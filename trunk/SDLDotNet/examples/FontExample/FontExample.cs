@@ -87,10 +87,6 @@ namespace SdlDotNet.Examples
 			channel.Play(sound);
 			//channel2.Play(sound);
 
-			SdlButton button = new SdlButton(200, 200, 75, 50, Color.Green, "Hello");
-			SdlTextBox textBox = new SdlTextBox(300, 300, 300);
-			button.Click +=new SdlButtonEventHandler(button_Click);
-
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			Video.WindowCaption = "Font Example";
 			//Video.Mouse.ShowCursor(false);
@@ -128,9 +124,6 @@ namespace SdlDotNet.Examples
 						textArray[rand.Next(textArray.Length)], 
 						Color.FromArgb(0, (byte)rand.Next(255), 
 						(byte)rand.Next(255),(byte)rand.Next(255)));
-					button.Draw(screen);
-						
-					textBox.Draw(screen);
 
 					if (Video.Mouse.IsButtonPressed(MouseButton.PrimaryButton))
 					{
@@ -258,10 +251,6 @@ namespace SdlDotNet.Examples
 		{
 			FontExample fontExample = new FontExample();
 			fontExample.Run();
-		}
-		private void button_Click(object source, SdlButtonEventArgs e)
-		{
-			Console.WriteLine("Button was clicked");
 		}
 	}
 }
