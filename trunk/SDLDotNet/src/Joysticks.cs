@@ -19,6 +19,7 @@
  */
 
 using System;
+
 using Tao.Sdl;
 
 namespace SdlDotNet 
@@ -30,6 +31,10 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Joysticks 
 	{
+		static private bool disposed = false;
+
+		static readonly Joysticks instance = new Joysticks();
+
 		static Joysticks()
 		{
 		}
@@ -37,6 +42,14 @@ namespace SdlDotNet
 		Joysticks()
 		{
 			Initialize();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		~Joysticks() 
+		{
+			Dispose(false);
 		}
 
 		/// <summary>
@@ -55,6 +68,75 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Queries if the Joystick subsystem has been intialized.
+		/// </summary>
+		/// <remarks>
+		/// </remarks>
+		/// <returns>True if Joystick subsystem has been initialized, false if it has not.</returns>
+		public static bool IsInitialized
+		{
+			get
+			{
+				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_JOYSTICK) & Sdl.SDL_INIT_JOYSTICK) 
+					== (int) SdlFlag.TrueValue)
+				{
+					return true;
+				}
+				else 
+				{
+					return false;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Returns true if the joystick has been initialized
+		/// </summary>
+		public bool IsJoystickInitialized(int index)
+		{
+				if (Sdl.SDL_JoystickOpened(index) == (int) SdlFlag.TrueValue)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void Dispose() 
+		{
+			Dispose(true);
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <param name="disposing"></param>
+		public static void Dispose(bool disposing)
+		{
+			if (!disposed)
+			{
+				if (disposing)
+				{
+				}
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_JOYSTICK);
+				disposed = true;
+			}
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
 		/// Returns the number of joysticks on this system
 		/// </summary>
 		/// <returns>The number of joysticks</returns>
@@ -67,18 +149,35 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns></returns>
+		public static bool IsValidJoystickNumber(int index)
+		{
+			if (index >= 0 && index < NumberOfJoysticks)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
 		/// Creates a joystick object to read information about a joystick
 		/// </summary>
 		/// <param name="index">The 0-based index of the joystick to read</param>
 		/// <returns>A Joystick object</returns>
 		public static Joystick OpenJoystick(int index) 
 		{
-			IntPtr joy = Sdl.SDL_JoystickOpen(index);
-			if (joy == IntPtr.Zero)
+			IntPtr joystick = Sdl.SDL_JoystickOpen(index);
+			if (!IsValidJoystickNumber(index) || (joystick == IntPtr.Zero))
 			{
 				throw SdlException.Generate();
 			}
-			return new Joystick(joy);
+			return new Joystick(joystick);
 		}
 	}
 }

@@ -19,21 +19,144 @@
  */
 
 using System;
+using System.Globalization;
+
 using Tao.Sdl;
 
 namespace SdlDotNet 
 {
+	/// <summary>
+	/// Summary description for Primitives.
+	/// </summary>
+	public struct BallMotion
+	{
+		int x;
+		int y;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		public BallMotion(int x, int y)
+		{
+			this.x = x;
+			this.y = y;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int MotionX
+		{
+			get
+			{
+				return this.x;
+			}
+			set
+			{
+				this.x = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int MotionY
+		{
+			get
+			{
+				return this.y;
+			}
+			set
+			{
+				this.y = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2})", x, y);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
+		public override bool Equals(object obj)
+		{
+			if (obj.GetType() != typeof(BallMotion))
+				return false;
+                
+			BallMotion c = (BallMotion)obj;   
+			return ((this.x == c.x) && (this.y == c.y));
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="c1"></param>
+		/// <param name="c2"></param>
+		/// <returns></returns>
+		public static bool operator== (BallMotion c1, BallMotion c2)
+		{
+			return ((c1.x == c2.x) && (c1.y == c2.y));
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="c1"></param>
+		/// <param name="c2"></param>
+		/// <returns></returns>
+		public static bool operator!= (BallMotion c1, BallMotion c2)
+		{
+			return !(c1 == c2);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override int GetHashCode()
+		{
+			return x ^ y;
+
+		}
+	}
 	/// <summary>
 	/// Represents a joystick on the system
 	/// </summary>
 	public class Joystick : BaseSdlResource 
 	{
 		private IntPtr handle;
+		private int index;
 		private bool disposed = false;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="index"></param>
+		public Joystick(int index)
+		{
+			this.handle = Sdl.SDL_JoystickOpen(index);
+			if ((this.handle == IntPtr.Zero) | !Joysticks.IsValidJoystickNumber(index))
+			{
+				throw SdlException.Generate();
+			}
+			else
+			{
+				this.index = index;
+			}
+		}
 		internal Joystick(IntPtr handle) 
 		{
 			this.handle = handle;
+			this.index = Sdl.SDL_JoystickIndex(handle); 
 		}
 
 		/// <summary>
@@ -70,6 +193,24 @@ namespace SdlDotNet
 			handleToClose = IntPtr.Zero;
 		}
 		
+
+		/// <summary>
+		/// Returns true if the joystick has been initialized
+		/// </summary>
+		public bool IsInitialized
+		{
+			get
+			{
+				if (Sdl.SDL_JoystickOpened(this.index) == (int) SdlFlag.TrueValue)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
 		/// <summary>
 		/// Gets the 0-based numeric index of this joystick
 		/// </summary>
@@ -77,9 +218,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickIndex(handle); 
-				GC.KeepAlive(this);
-				return result;
+				return this.index;
 			}
 		}
 
@@ -133,6 +272,71 @@ namespace SdlDotNet
 				GC.KeepAlive(this);
 				return result;
 			}
+		}
+
+		/// <summary>
+		/// Gets the name of this joystick
+		/// </summary>
+		public string Name 
+		{
+			get 
+			{ 
+				string result = Sdl.SDL_JoystickName(this.Index); 
+				GC.KeepAlive(this);
+				return result;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="axis"></param>
+		/// <returns></returns>
+		public short GetAxisPosition(JoystickAxes axis)
+		{
+			return Sdl.SDL_JoystickGetAxis(this.handle, (int) axis);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ball"></param>
+		/// <returns></returns>
+		public BallMotion GetBallMotion(int ball)
+		{
+			int motionX;
+			int motionY;
+
+			if (Sdl.SDL_JoystickGetBall(
+				this.handle, ball, out motionX, out motionY) == 
+				(int) SdlFlag.Success)
+			{
+				return new BallMotion(motionX, motionY);
+			}
+			else
+			{
+				throw new SdlException();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="button"></param>
+		/// <returns></returns>
+		public JoystickButtonState GetButtonState(int button)
+		{
+			return (JoystickButtonState) Sdl.SDL_JoystickGetButton(this.handle, button);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hat"></param>
+		/// <returns></returns>
+		public JoystickHatState GetHatState(int hat)
+		{
+			return (JoystickHatState) Sdl.SDL_JoystickGetHat(this.handle, (int) hat);
 		}
 	}
 }

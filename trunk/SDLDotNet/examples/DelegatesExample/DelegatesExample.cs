@@ -96,7 +96,7 @@ namespace SdlDotNet.Examples
 					{
 						if (musicFinishedFlag)
 						{
-							text = font.RenderTextSolid(
+							text = font.Render(
 								"MusicChannelFinishedDelegate was called.", 
 								Color.FromArgb(0, 254, 
 								254,254));
@@ -108,7 +108,7 @@ namespace SdlDotNet.Examples
 						}
 						if (channelFinishedFlag)
 						{
-							text = font.RenderTextSolid(
+							text = font.Render(
 								"ChannelChannelFinishedDelegate was called.", 
 								Color.FromArgb(0, 154, 
 								154,154));

@@ -107,21 +107,24 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Queuies if the CDRom subsystem has been intialized.
+		/// Queries if the CDRom subsystem has been intialized.
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
-		/// <returns>True if CDRom subsystem has been initialized. fasle if it has not.</returns>
-		public static bool IsInitialized()
+		/// <returns>True if CDRom subsystem has been initialized, false if it has not.</returns>
+		public static bool IsInitialized
 		{
-			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) & Sdl.SDL_INIT_CDROM) 
-				== (int) SdlFlag.TrueValue)
+			get
 			{
-				return true;
-			}
-			else 
-			{
-				return false;
+				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) & Sdl.SDL_INIT_CDROM) 
+					== (int) SdlFlag.TrueValue)
+				{
+					return true;
+				}
+				else 
+				{
+					return false;
+				}
 			}
 		}
 
@@ -175,7 +178,7 @@ namespace SdlDotNet
 		public static CDDrive OpenDrive(int index) 
 		{
 			IntPtr cd = Sdl.SDL_CDOpen(index);
-			if ((cd == IntPtr.Zero) | !IsValidDriveNumber(index))
+			if (!IsValidDriveNumber(index) || (cd == IntPtr.Zero))
 			{
 				throw SdlException.Generate();
 			}

@@ -64,6 +64,9 @@ namespace SdlDotNet.Examples
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			WindowManager.Caption = "Font Example";
 			Video.HideMouseCursor();
+			System.Drawing.Text.FontCollection installedFonts = FontSystem.GetSystemFonts();
+			Console.WriteLine("Installed Fonts: " + installedFonts.ToString());
+			Console.WriteLine("Installed Fonts: " + installedFonts.Families[0].ToString());
 
 			Surface surf = screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
@@ -78,7 +81,9 @@ namespace SdlDotNet.Examples
 				try
 				{
 					font.Style = (Styles)styleArray[rand.Next(styleArray.Length)];
-					text = font.RenderTextSolid(
+					Console.WriteLine("Style: " + font.Style);
+					Console.WriteLine(font.Bold);
+					text = font.Render(
 						textArray[rand.Next(textArray.Length)], 
 						Color.FromArgb(0, (byte)rand.Next(255), 
 						(byte)rand.Next(255),(byte)rand.Next(255)));
