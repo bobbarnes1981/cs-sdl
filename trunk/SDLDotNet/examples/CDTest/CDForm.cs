@@ -209,7 +209,7 @@ namespace SDLDotNet.Example {
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "CDForm";
-			this.Text = "Ghetto CD Player";
+			this.Text = "SDL.NET CD Player";
 			this.Load += new System.EventHandler(this.CDForm_Load);
 			this.ResumeLayout(false);
 
