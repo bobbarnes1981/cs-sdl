@@ -3,3 +3,4 @@ obj
 *.user
 *.csproj
 *.cmbx
+*.prjx
