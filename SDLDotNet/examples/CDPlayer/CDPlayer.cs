@@ -55,10 +55,10 @@ namespace SdlDotNet.Examples
 			//_drive = null;
 
 			try {
-				int num = CDAudio.NumberOfDrives;
-				_drive = CDAudio.OpenDrive(0);
+				int num = CDRom.NumberOfDrives;
+				_drive = CDRom.OpenDrive(0);
 				for (int i = 0; i < num; i++)
-					comboBoxDrive.Items.Add(CDAudio.DriveName(i));
+					comboBoxDrive.Items.Add(CDRom.DriveName(i));
 
 				if (comboBoxDrive.Items.Count > 0) {
 					comboBoxDrive.SelectedIndex = 0;
@@ -166,6 +166,7 @@ namespace SdlDotNet.Examples
 			this.labelStatus.Location = new System.Drawing.Point(16, 40);
 			this.labelStatus.Name = "labelStatus";
 			this.labelStatus.Size = new System.Drawing.Size(328, 40);
+			this.labelStatus.Text = "Track:";
 			this.labelStatus.TabIndex = 6;
 			this.labelStatus.Click += new System.EventHandler(this.labelStatus_Click);
 			// 
@@ -237,8 +238,16 @@ namespace SdlDotNet.Examples
 		private void buttonPlay_Click(object sender, System.EventArgs e) {
 			try {
 				if (_drive != null)
+				{
 					_drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
-			} catch (SdlException ex) {
+				}
+				TimeSpan timeSpan = Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
+				this.labelStatus.Text = 
+					"Track: " + _drive.CurrentTrack + 
+					"     Length: " + timeSpan.Minutes + ":" + timeSpan.Seconds;
+			} 
+			catch (SdlException ex) 
+			{
 				HandleError(ex);
 			}
 		}
@@ -258,6 +267,7 @@ namespace SdlDotNet.Examples
 					_drive.Stop();
 					_track = 0;
 				}
+				this.labelStatus.Text = "Track: " + _drive.CurrentTrack;
 			} catch (SdlException ex) {
 				HandleError(ex);
 			}
@@ -305,7 +315,7 @@ namespace SdlDotNet.Examples
 
 		private void labelStatus_Click(object sender, System.EventArgs e)
 		{
-		
+			
 		}
 
 //		private void timer_Tick(object sender, System.EventArgs e) {

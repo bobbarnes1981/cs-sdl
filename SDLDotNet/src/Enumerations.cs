@@ -1339,4 +1339,36 @@ namespace SdlDotNet
 		MetaKeys = (Sdl.KMOD_LMETA|Sdl.KMOD_RMETA)
 	}
 	#endregion ModifierKeys
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public enum SoundChannel
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		Mono = 1,
+		/// <summary>
+		/// 
+		/// </summary>
+		Stereo = 2
+	}
+
+	
+	/// <summary>
+	/// 
+	/// </summary>
+	[FlagsAttribute]
+	public enum CDTrackTypes
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		Audio = Sdl.SDL_AUDIO_TRACK,
+		/// <summary>
+		/// 
+		/// </summary>
+		Data = Sdl.SDL_DATA_TRACK
+	}
 }
