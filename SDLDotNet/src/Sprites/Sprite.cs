@@ -40,7 +40,6 @@ namespace SdlDotNet.Sprites
 		/// 
 		/// </summary>
 		/// <param name="coords"></param>
-		//public Sprite(Vector2 coords)
 		public Sprite(Point coords)
 		{
 			Coords = new Vector(coords, 0);
@@ -51,7 +50,6 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="coords"></param>
 		/// <param name="z"></param>
-//		public Sprite(Vector2 coords, int z)
 		public Sprite(Point coords, int z)
 		{
 			Coords = new Vector(coords, z);
@@ -185,7 +183,6 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="point"></param>
 		/// <returns></returns>
-//		public virtual bool IntersectsWith(Vector2 point)
 		public virtual bool IntersectsWith(Point point)
 		{
 			return Bounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));

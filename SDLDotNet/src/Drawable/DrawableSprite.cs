@@ -65,7 +65,6 @@ namespace SdlDotNet.Drawable
 		/// </summary>
 		/// <param name="d"></param>
 		/// <param name="coords"></param>
-		//public DrawableSprite(IDrawable d, Vector2 coords)
 		public DrawableSprite(IDrawable d, Point coords)
 			: base(coords)
 		{
@@ -89,7 +88,6 @@ namespace SdlDotNet.Drawable
 		/// <param name="d"></param>
 		/// <param name="frame"></param>
 		/// <param name="coords"></param>
-		//public DrawableSprite(IDrawable d, int frame, Vector2 coords)
 		public DrawableSprite(IDrawable d, int frame, Point coords)
 			: base(coords)
 		{
@@ -117,7 +115,7 @@ namespace SdlDotNet.Drawable
 		/// <param name="args"></param>
 		public override void Render(RenderArgs args)
 		{
-			// Blit the image on the surface
+			// Blit the image onto the surface
 			args.Surface.Blit(CurrentFrame,
 				new Rectangle(Coords.X + args.TranslateX,
 				Coords.Y + args.TranslateY,
@@ -141,8 +139,9 @@ namespace SdlDotNet.Drawable
 			get
 			{
 				if (drawable == null || drawable[frame] == null)
+				{
 					throw new DrawableException("No drawable to return");
-
+				}
 				return drawable[frame];
 			}
 		}
@@ -157,8 +156,9 @@ namespace SdlDotNet.Drawable
 			get
 			{
 				if (drawable == null)
+				{
 					throw new DrawableException("No drawable to return");
-
+				}
 				return drawable;
 			}
 
@@ -187,9 +187,13 @@ namespace SdlDotNet.Drawable
 			get
 			{
 				if (drawable == null)
+				{
 					return 0;
+				}
 				else
+				{
 					return drawable.FrameCount;
+				}
 			}
 		}
 		#endregion

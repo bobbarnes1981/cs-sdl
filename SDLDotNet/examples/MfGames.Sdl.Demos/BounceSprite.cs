@@ -20,32 +20,21 @@
 using SdlDotNet.Utility;
 using SdlDotNet.Drawable;
 using System.Drawing;
+using System;
 
 namespace MfGames.Sdl.Demos
 {
 	public class BounceSprite : BoundedSprite
 	{
-		private int dx = Entropy.Next(-10, 10);
-		private int dy = Entropy.Next(-10, 10);
+		Random rand = new Random();
+		private int dx;
+		private int dy;
 
-		public BounceSprite(IDrawable d, Rectangle rect)
-			: base(d, rect,
-			new Vector(Entropy.Next(rect.Left, rect.Right
-			- (int) d.Size.Width),
-			Entropy.Next(rect.Top, rect.Bottom
-			- (int) d.Size.Height),
-			0))
+		public BounceSprite(IDrawable d, Rectangle rect, Vector coords)
+			: base(d, rect, coords)
 		{
-		}
-
-		public BounceSprite(IDrawable d, Rectangle rect, int z)
-			: base(d, rect,
-			new Vector(Entropy.Next(rect.Left, rect.Right
-			- (int) d.Size.Width),
-			Entropy.Next(rect.Top, rect.Bottom
-			- (int) d.Size.Height),
-			z))
-		{
+			this.dx = rand.Next(-10, 11);
+			this.dy = rand.Next(-10, 11);
 		}
 
 		public override bool IsTickable { get { return true; } }
@@ -60,24 +49,32 @@ namespace MfGames.Sdl.Demos
 			Coords.Y += args.RatePerSecond(dy);
 
 			// Adjust our entropy
-			dx += Entropy.Next(-5, 5);
-			dy += Entropy.Next(-5, 5);
+			dx += rand.Next(-5, 6);
+			dy += rand.Next(-5, 6);
 
 			// Call the base which also normalizes the bounds
 			base.OnTick(args);
 
 			// Normalize the directions
 			if (Coords.X == SpriteBounds.Left)
-				dx = Entropy.Next(1, 10);
+			{
+				dx = rand.Next(1, 10);
+			}
 
 			if (Coords.X == SpriteBounds.Right)
-				dx = Entropy.Next(-1, -10);
+			{
+				dx = ((-1) * rand.Next(1, 10));
+			}
 
 			if (Coords.Y == SpriteBounds.Top)
-				dy = Entropy.Next(1, 10);
+			{
+				dy = rand.Next(1, 10);
+			}
 
 			if (Coords.Y == SpriteBounds.Bottom)
-				dy = Entropy.Next(-1, -10);
+			{
+				dy = ((-1) * rand.Next(1, 10));
+			}
 		}
 	}
 }

@@ -22,12 +22,14 @@ using SdlDotNet.Drawable;
 using SdlDotNet.Sprites;
 using MfGames.Sdl.Gui;
 using System.Drawing;
+using System;
 
 namespace MfGames.Sdl.Demos
 {
 	public class GuiMode : DemoMode
 	{
 		private GuiTicker ticker = null;
+		Random rand = new Random();
 
 		/// <summary>
 		/// Constructs the internal sprites needed for our demo.
@@ -151,8 +153,8 @@ namespace MfGames.Sdl.Demos
 			IDrawable m1 = LoadRandomMarble();
 			GuiManager manager = SdlDemo.GuiManager;
 			GuiWindow gw = new GuiWindow(manager,
-				new Rectangle(Entropy.Next() % 600,
-				Entropy.Next() % 400 + 50,
+				new Rectangle(rand.Next() % 600,
+				rand.Next() % 400 + 50,
 				70, 70));
 			gw.IsDragable = true;
 			gw.Title = "Created Window";
@@ -170,7 +172,7 @@ namespace MfGames.Sdl.Demos
 			{
 				threshold = 0.0;
 
-				switch (Entropy.Next() % 5)
+				switch (rand.Next() % 5)
 				{
 					case 0: // Switch autohide
 						if (ticker.IsAutoHide)

@@ -22,6 +22,7 @@ using SdlDotNet.Drawable;
 using MfGames.Sdl.Gui;
 using SdlDotNet.Sprites;
 using System.Drawing;
+using System;
 
 namespace MfGames.Sdl.Demos
 {
@@ -46,6 +47,7 @@ namespace MfGames.Sdl.Demos
 		/// </summary>
 		public MultipleMode()
 		{
+			Random rand = new Random();
 			// Create the fragment marbles
 			IDrawable td = LoadMarble("marble1");
 			IDrawable td2 = LoadMarble("marble2");
@@ -73,7 +75,7 @@ namespace MfGames.Sdl.Demos
 				{
 					// Create the sprite
 					DrawableSprite dw =
-						new DrawableSprite(floorTiles[Entropy.Next(0, numberOfFloors -1)],
+						new DrawableSprite(floorTiles[rand.Next(0, numberOfFloors)],
 						new Vector(i * floorTiles[0].Size.Width,
 						j * floorTiles[0].Size.Height,
 						-1000));
@@ -84,14 +86,26 @@ namespace MfGames.Sdl.Demos
 			// Load the bouncing sprites
 			for (int i = 0; i < 15; i++)
 			{
-				all.Add(new BounceSprite(td, rect));
+				BounceSprite d = 
+					new BounceSprite(td,
+					rect, 
+					new Vector(rand.Next(rect.Left, rect.Right - 
+					(int) td.Size.Width),
+					rand.Next(rect.Top, rect.Bottom - 
+					(int) td.Size.Height),
+					0));
+				all.Add(d);
 			}
 
 			// Only one container may be tickable when they all talk to the
 			// same inner tick manager.
 
 			// Set up container #1
-			sprite1 = new BounceSprite(td2, rect, 100);
+			sprite1 = new BounceSprite(td2, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+					(int) td2.Size.Width),
+					rand.Next(rect.Top, rect.Bottom - 
+					(int) td2.Size.Height),
+					100));
 			sm1.Coords = new Vector(10, 10);
 			sm1.IsTickable = true;
 			sm1.Size = new Size(380, 250);
@@ -99,7 +113,11 @@ namespace MfGames.Sdl.Demos
 			all.Add(sprite1);
 
 			// Set up container #2
-			sprite2 = new BounceSprite(td3, rect, 100);
+			sprite2 = new BounceSprite(td3, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+				(int) td3.Size.Width),
+				rand.Next(rect.Top, rect.Bottom - 
+				(int) td3.Size.Height),
+				100));
 			sm2.Coords = new Vector(410, 10);
 			sm2.IsTickable = false;
 			sm2.Size = new Size(380, 250);
@@ -107,7 +125,11 @@ namespace MfGames.Sdl.Demos
 			all.Add(sprite2);
 
 			// Set up container #3
-			sprite3 = new BounceSprite(td4, rect, 100);
+			sprite3 = new BounceSprite(td4, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+				(int) td4.Size.Width),
+				rand.Next(rect.Top, rect.Bottom - 
+				(int) td4.Size.Height),
+				100));
 			sm3.Coords = new Vector(10, 280);
 			sm3.IsTickable = false;
 			sm3.Size = new Size(380, 250);
@@ -115,7 +137,11 @@ namespace MfGames.Sdl.Demos
 			all.Add(sprite3);
       
 			// Set up container #4
-			sprite4 = new BounceSprite(td5, rect, 100);
+			sprite4 = new BounceSprite(td5, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+				(int) td5.Size.Width),
+				rand.Next(rect.Top, rect.Bottom - 
+				(int) td5.Size.Height),
+				100));
 			sm4.Coords = new Vector(410, 280);
 			sm4.IsTickable = false;
 			sm4.Size = new Size(380, 250);

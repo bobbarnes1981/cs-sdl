@@ -22,6 +22,7 @@ using SdlDotNet.Drawable;
 using MfGames.Sdl.Gui;
 using SdlDotNet.Sprites;
 using System.Drawing;
+using System;
 
 namespace MfGames.Sdl.Demos
 {
@@ -37,6 +38,7 @@ namespace MfGames.Sdl.Demos
 		/// </summary>
 		public ViewportMode()
 		{
+			Random rand = new Random();
 			// Create the fragment marbles
 			IDrawable td = LoadMarble("marble1");
 			IDrawable td2 = LoadMarble("marble2");
@@ -62,7 +64,7 @@ namespace MfGames.Sdl.Demos
 				{
 					// Create the sprite
 					DrawableSprite dw =
-						new DrawableSprite(floorTiles[Entropy.Next(0, numberOfFloors -1)],
+						new DrawableSprite(floorTiles[rand.Next(0, numberOfFloors)],
 						new Vector(i * floorTiles[0].Size.Width,
 						j * floorTiles[0].Size.Height,
 						-1000));
@@ -71,7 +73,11 @@ namespace MfGames.Sdl.Demos
 			}
 
 			// Load the trigger sprite
-			sprite = new BounceSprite(td2, rect, 100);
+			sprite = new BounceSprite(td2, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+				(int) td2.Size.Width),
+				rand.Next(rect.Top, rect.Bottom - 
+				(int) td2.Size.Height),
+				100));
 			sm.Add(sprite);
 			//OnMenuTranslated(0);
 			//OnMenuCentered(0);
@@ -80,7 +86,15 @@ namespace MfGames.Sdl.Demos
 			// Load the bouncing sprites
 			for (int i = 0; i < 53; i++)
 			{
-				sm.Add(new BounceSprite(td, rect));
+				BounceSprite bounceSprite = 
+					new BounceSprite(td,
+					rect, 
+					new Vector(rand.Next(rect.Left, rect.Right - 
+					(int) td.Size.Width),
+					rand.Next(rect.Top, rect.Bottom - 
+					(int) td.Size.Height),
+					0));
+				sm.Add(bounceSprite);
 			}
 
 			// Create the menus

@@ -22,6 +22,7 @@ using SdlDotNet.Sprites;
 using SdlDotNet.Utility;
 using System.Collections;
 using System.Drawing;
+using System;
 
 namespace MfGames.Sdl.Demos
 {
@@ -35,6 +36,7 @@ namespace MfGames.Sdl.Demos
 		private static Hashtable marbles = new Hashtable();
 
 		protected SpriteContainer sm = new SpriteContainer();
+		Random rand = new Random();
 
 		public DemoMode()
 		{
@@ -71,7 +73,7 @@ namespace MfGames.Sdl.Demos
 
 		protected IDrawable LoadRandomMarble()
 		{
-			return LoadMarble("marble" + (Entropy.Next() % 6 + 1));
+			return LoadMarble("marble" + (rand.Next() % 6 + 1));
 		}
 
 		/// <summary>

@@ -36,7 +36,6 @@ namespace MfGames.Sdl.Demos
 			tempWidth = this.rect.Size.Width - (int) d.Size.Width;
 			tempHeight = this.rect.Size.Height - (int) d.Size.Height;
 			this.rect.Size = new Size(tempWidth, tempHeight);
-			
 		}
 
 		public Rectangle SpriteBounds
@@ -51,19 +50,26 @@ namespace MfGames.Sdl.Demos
 
 			// Bounce off the left
 			if (Coords.X < rect.Left)
+			{
 				Coords.X = rect.Left;
+			}
 
 			// Bounce off the top
 			if (Coords.Y < rect.Top)
+			{
 				Coords.Y = rect.Top;
+			}
 
 			// Bounce off the bottom
 			if (Coords.Y > rect.Bottom)
+			{
 				Coords.Y = rect.Bottom;
-
+			}
 			// Bounce off the right
 			if (Coords.X > rect.Right)
+			{
 				Coords.X = rect.Right;
+			}
 		}
 	}
 }

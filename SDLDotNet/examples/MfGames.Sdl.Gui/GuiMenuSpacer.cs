@@ -22,11 +22,11 @@ using SdlDotNet.Sprites;
 
 namespace MfGames.Sdl.Gui
 {
-  public class GuiMenuSpacer : GuiMenuItem
-  {
-    public GuiMenuSpacer(GuiManager manager)
-      : base(manager)
-    {
-    }
-  }
+	public class GuiMenuSpacer : GuiMenuItem
+	{
+		public GuiMenuSpacer(GuiManager manager)
+			: base(manager)
+		{
+		}
+	}
 }
