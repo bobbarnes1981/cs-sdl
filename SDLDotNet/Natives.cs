@@ -78,7 +78,7 @@ namespace SDLDotNet {
 			Off = 0,
 			On = 1
 		}
-		
+
 		// delegates
 		public delegate void ChannelFinishedDelegate(int channel);
 		public delegate void MusicFinishedDelegate();
@@ -310,6 +310,9 @@ namespace SDLDotNet {
 		public static extern SDL_Surface *SDL_DisplayFormat(SDL_Surface *surface);
 		[DllImport(SDL_DLL), SuppressUnmanagedCodeSecurity]
 		public static extern SDL_Surface *SDL_ConvertSurface(SDL_Surface *src, SDL_PixelFormat *fmt, int flags);
+		//Mridul
+		[DllImport(SDL_DLL), SuppressUnmanagedCodeSecurity]
+		public static extern int SDL_SetAlpha(SDL_Surface *src, UInt32 flag, byte alpha);
 
 		// RWops
 		[DllImport(SDL_DLL), SuppressUnmanagedCodeSecurity]
