@@ -17,9 +17,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using log4net.Config;
-using MfGames.Utility;
-using MfGames.Sdl.Sprites;
+//using log4net.Config;
+using SdlDotNet.Utility;
+using SdlDotNet.Sprites;
 using MfGames.Sdl.Gui;
 using SdlDotNet;
 using System;
@@ -36,12 +36,12 @@ namespace MfGames.Sdl.Demos
 	/// directory has a "test/" directory underneath it containing
 	/// various images.
 	/// </summary>
-	public class SdlDemo : LoggedObject
+	public class SdlDemo
 	{
 		public static void Main(string [] args)
 		{
 			// Set up loggin
-			BasicConfigurator.Configure();
+			//BasicConfigurator.Configure();
 
 			// Create the demo application
 			SdlDemo demo = new SdlDemo();
@@ -51,11 +51,11 @@ namespace MfGames.Sdl.Demos
 		public void Start()
 		{
 			// Noise
-			Info("Staring up SDL demo...");
+			//Info("Staring up SDL demo...");
 			sdlDemo = this;
 
 			// Start up the SDL
-			Video.WindowCaption = "Moonfire Games' SDL Demo";
+			Video.WindowCaption = "SDL.NET Demonstrations";
       
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
@@ -87,7 +87,7 @@ namespace MfGames.Sdl.Demos
 			TickManager.Start();
 
 			// Loop until the system indicates it should stop
-			Report("Welcome to the Moonfire Games' SDL Demo!");
+			Report("Welcome to the SDL.NET Demo!");
 
 			while (running)
 			{
@@ -139,7 +139,7 @@ namespace MfGames.Sdl.Demos
 			// Create a viewport
 			manager.Coords.Y = gmb.OuterSize.Height + 5;
 			manager.Coords.X = 5;
-			manager.Size = new Dimension2(Size.Width - 10,
+			manager.Size = new Size(Size.Width - 10,
 				Size.Height - 10 - gmb.OuterSize.Height);
 		}
 
@@ -184,7 +184,7 @@ namespace MfGames.Sdl.Demos
 			if (status != null)
 				status.Add(new TextSprite(msg, GuiManager.BaseFont));
 
-			Instance.Info(msg);
+			//Instance.Info(msg);
 		}
 		#endregion
 
@@ -201,7 +201,7 @@ namespace MfGames.Sdl.Demos
 		private void LoadDemo(DemoMode mode)
 		{
 			// Add to the array list
-			Debug("Loading demo {0}", mode);
+			//Debug("Loading demo {0}", mode);
 			demos.Add(mode);
 
 			// Figure out the counter
@@ -232,7 +232,7 @@ namespace MfGames.Sdl.Demos
 			LoadDemo(new GuiMode());
       
 			// Make some noise
-			Debug("Loaded all demos");
+			//Debug("Loaded all demos");
 
 			// Finish up the gui
 			CreateMenuQuit(gui);
@@ -260,7 +260,7 @@ namespace MfGames.Sdl.Demos
 			// Start it
 			currentDemo = (DemoMode) demos[demo];
 			currentDemo.Start(manager);
-			Info("Switched mode to {0}", currentDemo);
+			//Info("Switched mode to {0}", currentDemo);
 			Report("Switched to " + currentDemo + " mode");
 		}
 		#endregion
@@ -342,11 +342,11 @@ namespace MfGames.Sdl.Demos
 		private static SpriteSurface ss = null;
 		private static GuiTicker status = null;
 		private static GuiMenuBar gmb = null;
-		private static SecondGuage fps = new SecondGuage(13);
+		private static SecondGauge fps = new SecondGauge(13);
 		private static TickManager ticker = new TickManager();
 		private static GuiManager gui = null;
 
-		public static SecondGuage Fps { get { return fps; } }
+		public static SecondGauge Fps { get { return fps; } }
 
 		public static SdlDemo Instance { get { return sdlDemo; } }
 
@@ -371,17 +371,18 @@ namespace MfGames.Sdl.Demos
 
 		public static GuiMenuBar MenuBar { get { return gmb; } }
 
-		public static Dimension2 Size
+		public static Size Size
 		{
-			get { return new Dimension2(800, 600); }
+			get { return new Size(800, 600); }
 		}
 
-		public static Rectangle2 Bounds
+		public static Rectangle Bounds
 		{
 			get
 			{
-				return new Rectangle2(new Vector2(0, gmb.Bounds.Bottom),
-					new Dimension2(Size.Width,
+				//return new Rectangle2(new Vector2(0, gmb.Bounds.Bottom),
+				return new Rectangle(new Point(0, gmb.Bounds.Bottom),
+					new Size(Size.Width,
 					Size.Height - gmb.Bounds.Bottom));
 			}
 		}

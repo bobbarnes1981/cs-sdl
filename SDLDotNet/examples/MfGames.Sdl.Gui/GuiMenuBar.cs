@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using MfGames.Utility;
-using MfGames.Sdl.Sprites;
+using SdlDotNet.Utility;
+using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Collections;
@@ -75,9 +75,9 @@ namespace MfGames.Sdl.Gui
     private int x2 = 0;
     private int baselineY = 0;
 
-    public override Vector3 Coords
+    public override Vector Coords
     {
-      get { return new Vector3(x1, baselineY, base.Coords.Z); }
+      get { return new Vector(x1, baselineY, base.Coords.Z); }
     }
 
     public override int HorizontalWidth

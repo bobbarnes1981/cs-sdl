@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using MfGames.Sdl.Sprites;
-using MfGames.Utility;
+using SdlDotNet.Sprites;
+using SdlDotNet.Utility;
 using NUnit.Framework;
 using SdlDotNet;
 using System.Drawing;
@@ -42,7 +42,7 @@ namespace MfGames.Sdl.Gui
 
     [Test] public void TestWindowBounds()
     {
-      GuiWindow win = new GuiWindow(gui, new Rectangle2(10, 11, 100, 101));
+      GuiWindow win = new GuiWindow(gui, new Rectangle(10, 11, 100, 101));
 
       Assert.Equals(10 - gui.GetPadding(win).Left, win.Coords.X);
       Assert.Equals(11 - gui.GetPadding(win).Top, win.Coords.Y);

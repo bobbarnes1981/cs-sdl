@@ -20,7 +20,7 @@
 using NUnit.Framework;
 using System.Drawing;
 
-namespace MfGames.Sdl.Sprites
+namespace SdlDotNet.Sprites
 {
   [TestFixture] public class SdlSpriteTest
   {

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using MfGames.Sdl.Sprites;
-using MfGames.Utility;
+using SdlDotNet.Sprites;
+using SdlDotNet.Utility;
 using SdlDotNet;
 using System.Drawing;
 using System;
@@ -36,7 +36,7 @@ namespace MfGames.Sdl.Gui
     {
     }
 
-    public GuiWindow(GuiManager manager, Rectangle2 rect)
+    public GuiWindow(GuiManager manager, Rectangle rect)
       : base(manager, rect)
     {
     }
@@ -67,7 +67,7 @@ namespace MfGames.Sdl.Gui
 
     #region Properties
     private string title = null;
-    private Dimension2 titleSize = new Dimension2();
+    private Size titleSize = new Size();
 
     public string Title
     {

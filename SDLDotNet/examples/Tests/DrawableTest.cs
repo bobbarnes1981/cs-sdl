@@ -19,7 +19,7 @@
 
 using NUnit.Framework;
 
-namespace MfGames.Sdl.Drawable
+namespace SdlDotNet.Drawable
 {
   [TestFixture] public class DrawableTest
   {

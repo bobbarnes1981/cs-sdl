@@ -63,10 +63,8 @@
 	<nant buildfile="${examples.dir}/BombRun/BombRun.build" target="clean" />
 	<nant buildfile="${examples.dir}/Bounce/Bounce.build" target="clean" />
 	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="clean" />
-	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="clean" />
-	<nant buildfile="${examples.dir}/GuiTest/GuiTest.build" target="clean" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
@@ -103,12 +101,10 @@
 	<nant buildfile="${examples.dir}/Bounce/Bounce.build" target="build" />
 	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="build" />
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="build" />
-	<nant buildfile="${examples.dir}/GuiTest/GuiTest.build" target="build" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
-	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="build" />
 	<nant buildfile="${examples.dir}/MfGames.Utility/MfGames.Utility.build" target="build" />
 	<nant buildfile="${examples.dir}/MfGames.Sdl.Dice/MfGames.Sdl.Dice.build" target="build" />
@@ -177,14 +173,6 @@
 		<exclude name="examples/PrimitivesExample/*j.user" />
 		<exclude name="examples/PrimitivesExample/${obj.dir}" />
 		<!-- <exclude name="examples/PrimitivesExample/${build.dir}/*.dll" /> -->
-		<include name="examples/DelegatesExample/*" />
-		<include name="examples/DelegatesExample/${build.dir}/*" />
-		<exclude name="examples/DelegatesExample/*j.user" />
-		<exclude name="examples/DelegatesExample/${obj.dir}" />
-		<!-- <exclude name="examples/DelegatesExample/${build.dir}/*.dll" /> -->
-		<include name="examples/GuiTest/**" />
-		<exclude name="examples/GuiTest/*j.user" />
-		<exclude name="examples/GuiTest/${obj.dir}" />
 		<include name="examples/JoystickExample/*" />
 		<include name="examples/JoystickExample/${build.dir}/*" />
 		<exclude name="examples/JoystickExample/*j.user" />
@@ -208,21 +196,9 @@
 		<include name="examples/MfGames.Sdl.Demos/**" />
 		<exclude name="examples/MfGames.Sdl.Demos/*j.user" />
 		<exclude name="examples/MfGames.Sdl.Demos/${obj.dir}" />
-		<include name="examples/MfGames.Sdl.Dice/**" />
-		<exclude name="examples/MfGames.Sdl.Dice/*j.user" />
-		<exclude name="examples/MfGames.Sdl.Dice/${obj.dir}" />
-		<include name="examples/MfGames.Sdl.Drawable/**" />
-		<exclude name="examples/MfGames.Sdl.Drawable/*j.user" />
-		<exclude name="examples/MfGames.Sdl.Drawable/${obj.dir}" />
 		<include name="examples/MfGames.Sdl.Gui/**" />
 		<exclude name="examples/MfGames.Sdl.Gui/*j.user" />
 		<exclude name="examples/MfGames.Sdl.Gui/${obj.dir}" />
-		<include name="examples/MfGames.Sdl.Sprites/**" />
-		<exclude name="examples/MfGames.Sdl.Sprites/*j.user" />
-		<exclude name="examples/MfGames.Sdl.Sprites/${obj.dir}" />
-		<include name="examples/MfGames.Utility/**" />
-		<exclude name="examples/MfGames.Utility/*j.user" />
-		<exclude name="examples/MfGames.Utility/${obj.dir}" />
 		<include name="examples/MoviePlayer/*" />
 		<include name="examples/MoviePlayer/${build.dir}/*" />
 		<exclude name="examples/MoviePlayer/*j.user" />

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using MfGames.Utility;
-using MfGames.Sdl.Sprites;
+using SdlDotNet.Utility;
+using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 

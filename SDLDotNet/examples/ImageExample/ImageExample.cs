@@ -142,8 +142,8 @@ namespace SdlDotNet.Examples
 
 						// Draw Textbox
 						surf.Blit(sdlimg,new Rectangle(new Point(230,440),Background.Size));
-
 						surf.Blit(Cursor,new Rectangle(MousePos, screen.Size));
+						
 
 						// Draw frame to screen
 						screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
@@ -198,6 +198,5 @@ namespace SdlDotNet.Examples
 			ImageExample imageExample = new ImageExample();
 			imageExample.Run();
 		}
-
 	}
 }
