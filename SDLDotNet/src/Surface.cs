@@ -180,7 +180,6 @@ namespace SdlDotNet
 		}
 		#endregion Constructors and Destructors
 
-		
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>

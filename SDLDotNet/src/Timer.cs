@@ -29,22 +29,23 @@ namespace SdlDotNet
 	{
 		static readonly Timer instance = new Timer();
 
+		static Timer()
+		{
+		}
+
 		Timer()
 		{
+			Initialize();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public static Timer Instance 
+		public static void Initialize()
 		{
-			get
+			if (Sdl.SDL_Init(Sdl.SDL_INIT_TIMER) != (int) SdlFlag.Success)
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_TIMER) != (int) SdlFlag.Success)
-				{
-					throw SdlException.Generate();
-				}
-				return instance;
+				throw SdlException.Generate();
 			}
 		}
 
@@ -52,7 +53,7 @@ namespace SdlDotNet
 		/// Gets the number of ticks since Sdl was initialized.  
 		/// This is not a high-resolution timer.
 		/// </summary>
-		public int Ticks 
+		public static int Ticks 
 		{
 			get
 			{
@@ -64,7 +65,7 @@ namespace SdlDotNet
 		/// Wait a number of milliseconds.
 		/// </summary>
 		/// <param name="delayTime">Delay time in milliseconds</param>
-		public void Delay(int delayTime)
+		public static void Delay(int delayTime)
 		{
 			Sdl.SDL_Delay(delayTime);
 		}

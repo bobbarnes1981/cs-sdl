@@ -65,33 +65,29 @@ namespace SdlDotNet.Examples
 			int height = 480;
 			Random rand = new Random();
 
-			Video video = Video.Instance;
-			WindowManager wm = WindowManager.Instance;
-			Mixer mixer = Mixer.Instance;
-			Events events = Events.Instance;
-			mixer.EnableMusicCallbacks();
+			Mixer.EnableMusicCallbacks();
 			
-			events.KeyboardDown += 
+			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
-			events.Quit += new QuitEventHandler(this.Quit);
-			events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
-			events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);			
+			Events.Quit += new QuitEventHandler(this.Quit);
+			Events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
+			Events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);			
 
 			try 
 			{
 				font = new Font(filepath + FontName, size);
-				Music music = mixer.LoadMusic(filepath + "fard-two.ogg");
-				mixer.PlayMusic(music, 1);
-				Sample sample = mixer.LoadWav(filepath + "test.wav");
-				mixer.PlaySample(1, sample, 0);
+				Music music = Mixer.LoadMusic(filepath + "fard-two.ogg");
+				Mixer.PlayMusic(music, 1);
+				Sample sample = Mixer.LoadWav(filepath + "test.wav");
+				Mixer.PlaySample(1, sample, 0);
 				// set the video mode
-				Surface screen = video.SetVideoModeWindow(width, height, true); 
-				wm.Caption = "Delegates Example";
-				video.HideMouseCursor();
+				Surface screen = Video.SetVideoModeWindow(width, height, true); 
+				WindowManager.Caption = "Delegates Example";
+				Video.HideMouseCursor();
 
 				while (!quitFlag) 
 				{
-					while (events.PollAndDelegate()) 
+					while (Events.PollAndDelegate()) 
 					{
 						// handle events till the queue is empty
 					} 

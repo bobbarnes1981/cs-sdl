@@ -23,6 +23,7 @@ using System.Drawing;
 using System.Threading;
 using System.IO;
 using SdlDotNet;
+using Tao.Sdl;
 
 namespace SdlDotNet.Examples
 {
@@ -53,21 +54,19 @@ namespace SdlDotNet.Examples
 				filepath = @"./";
 			}
 
+			Console.WriteLine("WasINIT" + SdlTtf.TTF_WasInit());
+			Console.WriteLine("INIT" +SdlTtf.TTF_Init());
+			Console.WriteLine("WASINIT"+SdlTtf.TTF_WasInit());
 			Font font;
 			Random rand = new Random();
 
-			Video video = Video.Instance;
-			WindowManager wm = WindowManager.Instance;
-			Ttf ttf = Ttf.Instance;
-			Events events = Events.Instance;
-
-			events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
-			events.Quit += new QuitEventHandler(this.Quit);
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
+			Events.Quit += new QuitEventHandler(this.Quit);
 
 			font = new Font(filepath + FontName, size);
-			Surface screen = video.SetVideoModeWindow(width, height, true); 
-			wm.Caption = "Font Example";
-			video.HideMouseCursor();
+			Surface screen = Video.SetVideoModeWindow(width, height, true); 
+			WindowManager.Caption = "Font Example";
+			Video.HideMouseCursor();
 
 			Surface surf = screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
@@ -75,7 +74,7 @@ namespace SdlDotNet.Examples
 
 			while (!quitFlag) 
 			{
-				while (events.PollAndDelegate()) 
+				while (Events.PollAndDelegate()) 
 				{
 					// handle events till the queue is empty
 				}

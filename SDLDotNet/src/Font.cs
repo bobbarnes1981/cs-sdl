@@ -57,13 +57,35 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
+	/// Text Style
+	/// </summary>
+	[FlagsAttribute]
+	public enum Styles
+	{
+		/// <summary>
+		/// Normal
+		/// </summary>
+		Normal = SdlTtf.TTF_STYLE_NORMAL,
+		/// <summary>
+		/// Bold
+		/// </summary>
+		Bold = SdlTtf.TTF_STYLE_BOLD,
+		/// <summary>
+		/// Italic
+		/// </summary>
+		Italic = SdlTtf.TTF_STYLE_ITALIC,
+		/// <summary>
+		/// Underline
+		/// </summary>
+		Underline = SdlTtf.TTF_STYLE_UNDERLINE
+	}
+
+	/// <summary>
 	/// Font Class
 	/// </summary>
 	public class Font : BaseSdlResource
 	{
 		private IntPtr handle; // Pointer to Ttf_Font struct
-		private Ttf ttf;
-		private Video video;
 		private bool disposed = false;
 	
 		/// <summary>
@@ -73,12 +95,18 @@ namespace SdlDotNet
 		/// <param name="pointSize"></param>
 		public Font(string filename, int pointSize) 
 		{
-			ttf = Ttf.Instance;
-			video = Video.Instance;
+			if (SdlTtf.TTF_WasInit() != (int) SdlFlag.TrueValue)
+			{
+				if (SdlTtf.TTF_Init() != (int) SdlFlag.Success)
+				{
+					FontException.Generate();
+				}
+			}
+
 			handle = SdlTtf.TTF_OpenFont(filename, pointSize);
 			if (handle == IntPtr.Zero) 
 			{
-				throw TtfException.Generate();
+				throw FontException.Generate();
 			}
 		}
 
@@ -212,9 +240,9 @@ namespace SdlDotNet
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
-				throw TtfException.Generate();
+				throw FontException.Generate();
 			}
-			return video.GenerateSurfaceFromPointer(pSurface);
+			return Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
 		/// <summary>
@@ -260,9 +288,9 @@ namespace SdlDotNet
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
-				throw TtfException.Generate();
+				throw FontException.Generate();
 			}
-			return video.GenerateSurfaceFromPointer(pSurface);
+			return Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
 		/// <summary>
@@ -281,9 +309,9 @@ namespace SdlDotNet
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
-				throw TtfException.Generate();
+				throw FontException.Generate();
 			}
-			return video.GenerateSurfaceFromPointer(pSurface);
+			return Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
 		/// <summary>
@@ -302,9 +330,9 @@ namespace SdlDotNet
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
-				throw TtfException.Generate();
+				throw FontException.Generate();
 			}
-			return video.GenerateSurfaceFromPointer(pSurface);
+			return Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
 		/// <summary>
@@ -324,9 +352,9 @@ namespace SdlDotNet
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
-				throw TtfException.Generate();
+				throw FontException.Generate();
 			}
-			return video.GenerateSurfaceFromPointer(pSurface);
+			return Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
 		/// <summary>
@@ -345,9 +373,9 @@ namespace SdlDotNet
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
-				throw TtfException.Generate();
+				throw FontException.Generate();
 			}
-			return video.GenerateSurfaceFromPointer(pSurface);
+			return Video.GenerateSurfaceFromPointer(pSurface);
 		}
 	}
 }

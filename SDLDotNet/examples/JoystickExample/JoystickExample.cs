@@ -63,28 +63,23 @@ namespace SdlDotNet.Examples
 
 			Random rand = new Random();
 			
-			Video video = Video.Instance;
-			WindowManager wm = WindowManager.Instance;
-			Joysticks joysticks = Joysticks.Instance;
-			Events events = Events.Instance;
-			
-			events.KeyboardDown += 
+			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
-			events.Quit += new QuitEventHandler(this.Quit);	
-			events.JoystickAxisMotion += new JoystickAxisEventHandler(this.JoystickAxisChanged);
-			events.JoystickHorizontalAxisMotion += 
+			Events.Quit += new QuitEventHandler(this.Quit);	
+			Events.JoystickAxisMotion += new JoystickAxisEventHandler(this.JoystickAxisChanged);
+			Events.JoystickHorizontalAxisMotion += 
 				new JoystickAxisEventHandler(this.JoystickHorizontalAxisChanged);
-			events.JoystickVerticalAxisMotion += 
+			Events.JoystickVerticalAxisMotion += 
 				new JoystickAxisEventHandler(this.JoystickVerticalAxisChanged);
-			events.JoystickBallMotion += new JoystickBallEventHandler(this.JoystickBallChanged);
-			events.JoystickHatMotion += new JoystickHatEventHandler(this.JoystickHatChanged);
-			events.JoystickButtonUp += new JoystickButtonEventHandler(this.JoystickButtonUpChanged);
-			events.JoystickButtonDown += new JoystickButtonEventHandler(this.JoystickButtonDownChanged);
+			Events.JoystickBallMotion += new JoystickBallEventHandler(this.JoystickBallChanged);
+			Events.JoystickHatMotion += new JoystickHatEventHandler(this.JoystickHatChanged);
+			Events.JoystickButtonUp += new JoystickButtonEventHandler(this.JoystickButtonUpChanged);
+			Events.JoystickButtonDown += new JoystickButtonEventHandler(this.JoystickButtonDownChanged);
 
 			try 
 			{
-				Console.WriteLine(joysticks.NumberOfJoysticks);
-				Joystick joystick = joysticks.OpenJoystick(0);
+				Console.WriteLine(Joysticks.NumberOfJoysticks);
+				Joystick joystick = Joysticks.OpenJoystick(0);
 				Console.WriteLine("NumberOfAxes: " + joystick.NumberOfAxes);
 				Console.WriteLine("NumberOfBalls: " + joystick.NumberOfBalls);
 				Console.WriteLine("NumberOfButtons: " + joystick.NumberOfButtons);
@@ -93,8 +88,8 @@ namespace SdlDotNet.Examples
 				Image Background = new Image(filepath + "background.jpg");
 				cursor.Transparent = true;
 				// set the video mode
-				Surface screen = video.SetVideoModeWindow(width, height, true); 
-				wm.Caption = "Joystick Example";
+				Surface screen = Video.SetVideoModeWindow(width, height, true); 
+				WindowManager.Caption = "Joystick Example";
 				//video.HideMouseCursor();
 
 				Surface surf = 
@@ -104,7 +99,7 @@ namespace SdlDotNet.Examples
 
 				while (!quitFlag) 
 				{
-					while (events.PollAndDelegate()) 
+					while (Events.PollAndDelegate()) 
 					{
 						// handle events till the queue is empty
 					} 

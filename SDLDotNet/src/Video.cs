@@ -106,22 +106,23 @@ namespace SdlDotNet
 	{
 		static readonly Video instance = new Video();
 
+		static Video()
+		{
+		}
+
 		Video()
 		{
+			Initialize();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public static Video Instance
+		public static void Initialize()
 		{
-			get 
+			if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
-				{
-					throw SdlException.Generate();
-				}
-				return instance;
+				throw SdlException.Generate();
 			}
 		}
 
@@ -131,7 +132,7 @@ namespace SdlDotNet
 		/// <param name="width">width</param>
 		/// <param name="height">height</param>
 		/// <returns>a surface to draw to</returns>
-		public Surface SetVideoMode(int width, int height) 
+		public static Surface SetVideoMode(int width, int height) 
 		{
 			return SetVideoMode(width, height, 0,
 				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN|
@@ -144,7 +145,7 @@ namespace SdlDotNet
 		/// <param name="height">screen height</param>
 		/// <param name="bitsPerPixel">bits per pixel</param>
 		/// <returns>a surface to draw to</returns>
-		public Surface SetVideoMode(int width, int height, int bitsPerPixel) 
+		public static Surface SetVideoMode(int width, int height, int bitsPerPixel) 
 		{
 			return SetVideoMode(width, height, bitsPerPixel,
 				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN|Sdl.SDL_ANYFORMAT));
@@ -159,7 +160,7 @@ namespace SdlDotNet
 		/// if true, the window will have a frame around it
 		/// </param>
 		/// <returns>a surface to draw to</returns>
-		public Surface SetVideoModeWindow(int width, int height, bool frame) 
+		public static Surface SetVideoModeWindow(int width, int height, bool frame) 
 		{
 			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT;
 			if (!frame)
@@ -178,7 +179,7 @@ namespace SdlDotNet
 		/// </param>
 		/// <param name="bitsPerPixel">bits per pixel</param>
 		/// <returns>a surface to draw to</returns>
-		public Surface SetVideoModeWindow(
+		public static Surface SetVideoModeWindow(
 			int width, 
 			int height, 
 			int bitsPerPixel, 
@@ -199,7 +200,7 @@ namespace SdlDotNet
 		/// <param name="height">the vertical resolution</param>
 		/// <param name="bitsPerPixel">bits per pixel</param>
 		/// <returns>A Surface representing the screen</returns>
-		public Surface SetVideoModeOpenGL(int width, int height, int bitsPerPixel) 
+		public static Surface SetVideoModeOpenGL(int width, int height, int bitsPerPixel) 
 		{
 			return SetVideoMode(width, height, bitsPerPixel,
 				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_OPENGL|Sdl.SDL_FULLSCREEN));
@@ -213,7 +214,7 @@ namespace SdlDotNet
 		/// If true, the window will have a frame around it
 		/// </param>
 		/// <returns>A Surface representing the window</returns>
-		public Surface SetVideoModeWindowOpenGL(
+		public static Surface SetVideoModeWindowOpenGL(
 			int width, 
 			int height, 
 			bool frame) 
@@ -235,7 +236,7 @@ namespace SdlDotNet
 		/// specific flags, see SDL documentation for details
 		/// </param>
 		/// <returns>A Surface representing the screen</returns>
-		public Surface SetVideoMode(int width, int height, int bitsPerPixel, int flags) 
+		public static Surface SetVideoMode(int width, int height, int bitsPerPixel, int flags) 
 		{
 			IntPtr s = Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, flags);
 			if (s == IntPtr.Zero)
@@ -251,7 +252,7 @@ namespace SdlDotNet
 		/// must be preceded by a call to SetVideoMode
 		/// </summary>
 		/// <returns>The main screen surface</returns>
-		public Surface GetVideoSurface
+		public static Surface GetVideoSurface
 		{
 			get
 			{
@@ -272,7 +273,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <returns>An Surface representing the real
 		/// SDL_Surface underlying the IntPtr.</returns>
-		public Surface GenerateSurfaceFromPointer( IntPtr pointer )
+		public static Surface GenerateSurfaceFromPointer( IntPtr pointer )
 		{
 			Surface s = new Surface(pointer); 
 			if (s == null)
@@ -288,7 +289,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="file">The filename of the bitmap to load</param>
 		/// <returns>A Surface representing the bitmap</returns>
-		public Surface LoadImage(string file) 
+		public static Surface LoadImage(string file) 
 		{
 			return Surface.FromImageFile(file);
 		}
@@ -299,7 +300,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="bitmap">The bitmap object to load</param>
 		/// <returns>A Surface representing the bitmap</returns>
-		public Surface LoadImage(System.Drawing.Bitmap bitmap) 
+		public static Surface LoadImage(System.Drawing.Bitmap bitmap) 
 		{
 			return Surface.FromBitmap(bitmap);
 		}
@@ -309,7 +310,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="bitmap">The bitmap data</param>
 		/// <returns>A Surface representing the bitmap</returns>
-		public Surface LoadBmp(byte[] bitmap) 
+		public static Surface LoadBmp(byte[] bitmap) 
 		{
 			return Surface.FromBitmap(bitmap);
 		}
@@ -340,7 +341,7 @@ namespace SdlDotNet
 		/// A flag indicating whether or not to attempt to place this surface
 		///  into video memory</param>
 		/// <returns>A new surface</returns>
-		public Surface CreateRgbSurface(
+		public static Surface CreateRgbSurface(
 			int width, 
 			int height, 
 			int depth, 
@@ -364,7 +365,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Shows the mouse cursor
 		/// </summary>
-		public void ShowMouseCursor() 
+		public static void ShowMouseCursor() 
 		{
 			Sdl.SDL_ShowCursor(Sdl.SDL_ENABLE);
 		}
@@ -372,7 +373,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Hides the mouse cursor
 		/// </summary>
-		public void HideMouseCursor() 
+		public static void HideMouseCursor() 
 		{
 			Sdl.SDL_ShowCursor(Sdl.SDL_DISABLE);
 		}
@@ -381,7 +382,7 @@ namespace SdlDotNet
 		/// Queries the current cursor state
 		/// </summary>
 		/// <returns>True if the cursor is visible, otherwise False</returns>
-		public bool IsCursorVisible() 
+		public static bool IsCursorVisible() 
 		{
 			return (Sdl.SDL_ShowCursor(Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
 		}
@@ -391,7 +392,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="x">The X coordinite</param>
 		/// <param name="y">The Y coordinite</param>
-		public void WarpCursor(int x, int y) 
+		public static void WarpCursor(int x, int y) 
 		{
 			Sdl.SDL_WarpMouse((short)x, (short)y);
 		}
@@ -401,7 +402,7 @@ namespace SdlDotNet
 		/// attribute was set.
 		/// Call this instead of Surface.Flip() for OpenGL windows.
 		/// </summary>
-		public void GLSwapBuffers() 
+		public static void GLSwapBuffers() 
 		{
 			Sdl.SDL_GL_SwapBuffers();
 		}
@@ -410,7 +411,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="attribute">The attribute to set</param>
 		/// <param name="attributeValue">The new attribute value</param>
-		public void GLSetAttribute(OpenGLAttr attribute, int attributeValue) 
+		public static void GLSetAttribute(OpenGLAttr attribute, int attributeValue) 
 		{
 			if (Sdl.SDL_GL_SetAttribute((int)attribute, attributeValue) != 0)
 			{
@@ -422,7 +423,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="attribute">The attribute to get</param>
 		/// <returns>The current attribute value</returns>
-		public int GLGetAttribute(OpenGLAttr attribute) 
+		public static int GLGetAttribute(OpenGLAttr attribute) 
 		{
 			int ret;
 			if (Sdl.SDL_GL_GetAttribute((int)attribute, out ret) != 0)

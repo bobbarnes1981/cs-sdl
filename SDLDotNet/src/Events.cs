@@ -207,10 +207,10 @@ namespace SdlDotNet
 	/// You can obtain an instance of this class by accessing the Events property of the main Sdl object.
 	/// You must call the PollAndDelegate() member in order for any events to fire.
 	/// </summary>
-	public class Events 
+	public sealed class Events 
 	{
-		private Hashtable userEvents = new Hashtable();
-		private int userEventId = 0;
+		private static Hashtable UserEvents = new Hashtable();
+		private static int UserEventId = 0;
 		//Reduced joystick "jitter"
 		private const int JOYSTICK_THRESHHOLD = 3200;
 		private const int JOYSTICK_ADJUSTMENT = 32768;
@@ -219,117 +219,110 @@ namespace SdlDotNet
 		/// <summary>
 		/// Fires when the application has become active or inactive
 		/// </summary>
-		public event ActiveEventHandler AppActive;
+		public static event ActiveEventHandler AppActive;
 		/// <summary>
 		/// Fires when the application gains or loses mouse focus
 		/// </summary>
-		public event ActiveEventHandler MouseFocus;
+		public static event ActiveEventHandler MouseFocus;
 		/// <summary>
 		/// Fires when the application gains or loses input focus
 		/// </summary>
-		public event ActiveEventHandler InputFocus;
+		public static event ActiveEventHandler InputFocus;
 		/// <summary>
 		/// Fires when a key is pressed or released
 		/// </summary>
-		public event KeyboardEventHandler Keyboard;
+		public static event KeyboardEventHandler Keyboard;
 		/// <summary>
 		/// Fires when a key is pressed
 		/// </summary>
-		public event KeyboardEventHandler KeyboardDown;
+		public static event KeyboardEventHandler KeyboardDown;
 		/// <summary>
 		/// Fires when a key is released
 		/// </summary>
-		public event KeyboardEventHandler KeyboardUp;
+		public static event KeyboardEventHandler KeyboardUp;
 		/// <summary>
 		/// Fires when the mouse moves
 		/// </summary>
-		public event MouseMotionEventHandler MouseMotion;
+		public static event MouseMotionEventHandler MouseMotion;
 		/// <summary>
 		/// Fires when a mouse button is pressed or released
 		/// </summary>
-		public event MouseButtonEventHandler MouseButton;
+		public static event MouseButtonEventHandler MouseButton;
 		/// <summary>
 		/// Fires when a mouse button is pressed
 		/// </summary>
-		public event MouseButtonEventHandler MouseButtonDown;
+		public static event MouseButtonEventHandler MouseButtonDown;
 		/// <summary>
 		/// Fires when a mouse button is released
 		/// </summary>
-		public event MouseButtonEventHandler MouseButtonUp;
+		public static event MouseButtonEventHandler MouseButtonUp;
 		/// <summary>
 		/// Fires when a joystick axis changes
 		/// </summary>
-		public event JoystickAxisEventHandler JoystickAxisMotion;
+		public static event JoystickAxisEventHandler JoystickAxisMotion;
 		/// <summary>
 		/// Fires when a joystick vertical axis changes
 		/// </summary>
-		public event JoystickAxisEventHandler JoystickVerticalAxisMotion;
+		public static event JoystickAxisEventHandler JoystickVerticalAxisMotion;
 		/// <summary>
 		/// Fires when a joystick horizontal axis changes
 		/// </summary>
-		public event JoystickAxisEventHandler JoystickHorizontalAxisMotion;
+		public static event JoystickAxisEventHandler JoystickHorizontalAxisMotion;
 		/// <summary>
 		/// Fires when a joystick button is pressed or released
 		/// </summary>
-		public event JoystickButtonEventHandler JoystickButton;
+		public static event JoystickButtonEventHandler JoystickButton;
 		/// <summary>
 		/// Fires when a joystick button is pressed
 		/// </summary>
-		public event JoystickButtonEventHandler JoystickButtonDown;
+		public static event JoystickButtonEventHandler JoystickButtonDown;
 		/// <summary>
 		/// Fires when a joystick button is released
 		/// </summary>
-		public event JoystickButtonEventHandler JoystickButtonUp;
+		public static event JoystickButtonEventHandler JoystickButtonUp;
 		/// <summary>
 		/// Fires when a joystick hat changes
 		/// </summary>
-		public event JoystickHatEventHandler JoystickHatMotion;
+		public static event JoystickHatEventHandler JoystickHatMotion;
 		/// <summary>
 		/// Fires when a joystick trackball changes
 		/// </summary>
-		public event JoystickBallEventHandler JoystickBallMotion;
+		public static event JoystickBallEventHandler JoystickBallMotion;
 		/// <summary>
 		/// Fires when the user resizes the window
 		/// </summary>
-		public event ResizeEventHandler Resize;
+		public static event ResizeEventHandler Resize;
 		/// <summary>
 		/// Fires when a portion of the window is uncovered
 		/// </summary>
-		public event ExposeEventHandler Expose;
+		public static event ExposeEventHandler Expose;
 		/// <summary>
 		/// Fires when a user closes the window
 		/// </summary>
-		public event QuitEventHandler Quit;
+		public static event QuitEventHandler Quit;
 		/// <summary>
 		/// Fires when a user event is consumed
 		/// </summary>
-		public event UserEventHandler UserEvent;
+		public static event UserEventHandler UserEvent;
 		/// <summary>
 		/// Fires when a sound channel finishes playing.
 		/// Will only occur if you call Mixer.EnableMusicCallbacks().
 		/// </summary>
-		public event ChannelFinishedEventHandler ChannelFinished;
+		public static event ChannelFinishedEventHandler ChannelFinished;
 		/// <summary>
 		/// Fires when a music sample finishes playing.
 		/// Will only occur if you call Mixer.EnableMusicCallbacks().
 		/// </summary>
-		public event MusicFinishedEventHandler MusicFinished;
+		public static event MusicFinishedEventHandler MusicFinished;
 
 		static readonly Events instance = new Events();
 
-		Events()
+		static Events()
 		{
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static Events Instance
+		Events()
 		{
-			get 
-			{
-				return instance;
-			}
 		}
 
 		/// <summary>
@@ -339,7 +332,7 @@ namespace SdlDotNet
 		/// <returns>
 		/// True if any events were in the queue, otherwise False
 		/// </returns>
-		public bool PollAndDelegate() 
+		public static bool PollAndDelegate() 
 		{
 			Sdl.SDL_Event ev;
 			int ret = Sdl.SDL_PollEvent(out ev);
@@ -358,7 +351,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks the event queue, and waits until an event is available
 		/// </summary>
-		public void WaitAndDelegate() 
+		public static void WaitAndDelegate() 
 		{
 			Sdl.SDL_Event ev;
 			if (Sdl.SDL_WaitEvent(out ev) == (int) SdlFlag.Error2)
@@ -374,14 +367,15 @@ namespace SdlDotNet
 		/// <param name="userEvent">
 		/// An opaque object representing a user-defined event.
 		/// Will be passed back to the UserEvent handler delegate when this event is processed.</param>
-		public void PushUserEvent(object userEvent) 
+		public static void PushUserEvent(object userEvent) 
 		{
 			Sdl.SDL_UserEvent sdlev = new Sdl.SDL_UserEvent();
 			sdlev.type = (byte)Sdl.SDL_USEREVENT;
-			lock (this) {
-				this.userEvents[userEventId] = userEvent;
-				sdlev.code = userEventId;
-				userEventId++;
+			lock (instance) 
+			{
+				UserEvents[UserEventId] = userEvent;
+				sdlev.code = UserEventId;
+				UserEventId++;
 			}
 			Sdl.SDL_Event evt = new Sdl.SDL_Event();
 			evt.user = sdlev;
@@ -391,59 +385,59 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateEvent(ref Sdl.SDL_Event ev) 
+		private static void DelegateEvent(ref Sdl.SDL_Event ev) 
 		{
 			switch (ev.type) 
 			{
 			case Sdl.SDL_ACTIVEEVENT:
-				DelegateActiveEvent(this, ref ev);
+				DelegateActiveEvent(instance, ref ev);
 				break;
 			case Sdl.SDL_JOYAXISMOTION:
-				DelegateJoystickAxisMotion(this, ref ev);
+				DelegateJoystickAxisMotion(instance, ref ev);
 				break;
 			case Sdl.SDL_JOYBALLMOTION:
-				DelegateJoystickBallMotion(this, ref ev);
+				DelegateJoystickBallMotion(instance, ref ev);
 				break;
 			case Sdl.SDL_JOYBUTTONDOWN:
-				DelegateJoystickButtonDown(this, ref ev);
+				DelegateJoystickButtonDown(instance, ref ev);
 				break;
 			case Sdl.SDL_JOYBUTTONUP:
-				DelegateJoystickButtonUp(this, ref ev);
+				DelegateJoystickButtonUp(instance, ref ev);
 				break;
 			case Sdl.SDL_JOYHATMOTION:
-				DelegateJoystickHatMotion(this, ref ev);
+				DelegateJoystickHatMotion(instance, ref ev);
 				break;
 			case Sdl.SDL_KEYDOWN:
-				DelegateKeyDown(this, ref ev);
+				DelegateKeyDown(instance, ref ev);
 				break;
 			case Sdl.SDL_KEYUP:
-				DelegateKeyUp(this, ref ev);
+				DelegateKeyUp(instance, ref ev);
 				break;
 			case Sdl.SDL_MOUSEBUTTONDOWN:
-				DelegateMouseButtonDown(this, ref ev);
+				DelegateMouseButtonDown(instance, ref ev);
 				break;
 			case Sdl.SDL_MOUSEBUTTONUP:
-				DelegateMouseButtonUp(this, ref ev);
+				DelegateMouseButtonUp(instance, ref ev);
 				break;
 			case Sdl.SDL_MOUSEMOTION:
-				DelegateMouseMotion(this, ref ev);
+				DelegateMouseMotion(instance, ref ev);
 				break;
 			case Sdl.SDL_QUIT:
-				DelegateQuit(this, ref ev);
+				DelegateQuit(instance, ref ev);
 				break;
 			case Sdl.SDL_USEREVENT:
-				DelegateUserEvent(this, ref ev);
+				DelegateUserEvent(instance, ref ev);
 				break;
 			case Sdl.SDL_VIDEOEXPOSE:
-				DelegateVideoExpose(this, ref ev);
+				DelegateVideoExpose(instance, ref ev);
 				break;
 			case Sdl.SDL_VIDEORESIZE:
-				DelegateVideoResize(this, ref ev);
+				DelegateVideoResize(instance, ref ev);
 				break;
 			}
 		}
 
-		private void DelegateActiveEvent(object sender,  ref Sdl.SDL_Event ev) 
+		private static void DelegateActiveEvent(object sender,  ref Sdl.SDL_Event ev) 
 		{
 			if (AppActive != null || MouseFocus != null || InputFocus != null) 
 			{
@@ -475,7 +469,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateJoystickAxisMotion(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateJoystickAxisMotion(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (JoystickAxisMotion != null) 
 			{
@@ -521,7 +515,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateJoystickBallMotion(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateJoystickBallMotion(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (JoystickBallMotion != null) 
 			{
@@ -535,7 +529,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateJoystickButtonDown(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateJoystickButtonDown(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (JoystickButton != null || JoystickButtonDown != null) 
 			{
@@ -552,7 +546,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateJoystickButtonUp(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateJoystickButtonUp(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (JoystickButton != null || JoystickButtonUp != null) 
 			{
@@ -569,7 +563,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateJoystickHatMotion(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateJoystickHatMotion(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (JoystickHatMotion != null) 
 			{
@@ -577,7 +571,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateKeyDown(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateKeyDown(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (Keyboard != null || KeyboardDown != null) 
 			{
@@ -603,7 +597,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateKeyUp(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateKeyUp(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (Keyboard != null || KeyboardUp != null) 
 			{
@@ -628,7 +622,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateMouseButtonDown(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateMouseButtonDown(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (MouseButton != null || MouseButtonDown != null) {
 				int button;
@@ -648,7 +642,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateMouseButtonUp(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateMouseButtonUp(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (MouseButton != null || MouseButtonUp != null) 
 			{
@@ -674,7 +668,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateMouseMotion(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateMouseMotion(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (MouseMotion != null) 
 			{
@@ -689,7 +683,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateQuit(object sender, ref Sdl.SDL_Event ev) {
+		private static void DelegateQuit(object sender, ref Sdl.SDL_Event ev) {
 			if (Quit != null) 
 			{
 				QuitEventArgs e = new QuitEventArgs();
@@ -697,14 +691,14 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateUserEvent(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateUserEvent(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (UserEvent != null || ChannelFinished != null || MusicFinished != null) 
 			{
 				object ret;
-				lock (this) 
+				lock (instance) 
 				{
-					ret = this.userEvents[ev.user.code];
+					ret = UserEvents[ev.user.code];
 				}
 				if (ret != null) 
 				{
@@ -712,12 +706,12 @@ namespace SdlDotNet
 					{
 						if (ChannelFinished != null)
 						{
-							ChannelFinished(this, (ChannelFinishedEventArgs)ret);
+							ChannelFinished(instance, (ChannelFinishedEventArgs)ret);
 						}
 					} else if (ret is MusicFinishedEventArgs) {
 						if (MusicFinished != null)
 						{
-							MusicFinished(this, (MusicFinishedEventArgs)ret);
+							MusicFinished(instance, (MusicFinishedEventArgs)ret);
 						}
 					} else
 						UserEvent(sender, new UserEventArgs(ret));
@@ -725,7 +719,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateVideoExpose(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateVideoExpose(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (Expose != null) 
 			{
@@ -733,7 +727,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void DelegateVideoResize(object sender, ref Sdl.SDL_Event ev) 
+		private static void DelegateVideoResize(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (Resize != null) 
 			{
@@ -741,7 +735,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private void ParseKeyStruct(
+		private static void ParseKeyStruct(
 			ref Sdl.SDL_Event ev, 
 			out int device, 
 			out bool down, 
@@ -757,7 +751,7 @@ namespace SdlDotNet
 			mod = (ModifierKeys)ks.mod;
 		}
 
-		private void ParseMouseStruct(
+		private static void ParseMouseStruct(
 			ref Sdl.SDL_Event ev, 
 			out int button, 
 			out int x, 
@@ -768,11 +762,11 @@ namespace SdlDotNet
 			y = ev.button.y;
 		}
 
-		internal void NotifyChannelFinished(int channel) 
+		internal static void NotifyChannelFinished(int channel) 
 		{
 			PushUserEvent(new ChannelFinishedEventArgs(channel));
 		}
-		internal void NotifyMusicFinished() 
+		internal static void NotifyMusicFinished() 
 		{
 			PushUserEvent(new MusicFinishedEventArgs());
 		}

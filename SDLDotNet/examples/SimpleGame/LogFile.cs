@@ -26,10 +26,18 @@ namespace SdlDotNet.Examples
 	public sealed class LogFile
 	{
 		static FileStream fs;
-		
+
 		static readonly LogFile instance = new LogFile();
+		static LogFile()
+		{
+		}
 
 		LogFile()
+		{
+			Initialize();
+		}
+
+		public static void Initialize()
 		{
 			RotateLogs();
 		}

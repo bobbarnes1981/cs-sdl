@@ -86,7 +86,19 @@ namespace SdlDotNet
 		/// </summary>
 		static readonly SdlCore instance = new SdlCore();
 
+		static SdlCore()
+		{
+		}
+
 		SdlCore() 
+		{
+			Initialize();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void Initialize()
 		{
 			if (Sdl.SDL_Init(0) == (int) SdlFlag.Error)
 			{

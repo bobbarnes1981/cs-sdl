@@ -57,19 +57,14 @@ namespace SdlDotNet.Examples
 			
 			int width = 352;
 			int height = 240;
-			
-			Video video = Video.Instance;
-			WindowManager wm = WindowManager.Instance;
-			Mixer mixer = Mixer.Instance;
-			Events events = Events.Instance;
 
-			events.KeyboardDown += 
+			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
-			events.Quit += new QuitEventHandler(this.Quit);
+			Events.Quit += new QuitEventHandler(this.Quit);
 
 			//SdlMixer.MixFunctionDelegate audioMixer = new SdlMixer.MixFunctionDelegate(this.player);
 			//(Smpeg.SMPEG_playAudioSDL);
-			Surface screen = video.SetVideoModeWindow(width, height, true); 
+			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			Mixer.Close();
 			Movie movie = new Movie(filepath + "test.mpg");
 			Console.WriteLine("Time: " + movie.TotalTime);
@@ -99,7 +94,7 @@ namespace SdlDotNet.Examples
 			{
 				while (movie.IsPlaying && (quitFlag == false))
 				{
-					while (events.PollAndDelegate()){}
+					while (Events.PollAndDelegate()){}
 				}
 			} catch (MovieStatusException)
 			{

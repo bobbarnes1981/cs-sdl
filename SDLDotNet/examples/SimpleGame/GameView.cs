@@ -28,8 +28,6 @@ namespace SdlDotNet.Examples
 	public class GameView
 	{
 		Map map;
-		Video video;
-		WindowManager wm;
 		int height;
 		int width;
 		Surface screen;
@@ -51,12 +49,10 @@ namespace SdlDotNet.Examples
 			eventManager.OnTickEvent += new EventManager.TickEventHandler(Subscribe);
 			this.width = 424;
 			this.height = 440;
-			this.video = Video.Instance;
-			this.wm = WindowManager.Instance;
 			this.names = Names.Instance;
 			this.backSprites = new ArrayList();
 			this.frontSprites = new ArrayList();
-			this.sample =Mixer.Instance.LoadWav("../../boing.wav");
+			this.sample = Mixer.LoadWav("../../boing.wav");
 		}
 
 		/// <summary>
@@ -114,12 +110,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void CreateView()
 		{
-			this.screen = video.SetVideoModeWindow(this.width, this.height, true); 
+			this.screen = Video.SetVideoModeWindow(this.width, this.height, true); 
 			this.surf = screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
 			this.surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
-			wm.Caption = Names.WindowCaption;
-			video.HideMouseCursor();
+			WindowManager.Caption = Names.WindowCaption;
+			Video.HideMouseCursor();
 		}
 
 		public void UpdateView()
@@ -150,7 +146,7 @@ namespace SdlDotNet.Examples
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
 			this.entitySprite.CenterX = sectSprite.CenterX;
 			this.entitySprite.CenterY = sectSprite.CenterY;
-			Mixer.Instance.PlaySample(this.sample);
+			Mixer.PlaySample(this.sample);
 		}
 
 		/// <summary>

@@ -27,7 +27,6 @@ namespace SdlDotNet.Examples
 	/// 
 	/// </summary>
 	public class CDPlayer : System.Windows.Forms.Form {
-		private CDAudio _cd;
 		private CDDrive _drive;
 		private int _track;
 
@@ -56,11 +55,10 @@ namespace SdlDotNet.Examples
 			//_drive = null;
 
 			try {
-				_cd = CDAudio.Instance;
-				int num = _cd.NumberOfDrives;
-				_drive = _cd.OpenDrive(0);
+				int num = CDAudio.NumberOfDrives;
+				_drive = CDAudio.OpenDrive(0);
 				for (int i = 0; i < num; i++)
-					comboBoxDrive.Items.Add(_cd.DriveName(i));
+					comboBoxDrive.Items.Add(CDAudio.DriveName(i));
 
 				if (comboBoxDrive.Items.Count > 0) {
 					comboBoxDrive.SelectedIndex = 0;

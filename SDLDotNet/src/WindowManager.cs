@@ -31,32 +31,32 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class WindowManager 
 	{
-
 		static readonly WindowManager instance = new WindowManager();
+
+		static WindowManager()
+		{
+		}
 
 		WindowManager()
 		{
+			Initialize();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public static WindowManager Instance
+		public static void Initialize()
 		{
-			get
+			if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
-				{
-					throw SdlException.Generate();
-				}
-				return instance;
+				throw SdlException.Generate();
 			}
 		}
 
 		/// <summary>
 		/// gets or sets the text for the current window
 		/// </summary>
-		public string Caption 
+		public static string Caption 
 		{
 			get
 			{
@@ -76,7 +76,7 @@ namespace SdlDotNet
 		/// sets the icon for the current window
 		/// </summary>
 		/// <param name="icon">the surface containing the image</param>
-		public void WindowIcon(Surface icon) 
+		public static void WindowIcon(Surface icon) 
 		{
 			Sdl.SDL_WM_SetIcon(icon.SurfacePointer, null);
 		}
@@ -85,21 +85,21 @@ namespace SdlDotNet
 		/// Iconifies (minimizes) the current window
 		/// </summary>
 		/// <returns>True if the action succeeded, otherwise False</returns>
-		public bool IconifyWindow() 
+		public static bool IconifyWindow() 
 		{
 			return (Sdl.SDL_WM_IconifyWindow() != (int) SdlFlag.Success);
 		}
 		/// <summary>
 		/// Forces keyboard focus and prevents the mouse from leaving the window
 		/// </summary>
-		public void GrabInput() 
+		public static void GrabInput() 
 		{
 			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_ON);
 		}
 		/// <summary>
 		/// Releases keyboard and mouse focus from a previous call to GrabInput()
 		/// </summary>
-		public void ReleaseInput() 
+		public static void ReleaseInput() 
 		{
 			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_OFF);
 		}
