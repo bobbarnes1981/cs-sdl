@@ -132,6 +132,12 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "SDLColor.cs"
+                    Link = "..\SDLColor.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "SDLException.cs"
                     Link = "..\SDLException.cs"
                     SubType = "Code"
