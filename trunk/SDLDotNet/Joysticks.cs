@@ -5,8 +5,6 @@ namespace SDLDotNet {
 	/// <summary>
 	/// Represents a joystick on the system
 	/// </summary>
-	/// <type>class</type>
-	/// <implements>System.IDisposable</implements>
 	public class Joystick : IDisposable {
 		private IntPtr _handle;
 		private bool _disposed;
@@ -35,40 +33,30 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the 0-based numeric index of this joystick
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int Index {
 			get { return Natives.SDL_JoystickIndex(_handle); }
 		}
 		/// <summary>
 		/// Gets the number of axes on this joystick (usually 2 for each stick handle)
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int NumAxes {
 			get { return Natives.SDL_JoystickNumAxes(_handle); }
 		}
 		/// <summary>
 		/// Gets the number of trackballs on this joystick
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int NumBalls {
 			get { return Natives.SDL_JoystickNumBalls(_handle); }
 		}
 		/// <summary>
 		/// Gets the number of hats on this joystick
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int NumHats {
 			get { return Natives.SDL_JoystickNumHats(_handle); }
 		}
 		/// <summary>
 		/// Gets the number of buttons on this joystick
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int NumButtons {
 			get { return Natives.SDL_JoystickNumButtons(_handle); }
 		}
@@ -86,7 +74,6 @@ namespace SDLDotNet {
 	/// You can obtain an instance of this class by accessing the Joysticks property of the main SDL object.
 	/// Note that actual joystick input is handled by the Events class
 	/// </summary>
-	/// <type>class</type>
 	public class Joysticks {
 		internal Joysticks() {
 			if (Natives.SDL_InitSubSystem((int)Natives.Init.Joystick) != 0)
@@ -96,7 +83,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Returns the number of joysticks on this system
 		/// </summary>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The number of joysticks</returns>
 		public int NumJoysticks() {
 			return Natives.SDL_NumJoysticks();
@@ -105,7 +91,6 @@ namespace SDLDotNet {
 		/// Creates a joystick object to read information about a joystick
 		/// </summary>
 		/// <param name="index">The 0-based index of the joystick to read</param>
-		/// <returntype>SDLDotNet.Joystick</returntype>
 		/// <returns>A Joystick object</returns>
 		public Joystick OpenJoystick(int index) {
 			IntPtr joy = Natives.SDL_JoystickOpen(index);

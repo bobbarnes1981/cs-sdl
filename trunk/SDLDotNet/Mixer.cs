@@ -4,7 +4,6 @@ namespace SDLDotNet {
 	/// <summary>
 	/// Specifies an audio format to mix audio in
 	/// </summary>
-	/// <type>enum</type>
 	public enum AudioFormat {
 		/// <summary>
 		/// Unsigned 8-bit
@@ -40,7 +39,6 @@ namespace SDLDotNet {
 	/// Represents a sound sample.
 	/// Create with Mixer.LoadWav().
 	/// </summary>
-	/// <type>class</type>
 	/// <implements>System.IDisposable</implements>
 	public class Sample : IDisposable {
 		private IntPtr _handle;
@@ -83,8 +81,6 @@ namespace SDLDotNet {
 	/// Represents a music sample.  Music is generally longer than a sound effect sample,
 	/// however it can also be compressed e.g. by Ogg Vorbis
 	/// </summary>
-	/// <type>class</type>
-	/// <implements>System.IDisposable</implements>
 	public class Music : IDisposable {
 		private IntPtr _handle;
 		private bool _disposed;
@@ -116,7 +112,6 @@ namespace SDLDotNet {
 	/// <summary>
 	/// Indicates the current fading status of a sample
 	/// </summary>
-	/// <type>enum</type>
 	public enum FadingStatus {
 		/// <summary>
 		/// Sample is not fading
@@ -136,14 +131,14 @@ namespace SDLDotNet {
 	/// Provides methods to access the sound system.
 	/// You can obtain an instance of this class by accessing the Mixer property of the main SDL object.
 	/// </summary>
-	/// <type>class</type>
-	/// <implements>System.IDisposable</implements>
 	public class Mixer {
 		private Natives.ChannelFinishedDelegate _channelfin;
 		private Natives.MusicFinishedDelegate _musicfin;
 		private Events _events;
 
 		internal Mixer(Events evs) {
+			if (Natives.SDL_InitSubSystem((int)Natives.Init.Audio) != 0)
+				throw SDLException.Generate();
 			_events = evs;
 			_channelfin = new Natives.ChannelFinishedDelegate(this.ChannelFinished);
 			_musicfin = new Natives.MusicFinishedDelegate(this.MusicFinished);
@@ -190,7 +185,6 @@ namespace SDLDotNet {
 		/// Loads a .wav file into memory
 		/// </summary>
 		/// <param name="file">The filename to load</param>
-		/// <returntype>SDLDotNet.Sample</returntype>
 		/// <returns>A new Sample object</returns>
 		public Sample LoadWAV(string file) {
 			IntPtr p = Natives.Mix_LoadWAV_RW(Natives.SDL_RWFromFile(file, "rb"), 1);
@@ -202,7 +196,6 @@ namespace SDLDotNet {
 		/// Loads a .wav file from a byte array
 		/// </summary>
 		/// <param name="data">The data to load</param>
-		/// <returntype>SDLDotNet.Sample</returntype>
 		/// <returns>A new Sample object</returns>
 		public Sample LoadWAV(byte[] data) {
 			IntPtr p = Natives.Mix_LoadWAV_RW(Natives.SDL_RWFromMem(data, data.Length), 1);
@@ -215,7 +208,6 @@ namespace SDLDotNet {
 		/// Changes the number of channels allocated for mixing
 		/// </summary>
 		/// <param name="num">The number of channels to allocate</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The number of channels allocated</returns>
 		public int AllocateChannels(int num) {
 			return Natives.Mix_AllocateChannels(num);
@@ -224,7 +216,6 @@ namespace SDLDotNet {
 		/// Sets the volume for all channels
 		/// </summary>
 		/// <param name="volume">A new volume value, between 0 and 128 inclusive</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>New average channel volume</returns>
 		public int SetAllChannelsVolume(int volume) {
 			return Natives.Mix_Volume(-1, volume);
@@ -234,7 +225,6 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="channel">Channel number</param>
 		/// <param name="volume">A new volume value, between 0 and 128 inclusive</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>New channel volume</returns>
 		public int SetChannelVolume(int channel, int volume) {
 			return Natives.Mix_Volume(channel, volume);
@@ -244,7 +234,6 @@ namespace SDLDotNet {
 		/// Plays a sample once using the first available channel
 		/// </summary>
 		/// <param name="sample">The sample to play</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int PlaySample(Sample sample) {
 			int ret = Natives.Mix_PlayChannelTimed(-1, sample.GetHandle(), 0, -1);
@@ -257,7 +246,6 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="sample">The sample to play</param>
 		/// <param name="loops">The number of loops.  Specify 1 to have the sample play twice</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int PlaySample(Sample sample, int loops) {
 			int ret = Natives.Mix_PlayChannelTimed(-1, sample.GetHandle(), loops, -1);
@@ -271,7 +259,6 @@ namespace SDLDotNet {
 		/// <param name="channel">The channel to play the sample on</param>
 		/// <param name="sample">The sample to play</param>
 		/// <param name="loops">The number of loops.  Specify 1 to have the sample play twice</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int PlaySample(int channel, Sample sample, int loops) {
 			int ret = Natives.Mix_PlayChannelTimed(channel, sample.GetHandle(), loops, -1);
@@ -284,7 +271,6 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="sample">The sample to play</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int PlaySampleTimed(Sample sample, int ticks) {
 			int ret = Natives.Mix_PlayChannelTimed(-1, sample.GetHandle(), 0, ticks);
@@ -298,7 +284,6 @@ namespace SDLDotNet {
 		/// <param name="sample">The sample to play</param>
 		/// <param name="loops">The number of loops.  Specify 1 to have the sample play twice</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int PlaySampleTimed(Sample sample, int loops, int ticks) {
 			int ret = Natives.Mix_PlayChannelTimed(-1, sample.GetHandle(), loops, ticks);
@@ -313,7 +298,6 @@ namespace SDLDotNet {
 		/// <param name="sample">The sample to play</param>
 		/// <param name="loops">The number of loops.  Specify 1 to have the sample play twice</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int PlaySampleTimed(int channel, Sample sample, int loops, int ticks) {
 			int ret = Natives.Mix_PlayChannelTimed(channel, sample.GetHandle(), loops, ticks);
@@ -327,7 +311,6 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="sample">The sample to play</param>
 		/// <param name="ms">The number of milliseconds to fade in for</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int FadeInSample(Sample sample, int ms) {
 			int ret = Natives.Mix_FadeInChannelTimed(-1, sample.GetHandle(), 0, ms, -1);
@@ -341,7 +324,6 @@ namespace SDLDotNet {
 		/// <param name="sample">The sample to play</param>
 		/// <param name="ms">The number of milliseconds to fade in for</param>
 		/// <param name="loops">The number of loops.  Specify 1 to have the sample play twice</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int FadeInSample(Sample sample, int ms, int loops) {
 			int ret = Natives.Mix_FadeInChannelTimed(-1, sample.GetHandle(), loops, ms, -1);
@@ -356,7 +338,6 @@ namespace SDLDotNet {
 		/// <param name="sample">The sample to play</param>
 		/// <param name="ms">The number of milliseconds to fade in for</param>
 		/// <param name="loops">The number of loops.  Specify 1 to have the sample play twice</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int FadeInSample(int channel, Sample sample, int ms, int loops) {
 			int ret = Natives.Mix_FadeInChannelTimed(channel, sample.GetHandle(), loops, ms, -1);
@@ -370,7 +351,6 @@ namespace SDLDotNet {
 		/// <param name="sample">The sample to play</param>
 		/// <param name="ms">The number of milliseconds to fade in for</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int FadeInSampleTimed(Sample sample, int ms, int ticks) {
 			int ret = Natives.Mix_FadeInChannelTimed(-1, sample.GetHandle(), 0, ms, ticks);
@@ -385,7 +365,6 @@ namespace SDLDotNet {
 		/// <param name="ms">The number of milliseconds to fade in for</param>
 		/// <param name="loops">The number of loops.  Specify 1 to have the sample play twice</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int FadeInSampleTimed(Sample sample, int ms, int loops, int ticks) {
 			int ret = Natives.Mix_FadeInChannelTimed(-1, sample.GetHandle(), loops, ms, ticks);
@@ -401,7 +380,6 @@ namespace SDLDotNet {
 		/// <param name="ms">The number of milliseconds to fade in for</param>
 		/// <param name="loops">The number of loops.  Specify 1 to have the sample play twice</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The channel used to play the sample</returns>
 		public int FadeInSampleTimed(int channel, Sample sample, int ms, int loops, int ticks) {
 			int ret = Natives.Mix_FadeInChannelTimed(channel, sample.GetHandle(), loops, ms, ticks);
@@ -471,7 +449,6 @@ namespace SDLDotNet {
 		/// Fades out all channels
 		/// </summary>
 		/// <param name="ms">The number of milliseconds to fade out for</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The number of channels fading out</returns>
 		public int FadeOut(int ms) {
 			return Natives.Mix_FadeOutChannel(-1, ms);
@@ -481,7 +458,6 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="channel">The channel to fade out</param>
 		/// <param name="ms">The number of milliseconds to fade out for</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The number of channels fading out</returns>
 		public int FadeOutChannel(int channel, int ms) {
 			return Natives.Mix_FadeOutChannel(channel, ms);
@@ -490,7 +466,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Returns the number of currently playing channels
 		/// </summary>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The number of channels playing</returns>
 		public int NumChannelsPlaying() {
 			return Natives.Mix_Playing(-1);
@@ -499,7 +474,6 @@ namespace SDLDotNet {
 		/// Returns a flag indicating whether or not a channel is playing
 		/// </summary>
 		/// <param name="channel">The channel to query</param>
-		/// <returntype>System.Boolean</returntype>
 		/// <returns>True if the channel is playing, otherwise False</returns>
 		public bool IsChannelPlaying(int channel) {
 			return (Natives.Mix_Playing(channel) != 0);
@@ -507,7 +481,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Returns the number of paused channels
 		/// </summary>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The number of channels paused</returns>
 		public int NumChannelsPaused() {
 			return Natives.Mix_Paused(-1);
@@ -516,7 +489,6 @@ namespace SDLDotNet {
 		/// Returns a flag indicating whether or not a channel is paused
 		/// </summary>
 		/// <param name="channel">The channel to query</param>
-		/// <returntype>System.Boolean</returntype>
 		/// <returns>True if the channel is paused, otherwise False</returns>
 		public bool IsChannelPaused(int channel) {
 			return (Natives.Mix_Paused(channel) != 0);
@@ -525,7 +497,6 @@ namespace SDLDotNet {
 		/// Returns the current fading status of a channel
 		/// </summary>
 		/// <param name="channel">The channel to query</param>
-		/// <returntype>SDLDotNet.FadingStatus</returntype>
 		/// <returns>The current fading status of the channel</returns>
 		public FadingStatus ChannelFadingStatus(int channel) {
 			return (FadingStatus)Natives.Mix_FadingChannel(channel);
@@ -610,7 +581,6 @@ namespace SDLDotNet {
 		/// It may be possible to compile in support for other formats such as MOD and and MP3.
 		/// </summary>
 		/// <param name="file">The filename to load</param>
-		/// <returntype>SDLDotNet.Music</returntype>
 		/// <returns>A new Music object</returns>
 		public Music LoadMusic(string file) {
 			IntPtr mus = Natives.Mix_LoadMUS(file);
@@ -652,7 +622,6 @@ namespace SDLDotNet {
 		/// Sets the music volume
 		/// </summary>
 		/// <param name="volume">The new volume value, between 0 and 128 inclusive</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The previous volume setting</returns>
 		public int SetMusicVolume(int volume) {
 			return Natives.Mix_VolumeMusic(volume);
@@ -701,7 +670,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Returns a flag indicating whether or not music is playing
 		/// </summary>
-		/// <returntype>System.Boolean</returntype>
 		/// <returns>True if music is playing, otherwise False</returns>
 		public bool PlayingMusic() {
 			return (Natives.Mix_PlayingMusic() != 0);
@@ -709,7 +677,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Returns a flag indicating whether or not music is paused
 		/// </summary>
-		/// <returntype>System.Boolean</returntype>
 		/// <returns>True if music is paused, otherwise False</returns>
 		public bool PausedMusic() {
 			return (Natives.Mix_PausedMusic() != 0);
@@ -717,7 +684,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Returns a flag indicating whether or not music is fading
 		/// </summary>
-		/// <returntype>System.Boolean</returntype>
 		/// <returns>True if music is fading in or out, otherwise False</returns>
 		public bool FadingMusic() {
 			return (Natives.Mix_FadingMusic() != 0);

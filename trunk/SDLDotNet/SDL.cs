@@ -8,8 +8,6 @@ namespace SDLDotNet {
 	/// method.
 	/// All the functionality of the SDL library is available through this class and its properties.
 	/// </summary>
-	/// <type>class</type>
-	/// <implements>System.IDisposable</implements>
 	public class SDL : IDisposable {
 		private Video _video;
 		private Events _events;
@@ -18,27 +16,29 @@ namespace SDLDotNet {
 		private CDAudio _cd;
 		private Mixer _mix;
 		private bool _disposed;
+		private static SDL _instance = null;
 
 		/// <summary>
-		/// Creates a new SDL object
+		/// Returns the global instance of this class.
 		/// </summary>
-		/// <param name="initaudio">if True, sound will be initialized</param>
-		public SDL(bool initaudio) {
-			Natives.Init flags = Natives.Init.Video;
-			if (initaudio)
-				flags |= Natives.Init.Audio;
-			if (Natives.SDL_Init((int)flags) == -1)
+		public static SDL Instance {
+			get {
+				if (_instance == null)
+					_instance = new SDL();
+				return _instance;
+			}
+		}
+
+		private SDL() {
+			if (Natives.SDL_Init(0) == -1)
 				throw SDLException.Generate();
-			_video = new Video();
-			_events = new Events();
-			_wm = new WindowManager();
+			_video = null;
+			_events = null;
+			_wm = null;
 			_joy = null;
 			_cd = null;
+			_mix = null;
 			_disposed = false;
-			if (initaudio)
-				_mix = new Mixer(_events);
-			else
-				_mix = null;
 		}
 
 		/// <protected/>
@@ -60,39 +60,43 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets an object from which the video libraries can be accessed
 		/// </summary>
-		/// <proptype>SDLDotNet.Video</proptype>
-		/// <readonly/>
 		public Video Video {
-			get { return _video; }
+			get {
+				if (_video == null)
+					_video = new Video();
+				return _video;
+			}
 		}
 
 		/// <summary>
 		/// Gets an object from which the event libraries can be accessed
 		/// </summary>
-		/// <proptype>SDLDotNet.Events</proptype>
-		/// <readonly/>
 		public Events Events {
-			get { return _events; }
+			get {
+				if (_events == null)
+					_events = new Events(Video);
+				return _events;
+			}
 		}
 
 		/// <summary>
 		/// Gets an object from which the window manager libraries can be accessed
 		/// </summary>
-		/// <proptype>SDLDotNet.WindowManager</proptype>
-		/// <readonly/>
 		public WindowManager WindowManager {
-			get { return _wm; }
+			get {
+				if (_wm == null)
+					_wm = new WindowManager(Video);
+				return _wm;
+			}
 		}
 
 		/// <summary>
 		/// Gets an object from which the sound libraries can be accessed
 		/// </summary>
-		/// <proptype>SDLDotNet.Mixer</proptype>
-		/// <readonly/>
 		public Mixer Mixer {
 			get {
 				if (_mix == null)
-					throw new SDLException("Audio not initialized");
+					_mix = new Mixer(Events);
 				return _mix;
 			}
 		}
@@ -100,8 +104,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets an object from which the CD audio can be accessed
 		/// </summary>
-		/// <proptype>SDLDotNet.CDAudio</proptype>
-		/// <readonly/>
 		public CDAudio CDAudio {
 			get {
 				if (_cd == null)
@@ -113,8 +115,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets an object from which the joystick libraries can be accessed
 		/// </summary>
-		/// <proptype>SDLDotNet.Joysticks</proptype>
-		/// <readonly/>
 		public Joysticks Joysticks {
 			get {
 				if (_joy == null)
@@ -124,11 +124,9 @@ namespace SDLDotNet {
 		}
 
 		/// <summary>
-		/// Gets the number of ticks since SDL was initialized
+		/// Gets the number of ticks since SDL was initialized.  
 		/// This is not a high-resolution timer
 		/// </summary>
-		/// <returntype>System.UInt32</returntype>
-		/// <returns>The number of ticks</returns>
 		public uint GetTicks() {
 			return Natives.SDL_GetTicks();
 		}

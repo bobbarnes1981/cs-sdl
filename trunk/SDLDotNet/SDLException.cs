@@ -4,12 +4,17 @@ namespace SDLDotNet {
 	/// <summary>
 	/// Represents a run-time error from the SDL library
 	/// </summary>
-	/// <type>class</type>
-	/// <base>System.Exception</base>
 	public class SDLException : Exception {
-
+		/// <summary>
+		/// Initializes an SDLException instance
+		/// </summary>
+		/// <param name="msg">The string representing the error message</param>
 		public SDLException(string msg) : base(msg) {}
 
+		/// <summary>
+		/// Generates an SDLException based on the last SDL Error code
+		/// </summary>
+		/// <returns>A new SDLException object</returns>
 		public static SDLException Generate() {
 			string msg = Natives.SDL_GetError();
 
@@ -24,8 +29,6 @@ namespace SDLDotNet {
 	/// Represents an error resulting from a surface being lost, usually as a result of
 	/// the user changing the input focus away from a full-screen application
 	/// </summary>
-	/// <type>class</type>
-	/// <base>SDLDotNet.SDLException</base>
 	public class SurfaceLostException : SDLException {
 		internal SurfaceLostException(string msg) : base(msg) {}
 	}

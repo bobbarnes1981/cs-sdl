@@ -4,7 +4,6 @@ namespace SDLDotNet {
 	/// <summary>
 	/// Indicates which key on the keyboard the user pressed or released
 	/// </summary>
-	/// <type>enum</type>
 	public enum Key {
 		/// <summary></summary>
 		K_UNKNOWN	= 0,
@@ -477,7 +476,6 @@ namespace SDLDotNet {
 	/// Indicates which keyboard modifiers were pressed.
 	/// Can be Or'd together
 	/// </summary>
-	/// <type>enum</type>
 	public enum Mod {
 		/// <summary>
 		/// No modifiers
@@ -558,7 +556,6 @@ namespace SDLDotNet {
 	/// <summary>
 	/// Indicates which position a joystick hat is pressed in
 	/// </summary>
-	/// <type>enum</type>
 	public enum HatPos {
 		/// <summary></summary>
 		Center = 0,
