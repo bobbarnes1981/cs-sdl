@@ -32,7 +32,7 @@ namespace SdlDotNet
 	/// We'll follow in the footsteps of X11...
 	/// The keyboard syms have been cleverly chosen to map to ASCII
 	/// </summary>
-	public enum Keys
+	public enum Key
 	{
 		/// <summary>
 		///
@@ -73,7 +73,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// exclaim. '!'
 		/// </summary>
-		ExclaimationPoint = Sdl.SDLK_EXCLAIM ,
+		ExclamationPoint = Sdl.SDLK_EXCLAIM ,
 		/// <summary>
 		/// quotedbl. '"'
 		/// </summary>
@@ -189,7 +189,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// question mark. '?'
 		/// </summary>
-		QuetsionMark = Sdl.SDLK_QUESTION ,
+		QuestionMark = Sdl.SDLK_QUESTION ,
 		/// <summary>
 		/// at. '@'
 		/// </summary>
@@ -220,111 +220,111 @@ namespace SdlDotNet
 		/// <summary>
 		/// grave. '`'
 		/// </summary>
-		Backquote = Sdl.SDLK_BACKQUOTE ,
+		BackQuote = Sdl.SDLK_BACKQUOTE ,
 		/// <summary>
 		/// a
 		/// </summary>
-		a = Sdl.SDLK_a ,
+		A = Sdl.SDLK_a ,
 		/// <summary>
 		/// b
 		/// </summary>
-		b = Sdl.SDLK_b ,
+		B = Sdl.SDLK_b ,
 		/// <summary>
 		/// c
 		/// </summary>
-		c = Sdl.SDLK_c ,
+		C = Sdl.SDLK_c ,
 		/// <summary>
 		/// d
 		/// </summary>
-		d = Sdl.SDLK_d ,
+		D = Sdl.SDLK_d ,
 		/// <summary>
 		/// e
 		/// </summary>
-		e = Sdl.SDLK_e ,
+		E = Sdl.SDLK_e ,
 		/// <summary>
 		/// f
 		/// </summary>
-		f = Sdl.SDLK_f ,
+		F = Sdl.SDLK_f ,
 		/// <summary>
 		/// g
 		/// </summary>
-		g = Sdl.SDLK_g ,
+		G = Sdl.SDLK_g ,
 		/// <summary>
 		/// h
 		/// </summary>
-		h = Sdl.SDLK_h ,
+		H = Sdl.SDLK_h ,
 		/// <summary>
 		/// i
 		/// </summary>
-		i = Sdl.SDLK_i ,
+		I = Sdl.SDLK_i ,
 		/// <summary>
 		/// j
 		/// </summary>
-		j = Sdl.SDLK_j ,
+		J = Sdl.SDLK_j ,
 		/// <summary>
 		/// k
 		/// </summary>
-		k = Sdl.SDLK_k ,
+		K = Sdl.SDLK_k ,
 		/// <summary>
 		/// l
 		/// </summary>
-		l = Sdl.SDLK_l ,
+		L = Sdl.SDLK_l ,
 		/// <summary>
 		/// m
 		/// </summary>
-		m = Sdl.SDLK_m ,
+		M = Sdl.SDLK_m ,
 		/// <summary>
 		/// n
 		/// </summary>
-		n = Sdl.SDLK_n ,
+		N = Sdl.SDLK_n ,
 		/// <summary>
 		/// o
 		/// </summary>
-		o = Sdl.SDLK_o ,
+		O = Sdl.SDLK_o ,
 		/// <summary>
 		/// p
 		/// </summary>
-		p = Sdl.SDLK_p ,
+		P = Sdl.SDLK_p ,
 		/// <summary>
 		/// q
 		/// </summary>
-		q = Sdl.SDLK_q ,
+		Q = Sdl.SDLK_q ,
 		/// <summary>
 		/// r
 		/// </summary>
-		r = Sdl.SDLK_r ,
+		R = Sdl.SDLK_r ,
 		/// <summary>
 		/// s
 		/// </summary>
-		s = Sdl.SDLK_s ,
+		S = Sdl.SDLK_s ,
 		/// <summary>
 		/// t
 		/// </summary>
-		t = Sdl.SDLK_t ,
+		T = Sdl.SDLK_t ,
 		/// <summary>
 		/// u
 		/// </summary>
-		u = Sdl.SDLK_u ,
+		U = Sdl.SDLK_u ,
 		/// <summary>
 		/// v
 		/// </summary>
-		v = Sdl.SDLK_v ,
+		V = Sdl.SDLK_v ,
 		/// <summary>
 		/// w
 		/// </summary>
-		w = Sdl.SDLK_w ,
+		W = Sdl.SDLK_w ,
 		/// <summary>
 		/// x
 		/// </summary>
-		x = Sdl.SDLK_x ,
+		X = Sdl.SDLK_x ,
 		/// <summary>
 		/// y
 		/// </summary>
-		y = Sdl.SDLK_y ,
+		Y = Sdl.SDLK_y ,
 		/// <summary>
 		/// z
 		/// </summary>
-		z = Sdl.SDLK_z ,
+		Z = Sdl.SDLK_z ,
 		/// <summary>
 		/// delete. '^?'
 		/// </summary>
@@ -903,7 +903,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// right shift
 		/// </summary>
-		Rightshift = Sdl.SDLK_RSHIFT ,
+		RightShift = Sdl.SDLK_RSHIFT ,
 		/// <summary>
 		/// left shift
 		/// </summary>
@@ -961,7 +961,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// SysRq
 		/// </summary>
-		SysRq = Sdl.SDLK_SYSREQ ,
+		SysRQ = Sdl.SDLK_SYSREQ ,
 		/// <summary>
 		/// break
 		/// </summary>
@@ -995,6 +995,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Enumeration of valid key mods (possibly OR'd together) 
 	/// </summary>
+	[FlagsAttribute]
 	public enum ModifierKeys
 	{
 		/// <summary>
@@ -1048,11 +1049,28 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		Reserved = Sdl.KMOD_RESERVED
+		Reserved = Sdl.KMOD_RESERVED,
+		/// <summary>
+		/// Both CTRL Keys
+		/// </summary>
+		ControlKeys = (Sdl.KMOD_LCTRL|Sdl.KMOD_RCTRL),
+		/// <summary>
+		/// Both SHIFT keys.
+		/// </summary>
+		ShiftKeys = (Sdl.KMOD_LSHIFT|Sdl.KMOD_RSHIFT),
+
+		/// <summary>
+		/// Both ALT keys.
+		/// </summary>
+		AltKeys = (Sdl.KMOD_LALT|Sdl.KMOD_RALT),
+
+		/// <summary>
+		/// Both META keys.
+		/// </summary>
+		MetaKeys = (Sdl.KMOD_LMETA|Sdl.KMOD_RMETA)
 	}
 	#endregion ModifierKeys
 	#endregion Public Enums
-
 
 	/// <summary>
 	/// Summary description for KeyboardEventArgs.
@@ -1071,7 +1089,7 @@ namespace SdlDotNet
 		/// <param name="modifierKeys">Current modifier flags</param>
 		public KeyboardEventArgs(
 			int device, bool down, 
-			int scanCode, Keys key, 
+			int scanCode, Key key, 
 			ModifierKeys modifierKeys)
 		{
 			this.device = device;
@@ -1130,11 +1148,11 @@ namespace SdlDotNet
 			}
 		}
 
-		private Keys key;
+		private Key key;
 		/// <summary>
 		/// 
 		/// </summary>
-		public Keys Key
+		public Key Key
 		{
 			get
 			{

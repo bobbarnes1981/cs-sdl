@@ -99,8 +99,8 @@ namespace SdlDotNet.Examples {
 		private void KeyboardDown(
 			object sender,
 			KeyboardEventArgs e) {
-			if (e.Key == Keys.Escape ||
-				e.Key == Keys.q)
+			if (e.Key == Key.Escape ||
+				e.Key == Key.Q)
 			{
 				quitFlag = true;
 			}
