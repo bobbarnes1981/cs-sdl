@@ -1,0 +1,94 @@
+using System;
+using System.Collections;
+
+namespace MfGames.Utility
+{
+  /// <summary>
+  /// This class contains a list of keys and their weights. It allows
+  /// a random selection of elements, based on the weights.
+  /// </summary>
+  public class WeightedSelector : LoggedObject
+  {
+    #region Operators
+    public int this[object key]
+    {
+      get
+      {
+	// Do some sanity checking
+	if (key == null)
+	  return 0;
+
+	// Find the weight, but make sure we always return an integer
+	if (weights[key] == null)
+	  return 0;
+	else
+	  return (int) weights[key];
+      }
+
+      set
+      {
+	// Make sure we are not negative
+	if (key == null)
+	  throw new Exception("Cannot assign a weight to a null key");
+
+	if (value < 0)
+	  throw new Exception("Cannot assign a negative weight to " + key);
+
+	// Get the previous key and remove its weight
+	int w = this[key];
+	total -= w;
+
+	// Assign the new one
+	weights[key] = value;
+	total += value;
+      }
+    }
+    #endregion
+
+    #region Random
+    public object RandomObject
+    {
+      get
+      {
+	// Just a random element, based on weights
+	int sel = Entropy.Next(0, (int) total);
+	
+	return Select(sel);
+      }
+    }
+    #endregion
+
+    #region Weights
+    // Contains a hashtable of weights
+    private Hashtable weights = new Hashtable();
+
+    // Contains the total weights
+    private long total = 0;
+
+    public long Total { get { return total; } }
+
+    /// <summary>
+    /// Selects a specific object from the weighted chart, based on
+    /// the given index.
+    /// </summary>
+    protected object Select(int index)
+    {
+      // Go through the keys
+      long running = 0;
+
+      foreach (object key in weights.Keys)
+      {
+	// Get the weight and add it
+	running += this[key];
+
+	// If we passed the results, return it
+	if (running >= index)
+	  return key;
+      }
+
+      // Return it
+      throw new Exception("Could not select random");
+    }
+    #endregion
+  }
+}

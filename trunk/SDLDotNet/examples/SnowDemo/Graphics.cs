@@ -16,11 +16,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  ****************************************************************************/
 
+using SdlDotNet;
+using System.Drawing;
+
 namespace SdlDotNet.Examples
-{
-	using SdlDotNet;
-	using System.Drawing;
-	
+{	
 	public sealed class Graphics
 	{
 		static Surface screen;

@@ -7,6 +7,7 @@
 * Conversion to GLUT by Mark J. Kilgard 
 * Conversion to C# by Lux, Using Tao & SDL.NET - 2003/10/15 
 * Revised to use SdlDotNet 2.x by David Hudson 2004-11-04
+* Revised to use SdlDotNet 3.x by David Hudson 2005-02-04
 *
 */
 

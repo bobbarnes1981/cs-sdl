@@ -18,7 +18,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="3.0.0beta1" />
+    <property name="project.version" value="3.0.0beta2" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
@@ -72,6 +72,7 @@
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="clean" />
 	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="clean" />
 	<nant buildfile="${examples.dir}/SnowDemo/SnowDemo.build" target="clean" />
+	<nant buildfile="${examples.dir}/Triad/Triad.build" target="clean" />
 	<nant buildfile="${examples.dir}/WeaponFire/WeaponFire.build" target="clean" />
     </target>
 
@@ -103,6 +104,7 @@
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="build" />
 	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="build" />    
 	<nant buildfile="${examples.dir}/SnowDemo/SnowDemo.build" target="build" />
+	<nant buildfile="${examples.dir}/Triad/Triad.build" target="build" />
 	<nant buildfile="${examples.dir}/WeaponFire/WeaponFire.build" target="build" />
     </target>
 
@@ -199,10 +201,13 @@
 		<include name="examples/SnowDemo/**" />
 		<exclude name="examples/SnowDemo/*j.user" />
 		<exclude name="examples/SnowDemo/${obj.dir}" />
+		<include name="examples/Triad/**" />
+		<exclude name="examples/Triad/*j.user" />
+		<exclude name="examples/Triad/${obj.dir}" />
 		<include name="examples/WeaponFire/**" />
 		<exclude name="examples/WeaponFire/*j.user" />
 		<exclude name="examples/WeaponFire/${obj.dir}" />
-		<include name="lib/*" />
+		<include name="lib/**" />
 		<include name="scripts/**" />
 		<include name="tools/**" />
 		<include name="*" />

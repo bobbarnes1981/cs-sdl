@@ -1,8 +1,13 @@
-3.0.0alpha1
+3.0.0beta2
+David Hudson 20 Feb 2005
+* Updated some of the documentation.
+* Added Triad, a Tetris-like game to the examples directory.
+
+3.0.0beta1
 David Hudson 14 Feb 2005
 * This is a big update. SDL.NET now has functionality similar to Pygame, the set of Python SDL bindings (http://pygame.org). There are some pieces missing, but SDL.NET finally has a full feature set.
 * Almost all classes have changed to some extent. Please read the documentation.
-* The Surface.Blit() function has changed. Instead of srcSurface.Blit(toDest, rect). It is now destSurf.Blit(fromSrcSurf, rect). This makes the method a little more intuitive when working with the main video screen.
+* The Surface.Blit() function has changed. Instead of srcSurface.Blit(toDest, rect). It is now destSurf.Blit(fromSrcSurf, rect). This makes the method a little more intuitive when working with the main video screen. If your app window comes up blank, this change is probably the reason.
 * The mixer system has been completely revamped. Each channel is now an object and can be manipulated easily.
 * The event system has been revamped. The event queue can be totally controlled. There are methods for adding new events, viewing events, and removing events directly from the queue.
 * Image class has been folded into Surface.
