@@ -98,6 +98,9 @@
     <target name = "win" depends="Win32NT" description="sets parameters for a Windows build">
     </target>
 
+    <target name = "Win32Windows" depends="Win32NT" description="sets parameters for a Windows 95 or later build">
+    </target>
+    
     <target name="build" depends="init" description="Builds current configuration">
 	<!-- build SDLDotNet assembly -->
 	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="build" />
