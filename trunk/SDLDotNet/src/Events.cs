@@ -210,6 +210,10 @@ namespace SdlDotNet {
 	{
 		private Hashtable userEvents = new Hashtable();
 		private int userEventId = 0;
+		//Reduced joystick "jitter"
+		private const int JOYSTICK_THRESHHOLD = 3200;
+		private const int JOYSTICK_ADJUSTMENT = 32768;
+		private const int JOYSTICK_SCALE = 65535;
 
 		/// <summary>
 		/// Fires when the application has become active or inactive
@@ -255,6 +259,14 @@ namespace SdlDotNet {
 		/// Fires when a joystick axis changes
 		/// </summary>
 		public event JoystickAxisEventHandler JoystickAxisMotion;
+		/// <summary>
+		/// Fires when a joystick vertical axis changes
+		/// </summary>
+		public event JoystickAxisEventHandler JoystickVerticalAxisMotion;
+		/// <summary>
+		/// Fires when a joystick horizontal axis changes
+		/// </summary>
+		public event JoystickAxisEventHandler JoystickHorizontalAxisMotion;
 		/// <summary>
 		/// Fires when a joystick button is pressed or released
 		/// </summary>
@@ -465,9 +477,45 @@ namespace SdlDotNet {
 		{
 			if (JoystickAxisMotion != null) 
 			{
-				JoystickAxisEventArgs e = 
-					new JoystickAxisEventArgs(ev.jaxis.which, ev.jaxis.axis, ev.jaxis.val);
-				JoystickAxisMotion(sender, e);
+				if ((ev.jaxis.val < (-1)*JOYSTICK_THRESHHOLD) || (ev.jaxis.val > JOYSTICK_THRESHHOLD))
+				{
+					float jaxisValue = 
+						(float)((int)ev.jaxis.val + JOYSTICK_ADJUSTMENT) / (float)JOYSTICK_SCALE;
+					//Console.WriteLine("jaxisValue: " + jaxisValue.ToString());
+					if (jaxisValue < 0)
+					{
+						jaxisValue = 0;
+					}
+
+					if (ev.jaxis.axis == 0)
+					{
+
+						JoystickAxisEventArgs e = 
+							new JoystickAxisEventArgs(
+							ev.jaxis.which, 
+							ev.jaxis.axis, 
+							jaxisValue);
+						JoystickHorizontalAxisMotion(sender, e);
+					}
+					else if (ev.jaxis.axis == 1)
+					{
+						JoystickAxisEventArgs e = 
+							new JoystickAxisEventArgs(
+							ev.jaxis.which, 
+							ev.jaxis.axis, 
+							jaxisValue);
+						JoystickVerticalAxisMotion(sender, e);
+					}
+					else
+					{
+						JoystickAxisEventArgs e = 
+							new JoystickAxisEventArgs(
+							ev.jaxis.which, 
+							ev.jaxis.axis, 
+							jaxisValue);
+						JoystickAxisMotion(sender, e);
+					}
+				}
 			}
 		}
 
@@ -507,7 +555,7 @@ namespace SdlDotNet {
 			if (JoystickButton != null || JoystickButtonUp != null) 
 			{
 				JoystickButtonEventArgs e = 
-					new JoystickButtonEventArgs(ev.jbutton.which, ev.jbutton.button, true);
+					new JoystickButtonEventArgs(ev.jbutton.which, ev.jbutton.button, false);
 				if (JoystickButton != null)
 				{
 					JoystickButton(sender, e);

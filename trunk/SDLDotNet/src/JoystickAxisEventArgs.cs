@@ -34,7 +34,7 @@ namespace SdlDotNet
 		/// <param name="device">The joystick index</param>
 		/// <param name="axisIndex">The axis index</param>
 		/// <param name="axisValue">The new axis value</param>
-		public JoystickAxisEventArgs(int device, int axisIndex, int axisValue)
+		public JoystickAxisEventArgs(int device, int axisIndex, float axisValue)
 		{
 			this.device = device;
 			this.axisIndex = axisIndex;
@@ -73,12 +73,12 @@ namespace SdlDotNet
 			}
 		}
 
-		private int axisValue;
+		private float axisValue;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public int AxisValue
+		public float AxisValue
 		{
 			get
 			{ 

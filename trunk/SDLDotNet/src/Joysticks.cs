@@ -54,9 +54,12 @@ namespace SdlDotNet {
 		/// Returns the number of joysticks on this system
 		/// </summary>
 		/// <returns>The number of joysticks</returns>
-		public int NumJoysticks() 
+		public int NumberOfJoysticks 
 		{
-			return Sdl.SDL_NumJoysticks();
+			get
+			{
+				return Sdl.SDL_NumJoysticks();
+			}
 		}
 
 		/// <summary>
