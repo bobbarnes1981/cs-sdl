@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
-using SdlDotNet.Drawable;
+using SdlDotNet;
+
 using SdlDotNet.Sprites;
 using MfGames.Sdl.Gui;
 using System.Drawing;
@@ -43,9 +43,8 @@ namespace MfGames.Sdl.Demos
 			// Create a new dragable window
 			GuiWindow gw = new GuiWindow(manager, new Rectangle(200, 65, 100, 100));
 			gw.IsDragable = true;
-			gw.Title = "Dragable Window";
+			gw.Title = "Draggable Window";
 			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
-				//new Vector2(18, 18)));
 				new Point(18, 18)));
 			sm.Add(gw);
 
@@ -53,16 +52,14 @@ namespace MfGames.Sdl.Demos
 			gw = new GuiWindow(manager, new Rectangle(25, 120, 32, 32));
 			gw.IsDragable = true;
 			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
-				//new Vector2(0, 0)));
 				new Point(0, 0)));
 			sm.Add(gw);
 
 			// Create a dragable window with a long title
-			gw = new GuiWindow(manager, new Rectangle(100, 415, 64, 64));
-			gw.Title = "Non-Dragable Window with a Really Long Title";
+			gw = new GuiWindow(manager, new Rectangle(100, 415, 256, 64));
+			gw.Title = "Non-Draggable Window with a Long Title";
 			gw.IsDragable = false;
 			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
-				//new Vector2(0, 0)));
 				new Point(0, 0)));
 			sm.Add(gw);
 
@@ -72,6 +69,7 @@ namespace MfGames.Sdl.Demos
 			// Create the ticker
 			ticker = new GuiTicker(manager, 0, 800, 550);
 			sm.Add(ticker);
+			this.EnableEvents();
 		}
 
 		public void CreateMenus(GuiManager gui, SpriteContainer sm)
@@ -85,15 +83,11 @@ namespace MfGames.Sdl.Demos
 			GuiMenuTitle gm = new GuiMenuTitle(gui, "Test Menu");
 			gmb.AddLeft(gm);
 
-			//Debug("GM {0}: {1}", gm, gm.Size);
-			//Debug("GMB {0}: {1}", gmb, gmb.Size);
-
 			// Create a menu items
 			gm.Add(new GuiMenuItem(gui, "Test #1"));
 			gm.Add(new GuiMenuItem(gui, "Test #2"));
 
 			GuiMenuItem gmi3 = new GuiMenuItem(gui);
-			//gmi3.AddLeft(new AnimatedSprite(LoadRandomMarble(), new Vector2(0, 0)));
 			gmi3.AddLeft(new AnimatedSprite(LoadRandomMarble(), new Point(0, 0)));
 			gmi3.AddLeft(new TextSprite("Create New Window", gui.BaseFont));
 			gm.Add(gmi3);
@@ -144,12 +138,9 @@ namespace MfGames.Sdl.Demos
 		#region Events
 		private double threshold = 100.0;
 		private double rate = 0.009;
-		//private bool running = false;
 
 		public void OnCreateNewWindow(int index)
 		{
-			//Debug("Selecting: " + index + ": " + this);
-
 			IDrawable m1 = LoadRandomMarble();
 			GuiManager manager = SdlDemo.GuiManager;
 			GuiWindow gw = new GuiWindow(manager,
@@ -158,12 +149,11 @@ namespace MfGames.Sdl.Demos
 				70, 70));
 			gw.IsDragable = true;
 			gw.Title = "Created Window";
-			//gw.Contents.Add(new AnimatedSprite(m1, new Vector2(3, 3)));
 			gw.Contents.Add(new AnimatedSprite(m1, new Point(3, 3)));
 			sm.Add(gw);
 		}
 
-		public override void OnTick(TickArgs args)
+		public override void OnTick(object sender, TickEventArgs args)
 		{
 			threshold += args.RatePerSecond(rate);
 
@@ -176,18 +166,20 @@ namespace MfGames.Sdl.Demos
 				{
 					case 0: // Switch autohide
 						if (ticker.IsAutoHide)
+						{
 							ticker.Add(new TextSprite("AutoHide off",
 								SdlDemo.GuiManager.BaseFont));
+						}
 						else
+						{
 							ticker.Add(new TextSprite("AutoHide on",
 								SdlDemo.GuiManager.BaseFont));
-	  
+						}	  
 						ticker.IsAutoHide = !ticker.IsAutoHide;
 						break;
 					case 1: // Simple message
 						// Add a message
 						ticker.Add(new TextSprite("*tick*", SdlDemo.GuiManager.BaseFont));
-						//Debug("*tick*");
 						break;
 					case 2: // Bunch of messages
 						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
@@ -202,15 +194,11 @@ namespace MfGames.Sdl.Demos
 						ticker.Delta *= -1;
 						ticker.Add(new TextSprite("Delta " + ticker.Delta,
 							SdlDemo.GuiManager.BaseFont));
-						//Debug("Delta changed to {0}", ticker.Delta);
 						break;
 					case 4: // Add two marbles
-						//Debug("*marbles*");
 						ticker.Add(new AnimatedSprite(LoadRandomMarble(),
-							//new Vector2(0, 0)));
 							new Point(0, 0)));
 						ticker.Add(new AnimatedSprite(LoadRandomMarble(),
-							//new Vector2(0, 0)));
 							new Point(0, 0)));
 						break;
 				}

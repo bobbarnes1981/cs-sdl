@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
@@ -37,7 +36,7 @@ namespace MfGames.Sdl.Gui
 		public GuiMenuBar(GuiManager manager, int x1, int x2, int baselineY)
 			: base(manager)
 		{
-			Coords.Z = 10000;
+			Coordinates.Z = 10000;
 			this.x1 = x1;
 			this.x2 = x2;
 			this.baselineY = baselineY;
@@ -58,7 +57,9 @@ namespace MfGames.Sdl.Gui
 			AddHead(s);
 
 			if (s is GuiMenuTitle)
+			{
 				((GuiMenuTitle) s).MenuBar = this;
+			}
 		}
 
 		public void AddRight(Sprite s)
@@ -66,7 +67,9 @@ namespace MfGames.Sdl.Gui
 			AddTail(s);
 
 			if (s is GuiMenuTitle)
+			{
 				((GuiMenuTitle) s).MenuBar = this;
+			}
 		}
 		#endregion
 
@@ -75,9 +78,9 @@ namespace MfGames.Sdl.Gui
 		private int x2 = 0;
 		private int baselineY = 0;
 
-		public override Vector Coords
+		public override Vector Coordinates
 		{
-			get { return new Vector(x1, baselineY, base.Coords.Z); }
+			get { return new Vector(x1, baselineY, base.Coordinates.Z); }
 		}
 
 		public override int HorizontalWidth

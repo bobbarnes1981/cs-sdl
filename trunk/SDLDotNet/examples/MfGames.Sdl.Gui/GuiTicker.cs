@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System.Collections;
@@ -65,8 +64,8 @@ namespace MfGames.Sdl.Gui
 
 			// Draw our sprites
 			RenderArgs args1 = args.Clone();
-			args1.TranslateX += Coords.X;
-			args1.TranslateY += Coords.Y + manager.TickerPadding.Top;
+			args1.TranslateX += Coordinates.X;
+			args1.TranslateY += Coordinates.Y + manager.TickerPadding.Top;
 
 			foreach (Sprite s in new ArrayList(display))
 			{
@@ -104,11 +103,11 @@ namespace MfGames.Sdl.Gui
 		private int baselineY = 0;
 		private Size lastSize = new Size();
 
-		public override Vector Coords
+		public override Vector Coordinates
 		{
 			get
 			{
-				return new Vector(x1, baselineY - Size.Height, base.Coords.Z);
+				return new Vector(x1, baselineY - Size.Height, base.Coordinates.Z);
 			}
 		}
 
@@ -138,11 +137,13 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Events
-		public override void OnTick(TickArgs args)
+		public override void OnTick(object sender, TickEventArgs args)
 		{
 			// Don't bother if there is nothing
 			if (display.Count == 0 && queue.Count == 0)
+			{
 				return;
+			}
 
 			// Figure out the rates. The min and max start on opposite sides
 			// of the ticker.
@@ -156,11 +157,11 @@ namespace MfGames.Sdl.Gui
 				foreach (Sprite s in new ArrayList(display))
 				{
 					// Tick the sprite and wrap it in a translator
-					s.OnTick(args);
+					s.OnTick(this, args);
 	  
 					// Move the sprite along
-					s.Coords.X += offset;
-					s.Coords.Y = 0;
+					s.Coordinates.X += offset;
+					s.Coordinates.Y = 0;
 
 					// See if the sprite is out of bounds
 					if ((delta < 0 && s.Bounds.Left < x1 - s.Size.Width) || 
@@ -172,9 +173,13 @@ namespace MfGames.Sdl.Gui
 	  
 					// Check for the edges
 					if (s.Bounds.Left < minX)
+					{
 						minX = s.Bounds.Left;
+					}
 					if (s.Bounds.Right > maxX)
+					{
 						maxX = s.Bounds.Right;
+					}
 				}
 			}
 
@@ -186,16 +191,16 @@ namespace MfGames.Sdl.Gui
 				{
 					// We have room on the left
 					Sprite ns = (Sprite) queue.Dequeue();
-					ns.Coords.Y = manager.TickerPadding.Top + Coords.Y;
-					ns.Coords.X = x1 - ns.Size.Width;
+					ns.Coordinates.Y = manager.TickerPadding.Top + Coordinates.Y;
+					ns.Coordinates.X = x1 - ns.Size.Width;
 					display.Add(ns);
 				}
 				else if (delta < 0 && x2 - maxX > minSpace)
 				{
 					// We have room on the right
 					Sprite ns = (Sprite) queue.Dequeue();
-					ns.Coords.Y = manager.TickerPadding.Top + Coords.Y;
-					ns.Coords.X = x2;
+					ns.Coordinates.Y = manager.TickerPadding.Top + Coordinates.Y;
+					ns.Coordinates.X = x2;
 					display.Add(ns);
 				}
 			}

@@ -17,38 +17,49 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Sprites;
-using SdlDotNet;
-using System.Drawing;
 using System;
+using System.Runtime.Serialization;
 
-namespace MfGames.Sdl.Demos
+namespace SdlDotNet.Sprites
 {
-	public class BounceMode : DemoMode
+	/// <summary>
+	/// 
+	/// </summary>
+	[Serializable()]
+	public class DrawableException : SdlException
 	{
-		Random rand = new Random();
 		/// <summary>
-		/// Constructs the internal sprites needed for our demo.
+		/// 
 		/// </summary>
-		public BounceMode()
+		public DrawableException()
 		{
-			// Create the fragment marbles
-			Rectangle rect = new Rectangle(new Point(0, 0), SdlDemo.SpriteContainer.Size);
-			for (int i = 0; i < 50; i++)
-			{
-				IDrawable d = LoadRandomMarble();
-				BounceSprite bounceSprite = 
-					new BounceSprite(d,
-					rect, 
-					new Vector(rand.Next(rect.Left, rect.Right - 
-					(int) d.Size.Width),
-					rand.Next(rect.Top, rect.Bottom - 
-					(int) d.Size.Height),
-					0));
-				sm.Add(bounceSprite);
-			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="msg"></param>
+		public DrawableException(string msg)
+			: base(msg)
+		{
 		}
 
-		public override string ToString() { return "Bounce"; }
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="exception"></param>
+		/// <param name="message"></param>
+		public DrawableException(string message, Exception exception)
+			: base(message, exception)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="context"></param>
+		protected DrawableException(SerializationInfo info, StreamingContext context) 
+		{
+		}
 	}
 }

@@ -18,7 +18,6 @@
  */
 
 using SdlDotNet.Sprites;
-using SdlDotNet.Utility;
 using SdlDotNet;
 using System;
 using System.Collections;
@@ -47,8 +46,8 @@ namespace MfGames.Sdl.Gui
 			// because the EventLock does not translate the values before
 			// sending it.
 			RenderArgs args0 = args.Clone();
-			args0.TranslateX += Coords.X + OuterPadding.Left + InnerPadding.Left;
-			args0.TranslateY += Coords.Y + OuterPadding.Top + InnerPadding.Top;
+			args0.TranslateX += Coordinates.X + OuterPadding.Left + InnerPadding.Left;
+			args0.TranslateY += Coordinates.Y + OuterPadding.Top + InnerPadding.Top;
 			translate = args0.Point;
 
 			// Check for exceeding
@@ -139,15 +138,17 @@ namespace MfGames.Sdl.Gui
 		/// selected, then it shows the entire sprite, regardless of the
 		/// packing size.
 		/// </summary>
-		public override bool OnMouseButton(object sender, MouseArgs args)
+		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
 		{
 			// If we are being held down, pick up the marble
-			if (args.IsButton1)
+			if (args.ButtonPressed)
 			{
 				ShowMenu();
 			}
-			else
-			{
+		}
+
+		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
+		{
 				// Check for an item
 				if (selected != null)
 				{
@@ -158,10 +159,6 @@ namespace MfGames.Sdl.Gui
 
 				// Remove the menu
 				HideMenu();
-			}
-
-			// We are finished
-			return true;
 		}
 
 		/// <summary>
@@ -169,17 +166,17 @@ namespace MfGames.Sdl.Gui
 		/// selected and hilight it. If the menu is not selected, it does
 		/// nothing.
 		/// </summary>
-		public override bool OnMouseMotion(object sender, MouseArgs args)
+		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
 		{
 			// Pull out some stuff
-			int x = args.X - translate.X - Coords.X;
-			int y = args.Y - translate.Y - Coords.Y;
+			int x = args.X - translate.X - Coordinates.X;
+			int y = args.Y - translate.Y - Coordinates.Y;
 			int relx = args.RelativeX;
 			int rely = args.RelativeY;
 
 			// Don't bother if we are not selected
-			if (IsHidden)
-				return false;
+//			if (IsHidden)
+//				return false;
 
 			// Retrieve the item for these coordinates
 			int ndx = 0;
@@ -200,14 +197,14 @@ namespace MfGames.Sdl.Gui
 				gmi.IsSelected = true;
 				selected = gmi;
 				selectedIndex = ndx;
-				return true;
+			//	return true;
 			}
 
 			/*
 			// We don't have a menu item and we are not selecting
 			// anything. See if we are current over a title of another menu.
-			int x1 = x + Coords.X;
-			int y1 = y + Coords.Y;
+			int x1 = x + Coordinates.X;
+			int y1 = y + Coordinates.Y;
 			ArrayList moreSprites =
 		  manager.SpriteContainer.GetSprites(new Vector2(x1, y1));
 
@@ -226,7 +223,7 @@ namespace MfGames.Sdl.Gui
 			*/
 
 			// We are done processing
-			return true;
+			//return true;
 		}
 		#endregion
 

@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
@@ -49,12 +48,12 @@ namespace MfGames.Sdl.Gui
 		{
 			// Modify the arguments
 			RenderArgs args1 = args.Clone();
-			args1.TranslateX += Coords.X;
-			args1.TranslateY += Coords.Y;
-			args1.SetClipping(new Rectangle(args.TranslateX + Coords.X,
-				args.TranslateY + Coords.Y,
+			args1.TranslateX += Coordinates.X;
+			args1.TranslateY += Coordinates.Y;
+			args1.Clipping = new Rectangle(args.TranslateX + Coordinates.X,
+				args.TranslateY + Coordinates.Y,
 				Size.Width,
-				Size.Height));
+				Size.Height);
 
 			// Render the contents
 			contents.Render(args1);
@@ -63,10 +62,10 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Events
-		public override void OnTick(TickArgs args)
+		public override void OnTick(object sender, TickEventArgs args)
 		{
-			base.OnTick(args);
-			contents.OnTick(args);
+			base.OnTick(this, args);
+			contents.OnTick(this, args);
 		}
 		#endregion
 

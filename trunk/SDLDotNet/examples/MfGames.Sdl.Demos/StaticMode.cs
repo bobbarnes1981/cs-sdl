@@ -17,9 +17,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
-using SdlDotNet.Drawable;
+
 using SdlDotNet.Sprites;
+using SdlDotNet;
 using System.Drawing;
 
 namespace MfGames.Sdl.Demos
@@ -33,15 +33,13 @@ namespace MfGames.Sdl.Demos
 		{
 			// Create our image and add it to our sprite manager
 			ImageDrawable id = new ImageDrawable("../../Data/marble1.png");
-			//DrawableSprite s = new DrawableSprite(id, new Vector2(5, 5));
 			DrawableSprite s = new DrawableSprite(id, new Point(5, 5));
-			//Debug("s {0}: {1}", s, s.IsHidden);
 			sm.Add(s);
 
 			// Create the fragment image
 			TiledDrawable td = new TiledDrawable(id, new Size(64, 64), 6, 6);
 			AnimatedSprite an = new AnimatedSprite(td, new Vector(200, 32, 100));
-			an.Coords.X = 250;
+			an.Coordinates.X = 250;
 			sm.Add(an);
 
 			// Create the full marble, but test order
@@ -60,6 +58,9 @@ namespace MfGames.Sdl.Demos
 			}
 		}
 
-		public override string ToString() { return "Static"; }
+		public override string ToString() 
+		{ 
+			return "Static"; 
+		}
 	}
 }

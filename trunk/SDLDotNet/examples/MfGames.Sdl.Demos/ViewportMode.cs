@@ -17,10 +17,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
-using SdlDotNet.Drawable;
 using MfGames.Sdl.Gui;
 using SdlDotNet.Sprites;
+using SdlDotNet;
 using System.Drawing;
 using System;
 
@@ -29,7 +28,6 @@ namespace MfGames.Sdl.Demos
 	public class ViewportMode : DemoMode
 	{
 		private Sprite sprite = null;
-		//private GuiMenuTitle viewMenu = null;
 		private Size size;
 		private bool created = false;
 
@@ -48,7 +46,9 @@ namespace MfGames.Sdl.Demos
 			IDrawable [] floorTiles = new IDrawable [4];
 
 			for (int i = 0; i < numberOfFloors; i++)
+			{
 				floorTiles[i] = LoadFloor(i + 1);
+			}
 
 			// Place the floors
 			int rows = 15;
@@ -56,7 +56,6 @@ namespace MfGames.Sdl.Demos
 			size = new Size(floorTiles[0].Size.Width * cols,
 				floorTiles[0].Size.Height * rows);
 			Rectangle rect = new Rectangle(new Point(0, 0),size);
-			//Debug("rect={0} size={1}", rect, size);
 
 			for (int i = 0; i < cols; i++)
 			{
@@ -79,8 +78,6 @@ namespace MfGames.Sdl.Demos
 				(int) td2.Size.Height),
 				100));
 			sm.Add(sprite);
-			//OnMenuTranslated(0);
-			//OnMenuCentered(0);
 			OnMenuBounded(0);
 
 			// Load the bouncing sprites
@@ -96,33 +93,6 @@ namespace MfGames.Sdl.Demos
 					0));
 				sm.Add(bounceSprite);
 			}
-
-			// Create the menus
-			/*
-			viewMenu = new GuiMenu(SdlDemo.MenuBar, "Viewport");
-			viewMenu.IsTitleHidden = true;
-			SdlDemo.MenuBar.Add(viewMenu);
-
-			GuiMenuItem gmi = new GuiMenuItem(viewMenu, "None");
-			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuNone);
-			viewMenu.Add(gmi);
-
-			gmi = new GuiMenuItem(viewMenu, "Translated (0, 0)");
-			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuTranslated0);
-			viewMenu.Add(gmi);
-
-			gmi = new GuiMenuItem(viewMenu, "Translated (25, 25)");
-			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuTranslated);
-			viewMenu.Add(gmi);
-
-			gmi = new GuiMenuItem(viewMenu, "Centered");
-			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuCentered);
-			viewMenu.Add(gmi);
-
-			gmi = new GuiMenuItem(viewMenu, "Bounded Center");
-			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuBounded);
-			viewMenu.Add(gmi);
-			*/
 
 			created = true;
 		}
@@ -156,25 +126,37 @@ namespace MfGames.Sdl.Demos
 			//Rectangle2 rect = new Rectangle2(new Vector2(0, 0), size);
 			Rectangle rect = new Rectangle(new Point(0, 0), size);
 			sm.Viewport = new BoundedCenterViewport(sprite, rect);
-			if (created) SdlDemo.Report("center(" + rect + ")");
+			if (created) 
+			{
+				SdlDemo.Report("center(" + rect + ")");
+			}
 		}
 
 		private void OnMenuCentered(int index)
 		{
 			sm.Viewport = new CenteredViewport(sprite);
-			if (created) SdlDemo.Report("center()");
+			if (created) 
+			{
+				SdlDemo.Report("center()");
+			}
 		}
 
 		private void OnMenuTranslated(int index)
 		{
 			sm.Viewport = new TranslatedViewport(25, 25);
-			if (created) SdlDemo.Report("translate(25, 25)");
+			if (created) 
+			{
+				SdlDemo.Report("translate(25, 25)");
+			}
 		}
 
 		private void OnMenuTranslated0(int index)
 		{
 			sm.Viewport = new TranslatedViewport(0, 0);
-			if (created) SdlDemo.Report("translate(0, 0)");
+			if (created) 
+			{
+				SdlDemo.Report("translate(0, 0)");
+			}
 		}
 		#endregion
 	}

@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using System.Drawing;
 
 namespace SdlDotNet.Sprites
@@ -43,11 +42,16 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public Sprite Sprite
 		{
-			get { return sprite; }
+			get 
+			{ 
+				return sprite; 
+			}
 			set
 			{
 				if (value == null)
+				{
 					throw new SpriteException("Cannot assign null sprite");
+				}
 
 				sprite = value;
 			}
@@ -59,15 +63,15 @@ namespace SdlDotNet.Sprites
 		/// viewport to only show in a specific part of the screen. The
 		/// point returned is relative to the sprite manager.
 		/// </summary>
-		public virtual void AdjustViewport(ref RenderArgs args)
+		public virtual void AdjustViewport(RenderArgs args)
 		{
 			// Get the midpoint of the surface
 			int mx = GetMidX(args);
 			int my = GetMidY(args);
 
 			// Return the offset point
-			args.TranslateX += mx - sprite.Coords.X;
-			args.TranslateY += my - sprite.Coords.Y;
+			args.TranslateX += mx - sprite.Coordinates.X;
+			args.TranslateY += my - sprite.Coordinates.Y;
 		}
 
 		/// <summary>

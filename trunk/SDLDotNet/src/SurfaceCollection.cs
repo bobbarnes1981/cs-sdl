@@ -65,6 +65,14 @@ namespace SdlDotNet
 			return List.Add(surface);
 		} 
 
+		internal ArrayList Data
+		{
+			get
+			{
+				return data;
+			}
+		}
+
 		/// <summary>
 		/// Load a SdlImage with the specified filename and add 
 		/// it to the end of the SdlImageList.
@@ -163,7 +171,7 @@ namespace SdlDotNet
 		/// <param name="array"></param>
 		/// <param name="index"></param>
 		// Provide the strongly typed member for ICollection.
-		public void CopyTo(Exception[] array, int index)
+		public void CopyTo(SdlException[] array, int index)
 		{
 			((ICollection)this).CopyTo(array, index);
 		}

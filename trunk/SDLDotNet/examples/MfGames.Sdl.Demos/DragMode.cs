@@ -17,8 +17,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
-using SdlDotNet.Drawable;
+
 using SdlDotNet.Sprites;
 using System.Drawing;
 
@@ -44,7 +43,6 @@ namespace MfGames.Sdl.Demos
 				for (int j = 0; j < rows; j++)
 				{
 					sm.Add(new DragSprite(m1, m2,
-//						new Vector2(sx + i * 64, sy + j * 64),
 						new Point(sx + i * 64, sy + j * 64),
 						new Rectangle(new Point(0, 0), SdlDemo.SpriteContainer.Size)));
 				}

@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet;
 using System.Drawing;
 
@@ -33,12 +32,12 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="text"></param>
+		/// <param name="textItem"></param>
 		/// <param name="font"></param>
 		/// <param name="size"></param>
-		public BoundedTextSprite(string text, SdlDotNet.Font font,
+		public BoundedTextSprite(string textItem, SdlDotNet.Font font,
 			Size size)
-			: base(text, font)
+			: base(textItem, font)
 		{
 			this.size = size;
 		}
@@ -46,18 +45,14 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="text"></param>
+		/// <param name="textItem"></param>
 		/// <param name="font"></param>
 		/// <param name="size"></param>
-		/// <param name="coords"></param>
-//		public BoundedTextSprite(string text, SdlDotNet.Font font,
-//			Dimension2 size,
-//			Vector2 coords)
-//			: base(text, font, coords)
-		public BoundedTextSprite(string text, SdlDotNet.Font font,
+		/// <param name="coordinates"></param>
+		public BoundedTextSprite(string textItem, SdlDotNet.Font font,
 						Size size,
-						Point coords)
-						: base(text, font, coords)
+						Point coordinates)
+						: base(textItem, font, coordinates)
 		{
 			this.size = size;
 		}
@@ -65,15 +60,15 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="text"></param>
+		/// <param name="textItem"></param>
 		/// <param name="font"></param>
 		/// <param name="size"></param>
-		/// <param name="coords"></param>
-		public BoundedTextSprite(string text, SdlDotNet.Font font,
+		/// <param name="coordinates"></param>
+		public BoundedTextSprite(string textItem, SdlDotNet.Font font,
 			
 			Size size,
-			Vector coords)
-			: base(text, font, coords)
+			Vector coordinates)
+			: base(textItem, font, coordinates)
 		{
 			this.size = size;
 		}
@@ -81,63 +76,59 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="text"></param>
+		/// <param name="textItem"></param>
 		/// <param name="font"></param>
 		/// <param name="size"></param>
-		/// <param name="horz"></param>
-		/// <param name="vert"></param>
-		public BoundedTextSprite(string text, SdlDotNet.Font font,
+		/// <param name="horizontal"></param>
+		/// <param name="vertical"></param>
+		public BoundedTextSprite(string textItem, SdlDotNet.Font font,
 			Size size,
-			double horz, double vert)
-			: base(text, font)
+			double horizontal, double vertical)
+			: base(textItem, font)
 		{
 			this.size = size;
-			this.horz = horz;
-			this.vert = vert;
+			this.horizontal = horizontal;
+			this.vertical = vertical;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="text"></param>
+		/// <param name="textItem"></param>
 		/// <param name="font"></param>
 		/// <param name="size"></param>
-		/// <param name="horz"></param>
-		/// <param name="vert"></param>
-		/// <param name="coords"></param>
-//		public BoundedTextSprite(string text, SdlDotNet.Font font,
-//			Dimension2 size,
-//			double horz, double vert,
-//			Vector2 coords)
-		public BoundedTextSprite(string text, SdlDotNet.Font font,
+		/// <param name="horizontal"></param>
+		/// <param name="vertical"></param>
+		/// <param name="coordinates"></param>
+		public BoundedTextSprite(string textItem, SdlDotNet.Font font,
 			Size size,
-			double horz, double vert,
-			Point coords)
-			: base(text, font, coords)
+			double horizontal, double vertical,
+			Point coordinates)
+			: base(textItem, font, coordinates)
 		{
 			this.size = size;
-			this.horz = horz;
-			this.vert = vert;
+			this.horizontal = horizontal;
+			this.vertical = vertical;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="text"></param>
+		/// <param name="textItem"></param>
 		/// <param name="font"></param>
 		/// <param name="size"></param>
-		/// <param name="horz"></param>
-		/// <param name="vert"></param>
-		/// <param name="coords"></param>
-		public BoundedTextSprite(string text, SdlDotNet.Font font,
+		/// <param name="horizontal"></param>
+		/// <param name="vertical"></param>
+		/// <param name="coordinates"></param>
+		public BoundedTextSprite(string textItem, SdlDotNet.Font font,
 			Size size,
-			double horz, double vert,
-			Vector coords)
-			: base(text, font, coords)
+			double horizontal, double vertical,
+			Vector coordinates)
+			: base(textItem, font, coordinates)
 		{
 			this.size = size;
-			this.horz = horz;
-			this.vert = vert;
+			this.horizontal = horizontal;
+			this.vertical = vertical;
 		}
 
 		#region Drawing
@@ -157,25 +148,29 @@ namespace SdlDotNet.Sprites
 			int offsetY = 0;
 
 			if (dw > 0.0)
-				offsetX += (int) (dw * horz);
+			{
+				offsetX += (int) (dw * horizontal);
+			}
 
 			if (dh > 0.0)
-				offsetY += (int) (dh * vert);
+			{
+				offsetY += (int) (dh * vertical);
+			}
 
 			// Render the image itself
 			args.Surface.Blit(render,
-				new Rectangle(new Point(Coords.X
+				new Rectangle(new Point(Coordinates.X
 				+ offsetX + args.TranslateX,
-				Coords.Y
+				Coordinates.Y
 				+ offsetY + args.TranslateY),
 				Size));
 		}
 		#endregion
 
 		#region Properties
-		private double horz = 0.5;
+		private double horizontal = 0.5;
 
-		private double vert = 0.5;
+		private double vertical = 0.5;
 
 		private Size size;
 
@@ -184,8 +179,15 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public double HorizontalWeight
 		{
-			get { return horz; }
-			set { horz = value; renderSurf = null; }
+			get 
+			{ 
+				return horizontal; 
+			}
+			set 
+			{ 
+				horizontal = value; 
+				this.Surface = null; 
+			}
 		}
 
 		/// <summary>
@@ -193,8 +195,15 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public double VerticalWeight
 		{
-			get { return vert; }
-			set { vert = value; renderSurf = null; }
+			get 
+			{ 
+				return vertical; 
+			}
+			set 
+			{ 
+				vertical = value; 
+				this.Surface = null; 
+			}
 		}
 
 		/// <summary>

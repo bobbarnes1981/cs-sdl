@@ -416,10 +416,8 @@ namespace SdlDotNet
 
 		private void Events_ChannelFinished(object sender, ChannelFinishedEventArgs e)
 		{
-			//Console.WriteLine("channel finished event handler");
 			if (this.queuedSound != null)
 			{
-				//Console.WriteLine("playing queued sound");
 				this.Play(this.queuedSound);
 				this.queuedSound = null;
 			}
@@ -429,7 +427,6 @@ namespace SdlDotNet
 		{
 			if (e.Action == SoundAction.Stop)
 			{
-				//Console.WriteLine("channel Stopped: " + this.index);
 				this.Stop();
 			}
 			else if (e.Action == SoundAction.Fadeout)

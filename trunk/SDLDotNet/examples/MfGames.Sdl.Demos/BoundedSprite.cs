@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
-using SdlDotNet.Drawable;
+using SdlDotNet;
+using SdlDotNet.Sprites;
 using System.Drawing;
 
 namespace MfGames.Sdl.Demos
@@ -27,8 +27,8 @@ namespace MfGames.Sdl.Demos
 	{
 		private Rectangle rect = new Rectangle();
 
-		public BoundedSprite(IDrawable d, Rectangle bounds, Vector coords)
-			: base(d, coords)
+		public BoundedSprite(IDrawable d, Rectangle bounds, Vector coordinates)
+			: base(d, coordinates)
 		{
 			this.rect = bounds;
 			int tempHeight;
@@ -43,32 +43,32 @@ namespace MfGames.Sdl.Demos
 			get { return rect; }
 		}
 
-		public override void OnTick(TickArgs args)
+		public override void OnTick(object sender, TickEventArgs args)
 		{
 			// Animate
-			base.OnTick(args);
+			base.OnTick(this, args);
 
 			// Bounce off the left
-			if (Coords.X < rect.Left)
+			if (Coordinates.X < rect.Left)
 			{
-				Coords.X = rect.Left;
+				Coordinates.X = rect.Left;
 			}
 
 			// Bounce off the top
-			if (Coords.Y < rect.Top)
+			if (Coordinates.Y < rect.Top)
 			{
-				Coords.Y = rect.Top;
+				Coordinates.Y = rect.Top;
 			}
 
 			// Bounce off the bottom
-			if (Coords.Y > rect.Bottom)
+			if (Coordinates.Y > rect.Bottom)
 			{
-				Coords.Y = rect.Bottom;
+				Coordinates.Y = rect.Bottom;
 			}
 			// Bounce off the right
-			if (Coords.X > rect.Right)
+			if (Coordinates.X > rect.Right)
 			{
-				Coords.X = rect.Right;
+				Coordinates.X = rect.Right;
 			}
 		}
 	}

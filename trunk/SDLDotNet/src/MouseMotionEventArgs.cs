@@ -81,7 +81,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// X position of mouse
 		/// </summary>
-		public int X
+		public short X
 		{
 			get
 			{
@@ -92,7 +92,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Y position of mouse
 		/// </summary>
-		public int Y
+		public short Y
 		{
 			get
 			{ 
@@ -103,7 +103,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// change in X position of mouse
 		/// </summary>
-		public int RelativeX
+		public short RelativeX
 		{
 			get
 			{
@@ -114,7 +114,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Change in Y position of mouse
 		/// </summary>
-		public int RelativeY
+		public short RelativeY
 		{
 			get
 			{

@@ -17,38 +17,22 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Sprites;
-using SdlDotNet;
-using System.Drawing;
-using System;
-
-namespace MfGames.Sdl.Demos
+namespace SdlDotNet
 {
-	public class BounceMode : DemoMode
+	/// <summary>
+	/// 
+	/// </summary>
+	public interface ITickable
 	{
-		Random rand = new Random();
 		/// <summary>
-		/// Constructs the internal sprites needed for our demo.
+		/// 
 		/// </summary>
-		public BounceMode()
-		{
-			// Create the fragment marbles
-			Rectangle rect = new Rectangle(new Point(0, 0), SdlDemo.SpriteContainer.Size);
-			for (int i = 0; i < 50; i++)
-			{
-				IDrawable d = LoadRandomMarble();
-				BounceSprite bounceSprite = 
-					new BounceSprite(d,
-					rect, 
-					new Vector(rand.Next(rect.Left, rect.Right - 
-					(int) d.Size.Width),
-					rand.Next(rect.Top, rect.Bottom - 
-					(int) d.Size.Height),
-					0));
-				sm.Add(bounceSprite);
-			}
-		}
-
-		public override string ToString() { return "Bounce"; }
+		bool IsTickable { get; }
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="args"></param>
+//		/// <param name="sender"></param>
+//		void OnTick(object sender, TickEventArgs args);
 	}
 }

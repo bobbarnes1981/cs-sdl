@@ -17,10 +17,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Drawable;
+
 using MfGames.Sdl.Gui;
 using SdlDotNet.Sprites;
-using SdlDotNet.Utility;
 using SdlDotNet;
 using System;
 using System.Drawing;
@@ -41,7 +40,7 @@ namespace MfGames.Sdl.Demos
 			: base(manager, new Rectangle(625, 475, 150, 100))
 		{
 			// Set up our title
-			Coords.Z = 2000;
+			Coordinates.Z = 2000;
 			Title = "Demo Status";
 			IsDragable = true;
 
@@ -58,14 +57,12 @@ namespace MfGames.Sdl.Demos
 			Contents.Add(new BoundedTextSprite("TPS:", manager.TitleFont,
 				new Size(labelWidth, labelHeight),
 				1.0, 0.5,
-				//new Vector2(labelOffset,
 				new Point(labelOffset,
 				(labelHeight
 				+ labelPad) * i + 2)));
 			tps = new BoundedTextSprite("---", manager.BaseFont,
 				new Size(dataWidth, labelHeight),
 				0.0, 0.5,
-				//new Vector2(dataOffset,
 				new Point(dataOffset,
 				(labelHeight + labelPad) * i + 2));
 			Contents.Add(tps);
@@ -75,14 +72,12 @@ namespace MfGames.Sdl.Demos
 			Contents.Add(new BoundedTextSprite("FPS:", manager.TitleFont,
 				new Size(labelWidth, labelHeight),
 				1.0, 0.5,
-				//new Vector2(labelOffset,
 				new Point(labelOffset,
 				(labelHeight
 				+ labelPad) * i + 2)));
 			fps = new BoundedTextSprite("---", manager.BaseFont,
 				new Size(dataWidth, labelHeight),
 				0.0, 0.5,
-				//new Vector2(dataOffset,
 				new Point(dataOffset,
 				(labelHeight + labelPad) * i + 2));
 			Contents.Add(fps);
@@ -92,14 +87,12 @@ namespace MfGames.Sdl.Demos
 			Contents.Add(new BoundedTextSprite("Mode:", manager.TitleFont,
 				new Size(labelWidth, labelHeight),
 				1.0, 0.5,
-				//new Vector2(labelOffset,
 				new Point(labelOffset,
 				(labelHeight
 				+ labelPad) * i + 2)));
 			mode = new BoundedTextSprite("---", manager.BaseFont,
 				new Size(dataWidth, labelHeight),
 				0.0, 0.5,
-				//new Vector2(dataOffset,
 				new Point(dataOffset,
 				(labelHeight + labelPad)
 				* i + 2));
@@ -111,13 +104,12 @@ namespace MfGames.Sdl.Demos
 				manager.BaseFont,
 				new Size(150, labelHeight),
 				0.5, 0.5,
-				//new Vector2(labelOffset,
 				new Point(labelOffset,
 				(labelHeight
 				+ labelPad) * i + 2)));
 
 			// Add ourselves to the ticker
-			SdlDemo.TickManager.Add(this);
+			this.EnableTickEvent();
 
 			// Adjust our height
 			i++;
@@ -132,19 +124,31 @@ namespace MfGames.Sdl.Demos
 		#endregion
 
 		#region Animation
-		public override void OnTick(TickArgs args)
+		public override void OnTick(object sender, TickEventArgs args)
 		{
-			tps.Text = String.Format("{0}", SdlDemo.TickManager.TicksPerSecond);
+			tps.TextString = String.Format("{0}", Events.TicksPerSecond);
 
 			if (SdlDemo.Fps.IsFull)
-				fps.Text = SdlDemo.Fps.Average.ToString("#0.00");
+			{
+				fps.TextString = SdlDemo.Fps.FramesPerSecond.ToString("#0.00");
+			}
 			else
-				fps.Text = "---";
+			{
+				fps.TextString = "---";
+			}
 
 			if (SdlDemo.CurrentDemo == null)
-				mode.Text = "<none>";
+			{
+				mode.TextString = "<none>";
+			}
 			else
-				mode.Text = SdlDemo.CurrentDemo.ToString();
+			{
+				mode.TextString = SdlDemo.CurrentDemo.ToString();
+			}
+		}
+		public void EnableTickEvent()
+		{
+			Events.TickEvent += new TickEventHandler(this.OnTick);
 		}
 		#endregion
 	}

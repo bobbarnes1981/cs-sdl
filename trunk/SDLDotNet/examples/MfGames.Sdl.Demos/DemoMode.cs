@@ -17,9 +17,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Drawable;
+using SdlDotNet;
+
 using SdlDotNet.Sprites;
-using SdlDotNet.Utility;
 using System.Collections;
 using System.Drawing;
 using System;
@@ -96,7 +96,6 @@ namespace MfGames.Sdl.Demos
 		/// </summary>
 		public virtual void Start(SpriteContainer manager)
 		{
-			//running = true;
 			manager.Add(sm);
 		}
 
@@ -106,16 +105,26 @@ namespace MfGames.Sdl.Demos
 		/// </summary>
 		public virtual void Stop(SpriteContainer manager)
 		{
-			//running = false;
 			manager.Remove(sm);
 		}
 		#endregion
 
 		#region Events
-		public virtual bool IsTickable { get { return true; } }
+		public virtual bool IsTickable 
+		{ 
+			get 
+			{ 
+				return true; 
+			} 
+		}
 
-		public virtual void OnTick(TickArgs args)
+		public virtual void OnTick(object sender, TickEventArgs args)
 		{
+		}
+
+		public void EnableEvents()
+		{
+			Events.TickEvent += new TickEventHandler(OnTick);
 		}
 		#endregion
 	}

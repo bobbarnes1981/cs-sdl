@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet;
 using System;
 using System.Collections;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Sprites
 {
@@ -49,8 +49,8 @@ namespace SdlDotNet.Sprites
 		{
 			// Check for our own X and Y
 			RenderArgs args1 = args.Clone();
-			args1.TranslateX += Coords.X;
-			args1.TranslateY += Coords.Y;
+			args1.TranslateX += Coordinates.X;
+			args1.TranslateY += Coordinates.Y;
 
 			// Check for a size
 			if (!size.IsEmpty)
@@ -62,22 +62,14 @@ namespace SdlDotNet.Sprites
 					size.Width,
 					size.Height);
 
-				// Debugging
-				if (IsTraced)
-				{
-					//	  MfGames.Sdl.Gui.GuiManager.DrawRect(args.Surface, clip,
-					//					      System.Drawing
-					//					      .Color.BlanchedAlmond);
-				}
-
 				// Set the clipping rectangle
-				args1.SetClipping(clip);
+				args1.Clipping = clip;
 			}
 
 			// Check for viewport
 			if (viewport != null)
 			{
-				viewport.AdjustViewport(ref args1);
+				viewport.AdjustViewport(args1);
 			}
 
 			// Go through the sprites. We make a copy to make sure nothing
@@ -86,7 +78,9 @@ namespace SdlDotNet.Sprites
 			list.Sort();
 
 			foreach (Sprite s in list)
+			{
 				s.Render(args1);
+			}
 
 			// Clear the clipping
 			args1.ClearClipping();
@@ -97,23 +91,81 @@ namespace SdlDotNet.Sprites
 		private ArrayList sprites = new ArrayList();
 
 		/// <summary>
-		/// 
+		/// Adds sprite to container
 		/// </summary>
-		/// <param name="sprite"></param>
+		/// <param name="sprite">Sprite to add</param>
 		public void Add(Sprite sprite)
 		{
 			if (!sprites.Contains(sprite))
+			{
 				sprites.Add(sprite);
+			}
 		}
 
 		/// <summary>
-		/// 
+		/// Removes sprite from container
 		/// </summary>
-		/// <param name="sprite"></param>
+		/// <param name="sprite">Sprite to remove</param>
 		public void Remove(Sprite sprite)
 		{
 			sprites.Remove(sprite);
 		}
+
+		/// <summary>
+		/// Clears all sprites out of the container
+		/// </summary>
+		public void Clear()
+		{
+			sprites.Clear();
+		}
+
+		/// <summary>
+		/// Checks if sprite is in the container
+		/// </summary>
+		/// <param name="sprite">Sprite to query for</param>
+		/// <returns>True is the sprite is in the container.</returns>
+		public bool Contains(Sprite sprite)
+		{
+			return sprites.Contains(sprite);
+		}
+
+		/// <summary>
+		/// Returns a copy of the arraylist
+		/// </summary>
+		/// <returns></returns>
+		public object Clone()
+		{
+			return sprites.Clone();
+		}
+
+		/// <summary>
+		/// Returns the number of sprites in the container.
+		/// </summary>
+		public int Count
+		{
+			get
+			{
+				return sprites.Count;
+			}
+		}
+
+		/// <summary>
+		/// Get and sets number of sprites that the container can contain.
+		/// </summary>
+		public int Capacity
+		{
+			get
+			{
+				return sprites.Capacity;
+			}
+			set
+			{
+				sprites.Capacity = value;
+			}
+		}
+
+
+
 		#endregion
 
 		#region Geometry
@@ -126,7 +178,7 @@ namespace SdlDotNet.Sprites
 		{
 			get
 			{
-					return size;
+				return size;
 			}
 			set
 			{
@@ -139,7 +191,6 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="point"></param>
 		/// <returns></returns>
-//		public override bool IntersectsWith(Vector2 point)
 		public override bool IntersectsWith(Point point)
 		{
 			
@@ -161,10 +212,8 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public override bool IntersectsWith(Rectangle rect)
 		{
-	
-				// We actually have a size
-				return base.IntersectsWith(rect);
-			
+			// We actually have a size
+			return base.IntersectsWith(rect);
 		}
 		#endregion
 
@@ -179,15 +228,27 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public override bool IsMouseSensitive { get { return true; } }
+		public override bool IsMouseSensitive 
+		{ 
+			get 
+			{ 
+				return true; 
+			} 
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public Sprite EventLock
 		{
-			get { return eventLock; }
-			set { eventLock = value; }
+			get 
+			{ 
+				return eventLock; 
+			}
+			set 
+			{ 
+				eventLock = value; 
+			}
 		}
 
 		/// <summary>
@@ -195,14 +256,17 @@ namespace SdlDotNet.Sprites
 		/// events. This enables it to handle the bulk of the processing
 		/// for mouse and button events.
 		/// </summary>
-		public void ListenToSdlEvents()
+		public void EnableEvents()
 		{
 			Events.MouseButtonUp +=
-				new MouseButtonEventHandler(OnSdlMouseButtonUp);
+				new MouseButtonEventHandler(OnMouseButtonUp);
 			Events.MouseButtonDown +=
-				new MouseButtonEventHandler(OnSdlMouseButtonDown);
+				new MouseButtonEventHandler(OnMouseButtonDown);
 			Events.MouseMotion +=
-				new MouseMotionEventHandler(OnSdlMouseMotion);
+				new MouseMotionEventHandler(OnMouseMotion);
+			Events.KeyboardUp += new KeyboardEventHandler(OnKeyboard);
+			Events.KeyboardDown += new KeyboardEventHandler(OnKeyboard);
+			Events.TickEvent += new TickEventHandler(OnTick);
 		}
 
 		/// <summary>
@@ -211,9 +275,8 @@ namespace SdlDotNet.Sprites
 		/// not true, then the next sprite that is keyboard sensitive is
 		/// processed.
 		/// </summary>
-		public override bool OnKeyboard(object sender, KeyboardEventArgs e)
+		public override void OnKeyboard(object sender, KeyboardEventArgs args)
 		{
-			return false;
 		}
 
 		/// <summary>
@@ -222,49 +285,74 @@ namespace SdlDotNet.Sprites
 		/// stopped. If it returns false, then the next sprite is
 		/// processed.
 		/// </summary>
-		public override bool OnMouseButton(object sender, MouseArgs args)
+		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
 		{
-			// Build up the new point
-			int x = args.X;
-			int y = args.Y;
-			int relx = args.RelativeX;
-			int rely = args.RelativeY;
-
-			MouseArgs args1 = args.Clone();
-			args1.TranslateX -= Coords.X;
-			args1.TranslateY -= Coords.Y;
-	 
 			// Check for an event lock
 			if (EventLock != null)
 			{
-				if (EventLock.OnMouseButton(this, args1))
-					return true;
+				EventLock.OnMouseButtonDown(this, args);
+				if (EventLock.IsMouseButtonLocked == true)
+				{
+					return;
+				}
 			}
 
 			// Go through the sprites. We make a copy to make sure nothing
 			// else changes the list while we are doing so.
 			ArrayList list = new ArrayList(sprites);
-			//Vector2 point = args1.Coords;
-			Point point = args1.Coords;
+			Point point = new Point(args.X - Coordinates.X, args.Y - Coordinates.Y);
 			list.Sort();
 
 			foreach (Sprite s in list)
 			{
 				// Don't bother if not mouse sensitive
 				if (!s.IsMouseSensitive)
+				{
 					continue;
+				}
 
 				// Check for bounds
 				if (s.IntersectsWith(point))
 				{
-					// Execute the button
-					if (s.OnMouseButton(this, args1))
-						return true;
+					s.OnMouseButtonDown(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - Coordinates.X), (short)(args.Y - Coordinates.Y)));
 				}
 			}
+		}
 
-			// We didn't process it
-			return false;
+		/// <summary>
+		/// Processes a mouse button. This event is trigger by the SDL
+		/// system. If this function returns true, then processing is
+		/// stopped. If it returns false, then the next sprite is
+		/// processed.
+		/// </summary>
+		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
+		{
+			// Check for an event lock
+			if (EventLock != null)
+			{
+				EventLock.OnMouseButtonUp(this, args);
+				return;
+			}
+			// Go through the sprites. We make a copy to make sure nothing
+			// else changes the list while we are doing so.
+			ArrayList list = new ArrayList(sprites);
+			Point point = new Point(args.X - Coordinates.X, args.Y - Coordinates.Y);
+			list.Sort();
+
+			foreach (Sprite s in list)
+			{
+				// Don't bother if not mouse sensitive
+				if (!s.IsMouseSensitive)
+				{
+					continue;
+				}
+
+				// Check for bounds
+				if (s.IntersectsWith(point))
+				{
+					s.OnMouseButtonUp(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - Coordinates.X), (short)(args.Y - Coordinates.Y)));
+				}
+			}
 		}
 
 		/// <summary>
@@ -273,112 +361,53 @@ namespace SdlDotNet.Sprites
 		/// is stopped, otherwise the next sprite is processed. Only
 		/// sprites that are MouseSensitive are processed.
 		/// </summary>
-		public bool OnMouseMotion(MouseArgs args)
-		{
-			// Build up the new point
-			int x = args.X;
-			int y = args.Y;
-			int relx = args.RelativeX;
-			int rely = args.RelativeY;
-      
-			MouseArgs args1 = args.Clone();
-			args1.TranslateX -= Coords.X;
-			args1.TranslateY -= Coords.Y;
-	 
+		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
+		{	 
 			// Check for an event lock
 			if (EventLock != null)
 			{
-				if (EventLock.OnMouseMotion(this, args1))
-					return true;
+				EventLock.OnMouseMotion(this, args);
+				if (EventLock.IsMouseMotionLocked == true)
+				{
+					return;
+				}
 			}
 
 			// Go through the sprites. We make a copy to make sure nothing
 			// else changes the list while we are doing so.
 			ArrayList list = new ArrayList(sprites);
-			//Vector2 point = new Vector2(x, y);
-			Point point = new Point(x, y);
+			Point point = new Point(args.X, args.Y);
 			list.Sort();
 
 			foreach (Sprite s in list)
 			{
 				// Don't bother if not mouse sensitive
 				if (!s.IsMouseSensitive)
+				{
 					continue;
+				}
 
 				// Check for bounds
 				if (s.IntersectsWith(point))
 				{
-					// Execute the button
-					if (s.OnMouseMotion(this, args1))
-						return true;
+					s.OnMouseMotion(this, new MouseMotionEventArgs(args.ButtonPressed,(short)(args.X - Coordinates.X), (short)(args.Y - Coordinates.Y), args.RelativeX, args.RelativeY));
 				}
 			}
-
-			// We didn't process it
-			return false;
-		}
-
-		/// <summary>
-		/// Processes a mouse button event by passing the events to the
-		/// appropriate sprites.
-		/// </summary>
-		public void OnSdlMouseButtonDown(object sender, MouseButtonEventArgs e)
-		{
-			// Create the mouse args
-			MouseArgs args = new MouseArgs();
-			args.BaseX = e.X;
-			args.BaseY = e.Y;
-			args.IsButton1 = true;
-
-			// Call it
-			OnMouseButton(this, args);
-		}
-
-		/// <summary>
-		/// Processes a mouse button event by passing the events to the
-		/// appropriate sprites.
-		/// </summary>
-		public void OnSdlMouseButtonUp(object sender, MouseButtonEventArgs e)
-		{
-			// Create the mouse args
-			MouseArgs args = new MouseArgs();
-			args.BaseX = e.X;
-			args.BaseY = e.Y;
-			args.IsButton1 = false;
-
-			// Call it
-			OnMouseButton(this, args);
-		}
-
-		/// <summary>
-		/// Processes a mouse motion event by passing the events to the
-		/// appropriate sprites.
-		/// </summary>
-		public void OnSdlMouseMotion(object sender, MouseMotionEventArgs e)
-			//		MouseButtonState state,
-			//			      int x, int y,
-			//			      int relx, int rely)
-		{
-			// Create the mouse args
-			MouseArgs args = new MouseArgs();
-			args.BaseX = e.X;
-			args.BaseY = e.Y;
-			args.RelativeX = e.RelativeX;
-			args.RelativeY = e.RelativeY;
-
-			// Call ourselves
-			OnMouseMotion(args);
 		}
 
 		/// <summary>
 		/// Calls the OnTick for all sprites inside the container.
 		/// </summary>
-		public override void OnTick(TickArgs args)
+		public override void OnTick(object sender, TickEventArgs args)
 		{
 			// Go through the sprites
 			foreach (Sprite s in new ArrayList(sprites))
+			{
 				if (s.IsTickable)
-					s.OnTick(args);
+				{
+					s.OnTick(this, args);
+				}
+			}
 		}
 		#endregion
 
@@ -389,7 +418,7 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return System.String.Format("(container {0})", sprites.Count);
+			return String.Format(CultureInfo.CurrentCulture, "(container {0}", sprites.Count);
 		}
 		#endregion
 

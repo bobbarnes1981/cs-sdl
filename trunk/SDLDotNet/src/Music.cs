@@ -359,11 +359,9 @@ namespace SdlDotNet
 
 		private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
-			//Console.WriteLine("channel finished event handler");
 			if (this.QueuedMusicFilename != null)
 			{
 				this.MusicFilename = this.QueuedMusicFilename;
-				//Console.WriteLine("playing queued sound");
 				this.Play();
 				this.QueuedMusicFilename = null;
 			}

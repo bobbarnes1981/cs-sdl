@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
@@ -190,7 +189,7 @@ namespace MfGames.Sdl.Gui
 				Size d = item.OuterSize;
 
 				// Draw the selection
-				args.Surface.Fill(args.Translate(new Rectangle(item.Coords.X, item.Coords.Y, d.Width, d.Height)),
+				args.Surface.Fill(args.Translate(new Rectangle(item.Coordinates.X, item.Coordinates.Y, d.Width, d.Height)),
 					selectedColor);
 			}
 		}
@@ -217,8 +216,8 @@ namespace MfGames.Sdl.Gui
 				transY = rect.Location.Y - MenuBarPadding.Top + MenuTitlePadding.Top;
 				transX = rect.Location.X - MenuTitlePadding.Left;
 				rect.Location = new Point(transX, transY);
-//				rect.Coords.Y -= MenuBarPadding.Top + MenuTitlePadding.Top;
-//				rect.Coords.X -= MenuTitlePadding.Left;
+//				rect.Coordinates.Y -= MenuBarPadding.Top + MenuTitlePadding.Top;
+//				rect.Coordinates.X -= MenuTitlePadding.Left;
 
 				int tempHeight;
 				int tempWidth;
@@ -241,8 +240,7 @@ namespace MfGames.Sdl.Gui
 		{
 			// Pull out the fields
 			Rectangle bounds = args.Translate(window.OuterBounds);
-			//Vector2 coords = bounds.Coords;
-			Point coords = bounds.Location;
+			Point coordinates = bounds.Location;
 			Size size = bounds.Size;
 
 			// Clear out the background and draw the frame line
@@ -256,17 +254,16 @@ namespace MfGames.Sdl.Gui
 				RenderArgs args1 = args.Clone();
 
 				// Blank out the title
-				//Rectangle2 tr = new Rectangle2(new Vector2(coords.X
-				Rectangle tr = new Rectangle(new Point(coords.X
+				Rectangle tr = new Rectangle(new Point(coordinates.X
 					+ windowPad,
-					coords.Y
+					coordinates.Y
 					+ windowPad),
 					new Size(size.Width,
 					TitleFont.Height));
 				Rectangle clip = new Rectangle(tr.Location,
 					new Size(tr.Width - windowPad,
 					tr.Height));
-				args1.SetClipping(clip);
+				args1.Clipping = clip;
 				args.Surface.Fill(tr, frameColor);
 
 				// Draw the title, centered
@@ -277,7 +274,7 @@ namespace MfGames.Sdl.Gui
 					int transX;
 					transX = tr.Location.X + (tr.Width - ts.Width) / 2;
 					tr.Location = new Point(transX, tr.Location.Y);
-					//tr.Coords.X += (tr.Width - ts.Width) / 2;
+					//tr.Coordinates.X += (tr.Width - ts.Width) / 2;
 				}
 
 				args.Surface.Blit(ts, tr);
@@ -441,7 +438,9 @@ namespace MfGames.Sdl.Gui
 			set
 			{
 				if (value == null)
+				{
 					throw new Exception("Cannot assign null sprite manager to gui");
+				}
 
 				manager = value;
 			}

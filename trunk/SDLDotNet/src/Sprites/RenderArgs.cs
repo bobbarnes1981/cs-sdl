@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet;
 using System;
 using System.Drawing;
@@ -54,33 +53,28 @@ namespace SdlDotNet.Sprites
 		}
 
 		#region Clipping
-		//private Rectangle origClip;
-		private Rectangle clip;
-
 		/// <summary>
 		/// 
 		/// </summary>
 		public void ClearClipping()
 		{
-			//if (origClip.IsEmpty)
-			//{
 				Surface.ClipRectangle  = new Rectangle(0, 0,
 					Surface.Width, Surface.Height);
-			//}
-			//else
-			//{
-			//	Surface.ClipRectangle = origClip;
-			//}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="rect"></param>
-		public void SetClipping(Rectangle rect)
+		public Rectangle Clipping
 		{
-			clip = rect;
-			Surface.ClipRectangle = clip;
+			get
+			{
+				return Surface.ClipRectangle;
+			}
+			set
+			{
+				Surface.ClipRectangle = value;
+			}
 		}
 		#endregion
 
@@ -88,16 +82,14 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="rect"></param>
+		/// <param name="rectangle"></param>
 		/// <returns></returns>
-		public Rectangle Translate(Rectangle rect)
+		public Rectangle Translate(Rectangle rectangle)
 		{
-			int transX; // new 
-			int transY;// new
+			int transX;
+			int transY;
 
-			Rectangle r = rect;
-//			r.Coords.X += TranslateX;
-//			r.Coords.Y += TranslateY;
+			Rectangle r = rectangle;
 			transX = r.Location.X + TranslateX;
 			transY = r.Location.Y + TranslateY;
 			r.Location = new Point(transX, transY);
@@ -109,8 +101,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="s"></param>
 		public void TranslateBy(Sprite s)
 		{
-			TranslateX += s.Coords.X;
-			TranslateY += s.Coords.Y;
+			TranslateX += s.Coordinates.X;
+			TranslateY += s.Coordinates.Y;
 		}
 		#endregion
 
@@ -123,11 +115,12 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-//		public Vector2 Vector
 		public Point Point
 		{
-			//get { return new Vector2(tx, ty); }
-			get { return new Point(tx, ty); }
+			get 
+			{ 
+				return new Point(tx, ty); 
+			}
 		}
 
 		/// <summary>
@@ -135,11 +128,16 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public Surface Surface
 		{
-			get { return surface; }
+			get 
+			{ 
+				return surface; 
+			}
 			set
 			{
 				if (value == null)
+				{
 					throw new SpriteException("Cannot assign a null surface");
+				}
 
 				surface = value;
 			}
@@ -150,12 +148,15 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public Size Size
 		{
-			get { return size; }
+			get 
+			{ 
+				return size; 
+			}
 			set
 			{
 				if (value.IsEmpty)
 				{
-					Console.WriteLine("Cannot assign a null size!");
+					//Console.WriteLine("Cannot assign a null size!");
 				}
 				else
 				{
@@ -169,8 +170,14 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public int TranslateX
 		{
-			get { return tx; }
-			set { tx = value; }
+			get 
+			{ 
+				return tx; 
+			}
+			set 
+			{ 
+				tx = value; 
+			}
 		}
 
 		/// <summary>
@@ -178,8 +185,14 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public int TranslateY
 		{
-			get { return ty; }
-			set { ty = value; }
+			get 
+			{ 
+				return ty; 
+			}
+			set 
+			{ 
+				ty = value; 
+			}
 		}
 		#endregion
 	}
