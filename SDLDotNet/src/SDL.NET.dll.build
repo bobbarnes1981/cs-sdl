@@ -10,7 +10,6 @@
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<!-- prepare build directory -->
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
-	<copy file="${project.main.dir}/sdl.keys" tofile="${nant.project.basedir}/sdl.keys"/>
 
 	<!-- build SDL.NET -->
 	<csc target="library" warnaserror="true" unsafe="true" nowarn="1591,0618" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
