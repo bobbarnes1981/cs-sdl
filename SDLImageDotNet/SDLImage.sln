@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL", "..\SDLDotNet\SDL.csproj", "{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDLImage.NET", "SDLImage.NET.csproj", "{DF73A86A-09AE-4CE5-A5E4-045E7919C541}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSample", "Example\ImageSample.csproj", "{CE599D7B-DE7F-47A3-BF91-404BF471B685}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Debug.ActiveCfg = Debug|.NET
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Debug.Build.0 = Debug|.NET
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Release.ActiveCfg = Release|.NET
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Release.Build.0 = Release|.NET
+		{DF73A86A-09AE-4CE5-A5E4-045E7919C541}.Debug.ActiveCfg = Debug|.NET
+		{DF73A86A-09AE-4CE5-A5E4-045E7919C541}.Debug.Build.0 = Debug|.NET
+		{DF73A86A-09AE-4CE5-A5E4-045E7919C541}.Release.ActiveCfg = Release|.NET
+		{DF73A86A-09AE-4CE5-A5E4-045E7919C541}.Release.Build.0 = Release|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Debug.ActiveCfg = Debug|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Debug.Build.0 = Debug|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Release.ActiveCfg = Release|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
