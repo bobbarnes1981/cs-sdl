@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -18,8 +19,9 @@
  */
 
 using System;
+using Tao.Sdl;
 
-namespace SDLDotNet 
+namespace SdlDotNet 
 {
 
 	/// <summary>
@@ -43,7 +45,7 @@ namespace SDLDotNet
 		/// </summary>
 		~Joystick() 
 		{
-			Natives.SDL_JoystickClose(_handle);
+			Sdl.SDL_JoystickClose(_handle);
 		}
 
 		/// <summary>
@@ -54,7 +56,7 @@ namespace SDLDotNet
 			if (!_disposed) 
 			{
 				_disposed = true;
-				Natives.SDL_JoystickClose(_handle);
+				Sdl.SDL_JoystickClose(_handle);
 				GC.SuppressFinalize(this);
 			}
 		}
@@ -64,35 +66,50 @@ namespace SDLDotNet
 		/// </summary>
 		public int Index 
 		{
-			get { return Natives.SDL_JoystickIndex(_handle); }
+			get 
+			{ 
+				return Sdl.SDL_JoystickIndex(_handle); 
+			}
 		}
 		/// <summary>
 		/// Gets the number of axes on this joystick (usually 2 for each stick handle)
 		/// </summary>
 		public int NumAxes 
 		{
-			get { return Natives.SDL_JoystickNumAxes(_handle); }
+			get 
+			{ 
+				return Sdl.SDL_JoystickNumAxes(_handle); 
+			}
 		}
 		/// <summary>
 		/// Gets the number of trackballs on this joystick
 		/// </summary>
 		public int NumBalls 
 		{
-			get { return Natives.SDL_JoystickNumBalls(_handle); }
+			get 
+			{ 
+				return Sdl.SDL_JoystickNumBalls(_handle); 
+			}
 		}
 		/// <summary>
 		/// Gets the number of hats on this joystick
 		/// </summary>
 		public int NumHats 
 		{
-			get { return Natives.SDL_JoystickNumHats(_handle); }
+			get 
+			{ 
+				return Sdl.SDL_JoystickNumHats(_handle); 
+			}
 		}
 		/// <summary>
 		/// Gets the number of buttons on this joystick
 		/// </summary>
 		public int NumButtons 
 		{
-			get { return Natives.SDL_JoystickNumButtons(_handle); }
+			get 
+			{ 
+				return Sdl.SDL_JoystickNumButtons(_handle); 
+			}
 		}
 
 		/// <summary>

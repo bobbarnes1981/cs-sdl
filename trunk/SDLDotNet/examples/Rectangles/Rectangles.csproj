@@ -18,9 +18,9 @@
                 OutputType = "WinExe"
                 PreBuildEvent = "copy $(ProjectDir)\fard-two.ogg $(TargetDir)"
                 PostBuildEvent = ""
-                RootNamespace = "SDLDotNet.Examples"
+                RootNamespace = "SdlDotNet.Examples"
                 RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = ""
+                StartupObject = "SdlDotNet.Examples.Rectangles"
             >
                 <Config
                     Name = "Debug"
@@ -36,7 +36,7 @@
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "false"
-                    OutputPath = "bin\Debug-net\"
+                    OutputPath = "bin\Debug\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -56,7 +56,7 @@
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "true"
-                    OutputPath = "bin\Release-net\"
+                    OutputPath = "bin\Release\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -75,8 +75,8 @@
                     HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.Drawing.dll"
                 />
                 <Reference
-                    Name = "SDL"
-                    Project = "{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}"
+                    Name = "SdlDotNet"
+                    Project = "{4001D616-7586-412E-839B-A630D4379B25}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
             </References>

@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -18,28 +19,53 @@
  */
 
 using System;
+using Tao.Sdl;
 
-namespace SDLDotNet {
+namespace SdlDotNet {
 	/// <summary>
 	/// Contains methods for interacting with the window title frame and for grabbing input focus.
 	/// These methods do not need a windowed display to be called.
-	/// You can obtain an instance of this class by accessing the WindowManager property of the main SDL
+	/// You can obtain an instance of this class by accessing the WindowManager property of the main Sdl
 	/// object.
 	/// </summary>
-	unsafe public class WindowManager {
-		internal WindowManager(Video vid) {}
+	public sealed class WindowManager {
+
+		static readonly WindowManager instance = new WindowManager();
+
+		WindowManager()
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static WindowManager Instance
+		{
+			get
+			{
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= 0)
+				{
+					throw SdlException.Generate();
+				}
+				return instance;
+			}
+		}
 
 		/// <summary>
 		/// gets or sets the text for the current window
 		/// </summary>
 		public string Caption {
-			get{
-				string ret, dummy;
-				Natives.SDL_WM_GetCaption(out ret, out dummy);
+			get
+			{
+				string ret;
+				string dummy;
+
+				Sdl.SDL_WM_GetCaption(out ret, out dummy);
 				return ret;
 			}
-			set{
-				Natives.SDL_WM_SetCaption(value, "");
+			set
+			{
+				Sdl.SDL_WM_SetCaption(value, "");
 			}
 		}
 		/// <summary>
@@ -47,26 +73,26 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="icon">the surface containing the image</param>
 		public void SetIcon(Surface icon) {
-			Natives.SDL_WM_SetIcon((Natives.SDL_Surface *)icon.GetPtr().ToPointer(), null);
+			Sdl.SDL_WM_SetIcon(icon.GetPtr(), null);
 		}
 		/// <summary>
 		/// Iconifies (minimizes) the current window
 		/// </summary>
 		/// <returns>True if the action succeeded, otherwise False</returns>
 		public bool IconifyWindow() {
-			return (Natives.SDL_WM_IconifyWindow() != 0);
+			return (Sdl.SDL_WM_IconifyWindow() != 0);
 		}
 		/// <summary>
 		/// Forces keyboard focus and prevents the mouse from leaving the window
 		/// </summary>
 		public void GrabInput() {
-			Natives.SDL_WM_GrabInput((int)Natives.GrabInput.On);
+			Sdl.SDL_WM_GrabInput(Sdl.SDL_GrabMode.SDL_GRAB_ON);
 		}
 		/// <summary>
 		/// Releases keyboard and mouse focus from a previous call to GrabInput()
 		/// </summary>
 		public void ReleaseInput() {
-			Natives.SDL_WM_GrabInput((int)Natives.GrabInput.Off);
+			Sdl.SDL_WM_GrabInput(Sdl.SDL_GrabMode.SDL_GRAB_OFF);
 		}
 	}
 }

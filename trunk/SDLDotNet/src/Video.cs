@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -18,48 +19,34 @@
  */
 
 using System;
+using Tao.Sdl;
 
-namespace SDLDotNet {
-	/// <summary>
-	/// OpenGL Attributes
-	/// </summary>
-	public enum GLAttribute {
-		/// <summary></summary>
-		RedSize,
-		/// <summary></summary>
-		GreenSize,
-		/// <summary></summary>
-		BlueSize,
-		/// <summary></summary>
-		AlphaSize,
-		/// <summary></summary>
-		BufferSize,
-		/// <summary></summary>
-		DoubleBuffer,
-		/// <summary></summary>
-		DepthSize,
-		/// <summary></summary>
-		StencilSize,
-		/// <summary></summary>
-		AccumRedSize,
-		/// <summary></summary>
-		AccumGreenSize,
-		/// <summary></summary>
-		AccumBlueSize,
-		/// <summary></summary>
-		AccumAlphaSize,
-		/// <summary></summary>
-		Stereo
-	}
+namespace SdlDotNet 
+{
 
 	/// <summary>
-	/// Provides methods to set the video mode, create video surfaces, hide and show the mouse cursor,
+	/// Provides methods to set the video mode, create video surfaces, 
+	/// hide and show the mouse cursor,
 	/// and interact with OpenGL
 	/// </summary>
-	unsafe public class Video {
-		internal Video() {
-			if (Natives.SDL_InitSubSystem((int)Natives.Init.Video) != 0)
-				throw SDLException.Generate();
+	public sealed class Video 
+	{
+		static readonly Video instance = new Video();
+
+		Video()
+		{
+		}
+
+		public static Video Instance
+		{
+			get 
+			{
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= 0)
+				{
+					throw SdlException.Generate();
+				}
+				return instance;
+			}
 		}
 
 		/// <summary>
@@ -68,9 +55,11 @@ namespace SDLDotNet {
 		/// <param name="width">width</param>
 		/// <param name="height">height</param>
 		/// <returns>a surface to draw to</returns>
-		public Surface SetVideoMode(int width, int height) {
+		public Surface SetVideoMode(int width, int height) 
+		{
 			return SetVideoMode(width, height, 0,
-				(int)(Natives.Video.HWSurface|Natives.Video.DoubleBuf|Natives.Video.FullScreen|Natives.Video.AnyFormat));
+				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN|
+				Sdl.SDL_ANYFORMAT));
 		}
 		/// <summary>
 		/// Sets the video mode of a fullscreen application
@@ -79,48 +68,26 @@ namespace SDLDotNet {
 		/// <param name="height">screen height</param>
 		/// <param name="bpp">bits per pixel</param>
 		/// <returns>a surface to draw to</returns>
-		public Surface SetVideoMode(int width, int height, int bpp) {
-			return SetVideoMode(width, height, bpp,
-				(int)(Natives.Video.HWSurface|Natives.Video.DoubleBuf|Natives.Video.FullScreen|Natives.Video.AnyFormat));
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="width">screen width</param>
-		/// <param name="height">screen height</param>
-		/// <param name="flags">sets mode parameters</param>
-		/// <returns></returns>
-		public Surface SetVideoMode(int width, int height, uint flags) 
-		{
-			return SetVideoMode(width, height, 0,
-				(int)(flags));
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="width">screen width</param>
-		/// <param name="height">screen height</param>
-		/// <param name="bpp">bits per pixel</param>
-		/// <param name="flags">sets mode parameters</param>
-		/// <returns></returns>
-		public Surface SetVideoMode(int width, int height, int bpp, uint flags) 
+		public Surface SetVideoMode(int width, int height, int bpp) 
 		{
 			return SetVideoMode(width, height, bpp,
-				(int)(flags));
+				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN|Sdl.SDL_ANYFORMAT));
 		}
+
 		/// <summary>
 		/// Sets the windowed video mode using current screen bpp
 		/// </summary>
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
-		/// <param name="frame">if true, the window will have a frame around it</param>
+		/// <param name="frame">
+		/// if true, the window will have a frame around it
+		/// </param>
 		/// <returns>a surface to draw to</returns>
-		public Surface SetVideoModeWindow(int width, int height, bool frame) {
-			Natives.Video flags = Natives.Video.HWSurface|Natives.Video.DoubleBuf|Natives.Video.AnyFormat;
+		public Surface SetVideoModeWindow(int width, int height, bool frame) 
+		{
+			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT;
 			if (!frame)
-				flags |= Natives.Video.NoFrame;
+				flags |= Sdl.SDL_NOFRAME;
 			return SetVideoMode(width, height, 0, (int)flags);
 		}
 		/// <summary>
@@ -128,13 +95,20 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
-		/// <param name="frame">if true, the window will have a frame around it</param>
+		/// <param name="frame">
+		/// if true, the window will have a frame around it
+		/// </param>
 		/// <param name="bpp">bits per pixel</param>
 		/// <returns>a surface to draw to</returns>
-		public Surface SetVideoModeWindow(int width, int height, int bpp, bool frame) {
-			Natives.Video flags = Natives.Video.HWSurface|Natives.Video.DoubleBuf|Natives.Video.AnyFormat;
+		public Surface SetVideoModeWindow(
+			int width, 
+			int height, 
+			int bpp, 
+			bool frame) 
+		{
+			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT;
 			if (!frame)
-				flags |= Natives.Video.NoFrame;
+				flags |= Sdl.SDL_NOFRAME;
 			return SetVideoMode(width, height, bpp, (int)flags);
 		}
 		
@@ -145,21 +119,28 @@ namespace SDLDotNet {
 		/// <param name="height">the vertical resolution</param>
 		/// <param name="bpp">bits per pixel</param>
 		/// <returns>A Surface representing the screen</returns>
-		public Surface SetVideoModeOpenGL(int width, int height, int bpp) {
+		public Surface SetVideoModeOpenGL(int width, int height, int bpp) 
+		{
 			return SetVideoMode(width, height, bpp,
-				(int)(Natives.Video.HWSurface|Natives.Video.OpenGL|Natives.Video.FullScreen));
+				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_OPENGL|Sdl.SDL_FULLSCREEN));
 		}
 		/// <summary>
 		/// Sets a windowed video mode suitable for drawing with OpenGL
 		/// </summary>
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
-		/// <param name="frame">If true, the window will have a frame around it</param>
+		/// <param name="frame">
+		/// If true, the window will have a frame around it
+		/// </param>
 		/// <returns>A Surface representing the window</returns>
-		public Surface SetVideoModeWindowOpenGL(int width, int height, bool frame) {
-			Natives.Video flags = Natives.Video.HWSurface|Natives.Video.OpenGL|Natives.Video.AnyFormat;
+		public Surface SetVideoModeWindowOpenGL(
+			int width, 
+			int height, 
+			bool frame) 
+		{
+			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_OPENGL|Sdl.SDL_ANYFORMAT;
 			if (!frame)
-				flags |= Natives.Video.NoFrame;
+				flags |= Sdl.SDL_NOFRAME;
 			return SetVideoMode(width, height, 0, (int)flags);
 		}
 		/// <summary>
@@ -168,24 +149,29 @@ namespace SDLDotNet {
 		/// <param name="width">screen width</param>
 		/// <param name="height">screen height</param>
 		/// <param name="bpp">bits per pixel</param>
-		/// <param name="flags">specific flags, see SDL documentation for details</param>
+		/// <param name="flags">
+		/// specific flags, see SDL documentation for details
+		/// </param>
 		/// <returns>A Surface representing the screen</returns>
-		public Surface SetVideoMode(int width, int height, int bpp, int flags) {
-			Natives.SDL_Surface *s = Natives.SDL_SetVideoMode(width, height, bpp, flags);
-			if (s == null)
-				throw SDLException.Generate();
-			return Surface.FromScreenPtr(s);
+		public Surface SetVideoMode(int width, int height, int bpp, int flags) 
+		{
+			IntPtr s = Sdl.SDL_SetVideoMode(width, height, bpp, flags);
+			if (s == IntPtr.Zero)
+				throw SdlException.Generate();
+			return new Surface(s);
 		}
 
 
 		/// <summary>
-		/// Gets the surface for the window or screen, must be preceded by a call to SetVideoMode*
+		/// Gets the surface for the window or screen, 
+		/// must be preceded by a call to SetVideoMode*
 		/// </summary>
 		/// <returns>The main screen surface</returns>
-		public Surface GetVideoSurface() {
-			Natives.SDL_Surface *s = Natives.SDL_GetVideoSurface();
-			if (s == null)
-				throw SDLException.Generate();
+		public Surface GetVideoSurface() 
+		{
+			IntPtr s = Sdl.SDL_GetVideoSurface();
+			if (s == IntPtr.Zero)
+				throw SdlException.Generate();
 			return Surface.FromScreenPtr(s);
 		}
 
@@ -199,32 +185,31 @@ namespace SDLDotNet {
 		/// SDL_Surface underlying the IntPtr.</returns>
 		public Surface GenerateSurfaceFromPointer( IntPtr pointer )
 		{
-			//Natives.SDL_Surface *s = (Natives.SDL_Surface*)pointer.ToPointer();
-			Surface s = Surface.FromPtr((Natives.SDL_Surface*)pointer.ToPointer()); 
+			Surface s = new Surface(pointer); 
 			if (s == null)
-				throw SDLException.Generate();
+				throw SdlException.Generate();
 			//return Surface.FromScreenPtr(s); 
 			return s; 
 		}
 
 		/// <summary>
-		/// Loads a .bmp file from disk
+		/// Loads an image file from disk
 		/// </summary>
 		/// <param name="file">The filename of the bitmap to load</param>
 		/// <returns>A Surface representing the bitmap</returns>
-		public Surface LoadBMP(string file) {
-			return Surface.FromBMPFile(file);
+		public Surface LoadImage(string file) 
+		{
+			return Surface.FromImageFile(file);
 		}
 
 		/// <summary>
-		/// Loads a bitmap from a System.Drawing.Bitmap object, usually obtained from a resource
+		/// Loads a bitmap from a System.Drawing.Bitmap object, 
+		/// usually obtained from a resource
 		/// </summary>
 		/// <param name="bitmap">The bitmap object to load</param>
 		/// <returns>A Surface representing the bitmap</returns>
-		public Surface LoadBMP(System.Drawing.Bitmap bitmap) {
-			if (Environment.Version.ToString() == "0.0")
-				throw new NotSupportedException("Method not supported on Mono");
-
+		public Surface LoadImage(System.Drawing.Bitmap bitmap) 
+		{
 			return Surface.FromBitmap(bitmap);
 		}
 
@@ -233,7 +218,8 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="bitmap">The bitmap data</param>
 		/// <returns>A Surface representing the bitmap</returns>
-		public Surface LoadBMP(byte[] bitmap) {
+		public Surface LoadBMP(byte[] bitmap) 
+		{
 			return Surface.FromBitmap(bitmap);
 		}
 
@@ -243,74 +229,102 @@ namespace SDLDotNet {
 		/// <param name="width">The width of the surface</param>
 		/// <param name="height">The height of the surface</param>
 		/// <param name="depth">The bits per pixel of the surface</param>
-		/// <param name="Rmask">A bitmask giving the range of red color values in the surface pixel format</param>
-		/// <param name="Gmask">A bitmask giving the range of green color values in the surface pixel format</param>
-		/// <param name="Bmask">A bitmask giving the range of blue color values in the surface pixel format</param>
-		/// <param name="Amask">A bitmask giving the range of alpha color values in the surface pixel format</param>
-		/// <param name="hardware">A flag indicating whether or not to attempt to place this surface into video memory</param>
+		/// <param name="Rmask">
+		/// A bitmask giving the range of red color values in the surface 
+		/// pixel format
+		/// </param>
+		/// <param name="Gmask">
+		/// A bitmask giving the range of green color values in the surface 
+		/// pixel format
+		/// </param>
+		/// <param name="Bmask">
+		/// A bitmask giving the range of blue color values in the surface 
+		/// pixel format
+		/// </param>
+		/// <param name="Amask">
+		/// A bitmask giving the range of alpha color values in the surface 
+		/// pixel format
+		/// </param>
+		/// <param name="hardware">
+		/// A flag indicating whether or not to attempt to place this surface
+		///  into video memory</param>
 		/// <returns>A new surface</returns>
-		public Surface CreateRGBSurface(int width, int height, int depth, uint Rmask, uint Gmask, uint Bmask, uint Amask, bool hardware) {
-			Natives.SDL_Surface *ret = Natives.SDL_CreateRGBSurface(hardware?(int)Natives.Video.HWSurface:(int)Natives.Video.SWSurface,
+		public Surface CreateRGBSurface(
+			int width, 
+			int height, 
+			int depth, 
+			int Rmask, 
+			int Gmask, 
+			int Bmask, 
+			int Amask, 
+			bool hardware) 
+		{
+			IntPtr ret = Sdl.SDL_CreateRGBSurface(
+				hardware?Sdl.SDL_HWSURFACE:Sdl.SDL_SWSURFACE,
 				width, height, depth,
 				Rmask, Gmask, Bmask, Amask);
-			if (ret == null)
-				throw SDLException.Generate();
-			return Surface.FromPtr(ret);
+			if (ret == IntPtr.Zero)
+				throw SdlException.Generate();
+			return new Surface(ret);
 		}
 
-		/// <summary>
-		/// Shows the mouse cursor
-		/// </summary>
-		public void ShowMouseCursor() {
-			Natives.SDL_ShowCursor((int)Natives.Enable.Enable);
-		}
-		/// <summary>
-		/// Hides the mouse cursor
-		/// </summary>
-		public void HideMouseCursor() {
-			Natives.SDL_ShowCursor((int)Natives.Enable.Disable);
-		}
-		/// <summary>
-		/// Queries the current cursor state
-		/// </summary>
-		/// <returns>True if the cursor is visible, otherwise False</returns>
-		public bool IsCursorVisible() {
-			return (Natives.SDL_ShowCursor((int)Natives.Enable.Query) == (int)Natives.Enable.Enable);
-		}
+		//		/// <summary>
+		//		/// Shows the mouse cursor
+		//		/// </summary>
+		//		public void ShowMouseCursor() {
+		//			Sdl.SDL_ShowCursor((int)Natives.Enable.Enable);
+		//		}
+		//		/// <summary>
+		//		/// Hides the mouse cursor
+		//		/// </summary>
+		//		public void HideMouseCursor() {
+		//			Sdl.SDL_ShowCursor((int)Natives.Enable.Disable);
+		//		}
+		//		/// <summary>
+		//		/// Queries the current cursor state
+		//		/// </summary>
+		//		/// <returns>True if the cursor is visible, otherwise False</returns>
+		//		public bool IsCursorVisible() {
+		//			return (Sdl.SDL_ShowCursor((int)Natives.Enable.Query) == (int)Natives.Enable.Enable);
+		//		}
 		/// <summary>
 		/// Move the mouse cursor to a specific location
 		/// </summary>
 		/// <param name="x">The X coordinite</param>
 		/// <param name="y">The Y coordinite</param>
-		public void WarpCursor(int x, int y) {
-			Natives.SDL_WarpMouse((ushort)x, (ushort)y);
+		public void WarpCursor(int x, int y) 
+		{
+			Sdl.SDL_WarpMouse((short)x, (short)y);
 		}
 
 		/// <summary>
 		/// Swaps the OpenGL screen, only if the double-buffered attribute was set.
 		/// Call this instead of Surface.Flip() for OpenGL windows.
 		/// </summary>
-		public void GL_SwapBuffers() {
-			Natives.SDL_GL_SwapBuffers();
+		public void GL_SwapBuffers() 
+		{
+			Sdl.SDL_GL_SwapBuffers();
 		}
 		/// <summary>
 		/// Sets an OpenGL attribute
 		/// </summary>
 		/// <param name="attrib">The attribute to set</param>
 		/// <param name="val">The new attribute value</param>
-		public void GL_SetAttribute(GLAttribute attrib, int val) {
-			if (Natives.SDL_GL_SetAttribute((int)attrib, val) != 0)
-				throw SDLException.Generate();
+		public void GL_SetAttribute(Sdl.SDL_GLattr attrib, int val) 
+		{
+			if (Sdl.SDL_GL_SetAttribute(attrib, val) != 0)
+				throw SdlException.Generate();
 		}
 		/// <summary>
 		/// Gets the value of an OpenGL attribute
 		/// </summary>
 		/// <param name="attrib">The attribute to get</param>
 		/// <returns>The current attribute value</returns>
-		public int GL_GetAttribute(GLAttribute attrib) {
+		public int GL_GetAttribute(Sdl.SDL_GLattr attrib) 
+		{
 			int ret;
-			if (Natives.SDL_GL_GetAttribute((int)attrib, out ret) != 0)
-				throw SDLException.Generate();
+			if (Sdl.SDL_GL_GetAttribute(attrib, out ret) != 0)
+				throw SdlException.Generate();
 			return ret;
 		}
 	}

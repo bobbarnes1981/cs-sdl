@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -18,35 +19,54 @@
  */
 
 using System;
+using Tao.Sdl;
 
-namespace SDLDotNet {
+namespace SdlDotNet {
 	/// <summary>
 	/// Provides methods for querying the number and make-up of the joysticks on a system.
-	/// You can obtain an instance of this class by accessing the Joysticks property of the main SDL object.
+	/// You can obtain an instance of this class by accessing the Joysticks property of the main Sdl object.
 	/// Note that actual joystick input is handled by the Events class
 	/// </summary>
-	public class Joysticks {
-		internal Joysticks() {
-			if (Natives.SDL_InitSubSystem((int)Natives.Init.Joystick) != 0)
-				throw SDLException.Generate();
+	public sealed class Joysticks 
+	{
+		static readonly Joysticks instance = new Joysticks();
+
+		Joysticks()
+		{
+		}
+
+		public static Joysticks Instance 
+		{
+			get
+			{
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_JOYSTICK) != 0)
+				{
+					throw SdlException.Generate();
+				}
+				return instance;
+			}
 		}
 
 		/// <summary>
 		/// Returns the number of joysticks on this system
 		/// </summary>
 		/// <returns>The number of joysticks</returns>
-		public int NumJoysticks() {
-			return Natives.SDL_NumJoysticks();
+		public int NumJoysticks() 
+		{
+			return Sdl.SDL_NumJoysticks();
 		}
 		/// <summary>
 		/// Creates a joystick object to read information about a joystick
 		/// </summary>
 		/// <param name="index">The 0-based index of the joystick to read</param>
 		/// <returns>A Joystick object</returns>
-		public Joystick OpenJoystick(int index) {
-			IntPtr joy = Natives.SDL_JoystickOpen(index);
+		public Joystick OpenJoystick(int index) 
+		{
+			IntPtr joy = Sdl.SDL_JoystickOpen(index);
 			if (joy == IntPtr.Zero)
-				throw SDLException.Generate();
+			{
+				throw SdlException.Generate();
+			}
 			return new Joystick(joy);
 		}
 	}
