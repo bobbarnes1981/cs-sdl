@@ -1,5 +1,5 @@
 3.0.0
-David Hudson 25 Feb 2005
+David Hudson 23 Feb 2005
 * Exceptions will use the SDL_error string by default.
 * Primitives are antialiased by default.
 * Fixed some documentation.
