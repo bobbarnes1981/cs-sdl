@@ -251,6 +251,8 @@
 		<include name="${project.zip-path}/lib/**" />
 		<include name="${project.zip-path}/src/**" />
 		<include name="${project.zip-path}/examples/**" />
+		<include name="${project.zip-path}/scripts/**" />
+		<include name="${project.zip-path}/tools/**" />
 		<include name="${project.zip-path}/*" />	
 	    </fileset>
 	</zip>
