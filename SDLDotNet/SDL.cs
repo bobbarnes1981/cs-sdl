@@ -130,5 +130,15 @@ namespace SDLDotNet {
 		public uint GetTicks() {
 			return Natives.SDL_GetTicks();
 		}
+
+		/// <summary>
+		/// Enable keyboard autorepeat
+		/// </summary>
+		/// <param name="delay">Delay in system ticks before repeat starts. Set to 0 to disable key repeat</param>
+		/// <param name="rate">Rate in system ticks at which key repeats</param>
+		public void EnableKeyRepeat(int delay, int rate) {
+			if (Natives.SDL_EnableKeyRepeat(delay, rate) == -1)
+				throw SDLException.Generate();
+		}
 	}
 }

@@ -266,6 +266,8 @@ namespace SDLDotNet {
 		public static extern string SDL_GetError();
 		[DllImport(SDL_DLL), SuppressUnmanagedCodeSecurity]
 		public static extern uint SDL_GetTicks();
+		[DllImport(SDL_DLL), SuppressUnmanagedCodeSecurity]
+		public static extern int SDL_EnableKeyRepeat(int rate, int delay);
 
 		// Video
 		[DllImport(SDL_DLL), SuppressUnmanagedCodeSecurity]
