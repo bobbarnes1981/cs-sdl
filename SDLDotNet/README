@@ -1,0 +1,7 @@
+Lucas Maloney Sun 23 Mar 2003 21:24:41 EST 
+
+SDLDotNet.TTF is a .NET wrapper for sdl-ttf (See http://www.libsdl.org/projects/SDL_ttf/)
+
+This is my initial import of this wrapper.  It is lacking a lot in the way of error checking and documentation, but it is fully functional.
+
+There is a simple example program in example/.  It is based on the showfont example that comes with SDL_ttf.
