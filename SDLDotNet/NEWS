@@ -1,3 +1,12 @@
+2.1.0b1
+David Hudson dd Dec 2004
+* Added Rotation
+* Added Zooming
+* Added Horizontal Flipping
+* Added primitive drawing (circles, ellipses, triangles)
+* Fixed ChannelFinished delegate for real this time :-)
+* Moved to NAnt 0.85 rc1
+
 2.0.0
 David Hudson 21 Nov 2004
 * Final Release.
@@ -6,7 +15,7 @@ David Hudson 21 Nov 2004
 2.0.0b2
 David Hudson 16 Nov 2004
 * Reworked all of the Dispose() methods to fix memory leak problems (hopefully).
-* Fixed MusicFinshed and ChannelFinshed delegates.
+* Fixed MusicFinished and ChannelFinished delegates.
 
 2.0.0b1
 David Hudson 5 Nov 2004

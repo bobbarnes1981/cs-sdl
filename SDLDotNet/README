@@ -79,10 +79,11 @@ Tutorials
 
 TODO items:
 
-Fix the ChannelFinished delegate.
+Fix the ChannelFinished delegate. **DONE**
 
 Xedecimal
-Surface.Fill(Color c); to fill an entire surface with no parameters (which could be done with a rect that takes up 0,0,w,h but this would be easier for people to use and if possible, faster) **DONE**
+Surface.Fill(Color c); to fill an entire surface with no parameters (which could be done with a rect that takes 
+up 0,0,w,h but this would be easier for people to use and if possible, faster) **DONE**
 
 StretchBlit: since it isn't supported by SDL itself. 
 I recently saw that the cvs version is updated quite often but no news on stretching other than YUV surfaces (video overlays?)).
