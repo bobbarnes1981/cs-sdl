@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL", "SDL.csproj", "{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{CE599D7B-DE7F-47A3-BF91-404BF471B685}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDTest", "CDTest\CDTest.csproj", "{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Debug.ActiveCfg = Debug|.NET
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Debug.Build.0 = Debug|.NET
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Release.ActiveCfg = Release|.NET
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Release.Build.0 = Release|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Debug.ActiveCfg = Debug|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Debug.Build.0 = Debug|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Release.ActiveCfg = Release|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Release.Build.0 = Release|.NET
+		{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}.Debug.ActiveCfg = Debug|.NET
+		{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}.Debug.Build.0 = Debug|.NET
+		{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}.Release.ActiveCfg = Release|.NET
+		{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
