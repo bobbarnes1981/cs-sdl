@@ -142,10 +142,10 @@ namespace SdlDotNet
 		/// Fires when the application gains or loses input focus
 		/// </summary>
 		public static event ActiveEventHandler InputFocus;
-		/// <summary>
-		/// Fires when a key is pressed or released
-		/// </summary>
-		public static event KeyboardEventHandler Keyboard;
+//		/// <summary>
+//		/// Fires when a key is pressed or released
+//		/// </summary>
+//		public static event KeyboardEventHandler Keyboard;
 		/// <summary>
 		/// Fires when a key is pressed
 		/// </summary>
@@ -234,10 +234,6 @@ namespace SdlDotNet
 		public static event TickEventHandler TickEvent;
 
 		static readonly Events instance = new Events();
-
-		//		static Events()
-		//		{
-		//		}
 
 		Events()
 		{
@@ -496,226 +492,291 @@ namespace SdlDotNet
 			switch ((EventTypes)ev.type)
 			{
 				case EventTypes.ActiveEvent:
-					if (AppActive != null || MouseFocus != null || InputFocus != null) 
-					{
-						ActiveEventArgs e = new ActiveEventArgs(ev);
-
-						if ((ev.active.state & (byte)Focus.Mouse) != 0 && 
-							MouseFocus != null)
-						{
-							MouseFocus(instance, e);
-						}
-						if ((ev.active.state & (byte)Focus.Keyboard) != 0 && 
-							InputFocus != null)
-						{
-							InputFocus(instance, e);
-						}
-						if ((ev.active.state & (byte)Focus.Application) != 0 && 
-							AppActive != null)
-						{
-							AppActive(instance, e);
-						}
-					}
+					OnActiveEvent(new ActiveEventArgs(ev));
 					break;
 
 				case EventTypes.JoystickAxisMotion:
-					if (JoystickAxisMotion != null || 
-						JoystickHorizontalAxisMotion != null || 
-						JoystickVerticalAxisMotion != null) 
-					{						
-						if ((ev.jaxis.val < (-1)*JoystickAxisEventArgs.JoystickThreshold) || (ev.jaxis.val > JoystickAxisEventArgs.JoystickThreshold))
-						{	
-							JoystickAxisEventArgs e = new JoystickAxisEventArgs(ev);
-							if (ev.jaxis.axis == 0)
-							{
-								if (JoystickAxisMotion != null) 
-								{
-									JoystickAxisMotion(instance, e);
-								}
-								if (JoystickHorizontalAxisMotion != null) 
-								{
-									JoystickHorizontalAxisMotion(instance, e);
-								}
-							}
-							else if (ev.jaxis.axis == 1)
-							{
-								if (JoystickAxisMotion != null) 
-								{
-									JoystickAxisMotion(instance, e);
-								}
-								if (JoystickVerticalAxisMotion != null) 
-								{
-									JoystickVerticalAxisMotion(instance, e);
-								}
-							}
-							else
-							{
-								if (JoystickAxisMotion != null) 
-								{
-									JoystickAxisMotion(instance, e);
-								}
-							}
-						}
-					}
+					OnJoystickAxisMotion(new JoystickAxisEventArgs(ev));
 					break;
 
 				case EventTypes.JoystickBallMotion:
-					if (JoystickBallMotion != null) 
-					{
-						JoystickBallMotion(
-							instance,
-							new JoystickBallEventArgs(ev));
-					}
+					OnJoystickBallMotion(new JoystickBallEventArgs(ev));
 					break;
 
 				case EventTypes.JoystickButtonDown:
-					if (JoystickButton != null || JoystickButtonDown != null) 
-					{
-						JoystickButtonEventArgs e = 
-							new JoystickButtonEventArgs(ev);
-						if (JoystickButton != null)
-						{
-							JoystickButton(instance, e);
-						}
-						if (JoystickButtonDown != null)
-						{
-							JoystickButtonDown(instance, e);
-						}
-					}
+					OnJoystickButtonDown(new JoystickButtonEventArgs(ev));
 					break;
 
 				case EventTypes.JoystickButtonUp:
-					if (JoystickButton != null || JoystickButtonUp != null) 
-					{
-						JoystickButtonEventArgs e = 
-							new JoystickButtonEventArgs(ev);
-						if (JoystickButton != null)
-						{
-							JoystickButton(instance, e);
-						}
-						if (JoystickButtonUp != null)
-						{
-							JoystickButtonUp(instance, e);
-						}
-					}
+					OnJoystickButtonUp(new JoystickButtonEventArgs(ev));
 					break;
 
 				case EventTypes.JoystickHatMotion:
-					if (JoystickHatMotion != null) 
-					{
-						JoystickHatMotion(instance, new JoystickHatEventArgs(ev));
-					}
+					OnJoystickHatMotion(new JoystickHatEventArgs(ev));
 					break;
 
 				case EventTypes.KeyDown:
-					if (Keyboard != null || KeyboardDown != null) 
-					{
-						KeyboardEventArgs e = new KeyboardEventArgs(ev);
-						if (KeyboardDown != null) 
-						{
-							KeyboardDown(instance, e);
-						}
-						if (Keyboard != null) 
-						{
-							Keyboard(instance, e);
-						}
-					}
+					OnKeyboardDown(new KeyboardEventArgs(ev));
 					break;
 
 				case EventTypes.KeyUp:
-					if (Keyboard != null || KeyboardUp != null) 
-					{
-						KeyboardEventArgs e = new KeyboardEventArgs(ev);
-						if (KeyboardUp != null) 
-						{
-							KeyboardUp(instance, e);
-						}
-						if (Keyboard != null) 
-						{
-							Keyboard(instance, e);
-						}
-					}
+					OnKeyboardUp(new KeyboardEventArgs(ev));
 					break;
 
 				case EventTypes.MouseButtonDown:
-					if (MouseButton != null)
-					{
-						MouseButton(instance, new MouseButtonEventArgs(ev));
-					}
-					if (MouseButtonDown != null)
-					{
-						MouseButtonDown(instance, new MouseButtonEventArgs(ev));
-					}
+					OnMouseButtonDown(new MouseButtonEventArgs(ev));
 					break;
 
 				case EventTypes.MouseButtonUp:
-					if (MouseButton != null)
-					{
-						MouseButton(instance, new MouseButtonEventArgs(ev));
-					}
-					if (MouseButtonUp != null)
-					{
-						MouseButtonUp(instance, new MouseButtonEventArgs(ev));
-					}
+					OnMouseButtonUp(new MouseButtonEventArgs(ev));
 					break;
 
 				case EventTypes.MouseMotion:
-					if (MouseMotion != null) 
-					{
-						MouseMotion(instance, new MouseMotionEventArgs(ev));
-					}
+					OnMouseMotion(new MouseMotionEventArgs(ev));
 					break;
 
 				case EventTypes.Quit:
-					if (Quit != null) 
-					{
-						Quit(instance, new QuitEventArgs(ev));
-					}
+					OnQuitEvent(new QuitEventArgs(ev));
 					break;
 
 				case EventTypes.UserEvent:
-					if (UserEvent != null || ChannelFinished != null || MusicFinished != null) 
-					{
-						object ret;
-						lock (instance) 
-						{
-							ret = UserEvents[ev.user.code];
-						}
-						if (ret != null) 
-						{
-							if (ret is ChannelFinishedEventArgs) 
-							{
-								if (ChannelFinished != null)
-								{
-									ChannelFinished(instance, (ChannelFinishedEventArgs)ret);
-								}
-							} 
-							else if (ret is MusicFinishedEventArgs) 
-							{
-								if (MusicFinished != null)
-								{
-									MusicFinished(instance, (MusicFinishedEventArgs)ret);
-								}
-							} 
-							else
-								UserEvent(instance, (UserEventArgs)ret);
-						}
-					}
+					OnUserEvent(new UserEventArgs(ev));
 					break;
 
 				case EventTypes.VideoExpose:
-					if (VideoExpose != null) 
-					{
-						VideoExpose(instance, new VideoExposeEventArgs(ev));
-					}
+					OnVideoExpose(new VideoExposeEventArgs(ev));
 					break;
 
 				case EventTypes.VideoResize:
-					if (VideoResize != null) 
-					{
-						VideoResize(instance, new VideoResizeEventArgs(ev));
-					}
+					OnVideoResize(new VideoResizeEventArgs(ev));
 					break;
+			}
+		}
+
+		static void OnActiveEvent(ActiveEventArgs e)
+		{
+			if (AppActive != null || MouseFocus != null || InputFocus != null) 
+			{
+				if (((byte)e.State & (byte)Focus.Mouse) != 0 && 
+					MouseFocus != null)
+				{
+					MouseFocus(instance, e);
+				}
+				if (((byte)e.State & (byte)Focus.Keyboard) != 0 && 
+					InputFocus != null)
+				{
+					InputFocus(instance, e);
+				}
+				if (((byte)e.State & (byte)Focus.Application) != 0 && 
+					AppActive != null)
+				{
+					AppActive(instance, e);
+				}
+			}
+		}
+
+		static void OnJoystickAxisMotion(JoystickAxisEventArgs e)
+		{
+			if (JoystickAxisMotion != null || 
+				JoystickHorizontalAxisMotion != null || 
+				JoystickVerticalAxisMotion != null) 
+			{						
+				if ((e.RawAxisValue < (-1)*JoystickAxisEventArgs.JoystickThreshold) ||
+					(e.RawAxisValue > JoystickAxisEventArgs.JoystickThreshold))
+				{	
+					if (e.AxisIndex == 0)
+					{
+						if (JoystickAxisMotion != null) 
+						{
+							JoystickAxisMotion(instance, e);
+						}
+						if (JoystickHorizontalAxisMotion != null) 
+						{
+							JoystickHorizontalAxisMotion(instance, e);
+						}
+					}
+					else if (e.AxisIndex == 1)
+					{
+						if (JoystickAxisMotion != null) 
+						{
+							JoystickAxisMotion(instance, e);
+						}
+						if (JoystickVerticalAxisMotion != null) 
+						{
+							JoystickVerticalAxisMotion(instance, e);
+						}
+					}
+					else
+					{
+						if (JoystickAxisMotion != null) 
+						{
+							JoystickAxisMotion(instance, e);
+						}
+					}
+				}
+			}
+		}
+
+		static void OnJoystickBallMotion(JoystickBallEventArgs e)
+		{
+			if (JoystickBallMotion != null) 
+			{
+				JoystickBallMotion(instance, e);
+			}
+		}
+
+		static void OnJoystickButtonDown(JoystickButtonEventArgs e)
+		{
+			if (JoystickButton != null || JoystickButtonDown != null) 
+			{
+				if (JoystickButton != null)
+				{
+					JoystickButton(instance, e);
+				}
+				if (JoystickButtonDown != null)
+				{
+					JoystickButtonDown(instance, e);
+				}
+			}
+		}
+
+		static void OnJoystickButtonUp(JoystickButtonEventArgs e)
+		{
+			if (JoystickButton != null || JoystickButtonUp != null) 
+			{
+				if (JoystickButton != null)
+				{
+					JoystickButton(instance, e);
+				}
+				if (JoystickButtonUp != null)
+				{
+					JoystickButtonUp(instance, e);
+				}
+			}
+		}
+
+		static void OnJoystickHatMotion(JoystickHatEventArgs e)
+		{
+			if (JoystickHatMotion != null) 
+			{
+				JoystickHatMotion(instance, e);
+			}
+		}
+
+		static void OnKeyboardDown(KeyboardEventArgs e)
+		{
+			if (Keyboard != null || KeyboardDown != null) 
+			{
+				if (KeyboardDown != null) 
+				{
+					KeyboardDown(instance, e);
+				}
+				if (Keyboard != null) 
+				{
+					Keyboard(instance, e);
+				}
+			}
+		}
+		static void OnKeyboardUp(KeyboardEventArgs e)
+		{
+			if (Keyboard != null || KeyboardUp != null) 
+			{
+				if (KeyboardUp != null) 
+				{
+					KeyboardUp(instance, e);
+				}
+				if (Keyboard != null) 
+				{
+					Keyboard(instance, e);
+				}
+			}
+		}
+
+		static void OnMouseButtonDown(MouseButtonEventArgs e)
+		{
+			if (MouseButton != null)
+			{
+				MouseButton(instance, e);
+			}
+			if (MouseButtonDown != null)
+			{
+				MouseButtonDown(instance, e);
+			}
+		}
+
+		static void OnMouseButtonUp(MouseButtonEventArgs e)
+		{
+			if (MouseButton != null)
+			{
+				MouseButton(instance, e);
+			}
+			if (MouseButtonUp != null)
+			{
+				MouseButtonUp(instance, e);
+			}
+		}
+
+		static void OnMouseMotion(MouseMotionEventArgs e)
+		{
+			if (MouseMotion != null) 
+			{
+				MouseMotion(instance, e);
+			}
+		}
+
+		static void OnQuitEvent(QuitEventArgs e)
+		{
+			if (Quit != null) 
+			{
+				Quit(instance, new QuitEventArgs());
+			}
+		}
+
+		static void OnUserEvent(UserEventArgs e)
+		{
+			if (UserEvent != null || ChannelFinished != null || MusicFinished != null) 
+			{
+				object ret;
+				lock (instance) 
+				{
+					ret = UserEvents[e.UserCode];
+				}
+				if (ret != null) 
+				{
+					if (ret is ChannelFinishedEventArgs) 
+					{
+						if (ChannelFinished != null)
+						{
+							ChannelFinished(instance, (ChannelFinishedEventArgs)ret);
+						}
+					} 
+					else if (ret is MusicFinishedEventArgs) 
+					{
+						if (MusicFinished != null)
+						{
+							MusicFinished(instance, (MusicFinishedEventArgs)ret);
+						}
+					} 
+					else
+						UserEvent(instance, (UserEventArgs)ret);
+				}
+			}
+		}
+
+
+		static void OnVideoExpose(VideoExposeEventArgs e)
+		{
+			if (VideoExpose != null) 
+			{
+				VideoExpose(instance, e);
+			}
+		}
+
+		static void OnVideoResize(VideoResizeEventArgs e)
+		{
+			if (VideoResize != null) 
+			{
+				VideoResize(instance, e);
 			}
 		}
 
