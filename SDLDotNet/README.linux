@@ -1,9 +1,0 @@
-SDL.NET 1.1 is the first version to include support for mono.
-
-Just type 'make'.
-
-I have noticed some problems already both with what is implemented and with
-behavior, but this is to be expected since mono is still in a development state.
-I will try to keep up mono development and update SDL.NET accordingly.
-
-	-W.W.
