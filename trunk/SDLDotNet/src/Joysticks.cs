@@ -30,7 +30,7 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Joysticks 
 	{
-		static private bool disposed = false;
+		static private bool disposed;
 
 		static readonly Joysticks instance = new Joysticks();
 

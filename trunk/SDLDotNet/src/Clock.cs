@@ -31,7 +31,7 @@ namespace SdlDotNet
 		int span;
 		const int spanDefault = 5;
 
-		int [] buckets = null;
+		int [] buckets;
 
 		/// <summary>
 		/// Constructor
@@ -59,12 +59,12 @@ namespace SdlDotNet
 		#region Counting
 		private long lastSecond = DateTime.Now.Second;
 
-		private long loops = 0;
+		private long loops;
 
-		/// <summary>
-		/// Object can respond to Tick events.
-		/// </summary>
-		public bool IsTickable { get { return true; } }
+//		/// <summary>
+//		/// Object can respond to Tick events.
+//		/// </summary>
+//		public bool IsTickable { get { return true; } }
 
 		/// <summary>
 		/// Activates the counter for the current second.

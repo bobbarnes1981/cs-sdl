@@ -30,7 +30,7 @@ namespace SdlDotNet
 	/// <remarks>Several SdlDotNet classes inherit from this class</remarks>
 	public abstract class BaseSdlResource : IDisposable 
 	{
-		private bool disposed = false;
+		private bool disposed;
 		private IntPtr handle;
 
 		/// <summary>

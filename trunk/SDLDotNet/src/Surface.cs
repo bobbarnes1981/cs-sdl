@@ -50,16 +50,16 @@ namespace SdlDotNet
 		/// int SDL_RLEACCEL = 0X00004000
 		/// int SDL_SRCALPHA = 0x00010000
 		/// </summary>
-		private Alphas alphaFlags = 0;
+		private Alphas alphaFlags;
 
 		/// <summary>
 		/// Private field. Used by the AlphaValue property 
 		/// </summary>
-		private byte alphaValue = 0;
+		private byte alphaValue;
 
-		private int colorKey = 0;
+		private int colorKey;
 
-		private bool disposed = false;
+		private bool disposed;
 		private IntPtr handle;
 
 		#region Constructors and Destructors

@@ -89,7 +89,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private string filename = null;
+		private string filename;
 
 		/// <summary>
 		/// Indexer for the Items in the Collection

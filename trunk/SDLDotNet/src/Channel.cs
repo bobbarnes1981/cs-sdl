@@ -31,8 +31,8 @@ namespace SdlDotNet
 	{
 		private int index;
 		private Sound sound;
-		private Sound queuedSound = null;
-		private Sound lastSound = null;
+		private Sound queuedSound;
+		private Sound lastSound;
 		private SdlMixer.ChannelFinishedDelegate channelFinishedDelegate;
 
 //		/// <summary>
@@ -309,7 +309,7 @@ namespace SdlDotNet
 		/// </param>
 		/// <returns>The number of channels fading out</returns>
 		/// <remarks></remarks>
-		public int FadeOut(int ms) 
+		public int Fadeout(int ms) 
 		{
 			return SdlMixer.Mix_FadeOutChannel(this.index, ms);
 		}
@@ -432,7 +432,7 @@ namespace SdlDotNet
 			}
 			else if (e.Action == SoundAction.Fadeout)
 			{
-				this.FadeOut(e.FadeoutTime);
+				this.Fadeout(e.FadeoutTime);
 			}
 			else
 			{

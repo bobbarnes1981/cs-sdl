@@ -29,7 +29,7 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class FontSystem
 	{
-		static private bool disposed = false;
+		static private bool disposed;
 		static readonly FontSystem instance = new FontSystem();
 
 		FontSystem()

@@ -35,7 +35,7 @@ namespace SdlDotNet
 	{
 		private IntPtr handle;
 		private Smpeg.SMPEG_Info movieInfo;
-		private bool disposed = false;
+		private bool disposed;
 
 		internal Movie(IntPtr handle) 
 		{

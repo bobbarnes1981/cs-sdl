@@ -40,7 +40,7 @@ namespace SdlDotNet
 	public sealed class Mixer
 	{
 		//static private SdlMixer.ChannelFinishedDelegate ChannelFinishedDelegate;
-		static private bool disposed = false;
+		static private bool disposed;
 		private const int DEFAULT_CHUNK_SIZE = 1024;
 		private const int DEFAULT_NUMBER_OF_CHANNELS = 8;
 		//private static ChannelList channelList = null;
@@ -505,24 +505,24 @@ namespace SdlDotNet
 		/// <summary>
 		/// Stop playing on all channels after a specified time interval
 		/// </summary>
-		/// <param name="ms">
+		/// <param name="milliseconds">
 		/// The number of milliseconds to stop playing after
 		/// </param>
-		public static void Expire(int ms) 
+		public static void Expire(int milliseconds) 
 		{
-			SdlMixer.Mix_ExpireChannel(-1, ms);
+			SdlMixer.Mix_ExpireChannel(-1, milliseconds);
 		}
 
 		/// <summary>
 		/// Fades out all channels
 		/// </summary>
-		/// <param name="ms">
+		/// <param name="milliseconds">
 		/// The number of milliseconds to fade out for
 		/// </param>
 		/// <returns>The number of channels fading out</returns>
-		public static int FadeOut(int ms) 
+		public static int Fadeout(int milliseconds) 
 		{
-			return SdlMixer.Mix_FadeOutChannel(-1, ms);
+			return SdlMixer.Mix_FadeOutChannel(-1, milliseconds);
 		}
 
 		/// <summary>

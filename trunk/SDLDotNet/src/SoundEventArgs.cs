@@ -46,7 +46,6 @@ namespace SdlDotNet
 		public SoundEventArgs(SoundAction action)
 		{
 			this.action = action;
-			this.fadeoutTime = 0;
 		}
 
 		private int fadeoutTime;

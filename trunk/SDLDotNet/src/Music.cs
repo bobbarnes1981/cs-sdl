@@ -34,8 +34,8 @@ namespace SdlDotNet
 
 		private IntPtr handle;
 		private string musicFilename;
-		private bool disposed = false;
-		private string queuedMusicFilename = null;
+		private bool disposed;
+		private string queuedMusicFilename;
 
 		static readonly Music instance = new Music();
 

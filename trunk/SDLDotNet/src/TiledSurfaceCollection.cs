@@ -76,8 +76,8 @@ namespace SdlDotNet.Sprites
 		#region Properties
 		private Surface surfaceTile;
 		private Size size;
-		private int rows = 0;
-		private int cols = 0;
+		private int rows;
+		private int cols;
 
 		// Provide the explicit interface member for ICollection.
 		void ICollection.CopyTo(Array array, int index)
