@@ -431,11 +431,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Move the video display area within the destination surface
 		/// </summary>
-		/// <param name="xAxis"></param>
-		/// <param name="yAxis"></param>
-		public void Move( int xAxis, int yAxis)
+		/// <param name="axisX"></param>
+		/// <param name="axisY"></param>
+		public void Move( int axisX, int axisY)
 		{
-			Smpeg.SMPEG_move(handle, xAxis, yAxis );
+			Smpeg.SMPEG_move(handle, axisX, axisY );
 		}
 
 		/// <summary>
@@ -443,13 +443,13 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="width"></param>
 		/// <param name="height"></param>
-		/// <param name="xAxis"></param>
-		/// <param name="yAxis"></param>
+		/// <param name="axisX"></param>
+		/// <param name="axisY"></param>
 		public void DisplayRegion( 
 			int width, int height, 
-			int xAxis, int yAxis)
+			int axisX, int axisY)
 		{
-			Smpeg.SMPEG_setdisplayregion(handle, xAxis, yAxis, width, height );
+			Smpeg.SMPEG_setdisplayregion(handle, axisX, axisY, width, height );
 		}
 
 		/// <summary>
