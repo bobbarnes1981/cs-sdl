@@ -24,20 +24,21 @@ Zip file contains:
 Development Environment:
 	Runtimes/Compilers:
 		.NET SDK 1.1 SP1 for now.
-		Future:
 		Mono on Windows
+		Future:
 		Mono on Linux
 		Mono on MacOSX
 		
 	IDEs:
-		Visual Studio 2003 - now
-		SharpDevelop-  once I get dnpb set up
+		Visual Studio 2003
+		SharpDevelop
 		VIM
+		Use dnpb for creating VS and SharpDevelop project files
 		
 	Tools:
 		NAnt 0.85 RC1
 		Nunit 2.2.0
-		dnpb 0.12.2a (soon)
+		dnpb 1.0.0
 		
 		Notes: NAnt will be the primary way to create release builds.
 		Using Nunit with GUI oriented programs is problematic, 
