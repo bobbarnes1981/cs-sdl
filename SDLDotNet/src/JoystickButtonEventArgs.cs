@@ -33,8 +33,10 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="device">The joystick index</param>
 		/// <param name="button">The button index</param>
-		/// <param name="down">True if the button was pressed, 
-		/// False if it was released</param>
+		/// <param name="down">
+		/// True if the button was pressed, 
+		/// False if it was released
+		/// </param>
 		public JoystickButtonEventArgs(int device, int button, bool down)
 		{
 			this.device = device;
