@@ -83,6 +83,33 @@ namespace SDLDotNet {
 			return SetVideoMode(width, height, bpp,
 				(int)(Natives.Video.HWSurface|Natives.Video.DoubleBuf|Natives.Video.FullScreen|Natives.Video.AnyFormat));
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="width">screen width</param>
+		/// <param name="height">screen height</param>
+		/// <param name="flags">sets mode parameters</param>
+		/// <returns></returns>
+		public Surface SetVideoMode(int width, int height, uint flags) 
+		{
+			return SetVideoMode(width, height, 0,
+				(int)(flags));
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="width">screen width</param>
+		/// <param name="height">screen height</param>
+		/// <param name="bpp">bits per pixel</param>
+		/// <param name="flags">sets mode parameters</param>
+		/// <returns></returns>
+		public Surface SetVideoMode(int width, int height, int bpp, uint flags) 
+		{
+			return SetVideoMode(width, height, bpp,
+				(int)(flags));
+		}
 		/// <summary>
 		/// Sets the windowed video mode using current screen bpp
 		/// </summary>
@@ -110,6 +137,7 @@ namespace SDLDotNet {
 				flags |= Natives.Video.NoFrame;
 			return SetVideoMode(width, height, bpp, (int)flags);
 		}
+		
 		/// <summary>
 		/// Sets a full-screen video mode suitable for drawing with OpenGL
 		/// </summary>
