@@ -23,6 +23,79 @@ using Tao.Sdl;
 
 namespace SdlDotNet 
 {
+	#region OpenGLAttributes
+	/// <summary>
+	/// Public enumeration for setting the OpenGL window Attributes
+	/// </summary>
+	/// <remarks>
+	/// While you can set most OpenGL attributes normally, 
+	/// the attributes list above must be known before SDL 
+	/// sets the video mode.
+	/// </remarks>
+	public enum OpenGLAttributes 
+	{
+		/// <summary>
+		/// Size of the framebuffer red component, in bits
+		/// </summary>
+		RedSize = Sdl.SDL_GL_RED_SIZE,
+		/// <summary>
+		/// Size of the framebuffer green component, in bits
+		/// </summary>
+		GreenSize = Sdl.SDL_GL_GREEN_SIZE,
+		/// <summary>
+		/// Size of the framebuffer blue component, in bits
+		/// </summary>
+		BlueSize = Sdl.SDL_GL_BLUE_SIZE,
+		/// <summary>
+		/// Size of the framebuffer alpha component, in bits
+		/// </summary>
+		AlphaSize = Sdl.SDL_GL_ALPHA_SIZE,
+		/// <summary>
+		/// Size of the framebuffer, in bits
+		/// </summary>
+		BufferSize = Sdl.SDL_GL_BUFFER_SIZE,
+		/// <summary>
+		/// 0 or 1, enable or disable double buffering
+		/// </summary>
+		DoubleBuffer = Sdl.SDL_GL_DOUBLEBUFFER,
+		/// <summary>
+		/// Size of the depth buffer, in bits
+		/// </summary>
+		DepthSize = Sdl.SDL_GL_DEPTH_SIZE,
+		/// <summary>
+		/// Size of the stencil buffer, in bits.
+		/// </summary>
+		StencilSize = Sdl.SDL_GL_STENCIL_SIZE,
+		/// <summary>
+		/// Size of the accumulation buffer red component, in bits.
+		/// </summary>
+		AccumulationRedSize = Sdl.SDL_GL_ACCUM_RED_SIZE,
+		/// <summary>
+		/// Size of the accumulation buffer green component, in bits.
+		/// </summary>
+		AccumulationGreenSize = Sdl.SDL_GL_ACCUM_GREEN_SIZE,
+		/// <summary>
+		/// Size of the accumulation buffer blue component, in bits.
+		/// </summary>
+		AccumulationBlueSize = Sdl.SDL_GL_ACCUM_BLUE_SIZE,
+		/// <summary>
+		/// Size of the accumulation buffer alpha component, in bits.
+		/// </summary>
+		AccumulationAlphaSize = Sdl.SDL_GL_ACCUM_ALPHA_SIZE,
+		/// <summary>
+		/// 
+		/// </summary>
+		Stereo = Sdl.SDL_GL_STEREO,
+		/// <summary>
+		/// 
+		/// </summary>
+		MultiSampleBuffers = Sdl.SDL_GL_MULTISAMPLEBUFFERS,
+		/// <summary>
+		/// 
+		/// </summary>
+		MultiSampleSamples = Sdl.SDL_GL_MULTISAMPLESAMPLES
+	}
+	#endregion OpenGLAttributes
 
 	/// <summary>
 	/// Provides methods to set the video mode, create video surfaces, 
@@ -335,11 +408,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Sets an OpenGL attribute
 		/// </summary>
-		/// <param name="attrib">The attribute to set</param>
-		/// <param name="attribValue">The new attribute value</param>
-		public void GLSetAttribute(Sdl.SDL_GLattr attrib, int attribValue) 
+		/// <param name="attribute">The attribute to set</param>
+		/// <param name="attributeValue">The new attribute value</param>
+		public void GLSetAttribute(OpenGLAttributes attribute, int attributeValue) 
 		{
-			if (Sdl.SDL_GL_SetAttribute(attrib, attribValue) != 0)
+			if (Sdl.SDL_GL_SetAttribute((int)attribute, attributeValue) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -347,12 +420,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the value of an OpenGL attribute
 		/// </summary>
-		/// <param name="attrib">The attribute to get</param>
+		/// <param name="attribute">The attribute to get</param>
 		/// <returns>The current attribute value</returns>
-		public int GLGetAttribute(Sdl.SDL_GLattr attrib) 
+		public int GLGetAttribute(OpenGLAttributes attribute) 
 		{
 			int ret;
-			if (Sdl.SDL_GL_GetAttribute(attrib, out ret) != 0)
+			if (Sdl.SDL_GL_GetAttribute((int)attribute, out ret) != 0)
 			{
 				throw SdlException.Generate();
 			}

@@ -94,6 +94,11 @@
         <Files>
             <Include>
                 <File
+                    RelPath = "ActiveEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "AssemblyInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -109,7 +114,17 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "ChannelFinishedEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Events.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ExposeEventArgs.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -144,7 +159,32 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "JoystickAxisEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "JoystickBallEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "JoystickButtonEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "JoystickHatEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Joysticks.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "KeyboardEventArgs.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -154,7 +194,32 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "MouseButtonEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "MouseMotionEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Music.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "MusicFinishedEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "QuitEventArgs.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ResizeEventArgs.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -200,6 +265,11 @@
                 />
                 <File
                     RelPath = "TtfException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "UserEventArgs.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

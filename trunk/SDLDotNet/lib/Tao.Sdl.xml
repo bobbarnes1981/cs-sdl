@@ -743,6 +743,1647 @@
             look on the screen.
             </summary>
         </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_AUDIO_STOPPED">
+            <summary>
+            SDL_audiostatus. Get the current audio state
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_AUDIO_PLAYING">
+            <summary>
+            SDL_audiostatus. Get the current audio state
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_AUDIO_PAUSED">
+            <summary>
+            SDL_audiostatus. Get the current audio state
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.CD_TRAYEMPTY">
+            <summary>
+            The CD tray is empty.
+            </summary>
+            <remarks>
+            CDstatus enum.
+            The possible states which a CD-ROM drive can be in.
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.CD_STOPPED">
+            <summary>
+            The CD has stopped playing.
+            </summary>
+            <remarks>
+            CDstatus enum.
+            The possible states which a CD-ROM drive can be in.
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.CD_PLAYING">
+            <summary>
+            The CD is playing.
+            </summary>
+            <remarks>
+            CDstatus enum.
+            The possible states which a CD-ROM drive can be in.
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.CD_PAUSED">
+            <summary>
+            The CD has been paused.
+            </summary>
+            <remarks>
+            CDstatus enum.
+            The possible states which a CD-ROM drive can be in.
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.CD_ERROR">
+            <summary>
+            An error occured while getting the status.
+            </summary>
+            <remarks>
+            CDstatus enum.
+            The possible states which a CD-ROM drive can be in.
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_ADDEVENT">
+            <summary>
+            If 'action' is SDL_ADDEVENT, up to 'numevents' events will 
+            be added to the back of the event queue.
+            </summary>
+            <remarks>
+            enum SDL_eventaction. 
+            Various event types.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_PEEKEVENT">
+            <summary>
+            If 'action' is SDL_PEEKEVENT, up to 'numevents' events at 
+            the front of the event queue, matching 'mask', will be 
+            returned and will not be removed from the queue.
+            </summary>
+            <remarks>
+            enum SDL_eventaction. 
+            Various event types.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GETEVENT">
+            <summary>
+            If 'action' is SDL_GETEVENT, up to 'numevents' events at 
+            the front of the event queue, matching 'mask', will be 
+            returned and will be removed from the queue.
+            </summary>
+            <remarks>
+            enum SDL_eventaction. 
+            Various event types.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_UNKNOWN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_FIRST">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_BACKSPACE">
+            <summary>
+            backspace. '\b'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_TAB">
+            <summary>
+            tab. '\t'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_CLEAR">
+            <summary>
+            clear
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_RETURN">
+            <summary>
+            return. '\r' 
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_PAUSE">
+            <summary>
+            pause
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_ESCAPE">
+            <summary>
+            escape. '^['
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_SPACE">
+            <summary>
+            space. ' '
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_EXCLAIM">
+            <summary>
+            exclaim. '!'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_QUOTEDBL">
+            <summary>
+            quotedbl. '"'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_HASH">
+            <summary>
+            hash. '#'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_DOLLAR">
+            <summary>
+            dollar. '$'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_AMPERSAND">
+            <summary>
+            ampersand. '&amp;'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_QUOTE">
+            <summary>
+            quote. '''
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LEFTPAREN">
+            <summary>
+            left parenthesis. '('
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_RIGHTPAREN">
+            <summary>
+            right parenthesis. ')'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_ASTERISK">
+            <summary>
+            asterisk. '*'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_PLUS">
+            <summary>
+            plus sign. '+'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_COMMA">
+            <summary>
+            comma. ';'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_MINUS">
+            <summary>
+            minus sign. '-'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_PERIOD">
+            <summary>
+            period. '.'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_SLASH">
+            <summary>
+            forward slash. '/'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_0">
+            <summary>
+            0
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_1">
+            <summary>
+            1
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_2">
+            <summary>
+            2
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_3">
+            <summary>
+            3
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_4">
+            <summary>
+            4
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_5">
+            <summary>
+            5
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_6">
+            <summary>
+            6
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_7">
+            <summary>
+            7
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_8">
+            <summary>
+            8
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_9">
+            <summary>
+            9
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_COLON">
+            <summary>
+            colon. ':'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_SEMICOLON">
+            <summary>
+            semicolon. ';'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LESS">
+            <summary>
+            less-than sign. '&lt;'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_EQUALS">
+            <summary>
+            equals sign. '='
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_GREATER">
+            <summary>
+            greater-than sign. '&gt;'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_QUESTION">
+            <summary>
+            question mark. '?'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_AT">
+            <summary>
+            at. '@'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LEFTBRACKET">
+            <summary>
+            left bracket. '['
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_BACKSLASH">
+            <summary>
+            backslash. '\'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_RIGHTBRACKET">
+            <summary>
+            right bracket. ']'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_CARET">
+            <summary>
+            caret. '^'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_UNDERSCORE">
+            <summary>
+            underscore.'_'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_BACKQUOTE">
+            <summary>
+            grave. '`'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_a">
+            <summary>
+            a
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_b">
+            <summary>
+            b
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_c">
+            <summary>
+            c
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_d">
+            <summary>
+            d
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_e">
+            <summary>
+            e
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_f">
+            <summary>
+            f
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_g">
+            <summary>
+            g
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_h">
+            <summary>
+            h
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_i">
+            <summary>
+            i
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_j">
+            <summary>
+            j
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_k">
+            <summary>
+            k
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_l">
+            <summary>
+            l
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_m">
+            <summary>
+            m
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_n">
+            <summary>
+            n
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_o">
+            <summary>
+            o
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_p">
+            <summary>
+            p
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_q">
+            <summary>
+            q
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_r">
+            <summary>
+            r
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_s">
+            <summary>
+            s
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_t">
+            <summary>
+            t
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_u">
+            <summary>
+            u
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_v">
+            <summary>
+            v
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_w">
+            <summary>
+            w
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_x">
+            <summary>
+            x
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_y">
+            <summary>
+            y
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_z">
+            <summary>
+            z
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_DELETE">
+            <summary>
+            delete. '^?'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_0">
+            <summary>
+            0xA0
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_9">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_10">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_11">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_12">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_13">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_14">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_15">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_16">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_17">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_18">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_19">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_20">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_21">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_22">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_23">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_24">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_25">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_26">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_27">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_28">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_29">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_30">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_31">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_32">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_33">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_34">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_35">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_36">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_37">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_38">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_39">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_40">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_41">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_42">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_43">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_44">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_45">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_46">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_47">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_48">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_49">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_50">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_51">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_52">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_53">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_54">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_55">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_56">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_57">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_58">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_59">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_60">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_61">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_62">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_63">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_64">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_65">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_66">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_67">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_68">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_69">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_70">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_71">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_72">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_73">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_74">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_75">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_76">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_77">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_78">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_79">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_80">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_81">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_82">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_83">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_84">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_85">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_86">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_87">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_88">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_89">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_90">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_91">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_92">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_93">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_94">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_WORLD_95">
+            <summary>
+            0xFF
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP0">
+            <summary>
+            keypad 0
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP1">
+            <summary>
+            keypad 1
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP2">
+            <summary>
+            keypad 2
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP3">
+            <summary>
+            keypad 3
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP4">
+            <summary>
+            keypad 4
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP5">
+            <summary>
+            keypad 5
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP6">
+            <summary>
+            keypad 6
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP7">
+            <summary>
+            keypad 7
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP8">
+            <summary>
+            keypad 8
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP9">
+            <summary>
+            keypad 9
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP_PERIOD">
+            <summary>
+            keypad period. '.'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP_DIVIDE">
+            <summary>
+            keypad divide. '/'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP_MULTIPLY">
+            <summary>
+            keypad multiply. '*'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP_MINUS">
+            <summary>
+            keypad minus. '-'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP_PLUS">
+            <summary>
+            keypad plus. '+'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP_ENTER">
+            <summary>
+            keypad enter. '\r'
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_KP_EQUALS">
+            <summary>
+            keypad equals. '='
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_UP">
+            <summary>
+            up arrow
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_DOWN">
+            <summary>
+            down arrow
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_RIGHT">
+            <summary>
+            right arrow
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LEFT">
+            <summary>
+            left arrow
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_INSERT">
+            <summary>
+            insert
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_HOME">
+            <summary>
+            home
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_END">
+            <summary>
+            end
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_PAGEUP">
+            <summary>
+            page up
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_PAGEDOWN">
+            <summary>
+            page down
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F1">
+            <summary>
+            F1
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F2">
+            <summary>
+            F2
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F3">
+            <summary>
+            F3
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F4">
+            <summary>
+            F4
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F5">
+            <summary>
+            F5
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F6">
+            <summary>
+            F6
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F7">
+            <summary>
+            F7
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F8">
+            <summary>
+            F8
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F9">
+            <summary>
+            F9
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F10">
+            <summary>
+            F10
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F11">
+            <summary>
+            F11
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F12">
+            <summary>
+            F12
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F13">
+            <summary>
+            F13
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F14">
+            <summary>
+            F14
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_F15">
+            <summary>
+            F15
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_NUMLOCK">
+            <summary>
+            numlock
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_CAPSLOCK">
+            <summary>
+            capslock
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_SCROLLOCK">
+            <summary>
+            scrollock
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_RSHIFT">
+            <summary>
+            right shift
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LSHIFT">
+            <summary>
+            left shift
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_RCTRL">
+            <summary>
+            right ctrl
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LCTRL">
+            <summary>
+            left ctrl
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_RALT">
+            <summary>
+            right alt
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LALT">
+            <summary>
+            left alt
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_RMETA">
+            <summary>
+            right meta
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LMETA">
+            <summary>
+            left meta
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LSUPER">
+            <summary>
+            Left "Windows" key
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_RSUPER">
+            <summary>
+            Right "Windows" key
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_MODE">
+            <summary>
+            "Alt Gr" key. Mode key
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_COMPOSE">
+            <summary>
+            Multi-key compose key
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_HELP">
+            <summary>
+            help
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_PRINT">
+            <summary>
+            print-screen
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_SYSREQ">
+            <summary>
+            SysRq
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_BREAK">
+            <summary>
+            break
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_MENU">
+            <summary>
+            menu
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_POWER">
+            <summary>
+            Power Macintosh power key
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_EURO">
+            <summary>
+            Some european keyboards
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_UNDO">
+            <summary>
+            Atari keyboard has Undo
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDLK_LAST">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_NONE">
+            <summary>
+            No modifiers applicable
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_LSHIFT">
+            <summary>
+            Left Shift is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_RSHIFT">
+            <summary>
+            Right Shift is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_LCTRL">
+            <summary>
+            Left Control is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_RCTRL">
+            <summary>
+            Right Control is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_LALT">
+            <summary>
+            Left Alt is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_RALT">
+            <summary>
+            Right Alt is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_LMETA">
+            <summary>
+            Left Meta is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_RMETA">
+            <summary>
+            Right Meta is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_NUM">
+            <summary>
+            Numlock is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_CAPS">
+            <summary>
+            Capslock is down
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_MODE">
+            <summary>
+            
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.KMOD_RESERVED">
+            <summary>
+            
+            </summary>
+            <remarks>
+            Enumeration of valid key mods (possibly OR'd together) 
+            </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_FALSE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_TRUE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_RED_SIZE">
+            <summary>
+            Size of the framebuffer red component, in bits
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_GREEN_SIZE">
+            <summary>
+            Size of the framebuffer green component, in bits
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_BLUE_SIZE">
+            <summary>
+            Size of the framebuffer blue component, in bits
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_ALPHA_SIZE">
+            <summary>
+            Size of the framebuffer alpha component, in bits
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            Public enumeration for setting the OpenGL window Attributes
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_BUFFER_SIZE">
+            <summary>
+            Size of the framebuffer, in bits
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_DOUBLEBUFFER">
+            <summary>
+            0 or 1, enable or disable double buffering
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_DEPTH_SIZE">
+            <summary>
+            Size of the depth buffer, in bits
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_STENCIL_SIZE">
+            <summary>
+            Size of the stencil buffer, in bits.
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_ACCUM_RED_SIZE">
+            <summary>
+            Size of the accumulation buffer red component, in bits.
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_ACCUM_GREEN_SIZE">
+            <summary>
+            Size of the accumulation buffer green component, in bits.
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_ACCUM_BLUE_SIZE">
+            <summary>
+            Size of the accumulation buffer blue component, in bits.
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_ACCUM_ALPHA_SIZE">
+            <summary>
+            Size of the accumulation buffer alpha component, in bits.
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_STEREO">
+            <summary>
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_MULTISAMPLEBUFFERS">
+            <summary>
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_MULTISAMPLESAMPLES">
+            <summary>
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GRAB_QUERY">
+            <summary>
+            Input grab state.
+            </summary>
+            <remarks>
+            enum SDL_GrabMode. 
+            </remarks>
+            <see cref="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(System.Int32)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GRAB_OFF">
+            <summary>
+            Input grab state.
+            </summary>
+            <remarks>
+            enum SDL_GrabMode. 
+            </remarks>
+            <see cref="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(System.Int32)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GRAB_ON">
+            <summary>
+            Input grab state.
+            </summary>
+            <remarks>
+            enum SDL_GrabMode. 
+            </remarks>
+            <see cref="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(System.Int32)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GRAB_FULLSCREEN">
+            <summary>
+            Input grab state.
+            </summary>
+            <remarks>
+            enum SDL_GrabMode. 
+            </remarks>
+            <see cref="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(System.Int32)"/>
+        </member>
         <member name="F:Tao.Sdl.Sdl.AUDIO_U16">
             <summary>
             Unsigned 16-bit little-endian samples
@@ -1250,10 +2891,9 @@
             </code></p>
             </remarks>
             <returns>Returns either SDL_AUDIO_STOPPED, 
-            SDL_AUDIO_PAUSED or SDL_AUDIO_PLAYING 
+            SDL_AUDIO_PAUSED or SDL_AUDIO_PLAYING (SDLaudiostatus enum)
             depending on the current audio state.</returns>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_PauseAudio(System.Int32)"/>
-            <seealso cref="T:Tao.Sdl.Sdl.SDL_audiostatus"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_PauseAudio(System.Int32)">
             <summary>
@@ -1594,18 +3234,17 @@
             </remarks>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_OpenAudio(System.IntPtr,System.IntPtr)"/>
         </member>
-        <member name="M:Tao.Sdl.Sdl.CD_INDRIVE(Tao.Sdl.Sdl.CDstatus)">
+        <member name="M:Tao.Sdl.Sdl.CD_INDRIVE(System.Int32)">
             <summary>
             Given a status, returns true if there's a disk in the drive.
             </summary>
             <remarks>
             <p>Binds to C-macro call in SDL_cdrom.h:
-            <code>#define CD_INDRIVE(status)	((int)status &gt; 0)
+            <code>#define CD_INDRIVE(status)	((int)status > 0)
             </code></p>
             </remarks>
-            <param name="status"></param>
+            <param name="status">CDstatus enum</param>
             <returns>Returns 1 if true and 0 if false</returns>
-            <seealso cref="T:Tao.Sdl.Sdl.CDstatus"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.FRAMES_TO_MSF(System.Int32,System.Int32@,System.Int32@,System.Int32@)">
             <summary>
@@ -1791,7 +3430,7 @@
             </code>
              </example>
              <param name="cdrom"></param>
-             <returns></returns>
+             <returns>CDstatus enum</returns>
              <seealso cref="T:Tao.Sdl.Sdl.SDL_CD"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_CDPlay(System.IntPtr,System.Int32,System.Int32)">
@@ -1937,7 +3576,7 @@
                 <code>extern DECLSPEC SDL_bool SDLCALL SDL_HasRDTSC()</code>
                 </p>
             </remarks>
-            <returns>Returns true if the CPU has the RDTSC instruction.</returns>
+            <returns>Returns SDL_TRUE if the CPU has the RDTSC instruction.</returns>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_HasMMX">
             <summary>
@@ -1948,7 +3587,7 @@
                 <code>extern DECLSPEC SDL_bool SDLCALL SDL_HasMMX()</code>
                 </p>
             </remarks>
-            <returns>Returns true if the CPU has MMX features.</returns>
+            <returns>Returns SDL_TRUE if the CPU has MMX features.</returns>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_HasMMXExt">
             <summary>
@@ -1959,7 +3598,7 @@
                 <code>extern DECLSPEC SDL_bool SDLCALL SDL_HasMMXExt()</code>
                 </p>
             </remarks>
-            <returns>Returns true if the CPU has MMX Ext. features.</returns>
+            <returns>Returns SDL_TRUE if the CPU has MMX Ext. features.</returns>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_Has3DNow">
             <summary>
@@ -1970,7 +3609,7 @@
                 <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_Has3DNow()</code>
                 </p>
             </remarks>
-            <returns>Returns true if the CPU has 3DNow features.</returns>
+            <returns>Returns SDL_TRUE if the CPU has 3DNow features.</returns>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_HasSSE">
             <summary>
@@ -1981,7 +3620,7 @@
                 <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_HasSSE()</code>
                 </p>
             </remarks>
-            <returns>Returns true if the CPU has SSE features.</returns>
+            <returns>Returns SDL_TRUE if the CPU has SSE features.</returns>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_HasSSE2">
             <summary>
@@ -1992,7 +3631,7 @@
                 <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_HasSSE2()</code>
                 </p>
             </remarks>
-            <returns>Returns true if the CPU has SSE2 features.</returns>
+            <returns>Returns SDL_TRUE if the CPU has SSE2 features.</returns>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_HasAltiVec">
             <summary>
@@ -2003,7 +3642,7 @@
                 <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_HasAltiVec()</code>
                 </p>
             </remarks>
-            <returns>Returns true if the CPU has AltiVec features.</returns>
+            <returns>Returns SDL_TRUE if the CPU has AltiVec features.</returns>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_SetError(System.String)">
             <summary>
@@ -2065,7 +3704,7 @@
             </remarks>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_PollEvent(Tao.Sdl.Sdl.SDL_Event@)"/>
         </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,Tao.Sdl.Sdl.SDL_eventaction,System.Int32)">
+        <member name="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)">
             <summary>
             Checks the event queue for messages and optionally returns them.
             </summary>
@@ -2091,7 +3730,7 @@
             </remarks>
             <param name="events"></param>
             <param name="numEvents"></param>
-            <param name="action"></param>
+            <param name="action">SDL_eventaction enum</param>
             <param name="mask"></param>
             <returns>
             This function returns the number of events actually stored,
@@ -2147,7 +3786,7 @@
              are none available</returns>
              <seealso cref="M:Tao.Sdl.Sdl.SDL_WaitEvent(Tao.Sdl.Sdl.SDL_Event@)"/>
               <seealso cref="T:Tao.Sdl.Sdl.SDL_Event"/>
-              <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,Tao.Sdl.Sdl.SDL_eventaction,System.Int32)"/>
+              <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_WaitEvent(Tao.Sdl.Sdl.SDL_Event@)">
             <summary>
@@ -2190,7 +3829,7 @@
             </returns>
             <seealso cref="T:Tao.Sdl.Sdl.SDL_Event"/>
              <seealso cref="M:Tao.Sdl.Sdl.SDL_PollEvent(Tao.Sdl.Sdl.SDL_Event@)"/>
-             <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,Tao.Sdl.Sdl.SDL_eventaction,System.Int32)"/>
+             <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_SetEventFilter(Tao.Sdl.Sdl.SDL_EventFilter)">
             <summary>
@@ -2215,7 +3854,7 @@
               signal, it will bypass the internal queue and be delivered to the
                application at the next event poll.</p>
             <p>Note: Events pushed onto the queue with 
-            <see cref="M:Tao.Sdl.Sdl.SDL_PushEvent(Tao.Sdl.Sdl.SDL_Event@)"/> or <see cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,Tao.Sdl.Sdl.SDL_eventaction,System.Int32)"/> 
+            <see cref="M:Tao.Sdl.Sdl.SDL_PushEvent(Tao.Sdl.Sdl.SDL_Event@)"/> or <see cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)"/> 
             do not get passed through the event filter.</p>
             <p>Note: Be Careful! The event filter function may run in a 
             different thread so be careful what you do within it.</p>
@@ -2777,7 +4416,6 @@
             </code>
             </example>
             <param name="numkeys"></param>
-            <seealso cref="T:Tao.Sdl.Sdl.SDLKey"/>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_PumpEvents"/> 
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_GetModState">
@@ -2791,11 +4429,11 @@
             </code></p>
             </remarks>
             <returns>The return value can be an OR'd combination of the 
-            <see cref="T:Tao.Sdl.Sdl.SDLMod"/> enum.
+            SDLMod enum.
             </returns>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_GetKeyState(System.Int32@)"/>
         </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_SetModState(Tao.Sdl.Sdl.SDLMod)">
+        <member name="M:Tao.Sdl.Sdl.SDL_SetModState(System.Int32)">
             <summary>
             Set the current key modifier state. 
             </summary>
@@ -2804,7 +4442,7 @@
             impose modifier key states on your application.
             <p>Simply pass your desired modifier states into modstate. 
             This value my be a logical OR'd combination of 
-            <see cref="T:Tao.Sdl.Sdl.SDLMod"/>.</p>
+            SDLMod.</p>
              <p>Binds to C-function in SDL_keyboard.h
              <code>void SDL_SetModState(SDLMod modstate)
              </code></p>
@@ -2812,7 +4450,7 @@
             <param name="modstate"></param>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_GetModState"/>
         </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_GetKeyName(Tao.Sdl.Sdl.SDLKey)">
+        <member name="M:Tao.Sdl.Sdl.SDL_GetKeyName(System.Int32)">
             <summary>
             Get the name of an SDL virtual keysym
             </summary>
@@ -2825,7 +4463,6 @@
             <returns>
             Returns the SDL-defined name of the SDLKey key.
             </returns>
-            <seealso cref="T:Tao.Sdl.Sdl.SDLKey"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_GetMouseState(System.Int32@,System.Int32@)">
             <summary>
@@ -3260,7 +4897,7 @@
                 The timer ID to remove.
             </param>
             <returns>
-                A boolean value indicating success.
+                A boolean value indicating success. SDL_TRUE or SDL_FALSE.
             </returns>
             <remarks>
             <p>
@@ -3513,7 +5150,7 @@
                             <term><see cref="F:Tao.Sdl.Sdl.SDL_OPENGL"/></term>
                             <description>Create an OpenGL rendering context. 
                             You should have previously set OpenGL 
-                            video attributes with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32)"/>.
+                            video attributes with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>.
                             </description>
                         </item>
                         <item>
@@ -4867,43 +6504,42 @@
             <code>void SDL_GL_SwapBuffers(void )
             </code></p></remarks>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_SetVideoMode(System.Int32,System.Int32,System.Int32,System.Int32)"/>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
         </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32)">
+        <member name="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)">
             <summary>
             Set a special SDL/OpenGL attribute.
             </summary>
             <remarks>
-            Sets the OpenGL <see cref="T:Tao.Sdl.Sdl.SDL_GLattr">attribute</see> attr to value. 
+            Sets the OpenGL attribute attr to value. 
             The attributes you set don't 
             take effect until after a call to <see cref="M:Tao.Sdl.Sdl.SDL_SetVideoMode(System.Int32,System.Int32,System.Int32,System.Int32)"/>.
              You should use 
-            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32@)"/> to check the values after a 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/> to check the values after a 
             SDL_SetVideoMode call.
             <p>Binds to C-function call in SDL_video.h:
             <code>int SDL_GL_SetAttribute(SDL_GLattr attr, int value);
             </code></p></remarks>
-            <param name="attr"></param>
+            <param name="attr">SDL_GLattr enum</param>
             <param name="val"></param>
             <returns>Returns 0 on success, or -1 on error.</returns>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32@)"/>
-            <seealso cref="T:Tao.Sdl.Sdl.SDL_GLattr"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
         </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32@)">
+        <member name="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)">
             <summary>
             Get the value of a special SDL/OpenGL attribute
             </summary>
             <remarks>
             Places the value of the SDL/OpenGL 
-            <see cref="T:Tao.Sdl.Sdl.SDL_GLattr">attribute</see> attr into value. This is 
+            attribute attr into value. This is 
             useful after a call to <see cref="M:Tao.Sdl.Sdl.SDL_SetVideoMode(System.Int32,System.Int32,System.Int32,System.Int32)"/> to check 
             whether your attributes have been 
-            <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32)">set</see> as you expected.
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)">set</see> as you expected.
             <p>Binds to C-function call in SDL_video.h:
             <code>int SDL_GL_GetAttribute(SDLGLattr attr, int *value)
             </code></p>
             </remarks>
-            <param name="attr"></param>
+            <param name="attr">SDL_GLattr enum</param>
             <param name="val"></param>
             <returns>Returns 0 on success, or -1 on an error.</returns>
         </member>
@@ -4995,7 +6631,7 @@
              <param name="surface"></param>
              <returns>Returns 0 on failure or 1 on success.</returns>
         </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(Tao.Sdl.Sdl.SDL_GrabMode)">
+        <member name="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(System.Int32)">
             <summary>
             Grabs mouse and keyboard input.
             </summary>
@@ -5011,10 +6647,9 @@
             <p>Binds to C-function call in SDL_video.h:
             <code>SDL_GrabMode SDL_WM_GrabInput(SDL_GrabMode mode)</code></p>
             </remarks>
-            <param name="mode"></param>
+            <param name="mode">SDL_GrabMode</param>
             <returns>The current/new SDL_GrabMode.
             </returns>
-            <seealso cref="T:Tao.Sdl.Sdl.SDL_GrabMode"/>
         </member>
         <member name="P:Tao.Sdl.Sdl.AUDIO_U16SYS">
             <summary>
@@ -5073,1462 +6708,6 @@
             <returns>
             Returns the version number as a numeric value: (1.2.7 -> 1207)
             </returns>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.SDL_audiostatus">
-            <summary>
-            Get the current audio state
-            </summary>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_GetAudioStatus"/>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_audiostatus.SDL_AUDIO_STOPPED">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_audiostatus.SDL_AUDIO_PLAYING">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_audiostatus.SDL_AUDIO_PAUSED">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.CDstatus">
-            <summary>
-            The possible states which a CD-ROM drive can be in.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.CDstatus.CD_TRAYEMPTY">
-            <summary>
-            The CD tray is empty.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.CDstatus.CD_STOPPED">
-            <summary>
-            The CD has stopped playing.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.CDstatus.CD_PLAYING">
-            <summary>
-            The CD is playing.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.CDstatus.CD_PAUSED">
-            <summary>
-            The CD has been paused.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.CDstatus.CD_ERROR">
-            <summary>
-            An error occured while getting the status.
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.SDL_eventaction">
-            <summary>
-            Various event types.
-            </summary>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,Tao.Sdl.Sdl.SDL_eventaction,System.Int32)"/>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_eventaction.SDL_ADDEVENT">
-            <summary>
-            If 'action' is SDL_ADDEVENT, up to 'numevents' events will 
-            be added to the back of the event queue.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_eventaction.SDL_PEEKEVENT">
-            <summary>
-            If 'action' is SDL_PEEKEVENT, up to 'numevents' events at 
-            the front of the event queue, matching 'mask', will be 
-            returned and will not be removed from the queue.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_eventaction.SDL_GETEVENT">
-            <summary>
-            If 'action' is SDL_GETEVENT, up to 'numevents' events at 
-            the front of the event queue, matching 'mask', will be 
-            returned and will be removed from the queue.
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.SDLKey">
-            <summary>
-            What we really want is a mapping of every raw key on the keyboard.
-            To support international keyboards, we use the range 0xA1 - 0xFF
-            as international virtual keycodes.  
-            We'll follow in the footsteps of X11...
-            The keyboard syms have been cleverly chosen to map to ASCII
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_UNKNOWN">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_FIRST">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_BACKSPACE">
-            <summary>
-            backspace. '\b'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_TAB">
-            <summary>
-            tab. '\t'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_CLEAR">
-            <summary>
-            clear
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_RETURN">
-            <summary>
-            return. '\r' 
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_PAUSE">
-            <summary>
-            pause
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_ESCAPE">
-            <summary>
-            escape. '^['
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_SPACE">
-            <summary>
-            space. ' '
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_EXCLAIM">
-            <summary>
-            exclaim. '!'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_QUOTEDBL">
-            <summary>
-            quotedbl. '"'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_HASH">
-            <summary>
-            hash. '#'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_DOLLAR">
-            <summary>
-            dollar. '$'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_AMPERSAND">
-            <summary>
-            ampersand. '&amp;'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_QUOTE">
-            <summary>
-            quote. '''
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LEFTPAREN">
-            <summary>
-            left parenthesis. '('
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_RIGHTPAREN">
-            <summary>
-            right parenthesis. ')'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_ASTERISK">
-            <summary>
-            asterisk. '*'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_PLUS">
-            <summary>
-            plus sign. '+'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_COMMA">
-            <summary>
-            comma. ','
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_MINUS">
-            <summary>
-            minus sign. '-'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_PERIOD">
-            <summary>
-            period. '.'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_SLASH">
-            <summary>
-            forward slash. '/'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_0">
-            <summary>
-            0
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_1">
-            <summary>
-            1
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_2">
-            <summary>
-            2
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_3">
-            <summary>
-            3
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_4">
-            <summary>
-            4
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_5">
-            <summary>
-            5
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_6">
-            <summary>
-            6
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_7">
-            <summary>
-            7
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_8">
-            <summary>
-            8
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_9">
-            <summary>
-            9
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_COLON">
-            <summary>
-            colon. ':'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_SEMICOLON">
-            <summary>
-            semicolon. ';'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LESS">
-            <summary>
-            less-than sign. '&lt;'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_EQUALS">
-            <summary>
-            equals sign. '='
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_GREATER">
-            <summary>
-            greater-than sign. '&gt;'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_QUESTION">
-            <summary>
-            question mark. '?'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_AT">
-            <summary>
-            at. '@'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LEFTBRACKET">
-            <summary>
-            left bracket. '['
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_BACKSLASH">
-            <summary>
-            backslash. '\'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_RIGHTBRACKET">
-            <summary>
-            right bracket. ']'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_CARET">
-            <summary>
-            caret. '^'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_UNDERSCORE">
-            <summary>
-            underscore.'_'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_BACKQUOTE">
-            <summary>
-            grave. '`'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_a">
-            <summary>
-            a
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_b">
-            <summary>
-            b
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_c">
-            <summary>
-            c
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_d">
-            <summary>
-            d
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_e">
-            <summary>
-            e
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_f">
-            <summary>
-            f
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_g">
-            <summary>
-            g
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_h">
-            <summary>
-            h
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_i">
-            <summary>
-            i
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_j">
-            <summary>
-            j
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_k">
-            <summary>
-            k
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_l">
-            <summary>
-            l
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_m">
-            <summary>
-            m
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_n">
-            <summary>
-            n
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_o">
-            <summary>
-            o
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_p">
-            <summary>
-            p
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_q">
-            <summary>
-            q
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_r">
-            <summary>
-            r
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_s">
-            <summary>
-            s
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_t">
-            <summary>
-            t
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_u">
-            <summary>
-            u
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_v">
-            <summary>
-            v
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_w">
-            <summary>
-            w
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_x">
-            <summary>
-            x
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_y">
-            <summary>
-            y
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_z">
-            <summary>
-            z
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_DELETE">
-            <summary>
-            delete. '^?'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_0">
-            <summary>
-            0xA0
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_1">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_3">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_4">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_5">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_6">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_7">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_8">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_9">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_10">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_11">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_12">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_13">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_14">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_15">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_16">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_17">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_18">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_19">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_20">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_21">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_22">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_23">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_24">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_25">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_26">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_27">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_28">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_29">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_30">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_31">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_32">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_33">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_34">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_35">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_36">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_37">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_38">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_39">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_40">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_41">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_42">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_43">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_44">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_45">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_46">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_47">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_48">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_49">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_50">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_51">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_52">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_53">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_54">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_55">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_56">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_57">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_58">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_59">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_60">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_61">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_62">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_63">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_64">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_65">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_66">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_67">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_68">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_69">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_70">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_71">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_72">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_73">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_74">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_75">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_76">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_77">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_78">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_79">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_80">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_81">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_82">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_83">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_84">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_85">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_86">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_87">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_88">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_89">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_90">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_91">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_92">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_93">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_94">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_WORLD_95">
-            <summary>
-            0xFF
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP0">
-            <summary>
-            keypad 0
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP1">
-            <summary>
-            keypad 1
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP2">
-            <summary>
-            keypad 2
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP3">
-            <summary>
-            keypad 3
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP4">
-            <summary>
-            keypad 4
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP5">
-            <summary>
-            keypad 5
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP6">
-            <summary>
-            keypad 6
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP7">
-            <summary>
-            keypad 7
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP8">
-            <summary>
-            keypad 8
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP9">
-            <summary>
-            keypad 9
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP_PERIOD">
-            <summary>
-            keypad period. '.'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP_DIVIDE">
-            <summary>
-            keypad divide. '/'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP_MULTIPLY">
-            <summary>
-            keypad multiply. '*'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP_MINUS">
-            <summary>
-            keypad minus. '-'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP_PLUS">
-            <summary>
-            keypad plus. '+'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP_ENTER">
-            <summary>
-            keypad enter. '\r'
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_KP_EQUALS">
-            <summary>
-            keypad equals. '='
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_UP">
-            <summary>
-            up arrow
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_DOWN">
-            <summary>
-            down arrow
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_RIGHT">
-            <summary>
-            right arrow
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LEFT">
-            <summary>
-            left arrow
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_INSERT">
-            <summary>
-            insert
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_HOME">
-            <summary>
-            home
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_END">
-            <summary>
-            end
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_PAGEUP">
-            <summary>
-            page up
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_PAGEDOWN">
-            <summary>
-            page down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F1">
-            <summary>
-            F1
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F2">
-            <summary>
-            F2
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F3">
-            <summary>
-            F3
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F4">
-            <summary>
-            F4
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F5">
-            <summary>
-            F5
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F6">
-            <summary>
-            F6
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F7">
-            <summary>
-            F7
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F8">
-            <summary>
-            F8
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F9">
-            <summary>
-            F9
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F10">
-            <summary>
-            F10
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F11">
-            <summary>
-            F11
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F12">
-            <summary>
-            F12
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F13">
-            <summary>
-            F13
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F14">
-            <summary>
-            F14
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_F15">
-            <summary>
-            F15
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_NUMLOCK">
-            <summary>
-            numlock
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_CAPSLOCK">
-            <summary>
-            capslock
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_SCROLLOCK">
-            <summary>
-            scrollock
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_RSHIFT">
-            <summary>
-            right shift
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LSHIFT">
-            <summary>
-            left shift
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_RCTRL">
-            <summary>
-            right ctrl
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LCTRL">
-            <summary>
-            left ctrl
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_RALT">
-            <summary>
-            right alt
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LALT">
-            <summary>
-            left alt
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_RMETA">
-            <summary>
-            right meta
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LMETA">
-            <summary>
-            left meta
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LSUPER">
-            <summary>
-            Left "Windows" key
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_RSUPER">
-            <summary>
-            Right "Windows" key
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_MODE">
-            <summary>
-            "Alt Gr" key. Mode key
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_COMPOSE">
-            <summary>
-            Multi-key compose key
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_HELP">
-            <summary>
-            help
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_PRINT">
-            <summary>
-            print-screen
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_SYSREQ">
-            <summary>
-            SysRq
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_BREAK">
-            <summary>
-            break
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_MENU">
-            <summary>
-            menu
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_POWER">
-            <summary>
-            Power Macintosh power key
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_EURO">
-            <summary>
-            Some european keyboards
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_UNDO">
-            <summary>
-            Atari keyboard has Undo
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLKey.SDLK_LAST">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.SDLMod">
-            <summary>
-            Enumeration of valid key mods (possibly OR'd together) 
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_NONE">
-            <summary>
-            No modifiers applicable
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_LSHIFT">
-            <summary>
-            Left Shift is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_RSHIFT">
-            <summary>
-            Right Shift is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_LCTRL">
-            <summary>
-            Left Control is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_RCTRL">
-            <summary>
-            Right Control is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_LALT">
-            <summary>
-            Left Alt is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_RALT">
-            <summary>
-            Right Alt is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_LMETA">
-            <summary>
-            Left Meta is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_RMETA">
-            <summary>
-            Right Meta is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_NUM">
-            <summary>
-            Numlock is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_CAPS">
-            <summary>
-            Capslock is down
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_MODE">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDLMod.KMOD_RESERVED">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.SDL_bool">
-            <summary>
-                
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_bool.SDL_FALSE">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_bool.SDL_TRUE">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.SDL_GLattr">
-            <summary>
-            Public enumeration for setting the OpenGL window Attributes
-            </summary>
-            <remarks>
-            While you can set most OpenGL attributes normally, 
-            the attributes list above must be known before SDL 
-            sets the video mode. These attributes a set and read 
-            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32)"/> and <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32@)"/>.
-            </remarks>
-            <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32)"/>
-            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(Tao.Sdl.Sdl.SDL_GLattr,System.Int32@)"/>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_RED_SIZE">
-            <summary>
-            Size of the framebuffer red component, in bits
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_GREEN_SIZE">
-            <summary>
-            Size of the framebuffer green component, in bits
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_BLUE_SIZE">
-            <summary>
-            Size of the framebuffer blue component, in bits
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_ALPHA_SIZE">
-            <summary>
-            Size of the framebuffer alpha component, in bits
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_BUFFER_SIZE">
-            <summary>
-            Size of the framebuffer, in bits
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_DOUBLEBUFFER">
-            <summary>
-            0 or 1, enable or disable double buffering
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_DEPTH_SIZE">
-            <summary>
-            Size of the depth buffer, in bits
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_STENCIL_SIZE">
-            <summary>
-            Size of the stencil buffer, in bits.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_ACCUM_RED_SIZE">
-            <summary>
-            Size of the accumulation buffer red component, in bits.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_ACCUM_GREEN_SIZE">
-            <summary>
-            Size of the accumulation buffer green component, in bits.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_ACCUM_BLUE_SIZE">
-            <summary>
-            Size of the accumulation buffer blue component, in bits.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_ACCUM_ALPHA_SIZE">
-            <summary>
-            Size of the accumulation buffer alpha component, in bits.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_STEREO">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_MULTISAMPLEBUFFERS">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GLattr.SDL_GL_MULTISAMPLESAMPLES">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.SDL_GrabMode">
-            <summary>
-            This function allows you to set and query the input grab state of
-            the application.  It returns the new input grab state.
-            </summary>
-            <see cref="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(Tao.Sdl.Sdl.SDL_GrabMode)"/>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GrabMode.SDL_GRAB_QUERY">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GrabMode.SDL_GRAB_OFF">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GrabMode.SDL_GRAB_ON">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_GrabMode.SDL_GRAB_FULLSCREEN">
-            <summary>
-            
-            </summary>
         </member>
         <member name="T:Tao.Sdl.Sdl.SDL_AudioSpec">
             <summary>
@@ -6876,8 +7055,11 @@
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_CD.status">
             <summary>
-            Current drive <see cref="M:Tao.Sdl.Sdl.SDL_CDStatus(System.IntPtr)">status</see>
+            Current drive status
             </summary>
+            <remarks>
+            SDL_CDStatus enum
+            </remarks>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_CD.numtracks">
             <summary>
@@ -7014,7 +7196,7 @@
              macro (see <see cref="M:Tao.Sdl.Sdl.SDL_GetMouseState(System.Int32@,System.Int32@)"/>).</p>
             <p>If the cursor is hidden (<see cref="M:Tao.Sdl.Sdl.SDL_ShowCursor(System.Int32)"/>(0))
              and the input is 
-            grabbed (<see cref="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(Tao.Sdl.Sdl.SDL_GrabMode)"/>(SDL_GRAB_ON)), 
+            grabbed (<see cref="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(System.Int32)"/>(SDL_GRAB_ON)), 
             then the mouse will give
              relative motion events even when the cursor reaches the edge fo 
              the screen. This is currently only implemented on Windows and 
@@ -7612,7 +7794,7 @@
              <p>Reading events on the event queue</p>
              <p>Placing events on the event queue</p>
              <p>Reading events from the event queue is done with either
-              <see cref="M:Tao.Sdl.Sdl.SDL_PollEvent(Tao.Sdl.Sdl.SDL_Event@)"/> or <see cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,Tao.Sdl.Sdl.SDL_eventaction,System.Int32)"/>.
+              <see cref="M:Tao.Sdl.Sdl.SDL_PollEvent(Tao.Sdl.Sdl.SDL_Event@)"/> or <see cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)"/>.
                We'll use SDL_PollEvent and step through an example.</p>
              <p>First off, we create an empty SDL_Event structure.</p> 
              <p><code>SDL_Event test_event;</code></p>
@@ -7653,7 +7835,7 @@
              printf("Event queue empty.\n");</code>
              <p>It is also possible to push events onto the event queue 
              and so use it as a two-way communication path. Both 
-             <see cref="M:Tao.Sdl.Sdl.SDL_PushEvent(Tao.Sdl.Sdl.SDL_Event@)"/> and <see cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,Tao.Sdl.Sdl.SDL_eventaction,System.Int32)"/>
+             <see cref="M:Tao.Sdl.Sdl.SDL_PushEvent(Tao.Sdl.Sdl.SDL_Event@)"/> and <see cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)"/>
               allow you to place events onto the event queue. This is 
               usually used to place a SDL_USEREVENT on the event queue,
                however you could use it to post fake input events if you 
@@ -7692,7 +7874,7 @@
              </code></p></p></remarks>
              <seealso cref="M:Tao.Sdl.Sdl.SDL_PollEvent(Tao.Sdl.Sdl.SDL_Event@)"/>
              <seealso cref="M:Tao.Sdl.Sdl.SDL_PushEvent(Tao.Sdl.Sdl.SDL_Event@)"/>
-             <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,Tao.Sdl.Sdl.SDL_eventaction,System.Int32)"/>
+             <seealso cref="M:Tao.Sdl.Sdl.SDL_PeepEvents(Tao.Sdl.Sdl.SDL_Event[],System.Int32,System.Int32,System.Int32)"/>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_Event.type">
             <summary>
@@ -9953,6 +10135,56 @@
              called for the setting to take effect.
             </summary>
         </member>
+        <member name="F:Tao.Sdl.SdlMixer.MIX_NO_FADING">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MIX_FADING_OUT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MIX_FADING_IN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MUS_NONE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MUS_CMD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MUS_WAV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MUS_MOD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MUS_MID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MUS_OGG">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MUS_MP3">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Tao.Sdl.SdlMixer.#ctor">
             <summary>
                 Prevents instantiation.
@@ -10452,7 +10684,6 @@
             <returns>The type of music or if music is NULL then 
             the currently playing music type, otherwise MUS_NONE
              if no music is playing.</returns>
-             <seealso cref="T:Tao.Sdl.SdlMixer.Mix_MusicType"/>
              <seealso cref="M:Tao.Sdl.SdlMixer.Mix_SetPosition(System.Int32,System.Int16,System.Byte)"/>
              <example>
              <code>
@@ -10483,7 +10714,6 @@
             	break;
             }
              </code></example>
-             <seealso cref="T:Tao.Sdl.SdlMixer.Mix_MusicType"/>
              <seealso cref="M:Tao.Sdl.SdlMixer.Mix_SetPosition(System.Int32,System.Int16,System.Byte)"/>
         </member>
         <member name="M:Tao.Sdl.SdlMixer.Mix_SetPostMix(Tao.Sdl.SdlMixer.MixFunctionDelegate,System.IntPtr)">
@@ -11945,7 +12175,6 @@
             }
             </code>
             </example>
-            <seealso cref="T:Tao.Sdl.SdlMixer.Mix_Fading"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_PausedMusic"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_PlayingMusic"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_FadeInMusicPos(System.IntPtr,System.Int32,System.Int32,System.Double)"/>
@@ -11987,7 +12216,6 @@
             }
             </code>
             </example>
-            <seealso cref="T:Tao.Sdl.SdlMixer.Mix_Fading"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_Paused(System.Int32)"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_Playing(System.Int32)"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_FadeInChannel(System.Int32,System.IntPtr,System.Int32,System.Int32)"/>
@@ -12237,7 +12465,6 @@
             </code>
             </example>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_Paused(System.Int32)"/>
-            <seealso cref="T:Tao.Sdl.SdlMixer.Mix_Fading"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_PlayChannel(System.Int32,System.IntPtr,System.Int32)"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_Pause(System.Int32)"/>
         </member>
@@ -12477,81 +12704,6 @@
         <member name="P:Tao.Sdl.SdlMixer.MIX_DEFAULT_FORMAT">
             <summary>
             The suggested default is signed 16bit samples in host byte order.
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.SdlMixer.Mix_Fading">
-            <summary>
-            Fader effect type enumerations
-            </summary>
-            <remarks>
-            Return values from Mix_FadingMusic and Mix_FadingChannel
-             are of these enumerated values. If no fading is taking 
-             place on the queried channel or music, then MIX_NO_FADING
-              is returned. Otherwise they are self explanatory.
-            </remarks>
-            <seealso cref="M:Tao.Sdl.SdlMixer.Mix_FadingChannel(System.Int32)"/>
-            <seealso cref="M:Tao.Sdl.SdlMixer.Mix_FadingMusic"/>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_Fading.MIX_NO_FADING">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_Fading.MIX_FADING_OUT">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_Fading.MIX_FADING_IN">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.SdlMixer.Mix_MusicType">
-            <summary>
-            Music type enumerations
-            </summary>
-            <remarks>
-            Return values from Mix_GetMusicType are of these enumerated values.
-            If no music is playing then MUS_NONE is returned.
-            If music is playing via an external command then MUS_CMD is returned.
-            Otherwise they are self explanatory.
-            </remarks>
-            <seealso cref="M:Tao.Sdl.SdlMixer.Mix_GetMusicType(System.IntPtr)"/>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_MusicType.MUS_NONE">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_MusicType.MUS_CMD">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_MusicType.MUS_WAV">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_MusicType.MUS_MOD">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_MusicType.MUS_MID">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_MusicType.MUS_OGG">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.SdlMixer.Mix_MusicType.MUS_MP3">
-            <summary>
-            
             </summary>
         </member>
         <member name="T:Tao.Sdl.SdlMixer.Mix_Chunk">

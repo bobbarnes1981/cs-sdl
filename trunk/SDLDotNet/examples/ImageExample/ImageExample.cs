@@ -21,7 +21,6 @@
 using System;
 using System.Drawing;
 using SdlDotNet;
-using Tao.Sdl;
 
 namespace SdlDotNet.Examples
 {
@@ -156,28 +155,16 @@ namespace SdlDotNet.Examples
 
 		public void MouseMotion(
 			object sender, 
-			EventArgs e,
-			MouseButtonState state, 
-			int x, 
-			int y, 
-			int relx, 
-			int rely)
+			MouseMotionEventArgs e)
 		{
-			MousePos.X = x;
-			MousePos.Y = y;
+			MousePos.X = e.X;
+			MousePos.Y = e.Y;
 		}
 
-		private void KeyboardDown(
-			object sender, 
-			EventArgs e,
-			int device,
-			bool down, 
-			int scancode, 
-			Sdl.SDLKey key, 
-			Sdl.SDLMod mod) 
+		private void KeyboardDown(object sender, KeyboardEventArgs e) 
 		{
-			if (key == Sdl.SDLKey.SDLK_ESCAPE ||
-				key == Sdl.SDLKey.SDLK_q)
+			if (e.Key == Keys.Escape ||
+				e.Key == Keys.q)
 			{
 				quitFlag = true;
 			}
@@ -186,7 +173,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Quits the application
 		/// </summary>
-		private void Quit(object sender, EventArgs e) 
+		private void Quit(object sender, QuitEventArgs e) 
 		{
 			quitFlag = true;
 		}

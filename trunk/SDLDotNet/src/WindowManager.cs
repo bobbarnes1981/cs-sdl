@@ -89,14 +89,14 @@ namespace SdlDotNet {
 		/// </summary>
 		public void GrabInput() 
 		{
-			Sdl.SDL_WM_GrabInput(Sdl.SDL_GrabMode.SDL_GRAB_ON);
+			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_ON);
 		}
 		/// <summary>
 		/// Releases keyboard and mouse focus from a previous call to GrabInput()
 		/// </summary>
 		public void ReleaseInput() 
 		{
-			Sdl.SDL_WM_GrabInput(Sdl.SDL_GrabMode.SDL_GRAB_OFF);
+			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_OFF);
 		}
 	}
 }

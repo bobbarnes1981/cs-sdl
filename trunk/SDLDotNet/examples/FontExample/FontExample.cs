@@ -22,7 +22,6 @@ using System;
 using System.Drawing;
 using System.Threading;
 using SdlDotNet;
-using Tao.Sdl;
 
 namespace SdlDotNet.Examples
 {
@@ -75,7 +74,7 @@ namespace SdlDotNet.Examples
 					font.Style = (Styles)styleArray[rand.Next(styleArray.Length)];
 					text = font.RenderTextSolid(
 						textArray[rand.Next(textArray.Length)], 
-						new Sdl.SDL_Color((byte)rand.Next(255), 
+						Color.FromArgb(0, (byte)rand.Next(255), 
 						(byte)rand.Next(255),(byte)rand.Next(255)));
 
 					text.Blit(
@@ -97,23 +96,16 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void KeyboardDown(
-			object sender, 
-			EventArgs e,
-			int device,
-			bool down, 
-			int scancode, 
-			Sdl.SDLKey key, 
-			Sdl.SDLMod mod) 
+		private void KeyboardDown(object sender, KeyboardEventArgs e) 
 		{
-			if (key == Sdl.SDLKey.SDLK_ESCAPE ||
-				key == Sdl.SDLKey.SDLK_q)
+			if (e.Key == Keys.Escape ||
+				e.Key == Keys.q)
 			{
 				quitFlag = true;
 			}
 		}
 
-		private void Quit(object sender, EventArgs e) 
+		private void Quit(object sender, QuitEventArgs e) 
 		{
 			quitFlag  = true;
 		}

@@ -429,17 +429,17 @@ namespace SdlDotNet
 		/// <summary>
 		/// Copies this surface to another surface
 		/// </summary>
-		/// <param name="destSurface">
+		/// <param name="destinationSurface">
 		/// The surface to copy to
 		/// </param>
-		/// <param name="destRectangle">
+		/// <param name="destinationRectangle">
 		/// The rectangle coordinites on the destination surface to copy to
 		/// </param>
-		public void Blit(Surface destSurface, System.Drawing.Rectangle destRectangle) {
+		public void Blit(Surface destinationSurface, System.Drawing.Rectangle destinationRectangle) {
 			Sdl.SDL_Rect s = this.ConvertRecttoSDLRect(new System.Drawing.Rectangle(
 				new System.Drawing.Point(0, 0), this.Size)),
-				d = this.ConvertRecttoSDLRect(destRectangle);
-			int result = Sdl.SDL_BlitSurface(_surfacePtr, ref s, destSurface._surfacePtr, ref d);
+				d = this.ConvertRecttoSDLRect(destinationRectangle);
+			int result = Sdl.SDL_BlitSurface(_surfacePtr, ref s, destinationSurface._surfacePtr, ref d);
 			GC.KeepAlive(this);
 			if (result != 0)
 			{
@@ -453,18 +453,18 @@ namespace SdlDotNet
 		/// <param name="sourceRectangle">
 		/// The rectangle coordinites of this surface to copy from
 		/// </param>
-		/// <param name="destSurface">The surface to copy to</param>
-		/// <param name="destRectangle">
+		/// <param name="destinationSurface">The surface to copy to</param>
+		/// <param name="destinationRectangle">
 		/// The rectangle coordinates on the destination surface to copy to
 		/// </param>
 		public void Blit(
 			System.Drawing.Rectangle sourceRectangle, 
-			Surface destSurface, 
-			System.Drawing.Rectangle destRectangle) 
+			Surface destinationSurface, 
+			System.Drawing.Rectangle destinationRectangle) 
 		{
 			Sdl.SDL_Rect s = this.ConvertRecttoSDLRect(sourceRectangle); 
-			Sdl.SDL_Rect d = this.ConvertRecttoSDLRect(destRectangle);
-			int result = Sdl.SDL_BlitSurface(_surfacePtr, ref s, destSurface._surfacePtr, ref d);
+			Sdl.SDL_Rect d = this.ConvertRecttoSDLRect(destinationRectangle);
+			int result = Sdl.SDL_BlitSurface(_surfacePtr, ref s, destinationSurface._surfacePtr, ref d);
 			GC.KeepAlive(this);
 			if (result!= 0)
 			{
@@ -643,7 +643,9 @@ namespace SdlDotNet
 //		/// <param name="c">The color of the pixel</param>
 //		public void DrawPixel(int x, int y, System.Drawing.Color c) {
 //			PixelValue color = this.MapColor(c);
-//			switch (_surface->format->BytesPerPixel) {
+//			Sdl.SDL_Surface surface = GetSurfaceStructFromPtr(_surface);
+//
+//			switch (surface.format->BytesPerPixel) {
 //				case 1: // Assuming 8-bpp
 //				{
 //					byte *bufp;

@@ -21,7 +21,6 @@
 using System;
 using System.Drawing;
 using SdlDotNet;
-using Tao.Sdl;
 
 // Simple SDL.NET Example
 // Just draws a bunch of rectangles to the screen, to quit hit 'Q' or Esc.
@@ -52,6 +51,8 @@ namespace SdlDotNet.Examples {
 				new KeyboardEventHandler(this.KeyboardDown); 
 			events.Quit += new QuitEventHandler(this.Quit);
 
+			
+
 			try {
 				Music music = mixer.LoadMusic(musicFile);
 				mixer.PlayMusic(music, 1);
@@ -59,6 +60,7 @@ namespace SdlDotNet.Examples {
 				Surface screen = video.SetVideoModeWindow(width, height, true); 
 				wm.Caption = "Rectangles Example";
 				video.HideMouseCursor();
+				mixer.EnableMusicCallbacks();
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
@@ -96,20 +98,15 @@ namespace SdlDotNet.Examples {
 
 		private void KeyboardDown(
 			object sender,
-			EventArgs e,
-			int device,
-			bool down, 
-			int scancode, 
-			Sdl.SDLKey key, 
-			Sdl.SDLMod mod) {
-			if (key == Sdl.SDLKey.SDLK_ESCAPE ||
-				key == Sdl.SDLKey.SDLK_q)
+			KeyboardEventArgs e) {
+			if (e.Key == Keys.Escape ||
+				e.Key == Keys.q)
 			{
 				quitFlag = true;
 			}
 		}
 
-		private void Quit(object sender, EventArgs e) 
+		private void Quit(object sender, QuitEventArgs e) 
 		{
 			quitFlag = true;
 		}
