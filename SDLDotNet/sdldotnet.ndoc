@@ -1,6 +1,6 @@
 <project>
     <assemblies>
-        <assembly location="C:\cygwin\home\will\SDLDotNet\bin\Debug\SDL.NET.dll" documentation="C:\cygwin\home\will\SDLDotNet\bin\Debug\doc.xml" />
+        <assembly location="bin\Release\SDL.NET.dll" documentation="bin\Release\doc.xml" />
     </assemblies>
     <namespaces>
         <namespace name="SDLDotNet"></namespace>
