@@ -140,7 +140,7 @@ namespace SDLDotNet {
 		public void Dispose() {
 			if (_freeondispose && !_disposed) {
 				_disposed = true;
-				Natives.SDL_FreeSurface(_surface);
+				//Natives.SDL_FreeSurface(_surface); //Scott Hilleard: fixes some crashes
 				GC.SuppressFinalize(this);
 			}
 		}
