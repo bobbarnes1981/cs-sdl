@@ -906,6 +906,22 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Copies another surface to this surface
+		/// </summary>
+		/// <param name="sourceSurface">
+		/// The surface to copy from
+		/// </param>
+		/// <param name="destinationPoint">
+		/// The rectangle coordinates on the this surface to copy to
+		/// </param>
+		public void Blit(Surface sourceSurface, System.Drawing.Point destinationPoint) 
+		{
+			this.Blit(
+				sourceSurface, 
+				new System.Drawing.Rectangle(destinationPoint, sourceSurface.Size));
+		}
+
+		/// <summary>
 		/// Copies a portion of a source surface to this surface
 		/// </summary>
 		/// <param name="sourceRectangle">

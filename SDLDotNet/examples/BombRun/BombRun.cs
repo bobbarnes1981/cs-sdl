@@ -208,12 +208,12 @@ namespace SdlDotNet.Examples
 #if DEBUG
 			_Screen = Video.SetVideoModeWindow(640, 480, true);
 #else
-_Screen = SDL.Instance.Video.SetVideoMode(640, 480, 16);
+_Screen = Video.SetVideoMode(640, 480, 16);
 #endif
 
-			Surface tempSurface = new Surface("../../Data/Background1.bmp");
+			Surface tempSurface = new Surface("../../Data/Background1.png");
 			_Background = tempSurface.Convert();
-			 tempSurface = new Surface("../../Data/Background2.bmp");
+			 tempSurface = new Surface("../../Data/Background2.png");
 			_AlternateBackground = tempSurface.Convert();
 
 			_Temporary = _Screen.CreateCompatibleSurface(32, 32, true);
@@ -304,7 +304,7 @@ _Screen = SDL.Instance.Video.SetVideoMode(640, 480, 16);
 		}
 	}
 
-	public class Bamboembam
+	public class BombRun
 	{
 		public static void Main()
 		{
