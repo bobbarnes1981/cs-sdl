@@ -3741,7 +3741,7 @@
             </code></p>
             </remarks>
             <param name="events"></param>
-            <param name="numEvents"></param>
+            <param name="numevents"></param>
             <param name="action">SDL_eventaction enum</param>
             <param name="mask"></param>
             <returns>
@@ -8754,7 +8754,9 @@
         <member name="T:Tao.Sdl.Sdl.SDL_VideoInfo">
             <summary>
             Video Target information.
-            Useful for determining the video hardware capabilities
+            Useful for determining the video hardware capabilities.
+            Not finished. The C struct uses a set of bit-fields that need to be marshalled.
+            The vfmt IntPtr works and provided useful information.
             </summary>
             <remarks>
             This (read-only) structure is returned by <see cref="M:Tao.Sdl.Sdl.SDL_GetVideoInfo"/>. 
@@ -8764,62 +8766,12 @@
             <see cref="M:Tao.Sdl.Sdl.SDL_GetVideoInfo"/>
             <see cref="T:Tao.Sdl.Sdl.SDL_PixelFormat"/>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.hw_available">
-            <summary>
-            Is it possible to create hardware surfaces?
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.wm_available">
-            <summary>
-            Is there a window manager available
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.UnusedBits1">
+        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.field1">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.UnusedBits2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.blit_hw">
-            <summary>
-            Are hardware to hardware blits accelerated?
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.blit_hw_CC">
-            <summary>
-            Are hardware to hardware colorkey blits accelerated?
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.blit_hw_A">
-            <summary>
-            Are hardware to hardware alpha blits accelerated?
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.blit_sw">
-            <summary>
-            Are software to hardware blits accelerated?
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.blit_sw_CC">
-            <summary>
-            Are software to hardware colorkey blits accelerated?
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.blit_sw_A">
-            <summary>
-            Are software to hardware alpha blits accelerated?
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.blit_fill">
-            <summary>
-            Are color fills accelerated?
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.UnusedBits3">
+        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.field2">
             <summary>
             
             </summary>
@@ -8832,6 +8784,51 @@
         <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.vfmt">
             <summary>
             Pixel format of the video device. Pointer to SDL_PixelFormat.
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.hw_available">
+            <summary>
+            Is it possible to create hardware surfaces?
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.wm_available">
+            <summary>
+            Is there a window manager available
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.blit_hw">
+            <summary>
+            Are hardware to hardware blits accelerated?
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.blit_hw_CC">
+            <summary>
+            Are hardware to hardware colorkey blits accelerated?
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.blit_hw_A">
+            <summary>
+            Are hardware to hardware alpha blits accelerated?
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.blit_sw">
+            <summary>
+            Are software to hardware blits accelerated?
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.blit_sw_CC">
+            <summary>
+            Are software to hardware colorkey blits accelerated?
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.blit_sw_A">
+            <summary>
+            Are software to hardware alpha blits accelerated?
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.blit_fill">
+            <summary>
+            Are color fills accelerated?
             </summary>
         </member>
         <member name="T:Tao.Sdl.Sdl.SDL_Overlay">
