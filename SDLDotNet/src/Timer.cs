@@ -61,24 +61,6 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Enable keyboard autorepeat
-		/// </summary>
-		/// <param name="delay">
-		/// Delay in system ticks before repeat starts. 
-		/// Set to 0 to disable key repeat.
-		/// </param>
-		/// <param name="rate">
-		/// Rate in system ticks at which key repeats.
-		/// </param>
-		public void EnableKeyRepeat(int delay, int rate) 
-		{
-			if (Sdl.SDL_EnableKeyRepeat(delay, rate) == -1)
-			{
-				throw SdlException.Generate();
-			}
-		}
-
-		/// <summary>
 		/// Wait a number of milliseconds.
 		/// </summary>
 		/// <param name="delayTime">Delay time in milliseconds</param>
