@@ -18,7 +18,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="3.0.0" />
+    <property name="project.version" value="3.1.0" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
@@ -69,11 +69,7 @@
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
 	<nant buildfile="${examples.dir}/MfGames.Sdl.Demos/MfGames.Sdl.Demos.build" target="clean" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Dice/MfGames.Sdl.Dice.build" target="clean" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Drawable/MfGames.Sdl.Drawable.build" target="clean" />
 	<nant buildfile="${examples.dir}/MfGames.Sdl.Gui/MfGames.Sdl.Gui.build" target="clean" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Sprites/MfGames.Sdl.Sprites.build" target="clean" />
-	<nant buildfile="${examples.dir}/MfGames.Utility/MfGames.Utility.build" target="clean" />
 	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="clean" />
@@ -106,10 +102,6 @@
 	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="build" />
-	<nant buildfile="${examples.dir}/MfGames.Utility/MfGames.Utility.build" target="build" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Dice/MfGames.Sdl.Dice.build" target="build" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Sprites/MfGames.Sdl.Sprites.build" target="build" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Drawable/MfGames.Sdl.Drawable.build" target="build" />
 	<nant buildfile="${examples.dir}/MfGames.Sdl.Gui/MfGames.Sdl.Gui.build" target="build" />
 	<nant buildfile="${examples.dir}/MfGames.Sdl.Demos/MfGames.Sdl.Demos.build" target="build" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="build" />
