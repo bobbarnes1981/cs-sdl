@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gears", "examples\Gears\Gea
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimitivesExample", "examples\PrimitivesExample\PrimitivesExample.csproj", "{CAE7F1D2-FD22-4102-BCAD-8FA2AE96B695}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -61,6 +65,10 @@ Global
 		{2E513256-B994-41ED-9579-07994C5350AC}.Debug.Build.0 = Debug|.NET
 		{2E513256-B994-41ED-9579-07994C5350AC}.Release.ActiveCfg = Release|.NET
 		{2E513256-B994-41ED-9579-07994C5350AC}.Release.Build.0 = Release|.NET
+		{CAE7F1D2-FD22-4102-BCAD-8FA2AE96B695}.Debug.ActiveCfg = Debug|.NET
+		{CAE7F1D2-FD22-4102-BCAD-8FA2AE96B695}.Debug.Build.0 = Debug|.NET
+		{CAE7F1D2-FD22-4102-BCAD-8FA2AE96B695}.Release.ActiveCfg = Release|.NET
+		{CAE7F1D2-FD22-4102-BCAD-8FA2AE96B695}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

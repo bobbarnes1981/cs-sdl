@@ -21,6 +21,8 @@
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
+using System.Globalization;
+
 using Tao.Sdl;
 
 namespace SdlDotNet {
@@ -29,11 +31,11 @@ namespace SdlDotNet {
 	/// </summary>
 	public struct MouseButtonState 
 	{
-		private int _state;
+		private int state;
 
 		internal MouseButtonState(int state) 
 		{
-			_state = state;
+			this.state = state;
 		}
 
 		/// <summary>
@@ -45,7 +47,69 @@ namespace SdlDotNet {
 		/// </returns>
 		public bool IsButtonPressed(int button) 
 		{
-			return (_state & (1 << ((int)button) - 1)) != 0;
+			return (state & (1 << ((int)button) - 1)) != 0;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return String.Format(CultureInfo.CurrentCulture, "({0})", state);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
+		public override bool Equals(object obj)
+		{
+			if (obj.GetType() != typeof(MouseButtonState))
+				return false;
+                
+			MouseButtonState mouseButtonState = (MouseButtonState)obj;   
+			return (
+				(this.state == mouseButtonState.state) 
+				);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="mouseButtonState1"></param>
+		/// <param name="mouseButtonState2"></param>
+		/// <returns></returns>
+		public static bool operator== (
+			MouseButtonState mouseButtonState1, 
+			MouseButtonState mouseButtonState2)
+		{
+			return (
+				(mouseButtonState1.state == mouseButtonState2.state)
+				);
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="mouseButtonState1"></param>
+		/// <param name="mouseButtonState2"></param>
+		/// <returns></returns>
+		public static bool operator!= (
+			MouseButtonState mouseButtonState1, 
+			MouseButtonState mouseButtonState2)
+		{
+			return !(mouseButtonState1 == mouseButtonState2);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override int GetHashCode()
+		{
+			return state;
+
 		}
 	}
 

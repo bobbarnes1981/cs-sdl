@@ -20,6 +20,8 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Globalization;
+
 using Tao.Sdl;
 
 namespace SdlDotNet {
@@ -203,6 +205,69 @@ namespace SdlDotNet {
 			{ 
 				return Sdl.CD_FPS; 
 			} 
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return String.Format(
+				CultureInfo.CurrentCulture, 
+				"({0},{1}, {2})", frames, minutes, seconds, framesLeftover);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
+		public override bool Equals(object obj)
+		{
+			if (obj.GetType() != typeof(CDFrames))
+				return false;
+                
+			CDFrames cdFrames = (CDFrames)obj;   
+			return (
+				(this.minutes == cdFrames.minutes) &&
+				(this.seconds == cdFrames.seconds) && 
+				(this.frames == cdFrames.frames) && 
+				(this.framesLeftover == cdFrames.framesLeftover));
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="cdFrames1"></param>
+		/// <param name="cdFrames2"></param>
+		/// <returns></returns>
+		public static bool operator== (CDFrames cdFrames1, CDFrames cdFrames2)
+		{
+			return (
+				(cdFrames1.minutes == cdFrames2.minutes) && 
+				(cdFrames1.seconds == cdFrames2.seconds) && 
+				(cdFrames1.frames == cdFrames2.frames)&& 
+				(cdFrames1.framesLeftover == cdFrames2.framesLeftover));
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="cdFrames1"></param>
+		/// <param name="cdFrames2"></param>
+		/// <returns></returns>
+		public static bool operator!= (CDFrames cdFrames1, CDFrames cdFrames2)
+		{
+			return !(cdFrames1 == cdFrames2);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override int GetHashCode()
+		{
+			return minutes ^ seconds ^ frames ^ framesLeftover;
+
 		}
 	}
 
