@@ -162,12 +162,12 @@
 	    </fileset>
 	</copy>
 	<copy todir="${bin.dir}/${nant.project.name}-${project.version}/${bin.dir}/net">
-	    <fileset basedir="${src.dir}/${bin.dir}/net/${project.config}">
+	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}-net">
 		<includes name="*.dll"/>
 	    </fileset>
 	</copy>
 	<copy todir="${bin.dir}/${nant.project.name}-${project.version}/${bin.dir}/mono">
-	    <fileset basedir="${src.dir}/${bin.dir}/mono/${project.config}">
+	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}-mono">
 		<includes name="*.dll"/>
 	    </fileset>
 	</copy>
