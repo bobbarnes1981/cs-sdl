@@ -115,14 +115,13 @@
     <target name="examples" depends="build" description="Build examples">
 	<echo message="Building examples" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="build" />
-	<if test = "${net}">
-	    <nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="build" />
-	    <nant buildfile="${examples.dir}/Gears/Gears.build" target="build" />
-	</if>
+	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="build" />
+	<nant buildfile="${examples.dir}/Gears/Gears.build" target="build" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
+	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="build" />
     </target>
 
     <target name="buildrelease" depends="clean, setrelease, examples" description="Build all Release assemblies">
