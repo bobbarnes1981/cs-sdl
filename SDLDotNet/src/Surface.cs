@@ -152,6 +152,12 @@ namespace SdlDotNet
 				typeof(Sdl.SDL_Surface));
 		}
 
+		private Sdl.SDL_PixelFormat GetFormatStructFromPtr(IntPtr ptr)
+		{
+			return (Sdl.SDL_PixelFormat)Marshal.PtrToStructure(ptr, 
+				typeof(Sdl.SDL_PixelFormat));
+		}
+
 		/// <summary>
 		/// Returns the native Sdl Surface pointer
 		/// </summary>
@@ -433,7 +439,7 @@ namespace SdlDotNet
 		/// The surface to copy to
 		/// </param>
 		/// <param name="destinationRectangle">
-		/// The rectangle coordinites on the destination surface to copy to
+		/// The rectangle coordinates on the destination surface to copy to
 		/// </param>
 		public void Blit(Surface destinationSurface, System.Drawing.Rectangle destinationRectangle) {
 			Sdl.SDL_Rect s = this.ConvertRecttoSDLRect(new System.Drawing.Rectangle(
@@ -633,35 +639,48 @@ namespace SdlDotNet
 			}
 		}
 
-//		//copied from http://cone3d.gamedev.net/cgi-bin/index.pl?page=tutorials/gfxsdl/tut1
-//		/// <summary>
-//		/// Draws a pixel to this surface - uses 1,2 or 4 BytesPerPixel modes.
-//		/// Call Lock() before calling this method.
-//		/// </summary>
-//		/// <param name="x">The x coordinate of where to plot the pixel</param>
-//		/// <param name="y">The y coordinate of where to plot the pixel</param>
-//		/// <param name="c">The color of the pixel</param>
-//		public void DrawPixel(int x, int y, System.Drawing.Color c) {
-//			PixelValue color = this.MapColor(c);
-//			Sdl.SDL_Surface surface = GetSurfaceStructFromPtr(_surface);
-//
-//			switch (surface.format->BytesPerPixel) {
-//				case 1: // Assuming 8-bpp
-//				{
-//					byte *bufp;
-//					bufp = (byte *)_surface->pixels.ToPointer() + y*_surface->pitch + x;
-//					*bufp = (byte)color.Value;
-//				}
-//				break;
-//				case 2: // Probably 15-bpp or 16-bpp
-//				{
-//					UInt16 *bufp;
-//					bufp = (short *)_surface->pixels.ToPointer() + y*_surface->pitch/2 + x;
-//					*bufp = (short)color.Value;
-//				}
-//				break;
-//				case 3: // Slow 24-bpp mode, usually not used
-//				{/*
+		/// <summary>
+		/// Draws a pixel to this surface - uses 1,2 or 4 BytesPerPixel modes.
+		/// Call Lock() before calling this method.
+		/// </summary>
+		/// <remarks>
+		/// copied from http://cone3d.gamedev.net/cgi-bin/index.pl?page=tutorials/gfxsdl/tut1
+		/// </remarks>
+		/// <param name="x">The x coordinate of where to plot the pixel</param>
+		/// <param name="y">The y coordinate of where to plot the pixel</param>
+		/// <param name="color">The color of the pixel</param>
+		public void DrawPixel(int x, int y, System.Drawing.Color color) 
+		{
+			PixelValue pixelColor = this.MapColor(color);
+			Sdl.SDL_Surface surface = GetSurfaceStructFromPtr(_surfacePtr);
+			GC.KeepAlive(this);
+
+			Sdl.SDL_PixelFormat format = 
+				this.GetFormatStructFromPtr(surface.format);
+			//Console.WriteLine("PixelFormat: " + format.BytesPerPixel.ToString());
+			//Console.WriteLine("Pitch: " + surface.pitch.ToString());
+			switch (format.BytesPerPixel) 
+			{
+				case 1: // Assuming 8-bpp
+				{
+					byte pixelColorValue = (byte) pixelColor.Value;
+					//Console.WriteLine("bufp: " + pixelColor.Value.ToString());
+					IntPtr pixelColorValuePtr = 
+						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
+					Marshal.WriteByte(pixelColorValuePtr, pixelColorValue);
+				}
+				break;
+				case 2: // Probably 15-bpp or 16-bpp
+				{
+					short pixelColorValue = (short) pixelColor.Value;
+					//Console.WriteLine("bufp: " + pixelColor.Value.ToString());
+					IntPtr pixelColorValuePtr = 
+						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
+					Marshal.WriteInt16(pixelColorValuePtr, pixelColorValue);
+				}
+				break;
+				case 3: // Slow 24-bpp mode, usually not used
+				{
 //					byte *bufp;
 //					bufp = (byte *)_surface->pixels + y*_surface->pitch + x * 3;
 //					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
@@ -676,49 +695,55 @@ namespace SdlDotNet
 //						bufp[1] = color >> 8;
 //						bufp[0] = color >> 16;
 //					}
-//				*/}
-//				break;
-//				case 4: // Probably 32-bpp
-//				{
-//					int *bufp;
-//					bufp = (int *)_surface->pixels.ToPointer() + y*_surface->pitch/4 + x;
-//					*bufp = color.Value;
-//				}
-//				break;
-//			}
-//		}
+				}
+				break;
+				case 4: // Probably 32-bpp
+				{
+					int pixelColorValue = pixelColor.Value;
+					//Console.WriteLine("bufp: " + pixelColor.Value.ToString());
+					IntPtr pixelColorValuePtr = 
+						new IntPtr(surface.pixels.ToInt32() + 2*(y*surface.pitch + 2*x));
+					Marshal.WriteInt32(pixelColorValuePtr, pixelColorValue);
+				}
+				break;
+			}
+		}
 
-//		/// <summary>
-//		/// Flips the rows of a surface, for use in as an OpenGL texture for example
-//		/// </summary>
-//		public void FlipVertical() {
-//
-//			int first = 0, second = Height-1;
-//			int pitch = Pitch;
-//			IntPtr temp = Marshal.AllocHGlobal(pitch);
-//			byte *tempp = (byte *)temp.ToPointer();
-//			byte *pixels = (byte *)_surface->pixels.ToPointer();
-//
-//			Lock();
-//			while (first < second) {
-//				UnmanagedCopy(pixels + first * pitch, tempp, pitch);
-//				UnmanagedCopy(pixels + second * pitch, pixels + first * pitch, pitch);
-//				UnmanagedCopy(tempp, pixels + second * pitch, pitch);
-//				first++;
-//				second--;
-//			}
-//			Unlock();
-//
-//			Marshal.FreeHGlobal(temp);
-//
-//		}
+		/// <summary>
+		/// Flips the rows of a surface, for use in an OpenGL texture for example
+		/// </summary>
+		public void FlipVertical() {
 
-//		private void UnmanagedCopy(byte *src, byte *dest, int len) {
-//			while (len > 0) {
-//				*(dest + (len - 1)) = *(src + (len - 1));
-//				len--;
-//			}
-//		}
+			int first = 0;
+			int second = this.Height-1;
+			int pitch = this.Pitch;
+			byte[] tempByte = new byte[pitch];
+			byte[] firstByte = new byte[pitch];
+			Sdl.SDL_Surface surface = this.GetSurfaceStructFromPtr(_surfacePtr);
+			GC.KeepAlive(this);
+
+			IntPtr pixelsPtr = surface.pixels;
+
+			Lock();
+			while (first < second) 
+			{
+				//Take first scanline
+				//Copy pointer data from scanline to tempByte array
+				Marshal.Copy(new IntPtr(surface.pixels.ToInt32() + first * pitch), tempByte, 0, pitch);
+				//Take last scanline
+				//Copy pointer data from scanline to firstByte array
+				Marshal.Copy(new IntPtr(surface.pixels.ToInt32() + second * pitch), firstByte, 0, pitch);
+				//Take tempByte array
+				//Copy pointer data from tempByte to last scanline
+				Marshal.Copy(tempByte, 0, new IntPtr(surface.pixels.ToInt32() + second * pitch), pitch);
+				//Take firstByte array
+				//Copy pointer data from firstByte array to first scanline
+				Marshal.Copy(firstByte, 0, new IntPtr(surface.pixels.ToInt32() + first * pitch), pitch);
+				first++;
+				second--;
+			}
+			Unlock();
+		}
 
 		/// <summary>
 		/// returns the length of a scanline in bytes
@@ -733,32 +758,37 @@ namespace SdlDotNet
 			} 
 		}
 
-//		/// <summary>
-//		/// Attempting to code GetPixel. The getter equivalent of PutPixel.
-//		/// Mridul - Added for my code...
-//		/// </summary>
-//		/// <param name="x">The x co-ordinate of the surface</param>
-//		/// <param name="y">The y co-ordinate of the surface</param>
-//		public int GetPixel(int x, int y) {
-//			int bpp = _surface->format->BytesPerPixel;
-//
-//			byte* p = (byte*)Pixels + y * Pitch + x * BytesPerPixel;
-//
-//			switch(bpp) {
-//				case 1: //Assuming 8-bpp
-//				{
-//					byte *bufp;
-//					bufp = (byte *)_surface->pixels.ToPointer() + y*_surface->pitch + x;
-//					return *bufp;
-//				}
-//				case 2:
-//				{
-//					short *bufp;
-//					bufp = (short *)_surface->pixels.ToPointer() + y*_surface->pitch/2 + x;
-//					return *bufp;
-//				}
-//				case 3: //Assuming this is not going to be used much... 
-//				{/*
+		/// <summary>
+		/// Attempting to code GetPixel. The getter equivalent of DrawPixel.
+		/// </summary>
+		/// <param name="x">The x coordinate of the surface</param>
+		/// <param name="y">The y coordinate of the surface</param>
+		public int GetPixel(int x, int y) 
+		{
+			Sdl.SDL_Surface surface = GetSurfaceStructFromPtr(_surfacePtr);
+			GC.KeepAlive(this);
+
+			Sdl.SDL_PixelFormat format = 
+				this.GetFormatStructFromPtr(surface.format);
+
+			int bytesPerPixel = format.BytesPerPixel;
+
+			switch (bytesPerPixel) 
+			{
+				case 1: //Assuming 8-bpp
+				{
+					IntPtr pixelColorValuePtr = 
+						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
+					return Marshal.ReadInt32(pixelColorValuePtr);
+				}
+				case 2:
+				{
+					IntPtr pixelColorValuePtr = 
+						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
+					return Marshal.ReadInt32(pixelColorValuePtr);
+				}
+				case 3: //Assuming this is not going to be used much... 
+				{
 //					byte *bufp;
 //					bufp = (byte *)screen->pixels + y*screen->pitch + x * 3;
 //					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
@@ -769,21 +799,21 @@ namespace SdlDotNet
 //					{
 //						return p[0] | p[1] << 8 | p[2] << 16;
 //					}
-//				*/return 0;
-//				}
-//				case 4:
-//				{
-//					int *bufp;
-//					bufp = (int *)_surface->pixels.ToPointer() + y*_surface->pitch/4 + x;
-//					return *bufp;
-//				}
-//				default: //Should never come here... but kya kare...
-//				{
-//					return 0;
-//				}
-//			}
-//		}
-//
+					return 0;
+				}
+				case 4:
+				{
+					IntPtr pixelColorValuePtr = 
+						new IntPtr(surface.pixels.ToInt32() + 2*(y*surface.pitch + 2*x));
+					return Marshal.ReadInt32(pixelColorValuePtr);
+				}
+				default: //Should never come here
+				{
+					return 0;
+				}
+			}
+		}
+
 		/// <summary>
 		/// Sets the alpha value of a surface
 		/// </summary>

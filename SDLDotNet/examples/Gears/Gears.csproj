@@ -3,24 +3,24 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{CE599D7B-DE7F-47A3-BF91-404BF471B685}"
+        ProjectGuid = "{2E513256-B994-41ED-9579-07994C5350AC}"
     >
         <Build>
             <Settings
                 ApplicationIcon = "App.ico"
                 AssemblyKeyContainerName = ""
-                AssemblyName = "Rectangles"
+                AssemblyName = "Gears"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
                 DefaultTargetSchema = "IE50"
                 DelaySign = "false"
                 OutputType = "WinExe"
-                PreBuildEvent = "copy $(ProjectDir)\fard-two.ogg $(TargetDir)"
+                PreBuildEvent = ""
                 PostBuildEvent = ""
                 RootNamespace = "SdlDotNet.Examples"
                 RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = "SdlDotNet.Examples.Rectangles"
+                StartupObject = "SdlDotNet.Examples.Gears"
             >
                 <Config
                     Name = "Debug"
@@ -32,7 +32,7 @@
                     DocumentationFile = ""
                     DebugSymbols = "true"
                     FileAlignment = "4096"
-                    IncrementalBuild = "true"
+                    IncrementalBuild = "false"
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "false"
@@ -67,12 +67,22 @@
                 <Reference
                     Name = "System"
                     AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.dll"
+                    HintPath = "..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                    HintPath = "..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
                 />
                 <Reference
                     Name = "System.Drawing"
                     AssemblyName = "System.Drawing"
-                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.Drawing.dll"
+                    HintPath = "..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                />
+                <Reference
+                    Name = "Tao.Sdl"
+                    AssemblyName = "Tao.Sdl"
+                    HintPath = "..\..\lib\Tao.Sdl.dll"
                 />
                 <Reference
                     Name = "SdlDotNet"
@@ -80,9 +90,9 @@
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "Tao.Sdl"
-                    AssemblyName = "Tao.Sdl"
-                    HintPath = "..\..\lib\Tao.Sdl.dll"
+                    Name = "Tao.OpenGl"
+                    AssemblyName = "Tao.OpenGl"
+                    HintPath = "Tao.OpenGl.dll"
                 />
             </References>
         </Build>
@@ -98,14 +108,9 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Rectangles.cs"
+                    RelPath = "Gears.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Rectangles.resx"
-                    DependentUpon = "Rectangles.cs"
-                    BuildAction = "EmbeddedResource"
                 />
             </Include>
         </Files>

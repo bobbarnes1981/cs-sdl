@@ -92,6 +92,7 @@ namespace SdlDotNet.Examples {
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(CDPlayer));
 			this.label1 = new System.Windows.Forms.Label();
 			this.comboBoxDrive = new System.Windows.Forms.ComboBox();
 			this.buttonPlay = new System.Windows.Forms.Button();
@@ -197,6 +198,7 @@ namespace SdlDotNet.Examples {
 			this.Controls.Add(this.comboBoxDrive);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "CDPlayer";
