@@ -12,11 +12,11 @@ using SDLDotNet;
 */
 namespace SDLDotNet.TTF {
 	/// <summary>
-	/// 
+	/// SDL TTF Exception Class
 	/// </summary>
 	public class SDLTTFException : SDLException {
 		/// <summary>
-		/// 
+		/// Constructor for SDL TTF Exception.
 		/// </summary>
 		/// <param name="msg"></param>
 		public SDLTTFException(string msg) : base(msg) {}
