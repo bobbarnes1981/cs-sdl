@@ -3,3 +3,4 @@ obj
 DelegatesExample.csproj.user
 *.prjx
 *.xml
+*.csproj

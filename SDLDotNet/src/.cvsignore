@@ -6,3 +6,4 @@ gc.log
 SdlDotNet.csproj.user
 *.prjx
 *.xml
+*.csproj

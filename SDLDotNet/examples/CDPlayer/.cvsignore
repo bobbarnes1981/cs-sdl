@@ -5,3 +5,4 @@ build
 CDPlayer.csproj.user
 *.prjx
 *.xml
+*.csproj
