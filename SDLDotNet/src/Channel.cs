@@ -108,6 +108,35 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Plays a sound the specified number of times on a specific channel
+		/// </summary>
+		/// <param name="sound">The sound to play</param>
+		/// <returns>The channel used to play the sound</returns>
+		public int PlayContinously(Sound sound) 
+		{
+			return this.Play(sound, -1, (int) SdlFlag.PlayForever);
+		}
+
+		/// <summary>
+		/// Plays a sound the specified number of times on a 
+		/// specific channel, stopping after the specified number of ms
+		/// </summary>
+		/// <param name="sound">The sound to play</param>
+		/// <param name="milliseconds">The time limit in milliseconds</param>
+		/// <returns>The channel used to play the sound</returns>
+		public int PlayContinuosly(Sound sound, int milliseconds) 
+		{
+			
+			int ret = SdlMixer.Mix_PlayChannelTimed(this.index, sound.GetHandle(), -1, milliseconds);
+			if (ret == (int) SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+			this.Sound = sound;
+			return ret;
+		}
+
+		/// <summary>
 		/// Sets the volume for a channel
 		/// </summary>
 		/// <returns>Channel volume</returns>

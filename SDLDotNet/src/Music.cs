@@ -23,33 +23,59 @@ using Tao.Sdl;
 
 namespace SdlDotNet 
 {
+	
+
 	/// <summary>
 	/// Represents a music sample.  Music is generally longer than a sound effect sample,
 	/// however it can also be compressed e.g. by Ogg Vorbis
 	/// </summary>
-	public class Music : BaseSdlResource 
+	public sealed class Music
 	{
-		private IntPtr handle;
-		private bool disposed = false;
+		private static SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
 
-		internal Music(IntPtr handle) 
+		private static IntPtr handle;
+		private static string musicFilename;
+		private static bool disposed = false;
+		private static string queuedMusicFilename = null;
+
+		static Music instance = new Music();
+
+		static Music()
 		{
-			this.handle = handle;
 		}
 
-		internal IntPtr GetHandle() 
+		Music()
+		{
+			Mixer.Initialize();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		~Music()
+		{
+			Dispose(false);
+		}
+
+		internal static IntPtr Handle
 		{ 
-			GC.KeepAlive(this);
-			return handle; 
+			get
+			{
+				return handle; 
+			}
+			set
+			{
+				handle = value;
+			}
 		}
 
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
 		/// <param name="disposing"></param>
-		protected override void Dispose(bool disposing)
+		public static void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			if (!disposed)
 			{
 				try
 				{
@@ -59,13 +85,12 @@ namespace SdlDotNet
 					// TODO: fix this issue correctly.
 					// In Release mode, GC disposes the Music class too quickly unless
 					// The CloseHandle is commented out.
-					//CloseHandle(handle);
-					GC.KeepAlive(this);
-					this.disposed = true;
+					CloseHandle(handle);
+					disposed = true;
 				}
 				finally
 				{
-					base.Dispose(disposing);
+					Dispose(disposing);
 				}
 			}
 		}
@@ -73,11 +98,261 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes Music handle
 		/// </summary>
-		protected override void CloseHandle(IntPtr handleToClose) 
+		public static void CloseHandle(IntPtr handleToClose) 
 		{
 			SdlMixer.Mix_FreeMusic(handleToClose);
-			GC.KeepAlive(this);
 			handleToClose = IntPtr.Zero;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static string MusicFilename
+		{
+			get
+			{
+				return Music.musicFilename;
+			}
+			set
+			{
+				Music.musicFilename = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static string QueuedMusicFilename
+		{
+			get
+			{
+				return Music.queuedMusicFilename;
+			}
+			set
+			{
+				Music.queuedMusicFilename = value;
+			}
+		}
+
+		/// <summary>
+		/// Loads a music sound from disk.
+		/// By default, Sdl_mixer only supports the Ogg Vorbis format,
+		///  see http://www.vorbis.com/.
+		/// It may be possible to compile in support for other formats
+		///  such as MOD and and MP3.
+		/// </summary>
+		/// <param name="file">The filename to load</param>
+		/// <returns>A new Music object</returns>
+		public static void Load(string file) 
+		{
+			IntPtr musicPtr = SdlMixer.Mix_LoadMUS(file);
+			if (musicPtr == IntPtr.Zero)
+			{
+				throw SdlException.Generate();
+			}
+			Music.musicFilename = file;
+			Music.Handle = musicPtr;
+		}
+
+		/// <summary>
+		/// Plays a music sample
+		/// </summary>
+		public static void Play() 
+		{
+			Music.Play(1);
+		}
+
+		/// <summary>
+		/// Plays a music sample
+		/// </summary>
+		public static void PlayContinuously() 
+		{
+			Music.Play(-1);
+		}
+
+		/// <summary>
+		/// Plays a music sample
+		/// </summary>
+		/// <param name="numberOfTimes">The number of times to play. 
+		/// Specify 1 to play a single time, -1 to loop forever.</param>
+		public static void Play(int numberOfTimes) 
+		{
+			if (SdlMixer.Mix_PlayMusic(Music.Handle, numberOfTimes) != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+		/// <summary>
+		/// Plays a music sample and fades it in
+		/// </summary>
+		/// <param name="numberOfTimes">The number of times to play. 
+		/// Specify 1 to play a single time, -1 to loop forever.</param>
+		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
+		public static void FadeIn(int numberOfTimes, int milliseconds) 
+		{
+			if (SdlMixer.Mix_FadeInMusic(Music.Handle, numberOfTimes, milliseconds) != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+		/// <summary>
+		/// Plays a music sample, starting from a specific 
+		/// position and fades it in
+		/// </summary>
+		/// <param name="numberOfTimes">The number of times to play.
+		///  Specify 1 to play a single time, -1 to loop forever.</param>
+		/// <param name="milliseconds">The number of milliseconds to fade in for
+		/// </param>
+		/// <param name="position">A format-defined position value. 
+		/// For Ogg Vorbis, this is the number of seconds from the
+		///  beginning of the song</param>
+		public static void FadeInPosition(int numberOfTimes, 
+			int milliseconds, double position) 
+		{
+			if (SdlMixer.Mix_FadeInMusicPos(Music.Handle, 
+				numberOfTimes, milliseconds, position) != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+		/// <summary>
+		/// Sets the music volume between 0 and 128.
+		/// </summary>
+		public static int Volume
+		{
+			get
+			{
+				return SdlMixer.Mix_VolumeMusic(-1);
+			}
+			set
+			{
+				int dummy = SdlMixer.Mix_VolumeMusic(value);
+			}
+		}
+
+		/// <summary>
+		/// Pauses the music playing
+		/// </summary>
+		public static void Pause() 
+		{
+			SdlMixer.Mix_PauseMusic();
+		}
+		/// <summary>
+		/// Resumes paused music
+		/// </summary>
+		public static void Resume() 
+		{
+			SdlMixer.Mix_ResumeMusic();
+		}
+		/// <summary>
+		/// Resets the music position to the beginning of the sample
+		/// </summary>
+		public static void Rewind() 
+		{
+			SdlMixer.Mix_RewindMusic();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static MusicTypes MusicType
+		{
+			get
+			{
+				return (MusicTypes) SdlMixer.Mix_GetMusicType(Music.Handle);
+			}
+		}
+		/// <summary>
+		/// Sets the music position to a format-defined value.
+		/// For Ogg Vorbis and Mp3, this is the number of seconds 
+		/// from the beginning of the song
+		/// </summary>
+		/// <param name="position"></param>
+		public static void Position(double position) 
+		{
+			if (Music.MusicType == MusicTypes.Mp3)
+			{
+				Music.Rewind();
+			}
+			if (SdlMixer.Mix_SetMusicPosition(position) != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+		/// <summary>
+		/// Stops playing music
+		/// </summary>
+		public static void Stop() 
+		{
+			SdlMixer.Mix_HaltMusic();
+		}
+		/// <summary>
+		/// Fades out music
+		/// </summary>
+		/// <param name="ms">
+		/// The number of milliseconds to fade out for
+		/// </param>
+		public static void FadeOut(int ms) 
+		{
+			if (SdlMixer.Mix_FadeOutMusic(ms) != 1)
+			{
+				throw SdlException.Generate();
+			}
+		}
+		/// <summary>
+		/// Returns a flag indicating whether or not music is playing
+		/// </summary>
+		/// <returns>True if music is playing, otherwise False</returns>
+		public static bool IsPlaying() 
+		{
+			return (SdlMixer.Mix_PlayingMusic() != 0);
+		}
+		/// <summary>
+		/// Returns a flag indicating whether or not music is paused
+		/// </summary>
+		/// <returns>True if music is paused, otherwise False</returns>
+		public static bool IsPaused() 
+		{
+			return (SdlMixer.Mix_PausedMusic() != 0);
+		}
+		/// <summary>
+		/// Returns a flag indicating whether or not music is fading
+		/// </summary>
+		/// <returns>True if music is fading in or out, 
+		/// otherwise False
+		/// </returns>
+		public static bool IsFading() 
+		{
+			return (SdlMixer.Mix_FadingMusic() != 0);
+		}
+
+		/// <summary>
+		/// For performance reasons, you must call this method
+		///  to enable the Events.ChannelFinished and 
+		///  Events.MusicFinished events
+		/// </summary>
+		public static void EnableMusicFinishedCallback() 
+		{
+			Music.MusicFinishedDelegate = new SdlMixer.MusicFinishedDelegate(Music.MusicFinished);
+			SdlMixer.Mix_HookMusicFinished(MusicFinishedDelegate);
+			Events.MusicFinished +=new MusicFinishedEventHandler(Events_MusicFinished);
+			}
+
+		private static void MusicFinished() 
+		{
+			Events.NotifyMusicFinished();
+		}
+
+		private static void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
+		{
+			//Console.WriteLine("channel finished event handler");
+			if (Music.QueuedMusicFilename != null)
+			{
+				Music.MusicFilename = Music.QueuedMusicFilename;
+				//Console.WriteLine("playing queued sound");
+				Music.Play();
+				Music.QueuedMusicFilename = null;
+			}
 		}
 	}
 }

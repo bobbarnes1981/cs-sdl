@@ -67,7 +67,7 @@ namespace SdlDotNet.Examples
 			int height = 480;
 			Random rand = new Random();
 
-			Mixer.EnableMusicFinishedCallback();
+			Music.EnableMusicFinishedCallback();
 			
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
@@ -78,8 +78,8 @@ namespace SdlDotNet.Examples
 			try 
 			{
 				font = new Font(filepath + FontName, size);
-				Music music = Mixer.LoadMusic(filepath + "fard-two.ogg");
-				Mixer.PlayMusic(music, 1);
+				Music.Load(filepath + "fard-two.ogg");
+				Music.Play(1);
 				Sound sound = Mixer.Sound(filepath + "test.wav");
 				Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
 				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
