@@ -1,3 +1,118 @@
-Mono compatibility on both linux and Windows
-CLR compliance
-Get rid of SDLColor and replace with System.Drawing.Color
+Project Name: SDL.NET
+Assembly:
+	Name: SdlDotNet.dll
+	Namespace: SdlDotNet
+	Notes:
+		There will be only one assembly. Supporting multiple assemblies was 
+		too much work.
+		Having the namespace the same as the assembly name is easier to remember
+		and it works better in Python.NET
+		
+Development Environment:
+	Runtimes/Compilers:
+		.NET SDK 1.1
+		Mono on Windows
+		Mono on Linux
+		Mono on MacOSX
+		
+		Notes: Mono compatibility will come a bit later i.e. v.2.0.1 or so.
+	
+	IDEs:
+		Visual Studio 2003
+		SharpDevelop
+		VIM
+		
+	Tools:
+		NAnt 0.84 
+		Nunit 2.1.5
+		dnpb 0.11.3 (possibly)
+		
+		Notes: NAnt will be the primary way to create release builds.
+		Using Nunit with GUI oriented programs is problematic, 
+		but I hope to use it as much as possible to reduce the ad hoc tests 
+		I do on the code.
+
+	Dependencies:
+		C libraries
+		SDL 1.2.7
+		SDL_image 1.2.3
+		SDL_mixer 1.2.5
+		SDL_ttf 2.0.6
+		SPMEG 0.4.4 (possibly for v2.1 or later)
+		
+		Notes: These libraries are supported by pygame. SDL.NET currently uses the 
+		SDL libraries.
+		I hope to sometime include bindings to SMPEG as well.
+
+		.NET libraries
+		Tao.Sdl
+
+		Notes: Randy Ridge of the Tao project and I worked on the native C 
+		bindings for the SDL libraries and Randy
+		added them to Tao. This gives the bindings and broader user base so
+		additional work can be done on the bindings.
+		SDL.NET will focus on the higher-level features.
+
+Approach:
+	I plan to model the API after pygame. Since pygame is a successful object-oriented 
+	wrapper around SDL, 
+	it makes sense to look to pygame for inspiration. Obviously there will be areas 
+	where they will differ. 
+	There is also a Java-based set of bindings (JSDL). It seems to be abandoned, 
+	but since Java and C# are so closely 
+	related, it is worth a look.
+
+Coding Style
+	Follow .NET naming conventions.
+	CLS compliance
+
+Tutorials
+	Actually write one. :-)
+
+Xedecimal
+Surface.Fill(Color c); to fill an entire surface with no parameters (which could be done with a rect that takes up 0,0,w,h but this would be easier for people to use and if possible, faster)
+
+StretchBlit: since it isn't supported by SDL itself. 
+I recently saw that the cvs version is updated quite often but no news on stretching other than YUV surfaces (video overlays?)).
+That's the number 1 feature I want to implement, just a nice simple easy stretch (maybe nearest / bilinear support afterwards), also, since it only takes the x/y coordinates of the destination rect, maybe support it in the w/h of the same exact rect, checking if it doesn't match the src w/h, then again, that check would happen every single draw call so might want to just put it elsewhere and convert that into a point instead.
+	
+gacutil installation.
+
+Sijmen Mulder
+- Horizontal flipping 
+- GetPixel/SetPixel better worked out 
+- Image rotation 
+- Primitive drawing (circle/line/rectangle) 
+- NO animations and stuff, an engine, not a layer is ment for that 
+- Things like Lock() and Unlock() should become a property 
+- SDL.Instance.Video.... too much to type 
+- Multiple windows. Really. Then I will make a Managed DirectDraw implementation 
+- More .NET like things, so instead of SDL.Instance.Video.LoadBMP(filename), new Surface(filename) 
+- SDL_image integration. Surface myimage = new Suface("image.PNG"); should become possible
+
+Could use some sort of TextOut function for blitting to a surface.
+
+can't get the MusicFinished delegate to work: 
+
+sdl = SDL.Instance; 
+sdl.Mixer.EnableMusicCallbacks(); 
+sdl.Events.MusicFinished += new MusicFinishedHandler(this.MyMusicFinished); 
+
+... 
+
+
+private void MyMusicFinished() 
+{ 
+MessageBox.Show("Music finished"); 
+} 
+
+
+Does anybody know what i'm doing wrong? 
+
+thanks 
+-Flynn
+
+Is SDL_Delay() not implemented in the current version? 
+
+I can't seem to find it, if it is. 
+ 

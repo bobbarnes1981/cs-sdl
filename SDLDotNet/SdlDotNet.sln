@@ -1,0 +1,53 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdlDotNet", "src\SdlDotNet.csproj", "{4001D616-7586-412E-839B-A630D4379B25}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rectangles", "examples\Rectangles\Rectangles.csproj", "{CE599D7B-DE7F-47A3-BF91-404BF471B685}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDPlayer", "examples\CDPlayer\CDPlayer.csproj", "{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageExample", "examples\ImageExample\ImageExample.csproj", "{CE599D7B-DE7F-47A3-BF91-404BF471B685}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FontExample", "examples\FontExample\FontExample.csproj", "{C8137414-34A0-452C-AEF7-3A123D96857D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{4001D616-7586-412E-839B-A630D4379B25}.Debug.ActiveCfg = Debug|.NET
+		{4001D616-7586-412E-839B-A630D4379B25}.Debug.Build.0 = Debug|.NET
+		{4001D616-7586-412E-839B-A630D4379B25}.Release.ActiveCfg = Release|.NET
+		{4001D616-7586-412E-839B-A630D4379B25}.Release.Build.0 = Release|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Debug.ActiveCfg = Debug|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Debug.Build.0 = Debug|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Release.ActiveCfg = Release|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Release.Build.0 = Release|.NET
+		{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}.Debug.ActiveCfg = Debug|.NET
+		{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}.Debug.Build.0 = Debug|.NET
+		{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}.Release.ActiveCfg = Release|.NET
+		{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}.Release.Build.0 = Release|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Debug.ActiveCfg = Debug|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Debug.Build.0 = Debug|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Release.ActiveCfg = Release|.NET
+		{CE599D7B-DE7F-47A3-BF91-404BF471B685}.Release.Build.0 = Release|.NET
+		{C8137414-34A0-452C-AEF7-3A123D96857D}.Debug.ActiveCfg = Debug|.NET
+		{C8137414-34A0-452C-AEF7-3A123D96857D}.Debug.Build.0 = Debug|.NET
+		{C8137414-34A0-452C-AEF7-3A123D96857D}.Release.ActiveCfg = Release|.NET
+		{C8137414-34A0-452C-AEF7-3A123D96857D}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
