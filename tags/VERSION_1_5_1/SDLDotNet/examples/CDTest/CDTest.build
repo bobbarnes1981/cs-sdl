@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project name="CDTest" default="build">
+    <!--
+    Required properties:
+    * build.dir     - (path) root level to build to, assemblies will go in ${build.dir}/bin
+    * build.debug   - (true|false) debug build?
+    * mono          - (true|false) build using Mono?
+    * log4netdll    - name of the log4net assembly to reference
+    -->
+    <target name="build">
+	<if propertytrue="net">
+	    <echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
+	    <mkdir dir="${nant.project.basedir}/${build.dir}"/>
+	    <echo message="Using '${nant.settings.currentframework}' Framework"/>
+	    <copy todir="${nant.project.basedir}/${build.dir}">
+		<fileset basedir="${project.main.dir}/${src.dir}/${build.dir}">
+		    <includes name="${project.name}.dll"/>
+		</fileset>
+	    </copy>
+	    <csc target="exe" warnaserror="true" unsafe="false" nowarn="1591,0618" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
+		<sources failonempty="true">
+		    <includes name="**/*.cs" />
+		</sources>
+		<references basedir="${nant.project.basedir}/${build.dir}">
+		    <includes name="${project.name}.dll"/>
+		    <includes name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+		</references>
+	    </csc>
+	</if>
+    </target>
+    <target name="clean">
+	<delete dir="${bin.dir}" failonerror="false" />
+	<delete dir="obj" failonerror="false" />
+    </target>
+</project>
