@@ -65,15 +65,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// Sample is not fading
 		/// </summary>
-		NoFading = SdlMixer.Mix_Fading.MIX_NO_FADING,
+		NoFading = SdlMixer.MIX_NO_FADING,
 		/// <summary>
 		/// Sample is fading out
 		/// </summary>
-		FadingOut = SdlMixer.Mix_Fading.MIX_FADING_OUT,
+		FadingOut = SdlMixer.MIX_FADING_OUT,
 		/// <summary>
 		/// Sample is fading in
 		/// </summary>
-		FadingIn = SdlMixer.Mix_Fading.MIX_FADING_IN
+		FadingIn = SdlMixer.MIX_FADING_IN
 	}
 
 	/// <summary>
@@ -83,9 +83,9 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Mixer
 	{
-		//private static SdlMixer.ChannelFinishedDelegate _channelfin;
-		//private static SdlMixer.MusicFinishedDelegate _musicfin;
-		Events events = Events.Instance;
+		private SdlMixer.ChannelFinishedDelegate channelFinished;
+		private SdlMixer.MusicFinishedDelegate musicFinished;
+		
 		byte _distance ;
 
 		static readonly Mixer instance = new Mixer();
@@ -106,9 +106,9 @@ namespace SdlDotNet
 					throw SdlException.Generate();
 				}
 				
-				//_channelfin = SdlMixer.ChannelFinishedDelegate(ChannelFinished());
-				//_musicfin = SdlMixer.MusicFinishedDelegate(Mixer.Instance.MusicFinished());
 				Mixer.PrivateOpen();
+
+				//Mixer.InitializeDelegates();
 				return instance;
 			}
 		}
@@ -148,13 +148,15 @@ namespace SdlDotNet
 			PrivateOpen(frequency, format, channels, chunkSize);
 		}
 
-		private static void PrivateOpen() {
+		private static void PrivateOpen() 
+		{
 			SdlMixer.Mix_OpenAudio(SdlMixer.MIX_DEFAULT_FREQUENCY, unchecked((short)AudioFormat.Default), 2, 1024);
 		}
 		private void PrivateOpen(int frequency, AudioFormat format, int channels, int chunksize) {
 			SdlMixer.Mix_OpenAudio(frequency, (short)format, channels, chunksize);
 		}
-		private static void PrivateClose() {
+		private static void PrivateClose() 
+		{
 			SdlMixer.Mix_CloseAudio();
 		}
 
@@ -836,23 +838,26 @@ namespace SdlDotNet
 			return (SdlMixer.Mix_FadingMusic() != 0);
 		}
 
-//		/// <summary>
-//		/// For performance reasons, you must call this method
-//		///  to enable the Events.ChannelFinished and 
-//		///  Events.MusicFinished events
-//		/// </summary>
-//		public void EnableMusicCallbacks() {
-//			SdlMixer.Mix_ChannelFinished(_channelfin);
-//			SdlMixer.Mix_HookMusicFinished(_musicfin);
-//		}
+		/// <summary>
+		/// For performance reasons, you must call this method
+		///  to enable the Events.ChannelFinished and 
+		///  Events.MusicFinished events
+		/// </summary>
+		public void EnableMusicCallbacks() 
+		{
+			this.channelFinished = new SdlMixer.ChannelFinishedDelegate(ChannelFinished);
+			this.musicFinished = new SdlMixer.MusicFinishedDelegate(MusicFinished);
+			SdlMixer.Mix_ChannelFinished(channelFinished);
+			SdlMixer.Mix_HookMusicFinished(musicFinished);
+		}
 
 		private static void ChannelFinished(int channel) 
 		{
-			//events.NotifyChannelFinished(channel);
+			Events.Instance.NotifyChannelFinished(channel);
 		}
 		private static void MusicFinished() 
 		{
-			//events.NotifyMusicFinished();
+			Events.Instance.NotifyMusicFinished();
 		}
 	}
 }

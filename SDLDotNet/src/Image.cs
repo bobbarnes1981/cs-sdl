@@ -264,13 +264,14 @@ namespace SdlDotNet
 		/// <summary>
 		/// Draws the image on a Sdl.Surface.
 		/// </summary>
-		/// <param name="destSurface">The Sdl.Surface to draw the image upon</param>
-		/// <param name="destRectangle">
+		/// <param name="destinationSurface">
+		/// The Sdl.Surface to draw the image upon</param>
+		/// <param name="destinationRectangle">
 		/// The position of the image on the destination surface
 		/// </param>
-		public void Draw(Surface destSurface, Rectangle destRectangle) 
+		public void Draw(Surface destinationSurface, Rectangle destinationRectangle) 
 		{
-			surface.Blit(destSurface,destRectangle);
+			surface.Blit(destinationSurface,destinationRectangle);
 		}
 
 		/// <summary>
@@ -279,13 +280,14 @@ namespace SdlDotNet
 		/// <param name="sourceRectangle">
 		/// The area of the image that is to be drawn on the destination surface
 		/// </param>
-		/// <param name="destSurface">The Sdl.Surface to draw the image upon</param>
-		/// <param name="destRectangle">
+		/// <param name="destinationSurface">
+		/// The Sdl.Surface to draw the image upon</param>
+		/// <param name="destinationRectangle">
 		/// The position of the image on the destination surface
 		/// </param>
-		public void Draw(Rectangle sourceRectangle, Surface destSurface, Rectangle destRectangle) 
+		public void Draw(Rectangle sourceRectangle, Surface destinationSurface, Rectangle destinationRectangle) 
 		{
-			surface.Blit(sourceRectangle,destSurface,destRectangle);
+			surface.Blit(sourceRectangle,destinationSurface,destinationRectangle);
 		}
 	}
 }

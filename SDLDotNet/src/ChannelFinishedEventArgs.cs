@@ -1,6 +1,6 @@
 /*
  * $RCSfile$
- * Copyright (C) 2003 Lucas Maloney
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,38 +17,40 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using System.Runtime.InteropServices;
-using System.Drawing;
+using System;
+
 using Tao.Sdl;
 
 namespace SdlDotNet
 {
 	/// <summary>
-	/// 
+	/// Summary description for ChannelFinishedEventArgs.
 	/// </summary>
-	public sealed class SdlColor
+	public class ChannelFinishedEventArgs : EventArgs 
 	{
-		SdlColor()
-		{}
-
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="color"></param>
-		/// <returns></returns>
-		public static Sdl.SDL_Color ConvertColor(Color color)
+		/// <param name="channel">The channel which has finished</param>
+		public ChannelFinishedEventArgs(int channel)
 		{
-			return new Sdl.SDL_Color(color.R, color.G, color.B);
+			this.channel = channel;
 		}
-
+		
+		private int channel;
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="color"></param>
-		/// <returns></returns>
-		public static Color ConvertColor(Sdl.SDL_Color color)
+		public int Channel
 		{
-			return Color.FromArgb(0, color.r, color.g, color.b);
+			get
+			{
+				return this.channel;
+			}
+			set
+			{
+				this.channel = value;
+			}
 		}
 	}
 }

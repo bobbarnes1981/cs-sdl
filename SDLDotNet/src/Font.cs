@@ -179,10 +179,11 @@ namespace SdlDotNet
 		/// <param name="textItem"></param>
 		/// <param name="color"></param>
 		/// <returns></returns>
-		public Surface RenderTextSolid(string textItem, Sdl.SDL_Color color) 
+		public Surface RenderTextSolid(string textItem, Color color) 
 		{
 			IntPtr pSurface;
-			pSurface = SdlTtf.TTF_RenderUNICODE_Solid(fontPtr, textItem, color);
+			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
+			pSurface = SdlTtf.TTF_RenderUNICODE_Solid(fontPtr, textItem, colorSdl);
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
@@ -197,17 +198,17 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="textItem"></param>
 		/// <param name="color"></param>
-		/// <param name="destSurface"></param>
+		/// <param name="destinationSurface"></param>
 		/// <param name="x"></param>
 		/// <param name="y"></param>
-		public void RenderTextSolid(string textItem, Sdl.SDL_Color color, Surface destSurface, int x, int y) 
+		public void RenderTextSolid(string textItem, Color color, Surface destinationSurface, int x, int y) 
 		{
 			Surface fontSurface;
-			System.Drawing.Rectangle destRectangle;
+			System.Drawing.Rectangle destinationRectangle;
 
 			fontSurface = RenderTextSolid(textItem, color);
-			destRectangle = new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size);
-			fontSurface.Blit(destSurface, destRectangle);
+			destinationRectangle = new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size);
+			fontSurface.Blit(destinationSurface, destinationRectangle);
 		}
 
 		/// <summary>
@@ -217,11 +218,14 @@ namespace SdlDotNet
 		/// <param name="backgroundColor"></param>
 		/// <param name="foregroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderTextShaded(string textItem, Sdl.SDL_Color foregroundColor, Sdl.SDL_Color backgroundColor) 
+		public Surface RenderTextShaded(string textItem, Color foregroundColor, Color backgroundColor) 
 		{
 			IntPtr pSurface;
 
-			pSurface = SdlTtf.TTF_RenderUNICODE_Shaded(fontPtr, textItem, foregroundColor, backgroundColor);
+			Sdl.SDL_Color foregroundColorSdl = SdlColor.ConvertColor(foregroundColor);
+			Sdl.SDL_Color backgroundColorSdl = SdlColor.ConvertColor(backgroundColor);
+			pSurface = SdlTtf.TTF_RenderUNICODE_Shaded(
+				fontPtr, textItem, foregroundColorSdl, backgroundColorSdl);
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
