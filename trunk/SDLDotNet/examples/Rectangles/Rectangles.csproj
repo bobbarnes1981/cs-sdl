@@ -79,6 +79,11 @@
                     Project = "{4001D616-7586-412E-839B-A630D4379B25}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
+                <Reference
+                    Name = "Tao.Sdl"
+                    AssemblyName = "Tao.Sdl"
+                    HintPath = "..\..\lib\Tao.Sdl.dll"
+                />
             </References>
         </Build>
         <Files>

@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Lucas Maloney
  *
  * This library is free software; you can redistribute it and/or
@@ -45,25 +46,30 @@ namespace SdlDotNet.Examples
 
 			Font font;
 			Random rand = new Random();
-			//	Console.WriteLine("Font\t{0}\nStyle\t{1}\nSize\t{2}\nText\t{3}\n", FontName, Style, Size, Text);
 
-			//			sdl.Events.Quit += new QuitEventHandler(SDL_Quit);
-			//			sdl.Events.MouseButtonDown += new MouseButtonEventHandler(SDL_MouseButtonEvent);
-			//			sdl.Events.KeyboardDown += new KeyboardEventHandler(SDL_KeyboardDown);
-
-			
 			Video video = Video.Instance;
 			WindowManager wm = WindowManager.Instance;
 			Ttf ttf = Ttf.Instance;
+			Events events = Events.Instance;
+
+			events.KeyboardDown += new KeyboardEventHandler(SDL_KeyboardDown);
+			events.Quit += new QuitEventHandler(this.SDL_Quit);
+
 			font = new Font(FontName, Size);
 			Surface screen = video.SetVideoModeWindow(width, height, true); 
 			wm.Caption = "Font Example";
+			video.HideMouseCursor();
+
 			Surface surf = screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
 			surf.FillRect(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 
 			while (!quitFlag) 
 			{
+				while (events.PollAndDelegate()) 
+				{
+					// handle events till the queue is empty
+				}
 				try
 				{
 					font.Style = (Style)styleArray[rand.Next(styleArray.Length)];
@@ -91,25 +97,24 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		private void SDL_KeyboardDown(
+			int device,
+			bool down, 
+			int scancode, 
+			Sdl.SDLKey key, 
+			Sdl.SDLMod mod) 
+		{
+			if (key == Sdl.SDLKey.SDLK_ESCAPE ||
+				key == Sdl.SDLKey.SDLK_q)
+			{
+				quitFlag = true;
+			}
+		}
+
 		private void SDL_Quit() 
 		{
 			quitFlag  = true;
-			//mDone = true;
 		}
-
-		//		private void SDL_MouseButtonEvent(MouseButton button, bool down, int x, int y)
-		//		{
-		//			System.Drawing.Rectangle DestRect;
-		//
-		//			DestRect = new System.Drawing.Rectangle(new System.Drawing.Point(x, y), text.Size);
-		//			text.Blit( screen, DestRect );
-		//			screen.Flip();
-		//		}
-
-		//		private void SDL_KeyboardDown(int device, bool down, int scancode, Key key, Mod mod)
-		//		{
-		//			mDone = true;
-		//		}
 
 		[STAThread]
 		static void Main() 
