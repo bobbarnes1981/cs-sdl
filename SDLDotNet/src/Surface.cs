@@ -812,8 +812,8 @@ namespace SdlDotNet
 			IntPtr intPtrRet = Sdl.SDL_ConvertSurface(
 				handle, surf.format, flag);
 			GC.KeepAlive(this);
-			Sdl.SDL_FreeSurface(intPtr);
-			return new Surface(intPtrRet);
+			//Sdl.SDL_FreeSurface(intPtr);
+			return new Surface(intPtr);
 		}
 
 		/// <summary>
