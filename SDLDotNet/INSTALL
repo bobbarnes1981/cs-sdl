@@ -4,13 +4,13 @@ From the SDL.NET download page
 (http://sourceforge.net/project/showfiles.php?group_id=52340),
 download these files
 
-SdlDotNet-2.1.0b1-1.zip
+SdlDotNet-2.1.0beta1-1.zip
 Tao.Sdl-deps-win-1.1.0-1.zip
 
 Unzip and copy the Tao.Sdl-deps files into a directory in your path. 
 C:\winnt or c:\winnt\system32 are common choices.
 
-Unzip the SdlDotNet-2.1.0b1-1.zip file. 
+Unzip the SdlDotNet-2.1.0beta1-1.zip file. 
 Copy the files located in the /bin directory (SdlDotNet.dll and Tao.Sdl.dll)
 into the Global Assembly Cache (c:\winnt\assembly).
 
