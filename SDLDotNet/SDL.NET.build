@@ -1,5 +1,15 @@
 <?xml version="1.0" ?>
 <project name="SDL.NET" default="build">
+    <!--
+	Targets:
+	build (default): builds all library assemblies for default framework (typically .NET)
+	examples: builds all examples.
+	buildrelease: builds release versions of libraries and examples.
+	doc: creates docs.
+	schema: creates XML schema.
+	packagedefault: creates release zip file for default framework.
+	package: creates release zip file for .NET and Mono. Must have both frameworks installed.
+    -->
     <echo message="Using '${nant.settings.currentframework}' Framework"/>
 
     <!-- global project settings -->
