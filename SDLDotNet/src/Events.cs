@@ -33,26 +33,6 @@ namespace SdlDotNet
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
 	public delegate void ActiveEventHandler(object sender, ActiveEventArgs e);
-
-	/// <summary>
-	/// Indicates that the keyboard state has changed
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	public delegate void KeyboardEventHandler(object sender, KeyboardEventArgs e);
-
-	/// <summary>
-	/// Indicates that the mouse has moved
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param> 
-	public delegate void MouseMotionEventHandler(object sender, MouseMotionEventArgs e);
-	/// <summary>
-	/// Indicates that a mouse button has been pressed or released
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	public delegate void MouseButtonEventHandler(object sender, MouseButtonEventArgs e);
 	/// <summary>
 	/// Indicates that a joystick has moved on an axis
 	/// </summary>
@@ -60,6 +40,12 @@ namespace SdlDotNet
 	/// <param name="e"></param>
 	/// 
 	public delegate void JoystickAxisEventHandler(object sender, JoystickAxisEventArgs e);
+	/// <summary>
+	/// Indicates a joystick trackball has changed position
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	public delegate void JoystickBallEventHandler(object sender, JoystickBallEventArgs e);
 	/// <summary>
 	/// Indicates that a joystick button has been pressed or released
 	/// </summary>
@@ -73,23 +59,23 @@ namespace SdlDotNet
 	/// <param name="e"></param>
 	public delegate void JoystickHatEventHandler(object sender, JoystickHatEventArgs e);
 	/// <summary>
-	/// Indicates a joystick trackball has changed position
+	/// Indicates that the keyboard state has changed
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	public delegate void JoystickBallEventHandler(object sender, JoystickBallEventArgs e);
+	public delegate void KeyboardEventHandler(object sender, KeyboardEventArgs e);
 	/// <summary>
-	/// Indicates the user has resized the window
+	/// Indicates that a mouse button has been pressed or released
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	public delegate void VideoResizeEventHandler(object sender, VideoResizeEventArgs e);
+	public delegate void MouseButtonEventHandler(object sender, MouseButtonEventArgs e);
 	/// <summary>
-	/// Indicates that a portion of the window has been exposed
+	/// Indicates that the mouse has moved
 	/// </summary>
 	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	public delegate void VideoExposeEventHandler(object sender, VideoExposeEventArgs e);
+	/// <param name="e"></param> 
+	public delegate void MouseMotionEventHandler(object sender, MouseMotionEventArgs e);
 	/// <summary>
 	/// Indicates that the user has closed the main window
 	/// </summary>
@@ -102,6 +88,18 @@ namespace SdlDotNet
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
 	public delegate void UserEventHandler(object sender, UserEventArgs e);
+	/// <summary>
+	/// Indicates that a portion of the window has been exposed
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	public delegate void VideoExposeEventHandler(object sender, VideoExposeEventArgs e);
+	/// <summary>
+	/// Indicates the user has resized the window
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	public delegate void VideoResizeEventHandler(object sender, VideoResizeEventArgs e);
 	/// <summary>
 	/// Indicates that a sound channel has stopped playing
 	/// </summary>
@@ -127,25 +125,13 @@ namespace SdlDotNet
 	public sealed class Events 
 	{
 		private static Hashtable UserEvents = new Hashtable();
-		private static int UserEventId = 1;		
+		private static int UserEventId = 0;		
 		private const int QUERY_EVENTS_MAX = 254;
 
 		/// <summary>
 		/// Fires when the application has become active or inactive
 		/// </summary>
 		public static event ActiveEventHandler AppActive;
-		/// <summary>
-		/// Fires when the application gains or loses mouse focus
-		/// </summary>
-		public static event ActiveEventHandler MouseFocus;
-		/// <summary>
-		/// Fires when the application gains or loses input focus
-		/// </summary>
-		public static event ActiveEventHandler InputFocus;
-		/// <summary>
-		/// Fires when a key is pressed or released
-		/// </summary>
-		public static event KeyboardEventHandler Keyboard;
 		/// <summary>
 		/// Fires when a key is pressed
 		/// </summary>
@@ -159,10 +145,6 @@ namespace SdlDotNet
 		/// </summary>
 		public static event MouseMotionEventHandler MouseMotion;
 		/// <summary>
-		/// Fires when a mouse button is pressed or released
-		/// </summary>
-		public static event MouseButtonEventHandler MouseButton;
-		/// <summary>
 		/// Fires when a mouse button is pressed
 		/// </summary>
 		public static event MouseButtonEventHandler MouseButtonDown;
@@ -174,18 +156,6 @@ namespace SdlDotNet
 		/// Fires when a joystick axis changes
 		/// </summary>
 		public static event JoystickAxisEventHandler JoystickAxisMotion;
-		/// <summary>
-		/// Fires when a joystick vertical axis changes
-		/// </summary>
-		public static event JoystickAxisEventHandler JoystickVerticalAxisMotion;
-		/// <summary>
-		/// Fires when a joystick horizontal axis changes
-		/// </summary>
-		public static event JoystickAxisEventHandler JoystickHorizontalAxisMotion;
-		/// <summary>
-		/// Fires when a joystick button is pressed or released
-		/// </summary>
-		public static event JoystickButtonEventHandler JoystickButton;
 		/// <summary>
 		/// Fires when a joystick button is pressed
 		/// </summary>
@@ -263,6 +233,34 @@ namespace SdlDotNet
 				ProcessEvent(ev);
 				return true;
 			}
+		}
+
+		/// <summary>
+		/// Polls and processes a given number of events before returning false
+		/// </summary>
+		/// <remarks>If the are no more events, the method will return false</remarks>
+		/// <param name="numberOfEvents">Nunmber of events to process at a time at most</param>
+		/// <returns>Returns false when done processing events</returns>
+		public static bool Poll(int numberOfEvents) 
+		{
+			Sdl.SDL_Event ev;
+			for (int i=0;i<=numberOfEvents;i++)
+			{
+				int ret = Sdl.SDL_PollEvent(out ev);
+				if (ret == (int) SdlFlag.Error)
+				{
+					throw SdlException.Generate();
+				}
+				if (ret == (int) SdlFlag.None)
+				{
+					break;
+				}
+				else
+				{
+					ProcessEvent(ev);
+				}
+			}
+			return false;
 		}
 
 		/// <summary>
@@ -555,64 +553,20 @@ namespace SdlDotNet
 
 		static void OnActiveEvent(ActiveEventArgs e)
 		{
-			if (AppActive != null || MouseFocus != null || InputFocus != null) 
+			if (AppActive != null)
 			{
-				if (((byte)e.State & (byte)Focus.Mouse) != 0 && 
-					MouseFocus != null)
-				{
-					MouseFocus(instance, e);
-				}
-				if (((byte)e.State & (byte)Focus.Keyboard) != 0 && 
-					InputFocus != null)
-				{
-					InputFocus(instance, e);
-				}
-				if (((byte)e.State & (byte)Focus.Application) != 0 && 
-					AppActive != null)
-				{
-					AppActive(instance, e);
-				}
+				AppActive(instance, e);
 			}
 		}
 
 		static void OnJoystickAxisMotion(JoystickAxisEventArgs e)
 		{
-			if (JoystickAxisMotion != null || 
-				JoystickHorizontalAxisMotion != null || 
-				JoystickVerticalAxisMotion != null) 
+			if (JoystickAxisMotion != null) 
 			{						
-				if ((e.RawAxisValue < (-1)*JoystickAxisEventArgs.JoystickThreshold) ||
-					(e.RawAxisValue > JoystickAxisEventArgs.JoystickThreshold))
+				if (((e.RawAxisValue < (-1)*JoystickAxisEventArgs.JoystickThreshold) ||
+					(e.RawAxisValue > JoystickAxisEventArgs.JoystickThreshold)) && (e.AxisIndex == 0 || e.AxisIndex == 1) )
 				{	
-					if (e.AxisIndex == 0)
-					{
-						if (JoystickAxisMotion != null) 
-						{
-							JoystickAxisMotion(instance, e);
-						}
-						if (JoystickHorizontalAxisMotion != null) 
-						{
-							JoystickHorizontalAxisMotion(instance, e);
-						}
-					}
-					else if (e.AxisIndex == 1)
-					{
-						if (JoystickAxisMotion != null) 
-						{
-							JoystickAxisMotion(instance, e);
-						}
-						if (JoystickVerticalAxisMotion != null) 
-						{
-							JoystickVerticalAxisMotion(instance, e);
-						}
-					}
-					else
-					{
-						if (JoystickAxisMotion != null) 
-						{
-							JoystickAxisMotion(instance, e);
-						}
-					}
+					JoystickAxisMotion(instance, e);
 				}
 			}
 		}
@@ -627,31 +581,17 @@ namespace SdlDotNet
 
 		static void OnJoystickButtonDown(JoystickButtonEventArgs e)
 		{
-			if (JoystickButton != null || JoystickButtonDown != null) 
+			if (JoystickButtonDown != null) 
 			{
-				if (JoystickButton != null)
-				{
-					JoystickButton(instance, e);
-				}
-				if (JoystickButtonDown != null)
-				{
-					JoystickButtonDown(instance, e);
-				}
+				JoystickButtonDown(instance, e);
 			}
 		}
 
 		static void OnJoystickButtonUp(JoystickButtonEventArgs e)
 		{
-			if (JoystickButton != null || JoystickButtonUp != null) 
+			if (JoystickButtonUp != null) 
 			{
-				if (JoystickButton != null)
-				{
-					JoystickButton(instance, e);
-				}
-				if (JoystickButtonUp != null)
-				{
-					JoystickButtonUp(instance, e);
-				}
+				JoystickButtonUp(instance, e);
 			}
 		}
 
@@ -665,39 +605,21 @@ namespace SdlDotNet
 
 		static void OnKeyboardDown(KeyboardEventArgs e)
 		{
-			if (Keyboard != null || KeyboardDown != null) 
+			if (KeyboardDown != null) 
 			{
-				if (KeyboardDown != null) 
-				{
-					KeyboardDown(instance, e);
-				}
-				if (Keyboard != null) 
-				{
-					Keyboard(instance, e);
-				}
+				KeyboardDown(instance, e);
 			}
 		}
 		static void OnKeyboardUp(KeyboardEventArgs e)
 		{
-			if (Keyboard != null || KeyboardUp != null) 
+			if (KeyboardUp != null) 
 			{
-				if (KeyboardUp != null) 
-				{
-					KeyboardUp(instance, e);
-				}
-				if (Keyboard != null) 
-				{
-					Keyboard(instance, e);
-				}
+				KeyboardUp(instance, e);
 			}
 		}
 
 		static void OnMouseButtonDown(MouseButtonEventArgs e)
 		{
-			if (MouseButton != null)
-			{
-				MouseButton(instance, e);
-			}
 			if (MouseButtonDown != null)
 			{
 				MouseButtonDown(instance, e);
@@ -706,10 +628,6 @@ namespace SdlDotNet
 
 		static void OnMouseButtonUp(MouseButtonEventArgs e)
 		{
-			if (MouseButton != null)
-			{
-				MouseButton(instance, e);
-			}
 			if (MouseButtonUp != null)
 			{
 				MouseButtonUp(instance, e);
@@ -936,8 +854,17 @@ namespace SdlDotNet
 		/// </summary>
 		public static int TicksPerSecond
 		{
-			get { return 1000 / tickSpan; }
-			set { tickSpan = 1000 / value; }
+			get 
+			{ 
+				return 1000 / tickSpan; 
+			}
+			set 
+			{ 
+				if (value != 0)
+				{
+					tickSpan = 1000 / value; 
+				}
+			}
 		}
 
 		/// <summary>
