@@ -115,19 +115,16 @@ namespace CsGL.SDL
 				This font style is implemented by modifying the font glyphs, and
 				doesn't reflect any inherent properties of the truetype font file.
 		*/
-		public enum TTF_STYLE : int
-		{
-			NORMAL = 0x00,
-			BOLD = 0x01,
-			ITALIC = 0x02,
-			UNDERLINE = 0x04
-		}
+		public const byte TTF_STYLE_NORMAL = 0x00;
+		public const byte TTF_STYLE_BOLD = 0x01;
+		public const byte TTF_STYLE_ITALIC = 0x02;
+		public const byte TTF_STYLE_UNDERLINE = 0x04;
 
 		[DllImport("SDL_ttf.dll")]
-		public static extern TTF_STYLE TTF_GetFontStyle(IntPtr font);
+		public static extern byte TTF_GetFontStyle(IntPtr font);
 
 		[DllImport("SDL_ttf.dll")]
-		public static extern void TTF_SetFontStyle(IntPtr font, TTF_STYLE style);
+		public static extern void TTF_SetFontStyle(IntPtr font, byte style);
 
 		/* Get the total height of the font - usually equal to point size */
 		[DllImport("SDL_ttf.dll")]
