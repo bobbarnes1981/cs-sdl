@@ -5,3 +5,4 @@ SDL.All.NET.csproj.user
 gc.log
 SdlDotNet.csproj.user
 *.prjx
+*.xml

@@ -2,3 +2,4 @@ bin
 obj
 DelegatesExample.csproj.user
 *.prjx
+*.xml

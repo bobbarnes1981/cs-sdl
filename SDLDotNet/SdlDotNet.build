@@ -19,7 +19,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="2.1.0beta1" />
+    <property name="project.version" value="2.1.0beta2" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
@@ -68,6 +68,7 @@
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="clean" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="clean" />
     </target>
 
     <!--run this target to create a mono build -->
@@ -123,13 +124,10 @@
 	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="build" />
+	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="build" />
     </target>
 
     <target name="buildrelease" depends="clean, setrelease, examples" description="Build all Release assemblies">
-	<echo message="Building all Release assemblies" />
-    </target>
-
-    <target name="prepackage" depends="buildrelease, doc, schema" description="Build all Release items for default framework">
 	<echo message="Building all Release assemblies" />
     </target>
 
@@ -145,14 +143,12 @@
 	</if>
     </target>
 
-    <target name="package" depends="prepackage" description="Package only default framework">
-	<call target="copyfiles" />
-	<call target="zip" />
+    <target name="package" depends="buildrelease, doc, schema, copyfiles, zip" description="Package">
     </target>
 
     <!-- copy project files -->
     <target name="copyfiles">
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}-${platform.dir}">
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}">
 	    <fileset>
 		<include name="src/*.cs" />
 		<include name="src/*.csproj" />
@@ -182,6 +178,10 @@
 		<include name="examples/DelegatesExample/${build.dir}/*" />
 		<exclude name="examples/DelegatesExample/*j.user" />
 		<!-- <exclude name="examples/DelegatesExample/${build.dir}/*.dll" /> -->
+		<include name="examples/JoystickExample/*" />
+		<include name="examples/JoystickExample/${build.dir}/*" />
+		<exclude name="examples/JoystickExample/*j.user" />
+		<!-- <exclude name="examples/JoystickExample/${build.dir}/*.dll" /> -->
 		<include name="examples/Rectangles/*" />
 		<include name="examples/Rectangles/${build.dir}/*" />
 		<exclude name="examples/Rectangles/*j.user" />
@@ -210,17 +210,17 @@
 	    </fileset>
 	</copy>
 
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}-${platform.dir}/${doc.dir}">
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.dir}">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
 		<include name="*" />
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}-${platform.dir}/${bin.dir}">
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}-${platform.dir}/${bin.dir}">
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
@@ -229,7 +229,7 @@
 
     <!-- create zip file -->
     <target name="zip" description="zip files">
-	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${nant.project.name}-${project.version}-${release.version}-${platform.dir}"/>
+	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${nant.project.name}-${project.version}-${release.version}"/>
 	<zip zipfile="${project.zip-path}.zip">
 	    <fileset basedir="${bin.dir}">
 		<include name="${project.zip-path}/bin/**" />

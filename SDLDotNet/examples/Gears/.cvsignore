@@ -2,3 +2,4 @@ bin
 obj
 Gears.csproj.user
 *.prjx
+*.xml

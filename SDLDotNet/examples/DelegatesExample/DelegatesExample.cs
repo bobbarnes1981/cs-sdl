@@ -19,64 +19,75 @@
 
 using System;
 using System.Drawing;
+using System.IO;
 using SdlDotNet;
 using Tao.Sdl;
 
 // Simple SDL.NET Example
 // Just draws a bunch of rectangles to the screen, to quit hit 'Q' or Esc.
 
-namespace SdlDotNet.Examples {
+namespace SdlDotNet.Examples 
+{
+	/// <summary>
+	/// 
+	/// </summary>
 	public class DelegatesExample 
 	{
 		private bool quitFlag;
-
-		SdlMixer.ChannelFinishedDelegate channelFinishedDelegate 
-			= new SdlMixer.ChannelFinishedDelegate(DelegatesExample.ChannelFinished);
+		private bool musicFinishedFlag;
+		private bool channelFinishedFlag;
 		
-		
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public DelegatesExample() 
 		{
 			quitFlag = false;
+			musicFinishedFlag = false;
+			channelFinishedFlag = false;
 		}
 
-		public void Run() {
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Run() 
+		{
+			string filepath = @"../../";
+			if (File.Exists("fard-two.ogg"))
+			{
+				filepath = "";
+			}
+			Font font;
+			Surface text;
+			string FontName = "Vera.ttf";
+			int size = 12;
 			int width = 640;
 			int height = 480;
 			Random rand = new Random();
-			
-			string musicFile = "fard-two.ogg";
 
 			Video video = Video.Instance;
 			WindowManager wm = WindowManager.Instance;
 			Mixer mixer = Mixer.Instance;
 			Events events = Events.Instance;
+			mixer.EnableMusicCallbacks();
 			
 			events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
 			events.Quit += new QuitEventHandler(this.Quit);
-			//events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
-			//events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);
-			SdlMixer.Mix_ChannelFinished(channelFinishedDelegate);
-			
-			
+			events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
+			events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);			
 
-			try {
-				Music music = mixer.LoadMusic(musicFile);
-				//Music music = mixer.LoadMusic("test.wav");
-				//mixer.PlayMusic(music, 1);
-				Sample sample = mixer.LoadWav("test.wav");
+			try 
+			{
+				font = new Font(filepath + FontName, size);
+				Music music = mixer.LoadMusic(filepath + "fard-two.ogg");
+				mixer.PlayMusic(music, 1);
+				Sample sample = mixer.LoadWav(filepath + "test.wav");
 				mixer.PlaySample(1, sample, 0);
 				// set the video mode
 				Surface screen = video.SetVideoModeWindow(width, height, true); 
 				wm.Caption = "Delegates Example";
 				video.HideMouseCursor();
-				//mixer.EnableMusicCallbacks();
-
-				//Surface surf = 
-				//	screen.CreateCompatibleSurface(width, height, true);
-				//fill the surface with black
-				//surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 
 				while (!quitFlag) 
 				{
@@ -87,22 +98,38 @@ namespace SdlDotNet.Examples {
 					
 					try 
 					{
-					//	surf.FillRectangle(
-					//		new Rectangle(rand.Next(-300, width), 
-//							rand.Next(-300, height), rand.Next(20, 300), 
-//							rand.Next(20, 300)),
-//						Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
-//						surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
-//						screen.Flip();
+						if (musicFinishedFlag)
+						{
+							text = font.RenderTextSolid(
+								"MusicChannelFinishedDelegate was called.", 
+								Color.FromArgb(0, 254, 
+								254,254));
+							text.Blit(
+								screen, 
+								new Rectangle(new Point(100,100), 
+								text.Size));
+							screen.Flip();
+						}
+						if (channelFinishedFlag)
+						{
+							text = font.RenderTextSolid(
+								"ChannelChannelFinishedDelegate was called.", 
+								Color.FromArgb(0, 154, 
+								154,154));
+							text.Blit(
+								screen, 
+								new Rectangle(new Point(100,200), 
+								text.Size));
+							screen.Flip();
+						}
 					} 
 					catch (SurfaceLostException) 
 					{
 						// if we are fullscreen and the user hits alt-tab 
 						// we can get this, for this simple app we can ignore it
 					}
-					//}
 				}
-			} 
+			}
 			catch 
 			{
 				//sdl.Dispose(); 
@@ -131,20 +158,17 @@ namespace SdlDotNet.Examples {
 			DelegatesExample delegatesExample = new DelegatesExample();
 			delegatesExample.Run();
 		}
-//		private void ChannelFinished(object sender, ChannelFinishedEventArgs e)
-//		{
-//			Console.WriteLine("channel: " + e.Channel.ToString());
-//			Console.WriteLine("Channel Finished");
-//		}
-
-		private static void ChannelFinished(int channel)
+		private void ChannelFinished(object sender, ChannelFinishedEventArgs e)
 		{
-			Console.WriteLine("channel: " + channel.ToString());
+			Console.WriteLine("channel: " + e.Channel.ToString());
 			Console.WriteLine("Channel Finished");
+			channelFinishedFlag = true;
 		}
+
 		private void MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
 			Console.WriteLine("Music Finished");
+			musicFinishedFlag = true;
 		}
 	}
 }

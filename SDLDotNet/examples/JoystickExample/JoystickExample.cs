@@ -19,6 +19,7 @@
 
 using System;
 using System.Drawing;
+using System.IO;
 using SdlDotNet;
 using Tao.Sdl;
 
@@ -27,6 +28,9 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Examples 
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class JoystickExample 
 	{
 		private Point joystickPosition = new Point(100,100);
@@ -38,13 +42,25 @@ namespace SdlDotNet.Examples
 		private int width = 640;
 		private int height = 480;
 		
+		/// <summary>
+		/// 
+		/// </summary>
 		public JoystickExample() 
 		{
 			quitFlag = false;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run() 
 		{
+			string filepath = @"../../";
+			if (File.Exists("cursor.png"))
+			{
+				filepath = @"./";
+			}
+
 			Random rand = new Random();
 			
 			Video video = Video.Instance;
@@ -73,8 +89,8 @@ namespace SdlDotNet.Examples
 				Console.WriteLine("NumberOfBalls: " + joystick.NumberOfBalls);
 				Console.WriteLine("NumberOfButtons: " + joystick.NumberOfButtons);
 				Console.WriteLine("NumberOfHats: " + joystick.NumberOfHats);
-				Image cursor = new Image("cursor.png");
-				Image Background = new Image("background.jpg");
+					Image cursor = new Image(filepath + "cursor.png");
+				Image Background = new Image(filepath + "background.jpg");
 				cursor.Transparent = true;
 				// set the video mode
 				Surface screen = video.SetVideoModeWindow(width, height, true); 
@@ -103,7 +119,7 @@ namespace SdlDotNet.Examples
 						surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
 						screen.Flip();
 					} 
-					catch (SurfaceLostException) 
+					catch (SurfaceLostException)
 					{
 						// if we are fullscreen and the user hits alt-tab 
 						// we can get this, for this simple app we can ignore it

@@ -861,8 +861,7 @@ namespace SdlDotNet
 
 		private void ChannelFinished(int channel) 
 		{
-				//Console.WriteLine("Channel");
-				Events.Instance.NotifyChannelFinished(channel);
+			Events.Instance.NotifyChannelFinished(channel);
 		}
 		private void MusicFinished() 
 		{

@@ -1,3 +1,12 @@
+2.1.0beta2
+David Hudson xx Jan 2004
+* Overhauled Joystick subsystem
+* Fixed JoystickButtonUp
+* Separated out Joystick vertical movements from Joystick horizontal movements
+* Made translating joystick movements to screen position much easier.
+* Added new Joystick example
+* Cleaned up a few build targets
+
 2.1.0beta1
 David Hudson 31 Dec 2004
 * Added Rotation
