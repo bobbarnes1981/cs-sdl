@@ -1,0 +1,8 @@
+It appears specifying the library name for P/Invoke attributes can be done without an extension.  Specifying "sdl-ttf" appears to turn into:
+Windows - sdl-ttf.dll
+Linux	- libsdl-ttf.so
+Mac		- sdl-ttf.dylib
+
+If this doesn't work, I will go back to my old system of not varying the library filename for different platforms and adding this line to mono's config file:
+
+<dllmap dll="SDL_ttf.dll" target="libSDL_ttf.so" />
