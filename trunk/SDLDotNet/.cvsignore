@@ -9,3 +9,4 @@ build
 SdlDotNet.suo
 SdlDotNet.FxCop
 *.cmbx
+*.sln

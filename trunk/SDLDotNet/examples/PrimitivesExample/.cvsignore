@@ -3,3 +3,4 @@ bin
 PrimitivesExample.csproj.user
 *.prjx
 *.xml
+*.csproj

@@ -3,3 +3,4 @@ obj
 PixelsExample.csproj.user
 *.prjx
 *.xml
+*.csproj

@@ -3,3 +3,4 @@ obj
 Gears.csproj.user
 *.prjx
 *.xml
+*.csproj
