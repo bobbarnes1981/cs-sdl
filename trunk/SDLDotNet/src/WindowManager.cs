@@ -72,26 +72,30 @@ namespace SdlDotNet {
 		/// sets the icon for the current window
 		/// </summary>
 		/// <param name="icon">the surface containing the image</param>
-		public void SetIcon(Surface icon) {
+		public void SetIcon(Surface icon) 
+		{
 			Sdl.SDL_WM_SetIcon(icon.GetPtr(), null);
 		}
 		/// <summary>
 		/// Iconifies (minimizes) the current window
 		/// </summary>
 		/// <returns>True if the action succeeded, otherwise False</returns>
-		public bool IconifyWindow() {
+		public bool IconifyWindow() 
+		{
 			return (Sdl.SDL_WM_IconifyWindow() != 0);
 		}
 		/// <summary>
 		/// Forces keyboard focus and prevents the mouse from leaving the window
 		/// </summary>
-		public void GrabInput() {
+		public void GrabInput() 
+		{
 			Sdl.SDL_WM_GrabInput(Sdl.SDL_GrabMode.SDL_GRAB_ON);
 		}
 		/// <summary>
 		/// Releases keyboard and mouse focus from a previous call to GrabInput()
 		/// </summary>
-		public void ReleaseInput() {
+		public void ReleaseInput() 
+		{
 			Sdl.SDL_WM_GrabInput(Sdl.SDL_GrabMode.SDL_GRAB_OFF);
 		}
 	}

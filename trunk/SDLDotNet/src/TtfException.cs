@@ -37,7 +37,8 @@ namespace SdlDotNet {
 	/// <summary>
 	/// Sdl Ttf Exception Class
 	/// </summary>
-	public class TtfException : SdlException {
+	public class TtfException : SdlException 
+	{
 		/// <summary>
 		/// Constructor for Sdl Ttf Exception.
 		/// </summary>

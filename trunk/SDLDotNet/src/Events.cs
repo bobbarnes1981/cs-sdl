@@ -1,7 +1,7 @@
 /*
  * $RCSfile$
- * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -292,24 +292,26 @@ namespace SdlDotNet {
 			DelegateEvent(ref ev);
 		}
 
-//		/// <summary>
-//		/// Pushes a user-defined event on the event queue
-//		/// </summary>
-//		/// <param name="ev">An opaque object representing a user-defined event.
-//		/// Will be passed back to the UserEvent handler delegate when this event is processed.</param>
-//		public void PushUserEvent(object ev) {
-//			Sdl.SDL_UserEvent sdlev;
-//			sdlev.type = (byte)Sdl.SDL_USEREVENT;
-//			lock (this) {
-//				_userevents[_usereventid] = ev;
-//				_usereventid++;
-//				sdlev.code = _usereventid;
-//			}
-//			if (Sdl.SDL_PushEvent(out (Sdl.SDL_Event)sdlev) != 0)
-//			{
-//				throw SdlException.Generate();
-//			}
-//		}
+		/// <summary>
+		/// Pushes a user-defined event on the event queue
+		/// </summary>
+		/// <param name="ev">An opaque object representing a user-defined event.
+		/// Will be passed back to the UserEvent handler delegate when this event is processed.</param>
+		public void PushUserEvent(object ev) {
+			Sdl.SDL_UserEvent sdlev;
+			sdlev.type = (byte)Sdl.SDL_USEREVENT;
+			lock (this) {
+				_userevents[_usereventid] = ev;
+				_usereventid++;
+				sdlev.code = _usereventid;
+			}
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.user = sdlev;
+			if (Sdl.SDL_PushEvent(out evt) != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
 
 		private void DelegateEvent(ref Sdl.SDL_Event ev) 
 		{
@@ -351,9 +353,9 @@ namespace SdlDotNet {
 			case Sdl.SDL_QUIT:
 				DelegateQuit(ref ev);
 				break;
-//			case Sdl.SDL_USEREVENT:
-//				DelegateUserEvent(ev);
-//				break;
+			case Sdl.SDL_USEREVENT:
+				DelegateUserEvent(ref ev);
+				break;
 			case Sdl.SDL_VIDEOEXPOSE:
 				DelegateVideoExpose(ref ev);
 				break;
@@ -547,29 +549,28 @@ namespace SdlDotNet {
 					Quit();
 			}
 		}
-//		private void DelegateUserEvent(ref Sdl.SDL_Event ev) {
-//			if (UserEvent != null) {
-//				Sdl.SDL_UserEvent *uev = (Sdl.SDL_UserEvent *)ev;
-//				object ret;
-//				lock (this) {
-//					ret = _userevents[uev->code];
-//				}
-//				if (ret != null) {
-//					if (ret is ChannelFinishedEvent) {
-//						if (ChannelFinished != null)
-//						{
-//							ChannelFinished(((ChannelFinishedEvent)ret).Channel);
-//						}
-//					} else if (ret is MusicFinishedEvent) {
-//						if (MusicFinished != null)
-//						{
-//							MusicFinished();
-//						}
-//					} else
-//						UserEvent(ret);
-//				}
-//			}
-//		}
+		private void DelegateUserEvent(ref Sdl.SDL_Event ev) {
+			if (UserEvent != null) {
+				object ret;
+				lock (this) {
+					ret = _userevents[ev.user.code];
+				}
+				if (ret != null) {
+					if (ret is ChannelFinishedEvent) {
+						if (ChannelFinished != null)
+						{
+							ChannelFinished(((ChannelFinishedEvent)ret).Channel);
+						}
+					} else if (ret is MusicFinishedEvent) {
+						if (MusicFinished != null)
+						{
+							MusicFinished();
+						}
+					} else
+						UserEvent(ret);
+				}
+			}
+		}
 
 		private void DelegateVideoExpose(ref Sdl.SDL_Event ev) 
 		{
@@ -614,9 +615,13 @@ namespace SdlDotNet {
 			y = ev.button.y;
 		}
 
-		private class ChannelFinishedEvent {
+		private class ChannelFinishedEvent 
+		{
 			public int Channel;
-			public ChannelFinishedEvent(int channel) { Channel = channel; }
+			public ChannelFinishedEvent(int channel) 
+			{ 
+				Channel = channel; 
+			}
 		}
 		private class MusicFinishedEvent {}
 

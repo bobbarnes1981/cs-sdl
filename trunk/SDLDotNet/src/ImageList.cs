@@ -24,16 +24,13 @@ using System.Collections;
 using SdlDotNet;
 using Tao.Sdl;
 
-
 namespace SdlDotNet
 {
-
 	/// <summary>
 	/// Provides methods to manage a collection of SdlImage objects. 
 	/// </summary>
 	public class ImageList
 	{
-
 		/// <summary>
 		/// Private field that holds ImageList.ImageCollection for this image list.
 		/// </summary>
@@ -47,13 +44,15 @@ namespace SdlDotNet
 			images = new ImageCollection();
 		}
 
-
 		/// <summary>
 		/// Gets the ImageList.ImageCollection for this image list.
 		/// </summary>
 		public ImageCollection Images 
 		{
-			get {return images;}
+			get 
+			{
+				return images;
+			}
 		}
 
 		/// <summary>
@@ -61,33 +60,40 @@ namespace SdlDotNet
 		/// </summary>
 		public class ImageCollection : CollectionBase 
 		{
-
-
 			/// <summary>
 			/// Indexer for the Items in the Collection
 			/// </summary>
 			public Image this[int index] 
 			{
-				get { return (Image)List[index];	}
+				get 
+				{ 
+					return (Image)List[index];	
+				}
 			}
-
 
 			/// <summary>
 			/// Adds the specified SdlImage to the end of the SdlImageList.
 			/// </summary>
-			/// <param name="image">The SdlImage to be added to the end of the SdlImageList.</param>
-			/// <returns>The index at which the SdlImage has been added.</returns>
+			/// <param name="image">
+			/// The SdlImage to be added to the end of the SdlImageList.
+			/// </param>
+			/// <returns>
+			/// The index at which the SdlImage has been added.
+			/// </returns>
 			public int Add(Image image)
 			{
 				return List.Add(image);
 			} 
 
-
 			/// <summary>
-			/// Load a SdlImage with the specified filename and add it to the end of the SdlImageList.
+			/// Load a SdlImage with the specified filename and add 
+			/// it to the end of the SdlImageList.
 			/// </summary>
-			/// <param name="filename">The filename of the SdlImage to be added to the end of the SdlImageList.</param>
-			/// <returns>The index at which the SdlImage has been added.</returns>
+			/// <param name="filename">The filename of the SdlImage 
+			/// to be added to the end of the SdlImageList.</param>
+			/// <returns>
+			/// The index at which the SdlImage has been added.
+			/// </returns>
 			public int Add(string filename)
 			{
 				return List.Add(new Image(filename));
@@ -95,29 +101,34 @@ namespace SdlDotNet
 
 
 			/// <summary>
-			/// Create a SdlImage from a byte array and add it to the end of the SdlImageList.
+			/// Create a SdlImage from a byte array and add it to the end 
+			/// of the SdlImageList.
 			/// </summary>
-			/// <param name="arr">The array of byte to create the SdlImage from.</param>
-			/// <returns>The index at which the SdlImage has been added.</returns>
+			/// <param name="arr">
+			/// The array of byte to create the Image 
+			/// from.
+			/// </param>
+			/// <returns>
+			/// The index at which the SdlImage has been added.
+			/// </returns>
 			public int Add(byte[] arr)
 			{
 				return List.Add(new Image(arr));
 			} 
 
-
-			
-			#if !__MONO__
 			/// <summary>
-			/// Create a SdlImage from a System.Drawing.Bitmap and add it to the end of the SdlImageList.
+			/// Create a SdlImage from a System.Drawing.Bitmap and add it 
+			/// to the end of the SdlImageList.
 			/// </summary>
-			/// <param name="bitmap">The System.Drawing.Bitmap to create the SdlImage from.</param>
-			/// <returns>The index at which the SdlImage has been added.</returns>
+			/// <param name="bitmap">The System.Drawing.Bitmap to create the 
+			/// Image from.</param>
+			/// <returns>
+			/// The index at which the SdlImage has been added.
+			/// </returns>
 			public int Add(Bitmap bitmap)
 			{
 				return List.Add(new Image(bitmap));
-			} 
-			#endif
-			
+			} 			
 
 			/// <summary>
 			/// Adds the specified SdlImage to the SdlImageList.
@@ -129,41 +140,36 @@ namespace SdlDotNet
 				List.Insert(index,image);
 			} 
 
-
 			/// <summary>
 			/// Removes a specified SdlImage from the list.
 			/// </summary>
 			/// <param name="image">The SdlImage to remove from the SdlImageList. </param>
-			public void Remove(SdlImage image)
+			public void Remove(Image image)
 			{
 				List.Remove(image);
 			} 
-
 
 			/// <summary>
 			/// Returns the index of a specified SdlImage in the list.
 			/// </summary>
 			/// <param name="image">The image object</param>
 			/// <returns>The index of specified image in the list</returns>
-			public int IndexOf(SdlImage image)
+			public int IndexOf(Image image)
 			{
 				return List.IndexOf(image);
 			} 
-
 
 			/// <summary>
 			/// Indicates whether a specified SdlImage is contained in the list.
 			/// </summary>
 			/// <param name="image">The SdlImage to find in the list.</param>
-			/// <returns>true if the SdlImage is found in the list; otherwise, false.</returns>
-			public bool Contains(SdlImage image)
+			/// <returns>
+			/// true if the SdlImage is found in the list; otherwise, false.
+			/// </returns>
+			public bool Contains(Image image)
 			{
 				return List.Contains(image);
 			} 
-			
-
-		}
-		
+		}	
 	}
-
 }

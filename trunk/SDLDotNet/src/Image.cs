@@ -29,8 +29,11 @@ namespace SdlDotNet
 
 	/// <summary>
 	/// <para>Represents a Image that can be drawn on a Sdl.Surface.</para>
-	/// <para>The image can be loaded from from a file, a System.Drawing.Bitmap, or a byte array.</para>
-	/// <para>Supported image formats follows the development cycle of SDL_Image. Currently, supported and planned supported image formats are:</para>
+	/// <para>The image can be loaded from from a file, 
+	/// a System.Drawing.Bitmap, or a byte array.</para>
+	/// <para>Supported image formats follows the development 
+	/// cycle of SDL_Image. Currently, supported and planned 
+	/// supported image formats are:</para>
 	/// 
 	/// <para>
 	/// <list type="bullet">
@@ -55,12 +58,6 @@ namespace SdlDotNet
 	/// </summary> 
 	public class Image
 	{
-
-		/// <summary>
-		/// Private field that holds an instance of Sdl.Sdl
-		/// </summary>
-		//private Sdl sdl = Sdl.Instance;
-
 		/// <summary>
 		/// Private field that holds the surface of the image.
 		/// </summary>
@@ -102,7 +99,6 @@ namespace SdlDotNet
 			surface = Video.Instance.GenerateSurfaceFromPointer(pSurface);
 		}
 
-	
 		/// <summary>
 		/// Create a SdlImage instance from a byte array in memory.
 		/// </summary>
@@ -119,7 +115,9 @@ namespace SdlDotNet
 
 		
 		/// <summary>
-		/// Create a SdlImage instance from a System.Drawing.Bitmap object. Loads a bitmap from a System.Drawing.Bitmap object, usually obtained from a resource.
+		/// Create a SdlImage instance from a System.Drawing.Bitmap object. 
+		/// Loads a bitmap from a System.Drawing.Bitmap object, 
+		/// usually obtained from a resource.
 		/// </summary>
 		/// <param name="bitmap">A System.Drawing.Bitmap object</param>
 		public Image(System.Drawing.Bitmap bitmap)
@@ -143,7 +141,6 @@ namespace SdlDotNet
 			surface.Dispose();
 		}
 
-
 		/// <summary>
 		/// The Sdl.Surface that represents the Surface of the SdlImage. 
 		/// </summary>
@@ -154,7 +151,6 @@ namespace SdlDotNet
 				return surface; 
 			} 
 		}
-
 
 		/// <summary>
 		/// The width of the image
@@ -188,7 +184,6 @@ namespace SdlDotNet
 				return surface.Size;
 			} 		
 		}
-
 
 		/// <summary>
 		/// Get/set the transparency of the image.  
@@ -249,7 +244,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Get/set the Alpha value of the image. 0 indicates that the image fully transparent. 255 indicates that the image is not tranparent.
+		/// Get/set the Alpha value of the image. 
+		/// 0 indicates that the image fully transparent. 
+		/// 255 indicates that the image is not tranparent.
 		/// </summary>
 		public byte AlphaValue
 		{
@@ -264,12 +261,13 @@ namespace SdlDotNet
 			}
 		}
 
-
 		/// <summary>
 		/// Draws the image on a Sdl.Surface.
 		/// </summary>
 		/// <param name="dest">The Sdl.Surface to draw the image upon</param>
-		/// <param name="destrect">The position of the image on the destination surface</param>
+		/// <param name="destrect">
+		/// The position of the image on the destination surface
+		/// </param>
 		public void Draw(Surface dest, Rectangle destrect) 
 		{
 			surface.Blit(dest,destrect);
@@ -278,14 +276,16 @@ namespace SdlDotNet
 		/// <summary>
 		/// Draws the image on a Sdl.Surface.
 		/// </summary>
-		/// <param name="srcrect">The area of the image that is to be drawn on the destination surface</param>
+		/// <param name="srcrect">
+		/// The area of the image that is to be drawn on the destination surface
+		/// </param>
 		/// <param name="dest">The Sdl.Surface to draw the image upon</param>
-		/// <param name="destrect">The position of the image on the destination surface</param>
+		/// <param name="destrect">
+		/// The position of the image on the destination surface
+		/// </param>
 		public void Draw(Rectangle srcrect, Surface dest, Rectangle destrect) 
 		{
 			surface.Blit(srcrect,dest,destrect);
 		}
-
-
 	}
 }

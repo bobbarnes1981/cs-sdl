@@ -87,7 +87,9 @@ namespace SdlDotNet
 		{
 			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT;
 			if (!frame)
+			{
 				flags |= Sdl.SDL_NOFRAME;
+			}
 			return SetVideoMode(width, height, 0, (int)flags);
 		}
 		/// <summary>
@@ -108,7 +110,9 @@ namespace SdlDotNet
 		{
 			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT;
 			if (!frame)
+			{
 				flags |= Sdl.SDL_NOFRAME;
+			}
 			return SetVideoMode(width, height, bpp, (int)flags);
 		}
 		
@@ -140,7 +144,9 @@ namespace SdlDotNet
 		{
 			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_OPENGL|Sdl.SDL_ANYFORMAT;
 			if (!frame)
+			{
 				flags |= Sdl.SDL_NOFRAME;
+			}
 			return SetVideoMode(width, height, 0, (int)flags);
 		}
 		/// <summary>
@@ -157,7 +163,9 @@ namespace SdlDotNet
 		{
 			IntPtr s = Sdl.SDL_SetVideoMode(width, height, bpp, flags);
 			if (s == IntPtr.Zero)
+			{
 				throw SdlException.Generate();
+			}
 			return new Surface(s);
 		}
 
@@ -171,7 +179,9 @@ namespace SdlDotNet
 		{
 			IntPtr s = Sdl.SDL_GetVideoSurface();
 			if (s == IntPtr.Zero)
+			{
 				throw SdlException.Generate();
+			}
 			return Surface.FromScreenPtr(s);
 		}
 
@@ -187,7 +197,9 @@ namespace SdlDotNet
 		{
 			Surface s = new Surface(pointer); 
 			if (s == null)
+			{
 				throw SdlException.Generate();
+			}
 			//return Surface.FromScreenPtr(s); 
 			return s; 
 		}
@@ -264,7 +276,9 @@ namespace SdlDotNet
 				width, height, depth,
 				Rmask, Gmask, Bmask, Amask);
 			if (ret == IntPtr.Zero)
+			{
 				throw SdlException.Generate();
+			}
 			return new Surface(ret);
 		}
 
@@ -320,7 +334,9 @@ namespace SdlDotNet
 		public void GL_SetAttribute(Sdl.SDL_GLattr attrib, int val) 
 		{
 			if (Sdl.SDL_GL_SetAttribute(attrib, val) != 0)
+			{
 				throw SdlException.Generate();
+			}
 		}
 		/// <summary>
 		/// Gets the value of an OpenGL attribute
@@ -331,7 +347,9 @@ namespace SdlDotNet
 		{
 			int ret;
 			if (Sdl.SDL_GL_GetAttribute(attrib, out ret) != 0)
+			{
 				throw SdlException.Generate();
+			}
 			return ret;
 		}
 	}
