@@ -67,7 +67,7 @@ namespace SdlDotNet.Examples
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			Mixer.Close();
 			Movie movie = new Movie(filepath + "test.mpg");
-			Console.WriteLine("Time: " + movie.TotalTime);
+			Console.WriteLine("Time: " + movie.Length);
 			Console.WriteLine("Width: " + movie.Width);
 			Console.WriteLine("Height: " + movie.Height);
 			Console.WriteLine("HasAudio: " + movie.HasAudio);

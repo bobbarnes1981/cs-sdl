@@ -148,7 +148,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Sets the volume for the movie.
 		/// </summary>
 		/// <param name="volume"></param>
 		public void AdjustVolume(int volume)
@@ -157,7 +157,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Width of movie
 		/// </summary>
 		public int Width
 		{
@@ -168,7 +168,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Height of movie
 		/// </summary>
 		public int Height
 		{
@@ -179,9 +179,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns the length of the movie in seconds
 		/// </summary>
-		public double TotalTime
+		public double Length
 		{
 			get
 			{
@@ -190,9 +190,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get the movie file size in bytes.
 		/// </summary>
-		public int Size
+		public int FileSize
 		{
 			get
 			{
@@ -212,7 +212,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns current frame number in movie.
 		/// </summary>
 		public double CurrentFrame
 		{
@@ -223,7 +223,18 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns current offset??? in movie.
+		/// </summary>
+		public double CurrentOffset
+		{
+			get
+			{
+				return movieInfo.current_offset;
+			}
+		}
+
+		/// <summary>
+		/// Returns the current time in the movie in seconds.
 		/// </summary>
 		public double CurrentTime
 		{
@@ -256,7 +267,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns true if the movie has a valid audio stream.
 		/// </summary>
 		public bool HasAudio
 		{
@@ -310,7 +321,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns true if the movie has a valid video stream.
 		/// </summary>
 		public bool HasVideo
 		{
@@ -328,15 +339,26 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Starts playback of a movie.
 		/// </summary>
 		public void Play()
 		{
+			this.Loop(false);
 			Smpeg.SMPEG_play(handle);
 		}
 
 		/// <summary>
-		/// 
+		/// Starts playback of a movie.
+		/// </summary>
+		/// <param name="loop">Loop movie while playing</param>
+		public void Play(bool loop)
+		{
+			this.Loop(loop);
+			Smpeg.SMPEG_play(handle);
+		}
+
+		/// <summary>
+		/// Stops playback of a movie.
 		/// </summary>
 		public void Stop()
 		{
@@ -344,7 +366,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// This pauses playback of the movie
 		/// </summary>
 		public void Pause()
 		{
@@ -352,7 +374,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Sets the movie playback position to the start of the movie.
 		/// </summary>
 		public void Rewind()
 		{
@@ -362,7 +384,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		public void Loop(bool repeat)
+		private void Loop(bool repeat)
 		{
 			if (repeat)
 			{
@@ -437,13 +459,13 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		/// <param name="seconds"></param>
-		public void SkipSeconds(float seconds)
+		public void Skip(float seconds)
 		{
 			Smpeg.SMPEG_skip(handle, seconds);
 		}
 
 		/// <summary>
-		/// 
+		/// Seeks a specified number of bytes forward in the movie stream.
 		/// </summary>
 		/// <param name="bytes"></param>
 		public void Seek(int bytes)
@@ -452,7 +474,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Renders specified frame of movie.
 		/// </summary>
 		/// <param name="frameNumber"></param>
 		public void RenderFrame(int frameNumber)
@@ -461,11 +483,18 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Renders specified frame of movie.
+		/// </summary>
+		public void RenderFirstFrame()
+		{
+			Smpeg.SMPEG_renderFrame(handle, 0);
+		}
+
+		/// <summary>
+		/// Renders final frame of movie and puts it on a surface
 		/// </summary>
 		/// <param name="surface"></param>
-		/// <param name="frameNumber"></param>
-		public void RenderFinalFrame(Surface surface, int frameNumber)
+		public void RenderFinalFrame(Surface surface)
 		{
 			Smpeg.SMPEG_renderFinal(handle, surface.SurfacePointer, 0, 0);
 		}

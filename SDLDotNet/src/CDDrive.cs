@@ -266,7 +266,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Returns the number of seconds in an audio track.
+		/// Returns the length of an audio track in seconds.
 		/// </summary>
 		public int TrackLength(int trackNumber)
 		{
@@ -303,6 +303,23 @@ namespace SdlDotNet
 				{ 
 					return 0;
 				}
+		}
+
+		/// <summary>
+		/// Returns the end time of the track in seconds.
+		/// </summary>
+		public int TrackEnd(int trackNumber)
+		{
+			int result = Sdl.CD_INDRIVE((int)this.Status);
+			GC.KeepAlive(this);
+			if (result == 1)
+			{
+				return this.TrackStart(trackNumber) + this.TrackLength(trackNumber);
+			}
+			else 
+			{ 
+				return 0;
+			}
 		}
 
 //		/// <summary>
