@@ -61,7 +61,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Which mouse button created the event
 		/// </summary>
 		public MouseButton Button
 		{
@@ -72,7 +72,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// True if button is pressed
 		/// </summary>
 		public bool ButtonPressed
 		{
@@ -83,7 +83,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// X position of mouse at time of event
 		/// </summary>
 		public short X
 		{
@@ -94,7 +94,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of mouse at time of event 
 		/// </summary>
 		public short Y
 		{

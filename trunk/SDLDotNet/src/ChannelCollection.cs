@@ -27,15 +27,17 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Encapsulates the collection of SdlImage objects in an SdlImageList.
+	/// Encapsulates the collection of Channel objects in the Mixer system.
 	/// </summary>
+	/// <remarks></remarks>
 	public class ChannelCollection : CollectionBase, ICollection
 	{
 		private ArrayList data;
 
 		/// <summary>
-		/// 
+		/// Create a Collection to hold channels
 		/// </summary>
+		/// <remarks></remarks>
 		public ChannelCollection()
 		{
 			data = new ArrayList();
@@ -44,6 +46,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Indexer for the Items in the Collection
 		/// </summary>
+		/// <remarks></remarks>
 		public Channel this[int index] 
 		{
 			get 
@@ -53,68 +56,75 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Adds the specified SdlImage to the end of the SdlImageList.
+		/// Adds the specified Channel to the end of the ChannelCollection.
 		/// </summary>
 		/// <param name="channel">
-		/// The SdlImage to be added to the end of the SdlImageList.
+		/// The Channel to be added to the end of the ChannelCollection.
 		/// </param>
 		/// <returns>
-		/// The index at which the SdlImage has been added.
+		/// The index at which the Channel has been added.
 		/// </returns>
+		/// <remarks></remarks>
 		public int Add(Channel channel)
 		{
 			return List.Add(channel);
 		} 
 
 		/// <summary>
-		/// Load a SdlImage with the specified filename and add 
-		/// it to the end of the SdlImageList.
+		/// Load a new Channel with the specified index and add 
+		/// it to the end of the ChannelCollection.
 		/// </summary>
-		/// <param name="index"></param>
+		/// <param name="channelIndex">Index of Channel object
+		/// </param>
 		/// <returns>
-		/// The index at which the SdlImage has been added.
+		/// The index at which the Channel has been added.
 		/// </returns>
-		public int Add(int index)
+		/// <remarks></remarks>
+		public int Add(int channelIndex)
 		{
-			return List.Add(new Channel(index));
+			return List.Add(new Channel(channelIndex));
 		} 			
 
 		/// <summary>
-		/// Adds the specified SdlImage to the SdlImageList.
+		/// Adds the specified Channel to the ChannelCollection.
 		/// </summary>
-		/// <param name="index"></param>
-		/// <param name="channel"></param>
-		public void Insert(int index, Channel channel)
+		/// <param name="collectionIndex">index of collection</param>
+		/// <param name="channel">channel object</param>
+		/// <remarks></remarks>
+		public void Insert(int collectionIndex, Channel channel)
 		{
-			List.Insert(index,channel);
+			List.Insert(collectionIndex,channel);
 		} 
 
 		/// <summary>
-		/// Removes a specified SdlImage from the list.
+		/// Removes a specified Channel from the list.
 		/// </summary>
-		/// <param name="channel">The SdlImage to remove from the SdlImageList. </param>
+		/// <param name="channel">The Channel to remove from the ChannelCollection. </param>
+		/// <remarks></remarks>
 		public void Remove(Channel channel)
 		{
 			List.Remove(channel);
 		} 
 
 		/// <summary>
-		/// Returns the index of a specified SdlImage in the list.
+		/// Returns the index of a specified Channel in the list.
 		/// </summary>
 		/// <param name="channel">The channel object</param>
 		/// <returns>The index of specified channel in the list</returns>
+		/// <remarks></remarks>
 		public int IndexOf(Channel channel)
 		{
 			return List.IndexOf(channel);
 		} 
 
 		/// <summary>
-		/// Indicates whether a specified SdlImage is contained in the list.
+		/// Indicates whether a specified Channel is contained in the list.
 		/// </summary>
-		/// <param name="channel">The SdlImage to find in the list.</param>
+		/// <param name="channel">The Channel to find in the list.</param>
 		/// <returns>
-		/// true if the SdlImage is found in the list; otherwise, false.
+		/// true if the Channel is found in the list; otherwise, false.
 		/// </returns>
+		/// <remarks></remarks>
 		public bool Contains(Channel channel)
 		{
 			return List.Contains(channel);
@@ -127,11 +137,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Provide the strongly typed member for ICollection.
 		/// </summary>
 		/// <param name="array"></param>
 		/// <param name="index"></param>
-		// Provide the strongly typed member for ICollection.
+		/// <remarks>Provide the strongly typed member for ICollection.</remarks> 
 		public void CopyTo(Exception[] array, int index)
 		{
 			((ICollection)this).CopyTo(array, index);

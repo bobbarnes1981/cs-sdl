@@ -43,7 +43,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create movie object from file
 		/// </summary>
 		/// <param name="file"></param>
 		public Movie(string file)
@@ -51,6 +51,10 @@ namespace SdlDotNet
 			this.handle =
 				Smpeg.SMPEG_new(file, out movieInfo, 
 				(int) SdlFlag.TrueValue);
+			if (this.handle == IntPtr.Zero)
+			{
+				throw MovieStatusException.Generate();
+			}
 			this.movieInfo = movieInfo;
 		}
 
@@ -104,15 +108,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Enable video during playback
 		/// </summary>
+		/// <remarks>Enabled by default</remarks>
 		public void EnableVideo()
 		{
 			Smpeg.SMPEG_enablevideo(this.handle, (int)SdlFlag.TrueValue);
 		}
 
 		/// <summary>
-		/// 
+		/// Disable video during playback
 		/// </summary>
 		public void DisableVideo()
 		{
@@ -120,15 +125,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Enable audio during playback
 		/// </summary>
+		/// <remarks>Enabled by default</remarks>
 		public void EnableAudio()
 		{
 			Smpeg.SMPEG_enableaudio(this.handle, (int)SdlFlag.TrueValue);
 		}
 
 		/// <summary>
-		/// 
+		/// Disable audio during playback
 		/// </summary>
 		public void DisableAudio()
 		{
@@ -136,7 +142,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Display video surface
 		/// </summary>
 		/// <param name="surface"></param>
 		public void Display(Surface surface)
@@ -157,7 +163,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns Size of movie
 		/// </summary>
 		public System.Drawing.Size Size
 		{
@@ -212,7 +218,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns current frames per second
 		/// </summary>
 		public double CurrentFps
 		{
@@ -256,7 +262,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns current audio frame
 		/// </summary>
 		public int CurrentAudioFrame
 		{
@@ -267,7 +273,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns audio string
 		/// </summary>
 		public string AudioString
 		{
@@ -296,7 +302,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// If true, movie is playing
 		/// </summary>
 		public bool IsPlaying
 		{
@@ -314,7 +320,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// If true, movie has been stopped
 		/// </summary>
 		public bool IsStopped
 		{
@@ -393,7 +399,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Loop movie
 		/// </summary>
 		private void Loop(bool repeat)
 		{
@@ -408,7 +414,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Resize movie
 		/// </summary>
 		/// <param name="width"></param>
 		/// <param name="height"></param>
@@ -418,7 +424,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Change size of movie by the same amount in both axes
 		/// </summary>
 		/// <param name="scalingFactor"></param>
 		public void ScaleSize(int scalingFactor)
@@ -427,7 +433,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Double size of movie
 		/// </summary>
 		public void ScaleDouble()
 		{
@@ -435,7 +441,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Return size to normal
 		/// </summary>
 		public void ScaleNormal()
 		{
@@ -467,7 +473,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Skip forward a certain number of seconds
 		/// </summary>
 		/// <param name="seconds"></param>
 		public void Skip(float seconds)

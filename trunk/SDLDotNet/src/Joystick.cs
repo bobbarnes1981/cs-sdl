@@ -26,7 +26,7 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Summary description for Primitives.
+	/// Struct for trackball motion
 	/// </summary>
 	public struct BallMotion
 	{
@@ -34,7 +34,7 @@ namespace SdlDotNet
 		int y;
 
 		/// <summary>
-		/// 
+		/// Ball motion
 		/// </summary>
 		/// <param name="x"></param>
 		/// <param name="y"></param>
@@ -45,7 +45,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// motion in X-axis
 		/// </summary>
 		public int MotionX
 		{
@@ -60,7 +60,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Motion in Y-axis
 		/// </summary>
 		public int MotionY
 		{
@@ -75,7 +75,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// String output
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
@@ -83,7 +83,7 @@ namespace SdlDotNet
 			return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2})", x, y);
 		}
 		/// <summary>
-		/// 
+		/// Equals
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
@@ -97,7 +97,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -108,7 +108,7 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// no equals operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -119,7 +119,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// GetHashCode openrator
 		/// </summary>
 		/// <returns></returns>
 		public override int GetHashCode()
@@ -138,7 +138,7 @@ namespace SdlDotNet
 		private bool disposed = false;
 
 		/// <summary>
-		/// 
+		/// open joystick at index number
 		/// </summary>
 		/// <param name="index"></param>
 		public Joystick(int index)
@@ -295,7 +295,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the current axis position
 		/// </summary>
 		/// <param name="axis"></param>
 		/// <returns></returns>
@@ -305,7 +305,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the ball motion
 		/// </summary>
 		/// <param name="ball"></param>
 		/// <returns></returns>
@@ -327,7 +327,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the current button state
 		/// </summary>
 		/// <param name="button"></param>
 		/// <returns></returns>
@@ -337,7 +337,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the current Hat state
 		/// </summary>
 		/// <param name="hat"></param>
 		/// <returns></returns>

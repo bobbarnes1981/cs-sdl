@@ -110,7 +110,7 @@
 	<echo message="Building all Release assemblies" />
     </target>
 
-    <target name="doc">
+    <target name="doc" depends="init, build">
 	    <nant buildfile="${src.dir}/${project.name}.dll.build" target="doc" />	
     </target>
 

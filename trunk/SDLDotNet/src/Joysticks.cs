@@ -45,7 +45,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Destroys joystick system
 		/// </summary>
 		~Joysticks() 
 		{
@@ -53,7 +53,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Starts joystick subsystem
 		/// </summary>
 		public static void Initialize()
 		{
@@ -150,7 +150,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks to see if joystick number is valid
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>

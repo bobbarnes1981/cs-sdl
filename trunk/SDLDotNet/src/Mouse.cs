@@ -25,7 +25,7 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for Mouse.
+	/// Mouse.
 	/// </summary>
 	public sealed class Mouse
 	{
@@ -82,7 +82,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns current mouse position
 		/// </summary>
 		/// <returns></returns>
 		public Point MousePosition
@@ -97,7 +97,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns change in mouse position
 		/// </summary>
 		/// <returns></returns>
 		public Point MousePositionChange
@@ -112,7 +112,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns true if app has mouse focus
 		/// </summary>
 		public bool HasMouseFocus
 		{

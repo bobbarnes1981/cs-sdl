@@ -36,7 +36,7 @@ namespace SdlDotNet
 		private const short JOYSTICK_THRESHHOLD = 3277;
 
 		/// <summary>
-		/// 
+		/// Create
 		/// </summary>
 		/// <param name="device">The joystick index</param>
 		/// <param name="axisIndex">The axis index</param>
@@ -57,7 +57,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Return device
 		/// </summary>
 		public byte Device
 		{
@@ -68,7 +68,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Axis Index
 		/// </summary>
 		public byte AxisIndex
 		{
@@ -79,7 +79,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// AxisValue
 		/// </summary>
 		public float AxisValue
 		{
@@ -96,8 +96,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Joystick jitter threshhold
 		/// </summary>
+		/// <remarks>The joystick has to return a value that is higher than this before firing an event. This is used to reduce joystick jitter.</remarks>
 		public static short JoystickThreshold
 		{
 			get

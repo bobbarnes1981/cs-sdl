@@ -26,8 +26,9 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Represents a CD-ROM drive on the system
+	/// Represents a CDROM drive on the system
 	/// </summary>
+	/// <remarks></remarks>
 	public class CDDrive : BaseSdlResource
 	{
 		private bool disposed = false;
@@ -35,10 +36,11 @@ namespace SdlDotNet
 		private int index;
 
 		/// <summary>
-		/// Represents a CD-ROM drive on the system
+		/// Represents a CDROM drive on the system
 		/// </summary>
 		/// <param name="handle">handle to CDDrive</param>
 		/// <param name="index">Index number of drive</param>
+		/// <remarks>used internally</remarks>
 		internal CDDrive(IntPtr handle, int index) 
 		{
 			this.handle = handle;
@@ -53,9 +55,14 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Represents a CD-ROM drive on the system
+		/// Represents a CDROM drive on the system
 		/// </summary>
 		/// <param name="index">Index number of drive</param>
+		/// <remarks>Initializes drive</remarks>
+		/// <exception cref="SdlException">
+		/// An exaception will be thrown if the drive number 
+		/// is below zero or above the number of drive on the system.
+		/// </exception>
 		public CDDrive(int index)
 		{
 			this.handle = Sdl.SDL_CDOpen(index);
@@ -69,21 +76,10 @@ namespace SdlDotNet
 			}
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		internal IntPtr GetHandle
-//		{ 
-//			get
-//			{
-//				GC.KeepAlive(this);
-//				return handle; 
-//			}
-//		}
-
 		/// <summary>
 		/// The drive number
 		/// </summary>
+		/// <remarks>Returns the drive number.</remarks>
 		public int Index 
 		{ 
 			get 
@@ -94,9 +90,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns a platform-specific name for a CD-ROM drive
 		/// </summary>
+		/// <remarks></remarks>
 		/// <returns>A platform-specific name, i.e. "D:\"</returns>
-		/// <remarks>
-		/// </remarks>
 		public string DriveName() 
 		{
 			if (!CDRom.IsValidDriveNumber(this.index))
@@ -107,9 +102,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Disposes object.
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <remarks>Destroys unmanaged resources</remarks>
+		/// <param name="disposing">If true, it disposes the handle to the drive</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -132,6 +128,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes CDDrive handle
 		/// </summary>
+		/// <remarks>Closes handle to unmanaged SDL resource</remarks>
 		protected override void CloseHandle(IntPtr handleToClose) 
 		{
 			Sdl.SDL_CDClose(handleToClose);
@@ -142,6 +139,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the current drive status
 		/// </summary>
+		/// <remarks>used to determine if the drive is busy, stopped, empty.</remarks>
 		public CDStatus Status 
 		{
 			get 
@@ -154,6 +152,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks to see if the CD is currently playing.
 		/// </summary>
+		/// <remarks>Returns true if the drive is in use.</remarks>
 		public bool IsBusy 
 		{
 			get 
@@ -173,6 +172,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks to see if the CD drive is currently empty.
 		/// </summary>
+		/// <remarks>Returns true if the drive is empty.</remarks>
 		public bool IsEmpty
 		{
 			get 
@@ -192,6 +192,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks to see if the CD drive is currently paused.
 		/// </summary>
+		/// <remarks>Returns true if the drive has been paused.</remarks>
 		public bool IsPaused
 		{
 			get 
@@ -211,6 +212,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks to see if the track has audio data.
 		/// </summary>
+		/// <remarks></remarks>
+		/// <param name="trackNumber">Returns true if the track is an audio track</param>
 		public bool IsAudioTrack(int trackNumber)
 		{
 				int result = Sdl.CD_INDRIVE((int)this.Status);
@@ -239,6 +242,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks to see if the track is a data track.
 		/// </summary>
+		/// <remarks></remarks>
+		/// <param name="trackNumber">Returns true if the track is a data track</param>
 		public bool IsDataTrack(int trackNumber)
 		{
 				int result = Sdl.CD_INDRIVE((int)this.Status);
@@ -267,6 +272,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns the length of an audio track in seconds.
 		/// </summary>
+		/// <remarks></remarks>
+		/// <param name="trackNumber">Track to query</param>
 		public int TrackLength(int trackNumber)
 		{
 				int result = Sdl.CD_INDRIVE((int)this.Status);
@@ -287,6 +294,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns the number of seconds before the audio track starts on the cd.
 		/// </summary>
+		/// <remarks></remarks>
+		/// <param name="trackNumber">Track to query</param>
 		public int TrackStart(int trackNumber)
 		{
 				int result = Sdl.CD_INDRIVE((int)this.Status);
@@ -307,6 +316,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns the end time of the track in seconds.
 		/// </summary>
+		/// <remarks></remarks>
+		/// <param name="trackNumber">Track to query</param>
 		public int TrackEnd(int trackNumber)
 		{
 			int result = Sdl.CD_INDRIVE((int)this.Status);
@@ -321,31 +332,10 @@ namespace SdlDotNet
 			}
 		}
 
-//		/// <summary>
-//		/// Plays the CD in the drive
-//		/// </summary>
-//		/// <param name="startmins">The number of minutes on the CD to start playing from</param>
-//		/// <param name="startsecs">The number of seconds on the CD to start playing from</param>
-//		/// <param name="lengthmins">The number of minutes on the CD to play</param>
-//		/// <param name="lengthsecs">The number of seconds on the CD to play</param>
-//		public void Play(int startmins, int startsecs, int lengthmins, int lengthsecs) {
-//			if (Sdl.SDL_CDPlay(this.handle, CDAudio.MinSecFramesToFrames(startmins, startsecs, 0),
-//				CDAudio.MinSecFramesToFrames(lengthmins, lengthsecs, 0)) == -1)
-//				throw SdlException.Generate();
-//		}
-//		/// <summary>
-//		/// Plays the CD in the drive
-//		/// </summary>
-//		/// <param name="startframes">The number of frames (75th of a second increments) on the CD to start playing from</param>
-//		/// <param name="lengthframes">The number of frames (75th of a second increments) to play</param>
-//		public void Play(int startframes, int lengthframes) {
-//			if (Sdl.SDL_CDPlay(this.handle, startframes, lengthframes) == -1)
-//				throw SdlException.Generate();
-//		}
-
 		/// <summary>
 		/// Plays the tracks on a CD in the drive
 		/// </summary>
+		/// <remarks></remarks>
 		/// <param name="startTrack">
 		/// The starting track to play (numbered 0-99)
 		/// </param>
@@ -381,6 +371,7 @@ namespace SdlDotNet
 		/// The frame (75th of a second increment) offset after the last 
 		/// track to stop playing after
 		/// </param>
+		/// <remarks></remarks>
 		public void PlayTracks(
 			int startTrack, int startFrame, 
 			int numberOfTracks, int numberOfFrames) 
@@ -398,7 +389,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Play CD from a given track
 		/// </summary>
-		/// <param name="startTrack"></param>
+		/// <remarks></remarks>
+		/// <param name="startTrack">Track to start from</param>
 		public void PlayTracks(int startTrack)
 		{
 			int result = Sdl.SDL_CDPlayTracks(
@@ -413,6 +405,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Play CD from the first track.
 		/// </summary>
+		/// <remarks></remarks>
 		public void Play()
 		{
 			int result = Sdl.SDL_CDPlayTracks(
@@ -427,6 +420,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Pauses the CD in this drive
 		/// </summary>
+		/// <remarks></remarks>
 		public void Pause() 
 		{
 			int result = Sdl.SDL_CDPause(this.handle);
@@ -439,6 +433,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Resumes a previously paused CD in this drive
 		/// </summary>
+		/// <remarks></remarks>
 		public void Resume() 
 		{
 			int result = Sdl.SDL_CDResume(this.handle);
@@ -451,6 +446,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Stops playing the CD in this drive
 		/// </summary>
+		/// <remarks></remarks>
 		public void Stop() 
 		{
 			int result = Sdl.SDL_CDStop(this.handle);
@@ -465,6 +461,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Ejects this drive
 		/// </summary>
+		/// <remarks></remarks>
 		public void Eject() 
 		{
 			int result = Sdl.SDL_CDEject(this.handle);
@@ -478,6 +475,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the number of tracks in the currently inserted CD
 		/// </summary>
+		/// <remarks></remarks>
 		public int NumberOfTracks 
 		{
 			get 
@@ -498,8 +496,9 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// Gets the currently playing track
+		/// Gets the currently playing track number
 		/// </summary>
+		/// <remarks></remarks>
 		public int CurrentTrack 
 		{
 			get 
@@ -516,6 +515,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the currently playing frame of the current track.
 		/// </summary>
+		/// <remarks></remarks>
 		public int CurrentTrackFrame 
 		{
 			get 
@@ -532,6 +532,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the number of seconds into the current track.
 		/// </summary>
+		/// <remarks></remarks>
 		public double CurrentTrackSeconds
 		{
 			get 

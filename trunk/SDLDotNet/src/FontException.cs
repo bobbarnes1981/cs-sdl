@@ -17,19 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/*
- * $Revision$
- * $Date$
- *
- *	REVISION HISTORY
- *
- *	Mon 31 Mar 2003 23:28:02 EST LM
- *	Changed namespace from SdlTtfDotNet
- *
- *	Tue 25 Mar 2003 18:19:03 EST LM
- *	Basically removed all code due to Natives.Sdl_GetError being inaccessible.
- */
-
 using System;
 using System.Runtime.Serialization;
 
@@ -44,7 +31,7 @@ namespace SdlDotNet
 	public class FontException : SdlException 
 	{
 		/// <summary>
-		/// 
+		/// Font Exception
 		/// </summary>
 		public FontException() 
 		{
@@ -60,7 +47,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Font Exception
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
@@ -69,7 +56,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Font Exception
 		/// </summary>
 		/// <param name="info"></param>
 		/// <param name="context"></param>

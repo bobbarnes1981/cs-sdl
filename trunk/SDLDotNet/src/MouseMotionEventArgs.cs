@@ -29,7 +29,7 @@ namespace SdlDotNet
 	public class MouseMotionEventArgs : SdlEventArgs 
 	{
 		/// <summary>
-		/// 
+		/// MouseMotion
 		/// </summary>
 		/// <param name="buttonPressed">The current mouse button state</param>
 		/// <param name="x">The current X coordinate</param>
@@ -68,7 +68,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// True if button pressed
 		/// </summary>
 		public bool ButtonPressed
 		{
@@ -79,7 +79,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// X position of mouse
 		/// </summary>
 		public int X
 		{
@@ -90,7 +90,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of mouse
 		/// </summary>
 		public int Y
 		{
@@ -101,7 +101,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// change in X position of mouse
 		/// </summary>
 		public int RelativeX
 		{
@@ -112,7 +112,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Change in Y position of mouse
 		/// </summary>
 		public int RelativeY
 		{

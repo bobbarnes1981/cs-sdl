@@ -79,9 +79,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Destroys this object
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If true, all managed and unmanaged objects will be destroyed.</param>
 		public static void Dispose(bool disposing)
 		{
 			if (!disposed)
@@ -104,7 +104,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Start Mixer subsystem
 		/// </summary>
 		public static void Initialize()
 		{
@@ -184,7 +184,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Creates sound channel
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
@@ -231,7 +231,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Access to music system.
 		/// </summary>
 		/// <returns></returns>
 		public static Music Music
@@ -299,7 +299,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// These channels will be resrved
 		/// </summary>
 		/// <param name="numberOfChannels"></param>
 		/// <returns></returns>
@@ -309,7 +309,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Stop reserving any channels
 		/// </summary>
 		public static void CancelReserveChannels()
 		{
@@ -317,7 +317,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns the index of an available channel
 		/// </summary>
 		/// <returns></returns>
 		public static int FindAvailableChannel()
@@ -612,9 +612,5 @@ namespace SdlDotNet
 				throw SdlException.Generate();
 			}
 		}
-
-
-
 	}
-
 }

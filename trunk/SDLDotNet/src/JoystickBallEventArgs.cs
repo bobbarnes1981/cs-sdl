@@ -51,7 +51,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Device
 		/// </summary>
 		public int Device
 		{
@@ -62,7 +62,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Ball
 		/// </summary>
 		public int Ball
 		{
@@ -73,7 +73,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// change in distance on X-axis
 		/// </summary>
 		public int RelativeX
 		{
@@ -84,7 +84,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Change in distance on Y axis
 		/// </summary>
 		public int RelativeY
 		{
