@@ -3,3 +3,4 @@ bin
 obj
 build
 gc.log
+*.prjx
