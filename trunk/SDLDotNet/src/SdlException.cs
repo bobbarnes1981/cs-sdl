@@ -1,7 +1,6 @@
 /*
  * $RCSfile$
- * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
- * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2005 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
