@@ -199,10 +199,12 @@ namespace SDLDotNet {
 		/// SDL_Surface underlying the IntPtr.</returns>
 		public Surface GenerateSurfaceFromPointer( IntPtr pointer )
 		{
-			Natives.SDL_Surface *s = (Natives.SDL_Surface*)pointer.ToPointer();
+			//Natives.SDL_Surface *s = (Natives.SDL_Surface*)pointer.ToPointer();
+			Surface s = Surface.FromPtr((Natives.SDL_Surface*)pointer.ToPointer()); 
 			if (s == null)
 				throw SDLException.Generate();
-			return Surface.FromScreenPtr(s);
+			//return Surface.FromScreenPtr(s); 
+			return s; 
 		}
 
 		/// <summary>
