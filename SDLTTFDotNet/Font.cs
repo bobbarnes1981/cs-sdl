@@ -11,6 +11,10 @@ using SDLDotNet;
 	In the future, I might merge Solid/Shaded/Blended into 1 function with the type as a parameter.  At the moment I can't see any reason to do this.
 
 	REVISION HISTORY
+
+	Tue 25 Mar 2003 18:18:27 EST LM
+	Changed all exception throws to use the Generate method.
+
 	Mon 24 Mar 2003 20:45:40 EST LM
 	There is currently a bug in mono which meant this class did not need an instance of SDL.
 	I have fixed this so it does not depend on that bug.
@@ -110,7 +114,7 @@ namespace SDLTTFDotNet
 		internal Font(SDL SDL, string Filename, int PointSize) {
 			mSDL = SDL;
 			mFont = TTF_OpenFont(Filename, PointSize);
-			if (mFont == IntPtr.Zero) throw new SDLTTFException();
+			if (mFont == IntPtr.Zero) throw SDLTTFException.Generate();
 		}
 
 		internal Font(SDL SDL, IntPtr pFont) {
@@ -148,7 +152,7 @@ namespace SDLTTFDotNet
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderUNICODE_Solid(mFont, Text, Color);
-			if (pSurface == IntPtr.Zero) throw new SDLTTFException();
+			if (pSurface == IntPtr.Zero) throw SDLTTFException.Generate();
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
@@ -167,7 +171,7 @@ namespace SDLTTFDotNet
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderUNICODE_Shaded(mFont, Text, FG, BG);
-			if (pSurface == IntPtr.Zero) throw new SDLTTFException();
+			if (pSurface == IntPtr.Zero) throw SDLTTFException.Generate();
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
@@ -175,7 +179,7 @@ namespace SDLTTFDotNet
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderUNICODE_Blended(mFont, Text, FG);
-			if (pSurface == IntPtr.Zero) throw new SDLTTFException();
+			if (pSurface == IntPtr.Zero) throw SDLTTFException.Generate();
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
@@ -183,7 +187,7 @@ namespace SDLTTFDotNet
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderGlyph_Solid(mFont, Character, FG);
-			if (pSurface == IntPtr.Zero) throw new SDLTTFException();
+			if (pSurface == IntPtr.Zero) throw SDLTTFException.Generate();
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
@@ -191,7 +195,7 @@ namespace SDLTTFDotNet
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderGlyph_Shaded(mFont, Character, FG, BG);
-			if (pSurface == IntPtr.Zero) throw new SDLTTFException();
+			if (pSurface == IntPtr.Zero) throw SDLTTFException.Generate();
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
@@ -199,7 +203,7 @@ namespace SDLTTFDotNet
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderGlyph_Blended(mFont, Character, FG);
-			if (pSurface == IntPtr.Zero) throw new SDLTTFException();
+			if (pSurface == IntPtr.Zero) throw SDLTTFException.Generate();
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
