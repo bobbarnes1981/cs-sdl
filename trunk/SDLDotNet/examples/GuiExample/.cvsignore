@@ -1,0 +1,8 @@
+bin
+obj
+*.user
+*.csproj
+*.prjx
+MfGames.Sdl.Gui.xml
+MfGames.Sdl.Gui.fxcop
+GuiExample.fxcop
