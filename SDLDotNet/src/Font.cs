@@ -18,36 +18,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/*
- * $Revision$
- * $Date$
- *
- *	Notes
- *
- *	For all functions where there are 3 versions, 
- *	the Text (Latin1) and UTF8 functions convert the string to 
- *  Unicode then use the unicode version.
- *	DotNet seems to do this conversion when marshalling so 
- *  I have decided to only have methods for the unicode versions.
- *
- *	In the future, I might merge Solid/Shaded/Blended into 
- *  1 function with the type as a parameter.  
- *	At the moment I can't see any reason to do this.
- *
- *	REVISION HISTORY
- *
- *	Mon 31 Mar 2003 23:28:02 EST LM
- *	Changed namespace from SdlTtfDotNet
- *	Now using singleton architecture
- *
- *	Tue 25 Mar 2003 18:18:27 EST LM
- *	Changed all exception throws to use the Generate method.
- *
- *	Mon 24 Mar 2003 20:45:40 EST LM
- *	There is currently a bug in mono which meant this class did not need an instance of Sdl.
- *	I have fixed this so it does not depend on that bug.
- */
-
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -67,8 +37,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Font Constructor
 		/// </summary>
-		/// <param name="filename"></param>
-		/// <param name="pointSize"></param>
+		/// <param name="filename">Font filename</param>
+		/// <param name="pointSize">Size of font</param>
 		public Font(string filename, int pointSize) 
 		{
 			if (!FontSystem.IsInitialized)
@@ -91,7 +61,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If true, it will dispose all obejects</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -333,7 +303,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Size
 		/// </summary>
-		/// <param name="textItem"></param>
+		/// <param name="textItem">String to display</param>
 		/// <returns></returns>
 		public Size SizeText(string textItem) 
 		{
@@ -348,9 +318,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Render Text to Solid
 		/// </summary>
-		/// <param name="textItem"></param>
-		/// <param name="color"></param>
-		/// <returns></returns>
+		/// <param name="textItem">String to display</param>
+		/// <param name="color">Color of text</param>
+		/// <returns>Surface containing the text</returns>
 		private Surface RenderTextSolid(string textItem, Color color) 
 		{
 			IntPtr pSurface;
@@ -363,28 +333,6 @@ namespace SdlDotNet
 			}
 			return new Surface(pSurface);
 		}
-
-//		/// <summary>
-//		/// This is a utility function for rendering and blitting text
-//		/// It's only really useful for one-off text
-//		/// </summary>
-//		/// <param name="textItem"></param>
-//		/// <param name="color"></param>
-//		/// <param name="destinationSurface"></param>
-//		/// <param name="x"></param>
-//		/// <param name="y"></param>
-//		public void Render(
-//			string textItem, Color color, 
-//			Surface destinationSurface, int x, int y) 
-//		{
-//			Surface fontSurface;
-//			System.Drawing.Rectangle destinationRectangle;
-//
-//			fontSurface = RenderTextSolid(textItem, color);
-//			destinationRectangle = 
-//				new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size);
-//			destinationSurface.Blit(fontSurface, destinationRectangle);
-//		}
 
 		/// <summary>
 		/// Shade text
@@ -438,10 +386,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Render text to a surface.
 		/// </summary>
-		/// <param name="textItem"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="textItem">String to display</param>
+		/// <param name="antiAlias">If true, text will be anti-aliased</param>
 		/// <param name="foregroundColor">Color of text</param>
-		/// <returns></returns>
+		/// <returns>Surface with text</returns>
 		public Surface Render(string textItem, bool antiAlias, Color foregroundColor)
 		{
 			if (antiAlias)
@@ -457,10 +405,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Render text to a surface with a background color
 		/// </summary>
-		/// <param name="textItem"></param>
-		/// <param name="foregroundColor"></param>
-		/// <param name="backgroundColor"></param>
-		/// <returns></returns>
+		/// <param name="textItem">String to display</param>
+		/// <param name="foregroundColor">Color of text</param>
+		/// <param name="backgroundColor">Color of background</param>
+		/// <returns>Surface with text</returns>
 		public Surface Render(string textItem, Color foregroundColor, Color backgroundColor)
 		{
 			return RenderTextShaded(textItem, foregroundColor, backgroundColor);
@@ -471,75 +419,10 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="textItem">Text string</param>
 		/// <param name="foregroundColor">Color of text</param>
-		/// <returns></returns>
+		/// <returns>Surface with text</returns>
 		public Surface Render(string textItem, Color foregroundColor)
 		{
 			return RenderTextBlended(textItem, foregroundColor);
 		}
-
-
-//		/// <summary>
-//		/// Render Glyphs as Solid
-//		/// </summary>
-//		/// <param name="character"></param>
-//		/// <param name="foregroundColor"></param>
-//		/// <returns></returns>
-//		public Surface RenderGlyphSolid(
-//			short character, Sdl.SDL_Color foregroundColor) 
-//		{
-//			IntPtr pSurface;
-//
-//			pSurface = SdlTtf.TTF_RenderGlyph_Solid(
-//				handle, character, foregroundColor);
-//			GC.KeepAlive(this);
-//			if (pSurface == IntPtr.Zero) 
-//			{
-//				throw FontException.Generate();
-//			}
-//			return Video.GenerateSurfaceFromPointer(pSurface);
-//		}
-//
-//		/// <summary>
-//		/// Shade Glyphs
-//		/// </summary>
-//		/// <param name="character"></param>
-//		/// <param name="foregroundColor"></param>
-//		/// <param name="backgroundColor"></param>
-//		/// <returns></returns>
-//		public Surface RenderGlyphShaded(short character, 
-//			Sdl.SDL_Color foregroundColor, Sdl.SDL_Color backgroundColor) 
-//		{
-//			IntPtr pSurface;
-//
-//			pSurface = SdlTtf.TTF_RenderGlyph_Shaded(
-//				handle, character, foregroundColor, backgroundColor);
-//			GC.KeepAlive(this);
-//			if (pSurface == IntPtr.Zero) 
-//			{
-//				throw FontException.Generate();
-//			}
-//			return Video.GenerateSurfaceFromPointer(pSurface);
-//		}
-//
-//		/// <summary>
-//		/// Blend glyphs
-//		/// </summary>
-//		/// <param name="character"></param>
-//		/// <param name="foregroundColor"></param>
-//		/// <returns></returns>
-//		public Surface RenderGlyphBlended(
-//			short character, Sdl.SDL_Color foregroundColor) 
-//		{
-//			IntPtr pSurface;
-//
-//			pSurface = SdlTtf.TTF_RenderGlyph_Blended(
-//				handle, character, foregroundColor);
-//			GC.KeepAlive(this);
-//			if (pSurface == IntPtr.Zero) 
-//			{
-//				throw FontException.Generate();
-//			}
-//			return Video.GenerateSurfaceFromPointer(pSurface);
-//		}
 	}
 }

@@ -27,22 +27,26 @@ namespace SdlDotNet
 	/// <summary>
 	/// Base class for SdlResources
 	/// </summary>
+	/// <remarks>Several SdlDotNet classes inherit from this class</remarks>
 	public abstract class BaseSdlResource : IDisposable 
 	{
 		private bool disposed = false;
 		private IntPtr handle;
 
 		/// <summary>
-		/// 
+		/// Creates class using a handle.
 		/// </summary>
+		/// <param name="handle">Pointer to unmanaged Sdl resource</param>
+		/// <remarks>Often used by internal classes.</remarks>
 		protected BaseSdlResource(IntPtr handle) 
 		{
 			this.handle = handle;
 		}
 
 		/// <summary>
-		/// 
+		/// Default constructor.
 		/// </summary>
+		/// <remarks>Used by outside classes.</remarks>
 		protected BaseSdlResource() 
 		{
 		}
@@ -52,6 +56,7 @@ namespace SdlDotNet
 		/// and perform other cleanup operations before the Object 
 		/// is reclaimed by garbage collection.
 		/// </summary>
+		/// <remarks>Frees managed resources</remarks>
 		~BaseSdlResource() 
 		{
 			Dispose(false);
@@ -60,6 +65,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
+		/// <remarks>Destroys managed and unmanaged objects</remarks>
 		public void Dispose() 
 		{
 			Dispose(true);
@@ -67,9 +73,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Dispose objects
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If true,. it will dispose close the handle</param>
+		/// <remarks>Will dispose managed and unmanaged resources.</remarks>
 		protected virtual void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -84,13 +91,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Close the handle.
 		/// </summary>
+		/// <remarks>Used to close handle to unmanaged SDL resources</remarks>
+		/// <param name="handle">Handle to unmanaged SDL resource</param>
 		protected abstract void CloseHandle(IntPtr handle);
 
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
+		/// <remarks>Same as Dispose(true)</remarks>
 		public void Close() 
 		{
 			Dispose();

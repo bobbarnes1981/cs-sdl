@@ -358,7 +358,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Remove all events from the queue
 		/// </summary>
 		/// <returns></returns>
 		public static void Remove()
@@ -367,20 +367,18 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Remove the last number of events from the queue
 		/// </summary>
-		/// <param name="numberOfEvents"></param>
-		/// <returns></returns>
+		/// <param name="numberOfEvents">number of events to remove</param>
 		public static void Remove(int numberOfEvents)
 		{
 			Remove(EventMask.AllEvents, numberOfEvents);
 		}
 
 		/// <summary>
-		/// 
+		/// Remove all events of a certain type
 		/// </summary>
-		/// <param name="eventMask"></param>
-		/// <returns></returns>
+		/// <param name="eventMask">Events to remove</param>
 		public static void Remove(EventMask eventMask)
 		{
 			Remove(eventMask, QUERY_EVENTS_MAX);
@@ -413,9 +411,9 @@ namespace SdlDotNet
 			return eventsArray;
 		}
 		/// <summary>
-		/// 
+		/// View number of events in the queue
 		/// </summary>
-		/// <param name="numberOfEvents"></param>
+		/// <param name="numberOfEvents">number of events to retrieve</param>
 		/// <returns></returns>
 		public static SdlEventArgs[] Peek(int numberOfEvents)
 		{
@@ -423,7 +421,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// View all events in the queue
 		/// </summary>
 		/// <returns></returns>
 		public static SdlEventArgs[] Peek()
@@ -432,9 +430,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// View all events of a certain type in the queue
 		/// </summary>
-		/// <param name="eventMask"></param>
+		/// <param name="eventMask">Type of events to view</param>
 		/// <returns></returns>
 		public static SdlEventArgs[] Peek(EventMask eventMask)
 		{
@@ -442,7 +440,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// check to se if a certain kind of event is queued
 		/// </summary>
 		/// <param name="eventMask"></param>
 		/// <returns></returns>
@@ -460,7 +458,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// /pump
+		/// Disables event from appearing in the queue
 		/// </summary>
 		/// <param name="eventType"></param>
 		public static void IgnoreEvent(EventTypes eventType)
@@ -469,8 +467,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Event type will be processed by queue.
 		/// </summary>
+		/// <remarks>all events are enabled by default</remarks>
 		/// <param name="eventType"></param>
 		public static void EnableEvent(EventTypes eventType)
 		{
@@ -478,7 +477,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Check to see if this type of event is enabled
 		/// </summary>
 		/// <param name="eventType"></param>
 		/// <returns></returns>

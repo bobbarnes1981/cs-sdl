@@ -23,22 +23,20 @@ using System.Runtime.Serialization;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Represents an error resulting from a surface being lost, 
-	/// usually as a result of the user changing the input focus 
-	/// away from a full-screen application.
+	/// Represents an error resulting from a movie not playing correctly
 	/// </summary>
 	[Serializable()]
 	public class MovieStatusException : SdlException 
 	{
 		/// <summary>
-		/// 
+		/// Represents an error resulting from a movie not playing correctly
 		/// </summary>
 		public MovieStatusException() 
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Represents an error resulting from a movie not playing correctly
 		/// </summary>
 		/// <param name="message"></param>
 		public MovieStatusException(string message): base(message)
@@ -46,7 +44,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Represents an error resulting from a movie not playing correctly
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
@@ -55,7 +53,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Represents an error resulting from a movie not playing correctly
 		/// </summary>
 		/// <param name="info"></param>
 		/// <param name="context"></param>

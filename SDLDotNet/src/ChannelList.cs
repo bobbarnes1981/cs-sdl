@@ -28,6 +28,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Provides methods to manage a collection of SdlImage objects. 
 	/// </summary>
+	/// <remarks></remarks>
 	public class ChannelList
 	{
 		/// <summary>
@@ -36,16 +37,18 @@ namespace SdlDotNet
 		private ChannelCollection channels;
 
 		/// <summary>
-		/// Create a new instance of a SdlImageList
+		/// Create a new instance of a ChannelCollection
 		/// </summary>
+		/// <remarks></remarks>
 		public ChannelList() 
 		{
 			channels = new ChannelCollection();
 		}
 
 		/// <summary>
-		/// Gets the ImageList.ImageCollection for this image list.
+		/// Gets the ChannelList.ChannelCollection for this image list.
 		/// </summary>
+		/// <remarks></remarks>
 		public ChannelCollection Channels 
 		{
 			get 

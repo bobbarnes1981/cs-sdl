@@ -24,13 +24,15 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Summary description for ChannelFinishedEventArgs.
+	/// Events args for when a channel finishes playing a sound.
 	/// </summary>
+	/// <remarks>This will create event args to trigger an event after a sound has finished playing.</remarks>
 	public class ChannelFinishedEventArgs : UserEventArgs 
 	{
 		/// <summary>
-		/// 
+		/// Constructor 
 		/// </summary>
+		/// <remarks>Can be passed into the event queue.</remarks>
 		/// <param name="channel">The channel which has finished</param>
 		public ChannelFinishedEventArgs(int channel)
 		{
@@ -41,9 +43,11 @@ namespace SdlDotNet
 		}
 		
 		private int channel;
+
 		/// <summary>
-		/// 
+		/// Return channel number
 		/// </summary>
+		/// <remarks></remarks>
 		public int Channel
 		{
 			get

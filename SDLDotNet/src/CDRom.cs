@@ -48,8 +48,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Closes and destroys the object
 		/// </summary>
+		/// <remarks></remarks>
 		~CDRom() 
 		{
 			Dispose(false);
@@ -58,6 +59,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
+		/// <remarks></remarks>
 		public static void Dispose() 
 		{
 			Dispose(true);
@@ -67,6 +69,7 @@ namespace SdlDotNet
 		/// Closes and destroys this object
 		/// </summary>
 		/// <param name="disposing"></param>
+		/// <remarks></remarks>
 		public static void Dispose(bool disposing)
 		{
 			if (!disposed)
@@ -82,6 +85,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
+		/// <remarks></remarks>
 		public static void Close() 
 		{
 			Dispose();
@@ -147,10 +151,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if the drive number uis valid
 		/// </summary>
-		/// <param name="index"></param>
-		/// <returns></returns>
+		/// <param name="index">drive number</param>
+		/// <returns>true is the number is greater than 0 and less than the number of drives on the system.</returns>
 		public static bool IsValidDriveNumber(int index)
 		{
 			if (index >= 0 && index < NumberOfDrives)

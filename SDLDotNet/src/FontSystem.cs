@@ -127,7 +127,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get System Font Names
 		/// </summary>
 		/// <returns></returns>
 		public static System.Drawing.Text.FontCollection SystemFontNames

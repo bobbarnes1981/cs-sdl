@@ -29,7 +29,7 @@ namespace SdlDotNet
 	public class KeyboardEventArgs : SdlEventArgs
 	{
 		/// <summary>
-		/// 
+		/// Keyboard event args
 		/// </summary>
 		/// <param name="down">
 		/// True if the key is pressed, False if it was released
@@ -59,10 +59,12 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Keyboard event args. Does not check modifier keys.
 		/// </summary>
-		/// <param name="key"></param>
-		/// <param name="down"></param>
+		/// <param name="down">
+		/// True if the key is pressed, False if it was released
+		/// </param>
+		/// <param name="key">The Sdl virtual keycode</param>
 		public KeyboardEventArgs( Key key, bool down) : this(key, ModifierKeys.None, down)
 		{
 		}
@@ -84,7 +86,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Is key pressed
 		/// </summary>
 		public bool Down
 		{
@@ -107,7 +109,7 @@ namespace SdlDotNet
 
 
 		/// <summary>
-		/// 
+		/// Key
 		/// </summary>
 		public Key Key
 		{
@@ -118,7 +120,7 @@ namespace SdlDotNet
 		}
         
 		/// <summary>
-		/// 
+		/// modifier Key
 		/// </summary>
 		public ModifierKeys Mod
 		{

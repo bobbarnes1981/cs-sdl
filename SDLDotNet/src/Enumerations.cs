@@ -28,6 +28,7 @@ namespace SdlDotNet
 	/// Enum for values that are returned by the SDL C library functions.
 	/// This reduces the amount of "magic numbers" in the code.
 	/// </summary>
+	/// <remarks></remarks>
 	public enum SdlFlag
 	{
 		/// <summary>
@@ -80,6 +81,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// The possible states which a CD-ROM drive can be in.
 	/// </summary>
+	/// <remarks></remarks>
 	public enum CDStatus 
 	{
 		/// <summary>
@@ -106,8 +108,9 @@ namespace SdlDotNet
 	#endregion CDstatus
 
 	/// <summary>
-	/// 
+	/// Alpha flags for Video
 	/// </summary>
+	/// <remarks></remarks>
 	[FlagsAttribute]
 	public enum Alphas
 	{
@@ -123,8 +126,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// Status of Movie
 	/// </summary>
+	/// <remarks></remarks>
 	public enum MovieStatus
 	{
 		/// <summary>
@@ -218,6 +222,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Specifies an audio format to mix audio in
 	/// </summary>
+	/// <remarks></remarks>
 	public enum AudioFormat
 	{
 		/// <summary>
@@ -253,6 +258,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Indicates the current fading status of a sound
 	/// </summary>
+	/// <remarks></remarks>
 	public enum FadingStatus
 	{
 		/// <summary>
@@ -272,6 +278,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Text Style
 	/// </summary>
+	/// <remarks></remarks>
 	[FlagsAttribute]
 	public enum Styles
 	{
@@ -301,6 +308,7 @@ namespace SdlDotNet
 	/// We'll follow in the footsteps of X11...
 	/// The keyboard syms have been cleverly chosen to map to ASCII
 	/// </summary>
+	/// <remarks></remarks>
 	public enum Key
 	{
 		/// <summary>
@@ -1264,6 +1272,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Enumeration of valid key mods (possibly OR'd together) 
 	/// </summary>
+	/// <remarks></remarks>
 	[FlagsAttribute]
 	public enum ModifierKeys
 	{
@@ -1341,8 +1350,9 @@ namespace SdlDotNet
 	#endregion ModifierKeys
 
 	/// <summary>
-	/// 
+	/// Type of sound channel
 	/// </summary>
+	/// <remarks></remarks>
 	public enum SoundChannel
 	{
 		/// <summary>
@@ -1357,8 +1367,9 @@ namespace SdlDotNet
 
 	
 	/// <summary>
-	/// 
+	/// CD Track Type
 	/// </summary>
+	/// <remarks></remarks>
 	[FlagsAttribute]
 	public enum CDTrackTypes
 	{
@@ -1373,8 +1384,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// JoystickAxes
 	/// </summary>
+	/// <remarks></remarks>
 	[FlagsAttribute]
 	public enum JoystickAxes
 	{
@@ -1389,8 +1401,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// ButtonKeyState
 	/// </summary>
+	/// <remarks></remarks>
 	public enum ButtonKeyState : byte
 	{
 		/// <summary>
@@ -1404,8 +1417,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// JoystickHatStates
 	/// </summary>
+	/// <remarks></remarks>
 	[FlagsAttribute]
 	public enum JoystickHatStates
 	{
@@ -1448,8 +1462,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// SoundAction
 	/// </summary>
+	/// <remarks></remarks>
 	public enum SoundAction
 	{
 		/// <summary>
@@ -1463,8 +1478,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// MusicType
 	/// </summary>
+	/// <remarks></remarks>
 	public enum MusicType
 	{
 		/// <summary>
@@ -1498,8 +1514,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// MouseButton
 	/// </summary>
+	/// <remarks></remarks>
 	public enum MouseButton : byte
 	{
 		/// <summary>
@@ -1525,8 +1542,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// EventMask
 	/// </summary>
+	/// <remarks>Only used internally to remove events from the event queue</remarks>
 	public enum EventMask
 	{
 		/// <summary>
@@ -1604,8 +1622,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// Event Types
 	/// </summary>
+	/// <remarks></remarks>
 	[FlagsAttribute]
 	public enum EventTypes
 	{
@@ -1680,8 +1699,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// Type of Focus 
 	/// </summary>
+	/// <remarks>For the AppActive event</remarks>
 	[FlagsAttribute]
 	public enum Focus : byte
 	{

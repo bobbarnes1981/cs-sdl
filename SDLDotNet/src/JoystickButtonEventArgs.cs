@@ -29,7 +29,7 @@ namespace SdlDotNet
 	public class JoystickButtonEventArgs : SdlEventArgs 
 	{
 		/// <summary>
-		/// 
+		/// joystick button args
 		/// </summary>
 		/// <param name="device">The joystick index</param>
 		/// <param name="button">The button index</param>
@@ -60,7 +60,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// joystick device
 		/// </summary>
 		public int Device
 		{
@@ -71,7 +71,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Button
 		/// </summary>
 		public int Button
 		{
@@ -82,7 +82,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Is button pressed
 		/// </summary>
 		public bool ButtonPressed
 		{

@@ -70,7 +70,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns which modifier keys are pressed
 		/// </summary>
 		public static ModifierKeys ModifierKeyState
 		{
@@ -85,10 +85,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks key state
 		/// </summary>
-		/// <param name="key"></param>
-		/// <returns></returns>
+		/// <param name="key">Key to check</param>
+		/// <returns>True if key is pressed</returns>
 		public static bool IsKeyPressed(Key key)
 		{
 			int numberOfKeys;

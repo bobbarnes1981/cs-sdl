@@ -29,7 +29,7 @@ namespace SdlDotNet
 	public class JoystickHatEventArgs : SdlEventArgs 
 	{
 		/// <summary>
-		/// 
+		/// Joystick Hat event args
 		/// </summary>
 		/// <param name="device">The joystick index</param>
 		/// <param name="hatIndex">The hat index</param>
@@ -49,7 +49,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// joystick
 		/// </summary>
 		public int Device
 		{
@@ -60,7 +60,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Hat Index
 		/// </summary>
 		public int HatIndex
 		{
@@ -71,7 +71,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Hat value
 		/// </summary>
 		public int HatValue
 		{
