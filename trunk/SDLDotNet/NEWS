@@ -6,6 +6,10 @@ David Hudson 31 Dec 2004
 * Added primitive drawing (circles, ellipses, triangles)
 * Fixed ChannelFinished delegate for real this time :-)
 * Moved to NAnt 0.85 rc1
+* Using latest version of Tao.OpenGl for the Gears example. 
+The new version is much larger than ther previous versions. If 
+people think it is too large to include in the release zip, let me know.
+* All examples except for the CDPlayer run on Mono for Windows.
 
 2.0.0
 David Hudson 21 Nov 2004
