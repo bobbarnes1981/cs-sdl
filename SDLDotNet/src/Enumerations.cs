@@ -1371,4 +1371,78 @@ namespace SdlDotNet
 		/// </summary>
 		Data = Sdl.SDL_DATA_TRACK
 	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	[FlagsAttribute]
+	public enum JoystickAxes
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		Horizontal = 0,
+		/// <summary>
+		/// 
+		/// </summary>
+		Vertical = 1
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public enum JoystickButtonState:byte
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		NotPressed = Sdl.SDL_RELEASED,
+		/// <summary>
+		/// 
+		/// </summary>
+		Pressed = Sdl.SDL_PRESSED
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public enum JoystickHatState
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		Centered = Sdl.SDL_HAT_CENTERED,
+		/// <summary>
+		/// 
+		/// </summary>
+		Up = Sdl.SDL_HAT_UP,
+		/// <summary>
+		/// 
+		/// </summary>
+		Right = Sdl.SDL_HAT_RIGHT,
+		/// <summary>
+		/// 
+		/// </summary>
+		Down = Sdl.SDL_HAT_DOWN,
+		/// <summary>
+		/// 
+		/// </summary>
+		Left = Sdl.SDL_HAT_LEFT,
+		/// <summary>
+		/// 
+		/// </summary>
+		RightUp = Sdl.SDL_HAT_RIGHTUP,
+		/// <summary>
+		/// 
+		/// </summary>
+		RightDown = Sdl.SDL_HAT_RIGHTDOWN,
+		/// <summary>
+		/// 
+		/// </summary>
+		LeftUp = Sdl.SDL_HAT_LEFTUP,
+		/// <summary>
+		/// 
+		/// </summary>
+		LeftDown = Sdl.SDL_HAT_LEFTDOWN
+	}
 }

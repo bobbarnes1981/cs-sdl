@@ -54,6 +54,28 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Queries if the Timer subsystem has been intialized.
+		/// </summary>
+		/// <remarks>
+		/// </remarks>
+		/// <returns>True if Timer subsystem has been initialized, false if it has not.</returns>
+		public static bool IsInitialized
+		{
+			get
+			{
+				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER) & Sdl.SDL_INIT_TIMER) 
+					== (int) SdlFlag.TrueValue)
+				{
+					return true;
+				}
+				else 
+				{
+					return false;
+				}
+			}
+		}
+
+		/// <summary>
 		/// Gets the number of ticks since Sdl was initialized.  
 		/// This is not a high-resolution timer.
 		/// </summary>

@@ -4123,7 +4123,7 @@
             Number of trackballs.
             </returns>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_JoystickOpen(System.Int32)"/>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_JoystickGetBall(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_JoystickGetBall(System.IntPtr,System.Int32,System.Int32@,System.Int32@)"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_JoystickNumHats(System.IntPtr)">
             <summary>
@@ -4271,7 +4271,7 @@
             </returns>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_JoystickNumHats(System.IntPtr)"/>
         </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_JoystickGetBall(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
+        <member name="M:Tao.Sdl.Sdl.SDL_JoystickGetBall(System.IntPtr,System.Int32,System.Int32@,System.Int32@)">
             <summary>
             Get relative trackball motion. 
             </summary>
@@ -7411,7 +7411,7 @@
             </code></p></remarks>
             <seealso cref="T:Tao.Sdl.Sdl.SDL_Event"/>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_JoystickEventState(System.Int32)"/>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_JoystickGetBall(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_JoystickGetBall(System.IntPtr,System.Int32,System.Int32@,System.Int32@)"/>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_JoyBallEvent.type">
             <summary>
@@ -16516,12 +16516,12 @@
         </member>
         <member name="F:Tao.Sdl.Smpeg.SMPEG_Info.width">
             <summary>
-            
+            Width of movie file
             </summary>
         </member>
         <member name="F:Tao.Sdl.Smpeg.SMPEG_Info.height">
             <summary>
-            
+            Height of movie file
             </summary>
         </member>
         <member name="F:Tao.Sdl.Smpeg.SMPEG_Info.current_frame">
@@ -16551,7 +16551,7 @@
         </member>
         <member name="F:Tao.Sdl.Smpeg.SMPEG_Info.total_size">
             <summary>
-            
+            Movie file size in bytes
             </summary>
         </member>
         <member name="F:Tao.Sdl.Smpeg.SMPEG_Info.current_time">
@@ -16561,7 +16561,7 @@
         </member>
         <member name="F:Tao.Sdl.Smpeg.SMPEG_Info.total_time">
             <summary>
-            
+            Length of movie file in seconds.
             </summary>
         </member>
         <member name="T:Tao.Sdl.Smpeg.SMPEG_FilterCallback">

@@ -68,8 +68,8 @@ namespace SdlDotNet.Examples
 			Mixer.Close();
 			Movie movie = new Movie(filepath + "test.mpg");
 			Console.WriteLine("Time: " + movie.Length);
-			Console.WriteLine("Width: " + movie.Width);
-			Console.WriteLine("Height: " + movie.Height);
+			Console.WriteLine("Width: " + movie.Size.Width);
+			Console.WriteLine("Height: " + movie.Size.Height);
 			Console.WriteLine("HasAudio: " + movie.HasAudio);
 //			movie.DisableAudio();
 //			int freq;

@@ -71,12 +71,9 @@ namespace SdlDotNet
 		/// <param name="pointSize"></param>
 		public Font(string filename, int pointSize) 
 		{
-			if (SdlTtf.TTF_WasInit() != (int) SdlFlag.TrueValue)
+			if (!FontSystem.IsInitialized)
 			{
-				if (SdlTtf.TTF_Init() != (int) SdlFlag.Success)
-				{
-					FontException.Generate();
-				}
+				FontSystem.Initialize();
 			}
 
 			handle = SdlTtf.TTF_OpenFont(filename, pointSize);
@@ -86,9 +83,9 @@ namespace SdlDotNet
 			}
 		}
 
-		internal Font(IntPtr pFont) 
+		internal Font(IntPtr handle) 
 		{
-			handle = pFont;
+			this.handle = handle;
 		}
 
 		/// <summary>
@@ -149,6 +146,139 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Bold Property
+		/// </summary>
+		public bool Bold 
+		{
+			set 
+			{ 
+				if (value == true)
+				{
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+					SdlTtf.TTF_SetFontStyle(handle, (int) style | (int) Styles.Bold); 
+					GC.KeepAlive(this);
+				}
+				else
+				{
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+					SdlTtf.TTF_SetFontStyle(handle, (int) style ^ (int) Styles.Bold); 
+					GC.KeepAlive(this);
+				}
+			}
+			get 
+			{ 
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+				GC.KeepAlive(this);
+				if ((int)(style & Styles.Bold) == (int) SdlFlag.FalseValue)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Italic Property
+		/// </summary>
+		public bool Italic
+		{
+			set 
+			{ 
+				if (value == true)
+				{
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+					SdlTtf.TTF_SetFontStyle(handle, (int) style | (int) Styles.Italic); 
+					GC.KeepAlive(this);
+				}
+				else
+				{
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+					SdlTtf.TTF_SetFontStyle(handle, (int) style ^ (int) Styles.Italic); 
+					GC.KeepAlive(this);
+				}
+			}
+			get 
+			{ 
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+				GC.KeepAlive(this);
+				if ((int)(style & Styles.Italic) == (int) SdlFlag.FalseValue)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Underline Property
+		/// </summary>
+		public bool Underline
+		{
+			set 
+			{ 
+				if (value == true)
+				{
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+					SdlTtf.TTF_SetFontStyle(handle, (int) style | (int) Styles.Underline); 
+					GC.KeepAlive(this);
+				}
+				else
+				{
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+					SdlTtf.TTF_SetFontStyle(handle, (int) style ^ (int) Styles.Underline); 
+					GC.KeepAlive(this);
+				}
+			}
+			get 
+			{ 
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+				GC.KeepAlive(this);
+				if ((int)(style & Styles.Underline) == (int) SdlFlag.FalseValue)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Normal Property
+		/// </summary>
+		public bool Normal
+		{
+			set 
+			{ 
+				if (value == true)
+				{
+					SdlTtf.TTF_SetFontStyle(handle, (int) Styles.Normal); 
+					GC.KeepAlive(this);
+				}
+			}
+			get 
+			{ 
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
+				GC.KeepAlive(this);
+				if ((int)(style | Styles.Underline | Styles.Bold | Styles.Italic) == (int) SdlFlag.TrueValue)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
+
+		/// <summary>
 		/// Height Property
 		/// </summary>
 		public int Height 
@@ -175,9 +305,22 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Line Skip property
+		/// Descent Property
 		/// </summary>
-		public int LineSkip 
+		public int Descent
+		{
+			get 
+			{ 
+				int result = SdlTtf.TTF_FontDescent(handle);
+				GC.KeepAlive(this);
+				return result;
+			}
+		}
+
+		/// <summary>
+		/// Line Size property
+		/// </summary>
+		public int LineSize 
 		{
 			get 
 			{ 
@@ -208,7 +351,7 @@ namespace SdlDotNet
 		/// <param name="textItem"></param>
 		/// <param name="color"></param>
 		/// <returns></returns>
-		public Surface RenderTextSolid(string textItem, Color color) 
+		private Surface RenderTextSolid(string textItem, Color color) 
 		{
 			IntPtr pSurface;
 			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
@@ -221,27 +364,27 @@ namespace SdlDotNet
 			return Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
-		/// <summary>
-		/// This is a utility function for rendering and blitting text
-		/// It's only really useful for one-off text
-		/// </summary>
-		/// <param name="textItem"></param>
-		/// <param name="color"></param>
-		/// <param name="destinationSurface"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		public void RenderTextSolid(
-			string textItem, Color color, 
-			Surface destinationSurface, int x, int y) 
-		{
-			Surface fontSurface;
-			System.Drawing.Rectangle destinationRectangle;
-
-			fontSurface = RenderTextSolid(textItem, color);
-			destinationRectangle = 
-				new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size);
-			fontSurface.Blit(destinationSurface, destinationRectangle);
-		}
+//		/// <summary>
+//		/// This is a utility function for rendering and blitting text
+//		/// It's only really useful for one-off text
+//		/// </summary>
+//		/// <param name="textItem"></param>
+//		/// <param name="color"></param>
+//		/// <param name="destinationSurface"></param>
+//		/// <param name="x"></param>
+//		/// <param name="y"></param>
+//		public void RenderTextSolid(
+//			string textItem, Color color, 
+//			Surface destinationSurface, int x, int y) 
+//		{
+//			Surface fontSurface;
+//			System.Drawing.Rectangle destinationRectangle;
+//
+//			fontSurface = RenderTextSolid(textItem, color);
+//			destinationRectangle = 
+//				new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size);
+//			fontSurface.Blit(destinationSurface, destinationRectangle);
+//		}
 
 		/// <summary>
 		/// Shade text
@@ -250,7 +393,7 @@ namespace SdlDotNet
 		/// <param name="backgroundColor"></param>
 		/// <param name="foregroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderTextShaded(
+		private Surface RenderTextShaded(
 			string textItem, Color foregroundColor, Color backgroundColor) 
 		{
 			IntPtr pSurface;
@@ -272,16 +415,17 @@ namespace SdlDotNet
 		/// <summary>
 		/// Blended Text
 		/// </summary>
-		/// <param name="foregroundColor"></param>
+		/// <param name="color"></param>
 		/// <param name="textItem"></param>
 		/// <returns></returns>
-		public Surface RenderTextBlended(
-			string textItem, Sdl.SDL_Color foregroundColor) 
+		private Surface RenderTextBlended(
+			string textItem, Color color) 
 		{
 			IntPtr pSurface;
 
+			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
 			pSurface = SdlTtf.TTF_RenderUNICODE_Blended(
-				handle, textItem, foregroundColor);
+				handle, textItem, colorSdl);
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
@@ -290,68 +434,112 @@ namespace SdlDotNet
 			return Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
+
 		/// <summary>
-		/// Render Glyphs as Solid
+		/// Render text to a surface.
 		/// </summary>
-		/// <param name="character"></param>
-		/// <param name="foregroundColor"></param>
+		/// <param name="textItem"></param>
+		/// <param name="antiAlias"></param>
+		/// <param name="foregroundColor">Color of text</param>
 		/// <returns></returns>
-		public Surface RenderGlyphSolid(
-			short character, Sdl.SDL_Color foregroundColor) 
+		public Surface Render(string textItem, bool antiAlias, Color foregroundColor)
 		{
-			IntPtr pSurface;
-
-			pSurface = SdlTtf.TTF_RenderGlyph_Solid(
-				handle, character, foregroundColor);
-			GC.KeepAlive(this);
-			if (pSurface == IntPtr.Zero) 
+			if (antiAlias)
 			{
-				throw FontException.Generate();
+				return Render(textItem, foregroundColor);
 			}
-			return Video.GenerateSurfaceFromPointer(pSurface);
+			else
+			{
+				return RenderTextSolid(textItem, foregroundColor);
+			}
 		}
 
 		/// <summary>
-		/// Shade Glyphs
+		/// Render text to a surface with a background color
 		/// </summary>
-		/// <param name="character"></param>
+		/// <param name="textItem"></param>
 		/// <param name="foregroundColor"></param>
 		/// <param name="backgroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderGlyphShaded(short character, 
-			Sdl.SDL_Color foregroundColor, Sdl.SDL_Color backgroundColor) 
+		public Surface Render(string textItem, Color foregroundColor, Color backgroundColor)
 		{
-			IntPtr pSurface;
-
-			pSurface = SdlTtf.TTF_RenderGlyph_Shaded(
-				handle, character, foregroundColor, backgroundColor);
-			GC.KeepAlive(this);
-			if (pSurface == IntPtr.Zero) 
-			{
-				throw FontException.Generate();
-			}
-			return Video.GenerateSurfaceFromPointer(pSurface);
+			return RenderTextShaded(textItem, foregroundColor, backgroundColor);
 		}
 
 		/// <summary>
-		/// Blend glyphs
+		/// Render Text to a surface
 		/// </summary>
-		/// <param name="character"></param>
-		/// <param name="foregroundColor"></param>
+		/// <param name="textItem">Text string</param>
+		/// <param name="foregroundColor">Color of text</param>
 		/// <returns></returns>
-		public Surface RenderGlyphBlended(
-			short character, Sdl.SDL_Color foregroundColor) 
+		public Surface Render(string textItem, Color foregroundColor)
 		{
-			IntPtr pSurface;
-
-			pSurface = SdlTtf.TTF_RenderGlyph_Blended(
-				handle, character, foregroundColor);
-			GC.KeepAlive(this);
-			if (pSurface == IntPtr.Zero) 
-			{
-				throw FontException.Generate();
-			}
-			return Video.GenerateSurfaceFromPointer(pSurface);
+			return RenderTextBlended(textItem, foregroundColor);
 		}
+
+
+//		/// <summary>
+//		/// Render Glyphs as Solid
+//		/// </summary>
+//		/// <param name="character"></param>
+//		/// <param name="foregroundColor"></param>
+//		/// <returns></returns>
+//		public Surface RenderGlyphSolid(
+//			short character, Sdl.SDL_Color foregroundColor) 
+//		{
+//			IntPtr pSurface;
+//
+//			pSurface = SdlTtf.TTF_RenderGlyph_Solid(
+//				handle, character, foregroundColor);
+//			GC.KeepAlive(this);
+//			if (pSurface == IntPtr.Zero) 
+//			{
+//				throw FontException.Generate();
+//			}
+//			return Video.GenerateSurfaceFromPointer(pSurface);
+//		}
+//
+//		/// <summary>
+//		/// Shade Glyphs
+//		/// </summary>
+//		/// <param name="character"></param>
+//		/// <param name="foregroundColor"></param>
+//		/// <param name="backgroundColor"></param>
+//		/// <returns></returns>
+//		public Surface RenderGlyphShaded(short character, 
+//			Sdl.SDL_Color foregroundColor, Sdl.SDL_Color backgroundColor) 
+//		{
+//			IntPtr pSurface;
+//
+//			pSurface = SdlTtf.TTF_RenderGlyph_Shaded(
+//				handle, character, foregroundColor, backgroundColor);
+//			GC.KeepAlive(this);
+//			if (pSurface == IntPtr.Zero) 
+//			{
+//				throw FontException.Generate();
+//			}
+//			return Video.GenerateSurfaceFromPointer(pSurface);
+//		}
+//
+//		/// <summary>
+//		/// Blend glyphs
+//		/// </summary>
+//		/// <param name="character"></param>
+//		/// <param name="foregroundColor"></param>
+//		/// <returns></returns>
+//		public Surface RenderGlyphBlended(
+//			short character, Sdl.SDL_Color foregroundColor) 
+//		{
+//			IntPtr pSurface;
+//
+//			pSurface = SdlTtf.TTF_RenderGlyph_Blended(
+//				handle, character, foregroundColor);
+//			GC.KeepAlive(this);
+//			if (pSurface == IntPtr.Zero) 
+//			{
+//				throw FontException.Generate();
+//			}
+//			return Video.GenerateSurfaceFromPointer(pSurface);
+//		}
 	}
 }

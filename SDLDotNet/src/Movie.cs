@@ -157,9 +157,20 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		public System.Drawing.Size Size
+		{
+			get
+			{
+				return new System.Drawing.Size(this.Width, this.Height);
+			}
+		}
+
+		/// <summary>
 		/// Width of movie
 		/// </summary>
-		public int Width
+		private int Width
 		{
 			get
 			{
@@ -170,7 +181,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Height of movie
 		/// </summary>
-		public int Height
+		private int Height
 		{
 			get
 			{
