@@ -48,9 +48,9 @@ namespace SDLDotNet.Images.Samples
 				surf.FillRect(new Rectangle(new Point(0, 0), surf.Size), Color.Black); // fill the surface with black
 
 				#if __MONO__
-					imagepath = @"images\";
+					imagepath = @"images/";
 				#else
-					imagepath = @"..\..\images\";
+					imagepath = @"../../images/";
 				#endif
 
 				SDLImage Background = new SDLImage(imagepath + "background.tga");
@@ -67,7 +67,7 @@ namespace SDLDotNet.Images.Samples
 
 				for (int j = 1; j <= 16;j++) 
 				{
-					Jeep.Images.Add(imagepath + @"jeep\jeep" + j.ToString() +".gif");
+					Jeep.Images.Add(imagepath + @"jeep/jeep" + j.ToString() +".gif");
 					Jeep.Images[Jeep.Images.Count-1].Transparent = true;
 				}
 
@@ -75,7 +75,7 @@ namespace SDLDotNet.Images.Samples
 				SDLImageList ImageList = new SDLImageList();
 
 
-				SDLImage Tree = new SDLImage(imagepath + "tree.bmp");
+				SDLImage Tree = new SDLImage(imagepath + "Tree.bmp");
 
 				Tree.TransparentColor = Color.Magenta;
 				Tree.Transparent = true;

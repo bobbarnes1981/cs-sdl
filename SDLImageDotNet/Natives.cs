@@ -23,7 +23,7 @@ namespace SDLDotNet.Images
 		/// <summary>
 		/// Filename of the SDL_Image library. 
 		/// </summary>
-		const string SDL_IMAGE_DLL = "SDL_Image";
+		const string SDL_IMAGE_DLL = "SDL_image";
 
 
 		/* SDL.dll/libSDL.so */
