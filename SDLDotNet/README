@@ -79,6 +79,19 @@ Coding Style
 
 Tutorials
 	Actually write one. :-)
+	To start read the install file and install SdlDotNet.dll and Tao.Sdl.dll.
+	The best examples to start with are probably the Rectangles and PixelExample. They show the basics of how the Video, Surface and Event classes works.
+	The ImageExample and Bounce Example show basic animation.
+	The DelegateExample show how the ChannelFinished and Musicfinished events/delegates work.
+	The BombRun, WeaponFire, SnowDemo show some more animation.
+	The Gears demo shows how SDL.NET works with OpenGl.
+	The MoviePlayer plays a short MPEG-1 file.
+	The CDPlayer uses the CDRom subsystem and show how SDL.NET can use WinForms.
+	The FontExample shows how Fonts are rendered in SDL.NET
+	The GuiTest show some very basic widgets created by SDL.NET.
+	The JoystickExample shows how to use a joystick. It is sluggish and still needs work.
+	The PrimitiveExmaple draws primitives such as ellipses, triangles, bezier curves.
+	The SimpleGame is more interesting from a code standpoint because it is strict Model-View-Controller design pattern. It is based on a Pygame tutorial.
 
 TODO items:
 

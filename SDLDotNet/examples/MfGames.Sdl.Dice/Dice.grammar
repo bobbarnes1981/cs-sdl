@@ -1,0 +1,68 @@
+/*
+ * Dice Parsing Grammar
+ */
+
+%header%
+
+GRAMMARTYPE = "LL"
+ 
+DESCRIPTION = "A grammar for basic dice calculations."
+ 
+AUTHOR      = "Dylan R. E. Moonfire <d period moonfire at mfgames dotcom>"
+VERSION     = "1.0"
+DATE        = "2004-05-08"
+ 
+LICENSE     = "Do not transmit."
+COPYRIGHT   = "Copyright (c) 2004 Moonfire Games. All rights reserved."
+
+/*
+ * Tokens
+ */
+
+%tokens%
+
+ADD		= "+"
+SUB		= "-"
+DICE		= "d"
+
+OPEN		= "("
+CLOSE		= ")"
+
+NUMBER                       = <<[0-9]+>>
+WHITESPACE                   = <<[ \t\n\r]+>> %ignore%
+
+/*
+ * Production Rules
+ */
+
+%productions%
+
+Expression
+	= AdditionFragment
+	;
+
+/*
+ * Operation Fragments
+ */
+
+AdditionFragment
+	= NumericFragment ADD AdditionFragment
+	| NumericFragment
+	;
+
+/*
+ * Numberic Fragments
+ */
+
+NumericFragment
+	= RandomFragment
+	| ConstantFragment
+	;
+
+ConstantFragment
+	= NUMBER
+	;
+
+RandomFragment
+	= NUMBER? DICE NUMBER
+	;
