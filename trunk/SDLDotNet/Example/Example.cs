@@ -1,15 +1,16 @@
 using System;
 using System.Drawing;
 using SDLDotNet;
+using SDLDotNet.Mixer;
 
 // Simple SDL.NET Example
 // Just draws a bunch of rectangles to the screen, to quit hit 'Q' or Esc.
 
-namespace Example {
-	public class SDLNetExample {
+namespace SDLDotNet.Example {
+	public class SDLExample {
 		private bool _quitflag;
 
-		public SDLNetExample() {
+		public SDLExample() {
 			_quitflag = false;
 		}
 
@@ -18,11 +19,8 @@ namespace Example {
 			int height = 600;
 			Random rand = new Random();
 			
-#if __MONO__
-			string musicfile = "fard-two.ogg";
-#else
-			string musicfile = "..\\..\\fard-two.ogg";
-#endif
+			string musicfile = "../../fard-two.ogg";
+
 
 			SDL sdl = SDL.Instance; // get SDL object
 
@@ -70,7 +68,7 @@ namespace Example {
 
 		[STAThread]
 		static void Main() {
-			SDLNetExample example = new SDLNetExample();
+			SDLExample example = new SDLExample();
 			example.Go();
 		}
 	}

@@ -1,8 +1,8 @@
 <VisualStudioProject>
     <CSHARP
         ProjectType = "Local"
-        ProductVersion = "7.0.9466"
-        SchemaVersion = "1.0"
+        ProductVersion = "7.10.3077"
+        SchemaVersion = "2.0"
         ProjectGuid = "{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}"
     >
         <Build>
@@ -16,7 +16,10 @@
                 DefaultTargetSchema = "IE50"
                 DelaySign = "false"
                 OutputType = "Library"
-                RootNamespace = "SDLDotNet"
+                PreBuildEvent = ""
+                PostBuildEvent = ""
+                RootNamespace = "SDLDotNET"
+                RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
                 <Config
@@ -26,10 +29,12 @@
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
                     DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = "bin\Debug\doc.xml"
+                    DocumentationFile = "bin\Debug\SDL.NET.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "true"
+                    NoStdLib = "false"
+                    NoWarn = ""
                     Optimize = "false"
                     OutputPath = "bin\Debug\"
                     RegisterForComInterop = "false"
@@ -48,6 +53,8 @@
                     DebugSymbols = "false"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
                     Optimize = "true"
                     OutputPath = "bin\Release\"
                     RegisterForComInterop = "false"
@@ -97,6 +104,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "CDDrive.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "EventEnums.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -107,12 +119,12 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Joysticks.cs"
+                    RelPath = "Joystick.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Mixer.cs"
+                    RelPath = "Joysticks.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -143,6 +155,21 @@
                 />
                 <File
                     RelPath = "WindowManager.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mixer\Music.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mixer\Sample.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Mixer\SDLMixer.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
