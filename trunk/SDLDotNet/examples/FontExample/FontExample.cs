@@ -62,8 +62,8 @@ namespace SdlDotNet.Examples
 
 			font = new Font(filepath + FontName, size);
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
-			WindowManager.Caption = "Font Example";
-			Video.HideMouseCursor();
+			Video.WindowCaption = "Font Example";
+			Video.Mouse.ShowCursor(false);
 			System.Drawing.Text.FontCollection installedFonts = FontSystem.GetSystemFontNames();
 			Console.WriteLine("Installed Fonts: " + installedFonts.ToString());
 			Console.WriteLine("Installed Fonts: " + installedFonts.Families[0].ToString());
@@ -97,7 +97,7 @@ namespace SdlDotNet.Examples
 							text.FlipHorizontal();
 							break;
 						case 3:
-							text.RotateSurface(90);
+							text.Rotate(90);
 							break;
 						default:
 							break;

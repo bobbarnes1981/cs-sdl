@@ -31,14 +31,14 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Music
 	{
-		private static SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
+		private  SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
 
-		private static IntPtr handle;
-		private static string musicFilename;
-		private static bool disposed = false;
-		private static string queuedMusicFilename = null;
+		private IntPtr handle;
+		private string musicFilename;
+		private bool disposed = false;
+		private string queuedMusicFilename = null;
 
-		static Music instance = new Music();
+		static readonly Music instance = new Music();
 
 		static Music()
 		{
@@ -49,6 +49,14 @@ namespace SdlDotNet
 			Mixer.Initialize();
 		}
 
+		internal static Music Instance
+		{
+			get
+			{
+				return instance;
+			}
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -57,7 +65,7 @@ namespace SdlDotNet
 			Dispose(false);
 		}
 
-		internal static IntPtr Handle
+		internal IntPtr Handle
 		{ 
 			get
 			{
@@ -73,7 +81,7 @@ namespace SdlDotNet
 		/// Destroys the surface object and frees its memory
 		/// </summary>
 		/// <param name="disposing"></param>
-		public static void Dispose(bool disposing)
+		public void Dispose(bool disposing)
 		{
 			if (!disposed)
 			{
@@ -98,7 +106,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes Music handle
 		/// </summary>
-		public static void CloseHandle(IntPtr handleToClose) 
+		public void CloseHandle(IntPtr handleToClose) 
 		{
 			SdlMixer.Mix_FreeMusic(handleToClose);
 			handleToClose = IntPtr.Zero;
@@ -107,30 +115,30 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		public static string MusicFilename
+		public string MusicFilename
 		{
 			get
 			{
-				return Music.musicFilename;
+				return this.musicFilename;
 			}
 			set
 			{
-				Music.musicFilename = value;
+				this.musicFilename = value;
 			}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public static string QueuedMusicFilename
+		public string QueuedMusicFilename
 		{
 			get
 			{
-				return Music.queuedMusicFilename;
+				return this.queuedMusicFilename;
 			}
 			set
 			{
-				Music.queuedMusicFilename = value;
+				this.queuedMusicFilename = value;
 			}
 		}
 
@@ -143,31 +151,38 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="file">The filename to load</param>
 		/// <returns>A new Music object</returns>
-		public static void Load(string file) 
+		public void Load(string file) 
 		{
 			IntPtr musicPtr = SdlMixer.Mix_LoadMUS(file);
 			if (musicPtr == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
-			Music.musicFilename = file;
-			Music.Handle = musicPtr;
+			this.musicFilename = file;
+			this.Handle = musicPtr;
 		}
 
 		/// <summary>
 		/// Plays a music sample
 		/// </summary>
-		public static void Play() 
+		public void Play() 
 		{
-			Music.Play(1);
+			this.Play(1);
 		}
 
 		/// <summary>
 		/// Plays a music sample
 		/// </summary>
-		public static void PlayContinuously() 
+		public void Play(bool continuous) 
 		{
-			Music.Play(-1);
+			if (continuous == true)
+			{
+				this.Play(-1);
+			}
+			else
+			{
+				this.Play(1);
+			}
 		}
 
 		/// <summary>
@@ -175,9 +190,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="numberOfTimes">The number of times to play. 
 		/// Specify 1 to play a single time, -1 to loop forever.</param>
-		public static void Play(int numberOfTimes) 
+		public void Play(int numberOfTimes) 
 		{
-			if (SdlMixer.Mix_PlayMusic(Music.Handle, numberOfTimes) != 0)
+			if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -188,9 +203,9 @@ namespace SdlDotNet
 		/// <param name="numberOfTimes">The number of times to play. 
 		/// Specify 1 to play a single time, -1 to loop forever.</param>
 		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
-		public static void FadeIn(int numberOfTimes, int milliseconds) 
+		public void FadeIn(int numberOfTimes, int milliseconds) 
 		{
-			if (SdlMixer.Mix_FadeInMusic(Music.Handle, numberOfTimes, milliseconds) != 0)
+			if (SdlMixer.Mix_FadeInMusic(this.Handle, numberOfTimes, milliseconds) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -206,10 +221,10 @@ namespace SdlDotNet
 		/// <param name="position">A format-defined position value. 
 		/// For Ogg Vorbis, this is the number of seconds from the
 		///  beginning of the song</param>
-		public static void FadeInPosition(int numberOfTimes, 
+		public void FadeInPosition(int numberOfTimes, 
 			int milliseconds, double position) 
 		{
-			if (SdlMixer.Mix_FadeInMusicPos(Music.Handle, 
+			if (SdlMixer.Mix_FadeInMusicPos(this.Handle, 
 				numberOfTimes, milliseconds, position) != 0)
 			{
 				throw SdlException.Generate();
@@ -218,7 +233,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Sets the music volume between 0 and 128.
 		/// </summary>
-		public static int Volume
+		public int Volume
 		{
 			get
 			{
@@ -233,21 +248,21 @@ namespace SdlDotNet
 		/// <summary>
 		/// Pauses the music playing
 		/// </summary>
-		public static void Pause() 
+		public void Pause() 
 		{
 			SdlMixer.Mix_PauseMusic();
 		}
 		/// <summary>
 		/// Resumes paused music
 		/// </summary>
-		public static void Resume() 
+		public void Resume() 
 		{
 			SdlMixer.Mix_ResumeMusic();
 		}
 		/// <summary>
 		/// Resets the music position to the beginning of the sample
 		/// </summary>
-		public static void Rewind() 
+		public void Rewind() 
 		{
 			SdlMixer.Mix_RewindMusic();
 		}
@@ -255,11 +270,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		public static MusicTypes MusicType
+		public MusicTypes MusicType
 		{
 			get
 			{
-				return (MusicTypes) SdlMixer.Mix_GetMusicType(Music.Handle);
+				return (MusicTypes) SdlMixer.Mix_GetMusicType(this.Handle);
 			}
 		}
 		/// <summary>
@@ -268,11 +283,11 @@ namespace SdlDotNet
 		/// from the beginning of the song
 		/// </summary>
 		/// <param name="position"></param>
-		public static void Position(double position) 
+		public void Position(double position) 
 		{
-			if (Music.MusicType == MusicTypes.Mp3)
+			if (this.MusicType == MusicTypes.Mp3)
 			{
-				Music.Rewind();
+				this.Rewind();
 			}
 			if (SdlMixer.Mix_SetMusicPosition(position) != 0)
 			{
@@ -282,7 +297,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Stops playing music
 		/// </summary>
-		public static void Stop() 
+		public void Stop() 
 		{
 			SdlMixer.Mix_HaltMusic();
 		}
@@ -292,7 +307,7 @@ namespace SdlDotNet
 		/// <param name="ms">
 		/// The number of milliseconds to fade out for
 		/// </param>
-		public static void FadeOut(int ms) 
+		public void FadeOut(int ms) 
 		{
 			if (SdlMixer.Mix_FadeOutMusic(ms) != 1)
 			{
@@ -303,7 +318,7 @@ namespace SdlDotNet
 		/// Returns a flag indicating whether or not music is playing
 		/// </summary>
 		/// <returns>True if music is playing, otherwise False</returns>
-		public static bool IsPlaying() 
+		public bool IsPlaying() 
 		{
 			return (SdlMixer.Mix_PlayingMusic() != 0);
 		}
@@ -311,7 +326,7 @@ namespace SdlDotNet
 		/// Returns a flag indicating whether or not music is paused
 		/// </summary>
 		/// <returns>True if music is paused, otherwise False</returns>
-		public static bool IsPaused() 
+		public bool IsPaused() 
 		{
 			return (SdlMixer.Mix_PausedMusic() != 0);
 		}
@@ -321,7 +336,7 @@ namespace SdlDotNet
 		/// <returns>True if music is fading in or out, 
 		/// otherwise False
 		/// </returns>
-		public static bool IsFading() 
+		public bool IsFading() 
 		{
 			return (SdlMixer.Mix_FadingMusic() != 0);
 		}
@@ -331,27 +346,27 @@ namespace SdlDotNet
 		///  to enable the Events.ChannelFinished and 
 		///  Events.MusicFinished events
 		/// </summary>
-		public static void EnableMusicFinishedCallback() 
+		public void EnableMusicFinishedCallback() 
 		{
-			Music.MusicFinishedDelegate = new SdlMixer.MusicFinishedDelegate(Music.MusicFinished);
+			this.MusicFinishedDelegate = new SdlMixer.MusicFinishedDelegate(this.MusicFinished);
 			SdlMixer.Mix_HookMusicFinished(MusicFinishedDelegate);
 			Events.MusicFinished +=new MusicFinishedEventHandler(Events_MusicFinished);
 			}
 
-		private static void MusicFinished() 
+		private void MusicFinished() 
 		{
 			Events.NotifyMusicFinished();
 		}
 
-		private static void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
+		private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
 			//Console.WriteLine("channel finished event handler");
-			if (Music.QueuedMusicFilename != null)
+			if (this.QueuedMusicFilename != null)
 			{
-				Music.MusicFilename = Music.QueuedMusicFilename;
+				this.MusicFilename = this.QueuedMusicFilename;
 				//Console.WriteLine("playing queued sound");
-				Music.Play();
-				Music.QueuedMusicFilename = null;
+				this.Play();
+				this.QueuedMusicFilename = null;
 			}
 		}
 	}

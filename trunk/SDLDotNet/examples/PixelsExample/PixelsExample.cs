@@ -63,8 +63,8 @@ namespace SdlDotNet.Examples {
 			try {
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, bitsPerPixel, true); 
-				WindowManager.Caption = "Pixels Example";
-				Video.HideMouseCursor();
+				Video.WindowCaption = "Pixels Example";
+				Video.Mouse.ShowCursor(false);
 
 				while (!quitFlag) 
 				{

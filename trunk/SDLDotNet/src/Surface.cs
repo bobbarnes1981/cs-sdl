@@ -422,7 +422,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="circle"></param>
 		/// <param name="color"></param>
-		public void CreateFilledCircle(Circle circle, System.Drawing.Color color)
+		public void DrawFilledCircle(Circle circle, System.Drawing.Color color)
 		{
 			int result = SdlGfx.filledCircleRGBA(handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
 				color.A);
@@ -439,7 +439,7 @@ namespace SdlDotNet
 		/// <param name="circle"></param>
 		/// <param name="color"></param>
 		/// <param name="antiAlias"></param>
-		public void CreateCircle(Circle circle, System.Drawing.Color color, bool antiAlias)
+		public void DrawCircle(Circle circle, System.Drawing.Color color, bool antiAlias)
 		{
 			int result = 0;
 			if (antiAlias)
@@ -465,9 +465,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="circle"></param>
 		/// <param name="color"></param>
-		public void CreateCircle(Circle circle, System.Drawing.Color color)
+		public void DrawCircle(Circle circle, System.Drawing.Color color)
 		{
-			CreateCircle(circle, color, false);
+			DrawCircle(circle, color, false);
 		}
 
 		/// <summary>
@@ -476,7 +476,7 @@ namespace SdlDotNet
 		/// <param name="ellipse"></param>
 		/// <param name="color"></param>
 		/// <param name="antiAlias"></param>
-		public void CreateEllipse(Ellipse ellipse, System.Drawing.Color color, bool antiAlias)
+		public void DrawEllipse(Ellipse ellipse, System.Drawing.Color color, bool antiAlias)
 		{
 			int result = 0;
 
@@ -509,9 +509,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="ellipse"></param>
 		/// <param name="color"></param>
-		public void CreateEllipse(Ellipse ellipse, System.Drawing.Color color)
+		public void DrawEllipse(Ellipse ellipse, System.Drawing.Color color)
 		{
-			CreateEllipse(ellipse, color, false);
+			DrawEllipse(ellipse, color, false);
 		}
 
 		/// <summary>
@@ -519,7 +519,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="ellipse"></param>
 		/// <param name="color"></param>
-		public void CreateFilledEllipse(Ellipse ellipse, System.Drawing.Color color)
+		public void DrawFilledEllipse(Ellipse ellipse, System.Drawing.Color color)
 		{
 			int result = SdlGfx.filledEllipseRGBA(handle, ellipse.XPosition, ellipse.YPosition, ellipse.RadiusX, ellipse.RadiusY,color.R, color.B, color.G,
 				color.A);
@@ -536,7 +536,7 @@ namespace SdlDotNet
 		/// <param name="line"></param>
 		/// <param name="color"></param>
 		/// <param name="antiAlias"></param>
-		public void CreateLine(Line line, System.Drawing.Color color, bool antiAlias)
+		public void DrawLine(Line line, System.Drawing.Color color, bool antiAlias)
 		{
 			int result = 0;
 
@@ -569,9 +569,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="line"></param>
 		/// <param name="color"></param>
-		public void CreateLine(Line line, System.Drawing.Color color)
+		public void DrawLine(Line line, System.Drawing.Color color)
 		{
-			CreateLine(line, color, false);
+			DrawLine(line, color, false);
 		}
 
 		/// <summary>
@@ -580,7 +580,7 @@ namespace SdlDotNet
 		/// <param name="triangle"></param>
 		/// <param name="color"></param>
 		/// <param name="antiAlias"></param>
-		public void CreateTriangle(Triangle triangle, System.Drawing.Color color, bool antiAlias)
+		public void DrawTriangle(Triangle triangle, System.Drawing.Color color, bool antiAlias)
 		{
 			int result = 0;
 
@@ -615,9 +615,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="triangle"></param>
 		/// <param name="color"></param>
-		public void CreateTriangle(Triangle triangle, System.Drawing.Color color)
+		public void DrawTriangle(Triangle triangle, System.Drawing.Color color)
 		{
-			CreateTriangle(triangle, color, false);
+			DrawTriangle(triangle, color, false);
 		}
 
 		/// <summary>
@@ -625,7 +625,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="triangle"></param>
 		/// <param name="color"></param>
-		public void CreateFilledTriangle(Triangle triangle, System.Drawing.Color color)
+		public void DrawFilledTriangle(Triangle triangle, System.Drawing.Color color)
 		{
 			int result = 0;
 			result = SdlGfx.filledTrigonRGBA(
@@ -647,7 +647,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="polygon"></param>
 		/// <param name="color"></param>
-		public void CreateFilledPolygon(Polygon polygon, System.Drawing.Color color)
+		public void DrawFilledPolygon(Polygon polygon, System.Drawing.Color color)
 		{
 			int result = SdlGfx.filledPolygonRGBA(handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
 				color.A);
@@ -664,7 +664,7 @@ namespace SdlDotNet
 		/// <param name="polygon"></param>
 		/// <param name="color"></param>
 		/// <param name="antiAlias"></param>
-		public void CreatePolygon(Polygon polygon, System.Drawing.Color color, bool antiAlias)
+		public void DrawPolygon(Polygon polygon, System.Drawing.Color color, bool antiAlias)
 		{
 			int result = 0;
 			if (antiAlias)
@@ -690,9 +690,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="polygon"></param>
 		/// <param name="color"></param>
-		public void CreatePolygon(Polygon polygon, System.Drawing.Color color)
+		public void DrawPolygon(Polygon polygon, System.Drawing.Color color)
 		{
-			CreatePolygon(polygon, color, false);
+			DrawPolygon(polygon, color, false);
 		}
 
 		/// <summary>
@@ -700,7 +700,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="pie"></param>
 		/// <param name="color"></param>
-		public void CreatePie(Pie pie, System.Drawing.Color color)
+		public void DrawPie(Pie pie, System.Drawing.Color color)
 		{
 			int result = 0;
 
@@ -723,7 +723,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="pie"></param>
 		/// <param name="color"></param>
-		public void CreateFilledPie(Pie pie, System.Drawing.Color color)
+		public void DrawFilledPie(Pie pie, System.Drawing.Color color)
 		{
 			int result = SdlGfx.filledPieRGBA(handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingPoint, pie.EndingPoint,color.R, color.B, color.G,
 				color.A);
@@ -739,7 +739,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="bezier"></param>
 		/// <param name="color"></param>
-		public void CreateBezier(Bezier bezier, System.Drawing.Color color)
+		public void DrawBezier(Bezier bezier, System.Drawing.Color color)
 		{
 			int result = 0;
 			result = SdlGfx.bezierRGBA(
@@ -759,7 +759,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="box"></param>
 		/// <param name="color"></param>
-		public void CreateBox(Box box, System.Drawing.Color color)
+		public void DrawBox(Box box, System.Drawing.Color color)
 		{
 			int result = 0;
 
@@ -782,7 +782,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="box"></param>
 		/// <param name="color"></param>
-		public void CreateFilledBox(Box box, System.Drawing.Color color)
+		public void DrawFilledBox(Box box, System.Drawing.Color color)
 		{
 			int result = 0;
 
@@ -1282,9 +1282,9 @@ namespace SdlDotNet
 		/// </summary>
 		public void FlipHorizontal() 
 		{
-			this.RotateSurface(270);
+			this.Rotate(270);
 			this.FlipVertical();
-			this.RotateSurface(90);
+			this.Rotate(90);
 		}
 
 		/// <summary>
@@ -1376,7 +1376,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="degreesOfRotation"></param>
 		/// <returns></returns>
-		public void RotateSurface(int degreesOfRotation)
+		public void Rotate(int degreesOfRotation)
 		{
 			this.SurfacePointer = 
 				SdlGfx.rotozoomSurface(this.SurfacePointer, degreesOfRotation, 1, SdlGfx.SMOOTHING_OFF);
@@ -1388,7 +1388,7 @@ namespace SdlDotNet
 		/// <param name="degreesOfRotation"></param>
 		/// <param name="antiAlias"></param>
 		/// <returns></returns>
-		public void RotateSurface(int degreesOfRotation, bool antiAlias)
+		public void Rotate(int degreesOfRotation, bool antiAlias)
 		{
 			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
@@ -1410,7 +1410,7 @@ namespace SdlDotNet
 		/// <param name="degreesOfRotation"></param>
 		/// <param name="zoom"></param>
 		/// <returns></returns>
-		public void RotateAndZoomSurface(int degreesOfRotation, double zoom)
+		public void RotoZoom(int degreesOfRotation, double zoom)
 		{
 			this.SurfacePointer = 
 				SdlGfx.rotozoomSurface(this.SurfacePointer, degreesOfRotation, zoom, SdlGfx.SMOOTHING_OFF);
@@ -1423,7 +1423,7 @@ namespace SdlDotNet
 		/// <param name="zoom"></param>
 		/// <param name="antiAlias"></param>
 		/// <returns></returns>
-		public void RotateAndZoomSurface(int degreesOfRotation, 
+		public void RotoZoom(int degreesOfRotation, 
 			double zoom, bool antiAlias)
 		{
 			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
@@ -1446,7 +1446,7 @@ namespace SdlDotNet
 		/// <param name="zoomX"></param>
 		/// <param name="zoomY"></param>
 		/// <returns></returns>
-		public void ZoomSurface(double zoomX, double zoomY)
+		public void Scale(double zoomX, double zoomY)
 		{
 			this.SurfacePointer = 
 				SdlGfx.zoomSurface(this.SurfacePointer, zoomX, zoomY, SdlGfx.SMOOTHING_OFF);
@@ -1459,7 +1459,7 @@ namespace SdlDotNet
 		/// <param name="zoomY"></param>
 		/// <param name="antiAlias"></param>
 		/// <returns></returns>
-		public void ZoomSurface(double zoomX, double zoomY, bool antiAlias)
+		public void Scale(double zoomX, double zoomY, bool antiAlias)
 		{
 			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
@@ -1475,7 +1475,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="zoom"></param>
 		/// <returns></returns>
-		public void ZoomSurface(double zoom)
+		public void Scale(double zoom)
 		{
 			this.SurfacePointer = 
 				SdlGfx.zoomSurface(this.SurfacePointer, zoom, zoom, SdlGfx.SMOOTHING_OFF);
@@ -1487,7 +1487,7 @@ namespace SdlDotNet
 		/// <param name="zoom"></param>
 		/// <param name="antiAlias"></param>
 		/// <returns></returns>
-		public void ZoomSurface(double zoom, bool antiAlias)
+		public void Scale(double zoom, bool antiAlias)
 		{
 			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
@@ -1497,6 +1497,33 @@ namespace SdlDotNet
 			this.SurfacePointer = 
 				SdlGfx.zoomSurface(this.SurfacePointer, zoom, zoom, antiAliasParameter);
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public void ScaleDouble()
+		{
+			this.SurfacePointer = 
+				SdlGfx.zoomSurface(this.SurfacePointer, 2, 2, SdlGfx.SMOOTHING_OFF);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="antiAlias"></param>
+		/// <returns></returns>
+		public void ScaleDouble(bool antiAlias)
+		{
+			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
+			if (antiAlias == true)
+			{
+				antiAliasParameter = SdlGfx.SMOOTHING_ON;
+			}
+			this.SurfacePointer = 
+				SdlGfx.zoomSurface(this.SurfacePointer, 2, 2, antiAliasParameter);
+		}
+
 		/// <summary>
 		/// Get/set the transparency of the image.  
 		/// </summary>

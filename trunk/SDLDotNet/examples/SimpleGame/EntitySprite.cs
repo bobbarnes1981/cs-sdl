@@ -36,7 +36,7 @@ namespace SdlDotNet.Examples
 		{
 			this.sprite = screen.CreateCompatibleSurface(70, 70, true);
 			this.sprite.Fill(Color.FromArgb(0, 255, 128));
-			this.sprite.CreateFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
+			this.sprite.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
 			this.rect = new Rectangle(0,0,70,70);
 		}
 		public Rectangle Rect

@@ -84,5 +84,16 @@ namespace SdlDotNet
 				return new SurfaceLostException(msg);
 			}
 		}
+
+		/// <summary>
+		/// Returns SDL error.
+		/// </summary>
+		public static string GetError
+		{
+			get
+			{
+				return Sdl.SDL_GetError();
+			}
+		}
 	}
 }

@@ -4740,6 +4740,13 @@
             <seealso cref="M:Tao.Sdl.Sdl.SDL_CreateCursor(System.Byte@,System.Byte@,System.Int32,System.Int32,System.Int32,System.Int32)"/>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_SetCursor(Tao.Sdl.Sdl.SDL_Cursor@)"/>
         </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_BUTTON(System.Byte)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <returns></returns>
+        </member>
         <member name="M:Tao.Sdl.Sdl.SDL_RWFromFile(System.String,System.String)">
             <summary>
             Create SDL_RWops structures from file.

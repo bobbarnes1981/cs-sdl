@@ -28,93 +28,6 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Represents the current state of all the mouse buttons
-	/// </summary>
-	public struct MouseButtonState 
-	{
-		private int state;
-
-		internal MouseButtonState(int state) 
-		{
-			this.state = state;
-		}
-
-		/// <summary>
-		/// Gets the pressed or released state of a mouse button
-		/// </summary>
-		/// <param name="button">The mouse button to check</param>
-		/// <returns>
-		/// If the button is pressed, returns True, otherwise returns False
-		/// </returns>
-		public bool IsButtonPressed(int button) 
-		{
-			return (state & (1 << ((int)button) - 1)) != 0;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			return String.Format(CultureInfo.CurrentCulture, "({0})", state);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
-		public override bool Equals(object obj)
-		{
-			if (obj.GetType() != typeof(MouseButtonState))
-				return false;
-                
-			MouseButtonState mouseButtonState = (MouseButtonState)obj;   
-			return (
-				(this.state == mouseButtonState.state) 
-				);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="mouseButtonState1"></param>
-		/// <param name="mouseButtonState2"></param>
-		/// <returns></returns>
-		public static bool operator== (
-			MouseButtonState mouseButtonState1, 
-			MouseButtonState mouseButtonState2)
-		{
-			return (
-				(mouseButtonState1.state == mouseButtonState2.state)
-				);
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="mouseButtonState1"></param>
-		/// <param name="mouseButtonState2"></param>
-		/// <returns></returns>
-		public static bool operator!= (
-			MouseButtonState mouseButtonState1, 
-			MouseButtonState mouseButtonState2)
-		{
-			return !(mouseButtonState1 == mouseButtonState2);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override int GetHashCode()
-		{
-			return state;
-
-		}
-	}
-
-	/// <summary>
 	/// Indicates that the application has gained or lost input focus
 	/// </summary>
 	/// <param name="sender"></param>
@@ -675,7 +588,7 @@ namespace SdlDotNet
 				MouseMotion(
 					sender, 
 					new MouseMotionEventArgs(
-					new MouseButtonState(ev.motion.state), 
+					ev.motion.state, 
 					ev.motion.x, 
 					ev.motion.y, 
 					ev.motion.xrel, 

@@ -35,11 +35,11 @@ namespace SdlDotNet
 		/// <param name="x">The current X coordinate</param>
 		/// <param name="y">The current Y coordinate</param>
 		/// <param name="relativeX">
-		/// The difference between the last X coordinite and current</param>
+		/// The difference between the last X coordinate and current</param>
 		/// <param name="relativeY">
-		/// The difference between the last Y coordinite and current</param>
+		/// The difference between the last Y coordinate and current</param>
 		public MouseMotionEventArgs(
-			MouseButtonState state, int x, int y, 
+			int state, int x, int y, 
 			int relativeX, int relativeY)
 		{
 			this.state = state;
@@ -49,11 +49,11 @@ namespace SdlDotNet
 			this.relativeY = relativeY;
 		}
 
-		private MouseButtonState state;
+		private int state;
 		/// <summary>
 		/// 
 		/// </summary>
-		public MouseButtonState State
+		public int State
 		{
 			get
 			{

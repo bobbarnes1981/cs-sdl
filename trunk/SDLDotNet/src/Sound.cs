@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Runtime.InteropServices;
 using Tao.Sdl;
 
 namespace SdlDotNet 
@@ -36,6 +37,7 @@ namespace SdlDotNet
 		private IntPtr handle;
 		private int channels = 0;
 		private bool disposed = false;
+		private long size = 0;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -44,6 +46,12 @@ namespace SdlDotNet
 		internal Sound(IntPtr handle) 
 		{
 			this.handle = handle;
+		}
+
+		internal Sound(IntPtr handle, long size) 
+		{
+			this.handle = handle;
+			this.size = size;
 		}
 
 		internal IntPtr GetHandle() 
@@ -108,6 +116,19 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Returns sound as an array of bytes.
+		/// </summary>
+		public byte[] Array
+		{
+			get
+			{
+				byte[] array = new byte[this.size];
+				Marshal.Copy(this.GetHandle(), array, 0, (int)this.size);
+				return array;
+			}
+		}
+
+		/// <summary>
 		/// 
 		/// </summary>
 		/// <returns></returns>
@@ -129,6 +150,23 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="loopIndefinitely"></param>
+		/// <returns></returns>
+		public Channel Play(bool loopIndefinitely) 
+		{
+			if (loopIndefinitely == true)
+			{
+				return this.Play(-1, (int) SdlFlag.PlayForever);
+			}
+			else
+			{
+				return this.Play(0);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="loops"></param>
 		/// <param name="milliseconds"></param>
 		/// <returns></returns>
@@ -143,6 +181,82 @@ namespace SdlDotNet
 				milliseconds
 				);
 
+			if (index == (int) SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+			this.channels++;
+			return new Channel(index);
+		}
+
+		/// <summary>
+		/// Fades in a sample once using the first available channel
+		/// </summary>
+		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
+		/// <returns>The channel used to play the sample</returns>
+		public Channel FadeIn(int milliseconds) 
+		{
+			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), this.GetHandle(), 0, milliseconds, -1);
+			if (index == (int) SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+			this.channels++;
+			return new Channel(index);
+		}
+
+		/// <summary>
+		/// Fades in a sample the specified number of times using 
+		/// the first available channel
+		/// </summary>
+		/// <param name="milliseconds">
+		/// The number of milliseconds to fade in for
+		/// </param>
+		/// <param name="loops">The number of loops.  
+		/// Specify 1 to have the sample play twice</param>
+		/// <returns>The channel used to play the sample</returns>
+		public Channel FadeIn(int milliseconds, int loops) 
+		{
+			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), this.GetHandle(), loops, milliseconds, -1);
+			if (index == (int) SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+			this.channels++;
+			return new Channel(index);
+		}
+
+		/// <summary>
+		/// Fades in a sample once using the first available channel, 
+		/// stopping after the specified number of ms
+		/// </summary>
+		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
+		/// <param name="ticks">The time limit in milliseconds</param>
+		/// <returns>The channel used to play the sample</returns>
+		public Channel FadeInTimed(int milliseconds, int ticks) 
+		{
+			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), this.GetHandle(), 0, milliseconds, ticks);
+			if (index == (int) SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+			this.channels++;
+			return new Channel(index);
+		}
+
+		/// <summary>
+		/// Fades in a sample the specified number of times using 
+		/// the first available channel, stopping after the 
+		/// specified number of ms
+		/// </summary>
+		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
+		/// <param name="loops">The number of loops.  
+		/// Specify 1 to have the sample play twice</param>
+		/// <param name="ticks">The time limit in milliseconds</param>
+		/// <returns>The channel used to play the sample</returns>
+		public Channel FadeInTimed(int milliseconds, int loops, int ticks) 
+		{
+			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), this.GetHandle(), loops, milliseconds, ticks);
 			if (index == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
