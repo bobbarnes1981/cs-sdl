@@ -319,6 +319,8 @@ namespace SDLDotNet {
 		[DllImport(SDL_DLL), SuppressUnmanagedCodeSecurity]
 		public static extern int SDL_PollEvent(SDL_Event *evt);
 		[DllImport(SDL_DLL), SuppressUnmanagedCodeSecurity]
+		public static extern int SDL_WaitEvent(SDL_Event *evt);
+		[DllImport(SDL_DLL), SuppressUnmanagedCodeSecurity]
 		public static extern int SDL_PushEvent(SDL_Event *evt);
 
 		// WM
