@@ -28,7 +28,7 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="icon">the surface containing the image</param>
 		public void SetIcon(Surface icon) {
-			Natives.SDL_WM_SetIcon(icon.GetPtr(), null);
+			Natives.SDL_WM_SetIcon((Natives.SDL_Surface *)icon.GetPtr().ToPointer(), null);
 		}
 		/// <summary>
 		/// Iconifies (minimizes) the current window
