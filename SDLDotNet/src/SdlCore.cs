@@ -40,12 +40,6 @@ namespace SdlDotNet
 		/// </summary>
 		static readonly SdlCore instance = new SdlCore();
 
-		// Explicit static constructor to tell C# compiler
-		// not to mark type as beforefieldinit
-		static SdlCore() 
-		{
-		}
-
 		SdlCore() 
 		{
 			if (Sdl.SDL_Init(0) == -1)

@@ -95,7 +95,10 @@ namespace SdlDotNet
 		public Image(string filename)
 		{
 			IntPtr pSurface = SdlImage.IMG_Load(filename);
-			if (pSurface == IntPtr.Zero) throw ImageException.Generate();
+			if (pSurface == IntPtr.Zero) 
+			{
+				throw ImageException.Generate();
+			}
 			surface = Video.Instance.GenerateSurfaceFromPointer(pSurface);
 		}
 
@@ -107,7 +110,10 @@ namespace SdlDotNet
 		public Image(byte[] arr)
 		{
 			IntPtr pSurface = SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(arr, arr.Length), 1);
-			if (pSurface == IntPtr.Zero) throw ImageException.Generate();
+			if (pSurface == IntPtr.Zero) 
+			{
+				throw ImageException.Generate();
+			}
 			surface = Video.Instance.GenerateSurfaceFromPointer(pSurface);
 		}
 
@@ -122,7 +128,10 @@ namespace SdlDotNet
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
 			IntPtr pSurface = SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(arr, arr.Length), 1);
-			if (pSurface == IntPtr.Zero) throw ImageException.Generate();
+			if (pSurface == IntPtr.Zero) 
+			{
+				throw ImageException.Generate();
+			}
 			surface = Video.Instance.GenerateSurfaceFromPointer(pSurface);
 		}
 		
@@ -140,7 +149,10 @@ namespace SdlDotNet
 		/// </summary>
 		public Surface Surface 
 		{ 
-			get { return surface; } 
+			get 
+			{ 
+				return surface; 
+			} 
 		}
 
 
@@ -149,7 +161,10 @@ namespace SdlDotNet
 		/// </summary>
 		public int Width 
 		{ 
-			get { return surface.Width; } 
+			get 
+			{ 
+				return surface.Width; 
+			} 
 		}
 
 		/// <summary>
@@ -157,7 +172,10 @@ namespace SdlDotNet
 		/// </summary>
 		public int Height
 		{ 
-			get { return surface.Height;} 		
+			get 
+			{ 
+				return surface.Height;
+			} 		
 		}
 
 		/// <summary>
@@ -165,7 +183,10 @@ namespace SdlDotNet
 		/// </summary>
 		public Size Size
 		{ 
-			get { return surface.Size;} 		
+			get 
+			{ 
+				return surface.Size;
+			} 		
 		}
 
 
@@ -174,7 +195,10 @@ namespace SdlDotNet
 		/// </summary>
 		public bool Transparent
 		{
-			get {return transparent;}
+			get 
+			{
+				return transparent;
+			}
 			set	
 			{
 				transparent = value;
@@ -194,11 +218,17 @@ namespace SdlDotNet
 		/// </summary>
 		public Color TransparentColor
 		{
-			get {return transparentcolor;}
+			get 
+			{
+				return transparentcolor;
+			}
 			set	
 			{
 				transparentcolor = value;
-				if (Transparent) surface.SetColorKey(transparentcolor,true);
+				if (Transparent) 
+				{
+					surface.SetColorKey(transparentcolor,true);
+				}
 			}
 		}
 
@@ -207,7 +237,10 @@ namespace SdlDotNet
 		/// </summary>
 		public Alpha AlphaFlags
 		{
-			get {return alphaflags;}
+			get 
+			{
+				return alphaflags;
+			}
 			set	
 			{
 				alphaflags = value;
@@ -220,7 +253,10 @@ namespace SdlDotNet
 		/// </summary>
 		public byte AlphaValue
 		{
-			get {return alphavalue;}
+			get 
+			{
+				return alphavalue;
+			}
 			set	
 			{
 				alphavalue = value;

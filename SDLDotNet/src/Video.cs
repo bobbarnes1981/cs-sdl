@@ -268,25 +268,31 @@ namespace SdlDotNet
 			return new Surface(ret);
 		}
 
-		//		/// <summary>
-		//		/// Shows the mouse cursor
-		//		/// </summary>
-		//		public void ShowMouseCursor() {
-		//			Sdl.SDL_ShowCursor((int)Natives.Enable.Enable);
-		//		}
-		//		/// <summary>
-		//		/// Hides the mouse cursor
-		//		/// </summary>
-		//		public void HideMouseCursor() {
-		//			Sdl.SDL_ShowCursor((int)Natives.Enable.Disable);
-		//		}
-		//		/// <summary>
-		//		/// Queries the current cursor state
-		//		/// </summary>
-		//		/// <returns>True if the cursor is visible, otherwise False</returns>
-		//		public bool IsCursorVisible() {
-		//			return (Sdl.SDL_ShowCursor((int)Natives.Enable.Query) == (int)Natives.Enable.Enable);
-		//		}
+		/// <summary>
+		/// Shows the mouse cursor
+		/// </summary>
+		public void ShowMouseCursor() 
+		{
+			Sdl.SDL_ShowCursor(Sdl.SDL_ENABLE);
+		}
+
+		/// <summary>
+		/// Hides the mouse cursor
+		/// </summary>
+		public void HideMouseCursor() 
+		{
+			Sdl.SDL_ShowCursor(Sdl.SDL_DISABLE);
+		}
+
+		/// <summary>
+		/// Queries the current cursor state
+		/// </summary>
+		/// <returns>True if the cursor is visible, otherwise False</returns>
+		public bool IsCursorVisible() 
+		{
+			return (Sdl.SDL_ShowCursor(Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
+		}
+
 		/// <summary>
 		/// Move the mouse cursor to a specific location
 		/// </summary>
@@ -298,7 +304,8 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Swaps the OpenGL screen, only if the double-buffered attribute was set.
+		/// Swaps the OpenGL screen, only if the double-buffered 
+		/// attribute was set.
 		/// Call this instead of Surface.Flip() for OpenGL windows.
 		/// </summary>
 		public void GL_SwapBuffers() 

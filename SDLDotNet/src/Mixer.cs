@@ -82,8 +82,8 @@ namespace SdlDotNet
 	/// Mixer property of the main Sdl object.
 	/// </summary>
 	public sealed class Mixer {
-		private SdlMixer.ChannelFinishedDelegate _channelfin;
-		private SdlMixer.MusicFinishedDelegate _musicfin;
+		private static SdlMixer.ChannelFinishedDelegate _channelfin;
+		private static SdlMixer.MusicFinishedDelegate _musicfin;
 		//private Events _events;
 
 		//internal Mixer(Events evs) {
@@ -103,8 +103,8 @@ namespace SdlDotNet
 					throw SdlException.Generate();
 				}
 				//_events = evs;
-				//_channelfin = new SdlMixer.ChannelFinishedDelegate(this.ChannelFinished);
-				//_musicfin = new SdlMixer.MusicFinishedDelegate(this.MusicFinished);
+				//_channelfin = SdlMixer.ChannelFinishedDelegate(ChannelFinished());
+				//_musicfin = SdlMixer.MusicFinishedDelegate(MusicFinished());
 				Mixer.PrivateOpen();
 				return instance;
 			}
