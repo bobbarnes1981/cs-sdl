@@ -5291,7 +5291,7 @@
             then swap
             video buffers before the next video surface blit or lock will
              return.
-            On hardware that doesn not support double-buffering, this is 
+            On hardware that does not support double-buffering, this is 
             equivalent
             to calling <see cref="M:Tao.Sdl.Sdl.SDL_UpdateRect(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32)"/>(screen, 0, 0, 0, 0)
             <p>
@@ -7089,6 +7089,26 @@
         <member name="F:Tao.Sdl.Sdl.SDL_CD.track">
             <summary>
             Array of track descriptions. (see <see cref="T:Tao.Sdl.Sdl.SDL_CDtrack"/>)
+            </summary>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CD.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Tao.Sdl.Sdl.SDL_CDTrackData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CDTrackData.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_CDTrackData.Item(System.Int32)">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Tao.Sdl.Sdl.SDL_ActiveEvent">

@@ -54,17 +54,17 @@ namespace SdlDotNet
 			this.movieInfo = movieInfo;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public IntPtr GetHandle
-		{ 
-			get
-			{
-				GC.KeepAlive(this);
-				return handle; 
-			}
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		internal IntPtr GetHandle
+//		{ 
+//			get
+//			{
+//				GC.KeepAlive(this);
+//				return handle; 
+//			}
+//		}
 
 		/// <summary>
 		/// Destroys the surface object and frees its memory

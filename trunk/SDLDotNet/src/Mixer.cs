@@ -40,8 +40,10 @@ namespace SdlDotNet
 	{
 		static private SdlMixer.ChannelFinishedDelegate ChannelFinishedDelegate;
 		static private SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
+		static private bool disposed = false;
+		static private int DEFAULT_CHUNK_SIZE = 1024;
 		
-		static byte distance;
+		static private byte distance;
 
 		static Mixer instance = new Mixer();
 
@@ -61,7 +63,39 @@ namespace SdlDotNet
 		/// </summary>
 		~Mixer() 
 		{
-			PrivateClose();
+			Dispose(false);
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void Dispose() 
+		{
+			Dispose(true);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		public static void Dispose(bool disposing)
+		{
+			if (!disposed)
+			{
+				if (disposing)
+				{
+				}
+				SdlMixer.Mix_CloseAudio();
+				disposed = true;
+			}
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void Close() 
+		{
+			Dispose();
 		}
 
 		/// <summary>
@@ -87,7 +121,7 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Open() 
 		{
-			PrivateClose();
+			Close();
 			PrivateOpen();
 		}
 		/// <summary>
@@ -103,30 +137,24 @@ namespace SdlDotNet
 		/// <param name="chunkSize">The chunk size for samples</param>
 		public static void Open(int frequency, AudioFormat format, int channels, int chunkSize) 
 		{
-			PrivateClose();
+			Close();
 			PrivateOpen(frequency, format, channels, chunkSize);
 		}
 
 		private static void PrivateOpen() 
 		{
-			SdlMixer.Mix_OpenAudio(SdlMixer.MIX_DEFAULT_FREQUENCY, unchecked((short)AudioFormat.Default), 2, 1024);
+			SdlMixer.Mix_OpenAudio(SdlMixer.MIX_DEFAULT_FREQUENCY, 
+				unchecked((short)AudioFormat.Default), 
+				(int) SoundChannel.Stereo, 
+				DEFAULT_CHUNK_SIZE);
 		}
-		private static void PrivateOpen(int frequency, AudioFormat format, int channels, int chunksize) 
+		private static void PrivateOpen(
+			int frequency, AudioFormat format, int channels, int chunksize) 
 		{
 			SdlMixer.Mix_OpenAudio(frequency, (short)format, channels, chunksize);
 		}
-		private static void PrivateClose() 
-		{
-			SdlMixer.Mix_CloseAudio();
-		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static void Close() 
-		{
-			SdlMixer.Mix_CloseAudio();
-		}
+		
 
 		/// <summary>
 		/// Loads a .wav file into memory

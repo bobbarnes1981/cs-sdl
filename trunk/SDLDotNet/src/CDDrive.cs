@@ -35,15 +35,51 @@ namespace SdlDotNet
 		private int index;
 
 		/// <summary>
-		/// 
+		/// Represents a CD-ROM drive on the system
 		/// </summary>
-		/// <param name="handle"></param>
-		/// <param name="index"></param>
-		public CDDrive(IntPtr handle, int index) 
+		/// <param name="handle">handle to CDDrive</param>
+		/// <param name="index">Index number of drive</param>
+		internal CDDrive(IntPtr handle, int index) 
 		{
 			this.handle = handle;
-			this.index = index;
+			if ((handle == IntPtr.Zero) | !CDRom.IsValidDriveNumber(index))
+			{
+				throw SdlException.Generate();
+			}
+			else
+			{
+				this.index = index;
+			}
 		}
+
+		/// <summary>
+		/// Represents a CD-ROM drive on the system
+		/// </summary>
+		/// <param name="index">Index number of drive</param>
+		public CDDrive(int index)
+		{
+			this.handle = Sdl.SDL_CDOpen(index);
+			if ((this.handle == IntPtr.Zero) | !CDRom.IsValidDriveNumber(index))
+			{
+				throw SdlException.Generate();
+			}
+			else
+			{
+				this.index = index;
+			}
+		}
+
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		internal IntPtr GetHandle
+//		{ 
+//			get
+//			{
+//				GC.KeepAlive(this);
+//				return handle; 
+//			}
+//		}
 
 		/// <summary>
 		/// The drive number
@@ -54,6 +90,20 @@ namespace SdlDotNet
 			{ 
 				return this.index; 
 			} 
+		}
+		/// <summary>
+		/// Returns a platform-specific name for a CD-ROM drive
+		/// </summary>
+		/// <returns>A platform-specific name, i.e. "D:\"</returns>
+		/// <remarks>
+		/// </remarks>
+		public string DriveName() 
+		{
+			if (!CDRom.IsValidDriveNumber(this.index))
+			{
+				throw new SdlException("Device index out of range");
+			}
+			return Sdl.SDL_CDName(this.index);
 		}
 
 		/// <summary>
@@ -100,6 +150,159 @@ namespace SdlDotNet
 				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(this.handle);
 				return (status); 
 			}
+		}
+
+		/// <summary>
+		/// Checks to see if the CD is currently playing.
+		/// </summary>
+		public bool IsBusy 
+		{
+			get 
+			{ 
+				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(this.handle);
+				if (status == CDStatus.Playing)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Checks to see if the CD drive is currently empty.
+		/// </summary>
+		public bool IsEmpty
+		{
+			get 
+			{ 
+				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(this.handle);
+				if (status == CDStatus.TrayEmpty)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Checks to see if the CD drive is currently paused.
+		/// </summary>
+		public bool IsPaused
+		{
+			get 
+			{ 
+				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(this.handle);
+				if (status == CDStatus.Paused)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Checks to see if the track has audio data.
+		/// </summary>
+		public bool IsAudioTrack(int trackNumber)
+		{
+				int result = Sdl.CD_INDRIVE((int)this.Status);
+				GC.KeepAlive(this);
+				if (result == 1)
+				{
+					Sdl.SDL_CD cd = 
+						(Sdl.SDL_CD)Marshal.PtrToStructure(
+						this.handle, typeof(Sdl.SDL_CD));
+
+					if (cd.track[trackNumber].type == (byte) CDTrackTypes.Audio)
+					{
+						return true;
+					}
+					else 
+					{
+						return false;
+					}
+				}
+				else 
+				{ 
+					return false;
+				}
+		}
+
+		/// <summary>
+		/// Checks to see if the track is a data track.
+		/// </summary>
+		public bool IsDataTrack(int trackNumber)
+		{
+				int result = Sdl.CD_INDRIVE((int)this.Status);
+				GC.KeepAlive(this);
+				if (result == 1)
+				{
+					Sdl.SDL_CD cd = 
+						(Sdl.SDL_CD)Marshal.PtrToStructure(
+						this.handle, typeof(Sdl.SDL_CD));
+
+					if (cd.track[trackNumber].type == (byte) CDTrackTypes.Data)
+					{
+						return true;
+					}
+					else 
+					{
+						return false;
+					}
+				}
+				else 
+				{ 
+					return false;
+				}
+		}
+
+		/// <summary>
+		/// Returns the number of seconds in an audio track.
+		/// </summary>
+		public int TrackLength(int trackNumber)
+		{
+				int result = Sdl.CD_INDRIVE((int)this.Status);
+				GC.KeepAlive(this);
+				if (result == 1)
+				{
+					Sdl.SDL_CD cd = 
+						(Sdl.SDL_CD)Marshal.PtrToStructure(
+						this.handle, typeof(Sdl.SDL_CD));
+					return (int)Timer.FramesToSeconds(cd.track[trackNumber].length);
+				}
+				else 
+				{ 
+					return 0;
+				}
+		}
+
+		/// <summary>
+		/// Returns the number of seconds before the audio track starts on the cd.
+		/// </summary>
+		public int TrackStart(int trackNumber)
+		{
+				int result = Sdl.CD_INDRIVE((int)this.Status);
+				GC.KeepAlive(this);
+				if (result == 1)
+				{
+					Sdl.SDL_CD cd = 
+						(Sdl.SDL_CD)Marshal.PtrToStructure(
+						this.handle, typeof(Sdl.SDL_CD));
+					return (int)Timer.FramesToSeconds(cd.track[trackNumber].offset);
+				}
+				else 
+				{ 
+					return 0;
+				}
 		}
 
 //		/// <summary>
@@ -177,7 +380,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Play CD from a given track
 		/// </summary>
 		/// <param name="startTrack"></param>
 		public void PlayTracks(int startTrack)
@@ -192,7 +395,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Play CD from the first track.
 		/// </summary>
 		public void Play()
 		{
@@ -242,6 +445,7 @@ namespace SdlDotNet
 			}
 
 		}
+
 		/// <summary>
 		/// Ejects this drive
 		/// </summary>
@@ -275,7 +479,6 @@ namespace SdlDotNet
 				{ 
 					return 0;
 				}
-				
 			}
 		}
 		/// <summary>
@@ -295,9 +498,9 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// Gets the currently playing frame (75th of a second increment)
+		/// Gets the currently playing frame of the current track.
 		/// </summary>
-		public int CurrentFrame 
+		public int CurrentTrackFrame 
 		{
 			get 
 			{
@@ -307,6 +510,17 @@ namespace SdlDotNet
 					(Sdl.SDL_CD)Marshal.PtrToStructure(
 					this.handle, typeof(Sdl.SDL_CD));
 				return cd.cur_frame;
+			}
+		}
+
+		/// <summary>
+		/// Gets the number of seconds into the current track.
+		/// </summary>
+		public double CurrentTrackSeconds
+		{
+			get 
+			{
+				return Timer.FramesToSeconds(this.CurrentTrackFrame);
 			}
 		}
 	}

@@ -25,7 +25,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for Timer.
 	/// </summary>
-	public class Timer
+	public sealed class Timer
 	{
 		static readonly Timer instance = new Timer();
 
@@ -72,6 +72,53 @@ namespace SdlDotNet
 		public static void Delay(int delayTime)
 		{
 			Sdl.SDL_Delay(delayTime);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="frames"></param>
+		/// <returns></returns>
+		public static double FramesToSeconds(int frames) 
+		{
+			return (double)(frames / Sdl.CD_FPS);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="seconds"></param>
+		/// <returns></returns>
+		public static int SecondsToFrames(int seconds) 
+		{
+			if (seconds * Sdl.CD_FPS <= Int32.MaxValue)
+			{
+				return (seconds * Sdl.CD_FPS);
+			}
+			else
+			{
+				throw new OverflowException();
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="frames"></param>
+		/// <returns></returns>
+		public static TimeSpan FramesToTime(int frames)
+		{
+			return new TimeSpan((long)Timer.FramesToSeconds(frames) * TimeSpan.TicksPerSecond);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="seconds"></param>
+		/// <returns></returns>
+		public static TimeSpan SecondsToTime(int seconds)
+		{
+			return new TimeSpan(seconds * TimeSpan.TicksPerSecond);
 		}
 	}
 }
