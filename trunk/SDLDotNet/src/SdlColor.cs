@@ -28,8 +28,15 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class SdlColor
 	{
+		static readonly SdlColor instance = new SdlColor();
+
+		static SdlColor()
+		{
+		}
+
 		SdlColor()
-		{}
+		{
+		}
 
 		/// <summary>
 		/// 

@@ -58,8 +58,8 @@ namespace SdlDotNet.Examples
 		{
 			this.eventManager = eventManager;
 			this.eventManager.OnQuitEvent += new QuitEventHandler(Subscribe);
-			Events.Instance.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown); 
-			Events.Instance.Quit += new QuitEventHandler(this.Quit);
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown); 
+			Events.Quit += new QuitEventHandler(this.Quit);
 		}
 
 		/// <summary>
@@ -118,7 +118,7 @@ namespace SdlDotNet.Examples
 			{
 				while (!quitFlag) 
 				{
-					while (Events.Instance.PollAndDelegate()) 
+					while (Events.PollAndDelegate()) 
 					{
 						// handle events till the queue is empty
 					} 

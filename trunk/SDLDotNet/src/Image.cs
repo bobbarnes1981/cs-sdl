@@ -96,7 +96,7 @@ namespace SdlDotNet
 			{
 				throw ImageException.Generate();
 			}
-			surface = Video.Instance.GenerateSurfaceFromPointer(pSurface);
+			surface = Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
 		/// <summary>
@@ -111,7 +111,7 @@ namespace SdlDotNet
 			{
 				throw ImageException.Generate();
 			}
-			surface = Video.Instance.GenerateSurfaceFromPointer(pSurface);
+			surface = Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
 		
@@ -132,7 +132,7 @@ namespace SdlDotNet
 			{
 				throw ImageException.Generate();
 			}
-			surface = Video.Instance.GenerateSurfaceFromPointer(pSurface);
+			surface = Video.GenerateSurfaceFromPointer(pSurface);
 		}
 		
 		/// <summary>

@@ -81,10 +81,9 @@ namespace SdlDotNet.Examples
 			GameView gameView = new GameView(eventManager);
 			gameView.CreateView();
 			map.Build();
-			Mixer mixer = Mixer.Instance;
-			Music music = mixer.LoadMusic("../../fard-two.ogg");
-			mixer.SetMusicVolume(127);
-			mixer.PlayMusic(music, -1);
+			Music music = Mixer.LoadMusic("../../fard-two.ogg");
+			Mixer.SetMusicVolume(127);
+			Mixer.PlayMusic(music, -1);
 			this.gameStatus = GameStatus.Started;
 			eventManager.Publish(new GameStatusEventArgs(this, GameStatus.Started));
 		}

@@ -54,16 +54,11 @@ namespace SdlDotNet.Examples
 			int height = 480;
 			Random rand = new Random();
 			string imagepath;
-
-			Video video = Video.Instance;
-			WindowManager wm = WindowManager.Instance;
-			Events events = Events.Instance;
-			Mixer mixer = Mixer.Instance;
 			
-			events.KeyboardDown += 
+			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
-			events.Quit += new QuitEventHandler(this.Quit);
-			events.MouseMotion += 
+			Events.Quit += new QuitEventHandler(this.Quit);
+			Events.MouseMotion += 
 				new MouseMotionEventHandler(this.MouseMotion);
 			try 
 			{
@@ -72,9 +67,9 @@ namespace SdlDotNet.Examples
 				{
 					filepath = "";
 				}
-				Surface screen = video.SetVideoModeWindow(width, height, true);
-				wm.Caption = "Image Example";
-				video.HideMouseCursor(); // hide the cursor
+				Surface screen = Video.SetVideoModeWindow(width, height, true);
+				WindowManager.Caption = "Image Example";
+				Video.HideMouseCursor(); // hide the cursor
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
@@ -112,12 +107,12 @@ namespace SdlDotNet.Examples
 				Tree.AlphaValue = 0;
 
 				int JeepFrame = 0;
-				Music music = mixer.LoadMusic(filepath + "fard-two.ogg");
-				mixer.PlayMusic(music, -1);
+				Music music = Mixer.LoadMusic(filepath + "fard-two.ogg");
+				Mixer.PlayMusic(music, -1);
 
 				while (!quitFlag) 
 				{
-					while (events.PollAndDelegate()) 
+					while (Events.PollAndDelegate()) 
 					{
 						// handle events till the queue is empty
 					}

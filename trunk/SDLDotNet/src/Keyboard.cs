@@ -27,25 +27,18 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Keyboard
 	{
+		static readonly Keyboard instance = new Keyboard();
+
 		/// <summary>
 		/// Returns the global instance of this class.
 		/// </summary>
-		static readonly Keyboard instance = new Keyboard();
-
+		static Keyboard()
+		{
+		}
 		Keyboard() 
 		{
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static Keyboard Instance
-		{
-			get
-			{
-				return instance;
-			}
-		}
 		/// <summary>
 		/// Enable keyboard autorepeat
 		/// </summary>

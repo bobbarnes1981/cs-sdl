@@ -284,22 +284,23 @@ namespace SdlDotNet
 	{
 		static readonly CDAudio instance = new CDAudio();
 
+		static CDAudio()
+		{
+		}
+
 		CDAudio()
 		{
+			Initialize();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public static CDAudio Instance 
+		public static void Initialize()
 		{
-			get
+			if (Sdl.SDL_Init(Sdl.SDL_INIT_CDROM) != (int) SdlFlag.Success)
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_CDROM) != (int) SdlFlag.Success)
-				{
-					throw SdlException.Generate();
-				}
-				return instance;
+				throw SdlException.Generate();
 			}
 		}
 
@@ -308,7 +309,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
-		public int NumberOfDrives 
+		public static int NumberOfDrives 
 		{
 			get {
 				int ret = Sdl.SDL_CDNumDrives();
@@ -332,7 +333,7 @@ namespace SdlDotNet
 		/// <remarks>
 		/// Opens a CD-ROM drive for manipulation
 		/// </remarks>
-		public CDDrive OpenDrive(int index) 
+		public static CDDrive OpenDrive(int index) 
 		{
 			IntPtr cd = Sdl.SDL_CDOpen(index);
 			if (cd == IntPtr.Zero)
@@ -349,7 +350,7 @@ namespace SdlDotNet
 		/// <returns>A platform-specific name, i.e. "D:\"</returns>
 		/// <remarks>
 		/// </remarks>
-		public string DriveName(int index) 
+		public static string DriveName(int index) 
 		{
 			if (index < 0 || index >= NumberOfDrives)
 			{

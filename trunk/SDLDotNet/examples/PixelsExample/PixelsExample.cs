@@ -49,13 +49,9 @@ namespace SdlDotNet.Examples {
 			int bitsPerPixel = 32;
 			Random rand = new Random();
 
-			Video video = Video.Instance;
-			WindowManager wm = WindowManager.Instance;
-			Events events = Events.Instance;
-			
-			events.KeyboardDown += 
+			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
-			events.Quit += new QuitEventHandler(this.Quit);
+			Events.Quit += new QuitEventHandler(this.Quit);
 
 			int x;
 			int y;
@@ -66,13 +62,13 @@ namespace SdlDotNet.Examples {
 
 			try {
 				// set the video mode
-				Surface screen = video.SetVideoModeWindow(width, height, bitsPerPixel, true); 
-				wm.Caption = "Pixels Example";
-				video.HideMouseCursor();
+				Surface screen = Video.SetVideoModeWindow(width, height, bitsPerPixel, true); 
+				WindowManager.Caption = "Pixels Example";
+				Video.HideMouseCursor();
 
 				while (!quitFlag) 
 				{
-					while (events.PollAndDelegate()) 
+					while (Events.PollAndDelegate()) 
 					{
 						// handle events till the queue is empty
 					} 

@@ -171,10 +171,6 @@ namespace SdlDotNet.Examples
 
 		static int T0 = 0;
 		static int Frames = 0;
-		static Video video;
-		static WindowManager windowManager;
-		static Events events;
-		static Timer timer;
 
 		static void draw ()
 		{
@@ -205,10 +201,10 @@ namespace SdlDotNet.Examples
 
 			Tao.OpenGl.Gl.glPopMatrix();
 
-			video.GLSwapBuffers();
+			Video.GLSwapBuffers();
 
 			Frames++;
-			int t = timer.Ticks;
+			int t = Timer.Ticks;
 			if (t - T0 >= 5000)
 			{
 				double seconds = (t - T0) / 1000.0;
@@ -293,24 +289,20 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run()
 		{
-			video = Video.Instance;
-			events = Events.Instance;
-			timer = Timer.Instance;
-			windowManager = WindowManager.Instance;
-			m_screen = video.SetVideoModeWindowOpenGL(500, 500, true);
-			events.Quit += new QuitEventHandler (this.Quit);
-			events.Resize += new ResizeEventHandler (this.Resize);
-			events.KeyboardDown +=
+			m_screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
+			Events.Quit += new QuitEventHandler (this.Quit);
+			Events.Resize += new ResizeEventHandler (this.Resize);
+			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.KeyboardDown);
 
-			windowManager.Caption = "SdlDotNet Gears";
+			WindowManager.Caption = "SdlDotNet Gears";
 
 			init ();
 			reshape ();
 			while ( ! quitFlag )
 			{
 				idle();
-				while (events.PollAndDelegate ()) ;
+				while (Events.PollAndDelegate ()) ;
 				if (m_screen.Width != m_newW || m_screen.Height != m_newH)
 					reshape ();
 				draw ();
@@ -331,7 +323,7 @@ namespace SdlDotNet.Examples
 
 		private void Resize (object sender, ResizeEventArgs e)
 		{
-			m_screen = video.SetVideoModeWindowOpenGL(e.W, e.H, true);
+			m_screen = Video.SetVideoModeWindowOpenGL(e.W, e.H, true);
 		}
 		private void KeyboardDown(
 			object sender,

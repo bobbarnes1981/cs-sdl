@@ -30,24 +30,23 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Joysticks 
 	{
-		static readonly Joysticks instance = new Joysticks();
+		static Joysticks()
+		{
+		}
 
 		Joysticks()
 		{
+			Initialize();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public static Joysticks Instance 
+		public static void Initialize()
 		{
-			get
+			if (Sdl.SDL_Init(Sdl.SDL_INIT_JOYSTICK) != (int) SdlFlag.Success)
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_JOYSTICK) != (int) SdlFlag.Success)
-				{
-					throw SdlException.Generate();
-				}
-				return instance;
+				throw SdlException.Generate();
 			}
 		}
 
@@ -55,7 +54,7 @@ namespace SdlDotNet
 		/// Returns the number of joysticks on this system
 		/// </summary>
 		/// <returns>The number of joysticks</returns>
-		public int NumberOfJoysticks 
+		public static int NumberOfJoysticks 
 		{
 			get
 			{
@@ -68,7 +67,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="index">The 0-based index of the joystick to read</param>
 		/// <returns>A Joystick object</returns>
-		public Joystick OpenJoystick(int index) 
+		public static Joystick OpenJoystick(int index) 
 		{
 			IntPtr joy = Sdl.SDL_JoystickOpen(index);
 			if (joy == IntPtr.Zero)

@@ -42,12 +42,12 @@ namespace SdlDotNet
 	/// Sdl Ttf Exception Class
 	/// </summary>
 	[Serializable()]
-	public class TtfException : SdlException 
+	public class FontException : SdlException 
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		public TtfException() 
+		public FontException() 
 		{
 		}
 		/// <summary>
@@ -56,7 +56,7 @@ namespace SdlDotNet
 		/// <param name="message">
 		/// The string representing the error message
 		/// </param>
-		public TtfException(string message): base(message)
+		public FontException(string message): base(message)
 		{
 		}
 
@@ -65,7 +65,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
-		public TtfException(string message, Exception exception) 
+		public FontException(string message, Exception exception) 
 		{
 		}
 
@@ -74,7 +74,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="info"></param>
 		/// <param name="context"></param>
-		protected TtfException(SerializationInfo info, StreamingContext context) 
+		protected FontException(SerializationInfo info, StreamingContext context) 
 		{
 		}
 	}

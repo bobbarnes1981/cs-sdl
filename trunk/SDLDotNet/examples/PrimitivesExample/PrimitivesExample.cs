@@ -51,21 +51,16 @@ namespace SdlDotNet.Examples
 			int height = 480;
 			Random rand = new Random();
 			
-
-			Video video = Video.Instance;
-			WindowManager wm = WindowManager.Instance;
-			Events events = Events.Instance;
-			
-			events.KeyboardDown += 
+			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
-			events.Quit += new QuitEventHandler(this.Quit);
+			Events.Quit += new QuitEventHandler(this.Quit);
 			
 			try 
 			{
 				// set the video mode
-				Surface screen = video.SetVideoModeWindow(width, height, true); 
-				wm.Caption = "Primitives Example";
-				video.HideMouseCursor();
+				Surface screen = Video.SetVideoModeWindow(width, height, true); 
+				WindowManager.Caption = "Primitives Example";
+				Video.HideMouseCursor();
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
@@ -87,7 +82,7 @@ namespace SdlDotNet.Examples
 				while (!quitFlag) 
 				
 				{
-					while (events.PollAndDelegate()) 
+					while (Events.PollAndDelegate()) 
 					{
 						// handle events till the queue is empty
 					} 
@@ -124,7 +119,7 @@ namespace SdlDotNet.Examples
 
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (events.PollAndDelegate()) 
+						while (Events.PollAndDelegate()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -161,7 +156,7 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (events.PollAndDelegate()) 
+						while (Events.PollAndDelegate()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -188,7 +183,7 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (events.PollAndDelegate()) 
+						while (Events.PollAndDelegate()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -230,7 +225,7 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (events.PollAndDelegate()) 
+						while (Events.PollAndDelegate()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -288,7 +283,7 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (events.PollAndDelegate()) 
+						while (Events.PollAndDelegate()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -327,7 +322,7 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (events.PollAndDelegate()) 
+						while (Events.PollAndDelegate()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -360,7 +355,7 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (events.PollAndDelegate()) 
+						while (Events.PollAndDelegate()) 
 						{
 							// handle events till the queue is empty
 						} 

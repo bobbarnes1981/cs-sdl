@@ -56,24 +56,19 @@ namespace SdlDotNet.Examples
 			int width = 640;
 			int height = 480;
 			Random rand = new Random();
-			
-			Video video = Video.Instance;
-			WindowManager wm = WindowManager.Instance;
-			Mixer mixer = Mixer.Instance;
-			Events events = Events.Instance;
-			
-			events.KeyboardDown += 
+				
+			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
-			events.Quit += new QuitEventHandler(this.Quit);
+			Events.Quit += new QuitEventHandler(this.Quit);
 
 			try {
-				Music music = mixer.LoadMusic(filepath + "fard-two.ogg");
-				mixer.PlayMusic(music, 1);
+				Music music = Mixer.LoadMusic(filepath + "fard-two.ogg");
+				Mixer.PlayMusic(music, 1);
 				// set the video mode
-				Surface screen = video.SetVideoModeWindow(width, height, true); 
-				wm.Caption = "Rectangles Example";
-				video.HideMouseCursor();
-				mixer.EnableMusicCallbacks();
+				Surface screen = Video.SetVideoModeWindow(width, height, true); 
+				WindowManager.Caption = "Rectangles Example";
+				Video.HideMouseCursor();
+				Mixer.EnableMusicCallbacks();
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
@@ -82,7 +77,7 @@ namespace SdlDotNet.Examples
 
 				while (!quitFlag) 
 				{
-					while (events.PollAndDelegate()) 
+					while (Events.PollAndDelegate()) 
 					{
 						// handle events till the queue is empty
 					} 
