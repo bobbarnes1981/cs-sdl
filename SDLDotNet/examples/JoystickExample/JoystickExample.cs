@@ -84,8 +84,8 @@ namespace SdlDotNet.Examples
 				Console.WriteLine("NumberOfBalls: " + joystick.NumberOfBalls);
 				Console.WriteLine("NumberOfButtons: " + joystick.NumberOfButtons);
 				Console.WriteLine("NumberOfHats: " + joystick.NumberOfHats);
-					Image cursor = new Image(filepath + "cursor.png");
-				Image Background = new Image(filepath + "background.jpg");
+					Surface cursor = new Surface(filepath + "cursor.png");
+				Surface Background = new Surface(filepath + "background.jpg");
 				cursor.Transparent = true;
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 

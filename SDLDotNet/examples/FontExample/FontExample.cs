@@ -64,7 +64,7 @@ namespace SdlDotNet.Examples
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			WindowManager.Caption = "Font Example";
 			Video.HideMouseCursor();
-			System.Drawing.Text.FontCollection installedFonts = FontSystem.GetSystemFonts();
+			System.Drawing.Text.FontCollection installedFonts = FontSystem.GetSystemFontNames();
 			Console.WriteLine("Installed Fonts: " + installedFonts.ToString());
 			Console.WriteLine("Installed Fonts: " + installedFonts.Families[0].ToString());
 

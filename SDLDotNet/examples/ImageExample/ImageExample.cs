@@ -68,7 +68,7 @@ namespace SdlDotNet.Examples
 					filepath = "";
 				}
 				Surface screen = Video.SetVideoModeWindow(width, height, true);
-				WindowManager.Caption = "Image Example";
+				WindowManager.Caption = "Surface Example";
 				Video.HideMouseCursor(); // hide the cursor
 
 				Surface surf = 
@@ -78,27 +78,27 @@ namespace SdlDotNet.Examples
 
 				imagepath = @"images/";
 
-				Image Background = new Image(filepath + imagepath + "background.tga");
+				Surface Background = new Surface(filepath + imagepath + "background.tga");
 
-				Image sdlimg = new Image(filepath + imagepath +  "sdlimage.png");
+				Surface sdlimg = new Surface(filepath + imagepath +  "sdlimage.png");
 				sdlimg.AlphaFlags = Alphas.RleEncoded| Alphas.SourceAlphaBlending;
 				sdlimg.AlphaValue = 100;
 
-				Image Cursor = new Image(filepath + imagepath +  "cursor.png");
+				Surface Cursor = new Surface(filepath + imagepath +  "cursor.png");
 				Cursor.Transparent = true;
 
-				ImageList Jeep = new ImageList();
+				SurfaceList Jeep = new SurfaceList();
 
 				for (int j = 1; j <= 16;j++) 
 				{
-					Jeep.Images.Add(filepath + imagepath + @"jeep/jeep" + j.ToString() +".gif");
-					Jeep.Images[Jeep.Images.Count-1].Transparent = true;
+					Jeep.Surfaces.Add(filepath + imagepath + @"jeep/jeep" + j.ToString() +".gif");
+					Jeep.Surfaces[Jeep.Surfaces.Count-1].Transparent = true;
 				}
 
 
-				ImageList ImageList = new ImageList();
+				SurfaceList SurfaceList = new SurfaceList();
 
-				Image Tree = new Image(filepath + imagepath + "Tree.bmp");
+				Surface Tree = new Surface(filepath + imagepath + "Tree.bmp");
 
 				Tree.TransparentColor = System.Drawing.Color.Magenta;
 				Tree.Transparent = true;
@@ -138,7 +138,7 @@ namespace SdlDotNet.Examples
 						}
 						JeepFrame++;
 
-						Jeep.Images[JeepFrame].Draw(surf, new Rectangle(new Point(100,100),Jeep.Images[JeepFrame].Size));
+						Jeep.Surfaces[JeepFrame].Draw(surf, new Rectangle(new Point(100,100),Jeep.Surfaces[JeepFrame].Size));
 
 						// Draw Textbox
 						sdlimg.Draw(surf,new Rectangle(new Point(230,440),Background.Size));

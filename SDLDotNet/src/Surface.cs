@@ -125,6 +125,28 @@ namespace SdlDotNet
 	/// </summary>
 	public class Surface : BaseSdlResource
 	{
+		/// <summary>
+		/// Private field. Used by the Transparent property 
+		/// </summary>
+		private bool transparent;
+
+		/// <summary>
+		/// Private field. Used by the TransparentColor property 
+		/// </summary>
+		private Color transparentcolor;
+
+		/// <summary>
+		/// Private field. Used by the AlphaFlags property 
+		/// int SDL_RLEACCEL = 0X00004000
+		/// int SDL_SRCALPHA = 0x00010000
+		/// </summary>
+		private Alphas alphaFlags;
+
+		/// <summary>
+		/// Private field. Used by the AlphaValue property 
+		/// </summary>
+		private byte alphaValue;
+
 		private bool disposed = false;
 		private IntPtr handle;
 
@@ -139,9 +161,34 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// <para>Represents a Image that can be drawn on a Sdl.Surface.</para>
+		/// <para>The image can be loaded from from a file, 
+		/// a System.Drawing.Bitmap, or a byte array.</para>
+		/// <para>Supported image formats follows the development 
+		/// cycle of SDL_Image. Currently, supported and planned 
+		/// supported image formats are:</para>
 		/// 
-		/// </summary>
-		/// <param name="file"></param>
+		/// <para>
+		/// <list type="bullet">
+		///		<item><term>.BMP</term><description>Windows Bitmap</description></item>
+		///		<item><term>.PNM</term><description>Portable Anymap File Format</description></item>
+		///		<item><term>.XPM</term><description>X PixMap</description></item>
+		///		<item><term>.LBM</term><description>Tagged Image File Format</description></item>
+		///		<item><term>.PCX</term><description>Z-Soft’s PC Paintbrush file format</description></item>
+		///		<item><term>.GIF</term><description>Graphics Interchange Format</description></item>
+		///		<item><term>.JPG</term><description>Joint Photographic Experts Group (JPEG)</description></item>
+		///		<item><term>.TIF</term><description>Tagged Image File Format</description></item>
+		///		<item><term>.PNG</term><description>Portable Network Graphics</description></item>
+		///		<item><term>.TGA</term><description>Truevision (Targa) File Format</description></item>
+		///	</list>
+		///	</para>
+		/// 
+		/// <para>Usage:</para>
+		/// <code>
+		/// SdlImage image = SdlImage("mybitmap.jpg")
+		/// image.Draw(screen, new Rectangle(new Point(0,0),image.Size))
+		/// </code>
+		/// </summary> 
 		public Surface(string file)
 		{
 			IntPtr surfPtr = SdlImage.IMG_Load(file);
@@ -149,7 +196,42 @@ namespace SdlDotNet
 			{
 				throw SdlException.Generate();
 			}
-			handle = surfPtr;
+			this.handle = surfPtr;
+		}
+
+		/// <summary>
+		/// Create a Surface from a byte array in memory.
+		/// </summary>
+		/// <param name="array">A array of byte that shold the image data</param>
+		public Surface(byte[] array)
+		{
+			IntPtr surfPtr = 
+				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
+			if (surfPtr == IntPtr.Zero) 
+			{
+				throw SdlException.Generate();
+			}
+			this.handle = surfPtr;
+		}
+
+		/// <summary>
+		/// Create a SdlImage instance from a System.Drawing.Bitmap object. 
+		/// Loads a bitmap from a System.Drawing.Bitmap object, 
+		/// usually obtained from a resource.
+		/// </summary>
+		/// <param name="bitmap">A System.Drawing.Bitmap object</param>
+		public Surface(System.Drawing.Bitmap bitmap)
+		{
+			MemoryStream stream = new MemoryStream();
+			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+			byte[] arr = stream.ToArray();
+			IntPtr surfPtr = 
+				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(arr, arr.Length), 1);
+			if (surfPtr == IntPtr.Zero) 
+			{
+				throw SdlException.Generate();
+			}
+			this.handle = surfPtr;
 		}
 	
 		/// <summary>
@@ -1414,6 +1496,114 @@ namespace SdlDotNet
 			}
 			this.SurfacePointer = 
 				SdlGfx.zoomSurface(this.SurfacePointer, zoom, zoom, antiAliasParameter);
+		}
+		/// <summary>
+		/// Get/set the transparency of the image.  
+		/// </summary>
+		public bool Transparent
+		{
+			get 
+			{
+				return transparent;
+			}
+			set	
+			{
+				transparent = value;
+				if (value)
+				{
+					this.SetColorKey(transparentcolor,true);
+				}
+				else 
+				{
+					this.ClearColorKey();
+				}
+			}
+		}
+
+		/// <summary>
+		/// Get/set the transparent color of the image.
+		/// </summary>
+		public Color TransparentColor
+		{
+			get 
+			{
+				return transparentcolor;
+			}
+			set	
+			{
+				transparentcolor = value;
+				if (Transparent) 
+				{
+					this.SetColorKey(transparentcolor,true);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Get/set the Alpha flags of the image.
+		/// </summary>
+		public Alphas AlphaFlags
+		{
+			get 
+			{
+				return alphaFlags;
+			}
+			set	
+			{
+				alphaFlags = value;
+				this.SetAlpha(alphaFlags,alphaValue);
+			}
+		}
+
+		/// <summary>
+		/// Get/set the Alpha value of the image. 
+		/// 0 indicates that the image fully transparent. 
+		/// 255 indicates that the image is not tranparent.
+		/// </summary>
+		public byte AlphaValue
+		{
+			get 
+			{
+				return alphaValue;
+			}
+			set	
+			{
+				alphaValue = value;
+				this.SetAlpha(alphaFlags,alphaValue);
+			}
+		}
+
+		/// <summary>
+		/// Draws the image on a Sdl.Surface.
+		/// </summary>
+		/// <param name="destinationSurface">
+		/// The Sdl.Surface to draw the image upon</param>
+		/// <param name="destinationRectangle">
+		/// The position of the image on the destination surface
+		/// </param>
+		public void Draw(
+			Surface destinationSurface, Rectangle destinationRectangle) 
+		{
+			this.Blit(destinationSurface,destinationRectangle);
+		}
+
+		/// <summary>
+		/// Draws the image on a Sdl.Surface.
+		/// </summary>
+		/// <param name="sourceRectangle">
+		/// The area of the image that is to be drawn on the destination surface
+		/// </param>
+		/// <param name="destinationSurface">
+		/// The Sdl.Surface to draw the image upon</param>
+		/// <param name="destinationRectangle">
+		/// The position of the image on the destination surface
+		/// </param>
+		public void Draw(
+			Rectangle sourceRectangle, 
+			Surface destinationSurface, 
+			Rectangle destinationRectangle) 
+		{
+			this.Blit(sourceRectangle,destinationSurface,destinationRectangle);
 		}
 	}
 }
