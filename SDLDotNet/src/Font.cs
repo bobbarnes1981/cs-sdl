@@ -373,7 +373,7 @@ namespace SdlDotNet
 //		/// <param name="destinationSurface"></param>
 //		/// <param name="x"></param>
 //		/// <param name="y"></param>
-//		public void RenderTextSolid(
+//		public void Render(
 //			string textItem, Color color, 
 //			Surface destinationSurface, int x, int y) 
 //		{
@@ -383,7 +383,7 @@ namespace SdlDotNet
 //			fontSurface = RenderTextSolid(textItem, color);
 //			destinationRectangle = 
 //				new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size);
-//			fontSurface.Blit(destinationSurface, destinationRectangle);
+//			destinationSurface.Blit(fontSurface, destinationRectangle);
 //		}
 
 		/// <summary>
