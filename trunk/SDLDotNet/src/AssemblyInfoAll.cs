@@ -25,7 +25,7 @@ using System.Runtime.CompilerServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly: AssemblyTitle("SDL.NET")]
+[assembly: AssemblyTitle("SDL.All.NET")]
 [assembly: AssemblyDescription(".NET Bindings for SDL")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The SDL.NET Project")]
@@ -45,7 +45,7 @@ using System.Runtime.CompilerServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("1.5.*")]
+[assembly: AssemblyVersion("1.5.1")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
@@ -72,6 +72,6 @@ using System.Runtime.CompilerServices;
 //   (*) Delay Signing is an advanced option - see the Microsoft .NET Framework
 //       documentation for more information on this.
 //
-//[assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("..\\..\\sdl.keys")]
-//[assembly: AssemblyKeyName("")]
+[assembly: AssemblyDelaySign(false)]
+[assembly: AssemblyKeyFile("..\\..\\..\\SDL.All.NET.keys")]
+[assembly: AssemblyKeyName("")]

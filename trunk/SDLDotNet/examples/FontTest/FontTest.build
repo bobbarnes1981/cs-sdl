@@ -11,7 +11,7 @@
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
 	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${src.dir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${src.dir}/${TTF.dir}/${build.dir}">
 		<includes name="SDL.TTF.NET.dll"/>
 	    </fileset>
 	</copy>
