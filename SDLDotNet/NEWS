@@ -1,7 +1,8 @@
 3.0.0beta2
 David Hudson 20 Feb 2005
 * Updated some of the documentation.
-* Added Triad, a Tetris-like game to the examples directory.
+* Added Triad, a Tetris-like game to the examples directory. It was created by Michael Rosario.
+* Added a massive, impressive demo by Moonfire called MfGames.Sdl.Demos. It shows off complex Sprite animation and Gui interaction.
 
 3.0.0beta1
 David Hudson 14 Feb 2005
