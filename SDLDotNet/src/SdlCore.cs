@@ -31,10 +31,8 @@ namespace SdlDotNet
 	/// All the functionality of the Sdl library is available through this 
 	/// class and its properties.
 	/// </summary>
-	public sealed class SdlCore : IDisposable 
+	public sealed class SdlCore
 	{
-		private bool disposed;
-
 		/// <summary>
 		/// Returns the global instance of this class.
 		/// </summary>
@@ -46,7 +44,6 @@ namespace SdlDotNet
 			{
 				throw SdlException.Generate();
 			}
-			disposed = false;
 		}
 
 		/// <summary>
@@ -68,19 +65,6 @@ namespace SdlDotNet
 		~SdlCore() 
 		{
 			Sdl.SDL_Quit();
-		}
-
-		/// <summary>
-		/// Destroys this object and shuts down the Sdl library.
-		/// </summary>
-		public void Dispose() 
-		{
-			if (!disposed) 
-			{
-				disposed = true;
-				Sdl.SDL_Quit();
-				GC.SuppressFinalize(this);
-			}
 		}
 	}
 }

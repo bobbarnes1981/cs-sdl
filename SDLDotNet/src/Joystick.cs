@@ -26,41 +26,50 @@ namespace SdlDotNet
 	/// <summary>
 	/// Represents a joystick on the system
 	/// </summary>
-	public class Joystick : IDisposable 
+	public class Joystick : BaseSdlResource 
 	{
-		private IntPtr _handle;
-		private bool _disposed;
+		private IntPtr handle;
+		private bool disposed = false;
 
-		internal Joystick(IntPtr j) 
+		internal Joystick(IntPtr handle) 
 		{
-			_handle = j;
-			_disposed = false;
+			this.handle = handle;
 		}
 
 		/// <summary>
-		/// Allows an Object to attempt to free resources 
-		/// and perform other cleanup operations before the Object 
-		/// is reclaimed by garbage collection.
+		/// Destroys the surface object and frees its memory
 		/// </summary>
-		~Joystick() 
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
 		{
-			Sdl.SDL_JoystickClose(_handle);
-		}
-
-		/// <summary>
-		/// Destroys this joystick object
-		/// </summary>
-		public void Dispose() 
-		{
-			if (!_disposed) 
+			if (!this.disposed)
 			{
-				_disposed = true;
-				Sdl.SDL_JoystickClose(_handle);
-				GC.KeepAlive(this);
-				GC.SuppressFinalize(this);
+				try
+				{
+					if (disposing)
+					{
+					}
+					CloseHandle(ref handle);
+					GC.KeepAlive(this);
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+				}
 			}
 		}
 
+		/// <summary>
+		/// Closes Joystick handle
+		/// </summary>
+		protected override void CloseHandle(ref IntPtr handleToClose) 
+		{
+			Sdl.SDL_JoystickClose(handleToClose);
+			GC.KeepAlive(this);
+			handleToClose = IntPtr.Zero;
+		}
+		
 		/// <summary>
 		/// Gets the 0-based numeric index of this joystick
 		/// </summary>
@@ -68,7 +77,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickIndex(_handle); 
+				int result = Sdl.SDL_JoystickIndex(handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -81,7 +90,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumAxes(_handle); 
+				int result = Sdl.SDL_JoystickNumAxes(handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -94,7 +103,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumBalls(_handle); 
+				int result = Sdl.SDL_JoystickNumBalls(handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -107,7 +116,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumHats(_handle); 
+				int result = Sdl.SDL_JoystickNumHats(handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -120,18 +129,10 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumButtons(_handle); 
+				int result = Sdl.SDL_JoystickNumButtons(handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
-		}
-
-		/// <summary>
-		/// Destroys this joystick object
-		/// </summary>
-		public void Close() 
-		{
-			Dispose();
 		}
 	}
 }

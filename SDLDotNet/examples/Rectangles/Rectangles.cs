@@ -50,8 +50,7 @@ namespace SdlDotNet.Examples {
 			events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
 			events.Quit += new QuitEventHandler(this.Quit);
-
-			
+			events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
 
 			try {
 				Music music = mixer.LoadMusic(musicFile);
@@ -76,14 +75,18 @@ namespace SdlDotNet.Examples {
 					
 					try 
 					{
-						surf.FillRectangle(new Rectangle(rand.Next(-300, width), rand.Next(-300, height), rand.Next(20, 300), rand.Next(20, 300)),
+						surf.FillRectangle(
+							new Rectangle(rand.Next(-300, width), 
+							rand.Next(-300, height), rand.Next(20, 300), 
+							rand.Next(20, 300)),
 						Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
 						surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
 						screen.Flip();
 					} 
 					catch (SurfaceLostException) 
 					{
-						// if we are fullscreen and the user hits alt-tab we can get this, for this simple app we can ignore it
+						// if we are fullscreen and the user hits alt-tab 
+						// we can get this, for this simple app we can ignore it
 					}
 					//}
 				}
@@ -115,6 +118,11 @@ namespace SdlDotNet.Examples {
 		static void Main() {
 			Rectangles rectangles = new Rectangles();
 			rectangles.Run();
+		}
+		private void MusicFinished(object sender, MusicFinishedEventArgs e)
+		{
+			Console.WriteLine("Music Finished");
+
 		}
 	}
 }

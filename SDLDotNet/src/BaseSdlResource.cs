@@ -1,7 +1,6 @@
 /*
  * $RCSfile$
  * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
- * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,62 +18,81 @@
  */
 
 using System;
+using System.Runtime.InteropServices;
+
 using Tao.Sdl;
 
-namespace SdlDotNet 
-{
+namespace SdlDotNet {
 	/// <summary>
-	/// Represents a music sample.  Music is generally longer than a sound effect sample,
-	/// however it can also be compressed e.g. by Ogg Vorbis
+	/// Base class for SdlResources
 	/// </summary>
-	public class Music : BaseSdlResource 
+	public abstract class BaseSdlResource : IDisposable 
 	{
-		private IntPtr handle;
 		private bool disposed = false;
+		private IntPtr handle;
 
-		internal Music(IntPtr handle) 
+		/// <summary>
+		/// 
+		/// </summary>
+		protected BaseSdlResource(IntPtr handle) 
 		{
 			this.handle = handle;
 		}
 
-		internal IntPtr GetHandle() 
-		{ 
-			GC.KeepAlive(this);
-			return handle; 
+		/// <summary>
+		/// 
+		/// </summary>
+		protected BaseSdlResource() 
+		{
 		}
 
 		/// <summary>
-		/// Destroys the surface object and frees its memory
+		/// Allows an Object to attempt to free resources 
+		/// and perform other cleanup operations before the Object 
+		/// is reclaimed by garbage collection.
+		/// </summary>
+		~BaseSdlResource() 
+		{
+			Dispose(false);
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public void Dispose() 
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		/// <summary>
+		/// 
 		/// </summary>
 		/// <param name="disposing"></param>
-		protected override void Dispose(bool disposing)
+		protected virtual void Dispose(bool disposing)
 		{
 			if (!this.disposed)
 			{
-				try
+				if (disposing)
 				{
-					if (disposing)
-					{
-					}
-					CloseHandle(ref handle);
-					GC.KeepAlive(this);
-					this.disposed = true;
 				}
-				finally
-				{
-					base.Dispose(disposing);
-				}
+				CloseHandle(ref handle);
+				GC.KeepAlive(this);
 			}
+			disposed = true;
 		}
 
 		/// <summary>
-		/// Closes Music handle
+		/// 
 		/// </summary>
-		protected override void CloseHandle(ref IntPtr handleToClose) 
+		protected abstract void CloseHandle(ref IntPtr handle);
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public void Close() 
 		{
-			SdlMixer.Mix_FreeMusic(handleToClose);
-			GC.KeepAlive(this);
-			handleToClose = IntPtr.Zero;
+			Dispose();
 		}
 	}
 }

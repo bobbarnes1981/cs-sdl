@@ -24,8 +24,7 @@ using System.Collections;
 using SdlDotNet;
 using Tao.Sdl;
 
-namespace SdlDotNet
-{
+namespace SdlDotNet {
 	/// <summary>
 	/// Encapsulates the collection of SdlImage objects in an SdlImageList.
 	/// </summary>

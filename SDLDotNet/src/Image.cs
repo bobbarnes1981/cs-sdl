@@ -105,7 +105,8 @@ namespace SdlDotNet
 		/// <param name="array">A array of byte that shold the image data</param>
 		public Image(byte[] array)
 		{
-			IntPtr pSurface = SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
+			IntPtr pSurface = 
+				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw ImageException.Generate();
@@ -125,7 +126,8 @@ namespace SdlDotNet
 			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
-			IntPtr pSurface = SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(arr, arr.Length), 1);
+			IntPtr pSurface = 
+				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(arr, arr.Length), 1);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw ImageException.Generate();
@@ -269,7 +271,8 @@ namespace SdlDotNet
 		/// <param name="destinationRectangle">
 		/// The position of the image on the destination surface
 		/// </param>
-		public void Draw(Surface destinationSurface, Rectangle destinationRectangle) 
+		public void Draw(
+			Surface destinationSurface, Rectangle destinationRectangle) 
 		{
 			surface.Blit(destinationSurface,destinationRectangle);
 		}
@@ -285,7 +288,10 @@ namespace SdlDotNet
 		/// <param name="destinationRectangle">
 		/// The position of the image on the destination surface
 		/// </param>
-		public void Draw(Rectangle sourceRectangle, Surface destinationSurface, Rectangle destinationRectangle) 
+		public void Draw(
+			Rectangle sourceRectangle, 
+			Surface destinationSurface, 
+			Rectangle destinationRectangle) 
 		{
 			surface.Blit(sourceRectangle,destinationSurface,destinationRectangle);
 		}
