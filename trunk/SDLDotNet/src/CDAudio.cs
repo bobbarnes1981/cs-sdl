@@ -28,10 +28,10 @@ namespace SdlDotNet {
 	/// </summary>
 	public struct CDFrames
 	{
-		int _frames;
-		int _minutes;
-		int _seconds;
-		int _framesLeftover;
+		int frames;
+		int minutes;
+		int seconds;
+		int framesLeftover;
 
 		/// <summary>
 		/// 
@@ -40,10 +40,10 @@ namespace SdlDotNet {
 		/// The number of frames to convert</param>
 		public CDFrames(int frames)
 		{
-			_frames = frames;
-			_minutes = 0;
-			_seconds = 0;
-			_framesLeftover = 0;
+			this.frames = frames;
+			this.minutes = 0;
+			this.seconds = 0;
+			this.framesLeftover = 0;
 			this.FramesToTime(frames);
 		}
 
@@ -74,11 +74,11 @@ namespace SdlDotNet {
 		/// </param>
 		public CDFrames(int minutes, int seconds, int framesLeftover)
 		{
-			_frames = 0;
-			_minutes = minutes;
-			_seconds = seconds;
-			_framesLeftover = framesLeftover;
-			_frames = this.TimeToFrames(minutes, seconds, _framesLeftover);
+			this.frames = 0;
+			this.minutes = minutes;
+			this.seconds = seconds;
+			this.framesLeftover = framesLeftover;
+			this.frames = this.TimeToFrames(minutes, seconds, framesLeftover);
 		}
 
 		/// <summary>
@@ -120,14 +120,14 @@ namespace SdlDotNet {
 		{
 			get
 			{
-				return _minutes;
+				return minutes;
 			}
 			set
 			{
 				if (value >= 0)
 				{
-					_minutes = value;
-					this.TimeToFrames(value, _seconds, _framesLeftover);
+					minutes = value;
+					this.TimeToFrames(value, seconds, framesLeftover);
 				}
 			}
 
@@ -140,15 +140,15 @@ namespace SdlDotNet {
 		{
 			get
 			{
-				return _seconds;
+				return seconds;
 			}
 			set 
 			{
 				if (value >= 0)
 				{
-					_seconds = value;
-					_frames = this.TimeToFrames(_minutes, value, _framesLeftover);
-					this.FramesToTime(_frames);
+					seconds = value;
+					frames = this.TimeToFrames(minutes, value, framesLeftover);
+					this.FramesToTime(frames);
 				}
 			}
 		}
@@ -160,15 +160,15 @@ namespace SdlDotNet {
 		{
 			get
 			{
-				return _framesLeftover;
+				return framesLeftover;
 			}
 			set
 			{
 				if (value >=0)
 				{
-					_framesLeftover = value;
-					_frames = this.TimeToFrames(_minutes, _seconds, value);
-					this.FramesToTime(_frames);
+					framesLeftover = value;
+					frames = this.TimeToFrames(minutes, seconds, value);
+					this.FramesToTime(frames);
 				}
 			}
 		}
@@ -180,13 +180,13 @@ namespace SdlDotNet {
 		{
 			get
 			{
-				return _frames;
+				return frames;
 			}
 			set
 			{
 				if (value >=0)
 				{
-					_frames = value;
+					frames = value;
 					this.FramesToTime(value);
 				}
 			}
@@ -214,7 +214,8 @@ namespace SdlDotNet {
 	/// <remarks>
 	/// Contains methods for playing audio CDs.
 	/// </remarks>
-	public sealed class CDAudio {
+	public sealed class CDAudio 
+	{
 		static readonly CDAudio instance = new CDAudio();
 
 		CDAudio()
@@ -265,7 +266,8 @@ namespace SdlDotNet {
 		/// <remarks>
 		/// Opens a CD-ROM drive for manipulation
 		/// </remarks>
-		public CDDrive OpenDrive(int index) {
+		public CDDrive OpenDrive(int index) 
+		{
 			IntPtr cd = Sdl.SDL_CDOpen(index);
 			if (cd == IntPtr.Zero)
 			{

@@ -86,7 +86,7 @@ namespace SdlDotNet
 		private SdlMixer.ChannelFinishedDelegate channelFinished;
 		private SdlMixer.MusicFinishedDelegate musicFinished;
 		
-		byte _distance ;
+		byte distance ;
 
 		static readonly Mixer instance = new Mixer();
 
@@ -108,7 +108,6 @@ namespace SdlDotNet
 				
 				Mixer.PrivateOpen();
 
-				//Mixer.InitializeDelegates();
 				return instance;
 			}
 		}
@@ -286,7 +285,8 @@ namespace SdlDotNet
 		/// Specify 1 to have the sample play twice</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
 		/// <returns>The channel used to play the sample</returns>
-		public int PlaySampleTimed(Sample sample, int loops, int ticks) {
+		public int PlaySampleTimed(Sample sample, int loops, int ticks) 
+		{
 			int ret = SdlMixer.Mix_PlayChannelTimed(-1, sample.GetHandle(), loops, ticks);
 			if (ret == -1)
 			{
@@ -305,7 +305,8 @@ namespace SdlDotNet
 		/// </param>
 		/// <param name="ticks">The time limit in milliseconds</param>
 		/// <returns>The channel used to play the sample</returns>
-		public int PlaySampleTimed(int channel, Sample sample, int loops, int ticks) {
+		public int PlaySampleTimed(int channel, Sample sample, int loops, int ticks) 
+		{
 			int ret = SdlMixer.Mix_PlayChannelTimed(channel, sample.GetHandle(), loops, ticks);
 			if (ret == -1)
 			{
@@ -320,7 +321,8 @@ namespace SdlDotNet
 		/// <param name="sample">The sample to play</param>
 		/// <param name="ms">The number of milliseconds to fade in for</param>
 		/// <returns>The channel used to play the sample</returns>
-		public int FadeInSample(Sample sample, int ms) {
+		public int FadeInSample(Sample sample, int ms) 
+		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), 0, ms, -1);
 			if (ret == -1)
 			{
@@ -339,7 +341,8 @@ namespace SdlDotNet
 		/// <param name="loops">The number of loops.  
 		/// Specify 1 to have the sample play twice</param>
 		/// <returns>The channel used to play the sample</returns>
-		public int FadeInSample(Sample sample, int ms, int loops) {
+		public int FadeInSample(Sample sample, int ms, int loops) 
+		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), loops, ms, -1);
 			if (ret == -1)
 			{
@@ -359,7 +362,8 @@ namespace SdlDotNet
 		/// Specify 1 to have the sample play twice
 		/// </param>
 		/// <returns>The channel used to play the sample</returns>
-		public int FadeInSample(int channel, Sample sample, int ms, int loops) {
+		public int FadeInSample(int channel, Sample sample, int ms, int loops) 
+		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(channel, sample.GetHandle(), loops, ms, -1);
 			if (ret == -1)
 			{
@@ -375,7 +379,8 @@ namespace SdlDotNet
 		/// <param name="ms">The number of milliseconds to fade in for</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
 		/// <returns>The channel used to play the sample</returns>
-		public int FadeInSampleTimed(Sample sample, int ms, int ticks) {
+		public int FadeInSampleTimed(Sample sample, int ms, int ticks) 
+		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), 0, ms, ticks);
 			if (ret == -1)
 			{
@@ -394,7 +399,8 @@ namespace SdlDotNet
 		/// Specify 1 to have the sample play twice</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
 		/// <returns>The channel used to play the sample</returns>
-		public int FadeInSampleTimed(Sample sample, int ms, int loops, int ticks) {
+		public int FadeInSampleTimed(Sample sample, int ms, int loops, int ticks) 
+		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), loops, ms, ticks);
 			if (ret == -1)
 			{
@@ -415,7 +421,8 @@ namespace SdlDotNet
 		/// Specify 1 to have the sample play twice</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
 		/// <returns>The channel used to play the sample</returns>
-		public int FadeInSampleTimed(int channel, Sample sample, int ms, int loops, int ticks) {
+		public int FadeInSampleTimed(int channel, Sample sample, int ms, int loops, int ticks) 
+		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(channel, sample.GetHandle(), loops, ms, ticks);
 			if (ret == -1)
 			{
@@ -605,11 +612,11 @@ namespace SdlDotNet
 				{
 					throw SdlException.Generate();
 				}
-				_distance = value;
+				distance = value;
 			}
 			get
 			{
-				return _distance;
+				return distance;
 			}
 		}
 		/// <summary>
@@ -845,17 +852,17 @@ namespace SdlDotNet
 		/// </summary>
 		public void EnableMusicCallbacks() 
 		{
-			this.channelFinished = new SdlMixer.ChannelFinishedDelegate(ChannelFinished);
-			this.musicFinished = new SdlMixer.MusicFinishedDelegate(MusicFinished);
+			this.channelFinished = new SdlMixer.ChannelFinishedDelegate(this.ChannelFinished);
+			this.musicFinished = new SdlMixer.MusicFinishedDelegate(this.MusicFinished);
 			SdlMixer.Mix_ChannelFinished(channelFinished);
 			SdlMixer.Mix_HookMusicFinished(musicFinished);
 		}
 
-		private static void ChannelFinished(int channel) 
+		private void ChannelFinished(int channel) 
 		{
 			Events.Instance.NotifyChannelFinished(channel);
 		}
-		private static void MusicFinished() 
+		private void MusicFinished() 
 		{
 			Events.Instance.NotifyMusicFinished();
 		}

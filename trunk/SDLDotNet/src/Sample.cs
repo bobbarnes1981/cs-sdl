@@ -27,46 +27,54 @@ namespace SdlDotNet
 	/// Represents a sound sample.
 	/// Create with Mixer.LoadWav().
 	/// </summary>
-	/// <implements>System.IDisposable</implements>
-	public class Sample : IDisposable 
+	public class Sample : BaseSdlResource 
 	{
-		private IntPtr _handle;
-		private bool _disposed;
+		private IntPtr handle;
+		private bool disposed = false;
 
 		internal Sample(IntPtr handle) 
 		{
-			_handle = handle;
-			_disposed = false;
+			this.handle = handle;
 		}
 
 		internal IntPtr GetHandle() 
 		{ 
 			GC.KeepAlive(this);
-			return _handle; 
+			return handle; 
 		}
 
 		/// <summary>
-		/// Allows an Object to attempt to free resources 
-		/// and perform other cleanup operations before the Object 
-		/// is reclaimed by garbage collection.
+		/// Destroys the surface object and frees its memory
 		/// </summary>
-		~Sample() 
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
 		{
-			SdlMixer.Mix_FreeChunk(_handle);
-		}
-
-		/// <summary>
-		/// Destroys this Sample and frees the memory associated with it
-		/// </summary>
-		public void Dispose() 
-		{
-			if (!_disposed) 
+			if (!this.disposed)
 			{
-				_disposed = true;
-				SdlMixer.Mix_FreeChunk(_handle);
-				GC.KeepAlive(this);
-				GC.SuppressFinalize(this);
+				try
+				{
+					if (disposing)
+					{
+					}
+					CloseHandle(ref handle);
+					GC.KeepAlive(this);
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+				}
 			}
+		}
+
+		/// <summary>
+		/// Closes Music handle
+		/// </summary>
+		protected override void CloseHandle(ref IntPtr handleToClose) 
+		{
+			SdlMixer.Mix_FreeChunk(handleToClose);
+			GC.KeepAlive(this);
+			handleToClose = IntPtr.Zero;
 		}
 
 		/// <summary>
@@ -76,7 +84,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				int result = SdlMixer.Mix_VolumeChunk(_handle, -1);
+				int result = SdlMixer.Mix_VolumeChunk(handle, -1);
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -84,7 +92,7 @@ namespace SdlDotNet
 			{
 				if (value >= 0 && value <= SdlMixer.MIX_MAX_VOLUME)
 				{
-					int result = SdlMixer.Mix_VolumeChunk(_handle, value);
+					int result = SdlMixer.Mix_VolumeChunk(handle, value);
 				}
 				GC.KeepAlive(this);
 			}

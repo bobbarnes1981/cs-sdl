@@ -142,7 +142,8 @@ namespace SdlDotNet {
 	/// You can obtain an instance of this class by accessing the Events property of the main Sdl object.
 	/// You must call the PollAndDelegate() member in order for any events to fire.
 	/// </summary>
-	public class Events {
+	public class Events 
+	{
 		private Hashtable _userEvents = new Hashtable();
 		private int _userEventId = 0;
 
@@ -650,10 +651,10 @@ namespace SdlDotNet {
 		}
 
 		internal void NotifyChannelFinished(int channel) {
-			PushUserEvent(new ChannelFinishedEventArgs(channel));
+			ChannelFinished(this, new ChannelFinishedEventArgs(channel));
 		}
 		internal void NotifyMusicFinished() {
-			PushUserEvent(new MusicFinishedEventArgs());
+			MusicFinished(this, new MusicFinishedEventArgs());
 		}
 	}
 }

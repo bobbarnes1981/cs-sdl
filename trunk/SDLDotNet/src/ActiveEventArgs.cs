@@ -21,8 +21,7 @@ using System;
 
 using Tao.Sdl;
 
-namespace SdlDotNet
-{
+namespace SdlDotNet {
 	/// <summary>
 	/// Summary description for ActiveEventArgs.
 	/// </summary>

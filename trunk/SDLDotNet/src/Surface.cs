@@ -81,30 +81,19 @@ namespace SdlDotNet
 	/// You can create instances of this class with the methods in the Video 
 	/// object.
 	/// </summary>
-	public class Surface : IDisposable 
+	public class Surface : BaseSdlResource
 	{
-		private bool _freeondispose;
-		private bool _disposed;
-		private IntPtr _surfacePtr;
+		private bool disposed = false;
+		private IntPtr handle;
 
 		#region Constructors and Destructors
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="surfacePtr"></param>
-		/// <param name="freeondispose"></param>
-		internal Surface(IntPtr surfacePtr, bool freeondispose) 
+		/// <param name="handle"></param>
+		internal Surface(IntPtr handle) 
 		{
-			_freeondispose = freeondispose;
-			_surfacePtr = surfacePtr;
-			_disposed = false;
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surfacePtr"></param>
-		internal Surface(IntPtr surfacePtr) : this(surfacePtr, true)
-		{
+			this.handle = handle;
 		}
 
 		/// <summary>
@@ -118,9 +107,7 @@ namespace SdlDotNet
 			{
 				throw SdlException.Generate();
 			}
-			_surfacePtr = surfPtr;
-			_freeondispose = true;
-			_disposed = false;
+			handle = surfPtr;
 		}
 	
 		/// <summary>
@@ -130,16 +117,50 @@ namespace SdlDotNet
 		/// </summary>
 		~Surface() 
 		{
-			if (_freeondispose)
-			{
-				Sdl.SDL_FreeSurface(ref _surfacePtr);
-			}
+			Dispose(false);
 		}
 		#endregion Constructors and Destructors
 
+		
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+
+					}
+					CloseHandle(ref handle);
+					GC.KeepAlive(this);
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Closes Surface handle
+		/// </summary>
+		protected override void CloseHandle(ref IntPtr handleToClose) 
+		{
+			Sdl.SDL_FreeSurface(handleToClose);
+			GC.KeepAlive(this);
+			handleToClose = IntPtr.Zero;
+		}
+
+
 		internal static Surface FromScreenPtr(IntPtr surfacePtr) 
 		{
-			return new Surface(surfacePtr, false);
+			return new Surface(surfacePtr);
 		}
 
 //		internal static Surface FromPtr(IntPtr surfacePtr) {
@@ -169,19 +190,18 @@ namespace SdlDotNet
 			get
 			{
 				GC.KeepAlive(this);
-				return _surfacePtr;
+				return handle;
 			}
 		}
 
 		internal static Surface FromImageFile(string file) 
 		{
 			IntPtr surfPtr = SdlImage.IMG_Load(file);
-			//GC.KeepAlive(this);
 			if (surfPtr == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
-			return new Surface(surfPtr, true);
+			return new Surface(surfPtr);
 		}
 
 		internal static Surface FromBitmap(System.Drawing.Bitmap bitmap) 
@@ -195,7 +215,7 @@ namespace SdlDotNet
 			{
 				throw SdlException.Generate();
 			}
-			return new Surface(surf, true);
+			return new Surface(surf);
 		}
 
 		internal static Surface FromBitmap(byte[] arr) 
@@ -206,21 +226,7 @@ namespace SdlDotNet
 			{
 				throw SdlException.Generate();
 			}
-			return new Surface(surf, true);
-		}
-
-
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		public void Dispose() 
-		{
-			if (_freeondispose && !_disposed) 
-			{
-				_disposed = true;
-				//Sdl.SDL_FreeSurface(ref _surfacePtr);
-				GC.SuppressFinalize(this);
-			}
+			return new Surface(surf);
 		}
 
 		/// <summary>
@@ -229,7 +235,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void Flip() 
 		{
-			int result = Sdl.SDL_Flip(_surfacePtr);
+			int result = Sdl.SDL_Flip(handle);
 			GC.KeepAlive(this);
 			if (result != 0)
 			{
@@ -257,7 +263,7 @@ namespace SdlDotNet
 		{
 			Sdl.SDL_Rect sdlrect = ConvertRecttoSDLRect(rectangle);
 
-			int result = Sdl.SDL_FillRect(_surfacePtr, ref sdlrect, MapColor(color).Value);
+			int result = Sdl.SDL_FillRect(handle, ref sdlrect, MapColor(color).Value);
 			GC.KeepAlive(this);
 			if (result != 0)
 			{
@@ -272,10 +278,10 @@ namespace SdlDotNet
 		public void Fill(System.Drawing.Color color) 
 		{
 			Sdl.SDL_Surface surf = 
-				this.GetSurfaceStructFromPtr(_surfacePtr);
+				this.GetSurfaceStructFromPtr(handle);
 			Sdl.SDL_Rect sdlrect = 
 				new Sdl.SDL_Rect(0, 0, (short)surf.w, (short)surf.h);
-			int result = Sdl.SDL_FillRect(_surfacePtr, ref sdlrect, MapColor(color).Value);
+			int result = Sdl.SDL_FillRect(handle, ref sdlrect, MapColor(color).Value);
 			GC.KeepAlive(this);
 			if (result != 0)
 			{
@@ -290,7 +296,7 @@ namespace SdlDotNet
 		/// <returns>A pixel value in the surface's format</returns>
 		public PixelValue MapColor(System.Drawing.Color color) 
 		{
-			Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(_surfacePtr);
+			Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(handle);
 			GC.KeepAlive(this);
 			return new PixelValue(Sdl.SDL_MapRGBA(
 				surf.format, 
@@ -310,7 +316,7 @@ namespace SdlDotNet
 		/// </returns>
 		public System.Drawing.Color GetColor(PixelValue pixelValue) {
 			byte r, g, b, a;
-			Sdl.SDL_Surface surf = this.GetSurfaceStructFromPtr(_surfacePtr);
+			Sdl.SDL_Surface surf = this.GetSurfaceStructFromPtr(handle);
 			GC.KeepAlive(this);
 			Sdl.SDL_GetRGBA(pixelValue.Value, surf.format, out r, out g, out b, out a);
 			GC.KeepAlive(this);
@@ -340,7 +346,7 @@ namespace SdlDotNet
 				flag = Sdl.SDL_SWSURFACE;
 			}
 			
-			Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(_surfacePtr);
+			Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(handle);
 			Sdl.SDL_PixelFormat pixelFormat = 
 				(Sdl.SDL_PixelFormat)Marshal.PtrToStructure(
 				surf.format, typeof(Sdl.SDL_PixelFormat));
@@ -356,10 +362,10 @@ namespace SdlDotNet
 			GC.KeepAlive(this);
 
 			IntPtr intPtrRet = Sdl.SDL_ConvertSurface(
-				_surfacePtr, surf.format, flag);
+				handle, surf.format, flag);
 			GC.KeepAlive(this);
-			Sdl.SDL_FreeSurface(ref intPtr);
-			return new Surface(intPtrRet, true);
+			Sdl.SDL_FreeSurface(intPtr);
+			return new Surface(intPtrRet);
 		}
 
 		/// <summary>
@@ -372,14 +378,14 @@ namespace SdlDotNet
 		/// </param>
 		/// <returns>The new surface</returns>
 		public Surface ConvertSurface(Surface toConvert, bool hardware) {
-			Sdl.SDL_Surface surf = this.GetSurfaceStructFromPtr(_surfacePtr);
-			IntPtr ret = Sdl.SDL_ConvertSurface(toConvert._surfacePtr, surf.format, hardware?(int)Sdl.SDL_HWSURFACE:(int)Sdl.SDL_SWSURFACE);
+			Sdl.SDL_Surface surf = this.GetSurfaceStructFromPtr(handle);
+			IntPtr ret = Sdl.SDL_ConvertSurface(toConvert.handle, surf.format, hardware?(int)Sdl.SDL_HWSURFACE:(int)Sdl.SDL_SWSURFACE);
 			GC.KeepAlive(this);
 			if (ret == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
-			return new Surface(ret, true);
+			return new Surface(ret);
 		}
 
 		/// <summary>
@@ -388,13 +394,13 @@ namespace SdlDotNet
 		/// </summary>
 		/// <returns>A copy of this surface</returns>
 		public Surface DisplayFormat() {
-			IntPtr surfPtr = Sdl.SDL_DisplayFormat(_surfacePtr);
+			IntPtr surfPtr = Sdl.SDL_DisplayFormat(handle);
 			GC.KeepAlive(this);
 			if (surfPtr == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
-			return new Surface(surfPtr, true);
+			return new Surface(surfPtr);
 		}
 
 		/// <summary>
@@ -402,7 +408,7 @@ namespace SdlDotNet
 		/// </summary>
 		public System.Drawing.Size Size {
 			get { 
-				Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(_surfacePtr);
+				Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(handle);
 				GC.KeepAlive(this);
 				return new System.Drawing.Size(surf.w, surf.h); 
 			}
@@ -414,7 +420,7 @@ namespace SdlDotNet
 		public int Width { 
 			get
 			{ 
-				Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(_surfacePtr);
+				Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(handle);
 				GC.KeepAlive(this);
 				return (int)surf.w; 
 			} 
@@ -426,7 +432,7 @@ namespace SdlDotNet
 		public int Height { 
 			get
 			{ 
-				Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(_surfacePtr);
+				Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(handle);
 				GC.KeepAlive(this);
 				return (int)surf.h; 
 			} 
@@ -445,7 +451,7 @@ namespace SdlDotNet
 			Sdl.SDL_Rect s = this.ConvertRecttoSDLRect(new System.Drawing.Rectangle(
 				new System.Drawing.Point(0, 0), this.Size)),
 				d = this.ConvertRecttoSDLRect(destinationRectangle);
-			int result = Sdl.SDL_BlitSurface(_surfacePtr, ref s, destinationSurface._surfacePtr, ref d);
+			int result = Sdl.SDL_BlitSurface(handle, ref s, destinationSurface.handle, ref d);
 			GC.KeepAlive(this);
 			if (result != 0)
 			{
@@ -470,7 +476,7 @@ namespace SdlDotNet
 		{
 			Sdl.SDL_Rect s = this.ConvertRecttoSDLRect(sourceRectangle); 
 			Sdl.SDL_Rect d = this.ConvertRecttoSDLRect(destinationRectangle);
-			int result = Sdl.SDL_BlitSurface(_surfacePtr, ref s, destinationSurface._surfacePtr, ref d);
+			int result = Sdl.SDL_BlitSurface(handle, ref s, destinationSurface.handle, ref d);
 			GC.KeepAlive(this);
 			if (result!= 0)
 			{
@@ -483,7 +489,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void Lock() {
 			if (MustLock) {
-				int result = Sdl.SDL_LockSurface(_surfacePtr);
+				int result = Sdl.SDL_LockSurface(handle);
 				GC.KeepAlive(this);
 				if (result != 0)
 				{
@@ -498,7 +504,7 @@ namespace SdlDotNet
 			get 
 			{ 
 				Sdl.SDL_Surface surf = 
-					this.GetSurfaceStructFromPtr(_surfacePtr);
+					this.GetSurfaceStructFromPtr(handle);
 				GC.KeepAlive(this);
 				return surf.pixels; 
 			}
@@ -509,7 +515,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void Unlock() {
 			if (MustLock) {
-				int result = Sdl.SDL_UnlockSurface(_surfacePtr);
+				int result = Sdl.SDL_UnlockSurface(handle);
 				GC.KeepAlive(this);
 				if (result != 0)
 				{
@@ -526,7 +532,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_MUSTLOCK(_surfacePtr);
+				int result = Sdl.SDL_MUSTLOCK(handle);
 				GC.KeepAlive(this);
 				if (result== 1)
 				{
@@ -545,7 +551,7 @@ namespace SdlDotNet
 		/// <param name="file">The filename to save to</param>
 		public void SaveBmp(string file) 
 		{
-			int result = Sdl.SDL_SaveBMP(_surfacePtr, file);
+			int result = Sdl.SDL_SaveBMP(handle, file);
 			GC.KeepAlive(this);
 			if (result!=0)
 			{
@@ -579,7 +585,7 @@ namespace SdlDotNet
 			{
 				flag |= Sdl.SDL_RLEACCELOK;
 			}
-			int result = Sdl.SDL_SetColorKey(_surfacePtr, (int)flag, key.Value);
+			int result = Sdl.SDL_SetColorKey(handle, (int)flag, key.Value);
 			GC.KeepAlive(this);
 			if (result != 0)
 			{
@@ -592,7 +598,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void ClearColorKey() 
 		{
-			int result = Sdl.SDL_SetColorKey(_surfacePtr, 0, 0);
+			int result = Sdl.SDL_SetColorKey(handle, 0, 0);
 			GC.KeepAlive(this);
 			if (result != 0)
 			{
@@ -609,14 +615,14 @@ namespace SdlDotNet
 			{
 				Sdl.SDL_Rect sdlrect = 
 					this.ConvertRecttoSDLRect(new System.Drawing.Rectangle());
-				Sdl.SDL_GetClipRect(_surfacePtr, ref sdlrect);
+				Sdl.SDL_GetClipRect(handle, ref sdlrect);
 				GC.KeepAlive(this);
 				return new System.Drawing.Rectangle(sdlrect.x, sdlrect.y, sdlrect.w, sdlrect.h);
 			}
 			set
 			{
 				Sdl.SDL_Rect sdlrect = this.ConvertRecttoSDLRect(value);
-				Sdl.SDL_SetClipRect(_surfacePtr, ref sdlrect);
+				Sdl.SDL_SetClipRect(handle, ref sdlrect);
 				GC.KeepAlive(this);
 			}
 		}
@@ -628,7 +634,7 @@ namespace SdlDotNet
 			get
 			{ 
 				Sdl.SDL_Surface surf = 
-					this.GetSurfaceStructFromPtr(_surfacePtr);
+					this.GetSurfaceStructFromPtr(handle);
 				GC.KeepAlive(this);
 
 				Sdl.SDL_PixelFormat pixelFormat = 
@@ -652,7 +658,7 @@ namespace SdlDotNet
 		public void DrawPixel(int x, int y, System.Drawing.Color color) 
 		{
 			PixelValue pixelColor = this.MapColor(color);
-			Sdl.SDL_Surface surface = GetSurfaceStructFromPtr(_surfacePtr);
+			Sdl.SDL_Surface surface = GetSurfaceStructFromPtr(handle);
 			GC.KeepAlive(this);
 
 			Sdl.SDL_PixelFormat format = 
@@ -719,7 +725,7 @@ namespace SdlDotNet
 			int pitch = this.Pitch;
 			byte[] tempByte = new byte[pitch];
 			byte[] firstByte = new byte[pitch];
-			Sdl.SDL_Surface surface = this.GetSurfaceStructFromPtr(_surfacePtr);
+			Sdl.SDL_Surface surface = this.GetSurfaceStructFromPtr(handle);
 			GC.KeepAlive(this);
 
 			IntPtr pixelsPtr = surface.pixels;
@@ -752,7 +758,7 @@ namespace SdlDotNet
 		{ 
 			get 
 			{ 
-				Sdl.SDL_Surface surf = this.GetSurfaceStructFromPtr(_surfacePtr);
+				Sdl.SDL_Surface surf = this.GetSurfaceStructFromPtr(handle);
 				GC.KeepAlive(this);
 				return surf.pitch; 
 			} 
@@ -765,7 +771,7 @@ namespace SdlDotNet
 		/// <param name="y">The y coordinate of the surface</param>
 		public int GetPixel(int x, int y) 
 		{
-			Sdl.SDL_Surface surface = GetSurfaceStructFromPtr(_surfacePtr);
+			Sdl.SDL_Surface surface = GetSurfaceStructFromPtr(handle);
 			GC.KeepAlive(this);
 
 			Sdl.SDL_PixelFormat format = 
@@ -821,7 +827,7 @@ namespace SdlDotNet
 		/// <param name="alpha">The alpha value</param>
 		public void SetAlpha(Alphas flag, byte alpha) 
 		{
-			int result = Sdl.SDL_SetAlpha(_surfacePtr, (int)flag, alpha);
+			int result = Sdl.SDL_SetAlpha(handle, (int)flag, alpha);
 			GC.KeepAlive(this);
 			if (result != 0) 
 			{

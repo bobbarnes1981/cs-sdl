@@ -25,10 +25,13 @@
  *	Notes
  *
  *	For all functions where there are 3 versions, 
- *	the Text (Latin1) and UTF8 functions convert the string to Unicode then use the unicode version.
- *	DotNet seems to do this conversion when marshalling so I have decided to only have methods for the unicode versions.
+ *	the Text (Latin1) and UTF8 functions convert the string to 
+ *  Unicode then use the unicode version.
+ *	DotNet seems to do this conversion when marshalling so 
+ *  I have decided to only have methods for the unicode versions.
  *
- *	In the future, I might merge Solid/Shaded/Blended into 1 function with the type as a parameter.  
+ *	In the future, I might merge Solid/Shaded/Blended into 
+ *  1 function with the type as a parameter.  
  *	At the moment I can't see any reason to do this.
  *
  *	REVISION HISTORY
@@ -56,12 +59,12 @@ namespace SdlDotNet
 	/// <summary>
 	/// Font Class
 	/// </summary>
-	public class Font : IDisposable
+	public class Font : BaseSdlResource
 	{
-		private IntPtr fontPtr; // Pointer to Ttf_Font struct
+		private IntPtr handle; // Pointer to Ttf_Font struct
 		private Ttf ttf;
 		private Video video;
-		private bool _disposed;
+		private bool disposed = false;
 	
 		/// <summary>
 		/// Font Constructor
@@ -70,11 +73,10 @@ namespace SdlDotNet
 		/// <param name="pointSize"></param>
 		public Font(string filename, int pointSize) 
 		{
-			_disposed = false;
 			ttf = Ttf.Instance;
 			video = Video.Instance;
-			fontPtr = SdlTtf.TTF_OpenFont(filename, pointSize);
-			if (fontPtr == IntPtr.Zero) 
+			handle = SdlTtf.TTF_OpenFont(filename, pointSize);
+			if (handle == IntPtr.Zero) 
 			{
 				throw TtfException.Generate();
 			}
@@ -82,21 +84,41 @@ namespace SdlDotNet
 
 		internal Font(IntPtr pFont) 
 		{
-			_disposed = false;
-			fontPtr = pFont;
+			handle = pFont;
 		}
 
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
-		public void Dispose() 
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
 		{
-			if (!_disposed) 
+			if (!this.disposed)
 			{
-				_disposed = true;
-				//Sdl.SDL_FreeSurface(ref _surfacePtr);
-				GC.SuppressFinalize(this);
+				try
+				{
+					if (disposing)
+					{
+					}
+					CloseHandle(ref handle);
+					GC.KeepAlive(this);
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+				}
 			}
+		}
+
+		/// <summary>
+		/// Closes Surface handle
+		/// </summary>
+		protected override void CloseHandle(ref IntPtr handleToClose) 
+		{
+			SdlTtf.TTF_CloseFont(handleToClose);
+			GC.KeepAlive(this);
+			handleToClose = IntPtr.Zero;
 		}
 
 		// Possibly add Bold/Italic/Underline properties
@@ -108,12 +130,12 @@ namespace SdlDotNet
 		{
 			set 
 			{ 
-				SdlTtf.TTF_SetFontStyle(fontPtr, (int) value); 
+				SdlTtf.TTF_SetFontStyle(handle, (int) value); 
 				GC.KeepAlive(this);
 			}
 			get 
 			{ 
-				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(fontPtr);
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(handle);
 				GC.KeepAlive(this);
 				return style; 
 			}
@@ -126,7 +148,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = SdlTtf.TTF_FontHeight(fontPtr);
+				int result = SdlTtf.TTF_FontHeight(handle);
 				GC.KeepAlive(this);
 				return result; 
 			}
@@ -139,7 +161,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = SdlTtf.TTF_FontAscent(fontPtr);
+				int result = SdlTtf.TTF_FontAscent(handle);
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -152,7 +174,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = SdlTtf.TTF_FontLineSkip(fontPtr); 
+				int result = SdlTtf.TTF_FontLineSkip(handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -168,7 +190,7 @@ namespace SdlDotNet
 			int width;
 			int height;
 
-			SdlTtf.TTF_SizeUNICODE(fontPtr, textItem, out width, out height);
+			SdlTtf.TTF_SizeUNICODE(handle, textItem, out width, out height);
 			GC.KeepAlive(this);
 			return new Size(width, height);
 		}
@@ -183,7 +205,7 @@ namespace SdlDotNet
 		{
 			IntPtr pSurface;
 			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
-			pSurface = SdlTtf.TTF_RenderUNICODE_Solid(fontPtr, textItem, colorSdl);
+			pSurface = SdlTtf.TTF_RenderUNICODE_Solid(handle, textItem, colorSdl);
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
@@ -201,13 +223,16 @@ namespace SdlDotNet
 		/// <param name="destinationSurface"></param>
 		/// <param name="x"></param>
 		/// <param name="y"></param>
-		public void RenderTextSolid(string textItem, Color color, Surface destinationSurface, int x, int y) 
+		public void RenderTextSolid(
+			string textItem, Color color, 
+			Surface destinationSurface, int x, int y) 
 		{
 			Surface fontSurface;
 			System.Drawing.Rectangle destinationRectangle;
 
 			fontSurface = RenderTextSolid(textItem, color);
-			destinationRectangle = new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size);
+			destinationRectangle = 
+				new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size);
 			fontSurface.Blit(destinationSurface, destinationRectangle);
 		}
 
@@ -218,14 +243,17 @@ namespace SdlDotNet
 		/// <param name="backgroundColor"></param>
 		/// <param name="foregroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderTextShaded(string textItem, Color foregroundColor, Color backgroundColor) 
+		public Surface RenderTextShaded(
+			string textItem, Color foregroundColor, Color backgroundColor) 
 		{
 			IntPtr pSurface;
 
-			Sdl.SDL_Color foregroundColorSdl = SdlColor.ConvertColor(foregroundColor);
-			Sdl.SDL_Color backgroundColorSdl = SdlColor.ConvertColor(backgroundColor);
+			Sdl.SDL_Color foregroundColorSdl = 
+				SdlColor.ConvertColor(foregroundColor);
+			Sdl.SDL_Color backgroundColorSdl = 
+				SdlColor.ConvertColor(backgroundColor);
 			pSurface = SdlTtf.TTF_RenderUNICODE_Shaded(
-				fontPtr, textItem, foregroundColorSdl, backgroundColorSdl);
+				handle, textItem, foregroundColorSdl, backgroundColorSdl);
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
@@ -240,11 +268,13 @@ namespace SdlDotNet
 		/// <param name="foregroundColor"></param>
 		/// <param name="textItem"></param>
 		/// <returns></returns>
-		public Surface RenderTextBlended(string textItem, Sdl.SDL_Color foregroundColor) 
+		public Surface RenderTextBlended(
+			string textItem, Sdl.SDL_Color foregroundColor) 
 		{
 			IntPtr pSurface;
 
-			pSurface = SdlTtf.TTF_RenderUNICODE_Blended(fontPtr, textItem, foregroundColor);
+			pSurface = SdlTtf.TTF_RenderUNICODE_Blended(
+				handle, textItem, foregroundColor);
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
@@ -259,11 +289,13 @@ namespace SdlDotNet
 		/// <param name="character"></param>
 		/// <param name="foregroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderGlyphSolid(short character, Sdl.SDL_Color foregroundColor) 
+		public Surface RenderGlyphSolid(
+			short character, Sdl.SDL_Color foregroundColor) 
 		{
 			IntPtr pSurface;
 
-			pSurface = SdlTtf.TTF_RenderGlyph_Solid(fontPtr, character, foregroundColor);
+			pSurface = SdlTtf.TTF_RenderGlyph_Solid(
+				handle, character, foregroundColor);
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
@@ -285,7 +317,7 @@ namespace SdlDotNet
 			IntPtr pSurface;
 
 			pSurface = SdlTtf.TTF_RenderGlyph_Shaded(
-				fontPtr, character, foregroundColor, backgroundColor);
+				handle, character, foregroundColor, backgroundColor);
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
@@ -300,28 +332,19 @@ namespace SdlDotNet
 		/// <param name="character"></param>
 		/// <param name="foregroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderGlyphBlended(short character, Sdl.SDL_Color foregroundColor) 
+		public Surface RenderGlyphBlended(
+			short character, Sdl.SDL_Color foregroundColor) 
 		{
 			IntPtr pSurface;
 
-			pSurface = SdlTtf.TTF_RenderGlyph_Blended(fontPtr, character, foregroundColor);
+			pSurface = SdlTtf.TTF_RenderGlyph_Blended(
+				handle, character, foregroundColor);
 			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw TtfException.Generate();
 			}
 			return video.GenerateSurfaceFromPointer(pSurface);
-		}
-
-		/// <summary>
-		/// Destructor
-		/// </summary>
-		~Font() {
-			if (fontPtr != IntPtr.Zero) 
-			{
-				SdlTtf.TTF_CloseFont(fontPtr);
-				fontPtr = IntPtr.Zero;
-			}
 		}
 	}
 }
