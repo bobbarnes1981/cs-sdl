@@ -67,6 +67,10 @@ namespace SdlDotNet.Examples
 				{
 					filepath = "";
 				}
+				SdlButton button = new SdlButton(200, 200, 75, 50, Color.Green, "Hello");
+				SdlTextBox textBox = new SdlTextBox(300, 300, 300);
+				button.Click +=new SdlButtonEventHandler(button_Click);
+				
 				Surface screen = Video.SetVideoModeWindow(width, height, true);
 				Video.WindowCaption = "Surface Example";
 				Video.Mouse.ShowCursor(false); // hide the cursor
@@ -142,6 +146,9 @@ namespace SdlDotNet.Examples
 
 						// Draw Textbox
 						surf.Blit(sdlimg,new Rectangle(new Point(230,440),Background.Size));
+						button.Draw(surf);
+						
+						textBox.Draw(surf);
 						surf.Blit(Cursor,new Rectangle(MousePos, screen.Size));
 						
 
@@ -187,6 +194,11 @@ namespace SdlDotNet.Examples
 		private void Quit(object sender, QuitEventArgs e) 
 		{
 			quitFlag = true;
+		}
+
+		private void button_Click(object source, SdlButtonEventArgs e)
+		{
+			Console.WriteLine("Button was clicked");
 		}
 
 		/// <summary>
