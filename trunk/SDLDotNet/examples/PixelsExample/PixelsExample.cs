@@ -38,7 +38,7 @@ namespace SdlDotNet.Examples {
 		public void Run() {
 			int width = 640;
 			int height = 480;
-			int bitsPerPixel = 16;
+			int bitsPerPixel = 32;
 			Random rand = new Random();
 
 			Video video = Video.Instance;
@@ -79,9 +79,11 @@ namespace SdlDotNet.Examples {
 						b = rand.Next(255);
 
 						colorValue = screen.MapColor(Color.FromArgb(r, g, b));
+						//colorValue = screen.MapColor(Color.FromArgb(254, 0, 0));
 						//screen.DrawPixel(x, y, Color.Red);
 						Console.WriteLine("colorValue: " + colorValue.Value.ToString());
 						screen.DrawPixel(x, y, Color.FromArgb(r, g, b));
+						//screen.DrawPixel(x, y, Color.Red);
 						Console.WriteLine("GetPixel: " + screen.GetPixel(x, y).ToString());
 					
 
