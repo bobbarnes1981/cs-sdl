@@ -107,8 +107,8 @@ namespace SdlDotNet.Examples
 				Tree.AlphaValue = 0;
 
 				int JeepFrame = 0;
-				Music music = Mixer.LoadMusic(filepath + "fard-two.ogg");
-				Mixer.PlayMusic(music, -1);
+				Music.Load(filepath + "fard-two.ogg");
+				Music.Play(-1);
 
 				while (!quitFlag) 
 				{

@@ -76,7 +76,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Gets the number of ticks since Sdl was initialized.  
+		/// Gets the number of milliseconds since Sdl was initialized.  
 		/// This is not a high-resolution timer.
 		/// </summary>
 		public static int Ticks 

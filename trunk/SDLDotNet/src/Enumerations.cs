@@ -1460,4 +1460,39 @@ namespace SdlDotNet
 		/// </summary>
 		Fadeout
 	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public enum MusicTypes
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		None = SdlMixer.MUS_NONE,
+		/// <summary>
+		/// 
+		/// </summary>
+		ExternalCommand = SdlMixer.MUS_CMD,
+		/// <summary>
+		/// 
+		/// </summary>
+		Wave = SdlMixer.MUS_WAV,
+		/// <summary>
+		/// 
+		/// </summary>
+		Mod = SdlMixer.MUS_MOD,
+		/// <summary>
+		/// 
+		/// </summary>
+		Midi = SdlMixer.MUS_MID,
+		/// <summary>
+		/// 
+		/// </summary>
+		Ogg = SdlMixer.MUS_OGG,
+		/// <summary>
+		/// 
+		/// </summary>
+		Mp3 = SdlMixer.MUS_MP3
+	}
 }
