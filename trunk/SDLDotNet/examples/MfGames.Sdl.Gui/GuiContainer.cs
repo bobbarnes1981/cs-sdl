@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using MfGames.Utility;
-using MfGames.Sdl.Sprites;
+using SdlDotNet.Utility;
+using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Drawing;
@@ -38,7 +38,7 @@ namespace MfGames.Sdl.Gui
     {
     }
 
-    public GuiContainer(GuiManager manager, Rectangle2 rect)
+    public GuiContainer(GuiManager manager, Rectangle rect)
       : base(manager, rect)
     {
     }
@@ -51,7 +51,7 @@ namespace MfGames.Sdl.Gui
       RenderArgs args1 = args.Clone();
       args1.TranslateX += Coords.X;
       args1.TranslateY += Coords.Y;
-      args1.SetClipping(new Rectangle2(args.TranslateX + Coords.X,
+      args1.SetClipping(new Rectangle(args.TranslateX + Coords.X,
 				       args.TranslateY + Coords.Y,
 				       Size.Width,
 				       Size.Height));

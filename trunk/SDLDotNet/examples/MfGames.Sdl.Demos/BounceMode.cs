@@ -17,9 +17,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using MfGames.Utility;
-using MfGames.Sdl.Drawable;
-using MfGames.Sdl.Sprites;
+using SdlDotNet.Utility;
+using SdlDotNet.Drawable;
+using SdlDotNet.Sprites;
 using System.Drawing;
 
 namespace MfGames.Sdl.Demos
@@ -35,7 +35,7 @@ namespace MfGames.Sdl.Demos
       for (int i = 0; i < 50; i++)
       {
 	sm.Add(new BounceSprite(LoadRandomMarble(),
-				new Rectangle2(SdlDemo.SpriteContainer.Size)));
+				new Rectangle(new Point(0, 0), SdlDemo.SpriteContainer.Size)));
       }
     }
 

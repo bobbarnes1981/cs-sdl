@@ -38,6 +38,10 @@ namespace SdlDotNet.Examples
 		int size = 12;
 		int width = 640;
 		int height = 480;
+		bool musicFinishedFlag = false;
+		bool channelFinishedFlag = false;
+		private int currentChannel;
+		private int positionY = 200;
 			
 
 		string[] textArray = {"Hello World!","This is a test", "FontExample"};
@@ -57,13 +61,39 @@ namespace SdlDotNet.Examples
 			Font font;
 			Random rand = new Random();
 
+			Mixer.Music.EnableMusicFinishedCallback();
+
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
+			Events.KeyboardUp += 
+				new KeyboardEventHandler(this.KeyboardUp);
 			Events.Quit += new QuitEventHandler(this.Quit);
+			Events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
+			Events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);	
+			//timerDelegate = new Sdl.SDL_TimerCallback(this.TimerCall);
+			//int result2 = Sdl.SDL_SetTimer(500, timerDelegate);
 
 			font = new Font(filepath + FontName, size);
+			Mixer.Music.Load(filepath + "fard-two.ogg");
+			Mixer.Music.Volume = 128;
+			Mixer.Music.Play(1);
+			Sound sound = Mixer.Sound(filepath + "test.wav");
+			Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
+			//Sound sound2 = Mixer.Sound(filepath + "test.wav");
+			Channel channel = new Channel(0);
+			//Channel channel2 = new Channel(1);
+			channel.EnableChannelFinishedCallback();
+			//channel2.EnableChannelFinishedCallback();
+			//channel.QueuedSound = queuedSound;
+			channel.Play(sound);
+			//channel2.Play(sound);
+
+			SdlButton button = new SdlButton(200, 200, 75, 50, Color.Green, "Hello");
+			SdlTextBox textBox = new SdlTextBox(300, 300, 300);
+			button.Click +=new SdlButtonEventHandler(button_Click);
+
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			Video.WindowCaption = "Font Example";
-			Video.Mouse.ShowCursor(false);
+			//Video.Mouse.ShowCursor(false);
 			System.Drawing.Text.FontCollection installedFonts = FontSystem.SystemFontNames;
 			Console.WriteLine("Installed Fonts: " + installedFonts.ToString());
 			Console.WriteLine("Installed Fonts: " + installedFonts.Families[0].ToString());
@@ -71,6 +101,17 @@ namespace SdlDotNet.Examples
 			Surface surf = screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
 			surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+
+			Console.WriteLine("Bpp: " + Video.Screen.BitsPerPixel);
+
+			SdlEventArgs[] events = new SdlEventArgs[3];
+			events[0] = new KeyboardEventArgs(Key.Space, true);
+			events[1] = new KeyboardEventArgs(Key.Space, false);
+			events[2] = new KeyboardEventArgs(Key.Space, true);
+			Events.Add(events);
+
+			SdlEventArgs[] eventArrayDown = Events.Peek(EventMask.KeyDown, 10);
+			SdlEventArgs[] eventArrayUp = Events.Peek(EventMask.KeyUp, 10);
 
 			while (!quitFlag) 
 			{
@@ -87,6 +128,51 @@ namespace SdlDotNet.Examples
 						textArray[rand.Next(textArray.Length)], 
 						Color.FromArgb(0, (byte)rand.Next(255), 
 						(byte)rand.Next(255),(byte)rand.Next(255)));
+					button.Draw(screen);
+						
+					textBox.Draw(screen);
+
+					if (Video.Mouse.IsButtonPressed(MouseButton.PrimaryButton))
+					{
+						Console.WriteLine("Primary button is pressed");
+					}
+					if (Video.Mouse.IsButtonPressed(MouseButton.SecondaryButton))
+					{
+						Console.WriteLine("Secondary button is pressed");
+					}
+					if (Keyboard.IsKeyPressed(Key.Space))
+					{
+						Console.WriteLine("space bar is currently pressed");
+					}
+					Console.WriteLine("Pos: " + Video.Mouse.MousePosition.ToString());
+					Console.WriteLine("Change: " +Video.Mouse.MousePositionChange.ToString());
+					Console.WriteLine("Has Mousefocus: " + Video.Mouse.HasMouseFocus);
+					if (musicFinishedFlag)
+					{
+						text = font.Render(
+							"MusicChannelFinishedDelegate was called.", 
+							Color.FromArgb(0, 254, 
+							254,254));
+						screen.Blit(
+							text, 
+							new Rectangle(new Point(100,300), 
+							text.Size));
+						screen.Flip();
+						musicFinishedFlag = false;
+					}
+					if (channelFinishedFlag)
+					{
+						text = font.Render(
+							"ChannelFinishedDelegate was called for channel " + currentChannel.ToString(), 
+							Color.FromArgb(0, 154, 
+							154,154));
+						screen.Blit(
+							text, 
+							new Rectangle(new Point(100,positionY + 50 * currentChannel), 
+							text.Size));
+						screen.Flip();
+						channelFinishedFlag = false;
+					}
 
 					switch (rand.Next(4))
 					{
@@ -125,6 +211,20 @@ namespace SdlDotNet.Examples
 			{
 				quitFlag = true;
 			}
+			if (e.Key == Key.Space)
+			{
+				Console.WriteLine("Space bar was pressed");
+			}
+		}
+
+		private void KeyboardUp(
+			object sender,
+			KeyboardEventArgs e) 
+		{
+			if (e.Key == Key.Space)
+			{
+				Console.WriteLine("Space bar was released");
+			}
 		}
 
 		private void Quit(object sender, QuitEventArgs e) 
@@ -132,11 +232,36 @@ namespace SdlDotNet.Examples
 			quitFlag  = true;
 		}
 
+		private void ChannelFinished(object sender, ChannelFinishedEventArgs e)
+		{
+			Console.WriteLine("channel: " + e.Channel.ToString());
+			Console.WriteLine("Channel Finished");
+			channelFinishedFlag = true;
+			currentChannel = e.Channel;
+		}
+
+		private void MusicFinished(object sender, MusicFinishedEventArgs e)
+		{
+			Console.WriteLine("Music Finished");
+			musicFinishedFlag = true;
+		}
+
+		private int TimerCall(int interval)
+		{
+			Console.WriteLine("timer call: " + interval);
+			return interval;
+
+		}
+
 		[STAThread]
 		static void Main() 
 		{
 			FontExample fontExample = new FontExample();
 			fontExample.Run();
+		}
+		private void button_Click(object source, SdlButtonEventArgs e)
+		{
+			Console.WriteLine("Button was clicked");
 		}
 	}
 }

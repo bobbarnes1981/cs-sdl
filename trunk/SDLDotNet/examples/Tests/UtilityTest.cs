@@ -20,23 +20,24 @@
 using NUnit.Framework;
 using System.Drawing;
 
-namespace MfGames.Utility
+namespace SdlDotNet.Utility
 {
-  [TestFixture] public class UtilityTest
-  {
-    [Test] public void TestDefaultsVector2()
-    {
-      Vector2 v = new Vector2();
-      Assert.Equals(0, v.X);
-      Assert.Equals(0, v.Y);
-    }
+	[TestFixture] public class UtilityTest
+	{
+		[Test] public void TestDefaultsPoint()
+		{
+			//Vector2 v = new Vector2();
+			Point v = new Point();
+			Assert.Equals(0, v.X);
+			Assert.Equals(0, v.Y);
+		}
 
-    [Test] public void TestDefaultsVector3()
-    {
-      Vector3 v = new Vector3();
-      Assert.Equals(0, v.X);
-      Assert.Equals(0, v.Y);
-      Assert.Equals(0, v.Z);
-    }
-  }
+		[Test] public void TestDefaultsVector()
+		{
+			Vector v = new Vector();
+			Assert.Equals(0, v.X);
+			Assert.Equals(0, v.Y);
+			Assert.Equals(0, v.Z);
+		}
+	}
 }

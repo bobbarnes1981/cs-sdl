@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using MfGames.Utility;
-using MfGames.Sdl.Sprites;
+using SdlDotNet.Utility;
+using SdlDotNet.Sprites;
 using SdlDotNet;
 using System.Collections;
 using System.Drawing;
@@ -40,7 +40,7 @@ namespace MfGames.Sdl.Gui
       this.x1 = x1;
       this.x2 = x2;
       this.baselineY = baselineY;
-      this.lastSize = new Dimension2(x2 - x1, 1);
+      this.lastSize = new Size(x2 - x1, 1);
     }
 
     public GuiTicker(GuiManager gui, int x1, int x2, int baselineY, int z)
@@ -50,7 +50,7 @@ namespace MfGames.Sdl.Gui
       this.x1 = x1;
       this.x2 = x2;
       this.baselineY = baselineY;
-      this.lastSize = new Dimension2(x2 - x1, 1);
+      this.lastSize = new Size(x2 - x1, 1);
     }
 
     #region Drawing
@@ -102,17 +102,17 @@ namespace MfGames.Sdl.Gui
     private int x1 = 0;
     private int x2 = 0;
     private int baselineY = 0;
-    private Dimension2 lastSize = new Dimension2();
+    private Size lastSize = new Size();
 
-    public override Vector3 Coords
+    public override Vector Coords
     {
       get
       {
-	return new Vector3(x1, baselineY - Size.Height, base.Coords.Z);
+	return new Vector(x1, baselineY - Size.Height, base.Coords.Z);
       }
     }
 
-    public override Dimension2 Size
+    public override Size Size
     {
       get
       {
@@ -130,7 +130,7 @@ namespace MfGames.Sdl.Gui
 	}
 	
 	// Return a new height
-	lastSize = new Dimension2(x2 - x1,
+	lastSize = new Size(x2 - x1,
 				  height + manager.TickerPadding.Vertical);
 	return lastSize;
       }

@@ -18,7 +18,7 @@
  */
 
 using SdlDotNet;
-using MfGames.Sdl.Sprites;
+using SdlDotNet.Sprites;
 
 namespace MfGames.Sdl.Gui
 {

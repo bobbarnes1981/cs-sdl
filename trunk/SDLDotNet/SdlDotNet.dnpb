@@ -45,9 +45,7 @@
 	    </Options>
 	</Configuration>
 	    <Reference name="System" /> 
-	    <Reference name="System.Data" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="System.XML" />
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\lib"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -173,8 +171,7 @@
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>ImageExample.cs</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
 	<Project name="Gears" path="examples\\Gears" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Gears" assemblyName="Gears" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -236,39 +233,7 @@
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>FontExample.cs</File>
-	    </Files>
-	</Project>
-	<Project name="DelegatesExample" path="examples\\DelegatesExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.DelegatesExample" assemblyName="DelegatesExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Files>
-		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>DelegatesExample.cs</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
 	<Project name="JoystickExample" path="examples\\JoystickExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.JoystickExample" assemblyName="JoystickExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -455,37 +420,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-<Project name="GuiTest" path="examples\\GuiTest" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.GuiTest" assemblyName="GuiTest" rootNamespace="SdlDotNet.Examples" icon="App.ico">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Files>
-		<File buildAction="Content">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-<Project name="SnowDemo" path="examples\\SnowDemo" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SnowDemo" assemblyName="SnowDemo" rootNamespace="SdlDotNet.Examples" icon="App.ico">
+	<Project name="SnowDemo" path="examples\\SnowDemo" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SnowDemo" assemblyName="SnowDemo" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -545,128 +480,6 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MfGames.Utility" path="examples\\MfGames.Utility" language="C#" type="Library" assemblyName="MfGames.Utility" rootNamespace="SdlDotNet.Examples">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="log4net" localCopy="true" path="..\\..\\lib"/>
-	    <Files>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="MfGames.Sdl.Dice" path="examples\\MfGames.Sdl.Dice" language="C#" type="Library" assemblyName="MfGames.Sdl.Dice" rootNamespace="SdlDotNet.Examples">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="grammatica-1.4" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MfGames.Utility" localCopy="true"/>
-	    <Files>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="MfGames.Sdl.Sprites" path="examples\\MfGames.Sdl.Sprites" language="C#" type="Library" assemblyName="MfGames.Sdl.Sprites" rootNamespace="SdlDotNet.Examples">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MfGames.Utility" localCopy="true"/>
-	    <Files>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="MfGames.Sdl.Drawable" path="examples\\MfGames.Sdl.Drawable" language="C#" type="Library" assemblyName="MfGames.Sdl.Drawable" rootNamespace="SdlDotNet.Examples">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MfGames.Utility" localCopy="true"/>
-	    <Reference name="MfGames.Sdl.Sprites" localCopy="true"/>
-	    <Files>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
 	<Project name="MfGames.Sdl.Gui" path="examples\\MfGames.Sdl.Gui" language="C#" type="Library" assemblyName="MfGames.Sdl.Gui" rootNamespace="SdlDotNet.Examples">
 	    <Configuration name="Debug">
 		<Options>
@@ -692,8 +505,6 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MfGames.Utility" localCopy="true"/>
-	    <Reference name="MfGames.Sdl.Sprites" localCopy="true"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
@@ -723,11 +534,7 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MfGames.Utility" localCopy="true"/>
-	    <Reference name="MfGames.Sdl.Sprites" localCopy="true"/>
 	    <Reference name="MfGames.Sdl.Gui" localCopy="true"/>
-	    <Reference name="MfGames.Sdl.Drawable" localCopy="true"/>
-	    <Reference name="log4net" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -758,14 +565,8 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MfGames.Utility" localCopy="true"/>
-	    <Reference name="MfGames.Sdl.Sprites" localCopy="true"/>
 	    <Reference name="MfGames.Sdl.Gui" localCopy="true"/>
-	    <Reference name="MfGames.Sdl.Drawable" localCopy="true"/>
-	    <Reference name="MfGames.Sdl.Dice" localCopy="true"/>
-	    <Reference name="log4net" localCopy="true" path="..\\..\\lib"/>
 	    <Reference name="nunit.framework" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="grammatica-1.4" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
