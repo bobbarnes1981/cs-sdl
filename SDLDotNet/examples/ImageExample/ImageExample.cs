@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Klavs Martens
  *
  * This library is free software; you can redistribute it and/or
@@ -30,42 +31,43 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Private field. Indicated if mainloop is to be continued.
 		/// </summary>
-		private bool Continue;
+		private bool quitFlag;
 		Point MousePos = new Point(100,100);
 
 
 		public ImageExample() 
 		{
-			Continue = true;
+			quitFlag = false;
 		}
 
-		public void Go() 
+		public void Run() 
 		{
 			int width = 640;
 			int height = 480;
 			Random rand = new Random();
 			string imagepath;
 
-
-//			sdl.Events.KeyboardDown += new KeyboardEventHandler(this.SDL_KeyboardDown); // register event handlers
-//			sdl.Events.MouseMotion += new MouseMotionEventHandler(this.SDL_MouseMotion);
-//			
-//			sdl.Events.Quit += new QuitEventHandler(this.SDL_Quit);
+			
 
 			Video video = Video.Instance;
 			WindowManager wm = WindowManager.Instance;
+			Events events = Events.Instance;
+			
+			events.KeyboardDown += 
+				new KeyboardEventHandler(this.SDL_KeyboardDown); 
+			events.Quit += new QuitEventHandler(this.SDL_Quit);
+			events.MouseMotion += 
+				new MouseMotionEventHandler(this.SDL_MouseMotion);
 			try 
 			{
-
-				//Surface screen = sdl.Video.SetVideoMode(width, height); // set the video mode
 				Surface screen = video.SetVideoModeWindow(width, height, true);
 				wm.Caption = "Image Example";
-				//video.HideMouseCursor(); // hide the cursor
+				video.HideMouseCursor(); // hide the cursor
 
-				// create a surface to draw to...we cant draw rectangles directly to the hardware back buffer because
-				// different video cards have different numbers of back buffers that flip in sequence :(
-				Surface surf = screen.CreateCompatibleSurface(width, height, true);
-				surf.FillRect(new Rectangle(new Point(0, 0), surf.Size), System.Drawing.Color.Black); // fill the surface with black
+				Surface surf = 
+					screen.CreateCompatibleSurface(width, height, true);
+				surf.FillRect(new Rectangle(new Point(0, 0), 
+					surf.Size), System.Drawing.Color.Black); 
 
 				imagepath = @"images/";
 
@@ -78,7 +80,6 @@ namespace SdlDotNet.Examples
 				Image Cursor = new Image(imagepath +  "cursor.png");
 				Cursor.Transparent = true;
 
-
 				ImageList Jeep = new ImageList();
 
 				for (int j = 1; j <= 16;j++) 
@@ -90,7 +91,6 @@ namespace SdlDotNet.Examples
 
 				ImageList ImageList = new ImageList();
 
-
 				Image Tree = new Image(imagepath + "Tree.bmp");
 
 				Tree.TransparentColor = System.Drawing.Color.Magenta;
@@ -99,32 +99,37 @@ namespace SdlDotNet.Examples
 				Tree.AlphaFlags = Alpha.SDL_RLEACCEL | Alpha.SDL_SRCALPHA;
 				Tree.AlphaValue = 0;
 
-
 				int JeepFrame = 0;
 
-				while (Continue) 
+				while (!quitFlag) 
 				{
-					//while (sdl.Events.PollAndDelegate()) {} // handle events till the queue is empty
+					while (events.PollAndDelegate()) 
+					{
+						// handle events till the queue is empty
+					}
 
 					try 
 					{
-
-
 						// Draw Background
 						Background.Draw(surf,new Rectangle(new Point(0,0),Background.Size));
 						
 						// Draw tree
-						if (Tree.AlphaValue == 255) Tree.AlphaValue = 0;
+						if (Tree.AlphaValue == 255) 
+						{
+							Tree.AlphaValue = 0;
+						}
 						Tree.AlphaValue++;
 
 						Tree.Draw(surf,new Rectangle(0,0,20,20));
 
 						// Draw Jeep;
-						if (JeepFrame == 15) JeepFrame = 0;
+						if (JeepFrame == 15) 
+						{
+							JeepFrame = 0;
+						}
 						JeepFrame++;
 
 						Jeep.Images[JeepFrame].Draw(surf, new Rectangle(new Point(100,100),Jeep.Images[JeepFrame].Size));
-
 
 						// Draw Textbox
 						sdlimg.Draw(surf,new Rectangle(new Point(230,440),Background.Size));
@@ -143,33 +148,43 @@ namespace SdlDotNet.Examples
 			} 
 			catch 
 			{
-				//sdl.Dispose(); // quit sdl so the window goes away, then handle the error...
+				//SdlCore.Instance.Dispose(); 
+				// quit sdl so the window goes away, then handle the error...
 				throw; // for this example we'll just throw it to the debugger
 			}
 		}
 
+		public void SDL_MouseMotion(
+			MouseButtonState state, 
+			int x, 
+			int y, 
+			int relx, 
+			int rely)
+		{
+			MousePos.X = x;
+			MousePos.Y = y;
+		}
 
-//		/// <summary>
-//		/// Response to keybord messages
-//		/// </summary>
-//		private void SDL_KeyboardDown(int device, bool down, int scancode, Sdl.SDLKey key, Mod mod) 
-//		{
-//			if (key == Key.K_ESCAPE || key == Key.K_q)	Continue = false;
-//		}
-//
-//		public void SDL_MouseMotion(MouseButtonState state, int x, int y, int relx, int rely)
-//		{
-//			MousePos.X = x;
-//			MousePos.Y = y;
-//		}
-
+		private void SDL_KeyboardDown(
+			int device,
+			bool down, 
+			int scancode, 
+			Sdl.SDLKey key, 
+			Sdl.SDLMod mod) 
+		{
+			if (key == Sdl.SDLKey.SDLK_ESCAPE ||
+				key == Sdl.SDLKey.SDLK_q)
+			{
+				quitFlag = true;
+			}
+		}
 
 		/// <summary>
 		/// Quits the application
 		/// </summary>
 		private void SDL_Quit() 
 		{
-			Continue = false;
+			quitFlag = true;
 		}
 
 		/// <summary>
@@ -178,7 +193,8 @@ namespace SdlDotNet.Examples
 		[STAThread]
 		static void Main() 
 		{
-			new ImageExample().Go();
+			ImageExample imageExample = new ImageExample();
+			imageExample.Run();
 		}
 
 	}

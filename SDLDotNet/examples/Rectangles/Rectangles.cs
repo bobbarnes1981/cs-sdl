@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -20,6 +21,7 @@
 using System;
 using System.Drawing;
 using SdlDotNet;
+using Tao.Sdl;
 
 // Simple SDL.NET Example
 // Just draws a bunch of rectangles to the screen, to quit hit 'Q' or Esc.
@@ -44,9 +46,11 @@ namespace SdlDotNet.Examples {
 			Video video = Video.Instance;
 			WindowManager wm = WindowManager.Instance;
 			Mixer mixer = Mixer.Instance;
-			// register event handlers
-			//sdl.Events.KeyboardDown += new KeyboardEventHandler(this.SDL_KeyboardDown); 
-			//sdl.Events.Quit += new QuitEventHandler(this.SDL_Quit);
+			Events events = Events.Instance;
+			
+			events.KeyboardDown += 
+				new KeyboardEventHandler(this.SDL_KeyboardDown); 
+			events.Quit += new QuitEventHandler(this.SDL_Quit);
 
 			try {
 				Music music = mixer.LoadMusic(musicFile);
@@ -54,16 +58,20 @@ namespace SdlDotNet.Examples {
 				// set the video mode
 				Surface screen = video.SetVideoModeWindow(width, height, true); 
 				wm.Caption = "Rectangles Example";
-				//video.HideMouseCursor(); // hide the cursor
+				video.HideMouseCursor();
 
-				Surface surf = screen.CreateCompatibleSurface(width, height, true);
+				Surface surf = 
+					screen.CreateCompatibleSurface(width, height, true);
 				//fill the surface with black
 				surf.FillRect(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 
 				while (!quitFlag) 
 				{
-					//while (sdl.Events.PollAndDelegate()) {} // handle events till the queue is empty
-
+					while (events.PollAndDelegate()) 
+					{
+						// handle events till the queue is empty
+					} 
+					
 					try 
 					{
 						surf.FillRect(new Rectangle(rand.Next(-300, width), rand.Next(-300, height), rand.Next(20, 300), rand.Next(20, 300)),
@@ -77,17 +85,30 @@ namespace SdlDotNet.Examples {
 					}
 					//}
 				}
-			} catch {
-				//sdl.Dispose(); // quit sdl so the window goes away, then handle the error...
+			} 
+			catch 
+			{
+				//sdl.Dispose(); 
+				// quit sdl so the window goes away, then handle the error...
 				throw; // for this example we'll just throw it to the debugger
 			}
 		}
 
-//		private void SDL_KeyboardDown(int device, bool down, int scancode, Key key, Mod mod) {
-//			if (key == Key.K_ESCAPE || key == Key.K_q)
-//				_quitflag = true;
-//		}
-		private void SDL_Quit() {
+		private void SDL_KeyboardDown(
+			int device,
+			bool down, 
+			int scancode, 
+			Sdl.SDLKey key, 
+			Sdl.SDLMod mod) {
+			if (key == Sdl.SDLKey.SDLK_ESCAPE ||
+				key == Sdl.SDLKey.SDLK_q)
+			{
+				quitFlag = true;
+			}
+		}
+
+		private void SDL_Quit() 
+		{
 			quitFlag = true;
 		}
 
