@@ -48,6 +48,14 @@ namespace SdlDotNet
 			this.eventStruct.type = (byte)EventTypes.UserEvent;
 			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		internal UserEventArgs(Sdl.SDL_Event ev)
+		{
+			this.eventStruct = ev;
+		}
 		
 		private object userEvent;
 		/// <summary>

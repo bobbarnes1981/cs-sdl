@@ -23,69 +23,86 @@ using System;
 using System.Collections;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class GuiMenuPopup : VerticalPacker
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		public GuiMenuPopup(GuiManager manager)
 			: base(manager, new Vector(1000))
 		{
-			IsHidden = true;
+			//IsHidden = true;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return String.Format("(menu {0})", base.ToString());
 		}
 
 		#region Drawing
-		public override void Render(RenderArgs args)
-		{
-			// We use the same formula as the horizontal packer to find out
-			// our own offset. This is used to handle the mouse events
-			// because the EventLock does not translate the values before
-			// sending it.
-			RenderArgs args0 = args.Clone();
-			args0.TranslateX += Coordinates.X + OuterPadding.Left + InnerPadding.Left;
-			args0.TranslateY += Coordinates.Y + OuterPadding.Top + InnerPadding.Top;
-			translate = args0.Point;
+//		public override void Render(RenderArgs args)
+//		{
+//			// We use the same formula as the horizontal packer to find out
+//			// our own offset. This is used to handle the mouse events
+//			// because the EventLock does not translate the values before
+//			// sending it.
+//			RenderArgs args0 = args.Clone();
+//			args0.TranslateX += Coordinates.X + OuterPadding.Left + InnerPadding.Left;
+//			args0.TranslateY += Coordinates.Y + OuterPadding.Top + InnerPadding.Top;
+//			translate = args0.Point;
+//
+//			// Check for exceeding
+//			int right = translate.X + Size.Width + manager.MenuTitlePadding.Right;
+//			if (right > manager.Size.Width)
+//			{
+//				// We have to adjust things over
+//				int off = right - manager.Size.Width;
+//				args = args.Clone();
+//				args.TranslateX -= off;
+//				translate.X -= off;
+//			}
+//
+//			// Draw the element
+//			manager.Render(args, this);
+//			base.Render(args);
+//
+//			// Trace the items
+//			if (IsTraced)
+//			{
+//				foreach (Sprite s in new ArrayList(Sprites))
+//				{
+//					Rectangle r = new Rectangle(translate, GetSize(s));
+//					GuiManager.DrawRect(args.Surface, r, manager.TraceColor);
+//				}
+//			}
+//		}
 
-			// Check for exceeding
-			int right = translate.X + Size.Width + manager.MenuTitlePadding.Right;
-			if (right > manager.Size.Width)
-			{
-				// We have to adjust things over
-				int off = right - manager.Size.Width;
-				args = args.Clone();
-				args.TranslateX -= off;
-				translate.X -= off;
-			}
-
-			// Draw the element
-			manager.Render(args, this);
-			base.Render(args);
-
-			// Trace the items
-			if (IsTraced)
-			{
-				foreach (Sprite s in new ArrayList(Sprites))
-				{
-					Rectangle r = new Rectangle(translate, GetSize(s));
-					GuiManager.DrawRect(args.Surface, r, manager.TraceColor);
-				}
-			}
-		}
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public void ShowMenu()
 		{
-			IsHidden = false;
-			manager.SpriteContainer.EventLock = this;
+			//IsHidden = false;
+			//manager.SpriteContainer.EventLock = this;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void HideMenu()
 		{
-			IsHidden = true;
-			manager.SpriteContainer.EventLock = null;
+//			IsHidden = true;
+//			manager.SpriteContainer.EventLock = null;
 
 			if (controller != null)
 				controller.IsSelected = false;
@@ -93,21 +110,31 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Sprites
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gmi"></param>
 		public void Add(GuiMenuItem gmi)
 		{
 			AddHead(gmi);
-			gmi.Menu = this;
+			//gmi.Menu = this;
 		}
 		#endregion
 
 		#region Geometry
 		private Point translate = new Point();
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Padding OuterPadding
 		{
 			get { return manager.MenuPopupPadding; }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Size Size
 		{
 			get
@@ -116,15 +143,15 @@ namespace MfGames.Sdl.Gui
 				// it, it uses that for the width, which would produce an
 				// infinite loop for processing. Removing the association
 				// allows the size to be retrieved properly.
-				foreach (GuiMenuItem gmi in Sprites)
-					gmi.Menu = null;
+//				foreach (GuiMenuItem gmi in Sprites)
+//					gmi.Menu = null;
 
 				// Get the base
 				Size d = base.Size;
 
 				// Reassociate this item
-				foreach (GuiMenuItem gmi in Sprites)
-					gmi.Menu = this;
+//				foreach (GuiMenuItem gmi in Sprites)
+//					gmi.Menu = this;
 
 				// Return the dimension
 				return d;
@@ -138,17 +165,15 @@ namespace MfGames.Sdl.Gui
 		/// selected, then it shows the entire sprite, regardless of the
 		/// packing size.
 		/// </summary>
-		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
+		public override void Update(object sender, MouseButtonEventArgs args)
 		{
 			// If we are being held down, pick up the marble
 			if (args.ButtonPressed)
 			{
 				ShowMenu();
 			}
-		}
-
-		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
-		{
+			else
+			{
 				// Check for an item
 				if (selected != null)
 				{
@@ -159,14 +184,29 @@ namespace MfGames.Sdl.Gui
 
 				// Remove the menu
 				HideMenu();
+			}
 		}
+
+//		public override void Update(object sender, MouseButtonEventArgs args)
+//		{
+//				// Check for an item
+//				if (selected != null)
+//				{
+//					selected.OnMenuSelected(selectedIndex);
+//					selected.IsSelected = false;
+//					selected = null;
+//				}
+//
+//				// Remove the menu
+//				HideMenu();
+//		}
 
 		/// <summary>
 		/// Uses the mouse motion to determine what menu item is actually
 		/// selected and hilight it. If the menu is not selected, it does
 		/// nothing.
 		/// </summary>
-		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
+		public override void Update(object sender, MouseMotionEventArgs args)
 		{
 			// Pull out some stuff
 			int x = args.X - translate.X - Coordinates.X;
@@ -232,6 +272,9 @@ namespace MfGames.Sdl.Gui
 		private IMenuPopupController controller = null;
 		private int selectedIndex = 0;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public IMenuPopupController Controller
 		{
 			get { return controller; }

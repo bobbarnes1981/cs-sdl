@@ -18,13 +18,13 @@
  */
 
 
-using MfGames.Sdl.Gui;
+using MFGames.Sdl.Gui;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Drawing;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
 	/// <summary>
 	/// This is a status window which shows the current state of the
@@ -40,9 +40,8 @@ namespace MfGames.Sdl.Demos
 			: base(manager, new Rectangle(625, 475, 150, 100))
 		{
 			// Set up our title
-			Coordinates.Z = 2000;
+			//Coordinates.Z = 2000;
 			Title = "Demo Status";
-			IsDragable = true;
 
 			// Add some text
 			int labelOffset = 2;
@@ -124,18 +123,23 @@ namespace MfGames.Sdl.Demos
 		#endregion
 
 		#region Animation
-		public override void OnTick(object sender, TickEventArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public new void OnTick(object sender, TickEventArgs args)
 		{
 			tps.TextString = String.Format("{0}", Events.TicksPerSecond);
 
-			if (SdlDemo.Fps.IsFull)
-			{
-				fps.TextString = SdlDemo.Fps.FramesPerSecond.ToString("#0.00");
-			}
-			else
-			{
+			//if (SdlDemo.Fps.IsFull)
+		//	{
+			//	fps.TextString = SdlDemo.Fps.FramesPerSecond.ToString("#0.00");
+			//}
+		//	else
+		//	{
 				fps.TextString = "---";
-			}
+		//	}
 
 			if (SdlDemo.CurrentDemo == null)
 			{
@@ -146,6 +150,9 @@ namespace MfGames.Sdl.Demos
 				mode.TextString = SdlDemo.CurrentDemo.ToString();
 			}
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public void EnableTickEvent()
 		{
 			Events.TickEvent += new TickEventHandler(this.OnTick);

@@ -26,29 +26,57 @@ using SdlDotNet;
 namespace SdlDotNet.Examples
 {
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public delegate void FireEventHandler(Point Location);
+	/// <summary>
+	/// 
+	/// </summary>
 	public delegate void DisposeRequestEventHandler(object Asker);
 
 	// used for the bullets
+	/// <summary>
+	/// 
+	/// </summary>
 	public struct Speed
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
 		public Speed(int x, int y)
 		{
 			X = x;
 			Y = y;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public int X;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Y;
 	}
 
 	// item fired by a weapon
+	/// <summary>
+	/// 
+	/// </summary>
 	public class WeaponParticle
 	{
 		Surface _Image;
 		PointF _Location;
 		Speed _Speed;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Location"></param>
+		/// <param name="Speed"></param>
 		public WeaponParticle(Point Location, Speed Speed)
 		{
 			Game.Debug("Constructing WeaponParticle");
@@ -61,6 +89,10 @@ namespace SdlDotNet.Examples
 			_Image.Fill(new Rectangle(new Point(0,0), _Image.Size), Color.White);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Seconds"></param>
 		public void Update(float Seconds)
 		{
 			_Location.X += Seconds * Speed.X;
@@ -77,17 +109,32 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public event DisposeRequestEventHandler DisposeRequest;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Surface Image{ get{ return _Image; }}
+		/// <summary>
+		/// 
+		/// </summary>
 		public Speed Speed{ get{ return _Speed; }}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Point Location
 		{
 			get{ return new Point((int)_Location.X, (int)_Location.Y); }
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Ship
 	{
 		Surface _Image;
@@ -110,6 +157,10 @@ namespace SdlDotNet.Examples
 		// the tick of the last fire action
 		int lastfire = 0;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Location"></param>
 		public Ship(Point Location)
 		{
 			Game.Debug("Constructing Ship");
@@ -120,9 +171,13 @@ namespace SdlDotNet.Examples
 			_Image = Game.Screen.CreateCompatibleSurface(32, 32, true);
 			_Image.Fill(new Rectangle(new Point(0,0), _Image.Size), Color.White);
 
-			Events.Keyboard += new KeyboardEventHandler(this.SDL_Keyboard);
+			Events.KeyboardDown += new KeyboardEventHandler(this.SDL_Keyboard);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Seconds"></param>
 		public void Update(float Seconds)
 		{
 			// how far the ship should move this frame, calculated on basis of the
@@ -156,6 +211,11 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		public void SDL_Keyboard(object sender, KeyboardEventArgs e)
 		{
 			switch(e.Key)
@@ -169,16 +229,28 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public event FireEventHandler WeaponFired;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Surface Image{ get{ return _Image; }}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Point Location
 		{
 			get{ return new Point((int)_Location.X, (int)_Location.Y); }
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Game
 	{
 		static Surface _Screen;
@@ -189,12 +261,19 @@ namespace SdlDotNet.Examples
 
 		// messages for debugging purposes are sent to this method, therefore it
 		// also is static
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Message"></param>
 		[Conditional("DEBUG")]
 		public static void Debug(string Message)
 		{
 			Console.WriteLine("> {0}", Message);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run()
 		{
 			Game.Debug("Running");
@@ -211,7 +290,7 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			Video.Mouse.ShowCursor(false);
 			Video.WindowCaption =
 				"WeaponFire, (c) 2003 CL Game Studios";
-			Events.Keyboard +=
+			Events.KeyboardDown +=
 				new KeyboardEventHandler(SDL_Keyboard);
 			Events.Quit += new QuitEventHandler(SDL_Quit);
 
@@ -258,6 +337,10 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Location"></param>
 		public void Ship_WeaponFired(Point Location)
 		{
 			Game.Debug("Fire in the hole!");
@@ -270,18 +353,32 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			bullets.Add(bullet);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Asker"></param>
 		public void Bullet_DisposeRequest(Object Asker)
 		{
 			Game.Debug("Disposing a bullet");
 			mustdispose.Add(Asker); // see Game.Run, the large comment
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		public void SDL_Keyboard(object sender, KeyboardEventArgs e)
 		{
 			if(e.Key == Key.Escape || e.Key == Key.Q)
 				quit = true;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		public void SDL_Quit(object sender, QuitEventArgs e)
 		{
 			Game.Debug("Quit was requested");
@@ -289,11 +386,20 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 		}
 
 		// used by the collision detection of some ingame objects
+		/// <summary>
+		/// 
+		/// </summary>
 		public static Surface Screen{ get{ return _Screen; }}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class WeaponFire
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public static void Main()
 		{
 			Console.WriteLine("Bamboembam, (C) 2003 Sijmen Mulder");

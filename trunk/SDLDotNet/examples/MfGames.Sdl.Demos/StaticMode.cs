@@ -21,9 +21,14 @@
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System.Drawing;
+using System;
+using System.Threading;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class StaticMode : DemoMode
 	{
 		/// <summary>
@@ -32,32 +37,39 @@ namespace MfGames.Sdl.Demos
 		public StaticMode()
 		{
 			// Create our image and add it to our sprite manager
-			ImageDrawable id = new ImageDrawable("../../Data/marble1.png");
+			SurfaceCollection id = new SurfaceCollection("../../Data/marble1.png");
 			DrawableSprite s = new DrawableSprite(id, new Point(5, 5));
-			sm.Add(s);
+			this.Sprites.Add(s);
 
 			// Create the fragment image
-			TiledDrawable td = new TiledDrawable(id, new Size(64, 64), 6, 6);
+			TiledSurfaceCollection td = new TiledSurfaceCollection(new Surface("../../Data/marble1.png"), new Size(64, 64));
 			AnimatedSprite an = new AnimatedSprite(td, new Vector(200, 32, 100));
-			an.Coordinates.X = 250;
-			sm.Add(an);
+			an.X = 250;
+			Sprites.Add(an);
 
 			// Create the full marble, but test order
-			IDrawable m1 = LoadMarble("marble1");
+			SurfaceCollection m1 = LoadMarble("marble1");
 
 			for (int i = 0; i < 10; i++)
 			{
+				Thread.Sleep(10);
 				AnimatedSprite as1 = new AnimatedSprite(m1,
 					new Vector(50 + i * 32,
 					436, i));
+				Thread.Sleep(10);
 				AnimatedSprite as2 = new AnimatedSprite(m1,
 					new Vector(50 + i * 32,
 					468, 10 - i));
-				sm.Add(as1);
-				sm.Add(as2);
+				Sprites.Add(as1);
+				Sprites.Add(as2);
 			}
+			Sprites.EnableTickEvent();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString() 
 		{ 
 			return "Static"; 

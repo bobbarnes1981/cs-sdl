@@ -32,9 +32,20 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class SdlButtonEventArgs
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Xpos;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Ypos;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
 		public SdlButtonEventArgs(int x, int y)
 		{
 			Xpos = x;
@@ -42,6 +53,9 @@ namespace SdlDotNet.Examples
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class SdlButton
 	{
 		/// <summary>
@@ -62,27 +76,42 @@ namespace SdlDotNet.Examples
 		private Color buttonColor; //Color of the button
 
 		#region Properties
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Width
 		{
 			get { return width; }
 			set { width = value; }
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Height
 		{
 			get { return height; }
 			set { height = value; }
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public int X
 		{
 			get { return x; }
 			set { x = value; }
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Y
 		{
 			get { return y; }
 			set { y = value; }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public string Text
 		{
 			get { return buttonText; }

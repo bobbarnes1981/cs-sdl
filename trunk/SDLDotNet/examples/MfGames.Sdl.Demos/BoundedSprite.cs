@@ -21,54 +21,74 @@ using SdlDotNet;
 using SdlDotNet.Sprites;
 using System.Drawing;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class BoundedSprite : AnimatedSprite
 	{
-		private Rectangle rect = new Rectangle();
+		private Rectangle bounds = new Rectangle();
 
-		public BoundedSprite(IDrawable d, Rectangle bounds, Vector coordinates)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="d"></param>
+		/// <param name="bounds"></param>
+		/// <param name="coordinates"></param>
+		public BoundedSprite(SurfaceCollection d, Rectangle bounds, Vector coordinates)
 			: base(d, coordinates)
 		{
-			this.rect = bounds;
+			this.bounds = bounds;
 			int tempHeight;
 			int tempWidth;
-			tempWidth = this.rect.Size.Width - (int) d.Size.Width;
-			tempHeight = this.rect.Size.Height - (int) d.Size.Height;
-			this.rect.Size = new Size(tempWidth, tempHeight);
+			tempWidth = this.bounds.Size.Width - (int) d.Size.Width;
+			tempHeight = this.bounds.Size.Height - (int) d.Size.Height;
+			this.bounds.Size = new Size(tempWidth, tempHeight);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle SpriteBounds
 		{
-			get { return rect; }
+			get 
+			{ 
+				return bounds; 
+			}
 		}
 
-		public override void OnTick(object sender, TickEventArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void Update(object sender, TickEventArgs args)
 		{
 			// Animate
-			base.OnTick(this, args);
+			base.Update(this, args);
 
 			// Bounce off the left
-			if (Coordinates.X < rect.Left)
+			if (Coordinates.X < bounds.Left)
 			{
-				Coordinates.X = rect.Left;
+				this.X = bounds.Left;
 			}
 
 			// Bounce off the top
-			if (Coordinates.Y < rect.Top)
+			if (Coordinates.Y < bounds.Top)
 			{
-				Coordinates.Y = rect.Top;
+				this.Y = bounds.Top;
 			}
 
 			// Bounce off the bottom
-			if (Coordinates.Y > rect.Bottom)
+			if (Coordinates.Y > bounds.Bottom)
 			{
-				Coordinates.Y = rect.Bottom;
+				this.Y = bounds.Bottom;
 			}
 			// Bounce off the right
-			if (Coordinates.X > rect.Right)
+			if (Coordinates.X > bounds.Right)
 			{
-				Coordinates.X = rect.Right;
+				this.X = bounds.Right;
 			}
 		}
 	}

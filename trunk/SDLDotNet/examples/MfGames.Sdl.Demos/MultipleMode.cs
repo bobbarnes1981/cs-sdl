@@ -17,15 +17,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
-using MfGames.Sdl.Gui;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System.Drawing;
 using System;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class MultipleMode : DemoMode
 	{
 		private Sprite sprite1 = null;
@@ -34,13 +35,10 @@ namespace MfGames.Sdl.Demos
 		private Sprite sprite4 = null;
 
 		private Size size;
-		//private bool created = false;
 
-		private SpriteContainer sm1 = new SpriteContainer();
-		private SpriteContainer sm2 = new SpriteContainer();
-		private SpriteContainer sm3 = new SpriteContainer();
-		private SpriteContainer sm4 = new SpriteContainer();
-		private SpriteContainer all = new SpriteContainer();
+		private SpriteCollection all = new SpriteCollection();
+
+		Rectangle rect;
 
 		/// <summary>
 		/// Constructs the internal sprites needed for our demo.
@@ -49,25 +47,22 @@ namespace MfGames.Sdl.Demos
 		{
 			Random rand = new Random();
 			// Create the fragment marbles
-			IDrawable td = LoadMarble("marble1");
-			IDrawable td2 = LoadMarble("marble2");
-			IDrawable td3 = LoadMarble("marble3");
-			IDrawable td4 = LoadMarble("marble4");
-			IDrawable td5 = LoadMarble("marble5");
+			SurfaceCollection td = LoadMarble("marble1");
+			SurfaceCollection td2 = LoadMarble("marble2");
+			SurfaceCollection td3 = LoadMarble("marble3");
+			SurfaceCollection td4 = LoadMarble("marble4");
+			SurfaceCollection td5 = LoadMarble("marble5");
 
 			// Load the floor
-			int numberOfFloors = 4;
-			IDrawable [] floorTiles = new IDrawable [4];
-
-			for (int i = 0; i < numberOfFloors; i++)
-				floorTiles[i] = LoadFloor(i + 1);
+			SurfaceCollection floorTiles = LoadFloor();
 
 			// Place the floors
 			int rows = 10;
-			int cols = 10;
+			int cols = 13;
 			size = new Size(floorTiles[0].Size.Width * cols,
 				floorTiles[0].Size.Height * rows);
-			Rectangle rect = new Rectangle(new Point(0, 0), size);
+			rect = new Rectangle(new Point(0, 0), size);
+			Console.WriteLine("MultiViewPort Size: " + size);
 
 			for (int i = 0; i < cols; i++)
 			{
@@ -75,7 +70,7 @@ namespace MfGames.Sdl.Demos
 				{
 					// Create the sprite
 					DrawableSprite dw =
-						new DrawableSprite(floorTiles[rand.Next(0, numberOfFloors)],
+						new DrawableSprite(floorTiles,
 						new Vector(i * floorTiles[0].Size.Width,
 						j * floorTiles[0].Size.Height,
 						-1000));
@@ -102,14 +97,10 @@ namespace MfGames.Sdl.Demos
 
 			// Set up container #1
 			sprite1 = new BounceSprite(td2, rect, new Vector(rand.Next(rect.Left, rect.Right - 
-					(int) td2.Size.Width),
-					rand.Next(rect.Top, rect.Bottom - 
-					(int) td2.Size.Height),
-					100));
-			sm1.Coordinates = new Vector(10, 10);
-			sm1.IsTickable = true;
-			sm1.Size = new Size(380, 250);
-			sm1.Viewport = new BoundedCenterViewport(sprite1, rect);
+				(int) td2.Size.Width),
+				rand.Next(rect.Top, rect.Bottom - 
+				(int) td2.Size.Height),
+				100));
 			all.Add(sprite1);
 
 			// Set up container #2
@@ -118,10 +109,6 @@ namespace MfGames.Sdl.Demos
 				rand.Next(rect.Top, rect.Bottom - 
 				(int) td3.Size.Height),
 				100));
-			sm2.Coordinates = new Vector(410, 10);
-			sm2.IsTickable = false;
-			sm2.Size = new Size(380, 250);
-			sm2.Viewport = new BoundedCenterViewport(sprite2, rect);
 			all.Add(sprite2);
 
 			// Set up container #3
@@ -130,10 +117,6 @@ namespace MfGames.Sdl.Demos
 				rand.Next(rect.Top, rect.Bottom - 
 				(int) td4.Size.Height),
 				100));
-			sm3.Coordinates = new Vector(10, 280);
-			sm3.IsTickable = false;
-			sm3.Size = new Size(380, 250);
-			sm3.Viewport = new BoundedCenterViewport(sprite3, rect);
 			all.Add(sprite3);
       
 			// Set up container #4
@@ -142,27 +125,142 @@ namespace MfGames.Sdl.Demos
 				rand.Next(rect.Top, rect.Bottom - 
 				(int) td5.Size.Height),
 				100));
-			sm4.Coordinates = new Vector(410, 280);
-			sm4.IsTickable = false;
-			sm4.Size = new Size(380, 250);
-			sm4.Viewport = new BoundedCenterViewport(sprite4, rect);
 			all.Add(sprite4);
 
-			// Add the managers
-			sm1.Add(all);
-			sm2.Add(all);
-			sm3.Add(all);
-			sm4.Add(all);
-			sm.Add(sm1);
-			sm.Add(sm2);
-			sm.Add(sm3);
-			sm.Add(sm4);
+			all.EnableTickEvent();
+			surf1 = this.Surface.CreateCompatibleSurface(380, 250);
+			surf2 = this.Surface.CreateCompatibleSurface(380, 250);
+			surf3 = this.Surface.CreateCompatibleSurface(380, 250);
+			surf4 = this.Surface.CreateCompatibleSurface(380, 250);
 		}
+
+		Surface surf1;
+		Surface surf2;
+		Surface surf3;
+		Surface surf4;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override Surface RenderSurface()
+		{	
+			this.Surface.Fill(Color.Black);
+			foreach (Sprite s in all)
+			{
+				Rectangle offsetRect = s.Rectangle;
+				offsetRect.Offset(AdjustBoundedViewport(sprite1, surf1));
+				surf1.Blit(s.Surface, offsetRect);
+				offsetRect = s.Rectangle;
+				offsetRect.Offset(AdjustBoundedViewport(sprite2, surf2));
+				surf2.Blit(s.Surface, offsetRect);
+				offsetRect = s.Rectangle;
+				offsetRect.Offset(AdjustBoundedViewport(sprite3, surf3));
+				surf3.Blit(s.Surface, offsetRect);
+				offsetRect = s.Rectangle;
+				offsetRect.Offset(AdjustBoundedViewport(sprite4, surf4));
+				surf4.Blit(s.Surface, offsetRect);
+			}
+			this.Surface.Blit(surf1, new Point(10, 10));
+			this.Surface.Blit(surf2, new Point(410, 10));
+			this.Surface.Blit(surf3, new Point(10, 280));
+			this.Surface.Blit(surf4, new Point(410, 280));	
+		
+			return this.Surface;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Point AdjustViewport(Sprite sprite, Surface surf)
+		{
+			return new Point(
+				surf.Size.Width / 2 - 
+				sprite.Size.Width / 2 - 
+				sprite.Coordinates.X,
+				surf.Size.Height / 2 - 
+				sprite.Size.Height / 2 - 
+				sprite.Coordinates.Y);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Rectangle ViewRect
+		{
+			get
+			{
+				return rect;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Point AdjustBoundedViewport(Sprite sprite, Surface surf)
+		{
+			Point offset = this.AdjustViewport(sprite, surf);
+
+			// Check to see if the window is too small
+			bool doWidth = true;
+			bool doHeight = true;
+			
+			if (this.ViewRect.Width < surf.Size.Width)
+			{
+				doWidth = false;
+			}
+			
+			if (this.ViewRect.Height < surf.Size.Height)
+			{
+				doHeight = false;
+			}
+			
+			if (!doWidth && !doHeight)
+			{
+				return offset;
+			}
+			
+			// Find out the "half" point for the sprite in the view
+			int mx = sprite.Coordinates.X + sprite.Size.Width / 2;
+			int my = sprite.Coordinates.Y + sprite.Size.Height / 2;
+			
+			// Figure out the coordinates
+			int x1 = mx - surf.Size.Width / 2;
+			int x2 = mx + surf.Size.Width / 2;
+			int y1 = my - surf.Size.Height / 2;
+			int y2 = my + surf.Size.Height / 2;
+			
+			// Make sure we don't exceed the bounds
+			if (doWidth && x1 < this.ViewRect.Left)
+			{
+				offset.X -= this.ViewRect.Left - x1;
+			}
+			
+			if (doHeight && y1 < this.ViewRect.Top)
+			{
+				offset.Y -= this.ViewRect.Top - y1;
+			}
+			
+			if (doWidth && x2 > this.ViewRect.Right)
+			{
+				offset.X += x2 - this.ViewRect.Right;
+			}
+			
+			if (doHeight && y2 > this.ViewRect.Bottom)
+			{
+				offset.Y += y2 - this.ViewRect.Bottom;
+			}
+			return new Point(offset.X, offset.Y);
+		}
+
+
+
 
 		/// <summary>
 		/// Adds the internal sprite manager to the outer one.
 		/// </summary>
-		public override void Start(SpriteContainer manager)
+		public override void Start(SpriteCollection manager)
 		{
 			base.Start(manager);
 		}
@@ -170,11 +268,15 @@ namespace MfGames.Sdl.Demos
 		/// <summary>
 		/// Removes the internal manager from the controlling manager.
 		/// </summary>
-		public override void Stop(SpriteContainer manager)
+		public override void Stop(SpriteCollection manager)
 		{
 			base.Stop(manager);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString() { return "Multiple"; }
 	}
 }

@@ -42,7 +42,6 @@ namespace SdlDotNet.Examples
 		bool channelFinishedFlag = false;
 		private int currentChannel;
 		private int positionY = 200;
-			
 
 		string[] textArray = {"Hello World!","This is a test", "FontExample"};
 		int[] styleArray = {0, 1, 2, 4};
@@ -61,8 +60,7 @@ namespace SdlDotNet.Examples
 			Font font;
 			Random rand = new Random();
 
-			Mixer.Music.EnableMusicFinishedCallback();
-
+			
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
 			Events.KeyboardUp += 
 				new KeyboardEventHandler(this.KeyboardUp);
@@ -75,6 +73,7 @@ namespace SdlDotNet.Examples
 			font = new Font(filepath + FontName, size);
 			Mixer.Music.Load(filepath + "fard-two.ogg");
 			Mixer.Music.Volume = 128;
+			Mixer.Music.EnableMusicFinishedCallback();
 			Mixer.Music.Play(1);
 			Sound sound = Mixer.Sound(filepath + "test.wav");
 			Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
@@ -84,6 +83,7 @@ namespace SdlDotNet.Examples
 			channel.EnableChannelFinishedCallback();
 			//channel2.EnableChannelFinishedCallback();
 			//channel.QueuedSound = queuedSound;
+			channel.Volume = 32;
 			channel.Play(sound);
 			//channel2.Play(sound);
 
@@ -105,9 +105,11 @@ namespace SdlDotNet.Examples
 			events[1] = new KeyboardEventArgs(Key.Space, false);
 			events[2] = new KeyboardEventArgs(Key.Space, true);
 			Events.Add(events);
+			//Events.PushUserEvent(new MusicFinishedEventArgs());
 
 			SdlEventArgs[] eventArrayDown = Events.Peek(EventMask.KeyDown, 10);
 			SdlEventArgs[] eventArrayUp = Events.Peek(EventMask.KeyUp, 10);
+			//	SdlEventArgs[] eventArrayMusic = Events.Peek(EventMask.AllEvents, 10);
 
 			while (!quitFlag) 
 			{
@@ -138,35 +140,8 @@ namespace SdlDotNet.Examples
 						Console.WriteLine("space bar is currently pressed");
 					}
 					Console.WriteLine("Pos: " + Video.Mouse.MousePosition.ToString());
-					Console.WriteLine("Change: " +Video.Mouse.MousePositionChange.ToString());
+					Console.WriteLine("Change: " + Video.Mouse.MousePositionChange.ToString());
 					Console.WriteLine("Has Mousefocus: " + Video.Mouse.HasMouseFocus);
-					if (musicFinishedFlag)
-					{
-						text = font.Render(
-							"MusicChannelFinishedDelegate was called.", 
-							Color.FromArgb(0, 254, 
-							254,254));
-						screen.Blit(
-							text, 
-							new Rectangle(new Point(100,300), 
-							text.Size));
-						screen.Flip();
-						musicFinishedFlag = false;
-					}
-					if (channelFinishedFlag)
-					{
-						text = font.Render(
-							"ChannelFinishedDelegate was called for channel " + currentChannel.ToString(), 
-							Color.FromArgb(0, 154, 
-							154,154));
-						screen.Blit(
-							text, 
-							new Rectangle(new Point(100,positionY + 50 * currentChannel), 
-							text.Size));
-						screen.Flip();
-						channelFinishedFlag = false;
-					}
-
 					switch (rand.Next(4))
 					{
 						case 1:
@@ -181,12 +156,39 @@ namespace SdlDotNet.Examples
 						default:
 							break;
 					}
-
 					screen.Blit(
 						text, 
 						new Rectangle(new Point(rand.Next(width - 100),rand.Next(height - 100)), 
 						text.Size));
 					screen.Flip();
+					
+					if (musicFinishedFlag)
+					{
+						text = font.Render(
+							"MusicChannelFinishedDelegate was called.", 
+							Color.FromArgb(0, 254, 
+							254,254));
+						screen.Blit(
+							text, 
+							new Rectangle(new Point(100,100), 
+							text.Size));
+						screen.Flip();
+						musicFinishedFlag = false;
+					} 
+					else if (channelFinishedFlag)
+					{
+						text = font.Render(
+							"ChannelFinishedDelegate was called for channel " + currentChannel.ToString(), 
+							Color.FromArgb(0, 154, 
+							154,154));
+						screen.Blit(
+							text, 
+							new Rectangle(new Point(100,positionY + 50 * currentChannel), 
+							text.Size));
+						screen.Flip();
+						channelFinishedFlag = false;
+						positionY += 20;
+					}
 					Thread.Sleep(1000);
 				} 
 				catch 

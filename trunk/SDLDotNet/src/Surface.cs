@@ -24,6 +24,7 @@ using System.Runtime.InteropServices;
 using System.Globalization;
 
 using Tao.Sdl;
+using SdlDotNet.Sprites;
 
 namespace SdlDotNet 
 {
@@ -117,7 +118,15 @@ namespace SdlDotNet
 		/// <param name="height"></param>
 		public Surface(int width, int height)
 		{
-			Video.Screen.CreateCompatibleSurface(width, height);
+			this.handle = Video.Screen.CreateCompatibleSurface(width, height).Handle;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Surface()
+		{
+			this.handle = Video.Screen.CreateCompatibleSurface(Video.Screen.Width, Video.Screen.Height).Handle;
 		}
 
 		/// <summary>
@@ -893,15 +902,15 @@ namespace SdlDotNet
 		/// <param name="sourceSurface">
 		/// The surface to copy from
 		/// </param>
-		/// <param name="destinationRectangle">
-		/// The rectangle coordinates on the this surface to copy to
+		/// <param name="destinationPosition">
+		/// The rectangle coordinates on this surface to copy to
 		/// </param>
-		public void Blit(Surface sourceSurface, System.Drawing.Rectangle destinationRectangle) 
+		public Rectangle Blit(Surface sourceSurface, System.Drawing.Point destinationPosition) 
 		{
-			this.Blit(
+			return this.Blit(
 				sourceSurface, 
-				destinationRectangle,
-				new System.Drawing.Rectangle(new System.Drawing.Point(0, 0), this.Size));
+				destinationPosition,
+				new Rectangle(new System.Drawing.Point(0, 0), sourceSurface.Size));
 		}
 
 		/// <summary>
@@ -910,27 +919,37 @@ namespace SdlDotNet
 		/// <param name="sourceSurface">
 		/// The surface to copy from
 		/// </param>
-		/// <param name="destinationPoint">
-		/// The rectangle coordinates on the this surface to copy to
-		/// </param>
-		public void Blit(Surface sourceSurface, System.Drawing.Point destinationPoint) 
-		{
-			this.Blit(
-				sourceSurface, 
-				new System.Drawing.Rectangle(destinationPoint, sourceSurface.Size));
-		}
-
-		/// <summary>
-		/// Copies a portion of a source surface to this surface
-		/// </summary>
-		/// <param name="sourceRectangle">
-		/// The rectangle coordinates of the source surface to copy from
-		/// </param>
-		/// <param name="sourceSurface">The surface to copy from</param>
 		/// <param name="destinationRectangle">
 		/// The rectangle coordinates on this surface to copy to
 		/// </param>
-		public void Blit( 
+		public Rectangle Blit(Surface sourceSurface, System.Drawing.Rectangle destinationRectangle) 
+		{
+			return this.Blit(
+				sourceSurface, 
+				destinationRectangle.Location,
+				new Rectangle(new System.Drawing.Point(0, 0), sourceSurface.Size));
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <returns></returns>
+		public Rectangle Blit(Surface sourceSurface) 
+		{
+			return this.Blit(
+				sourceSurface, 
+				new Point(0, 0));
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <param name="destinationRectangle"></param>
+		/// <param name="sourceRectangle"></param>
+		/// <returns></returns>
+		public Rectangle Blit( 
 			Surface sourceSurface, 
 			System.Drawing.Rectangle destinationRectangle,
 			System.Drawing.Rectangle sourceRectangle) 
@@ -943,6 +962,30 @@ namespace SdlDotNet
 			{
 				throw SdlException.Generate();
 			}
+			return new Rectangle(d.x, d.y, d.w, d.h);
+		}
+
+		/// <summary>
+		/// Copies a portion of a source surface to this surface
+		/// </summary>
+		/// <param name="sourceRectangle">
+		/// The rectangle coordinates of the source surface to copy from
+		/// </param>
+		/// <param name="sourceSurface">The surface to copy from</param>
+		/// <param name="destinationPosition">
+		/// The coordinates on this surface to copy to
+		/// </param>
+		/// <returns>Destination Rectangle after any necessary clipping</returns>
+		public Rectangle Blit( 
+			Surface sourceSurface, 
+			System.Drawing.Point destinationPosition,
+			System.Drawing.Rectangle sourceRectangle) 
+		{
+			return this.Blit(sourceSurface, 
+				new Rectangle(
+				destinationPosition.X, 
+				destinationPosition.Y, 0, 0), 
+				sourceRectangle);
 		}
 
 		/// <summary>
@@ -1548,15 +1591,30 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Updates entire surface
 		/// </summary>
-		/// <param name="rectangle"></param>
-		public void Update(System.Drawing.Rectangle[] rectangle)
+		public void Update()
 		{
-			Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangle.Length];
-			for (int i=0;i < rectangle.Length;i++)
+			Sdl.SDL_UpdateRect(
+				this.handle, 
+				0, 
+				0, 
+				this.Size.Width, 
+				this.Size.Height 
+				);
+			GC.KeepAlive(this);
+		}
+
+		/// <summary>
+		/// Update an array of rectangles
+		/// </summary>
+		/// <param name="rectangles"></param>
+		public void Update(System.Drawing.Rectangle[] rectangles)
+		{
+			Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangles.Length];
+			for (int i=0;i < rectangles.Length;i++)
 			{
-				rects[i] = this.ConvertRecttoSDLRect(rectangle[i]);
+				rects[i] = this.ConvertRecttoSDLRect(rectangles[i]);
 			}
 			Sdl.SDL_UpdateRects(this.handle, rects.Length, rects);
 			GC.KeepAlive(this);
@@ -1727,6 +1785,6 @@ namespace SdlDotNet
 			{
 				return this.SurfaceStruct.flags;
 			}
-		}
+		}	
 	}
 }

@@ -26,6 +26,9 @@ using System.Collections;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class BlockGrid : GameArea
 	{
 		Size sizeOfGrid;
@@ -33,6 +36,9 @@ namespace SdlDotNet.Examples
 		BlockCollection blockList = new BlockCollection();
 		int delayFactor = 400;
 		private float _SpeedFactor = 1.0f;
+		/// <summary>
+		/// 
+		/// </summary>
 		public float SpeedFactor
 		{
 			get
@@ -61,7 +67,15 @@ namespace SdlDotNet.Examples
 		bool gameIsPaused = false;
 		bool reductionOccured = false;
 		
+		/// <summary>
+		/// 
+		/// </summary>
 		public event BlocksDestroyedEventHandler BlocksDestroyed;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="reductionCount"></param>
+		/// <param name="blockCount"></param>
 		public void RaiseBlocksDestroyedEvent(int reductionCount, int blockCount)
 		{
 			if(BlocksDestroyed != null)
@@ -70,9 +84,9 @@ namespace SdlDotNet.Examples
             }
 
 		}
-
-
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public Size GridSize 
 		{
 			get
@@ -81,6 +95,11 @@ namespace SdlDotNet.Examples
 			}
 		}
 		 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="location"></param>
+		/// <param name="gridSize"></param>
 		public BlockGrid(Point location, Size gridSize) : base()
 		{
 			Mixer.SetAllChannelsVolume(50);
@@ -229,6 +248,9 @@ namespace SdlDotNet.Examples
 			return false;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void Update()
 		{
 			if(gameIsPaused) return;
@@ -540,6 +562,10 @@ namespace SdlDotNet.Examples
 
 		bool moveTriadLeft = false;
 		bool moveTriadRight = false;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
 		public override void HandleSDLKeyDownEvent(KeyboardEventArgs args)
 		{
 			System.Diagnostics.Debug.WriteLine(args.Key.ToString());
@@ -594,6 +620,10 @@ namespace SdlDotNet.Examples
 			
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
 		public override void HandleSDLKeyUpEvent(KeyboardEventArgs args)
 		{
             rapidDropTriad = false;
@@ -618,6 +648,10 @@ namespace SdlDotNet.Examples
 
 
 		Surface gameOverImage = null;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
 		protected override void DrawGameObject(Surface surface)
 		{
 

@@ -22,6 +22,8 @@ using System;
 using System.Drawing;
 using System.IO;
 using SdlDotNet;
+using System.Runtime.InteropServices;
+
 
 namespace SdlDotNet.Examples
 {
@@ -91,16 +93,13 @@ namespace SdlDotNet.Examples
 				Surface Cursor = new Surface(filepath + imagepath +  "cursor.png");
 				Cursor.Transparent = true;
 
-				SurfaceList Jeep = new SurfaceList();
+				SurfaceCollection Jeep = new SurfaceCollection();
 
 				for (int j = 1; j <= 16;j++) 
 				{
-					Jeep.Surfaces.Add(filepath + imagepath + @"jeep/jeep" + j.ToString() +".gif");
-					Jeep.Surfaces[Jeep.Surfaces.Count-1].Transparent = true;
+					Jeep.Add(filepath + imagepath + @"jeep/jeep" + j.ToString() +".gif");
+					Jeep[Jeep.Count-1].Transparent = true;
 				}
-
-
-				SurfaceList SurfaceList = new SurfaceList();
 
 				Surface Tree = new Surface(filepath + imagepath + "Tree.bmp");
 
@@ -142,7 +141,7 @@ namespace SdlDotNet.Examples
 						}
 						JeepFrame++;
 
-						surf.Blit(Jeep.Surfaces[JeepFrame], new Rectangle(new Point(100,100),Jeep.Surfaces[JeepFrame].Size));
+						surf.Blit(Jeep[JeepFrame], new Rectangle(new Point(100,100),Jeep[JeepFrame].Size));
 
 						// Draw Textbox
 						surf.Blit(sdlimg,new Rectangle(new Point(230,440),Background.Size));

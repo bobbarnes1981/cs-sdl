@@ -25,11 +25,23 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Block : GameObject, System.IDisposable
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public readonly static int BlockWidth = 36;
+		/// <summary>
+		/// 
+		/// </summary>
 		public readonly static Size BlockSize = new System.Drawing.Size(BlockWidth,BlockWidth);
 		BlockType blockType;
+		/// <summary>
+		/// 
+		/// </summary>
 		public BlockType TypeOfBlock
 		{
 			set
@@ -45,6 +57,9 @@ namespace SdlDotNet.Examples
 		}
 		static Random random;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Block()
 		{
 			this.Size = BlockSize;
@@ -58,6 +73,9 @@ namespace SdlDotNet.Examples
 		}
 
 		private int _GridX;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int GridX
 		{
 			get
@@ -71,6 +89,9 @@ namespace SdlDotNet.Examples
 		}
 	
 		private int _GridY;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int GridY
 		{
 			get
@@ -83,6 +104,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Point GridLocation
 		{
 			get
@@ -97,10 +121,11 @@ namespace SdlDotNet.Examples
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool Destroy = false;
 	
-
-
 		static Surface redBlock = null;
 		Surface getRedBlock()
 		{
@@ -164,6 +189,10 @@ namespace SdlDotNet.Examples
 			return blueBlock;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
 		protected override void DrawGameObject(Surface surface)
 		{
 
@@ -201,11 +230,17 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void Update()
 		{
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Dispose()
 		{
 			this.Parent = null;			

@@ -22,7 +22,7 @@ using SdlDotNet;
 using System.Collections;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// A rather simple component, the ticker scrolls text left or right
@@ -32,6 +32,13 @@ namespace MfGames.Sdl.Gui
 	/// </summary>
 	public class GuiTicker : GuiComponent
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gui"></param>
+		/// <param name="x1"></param>
+		/// <param name="x2"></param>
+		/// <param name="baselineY"></param>
 		public GuiTicker(GuiManager gui, int x1, int x2, int baselineY)
 			: base(gui)
 		{
@@ -42,6 +49,14 @@ namespace MfGames.Sdl.Gui
 			this.lastSize = new Size(x2 - x1, 1);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gui"></param>
+		/// <param name="x1"></param>
+		/// <param name="x2"></param>
+		/// <param name="baselineY"></param>
+		/// <param name="z"></param>
 		public GuiTicker(GuiManager gui, int x1, int x2, int baselineY, int z)
 			: base(gui, z)
 		{
@@ -53,24 +68,27 @@ namespace MfGames.Sdl.Gui
 		}
 
 		#region Drawing
-		public override void Render(RenderArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Render(/*RenderArgs args*/)
 		{
-			// Don't bother if we are hidden
-			if (IsHidden)
-				return;
-
+//			// Don't bother if we are hidden
+//			if (IsHidden)
+//				return;
+//
 			// Draw ourselves, then our components
-			manager.Render(args, this);
+			manager.Render(this);
 
 			// Draw our sprites
-			RenderArgs args1 = args.Clone();
-			args1.TranslateX += Coordinates.X;
-			args1.TranslateY += Coordinates.Y + manager.TickerPadding.Top;
+			//RenderArgs args1 = args.Clone();
+			//args1.TranslateX += Coordinates.X;
+			//args1.TranslateY += Coordinates.Y + manager.TickerPadding.Top;
 
-			foreach (Sprite s in new ArrayList(display))
-			{
-				s.Render(args1);
-			}
+			//foreach (Sprite s in new ArrayList(display))
+			//{
+				//s.Update();
+			//}
 		}
 		#endregion
 
@@ -78,11 +96,19 @@ namespace MfGames.Sdl.Gui
 		private Queue queue = new Queue();
 		private ArrayList display = new ArrayList();
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sprite"></param>
 		public void Add(Sprite sprite)
 		{
 			queue.Enqueue(sprite);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public ArrayList GetSprites()
 		{
 			ArrayList list = new ArrayList(display);
@@ -90,6 +116,10 @@ namespace MfGames.Sdl.Gui
 			return list;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sprite"></param>
 		public void Remove(Sprite sprite)
 		{
 			// Cannot remove from queue
@@ -103,6 +133,9 @@ namespace MfGames.Sdl.Gui
 		private int baselineY = 0;
 		private Size lastSize = new Size();
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Vector Coordinates
 		{
 			get
@@ -111,13 +144,18 @@ namespace MfGames.Sdl.Gui
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Size Size
 		{
 			get
 			{
 				// Check for last-size
 				if (display.Count == 0)
+				{
 					return lastSize;
+				}
 
 				// Build up a height
 				int height = 0;
@@ -125,7 +163,9 @@ namespace MfGames.Sdl.Gui
 				foreach (Sprite s in new ArrayList(display))
 				{
 					if (s.Size.Height > height)
+					{
 						height = s.Size.Height;
+					}
 				}
 	
 				// Return a new height
@@ -137,7 +177,12 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Events
-		public override void OnTick(object sender, TickEventArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void Update(object sender, TickEventArgs args)
 		{
 			// Don't bother if there is nothing
 			if (display.Count == 0 && queue.Count == 0)
@@ -154,33 +199,33 @@ namespace MfGames.Sdl.Gui
 			if (display.Count != 0)
 			{
 				// Go through all the displayed sprites
-				foreach (Sprite s in new ArrayList(display))
-				{
+				//foreach (Sprite s in new ArrayList(display))
+				//{
 					// Tick the sprite and wrap it in a translator
-					s.OnTick(this, args);
+					//s.OnTick(this, args);
 	  
 					// Move the sprite along
-					s.Coordinates.X += offset;
-					s.Coordinates.Y = 0;
-
+					//s.Coordinates.X += offset;
+					//s.Coordinates.Y = 0;
+//
 					// See if the sprite is out of bounds
-					if ((delta < 0 && s.Bounds.Left < x1 - s.Size.Width) || 
-						(delta > 0 && s.Bounds.Right > x2))
-					{
-						Remove(s);
-						continue;
-					}
-	  
-					// Check for the edges
-					if (s.Bounds.Left < minX)
-					{
-						minX = s.Bounds.Left;
-					}
-					if (s.Bounds.Right > maxX)
-					{
-						maxX = s.Bounds.Right;
-					}
-				}
+//					if ((delta < 0 && s.Bounds.Left < x1 - s.Size.Width) || 
+//						(delta > 0 && s.Bounds.Right > x2))
+//					{
+//						Remove(s);
+//						continue;
+//					}
+//	  
+//					// Check for the edges
+//					if (s.Bounds.Left < minX)
+//					{
+//						minX = s.Bounds.Left;
+//					}
+//					if (s.Bounds.Right > maxX)
+//					{
+//						maxX = s.Bounds.Right;
+//					}
+			//	}
 			}
 
 			// Add anything into the queue
@@ -191,16 +236,16 @@ namespace MfGames.Sdl.Gui
 				{
 					// We have room on the left
 					Sprite ns = (Sprite) queue.Dequeue();
-					ns.Coordinates.Y = manager.TickerPadding.Top + Coordinates.Y;
-					ns.Coordinates.X = x1 - ns.Size.Width;
+					//ns.Coordinates.Y = manager.TickerPadding.Top + Coordinates.Y;
+					//ns.Coordinates.X = x1 - ns.Size.Width;
 					display.Add(ns);
 				}
 				else if (delta < 0 && x2 - maxX > minSpace)
 				{
 					// We have room on the right
 					Sprite ns = (Sprite) queue.Dequeue();
-					ns.Coordinates.Y = manager.TickerPadding.Top + Coordinates.Y;
-					ns.Coordinates.X = x2;
+					//ns.Coordinates.Y = manager.TickerPadding.Top + Coordinates.Y;
+					//ns.Coordinates.X = x2;
 					display.Add(ns);
 				}
 			}
@@ -212,13 +257,19 @@ namespace MfGames.Sdl.Gui
 		private int minSpace = 10;
 		private bool isAutoHide = false;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool IsAutoHide
 		{
 			get { return isAutoHide; }
 			set { isAutoHide = value; }
 		}
 
-		public override bool IsHidden
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsHidden
 		{
 			get { return (isAutoHide && display.Count == 0); }
 		}

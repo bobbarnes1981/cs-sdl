@@ -23,7 +23,7 @@ using System;
 using System.Collections;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// Class to manager internal sprites, such as window
@@ -33,17 +33,29 @@ namespace MfGames.Sdl.Gui
 	public class VerticalPacker : Packer
 	{
 		#region Constructors
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		public VerticalPacker(GuiManager manager)
 			: base(manager)
 		{
 		}
-
-		//public VerticalPacker(GuiManager manager, Vector2 p)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="p"></param>
 		public VerticalPacker(GuiManager manager, Point p)
 			: base(manager, p)
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="p"></param>
 		public VerticalPacker(GuiManager manager, Vector p)
 			: base(manager, p)
 		{
@@ -51,70 +63,73 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Drawing
-		public override void Render(RenderArgs args)
-		{
-			// Call the base
-			base.Render(args);
-
-			// Handle our arguments
-			RenderArgs args0 = args.Clone();
-			args0.TranslateX += Coordinates.X + MarginPadding.Left + InnerPadding.Left;
-			args0.TranslateY += Coordinates.Y + MarginPadding.Top + InnerPadding.Top;
-
-			// Draw all of our left components
-			int y = 0;
-
-			foreach (Sprite s in HeadSprites)
-			{
-				// Ignore hidden
-				if (s.IsHidden)
-				{
-					continue;
-				}
-	
-				// Translate it and blit
-				Size size = GetSize(s);
-
-				s.Coordinates.Y = y;
-				s.Render(args0);
-
-				// Debugging
-				if (IsTraced)
-				{
-					args.Surface.DrawPixel(0 + args0.TranslateX,
-						y + args0.TranslateY,
-						System.Drawing.Color.CornflowerBlue);
-
-					args.Surface.DrawPixel(0 + args0.TranslateX,
-						y + args0.TranslateY
-						+ size.Height,
-						System.Drawing.Color.CornflowerBlue);
-				}
-
-				// Update the coordinates for the next one
-				y += size.Height + InnerPadding.Vertical;
-			}
-
-			// Draw our right components
-			y = Coordinates.Y + Size.Height - MarginPadding.Bottom;
-
-			foreach (Sprite s in TailSprites)
-			{
-				// Ignore hidden
-				if (s.IsHidden)
-				{
-					continue;
-				}
-	
-				// Translate it and blit
-				y -= s.Size.Height + InnerPadding.Vertical;
-				s.Coordinates.Y = y;
-				s.Render(args0);
-			}
-		}
+//		public override void Render(/*RenderArgs args*/)
+//		{
+//			// Call the base
+//			base.Render(args);
+//
+//			// Handle our arguments
+//			RenderArgs args0 = args.Clone();
+//			args0.TranslateX += Coordinates.X + MarginPadding.Left + InnerPadding.Left;
+//			args0.TranslateY += Coordinates.Y + MarginPadding.Top + InnerPadding.Top;
+//
+//			// Draw all of our left components
+//			int y = 0;
+//
+//			foreach (Sprite s in HeadSprites)
+//			{
+//				// Ignore hidden
+//				if (s.IsHidden)
+//				{
+//					continue;
+//				}
+//	
+//				// Translate it and blit
+//				Size size = GetSize(s);
+//
+//				s.Coordinates.Y = y;
+//				s.Render(args0);
+//
+//				// Debugging
+//				if (IsTraced)
+//				{
+//					args.Surface.DrawPixel(0 + args0.TranslateX,
+//						y + args0.TranslateY,
+//						System.Drawing.Color.CornflowerBlue);
+//
+//					args.Surface.DrawPixel(0 + args0.TranslateX,
+//						y + args0.TranslateY
+//						+ size.Height,
+//						System.Drawing.Color.CornflowerBlue);
+//				}
+//
+//				// Update the coordinates for the next one
+//				y += size.Height + InnerPadding.Vertical;
+//			}
+//
+//			// Draw our right components
+//			y = Coordinates.Y + Size.Height - MarginPadding.Bottom;
+//
+//			foreach (Sprite s in TailSprites)
+//			{
+//				// Ignore hidden
+//				if (s.IsHidden)
+//				{
+//					continue;
+//				}
+//	
+//				// Translate it and blit
+//				y -= s.Size.Height + InnerPadding.Vertical;
+//				s.Coordinates.Y = y;
+//				s.Render(args0);
+//			}
+//		}
 		#endregion
 
 		#region Geometry
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Size Size
 		{
 			get
@@ -126,10 +141,10 @@ namespace MfGames.Sdl.Gui
 				foreach (Sprite s in new ArrayList(Sprites))
 				{
 					// Ignore hidden ones
-					if (s.IsHidden)
-					{
-						continue;
-					}
+//					if (s.IsHidden)
+//					{
+//						continue;
+//					}
 
 					// Get the width
 					int w = GetSize(s).Width;
@@ -147,6 +162,9 @@ namespace MfGames.Sdl.Gui
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual int VerticalHeight
 		{
 			get
@@ -157,10 +175,10 @@ namespace MfGames.Sdl.Gui
 				foreach (Sprite s in new ArrayList(Sprites))
 				{
 					// Ignore hidden ones
-					if (s.IsHidden)
-					{
-						continue;
-					}
+//					if (s.IsHidden)
+//					{
+//						continue;
+//					}
 
 					// Get the height
 					int h = GetSize(s).Height;

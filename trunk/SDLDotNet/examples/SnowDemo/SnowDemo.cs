@@ -22,11 +22,17 @@ using System.Drawing;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class SnowDemo
 	{
 		static Snowflake[] snowflakes;
 		static Texts texts;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static Snowflake[] Snowflakes
 		{
 			get
@@ -35,6 +41,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static Texts Texts
 		{
 			get
@@ -43,10 +52,17 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public SnowDemo()
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="NumberOfSnowflakes"></param>
 		public void Init(int NumberOfSnowflakes)
 		{
 			snowflakes = new Snowflake[NumberOfSnowflakes];
@@ -58,6 +74,9 @@ namespace SdlDotNet.Examples
 			texts = new Texts();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Length
 		{
 			get
@@ -66,6 +85,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Snowflake this[int Index]
 		{
 			get
@@ -77,6 +99,9 @@ namespace SdlDotNet.Examples
 		static bool run = true;
 		static int numberOfSnowflakes = 250;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static int NumberOfSnowflakes
 		{
 			get
@@ -93,6 +118,9 @@ namespace SdlDotNet.Examples
 			
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run()
 		{
 			Graphics.Init();

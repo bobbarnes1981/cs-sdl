@@ -23,9 +23,15 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public abstract class GameArea : GameObject
 	{
 		GameObjectCollection _objectList = null;
+		/// <summary>
+		/// 
+		/// </summary>
 		public GameObjectCollection GameObjectList
 		{
 			get
@@ -34,11 +40,18 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public GameArea()
 		{
 			_objectList = new GameObjectCollection();			
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="obj"></param>
 		public void AddObject(GameObject obj)
 		{
 			
@@ -48,26 +61,43 @@ namespace SdlDotNet.Examples
 		}
 
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="obj"></param>
 		public void RemoveObject(GameObject obj)
 		{
 			_objectList.Remove(obj);			
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void Update()
 		{
 			foreach(GameObject obj in _objectList)
                 obj.Update();				
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
 		protected void DrawGameObjects(Surface surface)
 		{
 			foreach(GameObject obj in _objectList)
 				obj.Draw(surface);
 		}
 
-
-
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
 		public abstract void HandleSDLKeyDownEvent(KeyboardEventArgs args);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
 		public abstract void HandleSDLKeyUpEvent(KeyboardEventArgs args);
 
 

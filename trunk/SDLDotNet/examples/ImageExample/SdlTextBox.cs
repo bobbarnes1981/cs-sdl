@@ -42,14 +42,29 @@ namespace SdlDotNet.Examples
 		SdlDotNet.Font boxFont; //the font to use
 
 		#region Properties
+		/// <summary>
+		/// 
+		/// </summary>
 		public int X { get { return x; } }
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Y { get { return y; } }
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Length{ get { return length; } }
+		/// <summary>
+		/// 
+		/// </summary>
 		public string Text
 		{
 			get { return boxText; }
 			set { boxText = value; }
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool Enabled { get { return isEnabled; } }
 		#endregion
 

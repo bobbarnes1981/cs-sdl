@@ -131,48 +131,10 @@ namespace SdlDotNet.Sprites
 			this.vertical = vertical;
 		}
 
-		#region Drawing
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Render(RenderArgs args)
-		{
-			// Determine the offset
-			Surface render = Surface;
-			int width = Size.Width;
-			int height = Size.Height;
-			double dw = width - render.Width;
-			double dh = height - render.Height;
-			int offsetX = 0;
-			int offsetY = 0;
-
-			if (dw > 0.0)
-			{
-				offsetX += (int) (dw * horizontal);
-			}
-
-			if (dh > 0.0)
-			{
-				offsetY += (int) (dh * vertical);
-			}
-
-			// Render the image itself
-			args.Surface.Blit(render,
-				new Rectangle(new Point(Coordinates.X
-				+ offsetX + args.TranslateX,
-				Coordinates.Y
-				+ offsetY + args.TranslateY),
-				Size));
-		}
-		#endregion
-
 		#region Properties
 		private double horizontal = 0.5;
 
 		private double vertical = 0.5;
-
-		private Size size;
 
 		/// <summary>
 		/// 
@@ -205,6 +167,8 @@ namespace SdlDotNet.Sprites
 				this.Surface = null; 
 			}
 		}
+
+		private Size size;
 
 		/// <summary>
 		/// 

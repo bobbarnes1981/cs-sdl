@@ -22,7 +22,7 @@ using SdlDotNet;
 using System;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// Class to manager internal sprites, such as window
@@ -32,49 +32,72 @@ namespace MfGames.Sdl.Gui
 	public class GuiContainer : GuiComponent
 	{
 		#region Constructors
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		public GuiContainer(GuiManager manager)
 			: base(manager)
 		{
 		}
 
-		public GuiContainer(GuiManager manager, Rectangle rect)
-			: base(manager, rect)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="rectangle"></param>
+		public GuiContainer(GuiManager manager, Rectangle rectangle)
+			: base(manager, rectangle)
 		{
 		}
 		#endregion
 
 		#region Drawing
-		public override void Render(RenderArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Render(/*RenderArgs args*/)
 		{
 			// Modify the arguments
-			RenderArgs args1 = args.Clone();
-			args1.TranslateX += Coordinates.X;
-			args1.TranslateY += Coordinates.Y;
-			args1.Clipping = new Rectangle(args.TranslateX + Coordinates.X,
-				args.TranslateY + Coordinates.Y,
-				Size.Width,
-				Size.Height);
-
-			// Render the contents
-			contents.Render(args1);
-			args1.ClearClipping();
+//			RenderArgs args1 = args.Clone();
+//			args1.TranslateX += Coordinates.X;
+//			args1.TranslateY += Coordinates.Y;
+//			args1.Clipping = new Rectangle(args.TranslateX + Coordinates.X,
+//				args.TranslateY + Coordinates.Y,
+//				Size.Width,
+//				Size.Height);
+//
+//			// Render the contents
+//			contents.Render(args1);
+//			args1.ClearClipping();
 		}
 		#endregion
 
 		#region Events
-		public override void OnTick(object sender, TickEventArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public  void OnTick(object sender, TickEventArgs args)
 		{
-			base.OnTick(this, args);
-			contents.OnTick(this, args);
+//			base.OnTick(this, args);
+//			contents.OnTick(this, args);
 		}
 		#endregion
 
 		#region Properties
-		private SpriteContainer contents = new SpriteContainer();
+		private SpriteCollection contents = new SpriteCollection();
 
-		public SpriteContainer Contents
+		/// <summary>
+		/// 
+		/// </summary>
+		public SpriteCollection Contents
 		{
-			get { return contents; }
+			get 
+			{ 
+				return contents; 
+			}
 		}
 		#endregion
 	}

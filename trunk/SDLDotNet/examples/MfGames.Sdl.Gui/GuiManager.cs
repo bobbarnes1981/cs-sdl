@@ -22,7 +22,7 @@ using SdlDotNet;
 using System;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// This class manages and controls the various GUI elements inside
@@ -41,7 +41,7 @@ namespace MfGames.Sdl.Gui
 		/// used for any requests for fonts. Specific fonts may assigned,
 		/// the base system will always fall back to the baseFont.
 		/// </summary>
-		public GuiManager(SpriteContainer spriteManager, SdlDotNet.Font baseFont,
+		public GuiManager(SpriteCollection spriteManager, SdlDotNet.Font baseFont,
 			Size size)
 		{
 			this.manager = spriteManager;
@@ -50,23 +50,32 @@ namespace MfGames.Sdl.Gui
 		}
 
 		#region Singleton
-		private GuiManager singleton = null;
+		//		private GuiManager singleton = null;
 
-		/// <summary>
-		/// Contains the singleton instance of the GuiManager. This is
-		/// used for all the widgets that are not given a manager at their
-		/// creation.
-		/// </summary>
-		public GuiManager Singleton
-		{
-			get { return singleton; }
-			set { singleton = value; }
-		}
+		//		/// <summary>
+		//		/// Contains the singleton instance of the GuiManager. This is
+		//		/// used for all the widgets that are not given a manager at their
+		//		/// creation.
+		//		/// </summary>
+		//		public GuiManager Singleton
+		//		{
+		//			get 
+		//			{ 
+		//				return singleton; 
+		//			}
+		//			set 
+		//			{ 
+		//				singleton = value; 
+		//			}
+		//		}
 		#endregion
 
 		#region Fonts
 		// Contains the fall-back font for the system
-		protected SdlDotNet.Font baseFontGui = null;
+		/// <summary>
+		/// 
+		/// </summary>
+		private SdlDotNet.Font baseFontGui = null;
 
 		// Contains the font for any window titles
 		private SdlDotNet.Font titleFont = null;
@@ -74,214 +83,293 @@ namespace MfGames.Sdl.Gui
 		// Contains the font for menus
 		private SdlDotNet.Font menuFont = null;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public SdlDotNet.Font BaseFont
 		{
-			get { return baseFontGui; }
+			get 
+			{ 
+				return this.baseFontGui; 
+			}
 			set
 			{
 				if (value == null)
+				{
 					throw new GuiException("Cannot assign a null font to the GUI");
+				}
 
-				baseFontGui = value;
+				this.baseFontGui = value;
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public SdlDotNet.Font MenuFont
 		{
 			get
 			{
-				if (menuFont == null)
-					return BaseFont;
+				if (this.menuFont == null)
+				{
+					return this.baseFontGui;
+				}
 				else
+				{
 					return menuFont; 
+				}
 			}
-			set { menuFont = value; }
+			set 
+			{ 
+				menuFont = value; 
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public SdlDotNet.Font TitleFont
 		{
 			get
 			{
 				if (titleFont == null)
-					return BaseFont;
+				{
+					return baseFontGui;
+				}
 				else
+				{
 					return titleFont; 
+				}
 			}
-			set { titleFont = value; }
+			set 
+			{ 
+				titleFont = value; 
+			}
 		}
 
 		/// <summary>
 		/// Renders a given text with the given font and returns the size
 		/// of the surface rendered.
 		/// </summary>
-		public Size GetTextSize(SdlDotNet.Font font, string text)
+		public Size GetTextSize(SdlDotNet.Font font, string textItem)
 		{
 			// Render the text
-			Surface ts = font.Render(text, Color.FromArgb(255, 255, 255));
+			Surface ts = font.Render(textItem, Color.FromArgb(255, 255, 255));
       
 			return new Size(ts.Width, ts.Height);
 		}
 		#endregion
 
 		#region Components
+		/// <summary>
+		/// 
+		/// </summary>
 		public Padding TickerPadding
 		{
-			get { return new Padding(2); }
+			get 
+			{ 
+				return new Padding(2); 
+			}
 		}
 
-		public void Render(RenderArgs args, GuiTicker ticker)
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Render(GuiTicker ticker)
 		{
 			// Draw a frame
-			args.Surface.Fill(args.Translate(ticker.Bounds), backgroundColor);
-			DrawRect(args.Surface, args.Translate(ticker.Bounds), frameColor);
+			Surface surf = new Surface(ticker.Size.Width, ticker.Size.Height);
+			surf.Fill(ticker.Rectangle, backgroundColor);
+			DrawRect(surf, ticker.Rectangle, frameColor);
 		}
 		#endregion
 
 		#region Menus
+		/// <summary>
+		/// 
+		/// </summary>
 		public Padding MenuBarPadding
 		{
-			get { return new Padding(10, 2); }
+			get 
+			{ 
+				return new Padding(10, 2); 
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Padding MenuItemPadding
 		{
-			get { return new Padding(10, 2); }
+			get 
+			{ 
+				return new Padding(10, 2); 
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Padding MenuItemInnerPadding
 		{
-			get { return new Padding(0); }
+			get 
+			{ 
+				return new Padding(0); 
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Padding MenuPopupPadding
 		{
-			get { return new Padding(2, 2, 1, 1); }
+			get 
+			{ 
+				return new Padding(2, 2, 1, 1); 
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Padding MenuSpacerPadding
 		{
-			get { return new Padding(10, 1, 10, 2);}
+			get 
+			{ 
+				return new Padding(10, 1, 10, 2);
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Padding MenuTitlePadding
 		{
-			get { return new Padding(10, 2); }
-		}
-
-		public void Render(RenderArgs args, GuiMenuBar menubar)
-		{
-			// Draw a frame
-			args.Surface.Fill(args.Translate(menubar.OuterBounds),
-				backgroundColor);
-			DrawRect(args.Surface, args.Translate(menubar.OuterBounds), frameColor);
-		}
-
-		public void Render(RenderArgs args, GuiMenuItem item)
-		{
-			// Draw a background frame depending on if the title is selected
-			// or not. This draws out the outer bounds to include the
-			// padding. This has to be adjusted slightly because menu items
-			// are actually placed back on their outer coordinates, not
-			// their inner ones.
-			if (item.IsSelected)
-			{
-				// Adjust the size of the select box
-				Size d = item.OuterSize;
-
-				// Draw the selection
-				args.Surface.Fill(args.Translate(new Rectangle(item.Coordinates.X, item.Coordinates.Y, d.Width, d.Height)),
-					selectedColor);
+			get 
+			{ 
+				return new Padding(10, 2); 
 			}
 		}
 
-		public void Render(RenderArgs args, GuiMenuPopup menu)
-		{
-			// Clear out the background and draw the frame line
-			Rectangle rect = args.Translate(new Rectangle(menu.OuterBounds.X, menu.OuterBounds.Y, menu.OuterBounds.Width, menu.OuterBounds.Height));
-			args.Surface.Fill(rect, backgroundColor);
-			DrawRect(args.Surface, rect, frameColor);
-		}
+		//		public void Render(/*RenderArgs args, GuiMenuBar menubar*/)
+		//		{
+		////			// Draw a frame
+		////			args.Surface.Fill(args.Translate(menubar.OuterBounds),
+		////				backgroundColor);
+		////			DrawRect(args.Surface, args.Translate(menubar.OuterBounds), frameColor);
+		//		}
 
-		public void Render(RenderArgs args, GuiMenuTitle title)
-		{
-			// Draw a background frame depending on if the title is selected
-			// or not. We have to add the padding because of the title
-			// doesn't know about the menu's padding.
-			if (title.IsSelected)
-			{
-				// Get the rectangle
-				Rectangle rect = args.Translate(new Rectangle(title.OuterBounds.X, title.OuterBounds.Y, 0, 0));
-				int transX;
-				int transY;
-				transY = rect.Location.Y - MenuBarPadding.Top + MenuTitlePadding.Top;
-				transX = rect.Location.X - MenuTitlePadding.Left;
-				rect.Location = new Point(transX, transY);
-//				rect.Coordinates.Y -= MenuBarPadding.Top + MenuTitlePadding.Top;
-//				rect.Coordinates.X -= MenuTitlePadding.Left;
+		//		public void Render(/*RenderArgs args, GuiMenuItem item*/)
+		//		{
+		////			// Draw a background frame depending on if the title is selected
+		////			// or not. This draws out the outer bounds to include the
+		////			// padding. This has to be adjusted slightly because menu items
+		////			// are actually placed back on their outer coordinates, not
+		////			// their inner ones.
+		////			if (item.IsSelected)
+		////			{
+		////				// Adjust the size of the select box
+		////				Size d = item.OuterSize;
+		////
+		////				// Draw the selection
+		////				args.Surface.Fill(args.Translate(new Rectangle(item.Coordinates.X, item.Coordinates.Y, d.Width, d.Height)),
+		////					selectedColor);
+		////			}
+		//		}
 
-				int tempHeight;
-				int tempWidth;
-				tempHeight = rect.Size.Height + MenuBarPadding.Vertical
-					+ MenuTitlePadding.Vertical;
-				tempWidth = rect.Size.Width + MenuTitlePadding.Horizontal;
-				rect.Size = new Size(tempWidth, tempHeight);
-				
+		//		public void Render(RenderArgs args, GuiMenuPopup menu)
+		//		{
+		//			// Clear out the background and draw the frame line
+		//			Rectangle rect = args.Translate(new Rectangle(menu.OuterBounds.X, menu.OuterBounds.Y, menu.OuterBounds.Width, menu.OuterBounds.Height));
+		//			args.Surface.Fill(rect, backgroundColor);
+		//			DrawRect(args.Surface, rect, frameColor);
+		//		}
 
-				// Draw it
-				args.Surface.Fill(rect,  selectedColor);
-			}
-		}
+		//		public void Render(/*RenderArgs args, GuiMenuTitle title*/)
+		//		{
+		// Draw a background frame depending on if the title is selected
+		// or not. We have to add the padding because of the title
+		// doesn't know about the menu's padding.
+		//			if (title.IsSelected)
+		//			{
+		//				// Get the rectangle
+		//				Rectangle rect = args.Translate(new Rectangle(title.OuterBounds.X, title.OuterBounds.Y, 0, 0));
+		//				int transX;
+		//				int transY;
+		//				transY = rect.Location.Y - MenuBarPadding.Top + MenuTitlePadding.Top;
+		//				transX = rect.Location.X - MenuTitlePadding.Left;
+		//				rect.Location = new Point(transX, transY);
+		////				rect.Coordinates.Y -= MenuBarPadding.Top + MenuTitlePadding.Top;
+		////				rect.Coordinates.X -= MenuTitlePadding.Left;
+		//
+		//				int tempHeight;
+		//				int tempWidth;
+		//				tempHeight = rect.Size.Height + MenuBarPadding.Vertical
+		//					+ MenuTitlePadding.Vertical;
+		//				tempWidth = rect.Size.Width + MenuTitlePadding.Horizontal;
+		//				rect.Size = new Size(tempWidth, tempHeight);
+		//				
+		//
+		//				// Draw it
+		//				args.Surface.Fill(rect,  selectedColor);
+		//			}
+		//		}
 		#endregion
 
 		#region Windows
 		private int windowPad = 1;
 
-		public void Render(RenderArgs args, GuiWindow window)
-		{
-			// Pull out the fields
-			Rectangle bounds = args.Translate(window.OuterBounds);
-			Point coordinates = bounds.Location;
-			Size size = bounds.Size;
+		//		public void Render(/*RenderArgs args, GuiWindow window*/)
+		//		{
+		//			// Pull out the fields
+		//			Rectangle bounds = args.Translate(window.OuterBounds);
+		//			Point coordinates = bounds.Location;
+		//			Size size = bounds.Size;
+		//
+		//			// Clear out the background and draw the frame line
+		//			args.Surface.Fill(bounds, backgroundColor);
+		//			DrawRect(args.Surface, bounds, frameColor);
+		//
+		//			// Check for a title
+		//			if (window.Title != null)
+		//			{
+		//				// Copy the args
+		//				RenderArgs args1 = args.Clone();
+		//
+		//				// Blank out the title
+		//				Rectangle tr = new Rectangle(new Point(coordinates.X
+		//					+ windowPad,
+		//					coordinates.Y
+		//					+ windowPad),
+		//					new Size(size.Width,
+		//					TitleFont.Height));
+		//				Rectangle clip = new Rectangle(tr.Location,
+		//					new Size(tr.Width - windowPad,
+		//					tr.Height));
+		//				args1.Clipping = clip;
+		//				args.Surface.Fill(tr, frameColor);
+		//
+		//				// Draw the title, centered
+		//				Surface ts = titleFont.Render(window.Title, titleColor);
+		//
+		//				if (ts.Width < tr.Width)
+		//				{
+		//					int transX;
+		//					transX = tr.Location.X + (tr.Width - ts.Width) / 2;
+		//					tr.Location = new Point(transX, tr.Location.Y);
+		//					//tr.Coordinates.X += (tr.Width - ts.Width) / 2;
+		//				}
+		//
+		//				args.Surface.Blit(ts, tr);
+		//				args1.ClearClipping();
+		//			}
+		//		}
 
-			// Clear out the background and draw the frame line
-			args.Surface.Fill(bounds, backgroundColor);
-			DrawRect(args.Surface, bounds, frameColor);
-
-			// Check for a title
-			if (window.Title != null)
-			{
-				// Copy the args
-				RenderArgs args1 = args.Clone();
-
-				// Blank out the title
-				Rectangle tr = new Rectangle(new Point(coordinates.X
-					+ windowPad,
-					coordinates.Y
-					+ windowPad),
-					new Size(size.Width,
-					TitleFont.Height));
-				Rectangle clip = new Rectangle(tr.Location,
-					new Size(tr.Width - windowPad,
-					tr.Height));
-				args1.Clipping = clip;
-				args.Surface.Fill(tr, frameColor);
-
-				// Draw the title, centered
-				Surface ts = titleFont.Render(window.Title, titleColor);
-
-				if (ts.Width < tr.Width)
-				{
-					int transX;
-					transX = tr.Location.X + (tr.Width - ts.Width) / 2;
-					tr.Location = new Point(transX, tr.Location.Y);
-					//tr.Coordinates.X += (tr.Width - ts.Width) / 2;
-				}
-
-				args.Surface.Blit(ts, tr);
-				args1.ClearClipping();
-			}
-		}
-
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="window"></param>
+		/// <returns></returns>
 		public Padding GetPadding(GuiWindow window)
 		{
 			// Create a new padding
@@ -289,7 +377,9 @@ namespace MfGames.Sdl.Gui
 
 			// Check for title
 			if (window.Title != null)
+			{
 				pad.Top += TitleFont.Height + windowPad;
+			}
 
 			return pad;
 		}
@@ -306,7 +396,9 @@ namespace MfGames.Sdl.Gui
 
 			// Ignore blanks
 			if (surface.Width == 0 || surface.Height == 0)
+			{
 				return;
+			}
 
 			// Draw the lines
 			int l = bounds.Left;
@@ -322,16 +414,26 @@ namespace MfGames.Sdl.Gui
 					try 
 					{
 						if (t >= 0)
+						{
 							surface.DrawPixel(i, t, color);
+						}
 					} 
-					catch { }
+					catch (GuiException e)
+					{ 
+						throw e;
+					}
 	  
 					try 
 					{
 						if (b <= surface.Height)
+						{
 							surface.DrawPixel(i, b, color);
+						}
 					} 
-					catch { }
+					catch (GuiException e)
+					{ 
+						throw e;
+					}
 				}
 			}
 
@@ -342,16 +444,23 @@ namespace MfGames.Sdl.Gui
 					try 
 					{
 						if (l >= 0)
+						{
 							surface.DrawPixel(l, i, color);
+						}
 					} 
 					catch { }
 	  
 					try 
 					{
 						if (r <= surface.Width)
+						{
 							surface.DrawPixel(r, i, color);
+						}
 					} 
-					catch { }
+					catch (GuiException e)
+					{ 
+						throw e;
+					}
 				}
 			}
 		}
@@ -366,75 +475,153 @@ namespace MfGames.Sdl.Gui
 		private Color traceInnerColor = Color.FromArgb(255, 50, 50);
 		private Color traceColor = Color.CornflowerBlue;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Color TraceColor
 		{
-			get { return traceColor; }
-			set { traceColor = value; }
+			get 
+			{ 
+				return traceColor; 
+			}
+			set 
+			{ 
+				traceColor = value; 
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Color BoundsTraceColor
 		{
-			get { return traceBoundsColor; }
-			set { traceBoundsColor = value; }
+			get 
+			{ 
+				return traceBoundsColor; 
+			}
+			set 
+			{ 
+				traceBoundsColor = value; 
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Color OuterBoundsTraceColor
 		{
-			get { return traceOuterColor; }
-			set { traceOuterColor = value; }
+			get 
+			{ 
+				return traceOuterColor; 
+			}
+			set 
+			{ 
+				traceOuterColor = value; 
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Color InnerBoundsTraceColor
 		{
-			get { return traceInnerColor; }
-			set { traceInnerColor = value; }
+			get 
+			{ 
+				return traceInnerColor; 
+			}
+			set 
+			{ 
+				traceInnerColor = value; 
+			}
 		}
 		#endregion
 
 		/*************************************************************/
 
 		#region Information
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="title"></param>
+		/// <returns></returns>
 		public int GetTitleHeight(string title)
 		{
 			if (title == null || titleFont == null)
+			{
 				return 0;
+			}
 			else
+			{
 				return titleFont.Render(title, titleColor).Height;
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="title"></param>
+		/// <returns></returns>
 		public int GetTitleWidth(string title)
 		{
 			if (title == null || titleFont == null)
+			{
 				return 0;
+			}
 			else
+			{
 				return titleFont.Render(title, titleColor).Width
 					+ 2 * titleHorzPad;
+			}
 		}
 		#endregion
 
 		#region Properties
-		private SpriteContainer manager = null;
+		private SpriteCollection manager = null;
 		private Size size = Size.Empty;
 
 		private Color titleColor = Color.FromArgb(250, 250, 250);
 		private int titleHorzPad = 3;
 		private int dragZOrder = 10000;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public int DragZOrder
 		{
-			get { return dragZOrder; }
-			set { dragZOrder = value; }
+			get 
+			{ 
+				return dragZOrder; 
+			}
+			set 
+			{ 
+				dragZOrder = value; 
+			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Size Size
 		{
-			get { return size; }
-			set { size = value; }
+			get 
+			{ 
+				return size; 
+			}
+			set 
+			{ 
+				size = value; 
+			}
 		}
 
-		public SpriteContainer SpriteContainer
+		/// <summary>
+		/// 
+		/// </summary>
+		public SpriteCollection SpriteCollection
 		{
-			get { return manager; }
+			get 
+			{ 
+				return manager; 
+			}
 			set
 			{
 				if (value == null)
@@ -445,7 +632,6 @@ namespace MfGames.Sdl.Gui
 				manager = value;
 			}
 		}
-
 		#endregion
 	}
 }

@@ -22,28 +22,28 @@
 	    </Options>
 	</Configuration>
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
-	<Configuration name="Debug">
-	    <Options>
-		<CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		<OptimizeCode>false</OptimizeCode>
-		<AllowUnsafe>false</AllowUnsafe>
-		<OutputPath>.\bin\Debug</OutputPath>
-		<DebugInformation>true</DebugInformation>
-		<XmlDocFile>SdlDotNet.xml</XmlDocFile>
-		<WarningLevel>4</WarningLevel>
-	    </Options>
-	</Configuration>
-	<Configuration name="Release">
-	    <Options>
-		<CompilerDefines>TRACE</CompilerDefines>
-		<OptimizeCode>true</OptimizeCode>
-		<AllowUnsafe>false</AllowUnsafe>
-		<OutputPath>.\bin\Release</OutputPath>
-		<XmlDocFile>SdlDotNet.xml</XmlDocFile>
-		<DebugInformation>false</DebugInformation>
-		<WarningLevel>1</WarningLevel>
-	    </Options>
-	</Configuration>
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>SdlDotNet.xml</XmlDocFile>
+		    <WarningLevel>4</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Release</OutputPath>
+		    <XmlDocFile>SdlDotNet.xml</XmlDocFile>
+		    <DebugInformation>false</DebugInformation>
+		    <WarningLevel>1</WarningLevel>
+		</Options>
+	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\lib"/>
@@ -59,6 +59,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>Rectangles.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -69,6 +70,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>Rectangles.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -90,6 +92,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>PrimitivesExample.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -100,6 +103,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>PrimitivesExample.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -113,37 +117,6 @@
 		<File>PrimitivesExample.cs</File>
 	    </Files>
 	</Project>
-	<Project name="PixelsExample" path="examples\\PixelsExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.PixelsExample" assemblyName="PixelsExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Files>
-		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>PixelsExample.cs</File>
-	    </Files>
-	</Project>
 	<Project name="ImageExample" path="examples\\ImageExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.ImageExample" assemblyName="ImageExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
@@ -152,6 +125,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>ImageExample.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -162,6 +136,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>ImageExample.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -182,6 +157,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>Gears.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -192,6 +168,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>Gears.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -214,6 +191,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>FontExample.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -224,6 +202,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>FontExample.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -244,6 +223,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>JoystickExample.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -254,6 +234,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>JoystickExample.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -275,6 +256,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>CDPlayer.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -285,6 +267,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>CDPlayer.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -307,6 +290,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>MoviePlayer.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -317,6 +301,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>MoviePlayer.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -329,8 +314,8 @@
 		<File>AssemblyInfo.cs</File>
 		<File>MoviePlayer.cs</File>
 	    </Files>
-	    </Project>
-	   <Project name="SimpleGame" path="examples\\SimpleGame" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.GameMain" assemblyName="SimpleGame" rootNamespace="SdlDotNet.Examples" icon="App.ico">
+	</Project>
+	<Project name="SimpleGame" path="examples\\SimpleGame" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.GameMain" assemblyName="SimpleGame" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -338,6 +323,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>SimpleGame.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -348,6 +334,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>SimpleGame.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -360,7 +347,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-<Project name="Bounce" path="examples\\Bounce" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Bounce" assemblyName="Bounce" rootNamespace="SdlDotNet.Examples" icon="App.ico">
+	<Project name="Bounce" path="examples\\Bounce" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Bounce" assemblyName="Bounce" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -368,6 +355,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>Bounce.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -378,6 +366,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>Bounce.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -390,7 +379,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-<Project name="BombRun" path="examples\\BombRun" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BombRun" assemblyName="BombRun" rootNamespace="SdlDotNet.Examples" icon="App.ico">
+	<Project name="BombRun" path="examples\\BombRun" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BombRun" assemblyName="BombRun" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -398,6 +387,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>BombRun.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -408,6 +398,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>BombRun.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -428,6 +419,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>SnowDemo.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -438,6 +430,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>SnowDemo.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -458,6 +451,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>WeaponFire.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -468,6 +462,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>WeaponFire.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -480,7 +475,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MfGames.Sdl.Gui" path="examples\\MfGames.Sdl.Gui" language="C#" type="Library" assemblyName="MfGames.Sdl.Gui" rootNamespace="SdlDotNet.Examples">
+	<Project name="Triad" path="examples\\Triad" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.MainObject" assemblyName="Triad" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -488,6 +483,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>Triad.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -498,6 +494,40 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>Triad.xml</XmlDocFile>
+		    <WarningLevel>1</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
+	    <Reference name="nunit.framework" localCopy="true" path="..\\..\\lib"/>
+	    <Files>
+		<File buildAction="Content">App.ico</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
+	<Project name="MFGames.Sdl.Gui" path="examples\\MFGames.Sdl.Gui" language="C#" type="Library" assemblyName="MFGames.Sdl.Gui" rootNamespace="SdlDotNet.Examples">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>MFGames.Sdl.Gui.xml</XmlDocFile>
+		    <WarningLevel>4</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>MFGames.Sdl.Gui.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -509,7 +539,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MfGames.Sdl.Demos" path="examples\\MfGames.Sdl.Demos" language="C#" type="WinExe" startupObject="MfGames.Sdl.Demos.SdlDemo" assemblyName="MfGames.Sdl.Demos" rootNamespace="SdlDotNet.Examples" icon="App.ico">
+	<Project name="MFGames.Sdl.Demos" path="examples\\MFGames.Sdl.Demos" language="C#" type="WinExe" startupObject="MFGames.Sdl.Demos.SdlDemo" assemblyName="MFGames.Sdl.Demos" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -517,6 +547,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>MFGames.Sdl.Demos.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -527,6 +558,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>MFGames.Sdl.Demos.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -534,7 +566,7 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MfGames.Sdl.Gui" localCopy="true"/>
+	    <Reference name="MFGames.Sdl.Gui" localCopy="true"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -548,6 +580,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>Tests.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -558,6 +591,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>Tests.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -565,7 +599,7 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MfGames.Sdl.Gui" localCopy="true"/>
+	    <Reference name="MFGames.Sdl.Gui" localCopy="true"/>
 	    <Reference name="nunit.framework" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>

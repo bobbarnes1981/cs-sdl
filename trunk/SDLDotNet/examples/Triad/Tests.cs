@@ -23,14 +23,23 @@ using NUnit.Framework;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	[TestFixture]
 	public class Tests
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public Tests()
 		{
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		[Test]
 		public void GameObjectTests()
 		{
@@ -85,6 +94,9 @@ namespace SdlDotNet.Examples
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void TestGameObjectCollection()
 		{
 			GameObjectCollection objectList = new GameObjectCollection();
@@ -134,6 +146,9 @@ namespace SdlDotNet.Examples
 			catch(GameException){}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void TestGameArea()
 		{
 			MyGameArea area = new MyGameArea();

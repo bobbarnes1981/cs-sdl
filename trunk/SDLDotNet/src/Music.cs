@@ -39,10 +39,6 @@ namespace SdlDotNet
 
 		static readonly Music instance = new Music();
 
-//		static Music()
-//		{
-//		}
-
 		Music()
 		{
 			Mixer.Initialize();
@@ -95,6 +91,7 @@ namespace SdlDotNet
 					}
 					disposed = true;
 				}
+
 				finally
 				{
 					Dispose(disposing);

@@ -44,7 +44,6 @@ namespace SdlDotNet
 		/// </summary>
 		internal SdlEventArgs(Sdl.SDL_Event ev)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
 			this.eventStruct = ev;
 		}
 

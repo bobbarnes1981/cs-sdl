@@ -18,11 +18,16 @@
  */
 
 
+using SdlDotNet;
 using SdlDotNet.Sprites;
 using System.Drawing;
+using System.Threading;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class DragMode : DemoMode
 	{
 		/// <summary>
@@ -35,20 +40,29 @@ namespace MfGames.Sdl.Demos
 			int cols = 5;
 			int sx = (800 - cols * 64) / 2;
 			int sy = (600 - rows * 64) / 2;
-			IDrawable m1 = LoadMarble("marble1");
-			IDrawable m2 = LoadMarble("marble2");
+			SurfaceCollection m1 = LoadMarble("marble1");
+			SurfaceCollection m2 = LoadMarble("marble2");
 
 			for (int i = 0; i < cols; i++)
 			{
+				Thread.Sleep(10);
 				for (int j = 0; j < rows; j++)
 				{
-					sm.Add(new DragSprite(m1, m2,
+					Thread.Sleep(10);
+					Sprites.Add(new DragSprite(m1, m2,
 						new Point(sx + i * 64, sy + j * 64),
-						new Rectangle(new Point(0, 0), SdlDemo.SpriteContainer.Size)));
+						new Rectangle(new Point(0, 0), SdlDemo.Size)));
 				}
 			}
+			Sprites.EnableMouseButtonEvent();
+			Sprites.EnableMouseMotionEvent();
+			Sprites.EnableTickEvent();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString() { return "Drag"; }
 	}
 }

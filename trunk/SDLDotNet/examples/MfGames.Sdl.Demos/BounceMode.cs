@@ -21,9 +21,13 @@ using SdlDotNet.Sprites;
 using SdlDotNet;
 using System.Drawing;
 using System;
+using System.Threading;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class BounceMode : DemoMode
 	{
 		Random rand = new Random();
@@ -33,22 +37,26 @@ namespace MfGames.Sdl.Demos
 		public BounceMode()
 		{
 			// Create the fragment marbles
-			Rectangle rect = new Rectangle(new Point(0, 0), SdlDemo.SpriteContainer.Size);
+			Rectangle rect = new Rectangle(new Point(0, 0), SdlDemo.Size);
 			for (int i = 0; i < 50; i++)
 			{
-				IDrawable d = LoadRandomMarble();
+				Thread.Sleep(10);
+				SurfaceCollection d = LoadRandomMarble();
 				BounceSprite bounceSprite = 
 					new BounceSprite(d,
-					rect, 
-					new Vector(rand.Next(rect.Left, rect.Right - 
-					(int) d.Size.Width),
-					rand.Next(rect.Top, rect.Bottom - 
-					(int) d.Size.Height),
+					new Rectangle(new Point(0,0), SdlDemo.Size), 
+					new Vector(rand.Next(rect.Left, rect.Right),
+					rand.Next(rect.Top, rect.Bottom),
 					0));
-				sm.Add(bounceSprite);
+				Sprites.Add(bounceSprite);
 			}
+			Sprites.EnableTickEvent();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString() { return "Bounce"; }
 	}
 }

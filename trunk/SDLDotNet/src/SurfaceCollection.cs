@@ -20,34 +20,103 @@
 using System;
 using System.Drawing;
 using System.Collections;
+using System.IO;
+
 using SdlDotNet;
 using Tao.Sdl;
 
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Encapsulates the collection of SdlImage objects in an SdlImageList.
+	/// Encapsulates the collection of Surface objects in a SurfaceList.
 	/// </summary>
 	public class SurfaceCollection : CollectionBase, ICollection
 	{
-		private ArrayList data;
+		/// <summary>
+		/// 
+		/// </summary>
+		public SurfaceCollection() : base()
+		{
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public SurfaceCollection()
+		public SurfaceCollection(string filename)
 		{
-			data = new ArrayList();
+			this.List.Add(new Surface(filename));
 		}
+
+		void ICollection.CopyTo(Array array, int index)
+		{
+			this.List.CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="baseName"></param>
+		/// <param name="extension"></param>
+		public SurfaceCollection(string baseName, string extension)
+		{
+			// Save the fields
+			this.filename = baseName + "-*" + extension;
+      
+			// Load the images into memory
+			int i = 0;
+
+			while (true)
+			{
+				string fn = null;
+
+				if (i < 10)
+				{
+					fn = baseName + "-0" + i + extension;
+				}
+				else
+				{
+					fn = baseName + "-" + i + extension;
+				}
+
+				if (!File.Exists(fn))
+				{
+					break;
+				}
+
+				// Load it
+				this.List.Add(new Surface(fn));
+				i++;
+			}
+		}
+
+		private string filename = null;
 
 		/// <summary>
 		/// Indexer for the Items in the Collection
 		/// </summary>
-		public Surface this[int index] 
+		public virtual Surface this[int index] 
 		{
 			get 
 			{ 
-				return (Surface)List[index];	
+				if (this.Count == 0)
+				{
+					return ((Surface)List[index]);
+				}
+				else
+				{
+					return ((Surface)List[index % this.Count]);	
+				}
+			}
+			set
+			{
+				if (this.Count == 0)
+				{
+					List[index] = value;
+				}
+				else
+				{
+					List[index % this.Count] = value;
+				}
 			}
 		}
 
@@ -62,16 +131,26 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(Surface surface)
 		{
-			return List.Add(surface);
+			return (List.Add(surface));
 		} 
 
-		internal ArrayList Data
+		/// <summary>
+		/// Adds the specified SdlImage to the end of the SdlImageList.
+		/// </summary>
+		/// <param name="surfaceCollection">
+		/// The SdlImage to be added to the end of the SdlImageList.
+		/// </param>
+		/// <returns>
+		/// The index at which the SdlImage has been added.
+		/// </returns>
+		public int Add(SurfaceCollection surfaceCollection)
 		{
-			get
+			for (int i = 0; i < surfaceCollection.Count; i++)
 			{
-				return data;
+				this.List.Add(surfaceCollection[i]);
 			}
-		}
+			return this.Count;
+		} 
 
 		/// <summary>
 		/// Load a SdlImage with the specified filename and add 
@@ -84,7 +163,7 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(string filename)
 		{
-			return List.Add(new Surface(filename));
+			return (this.Add(new Surface(filename)));
 		} 
 
 
@@ -101,7 +180,7 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(byte[] array)
 		{
-			return List.Add(new Surface(array));
+			return (List.Add(new Surface(array)));
 		} 
 
 		/// <summary>
@@ -115,7 +194,7 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(Bitmap bitmap)
 		{
-			return List.Add(new Surface(bitmap));
+			return (List.Add(new Surface(bitmap)));
 		} 			
 
 		/// <summary>
@@ -125,7 +204,7 @@ namespace SdlDotNet
 		/// <param name="surface"></param>
 		public void Insert(int index, Surface surface)
 		{
-			List.Insert(index,surface);
+			List.Insert(index, surface);
 		} 
 
 		/// <summary>
@@ -144,7 +223,7 @@ namespace SdlDotNet
 		/// <returns>The index of specified surface in the list</returns>
 		public int IndexOf(Surface surface)
 		{
-			return List.IndexOf(surface);
+			return (List.IndexOf(surface));
 		} 
 
 		/// <summary>
@@ -156,13 +235,18 @@ namespace SdlDotNet
 		/// </returns>
 		public bool Contains(Surface surface)
 		{
-			return List.Contains(surface);
-		} 
+			return (List.Contains(surface));
+		}
 
-		// Provide the explicit interface member for ICollection.
-		void ICollection.CopyTo(Array array, int index)
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Size Size
 		{
-			data.CopyTo(array, index);
+			get 
+			{ 
+				return new Size(this[0].Width, this[0].Height); 
+			}
 		}
 
 		/// <summary>
@@ -170,11 +254,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="array"></param>
 		/// <param name="index"></param>
-		// Provide the strongly typed member for ICollection.
-		public void CopyTo(SdlException[] array, int index)
+		public virtual void CopyTo(Surface[] array, int index)
 		{
 			((ICollection)this).CopyTo(array, index);
 		}
-
 	}	
 }

@@ -112,6 +112,9 @@ namespace SdlDotNet.Examples
 		{
 			eventManager.Publish(new QuitEventArgs());
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run()
 		{
 			try 

@@ -18,14 +18,52 @@
  */
 
 using System;
+using System.Runtime.Serialization;
 
-namespace MfGames.Sdl.Gui
+using SdlDotNet;
+
+namespace MFGames.Sdl.Gui
 {
-	public class GuiException : Exception
+	/// <summary>
+	/// 
+	/// </summary>
+	[Serializable()]
+	public class GuiException : SdlException
 	{
-		public GuiException(string msg)
-			: base(msg)
+		/// <summary>
+		/// 
+		/// </summary>
+		public GuiException()
 		{
+			// Add any type-specific logic, and supply the default message.
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
+		public GuiException(string message): base(message) 
+		{
+			// Add any type-specific logic.
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="innerException"></param>
+		public GuiException(string message, Exception innerException): base (message, innerException)
+		{
+			// Add any type-specific logic for inner exceptions.
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="context"></param>
+		protected GuiException(SerializationInfo info, StreamingContext context) : base(info, context)
+		{
+			// Implement type-specific serialization constructor logic.
+		}
+
 	}
 }

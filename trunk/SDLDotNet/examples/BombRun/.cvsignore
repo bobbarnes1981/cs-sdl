@@ -3,3 +3,5 @@ obj
 *.user
 *.prjx
 *.csproj
+BombRun.fxcop
+BombRun.xml

@@ -20,12 +20,15 @@
 using SdlDotNet;
 
 using SdlDotNet.Sprites;
-using MfGames.Sdl.Gui;
+using MFGames.Sdl.Gui;
 using System.Drawing;
 using System;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class GuiMode : DemoMode
 	{
 		private GuiTicker ticker = null;
@@ -38,121 +41,139 @@ namespace MfGames.Sdl.Demos
 		{
 			// Create the manager and the marble base
 			GuiManager manager = SdlDemo.GuiManager;
-			manager.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
+			//manager.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
 
 			// Create a new dragable window
 			GuiWindow gw = new GuiWindow(manager, new Rectangle(200, 65, 100, 100));
-			gw.IsDragable = true;
+			//gw.IsDragable = true;
 			gw.Title = "Draggable Window";
 			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
 				new Point(18, 18)));
-			sm.Add(gw);
+			Sprites.Add(gw);
 
 			// Create a dragable window without a title
 			gw = new GuiWindow(manager, new Rectangle(25, 120, 32, 32));
-			gw.IsDragable = true;
+			//gw.IsDragable = true;
 			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
 				new Point(0, 0)));
-			sm.Add(gw);
+			Sprites.Add(gw);
 
 			// Create a dragable window with a long title
 			gw = new GuiWindow(manager, new Rectangle(100, 415, 256, 64));
 			gw.Title = "Non-Draggable Window with a Long Title";
-			gw.IsDragable = false;
+			//gw.IsDragable = false;
 			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
 				new Point(0, 0)));
-			sm.Add(gw);
+			Sprites.Add(gw);
 
 			// Create the menus
-			CreateMenus(manager, sm);
+			//CreateMenus(manager, Sprites);
 
 			// Create the ticker
 			ticker = new GuiTicker(manager, 0, 800, 550);
-			sm.Add(ticker);
-			this.EnableEvents();
+			Sprites.Add(ticker);
+			//this.EnableEvents();
 		}
 
-		public void CreateMenus(GuiManager gui, SpriteContainer sm)
-		{
-			// Create the menubar
-			Size dd = SdlDemo.SpriteContainer.Size;
-			GuiMenuBar gmb = new GuiMenuBar(gui, 0, dd.Width, 30);
-			sm.Add(gmb);
-
-			// First menu
-			GuiMenuTitle gm = new GuiMenuTitle(gui, "Test Menu");
-			gmb.AddLeft(gm);
-
-			// Create a menu items
-			gm.Add(new GuiMenuItem(gui, "Test #1"));
-			gm.Add(new GuiMenuItem(gui, "Test #2"));
-
-			GuiMenuItem gmi3 = new GuiMenuItem(gui);
-			gmi3.AddLeft(new AnimatedSprite(LoadRandomMarble(), new Point(0, 0)));
-			gmi3.AddLeft(new TextSprite("Create New Window", gui.BaseFont));
-			gm.Add(gmi3);
-			gmi3.ItemSelectedEvent += new MenuItemHandler(OnCreateNewWindow);
-
-			// Create the first menu
-			gm.Add(new GuiMenuItem(gui, "Test #3"));
-			gm.Add(new GuiMenuItem(gui, "Test #4"));
-
-			// Create the second
-			GuiMenuTitle gm2 = new GuiMenuTitle(gui, "Test #2");
-			GuiMenuItem gmi2 = new GuiMenuItem(gui, "Test 2.1");
-			gmb.AddLeft(gm2);
-			gm2.Popup.Add(gmi2);
-			gm2.Popup.Add(new GuiMenuItem(gui, "Test 2.2"));
-			//gm2.IsTraced = true;
-			//gm2.Popup.IsTraced = true;
-			//gmi2.IsTraced = true;
-
-			// Create a third menu
-			GuiMenuTitle gm3 = new GuiMenuTitle(gui, "Right Menu");
-			gm3.Popup.Add(new GuiMenuItem(gui, "Test #6"));
-			gm3.Popup.Add(new GuiMenuItem(gui, "Really Long Title for a Menu Item"));
-			gmb.AddRight(new TextSprite("NonMenu", gui.BaseFont));
-			gmb.AddRight(gm3);
-		}
+		//		/// <summary>
+		//		/// 
+		//		/// </summary>
+		//		/// <param name="gui"></param>
+		//		/// <param name="sm"></param>
+		//		public void CreateMenus(GuiManager gui, SpriteCollection sm)
+		//		{
+		//			// Create the menubar
+		//			Size dd = SdlDemo.Sprites.Size;
+		//			GuiMenuBar gmb = new GuiMenuBar(gui, 0, dd.Width, 30);
+		//			sm.Add(gmb);
+		//
+		//			// First menu
+		//			GuiMenuTitle gm = new GuiMenuTitle(gui, "Test Menu");
+		//			gmb.AddLeft(gm);
+		//
+		//			// Create a menu items
+		//			gm.Add(new GuiMenuItem(gui, "Test #1"));
+		//			gm.Add(new GuiMenuItem(gui, "Test #2"));
+		//
+		//			GuiMenuItem gmi3 = new GuiMenuItem(gui);
+		//			gmi3.AddLeft(new AnimatedSprite(LoadRandomMarble(), new Point(0, 0)));
+		//			gmi3.AddLeft(new TextSprite("Create New Window", gui.BaseFont));
+		//			gm.Add(gmi3);
+		//			gmi3.ItemSelectedEvent += new MenuItemHandler(OnCreateNewWindow);
+		//
+		//			// Create the first menu
+		//			gm.Add(new GuiMenuItem(gui, "Test #3"));
+		//			gm.Add(new GuiMenuItem(gui, "Test #4"));
+		//
+		//			// Create the second
+		//			GuiMenuTitle gm2 = new GuiMenuTitle(gui, "Test #2");
+		//			GuiMenuItem gmi2 = new GuiMenuItem(gui, "Test 2.1");
+		//			gmb.AddLeft(gm2);
+		//			//gm2.Popup.Add(gmi2);
+		//			//gm2.Popup.Add(new GuiMenuItem(gui, "Test 2.2"));
+		//			//gm2.IsTraced = true;
+		//			//gm2.Popup.IsTraced = true;
+		//			//gmi2.IsTraced = true;
+		//
+		//			// Create a third menu
+		//			GuiMenuTitle gm3 = new GuiMenuTitle(gui, "Right Menu");
+		//			//gm3.Popup.Add(new GuiMenuItem(gui, "Test #6"));
+		//			//gm3.Popup.Add(new GuiMenuItem(gui, "Really Long Title for a Menu Item"));
+		//			gmb.AddRight(new TextSprite("NonMenu", gui.BaseFont));
+		//			gmb.AddRight(gm3);
+		//		}
 
 		/// <summary>
 		/// Adds the internal sprite manager to the outer one.
 		/// </summary>
-		public override void Start(SpriteContainer manager)
+		public override void Start(SpriteCollection manager)
 		{
-			manager.Add(sm);
+			manager.Add(Sprites);
 			base.Start(manager);
 		}
 
 		/// <summary>
 		/// Removes the internal manager from the controlling manager.
 		/// </summary>
-		public override void Stop(SpriteContainer manager)
+		public override void Stop(SpriteCollection manager)
 		{
-			manager.Remove(sm);
+			manager.Remove(Sprites);
 			base.Stop(manager);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString() { return "GUI"; }
 
 		#region Events
 		private double threshold = 100.0;
 		private double rate = 0.009;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="index"></param>
 		public void OnCreateNewWindow(int index)
 		{
-			IDrawable m1 = LoadRandomMarble();
+			SurfaceCollection m1 = LoadRandomMarble();
 			GuiManager manager = SdlDemo.GuiManager;
 			GuiWindow gw = new GuiWindow(manager,
 				new Rectangle(rand.Next() % 600,
 				rand.Next() % 400 + 50,
 				70, 70));
-			gw.IsDragable = true;
+			//gw.IsDragable = true;
 			gw.Title = "Created Window";
 			gw.Contents.Add(new AnimatedSprite(m1, new Point(3, 3)));
-			sm.Add(gw);
+			Sprites.Add(gw);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
 		public override void OnTick(object sender, TickEventArgs args)
 		{
 			threshold += args.RatePerSecond(rate);

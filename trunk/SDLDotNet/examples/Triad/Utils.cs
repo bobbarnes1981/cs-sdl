@@ -26,17 +26,36 @@ using SdlDotNet;
 namespace SdlDotNet.Examples
 {
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Utils
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public Utils()
 		{}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
+		/// <param name="rectangle"></param>
+		/// <param name="color"></param>
 		public static void DrawRect(Surface surface, Rectangle rectangle, Color color)
 		{
 			Utils.DrawRect(surface,rectangle.Location,rectangle.Size,color);
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
+		/// <param name="location"></param>
+		/// <param name="size"></param>
+		/// <param name="color"></param>
 		public static void DrawRect(Surface surface, Point location, Size size, Color color)
 		{
 			int x;

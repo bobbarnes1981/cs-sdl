@@ -53,6 +53,9 @@ namespace SdlDotNet.Examples
 			_Position.Y = (int)y;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Snowflake()
 		{
 			_Image = Graphics.LoadImage("../../Data/snowflake.bmp",
@@ -66,6 +69,10 @@ namespace SdlDotNet.Examples
 			updaterectangle();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Seconds"></param>
 		public void Update(float Seconds)
 		{
 			float change = Seconds * speed;
@@ -79,6 +86,9 @@ namespace SdlDotNet.Examples
 			updaterectangle();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle Position
 		{
 			get
@@ -86,6 +96,9 @@ namespace SdlDotNet.Examples
 				return _Position;
 			}
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public Surface Image
 		{
 			get

@@ -389,8 +389,42 @@ namespace SdlDotNet.Examples
 							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 							Thread.Sleep(SLEEPTIME);
 						}
-
 						Thread.Sleep(SLEEPTIME);
+						times = 0;
+						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+
+						while (Events.Poll()) 
+						{
+							// handle events till the queue is empty
+						} 
+
+						int xpixel;
+						int ypixel;
+						int rpixel;
+						int gpixel;
+						int bpixel;
+						int colorValue;
+
+						while (times < 100)
+						{
+							xpixel = rand.Next(10,width);
+							ypixel = rand.Next(10,height);
+							rpixel = rand.Next(255);
+							gpixel = rand.Next(255);
+							bpixel = rand.Next(255);
+
+							colorValue = surf.GetColorValue(Color.FromArgb(rpixel, gpixel, bpixel));
+							//colorValue = screen.MapColor(Color.FromArgb(254, 0, 0));
+							//screen.DrawPixel(x, y, Color.Red);
+							Console.WriteLine("colorValue: " + colorValue.ToString());
+							surf.DrawPixel(xpixel, ypixel, Color.FromArgb(rpixel, gpixel, bpixel));
+							//screen.DrawPixel(x, y, Color.Red);
+							Console.WriteLine("GetPixel: " + screen.GetPixel(xpixel, ypixel).ToString());
+							Console.WriteLine("GetPixel: " + screen.GetColorValue(screen.GetPixel(xpixel, ypixel)).ToString());
+							times++;
+							screen.Flip();
+							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
+						}
 					} 
 					catch (SurfaceLostException) 
 					{

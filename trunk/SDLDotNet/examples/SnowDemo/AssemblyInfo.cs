@@ -18,6 +18,7 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("SnowDemo")]
 [assembly: AssemblyDescription("My first cool demo")]
@@ -30,3 +31,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyVersion("0.2.*")]
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
+[assembly: ComVisible(false)]

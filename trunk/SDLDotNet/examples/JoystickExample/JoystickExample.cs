@@ -41,6 +41,7 @@ namespace SdlDotNet.Examples
 		private int BallCount = 0;
 		private int width = 640;
 		private int height = 480;
+		private Joystick joystick;
 		
 		/// <summary>
 		/// 
@@ -67,10 +68,6 @@ namespace SdlDotNet.Examples
 				new KeyboardEventHandler(this.KeyboardDown); 
 			Events.Quit += new QuitEventHandler(this.Quit);	
 			Events.JoystickAxisMotion += new JoystickAxisEventHandler(this.JoystickAxisChanged);
-			Events.JoystickHorizontalAxisMotion += 
-				new JoystickAxisEventHandler(this.JoystickHorizontalAxisChanged);
-			Events.JoystickVerticalAxisMotion += 
-				new JoystickAxisEventHandler(this.JoystickVerticalAxisChanged);
 //			Events.JoystickBallMotion += new JoystickBallEventHandler(this.JoystickBallChanged);
 //			Events.JoystickHatMotion += new JoystickHatEventHandler(this.JoystickHatChanged);
 //			Events.JoystickButtonUp += new JoystickButtonEventHandler(this.JoystickButtonUpChanged);
@@ -79,7 +76,7 @@ namespace SdlDotNet.Examples
 			try 
 			{
 				//Console.WriteLine(Joysticks.NumberOfJoysticks);
-				Joystick joystick = Joysticks.OpenJoystick(0);
+				joystick = Joysticks.OpenJoystick(0);
 				//Console.WriteLine("NumberOfAxes: " + joystick.NumberOfAxes);
 				//Console.WriteLine("NumberOfBalls: " + joystick.NumberOfBalls);
 				//Console.WriteLine("NumberOfButtons: " + joystick.NumberOfButtons);
@@ -99,7 +96,7 @@ namespace SdlDotNet.Examples
 
 				while (!quitFlag) 
 				{
-					while (Events.Poll()) 
+					while (Events.Poll(10) ) 
 					{
 						// handle events till the queue is empty
 					} 
@@ -108,10 +105,10 @@ namespace SdlDotNet.Examples
 					{
 						// Draw Background
 						surf.Blit(Background,new Rectangle(new Point(0,0),Background.Size));
-						surf.Blit(cursor,new Rectangle(joystickPosition, cursor.Size));
+						surf.Blit(cursor,joystickPosition);
 
 						// Draw frame to screen
-						screen.Blit(surf, new Rectangle(new Point(0, 0), surf.Size));
+						screen.Blit(surf, new Point(0, 0));
 						screen.Flip();
 					} 
 					catch (SurfaceLostException)
@@ -149,29 +146,20 @@ namespace SdlDotNet.Examples
 		private void JoystickAxisChanged(object sender, JoystickAxisEventArgs e)
 		{
 			AxesCount++;
+			if (e.AxisIndex == 0)
+			{
+				//joystickPosition.X = (int)(e.AxisValue * width);
+				joystickPosition.X = (int)(Joysticks.OpenJoystick(e.Device).GetAxisPosition(JoystickAxes.Horizontal) * width);
+			} else if (e.AxisIndex == 1)
+			{
+				//joystickPosition.Y = (int)(e.AxisValue * height);
+				joystickPosition.Y = (int)(Joysticks.OpenJoystick(e.Device).GetAxisPosition(JoystickAxes.Vertical) * height);
+			}
 			Console.WriteLine("Joystick Axis Changed: " + AxesCount.ToString());
-			Console.WriteLine("Axes: " + e.AxisIndex);
-			Console.WriteLine("AxesValue: " + e.AxisValue);
-		}
-
-		private void JoystickHorizontalAxisChanged(object sender, JoystickAxisEventArgs e)
-		{
-			AxesCount++;
-			Console.WriteLine("Joystick Horizontal Axis Changed: " + AxesCount.ToString());
-			Console.WriteLine("Axes: " + e.AxisIndex);
-			Console.WriteLine("AxesValue: " + e.AxisValue);
-			joystickPosition.X = (int)(e.AxisValue * width);
 			Console.WriteLine("X: " + joystickPosition.X.ToString());
-		}
-
-		private void JoystickVerticalAxisChanged(object sender, JoystickAxisEventArgs e)
-		{
-			AxesCount++;
-			Console.WriteLine("Joystick Vertical Axis Changed: " + AxesCount.ToString());
+			Console.WriteLine("Y: " + joystickPosition.Y.ToString());
 			Console.WriteLine("Axes: " + e.AxisIndex);
 			Console.WriteLine("AxesValue: " + e.AxisValue);
-			joystickPosition.Y = (int)(e.AxisValue * height);
-			Console.WriteLine("Y: " + joystickPosition.Y.ToString());
 		}
 
 		private void JoystickBallChanged(object sender, JoystickBallEventArgs e)

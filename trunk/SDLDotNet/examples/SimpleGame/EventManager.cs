@@ -26,30 +26,76 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class EventManager
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public EventManager()
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public delegate void MapBuiltEventHandler(object sender, MapBuiltEventArgs e);
+		/// <summary>
+		/// 
+		/// </summary>
 		public event MapBuiltEventHandler OnMapBuiltEvent;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public delegate void EntityMoveEventHandler(object sender, EntityMoveEventArgs e);
+		/// <summary>
+		/// 
+		/// </summary>
 		public event EntityMoveEventHandler OnEntityMoveEvent;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public delegate void EntityMoveRequestEventHandler(object sender, EntityMoveRequestEventArgs e);
+		/// <summary>
+		/// 
+		/// </summary>
 		public event EntityMoveRequestEventHandler OnEntityMoveRequestEvent;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public delegate void EntityPlaceEventHandler(object sender, EntityPlaceEventArgs e);
+		/// <summary>
+		/// 
+		/// </summary>
 		public event EntityPlaceEventHandler OnEntityPlaceEvent;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public delegate void GameStatusEventHandler(object sender, GameStatusEventArgs e);
+		/// <summary>
+		/// 
+		/// </summary>
 		public event GameStatusEventHandler OnGameStatusEvent;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public delegate void TickEventHandler(object sender, TickEventArgs e);
+		/// <summary>
+		/// 
+		/// </summary>
 		public event TickEventHandler OnTickEvent;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public event QuitEventHandler OnQuitEvent;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="obj"></param>
 		public void Publish(Object obj)
 		{
 			if (obj is GameStatusEventArgs)

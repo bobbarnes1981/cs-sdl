@@ -2,3 +2,5 @@ bin
 obj
 *.user
 *.csproj
+Triad.prjx
+Triad.xml

@@ -26,7 +26,7 @@ namespace SdlDotNet
 	/// activations per second. This is used to calculate the FPS of a
 	/// program.
 	/// </summary>
-	public class Clock : ITickable
+	public class Clock
 	{
 		int span;
 		const int spanDefault = 5;

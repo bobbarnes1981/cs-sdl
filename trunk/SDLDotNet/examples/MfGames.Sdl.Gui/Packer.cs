@@ -22,7 +22,7 @@ using SdlDotNet;
 using System.Collections;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// This class handles one or more sprites packed into a line. The
@@ -32,16 +32,30 @@ namespace MfGames.Sdl.Gui
 	public class Packer : GuiComponent
 	{
 		#region Constructors
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		public Packer(GuiManager manager)
 			: base(manager)
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="p"></param>
 		public Packer(GuiManager manager, Point p)
 			: base(manager, p)
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="p"></param>
 		public Packer(GuiManager manager, Vector p)
 			: base(manager, p)
 		{
@@ -49,6 +63,11 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Sprites
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
+		/// <returns></returns>
 		protected Size GetSize(Sprite s)
 		{
 			// Get the size
@@ -62,6 +81,12 @@ namespace MfGames.Sdl.Gui
 			return d;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="point"></param>
+		/// <param name="index"></param>
+		/// <returns></returns>
 		protected Sprite SelectSprite(Point point, ref int index)
 		{
 			index = 0;
@@ -79,43 +104,69 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Events
-		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void Update(object sender, MouseButtonEventArgs args)
 		{
 			// We assume that the coordinates are set by the packing
 			// processing, so we can use them with the offset and
 			// coordinates.
 			Point p = new Point(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left), args.Y - ((Coordinates.Y + MarginPadding.Top + InnerPadding.Top)));
 
-			foreach (Sprite s in Sprites)
+			if (args.ButtonPressed)
 			{
-				// Check the region. If it contains the point, we call the
-				// basic sprite (and not its parent).
-				if (s.IntersectsWith(p))
+				foreach (Sprite s in Sprites)
 				{
-					s.OnMouseButtonDown(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
+					// Check the region. If it contains the point, we call the
+					// basic sprite (and not its parent).
+					if (s.IntersectsWith(p))
+					{
+						//s.OnMouseButtonDown(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
+					}
+				}
+			}
+			else 
+			{
+				
+				foreach (Sprite s in Sprites)
+				{
+					// Check the region. If it contains the point, we call the
+					// basic sprite (and not its parent).
+					if (s.IntersectsWith(p))
+					{
+						//s.OnMouseButtonUp(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
+					}
 				}
 			}
 		}
 
-		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
-		{
-			// We assume that the coordinates are set by the packing
-			// processing, so we can use them with the offset and
-			// coordinates.
-			Point p = new Point(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left), args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top));
+//		public override void Update(object sender, MouseButtonEventArgs args)
+//		{
+//			// We assume that the coordinates are set by the packing
+//			// processing, so we can use them with the offset and
+//			// coordinates.
+//			Point p = new Point(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left), args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top));
+//
+//			foreach (Sprite s in Sprites)
+//			{
+//				// Check the region. If it contains the point, we call the
+//				// basic sprite (and not its parent).
+//				if (s.IntersectsWith(p))
+//				{
+//					s.OnMouseButtonUp(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
+//				}
+//			}
+//		}
 
-			foreach (Sprite s in Sprites)
-			{
-				// Check the region. If it contains the point, we call the
-				// basic sprite (and not its parent).
-				if (s.IntersectsWith(p))
-				{
-					s.OnMouseButtonUp(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
-				}
-			}
-		}
-
-		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void Update(object sender, MouseMotionEventArgs args)
 		{
 			// Build up the new point   
 			MouseMotionEventArgs args1 = new MouseMotionEventArgs(args.ButtonPressed, (short)(args.X + Coordinates.X + MarginPadding.Left + InnerPadding.Left), (short)(args.Y + Coordinates.Y + MarginPadding.Top + InnerPadding.Top), args.RelativeX, args.RelativeY);
@@ -130,7 +181,7 @@ namespace MfGames.Sdl.Gui
 				// basic sprite (and not its parent).
 				if (s.IntersectsWith(p))
 				{
-					s.OnMouseMotion(this, args1);
+					//s.OnMouseMotion(this, args1);
 				}
 			}
 		}
@@ -140,17 +191,17 @@ namespace MfGames.Sdl.Gui
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void OnTick(object sender, TickEventArgs args)
+		public  void OnTick(object sender, TickEventArgs args)
 		{
-			base.OnTick(this, args);
+			//base.OnTick(this, args);
 
-			foreach (Sprite s in Sprites)
-			{
-				if (s.IsTickable)
-				{
-					s.OnTick(this, args);
-				}
-			}
+		//	foreach (Sprite s in Sprites)
+		//	{
+//				if (s.IsTickable)
+//				{
+//					s.OnTick(this, args);
+//				}
+		//	}
 		}
 		#endregion
 
@@ -158,26 +209,43 @@ namespace MfGames.Sdl.Gui
 		private ArrayList head = new ArrayList();
 		private ArrayList tail = new ArrayList();
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
 		protected void AddHead(Sprite s)
 		{
 			head.Add(s);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
 		protected void AddTail(Sprite s)
 		{
 			tail.Add(s);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual ArrayList HeadSprites
 		{
 			get { return head; }
 		}
     
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual ArrayList TailSprites
 		{
 			get { return tail; }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual ArrayList Sprites
 		{
 			get
@@ -188,11 +256,17 @@ namespace MfGames.Sdl.Gui
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual Padding MarginPadding
 		{
 			get { return new Padding(0); }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual Padding InnerPadding
 		{
 			get { return new Padding(0); }

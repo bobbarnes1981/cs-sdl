@@ -17,13 +17,28 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum GuiConstants
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		Left = 0,
+		/// <summary>
+		/// 
+		/// </summary>
 		Top = 1,
+		/// <summary>
+		/// 
+		/// </summary>
 		Right = 2,
+		/// <summary>
+		/// 
+		/// </summary>
 		Bottom = 3
 	}
 }

@@ -24,8 +24,15 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Triad : GameObject,System.IDisposable
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="blockGridObject"></param>
 		public Triad(BlockGrid blockGridObject)
 		{
 			this.topBlock = new Block();
@@ -54,6 +61,9 @@ namespace SdlDotNet.Examples
 		Block middleBlock;
 		Block bottomBlock;
 		BlockGrid blockGrid;
+		/// <summary>
+		/// 
+		/// </summary>
 		public Block TopBlock
 		{
 			get
@@ -62,6 +72,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Block MiddleBlock
 		{
 			get
@@ -70,6 +83,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Block BottomBlock
 		{
 			get
@@ -78,6 +94,10 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
 		protected override void DrawGameObject(Surface surface)
 		{
 			this.topBlock.Parent = this.Parent;
@@ -124,6 +144,9 @@ namespace SdlDotNet.Examples
 		}
 		
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void MoveLeft()
 		{
 			int deltaX = -Block.BlockWidth;
@@ -132,6 +155,9 @@ namespace SdlDotNet.Examples
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void MoveRight()
 		{
 			int deltaX = Block.BlockWidth;
@@ -140,6 +166,10 @@ namespace SdlDotNet.Examples
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public bool CanMoveDown()
 		{
 			return canMoveDown(Block.BlockWidth);
@@ -171,12 +201,18 @@ namespace SdlDotNet.Examples
 			return isInsideBlockGrid && !isInsideBlockGridChildren;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void MoveDown()
 		{
 			if(canMoveDown(Block.BlockWidth))
 				this.Y += Block.BlockWidth;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Permute()
 		{
             Block tempBlock = this.bottomBlock;
@@ -186,11 +222,17 @@ namespace SdlDotNet.Examples
 			
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void Update()
 		{
 			placeBlocks();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Dispose()
 		{	
 			this.blockGrid = null;

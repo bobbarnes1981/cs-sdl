@@ -99,6 +99,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Map Map
 		{
 			get 

@@ -26,17 +26,18 @@ namespace SdlDotNet
 	/// <summary>
 	/// Class for coordinates in three dimensions.
 	/// </summary>
-	public class Vector
+	[Serializable]
+	public struct Vector
 	{
-		/// <summary>
-		/// Creates point at 0, 0, 0
-		/// </summary>
-		public Vector()
-		{
-			this.x = 0;
-			this.y = 0;
-			this.z = 0;
-		}
+//		/// <summary>
+//		/// Creates point at 0, 0, 0
+//		/// </summary>
+//		public Vector()
+//		{
+//			this.x = 0;
+//			this.y = 0;
+//			this.z = 0;
+//		}
 
 		/// <summary>
 		/// Creates point on Z axis
@@ -122,7 +123,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Contains the x coordinate of the vector.
+		/// Contains the y coordinate of the vector.
 		/// </summary>
 		public int Y
 		{
@@ -130,12 +131,100 @@ namespace SdlDotNet
 			set { y = value; }
 		}
 		/// <summary>
-		/// Contains the x coordinate of the vector.
+		/// Contains the z coordinate of the vector.
 		/// </summary>
 		public int Z
 		{
 			get { return z; }
 			set { z = value; }
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsEmpty
+		{
+			get
+			{
+				return (x == 0 && y == 0 && z == 0);
+			}
+		}
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public Point Point
+		{
+			get
+			{
+				return new Point(x, y);
+			}
+			set
+			{
+				x = value.X;
+				y = value.Y;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="z"></param>
+		public void Offset(int x, int y, int z)
+		{
+			this.x += x;
+			this.y += y;
+			this.z += z;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
+		public override bool Equals(object obj)
+		{
+			if (obj.GetType() != typeof(Vector))
+			{
+				return false;
+			}
+                
+			Vector c = (Vector)obj;   
+			return ((this.x == c.x) && (this.y == c.y) && (this.z == c.z));
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="c1"></param>
+		/// <param name="c2"></param>
+		/// <returns></returns>
+		public static bool operator== (Vector c1, Vector c2)
+		{
+			return ((c1.x == c2.x) && (c1.y == c2.y) && (c1.z == c2.z));
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="c1"></param>
+		/// <param name="c2"></param>
+		/// <returns></returns>
+		public static bool operator!= (Vector c1, Vector c2)
+		{
+			return !(c1 == c2);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override int GetHashCode()
+		{
+			return x ^ y ^ z;
+
 		}
 		#endregion
 	}

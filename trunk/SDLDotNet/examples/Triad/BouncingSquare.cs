@@ -23,11 +23,17 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class BouncingSquare : GameObject
 	{
 		static Random rnd;
 
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public BouncingSquare()
 		{
 			if(rnd == null)
@@ -49,6 +55,9 @@ namespace SdlDotNet.Examples
 		int yinc = 5;
 		int dx = 5;
 		int dy = 5;
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void Update()
 		{
 			this.xinc = rnd.Next(5)+1;
@@ -94,6 +103,10 @@ namespace SdlDotNet.Examples
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
 		protected override void DrawGameObject(Surface surface)
 		{			
 			surface.Fill(this.Rectangle,Color.Red);
