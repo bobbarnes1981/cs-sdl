@@ -1,11 +1,11 @@
-TARGET = SDL-TTF.NET.dll
+TARGET = SDLDotNet.TTF.dll
 SRCS = SDLTTF.cs Font.cs SDLColor.cs SDLTTFException.cs
 CSCOMPILER = mcs
 
 all: $(TARGET)
 
 $(TARGET): $(SRCS)
-	$(CSCOMPILER) -target:library -out:$(TARGET) -r System.Drawing.dll -r SDL.NET.dll $(SRCS)
+	$(CSCOMPILER) -target:library -out:$(TARGET) -r:System.Drawing.dll -r:SDL.NET.dll $(SRCS)
 
 clean:
 	rm -f $(TARGET)
