@@ -1,9 +1,16 @@
+2.2.0
+David Hudson 21 Jan 2005
+* Integrated smpeg into SdlDotNet
+* Smpeg is used for the playing of mp3's and mpeg-1 movie files
+* Note that when playing mpeg-1 files, you must close the mixer. Smpeg uses a custom
+mixer. If you do not turn off the normal Mixer (Mixer.Close()) then the mpeg-1 files will play very slowly (x30 times slower).
+
 2.1.0
-David Hudson 10 Jan 2004
+David Hudson 10 Jan 2005
 * Minor cleanups to code.
 
 2.1.0beta2
-David Hudson 07 Jan 2004
+David Hudson 07 Jan 2005
 * Overhauled Joystick subsystem
 * Fixed JoystickButtonUp
 * Separated out Joystick vertical movements from Joystick horizontal movements

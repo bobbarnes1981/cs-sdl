@@ -44,6 +44,12 @@ namespace SdlDotNet
 	/// <summary>
 	/// Represents a movie mpg file.
 	/// </summary>
+	/// <remarks>
+	/// Before instantiating an instance of Movie,
+	/// you must call Mxier.Close() to turn off the default mixer.
+	/// If you do not do this, any movie will play very slowly. 
+	/// Smpeg uses a custom mixer for audio playback. 
+	/// </remarks>
 	public class Movie : BaseSdlResource, IDisposable
 	{
 		private IntPtr handle;
