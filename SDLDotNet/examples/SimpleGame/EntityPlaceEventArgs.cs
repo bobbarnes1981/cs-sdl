@@ -33,6 +33,9 @@ namespace SdlDotNet.Examples
 			this.entity = entity;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Entity Entity
 		{
 			get

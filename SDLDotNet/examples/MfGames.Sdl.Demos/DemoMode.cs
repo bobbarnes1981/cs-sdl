@@ -24,31 +24,42 @@ using System.Collections;
 using System.Drawing;
 using System;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
 	/// <summary>
 	/// An abstract page to encapsulates the common functionality of all
 	/// demo pages.
 	/// </summary>
-	public abstract class DemoMode : ITickable
+	public abstract class DemoMode
 	{
-		//private bool running = true;
 		private static Hashtable marbles = new Hashtable();
 
-		protected SpriteContainer sm = new SpriteContainer();
+		/// <summary>
+		/// 
+		/// </summary>
+		private Surface surf = new Surface();
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private SpriteCollection sprites = new SpriteCollection();
 		Random rand = new Random();
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public DemoMode()
 		{
+			//Sprites.EnableTickEvent();
 		}
 
 		#region Drawables
 		/// <summary>
 		/// Loads a floor title into memory.
 		/// </summary>
-		protected IDrawable LoadFloor(int number)
+		protected SurfaceCollection LoadFloor()
 		{
-			ImageDrawable id = new ImageDrawable("../../Data/floor" + number + ".png");
+			SurfaceCollection id = new SurfaceCollection("../../Data/floor", ".png");
 			return id;
 		}
 
@@ -56,22 +67,28 @@ namespace MfGames.Sdl.Demos
 		/// Loads the marble series into memory and returns the
 		/// collection.
 		/// </summary>
-		protected IDrawable LoadMarble(string name)
+		protected SurfaceCollection LoadMarble(string name)
 		{
 			// We cache it to speed things up
-			ImageCollectionDrawable icd =
-				(ImageCollectionDrawable) marbles["icd:" + name];
+			SurfaceCollection icd =
+				(SurfaceCollection) marbles["icd:" + name];
 
 			if (icd != null)
+			{
 				return icd;
+			}
 
 			// Load the marble and cache it before returning
-			icd = new ImageCollectionDrawable("../../Data/" + name, ".png");
+			icd = new SurfaceCollection("../../Data/" + name, ".png");
 			marbles["icd:" + name] = icd;
 			return icd;
 		}
 
-		protected IDrawable LoadRandomMarble()
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		protected SurfaceCollection LoadRandomMarble()
 		{
 			return LoadMarble("marble" + (rand.Next() % 6 + 1));
 		}
@@ -79,53 +96,97 @@ namespace MfGames.Sdl.Demos
 		/// <summary>
 		/// Loads a marble from a single image and tiles it.
 		/// </summary>
-		protected IDrawable LoadTiledMarble(string name)
+		protected SurfaceCollection LoadTiledMarble(string name)
 		{
 			// Load the marble
-			ImageDrawable id = new ImageDrawable("../../Data/" + name + ".png");
-			TiledDrawable td = new TiledDrawable(id, new Size(64, 64), 6, 6);
+			Sprite id = 
+				new Sprite(new Surface("../../Data/" + name + ".png"));
+			SurfaceCollection surfCollection = new SurfaceCollection();
+			surfCollection.Add(id.Surface);
+			TiledSurfaceCollection td = 
+				new TiledSurfaceCollection(new Surface("../../Data/" + name + ".png"), new Size(64, 64));
 
 			return td;
 		}
 		#endregion
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public virtual void OnTick(object sender, TickEventArgs args)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void EnableTickEvent()
+		{
+			Events.TickEvent += new TickEventHandler(OnTick);
+		}
+
 
 		#region Mode Switching
 		/// <summary>
 		/// Indicates to the demo page that it should start displaying its
 		/// data in the given sprite manager.
 		/// </summary>
-		public virtual void Start(SpriteContainer manager)
+		public virtual void Start(SpriteCollection manager)
 		{
-			manager.Add(sm);
+			manager.Add(Sprites);
 		}
 
 		/// <summary>
 		/// Indicates to the demo page that it should stop displaying its
 		/// data in the given sprite manager.
 		/// </summary>
-		public virtual void Stop(SpriteContainer manager)
+		public virtual void Stop(SpriteCollection manager)
 		{
-			manager.Remove(sm);
+			manager.Remove(Sprites);
 		}
 		#endregion
 
-		#region Events
-		public virtual bool IsTickable 
-		{ 
-			get 
-			{ 
-				return true; 
-			} 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public virtual Surface Surface
+		{
+			get
+			{
+				return surf;
+			}
+			set
+			{
+				surf = value;
+			}
 		}
 
-		public virtual void OnTick(object sender, TickEventArgs args)
-		{
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Surface RenderSurface()
+		{	
+			surf.Fill(Color.Black);
+			foreach (Sprite s in Sprites)
+			{
+				surf.Blit(s.Surface, s.Rectangle);
+			}
+			return surf;
 		}
 
-		public void EnableEvents()
+		/// <summary>
+		/// 
+		/// </summary>
+		public SpriteCollection Sprites
 		{
-			Events.TickEvent += new TickEventHandler(OnTick);
+			get
+			{
+				return sprites;
+			}
 		}
-		#endregion
+
 	}
 }

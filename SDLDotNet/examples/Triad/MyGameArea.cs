@@ -23,9 +23,15 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class MyGameArea : GameArea
 	{
 		BlueSquare bs = null;
+		/// <summary>
+		/// 
+		/// </summary>
 		public MyGameArea() :base()
 		{
 			for(int i=0;  i<200; i++)
@@ -40,17 +46,29 @@ namespace SdlDotNet.Examples
 			
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
 		protected override void DrawGameObject(Surface surface)
 		{
 			this.DrawGameObjects(surface);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
 		public override void HandleSDLKeyUpEvent(KeyboardEventArgs args)
 		{
             
 		}
 
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
 		public override void HandleSDLKeyDownEvent(KeyboardEventArgs args)
 		{
 			//if(!args.Down)return;

@@ -418,8 +418,9 @@ namespace SdlDotNet
 		{
 			if (this.queuedSound != null)
 			{
-				this.Play(this.queuedSound);
+				this.sound = this.queuedSound;
 				this.queuedSound = null;
+				this.Play(this.sound);
 			}
 		}
 

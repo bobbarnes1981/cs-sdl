@@ -26,14 +26,23 @@ using System.Drawing;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public abstract class  GameObject
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public GameObject()
 		{
 
 		}
 
 		private GameObject _Parent;
+		/// <summary>
+		/// 
+		/// </summary>
 		public GameObject Parent
 		{
 			get
@@ -47,6 +56,9 @@ namespace SdlDotNet.Examples
 		}
 	
 		private int  _X;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int  X
 		{
 			get
@@ -59,6 +71,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public int ScreenX
 		{
 			get
@@ -70,6 +85,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 	
+		/// <summary>
+		/// 
+		/// </summary>
 		public int ScreenY
 		{
 			get
@@ -82,6 +100,9 @@ namespace SdlDotNet.Examples
 		}
 	
 		private int  _Y;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int  Y
 		{
 			get
@@ -95,6 +116,9 @@ namespace SdlDotNet.Examples
 		}
 
 		private int  _Width;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int  Width
 		{
 			get
@@ -112,6 +136,9 @@ namespace SdlDotNet.Examples
 	
 
 		private int  _Height;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int  Height
 		{
 			get
@@ -130,6 +157,9 @@ namespace SdlDotNet.Examples
 			
 				
 		private int  _X2=0;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int  X2
 		{
 			get
@@ -139,6 +169,9 @@ namespace SdlDotNet.Examples
 		}
 	
 		private int  _Y2=0;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int  Y2
 		{
 			get
@@ -148,6 +181,9 @@ namespace SdlDotNet.Examples
 		}
 
 		
+		/// <summary>
+		/// 
+		/// </summary>
 		public int  ScreenX2
 		{
 			get
@@ -162,6 +198,9 @@ namespace SdlDotNet.Examples
 		}
 	
 		
+		/// <summary>
+		/// 
+		/// </summary>
 		public int  ScreenY2
 		{
 			get
@@ -178,6 +217,9 @@ namespace SdlDotNet.Examples
 		int _previousWidth = 0;
 		int _previousHeight = 0;
 		Size currentSize;
+		/// <summary>
+		/// 
+		/// </summary>
 		public Size Size
 		{
 			get
@@ -201,6 +243,9 @@ namespace SdlDotNet.Examples
 
 		System.Drawing.Rectangle currentRectangle;
 		Point previousLocation;
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle Rectangle
 		{
 			get
@@ -221,6 +266,9 @@ namespace SdlDotNet.Examples
 
 		Point previousScreenLocation;
 		System.Drawing.Rectangle currentScreenRectangle;
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle ScreenRectangle
 		{
 			get
@@ -239,6 +287,9 @@ namespace SdlDotNet.Examples
 		}	
 
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Point Location
 		{
 			get
@@ -252,6 +303,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Point ScreenLocation
 		{
 			get
@@ -260,6 +314,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Point BottomRightCorner
 		{
 			get
@@ -268,8 +325,19 @@ namespace SdlDotNet.Examples
 			}
 		}
 		
+		/// <summary>
+		/// 
+		/// </summary>
 		public abstract void Update();
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
 		protected abstract void DrawGameObject(Surface surface);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
 		public void Draw(Surface surface)
 		{
 			if(surface == null)
@@ -280,18 +348,33 @@ namespace SdlDotNet.Examples
 			DrawGameObject(surface);
 		}
 		
-		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <returns></returns>
 		public bool Contains(int x, int y)
 		{
 			bool inSideX = (ScreenX <= x)&&(x<=ScreenX2);
 			bool inSideY = (ScreenY <= y)&&(y<=ScreenY2);
 			return inSideX&&inSideY;
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="p"></param>
+		/// <returns></returns>
 		public bool Contains(Point p)
 		{
 			return Contains(p.X,p.Y);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
 		public bool Hits(GameObject obj)
 		{		
 			if(obj == null)

@@ -39,6 +39,9 @@ namespace SdlDotNet.Examples
 			this.sprite.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
 			this.rect = new Rectangle(0,0,70,70);
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle Rect
 		{
 			get
@@ -50,6 +53,9 @@ namespace SdlDotNet.Examples
 				this.rect = value;
 			}
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public int CenterX
 		{
 			get
@@ -62,6 +68,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public int CenterY
 		{
 			get
@@ -74,6 +83,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Surface Surface
 		{
 			get

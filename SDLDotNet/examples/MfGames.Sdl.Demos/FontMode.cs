@@ -20,10 +20,14 @@
 
 using SdlDotNet.Sprites;
 using SdlDotNet;
+using System;
 using System.Drawing;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class FontMode : DemoMode
 	{
 		private BoundedTextSprite moving = null;
@@ -33,92 +37,52 @@ namespace MfGames.Sdl.Demos
 		/// </summary>
 		public FontMode()
 		{
+			Console.WriteLine("Hello from FontMode");
 			// Create our fonts
-			SdlDotNet.Font f1 = new SdlDotNet.Font("../../Data/comicbd.ttf", 24);
-			SdlDotNet.Font f2 = new SdlDotNet.Font("../../Data/comicbd.ttf", 48);
-			SdlDotNet.Font f3 = new SdlDotNet.Font("../../Data/comicbd.ttf", 72);
-			SdlDotNet.Font f4 = new SdlDotNet.Font("../../Data/comicbd.ttf", 15);
+			SdlDotNet.Font f1 = 
+				new SdlDotNet.Font("../../Data/comicbd.ttf", 24);
+			SdlDotNet.Font f2 = 
+				new SdlDotNet.Font("../../Data/comicbd.ttf", 48);
+			SdlDotNet.Font f3 = 
+				new SdlDotNet.Font("../../Data/comicbd.ttf", 72);
+			SdlDotNet.Font f4 = 
+				new SdlDotNet.Font("../../Data/comicbd.ttf", 15);
 
 			// Create our text sprites
 			Color c2 = Color.FromArgb(255, 0, 123);
-			/*
-				  sm.Add(new TextSprite("Testing...", f1, new Vector2(5, 5)));
-				  sm.Add(new TextSprite("...one", f2, c2, new Vector2(5, 35)));
-				  sm.Add(new TextSprite("...two", f3, c2, new Vector2(5, 90)));
+			Sprites.Add(new TextSprite("Testing...", f1, new Point(5, 5)));
+			Sprites.Add(new TextSprite("...one", f2, c2, new Point(5, 35)));
+			Sprites.Add(new TextSprite("...two", f3, c2, new Point(5, 90)));
 
-				  sm.Add(new TextSprite("A quick brown fox", f2, new Vector2(5, 200)));
-				  sm.Add(new TextSprite("jumps over the lazy", f2, new Vector2(5, 280)));
-				  sm.Add(new TextSprite("dog. 1234567890", f2, new Vector2(5, 360)));
+			Sprites.Add(new TextSprite("A quick brown fox", f2, new Point(5, 200)));
+			Sprites.Add(new TextSprite("jumps over the lazy", f2, new Point(5, 280)));
+			Sprites.Add(new TextSprite("dog. 1234567890", f2, new Point(5, 360)));
 
-				  int w = SdlDemo.SpriteContainer.Size.Width - 10;
-				  sm.Add(new BoundedTextSprite("one", f4, new Dimension2(w, 30),
-							   0.0,  0.5, new Vector2(5, 450)));
-				  sm.Add(new BoundedTextSprite("one", f4, new Dimension2(w, 30),
-							   0.25, 0.0, new Vector2(5, 465)));
-				  sm.Add(new BoundedTextSprite("one", f4, new Dimension2(w, 30),
-							   0.5,  1.0, new Vector2(5, 480)));
-				  sm.Add(new BoundedTextSprite("one", f4, new Dimension2(w, 30),
-							   1.0,  0.5, new Vector2(5, 495)));
-
-				  // Add the moving one
-				  moving = new BoundedTextSprite("one", f4, new Dimension2(w, 30),
-								 0.0, 0.5, new Vector2(5, 510));
-					
-			*/
-			sm.Add(new TextSprite("Testing...", f1, new Point(5, 5)));
-			sm.Add(new TextSprite("...one", f2, c2, new Point(5, 35)));
-			sm.Add(new TextSprite("...two", f3, c2, new Point(5, 90)));
-
-			sm.Add(new TextSprite("A quick brown fox", f2, new Point(5, 200)));
-			sm.Add(new TextSprite("jumps over the lazy", f2, new Point(5, 280)));
-			sm.Add(new TextSprite("dog. 1234567890", f2, new Point(5, 360)));
-
-			int w = SdlDemo.SpriteContainer.Size.Width - 10;
-			sm.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+			int w = SdlDemo.Size.Width - 10;
+			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
 				0.0,  0.5, new Point(5, 450)));
-			sm.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
-				0.25, 0.0, new Point(5, 465)));
-			sm.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
-				0.5,  1.0, new Point(5, 480)));
-			sm.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
-				1.0,  0.5, new Point(5, 495)));
+			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+				0.25, 0.0, new Point(50, 465)));
+			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+				0.5,  1.0, new Point(100, 480)));
+			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+				1.0,  0.5, new Point(150, 495)));
 
 			// Add the moving one
-			moving = new BoundedTextSprite("two", f4, new Size(w, 30),
+			moving = new DemoBoundedTextSprite("two", f4, new Size(w, 30),
 				0.0, 0.5, new Point(5, 510));
-			sm.Add(moving);
-			this.EnableEvents();
+			Sprites.Add(moving);
+			Sprites.EnableTickEvent();
 		}
-
-		#region Events
-		private double delta = 0.01;
-
-		public override void OnTick(object sender, TickEventArgs args)
-		{
-			double dx = args.RatePerSecond(delta);
-			moving.HorizontalWeight += dx;
-
-			if (moving.HorizontalWeight > 1.0)
-			{
-				moving.HorizontalWeight = 1.0;
-				delta *= -1;
-			}
-
-			if (moving.HorizontalWeight < 0.0)
-			{
-				moving.HorizontalWeight = 0.0;
-				delta *= -1;
-			}
-      
-			// Change the text
-			moving.TextString = moving.HorizontalWeight.ToString("#0.0000000");
-		}
-		#endregion
 
 		#region Operators
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString() 
 		{ 
-			return "Font"; 
+			return "Font Mode"; 
 		}
 		#endregion
 	}

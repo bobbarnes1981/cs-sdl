@@ -24,14 +24,24 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class ScoreBoard : GameArea
 	{
 		SdlDotNet.Font font = null;
+		/// <summary>
+		/// 
+		/// </summary>
 		public ScoreBoard()
 		{
 			font = new SdlDotNet.Font(@"C:\WINNT\Fonts\arial.ttf",18);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
 		protected override void DrawGameObject(Surface surface)
 		{
 			int currentY = 0;
@@ -50,17 +60,28 @@ namespace SdlDotNet.Examples
 		}
 
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
 		public override void HandleSDLKeyDownEvent(KeyboardEventArgs args)
 		{
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
 		public override void HandleSDLKeyUpEvent(KeyboardEventArgs args)
 		{
 
 		}
 
 		private int _Score;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Score
 		{
 			get
@@ -74,6 +95,9 @@ namespace SdlDotNet.Examples
 		}
 	
 		private int _Level;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Level
 		{
 			get
@@ -87,6 +111,9 @@ namespace SdlDotNet.Examples
 		}
 
 		private int _BlocksDestroyed;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int BlocksDestroyed
 		{
 			get

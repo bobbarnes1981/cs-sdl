@@ -28,7 +28,7 @@ namespace MfGames.Sdl.Gui
 {
   [TestFixture] public class SdlGuiTest
   {
-    private SpriteContainer sm = null;
+    private SpriteCollection sm = null;
     private GuiManager gui = null;
 
     [SetUp] public void Setup()

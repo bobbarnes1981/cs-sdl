@@ -33,6 +33,9 @@ namespace SdlDotNet.Examples
 			this.map = map;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Map Map
 		{
 			get

@@ -22,15 +22,24 @@ using SdlDotNet;
 using System;
 using System.Drawing;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class ClickSprite : AnimatedSprite
 	{
-		private IDrawable d1 = null;
-		private IDrawable d2 = null;
+		private SurfaceCollection d1 = null;
+		private SurfaceCollection d2 = null;
 
-		public ClickSprite(IDrawable d1, IDrawable d2, Point coordinates)
-			: base(d1, coordinates)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="d1"></param>
+		/// <param name="d2"></param>
+		/// <param name="position"></param>
+		public ClickSprite(SurfaceCollection d1, SurfaceCollection d2, Point position)
+			: base(d1, position)
 		{
 			this.d1 = d1;
 			this.d2 = d2;
@@ -49,23 +58,26 @@ namespace MfGames.Sdl.Demos
 		/// <summary>
 		/// 
 		/// </summary>
-		public override bool IsMouseSensitive { get { return true; } }
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
+		public override void Update(object sender, MouseButtonEventArgs args)
 		{
-			// Switch the image
-			if (Drawable == d1)
+			if (this.IntersectsWith(new Point(args.X, args.Y)))
 			{
-				Drawable = d2;
-			}
-			else
-			{
-				Drawable = d1;
+				if (args.ButtonPressed)
+				{
+					// Switch the image
+					if (Surfaces.Contains(d1[1]))
+					{
+						this.Surfaces.Clear();
+						this.Surfaces.Add(d2);
+					}
+					else
+					{
+						this.Surfaces.Clear();
+						this.Surfaces.Add(d1);
+					}
+				}
 			}
 		}
 		#endregion

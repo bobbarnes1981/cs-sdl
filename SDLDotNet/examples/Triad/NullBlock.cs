@@ -22,8 +22,14 @@ using System;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class NullBlock : Block
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public NullBlock()
 		{
 		}

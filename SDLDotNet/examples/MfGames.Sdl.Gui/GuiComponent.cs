@@ -22,134 +22,139 @@ using SdlDotNet;
 using System;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// Base class to manage all graphical GUI elements.
 	/// </summary>
 	public class GuiComponent : Sprite
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		public GuiComponent(GuiManager manager)
 			: base()
 		{
 			this.manager = manager;
-			IsTickable = true;
-		}
-
-		public GuiComponent(GuiManager manager, int z)
-			: base(new Vector(z))
-		{
-			this.manager = manager;
-			IsTickable = true;
-		}
-
-		public GuiComponent(GuiManager manager, Point loc)
-			: base(loc)
-		{
-			this.manager = manager;
-			IsTickable = true;
-		}
-
-		public GuiComponent(GuiManager manager, Rectangle rect)
-			: base(rect.Location)
-		{
-			this.manager = manager;
-			this.size = rect.Size;
-			IsTickable = true;
-		}
-
-		public GuiComponent(GuiManager manager, Vector loc)
-			: base(loc)
-		{
-			this.manager = manager;
-			IsTickable = true;
-		}
-
-		public override string ToString()
-		{
-			return String.Format("(gui {0})", Bounds, base.ToString());
-		}
-
-		#region Drawing
-		public override void Render(RenderArgs args)
-		{
-			if (!IsTraced)
-			{
-				return;
-			}
-
-			// Draw the outer and the inner bounds
-			GuiManager.DrawRect(args.Surface,
-				args.Translate(Bounds),
-				manager.BoundsTraceColor);
-			GuiManager.DrawRect(args.Surface,
-				args.Translate(OuterBounds),
-				manager.OuterBoundsTraceColor);
-		}
-		#endregion
-
-		#region Events
-		private bool isDragable = false;
-		private bool beingDragged = false;
-
-		public virtual bool IsDragable
-		{
-			get { return isDragable; }
-			set { isDragable = value; }
 		}
 
 		/// <summary>
-		/// GUI components default to mouse sensitive.
+		/// 
 		/// </summary>
-		public override bool IsMouseSensitive { get { return true; } }
+		/// <param name="manager"></param>
+		/// <param name="z"></param>
+		public GuiComponent(GuiManager manager, int z)
+			: base()
+		{
+			this.manager = manager;
+			this.Coordinates = new Vector(z);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="loc"></param>
+		public GuiComponent(GuiManager manager, Point loc)
+			: base()
+		{
+			this.manager = manager;
+			this.Coordinates = new Vector(loc);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="rectangle"></param>
+		public GuiComponent(GuiManager manager, Rectangle rectangle)
+			: base()
+		{
+			this.manager = manager;
+			this.Rectangle = rectangle;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="loc"></param>
+		public GuiComponent(GuiManager manager, Vector loc)
+			: base()
+		{
+			this.manager = manager;
+			this.Coordinates = loc;
+		}
+
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <returns></returns>
+//		public override string ToString()
+//		{
+//			return String.Format("(gui {0})", Bounds, base.ToString());
+//		}
+
+		#region Drawing
+//		public virtual void Render(RenderArgs args)
+//		{
+////			if (!IsTraced)
+////			{
+////				return;
+////			}
+//
+//			// Draw the outer and the inner bounds
+//			GuiManager.DrawRect(args.Surface,
+//				args.Translate(Bounds),
+//				manager.BoundsTraceColor);
+//			GuiManager.DrawRect(args.Surface,
+//				args.Translate(OuterBounds),
+//				manager.OuterBoundsTraceColor);
+//		}
+		#endregion
+
+		#region Events
+		private bool isDraggable = false;
+		private bool beingDragged = false;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
+		public override void Update(object sender, MouseButtonEventArgs args)
 		{
 			// If we cannot be dragged, don't worry about it
-			if (!isDragable)
+			if (!isDraggable)
 			{
 				return;
 			}
 
 			// If we are being held down, pick up the marble
 			// Change the Z-order
-			Coordinates.Z += manager.DragZOrder;
-			beingDragged = true;
-			manager.SpriteContainer.EventLock = this;
-			
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="args"></param>
-		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
-		{
-			// If we cannot be dragged, don't worry about it
-			if (!isDragable)
+			if (args.ButtonPressed)
 			{
-				return;
+				this.Z += manager.DragZOrder;
+				beingDragged = true;
+//				manager.SpriteContainer.EventLock = this;
 			}
-			// Drop it
-			Coordinates.Z -= manager.DragZOrder;
-			beingDragged = false;
-			manager.SpriteContainer.EventLock = null;
+			else
+			{
+				this.Z -= manager.DragZOrder;
+				beingDragged = false;
+//				manager.SpriteContainer.EventLock = null;
+			}
 		}
 
 		/// <summary>
 		/// If the sprite is picked up, this moved the sprite to follow
 		/// the mouse.
 		/// </summary>
-		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
+		public override void Update(object sender, MouseMotionEventArgs args)
 		{
 			// If we cannot be dragged, don't worry about it
-			if (!isDragable)
+			if (!isDraggable)
 			{
 				return;
 			}
@@ -157,15 +162,18 @@ namespace MfGames.Sdl.Gui
 			// Move the window as appropriate
 			if (beingDragged)
 			{
-				Coordinates.X += args.RelativeX;
-				Coordinates.Y += args.RelativeY;;
+				this.X += args.RelativeX;
+				this.Y += args.RelativeY;;
 			}
 		}
 		#endregion
 
 		#region Geometry
-		private Size size = new Size();
+//		private Size size = new Size();
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle OuterBounds
 		{
 			get
@@ -174,6 +182,9 @@ namespace MfGames.Sdl.Gui
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual Size OuterSize
 		{
 			get
@@ -183,6 +194,9 @@ namespace MfGames.Sdl.Gui
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual Vector OuterCoordinates
 		{
 			get
@@ -193,29 +207,45 @@ namespace MfGames.Sdl.Gui
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual Padding OuterPadding
 		{
 			get { return new Padding(0); }
 		}
+//
+//		public override Size Size
+//		{
+//			get { return size; }
+//			set { size = value; }
+//		}
 
-		public override Size Size
-		{
-			get { return size; }
-			set { size = value; }
-		}
-
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="point"></param>
+		/// <returns></returns>
 		public override bool IntersectsWith(Point point)
 		{
 			return OuterBounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));
 		}
 
-		public override bool IntersectsWith(Rectangle rect)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rectangle"></param>
+		/// <returns></returns>
+		public override bool IntersectsWith(Rectangle rectangle)
 		{
-			return OuterBounds.IntersectsWith(rect);
+			return OuterBounds.IntersectsWith(rectangle);
 		}
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// 
+		/// </summary>
 		protected GuiManager manager = null;
 
 		/// <summary>
@@ -223,12 +253,16 @@ namespace MfGames.Sdl.Gui
 		/// </summary>
 		public GuiManager GuiManager
 		{
-			get { return manager; }
+			get 
+			{ 
+				return manager;
+			}
 			set
 			{
 				if (value == null)
+				{
 					throw new Exception("Cannot assign a null manager");
-
+				}
 				manager = value;
 			}
 		}
@@ -236,7 +270,7 @@ namespace MfGames.Sdl.Gui
 		/// <summary>
 		/// 
 		/// </summary>
-		public override bool IsMouseMotionLocked
+		public bool IsMouseMotionLocked
 		{
 			get
 			{
@@ -247,7 +281,7 @@ namespace MfGames.Sdl.Gui
 		/// <summary>
 		/// 
 		/// </summary>
-		public override bool IsMouseButtonLocked
+		public  bool IsMouseButtonLocked
 		{
 			get
 			{

@@ -117,6 +117,9 @@ namespace SdlDotNet.Examples
 			Video.Mouse.ShowCursor(false);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void UpdateView()
 		{
 			this.surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
@@ -131,6 +134,10 @@ namespace SdlDotNet.Examples
 			Video.Screen.Flip();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="entity"></param>
 		public void ShowEntity(Entity entity)
 		{
 			this.entitySprite = new EntitySprite(surf);
@@ -140,6 +147,10 @@ namespace SdlDotNet.Examples
 			this.entitySprite.CenterY = sectSprite.CenterY;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="entity"></param>
 		public void MoveEntity(Entity entity)
 		{
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
@@ -153,7 +164,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="eventManager"></param>
 		/// <param name="e"></param>
-		public void Subscribe(object eventManager, MapBuiltEventArgs e)
+		void Subscribe(object eventManager, MapBuiltEventArgs e)
 		{
 			LogFile.WriteLine("GameView received a MapBuilt event");
 			this.map = e.Map;
@@ -165,7 +176,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="eventManager"></param>
 		/// <param name="e"></param>
-		public void Subscribe(object eventManager, EntityPlaceEventArgs e)
+		void Subscribe(object eventManager, EntityPlaceEventArgs e)
 		{
 			LogFile.WriteLine("GameView received a EntityPlace event");
 			ShowEntity(e.Entity);
@@ -176,7 +187,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="eventManager"></param>
 		/// <param name="e"></param>
-		public void Subscribe(object eventManager, EntityMoveEventArgs e)
+		void Subscribe(object eventManager, EntityMoveEventArgs e)
 		{
 			LogFile.WriteLine("GameView received a EntityMove event");
 			MoveEntity(e.Entity);
@@ -187,7 +198,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="eventManager"></param>
 		/// <param name="e"></param>
-		public void Subscribe(object eventManager, TickEventArgs e)
+		void Subscribe(object eventManager, TickEventArgs e)
 		{
 			//LogFile.WriteLine("GameView received a Tick event");
 			UpdateView();

@@ -135,6 +135,9 @@ namespace SdlDotNet
 		private IntPtr handle;
 		private int index;
 		private bool disposed = false;
+		private const float JOYSTICK_ADJUSTMENT = 32768;
+		private const float JOYSTICK_SCALE = 65535;
+		private const short JOYSTICK_THRESHHOLD = 3277;
 
 		/// <summary>
 		/// open joystick at index number
@@ -298,9 +301,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="axis"></param>
 		/// <returns></returns>
-		public short GetAxisPosition(JoystickAxes axis)
+		public float GetAxisPosition(JoystickAxes axis)
 		{
-			return Sdl.SDL_JoystickGetAxis(this.handle, (int) axis);
+			return  ((float)(Sdl.SDL_JoystickGetAxis(this.handle, (int) axis) + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE);
 		}
 
 		/// <summary>

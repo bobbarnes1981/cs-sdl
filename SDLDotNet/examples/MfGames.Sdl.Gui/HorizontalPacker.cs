@@ -23,7 +23,7 @@ using System;
 using System.Collections;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// Class to manager internal sprites, such as window
@@ -33,17 +33,30 @@ namespace MfGames.Sdl.Gui
 	public class HorizontalPacker : Packer
 	{
 		#region Constructors
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		public HorizontalPacker(GuiManager manager)
 			: base(manager)
 		{
 		}
 
-		//public HorizontalPacker(GuiManager manager, Vector2 p)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="p"></param>
 		public HorizontalPacker(GuiManager manager, Point p)
 			: base(manager, p)
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="p"></param>
 		public HorizontalPacker(GuiManager manager, Vector p)
 			: base(manager, p)
 		{
@@ -51,51 +64,57 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Drawing
-		public override void Render(RenderArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Render(/*RenderArgs args*/)
 		{
-			// Handle our arguments
-			RenderArgs args0 = args.Clone();
-			args0.TranslateX += Coordinates.X + MarginPadding.Left + InnerPadding.Left;
-			args0.TranslateY += Coordinates.Y + MarginPadding.Top + InnerPadding.Top;
-
-			// Call the base
-			base.Render(args0);
-
-			// Draw all of our left components
-			int x = 0;
-
-			foreach (Sprite s in HeadSprites)
-			{
-				// Ignore hidden
-				if (s.IsHidden)
-					continue;
-	
-				// Translate it and blit
-				s.Coordinates.X = x;
-				s.Render(args0);
-
-				// Update the coordinates for the next one
-				x += s.Size.Width + InnerPadding.Horizontal;
-			}
-
-			// Draw our right components
-			x = Coordinates.X + Size.Width - MarginPadding.Right;
-
-			foreach (Sprite s in TailSprites)
-			{
-				// Ignore hidden
-				if (s.IsHidden)
-					continue;
-	
-				// Translate it and blit
-				x -= s.Size.Width + InnerPadding.Horizontal;
-				s.Coordinates.X = x;
-				s.Render(args0);
-			}
+//			// Handle our arguments
+//			RenderArgs args0 = args.Clone();
+//			args0.TranslateX += Coordinates.X + MarginPadding.Left + InnerPadding.Left;
+//			args0.TranslateY += Coordinates.Y + MarginPadding.Top + InnerPadding.Top;
+//
+//			// Call the base
+//			base.Render(args0);
+//
+//			// Draw all of our left components
+//			int x = 0;
+//
+//			foreach (Sprite s in HeadSprites)
+//			{
+//				// Ignore hidden
+//				if (s.IsHidden)
+//					continue;
+//	
+//				// Translate it and blit
+//				s.Coordinates.X = x;
+//				s.Render(args0);
+//
+//				// Update the coordinates for the next one
+//				x += s.Size.Width + InnerPadding.Horizontal;
+//			}
+//
+//			// Draw our right components
+//			x = Coordinates.X + Size.Width - MarginPadding.Right;
+//
+//			foreach (Sprite s in TailSprites)
+//			{
+//				// Ignore hidden
+//				if (s.IsHidden)
+//					continue;
+//	
+//				// Translate it and blit
+//				x -= s.Size.Width + InnerPadding.Horizontal;
+//				s.Coordinates.X = x;
+//				s.Render(args0);
+//			}
 		}
 		#endregion
 
 		#region Geometry
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Size Size
 		{
 			get
@@ -119,6 +138,9 @@ namespace MfGames.Sdl.Gui
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual int HorizontalWidth
 		{
 			get

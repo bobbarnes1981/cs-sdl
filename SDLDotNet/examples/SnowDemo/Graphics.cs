@@ -21,6 +21,9 @@ using System.Drawing;
 
 namespace SdlDotNet.Examples
 {	
+	/// <summary>
+	/// 
+	/// </summary>
 	public sealed class Graphics
 	{
 		static Surface screen;
@@ -30,6 +33,9 @@ namespace SdlDotNet.Examples
 		{
 		}
 		
+		/// <summary>
+		/// 
+		/// </summary>
 		public static void Init()
 		{
 			screen = Video.SetVideoModeWindow(640, 480, 16, true);
@@ -37,6 +43,12 @@ namespace SdlDotNet.Examples
 			Video.WindowCaption = "Snow Demo";
 		}
 		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <param name="ColorKey"></param>
+		/// <returns></returns>
 		public static Surface LoadImage(string filename, Color ColorKey)
 		{
 			Surface temp1 = new Surface(filename);
@@ -48,6 +60,11 @@ namespace SdlDotNet.Examples
 			return temp2;
 		}
 		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Filename"></param>
+		/// <returns></returns>
 		public static Surface LoadText(string Filename)
 		{
 			Surface temp1 = LoadImage(Filename, Color.White);
@@ -70,6 +87,9 @@ namespace SdlDotNet.Examples
 			return temp2;
 		}
 		
+		/// <summary>
+		/// 
+		/// </summary>
 		public static void DrawFrame()
 		{
 			screen.Fill(new Rectangle(new Point(0, 0), screen.Size),

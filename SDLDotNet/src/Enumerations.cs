@@ -1403,8 +1403,8 @@ namespace SdlDotNet
 	/// <summary>
 	/// ButtonKeyState
 	/// </summary>
-	/// <remarks></remarks>
-	public enum ButtonKeyState : byte
+	/// <remarks>/remarks> byte</remarks>
+	public enum ButtonKeyState 
 	{
 		/// <summary>
 		/// 
@@ -1516,8 +1516,8 @@ namespace SdlDotNet
 	/// <summary>
 	/// MouseButton
 	/// </summary>
-	/// <remarks></remarks>
-	public enum MouseButton : byte
+	/// <remarks>Byte</remarks>
+	public enum MouseButton
 	{
 		/// <summary>
 		/// 
@@ -1701,9 +1701,9 @@ namespace SdlDotNet
 	/// <summary>
 	/// Type of Focus 
 	/// </summary>
-	/// <remarks>For the AppActive event</remarks>
+	/// <remarks>For the AppActive event. byte</remarks>
 	[FlagsAttribute]
-	public enum Focus : byte
+	public enum Focus 
 	{
 		/// <summary>
 		/// 

@@ -23,6 +23,9 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Bomb
 	{
 		static Surface _Image;
@@ -31,6 +34,9 @@ namespace SdlDotNet.Examples
 		static float maxspeed = 250;
 		static Random random = new Random();
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Bomb()
 		{
 			Game.Debug("Constructing Bomb");
@@ -45,36 +51,52 @@ namespace SdlDotNet.Examples
 			Reset();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Reset()
 		{
 			_Location = new PointF(random.Next(Game.Screen.Width - _Image.Width), 0 -
 				_Image.Height - random.Next(Game.Screen.Height));
 
-			speed = random.Next((int)Game.Bombspeed / 2, (int)Game.Bombspeed * 2);
+			speed = random.Next((int)Game.BombSpeed / 2, (int)Game.BombSpeed * 2);
 		}
 
-		public void Update(float Seconds)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="seconds"></param>
+		public void Update(float seconds)
 		{
-			_Location.Y += Seconds * speed;
+			_Location.Y += seconds * speed;
 
 			if(Location.Y > Game.Screen.Height)
 				Reset();
 
-			if(Game.Bombspeed > maxspeed)
+			if(Game.BombSpeed > maxspeed)
 			{
-				Game.Bombspeed = maxspeed / 2;
+				Game.BombSpeed = maxspeed / 2;
 				maxspeed = maxspeed * 2;
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static Surface Image{ get{ return _Image; }}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Point Location
 		{
 			get{ return new Point((int)_Location.X, (int)_Location.Y); }
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Player
 	{
 		Surface _Image;
@@ -93,6 +115,10 @@ namespace SdlDotNet.Examples
 		int jumpstart;
 		bool falling = false;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Location"></param>
 		public Player(Point Location)
 		{
 			Game.Debug("Constructing Player");
@@ -104,15 +130,19 @@ namespace SdlDotNet.Examples
 			_Image = tempSurface.Convert();
 			_Image.SetColorKey(Color.White, true);
 
-			Events.Keyboard += new KeyboardEventHandler(SDL_Keyboard);
+			Events.KeyboardDown += new KeyboardEventHandler(Keyboard);
 		}
 
-		public void Update(float Seconds)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="seconds"></param>
+		public void Update(float seconds)
 		{
 			// how far the player should move this frame, calculated on basis of the
 			// elapsed number of seconds :)
-			float change = Seconds * 250;
-			float jumpspeed = Seconds * Game.Bombspeed * 2;
+			float change = seconds * 250;
+			float jumpspeed = seconds * Game.BombSpeed * 2;
 
 			if(jump || falling)
 				change = change / 2;
@@ -151,7 +181,12 @@ namespace SdlDotNet.Examples
 				_Location.X = Game.Screen.Width - _Image.Width;
 		}
 
-		public void SDL_Keyboard(object sender, KeyboardEventArgs e)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Keyboard(object sender, KeyboardEventArgs e)
 		{
 			switch(e.Key)
 			{
@@ -174,18 +209,27 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Surface Image{ get{ return _Image; }}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Point Location
 		{
 			get{ return new Point((int)_Location.X, (int)_Location.Y); }
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Game
 	{
 		static Surface _Screen;
-		static float _Bombspeed = 50;
+		static float _BombSpeed = 50;
 		Surface _Background;
 		Surface _AlternateBackground;
 		Surface _Temporary;
@@ -195,12 +239,19 @@ namespace SdlDotNet.Examples
 
 		// messages for debugging purposes are sent to this method, therefore it
 		// also is static
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
 		[Conditional("DEBUG")]
-		public static void Debug(string Message)
+		public static void Debug(string message)
 		{
-			Console.WriteLine("> {0}", Message);
+			Console.WriteLine("> {0}", message);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run()
 		{
 			Game.Debug("Running");
@@ -229,9 +280,9 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			Video.Mouse.ShowCursor(false);
 			Video.WindowCaption =
 				"Bomb Run, (c) 2003 CL Game Studios (Sijmen Mulder)";
-			Events.Keyboard +=
-				new KeyboardEventHandler(SDL_Keyboard);
-			Events.Quit += new QuitEventHandler(SDL_Quit);
+			Events.KeyboardDown +=
+				new KeyboardEventHandler(Keyboard);
+			Events.Quit += new QuitEventHandler(Quit);
 
 			Game.Debug("Starting game loop");
 
@@ -261,7 +312,7 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 					_Screen.Blit(_Temporary, dest);
 				}
 
-				Screen.Fill(new Rectangle(3, 3, (int)_Bombspeed, 2), Color.White);
+				Screen.Fill(new Rectangle(3, 3, (int)_BombSpeed, 2), Color.White);
 
 				// if lastupdate is 0 and the part below is done, one would get quite
 				// a funny result. it is set later in this method
@@ -271,7 +322,7 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 
 					player.Update(seconds);
 
-					_Bombspeed += seconds * 3;
+					_BombSpeed += seconds * 3;
 
 					for(int i = 0; i < bombs.Length; i++)
 						bombs[i].Update(seconds);
@@ -282,30 +333,52 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			}
 		}
 
-		public void SDL_Keyboard(object sender, KeyboardEventArgs e)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Keyboard(object sender, KeyboardEventArgs e)
 		{
 			if(e.Key == Key.Escape || e.Key == Key.Q)
 				quit = true;
 		}
 
-		public void SDL_Quit(object sender, QuitEventArgs e)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Quit(object sender, QuitEventArgs e)
 		{
 			Game.Debug("Quit was requested");
 			quit = true;
 		}
 
 		// used by the collision detection of some ingame objects
+		/// <summary>
+		/// 
+		/// </summary>
 		public static Surface Screen{ get{ return _Screen; }}
 
-		public static float Bombspeed
+		/// <summary>
+		/// 
+		/// </summary>
+		public static float BombSpeed
 		{
-			get{ return _Bombspeed; }
-			set{ _Bombspeed = value; }
+			get{ return _BombSpeed; }
+			set{ _BombSpeed = value; }
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class BombRun
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public static void Main()
 		{
 			Console.WriteLine("Bomb Run, (C) 2003 Sijmen Mulder");

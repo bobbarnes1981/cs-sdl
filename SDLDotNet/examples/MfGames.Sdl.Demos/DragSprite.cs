@@ -23,21 +23,36 @@ using SdlDotNet;
 using System;
 using System.Drawing;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class DragSprite : BoundedSprite
 	{
-		private IDrawable d1 = null;
-		private IDrawable d2 = null;
+		private SurfaceCollection d1 = null;
+		private SurfaceCollection d2 = null;
 
-		public DragSprite(IDrawable d1, IDrawable d2, Point coordinates,
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="d1"></param>
+		/// <param name="d2"></param>
+		/// <param name="coordinates"></param>
+		/// <param name="bounds"></param>
+		public DragSprite(SurfaceCollection d1, SurfaceCollection d2, Point coordinates,
 			Rectangle bounds)
 			: base(d1, bounds, new Vector(coordinates))
 		{
 			this.d1 = d1;
 			this.d2 = d2;
+			this.Size = d1.Size;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return String.Format("(drag {0} {1})", beingDragged, base.ToString());
@@ -46,45 +61,53 @@ namespace MfGames.Sdl.Demos
 		#region Events
 		private bool beingDragged = false;
 
-		public override bool IsMouseSensitive { get { return true; } }
-
-		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
-		{
-			// If we are being held down, pick up the marble
-				// Change the Z-order
-				Coordinates.Z += 100;
-				beingDragged = true;
-				Drawable = d2;
-				SdlDemo.MasterSpriteContainer.EventLock = this;		
-		}
-
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
+		public override void Update(object sender, MouseButtonEventArgs args)
 		{
-				Coordinates.Z -= 100;
-				beingDragged = false;
-				Drawable = d1;
-				SdlDemo.MasterSpriteContainer.EventLock = null;		
+			if (this.IntersectsWith(new Point(args.X, args.Y)))
+			{
+				// If we are being held down, pick up the marble
+				// Change the Z-order
+				if (args.ButtonPressed)
+				{
+					this.Z += 100;
+					beingDragged = true;
+					this.Surfaces.Clear();
+					this.Surfaces.Add(d2);
+					//SdlDemo.MasterSpriteContainer.EventLock = this;		
+				}
+				else
+				{
+					this.Z -= 100;
+					beingDragged = false;
+					this.Surfaces.Clear();
+					this.Surfaces.Add(d1);
+					//SdlDemo.MasterSpriteContainer.EventLock = null;	
+				}
+			}
 		}
 
 		/// <summary>
 		/// If the sprite is picked up, this moved the sprite to follow
 		/// the mouse.
 		/// </summary>
-		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
+		public override void Update(object sender, MouseMotionEventArgs args)
 		{
-			if (beingDragged)
+			if (this.IntersectsWith(new Point(args.X, args.Y)))
 			{
-				Coordinates.X += args.RelativeX;
-				Coordinates.Y += args.RelativeY; 
-			}
-			else
-			{
-				//return false;
+				if (beingDragged)
+				{
+					this.X += args.RelativeX;
+					this.Y += args.RelativeY; 
+				}
+				else
+				{
+					//return false;
+				}
 			}
 		}
 		#endregion
@@ -92,7 +115,7 @@ namespace MfGames.Sdl.Demos
 		/// <summary>
 		/// 
 		/// </summary>
-		public override bool IsMouseMotionLocked
+		public bool IsMouseMotionLocked
 		{
 			get
 			{
@@ -103,7 +126,7 @@ namespace MfGames.Sdl.Demos
 		/// <summary>
 		/// 
 		/// </summary>
-		public override bool IsMouseButtonLocked
+		public bool IsMouseButtonLocked
 		{
 			get
 			{

@@ -37,11 +37,18 @@ namespace SdlDotNet.Examples
 			Initialize();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static void Initialize()
 		{
 			RotateLogs();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="format"></param>
 		public static void WriteLine(string format)
 		{
 			
@@ -51,6 +58,11 @@ namespace SdlDotNet.Examples
 			streamWriter.Flush(); 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="format"></param>
+		/// <param name="arg0"></param>
 		public static void WriteLine(string format, Object arg0)
 		{
 			
@@ -60,6 +72,12 @@ namespace SdlDotNet.Examples
 			streamWriter.Flush(); 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="format"></param>
+		/// <param name="arg0"></param>
+		/// <param name="arg1"></param>
 		public static void WriteLine(string format, Object arg0, Object arg1)
 		{
 			
@@ -69,6 +87,13 @@ namespace SdlDotNet.Examples
 			streamWriter.Flush(); 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="format"></param>
+		/// <param name="arg0"></param>
+		/// <param name="arg1"></param>
+		/// <param name="arg2"></param>
 		public static void WriteLine(string format, Object arg0, Object arg1, Object arg2)
 		{
 			
@@ -78,6 +103,10 @@ namespace SdlDotNet.Examples
 			streamWriter.Flush(); 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="format"></param>
 		public static void Write(string format)
 		{
 			
@@ -88,6 +117,11 @@ namespace SdlDotNet.Examples
 			streamWriter.Flush(); 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="format"></param>
+		/// <param name="arg0"></param>
 		public static void Write(string format, Object arg0)
 		{
 			
@@ -97,6 +131,12 @@ namespace SdlDotNet.Examples
 			streamWriter.Flush(); 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="format"></param>
+		/// <param name="arg0"></param>
+		/// <param name="arg1"></param>
 		public static void Write(string format, Object arg0, Object arg1)
 		{
 			
@@ -106,6 +146,13 @@ namespace SdlDotNet.Examples
 			streamWriter.Flush(); 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="format"></param>
+		/// <param name="arg0"></param>
+		/// <param name="arg1"></param>
+		/// <param name="arg2"></param>
 		public static void Write(string format, Object arg0, Object arg1, Object arg2)
 		{
 			
@@ -115,6 +162,9 @@ namespace SdlDotNet.Examples
 			streamWriter.Flush(); 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static void RotateLogs()
 		{
 			LogFile.fs = null;

@@ -23,7 +23,7 @@ using System;
 using System.Collections;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// A fairly complicated class that creates a menu bar that
@@ -33,25 +33,36 @@ namespace MfGames.Sdl.Gui
 	/// </summary>
 	public class GuiMenuBar : HorizontalPacker
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="x1"></param>
+		/// <param name="x2"></param>
+		/// <param name="baselineY"></param>
 		public GuiMenuBar(GuiManager manager, int x1, int x2, int baselineY)
 			: base(manager)
 		{
-			Coordinates.Z = 10000;
+			//Coordinates.Z = 10000;
 			this.x1 = x1;
 			this.x2 = x2;
 			this.baselineY = baselineY;
 		}
 
 		#region Drawing
-		public override void Render(RenderArgs args)
-		{
-			// Draw ourselves, then our components
-			manager.Render(args, this);
-			base.Render(args);
-		}
+//		public new void Render(RenderArgs args)
+//		{
+//			// Draw ourselves, then our components
+//			manager.Render(args, this);
+//			base.Render(args);
+//		}
 		#endregion
 
 		#region Sprites
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
 		public void AddLeft(Sprite s)
 		{
 			AddHead(s);
@@ -62,6 +73,10 @@ namespace MfGames.Sdl.Gui
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
 		public void AddRight(Sprite s)
 		{
 			AddTail(s);
@@ -78,21 +93,33 @@ namespace MfGames.Sdl.Gui
 		private int x2 = 0;
 		private int baselineY = 0;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Vector Coordinates
 		{
 			get { return new Vector(x1, baselineY, base.Coordinates.Z); }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override int HorizontalWidth
 		{
 			get { return x2 - x1; }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Padding InnerPadding
 		{
 			get { return manager.MenuTitlePadding; }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Padding MarginPadding
 		{
 			get { return manager.MenuBarPadding; }
@@ -100,6 +127,10 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Operators
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return String.Format("(menu-bar {0})", base.ToString());

@@ -22,10 +22,16 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class MainObject
 	{
 		private bool _quitflag;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public MainObject() 
 		{
 			_quitflag = false;
@@ -36,6 +42,9 @@ namespace SdlDotNet.Examples
 		
 		Sound levelUpSound = null;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Go() 
 		{
 			DateTime startTime = DateTime.Now;
@@ -48,7 +57,7 @@ namespace SdlDotNet.Examples
 			Events.KeyboardUp += new KeyboardEventHandler(this.SDL_KeyboardUp); 
 			
 			
-			Events.MouseButton += new MouseButtonEventHandler(Events_MouseButton);
+			Events.MouseButtonDown += new MouseButtonEventHandler(Events_MouseButton);
 			Events.Quit += new QuitEventHandler(this.SDL_Quit);
 
 			

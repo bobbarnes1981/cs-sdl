@@ -10,3 +10,4 @@ SdlDotNet.suo
 SdlDotNet.FxCop
 *.cmbx
 *.sln
+cvs2cl.pl

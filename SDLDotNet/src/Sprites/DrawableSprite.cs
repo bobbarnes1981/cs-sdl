@@ -32,99 +32,75 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public DrawableSprite()
-			: base()
+		/// <param name="surfaces"></param>
+		public DrawableSprite(SurfaceCollection surfaces)
+			: base(surfaces[0])
 		{
+			this.surfaces.Add(surfaces);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d"></param>
-		public DrawableSprite(IDrawable d)
-			: base()
-		{
-			this.drawable = d;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="d"></param>
+		/// <param name="surfaces"></param>
 		/// <param name="frame"></param>
-		public DrawableSprite(IDrawable d, int frame)
-			: base()
+		public DrawableSprite(SurfaceCollection surfaces, int frame)
+			: base(surfaces[0])
 		{
-			this.drawable = d;
+			this.surfaces.Add(surfaces);
 			this.frame = frame;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d"></param>
-		/// <param name="coordinates"></param>
-		public DrawableSprite(IDrawable d, Point coordinates)
-			: base(coordinates)
+		/// <param name="surfaces"></param>
+		/// <param name="position"></param>
+		public DrawableSprite(SurfaceCollection surfaces, Point position)
+			: base(surfaces[0], position)
 		{
-			this.drawable = d;
+			this.surfaces.Add(surfaces);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d"></param>
+		/// <param name="surfaces"></param>
 		/// <param name="coordinates"></param>
-		public DrawableSprite(IDrawable d, Vector coordinates)
-			: base(coordinates)
+		public DrawableSprite(SurfaceCollection surfaces, Vector coordinates)
+			: base(surfaces[0], coordinates)
 		{
-			this.drawable = d;
+			this.surfaces.Add(surfaces);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d"></param>
+		/// <param name="surfaces"></param>
 		/// <param name="frame"></param>
-		/// <param name="coordinates"></param>
-		public DrawableSprite(IDrawable d, int frame, Point coordinates)
-			: base(coordinates)
+		/// <param name="position"></param>
+		public DrawableSprite(SurfaceCollection surfaces, int frame, Point position)
+			: base(surfaces[0], position)
 		{
-			this.drawable = d;
+			this.surfaces = surfaces;
 			this.frame = frame;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d"></param>
+		/// <param name="surfaces"></param>
 		/// <param name="frame"></param>
 		/// <param name="coordinates"></param>
-		public DrawableSprite(IDrawable d, int frame, Vector coordinates)
-			: base(coordinates)
+		public DrawableSprite(SurfaceCollection surfaces, int frame, Vector coordinates)
+			: base(surfaces[0], coordinates)
 		{
-			this.drawable = d;
+			this.surfaces = surfaces;
 			this.frame = frame;
 		}
-
-		#region Display
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Render(RenderArgs args)
-		{
-			// Blit the image onto the surface
-			args.Surface.Blit(CurrentFrame,
-				new Rectangle(Coordinates.X + args.TranslateX,
-				Coordinates.Y + args.TranslateY,
-				Size.Width,
-				Size.Height));
-		}
-		#endregion
 
 		#region Drawable
-		private IDrawable drawable = null;
+		private SurfaceCollection surfaces = new SurfaceCollection();
 
 		private int frame = 0;
 
@@ -133,15 +109,20 @@ namespace SdlDotNet.Sprites
 		/// the same as the "[0]" accessor. For sprites and other animated
 		/// drawables, this returns whatever frame is consider "current".
 		/// </summary>
-		public Surface CurrentFrame
+		public override Surface Surface
 		{
 			get
 			{
-				if (drawable == null || drawable[frame] == null)
+				if (surfaces == null || surfaces[frame] == null)
 				{
 					throw new DrawableException("No drawable to return");
 				}
-				return drawable[frame];
+
+				return surfaces[frame];
+			}
+			set
+			{
+				this.surfaces.Insert(0, value);
 			}
 		}
 
@@ -150,20 +131,15 @@ namespace SdlDotNet.Sprites
 		/// never return null (it will throw an exception if there is no
 		/// drawable).
 		/// </summary>
-		public IDrawable Drawable
+		public SurfaceCollection Surfaces
 		{
 			get
 			{
-				if (drawable == null)
+				if (surfaces == null)
 				{
-					throw new DrawableException("No drawable to return");
+					throw new DrawableException("No surface to return");
 				}
-				return drawable;
-			}
-
-			set
-			{
-				drawable = value;
+				return surfaces;
 			}
 		}
 
@@ -191,13 +167,13 @@ namespace SdlDotNet.Sprites
 		{
 			get
 			{
-				if (drawable == null)
+				if (surfaces == null)
 				{
 					return 0;
 				}
 				else
 				{
-					return drawable.FrameCount;
+					return surfaces.Count;
 				}
 			}
 		}
@@ -211,13 +187,13 @@ namespace SdlDotNet.Sprites
 		{
 			get
 			{
-				if (drawable == null)
+				if (surfaces == null)
 				{
 					throw new DrawableException("No size for this drawable");
 				}
 				else
 				{
-					return drawable.Size;
+					return surfaces.Size;
 				}
 			}
 		}

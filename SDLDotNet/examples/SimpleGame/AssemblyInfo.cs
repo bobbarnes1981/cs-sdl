@@ -17,6 +17,7 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -71,5 +72,6 @@ using System.Runtime.CompilerServices;
 //       documentation for more information on this.
 //
 [assembly: AssemblyDelaySign(false)]
+[assembly: ComVisible(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]

@@ -631,5 +631,32 @@ namespace SdlDotNet
 				throw SdlException.Generate();
 			}
 		}
+
+		/// <summary>
+		/// Update entire screen
+		/// </summary>
+		public void Update()
+		{
+			Video.Screen.Update();
+		}
+
+		/// <summary>
+		/// Updates rectangle
+		/// </summary>
+		/// <param name="rectangle"></param>
+		public void Update(System.Drawing.Rectangle rectangle)
+		{
+			Video.Screen.Update(rectangle);
+		}
+
+		/// <summary>
+		/// Update an array of rectangles
+		/// </summary>
+		/// <param name="rectangles"></param>
+		public void Update(System.Drawing.Rectangle[] rectangles)
+		{
+			Video.Screen.Update(rectangles);
+		}
+
 	}
 }

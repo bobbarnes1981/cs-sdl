@@ -22,7 +22,7 @@ using SdlDotNet;
 using System.Drawing;
 using System;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// Handles a simple window element, which displays its contents in
@@ -30,33 +30,52 @@ namespace MfGames.Sdl.Gui
 	/// </summary>
 	public class GuiWindow : GuiContainer
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		public GuiWindow(GuiManager manager)
 			: base(manager)
 		{
 		}
 
-		public GuiWindow(GuiManager manager, Rectangle rect)
-			: base(manager, rect)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="rectangle"></param>
+		public GuiWindow(GuiManager manager, Rectangle rectangle)
+			: base(manager, rectangle)
 		{
 		}
 
 		#region Drawing
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Padding OuterPadding
 		{
 			get { return manager.GetPadding(this); }
 		}
 
-		public override void Render(RenderArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		public new void Render(/*RenderArgs args*/)
 		{
-			// Render the window using the GUI manager
-			manager.Render(args, this);
-
-			// Render the components
-			base.Render(args);
+//			// Render the window using the GUI manager
+//			manager.Render(args, this);
+//
+//			// Render the components
+//			base.Render(args);
 		}
 		#endregion
 
 		#region Operators
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return String.Format("(window \"{0}\" {1})",
@@ -68,9 +87,15 @@ namespace MfGames.Sdl.Gui
 		private string title = null;
 		private Size titleSize = new Size();
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public string Title
 		{
-			get { return title; }
+			get 
+			{ 
+				return title; 
+			}
 			set
 			{
 				// Set the title size

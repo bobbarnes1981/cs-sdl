@@ -22,8 +22,11 @@ using SdlDotNet.Sprites;
 using System;
 using System.Drawing;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class AnimatedSprite : DrawableSprite
 	{
 		Random rand = new Random();
@@ -34,12 +37,12 @@ namespace MfGames.Sdl.Demos
 		/// 
 		/// </summary>
 		/// <param name="d"></param>
-		/// <param name="coordinates"></param>
-		public AnimatedSprite(IDrawable d, Point coordinates)
-			: base(d, coordinates)
+		/// <param name="position"></param>
+		public AnimatedSprite(SurfaceCollection d, Point position)
+			: base(d, position)
 		{
-			this.Frame = rand.Next();
-			this.frameRight = (rand.Next()  % 2 == 0);
+			base.Frame = rand.Next(d.Count);
+			this.frameRight = (rand.Next(2) % 2 == 0);
 		}
 
 		/// <summary>
@@ -47,26 +50,20 @@ namespace MfGames.Sdl.Demos
 		/// </summary>
 		/// <param name="d"></param>
 		/// <param name="coordinates"></param>
-		public AnimatedSprite(IDrawable d, Vector coordinates)
+		public AnimatedSprite(SurfaceCollection d, Vector coordinates)
 			: base(d, coordinates)
 		{
-			this.Frame = rand.Next();
+			base.Frame = rand.Next(d.Count);
+			this.frameRight = (rand.Next(2) % 2 == 0);
 		}
 
 		#region Animation and Drawing
 		/// <summary>
 		/// 
 		/// </summary>
-		public override bool IsTickable
-		{
-			get { return Drawable.FrameCount > 1; }
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="args"></param>
-		public override void OnTick(object sender, TickEventArgs args)
+		/// <param name="sender"></param>
+		public override void Update(object sender, TickEventArgs args)
 		{
 			// Increment the frame
 			if (frameRight)
@@ -85,6 +82,10 @@ namespace MfGames.Sdl.Demos
 		#endregion
 
 		#region Operators
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return String.Format("(animated {0})", base.ToString());

@@ -21,57 +21,70 @@ using SdlDotNet;
 using SdlDotNet.Sprites;
 using System.Drawing;
 using System;
+using System.Threading;
 
-namespace MfGames.Sdl.Demos
+namespace MFGames.Sdl.Demos
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class BounceSprite : BoundedSprite
 	{
 		Random rand = new Random();
 		private int dx;
 		private int dy;
 
-		public BounceSprite(IDrawable d, Rectangle rect, Vector coordinates)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="d"></param>
+		/// <param name="rect"></param>
+		/// <param name="coordinates"></param>
+		public BounceSprite(SurfaceCollection d, Rectangle rect, Vector coordinates)
 			: base(d, rect, coordinates)
 		{
 			this.dx = rand.Next(-10, 11);
 			this.dy = rand.Next(-10, 11);
 		}
 
-		public override bool IsTickable { get { return true; } }
-
-		public override void OnTick(object sender, TickEventArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void Update(object sender, TickEventArgs args)
 		{
 			// Move our direction a little
-			int x = Coordinates.X;
-			int y = Coordinates.Y;
+			int x = this.X;
+			int y = this.Y;
 
-			Coordinates.X += args.RatePerSecond(dx);
-			Coordinates.Y += args.RatePerSecond(dy);
+			this.X += args.RatePerSecond(dx);
+			this.Y += args.RatePerSecond(dy);
 
 			// Adjust our entropy
 			dx += rand.Next(-5, 6);
 			dy += rand.Next(-5, 6);
 
 			// Call the base which also normalizes the bounds
-			base.OnTick(this, args);
+			base.Update(this, args);
 
 			// Normalize the directions
-			if (Coordinates.X == SpriteBounds.Left)
+			if (this.X == SpriteBounds.Left)
 			{
 				dx = rand.Next(1, 10);
 			}
 
-			if (Coordinates.X == SpriteBounds.Right)
+			if (this.X == SpriteBounds.Right)
 			{
 				dx = ((-1) * rand.Next(1, 10));
 			}
 
-			if (Coordinates.Y == SpriteBounds.Top)
+			if (this.Y == SpriteBounds.Top)
 			{
 				dy = rand.Next(1, 10);
 			}
 
-			if (Coordinates.Y == SpriteBounds.Bottom)
+			if (this.Y == SpriteBounds.Bottom)
 			{
 				dy = ((-1) * rand.Next(1, 10));
 			}

@@ -30,6 +30,9 @@ namespace SdlDotNet.Examples
 		Finished
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Text
 	{
 		Rectangle _Position;
@@ -45,6 +48,11 @@ namespace SdlDotNet.Examples
 		TextFadeState state = TextFadeState.BeforeFadeIn;
 		float alpha = 0;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Num"></param>
+		/// <param name="Y"></param>
 		public Text(int Num, int Y)
 		{
 			if(_Image == null)
@@ -60,6 +68,10 @@ namespace SdlDotNet.Examples
 			_Image.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 0);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Seconds"></param>
 		public void Update(float Seconds)
 		{
 			time += Seconds;
@@ -106,14 +118,26 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle Position{ get{ return _Position; }}
+		/// <summary>
+		/// 
+		/// </summary>
 		public Surface Image{ get{ return _Image; }}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Texts
 	{
 		Text[] texts = new Text[6];
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Texts()
 		{
 			texts[0] = new Text(0, 25);
@@ -122,6 +146,9 @@ namespace SdlDotNet.Examples
 				texts[i] = new Text(i, texts[i-1].Position.Bottom + 10);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public int Length
 		{
 			get
@@ -130,6 +157,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Text this[int Index]
 		{
 			get

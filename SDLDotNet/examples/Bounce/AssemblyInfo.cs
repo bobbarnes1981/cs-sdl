@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
 
 //
 // General Information about an assembly is controlled through the following 
@@ -8,6 +10,7 @@ using System.Runtime.CompilerServices;
 // associated with an assembly.
 //
 [assembly: CLSCompliant(true)]
+[assembly: ComVisible(false)]
 [assembly: AssemblyTitle("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]

@@ -174,11 +174,18 @@ namespace SdlDotNet.Examples
 		{
 			private System.Collections.IEnumerator wrapped;
 
+			/// <summary>
+			/// 
+			/// </summary>
+			/// <param name="collection"></param>
 			public Enumerator(BlockCollection collection)
 			{
 				this.wrapped = ((System.Collections.CollectionBase)collection).GetEnumerator();
 			}
 
+			/// <summary>
+			/// 
+			/// </summary>
 			public Block Current
 			{
 				get
@@ -195,11 +202,18 @@ namespace SdlDotNet.Examples
 				}
 			}
 
+			/// <summary>
+			/// 
+			/// </summary>
+			/// <returns></returns>
 			public bool MoveNext()
 			{
 				return this.wrapped.MoveNext();
 			}
 
+			/// <summary>
+			/// 
+			/// </summary>
 			public void Reset()
 			{
 				this.wrapped.Reset();

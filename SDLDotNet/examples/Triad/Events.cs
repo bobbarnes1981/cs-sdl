@@ -24,10 +24,19 @@ using System;
 namespace SdlDotNet.Examples
 {
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public delegate void BlocksDestroyedEventHandler(object sender, BlockDestroyedEventArgs args);
+	/// <summary>
+	/// 
+	/// </summary>
 	public class BlockDestroyedEventArgs : EventArgs
 	{
 		private int _ReductionCount;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int ReductionCount
 		{
 			get
@@ -37,6 +46,9 @@ namespace SdlDotNet.Examples
 		}
 	
 		private int _BlocksCount;
+		/// <summary>
+		/// 
+		/// </summary>
 		public int BlocksCount
 		{
 			get
@@ -46,6 +58,11 @@ namespace SdlDotNet.Examples
 		}
 				
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="reductionCount"></param>
+		/// <param name="blockCount"></param>
 		public BlockDestroyedEventArgs(int reductionCount, int blockCount)
 		{
 			this._BlocksCount = blockCount;

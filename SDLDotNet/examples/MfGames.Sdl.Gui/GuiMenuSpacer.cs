@@ -20,10 +20,17 @@
 using SdlDotNet;
 using SdlDotNet.Sprites;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class GuiMenuSpacer : GuiMenuItem
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		public GuiMenuSpacer(GuiManager manager)
 			: base(manager)
 		{

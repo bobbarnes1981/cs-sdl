@@ -33,6 +33,9 @@ namespace SdlDotNet.Examples
 			this.direction = direction;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Direction Direction
 		{
 			get

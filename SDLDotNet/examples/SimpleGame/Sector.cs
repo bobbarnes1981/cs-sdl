@@ -54,11 +54,21 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="direction"></param>
+		/// <returns></returns>
 		public Sector GetNeighbors(Direction direction)
 		{
 			return this.neighbors[(int)direction];
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="direction"></param>
+		/// <param name="sector"></param>
 		public void SetNeighbors(Direction direction, Sector sector)
 		{
 			this.neighbors[(int)direction]  = sector;

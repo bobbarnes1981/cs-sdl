@@ -65,6 +65,9 @@ namespace SdlDotNet.Examples
 			_quitflag = true;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Go() 
 		{
 			for(int i = 0; i < MAX_BALLS; i++) 
@@ -148,6 +151,9 @@ namespace SdlDotNet.Examples
 
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static void Main() 
 		{
 			Bounce bounce = new Bounce();

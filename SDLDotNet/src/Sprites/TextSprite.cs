@@ -30,13 +30,13 @@ namespace SdlDotNet.Sprites
 	/// </summary>
 	public class TextSprite : Sprite
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		public TextSprite()
-			: base()
-		{
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public TextSprite()
+//			: base()
+//		{
+//		}
 
 		/// <summary>
 		/// 
@@ -44,8 +44,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="textItem"></param>
 		/// <param name="font"></param>
 		public TextSprite(string textItem, SdlDotNet.Font font)
-			: base()
 		{
+			base.Position = new Point(0, 0);
 			this.textItem = textItem;
 			this.font = font;
 		}
@@ -57,8 +57,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="font"></param>
 		/// <param name="color"></param>
 		public TextSprite(string textItem, SdlDotNet.Font font, Color color)
-			: base()
 		{
+			base.Position = new Point(0, 0);
 			this.textItem = textItem;
 			this.font = font;
 			this.color = color;
@@ -69,10 +69,10 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="textItem"></param>
 		/// <param name="font"></param>
-		/// <param name="coordinates"></param>
-		public TextSprite(string textItem, SdlDotNet.Font font, Point coordinates)
-			: base(coordinates)
+		/// <param name="position"></param>
+		public TextSprite(string textItem, SdlDotNet.Font font, Point position)
 		{
+			base.Position = position;
 			this.textItem = textItem;
 			this.font = font;
 		}
@@ -83,13 +83,11 @@ namespace SdlDotNet.Sprites
 		/// <param name="textItem"></param>
 		/// <param name="font"></param>
 		/// <param name="color"></param>
-		/// <param name="coordinates"></param>
+		/// <param name="position"></param>
 		public TextSprite(string textItem, SdlDotNet.Font font, Color color,
-			Point coordinates)
-			: base(coordinates)
+			Point position)
+			: this(textItem, font, position)
 		{
-			this.textItem = textItem;
-			this.font = font;
 			this.color = color;
 		}
 
@@ -100,11 +98,9 @@ namespace SdlDotNet.Sprites
 		/// <param name="font"></param>
 		/// <param name="coordinates"></param>
 		public TextSprite(string textItem, SdlDotNet.Font font,
-			Vector coordinates)
-			: base(coordinates)
+			Vector coordinates) : this(textItem, font)
 		{
-			this.textItem = textItem;
-			this.font = font;
+			this.Coordinates = coordinates;
 		}
 
 		/// <summary>
@@ -116,10 +112,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="coordinates"></param>
 		public TextSprite(string textItem, SdlDotNet.Font font, Color color,
 			Vector coordinates)
-			: base(coordinates)
+			: this(textItem, font, coordinates)
 		{
-			this.textItem = textItem;
-			this.font = font;
 			this.color = color;
 		}
 
@@ -128,39 +122,29 @@ namespace SdlDotNet.Sprites
 		/// Renders the font, if both the text and color and font are
 		/// set. It stores the render in memory until it is used.
 		/// </summary>
-		private void RenderSurface()
+		private Surface RenderText()
 		{
 			// Clear it
-			renderSurf = null;
+			this.Surface = null;
 
 			// Don't bother rendering if we don't have a text and a font
 			if (TextString == null || font == null)
 			{
-				return;
+				return null;
 			}
 
 			// Render it (Solid or Blended)
 			try
 			{
-				renderSurf = font.Render(TextString, color);
+				Surface surf = font.Render(TextString, color);
+				this.Size = new Size(surf.Width, surf.Height);
+				return surf;
 			}
 			catch (Exception e)
 			{
-				renderSurf = null;
+				this.Surface = null;
 				throw e;
 			}
-		}
-
-		/// <summary>
-		/// Displays the font using the arguments given.
-		/// </summary>
-		public override void Render(RenderArgs args)
-		{
-			// Blit out the render
-			args.Surface.Blit(Surface,
-				new Rectangle(new Point(Coordinates.X + args.TranslateX,
-				Coordinates.Y + args.TranslateY),
-				renderSurf.Size));
 		}
 		#endregion
 
@@ -168,7 +152,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		private Surface renderSurf = null;
+		//private Surface surface = null;
 
 		private SdlDotNet.Font font = null;
 
@@ -188,7 +172,7 @@ namespace SdlDotNet.Sprites
 			set 
 			{ 
 				color = value; 
-				renderSurf = null; 
+				this.Surface = null; 
 			}
 		}
 
@@ -204,26 +188,22 @@ namespace SdlDotNet.Sprites
 			set 
 			{ 
 				font = value; 
-				renderSurf = null; 
+				this.Surface = null; 
 			}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public Surface Surface
+		public override Surface Surface
 		{
 			get
 			{
-				if (renderSurf == null)
+				if (base.Surface == null)
 				{
-					RenderSurface();
+					base.Surface = RenderText();
 				}
-				return renderSurf;
-			}
-			set
-			{
-				renderSurf = value;
+				return base.Surface;
 			}
 		}
 
@@ -239,32 +219,7 @@ namespace SdlDotNet.Sprites
 			set 
 			{ 
 				textItem = value; 
-				renderSurf = null; 
-			}
-		}
-		#endregion
-
-		#region Geometry
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Size Size
-		{
-			get
-			{
-				if (renderSurf == null)
-				{
-					RenderSurface();
-				}
-
-				if (renderSurf == null)
-				{
-					return new Size(0, 0);
-				}
-				else
-				{
-					return new Size(renderSurf.Width, renderSurf.Height);
-				}
+				base.Surface = null; 
 			}
 		}
 		#endregion

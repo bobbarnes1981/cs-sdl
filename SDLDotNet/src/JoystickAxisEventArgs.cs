@@ -30,9 +30,6 @@ namespace SdlDotNet
 	{		
 		private const float JOYSTICK_ADJUSTMENT = 32768;
 		private const float JOYSTICK_SCALE = 65535;
-		/// <summary>
-		/// 
-		/// </summary>
 		private const short JOYSTICK_THRESHHOLD = 3277;
 
 		/// <summary>

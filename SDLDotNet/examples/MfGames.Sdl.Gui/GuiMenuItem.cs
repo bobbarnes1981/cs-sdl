@@ -22,7 +22,7 @@ using SdlDotNet;
 using System;
 using System.Drawing;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
 	/// <summary>
 	/// 
@@ -70,16 +70,21 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Drawing
-		public override void Render(RenderArgs args)
-		{
-			// We draw the rectangle normally
-			manager.Render(args, this);
-			base.Render(args);
-		}
+//		public void Render(RenderArgs args)
+//		{
+//			// We draw the rectangle normally
+//			manager.Render(args, this);
+//			base.Render(args);
+//		}
 		#endregion
 
 		#region Geometry
 		//    public override bool IntersectsWith(Vector2 point)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="point"></param>
+		/// <returns></returns>
 		public override bool IntersectsWith(Point point)
 		{
 			// Menu items are packed by their outer padding instead of the
@@ -90,6 +95,11 @@ namespace MfGames.Sdl.Gui
 			return OuterBounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rect"></param>
+		/// <returns></returns>
 		public override bool IntersectsWith(Rectangle rect)
 		{
 			// Menu items are packed by their outer padding instead of the
@@ -138,7 +148,7 @@ namespace MfGames.Sdl.Gui
 
 		#region Properties
 		private bool isSelected = false;
-		private GuiMenuPopup menu = null;
+		//private GuiMenuPopup menu = null;
 
 		/// <summary>
 		/// 
@@ -149,14 +159,14 @@ namespace MfGames.Sdl.Gui
 			set { isSelected = value; }
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public GuiMenuPopup Menu
-		{
-			get { return menu; }
-			set { menu = value; }
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public GuiMenuPopup Menu
+//		{
+//			get { return menu; }
+//			set { menu = value; }
+//		}
 
 		/// <summary>
 		/// 
@@ -181,18 +191,21 @@ namespace MfGames.Sdl.Gui
 		{
 			get
 			{
-				if (menu == null)
-				{
+				//if (menu == null)
+				//{
 					return base.HorizontalWidth;
-				}
-				else
-				{
-					return menu.Size.Width;
-				}
+				//}
+				//else
+				//{
+				//	return menu.Size.Width;
+				//}
 			}
 		}
 		#endregion
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public delegate void MenuItemHandler(int index);
 }

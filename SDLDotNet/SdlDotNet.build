@@ -72,7 +72,6 @@
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
 	<nant buildfile="${examples.dir}/MfGames.Sdl.Demos/MfGames.Sdl.Demos.build" target="clean" />
 	<nant buildfile="${examples.dir}/MfGames.Sdl.Gui/MfGames.Sdl.Gui.build" target="clean" />
-	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="clean" />
 	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="clean" />
@@ -101,7 +100,6 @@
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="build" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
-	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="build" />
 	<nant buildfile="${examples.dir}/MfGames.Sdl.Gui/MfGames.Sdl.Gui.build" target="build" />
@@ -157,11 +155,6 @@
 		<exclude name="examples/ImageExample/*j.user" />
 		<exclude name="examples/ImageExample/${obj.dir}" />
 		<!-- <exclude name="examples/ImageExample/${build.dir}/*.dll" /> -->
-		<include name="examples/PixelsExample/*" />
-		<include name="examples/PixelsExample/${build.dir}/*" />
-		<exclude name="examples/PixelsExample/*j.user" />
-		<exclude name="examples/PixelsExample/${obj.dir}" />
-		<!-- <exclude name="examples/PixelsExample/${build.dir}/*.dll" /> -->
 		<include name="examples/PrimitivesExample/*" />
 		<include name="examples/PrimitivesExample/${build.dir}/*" />
 		<exclude name="examples/PrimitivesExample/*j.user" />

@@ -34,7 +34,8 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="eventManager"></param>
+		/// <param name="screen"></param>
+		/// <param name="sector"></param>
 		public SectorSprite(Surface screen, Sector sector)
 		{
 			this.sector = sector;
@@ -43,6 +44,12 @@ namespace SdlDotNet.Examples
 			this.sprite.Fill(Color.FromArgb(0, 255, 128));
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="screen"></param>
+		/// <param name="sector"></param>
+		/// <param name="rect"></param>
 		public SectorSprite(Surface screen, Sector sector, Rectangle rect)
 		{
 			this.sector = sector;
@@ -52,6 +59,9 @@ namespace SdlDotNet.Examples
 			this.rect = rect;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Sector Sector
 		{
 			get
@@ -60,6 +70,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Surface Surface
 		{
 			get
@@ -68,6 +81,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle Rect
 		{
 			get
@@ -79,6 +95,9 @@ namespace SdlDotNet.Examples
 				this.rect = value;
 			}
 		}
+		/// <summary>
+		/// 
+		/// </summary>
 		public int CenterX
 		{
 			get
@@ -91,6 +110,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public int CenterY
 		{
 			get
