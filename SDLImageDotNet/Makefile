@@ -1,8 +1,0 @@
-TARGET = SDLImage.NET.dll
-SRCS = AssemblyInfo.cs Natives.cs Image.cs ImageList.cs SDLImageException.cs
-	
-$(TARGET): $(SRCS)
-	mcs -define:__MONO__ -target:library --unsafe -out:$(TARGET) $(SRCS) -r:..\SDLDotNet\SDL.NET.dll -r:System.Drawing.dll
-
-clean:
-	rm -f SDL.NET.dll
