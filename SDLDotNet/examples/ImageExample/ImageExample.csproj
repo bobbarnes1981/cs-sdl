@@ -16,7 +16,7 @@
                 DefaultTargetSchema = "IE50"
                 DelaySign = "false"
                 OutputType = "WinExe"
-                PreBuildEvent = "xcopy /E /Y $(ProjectDir)\images\* $(TargetDir)\images\"
+                PreBuildEvent = "xcopy /E /Y $(ProjectDir)\images\* $(TargetDir)\images\&#xd;&#xa;copy $(ProjectDir)\fard-two.ogg $(TargetDir)"
                 PostBuildEvent = ""
                 RootNamespace = "SdlDotNet.Examples"
                 RunPostBuildEvent = "OnBuildSuccess"

@@ -46,11 +46,11 @@ namespace SdlDotNet.Examples
 			Random rand = new Random();
 			string imagepath;
 
-			
-
+			string musicFile = "fard-two.ogg";
 			Video video = Video.Instance;
 			WindowManager wm = WindowManager.Instance;
 			Events events = Events.Instance;
+			Mixer mixer = Mixer.Instance;
 			
 			events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
@@ -99,6 +99,8 @@ namespace SdlDotNet.Examples
 				Tree.AlphaValue = 0;
 
 				int JeepFrame = 0;
+				Music music = mixer.LoadMusic(musicFile);
+				mixer.PlayMusic(music, -1);
 
 				while (!quitFlag) 
 				{
@@ -141,7 +143,8 @@ namespace SdlDotNet.Examples
 					} 
 					catch (SurfaceLostException) 
 					{
-						// if we are fullscreen and the user hits alt-tab we can get this, for this simple app we can ignore it
+						// if we are fullscreen and the user hits alt-tab 
+						// we can get this, for this simple app we can ignore it
 					}
 				}
 			} 

@@ -29,7 +29,7 @@ namespace SdlDotNet.Examples {
 	public class DelegatesExample 
 	{
 		private bool quitFlag;
-		private int channel;
+
 		SdlMixer.ChannelFinishedDelegate channelFinishedDelegate 
 			= new SdlMixer.ChannelFinishedDelegate(DelegatesExample.ChannelFinished);
 		
