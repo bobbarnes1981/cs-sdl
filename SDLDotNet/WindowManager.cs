@@ -7,14 +7,12 @@ namespace SDLDotNet {
 	/// You can obtain an instance of this class by accessing the WindowManager property of the main SDL
 	/// object.
 	/// </summary>
-	/// <type>class</type>
 	unsafe public class WindowManager {
-		internal WindowManager() {}
+		internal WindowManager(Video vid) {}
 
 		/// <summary>
 		/// gets or sets the text for the current window
 		/// </summary>
-		/// <proptype>System.String</proptype>
 		public string Caption {
 			get{
 				string ret, dummy;
@@ -35,7 +33,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Iconifies (minimizes) the current window
 		/// </summary>
-		/// <returntype>System.Boolean</returntype>
 		/// <returns>True if the action succeeded, otherwise False</returns>
 		public bool IconifyWindow() {
 			return (Natives.SDL_WM_IconifyWindow() != 0);

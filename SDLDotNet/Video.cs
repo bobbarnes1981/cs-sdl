@@ -4,7 +4,6 @@ namespace SDLDotNet {
 	/// <summary>
 	/// OpenGL Attributes
 	/// </summary>
-	/// <type>enum</type>
 	public enum GLAttribute {
 		/// <summary></summary>
 		RedSize,
@@ -38,16 +37,17 @@ namespace SDLDotNet {
 	/// Provides methods to set the video mode, create video surfaces, hide and show the mouse cursor,
 	/// and interact with OpenGL
 	/// </summary>
-	/// <type>class</type>
 	unsafe public class Video {
-		internal Video() {}
+		internal Video() {
+			if (Natives.SDL_InitSubSystem((int)Natives.Init.Video) != 0)
+				throw SDLException.Generate();
+		}
 
 		/// <summary>
 		/// Sets the video mode of a fullscreen application
 		/// </summary>
 		/// <param name="width">width</param>
 		/// <param name="height">height</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>a surface to draw to</returns>
 		public Surface SetVideoMode(int width, int height) {
 			return SetVideoMode(width, height, 0,
@@ -59,7 +59,6 @@ namespace SDLDotNet {
 		/// <param name="width">screen width</param>
 		/// <param name="height">screen height</param>
 		/// <param name="bpp">bits per pixel</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>a surface to draw to</returns>
 		public Surface SetVideoMode(int width, int height, int bpp) {
 			return SetVideoMode(width, height, bpp,
@@ -71,7 +70,6 @@ namespace SDLDotNet {
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
 		/// <param name="frame">if true, the window will have a frame around it</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>a surface to draw to</returns>
 		public Surface SetVideoModeWindow(int width, int height, bool frame) {
 			Natives.Video flags = Natives.Video.HWSurface|Natives.Video.DoubleBuf|Natives.Video.AnyFormat;
@@ -86,7 +84,6 @@ namespace SDLDotNet {
 		/// <param name="height">The height of the window</param>
 		/// <param name="frame">if true, the window will have a frame around it</param>
 		/// <param name="bpp">bits per pixel</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>a surface to draw to</returns>
 		public Surface SetVideoModeWindow(int width, int height, int bpp, bool frame) {
 			Natives.Video flags = Natives.Video.HWSurface|Natives.Video.DoubleBuf|Natives.Video.AnyFormat;
@@ -100,7 +97,6 @@ namespace SDLDotNet {
 		/// <param name="width">the horizontal resolution</param>
 		/// <param name="height">the vertical resolution</param>
 		/// <param name="bpp">bits per pixel</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>A Surface representing the screen</returns>
 		public Surface SetVideoModeOpenGL(int width, int height, int bpp) {
 			return SetVideoMode(width, height, bpp,
@@ -112,7 +108,6 @@ namespace SDLDotNet {
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
 		/// <param name="frame">If true, the window will have a frame around it</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>A Surface representing the window</returns>
 		public Surface SetVideoModeWindowOpenGL(int width, int height, bool frame) {
 			Natives.Video flags = Natives.Video.HWSurface|Natives.Video.OpenGL|Natives.Video.AnyFormat;
@@ -127,7 +122,6 @@ namespace SDLDotNet {
 		/// <param name="height">screen height</param>
 		/// <param name="bpp">bits per pixel</param>
 		/// <param name="flags">specific flags, see SDL documentation for details</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>A Surface representing the screen</returns>
 		public Surface SetVideoMode(int width, int height, int bpp, int flags) {
 			Natives.SDL_Surface *s = Natives.SDL_SetVideoMode(width, height, bpp, flags);
@@ -140,7 +134,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the surface for the window or screen, must be preceded by a call to SetVideoMode*
 		/// </summary>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>The main screen surface</returns>
 		public Surface GetVideoSurface() {
 			Natives.SDL_Surface *s = Natives.SDL_GetVideoSurface();
@@ -155,7 +148,6 @@ namespace SDLDotNet {
 		/// intended for use by people building wrappers of 
 		/// external SDL libraries such as SDL_ttf.
 		/// </summary>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>An Surface representing the real
 		/// SDL_Surface underlying the IntPtr.</returns>
 		public Surface GenerateSurfaceFromPointer( IntPtr pointer )
@@ -170,7 +162,6 @@ namespace SDLDotNet {
 		/// Loads a .bmp file from disk
 		/// </summary>
 		/// <param name="file">The filename of the bitmap to load</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>A Surface representing the bitmap</returns>
 		public Surface LoadBMP(string file) {
 			return Surface.FromBMPFile(file);
@@ -181,7 +172,6 @@ namespace SDLDotNet {
 		/// Loads a bitmap from a System.Drawing.Bitmap object, usually obtained from a resource
 		/// </summary>
 		/// <param name="bitmap">The bitmap object to load</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>A Surface representing the bitmap</returns>
 		public Surface LoadBMP(System.Drawing.Bitmap bitmap) {
 			return Surface.FromBitmap(bitmap);
@@ -191,7 +181,6 @@ namespace SDLDotNet {
 		/// Loads a bitmap from an array of bytes in memory.
 		/// </summary>
 		/// <param name="bitmap">The bitmap data</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>A Surface representing the bitmap</returns>
 		public Surface LoadBMP(byte[] bitmap) {
 			return Surface.FromBitmap(bitmap);
@@ -233,7 +222,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Queries the current cursor state
 		/// </summary>
-		/// <returntype>System.Boolean</returntype>
 		/// <returns>True if the cursor is visible, otherwise False</returns>
 		public bool IsCursorVisible() {
 			return (Natives.SDL_ShowCursor((int)Natives.Enable.Query) == (int)Natives.Enable.Enable);
@@ -267,7 +255,6 @@ namespace SDLDotNet {
 		/// Gets the value of an OpenGL attribute
 		/// </summary>
 		/// <param name="attrib">The attribute to get</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The current attribute value</returns>
 		public int GL_GetAttribute(GLAttribute attrib) {
 			int ret;

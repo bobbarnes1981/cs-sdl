@@ -35,7 +35,7 @@ namespace CDTest {
 			_drive = null;
 
 			try {
-				_cd = (new SDL(false)).CDAudio;
+				_cd = SDL.Instance.CDAudio;
 				int num = _cd.NumDrives;
 				for (int i = 0; i < num; i++)
 					comboBoxDrive.Items.Add(_cd.DriveName(i));

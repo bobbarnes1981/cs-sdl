@@ -24,7 +24,7 @@ namespace Example {
 			string musicfile = "..\\..\\BZO-prym-guitar.ogg";
 #endif
 
-			SDL sdl = new SDL(true); // create SDL object
+			SDL sdl = SDL.Instance; // get SDL object
 
 			sdl.Events.KeyboardDown += new KeyboardEventHandler(this.SDL_KeyboardDown); // register event handlers
 			sdl.Events.Quit += new QuitEventHandler(this.SDL_Quit);

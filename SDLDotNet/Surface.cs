@@ -6,7 +6,6 @@ namespace SDLDotNet {
 	/// <summary>
 	/// An opaque structure representing an SDL pixel value
 	/// </summary>
-	/// <type>struct</type>
 	public struct PixelValue {
 
 		private uint _val;
@@ -21,7 +20,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets or sets the pixel value
 		/// </summary>
-		/// <proptype>System.UInt32</proptype>
 		public uint Value {
 			get { return _val; }
 			set { _val = value; }
@@ -32,8 +30,6 @@ namespace SDLDotNet {
 	/// Represents an SDL drawing surface.
 	/// You can create instances of this class with the methods in the Video object
 	/// </summary>
-	/// <type>class</type>
-	/// <implements>System.IDisposable</implements>
 	unsafe public class Surface : IDisposable {
 		private bool _freeondispose;
 		private bool _disposed;
@@ -121,7 +117,6 @@ namespace SDLDotNet {
 		/// Maps a logical color to a pixel value in the surface's pixel format
 		/// </summary>
 		/// <param name="color">The color to map</param>
-		/// <returntype>SDLDotNet.PixelValue</returntype>
 		/// <returns>A pixel value in the surface's format</returns>
 		public PixelValue MapColor(System.Drawing.Color color) {
 			return new PixelValue(Natives.SDL_MapRGBA(_surface->format, color.R, color.G, color.B, color.A));
@@ -130,7 +125,6 @@ namespace SDLDotNet {
 		/// Maps an SDL 32-bit pixel value to a color using the surface's pixel format
 		/// </summary>
 		/// <param name="val">The pixel value to map</param>
-		/// <returntype>System.Drawing.Color</returntype>
 		/// <returns>A Color value for a pixel value in the surface's format</returns>
 		public System.Drawing.Color GetColor(PixelValue val) {
 			byte r, g, b, a;
@@ -144,7 +138,6 @@ namespace SDLDotNet {
 		/// <param name="width">The width of the new surface</param>
 		/// <param name="height">The height of the new surface</param>
 		/// <param name="hardware">Flag indicating whether to attempt to place the surface in video memory</param>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>A new surface</returns>
 		public Surface CreateCompatibleSurface(int width, int height, bool hardware) {
 			Natives.SDL_Surface *surf = Natives.SDL_CreateRGBSurface(hardware?(int)Natives.Video.HWSurface:(int)Natives.Video.SWSurface,
@@ -175,7 +168,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Copies this surface to a new surface with the format of the display window
 		/// </summary>
-		/// <returntype>SDLDotNet.Surface</returntype>
 		/// <returns>A copy of this surface</returns>
 		public Surface DisplayFormat() {
 			Natives.SDL_Surface *surf = Natives.SDL_DisplayFormat(_surface);
@@ -187,8 +179,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the size of the surface
 		/// </summary>
-		/// <proptype>System.Drawing.Size</proptype>
-		/// <readonly/>
 		public System.Drawing.Size Size {
 			get { return new System.Drawing.Size(_surface->w, _surface->h); }
 		}
@@ -196,15 +186,11 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the width of the surface
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int Width { get{ return (int)_surface->w; } }
 
 		/// <summary>
 		/// Gets the height of the surface
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int Height { get{ return (int)_surface->h; } }
 
 		/// <summary>
@@ -241,8 +227,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets a pointer to the raw pixel data of the surface
 		/// </summary>
-		/// <proptype>System.IntPtr</proptype>
-		/// <readonly/>
 		public IntPtr Pixels {
 			get { return _surface->pixels; }
 		}
@@ -259,8 +243,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets a flag indicating if it is neccessary to lock the surface before accessing its pixel data directly
 		/// </summary>
-		/// <proptype>System.Boolean</proptype>
-		/// <readonly/>
 		public bool MustLock {
 			get { return (_surface->offset != 0 || ((_surface->flags & (int)(Natives.Video.HWSurface|Natives.Video.AsyncBlit|Natives.Video.RLEAccel)) != 0)); }
 		}
@@ -314,7 +296,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the clipping rectangle for the surface
 		/// </summary>
-		/// <returntype>System.Drawing.Rectangle</returntype>
 		/// <returns>The current clipping coordinites</returns>
 		public System.Drawing.Rectangle GetClipRect() {
 			Natives.SDL_Rect sdlrect = new Natives.SDL_Rect(new System.Drawing.Rectangle());
@@ -325,8 +306,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the number of bytes per pixel for this surface
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int BytesPerPixel {
 			get{ return _surface->format->BytesPerPixel; }
 		}
@@ -419,8 +398,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Returns the length of a scanline in bytes
 		/// </summary>
-		/// <proptype>System.UInt16</proptype>
-		/// <readonly/>
 		public ushort Pitch { get { return _surface->pitch; } }
 	}
 }

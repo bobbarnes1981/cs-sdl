@@ -5,7 +5,6 @@ namespace SDLDotNet {
 	/// <summary>
 	/// Indicates the current CD Status
 	/// </summary>
-	/// <type>enum</type>
 	public enum CDStatus {
 		/// <summary>
 		/// The CD tray is empty
@@ -32,8 +31,6 @@ namespace SDLDotNet {
 	/// <summary>
 	/// Represents a CD-ROM drive on the system
 	/// </summary>
-	/// <type>class</type>
-	/// <implements>System.IDisposable</implements>
 	public class CDDrive : IDisposable {
 		private bool _disposed;
 		private IntPtr _handle;
@@ -64,8 +61,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// The drive number
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int Index { get { return _index; } }
 
 		/// <summary>
@@ -78,8 +73,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the current drive status
 		/// </summary>
-		/// <proptype>SDLDotNet.CDStatus</proptype>
-		/// <readonly/>
 		public CDStatus Status {
 			get { return (CDStatus)Natives.SDL_CDStatus(_handle); }
 		}
@@ -157,8 +150,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the number of tracks in the currently inserted CD
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int NumTracks {
 			get {
 				Natives.SDL_CDStatus(_handle);
@@ -169,8 +160,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the currently playing track
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int CurrentTrack {
 			get {
 				Natives.SDL_CDStatus(_handle);
@@ -181,8 +170,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the currently playing frame (75th of a second increment)
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int CurrentFrame {
 			get {
 				Natives.SDL_CDStatus(_handle);
@@ -196,7 +183,6 @@ namespace SDLDotNet {
 	/// Contains methods for playing audio CDs.
 	/// Obtain an instance of this class by accessing the CDAudio property of the main SDL object
 	/// </summary>
-	/// <type>class</type>
 	public class CDAudio {
 		internal CDAudio() {
 			if (Natives.SDL_InitSubSystem((int)Natives.Init.Cdrom) != 0)
@@ -206,8 +192,6 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets the number of CD-ROM drives available on the system
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <readonly/>
 		public int NumDrives {
 			get {
 				int ret = Natives.SDL_CDNumDrives();
@@ -221,7 +205,6 @@ namespace SDLDotNet {
 		/// Opens a CD-ROM drive for manipulation
 		/// </summary>
 		/// <param name="index">The number of the drive to open, from 0 - CDAudio.NumDrives</param>
-		/// <returntype>SDLDotNet.CDDrive</returntype>
 		/// <returns>The CDDrive object representing the CD-ROM drive</returns>
 		public CDDrive OpenDrive(int index) {
 			IntPtr cd = Natives.SDL_CDOpen(index);
@@ -234,7 +217,6 @@ namespace SDLDotNet {
 		/// Returns a platform-specific name for a CD-ROM drive
 		/// </summary>
 		/// <param name="index">The number of the drive</param>
-		/// <returntype>System.String</returntype>
 		/// <returns>A platform-specific name, i.e. "D:\"</returns>
 		public string DriveName(int index) {
 			if (index < 0 || index >= NumDrives)
@@ -249,7 +231,6 @@ namespace SDLDotNet {
 		/// <param name="M">A reference to a variable to receive the number of minutes</param>
 		/// <param name="S">A reference to a variable to receive the number of seconds</param>
 		/// <param name="F">A reference to a variable to receive the number of leftover frames</param>
-		/// <static/>
 		public static void FramesToMinSecFrames(int f, out int M, out int S, out int F) {
 			F = f % FramesPerSecond;
 			f /= FramesPerSecond;
@@ -263,18 +244,13 @@ namespace SDLDotNet {
 		/// <param name="M">The number of minutes to convert</param>
 		/// <param name="S">The number of seconds to convert</param>
 		/// <param name="F">The number of frames to convert</param>
-		/// <returntype>System.Int32</returntype>
 		/// <returns>The total number of frames</returns>
-		/// <static/>
 		public static int MinSecFramesToFrames(int M, int S, int F) {
 			return (M * 60 * FramesPerSecond + S * FramesPerSecond + F);
 		}
 		/// <summary>
 		/// Gets a static value indicating the number of frames in a second (75)
 		/// </summary>
-		/// <proptype>System.Int32</proptype>
-		/// <static/>
-		/// <readonly/>
 		public static int FramesPerSecond { get { return 75; } }
 	}
 }
