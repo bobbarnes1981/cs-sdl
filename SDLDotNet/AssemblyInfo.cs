@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("SDL.NET")]
 [assembly: AssemblyDescription(".NET Bindings for SDL")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("The SDL.NET Project")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("2002 Will Weisser")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
@@ -26,7 +26,7 @@ using System.Runtime.CompilerServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.3.*")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
@@ -54,5 +54,5 @@ using System.Runtime.CompilerServices;
 //       documentation for more information on this.
 //
 [assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile("")]
+[assembly: AssemblyKeyFile("sdl.keys")]
 [assembly: AssemblyKeyName("")]
