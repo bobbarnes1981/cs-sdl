@@ -26,15 +26,11 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for VideoInfo.
+	/// Information for current video mode..
 	/// </summary>
 	public sealed class VideoInfo
 	{
 		static readonly VideoInfo instance = new VideoInfo();
-
-//		static VideoInfo()
-//		{
-//		}
 
 		VideoInfo()
 		{
@@ -74,7 +70,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Bits Per Pixel. Typically 8, 16 or 32.
 		/// </summary>
 		public static byte BitsPerPixel
 		{
@@ -85,7 +81,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Bytes per pixel. Typically 1, 2 or 4.
 		/// </summary>
 		public static byte BytesPerPixel
 		{
@@ -96,7 +92,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Alpha Mask
 		/// </summary>
 		public static int AlphaMask
 		{
@@ -107,7 +103,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Red Mask
 		/// </summary>
 		public static int RedMask
 		{
@@ -118,7 +114,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Green Mask
 		/// </summary>
 		public static int GreenMask
 		{
@@ -129,7 +125,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Blue Mask
 		/// </summary>
 		public static int BlueMask
 		{

@@ -123,12 +123,14 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if the requested video mode is supported
 		/// </summary>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
-		/// <param name="fullscreen"></param>
-		/// <param name="bitsPerPixel"></param>
+		/// <param name="width">Width of mode</param>
+		/// <param name="height">Height of mode</param>
+		/// <param name="fullscreen">Fullscreen or not</param>
+		/// <param name="bitsPerPixel">Bits per pixel. Typically 8, 16, 24 or 32</param>
+		/// <remarks></remarks>
+		/// <returns>True is mode is supported, false if it is not.</returns>
 		public static bool IsVideoModeOK(int width, int height, bool fullscreen, int bitsPerPixel)
 		{
 			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN);
@@ -152,9 +154,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if the application is active
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>True is applications is active</returns>
 		public static bool IsActive
 		{
 			get
@@ -163,11 +165,11 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// Returns the highest bitsperpixel supported for the given width and height
 		/// </summary>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
-		/// <param name="fullscreen"></param>
+		/// <param name="width">Width of mode</param>
+		/// <param name="height">Height of mode</param>
+		/// <param name="fullscreen">Fullscreen mode</param>
 		public static int BestBitsPerPixel(int width, int height, bool fullscreen)
 		{
 			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF);
@@ -184,10 +186,10 @@ namespace SdlDotNet
 
 
 		/// <summary>
-		/// 
+		/// Returns array of modes supported
 		/// </summary>
-		/// <param name="fullscreen"></param>
-		/// <returns></returns>
+		/// <param name="fullscreen">Fullscreen mode</param>
+		/// <returns>Array of Size structs</returns>
 		public static Size[] ListModes(bool fullscreen)
 		{
 			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF);
@@ -392,7 +394,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Mouse object
 		/// </summary>
 		public static Mouse Mouse
 		{
@@ -403,7 +405,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns VideoInfo object
 		/// </summary>
 		public static VideoInfo VideoInfo
 		{
@@ -511,7 +513,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns video driver name
 		/// </summary>
 		public string VideoDriver
 		{
@@ -523,11 +525,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Sets gamma
 		/// </summary>
-		/// <param name="red"></param>
-		/// <param name="green"></param>
-		/// <param name="blue"></param>
+		/// <param name="red">Red</param>
+		/// <param name="green">Green</param>
+		/// <param name="blue">Blue</param>
 		public void Gamma(float red, float green, float blue)
 		{
 			int result = Sdl.SDL_SetGamma(red, green, blue);
@@ -538,7 +540,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Sets gamma for all colors
 		/// </summary>
 		/// <param name="gammaValue"></param>
 		public void Gamma(float gammaValue)

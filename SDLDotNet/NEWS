@@ -1,3 +1,9 @@
+3.0.0
+David Hudson 25 Feb 2005
+* Exceptions will use the SDL_error string by default.
+* Primitives are antialiased by default.
+* Fixed some documentation.
+
 3.0.0beta2
 David Hudson 20 Feb 2005
 * Updated some of the documentation.
@@ -18,6 +24,7 @@ David Hudson 14 Feb 2005
 * The video subsystem now returns much better information on the avaiable modes and the features available in the current mode and hardware.
 * There are many new methods exposing various SDL functions in manay of the classes. There is too much to state here.
 * I've added a major new example called "Simple Game" which shows off more of SDL.NET using a Model-View-Controller deisgn pattern. It is a reimplementation of a Pygame tutorial.
+* Fixed all of the Dispose methods in all of the appropriate classes. The garbage collector was prematurely collecting certain classes.
 
 2.2.0
 David Hudson 21 Jan 2005

@@ -288,9 +288,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Fill entire surface with color
 		/// </summary>
-		/// <param name="color"></param>
+		/// <param name="color">Color to fill surface</param>
 		public void Fill(System.Drawing.Color color) 
 		{
 			Sdl.SDL_Surface surf = 
@@ -301,10 +301,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw filled circle onto surface
 		/// </summary>
-		/// <param name="circle"></param>
-		/// <param name="color"></param>
+		/// <param name="circle">Circle</param>
+		/// <param name="color">Color to fill circle</param>
 		public void DrawFilledCircle(Circle circle, System.Drawing.Color color)
 		{
 			int result = SdlGfx.filledCircleRGBA(handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
@@ -350,7 +350,7 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawCircle(Circle circle, System.Drawing.Color color)
 		{
-			DrawCircle(circle, color, false);
+			DrawCircle(circle, color, true);
 		}
 
 		/// <summary>
@@ -394,7 +394,7 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawEllipse(Ellipse ellipse, System.Drawing.Color color)
 		{
-			DrawEllipse(ellipse, color, false);
+			DrawEllipse(ellipse, color, true);
 		}
 
 		/// <summary>
@@ -454,7 +454,7 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawLine(Line line, System.Drawing.Color color)
 		{
-			DrawLine(line, color, false);
+			DrawLine(line, color, true);
 		}
 
 		/// <summary>
@@ -500,7 +500,7 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawTriangle(Triangle triangle, System.Drawing.Color color)
 		{
-			DrawTriangle(triangle, color, false);
+			DrawTriangle(triangle, color, true);
 		}
 
 		/// <summary>
@@ -575,7 +575,7 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawPolygon(Polygon polygon, System.Drawing.Color color)
 		{
-			DrawPolygon(polygon, color, false);
+			DrawPolygon(polygon, color, true);
 		}
 
 		/// <summary>
@@ -1309,21 +1309,21 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Rotate surface.
 		/// </summary>
-		/// <param name="degreesOfRotation"></param>
-		/// <returns></returns>
+		/// <remarks>Smoothing is turned on.</remarks>
+		/// <param name="degreesOfRotation">degrees of rotation</param>
 		public void Rotate(int degreesOfRotation)
 		{
 			this.Handle = 
-				SdlGfx.rotozoomSurface(this.Handle, degreesOfRotation, 1, SdlGfx.SMOOTHING_OFF);
+				SdlGfx.rotozoomSurface(this.Handle, degreesOfRotation, 1, SdlGfx.SMOOTHING_ON);
 		}
 
 		/// <summary>
-		/// 
+		/// Rotate surface
 		/// </summary>
-		/// <param name="degreesOfRotation"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="degreesOfRotation">degrees of rotation</param>
+		/// <param name="antiAlias">If true, smoothing will be turned on.</param>
 		/// <returns></returns>
 		public void Rotate(int degreesOfRotation, bool antiAlias)
 		{
@@ -1342,23 +1342,23 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Rotate and Zoom surface
 		/// </summary>
-		/// <param name="degreesOfRotation"></param>
-		/// <param name="zoom"></param>
-		/// <returns></returns>
+		/// <param name="degreesOfRotation">Degrees of rotation</param>
+		/// <param name="zoom">Scale of zoom</param>
+		/// <remarks>Smoothing is turned on.</remarks>
 		public void RotationZoom(int degreesOfRotation, double zoom)
 		{
 			this.Handle = 
-				SdlGfx.rotozoomSurface(this.Handle, degreesOfRotation, zoom, SdlGfx.SMOOTHING_OFF);
+				SdlGfx.rotozoomSurface(this.Handle, degreesOfRotation, zoom, SdlGfx.SMOOTHING_ON);
 		}
 
 		/// <summary>
-		/// 
+		/// Rotate and zoom surface
 		/// </summary>
-		/// <param name="degreesOfRotation"></param>
-		/// <param name="zoom"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="degreesOfRotation">degrees of rotation</param>
+		/// <param name="zoom">scale of zoom</param>
+		/// <param name="antiAlias">If true, moothing is turned on.</param>
 		/// <returns></returns>
 		public void RotationZoom(int degreesOfRotation, 
 			double zoom, bool antiAlias)
@@ -1378,23 +1378,23 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Rescale surface
 		/// </summary>
-		/// <param name="zoomX"></param>
-		/// <param name="zoomY"></param>
+		/// <param name="zoomX">Scale on X-axis</param>
+		/// <param name="zoomY">Scale on Y-axis</param>
 		/// <returns></returns>
 		public void Scale(double zoomX, double zoomY)
 		{
 			this.Handle = 
-				SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, SdlGfx.SMOOTHING_OFF);
+				SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, SdlGfx.SMOOTHING_ON);
 		}
 
 		/// <summary>
-		/// 
+		/// Rescale surface
 		/// </summary>
-		/// <param name="zoomX"></param>
-		/// <param name="zoomY"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="zoomX">Scale on X-axis</param>
+		/// <param name="zoomY">Scale on Y-axis</param>
+		/// <param name="antiAlias">If true, smoothing is turned on.</param>
 		/// <returns></returns>
 		public void Scale(double zoomX, double zoomY, bool antiAlias)
 		{
@@ -1408,21 +1408,20 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Scale surface on both axes
 		/// </summary>
-		/// <param name="zoom"></param>
-		/// <returns></returns>
+		/// <param name="zoom">Scale amount</param>
 		public void Scale(double zoom)
 		{
 			this.Handle = 
-				SdlGfx.zoomSurface(this.Handle, zoom, zoom, SdlGfx.SMOOTHING_OFF);
+				SdlGfx.zoomSurface(this.Handle, zoom, zoom, SdlGfx.SMOOTHING_ON);
 		}
 
 		/// <summary>
-		/// 
+		/// Scale surface on both axes
 		/// </summary>
-		/// <param name="zoom"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="zoom">Scale amount</param>
+		/// <param name="antiAlias">If true, smoothing is turned on</param>
 		/// <returns></returns>
 		public void Scale(double zoom, bool antiAlias)
 		{
@@ -1436,19 +1435,19 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Doubles the size of the surface
 		/// </summary>
 		/// <returns></returns>
 		public void ScaleDouble()
 		{
 			this.Handle = 
-				SdlGfx.zoomSurface(this.Handle, 2, 2, SdlGfx.SMOOTHING_OFF);
+				SdlGfx.zoomSurface(this.Handle, 2, 2, SdlGfx.SMOOTHING_ON);
 		}
 
 		/// <summary>
-		/// 
+		/// Doubles the size of the surface
 		/// </summary>
-		/// <param name="antiAlias"></param>
+		/// <param name="antiAlias">If true</param>
 		/// <returns></returns>
 		public void ScaleDouble(bool antiAlias)
 		{
@@ -1539,7 +1538,7 @@ namespace SdlDotNet
 
 
 		/// <summary>
-		/// 
+		/// Updates rectangle
 		/// </summary>
 		/// <param name="rectangle"></param>
 		public void Update(System.Drawing.Rectangle rectangle)
@@ -1569,8 +1568,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the number of Bits per pixel.
 		/// </summary>
+		/// <remarks>Typically 8, 16, 24 or 32</remarks>
 		public byte BitsPerPixel
 		{
 			get
@@ -1582,6 +1582,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the number of bytes per pixel for this surface
 		/// </summary>
+		/// <remarks>Tyically 1, 2, 3 or 4</remarks>
 		public byte BytesPerPixel
 		{
 			get

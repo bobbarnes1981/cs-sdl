@@ -23,12 +23,12 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for ResizeEventArgs.
+	/// Event args for resizing the application window.
 	/// </summary>
 	public class VideoResizeEventArgs : SdlEventArgs 
 	{
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
 		/// <param name="w">The new window width</param>
 		/// <param name="h">The new window height</param>
@@ -45,7 +45,7 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Width of window
 		/// </summary>
 		public int W
 		{
@@ -56,7 +56,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Height of window
 		/// </summary>
 		public int H
 		{
