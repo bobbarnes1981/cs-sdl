@@ -37,7 +37,16 @@ namespace SdlDotNet.Examples
 		/// Private field. Indicated if mainloop is to be continued.
 		/// </summary>
 		private bool quitFlag;
-		Point MousePos = new Point(100,100);
+		Point position = new Point(100,100);
+		private int AxesCount = 0;
+		private int ButtonCount = 0;
+		private int HatCount = 0;
+		private int BallCount = 0;
+		private Joystick joystick;
+		int width = 640;
+		int height = 480;
+		MouseMotionEventHandler MouseMotionHandler;
+		JoystickAxisEventHandler JoystickAxisHandler;
 
 		/// <summary>
 		/// 
@@ -52,16 +61,16 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run() 
 		{
-			int width = 640;
-			int height = 480;
 			Random rand = new Random();
 			string imagepath;
+			
 			
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
 			Events.Quit += new QuitEventHandler(this.Quit);
-			Events.MouseMotion += 
-				new MouseMotionEventHandler(this.MouseMotion);
+			MouseMotionHandler = new MouseMotionEventHandler(this.MouseMotion);
+			JoystickAxisHandler = new JoystickAxisEventHandler(this.JoystickAxisChanged);
+			Events.MouseMotion += MouseMotionHandler;
 			try 
 			{
 				string filepath = @"../../";
@@ -148,7 +157,7 @@ namespace SdlDotNet.Examples
 						button.Draw(surf);
 						
 						textBox.Draw(surf);
-						surf.Blit(Cursor,new Rectangle(MousePos, screen.Size));
+						surf.Blit(Cursor,new Rectangle(position, screen.Size));
 						
 
 						// Draw frame to screen
@@ -174,8 +183,8 @@ namespace SdlDotNet.Examples
 			object sender, 
 			MouseMotionEventArgs e)
 		{
-			MousePos.X = e.X;
-			MousePos.Y = e.Y;
+			position.X = e.X;
+			position.Y = e.Y;
 		}
 
 		private void KeyboardDown(object sender, KeyboardEventArgs e) 
@@ -184,6 +193,17 @@ namespace SdlDotNet.Examples
 				e.Key == Key.Q)
 			{
 				quitFlag = true;
+			}
+			else if (e.Key == Key.J)
+			{
+				Events.MouseMotion -= MouseMotionHandler;
+				Events.JoystickAxisMotion += JoystickAxisHandler;
+				joystick = Joysticks.OpenJoystick(0);
+			}
+			else if (e.Key == Key.M)
+			{
+				Events.MouseMotion += MouseMotionHandler;
+				Events.JoystickAxisMotion -= JoystickAxisHandler;
 			}
 		}
 
@@ -198,6 +218,50 @@ namespace SdlDotNet.Examples
 		private void button_Click(object source, SdlButtonEventArgs e)
 		{
 			Console.WriteLine("Button was clicked");
+		}
+
+		private void JoystickAxisChanged(object sender, JoystickAxisEventArgs e)
+		{
+			AxesCount++;
+			if (e.AxisIndex == 0)
+			{
+				//joystickPosition.X = (int)(e.AxisValue * width);
+				position.X = (int)(Joysticks.OpenJoystick(e.Device).GetAxisPosition(JoystickAxes.Horizontal) * width);
+			} 
+			else if (e.AxisIndex == 1)
+			{
+				//joystickPosition.Y = (int)(e.AxisValue * height);
+				position.Y = (int)(Joysticks.OpenJoystick(e.Device).GetAxisPosition(JoystickAxes.Vertical) * height);
+			}
+			Console.WriteLine("Joystick Axis Changed: " + AxesCount.ToString());
+			Console.WriteLine("X: " + position.X.ToString());
+			Console.WriteLine("Y: " + position.Y.ToString());
+			Console.WriteLine("Axes: " + e.AxisIndex);
+			Console.WriteLine("AxesValue: " + e.AxisValue);
+		}
+
+		private void JoystickBallChanged(object sender, JoystickBallEventArgs e)
+		{
+			BallCount++;
+			Console.WriteLine("Joystick Ball Changed" + BallCount.ToString());
+		}
+
+		private void JoystickHatChanged(object sender, JoystickHatEventArgs e)
+		{
+			HatCount++;
+			Console.WriteLine("Joystick Hat Changed" + HatCount.ToString());
+		}
+
+		private void JoystickButtonUpChanged(object sender, JoystickButtonEventArgs e)
+		{
+			
+			Console.WriteLine("Joystick button up" + ButtonCount.ToString());
+		}
+
+		private void JoystickButtonDownChanged(object sender, JoystickButtonEventArgs e)
+		{
+			ButtonCount++;
+			Console.WriteLine("Joystick button down" + ButtonCount.ToString());
 		}
 
 		/// <summary>

@@ -6,7 +6,6 @@
     examples: builds all examples.
     buildrelease: builds release versions of libraries and examples.
     doc: creates docs.
-    schema: creates XML schema.
     package: creates release zip file for .NET and Mono.
 
     you can combine targets easily. If .NET is your default framework but you want to compile 
@@ -67,7 +66,6 @@
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="clean" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="clean" />
-	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
 	<nant buildfile="${examples.dir}/GuiExample/GuiExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/SpriteGuiDemos/SpriteGuiDemos.build" target="clean" />
@@ -100,7 +98,6 @@
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
-	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="build" />
 	<nant buildfile="${examples.dir}/GuiExample/GuiExample.build" target="build" />
 	<nant buildfile="${examples.dir}/SpriteGuiDemos/SpriteGuiDemos.build" target="build" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="build" />
@@ -120,11 +117,7 @@
 	    <nant buildfile="${src.dir}/${project.name}.dll.build" target="doc" />	
     </target>
 
-    <target name="schema" depends="init, build">
-	    <nant buildfile="${src.dir}/${project.name}.dll.build" target="schema" />
-    </target>
-
-    <target name="package" depends="buildrelease, doc, schema, copyfiles, zip" description="Package">
+    <target name="package" depends="buildrelease, doc, copyfiles, zip" description="Package">
     </target>
 
     <!-- copy project files -->
@@ -159,11 +152,6 @@
 		<exclude name="examples/PrimitivesExample/*j.user" />
 		<exclude name="examples/PrimitivesExample/${obj.dir}" />
 		<!-- <exclude name="examples/PrimitivesExample/${build.dir}/*.dll" /> -->
-		<include name="examples/JoystickExample/*" />
-		<include name="examples/JoystickExample/${build.dir}/*" />
-		<exclude name="examples/JoystickExample/*j.user" />
-		<exclude name="examples/JoystickExample/${obj.dir}" />
-		<!-- <exclude name="examples/JoystickExample/${build.dir}/*.dll" /> -->
 		<include name="examples/Rectangles/*" />
 		<include name="examples/Rectangles/${build.dir}/*" />
 		<exclude name="examples/Rectangles/*j.user" />
