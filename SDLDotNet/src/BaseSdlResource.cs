@@ -76,8 +76,8 @@ namespace SdlDotNet
 			{
 				if (disposing)
 				{
+					CloseHandle(handle);
 				}
-				CloseHandle(handle);
 				GC.KeepAlive(this);
 			}
 			disposed = true;

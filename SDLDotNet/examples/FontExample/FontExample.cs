@@ -64,17 +64,17 @@ namespace SdlDotNet.Examples
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			Video.WindowCaption = "Font Example";
 			Video.Mouse.ShowCursor(false);
-			System.Drawing.Text.FontCollection installedFonts = FontSystem.GetSystemFontNames();
+			System.Drawing.Text.FontCollection installedFonts = FontSystem.SystemFontNames;
 			Console.WriteLine("Installed Fonts: " + installedFonts.ToString());
 			Console.WriteLine("Installed Fonts: " + installedFonts.Families[0].ToString());
 
 			Surface surf = screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
-			surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+			surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 
 			while (!quitFlag) 
 			{
-				while (Events.PollAndDelegate()) 
+				while (Events.Poll()) 
 				{
 					// handle events till the queue is empty
 				}
@@ -103,16 +103,12 @@ namespace SdlDotNet.Examples
 							break;
 					}
 
-					text.Blit(
-						screen, 
+					screen.Blit(
+						text, 
 						new Rectangle(new Point(rand.Next(width - 100),rand.Next(height - 100)), 
 						text.Size));
 					screen.Flip();
 					Thread.Sleep(1000);
-					//				while (!mDone)
-					//				{
-					//					sdl.Events.WaitAndDelegate();
-					//				}
 				} 
 				catch 
 				{

@@ -96,8 +96,8 @@ namespace SdlDotNet
 			{
 				if (disposing)
 				{
+					SdlTtf.TTF_Quit();
 				}
-				SdlTtf.TTF_Quit();
 				disposed = true;
 			}
 		}
@@ -130,9 +130,12 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		public static System.Drawing.Text.FontCollection GetSystemFontNames()
+		public static System.Drawing.Text.FontCollection SystemFontNames
 		{
-			return new System.Drawing.Text.InstalledFontCollection();
+			get
+			{
+				return new System.Drawing.Text.InstalledFontCollection();
+			}
 		}
 	}
 }

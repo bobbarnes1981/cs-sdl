@@ -35,9 +35,9 @@ namespace SdlDotNet
 
 		static readonly Joysticks instance = new Joysticks();
 
-		static Joysticks()
-		{
-		}
+//		static Joysticks()
+//		{
+//		}
 
 		Joysticks()
 		{
@@ -64,6 +64,7 @@ namespace SdlDotNet
 				{
 					throw SdlException.Generate();
 				}
+				//Sdl.SDL_JoystickEventState(Sdl.SDL_ENABLE);
 			}
 		}
 
@@ -122,8 +123,8 @@ namespace SdlDotNet
 			{
 				if (disposing)
 				{
+					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_JOYSTICK);
 				}
-				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_JOYSTICK);
 				disposed = true;
 			}
 		}

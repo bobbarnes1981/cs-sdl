@@ -26,86 +26,81 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for MouseMotionEventArgs.
 	/// </summary>
-	public class MouseButtonEventArgs : EventArgs 
+	public class MouseButtonEventArgs : SdlEventArgs 
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="button">The mouse button</param>
-		/// <param name="down">True if the button is pressed, 
+		/// <param name="buttonPressed">True if the button is pressed, 
 		/// False if it is released</param>
 		/// <param name="x">The current X coordinate</param>
 		/// <param name="y">The current Y coordinate</param>
-		public MouseButtonEventArgs(int button, bool down, int x, int y)
+		public MouseButtonEventArgs(MouseButton button, bool buttonPressed, short x, short y)
 		{
-			this.button = button;
-			this.x = x;
-			this.y = y;
-			this.down = down;
-		}
-
-		private int button;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Button
-		{
-			get
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.button.button = (byte)button;
+			this.eventStruct.button.which = 0;
+			this.eventStruct.button.x = x;
+			this.eventStruct.button.y = y;
+			if (buttonPressed)
 			{
-				return this.button;
+				this.eventStruct.button.state = (byte)ButtonKeyState.Pressed;
+				this.eventStruct.type = (byte)EventTypes.MouseButtonDown;
 			}
-			set
+			else
 			{
-				this.button = value;
+				this.eventStruct.button.state = (byte)ButtonKeyState.NotPressed;
+				this.eventStruct.type = (byte)EventTypes.MouseButtonUp;
 			}
 		}
 
-		private bool down;
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool Down
+		internal MouseButtonEventArgs(Sdl.SDL_Event ev)
 		{
-			get
-			{
-				return this.down;
-			}
-			set
-			{
-				this.down = value;
-			}
+			this.eventStruct = ev;
 		}
 
-		private int x;
 		/// <summary>
 		/// 
 		/// </summary>
-		public int X
+		public MouseButton Button
 		{
 			get
 			{
-				return this.x;
-			}
-			set
-			{
-				this.x = value;
+				return (MouseButton)this.eventStruct.button.button;
 			}
 		}
-
-		private int y;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public int Y
+		public bool ButtonPressed
+		{
+			get
+			{
+				return (this.eventStruct.button.state == (byte)ButtonKeyState.Pressed);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public short X
+		{
+			get
+			{
+				return this.eventStruct.button.x;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public short Y
 		{
 			get
 			{ 
-				return this.y;
-			}
-			set
-			{
-				this.y = value;
+				return this.eventStruct.button.y;
 			}
 		}
 	}

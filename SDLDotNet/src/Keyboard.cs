@@ -32,9 +32,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns the global instance of this class.
 		/// </summary>
-		static Keyboard()
-		{
-		}
+//		static Keyboard()
+//		{
+//		}
 
 		Keyboard() 
 		{

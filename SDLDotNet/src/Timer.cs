@@ -29,9 +29,9 @@ namespace SdlDotNet
 	{
 		static readonly Timer instance = new Timer();
 
-		static Timer()
-		{
-		}
+//		static Timer()
+//		{
+//		}
 
 		Timer()
 		{

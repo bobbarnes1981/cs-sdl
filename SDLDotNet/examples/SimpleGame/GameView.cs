@@ -30,7 +30,6 @@ namespace SdlDotNet.Examples
 		Map map;
 		int height;
 		int width;
-		Surface screen;
 		Surface surf;
 		Names names;
 		EntitySprite entitySprite;
@@ -100,7 +99,7 @@ namespace SdlDotNet.Examples
 					LogFile.WriteLine(mapRectangles[i].ToString());
 					x+=138;
 				}	
-				backSprites.Add(new SectorSprite(screen, sec, mapRectangles[i]));
+				backSprites.Add(new SectorSprite(Video.Screen, sec, mapRectangles[i]));
 				i++;
 			}					
 		}
@@ -110,26 +109,26 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void CreateView()
 		{
-			this.screen = Video.SetVideoModeWindow(this.width, this.height, true); 
-			this.surf = screen.CreateCompatibleSurface(width, height, true);
+			Surface screen = Video.SetVideoModeWindow(this.width, this.height, true); 
+			this.surf = Video.Screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
-			this.surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
+			this.surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
 			Video.WindowCaption = Names.WindowCaption;
 			Video.Mouse.ShowCursor(false);
 		}
 
 		public void UpdateView()
 		{
-			this.surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
+			this.surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
 			foreach (SectorSprite i in this.backSprites)
 			{
-				i.Surface.Blit(screen, i.Rect);
+				Video.Screen.Blit(i.Surface, i.Rect);
 			}
 			foreach (EntitySprite j in this.frontSprites)
 			{
-				j.Surface.Blit(screen, j.Rect);
+				Video.Screen.Blit(j.Surface, j.Rect);
 			}
-			screen.Flip();
+			Video.Screen.Flip();
 		}
 
 		public void ShowEntity(Entity entity)

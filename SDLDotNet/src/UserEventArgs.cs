@@ -26,15 +26,27 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for UserEventArgs.
 	/// </summary>
-	public class UserEventArgs : EventArgs 
+	public class UserEventArgs : SdlEventArgs 
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		public UserEventArgs()
+		{
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.type = (byte)EventTypes.UserEvent;
+			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
+		}
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="userEvent">The user event object</param>
 		public UserEventArgs(object userEvent)
 		{
+			this.eventStruct = new Sdl.SDL_Event();
 			this.userEvent = userEvent;
+			this.eventStruct.type = (byte)EventTypes.UserEvent;
+			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
 		}
 		
 		private object userEvent;
@@ -47,11 +59,21 @@ namespace SdlDotNet
 			{
 				return this.userEvent;
 			}
-			set
-			{
-				this.userEvent = value;
-			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		public int UserCode
+		{
+			get
+			{
+				return this.eventStruct.user.code;
+			}
+			set
+			{
+				this.eventStruct.user.code = value;
+			}
+		}
 	}
 }

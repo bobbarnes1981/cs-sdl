@@ -83,13 +83,13 @@ namespace SdlDotNet
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	public delegate void ResizeEventHandler(object sender, ResizeEventArgs e);
+	public delegate void VideoResizeEventHandler(object sender, VideoResizeEventArgs e);
 	/// <summary>
 	/// Indicates that a portion of the window has been exposed
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	public delegate void ExposeEventHandler(object sender, ExposeEventArgs e);
+	public delegate void VideoExposeEventHandler(object sender, VideoExposeEventArgs e);
 	/// <summary>
 	/// Indicates that the user has closed the main window
 	/// </summary>
@@ -123,11 +123,11 @@ namespace SdlDotNet
 	public sealed class Events 
 	{
 		private static Hashtable UserEvents = new Hashtable();
-		private static int UserEventId = 0;
+		private static int UserEventId = 1;
+		
 		//Reduced joystick "jitter"
-		private const int JOYSTICK_THRESHHOLD = 3200;
-		private const int JOYSTICK_ADJUSTMENT = 32768;
-		private const int JOYSTICK_SCALE = 65535;
+		
+		private const int QUERY_EVENTS_MAX = 254;
 
 		/// <summary>
 		/// Fires when the application has become active or inactive
@@ -204,11 +204,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Fires when the user resizes the window
 		/// </summary>
-		public static event ResizeEventHandler Resize;
+		public static event VideoResizeEventHandler VideoResize;
 		/// <summary>
 		/// Fires when a portion of the window is uncovered
 		/// </summary>
-		public static event ExposeEventHandler Expose;
+		public static event VideoExposeEventHandler VideoExpose;
 		/// <summary>
 		/// Fires when a user closes the window
 		/// </summary>
@@ -219,7 +219,7 @@ namespace SdlDotNet
 		public static event UserEventHandler UserEvent;
 		/// <summary>
 		/// Fires when a sound channel finishes playing.
-		/// Will only occur if you call Mixer.EnableMusicCallbacks().
+		/// Will only occur if you call Channel.EnableChannelCallbacks().
 		/// </summary>
 		public static event ChannelFinishedEventHandler ChannelFinished;
 		/// <summary>
@@ -230,9 +230,9 @@ namespace SdlDotNet
 
 		static readonly Events instance = new Events();
 
-		static Events()
-		{
-		}
+//		static Events()
+//		{
+//		}
 
 		Events()
 		{
@@ -245,7 +245,7 @@ namespace SdlDotNet
 		/// <returns>
 		/// True if any events were in the queue, otherwise False
 		/// </returns>
-		public static bool PollAndDelegate() 
+		public static bool Poll() 
 		{
 			Sdl.SDL_Event ev;
 			int ret = Sdl.SDL_PollEvent(out ev);
@@ -257,422 +257,467 @@ namespace SdlDotNet
 			{
 				return false;
 			}
-			DelegateEvent(ref ev);
-			return true;
+			else
+			{
+				ProcessEvent(ref ev);
+				return true;
+			}
 		}
 
 		/// <summary>
 		/// Checks the event queue, and waits until an event is available
 		/// </summary>
-		public static void WaitAndDelegate() 
+		public static void Wait() 
 		{
 			Sdl.SDL_Event ev;
 			if (Sdl.SDL_WaitEvent(out ev) == (int) SdlFlag.Error2)
 			{
 				throw SdlException.Generate();
 			}
-			DelegateEvent(ref ev);
+			ProcessEvent(ref ev);
 		}
 
 		/// <summary>
 		/// Pushes a user-defined event on the event queue
 		/// </summary>
-		/// <param name="userEvent">
+		/// <param name="userEventArgs">
 		/// An opaque object representing a user-defined event.
 		/// Will be passed back to the UserEvent handler delegate when this event is processed.</param>
-		public static void PushUserEvent(object userEvent) 
+		public static void PushUserEvent(UserEventArgs userEventArgs) 
 		{
-			Sdl.SDL_UserEvent sdlev = new Sdl.SDL_UserEvent();
-			sdlev.type = (byte)Sdl.SDL_USEREVENT;
+			//Sdl.SDL_UserEvent sdlev = new Sdl.SDL_UserEvent();
+			//sdlev.type = (byte)Sdl.SDL_USEREVENT;
 			lock (instance) 
 			{
-				UserEvents[UserEventId] = userEvent;
-				sdlev.code = UserEventId;
+				UserEvents[UserEventId] = userEventArgs;
+				userEventArgs.UserCode = UserEventId;
 				UserEventId++;
 			}
-			Sdl.SDL_Event evt = new Sdl.SDL_Event();
-			evt.user = sdlev;
+
+			Sdl.SDL_Event evt = userEventArgs.EventStruct;
 			if (Sdl.SDL_PushEvent(out evt) != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
 		}
 
-		private static void DelegateEvent(ref Sdl.SDL_Event ev) 
+		/// <summary>
+		/// Adds an event to the Event queue.
+		/// </summary>
+		/// <param name="sdlEvent"></param>
+		/// <returns></returns>
+		public static void Add(SdlEventArgs sdlEvent)
 		{
-			switch (ev.type) 
+			SdlEventArgs[] events = new SdlEventArgs[1];
+			events[0] = sdlEvent;
+			Add(events);
+		}
+
+		/// <summary>
+		/// Adds an array of events to the event queue.
+		/// </summary>
+		/// <param name="sdlEvents"></param>
+		/// <returns></returns>
+		public static void Add(SdlEventArgs[] sdlEvents)
+		{
+			Sdl.SDL_Event[] events = new Sdl.SDL_Event[sdlEvents.Length];
+			for (int i = 0; i < sdlEvents.Length; i++)
 			{
-			case Sdl.SDL_ACTIVEEVENT:
-				DelegateActiveEvent(instance, ref ev);
-				break;
-			case Sdl.SDL_JOYAXISMOTION:
-				DelegateJoystickAxisMotion(instance, ref ev);
-				break;
-			case Sdl.SDL_JOYBALLMOTION:
-				DelegateJoystickBallMotion(instance, ref ev);
-				break;
-			case Sdl.SDL_JOYBUTTONDOWN:
-				DelegateJoystickButtonDown(instance, ref ev);
-				break;
-			case Sdl.SDL_JOYBUTTONUP:
-				DelegateJoystickButtonUp(instance, ref ev);
-				break;
-			case Sdl.SDL_JOYHATMOTION:
-				DelegateJoystickHatMotion(instance, ref ev);
-				break;
-			case Sdl.SDL_KEYDOWN:
-				DelegateKeyDown(instance, ref ev);
-				break;
-			case Sdl.SDL_KEYUP:
-				DelegateKeyUp(instance, ref ev);
-				break;
-			case Sdl.SDL_MOUSEBUTTONDOWN:
-				DelegateMouseButtonDown(instance, ref ev);
-				break;
-			case Sdl.SDL_MOUSEBUTTONUP:
-				DelegateMouseButtonUp(instance, ref ev);
-				break;
-			case Sdl.SDL_MOUSEMOTION:
-				DelegateMouseMotion(instance, ref ev);
-				break;
-			case Sdl.SDL_QUIT:
-				DelegateQuit(instance, ref ev);
-				break;
-			case Sdl.SDL_USEREVENT:
-				DelegateUserEvent(instance, ref ev);
-				break;
-			case Sdl.SDL_VIDEOEXPOSE:
-				DelegateVideoExpose(instance, ref ev);
-				break;
-			case Sdl.SDL_VIDEORESIZE:
-				DelegateVideoResize(instance, ref ev);
-				break;
+				events[ i ] = sdlEvents[ i ].EventStruct;
+			}
+			int result = 
+				Sdl.SDL_PeepEvents(
+				events, 
+				events.Length, 
+				Sdl.SDL_ADDEVENT, 
+				(int)EventMask.AllEvents);
+			if (result == (int)SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+		}
+		/// <summary>
+		/// Returns an array of events in the event queue.
+		/// </summary>
+		/// <param name="eventMask"></param>
+		/// <param name="numberOfEvents"></param>
+		/// <returns></returns>
+		public static void Remove(EventMask eventMask, int numberOfEvents)
+		{
+			Sdl.SDL_Event[] events = new Sdl.SDL_Event[numberOfEvents];
+			int result = 
+				Sdl.SDL_PeepEvents(
+				events, 
+				events.Length,
+				Sdl.SDL_GETEVENT, 
+				(int)eventMask);
+			if (result == (int)SdlFlag.Error)
+			{
+				throw SdlException.Generate();
 			}
 		}
 
-		private static void DelegateActiveEvent(object sender,  ref Sdl.SDL_Event ev) 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public static void Remove()
 		{
-			if (AppActive != null || MouseFocus != null || InputFocus != null) 
-			{
-				bool activeGain = false;
-				if (ev.active.gain != 0)
-				{
-					activeGain = true;
-				}
-				ActiveEventArgs e = new ActiveEventArgs(activeGain);
+			Remove(EventMask.AllEvents, QUERY_EVENTS_MAX);
+		}
 
-				if (((int)ev.active.state & 
-					(int)Sdl.SDL_APPMOUSEFOCUS) != 0 && 
-					MouseFocus != null)
-				{
-					MouseFocus(sender, e);
-				}
-				if (((int)ev.active.state & 
-					(int)Sdl.SDL_APPINPUTFOCUS) != 0 && 
-					InputFocus != null)
-				{
-					InputFocus(sender, e);
-				}
-				if (((int)ev.active.state & 
-					(int)Sdl.SDL_APPACTIVE) != 0 && 
-					AppActive != null)
-				{
-					AppActive(sender, e);
-				}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="numberOfEvents"></param>
+		/// <returns></returns>
+		public static void Remove(int numberOfEvents)
+		{
+			Remove(EventMask.AllEvents, numberOfEvents);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="eventMask"></param>
+		/// <returns></returns>
+		public static void Remove(EventMask eventMask)
+		{
+			Remove(eventMask, QUERY_EVENTS_MAX);
+		}
+
+		/// <summary>
+		/// Returns an array of events in the event queue.
+		/// </summary>
+		/// <param name="eventMask"></param>
+		/// <param name="numberOfEvents"></param>
+		/// <returns></returns>
+		public static SdlEventArgs[] Peek(EventMask eventMask, int numberOfEvents)
+		{
+			Sdl.SDL_Event[] events = new Sdl.SDL_Event[numberOfEvents];
+			int result = 
+				Sdl.SDL_PeepEvents(
+				events, 
+				events.Length,
+				Sdl.SDL_PEEKEVENT, 
+				(int)eventMask);
+			if (result == (int)SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+			SdlEventArgs[] eventsArray = new SdlEventArgs[result];
+			for (int i = 0; i < eventsArray.Length; i++)
+			{
+				eventsArray[ i ] = SdlEventArgs.CreateEventArgs(events[ i ]);
+			}
+			return eventsArray;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="numberOfEvents"></param>
+		/// <returns></returns>
+		public static SdlEventArgs[] Peek(int numberOfEvents)
+		{
+			return Peek(EventMask.AllEvents, numberOfEvents);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public static SdlEventArgs[] Peek()
+		{
+			return Peek(EventMask.AllEvents, QUERY_EVENTS_MAX);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="eventMask"></param>
+		/// <returns></returns>
+		public static SdlEventArgs[] Peek(EventMask eventMask)
+		{
+			return Peek(eventMask, QUERY_EVENTS_MAX);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="eventMask"></param>
+		/// <returns></returns>
+		public static bool IsEventQueued(EventMask eventMask)
+		{
+			SdlEventArgs[] eventArray = Peek(eventMask, QUERY_EVENTS_MAX);
+			if (eventArray.Length > 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 
-		private static void DelegateJoystickAxisMotion(object sender, ref Sdl.SDL_Event ev) 
+		/// <summary>
+		/// /pump
+		/// </summary>
+		/// <param name="eventType"></param>
+		public static void IgnoreEvent(EventTypes eventType)
 		{
-			if (JoystickAxisMotion != null) 
+			Sdl.SDL_EventState((byte)eventType, Sdl.SDL_IGNORE);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="eventType"></param>
+		public static void EnableEvent(EventTypes eventType)
+		{
+			Sdl.SDL_EventState((byte)eventType, Sdl.SDL_ENABLE);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="eventType"></param>
+		/// <returns></returns>
+		public static bool IsEventEnabled(EventTypes eventType)
+		{
+			return (Sdl.SDL_EventState((byte)eventType, Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
+		}
+
+		private static void ProcessEvent(ref Sdl.SDL_Event ev) 
+		{
+			switch ((EventTypes)ev.type)
 			{
-				if ((ev.jaxis.val < (-1)*JOYSTICK_THRESHHOLD) || (ev.jaxis.val > JOYSTICK_THRESHHOLD))
-				{
-					float jaxisValue = 
-						(float)((int)ev.jaxis.val + JOYSTICK_ADJUSTMENT) / (float)JOYSTICK_SCALE;
-					//Console.WriteLine("jaxisValue: " + jaxisValue.ToString());
-					if (jaxisValue < 0)
+				case EventTypes.ActiveEvent:
+					if (AppActive != null || MouseFocus != null || InputFocus != null) 
 					{
-						jaxisValue = 0;
-					}
+						ActiveEventArgs e = new ActiveEventArgs(ev);
 
-					if (ev.jaxis.axis == 0)
-					{
-
-						JoystickAxisEventArgs e = 
-							new JoystickAxisEventArgs(
-							ev.jaxis.which, 
-							ev.jaxis.axis, 
-							jaxisValue);
-						JoystickHorizontalAxisMotion(sender, e);
-					}
-					else if (ev.jaxis.axis == 1)
-					{
-						JoystickAxisEventArgs e = 
-							new JoystickAxisEventArgs(
-							ev.jaxis.which, 
-							ev.jaxis.axis, 
-							jaxisValue);
-						JoystickVerticalAxisMotion(sender, e);
-					}
-					else
-					{
-						JoystickAxisEventArgs e = 
-							new JoystickAxisEventArgs(
-							ev.jaxis.which, 
-							ev.jaxis.axis, 
-							jaxisValue);
-						JoystickAxisMotion(sender, e);
-					}
-				}
-			}
-		}
-
-		private static void DelegateJoystickBallMotion(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (JoystickBallMotion != null) 
-			{
-				JoystickBallMotion(
-					sender,
-					new JoystickBallEventArgs(
-					ev.jball.which, 
-					ev.jball.ball,
-					ev.jball.xrel, 
-					ev.jball.yrel));
-			}
-		}
-
-		private static void DelegateJoystickButtonDown(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (JoystickButton != null || JoystickButtonDown != null) 
-			{
-				JoystickButtonEventArgs e = 
-					new JoystickButtonEventArgs(ev.jbutton.which, ev.jbutton.button, true);
-				if (JoystickButton != null)
-				{
-					JoystickButton(sender, e);
-				}
-				if (JoystickButtonDown != null)
-				{
-					JoystickButtonDown(sender, e);
-				}
-			}
-		}
-
-		private static void DelegateJoystickButtonUp(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (JoystickButton != null || JoystickButtonUp != null) 
-			{
-				JoystickButtonEventArgs e = 
-					new JoystickButtonEventArgs(ev.jbutton.which, ev.jbutton.button, false);
-				if (JoystickButton != null)
-				{
-					JoystickButton(sender, e);
-				}
-				if (JoystickButtonUp != null)
-				{
-					JoystickButtonUp(sender, e);
-				}
-			}
-		}
-
-		private static void DelegateJoystickHatMotion(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (JoystickHatMotion != null) 
-			{
-				JoystickHatMotion(sender, new JoystickHatEventArgs(ev.jhat.which, ev.jhat.hat, (int)ev.jhat.val));
-			}
-		}
-
-		private static void DelegateKeyDown(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (Keyboard != null || KeyboardDown != null) 
-			{
-				int device;
-				int scancode;
-				Key key;
-				ModifierKeys mod;
-				bool down;
-				ParseKeyStruct(
-					ref ev, out device, 
-					out down, out scancode, 
-					out key, out mod);
-				KeyboardEventArgs e = new KeyboardEventArgs(device,  down, scancode, key, mod);
-				
-				if (Keyboard != null) 
-				{
-						Keyboard(sender, e);
-				}
-				if (KeyboardDown != null) 
-				{
-					KeyboardDown(sender, e);
-				}
-			}
-		}
-
-		private static void DelegateKeyUp(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (Keyboard != null || KeyboardUp != null) 
-			{
-				int device;
-				int scancode;
-				Key key;
-				ModifierKeys mod;
-				bool down;
-				ParseKeyStruct(
-					ref ev, out device, 
-					out down, out scancode, 
-					out key, out mod);
-				KeyboardEventArgs e = new KeyboardEventArgs(device,  down, scancode, key, mod);
-				if (Keyboard != null) 
-				{
-					Keyboard(sender, e);
-				}
-				if (KeyboardUp != null) 
-				{
-					KeyboardUp(sender, e);
-				}
-			}
-		}
-
-		private static void DelegateMouseButtonDown(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (MouseButton != null || MouseButtonDown != null) {
-				int button;
-				int x, y;
-				ParseMouseStruct(ref ev, out button, out x, out y);
-
-				MouseButtonEventArgs e = new MouseButtonEventArgs(button, true, x, y);
-
-				if (MouseButton != null)
-				{
-					MouseButton(sender, e);
-				}
-				if (MouseButtonDown != null)
-				{
-					MouseButtonDown(sender, e);
-				}
-			}
-		}
-
-		private static void DelegateMouseButtonUp(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (MouseButton != null || MouseButtonUp != null) 
-			{
-				int button;
-				int x, y;
-				ParseMouseStruct(ref ev, out button, out x, out y);
-
-				MouseButtonEventArgs e = new MouseButtonEventArgs(button, true, x, y);
-
-				e.Button = button;
-				e.Down = true;
-				e.X = x;
-				e.Y = y;
-
-				if (MouseButton != null)
-				{
-					MouseButton(sender, e);
-				}
-				if (MouseButtonUp != null)
-				{
-					MouseButtonUp(sender, e);
-				}
-			}
-		}
-
-		private static void DelegateMouseMotion(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (MouseMotion != null) 
-			{
-				MouseMotion(
-					sender, 
-					new MouseMotionEventArgs(
-					ev.motion.state, 
-					ev.motion.x, 
-					ev.motion.y, 
-					ev.motion.xrel, 
-					ev.motion.yrel));
-			}
-		}
-
-		private static void DelegateQuit(object sender, ref Sdl.SDL_Event ev) {
-			if (Quit != null) 
-			{
-				QuitEventArgs e = new QuitEventArgs();
-				Quit(sender, e);
-			}
-		}
-
-		private static void DelegateUserEvent(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (UserEvent != null || ChannelFinished != null || MusicFinished != null) 
-			{
-				object ret;
-				lock (instance) 
-				{
-					ret = UserEvents[ev.user.code];
-				}
-				if (ret != null) 
-				{
-					if (ret is ChannelFinishedEventArgs) 
-					{
-						if (ChannelFinished != null)
+						if ((ev.active.state & (byte)Focus.Mouse) != 0 && 
+							MouseFocus != null)
 						{
-							ChannelFinished(instance, (ChannelFinishedEventArgs)ret);
+							MouseFocus(instance, e);
 						}
-					} else if (ret is MusicFinishedEventArgs) {
-						if (MusicFinished != null)
+						if ((ev.active.state & (byte)Focus.Keyboard) != 0 && 
+							InputFocus != null)
 						{
-							MusicFinished(instance, (MusicFinishedEventArgs)ret);
+							InputFocus(instance, e);
 						}
-					} else
-						UserEvent(sender, new UserEventArgs(ret));
-				}
+						if ((ev.active.state & (byte)Focus.Application) != 0 && 
+							AppActive != null)
+						{
+							AppActive(instance, e);
+						}
+					}
+					break;
+
+				case EventTypes.JoystickAxisMotion:
+					if (JoystickAxisMotion != null || 
+						JoystickHorizontalAxisMotion != null || 
+						JoystickVerticalAxisMotion != null) 
+					{
+						Console.WriteLine("axisVal: " + ev.jaxis.val);
+						Console.WriteLine("which: " + ev.jaxis.which);
+						Console.WriteLine("axis: " + ev.jaxis.axis);
+						Console.WriteLine("type: " + ev.type);
+						
+						if ((ev.jaxis.val < (-1)*JoystickAxisEventArgs.JoystickThreshold) || (ev.jaxis.val > JoystickAxisEventArgs.JoystickThreshold))
+						{	
+							JoystickAxisEventArgs e = new JoystickAxisEventArgs(ev);
+							if (ev.jaxis.axis == 0)
+							{
+								if (JoystickAxisMotion != null) 
+								{
+									JoystickAxisMotion(instance, e);
+								}
+								if (JoystickHorizontalAxisMotion != null) 
+								{
+									JoystickHorizontalAxisMotion(instance, e);
+								}
+							}
+							else if (ev.jaxis.axis == 1)
+							{
+								if (JoystickAxisMotion != null) 
+								{
+									JoystickAxisMotion(instance, e);
+								}
+								if (JoystickVerticalAxisMotion != null) 
+								{
+									JoystickVerticalAxisMotion(instance, e);
+								}
+							}
+							else
+							{
+								if (JoystickAxisMotion != null) 
+								{
+									JoystickAxisMotion(instance, e);
+								}
+							}
+						}
+					}
+					break;
+
+				case EventTypes.JoystickBallMotion:
+					if (JoystickBallMotion != null) 
+					{
+						JoystickBallMotion(
+							instance,
+							new JoystickBallEventArgs(ev));
+					}
+					break;
+
+				case EventTypes.JoystickButtonDown:
+					if (JoystickButton != null || JoystickButtonDown != null) 
+					{
+						JoystickButtonEventArgs e = 
+							new JoystickButtonEventArgs(ev);
+						if (JoystickButton != null)
+						{
+							JoystickButton(instance, e);
+						}
+						if (JoystickButtonDown != null)
+						{
+							JoystickButtonDown(instance, e);
+						}
+					}
+					break;
+
+				case EventTypes.JoystickButtonUp:
+					if (JoystickButton != null || JoystickButtonUp != null) 
+					{
+						JoystickButtonEventArgs e = 
+							new JoystickButtonEventArgs(ev);
+						if (JoystickButton != null)
+						{
+							JoystickButton(instance, e);
+						}
+						if (JoystickButtonUp != null)
+						{
+							JoystickButtonUp(instance, e);
+						}
+					}
+					break;
+
+				case EventTypes.JoystickHatMotion:
+					if (JoystickHatMotion != null) 
+					{
+						JoystickHatMotion(instance, new JoystickHatEventArgs(ev));
+					}
+					break;
+
+				case EventTypes.KeyDown:
+					if (Keyboard != null || KeyboardDown != null) 
+					{
+						KeyboardEventArgs e = new KeyboardEventArgs(ev);
+						if (KeyboardDown != null) 
+						{
+							KeyboardDown(instance, e);
+						}
+						if (Keyboard != null) 
+						{
+							Keyboard(instance, e);
+						}
+					}
+					break;
+
+				case EventTypes.KeyUp:
+					if (Keyboard != null || KeyboardUp != null) 
+					{
+						KeyboardEventArgs e = new KeyboardEventArgs(ev);
+						if (KeyboardUp != null) 
+						{
+							KeyboardUp(instance, e);
+						}
+						if (Keyboard != null) 
+						{
+							Keyboard(instance, e);
+						}
+					}
+					break;
+
+				case EventTypes.MouseButtonDown:
+					if (MouseButton != null)
+					{
+						MouseButton(instance, new MouseButtonEventArgs(ev));
+					}
+					if (MouseButtonDown != null)
+					{
+						MouseButtonDown(instance, new MouseButtonEventArgs(ev));
+					}
+					break;
+
+				case EventTypes.MouseButtonUp:
+					if (MouseButton != null)
+					{
+						MouseButton(instance, new MouseButtonEventArgs(ev));
+					}
+					if (MouseButtonUp != null)
+					{
+						MouseButtonUp(instance, new MouseButtonEventArgs(ev));
+					}
+					break;
+
+				case EventTypes.MouseMotion:
+					if (MouseMotion != null) 
+					{
+						MouseMotion(instance, new MouseMotionEventArgs(ev));
+					}
+					break;
+
+				case EventTypes.Quit:
+					if (Quit != null) 
+					{
+						Quit(instance, new QuitEventArgs(ev));
+					}
+					break;
+
+				case EventTypes.UserEvent:
+					if (UserEvent != null || ChannelFinished != null || MusicFinished != null) 
+					{
+						object ret;
+						lock (instance) 
+						{
+							ret = UserEvents[ev.user.code];
+						}
+						if (ret != null) 
+						{
+							if (ret is ChannelFinishedEventArgs) 
+							{
+								if (ChannelFinished != null)
+								{
+									ChannelFinished(instance, (ChannelFinishedEventArgs)ret);
+								}
+							} 
+							else if (ret is MusicFinishedEventArgs) 
+							{
+								if (MusicFinished != null)
+								{
+									MusicFinished(instance, (MusicFinishedEventArgs)ret);
+								}
+							} 
+							else
+								UserEvent(instance, (UserEventArgs)ret);
+						}
+					}
+					break;
+
+				case EventTypes.VideoExpose:
+					if (VideoExpose != null) 
+					{
+						VideoExpose(instance, new VideoExposeEventArgs(ev));
+					}
+					break;
+
+				case EventTypes.VideoResize:
+					if (VideoResize != null) 
+					{
+						VideoResize(instance, new VideoResizeEventArgs(ev));
+					}
+					break;
 			}
-		}
-
-		private static void DelegateVideoExpose(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (Expose != null) 
-			{
-				Expose(sender, new ExposeEventArgs());
-			}
-		}
-
-		private static void DelegateVideoResize(object sender, ref Sdl.SDL_Event ev) 
-		{
-			if (Resize != null) 
-			{
-				Resize(sender, new ResizeEventArgs(ev.resize.w, ev.resize.h));
-			}
-		}
-
-		private static void ParseKeyStruct(
-			ref Sdl.SDL_Event ev, 
-			out int device, 
-			out bool down, 
-			out int scancode, 
-			out Key key, 
-			out ModifierKeys mod) 
-		{
-			device = ev.key.which;
-			down = ((int)ev.key.state == (int)Sdl.SDL_PRESSED);
-			Sdl.SDL_keysym ks = ev.key.keysym;
-			scancode = ks.scancode;
-			key = (Key)ks.sym;
-			mod = (ModifierKeys)ks.mod;
-		}
-
-		private static void ParseMouseStruct(
-			ref Sdl.SDL_Event ev, 
-			out int button, 
-			out int x, 
-			out int y) 
-		{
-			button = (int)ev.button.button;
-			x = ev.button.x;
-			y = ev.button.y;
 		}
 
 		internal static void NotifyChannelFinished(int channel) 

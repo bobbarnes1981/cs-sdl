@@ -29,7 +29,7 @@ namespace SdlDotNet
 	/// Represents a music sample.  Music is generally longer than a sound effect sample,
 	/// however it can also be compressed e.g. by Ogg Vorbis
 	/// </summary>
-	public sealed class Music
+	public sealed class Music : BaseSdlResource
 	{
 		private  SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
 
@@ -40,9 +40,9 @@ namespace SdlDotNet
 
 		static readonly Music instance = new Music();
 
-		static Music()
-		{
-		}
+//		static Music()
+//		{
+//		}
 
 		Music()
 		{
@@ -69,11 +69,13 @@ namespace SdlDotNet
 		{ 
 			get
 			{
+				GC.KeepAlive(this);
 				return handle; 
 			}
 			set
 			{
 				handle = value;
+				GC.KeepAlive(this);
 			}
 		}
 
@@ -81,7 +83,7 @@ namespace SdlDotNet
 		/// Destroys the surface object and frees its memory
 		/// </summary>
 		/// <param name="disposing"></param>
-		public void Dispose(bool disposing)
+		protected override void Dispose(bool disposing)
 		{
 			if (!disposed)
 			{
@@ -89,11 +91,9 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
+						CloseHandle(handle);
+						GC.KeepAlive(this);
 					}
-					// TODO: fix this issue correctly.
-					// In Release mode, GC disposes the Music class too quickly unless
-					// The CloseHandle is commented out.
-					CloseHandle(handle);
 					disposed = true;
 				}
 				finally
@@ -106,7 +106,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes Music handle
 		/// </summary>
-		public void CloseHandle(IntPtr handleToClose) 
+		protected override void CloseHandle(IntPtr handleToClose) 
 		{
 			SdlMixer.Mix_FreeMusic(handleToClose);
 			handleToClose = IntPtr.Zero;
@@ -270,11 +270,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		public MusicTypes MusicType
+		public MusicType MusicType
 		{
 			get
 			{
-				return (MusicTypes) SdlMixer.Mix_GetMusicType(this.Handle);
+				return (MusicType) SdlMixer.Mix_GetMusicType(this.Handle);
 			}
 		}
 		/// <summary>
@@ -282,14 +282,14 @@ namespace SdlDotNet
 		/// For Ogg Vorbis and Mp3, this is the number of seconds 
 		/// from the beginning of the song
 		/// </summary>
-		/// <param name="position"></param>
-		public void Position(double position) 
+		/// <param name="musicPosition"></param>
+		public void Position(double musicPosition) 
 		{
-			if (this.MusicType == MusicTypes.Mp3)
+			if (this.MusicType == MusicType.Mp3)
 			{
 				this.Rewind();
 			}
-			if (SdlMixer.Mix_SetMusicPosition(position) != 0)
+			if (SdlMixer.Mix_SetMusicPosition(musicPosition) != 0)
 			{
 				throw SdlException.Generate();
 			}

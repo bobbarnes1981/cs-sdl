@@ -291,7 +291,7 @@ namespace SdlDotNet.Examples
 		{
 			m_screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
 			Events.Quit += new QuitEventHandler (this.Quit);
-			Events.Resize += new ResizeEventHandler (this.Resize);
+			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.KeyboardDown);
 
@@ -302,7 +302,7 @@ namespace SdlDotNet.Examples
 			while ( ! quitFlag )
 			{
 				idle();
-				while (Events.PollAndDelegate ()) ;
+				while (Events.Poll()) ;
 				if (m_screen.Width != m_newW || m_screen.Height != m_newH)
 					reshape ();
 				draw ();
@@ -321,7 +321,7 @@ namespace SdlDotNet.Examples
 			quitFlag = true;
 		}
 
-		private void Resize (object sender, ResizeEventArgs e)
+		private void Resize (object sender, VideoResizeEventArgs e)
 		{
 			m_screen = Video.SetVideoModeWindowOpenGL(e.W, e.H, true);
 		}

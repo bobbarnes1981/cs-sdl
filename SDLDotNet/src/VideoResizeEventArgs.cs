@@ -18,7 +18,6 @@
  */
 
 using System;
-
 using Tao.Sdl;
 
 namespace SdlDotNet
@@ -26,20 +25,25 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for ResizeEventArgs.
 	/// </summary>
-	public class ResizeEventArgs : EventArgs 
+	public class VideoResizeEventArgs : SdlEventArgs 
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="w">The new window width</param>
 		/// <param name="h">The new window height</param>
-		public ResizeEventArgs(int w, int h)
+		public VideoResizeEventArgs(int w, int h)
 		{
-			this.w = w;
-			this.h = h;
+			this.eventStruct.resize.w = w;
+			this.eventStruct.resize.h = h;
+			this.eventStruct.type = (byte)EventTypes.VideoResize;
+		}
+
+		internal VideoResizeEventArgs(Sdl.SDL_Event ev)
+		{
+			this.eventStruct = ev;
 		}
 		
-		private int w;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -47,15 +51,10 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.w;
-			}
-			set
-			{
-				this.w = value;
+				return this.eventStruct.resize.w;
 			}
 		}
 
-		private int h;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -63,11 +62,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.h;
-			}
-			set
-			{
-				this.h = value;
+				return this.eventStruct.resize.h;
 			}
 		}
 

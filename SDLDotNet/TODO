@@ -1,5 +1,7 @@
 Jan 12, 2005
 
+Latest changes to the C dll's.
+
 SDL: SDL_endian.h appears to have changed, but SDL.NET does not use it. All other header files just have bug or platform fixes.
 Version number has changed.
 

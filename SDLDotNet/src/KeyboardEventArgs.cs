@@ -26,48 +26,63 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for KeyboardEventArgs.
 	/// </summary>
-	public class KeyboardEventArgs : EventArgs 
+	public class KeyboardEventArgs : SdlEventArgs
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="device">The device index of the keyboard</param>
 		/// <param name="down">
 		/// True if the key is pressed, False if it was released
 		/// </param>
-		/// <param name="scanCode">The scancode of the key</param>
 		/// <param name="key">The Sdl virtual keycode</param>
 		/// <param name="modifierKeys">Current modifier flags</param>
-		public KeyboardEventArgs(
-			int device, bool down, 
-			int scanCode, Key key, 
-			ModifierKeys modifierKeys)
+		public KeyboardEventArgs( 
+			Key key, 
+			ModifierKeys modifierKeys,
+			bool down)
 		{
-			this.device = device;
-			this.down = down;
-			this.scanCode = scanCode;
-			this.key = key;
-			this.mod = mod;
-		}
-		
-		private int device;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Device
-		{
-			get
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.key.which = 0;
+			this.eventStruct.key.keysym.scancode = 0;
+			this.eventStruct.key.keysym.sym = (int)key;
+			this.eventStruct.key.keysym.mod = (int)modifierKeys;
+			if (down)
 			{
-				return this.device;
+				this.eventStruct.key.state = (byte)ButtonKeyState.Pressed;
+				this.eventStruct.type = (byte)EventTypes.KeyDown;
 			}
-			set
+			else
 			{
-				this.device = value;
+				this.eventStruct.key.state = (byte)ButtonKeyState.NotPressed;
+				this.eventStruct.type = (byte)EventTypes.KeyUp;
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="down"></param>
+		public KeyboardEventArgs( Key key, bool down) : this(key, ModifierKeys.None, down)
+		{
+		}
+
+		internal KeyboardEventArgs(Sdl.SDL_Event ev)
+		{
+			this.eventStruct = ev;
+		}
 		
-		private bool down;
+		/// <summary>
+		/// The device index of the keyboard
+		/// </summary>
+		public byte Device
+		{
+			get
+			{
+				return this.eventStruct.key.which;
+			}
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -75,31 +90,22 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.down;
-			}
-			set
-			{
-				this.down = value;
+				return (this.eventStruct.key.state == Sdl.SDL_PRESSED);
 			}
 		}
 
-		private int scanCode;
 		/// <summary>
-		/// 
+		/// The scancode of the key
 		/// </summary>
-		public int ScanCode
+		public byte Scancode
 		{
 			get
 			{
-				return this.scanCode;
-			}
-			set
-			{
-				this.scanCode = value;
+				return this.eventStruct.key.keysym.scancode;
 			}
 		}
 
-		private Key key;
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -107,15 +113,10 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.key;
-			}
-			set
-			{
-				this.key = value;
+				return (Key)this.eventStruct.key.keysym.sym;
 			}
 		}
         
-		private ModifierKeys mod;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -123,11 +124,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.mod;
-			}
-			set
-			{
-				this.mod = value;
+				return (ModifierKeys)this.eventStruct.key.keysym.mod;
 			}
 		}
 	}

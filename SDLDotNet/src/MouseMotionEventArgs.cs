@@ -26,46 +26,58 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for MouseMotionEventArgs.
 	/// </summary>
-	public class MouseMotionEventArgs : EventArgs 
+	public class MouseMotionEventArgs : SdlEventArgs 
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="state">The current mouse button state</param>
+		/// <param name="buttonPressed">The current mouse button state</param>
 		/// <param name="x">The current X coordinate</param>
 		/// <param name="y">The current Y coordinate</param>
 		/// <param name="relativeX">
 		/// The difference between the last X coordinate and current</param>
 		/// <param name="relativeY">
 		/// The difference between the last Y coordinate and current</param>
-		public MouseMotionEventArgs(
-			int state, int x, int y, 
-			int relativeX, int relativeY)
+		public MouseMotionEventArgs(bool buttonPressed, short x, short y, 
+			short relativeX, short relativeY)
 		{
-			this.state = state;
-			this.x = x;
-			this.y = y;
-			this.relativeX = relativeX;
-			this.relativeY = relativeY;
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.motion.xrel = relativeX;
+			this.eventStruct.motion.yrel = relativeY;
+			this.eventStruct.motion.which = 0;
+			this.eventStruct.motion.x = x;
+			this.eventStruct.motion.y = y;
+			this.eventStruct.type = (byte)EventTypes.MouseMotion;
+			if (buttonPressed)
+			{
+				this.eventStruct.motion.state = (byte)ButtonKeyState.Pressed;
+			}
+			else
+			{
+				this.eventStruct.motion.state = (byte)ButtonKeyState.NotPressed;
+			}
 		}
 
-		private int state;
 		/// <summary>
 		/// 
 		/// </summary>
-		public int State
+		/// <param name="ev"></param>
+		internal MouseMotionEventArgs(Sdl.SDL_Event ev)
+		{
+			this.eventStruct = ev;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool ButtonPressed
 		{
 			get
 			{
-				return this.state;
-			}
-			set
-			{
-				this.state = value;
+				return (this.eventStruct.motion.state == (byte)ButtonKeyState.Pressed);
 			}
 		}
 
-		private int x;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -73,15 +85,9 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.x;
-			}
-			set
-			{
-				this.x = value;
+				return this.eventStruct.motion.x;
 			}
 		}
-
-		private int y;
 
 		/// <summary>
 		/// 
@@ -90,15 +96,10 @@ namespace SdlDotNet
 		{
 			get
 			{ 
-				return this.y;
-			}
-			set
-			{
-				this.y = value;
+				return this.eventStruct.motion.y;
 			}
 		}
 
-		private int relativeX;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -106,15 +107,10 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.relativeX;
-			}
-			set
-			{
-				this.relativeX = value;
+				return this.eventStruct.motion.xrel;
 			}
 		}
 
-		private int relativeY;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -122,11 +118,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.relativeY;
-			}
-			set
-			{
-				this.relativeY = value;
+				return this.eventStruct.motion.yrel;
 			}
 		}
 	}

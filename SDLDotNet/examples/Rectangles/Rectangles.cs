@@ -73,23 +73,23 @@ namespace SdlDotNet.Examples
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
 				//fill the surface with black
-				surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+				surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 
 				while (!quitFlag) 
 				{
-					while (Events.PollAndDelegate()) 
+					while (Events.Poll()) 
 					{
 						// handle events till the queue is empty
 					} 
 					
 					try 
 					{
-						surf.FillRectangle(
+						surf.Fill(
 							new Rectangle(rand.Next(-300, width), 
 							rand.Next(-300, height), rand.Next(20, 300), 
 							rand.Next(20, 300)),
 						Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
-						surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+						screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 						screen.Flip();
 					} 
 					catch (SurfaceLostException) 

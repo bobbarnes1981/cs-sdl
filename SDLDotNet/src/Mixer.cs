@@ -51,9 +51,9 @@ namespace SdlDotNet
 
 		static Mixer instance = new Mixer();
 
-		static Mixer()
-		{
-		}
+//		static Mixer()
+//		{
+//		}
 
 		Mixer()
 		{
@@ -88,8 +88,9 @@ namespace SdlDotNet
 			{
 				if (disposing)
 				{
+					SdlMixer.Mix_CloseAudio();
+					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
 				}
-				SdlMixer.Mix_CloseAudio();
 				disposed = true;
 			}
 		}
@@ -310,7 +311,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		public static void UnreserveChannels()
+		public static void CancelReserveChannels()
 		{
 			int dummy = SdlMixer.Mix_ReserveChannels(0);
 		}

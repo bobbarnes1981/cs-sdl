@@ -73,7 +73,7 @@ namespace SdlDotNet.Examples
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
-				surf.FillRectangle(new Rectangle(new Point(0, 0), 
+				surf.Fill(new Rectangle(new Point(0, 0), 
 					surf.Size), System.Drawing.Color.Black); 
 
 				imagepath = @"images/";
@@ -112,7 +112,7 @@ namespace SdlDotNet.Examples
 
 				while (!quitFlag) 
 				{
-					while (Events.PollAndDelegate()) 
+					while (Events.Poll()) 
 					{
 						// handle events till the queue is empty
 					}
@@ -120,7 +120,7 @@ namespace SdlDotNet.Examples
 					try 
 					{
 						// Draw Background
-						Background.Draw(surf,new Rectangle(new Point(0,0),Background.Size));
+						surf.Blit(Background,new Rectangle(new Point(0,0),Background.Size));
 						
 						// Draw tree
 						if (Tree.AlphaValue == 255) 
@@ -129,7 +129,7 @@ namespace SdlDotNet.Examples
 						}
 						Tree.AlphaValue++;
 
-						Tree.Draw(surf,new Rectangle(0,0,20,20));
+						surf.Blit(Tree, new Rectangle(0,0,20,20));
 
 						// Draw Jeep;
 						if (JeepFrame == 15) 
@@ -138,15 +138,15 @@ namespace SdlDotNet.Examples
 						}
 						JeepFrame++;
 
-						Jeep.Surfaces[JeepFrame].Draw(surf, new Rectangle(new Point(100,100),Jeep.Surfaces[JeepFrame].Size));
+						surf.Blit(Jeep.Surfaces[JeepFrame], new Rectangle(new Point(100,100),Jeep.Surfaces[JeepFrame].Size));
 
 						// Draw Textbox
-						sdlimg.Draw(surf,new Rectangle(new Point(230,440),Background.Size));
+						surf.Blit(sdlimg,new Rectangle(new Point(230,440),Background.Size));
 
-						Cursor.Draw(surf,new Rectangle(MousePos, screen.Size));
+						surf.Blit(Cursor,new Rectangle(MousePos, screen.Size));
 
 						// Draw frame to screen
-						surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+						screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 						screen.Flip();
 					} 
 					catch (SurfaceLostException) 

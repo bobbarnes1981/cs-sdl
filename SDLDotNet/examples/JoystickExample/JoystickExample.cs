@@ -71,20 +71,20 @@ namespace SdlDotNet.Examples
 				new JoystickAxisEventHandler(this.JoystickHorizontalAxisChanged);
 			Events.JoystickVerticalAxisMotion += 
 				new JoystickAxisEventHandler(this.JoystickVerticalAxisChanged);
-			Events.JoystickBallMotion += new JoystickBallEventHandler(this.JoystickBallChanged);
-			Events.JoystickHatMotion += new JoystickHatEventHandler(this.JoystickHatChanged);
-			Events.JoystickButtonUp += new JoystickButtonEventHandler(this.JoystickButtonUpChanged);
-			Events.JoystickButtonDown += new JoystickButtonEventHandler(this.JoystickButtonDownChanged);
+//			Events.JoystickBallMotion += new JoystickBallEventHandler(this.JoystickBallChanged);
+//			Events.JoystickHatMotion += new JoystickHatEventHandler(this.JoystickHatChanged);
+//			Events.JoystickButtonUp += new JoystickButtonEventHandler(this.JoystickButtonUpChanged);
+//			Events.JoystickButtonDown += new JoystickButtonEventHandler(this.JoystickButtonDownChanged);
 
 			try 
 			{
-				Console.WriteLine(Joysticks.NumberOfJoysticks);
+				//Console.WriteLine(Joysticks.NumberOfJoysticks);
 				Joystick joystick = Joysticks.OpenJoystick(0);
-				Console.WriteLine("NumberOfAxes: " + joystick.NumberOfAxes);
-				Console.WriteLine("NumberOfBalls: " + joystick.NumberOfBalls);
-				Console.WriteLine("NumberOfButtons: " + joystick.NumberOfButtons);
-				Console.WriteLine("NumberOfHats: " + joystick.NumberOfHats);
-					Surface cursor = new Surface(filepath + "cursor.png");
+				//Console.WriteLine("NumberOfAxes: " + joystick.NumberOfAxes);
+				//Console.WriteLine("NumberOfBalls: " + joystick.NumberOfBalls);
+				//Console.WriteLine("NumberOfButtons: " + joystick.NumberOfButtons);
+				//Console.WriteLine("NumberOfHats: " + joystick.NumberOfHats);
+				Surface cursor = new Surface(filepath + "cursor.png");
 				Surface Background = new Surface(filepath + "background.jpg");
 				cursor.Transparent = true;
 				// set the video mode
@@ -95,11 +95,11 @@ namespace SdlDotNet.Examples
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
 				//fill the surface with black
-				surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+				surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 
 				while (!quitFlag) 
 				{
-					while (Events.PollAndDelegate()) 
+					while (Events.Poll()) 
 					{
 						// handle events till the queue is empty
 					} 
@@ -107,11 +107,11 @@ namespace SdlDotNet.Examples
 					try 
 					{
 						// Draw Background
-						Background.Draw(surf,new Rectangle(new Point(0,0),Background.Size));
-						cursor.Draw(surf,new Rectangle(joystickPosition, screen.Size));
+						surf.Blit(Background,new Rectangle(new Point(0,0),Background.Size));
+						surf.Blit(cursor,new Rectangle(joystickPosition, cursor.Size));
 
 						// Draw frame to screen
-						surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+						screen.Blit(surf, new Rectangle(new Point(0, 0), surf.Size));
 						screen.Flip();
 					} 
 					catch (SurfaceLostException)

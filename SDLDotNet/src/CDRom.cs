@@ -38,9 +38,9 @@ namespace SdlDotNet
 		static private bool disposed = false;
 		static readonly CDRom instance = new CDRom();
 
-		static CDRom()
-		{
-		}
+//		static CDRom()
+//		{
+//		}
 
 		CDRom()
 		{
@@ -73,8 +73,8 @@ namespace SdlDotNet
 			{
 				if (disposing)
 				{
+					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_CDROM);
 				}
-				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_CDROM);
 				disposed = true;
 			}
 		}

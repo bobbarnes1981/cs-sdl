@@ -18,19 +18,25 @@
  */
 
 using System;
+using Tao.Sdl;
 
 namespace SdlDotNet
 {
 	/// <summary>
 	/// Summary description for ExposeEventArgs.
 	/// </summary>
-	public class ExposeEventArgs : EventArgs 
+	public class VideoExposeEventArgs : SdlEventArgs 
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		public ExposeEventArgs()
+		public VideoExposeEventArgs()
 		{
+		}
+
+		internal VideoExposeEventArgs(Sdl.SDL_Event ev)
+		{
+			this.eventStruct = ev;
 		}
 	}
 }
