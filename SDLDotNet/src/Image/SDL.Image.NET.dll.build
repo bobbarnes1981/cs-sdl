@@ -10,10 +10,9 @@
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<!-- prepare build directory -->
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
-	<nant buildfile="../../${SDL.name.simple}/${SDL.project.name}.build" target="buildrelease" />
 	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="../../${SDL.name.simple}/${src.dir}/${build.dir}">
-		<includes name="SDL.NET.dll"/>
+	    <fileset basedir="../${build.dir}">
+		<includes name="${project.name}.dll"/>
 	    </fileset>
 	</copy>
 	<!-- build SDL.NET -->
@@ -23,7 +22,7 @@
 		<!-- task currently does not work on Mono and is temporarily included in the NAnt.Win32 assembly -->
 	    </sources>
 	    <references basedir="${build.dir}">
-		<includes name="SDL.NET.dll"/>
+		<includes name="${project.name}.dll"/>
 	    </references>
 	    <arg value="/d:mono" if="${mono}" />
 	</csc>
@@ -31,42 +30,6 @@
     <target name="clean">
 	<delete dir="${bin.dir}" failonerror="false" />
 	<delete dir="obj" failonerror="false" />
-    </target>
-    <target name="doc">
-	<ndoc failonerror="false">
-	    <assemblies basedir="${nant.project.basedir}/${build.dir}">
-		<includes name="${nant.project.name}.dll" />
-	    </assemblies>
-	    <summaries basedir="${nant.project.basedir}/${build.dir}">
-		<includes name="${nant.project.name}.xml"/>
-	    </summaries>
-
-	    <documenters>
-		<documenter name="MSDN">
-		    <property name="OutputDirectory" value="${nant.project.basedir}/${build.dir}/doc/" />
-		    <property name="HtmlHelpName" value="${nant.project.name}" />
-		    <property name="HtmlHelpCompilerFilename" value="${project.html-help.dir}\hhc.exe" />
-		    <property name="IncludeFavorites" value="False" />
-		    <property name="Title" value="${nant.project.name} SDK Documentation - v.${project.version}" />
-		    <property name="SplitTOCs" value="False" />
-		    <property name="DefaulTOC" value="" />
-		    <property name="ShowVisualBasic" value="False" />
-		    <property name="AutoDocumentConstructors" value="True" />
-		    <property name="ShowMissingSummaries" value="${build.debug}" />
-		    <property name="ShowMissingRemarks" value="${build.debug}" />
-		    <property name="ShowMissingParams" value="${build.debug}" />
-		    <property name="ShowMissingReturns" value="${build.debug}" />
-		    <property name="ShowMissingValues" value="${build.debug}" />
-		    <property name="DocumentInternals" value="False" />
-		    <property name="DocumentPrivates" value="False" />
-		    <property name="DocumentProtected" value="True" />
-		    <property name="DocumentEmptyNamespaces" value="False" />
-		    <property name="IncludeAssemblyVersion" value="False" />
-		    <property name="CopyrightText" value="Copyright (C) 2003 David Hudson" />
-		    <property name="CopyrightHref" value="http://cs-sdl.sourceforge.net" />
-		</documenter>
-	    </documenters>
-	</ndoc>
     </target>
     <target name="schema">
 	<!-- generate schema -->

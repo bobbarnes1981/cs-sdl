@@ -16,7 +16,7 @@
 	    </fileset>
 	</copy>
 	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${src.dir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${src.dir}/${Image.dir}/${build.dir}">
 		<includes name="SDL.Image.NET.dll"/>
 	    </fileset>
 	</copy>

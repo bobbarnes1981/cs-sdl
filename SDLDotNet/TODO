@@ -1,0 +1,3 @@
+Mono compatibility on both linux and Windows
+CLR compliance
+Get rid of SDLColor and replace with System.Drawing.Color
