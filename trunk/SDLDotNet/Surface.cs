@@ -35,7 +35,7 @@ namespace SDLDotNet {
 		private bool _disposed;
 		private Natives.SDL_Surface *_surface;
 
-		internal Surface(Natives.SDL_Surface *surface, bool freeondispose) {
+		private Surface(Natives.SDL_Surface *surface, bool freeondispose) {
 			_freeondispose = freeondispose;
 			_surface = surface;
 			_disposed = false;
@@ -49,8 +49,12 @@ namespace SDLDotNet {
 			return new Surface(surface, true);
 		}
 
-		internal Natives.SDL_Surface *GetPtr() {
-			return _surface;
+		/// <summary>
+		/// Returns the native SDL Surface pointer
+		/// </summary>
+		/// <returns>An IntPtr pointing at the SDL surface reference</returns>
+		public IntPtr GetPtr() {
+			return new IntPtr((void *)_surface);
 		}
 
 		internal static Surface FromBMPFile(string file) {
