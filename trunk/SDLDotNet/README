@@ -8,9 +8,9 @@ Assembly:
 	Name: SdlDotNet.dll
 	Namespace: SdlDotNet
 	Notes:
-		There is one assembly. Supporting four separate assemblies was too much trouble. 
+		There is one assembly. Supporting separate assemblies was too much trouble. 
 		Tao.Sdl (http://taoframework.com, or http:/cs-sdl.sourceforge.net) contains 
-		the low-level bindings to the four C lbraries (SDL, SDL_image, SDL_ttf, SDL_mixer)
+		the low-level bindings to the six C lbraries (SDL, SDL_image, SDL_ttf, SDL_mixer, SDL_gfx, smpeg)
 
 Zip file contains:
 	/* - info files, Strong name keys, build/solution files.
@@ -29,15 +29,13 @@ Development Environment:
 		Mono on Linux
 		Mono on MacOSX
 		
-		Notes: Mono compatibility will come a bit later i.e. v.2.0.1 or so.
-	
 	IDEs:
 		Visual Studio 2003 - now
 		SharpDevelop-  once I get dnpb set up
 		VIM
 		
 	Tools:
-		NAnt 0.85 (cvs snapshot) 
+		NAnt 0.85 RC1
 		Nunit 2.2.0
 		dnpb 0.12.2a (soon)
 		
@@ -52,7 +50,8 @@ Development Environment:
 		SDL_image 1.2.3
 		SDL_mixer 1.2.5
 		SDL_ttf 2.0.6
-		SPMEG 0.4.4 (possibly for v2.1 or later)
+		SPMEG 0.4.4 (coming for v2.2)
+		SDL_gfx 2.0.12
 		
 		.NET libraries
 		Tao.Sdl
@@ -80,6 +79,8 @@ Tutorials
 
 TODO items:
 
+Fix the ChannelFinished delegate.
+
 Xedecimal
 Surface.Fill(Color c); to fill an entire surface with no parameters (which could be done with a rect that takes up 0,0,w,h but this would be easier for people to use and if possible, faster) **DONE**
 
@@ -90,14 +91,14 @@ That's the number 1 feature I want to implement, just a nice simple easy stretch
 gacutil installation.
 
 Sijmen Mulder
-- Horizontal flipping 
+- Horizontal flipping **DONE**
 - GetPixel/SetPixel better worked out **DONE**
-- Image rotation 
-- Primitive drawing (circle/line/rectangle) 
-- NO animations and stuff, an engine, not a layer is ment for that 
+- Image rotation **DONE**
+- Primitive drawing (circle/line/rectangle) **DONE**
+- NO animations and stuff, an engine, not a layer is meant for that **N/A**
 - Things like Lock() and Unlock() should become a property 
 - SDL.Instance.Video.... too much to type  **DONE**
-- Multiple windows. Really. Then I will make a Managed DirectDraw implementation
+- Multiple windows. Really. Then I will make a Managed DirectDraw implementation **WILL NOT BE DONE UNTIL SDL SUPPORTS IT**
 - More .NET like things, so instead of SDL.Instance.Video.LoadBMP(filename), new Surface(filename) **DONE** 
 - SDL_image integration. Surface myimage = new Surface("image.PNG"); should become possible **DONE**
 
