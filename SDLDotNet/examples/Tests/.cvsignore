@@ -3,3 +3,4 @@
 *.prjx
 bin
 obj
+Tests.xml

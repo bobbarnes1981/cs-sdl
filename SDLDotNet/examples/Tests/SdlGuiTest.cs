@@ -24,32 +24,43 @@ using SdlDotNet;
 using System.Drawing;
 using System;
 
-namespace MfGames.Sdl.Gui
+namespace MFGames.Sdl.Gui
 {
-  [TestFixture] public class SdlGuiTest
-  {
-    private SpriteCollection sm = null;
-    private GuiManager gui = null;
+	/// <summary>
+	/// 
+	/// </summary>
+	[TestFixture] public class SdlGuiTest
+	{
+		private SpriteCollection sm = null;
+		private GuiManager gui = null;
 
-    [SetUp] public void Setup()
-    {
-      // Create the gui used through the tst
-      sm = new SpriteContainer();
-      gui = new GuiManager(sm,
-			   new SdlDotNet.Font("../test/comic.ttf", 12),
-			   new Size(800, 600));
-    }
+		/// <summary>
+		/// 
+		/// </summary>
+		[SetUp] 
+		public void Setup()
+		{
+			// Create the gui used through the tst
+			sm = new SpriteCollection();
+			gui = new GuiManager(sm,
+				new SdlDotNet.Font("../test/comic.ttf", 12),
+				new Size(800, 600));
+		}
 
-    [Test] public void TestWindowBounds()
-    {
-      GuiWindow win = new GuiWindow(gui, new Rectangle(10, 11, 100, 101));
+		/// <summary>
+		/// 
+		/// </summary>
+		[Test] 
+		public void TestWindowBounds()
+		{
+			GuiWindow win = new GuiWindow(gui, new Rectangle(10, 11, 100, 101));
 
-      Assert.Equals(10 - gui.GetPadding(win).Left, win.Coordinates.X);
-      Assert.Equals(11 - gui.GetPadding(win).Top, win.Coordinates.Y);
-      Assert.Equals(100 + gui.GetPadding(win).Horizontal,
-			     win.Size.Width);
-      Assert.Equals(101 + gui.GetPadding(win).Vertical,
-			     win.Size.Height);
-    }
-  }
+			Assert.Equals(10 - gui.GetPadding(win).Left, win.Coordinates.X);
+			Assert.Equals(11 - gui.GetPadding(win).Top, win.Coordinates.Y);
+			Assert.Equals(100 + gui.GetPadding(win).Horizontal,
+				win.Size.Width);
+			Assert.Equals(101 + gui.GetPadding(win).Vertical,
+				win.Size.Height);
+		}
+	}
 }

@@ -22,9 +22,17 @@ using System.Drawing;
 
 namespace SdlDotNet.Utility
 {
-	[TestFixture] public class UtilityTest
+	/// <summary>
+	/// 
+	/// </summary>
+	[TestFixture] 
+	public class UtilityTest
 	{
-		[Test] public void TestDefaultsPoint()
+		/// <summary>
+		/// 
+		/// </summary>
+		[Test] 
+		public void TestDefaultsPoint()
 		{
 			//Vector2 v = new Vector2();
 			Point v = new Point();
@@ -32,7 +40,11 @@ namespace SdlDotNet.Utility
 			Assert.Equals(0, v.Y);
 		}
 
-		[Test] public void TestDefaultsVector()
+		/// <summary>
+		/// 
+		/// </summary>
+		[Test] 
+		public void TestDefaultsVector()
 		{
 			Vector v = new Vector();
 			Assert.Equals(0, v.X);

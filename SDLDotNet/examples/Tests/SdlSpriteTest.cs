@@ -22,7 +22,11 @@ using System.Drawing;
 
 namespace SdlDotNet.Sprites
 {
-  [TestFixture] public class SdlSpriteTest
+	/// <summary>
+	/// 
+	/// </summary>
+  [TestFixture] 
+	public class SdlSpriteTest
   {
     /*
     [Test] public void TestEmptyManager()
