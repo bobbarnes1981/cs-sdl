@@ -19,9 +19,9 @@ namespace Example {
 			Random rand = new Random();
 			
 #if __MONO__
-			string musicfile = "BZO-prym-guitar.ogg";
+			string musicfile = "fard-two.ogg";
 #else
-			string musicfile = "..\\..\\BZO-prym-guitar.ogg";
+			string musicfile = "..\\..\\fard-two.ogg";
 #endif
 
 			SDL sdl = SDL.Instance; // get SDL object
