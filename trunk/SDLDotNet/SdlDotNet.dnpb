@@ -545,7 +545,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MfGames.Utility" path="examples\\MfGames.Utility" language="C#" type="Library" startupObject="SdlDotNet.Examples.MfGames.Utility" assemblyName="MfGames.Utility" rootNamespace="SdlDotNet.Examples">
+	<Project name="MfGames.Utility" path="examples\\MfGames.Utility" language="C#" type="Library" assemblyName="MfGames.Utility" rootNamespace="SdlDotNet.Examples">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -575,7 +575,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MfGames.Sdl.Dice" path="examples\\MfGames.Sdl.Dice" language="C#" type="Library" startupObject="SdlDotNet.Examples.MfGames.Sdl.Dice" assemblyName="MfGames.Sdl.Dice" rootNamespace="SdlDotNet.Examples">
+	<Project name="MfGames.Sdl.Dice" path="examples\\MfGames.Sdl.Dice" language="C#" type="Library" assemblyName="MfGames.Sdl.Dice" rootNamespace="SdlDotNet.Examples">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -606,7 +606,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MfGames.Sdl.Sprites" path="examples\\MfGames.Sdl.Sprites" language="C#" type="Library" startupObject="SdlDotNet.Examples.MfGames.Sdl.Sprites" assemblyName="MfGames.Sdl.Sprites" rootNamespace="SdlDotNet.Examples">
+	<Project name="MfGames.Sdl.Sprites" path="examples\\MfGames.Sdl.Sprites" language="C#" type="Library" assemblyName="MfGames.Sdl.Sprites" rootNamespace="SdlDotNet.Examples">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -636,7 +636,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MfGames.Sdl.Drawable" path="examples\\MfGames.Sdl.Drawable" language="C#" type="Library" startupObject="SdlDotNet.Examples.MfGames.Sdl.Drawable" assemblyName="MfGames.Sdl.Drawable" rootNamespace="SdlDotNet.Examples">
+	<Project name="MfGames.Sdl.Drawable" path="examples\\MfGames.Sdl.Drawable" language="C#" type="Library" assemblyName="MfGames.Sdl.Drawable" rootNamespace="SdlDotNet.Examples">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -667,7 +667,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MfGames.Sdl.Gui" path="examples\\MfGames.Sdl.Gui" language="C#" type="Library" startupObject="SdlDotNet.Examples.MfGames.Sdl.Gui" assemblyName="MfGames.Sdl.Gui" rootNamespace="SdlDotNet.Examples">
+	<Project name="MfGames.Sdl.Gui" path="examples\\MfGames.Sdl.Gui" language="C#" type="Library" assemblyName="MfGames.Sdl.Gui" rootNamespace="SdlDotNet.Examples">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -733,7 +733,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="Tests" path="examples\\Tests" language="C#" type="Library" startupObject="SdlDotNet.Examples.Tests" assemblyName="Tests" rootNamespace="SdlDotNet.Examples">
+	<Project name="Tests" path="examples\\Tests" language="C#" type="Library" assemblyName="Tests" rootNamespace="SdlDotNet.Examples">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>

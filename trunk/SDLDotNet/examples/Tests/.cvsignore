@@ -1,3 +1,5 @@
 *.csproj
 *.user
 *.prjx
+bin
+obj
