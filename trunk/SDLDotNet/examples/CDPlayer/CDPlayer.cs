@@ -18,12 +18,9 @@
  */
 
 using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
+using System.Drawing;
 using System.Data;
-using System.Text;
 using SdlDotNet;
 
 namespace SdlDotNet.Examples {
@@ -166,6 +163,7 @@ namespace SdlDotNet.Examples {
 			this.labelStatus.Name = "labelStatus";
 			this.labelStatus.Size = new System.Drawing.Size(328, 40);
 			this.labelStatus.TabIndex = 6;
+			this.labelStatus.Click += new System.EventHandler(this.labelStatus_Click);
 			// 
 			// buttonNext
 			// 
@@ -297,6 +295,11 @@ namespace SdlDotNet.Examples {
 		}
 
 		private void CDPlayer_Load(object sender, System.EventArgs e)
+		{
+		
+		}
+
+		private void labelStatus_Click(object sender, System.EventArgs e)
 		{
 		
 		}

@@ -82,8 +82,8 @@ namespace SdlDotNet
 	/// Mixer property of the main Sdl object.
 	/// </summary>
 	public sealed class Mixer {
-		private static SdlMixer.ChannelFinishedDelegate _channelfin;
-		private static SdlMixer.MusicFinishedDelegate _musicfin;
+		//private static SdlMixer.ChannelFinishedDelegate _channelfin;
+		//private static SdlMixer.MusicFinishedDelegate _musicfin;
 		Events events = Events.Instance;
 
 		static readonly Mixer instance = new Mixer();
@@ -92,6 +92,9 @@ namespace SdlDotNet
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static Mixer Instance
 		{
 			get

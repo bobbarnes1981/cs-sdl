@@ -150,7 +150,7 @@ namespace SdlDotNet
 		/// Render Text to Solid
 		/// </summary>
 		/// <param name="Text"></param>
-		/// <param name="Color"></param>
+		/// <param name="color"></param>
 		/// <returns></returns>
 		public Surface RenderTextSolid(string Text, Sdl.SDL_Color color) 
 		{
@@ -168,7 +168,7 @@ namespace SdlDotNet
 		/// It's only really useful for one-off text
 		/// </summary>
 		/// <param name="Text"></param>
-		/// <param name="Color"></param>
+		/// <param name="color"></param>
 		/// <param name="DestSurface"></param>
 		/// <param name="X"></param>
 		/// <param name="Y"></param>

@@ -1,39 +1,43 @@
 <?xml version="1.0"?>
-<project name="FontTest" default="build">
-    <!--
-    Required properties:
-    * build.dir     - (path) root level to build to, assemblies will go in ${build.dir}/bin
-    * build.debug   - (true|false) debug build?
-    * mono          - (true|false) build using Mono?
-    * log4netdll    - name of the log4net assembly to reference
-    -->
+<project name="FontExample" default="build">
     <target name="build">
+    	<property name="font.name" value="Vera.ttf" />
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
 	<echo message="Using '${nant.settings.currentframework}' Framework"/>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${src.dir}/${TTF.dir}/${build.dir}">
-		<includes name="SDL.TTF.NET.dll"/>
-	    </fileset>
-	</copy>
 	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${src.dir}/${build.dir}">
 		<includes name="${project.name}.dll"/>
 	    </fileset>
 	</copy>
-	<csc target="exe" warnaserror="true" unsafe="false" nowarn="1591,0618" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${lib.dir}">
+		<includes name="${native.sdl}.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${lib.dir}">
+		<includes name="${native.sdl}.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${nant.project.basedir}">
+		<includes name="${font.name}"/>
+	    </fileset>
+	</copy>
+	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
 	    <sources failonempty="true">
 		<includes name="**/*.cs" />
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<includes name="${project.name}.dll"/>
-		<includes name="SDL.TTF.NET.dll"/>
+		<includes name="${native.sdl}.dll"/>
 		<includes name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
 	    </references>
 	</csc>
     </target>
     <target name="clean">
 	<delete dir="${bin.dir}" failonerror="false" />
-	<delete dir="obj" failonerror="false" />
+	<delete dir="${obj.dir}" failonerror="false" />
     </target>
 </project>

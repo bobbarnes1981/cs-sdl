@@ -33,6 +33,11 @@ namespace SdlDotNet {
 		private IntPtr _handle;
 		private int _index;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="handle"></param>
+		/// <param name="index"></param>
 		public CDDrive(IntPtr handle, int index) {
 			_disposed = false;
 			_handle = handle;
@@ -155,7 +160,6 @@ namespace SdlDotNet {
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="startTrack"></param>
 		public void Play()
 		{
 			if (Sdl.SDL_CDPlayTracks(_handle, 0, 0, 0, 0) == -1)

@@ -1,0 +1,22 @@
+2.0.0a1:
+David Hudson 29 Oct 2004
+* Finished rewriting SDL.NET.
+* Single assembly
+* CLS compliant, no more pointers!
+* Based on Tao.Sdl native bindings.
+* Better integration of SDL_image, Sdl_mixer and SDL_ttf
+* CHM docs.
+* Code cleanups and reorg
+* CdPlayer example works
+* Image Example works more reliably.
+* A few more features (see TODO)
+
+------------------------------------------
+0.0.2:
+Lucas Maloney - Mon 31 Mar 2003 23:48:21 EST 
+ * Changed the namespace from SDL-TTFDotNet to SDLDotNet.TTF
+ * Modified to use Singleton architecture.  This depends on changes to SDLDotNet which should be in version 1.4.  For now, you will have to use CVS.
+
+0.0.1:
+Lucas Maloney - Wed Mar 19 18:51:40 EST 2003
+ * Initial attempt

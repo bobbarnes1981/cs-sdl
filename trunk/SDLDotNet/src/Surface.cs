@@ -26,6 +26,9 @@ using Tao.Sdl;
 
 namespace SdlDotNet 
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum Alpha 
 	{
 		/// <summary>
@@ -48,7 +51,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a pixel value.
 		/// </summary>
-		/// <param name="val">
+		/// <param name="pixelValue">
 		/// The raw pixel value to use.
 		/// </param>
 		public PixelValue(int pixelValue) 
@@ -107,7 +110,7 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		/// <param name="file"></param>
-		internal Surface(string file)
+		public Surface(string file)
 		{
 			IntPtr surfPtr = SdlImage.IMG_Load(file);
 			if (surfPtr == IntPtr.Zero)
@@ -495,7 +498,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="file">The filename to save to</param>
 		public void SaveBMP(string file) {
-			if (Sdl.SDL_SaveBMP(_surfacePtr, file)!=0);
+			if (Sdl.SDL_SaveBMP(_surfacePtr, file)!=0)
 			{
 				throw SdlException.Generate();
 			}
@@ -578,14 +581,14 @@ namespace SdlDotNet
 			}
 		}
 
-		//copied from http://cone3d.gamedev.net/cgi-bin/index.pl?page=tutorials/gfxsdl/tut1
-		/// <summary>
-		/// Draws a pixel to this surface - uses 1,2 or 4 BytesPerPixel modes.
-		/// Call Lock() before calling this method.
-		/// </summary>
-		/// <param name="x">The x coordinate of where to plot the pixel</param>
-		/// <param name="y">The y coordinate of where to plot the pixel</param>
-		/// <param name="c">The color of the pixel</param>
+//		//copied from http://cone3d.gamedev.net/cgi-bin/index.pl?page=tutorials/gfxsdl/tut1
+//		/// <summary>
+//		/// Draws a pixel to this surface - uses 1,2 or 4 BytesPerPixel modes.
+//		/// Call Lock() before calling this method.
+//		/// </summary>
+//		/// <param name="x">The x coordinate of where to plot the pixel</param>
+//		/// <param name="y">The y coordinate of where to plot the pixel</param>
+//		/// <param name="c">The color of the pixel</param>
 //		public void DrawPixel(int x, int y, System.Drawing.Color c) {
 //			PixelValue color = this.MapColor(c);
 //			switch (_surface->format->BytesPerPixel) {
@@ -631,9 +634,9 @@ namespace SdlDotNet
 //			}
 //		}
 
-		/// <summary>
-		/// Flips the rows of a surface, for use in as an OpenGL texture for example
-		/// </summary>
+//		/// <summary>
+//		/// Flips the rows of a surface, for use in as an OpenGL texture for example
+//		/// </summary>
 //		public void FlipVertical() {
 //
 //			int first = 0, second = Height-1;

@@ -35,6 +35,9 @@ namespace SdlDotNet {
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static Joysticks Instance 
 		{
 			get
