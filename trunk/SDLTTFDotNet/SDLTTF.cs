@@ -18,23 +18,23 @@ using SDLDotNet;
 namespace SDLDotNet.TTF
 {
 	/// <summary>
-	/// 
+	/// Text Style
 	/// </summary>
 	public enum Style {
 		/// <summary>
-		/// 
+		/// Normal
 		/// </summary>
 		Normal = 0x00,
 		/// <summary>
-		/// 
+		/// Bold
 		/// </summary>
 		Bold = 0x01,
 		/// <summary>
-		/// 
+		/// Italic
 		/// </summary>
 		Italic = 0x02,
 		/// <summary>
-		/// 
+		/// Underline
 		/// </summary>
 		Underline = 0x04
 	}
@@ -54,7 +54,7 @@ namespace SDLDotNet.TTF
 		private static extern void TTF_Quit();
 
 		/// <summary>
-		/// 
+		/// Singleton get instance method
 		/// </summary>
 		public static SDLTTF Instance {
 			get {
@@ -69,7 +69,7 @@ namespace SDLDotNet.TTF
 		}
 
 		/// <summary>
-		/// 
+		/// Destructor
 		/// </summary>
 		~SDLTTF() {
 			TTF_Quit();
