@@ -7,6 +7,10 @@ David Hudson xx Jan 2004
 * Added new Joystick example
 * Cleaned up a few build targets
 * Started using dnpb for generating VS2003 and SharpDevelop project files.
+* Fixed bug with closing handle for fonts.
+* Removed build events that copy media files so that building 
+is faster and creates fewer redundant files.
+* Added Delegate Example back. I forgot to include the code in the last beta.
 
 2.1.0beta1
 David Hudson 31 Dec 2004
