@@ -726,6 +726,35 @@ namespace SdlDotNet
 			return System.Drawing.Color.FromArgb(a, r, g, b);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Surface CreateCompatibleSurface() 
+		{
+			return this.CreateCompatibleSurface(this.Size.Width, this.Size.Height, true);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="size"></param>
+		/// <returns></returns>
+		public Surface CreateCompatibleSurface(Size size) 
+		{
+			return this.CreateCompatibleSurface(size.Width, size.Height, true);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hardware"></param>
+		/// <param name="size"></param>
+		/// <returns></returns>
+		public Surface CreateCompatibleSurface(Size size, bool hardware) 
+		{
+			return this.CreateCompatibleSurface(size.Width, size.Height, hardware);
+		}
 
 		/// <summary>
 		/// 
@@ -940,6 +969,15 @@ namespace SdlDotNet
 			return this.Blit(
 				sourceSurface, 
 				new Point(0, 0));
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="spriteCollection"></param>
+		public void Blit(SpriteCollection spriteCollection)
+		{
+			spriteCollection.Draw(this);
 		}
 
 		/// <summary>

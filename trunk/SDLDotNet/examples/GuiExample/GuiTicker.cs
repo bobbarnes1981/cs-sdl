@@ -46,6 +46,7 @@ namespace SdlDotNet.Examples.GuiExample
 			this.x1 = x1;
 			this.x2 = x2;
 			this.baselineY = baselineY;
+			//this.Y = baselineY;
 			this.lastSize = new Size(x2 - x1, 1);
 		}
 
@@ -67,31 +68,6 @@ namespace SdlDotNet.Examples.GuiExample
 			this.lastSize = new Size(x2 - x1, 1);
 		}
 
-		#region Drawing
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Render(/*RenderArgs args*/)
-		{
-//			// Don't bother if we are hidden
-//			if (IsHidden)
-//				return;
-//
-			// Draw ourselves, then our components
-			manager.Render(this);
-
-			// Draw our sprites
-			//RenderArgs args1 = args.Clone();
-			//args1.TranslateX += Coordinates.X;
-			//args1.TranslateY += Coordinates.Y + manager.TickerPadding.Top;
-
-			//foreach (Sprite s in new ArrayList(display))
-			//{
-				//s.Update();
-			//}
-		}
-		#endregion
-
 		#region Sprites
 		private Queue queue = new Queue();
 		private ArrayList display = new ArrayList();
@@ -102,19 +78,23 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="sprite"></param>
 		public void Add(Sprite sprite)
 		{
+			if (queue.Count != 0)
+			{
+				queue.Dequeue();
+			}
 			queue.Enqueue(sprite);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public ArrayList GetSprites()
-		{
-			ArrayList list = new ArrayList(display);
-			list.Add(this);
-			return list;
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <returns></returns>
+//		public ArrayList GetSprites()
+//		{
+//			ArrayList list = new ArrayList(display);
+//			list.Add(this);
+//			return list;
+//		}
 
 		/// <summary>
 		/// 
@@ -143,6 +123,22 @@ namespace SdlDotNet.Examples.GuiExample
 				return new Vector(x1, baselineY - Size.Height, base.Coordinates.Z);
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override Rectangle Rectangle
+		{
+			get
+			{
+				return new Rectangle(Coordinates.X, Coordinates.Y, this.Size.Width, this.Size.Height);
+			}
+			set
+			{
+				base.Rectangle = value;
+			}
+		}
+
 
 		/// <summary>
 		/// 
@@ -199,14 +195,14 @@ namespace SdlDotNet.Examples.GuiExample
 			if (display.Count != 0)
 			{
 				// Go through all the displayed sprites
-				//foreach (Sprite s in new ArrayList(display))
-				//{
+				foreach (Sprite s in new ArrayList(display))
+				{
 					// Tick the sprite and wrap it in a translator
-					//s.OnTick(this, args);
+					s.Update(this, args);
 	  
 					// Move the sprite along
-					//s.Coordinates.X += offset;
-					//s.Coordinates.Y = 0;
+					s.X += offset;
+					s.Y = 0;
 //
 					// See if the sprite is out of bounds
 //					if ((delta < 0 && s.Bounds.Left < x1 - s.Size.Width) || 
@@ -225,7 +221,7 @@ namespace SdlDotNet.Examples.GuiExample
 //					{
 //						maxX = s.Bounds.Right;
 //					}
-			//	}
+				}
 			}
 
 			// Add anything into the queue
@@ -235,17 +231,18 @@ namespace SdlDotNet.Examples.GuiExample
 				if (delta > 0 && minX > minSpace)
 				{
 					// We have room on the left
-					Sprite ns = (Sprite) queue.Dequeue();
-					//ns.Coordinates.Y = manager.TickerPadding.Top + Coordinates.Y;
-					//ns.Coordinates.X = x1 - ns.Size.Width;
+					Sprite ns = (Sprite) queue.Peek();
+					ns.Y = manager.TickerPadding.Top + Coordinates.Y;
+					ns.X = x1 - ns.Size.Width;
 					display.Add(ns);
 				}
 				else if (delta < 0 && x2 - maxX > minSpace)
 				{
 					// We have room on the right
-					Sprite ns = (Sprite) queue.Dequeue();
-					//ns.Coordinates.Y = manager.TickerPadding.Top + Coordinates.Y;
-					//ns.Coordinates.X = x2;
+					Sprite ns = (Sprite) queue.Peek();
+					ns.Y = manager.TickerPadding.Top + Coordinates.Y;
+					ns.X = x2;
+					ns.Rectangle = new Rectangle(ns.X, ns.Y, ns.Size.Width, ns.Size.Height);
 					display.Add(ns);
 				}
 			}
@@ -273,6 +270,31 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get { return (isAutoHide && display.Count == 0); }
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override Surface Surface
+		{
+			get
+			{
+				Sprite s = new Sprite(Video.Screen.CreateCompatibleSurface(this.Size)); 
+				if (this.queue.Count != 0)
+				{
+					s = (Sprite)this.queue.Peek();
+				}
+				//Surface surf = Video.Screen.CreateCompatibleSurface(this.Size);
+				//surf.Blit(s.Surface, s.Rectangle);
+
+				return s.Surface;
+				//return surf;
+			}
+			set
+			{
+				base.Surface = value;
+			}
+		}
+
 
 		/// <summary>
 		/// Delta is the number of pixels that the ticker should move per

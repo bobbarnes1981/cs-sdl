@@ -97,20 +97,24 @@ namespace SdlDotNet.Examples.GuiExample
 //		}
 
 		#region Drawing
-//		public virtual void Render(RenderArgs args)
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override Surface Render()
 //		{
-////			if (!IsTraced)
-////			{
-////				return;
-////			}
-//
-//			// Draw the outer and the inner bounds
+//			if (!IsTraced)
+//			{
+//				return;
+//			}
+
+			// Draw the outer and the inner bounds
 //			GuiManager.DrawRect(args.Surface,
 //				args.Translate(Bounds),
 //				manager.BoundsTraceColor);
 //			GuiManager.DrawRect(args.Surface,
 //				args.Translate(OuterBounds),
 //				manager.OuterBoundsTraceColor);
+
 //		}
 		#endregion
 
@@ -214,12 +218,6 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get { return new Padding(0); }
 		}
-//
-//		public override Size Size
-//		{
-//			get { return size; }
-//			set { size = value; }
-//		}
 
 		/// <summary>
 		/// 
@@ -247,6 +245,27 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		protected GuiManager manager = null;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override Surface Surface
+		{
+			get
+			{
+				if (base.Surface == null)
+				{
+					base.Surface = new Surface(this.Size.Width, this.Size.Height);
+				}
+				return base.Surface;
+			}
+			set
+			{
+				base.Surface = value;
+			}
+		}
+
+
 
 		/// <summary>
 		/// Contains the manager for this component.

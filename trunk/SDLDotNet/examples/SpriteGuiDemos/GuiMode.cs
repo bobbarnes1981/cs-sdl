@@ -46,23 +46,23 @@ namespace SdlDotNet.Examples
 			GuiWindow gw = new GuiWindow(manager, new Rectangle(200, 65, 100, 100));
 			//gw.IsDragable = true;
 			gw.Title = "Draggable Window";
-			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
-				new Point(18, 18)));
+//			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
+//				new Point(18, 18)));
 			Sprites.Add(gw);
 
 			// Create a dragable window without a title
 			gw = new GuiWindow(manager, new Rectangle(25, 120, 32, 32));
 			//gw.IsDragable = true;
-			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
-				new Point(0, 0)));
+//			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
+//				new Point(0, 0)));
 			Sprites.Add(gw);
 
 			// Create a dragable window with a long title
 			gw = new GuiWindow(manager, new Rectangle(100, 415, 256, 64));
 			gw.Title = "Non-Draggable Window with a Long Title";
 			//gw.IsDragable = false;
-			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
-				new Point(0, 0)));
+//			gw.Contents.Add(new AnimatedSprite(LoadRandomMarble(),
+//				new Point(0, 0)));
 			Sprites.Add(gw);
 
 			// Create the menus
@@ -164,7 +164,7 @@ namespace SdlDotNet.Examples
 				70, 70));
 			//gw.IsDragable = true;
 			gw.Title = "Created Window";
-			gw.Contents.Add(new AnimatedSprite(m1, new Point(3, 3)));
+//			gw.Contents.Add(new AnimatedSprite(m1, new Point(3, 3)));
 			Sprites.Add(gw);
 		}
 

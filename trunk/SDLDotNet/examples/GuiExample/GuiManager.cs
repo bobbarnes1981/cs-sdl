@@ -44,38 +44,17 @@ namespace SdlDotNet.Examples.GuiExample
 		public GuiManager(SpriteCollection spriteManager, SdlDotNet.Font baseFont,
 			Size size)
 		{
-			this.manager = spriteManager;
-			this.baseFontGui = baseFont;
+			this.spriteManager = spriteManager;
+			this.baseFont = baseFont;
 			this.size = size;
 		}
-
-		#region Singleton
-		//		private GuiManager singleton = null;
-
-		//		/// <summary>
-		//		/// Contains the singleton instance of the GuiManager. This is
-		//		/// used for all the widgets that are not given a manager at their
-		//		/// creation.
-		//		/// </summary>
-		//		public GuiManager Singleton
-		//		{
-		//			get 
-		//			{ 
-		//				return singleton; 
-		//			}
-		//			set 
-		//			{ 
-		//				singleton = value; 
-		//			}
-		//		}
-		#endregion
 
 		#region Fonts
 		// Contains the fall-back font for the system
 		/// <summary>
 		/// 
 		/// </summary>
-		private SdlDotNet.Font baseFontGui = null;
+		private SdlDotNet.Font baseFont = null;
 
 		// Contains the font for any window titles
 		private SdlDotNet.Font titleFont = null;
@@ -90,7 +69,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get 
 			{ 
-				return this.baseFontGui; 
+				return this.baseFont; 
 			}
 			set
 			{
@@ -99,7 +78,7 @@ namespace SdlDotNet.Examples.GuiExample
 					throw new GuiException("Cannot assign a null font to the GUI");
 				}
 
-				this.baseFontGui = value;
+				this.baseFont = value;
 			}
 		}
 
@@ -112,7 +91,7 @@ namespace SdlDotNet.Examples.GuiExample
 			{
 				if (this.menuFont == null)
 				{
-					return this.baseFontGui;
+					return this.baseFont;
 				}
 				else
 				{
@@ -134,7 +113,7 @@ namespace SdlDotNet.Examples.GuiExample
 			{
 				if (titleFont == null)
 				{
-					return baseFontGui;
+					return baseFont;
 				}
 				else
 				{
@@ -175,12 +154,11 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public void Render(GuiTicker ticker)
+		public void Render(Surface surface, GuiTicker ticker)
 		{
 			// Draw a frame
-			Surface surf = new Surface(ticker.Size.Width, ticker.Size.Height);
-			surf.Fill(ticker.Rectangle, backgroundColor);
-			DrawRect(surf, ticker.Rectangle, frameColor);
+			surface.Fill(ticker.Rectangle, backgroundColor);
+			DrawRect(surface, ticker.Rectangle, frameColor);
 		}
 		#endregion
 
@@ -576,7 +554,7 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Properties
-		private SpriteCollection manager = null;
+		private SpriteCollection spriteManager = null;
 		private Size size = Size.Empty;
 
 		private Color titleColor = Color.FromArgb(250, 250, 250);
@@ -616,11 +594,11 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public SpriteCollection SpriteCollection
+		public SpriteCollection SpriteManager
 		{
 			get 
 			{ 
-				return manager; 
+				return spriteManager; 
 			}
 			set
 			{
@@ -629,7 +607,7 @@ namespace SdlDotNet.Examples.GuiExample
 					throw new Exception("Cannot assign null sprite manager to gui");
 				}
 
-				manager = value;
+				spriteManager = value;
 			}
 		}
 		#endregion

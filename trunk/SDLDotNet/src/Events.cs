@@ -872,7 +872,10 @@ namespace SdlDotNet
 		/// </summary>
 		public static int TickSpan
 		{
-			get { return tickSpan; }
+			get 
+			{ 
+				return tickSpan; 
+			}
 			set
 			{
 				if (value < 1)
