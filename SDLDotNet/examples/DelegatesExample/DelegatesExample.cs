@@ -36,6 +36,8 @@ namespace SdlDotNet.Examples
 		private bool quitFlag;
 		private bool musicFinishedFlag;
 		private bool channelFinishedFlag;
+		private int currentChannel;
+		private int positionY = 200;
 		
 		/// <summary>
 		/// 
@@ -65,7 +67,7 @@ namespace SdlDotNet.Examples
 			int height = 480;
 			Random rand = new Random();
 
-			Mixer.EnableMusicCallbacks();
+			Mixer.EnableMusicFinishedCallback();
 			
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
@@ -78,8 +80,18 @@ namespace SdlDotNet.Examples
 				font = new Font(filepath + FontName, size);
 				Music music = Mixer.LoadMusic(filepath + "fard-two.ogg");
 				Mixer.PlayMusic(music, 1);
-				Sample sample = Mixer.LoadWav(filepath + "test.wav");
-				Mixer.PlaySample(1, sample, 0);
+				Sound sound = Mixer.Sound(filepath + "test.wav");
+				Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
+				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
+				Channel channel = new Channel(0);
+				Channel channel2 = new Channel(1);
+				channel.EnableChannelFinishedCallback();
+				//channel2.EnableChannelFinishedCallback();
+				//channel.QueuedSound = queuedSound;
+				channel.Play(sound);
+				channel2.Play(sound);
+				
+				
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
 				WindowManager.Caption = "Delegates Example";
@@ -90,6 +102,7 @@ namespace SdlDotNet.Examples
 					while (Events.PollAndDelegate()) 
 					{
 						// handle events till the queue is empty
+						//sound.Stop();
 					} 
 					
 					try 
@@ -102,19 +115,19 @@ namespace SdlDotNet.Examples
 								254,254));
 							text.Blit(
 								screen, 
-								new Rectangle(new Point(100,100), 
+								new Rectangle(new Point(100,300), 
 								text.Size));
 							screen.Flip();
 						}
 						if (channelFinishedFlag)
 						{
 							text = font.Render(
-								"ChannelChannelFinishedDelegate was called.", 
+								"ChannelFinishedDelegate was called for channel " + currentChannel.ToString(), 
 								Color.FromArgb(0, 154, 
 								154,154));
 							text.Blit(
 								screen, 
-								new Rectangle(new Point(100,200), 
+								new Rectangle(new Point(100,positionY + 50 * currentChannel), 
 								text.Size));
 							screen.Flip();
 						}
@@ -159,6 +172,7 @@ namespace SdlDotNet.Examples
 			Console.WriteLine("channel: " + e.Channel.ToString());
 			Console.WriteLine("Channel Finished");
 			channelFinishedFlag = true;
+			currentChannel = e.Channel;
 		}
 
 		private void MusicFinished(object sender, MusicFinishedEventArgs e)

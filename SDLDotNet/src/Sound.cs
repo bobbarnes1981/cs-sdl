@@ -24,15 +24,24 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
+	/// 
+	/// </summary>
+	public delegate void SoundEventHandler(object sender, SoundEventArgs e);
+	/// <summary>
 	/// Represents a sound sample.
 	/// Create with Mixer.LoadWav().
 	/// </summary>
-	public class Sample : BaseSdlResource 
+	public class Sound : BaseSdlResource 
 	{
 		private IntPtr handle;
+		private int channels = 0;
 		private bool disposed = false;
-
-		internal Sample(IntPtr handle) 
+		/// <summary>
+		/// 
+		/// </summary>
+		public event SoundEventHandler SoundEvent;
+		
+		internal Sound(IntPtr handle) 
 		{
 			this.handle = handle;
 		}
@@ -78,7 +87,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Gets/Set the volume of the sample. Should be between 0 and 128 inclusive.
+		/// Gets/Set the volume of the sound. Should be between 0 and 128 inclusive.
 		/// </summary>
 		public int Volume
 		{
@@ -96,7 +105,95 @@ namespace SdlDotNet
 				}
 				GC.KeepAlive(this);
 			}
+		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Channel Play()
+		{
+			return this.Play(0);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="loops"></param>
+		/// <returns></returns>
+		public Channel Play(int loops) 
+		{
+			return this.Play(loops, (int) SdlFlag.PlayForever);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="loops"></param>
+		/// <param name="milliseconds"></param>
+		/// <returns></returns>
+		public Channel Play(int loops, int milliseconds) 
+		{
+			int index = 
+				SdlMixer.Mix_PlayChannelTimed
+				(
+				Mixer.FindAvailableChannel(), 
+				this.GetHandle(), 
+				loops, 
+				milliseconds
+				);
+
+			if (index == (int) SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+			this.channels++;
+			return new Channel(index);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int NumberOfChannels
+		{
+			get
+			{
+				return this.channels;
+			}
+			set
+			{
+				this.channels = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Stop()
+		{
+			SoundEventArgs args = new SoundEventArgs(SoundAction.Stop);
+			OnSoundEvent(args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Fadeout(int fadeoutTime)
+		{
+			SoundEventArgs args = new SoundEventArgs(SoundAction.Stop, fadeoutTime);
+			OnSoundEvent(args);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected void OnSoundEvent(SoundEventArgs e)
+		{
+			if (SoundEvent != null)
+			{
+				SoundEvent(this, e);
+			}
 		}
 	}
 }

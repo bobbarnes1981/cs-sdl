@@ -251,20 +251,20 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// Indicates the current fading status of a sample
+	/// Indicates the current fading status of a sound
 	/// </summary>
 	public enum FadingStatus
 	{
 		/// <summary>
-		/// Sample is not fading
+		/// Sound is not fading
 		/// </summary>
 		NoFading = SdlMixer.MIX_NO_FADING,
 		/// <summary>
-		/// Sample is fading out
+		/// Sound is fading out
 		/// </summary>
 		FadingOut = SdlMixer.MIX_FADING_OUT,
 		/// <summary>
-		/// Sample is fading in
+		/// Sound is fading in
 		/// </summary>
 		FadingIn = SdlMixer.MIX_FADING_IN
 	}
@@ -1444,5 +1444,20 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		LeftDown = Sdl.SDL_HAT_LEFTDOWN
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public enum SoundAction
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		Stop,
+		/// <summary>
+		/// 
+		/// </summary>
+		Fadeout
 	}
 }
