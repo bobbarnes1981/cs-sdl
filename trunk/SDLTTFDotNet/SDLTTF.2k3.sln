@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL-2k3", "..\SDLDotNet\SDL-2k3.csproj", "{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDLTTF.NET.2k3", "SDLTTF.NET.2k3.csproj", "{658B1E41-57D2-4AA3-BD7A-074F54E282F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00} = {42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "example", "example\example.csproj", "{C8137414-34A0-452C-AEF7-3A123D96857D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Debug.ActiveCfg = Debug|.NET
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Debug.Build.0 = Debug|.NET
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Release.ActiveCfg = Release|.NET
+		{42C73A09-0D0F-4123-B53F-F6B5C3F6AF00}.Release.Build.0 = Release|.NET
+		{658B1E41-57D2-4AA3-BD7A-074F54E282F8}.Debug.ActiveCfg = Debug|.NET
+		{658B1E41-57D2-4AA3-BD7A-074F54E282F8}.Debug.Build.0 = Debug|.NET
+		{658B1E41-57D2-4AA3-BD7A-074F54E282F8}.Release.ActiveCfg = Release|.NET
+		{658B1E41-57D2-4AA3-BD7A-074F54E282F8}.Release.Build.0 = Release|.NET
+		{C8137414-34A0-452C-AEF7-3A123D96857D}.Debug.ActiveCfg = Debug|.NET
+		{C8137414-34A0-452C-AEF7-3A123D96857D}.Debug.Build.0 = Debug|.NET
+		{C8137414-34A0-452C-AEF7-3A123D96857D}.Release.ActiveCfg = Release|.NET
+		{C8137414-34A0-452C-AEF7-3A123D96857D}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
