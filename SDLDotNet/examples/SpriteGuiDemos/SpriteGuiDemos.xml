@@ -1,0 +1,578 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpriteGuiDemo</name>
+    </assembly>
+    <members>
+        <member name="T:SdlDotNet.Examples.AnimatedSprite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.AnimatedSprite.#ctor(SdlDotNet.SurfaceCollection,System.Drawing.Point)">
+            <summary>
+            
+            </summary>
+            <param name="d"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.AnimatedSprite.#ctor(SdlDotNet.SurfaceCollection,SdlDotNet.Vector)">
+            <summary>
+            
+            </summary>
+            <param name="d"></param>
+            <param name="coordinates"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.AnimatedSprite.Update(System.Object,SdlDotNet.TickEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <param name="sender"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.AnimatedSprite.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SdlDotNet.Examples.BounceMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SdlDotNet.Examples.DemoMode">
+            <summary>
+            An abstract page to encapsulates the common functionality of all
+            demo pages.
+            </summary>
+        </member>
+        <member name="F:SdlDotNet.Examples.DemoMode.surf">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SdlDotNet.Examples.DemoMode.sprites">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.LoadFloor">
+            <summary>
+            Loads a floor title into memory.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.LoadMarble(System.String)">
+            <summary>
+            Loads the marble series into memory and returns the
+            collection.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.LoadRandomMarble">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.LoadTiledMarble(System.String)">
+            <summary>
+            Loads a marble from a single image and tiles it.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.OnTick(System.Object,SdlDotNet.TickEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.EnableTickEvent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.Start(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Indicates to the demo page that it should start displaying its
+            data in the given sprite manager.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.Stop(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Indicates to the demo page that it should stop displaying its
+            data in the given sprite manager.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DemoMode.RenderSurface">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.Examples.DemoMode.Surface">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SdlDotNet.Examples.DemoMode.Sprites">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.BounceMode.#ctor">
+            <summary>
+            Constructs the internal sprites needed for our demo.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.BounceMode.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SdlDotNet.Examples.BounceSprite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SdlDotNet.Examples.BoundedSprite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.BoundedSprite.#ctor(SdlDotNet.SurfaceCollection,System.Drawing.Rectangle,SdlDotNet.Vector)">
+            <summary>
+            
+            </summary>
+            <param name="d"></param>
+            <param name="bounds"></param>
+            <param name="coordinates"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.BoundedSprite.Update(System.Object,SdlDotNet.TickEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+        <member name="P:SdlDotNet.Examples.BoundedSprite.SpriteBounds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.BounceSprite.#ctor(SdlDotNet.SurfaceCollection,System.Drawing.Rectangle,SdlDotNet.Vector)">
+            <summary>
+            
+            </summary>
+            <param name="d"></param>
+            <param name="rect"></param>
+            <param name="coordinates"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.BounceSprite.Update(System.Object,SdlDotNet.TickEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+        <member name="T:SdlDotNet.Examples.ClickMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ClickMode.#ctor">
+            <summary>
+            Constructs the internal sprites needed for our demo.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ClickMode.Start(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Adds the internal sprite manager to the outer one.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ClickMode.Stop(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Removes the internal manager from the controlling manager.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ClickMode.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SdlDotNet.Examples.ClickSprite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ClickSprite.#ctor(SdlDotNet.SurfaceCollection,SdlDotNet.SurfaceCollection,System.Drawing.Point)">
+            <summary>
+            
+            </summary>
+            <param name="d1"></param>
+            <param name="d2"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.ClickSprite.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SdlDotNet.Examples.ClickSprite.Update(System.Object,SdlDotNet.MouseButtonEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+        <member name="T:SdlDotNet.Sprites.DemoBoundedTextSprite">
+            <summary>
+            Implements a text sprite that has a bounded box to define its
+            size and an orientation (as a float) for vertical and horizontal
+            alignment.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Sprites.DemoBoundedTextSprite.#ctor(System.String,SdlDotNet.Font,System.Drawing.Size,System.Double,System.Double,System.Drawing.Point)">
+            <summary>
+            
+            </summary>
+            <param name="textItem"></param>
+            <param name="font"></param>
+            <param name="size"></param>
+            <param name="horizontal"></param>
+            <param name="vertical"></param>
+            <param name="coordinates"></param>
+        </member>
+        <member name="M:SdlDotNet.Sprites.DemoBoundedTextSprite.Update(System.Object,SdlDotNet.TickEventArgs)">
+            <summary>
+            All sprites are tickable, regardless if they actual do
+            anything. This ensures that the functionality is there, to be
+            overridden as needed.
+            </summary>
+        </member>
+        <member name="T:SdlDotNet.Examples.DragMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DragMode.#ctor">
+            <summary>
+            Constructs the internal sprites needed for our demo.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DragMode.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SdlDotNet.Examples.DragSprite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.DragSprite.#ctor(SdlDotNet.SurfaceCollection,SdlDotNet.SurfaceCollection,System.Drawing.Point,System.Drawing.Rectangle)">
+            <summary>
+            
+            </summary>
+            <param name="d1"></param>
+            <param name="d2"></param>
+            <param name="coordinates"></param>
+            <param name="bounds"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.DragSprite.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SdlDotNet.Examples.DragSprite.Update(System.Object,SdlDotNet.MouseButtonEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.DragSprite.Update(System.Object,SdlDotNet.MouseMotionEventArgs)">
+            <summary>
+            If the sprite is picked up, this moved the sprite to follow
+            the mouse.
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.Examples.DragSprite.IsMouseMotionLocked">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.Examples.DragSprite.IsMouseButtonLocked">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SdlDotNet.Examples.FontMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.FontMode.#ctor">
+            <summary>
+            Constructs the internal sprites needed for our demo.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.FontMode.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SdlDotNet.Examples.GuiMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.GuiMode.#ctor">
+            <summary>
+            Constructs the internal sprites needed for our demo.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.GuiMode.Start(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Adds the internal sprite manager to the outer one.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.GuiMode.Stop(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Removes the internal manager from the controlling manager.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.GuiMode.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SdlDotNet.Examples.GuiMode.OnCreateNewWindow(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.GuiMode.OnTick(System.Object,SdlDotNet.TickEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+        <member name="T:SdlDotNet.Examples.MultipleMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.MultipleMode.#ctor">
+            <summary>
+            Constructs the internal sprites needed for our demo.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.MultipleMode.RenderSurface">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.MultipleMode.AdjustViewport(SdlDotNet.Sprites.Sprite,SdlDotNet.Surface)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SdlDotNet.Examples.MultipleMode.AdjustBoundedViewport(SdlDotNet.Sprites.Sprite,SdlDotNet.Surface)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SdlDotNet.Examples.MultipleMode.Start(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Adds the internal sprite manager to the outer one.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.MultipleMode.Stop(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Removes the internal manager from the controlling manager.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.MultipleMode.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SdlDotNet.Examples.MultipleMode.ViewRect">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SdlDotNet.Examples.SdlDemo">
+            <summary>
+            The SdlDemo is a general testbed and display of various features
+            in the MFGames.Sdl library. It includes animated sprites and
+            movement. To run, it currently assumes that the current
+            directory has a "test/" directory underneath it containing
+            various images.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.SdlDemo.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.SdlDemo.Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.SdlDemo.OnTick(System.Object,SdlDotNet.TickEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+        <member name="P:SdlDotNet.Examples.SdlDemo.CurrentDemo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.Examples.SdlDemo.GuiManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.Examples.SdlDemo.Instance">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.Examples.SdlDemo.MasterSpriteContainer">
+            <summary>
+            The master sprite manager is the top-most manager that
+            contains everything else. It includes the GUI elements common
+            throughout the site and also the sprite manager that frames
+            the actual output.
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.Examples.SdlDemo.Sprites">
+            <summary>
+            The sprite manager is the manager that handles the demo
+            pages. This may be translated or moved as needed. All
+            DemoModes should attached their sprite manager to this one.
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.Examples.SdlDemo.Size">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SdlDotNet.Examples.StaticMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.StaticMode.#ctor">
+            <summary>
+            Constructs the internal sprites needed for our demo.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.StaticMode.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SdlDotNet.Examples.StatusWindow">
+            <summary>
+            This is a status window which shows the current state of the
+            system at any time. This allows the system to report anything
+            required.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.StatusWindow.#ctor(SdlDotNet.Examples.GuiExample.GuiManager)">
+            <summary>
+            Creates a basic status window above everything else.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.StatusWindow.OnTick(System.Object,SdlDotNet.TickEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:SdlDotNet.Examples.StatusWindow.EnableTickEvent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SdlDotNet.Examples.ViewportMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ViewportMode.#ctor">
+            <summary>
+            Constructs the internal sprites needed for our demo.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ViewportMode.Start(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Adds the internal sprite manager to the outer one.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ViewportMode.Stop(SdlDotNet.Sprites.SpriteCollection)">
+            <summary>
+            Removes the internal manager from the controlling manager.
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ViewportMode.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SdlDotNet.Examples.ViewportMode.RenderSurface">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SdlDotNet.Examples.ViewportMode.AdjustViewport">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SdlDotNet.Examples.ViewportMode.AdjustBoundedViewport">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SdlDotNet.Examples.ViewportMode.CenterSprite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.Examples.ViewportMode.ViewRect">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>
