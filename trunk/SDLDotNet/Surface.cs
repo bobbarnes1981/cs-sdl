@@ -3,6 +3,22 @@ using System.IO;
 using System.Runtime.InteropServices;
 
 namespace SDLDotNet {
+
+	/// <summary>
+	/// Enum for setting surface alpha
+	/// </summary>
+	public enum Alpha {
+		/// <summary>
+		/// Equivalent to SDL_RLEACC
+		/// </summary>
+		RLEAccel = 0x00004000,
+
+		/// <summary>
+		/// Equivalent to SDL_SRCALPHA
+		/// </summary>
+		Source = 0x00010000
+	}
+	
 	/// <summary>
 	/// An opaque structure representing an SDL pixel value
 	/// </summary>
@@ -342,7 +358,7 @@ namespace SDLDotNet {
 				case 3: // Slow 24-bpp mode, usually not used
 				{/*
 					byte *bufp;
-					bufp = (byte *)screen->pixels + y*screen->pitch + x * 3;
+					bufp = (byte *)_surface->pixels + y*_surface->pitch + x * 3;
 					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
 					{
 						bufp[0] = color;
@@ -354,8 +370,8 @@ namespace SDLDotNet {
 						bufp[2] = color;
 						bufp[1] = color >> 8;
 						bufp[0] = color >> 16;
-					}*/
-				}
+					}
+				*/}
 				break;
 				case 4: // Probably 32-bpp
 				{
@@ -403,5 +419,67 @@ namespace SDLDotNet {
 		/// Returns the length of a scanline in bytes
 		/// </summary>
 		public ushort Pitch { get { return _surface->pitch; } }
+
+		/// <summary>
+		/// Attempting to code GetPixel. The getter equivalent of PutPixel.
+		/// Mridul - Added for my code...
+		/// </summary>
+		/// <param name="x">The x co-ordinate of the surface</param>
+		/// <param name="y">The y co-ordinate of the surface</param>
+		public UInt32 GetPixel(int x, int y) {
+			int bpp = _surface->format->BytesPerPixel;
+
+			byte* p = (byte*)Pixels + y * Pitch + x * BytesPerPixel;
+
+			switch(bpp) {
+				case 1: //Assuming 8-bpp
+				{
+					byte *bufp;
+					bufp = (byte *)_surface->pixels.ToPointer() + y*_surface->pitch + x;
+					return *bufp;
+				}
+				case 2:
+				{
+					UInt16 *bufp;
+					bufp = (UInt16 *)_surface->pixels.ToPointer() + y*_surface->pitch/2 + x;
+					return *bufp;
+				}
+				case 3: //Assuming this is not going to be used much... 
+				{/*
+					byte *bufp;
+					bufp = (byte *)screen->pixels + y*screen->pitch + x * 3;
+					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
+					{
+						return p[0] << 16 | p[1] << 8 | p[2];
+					}
+					else
+					{
+						return p[0] | p[1] << 8 | p[2] << 16;
+					}
+				*/return 0;
+				}
+				case 4:
+				{
+					UInt32 *bufp;
+					bufp = (UInt32 *)_surface->pixels.ToPointer() + y*_surface->pitch/4 + x;
+					return *bufp;
+				}
+				default: //Should never come here... but kya kare...
+				{
+					return 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Sets the alpha value of a surface
+		/// </summary>
+		/// <param name="flag">The alpha flags</param>
+		/// <param name="alpha">The alpha value</param>
+		public void SetAlpha(Alpha flag, byte alpha) {
+			if ((Natives.SDL_SetAlpha(_surface, (UInt32)flag, alpha)) != 0) {
+				throw SDLException.Generate();
+			}
+		}
 	}
 }
