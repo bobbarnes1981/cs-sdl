@@ -18,8 +18,8 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="2.1.0" />
-    <property name="release.version" value="2" />
+    <property name="project.version" value="2.2.0beta1" />
+    <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
     <property name="examples.dir" value="examples" />
@@ -49,8 +49,6 @@
 	<call target="${project.config}" />
 	<sysinfo />
 	<echo message = "Platform ${sys.os.platform}"/>
-	<call target="${nant.settings.currentframework}" />
-	<call target="${sys.os.platform}" />
 	<property name="build.dir" value="${bin.dir}/${project.config}"/>
     </target>
 
@@ -68,40 +66,9 @@
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
     </target>
 
-    <!--run this target to create a mono build -->
-    <target name = "mono-1.0" description="sets parameters for a mono build">
-	<property name="runtime.dir" value="mono"/>
-	<property name="nant.settings.currentframework" value="mono-1.0" />
-	<property name="mono" value="true"/>
-	<property name="net" value="false"/>
-    </target>
-
-    <target name = "mono" depends="mono-1.0" description="sets parameters for a mono build">
-    </target>
-
-    <target name = "net-1.1" description="sets parameters for a net build">
-	<property name="mono" value="false"/>
-	<property name="net" value="true"/>
-	<property name="runtime.dir" value="net"/>
-	<property name="nant.settings.currentframework" value="net-1.1" />
-    </target>
-
-    <target name = "net" depends="net-1.1" description="sets parameters for a .net build">
-    </target>
-
-    <target name = "Win32NT" description="sets parameters for a Windows build">
-	<property name="platform.dir" value="win"/>
-	<property name="platform.define" value="WIN32" />
-    </target>
-
-    <target name = "win" depends="Win32NT" description="sets parameters for a Windows build">
-    </target>
-
-    <target name = "Win32Windows" depends="Win32NT" description="sets parameters for a Windows 95 or later build">
-    </target>
-    
     <target name="build" depends="init" description="Builds current configuration">
 	<!-- build SDLDotNet assembly -->
 	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="build" />
@@ -124,6 +91,7 @@
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="build" />
+	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="build" />
     </target>
 
     <target name="buildrelease" depends="clean, setrelease, examples" description="Build all Release assemblies">
@@ -131,15 +99,11 @@
     </target>
 
     <target name="doc">
-	<if test = "${net}">
 	    <nant buildfile="${src.dir}/${project.name}.dll.build" target="doc" />	
-	</if>
     </target>
 
     <target name="schema" depends="init, build">
-	<if test = "${net}">
 	    <nant buildfile="${src.dir}/${project.name}.dll.build" target="schema" />
-	</if>
     </target>
 
     <target name="package" depends="buildrelease, doc, schema, copyfiles, zip" description="Package">
@@ -201,6 +165,11 @@
 		<exclude name="examples/Gears/*j.user" />
 		<exclude name="examples/Gears/${obj.dir}" />
 		<!-- <exclude name="examples/Gears/${build.dir}/*.dll" /> -->
+		<include name="examples/MoviePlayer/*" />
+		<include name="examples/MoviePlayer/${build.dir}/*" />
+		<exclude name="examples/MoviePlayer/*j.user" />
+		<exclude name="examples/MoviePlayer/${obj.dir}" />
+		<!-- <exclude name="examples/Rectangles/${build.dir}/*.dll" /> -->
 		<include name="lib/*" />
 		<include name="scripts/**" />
 		<include name="tools/**" />
