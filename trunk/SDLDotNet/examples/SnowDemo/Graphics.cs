@@ -33,7 +33,7 @@ namespace SdlDotNet.Examples
 		public static void Init()
 		{
 			screen = Video.SetVideoModeWindow(640, 480, 16, true);
-			background = Graphics.LoadImage("../../Data/background.bmp", Color.FromArgb(255, 0, 255));
+			background = Graphics.LoadImage("../../Data/background.png", Color.FromArgb(255, 0, 255));
 			Video.WindowCaption = "Snow Demo";
 		}
 		

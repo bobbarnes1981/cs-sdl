@@ -78,7 +78,7 @@ namespace SdlDotNet.Examples
 
 				imagepath = @"images/";
 
-				Surface Background = new Surface(filepath + imagepath + "background.tga");
+				Surface Background = new Surface(filepath + imagepath + "background.png");
 
 				Surface sdlimg = new Surface(filepath + imagepath +  "sdlimage.png");
 				sdlimg.AlphaFlags = Alphas.RleEncoded| Alphas.SourceAlphaBlending;

@@ -119,7 +119,7 @@ namespace SdlDotNet.Examples
 			surf.Fill(new Rectangle(new Point(x,y), new Size(width, height)), buttonColor);
 
 			Surface fontSurface = buttonFont.Render(buttonText, Color.Black);
-			surf.Blit(fontSurface,new System.Drawing.Rectangle(new System.Drawing.Point(textX, textY), fontSurface.Size));
+			surf.Blit(fontSurface, new System.Drawing.Point(textX, textY));
 		}
 
 		/// <summary>

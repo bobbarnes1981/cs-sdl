@@ -18,7 +18,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="3.0.0alpha1" />
+    <property name="project.version" value="3.0.0beta1" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
@@ -57,17 +57,22 @@
 	<delete dir="${nant.project.basedir}/${bin.dir}" failonerror="false" />
 	<delete dir="${nant.project.basedir}/${obj.dir}" failonerror="false" />
 	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="clean" />
-	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="clean" />
+	<nant buildfile="${examples.dir}/BombRun/BombRun.build" target="clean" />
+	<nant buildfile="${examples.dir}/Bounce/Bounce.build" target="clean" />
 	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="clean" />
-	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="clean" />
-	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="clean" />
-	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="clean" />
-	<nant buildfile="${examples.dir}/Gears/Gears.build" target="clean" />
-	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/Gears/Gears.build" target="clean" />
+	<nant buildfile="${examples.dir}/GuiTest/GuiTest.build" target="clean" />
+	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
+	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="clean" />
 	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="clean" />
+	<nant buildfile="${examples.dir}/SnowDemo/SnowDemo.build" target="clean" />
+	<nant buildfile="${examples.dir}/WeaponFire/WeaponFire.build" target="clean" />
     </target>
 
     <target name="build" depends="init" description="Builds current configuration">
@@ -83,9 +88,11 @@
 
     <target name="examples" depends="build" description="Build examples">
 	<echo message="Building examples" />
-	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="build" />
+	<nant buildfile="${examples.dir}/BombRun/BombRun.build" target="build" />
+	<nant buildfile="${examples.dir}/Bounce/Bounce.build" target="build" />
 	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="build" />
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="build" />
+	<nant buildfile="${examples.dir}/GuiTest/GuiTest.build" target="build" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="build" />
@@ -93,7 +100,10 @@
 	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="build" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="build" />
+	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="build" />
 	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="build" />    
+	<nant buildfile="${examples.dir}/SnowDemo/SnowDemo.build" target="build" />
+	<nant buildfile="${examples.dir}/WeaponFire/WeaponFire.build" target="build" />
     </target>
 
     <target name="buildrelease" depends="clean, setrelease, examples" description="Build all Release assemblies">
@@ -118,6 +128,12 @@
 		<include name="src/*.cs" />
 		<include name="src/*.build" />
 		<include name="src/*.snk" />
+		<include name="examples/BombRun/**" />
+		<exclude name="examples/BombRun/*j.user" />
+		<exclude name="examples/BombRun/${obj.dir}" />
+		<include name="examples/Bounce/**" />
+		<exclude name="examples/Bounce/*j.user" />
+		<exclude name="examples/Bounce/${obj.dir}" />
 		<include name="examples/FontExample/*" />
 		<include name="examples/FontExample/${build.dir}/*" />
 		<exclude name="examples/FontExample/*j.user" />
@@ -147,6 +163,9 @@
 		<exclude name="examples/DelegatesExample/*j.user" />
 		<exclude name="examples/DelegatesExample/${obj.dir}" />
 		<!-- <exclude name="examples/DelegatesExample/${build.dir}/*.dll" /> -->
+		<include name="examples/GuiTest/**" />
+		<exclude name="examples/GuiTest/*j.user" />
+		<exclude name="examples/GuiTest/${obj.dir}" />
 		<include name="examples/JoystickExample/*" />
 		<include name="examples/JoystickExample/${build.dir}/*" />
 		<exclude name="examples/JoystickExample/*j.user" />
@@ -177,6 +196,12 @@
 		<exclude name="examples/SimpleGame/*j.user" />
 		<exclude name="examples/SimpleGame/${obj.dir}" />
 		<!-- <exclude name="examples/SimpleGame/${build.dir}/*.dll" /> -->
+		<include name="examples/SnowDemo/**" />
+		<exclude name="examples/SnowDemo/*j.user" />
+		<exclude name="examples/SnowDemo/${obj.dir}" />
+		<include name="examples/WeaponFire/**" />
+		<exclude name="examples/WeaponFire/*j.user" />
+		<exclude name="examples/WeaponFire/${obj.dir}" />
 		<include name="lib/*" />
 		<include name="scripts/**" />
 		<include name="tools/**" />

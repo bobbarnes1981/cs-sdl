@@ -99,11 +99,11 @@ namespace SdlDotNet.Examples
 					
 					try 
 					{
-						surf.Blit(Background,new Rectangle(new Point(0,0),Background.Size));
+						surf.Blit(Background,new Point(0,0));
 						button.Draw(surf);
 						
 						textBox.Draw(surf);
-						screen.Blit(surf, new Rectangle(new Point(0, 0), surf.Size));
+						screen.Blit(surf, new Point(0, 0));
 						screen.Flip();
 						
 					} 

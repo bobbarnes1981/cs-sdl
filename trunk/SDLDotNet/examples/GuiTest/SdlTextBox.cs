@@ -135,7 +135,7 @@ namespace SdlDotNet.Examples
 				Surface fontSurface = boxFont.Render(boxText, Color.Black);
 				surf.Blit(
 					fontSurface,
-					new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size));
+					new System.Drawing.Point(x, y));
 			}
 		}
 
