@@ -15,6 +15,7 @@ using SDLDotNet;
 	There is currently a bug in mono which meant this class did not need an instance of SDL.
 	I have fixed this so it does not depend on that bug.
 */
+//[assembly: CLSCompliantAttribute(true)]
 namespace SDLDotNet.TTF
 {
 	/// <summary>

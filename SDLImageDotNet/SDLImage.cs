@@ -3,11 +3,11 @@ using System.IO;
 using System.Drawing;
 using SDLDotNet;
 
-namespace SDLDotNet.Images
+namespace SDLDotNet.Image
 {
 
 	/// <summary>
-	/// <para>Represents a Image that can be drawn on a SDLDotNet.Surface.</para>
+	/// <para>Represents a Image that can be drawn on a SDL.Surface.</para>
 	/// <para>The image can be loaded from from a file, a System.Drawing.Bitmap, or a byte array.</para>
 	/// <para>Supported image formats follows the development cycle of SDL_Image. Currently, supported and planned supported image formats are:</para>
 	/// 
@@ -36,7 +36,7 @@ namespace SDLDotNet.Images
 	{
 
 		/// <summary>
-		/// Private field that holds an instance of SDLDotNet.SDL
+		/// Private field that holds an instance of SDL.SDL
 		/// </summary>
 		private SDL sdl = SDL.Instance;
 
@@ -90,7 +90,7 @@ namespace SDLDotNet.Images
 		}
 
 		
-		#if !__MONO__
+#if !__MONO__
 		/// <summary>
 		/// Create a SDLImage instance from a System.Drawing.Bitmap object. Loads a bitmap from a System.Drawing.Bitmap object, usually obtained from a resource.
 		/// </summary>
@@ -104,16 +104,19 @@ namespace SDLDotNet.Images
 			if (pSurface == IntPtr.Zero) throw SDLImageException.Generate();
 			surface = sdl.Video.GenerateSurfaceFromPointer(pSurface);
 		}
-		#endif
+#endif
 		
-
-		~SDLImage() {
+		/// <summary>
+		/// Destructor
+		/// </summary>
+		~SDLImage() 
+		{
 			surface.Dispose();
 		}
 
 
 		/// <summary>
-		/// The SDLDotNet.Surface that represents the Surface of the SDLImage. 
+		/// The SDL.Surface that represents the Surface of the SDLImage. 
 		/// </summary>
 		public Surface Surface 
 		{ 
@@ -207,9 +210,9 @@ namespace SDLDotNet.Images
 
 
 		/// <summary>
-		/// Draws the image on a SDLDotNet.Surface.
+		/// Draws the image on a SDL.Surface.
 		/// </summary>
-		/// <param name="dest">The SDLDotNet.Surface to draw the image upon</param>
+		/// <param name="dest">The SDL.Surface to draw the image upon</param>
 		/// <param name="destrect">The position of the image on the destination surface</param>
 		public void Draw(Surface dest, Rectangle destrect) 
 		{
@@ -217,10 +220,10 @@ namespace SDLDotNet.Images
 		}
 
 		/// <summary>
-		/// Draws the image on a SDLDotNet.Surface.
+		/// Draws the image on a SDL.Surface.
 		/// </summary>
 		/// <param name="srcrect">The area of the image that is to be drawn on the destination surface</param>
-		/// <param name="dest">The SDLDotNet.Surface to draw the image upon</param>
+		/// <param name="dest">The SDL.Surface to draw the image upon</param>
 		/// <param name="destrect">The position of the image on the destination surface</param>
 		public void Draw(Rectangle srcrect, Surface dest, Rectangle destrect) 
 		{

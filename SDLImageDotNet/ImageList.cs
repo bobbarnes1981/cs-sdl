@@ -4,7 +4,7 @@ using System.Collections;
 using SDLDotNet;
 
 
-namespace SDLDotNet.Images
+namespace SDLDotNet.Image
 {
 
 	/// <summary>
