@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project name="PixelsExample" default="build">
+    <target name="build">
+	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
+	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
+	<echo message="Using '${nant.settings.currentframework}' Framework"/>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${src.dir}/${build.dir}">
+		<includes name="${project.name}.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${lib.dir}">
+		<includes name="${native.sdl}.dll"/>
+	    </fileset>
+	</copy>
+	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
+	    <sources failonempty="true">
+		<includes name="**/*.cs" />
+	    </sources>
+	    <references basedir="${nant.project.basedir}/${build.dir}">
+		<includes name="${project.name}.dll"/>
+		<includes name="${native.sdl}.dll"/>
+		<includes name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+	    </references>
+	    <arg value="/d:mono" if="${mono}" />
+	</csc>
+    </target>
+    <target name="clean">
+	<delete dir="${bin.dir}" failonerror="false" />
+	<delete dir="${obj.dir}" failonerror="false" />
+    </target>
+</project>

@@ -1,0 +1,55 @@
+2.0.0
+David Hudson 21 Nov 2004
+* Final Release.
+* Minor changes to docs.
+
+2.0.0b2
+David Hudson 16 Nov 2004
+* Reworked all of the Dispose() methods to fix memory leak problems (hopefully).
+* Fixed MusicFinshed and ChannelFinshed delegates.
+
+2.0.0b1
+David Hudson 5 Nov 2004
+* Added Gears example that uses OpenGL.
+* Finished adding all functionality that existed in 1.5.x.
+Including:
+Surface.DrawPixel
+Surface.GetPixel
+Surface.FlipVertical
+* Added Timer.Delay
+* Added PixelsExample which uses the Draw/Get pixel methods.
+* Modified FontExample to use FlipVertical
+
+2.0.0a2:
+David Hudson 3 Nov 2004
+* Ran FXCop against SDL.NET and fixed a huge amount of issues that make SDL.NET more .NET "compliant".
+* Decoupled Tao.Sdl and SDL.NET so that the examples do not need to reference Tao.Sdl directly.
+* Made some changes to enums in Tao.Sdl that required changes in SDL.NET.
+
+2.0.0a1:
+David Hudson 29 Oct 2004
+* Finished rewriting SDL.NET.
+* Single assembly
+* CLS compliant, no more pointers!
+* Based on Tao.Sdl native bindings.
+* Better integration of SDL_image, Sdl_mixer and SDL_ttf
+* CHM docs.
+* Code cleanups and reorg
+* CdPlayer example works
+* Image Example works more reliably.
+* A few more features (see README)
+
+------------------------------------------
+0.0.2:
+Lucas Maloney - Mon 31 Mar 2003 23:48:21 EST 
+ * Changed the namespace from SDL-TTFDotNet to SDLDotNet.TTF
+ * Modified to use Singleton architecture.  This depends on changes to SDLDotNet which should be in version 1.4.  For now, you will have to use CVS.
+
+0.0.1:
+Lucas Maloney - Wed Mar 19 18:51:40 EST 2003
+ * Initial attempt
+ Lucas Maloney Sun 23 Mar 2003 21:24:41 EST 
+SDLDotNet.TTF is a .NET wrapper for sdl-ttf (See http://www.libsdl.org/projects/SDL_ttf/)
+This is my initial import of this wrapper.  It is lacking a lot in the way of error checking and documentation, but it is fully functional.
+There is a simple example program in example/.  It is based on the showfont example that comes with SDL_ttf.
+ 
