@@ -23,7 +23,7 @@ using Tao.Sdl;
 
 namespace SdlDotNet 
 {
-	#region OpenGLAttributes
+	#region OpenGLAttribute
 	/// <summary>
 	/// Public enumeration for setting the OpenGL window Attributes
 	/// </summary>
@@ -32,7 +32,7 @@ namespace SdlDotNet
 	/// the attributes list above must be known before SDL 
 	/// sets the video mode.
 	/// </remarks>
-	public enum OpenGLAttributes 
+	public enum OpenGLAttr
 	{
 		/// <summary>
 		/// Size of the framebuffer red component, in bits
@@ -95,7 +95,7 @@ namespace SdlDotNet
 		/// </summary>
 		MultiSampleSamples = Sdl.SDL_GL_MULTISAMPLESAMPLES
 	}
-	#endregion OpenGLAttributes
+	#endregion OpenGLAttribute
 
 	/// <summary>
 	/// Provides methods to set the video mode, create video surfaces, 
@@ -410,7 +410,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="attribute">The attribute to set</param>
 		/// <param name="attributeValue">The new attribute value</param>
-		public void GLSetAttribute(OpenGLAttributes attribute, int attributeValue) 
+		public void GLSetAttribute(OpenGLAttr attribute, int attributeValue) 
 		{
 			if (Sdl.SDL_GL_SetAttribute((int)attribute, attributeValue) != 0)
 			{
@@ -422,7 +422,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="attribute">The attribute to get</param>
 		/// <returns>The current attribute value</returns>
-		public int GLGetAttribute(OpenGLAttributes attribute) 
+		public int GLGetAttribute(OpenGLAttr attribute) 
 		{
 			int ret;
 			if (Sdl.SDL_GL_GetAttribute((int)attribute, out ret) != 0)

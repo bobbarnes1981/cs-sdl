@@ -469,7 +469,7 @@ namespace SdlDotNet {
 			{
 				int device;
 				int scancode;
-				Keys key;
+				Key key;
 				ModifierKeys mod;
 				bool down;
 				ParseKeyStruct(
@@ -495,7 +495,7 @@ namespace SdlDotNet {
 			{
 				int device;
 				int scancode;
-				Keys key;
+				Key key;
 				ModifierKeys mod;
 				bool down;
 				ParseKeyStruct(
@@ -627,14 +627,14 @@ namespace SdlDotNet {
 			out int device, 
 			out bool down, 
 			out int scancode, 
-			out Keys key, 
+			out Key key, 
 			out ModifierKeys mod) 
 		{
 			device = ev.key.which;
 			down = ((int)ev.key.state == (int)Sdl.SDL_PRESSED);
 			Sdl.SDL_keysym ks = ev.key.keysym;
 			scancode = ks.scancode;
-			key = (Keys)ks.sym;
+			key = (Key)ks.sym;
 			mod = (ModifierKeys)ks.mod;
 		}
 
