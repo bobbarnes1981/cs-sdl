@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<project name="MfGames.Sdl.Demos" default="build">
+    <target name="build">
+	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
+	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
+	<echo message="Using '${nant.settings.currentframework}' Framework"/>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${src.dir}/${build.dir}">
+		<include name="${project.name}.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${lib.dir}">
+		<include name="${log.assembly}.dll"/>
+		<include name="${native.sdl}.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Utility/${build.dir}">
+		<include name="MfGames.Utility.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Sdl.Sprites/${build.dir}">
+		<include name="MfGames.Sdl.Sprites.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Sdl.Drawable/${build.dir}">
+		<include name="MfGames.Sdl.Drawable.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Sdl.Gui/${build.dir}">
+		<include name="MfGames.Sdl.Gui.dll"/>
+	    </fileset>
+	</copy>
+	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
+	    <sources failonempty="true">
+		<include name="*.cs" />
+	    </sources>
+	    <references basedir="${nant.project.basedir}/${build.dir}">
+		<include name="MfGames.Sdl.Drawable.dll"/>
+		<include name="MfGames.Sdl.Gui.dll"/>
+		<include name="MfGames.Sdl.Sprites.dll"/>
+		<include name="MfGames.Utility.dll"/>
+		<include name="${log.assembly}.dll"/>
+		<include name="${project.name}.dll"/>
+		<include name="${native.sdl}.dll"/>
+		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+	    </references>
+	</csc>
+    </target>
+    <target name="clean">
+	<delete dir="${bin.dir}" failonerror="false" />
+	<delete dir="${obj.dir}" failonerror="false" />
+    </target>
+</project>
