@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="SDL.NET" default="buildSDL">
+<project name="SDL.NET" default="build">
     <echo message="Using '${nant.settings.currentframework}' Framework"/>
 
     <!-- global project settings -->
@@ -56,12 +56,7 @@
 	<property name="build.dir" value="${bin.dir}/${project.config}-${platform.dir}"/>
     </target>
 
-    <target name="clean" depends="init" description="Deletes current build configuration">
-	<delete dir="${bin.dir}" failonerror="false" />
-	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="clean" />
-    </target>
-
-    <target name="cleanall" description="Deletes every build configuration">
+    <target name="clean" description="Deletes every build configuration">
 	<echo message="Deleting all builds from all configurations" />
 	<delete dir="${nant.project.basedir}/${bin.dir}" failonerror="false" />
 	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="clean" />
@@ -102,6 +97,10 @@
 	<!-- build SDLDotNet assembly -->
 	<nant buildfile="${src.dir}/${TTF.dir}/${project.name.TTF}.dll.build" target="build" />
     </target>
+
+    <target name="buildSDLAll" depends="init" description="Build the All assembly">
+	<nant buildfile="${src.dir}/${project.name.All}.dll.build" target="build" />
+    </target>
     
     <target name="buildsub" depends="init, buildSDL, buildimage, buildTTF" description="Builds all three separate assemblies">
     </target>
@@ -112,25 +111,18 @@
 	<call target="${project.config}" />
     </target>
 
-    <target name="buildrelease" depends="setrelease, build" description="Builds release configuration">
-    </target>
-
-    <target name="examples" depends="buildall" description="Build examples">
+    <target name="examples" depends="build" description="Build examples">
 	<echo message="Building examples" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="build" />
 	<nant buildfile="${examples.dir}/CDTest/CDTest.build" target="build" />
 	<nant buildfile="${examples.dir}/FontTest/FontTest.build" target="build" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
     </target>
-
-    <target name="buildSDLAll" depends="init" description="Build the All assembly">
-	<nant buildfile="${src.dir}/${project.name.All}.dll.build" target="build" />
-    </target>
     
-    <target name="buildall" depends="buildsub, buildSDLAll" description="Builds all four assemblies">
+    <target name="build" depends="buildsub, buildSDLAll" description="Builds all four assemblies">
     </target>
 
-    <target name="buildallrelease" depends="setrelease, examples" description="Build all Release assemblies">
+    <target name="buildrelease" depends="setrelease, examples" description="Build all Release assemblies">
 	<echo message="Building all Release assemblies" />
     </target>
 
@@ -138,15 +130,15 @@
 	<echo message="Building all Release assemblies" />
     </target>
 
-    <target name="doc" depends="init">
+    <target name="doc" depends="init, build">
 	<nant buildfile="${src.dir}/${project.name.All}.dll.build" target="doc" />
     </target>
 
-    <target name="schema" depends="init">
-	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="schema" />
+    <target name="schema" depends="init, build">
+	<nant buildfile="${src.dir}/${project.name.All}.dll.build" target="schema" />
     </target>
 
-    <target name="package" depends="cleanall,prepackage" description="Creates a package zip file.">
+    <target name="package" depends="clean, prepackage" description="Creates a package zip file.">
 	<!-- remove non-release files -->
 
 	<!-- copy project files -->
