@@ -101,7 +101,7 @@ namespace SdlDotNet.Examples
 			//	master.EnableEvents();
 
 			// Set up the demo sprite containers
-			master.Add(manager);
+			//master.Add(manager);
 			master.EnableMouseButtonEvent();
 			master.EnableTickEvent();
 
@@ -113,14 +113,15 @@ namespace SdlDotNet.Examples
 			gui.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
 
 			// Set up the ticker
-			status = new GuiTicker(gui, 0, Size.Width, Size.Height);
-			status.IsAutoHide = true;
-			status.Z = 3000;
-			status.Rectangle = new Rectangle(100,100,100,100);
-			master.Add(status);
+			statusTicker = new GuiTicker(gui, 0, Size.Width, Size.Height);
+			statusTicker.IsAutoHide = true;
+			statusTicker.Z = 3000;
+			master.Add(statusTicker);
+			Report("SDL.NET Demo started");
 
+			statusWindow = new StatusWindow(gui);
 			// Set up the status window
-			master.Add(new StatusWindow(gui));
+			master.Add(statusWindow);
 			//ticker.Add(fps);
 			//fps.EnableTickEvent();
 			
@@ -202,6 +203,7 @@ namespace SdlDotNet.Examples
 			currentDemo = (DemoMode) demos[demo];
 			currentDemo.Start(manager);
 			Console.WriteLine("Switched to " + currentDemo + " mode");
+			Report("Switched to " + currentDemo + " mode");
 		}
 		#endregion
 
@@ -275,8 +277,23 @@ namespace SdlDotNet.Examples
 			{
 				screen.Blit(currentDemo.RenderSurface());
 			}
-			//	screen.Blit(status.Surface);
+			
+			screen.Blit(master); 
 			screen.Update();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="msg"></param>
+		public static void Report(string msg)
+		{
+			if (statusTicker != null)
+			{
+				statusTicker.Add(new TextSprite(msg, GuiManager.BaseFont));
+			}
+
+			//Instance.Info(msg);
 		}
 		#endregion
 
@@ -286,7 +303,8 @@ namespace SdlDotNet.Examples
 		private static SpriteCollection master = new SpriteCollection();
 		private static SpriteCollection manager = new SpriteCollection();
 		private Surface screen = null;
-		private static GuiTicker status = null;
+		private GuiWindow statusWindow = null;
+		private static GuiTicker statusTicker = null;
 
 		/// <summary>
 		/// 

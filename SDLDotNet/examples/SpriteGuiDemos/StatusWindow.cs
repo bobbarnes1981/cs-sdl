@@ -52,59 +52,59 @@ namespace SdlDotNet.Examples
 			int i = 0;
 
 			// Add the ticks per second
-			Contents.Add(new BoundedTextSprite("TPS:", manager.TitleFont,
-				new Size(labelWidth, labelHeight),
-				1.0, 0.5,
-				new Point(labelOffset,
-				(labelHeight
-				+ labelPad) * i + 2)));
+//			Contents.Add(new BoundedTextSprite("TPS:", manager.TitleFont,
+//				new Size(labelWidth, labelHeight),
+//				1.0, 0.5,
+//				new Point(labelOffset,
+//				(labelHeight
+//				+ labelPad) * i + 2)));
 			tps = new BoundedTextSprite("---", manager.BaseFont,
 				new Size(dataWidth, labelHeight),
 				0.0, 0.5,
 				new Point(dataOffset,
 				(labelHeight + labelPad) * i + 2));
-			Contents.Add(tps);
+//			Contents.Add(tps);
 
 			// Add the frames per second
 			i++;
-			Contents.Add(new BoundedTextSprite("FPS:", manager.TitleFont,
-				new Size(labelWidth, labelHeight),
-				1.0, 0.5,
-				new Point(labelOffset,
-				(labelHeight
-				+ labelPad) * i + 2)));
+//			Contents.Add(new BoundedTextSprite("FPS:", manager.TitleFont,
+//				new Size(labelWidth, labelHeight),
+//				1.0, 0.5,
+//				new Point(labelOffset,
+//				(labelHeight
+//				+ labelPad) * i + 2)));
 			fps = new BoundedTextSprite("---", manager.BaseFont,
 				new Size(dataWidth, labelHeight),
 				0.0, 0.5,
 				new Point(dataOffset,
 				(labelHeight + labelPad) * i + 2));
-			Contents.Add(fps);
+//			Contents.Add(fps);
 
 			// Add the current mode
 			i++;
-			Contents.Add(new BoundedTextSprite("Mode:", manager.TitleFont,
-				new Size(labelWidth, labelHeight),
-				1.0, 0.5,
-				new Point(labelOffset,
-				(labelHeight
-				+ labelPad) * i + 2)));
+//			Contents.Add(new BoundedTextSprite("Mode:", manager.TitleFont,
+//				new Size(labelWidth, labelHeight),
+//				1.0, 0.5,
+//				new Point(labelOffset,
+//				(labelHeight
+//				+ labelPad) * i + 2)));
 			mode = new BoundedTextSprite("---", manager.BaseFont,
 				new Size(dataWidth, labelHeight),
 				0.0, 0.5,
 				new Point(dataOffset,
 				(labelHeight + labelPad)
 				* i + 2));
-			Contents.Add(mode);
+//			Contents.Add(mode);
 
 			// Add the instructions
 			i++;
-			Contents.Add(new BoundedTextSprite("Press the number keys",
-				manager.BaseFont,
-				new Size(150, labelHeight),
-				0.5, 0.5,
-				new Point(labelOffset,
-				(labelHeight
-				+ labelPad) * i + 2)));
+//			Contents.Add(new BoundedTextSprite("Press the number keys",
+//				manager.BaseFont,
+//				new Size(150, labelHeight),
+//				0.5, 0.5,
+//				new Point(labelOffset,
+//				(labelHeight
+//				+ labelPad) * i + 2)));
 
 			// Add ourselves to the ticker
 			this.EnableTickEvent();
@@ -112,7 +112,7 @@ namespace SdlDotNet.Examples
 			// Adjust our height
 			i++;
 			int tempHeight = (labelHeight + labelPad) * i + 4;
-			Size = new Size(this.Size.Width, tempHeight); 
+			//Size = new Size(this.Size.Width, tempHeight); 
 		}
 
 		#region Data Components
@@ -127,7 +127,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public new void OnTick(object sender, TickEventArgs args)
+		public void OnTick(object sender, TickEventArgs args)
 		{
 			tps.TextString = String.Format("{0}", Events.TicksPerSecond);
 
@@ -148,14 +148,13 @@ namespace SdlDotNet.Examples
 			{
 				mode.TextString = SdlDemo.CurrentDemo.ToString();
 			}
+//			this.Surface.Blit(Contents);
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public void EnableTickEvent()
-		{
-			Events.TickEvent += new TickEventHandler(this.OnTick);
-		}
+
+//		public void EnableTickEvent()
+//		{
+//			Events.TickEvent += new TickEventHandler(this.OnTick);
+//		}
 		#endregion
 	}
 }

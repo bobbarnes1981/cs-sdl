@@ -60,9 +60,4 @@
 	    </documenters>
 	</ndoc>
     </target> 
-
-    <target name="schema">
-	<!-- generate schema -->
-	<nantschema output="${nant.project.basedir}/${build.dir}/${nant.project.name}.xsd" target-ns="http://cs-sdl.sourceforge.net/schema/${nant.project.name}.xsd"/>
-    </target>
 </project>

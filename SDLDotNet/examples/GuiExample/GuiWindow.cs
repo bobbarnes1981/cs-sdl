@@ -28,15 +28,16 @@ namespace SdlDotNet.Examples.GuiExample
 	/// Handles a simple window element, which displays its contents in
 	/// a frame.
 	/// </summary>
-	public class GuiWindow : GuiContainer
+	public class GuiWindow : SpriteCollection
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
 		public GuiWindow(GuiManager manager)
-			: base(manager)
+			: base()
 		{
+			this.manager = manager;
 		}
 
 		/// <summary>
@@ -45,23 +46,28 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="rectangle"></param>
 		public GuiWindow(GuiManager manager, Rectangle rectangle)
-			: base(manager, rectangle)
+			: base()
 		{
+			this.manager = manager;
+			this.rectangle = rectangle;
 		}
+
+		GuiManager manager = null;
+		Rectangle rectangle;
 
 		#region Drawing
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Padding OuterPadding
-		{
-			get { return manager.GetPadding(this); }
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public Padding OuterPadding
+//		{
+//			get { return manager.GetPadding(this); }
+//		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public new void Render(/*RenderArgs args*/)
+		public void Render(/*RenderArgs args*/)
 		{
 //			// Render the window using the GUI manager
 //			manager.Render(args, this);
@@ -69,6 +75,7 @@ namespace SdlDotNet.Examples.GuiExample
 //			// Render the components
 //			base.Render(args);
 		}
+
 		#endregion
 
 		#region Operators
@@ -102,7 +109,7 @@ namespace SdlDotNet.Examples.GuiExample
 				title = value;
 
 				// Set the bounds
-				titleSize = manager.GetTextSize(manager.TitleFont, title);
+//				titleSize = manager.GetTextSize(manager.TitleFont, title);
 			}
 		}
 		#endregion

@@ -64,11 +64,11 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Drawing
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Render(/*RenderArgs args*/)
-		{
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override void Render(/*RenderArgs args*/)
+//		{
 //			// Handle our arguments
 //			RenderArgs args0 = args.Clone();
 //			args0.TranslateX += Coordinates.X + MarginPadding.Left + InnerPadding.Left;
@@ -108,7 +108,7 @@ namespace SdlDotNet.Examples.GuiExample
 //				s.Coordinates.X = x;
 //				s.Render(args0);
 //			}
-		}
+//		}
 		#endregion
 
 		#region Geometry

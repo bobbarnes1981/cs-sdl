@@ -204,6 +204,14 @@ namespace SdlDotNet.Sprites
 				surf = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Surface Render()
+		{
+			return surf;
+		}
 		#endregion
 
 		#region Events
