@@ -23,15 +23,11 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for Timer.
+	/// The Timer class holds methods for time-related functions
 	/// </summary>
 	public sealed class Timer
 	{
 		static readonly Timer instance = new Timer();
-
-//		static Timer()
-//		{
-//		}
 
 		Timer()
 		{
@@ -39,7 +35,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Initialize timer.
 		/// </summary>
 		public static void Initialize()
 		{
@@ -97,9 +93,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Converts number of frames to seconds
 		/// </summary>
-		/// <param name="frames"></param>
+		/// <param name="frames">Number of frames</param>
 		/// <returns></returns>
 		public static double FramesToSeconds(int frames) 
 		{
@@ -107,9 +103,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Converts seconds to number of frames
 		/// </summary>
-		/// <param name="seconds"></param>
+		/// <param name="seconds">Number of seconds</param>
 		/// <returns></returns>
 		public static int SecondsToFrames(int seconds) 
 		{
@@ -124,9 +120,9 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Converts frames to Timespan
 		/// </summary>
-		/// <param name="frames"></param>
+		/// <param name="frames">Number of frames</param>
 		/// <returns></returns>
 		public static TimeSpan FramesToTime(int frames)
 		{
@@ -134,9 +130,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Converts seconds to Timespan
 		/// </summary>
-		/// <param name="seconds"></param>
+		/// <param name="seconds">Number of seconds</param>
 		/// <returns></returns>
 		public static TimeSpan SecondsToTime(int seconds)
 		{

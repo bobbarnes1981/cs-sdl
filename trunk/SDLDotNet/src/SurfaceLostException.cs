@@ -32,10 +32,11 @@ namespace SdlDotNet
 	public class SurfaceLostException : SdlException 
 	{
 		/// <summary>
-		/// 
+		/// Basic exception.
 		/// </summary>
 		public SurfaceLostException() 
 		{
+			SurfaceLostException.Generate();
 		}
 
 		/// <summary>

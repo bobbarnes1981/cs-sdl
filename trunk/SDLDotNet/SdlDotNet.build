@@ -18,7 +18,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="3.0.0beta2" />
+    <property name="project.version" value="3.0.0" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
@@ -29,6 +29,7 @@
     <property name="doc.dir" value="doc" />
     <property name="project.main.dir" value="${nant.project.basedir}" />
     <property name="native.sdl" value="Tao.Sdl"/>
+    <property name="nunit.assembly" value="nunit.framework"/>
     <property name="log.assembly" value="log4net"/>
     <property name="grammar.assembly" value="grammatica-1.4"/>
 

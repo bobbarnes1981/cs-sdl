@@ -38,7 +38,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Singleton get instance method
+		/// Initialize Font subsystem.
 		/// </summary>
 		public static void Initialize()
 		{
@@ -111,10 +111,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create new font object from Truetype font file.
 		/// </summary>
-		/// <param name="filename"></param>
-		/// <param name="pointSize"></param>
+		/// <param name="filename">Filename of Truetype font</param>
+		/// <param name="pointSize">Point size</param>
 		/// <returns></returns>
 		public static Font OpenFont(string filename, int pointSize) 
 		{

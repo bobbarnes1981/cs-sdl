@@ -30,10 +30,6 @@ namespace SdlDotNet
 	{
 		static readonly SdlColor instance = new SdlColor();
 
-//		static SdlColor()
-//		{
-//		}
-
 		SdlColor()
 		{
 		}

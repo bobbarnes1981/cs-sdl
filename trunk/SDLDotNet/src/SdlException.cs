@@ -36,6 +36,7 @@ namespace SdlDotNet
 		/// </summary>
 		public SdlException() 
 		{
+			SdlException.Generate();
 		}
 		/// <summary>
 		/// Initializes an SdlException instance

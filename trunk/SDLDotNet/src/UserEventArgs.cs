@@ -24,12 +24,12 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for UserEventArgs.
+	/// Event args for user-defined events.
 	/// </summary>
 	public class UserEventArgs : SdlEventArgs 
 	{
 		/// <summary>
-		/// 
+		/// Default constructor
 		/// </summary>
 		public UserEventArgs()
 		{

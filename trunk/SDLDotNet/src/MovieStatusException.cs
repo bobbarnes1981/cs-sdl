@@ -33,6 +33,7 @@ namespace SdlDotNet
 		/// </summary>
 		public MovieStatusException() 
 		{
+			MovieStatusException.Generate();
 		}
 
 		/// <summary>

@@ -35,6 +35,7 @@ namespace SdlDotNet
 		/// </summary>
 		public FontException() 
 		{
+			FontException.Generate();
 		}
 		/// <summary>
 		/// Initializes an TtfException instance
