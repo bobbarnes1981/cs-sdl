@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Threading;
 using System.Collections;
 using System.Runtime.InteropServices;
 using System.Globalization;
@@ -113,6 +114,10 @@ namespace SdlDotNet
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
 	public delegate void MusicFinishedEventHandler(object sender, MusicFinishedEventArgs e);
+	/// <summary>
+	/// Handles the ticks as they are processed by the system.
+	/// </summary>
+	public delegate void TickEventHandler(object sender, TickEventArgs e);
 
 	/// <summary>
 	/// Contains events which can be attached to to read user input and other miscellaneous occurances.
@@ -122,10 +127,7 @@ namespace SdlDotNet
 	public sealed class Events 
 	{
 		private static Hashtable UserEvents = new Hashtable();
-		private static int UserEventId = 1;
-		
-		//Reduced joystick "jitter"
-		
+		private static int UserEventId = 1;		
 		private const int QUERY_EVENTS_MAX = 254;
 
 		/// <summary>
@@ -226,12 +228,16 @@ namespace SdlDotNet
 		/// Will only occur if you call Mixer.EnableMusicCallbacks().
 		/// </summary>
 		public static event MusicFinishedEventHandler MusicFinished;
+		/// <summary>
+		/// Fires every frame.
+		/// </summary>
+		public static event TickEventHandler TickEvent;
 
 		static readonly Events instance = new Events();
 
-//		static Events()
-//		{
-//		}
+		//		static Events()
+		//		{
+		//		}
 
 		Events()
 		{
@@ -258,7 +264,7 @@ namespace SdlDotNet
 			}
 			else
 			{
-				ProcessEvent(ref ev);
+				ProcessEvent(ev);
 				return true;
 			}
 		}
@@ -273,7 +279,7 @@ namespace SdlDotNet
 			{
 				throw SdlException.Generate();
 			}
-			ProcessEvent(ref ev);
+			ProcessEvent(ev);
 		}
 
 		/// <summary>
@@ -485,7 +491,7 @@ namespace SdlDotNet
 			return (Sdl.SDL_EventState((byte)eventType, Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
 		}
 
-		private static void ProcessEvent(ref Sdl.SDL_Event ev) 
+		private static void ProcessEvent(Sdl.SDL_Event ev) 
 		{
 			switch ((EventTypes)ev.type)
 			{
@@ -516,12 +522,7 @@ namespace SdlDotNet
 					if (JoystickAxisMotion != null || 
 						JoystickHorizontalAxisMotion != null || 
 						JoystickVerticalAxisMotion != null) 
-					{
-						Console.WriteLine("axisVal: " + ev.jaxis.val);
-						Console.WriteLine("which: " + ev.jaxis.which);
-						Console.WriteLine("axis: " + ev.jaxis.axis);
-						Console.WriteLine("type: " + ev.type);
-						
+					{						
 						if ((ev.jaxis.val < (-1)*JoystickAxisEventArgs.JoystickThreshold) || (ev.jaxis.val > JoystickAxisEventArgs.JoystickThreshold))
 						{	
 							JoystickAxisEventArgs e = new JoystickAxisEventArgs(ev);
@@ -726,5 +727,174 @@ namespace SdlDotNet
 		{
 			PushUserEvent(new MusicFinishedEventArgs());
 		}
+
+		#region Thread Management
+		private static Thread serverThread = null;
+
+		private static Thread tickerThread = null;
+
+		private static bool stopThread = true;
+
+		private static int skippedTicks = 0;
+
+		private static int processSkipped = 0;
+
+		private static bool processing = false;
+
+		private static long lastTick = DateTime.Now.Ticks;
+
+		/// <summary>
+		/// Processes the tick server thread. This keeps track of the
+		/// number of skipped ticks, to give a more accurate count or
+		/// status of each tick.
+		/// </summary>
+		private static void Run()
+		{
+			// Loops until the system indicates a stop
+			while (!stopThread)
+			{
+				// Sleep for a little bit
+				Thread.Sleep(tickSpan);
+
+				// Lock to see if we are processing
+				lock (Events.instance) 
+				{
+					// If we are processing, just increment it
+					if (processing)
+					{
+						skippedTicks++;
+						continue;
+					}
+
+					// Process the counter
+					processSkipped = skippedTicks;
+					skippedTicks = 0;
+					processing = true;
+				}
+
+				// Perform the actual threaded tick
+				tickerThread = new Thread(new ThreadStart(RunTicker));
+				tickerThread.Start();
+				//ThreadPool.QueueUserWorkItem(new WaitCallback(RunTicker));
+			}
+		}
+
+		/// <summary>
+		/// Executes a single tick statement in a second thread.
+		/// </summary>
+		//private static void RunTicker(object stateInfo)
+		private static void RunTicker()
+		{
+			// Execute the tick
+			if (Events.TickEvent != null)
+			{
+				// Create the arguments
+				long now = DateTime.Now.Ticks;
+				TickEventArgs args = new TickEventArgs(processSkipped, now - lastTick);
+				lastTick = now;
+			
+				// Trigger the ticker
+				Events.TickEvent(Events.instance, args);
+			}
+      
+			// Clear the flag. This is in a locked block because the testing
+			// of it is also in the same lock.
+			lock (Events.instance)
+			{
+				processing = false;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void StartTicker()
+		{
+			// Prepare for the server thread
+			stopThread = false;
+			serverThread = new Thread(new ThreadStart(Run));
+			serverThread.IsBackground = true;
+			serverThread.Priority = ThreadPriority.Lowest;
+			serverThread.Start();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void StopTicker()
+		{
+			// Mark everything to stop
+			stopThread = true;
+
+			// Join the ticker
+			if (tickerThread != null)
+			{
+				try
+				{
+					tickerThread.Join();
+				}
+				catch (Exception e)
+				{ 
+					throw e;
+				}
+			}
+
+			// Join the server
+			try
+			{
+				serverThread.Join();
+				serverThread = null;
+			}
+			catch (Exception e)
+			{ 
+				throw e;
+			}
+
+			// Make noise
+			while (processing)
+			{
+				Thread.Sleep(tickSpan);
+			}
+		}
+		#endregion
+
+		#region Tick Duration
+		private static int tickSpan = 1000;
+
+		//		/// <summary>
+		//		/// Convenience function to add an ITickable object into the tick
+		//		/// manager.
+		//		/// </summary>
+		//		public void Add(ITickable tickable)
+		//		{
+		//			Events.TickEvent += new TickEventHandler(tickable.OnTick);
+		//		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int TicksPerSecond
+		{
+			get { return 1000 / tickSpan; }
+			set { tickSpan = 1000 / value; }
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int TickSpan
+		{
+			get { return tickSpan; }
+			set
+			{
+				if (value < 1)
+				{
+					throw new SdlException("Cannot set a negative or zero sleep time");
+				}
+
+				tickSpan = value;
+			}
+		}
+		#endregion
 	}
 }

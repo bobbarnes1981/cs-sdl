@@ -32,6 +32,6 @@ namespace SdlDotNet.Sprites
 		/// This returns the viewport of the system, which changes what is
 		/// viewable in the sprite manager.
 		/// </summary>
-		void AdjustViewport(ref RenderArgs args);
+		void AdjustViewport(RenderArgs args);
 	}
 }

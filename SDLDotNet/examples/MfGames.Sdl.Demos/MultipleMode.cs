@@ -17,10 +17,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
-using SdlDotNet.Drawable;
+
 using MfGames.Sdl.Gui;
 using SdlDotNet.Sprites;
+using SdlDotNet;
 using System.Drawing;
 using System;
 
@@ -106,7 +106,7 @@ namespace MfGames.Sdl.Demos
 					rand.Next(rect.Top, rect.Bottom - 
 					(int) td2.Size.Height),
 					100));
-			sm1.Coords = new Vector(10, 10);
+			sm1.Coordinates = new Vector(10, 10);
 			sm1.IsTickable = true;
 			sm1.Size = new Size(380, 250);
 			sm1.Viewport = new BoundedCenterViewport(sprite1, rect);
@@ -118,7 +118,7 @@ namespace MfGames.Sdl.Demos
 				rand.Next(rect.Top, rect.Bottom - 
 				(int) td3.Size.Height),
 				100));
-			sm2.Coords = new Vector(410, 10);
+			sm2.Coordinates = new Vector(410, 10);
 			sm2.IsTickable = false;
 			sm2.Size = new Size(380, 250);
 			sm2.Viewport = new BoundedCenterViewport(sprite2, rect);
@@ -130,7 +130,7 @@ namespace MfGames.Sdl.Demos
 				rand.Next(rect.Top, rect.Bottom - 
 				(int) td4.Size.Height),
 				100));
-			sm3.Coords = new Vector(10, 280);
+			sm3.Coordinates = new Vector(10, 280);
 			sm3.IsTickable = false;
 			sm3.Size = new Size(380, 250);
 			sm3.Viewport = new BoundedCenterViewport(sprite3, rect);
@@ -142,7 +142,7 @@ namespace MfGames.Sdl.Demos
 				rand.Next(rect.Top, rect.Bottom - 
 				(int) td5.Size.Height),
 				100));
-			sm4.Coords = new Vector(410, 280);
+			sm4.Coordinates = new Vector(410, 280);
 			sm4.IsTickable = false;
 			sm4.Size = new Size(380, 250);
 			sm4.Viewport = new BoundedCenterViewport(sprite4, rect);

@@ -17,9 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+using SdlDotNet;
 using SdlDotNet.Sprites;
-using SdlDotNet.Drawable;
-using SdlDotNet.Utility;
 using System;
 using System.Drawing;
 
@@ -31,26 +30,43 @@ namespace MfGames.Sdl.Demos
 		// Randomly assign the direction we show the frames
 		private bool frameRight;
 
-		public AnimatedSprite(IDrawable d, Point coords)
-			: base(d, coords)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="d"></param>
+		/// <param name="coordinates"></param>
+		public AnimatedSprite(IDrawable d, Point coordinates)
+			: base(d, coordinates)
 		{
 			this.Frame = rand.Next();
 			this.frameRight = (rand.Next()  % 2 == 0);
 		}
 
-		public AnimatedSprite(IDrawable d, Vector coords)
-			: base(d, coords)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="d"></param>
+		/// <param name="coordinates"></param>
+		public AnimatedSprite(IDrawable d, Vector coordinates)
+			: base(d, coordinates)
 		{
 			this.Frame = rand.Next();
 		}
 
 		#region Animation and Drawing
+		/// <summary>
+		/// 
+		/// </summary>
 		public override bool IsTickable
 		{
 			get { return Drawable.FrameCount > 1; }
 		}
 
-		public override void OnTick(TickArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		public override void OnTick(object sender, TickEventArgs args)
 		{
 			// Increment the frame
 			if (frameRight)

@@ -1123,14 +1123,12 @@ namespace SdlDotNet
 
 			Sdl.SDL_PixelFormat format = 
 				this.PixelFormat;
-			//Console.WriteLine("PixelFormat: " + format.BytesPerPixel.ToString());
-			//Console.WriteLine("Pitch: " + surface.pitch.ToString());
+
 			switch (format.BytesPerPixel) 
 			{
 				case 1: // Assuming 8-bpp
 				{
 					byte pixelColorValue = (byte) pixelColor;
-					//Console.WriteLine("bufp: " + pixelColor.Value.ToString());
 					IntPtr pixelColorValuePtr = 
 						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
 					Marshal.WriteByte(pixelColorValuePtr, pixelColorValue);
@@ -1139,7 +1137,6 @@ namespace SdlDotNet
 				case 2: // Probably 15-bpp or 16-bpp
 				{
 					short pixelColorValue = (short) pixelColor;
-					//Console.WriteLine("bufp: " + pixelColor.Value.ToString());
 					IntPtr pixelColorValuePtr = 
 						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
 					Marshal.WriteInt16(pixelColorValuePtr, pixelColorValue);
@@ -1166,7 +1163,6 @@ namespace SdlDotNet
 				case 4: // Probably 32-bpp
 				{
 					int pixelColorValue = pixelColor;
-					//Console.WriteLine("bufp: " + pixelColor.Value.ToString());
 					IntPtr pixelColorValuePtr = 
 						new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
 					Marshal.WriteInt32(pixelColorValuePtr, pixelColorValue);

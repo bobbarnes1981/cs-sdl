@@ -17,8 +17,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
-using SdlDotNet.Drawable;
+
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
@@ -31,9 +30,9 @@ namespace MfGames.Sdl.Demos
 		private IDrawable d1 = null;
 		private IDrawable d2 = null;
 
-		public DragSprite(IDrawable d1, IDrawable d2, Point coords,
+		public DragSprite(IDrawable d1, IDrawable d2, Point coordinates,
 			Rectangle bounds)
-			: base(d1, bounds, new Vector(coords))
+			: base(d1, bounds, new Vector(coordinates))
 		{
 			this.d1 = d1;
 			this.d2 = d2;
@@ -49,47 +48,68 @@ namespace MfGames.Sdl.Demos
 
 		public override bool IsMouseSensitive { get { return true; } }
 
-		public override bool OnMouseButton(object sender, MouseArgs args)
+		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
 		{
 			// If we are being held down, pick up the marble
-			if (args.IsButton1)
-			{
 				// Change the Z-order
-				Coords.Z += 100;
+				Coordinates.Z += 100;
 				beingDragged = true;
 				Drawable = d2;
-				SdlDemo.MasterSpriteContainer.EventLock = this;
-			}
-			else
-			{
-				// Drop it
-				Coords.Z -= 100;
+				SdlDemo.MasterSpriteContainer.EventLock = this;		
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
+		{
+				Coordinates.Z -= 100;
 				beingDragged = false;
 				Drawable = d1;
-				SdlDemo.MasterSpriteContainer.EventLock = null;
-			}
-
-			// We are finished
-			return true;
+				SdlDemo.MasterSpriteContainer.EventLock = null;		
 		}
 
 		/// <summary>
 		/// If the sprite is picked up, this moved the sprite to follow
 		/// the mouse.
 		/// </summary>
-		public override bool OnMouseMotion(object sender, MouseArgs args)
+		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
 		{
 			if (beingDragged)
 			{
-				Coords.X += args.RelativeX;
-				Coords.Y += args.RelativeY; 
-				return true;
+				Coordinates.X += args.RelativeX;
+				Coordinates.Y += args.RelativeY; 
 			}
 			else
 			{
-				return false;
+				//return false;
 			}
 		}
 		#endregion
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override bool IsMouseMotionLocked
+		{
+			get
+			{
+				return beingDragged;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override bool IsMouseButtonLocked
+		{
+			get
+			{
+				return true;
+			}
+		}
 	}
+
 }

@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
-using SdlDotNet.Drawable;
+using SdlDotNet;
+using SdlDotNet.Sprites;
 using System.Drawing;
 using System;
 
@@ -30,8 +30,8 @@ namespace MfGames.Sdl.Demos
 		private int dx;
 		private int dy;
 
-		public BounceSprite(IDrawable d, Rectangle rect, Vector coords)
-			: base(d, rect, coords)
+		public BounceSprite(IDrawable d, Rectangle rect, Vector coordinates)
+			: base(d, rect, coordinates)
 		{
 			this.dx = rand.Next(-10, 11);
 			this.dy = rand.Next(-10, 11);
@@ -39,39 +39,39 @@ namespace MfGames.Sdl.Demos
 
 		public override bool IsTickable { get { return true; } }
 
-		public override void OnTick(TickArgs args)
+		public override void OnTick(object sender, TickEventArgs args)
 		{
 			// Move our direction a little
-			int x = Coords.X;
-			int y = Coords.Y;
+			int x = Coordinates.X;
+			int y = Coordinates.Y;
 
-			Coords.X += args.RatePerSecond(dx);
-			Coords.Y += args.RatePerSecond(dy);
+			Coordinates.X += args.RatePerSecond(dx);
+			Coordinates.Y += args.RatePerSecond(dy);
 
 			// Adjust our entropy
 			dx += rand.Next(-5, 6);
 			dy += rand.Next(-5, 6);
 
 			// Call the base which also normalizes the bounds
-			base.OnTick(args);
+			base.OnTick(this, args);
 
 			// Normalize the directions
-			if (Coords.X == SpriteBounds.Left)
+			if (Coordinates.X == SpriteBounds.Left)
 			{
 				dx = rand.Next(1, 10);
 			}
 
-			if (Coords.X == SpriteBounds.Right)
+			if (Coordinates.X == SpriteBounds.Right)
 			{
 				dx = ((-1) * rand.Next(1, 10));
 			}
 
-			if (Coords.Y == SpriteBounds.Top)
+			if (Coordinates.Y == SpriteBounds.Top)
 			{
 				dy = rand.Next(1, 10);
 			}
 
-			if (Coords.Y == SpriteBounds.Bottom)
+			if (Coordinates.Y == SpriteBounds.Bottom)
 			{
 				dy = ((-1) * rand.Next(1, 10));
 			}

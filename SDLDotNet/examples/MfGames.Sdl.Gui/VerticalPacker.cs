@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
@@ -59,8 +58,8 @@ namespace MfGames.Sdl.Gui
 
 			// Handle our arguments
 			RenderArgs args0 = args.Clone();
-			args0.TranslateX += Coords.X + MarginPadding.Left + InnerPadding.Left;
-			args0.TranslateY += Coords.Y + MarginPadding.Top + InnerPadding.Top;
+			args0.TranslateX += Coordinates.X + MarginPadding.Left + InnerPadding.Left;
+			args0.TranslateY += Coordinates.Y + MarginPadding.Top + InnerPadding.Top;
 
 			// Draw all of our left components
 			int y = 0;
@@ -69,12 +68,14 @@ namespace MfGames.Sdl.Gui
 			{
 				// Ignore hidden
 				if (s.IsHidden)
+				{
 					continue;
+				}
 	
 				// Translate it and blit
 				Size size = GetSize(s);
 
-				s.Coords.Y = y;
+				s.Coordinates.Y = y;
 				s.Render(args0);
 
 				// Debugging
@@ -95,17 +96,19 @@ namespace MfGames.Sdl.Gui
 			}
 
 			// Draw our right components
-			y = Coords.Y + Size.Height - MarginPadding.Bottom;
+			y = Coordinates.Y + Size.Height - MarginPadding.Bottom;
 
 			foreach (Sprite s in TailSprites)
 			{
 				// Ignore hidden
 				if (s.IsHidden)
+				{
 					continue;
+				}
 	
 				// Translate it and blit
 				y -= s.Size.Height + InnerPadding.Vertical;
-				s.Coords.Y = y;
+				s.Coordinates.Y = y;
 				s.Render(args0);
 			}
 		}
@@ -124,14 +127,18 @@ namespace MfGames.Sdl.Gui
 				{
 					// Ignore hidden ones
 					if (s.IsHidden)
+					{
 						continue;
+					}
 
 					// Get the width
 					int w = GetSize(s).Width;
 
 					// Adjust the size
 					if (w > width)
+					{
 						width = w;
+					}
 				}
 
 				// Add the padding
@@ -151,7 +158,9 @@ namespace MfGames.Sdl.Gui
 				{
 					// Ignore hidden ones
 					if (s.IsHidden)
+					{
 						continue;
+					}
 
 					// Get the height
 					int h = GetSize(s).Height;

@@ -17,8 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-//using log4net.Config;
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using MfGames.Sdl.Gui;
 using SdlDotNet;
@@ -50,16 +48,15 @@ namespace MfGames.Sdl.Demos
 
 		public void Start()
 		{
-			// Noise
-			//Info("Staring up SDL demo...");
 			sdlDemo = this;
 
 			// Start up the SDL
-			Video.WindowCaption = "SDL.NET Demonstrations";
+			Video.WindowCaption = "SDL.NET Demonstration";
       
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
 			Events.Quit += new QuitEventHandler(this.OnQuit);
+			Events.TickEvent += new TickEventHandler(this.OnTick);
 
 			// Create the screen
 			int width = 800;
@@ -74,17 +71,9 @@ namespace MfGames.Sdl.Demos
 			// Load demos
 			LoadDemos();
 
-			/*
-			master.Add(CreateMenu(gui));
-
-			// Set up the viewport
-			manager.Viewport = new LimitedViewport(Bounds);
-			*/
-
 			// Start up the ticker (and animation)
-			TickManager.TicksPerSecond = 15;
-			TickManager.TickEvent += new TickHandler(OnTick);
-			TickManager.Start();
+			Events.TicksPerSecond = 15;
+			Events.StartTicker();
 
 			// Loop until the system indicates it should stop
 			Report("Welcome to the SDL.NET Demo!");
@@ -99,7 +88,7 @@ namespace MfGames.Sdl.Demos
 
 			// Stop the ticker and the current demo
 			SwitchDemo(-1);
-			TickManager.Stop();
+			Events.StopTicker();
 		}
 
 		#region GUI
@@ -111,7 +100,7 @@ namespace MfGames.Sdl.Demos
 		private void SetupGui()
 		{
 			// Set up the master container
-			master.ListenToSdlEvents();
+			master.EnableEvents();
 
 			// Set up the demo sprite containers
 			master.Add(manager);
@@ -126,19 +115,21 @@ namespace MfGames.Sdl.Demos
 			// Set up the ticker
 			status = new GuiTicker(gui, 0, Size.Width, Size.Height);
 			status.IsAutoHide = true;
-			status.Coords.Z = 3000;
+			status.Coordinates.Z = 3000;
 			master.Add(status);
 
 			// Set up the status window
 			master.Add(new StatusWindow(gui));
-			ticker.Add(fps);
+			//ticker.Add(fps);
+			fps.EnableTickEvent();
+			
 
 			// Create the menu
 			CreateMenu(gui);
 
 			// Create a viewport
-			manager.Coords.Y = gmb.OuterSize.Height + 5;
-			manager.Coords.X = 5;
+			manager.Coordinates.Y = gmb.OuterSize.Height + 5;
+			manager.Coordinates.X = 5;
 			manager.Size = new Size(Size.Width - 10,
 				Size.Height - 10 - gmb.OuterSize.Height);
 		}
@@ -171,7 +162,6 @@ namespace MfGames.Sdl.Demos
 
 		private void CreateMenuQuit(GuiManager gui)
 		{
-			//demoMenu.Add(new GuiMenuSpacer(demoMenu));
 			GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
 			gmi.AddRight(new TextSprite("Q", gui.BaseFont));
 			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuQuit);
@@ -182,9 +172,9 @@ namespace MfGames.Sdl.Demos
 		public static void Report(string msg)
 		{
 			if (status != null)
+			{
 				status.Add(new TextSprite(msg, GuiManager.BaseFont));
-
-			//Instance.Info(msg);
+			}
 		}
 		#endregion
 
@@ -195,13 +185,15 @@ namespace MfGames.Sdl.Demos
 
 		public static DemoMode CurrentDemo
 		{
-			get { return currentDemo; }
+			get 
+			{ 
+				return currentDemo; 
+			}
 		}
 
 		private void LoadDemo(DemoMode mode)
 		{
 			// Add to the array list
-			//Debug("Loading demo {0}", mode);
 			demos.Add(mode);
 
 			// Figure out the counter
@@ -230,9 +222,6 @@ namespace MfGames.Sdl.Demos
 			LoadDemo(new ViewportMode());
 			LoadDemo(new MultipleMode());
 			LoadDemo(new GuiMode());
-      
-			// Make some noise
-			//Debug("Loaded all demos");
 
 			// Finish up the gui
 			CreateMenuQuit(gui);
@@ -255,12 +244,13 @@ namespace MfGames.Sdl.Demos
 
 			// Ignore if the demo request is too high
 			if (demo < 0 || demo + 1 > demos.Count)
+			{
 				return;
+			}
 
 			// Start it
 			currentDemo = (DemoMode) demos[demo];
 			currentDemo.Start(manager);
-			//Info("Switched mode to {0}", currentDemo);
 			Report("Switched to " + currentDemo + " mode");
 		}
 		#endregion
@@ -274,20 +264,39 @@ namespace MfGames.Sdl.Demos
 				case Key.Q:
 					running = false;
 					break;
-
 				case Key.C:
 					StopDemo();
 					break;
-				case Key.One: SwitchDemo(0); break;
-				case Key.Two: SwitchDemo(1); break;
-				case Key.Three: SwitchDemo(2); break;
-				case Key.Four: SwitchDemo(3); break;
-				case Key.Five: SwitchDemo(4); break;
-				case Key.Six: SwitchDemo(5); break;
-				case Key.Seven: SwitchDemo(6); break;
-				case Key.Eight: SwitchDemo(7); break;
-				case Key.Nine: SwitchDemo(8); break;
-				case Key.Zero: SwitchDemo(9); break;
+				case Key.One: 
+					SwitchDemo(0); 
+					break;
+				case Key.Two: 
+					SwitchDemo(1); 
+					break;
+				case Key.Three: 
+					SwitchDemo(2); 
+					break;
+				case Key.Four: 
+					SwitchDemo(3); 
+					break;
+				case Key.Five: 
+					SwitchDemo(4); 
+					break;
+				case Key.Six: 
+					SwitchDemo(5); 
+					break;
+				case Key.Seven: 
+					SwitchDemo(6); 
+					break;
+				case Key.Eight: 
+					SwitchDemo(7); 
+					break;
+				case Key.Nine: 
+					SwitchDemo(8); 
+					break;
+				case Key.Zero: 
+					SwitchDemo(9); 
+					break;
 			}
 		}
     
@@ -298,7 +307,7 @@ namespace MfGames.Sdl.Demos
 
 		private void OnMenuFps(int index)
 		{
-			SdlDemo.TickManager.TicksPerSecond = fpsSpeeds[index];
+			Events.TicksPerSecond = fpsSpeeds[index];
 		}
 
 		private void OnMenuQuit(int index)
@@ -312,22 +321,8 @@ namespace MfGames.Sdl.Demos
 			running = false;
 		}
 
-		public void OnTick(TickArgs args)
+		public void OnTick(object sender, TickEventArgs args)
 		{
-			// Process the SDL events
-			while (Events.Poll());
-      
-			// Process sprites
-			master.OnTick(args);
-
-			// Tick the demo
-			if (currentDemo != null)
-				currentDemo.OnTick(args);
-
-			// Tick the status
-			if (status != null)
-				status.OnTick(args);
-
 			// Process our own animation
 			ss.Blit();
 		}
@@ -342,13 +337,24 @@ namespace MfGames.Sdl.Demos
 		private static SpriteSurface ss = null;
 		private static GuiTicker status = null;
 		private static GuiMenuBar gmb = null;
-		private static SecondGauge fps = new SecondGauge(13);
-		private static TickManager ticker = new TickManager();
+		private static Clock fps = new Clock(13);
 		private static GuiManager gui = null;
 
-		public static SecondGauge Fps { get { return fps; } }
+		public static Clock Fps 
+		{ 
+			get 
+			{ 
+				return fps; 
+			} 
+		}
 
-		public static SdlDemo Instance { get { return sdlDemo; } }
+		public static SdlDemo Instance 
+		{ 
+			get 
+			{ 
+				return sdlDemo; 
+			} 
+		}
 
 		/// <summary>
 		/// The master sprite manager is the top-most manager that
@@ -356,24 +362,49 @@ namespace MfGames.Sdl.Demos
 		/// throughout the site and also the sprite manager that frames
 		/// the actual output.
 		/// </summary>
-		public static SpriteContainer MasterSpriteContainer { get { return master; } }
+		public static SpriteContainer MasterSpriteContainer 
+		{ 
+			get 
+			{ 
+				return master; 
+			} 
+		}
 
 		/// <summary>
 		/// The sprite manager is the manager that handles the demo
 		/// pages. This may be translated or moved as needed. All
 		/// DemoModes should attached their sprite manager to this one.
 		/// </summary>
-		public static SpriteContainer SpriteContainer { get { return manager; } }
+		public static SpriteContainer SpriteContainer 
+		{ 
+			get 
+			{ 
+				return manager; 
+			} 
+		}
 
-		public static TickManager TickManager { get { return ticker; } }
+		public static GuiManager GuiManager 
+		{ 
+			get 
+			{ 
+				return gui; 
+			} 
+		}
 
-		public static GuiManager GuiManager { get { return gui; } }
-
-		public static GuiMenuBar MenuBar { get { return gmb; } }
+		public static GuiMenuBar MenuBar 
+		{ 
+			get 
+			{ 
+				return gmb; 
+			} 
+		}
 
 		public static Size Size
 		{
-			get { return new Size(800, 600); }
+			get 
+			{ 
+				return new Size(800, 600); 
+			}
 		}
 
 		public static Rectangle Bounds
@@ -389,7 +420,10 @@ namespace MfGames.Sdl.Demos
 
 		public static SpriteSurface Surface
 		{
-			get { return ss; }
+			get 
+			{ 
+				return ss; 
+			}
 		}
 		#endregion
 	}

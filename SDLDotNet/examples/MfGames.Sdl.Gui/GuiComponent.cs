@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
@@ -75,7 +74,9 @@ namespace MfGames.Sdl.Gui
 		public override void Render(RenderArgs args)
 		{
 			if (!IsTraced)
+			{
 				return;
+			}
 
 			// Draw the outer and the inner bounds
 			GuiManager.DrawRect(args.Surface,
@@ -102,58 +103,62 @@ namespace MfGames.Sdl.Gui
 		/// </summary>
 		public override bool IsMouseSensitive { get { return true; } }
 
-		public override bool OnMouseButton(object sender, MouseArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
 		{
 			// If we cannot be dragged, don't worry about it
 			if (!isDragable)
-				return false;
+			{
+				return;
+			}
 
 			// If we are being held down, pick up the marble
-			if (args.IsButton1)
-			{
-				// Change the Z-order
-				Coords.Z += manager.DragZOrder;
-				beingDragged = true;
-				manager.SpriteContainer.EventLock = this;
-			}
-			else
-			{
-				// Drop it
-				Coords.Z -= manager.DragZOrder;
-				beingDragged = false;
-				manager.SpriteContainer.EventLock = null;
-			}
+			// Change the Z-order
+			Coordinates.Z += manager.DragZOrder;
+			beingDragged = true;
+			manager.SpriteContainer.EventLock = this;
+			
+		}
 
-			// We are finished
-			return true;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
+		{
+			// If we cannot be dragged, don't worry about it
+			if (!isDragable)
+			{
+				return;
+			}
+			// Drop it
+			Coordinates.Z -= manager.DragZOrder;
+			beingDragged = false;
+			manager.SpriteContainer.EventLock = null;
 		}
 
 		/// <summary>
 		/// If the sprite is picked up, this moved the sprite to follow
 		/// the mouse.
 		/// </summary>
-		public override bool OnMouseMotion(object sender, MouseArgs args)
+		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
 		{
-			// Pull out some stuff
-			int x = args.X;
-			int y = args.Y;
-			int relx = args.RelativeX;
-			int rely = args.RelativeY;
-
 			// If we cannot be dragged, don't worry about it
 			if (!isDragable)
-				return false;
+			{
+				return;
+			}
 
 			// Move the window as appropriate
 			if (beingDragged)
 			{
-				Coords.X += relx;
-				Coords.Y += rely;
-				return true;
-			}
-			else
-			{
-				return false;
+				Coordinates.X += args.RelativeX;
+				Coordinates.Y += args.RelativeY;;
 			}
 		}
 		#endregion
@@ -165,7 +170,7 @@ namespace MfGames.Sdl.Gui
 		{
 			get
 			{
-				return new Rectangle(new Point(OuterCoords.X, OuterCoords.Y), OuterSize);
+				return new Rectangle(new Point(OuterCoordinates.X, OuterCoordinates.Y), OuterSize);
 			}
 		}
 
@@ -178,13 +183,13 @@ namespace MfGames.Sdl.Gui
 			}
 		}
 
-		public virtual Vector OuterCoords
+		public virtual Vector OuterCoordinates
 		{
 			get
 			{
-				return new Vector(Coords.X - OuterPadding.Left,
-					Coords.Y - OuterPadding.Top,
-					Coords.Z);
+				return new Vector(Coordinates.X - OuterPadding.Left,
+					Coordinates.Y - OuterPadding.Top,
+					Coordinates.Z);
 			}
 		}
 
@@ -225,6 +230,28 @@ namespace MfGames.Sdl.Gui
 					throw new Exception("Cannot assign a null manager");
 
 				manager = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override bool IsMouseMotionLocked
+		{
+			get
+			{
+				return beingDragged;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override bool IsMouseButtonLocked
+		{
+			get
+			{
+				return true;
 			}
 		}
 		#endregion

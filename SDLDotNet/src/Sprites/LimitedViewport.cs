@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using System.Drawing;
 
 namespace SdlDotNet.Sprites
@@ -45,9 +44,8 @@ namespace SdlDotNet.Sprites
 		/// viewport to only show in a specific part of the screen. The
 		/// point returned is relative to the sprite manager.
 		/// </summary>
-		public void AdjustViewport(ref RenderArgs args)
+		public void AdjustViewport(RenderArgs args)
 		{
-			//("Cannot process viewport");
 		}
 	}
 }

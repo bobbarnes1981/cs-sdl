@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
@@ -56,8 +55,8 @@ namespace MfGames.Sdl.Gui
 		{
 			// Handle our arguments
 			RenderArgs args0 = args.Clone();
-			args0.TranslateX += Coords.X + MarginPadding.Left + InnerPadding.Left;
-			args0.TranslateY += Coords.Y + MarginPadding.Top + InnerPadding.Top;
+			args0.TranslateX += Coordinates.X + MarginPadding.Left + InnerPadding.Left;
+			args0.TranslateY += Coordinates.Y + MarginPadding.Top + InnerPadding.Top;
 
 			// Call the base
 			base.Render(args0);
@@ -72,7 +71,7 @@ namespace MfGames.Sdl.Gui
 					continue;
 	
 				// Translate it and blit
-				s.Coords.X = x;
+				s.Coordinates.X = x;
 				s.Render(args0);
 
 				// Update the coordinates for the next one
@@ -80,7 +79,7 @@ namespace MfGames.Sdl.Gui
 			}
 
 			// Draw our right components
-			x = Coords.X + Size.Width - MarginPadding.Right;
+			x = Coordinates.X + Size.Width - MarginPadding.Right;
 
 			foreach (Sprite s in TailSprites)
 			{
@@ -90,7 +89,7 @@ namespace MfGames.Sdl.Gui
 	
 				// Translate it and blit
 				x -= s.Size.Width + InnerPadding.Horizontal;
-				s.Coords.X = x;
+				s.Coordinates.X = x;
 				s.Render(args0);
 			}
 		}

@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet;
 using System;
 using System.Collections;
@@ -39,18 +38,22 @@ namespace SdlDotNet.Sprites
 		{
 			// Sanity checking
 			if (screen == null)
-				throw new Exception("Cannot create a sprite surface with a null "
+			{
+				throw new SdlException("Cannot create a sprite surface with a null "
 					+ "screen");
+			}
 
 			if (manager == null)
-				throw new Exception("Cannot create a sprite surface with a null "
+			{
+				throw new SdlException("Cannot create a sprite surface with a null "
 					+ "sprite manager");
+			}
 
 			// Save our fields
 			this.screen = screen;
 			this.manager = manager;
 
-			// Create a compatiable surface
+			// Create a compatible surface
 			surface = screen.CreateCompatibleSurface(screen.Width,
 				screen.Height,
 				true);

@@ -26,16 +26,16 @@ namespace SdlDotNet.Sprites
 	/// </summary>
 	public class TranslatedViewport : IViewport
 	{
-		private int tx = 0;
-		private int ty = 0;
+		private int translateX = 0;
+		private int translateY = 0;
 
 		/// <summary>
 		/// Constructs a viewport to center on a specific sprite.
 		/// </summary>
-		public TranslatedViewport(int tx, int ty)
+		public TranslatedViewport(int translateX, int translateY)
 		{
-			this.tx = tx;
-			this.ty = ty;
+			this.translateX = translateX;
+			this.translateY = translateY;
 		}
 
 		/// <summary>
@@ -44,10 +44,10 @@ namespace SdlDotNet.Sprites
 		/// viewport to only show in a specific part of the screen. The
 		/// point returned is relative to the sprite manager.
 		/// </summary>
-		public void AdjustViewport(ref RenderArgs args)
+		public void AdjustViewport(RenderArgs args)
 		{
-			args.TranslateX += tx;
-			args.TranslateY += ty;
+			args.TranslateX += this.translateX;
+			args.TranslateY += this.translateY;
 		}
 	}
 }

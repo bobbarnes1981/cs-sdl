@@ -18,7 +18,6 @@
  */
 
 using SdlDotNet.Sprites;
-using SdlDotNet.Utility;
 using SdlDotNet;
 using System.Drawing;
 using System;

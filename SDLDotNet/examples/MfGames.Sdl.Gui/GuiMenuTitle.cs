@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
@@ -98,8 +97,8 @@ namespace MfGames.Sdl.Gui
 			// Check for menu
 			if (IsSelected)
 			{
-				popup.Coords.X = 0;
-				popup.Coords.Y = 0;
+				popup.Coordinates.X = 0;
+				popup.Coordinates.Y = 0;
 				popup.Render(args1);
 			}
 		}
@@ -113,33 +112,52 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Events
-		public override bool OnMouseButton(object sender, MouseArgs args)
+		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
 		{
-			// Build up the translations
-			MouseArgs args1 = args.Clone();
-			args1.TranslateX += PopupX;
-			args1.TranslateY += PopupY;
+//			// Build up the translations
+//			MouseButtonEventArgs args1 = args.Clone();
+//			args1.TranslateX += PopupX;
+//			args1.TranslateY += PopupY;
 
 			// Check for clicking down
-			if (!popup.IsHidden)
-			{
-				return popup.OnMouseButton(this, args1);
-			}
+//			if (!popup.IsHidden)
+//			{
+//				popup.OnMouseButtonDown(this, args);
+//			}
 
-			if (args.IsButton1)
+			if (args.ButtonPressed)
 			{
 				IsSelected = true;
 				popup.ShowMenu();
-				return true;
+				//return true;
 			}
 
-			return false;
+			//return false;
 		}
 
-		public override void OnTick(TickArgs args)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
+		{
+//			if (popup.IsHidden)
+//			{
+//				popup.OnMouseButtonUp(this, args);
+//			}
+//			if (!args.ButtonPressed)
+//			{
+//				IsSelected = false;
+//				popup.HideMenu();
+//				//return true;
+//			}
+		}
+
+		public override void OnTick(object sender, TickEventArgs args)
 		{
 			// Call our base's tick processing
-			base.OnTick(args);
+			base.OnTick(this, args);
 
 			// If we are showing our menu, display it
 			/* TODO This kills things

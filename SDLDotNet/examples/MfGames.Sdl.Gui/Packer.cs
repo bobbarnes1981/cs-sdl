@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System.Collections;
@@ -38,7 +37,6 @@ namespace MfGames.Sdl.Gui
 		{
 		}
 
-		//public Packer(GuiManager manager, Vector2 p)
 		public Packer(GuiManager manager, Point p)
 			: base(manager, p)
 		{
@@ -57,12 +55,13 @@ namespace MfGames.Sdl.Gui
 			Size d = s.Size;
 
 			if (s is GuiComponent)
+			{
 				d = ((GuiComponent) s).OuterSize;
+			}
 
 			return d;
 		}
 
-		//protected Sprite SelectSprite(Vector2 point, ref int index)
 		protected Sprite SelectSprite(Point point, ref int index)
 		{
 			index = 0;
@@ -80,21 +79,12 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Events
-		public override bool OnMouseButton(object sender, MouseArgs args)
+		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
 		{
-			// Create a mapping
-			MouseArgs args1 = args.Clone();
-			args1.TranslateX -= Coords.X + MarginPadding.Left + InnerPadding.Left;
-			args1.TranslateY -= Coords.Y + MarginPadding.Top + InnerPadding.Top;
-			MouseArgs args2 = args.Clone();
-			args2.TranslateX += Coords.X + MarginPadding.Left + InnerPadding.Left;
-			args2.TranslateY += Coords.Y + MarginPadding.Top + InnerPadding.Top;
-
 			// We assume that the coordinates are set by the packing
 			// processing, so we can use them with the offset and
 			// coordinates.
-			//Vector2 p = args1.Coords;
-			Point p = args1.Coords;
+			Point p = new Point(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left), args.Y - ((Coordinates.Y + MarginPadding.Top + InnerPadding.Top)));
 
 			foreach (Sprite s in Sprites)
 			{
@@ -102,32 +92,17 @@ namespace MfGames.Sdl.Gui
 				// basic sprite (and not its parent).
 				if (s.IntersectsWith(p))
 				{
-					if (s.OnMouseButton(this, args2))
-						return true;
+					s.OnMouseButtonDown(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
 				}
 			}
-
-			// We didn't finish it
-			return false;
 		}
 
-		public override bool OnMouseMotion(object sender, MouseArgs args)
+		public override void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
 		{
-			// Build up the new point
-			int x = args.X;
-			int y = args.Y;
-			int relx = args.RelativeX;
-			int rely = args.RelativeY;
-      
-			MouseArgs args1 = args.Clone();
-			args1.TranslateX += Coords.X + MarginPadding.Left + InnerPadding.Left;
-			args1.TranslateY += Coords.Y + MarginPadding.Top + InnerPadding.Top;
-	 
 			// We assume that the coordinates are set by the packing
 			// processing, so we can use them with the offset and
 			// coordinates.
-			//Vector2 p = args1.Coords;
-			Point p = args1.Coords;
+			Point p = new Point(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left), args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top));
 
 			foreach (Sprite s in Sprites)
 			{
@@ -135,22 +110,47 @@ namespace MfGames.Sdl.Gui
 				// basic sprite (and not its parent).
 				if (s.IntersectsWith(p))
 				{
-					if (s.OnMouseMotion(this, args1))
-						return true;
+					s.OnMouseButtonUp(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
 				}
 			}
-
-			// We didn't finish it
-			return false;
 		}
 
-		public override void OnTick(TickArgs args)
+		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
 		{
-			base.OnTick(args);
+			// Build up the new point   
+			MouseMotionEventArgs args1 = new MouseMotionEventArgs(args.ButtonPressed, (short)(args.X + Coordinates.X + MarginPadding.Left + InnerPadding.Left), (short)(args.Y + Coordinates.Y + MarginPadding.Top + InnerPadding.Top), args.RelativeX, args.RelativeY);
+			// We assume that the coordinates are set by the packing
+			// processing, so we can use them with the offset and
+			// coordinates.
+			Point p = new Point(args1.X, args1.Y);
 
 			foreach (Sprite s in Sprites)
+			{
+				// Check the region. If it contains the point, we call the
+				// basic sprite (and not its parent).
+				if (s.IntersectsWith(p))
+				{
+					s.OnMouseMotion(this, args1);
+				}
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void OnTick(object sender, TickEventArgs args)
+		{
+			base.OnTick(this, args);
+
+			foreach (Sprite s in Sprites)
+			{
 				if (s.IsTickable)
-					s.OnTick(args);
+				{
+					s.OnTick(this, args);
+				}
+			}
 		}
 		#endregion
 

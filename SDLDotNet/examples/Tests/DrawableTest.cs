@@ -18,6 +18,7 @@
  */
 
 using NUnit.Framework;
+using SdlDotNet.Sprites;
 
 namespace SdlDotNet.Drawable
 {

@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet;
 using System;
 using System.Drawing;
@@ -81,9 +80,8 @@ namespace SdlDotNet.Sprites
 		/// not true, then the next sprite that is keyboard sensitive is
 		/// processed.
 		/// </summary>
-		public override bool OnKeyboard(object sender, KeyboardEventArgs e)
+		public override void OnKeyboard(object sender, KeyboardEventArgs e)
 		{
-			return sprite.OnKeyboard(this, e);
 		}
 
 		/// <summary>
@@ -92,9 +90,8 @@ namespace SdlDotNet.Sprites
 		/// stopped. If it returns false, then the next sprite is
 		/// processed.
 		/// </summary>
-		public override bool OnMouseButton(object sender, MouseArgs args)
+		public override void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
 		{
-			return sprite.OnMouseButton(this, args);
 		}
 
 		/// <summary>
@@ -103,9 +100,8 @@ namespace SdlDotNet.Sprites
 		/// is stopped, otherwise the next sprite is processed. Only
 		/// sprites that are MouseSensitive are processed.
 		/// </summary>
-		public override bool OnMouseMotion(object sender, MouseArgs args)
+		public override void OnMouseMotion(object sender, MouseMotionEventArgs args)
 		{
-			return sprite.OnMouseMotion(this, args);
 		}
 
 		/// <summary>
@@ -113,9 +109,9 @@ namespace SdlDotNet.Sprites
 		/// anything. This ensures that the functionality is there, to be
 		/// overriden as needed.
 		/// </summary>
-		public override void OnTick(TickArgs args)
+		public override void OnTick(object sender, TickEventArgs args)
 		{
-			sprite.OnTick(args);
+			sprite.OnTick(this, args);
 		}
 		#endregion
 
@@ -123,10 +119,16 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public override Vector Coords
+		public override Vector Coordinates
 		{
-			get { return sprite.Coords; }
-			set { sprite.Coords = value; }
+			get 
+			{ 
+				return sprite.Coordinates; 
+			}
+			set 
+			{ 
+				sprite.Coordinates = value; 
+			}
 		}
 
 		/// <summary>
@@ -170,7 +172,9 @@ namespace SdlDotNet.Sprites
 			set
 			{
 				if (value == null)
+				{
 					throw new SpriteException("Cannot assign a null sprite");
+				}
 
 				sprite = value;
 			}

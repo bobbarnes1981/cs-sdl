@@ -18,30 +18,47 @@
  */
 
 using System;
+using System.Runtime.Serialization;
 
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
 	/// 
 	/// </summary>
+	[Serializable()]
 	public class SpriteException : SdlException
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="msg"></param>
-		public SpriteException(string msg)
-			: base(msg)
+		public SpriteException()
+		{
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
+		public SpriteException(string message)
+			: base(message)
 		{
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="msg"></param>
-		/// <param name="e"></param>
-		public SpriteException(string msg, Exception e)
-			: base(msg, e)
+		/// <param name="exception"></param>
+		/// <param name="message"></param>
+		public SpriteException(string message, Exception exception)
+			: base(message, exception)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="context"></param>
+		protected SpriteException(SerializationInfo info, StreamingContext context) 
 		{
 		}
 	}

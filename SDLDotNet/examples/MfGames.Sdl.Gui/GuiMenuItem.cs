@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Utility;
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
@@ -25,13 +24,25 @@ using System.Drawing;
 
 namespace MfGames.Sdl.Gui
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class GuiMenuItem : HorizontalPacker
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		public GuiMenuItem(GuiManager manager)
 			: base(manager)
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="text"></param>
 		public GuiMenuItem(GuiManager manager, string text)
 			: base(manager)
 		{
@@ -39,11 +50,19 @@ namespace MfGames.Sdl.Gui
 		}
 
 		#region Sprites
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
 		public void AddLeft(Sprite s)
 		{
 			AddHead(s);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
 		public void AddRight(Sprite s)
 		{
 			AddTail(s);
@@ -76,8 +95,8 @@ namespace MfGames.Sdl.Gui
 			// Menu items are packed by their outer padding instead of the
 			// normal inner, so this has to be adjusted.
 			Rectangle r = rect;
-//			r.Coords.X -= OuterPadding.Left;
-//			r.Coords.Y -= OuterPadding.Top;
+//			r.Coordinates.X -= OuterPadding.Left;
+//			r.Coordinates.Y -= OuterPadding.Top;
 			int transX;
 			int transY;
 			transY = r.Location.Y - OuterPadding.Top;
@@ -88,8 +107,15 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Events
+		/// <summary>
+		/// 
+		/// </summary>
 		public event MenuItemHandler ItemSelectedEvent;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="index"></param>
 		public virtual void OnMenuSelected(int index)
 		{
 			if (ItemSelectedEvent != null)
@@ -100,6 +126,10 @@ namespace MfGames.Sdl.Gui
 		#endregion
 
 		#region Operators
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return String.Format("(menu-item {0})", base.ToString());
@@ -110,36 +140,55 @@ namespace MfGames.Sdl.Gui
 		private bool isSelected = false;
 		private GuiMenuPopup menu = null;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool IsSelected
 		{
 			get { return isSelected; }
 			set { isSelected = value; }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public GuiMenuPopup Menu
 		{
 			get { return menu; }
 			set { menu = value; }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Padding InnerPadding
 		{
 			get { return manager.MenuItemInnerPadding; }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override Padding MarginPadding
 		{
 			get { return manager.MenuItemPadding; }
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override int HorizontalWidth
 		{
 			get
 			{
 				if (menu == null)
+				{
 					return base.HorizontalWidth;
+				}
 				else
+				{
 					return menu.Size.Width;
+				}
 			}
 		}
 		#endregion

@@ -17,9 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Drawable;
+
 using SdlDotNet.Sprites;
-using SdlDotNet.Utility;
 using SdlDotNet;
 using System.Drawing;
 
@@ -85,15 +84,16 @@ namespace MfGames.Sdl.Demos
 				1.0,  0.5, new Point(5, 495)));
 
 			// Add the moving one
-			moving = new BoundedTextSprite("one", f4, new Size(w, 30),
+			moving = new BoundedTextSprite("two", f4, new Size(w, 30),
 				0.0, 0.5, new Point(5, 510));
 			sm.Add(moving);
+			this.EnableEvents();
 		}
 
 		#region Events
 		private double delta = 0.01;
 
-		public override void OnTick(TickArgs args)
+		public override void OnTick(object sender, TickEventArgs args)
 		{
 			double dx = args.RatePerSecond(delta);
 			moving.HorizontalWeight += dx;
@@ -111,12 +111,15 @@ namespace MfGames.Sdl.Demos
 			}
       
 			// Change the text
-			moving.Text = moving.HorizontalWeight.ToString("#0.0000000");
+			moving.TextString = moving.HorizontalWeight.ToString("#0.0000000");
 		}
 		#endregion
 
 		#region Operators
-		public override string ToString() { return "Font"; }
+		public override string ToString() 
+		{ 
+			return "Font"; 
+		}
 		#endregion
 	}
 }

@@ -141,7 +141,7 @@ namespace SdlDotNet
 		/// <param name="array"></param>
 		/// <param name="index"></param>
 		/// <remarks>Provide the strongly typed member for ICollection.</remarks> 
-		public void CopyTo(Exception[] array, int index)
+		public void CopyTo(SdlException[] array, int index)
 		{
 			((ICollection)this).CopyTo(array, index);
 		}
