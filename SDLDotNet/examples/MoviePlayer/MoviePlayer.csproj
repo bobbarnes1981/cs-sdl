@@ -1,114 +1,103 @@
 <VisualStudioProject>
-    <CSHARP
-        ProjectType = "Local"
-        ProductVersion = "7.10.3077"
-        SchemaVersion = "2.0"
-        ProjectGuid = "{0ED779FE-D118-43FB-B5E7-30A91A0EE869}"
-    >
-        <Build>
-            <Settings
-                ApplicationIcon = "App.ico"
-                AssemblyKeyContainerName = ""
-                AssemblyName = "MoviePlayer"
-                AssemblyOriginatorKeyFile = ""
-                DefaultClientScript = "JScript"
-                DefaultHTMLPageLayout = "Grid"
-                DefaultTargetSchema = "IE50"
-                DelaySign = "false"
-                OutputType = "WinExe"
-                PreBuildEvent = ""
-                PostBuildEvent = ""
-                RootNamespace = "SdlDotNet.Examples"
-                RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = "SdlDotNet.Examples.MoviePlayer"
-            >
-                <Config
-                    Name = "Debug"
-                    AllowUnsafeBlocks = "false"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = ""
-                    DebugSymbols = "true"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = ""
-                    Optimize = "false"
-                    OutputPath = "bin\Debug\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-                <Config
-                    Name = "Release"
-                    AllowUnsafeBlocks = "false"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "TRACE"
-                    DocumentationFile = ""
-                    DebugSymbols = "false"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = ""
-                    Optimize = "true"
-                    OutputPath = "bin\Release\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-            </Settings>
-            <References>
-                <Reference
-                    Name = "System"
-                    AssemblyName = "System"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.dll"
-                />
-                <Reference
-                    Name = "System.Data"
-                    AssemblyName = "System.Data"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
-                />
-                <Reference
-                    Name = "System.XML"
-                    AssemblyName = "System.Xml"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
-                />
-                <Reference
-                    Name = "SdlDotNet"
-                    Project = "{C2D6CC23-A178-40B6-98FD-7AF6A5366543}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
-                    Name = "Tao.Sdl"
-                    AssemblyName = "Tao.Sdl"
-                    HintPath = "..\..\lib\Tao.Sdl.dll"
-                />
-            </References>
-        </Build>
-        <Files>
-            <Include>
-                <File
-                    RelPath = "App.ico"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "AssemblyInfo.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "MoviePlayer.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-            </Include>
-        </Files>
-    </CSHARP>
+	<CSHARP
+		ProjectType = "Local"
+		ProductVersion = "7.10.3077"
+		SchemaVersion = "2.0"
+		ProjectGuid = "{CB82B95A-E8B5-407C-A8BD-30FC68945890}"
+	>
+		<Build>
+			<Settings
+				ApplicationIcon = "App.ico"
+				AssemblyKeyContainerName = ""
+				AssemblyName = "MoviePlayer"
+				AssemblyOriginatorKeyFile = ""
+				DefaultClientScript = "JScript"
+				DefaultHTMLPageLayout = "Grid"
+				DefaultTargetSchema = "IE50"
+				DelaySign = "false"
+				OutputType = "WinExe"
+				RootNamespace = "SdlDotNet.Examples"
+				StartupObject = "SdlDotNet.Examples.MoviePlayer"
+			>
+				<Config
+					Name = "Release"
+					AllowUnsafeBlocks = "False"
+					BaseAddress = "285212672"
+					CheckForOverflowUnderflow = "False"
+					ConfigurationOverrideFile = ""
+					DefineConstants = "TRACE"
+					DocumentationFile = ""
+					DebugSymbols = "False"
+					FileAlignment = "4096"
+					IncrementalBuild = "False"
+					NoStdLib = "False"
+					NoWarn = ""
+					Optimize = "True"
+					OutputPath = ".\bin\Release\"
+					RegisterForComInterop = "False"
+					RemoveIntegerChecks = ""
+					TreatWarningsAsErrors = "False"
+					WarningLevel = "1"
+				/>
+				<Config
+					Name = "Debug"
+					AllowUnsafeBlocks = "False"
+					BaseAddress = "285212672"
+					CheckForOverflowUnderflow = "False"
+					ConfigurationOverrideFile = ""
+					DefineConstants = "DEBUG;TRACE"
+					DocumentationFile = ""
+					DebugSymbols = "True"
+					FileAlignment = "4096"
+					IncrementalBuild = "False"
+					NoStdLib = "False"
+					NoWarn = ""
+					Optimize = "False"
+					OutputPath = ".\bin\Debug\"
+					RegisterForComInterop = "False"
+					RemoveIntegerChecks = ""
+					TreatWarningsAsErrors = "False"
+					WarningLevel = "4"
+				/>
+			</Settings>
+			<References>
+				<Reference
+					Name = "System"
+				/>
+				<Reference
+					Name = "System.Drawing"
+				/>
+				<Reference
+					Name = "SdlDotNet"
+					Project = "{775783AD-A9DF-46CF-A3CD-43083F9AD0CE}"
+					Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+					Private = "True"
+				/>
+				<Reference
+					Name = "Tao.Sdl"
+					HintPath = "..\\..\\lib\Tao.Sdl.dll"
+					Private = "True"
+				/>
+			</References>
+		</Build>
+		<Files>
+			<Include>
+				<File
+					RelPath = "App.ico"
+					SubType = "Code"
+					BuildAction = "Content"
+				/>
+				<File
+					RelPath = "AssemblyInfo.cs"
+					SubType = "Code"
+					BuildAction = "Compile"
+				/>
+				<File
+					RelPath = "MoviePlayer.cs"
+					SubType = "Code"
+					BuildAction = "Compile"
+				/>
+			</Include>
+		</Files>
+	</CSHARP>
 </VisualStudioProject>
-
