@@ -27,17 +27,21 @@ namespace MfGames.Sdl.Demos
 {
 	public class AnimatedSprite : DrawableSprite
 	{
+		Random rand = new Random();
 		// Randomly assign the direction we show the frames
-		private bool frameRight = Entropy.Next() % 2 == 0;
+		private bool frameRight;
 
 		public AnimatedSprite(IDrawable d, Point coords)
-			: base(d, Entropy.Next(), coords)
+			: base(d, coords)
 		{
+			this.Frame = rand.Next();
+			this.frameRight = (rand.Next()  % 2 == 0);
 		}
 
 		public AnimatedSprite(IDrawable d, Vector coords)
-			: base(d, Entropy.Next(), coords)
+			: base(d, coords)
 		{
+			this.Frame = rand.Next();
 		}
 
 		#region Animation and Drawing
@@ -50,11 +54,17 @@ namespace MfGames.Sdl.Demos
 		{
 			// Increment the frame
 			if (frameRight)
+			{
 				Frame++;
+			}
 			else if (Frame == 0)
+			{
 				Frame = FrameCount -1;
+			}
 			else
+			{
 				Frame--;
+			}
 		}
 		#endregion
 
