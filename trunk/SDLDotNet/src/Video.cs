@@ -29,7 +29,7 @@ namespace SdlDotNet
 	/// hide and show the mouse cursor,
 	/// and interact with OpenGL
 	/// </summary>
-	public sealed class Video 
+	public sealed class Video
 	{
 		static readonly Video instance = new Video();
 
@@ -69,11 +69,11 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="width">screen width</param>
 		/// <param name="height">screen height</param>
-		/// <param name="bpp">bits per pixel</param>
+		/// <param name="bitsPerPixel">bits per pixel</param>
 		/// <returns>a surface to draw to</returns>
-		public Surface SetVideoMode(int width, int height, int bpp) 
+		public Surface SetVideoMode(int width, int height, int bitsPerPixel) 
 		{
-			return SetVideoMode(width, height, bpp,
+			return SetVideoMode(width, height, bitsPerPixel,
 				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN|Sdl.SDL_ANYFORMAT));
 		}
 
@@ -103,12 +103,12 @@ namespace SdlDotNet
 		/// <param name="frame">
 		/// if true, the window will have a frame around it
 		/// </param>
-		/// <param name="bpp">bits per pixel</param>
+		/// <param name="bitsPerPixel">bits per pixel</param>
 		/// <returns>a surface to draw to</returns>
 		public Surface SetVideoModeWindow(
 			int width, 
 			int height, 
-			int bpp, 
+			int bitsPerPixel, 
 			bool frame) 
 		{
 			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT;
@@ -116,7 +116,7 @@ namespace SdlDotNet
 			{
 				flags |= Sdl.SDL_NOFRAME;
 			}
-			return SetVideoMode(width, height, bpp, (int)flags);
+			return SetVideoMode(width, height, bitsPerPixel, (int)flags);
 		}
 		
 		/// <summary>
@@ -124,11 +124,11 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="width">the horizontal resolution</param>
 		/// <param name="height">the vertical resolution</param>
-		/// <param name="bpp">bits per pixel</param>
+		/// <param name="bitsPerPixel">bits per pixel</param>
 		/// <returns>A Surface representing the screen</returns>
-		public Surface SetVideoModeOpenGL(int width, int height, int bpp) 
+		public Surface SetVideoModeOpenGL(int width, int height, int bitsPerPixel) 
 		{
-			return SetVideoMode(width, height, bpp,
+			return SetVideoMode(width, height, bitsPerPixel,
 				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_OPENGL|Sdl.SDL_FULLSCREEN));
 		}
 		/// <summary>
@@ -157,14 +157,14 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="width">screen width</param>
 		/// <param name="height">screen height</param>
-		/// <param name="bpp">bits per pixel</param>
+		/// <param name="bitsPerPixel">bits per pixel</param>
 		/// <param name="flags">
 		/// specific flags, see SDL documentation for details
 		/// </param>
 		/// <returns>A Surface representing the screen</returns>
-		public Surface SetVideoMode(int width, int height, int bpp, int flags) 
+		public Surface SetVideoMode(int width, int height, int bitsPerPixel, int flags) 
 		{
-			IntPtr s = Sdl.SDL_SetVideoMode(width, height, bpp, flags);
+			IntPtr s = Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, flags);
 			if (s == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
@@ -175,17 +175,20 @@ namespace SdlDotNet
 
 		/// <summary>
 		/// Gets the surface for the window or screen, 
-		/// must be preceded by a call to SetVideoMode*
+		/// must be preceded by a call to SetVideoMode
 		/// </summary>
 		/// <returns>The main screen surface</returns>
-		public Surface GetVideoSurface() 
+		public Surface GetVideoSurface
 		{
-			IntPtr s = Sdl.SDL_GetVideoSurface();
-			if (s == IntPtr.Zero)
+			get
 			{
-				throw SdlException.Generate();
+				IntPtr s = Sdl.SDL_GetVideoSurface();
+				if (s == IntPtr.Zero)
+				{
+					throw SdlException.Generate();
+				}
+				return Surface.FromScreenPtr(s);
 			}
-			return Surface.FromScreenPtr(s);
 		}
 
 		/// <summary>
@@ -233,7 +236,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="bitmap">The bitmap data</param>
 		/// <returns>A Surface representing the bitmap</returns>
-		public Surface LoadBMP(byte[] bitmap) 
+		public Surface LoadBmp(byte[] bitmap) 
 		{
 			return Surface.FromBitmap(bitmap);
 		}
@@ -244,19 +247,19 @@ namespace SdlDotNet
 		/// <param name="width">The width of the surface</param>
 		/// <param name="height">The height of the surface</param>
 		/// <param name="depth">The bits per pixel of the surface</param>
-		/// <param name="Rmask">
+		/// <param name="redMask">
 		/// A bitmask giving the range of red color values in the surface 
 		/// pixel format
 		/// </param>
-		/// <param name="Gmask">
+		/// <param name="greenMask">
 		/// A bitmask giving the range of green color values in the surface 
 		/// pixel format
 		/// </param>
-		/// <param name="Bmask">
+		/// <param name="blueMask">
 		/// A bitmask giving the range of blue color values in the surface 
 		/// pixel format
 		/// </param>
-		/// <param name="Amask">
+		/// <param name="alphaMask">
 		/// A bitmask giving the range of alpha color values in the surface 
 		/// pixel format
 		/// </param>
@@ -264,20 +267,20 @@ namespace SdlDotNet
 		/// A flag indicating whether or not to attempt to place this surface
 		///  into video memory</param>
 		/// <returns>A new surface</returns>
-		public Surface CreateRGBSurface(
+		public Surface CreateRgbSurface(
 			int width, 
 			int height, 
 			int depth, 
-			int Rmask, 
-			int Gmask, 
-			int Bmask, 
-			int Amask, 
+			int redMask, 
+			int greenMask, 
+			int blueMask, 
+			int alphaMask, 
 			bool hardware) 
 		{
 			IntPtr ret = Sdl.SDL_CreateRGBSurface(
 				hardware?Sdl.SDL_HWSURFACE:Sdl.SDL_SWSURFACE,
 				width, height, depth,
-				Rmask, Gmask, Bmask, Amask);
+				redMask, greenMask, blueMask, alphaMask);
 			if (ret == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
@@ -325,7 +328,7 @@ namespace SdlDotNet
 		/// attribute was set.
 		/// Call this instead of Surface.Flip() for OpenGL windows.
 		/// </summary>
-		public void GL_SwapBuffers() 
+		public void GLSwapBuffers() 
 		{
 			Sdl.SDL_GL_SwapBuffers();
 		}
@@ -333,10 +336,10 @@ namespace SdlDotNet
 		/// Sets an OpenGL attribute
 		/// </summary>
 		/// <param name="attrib">The attribute to set</param>
-		/// <param name="val">The new attribute value</param>
-		public void GL_SetAttribute(Sdl.SDL_GLattr attrib, int val) 
+		/// <param name="attribValue">The new attribute value</param>
+		public void GLSetAttribute(Sdl.SDL_GLattr attrib, int attribValue) 
 		{
-			if (Sdl.SDL_GL_SetAttribute(attrib, val) != 0)
+			if (Sdl.SDL_GL_SetAttribute(attrib, attribValue) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -346,7 +349,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="attrib">The attribute to get</param>
 		/// <returns>The current attribute value</returns>
-		public int GL_GetAttribute(Sdl.SDL_GLattr attrib) 
+		public int GLGetAttribute(Sdl.SDL_GLattr attrib) 
 		{
 			int ret;
 			if (Sdl.SDL_GL_GetAttribute(attrib, out ret) != 0)

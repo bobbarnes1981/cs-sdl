@@ -40,6 +40,7 @@ namespace SdlDotNet
 
 		internal IntPtr GetHandle() 
 		{ 
+			GC.KeepAlive(this);
 			return _handle; 
 		}
 
@@ -62,6 +63,7 @@ namespace SdlDotNet
 			{
 				_disposed = true;
 				SdlMixer.Mix_FreeMusic(_handle);
+				GC.KeepAlive(this);
 				GC.SuppressFinalize(this);
 			}
 		}

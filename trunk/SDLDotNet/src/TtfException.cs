@@ -31,18 +31,49 @@
  */
 
 using System;
+using System.Runtime.Serialization;
+
 using SdlDotNet;
 
 namespace SdlDotNet {
 	/// <summary>
 	/// Sdl Ttf Exception Class
 	/// </summary>
+	[Serializable()]
 	public class TtfException : SdlException 
 	{
 		/// <summary>
-		/// Constructor for Sdl Ttf Exception.
+		/// 
 		/// </summary>
-		/// <param name="msg">Exception message</param>
-		public TtfException(string msg) : base(msg) {}
+		public TtfException() 
+		{
+		}
+		/// <summary>
+		/// Initializes an TtfException instance
+		/// </summary>
+		/// <param name="message">
+		/// The string representing the error message
+		/// </param>
+		public TtfException(string message): base(message)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="exception"></param>
+		public TtfException(string message, Exception exception) 
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="context"></param>
+		protected TtfException(SerializationInfo info, StreamingContext context) 
+		{
+		}
 	}
 }

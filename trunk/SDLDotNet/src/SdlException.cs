@@ -19,6 +19,8 @@
  */
 
 using System;
+using System.Runtime.Serialization;
+
 using Tao.Sdl;
 
 namespace SdlDotNet 
@@ -26,15 +28,40 @@ namespace SdlDotNet
 	/// <summary>
 	/// Represents a run-time error from the Sdl library.
 	/// </summary>
+	[Serializable()]
 	public class SdlException : Exception 
 	{
 		/// <summary>
+		/// 
+		/// </summary>
+		public SdlException() 
+		{
+		}
+		/// <summary>
 		/// Initializes an SdlException instance
 		/// </summary>
-		/// <param name="msg">
+		/// <param name="message">
 		/// The string representing the error message
 		/// </param>
-		public SdlException(string msg) : base(msg) 
+		public SdlException(string message): base(message)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="exception"></param>
+		public SdlException(string message, Exception exception) 
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="context"></param>
+		protected SdlException(SerializationInfo info, StreamingContext context) 
 		{
 		}
 

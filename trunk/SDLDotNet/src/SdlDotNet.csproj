@@ -124,6 +124,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "ImageCollection.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "ImageException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -184,17 +189,17 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Timer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Ttf.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "TtfException.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Util.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

@@ -56,6 +56,7 @@ namespace SdlDotNet
 			{
 				_disposed = true;
 				Sdl.SDL_JoystickClose(_handle);
+				GC.KeepAlive(this);
 				GC.SuppressFinalize(this);
 			}
 		}
@@ -67,51 +68,61 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				return Sdl.SDL_JoystickIndex(_handle); 
+				int result = Sdl.SDL_JoystickIndex(_handle); 
+				GC.KeepAlive(this);
+				return result;
 			}
 		}
 
 		/// <summary>
 		/// Gets the number of axes on this joystick (usually 2 for each stick handle)
 		/// </summary>
-		public int NumAxes 
+		public int NumberOfAxes 
 		{
 			get 
 			{ 
-				return Sdl.SDL_JoystickNumAxes(_handle); 
+				int result = Sdl.SDL_JoystickNumAxes(_handle); 
+				GC.KeepAlive(this);
+				return result;
 			}
 		}
 
 		/// <summary>
 		/// Gets the number of trackballs on this joystick
 		/// </summary>
-		public int NumBalls 
+		public int NumberOfBalls 
 		{
 			get 
 			{ 
-				return Sdl.SDL_JoystickNumBalls(_handle); 
+				int result = Sdl.SDL_JoystickNumBalls(_handle); 
+				GC.KeepAlive(this);
+				return result;
 			}
 		}
 
 		/// <summary>
 		/// Gets the number of hats on this joystick
 		/// </summary>
-		public int NumHats 
+		public int NumberOfHats 
 		{
 			get 
 			{ 
-				return Sdl.SDL_JoystickNumHats(_handle); 
+				int result = Sdl.SDL_JoystickNumHats(_handle); 
+				GC.KeepAlive(this);
+				return result;
 			}
 		}
 
 		/// <summary>
 		/// Gets the number of buttons on this joystick
 		/// </summary>
-		public int NumButtons 
+		public int NumberOfButtons 
 		{
 			get 
 			{ 
-				return Sdl.SDL_JoystickNumButtons(_handle); 
+				int result = Sdl.SDL_JoystickNumButtons(_handle); 
+				GC.KeepAlive(this);
+				return result;
 			}
 		}
 

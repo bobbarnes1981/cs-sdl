@@ -16,7 +16,7 @@
                 DefaultTargetSchema = "IE50"
                 DelaySign = "false"
                 OutputType = "WinExe"
-                PreBuildEvent = ""
+                PreBuildEvent = "copy $(ProjectDir)\Vera.ttf $(TargetDir)"
                 PostBuildEvent = ""
                 RootNamespace = "SdlDotNet.Examples"
                 RunPostBuildEvent = "OnBuildSuccess"

@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Runtime.Serialization;
 
 namespace SdlDotNet 
 {
@@ -27,9 +28,39 @@ namespace SdlDotNet
 	/// usually as a result of the user changing the input focus 
 	/// away from a full-screen application.
 	/// </summary>
+	[Serializable()]
 	public class SurfaceLostException : SdlException 
 	{
-		internal SurfaceLostException(string msg) : base(msg) 
+		/// <summary>
+		/// 
+		/// </summary>
+		public SurfaceLostException() 
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
+		public SurfaceLostException(string message): base(message)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="exception"></param>
+		public SurfaceLostException(string message, Exception exception) 
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="context"></param>
+		protected SurfaceLostException(SerializationInfo info, StreamingContext context) 
 		{
 		}
 	}

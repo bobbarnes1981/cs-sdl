@@ -45,7 +45,9 @@ namespace SdlDotNet
 	/// <summary>
 	/// Text Style
 	/// </summary>
-	public enum Style {
+	[FlagsAttribute]
+	public enum Styles
+	{
 		/// <summary>
 		/// Normal
 		/// </summary>

@@ -19,6 +19,8 @@
  */
 
 using System;
+using System.Runtime.Serialization;
+
 using SdlDotNet;
 
 namespace SdlDotNet
@@ -26,12 +28,41 @@ namespace SdlDotNet
 	/// <summary>
 	/// Exception class for SdlDotNet.Images
 	/// </summary>
+	[Serializable()]
 	public class ImageException : SdlException 
 	{
 		/// <summary>
-		/// Constructor
+		/// 
 		/// </summary>
-		/// <param name="msg">Exception message</param>
-		public ImageException(string msg) : base(msg) {}
+		public ImageException() 
+		{
+		}
+		/// <summary>
+		/// Initializes an ImageException instance
+		/// </summary>
+		/// <param name="message">
+		/// The string representing the error message
+		/// </param>
+		public ImageException(string message): base(message)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="exception"></param>
+		public ImageException(string message, Exception exception) 
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="context"></param>
+		protected ImageException(SerializationInfo info, StreamingContext context) 
+		{
+		}
 	}
 }

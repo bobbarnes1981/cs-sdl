@@ -28,10 +28,6 @@ namespace SdlDotNet
 	/// </summary>
 	public struct SdlColor
 	{
-		static SdlColor()
-		{
-		}
-
 		/// <summary>
 		/// 
 		/// </summary>
