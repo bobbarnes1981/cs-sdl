@@ -10,10 +10,11 @@
     <target name="build">
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
+	<echo message="Using '${nant.settings.currentframework}' Framework"/>
 	<copy file="${nant.project.basedir}/fard-two.ogg" tofile="${nant.project.basedir}/${build.dir}/fard-two.ogg"/>
 	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${src.dir}/${build.dir}">
-		<includes name="SDL.NET.dll"/>
+		<includes name="${project.name}.dll"/>
 	    </fileset>
 	</copy>
 	<csc target="exe" warnaserror="true" unsafe="false" nowarn="1591,0618" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
@@ -21,7 +22,8 @@
 		<includes name="**/*.cs" />
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
-		<includes name="SDL.NET.dll"/>
+		<includes name="${project.name}.dll"/>
+		<includes name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
 	    </references>
 	    <arg value="/d:mono" if="${mono}" />
 	</csc>

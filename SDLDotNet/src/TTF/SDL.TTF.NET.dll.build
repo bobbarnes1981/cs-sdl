@@ -10,6 +10,7 @@
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<!-- prepare build directory -->
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
+	<echo message="Using '${nant.settings.currentframework}' Framework"/>
 	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="../${build.dir}">
 		<includes name="${project.name}.dll"/>
@@ -22,9 +23,9 @@
 		<!-- task currently does not work on Mono and is temporarily included in the NAnt.Win32 assembly -->
 	    </sources>
 	    <references basedir="${build.dir}">
-		<includes name="SDL.NET.dll"/>
+		<includes name="${project.name}.dll"/>
+		<includes name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
 	    </references>
-	    <arg value="/d:mono" if="${mono}" />
 	</csc>
     </target>
     <target name="clean">
