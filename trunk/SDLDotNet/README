@@ -115,7 +115,7 @@ MessageBox.Show("Music finished");
 } 
 -Flynn
 
-Is SDL_Delay() not implemented in the current version?
+Is SDL_Delay() not implemented in the current version? *DONE*
 
 -----------------------------
 Old News

@@ -1,3 +1,9 @@
+2.0.0a2:
+David Hudson 3 Nov 2004
+* Ran FXCop against SDL.NET and fixed a huge amount of issues that make SDL.NET more .NET "compliant".
+* Decoupled Tao.Sdl and SDL.NET so that the examples do not need to reference Tao.Sdl directly.
+* Made some changes to enums in Tao.Sdl that required changes in SDL.NET.
+
 2.0.0a1:
 David Hudson 29 Oct 2004
 * Finished rewriting SDL.NET.
@@ -9,7 +15,7 @@ David Hudson 29 Oct 2004
 * Code cleanups and reorg
 * CdPlayer example works
 * Image Example works more reliably.
-* A few more features (see TODO)
+* A few more features (see README)
 
 ------------------------------------------
 0.0.2:
