@@ -12,6 +12,10 @@ using SDLDotNet;
 
 	REVISION HISTORY
 
+	Mon 31 Mar 2003 23:28:02 EST LM
+	Changed namespace from SDLTTFDotNet
+	Now using singleton architecture
+
 	Tue 25 Mar 2003 18:18:27 EST LM
 	Changed all exception throws to use the Generate method.
 
@@ -19,14 +23,15 @@ using SDLDotNet;
 	There is currently a bug in mono which meant this class did not need an instance of SDL.
 	I have fixed this so it does not depend on that bug.
 */
-namespace SDLTTFDotNet
+namespace SDLDotNet.TTF
 {
 	public class Font
 	{
 		private IntPtr mFont; // Pointer to TTF_Font struct
 		private SDL mSDL;
+		private SDLTTF mSDLTTF;
 
-		const string TTF_DLL = "SDL_ttf.dll";
+		const string TTF_DLL = "SDL_ttf";
 
 		[DllImport(TTF_DLL)]
 		private static extern IntPtr TTF_OpenFont(string file, int ptsize);
@@ -111,14 +116,15 @@ namespace SDLTTFDotNet
 		[DllImport(TTF_DLL)]
 		private static extern void TTF_CloseFont(IntPtr font);
 
-		internal Font(SDL SDL, string Filename, int PointSize) {
-			mSDL = SDL;
+		public Font(string Filename, int PointSize) {
+			mSDLTTF = SDLTTF.Instance;
+			mSDL = SDL.Instance;
 			mFont = TTF_OpenFont(Filename, PointSize);
 			if (mFont == IntPtr.Zero) throw SDLTTFException.Generate();
 		}
 
-		internal Font(SDL SDL, IntPtr pFont) {
-			mSDL = SDL;
+		internal Font(IntPtr pFont) {
+			mSDL = SDL.Instance;
 			mFont = pFont;
 		}
 

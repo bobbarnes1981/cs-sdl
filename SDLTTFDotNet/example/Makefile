@@ -1,13 +1,13 @@
 TARGET = FontTest.exe
 SRCS = FontTest.cs
 CSCOMPILER = mcs
-TTFLIB = SDL-TTF.NET.dll
+TTFLIB = SDLDotNet.TTF.dll
 
 all: example
 
 example: $(SRCS)
 	ln -sf ../$(TTFLIB) .
-	$(CSCOMPILER) -g -out:$(TARGET) -r $(TTFLIB) -r SDL.NET.dll -r System.Drawing.dll $(SRCS)
+	$(CSCOMPILER) -out:$(TARGET) -r:$(TTFLIB) -r:SDL.NET.dll -r:System.Drawing.dll $(SRCS)
 
 clean:
 	rm -f $(TARGET)

@@ -1,6 +1,6 @@
 using System;
 using SDLDotNet;
-using SDLTTFDotNet;
+using SDLDotNet.TTF;
 
 namespace SDLTTFExamples
 {
@@ -70,18 +70,16 @@ namespace SDLTTFExamples
 
 		public void Run(string FontName, Style Style, int Size, string Text)
 		{
-			SDLTTF ttf;
 			Font font;
 
 			Console.WriteLine("Font\t{0}\nStyle\t{1}\nSize\t{2}\nText\t{3}\n", FontName, Style, Size, Text);
 
-			SDL sdl = new SDL(false);
+			SDL sdl = SDL.Instance;
 			sdl.Events.Quit += new QuitEventHandler(SDL_Quit);
 			sdl.Events.MouseButtonDown += new MouseButtonEventHandler(SDL_MouseButtonEvent);
 			sdl.Events.KeyboardDown += new KeyboardEventHandler(SDL_KeyboardDown);
 
-			ttf = new SDLTTF(sdl);
-			font = ttf.OpenFont(FontName, Size);
+			font = new Font(FontName, Size);
 			font.Style = Style;
 
 			try
