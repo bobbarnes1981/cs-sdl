@@ -361,16 +361,16 @@ namespace SdlDotNet.Sprites
 			}
 			return (this.CompareTo(obj) == 0);
 		}  
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <returns></returns>
-//		public override int GetHashCode()
-//		{
-//			return this.coordinates.X ^ this.coordinates.Y ^ this.coordinates.Z;
-//		}  
-//
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override int GetHashCode()
+		{
+			return this.coordinates.X ^ this.coordinates.Y ^ this.coordinates.Z;
+		}  
+
 //		/// <summary>
 //		/// 
 //		/// </summary>

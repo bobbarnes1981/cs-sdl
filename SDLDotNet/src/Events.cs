@@ -142,10 +142,10 @@ namespace SdlDotNet
 		/// Fires when the application gains or loses input focus
 		/// </summary>
 		public static event ActiveEventHandler InputFocus;
-//		/// <summary>
-//		/// Fires when a key is pressed or released
-//		/// </summary>
-//		public static event KeyboardEventHandler Keyboard;
+		/// <summary>
+		/// Fires when a key is pressed or released
+		/// </summary>
+		public static event KeyboardEventHandler Keyboard;
 		/// <summary>
 		/// Fires when a key is pressed
 		/// </summary>
