@@ -86,10 +86,10 @@ namespace SDLDotNet.TTF.Example
 			try
 			{
 				screen = sdl.Video.SetVideoModeWindow(640, 480, true); // Frame = true
-				sdl.WindowManager.Caption = "SDL TTF.NET test ";
+				sdl.WindowManager.Caption = "SDL.TTF.NET test ";
 				//screen.FillRect(new System.Drawing.Rectangle(0,0,100,100), System.Drawing.Color.Green);
 				screen.Flip();
-				text = font.RenderTextSolid(Text, Color.FromArgb(147, 112, 219, 0));
+				text = font.RenderTextSolid(Text, new SDLColor(147, 112, 219));
 				while (!mDone)
 				{
 					sdl.Events.WaitAndDelegate();
