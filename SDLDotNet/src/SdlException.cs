@@ -1,6 +1,7 @@
 /*
  * $RCSfile$
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,37 +19,43 @@
  */
 
 using System;
+using Tao.Sdl;
 
-namespace SDLDotNet {
+namespace SdlDotNet 
+{
 	/// <summary>
-	/// Represents a run-time error from the SDL library
+	/// Represents a run-time error from the Sdl library.
 	/// </summary>
-	public class SDLException : Exception {
+	public class SdlException : Exception 
+	{
 		/// <summary>
-		/// Initializes an SDLException instance
+		/// Initializes an SdlException instance
 		/// </summary>
-		/// <param name="msg">The string representing the error message</param>
-		public SDLException(string msg) : base(msg) {}
+		/// <param name="msg">
+		/// The string representing the error message
+		/// </param>
+		public SdlException(string msg) : base(msg) 
+		{
+		}
 
 		/// <summary>
-		/// Generates an SDLException based on the last SDL Error code
+		/// Generates an SdlException based on the last Sdl Error code.
 		/// </summary>
-		/// <returns>A new SDLException object</returns>
-		public static SDLException Generate() {
-			string msg = Natives.SDL_GetError();
+		/// <returns>
+		/// A new SdlException object
+		/// </returns>
+		public static SdlException Generate() 
+		{
+			string msg = Sdl.SDL_GetError();
 
 			if (msg.IndexOf("Surface was lost") == -1)
-				return new SDLException(msg);
+			{
+				return new SdlException(msg);
+			}
 			else
+			{
 				return new SurfaceLostException(msg);
+			}
 		}
-	}
-
-	/// <summary>
-	/// Represents an error resulting from a surface being lost, usually as a result of
-	/// the user changing the input focus away from a full-screen application
-	/// </summary>
-	public class SurfaceLostException : SDLException {
-		internal SurfaceLostException(string msg) : base(msg) {}
 	}
 }

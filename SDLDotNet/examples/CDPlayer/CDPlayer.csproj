@@ -3,24 +3,24 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{CE599D7B-DE7F-47A3-BF91-404BF471B685}"
+        ProjectGuid = "{A2F4A3FC-8B70-48F5-8416-D2CAC0BBE260}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "ImageExample"
+                AssemblyName = "CDPlayer"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
                 DefaultTargetSchema = "IE50"
                 DelaySign = "false"
                 OutputType = "WinExe"
-                PreBuildEvent = "xcopy /E /Y $(ProjectDir)\images\* $(TargetDir)\images\"
+                PreBuildEvent = ""
                 PostBuildEvent = ""
                 RootNamespace = "SdlDotNet.Examples"
                 RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = "SdlDotNet.Examples.ImageExample"
+                StartupObject = "SdlDotNet.Examples.CDPlayer"
             >
                 <Config
                     Name = "Debug"
@@ -70,9 +70,24 @@
                     HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.dll"
                 />
                 <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.Data.dll"
+                />
+                <Reference
                     Name = "System.Drawing"
                     AssemblyName = "System.Drawing"
                     HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.Drawing.dll"
+                />
+                <Reference
+                    Name = "System.Windows.Forms"
+                    AssemblyName = "System.Windows.Forms"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.Windows.Forms.dll"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                    HintPath = "..\..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.0.3705\System.XML.dll"
                 />
                 <Reference
                     Name = "SdlDotNet"
@@ -94,13 +109,13 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ImageExample.cs"
-                    SubType = "Code"
+                    RelPath = "CDPlayer.cs"
+                    SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ImageExample.resx"
-                    DependentUpon = "ImageExample.cs"
+                    RelPath = "CDPlayer.resx"
+                    DependentUpon = "CDPlayer.cs"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>

@@ -19,11 +19,10 @@
 
 using System;
 using System.Drawing;
-using SDLDotNet;
-using SDLDotNet.Image;
+using SdlDotNet;
+using Tao.Sdl;
 
-
-namespace SDLDotNet.Image.Example
+namespace SdlDotNet.Examples
 {
 	public class ImageExample
 	{
@@ -47,19 +46,21 @@ namespace SDLDotNet.Image.Example
 			Random rand = new Random();
 			string imagepath;
 
-			SDL sdl = SDL.Instance; // get SDL object
 
-			sdl.Events.KeyboardDown += new KeyboardEventHandler(this.SDL_KeyboardDown); // register event handlers
-			sdl.Events.MouseMotion += new MouseMotionEventHandler(this.SDL_MouseMotion);
-			
-			sdl.Events.Quit += new QuitEventHandler(this.SDL_Quit);
+//			sdl.Events.KeyboardDown += new KeyboardEventHandler(this.SDL_KeyboardDown); // register event handlers
+//			sdl.Events.MouseMotion += new MouseMotionEventHandler(this.SDL_MouseMotion);
+//			
+//			sdl.Events.Quit += new QuitEventHandler(this.SDL_Quit);
 
+			Video video = Video.Instance;
+			WindowManager wm = WindowManager.Instance;
 			try 
 			{
 
 				//Surface screen = sdl.Video.SetVideoMode(width, height); // set the video mode
-				Surface screen = sdl.Video.SetVideoModeWindow(width, height, true);
-				sdl.Video.HideMouseCursor(); // hide the cursor
+				Surface screen = video.SetVideoModeWindow(width, height, true);
+				wm.Caption = "Image Example";
+				//video.HideMouseCursor(); // hide the cursor
 
 				// create a surface to draw to...we cant draw rectangles directly to the hardware back buffer because
 				// different video cards have different numbers of back buffers that flip in sequence :(
@@ -68,17 +69,17 @@ namespace SDLDotNet.Image.Example
 
 				imagepath = @"images/";
 
-				SDLImage Background = new SDLImage(imagepath + "background.tga");
+				Image Background = new Image(imagepath + "background.tga");
 
-				SDLImage sdlimg = new SDLImage(imagepath +  "sdlimage.png");
-				sdlimg.AlphaFlags = Alpha.RLEAccel | Alpha.Source;
+				Image sdlimg = new Image(imagepath +  "sdlimage.png");
+				sdlimg.AlphaFlags = Alpha.SDL_RLEACCEL | Alpha.SDL_SRCALPHA;
 				sdlimg.AlphaValue = 100;
 
-				SDLImage Cursor = new SDLImage(imagepath +  "cursor.png");
+				Image Cursor = new Image(imagepath +  "cursor.png");
 				Cursor.Transparent = true;
 
 
-				SDLImageList Jeep = new SDLImageList();
+				ImageList Jeep = new ImageList();
 
 				for (int j = 1; j <= 16;j++) 
 				{
@@ -87,15 +88,15 @@ namespace SDLDotNet.Image.Example
 				}
 
 
-				SDLImageList ImageList = new SDLImageList();
+				ImageList ImageList = new ImageList();
 
 
-				SDLImage Tree = new SDLImage(imagepath + "Tree.bmp");
+				Image Tree = new Image(imagepath + "Tree.bmp");
 
 				Tree.TransparentColor = System.Drawing.Color.Magenta;
 				Tree.Transparent = true;
 
-				Tree.AlphaFlags = Alpha.RLEAccel | Alpha.Source;
+				Tree.AlphaFlags = Alpha.SDL_RLEACCEL | Alpha.SDL_SRCALPHA;
 				Tree.AlphaValue = 0;
 
 
@@ -103,7 +104,7 @@ namespace SDLDotNet.Image.Example
 
 				while (Continue) 
 				{
-					while (sdl.Events.PollAndDelegate()) {} // handle events till the queue is empty
+					//while (sdl.Events.PollAndDelegate()) {} // handle events till the queue is empty
 
 					try 
 					{
@@ -142,25 +143,25 @@ namespace SDLDotNet.Image.Example
 			} 
 			catch 
 			{
-				sdl.Dispose(); // quit sdl so the window goes away, then handle the error...
+				//sdl.Dispose(); // quit sdl so the window goes away, then handle the error...
 				throw; // for this example we'll just throw it to the debugger
 			}
 		}
 
 
-		/// <summary>
-		/// Response to keybord messages
-		/// </summary>
-		private void SDL_KeyboardDown(int device, bool down, int scancode, Key key, Mod mod) 
-		{
-			if (key == Key.K_ESCAPE || key == Key.K_q)	Continue = false;
-		}
-
-		public void SDL_MouseMotion(MouseButtonState state, int x, int y, int relx, int rely)
-		{
-			MousePos.X = x;
-			MousePos.Y = y;
-		}
+//		/// <summary>
+//		/// Response to keybord messages
+//		/// </summary>
+//		private void SDL_KeyboardDown(int device, bool down, int scancode, Sdl.SDLKey key, Mod mod) 
+//		{
+//			if (key == Key.K_ESCAPE || key == Key.K_q)	Continue = false;
+//		}
+//
+//		public void SDL_MouseMotion(MouseButtonState state, int x, int y, int relx, int rely)
+//		{
+//			MousePos.X = x;
+//			MousePos.Y = y;
+//		}
 
 
 		/// <summary>

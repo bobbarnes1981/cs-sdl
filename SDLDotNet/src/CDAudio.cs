@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -19,20 +20,34 @@
 
 using System;
 using System.Runtime.InteropServices;
+using Tao.Sdl;
 
-namespace SDLDotNet {
+namespace SdlDotNet {
 
 	/// <summary>
 	/// Contains methods for playing audio CDs.
-	/// Obtain an instance of this class by accessing the CDAudio property of the main SDL object
+	/// Obtain an instance of this class by accessing the CDAudio property of the main Sdl object
 	/// </summary>
 	/// <remarks>
 	/// Contains methods for playing audio CDs.
 	/// </remarks>
-	public class CDAudio {
-		internal CDAudio() {
-			if (Natives.SDL_InitSubSystem((int)Natives.Init.Cdrom) != 0)
-				throw SDLException.Generate();
+	public sealed class CDAudio {
+		static readonly CDAudio instance = new CDAudio();
+
+		CDAudio()
+		{
+		}
+
+		public static CDAudio Instance 
+		{
+			get
+			{
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_CDROM) != 0)
+				{
+					throw SdlException.Generate();
+				}
+				return instance;
+			}
 		}
 
 		/// <summary>
@@ -40,11 +55,14 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
-		public int NumDrives {
+		public int NumDrives 
+		{
 			get {
-				int ret = Natives.SDL_CDNumDrives();
+				int ret = Sdl.SDL_CDNumDrives();
 				if (ret == -1)
-					throw SDLException.Generate();
+				{
+					throw SdlException.Generate();
+				}
 				return ret;
 			}
 		}
@@ -58,9 +76,11 @@ namespace SDLDotNet {
 		/// Opens a CD-ROM drive for manipulation
 		/// </remarks>
 		public CDDrive OpenDrive(int index) {
-			IntPtr cd = Natives.SDL_CDOpen(index);
+			IntPtr cd = Sdl.SDL_CDOpen(index);
 			if (cd == IntPtr.Zero)
-				throw SDLException.Generate();
+			{
+				throw SdlException.Generate();
+			}
 			return new CDDrive(cd, index);
 		}
 
@@ -71,10 +91,13 @@ namespace SDLDotNet {
 		/// <returns>A platform-specific name, i.e. "D:\"</returns>
 		/// <remarks>
 		/// </remarks>
-		public string DriveName(int index) {
+		public string DriveName(int index) 
+		{
 			if (index < 0 || index >= NumDrives)
-				throw new SDLException("Device index out of range");
-			return Natives.SDL_CDName(index);
+			{
+				throw new SdlException("Device index out of range");
+			}
+			return Sdl.SDL_CDName(index);
 		}
 
 		/// <summary>
@@ -86,12 +109,9 @@ namespace SDLDotNet {
 		/// <param name="F">A reference to a variable to receive the number of leftover frames</param>
 		/// <remarks>
 		/// </remarks>
-		public static void FramesToMinSecFrames(int f, out int M, out int S, out int F) {
-			F = f % FramesPerSecond;
-			f /= FramesPerSecond;
-			S = f % 60;
-			f /= 60;
-			M = f;
+		public static void FramesToMinSecFrames(int f, out int M, out int S, out int F) 
+		{
+			Sdl.FRAMES_TO_MSF(f, out M, out S, out F);
 		}
 		/// <summary>
 		/// Converts minutes, seconds and frames into a frames value
@@ -102,14 +122,21 @@ namespace SDLDotNet {
 		/// <returns>The total number of frames</returns>
 		/// <remarks>
 		/// </remarks>
-		public static int MinSecFramesToFrames(int M, int S, int F) {
-			return (M * 60 * FramesPerSecond + S * FramesPerSecond + F);
+		public static int MinSecFramesToFrames(int M, int S, int F) 
+		{
+			return Sdl.MSF_TO_FRAMES(M, S, F);
 		}
 		/// <summary>
 		/// Gets a static value indicating the number of frames in a second (75)
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
-		public static int FramesPerSecond { get { return 75; } }
+		public static int FramesPerSecond 
+		{ 
+			get 
+			{ 
+				return Sdl.CD_FPS; 
+			} 
+		}
 	}
 }

@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -18,19 +19,19 @@
  */
 
 using System;
+using Tao.Sdl;
 
-namespace SDLDotNet.Mixer {
-	
+namespace SdlDotNet 
+{
 	/// <summary>
-	/// Represents a sound sample.
-	/// Create with Mixer.LoadWav().
+	/// Represents a music sample.  Music is generally longer than a sound effect sample,
+	/// however it can also be compressed e.g. by Ogg Vorbis
 	/// </summary>
-	/// <implements>System.IDisposable</implements>
-	public class Sample : IDisposable {
+	public class Music : IDisposable {
 		private IntPtr _handle;
 		private bool _disposed;
 
-		internal Sample(IntPtr handle) {
+		internal Music(IntPtr handle) {
 			_handle = handle;
 			_disposed = false;
 		}
@@ -42,29 +43,19 @@ namespace SDLDotNet.Mixer {
 		/// and perform other cleanup operations before the Object 
 		/// is reclaimed by garbage collection.
 		/// </summary>
-		~Sample() 
-		{
-			Natives.Mix_FreeChunk(_handle);
+		~Music() {
+			SdlMixer.Mix_FreeMusic(_handle);
 		}
 
 		/// <summary>
-		/// Destroys this Sample and frees the memory associated with it
+		/// Destroys this sample and frees the memory associated with it
 		/// </summary>
 		public void Dispose() {
 			if (!_disposed) {
 				_disposed = true;
-				Natives.Mix_FreeChunk(_handle);
+				SdlMixer.Mix_FreeMusic(_handle);
 				GC.SuppressFinalize(this);
 			}
-		}
-
-		/// <summary>
-		/// Sets the volume of the sample
-		/// </summary>
-		/// <param name="volume">New volume. Should be between 0 and 128 inclusive.</param>
-		public void SetVolume(int volume) {
-			if (Natives.Mix_VolumeChunk(_handle, volume) != 0)
-				throw SDLException.Generate();
 		}
 	}
 }
