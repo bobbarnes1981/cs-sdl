@@ -163,14 +163,14 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return new System.Drawing.Size(this.Width, this.Height);
+				return new System.Drawing.Size(this.movieInfo.width, this.movieInfo.height);
 			}
 		}
 
 		/// <summary>
 		/// Width of movie
 		/// </summary>
-		private int Width
+		public int Width
 		{
 			get
 			{
@@ -181,7 +181,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Height of movie
 		/// </summary>
-		private int Height
+		public int Height
 		{
 			get
 			{

@@ -29,14 +29,14 @@ namespace SdlDotNet
 	/// <summary>
 	/// Encapsulates the collection of SdlImage objects in an SdlImageList.
 	/// </summary>
-	public class ImageCollection : CollectionBase, ICollection
+	public class SurfaceCollection : CollectionBase, ICollection
 	{
 		private ArrayList data;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ImageCollection()
+		public SurfaceCollection()
 		{
 			data = new ArrayList();
 		}
@@ -44,26 +44,26 @@ namespace SdlDotNet
 		/// <summary>
 		/// Indexer for the Items in the Collection
 		/// </summary>
-		public Image this[int index] 
+		public Surface this[int index] 
 		{
 			get 
 			{ 
-				return (Image)List[index];	
+				return (Surface)List[index];	
 			}
 		}
 
 		/// <summary>
 		/// Adds the specified SdlImage to the end of the SdlImageList.
 		/// </summary>
-		/// <param name="image">
+		/// <param name="surface">
 		/// The SdlImage to be added to the end of the SdlImageList.
 		/// </param>
 		/// <returns>
 		/// The index at which the SdlImage has been added.
 		/// </returns>
-		public int Add(Image image)
+		public int Add(Surface surface)
 		{
-			return List.Add(image);
+			return List.Add(surface);
 		} 
 
 		/// <summary>
@@ -77,7 +77,7 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(string filename)
 		{
-			return List.Add(new Image(filename));
+			return List.Add(new Surface(filename));
 		} 
 
 
@@ -94,7 +94,7 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(byte[] array)
 		{
-			return List.Add(new Image(array));
+			return List.Add(new Surface(array));
 		} 
 
 		/// <summary>
@@ -108,48 +108,48 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(Bitmap bitmap)
 		{
-			return List.Add(new Image(bitmap));
+			return List.Add(new Surface(bitmap));
 		} 			
 
 		/// <summary>
 		/// Adds the specified SdlImage to the SdlImageList.
 		/// </summary>
 		/// <param name="index"></param>
-		/// <param name="image"></param>
-		public void Insert(int index, Image image)
+		/// <param name="surface"></param>
+		public void Insert(int index, Surface surface)
 		{
-			List.Insert(index,image);
+			List.Insert(index,surface);
 		} 
 
 		/// <summary>
 		/// Removes a specified SdlImage from the list.
 		/// </summary>
-		/// <param name="image">The SdlImage to remove from the SdlImageList. </param>
-		public void Remove(Image image)
+		/// <param name="surface">The SdlImage to remove from the SdlImageList. </param>
+		public void Remove(Surface surface)
 		{
-			List.Remove(image);
+			List.Remove(surface);
 		} 
 
 		/// <summary>
 		/// Returns the index of a specified SdlImage in the list.
 		/// </summary>
-		/// <param name="image">The image object</param>
-		/// <returns>The index of specified image in the list</returns>
-		public int IndexOf(Image image)
+		/// <param name="surface">The surface object</param>
+		/// <returns>The index of specified surface in the list</returns>
+		public int IndexOf(Surface surface)
 		{
-			return List.IndexOf(image);
+			return List.IndexOf(surface);
 		} 
 
 		/// <summary>
 		/// Indicates whether a specified SdlImage is contained in the list.
 		/// </summary>
-		/// <param name="image">The SdlImage to find in the list.</param>
+		/// <param name="surface">The SdlImage to find in the list.</param>
 		/// <returns>
 		/// true if the SdlImage is found in the list; otherwise, false.
 		/// </returns>
-		public bool Contains(Image image)
+		public bool Contains(Surface surface)
 		{
-			return List.Contains(image);
+			return List.Contains(surface);
 		} 
 
 		// Provide the explicit interface member for ICollection.

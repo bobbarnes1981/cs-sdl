@@ -130,7 +130,7 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		public static System.Drawing.Text.FontCollection GetSystemFonts()
+		public static System.Drawing.Text.FontCollection GetSystemFontNames()
 		{
 			return new System.Drawing.Text.InstalledFontCollection();
 		}

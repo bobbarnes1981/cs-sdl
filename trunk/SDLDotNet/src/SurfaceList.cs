@@ -29,29 +29,29 @@ namespace SdlDotNet
 	/// <summary>
 	/// Provides methods to manage a collection of SdlImage objects. 
 	/// </summary>
-	public class ImageList
+	public class SurfaceList
 	{
 		/// <summary>
 		/// Private field that holds ImageList.ImageCollection for this image list.
 		/// </summary>
-		private ImageCollection images;
+		private SurfaceCollection surfaces;
 
 		/// <summary>
 		/// Create a new instance of a SdlImageList
 		/// </summary>
-		public ImageList() 
+		public SurfaceList() 
 		{
-			images = new ImageCollection();
+			surfaces = new SurfaceCollection();
 		}
 
 		/// <summary>
 		/// Gets the ImageList.ImageCollection for this image list.
 		/// </summary>
-		public ImageCollection Images 
+		public SurfaceCollection Surfaces 
 		{
 			get 
 			{
-				return images;
+				return surfaces;
 			}
 		}
 	}
