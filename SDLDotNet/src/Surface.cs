@@ -702,7 +702,7 @@ namespace SdlDotNet
 					int pixelColorValue = pixelColor.Value;
 					//Console.WriteLine("bufp: " + pixelColor.Value.ToString());
 					IntPtr pixelColorValuePtr = 
-						new IntPtr(surface.pixels.ToInt32() + 2*(y*surface.pitch + 2*x));
+						new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
 					Marshal.WriteInt32(pixelColorValuePtr, pixelColorValue);
 				}
 				break;
