@@ -215,39 +215,6 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="JoystickExample" path="examples\\JoystickExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.JoystickExample" assemblyName="JoystickExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>JoystickExample.xml</XmlDocFile>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>JoystickExample.xml</XmlDocFile>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Files>
-		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>JoystickExample.cs</File>
-	    </Files>
-	</Project>
 	<Project name="CDPlayer" path="examples\\CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
