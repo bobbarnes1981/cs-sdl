@@ -362,12 +362,12 @@ namespace SdlDotNet {
 		/// An opaque object representing a user-defined event.
 		/// Will be passed back to the UserEvent handler delegate when this event is processed.</param>
 		public void PushUserEvent(object userEvent) {
-			Sdl.SDL_UserEvent sdlev;
+			Sdl.SDL_UserEvent sdlev = new Sdl.SDL_UserEvent();
 			sdlev.type = (byte)Sdl.SDL_USEREVENT;
 			lock (this) {
 				this.userEvents[userEventId] = userEvent;
-				userEventId++;
 				sdlev.code = userEventId;
+				userEventId++;
 			}
 			Sdl.SDL_Event evt = new Sdl.SDL_Event();
 			evt.user = sdlev;
@@ -523,7 +523,6 @@ namespace SdlDotNet {
 		{
 			if (JoystickHatMotion != null) 
 			{
-
 				JoystickHatMotion(sender, new JoystickHatEventArgs(ev.jhat.which, ev.jhat.hat, (int)ev.jhat.val));
 			}
 		}
@@ -647,14 +646,19 @@ namespace SdlDotNet {
 				Quit(sender, e);
 			}
 		}
-		private void DelegateUserEvent(object sender, ref Sdl.SDL_Event ev) {
-			if (UserEvent != null) {
+		private void DelegateUserEvent(object sender, ref Sdl.SDL_Event ev) 
+		{
+			if (UserEvent != null || ChannelFinished != null || MusicFinished != null) 
+			{
 				object ret;
-				lock (this) {
+				lock (this) 
+				{
 					ret = this.userEvents[ev.user.code];
 				}
-				if (ret != null) {
-					if (ret is ChannelFinishedEventArgs) {
+				if (ret != null) 
+				{
+					if (ret is ChannelFinishedEventArgs) 
+					{
 						if (ChannelFinished != null)
 						{
 							ChannelFinished(this, 
@@ -714,11 +718,13 @@ namespace SdlDotNet {
 			y = ev.button.y;
 		}
 
-		internal void NotifyChannelFinished(int channel) {
-			ChannelFinished(this, new ChannelFinishedEventArgs(channel));
+		internal void NotifyChannelFinished(int channel) 
+		{
+			PushUserEvent(new ChannelFinishedEventArgs(channel));
 		}
-		internal void NotifyMusicFinished() {
-			MusicFinished(this, new MusicFinishedEventArgs());
+		internal void NotifyMusicFinished() 
+		{
+			PushUserEvent(new MusicFinishedEventArgs());
 		}
 	}
 }

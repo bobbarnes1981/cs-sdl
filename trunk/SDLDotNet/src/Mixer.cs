@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Threading;
 using SdlDotNet;
 using Tao.Sdl;
 
@@ -83,8 +84,8 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Mixer
 	{
-		private SdlMixer.ChannelFinishedDelegate channelFinished;
-		private SdlMixer.MusicFinishedDelegate musicFinished;
+		private SdlMixer.ChannelFinishedDelegate channelFinishedDelegate;
+		private SdlMixer.MusicFinishedDelegate musicFinishedDelegate;
 		
 		byte distance ;
 
@@ -852,19 +853,21 @@ namespace SdlDotNet
 		/// </summary>
 		public void EnableMusicCallbacks() 
 		{
-			this.channelFinished = new SdlMixer.ChannelFinishedDelegate(this.ChannelFinished);
-			this.musicFinished = new SdlMixer.MusicFinishedDelegate(this.MusicFinished);
-			SdlMixer.Mix_ChannelFinished(channelFinished);
-			SdlMixer.Mix_HookMusicFinished(musicFinished);
+			this.channelFinishedDelegate = new SdlMixer.ChannelFinishedDelegate(this.ChannelFinished);
+			this.musicFinishedDelegate = new SdlMixer.MusicFinishedDelegate(this.MusicFinished);
+			SdlMixer.Mix_ChannelFinished(channelFinishedDelegate);
+			SdlMixer.Mix_HookMusicFinished(musicFinishedDelegate);
 		}
 
 		private void ChannelFinished(int channel) 
 		{
-			Events.Instance.NotifyChannelFinished(channel);
+				//Console.WriteLine("Channel");
+				Events.Instance.NotifyChannelFinished(channel);
 		}
 		private void MusicFinished() 
 		{
 			Events.Instance.NotifyMusicFinished();
 		}
 	}
+
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<project name="FontExample" default="build">
+<project name="PrimitivesExample" default="build">
     <target name="build">
-    	<property name="font.name" value="Vera.ttf" />
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
 	<echo message="Using '${nant.settings.currentframework}' Framework"/>
@@ -15,16 +14,6 @@
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${lib.dir}">
-		<include name="${native.sdl}.dll"/>
-	    </fileset>
-	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${nant.project.basedir}">
-		<include name="${font.name}"/>
-	    </fileset>
-	</copy>
 	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
 	    <sources failonempty="true">
 		<include name="*.cs" />
@@ -34,6 +23,7 @@
 		<include name="${native.sdl}.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
 	    </references>
+	    <arg value="/d:mono" if="${mono}" />
 	</csc>
     </target>
     <target name="clean">

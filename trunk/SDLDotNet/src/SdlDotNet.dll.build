@@ -6,18 +6,18 @@
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
 	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
-		<includes name="${native.sdl}.dll"/>
+		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
 	<!-- build SDL.NET -->
 	<csc target="library" warnaserror="true" unsafe="true" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
 	    <sources failonempty="true">
-		<includes name="**/*.cs" />
+		<include name="*.cs" />
 		<!-- task currently does not work on Mono and is temporarily included in the NAnt.Win32 assembly -->
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
-		<includes name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
-		<includes name="${native.sdl}.dll"/>
+		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+		<include name="${native.sdl}.dll"/>
 	    </references>
 	</csc>
     </target>
@@ -25,20 +25,20 @@
 	<delete dir="${bin.dir}" failonerror="false" />
 	<delete dir="${obj.dir}" failonerror="false" />
     </target>
-    <target name="doc">
+   <target name="doc">
 	<ndoc failonerror="true">
 	    <assemblies basedir="${nant.project.basedir}/${build.dir}">
-		<includes name="${nant.project.name}.dll" />
+		<include name="${nant.project.name}.dll" />
 	    </assemblies>
 	    <summaries basedir="${nant.project.basedir}/${build.dir}">
-		<includes name="${nant.project.name}.xml"/>
+		<include name="${nant.project.name}.xml"/>
 	    </summaries>
 
 	    <documenters>
 		<documenter name="MSDN">
 		    <property name="OutputDirectory" value="${nant.project.basedir}/${build.dir}/doc/" />
 		    <property name="HtmlHelpName" value="${nant.project.name}" />
-		    <property name="HtmlHelpCompilerFilename" value="${project.html-help.dir}\hhc.exe" />
+		    <!--<property name="HtmlHelpCompilerFilename" value="${project.html-help.dir}\hhc.exe" />-->
 		    <property name="IncludeFavorites" value="False" />
 		    <property name="Title" value="${nant.project.name} SDK Documentation - v.${project.version}" />
 		    <property name="SplitTOCs" value="False" />
@@ -55,12 +55,13 @@
 		    <property name="DocumentProtected" value="True" />
 		    <property name="DocumentEmptyNamespaces" value="False" />
 		    <property name="IncludeAssemblyVersion" value="False" />
-		    <property name="CopyrightText" value="Copyright (C) 2003 David Hudson" />
+		    <property name="CopyrightText" value="Copyright (C) 2004 David Hudson" />
 		    <property name="CopyrightHref" value="http://cs-sdl.sourceforge.net" />
 		</documenter>
 	    </documenters>
 	</ndoc>
-    </target>
+    </target> 
+
     <target name="schema">
 	<!-- generate schema -->
 	<nantschema output="${nant.project.basedir}/${build.dir}/${nant.project.name}.xsd" target-ns="http://cs-sdl.sourceforge.net/schema/${nant.project.name}.xsd"/>

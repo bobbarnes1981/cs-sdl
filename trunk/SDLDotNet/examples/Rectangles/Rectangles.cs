@@ -52,10 +52,14 @@ namespace SdlDotNet.Examples {
 				new KeyboardEventHandler(this.KeyboardDown); 
 			events.Quit += new QuitEventHandler(this.Quit);
 			events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
+			events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);
 
 			try {
 				Music music = mixer.LoadMusic(musicFile);
+				//Music music = mixer.LoadMusic("test.wav");
 				mixer.PlayMusic(music, 1);
+				//Sample sample = mixer.LoadWav("test.wav");
+				//mixer.PlaySample(1, sample, 0);
 				// set the video mode
 				Surface screen = video.SetVideoModeWindow(width, height, true); 
 				wm.Caption = "Rectangles Example";
@@ -120,10 +124,14 @@ namespace SdlDotNet.Examples {
 			Rectangles rectangles = new Rectangles();
 			rectangles.Run();
 		}
+		private void ChannelFinished(object sender, ChannelFinishedEventArgs e)
+		{
+			Console.WriteLine("channel: " + e.Channel.ToString());
+			Console.WriteLine("Channel Finished");
+		}
 		private void MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
 			Console.WriteLine("Music Finished");
-
 		}
 	}
 }
