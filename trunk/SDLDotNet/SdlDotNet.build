@@ -7,8 +7,7 @@
     buildrelease: builds release versions of libraries and examples.
     doc: creates docs.
     schema: creates XML schema.
-    packagedefault: creates release zip file for default framework.
-    package: creates release zip file for .NET and Mono. Must have both frameworks installed.
+    package: creates release zip file for .NET and Mono.
 
     you can combine targets easily. If .NET is your default framework but you want to compile 
     against Mono (mcs) you can use the command:
@@ -20,7 +19,7 @@
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
     <property name="project.version" value="2.1.0" />
-    <property name="release.version" value="1" />
+    <property name="release.version" value="2" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
     <property name="examples.dir" value="examples" />
@@ -209,11 +208,11 @@
 
 		<!--Start "Exclude VS.Net stuff" -->
 		<exclude name="*.suo" />
-		<exclude name="*.sln" />
-		<exclude name="*.cmbx" />
+		<!-- <exclude name="*.sln" /> -->
+		<!-- <exclude name="*.cmbx" /> -->
 		<exclude name="*j.user" />
-		<exclude name="**/*.csproj" />
-		<exclude name="**/*.prjx" />
+		<!-- <exclude name="**/*.csproj" />  -->
+		<!-- <exclude name="**/*.prjx" />  -->
 		<exclude name="obj/*" />
 		<exclude name="${src.dir}/${bin.dir}/*" />
 		<exclude name="doc/*" />
