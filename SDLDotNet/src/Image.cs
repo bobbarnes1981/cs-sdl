@@ -78,12 +78,12 @@ namespace SdlDotNet
 		/// int SDL_RLEACCEL = 0X00004000
 		/// int SDL_SRCALPHA = 0x00010000
 		/// </summary>
-		private Alpha alphaflags;
+		private Alphas alphaFlags;
 
 		/// <summary>
 		/// Private field. Used by the AlphaValue property 
 		/// </summary>
-		private byte alphavalue;
+		private byte alphaValue;
 
 		/// <summary>
 		/// Create a SdlImage instance from a diskfile
@@ -102,10 +102,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Create a SdlImage instance from a byte array in memory.
 		/// </summary>
-		/// <param name="arr">A array of byte that shold the image data</param>
-		public Image(byte[] arr)
+		/// <param name="array">A array of byte that shold the image data</param>
+		public Image(byte[] array)
 		{
-			IntPtr pSurface = SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(arr, arr.Length), 1);
+			IntPtr pSurface = SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw ImageException.Generate();
@@ -230,16 +230,16 @@ namespace SdlDotNet
 		/// <summary>
 		/// Get/set the Alpha flags of the image.
 		/// </summary>
-		public Alpha AlphaFlags
+		public Alphas AlphaFlags
 		{
 			get 
 			{
-				return alphaflags;
+				return alphaFlags;
 			}
 			set	
 			{
-				alphaflags = value;
-				surface.SetAlpha(alphaflags,alphavalue);
+				alphaFlags = value;
+				surface.SetAlpha(alphaFlags,alphaValue);
 			}
 		}
 
@@ -252,40 +252,40 @@ namespace SdlDotNet
 		{
 			get 
 			{
-				return alphavalue;
+				return alphaValue;
 			}
 			set	
 			{
-				alphavalue = value;
-				surface.SetAlpha(alphaflags,alphavalue);
+				alphaValue = value;
+				surface.SetAlpha(alphaFlags,alphaValue);
 			}
 		}
 
 		/// <summary>
 		/// Draws the image on a Sdl.Surface.
 		/// </summary>
-		/// <param name="dest">The Sdl.Surface to draw the image upon</param>
-		/// <param name="destrect">
+		/// <param name="destSurface">The Sdl.Surface to draw the image upon</param>
+		/// <param name="destRectangle">
 		/// The position of the image on the destination surface
 		/// </param>
-		public void Draw(Surface dest, Rectangle destrect) 
+		public void Draw(Surface destSurface, Rectangle destRectangle) 
 		{
-			surface.Blit(dest,destrect);
+			surface.Blit(destSurface,destRectangle);
 		}
 
 		/// <summary>
 		/// Draws the image on a Sdl.Surface.
 		/// </summary>
-		/// <param name="srcrect">
+		/// <param name="sourceRectangle">
 		/// The area of the image that is to be drawn on the destination surface
 		/// </param>
-		/// <param name="dest">The Sdl.Surface to draw the image upon</param>
-		/// <param name="destrect">
+		/// <param name="destSurface">The Sdl.Surface to draw the image upon</param>
+		/// <param name="destRectangle">
 		/// The position of the image on the destination surface
 		/// </param>
-		public void Draw(Rectangle srcrect, Surface dest, Rectangle destrect) 
+		public void Draw(Rectangle sourceRectangle, Surface destSurface, Rectangle destRectangle) 
 		{
-			surface.Blit(srcrect,dest,destrect);
+			surface.Blit(sourceRectangle,destSurface,destRectangle);
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace SdlDotNet
 	/// All the functionality of the Sdl library is available through this 
 	/// class and its properties.
 	/// </summary>
-	internal sealed class SdlCore : IDisposable 
+	public sealed class SdlCore : IDisposable 
 	{
 		private bool disposed;
 
@@ -49,6 +49,9 @@ namespace SdlDotNet
 			disposed = false;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SdlCore Instance
 		{
 			get

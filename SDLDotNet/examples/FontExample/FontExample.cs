@@ -52,8 +52,8 @@ namespace SdlDotNet.Examples
 			Ttf ttf = Ttf.Instance;
 			Events events = Events.Instance;
 
-			events.KeyboardDown += new KeyboardEventHandler(SDL_KeyboardDown);
-			events.Quit += new QuitEventHandler(this.SDL_Quit);
+			events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
+			events.Quit += new QuitEventHandler(this.Quit);
 
 			font = new Font(FontName, Size);
 			Surface screen = video.SetVideoModeWindow(width, height, true); 
@@ -62,7 +62,7 @@ namespace SdlDotNet.Examples
 
 			Surface surf = screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
-			surf.FillRect(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+			surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 
 			while (!quitFlag) 
 			{
@@ -72,7 +72,7 @@ namespace SdlDotNet.Examples
 				}
 				try
 				{
-					font.Style = (Style)styleArray[rand.Next(styleArray.Length)];
+					font.Style = (Styles)styleArray[rand.Next(styleArray.Length)];
 					text = font.RenderTextSolid(
 						textArray[rand.Next(textArray.Length)], 
 						new Sdl.SDL_Color((byte)rand.Next(255), 
@@ -97,7 +97,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void SDL_KeyboardDown(
+		private void KeyboardDown(
+			object sender, 
+			EventArgs e,
 			int device,
 			bool down, 
 			int scancode, 
@@ -111,7 +113,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void SDL_Quit() 
+		private void Quit(object sender, EventArgs e) 
 		{
 			quitFlag  = true;
 		}

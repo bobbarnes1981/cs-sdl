@@ -31,29 +31,29 @@ namespace SdlDotNet
 		/// <summary>
 		/// Unsigned 8-bit
 		/// </summary>
-		U8 = Sdl.AUDIO_U8,
+		Unsigned8 = Sdl.AUDIO_U8,
 		/// <summary>
 		/// Signed 8-bit
 		/// </summary>
-		S8 = Sdl.AUDIO_S8,
+		Signed8 = Sdl.AUDIO_S8,
 		/// <summary>
 		/// Unsigned 16-bit, little-endian
 		/// </summary>
-		U16LSB = Sdl.AUDIO_U16LSB,
+		Unsigned16Little = Sdl.AUDIO_U16LSB,
 		/// <summary>
 		/// Signed 16-bit, little-endian
 		/// </summary>
-		S16LSB = Sdl.AUDIO_S16LSB,
+		Signed16Little = Sdl.AUDIO_S16LSB,
 		/// <summary>
 		/// Unsigned 16-bit, big-endian
 		/// </summary>
-		U16MSB = Sdl.AUDIO_U16MSB,
+		Unsigned16Big = Sdl.AUDIO_U16MSB,
 		/// <summary>
 		/// Signed 16-bit, big-endian
 		/// </summary>
-		S16MSB = Sdl.AUDIO_S16MSB,
+		Signed16Big = Sdl.AUDIO_S16MSB,
 		/// <summary>
-		/// Default, equal to S16LSB
+		/// Default, equal to Signed16Little
 		/// </summary>
 		Default = Sdl.AUDIO_S16LSB
 	}
@@ -81,10 +81,12 @@ namespace SdlDotNet
 	/// You can obtain an instance of this class by accessing the 
 	/// Mixer property of the main Sdl object.
 	/// </summary>
-	public sealed class Mixer {
+	public sealed class Mixer
+	{
 		//private static SdlMixer.ChannelFinishedDelegate _channelfin;
 		//private static SdlMixer.MusicFinishedDelegate _musicfin;
 		Events events = Events.Instance;
+		byte _distance ;
 
 		static readonly Mixer instance = new Mixer();
 
@@ -140,10 +142,10 @@ namespace SdlDotNet
 		/// The number of channels to allocate.  
 		/// You will not be able to mix more than this number of samples.
 		/// </param>
-		/// <param name="chunksize">The chunk size for samples</param>
-		public void Open(int frequency, AudioFormat format, int channels, int chunksize) {
+		/// <param name="chunkSize">The chunk size for samples</param>
+		public void Open(int frequency, AudioFormat format, int channels, int chunkSize) {
 			PrivateClose();
-			PrivateOpen(frequency, format, channels, chunksize);
+			PrivateOpen(frequency, format, channels, chunkSize);
 		}
 
 		private static void PrivateOpen() {
@@ -161,7 +163,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="file">The filename to load</param>
 		/// <returns>A new Sample object</returns>
-		public Sample LoadWAV(string file) {
+		public Sample LoadWav(string file) {
 			IntPtr p = SdlMixer.Mix_LoadWAV_RW(Sdl.SDL_RWFromFile(file, "rb"), 1);
 			if (p == IntPtr.Zero)
 				throw SdlException.Generate();
@@ -172,7 +174,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="data">The data to load</param>
 		/// <returns>A new Sample object</returns>
-		public Sample LoadWAV(byte[] data) 
+		public Sample LoadWav(byte[] data) 
 		{
 			IntPtr p = SdlMixer.Mix_LoadWAV_RW(Sdl.SDL_RWFromMem(data, data.Length), 1);
 			if (p == IntPtr.Zero)
@@ -593,12 +595,19 @@ namespace SdlDotNet
 		/// Sets the distance (attenuate sounds based on distance 
 		/// from listener) for all channels
 		/// </summary>
-		/// <param name="distance">Distance value from 0-255 inclusive</param>
-		public void SetDistance(int distance) 
+		public byte Distance 
 		{
-			if (SdlMixer.Mix_SetDistance(-1, (byte)distance) == 0)
+			set
 			{
-				throw SdlException.Generate();
+				if (SdlMixer.Mix_SetDistance(-1, value) == 0)
+				{
+					throw SdlException.Generate();
+				}
+				_distance = value;
+			}
+			get
+			{
+				return _distance;
 			}
 		}
 		/// <summary>
@@ -691,12 +700,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Plays a music sample
 		/// </summary>
-		/// <param name="mus">The sample to play</param>
-		/// <param name="numtimes">The number of times to play. 
+		/// <param name="music">The sample to play</param>
+		/// <param name="numberOfTimes">The number of times to play. 
 		/// Specify 1 to play a single time, -1 to loop forever.</param>
-		public void PlayMusic(Music mus, int numtimes) 
+		public void PlayMusic(Music music, int numberOfTimes) 
 		{
-			if (SdlMixer.Mix_PlayMusic(mus.GetHandle(), numtimes) != 0)
+			if (SdlMixer.Mix_PlayMusic(music.GetHandle(), numberOfTimes) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -704,13 +713,13 @@ namespace SdlDotNet
 		/// <summary>
 		/// Plays a music sample and fades it in
 		/// </summary>
-		/// <param name="mus">The sample to play</param>
-		/// <param name="numtimes">The number of times to play. 
+		/// <param name="music">The sample to play</param>
+		/// <param name="numberOfTimes">The number of times to play. 
 		/// Specify 1 to play a single time, -1 to loop forever.</param>
-		/// <param name="ms">The number of milliseconds to fade in for</param>
-		public void FadeInMusic(Music mus, int numtimes, int ms) 
+		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
+		public void FadeInMusic(Music music, int numberOfTimes, int milliseconds) 
 		{
-			if (SdlMixer.Mix_FadeInMusic(mus.GetHandle(), numtimes, ms) != 0)
+			if (SdlMixer.Mix_FadeInMusic(music.GetHandle(), numberOfTimes, milliseconds) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -719,17 +728,19 @@ namespace SdlDotNet
 		/// Plays a music sample, starting from a specific 
 		/// position and fades it in
 		/// </summary>
-		/// <param name="mus">The sample to play</param>
-		/// <param name="numtimes">The number of times to play.
+		/// <param name="music">The sample to play</param>
+		/// <param name="numberOfTimes">The number of times to play.
 		///  Specify 1 to play a single time, -1 to loop forever.</param>
-		/// <param name="ms">The number of milliseconds to fade in for
+		/// <param name="milliseconds">The number of milliseconds to fade in for
 		/// </param>
 		/// <param name="position">A format-defined position value. 
 		/// For Ogg Vorbis, this is the number of seconds from the
 		///  beginning of the song</param>
-		public void FadeInMusicPosition(Music mus, int numtimes, int ms, double position) 
+		public void FadeInMusicPosition(Music music, int numberOfTimes, 
+			int milliseconds, double position) 
 		{
-			if (SdlMixer.Mix_FadeInMusicPos(mus.GetHandle(), numtimes, ms, position) != 0)
+			if (SdlMixer.Mix_FadeInMusicPos(music.GetHandle(), 
+				numberOfTimes, milliseconds, position) != 0)
 			{
 				throw SdlException.Generate();
 			}

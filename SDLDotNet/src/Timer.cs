@@ -23,26 +23,41 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for Util.
+	/// Summary description for Timer.
 	/// </summary>
-	public class Util
+	public class Timer
 	{
+		static readonly Timer instance = new Timer();
+
+		Timer()
+		{
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
-		public Util()
+		public static Timer Instance 
 		{
-			//
-			// TODO: Add constructor logic here
-			//
+			get
+			{
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_TIMER) != 0)
+				{
+					throw SdlException.Generate();
+				}
+				return instance;
+			}
 		}
+
 		/// <summary>
 		/// Gets the number of ticks since Sdl was initialized.  
 		/// This is not a high-resolution timer.
 		/// </summary>
-		public int GetTicks() 
+		public int Ticks 
 		{
-			return Sdl.SDL_GetTicks();
+			get
+			{
+				return Sdl.SDL_GetTicks();
+			}
 		}
 
 		/// <summary>

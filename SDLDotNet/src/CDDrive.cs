@@ -28,7 +28,8 @@ namespace SdlDotNet {
 	/// <summary>
 	/// Represents a CD-ROM drive on the system
 	/// </summary>
-	public class CDDrive : IDisposable {
+	public class CDDrive : IDisposable 
+	{
 		private bool _disposed;
 		private IntPtr _handle;
 		private int _index;
@@ -51,7 +52,6 @@ namespace SdlDotNet {
 		/// </summary>
 		~CDDrive() 
 		{
-			_handle = IntPtr.Zero;
 			Sdl.SDL_CDClose(_handle);
 		}
 
@@ -62,6 +62,7 @@ namespace SdlDotNet {
 			if (!_disposed) {
 				_disposed = true;
 				Sdl.SDL_CDClose(_handle);
+				GC.KeepAlive(this);
 				_handle = IntPtr.Zero;
 				GC.SuppressFinalize(this);
 			}
@@ -93,7 +94,9 @@ namespace SdlDotNet {
 		{
 			get 
 			{ 
-				return (Sdl.CDstatus)Sdl.SDL_CDStatus(_handle); 
+				Sdl.CDstatus status = Sdl.SDL_CDStatus(_handle);
+				GC.KeepAlive(this);
+				return (status); 
 			}
 		}
 
@@ -122,10 +125,13 @@ namespace SdlDotNet {
 		/// <summary>
 		/// Plays the tracks on a CD in the drive
 		/// </summary>
-		/// <param name="starttrack">The starting track to play (numbered 0-99)</param>
-		/// <param name="numtracks">The number of tracks to play</param>
-		public void PlayTracks(int starttrack, int numtracks) {
-			if (Sdl.SDL_CDPlayTracks(_handle, starttrack, 0, numtracks, 0) == -1)
+		/// <param name="startTrack">The starting track to play (numbered 0-99)</param>
+		/// <param name="numberOfTracks">The number of tracks to play</param>
+		public void PlayTracks(int startTrack, int numberOfTracks) 
+		{
+			int result = Sdl.SDL_CDPlayTracks(_handle, startTrack, 0, numberOfTracks, 0);
+			GC.KeepAlive(this);
+			if (result== -1)
 			{
 				throw SdlException.Generate();
 			}
@@ -134,12 +140,15 @@ namespace SdlDotNet {
 		/// <summary>
 		/// Plays the tracks on a CD in the drive
 		/// </summary>
-		/// <param name="starttrack">The starting track to play (numbered 0-99)</param>
-		/// <param name="startframe">The frame (75th of a second increment) offset from the starting track to play from</param>
-		/// <param name="numtracks">The number of tracks to play</param>
-		/// <param name="numframes">The frame (75th of a second increment) offset after the last track to stop playing after</param>
-		public void PlayTracks(int starttrack, int startframe, int numtracks, int numframes) {
-			if (Sdl.SDL_CDPlayTracks(_handle, starttrack, startframe, numtracks, numframes) == -1)
+		/// <param name="startTrack">The starting track to play (numbered 0-99)</param>
+		/// <param name="startFrame">The frame (75th of a second increment) offset from the starting track to play from</param>
+		/// <param name="numberOfTracks">The number of tracks to play</param>
+		/// <param name="numberOfFrames">The frame (75th of a second increment) offset after the last track to stop playing after</param>
+		public void PlayTracks(int startTrack, int startFrame, int numberOfTracks, int numberOfFrames) 
+		{
+			int result = Sdl.SDL_CDPlayTracks(_handle, startTrack, startFrame, numberOfTracks, numberOfFrames);
+			GC.KeepAlive(this);
+			if (result== -1)
 			{
 				throw SdlException.Generate();
 			}
@@ -151,7 +160,9 @@ namespace SdlDotNet {
 		/// <param name="startTrack"></param>
 		public void PlayTracks(int startTrack)
 		{
-			if (Sdl.SDL_CDPlayTracks(_handle, startTrack, 0, 0, 0) == -1)
+			int result = Sdl.SDL_CDPlayTracks(_handle, startTrack, 0, 0, 0);
+			GC.KeepAlive(this);
+			if (result== -1)
 			{
 				throw SdlException.Generate();
 			}
@@ -162,7 +173,9 @@ namespace SdlDotNet {
 		/// </summary>
 		public void Play()
 		{
-			if (Sdl.SDL_CDPlayTracks(_handle, 0, 0, 0, 0) == -1)
+			int result = Sdl.SDL_CDPlayTracks(_handle, 0, 0, 0, 0);
+			GC.KeepAlive(this);
+			if (result == -1)
 			{
 				throw SdlException.Generate();
 			}
@@ -173,7 +186,9 @@ namespace SdlDotNet {
 		/// </summary>
 		public void Pause() 
 		{
-			if (Sdl.SDL_CDPause(_handle) == -1)
+			int result = Sdl.SDL_CDPause(_handle);
+			GC.KeepAlive(this);
+			if (result == -1)
 			{
 				throw SdlException.Generate();
 			}
@@ -183,7 +198,9 @@ namespace SdlDotNet {
 		/// </summary>
 		public void Resume() 
 		{
-			if (Sdl.SDL_CDResume(_handle) == -1)
+			int result = Sdl.SDL_CDResume(_handle);
+			GC.KeepAlive(this);
+			if (result == -1)
 			{
 				throw SdlException.Generate();
 			}
@@ -193,10 +210,13 @@ namespace SdlDotNet {
 		/// </summary>
 		public void Stop() 
 		{
-			if (Sdl.SDL_CDStop(_handle) == -1)
+			int result = Sdl.SDL_CDStop(_handle);
+			GC.KeepAlive(this);
+			if ( result == -1)
 			{
 				throw SdlException.Generate();
 			}
+
 		}
 		/// <summary>
 		/// Ejects this drive
@@ -204,6 +224,7 @@ namespace SdlDotNet {
 		public void Eject() 
 		{
 			int result = Sdl.SDL_CDEject(_handle);
+			GC.KeepAlive(this);
 			if ( result == -1)
 			{
 				throw SdlException.Generate();
@@ -213,13 +234,14 @@ namespace SdlDotNet {
 		/// <summary>
 		/// Gets the number of tracks in the currently inserted CD
 		/// </summary>
-		public int NumTracks 
+		public int NumberOfTracks 
 		{
 			get 
 			{
-				if (Sdl.CD_INDRIVE(Sdl.SDL_CDStatus(_handle)) ==1)
+				int result = Sdl.CD_INDRIVE(this.Status);
+				GC.KeepAlive(this);
+				if (result == 1)
 				{
-					Sdl.CDstatus cdStatus = Sdl.SDL_CDStatus(_handle);
 					Sdl.SDL_CD cd = 
 						(Sdl.SDL_CD)Marshal.PtrToStructure(_handle, typeof(Sdl.SDL_CD));
 					return cd.numtracks;
@@ -239,8 +261,10 @@ namespace SdlDotNet {
 			get 
 			{
 				Sdl.SDL_CDStatus(_handle);
+				GC.KeepAlive(this);
 				Sdl.SDL_CD cd = 
 					(Sdl.SDL_CD)Marshal.PtrToStructure(_handle, typeof(Sdl.SDL_CD));
+				
 				return cd.cur_track;
 			}
 		}
@@ -252,6 +276,7 @@ namespace SdlDotNet {
 			get 
 			{
 				Sdl.SDL_CDStatus(_handle);
+				GC.KeepAlive(this);
 				Sdl.SDL_CD cd = 
 					(Sdl.SDL_CD)Marshal.PtrToStructure(_handle, typeof(Sdl.SDL_CD));
 				return cd.cur_frame;

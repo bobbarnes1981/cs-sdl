@@ -20,6 +20,9 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -32,7 +35,8 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCompany("The SDL.NET Project")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("David Hudson")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
+[assembly: AssemblyVersion("2.0.0")]
 [assembly: AssemblyCulture("")]		
 
 //
@@ -45,8 +49,6 @@ using System.Runtime.CompilerServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-
-[assembly: AssemblyVersion("2.0.*")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
@@ -73,7 +75,11 @@ using System.Runtime.CompilerServices;
 //   (*) Delay Signing is an advanced option - see the Microsoft .NET Framework
 //       documentation for more information on this.
 //
-[assembly: CLSCompliantAttribute(true)]
+[assembly: CLSCompliant(true)]
+[assembly: ComVisible(false)]
+[assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.Execution)]
+[assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
+[assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("..\\..\\..\\SdlDotNet.keys")]
+[assembly: AssemblyKeyFile("..\\..\\SdlDotNet.snk")]
 [assembly: AssemblyKeyName("")]

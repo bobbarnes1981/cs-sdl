@@ -56,22 +56,24 @@ namespace SdlDotNet
 	/// <summary>
 	/// Font Class
 	/// </summary>
-	public class Font
+	public class Font : IDisposable
 	{
 		private IntPtr fontPtr; // Pointer to Ttf_Font struct
 		private Ttf ttf;
 		private Video video;
+		private bool _disposed;
 	
 		/// <summary>
 		/// Font Constructor
 		/// </summary>
-		/// <param name="Filename"></param>
-		/// <param name="PointSize"></param>
-		public Font(string Filename, int PointSize) 
+		/// <param name="filename"></param>
+		/// <param name="pointSize"></param>
+		public Font(string filename, int pointSize) 
 		{
+			_disposed = false;
 			ttf = Ttf.Instance;
 			video = Video.Instance;
-			fontPtr = SdlTtf.TTF_OpenFont(Filename, PointSize);
+			fontPtr = SdlTtf.TTF_OpenFont(filename, pointSize);
 			if (fontPtr == IntPtr.Zero) 
 			{
 				throw TtfException.Generate();
@@ -80,7 +82,21 @@ namespace SdlDotNet
 
 		internal Font(IntPtr pFont) 
 		{
+			_disposed = false;
 			fontPtr = pFont;
+		}
+
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		public void Dispose() 
+		{
+			if (!_disposed) 
+			{
+				_disposed = true;
+				//Sdl.SDL_FreeSurface(ref _surfacePtr);
+				GC.SuppressFinalize(this);
+			}
 		}
 
 		// Possibly add Bold/Italic/Underline properties
@@ -88,15 +104,18 @@ namespace SdlDotNet
 		/// <summary>
 		/// Style Property
 		/// </summary>
-		public Style Style 
+		public Styles Style 
 		{
 			set 
 			{ 
 				SdlTtf.TTF_SetFontStyle(fontPtr, (int) value); 
+				GC.KeepAlive(this);
 			}
 			get 
 			{ 
-				return (Style) SdlTtf.TTF_GetFontStyle(fontPtr); 
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(fontPtr);
+				GC.KeepAlive(this);
+				return style; 
 			}
 		}
 
@@ -107,7 +126,9 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				return SdlTtf.TTF_FontHeight(fontPtr); 
+				int result = SdlTtf.TTF_FontHeight(fontPtr);
+				GC.KeepAlive(this);
+				return result; 
 			}
 		}
 
@@ -118,7 +139,9 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				return SdlTtf.TTF_FontAscent(fontPtr); 
+				int result = SdlTtf.TTF_FontAscent(fontPtr);
+				GC.KeepAlive(this);
+				return result;
 			}
 		}
 
@@ -129,33 +152,38 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				return SdlTtf.TTF_FontLineSkip(fontPtr); 
+				int result = SdlTtf.TTF_FontLineSkip(fontPtr); 
+				GC.KeepAlive(this);
+				return result;
 			}
 		}
 
 		/// <summary>
 		/// Size
 		/// </summary>
-		/// <param name="Text"></param>
+		/// <param name="textItem"></param>
 		/// <returns></returns>
-		public Size SizeText(string Text) 
+		public Size SizeText(string textItem) 
 		{
-			int Width, Height;
+			int width;
+			int height;
 
-			SdlTtf.TTF_SizeUNICODE(fontPtr, Text, out Width, out Height);
-			return new Size(Width, Height);
+			SdlTtf.TTF_SizeUNICODE(fontPtr, textItem, out width, out height);
+			GC.KeepAlive(this);
+			return new Size(width, height);
 		}
 
 		/// <summary>
 		/// Render Text to Solid
 		/// </summary>
-		/// <param name="Text"></param>
+		/// <param name="textItem"></param>
 		/// <param name="color"></param>
 		/// <returns></returns>
-		public Surface RenderTextSolid(string Text, Sdl.SDL_Color color) 
+		public Surface RenderTextSolid(string textItem, Sdl.SDL_Color color) 
 		{
 			IntPtr pSurface;
-			pSurface = SdlTtf.TTF_RenderUNICODE_Solid(fontPtr, Text, color);
+			pSurface = SdlTtf.TTF_RenderUNICODE_Solid(fontPtr, textItem, color);
+			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw TtfException.Generate();
@@ -167,33 +195,34 @@ namespace SdlDotNet
 		/// This is a utility function for rendering and blitting text
 		/// It's only really useful for one-off text
 		/// </summary>
-		/// <param name="Text"></param>
+		/// <param name="textItem"></param>
 		/// <param name="color"></param>
-		/// <param name="DestSurface"></param>
-		/// <param name="X"></param>
-		/// <param name="Y"></param>
-		public void RenderTextSolid(string Text, Sdl.SDL_Color color, Surface DestSurface, int X, int Y) 
+		/// <param name="destSurface"></param>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		public void RenderTextSolid(string textItem, Sdl.SDL_Color color, Surface destSurface, int x, int y) 
 		{
-			Surface FontSurface;
-			System.Drawing.Rectangle DestRect;
+			Surface fontSurface;
+			System.Drawing.Rectangle destRectangle;
 
-			FontSurface = RenderTextSolid(Text, color);
-			DestRect = new System.Drawing.Rectangle(new System.Drawing.Point(X, Y), FontSurface.Size);
-			FontSurface.Blit(DestSurface, DestRect);
+			fontSurface = RenderTextSolid(textItem, color);
+			destRectangle = new System.Drawing.Rectangle(new System.Drawing.Point(x, y), fontSurface.Size);
+			fontSurface.Blit(destSurface, destRectangle);
 		}
 
 		/// <summary>
 		/// Shade text
 		/// </summary>
-		/// <param name="Text"></param>
-		/// <param name="FG"></param>
-		/// <param name="BG"></param>
+		/// <param name="textItem"></param>
+		/// <param name="backgroundColor"></param>
+		/// <param name="foregroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderTextShaded(string Text, Sdl.SDL_Color FG, Sdl.SDL_Color BG) 
+		public Surface RenderTextShaded(string textItem, Sdl.SDL_Color foregroundColor, Sdl.SDL_Color backgroundColor) 
 		{
 			IntPtr pSurface;
 
-			pSurface = SdlTtf.TTF_RenderUNICODE_Shaded(fontPtr, Text, FG, BG);
+			pSurface = SdlTtf.TTF_RenderUNICODE_Shaded(fontPtr, textItem, foregroundColor, backgroundColor);
+			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw TtfException.Generate();
@@ -204,14 +233,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// Blended Text
 		/// </summary>
-		/// <param name="Text"></param>
-		/// <param name="FG"></param>
+		/// <param name="foregroundColor"></param>
+		/// <param name="textItem"></param>
 		/// <returns></returns>
-		public Surface RenderTextBlended(string Text, Sdl.SDL_Color FG) 
+		public Surface RenderTextBlended(string textItem, Sdl.SDL_Color foregroundColor) 
 		{
 			IntPtr pSurface;
 
-			pSurface = SdlTtf.TTF_RenderUNICODE_Blended(fontPtr, Text, FG);
+			pSurface = SdlTtf.TTF_RenderUNICODE_Blended(fontPtr, textItem, foregroundColor);
+			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw TtfException.Generate();
@@ -222,14 +252,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// Render Glyphs as Solid
 		/// </summary>
-		/// <param name="Character"></param>
-		/// <param name="FG"></param>
+		/// <param name="character"></param>
+		/// <param name="foregroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderGlyphSolid(short Character, Sdl.SDL_Color FG) 
+		public Surface RenderGlyphSolid(short character, Sdl.SDL_Color foregroundColor) 
 		{
 			IntPtr pSurface;
 
-			pSurface = SdlTtf.TTF_RenderGlyph_Solid(fontPtr, Character, FG);
+			pSurface = SdlTtf.TTF_RenderGlyph_Solid(fontPtr, character, foregroundColor);
+			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw TtfException.Generate();
@@ -240,15 +271,18 @@ namespace SdlDotNet
 		/// <summary>
 		/// Shade Glyphs
 		/// </summary>
-		/// <param name="Character"></param>
-		/// <param name="FG"></param>
-		/// <param name="BG"></param>
+		/// <param name="character"></param>
+		/// <param name="foregroundColor"></param>
+		/// <param name="backgroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderGlyphShaded(short Character, Sdl.SDL_Color FG, Sdl.SDL_Color BG) 
+		public Surface RenderGlyphShaded(short character, 
+			Sdl.SDL_Color foregroundColor, Sdl.SDL_Color backgroundColor) 
 		{
 			IntPtr pSurface;
 
-			pSurface = SdlTtf.TTF_RenderGlyph_Shaded(fontPtr, Character, FG, BG);
+			pSurface = SdlTtf.TTF_RenderGlyph_Shaded(
+				fontPtr, character, foregroundColor, backgroundColor);
+			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw TtfException.Generate();
@@ -259,14 +293,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// Blend glyphs
 		/// </summary>
-		/// <param name="Character"></param>
-		/// <param name="FG"></param>
+		/// <param name="character"></param>
+		/// <param name="foregroundColor"></param>
 		/// <returns></returns>
-		public Surface RenderGlyphBlended(short Character, Sdl.SDL_Color FG) 
+		public Surface RenderGlyphBlended(short character, Sdl.SDL_Color foregroundColor) 
 		{
 			IntPtr pSurface;
 
-			pSurface = SdlTtf.TTF_RenderGlyph_Blended(fontPtr, Character, FG);
+			pSurface = SdlTtf.TTF_RenderGlyph_Blended(fontPtr, character, foregroundColor);
+			GC.KeepAlive(this);
 			if (pSurface == IntPtr.Zero) 
 			{
 				throw TtfException.Generate();

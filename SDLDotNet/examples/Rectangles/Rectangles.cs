@@ -49,8 +49,8 @@ namespace SdlDotNet.Examples {
 			Events events = Events.Instance;
 			
 			events.KeyboardDown += 
-				new KeyboardEventHandler(this.SDL_KeyboardDown); 
-			events.Quit += new QuitEventHandler(this.SDL_Quit);
+				new KeyboardEventHandler(this.KeyboardDown); 
+			events.Quit += new QuitEventHandler(this.Quit);
 
 			try {
 				Music music = mixer.LoadMusic(musicFile);
@@ -63,7 +63,7 @@ namespace SdlDotNet.Examples {
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
 				//fill the surface with black
-				surf.FillRect(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+				surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 
 				while (!quitFlag) 
 				{
@@ -74,7 +74,7 @@ namespace SdlDotNet.Examples {
 					
 					try 
 					{
-						surf.FillRect(new Rectangle(rand.Next(-300, width), rand.Next(-300, height), rand.Next(20, 300), rand.Next(20, 300)),
+						surf.FillRectangle(new Rectangle(rand.Next(-300, width), rand.Next(-300, height), rand.Next(20, 300), rand.Next(20, 300)),
 						Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
 						surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
 						screen.Flip();
@@ -94,7 +94,9 @@ namespace SdlDotNet.Examples {
 			}
 		}
 
-		private void SDL_KeyboardDown(
+		private void KeyboardDown(
+			object sender,
+			EventArgs e,
 			int device,
 			bool down, 
 			int scancode, 
@@ -107,7 +109,7 @@ namespace SdlDotNet.Examples {
 			}
 		}
 
-		private void SDL_Quit() 
+		private void Quit(object sender, EventArgs e) 
 		{
 			quitFlag = true;
 		}

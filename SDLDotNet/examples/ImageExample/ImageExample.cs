@@ -54,10 +54,10 @@ namespace SdlDotNet.Examples
 			Events events = Events.Instance;
 			
 			events.KeyboardDown += 
-				new KeyboardEventHandler(this.SDL_KeyboardDown); 
-			events.Quit += new QuitEventHandler(this.SDL_Quit);
+				new KeyboardEventHandler(this.KeyboardDown); 
+			events.Quit += new QuitEventHandler(this.Quit);
 			events.MouseMotion += 
-				new MouseMotionEventHandler(this.SDL_MouseMotion);
+				new MouseMotionEventHandler(this.MouseMotion);
 			try 
 			{
 				Surface screen = video.SetVideoModeWindow(width, height, true);
@@ -66,7 +66,7 @@ namespace SdlDotNet.Examples
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
-				surf.FillRect(new Rectangle(new Point(0, 0), 
+				surf.FillRectangle(new Rectangle(new Point(0, 0), 
 					surf.Size), System.Drawing.Color.Black); 
 
 				imagepath = @"images/";
@@ -74,7 +74,7 @@ namespace SdlDotNet.Examples
 				Image Background = new Image(imagepath + "background.tga");
 
 				Image sdlimg = new Image(imagepath +  "sdlimage.png");
-				sdlimg.AlphaFlags = Alpha.SDL_RLEACCEL | Alpha.SDL_SRCALPHA;
+				sdlimg.AlphaFlags = Alphas.RleEncoded| Alphas.SourceAlphaBlending;
 				sdlimg.AlphaValue = 100;
 
 				Image Cursor = new Image(imagepath +  "cursor.png");
@@ -96,7 +96,7 @@ namespace SdlDotNet.Examples
 				Tree.TransparentColor = System.Drawing.Color.Magenta;
 				Tree.Transparent = true;
 
-				Tree.AlphaFlags = Alpha.SDL_RLEACCEL | Alpha.SDL_SRCALPHA;
+				Tree.AlphaFlags = Alphas.RleEncoded | Alphas.SourceAlphaBlending;
 				Tree.AlphaValue = 0;
 
 				int JeepFrame = 0;
@@ -154,7 +154,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		public void SDL_MouseMotion(
+		public void MouseMotion(
+			object sender, 
+			EventArgs e,
 			MouseButtonState state, 
 			int x, 
 			int y, 
@@ -165,7 +167,9 @@ namespace SdlDotNet.Examples
 			MousePos.Y = y;
 		}
 
-		private void SDL_KeyboardDown(
+		private void KeyboardDown(
+			object sender, 
+			EventArgs e,
 			int device,
 			bool down, 
 			int scancode, 
@@ -182,7 +186,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Quits the application
 		/// </summary>
-		private void SDL_Quit() 
+		private void Quit(object sender, EventArgs e) 
 		{
 			quitFlag = true;
 		}

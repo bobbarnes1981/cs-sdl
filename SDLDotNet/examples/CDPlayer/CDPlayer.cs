@@ -52,7 +52,7 @@ namespace SdlDotNet.Examples {
 
 			try {
 				_cd = CDAudio.Instance;
-				int num = _cd.NumDrives;
+				int num = _cd.NumberOfDrives;
 				_drive = _cd.OpenDrive(0);
 				for (int i = 0; i < num; i++)
 					comboBoxDrive.Items.Add(_cd.DriveName(i));
@@ -233,7 +233,7 @@ namespace SdlDotNet.Examples {
 		private void buttonPlay_Click(object sender, System.EventArgs e) {
 			try {
 				if (_drive != null)
-					_drive.PlayTracks(_track, _drive.NumTracks - _track);
+					_drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
 			} catch (SdlException ex) {
 				HandleError(ex);
 			}
@@ -285,7 +285,7 @@ namespace SdlDotNet.Examples {
 		private void buttonNext_Click(object sender, System.EventArgs e) {
 			try {
 				if (_drive != null) {
-					if (_track != _drive.NumTracks - 1)
+					if (_track != _drive.NumberOfTracks - 1)
 						_track++;
 					buttonPlay_Click(null, null);
 				}

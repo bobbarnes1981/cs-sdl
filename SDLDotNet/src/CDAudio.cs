@@ -23,10 +23,193 @@ using System.Runtime.InteropServices;
 using Tao.Sdl;
 
 namespace SdlDotNet {
+	/// <summary>
+	/// 
+	/// </summary>
+	public struct CDFrames
+	{
+		int _frames;
+		int _minutes;
+		int _seconds;
+		int _framesLeftover;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="frames">
+		/// The number of frames to convert</param>
+		public CDFrames(int frames)
+		{
+			_frames = frames;
+			_minutes = 0;
+			_seconds = 0;
+			_framesLeftover = 0;
+			this.FramesToTime(frames);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="minutes">
+		/// A reference to a variable to receive the number of minutes
+		/// </param>
+		/// <param name="seconds">
+		/// A reference to a variable to receive the number of seconds
+		/// </param>
+		public CDFrames(int minutes, int seconds) : this(minutes, seconds, 0)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="minutes">
+		/// A reference to a variable to receive the number of minutes
+		/// </param>
+		/// <param name="seconds">
+		/// A reference to a variable to receive the number of seconds
+		/// </param>
+		/// <param name="framesLeftover">
+		/// A reference to a variable to receive the number of leftover frames
+		/// </param>
+		public CDFrames(int minutes, int seconds, int framesLeftover)
+		{
+			_frames = 0;
+			_minutes = minutes;
+			_seconds = seconds;
+			_framesLeftover = framesLeftover;
+			_frames = this.TimeToFrames(minutes, seconds, _framesLeftover);
+		}
+
+		/// <summary>
+		/// Converts frames (75th of a second) to minutes, 
+		/// seconds and leftover frames
+		/// </summary>
+		/// <param name="frames">
+		/// The number of frames to convert</param>
+		private void FramesToTime(int frames) 
+		{
+			int minutes;
+			int seconds;
+			int framesLeftover;
+
+			Sdl.FRAMES_TO_MSF(
+				frames, out minutes, out seconds, out framesLeftover);
+			this.Minutes = minutes;
+			this.Seconds = seconds;
+			this.FramesLeftover = framesLeftover;
+		}
+
+		/// <summary>
+		/// Converts minutes, seconds and frames into a frames value
+		/// </summary>
+		/// <param name="minutes">The number of minutes to convert</param>
+		/// <param name="seconds">The number of seconds to convert</param>
+		/// <param name="framesLeftover">The number of frames to convert</param>
+		/// <returns>The total number of frames</returns>
+		public int TimeToFrames(
+			int minutes, int seconds, int framesLeftover) 
+		{
+			return Sdl.MSF_TO_FRAMES(minutes, seconds, framesLeftover);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Minutes
+		{
+			get
+			{
+				return _minutes;
+			}
+			set
+			{
+				if (value >= 0)
+				{
+					_minutes = value;
+					this.TimeToFrames(value, _seconds, _framesLeftover);
+				}
+			}
+
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Seconds
+		{
+			get
+			{
+				return _seconds;
+			}
+			set 
+			{
+				if (value >= 0)
+				{
+					_seconds = value;
+					_frames = this.TimeToFrames(_minutes, value, _framesLeftover);
+					this.FramesToTime(_frames);
+				}
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int FramesLeftover
+		{
+			get
+			{
+				return _framesLeftover;
+			}
+			set
+			{
+				if (value >=0)
+				{
+					_framesLeftover = value;
+					_frames = this.TimeToFrames(_minutes, _seconds, value);
+					this.FramesToTime(_frames);
+				}
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Frames
+		{
+			get
+			{
+				return _frames;
+			}
+			set
+			{
+				if (value >=0)
+				{
+					_frames = value;
+					this.FramesToTime(value);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets a static value indicating the number of frames in a second (75)
+		/// </summary>
+		/// <remarks>
+		/// </remarks>
+		public static int FramesPerSecond 
+		{ 
+			get 
+			{ 
+				return Sdl.CD_FPS; 
+			} 
+		}
+	}
 
 	/// <summary>
 	/// Contains methods for playing audio CDs.
-	/// Obtain an instance of this class by accessing the CDAudio property of the main Sdl object
+	/// Obtain an instance of this class by accessing 
+	/// the CDAudio property of the main Sdl object
 	/// </summary>
 	/// <remarks>
 	/// Contains methods for playing audio CDs.
@@ -58,7 +241,7 @@ namespace SdlDotNet {
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
-		public int NumDrives 
+		public int NumberOfDrives 
 		{
 			get {
 				int ret = Sdl.SDL_CDNumDrives();
@@ -73,8 +256,12 @@ namespace SdlDotNet {
 		/// <summary>
 		/// Opens a CD-ROM drive for manipulation
 		/// </summary>
-		/// <param name="index">The number of the drive to open, from 0 - CDAudio.NumDrives</param>
-		/// <returns>The CDDrive object representing the CD-ROM drive</returns>
+		/// <param name="index">
+		/// The number of the drive to open, from 0 - CDAudio.NumDrives
+		/// </param>
+		/// <returns>
+		/// The CDDrive object representing the CD-ROM drive
+		/// </returns>
 		/// <remarks>
 		/// Opens a CD-ROM drive for manipulation
 		/// </remarks>
@@ -96,50 +283,11 @@ namespace SdlDotNet {
 		/// </remarks>
 		public string DriveName(int index) 
 		{
-			if (index < 0 || index >= NumDrives)
+			if (index < 0 || index >= NumberOfDrives)
 			{
 				throw new SdlException("Device index out of range");
 			}
 			return Sdl.SDL_CDName(index);
-		}
-
-		/// <summary>
-		/// Converts frames (75th of a second) to minutes, seconds and leftover frames
-		/// </summary>
-		/// <param name="f">The number of frames to convert</param>
-		/// <param name="M">A reference to a variable to receive the number of minutes</param>
-		/// <param name="S">A reference to a variable to receive the number of seconds</param>
-		/// <param name="F">A reference to a variable to receive the number of leftover frames</param>
-		/// <remarks>
-		/// </remarks>
-		public static void FramesToMinSecFrames(int f, out int M, out int S, out int F) 
-		{
-			Sdl.FRAMES_TO_MSF(f, out M, out S, out F);
-		}
-		/// <summary>
-		/// Converts minutes, seconds and frames into a frames value
-		/// </summary>
-		/// <param name="M">The number of minutes to convert</param>
-		/// <param name="S">The number of seconds to convert</param>
-		/// <param name="F">The number of frames to convert</param>
-		/// <returns>The total number of frames</returns>
-		/// <remarks>
-		/// </remarks>
-		public static int MinSecFramesToFrames(int M, int S, int F) 
-		{
-			return Sdl.MSF_TO_FRAMES(M, S, F);
-		}
-		/// <summary>
-		/// Gets a static value indicating the number of frames in a second (75)
-		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		public static int FramesPerSecond 
-		{ 
-			get 
-			{ 
-				return Sdl.CD_FPS; 
-			} 
 		}
 	}
 }

@@ -41,6 +41,7 @@ namespace SdlDotNet
 
 		internal IntPtr GetHandle() 
 		{ 
+			GC.KeepAlive(this);
 			return _handle; 
 		}
 
@@ -63,20 +64,31 @@ namespace SdlDotNet
 			{
 				_disposed = true;
 				SdlMixer.Mix_FreeChunk(_handle);
+				GC.KeepAlive(this);
 				GC.SuppressFinalize(this);
 			}
 		}
 
 		/// <summary>
-		/// Sets the volume of the sample
+		/// Gets/Set the volume of the sample. Should be between 0 and 128 inclusive.
 		/// </summary>
-		/// <param name="volume">New volume. Should be between 0 and 128 inclusive.</param>
-		public void SetVolume(int volume) 
+		public int Volume
 		{
-			if (SdlMixer.Mix_VolumeChunk(_handle, volume) != 0)
+			get
 			{
-				throw SdlException.Generate();
+				int result = SdlMixer.Mix_VolumeChunk(_handle, -1);
+				GC.KeepAlive(this);
+				return result;
 			}
+			set
+			{
+				if (value >= 0 && value <= SdlMixer.MIX_MAX_VOLUME)
+				{
+					int result = SdlMixer.Mix_VolumeChunk(_handle, value);
+				}
+				GC.KeepAlive(this);
+			}
+
 		}
 	}
 }
