@@ -661,13 +661,12 @@ namespace SdlDotNet {
 					{
 						if (ChannelFinished != null)
 						{
-							ChannelFinished(this, 
-								new ChannelFinishedEventArgs(((ChannelFinishedEventArgs)ret).Channel));
+							ChannelFinished(this, (ChannelFinishedEventArgs)ret);
 						}
 					} else if (ret is MusicFinishedEventArgs) {
 						if (MusicFinished != null)
 						{
-							MusicFinished(this, new MusicFinishedEventArgs());
+							MusicFinished(this, (MusicFinishedEventArgs)ret);
 						}
 					} else
 						UserEvent(sender, new UserEventArgs(ret));
