@@ -1,6 +1,6 @@
 /*****************************************************************************
  * (c) The CsGL Project, 2003
- *     http://www.sourceforge.net/projects/csgl
+ *     http://sourceforge.net/projects/cs-sdl
  * 
  *     Author(s) : Jakub Florczyk <kuba@osw.pl>
  ****************************************************************************/
