@@ -26,60 +26,6 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Specifies an audio format to mix audio in
-	/// </summary>
-	public enum AudioFormat
-	{
-		/// <summary>
-		/// Unsigned 8-bit
-		/// </summary>
-		Unsigned8 = Sdl.AUDIO_U8,
-		/// <summary>
-		/// Signed 8-bit
-		/// </summary>
-		Signed8 = Sdl.AUDIO_S8,
-		/// <summary>
-		/// Unsigned 16-bit, little-endian
-		/// </summary>
-		Unsigned16Little = Sdl.AUDIO_U16LSB,
-		/// <summary>
-		/// Signed 16-bit, little-endian
-		/// </summary>
-		Signed16Little = Sdl.AUDIO_S16LSB,
-		/// <summary>
-		/// Unsigned 16-bit, big-endian
-		/// </summary>
-		Unsigned16Big = Sdl.AUDIO_U16MSB,
-		/// <summary>
-		/// Signed 16-bit, big-endian
-		/// </summary>
-		Signed16Big = Sdl.AUDIO_S16MSB,
-		/// <summary>
-		/// Default, equal to Signed16Little
-		/// </summary>
-		Default = Sdl.AUDIO_S16LSB
-	}
-
-	/// <summary>
-	/// Indicates the current fading status of a sample
-	/// </summary>
-	public enum FadingStatus
-	{
-		/// <summary>
-		/// Sample is not fading
-		/// </summary>
-		NoFading = SdlMixer.MIX_NO_FADING,
-		/// <summary>
-		/// Sample is fading out
-		/// </summary>
-		FadingOut = SdlMixer.MIX_FADING_OUT,
-		/// <summary>
-		/// Sample is fading in
-		/// </summary>
-		FadingIn = SdlMixer.MIX_FADING_IN
-	}
-
-	/// <summary>
 	/// Provides methods to access the sound system.
 	/// You can obtain an instance of this class by accessing the 
 	/// Mixer property of the main Sdl object.
@@ -123,10 +69,14 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Initialize()
 		{
-			if (Sdl.SDL_Init(Sdl.SDL_INIT_AUDIO) != (int) SdlFlag.Success)
+			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) & Sdl.SDL_INIT_AUDIO) 
+				!= (int) SdlFlag.TrueValue)
 			{
-				throw SdlException.Generate();
-			}	
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_AUDIO) != (int) SdlFlag.Success)
+				{
+					throw SdlException.Generate();
+				}	
+			}
 			Mixer.PrivateOpen();
 		}
 
