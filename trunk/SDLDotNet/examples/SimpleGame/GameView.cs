@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 		Rectangle[] mapRectangles;
 		ArrayList backSprites;
 		ArrayList frontSprites;
-		Sample sample;
+		Sound sound;
 		/// <summary>
 		/// constructor
 		/// </summary>
@@ -52,7 +52,7 @@ namespace SdlDotNet.Examples
 			this.names = Names.Instance;
 			this.backSprites = new ArrayList();
 			this.frontSprites = new ArrayList();
-			this.sample = Mixer.LoadWav("../../boing.wav");
+			this.sound = Mixer.Sound("../../boing.wav");
 		}
 
 		/// <summary>
@@ -146,7 +146,7 @@ namespace SdlDotNet.Examples
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
 			this.entitySprite.CenterX = sectSprite.CenterX;
 			this.entitySprite.CenterY = sectSprite.CenterY;
-			Mixer.PlaySample(this.sample);
+			Mixer.PlaySample(this.sound);
 		}
 
 		/// <summary>

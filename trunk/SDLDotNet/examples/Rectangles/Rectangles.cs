@@ -68,7 +68,7 @@ namespace SdlDotNet.Examples
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
 				WindowManager.Caption = "Rectangles Example";
 				Video.HideMouseCursor();
-				Mixer.EnableMusicCallbacks();
+				Mixer.EnableMusicFinishedCallback();
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
