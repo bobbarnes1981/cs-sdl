@@ -1,3 +1,15 @@
+2.0.0b1
+David Hudson 5 Nov 2004
+* Added Gears example that uses OpenGL.
+* Finished adding all functionality that existed in 1.5.x.
+Including:
+Surface.DrawPixel
+Surface.GetPixel
+Surface.FlipVertical
+* Added Timer.Delay
+* Added PixelsExample which uses the Draw/Get pixel methods.
+* Modified FontExample to use FlipVertical
+
 2.0.0a2:
 David Hudson 3 Nov 2004
 * Ran FXCop against SDL.NET and fixed a huge amount of issues that make SDL.NET more .NET "compliant".

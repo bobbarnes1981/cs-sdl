@@ -88,13 +88,13 @@ gacutil installation.
 
 Sijmen Mulder
 - Horizontal flipping 
-- GetPixel/SetPixel better worked out 
+- GetPixel/SetPixel better worked out **DONE**
 - Image rotation 
 - Primitive drawing (circle/line/rectangle) 
 - NO animations and stuff, an engine, not a layer is ment for that 
 - Things like Lock() and Unlock() should become a property 
 - SDL.Instance.Video.... too much to type  **DONE**
-- Multiple windows. Really. Then I will make a Managed DirectDraw implementation 
+- Multiple windows. Really. Then I will make a Managed DirectDraw implementation
 - More .NET like things, so instead of SDL.Instance.Video.LoadBMP(filename), new Surface(filename) **DONE** 
 - SDL_image integration. Surface myimage = new Surface("image.PNG"); should become possible **DONE**
 

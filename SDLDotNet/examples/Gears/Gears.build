@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="CDPlayer" default="build">
+<project name="Gears" default="build">
     <target name="build">
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
@@ -14,6 +14,11 @@
 		<includes name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${nant.project.basedir}">
+		<includes name="Tao.OpenGL.dll"/>
+	    </fileset>
+	</copy>
 	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
 	    <sources failonempty="true">
 		<includes name="**/*.cs" />
@@ -21,9 +26,10 @@
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<includes name="${project.name}.dll"/>
 		<includes name="${native.sdl}.dll"/>
+		<includes name="Tao.OpenGL.dll"/>
 		<includes name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
-		<includes name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Windows.Forms.dll"/>
 	    </references>
+	    <arg value="/d:mono" if="${mono}" />
 	</csc>
     </target>
     <target name="clean">

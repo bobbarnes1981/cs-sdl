@@ -19,7 +19,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="2.0.0a2" />
+    <property name="project.version" value="2.0.0b1" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
@@ -60,6 +60,8 @@
 	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="clean" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/Gears/Gears.build" target="clean" />
     </target>
 
     <!--run this target to create a mono build -->
@@ -100,6 +102,8 @@
 	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="build" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
+	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="build" />
+	<nant buildfile="${examples.dir}/Gears/Gears.build" target="build" />
     </target>
 
     <target name="buildrelease" depends="clean, setrelease, examples" description="Build all Release assemblies">
@@ -138,6 +142,7 @@
 	    <fileset>
 		<includes name="src/**" />
 		<includes name="examples/**" />
+		<includes name="lib/**" />
 		<includes name="*" />
 
 		<!--Start "Exclude VS.Net stuff" -->
@@ -175,6 +180,7 @@
 	    <fileset basedir="${bin.dir}">
 		<includes name="${project.zip-path}/bin/**" />
 		<includes name="${project.zip-path}/doc/**" />
+		<includes name="${project.zip-path}/lib/**" />
 		<includes name="${project.zip-path}/src/**" />
 		<includes name="${project.zip-path}/examples/**" />
 		<includes name="${project.zip-path}/*" />	
