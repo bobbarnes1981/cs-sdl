@@ -55,6 +55,7 @@ namespace SdlDotNet {
 		{
 			return Sdl.SDL_NumJoysticks();
 		}
+
 		/// <summary>
 		/// Creates a joystick object to read information about a joystick
 		/// </summary>

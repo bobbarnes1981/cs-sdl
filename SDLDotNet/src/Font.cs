@@ -1,5 +1,6 @@
 /*
  * $RCSfile$
+ * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Lucas Maloney
  *
  * This library is free software; you can redistribute it and/or
@@ -60,36 +61,7 @@ namespace SdlDotNet
 		private IntPtr fontPtr; // Pointer to Ttf_Font struct
 		private Ttf ttf;
 		private Video video;
-
-/* TODO: This one will be tricky.  
-		Possibly split into 3 properties - GlyphMinSize, GlyphMaxSize and GlyphAdvance.
-		Or make a struct of these 5 values: GlyphMetrics
-
-		[DllImport(Ttf_DLL)]
-		private static extern int Ttf_GlyphMetrics(IntPtr font, UInt16 ch,
-				     out int minx, out int maxx, out int miny, out int maxy, out int advance);
-*/
-
-
-/*
-		// Going by the Sdl_ttf source, all the Size functions always return 0.
-		[DllImport(Ttf_DLL)]
-		private static extern int Ttf_SizeText(IntPtr font, string text, out int w, out int h);
-
-		[DllImport(Ttf_DLL)]
-		private static extern int Ttf_SizeUTF8(IntPtr font, string text, out int w, out int h);
-*/
-		
-		// Rendering functions
-/*
-		[DllImport(Ttf_DLL)]
-		private static extern IntPtr Ttf_RenderText_Solid(IntPtr font, string text, Color fg);
-
-		[DllImport(Ttf_DLL)]
-		private static extern IntPtr Ttf_RenderUTF8_Solid(IntPtr font, string text, Color fg);
-*/
 	
-
 		/// <summary>
 		/// Font Constructor
 		/// </summary>

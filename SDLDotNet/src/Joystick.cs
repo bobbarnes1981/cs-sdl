@@ -23,7 +23,6 @@ using Tao.Sdl;
 
 namespace SdlDotNet 
 {
-
 	/// <summary>
 	/// Represents a joystick on the system
 	/// </summary>
@@ -71,6 +70,7 @@ namespace SdlDotNet
 				return Sdl.SDL_JoystickIndex(_handle); 
 			}
 		}
+
 		/// <summary>
 		/// Gets the number of axes on this joystick (usually 2 for each stick handle)
 		/// </summary>
@@ -81,6 +81,7 @@ namespace SdlDotNet
 				return Sdl.SDL_JoystickNumAxes(_handle); 
 			}
 		}
+
 		/// <summary>
 		/// Gets the number of trackballs on this joystick
 		/// </summary>
@@ -91,6 +92,7 @@ namespace SdlDotNet
 				return Sdl.SDL_JoystickNumBalls(_handle); 
 			}
 		}
+
 		/// <summary>
 		/// Gets the number of hats on this joystick
 		/// </summary>
@@ -101,6 +103,7 @@ namespace SdlDotNet
 				return Sdl.SDL_JoystickNumHats(_handle); 
 			}
 		}
+
 		/// <summary>
 		/// Gets the number of buttons on this joystick
 		/// </summary>
