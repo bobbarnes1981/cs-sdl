@@ -8,3 +8,4 @@ build
 .project
 SdlDotNet.suo
 SdlDotNet.FxCop
+*.cmbx

@@ -2,3 +2,4 @@ bin
 obj
 FontTest.csproj.user
 FontExample.csproj.user
+*.prjx

@@ -1,3 +1,4 @@
 obj
 bin
 PrimitivesExample.csproj.user
+*.prjx
