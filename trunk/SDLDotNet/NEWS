@@ -1,5 +1,10 @@
+2.0.0
+David Hudson 21 Nov 2004
+* Final Release.
+* Minor changes to docs.
+
 2.0.0b2
-David Hudson 5 Nov 2004
+David Hudson 16 Nov 2004
 * Reworked all of the Dispose() methods to fix memory leak problems (hopefully).
 * Fixed MusicFinshed and ChannelFinshed delegates.
 
