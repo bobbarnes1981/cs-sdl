@@ -23,7 +23,7 @@ using System.Drawing;
 namespace SdlDotNet.Utility
 {
 	/// <summary>
-	/// Extends the Vector2 class with a third dimension, Z.
+	/// Class with coordinates in three dimensions.
 	/// </summary>
 	public class Vector
 	{
@@ -86,7 +86,6 @@ namespace SdlDotNet.Utility
 		/// </summary>
 		/// <param name="v"></param>
 		/// <param name="z"></param>
-		//public Vector(Vector2 v, int z)
 		public Vector(Point v, int z)
 		{
 			this.x = v.X;
