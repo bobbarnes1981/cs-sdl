@@ -3,6 +3,10 @@ using System.Runtime.InteropServices;
 using SDLDotNet;
 /*
 	REVISION HISTORY
+
+	Tue 25 Mar 2003 17:50:09 EST LM
+	Added error check to TTF_Init call.  It will return -1 if there was a problem.
+
 	Mon 24 Mar 2003 20:45:40 EST LM
 	There is currently a bug in mono which meant this class did not need an instance of SDL.
 	I have fixed this so it does not depend on that bug.
@@ -30,7 +34,8 @@ namespace SDLTTFDotNet
 
 		public SDLTTF(SDL SDL) {
 			mSDL = SDL;
-			TTF_Init();
+			if (TTF_Init() != 0)
+				SDLTTFException.Generate();
 		}
 
 		~SDLTTF() {
