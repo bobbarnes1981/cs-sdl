@@ -77,9 +77,19 @@ namespace SdlDotNet.Examples
 						Color.FromArgb(0, (byte)rand.Next(255), 
 						(byte)rand.Next(255),(byte)rand.Next(255)));
 
-					if (rand.Next(2) == 1)
+					switch (rand.Next(4))
 					{
-						text.FlipVertical();
+						case 1:
+							text.FlipVertical();
+							break;
+						case 2:
+							text.FlipHorizontal();
+							break;
+						case 3:
+							text.RotateSurface(90);
+							break;
+						default:
+							break;
 					}
 
 					text.Blit(
@@ -87,7 +97,7 @@ namespace SdlDotNet.Examples
 						new Rectangle(new Point(rand.Next(width - 100),rand.Next(height - 100)), 
 						text.Size));
 					screen.Flip();
-					Thread.Sleep(100);
+					Thread.Sleep(1000);
 					//				while (!mDone)
 					//				{
 					//					sdl.Events.WaitAndDelegate();
