@@ -18,7 +18,7 @@ namespace SDLDotNet.TTF {
 		/// <summary>
 		/// Constructor for SDL TTF Exception.
 		/// </summary>
-		/// <param name="msg"></param>
+		/// <param name="msg">Exception message</param>
 		public SDLTTFException(string msg) : base(msg) {}
 	}
 }

@@ -2,7 +2,7 @@ using System;
 using System.Security;
 using System.Runtime.InteropServices;
 
-namespace SDLDotNet.Images
+namespace SDLDotNet.Image
 {
 	/// <summary>
 	/// SDL_Image bindings for .NET. 

@@ -1,12 +1,12 @@
 using System;
 using System.Drawing;
 using SDLDotNet;
-using SDLDotNet.Images;
+using SDLDotNet.Image;
 
 
-namespace SDLDotNet.Images.Samples
+namespace SDLDotNet.Image.Example
 {
-	public class ImageSample
+	public class ImageExample
 	{
 
 		/// <summary>
@@ -16,7 +16,7 @@ namespace SDLDotNet.Images.Samples
 		Point MousePos = new Point(100,100);
 
 
-		public ImageSample() 
+		public ImageExample() 
 		{
 			Continue = true;
 		}
@@ -45,7 +45,7 @@ namespace SDLDotNet.Images.Samples
 				// create a surface to draw to...we cant draw rectangles directly to the hardware back buffer because
 				// different video cards have different numbers of back buffers that flip in sequence :(
 				Surface surf = screen.CreateCompatibleSurface(width, height, true);
-				surf.FillRect(new Rectangle(new Point(0, 0), surf.Size), Color.Black); // fill the surface with black
+				surf.FillRect(new Rectangle(new Point(0, 0), surf.Size), System.Drawing.Color.Black); // fill the surface with black
 
 				#if __MONO__
 					imagepath = @"images/";
@@ -77,7 +77,7 @@ namespace SDLDotNet.Images.Samples
 
 				SDLImage Tree = new SDLImage(imagepath + "Tree.bmp");
 
-				Tree.TransparentColor = Color.Magenta;
+				Tree.TransparentColor = System.Drawing.Color.Magenta;
 				Tree.Transparent = true;
 
 				Tree.AlphaFlags = Alpha.RLEAccel | Alpha.Source;
@@ -162,7 +162,7 @@ namespace SDLDotNet.Images.Samples
 		[STAThread]
 		static void Main() 
 		{
-			new ImageSample().Go();
+			new ImageExample().Go();
 		}
 
 	}
