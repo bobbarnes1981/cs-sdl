@@ -1,5 +1,8 @@
 TARGET = SDLDotNet.TTF.dll
 SRCS = SDLTTF.cs Font.cs SDLColor.cs SDLTTFException.cs
+##
+# To compile for windows, change this to "csc"
+##
 CSCOMPILER = mcs
 
 all: $(TARGET)
