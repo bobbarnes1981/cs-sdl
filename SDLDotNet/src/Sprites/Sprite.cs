@@ -1,6 +1,6 @@
 /*
  * $RCSfile$
- * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
+ * Copyright (C) 2005 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,129 +20,205 @@
 using SdlDotNet;
 using System;
 using System.Drawing;
+using System.Collections;
 
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public class Sprite : IComparable, ITickable
+	public class Sprite : IComparable
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		public Sprite()
 		{
+			this.rect = new Rectangle(0, 0, 0, 0);
+			this.coordinateZ = 0;
+			this.surf = null;
 		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="group"></param>
+//		public Sprite(SpriteCollection group) : this()
+//		{
+//			this.InnerAdd(group);
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="coordinates"></param>
+//		public Sprite(Vector coordinates)
+//		{
+//			this.rect = new Rectangle(coordinates.Point, new Size(0, 0));
+//			this.coordinateZ = coordinates.Z;
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="coordinates"></param>
+//		/// <param name="group"></param>
+//		public Sprite(Vector coordinates, SpriteCollection group) : this(coordinates)
+//		{
+//			this.InnerAdd(group);
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="point"></param>
+//		/// <param name="z"></param>
+//		public Sprite(Point point, int z) : this(new Vector(point, z))
+//		{
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="point"></param>
+//		/// <param name="z"></param>
+//		/// <param name="group"></param>
+//		public Sprite(Point point, int z, SpriteCollection group) : this(new Vector(point, z))
+//		{
+//			this.InnerAdd(group);
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="point"></param>
+//		public Sprite(Point point)
+//		{
+//			this.rect = new Rectangle(point, new Size(0, 0));
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="point"></param>
+//		/// <param name="group"></param>
+//		public Sprite(Point point, SpriteCollection group) : this(point)
+//		{
+//			this.InnerAdd(group);
+//		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="coordinates"></param>
-		public Sprite(Point coordinates)
+		/// <param name="position"></param>
+		/// <param name="surface"></param>
+		public Sprite(Surface surface, Point position)
 		{
-			this.coordinates = new Vector(coordinates, 0);
+			this.rect = new Rectangle(position.X, position.Y, surface.Width, surface.Height);
+			this.coordinateZ = 0;
+			this.surf = surface;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="coordinates"></param>
+		/// <param name="surface"></param>
+		public Sprite(Surface surface, Vector coordinates) : this(surface, coordinates.Point)
+		{
+			this.coordinateZ = coordinates.Z;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
+		public Sprite(Surface surface)
+		{
+			this.rect = new Rectangle(0, 0, surface.Width, surface.Height);
+			this.coordinateZ = 0;
+			this.surf = surface;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="position"></param>
 		/// <param name="z"></param>
-		public Sprite(Point coordinates, int z)
+		/// <param name="surface"></param>
+		public Sprite(Surface surface, Point position, int z ) : this(surface, position)
 		{
-			this.coordinates = new Vector(coordinates, z);
+			this.coordinateZ = z;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="coordinates"></param>
-		public Sprite(Vector coordinates)
+		/// <param name="surface"></param>
+		/// <param name="group"></param>
+		public Sprite(Surface surface, Vector coordinates, SpriteCollection group) : this(surface, coordinates)
 		{
-			this.coordinates = coordinates;
+			this.InnerAdd(group);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="position"></param>
+		/// <param name="z"></param>
+		/// <param name="surface"></param>
+		/// <param name="group"></param>
+		public Sprite(Surface surface, Point position, int z, SpriteCollection group): this(surface, position, z)
+		{
+			this.InnerAdd(group);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="position"></param>
+		/// <param name="surface"></param>
+		/// <param name="group"></param>
+		public Sprite(Surface surface, Point position , SpriteCollection group):this(surface, position)
+		{
+			this.InnerAdd(group);
 		}
 
 		#region Display
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="args"></param>
-		public virtual void Render(RenderArgs args)
+		private Surface surf;
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Surface Surface
 		{
-			// Do nothing
+			get
+			{
+				return surf;
+			}
+			set
+			{
+				surf = value;
+			}
 		}
 		#endregion
 
 		#region Events
-		private bool tickable = false;
-
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual bool IsMouseSensitive 
-		{ 
-			get 
-			{ 
-				return false; 
-			} 
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual bool IsKeyboardSensitive 
-		{ 
-			get 
-			{ 
-				return false; 
-			} 
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual bool IsJoystickSensitive 
-		{ 
-			get 
-			{ 
-				return false; 
-			} 
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual bool IsTickable
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public virtual void Update(object sender, ActiveEventArgs e)
 		{
-			get 
-			{ 
-				return tickable; 
-			}
-			set 
-			{ 
-				tickable = value; 
-			}
 		}
-
 		/// <summary>
 		/// Processes the keyboard.
 		/// </summary>
-		public virtual void OnKeyboard(object sender, KeyboardEventArgs e)
-		{
-		}
-
-		/// <summary>
-		/// Processes the keyboard.
-		/// </summary>
-		public virtual void OnKeyboardDown(object sender, KeyboardEventArgs e)
-		{
-		}
-
-		/// <summary>
-		/// Processes the keyboard.
-		/// </summary>
-		public virtual void OnKeyboardUp(object sender, KeyboardEventArgs e)
+		public virtual void Update(object sender, KeyboardEventArgs e)
 		{
 		}
 
@@ -150,23 +226,7 @@ namespace SdlDotNet.Sprites
 		/// Processes a mouse button. This event is trigger by the SDL
 		/// system. 
 		/// </summary>
-		public virtual void OnMouseButtonDown(object sender, MouseButtonEventArgs args)
-		{
-		}
-
-		/// <summary>
-		/// Processes a mouse button. This event is trigger by the SDL
-		/// system.
-		/// </summary>
-		public virtual void OnMouseButtonUp(object sender, MouseButtonEventArgs args)
-		{
-		}
-
-		/// <summary>
-		/// Processes a mouse button. This event is trigger by the SDL
-		/// system.
-		/// </summary>
-		public virtual void OnMouseButton(object sender, MouseButtonEventArgs args)
+		public virtual void Update(object sender, MouseButtonEventArgs args)
 		{
 		}
 
@@ -175,117 +235,203 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are MouseSensitive are processed.
 		/// </summary>
-		public virtual void OnMouseMotion(object sender, MouseMotionEventArgs args)
+		public virtual void Update(object sender, MouseMotionEventArgs args)
 		{
 		}
-
+		
 		/// <summary>
 		/// Processes a joystick motion event. This event is triggered by
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		public virtual void OnJoystickAxisMotion(object sender, JoystickAxisEventArgs args)
+		public virtual void Update(object sender, JoystickAxisEventArgs args)
 		{
 		}
-
-		/// <summary>
-		/// Processes a joystick motion event. This event is triggered by
-		/// SDL. Only
-		/// sprites that are JoystickSensitive are processed.
-		/// </summary>
-		public virtual void OnJoystickVerticalAxisMotion(object sender, JoystickAxisEventArgs args)
-		{
-		}
-
-		/// <summary>
-		/// Processes a joystick motion event. This event is triggered by
-		/// SDL. Only
-		/// sprites that are JoystickSensitive are processed.
-		/// </summary>
-		public virtual void OnJoystickHorizontalAxisMotion(object sender, JoystickAxisEventArgs args)
-		{
-		}
-
+		
 		/// <summary>
 		/// Processes a joystick button event. This event is triggered by
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		public virtual void OnJoystickButton(object sender, JoystickButtonEventArgs args)
+		public virtual void Update(object sender, JoystickButtonEventArgs args)
 		{
 		}
-
-		/// <summary>
-		/// Processes a joystick button event. This event is triggered by
-		/// SDL. Only
-		/// sprites that are JoystickSensitive are processed.
-		/// </summary>
-		public virtual void OnJoystickButtonDown(object sender, JoystickButtonEventArgs args)
-		{
-		}
-
-		/// <summary>
-		/// Processes a joystick button event. This event is triggered by
-		/// SDL. Only
-		/// sprites that are JoystickSensitive are processed.
-		/// </summary>
-		public virtual void OnJoystickButtonUp(object sender, JoystickButtonEventArgs args)
-		{
-		}
-
+		
 		/// <summary>
 		/// Processes a joystick hat motion event. This event is triggered by
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		public virtual void OnJoystickHatMotion(object sender, JoystickHatEventArgs args)
+		public virtual void Update(object sender, JoystickHatEventArgs args)
 		{
 		}
-
+		
 		/// <summary>
 		/// Processes a joystick hat motion event. This event is triggered by
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		public virtual void OnJoystickBallMotion(object sender, JoystickBallEventArgs args)
+		public virtual void Update(object sender, JoystickBallEventArgs args)
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public virtual void Update(object sender, QuitEventArgs e)
+		{
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public virtual void Update(object sender, UserEventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public virtual void Update(object sender, VideoExposeEventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public virtual void Update(object sender, VideoResizeEventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public virtual void Update(object sender, ChannelFinishedEventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public virtual void Update(object sender, MusicFinishedEventArgs e)
+		{
+		}
+		
 		/// <summary>
 		/// All sprites are tickable, regardless if they actual do
 		/// anything. This ensures that the functionality is there, to be
 		/// overridden as needed.
 		/// </summary>
-		public virtual void OnTick(object sender, TickEventArgs args)
+		public virtual void Update(object sender, TickEventArgs args)
 		{
 		}
 		#endregion
 
 		#region Geometry
-		private Vector coordinates = new Vector();
 
-		private Size size;
+		private Rectangle rect;
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Rectangle Rectangle
+		{
+			get 
+			{ 
+				return this.rect;
+			}
+			set
+			{
+				this.rect = value;
+			}
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public Rectangle Bounds
+		public virtual Point Position
 		{
-			get { return new Rectangle(Coordinates.X, Coordinates.Y, Size.Width, Size.Height); }
+			get 
+			{ 
+				return new Point(rect.X, rect.Y); 
+			}
+			set
+			{
+				rect.X = value.X;
+				rect.Y = value.Y;
+			}
 		}
+
+		private int coordinateZ = 0;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public virtual Vector Coordinates
 		{
-			get 
-			{ 
-				return coordinates; 
+			get
+			{
+				return new Vector(this.Position, this.coordinateZ);
 			}
 			set
 			{
-				coordinates = value;
+				this.Position = new Point(value.X, value.Y);
+				this.coordinateZ = value.Z;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual int X
+		{
+			get
+			{
+				return this.rect.X;
+			}
+			set
+			{
+				this.rect.X = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual int Y
+		{
+			get
+			{
+				return this.rect.Y;
+			}
+			set
+			{
+				this.rect.Y = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual int Z
+		{
+			get
+			{
+				return this.coordinateZ;
+			}
+			set
+			{
+				this.coordinateZ = value;
 			}
 		}
 
@@ -296,13 +442,38 @@ namespace SdlDotNet.Sprites
 		{
 			get 
 			{ 
-				return size; 
+				if (surf != null)
+				{
+					return surf.Size; 
+				}
+				else
+				{
+					return new Size(0,0);
+				}
 			}
-			set 
-			{ 
-				size = value; 
+			set
+			{
+				rect.Width = value.Width;
+				rect.Height = value.Height;
 			}
 		}
+
+//		private bool dirty = false;
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public virtual bool Dirty
+//		{
+//			get
+//			{
+//				return dirty;
+//			}
+//			set
+//			{
+//				dirty = value;
+//			}
+//		}
 
 		/// <summary>
 		/// 
@@ -311,7 +482,7 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public virtual bool IntersectsWith(Point point)
 		{
-			return Bounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));
+			return this.rect.IntersectsWith(new Rectangle(point, new Size(0, 0)));
 		}
 
 		/// <summary>
@@ -321,7 +492,7 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public virtual bool IntersectsWith(Rectangle rectangle)
 		{
-			return Bounds.IntersectsWith(rectangle);
+			return this.rect.IntersectsWith(rectangle);
 		}
 		#endregion
 
@@ -338,7 +509,7 @@ namespace SdlDotNet.Sprites
 			Sprite s = (Sprite) obj;
 
 			// Compare the Z-Order first
-			int res = this.coordinates.Z.CompareTo(s.Coordinates.Z);
+			int res = this.Coordinates.Z.CompareTo(s.Coordinates.Z);
 
 			if (res != 0)
 			{
@@ -368,54 +539,55 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public override int GetHashCode()
 		{
-			return this.coordinates.X ^ this.coordinates.Y ^ this.coordinates.Z;
+			return this.Coordinates.X ^ this.Coordinates.Y ^ 
+				this.Coordinates.Z; 
+				//^ this.surf.Size.Height ^ 
+				//this.surf.Size.Width ^ this.surf.GetHashCode();
 		}  
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="sprite1"></param>
-//		/// <param name="sprite2"></param>
-//		/// <returns></returns>
-//		public static bool operator == (Sprite sprite1, Sprite sprite2)
-//		{
-//			return sprite1.Equals(sprite2);
-//		}  
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="sprite1"></param>
-//		/// <param name="sprite2"></param>
-//		/// <returns></returns>
-//		public static bool operator != (Sprite sprite1, Sprite sprite2)
-//		{
-//			return !(sprite1==sprite2);
-//		}  
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="sprite1"></param>
-//		/// <param name="sprite2"></param>
-//		/// <returns></returns>
-//		public static bool operator < (Sprite sprite1, Sprite sprite2)
-//		{
-//			return (sprite1.CompareTo(sprite2) < 0);
-//		}  
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="sprite1"></param>
-//		/// <param name="sprite2"></param>
-//		/// <returns></returns>
-//		public static bool operator > (Sprite sprite1, Sprite sprite2)
-//		{
-//			return (sprite1.CompareTo(sprite2) > 0);
-//		} 
-
-
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sprite1"></param>
+		/// <param name="sprite2"></param>
+		/// <returns></returns>
+		public static bool operator == (Sprite sprite1, Sprite sprite2)
+		{
+			return sprite1.Equals(sprite2);
+		}  
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sprite1"></param>
+		/// <param name="sprite2"></param>
+		/// <returns></returns>
+		public static bool operator != (Sprite sprite1, Sprite sprite2)
+		{
+			return !(sprite1==sprite2);
+		}  
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sprite1"></param>
+		/// <param name="sprite2"></param>
+		/// <returns></returns>
+		public static bool operator < (Sprite sprite1, Sprite sprite2)
+		{
+			return (sprite1.CompareTo(sprite2) < 0);
+		}  
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sprite1"></param>
+		/// <param name="sprite2"></param>
+		/// <returns></returns>
+		public static bool operator > (Sprite sprite1, Sprite sprite2)
+		{
+			return (sprite1.CompareTo(sprite2) > 0);
+		} 
 
 		/// <summary>
 		/// 
@@ -423,64 +595,74 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return Bounds.ToString();
+			return this.Rectangle.ToString();
 		}
 		#endregion
 
 		#region Properties
-		private bool hidden = false;
-		private bool debug = false;
-		private bool mouseMotionLocked = false;
-		private bool mouseButtonLocked = false;
-
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual bool IsHidden
-		{
-			get { return hidden; }
-			set { hidden = value; }
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual bool IsTraced
-		{
-			get { return debug; }
-			set { debug = value; }
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual bool IsMouseButtonLocked
+		public virtual bool Alive
 		{
 			get
 			{
-				return mouseButtonLocked;
+				return (groups.Count > 0);
 			}
-			set
+		}
+
+		ArrayList groups = new ArrayList();
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual ArrayList Collections
+		{
+			get
 			{
-				mouseButtonLocked = value;
+				return groups;
 			}
+		}
+
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public virtual void Kill()
+//		{
+//			for (int i = 0; i < groups.Count; i++)
+//			{
+//				groups[i].Remove(this);
+//			}
+//		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="group"></param>
+		public virtual void Add(SpriteCollection group)
+		{
+			group.Add(this);
+			this.groups.Add(group);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual bool IsMouseMotionLocked
+		/// <param name="group"></param>
+		protected void InnerAdd(SpriteCollection group)
 		{
-			get
-			{
-				return mouseMotionLocked;
-			}
-			set
-			{
-				mouseMotionLocked = value;
-			}
+			group.Add(this);
+			this.groups.Add(group);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="group"></param>
+		public virtual void Remove(SpriteCollection group)
+		{
+			group.Remove(this);
+			this.groups.Remove(group);
+		}
 		#endregion
 	}
 }
