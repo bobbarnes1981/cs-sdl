@@ -1495,4 +1495,31 @@ namespace SdlDotNet
 		/// </summary>
 		Mp3 = SdlMixer.MUS_MP3
 	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public enum MouseButtons : byte
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		PrimaryButton = Sdl.SDL_BUTTON_LEFT,
+		/// <summary>
+		/// 
+		/// </summary>
+		SecondaryButton = Sdl.SDL_BUTTON_RIGHT,
+		/// <summary>
+		/// 
+		/// </summary>
+		MiddleButton = Sdl.SDL_BUTTON_MIDDLE,
+		/// <summary>
+		/// 
+		/// </summary>
+		WheelUp = Sdl.SDL_BUTTON_WHEELUP,
+		/// <summary>
+		/// 
+		/// </summary>
+		WheelDown = Sdl.SDL_BUTTON_WHEELDOWN
+	}
 }

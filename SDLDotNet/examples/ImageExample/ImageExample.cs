@@ -68,8 +68,8 @@ namespace SdlDotNet.Examples
 					filepath = "";
 				}
 				Surface screen = Video.SetVideoModeWindow(width, height, true);
-				WindowManager.Caption = "Surface Example";
-				Video.HideMouseCursor(); // hide the cursor
+				Video.WindowCaption = "Surface Example";
+				Video.Mouse.ShowCursor(false); // hide the cursor
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
@@ -107,8 +107,8 @@ namespace SdlDotNet.Examples
 				Tree.AlphaValue = 0;
 
 				int JeepFrame = 0;
-				Music.Load(filepath + "fard-two.ogg");
-				Music.Play(-1);
+				Mixer.Music.Load(filepath + "fard-two.ogg");
+				Mixer.Music.Play(-1);
 
 				while (!quitFlag) 
 				{

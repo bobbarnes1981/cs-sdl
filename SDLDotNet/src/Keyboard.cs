@@ -57,5 +57,51 @@ namespace SdlDotNet
 				throw SdlException.Generate();
 			}
 		}
+
+		/// <summary>
+		/// Returns true if the application has keyboard focus.
+		/// </summary>
+		public static bool HasFocus
+		{
+			get
+			{
+				return (Sdl.SDL_GetAppState() & Sdl.SDL_APPINPUTFOCUS) !=0;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static ModifierKeys ModifierKeyState
+		{
+			get
+			{
+				return (ModifierKeys) Sdl.SDL_GetModState();
+			}
+			set
+			{
+				Sdl.SDL_SetModState((int)value);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public static bool IsKeyPressed(Key key)
+		{
+			int numberOfKeys;
+			byte[] keys;
+			keys = Sdl.SDL_GetKeyState(out numberOfKeys);
+			if (keys[(int)key] == 1)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 }

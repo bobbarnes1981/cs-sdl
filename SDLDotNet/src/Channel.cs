@@ -111,10 +111,18 @@ namespace SdlDotNet
 		/// Plays a sound the specified number of times on a specific channel
 		/// </summary>
 		/// <param name="sound">The sound to play</param>
+		/// <param name="continuous"></param>
 		/// <returns>The channel used to play the sound</returns>
-		public int PlayContinously(Sound sound) 
+		public int Play(Sound sound, bool continuous) 
 		{
-			return this.Play(sound, -1, (int) SdlFlag.PlayForever);
+			if (continuous == true)
+			{
+				return this.Play(sound, -1, (int) SdlFlag.PlayForever);
+			}
+			else
+			{
+				return this.Play(sound);
+			}
 		}
 
 		/// <summary>
@@ -124,16 +132,15 @@ namespace SdlDotNet
 		/// <param name="sound">The sound to play</param>
 		/// <param name="milliseconds">The time limit in milliseconds</param>
 		/// <returns>The channel used to play the sound</returns>
-		public int PlayContinuosly(Sound sound, int milliseconds) 
+		public int PlayContinous(Sound sound, int milliseconds) 
 		{
-			
-			int ret = SdlMixer.Mix_PlayChannelTimed(this.index, sound.GetHandle(), -1, milliseconds);
-			if (ret == (int) SdlFlag.Error)
-			{
-				throw SdlException.Generate();
-			}
-			this.Sound = sound;
-			return ret;
+				int ret = SdlMixer.Mix_PlayChannelTimed(this.index, sound.GetHandle(), -1, milliseconds);
+				if (ret == (int) SdlFlag.Error)
+				{
+					throw SdlException.Generate();
+				}
+				this.Sound = sound;
+				return ret;
 		}
 
 		/// <summary>
@@ -232,7 +239,7 @@ namespace SdlDotNet
 		/// Specify 1 to have the sound play twice</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
 		/// <returns>The channel used to play the sound</returns>
-		public int FadeInTimed(Sound sound, int ms, int loops, int ticks) 
+		public int FadeIn(Sound sound, int ms, int loops, int ticks) 
 		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(this.index, sound.GetHandle(), loops, ms, ticks);
 			if (ret == (int) SdlFlag.Error)

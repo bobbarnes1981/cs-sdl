@@ -62,13 +62,13 @@ namespace SdlDotNet.Examples
 			Events.Quit += new QuitEventHandler(this.Quit);
 
 			try {
-				Music.Load(filepath + "fard-two.ogg");
-				Music.Play(1);
+				Mixer.Music.Load(filepath + "fard-two.ogg");
+				Mixer.Music.Play(1);
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
-				WindowManager.Caption = "Rectangles Example";
-				Video.HideMouseCursor();
-				Music.EnableMusicFinishedCallback();
+				Video.WindowCaption = "Rectangles Example";
+				Video.Mouse.ShowCursor(false);
+				Mixer.Music.EnableMusicFinishedCallback();
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);

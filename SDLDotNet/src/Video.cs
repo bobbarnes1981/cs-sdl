@@ -19,6 +19,8 @@
  */
 
 using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using Tao.Sdl;
 
 namespace SdlDotNet 
@@ -30,7 +32,9 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Video
 	{
+		static private bool disposed = false;
 		static readonly Video instance = new Video();
+		static Mouse mouse = Mouse.Instance;
 
 		static Video()
 		{
@@ -39,6 +43,45 @@ namespace SdlDotNet
 		Video()
 		{
 			Initialize();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		~Video() 
+		{
+			Dispose(false);
+		}
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void Dispose() 
+		{
+			Dispose(true);
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <param name="disposing"></param>
+		public static void Dispose(bool disposing)
+		{
+			if (!disposed)
+			{
+				if (disposing)
+				{
+				}
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
+				disposed = true;
+			}
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void Close() 
+		{
+			Dispose();
 		}
 
 		/// <summary>
@@ -56,6 +99,125 @@ namespace SdlDotNet
 			}
 		}
 
+		/// <summary>
+		/// Queries if the Video subsystem has been intialized.
+		/// </summary>
+		/// <remarks>
+		/// </remarks>
+		/// <returns>True if Video subsystem has been initialized, false if it has not.</returns>
+		public static bool IsInitialized
+		{
+			get
+			{
+				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
+					== (int) SdlFlag.TrueValue)
+				{
+					return true;
+				}
+				else 
+				{
+					return false;
+				}
+			}
+		}
+
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		/// <param name="fullscreen"></param>
+		/// <param name="bitsPerPixel"></param>
+		public bool IsVideoModeOk(int width, int height, bool fullscreen, int bitsPerPixel)
+		{
+			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN);
+			if (fullscreen)
+			{
+				flags |= Sdl.SDL_FULLSCREEN;
+			}
+			int result = Sdl.SDL_VideoModeOK(
+				width, 
+				height, 
+				bitsPerPixel, 
+				flags);
+			if (result == bitsPerPixel)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		/// <param name="fullscreen"></param>
+		public int BestBitsPerPixel(int width, int height, bool fullscreen)
+		{
+			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN);
+			if (fullscreen)
+			{
+				flags |= Sdl.SDL_FULLSCREEN;
+			}
+			return Sdl.SDL_VideoModeOK(
+				width, 
+				height, 
+				PixelFormat.BitsPerPixel, 
+				flags);
+		}
+
+		private Sdl.SDL_VideoInfo VideoInfo
+		{
+			get
+			{
+				IntPtr videoInfoPointer = Sdl.SDL_GetVideoInfo();
+				if(videoInfoPointer == IntPtr.Zero) 
+				{
+					throw new SdlException(string.Format("Video query failed: {0}", Sdl.SDL_GetError()));
+				}
+				return (Sdl.SDL_VideoInfo)
+					Marshal.PtrToStructure(videoInfoPointer, 
+					typeof(Sdl.SDL_VideoInfo));
+			}
+		}
+
+		private Sdl.SDL_PixelFormat PixelFormat
+		{
+			get
+			{
+				return (Sdl.SDL_PixelFormat)
+					Marshal.PtrToStructure(VideoInfo.vfmt, 
+					typeof(Sdl.SDL_PixelFormat));
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="fullscreen"></param>
+		/// <returns></returns>
+		public Size[] ListModes(bool fullscreen)
+		{
+			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN);
+			if (fullscreen)
+			{
+				flags |= Sdl.SDL_FULLSCREEN;
+			}
+				IntPtr format = IntPtr.Zero;
+				Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, flags);
+			Size[] size = new Size[rects.Length];
+			for (int i=0; i<rects.Length; i++)
+			{
+				size[ i ].Width = rects[ i ].w;
+				size[ i ].Height = rects[ i ].h; 
+			}
+			return size;
+		}
 		/// <summary>
 		/// Sets the video mode of a fullscreen application
 		/// </summary>
@@ -293,38 +455,14 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Shows the mouse cursor
+		/// 
 		/// </summary>
-		public static void ShowMouseCursor() 
+		public static Mouse Mouse
 		{
-			Sdl.SDL_ShowCursor(Sdl.SDL_ENABLE);
-		}
-
-		/// <summary>
-		/// Hides the mouse cursor
-		/// </summary>
-		public static void HideMouseCursor() 
-		{
-			Sdl.SDL_ShowCursor(Sdl.SDL_DISABLE);
-		}
-
-		/// <summary>
-		/// Queries the current cursor state
-		/// </summary>
-		/// <returns>True if the cursor is visible, otherwise False</returns>
-		public static bool IsCursorVisible() 
-		{
-			return (Sdl.SDL_ShowCursor(Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
-		}
-
-		/// <summary>
-		/// Move the mouse cursor to a specific location
-		/// </summary>
-		/// <param name="x">The X coordinite</param>
-		/// <param name="y">The Y coordinite</param>
-		public static void WarpCursor(int x, int y) 
-		{
-			Sdl.SDL_WarpMouse((short)x, (short)y);
+			get
+			{
+				return Video.mouse;
+			}
 		}
 
 		/// <summary>
@@ -361,6 +499,69 @@ namespace SdlDotNet
 				throw SdlException.Generate();
 			}
 			return ret;
+		}
+
+		/// <summary>
+		/// gets or sets the text for the current window
+		/// </summary>
+		public static string WindowCaption 
+		{
+			get
+			{
+				string ret;
+				string dummy;
+
+				Sdl.SDL_WM_GetCaption(out ret, out dummy);
+				return ret;
+			}
+			set
+			{
+				Sdl.SDL_WM_SetCaption(value, "");
+			}
+		}
+
+		/// <summary>
+		/// sets the icon for the current window
+		/// </summary>
+		/// <param name="icon">the surface containing the image</param>
+		public static void WindowIcon(Surface icon) 
+		{
+			Sdl.SDL_WM_SetIcon(icon.SurfacePointer, null);
+		}
+
+		/// <summary>
+		/// Iconifies (minimizes) the current window
+		/// </summary>
+		/// <returns>True if the action succeeded, otherwise False</returns>
+		public static bool IconifyWindow() 
+		{
+			return (Sdl.SDL_WM_IconifyWindow() != (int) SdlFlag.Success);
+		}
+		/// <summary>
+		/// Forces keyboard focus and prevents the mouse from leaving the window
+		/// </summary>
+		public static void GrabInput() 
+		{
+			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_ON);
+		}
+		/// <summary>
+		/// Releases keyboard and mouse focus from a previous call to GrabInput()
+		/// </summary>
+		public static void ReleaseInput() 
+		{
+			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_OFF);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string VideoDriver
+		{
+			get
+			{
+				string buffer="";
+				return Sdl.SDL_VideoDriverName(buffer, 100);
+			}
 		}
 	}
 }

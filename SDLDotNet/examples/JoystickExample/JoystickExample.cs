@@ -89,7 +89,7 @@ namespace SdlDotNet.Examples
 				cursor.Transparent = true;
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
-				WindowManager.Caption = "Joystick Example";
+				Video.WindowCaption = "Joystick Example";
 				//video.HideMouseCursor();
 
 				Surface surf = 

@@ -59,8 +59,8 @@ namespace SdlDotNet.Examples
 			{
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
-				WindowManager.Caption = "Primitives Example";
-				Video.HideMouseCursor();
+				Video.WindowCaption = "Primitives Example";
+				Video.Mouse.ShowCursor(false);
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
@@ -95,7 +95,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, width), 
 								(short)rand.Next(0, height), 
 								(short)rand.Next(20, 100));
-							surf.CreateFilledCircle(circle,
+							surf.DrawFilledCircle(circle,
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255), 
@@ -105,7 +105,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, width), 
 								(short)rand.Next(0, height), 
 								(short)rand.Next(20, 100));
-							surf.CreateCircle(circle,
+							surf.DrawCircle(circle,
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255), 
@@ -131,7 +131,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, height), 
 								(short)rand.Next(20, 100),
 								(short)rand.Next(20,100));
-							surf.CreateEllipse(ellipse,
+							surf.DrawEllipse(ellipse,
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255),
@@ -142,7 +142,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, height),
 								(short)rand.Next(20, 100), 
 								(short)rand.Next(20,100));
-							surf.CreateFilledEllipse(ellipse,
+							surf.DrawFilledEllipse(ellipse,
 								Color.FromArgb(rand.Next(255), 
 								rand.Next(255), 
 								rand.Next(255) ,
@@ -168,7 +168,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, height),
 								(short)rand.Next(0, width), 
 								(short)rand.Next(0, height));
-							surf.CreateLine(line,
+							surf.DrawLine(line,
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255), 
@@ -197,7 +197,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, height/2), 
 								(short)rand.Next(0, width/2), 
 								(short)rand.Next(0, height/2));
-							surf.CreateTriangle(triangle,
+							surf.DrawTriangle(triangle,
 								Color.FromArgb(
 								rand.Next(255),
 								rand.Next(255), 
@@ -210,7 +210,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, height/2), 
 								(short)rand.Next(0, width/2), 
 								(short)rand.Next(0, height/2));
-							surf.CreateFilledTriangle(triangle,
+							surf.DrawFilledTriangle(triangle,
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255), 
@@ -247,7 +247,7 @@ namespace SdlDotNet.Examples
 											(short)rand.Next(0, height)
 										};
 							polygon = new Polygon(x, y);
-							surf.CreatePolygon(polygon, 
+							surf.DrawPolygon(polygon, 
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255), 
@@ -268,7 +268,7 @@ namespace SdlDotNet.Examples
 											(short)rand.Next(0, height)
 										};
 							polygon = new Polygon(a, b);
-							surf.CreateFilledPolygon(polygon, 
+							surf.DrawFilledPolygon(polygon, 
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255),
@@ -296,7 +296,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, 360), 
 								(short)rand.Next(0, 360));
 
-							surf.CreatePie(pie, 
+							surf.DrawPie(pie, 
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255), 
@@ -308,7 +308,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, 360), 
 								(short)rand.Next(0, 360));
 
-							surf.CreateFilledPie(pie, 
+							surf.DrawFilledPie(pie, 
 								Color.FromArgb(rand.Next(255), 
 								rand.Next(255), 
 								rand.Next(255),
@@ -341,7 +341,7 @@ namespace SdlDotNet.Examples
 											(short)rand.Next(0, height)};
 
 							bezier = new Bezier(c, d, 0);
-							surf.CreateBezier(bezier, 
+							surf.DrawBezier(bezier, 
 								Color.FromArgb(rand.Next(255), 
 								rand.Next(255), 
 								rand.Next(255),
@@ -367,7 +367,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, height),
 								(short)rand.Next(0, width), 
 								(short)rand.Next(0, height));
-							surf.CreateBox(box,
+							surf.DrawBox(box,
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255), 
@@ -378,7 +378,7 @@ namespace SdlDotNet.Examples
 								(short)rand.Next(0, height),
 								(short)rand.Next(0, width), 
 								(short)rand.Next(0, height));
-							surf.CreateFilledBox(box,
+							surf.DrawFilledBox(box,
 								Color.FromArgb(
 								rand.Next(255), 
 								rand.Next(255), 

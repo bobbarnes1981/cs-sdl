@@ -114,8 +114,8 @@ namespace SdlDotNet.Examples
 			this.surf = screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
 			this.surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
-			WindowManager.Caption = Names.WindowCaption;
-			Video.HideMouseCursor();
+			Video.WindowCaption = Names.WindowCaption;
+			Video.Mouse.ShowCursor(false);
 		}
 
 		public void UpdateView()
@@ -146,7 +146,7 @@ namespace SdlDotNet.Examples
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
 			this.entitySprite.CenterX = sectSprite.CenterX;
 			this.entitySprite.CenterY = sectSprite.CenterY;
-			Mixer.PlaySample(this.sound);
+			Channel channel = this.sound.Play();
 		}
 
 		/// <summary>

@@ -67,7 +67,7 @@ namespace SdlDotNet.Examples
 			int height = 480;
 			Random rand = new Random();
 
-			Music.EnableMusicFinishedCallback();
+			Mixer.Music.EnableMusicFinishedCallback();
 			
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
@@ -78,8 +78,8 @@ namespace SdlDotNet.Examples
 			try 
 			{
 				font = new Font(filepath + FontName, size);
-				Music.Load(filepath + "fard-two.ogg");
-				Music.Play(1);
+				Mixer.Music.Load(filepath + "fard-two.ogg");
+				Mixer.Music.Play(1);
 				Sound sound = Mixer.Sound(filepath + "test.wav");
 				Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
 				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
@@ -94,8 +94,8 @@ namespace SdlDotNet.Examples
 				
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
-				WindowManager.Caption = "Delegates Example";
-				Video.HideMouseCursor();
+				Video.WindowCaption = "Delegates Example";
+				Video.Mouse.ShowCursor(false);
 
 				while (!quitFlag) 
 				{
@@ -107,6 +107,17 @@ namespace SdlDotNet.Examples
 					
 					try 
 					{
+						if (Video.Mouse.IsButtonPressed(MouseButtons.PrimaryButton))
+						{
+							Console.WriteLine("Primary button is pressed");
+						}
+						if (Video.Mouse.IsButtonPressed(MouseButtons.SecondaryButton))
+						{
+							Console.WriteLine("Secondary button is pressed");
+						}
+						Console.WriteLine("Pos: " + Video.Mouse.MousePosition.ToString());
+						Console.WriteLine("Change: " +Video.Mouse.MousePositionChange.ToString());
+						Console.WriteLine("Has Mousefocus: " + Video.Mouse.HasMouseFocus);
 						if (musicFinishedFlag)
 						{
 							text = font.Render(

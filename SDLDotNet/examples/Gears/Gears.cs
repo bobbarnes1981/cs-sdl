@@ -295,7 +295,7 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.KeyboardDown);
 
-			WindowManager.Caption = "SdlDotNet Gears";
+			Video.WindowCaption = "SdlDotNet Gears";
 
 			init ();
 			reshape ();
