@@ -78,6 +78,7 @@
                     Name = "Tao.Sdl"
                     AssemblyName = "Tao.Sdl"
                     HintPath = "..\..\lib\Tao.Sdl.dll"
+                    Private = "True"
                 />
                 <Reference
                     Name = "SdlDotNet"
@@ -88,6 +89,7 @@
                     Name = "Tao.OpenGl"
                     AssemblyName = "Tao.OpenGl"
                     HintPath = "Tao.OpenGl.dll"
+                    Private = "True"
                 />
             </References>
         </Build>

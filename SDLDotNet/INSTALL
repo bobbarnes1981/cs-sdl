@@ -14,6 +14,9 @@ Unzip the SdlDotNet-2.1.0beta1-1.zip file.
 Copy the files located in the /bin directory (SdlDotNet.dll and Tao.Sdl.dll)
 into the Global Assembly Cache (c:\winnt\assembly).
 
+For the Gears exampel to work, you must download
+Tao.OpenGl.dll from http://taoframework.com and copy the file
+into the Global Assembly Cache.
 
 
 
