@@ -153,6 +153,10 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (events.PollAndDelegate()) 
+						{
+							// handle events till the queue is empty
+						} 
 
 						while (times < MAXCOUNT)
 						{
@@ -176,6 +180,10 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (events.PollAndDelegate()) 
+						{
+							// handle events till the queue is empty
+						} 
 
 						while (times < MAXCOUNT)
 						{
@@ -214,6 +222,10 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (events.PollAndDelegate()) 
+						{
+							// handle events till the queue is empty
+						} 
 
 						while (times < MAXCOUNT)
 						{
@@ -268,6 +280,10 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (events.PollAndDelegate()) 
+						{
+							// handle events till the queue is empty
+						} 
 
 						while (times < MAXCOUNT)
 						{
@@ -303,6 +319,10 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (events.PollAndDelegate()) 
+						{
+							// handle events till the queue is empty
+						} 
 						
 						while (times < MAXCOUNT)
 						{
@@ -332,6 +352,10 @@ namespace SdlDotNet.Examples
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
 						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (events.PollAndDelegate()) 
+						{
+							// handle events till the queue is empty
+						} 
 
 						while (times < MAXCOUNT)
 						{
