@@ -84,6 +84,12 @@ namespace SdlDotNet
 	/// You can obtain an instance of this class by accessing the 
 	/// Mixer property of the main Sdl object.
 	/// </summary>
+	/// <remarks>
+	/// Before instantiating an instance of Movie,
+	/// you must call Mxier.Close() to turn off the default mixer.
+	/// If you do not do this, any movie will play very slowly. 
+	/// Smpeg uses a custom mixer for audio playback. 
+	/// </remarks>
 	public sealed class Mixer
 	{
 		private SdlMixer.ChannelFinishedDelegate channelFinishedDelegate;

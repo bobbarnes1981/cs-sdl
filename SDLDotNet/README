@@ -19,6 +19,8 @@ Zip file contains:
 	/lib - library dependencies. Please put these libs in your path.
 	/examples - demo apps for the library
 	/src - source
+	/scripts - build scripts
+	/tools - utils
 	
 		
 Development Environment:
@@ -47,12 +49,12 @@ Development Environment:
 
 	Dependencies (make sure these are in your path):
 		C libraries
-		SDL 1.2.7
-		SDL_image 1.2.3
+		SDL 1.2.8
+		SDL_image 1.2.4
 		SDL_mixer 1.2.5
-		SDL_ttf 2.0.6
+		SDL_ttf 2.0.7
 		SPMEG 0.4.4 (coming for v2.2)
-		SDL_gfx 2.0.12
+		SDL_gfx 2.0.13
 		
 		.NET libraries
 		Tao.Sdl
