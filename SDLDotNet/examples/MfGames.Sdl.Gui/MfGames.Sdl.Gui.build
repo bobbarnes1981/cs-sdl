@@ -14,23 +14,11 @@
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Utility/${build.dir}">
-		<include name="MfGames.Utility.dll"/>
-	    </fileset>
-	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Sdl.Sprites/${build.dir}">
-		<include name="MfGames.Sdl.Sprites.dll"/>
-	    </fileset>
-	</copy>
 	<csc target="library" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" >
 	    <sources failonempty="true">
 		<include name="*.cs" />
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
-		<include name="MfGames.Utility.dll"/>
-		<include name="MfGames.Sdl.Sprites.dll"/>
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>

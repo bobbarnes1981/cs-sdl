@@ -16,21 +16,6 @@
 	    </fileset>
 	</copy>
 	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Utility/${build.dir}">
-		<include name="MfGames.Utility.dll"/>
-	    </fileset>
-	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Sdl.Sprites/${build.dir}">
-		<include name="MfGames.Sdl.Sprites.dll"/>
-	    </fileset>
-	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Sdl.Drawable/${build.dir}">
-		<include name="MfGames.Sdl.Drawable.dll"/>
-	    </fileset>
-	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Sdl.Gui/${build.dir}">
 		<include name="MfGames.Sdl.Gui.dll"/>
 	    </fileset>
@@ -40,10 +25,7 @@
 		<include name="*.cs" />
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
-		<include name="MfGames.Sdl.Drawable.dll"/>
 		<include name="MfGames.Sdl.Gui.dll"/>
-		<include name="MfGames.Sdl.Sprites.dll"/>
-		<include name="MfGames.Utility.dll"/>
 		<include name="${log.assembly}.dll"/>
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>

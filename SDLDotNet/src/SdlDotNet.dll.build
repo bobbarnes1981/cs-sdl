@@ -12,7 +12,7 @@
 	<!-- build SDL.NET -->
 	<csc target="library" warnaserror="true" unsafe="true" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
 	    <sources failonempty="true">
-		<include name="*.cs" />
+		<include name="**.cs" />
 		<!-- task currently does not work on Mono and is temporarily included in the NAnt.Win32 assembly -->
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
