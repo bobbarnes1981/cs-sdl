@@ -1,0 +1,12 @@
+SDL.csproj.user
+bin
+obj
+SDL.NET.suo
+doc
+ChangeLog
+build
+.project
+SdlDotNet.suo
+SdlDotNet.FxCop
+*.cmbx
+*.sln

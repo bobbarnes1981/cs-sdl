@@ -1,0 +1,45 @@
+/*
+ * $RCSfile$
+ * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+using PerCederberg.Grammatica.Parser;
+using System.IO;
+
+namespace MfGames.Utility.Dice
+{
+  public class Dice : LoggedObject
+  {
+    public static IDice Parse(string fmt)
+    {
+      // Parse the string and generate a node object
+      Parser parser = new DiceParser(new StringReader(fmt),
+				     new DiceFactory());
+      Node node = parser.Parse();
+      IDice dice = (IDice) node.GetChildAt(0).GetValue(0);
+
+      // Return the dice
+      return dice;
+    }
+
+    public static int Roll(string fmt)
+    {
+      // Parse the format string and roll the results
+      return Parse(fmt).Roll;
+    }
+  }
+}
