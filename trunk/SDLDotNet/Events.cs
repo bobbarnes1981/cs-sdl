@@ -8,10 +8,13 @@ namespace SDLDotNet {
 	/// </summary>
 	/// <type>struct</type>
 	public struct MouseButtonState {
+
 		private int _state;
+
 		internal MouseButtonState(int state) {
 			_state = state;
 		}
+
 		/// <summary>
 		/// Gets the pressed or released state of a mouse button
 		/// </summary>
@@ -30,6 +33,7 @@ namespace SDLDotNet {
 	/// <param name="gained">True if the focus was gained, False if it was lost</param>
 	/// <type>delegate</type>
 	public delegate void ActiveEventHandler(bool gained);
+
 	/// <summary>
 	/// Indicates that the keyboard state has changed
 	/// </summary>
@@ -41,6 +45,7 @@ namespace SDLDotNet {
 	/// <param name="mod">Current modifier flags</param>
 	/// <type>delegate</type>
 	public delegate void KeyboardEventHandler(int device, bool down, int scancode, Key key, Mod mod);
+
 	/// <summary>
 	/// Indicates that the mouse has moved
 	/// </summary>
@@ -279,6 +284,17 @@ namespace SDLDotNet {
 				return false;
 			DelegateEvent(&ev);
 			return true;
+		}
+
+		/// <summary>
+		/// Checks the event queue, and waits until an event is available
+		/// </summary>
+		/// <returntype>System.Boolean</returntype>
+		public void WaitAndDelegate() 
+		{
+			Natives.SDL_Event ev;
+			Natives.SDL_WaitEvent(&ev);
+			DelegateEvent(&ev);
 		}
 
 		/// <summary>
