@@ -1,1 +1,1 @@
-FontTest.exe Vera.ttf 12 "Test"
+bin\Debug\FontTest.exe Vera.ttf 12 "Test"
