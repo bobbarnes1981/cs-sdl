@@ -40,7 +40,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_TIMER) != 0)
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_TIMER) != (int) SdlFlag.Success)
 				{
 					throw SdlException.Generate();
 				}

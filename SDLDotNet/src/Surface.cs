@@ -329,7 +329,7 @@ namespace SdlDotNet
 
 			int result = Sdl.SDL_FillRect(handle, ref sdlrect, MapColor(color).Value);
 			GC.KeepAlive(this);
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -363,7 +363,7 @@ namespace SdlDotNet
 			int result = SdlGfx.filledCircleRGBA(handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
 				color.A);
 			GC.KeepAlive(this);
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -390,7 +390,7 @@ namespace SdlDotNet
 					color.A);
 				GC.KeepAlive(this);
 			}
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -434,7 +434,7 @@ namespace SdlDotNet
 					color.A);
 				GC.KeepAlive(this);
 			}
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -460,7 +460,7 @@ namespace SdlDotNet
 			int result = SdlGfx.filledEllipseRGBA(handle, ellipse.XPosition, ellipse.YPosition, ellipse.RadiusX, ellipse.RadiusY,color.R, color.B, color.G,
 				color.A);
 			GC.KeepAlive(this);
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -494,7 +494,7 @@ namespace SdlDotNet
 					color.A);
 				GC.KeepAlive(this);
 			}
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -540,7 +540,7 @@ namespace SdlDotNet
 					color.A);
 				GC.KeepAlive(this);
 			}
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -572,7 +572,7 @@ namespace SdlDotNet
 				color.A);
 			GC.KeepAlive(this);
 
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -615,7 +615,7 @@ namespace SdlDotNet
 					color.A);
 				GC.KeepAlive(this);
 			}
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -648,7 +648,7 @@ namespace SdlDotNet
 				color.A);
 			GC.KeepAlive(this);
 
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -664,7 +664,7 @@ namespace SdlDotNet
 			int result = SdlGfx.filledPieRGBA(handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingPoint, pie.EndingPoint,color.R, color.B, color.G,
 				color.A);
 			GC.KeepAlive(this);
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -684,7 +684,7 @@ namespace SdlDotNet
 				color.R, color.B, color.G,
 				color.A);
 			GC.KeepAlive(this);
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -707,7 +707,7 @@ namespace SdlDotNet
 				color.A);
 			GC.KeepAlive(this);
 			
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -730,7 +730,7 @@ namespace SdlDotNet
 				color.A);
 			GC.KeepAlive(this);
 			
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -908,7 +908,7 @@ namespace SdlDotNet
 				d = this.ConvertRecttoSDLRect(destinationRectangle);
 			int result = Sdl.SDL_BlitSurface(handle, ref s, destinationSurface.handle, ref d);
 			GC.KeepAlive(this);
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -933,7 +933,7 @@ namespace SdlDotNet
 			Sdl.SDL_Rect d = this.ConvertRecttoSDLRect(destinationRectangle);
 			int result = Sdl.SDL_BlitSurface(handle, ref s, destinationSurface.handle, ref d);
 			GC.KeepAlive(this);
-			if (result!= 0)
+			if (result!= (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -948,7 +948,7 @@ namespace SdlDotNet
 			{
 				int result = Sdl.SDL_LockSurface(handle);
 				GC.KeepAlive(this);
-				if (result != 0)
+				if (result != (int) SdlFlag.Success)
 				{
 					throw SdlException.Generate();
 				}
@@ -977,7 +977,7 @@ namespace SdlDotNet
 			{
 				int result = Sdl.SDL_UnlockSurface(handle);
 				GC.KeepAlive(this);
-				if (result != 0)
+				if (result != (int) SdlFlag.Success)
 				{
 					throw SdlException.Generate();
 				}
@@ -994,7 +994,7 @@ namespace SdlDotNet
 			{ 
 				int result = Sdl.SDL_MUSTLOCK(handle);
 				GC.KeepAlive(this);
-				if (result== 1)
+				if (result == 1)
 				{
 					return true; 
 				}
@@ -1013,7 +1013,7 @@ namespace SdlDotNet
 		{
 			int result = Sdl.SDL_SaveBMP(handle, file);
 			GC.KeepAlive(this);
-			if (result!=0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -1047,7 +1047,7 @@ namespace SdlDotNet
 			}
 			int result = Sdl.SDL_SetColorKey(handle, (int)flag, key.Value);
 			GC.KeepAlive(this);
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -1060,7 +1060,7 @@ namespace SdlDotNet
 		{
 			int result = Sdl.SDL_SetColorKey(handle, 0, 0);
 			GC.KeepAlive(this);
-			if (result != 0)
+			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -1301,7 +1301,7 @@ namespace SdlDotNet
 		{
 			int result = Sdl.SDL_SetAlpha(handle, (int)flag, alpha);
 			GC.KeepAlive(this);
-			if (result != 0) 
+			if (result != (int) SdlFlag.Success) 
 			{
 				throw SdlException.Generate();
 			}

@@ -21,7 +21,8 @@
 using System;
 using Tao.Sdl;
 
-namespace SdlDotNet {
+namespace SdlDotNet 
+{
 	/// <summary>
 	/// Contains methods for interacting with the window title frame and for grabbing input focus.
 	/// These methods do not need a windowed display to be called.
@@ -44,7 +45,7 @@ namespace SdlDotNet {
 		{
 			get
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= 0)
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
 				{
 					throw SdlException.Generate();
 				}
@@ -55,7 +56,8 @@ namespace SdlDotNet {
 		/// <summary>
 		/// gets or sets the text for the current window
 		/// </summary>
-		public string Caption {
+		public string Caption 
+		{
 			get
 			{
 				string ret;
@@ -85,7 +87,7 @@ namespace SdlDotNet {
 		/// <returns>True if the action succeeded, otherwise False</returns>
 		public bool IconifyWindow() 
 		{
-			return (Sdl.SDL_WM_IconifyWindow() != 0);
+			return (Sdl.SDL_WM_IconifyWindow() != (int) SdlFlag.Success);
 		}
 		/// <summary>
 		/// Forces keyboard focus and prevents the mouse from leaving the window

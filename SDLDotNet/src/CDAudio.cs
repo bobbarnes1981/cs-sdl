@@ -24,7 +24,8 @@ using System.Globalization;
 
 using Tao.Sdl;
 
-namespace SdlDotNet {
+namespace SdlDotNet 
+{
 	/// <summary>
 	/// 
 	/// </summary>
@@ -294,7 +295,7 @@ namespace SdlDotNet {
 		{
 			get
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_CDROM) != 0)
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_CDROM) != (int) SdlFlag.Success)
 				{
 					throw SdlException.Generate();
 				}
@@ -311,7 +312,7 @@ namespace SdlDotNet {
 		{
 			get {
 				int ret = Sdl.SDL_CDNumDrives();
-				if (ret == -1)
+				if (ret == (int) CDStatus.Error)
 				{
 					throw SdlException.Generate();
 				}

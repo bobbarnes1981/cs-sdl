@@ -21,7 +21,8 @@
 using System;
 using Tao.Sdl;
 
-namespace SdlDotNet {
+namespace SdlDotNet 
+{
 	/// <summary>
 	/// Provides methods for querying the number and make-up of the joysticks on a system.
 	/// You can obtain an instance of this class by accessing the Joysticks property of the main Sdl object.
@@ -42,7 +43,7 @@ namespace SdlDotNet {
 		{
 			get
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_JOYSTICK) != 0)
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_JOYSTICK) != (int) SdlFlag.Success)
 				{
 					throw SdlException.Generate();
 				}

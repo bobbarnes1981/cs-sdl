@@ -81,10 +81,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Singleton get instance method
 		/// </summary>
-		public static Ttf Instance {
+		public static Ttf Instance 
+		{
 			get 
 			{
-				if (SdlTtf.TTF_Init() != 0)
+				if (SdlTtf.TTF_Init() != (int) SdlFlag.Success)
 				{
 					TtfException.Generate();
 				}
@@ -95,7 +96,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Destructor
 		/// </summary>
-		~Ttf() {
+		~Ttf() 
+		{
 			SdlTtf.TTF_Quit();
 		}
 	}

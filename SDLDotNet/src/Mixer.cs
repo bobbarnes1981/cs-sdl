@@ -28,7 +28,8 @@ namespace SdlDotNet
 	/// <summary>
 	/// Specifies an audio format to mix audio in
 	/// </summary>
-	public enum AudioFormat {
+	public enum AudioFormat
+	{
 		/// <summary>
 		/// Unsigned 8-bit
 		/// </summary>
@@ -62,7 +63,8 @@ namespace SdlDotNet
 	/// <summary>
 	/// Indicates the current fading status of a sample
 	/// </summary>
-	public enum FadingStatus {
+	public enum FadingStatus
+	{
 		/// <summary>
 		/// Sample is not fading
 		/// </summary>
@@ -102,7 +104,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_AUDIO) != 0)
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_AUDIO) != (int) SdlFlag.Success)
 				{
 					throw SdlException.Generate();
 				}
@@ -244,8 +246,8 @@ namespace SdlDotNet
 		/// <returns>The channel used to play the sample</returns>
 		public int PlaySample(Sample sample, int loops) 
 		{
-			int ret = SdlMixer.Mix_PlayChannelTimed(-1, sample.GetHandle(), loops, -1);
-			if (ret == -1)
+			int ret = SdlMixer.Mix_PlayChannelTimed(-1, sample.GetHandle(), loops, (int) SdlFlag.PlayForever);
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -262,8 +264,8 @@ namespace SdlDotNet
 		/// <returns>The channel used to play the sample</returns>
 		public int PlaySample(int channel, Sample sample, int loops) 
 		{
-			int ret = SdlMixer.Mix_PlayChannelTimed(channel, sample.GetHandle(), loops, -1);
-			if (ret == -1)
+			int ret = SdlMixer.Mix_PlayChannelTimed(channel, sample.GetHandle(), loops, (int) SdlFlag.PlayForever);
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -279,7 +281,7 @@ namespace SdlDotNet
 		public int PlaySampleTimed(Sample sample, int ticks) 
 		{
 			int ret = SdlMixer.Mix_PlayChannelTimed(-1, sample.GetHandle(), 0, ticks);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -297,7 +299,7 @@ namespace SdlDotNet
 		public int PlaySampleTimed(Sample sample, int loops, int ticks) 
 		{
 			int ret = SdlMixer.Mix_PlayChannelTimed(-1, sample.GetHandle(), loops, ticks);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -317,7 +319,7 @@ namespace SdlDotNet
 		public int PlaySampleTimed(int channel, Sample sample, int loops, int ticks) 
 		{
 			int ret = SdlMixer.Mix_PlayChannelTimed(channel, sample.GetHandle(), loops, ticks);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -333,7 +335,7 @@ namespace SdlDotNet
 		public int FadeInSample(Sample sample, int ms) 
 		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), 0, ms, -1);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -353,7 +355,7 @@ namespace SdlDotNet
 		public int FadeInSample(Sample sample, int ms, int loops) 
 		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), loops, ms, -1);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -374,7 +376,7 @@ namespace SdlDotNet
 		public int FadeInSample(int channel, Sample sample, int ms, int loops) 
 		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(channel, sample.GetHandle(), loops, ms, -1);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -391,7 +393,7 @@ namespace SdlDotNet
 		public int FadeInSampleTimed(Sample sample, int ms, int ticks) 
 		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), 0, ms, ticks);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -411,7 +413,7 @@ namespace SdlDotNet
 		public int FadeInSampleTimed(Sample sample, int ms, int loops, int ticks) 
 		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), loops, ms, ticks);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -433,7 +435,7 @@ namespace SdlDotNet
 		public int FadeInSampleTimed(int channel, Sample sample, int ms, int loops, int ticks) 
 		{
 			int ret = SdlMixer.Mix_FadeInChannelTimed(channel, sample.GetHandle(), loops, ms, ticks);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
