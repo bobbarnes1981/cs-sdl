@@ -87,10 +87,10 @@ namespace SDLDotNet.TTF
 		private static extern IntPtr TTF_RenderUTF8_Solid(IntPtr font, string text, Color fg);
 */
 		[DllImport(TTF_DLL)]
-		private static extern IntPtr TTF_RenderUNICODE_Solid(IntPtr font, [MarshalAs(UnmanagedType.LPWStr)] string text, Color fg);
+		private static extern IntPtr TTF_RenderUNICODE_Solid(IntPtr font, [MarshalAs(UnmanagedType.LPWStr)] string text, SDLColor fg);
 
 		[DllImport(TTF_DLL)]
-		private static extern IntPtr TTF_RenderGlyph_Solid(IntPtr font, UInt16 ch, Color fg);
+		private static extern IntPtr TTF_RenderGlyph_Solid(IntPtr font, UInt16 ch, SDLColor fg);
 /*
 		[DllImport(TTF_DLL)]
 		private static extern IntPtr TTF_RenderText_Shaded(IntPtr font, string text, Color fg, Color bg);
@@ -99,10 +99,10 @@ namespace SDLDotNet.TTF
 		private static extern IntPtr TTF_RenderUTF8_Shaded(IntPtr font, string text, Color fg, Color bg);
 */
 		[DllImport(TTF_DLL)]
-		private static extern IntPtr TTF_RenderUNICODE_Shaded(IntPtr font, [MarshalAs(UnmanagedType.LPWStr)] string text, Color fg, Color bg);
+		private static extern IntPtr TTF_RenderUNICODE_Shaded(IntPtr font, [MarshalAs(UnmanagedType.LPWStr)] string text, SDLColor fg, SDLColor bg);
 
 		[DllImport(TTF_DLL)]
-		private static extern IntPtr TTF_RenderGlyph_Shaded(IntPtr font, UInt16 ch, Color fg, Color bg);
+		private static extern IntPtr TTF_RenderGlyph_Shaded(IntPtr font, UInt16 ch, SDLColor fg, SDLColor bg);
 /*
 		[DllImport(TTF_DLL)]
 		private static extern IntPtr TTF_RenderText_Blended(IntPtr font, string text, Color fg);
@@ -111,10 +111,10 @@ namespace SDLDotNet.TTF
 		private static extern IntPtr TTF_RenderUTF8_Blended(IntPtr font, string text, Color fg);
 */
 		[DllImport(TTF_DLL)]
-		private static extern IntPtr TTF_RenderUNICODE_Blended(IntPtr font, [MarshalAs(UnmanagedType.LPWStr)] string text, Color fg);
+		private static extern IntPtr TTF_RenderUNICODE_Blended(IntPtr font, [MarshalAs(UnmanagedType.LPWStr)] string text, SDLColor fg);
 
 		[DllImport(TTF_DLL)]
-		private static extern IntPtr TTF_RenderGlyph_Blended(IntPtr font, UInt16 ch, Color fg);
+		private static extern IntPtr TTF_RenderGlyph_Blended(IntPtr font, UInt16 ch, SDLColor fg);
 
 		[DllImport(TTF_DLL)]
 		private static extern void TTF_CloseFont(IntPtr font);
@@ -185,9 +185,8 @@ namespace SDLDotNet.TTF
 		/// <param name="Text"></param>
 		/// <param name="Color"></param>
 		/// <returns></returns>
-		public Surface RenderTextSolid(string Text, Color Color) {
+		public Surface RenderTextSolid(string Text, SDLColor Color) {
 			IntPtr pSurface;
-
 			pSurface = TTF_RenderUNICODE_Solid(mFont, Text, Color);
 			if (pSurface == IntPtr.Zero) throw SDLTTFException.Generate();
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
@@ -202,7 +201,7 @@ namespace SDLDotNet.TTF
 		/// <param name="DestSurface"></param>
 		/// <param name="X"></param>
 		/// <param name="Y"></param>
-		public void RenderTextSolid(string Text, Color Color, Surface DestSurface, int X, int Y) 
+		public void RenderTextSolid(string Text, SDLColor Color, Surface DestSurface, int X, int Y) 
 		{
 			Surface FontSurface;
 			System.Drawing.Rectangle DestRect;
@@ -219,7 +218,7 @@ namespace SDLDotNet.TTF
 		/// <param name="FG"></param>
 		/// <param name="BG"></param>
 		/// <returns></returns>
-		public Surface RenderTextShaded(string Text, Color FG, Color BG) {
+		public Surface RenderTextShaded(string Text, SDLColor FG, SDLColor BG) {
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderUNICODE_Shaded(mFont, Text, FG, BG);
@@ -233,7 +232,7 @@ namespace SDLDotNet.TTF
 		/// <param name="Text"></param>
 		/// <param name="FG"></param>
 		/// <returns></returns>
-		public Surface RenderTextBlended(string Text, Color FG) {
+		public Surface RenderTextBlended(string Text, SDLColor FG) {
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderUNICODE_Blended(mFont, Text, FG);
@@ -247,7 +246,7 @@ namespace SDLDotNet.TTF
 		/// <param name="Character"></param>
 		/// <param name="FG"></param>
 		/// <returns></returns>
-		public Surface RenderGlyphSolid(UInt16 Character, Color FG) {
+		public Surface RenderGlyphSolid(UInt16 Character, SDLColor FG) {
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderGlyph_Solid(mFont, Character, FG);
@@ -262,7 +261,7 @@ namespace SDLDotNet.TTF
 		/// <param name="FG"></param>
 		/// <param name="BG"></param>
 		/// <returns></returns>
-		public Surface RenderGlyphShaded(UInt16 Character, Color FG, Color BG) {
+		public Surface RenderGlyphShaded(UInt16 Character, SDLColor FG, SDLColor BG) {
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderGlyph_Shaded(mFont, Character, FG, BG);
@@ -276,7 +275,7 @@ namespace SDLDotNet.TTF
 		/// <param name="Character"></param>
 		/// <param name="FG"></param>
 		/// <returns></returns>
-		public Surface RenderGlyphBlended(UInt16 Character, Color FG) {
+		public Surface RenderGlyphBlended(UInt16 Character, SDLColor FG) {
 			IntPtr pSurface;
 
 			pSurface = TTF_RenderGlyph_Blended(mFont, Character, FG);

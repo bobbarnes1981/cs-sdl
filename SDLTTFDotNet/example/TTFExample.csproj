@@ -20,7 +20,7 @@
                 PostBuildEvent = ""
                 RootNamespace = "SDLDotNET.TTF.Example"
                 RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = "SDLDotNet.TTF.Example.FontTest"
+                StartupObject = ""
             >
                 <Config
                     Name = "Debug"
