@@ -253,6 +253,11 @@
             User-requested quit
             </summary>
         </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_SYSWMEVENT">
+            <summary>
+            System specific event
+            </summary>
+        </member>
         <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVEDA">
             <summary>
             Reserved for future use..
@@ -391,6 +396,11 @@
             </summary>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_QUITMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_SYSWMEVENTMASK">
             <summary>
             
             </summary>
@@ -5043,8 +5053,8 @@
                 </p>
             </remarks>
             <param name="width">Width of mode</param>
-            <param name="height">Height of mdoe</param>
-            <param name="bpp">bit depth of Mdoe</param>
+            <param name="height">Height of mode</param>
+            <param name="bpp">bit depth of Mode</param>
             <param name="flags"></param>
             <returns></returns>
         </member>
@@ -8799,6 +8809,11 @@
             </summary>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.field2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.unused">
             <summary>
             
             </summary>

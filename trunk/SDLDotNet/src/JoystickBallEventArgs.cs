@@ -26,7 +26,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for JoystickBallEventArgs.
 	/// </summary>
-	public class JoystickBallEventArgs : EventArgs 
+	public class JoystickBallEventArgs : SdlEventArgs 
 	{
 		/// <summary>
 		/// 
@@ -35,15 +35,21 @@ namespace SdlDotNet
 		/// <param name="ball">The trackball index</param>
 		/// <param name="relativeX">The relative X position</param>
 		/// <param name="relativeY">The relative Y position</param>
-		public JoystickBallEventArgs(int device, int ball, int relativeX, int relativeY)
+		public JoystickBallEventArgs(byte device, byte ball, short relativeX, short relativeY)
 		{
-			this.device = device;
-			this.ball = ball;
-			this.relativeX = relativeX;
-			this.relativeY = relativeY;
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.jball.which = device;
+			this.eventStruct.jball.ball = ball;
+			this.eventStruct.jball.xrel = relativeX;
+			this.eventStruct.jball.yrel = relativeY;
+			this.eventStruct.type = (byte)EventTypes.JoystickBallMotion;
 		}
 
-		private int device;
+		internal JoystickBallEventArgs(Sdl.SDL_Event ev)
+		{
+			this.eventStruct = ev;
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -51,15 +57,10 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.device;
-			}
-			set
-			{
-				this.device = value;
+				return this.eventStruct.jball.which;
 			}
 		}
 
-		private int ball;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -67,15 +68,10 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.ball;
-			}
-			set
-			{
-				this.ball = value;
+				return this.eventStruct.jball.ball;
 			}
 		}
 
-		private int relativeX;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -83,15 +79,10 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.relativeX;
-			}
-			set
-			{
-				this.relativeX = value;
+				return this.eventStruct.jball.xrel;
 			}
 		}
 
-		private int relativeY;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -99,11 +90,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.relativeY;
-			}
-			set
-			{
-				this.relativeY = value;
+				return this.eventStruct.jball.yrel;
 			}
 		}
 	}

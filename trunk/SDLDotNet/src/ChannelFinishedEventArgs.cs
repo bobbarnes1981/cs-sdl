@@ -26,7 +26,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for ChannelFinishedEventArgs.
 	/// </summary>
-	public class ChannelFinishedEventArgs : EventArgs 
+	public class ChannelFinishedEventArgs : UserEventArgs 
 	{
 		/// <summary>
 		/// 
@@ -35,6 +35,9 @@ namespace SdlDotNet
 		public ChannelFinishedEventArgs(int channel)
 		{
 			this.channel = channel;
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.type = (byte)EventTypes.UserEvent;
+			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
 		}
 		
 		private int channel;

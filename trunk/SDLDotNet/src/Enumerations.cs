@@ -1391,7 +1391,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// 
 	/// </summary>
-	public enum JoystickButtonState:byte
+	public enum ButtonKeyState : byte
 	{
 		/// <summary>
 		/// 
@@ -1406,7 +1406,8 @@ namespace SdlDotNet
 	/// <summary>
 	/// 
 	/// </summary>
-	public enum JoystickHatState
+	[FlagsAttribute]
+	public enum JoystickHatStates
 	{
 		/// <summary>
 		/// 
@@ -1464,7 +1465,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// 
 	/// </summary>
-	public enum MusicTypes
+	public enum MusicType
 	{
 		/// <summary>
 		/// 
@@ -1499,7 +1500,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// 
 	/// </summary>
-	public enum MouseButtons : byte
+	public enum MouseButton : byte
 	{
 		/// <summary>
 		/// 
@@ -1521,5 +1522,180 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		WheelDown = Sdl.SDL_BUTTON_WHEELDOWN
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public enum EventMask
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		ActiveEvent = Sdl.SDL_ACTIVEEVENTMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		KeyDown = Sdl.SDL_KEYDOWNMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		KeyUp = Sdl.SDL_KEYUPMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		MouseMotion = Sdl.SDL_MOUSEMOTIONMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		MouseButtonDown = Sdl.SDL_MOUSEBUTTONDOWNMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		MouseButtonUp = Sdl.SDL_MOUSEBUTTONUPMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		MouseEvent = Sdl.SDL_MOUSEEVENTMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickAxisMotion = Sdl.SDL_JOYAXISMOTIONMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickBallMotion = Sdl.SDL_JOYBALLMOTIONMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickHatMotion = Sdl.SDL_JOYHATMOTIONMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickButtonDown = Sdl.SDL_JOYBUTTONDOWNMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickButtonUp = Sdl.SDL_JOYBUTTONUPMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickEvent = Sdl.SDL_JOYEVENTMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		VideoResize = Sdl.SDL_VIDEORESIZEMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		VideoExpose = Sdl.SDL_VIDEOEXPOSEMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		Quit = Sdl.SDL_QUITMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		WindowManagerEvent = Sdl.SDL_SYSWMEVENTMASK,
+		/// <summary>
+		/// 
+		/// </summary>
+		AllEvents = Sdl.SDL_ALLEVENTS
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	[FlagsAttribute]
+	public enum EventTypes
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		NoEvent = Sdl.SDL_NOEVENT,
+		/// <summary>
+		/// 
+		/// </summary>
+		ActiveEvent = Sdl.SDL_ACTIVEEVENT,
+		/// <summary>
+		/// 
+		/// </summary>
+		KeyDown = Sdl.SDL_KEYDOWN,
+		/// <summary>
+		/// 
+		/// </summary>
+		KeyUp = Sdl.SDL_KEYUP,
+		/// <summary>
+		/// 
+		/// </summary>
+		MouseMotion = Sdl.SDL_MOUSEMOTION,
+		/// <summary>
+		/// 
+		/// </summary>
+		MouseButtonDown = Sdl.SDL_MOUSEBUTTONDOWN,
+		/// <summary>
+		/// 
+		/// </summary>
+		MouseButtonUp = Sdl.SDL_MOUSEBUTTONUP,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickAxisMotion = Sdl.SDL_JOYAXISMOTION,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickBallMotion = Sdl.SDL_JOYBALLMOTION,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickHatMotion = Sdl.SDL_JOYHATMOTION,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickButtonDown = Sdl.SDL_JOYBUTTONDOWN,
+		/// <summary>
+		/// 
+		/// </summary>
+		JoystickButtonUp = Sdl.SDL_JOYBUTTONUP,
+		/// <summary>
+		/// 
+		/// </summary>
+		VideoResize = Sdl.SDL_VIDEORESIZE,
+		/// <summary>
+		/// 
+		/// </summary>
+		VideoExpose = Sdl.SDL_VIDEOEXPOSE,
+		/// <summary>
+		/// 
+		/// </summary>
+		Quit = Sdl.SDL_QUIT,
+		/// <summary>
+		/// 
+		/// </summary>
+		WindowManagerEvent = Sdl.SDL_SYSWMEVENT,
+		/// <summary>
+		/// 
+		/// </summary>
+		UserEvent = Sdl.SDL_USEREVENT
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	[FlagsAttribute]
+	public enum Focus : byte
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		Mouse = Sdl.SDL_APPMOUSEFOCUS,
+		/// <summary>
+		/// 
+		/// </summary>
+		Keyboard = Sdl.SDL_APPINPUTFOCUS,
+		/// <summary>
+		/// 
+		/// </summary>
+		Application = Sdl.SDL_APPACTIVE
 	}
 }

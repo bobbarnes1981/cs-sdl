@@ -18,19 +18,23 @@
  */
 
 using System;
+using Tao.Sdl;
 
 namespace SdlDotNet
 {
 	/// <summary>
 	/// Summary description for MusicFinishedEventArgs.
 	/// </summary>
-	public class MusicFinishedEventArgs : EventArgs 
+	public class MusicFinishedEventArgs : UserEventArgs 
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		public MusicFinishedEventArgs()
 		{
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.type = (byte)EventTypes.UserEvent;
+			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
 		}
 	}
 }

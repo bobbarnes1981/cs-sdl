@@ -26,25 +26,39 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for JoystickButtonEventArgs.
 	/// </summary>
-	public class JoystickButtonEventArgs : EventArgs 
+	public class JoystickButtonEventArgs : SdlEventArgs 
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="device">The joystick index</param>
 		/// <param name="button">The button index</param>
-		/// <param name="down">
+		/// <param name="buttonPressed">
 		/// True if the button was pressed, 
 		/// False if it was released
 		/// </param>
-		public JoystickButtonEventArgs(int device, int button, bool down)
+		public JoystickButtonEventArgs(byte device, byte button, bool buttonPressed)
 		{
-			this.device = device;
-			this.button = button;
-			this.down = down;
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.jbutton.which = device;
+			this.eventStruct.jbutton.button = button;
+			if (buttonPressed)
+			{
+				this.eventStruct.jbutton.state = (byte)ButtonKeyState.Pressed;
+				this.eventStruct.type = (byte)EventTypes.JoystickButtonDown;
+			}
+			else
+			{
+				this.eventStruct.jbutton.state = (byte)ButtonKeyState.NotPressed;
+				this.eventStruct.type = (byte)EventTypes.JoystickButtonUp;
+			}
 		}
 
-		private int device;
+		internal JoystickButtonEventArgs(Sdl.SDL_Event ev)
+		{
+			this.eventStruct = ev;
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -52,15 +66,10 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.device;
-			}
-			set
-			{
-				this.device = value;
+				return this.eventStruct.jbutton.which;
 			}
 		}
 
-		private int button;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -68,27 +77,18 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.button;
-			}
-			set
-			{
-				this.button = value;
+				return this.eventStruct.jbutton.button;
 			}
 		}
 
-		private bool down;
 		/// <summary>
 		/// 
 		/// </summary>
-		public bool Down
+		public bool ButtonPressed
 		{
 			get
 			{
-				return this.down;
-			}
-			set
-			{
-				this.down = value;
+				return (this.eventStruct.jbutton.state == (byte)ButtonKeyState.Pressed);
 			}
 		}
 	}

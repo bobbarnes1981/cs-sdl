@@ -36,7 +36,7 @@ using System.Security.Permissions;
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("David Hudson")]
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
-[assembly: AssemblyVersion("2.2.0.0")]
+[assembly: AssemblyVersion("3.0.0")]
 [assembly: AssemblyCulture("")]		
 
 //

@@ -38,6 +38,7 @@ namespace SdlDotNet.Examples
 		private bool channelFinishedFlag;
 		private int currentChannel;
 		private int positionY = 200;
+		//private Sdl.SDL_TimerCallback timerDelegate;
 		
 		/// <summary>
 		/// 
@@ -71,49 +72,69 @@ namespace SdlDotNet.Examples
 			
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
+			Events.KeyboardUp += 
+				new KeyboardEventHandler(this.KeyboardUp);
 			Events.Quit += new QuitEventHandler(this.Quit);
 			Events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
-			Events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);			
+			Events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);	
+			//timerDelegate = new Sdl.SDL_TimerCallback(this.TimerCall);
+			//int result2 = Sdl.SDL_SetTimer(500, timerDelegate);
 
 			try 
 			{
 				font = new Font(filepath + FontName, size);
 				Mixer.Music.Load(filepath + "fard-two.ogg");
+				Mixer.Music.Volume = 128;
 				Mixer.Music.Play(1);
 				Sound sound = Mixer.Sound(filepath + "test.wav");
 				Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
 				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
 				Channel channel = new Channel(0);
-				Channel channel2 = new Channel(1);
+				//Channel channel2 = new Channel(1);
 				channel.EnableChannelFinishedCallback();
 				//channel2.EnableChannelFinishedCallback();
 				//channel.QueuedSound = queuedSound;
 				channel.Play(sound);
-				channel2.Play(sound);
+				//channel2.Play(sound);
 				
 				
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
 				Video.WindowCaption = "Delegates Example";
 				Video.Mouse.ShowCursor(false);
+				Console.WriteLine("Bpp: " + Video.Screen.BitsPerPixel);
+
+				SdlEventArgs[] events = new SdlEventArgs[3];
+				events[0] = new KeyboardEventArgs(Key.Space, true);
+				events[1] = new KeyboardEventArgs(Key.Space, false);
+				events[2] = new KeyboardEventArgs(Key.Space, true);
+				Events.Add(events);
+
+				SdlEventArgs[] eventArrayDown = Events.Peek(EventMask.KeyDown, 10);
+				SdlEventArgs[] eventArrayUp = Events.Peek(EventMask.KeyUp, 10);
+
 
 				while (!quitFlag) 
 				{
-					while (Events.PollAndDelegate()) 
+					while (Events.Poll()) 
 					{
 						// handle events till the queue is empty
 						//sound.Stop();
 					} 
 					
 					try 
-					{
-						if (Video.Mouse.IsButtonPressed(MouseButtons.PrimaryButton))
+					{						
+						if (Video.Mouse.IsButtonPressed(MouseButton.PrimaryButton))
 						{
 							Console.WriteLine("Primary button is pressed");
 						}
-						if (Video.Mouse.IsButtonPressed(MouseButtons.SecondaryButton))
+						if (Video.Mouse.IsButtonPressed(MouseButton.SecondaryButton))
 						{
 							Console.WriteLine("Secondary button is pressed");
+						}
+						if (Keyboard.IsKeyPressed(Key.Space))
+						{
+							Console.WriteLine("space bar is currently pressed");
 						}
 						Console.WriteLine("Pos: " + Video.Mouse.MousePosition.ToString());
 						Console.WriteLine("Change: " +Video.Mouse.MousePositionChange.ToString());
@@ -124,8 +145,8 @@ namespace SdlDotNet.Examples
 								"MusicChannelFinishedDelegate was called.", 
 								Color.FromArgb(0, 254, 
 								254,254));
-							text.Blit(
-								screen, 
+							screen.Blit(
+								text, 
 								new Rectangle(new Point(100,300), 
 								text.Size));
 							screen.Flip();
@@ -136,8 +157,8 @@ namespace SdlDotNet.Examples
 								"ChannelFinishedDelegate was called for channel " + currentChannel.ToString(), 
 								Color.FromArgb(0, 154, 
 								154,154));
-							text.Blit(
-								screen, 
+							screen.Blit(
+								text, 
 								new Rectangle(new Point(100,positionY + 50 * currentChannel), 
 								text.Size));
 							screen.Flip();
@@ -166,6 +187,20 @@ namespace SdlDotNet.Examples
 			{
 				quitFlag = true;
 			}
+			if (e.Key == Key.Space)
+			{
+				Console.WriteLine("Space bar was pressed");
+			}
+		}
+
+		private void KeyboardUp(
+			object sender,
+			KeyboardEventArgs e) 
+		{
+			if (e.Key == Key.Space)
+			{
+				Console.WriteLine("Space bar was released");
+			}
 		}
 
 		private void Quit(object sender, QuitEventArgs e) 
@@ -190,6 +225,13 @@ namespace SdlDotNet.Examples
 		{
 			Console.WriteLine("Music Finished");
 			musicFinishedFlag = true;
+		}
+
+		private int TimerCall(int interval)
+		{
+			Console.WriteLine("timer call: " + interval);
+			return interval;
+
 		}
 	}
 }

@@ -65,7 +65,7 @@ namespace SdlDotNet.Examples
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
 				//fill the surface with black
-				surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+				surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 				Circle circle;
 				Ellipse ellipse;
 				Line line;
@@ -82,7 +82,7 @@ namespace SdlDotNet.Examples
 				while (!quitFlag) 
 				
 				{
-					while (Events.PollAndDelegate()) 
+					while (Events.Poll()) 
 					{
 						// handle events till the queue is empty
 					} 
@@ -113,13 +113,13 @@ namespace SdlDotNet.Examples
 								rand.Next(255)));
 							times++;
 							screen.Flip();
-							surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 							Thread.Sleep(SLEEPTIME);
 						}
 
 						times = 0;
-						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (Events.PollAndDelegate()) 
+						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (Events.Poll()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -149,14 +149,14 @@ namespace SdlDotNet.Examples
 								rand.Next(255)));
 							times++;
 							screen.Flip();
-							surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 							Thread.Sleep(SLEEPTIME);
 						}
 
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
-						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (Events.PollAndDelegate()) 
+						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (Events.Poll()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -176,14 +176,14 @@ namespace SdlDotNet.Examples
 								rand.Next(255)));
 							times++;
 							screen.Flip();
-							surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 							Thread.Sleep(SLEEPTIME);
 						}
 
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
-						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (Events.PollAndDelegate()) 
+						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (Events.Poll()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -218,14 +218,14 @@ namespace SdlDotNet.Examples
 								rand.Next(255)));
 							times++;
 							screen.Flip();
-							surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 							Thread.Sleep(SLEEPTIME);
 						}
 
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
-						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (Events.PollAndDelegate()) 
+						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (Events.Poll()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -276,14 +276,14 @@ namespace SdlDotNet.Examples
 								rand.Next(255)));
 							times++;
 							screen.Flip();
-							surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 							Thread.Sleep(SLEEPTIME);
 						}
 
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
-						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (Events.PollAndDelegate()) 
+						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (Events.Poll()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -315,14 +315,14 @@ namespace SdlDotNet.Examples
 								rand.Next(255)));
 							times++;
 							screen.Flip();
-							surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 							Thread.Sleep(SLEEPTIME);
 						}
 
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
-						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (Events.PollAndDelegate()) 
+						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (Events.Poll()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -348,14 +348,14 @@ namespace SdlDotNet.Examples
 								rand.Next(255)));
 							times++;
 							screen.Flip();
-							surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 							Thread.Sleep(SLEEPTIME);
 						}
 
 						Thread.Sleep(SLEEPTIME);
 						times = 0;
-						surf.FillRectangle(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (Events.PollAndDelegate()) 
+						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+						while (Events.Poll()) 
 						{
 							// handle events till the queue is empty
 						} 
@@ -386,7 +386,7 @@ namespace SdlDotNet.Examples
 								rand.Next(255)));
 							times++;
 							screen.Flip();
-							surf.Blit(screen, new Rectangle(new Point(0, 0), screen.Size));
+							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
 							Thread.Sleep(SLEEPTIME);
 						}
 

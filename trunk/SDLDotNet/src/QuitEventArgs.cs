@@ -18,19 +18,29 @@
  */
 
 using System;
+using Tao.Sdl;
 
 namespace SdlDotNet
 {
 	/// <summary>
 	/// Summary description for QuitEventArgs.
 	/// </summary>
-	public class QuitEventArgs : EventArgs 
+	public class QuitEventArgs : SdlEventArgs 
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		public QuitEventArgs()
+		{	
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.type = (byte)EventTypes.Quit;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		internal QuitEventArgs(Sdl.SDL_Event ev)
 		{
+			this.eventStruct = ev;
 		}
 	}
 }

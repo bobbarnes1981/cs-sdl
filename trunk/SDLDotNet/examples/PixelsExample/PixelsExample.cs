@@ -1,7 +1,6 @@
 /*
  * $RCSfile$
  * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
- * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -58,7 +57,7 @@ namespace SdlDotNet.Examples {
 			int r;
 			int g;
 			int b;
-			PixelValue colorValue;
+			int colorValue;
 
 			try {
 				// set the video mode
@@ -68,7 +67,7 @@ namespace SdlDotNet.Examples {
 
 				while (!quitFlag) 
 				{
-					while (Events.PollAndDelegate()) 
+					while (Events.Poll()) 
 					{
 						// handle events till the queue is empty
 					} 
@@ -82,13 +81,14 @@ namespace SdlDotNet.Examples {
 						g = rand.Next(255);
 						b = rand.Next(255);
 
-						colorValue = screen.MapColor(Color.FromArgb(r, g, b));
+						colorValue = screen.GetColorValue(Color.FromArgb(r, g, b));
 						//colorValue = screen.MapColor(Color.FromArgb(254, 0, 0));
 						//screen.DrawPixel(x, y, Color.Red);
-						Console.WriteLine("colorValue: " + colorValue.Value.ToString());
+						Console.WriteLine("colorValue: " + colorValue.ToString());
 						screen.DrawPixel(x, y, Color.FromArgb(r, g, b));
 						//screen.DrawPixel(x, y, Color.Red);
 						Console.WriteLine("GetPixel: " + screen.GetPixel(x, y).ToString());
+						Console.WriteLine("GetPixel: " + screen.GetColorValue(screen.GetPixel(x, y)).ToString());
 					
 
 						screen.Unlock();

@@ -143,8 +143,15 @@ namespace SdlDotNet
 		/// <param name="index"></param>
 		public Joystick(int index)
 		{
-			this.handle = Sdl.SDL_JoystickOpen(index);
-			if ((this.handle == IntPtr.Zero) | !Joysticks.IsValidJoystickNumber(index))
+			if (!Joysticks.IsInitialized)
+			{
+				Joysticks.Initialize();
+			}
+			if (Joysticks.IsValidJoystickNumber(index))
+			{
+				this.handle = Sdl.SDL_JoystickOpen(index);
+			}
+			if (this.handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
@@ -171,9 +178,9 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
+						CloseHandle(handle);
+						GC.KeepAlive(this);
 					}
-					CloseHandle(handle);
-					GC.KeepAlive(this);
 					this.disposed = true;
 				}
 				finally
@@ -324,9 +331,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="button"></param>
 		/// <returns></returns>
-		public JoystickButtonState GetButtonState(int button)
+		public ButtonKeyState GetButtonState(int button)
 		{
-			return (JoystickButtonState) Sdl.SDL_JoystickGetButton(this.handle, button);
+			return (ButtonKeyState) Sdl.SDL_JoystickGetButton(this.handle, button);
 		}
 
 		/// <summary>
@@ -334,9 +341,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="hat"></param>
 		/// <returns></returns>
-		public JoystickHatState GetHatState(int hat)
+		public JoystickHatStates GetHatState(int hat)
 		{
-			return (JoystickHatState) Sdl.SDL_JoystickGetHat(this.handle, (int) hat);
+			return (JoystickHatStates) Sdl.SDL_JoystickGetHat(this.handle, (int) hat);
 		}
 	}
 }

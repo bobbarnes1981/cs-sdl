@@ -30,9 +30,9 @@ namespace SdlDotNet
 	{
 		static readonly SdlColor instance = new SdlColor();
 
-		static SdlColor()
-		{
-		}
+//		static SdlColor()
+//		{
+//		}
 
 		SdlColor()
 		{
@@ -48,15 +48,15 @@ namespace SdlDotNet
 			return new Sdl.SDL_Color(color.R, color.G, color.B);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="color"></param>
-		/// <returns></returns>
-		internal static Color ConvertColor(Sdl.SDL_Color color)
-		{
-			return Color.FromArgb(0, color.r, color.g, color.b);
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="color"></param>
+//		/// <returns></returns>
+//		internal static Color ConvertColor(Sdl.SDL_Color color)
+//		{
+//			return Color.FromArgb(0, color.r, color.g, color.b);
+//		}
 
 		/// <summary>
 		/// 

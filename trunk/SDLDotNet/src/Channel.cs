@@ -132,7 +132,7 @@ namespace SdlDotNet
 		/// <param name="sound">The sound to play</param>
 		/// <param name="milliseconds">The time limit in milliseconds</param>
 		/// <returns>The channel used to play the sound</returns>
-		public int PlayContinous(Sound sound, int milliseconds) 
+		public int PlayTimed(Sound sound, int milliseconds) 
 		{
 				int ret = SdlMixer.Mix_PlayChannelTimed(this.index, sound.GetHandle(), -1, milliseconds);
 				if (ret == (int) SdlFlag.Error)
@@ -336,10 +336,10 @@ namespace SdlDotNet
 		/// Sets the distance (attenuate sounds based on distance 
 		/// from listener) for a specific channel
 		/// </summary>
-		/// <param name="distance">Distance value from 0-255 inclusive</param>
-		public  void SetDistance(int distance) 
+		/// <param name="distanceValue">Distance value from 0-255 inclusive</param>
+		public void Distance(byte distanceValue)
 		{
-			if (SdlMixer.Mix_SetDistance(this.index, (byte)distance) == 0)
+			if (SdlMixer.Mix_SetDistance(this.index, distanceValue) == 0)
 			{
 				throw SdlException.Generate();
 			}

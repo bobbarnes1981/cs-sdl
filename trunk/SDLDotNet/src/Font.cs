@@ -100,9 +100,9 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
+						CloseHandle(handle);
+						GC.KeepAlive(this);
 					}
-					CloseHandle(handle);
-					GC.KeepAlive(this);
 					this.disposed = true;
 				}
 				finally
@@ -361,7 +361,7 @@ namespace SdlDotNet
 			{
 				throw FontException.Generate();
 			}
-			return Video.GenerateSurfaceFromPointer(pSurface);
+			return new Surface(pSurface);
 		}
 
 //		/// <summary>
@@ -409,7 +409,7 @@ namespace SdlDotNet
 			{
 				throw FontException.Generate();
 			}
-			return Video.GenerateSurfaceFromPointer(pSurface);
+			return new Surface(pSurface);
 		}
 
 		/// <summary>
@@ -431,7 +431,7 @@ namespace SdlDotNet
 			{
 				throw FontException.Generate();
 			}
-			return Video.GenerateSurfaceFromPointer(pSurface);
+			return new Surface(pSurface);
 		}
 
 

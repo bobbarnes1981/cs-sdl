@@ -118,7 +118,7 @@ namespace SdlDotNet.Examples
 			{
 				while (!quitFlag) 
 				{
-					while (Events.PollAndDelegate()) 
+					while (Events.Poll()) 
 					{
 						// handle events till the queue is empty
 					} 

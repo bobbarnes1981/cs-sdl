@@ -78,9 +78,9 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
+						CloseHandle(handle);
+						GC.KeepAlive(this);
 					}
-					CloseHandle(handle);
-					GC.KeepAlive(this);
 					this.disposed = true;
 				}
 				finally
@@ -143,7 +143,7 @@ namespace SdlDotNet
 		{
 			Smpeg.SMPEG_setdisplay(
 				this.handle, 
-				surface.SurfacePointer, 
+				surface.Handle, 
 				IntPtr.Zero, null);
 		}
 
@@ -361,10 +361,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Starts playback of a movie.
 		/// </summary>
-		/// <param name="loop">Loop movie while playing</param>
-		public void Play(bool loop)
+		/// <param name="repeat">Loop movie while playing</param>
+		public void Play(bool repeat)
 		{
-			this.Loop(loop);
+			this.Loop(repeat);
 			Smpeg.SMPEG_play(handle);
 		}
 
@@ -507,7 +507,7 @@ namespace SdlDotNet
 		/// <param name="surface"></param>
 		public void RenderFinalFrame(Surface surface)
 		{
-			Smpeg.SMPEG_renderFinal(handle, surface.SurfacePointer, 0, 0);
+			Smpeg.SMPEG_renderFinal(handle, surface.Handle, 0, 0);
 		}
 
 	}

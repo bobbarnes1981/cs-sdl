@@ -26,54 +26,57 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for JoystickAxisEventArgs.
 	/// </summary>
-	public class JoystickAxisEventArgs : EventArgs 
-	{
+	public class JoystickAxisEventArgs : SdlEventArgs 
+	{		
+		private const float JOYSTICK_ADJUSTMENT = 32768;
+		private const float JOYSTICK_SCALE = 65535;
+		/// <summary>
+		/// 
+		/// </summary>
+		private const short JOYSTICK_THRESHHOLD = 3277;
+
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="device">The joystick index</param>
 		/// <param name="axisIndex">The axis index</param>
 		/// <param name="axisValue">The new axis value</param>
-		public JoystickAxisEventArgs(int device, int axisIndex, float axisValue)
+		public JoystickAxisEventArgs(byte device, byte axisIndex, float axisValue)
 		{
-			this.device = device;
-			this.axisIndex = axisIndex;
-			this.axisValue = axisValue;
+			this.eventStruct = new Sdl.SDL_Event();
+			this.eventStruct.jaxis.which = device;
+			this.eventStruct.jaxis.axis = axisIndex;
+			this.eventStruct.jaxis.val = 
+				(short)((axisValue * JOYSTICK_SCALE) - JOYSTICK_ADJUSTMENT);
+			this.eventStruct.type = (byte)EventTypes.JoystickAxisMotion;
 		}
 
-		private int device;
+		internal JoystickAxisEventArgs(Sdl.SDL_Event ev)
+		{
+			this.eventStruct = ev;
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
-		public int Device
+		public byte Device
 		{
 			get
 			{
-				return this.device;
-			}
-			set
-			{
-				this.device = value;
+				return this.eventStruct.jaxis.which;
 			}
 		}
 
-		private int axisIndex;
 		/// <summary>
 		/// 
 		/// </summary>
-		public int AxisIndex
+		public byte AxisIndex
 		{
 			get
 			{
-				return this.axisIndex;
-			}
-			set
-			{
-				this.axisIndex = value;
+				return this.eventStruct.jaxis.axis;
 			}
 		}
-
-		private float axisValue;
 
 		/// <summary>
 		/// 
@@ -82,11 +85,24 @@ namespace SdlDotNet
 		{
 			get
 			{ 
-				return this.axisValue;
+				float jaxisValue = 
+					((float)this.eventStruct.jaxis.val + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE;
+				if (jaxisValue < 0)
+				{
+					jaxisValue = 0;
+				}
+				return jaxisValue;
 			}
-			set
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static short JoystickThreshold
+		{
+			get
 			{
-				this.axisValue = value;
+				return JOYSTICK_THRESHHOLD;
 			}
 		}
 	}

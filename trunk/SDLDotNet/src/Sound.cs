@@ -72,9 +72,9 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
+						CloseHandle(handle);
+						GC.KeepAlive(this);
 					}
-					CloseHandle(handle);
-					GC.KeepAlive(this);
 					this.disposed = true;
 				}
 				finally
@@ -118,14 +118,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns sound as an array of bytes.
 		/// </summary>
-		public byte[] Array
+		public byte[] Array()
 		{
-			get
-			{
 				byte[] array = new byte[this.size];
 				Marshal.Copy(this.GetHandle(), array, 0, (int)this.size);
 				return array;
-			}
 		}
 
 		/// <summary>

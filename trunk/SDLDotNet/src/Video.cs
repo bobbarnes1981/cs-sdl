@@ -35,10 +35,11 @@ namespace SdlDotNet
 		static private bool disposed = false;
 		static readonly Video instance = new Video();
 		static Mouse mouse = Mouse.Instance;
+		static VideoInfo videoInfo = VideoInfo.Instance;
 
-		static Video()
-		{
-		}
+//		static Video()
+//		{
+//		}
 
 		Video()
 		{
@@ -70,8 +71,8 @@ namespace SdlDotNet
 			{
 				if (disposing)
 				{
+					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
 				}
-				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
 				disposed = true;
 			}
 		}
@@ -121,7 +122,6 @@ namespace SdlDotNet
 			}
 		}
 
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -129,7 +129,7 @@ namespace SdlDotNet
 		/// <param name="height"></param>
 		/// <param name="fullscreen"></param>
 		/// <param name="bitsPerPixel"></param>
-		public bool IsVideoModeOk(int width, int height, bool fullscreen, int bitsPerPixel)
+		public static bool IsVideoModeOK(int width, int height, bool fullscreen, int bitsPerPixel)
 		{
 			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN);
 			if (fullscreen)
@@ -154,12 +154,23 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns></returns>
+		public static bool IsActive
+		{
+			get
+			{
+				return (Sdl.SDL_GetAppState() & Sdl.SDL_APPACTIVE) !=0;
+			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="width"></param>
 		/// <param name="height"></param>
 		/// <param name="fullscreen"></param>
-		public int BestBitsPerPixel(int width, int height, bool fullscreen)
+		public static int BestBitsPerPixel(int width, int height, bool fullscreen)
 		{
-			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN);
+			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF);
 			if (fullscreen)
 			{
 				flags |= Sdl.SDL_FULLSCREEN;
@@ -167,49 +178,25 @@ namespace SdlDotNet
 			return Sdl.SDL_VideoModeOK(
 				width, 
 				height, 
-				PixelFormat.BitsPerPixel, 
+				VideoInfo.BitsPerPixel, 
 				flags);
 		}
 
-		private Sdl.SDL_VideoInfo VideoInfo
-		{
-			get
-			{
-				IntPtr videoInfoPointer = Sdl.SDL_GetVideoInfo();
-				if(videoInfoPointer == IntPtr.Zero) 
-				{
-					throw new SdlException(string.Format("Video query failed: {0}", Sdl.SDL_GetError()));
-				}
-				return (Sdl.SDL_VideoInfo)
-					Marshal.PtrToStructure(videoInfoPointer, 
-					typeof(Sdl.SDL_VideoInfo));
-			}
-		}
-
-		private Sdl.SDL_PixelFormat PixelFormat
-		{
-			get
-			{
-				return (Sdl.SDL_PixelFormat)
-					Marshal.PtrToStructure(VideoInfo.vfmt, 
-					typeof(Sdl.SDL_PixelFormat));
-			}
-		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="fullscreen"></param>
 		/// <returns></returns>
-		public Size[] ListModes(bool fullscreen)
+		public static Size[] ListModes(bool fullscreen)
 		{
-			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN);
+			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF);
 			if (fullscreen)
 			{
 				flags |= Sdl.SDL_FULLSCREEN;
 			}
-				IntPtr format = IntPtr.Zero;
-				Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, flags);
+			IntPtr format = IntPtr.Zero;
+			Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, flags);
 			Size[] size = new Size[rects.Length];
 			for (int i=0; i<rects.Length; i++)
 			{
@@ -344,7 +331,7 @@ namespace SdlDotNet
 		/// must be preceded by a call to SetVideoMode
 		/// </summary>
 		/// <returns>The main screen surface</returns>
-		public static Surface GetVideoSurface
+		public static Surface Screen
 		{
 			get
 			{
@@ -355,56 +342,6 @@ namespace SdlDotNet
 				}
 				return Surface.FromScreenPtr(s);
 			}
-		}
-
-		/// <summary>
-		/// This method can be used to generate a Surface from 
-		/// a pointer generated in an external library. It is 
-		/// intended for use by people building wrappers of 
-		/// external SDL libraries such as SDL_ttf.
-		/// </summary>
-		/// <returns>An Surface representing the real
-		/// SDL_Surface underlying the IntPtr.</returns>
-		public static Surface GenerateSurfaceFromPointer( IntPtr pointer )
-		{
-			Surface s = new Surface(pointer); 
-			if (s == null)
-			{
-				throw SdlException.Generate();
-			}
-			//return Surface.FromScreenPtr(s); 
-			return s; 
-		}
-
-		/// <summary>
-		/// Loads an image file from disk
-		/// </summary>
-		/// <param name="file">The filename of the bitmap to load</param>
-		/// <returns>A Surface representing the bitmap</returns>
-		public static Surface LoadImage(string file) 
-		{
-			return Surface.FromImageFile(file);
-		}
-
-		/// <summary>
-		/// Loads a bitmap from a System.Drawing.Bitmap object, 
-		/// usually obtained from a resource
-		/// </summary>
-		/// <param name="bitmap">The bitmap object to load</param>
-		/// <returns>A Surface representing the bitmap</returns>
-		public static Surface LoadImage(System.Drawing.Bitmap bitmap) 
-		{
-			return Surface.FromBitmap(bitmap);
-		}
-
-		/// <summary>
-		/// Loads a bitmap from an array of bytes in memory.
-		/// </summary>
-		/// <param name="bitmap">The bitmap data</param>
-		/// <returns>A Surface representing the bitmap</returns>
-		public static Surface LoadBmp(byte[] bitmap) 
-		{
-			return Surface.FromBitmap(bitmap);
 		}
 
 		/// <summary>
@@ -462,6 +399,17 @@ namespace SdlDotNet
 			get
 			{
 				return Video.mouse;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static VideoInfo VideoInfo
+		{
+			get
+			{
+				return Video.videoInfo;
 			}
 		}
 
@@ -526,7 +474,7 @@ namespace SdlDotNet
 		/// <param name="icon">the surface containing the image</param>
 		public static void WindowIcon(Surface icon) 
 		{
-			Sdl.SDL_WM_SetIcon(icon.SurfacePointer, null);
+			Sdl.SDL_WM_SetIcon(icon.Handle, null);
 		}
 
 		/// <summary>
@@ -545,6 +493,16 @@ namespace SdlDotNet
 			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_ON);
 		}
 		/// <summary>
+		/// Queries if input has been grabbed.
+		/// </summary>
+		public static bool IsInputGrabbed
+		{
+			get
+			{
+				return (Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_QUERY) == Sdl.SDL_GRAB_ON);
+			}
+		}
+		/// <summary>
 		/// Releases keyboard and mouse focus from a previous call to GrabInput()
 		/// </summary>
 		public static void ReleaseInput() 
@@ -561,6 +519,115 @@ namespace SdlDotNet
 			{
 				string buffer="";
 				return Sdl.SDL_VideoDriverName(buffer, 100);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="red"></param>
+		/// <param name="green"></param>
+		/// <param name="blue"></param>
+		public void Gamma(float red, float green, float blue)
+		{
+			int result = Sdl.SDL_SetGamma(red, green, blue);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gammaValue"></param>
+		public void Gamma(float gammaValue)
+		{
+			int result = Sdl.SDL_SetGamma(gammaValue, gammaValue, gammaValue);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public short[] GetGammaRampRed()
+		{
+			short[] red = new short[256];
+			int result = Sdl.SDL_GetGammaRamp(red, null, null);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+			return red;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gammaArray"></param>
+		public void SetGammaRampRed(short[] gammaArray)
+		{
+			int result = Sdl.SDL_SetGammaRamp(gammaArray, null, null);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public short[] GetGammaRampBlue()
+		{
+			short[] blue = new short[256];
+			int result = Sdl.SDL_GetGammaRamp(null, null, blue);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+			return blue;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gammaArray"></param>
+		public void SetGammaRampBlue(short[] gammaArray)
+		{
+			int result = Sdl.SDL_SetGammaRamp(null, null, gammaArray);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public short[] GetGammaRampGreen()
+		{
+			short[] green = new short[256];
+			int result = Sdl.SDL_GetGammaRamp(null, green, null);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+			return green;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gammaArray"></param>
+		public void SetGammaRampGreen(short[] gammaArray)
+		{
+			int result = Sdl.SDL_SetGammaRamp(null, gammaArray, null);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
 			}
 		}
 	}

@@ -26,41 +26,61 @@ namespace SdlDotNet
 	/// <summary>
 	/// Summary description for ActiveEventArgs.
 	/// </summary>
-	public class ActiveEventArgs : EventArgs 
+	public class ActiveEventArgs : SdlEventArgs
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		public ActiveEventArgs()
+		internal ActiveEventArgs(Sdl.SDL_Event ev)
 		{
+			this.eventStruct = ev;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="gained">
+		/// <param name="gainedFocus">
 		/// True if the focus was gained, False if it was lost
 		/// </param>
-		public ActiveEventArgs(bool gained)
+		/// <param name="state"></param>
+		public ActiveEventArgs(bool gainedFocus, Focus state)
 		{
-			this.gained = gained;
+			this.eventStruct = new Sdl.SDL_Event();
+			if (gainedFocus)
+			{
+				this.eventStruct.active.gain = 1;
+			}
+			else
+			{
+				this.eventStruct.active.gain = 0;
+			}
+			this.eventStruct.type = (byte)EventTypes.ActiveEvent;
+			this.eventStruct.active.state = (byte)state;
 		}
 		
-		private bool gained;
 		/// <summary>
 		/// 
 		/// </summary>
-		public bool Gained
+		public bool GainedFocus
 		{
 			get
 			{
-				return this.gained;
+				if (this.eventStruct.active.gain != 0)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
-			set
+		}	
+		/// <summary>
+		/// 
+		/// </summary>
+		public Focus State
+		{
+			get
 			{
-				this.gained = value;
+				return (Focus)this.eventStruct.active.state;
 			}
 		}
-
 	}
 }

@@ -64,6 +64,7 @@ namespace SdlDotNet.Examples
 
 			//SdlMixer.MixFunctionDelegate audioMixer = new SdlMixer.MixFunctionDelegate(this.player);
 			//(Smpeg.SMPEG_playAudioSDL);
+			Mixer.Initialize();
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			Mixer.Close();
 			Movie movie = new Movie(filepath + "test.mpg");
@@ -94,7 +95,7 @@ namespace SdlDotNet.Examples
 			{
 				while (movie.IsPlaying && (quitFlag == false))
 				{
-					while (Events.PollAndDelegate()){}
+					while (Events.Poll()){}
 				}
 			} catch (MovieStatusException)
 			{

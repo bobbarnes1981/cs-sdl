@@ -31,9 +31,9 @@ namespace SdlDotNet
 	{
 		static readonly Mouse instance = new Mouse();
 
-		static Mouse()
-		{
-		}
+//		static Mouse()
+//		{
+//		}
 
 		Mouse()
 		{
@@ -129,7 +129,7 @@ namespace SdlDotNet
 		/// <returns>
 		/// If the button is pressed, returns True, otherwise returns False
 		/// </returns>
-		public bool IsButtonPressed(MouseButtons button) 
+		public bool IsButtonPressed(MouseButton button) 
 		{
 			int dummyX;
 			int dummyY;
