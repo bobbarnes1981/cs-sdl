@@ -1,6 +1,6 @@
 <project>
     <assemblies>
-        <assembly location="C:\data\workspace\SDLDotNet\SDLAllDotNet\bin\Debug\SDL.All.NET.dll" documentation="C:\data\workspace\SDLDotNet\SDLAllDotNet\bin\Debug\SDL.All.NET.xml" />
+        <assembly location="C:\data\workspace\backup\new\SDLDotNet\SDLAllDotNet\bin\Debug\SDL.All.NET.dll" documentation="C:\data\workspace\backup\new\SDLDotNet\SDLAllDotNet\bin\Debug\SDL.All.NET.xml" />
     </assemblies>
     <namespaces>
         <namespace name="SDLDotNet"></namespace>
@@ -58,7 +58,7 @@
             <property name="UseNDocXmlFile" value="" />
         </documenter>
         <documenter name="JavaDoc">
-            <property name="OutputDirectory" value=".\docs\JavaDoc\" />
+            <property name="OutputDirectory" value=".\doc\" />
             <property name="ShowMissingSummaries" value="False" />
             <property name="ShowMissingRemarks" value="False" />
             <property name="ShowMissingParams" value="False" />
@@ -154,9 +154,9 @@
         </documenter>
         <documenter name="MSDN">
             <property name="OutputDirectory" value=".\doc\" />
-            <property name="HtmlHelpName" value="SDL.All.NET" />
+            <property name="HtmlHelpName" value="SDL.ALL.NET" />
             <property name="IncludeFavorites" value="False" />
-            <property name="Title" value="SDL.NET All" />
+            <property name="Title" value="SDL.ALL.NET" />
             <property name="SplitTOCs" value="False" />
             <property name="DefaulTOC" value="" />
             <property name="IncludeHierarchy" value="False" />
