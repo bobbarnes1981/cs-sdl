@@ -76,7 +76,7 @@ namespace SdlDotNet {
 				if (disposing)
 				{
 				}
-				CloseHandle(ref handle);
+				CloseHandle(handle);
 				GC.KeepAlive(this);
 			}
 			disposed = true;
@@ -85,7 +85,7 @@ namespace SdlDotNet {
 		/// <summary>
 		/// 
 		/// </summary>
-		protected abstract void CloseHandle(ref IntPtr handle);
+		protected abstract void CloseHandle(IntPtr handle);
 
 		/// <summary>
 		/// Closes and destroys this object

@@ -99,7 +99,7 @@ namespace SdlDotNet {
 					{
 
 					}
-					CloseHandle(ref handle);
+					CloseHandle(handle);
 					this.disposed = true;
 				}
 				finally
@@ -112,7 +112,7 @@ namespace SdlDotNet {
 		/// <summary>
 		/// Closes CDDrive handle
 		/// </summary>
-		protected override void CloseHandle(ref IntPtr handleToClose) 
+		protected override void CloseHandle(IntPtr handleToClose) 
 		{
 			Sdl.SDL_CDClose(handleToClose);
 			GC.KeepAlive(this);

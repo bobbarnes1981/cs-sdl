@@ -100,7 +100,7 @@ namespace SdlDotNet
 					if (disposing)
 					{
 					}
-					CloseHandle(ref handle);
+					CloseHandle(handle);
 					GC.KeepAlive(this);
 					this.disposed = true;
 				}
@@ -114,7 +114,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes Surface handle
 		/// </summary>
-		protected override void CloseHandle(ref IntPtr handleToClose) 
+		protected override void CloseHandle(IntPtr handleToClose) 
 		{
 			SdlTtf.TTF_CloseFont(handleToClose);
 			GC.KeepAlive(this);
