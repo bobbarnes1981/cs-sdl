@@ -43,11 +43,11 @@ namespace SdlDotNet.Examples
 			Title = "Demo Status";
 
 			// Add some text
-			int labelOffset = 2;
+			//int labelOffset = 2;
 			int dataOffset = 54;
 			int labelHeight = manager.GetTitleHeight("test");
 			int labelPad = 2;
-			int labelWidth = 48;
+			//int labelWidth = 48;
 			int dataWidth = 96;
 			int i = 0;
 
