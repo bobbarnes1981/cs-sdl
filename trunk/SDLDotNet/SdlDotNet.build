@@ -67,6 +67,7 @@
 	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
+	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="clean" />
     </target>
 
     <target name="build" depends="init" description="Builds current configuration">
@@ -92,6 +93,7 @@
 	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="build" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="build" />
+	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="build" />    
     </target>
 
     <target name="buildrelease" depends="clean, setrelease, examples" description="Build all Release assemblies">
@@ -169,7 +171,12 @@
 		<include name="examples/MoviePlayer/${build.dir}/*" />
 		<exclude name="examples/MoviePlayer/*j.user" />
 		<exclude name="examples/MoviePlayer/${obj.dir}" />
-		<!-- <exclude name="examples/Rectangles/${build.dir}/*.dll" /> -->
+		<!-- <exclude name="examples/MoviePlayer/${build.dir}/*.dll" /> -->
+		<include name="examples/SimpleGame/*" />
+		<include name="examples/SimpleGame/${build.dir}/*" />
+		<exclude name="examples/SimpleGame/*j.user" />
+		<exclude name="examples/SimpleGame/${obj.dir}" />
+		<!-- <exclude name="examples/SimpleGame/${build.dir}/*.dll" /> -->
 		<include name="lib/*" />
 		<include name="scripts/**" />
 		<include name="tools/**" />

@@ -1,0 +1,61 @@
+<Project name="MoviePlayer" description="" standardNamespace="SdlDotNet.Examples" newfilesearch="None" enableviewstate="True" version="1.1" projecttype="C#">
+	<Contents>
+		<File name=".\App.ico" subtype="Code" buildaction="Exclude" dependson="" data="" />
+		<File name=".\AssemblyInfo.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+		<File name=".\MoviePlayer.cs" subtype="Code" buildaction="Compile" dependson="" data="" />
+	</Contents>
+	<References>
+				<Reference type="Gac" refto="System.dll" localcopy="True" />
+				<Reference type="Gac" refto="System.Drawing.dll" localcopy="True" />
+				<Reference type="Project" refto="SdlDotNet" localcopy="True" />
+				<Reference type="Assembly" refto="..\\..\\lib\Tao.Sdl.dll" localcopy="True" />
+	</References>
+	<Configurations active="Release">
+		<Configuration name="Release">
+			<CodeGeneration
+				runtime="MsNet"
+				compiler="Csc"
+				warninglevel="1"
+				includedebuginformation="False"
+				optimize="True"
+				unsafecodeallowed="False"
+				generateoverflowchecks="False"
+				mainclass="SdlDotNet.Examples.MoviePlayer"
+				target="WinExe"
+				definesymbols="TRACE"
+				generatexmldocumentation="False"
+				win32Icon="App.ico"
+			/>
+			<Output
+				directory=".\bin\Release"
+				assembly="MoviePlayer"
+				executeScript=""
+				executeBeforeBuild=""
+				executeAfterBuild=""
+			/>
+		</Configuration>
+		<Configuration name="Debug">
+			<CodeGeneration
+				runtime="MsNet"
+				compiler="Csc"
+				warninglevel="4"
+				includedebuginformation="True"
+				optimize="False"
+				unsafecodeallowed="False"
+				generateoverflowchecks="False"
+				mainclass="SdlDotNet.Examples.MoviePlayer"
+				target="WinExe"
+				definesymbols="DEBUG;TRACE"
+				generatexmldocumentation="False"
+				win32Icon="App.ico"
+			/>
+			<Output
+				directory=".\bin\Debug"
+				assembly="MoviePlayer"
+				executeScript=""
+				executeBeforeBuild=""
+				executeAfterBuild=""
+			/>
+		</Configuration>
+	</Configurations>
+</Project>
