@@ -8,7 +8,9 @@ Assembly:
 	Name: SdlDotNet.dll
 	Namespace: SdlDotNet
 	Notes:
-		There is one assembly. Supporting four separate assemblies was too much trouble. Tao.Sdl (http://taoframework.com, or http:/cs-sdl.sourceforge.net) contains the low-level bindings to the four C lbraries (SDL, SDL_image, SDL_ttf, SDL_mixer)
+		There is one assembly. Supporting four separate assemblies was too much trouble. 
+		Tao.Sdl (http://taoframework.com, or http:/cs-sdl.sourceforge.net) contains 
+		the low-level bindings to the four C lbraries (SDL, SDL_image, SDL_ttf, SDL_mixer)
 
 Zip file contains:
 	/* - info files, Strong name keys, build/solution files.
@@ -50,7 +52,7 @@ Development Environment:
 		SDL_image 1.2.3
 		SDL_mixer 1.2.5
 		SDL_ttf 2.0.6
-		SPMEG 0.4.4 (possibly for v2.1 or later) I have had problems getting mp3 to run. There is some sort of dep problem.
+		SPMEG 0.4.4 (possibly for v2.1 or later)
 		
 		.NET libraries
 		Tao.Sdl
@@ -101,30 +103,7 @@ Sijmen Mulder
 
 Could use some sort of TextOut function for blitting to a surface.
 
-can't get the MusicFinished delegate to work: 
+Fix the MusicFinished delegate **DONE**
 
-sdl = SDL.Instance; 
-sdl.Mixer.EnableMusicCallbacks(); 
-sdl.Events.MusicFinished += new MusicFinishedHandler(this.MyMusicFinished); 
+Is SDL_Delay() not implemented in the current version? **DONE**
 
-... 
-
-
-private void MyMusicFinished() 
-{ 
-MessageBox.Show("Music finished"); 
-} 
--Flynn
-
-Is SDL_Delay() not implemented in the current version? *DONE*
-
------------------------------
-Old News
--
-Lucas Maloney Sun 23 Mar 2003 21:24:41 EST 
-
-SDLDotNet.TTF is a .NET wrapper for sdl-ttf (See http://www.libsdl.org/projects/SDL_ttf/)
-
-This is my initial import of this wrapper.  It is lacking a lot in the way of error checking and documentation, but it is fully functional.
-
-There is a simple example program in example/.  It is based on the showfont example that comes with SDL_ttf.
