@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimitivesExample", "exampl
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegatesExample", "examples\DelegatesExample\DelegatesExample.csproj", "{BFBDBF71-B2E6-4EA8-A00B-AC25C6A40DF0}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -69,6 +73,10 @@ Global
 		{CAE7F1D2-FD22-4102-BCAD-8FA2AE96B695}.Debug.Build.0 = Debug|.NET
 		{CAE7F1D2-FD22-4102-BCAD-8FA2AE96B695}.Release.ActiveCfg = Release|.NET
 		{CAE7F1D2-FD22-4102-BCAD-8FA2AE96B695}.Release.Build.0 = Release|.NET
+		{BFBDBF71-B2E6-4EA8-A00B-AC25C6A40DF0}.Debug.ActiveCfg = Debug|.NET
+		{BFBDBF71-B2E6-4EA8-A00B-AC25C6A40DF0}.Debug.Build.0 = Debug|.NET
+		{BFBDBF71-B2E6-4EA8-A00B-AC25C6A40DF0}.Release.ActiveCfg = Release|.NET
+		{BFBDBF71-B2E6-4EA8-A00B-AC25C6A40DF0}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
