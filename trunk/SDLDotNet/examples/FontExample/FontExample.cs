@@ -77,6 +77,11 @@ namespace SdlDotNet.Examples
 						Color.FromArgb(0, (byte)rand.Next(255), 
 						(byte)rand.Next(255),(byte)rand.Next(255)));
 
+					if (rand.Next(2) == 1)
+					{
+						text.FlipVertical();
+					}
+
 					text.Blit(
 						screen, 
 						new Rectangle(new Point(rand.Next(width - 100),rand.Next(height - 100)), 
