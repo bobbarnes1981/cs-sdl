@@ -33,7 +33,6 @@
     <property name="native.sdl" value="Tao.Sdl"/>
     <property name="nunit.assembly" value="nunit.framework"/>
     <property name="log.assembly" value="log4net"/>
-    <property name="grammar.assembly" value="grammatica-1.4"/>
 
     <!-- default configuration -->
     <property name="project.config" value="Debug" /> <!-- Debug|Release -->
@@ -70,8 +69,8 @@
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Demos/MfGames.Sdl.Demos.build" target="clean" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Gui/MfGames.Sdl.Gui.build" target="clean" />
+	<nant buildfile="${examples.dir}/GuiExample/GuiExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/SpriteGuiDemos/SpriteGuiDemos.build" target="clean" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="clean" />
 	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="clean" />
@@ -102,8 +101,8 @@
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/JoystickExample/JoystickExample.build" target="build" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Gui/MfGames.Sdl.Gui.build" target="build" />
-	<nant buildfile="${examples.dir}/MfGames.Sdl.Demos/MfGames.Sdl.Demos.build" target="build" />
+	<nant buildfile="${examples.dir}/GuiExample/GuiExample.build" target="build" />
+	<nant buildfile="${examples.dir}/SpriteGuiDemos/SpriteGuiDemos.build" target="build" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="build" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="build" />
 	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="build" />    
@@ -180,12 +179,12 @@
 		<exclude name="examples/Gears/*j.user" />
 		<exclude name="examples/Gears/${obj.dir}" />
 		<!-- <exclude name="examples/Gears/${build.dir}/*.dll" /> -->
-		<include name="examples/MfGames.Sdl.Demos/**" />
-		<exclude name="examples/MfGames.Sdl.Demos/*j.user" />
-		<exclude name="examples/MfGames.Sdl.Demos/${obj.dir}" />
-		<include name="examples/MfGames.Sdl.Gui/**" />
-		<exclude name="examples/MfGames.Sdl.Gui/*j.user" />
-		<exclude name="examples/MfGames.Sdl.Gui/${obj.dir}" />
+		<include name="examples/GuiExample/**" />
+		<exclude name="examples/GuiExample/*j.user" />
+		<exclude name="examples/GuiExample/${obj.dir}" />
+		<include name="examples/SpriteGuiDemos/**" />
+		<exclude name="examples/SpriteGuiDemos/*j.user" />
+		<exclude name="examples/SpriteGuiDemos/${obj.dir}" />
 		<include name="examples/MoviePlayer/*" />
 		<include name="examples/MoviePlayer/${build.dir}/*" />
 		<exclude name="examples/MoviePlayer/*j.user" />
@@ -241,14 +240,21 @@
 		<include name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}">
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}">
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}/deps">
+	    <fileset basedir="${project.main.dir}/${lib.dir}">
+		<include name="*.dll"/>
+		<exclude name="${native.sdl}.dll"/>
+		<exclude name="${nunit.assembly}.dll"/>
 	    </fileset>
 	</copy>
     </target>

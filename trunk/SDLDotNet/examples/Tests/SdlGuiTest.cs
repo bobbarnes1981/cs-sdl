@@ -18,13 +18,13 @@
  */
 
 using SdlDotNet.Sprites;
-using SdlDotNet.Utility;
+using SdlDotNet.Examples.GuiExample;
 using NUnit.Framework;
 using SdlDotNet;
 using System.Drawing;
 using System;
 
-namespace MFGames.Sdl.Gui
+namespace SdlDotNet.Examples.GuiExample
 {
 	/// <summary>
 	/// 

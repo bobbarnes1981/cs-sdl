@@ -508,7 +508,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MFGames.Sdl.Gui" path="examples\\MFGames.Sdl.Gui" language="C#" type="Library" assemblyName="MFGames.Sdl.Gui" rootNamespace="SdlDotNet.Examples">
+	<Project name="GuiExample" path="examples\\GuiExample" language="C#" type="Library" assemblyName="GuiExample" rootNamespace="GuiExample">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -516,7 +516,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>MFGames.Sdl.Gui.xml</XmlDocFile>
+		    <XmlDocFile>GuiExample.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -527,7 +527,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>MFGames.Sdl.Gui.xml</XmlDocFile>
+		    <XmlDocFile>GuiExample.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -539,7 +539,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="MFGames.Sdl.Demos" path="examples\\MFGames.Sdl.Demos" language="C#" type="WinExe" startupObject="MFGames.Sdl.Demos.SdlDemo" assemblyName="MFGames.Sdl.Demos" rootNamespace="SdlDotNet.Examples" icon="App.ico">
+	<Project name="SpriteGuiDemos" path="examples\\SpriteGuiDemos" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SdlDemo" assemblyName="SpriteGuiDemo" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -547,7 +547,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>MFGames.Sdl.Demos.xml</XmlDocFile>
+		    <XmlDocFile>SpriteGuiDemos.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -558,7 +558,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>MFGames.Sdl.Demos.xml</XmlDocFile>
+		    <XmlDocFile>SpriteGuiDemos.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -566,7 +566,7 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MFGames.Sdl.Gui" localCopy="true"/>
+	    <Reference name="GuiExample" localCopy="true"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -599,7 +599,7 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="MFGames.Sdl.Gui" localCopy="true"/>
+	    <Reference name="GuiExample" localCopy="true"/>
 	    <Reference name="nunit.framework" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
