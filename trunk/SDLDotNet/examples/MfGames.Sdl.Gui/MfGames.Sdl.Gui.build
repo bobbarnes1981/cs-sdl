@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Triad" default="build">
+<project name="MfGames.Sdl.Gui" default="build">
     <target name="build">
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
@@ -12,17 +12,27 @@
 	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
-		<include name="nunit.framework.dll"/>
 	    </fileset>
 	</copy>
-	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Utility/${build.dir}">
+		<include name="MfGames.Utility.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${examples.dir}/MfGames.Sdl.Sprites/${build.dir}">
+		<include name="MfGames.Sdl.Sprites.dll"/>
+	    </fileset>
+	</copy>
+	<csc target="library" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" >
 	    <sources failonempty="true">
 		<include name="*.cs" />
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
+		<include name="MfGames.Utility.dll"/>
+		<include name="MfGames.Sdl.Sprites.dll"/>
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>
-		<include name="nunit.framework.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
 	    </references>
 	</csc>
