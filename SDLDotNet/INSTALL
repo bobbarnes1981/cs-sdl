@@ -14,6 +14,8 @@ Unzip the SdlDotNet-2.1.0beta1-1.zip file.
 Copy the files located in the /bin directory (SdlDotNet.dll and Tao.Sdl.dll)
 into the Global Assembly Cache (c:\winnt\assembly).
 
+If you plan to compile SdlDotNet, you will have to run one of the scripts in the /scripts directory. There are scritps to create project files for Visual Studio 2003, Sharpdevelop and MonoDevelop.
+
 
 
 
