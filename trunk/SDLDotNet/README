@@ -14,6 +14,7 @@ Zip file contains:
 	/* - info files, Strong name keys, build/solution files.
 	/bin - Assemblies
 	/doc - HTML and CHM docs.
+	/lib - library dependencies. Please put these libs in your path.
 	/examples - demo apps for the library
 	/src - source
 	
@@ -43,7 +44,7 @@ Development Environment:
 		but I hope to use it as much as possible to reduce the ad hoc tests 
 		I do on the code.
 
-	Dependencies:
+	Dependencies (make sure these are in your path):
 		C libraries
 		SDL 1.2.7
 		SDL_image 1.2.3
@@ -69,7 +70,7 @@ Approach:
 	related, it is worth a look.
 
 Coding Style
-	Follow .NET naming conventions.
+	Follow .NET naming conventions. **DONE**
 	CLS compliance **Done**
 
 Tutorials
