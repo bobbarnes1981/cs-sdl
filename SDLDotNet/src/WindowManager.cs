@@ -47,9 +47,13 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Initialize()
 		{
-			if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
+			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
+				== (int) SdlFlag.FalseValue)
 			{
-				throw SdlException.Generate();
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
+				{
+					throw SdlException.Generate();
+				}
 			}
 		}
 

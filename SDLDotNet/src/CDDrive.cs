@@ -25,36 +25,6 @@ using Tao.Sdl;
 
 namespace SdlDotNet 
 {
-
-	#region CDstatus
-	/// <summary>
-	/// The possible states which a CD-ROM drive can be in.
-	/// </summary>
-	public enum CDStatus 
-	{
-		/// <summary>
-		/// The CD tray is empty.
-		/// </summary>
-		TrayEmpty = Sdl.CD_TRAYEMPTY,
-		/// <summary>
-		/// The CD has stopped playing.
-		/// </summary>
-		Stopped = Sdl.CD_STOPPED,
-		/// <summary>
-		/// The CD is playing.
-		/// </summary>
-		Playing = Sdl.CD_PLAYING,
-		/// <summary>
-		/// The CD has been paused.
-		/// </summary>
-		Paused = Sdl.CD_PAUSED,
-		/// <summary>
-		/// An error occured while getting the status.
-		/// </summary>
-		Error = Sdl.CD_ERROR
-	}
-	#endregion CDstatus
-
 	/// <summary>
 	/// Represents a CD-ROM drive on the system
 	/// </summary>

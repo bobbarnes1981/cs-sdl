@@ -54,9 +54,6 @@ namespace SdlDotNet.Examples
 				filepath = @"./";
 			}
 
-			Console.WriteLine("WasINIT" + SdlTtf.TTF_WasInit());
-			Console.WriteLine("INIT" +SdlTtf.TTF_Init());
-			Console.WriteLine("WASINIT"+SdlTtf.TTF_WasInit());
 			Font font;
 			Random rand = new Random();
 

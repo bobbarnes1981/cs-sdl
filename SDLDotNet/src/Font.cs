@@ -57,30 +57,6 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Text Style
-	/// </summary>
-	[FlagsAttribute]
-	public enum Styles
-	{
-		/// <summary>
-		/// Normal
-		/// </summary>
-		Normal = SdlTtf.TTF_STYLE_NORMAL,
-		/// <summary>
-		/// Bold
-		/// </summary>
-		Bold = SdlTtf.TTF_STYLE_BOLD,
-		/// <summary>
-		/// Italic
-		/// </summary>
-		Italic = SdlTtf.TTF_STYLE_ITALIC,
-		/// <summary>
-		/// Underline
-		/// </summary>
-		Underline = SdlTtf.TTF_STYLE_UNDERLINE
-	}
-
-	/// <summary>
 	/// Font Class
 	/// </summary>
 	public class Font : BaseSdlResource

@@ -23,25 +23,6 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// 
-	/// </summary>
-	public enum MovieStatus
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		Playing = Smpeg.SMPEG_PLAYING,
-		/// <summary>
-		/// 
-		/// </summary>
-		Stopped = Smpeg.SMPEG_STOPPED,
-		/// <summary>
-		/// 
-		/// </summary>
-		Error = Smpeg.SMPEG_ERROR
-	}
-
-	/// <summary>
 	/// Represents a movie mpg file.
 	/// </summary>
 	/// <remarks>

@@ -298,9 +298,13 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Initialize()
 		{
-			if (Sdl.SDL_Init(Sdl.SDL_INIT_CDROM) != (int) SdlFlag.Success)
+			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) & Sdl.SDL_INIT_CDROM) 
+				!= (int) SdlFlag.TrueValue)
 			{
-				throw SdlException.Generate();
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_CDROM) != (int) SdlFlag.Success)
+				{
+					throw SdlException.Generate();
+				}
 			}
 		}
 

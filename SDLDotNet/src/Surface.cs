@@ -27,24 +27,7 @@ using System.Globalization;
 using Tao.Sdl;
 
 namespace SdlDotNet 
-{
-	/// <summary>
-	/// 
-	/// </summary>
-	[FlagsAttribute]
-	public enum Alphas
-	{
-		/// <summary>
-		/// Equivalent to SDL_RLEACC
-		/// </summary>
-		RleEncoded = Sdl.SDL_RLEACCEL,
-
-		/// <summary>
-		/// Equivalent to SDL_SRCALPHA
-		/// </summary>
-		SourceAlphaBlending  = Sdl.SDL_SRCALPHA
-	}
-	
+{	
 	/// <summary>
 	/// An opaque structure representing an Sdl pixel value.
 	/// </summary>
