@@ -128,7 +128,8 @@ namespace SdlDotNet
 		/// You do not have to call this method
 		/// in order to start using the Mixer object.
 		/// </summary>
-		public void Open() {
+		public void Open() 
+		{
 			PrivateClose();
 			PrivateOpen();
 		}
@@ -143,7 +144,8 @@ namespace SdlDotNet
 		/// You will not be able to mix more than this number of samples.
 		/// </param>
 		/// <param name="chunkSize">The chunk size for samples</param>
-		public void Open(int frequency, AudioFormat format, int channels, int chunkSize) {
+		public void Open(int frequency, AudioFormat format, int channels, int chunkSize) 
+		{
 			PrivateClose();
 			PrivateOpen(frequency, format, channels, chunkSize);
 		}
@@ -152,7 +154,8 @@ namespace SdlDotNet
 		{
 			SdlMixer.Mix_OpenAudio(SdlMixer.MIX_DEFAULT_FREQUENCY, unchecked((short)AudioFormat.Default), 2, 1024);
 		}
-		private void PrivateOpen(int frequency, AudioFormat format, int channels, int chunksize) {
+		private void PrivateOpen(int frequency, AudioFormat format, int channels, int chunksize) 
+		{
 			SdlMixer.Mix_OpenAudio(frequency, (short)format, channels, chunksize);
 		}
 		private static void PrivateClose() 
@@ -165,10 +168,13 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="file">The filename to load</param>
 		/// <returns>A new Sample object</returns>
-		public Sample LoadWav(string file) {
+		public Sample LoadWav(string file) 
+		{
 			IntPtr p = SdlMixer.Mix_LoadWAV_RW(Sdl.SDL_RWFromFile(file, "rb"), 1);
 			if (p == IntPtr.Zero)
+			{
 				throw SdlException.Generate();
+			}
 			return new Sample(p);
 		}
 		/// <summary>
@@ -180,7 +186,9 @@ namespace SdlDotNet
 		{
 			IntPtr p = SdlMixer.Mix_LoadWAV_RW(Sdl.SDL_RWFromMem(data, data.Length), 1);
 			if (p == IntPtr.Zero)
+			{
 				throw SdlException.Generate();
+			}
 			return new Sample(p);
 		}
 
@@ -700,12 +708,12 @@ namespace SdlDotNet
 		/// <returns>A new Music object</returns>
 		public Music LoadMusic(string file) 
 		{
-			IntPtr mus = SdlMixer.Mix_LoadMUS(file);
-			if (mus == IntPtr.Zero)
+			IntPtr musicPtr = SdlMixer.Mix_LoadMUS(file);
+			if (musicPtr == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
-			return new Music(mus);
+			return new Music(musicPtr);
 		}
 		/// <summary>
 		/// Plays a music sample

@@ -56,7 +56,10 @@ namespace SdlDotNet
 					if (disposing)
 					{
 					}
-					CloseHandle(handle);
+					// TODO: fix this issue correctly.
+					// In Release mode, GC disposes the Music class too quickly unless
+					// The CloseHandle is commented out.
+					//CloseHandle(handle);
 					GC.KeepAlive(this);
 					this.disposed = true;
 				}
