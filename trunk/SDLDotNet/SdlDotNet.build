@@ -67,6 +67,7 @@
 	<nant buildfile="${examples.dir}/PixelsExample/PixelsExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="clean" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
+	<nant buildfile="${examples.dir}/DelegatesExample/DelegatesExample.build" target="clean" />
     </target>
 
     <!--run this target to create a mono build -->
@@ -177,6 +178,10 @@
 		<include name="examples/PrimitivesExample/${build.dir}/*" />
 		<exclude name="examples/PrimitivesExample/*j.user" />
 		<!-- <exclude name="examples/PrimitivesExample/${build.dir}/*.dll" /> -->
+		<include name="examples/DelegatesExample/*" />
+		<include name="examples/DelegatesExample/${build.dir}/*" />
+		<exclude name="examples/DelegatesExample/*j.user" />
+		<!-- <exclude name="examples/DelegatesExample/${build.dir}/*.dll" /> -->
 		<include name="examples/Rectangles/*" />
 		<include name="examples/Rectangles/${build.dir}/*" />
 		<exclude name="examples/Rectangles/*j.user" />
