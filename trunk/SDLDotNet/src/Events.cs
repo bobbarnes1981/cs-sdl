@@ -27,11 +27,12 @@ namespace SdlDotNet {
 	/// <summary>
 	/// Represents the current state of all the mouse buttons
 	/// </summary>
-	public struct MouseButtonState {
-
+	public struct MouseButtonState 
+	{
 		private int _state;
 
-		internal MouseButtonState(int state) {
+		internal MouseButtonState(int state) 
+		{
 			_state = state;
 		}
 
@@ -42,7 +43,8 @@ namespace SdlDotNet {
 		/// <returns>
 		/// If the button is pressed, returns True, otherwise returns False
 		/// </returns>
-		public bool IsButtonPressed(int button) {
+		public bool IsButtonPressed(int button) 
+		{
 			return (_state & (1 << ((int)button) - 1)) != 0;
 		}
 	}
@@ -50,7 +52,9 @@ namespace SdlDotNet {
 	/// <summary>
 	/// Indicates that the application has gained or lost input focus
 	/// </summary>
-	/// <param name="gained">True if the focus was gained, False if it was lost</param>
+	/// <param name="gained">
+	/// True if the focus was gained, False if it was lost
+	/// </param>
 	public delegate void ActiveEventHandler(bool gained);
 
 	/// <summary>
@@ -61,7 +65,7 @@ namespace SdlDotNet {
 	/// <param name="scancode">The scancode of the key</param>
 	/// <param name="key">The Sdl virtual keycode</param>
 	/// <param name="mod">Current modifier flags</param>
-	public delegate void KeyboardEventHandler(int device, bool down, int scancode, Sdl.SDLKey key, Sdl.SDLKey mod);
+	public delegate void KeyboardEventHandler(int device, bool down, int scancode, Sdl.SDLKey key, Sdl.SDLMod mod);
 
 	/// <summary>
 	/// Indicates that the mouse has moved
@@ -144,8 +148,8 @@ namespace SdlDotNet {
 	/// You must call the PollAndDelegate() member in order for any events to fire.
 	/// </summary>
 	public class Events {
-		private Hashtable _userevents;
-		private int _usereventid;
+		private Hashtable _userevents = new Hashtable();
+		private int _usereventid = 0;
 
 		/// <summary>
 		/// Fires when the application has become active or inactive
@@ -238,9 +242,18 @@ namespace SdlDotNet {
 		/// </summary>
 		public event MusicFinishedHandler MusicFinished;
 
-		internal Events(Video vid) {
-			_userevents = new Hashtable();
-			_usereventid = 0;
+		static readonly Events instance = new Events();
+
+		Events()
+		{
+		}
+
+		public static Events Instance
+		{
+			get 
+			{
+				return instance;
+			}
 		}
 
 		/// <summary>
@@ -250,13 +263,18 @@ namespace SdlDotNet {
 		/// <returns>
 		/// True if any events were in the queue, otherwise False
 		/// </returns>
-		public bool PollAndDelegate() {
-			Tao.Sdl.Sdl.SDL_Event ev;
+		public bool PollAndDelegate() 
+		{
+			Sdl.SDL_Event ev;
 			int ret = Sdl.SDL_PollEvent(out ev);
 			if (ret == -1)
+			{
 				throw SdlException.Generate();
+			}
 			if (ret == 0)
+			{
 				return false;
+			}
 			DelegateEvent(ref ev);
 			return true;
 		}
@@ -264,8 +282,9 @@ namespace SdlDotNet {
 		/// <summary>
 		/// Checks the event queue, and waits until an event is available
 		/// </summary>
-		public void WaitAndDelegate() {
-			Tao.Sdl.Sdl.SDL_Event ev;
+		public void WaitAndDelegate() 
+		{
+			Sdl.SDL_Event ev;
 			if (Sdl.SDL_WaitEvent(out ev) == 0)
 			{
 				throw SdlException.Generate();
@@ -279,137 +298,167 @@ namespace SdlDotNet {
 //		/// <param name="ev">An opaque object representing a user-defined event.
 //		/// Will be passed back to the UserEvent handler delegate when this event is processed.</param>
 //		public void PushUserEvent(object ev) {
-//			Tao.Sdl.Sdl.SDL_UserEvent sdlev;
-//			sdlev.type = (byte)Tao.Sdl.Sdl.SDL_USEREVENT;
+//			Sdl.SDL_UserEvent sdlev;
+//			sdlev.type = (byte)Sdl.SDL_USEREVENT;
 //			lock (this) {
 //				_userevents[_usereventid] = ev;
 //				_usereventid++;
 //				sdlev.code = _usereventid;
 //			}
-//			if (Tao.Sdl.Sdl.SDL_PushEvent(out (Tao.Sdl.Sdl.SDL_Event)sdlev) != 0)
+//			if (Sdl.SDL_PushEvent(out (Sdl.SDL_Event)sdlev) != 0)
 //			{
 //				throw SdlException.Generate();
 //			}
 //		}
 
-		private void DelegateEvent(ref Sdl.SDL_Event ev) {
-			switch (ev.type) {
-			case Tao.Sdl.Sdl.SDL_ACTIVEEVENT:
+		private void DelegateEvent(ref Sdl.SDL_Event ev) 
+		{
+			switch (ev.type) 
+			{
+			case Sdl.SDL_ACTIVEEVENT:
 				DelegateActiveEvent(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_JOYAXISMOTION:
+			case Sdl.SDL_JOYAXISMOTION:
 				DelegateJoyAxisMotion(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_JOYBALLMOTION:
+			case Sdl.SDL_JOYBALLMOTION:
 				DelegateJoyBallMotion(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_JOYBUTTONDOWN:
+			case Sdl.SDL_JOYBUTTONDOWN:
 				DelegateJoyButtonDown(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_JOYBUTTONUP:
+			case Sdl.SDL_JOYBUTTONUP:
 				DelegateJoyButtonUp(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_JOYHATMOTION:
+			case Sdl.SDL_JOYHATMOTION:
 				DelegateJoyHatMotion(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_KEYDOWN:
+			case Sdl.SDL_KEYDOWN:
 				DelegateKeyDown(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_KEYUP:
+			case Sdl.SDL_KEYUP:
 				DelegateKeyUp(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_MOUSEBUTTONDOWN:
+			case Sdl.SDL_MOUSEBUTTONDOWN:
 				DelegateMouseButtonDown(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_MOUSEBUTTONUP:
+			case Sdl.SDL_MOUSEBUTTONUP:
 				DelegateMouseButtonUp(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_MOUSEMOTION:
+			case Sdl.SDL_MOUSEMOTION:
 				DelegateMouseMotion(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_QUIT:
+			case Sdl.SDL_QUIT:
 				DelegateQuit(ref ev);
 				break;
-//			case Tao.Sdl.Sdl.SDL_USEREVENT:
+//			case Sdl.SDL_USEREVENT:
 //				DelegateUserEvent(ev);
 //				break;
-			case Tao.Sdl.Sdl.SDL_VIDEOEXPOSE:
+			case Sdl.SDL_VIDEOEXPOSE:
 				DelegateVideoExpose(ref ev);
 				break;
-			case Tao.Sdl.Sdl.SDL_VIDEORESIZE:
+			case Sdl.SDL_VIDEORESIZE:
 				DelegateVideoResize(ref ev);
 				break;
 			}
 		}
 
-		private void DelegateActiveEvent(ref Sdl.SDL_Event ev) {
-			if (AppActive != null || MouseFocus != null || InputFocus != null) {
-				Tao.Sdl.Sdl.SDL_ActiveEvent *aev = (Tao.Sdl.Sdl.SDL_ActiveEvent *)ev;
-				if (((int)aev->state & (int)Tao.Sdl.Sdl.SDL_APPMOUSEFOCUS) != 0 && MouseFocus != null)
+		private void DelegateActiveEvent(ref Sdl.SDL_Event ev) 
+		{
+			if (AppActive != null || MouseFocus != null || InputFocus != null) 
+			{
+				if (((int)ev.active.state & 
+					(int)Sdl.SDL_APPMOUSEFOCUS) != 0 && 
+					MouseFocus != null)
 				{
-					MouseFocus(aev->gain != 0);
+					MouseFocus(ev.active.gain != 0);
 				}
-				if (((int)aev->state & (int)Tao.Sdl.Sdl.SDL_APPINPUTFOCUS) != 0 && InputFocus != null)
+				if (((int)ev.active.state & 
+					(int)Sdl.SDL_APPINPUTFOCUS) != 0 && 
+					InputFocus != null)
 				{
-					InputFocus(aev->gain != 0);
+					InputFocus(ev.active.gain != 0);
 				}
-				if (((int)aev->state & (int)Tao.Sdl.Sdl.SDL_APPACTIVE) != 0 && AppActive != null)
+				if (((int)ev.active.state & 
+					(int)Sdl.SDL_APPACTIVE) != 0 && 
+					AppActive != null)
 				{
-					AppActive(aev->gain != 0);
+					AppActive(ev.active.gain != 0);
 				}
 			}
 		}
-		private void DelegateJoyAxisMotion(ref Sdl.SDL_Event ev) {
-			if (JoyAxisMotion != null) {
-				Tao.Sdl.Sdl.SDL_JoyAxisEvent *jev = (Tao.Sdl.Sdl.SDL_JoyAxisEvent *)ev;
-				JoyAxisMotion(jev->which, jev->axis, jev->value);
+
+		private void DelegateJoyAxisMotion(ref Sdl.SDL_Event ev) 
+		{
+			if (JoyAxisMotion != null) 
+			{
+				JoyAxisMotion(ev.jaxis.which, ev.jaxis.axis, ev.jaxis.val);
 			}
 		}
-		private void DelegateJoyBallMotion(ref Sdl.SDL_Event ev) {
-			if (JoyBallMotion != null) {
-				Tao.Sdl.Sdl.SDL_JoyBallEvent *jev = (Tao.Sdl.Sdl.SDL_JoyBallEvent *)ev;
-				JoyBallMotion(jev->which, jev->ball, jev->xrel, jev->yrel);
+
+		private void DelegateJoyBallMotion(ref Sdl.SDL_Event ev) 
+		{
+			if (JoyBallMotion != null) 
+			{
+				JoyBallMotion(
+					ev.jball.which, 
+					ev.jball.ball,
+					ev.jball.xrel, 
+					ev.jball.yrel);
 			}
 		}
-		private void DelegateJoyButtonDown(ref Sdl.SDL_Event ev) {
-			if (JoyButton != null || JoyButtonDown != null) {
-				Tao.Sdl.Sdl.SDL_JoyButtonEvent *jev = (Tao.Sdl.Sdl.SDL_JoyButtonEvent *)ev;
+
+		private void DelegateJoyButtonDown(ref Sdl.SDL_Event ev) 
+		{
+			if (JoyButton != null || JoyButtonDown != null) 
+			{
 				if (JoyButton != null)
 				{
-					JoyButton(jev->which, jev->button, true);
+					JoyButton(ev.jbutton.which, ev.jbutton.button, true);
 				}
 				if (JoyButtonDown != null)
 				{
-					JoyButtonDown(jev->which, jev->button, true);
+					JoyButtonDown(ev.jbutton.which, ev.jbutton.button, true);
 				}
 			}
 		}
-		private void DelegateJoyButtonUp(ref Sdl.SDL_Event ev) {
-			if (JoyButton != null || JoyButtonUp != null) {
-				Tao.Sdl.Sdl.SDL_JoyButtonEvent *jev = (Tao.Sdl.Sdl.SDL_JoyButtonEvent *)ev;
+
+		private void DelegateJoyButtonUp(ref Sdl.SDL_Event ev) 
+		{
+			if (JoyButton != null || JoyButtonUp != null) 
+			{
 				if (JoyButton != null)
 				{
-					JoyButton(jev->which, jev->button, true);
+					JoyButton(ev.jbutton.which, ev.jbutton.button, true);
 				}
 				if (JoyButtonUp != null)
 				{
-					JoyButtonUp(jev->which, jev->button, true);
+					JoyButtonUp(ev.jbutton.which, ev.jbutton.button, true);
 				}
 			}
 		}
-		private void DelegateJoyHatMotion(ref Sdl.SDL_Event ev) {
-			if (JoyHatMotion != null) {
-				Tao.Sdl.Sdl.SDL_JoyHatEvent *jev = (Tao.Sdl.Sdl.SDL_JoyHatEvent *)ev;
-				JoyHatMotion(jev->which, jev->hat, (int)jev->value);
+
+		private void DelegateJoyHatMotion(ref Sdl.SDL_Event ev) 
+		{
+			if (JoyHatMotion != null) 
+			{
+				JoyHatMotion(ev.jhat.which, ev.jhat.hat, (int)ev.jhat.val);
 			}
 		}
-		private void DelegateKeyDown(ref Sdl.SDL_Event ev) {
-			if (Keyboard != null || KeyboardDown != null) {
-				int device, scancode;
+
+		private void DelegateKeyDown(ref Sdl.SDL_Event ev) 
+		{
+			if (Keyboard != null || KeyboardDown != null) 
+			{
+				int device;
+				int scancode;
 				Sdl.SDLKey key;
-				Sdl.SDLKey mod;
+				Sdl.SDLMod mod;
 				bool down;
-				ParseKeyStruct(ev, out device, out down, out scancode, out key, out mod);
+				ParseKeyStruct(
+					ref ev, out device, 
+					out down, out scancode, 
+					out key, out mod);
 				if (Keyboard != null) 
 				{
 						Keyboard(device, down, scancode, key, mod);
@@ -420,13 +469,20 @@ namespace SdlDotNet {
 				}
 			}
 		}
-		private void DelegateKeyUp(ref Sdl.SDL_Event ev) {
-			if (Keyboard != null || KeyboardUp != null) {
-				int device, scancode;
+
+		private void DelegateKeyUp(ref Sdl.SDL_Event ev) 
+		{
+			if (Keyboard != null || KeyboardUp != null) 
+			{
+				int device;
+				int scancode;
 				Sdl.SDLKey key;
-				Sdl.SDLKey mod;
+				Sdl.SDLMod mod;
 				bool down;
-				ParseKeyStruct(ref ev, out device, out down, out scancode, out key, out mod);
+				ParseKeyStruct(
+					ref ev, out device, 
+					out down, out scancode, 
+					out key, out mod);
 				if (Keyboard != null) 
 				{
 					Keyboard(device, down, scancode, key, mod);
@@ -437,7 +493,9 @@ namespace SdlDotNet {
 				}
 			}
 		}
-		private void DelegateMouseButtonDown(ref Sdl.SDL_Event ev) {
+
+		private void DelegateMouseButtonDown(ref Sdl.SDL_Event ev) 
+		{
 			if (MouseButton != null || MouseButtonDown != null) {
 				int button;
 				int x, y;
@@ -452,8 +510,10 @@ namespace SdlDotNet {
 				}
 			}
 		}
-		private void DelegateMouseButtonUp(ref Sdl.SDL_Event ev) {
-			if (MouseButton != null || MouseButtonUp != null) {
+		private void DelegateMouseButtonUp(ref Sdl.SDL_Event ev) 
+		{
+			if (MouseButton != null || MouseButtonUp != null) 
+			{
 				int button;
 				int x, y;
 				ParseMouseStruct(ref ev, out button, out x, out y);
@@ -467,66 +527,91 @@ namespace SdlDotNet {
 				}
 			}
 		}
-		private void DelegateMouseMotion(ref Sdl.SDL_Event ev) {
-			if (MouseMotion != null) {
-				Tao.Sdl.Sdl.SDL_MouseMotionEvent *mev = (Tao.Sdl.Sdl.SDL_MouseMotionEvent *)ev;
-				MouseMotion(new MouseButtonState(mev->state), mev->x, mev->y, mev->xrel, mev->yrel);
+
+		private void DelegateMouseMotion(ref Sdl.SDL_Event ev) 
+		{
+			if (MouseMotion != null) 
+			{
+				MouseMotion(
+					new MouseButtonState(ev.motion.state), 
+					ev.motion.x, 
+					ev.motion.y, 
+					ev.motion.xrel, 
+					ev.motion.yrel);
 			}
 		}
+
 		private void DelegateQuit(ref Sdl.SDL_Event ev) {
-			if (Quit != null) Quit();
-		}
-		private void DelegateUserEvent(ref Sdl.SDL_Event ev) {
-			if (UserEvent != null) {
-				Tao.Sdl.Sdl.SDL_UserEvent *uev = (Tao.Sdl.Sdl.SDL_UserEvent *)ev;
-				object ret;
-				lock (this) {
-					ret = _userevents[uev->code];
-				}
-				if (ret != null) {
-					if (ret is ChannelFinishedEvent) {
-						if (ChannelFinished != null)
-						{
-							ChannelFinished(((ChannelFinishedEvent)ret).Channel);
-						}
-					} else if (ret is MusicFinishedEvent) {
-						if (MusicFinished != null)
-						{
-							MusicFinished();
-						}
-					} else
-						UserEvent(ret);
-				}
+			if (Quit != null) 
+			{
+					Quit();
 			}
 		}
-		private void DelegateVideoExpose(ref Sdl.SDL_Event ev) {
+//		private void DelegateUserEvent(ref Sdl.SDL_Event ev) {
+//			if (UserEvent != null) {
+//				Sdl.SDL_UserEvent *uev = (Sdl.SDL_UserEvent *)ev;
+//				object ret;
+//				lock (this) {
+//					ret = _userevents[uev->code];
+//				}
+//				if (ret != null) {
+//					if (ret is ChannelFinishedEvent) {
+//						if (ChannelFinished != null)
+//						{
+//							ChannelFinished(((ChannelFinishedEvent)ret).Channel);
+//						}
+//					} else if (ret is MusicFinishedEvent) {
+//						if (MusicFinished != null)
+//						{
+//							MusicFinished();
+//						}
+//					} else
+//						UserEvent(ret);
+//				}
+//			}
+//		}
+
+		private void DelegateVideoExpose(ref Sdl.SDL_Event ev) 
+		{
 			if (Expose != null) 
 			{
 				Expose();
 			}
 		}
-		private void DelegateVideoResize(ref Sdl.SDL_Event ev) {
-			if (Resize != null) {
-				Tao.Sdl.Sdl.SDL_ResizeEvent *rev = (Tao.Sdl.Sdl.SDL_ResizeEvent *)ev;
-				Resize(rev->w, rev->h);
+
+		private void DelegateVideoResize(ref Sdl.SDL_Event ev) 
+		{
+			if (Resize != null) 
+			{
+				Resize(ev.resize.w, ev.resize.h);
 			}
 		}
 
-		private void ParseKeyStruct(ref Sdl.SDL_Event ev, out int device, out bool down, out int scancode, out Sdl.SDLKey key, out Sdl.SDLKey mod) {
-			Sdl.SDL_KeyboardEvent *kev = (Tao.Sdl.Sdl.SDL_KeyboardEvent *)ev;
-			device = kev->which;
-			down = ((int)kev->state == (int)Sdl.SDL_PRESSED);
-			Sdl.SDL_keysym ks = kev->keysym;
+		private void ParseKeyStruct(
+			ref Sdl.SDL_Event ev, 
+			out int device, 
+			out bool down, 
+			out int scancode, 
+			out Sdl.SDLKey key, 
+			out Sdl.SDLMod mod) 
+		{
+			device = ev.key.which;
+			down = ((int)ev.key.state == (int)Sdl.SDL_PRESSED);
+			Sdl.SDL_keysym ks = ev.key.keysym;
 			scancode = ks.scancode;
-			key = (Key)ks.sym;
-			mod = (Mod)ks.mod;
+			key = (Sdl.SDLKey)ks.sym;
+			mod = (Sdl.SDLMod)ks.mod;
 		}
 
-		private void ParseMouseStruct(ref Sdl.SDL_Event ev, out int button, out int x, out int y) {
-			Tao.Sdl.Sdl.SDL_MouseButtonEvent *mev = (Tao.Sdl.Sdl.SDL_MouseButtonEvent *)ev;
-			button = (int)mev->button;
-			x = mev->x;
-			y = mev->y;
+		private void ParseMouseStruct(
+			ref Sdl.SDL_Event ev, 
+			out int button, 
+			out int x, 
+			out int y) 
+		{
+			button = (int)ev.button.button;
+			x = ev.button.x;
+			y = ev.button.y;
 		}
 
 		private class ChannelFinishedEvent {

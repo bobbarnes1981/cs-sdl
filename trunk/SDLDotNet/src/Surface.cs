@@ -196,7 +196,7 @@ namespace SdlDotNet
 			if (_freeondispose && !_disposed) 
 			{
 				_disposed = true;
-				Sdl.SDL_FreeSurface(ref _surfacePtr);
+				//Sdl.SDL_FreeSurface(ref _surfacePtr);
 				GC.SuppressFinalize(this);
 			}
 		}
