@@ -195,7 +195,7 @@ namespace SdlDotNet
 					{
 
 					}
-					CloseHandle(ref handle);
+					CloseHandle(handle);
 					GC.KeepAlive(this);
 					this.disposed = true;
 				}
@@ -209,7 +209,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes Surface handle
 		/// </summary>
-		protected override void CloseHandle(ref IntPtr handleToClose) 
+		protected override void CloseHandle(IntPtr handleToClose) 
 		{
 			Sdl.SDL_FreeSurface(handleToClose);
 			GC.KeepAlive(this);
@@ -250,6 +250,11 @@ namespace SdlDotNet
 			{
 				GC.KeepAlive(this);
 				return handle;
+			}
+			set
+			{
+				GC.KeepAlive(this);
+				handle = value;
 			}
 		}
 
@@ -1209,6 +1214,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Flips the columns of a surface, for use in an OpenGL texture for example
+		/// </summary>
+		public void FlipHorizontal() 
+		{
+			this.RotateSurface(270);
+			this.FlipVertical();
+			this.RotateSurface(90);
+		}
+
+		/// <summary>
 		/// returns the length of a scanline in bytes
 		/// </summary>
 		public short Pitch 
@@ -1295,64 +1310,56 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sourceSurface"></param>
 		/// <param name="degreesOfRotation"></param>
 		/// <returns></returns>
-		public Surface RotateSurface(Surface sourceSurface, int degreesOfRotation)
+		public void RotateSurface(int degreesOfRotation)
 		{
-			IntPtr surfacePtr = 
-				SdlGfx.rotozoomSurface(sourceSurface.SurfacePointer, degreesOfRotation, 1, 0);
-			return new Surface(surfacePtr);
+			this.SurfacePointer = 
+				SdlGfx.rotozoomSurface(this.SurfacePointer, degreesOfRotation, 1, 0);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sourceSurface"></param>
 		/// <param name="degreesOfRotation"></param>
 		/// <param name="antiAlias"></param>
 		/// <returns></returns>
-		public Surface RotateSurface(Surface sourceSurface, int degreesOfRotation, bool antiAlias)
+		public void RotateSurface(int degreesOfRotation, bool antiAlias)
 		{
 			int antiAliasParameter = 0;
 			if (antiAlias == true)
 			{
-				antiAliasParameter = 1;
+				antiAliasParameter = SdlGfx.SMOOTHING_ON;
 			}
 			
-			IntPtr surfacePtr = 
+			this.SurfacePointer = 
 				SdlGfx.rotozoomSurface(
-				sourceSurface.SurfacePointer, 
+				this.SurfacePointer, 
 				degreesOfRotation, 
 				1, 
 				antiAliasParameter);
-
-			return new Surface(surfacePtr);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sourceSurface"></param>
 		/// <param name="degreesOfRotation"></param>
 		/// <param name="zoom"></param>
 		/// <returns></returns>
-		public Surface RotateAndZoomSurface(Surface sourceSurface, int degreesOfRotation, double zoom)
+		public void RotateAndZoomSurface(int degreesOfRotation, double zoom)
 		{
-			IntPtr surfacePtr = 
-				SdlGfx.rotozoomSurface(sourceSurface.SurfacePointer, degreesOfRotation, zoom, 0);
-			return new Surface(surfacePtr);
+			this.SurfacePointer = 
+				SdlGfx.rotozoomSurface(this.SurfacePointer, degreesOfRotation, zoom, 0);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sourceSurface"></param>
 		/// <param name="degreesOfRotation"></param>
 		/// <param name="zoom"></param>
 		/// <param name="antiAlias"></param>
 		/// <returns></returns>
-		public Surface RotateAndZoomSurface(Surface sourceSurface, int degreesOfRotation, 
+		public void RotateAndZoomSurface(int degreesOfRotation, 
 			double zoom, bool antiAlias)
 		{
 			int antiAliasParameter = 0;
@@ -1361,80 +1368,70 @@ namespace SdlDotNet
 				antiAliasParameter = 1;
 			}
 			
-			IntPtr surfacePtr = 
+			this.SurfacePointer = 
 				SdlGfx.rotozoomSurface(
-				sourceSurface.SurfacePointer, 
+				this.SurfacePointer, 
 				degreesOfRotation, 
 				zoom, 
 				antiAliasParameter);
-
-			return new Surface(surfacePtr);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sourceSurface"></param>
 		/// <param name="zoomX"></param>
 		/// <param name="zoomY"></param>
 		/// <returns></returns>
-		public Surface ZoomSurface(Surface sourceSurface, double zoomX, double zoomY)
+		public void ZoomSurface(double zoomX, double zoomY)
 		{
-			IntPtr surfacePtr = 
-				SdlGfx.zoomSurface(sourceSurface.SurfacePointer, zoomX, zoomY, 0);
-			return new Surface(surfacePtr);
+			this.SurfacePointer = 
+				SdlGfx.zoomSurface(this.SurfacePointer, zoomX, zoomY, 0);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sourceSurface"></param>
 		/// <param name="zoomX"></param>
 		/// <param name="zoomY"></param>
 		/// <param name="antiAlias"></param>
 		/// <returns></returns>
-		public Surface ZoomSurface(Surface sourceSurface, double zoomX, double zoomY, bool antiAlias)
+		public void ZoomSurface(double zoomX, double zoomY, bool antiAlias)
 		{
 			int antiAliasParameter = 0;
 			if (antiAlias == true)
 			{
 				antiAliasParameter = 1;
 			}
-			IntPtr surfacePtr = 
-				SdlGfx.zoomSurface(sourceSurface.SurfacePointer, zoomX, zoomY, antiAliasParameter);
-			return new Surface(surfacePtr);
+			this.SurfacePointer = 
+				SdlGfx.zoomSurface(this.SurfacePointer, zoomX, zoomY, antiAliasParameter);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sourceSurface"></param>
 		/// <param name="zoom"></param>
 		/// <returns></returns>
-		public Surface ZoomSurface(Surface sourceSurface, double zoom)
+		public void ZoomSurface(double zoom)
 		{
-			IntPtr surfacePtr = 
-				SdlGfx.zoomSurface(sourceSurface.SurfacePointer, zoom, zoom, 0);
-			return new Surface(surfacePtr);
+			this.SurfacePointer = 
+				SdlGfx.zoomSurface(this.SurfacePointer, zoom, zoom, 0);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sourceSurface"></param>
 		/// <param name="zoom"></param>
 		/// <param name="antiAlias"></param>
 		/// <returns></returns>
-		public Surface ZoomSurface(Surface sourceSurface, double zoom, bool antiAlias)
+		public void ZoomSurface(double zoom, bool antiAlias)
 		{
 			int antiAliasParameter = 0;
 			if (antiAlias == true)
 			{
 				antiAliasParameter = 1;
 			}
-			IntPtr surfacePtr = 
-				SdlGfx.zoomSurface(sourceSurface.SurfacePointer, zoom, zoom, antiAliasParameter);
-			return new Surface(surfacePtr);
+			this.SurfacePointer = 
+				SdlGfx.zoomSurface(this.SurfacePointer, zoom, zoom, antiAliasParameter);
 		}
 	}
 }
