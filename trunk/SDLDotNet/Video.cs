@@ -135,6 +135,8 @@ namespace SDLDotNet {
 				throw SDLException.Generate();
 			return Surface.FromScreenPtr(s);
 		}
+
+
 		/// <summary>
 		/// Gets the surface for the window or screen, must be preceded by a call to SetVideoMode*
 		/// </summary>
@@ -142,6 +144,23 @@ namespace SDLDotNet {
 		/// <returns>The main screen surface</returns>
 		public Surface GetVideoSurface() {
 			Natives.SDL_Surface *s = Natives.SDL_GetVideoSurface();
+			if (s == null)
+				throw SDLException.Generate();
+			return Surface.FromScreenPtr(s);
+		}
+
+		/// <summary>
+		/// This method can be used to generate a Surface from 
+		/// a pointer generated in an external library. It is 
+		/// intended for use by people building wrappers of 
+		/// external SDL libraries such as SDL_ttf.
+		/// </summary>
+		/// <returntype>SDLDotNet.Surface</returntype>
+		/// <returns>An Surface representing the real
+		/// SDL_Surface underlying the IntPtr.</returns>
+		public Surface GenerateSurfaceFromPointer( IntPtr pointer )
+		{
+			Natives.SDL_Surface *s = (Natives.SDL_Surface*)pointer.ToPointer();
 			if (s == null)
 				throw SDLException.Generate();
 			return Surface.FromScreenPtr(s);
