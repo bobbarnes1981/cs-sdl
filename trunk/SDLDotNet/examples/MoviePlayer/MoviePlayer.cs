@@ -82,7 +82,7 @@ namespace SdlDotNet.Examples
 			movie.DisableAudio();
 			movie.AdjustVolume(100);
 			movie.Display(screen);
-			//Smpeg.SMPEG_play(intPtr);
+			//movie.Loop(true);
 			movie.Play();
 
 			try

@@ -40,6 +40,7 @@ namespace SdlDotNet
 		/// </summary>
 		Error = Smpeg.SMPEG_ERROR
 	}
+
 	/// <summary>
 	/// Represents a movie mpg file.
 	/// </summary>
@@ -60,7 +61,9 @@ namespace SdlDotNet
 		/// <param name="file"></param>
 		public Movie(string file)
 		{
-			this.handle = Smpeg.SMPEG_new(file, out movieInfo, (int)SdlFlag.TrueValue);
+			this.handle = 
+				Smpeg.SMPEG_new(file, out movieInfo, 
+				(int)SdlFlag.TrueValue);
 			this.movieInfo = movieInfo;
 			EnableVideo();
 			EnableAudio();
@@ -69,7 +72,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		public IntPtr GetHandle
+		private IntPtr GetHandle
 		{ 
 			get
 			{
@@ -153,8 +156,12 @@ namespace SdlDotNet
 		/// <param name="surface"></param>
 		public void Display(Surface surface)
 		{
-			Smpeg.SMPEG_setdisplay(handle, surface.SurfacePointer, IntPtr.Zero, null);
+			Smpeg.SMPEG_setdisplay(
+				handle, 
+				surface.SurfacePointer, 
+				IntPtr.Zero, null);
 		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -349,6 +356,133 @@ namespace SdlDotNet
 		public void Stop()
 		{
 			Smpeg.SMPEG_stop(handle);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Pause()
+		{
+			Smpeg.SMPEG_pause(handle);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Rewind()
+		{
+			Smpeg.SMPEG_rewind(handle);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Loop(bool repeat)
+		{
+			if (repeat)
+			{
+				Smpeg.SMPEG_loop(handle, (int) SdlFlag.TrueValue);
+			}
+			else
+			{
+				Smpeg.SMPEG_loop(handle, (int) SdlFlag.FalseValue);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		public void ScaleXY( int width, int height)
+		{
+			Smpeg.SMPEG_scaleXY(handle, width, height );
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="scalingFactor"></param>
+		public void ScaleSize(int scalingFactor)
+		{
+			Smpeg.SMPEG_scale(handle, scalingFactor);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void ScaleDouble()
+		{
+			Smpeg.SMPEG_scale(handle, 2);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void ScaleNormal()
+		{
+			Smpeg.SMPEG_scale(handle, 1);
+		}
+
+		/// <summary>
+		/// Move the video display area within the destination surface
+		/// </summary>
+		/// <param name="xAxis"></param>
+		/// <param name="yAxis"></param>
+		public void Move( int xAxis, int yAxis)
+		{
+			Smpeg.SMPEG_move(handle, xAxis, yAxis );
+		}
+
+		/// <summary>
+		/// Move the video display area within the destination surface
+		/// </summary>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		/// <param name="xAxis"></param>
+		/// <param name="yAxis"></param>
+		public void DisplayRegion( 
+			int width, int height, 
+			int xAxis, int yAxis)
+		{
+			Smpeg.SMPEG_setdisplayregion(handle, xAxis, yAxis, width, height );
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="seconds"></param>
+		public void SkipSeconds(float seconds)
+		{
+			Smpeg.SMPEG_skip(handle, seconds);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="bytes"></param>
+		public void Seek(int bytes)
+		{
+			Smpeg.SMPEG_seek(handle, bytes);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="frameNumber"></param>
+		public void RenderFrame(int frameNumber)
+		{
+			Smpeg.SMPEG_renderFrame(handle, frameNumber);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
+		/// <param name="frameNumber"></param>
+		public void RenderFinalFrame(Surface surface, int frameNumber)
+		{
+			Smpeg.SMPEG_renderFinal(handle, surface.SurfacePointer, 0, 0);
 		}
 
 	}
