@@ -96,9 +96,24 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		public float RawAxisValue
+		{
+			get
+			{
+				return this.eventStruct.jaxis.val;
+			}
+		}
+
+		/// <summary>
 		/// Joystick jitter threshhold
 		/// </summary>
-		/// <remarks>The joystick has to return a value that is higher than this before firing an event. This is used to reduce joystick jitter.</remarks>
+		/// <remarks>
+		/// The joystick has to return a value that is 
+		/// higher than this before firing an event. 
+		/// This is used to reduce joystick jitter.
+		/// </remarks>
 		public static short JoystickThreshold
 		{
 			get
