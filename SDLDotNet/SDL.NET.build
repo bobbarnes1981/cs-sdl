@@ -166,18 +166,6 @@
 		<excludes name="**/*.bak" />
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}/examples">
-	    <fileset basedir="examples">
-		<includes name="**" />
-
-		<excludes name="**/*.suo" />
-		<excludes name="**/Debug/**" />
-		<excludes name="**/*j.user" />
-		<excludes name="**/obj/**" />
-		<excludes name="**/*.swp" />
-		<excludes name="**/*.bak" />
-	    </fileset>
-	</copy>
 	<copy todir="${bin.dir}/${nant.project.name}-${project.version}/doc">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}-${platform.dir}/doc">
 		<includes name="*" />
@@ -209,12 +197,22 @@
 	    </fileset>
 	</copy>
 	<!-- create zip file -->
-	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${nant.project.name}-${project.version}.zip" />
-	<zip zipfile="${project.zip-path}">
+	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${nant.project.name}-${project.version}" />
+	<zip zipfile="${project.zip-path}.zip">
 	    <fileset basedir="${bin.dir}">
-		<includes name="**/*" />
+		<includes name="${project.zip-path}/bin/**" />
+		<includes name="${project.zip-path}/doc/**" />
 	    </fileset>
 	</zip>
-	<echo message="Created a '${project.config}' package at file://${project.zip-path}" />
+	<zip zipfile="${project.zip-path}-src.zip">
+	    <fileset basedir="${bin.dir}">
+		<includes name="${project.zip-path}/src/**" />
+		<includes name="${project.zip-path}/examples/**" />
+		<includes name="${project.zip-path}/*" />
+		<excludes name="${project.zip-path}/**/bin/*" />
+		<excludes name="${project.zip-path}/**/obj/*" />
+	    </fileset>
+	</zip>
+	<echo message="Created '${project.config}' packages at ${project.zip-path}" />
     </target>
 </project>
