@@ -77,5 +77,14 @@ namespace SdlDotNet
 				throw SdlException.Generate();
 			}
 		}
+
+		/// <summary>
+		/// Wait a number of milliseconds.
+		/// </summary>
+		/// <param name="delayTime">Delay time in milliseconds</param>
+		public void Delay(int delayTime)
+		{
+			Sdl.SDL_Delay(delayTime);
+		}
 	}
 }
