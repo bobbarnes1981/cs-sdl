@@ -1267,7 +1267,7 @@ namespace SdlDotNet
 				case 4:
 				{
 					IntPtr pixelColorValuePtr = 
-						new IntPtr(surface.pixels.ToInt32() + 2*(y*surface.pitch + 2*x));
+						new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
 					return Marshal.ReadInt32(pixelColorValuePtr);
 				}
 				default: //Should never come here
