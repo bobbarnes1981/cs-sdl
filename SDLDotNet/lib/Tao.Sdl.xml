@@ -4,6 +4,21 @@
         <name>Tao.Sdl</name>
     </assembly>
     <members>
+        <member name="T:Tao.Sdl.DelegateCallingConventionCdeclAttribute">
+            <summary>
+                Marks a delegate's calling convention as a <see cref="F:System.Runtime.InteropServices.CallingConvention.Cdecl"/>.
+            </summary>
+            <remarks>
+                This is a hack as the C# compiler does not allow setting a calling convention on a
+                delegate.  This is extracted and the appropriate MSIL injected by the Tao.PostProcess
+                utility.
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.DelegateCallingConventionCdeclAttribute.#ctor">
+            <summary>
+                Empty constructor.
+            </summary>
+        </member>
         <member name="T:Tao.Sdl.Sdl">
             <summary>
                 Simple DirectMedia Layer binding for .NET, implementing SDL 1.2.7.
