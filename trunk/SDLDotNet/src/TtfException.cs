@@ -36,7 +36,8 @@ using System.Runtime.Serialization;
 
 using SdlDotNet;
 
-namespace SdlDotNet {
+namespace SdlDotNet 
+{
 	/// <summary>
 	/// Sdl Ttf Exception Class
 	/// </summary>

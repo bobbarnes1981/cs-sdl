@@ -23,7 +23,8 @@ using System.Runtime.InteropServices;
 
 using Tao.Sdl;
 
-namespace SdlDotNet {
+namespace SdlDotNet 
+{
 
 	#region CDstatus
 	/// <summary>
@@ -167,7 +168,7 @@ namespace SdlDotNet {
 			int result = Sdl.SDL_CDPlayTracks(
 				this.handle, startTrack, 0, numberOfTracks, 0);
 			GC.KeepAlive(this);
-			if (result== -1)
+			if (result == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -199,7 +200,7 @@ namespace SdlDotNet {
 				this.handle, startTrack, startFrame, 
 				numberOfTracks, numberOfFrames);
 			GC.KeepAlive(this);
-			if (result== -1)
+			if (result == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -214,7 +215,7 @@ namespace SdlDotNet {
 			int result = Sdl.SDL_CDPlayTracks(
 				this.handle, startTrack, 0, 0, 0);
 			GC.KeepAlive(this);
-			if (result== -1)
+			if (result == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -228,7 +229,7 @@ namespace SdlDotNet {
 			int result = Sdl.SDL_CDPlayTracks(
 				this.handle, 0, 0, 0, 0);
 			GC.KeepAlive(this);
-			if (result == -1)
+			if (result == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -241,7 +242,7 @@ namespace SdlDotNet {
 		{
 			int result = Sdl.SDL_CDPause(this.handle);
 			GC.KeepAlive(this);
-			if (result == -1)
+			if (result == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -253,7 +254,7 @@ namespace SdlDotNet {
 		{
 			int result = Sdl.SDL_CDResume(this.handle);
 			GC.KeepAlive(this);
-			if (result == -1)
+			if (result == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -265,7 +266,7 @@ namespace SdlDotNet {
 		{
 			int result = Sdl.SDL_CDStop(this.handle);
 			GC.KeepAlive(this);
-			if ( result == -1)
+			if ( result == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
@@ -278,7 +279,7 @@ namespace SdlDotNet {
 		{
 			int result = Sdl.SDL_CDEject(this.handle);
 			GC.KeepAlive(this);
-			if ( result == -1)
+			if ( result == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}

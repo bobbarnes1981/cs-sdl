@@ -24,6 +24,46 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
+	/// Enum for values that are returned by the SDL C library functions.
+	/// This reduces the amount of "magic numbers" in the code.
+	/// </summary>
+	public enum SdlFlag
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		Error = -1,
+		/// <summary>
+		/// 
+		/// </summary>
+		Success = 0,
+		/// <summary>
+		/// 
+		/// </summary>
+		InfiniteLoops = -1,
+		/// <summary>
+		/// 
+		/// </summary>
+		PlayForever = -1,
+		/// <summary>
+		/// 
+		/// </summary>
+		Error2 = 1,
+		/// <summary>
+		/// 
+		/// </summary>
+		Success2 = 1,
+		/// <summary>
+		/// 
+		/// </summary>
+		None = 0,
+		/// <summary>
+		/// 
+		/// </summary>
+		FirstFreeChannel = -1
+
+	}
+	/// <summary>
 	/// The main Sdl object.
 	/// Only one of these should be created for any Sdl application.
 	/// If you wish to shut down the Sdl library before the end of the 
@@ -40,7 +80,7 @@ namespace SdlDotNet
 
 		SdlCore() 
 		{
-			if (Sdl.SDL_Init(0) == -1)
+			if (Sdl.SDL_Init(0) == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}

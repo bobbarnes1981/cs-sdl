@@ -25,7 +25,8 @@ using System.Globalization;
 
 using Tao.Sdl;
 
-namespace SdlDotNet {
+namespace SdlDotNet 
+{
 	/// <summary>
 	/// Represents the current state of all the mouse buttons
 	/// </summary>
@@ -342,11 +343,11 @@ namespace SdlDotNet {
 		{
 			Sdl.SDL_Event ev;
 			int ret = Sdl.SDL_PollEvent(out ev);
-			if (ret == -1)
+			if (ret == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}
-			if (ret == 0)
+			if (ret == (int) SdlFlag.None)
 			{
 				return false;
 			}
@@ -360,7 +361,7 @@ namespace SdlDotNet {
 		public void WaitAndDelegate() 
 		{
 			Sdl.SDL_Event ev;
-			if (Sdl.SDL_WaitEvent(out ev) == 0)
+			if (Sdl.SDL_WaitEvent(out ev) == (int) SdlFlag.Error2)
 			{
 				throw SdlException.Generate();
 			}
@@ -373,7 +374,8 @@ namespace SdlDotNet {
 		/// <param name="userEvent">
 		/// An opaque object representing a user-defined event.
 		/// Will be passed back to the UserEvent handler delegate when this event is processed.</param>
-		public void PushUserEvent(object userEvent) {
+		public void PushUserEvent(object userEvent) 
+		{
 			Sdl.SDL_UserEvent sdlev = new Sdl.SDL_UserEvent();
 			sdlev.type = (byte)Sdl.SDL_USEREVENT;
 			lock (this) {
@@ -383,7 +385,7 @@ namespace SdlDotNet {
 			}
 			Sdl.SDL_Event evt = new Sdl.SDL_Event();
 			evt.user = sdlev;
-			if (Sdl.SDL_PushEvent(out evt) != 0)
+			if (Sdl.SDL_PushEvent(out evt) != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
 			}
@@ -694,6 +696,7 @@ namespace SdlDotNet {
 				Quit(sender, e);
 			}
 		}
+
 		private void DelegateUserEvent(object sender, ref Sdl.SDL_Event ev) 
 		{
 			if (UserEvent != null || ChannelFinished != null || MusicFinished != null) 

@@ -58,7 +58,7 @@ namespace SdlDotNet
 		/// </param>
 		public static void EnableKeyRepeat(int delay, int rate) 
 		{
-			if (Sdl.SDL_EnableKeyRepeat(delay, rate) == -1)
+			if (Sdl.SDL_EnableKeyRepeat(delay, rate) == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
 			}

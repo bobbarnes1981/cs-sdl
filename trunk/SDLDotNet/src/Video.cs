@@ -117,7 +117,7 @@ namespace SdlDotNet
 		{
 			get 
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= 0)
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
 				{
 					throw SdlException.Generate();
 				}
