@@ -1,10 +1,14 @@
-SDL.NET by Will Weisser (ogl@9mm.com)
-with additional code by David Hudson (jendave@yahoo.com)
-and Scott Hilleard (Scottles3@yahoo.co.uk)
+SDL.NET by by David Hudson (jendave@yahoo.com)
+
+Original version by Will Weisser (ogl@9mm.com)
+with additional code from Scott Hilleard (Scottles3@yahoo.co.uk)
 
 Additional Code & Documentation by Ben Ratzlaff (ratzlaff@cs.Arizona.edu)
 -------------------
 Image
-Contributed by Klavs Martens (klavsmartens@sourceforge.org)
+Originally ontributed by Klavs Martens (klavsmartens@sourceforge.org)
+
+TTF
+Originally contributed by Lucas Maloney
 
 
