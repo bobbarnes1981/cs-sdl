@@ -1,5 +1,5 @@
 2.1.0beta2
-David Hudson xx Jan 2004
+David Hudson 07 Jan 2004
 * Overhauled Joystick subsystem
 * Fixed JoystickButtonUp
 * Separated out Joystick vertical movements from Joystick horizontal movements
@@ -10,7 +10,7 @@ David Hudson xx Jan 2004
 * Fixed bug with closing handle for fonts.
 * Removed build events that copy media files so that building 
 is faster and creates fewer redundant files.
-* Added Delegate Example back. I forgot to include the code in the last beta.
+* Added Delegate Example back. I forgot to include the code in the last beta. Also reworked it to provide better feedback when the delegates are called.
 * Workaround for problem where Music objects are disposed prematurely in Release mode.
 
 2.1.0beta1
