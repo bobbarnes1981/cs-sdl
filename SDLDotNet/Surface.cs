@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace SDLDotNet {
@@ -139,14 +140,17 @@ namespace SDLDotNet {
 				throw SDLException.Generate();
 		}
 
+
 		/// <summary>
 		/// Maps a logical color to a pixel value in the surface's pixel format
 		/// </summary>
 		/// <param name="color">The color to map</param>
 		/// <returns>A pixel value in the surface's format</returns>
-		public PixelValue MapColor(System.Drawing.Color color) {
+		public PixelValue MapColor(System.Drawing.Color color) 
+		{
 			return new PixelValue(Natives.SDL_MapRGBA(_surface->format, color.R, color.G, color.B, color.A));
 		}
+		
 		/// <summary>
 		/// Maps an SDL 32-bit pixel value to a color using the surface's pixel format
 		/// </summary>
@@ -287,7 +291,7 @@ namespace SDLDotNet {
 		/// </summary>
 		/// <param name="transparent">The transparent color</param>
 		/// <param name="accelrle">A flag indicating whether or not to use hardware acceleration for RLE</param>
-		public void SetColorKey(System.Drawing.Color transparent, bool accelrle) {
+		public void SetColorKey(Color transparent, bool accelrle) {
 			SetColorKey(this.MapColor(transparent), accelrle);
 		}
 

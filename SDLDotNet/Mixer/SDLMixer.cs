@@ -1,6 +1,6 @@
 using System;
 
-namespace SDLDotNet {
+namespace SDLDotNet.Mixer {
 	/// <summary>
 	/// Specifies an audio format to mix audio in
 	/// </summary>
@@ -34,80 +34,6 @@ namespace SDLDotNet {
 		/// </summary>
 		Default = 0x8010
 	}
-	
-	/// <summary>
-	/// Represents a sound sample.
-	/// Create with Mixer.LoadWav().
-	/// </summary>
-	/// <implements>System.IDisposable</implements>
-	public class Sample : IDisposable {
-		private IntPtr _handle;
-		private bool _disposed;
-
-		internal Sample(IntPtr handle) {
-			_handle = handle;
-			_disposed = false;
-		}
-
-		internal IntPtr GetHandle() { return _handle; }
-
-		/// <protected/>
-		~Sample() {
-			Natives.Mix_FreeChunk(_handle);
-		}
-
-		/// <summary>
-		/// Destroys this Sample and frees the memory associated with it
-		/// </summary>
-		public void Dispose() {
-			if (!_disposed) {
-				_disposed = true;
-				Natives.Mix_FreeChunk(_handle);
-				GC.SuppressFinalize(this);
-			}
-		}
-
-		/// <summary>
-		/// Sets the volume of the sample
-		/// </summary>
-		/// <param name="volume">New volume. Should be between 0 and 128 inclusive.</param>
-		public void SetVolume(int volume) {
-			if (Natives.Mix_VolumeChunk(_handle, volume) != 0)
-				throw SDLException.Generate();
-		}
-	}
-
-	/// <summary>
-	/// Represents a music sample.  Music is generally longer than a sound effect sample,
-	/// however it can also be compressed e.g. by Ogg Vorbis
-	/// </summary>
-	public class Music : IDisposable {
-		private IntPtr _handle;
-		private bool _disposed;
-
-		internal Music(IntPtr handle) {
-			_handle = handle;
-			_disposed = false;
-		}
-
-		internal IntPtr GetHandle() { return _handle; }
-
-		/// <protected/>
-		~Music() {
-			Natives.Mix_FreeMusic(_handle);
-		}
-
-		/// <summary>
-		/// Destroys this sample and frees the memory associated with it
-		/// </summary>
-		public void Dispose() {
-			if (!_disposed) {
-				_disposed = true;
-				Natives.Mix_FreeMusic(_handle);
-				GC.SuppressFinalize(this);
-			}
-		}
-	}
 
 	/// <summary>
 	/// Indicates the current fading status of a sample
@@ -131,12 +57,12 @@ namespace SDLDotNet {
 	/// Provides methods to access the sound system.
 	/// You can obtain an instance of this class by accessing the Mixer property of the main SDL object.
 	/// </summary>
-	public class Mixer {
+	public class SDLMixer {
 		private Natives.ChannelFinishedDelegate _channelfin;
 		private Natives.MusicFinishedDelegate _musicfin;
 		private Events _events;
 
-		internal Mixer(Events evs) {
+		internal SDLMixer(Events evs) {
 			if (Natives.SDL_InitSubSystem((int)Natives.Init.Audio) != 0)
 				throw SDLException.Generate();
 			_events = evs;
@@ -146,7 +72,7 @@ namespace SDLDotNet {
 		}
 
 		/// <protected/>
-		~Mixer() {
+		~SDLMixer() {
 			PrivateClose();
 		}
 

@@ -7,7 +7,7 @@ using System.Data;
 using System.Text;
 using SDLDotNet;
 
-namespace CDTest {
+namespace SDLDotNet.Example {
 	public class CDForm : System.Windows.Forms.Form {
 		private CDAudio _cd;
 		private CDDrive _drive;
@@ -148,6 +148,7 @@ namespace CDTest {
 			this.labelStatus.Name = "labelStatus";
 			this.labelStatus.Size = new System.Drawing.Size(328, 40);
 			this.labelStatus.TabIndex = 6;
+			this.labelStatus.Click += new System.EventHandler(this.labelStatus_Click);
 			// 
 			// buttonNext
 			// 
@@ -176,21 +177,21 @@ namespace CDTest {
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 			this.ClientSize = new System.Drawing.Size(354, 134);
-			this.Controls.AddRange(new System.Windows.Forms.Control[] {
-																		  this.buttonPrev,
-																		  this.buttonNext,
-																		  this.labelStatus,
-																		  this.buttonEject,
-																		  this.buttonStop,
-																		  this.buttonPause,
-																		  this.buttonPlay,
-																		  this.comboBoxDrive,
-																		  this.label1});
+			this.Controls.Add(this.buttonPrev);
+			this.Controls.Add(this.buttonNext);
+			this.Controls.Add(this.labelStatus);
+			this.Controls.Add(this.buttonEject);
+			this.Controls.Add(this.buttonStop);
+			this.Controls.Add(this.buttonPause);
+			this.Controls.Add(this.buttonPlay);
+			this.Controls.Add(this.comboBoxDrive);
+			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "CDForm";
 			this.Text = "Ghetto CD Player";
+			this.Load += new System.EventHandler(this.CDForm_Load);
 			this.ResumeLayout(false);
 
 		}
@@ -299,6 +300,16 @@ namespace CDTest {
 				HandleError(ex);
 				labelStatus.Text = "Error";
 			}
+		}
+
+		private void labelStatus_Click(object sender, System.EventArgs e)
+		{
+		
+		}
+
+		private void CDForm_Load(object sender, System.EventArgs e)
+		{
+		
 		}
 	}
 }

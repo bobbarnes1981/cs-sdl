@@ -1,5 +1,7 @@
 using System;
-
+using SDLDotNet.Mixer;
+// Assembly marked as compliant.
+//[assembly: CLSCompliantAttribute(true)]
 namespace SDLDotNet {
 	/// <summary>
 	/// The main SDL object.
@@ -8,13 +10,14 @@ namespace SDLDotNet {
 	/// method.
 	/// All the functionality of the SDL library is available through this class and its properties.
 	/// </summary>
-	public class SDL : IDisposable {
+	public class SDL : IDisposable 
+	{
 		private Video _video;
 		private Events _events;
 		private WindowManager _wm;
 		private Joysticks _joy;
 		private CDAudio _cd;
-		private Mixer _mix;
+		private SDLMixer _mix;
 		private bool _disposed;
 		private static SDL _instance = null;
 
@@ -93,10 +96,10 @@ namespace SDLDotNet {
 		/// <summary>
 		/// Gets an object from which the sound libraries can be accessed
 		/// </summary>
-		public Mixer Mixer {
+		public SDLMixer Mixer {
 			get {
 				if (_mix == null)
-					_mix = new Mixer(Events);
+					_mix = new SDLMixer(Events);
 				return _mix;
 			}
 		}
