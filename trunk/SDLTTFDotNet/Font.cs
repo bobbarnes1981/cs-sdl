@@ -25,6 +25,9 @@ using SDLDotNet;
 */
 namespace SDLDotNet.TTF
 {
+	/// <summary>
+	/// Font Class
+	/// </summary>
 	public class Font
 	{
 		private IntPtr mFont; // Pointer to TTF_Font struct
@@ -116,6 +119,11 @@ namespace SDLDotNet.TTF
 		[DllImport(TTF_DLL)]
 		private static extern void TTF_CloseFont(IntPtr font);
 
+		/// <summary>
+		/// Font Constructor
+		/// </summary>
+		/// <param name="Filename"></param>
+		/// <param name="PointSize"></param>
 		public Font(string Filename, int PointSize) {
 			mSDLTTF = SDLTTF.Instance;
 			mSDL = SDL.Instance;
@@ -130,23 +138,40 @@ namespace SDLDotNet.TTF
 
 		// Possibly add Bold/Italic/Underline properties
 
+		/// <summary>
+		/// Style Property
+		/// </summary>
 		public Style Style {
 			set { TTF_SetFontStyle(mFont, (int) value); }
 			get { return (Style) TTF_GetFontStyle(mFont); }
 		}
 
+		/// <summary>
+		/// Height Property
+		/// </summary>
 		public int Height {
 			get { return TTF_FontHeight(mFont); }
 		}
 
+		/// <summary>
+		/// Ascent Property
+		/// </summary>
 		public int Ascent {
 			get { return TTF_FontAscent(mFont); }
 		}
 
+		/// <summary>
+		/// Line Skip property
+		/// </summary>
 		public int LineSkip {
 			get { return TTF_FontLineSkip(mFont); }
 		}
 
+		/// <summary>
+		/// Size
+		/// </summary>
+		/// <param name="Text"></param>
+		/// <returns></returns>
 		public Size SizeText(string Text) {
 			int Width, Height;
 
@@ -154,6 +179,12 @@ namespace SDLDotNet.TTF
 			return new Size(Width, Height);
 		}
 
+		/// <summary>
+		/// Render Text to Solid
+		/// </summary>
+		/// <param name="Text"></param>
+		/// <param name="Color"></param>
+		/// <returns></returns>
 		public Surface RenderTextSolid(string Text, SDLColor Color) {
 			IntPtr pSurface;
 
@@ -162,9 +193,17 @@ namespace SDLDotNet.TTF
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
-		// This is a utility function for rendering and blitting text
-		// It's only really useful for one-off text
-		public void RenderTextSolid(string Text, SDLColor Color, Surface DestSurface, int X, int Y) {
+		/// <summary>
+		/// This is a utility function for rendering and blitting text
+		/// It's only really useful for one-off text
+		/// </summary>
+		/// <param name="Text"></param>
+		/// <param name="Color"></param>
+		/// <param name="DestSurface"></param>
+		/// <param name="X"></param>
+		/// <param name="Y"></param>
+		public void RenderTextSolid(string Text, SDLColor Color, Surface DestSurface, int X, int Y) 
+		{
 			Surface FontSurface;
 			System.Drawing.Rectangle DestRect;
 
@@ -173,6 +212,13 @@ namespace SDLDotNet.TTF
 			FontSurface.Blit(DestSurface, DestRect);
 		}
 
+		/// <summary>
+		/// Shade text
+		/// </summary>
+		/// <param name="Text"></param>
+		/// <param name="FG"></param>
+		/// <param name="BG"></param>
+		/// <returns></returns>
 		public Surface RenderTextShaded(string Text, SDLColor FG, SDLColor BG) {
 			IntPtr pSurface;
 
@@ -181,6 +227,12 @@ namespace SDLDotNet.TTF
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
+		/// <summary>
+		/// Blended Text
+		/// </summary>
+		/// <param name="Text"></param>
+		/// <param name="FG"></param>
+		/// <returns></returns>
 		public Surface RenderTextBlended(string Text, SDLColor FG) {
 			IntPtr pSurface;
 
@@ -189,6 +241,12 @@ namespace SDLDotNet.TTF
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
+		/// <summary>
+		/// Render Glyphs as Solid
+		/// </summary>
+		/// <param name="Character"></param>
+		/// <param name="FG"></param>
+		/// <returns></returns>
 		public Surface RenderGlyphSolid(UInt16 Character, SDLColor FG) {
 			IntPtr pSurface;
 
@@ -197,6 +255,13 @@ namespace SDLDotNet.TTF
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
+		/// <summary>
+		/// Shade Glyphs
+		/// </summary>
+		/// <param name="Character"></param>
+		/// <param name="FG"></param>
+		/// <param name="BG"></param>
+		/// <returns></returns>
 		public Surface RenderGlyphShaded(UInt16 Character, SDLColor FG, SDLColor BG) {
 			IntPtr pSurface;
 
@@ -205,6 +270,12 @@ namespace SDLDotNet.TTF
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
+		/// <summary>
+		/// Blend glyphs
+		/// </summary>
+		/// <param name="Character"></param>
+		/// <param name="FG"></param>
+		/// <returns></returns>
 		public Surface RenderGlyphBlended(UInt16 Character, SDLColor FG) {
 			IntPtr pSurface;
 
@@ -213,6 +284,9 @@ namespace SDLDotNet.TTF
 			return mSDL.Video.GenerateSurfaceFromPointer(pSurface);
 		}
 
+		/// <summary>
+		/// Destructor
+		/// </summary>
 		~Font() {
 			if (mFont != IntPtr.Zero) {
 				TTF_CloseFont(mFont);

@@ -11,7 +11,14 @@ using SDLDotNet;
 	Basically removed all code due to Natives.SDL_GetError being inaccessible.
 */
 namespace SDLDotNet.TTF {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class SDLTTFException : SDLException {
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="msg"></param>
 		public SDLTTFException(string msg) : base(msg) {}
 	}
 }
