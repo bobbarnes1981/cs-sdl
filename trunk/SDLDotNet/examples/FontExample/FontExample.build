@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <project name="FontExample" default="build">
     <target name="build">
-    	<property name="font.name" value="Vera.ttf" />
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
 	<echo message="Using '${nant.settings.currentframework}' Framework"/>
@@ -18,11 +17,6 @@
 	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
-	    </fileset>
-	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${nant.project.basedir}">
-		<include name="${font.name}"/>
 	    </fileset>
 	</copy>
 	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >

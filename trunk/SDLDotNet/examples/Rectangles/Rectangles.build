@@ -4,7 +4,6 @@
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
 	<echo message="Using '${nant.settings.currentframework}' Framework"/>
-	<copy file="${nant.project.basedir}/fard-two.ogg" tofile="${nant.project.basedir}/${build.dir}/fard-two.ogg"/>
 	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${src.dir}/${build.dir}">
 		<include name="${project.name}.dll"/>

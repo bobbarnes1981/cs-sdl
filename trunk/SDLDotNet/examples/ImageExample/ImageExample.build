@@ -5,12 +5,6 @@
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
 	<echo message="Using '${nant.settings.currentframework}' Framework"/>
 	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${nant.project.basedir}">
-		<include name="images/**"/>
-		<include name="fard-two.ogg"/>
-	    </fileset>
-	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${src.dir}/${build.dir}">
 		<include name="${project.name}.dll"/>
 	    </fileset>

@@ -26,15 +26,23 @@ using SdlDotNet;
 // Just draws a bunch of rectangles to the screen, to quit hit 'Q' or Esc.
 
 namespace SdlDotNet.Examples {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class PixelsExample {
 		private bool quitFlag;
 		
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public PixelsExample() 
 		{
 			quitFlag = false;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run() {
 			int width = 640;
 			int height = 480;

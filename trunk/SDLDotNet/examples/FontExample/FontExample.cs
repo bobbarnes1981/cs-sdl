@@ -21,17 +21,20 @@
 using System;
 using System.Drawing;
 using System.Threading;
+using System.IO;
 using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class FontExample
 	{
-
 		Surface text;
 		bool quitFlag = false;
 		string FontName = "Vera.ttf";
-		int Size = 12;
+		int size = 12;
 		int width = 640;
 		int height = 480;
 			
@@ -39,9 +42,16 @@ namespace SdlDotNet.Examples
 		string[] textArray = {"Hello World!","This is a test", "FontExample"};
 		int[] styleArray = {0, 1, 2, 4};
 
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run()
 		{
+			string filepath = @"../../";
+			if (File.Exists("Vera.ttf"))
+			{
+				filepath = @"./";
+			}
 
 			Font font;
 			Random rand = new Random();
@@ -54,7 +64,7 @@ namespace SdlDotNet.Examples
 			events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
 			events.Quit += new QuitEventHandler(this.Quit);
 
-			font = new Font(FontName, Size);
+			font = new Font(filepath + FontName, size);
 			Surface screen = video.SetVideoModeWindow(width, height, true); 
 			wm.Caption = "Font Example";
 			video.HideMouseCursor();

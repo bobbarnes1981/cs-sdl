@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="DelegatesExample" default="build">
+<project name="JoystickExample" default="build">
     <target name="build">
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>

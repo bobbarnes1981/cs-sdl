@@ -116,9 +116,12 @@ namespace SdlDotNet
 		/// </summary>
 		protected override void CloseHandle(IntPtr handleToClose) 
 		{
-			SdlTtf.TTF_CloseFont(handleToClose);
-			GC.KeepAlive(this);
-			handleToClose = IntPtr.Zero;
+			if (handleToClose != IntPtr.Zero)
+			{
+				SdlTtf.TTF_CloseFont(handleToClose);
+				GC.KeepAlive(this);
+				handleToClose = IntPtr.Zero;
+			}
 		}
 
 		// Possibly add Bold/Italic/Underline properties

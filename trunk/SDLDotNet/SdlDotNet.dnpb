@@ -7,8 +7,29 @@
 		<OptimizeCode>false</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>.\bin\Debug</OutputPath>
-		<XmlDocFile>SdlDotNet.xml</XmlDocFile>
 		<DebugInformation>true</DebugInformation>
+		<WarningLevel>4</WarningLevel>
+	    </Options>
+	</Configuration>
+	<Configuration name="Release">
+	    <Options>
+		<CompilerDefines>TRACE</CompilerDefines>
+		<OptimizeCode>true</OptimizeCode>
+		<AllowUnsafe>false</AllowUnsafe>
+		<OutputPath>.\bin\Release</OutputPath>
+		<DebugInformation>false</DebugInformation>
+		<WarningLevel>1</WarningLevel>
+	    </Options>
+	</Configuration>
+	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
+	<Configuration name="Debug">
+	    <Options>
+		<CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		<OptimizeCode>false</OptimizeCode>
+		<AllowUnsafe>false</AllowUnsafe>
+		<OutputPath>.\bin\Debug</OutputPath>
+		<DebugInformation>true</DebugInformation>
+		<XmlDocFile>SdlDotNet.xml</XmlDocFile>
 		<WarningLevel>4</WarningLevel>
 	    </Options>
 	</Configuration>
@@ -23,7 +44,6 @@
 		<WarningLevel>1</WarningLevel>
 	    </Options>
 	</Configuration>
-	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
 	    <Reference name="System" /> 
 	    <Reference name="System.Data" /> 
 	    <Reference name="System.Drawing" /> 
@@ -249,6 +269,37 @@
 		<File buildAction="Content">App.ico</File>
 		<File>AssemblyInfo.cs</File>
 		<File>DelegatesExample.cs</File>
+	    </Files>
+	</Project>
+	<Project name="JoystickExample" path="examples\\JoystickExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.JoystickExample" assemblyName="JoystickExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <WarningLevel>4</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <WarningLevel>1</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
+	    <Files>
+		<File buildAction="Content">App.ico</File>
+		<File>AssemblyInfo.cs</File>
+		<File>JoystickExample.cs</File>
 	    </Files>
 	</Project>
 	<Project name="CDPlayer" path="examples\\CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples" icon="App.ico">

@@ -27,16 +27,24 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples 
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class PrimitivesExample
 	{
 		private bool quitFlag;
 		
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public PrimitivesExample() 
 		{
 			quitFlag = false;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run() 
 		{
 			int width = 640;

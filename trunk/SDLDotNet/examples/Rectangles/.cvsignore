@@ -4,3 +4,4 @@ obj
 build
 gc.log
 *.prjx
+*.xml

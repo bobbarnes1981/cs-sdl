@@ -21,7 +21,11 @@ using System;
 using System.Windows.Forms;
 using SdlDotNet;
 
-namespace SdlDotNet.Examples {
+namespace SdlDotNet.Examples 
+{
+	/// <summary>
+	/// 
+	/// </summary>
 	public class CDPlayer : System.Windows.Forms.Form {
 		private CDAudio _cd;
 		private CDDrive _drive;
@@ -39,6 +43,9 @@ namespace SdlDotNet.Examples {
 		//private System.Windows.Forms.Timer timer;
 		//private System.ComponentModel.IContainer components;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public CDPlayer() {
 			//
 			// Required for Windows Form Designer support

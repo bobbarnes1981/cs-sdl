@@ -20,29 +20,43 @@
 
 using System;
 using System.Drawing;
+using System.IO;
 using SdlDotNet;
 
 // Simple SDL.NET Example
 // Just draws a bunch of rectangles to the screen, to quit hit 'Q' or Esc.
 
-namespace SdlDotNet.Examples {
+namespace SdlDotNet.Examples 
+{
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Rectangles 
 	{
 		private bool quitFlag;
 		
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangles() 
 		{
 			quitFlag = false;
 		}
 
-		public void Run() {
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Run() 
+		{
+			string filepath = @"../../";
+			if (File.Exists("fard-two.ogg"))
+			{
+				filepath = "";
+			}
 			int width = 640;
 			int height = 480;
 			Random rand = new Random();
 			
-			string musicFile = "fard-two.ogg";
-
 			Video video = Video.Instance;
 			WindowManager wm = WindowManager.Instance;
 			Mixer mixer = Mixer.Instance;
@@ -51,15 +65,10 @@ namespace SdlDotNet.Examples {
 			events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
 			events.Quit += new QuitEventHandler(this.Quit);
-			events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
-			events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);
 
 			try {
-				Music music = mixer.LoadMusic(musicFile);
-				//Music music = mixer.LoadMusic("test.wav");
+				Music music = mixer.LoadMusic(filepath + "fard-two.ogg");
 				mixer.PlayMusic(music, 1);
-				//Sample sample = mixer.LoadWav("test.wav");
-				//mixer.PlaySample(1, sample, 0);
 				// set the video mode
 				Surface screen = video.SetVideoModeWindow(width, height, true); 
 				wm.Caption = "Rectangles Example";
@@ -123,15 +132,6 @@ namespace SdlDotNet.Examples {
 		static void Main() {
 			Rectangles rectangles = new Rectangles();
 			rectangles.Run();
-		}
-		private void ChannelFinished(object sender, ChannelFinishedEventArgs e)
-		{
-			Console.WriteLine("channel: " + e.Channel.ToString());
-			Console.WriteLine("Channel Finished");
-		}
-		private void MusicFinished(object sender, MusicFinishedEventArgs e)
-		{
-			Console.WriteLine("Music Finished");
 		}
 	}
 }

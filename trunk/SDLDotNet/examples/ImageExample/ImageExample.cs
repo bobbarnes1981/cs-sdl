@@ -20,10 +20,14 @@
 
 using System;
 using System.Drawing;
+using System.IO;
 using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class ImageExample
 	{
 
@@ -33,12 +37,17 @@ namespace SdlDotNet.Examples
 		private bool quitFlag;
 		Point MousePos = new Point(100,100);
 
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public ImageExample() 
 		{
 			quitFlag = false;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run() 
 		{
 			int width = 640;
@@ -46,7 +55,6 @@ namespace SdlDotNet.Examples
 			Random rand = new Random();
 			string imagepath;
 
-			string musicFile = "fard-two.ogg";
 			Video video = Video.Instance;
 			WindowManager wm = WindowManager.Instance;
 			Events events = Events.Instance;
@@ -59,6 +67,11 @@ namespace SdlDotNet.Examples
 				new MouseMotionEventHandler(this.MouseMotion);
 			try 
 			{
+				string filepath = @"../../";
+				if (File.Exists("fard-two.ogg"))
+				{
+					filepath = "";
+				}
 				Surface screen = video.SetVideoModeWindow(width, height, true);
 				wm.Caption = "Image Example";
 				video.HideMouseCursor(); // hide the cursor
@@ -70,27 +83,27 @@ namespace SdlDotNet.Examples
 
 				imagepath = @"images/";
 
-				Image Background = new Image(imagepath + "background.tga");
+				Image Background = new Image(filepath + imagepath + "background.tga");
 
-				Image sdlimg = new Image(imagepath +  "sdlimage.png");
+				Image sdlimg = new Image(filepath + imagepath +  "sdlimage.png");
 				sdlimg.AlphaFlags = Alphas.RleEncoded| Alphas.SourceAlphaBlending;
 				sdlimg.AlphaValue = 100;
 
-				Image Cursor = new Image(imagepath +  "cursor.png");
+				Image Cursor = new Image(filepath + imagepath +  "cursor.png");
 				Cursor.Transparent = true;
 
 				ImageList Jeep = new ImageList();
 
 				for (int j = 1; j <= 16;j++) 
 				{
-					Jeep.Images.Add(imagepath + @"jeep/jeep" + j.ToString() +".gif");
+					Jeep.Images.Add(filepath + imagepath + @"jeep/jeep" + j.ToString() +".gif");
 					Jeep.Images[Jeep.Images.Count-1].Transparent = true;
 				}
 
 
 				ImageList ImageList = new ImageList();
 
-				Image Tree = new Image(imagepath + "Tree.bmp");
+				Image Tree = new Image(filepath + imagepath + "Tree.bmp");
 
 				Tree.TransparentColor = System.Drawing.Color.Magenta;
 				Tree.Transparent = true;
@@ -99,7 +112,7 @@ namespace SdlDotNet.Examples
 				Tree.AlphaValue = 0;
 
 				int JeepFrame = 0;
-				Music music = mixer.LoadMusic(musicFile);
+				Music music = mixer.LoadMusic(filepath + "fard-two.ogg");
 				mixer.PlayMusic(music, -1);
 
 				while (!quitFlag) 
@@ -156,7 +169,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		public void MouseMotion(
+		private void MouseMotion(
 			object sender, 
 			MouseMotionEventArgs e)
 		{

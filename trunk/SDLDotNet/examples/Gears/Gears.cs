@@ -17,6 +17,9 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class Gears
 	{
 //		Draw a gear wheel. You'll probably want to call this function when
@@ -285,6 +288,9 @@ namespace SdlDotNet.Examples
 		static bool quitFlag = false;
 		static Surface m_screen;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run()
 		{
 			video = Video.Instance;
