@@ -6,43 +6,71 @@ namespace SDLDotNet
 		or possibly replaced with System.Drawing.Color */
 
 	/// <summary>
-	/// 
+	/// SDL Color Class
 	/// </summary>
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SDLColor {
 		/// <summary>
-		/// 
+		/// Red Channel
 		/// </summary>
-		public byte	r;
+		private byte redChannel;
 		/// <summary>
-		/// 
+		/// Green Channel
 		/// </summary>
-		public byte	g;
+		private byte greenChannel;
 		/// <summary>
-		/// 
+		/// Blue Channel
 		/// </summary>
-		public byte	b;
+		private byte blueChannel;
 		/// <summary>
-		/// 
+		/// Alpha Channel
+		/// Currently unused
 		/// </summary>
-		public byte	unused;
+		private byte alphaChannel;
 
 		/// <summary>
-		/// 
+		/// Constructor for SDL Color
 		/// </summary>
 		/// <param name="R"></param>
 		/// <param name="G"></param>
 		/// <param name="B"></param>
 		public SDLColor(byte R, byte G, byte B)
 		{
-			r = R;
-			g = G;
-			b = B;
-			unused = 0;
+			redChannel = R;
+			greenChannel = G;
+			blueChannel = B;
+			alphaChannel = 0;
 		}
 
 		/// <summary>
-		/// 
+		/// Property for red channel
+		/// </summary>
+		public byte r
+		{
+			get { return redChannel; }
+			set { redChannel = value; }
+		}
+
+		/// <summary>
+		/// Property for green channel
+		/// </summary>
+		public byte g
+		{
+			get { return greenChannel; }
+			set { greenChannel = value; }
+		}
+
+		/// <summary>
+		/// Property for blue channel
+		/// </summary>
+		public byte b
+		{
+			get { return blueChannel; }
+			set { blueChannel = value; }
+		}
+
+		/// <summary>
+		/// Get Red Instance
 		/// </summary>
 		static public SDLColor Red
 		{
@@ -50,7 +78,7 @@ namespace SDLDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get Green Instance
 		/// </summary>
 		static public SDLColor Green
 		{
@@ -58,7 +86,7 @@ namespace SDLDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get Blue Instance
 		/// </summary>
 		static public SDLColor Blue
 		{
@@ -66,7 +94,7 @@ namespace SDLDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get MediumPurple instance
 		/// </summary>
 		static public SDLColor MediumPurple
 		{	
@@ -74,13 +102,14 @@ namespace SDLDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get orange instance
 		/// </summary>
 		static public SDLColor Orange
 		{	
 			get { return new SDLColor(255, 165, 0); }
 		}
 
-		/* TODO: A few more colours */
+		/* TODO: A few more colours. xfree colors and/or .NET colors */
+
 	}
 }
