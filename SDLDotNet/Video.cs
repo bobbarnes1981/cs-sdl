@@ -167,16 +167,18 @@ namespace SDLDotNet {
 			return Surface.FromBMPFile(file);
 		}
 
-#if !__MONO__
 		/// <summary>
 		/// Loads a bitmap from a System.Drawing.Bitmap object, usually obtained from a resource
 		/// </summary>
 		/// <param name="bitmap">The bitmap object to load</param>
 		/// <returns>A Surface representing the bitmap</returns>
 		public Surface LoadBMP(System.Drawing.Bitmap bitmap) {
+			if (Environment.Version.ToString() == "0.0")
+				throw new NotSupportedException("Method not supported on Mono");
+
 			return Surface.FromBitmap(bitmap);
 		}
-#endif
+
 		/// <summary>
 		/// Loads a bitmap from an array of bytes in memory.
 		/// </summary>

@@ -79,8 +79,11 @@ namespace SDLDotNet {
 				throw SDLException.Generate();
 			return new Surface(surf, true);
 		}
-#if !__MONO__
+
 		internal static Surface FromBitmap(System.Drawing.Bitmap bitmap) {
+			if(Environment.Version.ToString() == "0.0")
+				throw new NotSupportedException("Method not supported on Mono");
+#if !__MONO__
 			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
@@ -88,8 +91,11 @@ namespace SDLDotNet {
 			if (surf == null)
 				throw SDLException.Generate();
 			return new Surface(surf, true);
-		}
+#else
+			throw new NotSupportedException("Mono compiled, method not supported");
 #endif
+		}
+
 		internal static Surface FromBitmap(byte[] arr) {
 			Natives.SDL_Surface *surf = Natives.SDL_LoadBMP_RW(Natives.SDL_RWFromMem(arr, arr.Length), 1);
 			if (surf == null)
