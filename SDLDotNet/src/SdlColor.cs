@@ -23,6 +23,9 @@ using Tao.Sdl;
 
 namespace SdlDotNet
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public struct SdlColor
 	{
 		static SdlColor()

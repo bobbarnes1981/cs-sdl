@@ -38,6 +38,9 @@ namespace SdlDotNet {
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static CDAudio Instance 
 		{
 			get

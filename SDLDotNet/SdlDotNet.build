@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="SDL.NET" default="build">
+<project name="SdlDotNet" default="build">
     <!--
 	Targets:
 	build (default): builds all library assemblies for default framework (typically .NET)
@@ -18,20 +18,17 @@
     <echo message="Using '${nant.settings.currentframework}' Framework"/>
 
     <!-- global project settings -->
-    <property name="project.name" value="SDL.NET" />
-    <property name="project.version" value="1.5.2" />
+    <property name="project.name" value="SdlDotNet" />
+    <property name="project.version" value="2.0.0a1" />
+    <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
     <property name="examples.dir" value="examples" />
     <property name="bin.dir" value="bin" />
+    <property name="obj.dir" value="obj" />
     <property name="lib.dir" value="lib" />
-    <property name="Image.dir" value="Image" />
-    <property name="TTF.dir" value="TTF" />
     <property name="project.main.dir" value="${nant.project.basedir}" />
-    <property name="project.name.simple" value="SDLDotNet" />
-    <property name="project.name.Image" value="SDL.Image.NET" />
-    <property name="project.name.TTF" value="SDL.TTF.NET" />
-    <property name="project.name.All" value="SDL.All.NET" />
+    <property name="native.sdl" value="Tao.Sdl"/>
 
     <!-- default configuration -->
     <property name="project.config" value="Debug" /> <!-- Debug|Release -->
@@ -51,18 +48,17 @@
     <target name="init" description="Initializes build properties">
 	<call target="${project.config}" />
 	<call target="${nant.settings.currentframework}" />
-	<property name="build.dir" value="${bin.dir}/${project.config}-${platform.dir}"/>
+	<property name="build.dir" value="${bin.dir}/${project.config}"/>
     </target>
 
     <target name="clean" description="Deletes every build configuration">
 	<echo message="Deleting all builds from all configurations" />
 	<delete dir="${nant.project.basedir}/${bin.dir}" failonerror="false" />
+	<delete dir="${nant.project.basedir}/${obj.dir}" failonerror="false" />
 	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="clean" />
-	<nant buildfile="${src.dir}/${Image.dir}/${project.name.Image}.dll.build" target="clean" />
-	<nant buildfile="${src.dir}/${TTF.dir}/${project.name.TTF}.dll.build" target="clean" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="clean" />
-	<nant buildfile="${examples.dir}/CDTest/CDTest.build" target="clean" />
-	<nant buildfile="${examples.dir}/FontTest/FontTest.build" target="clean" />
+	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="clean" />
+	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="clean" />
     </target>
 
@@ -87,28 +83,11 @@
     <target name = "net" depends="net-1.1" description="sets parameters for a .net build">
     </target>
 
-    <target name="buildSDL" depends="init" description="Builds current configuration">
+    <target name="build" depends="init" description="Builds current configuration">
 	<!-- build SDLDotNet assembly -->
 	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="build" />
     </target>
-
-    <target name="buildImage" depends="init, buildSDL" description="Builds current configuration">
-	<!-- build SDLDotNet assembly -->
-	<nant buildfile="${src.dir}/${Image.dir}/${project.name.Image}.dll.build" target="build" />
-    </target>
-
-    <target name="buildTTF" depends="init, buildSDL" description="Builds current configuration">
-	<!-- build SDLDotNet assembly -->
-	<nant buildfile="${src.dir}/${TTF.dir}/${project.name.TTF}.dll.build" target="build" />
-    </target>
-
-    <target name="buildSDLAll" depends="init" description="Build the All assembly">
-	<nant buildfile="${src.dir}/${project.name.All}.dll.build" target="build" />
-    </target>
-
-    <target name="buildsub" depends="init, buildSDL, buildImage, buildTTF" description="Builds all three separate assemblies">
-    </target>
-
+    
     <target name="setrelease" description="Sets Release configuration">
 	<!-- build SDLDotNet assembly -->
 	<property name="project.config" value="Release" /> <!-- Debug|Release -->
@@ -118,12 +97,9 @@
     <target name="examples" depends="build" description="Build examples">
 	<echo message="Building examples" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="build" />
-	<nant buildfile="${examples.dir}/CDTest/CDTest.build" target="build" />
-	<nant buildfile="${examples.dir}/FontTest/FontTest.build" target="build" />
+	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="build" />
+	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
-    </target>
-
-    <target name="build" depends="buildsub, buildSDLAll" description="Builds all four assemblies">
     </target>
 
     <target name="buildrelease" depends="clean, setrelease, examples" description="Build all Release assemblies">
@@ -135,11 +111,11 @@
     </target>
 
     <target name="doc" depends="init, build">
-	<nant buildfile="${src.dir}/${project.name.All}.dll.build" target="doc" />
+	<nant buildfile="${src.dir}/${project.name}.dll.build" target="doc" />
     </target>
 
     <target name="schema" depends="init, build">
-	<nant buildfile="${src.dir}/${project.name.All}.dll.build" target="schema" />
+	<nant buildfile="${src.dir}/${project.name}.dll.build" target="schema" />
     </target>
 
     <target name="package" depends="mono, buildrelease, copyfiles, net">
@@ -148,12 +124,12 @@
 	<call target="doc" />
 	<call target="schema" />
 	<call target="copyfiles" />
-	<call target="archive" />
+	<call target="zip" />
     </target>
 
     <target name="packagedefault" depends="prepackage" description="Package only default framework">
 	<call target="copyfiles" />
-	<call target="archive" />
+	<call target="zip" />
     </target>
 
     <!-- copy project files -->
@@ -176,47 +152,35 @@
 	    </fileset>
 	</copy>
 	<copy todir="${bin.dir}/${nant.project.name}-${project.version}/doc">
-	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}-${platform.dir}/doc">
+	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
 		<includes name="*" />
 	    </fileset>
 	</copy>
 	<copy todir="${bin.dir}/${nant.project.name}-${project.version}/${bin.dir}/${platform.dir}">
-	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}-${platform.dir}">
+	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<includes name="*.dll"/>
 	    </fileset>
 	</copy>
 	<copy todir="${bin.dir}/${nant.project.name}-${project.version}/${bin.dir}/${platform.dir}">
-	    <fileset basedir="${src.dir}/${Image.dir}/${bin.dir}/${project.config}-${platform.dir}">
-		<includes name="SDL.Image.NET.dll"/>
-	    </fileset>
-	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}/${bin.dir}/${platform.dir}">
-	    <fileset basedir="${src.dir}/${TTF.dir}/${bin.dir}/${project.config}-${platform.dir}">
-		<includes name="SDL.TTF.NET.dll"/>
+	    <fileset basedir="${project.main.dir}/${lib.dir}">
+		<includes name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
     </target>
 
     <!-- create zip file -->
-    <target name="archive" description="archive files">
+    <target name="zip" description="zip files">
 	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${nant.project.name}-${project.version}" />
-	<zip zipfile="${project.zip-path}.zip">
+	<zip zipfile="${project.zip-path}-${release.version}.zip">
 	    <fileset basedir="${bin.dir}">
 		<includes name="${project.zip-path}/bin/**" />
 		<includes name="${project.zip-path}/doc/**" />
-	    </fileset>
-	</zip>
-	<zip zipfile="${project.zip-path}-src.zip">
-	    <fileset basedir="${bin.dir}">
 		<includes name="${project.zip-path}/src/**" />
-		<includes name="${project.zip-path}/*" />
+		<includes name="${project.zip-path}/examples/**" />
+		<includes name="${project.zip-path}/*" />	
 		<excludes name="${project.zip-path}/**/bin/*" />
 		<excludes name="${project.zip-path}/**/obj/*" />
-	    </fileset>
-	</zip>
-	<zip zipfile="${project.zip-path}-examples.zip">
-	    <fileset basedir="${bin.dir}">
-		<includes name="${project.zip-path}/examples/**" />
+		
 	    </fileset>
 	</zip>
 	<echo message="Created '${project.config}' packages at ${project.zip-path}" />

@@ -27,6 +27,9 @@ namespace SdlDotNet
 	/// </summary>
 	public class Util
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public Util()
 		{
 			//

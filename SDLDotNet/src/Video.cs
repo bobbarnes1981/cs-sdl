@@ -37,6 +37,9 @@ namespace SdlDotNet
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static Video Instance
 		{
 			get 

@@ -1,36 +1,32 @@
 <?xml version="1.0"?>
-<project name="SDL.All.NET" default="build">
-    <!--
-    Required properties:
-    * build.dir     - (path) root level to build to, assemblies will go in ${build.dir}/bin
-    * build.debug   - (true|false) debug build?
-    * mono          - (true|false) build using Mono?
-    -->
+<project name="SdlDotNet" default="build">
     <target name="build">
 	<echo message="Build Directory is ${nant.project.basedir}/${build.dir}" />
 	<!-- prepare build directory -->
 	<mkdir dir="${nant.project.basedir}/${build.dir}"/>
-	<echo message="Using '${nant.settings.currentframework}' Framework"/>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${lib.dir}">
+		<includes name="${native.sdl}.dll"/>
+	    </fileset>
+	</copy>
 	<!-- build SDL.NET -->
-	<csc target="library" warnaserror="true" unsafe="true" nowarn="1591,0618" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
+	<csc target="library" warnaserror="true" unsafe="true" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
 	    <sources failonempty="true">
 		<includes name="**/*.cs" />
-		<excludes name="Image/AssemblyInfo.cs" />
-		<excludes name="TTF/AssemblyInfo.cs" />
-		<excludes name="AssemblyInfo.cs" />
 		<!-- task currently does not work on Mono and is temporarily included in the NAnt.Win32 assembly -->
 	    </sources>
-	    <references basedir="${build.dir}/${lib.dir}">
+	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<includes name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+		<includes name="${native.sdl}.dll"/>
 	    </references>
 	</csc>
     </target>
     <target name="clean">
 	<delete dir="${bin.dir}" failonerror="false" />
-	<delete dir="obj" failonerror="false" />
+	<delete dir="${obj.dir}" failonerror="false" />
     </target>
     <target name="doc">
-	<ndoc failonerror="false">
+	<ndoc failonerror="true">
 	    <assemblies basedir="${nant.project.basedir}/${build.dir}">
 		<includes name="${nant.project.name}.dll" />
 	    </assemblies>

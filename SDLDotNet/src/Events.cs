@@ -248,6 +248,9 @@ namespace SdlDotNet {
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static Events Instance
 		{
 			get 
