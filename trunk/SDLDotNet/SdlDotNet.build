@@ -18,7 +18,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="2.2.0beta1" />
+    <property name="project.version" value="2.2.0" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
