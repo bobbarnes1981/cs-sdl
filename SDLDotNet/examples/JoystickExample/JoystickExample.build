@@ -23,7 +23,6 @@
 		<include name="${native.sdl}.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
 	    </references>
-	    <arg value="/d:mono" if="${mono}" />
 	</csc>
     </target>
     <target name="clean">
