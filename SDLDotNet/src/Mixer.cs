@@ -166,6 +166,14 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		public static void Close() 
+		{
+			SdlMixer.Mix_CloseAudio();
+		}
+
+		/// <summary>
 		/// Loads a .wav file into memory
 		/// </summary>
 		/// <param name="file">The filename to load</param>

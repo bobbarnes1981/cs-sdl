@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 using System;
 using System.Threading;
 using System.IO;
@@ -68,21 +67,32 @@ namespace SdlDotNet.Examples
 				new KeyboardEventHandler(this.KeyboardDown); 
 			events.Quit += new QuitEventHandler(this.Quit);
 
+			//SdlMixer.MixFunctionDelegate audioMixer = new SdlMixer.MixFunctionDelegate(this.player);
+			//(Smpeg.SMPEG_playAudioSDL);
 			Surface screen = video.SetVideoModeWindow(width, height, true); 
-		
-
+			Mixer.Close();
 			Movie movie = new Movie(filepath + "test.mpg");
-			//IntPtr intPtr = Smpeg.SMPEG_new(filepath + "test.mpg", out info, (int) SdlFlag.TrueValue); 
-			//Smpeg.SMPEG_getinfo(intPtr, out info);
 			Console.WriteLine("Time: " + movie.TotalTime);
 			Console.WriteLine("Width: " + movie.Width);
 			Console.WriteLine("Height: " + movie.Height);
 			Console.WriteLine("HasAudio: " + movie.HasAudio);
-			//Console.WriteLine("Smpeg_error: " + Smpeg.SMPEG_error(movie.GetHandle));
-			movie.DisableAudio();
-			movie.AdjustVolume(100);
+//			movie.DisableAudio();
+//			int freq;
+//			short format;
+//			int channels;
+//			SdlMixer.Mix_QuerySpec(out freq, out unchecked(format), out channels);
+//			Sdl.SDL_AudioSpec audiofmt = new Tao.Sdl.Sdl.SDL_AudioSpec();
+//			audiofmt.freq = freq;
+//			audiofmt.format = unchecked(format);
+//			audiofmt.channels = (byte) channels;
+//			Console.WriteLine("Freq: " + audiofmt.freq);
+//			Console.WriteLine("Format: " + audiofmt.format);
+//			Console.WriteLine("Channels: " + audiofmt.channels);
+//			Smpeg.SMPEG_actualSpec(movie.GetHandle, ref audiofmt); 
+//			SdlMixer.Mix_HookMusic(audioMixer, movie.GetHandle);
+//			movie.EnableAudio();
 			movie.Display(screen);
-			//movie.Loop(true);
+			
 			movie.Play();
 
 			try
@@ -96,7 +106,10 @@ namespace SdlDotNet.Examples
 				throw;
 			}
 			movie.Stop();
-			movie.Dispose();
+			//mixer.Open();
+			//SdlMixer.Mix_HookMusic(null, IntPtr.Zero);
+			movie.Close();
+
 		} 
 		#endregion Run()
 
@@ -124,5 +137,14 @@ namespace SdlDotNet.Examples
 		{
 			quitFlag = true;
 		}
+
+//		private void player(IntPtr one, IntPtr two, int len)
+//		{
+//
+//			byte[] testbyte = new byte[len];
+//			Marshal.Copy(two, testbyte, 0, len);
+//			Smpeg.SMPEG_playAudioSDL(one, testbyte, len);
+//
+//		}
 	}
 }

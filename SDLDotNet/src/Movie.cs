@@ -1,6 +1,6 @@
 /*
  * $RCSfile$
- * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2005 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Represents a movie mpg file.
 	/// </summary>
-	public class Movie : BaseSdlResource 
+	public class Movie : BaseSdlResource, IDisposable
 	{
 		private IntPtr handle;
 		private Smpeg.SMPEG_Info movieInfo;
@@ -61,18 +61,16 @@ namespace SdlDotNet
 		/// <param name="file"></param>
 		public Movie(string file)
 		{
-			this.handle = 
+			this.handle =
 				Smpeg.SMPEG_new(file, out movieInfo, 
-				(int)SdlFlag.TrueValue);
+				(int) SdlFlag.TrueValue);
 			this.movieInfo = movieInfo;
-			EnableVideo();
-			EnableAudio();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		private IntPtr GetHandle
+		public IntPtr GetHandle
 		{ 
 			get
 			{
@@ -123,7 +121,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void EnableVideo()
 		{
-			Smpeg.SMPEG_enablevideo(handle, (int)SdlFlag.TrueValue);
+			Smpeg.SMPEG_enablevideo(this.handle, (int)SdlFlag.TrueValue);
 		}
 
 		/// <summary>
@@ -131,7 +129,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void DisableVideo()
 		{
-			Smpeg.SMPEG_enablevideo(handle, (int)SdlFlag.FalseValue);
+			Smpeg.SMPEG_enablevideo(this.handle, (int)SdlFlag.FalseValue);
 		}
 
 		/// <summary>
@@ -139,7 +137,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void EnableAudio()
 		{
-			Smpeg.SMPEG_enableaudio(handle, (int)SdlFlag.TrueValue);
+			Smpeg.SMPEG_enableaudio(this.handle, (int)SdlFlag.TrueValue);
 		}
 
 		/// <summary>
@@ -147,7 +145,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void DisableAudio()
 		{
-			Smpeg.SMPEG_enableaudio(handle, (int)SdlFlag.FalseValue);
+			Smpeg.SMPEG_enableaudio(this.handle, (int)SdlFlag.FalseValue);
 		}
 
 		/// <summary>
@@ -157,7 +155,7 @@ namespace SdlDotNet
 		public void Display(Surface surface)
 		{
 			Smpeg.SMPEG_setdisplay(
-				handle, 
+				this.handle, 
 				surface.SurfacePointer, 
 				IntPtr.Zero, null);
 		}

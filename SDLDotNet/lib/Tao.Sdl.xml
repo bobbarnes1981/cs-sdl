@@ -16352,7 +16352,7 @@
             <param name="len">Amount of data to fill</param>
             <returns>Amount of data in bytes that was actually written</returns>
         </member>
-        <member name="M:Tao.Sdl.Smpeg.SMPEG_playAudioSDL(System.Object,System.Byte[],System.Int32)">
+        <member name="M:Tao.Sdl.Smpeg.SMPEG_playAudioSDL(System.IntPtr,System.Byte[],System.Int32)">
             <summary>
             Wrapper for SMPEG_playAudio() that can be passed to SDL and SDL_mixer. 
             Exported callback function for audio playback.
@@ -16386,7 +16386,7 @@
             <param name="wanted">SDL_AudioSpec</param>
             <returns></returns>
         </member>
-        <member name="M:Tao.Sdl.Smpeg.SMPEG_actualSpec(System.IntPtr,System.IntPtr)">
+        <member name="M:Tao.Sdl.Smpeg.SMPEG_actualSpec(System.IntPtr,Tao.Sdl.Sdl.SDL_AudioSpec@)">
             <summary>
             Inform SMPEG of the actual SDL audio spec used for sound playback
             </summary>
