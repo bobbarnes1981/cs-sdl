@@ -17,13 +17,31 @@ using SDLDotNet;
 */
 namespace SDLDotNet.TTF
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum Style {
+		/// <summary>
+		/// 
+		/// </summary>
 		Normal = 0x00,
+		/// <summary>
+		/// 
+		/// </summary>
 		Bold = 0x01,
+		/// <summary>
+		/// 
+		/// </summary>
 		Italic = 0x02,
+		/// <summary>
+		/// 
+		/// </summary>
 		Underline = 0x04
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public class SDLTTF
 	{
 		const string TTF_DLL = "SDL_ttf";
@@ -35,6 +53,9 @@ namespace SDLDotNet.TTF
 		[DllImport(TTF_DLL)]
 		private static extern void TTF_Quit();
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SDLTTF Instance {
 			get {
 				if (mInstance == null) mInstance = new SDLTTF();
@@ -47,6 +68,9 @@ namespace SDLDotNet.TTF
 				SDLTTFException.Generate();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		~SDLTTF() {
 			TTF_Quit();
 		}
