@@ -28,7 +28,8 @@ namespace SdlDotNet {
 	/// You can obtain an instance of this class by accessing the WindowManager property of the main Sdl
 	/// object.
 	/// </summary>
-	public sealed class WindowManager {
+	public sealed class WindowManager 
+	{
 
 		static readonly WindowManager instance = new WindowManager();
 

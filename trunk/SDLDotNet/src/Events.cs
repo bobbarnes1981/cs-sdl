@@ -144,8 +144,8 @@ namespace SdlDotNet {
 	/// </summary>
 	public class Events 
 	{
-		private Hashtable _userEvents = new Hashtable();
-		private int _userEventId = 0;
+		private Hashtable userEvents = new Hashtable();
+		private int userEventId = 0;
 
 		/// <summary>
 		/// Fires when the application has become active or inactive
@@ -301,9 +301,9 @@ namespace SdlDotNet {
 			Sdl.SDL_UserEvent sdlev;
 			sdlev.type = (byte)Sdl.SDL_USEREVENT;
 			lock (this) {
-				_userEvents[_userEventId] = userEvent;
-				_userEventId++;
-				sdlev.code = _userEventId;
+				this.userEvents[userEventId] = userEvent;
+				userEventId++;
+				sdlev.code = userEventId;
 			}
 			Sdl.SDL_Event evt = new Sdl.SDL_Event();
 			evt.user = sdlev;
@@ -587,7 +587,7 @@ namespace SdlDotNet {
 			if (UserEvent != null) {
 				object ret;
 				lock (this) {
-					ret = _userEvents[ev.user.code];
+					ret = this.userEvents[ev.user.code];
 				}
 				if (ret != null) {
 					if (ret is ChannelFinishedEventArgs) {
