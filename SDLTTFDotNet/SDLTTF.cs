@@ -41,7 +41,7 @@ namespace SDLDotNet.TTF
 	}
 
 	/// <summary>
-	/// 
+	/// Constructor.
 	/// </summary>
 	public class SDLTTF
 	{

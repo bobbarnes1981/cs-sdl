@@ -3,8 +3,8 @@
         <assembly location="C:\data\workspace\SDLDotNet\bin\Debug\SDL.NET.dll" documentation="C:\data\workspace\SDLDotNet\bin\Debug\SDL.NET.xml" />
     </assemblies>
     <namespaces>
-        <namespace name="SDLDotNET"></namespace>
-        <namespace name="SDLDotNET.Mixer"></namespace>
+        <namespace name="SDLDotNet"></namespace>
+        <namespace name="SDLDotNet.Mixer"></namespace>
     </namespaces>
     <documenters>
         <documenter name="HtmlHelp2">
