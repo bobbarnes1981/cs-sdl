@@ -8,6 +8,7 @@ namespace SDLDotNet {
 	/// </summary>
 	/// <type>struct</type>
 	public struct PixelValue {
+
 		private uint _val;
 		/// <summary>
 		/// Creates a pixel value
@@ -38,7 +39,7 @@ namespace SDLDotNet {
 		private bool _disposed;
 		private Natives.SDL_Surface *_surface;
 
-		private Surface(Natives.SDL_Surface *surface, bool freeondispose) {
+		internal Surface(Natives.SDL_Surface *surface, bool freeondispose) {
 			_freeondispose = freeondispose;
 			_surface = surface;
 			_disposed = false;
