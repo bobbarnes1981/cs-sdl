@@ -6,7 +6,7 @@
 		<CompilerDefines>DEBUG;TRACE</CompilerDefines>
 		<OptimizeCode>false</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
-		<OutputPath>bin\Debug</OutputPath>
+		<OutputPath>.\bin\Debug</OutputPath>
 		<XmlDocFile>SdlDotNet.xml</XmlDocFile>
 		<DebugInformation>true</DebugInformation>
 		<WarningLevel>4</WarningLevel>
@@ -17,7 +17,7 @@
 		<CompilerDefines>TRACE</CompilerDefines>
 		<OptimizeCode>true</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
-		<OutputPath>bin\Release</OutputPath>
+		<OutputPath>.\bin\Release</OutputPath>
 		<XmlDocFile>SdlDotNet.xml</XmlDocFile>
 		<DebugInformation>false</DebugInformation>
 		<WarningLevel>1</WarningLevel>
@@ -39,7 +39,7 @@
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Debug</OutputPath>
+		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
@@ -49,14 +49,14 @@
 		    <CompilerDefines>TRACE</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Release</OutputPath>
+		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" />
+	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
@@ -70,7 +70,7 @@
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Debug</OutputPath>
+		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
@@ -80,14 +80,14 @@
 		    <CompilerDefines>TRACE</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Release</OutputPath>
+		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" />
+	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
@@ -101,7 +101,7 @@
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Debug</OutputPath>
+		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
@@ -111,14 +111,14 @@
 		    <CompilerDefines>TRACE</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Release</OutputPath>
+		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" />
+	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
@@ -132,7 +132,7 @@
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Debug</OutputPath>
+		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
@@ -142,14 +142,14 @@
 		    <CompilerDefines>TRACE</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Release</OutputPath>
+		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" />
+	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
@@ -163,7 +163,7 @@
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Debug</OutputPath>
+		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
@@ -173,14 +173,14 @@
 		    <CompilerDefines>TRACE</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Release</OutputPath>
+		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" />
+	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Reference name="Tao.OpenGl" localCopy="true" path="."/>
 	    <Files>
@@ -195,7 +195,7 @@
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Debug</OutputPath>
+		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
@@ -205,14 +205,14 @@
 		    <CompilerDefines>TRACE</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Release</OutputPath>
+		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" />
+	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
@@ -226,7 +226,7 @@
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Debug</OutputPath>
+		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
@@ -236,14 +236,14 @@
 		    <CompilerDefines>TRACE</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Release</OutputPath>
+		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" />
+	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
@@ -257,7 +257,7 @@
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Debug</OutputPath>
+		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
@@ -267,7 +267,7 @@
 		    <CompilerDefines>TRACE</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin\Release</OutputPath>
+		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
@@ -275,7 +275,7 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="System.Windows.Forms" /> 
-	    <Reference name="SdlDotNet" />
+	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
