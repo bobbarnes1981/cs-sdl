@@ -102,7 +102,7 @@ namespace SdlDotNet.Sprites
 		#region Drawable
 		private SurfaceCollection surfaces = new SurfaceCollection();
 
-		private int frame = 0;
+		private int frame;
 
 		/// <summary>
 		/// Returns the current frame. For almost all drawables, this is

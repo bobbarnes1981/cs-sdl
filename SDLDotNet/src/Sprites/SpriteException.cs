@@ -58,7 +58,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="info"></param>
 		/// <param name="context"></param>
-		protected SpriteException(SerializationInfo info, StreamingContext context) 
+		protected SpriteException(SerializationInfo info, StreamingContext context) : base( info, context)
 		{
 		}
 	}

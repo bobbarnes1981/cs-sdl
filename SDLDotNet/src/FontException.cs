@@ -61,7 +61,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="info"></param>
 		/// <param name="context"></param>
-		protected FontException(SerializationInfo info, StreamingContext context) 
+		protected FontException(SerializationInfo info, StreamingContext context) : base( info, context )
 		{
 		}
 	}

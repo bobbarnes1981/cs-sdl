@@ -31,7 +31,7 @@ namespace SdlDotNet
 	public class Font : BaseSdlResource
 	{
 		private IntPtr handle; // Pointer to Ttf_Font struct
-		private bool disposed = false;
+		private bool disposed;
 	
 		/// <summary>
 		/// Font Constructor

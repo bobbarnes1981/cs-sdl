@@ -34,9 +34,9 @@ namespace SdlDotNet
 	public class Sound : BaseSdlResource 
 	{
 		private IntPtr handle;
-		private int channels = 0;
-		private bool disposed = false;
-		private long size = 0;
+		private int channels;
+		private bool disposed;
+		private long size;
 		/// <summary>
 		/// 
 		/// </summary>

@@ -140,10 +140,10 @@ namespace SdlDotNet.Sprites
 				this.Size = new Size(surf.Width, surf.Height);
 				return surf;
 			}
-			catch (Exception e)
+			catch (SpriteException e)
 			{
 				this.Surface = null;
-				throw e;
+				throw new SdlException("Text sprite exception", e);
 			}
 		}
 		#endregion
@@ -154,9 +154,9 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		//private Surface surface = null;
 
-		private SdlDotNet.Font font = null;
+		private SdlDotNet.Font font;
 
-		private string textItem = null;
+		private string textItem;
 
 		private Color color = Color.White;
 

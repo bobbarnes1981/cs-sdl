@@ -18,7 +18,7 @@ namespace SdlDotNet
 			this.lastTick = lastTick;
 		}
 
-		private int skipped = 0;
+		private int skipped;
 
 		/// <summary>
 		/// 
@@ -35,7 +35,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private long lastTick = 0;
+		private long lastTick;
 
 		/// <summary>
 		/// 

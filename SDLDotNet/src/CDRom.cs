@@ -35,7 +35,7 @@ namespace SdlDotNet
 	/// </remarks>
 	public sealed class CDRom
 	{
-		static private bool disposed = false;
+		static private bool disposed;
 		static readonly CDRom instance = new CDRom();
 
 //		static CDRom()

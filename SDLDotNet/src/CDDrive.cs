@@ -30,7 +30,7 @@ namespace SdlDotNet
 	/// <remarks></remarks>
 	public class CDDrive : BaseSdlResource
 	{
-		private bool disposed = false;
+		private bool disposed;
 		private IntPtr handle;
 		private int index;
 
@@ -95,7 +95,7 @@ namespace SdlDotNet
 		{
 			if (!CDRom.IsValidDriveNumber(this.index))
 			{
-				throw new SdlException("Device index out of range");
+				throw new SdlException("Device " + this.index + "out of range. Drive name not available.");
 			}
 			return Sdl.SDL_CDName(this.index);
 		}

@@ -60,7 +60,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="info"></param>
 		/// <param name="context"></param>
-		protected SurfaceLostException(SerializationInfo info, StreamingContext context) 
+		protected SurfaceLostException(SerializationInfo info, StreamingContext context) : base( info, context )
 		{
 		}
 	}

@@ -31,7 +31,7 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Video
 	{
-		static private bool disposed = false;
+		static private bool disposed;
 		static readonly Video instance = new Video();
 		static Mouse mouse = Mouse.Instance;
 		static VideoInfo videoInfo = VideoInfo.Instance;

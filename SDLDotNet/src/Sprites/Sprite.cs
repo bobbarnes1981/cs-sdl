@@ -35,8 +35,8 @@ namespace SdlDotNet.Sprites
 		public Sprite()
 		{
 			this.rect = new Rectangle(0, 0, 0, 0);
-			this.coordinateZ = 0;
-			this.surf = null;
+			//this.coordinateZ;
+			//this.surf = null;
 		}
 //
 //		/// <summary>
@@ -115,7 +115,7 @@ namespace SdlDotNet.Sprites
 		public Sprite(Surface surface, Point position)
 		{
 			this.rect = new Rectangle(position.X, position.Y, surface.Width, surface.Height);
-			this.coordinateZ = 0;
+			//this.coordinateZ = 0;
 			this.surf = surface;
 		}
 
@@ -136,7 +136,7 @@ namespace SdlDotNet.Sprites
 		public Sprite(Surface surface)
 		{
 			this.rect = new Rectangle(0, 0, surface.Width, surface.Height);
-			this.coordinateZ = 0;
+			//this.coordinateZ = 0;
 			this.surf = surface;
 		}
 
@@ -380,7 +380,7 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		private int coordinateZ = 0;
+		private int coordinateZ;
 
 		/// <summary>
 		/// 
