@@ -160,7 +160,8 @@
 		<excludes name="**/*.suo" />
 		<excludes name="**/*j.user" />
 		<excludes name="**/obj/**" />
-		<excludes name="**/${bin.dir}/**" />
+		<excludes name="${src.dir}/**/${bin.dir}/**" />
+		<excludes name="**/doc/**" />
 		<!--End "Exclude VS.Net stuff"-->
 		<excludes name="**/*.swp" />
 		<excludes name="**/*.bak" />
@@ -207,10 +208,14 @@
 	<zip zipfile="${project.zip-path}-src.zip">
 	    <fileset basedir="${bin.dir}">
 		<includes name="${project.zip-path}/src/**" />
-		<includes name="${project.zip-path}/examples/**" />
 		<includes name="${project.zip-path}/*" />
 		<excludes name="${project.zip-path}/**/bin/*" />
 		<excludes name="${project.zip-path}/**/obj/*" />
+	    </fileset>
+	</zip>
+	<zip zipfile="${project.zip-path}-examples.zip">
+	    <fileset basedir="${bin.dir}">
+		<includes name="${project.zip-path}/examples/**" />
 	    </fileset>
 	</zip>
 	<echo message="Created '${project.config}' packages at ${project.zip-path}" />
