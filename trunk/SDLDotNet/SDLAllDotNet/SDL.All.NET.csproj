@@ -85,139 +85,139 @@
                 />
                 <File
                     RelPath = "CDAudio.cs"
-                    Link = "..\CDAudio.cs"
+                    Link = "..\src\CDAudio.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "CDDrive.cs"
-                    Link = "..\CDDrive.cs"
+                    Link = "..\src\CDDrive.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "EventEnums.cs"
-                    Link = "..\EventEnums.cs"
+                    Link = "..\src\EventEnums.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Events.cs"
-                    Link = "..\Events.cs"
+                    Link = "..\src\Events.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Joystick.cs"
-                    Link = "..\Joystick.cs"
+                    Link = "..\src\Joystick.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Joysticks.cs"
-                    Link = "..\Joysticks.cs"
+                    Link = "..\src\Joysticks.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Natives.cs"
-                    Link = "..\Natives.cs"
+                    Link = "..\src\Natives.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "SDL.cs"
-                    Link = "..\SDL.cs"
+                    Link = "..\src\SDL.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "SDLColor.cs"
-                    Link = "..\SDLColor.cs"
+                    Link = "..\src\SDLColor.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "SDLException.cs"
-                    Link = "..\SDLException.cs"
+                    Link = "..\src\SDLException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Surface.cs"
-                    Link = "..\Surface.cs"
+                    Link = "..\src\Surface.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Video.cs"
-                    Link = "..\Video.cs"
+                    Link = "..\src\Video.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "WindowManager.cs"
-                    Link = "..\WindowManager.cs"
+                    Link = "..\src\WindowManager.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Image\ImageList.cs"
-                    Link = "..\..\SDLImageDotNet\ImageList.cs"
+                    Link = "..\..\SDLImageDotNet\src\ImageList.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Image\Natives.cs"
-                    Link = "..\..\SDLImageDotNet\Natives.cs"
+                    Link = "..\..\SDLImageDotNet\src\Natives.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Image\SDLImage.cs"
-                    Link = "..\..\SDLImageDotNet\SDLImage.cs"
+                    Link = "..\..\SDLImageDotNet\src\SDLImage.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Image\SDLImageException.cs"
-                    Link = "..\..\SDLImageDotNet\SDLImageException.cs"
+                    Link = "..\..\SDLImageDotNet\src\SDLImageException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Mixer\Music.cs"
-                    Link = "..\Mixer\Music.cs"
+                    Link = "..\src\Mixer\Music.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Mixer\Sample.cs"
-                    Link = "..\Mixer\Sample.cs"
+                    Link = "..\src\Mixer\Sample.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Mixer\SDLMixer.cs"
-                    Link = "..\Mixer\SDLMixer.cs"
+                    Link = "..\src\Mixer\SDLMixer.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "TTF\Font.cs"
-                    Link = "..\..\SDLTTFDotNet\Font.cs"
+                    Link = "..\..\SDLTTFDotNet\src\Font.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "TTF\SDLTTF.cs"
-                    Link = "..\..\SDLTTFDotNet\SDLTTF.cs"
+                    Link = "..\..\SDLTTFDotNet\src\SDLTTF.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "TTF\SDLTTFException.cs"
-                    Link = "..\..\SDLTTFDotNet\SDLTTFException.cs"
+                    Link = "..\..\SDLTTFDotNet\src\SDLTTFException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
