@@ -1315,7 +1315,7 @@ namespace SdlDotNet
 		public void RotateSurface(int degreesOfRotation)
 		{
 			this.SurfacePointer = 
-				SdlGfx.rotozoomSurface(this.SurfacePointer, degreesOfRotation, 1, 0);
+				SdlGfx.rotozoomSurface(this.SurfacePointer, degreesOfRotation, 1, SdlGfx.SMOOTHING_OFF);
 		}
 
 		/// <summary>
@@ -1326,7 +1326,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public void RotateSurface(int degreesOfRotation, bool antiAlias)
 		{
-			int antiAliasParameter = 0;
+			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
 			{
 				antiAliasParameter = SdlGfx.SMOOTHING_ON;
@@ -1349,7 +1349,7 @@ namespace SdlDotNet
 		public void RotateAndZoomSurface(int degreesOfRotation, double zoom)
 		{
 			this.SurfacePointer = 
-				SdlGfx.rotozoomSurface(this.SurfacePointer, degreesOfRotation, zoom, 0);
+				SdlGfx.rotozoomSurface(this.SurfacePointer, degreesOfRotation, zoom, SdlGfx.SMOOTHING_OFF);
 		}
 
 		/// <summary>
@@ -1362,10 +1362,10 @@ namespace SdlDotNet
 		public void RotateAndZoomSurface(int degreesOfRotation, 
 			double zoom, bool antiAlias)
 		{
-			int antiAliasParameter = 0;
+			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
 			{
-				antiAliasParameter = 1;
+				antiAliasParameter = SdlGfx.SMOOTHING_ON;
 			}
 			
 			this.SurfacePointer = 
@@ -1385,7 +1385,7 @@ namespace SdlDotNet
 		public void ZoomSurface(double zoomX, double zoomY)
 		{
 			this.SurfacePointer = 
-				SdlGfx.zoomSurface(this.SurfacePointer, zoomX, zoomY, 0);
+				SdlGfx.zoomSurface(this.SurfacePointer, zoomX, zoomY, SdlGfx.SMOOTHING_OFF);
 		}
 
 		/// <summary>
@@ -1397,10 +1397,10 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public void ZoomSurface(double zoomX, double zoomY, bool antiAlias)
 		{
-			int antiAliasParameter = 0;
+			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
 			{
-				antiAliasParameter = 1;
+				antiAliasParameter = SdlGfx.SMOOTHING_ON;
 			}
 			this.SurfacePointer = 
 				SdlGfx.zoomSurface(this.SurfacePointer, zoomX, zoomY, antiAliasParameter);
@@ -1414,7 +1414,7 @@ namespace SdlDotNet
 		public void ZoomSurface(double zoom)
 		{
 			this.SurfacePointer = 
-				SdlGfx.zoomSurface(this.SurfacePointer, zoom, zoom, 0);
+				SdlGfx.zoomSurface(this.SurfacePointer, zoom, zoom, SdlGfx.SMOOTHING_OFF);
 		}
 
 		/// <summary>
@@ -1425,10 +1425,10 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public void ZoomSurface(double zoom, bool antiAlias)
 		{
-			int antiAliasParameter = 0;
+			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
 			{
-				antiAliasParameter = 1;
+				antiAliasParameter = SdlGfx.SMOOTHING_ON;
 			}
 			this.SurfacePointer = 
 				SdlGfx.zoomSurface(this.SurfacePointer, zoom, zoom, antiAliasParameter);
