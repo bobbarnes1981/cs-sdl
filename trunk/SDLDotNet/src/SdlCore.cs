@@ -60,7 +60,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		FirstFreeChannel = -1
+		FirstFreeChannel = -1,
+		/// <summary>
+		/// 
+		/// </summary>
+		TrueValue = 1,
+		/// <summary>
+		/// 
+		/// </summary>
+		FalseValue = 0
 
 	}
 	/// <summary>

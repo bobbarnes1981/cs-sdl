@@ -6366,7 +6366,7 @@
             <param name="display">IntPtr to SDL_Surface</param>
             <returns>IntPtr to SDL_Overlay</returns>
             <seealso cref="T:Tao.Sdl.Sdl.SDL_Overlay"/>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_DisplayYUVOverlay(System.IntPtr,System.IntPtr)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_DisplayYUVOverlay(System.IntPtr,Tao.Sdl.Sdl.SDL_Rect@)"/>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_FreeYUVOverlay(System.IntPtr)"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_LockYUVOverlay(System.IntPtr)">
@@ -6401,7 +6401,7 @@
             <seealso cref="M:Tao.Sdl.Sdl.SDL_CreateYUVOverlay(System.Int32,System.Int32,System.Int32,System.IntPtr)"/>
             <seealso cref="T:Tao.Sdl.Sdl.SDL_Overlay"/>
         </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_DisplayYUVOverlay(System.IntPtr,System.IntPtr)">
+        <member name="M:Tao.Sdl.Sdl.SDL_DisplayYUVOverlay(System.IntPtr,Tao.Sdl.Sdl.SDL_Rect@)">
             <summary>
             Blit the overlay to the display.
             </summary>
@@ -6414,7 +6414,7 @@
             <code>SDL_DisplayYUVOverlay(SDL_Overlay *overlay, SDL_Rect *dstrect)
             </code></p></remarks>
             <param name="overlay">IntPtr to SDL_Overlay</param>
-            <param name="dstrect">IntPtr to SDL_Rect</param>
+            <param name="dstrect">SDL_Rect</param>
             <returns>Returns 0 on success.</returns>
             <seealso cref="T:Tao.Sdl.Sdl.SDL_Overlay"/>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_CreateYUVOverlay(System.Int32,System.Int32,System.Int32,System.IntPtr)"/>
@@ -6430,7 +6430,7 @@
             </code></p></remarks>
             <param name="overlay"></param>
             <seealso cref="T:Tao.Sdl.Sdl.SDL_Overlay"/>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_DisplayYUVOverlay(System.IntPtr,System.IntPtr)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_DisplayYUVOverlay(System.IntPtr,Tao.Sdl.Sdl.SDL_Rect@)"/>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_CreateYUVOverlay(System.Int32,System.Int32,System.Int32,System.IntPtr)"/>
             SDL_Overlay, SDL_DisplayYUVOverlay, SDL_FreeYUVOverlay
         </member>
@@ -9004,11 +9004,11 @@
             <summary>
                         </summary>
         </member>
-        <member name="F:Tao.Sdl.SdlGfx.FPS_LOWER_IMIT">
+        <member name="F:Tao.Sdl.SdlGfx.FPS_LOWER_LIMIT">
             <summary>
                         </summary>
         </member>
-        <member name="F:Tao.Sdl.SdlGfx.FPS_DEAFULT">
+        <member name="F:Tao.Sdl.SdlGfx.FPS_DEFAULT">
             <summary>
                         </summary>
         </member>
@@ -15022,6 +15022,8 @@
             Get individual font glyph metrics 
             </summary>
             <remarks>
+            To understand what these metrics mean, here is a useful link:
+            http://freetype.sourceforge.net/freetype2/docs/tutorial/step2.html
             <p>Binds to C-function in SDL_ttf.h
              <code>
              int TTF_GlyphMetrics(TTF_Font *font, Uint16 ch, int *minx, int *maxx, int *miny, int *maxy, int *advance)
@@ -15946,7 +15948,10 @@
             initialize the SDL audio
             subsystem. If not, you will have to use the 
             SMPEG_playaudio() function below
-            to extract the decoded data.</param>
+            to extract the decoded data. Never set this parameter to false (i.e. 0). 
+            This will cause the video playback to run very slowly. 
+            To disable audio, 
+            use the <see cref="M:Tao.Sdl.Smpeg.SMPEG_enableaudio(System.IntPtr,System.Int32)"/> function.</param>
             <returns>This function returns a new SMPEG object.  
             Use SMPEG_error() to find out whether or not there 
             was a problem building the MPEG stream.</returns>
