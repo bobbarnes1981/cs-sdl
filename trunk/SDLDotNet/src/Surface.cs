@@ -22,6 +22,8 @@ using System;
 using System.IO;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Globalization;
+
 using Tao.Sdl;
 
 namespace SdlDotNet 
@@ -73,6 +75,63 @@ namespace SdlDotNet
 			{ 
 				val = value;
 			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return String.Format(CultureInfo.CurrentCulture, "({0})", val);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
+		public override bool Equals(object obj)
+		{
+			if (obj.GetType() != typeof(PixelValue))
+				return false;
+                
+			PixelValue pixelValue = (PixelValue)obj;   
+			return (this.val == pixelValue.val);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="pixelValue1"></param>
+		/// <param name="pixelValue2"></param>
+		/// <returns></returns>
+		public static bool operator== (
+			PixelValue pixelValue1, 
+			PixelValue pixelValue2)
+		{
+			return (pixelValue1.val == pixelValue2.val);
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="pixelValue1"></param>
+		/// <param name="pixelValue2"></param>
+		/// <returns></returns>
+		public static bool operator!= (
+			PixelValue pixelValue1, 
+			PixelValue pixelValue2)
+		{
+			return !(pixelValue1 == pixelValue2);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override int GetHashCode()
+		{
+			return val;
+
 		}
 	}
 
@@ -163,9 +222,9 @@ namespace SdlDotNet
 			return new Surface(surfacePtr);
 		}
 
-//		internal static Surface FromPtr(IntPtr surfacePtr) {
-//			return new Surface(surfacePtr, true);
-//		}
+		//		internal static Surface FromPtr(IntPtr surfacePtr) {
+		//			return new Surface(surfacePtr, true);
+		//		}
 
 		private Sdl.SDL_Surface GetSurfaceStructFromPtr(IntPtr ptr)
 		{
@@ -290,6 +349,389 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="circle"></param>
+		/// <param name="color"></param>
+		public void CreateFilledCircle(Circle circle, System.Drawing.Color color)
+		{
+			int result = SdlGfx.filledCircleRGBA(handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
+				color.A);
+			GC.KeepAlive(this);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="circle"></param>
+		/// <param name="color"></param>
+		/// <param name="antiAlias"></param>
+		public void CreateCircle(Circle circle, System.Drawing.Color color, bool antiAlias)
+		{
+			int result = 0;
+			if (antiAlias)
+			{
+				result = SdlGfx.aacircleRGBA(handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			else
+			{
+				result = SdlGfx.circleRGBA(handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="circle"></param>
+		/// <param name="color"></param>
+		public void CreateCircle(Circle circle, System.Drawing.Color color)
+		{
+			CreateCircle(circle, color, false);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ellipse"></param>
+		/// <param name="color"></param>
+		/// <param name="antiAlias"></param>
+		public void CreateEllipse(Ellipse ellipse, System.Drawing.Color color, bool antiAlias)
+		{
+			int result = 0;
+
+			if (antiAlias)
+			{
+				result = SdlGfx.aaellipseRGBA(
+					handle, ellipse.XPosition, ellipse.YPosition, 
+					ellipse.RadiusX, ellipse.RadiusY, 
+					color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			else
+			{
+				result = SdlGfx.ellipseRGBA(
+					handle, ellipse.XPosition, ellipse.YPosition, 
+					ellipse.RadiusX, ellipse.RadiusY, 
+					color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ellipse"></param>
+		/// <param name="color"></param>
+		public void CreateEllipse(Ellipse ellipse, System.Drawing.Color color)
+		{
+			CreateEllipse(ellipse, color, false);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ellipse"></param>
+		/// <param name="color"></param>
+		public void CreateFilledEllipse(Ellipse ellipse, System.Drawing.Color color)
+		{
+			int result = SdlGfx.filledEllipseRGBA(handle, ellipse.XPosition, ellipse.YPosition, ellipse.RadiusX, ellipse.RadiusY,color.R, color.B, color.G,
+				color.A);
+			GC.KeepAlive(this);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="line"></param>
+		/// <param name="color"></param>
+		/// <param name="antiAlias"></param>
+		public void CreateLine(Line line, System.Drawing.Color color, bool antiAlias)
+		{
+			int result = 0;
+
+			if (antiAlias)
+			{
+				result = SdlGfx.aalineRGBA(
+					handle, line.XPosition1, line.YPosition1, 
+					line.XPosition2, line.YPosition2, 
+					color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			else
+			{
+				result = SdlGfx.lineRGBA(
+					handle, line.XPosition1, line.YPosition1, 
+					line.XPosition2, line.YPosition2, 
+					color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="line"></param>
+		/// <param name="color"></param>
+		public void CreateLine(Line line, System.Drawing.Color color)
+		{
+			CreateLine(line, color, false);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="triangle"></param>
+		/// <param name="color"></param>
+		/// <param name="antiAlias"></param>
+		public void CreateTriangle(Triangle triangle, System.Drawing.Color color, bool antiAlias)
+		{
+			int result = 0;
+
+			if (antiAlias)
+			{
+				result = SdlGfx.aatrigonRGBA(
+					handle, triangle.XPosition1, triangle.YPosition1, 
+					triangle.XPosition2, triangle.YPosition2, 
+					triangle.XPosition3, triangle.YPosition3, 
+					color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			else
+			{
+				result = SdlGfx.trigonRGBA(
+					handle, triangle.XPosition1, triangle.YPosition1, 
+					triangle.XPosition2, triangle.YPosition2, 
+					triangle.XPosition3, triangle.YPosition3, 
+					color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="triangle"></param>
+		/// <param name="color"></param>
+		public void CreateTriangle(Triangle triangle, System.Drawing.Color color)
+		{
+			CreateTriangle(triangle, color, false);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="triangle"></param>
+		/// <param name="color"></param>
+		public void CreateFilledTriangle(Triangle triangle, System.Drawing.Color color)
+		{
+			int result = 0;
+			result = SdlGfx.filledTrigonRGBA(
+				handle, triangle.XPosition1, triangle.YPosition1, 
+				triangle.XPosition2, triangle.YPosition2, 
+				triangle.XPosition3, triangle.YPosition3, 
+				color.R, color.B, color.G,
+				color.A);
+			GC.KeepAlive(this);
+
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="polygon"></param>
+		/// <param name="color"></param>
+		public void CreateFilledPolygon(Polygon polygon, System.Drawing.Color color)
+		{
+			int result = SdlGfx.filledPolygonRGBA(handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
+				color.A);
+			GC.KeepAlive(this);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="polygon"></param>
+		/// <param name="color"></param>
+		/// <param name="antiAlias"></param>
+		public void CreatePolygon(Polygon polygon, System.Drawing.Color color, bool antiAlias)
+		{
+			int result = 0;
+			if (antiAlias)
+			{
+				result = SdlGfx.aapolygonRGBA(handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			else
+			{
+				result = SdlGfx.polygonRGBA(handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
+					color.A);
+				GC.KeepAlive(this);
+			}
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="polygon"></param>
+		/// <param name="color"></param>
+		public void CreatePolygon(Polygon polygon, System.Drawing.Color color)
+		{
+			CreatePolygon(polygon, color, false);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="pie"></param>
+		/// <param name="color"></param>
+		public void CreatePie(Pie pie, System.Drawing.Color color)
+		{
+			int result = 0;
+
+			result = SdlGfx.pieRGBA(
+				handle, pie.XPosition, pie.YPosition, 
+				pie.Radius,
+				pie.StartingPoint, pie.EndingPoint, 
+				color.R, color.B, color.G,
+				color.A);
+			GC.KeepAlive(this);
+
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="pie"></param>
+		/// <param name="color"></param>
+		public void CreateFilledPie(Pie pie, System.Drawing.Color color)
+		{
+			int result = SdlGfx.filledPieRGBA(handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingPoint, pie.EndingPoint,color.R, color.B, color.G,
+				color.A);
+			GC.KeepAlive(this);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="bezier"></param>
+		/// <param name="color"></param>
+		public void CreateBezier(Bezier bezier, System.Drawing.Color color)
+		{
+			int result = 0;
+			result = SdlGfx.bezierRGBA(
+				handle, bezier.XPositions(), bezier.YPositions(), 
+				bezier.NumberOfPoints, bezier.Steps, 
+				color.R, color.B, color.G,
+				color.A);
+			GC.KeepAlive(this);
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="box"></param>
+		/// <param name="color"></param>
+		public void CreateBox(Box box, System.Drawing.Color color)
+		{
+			int result = 0;
+
+			
+			result = SdlGfx.rectangleRGBA(
+				handle, box.XPosition1, box.YPosition1, 
+				box.XPosition2, box.YPosition2, 
+				color.R, color.B, color.G,
+				color.A);
+			GC.KeepAlive(this);
+			
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="box"></param>
+		/// <param name="color"></param>
+		public void CreateFilledBox(Box box, System.Drawing.Color color)
+		{
+			int result = 0;
+
+			
+			result = SdlGfx.boxRGBA(
+				handle, box.XPosition1, box.YPosition1, 
+				box.XPosition2, box.YPosition2, 
+				color.R, color.B, color.G,
+				color.A);
+			GC.KeepAlive(this);
+			
+			if (result != 0)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
 		/// Maps a logical color to a pixel value in the surface's pixel format
 		/// </summary>
 		/// <param name="color">The color to map</param>
@@ -314,7 +756,8 @@ namespace SdlDotNet
 		/// <returns>
 		/// A Color value for a pixel value in the surface's format
 		/// </returns>
-		public System.Drawing.Color GetColor(PixelValue pixelValue) {
+		public System.Drawing.Color GetColor(PixelValue pixelValue) 
+		{
 			byte r, g, b, a;
 			Sdl.SDL_Surface surf = this.GetSurfaceStructFromPtr(handle);
 			GC.KeepAlive(this);
@@ -377,7 +820,8 @@ namespace SdlDotNet
 		/// attempt to place the new surface in video memory
 		/// </param>
 		/// <returns>The new surface</returns>
-		public Surface ConvertSurface(Surface toConvert, bool hardware) {
+		public Surface ConvertSurface(Surface toConvert, bool hardware) 
+		{
 			Sdl.SDL_Surface surf = this.GetSurfaceStructFromPtr(handle);
 			IntPtr ret = Sdl.SDL_ConvertSurface(toConvert.handle, surf.format, hardware?(int)Sdl.SDL_HWSURFACE:(int)Sdl.SDL_SWSURFACE);
 			GC.KeepAlive(this);
@@ -393,7 +837,8 @@ namespace SdlDotNet
 		/// the display window
 		/// </summary>
 		/// <returns>A copy of this surface</returns>
-		public Surface DisplayFormat() {
+		public Surface DisplayFormat() 
+		{
 			IntPtr surfPtr = Sdl.SDL_DisplayFormat(handle);
 			GC.KeepAlive(this);
 			if (surfPtr == IntPtr.Zero)
@@ -406,8 +851,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the size of the surface
 		/// </summary>
-		public System.Drawing.Size Size {
-			get { 
+		public System.Drawing.Size Size 
+		{
+			get 
+			{ 
 				Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(handle);
 				GC.KeepAlive(this);
 				return new System.Drawing.Size(surf.w, surf.h); 
@@ -417,7 +864,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the width of the surface
 		/// </summary>
-		public int Width { 
+		public int Width 
+		{ 
 			get
 			{ 
 				Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(handle);
@@ -429,7 +877,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the height of the surface
 		/// </summary>
-		public int Height { 
+		public int Height 
+		{ 
 			get
 			{ 
 				Sdl.SDL_Surface surf = GetSurfaceStructFromPtr(handle);
@@ -447,7 +896,8 @@ namespace SdlDotNet
 		/// <param name="destinationRectangle">
 		/// The rectangle coordinates on the destination surface to copy to
 		/// </param>
-		public void Blit(Surface destinationSurface, System.Drawing.Rectangle destinationRectangle) {
+		public void Blit(Surface destinationSurface, System.Drawing.Rectangle destinationRectangle) 
+		{
 			Sdl.SDL_Rect s = this.ConvertRecttoSDLRect(new System.Drawing.Rectangle(
 				new System.Drawing.Point(0, 0), this.Size)),
 				d = this.ConvertRecttoSDLRect(destinationRectangle);
@@ -487,8 +937,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Locks a surface to allow direct pixel manipulation
 		/// </summary>
-		public void Lock() {
-			if (MustLock) {
+		public void Lock() 
+		{
+			if (MustLock) 
+			{
 				int result = Sdl.SDL_LockSurface(handle);
 				GC.KeepAlive(this);
 				if (result != 0)
@@ -500,7 +952,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets a pointer to the raw pixel data of the surface
 		/// </summary>
-		public IntPtr Pixels {
+		public IntPtr Pixels 
+		{
 			get 
 			{ 
 				Sdl.SDL_Surface surf = 
@@ -513,8 +966,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Unlocks a surface which has been locked.
 		/// </summary>
-		public void Unlock() {
-			if (MustLock) {
+		public void Unlock() 
+		{
+			if (MustLock) 
+			{
 				int result = Sdl.SDL_UnlockSurface(handle);
 				GC.KeepAlive(this);
 				if (result != 0)
@@ -630,7 +1085,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the number of bytes per pixel for this surface
 		/// </summary>
-		public int BytesPerPixel {
+		public int BytesPerPixel 
+		{
 			get
 			{ 
 				Sdl.SDL_Surface surf = 
@@ -675,7 +1131,7 @@ namespace SdlDotNet
 						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
 					Marshal.WriteByte(pixelColorValuePtr, pixelColorValue);
 				}
-				break;
+					break;
 				case 2: // Probably 15-bpp or 16-bpp
 				{
 					short pixelColorValue = (short) pixelColor.Value;
@@ -684,25 +1140,25 @@ namespace SdlDotNet
 						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
 					Marshal.WriteInt16(pixelColorValuePtr, pixelColorValue);
 				}
-				break;
+					break;
 				case 3: // Slow 24-bpp mode, usually not used
 				{
-//					byte *bufp;
-//					bufp = (byte *)_surface->pixels + y*_surface->pitch + x * 3;
-//					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
-//					{
-//						bufp[0] = color;
-//						bufp[1] = color >> 8;
-//						bufp[2] = color >> 16;
-//					} 
-//					else 
-//					{
-//						bufp[2] = color;
-//						bufp[1] = color >> 8;
-//						bufp[0] = color >> 16;
-//					}
+					//					byte *bufp;
+					//					bufp = (byte *)_surface->pixels + y*_surface->pitch + x * 3;
+					//					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
+					//					{
+					//						bufp[0] = color;
+					//						bufp[1] = color >> 8;
+					//						bufp[2] = color >> 16;
+					//					} 
+					//					else 
+					//					{
+					//						bufp[2] = color;
+					//						bufp[1] = color >> 8;
+					//						bufp[0] = color >> 16;
+					//					}
 				}
-				break;
+					break;
 				case 4: // Probably 32-bpp
 				{
 					int pixelColorValue = pixelColor.Value;
@@ -711,14 +1167,15 @@ namespace SdlDotNet
 						new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
 					Marshal.WriteInt32(pixelColorValuePtr, pixelColorValue);
 				}
-				break;
+					break;
 			}
 		}
 
 		/// <summary>
 		/// Flips the rows of a surface, for use in an OpenGL texture for example
 		/// </summary>
-		public void FlipVertical() {
+		public void FlipVertical() 
+		{
 
 			int first = 0;
 			int second = this.Height-1;
@@ -795,16 +1252,16 @@ namespace SdlDotNet
 				}
 				case 3: //Assuming this is not going to be used much... 
 				{
-//					byte *bufp;
-//					bufp = (byte *)screen->pixels + y*screen->pitch + x * 3;
-//					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
-//					{
-//						return p[0] << 16 | p[1] << 8 | p[2];
-//					}
-//					else
-//					{
-//						return p[0] | p[1] << 8 | p[2] << 16;
-//					}
+					//					byte *bufp;
+					//					bufp = (byte *)screen->pixels + y*screen->pitch + x * 3;
+					//					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
+					//					{
+					//						return p[0] << 16 | p[1] << 8 | p[2];
+					//					}
+					//					else
+					//					{
+					//						return p[0] | p[1] << 8 | p[2] << 16;
+					//					}
 					return 0;
 				}
 				case 4:
@@ -833,6 +1290,151 @@ namespace SdlDotNet
 			{
 				throw SdlException.Generate();
 			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <param name="degreesOfRotation"></param>
+		/// <returns></returns>
+		public Surface RotateSurface(Surface sourceSurface, int degreesOfRotation)
+		{
+			IntPtr surfacePtr = 
+				SdlGfx.rotozoomSurface(sourceSurface.SurfacePointer, degreesOfRotation, 1, 0);
+			return new Surface(surfacePtr);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <param name="degreesOfRotation"></param>
+		/// <param name="antiAlias"></param>
+		/// <returns></returns>
+		public Surface RotateSurface(Surface sourceSurface, int degreesOfRotation, bool antiAlias)
+		{
+			int antiAliasParameter = 0;
+			if (antiAlias == true)
+			{
+				antiAliasParameter = 1;
+			}
+			
+			IntPtr surfacePtr = 
+				SdlGfx.rotozoomSurface(
+				sourceSurface.SurfacePointer, 
+				degreesOfRotation, 
+				1, 
+				antiAliasParameter);
+
+			return new Surface(surfacePtr);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <param name="degreesOfRotation"></param>
+		/// <param name="zoom"></param>
+		/// <returns></returns>
+		public Surface RotateAndZoomSurface(Surface sourceSurface, int degreesOfRotation, double zoom)
+		{
+			IntPtr surfacePtr = 
+				SdlGfx.rotozoomSurface(sourceSurface.SurfacePointer, degreesOfRotation, zoom, 0);
+			return new Surface(surfacePtr);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <param name="degreesOfRotation"></param>
+		/// <param name="zoom"></param>
+		/// <param name="antiAlias"></param>
+		/// <returns></returns>
+		public Surface RotateAndZoomSurface(Surface sourceSurface, int degreesOfRotation, 
+			double zoom, bool antiAlias)
+		{
+			int antiAliasParameter = 0;
+			if (antiAlias == true)
+			{
+				antiAliasParameter = 1;
+			}
+			
+			IntPtr surfacePtr = 
+				SdlGfx.rotozoomSurface(
+				sourceSurface.SurfacePointer, 
+				degreesOfRotation, 
+				zoom, 
+				antiAliasParameter);
+
+			return new Surface(surfacePtr);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <param name="zoomX"></param>
+		/// <param name="zoomY"></param>
+		/// <returns></returns>
+		public Surface ZoomSurface(Surface sourceSurface, double zoomX, double zoomY)
+		{
+			IntPtr surfacePtr = 
+				SdlGfx.zoomSurface(sourceSurface.SurfacePointer, zoomX, zoomY, 0);
+			return new Surface(surfacePtr);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <param name="zoomX"></param>
+		/// <param name="zoomY"></param>
+		/// <param name="antiAlias"></param>
+		/// <returns></returns>
+		public Surface ZoomSurface(Surface sourceSurface, double zoomX, double zoomY, bool antiAlias)
+		{
+			int antiAliasParameter = 0;
+			if (antiAlias == true)
+			{
+				antiAliasParameter = 1;
+			}
+			IntPtr surfacePtr = 
+				SdlGfx.zoomSurface(sourceSurface.SurfacePointer, zoomX, zoomY, antiAliasParameter);
+			return new Surface(surfacePtr);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <param name="zoom"></param>
+		/// <returns></returns>
+		public Surface ZoomSurface(Surface sourceSurface, double zoom)
+		{
+			IntPtr surfacePtr = 
+				SdlGfx.zoomSurface(sourceSurface.SurfacePointer, zoom, zoom, 0);
+			return new Surface(surfacePtr);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceSurface"></param>
+		/// <param name="zoom"></param>
+		/// <param name="antiAlias"></param>
+		/// <returns></returns>
+		public Surface ZoomSurface(Surface sourceSurface, double zoom, bool antiAlias)
+		{
+			int antiAliasParameter = 0;
+			if (antiAlias == true)
+			{
+				antiAliasParameter = 1;
+			}
+			IntPtr surfacePtr = 
+				SdlGfx.zoomSurface(sourceSurface.SurfacePointer, zoom, zoom, antiAliasParameter);
+			return new Surface(surfacePtr);
 		}
 	}
 }

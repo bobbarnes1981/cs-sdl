@@ -668,7 +668,7 @@ namespace SdlDotNet
 		/// Flips the left and right stereo for all channels
 		/// </summary>
 		/// <param name="flip">True to flip, False to reset to normal</param>
-		public void SetReverseStereo(bool flip) 
+		public void ReverseStereo(bool flip) 
 		{
 			if (SdlMixer.Mix_SetReverseStereo(-1, flip?1:0) == 0)
 			{
@@ -680,7 +680,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="channel">The channel to flip</param>
 		/// <param name="flip">True to flip, False to reset to normal</param>
-		public void SetReverseStereoChannel(int channel, bool flip) 
+		public void ReverseStereoChannel(int channel, bool flip) 
 		{
 			if (SdlMixer.Mix_SetReverseStereo(channel, flip?1:0) == 0)
 			{
@@ -791,7 +791,7 @@ namespace SdlDotNet
 		/// from the beginning of the song
 		/// </summary>
 		/// <param name="position"></param>
-		public void SetMusicPosition(double position) 
+		public void MusicPosition(double position) 
 		{
 			if (SdlMixer.Mix_SetMusicPosition(position) != 0)
 			{

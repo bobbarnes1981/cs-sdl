@@ -69,14 +69,16 @@ namespace SdlDotNet {
 				Sdl.SDL_WM_SetCaption(value, "");
 			}
 		}
+
 		/// <summary>
 		/// sets the icon for the current window
 		/// </summary>
 		/// <param name="icon">the surface containing the image</param>
-		public void SetIcon(Surface icon) 
+		public void WindowIcon(Surface icon) 
 		{
 			Sdl.SDL_WM_SetIcon(icon.SurfacePointer, null);
 		}
+
 		/// <summary>
 		/// Iconifies (minimizes) the current window
 		/// </summary>
