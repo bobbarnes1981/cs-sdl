@@ -9,6 +9,11 @@
 	schema: creates XML schema.
 	packagedefault: creates release zip file for default framework.
 	package: creates release zip file for .NET and Mono. Must have both frameworks installed.
+
+	you can combine targets easily. If .NET is your default framework but you want to compile 
+	against Mono (mcs) you can use the command:
+	'nant mono build'
+	This sets mono parameters and then runs the build.
     -->
     <echo message="Using '${nant.settings.currentframework}' Framework"/>
 
