@@ -1,28 +1,54 @@
+/*
+ * $RCSfile$
+ * Copyright (C) 2003 Lucas Maloney
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+/*
+ * $Revision$
+ * $Date$
+ *
+ *	Notes
+ *
+ *	For all functions where there are 3 versions, 
+ *	the Text (Latin1) and UTF8 functions convert the string to Unicode then use the unicode version.
+ *	DotNet seems to do this conversion when marshalling so I have decided to only have methods for the unicode versions.
+ *
+ *	In the future, I might merge Solid/Shaded/Blended into 1 function with the type as a parameter.  
+ *	At the moment I can't see any reason to do this.
+ *
+ *	REVISION HISTORY
+ *
+ *	Mon 31 Mar 2003 23:28:02 EST LM
+ *	Changed namespace from SDLTTFDotNet
+ *	Now using singleton architecture
+ *
+ *	Tue 25 Mar 2003 18:18:27 EST LM
+ *	Changed all exception throws to use the Generate method.
+ *
+ *	Mon 24 Mar 2003 20:45:40 EST LM
+ *	There is currently a bug in mono which meant this class did not need an instance of SDL.
+ *	I have fixed this so it does not depend on that bug.
+ */
+
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using SDLDotNet;
 
-/*
-	Notes
-
-	For all functions where there are 3 versions, the Text (Latin1) and UTF8 functions convert the string to Unicode then use the unicode version.  DotNet seems to do this conversion when marshalling so I have decided to only have methods for the unicode versions.
-
-	In the future, I might merge Solid/Shaded/Blended into 1 function with the type as a parameter.  At the moment I can't see any reason to do this.
-
-	REVISION HISTORY
-
-	Mon 31 Mar 2003 23:28:02 EST LM
-	Changed namespace from SDLTTFDotNet
-	Now using singleton architecture
-
-	Tue 25 Mar 2003 18:18:27 EST LM
-	Changed all exception throws to use the Generate method.
-
-	Mon 24 Mar 2003 20:45:40 EST LM
-	There is currently a bug in mono which meant this class did not need an instance of SDL.
-	I have fixed this so it does not depend on that bug.
-*/
 namespace SDLDotNet.TTF
 {
 	/// <summary>
