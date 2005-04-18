@@ -46,7 +46,7 @@ namespace SdlDotNet.Examples
 			GuiWindow gw = new GuiWindow(manager, new Rectangle(200, 65, 110, 100));
 			gw.AllowDrag = true;
 			gw.Title = "Draggable Window";
-			gw.Sprites.Add(new AnimatedSprite(LoadRandomMarble(),
+			gw.Sprites.Add(new AnimatedDemoSprite(LoadRandomMarble(),
 				new Point(18, 18)));
 			gw.Sprites.EnableTickEvent();
 			Sprites.Add(gw);
@@ -54,7 +54,7 @@ namespace SdlDotNet.Examples
 			// Create a draggable window without a title
 			gw = new GuiWindow(manager, new Rectangle(25, 120, 32, 32));
 			gw.AllowDrag = true;
-			gw.Sprites.Add(new AnimatedSprite(LoadRandomMarble(),
+			gw.Sprites.Add(new AnimatedDemoSprite(LoadRandomMarble(),
 				new Point(0, 0)));
 			gw.Sprites.EnableTickEvent();
 			Sprites.Add(gw);
@@ -63,7 +63,7 @@ namespace SdlDotNet.Examples
 			gw = new GuiWindow(manager, new Rectangle(100, 390, 256, 90));
 			gw.Title = "Non-Draggable Window with a Long Title";
 			gw.AllowDrag = false;
-			gw.Sprites.Add(new AnimatedSprite(LoadRandomMarble(),
+			gw.Sprites.Add(new AnimatedDemoSprite(LoadRandomMarble(),
 				new Point(0, 18)));
 			gw.Sprites.EnableTickEvent();
 			Sprites.Add(gw);
@@ -102,7 +102,7 @@ namespace SdlDotNet.Examples
 		//			gm.Add(new GuiMenuItem(gui, "Test #2"));
 		//
 		//			GuiMenuItem gmi3 = new GuiMenuItem(gui);
-		//			gmi3.AddLeft(new AnimatedSprite(LoadRandomMarble(), new Point(0, 0)));
+		//			gmi3.AddLeft(new AnimatedDemoSprite(LoadRandomMarble(), new Point(0, 0)));
 		//			gmi3.AddLeft(new TextSprite("Create New Window", gui.BaseFont));
 		//			gm.Add(gmi3);
 		//			gmi3.ItemSelectedEvent += new MenuItemHandler(OnCreateNewWindow);
@@ -171,7 +171,7 @@ namespace SdlDotNet.Examples
 				70, 70));
 			gw.AllowDrag = true;
 			gw.Title = "Created Window";
-			gw.Sprites.Add(new AnimatedSprite(m1, new Point(3, 3)));
+			gw.Sprites.Add(new AnimatedDemoSprite(m1, new Point(3, 3)));
 			Sprites.Add(gw);
 		}
 
@@ -223,9 +223,9 @@ namespace SdlDotNet.Examples
 							SdlDemo.GuiManager.BaseFont));
 						break;
 					case 4: // Add two marbles
-						ticker.Add(new AnimatedSprite(LoadRandomMarble(),
+						ticker.Add(new AnimatedDemoSprite(LoadRandomMarble(),
 							new Point(0, 0)));
-						ticker.Add(new AnimatedSprite(LoadRandomMarble(),
+						ticker.Add(new AnimatedDemoSprite(LoadRandomMarble(),
 							new Point(0, 0)));
 						break;
 				}

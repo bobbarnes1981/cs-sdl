@@ -69,8 +69,8 @@ namespace SdlDotNet.Examples
 				for (int j = 0; j < rows; j++)
 				{
 					// Create the sprite
-					DrawableSprite dw =
-						new DrawableSprite(floorTiles,
+					AnimatedSprite dw =
+						new AnimatedSprite(floorTiles,
 						new Vector(i * floorTiles[0].Size.Width,
 						j * floorTiles[0].Size.Height,
 						-1000));

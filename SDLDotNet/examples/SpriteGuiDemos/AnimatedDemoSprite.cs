@@ -27,7 +27,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class AnimatedSprite : DrawableSprite
+	public class AnimatedDemoSprite : AnimatedSprite
 	{
 		Random rand = new Random();
 		// Randomly assign the direction we show the frames
@@ -38,7 +38,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="d"></param>
 		/// <param name="position"></param>
-		public AnimatedSprite(SurfaceCollection d, Point position)
+		public AnimatedDemoSprite(SurfaceCollection d, Point position)
 			: base(d, position)
 		{
 			base.Frame = rand.Next(d.Count);
@@ -50,7 +50,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="d"></param>
 		/// <param name="coordinates"></param>
-		public AnimatedSprite(SurfaceCollection d, Vector coordinates)
+		public AnimatedDemoSprite(SurfaceCollection d, Vector coordinates)
 			: base(d, coordinates)
 		{
 			base.Frame = rand.Next(d.Count);

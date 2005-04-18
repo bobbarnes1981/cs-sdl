@@ -38,12 +38,12 @@ namespace SdlDotNet.Examples
 		{
 			// Create our image and add it to our sprite manager
 			SurfaceCollection id = new SurfaceCollection("../../Data/marble1.png");
-			DrawableSprite s = new DrawableSprite(id, new Point(5, 5));
+			AnimatedSprite s = new AnimatedSprite(id, new Point(5, 5));
 			this.Sprites.Add(s);
 
 			// Create the fragment image
 			TiledSurfaceCollection td = new TiledSurfaceCollection(new Surface("../../Data/marble1.png"), new Size(64, 64));
-			AnimatedSprite an = new AnimatedSprite(td, new Vector(200, 32, 100));
+			AnimatedDemoSprite an = new AnimatedDemoSprite(td, new Vector(200, 32, 100));
 			an.X = 250;
 			Sprites.Add(an);
 
@@ -53,11 +53,11 @@ namespace SdlDotNet.Examples
 			for (int i = 0; i < 10; i++)
 			{
 				Thread.Sleep(10);
-				AnimatedSprite as1 = new AnimatedSprite(m1,
+				AnimatedDemoSprite as1 = new AnimatedDemoSprite(m1,
 					new Vector(50 + i * 32,
 					436, i));
 				Thread.Sleep(10);
-				AnimatedSprite as2 = new AnimatedSprite(m1,
+				AnimatedDemoSprite as2 = new AnimatedDemoSprite(m1,
 					new Vector(50 + i * 32,
 					468, 10 - i));
 				Sprites.Add(as1);
