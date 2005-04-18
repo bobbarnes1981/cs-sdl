@@ -710,6 +710,42 @@ namespace SdlDotNet.Sprites
 			group.Remove(this);
 			this.groups.Remove(group);
 		}
+
+		private bool allowDrag;
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool AllowDrag
+		{
+			get
+			{
+				return allowDrag;
+			}
+			set
+			{
+				allowDrag = value;
+			}
+		}
+
+		private bool beingDragged;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool BeingDragged
+		{
+			get
+			{
+				return beingDragged;
+			}
+			set
+			{
+				beingDragged = value;
+			}
+		}
+
+
+
 		#endregion
 	}
 }

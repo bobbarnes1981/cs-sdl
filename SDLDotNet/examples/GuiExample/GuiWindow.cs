@@ -37,7 +37,10 @@ namespace SdlDotNet.Examples.GuiExample
 		public GuiWindow(GuiManager manager)
 			: base(manager)
 		{
-			//this.manager = manager;
+			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
+				new Vector(0, 0, this.Z));
+			base.Sprites.Add(titleSprite);
+			this.title = string.Empty;
 		}
 
 		/// <summary>
@@ -49,8 +52,10 @@ namespace SdlDotNet.Examples.GuiExample
 		public GuiWindow(GuiManager manager, Rectangle rectangle, int coordinateZ)
 			: base(manager, rectangle, coordinateZ)
 		{
-			//this.manager = manager;
-			//this.rectangle = rectangle;
+			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
+				new Vector(0, 0, coordinateZ));
+			base.Sprites.Add(titleSprite);
+			this.title = string.Empty;
 		}
 
 		/// <summary>
@@ -61,10 +66,11 @@ namespace SdlDotNet.Examples.GuiExample
 		public GuiWindow(GuiManager manager, Rectangle rectangle)
 			: this(manager, rectangle, 0)
 		{
+			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
+				new Vector(0, 0, 0));
+			base.Sprites.Add(titleSprite);
+			this.title = string.Empty;
 		}
-
-		//GuiManager manager;
-		//Rectangle rectangle;
 
 		#region Drawing
 //		/// <summary>
@@ -73,18 +79,6 @@ namespace SdlDotNet.Examples.GuiExample
 //		public Padding OuterPadding
 //		{
 //			get { return manager.GetPadding(this); }
-//		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public void Render(/*RenderArgs args*/)
-//		{
-//			// Render the window using the GUI manager
-//			manager.Render(args, this);
-//
-//			// Render the components
-//			base.Render(args);
 //		}
 
 		#endregion
@@ -104,6 +98,7 @@ namespace SdlDotNet.Examples.GuiExample
 		#region Properties
 		private string title = null;
 		private Size titleSize = new Size();
+		private TextSprite titleSprite;
 
 		/// <summary>
 		/// 
@@ -121,6 +116,8 @@ namespace SdlDotNet.Examples.GuiExample
 
 				// Set the bounds
 				titleSize = this.GuiManager.GetTextSize(this.GuiManager.TitleFont, title);
+				//this.Sprites.Remove(titleSprite);
+				titleSprite.TextString = value;
 			}
 		}
 		#endregion

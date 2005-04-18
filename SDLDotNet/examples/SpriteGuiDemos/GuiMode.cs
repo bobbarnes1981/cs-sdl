@@ -43,38 +43,42 @@ namespace SdlDotNet.Examples
 			//manager.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
 
 			// Create a new dragable window
-			GuiWindow gw = new GuiWindow(manager, new Rectangle(200, 65, 100, 100));
-			gw.IsDragable = true;
+			GuiWindow gw = new GuiWindow(manager, new Rectangle(200, 65, 110, 100));
+			gw.AllowDrag = true;
 			gw.Title = "Draggable Window";
 			gw.Sprites.Add(new AnimatedSprite(LoadRandomMarble(),
 				new Point(18, 18)));
+			gw.Sprites.EnableTickEvent();
 			Sprites.Add(gw);
 
-			// Create a dragable window without a title
+			// Create a draggable window without a title
 			gw = new GuiWindow(manager, new Rectangle(25, 120, 32, 32));
-			gw.IsDragable = true;
+			gw.AllowDrag = true;
 			gw.Sprites.Add(new AnimatedSprite(LoadRandomMarble(),
 				new Point(0, 0)));
+			gw.Sprites.EnableTickEvent();
 			Sprites.Add(gw);
 
-			// Create a dragable window with a long title
-			gw = new GuiWindow(manager, new Rectangle(100, 415, 256, 64));
+			// Create a non-draggable window with a long title
+			gw = new GuiWindow(manager, new Rectangle(100, 390, 256, 90));
 			gw.Title = "Non-Draggable Window with a Long Title";
-			gw.IsDragable = false;
+			gw.AllowDrag = false;
 			gw.Sprites.Add(new AnimatedSprite(LoadRandomMarble(),
-				new Point(0, 0)));
+				new Point(0, 18)));
+			gw.Sprites.EnableTickEvent();
 			Sprites.Add(gw);
 
 			// Create the menus
 			//CreateMenus(manager, Sprites);
 
 			// Create the ticker
-			ticker = new GuiTicker(manager, 0, 800, 550);
+			ticker = new GuiTicker(manager, 0, 500, 64);
 			Sprites.Add(ticker);
-			//this.EnableEvents();
+			this.EnableTickEvent();
 			Sprites.EnableMouseButtonEvent();
 			Sprites.EnableMouseMotionEvent();
 			Sprites.EnableTickEvent();
+			ticker.Sprites.EnableTickEvent();
 		}
 
 		//		/// <summary>
@@ -150,8 +154,8 @@ namespace SdlDotNet.Examples
 		public override string ToString() { return "GUI"; }
 
 		#region Events
-		//private double threshold = 100.0;
-		//private double rate = 0.009;
+		private double threshold = 100.0;
+		private double rate = 0.009;
 
 		/// <summary>
 		/// 
@@ -165,68 +169,69 @@ namespace SdlDotNet.Examples
 				new Rectangle(rand.Next() % 600,
 				rand.Next() % 400 + 50,
 				70, 70));
-			//gw.IsDragable = true;
+			gw.AllowDrag = true;
 			gw.Title = "Created Window";
-//			gw.Contents.Add(new AnimatedSprite(m1, new Point(3, 3)));
+			gw.Sprites.Add(new AnimatedSprite(m1, new Point(3, 3)));
 			Sprites.Add(gw);
 		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="sender"></param>
-//		/// <param name="args"></param>
-//		public override void Update(object sender, TickEventArgs args)
-//		{
-//			threshold += args.RatePerSecond(rate);
-//
-//			// Keep track of the counter (the point to trigger)
-//			if (threshold > 1.0)
-//			{
-//				threshold = 0.0;
-//
-//				switch (rand.Next() % 5)
-//				{
-//					case 0: // Switch autohide
-//						if (ticker.IsAutoHide)
-//						{
-//							ticker.Add(new TextSprite("AutoHide off",
-//								SdlDemo.GuiManager.BaseFont));
-//						}
-//						else
-//						{
-//							ticker.Add(new TextSprite("AutoHide on",
-//								SdlDemo.GuiManager.BaseFont));
-//						}	  
-//						ticker.IsAutoHide = !ticker.IsAutoHide;
-//						break;
-//					case 1: // Simple message
-//						// Add a message
-//						ticker.Add(new TextSprite("*tick*", SdlDemo.GuiManager.BaseFont));
-//						break;
-//					case 2: // Bunch of messages
-//						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
-//						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
-//						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
-//						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
-//						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
-//						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
-//						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
-//						break;
-//					case 3: // Reverse direction
-//						ticker.Delta *= -1;
-//						ticker.Add(new TextSprite("Delta " + ticker.Delta,
-//							SdlDemo.GuiManager.BaseFont));
-//						break;
-//					case 4: // Add two marbles
-//						ticker.Add(new AnimatedSprite(LoadRandomMarble(),
-//							new Point(0, 0)));
-//						ticker.Add(new AnimatedSprite(LoadRandomMarble(),
-//							new Point(0, 0)));
-//						break;
-//				}
-//			}
-//		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		public override void OnTick(object sender, TickEventArgs args)
+		{
+			threshold += args.RatePerSecond(rate);
+
+			// Keep track of the counter (the point to trigger)
+			if (threshold > 1.0)
+			{
+				threshold = 0.0;
+
+				switch (rand.Next() % 5)
+				{
+					case 0: // Switch autohide
+						if (ticker.IsAutoHide)
+						{
+							ticker.Add(new TextSprite("AutoHide off",
+								SdlDemo.GuiManager.BaseFont));
+						}
+						else
+						{
+							ticker.Add(new TextSprite("AutoHide on",
+								SdlDemo.GuiManager.BaseFont));
+						}	  
+						ticker.IsAutoHide = !ticker.IsAutoHide;
+						break;
+					case 1: // Simple message
+						// Add a message
+						ticker.Add(new TextSprite("*tick*", SdlDemo.GuiManager.BaseFont));
+						break;
+					case 2: // Bunch of messages
+						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
+						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
+						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
+						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
+						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
+						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
+						ticker.Add(new TextSprite("*", SdlDemo.GuiManager.BaseFont));
+						break;
+					case 3: // Reverse direction
+						ticker.Delta *= -1;
+						ticker.Add(new TextSprite("Delta " + ticker.Delta,
+							SdlDemo.GuiManager.BaseFont));
+						break;
+					case 4: // Add two marbles
+						ticker.Add(new AnimatedSprite(LoadRandomMarble(),
+							new Point(0, 0)));
+						ticker.Add(new AnimatedSprite(LoadRandomMarble(),
+							new Point(0, 0)));
+						break;
+				}
+				
+			}
+		}
 		#endregion
 	}
 }

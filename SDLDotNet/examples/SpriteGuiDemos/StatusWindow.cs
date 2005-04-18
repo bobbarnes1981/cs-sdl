@@ -49,12 +49,12 @@ namespace SdlDotNet.Examples
 			int labelWidth = 48;
 			int dataWidth = 96;
 			int i = 0;
-			this.IsDragable = true;
+			this.AllowDrag = true;
 
-			this.Sprites.Add(new TextSprite(Title, manager.TitleFont,
-				new Vector(0,0,2000)));
-
-			i++;
+			if (this.Title != null)
+			{
+				i++;
+			}
 			// Add the ticks per second
 			this.Sprites.Add(new BoundedTextSprite("TPS:", manager.TitleFont,
 				new Size(labelWidth, labelHeight),

@@ -146,9 +146,13 @@ namespace SdlDotNet.Sprites
 			//this.Surface = null;
 
 			// Don't bother rendering if we don't have a text and a font
-			if (TextString == null || font == null)
+//			if (TextString == null || font == null)
+//			{
+//				return this.Surface;
+//			}
+			if (TextString == null)
 			{
-				return this.Surface;
+				this.textItem = "Test";
 			}
 
 			// Render it (Solid or Blended)

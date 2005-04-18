@@ -130,17 +130,17 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Events
-		private bool isDragable = false;
-		private bool beingDragged = false;
+		//private bool isDragable = false;
+		//private bool beingDragged = false;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual bool IsDragable
-		{
-			get { return isDragable; }
-			set { isDragable = value; }
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public virtual bool IsDragable
+//		{
+//			get { return isDragable; }
+//			set { isDragable = value; }
+//		}
 
 //		/// <summary>
 //		/// GUI components default to mouse sensitive.
@@ -154,7 +154,7 @@ namespace SdlDotNet.Examples.GuiExample
 		public override void Update(MouseButtonEventArgs args)
 		{
 			// If we cannot be dragged, don't worry about it
-			if (!isDragable)
+			if (!AllowDrag)
 			{
 				return;
 			}
@@ -165,14 +165,14 @@ namespace SdlDotNet.Examples.GuiExample
 				{
 					// Change the Z-order
 					this.Z += manager.DragZOrder;
-					beingDragged = true;
+					this.BeingDragged = true;
 					//manager.SpriteContainer.EventLock = this;
 				}
 				else
 				{
 					// Drop it
 					this.Z -= manager.DragZOrder;
-					beingDragged = false;
+					this.BeingDragged = false;
 					//manager.SpriteContainer.EventLock = null;
 				}
 			}
@@ -195,7 +195,7 @@ namespace SdlDotNet.Examples.GuiExample
 //				return false;
 
 			// Move the window as appropriate
-			if (beingDragged)
+			if (this.BeingDragged)
 			{
 				this.X += relx;
 				this.Y += rely;
