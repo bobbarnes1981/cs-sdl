@@ -133,7 +133,7 @@ namespace SdlDotNet.Examples
 			
 
 			// Create the menu
-			//CreateMenu(gui);
+			CreateMenu(gui);
 
 			// Create a viewport
 			//			manager.Coordinates.Y = gmb.OuterSize.Height + 5;

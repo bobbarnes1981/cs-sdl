@@ -42,7 +42,7 @@ namespace SdlDotNet.Examples
 			GuiManager manager = SdlDemo.GuiManager;
 			//manager.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
 
-			// Create a new dragable window
+			// Create a new draggable window
 			GuiWindow gw = new GuiWindow(manager, new Rectangle(200, 65, 110, 100));
 			gw.AllowDrag = true;
 			gw.Title = "Draggable Window";

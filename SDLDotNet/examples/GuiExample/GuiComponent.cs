@@ -130,18 +130,6 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Events
-		//private bool isDragable = false;
-		//private bool beingDragged = false;
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public virtual bool IsDragable
-//		{
-//			get { return isDragable; }
-//			set { isDragable = value; }
-//		}
-
 //		/// <summary>
 //		/// GUI components default to mouse sensitive.
 //		/// </summary>
@@ -184,26 +172,21 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(MouseMotionEventArgs args)
 		{
-			// Pull out some stuff
 			int x = args.X;
 			int y = args.Y;
 			int relx = args.RelativeX;
 			int rely = args.RelativeY;
 
-			// If we cannot be dragged, don't worry about it
-//			if (!isDragable)
-//				return false;
+			if (!AllowDrag)
+			{
+				return;
+			}
 
 			// Move the window as appropriate
 			if (this.BeingDragged)
 			{
 				this.X += relx;
 				this.Y += rely;
-				//return true;
-			}
-			else
-			{
-				//return false;
 			}
 		}
 
