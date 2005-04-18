@@ -92,7 +92,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns true if the joystick has been initialized
 		/// </summary>
-		public bool IsJoystickInitialized(int index)
+		public static bool IsJoystickInitialized(int index)
 		{
 				if (Sdl.SDL_JoystickOpened(index) == (int) SdlFlag.TrueValue)
 				{

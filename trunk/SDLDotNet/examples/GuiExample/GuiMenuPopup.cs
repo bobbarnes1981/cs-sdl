@@ -129,34 +129,34 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override Padding OuterPadding
 		{
-			get { return manager.MenuPopupPadding; }
+			get { return base.GuiManager.MenuPopupPadding; }
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Size Size
-		{
-			get
-			{
-				// Clear out the popups. If the GMI has a menu associated with
-				// it, it uses that for the width, which would produce an
-				// infinite loop for processing. Removing the association
-				// allows the size to be retrieved properly.
-//				foreach (GuiMenuItem gmi in Sprites)
-//					gmi.Menu = null;
-
-				// Get the base
-				Size d = base.Size;
-
-				// Reassociate this item
-//				foreach (GuiMenuItem gmi in Sprites)
-//					gmi.Menu = this;
-
-				// Return the dimension
-				return d;
-			}
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override Size Size
+//		{
+//			get
+//			{
+//				// Clear out the popups. If the GMI has a menu associated with
+//				// it, it uses that for the width, which would produce an
+//				// infinite loop for processing. Removing the association
+//				// allows the size to be retrieved properly.
+////				foreach (GuiMenuItem gmi in Sprites)
+////					gmi.Menu = null;
+//
+//				// Get the base
+//				Size d = base.Size;
+//
+//				// Reassociate this item
+////				foreach (GuiMenuItem gmi in Sprites)
+////					gmi.Menu = this;
+//
+//				// Return the dimension
+//				return d;
+//			}
+//		}
 		#endregion
 
 		#region Events
@@ -165,7 +165,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// selected, then it shows the entire sprite, regardless of the
 		/// packing size.
 		/// </summary>
-		public override void Update(object sender, MouseButtonEventArgs args)
+		public override void Update(MouseButtonEventArgs args)
 		{
 			// If we are being held down, pick up the marble
 			if (args.ButtonPressed)
@@ -206,7 +206,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// selected and hilight it. If the menu is not selected, it does
 		/// nothing.
 		/// </summary>
-		public override void Update(object sender, MouseMotionEventArgs args)
+		public override void Update(MouseMotionEventArgs args)
 		{
 			// Pull out some stuff
 			int x = args.X - translate.X - Coordinates.X;

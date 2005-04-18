@@ -27,7 +27,7 @@ namespace SdlDotNet.Examples.GuiExample
 	/// <summary>
 	/// Base class to manage all graphical GUI elements.
 	/// </summary>
-	public class GuiComponent : Sprite
+	public class GuiComponent : SpriteContainer
 	{
 		/// <summary>
 		/// 
@@ -45,46 +45,54 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="z"></param>
 		public GuiComponent(GuiManager manager, int z)
-			: base()
+			: base(new Vector(z))
 		{
 			this.manager = manager;
-			this.Coordinates = new Vector(z);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="loc"></param>
-		public GuiComponent(GuiManager manager, Point loc)
-			: base()
+		/// <param name="position"></param>
+		public GuiComponent(GuiManager manager, Point position)
+			: base(new Vector(position))
 		{
 			this.manager = manager;
-			this.Coordinates = new Vector(loc);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="rectangle"></param>
-		public GuiComponent(GuiManager manager, Rectangle rectangle)
-			: base()
+		/// <param name="rect"></param>
+		public GuiComponent(GuiManager manager, Rectangle rect)
+			: base(rect)
 		{
 			this.manager = manager;
-			this.Rectangle = rectangle;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="loc"></param>
-		public GuiComponent(GuiManager manager, Vector loc)
-			: base()
+		/// <param name="rect"></param>
+		/// <param name="z"></param>
+		public GuiComponent(GuiManager manager, Rectangle rect, int z)
+			: base(rect)
 		{
 			this.manager = manager;
-			this.Coordinates = loc;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="coordinates"></param>
+		public GuiComponent(GuiManager manager, Vector coordinates)
+			: base(coordinates)
+		{
+			this.manager = manager;
 		}
 
 //		/// <summary>
@@ -97,120 +105,148 @@ namespace SdlDotNet.Examples.GuiExample
 //		}
 
 		#region Drawing
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override Surface Render()
-//		{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override Surface Render()
+		{
 //			if (!IsTraced)
-//			{
 //				return;
-//			}
-
-			// Draw the outer and the inner bounds
+//
+//			// Draw the outer and the inner bounds
 //			GuiManager.DrawRect(args.Surface,
 //				args.Translate(Bounds),
 //				manager.BoundsTraceColor);
 //			GuiManager.DrawRect(args.Surface,
 //				args.Translate(OuterBounds),
 //				manager.OuterBoundsTraceColor);
-
-//		}
+				this.Surface.Fill(manager.BackgroundColor);
+				//this.Surface.DrawBox(this.Rectangle, manager.BoundsTraceColor);
+			this.Surface.DrawBox(new Rectangle(0, 0, this.Rectangle.Width, this.Rectangle.Height), manager.FrameColor);
+				base.Sprites.Draw(this.Surface);
+				return this.Surface;
+		}
 		#endregion
 
 		#region Events
-		private bool isDraggable = false;
+		private bool isDragable = false;
 		private bool beingDragged = false;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
+		public virtual bool IsDragable
+		{
+			get { return isDragable; }
+			set { isDragable = value; }
+		}
+
+//		/// <summary>
+//		/// GUI components default to mouse sensitive.
+//		/// </summary>
+//		public override bool IsMouseSensitive { get { return true; } }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="args"></param>
-		public override void Update(object sender, MouseButtonEventArgs args)
+		public override void Update(MouseButtonEventArgs args)
 		{
 			// If we cannot be dragged, don't worry about it
-			if (!isDraggable)
+			if (!isDragable)
 			{
 				return;
 			}
-
-			// If we are being held down, pick up the marble
-			// Change the Z-order
-			if (args.ButtonPressed)
+			if (this.IntersectsWith(new Point(args.X, args.Y)))
 			{
-				this.Z += manager.DragZOrder;
-				beingDragged = true;
-//				manager.SpriteContainer.EventLock = this;
-			}
-			else
-			{
-				this.Z -= manager.DragZOrder;
-				beingDragged = false;
-//				manager.SpriteContainer.EventLock = null;
+				// If we are being held down, pick up the marble
+				if (args.ButtonPressed)
+				{
+					// Change the Z-order
+					this.Z += manager.DragZOrder;
+					beingDragged = true;
+					//manager.SpriteContainer.EventLock = this;
+				}
+				else
+				{
+					// Drop it
+					this.Z -= manager.DragZOrder;
+					beingDragged = false;
+					//manager.SpriteContainer.EventLock = null;
+				}
 			}
 		}
 
 		/// <summary>
-		/// If the sprite is picked up, this moved the sprite to follow
-		/// the mouse.
+		/// 
 		/// </summary>
-		public override void Update(object sender, MouseMotionEventArgs args)
+		/// <param name="args"></param>
+		public override void Update(MouseMotionEventArgs args)
 		{
+			// Pull out some stuff
+			int x = args.X;
+			int y = args.Y;
+			int relx = args.RelativeX;
+			int rely = args.RelativeY;
+
 			// If we cannot be dragged, don't worry about it
-			if (!isDraggable)
-			{
-				return;
-			}
+//			if (!isDragable)
+//				return false;
 
 			// Move the window as appropriate
 			if (beingDragged)
 			{
-				this.X += args.RelativeX;
-				this.Y += args.RelativeY;;
+				this.X += relx;
+				this.Y += rely;
+				//return true;
+			}
+			else
+			{
+				//return false;
 			}
 		}
+
+
 		#endregion
 
 		#region Geometry
-//		private Size size = new Size();
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Rectangle OuterBounds
-		{
-			get
-			{
-				return new Rectangle(new Point(OuterCoordinates.X, OuterCoordinates.Y), OuterSize);
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual Size OuterSize
-		{
-			get
-			{
-				return new Size(Size.Width + OuterPadding.Horizontal,
-					Size.Height + OuterPadding.Vertical);
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual Vector OuterCoordinates
-		{
-			get
-			{
-				return new Vector(Coordinates.X - OuterPadding.Left,
-					Coordinates.Y - OuterPadding.Top,
-					Coordinates.Z);
-			}
-		}
-
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public Rectangle OuterBounds
+//		{
+//			get
+//			{
+//				return new Rectangle(new Point(OuterCoords.X, OuterCoords.Y), OuterSize);
+//			}
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public virtual Size OuterSize
+//		{
+//			get
+//			{
+//				return new Size(Size.Width + OuterPadding.Horizontal,
+//					Size.Height + OuterPadding.Vertical);
+//			}
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public virtual Vector OuterCoords
+//		{
+//			get
+//			{
+//				return new Vector(this.X - OuterPadding.Left,
+//					this.Y - OuterPadding.Top,
+//					this.Z);
+//			}
+//		}
+//
 		/// <summary>
 		/// 
 		/// </summary>
@@ -218,54 +254,33 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get { return new Padding(0); }
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="point"></param>
-		/// <returns></returns>
-		public override bool IntersectsWith(Point point)
-		{
-			return OuterBounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="rectangle"></param>
-		/// <returns></returns>
-		public override bool IntersectsWith(Rectangle rectangle)
-		{
-			return OuterBounds.IntersectsWith(rectangle);
-		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="point"></param>
+//		/// <returns></returns>
+//		public override bool IntersectsWith(Point point)
+//		{
+//			return OuterBounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="rect"></param>
+//		/// <returns></returns>
+//		public override bool IntersectsWith(Rectangle rect)
+//		{
+//			return OuterBounds.IntersectsWith(rect);
+//		}
 		#endregion
 
 		#region Properties
 		/// <summary>
 		/// 
 		/// </summary>
-		protected GuiManager manager = null;
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Surface Surface
-		{
-			get
-			{
-				if (base.Surface == null)
-				{
-					base.Surface = new Surface(this.Size.Width, this.Size.Height);
-				}
-				return base.Surface;
-			}
-			set
-			{
-				base.Surface = value;
-			}
-		}
-
-
+		private GuiManager manager;
 
 		/// <summary>
 		/// Contains the manager for this component.
@@ -274,7 +289,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get 
 			{ 
-				return manager;
+				return manager; 
 			}
 			set
 			{
@@ -282,29 +297,8 @@ namespace SdlDotNet.Examples.GuiExample
 				{
 					throw new Exception("Cannot assign a null manager");
 				}
+
 				manager = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool IsMouseMotionLocked
-		{
-			get
-			{
-				return beingDragged;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public  bool IsMouseButtonLocked
-		{
-			get
-			{
-				return true;
 			}
 		}
 		#endregion

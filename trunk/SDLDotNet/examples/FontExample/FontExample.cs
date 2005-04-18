@@ -190,6 +190,8 @@ namespace SdlDotNet.Examples
 						positionY += 20;
 					}
 					Thread.Sleep(1000);
+					text.Dispose();
+					//GC.Collect();
 				} 
 				catch 
 				{

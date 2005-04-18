@@ -529,7 +529,7 @@ namespace SdlDotNet
 		/// <param name="red">Red</param>
 		/// <param name="green">Green</param>
 		/// <param name="blue">Blue</param>
-		public void Gamma(float red, float green, float blue)
+		public static void Gamma(float red, float green, float blue)
 		{
 			int result = Sdl.SDL_SetGamma(red, green, blue);
 			if (result != 0)
@@ -542,7 +542,7 @@ namespace SdlDotNet
 		/// Sets gamma for all colors
 		/// </summary>
 		/// <param name="gammaValue"></param>
-		public void Gamma(float gammaValue)
+		public static void Gamma(float gammaValue)
 		{
 			int result = Sdl.SDL_SetGamma(gammaValue, gammaValue, gammaValue);
 			if (result != 0)
@@ -569,7 +569,7 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		/// <param name="gammaArray"></param>
-		public void SetGammaRampRed(short[] gammaArray)
+		public static void SetGammaRampRed(short[] gammaArray)
 		{
 			int result = Sdl.SDL_SetGammaRamp(gammaArray, null, null);
 			if (result != 0)
@@ -596,7 +596,7 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		/// <param name="gammaArray"></param>
-		public void SetGammaRampBlue(short[] gammaArray)
+		public static void SetGammaRampBlue(short[] gammaArray)
 		{
 			int result = Sdl.SDL_SetGammaRamp(null, null, gammaArray);
 			if (result != 0)
@@ -623,7 +623,7 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		/// <param name="gammaArray"></param>
-		public void SetGammaRampGreen(short[] gammaArray)
+		public static void SetGammaRampGreen(short[] gammaArray)
 		{
 			int result = Sdl.SDL_SetGammaRamp(null, gammaArray, null);
 			if (result != 0)
@@ -635,7 +635,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Update entire screen
 		/// </summary>
-		public void Update()
+		public static void Update()
 		{
 			Video.Screen.Update();
 		}
@@ -644,7 +644,7 @@ namespace SdlDotNet
 		/// Updates rectangle
 		/// </summary>
 		/// <param name="rectangle"></param>
-		public void Update(System.Drawing.Rectangle rectangle)
+		public static void Update(System.Drawing.Rectangle rectangle)
 		{
 			Video.Screen.Update(rectangle);
 		}
@@ -653,7 +653,7 @@ namespace SdlDotNet
 		/// Update an array of rectangles
 		/// </summary>
 		/// <param name="rectangles"></param>
-		public void Update(System.Drawing.Rectangle[] rectangles)
+		public static void Update(System.Drawing.Rectangle[] rectangles)
 		{
 			Video.Screen.Update(rectangles);
 		}

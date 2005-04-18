@@ -52,7 +52,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
-		public SdlException(string message, Exception exception) 
+		public SdlException(string message, Exception exception) : base(message, exception)
 		{
 		}
 

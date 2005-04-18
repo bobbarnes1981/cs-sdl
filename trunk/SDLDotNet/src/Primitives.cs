@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Drawing;
 using System.Globalization;
 
 
@@ -1188,6 +1189,19 @@ namespace SdlDotNet
 			this.y1 = y1;
 			this.x2 = x2;
 			this.y2 = y2;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="point1"></param>
+		/// <param name="point2"></param>
+		public Box(Point point1, Point point2)
+		{
+			this.x1 = (short)point1.X;
+			this.y1 = (short)point1.Y;
+			this.x2 = (short)point2.X;
+			this.y2 = (short)point2.Y;
 		}
 
 		/// <summary>

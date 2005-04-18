@@ -31,8 +31,8 @@ namespace SdlDotNet.Examples.GuiExample
 	/// </summary>
 	[TestFixture] public class SdlGuiTest
 	{
-		private SpriteCollection sm = null;
-		private GuiManager gui = null;
+		private SpriteCollection sm;
+		private GuiManager gui;
 
 		/// <summary>
 		/// 

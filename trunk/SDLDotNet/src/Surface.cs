@@ -267,7 +267,7 @@ namespace SdlDotNet
 			}
 		}
 
-		private Sdl.SDL_Rect ConvertRecttoSDLRect(
+		private static Sdl.SDL_Rect ConvertRecttoSDLRect(
 			System.Drawing.Rectangle rect)
 		{
 			return new Sdl.SDL_Rect(
@@ -648,13 +648,21 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="rectangle"></param>
+		/// <param name="color"></param>
+		public void DrawBox(Rectangle rectangle, System.Drawing.Color color)
+		{
+			this.DrawBox(new Box((short)rectangle.X, (short)rectangle.Y, (short)rectangle.Right, (short)rectangle.Bottom), color);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="box"></param>
 		/// <param name="color"></param>
 		public void DrawBox(Box box, System.Drawing.Color color)
 		{
 			int result = 0;
 
-			
 			result = SdlGfx.rectangleRGBA(
 				handle, box.XPosition1, box.YPosition1, 
 				box.XPosition2, box.YPosition2, 
@@ -671,13 +679,22 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="rectangle"></param>
+		/// <param name="color"></param>
+		public void DrawFilledBox(Rectangle rectangle, System.Drawing.Color color)
+		{
+			this.DrawFilledBox(new Box((short)rectangle.X, (short)rectangle.Y, (short)rectangle.Right, (short)rectangle.Bottom), color);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="box"></param>
 		/// <param name="color"></param>
 		public void DrawFilledBox(Box box, System.Drawing.Color color)
 		{
 			int result = 0;
 
-			
 			result = SdlGfx.boxRGBA(
 				handle, box.XPosition1, box.YPosition1, 
 				box.XPosition2, box.YPosition2, 
@@ -805,9 +822,9 @@ namespace SdlDotNet
 				pixelFormat.Amask);
 			GC.KeepAlive(this);
 
-			IntPtr intPtrRet = Sdl.SDL_ConvertSurface(
-				handle, surf.format, flag);
-			GC.KeepAlive(this);
+//			IntPtr intPtrRet = Sdl.SDL_ConvertSurface(
+//				handle, surf.format, flag);
+//			GC.KeepAlive(this);
 			//Sdl.SDL_FreeSurface(intPtr);
 			return new Surface(intPtr);
 		}
@@ -974,6 +991,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="sprite"></param>
+		public void Blit(Sprite sprite)
+		{
+			this.Blit(sprite.Render());
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="spriteCollection"></param>
 		public void Blit(SpriteCollection spriteCollection)
 		{
@@ -992,8 +1018,8 @@ namespace SdlDotNet
 			System.Drawing.Rectangle destinationRectangle,
 			System.Drawing.Rectangle sourceRectangle) 
 		{
-			Sdl.SDL_Rect s = this.ConvertRecttoSDLRect(sourceRectangle); 
-			Sdl.SDL_Rect d = this.ConvertRecttoSDLRect(destinationRectangle);
+			Sdl.SDL_Rect s = Surface.ConvertRecttoSDLRect(sourceRectangle); 
+			Sdl.SDL_Rect d = Surface.ConvertRecttoSDLRect(destinationRectangle);
 			int result = Sdl.SDL_BlitSurface(sourceSurface.Handle, ref s, this.handle, ref d);
 			GC.KeepAlive(this);
 			if (result!= (int) SdlFlag.Success)
@@ -1173,14 +1199,14 @@ namespace SdlDotNet
 			get
 			{
 				Sdl.SDL_Rect sdlrect = 
-					this.ConvertRecttoSDLRect(new System.Drawing.Rectangle());
+					Surface.ConvertRecttoSDLRect(new System.Drawing.Rectangle());
 				Sdl.SDL_GetClipRect(handle, ref sdlrect);
 				GC.KeepAlive(this);
 				return new System.Drawing.Rectangle(sdlrect.x, sdlrect.y, sdlrect.w, sdlrect.h);
 			}
 			set
 			{
-				Sdl.SDL_Rect sdlrect = this.ConvertRecttoSDLRect(value);
+				Sdl.SDL_Rect sdlrect = Surface.ConvertRecttoSDLRect(value);
 				Sdl.SDL_SetClipRect(handle, ref sdlrect);
 				GC.KeepAlive(this);
 			}
@@ -1266,7 +1292,7 @@ namespace SdlDotNet
 			Sdl.SDL_Surface surface = this.SurfaceStruct;
 			GC.KeepAlive(this);
 
-			IntPtr pixelsPtr = surface.pixels;
+			//IntPtr pixelsPtr = surface.pixels;
 
 			Lock();
 			while (first < second) 
@@ -1652,7 +1678,7 @@ namespace SdlDotNet
 			Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangles.Length];
 			for (int i=0;i < rectangles.Length;i++)
 			{
-				rects[i] = this.ConvertRecttoSDLRect(rectangles[i]);
+				rects[i] = Surface.ConvertRecttoSDLRect(rectangles[i]);
 			}
 			Sdl.SDL_UpdateRects(this.handle, rects.Length, rects);
 			GC.KeepAlive(this);

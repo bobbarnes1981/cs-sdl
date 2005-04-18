@@ -117,7 +117,9 @@ namespace SdlDotNet.Sprites
 				{
 					throw new DrawableException("No drawable to return");
 				}
+				//base.Surface = surfaces[frame];
 
+				//return base.Surface;
 				return surfaces[frame];
 			}
 			set
@@ -125,6 +127,17 @@ namespace SdlDotNet.Sprites
 				this.surfaces.Insert(0, value);
 			}
 		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override Surface Render()
+		{
+			return this.Surface;
+		}
+
+
 
 		/// <summary>
 		/// Retrieves the drawable associated with this sprite. This will
@@ -180,23 +193,23 @@ namespace SdlDotNet.Sprites
 		#endregion
 
 		#region Properties
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Size Size
-		{
-			get
-			{
-				if (surfaces == null)
-				{
-					throw new DrawableException("No size for this drawable");
-				}
-				else
-				{
-					return surfaces.Size;
-				}
-			}
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override Size Size
+//		{
+//			get
+//			{
+//				if (surfaces == null)
+//				{
+//					throw new DrawableException("No size for this drawable");
+//				}
+//				else
+//				{
+//					return surfaces.Size;
+//				}
+//			}
+//		}
 		#endregion
 	}
 }

@@ -79,41 +79,41 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Geometry
-		//    public override bool IntersectsWith(Vector2 point)
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="point"></param>
-		/// <returns></returns>
-		public override bool IntersectsWith(Point point)
-		{
-			// Menu items are packed by their outer padding instead of the
-			// normal inner, so this has to be adjusted.
-			//Vector2 v = new Vector2(point);
-			point.X -= OuterPadding.Left;
-			point.Y -= OuterPadding.Top;
-			return OuterBounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="rect"></param>
-		/// <returns></returns>
-		public override bool IntersectsWith(Rectangle rect)
-		{
-			// Menu items are packed by their outer padding instead of the
-			// normal inner, so this has to be adjusted.
-			Rectangle r = rect;
-//			r.Coordinates.X -= OuterPadding.Left;
-//			r.Coordinates.Y -= OuterPadding.Top;
-			int transX;
-			int transY;
-			transY = r.Location.Y - OuterPadding.Top;
-			transX = r.Location.X - OuterPadding.Left;
-			r.Location = new Point(transX, transY);
-			return OuterBounds.IntersectsWith(r);
-		}
+//		//    public override bool IntersectsWith(Vector2 point)
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="point"></param>
+//		/// <returns></returns>
+//		public override bool IntersectsWith(Point point)
+//		{
+//			// Menu items are packed by their outer padding instead of the
+//			// normal inner, so this has to be adjusted.
+//			//Vector2 v = new Vector2(point);
+//			point.X -= OuterPadding.Left;
+//			point.Y -= OuterPadding.Top;
+//			return OuterBounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));
+//		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="rect"></param>
+//		/// <returns></returns>
+//		public override bool IntersectsWith(Rectangle rect)
+//		{
+//			// Menu items are packed by their outer padding instead of the
+//			// normal inner, so this has to be adjusted.
+//			Rectangle r = rect;
+////			r.Coordinates.X -= OuterPadding.Left;
+////			r.Coordinates.Y -= OuterPadding.Top;
+//			int transX;
+//			int transY;
+//			transY = r.Location.Y - OuterPadding.Top;
+//			transX = r.Location.X - OuterPadding.Left;
+//			r.Location = new Point(transX, transY);
+//			return OuterBounds.IntersectsWith(r);
+//		}
 		#endregion
 
 		#region Events
@@ -173,7 +173,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override Padding InnerPadding
 		{
-			get { return manager.MenuItemInnerPadding; }
+			get { return base.GuiManager.MenuItemInnerPadding; }
 		}
 
 		/// <summary>
@@ -181,7 +181,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override Padding MarginPadding
 		{
-			get { return manager.MenuItemPadding; }
+			get { return base.GuiManager.MenuItemPadding; }
 		}
 
 		/// <summary>

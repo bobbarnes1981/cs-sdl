@@ -95,6 +95,10 @@ namespace SdlDotNet.Examples
 		}
 
 		#region GUI
+		private GuiMenuTitle demoMenu;
+
+		private int [] fpsSpeeds = 
+			new int [] {1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
 		private void SetupGui()
 		{
 			// Set up the master container
@@ -103,6 +107,7 @@ namespace SdlDotNet.Examples
 			// Set up the demo sprite containers
 			//master.Add(manager);
 			master.EnableMouseButtonEvent();
+			master.EnableMouseMotionEvent();
 			master.EnableTickEvent();
 
 			// Set up the gui manager
@@ -113,8 +118,9 @@ namespace SdlDotNet.Examples
 			gui.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
 
 			// Set up the ticker
-			statusTicker = new GuiTicker(gui, 0, Size.Width, Size.Height);
+			statusTicker = new GuiTicker(gui, 0, Size.Height - 20, 20);
 			statusTicker.IsAutoHide = true;
+			//statusTicker.Rectangle = new Rectangle(0, 0, 800, 20);
 			statusTicker.Z = 3000;
 			master.Add(statusTicker);
 			Report("SDL.NET Demo started");
@@ -134,6 +140,42 @@ namespace SdlDotNet.Examples
 			//			manager.Coordinates.X = 5;
 			//			manager.Size = new Size(Size.Width - 10,
 			//				Size.Height - 10 - gmb.OuterSize.Height);
+		}
+
+		private void CreateMenu(GuiManager gui)
+		{
+			// Create the menu
+			gmb = new GuiMenuBar(gui, 0, 800, 0);
+			//gmb.IsTickable = false;
+			master.Add(gmb);
+
+			// Create the demo menu
+			demoMenu = new GuiMenuTitle(gui, "Demo");
+			gmb.AddLeft(demoMenu);
+
+			// Create the FPS menu
+			GuiMenuTitle gm = new GuiMenuTitle(gui, "FPS");
+			gmb.AddLeft(gm);
+      
+			for (int i = 0; i < fpsSpeeds.Length; i++)
+			{
+				int spd = fpsSpeeds[i];
+
+				GuiMenuItem fmi = new GuiMenuItem(gui, spd + " FPS");
+				//fmi.ItemSelectedEvent += new MenuItemHandler(OnMenuFps);
+				//fmi.IsTickable = false;
+				gm.Add(fmi);
+			}
+		}
+
+		private void CreateMenuQuit(GuiManager gui)
+		{
+			//demoMenu.Add(new GuiMenuSpacer(demoMenu));
+			GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
+			gmi.AddRight(new TextSprite("Q", gui.BaseFont));
+			//gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuQuit);
+			//gmi.IsTickable = false;
+			demoMenu.Add(gmi);
 		}
 		#endregion
 
@@ -156,11 +198,28 @@ namespace SdlDotNet.Examples
 		private void LoadDemo(DemoMode mode)
 		{
 			// Add to the array list
+			//Debug("Loading demo {0}", mode);
 			demos.Add(mode);
 
 			// Figure out the counter
 			int cnt = demos.Count;
+
+			// Add the graphical menu
+			GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
+			gmi.AddRight(new TextSprite(String.Format("{0}", cnt),
+				gui.BaseFont));
+			//gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuDemo);
+			//gmi.IsTickable = false;
+			//demoMenu.Add(gmi);
 		}
+//		private void LoadDemo(DemoMode mode)
+//		{
+//			// Add to the array list
+//			demos.Add(mode);
+//
+//			// Figure out the counter
+//			int cnt = demos.Count;
+//		}
 
 		private void LoadDemos()
 		{
@@ -207,7 +266,7 @@ namespace SdlDotNet.Examples
 		}
 		#endregion
 
-		private static GuiManager gui = null;
+		private static GuiManager gui;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -277,7 +336,6 @@ namespace SdlDotNet.Examples
 			{
 				screen.Blit(currentDemo.RenderSurface());
 			}
-			
 			screen.Blit(master); 
 			screen.Update();
 		}
@@ -290,10 +348,9 @@ namespace SdlDotNet.Examples
 		{
 			if (statusTicker != null)
 			{
-				statusTicker.Add(new TextSprite(msg, GuiManager.BaseFont));
+				TextSprite textSprite = new TextSprite(msg, GuiManager.BaseFont);
+				statusTicker.Add(textSprite);
 			}
-
-			//Instance.Info(msg);
 		}
 		#endregion
 
@@ -303,8 +360,30 @@ namespace SdlDotNet.Examples
 		private static SpriteCollection master = new SpriteCollection();
 		private static SpriteCollection manager = new SpriteCollection();
 		private Surface screen = null;
-		private GuiWindow statusWindow = null;
-		private static GuiTicker statusTicker = null;
+		private GuiWindow statusWindow;
+		private static GuiMenuBar gmb;
+		/// <summary>
+		/// 
+		/// </summary>
+		public static GuiMenuBar MenuBar 
+		{ 
+			get 
+			{ 
+				return gmb; 
+			} 
+		}
+		private static Clock clock = new Clock(5);
+		/// <summary>
+		/// 
+		/// </summary>
+		public static Clock FPS
+		{
+			get
+			{
+				return clock;
+			}
+		}
+		private static GuiTicker statusTicker;
 
 		/// <summary>
 		/// 

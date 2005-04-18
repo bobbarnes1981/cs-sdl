@@ -35,8 +35,26 @@ namespace SdlDotNet.Sprites
 		public Sprite()
 		{
 			this.rect = new Rectangle(0, 0, 0, 0);
-			//this.coordinateZ;
-			//this.surf = null;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="coordinates"></param>
+		public Sprite(Vector coordinates)
+		{
+			this.rect = 
+				new Rectangle(coordinates.X, coordinates.Y, 0, 0);
+			this.coordinateZ = coordinates.Z;
+
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rectangle"></param>
+		public Sprite(Rectangle rectangle)
+		{
+			this.rect = rectangle;
 		}
 //
 //		/// <summary>
@@ -154,6 +172,28 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="surface"></param>
+		/// <param name="rectangle"></param>
+		public Sprite(Surface surface, Rectangle rectangle)
+		{
+			this.surf = surface;
+			this.rect = rectangle;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
+		/// <param name="rectangle"></param>
+		/// <param name="z"></param>
+		public Sprite(Surface surface, Rectangle rectangle, int z): this(surface, rectangle)
+		{
+			this.coordinateZ = z;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="coordinates"></param>
 		/// <param name="surface"></param>
 		/// <param name="group"></param>
@@ -197,6 +237,11 @@ namespace SdlDotNet.Sprites
 		{
 			get
 			{
+				if (this.surf == null)
+				{
+					this.surf = 
+						Video.Screen.CreateCompatibleSurface(this.Size);
+				}
 				return surf;
 			}
 			set
@@ -218,15 +263,14 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public virtual void Update(object sender, ActiveEventArgs e)
+		public virtual void Update(ActiveEventArgs e)
 		{
 		}
 		/// <summary>
 		/// Processes the keyboard.
 		/// </summary>
-		public virtual void Update(object sender, KeyboardEventArgs e)
+		public virtual void Update(KeyboardEventArgs e)
 		{
 		}
 
@@ -234,7 +278,7 @@ namespace SdlDotNet.Sprites
 		/// Processes a mouse button. This event is trigger by the SDL
 		/// system. 
 		/// </summary>
-		public virtual void Update(object sender, MouseButtonEventArgs args)
+		public virtual void Update(MouseButtonEventArgs args)
 		{
 		}
 
@@ -243,7 +287,7 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are MouseSensitive are processed.
 		/// </summary>
-		public virtual void Update(object sender, MouseMotionEventArgs args)
+		public virtual void Update(MouseMotionEventArgs args)
 		{
 		}
 		
@@ -252,7 +296,7 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		public virtual void Update(object sender, JoystickAxisEventArgs args)
+		public virtual void Update(JoystickAxisEventArgs args)
 		{
 		}
 		
@@ -261,7 +305,7 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		public virtual void Update(object sender, JoystickButtonEventArgs args)
+		public virtual void Update(JoystickButtonEventArgs args)
 		{
 		}
 		
@@ -270,7 +314,7 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		public virtual void Update(object sender, JoystickHatEventArgs args)
+		public virtual void Update(JoystickHatEventArgs args)
 		{
 		}
 		
@@ -279,60 +323,54 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		public virtual void Update(object sender, JoystickBallEventArgs args)
+		public virtual void Update(JoystickBallEventArgs args)
 		{
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public virtual void Update(object sender, QuitEventArgs e)
+		public virtual void Update(QuitEventArgs e)
 		{
 		}
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public virtual void Update(object sender, UserEventArgs e)
-		{
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		public virtual void Update(object sender, VideoExposeEventArgs e)
+		public virtual void Update(UserEventArgs e)
 		{
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public virtual void Update(object sender, VideoResizeEventArgs e)
+		public virtual void Update(VideoExposeEventArgs e)
 		{
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public virtual void Update(object sender, ChannelFinishedEventArgs e)
+		public virtual void Update(VideoResizeEventArgs e)
 		{
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public virtual void Update(object sender, MusicFinishedEventArgs e)
+		public virtual void Update(ChannelFinishedEventArgs e)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		public virtual void Update(MusicFinishedEventArgs e)
 		{
 		}
 		
@@ -341,7 +379,7 @@ namespace SdlDotNet.Sprites
 		/// anything. This ensures that the functionality is there, to be
 		/// overridden as needed.
 		/// </summary>
-		public virtual void Update(object sender, TickEventArgs args)
+		public virtual void Update(TickEventArgs args)
 		{
 		}
 		#endregion
@@ -450,14 +488,15 @@ namespace SdlDotNet.Sprites
 		{
 			get 
 			{ 
-				if (surf != null)
-				{
-					return surf.Size; 
-				}
-				else
-				{
-					return new Size(0,0);
-				}
+//				if (surf != null)
+//				{
+//					return surf.Size; 
+//				}
+//				else
+//				{
+//					return new Size(0,0);
+//				}
+				return new Size(rect.Width, rect.Height);
 			}
 			set
 			{

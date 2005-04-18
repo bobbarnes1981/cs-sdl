@@ -62,8 +62,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
-		/// <param name="sender"></param>
-		public override void Update(object sender, TickEventArgs args)
+		public override void Update(TickEventArgs args)
 		{
 			// Increment the frame
 			if (frameRight)

@@ -223,7 +223,7 @@ namespace SdlDotNet
 						(Sdl.SDL_CD)Marshal.PtrToStructure(
 						this.handle, typeof(Sdl.SDL_CD));
 
-					if (cd.track[trackNumber].type == (byte) CDTrackTypes.Audio)
+					if (cd.track[trackNumber].type == (byte) CDTrackType.Audio)
 					{
 						return true;
 					}
@@ -253,7 +253,7 @@ namespace SdlDotNet
 						(Sdl.SDL_CD)Marshal.PtrToStructure(
 						this.handle, typeof(Sdl.SDL_CD));
 
-					if (cd.track[trackNumber].type == (byte) CDTrackTypes.Data)
+					if (cd.track[trackNumber].type == (byte) CDTrackType.Data)
 					{
 						return true;
 					}

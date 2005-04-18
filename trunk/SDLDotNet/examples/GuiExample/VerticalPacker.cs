@@ -127,40 +127,40 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Geometry
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Size Size
-		{
-			get
-			{
-				// Get the height
-				int width = 0;
-
-				// Get the sprites
-				foreach (Sprite s in new ArrayList(Sprites))
-				{
-					// Ignore hidden ones
-//					if (s.IsHidden)
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override Size Size
+//		{
+//			get
+//			{
+//				// Get the height
+//				int width = 0;
+//
+//				// Get the sprites
+//				foreach (Sprite s in new ArrayList(Sprites))
+//				{
+//					// Ignore hidden ones
+////					if (s.IsHidden)
+////					{
+////						continue;
+////					}
+//
+//					// Get the width
+//					int w = GetSize(s).Width;
+//
+//					// Adjust the size
+//					if (w > width)
 //					{
-//						continue;
+//						width = w;
 //					}
-
-					// Get the width
-					int w = GetSize(s).Width;
-
-					// Adjust the size
-					if (w > width)
-					{
-						width = w;
-					}
-				}
-
-				// Add the padding
-				width += InnerPadding.Horizontal;
-				return new Size(width, VerticalHeight);
-			}
-		}
+//				}
+//
+//				// Add the padding
+//				width += InnerPadding.Horizontal;
+//				return new Size(width, VerticalHeight);
+//			}
+//		}
 
 		/// <summary>
 		/// 

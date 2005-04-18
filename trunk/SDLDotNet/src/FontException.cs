@@ -52,7 +52,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
-		public FontException(string message, Exception exception) 
+		public FontException(string message, Exception exception) : base(message, exception)
 		{
 		}
 

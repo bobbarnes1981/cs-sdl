@@ -48,8 +48,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="exception"></param>
 		/// <param name="message"></param>
-		public DrawableException(string message, Exception exception)
-			: base(message, exception)
+		public DrawableException(string message, Exception exception) : base(message, exception)
 		{
 		}
 

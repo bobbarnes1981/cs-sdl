@@ -226,12 +226,12 @@ namespace SdlDotNet.Examples
 			if (e.AxisIndex == 0)
 			{
 				//joystickPosition.X = (int)(e.AxisValue * width);
-				position.X = (int)(Joysticks.OpenJoystick(e.Device).GetAxisPosition(JoystickAxes.Horizontal) * width);
+				position.X = (int)(Joysticks.OpenJoystick(e.Device).GetAxisPosition(JoystickAxis.Horizontal) * width);
 			} 
 			else if (e.AxisIndex == 1)
 			{
 				//joystickPosition.Y = (int)(e.AxisValue * height);
-				position.Y = (int)(Joysticks.OpenJoystick(e.Device).GetAxisPosition(JoystickAxes.Vertical) * height);
+				position.Y = (int)(Joysticks.OpenJoystick(e.Device).GetAxisPosition(JoystickAxis.Vertical) * height);
 			}
 			Console.WriteLine("Joystick Axis Changed: " + AxesCount.ToString());
 			Console.WriteLine("X: " + position.X.ToString());

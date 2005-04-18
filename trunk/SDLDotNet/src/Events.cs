@@ -646,7 +646,7 @@ namespace SdlDotNet
 		{
 			if (Quit != null) 
 			{
-				Quit(instance, new QuitEventArgs());
+				Quit(instance, e);
 			}
 		}
 
@@ -812,9 +812,10 @@ namespace SdlDotNet
 				{
 					tickerThread.Join();
 				}
-				catch (Exception e)
-				{ 
-					throw e;
+				catch
+				{
+					throw new SdlException("StopTicker Problem");
+					
 				}
 			}
 
@@ -824,9 +825,9 @@ namespace SdlDotNet
 				serverThread.Join();
 				serverThread = null;
 			}
-			catch (Exception e)
-			{ 
-				throw e;
+			catch
+			{
+				throw new SdlException("Thread Join exception");
 			}
 
 			// Make noise

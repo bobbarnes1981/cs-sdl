@@ -28,16 +28,29 @@ namespace SdlDotNet.Examples.GuiExample
 	/// Handles a simple window element, which displays its contents in
 	/// a frame.
 	/// </summary>
-	public class GuiWindow : SpriteCollection
+	public class GuiWindow : GuiComponent
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
 		public GuiWindow(GuiManager manager)
-			: base()
+			: base(manager)
 		{
-			this.manager = manager;
+			//this.manager = manager;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="rectangle"></param>
+		/// <param name="coordinateZ"></param>
+		public GuiWindow(GuiManager manager, Rectangle rectangle, int coordinateZ)
+			: base(manager, rectangle, coordinateZ)
+		{
+			//this.manager = manager;
+			//this.rectangle = rectangle;
 		}
 
 		/// <summary>
@@ -46,14 +59,12 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="rectangle"></param>
 		public GuiWindow(GuiManager manager, Rectangle rectangle)
-			: base()
+			: this(manager, rectangle, 0)
 		{
-			this.manager = manager;
-			this.rectangle = rectangle;
 		}
 
-		GuiManager manager = null;
-		Rectangle rectangle;
+		//GuiManager manager;
+		//Rectangle rectangle;
 
 		#region Drawing
 //		/// <summary>
@@ -64,17 +75,17 @@ namespace SdlDotNet.Examples.GuiExample
 //			get { return manager.GetPadding(this); }
 //		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Render(/*RenderArgs args*/)
-		{
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public void Render(/*RenderArgs args*/)
+//		{
 //			// Render the window using the GUI manager
 //			manager.Render(args, this);
 //
 //			// Render the components
 //			base.Render(args);
-		}
+//		}
 
 		#endregion
 
@@ -109,7 +120,7 @@ namespace SdlDotNet.Examples.GuiExample
 				title = value;
 
 				// Set the bounds
-//				titleSize = manager.GetTextSize(manager.TitleFont, title);
+				titleSize = this.GuiManager.GetTextSize(this.GuiManager.TitleFont, title);
 			}
 		}
 		#endregion

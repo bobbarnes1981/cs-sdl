@@ -60,7 +60,7 @@ namespace SdlDotNet.Examples
 
 			int w = SdlDemo.Size.Width - 10;
 			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
-				0.0,  0.5, new Point(5, 450)));
+				0.1,  0.5, new Point(5, 450)));
 			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
 				0.25, 0.0, new Point(50, 465)));
 			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
@@ -69,8 +69,8 @@ namespace SdlDotNet.Examples
 				1.0,  0.5, new Point(150, 495)));
 
 			// Add the moving one
-			moving = new DemoBoundedTextSprite("two", f4, new Size(w, 30),
-				0.0, 0.5, new Point(5, 510));
+			moving = new BoundedTextSprite("two", f4, new Size(w, 30),
+				0.0, 0.5, new Point(10, 510));
 			Sprites.Add(moving);
 			Sprites.EnableTickEvent();
 		}
@@ -82,7 +82,7 @@ namespace SdlDotNet.Examples
 		/// <returns></returns>
 		public override string ToString() 
 		{ 
-			return "Font Mode"; 
+			return "Font"; 
 		}
 		#endregion
 	}

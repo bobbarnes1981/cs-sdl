@@ -76,7 +76,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="x">The X coordinate</param>
 		/// <param name="y">The Y coordinate</param>
-		public void MoveCursor(short x, short y) 
+		public static void MoveCursor(short x, short y) 
 		{
 			Sdl.SDL_WarpMouse(x, y);
 		}

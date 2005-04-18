@@ -172,7 +172,7 @@ namespace SdlDotNet.Examples
 			surf.Fill(Color.Black);
 			foreach (Sprite s in Sprites)
 			{
-				surf.Blit(s.Surface, s.Rectangle);
+				surf.Blit(s.Render(), s.Rectangle);
 			}
 			return surf;
 		}

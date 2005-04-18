@@ -63,7 +63,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="s"></param>
-		public void AddLeft(Sprite s)
+		public void AddLeft(SpriteContainer s)
 		{
 			AddHead(s);
 
@@ -77,7 +77,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="s"></param>
-		public void AddRight(Sprite s)
+		public void AddRight(SpriteContainer s)
 		{
 			AddTail(s);
 
@@ -93,13 +93,13 @@ namespace SdlDotNet.Examples.GuiExample
 		private int x2 = 0;
 		private int baselineY = 0;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Vector Coordinates
-		{
-			get { return new Vector(x1, baselineY, base.Coordinates.Z); }
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public Vector Coordinates
+//		{
+//			get { return new Vector(x1, baselineY, base.Coordinates.Z); }
+//		}
 
 		/// <summary>
 		/// 
@@ -114,7 +114,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override Padding InnerPadding
 		{
-			get { return manager.MenuTitlePadding; }
+			get { return base.GuiManager.MenuTitlePadding; }
 		}
 
 		/// <summary>
@@ -122,7 +122,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override Padding MarginPadding
 		{
-			get { return manager.MenuBarPadding; }
+			get { return base.GuiManager.MenuBarPadding; }
 		}
 		#endregion
 

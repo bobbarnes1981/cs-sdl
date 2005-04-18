@@ -50,9 +50,8 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void Update(object sender, TickEventArgs args)
+		public override void Update(TickEventArgs args)
 		{
 			// Move our direction a little
 			int x = this.X;
@@ -66,7 +65,7 @@ namespace SdlDotNet.Examples
 			dy += rand.Next(-5, 6);
 
 			// Call the base which also normalizes the bounds
-			base.Update(this, args);
+			base.Update(args);
 
 			// Normalize the directions
 			if (this.X == SpriteBounds.Left)
