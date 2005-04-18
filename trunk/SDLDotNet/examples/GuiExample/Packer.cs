@@ -95,7 +95,9 @@ namespace SdlDotNet.Examples.GuiExample
 			foreach (Sprite s in new ArrayList(Sprites))
 			{
 				if (s.IntersectsWith(point))
+				{
 					return s;
+				}
 
 				index++;
 			}
@@ -184,24 +186,6 @@ namespace SdlDotNet.Examples.GuiExample
 				}
 			}
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="args"></param>
-		public  void OnTick(object sender, TickEventArgs args)
-		{
-			//base.OnTick(this, args);
-
-		//	foreach (Sprite s in Sprites)
-		//	{
-//				if (s.IsTickable)
-//				{
-//					s.OnTick(this, args);
-//				}
-		//	}
-		}
 		#endregion
 
 		#region Properties
@@ -231,7 +215,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public virtual ArrayList HeadSprites
 		{
-			get { return head; }
+			get 
+			{ 
+				return head; 
+			}
 		}
     
 		/// <summary>
@@ -239,7 +226,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public virtual ArrayList TailSprites
 		{
-			get { return tail; }
+			get 
+			{ 
+				return tail; 
+			}
 		}
 
 		/// <summary>
@@ -260,7 +250,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public virtual Padding MarginPadding
 		{
-			get { return new Padding(0); }
+			get 
+			{ 
+				return new Padding(0); 
+			}
 		}
 
 		/// <summary>
@@ -268,7 +261,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public virtual Padding InnerPadding
 		{
-			get { return new Padding(0); }
+			get 
+			{ 
+				return new Padding(0); 
+			}
 		}
 		#endregion
 	}

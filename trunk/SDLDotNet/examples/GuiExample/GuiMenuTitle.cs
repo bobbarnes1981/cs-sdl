@@ -173,21 +173,21 @@ namespace SdlDotNet.Examples.GuiExample
 		//			}
 		//}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(TickEventArgs args)
-		{
-			// Call our base's tick processing
-			base.OnTick(this, args);
-
-			// If we are showing our menu, display it
-			/* TODO This kills things
-					if (IsSelected)
-				  popup.OnTick(args);
-					*/
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="args"></param>
+//		public override void Update(TickEventArgs args)
+//		{
+//			// Call our base's tick processing
+//			base.OnTick(this, args);
+//
+//			// If we are showing our menu, display it
+//			/* TODO This kills things
+//					if (IsSelected)
+//				  popup.OnTick(args);
+//					*/
+//		}
 		#endregion
 
 		#region Operators

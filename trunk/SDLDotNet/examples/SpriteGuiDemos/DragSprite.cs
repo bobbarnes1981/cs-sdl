@@ -47,6 +47,7 @@ namespace SdlDotNet.Examples
 			this.d1 = d1;
 			this.d2 = d2;
 			this.Size = d1.Size;
+			this.AllowDrag = true;
 		}
 
 		/// <summary>
@@ -55,11 +56,12 @@ namespace SdlDotNet.Examples
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format("(drag {0} {1})", beingDragged, base.ToString());
+			return String.Format("(drag {0} {1})", this.BeingDragged, base.ToString());
 		}
 
 		#region Events
-		private bool beingDragged = false;
+		//private bool beingDragged = false;
+		
 
 		/// <summary>
 		/// 
@@ -74,7 +76,7 @@ namespace SdlDotNet.Examples
 				if (args.ButtonPressed)
 				{
 					this.Z += 100;
-					beingDragged = true;
+					this.BeingDragged = true;
 					this.Surfaces.Clear();
 					this.Surfaces.Add(d2);
 					//SdlDemo.MasterSpriteContainer.EventLock = this;		
@@ -82,7 +84,7 @@ namespace SdlDotNet.Examples
 				else
 				{
 					this.Z -= 100;
-					beingDragged = false;
+					this.BeingDragged = false;
 					this.Surfaces.Clear();
 					this.Surfaces.Add(d1);
 					//SdlDemo.MasterSpriteContainer.EventLock = null;	
@@ -96,17 +98,21 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Update(MouseMotionEventArgs args)
 		{
-			if (this.IntersectsWith(new Point(args.X, args.Y)))
+			int x = args.X;
+			int y = args.Y;
+			int relx = args.RelativeX;
+			int rely = args.RelativeY;
+
+			if (!AllowDrag)
 			{
-				if (beingDragged)
-				{
-					this.X += args.RelativeX;
-					this.Y += args.RelativeY; 
-				}
-				else
-				{
-					//return false;
-				}
+				return;
+			}
+
+			// Move the window as appropriate
+			if (this.BeingDragged)
+			{
+				this.X += relx;
+				this.Y += rely;
 			}
 		}
 		#endregion
@@ -118,7 +124,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return beingDragged;
+				return this.BeingDragged;
 			}
 		}
 
