@@ -68,6 +68,22 @@ namespace SdlDotNet.Sprites
 			this.font = font;
 			this.color = color;
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="textItem"></param>
+		/// <param name="font"></param>
+		/// <param name="textColor"></param>
+		/// <param name="backgroundColor"></param>
+		public TextSprite(
+			string textItem, 
+			SdlDotNet.Font font, 
+			Color textColor,
+			Color backgroundColor)
+			: this(textItem, font, textColor)
+		{
+			this.backgroundColor = backgroundColor;
+		}
 
 		/// <summary>
 		/// 
@@ -158,7 +174,15 @@ namespace SdlDotNet.Sprites
 			// Render it (Solid or Blended)
 			try
 			{
-				this.Surface = font.Render(TextString, color);
+				if (backgroundColor.IsEmpty)
+				{
+					this.Surface = font.Render(TextString, color);
+				}
+				else
+				{
+					this.Surface = font.Render(TextString, color, backgroundColor);
+				}
+				
 				this.Size = new Size(this.Surface.Width, this.Surface.Height);
 				return this.Surface;
 			}
@@ -177,6 +201,7 @@ namespace SdlDotNet.Sprites
 		private string textItem;
 
 		private Color color = Color.White;
+		private Color backgroundColor;
 
 		/// <summary>
 		/// 
@@ -190,6 +215,22 @@ namespace SdlDotNet.Sprites
 			set 
 			{ 
 				color = value; 
+				this.Surface = this.Render(); 
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Color BackgroundColor
+		{
+			get 
+			{ 
+				return backgroundColor; 
+			}
+			set 
+			{ 
+				backgroundColor = value; 
 				this.Surface = this.Render(); 
 			}
 		}

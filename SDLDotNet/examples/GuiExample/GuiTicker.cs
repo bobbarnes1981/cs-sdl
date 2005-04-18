@@ -68,64 +68,6 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Geometry
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public Vector Coordinates
-//		{
-//			get
-//			{
-//				return new Vector(x1, baselineY - Size.Height, base.Coordinates.Z);
-//			}
-//		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public Rectangle Rectangle
-//		{
-//			get
-//			{
-//				return new Rectangle(Coordinates.X, Coordinates.Y, this.Size.Width, this.Size.Height);
-//			}
-//			set
-//			{
-//				//this.rectangle = value;
-//			}
-//		}
-
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override Size Size
-//		{
-//			get
-//			{
-//				// Check for last-size
-//				if (this.Sprites.Count == 0)
-//				{
-//					return lastSize;
-//				}
-//
-//				// Build up a height
-//				int height = 10;
-//
-//				foreach (Sprite s in this.Sprites)
-//				{
-//					if (s.Size.Height > height)
-//					{
-//						height = 10;//s.Size.Height;
-//					}
-//				}
-//	
-//				// Return a new height
-//				lastSize = new Size(800, 10);
-////				lastSize = new Size(x2 - x1,
-////					height + manager.TickerPadding.Vertical);
-//				return lastSize;
-//			}
-//		}
 		#endregion
 
 		#region Events
@@ -138,7 +80,6 @@ namespace SdlDotNet.Examples.GuiExample
 			// Figure out the rates. 
 			// The min and max start on opposite sides
 			// of the ticker.
-			
 			int offset = args.RatePerSecond(Delta);
 
 			if (this.Sprites.Count != 0)
@@ -154,35 +95,12 @@ namespace SdlDotNet.Examples.GuiExample
 					s.Y = 0;
 				}
 			}
-
-			// Add anything into the queue
-			//if (queue.Count != 0)
-			//{
-				// Check which side to add
-				if (delta > 0 && this.Rectangle.Height > minSpace)
-				{
-					// We have room on the left
-					//Sprite ns = (Sprite) queue.Peek();
-					//ns.Y = manager.TickerPadding.Top + Coordinates.Y;
-					//ns.X = x1 - ns.Size.Width;
-				//	display.Add(ns);
-				}
-				else if (delta < 0 && this.Rectangle.Height > minSpace)
-				{
-					// We have room on the right
-					//Sprite ns = (Sprite) queue.Peek();
-				//	ns.Y = manager.TickerPadding.Top + Coordinates.Y;
-					//ns.X = x2;
-					//ns.Rectangle = new Rectangle(ns.X, ns.Y, ns.Size.Width, ns.Size.Height);
-				//	display.Add(ns);
-			//	}
-			}
 		}
 		#endregion
 
 		#region Properties
 		private int delta = -10;
-		private int minSpace = 10;
+		//private int minSpace = 10;
 		private bool isAutoHide = false;
 
 		/// <summary>

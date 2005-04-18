@@ -40,7 +40,6 @@ namespace SdlDotNet.Examples
 		{
 			// Create the manager and the marble base
 			GuiManager manager = SdlDemo.GuiManager;
-			//manager.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
 
 			// Create a new draggable window
 			GuiWindow gw = new GuiWindow(manager, new Rectangle(200, 65, 110, 100));
@@ -48,6 +47,7 @@ namespace SdlDotNet.Examples
 			gw.Title = "Draggable Window";
 			gw.Sprites.Add(new AnimatedDemoSprite(LoadRandomMarble(),
 				new Point(18, 18)));
+			gw.TitleBackgroundColor = manager.FrameColor;
 			gw.Sprites.EnableTickEvent();
 			Sprites.Add(gw);
 
@@ -65,6 +65,7 @@ namespace SdlDotNet.Examples
 			gw.AllowDrag = false;
 			gw.Sprites.Add(new AnimatedDemoSprite(LoadRandomMarble(),
 				new Point(0, 18)));
+			gw.TitleBackgroundColor = manager.FrameColor;
 			gw.Sprites.EnableTickEvent();
 			Sprites.Add(gw);
 

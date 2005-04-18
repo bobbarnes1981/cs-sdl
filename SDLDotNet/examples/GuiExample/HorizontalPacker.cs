@@ -61,6 +61,18 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(manager, p)
 		{
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gui"></param>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="height"></param>
+		public HorizontalPacker(GuiManager gui, int x, int y, int height)
+			: base(gui, x, y, height)
+		{
+		}
 		#endregion
 
 		#region Drawing
@@ -112,52 +124,63 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Geometry
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override Size Size
-//		{
-//			get
-//			{
-//				// Get the height
-//				int height = 0;
-//
-//				// Get the sprites
-//				foreach (Sprite s in new ArrayList(Sprites))
-//				{
-//					int h = GetSize(s).Height;
-//
-//					if (h > height)
-//						height = h;
-//				}
-//
-//				// Add the padding
-//				height += InnerPadding.Vertical + MarginPadding.Vertical;
-//
-//				return new Size(HorizontalWidth, height);
-//			}
-//		}
-
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual int HorizontalWidth
+		public override Size Size
 		{
 			get
 			{
-				// Go through the sprites
-				int width = 0;
+				// Get the height
+				//int height = 20;
+				//int width = 0;
 
-				foreach (Sprite s in new ArrayList(Sprites))
+				// Get the sprites
+				foreach (Sprite s in this.Sprites)
 				{
-					int w = GetSize(s).Width;
+					int h = s.Size.Height;
+					int w = s.Size.Width;
 
-					width += w + InnerPadding.Horizontal;
+					if (h > this.Height)
+					{
+						this.Height = h;
+					}
+					if (w > this.Width)
+					{
+						this.Width = w;
+					}
 				}
 
-				return width + MarginPadding.Horizontal;
+				// Add the padding
+//				height += 
+//					InnerPadding.Vertical + MarginPadding.Vertical;
+
+				//return new Size(HorizontalWidth, height);
+				return new Size(this.Width, this.Height);
+
 			}
 		}
+
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public virtual int HorizontalWidth
+//		{
+//			get
+//			{
+//				// Go through the sprites
+//				int width = 0;
+//
+//				foreach (Sprite s in new ArrayList(Sprites))
+//				{
+//					int w = s.Size.Width;
+//
+//					width += w + InnerPadding.Horizontal;
+//				}
+//
+//				return width + MarginPadding.Horizontal;
+//			}
+//		}
 		#endregion
 	}
 }

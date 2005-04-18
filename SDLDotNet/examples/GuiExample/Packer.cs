@@ -40,6 +40,17 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(manager)
 		{
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gui"></param>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="height"></param>
+		public Packer(GuiManager gui, int x, int y, int height)
+			: base(gui, new Rectangle(x, y, Video.Screen.Width, height))
+		{
+		}
 
 		/// <summary>
 		/// 
@@ -63,24 +74,24 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Sprites
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="s"></param>
-		/// <returns></returns>
-		protected Size GetSize(Sprite s)
-		{
-			// Get the size
-			Size d = s.Size;
-
-//			if (s is GuiComponent)
-//			{
-//				//d = ((GuiComponent) s).OuterSize;
-//				d = ((GuiComponent) s).Size;
-//			}
-
-			return d;
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="s"></param>
+//		/// <returns></returns>
+//		protected Size GetSize(Sprite s)
+//		{
+//			// Get the size
+//			Size d = s.Size;
+//
+//			//			if (s is GuiComponent)
+//			//			{
+//			//				//d = ((GuiComponent) s).OuterSize;
+//			//				d = ((GuiComponent) s).Size;
+//			//			}
+//
+//			return d;
+//		}
 
 		/// <summary>
 		/// 
@@ -145,23 +156,23 @@ namespace SdlDotNet.Examples.GuiExample
 			}
 		}
 
-//		public override void Update(object sender, MouseButtonEventArgs args)
-//		{
-//			// We assume that the coordinates are set by the packing
-//			// processing, so we can use them with the offset and
-//			// coordinates.
-//			Point p = new Point(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left), args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top));
-//
-//			foreach (Sprite s in Sprites)
-//			{
-//				// Check the region. If it contains the point, we call the
-//				// basic sprite (and not its parent).
-//				if (s.IntersectsWith(p))
-//				{
-//					s.OnMouseButtonUp(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
-//				}
-//			}
-//		}
+		//		public override void Update(object sender, MouseButtonEventArgs args)
+		//		{
+		//			// We assume that the coordinates are set by the packing
+		//			// processing, so we can use them with the offset and
+		//			// coordinates.
+		//			Point p = new Point(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left), args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top));
+		//
+		//			foreach (Sprite s in Sprites)
+		//			{
+		//				// Check the region. If it contains the point, we call the
+		//				// basic sprite (and not its parent).
+		//				if (s.IntersectsWith(p))
+		//				{
+		//					s.OnMouseButtonUp(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
+		//				}
+		//			}
+		//		}
 
 		/// <summary>
 		/// 
@@ -199,6 +210,7 @@ namespace SdlDotNet.Examples.GuiExample
 		protected void AddHead(Sprite s)
 		{
 			head.Add(s);
+			this.Sprites.Add(s);
 		}
 
 		/// <summary>
@@ -208,6 +220,7 @@ namespace SdlDotNet.Examples.GuiExample
 		protected void AddTail(Sprite s)
 		{
 			tail.Add(s);
+			this.Sprites.Add(s);
 		}
 
 		/// <summary>
@@ -232,18 +245,18 @@ namespace SdlDotNet.Examples.GuiExample
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public new virtual ArrayList Sprites
-		{
-			get
-			{
-				ArrayList list = new ArrayList(head);
-				list.AddRange(tail);
-				return list;
-			}
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public new virtual ArrayList Sprites
+//		{
+//			get
+//			{
+//				ArrayList list = new ArrayList(head);
+//				list.AddRange(tail);
+//				return list;
+//			}
+//		}
 
 		/// <summary>
 		/// 

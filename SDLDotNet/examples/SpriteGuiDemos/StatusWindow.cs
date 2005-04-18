@@ -50,6 +50,7 @@ namespace SdlDotNet.Examples
 			int dataWidth = 96;
 			int i = 0;
 			this.AllowDrag = true;
+			this.TitleBackgroundColor = manager.FrameColor;
 
 			if (this.Title != null)
 			{
@@ -120,9 +121,9 @@ namespace SdlDotNet.Examples
 		}
 
 		#region Data Components
-		private BoundedTextSprite tps = null;
-		private BoundedTextSprite fps = null;
-		private BoundedTextSprite mode = null;
+		private BoundedTextSprite tps;
+		private BoundedTextSprite fps;
+		private BoundedTextSprite mode;
 		#endregion
 
 		#region Animation

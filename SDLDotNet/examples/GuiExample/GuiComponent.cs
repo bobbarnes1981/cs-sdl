@@ -111,21 +111,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <returns></returns>
 		public override Surface Render()
 		{
-//			if (!IsTraced)
-//				return;
-//
-//			// Draw the outer and the inner bounds
-//			GuiManager.DrawRect(args.Surface,
-//				args.Translate(Bounds),
-//				manager.BoundsTraceColor);
-//			GuiManager.DrawRect(args.Surface,
-//				args.Translate(OuterBounds),
-//				manager.OuterBoundsTraceColor);
-				this.Surface.Fill(manager.BackgroundColor);
-				//this.Surface.DrawBox(this.Rectangle, manager.BoundsTraceColor);
+			this.Surface.Fill(manager.BackgroundColor);
 			this.Surface.DrawBox(new Rectangle(0, 0, this.Rectangle.Width, this.Rectangle.Height), manager.FrameColor);
-				base.Sprites.Draw(this.Surface);
-				return this.Surface;
+			base.Sprites.Draw(this.Surface);
+			return this.Surface;
 		}
 		#endregion
 
@@ -190,7 +179,22 @@ namespace SdlDotNet.Examples.GuiExample
 			}
 		}
 
-
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		public override void Update(TickEventArgs args)
+		{
+			if (this.Sprites.Count != 0)
+			{
+				// Go through all the displayed sprites
+				foreach (Sprite s in this.Sprites)
+				{
+					// Tick the sprite and wrap it in a translator
+					s.Update(args);
+				}
+			}
+		}
 		#endregion
 
 		#region Geometry

@@ -181,7 +181,7 @@ namespace SdlDotNet.Examples.GuiExample
 //					}
 
 					// Get the height
-					int h = GetSize(s).Height;
+					int h = s.Size.Height;
 
 					height += h + InnerPadding.Vertical;
 				}
