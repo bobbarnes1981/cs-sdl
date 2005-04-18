@@ -63,7 +63,7 @@ namespace SdlDotNet.Sprites
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				surface.Blit(this[i].Surface, this[i].Rectangle);
+				 surface.Blit(this[i].Render(), this[i].Rectangle);
 			}
 		}
 
@@ -158,7 +158,7 @@ namespace SdlDotNet.Sprites
 		}
 		#endregion
 
-		#region Events
+ 		#region Events
 		/// <summary>
 		/// 
 		/// </summary>
@@ -507,11 +507,11 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Update(object sender, ActiveEventArgs e)
+		private void Update(object sender, ActiveEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 
@@ -520,11 +520,11 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		protected virtual void Update(object sender, JoystickAxisEventArgs e)
+		private void Update(object sender, JoystickAxisEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 		
@@ -533,11 +533,11 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		protected virtual void Update(object sender, JoystickBallEventArgs e)
+		private void Update(object sender, JoystickBallEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 		
@@ -546,11 +546,11 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		protected virtual void Update(object sender, JoystickButtonEventArgs e)
+		private void Update(object sender, JoystickButtonEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 		
@@ -559,22 +559,22 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
-		protected virtual void Update(object sender, JoystickHatEventArgs e)
+		private void Update(object sender, JoystickHatEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 		
 		/// <summary>
 		/// Processes the keyboard.
 		/// </summary>
-		protected virtual void Update(object sender, KeyboardEventArgs e)
+		private void Update(object sender, KeyboardEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 
@@ -582,11 +582,11 @@ namespace SdlDotNet.Sprites
 		/// Processes a mouse button. This event is trigger by the SDL
 		/// system. 
 		/// </summary>
-		protected virtual void Update(object sender, MouseButtonEventArgs e)
+		private void Update(object sender, MouseButtonEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 
@@ -595,11 +595,11 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are MouseSensitive are processed.
 		/// </summary>
-		protected virtual void Update(object sender, MouseMotionEventArgs e)
+		private void Update(object sender, MouseMotionEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 		
@@ -608,11 +608,11 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Update(object sender, QuitEventArgs e)
+		private void Update(object sender, QuitEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 
@@ -621,11 +621,11 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Update(object sender, UserEventArgs e)
+		private void Update(object sender, UserEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 
@@ -634,11 +634,11 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Update(object sender, VideoExposeEventArgs e)
+		private void Update(object sender, VideoExposeEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 
@@ -647,11 +647,11 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Update(object sender, VideoResizeEventArgs e)
+		private void Update(object sender, VideoResizeEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 
@@ -660,11 +660,11 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Update(object sender, ChannelFinishedEventArgs e)
+		private void Update(object sender, ChannelFinishedEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 
@@ -673,11 +673,11 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		protected virtual void Update(object sender, MusicFinishedEventArgs e)
+		private void Update(object sender, MusicFinishedEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 
@@ -686,11 +686,11 @@ namespace SdlDotNet.Sprites
 		/// anything. This ensures that the functionality is there, to be
 		/// overridden as needed.
 		/// </summary>
-		protected virtual void Update(object sender, TickEventArgs e)
+		private void Update(object sender, TickEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				this[i].Update(this, e);
+				this[i].Update(e);
 			}
 		}
 

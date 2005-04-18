@@ -73,10 +73,11 @@ namespace SdlDotNet.Examples.GuiExample
 			// Get the size
 			Size d = s.Size;
 
-			if (s is GuiComponent)
-			{
-				d = ((GuiComponent) s).OuterSize;
-			}
+//			if (s is GuiComponent)
+//			{
+//				//d = ((GuiComponent) s).OuterSize;
+//				d = ((GuiComponent) s).Size;
+//			}
 
 			return d;
 		}
@@ -107,9 +108,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void Update(object sender, MouseButtonEventArgs args)
+		public override void Update(MouseButtonEventArgs args)
 		{
 			// We assume that the coordinates are set by the packing
 			// processing, so we can use them with the offset and
@@ -164,9 +164,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void Update(object sender, MouseMotionEventArgs args)
+		public override void Update(MouseMotionEventArgs args)
 		{
 			// Build up the new point   
 			MouseMotionEventArgs args1 = new MouseMotionEventArgs(args.ButtonPressed, (short)(args.X + Coordinates.X + MarginPadding.Left + InnerPadding.Left), (short)(args.Y + Coordinates.Y + MarginPadding.Top + InnerPadding.Top), args.RelativeX, args.RelativeY);
@@ -246,7 +245,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual ArrayList Sprites
+		public new virtual ArrayList Sprites
 		{
 			get
 			{

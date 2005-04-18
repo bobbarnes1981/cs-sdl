@@ -64,9 +64,8 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void Update(object sender, MouseButtonEventArgs args)
+		public override void Update(MouseButtonEventArgs args)
 		{
 			if (this.IntersectsWith(new Point(args.X, args.Y)))
 			{
@@ -95,7 +94,7 @@ namespace SdlDotNet.Examples
 		/// If the sprite is picked up, this moved the sprite to follow
 		/// the mouse.
 		/// </summary>
-		public override void Update(object sender, MouseMotionEventArgs args)
+		public override void Update(MouseMotionEventArgs args)
 		{
 			if (this.IntersectsWith(new Point(args.X, args.Y)))
 			{

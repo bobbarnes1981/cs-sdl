@@ -456,7 +456,21 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public Color TraceColor
+		public Color FrameColor
+		{
+			get
+			{
+				return frameColor;
+			}
+			set
+			{
+				frameColor = value;
+			}
+		}
+			/// <summary>
+			/// 
+			/// </summary>
+			public Color TraceColor
 		{
 			get 
 			{ 
@@ -467,6 +481,22 @@ namespace SdlDotNet.Examples.GuiExample
 				traceColor = value; 
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Color BackgroundColor
+		{
+			get 
+			{ 
+				return backgroundColor; 
+			}
+			set 
+			{ 
+				backgroundColor = value; 
+			}
+		}
+
 
 		/// <summary>
 		/// 

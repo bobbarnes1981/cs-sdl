@@ -303,7 +303,7 @@ namespace SdlDotNet
 		/// <param name="ms">
 		/// The number of milliseconds to fade out for
 		/// </param>
-		public void FadeOut(int ms) 
+		public void Fadeout(int ms) 
 		{
 			if (SdlMixer.Mix_FadeOutMusic(ms) != 1)
 			{

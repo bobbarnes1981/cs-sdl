@@ -62,7 +62,8 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get
 			{
-				return OuterBounds.Left - manager.MenuTitlePadding.Left;
+				//return OuterBounds.Left - manager.MenuTitlePadding.Left;
+				return this.Rectangle.Left - - base.GuiManager.MenuTitlePadding.Left;
 			}
 		}
 
@@ -70,7 +71,8 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get
 			{
-				return OuterBounds.Bottom;
+				return this.Rectangle.Bottom;
+				//return OuterBounds.Bottom;
 					//+ popup.OuterPadding.Top
 					//+ manager.MenuTitlePadding.Bottom
 					//+ manager.MenuBarPadding.Bottom;
@@ -128,9 +130,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void Update(object sender, MouseButtonEventArgs args)
+		public override void Update(MouseButtonEventArgs args)
 		{
 			//			// Build up the translations
 			//			MouseButtonEventArgs args1 = args.Clone();
@@ -175,9 +176,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void Update(object sender, TickEventArgs args)
+		public override void Update(TickEventArgs args)
 		{
 			// Call our base's tick processing
 			base.OnTick(this, args);

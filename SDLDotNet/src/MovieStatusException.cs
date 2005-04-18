@@ -49,7 +49,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
-		public MovieStatusException(string message, Exception exception) 
+		public MovieStatusException(string message, Exception exception) : base(message, exception)
 		{
 		}
 

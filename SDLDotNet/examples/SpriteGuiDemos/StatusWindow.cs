@@ -36,78 +36,82 @@ namespace SdlDotNet.Examples
 		/// Creates a basic status window above everything else.
 		/// </summary>
 		public StatusWindow(GuiManager manager)
-			: base(manager, new Rectangle(625, 475, 150, 100))
+			: base(manager, new Rectangle(625, 475, 150, 100), 2000)
 		{
 			// Set up our title
-			//Coordinates.Z = 2000;
 			Title = "Demo Status";
 
 			// Add some text
-			//int labelOffset = 2;
+			int labelOffset = 2;
 			int dataOffset = 54;
 			int labelHeight = manager.GetTitleHeight("test");
 			int labelPad = 2;
-			//int labelWidth = 48;
+			int labelWidth = 48;
 			int dataWidth = 96;
 			int i = 0;
+			this.IsDragable = true;
 
+			this.Sprites.Add(new TextSprite(Title, manager.TitleFont,
+				new Vector(0,0,2000)));
+
+			i++;
 			// Add the ticks per second
-//			Contents.Add(new BoundedTextSprite("TPS:", manager.TitleFont,
-//				new Size(labelWidth, labelHeight),
-//				1.0, 0.5,
-//				new Point(labelOffset,
-//				(labelHeight
-//				+ labelPad) * i + 2)));
+			this.Sprites.Add(new BoundedTextSprite("TPS:", manager.TitleFont,
+				new Size(labelWidth, labelHeight),
+				1.0, 0.5,
+				new Point(labelOffset,
+				(labelHeight
+				+ labelPad) * i + 2)));
 			tps = new BoundedTextSprite("---", manager.BaseFont,
 				new Size(dataWidth, labelHeight),
 				0.0, 0.5,
 				new Point(dataOffset,
 				(labelHeight + labelPad) * i + 2));
-//			Contents.Add(tps);
+			this.Sprites.Add(tps);
 
 			// Add the frames per second
 			i++;
-//			Contents.Add(new BoundedTextSprite("FPS:", manager.TitleFont,
-//				new Size(labelWidth, labelHeight),
-//				1.0, 0.5,
-//				new Point(labelOffset,
-//				(labelHeight
-//				+ labelPad) * i + 2)));
+			this.Sprites.Add(new BoundedTextSprite("FPS:", manager.TitleFont,
+				new Size(labelWidth, labelHeight),
+				1.0, 0.5,
+				new Point(labelOffset,
+				(labelHeight
+				+ labelPad) * i + 2)));
 			fps = new BoundedTextSprite("---", manager.BaseFont,
 				new Size(dataWidth, labelHeight),
 				0.0, 0.5,
 				new Point(dataOffset,
 				(labelHeight + labelPad) * i + 2));
-//			Contents.Add(fps);
+			this.Sprites.Add(fps);
 
 			// Add the current mode
 			i++;
-//			Contents.Add(new BoundedTextSprite("Mode:", manager.TitleFont,
-//				new Size(labelWidth, labelHeight),
-//				1.0, 0.5,
-//				new Point(labelOffset,
-//				(labelHeight
-//				+ labelPad) * i + 2)));
+			this.Sprites.Add(new BoundedTextSprite("Mode:", manager.TitleFont,
+				new Size(labelWidth, labelHeight),
+				1.0, 0.5,
+				new Point(labelOffset,
+				(labelHeight
+				+ labelPad) * i + 2)));
 			mode = new BoundedTextSprite("---", manager.BaseFont,
 				new Size(dataWidth, labelHeight),
 				0.0, 0.5,
 				new Point(dataOffset,
 				(labelHeight + labelPad)
 				* i + 2));
-//			Contents.Add(mode);
+			this.Sprites.Add(mode);
 
 			// Add the instructions
 			i++;
-//			Contents.Add(new BoundedTextSprite("Press the number keys",
-//				manager.BaseFont,
-//				new Size(150, labelHeight),
-//				0.5, 0.5,
-//				new Point(labelOffset,
-//				(labelHeight
-//				+ labelPad) * i + 2)));
+			this.Sprites.Add(new BoundedTextSprite("Press the number keys",
+				manager.BaseFont,
+				new Size(150, labelHeight),
+				0.5, 0.5,
+				new Point(labelOffset,
+				(labelHeight
+				+ labelPad) * i + 2)));
 
 			// Add ourselves to the ticker
-			this.EnableTickEvent();
+			//this.EnableTickEvent();
 
 			// Adjust our height
 			i++;
@@ -125,20 +129,19 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public void OnTick(object sender, TickEventArgs args)
+		public override void Update(TickEventArgs args)
 		{
 			tps.TextString = String.Format("{0}", Events.TicksPerSecond);
 
-			//if (SdlDemo.Fps.IsFull)
-		//	{
-			//	fps.TextString = SdlDemo.Fps.FramesPerSecond.ToString("#0.00");
-			//}
-		//	else
-		//	{
+			if (SdlDemo.FPS.IsFull)
+			{
+				fps.TextString = SdlDemo.FPS.FramesPerSecond.ToString("#0.00");
+			}
+			else
+			{
 				fps.TextString = "---";
-		//	}
+			}
 
 			if (SdlDemo.CurrentDemo == null)
 			{

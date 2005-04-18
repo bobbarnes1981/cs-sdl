@@ -51,7 +51,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="exception"></param>
-		public SurfaceLostException(string message, Exception exception) 
+		public SurfaceLostException(string message, Exception exception) : base(message, exception)
 		{
 		}
 

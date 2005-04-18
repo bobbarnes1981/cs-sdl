@@ -61,12 +61,11 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void Update(object sender, TickEventArgs args)
+		public override void Update(TickEventArgs args)
 		{
 			// Animate
-			base.Update(this, args);
+			base.Update(args);
 
 			// Bounce off the left
 			if (Coordinates.X < bounds.Left)

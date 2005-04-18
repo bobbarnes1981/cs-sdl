@@ -226,6 +226,10 @@ namespace SdlDotNet
 	public enum AudioFormat
 	{
 		/// <summary>
+		/// 
+		/// </summary>
+		None = 0,
+		/// <summary>
 		/// Unsigned 8-bit
 		/// </summary>
 		Unsigned8 = Sdl.AUDIO_U8,
@@ -1358,6 +1362,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		None = 0,
+		/// <summary>
+		/// 
+		/// </summary>
 		Mono = 1,
 		/// <summary>
 		/// 
@@ -1370,8 +1378,7 @@ namespace SdlDotNet
 	/// CD Track Type
 	/// </summary>
 	/// <remarks></remarks>
-	[FlagsAttribute]
-	public enum CDTrackTypes
+	public enum CDTrackType
 	{
 		/// <summary>
 		/// 
@@ -1387,8 +1394,7 @@ namespace SdlDotNet
 	/// JoystickAxes
 	/// </summary>
 	/// <remarks></remarks>
-	[FlagsAttribute]
-	public enum JoystickAxes
+	public enum JoystickAxis
 	{
 		/// <summary>
 		/// 
@@ -1522,6 +1528,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		None = 0,
+		/// <summary>
+		/// 
+		/// </summary>
 		PrimaryButton = Sdl.SDL_BUTTON_LEFT,
 		/// <summary>
 		/// 
@@ -1547,6 +1557,10 @@ namespace SdlDotNet
 	/// <remarks>Only used internally to remove events from the event queue</remarks>
 	public enum EventMask
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		None = 0,
 		/// <summary>
 		/// 
 		/// </summary>
@@ -1631,7 +1645,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		NoEvent = Sdl.SDL_NOEVENT,
+		None = Sdl.SDL_NOEVENT,
 		/// <summary>
 		/// 
 		/// </summary>

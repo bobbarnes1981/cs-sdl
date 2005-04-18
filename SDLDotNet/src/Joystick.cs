@@ -301,7 +301,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="axis"></param>
 		/// <returns></returns>
-		public float GetAxisPosition(JoystickAxes axis)
+		public float GetAxisPosition(JoystickAxis axis)
 		{
 			return  ((float)(Sdl.SDL_JoystickGetAxis(this.handle, (int) axis) + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE);
 		}

@@ -72,6 +72,7 @@ namespace SdlDotNet
 						CloseHandle(handle);
 						GC.KeepAlive(this);
 					}
+				//	pSurface = IntPtr.Zero;
 					this.disposed = true;
 				}
 				finally
@@ -322,15 +323,8 @@ namespace SdlDotNet
 		/// <returns>Surface containing the text</returns>
 		private Surface RenderTextSolid(string textItem, Color color) 
 		{
-			IntPtr pSurface;
 			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
-			pSurface = SdlTtf.TTF_RenderUNICODE_Solid(handle, textItem, colorSdl);
-			GC.KeepAlive(this);
-			if (pSurface == IntPtr.Zero) 
-			{
-				throw FontException.Generate();
-			}
-			return new Surface(pSurface);
+			return new Surface(SdlTtf.TTF_RenderUNICODE_Solid(handle, textItem, colorSdl));
 		}
 
 		/// <summary>
@@ -343,20 +337,12 @@ namespace SdlDotNet
 		private Surface RenderTextShaded(
 			string textItem, Color foregroundColor, Color backgroundColor) 
 		{
-			IntPtr pSurface;
-
 			Sdl.SDL_Color foregroundColorSdl = 
 				SdlColor.ConvertColor(foregroundColor);
 			Sdl.SDL_Color backgroundColorSdl = 
 				SdlColor.ConvertColor(backgroundColor);
-			pSurface = SdlTtf.TTF_RenderUNICODE_Shaded(
-				handle, textItem, foregroundColorSdl, backgroundColorSdl);
-			GC.KeepAlive(this);
-			if (pSurface == IntPtr.Zero) 
-			{
-				throw FontException.Generate();
-			}
-			return new Surface(pSurface);
+			return new Surface(SdlTtf.TTF_RenderUNICODE_Shaded(
+				handle, textItem, foregroundColorSdl, backgroundColorSdl));
 		}
 
 		/// <summary>
@@ -368,17 +354,9 @@ namespace SdlDotNet
 		private Surface RenderTextBlended(
 			string textItem, Color color) 
 		{
-			IntPtr pSurface;
-
 			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
-			pSurface = SdlTtf.TTF_RenderUNICODE_Blended(
-				handle, textItem, colorSdl);
-			GC.KeepAlive(this);
-			if (pSurface == IntPtr.Zero) 
-			{
-				throw FontException.Generate();
-			}
-			return new Surface(pSurface);
+			return new Surface(SdlTtf.TTF_RenderUNICODE_Blended(
+				handle, textItem, colorSdl));
 		}
 
 

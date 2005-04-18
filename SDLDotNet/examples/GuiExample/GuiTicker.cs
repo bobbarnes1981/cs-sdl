@@ -36,215 +36,146 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="gui"></param>
-		/// <param name="x1"></param>
-		/// <param name="x2"></param>
-		/// <param name="baselineY"></param>
-		public GuiTicker(GuiManager gui, int x1, int x2, int baselineY)
-			: base(gui)
-		{
-			// Save our bottom point
-			this.x1 = x1;
-			this.x2 = x2;
-			this.baselineY = baselineY;
-			//this.Y = baselineY;
-			this.lastSize = new Size(x2 - x1, 1);
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="height"></param>
+		public GuiTicker(GuiManager gui, int x, int y, int height)
+			: base(gui, new Rectangle(x, y, Video.Screen.Width, height))
+		{			
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="gui"></param>
-		/// <param name="x1"></param>
-		/// <param name="x2"></param>
-		/// <param name="baselineY"></param>
-		/// <param name="z"></param>
-		public GuiTicker(GuiManager gui, int x1, int x2, int baselineY, int z)
-			: base(gui, z)
+		/// <param name="coordinates"></param>
+		/// <param name="height"></param>
+		public GuiTicker(GuiManager gui, Vector coordinates, int height)
+			: base(gui, new Rectangle(coordinates.X, coordinates.Y, 0, height), coordinates.Z)
 		{
-			// Save our bottom point
-			this.x1 = x1;
-			this.x2 = x2;
-			this.baselineY = baselineY;
-			this.lastSize = new Size(x2 - x1, 1);
 		}
 
 		#region Sprites
-		private Queue queue = new Queue();
-		private ArrayList display = new ArrayList();
-
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="sprite"></param>
 		public void Add(Sprite sprite)
 		{
-			if (queue.Count != 0)
-			{
-				queue.Dequeue();
-			}
-			queue.Enqueue(sprite);
-		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <returns></returns>
-//		public ArrayList GetSprites()
-//		{
-//			ArrayList list = new ArrayList(display);
-//			list.Add(this);
-//			return list;
-//		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sprite"></param>
-		public void Remove(Sprite sprite)
-		{
-			// Cannot remove from queue
-			display.Remove(sprite);
+			sprite.Position = new Point(this.Size.Width, this.Position.Y);
+			base.Sprites.Add(sprite);
 		}
 		#endregion
 
 		#region Geometry
-		private int x1 = 0;
-		private int x2 = 0;
-		private int baselineY = 0;
-		private Size lastSize = new Size();
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public Vector Coordinates
+//		{
+//			get
+//			{
+//				return new Vector(x1, baselineY - Size.Height, base.Coordinates.Z);
+//			}
+//		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Vector Coordinates
-		{
-			get
-			{
-				return new Vector(x1, baselineY - Size.Height, base.Coordinates.Z);
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Rectangle Rectangle
-		{
-			get
-			{
-				return new Rectangle(Coordinates.X, Coordinates.Y, this.Size.Width, this.Size.Height);
-			}
-			set
-			{
-				base.Rectangle = value;
-			}
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public Rectangle Rectangle
+//		{
+//			get
+//			{
+//				return new Rectangle(Coordinates.X, Coordinates.Y, this.Size.Width, this.Size.Height);
+//			}
+//			set
+//			{
+//				//this.rectangle = value;
+//			}
+//		}
 
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Size Size
-		{
-			get
-			{
-				// Check for last-size
-				if (display.Count == 0)
-				{
-					return lastSize;
-				}
-
-				// Build up a height
-				int height = 0;
-
-				foreach (Sprite s in new ArrayList(display))
-				{
-					if (s.Size.Height > height)
-					{
-						height = s.Size.Height;
-					}
-				}
-	
-				// Return a new height
-				lastSize = new Size(x2 - x1,
-					height + manager.TickerPadding.Vertical);
-				return lastSize;
-			}
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override Size Size
+//		{
+//			get
+//			{
+//				// Check for last-size
+//				if (this.Sprites.Count == 0)
+//				{
+//					return lastSize;
+//				}
+//
+//				// Build up a height
+//				int height = 10;
+//
+//				foreach (Sprite s in this.Sprites)
+//				{
+//					if (s.Size.Height > height)
+//					{
+//						height = 10;//s.Size.Height;
+//					}
+//				}
+//	
+//				// Return a new height
+//				lastSize = new Size(800, 10);
+////				lastSize = new Size(x2 - x1,
+////					height + manager.TickerPadding.Vertical);
+//				return lastSize;
+//			}
+//		}
 		#endregion
 
 		#region Events
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void Update(object sender, TickEventArgs args)
+		public override void Update(TickEventArgs args)
 		{
-			// Don't bother if there is nothing
-			if (display.Count == 0 && queue.Count == 0)
-			{
-				return;
-			}
-
-			// Figure out the rates. The min and max start on opposite sides
+			// Figure out the rates. 
+			// The min and max start on opposite sides
 			// of the ticker.
-			int minX = x2;
-			int maxX = x1;
+			
 			int offset = args.RatePerSecond(Delta);
 
-			if (display.Count != 0)
+			if (this.Sprites.Count != 0)
 			{
 				// Go through all the displayed sprites
-				foreach (Sprite s in new ArrayList(display))
+				foreach (Sprite s in this.Sprites)
 				{
 					// Tick the sprite and wrap it in a translator
-					s.Update(this, args);
+					s.Update(args);
 	  
 					// Move the sprite along
 					s.X += offset;
 					s.Y = 0;
-//
-					// See if the sprite is out of bounds
-//					if ((delta < 0 && s.Bounds.Left < x1 - s.Size.Width) || 
-//						(delta > 0 && s.Bounds.Right > x2))
-//					{
-//						Remove(s);
-//						continue;
-//					}
-//	  
-//					// Check for the edges
-//					if (s.Bounds.Left < minX)
-//					{
-//						minX = s.Bounds.Left;
-//					}
-//					if (s.Bounds.Right > maxX)
-//					{
-//						maxX = s.Bounds.Right;
-//					}
 				}
 			}
 
 			// Add anything into the queue
-			if (queue.Count != 0)
-			{
+			//if (queue.Count != 0)
+			//{
 				// Check which side to add
-				if (delta > 0 && minX > minSpace)
+				if (delta > 0 && this.Rectangle.Height > minSpace)
 				{
 					// We have room on the left
-					Sprite ns = (Sprite) queue.Peek();
-					ns.Y = manager.TickerPadding.Top + Coordinates.Y;
-					ns.X = x1 - ns.Size.Width;
-					display.Add(ns);
+					//Sprite ns = (Sprite) queue.Peek();
+					//ns.Y = manager.TickerPadding.Top + Coordinates.Y;
+					//ns.X = x1 - ns.Size.Width;
+				//	display.Add(ns);
 				}
-				else if (delta < 0 && x2 - maxX > minSpace)
+				else if (delta < 0 && this.Rectangle.Height > minSpace)
 				{
 					// We have room on the right
-					Sprite ns = (Sprite) queue.Peek();
-					ns.Y = manager.TickerPadding.Top + Coordinates.Y;
-					ns.X = x2;
-					ns.Rectangle = new Rectangle(ns.X, ns.Y, ns.Size.Width, ns.Size.Height);
-					display.Add(ns);
-				}
+					//Sprite ns = (Sprite) queue.Peek();
+				//	ns.Y = manager.TickerPadding.Top + Coordinates.Y;
+					//ns.X = x2;
+					//ns.Rectangle = new Rectangle(ns.X, ns.Y, ns.Size.Width, ns.Size.Height);
+				//	display.Add(ns);
+			//	}
 			}
 		}
 		#endregion
@@ -268,33 +199,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public bool IsHidden
 		{
-			get { return (isAutoHide && display.Count == 0); }
+			get { return (isAutoHide && this.Sprites.Count == 0); }
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Surface Surface
-		{
-			get
-			{
-				Sprite s = new Sprite(Video.Screen.CreateCompatibleSurface(this.Size)); 
-				if (this.queue.Count != 0)
-				{
-					s = (Sprite)this.queue.Peek();
-				}
-				//Surface surf = Video.Screen.CreateCompatibleSurface(this.Size);
-				//surf.Blit(s.Surface, s.Rectangle);
-
-				return s.Surface;
-				//return surf;
-			}
-			set
-			{
-				base.Surface = value;
-			}
-		}
-
 
 		/// <summary>
 		/// Delta is the number of pixels that the ticker should move per
