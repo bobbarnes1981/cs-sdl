@@ -26,7 +26,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class BoundedSprite : AnimatedSprite
+	public class BoundedSprite : AnimatedDemoSprite
 	{
 		private Rectangle bounds = new Rectangle();
 

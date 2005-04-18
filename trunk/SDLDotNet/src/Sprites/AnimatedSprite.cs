@@ -27,13 +27,13 @@ namespace SdlDotNet.Sprites
 	/// <summary>
 	/// 
 	/// </summary>
-	public class DrawableSprite : Sprite
+	public class AnimatedSprite : Sprite
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="surfaces"></param>
-		public DrawableSprite(SurfaceCollection surfaces)
+		public AnimatedSprite(SurfaceCollection surfaces)
 			: base(surfaces[0])
 		{
 			this.surfaces.Add(surfaces);
@@ -44,7 +44,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="surfaces"></param>
 		/// <param name="frame"></param>
-		public DrawableSprite(SurfaceCollection surfaces, int frame)
+		public AnimatedSprite(SurfaceCollection surfaces, int frame)
 			: base(surfaces[0])
 		{
 			this.surfaces.Add(surfaces);
@@ -56,7 +56,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="surfaces"></param>
 		/// <param name="position"></param>
-		public DrawableSprite(SurfaceCollection surfaces, Point position)
+		public AnimatedSprite(SurfaceCollection surfaces, Point position)
 			: base(surfaces[0], position)
 		{
 			this.surfaces.Add(surfaces);
@@ -67,7 +67,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="surfaces"></param>
 		/// <param name="coordinates"></param>
-		public DrawableSprite(SurfaceCollection surfaces, Vector coordinates)
+		public AnimatedSprite(SurfaceCollection surfaces, Vector coordinates)
 			: base(surfaces[0], coordinates)
 		{
 			this.surfaces.Add(surfaces);
@@ -79,7 +79,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="surfaces"></param>
 		/// <param name="frame"></param>
 		/// <param name="position"></param>
-		public DrawableSprite(SurfaceCollection surfaces, int frame, Point position)
+		public AnimatedSprite(SurfaceCollection surfaces, int frame, Point position)
 			: base(surfaces[0], position)
 		{
 			this.surfaces = surfaces;
@@ -92,7 +92,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="surfaces"></param>
 		/// <param name="frame"></param>
 		/// <param name="coordinates"></param>
-		public DrawableSprite(SurfaceCollection surfaces, int frame, Vector coordinates)
+		public AnimatedSprite(SurfaceCollection surfaces, int frame, Vector coordinates)
 			: base(surfaces[0], coordinates)
 		{
 			this.surfaces = surfaces;
@@ -190,6 +190,14 @@ namespace SdlDotNet.Sprites
 				}
 			}
 		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="args"></param>
+//		public override void Update(TickEventArgs args)
+//		{
+//				this.Frame++;
+//		}
 		#endregion
 
 		#region Properties

@@ -27,7 +27,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class ClickSprite : AnimatedSprite
+	public class ClickSprite : AnimatedDemoSprite
 	{
 		private SurfaceCollection d1 = null;
 		private SurfaceCollection d2 = null;
