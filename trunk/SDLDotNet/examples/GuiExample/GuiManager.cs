@@ -588,6 +588,20 @@ namespace SdlDotNet.Examples.GuiExample
 		private Size size = Size.Empty;
 
 		private Color titleColor = Color.FromArgb(250, 250, 250);
+		/// <summary>
+		/// 
+		/// </summary>
+		public Color TitleColor
+		{
+			get
+			{
+				return titleColor;
+			}
+			set
+			{
+				titleColor = value;
+			}
+		}
 		private int titleHorzPad = 3;
 		private int dragZOrder = 10000;
 

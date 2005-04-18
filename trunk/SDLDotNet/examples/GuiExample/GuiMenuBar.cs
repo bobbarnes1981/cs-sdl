@@ -36,26 +36,26 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="x1"></param>
-		/// <param name="x2"></param>
-		/// <param name="baselineY"></param>
-		public GuiMenuBar(GuiManager manager, int x1, int x2, int baselineY)
-			: base(manager)
+		/// <param name="gui"></param>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="height"></param>
+		public GuiMenuBar(GuiManager gui, int x, int y, int height)
+			: base(gui, x, y, height)
 		{
-			//Coordinates.Z = 10000;
-			this.x1 = x1;
-			this.x2 = x2;
-			this.baselineY = baselineY;
+			this.Z = 10000;
+			//			this.x1 = x1;
+			//			this.x2 = x2;
+			//			this.baselineY = baselineY;
 		}
 
 		#region Drawing
-//		public new void Render(RenderArgs args)
-//		{
-//			// Draw ourselves, then our components
-//			manager.Render(args, this);
-//			base.Render(args);
-//		}
+		//		public new void Render(RenderArgs args)
+		//		{
+		//			// Draw ourselves, then our components
+		//			manager.Render(args, this);
+		//			base.Render(args);
+		//		}
 		#endregion
 
 		#region Sprites
@@ -66,6 +66,7 @@ namespace SdlDotNet.Examples.GuiExample
 		public void AddLeft(SpriteContainer s)
 		{
 			AddHead(s);
+			s.Position = new Point(0, 0);
 
 			if (s is GuiMenuTitle)
 			{
@@ -89,25 +90,25 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Geometry
-		private int x1 = 0;
-		private int x2 = 0;
-		private int baselineY = 0;
+	//	private int x1 = 0;
+	//	private int x2 = 0;
+//		private int baselineY = 0;
+
+		//		/// <summary>
+		//		/// 
+		//		/// </summary>
+		//		public Vector Coordinates
+		//		{
+		//			get { return new Vector(x1, baselineY, base.Coordinates.Z); }
+		//		}
 
 //		/// <summary>
 //		/// 
 //		/// </summary>
-//		public Vector Coordinates
+//		public override int HorizontalWidth
 //		{
-//			get { return new Vector(x1, baselineY, base.Coordinates.Z); }
+//			get { return x2 - x1; }
 //		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public override int HorizontalWidth
-		{
-			get { return x2 - x1; }
-		}
 
 		/// <summary>
 		/// 

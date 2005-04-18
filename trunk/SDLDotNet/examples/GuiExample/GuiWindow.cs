@@ -99,6 +99,8 @@ namespace SdlDotNet.Examples.GuiExample
 		private string title = null;
 		private Size titleSize = new Size();
 		private TextSprite titleSprite;
+		//public TextSprite TitleSprite
+
 
 		/// <summary>
 		/// 
@@ -118,6 +120,36 @@ namespace SdlDotNet.Examples.GuiExample
 				titleSize = this.GuiManager.GetTextSize(this.GuiManager.TitleFont, title);
 				//this.Sprites.Remove(titleSprite);
 				titleSprite.TextString = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Color TitleColor
+		{
+			get
+			{
+				return titleSprite.Color;
+			}
+			set
+			{
+				titleSprite.Color = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Color TitleBackgroundColor
+		{
+			get
+			{
+				return titleSprite.BackgroundColor;
+			}
+			set
+			{
+				titleSprite.BackgroundColor = value;
 			}
 		}
 		#endregion

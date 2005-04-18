@@ -184,23 +184,23 @@ namespace SdlDotNet.Examples.GuiExample
 			get { return base.GuiManager.MenuItemPadding; }
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override int HorizontalWidth
-		{
-			get
-			{
-				//if (menu == null)
-				//{
-					return base.HorizontalWidth;
-				//}
-				//else
-				//{
-				//	return menu.Size.Width;
-				//}
-			}
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override int HorizontalWidth
+//		{
+//			get
+//			{
+//				//if (menu == null)
+//				//{
+//					return base.HorizontalWidth;
+//				//}
+//				//else
+//				//{
+//				//	return menu.Size.Width;
+//				//}
+//			}
+//		}
 		#endregion
 	}
 

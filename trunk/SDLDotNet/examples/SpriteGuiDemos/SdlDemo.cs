@@ -119,7 +119,7 @@ namespace SdlDotNet.Examples
 
 			// Set up the ticker
 			statusTicker = new GuiTicker(gui, 0, Size.Height - 20, 20);
-			statusTicker.IsAutoHide = true;
+			//statusTicker.IsAutoHide = true;
 			//statusTicker.Rectangle = new Rectangle(0, 0, 800, 20);
 			statusTicker.Z = 3000;
 			master.Add(statusTicker);
@@ -145,27 +145,30 @@ namespace SdlDotNet.Examples
 		private void CreateMenu(GuiManager gui)
 		{
 			// Create the menu
-			gmb = new GuiMenuBar(gui, 0, 800, 0);
+			gmb = new GuiMenuBar(gui, 0, 1, 20);
 			//gmb.IsTickable = false;
+			gmb.Sprites.EnableTickEvent();
 			master.Add(gmb);
 
 			// Create the demo menu
 			demoMenu = new GuiMenuTitle(gui, "Demo");
+			demoMenu.Sprites.EnableTickEvent();
+			//master.Add(demoMenu);
 			gmb.AddLeft(demoMenu);
 
 			// Create the FPS menu
-			GuiMenuTitle gm = new GuiMenuTitle(gui, "FPS");
-			gmb.AddLeft(gm);
-      
-			for (int i = 0; i < fpsSpeeds.Length; i++)
-			{
-				int spd = fpsSpeeds[i];
-
-				GuiMenuItem fmi = new GuiMenuItem(gui, spd + " FPS");
-				//fmi.ItemSelectedEvent += new MenuItemHandler(OnMenuFps);
-				//fmi.IsTickable = false;
-				gm.Add(fmi);
-			}
+//			GuiMenuTitle gm = new GuiMenuTitle(gui, "FPS");
+//			gmb.AddLeft(gm);
+//      
+//			for (int i = 0; i < fpsSpeeds.Length; i++)
+//			{
+//				int spd = fpsSpeeds[i];
+//
+//				GuiMenuItem fmi = new GuiMenuItem(gui, spd + " FPS");
+//				//fmi.ItemSelectedEvent += new MenuItemHandler(OnMenuFps);
+//				//fmi.IsTickable = false;
+//				gm.Add(fmi);
+//			}
 		}
 
 		private void CreateMenuQuit(GuiManager gui)

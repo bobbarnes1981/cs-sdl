@@ -37,8 +37,8 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(manager)
 		{
 			this.menubar = menubar;
-			//this.popup = new GuiMenuPopup(manager);
-			//this.popup.Controller = this;
+			this.popup = new GuiMenuPopup(manager);
+			this.popup.Controller = this;
 		}
 
 		/// <summary>
@@ -50,10 +50,11 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(manager)
 		{
 			this.menubar = menubar;
-			//this.popup = new GuiMenuPopup(manager);
-			//this.popup.Controller = this;
+			this.popup = new GuiMenuPopup(manager);
+			this.popup.Controller = this;
       
 			TextSprite ts = new TextSprite(title, manager.BaseFont);
+			this.Size = ts.Size;
 			AddHead(ts);
 		}
 
@@ -122,7 +123,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="gmi"></param>
 		public void Add(GuiMenuItem gmi)
 		{
-			//popup.Add(gmi);
+			popup.Add(gmi);
 		}
 		#endregion
 
@@ -188,6 +189,7 @@ namespace SdlDotNet.Examples.GuiExample
 //				  popup.OnTick(args);
 //					*/
 //		}
+
 		#endregion
 
 		#region Operators
@@ -202,8 +204,8 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Properties
-		private GuiMenuBar menubar = null;
-		//private GuiMenuPopup popup = null;
+		private GuiMenuBar menubar;
+		private GuiMenuPopup popup;
 
 		private bool selected = false;
 
@@ -225,10 +227,13 @@ namespace SdlDotNet.Examples.GuiExample
 			set { menubar = value; }
 		}
 
-//		public GuiMenuPopup Popup
-//		{
-//			get { return popup; }
-//		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public GuiMenuPopup Popup
+		{
+			get { return popup; }
+		}
 		#endregion
 	}
 }

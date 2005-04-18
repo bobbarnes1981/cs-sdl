@@ -505,6 +505,36 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Height
+		{
+			get
+			{
+				return this.rect.Height;
+			}
+			set
+			{
+				this.rect.Height = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Width
+		{
+			get
+			{
+				return this.rect.Width;
+			}
+			set
+			{
+				this.rect.Width = value;
+			}
+		}
+
 //		private bool dirty = false;
 //
 //		/// <summary>
@@ -743,6 +773,25 @@ namespace SdlDotNet.Sprites
 				beingDragged = value;
 			}
 		}
+
+		private bool visible = true;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool Visible
+		{
+			get
+			{
+				return visible;
+			}
+			set
+			{
+				visible = value;
+			}
+		}
+
+
 
 
 
