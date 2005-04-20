@@ -37,7 +37,6 @@ namespace SdlDotNet.Examples.GuiExample
 		public GuiMenuPopup(GuiManager manager)
 			: base(manager, new Vector(1000))
 		{
-			//IsHidden = true;
 		}
 
 		/// <summary>
@@ -50,41 +49,47 @@ namespace SdlDotNet.Examples.GuiExample
 		}
 
 		#region Drawing
-//		public override void Render(RenderArgs args)
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <returns></returns>
+//		public override Surface Render()
 //		{
 //			// We use the same formula as the horizontal packer to find out
 //			// our own offset. This is used to handle the mouse events
 //			// because the EventLock does not translate the values before
 //			// sending it.
-//			RenderArgs args0 = args.Clone();
-//			args0.TranslateX += Coordinates.X + OuterPadding.Left + InnerPadding.Left;
-//			args0.TranslateY += Coordinates.Y + OuterPadding.Top + InnerPadding.Top;
-//			translate = args0.Point;
+//			//RenderArgs args0 = args.Clone();
+//			//args0.TranslateX += Coordinates.X + OuterPadding.Left + InnerPadding.Left;
+//			//args0.TranslateY += Coordinates.Y + OuterPadding.Top + InnerPadding.Top;
+//		//	translate = args0.Point;
 //
 //			// Check for exceeding
-//			int right = translate.X + Size.Width + manager.MenuTitlePadding.Right;
-//			if (right > manager.Size.Width)
+//			//int right = translate.X + Size.Width + manager.MenuTitlePadding.Right;
+//			int right = Size.Width;
+//			if (right > this.GuiManager.Size.Width)
 //			{
 //				// We have to adjust things over
-//				int off = right - manager.Size.Width;
-//				args = args.Clone();
-//				args.TranslateX -= off;
-//				translate.X -= off;
+//				int off = right - this.GuiManager.Size.Width;
+//				//args = args.Clone();
+//				//args.TranslateX -= off;
+//				//translate.X -= off;
 //			}
 //
 //			// Draw the element
-//			manager.Render(args, this);
-//			base.Render(args);
+//			//manager.Render(args, this);
+//			//base.Render(args);
 //
 //			// Trace the items
-//			if (IsTraced)
-//			{
-//				foreach (Sprite s in new ArrayList(Sprites))
+//			//if (IsTraced)
+//			//{
+//				foreach (Sprite s in Sprites)
 //				{
-//					Rectangle r = new Rectangle(translate, GetSize(s));
-//					GuiManager.DrawRect(args.Surface, r, manager.TraceColor);
+//					Rectangle r = new Rectangle(translate, s.Size);
+//					//GuiManager.DrawRect(args.Surface, r, manager.TraceColor);
 //				}
-//			}
+//			//}
+//			return this.Surface;
 //		}
 
 		/// <summary>
@@ -92,7 +97,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public void ShowMenu()
 		{
-			//IsHidden = false;
+			this.Visible = true;
 			//manager.SpriteContainer.EventLock = this;
 		}
 
@@ -101,11 +106,13 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public void HideMenu()
 		{
-//			IsHidden = true;
+			this.Visible = false;
 //			manager.SpriteContainer.EventLock = null;
 
 			if (controller != null)
+			{
 				controller.IsSelected = false;
+			}
 		}
 		#endregion
 
@@ -124,13 +131,13 @@ namespace SdlDotNet.Examples.GuiExample
 		#region Geometry
 		private Point translate = new Point();
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Padding OuterPadding
-		{
-			get { return base.GuiManager.MenuPopupPadding; }
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override Padding OuterPadding
+//		{
+//			get { return base.GuiManager.MenuPopupPadding; }
+//		}
 
 //		/// <summary>
 //		/// 
@@ -268,8 +275,8 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Properties
-		private GuiMenuItem selected = null;
-		private IMenuPopupController controller = null;
+		private GuiMenuItem selected;
+		private IMenuPopupController controller;
 		private int selectedIndex = 0;
 
 		/// <summary>

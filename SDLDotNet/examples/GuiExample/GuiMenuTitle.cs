@@ -20,6 +20,7 @@
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
+using System.Drawing;
 
 namespace SdlDotNet.Examples.GuiExample
 {
@@ -33,7 +34,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		public GuiMenuTitle(GuiManager manager)
+		/// <param name="menubar"></param>
+		public GuiMenuTitle(GuiManager manager, GuiMenuBar menubar)
 			: base(manager)
 		{
 			this.menubar = menubar;
@@ -46,7 +48,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		/// <param name="manager"></param>
 		/// <param name="title"></param>
-		public GuiMenuTitle(GuiManager manager, string title)
+		/// <param name="menubar"></param>
+		public GuiMenuTitle(GuiManager manager, GuiMenuBar menubar, string title)
 			: base(manager)
 		{
 			this.menubar = menubar;
@@ -54,7 +57,9 @@ namespace SdlDotNet.Examples.GuiExample
 			this.popup.Controller = this;
       
 			TextSprite ts = new TextSprite(title, manager.BaseFont);
-			this.Size = ts.Size;
+			ts.Color = Color.White;
+			this.Surface = ts.Surface;
+			this.Rectangle = this.Surface.Rectangle;
 			AddHead(ts);
 		}
 
@@ -63,8 +68,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get
 			{
-				//return OuterBounds.Left - manager.MenuTitlePadding.Left;
-				return this.Rectangle.Left - - base.GuiManager.MenuTitlePadding.Left;
+				return this.Rectangle.Left - this.GuiManager.MenuTitlePadding.Left;
 			}
 		}
 
@@ -72,48 +76,33 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get
 			{
-				return this.Rectangle.Bottom;
-				//return OuterBounds.Bottom;
-					//+ popup.OuterPadding.Top
-					//+ manager.MenuTitlePadding.Bottom
-					//+ manager.MenuBarPadding.Bottom;
+				return 
+					this.Rectangle.Bottom + 
+					this.GuiManager.MenuTitlePadding.Bottom + 
+					this.GuiManager.MenuBarPadding.Bottom;
 			}
 		}
 
-//		public new void Render(RenderArgs args)
-//		{
-//			// Draw ourselves
-//			manager.Render(args, this);
-//			base.Render(args);
-//
-//			// Push the args
-//			RenderArgs args1 = args.Clone();
-//			args1.TranslateX += PopupX;
-//			args1.TranslateY += PopupY;
-//
-//			// Check for tracing renders
-//			if (IsTraced)
-//			{
-//				// Put a small dot where the menu will show up
-//				int px = 0 + args.TranslateX;
-//				int py = 0 + args.TranslateY;
-//
-//				//Debug("ar: {0}, ar1: {1}", args.Vector, args1.Vector);
-//
-//				args.Surface.DrawPixel(px, py, System.Drawing.Color.BlanchedAlmond);
-//				GuiManager.DrawRect(args.Surface,
-//					args1.Translate(popup.OuterBounds),
-//					manager.OuterBoundsTraceColor);
-//			}
-//
-//			// Check for menu
-//			if (IsSelected)
-//			{
-//				popup.Coordinates.X = 0;
-//				popup.Coordinates.Y = 0;
-//				popup.Render(args1);
-//			}
-//		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override Surface Render()
+		{
+			// Draw ourselves
+			base.Render();
+
+			// Check for menu
+			//if (IsSelected)
+			//{
+				popup.X = 0;
+				popup.Y = 0;
+				popup.Render();
+			this.Surface.Blit(popup);
+			return this.Surface;
+
+			//}
+		}
 		#endregion
 
 		#region Sprites
@@ -134,24 +123,29 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(MouseButtonEventArgs args)
 		{
-			//			// Build up the translations
-			//			MouseButtonEventArgs args1 = args.Clone();
-			//			args1.TranslateX += PopupX;
-			//			args1.TranslateY += PopupY;
-
-			// Check for clicking down
-			//			if (!popup.IsHidden)
-			//			{
-			//				popup.OnMouseButtonDown(this, args);
-			//			}
-
-			if (args.ButtonPressed)
+			if (this.IntersectsWith(new Point(args.X + this.menubar.X, args.Y + this.menubar.Y)))
 			{
-				IsSelected = true;
-				//popup.ShowMenu();
-				//return true;
-			}
+				//			// Build up the translations
+				//			MouseButtonEventArgs args1 = args.Clone();
+				//			args1.TranslateX += PopupX;
+				//			args1.TranslateY += PopupY;
 
+				// Check for clicking down
+				//			if (!popup.IsHidden)
+				//			{
+				//				popup.OnMouseButtonDown(this, args);
+				//			}
+
+				if (args.ButtonPressed)
+				{
+					Console.WriteLine("TitleClicked");
+					IsSelected = true;
+					popup.Width = 30;
+					popup.Height = 100;
+					popup.ShowMenu();
+				}
+
+			}
 			//return false;
 		}
 

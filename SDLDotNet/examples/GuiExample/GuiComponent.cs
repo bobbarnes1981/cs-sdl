@@ -95,14 +95,14 @@ namespace SdlDotNet.Examples.GuiExample
 			this.manager = manager;
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <returns></returns>
-//		public override string ToString()
-//		{
-//			return String.Format("(gui {0})", Bounds, base.ToString());
-//		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return String.Format("(gui {0})", this.Rectangle, base.ToString());
+		}
 
 		#region Drawing
 		/// <summary>
@@ -112,8 +112,10 @@ namespace SdlDotNet.Examples.GuiExample
 		public override Surface Render()
 		{
 			this.Surface.Fill(manager.BackgroundColor);
-			this.Surface.DrawBox(new Rectangle(0, 0, this.Rectangle.Width, this.Rectangle.Height), manager.FrameColor);
-			base.Sprites.Draw(this.Surface);
+			this.Surface.DrawBox(
+				new Rectangle(0, 0, this.Rectangle.Width, this.Rectangle.Height),
+				manager.FrameColor);
+			this.Sprites.Draw(this.Surface);
 			return this.Surface;
 		}
 		#endregion
@@ -198,69 +200,6 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Geometry
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public Rectangle OuterBounds
-//		{
-//			get
-//			{
-//				return new Rectangle(new Point(OuterCoords.X, OuterCoords.Y), OuterSize);
-//			}
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public virtual Size OuterSize
-//		{
-//			get
-//			{
-//				return new Size(Size.Width + OuterPadding.Horizontal,
-//					Size.Height + OuterPadding.Vertical);
-//			}
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public virtual Vector OuterCoords
-//		{
-//			get
-//			{
-//				return new Vector(this.X - OuterPadding.Left,
-//					this.Y - OuterPadding.Top,
-//					this.Z);
-//			}
-//		}
-//
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual Padding OuterPadding
-		{
-			get { return new Padding(0); }
-		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="point"></param>
-//		/// <returns></returns>
-//		public override bool IntersectsWith(Point point)
-//		{
-//			return OuterBounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="rect"></param>
-//		/// <returns></returns>
-//		public override bool IntersectsWith(Rectangle rect)
-//		{
-//			return OuterBounds.IntersectsWith(rect);
-//		}
 		#endregion
 
 		#region Properties

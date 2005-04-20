@@ -44,18 +44,9 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(gui, x, y, height)
 		{
 			this.Z = 10000;
-			//			this.x1 = x1;
-			//			this.x2 = x2;
-			//			this.baselineY = baselineY;
 		}
 
 		#region Drawing
-		//		public new void Render(RenderArgs args)
-		//		{
-		//			// Draw ourselves, then our components
-		//			manager.Render(args, this);
-		//			base.Render(args);
-		//		}
 		#endregion
 
 		#region Sprites
@@ -90,26 +81,6 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Geometry
-	//	private int x1 = 0;
-	//	private int x2 = 0;
-//		private int baselineY = 0;
-
-		//		/// <summary>
-		//		/// 
-		//		/// </summary>
-		//		public Vector Coordinates
-		//		{
-		//			get { return new Vector(x1, baselineY, base.Coordinates.Z); }
-		//		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override int HorizontalWidth
-//		{
-//			get { return x2 - x1; }
-//		}
-
 		/// <summary>
 		/// 
 		/// </summary>

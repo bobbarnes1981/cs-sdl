@@ -76,111 +76,51 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Drawing
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override void Render(/*RenderArgs args*/)
-//		{
-//			// Handle our arguments
-//			RenderArgs args0 = args.Clone();
-//			args0.TranslateX += Coordinates.X + MarginPadding.Left + InnerPadding.Left;
-//			args0.TranslateY += Coordinates.Y + MarginPadding.Top + InnerPadding.Top;
-//
-//			// Call the base
-//			base.Render(args0);
-//
-//			// Draw all of our left components
-//			int x = 0;
-//
-//			foreach (Sprite s in HeadSprites)
-//			{
-//				// Ignore hidden
-//				if (s.IsHidden)
-//					continue;
-//	
-//				// Translate it and blit
-//				s.Coordinates.X = x;
-//				s.Render(args0);
-//
-//				// Update the coordinates for the next one
-//				x += s.Size.Width + InnerPadding.Horizontal;
-//			}
-//
-//			// Draw our right components
-//			x = Coordinates.X + Size.Width - MarginPadding.Right;
-//
-//			foreach (Sprite s in TailSprites)
-//			{
-//				// Ignore hidden
-//				if (s.IsHidden)
-//					continue;
-//	
-//				// Translate it and blit
-//				x -= s.Size.Width + InnerPadding.Horizontal;
-//				s.Coordinates.X = x;
-//				s.Render(args0);
-//			}
-//		}
-		#endregion
-
-		#region Geometry
 		/// <summary>
 		/// 
 		/// </summary>
-		public override Size Size
+		public override Surface Render()
 		{
-			get
+			this.Surface.Fill(this.GuiManager.BackgroundColor);
+			// Draw all of our left components
+			int x = 0;
+
+			foreach (Sprite s in HeadSprites)
 			{
-				// Get the height
-				//int height = 20;
-				//int width = 0;
-
-				// Get the sprites
-				foreach (Sprite s in this.Sprites)
+				// Ignore hidden
+				if (!s.Visible)
 				{
-					int h = s.Size.Height;
-					int w = s.Size.Width;
-
-					if (h > this.Height)
-					{
-						this.Height = h;
-					}
-					if (w > this.Width)
-					{
-						this.Width = w;
-					}
+					continue;
 				}
+	
+				// Translate it and blit
+				s.X = x;
 
-				// Add the padding
-//				height += 
-//					InnerPadding.Vertical + MarginPadding.Vertical;
-
-				//return new Size(HorizontalWidth, height);
-				return new Size(this.Width, this.Height);
-
+				// Update the coordinates for the next one
+				x += s.Size.Width + InnerPadding.Horizontal;
 			}
-		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public virtual int HorizontalWidth
-//		{
-//			get
-//			{
-//				// Go through the sprites
-//				int width = 0;
-//
-//				foreach (Sprite s in new ArrayList(Sprites))
-//				{
-//					int w = s.Size.Width;
-//
-//					width += w + InnerPadding.Horizontal;
-//				}
-//
-//				return width + MarginPadding.Horizontal;
-//			}
-//		}
+			// Draw our right components
+			x = this.X + Size.Width - MarginPadding.Right;
+
+			foreach (Sprite s in TailSprites)
+			{
+				// Ignore hidden
+				if (!s.Visible)
+				{
+					continue;
+				}
+	
+				// Translate it and blit
+				x -= s.Size.Width + InnerPadding.Horizontal;
+				s.X = x;
+			}
+			this.Sprites.Draw(this.Surface);
+			return this.Surface;
+		}
+		#endregion
+
+		#region Geometry
 		#endregion
 	}
 }

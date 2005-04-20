@@ -46,7 +46,9 @@ namespace SdlDotNet.Examples.GuiExample
 		public GuiMenuItem(GuiManager manager, string text)
 			: base(manager)
 		{
-			AddLeft(new TextSprite(text, manager.BaseFont));
+			TextSprite ts = new TextSprite(text, manager.BaseFont);
+			AddLeft(ts);
+			this.Visible = true;
 		}
 
 		#region Sprites
