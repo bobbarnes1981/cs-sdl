@@ -74,25 +74,6 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Sprites
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="s"></param>
-//		/// <returns></returns>
-//		protected Size GetSize(Sprite s)
-//		{
-//			// Get the size
-//			Size d = s.Size;
-//
-//			//			if (s is GuiComponent)
-//			//			{
-//			//				//d = ((GuiComponent) s).OuterSize;
-//			//				d = ((GuiComponent) s).Size;
-//			//			}
-//
-//			return d;
-//		}
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -103,7 +84,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			index = 0;
 
-			foreach (Sprite s in new ArrayList(Sprites))
+			foreach (Sprite s in Sprites)
 			{
 				if (s.IntersectsWith(point))
 				{
@@ -137,42 +118,23 @@ namespace SdlDotNet.Examples.GuiExample
 					// basic sprite (and not its parent).
 					if (s.IntersectsWith(p))
 					{
-						//s.OnMouseButtonDown(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
+						s.Update(new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
 					}
 				}
 			}
 			else 
 			{
-				
 				foreach (Sprite s in Sprites)
 				{
 					// Check the region. If it contains the point, we call the
 					// basic sprite (and not its parent).
 					if (s.IntersectsWith(p))
 					{
-						//s.OnMouseButtonUp(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
+						s.Update(new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
 					}
 				}
 			}
 		}
-
-		//		public override void Update(object sender, MouseButtonEventArgs args)
-		//		{
-		//			// We assume that the coordinates are set by the packing
-		//			// processing, so we can use them with the offset and
-		//			// coordinates.
-		//			Point p = new Point(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left), args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top));
-		//
-		//			foreach (Sprite s in Sprites)
-		//			{
-		//				// Check the region. If it contains the point, we call the
-		//				// basic sprite (and not its parent).
-		//				if (s.IntersectsWith(p))
-		//				{
-		//					s.OnMouseButtonUp(this, new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
-		//				}
-		//			}
-		//		}
 
 		/// <summary>
 		/// 
@@ -193,15 +155,15 @@ namespace SdlDotNet.Examples.GuiExample
 				// basic sprite (and not its parent).
 				if (s.IntersectsWith(p))
 				{
-					//s.OnMouseMotion(this, args1);
+					s.Update(args1);
 				}
 			}
 		}
 		#endregion
 
 		#region Properties
-		private ArrayList head = new ArrayList();
-		private ArrayList tail = new ArrayList();
+		private SpriteCollection head = new SpriteCollection();
+		private SpriteCollection tail = new SpriteCollection();
 
 		/// <summary>
 		/// 
@@ -226,7 +188,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual ArrayList HeadSprites
+		public SpriteCollection HeadSprites
 		{
 			get 
 			{ 
@@ -237,26 +199,13 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual ArrayList TailSprites
+		public SpriteCollection TailSprites
 		{
 			get 
 			{ 
 				return tail; 
 			}
 		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public new virtual ArrayList Sprites
-//		{
-//			get
-//			{
-//				ArrayList list = new ArrayList(head);
-//				list.AddRange(tail);
-//				return list;
-//			}
-//		}
 
 		/// <summary>
 		/// 

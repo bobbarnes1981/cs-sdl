@@ -124,6 +124,47 @@ namespace SdlDotNet.Examples.GuiExample
 //				s.Render(args0);
 //			}
 //		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public override Surface Render()
+		{
+			// Draw all of our left components
+			int y = 0;
+
+			foreach (Sprite s in HeadSprites)
+			{
+				// Ignore hidden
+				if (!s.Visible)
+				{
+					continue;
+				}
+	
+				// Translate it and blit
+				s.Y = y;
+
+				// Update the coordinates for the next one
+				y += s.Size.Height + InnerPadding.Vertical;
+			}
+
+			// Draw our right components
+			y = this.Y + Size.Height - MarginPadding.Bottom;
+
+			foreach (Sprite s in TailSprites)
+			{
+				// Ignore hidden
+				if (!s.Visible)
+				{
+					continue;
+				}
+	
+				// Translate it and blit
+				y -= s.Size.Height + InnerPadding.Vertical;
+				s.Y = y;
+			}
+			this.Sprites.Draw(this.Surface);
+			return this.Surface;
+		}
 		#endregion
 
 		#region Geometry

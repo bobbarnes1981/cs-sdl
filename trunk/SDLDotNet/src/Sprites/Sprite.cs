@@ -394,6 +394,10 @@ namespace SdlDotNet.Sprites
 		{
 			get 
 			{ 
+				if (rect.IsEmpty)
+				{
+					this.rect = this.surf.Rectangle;
+				}
 				return this.rect;
 			}
 			set
@@ -488,14 +492,6 @@ namespace SdlDotNet.Sprites
 		{
 			get 
 			{ 
-//				if (surf != null)
-//				{
-//					return surf.Size; 
-//				}
-//				else
-//				{
-//					return new Size(0,0);
-//				}
 				return new Size(rect.Width, rect.Height);
 			}
 			set

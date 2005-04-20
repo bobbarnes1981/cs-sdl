@@ -70,7 +70,7 @@ namespace SdlDotNet.Examples
 			Sprites.Add(gw);
 
 			// Create the menus
-			//CreateMenus(manager, Sprites);
+			CreateMenus(manager, Sprites);
 
 			// Create the ticker
 			ticker = new GuiTicker(manager, 0, 500, 64);
@@ -82,53 +82,56 @@ namespace SdlDotNet.Examples
 			ticker.Sprites.EnableTickEvent();
 		}
 
-		//		/// <summary>
-		//		/// 
-		//		/// </summary>
-		//		/// <param name="gui"></param>
-		//		/// <param name="sm"></param>
-		//		public void CreateMenus(GuiManager gui, SpriteCollection sm)
-		//		{
-		//			// Create the menubar
-		//			Size dd = SdlDemo.Sprites.Size;
-		//			GuiMenuBar gmb = new GuiMenuBar(gui, 0, dd.Width, 30);
-		//			sm.Add(gmb);
-		//
-		//			// First menu
-		//			GuiMenuTitle gm = new GuiMenuTitle(gui, "Test Menu");
-		//			gmb.AddLeft(gm);
-		//
-		//			// Create a menu items
-		//			gm.Add(new GuiMenuItem(gui, "Test #1"));
-		//			gm.Add(new GuiMenuItem(gui, "Test #2"));
-		//
-		//			GuiMenuItem gmi3 = new GuiMenuItem(gui);
-		//			gmi3.AddLeft(new AnimatedDemoSprite(LoadRandomMarble(), new Point(0, 0)));
-		//			gmi3.AddLeft(new TextSprite("Create New Window", gui.BaseFont));
-		//			gm.Add(gmi3);
-		//			gmi3.ItemSelectedEvent += new MenuItemHandler(OnCreateNewWindow);
-		//
-		//			// Create the first menu
-		//			gm.Add(new GuiMenuItem(gui, "Test #3"));
-		//			gm.Add(new GuiMenuItem(gui, "Test #4"));
-		//
-		//			// Create the second
-		//			GuiMenuTitle gm2 = new GuiMenuTitle(gui, "Test #2");
-		//			GuiMenuItem gmi2 = new GuiMenuItem(gui, "Test 2.1");
-		//			gmb.AddLeft(gm2);
-		//			//gm2.Popup.Add(gmi2);
-		//			//gm2.Popup.Add(new GuiMenuItem(gui, "Test 2.2"));
-		//			//gm2.IsTraced = true;
-		//			//gm2.Popup.IsTraced = true;
-		//			//gmi2.IsTraced = true;
-		//
-		//			// Create a third menu
-		//			GuiMenuTitle gm3 = new GuiMenuTitle(gui, "Right Menu");
-		//			//gm3.Popup.Add(new GuiMenuItem(gui, "Test #6"));
-		//			//gm3.Popup.Add(new GuiMenuItem(gui, "Really Long Title for a Menu Item"));
-		//			gmb.AddRight(new TextSprite("NonMenu", gui.BaseFont));
-		//			gmb.AddRight(gm3);
-		//		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gui"></param>
+		/// <param name="sm"></param>
+		public void CreateMenus(GuiManager gui, SpriteCollection sm)
+		{
+			// Create the menubar
+			//Size dd = SdlDemo.Sprites.Size;
+			GuiMenuBar gmb = new GuiMenuBar(gui, 0, 40, 20);
+			gmb.Sprites.EnableMouseButtonEvent();
+			sm.Add(gmb);
+		
+			// First menu
+			GuiMenuTitle gm = new GuiMenuTitle(gui, gmb, "Test Menu");
+			//gm.MenuBar = gmb;
+			gm.Sprites.EnableMouseButtonEvent();
+			gmb.AddLeft(gm);
+		
+			// Create a menu items
+			gm.Add(new GuiMenuItem(gui, "Test #1"));
+			gm.Add(new GuiMenuItem(gui, "Test #2"));
+		
+			GuiMenuItem gmi3 = new GuiMenuItem(gui);
+			gmi3.AddLeft(new AnimatedDemoSprite(LoadRandomMarble(), new Point(0, 0)));
+			gmi3.AddLeft(new TextSprite("Create New Window", gui.BaseFont));
+			gm.Add(gmi3);
+			gmi3.ItemSelectedEvent += new MenuItemHandler(OnCreateNewWindow);
+		
+			// Create the first menu
+			gm.Add(new GuiMenuItem(gui, "Test #3"));
+			gm.Add(new GuiMenuItem(gui, "Test #4"));
+		
+			// Create the second
+			GuiMenuTitle gm2 = new GuiMenuTitle(gui, gmb, "Test #2");
+			GuiMenuItem gmi2 = new GuiMenuItem(gui, "Test 2.1");
+			gmb.AddLeft(gm2);
+			gm2.Popup.Add(gmi2);
+			gm2.Popup.Add(new GuiMenuItem(gui, "Test 2.2"));
+			//gm2.IsTraced = true;
+			//gm2.Popup.IsTraced = true;
+			//gmi2.IsTraced = true;
+		
+			// Create a third menu
+			GuiMenuTitle gm3 = new GuiMenuTitle(gui, gmb, "Right Menu");
+			gm3.Popup.Add(new GuiMenuItem(gui, "Test #6"));
+			gm3.Popup.Add(new GuiMenuItem(gui, "Really Long Title for a Menu Item"));
+			//gmb.AddRight(new TextSprite("NonMenu", gui.BaseFont));
+			gmb.AddRight(gm3);
+		}
 
 		/// <summary>
 		/// Adds the internal sprite manager to the outer one.

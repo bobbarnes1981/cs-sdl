@@ -148,35 +148,36 @@ namespace SdlDotNet.Examples
 			gmb = new GuiMenuBar(gui, 0, 1, 20);
 			//gmb.IsTickable = false;
 			gmb.Sprites.EnableTickEvent();
+			gmb.Sprites.EnableMouseButtonEvent();
 			master.Add(gmb);
 
 			// Create the demo menu
-			demoMenu = new GuiMenuTitle(gui, "Demo");
+			demoMenu = new GuiMenuTitle(gui, gmb, "Demo");
 			demoMenu.Sprites.EnableTickEvent();
+			demoMenu.Sprites.EnableMouseButtonEvent();
 			//master.Add(demoMenu);
 			gmb.AddLeft(demoMenu);
 
 			// Create the FPS menu
-//			GuiMenuTitle gm = new GuiMenuTitle(gui, "FPS");
-//			gmb.AddLeft(gm);
-//      
-//			for (int i = 0; i < fpsSpeeds.Length; i++)
-//			{
-//				int spd = fpsSpeeds[i];
-//
-//				GuiMenuItem fmi = new GuiMenuItem(gui, spd + " FPS");
-//				//fmi.ItemSelectedEvent += new MenuItemHandler(OnMenuFps);
-//				//fmi.IsTickable = false;
-//				gm.Add(fmi);
-//			}
+			GuiMenuTitle gm = new GuiMenuTitle(gui, gmb, "FPS");
+			gmb.AddLeft(gm);
+      
+			for (int i = 0; i < fpsSpeeds.Length; i++)
+			{
+				int spd = fpsSpeeds[i];
+
+				GuiMenuItem fmi = new GuiMenuItem(gui, spd + " FPS");
+				fmi.ItemSelectedEvent += new MenuItemHandler(OnMenuFps);
+				//fmi.IsTickable = false;
+				gm.Add(fmi);
+			}
 		}
 
 		private void CreateMenuQuit(GuiManager gui)
 		{
-			//demoMenu.Add(new GuiMenuSpacer(demoMenu));
 			GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
 			gmi.AddRight(new TextSprite("Q", gui.BaseFont));
-			//gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuQuit);
+			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuQuit);
 			//gmi.IsTickable = false;
 			demoMenu.Add(gmi);
 		}
@@ -185,7 +186,7 @@ namespace SdlDotNet.Examples
 		#region Demos
 		private ArrayList demos = new ArrayList();
 
-		private static DemoMode currentDemo = null;
+		private static DemoMode currentDemo;
 
 		/// <summary>
 		/// 
@@ -201,7 +202,6 @@ namespace SdlDotNet.Examples
 		private void LoadDemo(DemoMode mode)
 		{
 			// Add to the array list
-			//Debug("Loading demo {0}", mode);
 			demos.Add(mode);
 
 			// Figure out the counter
@@ -209,20 +209,12 @@ namespace SdlDotNet.Examples
 
 			// Add the graphical menu
 			GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
-			gmi.AddRight(new TextSprite(String.Format("{0}", cnt),
-				gui.BaseFont));
-			//gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuDemo);
+//			gmi.AddRight(new TextSprite(String.Format("{0}", cnt),
+//				gui.BaseFont));
+//			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuDemo);
 			//gmi.IsTickable = false;
-			//demoMenu.Add(gmi);
+			demoMenu.Add(gmi);
 		}
-//		private void LoadDemo(DemoMode mode)
-//		{
-//			// Add to the array list
-//			demos.Add(mode);
-//
-//			// Figure out the counter
-//			int cnt = demos.Count;
-//		}
 
 		private void LoadDemos()
 		{
@@ -238,6 +230,9 @@ namespace SdlDotNet.Examples
 			LoadDemo(new ViewportMode());
 			LoadDemo(new MultipleMode());
 			LoadDemo(new GuiMode());
+
+			// Finish up the gui
+			CreateMenuQuit(gui);
 		}
 
 		private void StopDemo()
@@ -332,7 +327,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public void OnTick(object sender, TickEventArgs args)
+		private void OnTick(object sender, TickEventArgs args)
 		{	
 			screen.Fill(Color.Black);
 			if (currentDemo != null)
@@ -341,6 +336,21 @@ namespace SdlDotNet.Examples
 			}
 			screen.Blit(master); 
 			screen.Update();
+		}
+
+		private void OnMenuDemo(int index)
+		{
+			SwitchDemo(index);
+		}
+
+		private void OnMenuFps(int index)
+		{
+			Events.TicksPerSecond = fpsSpeeds[index];
+		}
+
+		private void OnMenuQuit(int index)
+		{
+			running = false;
 		}
 
 		/// <summary>
