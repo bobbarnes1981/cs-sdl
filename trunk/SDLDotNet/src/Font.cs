@@ -229,7 +229,7 @@ namespace SdlDotNet
 			{ 
 				if (value == true)
 				{
-					SdlTtf.TTF_SetFontStyle(handle, (int) Styles.Normal); 
+					SdlTtf.TTF_SetFontStyle(handle, (int) Styles.None); 
 					GC.KeepAlive(this);
 				}
 			}

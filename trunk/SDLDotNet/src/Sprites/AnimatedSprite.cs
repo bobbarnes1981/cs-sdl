@@ -105,41 +105,6 @@ namespace SdlDotNet.Sprites
 		private int frame;
 
 		/// <summary>
-		/// Returns the current frame. For almost all drawables, this is
-		/// the same as the "[0]" accessor. For sprites and other animated
-		/// drawables, this returns whatever frame is consider "current".
-		/// </summary>
-		public override Surface Surface
-		{
-			get
-			{
-				if (surfaces == null || surfaces[frame] == null)
-				{
-					throw new DrawableException("No drawable to return");
-				}
-				//base.Surface = surfaces[frame];
-
-				//return base.Surface;
-				return surfaces[frame];
-			}
-			set
-			{
-				this.surfaces.Insert(0, value);
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override Surface Render()
-		{
-			return this.Surface;
-		}
-
-
-
-		/// <summary>
 		/// Retrieves the drawable associated with this sprite. This will
 		/// never return null (it will throw an exception if there is no
 		/// drawable).
@@ -190,34 +155,9 @@ namespace SdlDotNet.Sprites
 				}
 			}
 		}
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="args"></param>
-//		public override void Update(TickEventArgs args)
-//		{
-//				this.Frame++;
-//		}
 		#endregion
 
 		#region Properties
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override Size Size
-//		{
-//			get
-//			{
-//				if (surfaces == null)
-//				{
-//					throw new DrawableException("No size for this drawable");
-//				}
-//				else
-//				{
-//					return surfaces.Size;
-//				}
-//			}
-//		}
 		#endregion
 	}
 }

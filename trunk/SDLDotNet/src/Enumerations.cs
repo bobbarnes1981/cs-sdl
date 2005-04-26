@@ -289,7 +289,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Normal
 		/// </summary>
-		Normal = SdlTtf.TTF_STYLE_NORMAL,
+		None = SdlTtf.TTF_STYLE_NORMAL,
 		/// <summary>
 		/// Bold
 		/// </summary>

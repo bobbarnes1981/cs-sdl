@@ -230,6 +230,8 @@ namespace SdlDotNet.Examples
 			LoadDemo(new ViewportMode());
 			LoadDemo(new MultipleMode());
 			LoadDemo(new GuiMode());
+			master.Add(demoMenu.Popup);
+
 
 			// Finish up the gui
 			CreateMenuQuit(gui);

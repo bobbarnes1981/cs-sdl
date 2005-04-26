@@ -30,14 +30,6 @@ namespace SdlDotNet.Sprites
 	/// </summary>
 	public class TextSprite : Sprite
 	{
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public TextSprite()
-//			: base()
-//		{
-//		}
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -45,11 +37,13 @@ namespace SdlDotNet.Sprites
 		/// <param name="font"></param>
 		public TextSprite(
 			string textItem, 
-			SdlDotNet.Font font)
+			SdlDotNet.Font font) : base(font.Render(textItem, Color.White))
 		{
-			base.Position = new Point(0, 0);
 			this.textItem = textItem;
 			this.font = font;
+			//this.Surface = font.Render(TextString, color);
+			//this.Rectangle = this.Surface.Rectangle;
+			//this.Position = new Point(0, 0);
 		}
 
 		/// <summary>
@@ -61,12 +55,14 @@ namespace SdlDotNet.Sprites
 		public TextSprite(
 			string textItem, 
 			SdlDotNet.Font font, 
-			Color color)
+			Color color) : base(font.Render(textItem, color))
 		{
-			base.Position = new Point(0, 0);
 			this.textItem = textItem;
 			this.font = font;
 			this.color = color;
+			//this.Surface = font.Render(TextString, color);
+			//this.Rectangle = this.Surface.Rectangle;
+			//this.Position = new Point(0, 0);
 		}
 		/// <summary>
 		/// 
@@ -83,6 +79,8 @@ namespace SdlDotNet.Sprites
 			: this(textItem, font, textColor)
 		{
 			this.backgroundColor = backgroundColor;
+			//this.Surface = font.Render(TextString, color);
+			//this.Position = new Point(0, 0);
 		}
 
 		/// <summary>
@@ -94,11 +92,9 @@ namespace SdlDotNet.Sprites
 		public TextSprite(
 			string textItem, 
 			SdlDotNet.Font font, 
-			Point position)
+			Point position) : this(textItem, font)
 		{
-			base.Position = position;
-			this.textItem = textItem;
-			this.font = font;
+			this.Position = position;
 		}
 
 		/// <summary>
@@ -128,10 +124,9 @@ namespace SdlDotNet.Sprites
 			string textItem, 
 			SdlDotNet.Font font,
 			Vector coordinates) 
-			: base(coordinates)
+			: this(textItem, font, coordinates.Point)
 		{
-			this.textItem = textItem;
-			this.font = font;
+			this.Z = coordinates.Z;
 		}
 
 		/// <summary>
@@ -158,14 +153,6 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public override Surface Render()
 		{
-			// Clear it
-			//this.Surface = null;
-
-			// Don't bother rendering if we don't have a text and a font
-//			if (TextString == null || font == null)
-//			{
-//				return this.Surface;
-//			}
 			if (TextString == null)
 			{
 				this.textItem = " ";
@@ -246,23 +233,12 @@ namespace SdlDotNet.Sprites
 			}
 			set 
 			{ 
+				if (value == null)
+				{
+					throw new SdlException("Cannot assign a null manager");
+				}
 				font = value; 
 				this.Surface = this.Render(); 
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Surface Surface
-		{
-			get
-			{
-				if (base.Surface == null)
-				{
-					base.Surface = this.Render();
-				}
-				return base.Surface;
 			}
 		}
 
@@ -278,7 +254,7 @@ namespace SdlDotNet.Sprites
 			set 
 			{ 
 				textItem = value; 
-				base.Surface = this.Render(); 
+				this.Surface = this.Render(); 
 			}
 		}
 		#endregion

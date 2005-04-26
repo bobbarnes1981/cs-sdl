@@ -36,14 +36,6 @@ namespace SdlDotNet
 		{
 		}
 
-		internal static VideoInfo Instance
-		{
-			get
-			{
-				return instance;
-			}
-		}
-
 		private static Sdl.SDL_VideoInfo VideoInfoStruct
 		{
 			get

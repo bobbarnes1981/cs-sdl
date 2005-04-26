@@ -34,7 +34,7 @@ namespace SdlDotNet
 		static private bool disposed;
 		static readonly Video instance = new Video();
 		static Mouse mouse = Mouse.Instance;
-		static VideoInfo videoInfo = VideoInfo.Instance;
+//		static VideoInfo videoInfo = VideoInfo.Instance;
 
 //		static Video()
 //		{
@@ -393,6 +393,18 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		/// <returns></returns>
+		public static Surface CreateRgbSurface(int width, int height)
+		{
+			return Video.CreateRgbSurface(width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask, false);
+		}
+
+
+		/// <summary>
 		/// Mouse object
 		/// </summary>
 		public static Mouse Mouse
@@ -402,17 +414,17 @@ namespace SdlDotNet
 				return Video.mouse;
 			}
 		}
-
-		/// <summary>
-		/// Returns VideoInfo object
-		/// </summary>
-		public static VideoInfo VideoInfo
-		{
-			get
-			{
-				return Video.videoInfo;
-			}
-		}
+//
+//		/// <summary>
+//		/// Returns VideoInfo object
+//		/// </summary>
+//		public static VideoInfo VideoInfo
+//		{
+//			get
+//			{
+//				return Video.VideoInfo;
+//			}
+//		}
 
 		/// <summary>
 		/// Swaps the OpenGL screen, only if the double-buffered 

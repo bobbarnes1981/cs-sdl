@@ -27,7 +27,7 @@ namespace SdlDotNet.Examples.GuiExample
 	/// <summary>
 	/// This class handles one or more sprites packed into a line. The
 	/// sprites may be added to the beginning or the end of the line, as
-	/// the program desirs.
+	/// the program desires.
 	/// </summary>
 	public class Packer : GuiComponent
 	{
@@ -99,66 +99,6 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Events
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(MouseButtonEventArgs args)
-		{
-			// We assume that the coordinates are set by the packing
-			// processing, so we can use them with the offset and
-			// coordinates.
-			Point p = new Point(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left), args.Y - ((Coordinates.Y + MarginPadding.Top + InnerPadding.Top)));
-
-			if (args.ButtonPressed)
-			{
-				foreach (Sprite s in Sprites)
-				{
-					// Check the region. If it contains the point, we call the
-					// basic sprite (and not its parent).
-					if (s.IntersectsWith(p))
-					{
-						s.Update(new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
-					}
-				}
-			}
-			else 
-			{
-				foreach (Sprite s in Sprites)
-				{
-					// Check the region. If it contains the point, we call the
-					// basic sprite (and not its parent).
-					if (s.IntersectsWith(p))
-					{
-						s.Update(new MouseButtonEventArgs(args.Button, args.ButtonPressed, (short)(args.X - (Coordinates.X + MarginPadding.Left + InnerPadding.Left)), (short)(args.Y - (Coordinates.Y + MarginPadding.Top + InnerPadding.Top))));
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(MouseMotionEventArgs args)
-		{
-			// Build up the new point   
-			MouseMotionEventArgs args1 = new MouseMotionEventArgs(args.ButtonPressed, (short)(args.X + Coordinates.X + MarginPadding.Left + InnerPadding.Left), (short)(args.Y + Coordinates.Y + MarginPadding.Top + InnerPadding.Top), args.RelativeX, args.RelativeY);
-			// We assume that the coordinates are set by the packing
-			// processing, so we can use them with the offset and
-			// coordinates.
-			Point p = new Point(args1.X, args1.Y);
-
-			foreach (Sprite s in Sprites)
-			{
-				// Check the region. If it contains the point, we call the
-				// basic sprite (and not its parent).
-				if (s.IntersectsWith(p))
-				{
-					s.Update(args1);
-				}
-			}
-		}
 		#endregion
 
 		#region Properties

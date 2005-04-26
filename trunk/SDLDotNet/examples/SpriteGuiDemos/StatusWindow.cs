@@ -111,13 +111,9 @@ namespace SdlDotNet.Examples
 				(labelHeight
 				+ labelPad) * i + 2)));
 
-			// Add ourselves to the ticker
-			//this.EnableTickEvent();
-
 			// Adjust our height
 			i++;
 			int tempHeight = (labelHeight + labelPad) * i + 4;
-			//Size = new Size(this.Size.Width, tempHeight); 
 		}
 
 		#region Data Components
@@ -152,13 +148,7 @@ namespace SdlDotNet.Examples
 			{
 				mode.TextString = SdlDemo.CurrentDemo.ToString();
 			}
-//			this.Surface.Blit(Contents);
 		}
-
-//		public void EnableTickEvent()
-//		{
-//			Events.TickEvent += new TickEventHandler(this.OnTick);
-//		}
 		#endregion
 	}
 }

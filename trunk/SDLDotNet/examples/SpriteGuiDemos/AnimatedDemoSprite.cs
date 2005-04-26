@@ -77,6 +77,7 @@ namespace SdlDotNet.Examples
 			{
 				Frame--;
 			}
+			this.Surface = this.Surfaces[Frame];
 		}
 		#endregion
 

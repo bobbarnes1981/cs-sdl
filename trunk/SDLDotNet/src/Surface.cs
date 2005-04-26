@@ -118,7 +118,14 @@ namespace SdlDotNet
 		/// <param name="height"></param>
 		public Surface(int width, int height)
 		{
-			this.handle = Video.Screen.CreateCompatibleSurface(width, height).Handle;
+			if (Video.Screen == null)
+			{
+				this.handle = Video.CreateRgbSurface(width, height).Handle;
+			}
+			else
+			{
+				this.handle = Video.Screen.CreateCompatibleSurface(width, height).Handle;
+			}
 		}
 
 		/// <summary>
@@ -126,7 +133,8 @@ namespace SdlDotNet
 		/// </summary>
 		public Surface()
 		{
-			this.handle = Video.Screen.CreateCompatibleSurface(Video.Screen.Width, Video.Screen.Height).Handle;
+			this.handle = 
+				Video.Screen.CreateCompatibleSurface(Video.Screen.Width, Video.Screen.Height).Handle;
 		}
 
 		/// <summary>
