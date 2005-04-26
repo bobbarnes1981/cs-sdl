@@ -34,19 +34,6 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="menubar"></param>
-		public GuiMenuTitle(GuiManager manager, GuiMenuBar menubar)
-			: base(manager)
-		{
-			this.menubar = menubar;
-			this.popup = new GuiMenuPopup(manager);
-			this.popup.Controller = this;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
 		/// <param name="title"></param>
 		/// <param name="menubar"></param>
 		public GuiMenuTitle(GuiManager manager, GuiMenuBar menubar, string title)
@@ -55,11 +42,11 @@ namespace SdlDotNet.Examples.GuiExample
 			this.menubar = menubar;
 			this.popup = new GuiMenuPopup(manager);
 			this.popup.Controller = this;
+			//AddHead(this.popup);
       
-			TextSprite ts = new TextSprite(title, manager.BaseFont);
-			ts.Color = Color.White;
-			this.Surface = ts.Surface;
-			this.Rectangle = this.Surface.Rectangle;
+			TextSprite ts = new TextSprite(title, manager.MenuFont);
+			//this.Surface = ts.Surface;
+			this.Rectangle = ts.Rectangle;
 			AddHead(ts);
 		}
 
@@ -82,27 +69,6 @@ namespace SdlDotNet.Examples.GuiExample
 					this.GuiManager.MenuBarPadding.Bottom;
 			}
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override Surface Render()
-		{
-			// Draw ourselves
-			base.Render();
-
-			// Check for menu
-			//if (IsSelected)
-			//{
-				popup.X = 0;
-				popup.Y = 0;
-				popup.Render();
-			this.Surface.Blit(popup);
-			return this.Surface;
-
-			//}
-		}
 		#endregion
 
 		#region Sprites
@@ -123,6 +89,16 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(MouseButtonEventArgs args)
 		{
+			if (!popup.Visible)
+			{
+				popup.Update(args);
+				Video.Screen.Blit(popup.Render(), popup.Rectangle);
+			}
+			if (!args.ButtonPressed)
+			{
+				IsSelected = false;
+				popup.HideMenu();
+			}
 			if (this.IntersectsWith(new Point(args.X + this.menubar.X, args.Y + this.menubar.Y)))
 			{
 				//			// Build up the translations
@@ -140,50 +116,13 @@ namespace SdlDotNet.Examples.GuiExample
 				{
 					Console.WriteLine("TitleClicked");
 					IsSelected = true;
-					popup.Width = 30;
-					popup.Height = 100;
 					popup.ShowMenu();
+					//popup.Rectangle = new Rectangle(0,0,100,100);
+					//Video.Screen.Blit(popup.Render(), popup.Rectangle);
 				}
 
 			}
-			//return false;
 		}
-
-		//		/// <summary>
-		//		/// 
-		//		/// </summary>
-		//		/// <param name="sender"></param>
-		//		/// <param name="args"></param>
-		//		public override void Update(object sender, MouseButtonEventArgs args)
-		//		{
-		//			if (popup.IsHidden)
-		//			{
-		//				popup.OnMouseButtonUp(this, args);
-		//			}
-		//			if (!args.ButtonPressed)
-		//			{
-		//				IsSelected = false;
-		//				popup.HideMenu();
-		//				//return true;
-		//			}
-		//}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="args"></param>
-//		public override void Update(TickEventArgs args)
-//		{
-//			// Call our base's tick processing
-//			base.OnTick(this, args);
-//
-//			// If we are showing our menu, display it
-//			/* TODO This kills things
-//					if (IsSelected)
-//				  popup.OnTick(args);
-//					*/
-//		}
-
 		#endregion
 
 		#region Operators

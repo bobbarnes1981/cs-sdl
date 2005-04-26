@@ -34,28 +34,26 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public Sprite()
 		{
-			this.rect = new Rectangle(0, 0, 0, 0);
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="coordinates"></param>
-		public Sprite(Vector coordinates)
-		{
-			this.rect = 
-				new Rectangle(coordinates.X, coordinates.Y, 0, 0);
-			this.coordinateZ = coordinates.Z;
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="coordinates"></param>
+//		public Sprite(Vector coordinates)
+//		{
+//			this.rect = 
+//				new Rectangle(coordinates.X, coordinates.Y, 0, 0);
+//			this.coordinateZ = coordinates.Z;
+//		}
 
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="rectangle"></param>
-		public Sprite(Rectangle rectangle)
-		{
-			this.rect = rectangle;
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="rectangle"></param>
+//		public Sprite(Rectangle rectangle)
+//		{
+//			this.rect = rectangle;
+//		}
 //
 //		/// <summary>
 //		/// 
@@ -133,7 +131,6 @@ namespace SdlDotNet.Sprites
 		public Sprite(Surface surface, Point position)
 		{
 			this.rect = new Rectangle(position.X, position.Y, surface.Width, surface.Height);
-			//this.coordinateZ = 0;
 			this.surf = surface;
 		}
 
@@ -154,7 +151,6 @@ namespace SdlDotNet.Sprites
 		public Sprite(Surface surface)
 		{
 			this.rect = new Rectangle(0, 0, surface.Width, surface.Height);
-			//this.coordinateZ = 0;
 			this.surf = surface;
 		}
 
@@ -233,14 +229,13 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Surface Surface
+		public Surface Surface
 		{
 			get
 			{
 				if (this.surf == null)
 				{
-					this.surf = 
-						Video.Screen.CreateCompatibleSurface(this.Size);
+					this.surf = new Surface(this.Width, this.Height);				
 				}
 				return surf;
 			}
@@ -255,7 +250,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public virtual Surface Render()
 		{
-			return surf;
+			return this.surf;
 		}
 		#endregion
 
@@ -390,13 +385,13 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Rectangle Rectangle
+		public Rectangle Rectangle
 		{
 			get 
 			{ 
 				if (rect.IsEmpty)
 				{
-					this.rect = this.surf.Rectangle;
+					this.rect = this.Surface.Rectangle;
 				}
 				return this.rect;
 			}
@@ -409,7 +404,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Point Position
+		public Point Position
 		{
 			get 
 			{ 
@@ -427,7 +422,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Vector Coordinates
+		public Vector Coordinates
 		{
 			get
 			{
@@ -443,7 +438,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual int X
+		public int X
 		{
 			get
 			{
@@ -458,7 +453,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual int Y
+		public int Y
 		{
 			get
 			{
@@ -473,7 +468,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual int Z
+		public int Z
 		{
 			get
 			{
@@ -488,7 +483,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Size Size
+		public Size Size
 		{
 			get 
 			{ 

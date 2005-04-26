@@ -35,8 +35,9 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		/// <param name="manager"></param>
 		public GuiMenuPopup(GuiManager manager)
-			: base(manager, new Vector(1000))
+			: base(manager, new Vector(12000))
 		{
+			this.Visible = true;
 		}
 
 		/// <summary>
@@ -49,56 +50,12 @@ namespace SdlDotNet.Examples.GuiExample
 		}
 
 		#region Drawing
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <returns></returns>
-//		public override Surface Render()
-//		{
-//			// We use the same formula as the horizontal packer to find out
-//			// our own offset. This is used to handle the mouse events
-//			// because the EventLock does not translate the values before
-//			// sending it.
-//			//RenderArgs args0 = args.Clone();
-//			//args0.TranslateX += Coordinates.X + OuterPadding.Left + InnerPadding.Left;
-//			//args0.TranslateY += Coordinates.Y + OuterPadding.Top + InnerPadding.Top;
-//		//	translate = args0.Point;
-//
-//			// Check for exceeding
-//			//int right = translate.X + Size.Width + manager.MenuTitlePadding.Right;
-//			int right = Size.Width;
-//			if (right > this.GuiManager.Size.Width)
-//			{
-//				// We have to adjust things over
-//				int off = right - this.GuiManager.Size.Width;
-//				//args = args.Clone();
-//				//args.TranslateX -= off;
-//				//translate.X -= off;
-//			}
-//
-//			// Draw the element
-//			//manager.Render(args, this);
-//			//base.Render(args);
-//
-//			// Trace the items
-//			//if (IsTraced)
-//			//{
-//				foreach (Sprite s in Sprites)
-//				{
-//					Rectangle r = new Rectangle(translate, s.Size);
-//					//GuiManager.DrawRect(args.Surface, r, manager.TraceColor);
-//				}
-//			//}
-//			return this.Surface;
-//		}
-
 		/// <summary>
 		/// 
 		/// </summary>
 		public void ShowMenu()
 		{
 			this.Visible = true;
-			//manager.SpriteContainer.EventLock = this;
 		}
 
 		/// <summary>
@@ -107,7 +64,6 @@ namespace SdlDotNet.Examples.GuiExample
 		public void HideMenu()
 		{
 			this.Visible = false;
-//			manager.SpriteContainer.EventLock = null;
 
 			if (controller != null)
 			{
@@ -124,47 +80,24 @@ namespace SdlDotNet.Examples.GuiExample
 		public void Add(GuiMenuItem gmi)
 		{
 			AddHead(gmi);
-			//gmi.Menu = this;
 		}
 		#endregion
 
 		#region Geometry
 		private Point translate = new Point();
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override Padding OuterPadding
-//		{
-//			get { return base.GuiManager.MenuPopupPadding; }
-//		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override Size Size
-//		{
-//			get
-//			{
-//				// Clear out the popups. If the GMI has a menu associated with
-//				// it, it uses that for the width, which would produce an
-//				// infinite loop for processing. Removing the association
-//				// allows the size to be retrieved properly.
-////				foreach (GuiMenuItem gmi in Sprites)
-////					gmi.Menu = null;
-//
-//				// Get the base
-//				Size d = base.Size;
-//
-//				// Reassociate this item
-////				foreach (GuiMenuItem gmi in Sprites)
-////					gmi.Menu = this;
-//
-//				// Return the dimension
-//				return d;
-//			}
-//		}
 		#endregion
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override Surface Render()
+		{
+			this.Surface = base.Render();
+			Video.Screen.Blit(this.Surface);
+			return this.Surface;
+		}
+
 
 		#region Events
 		/// <summary>
@@ -178,35 +111,22 @@ namespace SdlDotNet.Examples.GuiExample
 			if (args.ButtonPressed)
 			{
 				ShowMenu();
+				this.Render();
 			}
 			else
 			{
 				// Check for an item
-				if (selected != null)
-				{
-					selected.OnMenuSelected(selectedIndex);
-					selected.IsSelected = false;
-					selected = null;
-				}
-
-				// Remove the menu
-				HideMenu();
-			}
-		}
-
-//		public override void Update(object sender, MouseButtonEventArgs args)
-//		{
-//				// Check for an item
 //				if (selected != null)
 //				{
 //					selected.OnMenuSelected(selectedIndex);
 //					selected.IsSelected = false;
 //					selected = null;
 //				}
-//
-//				// Remove the menu
-//				HideMenu();
-//		}
+
+				// Remove the menu
+				HideMenu();
+			}
+		}
 
 		/// <summary>
 		/// Uses the mouse motion to determine what menu item is actually
@@ -221,63 +141,32 @@ namespace SdlDotNet.Examples.GuiExample
 			int relx = args.RelativeX;
 			int rely = args.RelativeY;
 
-			// Don't bother if we are not selected
-//			if (IsHidden)
-//				return false;
-
 			// Retrieve the item for these coordinates
 			int ndx = 0;
-			//GuiMenuItem gmi = (GuiMenuItem) SelectSprite(new Vector2(x, y), ref ndx);
 			GuiMenuItem gmi = (GuiMenuItem) SelectSprite(new Point(x, y), ref ndx);
 
 			// Check to see if we need to deselect an old one
-			if (selected != null && (gmi == null || gmi != selected))
-			{
-				// Clear out selected
-				selected.IsSelected = false;
-				selected = null;
-			}
-
-			// If we have a menu, select it
-			if (gmi != null)
-			{
-				gmi.IsSelected = true;
-				selected = gmi;
-				selectedIndex = ndx;
-			//	return true;
-			}
-
-			/*
-			// We don't have a menu item and we are not selecting
-			// anything. See if we are current over a title of another menu.
-			int x1 = x + Coordinates.X;
-			int y1 = y + Coordinates.Y;
-			ArrayList moreSprites =
-		  manager.SpriteContainer.GetSprites(new Vector2(x1, y1));
-
-			foreach (Sprite s in moreSprites)
-			{
-		  if (s is GuiMenuTitle)
-		  {
-			// This is the menu we should select
-			GuiMenuTitle gmt = (GuiMenuTitle) s;
-			IsSelected = false;
-			HideMenu();
-			gm.IsSelected = true;
-			gm.Popup.ShowMenu();
-		  }
-			}
-			*/
-
-			// We are done processing
-			//return true;
+//			if (selected != null && (gmi == null || gmi != selected))
+//			{
+//				// Clear out selected
+//				selected.IsSelected = false;
+//				selected = null;
+//			}
+//
+//			// If we have a menu, select it
+//			if (gmi != null)
+//			{
+//				gmi.IsSelected = true;
+//				selected = gmi;
+//				selectedIndex = ndx;
+//			}
 		}
 		#endregion
 
 		#region Properties
-		private GuiMenuItem selected;
+		//private GuiMenuItem selected;
 		private IMenuPopupController controller;
-		private int selectedIndex = 0;
+		//private int selectedIndex = 0;
 
 		/// <summary>
 		/// 

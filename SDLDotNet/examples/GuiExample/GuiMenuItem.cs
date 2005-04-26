@@ -48,7 +48,6 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			TextSprite ts = new TextSprite(text, manager.BaseFont);
 			AddLeft(ts);
-			this.Visible = true;
 		}
 
 		#region Sprites
@@ -72,50 +71,9 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Drawing
-//		public void Render(RenderArgs args)
-//		{
-//			// We draw the rectangle normally
-//			manager.Render(args, this);
-//			base.Render(args);
-//		}
 		#endregion
 
 		#region Geometry
-//		//    public override bool IntersectsWith(Vector2 point)
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="point"></param>
-//		/// <returns></returns>
-//		public override bool IntersectsWith(Point point)
-//		{
-//			// Menu items are packed by their outer padding instead of the
-//			// normal inner, so this has to be adjusted.
-//			//Vector2 v = new Vector2(point);
-//			point.X -= OuterPadding.Left;
-//			point.Y -= OuterPadding.Top;
-//			return OuterBounds.IntersectsWith(new Rectangle(point, new Size(0, 0)));
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="rect"></param>
-//		/// <returns></returns>
-//		public override bool IntersectsWith(Rectangle rect)
-//		{
-//			// Menu items are packed by their outer padding instead of the
-//			// normal inner, so this has to be adjusted.
-//			Rectangle r = rect;
-////			r.Coordinates.X -= OuterPadding.Left;
-////			r.Coordinates.Y -= OuterPadding.Top;
-//			int transX;
-//			int transY;
-//			transY = r.Location.Y - OuterPadding.Top;
-//			transX = r.Location.X - OuterPadding.Left;
-//			r.Location = new Point(transX, transY);
-//			return OuterBounds.IntersectsWith(r);
-//		}
 		#endregion
 
 		#region Events
@@ -150,7 +108,6 @@ namespace SdlDotNet.Examples.GuiExample
 
 		#region Properties
 		private bool isSelected = false;
-		//private GuiMenuPopup menu = null;
 
 		/// <summary>
 		/// 
@@ -160,15 +117,6 @@ namespace SdlDotNet.Examples.GuiExample
 			get { return isSelected; }
 			set { isSelected = value; }
 		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public GuiMenuPopup Menu
-//		{
-//			get { return menu; }
-//			set { menu = value; }
-//		}
 
 		/// <summary>
 		/// 
@@ -185,24 +133,6 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get { return base.GuiManager.MenuItemPadding; }
 		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override int HorizontalWidth
-//		{
-//			get
-//			{
-//				//if (menu == null)
-//				//{
-//					return base.HorizontalWidth;
-//				//}
-//				//else
-//				//{
-//				//	return menu.Size.Width;
-//				//}
-//			}
-//		}
 		#endregion
 	}
 

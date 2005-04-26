@@ -39,13 +39,13 @@ namespace SdlDotNet.Sprites
 		{
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="coordinates"></param>
-		public SpriteContainer(Vector coordinates) : base(coordinates)
-		{
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="coordinates"></param>
+//		public SpriteContainer(Vector coordinates) : base(coordinates)
+//		{
+//		}
 
 		/// <summary>
 		/// 
@@ -56,11 +56,19 @@ namespace SdlDotNet.Sprites
 		{
 		}
 
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="rectangle"></param>
+//		public SpriteContainer(Rectangle rectangle) : base(rectangle)
+//		{
+//		}
+
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="rectangle"></param>
-		public SpriteContainer(Rectangle rectangle) : base(rectangle)
+		/// <param name="surface"></param>
+		public SpriteContainer(Surface surface) : base(surface)
 		{
 		}
 
@@ -68,7 +76,18 @@ namespace SdlDotNet.Sprites
 		/// 
 		/// </summary>
 		/// <param name="surface"></param>
-		public SpriteContainer(Surface surface) : base(surface)
+		/// <param name="rectangle"></param>
+		public SpriteContainer(Surface surface, Rectangle rectangle) : base(surface, rectangle)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
+		/// <param name="rectangle"></param>
+		/// <param name="z"></param>
+		public SpriteContainer(Surface surface, Rectangle rectangle, int z) : base(surface, rectangle, z)
 		{
 		}
 

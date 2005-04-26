@@ -45,9 +45,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="z"></param>
 		public GuiComponent(GuiManager manager, int z)
-			: base(new Vector(z))
+			: base()
 		{
 			this.manager = manager;
+			this.Z = z;
 		}
 
 		/// <summary>
@@ -56,32 +57,34 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="position"></param>
 		public GuiComponent(GuiManager manager, Point position)
-			: base(new Vector(position))
+			: base()
 		{
 			this.manager = manager;
+			this.Position = position;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="rect"></param>
-		public GuiComponent(GuiManager manager, Rectangle rect)
-			: base(rect)
+		/// <param name="rectangle"></param>
+		public GuiComponent(GuiManager manager, Rectangle rectangle)
+			: base()
 		{
 			this.manager = manager;
+			this.Rectangle = rectangle;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="rect"></param>
+		/// <param name="rectangle"></param>
 		/// <param name="z"></param>
-		public GuiComponent(GuiManager manager, Rectangle rect, int z)
-			: base(rect)
+		public GuiComponent(GuiManager manager, Rectangle rectangle, int z)
+			: this(manager, rectangle)
 		{
-			this.manager = manager;
+			this.Z = z;
 		}
 
 		/// <summary>
@@ -90,9 +93,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="coordinates"></param>
 		public GuiComponent(GuiManager manager, Vector coordinates)
-			: base(coordinates)
+			: base()
 		{
 			this.manager = manager;
+			this.Coordinates = coordinates;
 		}
 
 		/// <summary>
@@ -115,44 +119,36 @@ namespace SdlDotNet.Examples.GuiExample
 			this.Surface.DrawBox(
 				new Rectangle(0, 0, this.Rectangle.Width, this.Rectangle.Height),
 				manager.FrameColor);
-			this.Sprites.Draw(this.Surface);
-			return this.Surface;
+			return base.Render();
 		}
 		#endregion
 
 		#region Events
-//		/// <summary>
-//		/// GUI components default to mouse sensitive.
-//		/// </summary>
-//		public override bool IsMouseSensitive { get { return true; } }
-
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
 		public override void Update(MouseButtonEventArgs args)
 		{
-			// If we cannot be dragged, don't worry about it
+			// Return immediately if component cannt be dragged
 			if (!AllowDrag)
 			{
 				return;
 			}
 			if (this.IntersectsWith(new Point(args.X, args.Y)))
 			{
-				// If we are being held down, pick up the marble
+				// If we are being held down, pick up the component
 				if (args.ButtonPressed)
 				{
 					// Change the Z-order
 					this.Z += manager.DragZOrder;
 					this.BeingDragged = true;
-					//manager.SpriteContainer.EventLock = this;
 				}
 				else
 				{
 					// Drop it
 					this.Z -= manager.DragZOrder;
 					this.BeingDragged = false;
-					//manager.SpriteContainer.EventLock = null;
 				}
 			}
 		}
@@ -163,11 +159,6 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(MouseMotionEventArgs args)
 		{
-			int x = args.X;
-			int y = args.Y;
-			int relx = args.RelativeX;
-			int rely = args.RelativeY;
-
 			if (!AllowDrag)
 			{
 				return;
@@ -176,8 +167,8 @@ namespace SdlDotNet.Examples.GuiExample
 			// Move the window as appropriate
 			if (this.BeingDragged)
 			{
-				this.X += relx;
-				this.Y += rely;
+				this.X += args.RelativeX;
+				this.Y += args.RelativeY;
 			}
 		}
 
@@ -187,14 +178,9 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
-			if (this.Sprites.Count != 0)
+			for (int i = 0; i < this.Sprites.Count; i++)
 			{
-				// Go through all the displayed sprites
-				foreach (Sprite s in this.Sprites)
-				{
-					// Tick the sprite and wrap it in a translator
-					s.Update(args);
-				}
+				this.Sprites[i].Update(args);
 			}
 		}
 		#endregion
@@ -221,7 +207,7 @@ namespace SdlDotNet.Examples.GuiExample
 			{
 				if (value == null)
 				{
-					throw new Exception("Cannot assign a null manager");
+					throw new SdlException("Cannot assign a null manager");
 				}
 
 				manager = value;
