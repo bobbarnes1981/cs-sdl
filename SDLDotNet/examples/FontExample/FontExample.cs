@@ -34,7 +34,7 @@ namespace SdlDotNet.Examples
 	{
 		Surface text;
 		bool quitFlag = false;
-		string FontName = "Vera.ttf";
+		string FontName = "FreeSans.ttf";
 		int size = 12;
 		int width = 640;
 		int height = 480;
@@ -52,7 +52,7 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			string filepath = @"../../";
-			if (File.Exists("Vera.ttf"))
+			if (File.Exists("FreeSans.ttf"))
 			{
 				filepath = @"./";
 			}
