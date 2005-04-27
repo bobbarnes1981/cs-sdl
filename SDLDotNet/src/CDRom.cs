@@ -20,6 +20,8 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Reflection;
+using System.Resources;
 
 using Tao.Sdl;
 
@@ -36,6 +38,7 @@ namespace SdlDotNet
 	public sealed class CDRom
 	{
 		static private bool disposed;
+		static ResourceManager stringManager;
 		static readonly CDRom instance = new CDRom();
 
 //		static CDRom()
@@ -100,6 +103,8 @@ namespace SdlDotNet
 		/// </remarks>
 		public static void Initialize()
 		{
+			stringManager = 
+				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
 			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) & Sdl.SDL_INIT_CDROM) 
 				!= (int) SdlFlag.TrueValue)
 			{
@@ -199,7 +204,7 @@ namespace SdlDotNet
 		{
 			if (!IsValidDriveNumber(index))
 			{
-				throw new SdlException("Device index out of range");
+				throw new SdlException(stringManager.GetString("Device index out of range", CultureInfo.CurrentUICulture));
 			}
 			return Sdl.SDL_CDName(index);
 		}

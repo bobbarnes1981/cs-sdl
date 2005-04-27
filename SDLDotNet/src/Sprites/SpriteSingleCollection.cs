@@ -41,50 +41,6 @@ namespace SdlDotNet.Sprites
 		}
 
 		#region Display
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="args"></param>
-//		public void Render(RenderArgs args)
-//		{
-//			// Check for our own X and Y
-//			RenderArgs args1 = args.Clone();
-//			args1.TranslateX += Coordinates.X;
-//			args1.TranslateY += Coordinates.Y;
-//
-//			// Check for a size
-//			if (!size.IsEmpty)
-//			{
-//				// Set the size
-//				args1.Size = size;
-//				Rectangle clip = new Rectangle(args1.TranslateX,
-//					args1.TranslateY,
-//					size.Width,
-//					size.Height);
-//
-//				// Set the clipping rectangle
-//				args1.Clipping = clip;
-//			}
-//
-//			// Check for viewport
-//			if (viewport != null)
-//			{
-//				viewport.AdjustViewport(args1);
-//			}
-//
-//			// Go through the sprites. We make a copy to make sure nothing
-//			// else changes the list while we are doing so.
-//			ArrayList list = new ArrayList(sprites);
-//			list.Sort();
-//
-//			foreach (Sprite s in list)
-//			{
-//				s.Render(args1);
-//			}
-//
-//			// Clear the clipping
-//			args1.ClearClipping();
-//		}
 		#endregion
 
 		#region Sprites

@@ -1331,7 +1331,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		Reserved = Sdl.KMOD_RESERVED,
+		ReserveKey = Sdl.KMOD_RESERVED,
 		/// <summary>
 		/// Both CTRL Keys
 		/// </summary>
@@ -1430,9 +1430,9 @@ namespace SdlDotNet
 	public enum JoystickHatStates
 	{
 		/// <summary>
-		/// 
+		/// Centered state. FXCop was complaining that this should be called "None".
 		/// </summary>
-		Centered = Sdl.SDL_HAT_CENTERED,
+		None = Sdl.SDL_HAT_CENTERED,
 		/// <summary>
 		/// 
 		/// </summary>

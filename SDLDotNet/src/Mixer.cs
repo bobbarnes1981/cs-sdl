@@ -293,7 +293,7 @@ namespace SdlDotNet
 			}
 			set
 			{
-				int dummy = SdlMixer.Mix_AllocateChannels(value);
+				SdlMixer.Mix_AllocateChannels(value);
 			}
 		}
 
@@ -312,7 +312,7 @@ namespace SdlDotNet
 		/// </summary>
 		public static void CancelReserveChannels()
 		{
-			int dummy = SdlMixer.Mix_ReserveChannels(0);
+			SdlMixer.Mix_ReserveChannels(0);
 		}
 
 		/// <summary>
