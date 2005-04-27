@@ -17,7 +17,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="3.1.0" />
+    <property name="project.version" value="3.1.0alpha1" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
@@ -214,6 +214,8 @@
 		<exclude name="*.swp" />
 		<exclude name="*.bak" />
 		<exclude name="*.project" />
+		<exclude name="ChangeLog" />
+		<exclude name="cvs2cl.pl" />
 	    </fileset>
 	</copy>
 
