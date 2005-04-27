@@ -237,7 +237,7 @@ namespace SdlDotNet
 			}
 			set
 			{
-				int dummy = SdlMixer.Mix_VolumeMusic(value);
+				SdlMixer.Mix_VolumeMusic(value);
 			}
 		}
 

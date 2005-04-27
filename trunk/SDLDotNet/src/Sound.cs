@@ -108,7 +108,7 @@ namespace SdlDotNet
 			{
 				if (value >= 0 && value <= SdlMixer.MIX_MAX_VOLUME)
 				{
-					int result = SdlMixer.Mix_VolumeChunk(handle, value);
+					SdlMixer.Mix_VolumeChunk(handle, value);
 				}
 				GC.KeepAlive(this);
 			}

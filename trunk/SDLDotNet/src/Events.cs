@@ -22,6 +22,8 @@ using System.Threading;
 using System.Collections;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Reflection;
+using System.Resources;
 
 using Tao.Sdl;
 
@@ -127,6 +129,7 @@ namespace SdlDotNet
 		private static Hashtable UserEvents = new Hashtable();
 		private static int UserEventId = 0;		
 		private const int QUERY_EVENTS_MAX = 254;
+		static ResourceManager stringManager;
 
 		/// <summary>
 		/// Fires when the application has become active or inactive
@@ -207,6 +210,8 @@ namespace SdlDotNet
 
 		Events()
 		{
+			stringManager = 
+				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
 		}
 
 		/// <summary>
@@ -657,18 +662,18 @@ namespace SdlDotNet
 				object ret;
 				lock (instance) 
 				{
-					ret = UserEvents[e.UserCode];
+					ret = (UserEventArgs)UserEvents[e.UserCode];
 				}
 				if (ret != null) 
 				{
-					if (ret is ChannelFinishedEventArgs) 
+					if (ret.GetType().Name == "ChannelFinishedEventArgs") 
 					{
 						if (ChannelFinished != null)
 						{
 							ChannelFinished(instance, (ChannelFinishedEventArgs)ret);
 						}
 					} 
-					else if (ret is MusicFinishedEventArgs) 
+					else if (ret.GetType().Name == "MusicFinishedEventArgs") 
 					{
 						if (MusicFinished != null)
 						{
@@ -814,8 +819,7 @@ namespace SdlDotNet
 				}
 				catch
 				{
-					throw new SdlException("StopTicker Problem");
-					
+					throw new SdlException(stringManager.GetString("StopTicker Problem", CultureInfo.CurrentUICulture));
 				}
 			}
 
@@ -827,7 +831,7 @@ namespace SdlDotNet
 			}
 			catch
 			{
-				throw new SdlException("Thread Join exception");
+				throw new SdlException(stringManager.GetString("Thread Join exception", CultureInfo.CurrentUICulture));
 			}
 
 			// Make noise
@@ -881,7 +885,7 @@ namespace SdlDotNet
 			{
 				if (value < 1)
 				{
-					throw new SdlException("Cannot set a negative or zero sleep time");
+					throw new SdlException(stringManager.GetString("Cannot set a negative or zero sleep time.", CultureInfo.CurrentUICulture));
 				}
 
 				tickSpan = value;

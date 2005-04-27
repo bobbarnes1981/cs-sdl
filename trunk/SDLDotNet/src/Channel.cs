@@ -164,7 +164,7 @@ namespace SdlDotNet
 			}
 			set
 			{
-				int dummy = SdlMixer.Mix_Volume(this.index, value);
+				SdlMixer.Mix_Volume(this.index, value);
 			}
 		}
 

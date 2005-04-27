@@ -19,6 +19,9 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
 
 using Tao.Sdl;
 
@@ -33,6 +36,7 @@ namespace SdlDotNet
 		private bool disposed;
 		private IntPtr handle;
 		private int index;
+		ResourceManager stringManager;
 
 		/// <summary>
 		/// Represents a CDROM drive on the system
@@ -42,6 +46,8 @@ namespace SdlDotNet
 		/// <remarks>used internally</remarks>
 		internal CDDrive(IntPtr handle, int index) 
 		{
+			stringManager = 
+				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
 			this.handle = handle;
 			if ((handle == IntPtr.Zero) | !CDRom.IsValidDriveNumber(index))
 			{
@@ -64,6 +70,8 @@ namespace SdlDotNet
 		/// </exception>
 		public CDDrive(int index)
 		{
+			stringManager = 
+				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
 			this.handle = Sdl.SDL_CDOpen(index);
 			if ((this.handle == IntPtr.Zero) | !CDRom.IsValidDriveNumber(index))
 			{
@@ -95,7 +103,7 @@ namespace SdlDotNet
 		{
 			if (!CDRom.IsValidDriveNumber(this.index))
 			{
-				throw new SdlException("Device " + this.index + "out of range. Drive name not available.");
+				throw new SdlException(stringManager.GetString("Device " + this.index + "out of range. Drive name not available.", CultureInfo.CurrentUICulture));
 			}
 			return Sdl.SDL_CDName(this.index);
 		}
