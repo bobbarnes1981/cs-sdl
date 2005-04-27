@@ -109,7 +109,7 @@ namespace SdlDotNet.Examples.GuiExample
 		#region Properties
 		private int delta = -10;
 		//private int minSpace = 10;
-		private bool isAutoHide = false;
+		private bool isAutoHide;
 
 		/// <summary>
 		/// 

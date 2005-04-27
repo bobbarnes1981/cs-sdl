@@ -31,14 +31,6 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public abstract class  GameObject
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		public GameObject()
-		{
-
-		}
-
 		private GameObject _Parent;
 		/// <summary>
 		/// 
@@ -154,9 +146,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 	
-			
-				
-		private int  _X2=0;
+		//private int _X2;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -168,7 +158,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 	
-		private int  _Y2=0;
+		//private int _Y2;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -214,8 +204,8 @@ namespace SdlDotNet.Examples
 			}
 		}
 		
-		int _previousWidth = 0;
-		int _previousHeight = 0;
+		int _previousWidth;
+		int _previousHeight;
 		Size currentSize;
 		/// <summary>
 		/// 
@@ -321,7 +311,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return new Point(_X2,_Y2);
+				return new Point(X2,Y2);
 			}
 		}
 		

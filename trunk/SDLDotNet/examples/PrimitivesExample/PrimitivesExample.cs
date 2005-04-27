@@ -39,7 +39,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public PrimitivesExample() 
 		{
-			quitFlag = false;
 		}
 
 		/// <summary>

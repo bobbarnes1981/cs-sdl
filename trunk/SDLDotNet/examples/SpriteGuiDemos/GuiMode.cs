@@ -30,11 +30,11 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class GuiMode : DemoMode
 	{
-		private GuiTicker ticker = null;
+		private GuiTicker ticker;
 		Random rand = new Random();
 		GuiMenuTitle gm;
 		GuiMenuTitle gm2;
-			GuiMenuTitle gm3;
+		GuiMenuTitle gm3;
 
 		/// <summary>
 		/// Constructs the internal sprites needed for our demo.
@@ -84,6 +84,13 @@ namespace SdlDotNet.Examples
 			Sprites.EnableTickEvent();
 			ticker.Sprites.EnableTickEvent();
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public void EnableTickEvent()
+		{
+			Events.TickEvent += new TickEventHandler(OnTick);
+		}
 
 		/// <summary>
 		/// 
@@ -112,7 +119,7 @@ namespace SdlDotNet.Examples
 			gmi3.AddLeft(new AnimatedDemoSprite(LoadRandomMarble(), new Point(0, 0)));
 			gmi3.AddLeft(new TextSprite("Create New Window", gui.BaseFont));
 			gm.Add(gmi3);
-			gmi3.ItemSelectedEvent += new MenuItemHandler(OnCreateNewWindow);
+			gmi3.ItemSelectedEvent += new MenuItemEventHandler(OnCreateNewWindow);
 		
 			// Create the first menu
 			gm.Add(new GuiMenuItem(gui, "Test #3"));
@@ -190,7 +197,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		public override void OnTick(object sender, TickEventArgs args)
+		private void OnTick(object sender, TickEventArgs args)
 		{
 			threshold += args.RatePerSecond(rate);
 

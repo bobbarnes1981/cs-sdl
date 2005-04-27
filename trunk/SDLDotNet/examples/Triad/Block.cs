@@ -33,7 +33,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public readonly static int BlockWidth = 36;
+		public const int BlockWidth = 36;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -121,12 +121,24 @@ namespace SdlDotNet.Examples
 
 		}
 
+		private bool destroy;
+
 		/// <summary>
 		/// 
 		/// </summary>
-		public bool Destroy = false;
+		public bool Destroy
+		{
+			get
+			{
+				return destroy;
+			}
+			set
+			{
+				destroy = value;
+			}
+		}
 	
-		static Surface redBlock = null;
+		static Surface redBlock;
 		Surface getRedBlock()
 		{
 			if(redBlock==null)
@@ -138,7 +150,7 @@ namespace SdlDotNet.Examples
 			return redBlock;
 		}
 
-		static Surface whiteBlock = null;
+		static Surface whiteBlock;
 		Surface getWhiteBlock()
 		{
 			if(whiteBlock==null)
@@ -151,7 +163,7 @@ namespace SdlDotNet.Examples
 		}
 		
 
-		static Surface yellowBlock = null;
+		static Surface yellowBlock;
 		Surface getYellowBlock()
 		{
 			if(yellowBlock==null)
@@ -164,7 +176,7 @@ namespace SdlDotNet.Examples
 		}
 
 
-		static Surface purpleBlock = null;
+		static Surface purpleBlock;
 		Surface getPurpleBlock()
 		{
 			if(purpleBlock==null)
@@ -177,7 +189,7 @@ namespace SdlDotNet.Examples
 		}
 
 
-		static Surface blueBlock = null;
+		static Surface blueBlock;
 		Surface getBlueBlock()
 		{
 			if(blueBlock==null)
@@ -196,7 +208,7 @@ namespace SdlDotNet.Examples
 		protected override void DrawGameObject(Surface surface)
 		{
 
-			Surface image = null;
+			Surface image;
 			
 			switch(blockType)
 			{
@@ -220,8 +232,8 @@ namespace SdlDotNet.Examples
 
 			if(!this.Destroy)
 			{
-				if(image != null)
-					surface.Blit(image,this.ScreenRectangle);	
+				//if(image != null)
+				//	surface.Blit(image,this.ScreenRectangle);	
 				//surface.FillRect(this.ScreenRectangle, currentColor);
 			}
 			else

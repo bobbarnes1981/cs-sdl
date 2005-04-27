@@ -28,7 +28,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class MyGameArea : GameArea
 	{
-		BlueSquare bs = null;
+		BlueSquare bs;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -59,7 +59,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
-		public override void HandleSDLKeyUpEvent(KeyboardEventArgs args)
+		public override void HandleSdlKeyUpEvent(KeyboardEventArgs args)
 		{
             
 		}
@@ -69,7 +69,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
-		public override void HandleSDLKeyDownEvent(KeyboardEventArgs args)
+		public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
 		{
 			//if(!args.Down)return;
 

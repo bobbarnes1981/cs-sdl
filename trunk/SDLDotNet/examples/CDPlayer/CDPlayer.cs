@@ -38,8 +38,8 @@ namespace SdlDotNet.Examples
 		private System.Windows.Forms.Button buttonStop;
 		private System.Windows.Forms.Button buttonEject;
 		private System.Windows.Forms.Label labelStatus;
+		private System.Windows.Forms.Button buttonPrevious;
 		private System.Windows.Forms.Button buttonNext;
-		private System.Windows.Forms.Button buttonPrev;
 		//private System.Windows.Forms.Timer timer;
 		//private System.ComponentModel.IContainer components;
 
@@ -52,7 +52,6 @@ namespace SdlDotNet.Examples
 			//
 			InitializeComponent();
 
-			_track = 0;
 			//_drive = null;
 
 			try {
@@ -96,7 +95,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(CDPlayer));
 			this.label1 = new System.Windows.Forms.Label();
 			this.comboBoxDrive = new System.Windows.Forms.ComboBox();
 			this.buttonPlay = new System.Windows.Forms.Button();
@@ -105,7 +103,7 @@ namespace SdlDotNet.Examples
 			this.buttonEject = new System.Windows.Forms.Button();
 			this.labelStatus = new System.Windows.Forms.Label();
 			this.buttonNext = new System.Windows.Forms.Button();
-			this.buttonPrev = new System.Windows.Forms.Button();
+			this.buttonPrevious = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -167,8 +165,8 @@ namespace SdlDotNet.Examples
 			this.labelStatus.Location = new System.Drawing.Point(16, 40);
 			this.labelStatus.Name = "labelStatus";
 			this.labelStatus.Size = new System.Drawing.Size(328, 40);
-			this.labelStatus.Text = "Track:";
 			this.labelStatus.TabIndex = 6;
+			this.labelStatus.Text = "Track:";
 			this.labelStatus.Click += new System.EventHandler(this.labelStatus_Click);
 			// 
 			// buttonNext
@@ -180,20 +178,20 @@ namespace SdlDotNet.Examples
 			this.buttonNext.Text = "Next";
 			this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
 			// 
-			// buttonPrev
+			// buttonPrevious
 			// 
-			this.buttonPrev.Location = new System.Drawing.Point(240, 88);
-			this.buttonPrev.Name = "buttonPrev";
-			this.buttonPrev.Size = new System.Drawing.Size(48, 40);
-			this.buttonPrev.TabIndex = 8;
-			this.buttonPrev.Text = "Prev";
-			this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
+			this.buttonPrevious.Location = new System.Drawing.Point(240, 88);
+			this.buttonPrevious.Name = "buttonPrevious";
+			this.buttonPrevious.Size = new System.Drawing.Size(48, 40);
+			this.buttonPrevious.TabIndex = 8;
+			this.buttonPrevious.Text = "Prev";
+			this.buttonPrevious.Click += new System.EventHandler(this.buttonPrev_Click);
 			// 
 			// CDPlayer
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 			this.ClientSize = new System.Drawing.Size(354, 134);
-			this.Controls.Add(this.buttonPrev);
+			this.Controls.Add(this.buttonPrevious);
 			this.Controls.Add(this.buttonNext);
 			this.Controls.Add(this.labelStatus);
 			this.Controls.Add(this.buttonEject);
@@ -207,7 +205,6 @@ namespace SdlDotNet.Examples
 			this.MinimizeBox = false;
 			this.Name = "CDPlayer";
 			this.Text = "SDL.NET CD Player";
-			this.Load += new System.EventHandler(this.CDPlayer_Load);
 			this.ResumeLayout(false);
 
 		}
@@ -307,11 +304,6 @@ namespace SdlDotNet.Examples
 			} catch (SdlException ex) {
 				HandleError(ex);
 			}
-		}
-
-		private void CDPlayer_Load(object sender, System.EventArgs e)
-		{
-		
 		}
 
 		private void labelStatus_Click(object sender, System.EventArgs e)

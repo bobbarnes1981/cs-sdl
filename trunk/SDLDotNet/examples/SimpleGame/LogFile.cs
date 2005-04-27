@@ -28,9 +28,9 @@ namespace SdlDotNet.Examples
 		static FileStream fs;
 
 		static readonly LogFile instance = new LogFile();
-		static LogFile()
-		{
-		}
+//		static LogFile()
+//		{
+//		}
 
 		LogFile()
 		{

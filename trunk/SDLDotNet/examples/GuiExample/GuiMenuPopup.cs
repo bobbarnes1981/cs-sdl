@@ -72,10 +72,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="gmi"></param>
-		public void Add(GuiMenuItem gmi)
+		/// <param name="menuItem"></param>
+		public void Add(GuiMenuItem menuItem)
 		{
-			AddHead(gmi);
+			AddHead(menuItem);
 			
 			Redo();
 		}

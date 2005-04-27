@@ -33,13 +33,13 @@ namespace SdlDotNet.Examples
 	public class FontExample
 	{
 		Surface text;
-		bool quitFlag = false;
+		bool quitFlag;
 		string FontName = "FreeSans.ttf";
 		int size = 12;
 		int width = 640;
 		int height = 480;
-		bool musicFinishedFlag = false;
-		bool channelFinishedFlag = false;
+		bool musicFinishedFlag;
+		bool channelFinishedFlag;
 		private int currentChannel;
 		private int positionY = 200;
 
@@ -241,13 +241,6 @@ namespace SdlDotNet.Examples
 		{
 			Console.WriteLine("Music Finished");
 			musicFinishedFlag = true;
-		}
-
-		private int TimerCall(int interval)
-		{
-			Console.WriteLine("timer call: " + interval);
-			return interval;
-
 		}
 
 		[STAThread]

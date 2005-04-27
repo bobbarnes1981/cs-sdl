@@ -865,9 +865,10 @@ namespace SdlDotNet
 			}
 			set 
 			{ 
-				if (value != 0)
+				if (value > 1 && value <= 1000)
 				{
-					tickSpan = 1000 / value; 
+					int temp = 1000 / value;
+					tickSpan = temp; 
 				}
 			}
 		}

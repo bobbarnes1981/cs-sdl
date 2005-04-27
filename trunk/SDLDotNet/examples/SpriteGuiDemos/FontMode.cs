@@ -30,7 +30,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class FontMode : DemoMode
 	{
-		private BoundedTextSprite moving = null;
+		private BoundedTextSprite moving;
 
 		/// <summary>
 		/// Constructs the internal sprites needed for our demo.

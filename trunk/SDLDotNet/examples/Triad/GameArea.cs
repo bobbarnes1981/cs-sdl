@@ -28,7 +28,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public abstract class GameArea : GameObject
 	{
-		GameObjectCollection _objectList = null;
+		GameObjectCollection _objectList = new GameObjectCollection();
 		/// <summary>
 		/// 
 		/// </summary>
@@ -43,14 +43,6 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public GameArea()
-		{
-			_objectList = new GameObjectCollection();			
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="obj"></param>
 		public void AddObject(GameObject obj)
 		{
@@ -59,7 +51,6 @@ namespace SdlDotNet.Examples
 			obj.Parent = this;
 			
 		}
-
 
 		/// <summary>
 		/// 
@@ -93,16 +84,11 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
-		public abstract void HandleSDLKeyDownEvent(KeyboardEventArgs args);
+		public abstract void HandleSdlKeyDownEvent(KeyboardEventArgs args);
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
-		public abstract void HandleSDLKeyUpEvent(KeyboardEventArgs args);
-
-
-
-
-
+		public abstract void HandleSdlKeyUpEvent(KeyboardEventArgs args);
 	}
 }

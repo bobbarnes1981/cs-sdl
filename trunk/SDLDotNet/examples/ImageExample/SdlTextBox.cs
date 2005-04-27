@@ -71,23 +71,16 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Constructor, Initialize variables
 		/// </summary>
-		/// <param name="xPos">X position</param>
-		/// <param name="yPos">Y position</param>
+		/// <param name="posX">X position</param>
+		/// <param name="posY">Y position</param>
 		/// <param name="textLength">Textlength (in pixels :P)</param>
-		public SdlTextBox(int xPos, int yPos, int textLength)
+		public SdlTextBox(int posX, int posY, int textLength)
 		{
-			//Initialize variables
-			//this.mouseOver = false;
-			this.isEnabled = false;
 
-			x = xPos;
-			y = yPos;
+			x = posX;
+			y = posY;
 			length = textLength;
 			boxText = "";
-
-			lastCode = 0;
-			code = 0;
-
 			boxFont = new SdlDotNet.Font("../../Vera.ttf", 12); //font
 			
 			//Events
@@ -98,14 +91,14 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// If the mouse is over the textbox then true
 		/// </summary>
-		/// <param name="xPos">mouse x pos</param>
-		/// <param name="yPos">mouse y pos</param>
+		/// <param name="posX">mouse x pos</param>
+		/// <param name="posY">mouse y pos</param>
 		/// <returns></returns>
-		public bool IsOver(int xPos, int yPos)
+		public bool IsOver(int posX, int posY)
 		{
-			if(xPos > x && xPos < x+length)
+			if(posX > x && posX < x+length)
 			{
-				if(yPos > y && yPos < y+20)
+				if(posY > y && posY < y+20)
 				{
 					//mouseOver = true;
 					return true;
@@ -119,14 +112,14 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// If the textbox has been clicked then true
 		/// </summary>
-		/// <param name="xPos">mouse x pos</param>
-		/// <param name="yPos">mouse y pos</param>
+		/// <param name="posX">mouse x pos</param>
+		/// <param name="posY">mouse y pos</param>
 		/// <returns></returns>
-		public bool IsHit(int xPos, int yPos)
+		public bool IsHit(int posX, int posY)
 		{
-			if(xPos > x && xPos < x+length)
+			if(posX > x && posY < x+length)
 			{
-				if(yPos > y && yPos < y+20)
+				if(posX > y && posY < y+20)
 				{
 					isEnabled = true;
 					return true;

@@ -81,7 +81,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public event MenuItemHandler ItemSelectedEvent;
+		public event MenuItemEventHandler ItemSelectedEvent;
 
 		/// <summary>
 		/// 
@@ -108,7 +108,7 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Properties
-		private bool isSelected = false;
+		private bool isSelected;
 
 		/// <summary>
 		/// 
@@ -152,5 +152,5 @@ namespace SdlDotNet.Examples.GuiExample
 	/// <summary>
 	/// 
 	/// </summary>
-	public delegate void MenuItemHandler(int index);
+	public delegate void MenuItemEventHandler(int index);
 }

@@ -108,23 +108,23 @@ namespace SdlDotNet.Examples
 		const Key JUMP = Key.UpArrow;
 
 		// weither the respective keys are pressed
-		bool left = false;
-		bool right = false;
-		bool jump = false;
+		bool left;
+		bool right;
+		bool jump;
 
 		int jumpstart;
-		bool falling = false;
+		bool falling;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Location"></param>
-		public Player(Point Location)
+		/// <param name="location"></param>
+		public Player(Point location)
 		{
 			Game.Debug("Constructing Player");
 
-			_Location = Location;
-			jumpstart = Location.Y;
+			_Location = location;
+			jumpstart = location.Y;
 
 			Surface tempSurface = new Surface("../../Data/Head.bmp");
 			_Image = tempSurface.Convert();
@@ -235,7 +235,7 @@ namespace SdlDotNet.Examples
 		Surface _Temporary;
 		Player player;
 		Bomb[] bombs;
-		bool quit = false;
+		bool quit;
 
 		// messages for debugging purposes are sent to this method, therefore it
 		// also is static
@@ -374,8 +374,11 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 	/// <summary>
 	/// 
 	/// </summary>
-	public class BombRun
+	public sealed class BombRun
 	{
+		BombRun()
+		{}
+
 		/// <summary>
 		/// 
 		/// </summary>

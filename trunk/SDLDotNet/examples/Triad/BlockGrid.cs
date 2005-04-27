@@ -58,14 +58,14 @@ namespace SdlDotNet.Examples
 		}
 	
 
-		int reductionCount = 0;
+		int reductionCount;
 		int lastTriadMove;
 		int timeNow;
 		Block[,] grid;
 		BlockGridState currentState;
-		bool rapidDropTriad = false;
-		bool gameIsPaused = false;
-		bool reductionOccured = false;
+		bool rapidDropTriad;
+		bool gameIsPaused;
+		bool reductionOccured;
 		
 		/// <summary>
 		/// 
@@ -128,11 +128,11 @@ namespace SdlDotNet.Examples
 			loadSounds();
 		}
 
-		Sound moveSound =null;
-		Sound permuteSound =null;
-		Sound reductionSound = null;
-		Sound hitBottomSound = null;
-		Sound gameOverSound = null;
+		Sound moveSound;
+		Sound permuteSound;
+		Sound reductionSound;
+		Sound hitBottomSound;
+		Sound gameOverSound;
 		void loadSounds()
 		{
 
@@ -185,7 +185,7 @@ namespace SdlDotNet.Examples
 			AddObject(someBlock);
 		}
 
-		int lastTriadLeftRight = 0;
+		int lastTriadLeftRight;
 		void moveTriad()
 		{
 			if(triad==null)
@@ -320,12 +320,11 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		int numberOfBlocksDestroyed = 0;
+		int numberOfBlocksDestroyed;
 		void clearDestroyedBlocks()
 		{
-			int row = 0;
-			int column = 0;
-			numberOfBlocksDestroyed = 0;
+			int row;
+			int column;
 			Block currentBlock;
 			for(column=0;  column<GridSize.Width;  column++)
 			{		
@@ -346,9 +345,9 @@ namespace SdlDotNet.Examples
 
 		void removeEmptySpacesInGrid()
 		{
-			int row = 0;
-			int column = 0;
-			Block currentBlock=null;			
+			int row;
+			int column;
+			Block currentBlock;			
 			
 			//Setup block list..			
 			for(column=0;  column<GridSize.Width;  column++)
@@ -419,18 +418,14 @@ namespace SdlDotNet.Examples
 			{
 				delta = Timer.Ticks - start;				
 			}
-
-			
-			
-
 		}
 
 		void markBlockToDestroyUsingBlockList()
 		{
 			//Using the blockList, determine which blocks need to be destroyed.
 
-			Block currentBlock = null;
-			Block previousBlock = null;
+			Block currentBlock;
+			Block previousBlock;
 			int sameColorCount = 1;
 			for(int i=1;  i<blockList.Count;  i++)
 			{
@@ -507,8 +502,6 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-
-
 		void markBlocksLeftDown()
 		{
 			for (int currentRow=0;  currentRow<GridSize.Height - 2;   currentRow++)
@@ -560,13 +553,13 @@ namespace SdlDotNet.Examples
 			markBlocksRightDown();
 		}
 
-		bool moveTriadLeft = false;
-		bool moveTriadRight = false;
+		bool moveTriadLeft;
+		bool moveTriadRight;
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
-		public override void HandleSDLKeyDownEvent(KeyboardEventArgs args)
+		public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
 		{
 			System.Diagnostics.Debug.WriteLine(args.Key.ToString());
 			
@@ -598,9 +591,6 @@ namespace SdlDotNet.Examples
 						this.moveSound.Play();
 						this.lastTriadLeftRight = Timer.Ticks;
 					}
-
-					
-
 					break;
 				case Key.DownArrow:
 					this.rapidDropTriad = true;
@@ -609,9 +599,6 @@ namespace SdlDotNet.Examples
 				case Key.P:
 					gameIsPaused = !gameIsPaused;
 					break;
-
-					
-
 				default:
 					System.Diagnostics.Debug.WriteLine("Key not handled: " + args.Key.ToString());
 					break;
@@ -624,7 +611,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
-		public override void HandleSDLKeyUpEvent(KeyboardEventArgs args)
+		public override void HandleSdlKeyUpEvent(KeyboardEventArgs args)
 		{
             rapidDropTriad = false;
 			moveTriadRight = false;
@@ -647,7 +634,7 @@ namespace SdlDotNet.Examples
 		}
 
 
-		Surface gameOverImage = null;
+		Surface gameOverImage;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -682,7 +669,7 @@ namespace SdlDotNet.Examples
 			surface.Blit(gameOverImage, new Rectangle(xPosition ,this.ScreenY+200,gameOverImage.Width,gameOverImage.Height));
 		}
 
-		Surface gamePausedImage = null;
+		Surface gamePausedImage;
 		void drawGamePausedMessage(Surface surface)
 		{
 			if(gamePausedImage==null)
@@ -693,6 +680,5 @@ namespace SdlDotNet.Examples
 			int xPosition = this.ScreenX + (int)((this.Width-gamePausedImage.Width)/2); 
 			surface.Blit(gamePausedImage, new Rectangle(xPosition ,this.ScreenY+200,gamePausedImage.Width,gamePausedImage.Height));
 		}
-
 	}
 }

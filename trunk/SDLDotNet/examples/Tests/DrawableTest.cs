@@ -20,17 +20,19 @@
 using NUnit.Framework;
 using SdlDotNet.Sprites;
 
-namespace SdlDotNet.Drawable
+namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	[TestFixture] public class DrawableTest
+	[TestFixture] 
+	public class DrawableTest
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		[Test] public void TestImageLoad()
+		[Test] 
+		public void TestImageLoad()
 		{
 			// Load the image
 			SurfaceCollection id = new SurfaceCollection("../../Data/marble1.png");

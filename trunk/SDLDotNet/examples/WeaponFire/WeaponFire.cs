@@ -29,11 +29,11 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public delegate void FireEventHandler(Point Location);
+	public delegate void FireEventHandler(object sender, Point location);
 	/// <summary>
 	/// 
 	/// </summary>
-	public delegate void DisposeRequestEventHandler(object Asker);
+	public delegate void DisposeRequestEventHandler(object sender, EventArgs e);
 
 	// used for the bullets
 	/// <summary>
@@ -48,18 +48,42 @@ namespace SdlDotNet.Examples
 		/// <param name="y"></param>
 		public Speed(int x, int y)
 		{
-			X = x;
-			Y = y;
+			this.x = x;
+			this.y = y;
+		}
+
+		int x;
+		int y;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int X
+		{
+			get
+			{
+				return x;
+			}
+			set
+			{
+				x = value;
+			}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public int X;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Y;
+		public int Y
+		{
+			get
+			{
+				return y;
+			}
+			set
+			{
+				y = value;
+			}
+		}
 	}
 
 	// item fired by a weapon
@@ -75,14 +99,14 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Location"></param>
-		/// <param name="Speed"></param>
-		public WeaponParticle(Point Location, Speed Speed)
+		/// <param name="location"></param>
+		/// <param name="speed"></param>
+		public WeaponParticle(Point location, Speed speed)
 		{
 			Game.Debug("Constructing WeaponParticle");
 
-			_Location = Location;
-			_Speed = Speed;
+			_Location = location;
+			_Speed = speed;
 
 			// a white box for now
 			_Image = Game.Screen.CreateCompatibleSurface(16, 32, true);
@@ -92,11 +116,11 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Seconds"></param>
-		public void Update(float Seconds)
+		/// <param name="seconds"></param>
+		public void Update(float seconds)
 		{
-			_Location.X += Seconds * Speed.X;
-			_Location.Y += Seconds * Speed.Y;
+			_Location.X += seconds * Speed.X;
+			_Location.Y += seconds * Speed.Y;
 
 			// check if the particle is outside the visible area of the game, it
 			// should be disposed. this request is handled by the Game class
@@ -105,7 +129,7 @@ namespace SdlDotNet.Examples
 				0 || _Location.Y > Game.Screen.Height))
 			{
 				Game.Debug("Requesting disposal of WeaponParticle");
-				DisposeRequest(this);
+				DisposeRequest(this, new EventArgs());
 			}
 		}
 
@@ -148,41 +172,50 @@ namespace SdlDotNet.Examples
 		const Key FIRE = Key.Space;
 
 		// weither the respective keys are pressed
-		bool up = false;
-		bool down = false;
-		bool left = false;
-		bool right = false;
-		bool fire = false;
+		bool up;
+		bool down;
+		bool left;
+		bool right;
+		bool fire;
 
 		// the tick of the last fire action
-		int lastfire = 0;
+		int lastfire;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Location"></param>
-		public Ship(Point Location)
+		/// <param name="location"></param>
+		public Ship(Point location)
 		{
 			Game.Debug("Constructing Ship");
 
-			_Location = Location;
+			_Location = location;
 
 			// just a white box for now
 			_Image = Game.Screen.CreateCompatibleSurface(32, 32, true);
 			_Image.Fill(new Rectangle(new Point(0,0), _Image.Size), Color.White);
 
-			Events.KeyboardDown += new KeyboardEventHandler(this.SDL_Keyboard);
+			Events.KeyboardDown += new KeyboardEventHandler(this.SdlKeyboard);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Seconds"></param>
-		public void Update(float Seconds)
+		/// <param name="seconds"></param>
+		public void Update(float seconds)
 		{
 			// how far the ship should move this frame, calculated on basis of the
 			// elapsed number of seconds :)
-			float change = Seconds * 250;
+			float change;
+			if (seconds <= (float.MaxValue /250))
+			{
+				change = seconds * 250;
+			}
+			else
+			{
+				change = float.MaxValue;
+			}
+
 
 			if(up) _Location.Y -= change;
 			if(down) _Location.Y += change;
@@ -204,7 +237,7 @@ namespace SdlDotNet.Examples
 			if(fire && lastfire + 250 < Timer.Ticks)
 			{
 				if(WeaponFired != null)
-					WeaponFired(Location);
+					WeaponFired(this, Location);
 
 				// dont forget this
 				lastfire = Timer.Ticks;
@@ -216,7 +249,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void SDL_Keyboard(object sender, KeyboardEventArgs e)
+		private void SdlKeyboard(object sender, KeyboardEventArgs e)
 		{
 			switch(e.Key)
 			{
@@ -257,18 +290,18 @@ namespace SdlDotNet.Examples
 		Ship ship;
 		ArrayList bullets = new ArrayList();
 		ArrayList mustdispose = new ArrayList(); // see below
-		bool quit = false;
+		bool quit;
 
 		// messages for debugging purposes are sent to this method, therefore it
 		// also is static
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Message"></param>
+		/// <param name="message"></param>
 		[Conditional("DEBUG")]
-		public static void Debug(string Message)
+		public static void Debug(string message)
 		{
-			Console.WriteLine("> {0}", Message);
+			Console.WriteLine("> {0}", message);
 		}
 
 		/// <summary>
@@ -285,14 +318,14 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 #endif
 
 			ship = new Ship(new Point(50, 235));
-			ship.WeaponFired += new FireEventHandler(Ship_WeaponFired);
+			ship.WeaponFired += new FireEventHandler(ShipWeaponFired);
 
 			Video.Mouse.ShowCursor(false);
 			Video.WindowCaption =
 				"WeaponFire, (c) 2003 CL Game Studios";
 			Events.KeyboardDown +=
-				new KeyboardEventHandler(SDL_Keyboard);
-			Events.Quit += new QuitEventHandler(SDL_Quit);
+				new KeyboardEventHandler(SdlKeyboard);
+			Events.Quit += new QuitEventHandler(SdlQuit);
 
 			Game.Debug("Starting game loop");
 
@@ -340,15 +373,16 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Location"></param>
-		public void Ship_WeaponFired(Point Location)
+		/// <param name="location"></param>
+		/// <param name="sender"></param>
+		public void ShipWeaponFired(object sender, Point location)
 		{
 			Game.Debug("Fire in the hole!");
 
 			// create a new bullet
-			WeaponParticle bullet = new WeaponParticle(Location, new Speed(300,0));
+			WeaponParticle bullet = new WeaponParticle(location, new Speed(300,0));
 			bullet.DisposeRequest += new DisposeRequestEventHandler(
-				Bullet_DisposeRequest);
+				BulletDisposeRequest);
 
 			bullets.Add(bullet);
 		}
@@ -356,11 +390,12 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Asker"></param>
-		public void Bullet_DisposeRequest(Object Asker)
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BulletDisposeRequest(object sender, EventArgs e)
 		{
 			Game.Debug("Disposing a bullet");
-			mustdispose.Add(Asker); // see Game.Run, the large comment
+			mustdispose.Add(sender); // see Game.Run, the large comment
 		}
 
 		/// <summary>
@@ -368,7 +403,7 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void SDL_Keyboard(object sender, KeyboardEventArgs e)
+		private void SdlKeyboard(object sender, KeyboardEventArgs e)
 		{
 			if(e.Key == Key.Escape || e.Key == Key.Q)
 				quit = true;
@@ -379,7 +414,7 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void SDL_Quit(object sender, QuitEventArgs e)
+		private void SdlQuit(object sender, QuitEventArgs e)
 		{
 			Game.Debug("Quit was requested");
 			quit = true;
@@ -395,8 +430,11 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 	/// <summary>
 	/// 
 	/// </summary>
-	public class WeaponFire
+	public sealed class WeaponFire
 	{
+		WeaponFire()
+		{
+		}
 		/// <summary>
 		/// 
 		/// </summary>

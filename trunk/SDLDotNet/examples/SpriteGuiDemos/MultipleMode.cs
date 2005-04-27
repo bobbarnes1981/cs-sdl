@@ -29,10 +29,10 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class MultipleMode : DemoMode
 	{
-		private Sprite sprite1 = null;
-		private Sprite sprite2 = null;
-		private Sprite sprite3 = null;
-		private Sprite sprite4 = null;
+		private Sprite sprite1;
+		private Sprite sprite2;
+		private Sprite sprite3;
+		private Sprite sprite4;
 
 		private Size size;
 

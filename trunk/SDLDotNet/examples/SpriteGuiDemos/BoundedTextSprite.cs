@@ -163,7 +163,7 @@ namespace SdlDotNet.Examples
 
 		private double delta = 0.01;
 
-		private int move = 0;
+		private int move;
 		private int direction = 1;
 
 		/// <summary>

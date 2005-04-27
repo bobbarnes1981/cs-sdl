@@ -31,7 +31,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class ViewportMode : DemoMode
 	{
-		private Sprite sprite = null;
+		private Sprite sprite;
 		SpriteSingleCollection spriteSingle = new SpriteSingleCollection();
 		private Size size;
 
@@ -102,7 +102,7 @@ namespace SdlDotNet.Examples
 				100));
 			Sprites.Add(sprite);
 			CenterSprite.Add(sprite);
-			OnMenuBounded(0);
+			//OnMenuBounded(0);
 
 			// Load the bouncing sprites
 			for (int i = 0; i < 53; i++)
@@ -145,27 +145,6 @@ namespace SdlDotNet.Examples
 		public override string ToString() { return "Viewport"; }
 
 		#region Events
-		private void OnMenuNone(int index)
-		{
-		}
-
-		private void OnMenuBounded(int index)
-		{
-		}
-
-//		public override Surface Surface
-//		{
-//			get
-//			{
-//				return base.Surface;
-//			}
-//			set
-//			{
-//				base.Surface = value;
-//			}
-//		}
-
-//		private Surface surfViewport = new Surface();
 		/// <summary>
 		/// 
 		/// </summary>

@@ -20,7 +20,7 @@
 using NUnit.Framework;
 using System.Drawing;
 
-namespace SdlDotNet.Sprites
+namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// 

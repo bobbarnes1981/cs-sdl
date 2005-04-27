@@ -62,10 +62,10 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="NumberOfSnowflakes"></param>
-		public void Init(int NumberOfSnowflakes)
+		/// <param name="numberOfSnowflakes"></param>
+		public void Init(int numberOfSnowflakes)
 		{
-			snowflakes = new Snowflake[NumberOfSnowflakes];
+			snowflakes = new Snowflake[numberOfSnowflakes];
 
 			for(int i = 0; i < snowflakes.Length; i++)
 			{
@@ -88,11 +88,11 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Snowflake this[int Index]
+		public Snowflake this[int index]
 		{
 			get
 			{
-				return snowflakes[Index];
+				return snowflakes[index];
 			}
 		}
 
