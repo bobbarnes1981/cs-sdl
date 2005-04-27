@@ -1,3 +1,17 @@
+3.1.0alpha1
+David Hudson 27 Apr 2005
+**** Note that this is definitely an alpha. Feedback will be greatly appreciated. ****
+* New sprite engine. Based on pygame and includes some ideas from Moonfire's demo
+* Moonfire's GUI system and demo have been reworked to use new sprite engine. This still needs a lot of work.
+* VideoInfo is now a proper singleton.
+* Added some new overloads and a constructor to Surface.
+* All Windows dll dependencies are now included in the zip file under the /lib.win32deps directory. You no longer need to download Tao.Sdl.deps separately.
+* Fixed some memory issues pointed out by scottles2. Note that there are still some memory leaks.
+* Used FXCop to clean up many issues.
+* Removed Bitstream fonts from FontExample. Added FSF GPL fonts.
+* Consolidated a few of the examples. Renamed Moonfire's demo. 
+* Removed some of Moonfire's examples that were not relating to SDL.NET.
+
 3.0.0
 David Hudson 23 Feb 2005
 * Exceptions will use the SDL_error string by default.
@@ -20,7 +34,7 @@ David Hudson 14 Feb 2005
 * Image class has been folded into Surface.
 * None of singleton classes require Singleton.Instance anymore. They all use static methods so just call the methods directly.
 * The CDRom subsystem now allows querying the track information of the cd.
-* The joystick system has been revamped so that you can query joystick parameters directly indtead of just using events. This system still needs work, it is a little sluggish.
+* The joystick system has been revamped so that you can query joystick parameters directly instead of just using events. This system still needs work, it is a little sluggish.
 * The video subsystem now returns much better information on the avaiable modes and the features available in the current mode and hardware.
 * There are many new methods exposing various SDL functions in manay of the classes. There is too much to state here.
 * I've added a major new example called "Simple Game" which shows off more of SDL.NET using a Model-View-Controller deisgn pattern. It is a reimplementation of a Pygame tutorial.
