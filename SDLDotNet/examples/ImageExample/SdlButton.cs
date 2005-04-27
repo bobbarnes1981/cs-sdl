@@ -30,16 +30,16 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// Event args fyrir SdlButton
 	/// </summary>
-	public class SdlButtonEventArgs
+	public class SdlButtonEventArgs : EventArgs
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		public int Xpos;
+		private int posX;
 		/// <summary>
 		/// 
 		/// </summary>
-		public int Ypos;
+		private int posY;
 
 		/// <summary>
 		/// 
@@ -48,8 +48,8 @@ namespace SdlDotNet.Examples
 		/// <param name="y"></param>
 		public SdlButtonEventArgs(int x, int y)
 		{
-			Xpos = x;
-			Ypos = y;
+			posX = x;
+			posY = y;
 		}
 	}
 
@@ -122,12 +122,12 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		public SdlButton(int xPos, int yPos, int Width, int Height, Color color, string text)
+		public SdlButton(int posX, int posY, int width, int height, Color color, string text)
 		{
-			x = xPos;
-			y = yPos;
-			width = Width;
-			height = Height;
+			x = posX;
+			y = posY;
+			this.width = width;
+			this.height = height;
 
 			buttonColor = color;
 			buttonText = text;

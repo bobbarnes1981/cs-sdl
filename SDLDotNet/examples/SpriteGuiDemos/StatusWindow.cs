@@ -131,9 +131,9 @@ namespace SdlDotNet.Examples
 		{
 			tps.TextString = String.Format("{0}", Events.TicksPerSecond);
 
-			if (SdlDemo.FPS.IsFull)
+			if (SdlDemo.Fps.IsFull)
 			{
-				fps.TextString = SdlDemo.FPS.FramesPerSecond.ToString("#0.00");
+				fps.TextString = SdlDemo.Fps.FramesPerSecond.ToString("#0.00");
 			}
 			else
 			{

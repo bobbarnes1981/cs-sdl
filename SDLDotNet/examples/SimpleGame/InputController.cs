@@ -48,7 +48,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class InputController
 	{
-		bool quitFlag = false;
+		bool quitFlag;
 
 		EventManager eventManager;
 		/// <summary>
@@ -67,7 +67,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="eventManager"></param>
 		/// <param name="e"></param>
-		public void Subscribe(object eventManager, QuitEventArgs e)
+		private void Subscribe(object eventManager, QuitEventArgs e)
 		{
 			LogFile.WriteLine("InputController received a Quit event");
 			quitFlag = true;
@@ -78,7 +78,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void KeyboardDown(object sender, KeyboardEventArgs e) 
+		private void KeyboardDown(object sender, KeyboardEventArgs e) 
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
@@ -108,7 +108,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void Quit(object sender, QuitEventArgs e) 
+		private void Quit(object sender, QuitEventArgs e) 
 		{
 			eventManager.Publish(new QuitEventArgs());
 		}

@@ -40,7 +40,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public Rectangles() 
 		{
-			quitFlag = false;
 		}
 
 		/// <summary>

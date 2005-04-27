@@ -33,36 +33,36 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class Text
+	public class TextItem
 	{
 		Rectangle _Position;
-		Surface _Image = null;
+		Surface _Image;
 
 		const float inspeed = 510;
 		const float outspeed = 64;
 
-		float time = 0;
+		float time;
 		float starttime;
 		float endtime;
 
 		TextFadeState state = TextFadeState.BeforeFadeIn;
-		float alpha = 0;
+		float alpha;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Num"></param>
-		/// <param name="Y"></param>
-		public Text(int Num, int Y)
+		/// <param name="number"></param>
+		/// <param name="y"></param>
+		public TextItem(int number, int y)
 		{
 			if(_Image == null)
 			{
-				_Image = Graphics.LoadText(string.Format("../../Data/Text{0}.bmp", Num));
+				_Image = Graphics.LoadText(string.Format("../../Data/Text{0}.bmp", number));
 			}
 
-			_Position = new Rectangle(25, Y, _Image.Width, _Image.Height);
+			_Position = new Rectangle(25, y, _Image.Width, _Image.Height);
 
-			starttime = Num * 2;
+			starttime = number * 2;
 			endtime = starttime + 4.5f;
 
 			_Image.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 0);
@@ -71,10 +71,10 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Seconds"></param>
-		public void Update(float Seconds)
+		/// <param name="seconds"></param>
+		public void Update(float seconds)
 		{
-			time += Seconds;
+			time += seconds;
 
 			switch(state)
 			{
@@ -86,7 +86,7 @@ namespace SdlDotNet.Examples
 
 				case TextFadeState.FadeIn:
 
-					alpha += Seconds * inspeed;
+					alpha += seconds * inspeed;
 
 					if(alpha >= 255)
 					{
@@ -105,7 +105,7 @@ namespace SdlDotNet.Examples
 
 				case TextFadeState.FadeOut:
 
-					alpha -= Seconds * outspeed;
+					alpha -= seconds * outspeed;
 
 					if(alpha <= 0)
 					{
@@ -133,17 +133,17 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class Texts
 	{
-		Text[] texts = new Text[6];
+		TextItem[] texts = new TextItem[6];
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public Texts()
 		{
-			texts[0] = new Text(0, 25);
+			texts[0] = new TextItem(0, 25);
 
 			for(int i = 1; i < texts.Length; i++)
-				texts[i] = new Text(i, texts[i-1].Position.Bottom + 10);
+				texts[i] = new TextItem(i, texts[i-1].Position.Bottom + 10);
 		}
 
 		/// <summary>
@@ -160,11 +160,11 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Text this[int Index]
+		public TextItem this[int index]
 		{
 			get
 			{
-				return texts[Index];
+				return texts[index];
 			}
 		}
 	}

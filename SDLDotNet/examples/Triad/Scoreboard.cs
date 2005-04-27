@@ -27,13 +27,13 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class ScoreBoard : GameArea
+	public class Scoreboard : GameArea
 	{
-		SdlDotNet.Font font = null;
+		SdlDotNet.Font font;
 		/// <summary>
 		/// 
 		/// </summary>
-		public ScoreBoard()
+		public Scoreboard()
 		{
 			font = new SdlDotNet.Font(@"C:\WINNT\Fonts\arial.ttf",18);
 		}
@@ -64,7 +64,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
-		public override void HandleSDLKeyDownEvent(KeyboardEventArgs args)
+		public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
 		{
 
 		}
@@ -73,7 +73,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
-		public override void HandleSDLKeyUpEvent(KeyboardEventArgs args)
+		public override void HandleSdlKeyUpEvent(KeyboardEventArgs args)
 		{
 
 		}

@@ -53,13 +53,13 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// Contains the fall-back font for the system
 		/// </summary>
-		private SdlDotNet.Font baseFont = null;
+		private SdlDotNet.Font baseFont;
 
 		// Contains the font for any window titles
-		private SdlDotNet.Font titleFont = null;
+		private SdlDotNet.Font titleFont;
 
 		// Contains the font for menus
-		private SdlDotNet.Font menuFont = null;
+		private SdlDotNet.Font menuFont;
 
 		/// <summary>
 		/// 
@@ -473,7 +473,7 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Properties
-		private SpriteCollection spriteManager = null;
+		private SpriteCollection spriteManager;
 		private Size size = Size.Empty;
 
 		private Color titleColor = Color.FromArgb(250, 250, 250);

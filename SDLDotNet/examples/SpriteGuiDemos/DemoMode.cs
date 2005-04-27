@@ -30,7 +30,7 @@ namespace SdlDotNet.Examples
 	/// An abstract page to encapsulates the common functionality of all
 	/// demo pages.
 	/// </summary>
-	public abstract class DemoMode
+	public abstract class DemoMode : IDisposable
 	{
 		private static Hashtable marbles = new Hashtable();
 
@@ -44,14 +44,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private SpriteCollection sprites = new SpriteCollection();
 		Random rand = new Random();
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public DemoMode()
-		{
-			//Sprites.EnableTickEvent();
-		}
 
 		#region Drawables
 		/// <summary>
@@ -110,22 +102,14 @@ namespace SdlDotNet.Examples
 		}
 		#endregion
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="args"></param>
-		public virtual void OnTick(object sender, TickEventArgs args)
-		{
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public void EnableTickEvent()
-		{
-			Events.TickEvent += new TickEventHandler(OnTick);
-		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public void EnableTickEvent()
+//		{
+//			Events.TickEvent += new TickEventHandler(OnTick);
+//		}
 
 
 		#region Mode Switching
@@ -187,6 +171,16 @@ namespace SdlDotNet.Examples
 				return sprites;
 			}
 		}
+		#region IDisposable Members
 
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Dispose()
+		{
+			// TODO:  Add DemoMode.Dispose implementation
+		}
+
+		#endregion
 	}
 }

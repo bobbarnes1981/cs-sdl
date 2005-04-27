@@ -24,7 +24,7 @@ using SdlDotNet;
 using System.Drawing;
 using System;
 
-namespace SdlDotNet.Examples.GuiExample
+namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// 

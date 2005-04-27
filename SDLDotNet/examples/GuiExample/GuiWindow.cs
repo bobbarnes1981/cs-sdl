@@ -96,7 +96,7 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Properties
-		private string title = null;
+		private string title;
 		private Size titleSize = new Size();
 		private TextSprite titleSprite;
 		//public TextSprite TitleSprite

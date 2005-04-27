@@ -47,15 +47,15 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="filename"></param>
-		/// <param name="ColorKey"></param>
+		/// <param name="colorKey"></param>
 		/// <returns></returns>
-		public static Surface LoadImage(string filename, Color ColorKey)
+		public static Surface LoadImage(string filename, Color colorKey)
 		{
 			Surface temp1 = new Surface(filename);
 			Surface temp2 = temp1.Convert();
 			
 			temp1.Dispose();
-			temp2.SetColorKey(ColorKey, true);
+			temp2.SetColorKey(colorKey, true);
 			
 			return temp2;
 		}
@@ -63,11 +63,11 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Filename"></param>
+		/// <param name="filename"></param>
 		/// <returns></returns>
-		public static Surface LoadText(string Filename)
+		public static Surface LoadText(string filename)
 		{
-			Surface temp1 = LoadImage(Filename, Color.White);
+			Surface temp1 = LoadImage(filename, Color.White);
 			Surface temp2 = temp1.CreateCompatibleSurface(temp1.Width + 3,
 				temp1.Height + 3, true);
 			

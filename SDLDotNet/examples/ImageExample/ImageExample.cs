@@ -38,10 +38,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private bool quitFlag;
 		Point position = new Point(100,100);
-		private int AxesCount = 0;
-		private int ButtonCount = 0;
-		private int HatCount = 0;
-		private int BallCount = 0;
+		private int AxesCount;
 		private Joystick joystick;
 		int width = 640;
 		int height = 480;
@@ -53,7 +50,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public ImageExample() 
 		{
-			quitFlag = false;
 		}
 
 		/// <summary>
@@ -238,30 +234,6 @@ namespace SdlDotNet.Examples
 			Console.WriteLine("Y: " + position.Y.ToString());
 			Console.WriteLine("Axes: " + e.AxisIndex);
 			Console.WriteLine("AxesValue: " + e.AxisValue);
-		}
-
-		private void JoystickBallChanged(object sender, JoystickBallEventArgs e)
-		{
-			BallCount++;
-			Console.WriteLine("Joystick Ball Changed" + BallCount.ToString());
-		}
-
-		private void JoystickHatChanged(object sender, JoystickHatEventArgs e)
-		{
-			HatCount++;
-			Console.WriteLine("Joystick Hat Changed" + HatCount.ToString());
-		}
-
-		private void JoystickButtonUpChanged(object sender, JoystickButtonEventArgs e)
-		{
-			
-			Console.WriteLine("Joystick button up" + ButtonCount.ToString());
-		}
-
-		private void JoystickButtonDownChanged(object sender, JoystickButtonEventArgs e)
-		{
-			ButtonCount++;
-			Console.WriteLine("Joystick button down" + ButtonCount.ToString());
 		}
 
 		/// <summary>

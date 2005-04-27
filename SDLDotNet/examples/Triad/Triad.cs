@@ -110,7 +110,7 @@ namespace SdlDotNet.Examples
 		}
 
 
-		static int halfOfBlock = 0;
+		static int halfOfBlock;
 		bool canMoveLeftRightBy(int deltaX)
 		{
 			 if(halfOfBlock==0)

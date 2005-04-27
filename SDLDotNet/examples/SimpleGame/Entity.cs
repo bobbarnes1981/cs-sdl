@@ -25,7 +25,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class Entity
 	{
-		Sector sector = null;
+		Sector sector;
 		EventManager eventManager;
 		/// <summary>
 		/// constructor
@@ -43,7 +43,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="eventManager"></param>
 		/// <param name="e"></param>
-		public void Subscribe(object eventManager, GameStatusEventArgs e)
+		private void Subscribe(object eventManager, GameStatusEventArgs e)
 		{
 			LogFile.WriteLine("Entity received a GameStatus event: " + e.GameStatus);
 			if (e.GameStatus == GameStatus.Started)
@@ -57,7 +57,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="eventManager"></param>
 		/// <param name="e"></param>
-		public void Subscribe(object eventManager, EntityMoveRequestEventArgs e)
+		private void Subscribe(object eventManager, EntityMoveRequestEventArgs e)
 		{
 			LogFile.WriteLine("Entity received a EntityMoveRequest event: " + e.Direction);
 			Move(e.Direction);

@@ -166,7 +166,7 @@ namespace SdlDotNet.Examples
 				int spd = fpsSpeeds[i];
 
 				fmi = new GuiMenuItem(gui, spd.ToString() + " FPS");
-				fmi.ItemSelectedEvent += new MenuItemHandler(OnMenuFps);
+				fmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuFps);
 				//fmi.IsTickable = false;
 				gm.Add(fmi);
 			}
@@ -176,7 +176,7 @@ namespace SdlDotNet.Examples
 		{
 			GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
 			gmi.AddRight(new TextSprite("Q", gui.BaseFont));
-			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuQuit);
+			gmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuQuit);
 			//gmi.IsTickable = false;
 			demoMenu.Add(gmi);
 		}
@@ -210,7 +210,7 @@ namespace SdlDotNet.Examples
 			GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
 			gmi.AddRight(new TextSprite(String.Format("{0}", cnt),
 				gui.BaseFont));
-			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuDemo);
+			gmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuDemo);
 			//gmi.IsTickable = false;
 			demoMenu.Add(gmi);
 		}
@@ -367,11 +367,11 @@ namespace SdlDotNet.Examples
 		#endregion
 
 		#region Properties
-		private static SdlDemo sdlDemo = null;
+		private static SdlDemo sdlDemo;
 		private bool running = true;
 		private static SpriteCollection master = new SpriteCollection();
 		private static SpriteCollection manager = new SpriteCollection();
-		private Surface screen = null;
+		private Surface screen;
 		private GuiWindow statusWindow;
 		private static GuiMenuBar gmb;
 		/// <summary>
@@ -388,7 +388,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public static Clock FPS
+		public static Clock Fps
 		{
 			get
 			{

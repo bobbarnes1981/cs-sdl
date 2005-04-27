@@ -34,13 +34,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public MainObject() 
 		{
-			_quitflag = false;
 		}
 		
-		BlockGrid grid = null;
-		ScoreBoard board = null;
+		BlockGrid grid;
+		Scoreboard board;
 		
-		Sound levelUpSound = null;
+		Sound levelUpSound;
 
 		/// <summary>
 		/// 
@@ -61,7 +60,7 @@ namespace SdlDotNet.Examples
 			Events.Quit += new QuitEventHandler(this.SDL_Quit);
 
 			
-			board = new ScoreBoard();
+			board = new Scoreboard();
 			board.X = 600;
 			board.Y = 0;
 			board.Size = new Size(200,400);
@@ -114,12 +113,12 @@ namespace SdlDotNet.Examples
 				_quitflag = true;
 			}
 	
-			grid.HandleSDLKeyDownEvent(e);
+			grid.HandleSdlKeyDownEvent(e);
 		}
 
 		private void SDL_KeyboardUp(object sender, KeyboardEventArgs e) 
 		{
-			grid.HandleSDLKeyUpEvent(e);
+			grid.HandleSdlKeyUpEvent(e);
 		}
 
 		private void SDL_Quit(object sender, QuitEventArgs e) 
@@ -138,7 +137,7 @@ namespace SdlDotNet.Examples
 		{
 		}
 
-		int blockCount = 0;
+		int blockCount;
 		private void grid_BlocksDestroyed(object sender, BlockDestroyedEventArgs args)
 		{
 			this.blockCount += args.BlocksCount;

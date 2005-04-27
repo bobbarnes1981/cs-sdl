@@ -26,7 +26,7 @@ namespace SdlDotNet.Examples
 	public class Snowflake
 	{
 		Rectangle _Position;
-		Surface _Image = null;
+		Surface _Image;
 		static Random random = new Random();
 
 		float x;
@@ -72,10 +72,10 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="Seconds"></param>
-		public void Update(float Seconds)
+		/// <param name="seconds"></param>
+		public void Update(float seconds)
 		{
-			float change = Seconds * speed;
+			float change = seconds * speed;
 
 			y += change;
 			x += change * wind;

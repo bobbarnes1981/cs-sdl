@@ -35,11 +35,11 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		/// <param name="manager"></param>
 		/// <param name="title"></param>
-		/// <param name="menubar"></param>
-		public GuiMenuTitle(GuiManager manager, GuiMenuBar menubar, string title)
+		/// <param name="menuBar"></param>
+		public GuiMenuTitle(GuiManager manager, GuiMenuBar menuBar, string title)
 			: base(manager)
 		{
-			this.menubar = menubar;
+			this.menubar = menuBar;
 			this.popup = new GuiMenuPopup(manager);
 			this.popup.MenuTitle = this;
       
@@ -50,34 +50,34 @@ namespace SdlDotNet.Examples.GuiExample
 		}
 
 		#region Drawing
-		private int PopupX
-		{
-			get
-			{
-				return this.Rectangle.Left - this.GuiManager.MenuTitlePadding.Left;
-			}
-		}
-
-		private int PopupY
-		{
-			get
-			{
-				return 
-					this.Rectangle.Bottom + 
-					this.GuiManager.MenuTitlePadding.Bottom + 
-					this.GuiManager.MenuBarPadding.Bottom;
-			}
-		}
+//		private int PopupX
+//		{
+//			get
+//			{
+//				return this.Rectangle.Left - this.GuiManager.MenuTitlePadding.Left;
+//			}
+//		}
+//
+//		private int PopupY
+//		{
+//			get
+//			{
+//				return 
+//					this.Rectangle.Bottom + 
+//					this.GuiManager.MenuTitlePadding.Bottom + 
+//					this.GuiManager.MenuBarPadding.Bottom;
+//			}
+//		}
 		#endregion
 
 		#region Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="gmi"></param>
-		public void Add(GuiMenuItem gmi)
+		/// <param name="menuItem"></param>
+		public void Add(GuiMenuItem menuItem)
 		{
-			popup.Add(gmi);
+			popup.Add(menuItem);
 		}
 		#endregion
 
@@ -123,7 +123,7 @@ namespace SdlDotNet.Examples.GuiExample
 		private GuiMenuBar menubar;
 		private GuiMenuPopup popup;
 
-		private bool selected = false;
+		private bool selected;
 
 		/// <summary>
 		/// 

@@ -30,8 +30,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class DragSprite : BoundedSprite
 	{
-		private SurfaceCollection d1 = null;
-		private SurfaceCollection d2 = null;
+		private SurfaceCollection d1;
+		private SurfaceCollection d2;
 
 		/// <summary>
 		/// 
