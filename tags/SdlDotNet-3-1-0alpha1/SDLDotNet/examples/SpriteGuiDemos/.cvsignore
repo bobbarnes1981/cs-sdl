@@ -1,0 +1,7 @@
+bin
+obj
+*.user
+*.csproj
+*.prjx
+MFGames.Sdl.Demos.xml
+SpriteGuiDemos.xml

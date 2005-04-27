@@ -1,0 +1,6 @@
+ImageExample.csproj.user
+bin
+obj
+*.prjx
+*.xml
+*.csproj

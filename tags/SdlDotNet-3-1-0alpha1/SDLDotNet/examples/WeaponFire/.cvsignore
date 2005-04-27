@@ -1,0 +1,6 @@
+bin
+obj
+*.user
+*.prjx
+*.csproj
+WeaponFire.xml
