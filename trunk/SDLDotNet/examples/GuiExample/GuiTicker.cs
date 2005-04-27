@@ -77,6 +77,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			Sprite s;
 			// Figure out the rates. 
 			// The min and max start on opposite sides
 			// of the ticker.
@@ -85,13 +86,20 @@ namespace SdlDotNet.Examples.GuiExample
 			if (this.Sprites.Count != 0)
 			{
 				// Go through all the displayed sprites
-				foreach (Sprite s in this.Sprites)
+				for (int i = 0; i < this.Sprites.Count; i++)
 				{
+					s = this.Sprites[i];
 					// Tick the sprite and wrap it in a translator
 					s.Update(args);
 	  
 					// Move the sprite along
-					s.X += offset;
+					if (i > 1 && this.Sprites[i-1] !=null && s.IntersectsWith(this.Sprites[i-1].Rectangle))
+					{
+					}
+					else
+					{
+						s.X += offset;
+					}
 					s.Y = 0;
 				}
 			}

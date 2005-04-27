@@ -41,12 +41,11 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			this.menubar = menubar;
 			this.popup = new GuiMenuPopup(manager);
-			this.popup.Controller = this;
-			//AddHead(this.popup);
+			this.popup.MenuTitle = this;
       
 			TextSprite ts = new TextSprite(title, manager.MenuFont);
-			//this.Surface = ts.Surface;
 			this.Rectangle = ts.Rectangle;
+			this.Position = menubar.Position;
 			AddHead(ts);
 		}
 
@@ -89,38 +88,22 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(MouseButtonEventArgs args)
 		{
-			if (!popup.Visible)
-			{
-				popup.Update(args);
-				Video.Screen.Blit(popup.Render(), popup.Rectangle);
-			}
 			if (!args.ButtonPressed)
 			{
 				IsSelected = false;
 				popup.HideMenu();
 			}
-			if (this.IntersectsWith(new Point(args.X + this.menubar.X, args.Y + this.menubar.Y)))
+			else
 			{
-				//			// Build up the translations
-				//			MouseButtonEventArgs args1 = args.Clone();
-				//			args1.TranslateX += PopupX;
-				//			args1.TranslateY += PopupY;
-
-				// Check for clicking down
-				//			if (!popup.IsHidden)
-				//			{
-				//				popup.OnMouseButtonDown(this, args);
-				//			}
-
-				if (args.ButtonPressed)
+			if (this.IntersectsWith(new Point(args.X - this.menubar.X, args.Y - this.menubar.Y)))
 				{
-					Console.WriteLine("TitleClicked");
-					IsSelected = true;
-					popup.ShowMenu();
-					//popup.Rectangle = new Rectangle(0,0,100,100);
-					//Video.Screen.Blit(popup.Render(), popup.Rectangle);
+					if (args.ButtonPressed)
+					{
+						Console.WriteLine("TitleClicked");
+						IsSelected = true;
+						popup.ShowMenu();
+					}
 				}
-
 			}
 		}
 		#endregion

@@ -27,7 +27,7 @@ namespace SdlDotNet.Sprites
 	/// <summary>
 	/// 
 	/// </summary>
-	public class Sprite : IComparable
+	public class Sprite : IComparable, IDisposable
 	{
 		/// <summary>
 		/// 
@@ -594,7 +594,7 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public override bool Equals (Object obj)
 		{
-			if (!(obj is Sprite))
+			if (!(obj is Sprite) || obj == null)
 			{
 				return false;
 			}
@@ -621,7 +621,21 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public static bool operator == (Sprite sprite1, Sprite sprite2)
 		{
-			return sprite1.Equals(sprite2);
+			try
+			{
+				return sprite1.Equals(sprite2);
+			}
+			catch (NullReferenceException)
+			{
+				try
+				{
+					return sprite2.Equals(sprite1);
+				}
+				catch (NullReferenceException)
+				{
+					return false;
+				}
+			}
 		}  
 		
 		/// <summary>
@@ -632,7 +646,21 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public static bool operator != (Sprite sprite1, Sprite sprite2)
 		{
-			return !(sprite1==sprite2);
+			try
+			{
+				return !sprite1.Equals(sprite2);
+			}
+			catch (NullReferenceException)
+			{
+				try
+				{
+					return !sprite2.Equals(sprite1);
+				}
+				catch (NullReferenceException)
+				{
+					return false;
+				}
+			}
 		}  
 		
 		/// <summary>
@@ -785,6 +813,18 @@ namespace SdlDotNet.Sprites
 
 
 
+
+		#endregion
+
+		#region IDisposable Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Dispose()
+		{
+			// TODO:  Add Sprite.Dispose implementation
+		}
 
 		#endregion
 	}

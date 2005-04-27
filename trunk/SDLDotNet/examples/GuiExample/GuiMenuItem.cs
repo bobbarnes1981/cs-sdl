@@ -47,6 +47,7 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(manager)
 		{
 			TextSprite ts = new TextSprite(text, manager.BaseFont);
+			this.Surface = ts.Surface;
 			AddLeft(ts);
 		}
 
@@ -114,8 +115,14 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public bool IsSelected
 		{
-			get { return isSelected; }
-			set { isSelected = value; }
+			get 
+			{ 
+				return isSelected; 
+			}
+			set 
+			{ 
+				isSelected = value; 
+			}
 		}
 
 		/// <summary>
@@ -123,7 +130,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override Padding InnerPadding
 		{
-			get { return base.GuiManager.MenuItemInnerPadding; }
+			get 
+			{ 
+				return base.GuiManager.MenuItemInnerPadding; 
+			}
 		}
 
 		/// <summary>
@@ -131,7 +141,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override Padding MarginPadding
 		{
-			get { return base.GuiManager.MenuItemPadding; }
+			get 
+			{ 
+				return base.GuiManager.MenuItemPadding; 
+			}
 		}
 		#endregion
 	}

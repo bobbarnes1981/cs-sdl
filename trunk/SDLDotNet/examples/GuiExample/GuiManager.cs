@@ -50,9 +50,8 @@ namespace SdlDotNet.Examples.GuiExample
 		}
 
 		#region Fonts
-		// Contains the fall-back font for the system
 		/// <summary>
-		/// 
+		/// Contains the fall-back font for the system
 		/// </summary>
 		private SdlDotNet.Font baseFont = null;
 
@@ -228,120 +227,10 @@ namespace SdlDotNet.Examples.GuiExample
 				return new Padding(10, 2); 
 			}
 		}
-
-		//		public void Render(/*RenderArgs args, GuiMenuBar menubar*/)
-		//		{
-		////			// Draw a frame
-		////			args.Surface.Fill(args.Translate(menubar.OuterBounds),
-		////				backgroundColor);
-		////			DrawRect(args.Surface, args.Translate(menubar.OuterBounds), frameColor);
-		//		}
-
-		//		public void Render(/*RenderArgs args, GuiMenuItem item*/)
-		//		{
-		////			// Draw a background frame depending on if the title is selected
-		////			// or not. This draws out the outer bounds to include the
-		////			// padding. This has to be adjusted slightly because menu items
-		////			// are actually placed back on their outer coordinates, not
-		////			// their inner ones.
-		////			if (item.IsSelected)
-		////			{
-		////				// Adjust the size of the select box
-		////				Size d = item.OuterSize;
-		////
-		////				// Draw the selection
-		////				args.Surface.Fill(args.Translate(new Rectangle(item.Coordinates.X, item.Coordinates.Y, d.Width, d.Height)),
-		////					selectedColor);
-		////			}
-		//		}
-
-		//		public void Render(RenderArgs args, GuiMenuPopup menu)
-		//		{
-		//			// Clear out the background and draw the frame line
-		//			Rectangle rect = args.Translate(new Rectangle(menu.OuterBounds.X, menu.OuterBounds.Y, menu.OuterBounds.Width, menu.OuterBounds.Height));
-		//			args.Surface.Fill(rect, backgroundColor);
-		//			DrawRect(args.Surface, rect, frameColor);
-		//		}
-
-		//		public void Render(/*RenderArgs args, GuiMenuTitle title*/)
-		//		{
-		// Draw a background frame depending on if the title is selected
-		// or not. We have to add the padding because of the title
-		// doesn't know about the menu's padding.
-		//			if (title.IsSelected)
-		//			{
-		//				// Get the rectangle
-		//				Rectangle rect = args.Translate(new Rectangle(title.OuterBounds.X, title.OuterBounds.Y, 0, 0));
-		//				int transX;
-		//				int transY;
-		//				transY = rect.Location.Y - MenuBarPadding.Top + MenuTitlePadding.Top;
-		//				transX = rect.Location.X - MenuTitlePadding.Left;
-		//				rect.Location = new Point(transX, transY);
-		////				rect.Coordinates.Y -= MenuBarPadding.Top + MenuTitlePadding.Top;
-		////				rect.Coordinates.X -= MenuTitlePadding.Left;
-		//
-		//				int tempHeight;
-		//				int tempWidth;
-		//				tempHeight = rect.Size.Height + MenuBarPadding.Vertical
-		//					+ MenuTitlePadding.Vertical;
-		//				tempWidth = rect.Size.Width + MenuTitlePadding.Horizontal;
-		//				rect.Size = new Size(tempWidth, tempHeight);
-		//				
-		//
-		//				// Draw it
-		//				args.Surface.Fill(rect,  selectedColor);
-		//			}
-		//		}
 		#endregion
 
 		#region Windows
 		private int windowPad = 1;
-
-		//		public void Render(/*RenderArgs args, GuiWindow window*/)
-		//		{
-		//			// Pull out the fields
-		//			Rectangle bounds = args.Translate(window.OuterBounds);
-		//			Point coordinates = bounds.Location;
-		//			Size size = bounds.Size;
-		//
-		//			// Clear out the background and draw the frame line
-		//			args.Surface.Fill(bounds, backgroundColor);
-		//			DrawRect(args.Surface, bounds, frameColor);
-		//
-		//			// Check for a title
-		//			if (window.Title != null)
-		//			{
-		//				// Copy the args
-		//				RenderArgs args1 = args.Clone();
-		//
-		//				// Blank out the title
-		//				Rectangle tr = new Rectangle(new Point(coordinates.X
-		//					+ windowPad,
-		//					coordinates.Y
-		//					+ windowPad),
-		//					new Size(size.Width,
-		//					TitleFont.Height));
-		//				Rectangle clip = new Rectangle(tr.Location,
-		//					new Size(tr.Width - windowPad,
-		//					tr.Height));
-		//				args1.Clipping = clip;
-		//				args.Surface.Fill(tr, frameColor);
-		//
-		//				// Draw the title, centered
-		//				Surface ts = titleFont.Render(window.Title, titleColor);
-		//
-		//				if (ts.Width < tr.Width)
-		//				{
-		//					int transX;
-		//					transX = tr.Location.X + (tr.Width - ts.Width) / 2;
-		//					tr.Location = new Point(transX, tr.Location.Y);
-		//					//tr.Coordinates.X += (tr.Width - ts.Width) / 2;
-		//				}
-		//
-		//				args.Surface.Blit(ts, tr);
-		//				args1.ClearClipping();
-		//			}
-		//		}
 
 		/// <summary>
 		/// 
