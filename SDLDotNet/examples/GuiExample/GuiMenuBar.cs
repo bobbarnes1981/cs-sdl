@@ -86,7 +86,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override Padding InnerPadding
 		{
-			get { return base.GuiManager.MenuTitlePadding; }
+			get 
+			{ 
+				return base.GuiManager.MenuTitlePadding; 
+			}
 		}
 
 		/// <summary>
@@ -94,7 +97,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override Padding MarginPadding
 		{
-			get { return base.GuiManager.MenuBarPadding; }
+			get 
+			{ 
+				return base.GuiManager.MenuBarPadding; 
+			}
 		}
 		#endregion
 

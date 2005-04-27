@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Drawing;
 
 using Tao.Sdl;
 
@@ -119,6 +120,16 @@ namespace SdlDotNet
 			get
 			{
 				return this.eventStruct.motion.yrel;
+			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Position
+		{
+			get
+			{
+				return new Point(this.eventStruct.motion.x, this.eventStruct.motion.y);
 			}
 		}
 	}

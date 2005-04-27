@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples.GuiExample
 		public GuiMenuPopup(GuiManager manager)
 			: base(manager, new Vector(12000))
 		{
-			this.Visible = true;
+			this.Visible = false;
 		}
 
 		/// <summary>
@@ -56,6 +56,7 @@ namespace SdlDotNet.Examples.GuiExample
 		public void ShowMenu()
 		{
 			this.Visible = true;
+			this.Render();
 		}
 
 		/// <summary>
@@ -64,11 +65,6 @@ namespace SdlDotNet.Examples.GuiExample
 		public void HideMenu()
 		{
 			this.Visible = false;
-
-			if (controller != null)
-			{
-				controller.IsSelected = false;
-			}
 		}
 		#endregion
 
@@ -80,24 +76,38 @@ namespace SdlDotNet.Examples.GuiExample
 		public void Add(GuiMenuItem gmi)
 		{
 			AddHead(gmi);
+			
+			Redo();
+		}
+
+
+		private void Redo()
+		{
+			int height = 0;
+			int width = 0;
+			for (int i = 0; i < this.Sprites.Count; i++)
+			{
+				this.Sprites[i].X = this.menuTitle.X;
+				this.Sprites[i].Y = this.menuTitle.Y + this.Sprites[i].Height * i;
+				height += this.Sprites[i].Height;
+				if (this.Sprites[i].Width > width)
+				{
+					width = this.Sprites[i].Width;
+				}
+				
+			}
+			this.Surface = new Surface(width,height);
+			this.Rectangle = new Rectangle(this.menuTitle.X, this.menuTitle.Y + this.menuTitle.Height, width, height);
+			this.Surface.Fill(this.GuiManager.BackgroundColor);
+			base.Render();
+			
+			
 		}
 		#endregion
 
 		#region Geometry
 		private Point translate = new Point();
 		#endregion
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override Surface Render()
-		{
-			this.Surface = base.Render();
-			Video.Screen.Blit(this.Surface);
-			return this.Surface;
-		}
-
 
 		#region Events
 		/// <summary>
@@ -107,25 +117,35 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override void Update(MouseButtonEventArgs args)
 		{
-			// If we are being held down, pick up the marble
-			if (args.ButtonPressed)
+			if (this.Visible)
 			{
-				ShowMenu();
-				this.Render();
+				// If we are being held down, pick up the marble
+				if (args.ButtonPressed)
+				{
+				}
+				else
+				{
+					// Check for an item
+					if (selected != null)
+					{
+						selected.OnMenuSelected(selectedIndex);
+						selected.IsSelected = false;
+						selected = null;
+					}
+					// Remove the menu
+					HideMenu();
+				}
 			}
-			else
-			{
-				// Check for an item
-//				if (selected != null)
-//				{
-//					selected.OnMenuSelected(selectedIndex);
-//					selected.IsSelected = false;
-//					selected = null;
-//				}
+		}
 
-				// Remove the menu
-				HideMenu();
-			}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public override Surface Render()
+		{
+			Redo();
+			return this.Surface;
 		}
 
 		/// <summary>
@@ -135,47 +155,51 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override void Update(MouseMotionEventArgs args)
 		{
-			// Pull out some stuff
-			int x = args.X - translate.X - Coordinates.X;
-			int y = args.Y - translate.Y - Coordinates.Y;
-			int relx = args.RelativeX;
-			int rely = args.RelativeY;
-
 			// Retrieve the item for these coordinates
 			int ndx = 0;
-			GuiMenuItem gmi = (GuiMenuItem) SelectSprite(new Point(x, y), ref ndx);
+			GuiMenuItem gmi = 
+				(GuiMenuItem) SelectSprite(new Point(args.X - this.X, args.Y- this.Y), ref ndx);
 
 			// Check to see if we need to deselect an old one
-//			if (selected != null && (gmi == null || gmi != selected))
-//			{
-//				// Clear out selected
-//				selected.IsSelected = false;
-//				selected = null;
-//			}
-//
-//			// If we have a menu, select it
-//			if (gmi != null)
-//			{
-//				gmi.IsSelected = true;
-//				selected = gmi;
-//				selectedIndex = ndx;
-//			}
+			if (selected != null && (gmi == null || gmi != selected))
+			{
+				// Clear out selected
+				selected.IsSelected = false;
+				selected = null;
+			}
+
+			// If we have a menu, select it
+			if (gmi != null)
+			{
+				gmi.IsSelected = true;
+				selected = gmi;
+				selectedIndex = ndx;
+			}
 		}
 		#endregion
 
 		#region Properties
-		//private GuiMenuItem selected;
-		private IMenuPopupController controller;
-		//private int selectedIndex = 0;
+		private GuiMenuItem selected;
+		private int selectedIndex;
 
+		private GuiMenuTitle menuTitle;
 		/// <summary>
 		/// 
 		/// </summary>
-		public IMenuPopupController Controller
+		public GuiMenuTitle MenuTitle
 		{
-			get { return controller; }
-			set { controller = value; }
+			get
+			{
+				return menuTitle;
+			}
+			set 
+			{
+				menuTitle = value;
+				this.Position = menuTitle.Position;
+			}
 		}
+
+
 		#endregion
 	}
 }

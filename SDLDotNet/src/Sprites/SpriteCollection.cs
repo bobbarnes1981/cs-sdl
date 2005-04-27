@@ -63,7 +63,10 @@ namespace SdlDotNet.Sprites
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				 surface.Blit(this[i].Render(), this[i].Rectangle);
+				if (this[i].Visible)
+				{
+					surface.Blit(this[i].Render(), this[i].Rectangle);
+				}
 			}
 		}
 

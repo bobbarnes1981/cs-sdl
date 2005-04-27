@@ -96,6 +96,7 @@ namespace SdlDotNet.Examples
 
 		#region GUI
 		private GuiMenuTitle demoMenu;
+		private GuiMenuTitle gm;
 
 		private int [] fpsSpeeds = 
 			new int [] {1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
@@ -105,7 +106,6 @@ namespace SdlDotNet.Examples
 			//	master.EnableEvents();
 
 			// Set up the demo sprite containers
-			//master.Add(manager);
 			master.EnableMouseButtonEvent();
 			master.EnableMouseMotionEvent();
 			master.EnableTickEvent();
@@ -119,8 +119,6 @@ namespace SdlDotNet.Examples
 
 			// Set up the ticker
 			statusTicker = new GuiTicker(gui, 0, Size.Height - 20, 20);
-			//statusTicker.IsAutoHide = true;
-			//statusTicker.Rectangle = new Rectangle(0, 0, 800, 20);
 			statusTicker.Z = 3000;
 			master.Add(statusTicker);
 			Report("SDL.NET Demo started");
@@ -153,20 +151,21 @@ namespace SdlDotNet.Examples
 
 			// Create the demo menu
 			demoMenu = new GuiMenuTitle(gui, gmb, "Demo");
-			demoMenu.Sprites.EnableTickEvent();
-			demoMenu.Sprites.EnableMouseButtonEvent();
-			//master.Add(demoMenu);
+			master.Add(demoMenu.Popup);
 			gmb.AddLeft(demoMenu);
 
 			// Create the FPS menu
-			GuiMenuTitle gm = new GuiMenuTitle(gui, gmb, "FPS");
+			gm = new GuiMenuTitle(gui, gmb, "FPS");
+			master.Add(gm.Popup);
 			gmb.AddLeft(gm);
+
+			GuiMenuItem fmi;
       
 			for (int i = 0; i < fpsSpeeds.Length; i++)
 			{
 				int spd = fpsSpeeds[i];
 
-				GuiMenuItem fmi = new GuiMenuItem(gui, spd + " FPS");
+				fmi = new GuiMenuItem(gui, spd.ToString() + " FPS");
 				fmi.ItemSelectedEvent += new MenuItemHandler(OnMenuFps);
 				//fmi.IsTickable = false;
 				gm.Add(fmi);
@@ -209,9 +208,9 @@ namespace SdlDotNet.Examples
 
 			// Add the graphical menu
 			GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
-//			gmi.AddRight(new TextSprite(String.Format("{0}", cnt),
-//				gui.BaseFont));
-//			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuDemo);
+			gmi.AddRight(new TextSprite(String.Format("{0}", cnt),
+				gui.BaseFont));
+			gmi.ItemSelectedEvent += new MenuItemHandler(OnMenuDemo);
 			//gmi.IsTickable = false;
 			demoMenu.Add(gmi);
 		}
@@ -230,8 +229,6 @@ namespace SdlDotNet.Examples
 			LoadDemo(new ViewportMode());
 			LoadDemo(new MultipleMode());
 			LoadDemo(new GuiMode());
-			master.Add(demoMenu.Popup);
-
 
 			// Finish up the gui
 			CreateMenuQuit(gui);

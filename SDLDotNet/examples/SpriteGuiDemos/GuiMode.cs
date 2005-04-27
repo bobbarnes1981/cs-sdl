@@ -32,6 +32,9 @@ namespace SdlDotNet.Examples
 	{
 		private GuiTicker ticker = null;
 		Random rand = new Random();
+		GuiMenuTitle gm;
+		GuiMenuTitle gm2;
+			GuiMenuTitle gm3;
 
 		/// <summary>
 		/// Constructs the internal sprites needed for our demo.
@@ -96,7 +99,7 @@ namespace SdlDotNet.Examples
 			sm.Add(gmb);
 		
 			// First menu
-			GuiMenuTitle gm = new GuiMenuTitle(gui, gmb, "Test Menu");
+			gm = new GuiMenuTitle(gui, gmb, "Test Menu");
 			//gm.MenuBar = gmb;
 			gm.Sprites.EnableMouseButtonEvent();
 			gmb.AddLeft(gm);
@@ -116,7 +119,7 @@ namespace SdlDotNet.Examples
 			gm.Add(new GuiMenuItem(gui, "Test #4"));
 		
 			// Create the second
-			GuiMenuTitle gm2 = new GuiMenuTitle(gui, gmb, "Test #2");
+			gm2 = new GuiMenuTitle(gui, gmb, "Test #2");
 			GuiMenuItem gmi2 = new GuiMenuItem(gui, "Test 2.1");
 			gmb.AddLeft(gm2);
 			gm2.Popup.Add(gmi2);
@@ -126,7 +129,7 @@ namespace SdlDotNet.Examples
 			//gmi2.IsTraced = true;
 		
 			// Create a third menu
-			GuiMenuTitle gm3 = new GuiMenuTitle(gui, gmb, "Right Menu");
+			gm3 = new GuiMenuTitle(gui, gmb, "Right Menu");
 			gm3.Popup.Add(new GuiMenuItem(gui, "Test #6"));
 			gm3.Popup.Add(new GuiMenuItem(gui, "Really Long Title for a Menu Item"));
 			//gmb.AddRight(new TextSprite("NonMenu", gui.BaseFont));
@@ -140,6 +143,9 @@ namespace SdlDotNet.Examples
 		{
 			manager.Add(Sprites);
 			base.Start(manager);
+			manager.Add(gm.Popup);
+			manager.Add(gm2.Popup);
+			manager.Add(gm3.Popup);
 		}
 
 		/// <summary>

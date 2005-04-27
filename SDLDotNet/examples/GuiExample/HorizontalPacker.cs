@@ -85,6 +85,7 @@ namespace SdlDotNet.Examples.GuiExample
 			// Draw all of our left components
 			int x = 0;
 
+			int width = 0;
 			foreach (Sprite s in HeadSprites)
 			{
 				// Ignore hidden
@@ -98,10 +99,13 @@ namespace SdlDotNet.Examples.GuiExample
 
 				// Update the coordinates for the next one
 				x += s.Size.Width + InnerPadding.Horizontal;
+				if (s.Size.Width > width)
+				{
+					width = s.Size.Width;
+				}
 			}
 
-			// Draw our right components
-			x = this.X + Size.Width - MarginPadding.Right;
+			this.Surface = new Surface( width* 3, this.HeadSprites[0].Height);
 
 			foreach (Sprite s in TailSprites)
 			{
@@ -112,8 +116,7 @@ namespace SdlDotNet.Examples.GuiExample
 				}
 	
 				// Translate it and blit
-				x -= s.Size.Width + InnerPadding.Horizontal;
-				s.X = x;
+				s.X = this.X + this.Size.Width - MarginPadding.Right - s.Size.Width - InnerPadding.Horizontal;
 			}
 			this.Sprites.Draw(this.Surface);
 			return this.Surface;

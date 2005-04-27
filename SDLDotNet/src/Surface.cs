@@ -1002,7 +1002,10 @@ namespace SdlDotNet
 		/// <param name="sprite"></param>
 		public void Blit(Sprite sprite)
 		{
-			this.Blit(sprite.Render());
+			if (sprite.Visible)
+			{
+				this.Blit(sprite.Render());
+			}
 		}
 
 		/// <summary>

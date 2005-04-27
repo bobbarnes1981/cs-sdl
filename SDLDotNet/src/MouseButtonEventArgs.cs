@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Drawing;
 
 using Tao.Sdl;
 
@@ -101,6 +102,17 @@ namespace SdlDotNet
 			get
 			{ 
 				return this.eventStruct.button.y;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Position
+		{
+			get
+			{
+				return new Point(this.eventStruct.button.x, this.eventStruct.button.y);
 			}
 		}
 	}
