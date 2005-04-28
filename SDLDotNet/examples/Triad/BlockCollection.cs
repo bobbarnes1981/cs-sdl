@@ -17,13 +17,14 @@
 //********************************************************************************
 
 using System;
+using System.Collections;
 
 namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// A collection of elements of type Block
 	/// </summary>
-	public class BlockCollection: System.Collections.CollectionBase
+	public class BlockCollection: CollectionBase, ICollection
 	{
 		/// <summary>
 		/// Initializes a new empty instance of the BlockCollection class.
@@ -63,7 +64,7 @@ namespace SdlDotNet.Examples
 		/// <param name="items">
 		/// The array whose elements are to be added to the end of this BlockCollection.
 		/// </param>
-		public virtual void AddRange(Block[] items)
+		public void AddRange(Block[] items)
 		{
 			foreach (Block item in items)
 			{
@@ -77,7 +78,7 @@ namespace SdlDotNet.Examples
 		/// <param name="items">
 		/// The BlockCollection whose elements are to be added to the end of this BlockCollection.
 		/// </param>
-		public virtual void AddRange(BlockCollection items)
+		public void AddRange(BlockCollection items)
 		{
 			foreach (Block item in items)
 			{
@@ -230,6 +231,57 @@ namespace SdlDotNet.Examples
 		{
 			return new BlockCollection.Enumerator(this);
 		}
+		#region ICollection Members
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsSynchronized
+		{
+			get
+			{
+				// TODO:  Add BlockCollection.IsSynchronized getter implementation
+				return false;
+			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="array"></param>
+		/// <param name="index"></param>
+		public void CopyTo(Block[] array, int index)
+		{
+			((ICollection)this).CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public object SyncRoot
+		{
+			get
+			{
+				// TODO:  Add BlockCollection.SyncRoot getter implementation
+				return null;
+			}
+		}
+		// Provide the explicit interface member for ICollection.
+		void ICollection.CopyTo(Array array, int index)
+		{
+			this.List.CopyTo(array, index);
+		}
+
+
+		#endregion
+
+		#region IEnumerable Members
+
+		IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			// TODO:  Add BlockCollection.System.Collections.IEnumerable.GetEnumerator implementation
+			return null;
+		}
+
+		#endregion
 	}
 
 
