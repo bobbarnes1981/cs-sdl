@@ -113,6 +113,7 @@
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	   	<Files>
 		<File buildAction="Content">App.ico</File>
+		<File buildAction="Content">ParticleEngine.html</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
