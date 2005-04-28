@@ -22,6 +22,7 @@ using SdlDotNet;
 using System;
 using System.Collections;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples.GuiExample
 {
@@ -46,7 +47,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format("(menu {0})", base.ToString());
+			return String.Format(CultureInfo.CurrentCulture, "(menu {0})", base.ToString());
 		}
 
 		#region Drawing
@@ -73,7 +74,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="menuItem"></param>
-		public void Add(GuiMenuItem menuItem)
+		public void Add(Sprite menuItem)
 		{
 			AddHead(menuItem);
 			

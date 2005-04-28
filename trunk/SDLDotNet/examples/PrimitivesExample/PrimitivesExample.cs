@@ -20,6 +20,8 @@
 using System;
 using System.Drawing;
 using System.Threading;
+using System.Globalization;
+
 using SdlDotNet;
 
 // Simple SDL.NET Example
@@ -415,11 +417,11 @@ namespace SdlDotNet.Examples
 							colorValue = surf.GetColorValue(Color.FromArgb(rpixel, gpixel, bpixel));
 							//colorValue = screen.MapColor(Color.FromArgb(254, 0, 0));
 							//screen.DrawPixel(x, y, Color.Red);
-							Console.WriteLine("colorValue: " + colorValue.ToString());
+							Console.WriteLine("colorValue: " + colorValue.ToString(CultureInfo.CurrentCulture));
 							surf.DrawPixel(xpixel, ypixel, Color.FromArgb(rpixel, gpixel, bpixel));
 							//screen.DrawPixel(x, y, Color.Red);
 							Console.WriteLine("GetPixel: " + screen.GetPixel(xpixel, ypixel).ToString());
-							Console.WriteLine("GetPixel: " + screen.GetColorValue(screen.GetPixel(xpixel, ypixel)).ToString());
+							Console.WriteLine("GetPixel: " + screen.GetColorValue(screen.GetPixel(xpixel, ypixel)).ToString(CultureInfo.CurrentCulture));
 							times++;
 							screen.Flip();
 							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));

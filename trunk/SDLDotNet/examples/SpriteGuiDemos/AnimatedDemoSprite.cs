@@ -21,6 +21,7 @@ using SdlDotNet;
 using SdlDotNet.Sprites;
 using System;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples
 {
@@ -88,7 +89,7 @@ namespace SdlDotNet.Examples
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format("(animated {0})", base.ToString());
+			return String.Format(CultureInfo.CurrentCulture, "(animated {0})", base.ToString());
 		}
 		#endregion
 	}

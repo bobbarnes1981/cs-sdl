@@ -25,7 +25,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class MainObject
+	public class MainObject : IDisposable
 	{
 		private bool _quitflag;
 
@@ -46,7 +46,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Go() 
 		{
-			DateTime startTime = DateTime.Now;
+			//DateTime startTime = DateTime.Now;
 
 			int width = 800;
 			int height = 600;
@@ -138,7 +138,7 @@ namespace SdlDotNet.Examples
 		}
 
 		int blockCount;
-		private void grid_BlocksDestroyed(object sender, BlockDestroyedEventArgs args)
+		private void grid_BlocksDestroyed(object sender, BlocksDestroyedEventArgs args)
 		{
 			this.blockCount += args.BlocksCount;
 			if(blockCount > 30)
@@ -154,5 +154,18 @@ namespace SdlDotNet.Examples
 			this.board.BlocksDestroyed += args.BlocksCount;
 			this.board.Score += args.BlocksCount * 100 * args.ReductionCount;
 		}
+		#region IDisposable Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Dispose()
+		{
+			grid.Dispose();
+			board.Dispose();
+			levelUpSound.Dispose();
+		}
+
+		#endregion
 	}
 }

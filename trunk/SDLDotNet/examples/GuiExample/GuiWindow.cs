@@ -21,6 +21,7 @@ using SdlDotNet.Sprites;
 using SdlDotNet;
 using System.Drawing;
 using System;
+using System.Globalization;
 
 namespace SdlDotNet.Examples.GuiExample
 {
@@ -90,7 +91,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format("(window \"{0}\" {1})",
+			return String.Format(CultureInfo.CurrentCulture, "(window \"{0}\" {1})",
 				Title, base.ToString());
 		}
 		#endregion
@@ -117,7 +118,7 @@ namespace SdlDotNet.Examples.GuiExample
 				title = value;
 
 				// Set the bounds
-				titleSize = this.GuiManager.GetTextSize(this.GuiManager.TitleFont, title);
+				titleSize = GuiManager.GetTextSize(this.GuiManager.TitleFont, title);
 				//this.Sprites.Remove(titleSprite);
 				titleSprite.TextString = value;
 			}

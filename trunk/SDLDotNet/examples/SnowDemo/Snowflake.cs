@@ -81,7 +81,9 @@ namespace SdlDotNet.Examples
 			x += change * wind;
 
 			if(y > 480)
+			{
 				reset();
+			}
 
 			updaterectangle();
 		}

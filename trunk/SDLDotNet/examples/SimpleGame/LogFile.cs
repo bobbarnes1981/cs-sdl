@@ -17,6 +17,7 @@
 
 using System;
 using System.IO;
+using System.Globalization;
 
 namespace SdlDotNet.Examples
 {
@@ -54,7 +55,7 @@ namespace SdlDotNet.Examples
 			
 			StreamWriter streamWriter = new StreamWriter(fs);
 			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.WriteLine(DateTime.Now.ToString() + " " + format);
+			streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format);
 			streamWriter.Flush(); 
 		}
 
@@ -68,7 +69,7 @@ namespace SdlDotNet.Examples
 			
 			StreamWriter streamWriter = new StreamWriter(fs);
 			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.WriteLine(DateTime.Now.ToString() + " " + format, arg0);
+			streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0);
 			streamWriter.Flush(); 
 		}
 
@@ -83,7 +84,7 @@ namespace SdlDotNet.Examples
 			
 			StreamWriter streamWriter = new StreamWriter(fs);
 			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.WriteLine(DateTime.Now.ToString() + " " + format, arg0, arg1);
+			streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1);
 			streamWriter.Flush(); 
 		}
 
@@ -99,7 +100,7 @@ namespace SdlDotNet.Examples
 			
 			StreamWriter streamWriter = new StreamWriter(fs);
 			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.WriteLine(DateTime.Now.ToString() + " " + format, arg0, arg1, arg2);
+			streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1, arg2);
 			streamWriter.Flush(); 
 		}
 
@@ -113,7 +114,7 @@ namespace SdlDotNet.Examples
 			StreamWriter streamWriter = new StreamWriter(fs);
 			// Write to the file using StreamWriter class 
 			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.Write(DateTime.Now.ToString() + " " + format);
+			streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format);
 			streamWriter.Flush(); 
 		}
 
@@ -127,7 +128,7 @@ namespace SdlDotNet.Examples
 			
 			StreamWriter streamWriter = new StreamWriter(fs);
 			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.Write(DateTime.Now.ToString() + " " + format, arg0);
+			streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0);
 			streamWriter.Flush(); 
 		}
 
@@ -142,7 +143,7 @@ namespace SdlDotNet.Examples
 			
 			StreamWriter streamWriter = new StreamWriter(fs);
 			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.Write(DateTime.Now.ToString() + " " + format, arg0, arg1);
+			streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1);
 			streamWriter.Flush(); 
 		}
 
@@ -158,7 +159,7 @@ namespace SdlDotNet.Examples
 			
 			StreamWriter streamWriter = new StreamWriter(fs);
 			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.Write(DateTime.Now.ToString() + " " + format, arg0, arg1, arg2);
+			streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1, arg2);
 			streamWriter.Flush(); 
 		}
 

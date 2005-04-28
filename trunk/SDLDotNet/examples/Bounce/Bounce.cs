@@ -86,7 +86,7 @@ namespace SdlDotNet.Examples
 			{
 
 				Surface screen = Video.SetVideoModeWindow(WIDTH, HEIGHT, true);
-				Video.WindowCaption = "SDL# Bouncer"; //, "SDL# Bouncer");
+				Video.WindowCaption = "SDL.NET Bouncer";
 				Video.Mouse.ShowCursor(false); // hide the cursor
 
 				// create a surface to draw to...

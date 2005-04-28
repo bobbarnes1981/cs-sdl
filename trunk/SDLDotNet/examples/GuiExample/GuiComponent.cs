@@ -21,6 +21,7 @@ using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples.GuiExample
 {
@@ -105,7 +106,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format("(gui {0})", this.Rectangle, base.ToString());
+			return String.Format(CultureInfo.CurrentCulture, "(gui {0})", this.Rectangle, base.ToString());
 		}
 
 		#region Drawing

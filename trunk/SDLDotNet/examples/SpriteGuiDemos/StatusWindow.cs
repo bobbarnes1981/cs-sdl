@@ -22,6 +22,7 @@ using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples
 {
@@ -113,7 +114,7 @@ namespace SdlDotNet.Examples
 
 			// Adjust our height
 			i++;
-			int tempHeight = (labelHeight + labelPad) * i + 4;
+			//int tempHeight = (labelHeight + labelPad) * i + 4;
 		}
 
 		#region Data Components
@@ -129,11 +130,11 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
-			tps.TextString = String.Format("{0}", Events.TicksPerSecond);
+			tps.TextString = String.Format(CultureInfo.CurrentCulture, "{0}", Events.TicksPerSecond);
 
 			if (SdlDemo.Fps.IsFull)
 			{
-				fps.TextString = SdlDemo.Fps.FramesPerSecond.ToString("#0.00");
+				fps.TextString = SdlDemo.Fps.FramesPerSecond.ToString("#0.00", CultureInfo.CurrentCulture);
 			}
 			else
 			{

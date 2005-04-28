@@ -235,13 +235,11 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Dispose()
 		{	
-			this.blockGrid = null;
-			this.bottomBlock = null;
-			this.middleBlock = null;
+			this.blockGrid.Dispose();
+			this.bottomBlock.Dispose();
+			this.middleBlock.Dispose();;
 			this.Parent = null;
-			this.topBlock = null;
-			
-
+			this.topBlock.Dispose();
 		}
 	}
 }

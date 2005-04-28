@@ -82,12 +82,9 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Sector[] Sectors
+		public Sector[] GetSectors()
 		{
-			get
-			{
-				return this.sectors;
-			}
+			return this.sectors;
 		}
 	}
 }

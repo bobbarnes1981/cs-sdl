@@ -24,6 +24,7 @@ using System;
 using System.Collections;
 using System.Drawing;
 using System.Threading;
+using System.Globalization;
 
 namespace SdlDotNet.Examples
 {
@@ -34,13 +35,12 @@ namespace SdlDotNet.Examples
 	/// directory has a "test/" directory underneath it containing
 	/// various images.
 	/// </summary>
-	public class SdlDemo
+	public class SdlDemo : IDisposable
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="args"></param>
-		public static void Main(string [] args)
+		public static void Main()
 		{
 			// Create the demo application
 			SdlDemo demo = new SdlDemo();
@@ -165,7 +165,7 @@ namespace SdlDotNet.Examples
 			{
 				int spd = fpsSpeeds[i];
 
-				fmi = new GuiMenuItem(gui, spd.ToString() + " FPS");
+				fmi = new GuiMenuItem(gui, spd.ToString(CultureInfo.CurrentCulture) + " FPS");
 				fmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuFps);
 				//fmi.IsTickable = false;
 				gm.Add(fmi);
@@ -208,7 +208,7 @@ namespace SdlDotNet.Examples
 
 			// Add the graphical menu
 			GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
-			gmi.AddRight(new TextSprite(String.Format("{0}", cnt),
+			gmi.AddRight(new TextSprite(String.Format(CultureInfo.CurrentCulture, "{0}", cnt),
 				gui.BaseFont));
 			gmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuDemo);
 			//gmi.IsTickable = false;
@@ -337,17 +337,17 @@ namespace SdlDotNet.Examples
 			screen.Update();
 		}
 
-		private void OnMenuDemo(int index)
+		private void OnMenuDemo(object sender, MenuItemEventArgs e)
 		{
-			SwitchDemo(index);
+			SwitchDemo(e.Index);
 		}
 
-		private void OnMenuFps(int index)
+		private void OnMenuFps(object sender, MenuItemEventArgs e)
 		{
-			Events.TicksPerSecond = fpsSpeeds[index];
+			Events.TicksPerSecond = fpsSpeeds[e.Index];
 		}
 
-		private void OnMenuQuit(int index)
+		private void OnMenuQuit(object sender, MenuItemEventArgs e)
 		{
 			running = false;
 		}
@@ -445,6 +445,19 @@ namespace SdlDotNet.Examples
 				return new Size(800, 600); 
 			}
 		}
+		#endregion
+
+		#region IDisposable Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Dispose()
+		{
+			screen.Dispose();
+			// TODO:  Add SdlDemo.Dispose implementation
+		}
+
 		#endregion
 	}
 }

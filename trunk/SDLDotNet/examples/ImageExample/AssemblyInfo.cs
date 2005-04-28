@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
+using System.Resources;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -83,3 +84,5 @@ using System.Security.Permissions;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyKeyFile("..\\..\\..\\..\\src\\SdlDotNet.snk")]
+//[assembly: NeutralResourcesLanguageAttribute("en-US")]
+

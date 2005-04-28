@@ -22,6 +22,7 @@ using SdlDotNet;
 using System;
 using System.Collections;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples.GuiExample
 {
@@ -59,7 +60,7 @@ namespace SdlDotNet.Examples.GuiExample
 			AddHead(s);
 			s.Position = new Point(0, 0);
 
-			if (s is GuiMenuTitle)
+			if (s.GetType().Name == "GuiMenuTitle")
 			{
 				((GuiMenuTitle) s).MenuBar = this;
 			}
@@ -73,7 +74,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			AddTail(s);
 
-			if (s is GuiMenuTitle)
+			if (s.GetType().Name == "GuiMenuTitle")
 			{
 				((GuiMenuTitle) s).MenuBar = this;
 			}
@@ -111,7 +112,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format("(menu-bar {0})", base.ToString());
+			return String.Format(CultureInfo.CurrentCulture, "(menu-bar {0})", base.ToString());
 		}
 		#endregion
 	}

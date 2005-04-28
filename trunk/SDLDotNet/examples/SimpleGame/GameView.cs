@@ -67,7 +67,7 @@ namespace SdlDotNet.Examples
 			
 			int i = 0;
 			//for (int i=0; i < 9; i++)
-			foreach (Sector sec in map.Sectors)
+			foreach (Sector sec in map.GetSectors())
 			{
 				if (i < 3)
 				{
@@ -109,7 +109,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void CreateView()
 		{
-			Surface screen = Video.SetVideoModeWindow(this.width, this.height, true); 
+			Video.SetVideoModeWindow(this.width, this.height, true);
 			this.surf = Video.Screen.CreateCompatibleSurface(width, height, true);
 			//fill the surface with black
 			this.surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
@@ -156,7 +156,7 @@ namespace SdlDotNet.Examples
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
 			this.entitySprite.CenterX = sectSprite.CenterX;
 			this.entitySprite.CenterY = sectSprite.CenterY;
-			Channel channel = this.sound.Play();
+			this.sound.Play();
 		}
 
 		/// <summary>

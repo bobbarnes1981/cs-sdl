@@ -172,7 +172,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		public Point AdjustViewport(Sprite sprite, Surface surf)
+		public static Point AdjustViewport(Sprite sprite, Surface surf)
 		{
 			return new Point(
 				surf.Size.Width / 2 - 
@@ -200,7 +200,7 @@ namespace SdlDotNet.Examples
 		/// <returns></returns>
 		public Point AdjustBoundedViewport(Sprite sprite, Surface surf)
 		{
-			Point offset = this.AdjustViewport(sprite, surf);
+			Point offset = AdjustViewport(sprite, surf);
 
 			// Check to see if the window is too small
 			bool doWidth = true;

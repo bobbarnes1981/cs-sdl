@@ -22,6 +22,8 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.IO;
+using System.Globalization;
+
 using SdlDotNet;
 using Tao.Sdl;
 
@@ -76,7 +78,7 @@ namespace SdlDotNet.Examples
 			Mixer.Music.EnableMusicFinishedCallback();
 			Mixer.Music.Play(1);
 			Sound sound = Mixer.Sound(filepath + "test.wav");
-			Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
+			//Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
 			//Sound sound2 = Mixer.Sound(filepath + "test.wav");
 			Channel channel = new Channel(0);
 			//Channel channel2 = new Channel(1);
@@ -107,8 +109,8 @@ namespace SdlDotNet.Examples
 			Events.Add(events);
 			//Events.PushUserEvent(new MusicFinishedEventArgs());
 
-			SdlEventArgs[] eventArrayDown = Events.Peek(EventMask.KeyDown, 10);
-			SdlEventArgs[] eventArrayUp = Events.Peek(EventMask.KeyUp, 10);
+			//SdlEventArgs[] eventArrayDown = Events.Peek(EventMask.KeyDown, 10);
+			//SdlEventArgs[] eventArrayUp = Events.Peek(EventMask.KeyUp, 10);
 			//	SdlEventArgs[] eventArrayMusic = Events.Peek(EventMask.AllEvents, 10);
 
 			while (!quitFlag) 
@@ -178,7 +180,7 @@ namespace SdlDotNet.Examples
 					else if (channelFinishedFlag)
 					{
 						text = font.Render(
-							"ChannelFinishedDelegate was called for channel " + currentChannel.ToString(), 
+							"ChannelFinishedDelegate was called for channel " + currentChannel.ToString(CultureInfo.CurrentCulture), 
 							Color.FromArgb(0, 154, 
 							154,154));
 						screen.Blit(
@@ -231,15 +233,15 @@ namespace SdlDotNet.Examples
 
 		private void ChannelFinished(object sender, ChannelFinishedEventArgs e)
 		{
-			Console.WriteLine("channel: " + e.Channel.ToString());
-			Console.WriteLine("Channel Finished");
+			//Console.WriteLine("channel: " + e.Channel.ToString());
+			//Console.WriteLine("Channel Finished");
 			channelFinishedFlag = true;
 			currentChannel = e.Channel;
 		}
 
 		private void MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
-			Console.WriteLine("Music Finished");
+			//Console.WriteLine("Music Finished");
 			musicFinishedFlag = true;
 		}
 

@@ -20,6 +20,10 @@
 
 using System;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
+
 using SdlDotNet;
 
 namespace SdlDotNet.Examples 
@@ -30,6 +34,7 @@ namespace SdlDotNet.Examples
 	public class CDPlayer : System.Windows.Forms.Form {
 		private CDDrive _drive;
 		private int _track;
+		static ResourceManager stringManager;
 
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ComboBox comboBoxDrive;
@@ -51,6 +56,8 @@ namespace SdlDotNet.Examples
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
+			stringManager = 
+				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
 
 			//_drive = null;
 
@@ -69,8 +76,8 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void HandleError(SdlException ex) {
-			MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		private static void HandleError(SdlException ex) {
+			MessageBox.Show(ex.Message, stringManager.GetString("Error", CultureInfo.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 		/// <summary>
@@ -241,8 +248,8 @@ namespace SdlDotNet.Examples
 				}
 				TimeSpan timeSpan = Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
 				this.labelStatus.Text = 
-					"Track: " + _drive.CurrentTrack + 
-					"     Length: " + timeSpan.Minutes + ":" + timeSpan.Seconds;
+					stringManager.GetString("Track: ", CultureInfo.CurrentUICulture) + _drive.CurrentTrack + 
+					stringManager.GetString("     Length: ", CultureInfo.CurrentUICulture) + timeSpan.Minutes + stringManager.GetString(":", CultureInfo.CurrentUICulture) + timeSpan.Seconds;
 			} 
 			catch (SdlException ex) 
 			{
@@ -265,7 +272,7 @@ namespace SdlDotNet.Examples
 					_drive.Stop();
 					_track = 0;
 				}
-				this.labelStatus.Text = "Track: " + _drive.CurrentTrack;
+				this.labelStatus.Text = stringManager.GetString("Track: ", CultureInfo.CurrentUICulture) + _drive.CurrentTrack;
 			} catch (SdlException ex) {
 				HandleError(ex);
 			}

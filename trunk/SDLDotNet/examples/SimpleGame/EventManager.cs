@@ -98,7 +98,7 @@ namespace SdlDotNet.Examples
 		/// <param name="obj"></param>
 		public void Publish(Object obj)
 		{
-			if (obj is GameStatusEventArgs)
+			if (obj.GetType().Name == "GameStatusEventArgs")
 			{
 				if (OnGameStatusEvent != null) 
 				{
@@ -106,7 +106,7 @@ namespace SdlDotNet.Examples
 					OnGameStatusEvent(this, (GameStatusEventArgs) obj);
 				}
 			}
-			else if (obj is SdlDotNet.QuitEventArgs)
+			else if (obj.GetType().Name == "QuitEventArgs")
 			{
 				if (OnQuitEvent != null) 
 				{
@@ -114,7 +114,7 @@ namespace SdlDotNet.Examples
 					OnQuitEvent(this, (SdlDotNet.QuitEventArgs) obj);
 				}
 			}
-			else if (obj is EntityMoveRequestEventArgs)
+			else if (obj.GetType().Name == "EntityMoveRequestEventArgs")
 			{
 				if (OnEntityMoveRequestEvent != null) 
 				{
@@ -122,7 +122,7 @@ namespace SdlDotNet.Examples
 					OnEntityMoveRequestEvent(this, (EntityMoveRequestEventArgs)obj);
 				}
 			}
-			else if (obj is MapBuiltEventArgs)
+			else if (obj.GetType().Name == "MapBuiltEventArgs")
 			{
 				if (OnMapBuiltEvent != null) 
 				{
@@ -130,7 +130,7 @@ namespace SdlDotNet.Examples
 					OnMapBuiltEvent(this, (MapBuiltEventArgs) obj);
 				}
 			}
-			else if (obj is TickEventArgs)
+			else if (obj.GetType().Name == "TickEventArgs")
 			{
 				if (OnTickEvent != null) 
 				{
@@ -138,7 +138,7 @@ namespace SdlDotNet.Examples
 					OnTickEvent(this, (TickEventArgs) obj);
 				}
 			}		
-			else if (obj is EntityMoveEventArgs)
+			else if (obj.GetType().Name == "EntityMoveEventArgs")
 			{
 				if (OnEntityMoveEvent != null) 
 				{
@@ -146,7 +146,7 @@ namespace SdlDotNet.Examples
 					OnEntityMoveEvent(this, (EntityMoveEventArgs) obj);
 				}
 			}
-			else if (obj is EntityPlaceEventArgs)
+			else if (obj.GetType().Name == "EntityPlaceEventArgs")
 			{	
 				if (OnEntityPlaceEvent != null) 
 				{

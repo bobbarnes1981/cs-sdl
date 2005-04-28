@@ -21,8 +21,12 @@
 using System;
 using System.Drawing;
 using System.IO;
-using SdlDotNet;
+using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Reflection;
+using System.Resources;
+
+using SdlDotNet;
 
 
 namespace SdlDotNet.Examples
@@ -32,10 +36,6 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class ImageExample
 	{
-
-		/// <summary>
-		/// Private field. Indicated if mainloop is to be continued.
-		/// </summary>
 		private bool quitFlag;
 		Point position = new Point(100,100);
 		private int AxesCount;
@@ -57,7 +57,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run() 
 		{
-			Random rand = new Random();
+			//Random rand = new Random();
 			string imagepath;
 			
 			
@@ -74,7 +74,10 @@ namespace SdlDotNet.Examples
 				{
 					filepath = "";
 				}
+//				SdlButton button = new SdlButton(200, 200, 75, 50, Color.Green, stringManager.GetString(
+//                        "Hello", CultureInfo.CurrentUICulture));
 				SdlButton button = new SdlButton(200, 200, 75, 50, Color.Green, "Hello");
+
 				SdlTextBox textBox = new SdlTextBox(300, 300, 300);
 				button.Click +=new SdlButtonEventHandler(button_Click);
 				
@@ -102,7 +105,7 @@ namespace SdlDotNet.Examples
 
 				for (int j = 1; j <= 16;j++) 
 				{
-					Jeep.Add(filepath + imagepath + @"jeep/jeep" + j.ToString() +".gif");
+					Jeep.Add(filepath + imagepath + @"jeep/jeep" + j.ToString(CultureInfo.CurrentCulture) +".gif");
 					Jeep[Jeep.Count-1].Transparent = true;
 				}
 
@@ -229,9 +232,9 @@ namespace SdlDotNet.Examples
 				//joystickPosition.Y = (int)(e.AxisValue * height);
 				position.Y = (int)(Joysticks.OpenJoystick(e.Device).GetAxisPosition(JoystickAxis.Vertical) * height);
 			}
-			Console.WriteLine("Joystick Axis Changed: " + AxesCount.ToString());
-			Console.WriteLine("X: " + position.X.ToString());
-			Console.WriteLine("Y: " + position.Y.ToString());
+			Console.WriteLine("Joystick Axis Changed: " + AxesCount.ToString(CultureInfo.CurrentCulture));
+			Console.WriteLine("X: " + position.X.ToString(CultureInfo.CurrentCulture));
+			Console.WriteLine("Y: " + position.Y.ToString(CultureInfo.CurrentCulture));
 			Console.WriteLine("Axes: " + e.AxisIndex);
 			Console.WriteLine("AxesValue: " + e.AxisValue);
 		}
