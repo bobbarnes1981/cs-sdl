@@ -109,7 +109,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static int SecondsToFrames(int seconds) 
 		{
-			if (seconds * Sdl.CD_FPS <= Int32.MaxValue)
+			if (seconds <= Int32.MaxValue / Sdl.CD_FPS)
 			{
 				return (seconds * Sdl.CD_FPS);
 			}

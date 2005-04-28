@@ -123,12 +123,12 @@ namespace SdlDotNet.Examples
 			objectList.AddRange(emptyList);
 
 			//Test constructor...						
-			try
-			{
-				GameObjectCollection objectList2 = new GameObjectCollection(nullList);
-				Assert.Fail("Input object list is null.");
-			}
-			catch(GameException){}
+			//try
+			//{
+				//GameObjectCollection objectList2 = new GameObjectCollection(nullList);
+				//Assert.Fail("Input object list is null.");
+			//}
+			//catch(GameException){}
 
 			objectList.IndexOf(null);			
 			try

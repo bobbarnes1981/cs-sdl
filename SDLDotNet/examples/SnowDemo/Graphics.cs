@@ -97,7 +97,7 @@ namespace SdlDotNet.Examples
 			
 			for(int i = 0; i < SnowDemo.NumberOfSnowflakes; i++)
 			{
-				screen.Blit(SnowDemo.Snowflakes[i].Image, SnowDemo.Snowflakes[i].Position);
+				screen.Blit(SnowDemo.GetSnowflakes()[i].Image, SnowDemo.GetSnowflakes()[i].Position);
 			}
 			
 			screen.Blit(background, new Rectangle(new Point(0, 280), background.Size));
@@ -106,7 +106,6 @@ namespace SdlDotNet.Examples
 			{
 				screen.Blit(SnowDemo.Texts[i].Image, SnowDemo.Texts[i].Position);
 			}
-			
 			screen.Flip();
 		}
 	}

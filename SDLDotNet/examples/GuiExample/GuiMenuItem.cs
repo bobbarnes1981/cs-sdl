@@ -21,6 +21,7 @@ using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples.GuiExample
 {
@@ -91,7 +92,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			if (ItemSelectedEvent != null)
 			{
-				ItemSelectedEvent(index);
+				ItemSelectedEvent(this, new MenuItemEventArgs(index));
 			}
 		}
 		#endregion
@@ -103,7 +104,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format("(menu-item {0})", base.ToString());
+			return String.Format(CultureInfo.CurrentCulture, "(menu-item {0})", base.ToString());
 		}
 		#endregion
 
@@ -152,5 +153,5 @@ namespace SdlDotNet.Examples.GuiExample
 	/// <summary>
 	/// 
 	/// </summary>
-	public delegate void MenuItemEventHandler(int index);
+	public delegate void MenuItemEventHandler(object sender, MenuItemEventArgs e);
 }

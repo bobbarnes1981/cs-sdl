@@ -29,7 +29,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class BlockGrid : GameArea
+	public class BlockGrid : GameArea, IDisposable
 	{
 		Size sizeOfGrid;
 		Triad triad;
@@ -49,7 +49,7 @@ namespace SdlDotNet.Examples
 			{
 				if(value == 0.0)
 				{
-                    throw new ApplicationException("You can not set the speed factor to zero.");
+                    throw new SdlException("You can not set the speed factor to zero.");
 				}
 
 				this.delayFactor = (int)(this.delayFactor / value);
@@ -76,11 +76,11 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="reductionCount"></param>
 		/// <param name="blockCount"></param>
-		public void RaiseBlocksDestroyedEvent(int reductionCount, int blockCount)
+		public void OnBlocksDestroyed(int reductionCount, int blockCount)
 		{
 			if(BlocksDestroyed != null)
 			{
-				BlocksDestroyed(this,new BlockDestroyedEventArgs(reductionCount,blockCount));
+				BlocksDestroyed(this,new BlocksDestroyedEventArgs(reductionCount,blockCount));
             }
 
 		}
@@ -304,19 +304,15 @@ namespace SdlDotNet.Examples
 					if(numberOfBlocksDestroyed > 0)
 					{
 						this.reductionSound.Play();
-						RaiseBlocksDestroyedEvent(reductionCount, numberOfBlocksDestroyed);
+						OnBlocksDestroyed(reductionCount, numberOfBlocksDestroyed);
 					}
-
 
 					break;
 				case BlockGridState.GameOver:
 
 					break;
-
-
-
 				default:
-					throw new ApplicationException("BlockGridState is not handled: " + currentState);
+					throw new SdlException("BlockGridState is not handled: " + currentState);
 			}
 		}
 
@@ -385,7 +381,7 @@ namespace SdlDotNet.Examples
 			blocksToDestroy.Clear();
 			foreach(GameObject go in this.GameObjectList)
 			{
-				if(go is Block)
+				if(go.GetType().Name == "Block")
 				{
 					Block aBlock = (Block)go;
 					if(aBlock.Destroy)
@@ -618,20 +614,20 @@ namespace SdlDotNet.Examples
 			moveTriadLeft = false;
 		}
 
-		void drawGrid(Surface surface)
-		{
-			Point location;
-			for(int row=0; row<sizeOfGrid.Height;  row++)
-			{
-				for(int col=0;  col<sizeOfGrid.Width;  col++)
-				{
-					location = new Point(col*Block.BlockWidth+ this.Location.X,row*Block.BlockWidth +this.Location.Y);
-					Utils.DrawRect(surface,location,Block.BlockSize,Color.SlateGray);
-				}
-			}
-
-			Utils.DrawRect(surface,this.Location,this.Size,Color.Silver);
-		}
+//		void drawGrid(Surface surface)
+//		{
+//			Point location;
+//			for(int row=0; row<sizeOfGrid.Height;  row++)
+//			{
+//				for(int col=0;  col<sizeOfGrid.Width;  col++)
+//				{
+//					location = new Point(col*Block.BlockWidth+ this.Location.X,row*Block.BlockWidth +this.Location.Y);
+//					Utils.DrawRect(surface,location,Block.BlockSize,Color.SlateGray);
+//				}
+//			}
+//
+//			Utils.DrawRect(surface,this.Location,this.Size,Color.Silver);
+//		}
 
 
 		Surface gameOverImage;
@@ -680,5 +676,23 @@ namespace SdlDotNet.Examples
 			int xPosition = this.ScreenX + (int)((this.Width-gamePausedImage.Width)/2); 
 			surface.Blit(gamePausedImage, new Rectangle(xPosition ,this.ScreenY+200,gamePausedImage.Width,gamePausedImage.Height));
 		}
+		#region IDisposable Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Dispose()
+		{
+			reductionSound.Dispose();
+			hitBottomSound.Dispose();
+			moveSound.Dispose();
+			gameOverSound.Dispose();
+			gameOverImage.Dispose();
+			gamePausedImage.Dispose();
+			permuteSound.Dispose();
+			triad.Dispose();
+		}
+
+		#endregion
 	}
 }

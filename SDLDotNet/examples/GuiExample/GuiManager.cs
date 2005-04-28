@@ -129,7 +129,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// Renders a given text with the given font and returns the size
 		/// of the surface rendered.
 		/// </summary>
-		public Size GetTextSize(SdlDotNet.Font font, string textItem)
+		public static Size GetTextSize(SdlDotNet.Font font, string textItem)
 		{
 			// Render the text
 			Surface ts = font.Render(textItem, Color.FromArgb(255, 255, 255));
@@ -150,15 +150,15 @@ namespace SdlDotNet.Examples.GuiExample
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Render(Surface surface, GuiTicker ticker)
-		{
-			// Draw a frame
-			surface.Fill(ticker.Rectangle, backgroundColor);
-			DrawRect(surface, ticker.Rectangle, frameColor);
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public void Render(Surface surface, GuiTicker ticker)
+//		{
+//			// Draw a frame
+//			surface.Fill(ticker.Rectangle, backgroundColor);
+//			DrawRect(surface, ticker.Rectangle, frameColor);
+//		}
 		#endregion
 
 		#region Menus
@@ -287,7 +287,8 @@ namespace SdlDotNet.Examples.GuiExample
 					} 
 					catch (GuiException e)
 					{ 
-						throw e;
+						Console.WriteLine(e);
+						//throw;
 					}
 	  
 					try 
@@ -299,7 +300,8 @@ namespace SdlDotNet.Examples.GuiExample
 					} 
 					catch (GuiException e)
 					{ 
-						throw e;
+						Console.WriteLine(e);
+						//throw;
 					}
 				}
 			}
@@ -315,7 +317,10 @@ namespace SdlDotNet.Examples.GuiExample
 							surface.DrawPixel(l, i, color);
 						}
 					} 
-					catch { }
+					catch (SdlException e)
+					{ 
+						Console.WriteLine(e);
+					}
 	  
 					try 
 					{
@@ -326,7 +331,8 @@ namespace SdlDotNet.Examples.GuiExample
 					} 
 					catch (GuiException e)
 					{ 
-						throw e;
+						Console.WriteLine(e);
+						//throw e;
 					}
 				}
 			}
@@ -533,15 +539,15 @@ namespace SdlDotNet.Examples.GuiExample
 			{ 
 				return spriteManager; 
 			}
-			set
-			{
-				if (value == null)
-				{
-					throw new Exception("Cannot assign null sprite manager to gui");
-				}
-
-				spriteManager = value;
-			}
+//			set
+//			{
+//				if (value == null)
+//				{
+//					throw new SdlException("Cannot assign null sprite manager to gui");
+//				}
+//
+//				spriteManager = value;
+//			}
 		}
 		#endregion
 	}

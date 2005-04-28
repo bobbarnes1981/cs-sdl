@@ -22,6 +22,7 @@ using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples
 {
@@ -56,7 +57,7 @@ namespace SdlDotNet.Examples
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format("(drag {0} {1})", this.BeingDragged, base.ToString());
+			return String.Format(CultureInfo.CurrentCulture, "(drag {0} {1})", this.BeingDragged, base.ToString());
 		}
 
 		#region Events
@@ -98,11 +99,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Update(MouseMotionEventArgs args)
 		{
-			int x = args.X;
-			int y = args.Y;
-			int relx = args.RelativeX;
-			int rely = args.RelativeY;
-
 			if (!AllowDrag)
 			{
 				return;
@@ -111,8 +107,8 @@ namespace SdlDotNet.Examples
 			// Move the window as appropriate
 			if (this.BeingDragged)
 			{
-				this.X += relx;
-				this.Y += rely;
+				this.X += args.RelativeX;
+				this.Y += args.RelativeY;
 			}
 		}
 		#endregion

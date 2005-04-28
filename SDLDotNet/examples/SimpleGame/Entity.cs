@@ -48,7 +48,7 @@ namespace SdlDotNet.Examples
 			LogFile.WriteLine("Entity received a GameStatus event: " + e.GameStatus);
 			if (e.GameStatus == GameStatus.Started)
 			{
-				Place(e.Game.Map.Sectors[Names.StartingSector]);
+				Place(e.Game.Map.GetSectors()[Names.StartingSector]);
 			}
 		}
 

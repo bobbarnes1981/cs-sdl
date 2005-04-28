@@ -140,7 +140,9 @@ namespace SdlDotNet.Examples
 			set
 			{
 				if(value <= 0)
+				{
 					throw new GameException("Height is set to zero or negative value.");
+				}
 
 				_Height = value;				
 			}
@@ -180,9 +182,9 @@ namespace SdlDotNet.Examples
 			{
 				int offSetX = 0;
 				if(this._Parent != null)
+				{
 					offSetX = this._Parent.ScreenX;
-
-
+				}
 				return this.X2 + offSetX;
 			}
 		}
@@ -197,9 +199,9 @@ namespace SdlDotNet.Examples
 			{
 				int offSetY = 0;
 				if(this._Parent != null)
+				{
 					offSetY = this._Parent.ScreenY;
-
-
+				}
 				return _Y + _Height + offSetY;
 			}
 		}
@@ -368,7 +370,9 @@ namespace SdlDotNet.Examples
 		public bool Hits(GameObject obj)
 		{		
 			if(obj == null)
+			{
 				return false;
+			}
 
 			return Contains(obj.Location) || Contains(obj.BottomRightCorner) ;
 		}

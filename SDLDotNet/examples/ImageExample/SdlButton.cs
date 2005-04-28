@@ -25,7 +25,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// Event handler delegate fyrir SdlButton
 	/// </summary>
-	public delegate void SdlButtonEventHandler(object source, SdlButtonEventArgs e);
+	public delegate void SdlButtonEventHandler(object sender, SdlButtonEventArgs e);
 
 	/// <summary>
 	/// Event args fyrir SdlButton
@@ -56,7 +56,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class SdlButton
+	public class SdlButton : IDisposable
 	{
 		/// <summary>
 		/// Event onClick
@@ -168,5 +168,17 @@ namespace SdlDotNet.Examples
 				}
 			}
 		}
+		#region IDisposable Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Dispose()
+		{
+			buttonFont.Dispose();
+			// TODO:  Add SdlButton.Dispose implementation
+		}
+
+		#endregion
 	}
 }

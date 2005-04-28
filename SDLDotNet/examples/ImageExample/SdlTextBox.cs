@@ -17,6 +17,8 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
+
 using SdlDotNet;
 
 namespace SdlDotNet.Examples
@@ -24,7 +26,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// SdlTextBox by Jón Brynjar Stefánsson
 	/// </summary>
-	public class SdlTextBox
+	public class SdlTextBox : IDisposable
 	{
 		private int x; //X position
 		private int y; //Y position
@@ -167,7 +169,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
 		{
-			code = Convert.ToInt32(e.Key); //Get the ASCII code of the key that was pressed
+			code = Convert.ToInt32(e.Key, CultureInfo.CurrentCulture); //Get the ASCII code of the key that was pressed
 
 			if(isEnabled && boxText.Length < length/7) //if the textbox is enabled and the text is not too long
 			{
@@ -181,7 +183,7 @@ namespace SdlDotNet.Examples
 					if(lastCode == 303 || lastCode == 304) //SHIFT
 						code -= 32; //Capitalize the letter
 
-					boxText += Convert.ToString((char)code); //Add char to text
+					boxText += Convert.ToString((char)code,CultureInfo.CurrentCulture); //Add char to text
 				}
 				else if(code == 32) //SPACE
 				{
@@ -191,11 +193,23 @@ namespace SdlDotNet.Examples
 				{
 					int temp = code - 256;
 
-					boxText += temp.ToString();
+					boxText += temp.ToString(CultureInfo.CurrentCulture);
 				}
 
 			}
 			lastCode = code;
 		}
+		#region IDisposable Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Dispose()
+		{
+			boxFont.Dispose();
+			// TODO:  Add SdlTextBox.Dispose implementation
+		}
+
+		#endregion
 	}
 }

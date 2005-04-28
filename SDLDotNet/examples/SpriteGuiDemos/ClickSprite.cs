@@ -21,6 +21,7 @@ using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples
 {
@@ -51,7 +52,7 @@ namespace SdlDotNet.Examples
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format("(click {0})", base.ToString());
+			return String.Format(CultureInfo.CurrentCulture, "(click {0})", base.ToString());
 		}
 
 		#region Events

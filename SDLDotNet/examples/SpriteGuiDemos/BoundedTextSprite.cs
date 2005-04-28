@@ -21,6 +21,7 @@
 using SdlDotNet;
 using SdlDotNet.Sprites;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples
 {
@@ -206,7 +207,7 @@ namespace SdlDotNet.Examples
       
 			// Change the text
 			this.TextString = 
-				this.HorizontalWeight.ToString("#0.0000000");
+				this.HorizontalWeight.ToString("#0.0000000", CultureInfo.CurrentCulture);
 		}
 	}
 }

@@ -29,17 +29,44 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public delegate void FireEventHandler(object sender, Point location);
+	public delegate void FireEventHandler(object sender, FireEventArgs e);
 	/// <summary>
 	/// 
 	/// </summary>
 	public delegate void DisposeRequestEventHandler(object sender, EventArgs e);
 
+	/// <summary>
+	/// 
+	/// </summary>
+	public class FireEventArgs : EventArgs
+	{
+		Point location;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="location"></param>
+		public FireEventArgs(Point location)
+		{
+			this.location = location;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Location
+		{
+			get
+			{
+				return location;
+			}
+		}
+	}
+
 	// used for the bullets
 	/// <summary>
 	/// 
 	/// </summary>
-	public struct Speed
+	public class Speed
 	{
 		/// <summary>
 		/// 
@@ -86,9 +113,8 @@ namespace SdlDotNet.Examples
 		}
 	}
 
-	// item fired by a weapon
 	/// <summary>
-	/// 
+	/// item fired by a weapon
 	/// </summary>
 	public class WeaponParticle
 	{
@@ -145,14 +171,23 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Speed Speed{ get{ return _Speed; }}
+		public Speed Speed
+		{ 
+			get
+			{ 
+				return _Speed; 
+			}
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public Point Location
 		{
-			get{ return new Point((int)_Location.X, (int)_Location.Y); }
+			get
+			{ 
+				return new Point((int)_Location.X, (int)_Location.Y); 
+			}
 		}
 	}
 
@@ -216,28 +251,51 @@ namespace SdlDotNet.Examples
 				change = float.MaxValue;
 			}
 
-
-			if(up) _Location.Y -= change;
-			if(down) _Location.Y += change;
-			if(left) _Location.X -= change;
-			if(right) _Location.X += change;
+			if(up) 
+			{
+				_Location.Y -= change;
+			}
+			if(down)
+			{
+				_Location.Y += change;
+			}
+			if(left)
+			{
+				_Location.X -= change;
+			}
+			if(right) 
+			{
+				_Location.X += change;
+			}
 
 			// collision detection
 
-			if(_Location.X < 0) _Location.X = 0;
-			if(_Location.Y < 0) _Location.Y = 0;
+			if(_Location.X < 0) 
+			{
+				_Location.X = 0;
+			}
+			if(_Location.Y < 0)
+			{
+				_Location.Y = 0;
+			}
 
 			if(_Location.X + _Image.Size.Width > Game.Screen.Width)
+			{
 				_Location.X = Game.Screen.Width - _Image.Width;
+			}
 
 			if(_Location.Y + _Image.Size.Height > Game.Screen.Height)
+			{
 				_Location.Y = Game.Screen.Height - _Image.Height;
+			}
 
 			// fire if needed. the 250 stands for the delay between two shots
 			if(fire && lastfire + 250 < Timer.Ticks)
 			{
 				if(WeaponFired != null)
-					WeaponFired(this, Location);
+				{
+					WeaponFired(this, new FireEventArgs(Location));
+				}
 
 				// dont forget this
 				lastfire = Timer.Ticks;
@@ -339,10 +397,10 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 				_Screen.Blit(ship.Image,
 					new Rectangle(ship.Location, ship.Image.Size));
 
-				foreach(object o in bullets)
-					_Screen.Blit(((WeaponParticle)o).Image, new
-						Rectangle(((WeaponParticle)o).Location,
-						((WeaponParticle)o).Image.Size));
+				foreach(WeaponParticle o in bullets)
+					_Screen.Blit(o.Image, new
+						Rectangle(o.Location,
+						o.Image.Size));
 
 				// if lastupdate is 0 and the part below is done, one would get quite
 				// a funny result. it is set later in this method
@@ -370,17 +428,12 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="location"></param>
-		/// <param name="sender"></param>
-		public void ShipWeaponFired(object sender, Point location)
+		private void ShipWeaponFired(object sender, FireEventArgs e)
 		{
 			Game.Debug("Fire in the hole!");
 
 			// create a new bullet
-			WeaponParticle bullet = new WeaponParticle(location, new Speed(300,0));
+			WeaponParticle bullet = new WeaponParticle(e.Location, new Speed(300,0));
 			bullet.DisposeRequest += new DisposeRequestEventHandler(
 				BulletDisposeRequest);
 
@@ -406,7 +459,9 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 		private void SdlKeyboard(object sender, KeyboardEventArgs e)
 		{
 			if(e.Key == Key.Escape || e.Key == Key.Q)
+			{
 				quit = true;
+			}
 		}
 
 		/// <summary>
@@ -451,6 +506,10 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			{
 				Console.WriteLine(e);
 				Console.ReadLine();
+			}
+			catch
+			{
+				Console.WriteLine();
 			}
 #endif
 			finally

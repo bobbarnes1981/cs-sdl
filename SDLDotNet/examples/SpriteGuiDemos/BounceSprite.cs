@@ -53,10 +53,6 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
-			// Move our direction a little
-			int x = this.X;
-			int y = this.Y;
-
 			this.X += args.RatePerSecond(dx);
 			this.Y += args.RatePerSecond(dy);
 

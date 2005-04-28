@@ -177,8 +177,9 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="index"></param>
-		public void OnCreateNewWindow(int index)
+		/// <param name="e"></param>
+		/// <param name="sender"></param>
+		private void OnCreateNewWindow(object sender, MenuItemEventArgs e)
 		{
 			SurfaceCollection m1 = LoadRandomMarble();
 			GuiManager manager = SdlDemo.GuiManager;

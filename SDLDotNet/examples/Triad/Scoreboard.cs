@@ -27,7 +27,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class Scoreboard : GameArea
+	public class Scoreboard : GameArea, IDisposable
 	{
 		SdlDotNet.Font font;
 		/// <summary>
@@ -125,5 +125,17 @@ namespace SdlDotNet.Examples
 				_BlocksDestroyed = value;				
 			}
 		}
+		#region IDisposable Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Dispose()
+		{
+			font.Dispose();
+			// TODO:  Add Scoreboard.Dispose implementation
+		}
+
+		#endregion
 	}
 }

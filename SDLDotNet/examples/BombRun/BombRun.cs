@@ -140,8 +140,17 @@ namespace SdlDotNet.Examples
 		public void Update(float seconds)
 		{
 			// how far the player should move this frame, calculated on basis of the
+			float change;
 			// elapsed number of seconds :)
-			float change = seconds * 250;
+			if (seconds <= (float.MaxValue /250))
+			{
+				change = seconds * 250;
+			}
+			else
+			{
+				change = float.MaxValue;
+			}
+			//float change = seconds * 250;
 			float jumpspeed = seconds * Game.BombSpeed * 2;
 
 			if(jump || falling)
@@ -396,11 +405,15 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 				Console.WriteLine(e);
 				Console.ReadLine();
 			}
+			catch
+			{
+				Console.WriteLine();
+			}
 #endif
 			finally
 			{
-//				try { SDL.Instance.Dispose(); } 
-//				catch {} // = bugfix
+				//				try { SDL.Instance.Dispose(); } 
+				//				catch {} // = bugfix
 
 				Console.WriteLine("Bye");
 			}

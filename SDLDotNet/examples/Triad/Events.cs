@@ -27,11 +27,11 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public delegate void BlocksDestroyedEventHandler(object sender, BlockDestroyedEventArgs args);
+	public delegate void BlocksDestroyedEventHandler(object sender, BlocksDestroyedEventArgs e);
 	/// <summary>
 	/// 
 	/// </summary>
-	public class BlockDestroyedEventArgs : EventArgs
+	public class BlocksDestroyedEventArgs : EventArgs
 	{
 		private int _ReductionCount;
 		/// <summary>
@@ -63,7 +63,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="reductionCount"></param>
 		/// <param name="blockCount"></param>
-		public BlockDestroyedEventArgs(int reductionCount, int blockCount)
+		public BlocksDestroyedEventArgs(int reductionCount, int blockCount)
 		{
 			this._BlocksCount = blockCount;
 			this._ReductionCount = reductionCount;

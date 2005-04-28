@@ -59,7 +59,7 @@ namespace SdlDotNet.Examples
 		/// Loads the marble series into memory and returns the
 		/// collection.
 		/// </summary>
-		protected SurfaceCollection LoadMarble(string name)
+		protected static SurfaceCollection LoadMarble(string name)
 		{
 			// We cache it to speed things up
 			SurfaceCollection icd =
@@ -88,7 +88,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Loads a marble from a single image and tiles it.
 		/// </summary>
-		protected SurfaceCollection LoadTiledMarble(string name)
+		protected static SurfaceCollection LoadTiledMarble(string name)
 		{
 			// Load the marble
 			Sprite id = 

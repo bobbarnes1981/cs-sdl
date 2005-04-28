@@ -18,6 +18,7 @@
 
 using SdlDotNet;
 using System.Drawing;
+using System.Globalization;
 
 namespace SdlDotNet.Examples
 {
@@ -57,7 +58,8 @@ namespace SdlDotNet.Examples
 		{
 			if(_Image == null)
 			{
-				_Image = Graphics.LoadText(string.Format("../../Data/Text{0}.bmp", number));
+				_Image = 
+					Graphics.LoadText(string.Format(CultureInfo.CurrentCulture,"../../Data/Text{0}.bmp", number));
 			}
 
 			_Position = new Rectangle(25, y, _Image.Width, _Image.Height);
@@ -79,14 +81,21 @@ namespace SdlDotNet.Examples
 			switch(state)
 			{
 				case TextFadeState.BeforeFadeIn:
-
 					if(time >= starttime)
+					{
 						state = TextFadeState.FadeIn;
+					}
 					break;
 
 				case TextFadeState.FadeIn:
-
-					alpha += seconds * inspeed;
+					if (seconds <= (float.MaxValue / inspeed) - alpha)
+					{
+						alpha += seconds * inspeed;
+					}
+					else
+					{
+						alpha = float.MaxValue;
+					}
 
 					if(alpha >= 255)
 					{
@@ -98,13 +107,11 @@ namespace SdlDotNet.Examples
 					break;
 
 				case TextFadeState.BeforeFadeOut:
-
 					if(time >= endtime)
 						state = TextFadeState.FadeOut;
 					break;
 
 				case TextFadeState.FadeOut:
-
 					alpha -= seconds * outspeed;
 
 					if(alpha <= 0)
@@ -121,11 +128,23 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Rectangle Position{ get{ return _Position; }}
+		public Rectangle Position
+		{ 
+			get
+			{ 
+				return _Position; 
+			}
+		}
 		/// <summary>
 		/// 
 		/// </summary>
-		public Surface Image{ get{ return _Image; }}
+		public Surface Image
+		{ 
+			get
+			{ 
+				return _Image; 
+			}
+		}
 	}
 
 	/// <summary>
@@ -143,7 +162,9 @@ namespace SdlDotNet.Examples
 			texts[0] = new TextItem(0, 25);
 
 			for(int i = 1; i < texts.Length; i++)
+			{
 				texts[i] = new TextItem(i, texts[i-1].Position.Bottom + 10);
+			}
 		}
 
 		/// <summary>

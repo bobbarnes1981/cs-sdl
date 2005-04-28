@@ -33,12 +33,9 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public static Snowflake[] Snowflakes
+		public static Snowflake[] GetSnowflakes()
 		{
-			get
-			{
-				return SnowDemo.snowflakes;
-			}
+			return snowflakes;
 		}
 
 		/// <summary>
@@ -63,7 +60,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="numberOfSnowflakes"></param>
-		public void Init(int numberOfSnowflakes)
+		public static void Init(int numberOfSnowflakes)
 		{
 			snowflakes = new Snowflake[numberOfSnowflakes];
 
@@ -124,7 +121,7 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			Graphics.Init();
-			this.Init(250);
+			Init(250);
 			Console.WriteLine("Setting video mode");
 			Console.WriteLine("Initializing game data");
 			Events.KeyboardDown +=
@@ -145,7 +142,6 @@ namespace SdlDotNet.Examples
 			{
 				while(run)
 				{
-
 					while (Events.Poll()) 
 					{
 						// handle events till the queue is empty
@@ -168,9 +164,9 @@ namespace SdlDotNet.Examples
 
 					Events.Poll();
 
-					for(int i = 0; i < SnowDemo.Snowflakes.Length; i++)
+					for(int i = 0; i < SnowDemo.GetSnowflakes().Length; i++)
 					{
-						SnowDemo.Snowflakes[i].Update(seconds);
+						SnowDemo.GetSnowflakes()[i].Update(seconds);
 					}
 
 					for(int i = 0; i < SnowDemo.texts.Length; i++)
@@ -183,8 +179,10 @@ namespace SdlDotNet.Examples
 					lastframe = newframe;
 				}
 			}
-			catch
-			{}
+			catch (NullReferenceException e)
+			{
+				Console.WriteLine(e);
+			}
 
 		}
 
