@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SDL.NET Particle Engine Tutorial</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+.style1 {
+	font-family: "Courier New", Courier, mono;
+	font-size: 18px;
+}
+.style2 {
+	color: #669900;
+	font-weight: bold;
+}
+.style3 {
+	font-size: 24px;
+	font-weight: bold;
+}
+.style4 {font-size: 12px}
+.style5 {font-family: "Courier New", Courier, mono; font-size: 12px; }
+-->
+</style>
+</head>
+
+<body>
+<p align="center" class="style3"><code>AN INTRODUCTION TO PARTICLE ENGINES</code></p>
+<p><code>First of all I what to apologize for my poor English. : D Now that you have forgiven me lets start with what I hope you appreciate: our little tutorial about particle engine in c# using Sdl.Net ( <a href="http://cs-sdl.sourceforge.net/">http://cs-sdl.sourceforge.net/ </a>) but it can be ported to anything :P. </code></p>
+<p><code>If you already know how to do a particle engine but this tutorial is not for you. This tutorial is for those who don't know how to : P so it's kind of an introduction to it. I have posted the code and I have tried to comment it all.</code></p>
+<p><code>To do a particle engine you must ask first what a particle is or what defines a particle. Well a particle has a color, a location, some have lifetime, others have weight, others velocity. There are many other things that you can see in one particle.</code></p>
+<p><code>So in this tutorial we are going to do the &quot;hello world&quot; of particle engines: the stars in the sky. For this purpose we are going to need a very simple particle engine, we will need a particle engine that can have a velocity, direction and a point.</code></p>
+<p><code>So in our project we create a new class that you can call &quot;ParticleEngine.cs&quot;</code></p>
+<pre class="style1 style4">
+<code><strong>using System; </strong></code>
+<code><strong>using System.Drawing; </strong></code>
+<code><strong>using System.Collections; </strong></code>
+<code><strong>namespace sdltesting </strong></code>
+<code><strong>{ </strong></code>
+<span class="style2"><code><strong>/// &lt;summary&gt; </strong></code>
+<code><strong>/// Summary description for PE. </strong></code> 
+<code><strong>/// &lt;/summary&gt; </strong></code></span>
+<code><strong>	public class PE </strong></code>
+<code><strong>	{ </strong></code>
+<code><strong>		public PE() </strong></code>
+<code><strong>		{ </strong></code>
+<code><strong>		} </strong></code>
+<code><strong>		ArrayList _particles = new ArrayList(); </strong></code>
+<span class="style2"><code>		//we will use an array list because it's more flexible </code></span>
+<code><strong>		
+		public Random _rnd = new Random(System.DateTime.Now.Millisecond); </strong></code>
+<span class="style2"><code>		//then we declare the _rnd with a seed on millisecond so we can randomise things; </code></span>
+<code><strong>		
+		Point _POINT; </strong></code>
+<code><strong>		Color _COLOR; </strong></code>
+<span class="style2"><code>		//this is for accessing information out the class about the location and the color of the particle; </code></span>
+&nbsp;
+<code><strong>		const int NUM =50; </strong></code>
+<span class="style2"><code>		//this is the limiter of the particles you can change this for more or less particles...; </code></span>
+<code><strong>&nbsp; </strong></code>
+<code class="style2"><strong>		//now we are going to create the struct of our particle; </strong></code>
+<code><strong>		struct Particle </strong></code>
+<code><strong>		{ </strong></code>
+<code><strong>			public Point P; <span class="style2">//location</span> </strong></code>
+<code><strong>			public int Velocity; <span class="style2">//velocity </span></strong></code>
+<code><strong>			public Point Direction;<span class="style2"> //direction</span> </strong></code>
+<code><strong>			public Color COLOR; </strong></code>
+<code><strong>			public Particle(Point p1, int velocity, Point direction,Color color) </strong></code>
+<code><strong>			{ </strong></code>
+<code><strong>				COLOR=color; </strong></code>
+<code><strong>				Direction=direction; </strong></code>
+<code><strong>				Velocity=velocity; </strong></code>
+<code><strong>				P=p1; </strong></code>
+<code><strong>			} </strong></code>
+<code><strong>		} </strong></code>
+&nbsp;
+<code class="style2"><strong>		//now we do the initial of the stars so it can all be created... </strong></code>
+<code><strong>		public void init_stars() </strong></code>
+<code><strong>		{ </strong></code>
+<code><strong>			Particle particle; <span class="style2">//here we call the struct</span> </strong></code>
+<code><strong>			int Velo; <span class="style2">// we declare an int that we will put velocity so later on we can do some fancy colors ;)</span> </strong></code>
+&nbsp;
+<code><strong>			for ( int i= 1; i&lt;NUM;i++) </strong></code>
+<code><strong>			{ </strong></code>
+<code><strong>				Velo=_rnd.Next(1,5); </strong></code>
+<code><strong>				particle= new Particle( new Point(_rnd.Next(1,639),_rnd.Next(1,479)),Velo, new Point(-1,0),Color.FromArgb(255,51*Velo,51*Velo)); </strong></code>
+<code><strong>				<span class="style2">//hehehe int the last line we have give the data to the particle we have randomized the location </span></strong></code>
+<span class="style2"><code><strong>				//that initial begins and we have generated the color of the star by its velocity cause being near </strong></code>
+<code><strong>				//means that it travels faster and it shines more, cool hu? :) </strong></code></span>
+<code><strong>				_particles.Add(particle); <span class="style2">//and here we add the particle to the array </span></strong></code>
+<code><strong>			} </strong></code>
+<code><strong>		} </strong></code>
+<code><strong>&nbsp; </strong></code>
+<code><strong>&nbsp; </strong></code>
+<code><strong>		<span class="style2">//the stars_recycler is for the particles that have reach point 0 of X in this example and we do </span></strong></code>
+<span class="style2"><code><strong>		//as was going to initialize but don't use the _particles.Add(particle); because it's already created </strong></code></span>
+<code><strong>		public void stars_recycle( int number) </strong></code>
+<code><strong>		{ </strong></code>
+<code><strong>			Particle particle; </strong></code>
+<code><strong>			int Velo=_rnd.Next(1,5); </strong></code>
+<code><strong>			particle= new Particle( new Point(639,_rnd.Next(1,479)),Velo, new Point(-1,0),Color.FromArgb(255,51*Velo,51*Velo)); </strong></code>
+<code><strong>			_particles[number]= particle; </strong></code>
+<code><strong>		} </strong></code>
+<code class="style2"><strong>		//next we are going to make the stars move (yea yea here we are the all powerful :D ) </strong></code>
+<code><strong>		public void move_stars( int i) </strong></code>
+<code><strong>		{ </strong></code>
+<code><strong>			Particle particle; <span class="style2">// call the struct</span> </strong></code>
+<code><strong>			particle = (Particle)_particles[i]; <span class="style2">// put the data from particle i </span></strong></code>
+<code><strong>			particle.P.X=particle.P.X+(particle.Direction.X*particle.Velocity); <span class="style2">//calculate the x</span> </strong></code>
+<code><strong>			particle.P.Y=particle.P.Y+(particle.Direction.Y*particle.Velocity); <span class="style2">//calculate the y </span></strong></code>
+<code><strong>		<span class="style2">	//next we are going to check if the particle reaches the limits if not you pass it else recycle </span></strong></code>
+<span class="style2"><code><strong>			//I have put it checking in case of you want it moving in the y to :P </strong></code></span>
+<code><strong>			if ((particle.P.X&gt;0)&amp;&amp;(particle.P.Y&gt;0)&amp;&amp;(particle.P.Y&lt;479)) </strong></code>
+<code><strong>			{ </strong></code>
+<code><strong>				_COLOR = particle.COLOR; <span class="style2">//set the _COLOR</span> </strong></code>
+<code><strong>				_POINT = particle.P; <span class="style2">//set the _POINT</span> </strong></code>
+<code><strong>				_particles[i]= particle; <span class="style2">//store the data</span> </strong></code>
+<code><strong>			} </strong></code>
+<code><strong>			else </strong></code>
+<code><strong>			{ </strong></code>
+<code><strong>				stars_recycle(i); <span class="style2">// recycle</span> </strong></code>
+<code><strong>			} </strong></code>
+<code><strong>		} </strong></code>
+<code class="style2"><strong>		//here we return the location </strong></code>
+<code><strong>		public Point Return_Point </strong></code>
+<code><strong>		{ </strong></code>
+<code><strong>			get { return _POINT;} </strong></code>
+<code><strong>		} </strong></code>
+<code class="style2"><strong>		//here we return the Color </strong></code>
+<code><strong>		public Color Return_Color </strong></code>
+<code><strong>		{ </strong></code>
+<code><strong>			get { return _COLOR;} </strong></code>
+<code><strong>		} </strong></code>
+<code><strong>		<span class="style2">//here we return the number of the particle I use it like that and not the const cause sometimes you may have </span></strong></code>
+<span class="style2"><code><strong>		//cases that it's not full and/or you don't have to have the limit </strong></code></span>
+<code><strong>		public int Return_Number_Particles </strong></code>
+<code><strong>		{ </strong></code>
+<code><strong>			get { return this ._particles.Count;} </strong></code>
+<code><strong>		} </strong></code>
+<code><strong>&nbsp; </strong></code>
+<code><strong>	} </strong></code>
+<code><strong>} </strong></code>
+</pre>
+<p>&nbsp; </p>
+<p><code>So this was our class now we should do the void that goes in the main: </code></p>
+<p>&nbsp; </p>
+<p><code>First call the class </code></p>
+<p>&nbsp; </p>
+<p class="style4"><code><strong>PE _PE_STARS = new PE(); </strong></code></p>
+<p>&nbsp; </p>
+<p><code>Then on the load or somewhere else before the main cycle do the: </code></p>
+<p><code>_PE_STARS.init_stars();</code></p>
+<p><code>And then we write the function that call the move_stars(int i);</code></p>
+<pre class="style5">
+<code><strong>private void Stars() </strong></code>
+<code><strong>{ </strong></code>
+<code><strong>	screen.Fill(Color.FromArgb(0,0,0)); </strong></code>
+<span class="style2"><code><strong>	//the above line paint the screen in black no need to put it if your going to put some kind </strong></code>
+<code><strong>	//of UFO, star ship or songoku in it </strong></code>
+<code><strong>	//then we do a cycle that goes updating and drawing all our particles </strong></code></span>
+<code><strong>	for ( int i =0; i&lt;_PE_STARS.Return_Number_Particles;i++) </strong></code>
+<code><strong>	{ </strong></code>
+<code><strong>		_PE_STARS.move_stars(i); //update our particles... doing all the back work </strong></code>
+<code><strong>		screen.DrawPixel(_PE_STARS.Return_Point.X,_PE_STARS.Return_Point.Y,_PE_STARS.Return_Color); </strong></code>
+<code class="style2"><strong>		//then draw it calling the variables that we have declared on the very beginning of the class remember??? </strong></code>
+<code><strong>	} </strong></code>
+<code><strong>	screen.Flip();<span class="style2"> //well ... don't know really what it does but its necessary for the scene be draw </span></strong></code>
+<code><strong>} </strong></code>
+</pre>
+<p><code>Then just put stars(); somewhere after you draw your ufo and if you do draw ufo, rockets or any kind of space things … remove the screen.Fill(Color.FromArgb(0,0,0));</code></p>
+<p><code>Well I guess this is it … this is my first ever tutorial so don't be ruff with me and if you need any more info, just what to give feedback ,send flowers or money please send me an email:</code></p>
+<p><code>DeSousa_87@hotmail.com </code></p>
+<p><code>And I would like to thanks to KammutierSpule to teach me these, fozi and supermegamau for helping me with the errors and all the dudes at gamedev-pt for helping me and to the people at Sdl.net that helped me (jendave, hanclito and scotles2). </code></p>
+<p><code>www.GameDev-PT.net </code></p>
+<p><code>Miguel De Sousa Friday, April 22, 2005 </code></p>
+</body>
+</html>
