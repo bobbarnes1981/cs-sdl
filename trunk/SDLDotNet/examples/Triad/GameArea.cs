@@ -67,7 +67,9 @@ namespace SdlDotNet.Examples
 		public override void Update()
 		{
 			foreach(GameObject obj in _objectList)
-                obj.Update();				
+			{
+				obj.Update();			
+			}
 		}
 
 		/// <summary>
@@ -77,7 +79,9 @@ namespace SdlDotNet.Examples
 		protected void DrawGameObjects(Surface surface)
 		{
 			foreach(GameObject obj in _objectList)
+			{
 				obj.Draw(surface);
+			}
 		}
 
 		/// <summary>

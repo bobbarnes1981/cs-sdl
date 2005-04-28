@@ -56,7 +56,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-        MoveTriad, 
+		MoveTriad, 
 		/// <summary>
 		/// 
 		/// </summary>

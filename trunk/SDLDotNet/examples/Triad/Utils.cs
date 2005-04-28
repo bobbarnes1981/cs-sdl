@@ -42,7 +42,6 @@ namespace SdlDotNet.Examples
 		public static void DrawRect(Surface surface, Rectangle rectangle, Color color)
 		{
 			Utils.DrawRect(surface,rectangle.Location,rectangle.Size,color);
-
 		}
 
 		/// <summary>
@@ -59,20 +58,28 @@ namespace SdlDotNet.Examples
 
 			//Draw top line...
 			for(x=location.X; x<location.X + size.Width; x++)
+			{
 				surface.DrawPixel(x,location.Y,color);
+			}
 
 			//Draw bottom line...
 			for(x=location.X; x<location.X + size.Width; x++)
+			{
 				surface.DrawPixel(x,location.Y + size.Height,color);
+			}
 
 			//Draw left line...
 			for(y=location.Y; y<location.Y+size.Height;y++)
+			{
 				surface.DrawPixel(location.X,y,color);
+			}
 
 
 			//Draw right line... 
 			for(y=location.Y; y<location.Y+size.Height;y++)
+			{
 				surface.DrawPixel(location.X+size.Width,y,color);
+			}
 		}
 	}
 }

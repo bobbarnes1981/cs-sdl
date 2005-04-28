@@ -57,7 +57,6 @@ namespace SdlDotNet.Examples
 			}
 		}
 				
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -70,5 +69,4 @@ namespace SdlDotNet.Examples
 
 		}	
 	}
-
 }

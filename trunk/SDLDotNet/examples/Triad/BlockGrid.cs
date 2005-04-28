@@ -49,7 +49,7 @@ namespace SdlDotNet.Examples
 			{
 				if(value == 0.0)
 				{
-                    throw new SdlException("You can not set the speed factor to zero.");
+					throw new SdlException("You can not set the speed factor to zero.");
 				}
 
 				this.delayFactor = (int)(this.delayFactor / value);
@@ -81,7 +81,7 @@ namespace SdlDotNet.Examples
 			if(BlocksDestroyed != null)
 			{
 				BlocksDestroyed(this,new BlocksDestroyedEventArgs(reductionCount,blockCount));
-            }
+			}
 
 		}
 		/// <summary>
@@ -144,7 +144,7 @@ namespace SdlDotNet.Examples
 
 			if(permuteSound==null)
 			{
-                permuteSound = Mixer.Sound("../../Data/permute.wav");
+				permuteSound = Mixer.Sound("../../Data/permute.wav");
 			}
 
 			if(reductionSound==null)
@@ -166,7 +166,7 @@ namespace SdlDotNet.Examples
 	
 		void markBlocks(Triad triad)
 		{
-            int row = triad.Y / Block.BlockWidth;
+			int row = triad.Y / Block.BlockWidth;
 			int col = triad.X / Block.BlockWidth;
 			markBlock(row,col,triad.TopBlock);
 			markBlock(row+1,col,triad.MiddleBlock);
@@ -176,7 +176,7 @@ namespace SdlDotNet.Examples
 
 		void markBlock(int row, int column, Block someBlock)
 		{
-            someBlock.Y = row*Block.BlockWidth;
+			someBlock.Y = row*Block.BlockWidth;
 			someBlock.X = column*Block.BlockWidth;
 			someBlock.GridX = column;
 			someBlock.GridY = row;
@@ -241,7 +241,7 @@ namespace SdlDotNet.Examples
 			{
 				if(triad.Hits(obj))
 				{
-                    return true;
+					return true;
 				}
 			}
 
@@ -438,10 +438,10 @@ namespace SdlDotNet.Examples
 				}
 				else
 				{
-                    sameColorCount++;
+					sameColorCount++;
 					if(sameColorCount >= 3)
 					{
-                        blockList[i].Destroy = true;
+						blockList[i].Destroy = true;
 						blockList[i-1].Destroy = true;
 						blockList[i-2].Destroy = true;
 						reductionOccured = true;
@@ -454,10 +454,10 @@ namespace SdlDotNet.Examples
 
 		void addCurrentGridLocationToBlockList(int column, int row)
 		{
-            Block currentBlock = grid[column,row];
+			Block currentBlock = grid[column,row];
 			if(currentBlock == null)
 			{
-                blockList.Add(new NullBlock());
+				blockList.Add(new NullBlock());
 			}
 			else
 			{
@@ -598,9 +598,7 @@ namespace SdlDotNet.Examples
 				default:
 					System.Diagnostics.Debug.WriteLine("Key not handled: " + args.Key.ToString());
 					break;
-
 			}			
-			
 		}
 
 		/// <summary>
@@ -609,26 +607,25 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void HandleSdlKeyUpEvent(KeyboardEventArgs args)
 		{
-            rapidDropTriad = false;
+			rapidDropTriad = false;
 			moveTriadRight = false;
 			moveTriadLeft = false;
 		}
 
-//		void drawGrid(Surface surface)
-//		{
-//			Point location;
-//			for(int row=0; row<sizeOfGrid.Height;  row++)
-//			{
-//				for(int col=0;  col<sizeOfGrid.Width;  col++)
-//				{
-//					location = new Point(col*Block.BlockWidth+ this.Location.X,row*Block.BlockWidth +this.Location.Y);
-//					Utils.DrawRect(surface,location,Block.BlockSize,Color.SlateGray);
-//				}
-//			}
-//
-//			Utils.DrawRect(surface,this.Location,this.Size,Color.Silver);
-//		}
-
+		//		void drawGrid(Surface surface)
+		//		{
+		//			Point location;
+		//			for(int row=0; row<sizeOfGrid.Height;  row++)
+		//			{
+		//				for(int col=0;  col<sizeOfGrid.Width;  col++)
+		//				{
+		//					location = new Point(col*Block.BlockWidth+ this.Location.X,row*Block.BlockWidth +this.Location.Y);
+		//					Utils.DrawRect(surface,location,Block.BlockSize,Color.SlateGray);
+		//				}
+		//			}
+		//
+		//			Utils.DrawRect(surface,this.Location,this.Size,Color.Silver);
+		//		}
 
 		Surface gameOverImage;
 		/// <summary>
@@ -637,21 +634,18 @@ namespace SdlDotNet.Examples
 		/// <param name="surface"></param>
 		protected override void DrawGameObject(Surface surface)
 		{
-
 			//drawGrid(surface);
 			this.DrawGameObjects(surface);
 
 			if(gameIsPaused)
 			{
-                drawGamePausedMessage(surface);
+				drawGamePausedMessage(surface);
 			}
 
-			
 			if(currentState == BlockGridState.GameOver)
 			{
-                drawGameOverMessage(surface);
+				drawGameOverMessage(surface);
 			}
-
 		}
 
 		void drawGameOverMessage(Surface surface)

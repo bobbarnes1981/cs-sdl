@@ -70,9 +70,11 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-                int x = this._X;
+				int x = this._X;
 				if(this._Parent != null)
+				{
 					x += this._Parent.ScreenX;
+				}
 				return x;
 			}
 		}
@@ -86,7 +88,9 @@ namespace SdlDotNet.Examples
 			{
 				int y = this._Y;
 				if(this._Parent != null)
+				{
 					y += this._Parent.ScreenY;
+				}
 				return y;
 			}
 		}
@@ -120,7 +124,9 @@ namespace SdlDotNet.Examples
 			set
 			{
 				if(_Width <= 0)
+				{
 					throw new GameException("Width is set to zero or negative value.");
+				}
 
 				_Width = value;				
 			}
@@ -242,8 +248,6 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-
-
 				if(previousLocation != Location)
 				{
 					currentRectangle = new System.Drawing.Rectangle(Location,this.Size);					
@@ -251,10 +255,8 @@ namespace SdlDotNet.Examples
 
 				previousLocation = Location;
 				return currentRectangle;
-				
 			}
 		}	
-
 
 		Point previousScreenLocation;
 		System.Drawing.Rectangle currentScreenRectangle;
@@ -265,19 +267,15 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-
 				if(previousScreenLocation != ScreenLocation)
 				{
-					currentScreenRectangle = new System.Drawing.Rectangle(ScreenLocation,this.Size);					
+					currentScreenRectangle = new System.Drawing.Rectangle(ScreenLocation,this.Size);
 				}
-
 
 				previousScreenLocation = ScreenLocation;
 				return currentScreenRectangle;
 			}
-
 		}	
-
 
 		/// <summary>
 		/// 
@@ -376,7 +374,5 @@ namespace SdlDotNet.Examples
 
 			return Contains(obj.Location) || Contains(obj.BottomRightCorner) ;
 		}
-
-	
 	}
 }

@@ -34,7 +34,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public Tests()
 		{
-
 		}
 
 		/// <summary>
@@ -88,10 +87,6 @@ namespace SdlDotNet.Examples
 				Assert.Fail("Height is negative!");
 			}
 			catch(GameException){}
-
-
-
-
 		}
 
 		/// <summary>
@@ -125,8 +120,8 @@ namespace SdlDotNet.Examples
 			//Test constructor...						
 			//try
 			//{
-				//GameObjectCollection objectList2 = new GameObjectCollection(nullList);
-				//Assert.Fail("Input object list is null.");
+			//GameObjectCollection objectList2 = new GameObjectCollection(nullList);
+			//Assert.Fail("Input object list is null.");
 			//}
 			//catch(GameException){}
 
@@ -159,7 +154,6 @@ namespace SdlDotNet.Examples
 			}
 			catch(GameException){}
 
-			
 			try
 			{
 				area.RemoveObject(null);
@@ -168,8 +162,5 @@ namespace SdlDotNet.Examples
 			catch(GameException){}
            
 		}
-
-
-
 	}
 }

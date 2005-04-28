@@ -56,9 +56,13 @@ namespace SdlDotNet.Examples
 		private void SDL_KeyboardDown(object sender, KeyboardEventArgs e) 
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
+			{
 				_quitflag = true;
+			}
 			if (e.Key == Key.Space)
+			{
 				this.RandomizeMotion();
+			}
 		}
 		private void SDL_Quit(object sender, QuitEventArgs e) 
 		{
@@ -148,7 +152,6 @@ namespace SdlDotNet.Examples
 				//sdl.Dispose(); // quit sdl so the window goes away, then handle the error...
 				throw; // for this example we'll just throw it to the debugger
 			}
-
 		}
 
 		/// <summary>

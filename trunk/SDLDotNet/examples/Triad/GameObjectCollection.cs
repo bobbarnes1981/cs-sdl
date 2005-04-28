@@ -31,7 +31,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public GameObjectCollection()
 		{
-			// empty
 		}
 
 		/// <summary>
@@ -70,7 +69,7 @@ namespace SdlDotNet.Examples
 			{
 				if(item==null)
 				{
-                    throw new GameException("Game object is null while adding to collection.");
+					throw new GameException("Game object is null while adding to collection.");
 				}
 
 				this.List.Add(item);
@@ -100,7 +99,9 @@ namespace SdlDotNet.Examples
 		public virtual void Add(GameObject value)
 		{
 			if(value == null)
+			{
 				throw new GameException("Input game object is null.");
+			}
 
 			this.List.Add(value);
 		}
@@ -148,7 +149,9 @@ namespace SdlDotNet.Examples
 		public virtual void Insert(int index, GameObject value)
 		{
 			if(value == null)
+			{
 				throw new GameException("GameObject is null during insert.");
+			}
 
 			this.List.Insert(index, value);
 		}

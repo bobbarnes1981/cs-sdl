@@ -108,7 +108,9 @@ namespace SdlDotNet.Examples
 
 				case TextFadeState.BeforeFadeOut:
 					if(time >= endtime)
+					{
 						state = TextFadeState.FadeOut;
+					}
 					break;
 
 				case TextFadeState.FadeOut:

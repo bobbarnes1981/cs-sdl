@@ -54,7 +54,6 @@ namespace SdlDotNet.Examples
 			this.middleBlock.Y = this.Y+Block.BlockWidth;
 			this.bottomBlock.X	 = this.X;
 			this.bottomBlock.Y = this.Y+(Block.BlockWidth*2);
-
 		}
 		
 		Block topBlock;
@@ -68,7 +67,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-              return topBlock;   
+				return topBlock;   
 			}
 		}
 
@@ -109,19 +108,17 @@ namespace SdlDotNet.Examples
 			bottomBlock.Draw(surface);
 		}
 
-
 		static int halfOfBlock;
 		bool canMoveLeftRightBy(int deltaX)
 		{
-			 if(halfOfBlock==0)
-				 halfOfBlock = (Block.BlockWidth/2);
+			if(halfOfBlock==0)
+				halfOfBlock = (Block.BlockWidth/2);
 
 			//Calc three points to represent the position of the tree blocks of the Triad...
 			Point newPoint  = new Point(this.ScreenLocation.X + deltaX + halfOfBlock,this.ScreenLocation.Y+ halfOfBlock);
 			Point newPoint2  = new Point(this.ScreenLocation.X + deltaX + halfOfBlock,this.ScreenLocation.Y+Block.BlockWidth+ halfOfBlock);
 			Point newPoint3  = new Point(this.ScreenLocation.X + deltaX + halfOfBlock,this.ScreenLocation.Y+Block.BlockWidth+Block.BlockWidth+ halfOfBlock);
 			
-
 			bool isInsideBlockGrid = blockGrid.Contains(newPoint);
 
 			bool isInsideBlockGridChildren = false;
@@ -131,16 +128,10 @@ namespace SdlDotNet.Examples
 				{
 					isInsideBlockGridChildren = true;
 					break;
-                }
-				
-                
+				}
 			}
 
 			return isInsideBlockGrid && !isInsideBlockGridChildren;
-
-																 
-
-
 		}
 		
 
@@ -151,8 +142,9 @@ namespace SdlDotNet.Examples
 		{
 			int deltaX = -Block.BlockWidth;
 			if(canMoveLeftRightBy(deltaX))
+			{
 				this.X -= Block.BlockWidth;
-
+			}
 		}
 
 		/// <summary>
@@ -162,7 +154,9 @@ namespace SdlDotNet.Examples
 		{
 			int deltaX = Block.BlockWidth;
 			if(canMoveLeftRightBy(deltaX))
+			{
 				this.X += Block.BlockWidth;
+			}
 
 		}
 
@@ -175,15 +169,15 @@ namespace SdlDotNet.Examples
 			return canMoveDown(Block.BlockWidth);
 		}
 
-
 		bool canMoveDown(int deltaY)
 		{
 			if(halfOfBlock==0)
+			{
 				halfOfBlock = (Block.BlockWidth/2);
+			}
 
 			Point newPoint  = new Point(this.ScreenLocation.X  + halfOfBlock,this.ScreenLocation.Y+Block.BlockWidth+Block.BlockWidth+ halfOfBlock + deltaY);
 			
-
 			bool isInsideBlockGrid = blockGrid.Contains(newPoint);
 
 			bool isInsideBlockGridChildren = false;
@@ -194,10 +188,7 @@ namespace SdlDotNet.Examples
 					isInsideBlockGridChildren = true;
 					break;
 				}
-				
-                
 			}
-
 			return isInsideBlockGrid && !isInsideBlockGridChildren;
 		}
 
@@ -207,7 +198,9 @@ namespace SdlDotNet.Examples
 		public void MoveDown()
 		{
 			if(canMoveDown(Block.BlockWidth))
+			{
 				this.Y += Block.BlockWidth;
+			}
 		}
 
 		/// <summary>
@@ -215,7 +208,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Permute()
 		{
-            Block tempBlock = this.bottomBlock;
+			Block tempBlock = this.bottomBlock;
 			this.bottomBlock = this.middleBlock;
 			this.middleBlock = this.topBlock;
 			this.topBlock = tempBlock;

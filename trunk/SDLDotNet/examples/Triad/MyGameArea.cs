@@ -42,8 +42,6 @@ namespace SdlDotNet.Examples
 
 			bs = new BlueSquare();
 			AddObject(bs);
-			
-			
 		}
 
 		/// <summary>
@@ -63,7 +61,6 @@ namespace SdlDotNet.Examples
 		{
             
 		}
-
 
 		/// <summary>
 		/// 
@@ -94,12 +91,7 @@ namespace SdlDotNet.Examples
 				default:
 					break;
 
-			}
-
-			
+			}			
 		}
-
-
-
 	}
 }

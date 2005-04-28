@@ -26,11 +26,9 @@ namespace SdlDotNet.Examples
 		public GameException(string message) : base(message)
 		{
 			if(message==null)
+			{
 				throw new ApplicationException("Please provide a message.");
+			}
 		}
 	}
-
-
-
-
 }
