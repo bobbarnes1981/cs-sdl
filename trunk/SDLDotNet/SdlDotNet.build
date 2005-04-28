@@ -17,7 +17,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="3.1.0alpha1" />
+    <property name="project.version" value="3.1.0alpha2" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
@@ -69,8 +69,10 @@
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
 	<nant buildfile="${examples.dir}/GuiExample/GuiExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/SpriteGuiDemos/SpriteGuiDemos.build" target="clean" />
+	<nant buildfile="${examples.dir}/ParticleEngine/ParticleEngine.build" target="clean" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="clean" />
+	<nant buildfile="${examples.dir}/SimpleExample/SimpleExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="clean" />
 	<nant buildfile="${examples.dir}/SnowDemo/SnowDemo.build" target="clean" />
 	<nant buildfile="${examples.dir}/Tests/Tests.build" target="clean" />
@@ -97,11 +99,13 @@
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="build" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
 	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
+	<nant buildfile="${examples.dir}/ParticleEngine/ParticleEngine.build" target="build" />
 	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
 	<nant buildfile="${examples.dir}/GuiExample/GuiExample.build" target="build" />
 	<nant buildfile="${examples.dir}/SpriteGuiDemos/SpriteGuiDemos.build" target="build" />
 	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="build" />
 	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="build" />
+	<nant buildfile="${examples.dir}/SimpleExample/SimpleExample.build" target="build" />
 	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="build" />    
 	<nant buildfile="${examples.dir}/SnowDemo/SnowDemo.build" target="build" />
 	<nant buildfile="${examples.dir}/Tests/Tests.build" target="build" />
@@ -147,6 +151,10 @@
 		<exclude name="examples/ImageExample/*j.user" />
 		<exclude name="examples/ImageExample/${obj.dir}" />
 		<!-- <exclude name="examples/ImageExample/${build.dir}/*.dll" /> -->
+		<include name="examples/ParticleEngine/*" />
+		<include name="examples/ParticleEngine/${build.dir}/*" />
+		<exclude name="examples/ParticleEngine/*j.user" />
+		<exclude name="examples/ParticleEngine/${obj.dir}" />
 		<include name="examples/PrimitivesExample/*" />
 		<include name="examples/PrimitivesExample/${build.dir}/*" />
 		<exclude name="examples/PrimitivesExample/*j.user" />
@@ -178,6 +186,10 @@
 		<exclude name="examples/MoviePlayer/*j.user" />
 		<exclude name="examples/MoviePlayer/${obj.dir}" />
 		<!-- <exclude name="examples/MoviePlayer/${build.dir}/*.dll" /> -->
+		<include name="examples/SimpleExample/*" />
+		<include name="examples/SimpleExample/${build.dir}/*" />
+		<exclude name="examples/SimpleExample/*j.user" />
+		<exclude name="examples/SimpleExample/${obj.dir}" />
 		<include name="examples/SimpleGame/*" />
 		<include name="examples/SimpleGame/${build.dir}/*" />
 		<exclude name="examples/SimpleGame/*j.user" />
