@@ -29,10 +29,7 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Examples
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class FontExample
+	class FontExample
 	{
 		Surface text;
 		bool quitFlag;

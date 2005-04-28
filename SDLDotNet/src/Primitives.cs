@@ -259,11 +259,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="e1"></param>
-	/// <param name="e2"></param>
-	/// <returns></returns>
+		/// 
+		/// </summary>
+		/// <param name="e1"></param>
+		/// <param name="e2"></param>
+		/// <returns></returns>
 		public static bool operator== (Ellipse e1, Ellipse e2)
 		{
 			return (
@@ -1260,6 +1260,57 @@ namespace SdlDotNet
 			set
 			{
 				this.y2 = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public short Height
+		{
+			get
+			{
+
+				return (short)(this.y2 - this.y1);
+			}
+			set
+			{
+				this.y2 = (short)(this.y1 + value);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public short Width
+		{
+			get
+			{
+
+				return (short)(this.x2 - this.x1);
+			}
+			set
+			{
+				this.x2 = (short)(this.x1 + value);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Location
+		{
+			get
+			{
+				return new Point(x1, y1);
+			}
+			set
+			{
+				this.y2 = (short)(value.Y + this.Height);
+				this.x2 = (short)(value.X + this.Width);
+				this.x1 = (short)value.X;
+				this.y1 = (short)value.Y;
+
 			}
 		}
 

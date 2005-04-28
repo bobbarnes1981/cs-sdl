@@ -28,7 +28,7 @@ namespace SdlDotNet.Examples
 	/// By Sam Hart 
 	/// Updated to SdlDotNet 3.0.0 by David Hudson
 	/// </summary>
-	public class Bounce 
+	class Bounce 
 	{
 		private bool _quitflag;
 		int WIDTH = 640;

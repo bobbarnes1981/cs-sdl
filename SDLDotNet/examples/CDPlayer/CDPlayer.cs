@@ -28,10 +28,7 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples 
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class CDPlayer : System.Windows.Forms.Form {
+	class CDPlayer : System.Windows.Forms.Form {
 		private CDDrive _drive;
 		private int _track;
 		static ResourceManager stringManager;

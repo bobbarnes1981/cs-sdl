@@ -18,10 +18,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Gears
+	class Gears
 	{
 //		Draw a gear wheel. You'll probably want to call this function when
 //		building a display list since we do a lot of trig here.

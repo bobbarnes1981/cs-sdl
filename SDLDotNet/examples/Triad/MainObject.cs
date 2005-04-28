@@ -25,7 +25,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class MainObject : IDisposable
+	class MainObject : IDisposable
 	{
 		private bool _quitflag;
 

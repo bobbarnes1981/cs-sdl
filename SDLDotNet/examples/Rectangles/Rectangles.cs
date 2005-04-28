@@ -31,7 +31,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class Rectangles 
+	class Rectangles 
 	{
 		private bool quitFlag;
 		

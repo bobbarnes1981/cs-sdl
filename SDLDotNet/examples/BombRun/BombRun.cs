@@ -26,7 +26,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class Bomb
+	class Bomb
 	{
 		static Surface _Image;
 		PointF _Location;
