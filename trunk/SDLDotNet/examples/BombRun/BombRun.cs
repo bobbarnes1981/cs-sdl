@@ -71,7 +71,9 @@ namespace SdlDotNet.Examples
 			_Location.Y += seconds * speed;
 
 			if(Location.Y > Game.Screen.Height)
+			{
 				Reset();
+			}
 
 			if(Game.BombSpeed > maxspeed)
 			{
@@ -83,14 +85,23 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public static Surface Image{ get{ return _Image; }}
+		public static Surface Image
+		{ 
+			get
+			{ 
+				return _Image; 
+			}
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public Point Location
 		{
-			get{ return new Point((int)_Location.X, (int)_Location.Y); }
+			get
+			{ 
+				return new Point((int)_Location.X, (int)_Location.Y); 
+			}
 		}
 	}
 
@@ -131,6 +142,7 @@ namespace SdlDotNet.Examples
 			_Image.SetColorKey(Color.White, true);
 
 			Events.KeyboardDown += new KeyboardEventHandler(Keyboard);
+			Events.KeyboardUp += new KeyboardEventHandler(Keyboard);
 		}
 
 		/// <summary>
@@ -154,10 +166,18 @@ namespace SdlDotNet.Examples
 			float jumpspeed = seconds * Game.BombSpeed * 2;
 
 			if(jump || falling)
+			{
 				change = change / 2;
+			}
 
-			if(left) _Location.X -= change;
-			if(right) _Location.X += change;
+			if(left)
+			{
+				_Location.X -= change;
+			}
+			if(right)
+			{
+				_Location.X += change;
+			}
 
 			if(jump)
 			{
@@ -183,11 +203,15 @@ namespace SdlDotNet.Examples
 			}
 
 			// collision detection
-
-			if(_Location.X < 0) _Location.X = 0;
+			if(_Location.X < 0)
+			{
+				_Location.X = 0;
+			}
 
 			if(_Location.X + _Image.Size.Width > Game.Screen.Width)
+			{
 				_Location.X = Game.Screen.Width - _Image.Width;
+			}
 		}
 
 		/// <summary>
@@ -200,11 +224,15 @@ namespace SdlDotNet.Examples
 			switch(e.Key)
 			{
 					// the =Down trick works quite well
-				case LEFT: left = e.Down; break;
-				case RIGHT: right = e.Down; break;
+				case LEFT: 
+					left = e.Down; 
+					break;
+
+				case RIGHT: 
+					right = e.Down; 
+					break;
 
 				case JUMP:
-
 					if(e.Down && !falling)
 					{
 						jump = true;
@@ -221,14 +249,23 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Surface Image{ get{ return _Image; }}
+		public Surface Image
+		{ 
+			get
+			{ 
+				return _Image; 
+			}
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public Point Location
 		{
-			get{ return new Point((int)_Location.X, (int)_Location.Y); }
+			get
+			{ 
+				return new Point((int)_Location.X, (int)_Location.Y); 
+			}
 		}
 	}
 
@@ -273,7 +310,7 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 
 			Surface tempSurface = new Surface("../../Data/Background1.png");
 			_Background = tempSurface.Convert();
-			 tempSurface = new Surface("../../Data/Background2.png");
+			tempSurface = new Surface("../../Data/Background2.png");
 			_AlternateBackground = tempSurface.Convert();
 
 			_Temporary = _Screen.CreateCompatibleSurface(32, 32, true);
@@ -284,7 +321,9 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			bombs = new Bomb[25];
 
 			for(int i = 0; i < bombs.Length; i++)
+			{
 				bombs[i] = new Bomb();
+			}
 
 			Video.Mouse.ShowCursor(false);
 			Video.WindowCaption =
@@ -334,7 +373,9 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 					_BombSpeed += seconds * 3;
 
 					for(int i = 0; i < bombs.Length; i++)
+					{
 						bombs[i].Update(seconds);
+					}
 				}
 
 				lastupdate = Timer.Ticks;
@@ -350,7 +391,9 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 		private void Keyboard(object sender, KeyboardEventArgs e)
 		{
 			if(e.Key == Key.Escape || e.Key == Key.Q)
+			{
 				quit = true;
+			}
 		}
 
 		/// <summary>
@@ -368,15 +411,27 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 		/// <summary>
 		/// 
 		/// </summary>
-		public static Surface Screen{ get{ return _Screen; }}
+		public static Surface Screen
+		{
+			get
+			{ 
+				return _Screen; 
+			}
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public static float BombSpeed
 		{
-			get{ return _BombSpeed; }
-			set{ _BombSpeed = value; }
+			get
+			{ 
+				return _BombSpeed; 
+			}
+			set
+			{
+				_BombSpeed = value; 
+			}
 		}
 	}
 
@@ -414,7 +469,6 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			{
 				//				try { SDL.Instance.Dispose(); } 
 				//				catch {} // = bugfix
-
 				Console.WriteLine("Bye");
 			}
 		}
