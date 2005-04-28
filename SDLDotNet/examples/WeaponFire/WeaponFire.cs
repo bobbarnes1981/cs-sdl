@@ -167,7 +167,13 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Surface Image{ get{ return _Image; }}
+		public Surface Image
+		{ 
+			get
+			{ 
+				return _Image; 
+			}
+		}
 		/// <summary>
 		/// 
 		/// </summary>
@@ -231,6 +237,7 @@ namespace SdlDotNet.Examples
 			_Image.Fill(new Rectangle(new Point(0,0), _Image.Size), Color.White);
 
 			Events.KeyboardDown += new KeyboardEventHandler(this.SdlKeyboard);
+			Events.KeyboardUp += new KeyboardEventHandler(this.SdlKeyboard);
 		}
 
 		/// <summary>
@@ -312,11 +319,21 @@ namespace SdlDotNet.Examples
 			switch(e.Key)
 			{
 					// the =Down trick works quite well
-				case Key.UpArrow: up = e.Down; break;
-				case Key.DownArrow: down = e.Down; break;
-				case Key.LeftArrow: left = e.Down; break;
-				case Key.RightArrow: right = e.Down; break;
-				case Key.Space: fire = e.Down; break;
+				case Key.UpArrow: 
+					up = e.Down; 
+					break;
+				case Key.DownArrow: 
+					down = e.Down; 
+					break;
+				case Key.LeftArrow: 
+					left = e.Down; 
+					break;
+				case Key.RightArrow: 
+					right = e.Down; 
+					break;
+				case Key.Space: 
+					fire = e.Down; 
+					break;
 			}
 		}
 
@@ -328,14 +345,23 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Surface Image{ get{ return _Image; }}
+		public Surface Image
+		{ 
+			get
+			{ 
+				return _Image; 
+			}
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public Point Location
 		{
-			get{ return new Point((int)_Location.X, (int)_Location.Y); }
+			get
+			{ 
+				return new Point((int)_Location.X, (int)_Location.Y); 
+			}
 		}
 	}
 
@@ -410,14 +436,18 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 					ship.Update(seconds);
 
 					foreach(object o in bullets)
+					{
 						((WeaponParticle)o).Update(seconds);
+					}
 
 					// things can't be deleted from a collection in a foreach loop when
 					// the foreach-ed collection and the target collection are the same.
 					// that is why i put the must-be-deleted objects in a serperate
 					// collection
 					foreach(object o in mustdispose)
+					{
 						bullets.Remove(o);
+					}
 
 					// which ofcourse must be emptied
 					mustdispose = new ArrayList();
@@ -434,9 +464,8 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 
 			// create a new bullet
 			WeaponParticle bullet = new WeaponParticle(e.Location, new Speed(300,0));
-			bullet.DisposeRequest += new DisposeRequestEventHandler(
-				BulletDisposeRequest);
-
+			bullet.DisposeRequest += 
+				new DisposeRequestEventHandler(BulletDisposeRequest);
 			bullets.Add(bullet);
 		}
 
@@ -474,12 +503,17 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			Game.Debug("Quit was requested");
 			quit = true;
 		}
-
-		// used by the collision detection of some ingame objects
+ 
 		/// <summary>
-		/// 
+		/// used by the collision detection of some ingame objects
 		/// </summary>
-		public static Surface Screen{ get{ return _Screen; }}
+		public static Surface Screen
+		{ 
+			get
+			{ 
+				return _Screen; 
+			}
+		}
 	}
 
 	/// <summary>
