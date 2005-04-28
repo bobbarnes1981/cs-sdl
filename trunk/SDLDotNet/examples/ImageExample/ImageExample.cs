@@ -31,10 +31,7 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class ImageExample
+	class ImageExample
 	{
 		//ResourceManager stringManager;
 		private bool quitFlag;

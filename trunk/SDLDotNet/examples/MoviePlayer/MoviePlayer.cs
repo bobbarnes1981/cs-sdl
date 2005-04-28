@@ -38,7 +38,7 @@ namespace SdlDotNet.Examples
 	/// written by Will Weisser (ogl@9mm.com)</p>
 	/// </remarks>
 	#endregion Class Documentation
-	public class MoviePlayer 
+	class MoviePlayer 
 	{		
 		bool quitFlag;
 

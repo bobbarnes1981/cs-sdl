@@ -26,7 +26,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// Summary description for Game.
 	/// </summary>
-	public sealed class GameMain
+	class GameMain
 	{
 		GameMain()
 		{}

@@ -32,7 +32,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class PrimitivesExample
+	class PrimitivesExample
 	{
 		private bool quitFlag;
 		

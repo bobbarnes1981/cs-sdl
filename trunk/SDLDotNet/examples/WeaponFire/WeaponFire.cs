@@ -368,7 +368,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class Game
+	class Game
 	{
 		static Surface _Screen;
 		Ship ship;

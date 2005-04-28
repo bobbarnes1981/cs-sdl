@@ -25,7 +25,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class SnowDemo
+	class SnowDemo
 	{
 		static Snowflake[] snowflakes;
 		static Texts texts;
