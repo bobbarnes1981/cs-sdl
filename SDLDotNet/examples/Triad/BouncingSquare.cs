@@ -30,14 +30,15 @@ namespace SdlDotNet.Examples
 	{
 		static Random rnd;
 
-
 		/// <summary>
 		/// 
 		/// </summary>
 		public BouncingSquare()
 		{
 			if(rnd == null)
+			{
 				rnd = new Random(System.DateTime.Now.Second);
+			}
 
 			this.dx = xinc;
 			this.dy = yinc;
@@ -49,7 +50,6 @@ namespace SdlDotNet.Examples
 			this.yinc = rnd.Next(5)+1;
 
 		}
-
 
 		int xinc = 5;
 		int yinc = 5;
@@ -100,7 +100,6 @@ namespace SdlDotNet.Examples
 
 			this.X += dx;
 			this.Y += dy;
-
 		}
 
 		/// <summary>
@@ -111,10 +110,5 @@ namespace SdlDotNet.Examples
 		{			
 			surface.Fill(this.Rectangle,Color.Red);
 		}
-
-
-
-
-
 	}
 }

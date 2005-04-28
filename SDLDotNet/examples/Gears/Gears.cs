@@ -305,7 +305,9 @@ namespace SdlDotNet.Examples
 				idle();
 				while (Events.Poll()) ;
 				if (m_screen.Width != m_newW || m_screen.Height != m_newH)
+				{
 					reshape ();
+				}
 				draw ();
 			}
 		}

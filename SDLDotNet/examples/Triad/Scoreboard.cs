@@ -59,14 +59,12 @@ namespace SdlDotNet.Examples
 			surface.Blit(fontSurface, new System.Drawing.Point(this.ScreenX, this.ScreenY + currentY));
 		}
 
-
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="args"></param>
 		public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
 		{
-
 		}
 
 		/// <summary>
@@ -75,7 +73,6 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void HandleSdlKeyUpEvent(KeyboardEventArgs args)
 		{
-
 		}
 
 		private int _Score;

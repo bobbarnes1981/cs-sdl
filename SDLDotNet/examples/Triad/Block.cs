@@ -46,12 +46,12 @@ namespace SdlDotNet.Examples
 		{
 			set
 			{
-                blockType = value;
+				blockType = value;
 			}
 
 			get
 			{
-                return blockType;
+				return blockType;
 			}
 
 		}
@@ -115,7 +115,7 @@ namespace SdlDotNet.Examples
 			}
 			set
 			{
-                _GridX = value.X;
+				_GridX = value.X;
 				_GridY = value.Y;
 			}
 
@@ -220,15 +220,15 @@ namespace SdlDotNet.Examples
 			}
 
 		
-//			Color currentColor = Color.Black;
-//			switch(blockType)
-//			{
-//				case BlockType.Purple:	currentColor = Color.Purple;	break;
-//				case BlockType.Red:		currentColor = Color.Red;	break;
-//				case BlockType.White:	currentColor = Color.White;	break;
-//				case BlockType.Yellow:	currentColor = Color.Yellow;	break;
-//				case BlockType.Blue:	currentColor = Color.Blue;	break;
-//			}
+			//			Color currentColor = Color.Black;
+			//			switch(blockType)
+			//			{
+			//				case BlockType.Purple:	currentColor = Color.Purple;	break;
+			//				case BlockType.Red:		currentColor = Color.Red;	break;
+			//				case BlockType.White:	currentColor = Color.White;	break;
+			//				case BlockType.Yellow:	currentColor = Color.Yellow;	break;
+			//				case BlockType.Blue:	currentColor = Color.Blue;	break;
+			//			}
 
 			if(!this.Destroy)
 			{
@@ -238,7 +238,7 @@ namespace SdlDotNet.Examples
 			}
 			else
 			{
-                surface.Fill(this.ScreenRectangle,Color.SlateGray);
+				surface.Fill(this.ScreenRectangle,Color.SlateGray);
 			}
 		}
 
