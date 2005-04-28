@@ -18,13 +18,14 @@
 
 
 using System;
+using System.Collections;
 
 namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// A collection of elements of type GameObject
 	/// </summary>
-	public class GameObjectCollection: System.Collections.CollectionBase
+	public class GameObjectCollection: CollectionBase, ICollection
 	{
 		/// <summary>
 		/// Initializes a new empty instance of the GameObjectCollection class.
@@ -63,7 +64,7 @@ namespace SdlDotNet.Examples
 		/// <param name="items">
 		/// The array whose elements are to be added to the end of this GameObjectCollection.
 		/// </param>
-		public virtual void AddRange(GameObject[] items)
+		public void AddRange(GameObject[] items)
 		{
 			foreach (GameObject item in items)
 			{
@@ -82,7 +83,7 @@ namespace SdlDotNet.Examples
 		/// <param name="items">
 		/// The GameObjectCollection whose elements are to be added to the end of this GameObjectCollection.
 		/// </param>
-		public virtual void AddRange(GameObjectCollection items)
+		public void AddRange(GameObjectCollection items)
 		{
 			foreach (GameObject item in items)
 			{
@@ -250,6 +251,55 @@ namespace SdlDotNet.Examples
 		{
 			return new GameObjectCollection.Enumerator(this);
 		}
+		#region ICollection Members
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsSynchronized
+		{
+			get
+			{
+				// TODO:  Add GameObjectCollection.IsSynchronized getter implementation
+				return false;
+			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="array"></param>
+		/// <param name="index"></param>
+		public void CopyTo(GameObject[] array, int index)
+		{
+			((ICollection)this).CopyTo(array, index);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public object SyncRoot
+		{
+			get
+			{
+				// TODO:  Add GameObjectCollection.SyncRoot getter implementation
+				return null;
+			}
+		}
+		// Provide the explicit interface member for ICollection.
+		void ICollection.CopyTo(Array array, int index)
+		{
+			this.List.CopyTo(array, index);
+		}
+
+		#endregion
+
+		#region IEnumerable Members
+
+		IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			// TODO:  Add GameObjectCollection.System.Collections.IEnumerable.GetEnumerator implementation
+			return null;
+		}
+
+		#endregion
 	}
 
 }

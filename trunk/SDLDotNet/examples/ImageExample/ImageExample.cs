@@ -23,8 +23,8 @@ using System.Drawing;
 using System.IO;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Reflection;
-using System.Resources;
+//using System.Reflection;
+//using System.Resources;
 
 using SdlDotNet;
 
@@ -36,6 +36,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class ImageExample
 	{
+		//ResourceManager stringManager;
 		private bool quitFlag;
 		Point position = new Point(100,100);
 		private int AxesCount;
@@ -50,6 +51,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public ImageExample() 
 		{
+//			stringManager = 
+//				new ResourceManager("en-US", Assembly.GetExecutingAssembly());	
 		}
 
 		/// <summary>

@@ -136,7 +136,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		public virtual Surface Surface
+		public Surface Surface
 		{
 			get
 			{

@@ -217,6 +217,7 @@ namespace SdlDotNet.Examples
 				case BlockType.White:	image = this.getWhiteBlock();	break;
 				case BlockType.Yellow:	image = this.getYellowBlock();	break;
 				case BlockType.Blue:	image = this.getBlueBlock();	break;
+				default: image = this.getBlueBlock(); break;
 			}
 
 		
@@ -232,8 +233,10 @@ namespace SdlDotNet.Examples
 
 			if(!this.Destroy)
 			{
-				//if(image != null)
-				//	surface.Blit(image,this.ScreenRectangle);	
+				if(image != null)
+				{
+					surface.Blit(image,this.ScreenRectangle);	
+				}
 				//surface.FillRect(this.ScreenRectangle, currentColor);
 			}
 			else
