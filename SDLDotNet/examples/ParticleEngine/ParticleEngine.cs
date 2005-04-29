@@ -26,141 +26,180 @@ using SdlDotNet;
 namespace SdlDotNet.Examples
 { 
 	/// <summary> 
-	/// Summary description for ParticleEngine.  
+	/// ParticleEngine is a small program that creates 
+	/// a moving starfield on the screen using SDL.NET.
 	/// </summary> 
 	class ParticleEngine
 	{ 
 		/// <summary>
-		/// 
+		/// Constructor for application. It simply initializes the stars.
 		/// </summary>
 		public ParticleEngine() 
 		{ 
 			this.InitializeStars();
-		} 
-		ArrayList _particles = new ArrayList(); 
-		//we will use an array list because it's more flexible 
-
-		private bool quitFlag;
-		int width = 800;
-		int height = 600;
-
-		private Random _rnd = new Random(System.DateTime.Now.Millisecond); 
-		//then we declare the _rnd with a seed on millisecond so we can randomise things; 
+		}
+		// we will use an array list because it's more flexible 
+		private ArrayList particles = new ArrayList(); 
 		
-		Point _POINT; 
-		Color _COLOR; 
-		//this is for accessing information out the class about the location and the color of the particle; 
+		// quitflag will tell the app to quit the main polling loop and exit.
+		private bool quitFlag;
+
+		// width of display screen
+		private int width = 800;
+
+		//height of display screen
+		private int height = 600;
+
+		// then we declare the rand with a seed on millisecond so we can randomize things; 
+		private Random rand = new Random(System.DateTime.Now.Millisecond); 
+		
+		//		// this is for accessing information out the class 
+		//		// about the location and the color of the particle; 
+		//		private Point point; 
+		//		private Color color; 
  
-		const int NUM =50; 
-		//this is the limiter of the particles you can change this for more or less particles...; 
+		//this is the number of particles created. You can change this for more or fewer particles. 
+		private int num = 50; 
   
 		//now we are going to create the struct of our particle; 
-		struct Particle 
+		class Particle 
 		{ 
-			public Point P; //location 
-			public int Velocity; //velocity 
-			public Point Direction; //direction 
-			public Color COLOR; 
-			public Particle(Point p1, int velocity, Point direction, Color color) 
+			private Point position; //location 
+			private int velocity; //velocity 
+			private Point direction; //direction 
+			private Color color; // color of particle
+
+			public Particle(Point position, int velocity, Point direction, Color color) 
 			{ 
-				COLOR=color; 
-				Direction=direction; 
-				Velocity=velocity; 
-				P=p1; 
+				this.color = color; 
+				this.direction = direction; 
+				this.velocity = velocity; 
+				this.position = position; 
 			} 
-		} 
+
+			// Property getters/setters
+			public Point Position
+			{
+				get
+				{
+					return position;
+				}
+				set
+				{
+					position = value;
+				}
+			}
+
+			public Point Direction
+			{
+				get
+				{
+					return direction;
+				}
+				set
+				{
+					direction = value;
+				}
+			}
+
+
+			public int Velocity
+			{
+				get
+				{
+					return velocity;
+				}
+				set
+				{
+					velocity = value;
+				}
+			}
+
+			public Color Color
+			{
+				get
+				{
+					return color;
+				}
+				set
+				{
+					color = value;
+				}
+			}
+
+			public Box Star
+			{
+				get
+				{
+					return new Box((short)this.position.X, (short)this.position.Y, (short)(this.position.X + 2), (short)(this.position.Y + 2));
+				}
+
+			} 
+		}
  
 		/// <summary>
-		/// now we do the initial of the stars so it can all be created... 
+		/// Now we do the initialization of the stars so it can all be created.
 		/// </summary>
 		private void InitializeStars() 
 		{ 
-			Particle particle; //here we call the struct 
-			int Velo; // we declare an int that we will put velocity so later on we can do some fancy colors ;) 
+			Particle particle; //here we call the particle struct 
+
+			// we declare an int that we will put velocity 
+			int velocity; 
  
-			for ( int i= 1; i<NUM;i++) 
+			// for loop that will set up all of the particles.
+			for ( int i= 1; i < num;i++) 
 			{ 
-				Velo=_rnd.Next(1,5); 
-				particle= new Particle( new Point(_rnd.Next(1,width),_rnd.Next(1,height)),Velo, new Point(-1,0),Color.FromArgb(255,51*Velo,51*Velo)); 
-				//hehehe int the last line we have give the data to the particle we have randomized the location 
-				//that initial begins and we have generated the color of the star by its velocity cause being near 
-				//means that it travels faster and it shines more, cool hu? :) 
-				_particles.Add(particle); //and here we add the particle to the array 
+				// set a random velocity
+				velocity = rand.Next(1,5);
+
+				// creates new particle
+				particle = 
+					new Particle(
+					// at a random point on the screen,
+					new Point(rand.Next(1,width), rand.Next(1,height)),
+					// with a random velocity
+					velocity, 
+					// moving from right to left
+					new Point(-1, 0),
+					// with a color based on its velocity. If it travels faster, it shines more.
+					Color.FromArgb(255, 51 * velocity, 51 * velocity)
+					); 
+
+				particles.Add(particle); //and here we add the particle to the arraylist
 			} 
-		} 
-  
-		/// <summary>
-		/// the stars_recycler is for the particles that have reach 
-		/// point 0 of X in this example and we do 
-		/// as was going to initialize but don't use the _particles.
-		/// Add(particle); because it's already created 
-		/// </summary>
-		/// <param name="number"></param>
-		public void RecycleStars( int number) 
-		{ 
-			Particle particle; 
-			int Velo =_rnd.Next(1,5); 
-			particle = new Particle(new Point(width,_rnd.Next(1,height)), Velo, new Point(-1,0),Color.FromArgb(255,51*Velo,51*Velo)); 
-			_particles[number]= particle; 
 		} 
 
 		/// <summary>
 		/// next we are going to make the stars move (yea yea here we are the all powerful :D ) 
 		/// </summary>
-		/// <param name="i"></param>
-		public void MoveStars( int i) 
+		/// <param name="particle"></param>
+		private void MoveStars(Particle particle) 
 		{ 
-			Particle particle; // call the struct 
-			particle = (Particle)_particles[i]; // put the data from particle i 
-			particle.P.X=particle.P.X+(particle.Direction.X*particle.Velocity); //calculate the x 
-			particle.P.Y=particle.P.Y+(particle.Direction.Y*particle.Velocity); //calculate the y 
+			particle.Position = 
+				new Point(
+				particle.Position.X + (particle.Direction.X * particle.Velocity), 
+				particle.Position.Y + (particle.Direction.Y * particle.Velocity)
+				); 
+			//calculate the x 
+			//calculate the y 
 			//next we are going to check if the particle reaches the limits if not you pass it else recycle 
 			//I have put it checking in case of you want it moving in the y to :P 
-			if ((particle.P.X > 0)&&(particle.P.Y > 0)&&(particle.P.Y < height)) 
+			// the stars_recycler is for the particles that have reached
+			// point 0 of X in this example and we do 
+			// as was going to initialize but don't use the _particles.
+			// Add(particle); because it's already created 
+			if ((particle.Position.X <= 0) ||
+				(particle.Position.X >= this.width) ||
+				(particle.Position.Y <= 0)||
+				(particle.Position.Y >= this.height)
+				) 
 			{ 
-				_COLOR = particle.COLOR; //set the _COLOR 
-				_POINT = particle.P; //set the _POINT 
-				_particles[i]= particle; //store the data 
-			} 
-			else 
-			{ 
-				RecycleStars(i); // recycle 
-			} 
-		} 
-
-		private Box box = new Box(0, 0, 2, 2);
-		/// <summary>
-		/// here we return the location 
-		/// </summary>
-		public Point Point 
-		{ 
-			get 
-			{ 
-				return _POINT;
-			} 
-		} 
-		/// <summary>
-		/// here we return the Color 
-		/// </summary>
-		public Color Color 
-		{ 
-			get 
-			{ 
-				return _COLOR;
-			} 
-		} 
-		//
-		/// <summary>
-		/// here we return the number of the particle I use it like that 
-		/// and not the const cause sometimes you may have cases that 
-		/// it's not full and/or you don't have to have the limit 
-		/// </summary>
-		public int NumberOfParticles 
-		{ 
-			get 
-			{ 
-				return this ._particles.Count;
-			} 
+				particle.Position = new Point(this.width, rand.Next(1, this.height));
+				particle.Velocity = rand.Next(1,5);
+				particle.Direction = new Point(-1, 0);
+				particle.Color = Color.FromArgb(255, 51 * particle.Velocity, 51 * particle.Velocity); 
+			}
 		} 
 
 		/// <summary>
@@ -168,7 +207,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run()
 		{
-			Surface screen = Video.SetVideoModeWindow(width, height, true); 
+			Particle particle;
+			Surface screen = Video.SetVideoModeWindow(width, height); 
 
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
@@ -187,18 +227,18 @@ namespace SdlDotNet.Examples
 					//the above line paint the screen in black no need to put it if your going to put some kind 
 					//of UFO, star ship or songoku in it 
 					//then we do a cycle that goes updating and drawing all our particles 
-					for ( int i =0; i< this.NumberOfParticles;i++) 
+					for (int i = 0; i < this.particles.Count;i++) 
 					{ 
-						this.MoveStars(i); //update our particles... doing all the back work 
-						box.Location = new Point(this.Point.X, this.Point.Y);
-						screen.DrawFilledBox(box, this.Color);
-						//screen.DrawPixel(this.Return_Point.X,this.Return_Point.Y,this.Return_Color); 
+						particle = (Particle)particles[i];
+						this.MoveStars(particle); //update our particles... doing all the back work 
+						screen.DrawFilledBox(particle.Star, particle.Color);
 						//then draw it calling the variables that we have declared on the very beginning of the class remember??? 
 					} 
 					screen.Flip(); //well ... don't know really what it does but its necessary for the scene be draw 
 				} 
-				catch (SurfaceLostException) 
+				catch (SurfaceLostException e) 
 				{
+					Console.WriteLine(e);
 				}
 			}
 		}
@@ -225,4 +265,4 @@ namespace SdlDotNet.Examples
 			particleEngine.Run();
 		}
 	} 
-} 
+}
