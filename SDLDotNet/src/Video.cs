@@ -236,6 +236,18 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
+		/// <remarks>It puts a frame around the window</remarks>
+		/// <returns>a surface to draw to</returns>
+		public static Surface SetVideoModeWindow(int width, int height) 
+		{
+			return Video.SetVideoModeWindow(width, height, true);
+		}
+
+		/// <summary>
+		/// Sets the windowed video mode using current screen bpp
+		/// </summary>
+		/// <param name="width">The width of the window</param>
+		/// <param name="height">The height of the window</param>
 		/// <param name="frame">
 		/// if true, the window will have a frame around it
 		/// </param>
