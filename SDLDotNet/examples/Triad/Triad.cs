@@ -212,7 +212,6 @@ namespace SdlDotNet.Examples
 			this.bottomBlock = this.middleBlock;
 			this.middleBlock = this.topBlock;
 			this.topBlock = tempBlock;
-			
 		}
 
 		/// <summary>

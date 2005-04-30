@@ -374,16 +374,6 @@ namespace SdlDotNet.Examples
 		private Surface screen;
 		private GuiWindow statusWindow;
 		private static GuiMenuBar gmb;
-		/// <summary>
-		/// 
-		/// </summary>
-		public static GuiMenuBar MenuBar 
-		{ 
-			get 
-			{ 
-				return gmb; 
-			} 
-		}
 		private static Clock clock = new Clock(5);
 		/// <summary>
 		/// 
@@ -396,44 +386,6 @@ namespace SdlDotNet.Examples
 			}
 		}
 		private static GuiTicker statusTicker;
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static SdlDemo Instance 
-		{ 
-			get 
-			{ 
-				return sdlDemo; 
-			} 
-		}
-
-		/// <summary>
-		/// The master sprite manager is the top-most manager that
-		/// contains everything else. It includes the GUI elements common
-		/// throughout the site and also the sprite manager that frames
-		/// the actual output.
-		/// </summary>
-		public static SpriteCollection MasterSpriteContainer 
-		{ 
-			get 
-			{ 
-				return master; 
-			} 
-		}
-
-		/// <summary>
-		/// The sprite manager is the manager that handles the demo
-		/// pages. This may be translated or moved as needed. All
-		/// DemoModes should attached their sprite manager to this one.
-		/// </summary>
-		public static SpriteCollection Sprites
-		{ 
-			get 
-			{ 
-				return manager; 
-			} 
-		}
 
 		/// <summary>
 		/// 
