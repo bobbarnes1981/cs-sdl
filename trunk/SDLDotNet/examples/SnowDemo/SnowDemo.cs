@@ -71,28 +71,6 @@ namespace SdlDotNet.Examples
 			texts = new Texts();
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Length
-		{
-			get
-			{
-				return snowflakes.Length;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Snowflake this[int index]
-		{
-			get
-			{
-				return snowflakes[index];
-			}
-		}
-
 		static bool run = true;
 		static int numberOfSnowflakes = 250;
 
