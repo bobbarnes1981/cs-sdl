@@ -50,15 +50,12 @@ namespace SdlDotNet.Examples
 		//height of display screen
 		private int height = 600;
 
-		// then we declare the rand with a seed on millisecond so we can randomize things; 
+		// then we declare the rand with a seed on millisecond 
+		// so we can randomize things; 
 		private Random rand = new Random(System.DateTime.Now.Millisecond); 
-		
-		//		// this is for accessing information out the class 
-		//		// about the location and the color of the particle; 
-		//		private Point point; 
-		//		private Color color; 
  
-		//this is the number of particles created. You can change this for more or fewer particles. 
+		// This is the number of particles created. 
+		// You can change this for more or fewer particles. 
 		private int num = 50; 
   
 		//now we are going to create the struct of our particle; 
@@ -69,7 +66,9 @@ namespace SdlDotNet.Examples
 			private Point direction; //direction 
 			private Color color; // color of particle
 
-			public Particle(Point position, int velocity, Point direction, Color color) 
+			public Particle(
+				Point position, int velocity, 
+				Point direction, Color color) 
 			{ 
 				this.color = color; 
 				this.direction = direction; 
@@ -127,11 +126,16 @@ namespace SdlDotNet.Examples
 				}
 			}
 
+			// particle will appear as a 2x2 pixel box
 			public Box Star
 			{
 				get
 				{
-					return new Box((short)this.position.X, (short)this.position.Y, (short)(this.position.X + 2), (short)(this.position.Y + 2));
+					return new Box(
+						(short)this.position.X, 
+						(short)this.position.Y, 
+						(short)(this.position.X + 2), 
+						(short)(this.position.Y + 2));
 				}
 
 			} 
@@ -162,43 +166,49 @@ namespace SdlDotNet.Examples
 					velocity, 
 					// moving from right to left
 					new Point(-1, 0),
-					// with a color based on its velocity. If it travels faster, it shines more.
+					// with a color based on its velocity. 
+					// If it travels faster, it shines more.
 					Color.FromArgb(255, 51 * velocity, 51 * velocity)
 					); 
-
-				particles.Add(particle); //and here we add the particle to the arraylist
+				//and here we add the particle to the arraylist
+				particles.Add(particle); 
 			} 
 		} 
 
 		/// <summary>
-		/// next we are going to make the stars move (yea yea here we are the all powerful :D ) 
+		/// next we are going to make the stars move 
+		/// (yea yea here we are the all powerful :D ) 
 		/// </summary>
 		/// <param name="particle"></param>
 		private void MoveStars(Particle particle) 
 		{ 
-			particle.Position = 
-				new Point(
-				particle.Position.X + (particle.Direction.X * particle.Velocity), 
-				particle.Position.Y + (particle.Direction.Y * particle.Velocity)
-				); 
 			//calculate the x 
 			//calculate the y 
-			//next we are going to check if the particle reaches the limits if not you pass it else recycle 
-			//I have put it checking in case of you want it moving in the y to :P 
-			// the stars_recycler is for the particles that have reached
-			// point 0 of X in this example and we do 
-			// as was going to initialize but don't use the _particles.
-			// Add(particle); because it's already created 
+			particle.Position = 
+				new Point(
+				particle.Position.X + 
+				(particle.Direction.X * particle.Velocity), 
+				particle.Position.Y + 
+				(particle.Direction.Y * particle.Velocity)
+				); 
+			
+			// Next we are going to check if the particle 
+			// reaches the limits of the screen. 
+			// If so, we reset its position to the starting point.
+			// I have put it checking in case of you want it 
+			// moving in the y to :P
 			if ((particle.Position.X <= 0) ||
 				(particle.Position.X >= this.width) ||
 				(particle.Position.Y <= 0)||
 				(particle.Position.Y >= this.height)
 				) 
 			{ 
-				particle.Position = new Point(this.width, rand.Next(1, this.height));
+				particle.Position = 
+					new Point(this.width, rand.Next(1, this.height));
 				particle.Velocity = rand.Next(1,5);
 				particle.Direction = new Point(-1, 0);
-				particle.Color = Color.FromArgb(255, 51 * particle.Velocity, 51 * particle.Velocity); 
+				particle.Color = 
+					Color.FromArgb(255, 51 * particle.Velocity, 51 * particle.Velocity); 
 			}
 		} 
 
@@ -208,33 +218,42 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			Particle particle;
+			//Set up screen to display app.
 			Surface screen = Video.SetVideoModeWindow(width, height); 
 
+			// Allow for app to respond to keybaord presses.
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
+			// Allow app to quit by clicking on the 'X' on the window frame.
 			Events.Quit += new QuitEventHandler(this.Quit);
 
+			// Will loop until quitflag is true, then app will quit.
 			while (!quitFlag) 
 			{
 				while (Events.Poll()) 
 				{
-					// handle events till the queue is empty
+					// handle input events till the queue is empty
 				} 
 					
 				try 
 				{
+					// Paints the screen in black and erases all items
 					screen.Fill(Color.FromArgb(0,0,0)); 
-					//the above line paint the screen in black no need to put it if your going to put some kind 
-					//of UFO, star ship or songoku in it 
-					//then we do a cycle that goes updating and drawing all our particles 
+					
+					// Then we do a cycle that goes 
+					// updating and drawing all our particles 
 					for (int i = 0; i < this.particles.Count;i++) 
 					{ 
 						particle = (Particle)particles[i];
-						this.MoveStars(particle); //update our particles... doing all the back work 
+						//update our particles... doing all the back work 
+						this.MoveStars(particle); 
+						// draw particles to the screen back screen buffer
 						screen.DrawFilledBox(particle.Star, particle.Color);
-						//then draw it calling the variables that we have declared on the very beginning of the class remember??? 
+						
 					} 
-					screen.Flip(); //well ... don't know really what it does but its necessary for the scene be draw 
+					// updates screen by flipping results 
+					// to front screen buffer.
+					screen.Flip(); 
 				} 
 				catch (SurfaceLostException e) 
 				{
@@ -242,6 +261,9 @@ namespace SdlDotNet.Examples
 				}
 			}
 		}
+
+		// Event handler for keyboard events.
+		// This accepts the Escape key and 'Q' key and will exit the app.
 		private void KeyboardDown(
 			object sender,
 			KeyboardEventArgs e) 
@@ -253,11 +275,13 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		// Event handler for when the 'X' on the window frame is clicked
 		private void Quit(object sender, QuitEventArgs e) 
 		{
 			quitFlag = true;
 		}
 
+		// Main() of program.
 		[STAThread]
 		static void Main() 
 		{

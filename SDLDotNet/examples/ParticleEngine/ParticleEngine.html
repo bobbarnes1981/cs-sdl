@@ -1,177 +1,1424 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
 <head>
-<title>SDL.NET Particle Engine Tutorial</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<style type="text/css">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./ParticleEngine_files/filelist.xml">
+<title>AN INTRODUCTION TO PARTICLE ENGINES</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>DYYH</o:Author>
+  <o:LastAuthor>DYYH</o:LastAuthor>
+  <o:Revision>1</o:Revision>
+  <o:TotalTime>2</o:TotalTime>
+  <o:Created>2005-04-30T08:21:00Z</o:Created>
+  <o:LastSaved>2005-04-30T08:23:00Z</o:LastSaved>
+  <o:Pages>6</o:Pages>
+  <o:Words>1175</o:Words>
+  <o:Characters>6702</o:Characters>
+  <o:Company>The Capital Group Companies, Inc.</o:Company>
+  <o:Lines>55</o:Lines>
+  <o:Paragraphs>13</o:Paragraphs>
+  <o:CharactersWithSpaces>8230</o:CharactersWithSpaces>
+  <o:Version>9.7616</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:DrawingGridHorizontalSpacing>9.35 pt</w:DrawingGridHorizontalSpacing>
+  <w:DrawingGridVerticalSpacing>6.35 pt</w:DrawingGridVerticalSpacing>
+  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
+  <w:DisplayVerticalDrawingGridEvery>2</w:DisplayVerticalDrawingGridEvery>
+  <w:Compatibility>
+   <w:FootnoteLayoutLikeWW8/>
+   <w:ShapeLayoutLikeWW8/>
+   <w:AlignTablesRowByRow/>
+   <w:ForgetLastTabAlignment/>
+   <w:LayoutRawTableWidth/>
+   <w:LayoutTableRowsApart/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
 <!--
-.style1 {
-	font-family: "Courier New", Courier, mono;
-	font-size: 18px;
-}
-.style2 {
-	color: #669900;
-	font-weight: bold;
-}
-.style3 {
-	font-size: 24px;
-	font-weight: bold;
-}
-.style4 {font-size: 12px}
-.style5 {font-family: "Courier New", Courier, mono; font-size: 12px; }
+ /* Font Definitions */
+@font-face
+	{font-family:"Quest Font";
+	panose-1:2 7 3 9 2 2 5 2 4 4;
+	mso-font-charset:0;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:536902279 -2147483648 8 0 511 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0in;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+code
+	{mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+p.style3, li.style3, div.style3
+	{mso-style-name:style3;
+	margin-right:0in;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:16.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;}
+ /* Page Definitions */
+@page
+	{mso-facing-pages:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:.5in .5in .5in .5in;
+	mso-header-margin:0in;
+	mso-footer-margin:1.0in;
+	mso-title-page:yes;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
 -->
 </style>
 </head>
 
-<body>
-<p align="center" class="style3"><code>AN INTRODUCTION TO PARTICLE ENGINES</code></p>
-<p><code>First of all I what to apologize for my poor English. : D Now that you have forgiven me lets start with what I hope you appreciate: our little tutorial about particle engine in c# using Sdl.Net ( <a href="http://cs-sdl.sourceforge.net/">http://cs-sdl.sourceforge.net/ </a>) but it can be ported to anything :P. </code></p>
-<p><code>If you already know how to do a particle engine but this tutorial is not for you. This tutorial is for those who don't know how to : P so it's kind of an introduction to it. I have posted the code and I have tried to comment it all.</code></p>
-<p><code>To do a particle engine you must ask first what a particle is or what defines a particle. Well a particle has a color, a location, some have lifetime, others have weight, others velocity. There are many other things that you can see in one particle.</code></p>
-<p><code>So in this tutorial we are going to do the &quot;hello world&quot; of particle engines: the stars in the sky. For this purpose we are going to need a very simple particle engine, we will need a particle engine that can have a velocity, direction and a point.</code></p>
-<p><code>So in our project we create a new class that you can call &quot;ParticleEngine.cs&quot;</code></p>
-<pre class="style1 style4">
-<code><strong>using System; </strong></code>
-<code><strong>using System.Drawing; </strong></code>
-<code><strong>using System.Collections; </strong></code>
-<code><strong>namespace sdltesting </strong></code>
-<code><strong>{ </strong></code>
-<span class="style2"><code><strong>/// &lt;summary&gt; </strong></code>
-<code><strong>/// Summary description for PE. </strong></code> 
-<code><strong>/// &lt;/summary&gt; </strong></code></span>
-<code><strong>	public class PE </strong></code>
-<code><strong>	{ </strong></code>
-<code><strong>		public PE() </strong></code>
-<code><strong>		{ </strong></code>
-<code><strong>		} </strong></code>
-<code><strong>		ArrayList _particles = new ArrayList(); </strong></code>
-<span class="style2"><code>		//we will use an array list because it's more flexible </code></span>
-<code><strong>		
-		public Random _rnd = new Random(System.DateTime.Now.Millisecond); </strong></code>
-<span class="style2"><code>		//then we declare the _rnd with a seed on millisecond so we can randomise things; </code></span>
-<code><strong>		
-		Point _POINT; </strong></code>
-<code><strong>		Color _COLOR; </strong></code>
-<span class="style2"><code>		//this is for accessing information out the class about the location and the color of the particle; </code></span>
-&nbsp;
-<code><strong>		const int NUM =50; </strong></code>
-<span class="style2"><code>		//this is the limiter of the particles you can change this for more or less particles...; </code></span>
-<code><strong>&nbsp; </strong></code>
-<code class="style2"><strong>		//now we are going to create the struct of our particle; </strong></code>
-<code><strong>		struct Particle </strong></code>
-<code><strong>		{ </strong></code>
-<code><strong>			public Point P; <span class="style2">//location</span> </strong></code>
-<code><strong>			public int Velocity; <span class="style2">//velocity </span></strong></code>
-<code><strong>			public Point Direction;<span class="style2"> //direction</span> </strong></code>
-<code><strong>			public Color COLOR; </strong></code>
-<code><strong>			public Particle(Point p1, int velocity, Point direction,Color color) </strong></code>
-<code><strong>			{ </strong></code>
-<code><strong>				COLOR=color; </strong></code>
-<code><strong>				Direction=direction; </strong></code>
-<code><strong>				Velocity=velocity; </strong></code>
-<code><strong>				P=p1; </strong></code>
-<code><strong>			} </strong></code>
-<code><strong>		} </strong></code>
-&nbsp;
-<code class="style2"><strong>		//now we do the initial of the stars so it can all be created... </strong></code>
-<code><strong>		public void init_stars() </strong></code>
-<code><strong>		{ </strong></code>
-<code><strong>			Particle particle; <span class="style2">//here we call the struct</span> </strong></code>
-<code><strong>			int Velo; <span class="style2">// we declare an int that we will put velocity so later on we can do some fancy colors ;)</span> </strong></code>
-&nbsp;
-<code><strong>			for ( int i= 1; i&lt;NUM;i++) </strong></code>
-<code><strong>			{ </strong></code>
-<code><strong>				Velo=_rnd.Next(1,5); </strong></code>
-<code><strong>				particle= new Particle( new Point(_rnd.Next(1,639),_rnd.Next(1,479)),Velo, new Point(-1,0),Color.FromArgb(255,51*Velo,51*Velo)); </strong></code>
-<code><strong>				<span class="style2">//hehehe int the last line we have give the data to the particle we have randomized the location </span></strong></code>
-<span class="style2"><code><strong>				//that initial begins and we have generated the color of the star by its velocity cause being near </strong></code>
-<code><strong>				//means that it travels faster and it shines more, cool hu? :) </strong></code></span>
-<code><strong>				_particles.Add(particle); <span class="style2">//and here we add the particle to the array </span></strong></code>
-<code><strong>			} </strong></code>
-<code><strong>		} </strong></code>
-<code><strong>&nbsp; </strong></code>
-<code><strong>&nbsp; </strong></code>
-<code><strong>		<span class="style2">//the stars_recycler is for the particles that have reach point 0 of X in this example and we do </span></strong></code>
-<span class="style2"><code><strong>		//as was going to initialize but don't use the _particles.Add(particle); because it's already created </strong></code></span>
-<code><strong>		public void stars_recycle( int number) </strong></code>
-<code><strong>		{ </strong></code>
-<code><strong>			Particle particle; </strong></code>
-<code><strong>			int Velo=_rnd.Next(1,5); </strong></code>
-<code><strong>			particle= new Particle( new Point(639,_rnd.Next(1,479)),Velo, new Point(-1,0),Color.FromArgb(255,51*Velo,51*Velo)); </strong></code>
-<code><strong>			_particles[number]= particle; </strong></code>
-<code><strong>		} </strong></code>
-<code class="style2"><strong>		//next we are going to make the stars move (yea yea here we are the all powerful :D ) </strong></code>
-<code><strong>		public void move_stars( int i) </strong></code>
-<code><strong>		{ </strong></code>
-<code><strong>			Particle particle; <span class="style2">// call the struct</span> </strong></code>
-<code><strong>			particle = (Particle)_particles[i]; <span class="style2">// put the data from particle i </span></strong></code>
-<code><strong>			particle.P.X=particle.P.X+(particle.Direction.X*particle.Velocity); <span class="style2">//calculate the x</span> </strong></code>
-<code><strong>			particle.P.Y=particle.P.Y+(particle.Direction.Y*particle.Velocity); <span class="style2">//calculate the y </span></strong></code>
-<code><strong>		<span class="style2">	//next we are going to check if the particle reaches the limits if not you pass it else recycle </span></strong></code>
-<span class="style2"><code><strong>			//I have put it checking in case of you want it moving in the y to :P </strong></code></span>
-<code><strong>			if ((particle.P.X&gt;0)&amp;&amp;(particle.P.Y&gt;0)&amp;&amp;(particle.P.Y&lt;479)) </strong></code>
-<code><strong>			{ </strong></code>
-<code><strong>				_COLOR = particle.COLOR; <span class="style2">//set the _COLOR</span> </strong></code>
-<code><strong>				_POINT = particle.P; <span class="style2">//set the _POINT</span> </strong></code>
-<code><strong>				_particles[i]= particle; <span class="style2">//store the data</span> </strong></code>
-<code><strong>			} </strong></code>
-<code><strong>			else </strong></code>
-<code><strong>			{ </strong></code>
-<code><strong>				stars_recycle(i); <span class="style2">// recycle</span> </strong></code>
-<code><strong>			} </strong></code>
-<code><strong>		} </strong></code>
-<code class="style2"><strong>		//here we return the location </strong></code>
-<code><strong>		public Point Return_Point </strong></code>
-<code><strong>		{ </strong></code>
-<code><strong>			get { return _POINT;} </strong></code>
-<code><strong>		} </strong></code>
-<code class="style2"><strong>		//here we return the Color </strong></code>
-<code><strong>		public Color Return_Color </strong></code>
-<code><strong>		{ </strong></code>
-<code><strong>			get { return _COLOR;} </strong></code>
-<code><strong>		} </strong></code>
-<code><strong>		<span class="style2">//here we return the number of the particle I use it like that and not the const cause sometimes you may have </span></strong></code>
-<span class="style2"><code><strong>		//cases that it's not full and/or you don't have to have the limit </strong></code></span>
-<code><strong>		public int Return_Number_Particles </strong></code>
-<code><strong>		{ </strong></code>
-<code><strong>			get { return this ._particles.Count;} </strong></code>
-<code><strong>		} </strong></code>
-<code><strong>&nbsp; </strong></code>
-<code><strong>	} </strong></code>
-<code><strong>} </strong></code>
-</pre>
-<p>&nbsp; </p>
-<p><code>So this was our class now we should do the void that goes in the main: </code></p>
-<p>&nbsp; </p>
-<p><code>First call the class </code></p>
-<p>&nbsp; </p>
-<p class="style4"><code><strong>PE _PE_STARS = new PE(); </strong></code></p>
-<p>&nbsp; </p>
-<p><code>Then on the load or somewhere else before the main cycle do the: </code></p>
-<p><code>_PE_STARS.init_stars();</code></p>
-<p><code>And then we write the function that call the move_stars(int i);</code></p>
-<pre class="style5">
-<code><strong>private void Stars() </strong></code>
-<code><strong>{ </strong></code>
-<code><strong>	screen.Fill(Color.FromArgb(0,0,0)); </strong></code>
-<span class="style2"><code><strong>	//the above line paint the screen in black no need to put it if your going to put some kind </strong></code>
-<code><strong>	//of UFO, star ship or songoku in it </strong></code>
-<code><strong>	//then we do a cycle that goes updating and drawing all our particles </strong></code></span>
-<code><strong>	for ( int i =0; i&lt;_PE_STARS.Return_Number_Particles;i++) </strong></code>
-<code><strong>	{ </strong></code>
-<code><strong>		_PE_STARS.move_stars(i); //update our particles... doing all the back work </strong></code>
-<code><strong>		screen.DrawPixel(_PE_STARS.Return_Point.X,_PE_STARS.Return_Point.Y,_PE_STARS.Return_Color); </strong></code>
-<code class="style2"><strong>		//then draw it calling the variables that we have declared on the very beginning of the class remember??? </strong></code>
-<code><strong>	} </strong></code>
-<code><strong>	screen.Flip();<span class="style2"> //well ... don't know really what it does but its necessary for the scene be draw </span></strong></code>
-<code><strong>} </strong></code>
-</pre>
-<p><code>Then just put stars(); somewhere after you draw your ufo and if you do draw ufo, rockets or any kind of space things … remove the screen.Fill(Color.FromArgb(0,0,0));</code></p>
-<p><code>Well I guess this is it … this is my first ever tutorial so don't be ruff with me and if you need any more info, just what to give feedback ,send flowers or money please send me an email:</code></p>
-<p><code>DeSousa_87@hotmail.com </code></p>
-<p><code>And I would like to thanks to KammutierSpule to teach me these, fozi and supermegamau for helping me with the errors and all the dudes at gamedev-pt for helping me and to the people at Sdl.net that helped me (jendave, hanclito and scotles2). </code></p>
-<p><code>www.GameDev-PT.net </code></p>
-<p><code>Miguel De Sousa Friday, April 22, 2005 </code></p>
+<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=style3 align=center style='text-align:center'><code><span
+style='font-size:10.0pt;font-family:"Courier New"'>AN INTRODUCTION TO PARTICLE
+ENGINES</span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'>First of all
+I what to apologize for my poor English. : D Now that you have forgiven me lets
+start with what I hope you appreciate: our little tutorial about particle
+engine in c# using Sdl.Net ( <a href="http://cs-sdl.sourceforge.net/">http://cs-sdl.sourceforge.net/
+</a>) but it can be ported to anything :P. </span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'>If you
+already know how to do a particle engine but this tutorial is not for you. This
+tutorial is for those who don't know how to : P so it's kind of an introduction
+to it. I have posted the code and I have tried to comment it all.</span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'>To do a
+particle engine you must ask first what a particle is or what defines a
+particle. Well a particle has a color, a location, some have lifetime, others
+have weight, others velocity. There are many other things that you can see in
+one particle.</span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'>So in this
+tutorial we are going to do the &quot;hello world&quot; of particle engines:
+the stars in the sky. For this purpose we are going to need a very simple
+particle engine, we will need a particle engine that can have a velocity,
+direction and a point.</span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'>So in our
+project we create a new class that you can call &quot;ParticleEngine.cs&quot;.</span></code><span
+style='font-family:"Quest Font";color:green'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font";color:green'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font";color:blue'>using</span><span style='font-family:
+"Quest Font"'> System; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font";color:blue'>using</span><span style='font-family:
+"Quest Font"'> System.Drawing; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font";color:blue'>using</span><span style='font-family:
+"Quest Font"'> System.Collections; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font";color:blue'>using</span><span style='font-family:
+"Quest Font"'> SdlDotNet;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font";color:blue'>namespace</span><span
+style='font-family:"Quest Font"'> SdlDotNet.Examples<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'>{ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='color:gray'>///</span><span style='color:green'> </span><span
+style='color:gray'>&lt;summary&gt;</span><span style='color:green'> <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='color:gray'>///</span><span style='color:green'> ParticleEngine is a
+small program that creates <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='color:gray'>///</span><span style='color:green'> a moving starfield on
+the screen using SDL.NET.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='color:gray'>///</span><span style='color:green'> </span><span
+style='color:gray'>&lt;/summary&gt;</span><span style='color:green'> <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>class</span> ParticleEngine<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span>{ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> </span><span style='color:gray'>&lt;summary&gt;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> Constructor for application. It simply initializes the
+stars.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> </span><span style='color:gray'>&lt;/summary&gt;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>public</span>
+ParticleEngine() <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>{ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>this</span>.InitializeStars();<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// we will use
+an array list because it's more flexible <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span>
+ArrayList particles = <span style='color:blue'>new</span> ArrayList(); <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// quitflag will
+tell the app to quit the main polling loop and exit.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span> <span
+style='color:blue'>bool</span> quitFlag;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// width of
+display screen<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span> <span
+style='color:blue'>int</span> width = 800;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>//height of
+display screen<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span> <span
+style='color:blue'>int</span> height = 600;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// then we
+declare the rand with a seed on millisecond <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// so we can
+randomize things; <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span>
+Random rand = <span style='color:blue'>new</span>
+Random(System.DateTime.Now.Millisecond); <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style="mso-spacerun: yes"> </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// This is the
+number of particles created. <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// You can
+change this for more or fewer particles. <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span> <span
+style='color:blue'>int</span> num = 50; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style="mso-spacerun: yes">  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>//now we are
+going to create the struct of our particle; <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>class</span>
+Particle <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>{ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span>
+Point position; <span style='color:green'>//location <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span> <span
+style='color:blue'>int</span> velocity; <span style='color:green'>//velocity <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span>
+Point direction; <span style='color:green'>//direction <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span>
+Color color; <span style='color:green'>// color of particle<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font";color:green'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>public</span>
+Particle(<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>Point
+position, <span style='color:blue'>int</span> velocity, <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>Point
+direction, Color color) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>this</span>.color = color; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>this</span>.direction = direction; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>this</span>.velocity = velocity; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>this</span>.position = position; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>} <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// Property
+getters/setters<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>public</span>
+Point Position<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>get<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>return</span> position;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>set<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>position
+= <span style='color:blue'>value</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>public</span>
+Point Direction<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>get<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>return</span> direction;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>set<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>direction
+= <span style='color:blue'>value</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>public</span> <span
+style='color:blue'>int</span> Velocity<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>get<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>return</span> velocity;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>set<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>velocity
+= <span style='color:blue'>value</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>public</span>
+Color Color<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>get<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>return</span> color;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>set<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>color
+= <span style='color:blue'>value</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// particle will
+appear as a 2x2 pixel box<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>public</span> Box
+Star<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>get<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>return</span> <span style='color:blue'>new</span> Box(<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>(<span style='color:blue'>short</span>)<span
+style='color:blue'>this</span>.position.X, <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>(<span style='color:blue'>short</span>)<span
+style='color:blue'>this</span>.position.Y, <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>(<span style='color:blue'>short</span>)(<span
+style='color:blue'>this</span>.position.X + 2), <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>(<span style='color:blue'>short</span>)(<span
+style='color:blue'>this</span>.position.Y + 2));<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>} <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style="mso-spacerun: yes"> </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> </span><span style='color:gray'>&lt;summary&gt;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> Now we do the initialization of the stars so it can all be
+created.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> </span><span style='color:gray'>&lt;/summary&gt;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span> <span
+style='color:blue'>void</span> InitializeStars() <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>{ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>Particle particle; <span style='color:
+green'>//here we call the particle struct <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font";color:green'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// we declare an
+int that we will put velocity <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>int</span>
+velocity; <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style="mso-spacerun: yes"> </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// for loop that
+will set up all of the particles.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>for</span> ( <span
+style='color:blue'>int</span> i= 1; i &lt; num;i++) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// set a random velocity<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>velocity
+= rand.Next(1,5);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// creates new particle<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>particle
+= <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>new</span> Particle(<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// at a random point on the screen,<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>new</span> Point(rand.Next(1,width), rand.Next(1,height)),<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// with a random velocity<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>velocity,
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// moving from right to left<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>new</span> Point(-1, 0),<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// with a color based on its velocity. <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// If it travels faster, it shines more.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>Color.FromArgb(255,
+51 * velocity, 51 * velocity)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>);
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>//and here we add the particle to the arraylist<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>particles.Add(particle);
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>} <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>} <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> </span><span style='color:gray'>&lt;summary&gt;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> next we are going to make the stars move <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> (yea yea here we are the all powerful :D ) <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> </span><span style='color:gray'>&lt;/summary&gt;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> </span><span style='color:gray'>&lt;param
+name=&quot;particle&quot;&gt;&lt;/param&gt;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span> <span
+style='color:blue'>void</span> MoveStars(Particle particle) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>{ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>//calculate the
+x <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>//calculate the
+y <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>particle.Position = <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>new</span> Point(<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>particle.Position.X
++ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>(particle.Direction.X
+* particle.Velocity), <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>particle.Position.Y
++ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>(particle.Direction.Y
+* particle.Velocity)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>);
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// Next we are
+going to check if the particle <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// reaches the
+limits of the screen. <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// If so, we
+reset its position to the starting point.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// I have put it
+checking in case of you want it <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// moving in the
+y to :P<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>if</span>
+((particle.Position.X &lt;= 0) ||<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>(particle.Position.X
+&gt;= <span style='color:blue'>this</span>.width) ||<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>(particle.Position.Y
+&lt;= 0)||<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>(particle.Position.Y
+&gt;= <span style='color:blue'>this</span>.height)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>)
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{ <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>particle.Position
+= <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>new</span> Point(<span style='color:blue'>this</span>.width,
+rand.Next(1, <span style='color:blue'>this</span>.height));<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>particle.Velocity
+= rand.Next(1,5);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>particle.Direction
+= <span style='color:blue'>new</span> Point(-1, 0);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>particle.Color
+= <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>Color.FromArgb(255,
+51 * particle.Velocity, 51 * particle.Velocity); <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>} <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> </span><span style='color:gray'>&lt;summary&gt;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:gray'>///</span><span
+style='color:green'> </span><span style='color:gray'>&lt;/summary&gt;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>public</span> <span
+style='color:blue'>void</span> Run()<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>Particle particle;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>//Set up screen
+to display app.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>Surface screen =
+Video.SetVideoModeWindow(width, height); <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// Allow for app
+to respond to keybaord presses.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>Events.KeyboardDown += <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>new</span> KeyboardEventHandler(<span style='color:blue'>this</span>.KeyboardDown);
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// Allow app to
+quit by clicking on the 'X' on the window frame.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>Events.Quit += <span style='color:blue'>new</span>
+QuitEventHandler(<span style='color:blue'>this</span>.Quit);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// Will loop
+until quitflag is true, then app will quit.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>while</span>
+(!quitFlag) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>while</span> (Events.Poll()) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// handle input events till the queue is empty<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>try</span> <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// Paints the screen in black and erases all items<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>screen.Fill(Color.FromArgb(0,0,0));
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// Then we do a cycle that goes <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// updating and drawing all our particles <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>for</span> (<span style='color:blue'>int</span> i = 0; i
+&lt; <span style='color:blue'>this</span>.particles.Count;i++) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>{
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>particle = (Particle)particles[i];<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>//update our
+particles... doing all the back work <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>this</span>.MoveStars(particle);
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// draw
+particles to the screen back screen buffer<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>screen.DrawFilledBox(particle.Star,
+particle.Color);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:2'>            </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>}
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// updates screen by flipping results <o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span><span
+style='color:green'>// to front screen buffer.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>screen.Flip();
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span><span
+style='color:blue'>catch</span> (SurfaceLostException e) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:2'>            </span><span style='mso-tab-count:1'>      </span>Console.WriteLine(e);<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// Event handler
+for keyboard events.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// This accepts
+the Escape key and 'Q' key and will exit the app.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span> <span
+style='color:blue'>void</span> KeyboardDown(<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>object</span>
+sender,<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>KeyboardEventArgs e) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>if</span> (e.Key
+== Key.Escape ||<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>e.Key
+== Key.Q)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>      </span>quitFlag
+= <span style='color:blue'>true</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// Event handler
+for when the 'X' on the window frame is clicked<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>private</span> <span
+style='color:blue'>void</span> Quit(<span style='color:blue'>object</span>
+sender, QuitEventArgs e) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>quitFlag = <span style='color:blue'>true</span>;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:green'>// Main() of
+program.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>[STAThread]<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span><span style='color:blue'>static</span> <span
+style='color:blue'>void</span> Main() <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>{<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>ParticleEngine particleEngine = <span
+style='color:blue'>new</span> ParticleEngine();<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:2'>            </span><span
+style='mso-tab-count:1'>      </span>particleEngine.Run();<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span><span
+style='mso-tab-count:1'>      </span>}<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Quest Font"'><span style='mso-tab-count:1'>      </span>} <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'>}</p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'>Well I guess this
+is it. This is my first ever tutorial so don't be rough with me and if you need
+any more info, just what to give feedback, send flowers or money please send me
+an email:</span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'><a
+href="mailto:DeSousa_87@hotmail.com">DeSousa_87@hotmail.com</a> </span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'>And I would
+like to thank KammutierSpule&nbsp;for teaching me this, fozi and supermegamau
+for helping me with the errors and all the dudes at gamedev-pt for helping me
+and to the people at Sdl.net that helped me (jendave, hanclito and scottles2). </span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'><a
+href="http://www.GameDev-PT.net">http://www.GameDev-PT.net</a> </span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'>Miguel De
+Sousa Friday, April 22, 2005 </span></code><o:p></o:p></p>
+
+<p><code><span style='font-size:10.0pt;font-family:"Courier New"'>Code and
+tutorial edited by David Hudson (jendave) April 29, 2005</span></code><o:p></o:p></p>
+
+<p class=MsoNormal>&nbsp;<o:p></o:p></p>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+
 </body>
+
 </html>
