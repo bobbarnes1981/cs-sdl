@@ -1,4 +1,4 @@
-//********************************************************************************		
+//*****************************************************************************
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -14,10 +14,7 @@
 //	Created by Michael Rosario
 //	July 29th,2003
 //	Contact me at mrosario@scrypt.net	
-//********************************************************************************
-
-
-
+//*****************************************************************************
 
 using System;
 using System.Drawing;
@@ -37,7 +34,8 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public readonly static Size BlockSize = new System.Drawing.Size(BlockWidth,BlockWidth);
+		public readonly static Size BlockSize = 
+			new System.Drawing.Size(BlockWidth,BlockWidth);
 		BlockType blockType;
 		/// <summary>
 		/// 
@@ -175,7 +173,6 @@ namespace SdlDotNet.Examples
 			return yellowBlock;
 		}
 
-
 		static Surface purpleBlock;
 		Surface getPurpleBlock()
 		{
@@ -187,7 +184,6 @@ namespace SdlDotNet.Examples
 
 			return purpleBlock;
 		}
-
 
 		static Surface blueBlock;
 		Surface getBlueBlock()
@@ -207,7 +203,6 @@ namespace SdlDotNet.Examples
 		/// <param name="surface"></param>
 		protected override void DrawGameObject(Surface surface)
 		{
-
 			Surface image;
 			
 			switch(blockType)
@@ -219,17 +214,6 @@ namespace SdlDotNet.Examples
 				case BlockType.Blue:	image = this.getBlueBlock();	break;
 				default: image = this.getBlueBlock(); break;
 			}
-
-		
-			//			Color currentColor = Color.Black;
-			//			switch(blockType)
-			//			{
-			//				case BlockType.Purple:	currentColor = Color.Purple;	break;
-			//				case BlockType.Red:		currentColor = Color.Red;	break;
-			//				case BlockType.White:	currentColor = Color.White;	break;
-			//				case BlockType.Yellow:	currentColor = Color.Yellow;	break;
-			//				case BlockType.Blue:	currentColor = Color.Blue;	break;
-			//			}
 
 			if(!this.Destroy)
 			{
@@ -250,7 +234,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Update()
 		{
-
 		}
 
 		/// <summary>
@@ -260,7 +243,5 @@ namespace SdlDotNet.Examples
 		{
 			this.Parent = null;			
 		}
-
-
 	}
 }

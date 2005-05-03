@@ -60,7 +60,6 @@ namespace SdlDotNet
 		private int colorKey;
 
 		private bool disposed;
-		private IntPtr handle;
 
 		#region Constructors and Destructors
 		/// <summary>
@@ -69,7 +68,7 @@ namespace SdlDotNet
 		/// <param name="handle"></param>
 		internal Surface(IntPtr handle) 
 		{
-			this.handle = handle;
+			base.Handle = handle;
 		}
 
 		/// <summary>
@@ -103,12 +102,11 @@ namespace SdlDotNet
 		/// </summary> 
 		public Surface(string file)
 		{
-			IntPtr surfPtr = SdlImage.IMG_Load(file);
-			if (surfPtr == IntPtr.Zero)
+			base.Handle = SdlImage.IMG_Load(file);
+			if (base.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
-			this.handle = surfPtr;
 		}
 
 		/// <summary>
@@ -120,11 +118,15 @@ namespace SdlDotNet
 		{
 			if (Video.Screen == null)
 			{
-				this.handle = Video.CreateRgbSurface(width, height).Handle;
+				base.Handle = Video.CreateRgbSurface(width, height).Handle;
 			}
 			else
 			{
-				this.handle = Video.Screen.CreateCompatibleSurface(width, height).Handle;
+				base.Handle = Video.Screen.CreateCompatibleSurface(width, height).Handle;
+			}
+			if (base.Handle == IntPtr.Zero)
+			{
+				throw SdlException.Generate();
 			}
 		}
 
@@ -133,8 +135,12 @@ namespace SdlDotNet
 		/// </summary>
 		public Surface()
 		{
-			this.handle = 
+			base.Handle = 
 				Video.Screen.CreateCompatibleSurface(Video.Screen.Width, Video.Screen.Height).Handle;
+			if (base.Handle == IntPtr.Zero)
+			{
+				throw SdlException.Generate();
+			}
 		}
 
 		/// <summary>
@@ -143,13 +149,12 @@ namespace SdlDotNet
 		/// <param name="array">A array of byte that shold the image data</param>
 		public Surface(byte[] array)
 		{
-			IntPtr surfPtr = 
+			base.Handle = 
 				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
-			if (surfPtr == IntPtr.Zero) 
+			if (base.Handle == IntPtr.Zero) 
 			{
 				throw SdlException.Generate();
 			}
-			this.handle = surfPtr;
 		}
 
 		/// <summary>
@@ -163,13 +168,12 @@ namespace SdlDotNet
 			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
-			IntPtr surfPtr = 
+			base.Handle = 
 				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(arr, arr.Length), 1);
-			if (surfPtr == IntPtr.Zero) 
+			if (base.Handle == IntPtr.Zero) 
 			{
 				throw SdlException.Generate();
 			}
-			this.handle = surfPtr;
 		}
 	
 		/// <summary>
@@ -195,14 +199,16 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
-						CloseHandle(handle);
-						GC.KeepAlive(this);
 					}
+					CloseHandle();
+					//GC.KeepAlive(this);
+					GC.SuppressFinalize(this);
 					this.disposed = true;
 				}
 				finally
 				{
 					base.Dispose(disposing);
+					this.disposed = true;
 				}
 			}
 		}
@@ -210,11 +216,14 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes Surface handle
 		/// </summary>
-		protected override void CloseHandle(IntPtr handleToClose) 
+		protected override void CloseHandle() 
 		{
-			Sdl.SDL_FreeSurface(handleToClose);
-			GC.KeepAlive(this);
-			handleToClose = IntPtr.Zero;
+			if (base.Handle != IntPtr.Zero)
+			{
+				Sdl.SDL_FreeSurface(base.Handle);
+				GC.KeepAlive(this);
+				base.Handle = IntPtr.Zero;
+			}
 		}
 
 		internal static Surface FromScreenPtr(IntPtr surfacePtr) 
@@ -227,7 +236,7 @@ namespace SdlDotNet
 			get
 			{
 				GC.KeepAlive(this);
-				return (Sdl.SDL_Surface)Marshal.PtrToStructure(this.handle, 
+				return (Sdl.SDL_Surface)Marshal.PtrToStructure(base.Handle, 
 					typeof(Sdl.SDL_Surface));
 			}
 		}
@@ -242,32 +251,12 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Returns the native Sdl Surface pointer
-		/// </summary>
-		/// <returns>
-		/// An IntPtr pointing at the Sdl surface reference
-		/// </returns>
-		public IntPtr Handle
-		{
-			get
-			{
-				GC.KeepAlive(this);
-				return handle;
-			}
-			set
-			{
-				GC.KeepAlive(this);
-				handle = value;
-			}
-		}
-
-		/// <summary>
 		/// If the surface is double-buffered, 
 		/// this method will flip the back buffer onto the screen
 		/// </summary>
 		public void Flip() 
 		{
-			int result = Sdl.SDL_Flip(handle);
+			int result = Sdl.SDL_Flip(base.Handle);
 			GC.KeepAlive(this);
 			if (result != 0)
 			{
@@ -295,7 +284,7 @@ namespace SdlDotNet
 		{
 			Sdl.SDL_Rect sdlrect = ConvertRecttoSDLRect(rectangle);
 
-			int result = Sdl.SDL_FillRect(handle, ref sdlrect, GetColorValue(color));
+			int result = Sdl.SDL_FillRect(base.Handle, ref sdlrect, GetColorValue(color));
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
 			{
@@ -323,7 +312,7 @@ namespace SdlDotNet
 		/// <param name="color">Color to fill circle</param>
 		public void DrawFilledCircle(Circle circle, System.Drawing.Color color)
 		{
-			int result = SdlGfx.filledCircleRGBA(handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
+			int result = SdlGfx.filledCircleRGBA(base.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -343,13 +332,13 @@ namespace SdlDotNet
 			int result = 0;
 			if (antiAlias)
 			{
-				result = SdlGfx.aacircleRGBA(handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
+				result = SdlGfx.aacircleRGBA(base.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
 					color.A);
 				GC.KeepAlive(this);
 			}
 			else
 			{
-				result = SdlGfx.circleRGBA(handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
+				result = SdlGfx.circleRGBA(base.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
 					color.A);
 				GC.KeepAlive(this);
 			}
@@ -382,7 +371,7 @@ namespace SdlDotNet
 			if (antiAlias)
 			{
 				result = SdlGfx.aaellipseRGBA(
-					handle, ellipse.XPosition, ellipse.YPosition, 
+					base.Handle, ellipse.XPosition, ellipse.YPosition, 
 					ellipse.RadiusX, ellipse.RadiusY, 
 					color.R, color.B, color.G,
 					color.A);
@@ -391,7 +380,7 @@ namespace SdlDotNet
 			else
 			{
 				result = SdlGfx.ellipseRGBA(
-					handle, ellipse.XPosition, ellipse.YPosition, 
+					base.Handle, ellipse.XPosition, ellipse.YPosition, 
 					ellipse.RadiusX, ellipse.RadiusY, 
 					color.R, color.B, color.G,
 					color.A);
@@ -420,7 +409,7 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawFilledEllipse(Ellipse ellipse, System.Drawing.Color color)
 		{
-			int result = SdlGfx.filledEllipseRGBA(handle, ellipse.XPosition, ellipse.YPosition, ellipse.RadiusX, ellipse.RadiusY,color.R, color.B, color.G,
+			int result = SdlGfx.filledEllipseRGBA(base.Handle, ellipse.XPosition, ellipse.YPosition, ellipse.RadiusX, ellipse.RadiusY,color.R, color.B, color.G,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -442,7 +431,7 @@ namespace SdlDotNet
 			if (antiAlias)
 			{
 				result = SdlGfx.aalineRGBA(
-					handle, line.XPosition1, line.YPosition1, 
+					base.Handle, line.XPosition1, line.YPosition1, 
 					line.XPosition2, line.YPosition2, 
 					color.R, color.B, color.G,
 					color.A);
@@ -451,7 +440,7 @@ namespace SdlDotNet
 			else
 			{
 				result = SdlGfx.lineRGBA(
-					handle, line.XPosition1, line.YPosition1, 
+					base.Handle, line.XPosition1, line.YPosition1, 
 					line.XPosition2, line.YPosition2, 
 					color.R, color.B, color.G,
 					color.A);
@@ -486,7 +475,7 @@ namespace SdlDotNet
 			if (antiAlias)
 			{
 				result = SdlGfx.aatrigonRGBA(
-					handle, triangle.XPosition1, triangle.YPosition1, 
+					base.Handle, triangle.XPosition1, triangle.YPosition1, 
 					triangle.XPosition2, triangle.YPosition2, 
 					triangle.XPosition3, triangle.YPosition3, 
 					color.R, color.B, color.G,
@@ -496,7 +485,7 @@ namespace SdlDotNet
 			else
 			{
 				result = SdlGfx.trigonRGBA(
-					handle, triangle.XPosition1, triangle.YPosition1, 
+					base.Handle, triangle.XPosition1, triangle.YPosition1, 
 					triangle.XPosition2, triangle.YPosition2, 
 					triangle.XPosition3, triangle.YPosition3, 
 					color.R, color.B, color.G,
@@ -528,7 +517,7 @@ namespace SdlDotNet
 		{
 			int result = 0;
 			result = SdlGfx.filledTrigonRGBA(
-				handle, triangle.XPosition1, triangle.YPosition1, 
+				base.Handle, triangle.XPosition1, triangle.YPosition1, 
 				triangle.XPosition2, triangle.YPosition2, 
 				triangle.XPosition3, triangle.YPosition3, 
 				color.R, color.B, color.G,
@@ -548,7 +537,7 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawFilledPolygon(Polygon polygon, System.Drawing.Color color)
 		{
-			int result = SdlGfx.filledPolygonRGBA(handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
+			int result = SdlGfx.filledPolygonRGBA(base.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != 0)
@@ -568,13 +557,13 @@ namespace SdlDotNet
 			int result = 0;
 			if (antiAlias)
 			{
-				result = SdlGfx.aapolygonRGBA(handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
+				result = SdlGfx.aapolygonRGBA(base.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
 					color.A);
 				GC.KeepAlive(this);
 			}
 			else
 			{
-				result = SdlGfx.polygonRGBA(handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
+				result = SdlGfx.polygonRGBA(base.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
 					color.A);
 				GC.KeepAlive(this);
 			}
@@ -604,7 +593,7 @@ namespace SdlDotNet
 			int result = 0;
 
 			result = SdlGfx.pieRGBA(
-				handle, pie.XPosition, pie.YPosition, 
+				base.Handle, pie.XPosition, pie.YPosition, 
 				pie.Radius,
 				pie.StartingPoint, pie.EndingPoint, 
 				color.R, color.B, color.G,
@@ -624,7 +613,7 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawFilledPie(Pie pie, System.Drawing.Color color)
 		{
-			int result = SdlGfx.filledPieRGBA(handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingPoint, pie.EndingPoint,color.R, color.B, color.G,
+			int result = SdlGfx.filledPieRGBA(base.Handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingPoint, pie.EndingPoint,color.R, color.B, color.G,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -642,7 +631,7 @@ namespace SdlDotNet
 		{
 			int result = 0;
 			result = SdlGfx.bezierRGBA(
-				handle, bezier.XPositions(), bezier.YPositions(), 
+				base.Handle, bezier.XPositions(), bezier.YPositions(), 
 				bezier.NumberOfPoints, bezier.Steps, 
 				color.R, color.B, color.G,
 				color.A);
@@ -672,7 +661,7 @@ namespace SdlDotNet
 			int result = 0;
 
 			result = SdlGfx.rectangleRGBA(
-				handle, box.XPosition1, box.YPosition1, 
+				base.Handle, box.XPosition1, box.YPosition1, 
 				box.XPosition2, box.YPosition2, 
 				color.R, color.B, color.G,
 				color.A);
@@ -704,7 +693,7 @@ namespace SdlDotNet
 			int result = 0;
 
 			result = SdlGfx.boxRGBA(
-				handle, box.XPosition1, box.YPosition1, 
+				base.Handle, box.XPosition1, box.YPosition1, 
 				box.XPosition2, box.YPosition2, 
 				color.R, color.B, color.G,
 				color.A);
@@ -819,7 +808,7 @@ namespace SdlDotNet
 			Sdl.SDL_PixelFormat pixelFormat = 
 				(Sdl.SDL_PixelFormat)Marshal.PtrToStructure(
 				surf.format, typeof(Sdl.SDL_PixelFormat));
-			IntPtr intPtr = Sdl.SDL_CreateRGBSurface(
+			return new Surface(Sdl.SDL_CreateRGBSurface(
 				flag,
 				width, 
 				height, 
@@ -827,14 +816,10 @@ namespace SdlDotNet
 				pixelFormat.Rmask, 
 				pixelFormat.Gmask, 
 				pixelFormat.Bmask, 
-				pixelFormat.Amask);
-			GC.KeepAlive(this);
+				pixelFormat.Amask));
+			//GC.KeepAlive(this);
 
-//			IntPtr intPtrRet = Sdl.SDL_ConvertSurface(
-//				handle, surf.format, flag);
-//			GC.KeepAlive(this);
-			//Sdl.SDL_FreeSurface(intPtr);
-			return new Surface(intPtr);
+			//return new Surface(intPtr);
 		}
 
 		/// <summary>
@@ -863,13 +848,8 @@ namespace SdlDotNet
 			}
 			
 			Sdl.SDL_Surface sourceSurf = source.SurfaceStruct;
-			IntPtr ret = Sdl.SDL_ConvertSurface(this.handle, sourceSurf.format, flags);
-			GC.KeepAlive(this);
-			if (ret == IntPtr.Zero)
-			{
-				throw SdlException.Generate();
-			}
-			return new Surface(ret);
+
+			return new Surface(Sdl.SDL_ConvertSurface(base.Handle, sourceSurf.format, flags));
 		}
 
 		/// <summary>
@@ -889,13 +869,7 @@ namespace SdlDotNet
 		/// <returns>The new surface</returns>
 		public Surface Convert() 
 		{
-			IntPtr surfPtr = Sdl.SDL_DisplayFormat(handle);
-			GC.KeepAlive(this);
-			if (surfPtr == IntPtr.Zero)
-			{
-				throw SdlException.Generate();
-			}
-			return new Surface(surfPtr);
+			return new Surface(Sdl.SDL_DisplayFormat(base.Handle));
 		}
 
 		/// <summary>
@@ -1031,7 +1005,7 @@ namespace SdlDotNet
 		{
 			Sdl.SDL_Rect s = Surface.ConvertRecttoSDLRect(sourceRectangle); 
 			Sdl.SDL_Rect d = Surface.ConvertRecttoSDLRect(destinationRectangle);
-			int result = Sdl.SDL_BlitSurface(sourceSurface.Handle, ref s, this.handle, ref d);
+			int result = Sdl.SDL_BlitSurface(sourceSurface.Handle, ref s, base.Handle, ref d);
 			GC.KeepAlive(this);
 			if (result!= (int) SdlFlag.Success)
 			{
@@ -1070,7 +1044,7 @@ namespace SdlDotNet
 		{
 			if (MustLock) 
 			{
-				int result = Sdl.SDL_LockSurface(handle);
+				int result = Sdl.SDL_LockSurface(base.Handle);
 				GC.KeepAlive(this);
 				if (result != (int) SdlFlag.Success)
 				{
@@ -1099,7 +1073,7 @@ namespace SdlDotNet
 		{
 			if (MustLock) 
 			{
-				int result = Sdl.SDL_UnlockSurface(handle);
+				int result = Sdl.SDL_UnlockSurface(base.Handle);
 				GC.KeepAlive(this);
 				if (result != (int) SdlFlag.Success)
 				{
@@ -1116,7 +1090,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_MUSTLOCK(handle);
+				int result = Sdl.SDL_MUSTLOCK(base.Handle);
 				GC.KeepAlive(this);
 				if (result == 1)
 				{
@@ -1135,7 +1109,7 @@ namespace SdlDotNet
 		/// <param name="file">The filename to save to</param>
 		public void SaveBmp(string file) 
 		{
-			int result = Sdl.SDL_SaveBMP(handle, file);
+			int result = Sdl.SDL_SaveBMP(base.Handle, file);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
 			{
@@ -1169,7 +1143,7 @@ namespace SdlDotNet
 			{
 				flag |= Sdl.SDL_RLEACCELOK;
 			}
-			int result = Sdl.SDL_SetColorKey(handle, (int)flag, key);
+			int result = Sdl.SDL_SetColorKey(base.Handle, (int)flag, key);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
 			{
@@ -1183,7 +1157,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void ClearColorKey() 
 		{
-			int result = Sdl.SDL_SetColorKey(handle, 0, 0);
+			int result = Sdl.SDL_SetColorKey(base.Handle, 0, 0);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
 			{
@@ -1211,14 +1185,14 @@ namespace SdlDotNet
 			{
 				Sdl.SDL_Rect sdlrect = 
 					Surface.ConvertRecttoSDLRect(new System.Drawing.Rectangle());
-				Sdl.SDL_GetClipRect(handle, ref sdlrect);
+				Sdl.SDL_GetClipRect(base.Handle, ref sdlrect);
 				GC.KeepAlive(this);
 				return new System.Drawing.Rectangle(sdlrect.x, sdlrect.y, sdlrect.w, sdlrect.h);
 			}
 			set
 			{
 				Sdl.SDL_Rect sdlrect = Surface.ConvertRecttoSDLRect(value);
-				Sdl.SDL_SetClipRect(handle, ref sdlrect);
+				Sdl.SDL_SetClipRect(base.Handle, ref sdlrect);
 				GC.KeepAlive(this);
 			}
 		}
@@ -1247,17 +1221,17 @@ namespace SdlDotNet
 				case 1: // Assuming 8-bpp
 				{
 					byte pixelColorValue = (byte) pixelColor;
-					IntPtr pixelColorValuePtr = 
-						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					Marshal.WriteByte(pixelColorValuePtr, pixelColorValue);
+					//IntPtr pixelColorValuePtr = 
+					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
+					Marshal.WriteByte(new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x), pixelColorValue);
 				}
 					break;
 				case 2: // Probably 15-bpp or 16-bpp
 				{
 					short pixelColorValue = (short) pixelColor;
-					IntPtr pixelColorValuePtr = 
-						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					Marshal.WriteInt16(pixelColorValuePtr, pixelColorValue);
+					//IntPtr pixelColorValuePtr = 
+					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
+					Marshal.WriteInt16(new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x), pixelColorValue);
 				}
 					break;
 				case 3: // Slow 24-bpp mode, usually not used
@@ -1281,9 +1255,9 @@ namespace SdlDotNet
 				case 4: // Probably 32-bpp
 				{
 					int pixelColorValue = pixelColor;
-					IntPtr pixelColorValuePtr = 
-						new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
-					Marshal.WriteInt32(pixelColorValuePtr, pixelColorValue);
+					//IntPtr pixelColorValuePtr = 
+					//	new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
+					Marshal.WriteInt32(new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x)), pixelColorValue);
 				}
 					break;
 			}
@@ -1413,7 +1387,7 @@ namespace SdlDotNet
 		/// <param name="alpha">The alpha value</param>
 		public void SetAlpha(Alphas flag, byte alpha) 
 		{
-			int result = Sdl.SDL_SetAlpha(this.handle, (int)flag, alpha);
+			int result = Sdl.SDL_SetAlpha(base.Handle, (int)flag, alpha);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success) 
 			{
@@ -1657,7 +1631,7 @@ namespace SdlDotNet
 		public void Update(System.Drawing.Rectangle rectangle)
 		{
 			Sdl.SDL_UpdateRect(
-				this.handle, 
+				base.Handle, 
 				rectangle.X, 
 				rectangle.Y, 
 				rectangle.Width, 
@@ -1671,7 +1645,7 @@ namespace SdlDotNet
 		public void Update()
 		{
 			Sdl.SDL_UpdateRect(
-				this.handle, 
+				base.Handle, 
 				0, 
 				0, 
 				this.Size.Width, 
@@ -1691,7 +1665,7 @@ namespace SdlDotNet
 			{
 				rects[i] = Surface.ConvertRecttoSDLRect(rectangles[i]);
 			}
-			Sdl.SDL_UpdateRects(this.handle, rects.Length, rects);
+			Sdl.SDL_UpdateRects(base.Handle, rects.Length, rects);
 			GC.KeepAlive(this);
 		}
 

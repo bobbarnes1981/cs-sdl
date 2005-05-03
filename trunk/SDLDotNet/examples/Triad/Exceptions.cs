@@ -1,5 +1,5 @@
 
-//********************************************************************************		
+//*****************************************************************************
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -15,7 +15,7 @@
 //	Created by Michael Rosario
 //	July 29th,2003
 //	Contact me at mrosario@scrypt.net	
-//********************************************************************************
+//*****************************************************************************
 
 using System;
 

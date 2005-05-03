@@ -1,4 +1,4 @@
-//********************************************************************************		
+//*****************************************************************************
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -14,7 +14,7 @@
 //	Created by Michael Rosario
 //	July 29th,2003
 //	Contact me at mrosario@scrypt.net	
-//********************************************************************************
+//*****************************************************************************
 
 using System;
 using System.Drawing;
@@ -27,7 +27,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	class MainObject : IDisposable
 	{
-		private bool _quitflag;
+		private bool quitflag;
 
 		/// <summary>
 		/// 
@@ -46,20 +46,16 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Go() 
 		{
-			//DateTime startTime = DateTime.Now;
-
 			int width = 800;
 			int height = 600;
 			
 			Video.WindowCaption = "Triad";
-			Events.KeyboardDown += new KeyboardEventHandler(this.SDL_KeyboardDown); 
-			Events.KeyboardUp += new KeyboardEventHandler(this.SDL_KeyboardUp); 
-			
-			
-			Events.MouseButtonDown += new MouseButtonEventHandler(Events_MouseButton);
+			Events.KeyboardDown += 
+				new KeyboardEventHandler(this.SDL_KeyboardDown); 
+			Events.KeyboardUp += 
+				new KeyboardEventHandler(this.SDL_KeyboardUp); 
 			Events.Quit += new QuitEventHandler(this.SDL_Quit);
 
-			
 			board = new Scoreboard();
 			board.X = 600;
 			board.Y = 0;
@@ -67,18 +63,22 @@ namespace SdlDotNet.Examples
 
 			try 
 			{
-				Surface screen = Video.SetVideoModeWindow(width, height, true);
-				Surface surf = screen.CreateCompatibleSurface(width, height, true);
-				surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-				Rectangle screenRec = new Rectangle(0,0,screen.Width,screen.Height);
+				Surface screen = 
+					Video.SetVideoModeWindow(width, height, true);
+				Surface surf = 
+					screen.CreateCompatibleSurface(width, height, true);
+				surf.Fill(
+					new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+				Rectangle screenRec = 
+					new Rectangle(0,0,screen.Width,screen.Height);
 
 				grid = new BlockGrid(new Point(20,20),new Size(11,13));
-				grid.BlocksDestroyed += new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
-
+				grid.BlocksDestroyed += 
+					new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
 
 				levelUpSound = Mixer.Sound("../../Data/levelup.wav");
 				
-				while (!_quitflag) 
+				while (!quitflag) 
 				{
 					while (Events.Poll()) {} 
 
@@ -94,10 +94,8 @@ namespace SdlDotNet.Examples
 
 					//Blit the grid and the board to the screen surface...
 					screen.Blit(surf, board.Rectangle);
-					screen.Blit(surf, grid.Rectangle);						
-			
+					screen.Blit(surf, grid.Rectangle);	
 					screen.Flip();
-
 				}
 			} 
 			catch 
@@ -110,9 +108,8 @@ namespace SdlDotNet.Examples
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
-				_quitflag = true;
+				quitflag = true;
 			}
-	
 			grid.HandleSdlKeyDownEvent(e);
 		}
 
@@ -123,7 +120,7 @@ namespace SdlDotNet.Examples
 
 		private void SDL_Quit(object sender, QuitEventArgs e) 
 		{
-			_quitflag = true;
+			quitflag = true;
 		}
 
 		[STAThread]
@@ -133,12 +130,9 @@ namespace SdlDotNet.Examples
 			s.Go();
 		}
 
-		private void Events_MouseButton(object sender, MouseButtonEventArgs e)
-		{
-		}
-
 		int blockCount;
-		private void grid_BlocksDestroyed(object sender, BlocksDestroyedEventArgs args)
+		private void grid_BlocksDestroyed(
+			object sender, BlocksDestroyedEventArgs args)
 		{
 			this.blockCount += args.BlocksCount;
 			if(blockCount > 30)
@@ -146,9 +140,7 @@ namespace SdlDotNet.Examples
 				this.blockCount = 0;
 				this.grid.SpeedFactor = grid.SpeedFactor * 1.025f;
 				this.board.Level += 1;
-				//GC.Collect();
 				this.levelUpSound.Play();
-				
 			}
 			
 			this.board.BlocksDestroyed += args.BlocksCount;

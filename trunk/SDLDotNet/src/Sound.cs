@@ -33,7 +33,6 @@ namespace SdlDotNet
 	/// </summary>
 	public class Sound : BaseSdlResource 
 	{
-		private IntPtr handle;
 		private int channels;
 		private bool disposed;
 		private long size;
@@ -44,19 +43,13 @@ namespace SdlDotNet
 		
 		internal Sound(IntPtr handle) 
 		{
-			this.handle = handle;
+			base.Handle = handle;
 		}
 
 		internal Sound(IntPtr handle, long size) 
 		{
-			this.handle = handle;
+			base.Handle = handle;
 			this.size = size;
-		}
-
-		internal IntPtr GetHandle() 
-		{ 
-			GC.KeepAlive(this);
-			return handle; 
 		}
 
 		/// <summary>
@@ -71,14 +64,16 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
-						CloseHandle(handle);
-						GC.KeepAlive(this);
 					}
+					CloseHandle();
+					//GC.KeepAlive(this);
+					GC.SuppressFinalize(this);
 					this.disposed = true;
 				}
 				finally
 				{
 					base.Dispose(disposing);
+					this.disposed = true;
 				}
 			}
 		}
@@ -86,11 +81,14 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes Music handle
 		/// </summary>
-		protected override void CloseHandle(IntPtr handleToClose) 
+		protected override void CloseHandle() 
 		{
-			SdlMixer.Mix_FreeChunk(handleToClose);
-			GC.KeepAlive(this);
-			handleToClose = IntPtr.Zero;
+			if (base.Handle != IntPtr.Zero)
+			{
+				SdlMixer.Mix_FreeChunk(base.Handle);
+				GC.KeepAlive(this);
+				base.Handle = IntPtr.Zero;
+			}
 		}
 
 		/// <summary>
@@ -100,7 +98,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				int result = SdlMixer.Mix_VolumeChunk(handle, -1);
+				int result = SdlMixer.Mix_VolumeChunk(base.Handle, -1);
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -108,7 +106,7 @@ namespace SdlDotNet
 			{
 				if (value >= 0 && value <= SdlMixer.MIX_MAX_VOLUME)
 				{
-					SdlMixer.Mix_VolumeChunk(handle, value);
+					SdlMixer.Mix_VolumeChunk(base.Handle, value);
 				}
 				GC.KeepAlive(this);
 			}
@@ -120,7 +118,7 @@ namespace SdlDotNet
 		public byte[] Array()
 		{
 				byte[] array = new byte[this.size];
-				Marshal.Copy(this.GetHandle(), array, 0, (int)this.size);
+				Marshal.Copy(base.Handle, array, 0, (int)this.size);
 				return array;
 		}
 
@@ -172,7 +170,7 @@ namespace SdlDotNet
 				SdlMixer.Mix_PlayChannelTimed
 				(
 				Mixer.FindAvailableChannel(), 
-				this.GetHandle(), 
+				base.Handle, 
 				loops, 
 				milliseconds
 				);
@@ -192,7 +190,7 @@ namespace SdlDotNet
 		/// <returns>The channel used to play the sample</returns>
 		public Channel FadeIn(int milliseconds) 
 		{
-			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), this.GetHandle(), 0, milliseconds, -1);
+			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), base.Handle, 0, milliseconds, -1);
 			if (index == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
@@ -213,7 +211,7 @@ namespace SdlDotNet
 		/// <returns>The channel used to play the sample</returns>
 		public Channel FadeIn(int milliseconds, int loops) 
 		{
-			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), this.GetHandle(), loops, milliseconds, -1);
+			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), base.Handle, loops, milliseconds, -1);
 			if (index == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
@@ -231,7 +229,7 @@ namespace SdlDotNet
 		/// <returns>The channel used to play the sample</returns>
 		public Channel FadeInTimed(int milliseconds, int ticks) 
 		{
-			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), this.GetHandle(), 0, milliseconds, ticks);
+			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), base.Handle, 0, milliseconds, ticks);
 			if (index == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
@@ -252,7 +250,7 @@ namespace SdlDotNet
 		/// <returns>The channel used to play the sample</returns>
 		public Channel FadeInTimed(int milliseconds, int loops, int ticks) 
 		{
-			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), this.GetHandle(), loops, milliseconds, ticks);
+			int index = SdlMixer.Mix_FadeInChannelTimed(Mixer.FindAvailableChannel(), base.Handle, loops, milliseconds, ticks);
 			if (index == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();

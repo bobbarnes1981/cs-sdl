@@ -809,11 +809,6 @@ namespace SdlDotNet.Sprites
 				visible = value;
 			}
 		}
-
-
-
-
-
 		#endregion
 
 		#region IDisposable Members
@@ -823,7 +818,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public void Dispose()
 		{
-			// TODO:  Add Sprite.Dispose implementation
+			this.surf.Dispose();
 		}
 
 		#endregion

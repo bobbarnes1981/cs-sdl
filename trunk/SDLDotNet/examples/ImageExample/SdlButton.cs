@@ -146,9 +146,7 @@ namespace SdlDotNet.Examples
 			textX = x + ((width/2) - (buttonText.Length*3));
 			textY = y + ((height/2) - 10);
 			surf.Fill(new Rectangle(new Point(x,y), new Size(width, height)), buttonColor);
-
-			Surface fontSurface = buttonFont.Render(buttonText, Color.Black);
-			surf.Blit(fontSurface, new System.Drawing.Point(textX, textY));
+			surf.Blit(buttonFont.Render(buttonText, Color.Black), new System.Drawing.Point(textX, textY));
 		}
 
 		/// <summary>
@@ -176,7 +174,6 @@ namespace SdlDotNet.Examples
 		public void Dispose()
 		{
 			buttonFont.Dispose();
-			// TODO:  Add SdlButton.Dispose implementation
 		}
 
 		#endregion

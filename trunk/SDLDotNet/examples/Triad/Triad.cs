@@ -1,4 +1,4 @@
-//********************************************************************************		
+//*****************************************************************************
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -14,9 +14,7 @@
 //	Created by Michael Rosario
 //	July 29th,2003
 //	Contact me at mrosario@scrypt.net	
-//********************************************************************************
-
-
+//*****************************************************************************
 
 using System;
 using System.Drawing;
@@ -27,7 +25,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class Triad : GameObject,System.IDisposable
+	public class Triad : GameObject, IDisposable
 	{
 		/// <summary>
 		/// 
@@ -43,7 +41,6 @@ namespace SdlDotNet.Examples
 			int startColumn = blockGrid.GridSize.Width/2;
 			this.X = startColumn*Block.BlockWidth;
 			this.Y = 0;
-
 		}
 
 		void placeBlocks()
@@ -112,7 +109,9 @@ namespace SdlDotNet.Examples
 		bool canMoveLeftRightBy(int deltaX)
 		{
 			if(halfOfBlock==0)
+			{
 				halfOfBlock = (Block.BlockWidth/2);
+			}
 
 			//Calc three points to represent the position of the tree blocks of the Triad...
 			Point newPoint  = new Point(this.ScreenLocation.X + deltaX + halfOfBlock,this.ScreenLocation.Y+ halfOfBlock);
@@ -134,7 +133,6 @@ namespace SdlDotNet.Examples
 			return isInsideBlockGrid && !isInsideBlockGridChildren;
 		}
 		
-
 		/// <summary>
 		/// 
 		/// </summary>

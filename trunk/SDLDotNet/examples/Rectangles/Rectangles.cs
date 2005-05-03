@@ -96,12 +96,10 @@ namespace SdlDotNet.Examples
 						// if we are fullscreen and the user hits alt-tab 
 						// we can get this, for this simple app we can ignore it
 					}
-					//}
 				}
 			} 
 			catch 
 			{
-				//sdl.Dispose(); 
 				// quit sdl so the window goes away, then handle the error...
 				throw; // for this example we'll just throw it to the debugger
 			}

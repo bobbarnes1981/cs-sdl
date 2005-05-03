@@ -1,4 +1,4 @@
-//********************************************************************************		
+//*****************************************************************************
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -14,7 +14,7 @@
 //	Created by Michael Rosario
 //	July 29th,2003
 //	Contact me at mrosario@scrypt.net	
-//********************************************************************************
+//*****************************************************************************
 
 using System;
 using System.Collections;
@@ -35,11 +35,13 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the BlockCollection class, containing elements
+		/// Initializes a new instance of the BlockCollection class, 
+		/// containing elements
 		/// copied from an array.
 		/// </summary>
 		/// <param name="items">
-		/// The array whose elements are to be added to the new BlockCollection.
+		/// The array whose elements are to be added to the new 
+		/// BlockCollection.
 		/// </param>
 		public BlockCollection(Block[] items)
 		{
@@ -47,11 +49,13 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the BlockCollection class, containing elements
+		/// Initializes a new instance of the BlockCollection class, 
+		/// containing elements
 		/// copied from another instance of BlockCollection
 		/// </summary>
 		/// <param name="items">
-		/// The BlockCollection whose elements are to be added to the new BlockCollection.
+		/// The BlockCollection whose elements are to be added to the 
+		/// new BlockCollection.
 		/// </param>
 		public BlockCollection(BlockCollection items)
 		{
@@ -62,7 +66,8 @@ namespace SdlDotNet.Examples
 		/// Adds the elements of an array to the end of this BlockCollection.
 		/// </summary>
 		/// <param name="items">
-		/// The array whose elements are to be added to the end of this BlockCollection.
+		/// The array whose elements are to be added to the end of this
+		/// BlockCollection.
 		/// </param>
 		public void AddRange(Block[] items)
 		{
@@ -73,10 +78,12 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// Adds the elements of another BlockCollection to the end of this BlockCollection.
+		/// Adds the elements of another BlockCollection to the 
+		/// end of this BlockCollection.
 		/// </summary>
 		/// <param name="items">
-		/// The BlockCollection whose elements are to be added to the end of this BlockCollection.
+		/// The BlockCollection whose elements are to be added to 
+		/// the end of this BlockCollection.
 		/// </param>
 		public void AddRange(BlockCollection items)
 		{
@@ -98,7 +105,8 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// Determines whether a specfic Block value is in this BlockCollection.
+		/// Determines whether a specfic Block value is in this 
+		/// BlockCollection.
 		/// </summary>
 		/// <param name="value">
 		/// The Block value to locate in this BlockCollection.
@@ -113,14 +121,16 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// Return the zero-based index of the first occurrence of a specific value
+		/// Return the zero-based index of the first occurrence of 
+		/// a specific value
 		/// in this BlockCollection
 		/// </summary>
 		/// <param name="value">
 		/// The Block value to locate in the BlockCollection.
 		/// </param>
 		/// <returns>
-		/// The zero-based index of the first occurrence of the _ELEMENT value if found;
+		/// The zero-based index of the first occurrence of the 
+		/// _ELEMENT value if found;
 		/// -1 otherwise.
 		/// </returns>
 		public virtual int IndexOf(Block value)
@@ -158,7 +168,8 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// Removes the first occurrence of a specific Block from this BlockCollection.
+		/// Removes the first occurrence of a specific 
+		/// Block from this BlockCollection.
 		/// </summary>
 		/// <param name="value">
 		/// The Block value to remove from this BlockCollection.
@@ -169,7 +180,8 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// Type-specific enumeration class, used by BlockCollection.GetEnumerator.
+		/// Type-specific enumeration class, used by BlockCollection.
+		/// GetEnumerator.
 		/// </summary>
 		public class Enumerator: System.Collections.IEnumerator
 		{
@@ -181,7 +193,8 @@ namespace SdlDotNet.Examples
 			/// <param name="collection"></param>
 			public Enumerator(BlockCollection collection)
 			{
-				this.wrapped = ((System.Collections.CollectionBase)collection).GetEnumerator();
+				this.wrapped = 
+					((System.Collections.CollectionBase)collection).GetEnumerator();
 			}
 
 			/// <summary>
@@ -222,7 +235,8 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// Returns an enumerator that can iterate through the elements of this BlockCollection.
+		/// Returns an enumerator that can iterate through the 
+		/// elements of this BlockCollection.
 		/// </summary>
 		/// <returns>
 		/// An object that implements System.Collections.IEnumerator.
