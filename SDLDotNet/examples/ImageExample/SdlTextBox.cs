@@ -141,10 +141,8 @@ namespace SdlDotNet.Examples
 			surf.Fill(new Rectangle(x, y, length, 20), Color.GhostWhite);
 			if(boxText.Length > 0)
 			{
-				//boxFont.Render(boxText, Color.Black, surf, x, y);
-				Surface fontSurface = boxFont.Render(boxText, Color.Black);
 				surf.Blit(
-					fontSurface,
+					boxFont.Render(boxText, Color.Black),
 					new System.Drawing.Point(x, y));
 			}
 		}
@@ -207,7 +205,6 @@ namespace SdlDotNet.Examples
 		public void Dispose()
 		{
 			boxFont.Dispose();
-			// TODO:  Add SdlTextBox.Dispose implementation
 		}
 
 		#endregion

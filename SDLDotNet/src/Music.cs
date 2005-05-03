@@ -32,7 +32,6 @@ namespace SdlDotNet
 	{
 		private  SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
 
-		private IntPtr handle;
 		private string musicFilename;
 		private bool disposed;
 		private string queuedMusicFilename;
@@ -60,41 +59,28 @@ namespace SdlDotNet
 			Dispose(false);
 		}
 
-		internal IntPtr Handle
-		{ 
-			get
-			{
-				GC.KeepAlive(this);
-				return handle; 
-			}
-			set
-			{
-				handle = value;
-				GC.KeepAlive(this);
-			}
-		}
-
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
 		/// <param name="disposing"></param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!disposed)
+			if (!this.disposed)
 			{
 				try
 				{
 					if (disposing)
 					{
-						CloseHandle(handle);
-						GC.KeepAlive(this);
 					}
-					disposed = true;
+					CloseHandle();
+					//GC.KeepAlive(this);
+					GC.SuppressFinalize(this);
+					this.disposed = true;
 				}
-
 				finally
 				{
-					Dispose(disposing);
+					base.Dispose(disposing);
+					this.disposed = true;
 				}
 			}
 		}
@@ -102,10 +88,13 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes Music handle
 		/// </summary>
-		protected override void CloseHandle(IntPtr handleToClose) 
+		protected override void CloseHandle() 
 		{
-			SdlMixer.Mix_FreeMusic(handleToClose);
-			handleToClose = IntPtr.Zero;
+			if (base.Handle != IntPtr.Zero)
+			{
+				SdlMixer.Mix_FreeMusic(base.Handle);
+				base.Handle = IntPtr.Zero;
+			}
 		}
 
 		/// <summary>
@@ -149,13 +138,12 @@ namespace SdlDotNet
 		/// <returns>A new Music object</returns>
 		public void Load(string file) 
 		{
-			IntPtr musicPtr = SdlMixer.Mix_LoadMUS(file);
-			if (musicPtr == IntPtr.Zero)
+			base.Handle = SdlMixer.Mix_LoadMUS(file);
+			if (base.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
 			this.musicFilename = file;
-			this.Handle = musicPtr;
 		}
 
 		/// <summary>
@@ -188,7 +176,7 @@ namespace SdlDotNet
 		/// Specify 1 to play a single time, -1 to loop forever.</param>
 		public void Play(int numberOfTimes) 
 		{
-			if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
+			if (SdlMixer.Mix_PlayMusic(base.Handle, numberOfTimes) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -201,7 +189,7 @@ namespace SdlDotNet
 		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
 		public void FadeIn(int numberOfTimes, int milliseconds) 
 		{
-			if (SdlMixer.Mix_FadeInMusic(this.Handle, numberOfTimes, milliseconds) != 0)
+			if (SdlMixer.Mix_FadeInMusic(base.Handle, numberOfTimes, milliseconds) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -220,7 +208,7 @@ namespace SdlDotNet
 		public void FadeInPosition(int numberOfTimes, 
 			int milliseconds, double position) 
 		{
-			if (SdlMixer.Mix_FadeInMusicPos(this.Handle, 
+			if (SdlMixer.Mix_FadeInMusicPos(base.Handle, 
 				numberOfTimes, milliseconds, position) != 0)
 			{
 				throw SdlException.Generate();
@@ -270,7 +258,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (MusicType) SdlMixer.Mix_GetMusicType(this.Handle);
+				return (MusicType) SdlMixer.Mix_GetMusicType(base.Handle);
 			}
 		}
 		/// <summary>

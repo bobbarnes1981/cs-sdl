@@ -63,13 +63,29 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		protected internal IntPtr Handle
+		{
+			get
+			{
+				GC.KeepAlive(this);
+				return this.handle;
+			}
+			set
+			{
+				this.handle = value;
+				GC.KeepAlive(this);
+			}
+		}
+
+		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
 		/// <remarks>Destroys managed and unmanaged objects</remarks>
 		public void Dispose() 
 		{
 			Dispose(true);
-			GC.SuppressFinalize(this);
 		}
 
 		/// <summary>
@@ -83,19 +99,20 @@ namespace SdlDotNet
 			{
 				if (disposing)
 				{
-					CloseHandle(handle);
 				}
-				GC.KeepAlive(this);
+				CloseHandle();
+				//GC.KeepAlive(this);
+				GC.SuppressFinalize(this);
+				this.disposed = true;
 			}
-			disposed = true;
+			this.disposed = true;
 		}
 
 		/// <summary>
 		/// Close the handle.
 		/// </summary>
 		/// <remarks>Used to close handle to unmanaged SDL resources</remarks>
-		/// <param name="handle">Handle to unmanaged SDL resource</param>
-		protected abstract void CloseHandle(IntPtr handle);
+		protected abstract void CloseHandle();
 
 		/// <summary>
 		/// Closes and destroys this object

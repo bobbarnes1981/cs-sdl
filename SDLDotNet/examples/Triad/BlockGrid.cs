@@ -1,5 +1,5 @@
 
-//********************************************************************************		
+//*****************************************************************************
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -15,9 +15,7 @@
 //	Created by Michael Rosario
 //	July 29th,2003
 //	Contact me at mrosario@scrypt.net	
-//********************************************************************************
-
-
+//*****************************************************************************
 
 using System;
 using System.Drawing;
@@ -56,7 +54,6 @@ namespace SdlDotNet.Examples
 				_SpeedFactor = value;				
 			}
 		}
-	
 
 		int reductionCount;
 		int lastTriadMove;
@@ -112,10 +109,6 @@ namespace SdlDotNet.Examples
 
 			triad = new Triad(this);			
 			AddObject(triad);
-
-
-			
-
 			lastTriadMove = Timer.Ticks;
 			lastTriadLeftRight = Timer.Ticks;
 
@@ -135,8 +128,6 @@ namespace SdlDotNet.Examples
 		Sound gameOverSound;
 		void loadSounds()
 		{
-
-
 			if(moveSound == null)
 			{
 				moveSound = Mixer.Sound("../../Data/move.wav");
@@ -151,7 +142,6 @@ namespace SdlDotNet.Examples
 			{
 				reductionSound = Mixer.Sound("../../Data/reduction.wav");
 			}
-
 
 			if(hitBottomSound==null)
 			{
@@ -188,15 +178,15 @@ namespace SdlDotNet.Examples
 		int lastTriadLeftRight;
 		void moveTriad()
 		{
-			if(triad==null)
+			if(triad == null)
+			{
 				return;
+			}
 
 			timeNow = Timer.Ticks;
 			triad.Update();
 
-
 			int deltaTime = timeNow - lastTriadMove;
-
 			int deltaTimeLeftRight = timeNow - lastTriadLeftRight;
 
 			if((this.moveTriadLeft == true)  &&   (deltaTimeLeftRight > 250) )
@@ -212,11 +202,9 @@ namespace SdlDotNet.Examples
 				this.lastTriadLeftRight = Timer.Ticks;
 				moveSound.Play();
 			}
-
 			
 			if((deltaTime > delayFactor)||((rapidDropTriad)&&(deltaTime>(delayFactor/16))))
-			{				
-						
+			{	
 				if(triad.CanMoveDown())
 				{
 					triad.MoveDown();
@@ -226,7 +214,7 @@ namespace SdlDotNet.Examples
 					this.hitBottomSound.Play();
 					markBlocks(triad);
 					RemoveObject(triad);
-					triad.Dispose();
+					//triad.Dispose();
 					triad=null;
 					currentState = BlockGridState.MarkBlocksToDestroy;
 				}
@@ -270,8 +258,6 @@ namespace SdlDotNet.Examples
 						currentState = BlockGridState.MoveTriad;
 						reductionCount = 0;
 					}
-
-
 					break;
 				
 				case BlockGridState.MoveTriad:
@@ -300,7 +286,6 @@ namespace SdlDotNet.Examples
 						currentState = BlockGridState.CreateTriad;
 					}
 
-					
 					if(numberOfBlocksDestroyed > 0)
 					{
 						this.reductionSound.Play();
@@ -309,8 +294,8 @@ namespace SdlDotNet.Examples
 
 					break;
 				case BlockGridState.GameOver:
-
 					break;
+
 				default:
 					throw new SdlException("BlockGridState is not handled: " + currentState);
 			}

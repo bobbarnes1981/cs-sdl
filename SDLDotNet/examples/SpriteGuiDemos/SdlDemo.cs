@@ -407,7 +407,6 @@ namespace SdlDotNet.Examples
 		public void Dispose()
 		{
 			screen.Dispose();
-			// TODO:  Add SdlDemo.Dispose implementation
 		}
 
 		#endregion

@@ -1,4 +1,4 @@
-//********************************************************************************		
+//*****************************************************************************
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
 //	as published by the Free Software Foundation; either version 2
@@ -14,7 +14,7 @@
 //	Created by Michael Rosario
 //	July 29th,2003
 //	Contact me at mrosario@scrypt.net	
-//********************************************************************************
+//*****************************************************************************
 
 
 
@@ -120,7 +120,8 @@ namespace SdlDotNet.Examples
 			//Test constructor...						
 			//try
 			//{
-			//GameObjectCollection objectList2 = new GameObjectCollection(nullList);
+			//GameObjectCollection objectList2 
+			// = new GameObjectCollection(nullList);
 			//Assert.Fail("Input object list is null.");
 			//}
 			//catch(GameException){}
@@ -160,7 +161,6 @@ namespace SdlDotNet.Examples
 				Assert.Fail("Input object is null.");
 			}
 			catch(GameException){}
-           
 		}
 	}
 }

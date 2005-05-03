@@ -178,7 +178,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Dispose()
 		{
-			// TODO:  Add DemoMode.Dispose implementation
+			this.surf.Dispose();
 		}
 
 		#endregion

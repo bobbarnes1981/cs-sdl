@@ -132,7 +132,6 @@ namespace SdlDotNet
 	/// </summary>
 	public class Joystick : BaseSdlResource 
 	{
-		private IntPtr handle;
 		private int index;
 		private bool disposed;
 		private const float JOYSTICK_ADJUSTMENT = 32768;
@@ -151,9 +150,9 @@ namespace SdlDotNet
 			}
 			if (Joysticks.IsValidJoystickNumber(index))
 			{
-				this.handle = Sdl.SDL_JoystickOpen(index);
+				base.Handle = Sdl.SDL_JoystickOpen(index);
 			}
-			if (this.handle == IntPtr.Zero)
+			if (base.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
@@ -164,7 +163,7 @@ namespace SdlDotNet
 		}
 		internal Joystick(IntPtr handle) 
 		{
-			this.handle = handle;
+			base.Handle = handle;
 			this.index = Sdl.SDL_JoystickIndex(handle); 
 		}
 
@@ -180,14 +179,16 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
-						CloseHandle(handle);
-						GC.KeepAlive(this);
 					}
+					CloseHandle();
+					//GC.KeepAlive(this);
+					GC.SuppressFinalize(this);
 					this.disposed = true;
 				}
 				finally
 				{
 					base.Dispose(disposing);
+					this.disposed = true;
 				}
 			}
 		}
@@ -195,11 +196,14 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes Joystick handle
 		/// </summary>
-		protected override void CloseHandle(IntPtr handleToClose) 
+		protected override void CloseHandle() 
 		{
-			Sdl.SDL_JoystickClose(handleToClose);
-			GC.KeepAlive(this);
-			handleToClose = IntPtr.Zero;
+			if (base.Handle != IntPtr.Zero)
+			{
+				Sdl.SDL_JoystickClose(base.Handle);
+				GC.KeepAlive(this);
+				base.Handle = IntPtr.Zero;
+			}
 		}
 		
 
@@ -238,7 +242,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumAxes(handle); 
+				int result = Sdl.SDL_JoystickNumAxes(base.Handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -251,7 +255,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumBalls(handle); 
+				int result = Sdl.SDL_JoystickNumBalls(base.Handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -264,7 +268,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumHats(handle); 
+				int result = Sdl.SDL_JoystickNumHats(base.Handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -277,7 +281,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumButtons(handle); 
+				int result = Sdl.SDL_JoystickNumButtons(base.Handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -303,7 +307,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public float GetAxisPosition(JoystickAxis axis)
 		{
-			return  ((float)(Sdl.SDL_JoystickGetAxis(this.handle, (int) axis) + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE);
+			return  ((float)(Sdl.SDL_JoystickGetAxis(base.Handle, (int) axis) + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE);
 		}
 
 		/// <summary>
@@ -317,7 +321,7 @@ namespace SdlDotNet
 			int motionY;
 
 			if (Sdl.SDL_JoystickGetBall(
-				this.handle, ball, out motionX, out motionY) == 
+				base.Handle, ball, out motionX, out motionY) == 
 				(int) SdlFlag.Success)
 			{
 				return new BallMotion(motionX, motionY);
@@ -335,7 +339,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public ButtonKeyState GetButtonState(int button)
 		{
-			return (ButtonKeyState) Sdl.SDL_JoystickGetButton(this.handle, button);
+			return (ButtonKeyState) Sdl.SDL_JoystickGetButton(base.Handle, button);
 		}
 
 		/// <summary>
@@ -345,7 +349,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public JoystickHatStates GetHatState(int hat)
 		{
-			return (JoystickHatStates) Sdl.SDL_JoystickGetHat(this.handle, (int) hat);
+			return (JoystickHatStates) Sdl.SDL_JoystickGetHat(base.Handle, (int) hat);
 		}
 	}
 }
