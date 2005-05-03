@@ -686,7 +686,6 @@ namespace SdlDotNet
 			}
 		}
 
-
 		static void OnVideoExpose(VideoExposeEventArgs e)
 		{
 			if (VideoExpose != null) 
