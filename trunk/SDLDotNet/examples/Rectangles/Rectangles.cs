@@ -72,7 +72,7 @@ namespace SdlDotNet.Examples
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);
 				//fill the surface with black
-				surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+				surf.Fill(Color.Black); 
 
 				while (!quitFlag) 
 				{

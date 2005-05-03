@@ -279,7 +279,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="rectangle">The rectangle coordinates</param>
 		/// <param name="color">The color to draw</param>
-		public void Fill(System.Drawing.Rectangle rectangle,
+		public Rectangle Fill(System.Drawing.Rectangle rectangle,
 			System.Drawing.Color color) 
 		{
 			Sdl.SDL_Rect sdlrect = ConvertRecttoSDLRect(rectangle);
@@ -290,19 +290,16 @@ namespace SdlDotNet
 			{
 				throw SdlException.Generate();
 			}
+			return new Rectangle(sdlrect.x, sdlrect.y, sdlrect.w, sdlrect.h);
 		}
 
 		/// <summary>
 		/// Fill entire surface with color
 		/// </summary>
 		/// <param name="color">Color to fill surface</param>
-		public void Fill(System.Drawing.Color color) 
+		public Rectangle Fill(System.Drawing.Color color) 
 		{
-			Sdl.SDL_Surface surf = 
-				this.SurfaceStruct;
-			System.Drawing.Rectangle rectangle = 
-				new System.Drawing.Rectangle(0, 0, (short)surf.w, (short)surf.h);
-			this.Fill(rectangle, color);
+			return this.Fill(new System.Drawing.Rectangle(0, 0, this.SurfaceStruct.w, this.SurfaceStruct.h), color);
 		}
 
 		/// <summary>
@@ -1343,15 +1340,15 @@ namespace SdlDotNet
 			{
 				case 1: //Assuming 8-bpp
 				{
-					IntPtr pixelColorValuePtr = 
-						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					return this.GetColor(Marshal.ReadInt32(pixelColorValuePtr));
+					//IntPtr pixelColorValuePtr = 
+					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
+					return this.GetColor(Marshal.ReadInt32(new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x)));
 				}
 				case 2:
 				{
-					IntPtr pixelColorValuePtr = 
-						new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					return this.GetColor(Marshal.ReadInt32(pixelColorValuePtr));
+					//IntPtr pixelColorValuePtr = 
+					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
+					return this.GetColor(Marshal.ReadInt32(new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x)));
 				}
 				case 3: //Assuming this is not going to be used much... 
 				{
@@ -1369,9 +1366,9 @@ namespace SdlDotNet
 				}
 				case 4:
 				{
-					IntPtr pixelColorValuePtr = 
-						new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
-					return this.GetColor(Marshal.ReadInt32(pixelColorValuePtr));
+					//IntPtr pixelColorValuePtr = 
+					//	new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
+					return this.GetColor(Marshal.ReadInt32(new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x))));
 				}
 				default: //Should never come here
 				{

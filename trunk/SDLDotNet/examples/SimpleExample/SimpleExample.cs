@@ -16,6 +16,7 @@
 
 using System;
 using System.Drawing;
+using Tao.Sdl;
 
 using SdlDotNet;
 
@@ -42,11 +43,11 @@ namespace SdlDotNet.Examples
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Events.Quit += new QuitEventHandler(this.Quit);
-			screen = Video.SetVideoModeWindow(width, height, true);
+			screen = Video.SetVideoModeWindow(width, height);
 			rand = new Random();
 		}
 
-		private void KeyDown(object s, KeyboardEventArgs e)
+		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			if (e.Key == Key.Escape)
 			{
@@ -54,7 +55,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void Quit(object s, QuitEventArgs e)
+		private void Quit(object sender, QuitEventArgs e)
 		{
 			quit = true;
 		}
@@ -66,7 +67,6 @@ namespace SdlDotNet.Examples
 				while(Events.Poll())
 				{
 				}
-
 				screen.Lock();
 				screen.Fill(Color.FromArgb(rand.Next(255),rand.Next(255),rand.Next(255)));
 				System.Threading.Thread.Sleep(100);

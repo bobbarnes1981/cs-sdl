@@ -330,12 +330,7 @@ namespace SdlDotNet
 		/// <returns>A Surface representing the screen</returns>
 		public static Surface SetVideoMode(int width, int height, int bitsPerPixel, int flags) 
 		{
-			IntPtr s = Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, flags);
-			if (s == IntPtr.Zero)
-			{
-				throw SdlException.Generate();
-			}
-			return new Surface(s);
+			return new Surface(Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, flags));
 		}
 
 
@@ -348,12 +343,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				IntPtr s = Sdl.SDL_GetVideoSurface();
-				if (s == IntPtr.Zero)
-				{
-					throw SdlException.Generate();
-				}
-				return Surface.FromScreenPtr(s);
+				return Surface.FromScreenPtr(Sdl.SDL_GetVideoSurface());
 			}
 		}
 
@@ -393,15 +383,10 @@ namespace SdlDotNet
 			int alphaMask, 
 			bool hardware) 
 		{
-			IntPtr ret = Sdl.SDL_CreateRGBSurface(
+			return new Surface(Sdl.SDL_CreateRGBSurface(
 				hardware?Sdl.SDL_HWSURFACE:Sdl.SDL_SWSURFACE,
 				width, height, depth,
-				redMask, greenMask, blueMask, alphaMask);
-			if (ret == IntPtr.Zero)
-			{
-				throw SdlException.Generate();
-			}
-			return new Surface(ret);
+				redMask, greenMask, blueMask, alphaMask));
 		}
 
 		/// <summary>
