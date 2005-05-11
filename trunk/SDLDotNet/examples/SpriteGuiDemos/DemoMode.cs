@@ -173,12 +173,53 @@ namespace SdlDotNet.Examples
 		}
 		#region IDisposable Members
 
+		private bool disposed;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					this.surf.Dispose();
+					foreach (Sprite s in this.sprites)
+					{
+						IDisposable disposableObj = s as IDisposable;
+						if (disposableObj != null)
+						{
+							disposableObj.Dispose( );
+						}
+					}
+				}
+			}
+			this.disposed = true;
+		}
 		/// <summary>
 		/// 
 		/// </summary>
 		public void Dispose()
 		{
-			this.surf.Dispose();
+			this.Dispose(true);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		~DemoMode() 
+		{
+			Dispose(false);
 		}
 
 		#endregion

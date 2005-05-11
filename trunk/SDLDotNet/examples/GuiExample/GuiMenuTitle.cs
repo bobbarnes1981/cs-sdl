@@ -152,5 +152,37 @@ namespace SdlDotNet.Examples.GuiExample
 			get { return popup; }
 		}
 		#endregion
+		private bool disposed;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+						this.Surface.Dispose();
+						foreach (Sprite s in this.Sprites)
+						{
+							IDisposable disposableObj = s as IDisposable;
+							if (disposableObj != null)
+							{
+								disposableObj.Dispose( );
+							}
+						}
+					}
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
+			}
+		}
 	}
 }

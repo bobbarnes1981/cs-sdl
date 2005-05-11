@@ -278,5 +278,45 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString() { return "Multiple"; }
+		private bool disposed;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+						this.Surface.Dispose();
+						foreach (Sprite s in this.Sprites)
+						{
+							IDisposable disposableObj = s as IDisposable;
+							if (disposableObj != null)
+							{
+								disposableObj.Dispose( );
+							}
+						}
+						this.surf1.Dispose();
+						this.surf2.Dispose();
+						this.surf3.Dispose();
+						this.surf4.Dispose();
+						this.sprite1.Dispose();
+						this.sprite2.Dispose();
+						this.sprite3.Dispose();
+						this.sprite4.Dispose();
+					}
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
+			}
+		}
 	}
 }

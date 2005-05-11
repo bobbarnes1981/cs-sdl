@@ -28,6 +28,7 @@
     <property name="doc.dir" value="doc" />
     <property name="doc.html.dir" value="doc/html" />
     <property name="doc.chm.dir" value="doc/chm" />
+    <property name="doc.tutorials.dir" value="doc/tutorials" />
     <property name="project.main.dir" value="${nant.project.basedir}" />
     <property name="native.sdl" value="Tao.Sdl"/>
     <property name="nunit.assembly" value="nunit.framework"/>
@@ -257,6 +258,16 @@
 		<include name="*.dll"/>
 		<exclude name="${native.sdl}.dll"/>
 		<exclude name="${nunit.assembly}.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.tutorials.dir}">
+	    <fileset basedir="${examples.dir}/ParticleEngine">
+		<include name="ParticleEngine.html" />
+	    </fileset>
+	</copy>
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.tutorials.dir}">
+	    <fileset basedir="${examples.dir}/SimpleExample">
+		<include name="SimpleExample.pdf" />
 	    </fileset>
 	</copy>
     </target>

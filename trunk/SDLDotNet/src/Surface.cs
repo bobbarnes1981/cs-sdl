@@ -56,9 +56,7 @@ namespace SdlDotNet
 		/// Private field. Used by the AlphaValue property 
 		/// </summary>
 		private byte alphaValue;
-
 		private int colorKey;
-
 		private bool disposed;
 
 		#region Constructors and Destructors
@@ -68,7 +66,7 @@ namespace SdlDotNet
 		/// <param name="handle"></param>
 		internal Surface(IntPtr handle) 
 		{
-			base.Handle = handle;
+			this.Handle = handle;
 		}
 
 		/// <summary>
@@ -81,16 +79,36 @@ namespace SdlDotNet
 		/// 
 		/// <para>
 		/// <list type="bullet">
-		///		<item><term>.BMP</term><description>Windows Bitmap</description></item>
-		///		<item><term>.PNM</term><description>Portable Anymap File Format</description></item>
-		///		<item><term>.XPM</term><description>X PixMap</description></item>
-		///		<item><term>.LBM</term><description>Tagged Image File Format</description></item>
-		///		<item><term>.PCX</term><description>Z-Soft’s PC Paintbrush file format</description></item>
-		///		<item><term>.GIF</term><description>Graphics Interchange Format</description></item>
-		///		<item><term>.JPG</term><description>Joint Photographic Experts Group (JPEG)</description></item>
-		///		<item><term>.TIF</term><description>Tagged Image File Format</description></item>
-		///		<item><term>.PNG</term><description>Portable Network Graphics</description></item>
-		///		<item><term>.TGA</term><description>Truevision (Targa) File Format</description></item>
+		///		<item><term>.BMP</term>
+		///		<description>Windows Bitmap</description>
+		///		</item>
+		///		<item><term>.PNM</term>
+		///		<description>Portable Anymap File Format</description>
+		///		</item>
+		///		<item><term>.XPM</term>
+		///		<description>X PixMap</description></item>
+		///		<item><term>.LBM</term>
+		///		<description>Tagged Image File Format</description>
+		///		</item>
+		///		<item><term>.PCX</term>
+		///		<description>Z-Soft’s PC Paintbrush file format</description>
+		///		</item>
+		///		<item><term>.GIF</term>
+		///		<description>Graphics Interchange Format</description>
+		///		</item>
+		///		<item><term>.JPG</term>
+		///		<description>Joint Photographic Experts Group (JPEG)
+		///		</description>
+		///		</item>
+		///		<item><term>.TIF</term>
+		///		<description>Tagged Image File Format</description>
+		///		</item>
+		///		<item><term>.PNG</term>
+		///		<description>Portable Network Graphics</description>
+		///		</item>
+		///		<item><term>.TGA</term>
+		///		<description>Truevision (Targa) File Format</description>
+		///		</item>
 		///	</list>
 		///	</para>
 		/// 
@@ -102,8 +120,8 @@ namespace SdlDotNet
 		/// </summary> 
 		public Surface(string file)
 		{
-			base.Handle = SdlImage.IMG_Load(file);
-			if (base.Handle == IntPtr.Zero)
+			this.Handle = SdlImage.IMG_Load(file);
+			if (this.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
@@ -116,15 +134,9 @@ namespace SdlDotNet
 		/// <param name="height"></param>
 		public Surface(int width, int height)
 		{
-			if (Video.Screen == null)
-			{
-				base.Handle = Video.CreateRgbSurface(width, height).Handle;
-			}
-			else
-			{
-				base.Handle = Video.Screen.CreateCompatibleSurface(width, height).Handle;
-			}
-			if (base.Handle == IntPtr.Zero)
+			this.Handle = 
+				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
+			if (this.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
@@ -133,14 +145,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		public Surface()
+		public Surface() : this(Video.Screen.Width, Video.Screen.Height)
 		{
-			base.Handle = 
-				Video.Screen.CreateCompatibleSurface(Video.Screen.Width, Video.Screen.Height).Handle;
-			if (base.Handle == IntPtr.Zero)
-			{
-				throw SdlException.Generate();
-			}
 		}
 
 		/// <summary>
@@ -149,9 +155,9 @@ namespace SdlDotNet
 		/// <param name="array">A array of byte that shold the image data</param>
 		public Surface(byte[] array)
 		{
-			base.Handle = 
+			this.Handle = 
 				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
-			if (base.Handle == IntPtr.Zero) 
+			if (this.Handle == IntPtr.Zero) 
 			{
 				throw SdlException.Generate();
 			}
@@ -168,9 +174,9 @@ namespace SdlDotNet
 			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
-			base.Handle = 
+			this.Handle = 
 				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(arr, arr.Length), 1);
-			if (base.Handle == IntPtr.Zero) 
+			if (this.Handle == IntPtr.Zero) 
 			{
 				throw SdlException.Generate();
 			}
@@ -201,7 +207,6 @@ namespace SdlDotNet
 					{
 					}
 					CloseHandle();
-					//GC.KeepAlive(this);
 					GC.SuppressFinalize(this);
 					this.disposed = true;
 				}
@@ -218,11 +223,11 @@ namespace SdlDotNet
 		/// </summary>
 		protected override void CloseHandle() 
 		{
-			if (base.Handle != IntPtr.Zero)
+			if (this.Handle != IntPtr.Zero)
 			{
-				Sdl.SDL_FreeSurface(base.Handle);
+				Sdl.SDL_FreeSurface(this.Handle);
 				GC.KeepAlive(this);
-				base.Handle = IntPtr.Zero;
+				this.Handle = IntPtr.Zero;
 			}
 		}
 
@@ -235,8 +240,12 @@ namespace SdlDotNet
 		{
 			get
 			{
+				if (this.disposed)
+				{
+					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				}
 				GC.KeepAlive(this);
-				return (Sdl.SDL_Surface)Marshal.PtrToStructure(base.Handle, 
+				return (Sdl.SDL_Surface)Marshal.PtrToStructure(this.Handle, 
 					typeof(Sdl.SDL_Surface));
 			}
 		}
@@ -245,7 +254,12 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (Sdl.SDL_PixelFormat)Marshal.PtrToStructure(SurfaceStruct.format, 
+				if (this.disposed)
+				{
+					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+		}
+				GC.KeepAlive(this);
+				return (Sdl.SDL_PixelFormat)Marshal.PtrToStructure(this.SurfaceStruct.format, 
 					typeof(Sdl.SDL_PixelFormat));
 			}
 		}
@@ -256,7 +270,11 @@ namespace SdlDotNet
 		/// </summary>
 		public void Flip() 
 		{
-			int result = Sdl.SDL_Flip(base.Handle);
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int result = Sdl.SDL_Flip(this.Handle);
 			GC.KeepAlive(this);
 			if (result != 0)
 			{
@@ -282,9 +300,14 @@ namespace SdlDotNet
 		public Rectangle Fill(System.Drawing.Rectangle rectangle,
 			System.Drawing.Color color) 
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+
 			Sdl.SDL_Rect sdlrect = ConvertRecttoSDLRect(rectangle);
 
-			int result = Sdl.SDL_FillRect(base.Handle, ref sdlrect, GetColorValue(color));
+			int result = Sdl.SDL_FillRect(this.Handle, ref sdlrect, GetColorValue(color));
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
 			{
@@ -309,7 +332,11 @@ namespace SdlDotNet
 		/// <param name="color">Color to fill circle</param>
 		public void DrawFilledCircle(Circle circle, System.Drawing.Color color)
 		{
-			int result = SdlGfx.filledCircleRGBA(base.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int result = SdlGfx.filledCircleRGBA(this.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -326,16 +353,20 @@ namespace SdlDotNet
 		/// <param name="antiAlias"></param>
 		public void DrawCircle(Circle circle, System.Drawing.Color color, bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 			if (antiAlias)
 			{
-				result = SdlGfx.aacircleRGBA(base.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
+				result = SdlGfx.aacircleRGBA(this.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
 			else
 			{
-				result = SdlGfx.circleRGBA(base.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.B, color.G,
+				result = SdlGfx.circleRGBA(this.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
@@ -363,23 +394,27 @@ namespace SdlDotNet
 		/// <param name="antiAlias"></param>
 		public void DrawEllipse(Ellipse ellipse, System.Drawing.Color color, bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 
 			if (antiAlias)
 			{
 				result = SdlGfx.aaellipseRGBA(
-					base.Handle, ellipse.XPosition, ellipse.YPosition, 
+					this.Handle, ellipse.XPosition, ellipse.YPosition, 
 					ellipse.RadiusX, ellipse.RadiusY, 
-					color.R, color.B, color.G,
+					color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
 			else
 			{
 				result = SdlGfx.ellipseRGBA(
-					base.Handle, ellipse.XPosition, ellipse.YPosition, 
+					this.Handle, ellipse.XPosition, ellipse.YPosition, 
 					ellipse.RadiusX, ellipse.RadiusY, 
-					color.R, color.B, color.G,
+					color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
@@ -406,7 +441,11 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawFilledEllipse(Ellipse ellipse, System.Drawing.Color color)
 		{
-			int result = SdlGfx.filledEllipseRGBA(base.Handle, ellipse.XPosition, ellipse.YPosition, ellipse.RadiusX, ellipse.RadiusY,color.R, color.B, color.G,
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int result = SdlGfx.filledEllipseRGBA(this.Handle, ellipse.XPosition, ellipse.YPosition, ellipse.RadiusX, ellipse.RadiusY,color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -423,23 +462,27 @@ namespace SdlDotNet
 		/// <param name="antiAlias"></param>
 		public void DrawLine(Line line, System.Drawing.Color color, bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 
 			if (antiAlias)
 			{
 				result = SdlGfx.aalineRGBA(
-					base.Handle, line.XPosition1, line.YPosition1, 
+					this.Handle, line.XPosition1, line.YPosition1, 
 					line.XPosition2, line.YPosition2, 
-					color.R, color.B, color.G,
+					color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
 			else
 			{
 				result = SdlGfx.lineRGBA(
-					base.Handle, line.XPosition1, line.YPosition1, 
+					this.Handle, line.XPosition1, line.YPosition1, 
 					line.XPosition2, line.YPosition2, 
-					color.R, color.B, color.G,
+					color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
@@ -467,25 +510,29 @@ namespace SdlDotNet
 		/// <param name="antiAlias"></param>
 		public void DrawTriangle(Triangle triangle, System.Drawing.Color color, bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 
 			if (antiAlias)
 			{
 				result = SdlGfx.aatrigonRGBA(
-					base.Handle, triangle.XPosition1, triangle.YPosition1, 
+					this.Handle, triangle.XPosition1, triangle.YPosition1, 
 					triangle.XPosition2, triangle.YPosition2, 
 					triangle.XPosition3, triangle.YPosition3, 
-					color.R, color.B, color.G,
+					color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
 			else
 			{
 				result = SdlGfx.trigonRGBA(
-					base.Handle, triangle.XPosition1, triangle.YPosition1, 
+					this.Handle, triangle.XPosition1, triangle.YPosition1, 
 					triangle.XPosition2, triangle.YPosition2, 
 					triangle.XPosition3, triangle.YPosition3, 
-					color.R, color.B, color.G,
+					color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
@@ -512,12 +559,16 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawFilledTriangle(Triangle triangle, System.Drawing.Color color)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 			result = SdlGfx.filledTrigonRGBA(
-				base.Handle, triangle.XPosition1, triangle.YPosition1, 
+				this.Handle, triangle.XPosition1, triangle.YPosition1, 
 				triangle.XPosition2, triangle.YPosition2, 
 				triangle.XPosition3, triangle.YPosition3, 
-				color.R, color.B, color.G,
+				color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 
@@ -534,7 +585,11 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawFilledPolygon(Polygon polygon, System.Drawing.Color color)
 		{
-			int result = SdlGfx.filledPolygonRGBA(base.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int result = SdlGfx.filledPolygonRGBA(this.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.G, color.G,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != 0)
@@ -551,16 +606,20 @@ namespace SdlDotNet
 		/// <param name="antiAlias"></param>
 		public void DrawPolygon(Polygon polygon, System.Drawing.Color color, bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 			if (antiAlias)
 			{
-				result = SdlGfx.aapolygonRGBA(base.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
+				result = SdlGfx.aapolygonRGBA(this.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
 			else
 			{
-				result = SdlGfx.polygonRGBA(base.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.B, color.G,
+				result = SdlGfx.polygonRGBA(this.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
@@ -587,13 +646,17 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawPie(Pie pie, System.Drawing.Color color)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 
 			result = SdlGfx.pieRGBA(
-				base.Handle, pie.XPosition, pie.YPosition, 
+				this.Handle, pie.XPosition, pie.YPosition, 
 				pie.Radius,
 				pie.StartingPoint, pie.EndingPoint, 
-				color.R, color.B, color.G,
+				color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 
@@ -610,7 +673,11 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawFilledPie(Pie pie, System.Drawing.Color color)
 		{
-			int result = SdlGfx.filledPieRGBA(base.Handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingPoint, pie.EndingPoint,color.R, color.B, color.G,
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int result = SdlGfx.filledPieRGBA(this.Handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingPoint, pie.EndingPoint,color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -626,11 +693,15 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawBezier(Bezier bezier, System.Drawing.Color color)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 			result = SdlGfx.bezierRGBA(
-				base.Handle, bezier.XPositions(), bezier.YPositions(), 
+				this.Handle, bezier.XPositions(), bezier.YPositions(), 
 				bezier.NumberOfPoints, bezier.Steps, 
-				color.R, color.B, color.G,
+				color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -655,12 +726,16 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawBox(Box box, System.Drawing.Color color)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 
 			result = SdlGfx.rectangleRGBA(
-				base.Handle, box.XPosition1, box.YPosition1, 
+				this.Handle, box.XPosition1, box.YPosition1, 
 				box.XPosition2, box.YPosition2, 
-				color.R, color.B, color.G,
+				color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			
@@ -687,12 +762,16 @@ namespace SdlDotNet
 		/// <param name="color"></param>
 		public void DrawFilledBox(Box box, System.Drawing.Color color)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int result = 0;
 
 			result = SdlGfx.boxRGBA(
-				base.Handle, box.XPosition1, box.YPosition1, 
+				this.Handle, box.XPosition1, box.YPosition1, 
 				box.XPosition2, box.YPosition2, 
-				color.R, color.B, color.G,
+				color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			
@@ -709,14 +788,24 @@ namespace SdlDotNet
 		/// <returns>A pixel value in the surface's format</returns>
 		public int GetColorValue(System.Drawing.Color color) 
 		{
-			Sdl.SDL_Surface surf = this.SurfaceStruct;
-			GC.KeepAlive(this);
-			return Sdl.SDL_MapRGBA(
-				surf.format, 
-				color.R, 
-				color.G, 
-				color.B,
-				color.A);
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			if (this.SurfaceStruct.format != IntPtr.Zero)
+			{
+				GC.KeepAlive(this);
+				return Sdl.SDL_MapRGBA(
+					this.SurfaceStruct.format, 
+					color.R, 
+					color.G, 
+					color.B,
+					color.A);
+			}
+			else
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 		}
 		
 		/// <summary>
@@ -729,10 +818,13 @@ namespace SdlDotNet
 		/// </returns>
 		public System.Drawing.Color GetColor(int colorValue) 
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+
 			byte r, g, b, a;
-			Sdl.SDL_Surface surf = this.SurfaceStruct;
-			GC.KeepAlive(this);
-			Sdl.SDL_GetRGBA(colorValue, surf.format, out r, out g, out b, out a);
+			Sdl.SDL_GetRGBA(colorValue, this.SurfaceStruct.format, out r, out g, out b, out a);
 			GC.KeepAlive(this);
 			return System.Drawing.Color.FromArgb(a, r, g, b);
 		}
@@ -791,32 +883,26 @@ namespace SdlDotNet
 		public Surface CreateCompatibleSurface(
 			int width, int height, bool hardware) 
 		{
-			int flag;
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+
+			int flag = 0;
 			if (hardware)
 			{
-				flag = Sdl.SDL_HWSURFACE;
+				flag = (int)VideoModes.HardwareSurface;
 			}
-			else
-			{
-				flag = Sdl.SDL_SWSURFACE;
-			}
-			
-			Sdl.SDL_Surface surf = this.SurfaceStruct;
-			Sdl.SDL_PixelFormat pixelFormat = 
-				(Sdl.SDL_PixelFormat)Marshal.PtrToStructure(
-				surf.format, typeof(Sdl.SDL_PixelFormat));
+
 			return new Surface(Sdl.SDL_CreateRGBSurface(
 				flag,
 				width, 
 				height, 
-				pixelFormat.BitsPerPixel,
-				pixelFormat.Rmask, 
-				pixelFormat.Gmask, 
-				pixelFormat.Bmask, 
-				pixelFormat.Amask));
-			//GC.KeepAlive(this);
-
-			//return new Surface(intPtr);
+				this.PixelFormat.BitsPerPixel,
+				this.PixelFormat.Rmask, 
+				this.PixelFormat.Gmask, 
+				this.PixelFormat.Bmask, 
+				this.PixelFormat.Amask));
 		}
 
 		/// <summary>
@@ -831,12 +917,15 @@ namespace SdlDotNet
 		/// <returns>The new surface</returns>
 		public Surface Convert(Surface source, bool hardware, bool alpha) 
 		{
-
-			int flags = Sdl.SDL_HWSURFACE;
-
-			if (!hardware)
+			if (this.disposed)
 			{
-				flags = Sdl.SDL_SWSURFACE;
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int flags = 0;
+
+			if (hardware)
+			{
+				flags = (int)VideoModes.HardwareSurface;
 			}
 			if (alpha)
 			{
@@ -844,9 +933,7 @@ namespace SdlDotNet
 
 			}
 			
-			Sdl.SDL_Surface sourceSurf = source.SurfaceStruct;
-
-			return new Surface(Sdl.SDL_ConvertSurface(base.Handle, sourceSurf.format, flags));
+			return new Surface(Sdl.SDL_ConvertSurface(this.Handle, source.SurfaceStruct.format, flags));
 		}
 
 		/// <summary>
@@ -866,7 +953,11 @@ namespace SdlDotNet
 		/// <returns>The new surface</returns>
 		public Surface Convert() 
 		{
-			return new Surface(Sdl.SDL_DisplayFormat(base.Handle));
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			return new Surface(Sdl.SDL_DisplayFormat(this.Handle));
 		}
 
 		/// <summary>
@@ -876,9 +967,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				Sdl.SDL_Surface surf = this.SurfaceStruct;
-				GC.KeepAlive(this);
-				return new System.Drawing.Size(surf.w, surf.h); 
+				return new System.Drawing.Size(this.SurfaceStruct.w, this.SurfaceStruct.h); 
 			}
 		}
 
@@ -889,9 +978,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				Sdl.SDL_Surface surf = this.SurfaceStruct;
-				GC.KeepAlive(this);
-				return new System.Drawing.Rectangle(0, 0, surf.w, surf.h); 
+				return new System.Drawing.Rectangle(0, 0, this.SurfaceStruct.w, this.SurfaceStruct.h); 
 			}
 		}
 
@@ -902,9 +989,7 @@ namespace SdlDotNet
 		{ 
 			get
 			{ 
-				Sdl.SDL_Surface surf = this.SurfaceStruct;
-				GC.KeepAlive(this);
-				return (int)surf.w; 
+				return (int)this.SurfaceStruct.w; 
 			} 
 		}
 
@@ -915,9 +1000,7 @@ namespace SdlDotNet
 		{ 
 			get
 			{ 
-				Sdl.SDL_Surface surf = this.SurfaceStruct;
-				GC.KeepAlive(this);
-				return (int)surf.h; 
+				return (int)this.SurfaceStruct.h; 
 			} 
 		}
 
@@ -1000,9 +1083,13 @@ namespace SdlDotNet
 			System.Drawing.Rectangle destinationRectangle,
 			System.Drawing.Rectangle sourceRectangle) 
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			Sdl.SDL_Rect s = Surface.ConvertRecttoSDLRect(sourceRectangle); 
 			Sdl.SDL_Rect d = Surface.ConvertRecttoSDLRect(destinationRectangle);
-			int result = Sdl.SDL_BlitSurface(sourceSurface.Handle, ref s, base.Handle, ref d);
+			int result = Sdl.SDL_BlitSurface(sourceSurface.Handle, ref s, this.Handle, ref d);
 			GC.KeepAlive(this);
 			if (result!= (int) SdlFlag.Success)
 			{
@@ -1039,9 +1126,13 @@ namespace SdlDotNet
 		/// </summary>
 		public void Lock() 
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			if (MustLock) 
 			{
-				int result = Sdl.SDL_LockSurface(base.Handle);
+				int result = Sdl.SDL_LockSurface(this.Handle);
 				GC.KeepAlive(this);
 				if (result != (int) SdlFlag.Success)
 				{
@@ -1056,10 +1147,12 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				Sdl.SDL_Surface surf = 
-					this.SurfaceStruct;
+				if (this.disposed)
+				{
+					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				}
 				GC.KeepAlive(this);
-				return surf.pixels; 
+				return this.SurfaceStruct.pixels; 
 			}
 		}
 
@@ -1070,7 +1163,11 @@ namespace SdlDotNet
 		{
 			if (MustLock) 
 			{
-				int result = Sdl.SDL_UnlockSurface(base.Handle);
+				if (this.disposed)
+				{
+					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				}
+				int result = Sdl.SDL_UnlockSurface(this.Handle);
 				GC.KeepAlive(this);
 				if (result != (int) SdlFlag.Success)
 				{
@@ -1087,7 +1184,12 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_MUSTLOCK(base.Handle);
+				if (this.disposed)
+				{
+					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				}
+				
+				int result = Sdl.SDL_MUSTLOCK(this.Handle);
 				GC.KeepAlive(this);
 				if (result == 1)
 				{
@@ -1106,7 +1208,11 @@ namespace SdlDotNet
 		/// <param name="file">The filename to save to</param>
 		public void SaveBmp(string file) 
 		{
-			int result = Sdl.SDL_SaveBMP(base.Handle, file);
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int result = Sdl.SDL_SaveBMP(this.Handle, file);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
 			{
@@ -1135,12 +1241,16 @@ namespace SdlDotNet
 		/// </param>
 		public void SetColorKey(int key, bool accelerationRle) 
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int flag = Sdl.SDL_SRCCOLORKEY;
 			if (accelerationRle)
 			{
 				flag |= Sdl.SDL_RLEACCELOK;
 			}
-			int result = Sdl.SDL_SetColorKey(base.Handle, (int)flag, key);
+			int result = Sdl.SDL_SetColorKey(this.Handle, (int)flag, key);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
 			{
@@ -1154,7 +1264,11 @@ namespace SdlDotNet
 		/// </summary>
 		public void ClearColorKey() 
 		{
-			int result = Sdl.SDL_SetColorKey(base.Handle, 0, 0);
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int result = Sdl.SDL_SetColorKey(this.Handle, 0, 0);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
 			{
@@ -1180,16 +1294,20 @@ namespace SdlDotNet
 		{
 			get
 			{
+				if (this.disposed)
+				{
+					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				}
 				Sdl.SDL_Rect sdlrect = 
 					Surface.ConvertRecttoSDLRect(new System.Drawing.Rectangle());
-				Sdl.SDL_GetClipRect(base.Handle, ref sdlrect);
+				Sdl.SDL_GetClipRect(this.Handle, ref sdlrect);
 				GC.KeepAlive(this);
 				return new System.Drawing.Rectangle(sdlrect.x, sdlrect.y, sdlrect.w, sdlrect.h);
 			}
 			set
 			{
 				Sdl.SDL_Rect sdlrect = Surface.ConvertRecttoSDLRect(value);
-				Sdl.SDL_SetClipRect(base.Handle, ref sdlrect);
+				Sdl.SDL_SetClipRect(this.Handle, ref sdlrect);
 				GC.KeepAlive(this);
 			}
 		}
@@ -1206,29 +1324,27 @@ namespace SdlDotNet
 		/// <param name="color">The color of the pixel</param>
 		public void DrawPixel(int x, int y, System.Drawing.Color color) 
 		{
-			int pixelColor = this.GetColorValue(color);
-			Sdl.SDL_Surface surface = this.SurfaceStruct;
-			GC.KeepAlive(this);
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 
-			Sdl.SDL_PixelFormat format = 
-				this.PixelFormat;
-
-			switch (format.BytesPerPixel) 
+			switch (this.PixelFormat.BytesPerPixel) 
 			{
 				case 1: // Assuming 8-bpp
 				{
-					byte pixelColorValue = (byte) pixelColor;
+					byte pixelColorValue = (byte) this.GetColorValue(color);
 					//IntPtr pixelColorValuePtr = 
 					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					Marshal.WriteByte(new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x), pixelColorValue);
+					Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + y*this.SurfaceStruct.pitch + 2*x), pixelColorValue);
 				}
 					break;
 				case 2: // Probably 15-bpp or 16-bpp
 				{
-					short pixelColorValue = (short) pixelColor;
+					short pixelColorValue = (short) this.GetColorValue(color);
 					//IntPtr pixelColorValuePtr = 
 					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					Marshal.WriteInt16(new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x), pixelColorValue);
+					Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + y*this.SurfaceStruct.pitch + 2*x), pixelColorValue);
 				}
 					break;
 				case 3: // Slow 24-bpp mode, usually not used
@@ -1251,10 +1367,10 @@ namespace SdlDotNet
 					break;
 				case 4: // Probably 32-bpp
 				{
-					int pixelColorValue = pixelColor;
+					int pixelColorValue = this.GetColorValue(color);
 					//IntPtr pixelColorValuePtr = 
 					//	new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
-					Marshal.WriteInt32(new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x)), pixelColorValue);
+					Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (y*this.SurfaceStruct.pitch + 4*x)), pixelColorValue);
 				}
 					break;
 			}
@@ -1271,26 +1387,22 @@ namespace SdlDotNet
 			int pitch = this.Pitch;
 			byte[] tempByte = new byte[pitch];
 			byte[] firstByte = new byte[pitch];
-			Sdl.SDL_Surface surface = this.SurfaceStruct;
-			GC.KeepAlive(this);
-
-			//IntPtr pixelsPtr = surface.pixels;
 
 			Lock();
 			while (first < second) 
 			{
 				//Take first scanline
 				//Copy pointer data from scanline to tempByte array
-				Marshal.Copy(new IntPtr(surface.pixels.ToInt32() + first * pitch), tempByte, 0, pitch);
+				Marshal.Copy(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + first * pitch), tempByte, 0, pitch);
 				//Take last scanline
 				//Copy pointer data from scanline to firstByte array
-				Marshal.Copy(new IntPtr(surface.pixels.ToInt32() + second * pitch), firstByte, 0, pitch);
+				Marshal.Copy(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + second * pitch), firstByte, 0, pitch);
 				//Take tempByte array
 				//Copy pointer data from tempByte to last scanline
-				Marshal.Copy(tempByte, 0, new IntPtr(surface.pixels.ToInt32() + second * pitch), pitch);
+				Marshal.Copy(tempByte, 0, new IntPtr(this.SurfaceStruct.pixels.ToInt32() + second * pitch), pitch);
 				//Take firstByte array
 				//Copy pointer data from firstByte array to first scanline
-				Marshal.Copy(firstByte, 0, new IntPtr(surface.pixels.ToInt32() + first * pitch), pitch);
+				Marshal.Copy(firstByte, 0, new IntPtr(this.SurfaceStruct.pixels.ToInt32() + first * pitch), pitch);
 				first++;
 				second--;
 			}
@@ -1314,9 +1426,7 @@ namespace SdlDotNet
 		{ 
 			get 
 			{ 
-				Sdl.SDL_Surface surf = this.SurfaceStruct;
-				GC.KeepAlive(this);
-				return surf.pitch; 
+				return this.SurfaceStruct.pitch; 
 			} 
 		}
 
@@ -1328,27 +1438,22 @@ namespace SdlDotNet
 		/// <returns>ColorValue of pixel</returns>
 		public Color GetPixel(int x, int y) 
 		{
-			Sdl.SDL_Surface surface = this.SurfaceStruct;
-			GC.KeepAlive(this);
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 
-			Sdl.SDL_PixelFormat format = 
-				this.PixelFormat;
-
-			int bytesPerPixel = format.BytesPerPixel;
+			int bytesPerPixel = this.PixelFormat.BytesPerPixel;
 
 			switch (bytesPerPixel) 
 			{
 				case 1: //Assuming 8-bpp
 				{
-					//IntPtr pixelColorValuePtr = 
-					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					return this.GetColor(Marshal.ReadInt32(new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x)));
+					return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + y*this.SurfaceStruct.pitch + 2*x)));
 				}
 				case 2:
 				{
-					//IntPtr pixelColorValuePtr = 
-					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					return this.GetColor(Marshal.ReadInt32(new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x)));
+					return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + y*this.SurfaceStruct.pitch + 2*x)));
 				}
 				case 3: //Assuming this is not going to be used much... 
 				{
@@ -1366,9 +1471,7 @@ namespace SdlDotNet
 				}
 				case 4:
 				{
-					//IntPtr pixelColorValuePtr = 
-					//	new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
-					return this.GetColor(Marshal.ReadInt32(new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x))));
+					return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (y*this.SurfaceStruct.pitch + 4*x))));
 				}
 				default: //Should never come here
 				{
@@ -1384,7 +1487,11 @@ namespace SdlDotNet
 		/// <param name="alpha">The alpha value</param>
 		public void SetAlpha(Alphas flag, byte alpha) 
 		{
-			int result = Sdl.SDL_SetAlpha(base.Handle, (int)flag, alpha);
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int result = Sdl.SDL_SetAlpha(this.Handle, (int)flag, alpha);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success) 
 			{
@@ -1399,6 +1506,10 @@ namespace SdlDotNet
 		/// <param name="degreesOfRotation">degrees of rotation</param>
 		public void Rotate(int degreesOfRotation)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			this.Handle = 
 				SdlGfx.rotozoomSurface(this.Handle, degreesOfRotation, 1, SdlGfx.SMOOTHING_ON);
 		}
@@ -1411,6 +1522,10 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public void Rotate(int degreesOfRotation, bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
 			{
@@ -1433,6 +1548,10 @@ namespace SdlDotNet
 		/// <remarks>Smoothing is turned on.</remarks>
 		public void RotationZoom(int degreesOfRotation, double zoom)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			this.Handle = 
 				SdlGfx.rotozoomSurface(this.Handle, degreesOfRotation, zoom, SdlGfx.SMOOTHING_ON);
 		}
@@ -1447,6 +1566,10 @@ namespace SdlDotNet
 		public void RotationZoom(int degreesOfRotation, 
 			double zoom, bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
 			{
@@ -1469,6 +1592,10 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public void Scale(double zoomX, double zoomY)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			this.Handle = 
 				SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, SdlGfx.SMOOTHING_ON);
 		}
@@ -1482,6 +1609,10 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public void Scale(double zoomX, double zoomY, bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
 			{
@@ -1497,6 +1628,10 @@ namespace SdlDotNet
 		/// <param name="zoom">Scale amount</param>
 		public void Scale(double zoom)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			this.Handle = 
 				SdlGfx.zoomSurface(this.Handle, zoom, zoom, SdlGfx.SMOOTHING_ON);
 		}
@@ -1509,6 +1644,10 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public void Scale(double zoom, bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
 			{
@@ -1524,6 +1663,10 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public void ScaleDouble()
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			this.Handle = 
 				SdlGfx.zoomSurface(this.Handle, 2, 2, SdlGfx.SMOOTHING_ON);
 		}
@@ -1535,6 +1678,10 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public void ScaleDouble(bool antiAlias)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
 			if (antiAlias == true)
 			{
@@ -1627,8 +1774,12 @@ namespace SdlDotNet
 		/// <param name="rectangle"></param>
 		public void Update(System.Drawing.Rectangle rectangle)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			Sdl.SDL_UpdateRect(
-				base.Handle, 
+				this.Handle, 
 				rectangle.X, 
 				rectangle.Y, 
 				rectangle.Width, 
@@ -1641,8 +1792,12 @@ namespace SdlDotNet
 		/// </summary>
 		public void Update()
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			Sdl.SDL_UpdateRect(
-				base.Handle, 
+				this.Handle, 
 				0, 
 				0, 
 				this.Size.Width, 
@@ -1657,12 +1812,16 @@ namespace SdlDotNet
 		/// <param name="rectangles"></param>
 		public void Update(System.Drawing.Rectangle[] rectangles)
 		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
 			Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangles.Length];
 			for (int i=0;i < rectangles.Length;i++)
 			{
 				rects[i] = Surface.ConvertRecttoSDLRect(rectangles[i]);
 			}
-			Sdl.SDL_UpdateRects(base.Handle, rects.Length, rects);
+			Sdl.SDL_UpdateRects(this.Handle, rects.Length, rects);
 			GC.KeepAlive(this);
 		}
 

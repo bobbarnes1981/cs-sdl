@@ -1,3 +1,15 @@
+3.1.0alpha2
+David Hudson xx May 2005
+* Fixed several memory leaks.
+* Added two tutorials. SimpleExample is from Terry Price and ParticleEngine is from Miguel De Sousa.
+* Made the VideoModes flags into an enum.
+* The Surface.Fill() method now returns the updated rectangles instead of void
+* Many more FXCop fixes.
+* TODO The GUI demo is now broken.
+* TODO Make sure every method has some documentation.
+* TODO Should Music and VideoInfo be nested classes in Mixer and Video respectively?
+* Fixed major color bug in Surface primitives.
+
 3.1.0alpha1
 David Hudson 27 Apr 2005
 **** Note that this is definitely an alpha. Feedback will be greatly appreciated. ****

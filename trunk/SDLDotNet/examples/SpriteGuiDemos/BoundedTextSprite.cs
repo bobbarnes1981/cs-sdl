@@ -209,5 +209,32 @@ namespace SdlDotNet.Examples
 			this.TextString = 
 				this.HorizontalWeight.ToString("#0.0000000", CultureInfo.CurrentCulture);
 		}
+		private bool disposed;
+
+
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+						this.Surface.Dispose();
+						this.Font.Dispose();
+					}
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
+			}
+		}
 	}
 }
