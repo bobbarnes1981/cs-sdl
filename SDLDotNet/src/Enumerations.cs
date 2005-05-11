@@ -1636,6 +1636,68 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
+	/// 
+	/// </summary>
+	[FlagsAttribute]
+	public enum VideoModes
+	{
+		/// <summary>
+		/// Create the video surface in system memory
+		/// </summary>
+		None = Sdl.SDL_SWSURFACE,
+		/// <summary>
+		/// Create the video surface in video memory
+		/// </summary>
+		HardwareSurface = Sdl.SDL_HWSURFACE,
+		/// <summary>
+		/// Enables the use of asynchronous updates of the display surface. 
+		/// This will usually slow down blitting on single CPU machines, 
+		/// but may provide a speed increase on SMP systems.
+		/// </summary>
+		AsynchronousBlit = Sdl.SDL_ASYNCBLIT,
+
+		//Anyformat = Sdl.SDL_ANYFORMAT,
+		/// <summary>
+		/// Give SDL.NET exclusive palette access. 
+		/// </summary>
+		HardwarePalette = Sdl.SDL_HWPALETTE,
+		/// <summary>
+		/// Enable hardware double buffering; only valid with <see cref="HardwareSurface"/>. 
+		/// Calling Surface.Flip() will flip the buffers and update the screen. 
+		/// All drawing will take place on the surface that is not displayed 
+		/// at the moment. If double buffering could not be enabled then 
+		/// <see cref="Surface.Flip"/> will just perform a 
+		/// <see cref="Surface.Update"/> on the entire screen.
+		/// </summary>
+		DoubleBuffering = Sdl.SDL_DOUBLEBUF,
+		/// <summary>
+		/// SDL.NET will attempt to use a fullscreen mode. 
+		/// If a hardware resolution change is not possible 
+		/// (for whatever reason), the next higher resolution 
+		/// will be used and the display window centered on a black background.
+		/// </summary>
+		Fullscreen = Sdl.SDL_FULLSCREEN,
+		/// <summary>
+		/// Create an OpenGL rendering context. 
+		/// You should have previously set OpenGL video 
+		/// attributes with SDL_GL_SetAttribute.
+		/// </summary>
+		OpenGL = Sdl.SDL_OPENGL,
+		/// <summary>
+		/// Create a resizable window. When the window is resized by 
+		/// the user a <see cref="Events.VideoResize"/> event is generated and 
+		/// Video.SetVideoMode can be called again with the new size.
+		/// </summary>
+		Resizable = Sdl.SDL_RESIZABLE,
+		/// <summary>
+		/// If possible, NoFrame causes SDL to create a window with 
+		/// no title bar or frame decoration. 
+		/// Fullscreen modes automatically have this flag set.
+		/// </summary>
+		NoFrame = Sdl.SDL_NOFRAME
+	}
+
+	/// <summary>
 	/// Event Types
 	/// </summary>
 	/// <remarks></remarks>

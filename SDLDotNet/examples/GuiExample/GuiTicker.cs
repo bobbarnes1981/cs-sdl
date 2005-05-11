@@ -19,6 +19,7 @@
 
 using SdlDotNet.Sprites;
 using SdlDotNet;
+using System;
 using System.Collections;
 using System.Drawing;
 
@@ -51,7 +52,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="coordinates"></param>
 		/// <param name="height"></param>
 		public GuiTicker(GuiManager gui, Vector coordinates, int height)
-			: base(gui, new Rectangle(coordinates.X, coordinates.Y, 0, height), coordinates.Z)
+			: base(gui, new Rectangle(coordinates.X, coordinates.Y, Video.Screen.Width, height), coordinates.Z)
 		{
 		}
 
@@ -93,7 +94,7 @@ namespace SdlDotNet.Examples.GuiExample
 					s.Update(args);
 	  
 					// Move the sprite along
-					if (i > 1 && this.Sprites[i-1] !=null && s.IntersectsWith(this.Sprites[i-1].Rectangle))
+					if (i > 1 && this.Sprites[i-1] != null && s.IntersectsWith(this.Sprites[i-1].Rectangle))
 					{
 					}
 					else
@@ -138,5 +139,37 @@ namespace SdlDotNet.Examples.GuiExample
 			set { delta = value; }
 		}
 		#endregion
+		private bool disposed;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+						this.Surface.Dispose();
+						foreach (Sprite s in this.Sprites)
+						{
+							IDisposable disposableObj = s as IDisposable;
+							if (disposableObj != null)
+							{
+								disposableObj.Dispose( );
+							}
+						}
+					}
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
+			}
+		}
 	}
 }

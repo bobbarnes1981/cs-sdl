@@ -35,7 +35,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		/// <param name="manager"></param>
 		public GuiComponent(GuiManager manager)
-			: base()
+			: base(new Surface(0,0), new Rectangle(0, 0, 0, 0))
 		{
 			this.manager = manager;
 		}
@@ -46,9 +46,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="z"></param>
 		public GuiComponent(GuiManager manager, int z)
-			: base()
+			: this(manager)
 		{
-			this.manager = manager;
 			this.Z = z;
 		}
 
@@ -58,9 +57,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="position"></param>
 		public GuiComponent(GuiManager manager, Point position)
-			: base()
+			: this(manager)
 		{
-			this.manager = manager;
 			this.Position = position;
 		}
 
@@ -70,10 +68,9 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="rectangle"></param>
 		public GuiComponent(GuiManager manager, Rectangle rectangle)
-			: base()
+			: base(new Surface(rectangle.Width, rectangle.Height), rectangle)
 		{
 			this.manager = manager;
-			this.Rectangle = rectangle;
 		}
 
 		/// <summary>
@@ -94,9 +91,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="manager"></param>
 		/// <param name="coordinates"></param>
 		public GuiComponent(GuiManager manager, Vector coordinates)
-			: base()
+			: this(manager)
 		{
-			this.manager = manager;
 			this.Coordinates = coordinates;
 		}
 
@@ -215,5 +211,38 @@ namespace SdlDotNet.Examples.GuiExample
 			}
 		}
 		#endregion
+
+		private bool disposed;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+						this.Surface.Dispose();
+						foreach (Sprite s in this.Sprites)
+						{
+							IDisposable disposableObj = s as IDisposable;
+							if (disposableObj != null)
+							{
+								disposableObj.Dispose( );
+							}
+						}
+					}
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
+			}
+		}
 	}
 }

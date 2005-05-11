@@ -85,7 +85,8 @@ namespace SdlDotNet.Examples
 			{
 				// Sleep a little (60 fps)
 				while(Events.Poll())
-				{}
+				{
+				}
 				Thread.Sleep(1000 / 60);
 			}
 
@@ -102,9 +103,6 @@ namespace SdlDotNet.Examples
 			new int [] {1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
 		private void SetupGui()
 		{
-			// Set up the master container
-			//	master.EnableEvents();
-
 			// Set up the demo sprite containers
 			master.EnableMouseButtonEvent();
 			master.EnableMouseMotionEvent();
@@ -114,11 +112,10 @@ namespace SdlDotNet.Examples
 			gui = new GuiManager(master,
 				new SdlDotNet.Font("../../Data/comic.ttf", 12),
 				Size);
-			//GuiManager.Singleton = gui;
 			gui.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
 
 			// Set up the ticker
-			statusTicker = new GuiTicker(gui, 0, Size.Height - 20, 20);
+			statusTicker = new GuiTicker(gui, 0, Video.Screen.Height - 20, 20);
 			statusTicker.Z = 3000;
 			master.Add(statusTicker);
 			Report("SDL.NET Demo started");
@@ -126,25 +123,18 @@ namespace SdlDotNet.Examples
 			statusWindow = new StatusWindow(gui);
 			// Set up the status window
 			master.Add(statusWindow);
-			//ticker.Add(fps);
+			//statusWindow.Add(fps);
 			//fps.EnableTickEvent();
 			
 
 			// Create the menu
 			CreateMenu(gui);
-
-			// Create a viewport
-			//			manager.Coordinates.Y = gmb.OuterSize.Height + 5;
-			//			manager.Coordinates.X = 5;
-			//			manager.Size = new Size(Size.Width - 10,
-			//				Size.Height - 10 - gmb.OuterSize.Height);
 		}
 
 		private void CreateMenu(GuiManager gui)
 		{
 			// Create the menu
 			gmb = new GuiMenuBar(gui, 0, 1, 20);
-			//gmb.IsTickable = false;
 			gmb.Sprites.EnableTickEvent();
 			gmb.Sprites.EnableMouseButtonEvent();
 			master.Add(gmb);
@@ -167,7 +157,6 @@ namespace SdlDotNet.Examples
 
 				fmi = new GuiMenuItem(gui, spd.ToString(CultureInfo.CurrentCulture) + " FPS");
 				fmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuFps);
-				//fmi.IsTickable = false;
 				gm.Add(fmi);
 			}
 		}
@@ -177,7 +166,6 @@ namespace SdlDotNet.Examples
 			GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
 			gmi.AddRight(new TextSprite("Q", gui.BaseFont));
 			gmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuQuit);
-			//gmi.IsTickable = false;
 			demoMenu.Add(gmi);
 		}
 		#endregion
@@ -211,7 +199,6 @@ namespace SdlDotNet.Examples
 			gmi.AddRight(new TextSprite(String.Format(CultureInfo.CurrentCulture, "{0}", cnt),
 				gui.BaseFont));
 			gmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuDemo);
-			//gmi.IsTickable = false;
 			demoMenu.Add(gmi);
 		}
 
@@ -320,7 +307,6 @@ namespace SdlDotNet.Examples
 			running = false;
 		}
 
-		//		StatusWindow statuswin;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -356,7 +342,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="msg"></param>
-		public static void Report(string msg)
+		public void Report(string msg)
 		{
 			if (statusTicker != null)
 			{
@@ -373,6 +359,7 @@ namespace SdlDotNet.Examples
 		private static SpriteCollection manager = new SpriteCollection();
 		private Surface screen;
 		private GuiWindow statusWindow;
+		private GuiTicker statusTicker;
 		private static GuiMenuBar gmb;
 		private static Clock clock = new Clock(5);
 		/// <summary>
@@ -385,7 +372,6 @@ namespace SdlDotNet.Examples
 				return clock;
 			}
 		}
-		private static GuiTicker statusTicker;
 
 		/// <summary>
 		/// 
@@ -401,14 +387,56 @@ namespace SdlDotNet.Examples
 
 		#region IDisposable Members
 
+		private bool disposed;
+
+		
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks>Destroys managed and unmanaged objects</remarks>
+		public void Dispose() 
+		{
+			Dispose(true);
+		}
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks>Same as Dispose(true)</remarks>
+		public void Close() 
+		{
+			Dispose();
+		}
 		/// <summary>
 		/// 
 		/// </summary>
-		public void Dispose()
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
 		{
-			screen.Dispose();
+			if (!this.disposed)
+			{
+					if (disposing)
+					{
+						this.screen.Dispose();
+						foreach (Sprite s in SdlDemo.manager)
+						{
+							IDisposable disposableObj = s as IDisposable;
+							if (disposableObj != null)
+							{
+								disposableObj.Dispose( );
+							}
+						}
+						foreach (Sprite s in SdlDemo.master)
+						{
+							IDisposable disposableObj = s as IDisposable;
+							if (disposableObj != null)
+							{
+								disposableObj.Dispose( );
+							}
+						}
+					}
+					this.disposed = true;
+			}
 		}
-
 		#endregion
 	}
 }

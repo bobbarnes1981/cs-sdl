@@ -21,9 +21,6 @@ using System;
 using System.Threading;
 using System.Collections;
 using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Reflection;
-using System.Resources;
 
 using Tao.Sdl;
 
@@ -129,7 +126,6 @@ namespace SdlDotNet
 		private static Hashtable UserEvents = new Hashtable();
 		private static int UserEventId = 0;		
 		private const int QUERY_EVENTS_MAX = 254;
-		static ResourceManager stringManager;
 
 		/// <summary>
 		/// Fires when the application has become active or inactive
@@ -210,8 +206,6 @@ namespace SdlDotNet
 
 		Events()
 		{
-			stringManager = 
-				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
 		}
 
 		/// <summary>
@@ -713,17 +707,11 @@ namespace SdlDotNet
 
 		#region Thread Management
 		private static Thread serverThread = null;
-
 		private static Thread tickerThread = null;
-
 		private static bool stopThread = true;
-
 		private static int skippedTicks = 0;
-
 		private static int processSkipped = 0;
-
 		private static bool processing = false;
-
 		private static long lastTick = DateTime.Now.Ticks;
 
 		/// <summary>
@@ -758,7 +746,6 @@ namespace SdlDotNet
 				// Perform the actual threaded tick
 				tickerThread = new Thread(new ThreadStart(RunTicker));
 				tickerThread.Start();
-				//ThreadPool.QueueUserWorkItem(new WaitCallback(RunTicker));
 			}
 		}
 
@@ -818,7 +805,7 @@ namespace SdlDotNet
 				}
 				catch
 				{
-					throw new SdlException(stringManager.GetString("StopTicker Problem", CultureInfo.CurrentUICulture));
+					throw new SdlException("StopTicker Problem");
 				}
 			}
 
@@ -830,7 +817,7 @@ namespace SdlDotNet
 			}
 			catch
 			{
-				throw new SdlException(stringManager.GetString("Thread Join exception", CultureInfo.CurrentUICulture));
+				throw new SdlException("Thread Join exception");
 			}
 
 			// Make noise
@@ -843,15 +830,6 @@ namespace SdlDotNet
 
 		#region Tick Duration
 		private static int tickSpan = 1000;
-
-		//		/// <summary>
-		//		/// Convenience function to add an ITickable object into the tick
-		//		/// manager.
-		//		/// </summary>
-		//		public void Add(ITickable tickable)
-		//		{
-		//			Events.TickEvent += new TickEventHandler(tickable.OnTick);
-		//		}
 
 		/// <summary>
 		/// 
@@ -885,7 +863,7 @@ namespace SdlDotNet
 			{
 				if (value < 1)
 				{
-					throw new SdlException(stringManager.GetString("Cannot set a negative or zero sleep time.", CultureInfo.CurrentUICulture));
+					throw new SdlException("Cannot set a negative or zero sleep time.");
 				}
 
 				tickSpan = value;

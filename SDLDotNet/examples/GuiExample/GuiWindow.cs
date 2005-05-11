@@ -35,19 +35,6 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		public GuiWindow(GuiManager manager)
-			: base(manager)
-		{
-			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
-				new Vector(0, 0, this.Z));
-			base.Sprites.Add(titleSprite);
-			this.title = string.Empty;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
 		/// <param name="rectangle"></param>
 		/// <param name="coordinateZ"></param>
 		public GuiWindow(GuiManager manager, Rectangle rectangle, int coordinateZ)
@@ -74,14 +61,6 @@ namespace SdlDotNet.Examples.GuiExample
 		}
 
 		#region Drawing
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public Padding OuterPadding
-//		{
-//			get { return manager.GetPadding(this); }
-//		}
-
 		#endregion
 
 		#region Operators
@@ -100,8 +79,6 @@ namespace SdlDotNet.Examples.GuiExample
 		private string title;
 		private Size titleSize = new Size();
 		private TextSprite titleSprite;
-		//public TextSprite TitleSprite
-
 
 		/// <summary>
 		/// 
@@ -119,7 +96,7 @@ namespace SdlDotNet.Examples.GuiExample
 
 				// Set the bounds
 				titleSize = GuiManager.GetTextSize(this.GuiManager.TitleFont, title);
-				//this.Sprites.Remove(titleSprite);
+				titleSprite.X = (this.Rectangle.Width - titleSize.Width)/2;
 				titleSprite.TextString = value;
 			}
 		}
@@ -154,5 +131,37 @@ namespace SdlDotNet.Examples.GuiExample
 			}
 		}
 		#endregion
+		private bool disposed;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+						this.Surface.Dispose();
+						foreach (Sprite s in this.Sprites)
+						{
+							IDisposable disposableObj = s as IDisposable;
+							if (disposableObj != null)
+							{
+								disposableObj.Dispose( );
+							}
+						}
+					}
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
+			}
+		}
 	}
 }

@@ -150,9 +150,9 @@ namespace SdlDotNet
 			}
 			if (Joysticks.IsValidJoystickNumber(index))
 			{
-				base.Handle = Sdl.SDL_JoystickOpen(index);
+				this.Handle = Sdl.SDL_JoystickOpen(index);
 			}
-			if (base.Handle == IntPtr.Zero)
+			if (this.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
@@ -163,7 +163,7 @@ namespace SdlDotNet
 		}
 		internal Joystick(IntPtr handle) 
 		{
-			base.Handle = handle;
+			this.Handle = handle;
 			this.index = Sdl.SDL_JoystickIndex(handle); 
 		}
 
@@ -193,16 +193,27 @@ namespace SdlDotNet
 			}
 		}
 
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override bool HasBeenDisposed
+//		{
+//			get
+//			{
+//				return this.disposed;
+//			}
+//		}
+
 		/// <summary>
 		/// Closes Joystick handle
 		/// </summary>
 		protected override void CloseHandle() 
 		{
-			if (base.Handle != IntPtr.Zero)
+			if (this.Handle != IntPtr.Zero)
 			{
-				Sdl.SDL_JoystickClose(base.Handle);
+				Sdl.SDL_JoystickClose(this.Handle);
 				GC.KeepAlive(this);
-				base.Handle = IntPtr.Zero;
+				this.Handle = IntPtr.Zero;
 			}
 		}
 		
@@ -242,7 +253,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumAxes(base.Handle); 
+				int result = Sdl.SDL_JoystickNumAxes(this.Handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -255,7 +266,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumBalls(base.Handle); 
+				int result = Sdl.SDL_JoystickNumBalls(this.Handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -268,7 +279,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumHats(base.Handle); 
+				int result = Sdl.SDL_JoystickNumHats(this.Handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -281,7 +292,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = Sdl.SDL_JoystickNumButtons(base.Handle); 
+				int result = Sdl.SDL_JoystickNumButtons(this.Handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -307,7 +318,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public float GetAxisPosition(JoystickAxis axis)
 		{
-			return  ((float)(Sdl.SDL_JoystickGetAxis(base.Handle, (int) axis) + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE);
+			return  ((float)(Sdl.SDL_JoystickGetAxis(this.Handle, (int) axis) + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE);
 		}
 
 		/// <summary>
@@ -321,7 +332,7 @@ namespace SdlDotNet
 			int motionY;
 
 			if (Sdl.SDL_JoystickGetBall(
-				base.Handle, ball, out motionX, out motionY) == 
+				this.Handle, ball, out motionX, out motionY) == 
 				(int) SdlFlag.Success)
 			{
 				return new BallMotion(motionX, motionY);
@@ -339,7 +350,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public ButtonKeyState GetButtonState(int button)
 		{
-			return (ButtonKeyState) Sdl.SDL_JoystickGetButton(base.Handle, button);
+			return (ButtonKeyState) Sdl.SDL_JoystickGetButton(this.Handle, button);
 		}
 
 		/// <summary>
@@ -349,7 +360,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public JoystickHatStates GetHatState(int hat)
 		{
-			return (JoystickHatStates) Sdl.SDL_JoystickGetHat(base.Handle, (int) hat);
+			return (JoystickHatStates) Sdl.SDL_JoystickGetHat(this.Handle, (int) hat);
 		}
 	}
 }

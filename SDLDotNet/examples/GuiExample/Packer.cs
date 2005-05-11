@@ -19,6 +19,7 @@
 
 using SdlDotNet.Sprites;
 using SdlDotNet;
+using System;
 using System.Collections;
 using System.Drawing;
 
@@ -169,5 +170,37 @@ namespace SdlDotNet.Examples.GuiExample
 			}
 		}
 		#endregion
+		private bool disposed;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+						this.Surface.Dispose();
+						foreach (Sprite s in this.Sprites)
+						{
+							IDisposable disposableObj = s as IDisposable;
+							if (disposableObj != null)
+							{
+								disposableObj.Dispose( );
+							}
+						}
+					}
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
+			}
+		}
 	}
 }
