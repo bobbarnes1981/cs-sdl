@@ -44,8 +44,8 @@ namespace SdlDotNet
 				FontSystem.Initialize();
 			}
 
-			base.Handle = SdlTtf.TTF_OpenFont(filename, pointSize);
-			if (base.Handle == IntPtr.Zero) 
+			this.Handle = SdlTtf.TTF_OpenFont(filename, pointSize);
+			if (this.Handle == IntPtr.Zero) 
 			{
 				throw FontException.Generate();
 			}
@@ -53,7 +53,7 @@ namespace SdlDotNet
 
 		internal Font(IntPtr handle) 
 		{
-			base.Handle = handle;
+			this.Handle = handle;
 		}
 
 		/// <summary>
@@ -82,16 +82,27 @@ namespace SdlDotNet
 			}
 		}
 
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override bool HasBeenDisposed
+//		{
+//			get
+//			{
+//				return this.disposed;
+//			}
+//		}
+
 		/// <summary>
 		/// Closes Surface handle
 		/// </summary>
 		protected override void CloseHandle() 
 		{
-			if (base.Handle != IntPtr.Zero)
+			if (this.Handle != IntPtr.Zero)
 			{
-				SdlTtf.TTF_CloseFont(base.Handle);
+				SdlTtf.TTF_CloseFont(this.Handle);
 				GC.KeepAlive(this);
-				base.Handle = IntPtr.Zero;
+				this.Handle = IntPtr.Zero;
 			}
 		}
 
@@ -104,12 +115,12 @@ namespace SdlDotNet
 		{
 			set 
 			{ 
-				SdlTtf.TTF_SetFontStyle(base.Handle, (int) value); 
+				SdlTtf.TTF_SetFontStyle(this.Handle, (int) value); 
 				GC.KeepAlive(this);
 			}
 			get 
 			{ 
-				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
 				GC.KeepAlive(this);
 				return style; 
 			}
@@ -124,20 +135,20 @@ namespace SdlDotNet
 			{ 
 				if (value == true)
 				{
-					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
-					SdlTtf.TTF_SetFontStyle(base.Handle, (int) style | (int) Styles.Bold); 
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
+					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style | (int) Styles.Bold); 
 					GC.KeepAlive(this);
 				}
 				else
 				{
-					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
-					SdlTtf.TTF_SetFontStyle(base.Handle, (int) style ^ (int) Styles.Bold); 
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
+					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style ^ (int) Styles.Bold); 
 					GC.KeepAlive(this);
 				}
 			}
 			get 
 			{ 
-				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
 				GC.KeepAlive(this);
 				if ((int)(style & Styles.Bold) == (int) SdlFlag.FalseValue)
 				{
@@ -159,20 +170,20 @@ namespace SdlDotNet
 			{ 
 				if (value == true)
 				{
-					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
-					SdlTtf.TTF_SetFontStyle(base.Handle, (int) style | (int) Styles.Italic); 
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
+					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style | (int) Styles.Italic); 
 					GC.KeepAlive(this);
 				}
 				else
 				{
-					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
-					SdlTtf.TTF_SetFontStyle(base.Handle, (int) style ^ (int) Styles.Italic); 
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
+					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style ^ (int) Styles.Italic); 
 					GC.KeepAlive(this);
 				}
 			}
 			get 
 			{ 
-				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
 				GC.KeepAlive(this);
 				if ((int)(style & Styles.Italic) == (int) SdlFlag.FalseValue)
 				{
@@ -194,20 +205,20 @@ namespace SdlDotNet
 			{ 
 				if (value == true)
 				{
-					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
-					SdlTtf.TTF_SetFontStyle(base.Handle, (int) style | (int) Styles.Underline); 
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
+					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style | (int) Styles.Underline); 
 					GC.KeepAlive(this);
 				}
 				else
 				{
-					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
-					SdlTtf.TTF_SetFontStyle(base.Handle, (int) style ^ (int) Styles.Underline); 
+					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
+					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style ^ (int) Styles.Underline); 
 					GC.KeepAlive(this);
 				}
 			}
 			get 
 			{ 
-				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
 				GC.KeepAlive(this);
 				if ((int)(style & Styles.Underline) == (int) SdlFlag.FalseValue)
 				{
@@ -229,13 +240,13 @@ namespace SdlDotNet
 			{ 
 				if (value == true)
 				{
-					SdlTtf.TTF_SetFontStyle(base.Handle, (int) Styles.None); 
+					SdlTtf.TTF_SetFontStyle(this.Handle, (int) Styles.None); 
 					GC.KeepAlive(this);
 				}
 			}
 			get 
 			{ 
-				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(base.Handle);
+				Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
 				GC.KeepAlive(this);
 				if ((int)(style | Styles.Underline | Styles.Bold | Styles.Italic) == (int) SdlFlag.TrueValue)
 				{
@@ -255,7 +266,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = SdlTtf.TTF_FontHeight(base.Handle);
+				int result = SdlTtf.TTF_FontHeight(this.Handle);
 				GC.KeepAlive(this);
 				return result; 
 			}
@@ -268,7 +279,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = SdlTtf.TTF_FontAscent(base.Handle);
+				int result = SdlTtf.TTF_FontAscent(this.Handle);
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -281,7 +292,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = SdlTtf.TTF_FontDescent(base.Handle);
+				int result = SdlTtf.TTF_FontDescent(this.Handle);
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -294,7 +305,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				int result = SdlTtf.TTF_FontLineSkip(base.Handle); 
+				int result = SdlTtf.TTF_FontLineSkip(this.Handle); 
 				GC.KeepAlive(this);
 				return result;
 			}
@@ -310,7 +321,7 @@ namespace SdlDotNet
 			int width;
 			int height;
 
-			SdlTtf.TTF_SizeUNICODE(base.Handle, textItem, out width, out height);
+			SdlTtf.TTF_SizeUNICODE(this.Handle, textItem, out width, out height);
 			GC.KeepAlive(this);
 			return new Size(width, height);
 		}
@@ -324,7 +335,7 @@ namespace SdlDotNet
 		private Surface RenderTextSolid(string textItem, Color color) 
 		{
 			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
-			return new Surface(SdlTtf.TTF_RenderUNICODE_Solid(base.Handle, textItem, colorSdl));
+			return new Surface(SdlTtf.TTF_RenderUNICODE_Solid(this.Handle, textItem, colorSdl));
 		}
 
 		/// <summary>
@@ -342,7 +353,7 @@ namespace SdlDotNet
 			Sdl.SDL_Color backgroundColorSdl = 
 				SdlColor.ConvertColor(backgroundColor);
 			return new Surface(SdlTtf.TTF_RenderUNICODE_Shaded(
-				base.Handle, textItem, foregroundColorSdl, backgroundColorSdl));
+				this.Handle, textItem, foregroundColorSdl, backgroundColorSdl));
 		}
 
 		/// <summary>
@@ -356,7 +367,7 @@ namespace SdlDotNet
 		{
 			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
 			return new Surface(SdlTtf.TTF_RenderUNICODE_Blended(
-				base.Handle, textItem, colorSdl));
+				this.Handle, textItem, colorSdl));
 		}
 
 

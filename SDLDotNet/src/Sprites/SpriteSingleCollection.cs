@@ -79,20 +79,20 @@ namespace SdlDotNet.Sprites
 		/// 
 		/// </summary>
 		/// <param name="index"></param>
-		/// <param name="surface"></param>
-		public override void Insert(int index, Surface surface)
+		/// <param name="sprite"></param>
+		public override void Insert(int index, Sprite sprite)
 		{
-			List.Insert(index, surface);
+			List.Insert(index, sprite);
 		} 
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="surface"></param>
+		/// <param name="sprite"></param>
 		/// <returns></returns>
-		public override int IndexOf(Surface surface)
+		public override int IndexOf(Sprite sprite)
 		{
-			return List.IndexOf(surface);
+			return List.IndexOf(sprite);
 		} 
 	}
 }

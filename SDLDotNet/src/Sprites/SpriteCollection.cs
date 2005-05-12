@@ -732,20 +732,20 @@ namespace SdlDotNet.Sprites
 		/// 
 		/// </summary>
 		/// <param name="index"></param>
-		/// <param name="surface"></param>
-		public virtual void Insert(int index, Surface surface)
+		/// <param name="sprite"></param>
+		public virtual void Insert(int index, Sprite sprite)
 		{
-			List.Insert(index, surface);
+			List.Insert(index, sprite);
 		} 
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="surface"></param>
+		/// <param name="sprite"></param>
 		/// <returns></returns>
-		public virtual int IndexOf(Surface surface)
+		public virtual int IndexOf(Sprite sprite)
 		{
-			return List.IndexOf(surface);
+			return List.IndexOf(sprite);
 		} 
 	}
 }

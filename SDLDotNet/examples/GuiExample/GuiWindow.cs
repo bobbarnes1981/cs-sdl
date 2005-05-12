@@ -42,6 +42,8 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
 				new Vector(0, 0, coordinateZ));
+			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Vector(0,0,-1));
+			titleBar.Surface.Fill(manager.FrameColor);
 			base.Sprites.Add(titleSprite);
 			this.title = string.Empty;
 		}
@@ -56,6 +58,9 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
 				new Vector(0, 0, 0));
+			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Vector(0,0,-1));
+			titleBar.Surface.Fill(manager.FrameColor);
+			
 			base.Sprites.Add(titleSprite);
 			this.title = string.Empty;
 		}
@@ -79,6 +84,7 @@ namespace SdlDotNet.Examples.GuiExample
 		private string title;
 		private Size titleSize = new Size();
 		private TextSprite titleSprite;
+		private Sprite titleBar;
 
 		/// <summary>
 		/// 
@@ -97,6 +103,7 @@ namespace SdlDotNet.Examples.GuiExample
 				// Set the bounds
 				titleSize = GuiManager.GetTextSize(this.GuiManager.TitleFont, title);
 				titleSprite.X = (this.Rectangle.Width - titleSize.Width)/2;
+				base.Sprites.Insert(0, titleBar);
 				titleSprite.TextString = value;
 			}
 		}

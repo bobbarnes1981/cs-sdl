@@ -81,7 +81,6 @@ namespace SdlDotNet.Examples.GuiExample
 			Redo();
 		}
 
-
 		private void Redo()
 		{
 			int height = 0;
@@ -95,14 +94,10 @@ namespace SdlDotNet.Examples.GuiExample
 				{
 					width = this.Sprites[i].Width;
 				}
-				
 			}
 			this.Surface = new Surface(width,height);
 			this.Rectangle = new Rectangle(this.menuTitle.X, this.menuTitle.Y + this.menuTitle.Height, width, height);
-			this.Surface.Fill(this.GuiManager.BackgroundColor);
 			base.Render();
-			
-			
 		}
 		#endregion
 

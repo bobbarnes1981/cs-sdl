@@ -105,7 +105,7 @@ namespace SdlDotNet.Examples.GuiExample
 				}
 			}
 
-			this.Surface = new Surface( width* 3, this.HeadSprites[0].Height);
+			this.Surface = new Surface( width * 3, this.HeadSprites[0].Height);
 
 			foreach (Sprite s in TailSprites)
 			{
@@ -116,7 +116,8 @@ namespace SdlDotNet.Examples.GuiExample
 				}
 	
 				// Translate it and blit
-				s.X = this.X + this.Size.Width - MarginPadding.Right - s.Size.Width - InnerPadding.Horizontal;
+				//s.X = this.X + this.Size.Width - MarginPadding.Right /*- s.Size.Width*/ - InnerPadding.Horizontal;
+				s.X = this.X + this.Surface.Width - s.Width;
 			}
 			this.Sprites.Draw(this.Surface);
 			return this.Surface;

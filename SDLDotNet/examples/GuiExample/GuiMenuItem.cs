@@ -73,6 +73,52 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Drawing
+				/// <summary>
+		/// 
+		/// </summary>
+		public override Surface Render()
+		{
+			//this.Surface.Fill(this.GuiManager.BackgroundColor);
+			// Draw all of our left components
+			int x = 0;
+
+			int width = 0;
+			foreach (Sprite s in HeadSprites)
+			{
+				// Ignore hidden
+				if (!s.Visible)
+				{
+					continue;
+				}
+	
+				// Translate it and blit
+				s.X = x;
+
+				// Update the coordinates for the next one
+				x += s.Size.Width + InnerPadding.Horizontal;
+				if (s.Size.Width > width)
+				{
+					width = s.Size.Width;
+				}
+			}
+
+			this.Surface = new Surface( width * 3, this.HeadSprites[0].Height);
+
+			foreach (Sprite s in TailSprites)
+			{
+				// Ignore hidden
+				if (!s.Visible)
+				{
+					continue;
+				}
+	
+				// Translate it and blit
+				//s.X = this.X + this.Size.Width - MarginPadding.Right /*- s.Size.Width*/ - InnerPadding.Horizontal;
+				s.X = this.X + this.Surface.Width - s.Width;
+			}
+			this.Sprites.Draw(this.Surface);
+			return this.Surface;
+		}
 		#endregion
 
 		#region Geometry

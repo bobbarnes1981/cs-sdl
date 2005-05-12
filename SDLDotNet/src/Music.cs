@@ -85,15 +85,26 @@ namespace SdlDotNet
 			}
 		}
 
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override bool HasBeenDisposed
+//		{
+//			get
+//			{
+//				return this.disposed;
+//			}
+//		}
+
 		/// <summary>
 		/// Closes Music handle
 		/// </summary>
 		protected override void CloseHandle() 
 		{
-			if (base.Handle != IntPtr.Zero)
+			if (this.Handle != IntPtr.Zero)
 			{
-				SdlMixer.Mix_FreeMusic(base.Handle);
-				base.Handle = IntPtr.Zero;
+				SdlMixer.Mix_FreeMusic(this.Handle);
+				this.Handle = IntPtr.Zero;
 			}
 		}
 
@@ -138,8 +149,8 @@ namespace SdlDotNet
 		/// <returns>A new Music object</returns>
 		public void Load(string file) 
 		{
-			base.Handle = SdlMixer.Mix_LoadMUS(file);
-			if (base.Handle == IntPtr.Zero)
+			this.Handle = SdlMixer.Mix_LoadMUS(file);
+			if (this.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
@@ -176,7 +187,7 @@ namespace SdlDotNet
 		/// Specify 1 to play a single time, -1 to loop forever.</param>
 		public void Play(int numberOfTimes) 
 		{
-			if (SdlMixer.Mix_PlayMusic(base.Handle, numberOfTimes) != 0)
+			if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -189,7 +200,7 @@ namespace SdlDotNet
 		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
 		public void FadeIn(int numberOfTimes, int milliseconds) 
 		{
-			if (SdlMixer.Mix_FadeInMusic(base.Handle, numberOfTimes, milliseconds) != 0)
+			if (SdlMixer.Mix_FadeInMusic(this.Handle, numberOfTimes, milliseconds) != 0)
 			{
 				throw SdlException.Generate();
 			}
@@ -208,7 +219,7 @@ namespace SdlDotNet
 		public void FadeInPosition(int numberOfTimes, 
 			int milliseconds, double position) 
 		{
-			if (SdlMixer.Mix_FadeInMusicPos(base.Handle, 
+			if (SdlMixer.Mix_FadeInMusicPos(this.Handle, 
 				numberOfTimes, milliseconds, position) != 0)
 			{
 				throw SdlException.Generate();
@@ -258,7 +269,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (MusicType) SdlMixer.Mix_GetMusicType(base.Handle);
+				return (MusicType) SdlMixer.Mix_GetMusicType(this.Handle);
 			}
 		}
 		/// <summary>
