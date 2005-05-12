@@ -32,106 +32,11 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public Sprite()
-		{
-		}
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="coordinates"></param>
-//		public Sprite(Vector coordinates)
-//		{
-//			this.rect = 
-//				new Rectangle(coordinates.X, coordinates.Y, 0, 0);
-//			this.coordinateZ = coordinates.Z;
-//		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="rectangle"></param>
-//		public Sprite(Rectangle rectangle)
-//		{
-//			this.rect = rectangle;
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="group"></param>
-//		public Sprite(SpriteCollection group) : this()
-//		{
-//			this.InnerAdd(group);
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="coordinates"></param>
-//		public Sprite(Vector coordinates)
-//		{
-//			this.rect = new Rectangle(coordinates.Point, new Size(0, 0));
-//			this.coordinateZ = coordinates.Z;
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="coordinates"></param>
-//		/// <param name="group"></param>
-//		public Sprite(Vector coordinates, SpriteCollection group) : this(coordinates)
-//		{
-//			this.InnerAdd(group);
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="point"></param>
-//		/// <param name="z"></param>
-//		public Sprite(Point point, int z) : this(new Vector(point, z))
-//		{
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="point"></param>
-//		/// <param name="z"></param>
-//		/// <param name="group"></param>
-//		public Sprite(Point point, int z, SpriteCollection group) : this(new Vector(point, z))
-//		{
-//			this.InnerAdd(group);
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="point"></param>
-//		public Sprite(Point point)
-//		{
-//			this.rect = new Rectangle(point, new Size(0, 0));
-//		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="point"></param>
-//		/// <param name="group"></param>
-//		public Sprite(Point point, SpriteCollection group) : this(point)
-//		{
-//			this.InnerAdd(group);
-//		}
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="position"></param>
 		/// <param name="surface"></param>
-		public Sprite(Surface surface, Point position)
+		public Sprite(Surface surface, Point position) : 
+			this(surface, new Rectangle(position.X, position.Y, surface.Width, surface.Height))
 		{
-			this.rect = new Rectangle(position.X, position.Y, surface.Width, surface.Height);
-			this.surf = surface;
 		}
 
 		/// <summary>
@@ -139,7 +44,8 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="coordinates"></param>
 		/// <param name="surface"></param>
-		public Sprite(Surface surface, Vector coordinates) : this(surface, coordinates.Point)
+		public Sprite(Surface surface, Vector coordinates) : 
+			this(surface, coordinates.Point)
 		{
 			this.coordinateZ = coordinates.Z;
 		}
@@ -160,7 +66,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="position"></param>
 		/// <param name="z"></param>
 		/// <param name="surface"></param>
-		public Sprite(Surface surface, Point position, int z ) : this(surface, position)
+		public Sprite(Surface surface, Point position, int z ) : 
+			this(surface, position)
 		{
 			this.coordinateZ = z;
 		}
@@ -182,7 +89,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="surface"></param>
 		/// <param name="rectangle"></param>
 		/// <param name="z"></param>
-		public Sprite(Surface surface, Rectangle rectangle, int z): this(surface, rectangle)
+		public Sprite(Surface surface, Rectangle rectangle, int z): 
+			this(surface, rectangle)
 		{
 			this.coordinateZ = z;
 		}
@@ -193,7 +101,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="coordinates"></param>
 		/// <param name="surface"></param>
 		/// <param name="group"></param>
-		public Sprite(Surface surface, Vector coordinates, SpriteCollection group) : this(surface, coordinates)
+		public Sprite(Surface surface, Vector coordinates, SpriteCollection group) : 
+			this(surface, coordinates)
 		{
 			this.InnerAdd(group);
 		}
@@ -205,7 +114,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="z"></param>
 		/// <param name="surface"></param>
 		/// <param name="group"></param>
-		public Sprite(Surface surface, Point position, int z, SpriteCollection group): this(surface, position, z)
+		public Sprite(Surface surface, Point position, int z, SpriteCollection group): 
+			this(surface, position, z)
 		{
 			this.InnerAdd(group);
 		}
@@ -216,7 +126,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="position"></param>
 		/// <param name="surface"></param>
 		/// <param name="group"></param>
-		public Sprite(Surface surface, Point position , SpriteCollection group):this(surface, position)
+		public Sprite(Surface surface, Point position , SpriteCollection group):
+			this(surface, position)
 		{
 			this.InnerAdd(group);
 		}
@@ -233,10 +144,10 @@ namespace SdlDotNet.Sprites
 		{
 			get
 			{
-				if (this.surf == null)
-				{
-					this.surf = new Surface(this.Width, this.Height);				
-				}
+//				if (this.surf == null)
+//				{
+//					this.surf = new Surface(this.Width, this.Height);				
+//				}
 				return surf;
 			}
 			set
@@ -250,7 +161,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public virtual Surface Render()
 		{
-			return this.surf;
+				return this.surf;
 		}
 		#endregion
 
@@ -813,12 +724,45 @@ namespace SdlDotNet.Sprites
 
 		#region IDisposable Members
 
+		private bool disposed;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					this.surf.Dispose();
+				}
+			}
+			this.disposed = true;
+		}
 		/// <summary>
 		/// 
 		/// </summary>
 		public void Dispose()
 		{
-			this.surf.Dispose();
+			this.Dispose(true);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		~Sprite() 
+		{
+			Dispose(false);
 		}
 
 		#endregion
