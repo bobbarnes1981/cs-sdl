@@ -67,6 +67,16 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
+		/// <param name="rectangle"></param>
+		public Packer(GuiManager manager, Rectangle rectangle)
+			: base(manager, rectangle)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
 		/// <param name="p"></param>
 		public Packer(GuiManager manager, Vector p)
 			: base(manager, p)

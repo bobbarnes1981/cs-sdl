@@ -42,7 +42,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="y"></param>
 		/// <param name="height"></param>
 		public GuiMenuBar(GuiManager gui, int x, int y, int height)
-			: base(gui, x, y, height)
+			: base(gui, new Rectangle(x, y, Video.Screen.Width, height))
 		{
 			this.Z = 10000;
 		}
