@@ -85,17 +85,6 @@ namespace SdlDotNet
 			}
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override bool HasBeenDisposed
-//		{
-//			get
-//			{
-//				return this.disposed;
-//			}
-//		}
-
 		/// <summary>
 		/// Closes Music handle
 		/// </summary>

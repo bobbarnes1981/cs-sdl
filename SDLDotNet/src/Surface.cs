@@ -128,7 +128,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create surface of a given width and height
 		/// </summary>
 		/// <param name="width"></param>
 		/// <param name="height"></param>
@@ -143,7 +143,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create surface that has the same size as the screen
 		/// </summary>
 		public Surface() : this(Video.Screen.Width, Video.Screen.Height)
 		{
@@ -346,7 +346,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw circle onto surface
 		/// </summary>
 		/// <param name="circle"></param>
 		/// <param name="color"></param>
@@ -377,7 +377,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Drawe circle onto surface
 		/// </summary>
 		/// <param name="circle"></param>
 		/// <param name="color"></param>
@@ -387,7 +387,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw ellipse onto surface
 		/// </summary>
 		/// <param name="ellipse"></param>
 		/// <param name="color"></param>
@@ -425,7 +425,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw ellipse onto surface
 		/// </summary>
 		/// <param name="ellipse"></param>
 		/// <param name="color"></param>

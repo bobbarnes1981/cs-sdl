@@ -41,10 +41,6 @@ namespace SdlDotNet
 		static ResourceManager stringManager;
 		static readonly CDRom instance = new CDRom();
 
-//		static CDRom()
-//		{
-//		}
-
 		CDRom()
 		{
 			Initialize();
@@ -159,7 +155,10 @@ namespace SdlDotNet
 		/// Checks if the drive number uis valid
 		/// </summary>
 		/// <param name="index">drive number</param>
-		/// <returns>true is the number is greater than 0 and less than the number of drives on the system.</returns>
+		/// <returns>
+		/// true is the number is greater than 0 and less 
+		/// than the number of drives on the system.
+		/// </returns>
 		public static bool IsValidDriveNumber(int index)
 		{
 			if (index >= 0 && index < NumberOfDrives)

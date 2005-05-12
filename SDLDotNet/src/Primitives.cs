@@ -25,7 +25,7 @@ using System.Globalization;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for Primitives.
+	/// Circle
 	/// </summary>
 	public struct Circle
 	{
@@ -34,7 +34,7 @@ namespace SdlDotNet
 		short r;
 
 		/// <summary>
-		/// 
+		/// Constructor for Circle
 		/// </summary>
 		/// <param name="x"></param>
 		/// <param name="y"></param>
@@ -47,7 +47,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// X position of circle
 		/// </summary>
 		public short XPosition
 		{
@@ -62,7 +62,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of circle
 		/// </summary>
 		public short YPosition
 		{
@@ -77,7 +77,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Radius of circle
 		/// </summary>
 		public short Radius
 		{
@@ -91,7 +91,7 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// string representation of circle
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()

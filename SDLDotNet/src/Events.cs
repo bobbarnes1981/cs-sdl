@@ -776,7 +776,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Start ticker thread
 		/// </summary>
 		public static void StartTicker()
 		{
@@ -789,7 +789,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Stop ticker thread
 		/// </summary>
 		public static void StopTicker()
 		{
@@ -832,7 +832,7 @@ namespace SdlDotNet
 		private static int tickSpan = 1000;
 
 		/// <summary>
-		/// 
+		/// Ticks per second
 		/// </summary>
 		public static int TicksPerSecond
 		{

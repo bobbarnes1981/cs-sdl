@@ -106,7 +106,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Return Point(X, Y) of mouse
 		/// </summary>
 		public Point Position
 		{

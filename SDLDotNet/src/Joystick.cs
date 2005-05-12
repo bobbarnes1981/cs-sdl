@@ -193,17 +193,6 @@ namespace SdlDotNet
 			}
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override bool HasBeenDisposed
-//		{
-//			get
-//			{
-//				return this.disposed;
-//			}
-//		}
-
 		/// <summary>
 		/// Closes Joystick handle
 		/// </summary>

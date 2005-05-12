@@ -57,18 +57,6 @@ namespace SdlDotNet
 			this.movieInfo = movieInfo;
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		internal IntPtr GetHandle
-//		{ 
-//			get
-//			{
-//				GC.KeepAlive(this);
-//				return handle; 
-//			}
-//		}
-
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
@@ -94,17 +82,6 @@ namespace SdlDotNet
 				}
 			}
 		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override bool HasBeenDisposed
-//		{
-//			get
-//			{
-//				return this.disposed;
-//			}
-//		}
 
 		/// <summary>
 		/// Closes Music handle
@@ -527,6 +504,5 @@ namespace SdlDotNet
 		{
 			Smpeg.SMPEG_renderFinal(this.Handle, surface.Handle, 0, 0);
 		}
-
 	}
 }

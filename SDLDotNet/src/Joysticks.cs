@@ -63,7 +63,6 @@ namespace SdlDotNet
 				{
 					throw SdlException.Generate();
 				}
-				//Sdl.SDL_JoystickEventState(Sdl.SDL_ENABLE);
 			}
 		}
 

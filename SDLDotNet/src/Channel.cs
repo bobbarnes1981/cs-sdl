@@ -35,14 +35,6 @@ namespace SdlDotNet
 		private Sound lastSound;
 		private SdlMixer.ChannelFinishedDelegate channelFinishedDelegate;
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public Channel()
-//		{
-//			this.index = Mixer.FindAvailableChannel();
-//		}
-
 		/// <summary>
 		/// Creates a channel with the given index
 		/// </summary>
@@ -87,7 +79,7 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public int Play(Sound sound, int loops) 
 		{
-			return this.Play(sound, loops, (int) SdlFlag.PlayForever);
+			return this.Play(sound, loops, (int) SdlFlag.InfiniteLoop);
 		}
 
 		/// <summary>
@@ -124,7 +116,7 @@ namespace SdlDotNet
 		{
 			if (continuous == true)
 			{
-				return this.Play(sound, -1, (int) SdlFlag.PlayForever);
+				return this.Play(sound, -1, (int) SdlFlag.InfiniteLoop);
 			}
 			else
 			{

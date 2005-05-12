@@ -37,10 +37,6 @@ namespace SdlDotNet
 			Initialize();
 		}
 
-//		static FontSystem()
-//		{
-//		}
-
 		/// <summary>
 		/// Initialize Font subsystem.
 		/// </summary>

@@ -47,12 +47,7 @@ namespace SdlDotNet
 		private Music music = Music.Instance;
 		
 		static private byte distance;
-
 		static Mixer instance = new Mixer();
-
-//		static Mixer()
-//		{
-//		}
 
 		Mixer()
 		{
@@ -199,26 +194,6 @@ namespace SdlDotNet
 			}
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <returns></returns>
-//		public static Channel CreateChannel()
-//		{
-//			return new Channel();
-//		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public static ChannelList Channels
-//		{
-//			get
-//			{
-//				return Mixer.channelList;
-//			}
-//		}
-
 		/// <summary>
 		/// Loads a .wav file into memory
 		/// </summary>
@@ -333,149 +308,6 @@ namespace SdlDotNet
 		{
 			return SdlMixer.Mix_Volume(-1, volume);
 		}
-	
-//		/// <summary>
-//		/// Plays a sample once using the first available channel
-//		/// </summary>
-//		/// <param name="sample">The sample to play</param>
-//		/// <returns>The channel used to play the sample</returns>
-//		public static int PlaySample(Sound sample) 
-//		{
-//			int ret = SdlMixer.Mix_PlayChannelTimed(-1, sample.GetHandle(), 0, -1);
-//			if (ret == -1)
-//			{
-//				throw SdlException.Generate();
-//			}
-//			return ret;
-//		}
-
-//		/// <summary>
-//		/// Plays a sample the specified number of times using the first available channel
-//		/// </summary>
-//		/// <param name="sample">The sample to play</param>
-//		/// <param name="loops">The number of loops.  
-//		/// Specify 1 to have the sample play twice</param>
-//		/// <returns>The channel used to play the sample</returns>
-//		public static int PlaySample(Sound sample, int loops) 
-//		{
-//			int ret = SdlMixer.Mix_PlayChannelTimed(-1, sample.GetHandle(), loops, (int) SdlFlag.PlayForever);
-//			if (ret == (int) SdlFlag.Error)
-//			{
-//				throw SdlException.Generate();
-//			}
-//			return ret;
-//		}
-
-//		/// <summary>
-//		/// Plays a sample once using the first available channel, 
-//		/// stopping after the specified number of ms
-//		/// </summary>
-//		/// <param name="sample">The sample to play</param>
-//		/// <param name="ticks">The time limit in milliseconds</param>
-//		/// <returns>The channel used to play the sample</returns>
-//		public static int PlaySampleTimed(Sound sample, int ticks) 
-//		{
-//			int ret = SdlMixer.Mix_PlayChannelTimed(-1, sample.GetHandle(), 0, ticks);
-//			if (ret == (int) SdlFlag.Error)
-//			{
-//				throw SdlException.Generate();
-//			}
-//			return ret;
-//		}
-
-//		/// <summary>
-//		/// Plays a sample the specified number of times using 
-//		/// the first available channel, stopping after the specified number of ms
-//		/// </summary>
-//		/// <param name="sample">The sample to play</param>
-//		/// <param name="loops">The number of loops.  
-//		/// Specify 1 to have the sample play twice</param>
-//		/// <param name="ticks">The time limit in milliseconds</param>
-//		/// <returns>The channel used to play the sample</returns>
-//		public static int PlaySampleTimed(Sound sample, int loops, int ticks) 
-//		{
-//			int ret = SdlMixer.Mix_PlayChannelTimed(-1, sample.GetHandle(), loops, ticks);
-//			if (ret == (int) SdlFlag.Error)
-//			{
-//				throw SdlException.Generate();
-//			}
-//			return ret;
-//		}
-
-//		/// <summary>
-//		/// Fades in a sample once using the first available channel
-//		/// </summary>
-//		/// <param name="sample">The sample to play</param>
-//		/// <param name="ms">The number of milliseconds to fade in for</param>
-//		/// <returns>The channel used to play the sample</returns>
-//		public static int FadeInSample(Sound sample, int ms) 
-//		{
-//			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), 0, ms, -1);
-//			if (ret == (int) SdlFlag.Error)
-//			{
-//				throw SdlException.Generate();
-//			}
-//			return ret;
-//		}
-//		/// <summary>
-//		/// Fades in a sample the specified number of times using 
-//		/// the first available channel
-//		/// </summary>
-//		/// <param name="sample">The sample to play</param>
-//		/// <param name="ms">
-//		/// The number of milliseconds to fade in for
-//		/// </param>
-//		/// <param name="loops">The number of loops.  
-//		/// Specify 1 to have the sample play twice</param>
-//		/// <returns>The channel used to play the sample</returns>
-//		public static int FadeInSample(Sound sample, int ms, int loops) 
-//		{
-//			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), loops, ms, -1);
-//			if (ret == (int) SdlFlag.Error)
-//			{
-//				throw SdlException.Generate();
-//			}
-//			return ret;
-//		}
-//
-//		/// <summary>
-//		/// Fades in a sample once using the first available channel, 
-//		/// stopping after the specified number of ms
-//		/// </summary>
-//		/// <param name="sample">The sample to play</param>
-//		/// <param name="ms">The number of milliseconds to fade in for</param>
-//		/// <param name="ticks">The time limit in milliseconds</param>
-//		/// <returns>The channel used to play the sample</returns>
-//		public static int FadeInSampleTimed(Sound sample, int ms, int ticks) 
-//		{
-//			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sample.GetHandle(), 0, ms, ticks);
-//			if (ret == (int) SdlFlag.Error)
-//			{
-//				throw SdlException.Generate();
-//			}
-//			return ret;
-//		}
-//
-//		/// <summary>
-//		/// Fades in a sample the specified number of times using 
-//		/// the first available channel, stopping after the 
-//		/// specified number of ms
-//		/// </summary>
-//		/// <param name="sound">The sample to play</param>
-//		/// <param name="ms">The number of milliseconds to fade in for</param>
-//		/// <param name="loops">The number of loops.  
-//		/// Specify 1 to have the sample play twice</param>
-//		/// <param name="ticks">The time limit in milliseconds</param>
-//		/// <returns>The channel used to play the sample</returns>
-//		public static int FadeInSampleTimed(Sound sound, int ms, int loops, int ticks) 
-//		{
-//			int ret = SdlMixer.Mix_FadeInChannelTimed(-1, sound.GetHandle(), loops, ms, ticks);
-//			if (ret == (int) SdlFlag.Error)
-//			{
-//				throw SdlException.Generate();
-//			}
-//			return ret;
-//		}
 	
 		/// <summary>
 		/// Pauses playing on all channels

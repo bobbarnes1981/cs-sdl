@@ -44,7 +44,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="newSpan">Number seconds to use for calculations</param>
+		/// <param name="newSpan">
+		/// Number seconds to use for calculations
+		/// </param>
 		public Clock(int newSpan)
 		{
 			this.span = newSpan;
@@ -58,13 +60,7 @@ namespace SdlDotNet
 
 		#region Counting
 		private long lastSecond = DateTime.Now.Second;
-
 		private long loops;
-
-//		/// <summary>
-//		/// Object can respond to Tick events.
-//		/// </summary>
-//		public bool IsTickable { get { return true; } }
 
 		/// <summary>
 		/// Activates the counter for the current second.
@@ -107,7 +103,7 @@ namespace SdlDotNet
 		#endregion
 
 		/// <summary>
-		/// 
+		/// Enables clock to listen for Tick Events.
 		/// </summary>
 		public void EnableTickEvent()
 		{

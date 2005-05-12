@@ -123,7 +123,7 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// Returns Point(X, Y) of mouse
 		/// </summary>
 		public Point Position
 		{
