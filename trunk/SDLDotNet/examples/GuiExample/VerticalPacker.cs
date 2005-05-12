@@ -70,7 +70,7 @@ namespace SdlDotNet.Examples.GuiExample
 		public override Surface Render()
 		{
 			this.Surface = base.Render();
-			this.Surface.Fill(this.GuiManager.BackgroundColor);
+			//this.Surface.Fill(this.GuiManager.BackgroundColor);
 			// Draw all of our left components
 			int y = 0;
 

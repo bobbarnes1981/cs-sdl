@@ -132,16 +132,16 @@ namespace SdlDotNet
 		/// <returns>True is mode is supported, false if it is not.</returns>
 		public static bool IsVideoModeOK(int width, int height, bool fullscreen, int bitsPerPixel)
 		{
-			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN);
+			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
 			if (fullscreen)
 			{
-				flags |= Sdl.SDL_FULLSCREEN;
+				flags |= VideoModes.Fullscreen;
 			}
 			int result = Sdl.SDL_VideoModeOK(
 				width, 
 				height, 
 				bitsPerPixel, 
-				flags);
+				(int)flags);
 			if (result == bitsPerPixel)
 			{
 				return true;
@@ -160,7 +160,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (Sdl.SDL_GetAppState() & Sdl.SDL_APPACTIVE) !=0;
+				return (Sdl.SDL_GetAppState() & (int)Focus.Application) !=0;
 			}
 		}
 		/// <summary>
@@ -171,16 +171,16 @@ namespace SdlDotNet
 		/// <param name="fullscreen">Fullscreen mode</param>
 		public static int BestBitsPerPixel(int width, int height, bool fullscreen)
 		{
-			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF);
+			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
 			if (fullscreen)
 			{
-				flags |= Sdl.SDL_FULLSCREEN;
+				flags |= VideoModes.Fullscreen;
 			}
 			return Sdl.SDL_VideoModeOK(
 				width, 
 				height, 
 				VideoInfo.BitsPerPixel, 
-				flags);
+				(int)flags);
 		}
 
 
@@ -191,10 +191,10 @@ namespace SdlDotNet
 		/// <returns>Array of Size structs</returns>
 		public static Size[] ListModes(bool fullscreen)
 		{
-			int flags = (int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF);
+			int flags = (int)(VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
 			if (fullscreen)
 			{
-				flags |= Sdl.SDL_FULLSCREEN;
+				flags |= (int)VideoModes.Fullscreen;
 			}
 			IntPtr format = IntPtr.Zero;
 			Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, flags);
@@ -215,8 +215,7 @@ namespace SdlDotNet
 		public static Surface SetVideoMode(int width, int height) 
 		{
 			return SetVideoMode(width, height, 0,
-				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN|
-				Sdl.SDL_ANYFORMAT));
+				(VideoModes.HardwareSurface|VideoModes.DoubleBuffering|VideoModes.Fullscreen));
 		}
 		/// <summary>
 		/// Sets the video mode of a fullscreen application
@@ -228,7 +227,7 @@ namespace SdlDotNet
 		public static Surface SetVideoMode(int width, int height, int bitsPerPixel) 
 		{
 			return SetVideoMode(width, height, bitsPerPixel,
-				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_FULLSCREEN|Sdl.SDL_ANYFORMAT));
+				(VideoModes.HardwareSurface|VideoModes.DoubleBuffering|VideoModes.Fullscreen));
 		}
 
 		/// <summary>
@@ -254,12 +253,12 @@ namespace SdlDotNet
 		/// <returns>a surface to draw to</returns>
 		public static Surface SetVideoModeWindow(int width, int height, bool frame) 
 		{
-			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT;
+			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
 			if (!frame)
 			{
-				flags |= Sdl.SDL_NOFRAME;
+				flags |= VideoModes.NoFrame;
 			}
-			return SetVideoMode(width, height, 0, (int)flags);
+			return SetVideoMode(width, height, 0, flags);
 		}
 		/// <summary>
 		/// Sets the windowed video mode
@@ -277,12 +276,12 @@ namespace SdlDotNet
 			int bitsPerPixel, 
 			bool frame) 
 		{
-			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT;
+			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
 			if (!frame)
 			{
-				flags |= Sdl.SDL_NOFRAME;
+				flags |= VideoModes.NoFrame;
 			}
-			return SetVideoMode(width, height, bitsPerPixel, (int)flags);
+			return SetVideoMode(width, height, bitsPerPixel, flags);
 		}
 		
 		/// <summary>
@@ -295,7 +294,7 @@ namespace SdlDotNet
 		public static Surface SetVideoModeOpenGL(int width, int height, int bitsPerPixel) 
 		{
 			return SetVideoMode(width, height, bitsPerPixel,
-				(int)(Sdl.SDL_HWSURFACE|Sdl.SDL_OPENGL|Sdl.SDL_FULLSCREEN));
+				(VideoModes.HardwareSurface|VideoModes.OpenGL|VideoModes.Fullscreen));
 		}
 		/// <summary>
 		/// Sets a windowed video mode suitable for drawing with OpenGL
@@ -311,12 +310,12 @@ namespace SdlDotNet
 			int height, 
 			bool frame) 
 		{
-			int flags = Sdl.SDL_HWSURFACE|Sdl.SDL_OPENGL|Sdl.SDL_ANYFORMAT;
+			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.OpenGL);
 			if (!frame)
 			{
-				flags |= Sdl.SDL_NOFRAME;
+				flags |= VideoModes.NoFrame;
 			}
-			return SetVideoMode(width, height, 0, (int)flags);
+			return SetVideoMode(width, height, 0, flags);
 		}
 		/// <summary>
 		/// Sets the video mode of a fullscreen application
@@ -328,9 +327,9 @@ namespace SdlDotNet
 		/// specific flags, see SDL documentation for details
 		/// </param>
 		/// <returns>A Surface representing the screen</returns>
-		public static Surface SetVideoMode(int width, int height, int bitsPerPixel, int flags) 
+		public static Surface SetVideoMode(int width, int height, int bitsPerPixel, VideoModes flags) 
 		{
-			return new Surface(Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, flags));
+			return new Surface(Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, (int)flags));
 		}
 
 
@@ -384,7 +383,7 @@ namespace SdlDotNet
 			bool hardware) 
 		{
 			return new Surface(Sdl.SDL_CreateRGBSurface(
-				hardware?Sdl.SDL_HWSURFACE:Sdl.SDL_SWSURFACE,
+				hardware?(int)VideoModes.HardwareSurface:(int)VideoModes.None,
 				width, height, depth,
 				redMask, greenMask, blueMask, alphaMask));
 		}
