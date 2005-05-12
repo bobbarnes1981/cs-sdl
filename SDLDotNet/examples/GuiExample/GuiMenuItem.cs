@@ -96,13 +96,14 @@ namespace SdlDotNet.Examples.GuiExample
 
 				// Update the coordinates for the next one
 				x += s.Size.Width + InnerPadding.Horizontal;
-				if (s.Size.Width > width)
-				{
-					width = s.Size.Width;
-				}
+//				if (s.Size.Width > width)
+//				{
+//					width = s.Size.Width;
+//				}
+				width = 100;
 			}
 
-			this.Surface = new Surface( width * 3, this.HeadSprites[0].Height);
+			this.Surface = new Surface( width, this.HeadSprites[0].Height);
 
 			foreach (Sprite s in TailSprites)
 			{

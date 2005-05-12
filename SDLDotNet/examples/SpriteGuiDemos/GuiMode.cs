@@ -110,6 +110,8 @@ namespace SdlDotNet.Examples
 			//gm.MenuBar = gmb;
 			gm.Sprites.EnableMouseButtonEvent();
 			gmb.AddLeft(gm);
+			//sm.Add(gm.Popup);
+
 		
 			// Create a menu items
 			gm.Add(new GuiMenuItem(gui, "Test #1"));
@@ -134,6 +136,7 @@ namespace SdlDotNet.Examples
 			//gm2.IsTraced = true;
 			//gm2.Popup.IsTraced = true;
 			//gmi2.IsTraced = true;
+			//sm.Add(gm2.Popup);
 		
 			// Create a third menu
 			gm3 = new GuiMenuTitle(gui, gmb, "Right Menu");
@@ -141,6 +144,7 @@ namespace SdlDotNet.Examples
 			gm3.Popup.Add(new GuiMenuItem(gui, "Really Long Title for a Menu Item"));
 			//gmb.AddRight(new TextSprite("NonMenu", gui.BaseFont));
 			gmb.AddRight(gm3);
+			//sm.Add(gm3.Popup);
 		}
 
 		/// <summary>

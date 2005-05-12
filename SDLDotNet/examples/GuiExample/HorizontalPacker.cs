@@ -73,6 +73,16 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(gui, x, y, height)
 		{
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manager"></param>
+		/// <param name="rectangle"></param>
+		public HorizontalPacker(GuiManager manager, Rectangle rectangle)
+			: base(manager, rectangle)
+		{
+		}
 		#endregion
 
 		#region Drawing

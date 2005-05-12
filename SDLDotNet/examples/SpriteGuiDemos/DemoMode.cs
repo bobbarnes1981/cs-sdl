@@ -194,9 +194,10 @@ namespace SdlDotNet.Examples
 							disposableObj.Dispose( );
 						}
 					}
+					GC.SuppressFinalize(this);
 				}
+				this.disposed = true;
 			}
-			this.disposed = true;
 		}
 		/// <summary>
 		/// 

@@ -398,14 +398,6 @@ namespace SdlDotNet.Examples
 			Dispose(true);
 		}
 		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		/// <remarks>Same as Dispose(true)</remarks>
-		public void Close() 
-		{
-			Dispose();
-		}
-		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="disposing"></param>
@@ -432,6 +424,10 @@ namespace SdlDotNet.Examples
 								disposableObj.Dispose( );
 							}
 						}
+						statusTicker.Dispose();
+						demoMenu.Dispose();
+						gm.Dispose();
+						statusWindow.Dispose();
 					}
 					this.disposed = true;
 			}
