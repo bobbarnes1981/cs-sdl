@@ -25,7 +25,6 @@ namespace SdlDotNet
 {
 	/// <summary>
 	/// Event args for gaining focus.
-	/// 
 	/// </summary>
 	/// <remarks>The app can gain focus from the mouse, keyboard or from being de-inconified.</remarks>
 	public class ActiveEventArgs : SdlEventArgs

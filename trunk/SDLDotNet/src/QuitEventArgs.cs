@@ -28,7 +28,7 @@ namespace SdlDotNet
 	public class QuitEventArgs : SdlEventArgs 
 	{
 		/// <summary>
-		/// 
+		/// Quit Event
 		/// </summary>
 		public QuitEventArgs()
 		{	

@@ -149,7 +149,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public Channel Play(int loops) 
 		{
-			return this.Play(loops, (int) SdlFlag.PlayForever);
+			return this.Play(loops, (int) SdlFlag.InfiniteLoop);
 		}
 
 		/// <summary>
@@ -161,7 +161,7 @@ namespace SdlDotNet
 		{
 			if (loopIndefinitely == true)
 			{
-				return this.Play(-1, (int) SdlFlag.PlayForever);
+				return this.Play(-1, (int) SdlFlag.InfiniteLoop);
 			}
 			else
 			{

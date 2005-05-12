@@ -23,7 +23,7 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Summary description for ActiveEventArgs.
+	/// Base class for SdlEventArgs.
 	/// </summary>
 	public class SdlEventArgs : EventArgs
 	{

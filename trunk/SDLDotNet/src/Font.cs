@@ -82,17 +82,6 @@ namespace SdlDotNet
 			}
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override bool HasBeenDisposed
-//		{
-//			get
-//			{
-//				return this.disposed;
-//			}
-//		}
-
 		/// <summary>
 		/// Closes Surface handle
 		/// </summary>
@@ -105,8 +94,6 @@ namespace SdlDotNet
 				this.Handle = IntPtr.Zero;
 			}
 		}
-
-		// Possibly add Bold/Italic/Underline properties
 
 		/// <summary>
 		/// Style Property

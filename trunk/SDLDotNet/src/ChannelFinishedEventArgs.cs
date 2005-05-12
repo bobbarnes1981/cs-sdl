@@ -26,7 +26,10 @@ namespace SdlDotNet
 	/// <summary>
 	/// Events args for when a channel finishes playing a sound.
 	/// </summary>
-	/// <remarks>This will create event args to trigger an event after a sound has finished playing.</remarks>
+	/// <remarks>
+	/// This will create event args to trigger an 
+	/// event after a sound has finished playing.
+	/// </remarks>
 	public class ChannelFinishedEventArgs : UserEventArgs 
 	{
 		/// <summary>

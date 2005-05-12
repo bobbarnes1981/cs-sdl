@@ -32,49 +32,41 @@ namespace SdlDotNet
 	public enum SdlFlag
 	{
 		/// <summary>
-		/// 
+		/// Error
 		/// </summary>
 		Error = -1,
 		/// <summary>
-		/// 
+		/// Surccess
 		/// </summary>
 		Success = 0,
 		/// <summary>
-		/// 
+		/// Plays in infinite loop.
 		/// </summary>
-		InfiniteLoops = -1,
+		InfiniteLoop = -1,
 		/// <summary>
-		/// 
-		/// </summary>
-		PlayForever = -1,
-		/// <summary>
-		/// 
+		/// Error
 		/// </summary>
 		Error2 = 1,
 		/// <summary>
-		/// 
+		/// Success
 		/// </summary>
 		Success2 = 1,
 		/// <summary>
-		/// 
+		/// None
 		/// </summary>
 		None = 0,
 		/// <summary>
-		/// 
+		/// First available channel
 		/// </summary>
 		FirstFreeChannel = -1,
 		/// <summary>
-		/// 
+		/// True
 		/// </summary>
 		TrueValue = 1,
 		/// <summary>
-		/// 
+		/// False
 		/// </summary>
 		FalseValue = 0,
-		/// <summary>
-		/// 
-		/// </summary>
-		LoopMusic = -1
 	}
 
 	#region CDstatus
@@ -287,8 +279,11 @@ namespace SdlDotNet
 	public enum Styles
 	{
 		/// <summary>
-		/// Normal
+		/// Normal.
 		/// </summary>
+		/// <remarks>
+		/// FXCop wants this to be called 'None' instead of 'Normal'
+		/// </remarks>
 		None = SdlTtf.TTF_STYLE_NORMAL,
 		/// <summary>
 		/// Bold
@@ -316,7 +311,7 @@ namespace SdlDotNet
 	public enum Key
 	{
 		/// <summary>
-		///
+		///Unknown
 		/// </summary>
 		Unknown = Sdl.SDLK_UNKNOWN ,
 		/// <summary>
@@ -1360,15 +1355,15 @@ namespace SdlDotNet
 	public enum SoundChannel
 	{
 		/// <summary>
-		/// 
+		/// None
 		/// </summary>
 		None = 0,
 		/// <summary>
-		/// 
+		/// Mono
 		/// </summary>
 		Mono = 1,
 		/// <summary>
-		/// 
+		/// Stereo
 		/// </summary>
 		Stereo = 2
 	}
@@ -1381,11 +1376,11 @@ namespace SdlDotNet
 	public enum CDTrackType
 	{
 		/// <summary>
-		/// 
+		/// Audio
 		/// </summary>
 		Audio = Sdl.SDL_AUDIO_TRACK,
 		/// <summary>
-		/// 
+		/// Data
 		/// </summary>
 		Data = Sdl.SDL_DATA_TRACK
 	}
@@ -1397,11 +1392,11 @@ namespace SdlDotNet
 	public enum JoystickAxis
 	{
 		/// <summary>
-		/// 
+		/// Horizontal Axis
 		/// </summary>
 		Horizontal = 0,
 		/// <summary>
-		/// 
+		/// Vertical Axis
 		/// </summary>
 		Vertical = 1
 	}
@@ -1413,11 +1408,11 @@ namespace SdlDotNet
 	public enum ButtonKeyState 
 	{
 		/// <summary>
-		/// 
+		/// Button has been released.
 		/// </summary>
 		NotPressed = Sdl.SDL_RELEASED,
 		/// <summary>
-		/// 
+		/// Button has been pressed down.
 		/// </summary>
 		Pressed = Sdl.SDL_PRESSED
 	}
@@ -1434,35 +1429,35 @@ namespace SdlDotNet
 		/// </summary>
 		None = Sdl.SDL_HAT_CENTERED,
 		/// <summary>
-		/// 
+		/// Up
 		/// </summary>
 		Up = Sdl.SDL_HAT_UP,
 		/// <summary>
-		/// 
+		/// Right
 		/// </summary>
 		Right = Sdl.SDL_HAT_RIGHT,
 		/// <summary>
-		/// 
+		/// Down
 		/// </summary>
 		Down = Sdl.SDL_HAT_DOWN,
 		/// <summary>
-		/// 
+		/// Left
 		/// </summary>
 		Left = Sdl.SDL_HAT_LEFT,
 		/// <summary>
-		/// 
+		/// Right and Up
 		/// </summary>
 		RightUp = Sdl.SDL_HAT_RIGHTUP,
 		/// <summary>
-		/// 
+		/// Right and Down
 		/// </summary>
 		RightDown = Sdl.SDL_HAT_RIGHTDOWN,
 		/// <summary>
-		/// 
+		/// Left and Up
 		/// </summary>
 		LeftUp = Sdl.SDL_HAT_LEFTUP,
 		/// <summary>
-		/// 
+		/// Left and Down
 		/// </summary>
 		LeftDown = Sdl.SDL_HAT_LEFTDOWN
 	}
@@ -1474,11 +1469,11 @@ namespace SdlDotNet
 	public enum SoundAction
 	{
 		/// <summary>
-		/// 
+		/// Stop sound
 		/// </summary>
 		Stop,
 		/// <summary>
-		/// 
+		/// Fadeout sound
 		/// </summary>
 		Fadeout
 	}
@@ -1490,31 +1485,31 @@ namespace SdlDotNet
 	public enum MusicType
 	{
 		/// <summary>
-		/// 
+		/// None
 		/// </summary>
 		None = SdlMixer.MUS_NONE,
 		/// <summary>
-		/// 
+		/// Starts external player
 		/// </summary>
 		ExternalCommand = SdlMixer.MUS_CMD,
 		/// <summary>
-		/// 
+		/// .WAV file
 		/// </summary>
 		Wave = SdlMixer.MUS_WAV,
 		/// <summary>
-		/// 
+		/// Mod music file
 		/// </summary>
 		Mod = SdlMixer.MUS_MOD,
 		/// <summary>
-		/// 
+		/// MIDI file
 		/// </summary>
 		Midi = SdlMixer.MUS_MID,
 		/// <summary>
-		/// 
+		/// Ogg file
 		/// </summary>
 		Ogg = SdlMixer.MUS_OGG,
 		/// <summary>
-		/// 
+		/// mp3 file
 		/// </summary>
 		Mp3 = SdlMixer.MUS_MP3
 	}
@@ -1526,27 +1521,27 @@ namespace SdlDotNet
 	public enum MouseButton
 	{
 		/// <summary>
-		/// 
+		/// None
 		/// </summary>
 		None = 0,
 		/// <summary>
-		/// 
+		/// Primary button. Typically the left button
 		/// </summary>
 		PrimaryButton = Sdl.SDL_BUTTON_LEFT,
 		/// <summary>
-		/// 
+		/// Secondary button. typically the right button
 		/// </summary>
 		SecondaryButton = Sdl.SDL_BUTTON_RIGHT,
 		/// <summary>
-		/// 
+		/// Middle button
 		/// </summary>
 		MiddleButton = Sdl.SDL_BUTTON_MIDDLE,
 		/// <summary>
-		/// 
+		/// Wheel up
 		/// </summary>
 		WheelUp = Sdl.SDL_BUTTON_WHEELUP,
 		/// <summary>
-		/// 
+		/// Wheel down
 		/// </summary>
 		WheelDown = Sdl.SDL_BUTTON_WHEELDOWN
 	}
@@ -1777,20 +1772,20 @@ namespace SdlDotNet
 	/// <summary>
 	/// Type of Focus 
 	/// </summary>
-	/// <remarks>For the AppActive event. byte</remarks>
+	/// <remarks>For the AppActive event.</remarks>
 	[FlagsAttribute]
 	public enum Focus 
 	{
 		/// <summary>
-		/// 
+		/// Mouse focus
 		/// </summary>
 		Mouse = Sdl.SDL_APPMOUSEFOCUS,
 		/// <summary>
-		/// 
+		/// Keeyboard focus
 		/// </summary>
 		Keyboard = Sdl.SDL_APPINPUTFOCUS,
 		/// <summary>
-		/// 
+		/// App becomes un-iconified.
 		/// </summary>
 		Application = Sdl.SDL_APPACTIVE
 	}

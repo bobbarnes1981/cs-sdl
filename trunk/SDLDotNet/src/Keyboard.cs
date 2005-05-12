@@ -29,13 +29,6 @@ namespace SdlDotNet
 	{
 		static readonly Keyboard instance = new Keyboard();
 
-		/// <summary>
-		/// Returns the global instance of this class.
-		/// </summary>
-//		static Keyboard()
-//		{
-//		}
-
 		Keyboard() 
 		{
 		}
