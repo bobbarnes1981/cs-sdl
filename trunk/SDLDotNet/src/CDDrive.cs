@@ -53,7 +53,7 @@ namespace SdlDotNet
 			}
 			else
 			{
-				base.Handle = handle;
+				this.Handle = handle;
 				this.index = index;
 			}
 		}
@@ -122,17 +122,28 @@ namespace SdlDotNet
 			}
 		}
 
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public override bool HasBeenDisposed
+//		{
+//			get
+//			{
+//				return this.disposed;
+//			}
+//		}
+
 		/// <summary>
 		/// Closes CDDrive handle
 		/// </summary>
 		/// <remarks>Closes handle to unmanaged SDL resource</remarks>
 		protected override void CloseHandle() 
 		{
-			if (base.Handle != IntPtr.Zero)
+			if (this.Handle != IntPtr.Zero)
 			{
-				Sdl.SDL_CDClose(base.Handle);
+				Sdl.SDL_CDClose(this.Handle);
 				GC.KeepAlive(this);
-				base.Handle = IntPtr.Zero;
+				this.Handle = IntPtr.Zero;
 			}
 		}
 
@@ -144,7 +155,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(base.Handle);
+				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(this.Handle);
 				return (status); 
 			}
 		}
@@ -157,7 +168,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(base.Handle);
+				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(this.Handle);
 				if (status == CDStatus.Playing)
 				{
 					return true;
@@ -177,7 +188,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(base.Handle);
+				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(this.Handle);
 				if (status == CDStatus.TrayEmpty)
 				{
 					return true;
@@ -197,7 +208,7 @@ namespace SdlDotNet
 		{
 			get 
 			{ 
-				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(base.Handle);
+				CDStatus status = (CDStatus) Sdl.SDL_CDStatus(this.Handle);
 				if (status == CDStatus.Paused)
 				{
 					return true;
@@ -222,7 +233,7 @@ namespace SdlDotNet
 				{
 					Sdl.SDL_CD cd = 
 						(Sdl.SDL_CD)Marshal.PtrToStructure(
-						base.Handle, typeof(Sdl.SDL_CD));
+						this.Handle, typeof(Sdl.SDL_CD));
 
 					if (cd.track[trackNumber].type == (byte) CDTrackType.Audio)
 					{
@@ -252,7 +263,7 @@ namespace SdlDotNet
 				{
 					Sdl.SDL_CD cd = 
 						(Sdl.SDL_CD)Marshal.PtrToStructure(
-						base.Handle, typeof(Sdl.SDL_CD));
+						this.Handle, typeof(Sdl.SDL_CD));
 
 					if (cd.track[trackNumber].type == (byte) CDTrackType.Data)
 					{
@@ -282,7 +293,7 @@ namespace SdlDotNet
 				{
 					Sdl.SDL_CD cd = 
 						(Sdl.SDL_CD)Marshal.PtrToStructure(
-						base.Handle, typeof(Sdl.SDL_CD));
+						this.Handle, typeof(Sdl.SDL_CD));
 					return (int)Timer.FramesToSeconds(cd.track[trackNumber].length);
 				}
 				else 
@@ -304,7 +315,7 @@ namespace SdlDotNet
 				{
 					Sdl.SDL_CD cd = 
 						(Sdl.SDL_CD)Marshal.PtrToStructure(
-						base.Handle, typeof(Sdl.SDL_CD));
+						this.Handle, typeof(Sdl.SDL_CD));
 					return (int)Timer.FramesToSeconds(cd.track[trackNumber].offset);
 				}
 				else 
@@ -345,7 +356,7 @@ namespace SdlDotNet
 		public void PlayTracks(int startTrack, int numberOfTracks) 
 		{
 			int result = Sdl.SDL_CDPlayTracks(
-				base.Handle, startTrack, 0, numberOfTracks, 0);
+				this.Handle, startTrack, 0, numberOfTracks, 0);
 			GC.KeepAlive(this);
 			if (result == (int) SdlFlag.Error)
 			{
@@ -377,7 +388,7 @@ namespace SdlDotNet
 			int numberOfTracks, int numberOfFrames) 
 		{
 			int result = Sdl.SDL_CDPlayTracks(
-				base.Handle, startTrack, startFrame, 
+				this.Handle, startTrack, startFrame, 
 				numberOfTracks, numberOfFrames);
 			GC.KeepAlive(this);
 			if (result == (int) SdlFlag.Error)
@@ -394,7 +405,7 @@ namespace SdlDotNet
 		public void PlayTracks(int startTrack)
 		{
 			int result = Sdl.SDL_CDPlayTracks(
-				base.Handle, startTrack, 0, 0, 0);
+				this.Handle, startTrack, 0, 0, 0);
 			GC.KeepAlive(this);
 			if (result == (int) SdlFlag.Error)
 			{
@@ -409,7 +420,7 @@ namespace SdlDotNet
 		public void Play()
 		{
 			int result = Sdl.SDL_CDPlayTracks(
-				base.Handle, 0, 0, 0, 0);
+				this.Handle, 0, 0, 0, 0);
 			GC.KeepAlive(this);
 			if (result == (int) SdlFlag.Error)
 			{
@@ -423,7 +434,7 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public void Pause() 
 		{
-			int result = Sdl.SDL_CDPause(base.Handle);
+			int result = Sdl.SDL_CDPause(this.Handle);
 			GC.KeepAlive(this);
 			if (result == (int) SdlFlag.Error)
 			{
@@ -436,7 +447,7 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public void Resume() 
 		{
-			int result = Sdl.SDL_CDResume(base.Handle);
+			int result = Sdl.SDL_CDResume(this.Handle);
 			GC.KeepAlive(this);
 			if (result == (int) SdlFlag.Error)
 			{
@@ -449,7 +460,7 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public void Stop() 
 		{
-			int result = Sdl.SDL_CDStop(base.Handle);
+			int result = Sdl.SDL_CDStop(this.Handle);
 			GC.KeepAlive(this);
 			if ( result == (int) SdlFlag.Error)
 			{
@@ -464,7 +475,7 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public void Eject() 
 		{
-			int result = Sdl.SDL_CDEject(base.Handle);
+			int result = Sdl.SDL_CDEject(this.Handle);
 			GC.KeepAlive(this);
 			if ( result == (int) SdlFlag.Error)
 			{
@@ -486,7 +497,7 @@ namespace SdlDotNet
 				{
 					Sdl.SDL_CD cd = 
 						(Sdl.SDL_CD)Marshal.PtrToStructure(
-						base.Handle, typeof(Sdl.SDL_CD));
+						this.Handle, typeof(Sdl.SDL_CD));
 					return cd.numtracks;
 				}
 				else 
@@ -503,11 +514,11 @@ namespace SdlDotNet
 		{
 			get 
 			{
-				Sdl.SDL_CDStatus(base.Handle);
+				Sdl.SDL_CDStatus(this.Handle);
 				GC.KeepAlive(this);
 				Sdl.SDL_CD cd = 
 					(Sdl.SDL_CD)Marshal.PtrToStructure(
-					base.Handle, typeof(Sdl.SDL_CD));
+					this.Handle, typeof(Sdl.SDL_CD));
 				
 				return cd.cur_track;
 			}
@@ -520,11 +531,11 @@ namespace SdlDotNet
 		{
 			get 
 			{
-				Sdl.SDL_CDStatus(base.Handle);
+				Sdl.SDL_CDStatus(this.Handle);
 				GC.KeepAlive(this);
 				Sdl.SDL_CD cd = 
 					(Sdl.SDL_CD)Marshal.PtrToStructure(
-					base.Handle, typeof(Sdl.SDL_CD));
+					this.Handle, typeof(Sdl.SDL_CD));
 				return cd.cur_frame;
 			}
 		}

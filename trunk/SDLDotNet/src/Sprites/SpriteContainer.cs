@@ -35,40 +35,19 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		public SpriteContainer() : base()
-		{
-		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="coordinates"></param>
-//		public SpriteContainer(Vector coordinates) : base(coordinates)
-//		{
-//		}
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="coordinates"></param>
 		/// <param name="surface"></param>
-		public SpriteContainer(Surface surface, Vector coordinates) : base(surface, coordinates)
+		public SpriteContainer(Surface surface, Vector coordinates) : 
+			base(surface, coordinates)
 		{
 		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="rectangle"></param>
-//		public SpriteContainer(Rectangle rectangle) : base(rectangle)
-//		{
-//		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="surface"></param>
-		public SpriteContainer(Surface surface) : base(surface)
+		public SpriteContainer(Surface surface) : 
+			base(surface)
 		{
 		}
 
@@ -77,7 +56,8 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="surface"></param>
 		/// <param name="rectangle"></param>
-		public SpriteContainer(Surface surface, Rectangle rectangle) : base(surface, rectangle)
+		public SpriteContainer(Surface surface, Rectangle rectangle) : 
+			base(surface, rectangle)
 		{
 		}
 
@@ -87,7 +67,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="surface"></param>
 		/// <param name="rectangle"></param>
 		/// <param name="z"></param>
-		public SpriteContainer(Surface surface, Rectangle rectangle, int z) : base(surface, rectangle, z)
+		public SpriteContainer(Surface surface, Rectangle rectangle, int z) : 
+base(surface, rectangle, z)
 		{
 		}
 
@@ -100,6 +81,39 @@ namespace SdlDotNet.Sprites
 			get
 			{
 				return sprites;
+			}
+		}
+
+		private bool disposed;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+//						this.Surface.Dispose();
+//						foreach (Sprite s in this.sprites)
+//						{
+//							IDisposable disposableObj = s as IDisposable;
+//							if (disposableObj != null)
+//							{
+//								disposableObj.Dispose( );
+//							}
+//						}
+					}
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
 			}
 		}
 

@@ -101,11 +101,9 @@ namespace SdlDotNet
 				{
 				}
 				CloseHandle();
-				//GC.KeepAlive(this);
 				GC.SuppressFinalize(this);
 				this.disposed = true;
 			}
-			this.disposed = true;
 		}
 
 		/// <summary>
@@ -113,7 +111,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <remarks>Used to close handle to unmanaged SDL resources</remarks>
 		protected abstract void CloseHandle();
-
+		
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
