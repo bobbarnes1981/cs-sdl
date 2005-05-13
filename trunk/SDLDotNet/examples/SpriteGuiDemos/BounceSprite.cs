@@ -84,5 +84,30 @@ namespace SdlDotNet.Examples
 				dy = ((-1) * rand.Next(1, 10));
 			}
 		}
+
+		private bool disposed;
+
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+					}
+					this.disposed = true;
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
+			}
+		}
 	}
 }

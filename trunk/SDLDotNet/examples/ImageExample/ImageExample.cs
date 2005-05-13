@@ -110,6 +110,7 @@ namespace SdlDotNet.Examples
 				}
 
 				Surface Tree = new Surface(filepath + imagepath + "Tree.bmp");
+				Surface treeClone = (Surface)Tree.Clone();
 
 				Tree.TransparentColor = System.Drawing.Color.Magenta;
 				Tree.Transparent = true;
@@ -141,6 +142,7 @@ namespace SdlDotNet.Examples
 						Tree.AlphaValue++;
 
 						surf.Blit(Tree, new Rectangle(0,0,20,20));
+						surf.Blit(treeClone, new Rectangle(0,100,20,20));
 
 						// Draw Jeep;
 						if (JeepFrame == 15) 

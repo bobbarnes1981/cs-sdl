@@ -102,16 +102,6 @@ namespace SdlDotNet.Examples
 		}
 		#endregion
 
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public void EnableTickEvent()
-//		{
-//			Events.TickEvent += new TickEventHandler(OnTick);
-//		}
-
-
 		#region Mode Switching
 		/// <summary>
 		/// Indicates to the demo page that it should start displaying its
