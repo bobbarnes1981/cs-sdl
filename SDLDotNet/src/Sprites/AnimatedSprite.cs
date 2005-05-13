@@ -159,5 +159,33 @@ namespace SdlDotNet.Sprites
 
 		#region Properties
 		#endregion
+
+		private bool disposed;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected override void Dispose(bool disposing)
+		{
+			if (!disposed)
+			{
+				try
+				{
+					if (disposing)
+					{
+						foreach (Surface s in this.surfaces)
+						{
+							s.Dispose();
+						}
+					}
+				}
+				finally
+				{
+					base.Dispose(disposing);
+					this.disposed = true;
+				}
+			}
+		}
 	}
 }

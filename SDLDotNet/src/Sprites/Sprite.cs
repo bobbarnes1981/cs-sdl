@@ -737,9 +737,10 @@ namespace SdlDotNet.Sprites
 				if (disposing)
 				{
 					this.surf.Dispose();
+					GC.SuppressFinalize(this);
 				}
+				this.disposed = true;
 			}
-			this.disposed = true;
 		}
 		/// <summary>
 		/// 

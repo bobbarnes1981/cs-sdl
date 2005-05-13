@@ -41,9 +41,6 @@ namespace SdlDotNet.Sprites
 		{
 			this.textItem = textItem;
 			this.font = font;
-			//this.Surface = font.Render(TextString, color);
-			//this.Rectangle = this.Surface.Rectangle;
-			//this.Position = new Point(0, 0);
 		}
 
 		/// <summary>
@@ -60,9 +57,6 @@ namespace SdlDotNet.Sprites
 			this.textItem = textItem;
 			this.font = font;
 			this.color = color;
-			//this.Surface = font.Render(TextString, color);
-			//this.Rectangle = this.Surface.Rectangle;
-			//this.Position = new Point(0, 0);
 		}
 		/// <summary>
 		/// 
@@ -79,8 +73,6 @@ namespace SdlDotNet.Sprites
 			: this(textItem, font, textColor)
 		{
 			this.backgroundColor = backgroundColor;
-			//this.Surface = font.Render(TextString, color);
-			//this.Position = new Point(0, 0);
 		}
 
 		/// <summary>
@@ -272,7 +264,6 @@ namespace SdlDotNet.Sprites
 
 		private bool disposed;
 
-
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
@@ -285,7 +276,6 @@ namespace SdlDotNet.Sprites
 				{
 					if (disposing)
 					{
-						this.Surface.Dispose();
 						this.font.Dispose();
 					}
 					this.disposed = true;

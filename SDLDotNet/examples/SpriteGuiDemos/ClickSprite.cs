@@ -84,7 +84,6 @@ namespace SdlDotNet.Examples
 
 		private bool disposed;
 
-
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
@@ -97,7 +96,6 @@ namespace SdlDotNet.Examples
 				{
 					if (disposing)
 					{
-						this.Surface.Dispose();
 					}
 					this.disposed = true;
 				}

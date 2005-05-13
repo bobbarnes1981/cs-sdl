@@ -97,15 +97,10 @@ base(surface, rectangle, z)
 				{
 					if (disposing)
 					{
-//						this.Surface.Dispose();
-//						foreach (Sprite s in this.sprites)
-//						{
-//							IDisposable disposableObj = s as IDisposable;
-//							if (disposableObj != null)
-//							{
-//								disposableObj.Dispose( );
-//							}
-//						}
+						foreach (Sprite s in this.sprites)
+						{
+							s.Dispose();							
+						}
 					}
 					this.disposed = true;
 				}

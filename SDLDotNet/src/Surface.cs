@@ -33,7 +33,7 @@ namespace SdlDotNet
 	/// You can create instances of this class with the methods in the Video 
 	/// object.
 	/// </summary>
-	public class Surface : BaseSdlResource
+	public class Surface : BaseSdlResource, ICloneable
 	{
 		/// <summary>
 		/// Private field. Used by the Transparent property 
@@ -223,10 +223,17 @@ namespace SdlDotNet
 		/// </summary>
 		protected override void CloseHandle() 
 		{
-			if (this.Handle != IntPtr.Zero)
+			try
 			{
-				Sdl.SDL_FreeSurface(this.Handle);
-				GC.KeepAlive(this);
+				if (this.Handle != IntPtr.Zero)
+				{
+					Sdl.SDL_FreeSurface(this.Handle);
+					GC.KeepAlive(this);
+					this.Handle = IntPtr.Zero;
+				}
+			}
+			catch (NullReferenceException)
+			{
 				this.Handle = IntPtr.Zero;
 			}
 		}
@@ -1692,6 +1699,25 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Uses a Transformation object to perform rotation, zooming and scaling
+		/// </summary>
+		/// <param name="transform"></param>
+		public void Transform(Transformation transform)
+		{
+			if (transform.Zoom != 1.0 && transform.Zoom != 0.0)
+			{
+				this.RotationZoom(transform.DegreesOfRotation, transform.Zoom, transform.AntiAlias);
+			}
+			if (transform.ScaleX != 1.0 && 
+				transform.ScaleY != 1.0 && 
+				transform.ScaleX != 0.0 && 
+				transform.ScaleY != 0.0)
+			{
+				this.Scale(transform.ScaleX, transform.ScaleY, transform.AntiAlias);
+			}
+		}
+
+		/// <summary>
 		/// Get/set the transparency of the image.  
 		/// </summary>
 		public bool Transparent
@@ -1991,5 +2017,34 @@ namespace SdlDotNet
 				return this.SurfaceStruct.flags;
 			}
 		}	
+		#region ICloneable Members
+		/// <summary>
+		/// Creates a shallow copy of the Surface.
+		/// </summary>
+		/// <returns>
+		/// Returns an object that needs to be cast to a Surface
+		/// </returns>
+		public object Clone()
+		{
+			return Clone(false);
+		}
+
+		/// <summary>
+		/// Creates a copy of the Surface
+		/// </summary>
+		/// <param name="doDeepCopy">If true, a deep copy is created</param>
+		/// <returns></returns>
+		public object Clone(bool doDeepCopy)
+		{
+			if (doDeepCopy)
+			{
+				return (new Surface(SdlGfx.zoomSurface(this.Handle, 1, 1, SdlGfx.SMOOTHING_OFF)));
+			}
+			else
+			{
+				return (this.MemberwiseClone());
+			}
+		}
+		#endregion
 	}
 }

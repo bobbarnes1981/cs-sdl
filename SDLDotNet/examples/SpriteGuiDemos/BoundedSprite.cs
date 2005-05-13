@@ -105,7 +105,6 @@ namespace SdlDotNet.Examples
 				{
 					if (disposing)
 					{
-						this.Surface.Dispose();
 					}
 					this.disposed = true;
 				}

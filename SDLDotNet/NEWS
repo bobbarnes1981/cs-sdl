@@ -1,14 +1,21 @@
-3.1.0alpha2
+3.1.0beta2
 David Hudson xx May 2005
+* Surface is now Clonable, both shallow and deep.
+* Added Transformation object to help rotate, zoom or scale Surfaces.
+
+3.1.0beta1
+David Hudson 13 May 2005
 * Fixed several memory leaks.
 * Added two tutorials. SimpleExample is from Terry Price and ParticleEngine is from Miguel De Sousa.
 * Made the VideoModes flags into an enum.
 * The Surface.Fill() method now returns the updated rectangles instead of void
 * Many more FXCop fixes.
-* TODO The GUI demo is now broken.
-* TODO Make sure every method has some documentation.
-* TODO Should Music and VideoInfo be nested classes in Mixer and Video respectively?
+* GUI demo works but is not complete. It still has memory leaks and missing functionality.
 * Fixed major color bug in Surface primitives.
+* Removed some redundant enums from SdlFlags.
+* Fixed problems with Surface constructors.
+* Removed ChannelList class.
+* TODO: Sprite tutorial.
 
 3.1.0alpha1
 David Hudson 27 Apr 2005

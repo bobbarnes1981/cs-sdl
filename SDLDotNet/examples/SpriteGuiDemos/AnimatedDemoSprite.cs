@@ -100,15 +100,13 @@ namespace SdlDotNet.Examples
 		/// <param name="disposing"></param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			if (!disposed)
 			{
 				try
 				{
 					if (disposing)
 					{
-						this.Surface.Dispose();
 					}
-					this.disposed = true;
 				}
 				finally
 				{
