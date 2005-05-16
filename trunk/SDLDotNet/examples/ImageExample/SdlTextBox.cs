@@ -83,7 +83,7 @@ namespace SdlDotNet.Examples
 			y = posY;
 			length = textLength;
 			boxText = "";
-			boxFont = new SdlDotNet.Font("../../Vera.ttf", 12); //font
+			boxFont = new SdlDotNet.Font("../../FreeSans.ttf", 12); //font
 			
 			//Events
 			Events.MouseButtonDown += new MouseButtonEventHandler(Events_MouseButtonDown);
