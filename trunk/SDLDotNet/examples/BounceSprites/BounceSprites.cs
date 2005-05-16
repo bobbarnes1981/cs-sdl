@@ -75,7 +75,6 @@ namespace SdlDotNet.Examples
 					new SurfaceCollection("../../Data/marble" + (rand.Next() % 2 + 1), ".png");
 				BounceSprite bounceSprite = 
 					new BounceSprite(marbleSurfaces,
-					screen.Rectangle, 
 					new Vector(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
 					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom),
 					0));
