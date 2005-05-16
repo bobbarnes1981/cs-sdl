@@ -1701,19 +1701,19 @@ namespace SdlDotNet
 		/// <summary>
 		/// Uses a Transformation object to perform rotation, zooming and scaling
 		/// </summary>
-		/// <param name="transform"></param>
-		public void Transform(Transformation transform)
+		/// <param name="transformation"></param>
+		public void Transform(Transformation transformation)
 		{
-			if (transform.Zoom != 1.0 && transform.Zoom != 0.0)
+			if (Math.Round(transformation.Zoom, 1) != 1.0 && Math.Round(transformation.Zoom, 1) != 0.0)
 			{
-				this.RotationZoom(transform.DegreesOfRotation, transform.Zoom, transform.AntiAlias);
+				this.RotationZoom(transformation.DegreesOfRotation, transformation.Zoom, transformation.AntiAlias);
 			}
-			if (transform.ScaleX != 1.0 && 
-				transform.ScaleY != 1.0 && 
-				transform.ScaleX != 0.0 && 
-				transform.ScaleY != 0.0)
+			if (Math.Round(transformation.ScaleX, 1) != 1.0 && 
+				Math.Round(transformation.ScaleY, 1) != 1.0 && 
+				Math.Round(transformation.ScaleX, 1) != 0.0 && 
+				Math.Round(transformation.ScaleY, 1) != 0.0)
 			{
-				this.Scale(transform.ScaleX, transform.ScaleY, transform.AntiAlias);
+				this.Scale(transformation.ScaleX, transformation.ScaleY, transformation.AntiAlias);
 			}
 		}
 

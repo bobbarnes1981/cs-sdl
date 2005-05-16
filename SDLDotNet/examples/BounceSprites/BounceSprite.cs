@@ -30,7 +30,6 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class BounceSprite : AnimatedSprite
 	{
-		Random rand = new Random();
 		private int dx = 10;
 		private int dy = 10;
 		private Rectangle bounds = new Rectangle();
@@ -39,9 +38,8 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="d"></param>
-		/// <param name="rect"></param>
 		/// <param name="coordinates"></param>
-		public BounceSprite(SurfaceCollection d, Rectangle rect, Vector coordinates)
+		public BounceSprite(SurfaceCollection d, Vector coordinates)
 			: base(d, coordinates)
 		{
 			this.bounds = 
