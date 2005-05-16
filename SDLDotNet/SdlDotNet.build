@@ -63,6 +63,7 @@
 	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="clean" />
 	<nant buildfile="${examples.dir}/BombRun/BombRun.build" target="clean" />
 	<nant buildfile="${examples.dir}/Bounce/Bounce.build" target="clean" />
+	<nant buildfile="${examples.dir}/BounceSprites/BounceSprites.build" target="clean" />
 	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="clean" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="clean" />
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="clean" />
@@ -96,6 +97,7 @@
 	<echo message="Building examples" />
 	<nant buildfile="${examples.dir}/BombRun/BombRun.build" target="build" />
 	<nant buildfile="${examples.dir}/Bounce/Bounce.build" target="build" />
+	<nant buildfile="${examples.dir}/BounceSprites/BounceSprites.build" target="build" />
 	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="build" />
 	<nant buildfile="${examples.dir}/Gears/Gears.build" target="build" />
 	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
@@ -138,6 +140,9 @@
 		<include name="examples/Bounce/**" />
 		<exclude name="examples/Bounce/*j.user" />
 		<exclude name="examples/Bounce/${obj.dir}" />
+		<include name="examples/BounceSprites/**" />
+		<exclude name="examples/BounceSprites/*j.user" />
+		<exclude name="examples/BounceSprites/${obj.dir}" />
 		<include name="examples/FontExample/*" />
 		<include name="examples/FontExample/${build.dir}/*" />
 		<exclude name="examples/FontExample/*j.user" />

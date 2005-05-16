@@ -829,7 +829,7 @@ namespace SdlDotNet
 		#endregion
 
 		#region Tick Duration
-		private static int tickSpan = 1000;
+		private static int tickSpan = 50;
 
 		/// <summary>
 		/// Ticks per second
