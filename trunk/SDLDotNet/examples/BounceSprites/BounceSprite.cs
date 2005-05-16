@@ -30,10 +30,13 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class BounceSprite : AnimatedSprite
 	{
+		#region Fields
 		private int dx = 10;
 		private int dy = 10;
 		private Rectangle bounds = new Rectangle();
+		#endregion Fields
 
+		#region Constructor
 		/// <summary>
 		/// 
 		/// </summary>
@@ -48,7 +51,9 @@ namespace SdlDotNet.Examples
 				(int) d.Size.Height);
 			this.AllowDrag = true;
 		}
+		#endregion Constructor
 
+		#region Event Update Methods
 		/// <summary>
 		/// 
 		/// </summary>
@@ -156,7 +161,9 @@ namespace SdlDotNet.Examples
 				this.Y += args.RelativeY;
 			}
 		}
+		#endregion Event Update Methods
 
+		#region IDisposable
 		private bool disposed;
 
 		/// <summary>
@@ -181,5 +188,6 @@ namespace SdlDotNet.Examples
 				}
 			}
 		}
+		#endregion IDisposable
 	}
 }

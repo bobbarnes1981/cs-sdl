@@ -32,6 +32,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	class BounceSprites
 	{
+		#region Fields
 		private Surface screen;
 		private bool quitflag;
 		private SpriteCollection master = new SpriteCollection();
@@ -39,7 +40,9 @@ namespace SdlDotNet.Examples
 		private int height = 600;
 		private int maxBalls = 10;
 		private Random rand = new Random();
+		#endregion Fields
 
+		#region EventHandler Methods
 		private void OnKeyboardDown(object sender, KeyboardEventArgs e) 
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
@@ -58,7 +61,9 @@ namespace SdlDotNet.Examples
 			screen.Blit(master); 
 			screen.Update();
 		}
+		#endregion EventHandler Methods
 
+		#region Methods
 		/// <summary>
 		/// 
 		/// </summary>
@@ -72,7 +77,7 @@ namespace SdlDotNet.Examples
 				Thread.Sleep(10);
 
 				SurfaceCollection marbleSurfaces = 
-					new SurfaceCollection("../../Data/marble" + (rand.Next() % 2 + 1), ".png");
+					new SurfaceCollection("../../Data/marble" + (i % 2 + 1), ".png");
 				BounceSprite bounceSprite = 
 					new BounceSprite(marbleSurfaces,
 					new Vector(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
@@ -114,5 +119,6 @@ namespace SdlDotNet.Examples
 			BounceSprites bounce = new BounceSprites();
 			bounce.Go();
 		}
+		#endregion Methods
 	}
 }
