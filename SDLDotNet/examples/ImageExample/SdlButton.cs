@@ -132,7 +132,7 @@ namespace SdlDotNet.Examples
 			buttonColor = color;
 			buttonText = text;
 
-			buttonFont = new SdlDotNet.Font("../../Vera.ttf", 12);
+			buttonFont = new SdlDotNet.Font("../../FreeSans.ttf", 12);
 			//Events
 			Events.MouseButtonDown += new MouseButtonEventHandler(Events_MouseButtonDown);
 		}
