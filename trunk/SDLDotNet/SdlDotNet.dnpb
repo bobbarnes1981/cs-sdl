@@ -21,6 +21,9 @@
 		<WarningLevel>1</WarningLevel>
 	    </Options>
 	</Configuration>
+	<Files>
+		<File buildAction="Content">SdlDotNet.build</File>
+	</Files>
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
 	    <Configuration name="Debug">
 		<Options>
