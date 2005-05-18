@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+using System;
+using System.Drawing;
+
 using SdlDotNet;
 using SdlDotNet.Sprites;
-using System.Drawing;
-using System;
-using System.Threading;
 
 namespace SdlDotNet.Examples
 {
@@ -31,8 +31,12 @@ namespace SdlDotNet.Examples
 	public class BounceSprite : AnimatedSprite
 	{
 		#region Fields
+		//Move sprites 10 pixels per tick
 		private int dx = 10;
 		private int dy = 10;
+
+		//Sprites will be bounded by the screen edges minus 
+		//their size so they will not go off the screen
 		private Rectangle bounds = new Rectangle();
 		#endregion Fields
 
@@ -45,21 +49,25 @@ namespace SdlDotNet.Examples
 		public BounceSprite(SurfaceCollection d, Vector coordinates)
 			: base(d, coordinates)
 		{
+			//Sprites will be bounded by the screen edges minus 
+			//their size so they will not go off the screen
 			this.bounds = 
 				new Rectangle(0, 0, Video.Screen.Rectangle.Width - 
 				(int) d.Size.Width, Video.Screen.Rectangle.Height - 
 				(int) d.Size.Height);
+			//The sprite can be dragged
 			this.AllowDrag = true;
 		}
 		#endregion Constructor
 
 		#region Event Update Methods
 		/// <summary>
-		/// 
+		/// Every tick will update the animation frame
 		/// </summary>
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			//Call the base method
 			base.Update(args);
 
 			// Increment the frame
@@ -71,8 +79,10 @@ namespace SdlDotNet.Examples
 			{
 				Frame--;
 			}
+			//set the surface to point to the new frame. This creates the animation
 			this.Surface = this.Surfaces[Frame];
 
+			//Change the sprite coordinates if the sprite is not being dragged
 			if (!this.BeingDragged)
 			{
 				this.X += dx;
@@ -101,7 +111,7 @@ namespace SdlDotNet.Examples
 					this.X = bounds.Right;
 				}
 
-				// Normalize the directions
+				// Revrse the directions when the sprite hits an edge
 				if (this.X == bounds.Left)
 				{
 					dx = (Math.Abs(this.dx));
@@ -124,7 +134,8 @@ namespace SdlDotNet.Examples
 			}
 		}
 		/// <summary>
-		/// 
+		/// If the mouse click hits a sprite, 
+		/// then the sprite will be marked as 'being dragged'
 		/// </summary>
 		/// <param name="args"></param>
 		public override void Update(MouseButtonEventArgs args)

@@ -1,3 +1,10 @@
+Future changes (as of May 2005):
+
+* Add more sophisticated SpriteCollection and/or Sprite rendering logic (like Pygame). instead of updating all of the sprites, we could just update the changed rectangles.
+* Add more docs and tutorials.
+* Create installer for windows and rpms/ebuild/debs for Linux.
+* Fix build process to build on Mono.
+
 Jan 12, 2005
 
 Latest changes to the C dll's.

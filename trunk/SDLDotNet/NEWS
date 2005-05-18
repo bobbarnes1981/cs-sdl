@@ -1,8 +1,8 @@
-3.1.0beta2
-David Hudson xx May 2005
+3.1.0
+David Hudson 18 May 2005
 * Surface is now Clonable, both shallow and deep.
 * Added Transformation object to help rotate, zoom or scale Surfaces.
-* Added BounceSprite demo
+* Added BounceSprite demo and tutorial
 
 3.1.0beta1
 David Hudson 13 May 2005
