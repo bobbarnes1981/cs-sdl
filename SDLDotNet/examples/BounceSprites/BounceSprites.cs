@@ -19,7 +19,6 @@
 
 using System;
 using System.Drawing;
-using System.Threading;
 using System.Collections;
 
 using SdlDotNet;
@@ -28,21 +27,25 @@ using SdlDotNet.Sprites;
 namespace SdlDotNet.Examples 
 {
 	/// <summary>
-	/// Demo of Bouncing Balls using Sprites
+	/// Demo of Bouncing Balls using Sprites. 
+	/// The Bouncesprites will respond to Tick Events by spinning. 
+	/// You can click on each sprite and move them around the 
+	/// screen as well (MouseButton and MouseMotion events).
 	/// </summary>
 	class BounceSprites
 	{
 		#region Fields
-		private Surface screen;
-		private bool quitflag;
-		private SpriteCollection master = new SpriteCollection();
-		private int width = 800;
-		private int height = 600;
-		private int maxBalls = 10;
-		private Random rand = new Random();
+		private Surface screen; //video screen
+		private bool quitflag; //flag to tell the app to shutdown
+		private SpriteCollection master = new SpriteCollection(); //holds all sprites
+		private int width = 800; //screen width
+		private int height = 600; //screen height
+		private int maxBalls = 10; //number of balls to display
+		private Random rand = new Random(); //randomizer
 		#endregion Fields
 
 		#region EventHandler Methods
+		//Handles keyboard events. The 'Escape' and 'Q'keys will cause the app to exit
 		private void OnKeyboardDown(object sender, KeyboardEventArgs e) 
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
@@ -50,11 +53,17 @@ namespace SdlDotNet.Examples
 				quitflag = true;
 			}
 		}
+
+		//The app will exit if the 'x' in the window is clicked
 		private void OnQuit(object sender, QuitEventArgs e) 
 		{
 			quitflag = true;
 		}
 
+		//A ticker is running to update the sprites constantly.
+		//This method will fill the screen with black to clear it of the sprites.
+		//Then it will Blit all of the sprites to the screen.
+		//Then it will refresh the screen and display it.
 		private void OnTick(object sender, TickEventArgs args)
 		{	
 			screen.Fill(Color.Black);
@@ -64,35 +73,41 @@ namespace SdlDotNet.Examples
 		#endregion EventHandler Methods
 
 		#region Methods
-		/// <summary>
-		/// 
-		/// </summary>
+		//Main program loop
 		private void Go() 
 		{
+			//Set up screen
 			screen = Video.SetVideoModeWindow(width, height, true);
 			Video.WindowCaption = "Bounce Sprites";
 
+			//instantiate each marble
 			for (int i = 0; i < this.maxBalls; i++)
 			{
-				Thread.Sleep(10);
-
+				//This loads the various images (provided by Moonfire) 
+				// into a SurfaceCollection for animation
 				SurfaceCollection marbleSurfaces = 
 					new SurfaceCollection("../../Data/marble" + (i % 2 + 1), ".png");
+				//Create a new Sprite at a random lcation on the screen
 				BounceSprite bounceSprite = 
 					new BounceSprite(marbleSurfaces,
 					new Vector(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
 					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom),
 					0));
+				//Add the sprite to the SpriteCollection
 				master.Add(bounceSprite);
 			}
+			//The collection will respond to mouse button clicks, mouse movement and the ticker.
 			master.EnableMouseButtonEvent();
 			master.EnableMouseMotionEvent();
 			master.EnableTickEvent();
       
+			//These bind the events to the above methods.
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
 			Events.Quit += new QuitEventHandler(this.OnQuit);
 			Events.TickEvent += new TickEventHandler(this.OnTick);
+
+			//Start the event ticker
 			Events.StartTicker();
 
 			try 
@@ -103,6 +118,7 @@ namespace SdlDotNet.Examples
 					while (Events.Poll()) 
 					{} 
 				}
+				//Stop the ticker when the app quits.
 				Events.StopTicker();
 			} 
 			catch 

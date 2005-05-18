@@ -539,6 +539,7 @@
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
+		<File buildAction="Content">BounceSprites.html</File>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>

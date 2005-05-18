@@ -17,7 +17,7 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="3.1.0beta2" />
+    <property name="project.version" value="3.1.0" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
@@ -274,6 +274,11 @@
 	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.tutorials.dir}">
 	    <fileset basedir="${examples.dir}/SimpleExample">
 		<include name="SimpleExample.pdf" />
+	    </fileset>
+	</copy>
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.tutorials.dir}">
+	    <fileset basedir="${examples.dir}/BounceSprites">
+		<include name="BounceSprites.html" />
 	    </fileset>
 	</copy>
     </target>
