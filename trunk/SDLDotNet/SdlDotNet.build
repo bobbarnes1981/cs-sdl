@@ -60,27 +60,19 @@
 	<echo message="Deleting all builds from all configurations" />
 	<delete dir="${nant.project.basedir}/${bin.dir}" failonerror="false" />
 	<delete dir="${nant.project.basedir}/${obj.dir}" failonerror="false" />
-	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="clean" />
-	<nant buildfile="${examples.dir}/BombRun/BombRun.build" target="clean" />
-	<nant buildfile="${examples.dir}/Bounce/Bounce.build" target="clean" />
-	<nant buildfile="${examples.dir}/BounceSprites/BounceSprites.build" target="clean" />
-	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="clean" />
-	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="clean" />
-	<nant buildfile="${examples.dir}/Gears/Gears.build" target="clean" />
-	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="clean" />
-	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="clean" />
-	<nant buildfile="${examples.dir}/GuiExample/GuiExample.build" target="clean" />
-	<nant buildfile="${examples.dir}/SpriteGuiDemos/SpriteGuiDemos.build" target="clean" />
-	<nant buildfile="${examples.dir}/ParticleEngine/ParticleEngine.build" target="clean" />
-	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="clean" />
-	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="clean" />
-	<nant buildfile="${examples.dir}/SimpleExample/SimpleExample.build" target="clean" />
-	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="clean" />
-	<nant buildfile="${examples.dir}/SnowDemo/SnowDemo.build" target="clean" />
-	<nant buildfile="${examples.dir}/Tests/Tests.build" target="clean" />
-	<nant buildfile="${examples.dir}/Triad/Triad.build" target="clean" />
-	<nant buildfile="${examples.dir}/WeaponFire/WeaponFire.build" target="clean" />
+	<foreach item="File" property="filename">
+	    <in>
+		<items>
+		    <include name="${examples.dir}/**/*.build" />
+		</items>
+	    </in>
+	    <do>
+		<echo message="${filename}" />
+		<nant buildfile="${filename}" target="clean" />
+	    </do>
+	</foreach>
     </target>
+
 
     <target name="build" depends="init" description="Builds current configuration">
 	<!-- build SDLDotNet assembly -->
@@ -95,25 +87,17 @@
 
     <target name="examples" depends="build" description="Build examples">
 	<echo message="Building examples" />
-	<nant buildfile="${examples.dir}/BombRun/BombRun.build" target="build" />
-	<nant buildfile="${examples.dir}/Bounce/Bounce.build" target="build" />
-	<nant buildfile="${examples.dir}/BounceSprites/BounceSprites.build" target="build" />
-	<nant buildfile="${examples.dir}/CDPlayer/CDPlayer.build" target="build" />
-	<nant buildfile="${examples.dir}/Gears/Gears.build" target="build" />
-	<nant buildfile="${examples.dir}/FontExample/FontExample.build" target="build" />
-	<nant buildfile="${examples.dir}/ImageExample/ImageExample.build" target="build" />
-	<nant buildfile="${examples.dir}/ParticleEngine/ParticleEngine.build" target="build" />
-	<nant buildfile="${examples.dir}/PrimitivesExample/PrimitivesExample.build" target="build" />
-	<nant buildfile="${examples.dir}/GuiExample/GuiExample.build" target="build" />
-	<nant buildfile="${examples.dir}/SpriteGuiDemos/SpriteGuiDemos.build" target="build" />
-	<nant buildfile="${examples.dir}/MoviePlayer/MoviePlayer.build" target="build" />
-	<nant buildfile="${examples.dir}/Rectangles/Rectangles.build" target="build" />
-	<nant buildfile="${examples.dir}/SimpleExample/SimpleExample.build" target="build" />
-	<nant buildfile="${examples.dir}/SimpleGame/SimpleGame.build" target="build" />    
-	<nant buildfile="${examples.dir}/SnowDemo/SnowDemo.build" target="build" />
-	<nant buildfile="${examples.dir}/Tests/Tests.build" target="build" />
-	<nant buildfile="${examples.dir}/Triad/Triad.build" target="build" />
-	<nant buildfile="${examples.dir}/WeaponFire/WeaponFire.build" target="build" />
+	<foreach item="File" property="filename">
+	    <in>
+		<items>
+		    <include name="${examples.dir}/**/*.build" />
+		</items>
+	    </in>
+	    <do>
+		<echo message="${filename}" />
+		<nant buildfile="${filename}" target="build" />
+	    </do>
+	</foreach>
     </target>
 
     <target name="buildrelease" depends="clean, setrelease, examples" description="Build all Release assemblies">
@@ -121,7 +105,7 @@
     </target>
 
     <target name="doc" depends="init, build">
-	    <nant buildfile="${src.dir}/${project.name}.dll.build" target="doc" />	
+	<nant buildfile="${src.dir}/${project.name}.dll.build" target="doc" />	
     </target>
 
     <target name="package" depends="buildrelease, doc, copyfiles, zip" description="Package">
@@ -134,85 +118,9 @@
 		<include name="src/**.cs" />
 		<include name="src/**.build" />
 		<include name="src/*.snk" />
-		<include name="examples/BombRun/**" />
-		<exclude name="examples/BombRun/*j.user" />
-		<exclude name="examples/BombRun/${obj.dir}/**" />
-		<include name="examples/Bounce/**" />
-		<exclude name="examples/Bounce/*j.user" />
-		<exclude name="examples/Bounce/${obj.dir}/**" />
-		<include name="examples/BounceSprites/**" />
-		<exclude name="examples/BounceSprites/*j.user" />
-		<exclude name="examples/BounceSprites/${obj.dir}/**" />
-		<include name="examples/FontExample/*" />
-		<include name="examples/FontExample/${build.dir}/*" />
-		<exclude name="examples/FontExample/*j.user" />
-		<exclude name="examples/FontExample/${obj.dir}/**" />
-		<!-- <exclude name="examples/FontExample/${build.dir}/*.dll" /> -->
-		<include name="examples/ImageExample/*" />
-		<include name="examples/ImageExample/images/*" />
-		<include name="examples/ImageExample/images/jeep/*" />
-		<include name="examples/ImageExample/${build.dir}/*" />
-		<include name="examples/ImageExample/${build.dir}/images/*" />
-		<include name="examples/ImageExample/${build.dir}/images/jeep/*" />
-		<exclude name="examples/ImageExample/*j.user" />
-		<exclude name="examples/ImageExample/${obj.dir}/**" />
-		<!-- <exclude name="examples/ImageExample/${build.dir}/*.dll" /> -->
-		<include name="examples/ParticleEngine/*" />
-		<include name="examples/ParticleEngine/${build.dir}/*" />
-		<exclude name="examples/ParticleEngine/*j.user" />
-		<exclude name="examples/ParticleEngine/${obj.dir}/**" />
-		<include name="examples/PrimitivesExample/*" />
-		<include name="examples/PrimitivesExample/${build.dir}/*" />
-		<exclude name="examples/PrimitivesExample/*j.user" />
-		<exclude name="examples/PrimitivesExample/${obj.dir}/**" />
-		<!-- <exclude name="examples/PrimitivesExample/${build.dir}/*.dll" /> -->
-		<include name="examples/Rectangles/*" />
-		<include name="examples/Rectangles/${build.dir}/*" />
-		<exclude name="examples/Rectangles/*j.user" />
-		<exclude name="examples/Rectangles/${obj.dir}/**" />
-		<!-- <exclude name="examples/Rectangles/${build.dir}/*.dll" /> -->
-		<include name="examples/CDPlayer/*" />
-		<include name="examples/CDPlayer/${build.dir}/*" />
-		<exclude name="examples/CDPlayer/*j.user" />
-		<exclude name="examples/CDPlayer/${obj.dir}/**" />
-		<!-- <exclude name="examples/CDPlayer/${build.dir}/*.dll" /> -->
-		<include name="examples/Gears/*" />
-		<include name="examples/Gears/${build.dir}/*" />
-		<exclude name="examples/Gears/*j.user" />
-		<exclude name="examples/Gears/${obj.dir}/**" />
-		<!-- <exclude name="examples/Gears/${build.dir}/*.dll" /> -->
-		<include name="examples/GuiExample/**" />
-		<exclude name="examples/GuiExample/*j.user" />
-		<exclude name="examples/GuiExample/${obj.dir}/**" />
-		<include name="examples/SpriteGuiDemos/**" />
-		<exclude name="examples/SpriteGuiDemos/*j.user" />
-		<exclude name="examples/SpriteGuiDemos/${obj.dir}/**" />
-		<include name="examples/MoviePlayer/*" />
-		<include name="examples/MoviePlayer/${build.dir}/*" />
-		<exclude name="examples/MoviePlayer/*j.user" />
-		<exclude name="examples/MoviePlayer/${obj.dir}/**" />
-		<!-- <exclude name="examples/MoviePlayer/${build.dir}/*.dll" /> -->
-		<include name="examples/SimpleExample/*" />
-		<include name="examples/SimpleExample/${build.dir}/*" />
-		<exclude name="examples/SimpleExample/*j.user" />
-		<exclude name="examples/SimpleExample/${obj.dir}/**" />
-		<include name="examples/SimpleGame/*" />
-		<include name="examples/SimpleGame/${build.dir}/*" />
-		<exclude name="examples/SimpleGame/*j.user" />
-		<exclude name="examples/SimpleGame/${obj.dir}/**" />
-		<!-- <exclude name="examples/SimpleGame/${build.dir}/*.dll" /> -->
-		<include name="examples/SnowDemo/**" />
-		<exclude name="examples/SnowDemo/*j.user" />
-		<exclude name="examples/SnowDemo/${obj.dir}/**" />
-		<include name="examples/Triad/**" />
-		<exclude name="examples/Triad/*j.user" />
-		<exclude name="examples/Triad/${obj.dir}/**" />
-		<include name="examples/Tests/**" />
-		<exclude name="examples/Tests/*j.user" />
-		<exclude name="examples/Tests/${obj.dir}/**" />
-		<include name="examples/WeaponFire/**" />
-		<exclude name="examples/WeaponFire/*j.user" />
-		<exclude name="examples/WeaponFire/${obj.dir}/**" />
+		<include name="examples/**" />
+		<exclude name="examples/**/*j.user" />
+		<exclude name="examples/**/${obj.dir}/**" />
 		<include name="lib/**" />
 		<include name="scripts/**" />
 		<include name="tools/**" />
