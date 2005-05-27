@@ -152,7 +152,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Create a Surface from a byte array in memory.
 		/// </summary>
-		/// <param name="array">A array of byte that shold the image data</param>
+		/// <param name="array">
+		/// A array of byte that should the image data
+		/// </param>
 		public Surface(byte[] array)
 		{
 			this.Handle = 
