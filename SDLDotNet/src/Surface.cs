@@ -128,6 +128,22 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="size"></param>
+		public Surface(Size size) : this(size.Width, size.Height)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rectangle"></param>
+		public Surface(Rectangle rectangle) : this(rectangle.Width, rectangle.Height)
+		{
+		}
+
+		/// <summary>
 		/// Create surface of a given width and height
 		/// </summary>
 		/// <param name="width"></param>
@@ -266,7 +282,7 @@ namespace SdlDotNet
 				if (this.disposed)
 				{
 					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-		}
+				}
 				GC.KeepAlive(this);
 				return (Sdl.SDL_PixelFormat)Marshal.PtrToStructure(this.SurfaceStruct.format, 
 					typeof(Sdl.SDL_PixelFormat));
@@ -1605,8 +1621,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			this.Handle = 
-				SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, SdlGfx.SMOOTHING_ON);
+			this.Scale(zoomX, zoomY, true);
 		}
 
 		/// <summary>
@@ -1627,8 +1642,15 @@ namespace SdlDotNet
 			{
 				antiAliasParameter = SdlGfx.SMOOTHING_ON;
 			}
-			this.Handle = 
-				SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter);
+			try
+			{
+				this.Handle = 
+					SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter);
+			}
+			catch (NullReferenceException e)
+			{
+				throw e;
+			}
 		}
 
 		/// <summary>
@@ -1641,8 +1663,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			this.Handle = 
-				SdlGfx.zoomSurface(this.Handle, zoom, zoom, SdlGfx.SMOOTHING_ON);
+			this.Scale(zoom, zoom);
 		}
 
 		/// <summary>
@@ -1657,13 +1678,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
-			if (antiAlias == true)
-			{
-				antiAliasParameter = SdlGfx.SMOOTHING_ON;
-			}
-			this.Handle = 
-				SdlGfx.zoomSurface(this.Handle, zoom, zoom, antiAliasParameter);
+			this.Scale(zoom, zoom, antiAlias);
 		}
 
 		/// <summary>
@@ -1676,8 +1691,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			this.Handle = 
-				SdlGfx.zoomSurface(this.Handle, 2, 2, SdlGfx.SMOOTHING_ON);
+			this.Scale(2, 2);
 		}
 
 		/// <summary>
@@ -1691,13 +1705,23 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
-			if (antiAlias == true)
-			{
-				antiAliasParameter = SdlGfx.SMOOTHING_ON;
-			}
-			this.Handle = 
-				SdlGfx.zoomSurface(this.Handle, 2, 2, antiAliasParameter);
+			this.Scale(2, 2, antiAlias);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sourceRectangle"></param>
+		/// <param name="destinationRectangle"></param>
+		/// <returns></returns>
+		public Surface Stretch(Rectangle sourceRectangle, Rectangle destinationRectangle)
+		{
+			Surface surface = new Surface(sourceRectangle);
+			surface.Blit(this, new Rectangle(0,0,surface.Width,surface.Height), sourceRectangle);
+			surface.Transparent = true;
+			double stretchWidth = (destinationRectangle.Width / sourceRectangle.Width);
+			double stretchHeight = (destinationRectangle.Height / sourceRectangle.Height);
+			surface.Scale(stretchWidth, stretchHeight);
+			return surface;
 		}
 
 		/// <summary>
@@ -1812,7 +1836,7 @@ namespace SdlDotNet
 				rectangle.Y, 
 				rectangle.Width, 
 				rectangle.Height);
-				GC.KeepAlive(this);
+			GC.KeepAlive(this);
 		}
 
 		/// <summary>

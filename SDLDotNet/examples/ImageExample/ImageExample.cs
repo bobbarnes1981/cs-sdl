@@ -74,8 +74,6 @@ namespace SdlDotNet.Examples
 				{
 					filepath = "";
 				}
-//				SdlButton button = new SdlButton(200, 200, 75, 50, Color.Green, stringManager.GetString(
-//                        "Hello", CultureInfo.CurrentUICulture));
 				SdlButton button = new SdlButton(200, 200, 75, 50, Color.Green, "Hello");
 
 				SdlTextBox textBox = new SdlTextBox(300, 300, 300);
@@ -92,13 +90,16 @@ namespace SdlDotNet.Examples
 
 				imagepath = @"images/";
 
-				Surface Background = new Surface(filepath + imagepath + "background.png");
+				Surface Background = 
+					new Surface(filepath + imagepath + "background.png");
 
-				Surface sdlimg = new Surface(filepath + imagepath +  "sdlimage.png");
+				Surface sdlimg = 
+					new Surface(filepath + imagepath +  "sdlimage.png");
 				sdlimg.AlphaFlags = Alphas.RleEncoded| Alphas.SourceAlphaBlending;
 				sdlimg.AlphaValue = 100;
 
-				Surface Cursor = new Surface(filepath + imagepath +  "cursor.png");
+				Surface Cursor = 
+					new Surface(filepath + imagepath +  "cursor.png");
 				Cursor.Transparent = true;
 
 				SurfaceCollection Jeep = new SurfaceCollection();
@@ -110,7 +111,20 @@ namespace SdlDotNet.Examples
 				}
 
 				Surface Tree = new Surface(filepath + imagepath + "Tree.bmp");
-				Surface treeClone = (Surface)Tree.Clone();
+				Surface treeClone = (Surface)Tree.Clone(true);
+				Surface treeStretch = 
+					treeClone.Stretch(
+					new Rectangle(
+					new Point(
+					treeClone.Rectangle.X + 20, 
+					treeClone.Rectangle.Y + 30), 
+					new Size(
+					treeClone.Width/2, 
+					treeClone.Height/2)),
+					treeClone.Rectangle);
+				//Surface treeStretch = (Surface)treeClone.Clone(true);
+				treeStretch.Transparent = true;
+				Console.WriteLine("treeClone: " + treeClone.Rectangle.ToString());
 
 				Tree.TransparentColor = System.Drawing.Color.Magenta;
 				Tree.Transparent = true;
@@ -142,7 +156,8 @@ namespace SdlDotNet.Examples
 						Tree.AlphaValue++;
 
 						surf.Blit(Tree, new Rectangle(0,0,20,20));
-						surf.Blit(treeClone, new Rectangle(0,100,20,20));
+						surf.Blit(treeClone, new Point(0,100));
+						surf.Blit(treeStretch, new Point(100,100));
 
 						// Draw Jeep;
 						if (JeepFrame == 15) 
