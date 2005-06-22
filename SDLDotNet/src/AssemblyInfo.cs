@@ -37,7 +37,7 @@ using System.Resources;
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("David Hudson")]
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
-[assembly: AssemblyVersion("3.1.0.0")]
+[assembly: AssemblyVersion("3.1.1.0")]
 [assembly: AssemblyCulture("")]		
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
 

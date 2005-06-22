@@ -862,6 +862,14 @@ namespace SdlDotNet
 		{
 			return this.CreateCompatibleSurface(this.Size.Width, this.Size.Height, true);
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Surface CreateCompatibleSurface(Rectangle rectangle) 
+		{
+			return this.CreateCompatibleSurface(rectangle.Width, rectangle.Height, true);
+		}
 
 		/// <summary>
 		/// 
@@ -1531,12 +1539,7 @@ namespace SdlDotNet
 		/// <param name="degreesOfRotation">degrees of rotation</param>
 		public void Rotate(int degreesOfRotation)
 		{
-			if (this.disposed)
-			{
-				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-			}
-			this.Handle = 
-				SdlGfx.rotozoomSurface(this.Handle, degreesOfRotation, 1, SdlGfx.SMOOTHING_ON);
+			this.Rotate(degreesOfRotation, true);
 		}
 
 		/// <summary>
@@ -1566,6 +1569,79 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="degreesOfRotation"></param>
+		/// <returns></returns>
+		public Surface CreateRotatedSurface(int degreesOfRotation)
+		{
+			return this.CreateRotatedSurface(degreesOfRotation, true);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="degreesOfRotation"></param>
+		/// <param name="antiAlias"></param>
+		/// <returns></returns>
+		public Surface CreateRotatedSurface(int degreesOfRotation, bool antiAlias)
+		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
+			if (antiAlias == true)
+			{
+				antiAliasParameter = SdlGfx.SMOOTHING_ON;
+			}
+			
+			return new Surface(
+				SdlGfx.rotozoomSurface(
+				this.Handle, 
+				degreesOfRotation, 
+				1, 
+				antiAliasParameter));
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="degreesOfRotation"></param>
+		/// <param name="zoom"></param>
+		/// <returns></returns>
+		public Surface CreateRotoZoomedSurface(int degreesOfRotation, double zoom)
+		{
+			return this.CreateRotoZoomedSurface(degreesOfRotation, zoom, true);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="degreesOfRotation"></param>
+		/// <param name="zoom"></param>
+		/// <param name="antiAlias"></param>
+		public Surface CreateRotoZoomedSurface(int degreesOfRotation, 
+			double zoom, bool antiAlias)
+		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
+			if (antiAlias == true)
+			{
+				antiAliasParameter = SdlGfx.SMOOTHING_ON;
+			}
+			
+			return new Surface(SdlGfx.rotozoomSurface(
+				this.Handle, 
+				degreesOfRotation, 
+				zoom, 
+				antiAliasParameter));
+		}
+
+		/// <summary>
 		/// Rotate and Zoom surface
 		/// </summary>
 		/// <param name="degreesOfRotation">Degrees of rotation</param>
@@ -1573,12 +1649,7 @@ namespace SdlDotNet
 		/// <remarks>Smoothing is turned on.</remarks>
 		public void RotationZoom(int degreesOfRotation, double zoom)
 		{
-			if (this.disposed)
-			{
-				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-			}
-			this.Handle = 
-				SdlGfx.rotozoomSurface(this.Handle, degreesOfRotation, zoom, SdlGfx.SMOOTHING_ON);
+			this.RotationZoom(degreesOfRotation, zoom, true);
 		}
 
 		/// <summary>
@@ -1607,6 +1678,66 @@ namespace SdlDotNet
 				degreesOfRotation, 
 				zoom, 
 				antiAliasParameter);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="zoomX"></param>
+		/// <param name="zoomY"></param>
+		/// <param name="antiAlias"></param>
+		/// <returns></returns>
+		public Surface CreateScaledSurface(double zoomX, double zoomY, bool antiAlias)
+		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
+			if (antiAlias == true)
+			{
+				antiAliasParameter = SdlGfx.SMOOTHING_ON;
+			}
+			try
+			{
+				return new Surface(SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter));
+			}
+			catch (NullReferenceException e)
+			{
+				throw e;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="zoomX"></param>
+		/// <param name="zoomY"></param>
+		/// <returns></returns>
+		public Surface CreateScaledSurface(double zoomX, double zoomY)
+		{
+			return this.CreateScaledSurface(zoomX, zoomY, true);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="zoom"></param>
+		/// <returns></returns>
+		public Surface CreateScaledSurface(double zoom)
+		{
+			return this.CreateScaledSurface(zoom, zoom);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="zoom"></param>
+		/// <param name="antiAlias"></param>
+		/// <returns></returns>
+		public Surface CreateScaledSurface(double zoom, bool antiAlias)
+		{
+			return this.CreateScaledSurface(zoom, zoom, antiAlias);
 		}
 
 		/// <summary>
@@ -1682,6 +1813,24 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Surface CreateScaleDoubleSurface()
+		{
+			return this.CreateScaledSurface(2);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Surface CreateScaleDoubleSurface(bool antiAlias)
+		{
+			return this.CreateScaledSurface(2, antiAlias);
+		}
+
+		/// <summary>
 		/// Doubles the size of the surface
 		/// </summary>
 		/// <returns></returns>
@@ -1716,10 +1865,10 @@ namespace SdlDotNet
 		public Surface Stretch(Rectangle sourceRectangle, Rectangle destinationRectangle)
 		{
 			Surface surface = new Surface(sourceRectangle);
-			surface.Blit(this, new Rectangle(0,0,surface.Width,surface.Height), sourceRectangle);
+			surface.Blit(this, new Point(0,0), sourceRectangle);
 			surface.Transparent = true;
-			double stretchWidth = (destinationRectangle.Width / sourceRectangle.Width);
-			double stretchHeight = (destinationRectangle.Height / sourceRectangle.Height);
+			double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
+			double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
 			surface.Scale(stretchWidth, stretchHeight);
 			return surface;
 		}

@@ -1,3 +1,9 @@
+3.1.1
+David Hudson 21 June 2005
+* Added Surface.Stretch. This allows surfaces to be stretched to fit a given rectangle. This much requested feature was very helpful for the CEGUI renderer.
+* Added new Scale, Rotation, Zoom methods that return a new Surface instead of modifying current Surface. This issue was brought up by an example from Cibressus.
+* Updated Tao.Sdl and Tao.OpenGl
+
 3.1.0
 David Hudson 18 May 2005
 * Surface is now Clonable, both shallow and deep.

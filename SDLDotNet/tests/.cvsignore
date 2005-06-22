@@ -1,0 +1,6 @@
+*.csproj
+*.user
+*.prjx
+bin
+obj
+Tests.xml

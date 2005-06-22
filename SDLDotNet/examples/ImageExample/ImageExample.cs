@@ -122,9 +122,6 @@ namespace SdlDotNet.Examples
 					treeClone.Width/2, 
 					treeClone.Height/2)),
 					treeClone.Rectangle);
-				//Surface treeStretch = (Surface)treeClone.Clone(true);
-				treeStretch.Transparent = true;
-				Console.WriteLine("treeClone: " + treeClone.Rectangle.ToString());
 
 				Tree.TransparentColor = System.Drawing.Color.Magenta;
 				Tree.Transparent = true;
