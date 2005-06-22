@@ -21,6 +21,7 @@ Zip file contains:
 	/src - source
 	/scripts - build scripts
 	/tools - utils
+	/tests - unit tests
 	
 		
 Development Environment:
@@ -97,10 +98,6 @@ Tutorials
 
 TODO items:
 
-StretchBlit: since it isn't supported by SDL itself. 
-I recently saw that the cvs version is updated quite often but no news on stretching other than YUV surfaces (video overlays?)).
-That's the number 1 feature I want to implement, just a nice simple easy stretch (maybe nearest / bilinear support afterwards), also, since it only takes the x/y coordinates of the destination rect, maybe support it in the w/h of the same exact rect, checking if it doesn't match the src w/h, then again, that check would happen every single draw call so might want to just put it elsewhere and convert that into a point instead.
-	
 gacutil installation.
 
 Sijmen Mulder

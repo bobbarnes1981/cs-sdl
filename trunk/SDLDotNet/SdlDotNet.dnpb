@@ -641,7 +641,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="Tests" path="examples\\Tests" language="C#" type="Library" assemblyName="Tests" rootNamespace="SdlDotNet.Examples">
+	<Project name="Tests" path="tests" language="C#" type="Library" assemblyName="SdlDotNet.Tests" rootNamespace="SdlDotNet.Tests">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -649,7 +649,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>Tests.xml</XmlDocFile>
+		    <XmlDocFile>SdlDotNet.Tests.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
 		</Options>
 	    </Configuration>
@@ -660,16 +660,16 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>Tests.xml</XmlDocFile>
+		    <XmlDocFile>SdlDotNet.Tests.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
+	    <Reference name="Tao.Sdl" localCopy="true" path="..\\lib"/>
 	    <Reference name="GuiExample" localCopy="true"/>
-	    <Reference name="nunit.framework" localCopy="true" path="..\\..\\lib"/>
+	    <Reference name="nunit.framework" localCopy="true" path="..\\lib"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>

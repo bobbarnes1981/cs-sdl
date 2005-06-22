@@ -17,11 +17,12 @@
 
     <!-- global project settings -->
     <property name="project.name" value="SdlDotNet" />
-    <property name="project.version" value="3.1.0" />
+    <property name="project.version" value="3.1.1" />
     <property name="release.version" value="1" />
     <property name="project.html-help.dir" value="C:\Program Files\HTML Help Workshop" />
     <property name="src.dir" value="src" />
     <property name="examples.dir" value="examples" />
+    <property name="tests.dir" value="tests" />
     <property name="bin.dir" value="bin" />
     <property name="obj.dir" value="obj" />
     <property name="lib.dir" value="lib" />
@@ -63,7 +64,9 @@
 	<foreach item="File" property="filename">
 	    <in>
 		<items>
+		    <include name="${src.dir}/**/*.build" />
 		    <include name="${examples.dir}/**/*.build" />
+		    <include name="${tests.dir}/**/*.build" />
 		</items>
 	    </in>
 	    <do>
@@ -100,7 +103,22 @@
 	</foreach>
     </target>
 
-    <target name="buildrelease" depends="clean, setrelease, examples" description="Build all Release assemblies">
+    <target name="tests" depends="build" description="Build tests">
+	<echo message="Building tests" />
+	<foreach item="File" property="filename">
+	    <in>
+		<items>
+		    <include name="${tests.dir}/**/*.build" />
+		</items>
+	    </in>
+	    <do>
+		<echo message="${filename}" />
+		<nant buildfile="${filename}" target="build" />
+	    </do>
+	</foreach>
+    </target>
+
+    <target name="buildrelease" depends="clean, setrelease, examples, tests" description="Build all Release assemblies">
 	<echo message="Building all Release assemblies" />
     </target>
 
@@ -118,9 +136,14 @@
 		<include name="src/**.cs" />
 		<include name="src/**.build" />
 		<include name="src/*.snk" />
+		<include name="src/*.csproj" />
+		<include name="src/*.prjx" />
 		<include name="examples/**" />
 		<exclude name="examples/**/*j.user" />
 		<exclude name="examples/**/${obj.dir}/**" />
+		<include name="tests/**" />
+		<exclude name="tests/**/*j.user" />
+		<exclude name="tests/**/${obj.dir}/**" />
 		<include name="lib/**" />
 		<include name="scripts/**" />
 		<include name="tools/**" />
@@ -201,6 +224,7 @@
 		<include name="${project.zip-path}/lib/**" />
 		<include name="${project.zip-path}/src/**" />
 		<include name="${project.zip-path}/examples/**" />
+		<include name="${project.zip-path}/tests/**" />
 		<include name="${project.zip-path}/scripts/**" />
 		<include name="${project.zip-path}/tools/**" />
 		<include name="${project.zip-path}/*" />	
