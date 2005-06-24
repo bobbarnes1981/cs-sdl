@@ -80,7 +80,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<File>AssemblyInfo.cs</File>
@@ -113,7 +112,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	   	<Files>
 		<File buildAction="Content">App.ico</File>
 		<File buildAction="Content">ParticleEngine.html</File>
@@ -146,7 +144,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<File>AssemblyInfo.cs</File>
@@ -179,7 +176,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -211,8 +207,7 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
-	    <Reference name="Tao.OpenGl" localCopy="true" path="."/>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<File>AssemblyInfo.cs</File>
@@ -245,7 +240,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -278,7 +272,6 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<File>AssemblyInfo.cs</File>
@@ -311,7 +304,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<File>AssemblyInfo.cs</File>
@@ -344,7 +336,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -376,7 +367,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<File buildAction="Content">SimpleExample.pdf</File>
@@ -409,7 +399,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -441,7 +430,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -473,7 +461,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -505,7 +492,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -537,7 +523,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">BounceSprites.html</File>
 		<File buildAction="Content">App.ico</File>
@@ -570,7 +555,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Reference name="nunit.framework" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
@@ -603,7 +587,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
@@ -634,7 +617,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
 	    <Reference name="GuiExample" localCopy="true"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>

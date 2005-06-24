@@ -16,8 +16,6 @@
 
 using System;
 using System.Drawing;
-using Tao.Sdl;
-
 using SdlDotNet;
 
 namespace SdlDotNet.Examples

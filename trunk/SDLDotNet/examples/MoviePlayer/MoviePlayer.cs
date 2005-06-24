@@ -20,8 +20,8 @@
 using System;
 using System.Threading;
 using System.IO;
-using Tao.Sdl;
 using System.Runtime.InteropServices;
+using SdlDotNet;
 
 namespace SdlDotNet.Examples 
 {
