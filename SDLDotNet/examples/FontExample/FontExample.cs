@@ -25,7 +25,6 @@ using System.IO;
 using System.Globalization;
 
 using SdlDotNet;
-using Tao.Sdl;
 
 namespace SdlDotNet.Examples
 {
