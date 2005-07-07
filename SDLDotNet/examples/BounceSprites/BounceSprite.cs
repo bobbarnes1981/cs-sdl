@@ -61,6 +61,7 @@ namespace SdlDotNet.Examples
 		#endregion Constructor
 
 		#region Event Update Methods
+		int i;
 		/// <summary>
 		/// Every tick will update the animation frame
 		/// </summary>
@@ -85,6 +86,7 @@ namespace SdlDotNet.Examples
 			//Change the sprite coordinates if the sprite is not being dragged
 			if (!this.BeingDragged)
 			{
+				//Console.WriteLine("Sprite: " + i++);
 				this.X += dx;
 				this.Y += dy;
 

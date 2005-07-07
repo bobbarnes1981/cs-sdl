@@ -1,4 +1,4 @@
-Future changes (as of May 2005):
+Future changes (as of July 2005):
 
 * Add more sophisticated SpriteCollection and/or Sprite rendering logic (like Pygame). Instead of updating all of the sprites, we could just update the changed rectangles.
 * Add more docs and tutorials.
@@ -6,6 +6,8 @@ Future changes (as of May 2005):
 * Fix build process to build on Mono.
 * Work on a Mac version.
 * Create custom WinForms control for Surface.
+* Work on SDL.NET Renderer for CEGUI.
+* TileMapper for SDL.NET
 
 Jan 12, 2005
 
