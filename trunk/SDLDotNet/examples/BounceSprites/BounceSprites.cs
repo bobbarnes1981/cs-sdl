@@ -38,10 +38,11 @@ namespace SdlDotNet.Examples
 		private Surface screen; //video screen
 		private bool quitflag; //flag to tell the app to shutdown
 		private SpriteCollection master = new SpriteCollection(); //holds all sprites
-		private int width = 800; //screen width
-		private int height = 600; //screen height
-		private int maxBalls = 10; //number of balls to display
+		private int width = 640; //screen width
+		private int height = 480; //screen height
+		private int maxBalls = 2; //number of balls to display
 		private Random rand = new Random(); //randomizer
+		private Surface background = new Surface("../../Data/background.png");
 		#endregion Fields
 
 		#region EventHandler Methods
@@ -60,15 +61,17 @@ namespace SdlDotNet.Examples
 			quitflag = true;
 		}
 
+		RectangleCollection rects = new RectangleCollection();
+
 		//A ticker is running to update the sprites constantly.
 		//This method will fill the screen with black to clear it of the sprites.
 		//Then it will Blit all of the sprites to the screen.
 		//Then it will refresh the screen and display it.
 		private void OnTick(object sender, TickEventArgs args)
 		{	
-			screen.Fill(Color.Black);
-			screen.Blit(master); 
-			screen.Update();
+			rects = screen.Blit(master);
+			screen.Update(rects);	
+			screen.Erase(rects, background);
 		}
 		#endregion EventHandler Methods
 
@@ -78,6 +81,7 @@ namespace SdlDotNet.Examples
 		{
 			//Set up screen
 			screen = Video.SetVideoModeWindow(width, height, true);
+			screen.Blit(background);
 			Video.WindowCaption = "Bounce Sprites";
 
 			//instantiate each marble

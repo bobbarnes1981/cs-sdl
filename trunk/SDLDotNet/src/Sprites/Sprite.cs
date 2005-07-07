@@ -312,6 +312,22 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
+		private Rectangle rectDirty;
+		/// <summary>
+		/// 
+		/// </summary>
+		public Rectangle RectangleDirty
+		{
+			get 
+			{ 
+				return this.rectDirty;
+			}
+			set
+			{
+				this.rectDirty = value;
+			}
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>

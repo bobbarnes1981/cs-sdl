@@ -32,6 +32,7 @@ namespace SdlDotNet.Sprites
 	/// </summary>
 	public class SpriteCollection : CollectionBase, ICollection
 	{
+		RectangleCollection lostRects = new RectangleCollection();
 		/// <summary>
 		/// 
 		/// </summary>
@@ -59,25 +60,46 @@ namespace SdlDotNet.Sprites
 		/// 
 		/// </summary>
 		/// <param name="surface"></param>
-		public virtual void Draw(Surface surface)
+		public virtual RectangleCollection Draw(Surface surface)
 		{
+			this.lostRects.Clear();
+			RectangleCollection rects = new RectangleCollection();
 			for (int i = 0; i < this.Count; i++)
 			{
 				if (this[i].Visible)
 				{
-					surface.Blit(this[i].Render(), this[i].Rectangle);
+					rects.Add(surface.Blit(this[i].Render(), this[i].Rectangle));
+					if (!this[i].RectangleDirty.IsEmpty)
+					{
+						rects.Add(this[i].RectangleDirty);
+					}
+				}
+				this[i].RectangleDirty = this[i].Rectangle;
+			}
+			return rects;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="surface"></param>
+		/// <param name="background"></param>
+		public void Erase(Surface surface, Surface background)
+		{
+			for (int i = 0; i < this.lostRects.Count; i++)
+			{
+				surface.Blit(background, this.lostRects[i], this.lostRects[i]);
+			}
+
+			for (int i = 0; i < this.Count; i++)
+			{
+				if (this[i].Visible)
+				{
+					surface.Blit(background, this[i].Rectangle, this[i].Rectangle);
 				}
 			}
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="surface"></param>
-//		/// <param name="background"></param>
-//		public virtual void ClearRects(Surface surface, Surface background)
-//		{
-//		}
 		#endregion
 
 		#region Sprites
@@ -104,11 +126,24 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		protected RectangleCollection LostRects
+		{
+			get
+			{
+				return this.lostRects;
+			}
+		}
+
+
+		/// <summary>
 		/// Removes sprite from group
 		/// </summary>
 		/// <param name="sprite">Sprite to remove</param>
 		public virtual void Remove(Sprite sprite)
 		{
+			this.lostRects.Add(sprite.Rectangle);
 			List.Remove(sprite);
 		}
 

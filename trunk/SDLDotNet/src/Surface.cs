@@ -1087,21 +1087,24 @@ namespace SdlDotNet
 		/// 
 		/// </summary>
 		/// <param name="sprite"></param>
-		public void Blit(Sprite sprite)
+		public Rectangle Blit(Sprite sprite)
 		{
+			Rectangle rect = new Rectangle();
+
 			if (sprite.Visible)
 			{
-				this.Blit(sprite.Render());
+				rect = this.Blit(sprite.Render());
 			}
+			return rect;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="spriteCollection"></param>
-		public void Blit(SpriteCollection spriteCollection)
+		public RectangleCollection Blit(SpriteCollection spriteCollection)
 		{
-			spriteCollection.Draw(this);
+			return spriteCollection.Draw(this);
 		}
 
 		/// <summary>
@@ -1152,6 +1155,40 @@ namespace SdlDotNet
 				destinationPosition.X, 
 				destinationPosition.Y, 0, 0), 
 				sourceRectangle);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="spriteCollection"></param>
+		/// <param name="background"></param>
+		public void Erase(SpriteCollection spriteCollection, Surface background)
+		{
+			spriteCollection.Erase(this, background);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rects"></param>
+		/// <param name="background"></param>
+		public void Erase(RectangleCollection rects, Surface background)
+		{
+			for (int i = 0; i < rects.Count; i++)
+			{
+				this.Blit(background, rects[i], rects[i]);
+				//this.Blit(background, rects[i]);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="rectangle"></param>
+		/// <param name="background"></param>
+		public void Erase(Rectangle rectangle, Surface background)
+		{
+			this.Blit(background, rectangle, rectangle);
 		}
 
 		/// <summary>
@@ -2019,6 +2056,25 @@ namespace SdlDotNet
 			}
 			Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangles.Length];
 			for (int i=0;i < rectangles.Length;i++)
+			{
+				rects[i] = Surface.ConvertRecttoSDLRect(rectangles[i]);
+			}
+			Sdl.SDL_UpdateRects(this.Handle, rects.Length, rects);
+			GC.KeepAlive(this);
+		}
+
+		/// <summary>
+		/// Update an array of rectangles
+		/// </summary>
+		/// <param name="rectangles"></param>
+		public void Update(RectangleCollection rectangles)
+		{
+			if (this.disposed)
+			{
+				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+			}
+			Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangles.Count];
+			for (int i=0;i < rectangles.Count;i++)
 			{
 				rects[i] = Surface.ConvertRecttoSDLRect(rectangles[i]);
 			}
