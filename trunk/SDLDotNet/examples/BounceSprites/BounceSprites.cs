@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 		private SpriteCollection master = new SpriteCollection(); //holds all sprites
 		private int width = 640; //screen width
 		private int height = 480; //screen height
-		private int maxBalls = 2; //number of balls to display
+		private int maxBalls = 10; //number of balls to display
 		private Random rand = new Random(); //randomizer
 		private Surface background = new Surface("../../Data/background.png");
 		#endregion Fields
