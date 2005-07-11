@@ -117,11 +117,16 @@ namespace SdlDotNet.Examples
 		const Key LEFT = Key.LeftArrow;
 		const Key RIGHT = Key.RightArrow;
 		const Key JUMP = Key.UpArrow;
+		const Key FIRE = Key.Space;
 
 		// weither the respective keys are pressed
 		bool left;
 		bool right;
 		bool jump;
+		bool fire;
+
+		// the tick of the last fire action
+		int lastfire;
 
 		int jumpstart;
 		bool falling;
@@ -212,6 +217,18 @@ namespace SdlDotNet.Examples
 			{
 				_Location.X = Game.Screen.Width - _Image.Width;
 			}
+
+			// fire if needed. the 250 stands for the delay between two shots
+			if(fire && lastfire + 250 < Timer.Ticks)
+			{
+				if(WeaponFired != null)
+				{
+					WeaponFired(this, new FireEventArgs(Location));
+				}
+
+				// dont forget this
+				lastfire = Timer.Ticks;
+			}
 		}
 
 		/// <summary>
@@ -243,8 +260,15 @@ namespace SdlDotNet.Examples
 						falling = true;
 					}
 					break;
+				case Key.Space: 
+					fire = e.Down; 
+					break;
 			}
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public event FireEventHandler WeaponFired;
 
 		/// <summary>
 		/// 
@@ -282,6 +306,8 @@ namespace SdlDotNet.Examples
 		Player player;
 		Bomb[] bombs;
 		bool quit;
+		ArrayList bullets = new ArrayList();
+		ArrayList mustdispose = new ArrayList(); // see below
 
 		// messages for debugging purposes are sent to this method, therefore it
 		// also is static
@@ -301,13 +327,7 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			Game.Debug("Running");
-
-#if DEBUG
 			_Screen = Video.SetVideoModeWindow(640, 480, true);
-#else
-_Screen = Video.SetVideoMode(640, 480, 16);
-#endif
-
 			Surface tempSurface = new Surface("../../Data/Background1.png");
 			_Background = tempSurface.Convert();
 			tempSurface = new Surface("../../Data/Background2.png");
@@ -331,6 +351,7 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(Keyboard);
 			Events.Quit += new QuitEventHandler(Quit);
+			player.WeaponFired += new FireEventHandler(PlayerWeaponFired);
 
 			Game.Debug("Starting game loop");
 
@@ -359,6 +380,10 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 					_Temporary.Blit(Bomb.Image, src);
 					_Screen.Blit(_Temporary, dest);
 				}
+				foreach(WeaponParticle o in bullets)
+					_Screen.Blit(o.Image, new
+						Rectangle(o.Location,
+						o.Image.Size));
 
 				Screen.Fill(new Rectangle(3, 3, (int)_BombSpeed, 2), Color.White);
 
@@ -376,11 +401,49 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 					{
 						bombs[i].Update(seconds);
 					}
+					foreach(object o in bullets)
+					{
+						((WeaponParticle)o).Update(seconds);
+					}
+
+					// things can't be deleted from a collection in a foreach loop when
+					// the foreach-ed collection and the target collection are the same.
+					// that is why i put the must-be-deleted objects in a serperate
+					// collection
+					foreach(object o in mustdispose)
+					{
+						bullets.Remove(o);
+					}
+
+					// which ofcourse must be emptied
+					mustdispose = new ArrayList();
 				}
 
 				lastupdate = Timer.Ticks;
 				_Screen.Flip();
 			}
+		}
+
+		private void PlayerWeaponFired(object sender, FireEventArgs e)
+		{
+			Game.Debug("Fire in the hole!");
+
+			// create a new bullet
+			WeaponParticle bullet = new WeaponParticle(e.Location, new Speed(0,-300));
+			bullet.DisposeRequest += 
+				new DisposeRequestEventHandler(BulletDisposeRequest);
+			bullets.Add(bullet);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BulletDisposeRequest(object sender, EventArgs e)
+		{
+			Game.Debug("Disposing a bullet");
+			mustdispose.Add(sender); // see Game.Run, the large comment
 		}
 
 		/// <summary>
@@ -470,6 +533,175 @@ _Screen = Video.SetVideoMode(640, 480, 16);
 				//				try { SDL.Instance.Dispose(); } 
 				//				catch {} // = bugfix
 				Console.WriteLine("Bye");
+			}
+		}
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public delegate void FireEventHandler(object sender, FireEventArgs e);
+	/// <summary>
+	/// 
+	/// </summary>
+	public delegate void DisposeRequestEventHandler(object sender, EventArgs e);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public class FireEventArgs : EventArgs
+	{
+		Point location;
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="location"></param>
+		public FireEventArgs(Point location)
+		{
+			this.location = location;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Location
+		{
+			get
+			{
+				return location;
+			}
+		}
+	}
+	/// <summary>
+	/// item fired by a weapon
+	/// </summary>
+	public class WeaponParticle
+	{
+		Surface _Image;
+		PointF _Location;
+		Speed _Speed;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="location"></param>
+		/// <param name="speed"></param>
+		public WeaponParticle(Point location, Speed speed)
+		{
+			Game.Debug("Constructing WeaponParticle");
+
+			_Location = location;
+			_Speed = speed;
+
+			// a white box for now
+			_Image = Game.Screen.CreateCompatibleSurface(8, 16, true);
+			_Image.Fill(new Rectangle(new Point(0,0), _Image.Size), Color.DarkBlue);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="seconds"></param>
+		public void Update(float seconds)
+		{
+			_Location.X += seconds * Speed.X;
+			_Location.Y += seconds * Speed.Y;
+
+			// check if the particle is outside the visible area of the game, it
+			// should be disposed. this request is handled by the Game class
+			if(DisposeRequest != null && (_Location.X + _Image.Size.Width < 0 ||
+				_Location.X > Game.Screen.Width || _Location.Y + _Image.Size.Height <
+				0 || _Location.Y > Game.Screen.Height))
+			{
+				Game.Debug("Requesting disposal of WeaponParticle");
+				DisposeRequest(this, new EventArgs());
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public event DisposeRequestEventHandler DisposeRequest;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Surface Image
+		{ 
+			get
+			{ 
+				return _Image; 
+			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public Speed Speed
+		{ 
+			get
+			{ 
+				return _Speed; 
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Location
+		{
+			get
+			{ 
+				return new Point((int)_Location.X, (int)_Location.Y); 
+			}
+		}
+	}
+	// used for the bullets
+	/// <summary>
+	/// 
+	/// </summary>
+	public class Speed
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		public Speed(int x, int y)
+		{
+			this.x = x;
+			this.y = y;
+		}
+
+		int x;
+		int y;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int X
+		{
+			get
+			{
+				return x;
+			}
+			set
+			{
+				x = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Y
+		{
+			get
+			{
+				return y;
+			}
+			set
+			{
+				y = value;
 			}
 		}
 	}

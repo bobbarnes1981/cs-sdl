@@ -8,6 +8,7 @@ Future changes (as of July 2005):
 * Create custom WinForms control for Surface.
 * Work on SDL.NET Renderer for CEGUI.
 * TileMapper for SDL.NET
+* Removed Bounce and WeaponFire Demos.
 
 Jan 12, 2005
 
