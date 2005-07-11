@@ -69,7 +69,7 @@ namespace SdlDotNet.Sprites
 				if (this[i].Visible)
 				{
 					rects.Add(surface.Blit(this[i].Render(), this[i].Rectangle));
-					if (!this[i].RectangleDirty.IsEmpty)
+					if (!(this[i].RectangleDirty.Equals(this[i].Rectangle)))
 					{
 						rects.Add(this[i].RectangleDirty);
 					}

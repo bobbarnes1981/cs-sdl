@@ -435,37 +435,6 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="WeaponFire" path="examples\\WeaponFire" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.WeaponFire" assemblyName="WeaponFire" rootNamespace="SdlDotNet.Examples" icon="App.ico">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>WeaponFire.xml</XmlDocFile>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>WeaponFire.xml</XmlDocFile>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="Content">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
 	<Project name="BounceSprites" path="examples\\BounceSprites" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BounceSprites" assemblyName="BounceSprites" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
