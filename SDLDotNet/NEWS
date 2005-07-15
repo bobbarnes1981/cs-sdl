@@ -5,6 +5,7 @@ David Hudson xx xx 2005
 * Fixed problems with LostSprites in SpriteCollections. This allows the old Rects to be cleared properly.
 * Removed WeaponFire and Bounce examples. WeaponFire has been integratedinto BombRun (press the space bar to fire).
 * The BounceSprites example will remove a ball if you right click on it. This uses the Sprite.Kill()/Remove() methods.
+* Updated to Sdl_mixer 1.2.6
 
 3.1.1
 David Hudson 21 June 2005
