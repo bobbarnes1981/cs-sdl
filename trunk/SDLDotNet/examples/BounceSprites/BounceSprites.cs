@@ -71,7 +71,7 @@ namespace SdlDotNet.Examples
 		{	
 			rects = screen.Blit(master);
 			screen.Update(rects);	
-			screen.Erase(rects, background);
+			screen.Erase(master, background);
 		}
 		#endregion EventHandler Methods
 
