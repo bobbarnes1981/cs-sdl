@@ -1,6 +1,6 @@
 Future changes (as of July 2005):
 
-* Add more sophisticated SpriteCollection and/or Sprite rendering logic (like Pygame). Instead of updating all of the sprites, we could just update the changed rectangles.
+* Update API to mirror Pygame 1.7.0. It mirrors 1.6 right now.
 * Add more docs and tutorials.
 * Create installer for windows and rpms/ebuild/debs/etc... for Linux.
 * Fix build process to build on Mono.
@@ -8,7 +8,7 @@ Future changes (as of July 2005):
 * Create custom WinForms control for Surface.
 * Work on SDL.NET Renderer for CEGUI.
 * TileMapper for SDL.NET
-* Removed Bounce and WeaponFire Demos.
+* Add Side Scroller Drawing methods.
 
 Jan 12, 2005
 

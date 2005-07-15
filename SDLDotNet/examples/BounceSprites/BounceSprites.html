@@ -6,7 +6,7 @@
 		<meta name="ProgId" content="Word.Document">
 		<meta name="Generator" content="Microsoft Word 9">
 		<meta name="Originator" content="Microsoft Word 9">
-		<link rel="File-List" href="./BounceSprites_files/filelist.xml"> <!--[if gte mso 9]><xml>
+		<link rel="File-List" href="./BounceSprites_files/filelist.xml"><!--[if gte mso 9]><xml>
  <o:DocumentProperties>
   <o:Author>DYYH</o:Author>
   <o:LastAuthor>DYYH</o:LastAuthor>
@@ -23,7 +23,7 @@
   <o:CharactersWithSpaces>11827</o:CharactersWithSpaces>
   <o:Version>9.7616</o:Version>
  </o:DocumentProperties>
-</xml><![endif]-->  <!--[if gte mso 9]><xml>
+</xml><![endif]--><!--[if gte mso 9]><xml>
  <w:WordDocument>
   <w:DrawingGridHorizontalSpacing>9.35 pt</w:DrawingGridHorizontalSpacing>
   <w:DrawingGridVerticalSpacing>6.35 pt</w:DrawingGridVerticalSpacing>
@@ -47,7 +47,8 @@
 	/* Page Definitions */ @page {mso-facing-pages:yes;}
 	@page Section1 {size:8.5in 11.0in; margin:1.0in 1.0in 1.0in 1.0in; mso-header-margin:0in; mso-footer-margin:1.0in; mso-title-page:yes; mso-paper-source:0;}
 	div.Section1 {page:Section1;}
-	--></style>
+	--> 
+	</style>
 	</head>
 	<body lang="EN-US" style='tab-interval:.5in'>
 		<div class="Section1">
@@ -115,14 +116,7 @@ to do that.<o:p></o:p></span></p>
 are some other properties of a Sprite:<o:p></o:p></span></p>
 			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
 			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<table border="1" cellspacing="0" cellpadding="0" style='BORDER-RIGHT:medium none;
- BORDER-TOP:medium none;
- MARGIN-LEFT:5.4pt;
- BORDER-LEFT:medium none;
- BORDER-BOTTOM:medium none;
- BORDER-COLLAPSE:collapse;
- mso-border-alt:solid windowtext .5pt;
- mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+			<table border="1" cellspacing="0" cellpadding="0" style='BORDER-RIGHT:medium none; BORDER-TOP:medium none; MARGIN-LEFT:5.4pt; BORDER-LEFT:medium none; BORDER-BOTTOM:medium none; BORDER-COLLAPSE:collapse; mso-border-alt:solid windowtext .5pt; mso-padding-alt:0in 5.4pt 0in 5.4pt'>
 				<tr style='HEIGHT:31.1pt'>
 					<td width="251" valign="top" height="41">
 						<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>AllowDrag
@@ -173,7 +167,7 @@ multiple surfaces over time to create the animation.<o:p></o:p></span></p>
 			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
 			<h2>SpriteCollection class</h2>
 			<p class="MsoNormal"><b><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></b></p>
-			<p class="MsoBodyText">The SpriteCollection class is a strongly-typed collection 
+			<p class="MsoBodyText">The SpriteCollection&nbsp;class is a strongly-typed collection 
 				that helps aggregate sprites and execute events on them.</p>
 			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
 			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>Besides
@@ -195,35 +189,175 @@ mso-bidi-font-size:10.0pt'><o:p></o:p>
 				</span></p>
 			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
 			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>The
-sprite can then decide how to respond. Usually, the sprite will have logic to
-check if the mouse click happened on which sprite. For example:<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">public</span><span style="FONT-FAMILY:'Quest Font'"> <span style='COLOR:blue'>override</span> <span style='COLOR:blue'>void</span> Update(MouseButtonEventArgs args)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'">{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.IntersectsWith(<span style='COLOR:blue'>new</span> Point(args.X, args.Y)))<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// If we are being held down, pick up the marble<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (args.ButtonPressed)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.BeingDragged =  <span style='COLOR:blue'>true</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:blue'>else<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.BeingDragged =  <span style='COLOR:blue'>false</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style="FONT-FAMILY:'Quest Font'">}<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoBodyText">SpriteCollections can be used to categorize sprites into 
-				logical groups. A program may have SpriteCollection for the player’s spaceship 
-				and another collection for the enemies. Another SpriteCollection could contain 
-				only those sprites that are close to the player’s ship to do faster collision 
-				detection.</p>
+			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>The 
+sprite can then decide how to respond. Usually, the sprite will have logic to 
+check if the mouse click happened on which sprite. For example:<![if !supportEmptyParas]><![endif]></span></p>
+<P class=MsoNormal><SPAN 
+style="FONT-SIZE: 12pt; mso-bidi-font-size: 10.0pt"></SPAN>&nbsp;</P>
+<P class=MsoNormal><SPAN 
+style="FONT-SIZE: 12pt; mso-bidi-font-size: 10.0pt"></SPAN><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><o:p><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="COLOR: blue">public</SPAN> <SPAN style="COLOR: blue">override</SPAN> 
+<SPAN style="COLOR: blue">void</SPAN> Update(MouseButtonEventArgs args)</SPAN></o:p></SPAN></P>
+<P class=MsoNormal><SPAN style="FONT-FAMILY: 'Quest Font'">
+<o:p><SPAN 
+style="FONT-FAMILY: 'Quest Font'"></SPAN><SPAN 
+style="FONT-FAMILY: 'Quest Font'">{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: blue">if</SPAN> (<SPAN 
+style="COLOR: blue">this</SPAN>.IntersectsWith(<SPAN 
+style="COLOR: blue">new</SPAN> Point(args.X, args.Y)))
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: green">// If we are being held down, pick up the 
+marble
+<o:p></o:p></SPAN></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: blue">if</SPAN> (args.ButtonPressed)
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: blue">if</SPAN> (args.Button == 
+MouseButton.PrimaryButton)
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: blue">this</SPAN>.BeingDragged =    <SPAN 
+style="COLOR: blue">true</SPAN>;
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: blue">else
+<o:p></o:p></SPAN></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: blue">this</SPAN>.Kill();
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: blue">else
+<o:p></o:p></SPAN></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: blue">this</SPAN>.BeingDragged =    <SPAN 
+style="COLOR: blue">false</SPAN>;
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN-RIGHT: -89.5pt"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp; </SPAN>}</SPAN></P>
+<P class=MsoNormal style="MARGIN-RIGHT: -89.5pt"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"></SPAN></o:p></SPAN></P>
+			<p class="MsoBodyText">If you click on the spirte with the primary mouse button, 
+				you can drag the sprite. If you click on it 
+				with the secondary button, it will remove the sprite from the screen and the 
+				SpriteCollection.</p>
+<P class=MsoBodyText>&nbsp;</P>
+<P class=MsoBodyText>SpriteCollections can be used to categorize sprites into 
+logical groups. A program may have SpriteCollection for the player’s spaceship 
+and another collection for the enemies. Another SpriteCollection could contain 
+only those sprites that are close to the player’s ship to do faster collision 
+detection.</P>
 			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
 			<p class="MsoBodyText"><b>SpriteContainer<o:p></o:p></b></p>
 			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
@@ -340,7 +474,7 @@ coordinates)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
 					<span style='COLOR:green'>//The sprite can be dragged<o:p></o:p></span>
 				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.AllowDrag =  <span style='COLOR:blue'>true</span>;<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.AllowDrag =      <span style='COLOR:blue'>true</span>;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#endregion</span><span style="FONT-FAMILY:'Quest Font'"> Constructor<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
@@ -390,7 +524,7 @@ the animation frame<o:p></o:p></span>
 					<span style='COLOR:green'>//set the surface to point to the new frame. This creates
 the animation<o:p></o:p></span>
 				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Surface = <span style='COLOR:blue'>this</span>.Surfaces[Frame];<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Surface =     <span style='COLOR:blue'>this</span>.Surfaces[Frame];<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
 					<span style='COLOR:green'>//Change the sprite coordinates if the sprite is not being
@@ -407,7 +541,7 @@ dragged<o:p></o:p></span>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.X &lt;
 bounds.Left)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X =  bounds.Left;<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X =      bounds.Left;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
@@ -416,7 +550,7 @@ bounds.Left)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.Y &lt;
 bounds.Top)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y =  bounds.Top;<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y =      bounds.Top;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
@@ -425,7 +559,7 @@ bounds.Top)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.Y &gt;
 bounds.Bottom)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y =  bounds.Bottom;<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y =      bounds.Bottom;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
 					<span style='COLOR:green'>// Bounce off the right<o:p></o:p></span>
@@ -433,7 +567,7 @@ bounds.Bottom)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.X &gt;
 bounds.Right)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X =  bounds.Right;<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X =      bounds.Right;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
@@ -493,26 +627,175 @@ marked as 'being dragged'<o:p></o:p></span>
 					<span style='COLOR:green'></span>
 					<span style='COLOR:gray'>&lt;param name="args"&gt;&lt;/param&gt;<o:p></o:p></span>
 				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>public</span> <span style='COLOR:blue'>override</span> <span style='COLOR:blue'>void</span> Update(MouseButtonEventArgs args)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.IntersectsWith(<span style='COLOR:blue'>new</span> Point(args.X, args.Y)))<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// If we are being held down, pick up the marble<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (args.ButtonPressed)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.BeingDragged =  <span style='COLOR:blue'>true</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:blue'>else<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.BeingDragged =  <span style='COLOR:blue'>false</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><o:p></o:p></span></p><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="COLOR: blue">public</SPAN> <SPAN style="COLOR: blue">override</SPAN> 
+<SPAN style="COLOR: blue">void</SPAN> Update(MouseButtonEventArgs 
+args)
+<o:p></o:p></SPAN>
+<P></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="COLOR: blue">if</SPAN> (<SPAN 
+style="COLOR: blue">this</SPAN>.IntersectsWith(<SPAN 
+style="COLOR: blue">new</SPAN> Point(args.X, args.Y)))
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="COLOR: green">// If we are being held down, pick up the 
+marble
+<o:p></o:p></SPAN></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="COLOR: blue">if</SPAN> 
+(args.ButtonPressed)
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="COLOR: blue">if</SPAN> (args.Button == 
+MouseButton.PrimaryButton)
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="COLOR: blue">this</SPAN>.BeingDragged =    <SPAN 
+style="COLOR: blue">true</SPAN>;
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="COLOR: blue">else
+<o:p></o:p></SPAN></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="COLOR: blue">this</SPAN>.Kill();
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="COLOR: blue">else
+<o:p></o:p></SPAN></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>{
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="COLOR: blue">this</SPAN>.BeingDragged = <SPAN 
+style="COLOR: blue">false</SPAN>;
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}
+<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN-RIGHT: -89.5pt"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>}</SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none">&nbsp;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
 					<span style='COLOR:gray'>///</span>
 					<span style='COLOR:green'></span>
@@ -544,8 +827,8 @@ up, this moved the sprite to follow<o:p></o:p></span>
 				</span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.BeingDragged)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X +=  args.RelativeX;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y +=  args.RelativeY;<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X +=      args.RelativeX;<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y +=      args.RelativeY;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
 			<p class="MsoBodyText"><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#endregion</span><span style="FONT-FAMILY:'Quest Font'"> Event Update Methods<o:p></o:p></span></p>
@@ -625,7 +908,7 @@ cause the app to exit<o:p></o:p></span>
 OnKeyboardDown(<span style='COLOR:blue'>object</span> sender, KeyboardEventArgs
 e) <o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (e.Key ==   Key.Escape || e.Key == Key.Q)<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (e.Key ==           Key.Escape || e.Key == Key.Q)<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>quitflag
 = <span style='COLOR:blue'>true</span>;<o:p></o:p></span></p>
@@ -655,12 +938,22 @@ of the sprites.<o:p></o:p></span>
 					<span style='COLOR:green'>//Then it will refresh the screen and display it.<o:p></o:p></span>
 				</span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>void</span> OnTick(<span style='COLOR:blue'>object</span> sender, TickEventArgs args)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>screen.Fill(Color.Black);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>screen.Blit(master);
-<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>screen.Update();<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></p>
+<P class=MsoNormal style="mso-layout-grid-align: none"><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+rects = screen.Blit(master); </span></span></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></SPAN><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">screen.Update(rects); </SPAN></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN></SPAN><SPAN style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">screen.Erase(master, background);</SPAN></SPAN></P>
+<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
+style="FONT-FAMILY: 'Quest Font'"><SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>}<o:p></o:p></SPAN></P>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#endregion</span><span style="FONT-FAMILY:'Quest Font'"> EventHandler Methods<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
 			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#region</span><span style="FONT-FAMILY:'Quest Font'"> Methods<o:p></o:p></span></p>
