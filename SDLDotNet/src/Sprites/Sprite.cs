@@ -104,7 +104,7 @@ namespace SdlDotNet.Sprites
 		public Sprite(Surface surface, Vector coordinates, SpriteCollection group) : 
 			this(surface, coordinates)
 		{
-			this.InnerAdd(group);
+			this.AddInternal(group);
 		}
 
 		/// <summary>
@@ -117,7 +117,7 @@ namespace SdlDotNet.Sprites
 		public Sprite(Surface surface, Point position, int z, SpriteCollection group): 
 			this(surface, position, z)
 		{
-			this.InnerAdd(group);
+			this.AddInternal(group);
 		}
 
 		/// <summary>
@@ -129,7 +129,7 @@ namespace SdlDotNet.Sprites
 		public Sprite(Surface surface, Point position , SpriteCollection group):
 			this(surface, position)
 		{
-			this.InnerAdd(group);
+			this.AddInternal(group);
 		}
 
 		#region Display
@@ -144,10 +144,6 @@ namespace SdlDotNet.Sprites
 		{
 			get
 			{
-//				if (this.surf == null)
-//				{
-//					this.surf = new Surface(this.Width, this.Height);				
-//				}
 				return surf;
 			}
 			set
@@ -453,22 +449,16 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-//		private bool dirty = false;
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public virtual bool Dirty
-//		{
-//			get
-//			{
-//				return dirty;
-//			}
-//			set
-//			{
-//				dirty = value;
-//			}
-//		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool Dirty
+		{
+			get
+			{
+				return (!this.rect.Equals(this.rectDirty));
+			}
+		}
 
 		/// <summary>
 		/// 
@@ -646,16 +636,16 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public virtual void Kill()
-//		{
-//			for (int i = 0; i < groups.Count; i++)
-//			{
-//				groups[i].Remove(this);
-//			}
-//		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual void Kill()
+		{
+			for (int i = 0; i < this.groups.Count; i++)
+			{
+				((SpriteCollection)groups[i]).Remove(this);
+			}
+		}
 
 		/// <summary>
 		/// 
@@ -663,17 +653,16 @@ namespace SdlDotNet.Sprites
 		/// <param name="group"></param>
 		public virtual void Add(SpriteCollection group)
 		{
-			group.Add(this);
 			this.groups.Add(group);
+			group.AddInternal(this);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="group"></param>
-		protected void InnerAdd(SpriteCollection group)
+		public void AddInternal(SpriteCollection group)
 		{
-			group.Add(this);
 			this.groups.Add(group);
 		}
 
@@ -683,7 +672,16 @@ namespace SdlDotNet.Sprites
 		/// <param name="group"></param>
 		public virtual void Remove(SpriteCollection group)
 		{
-			group.Remove(this);
+			this.groups.Remove(group);
+			group.RemoveInternal(this);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="group"></param>
+		public void RemoveInternal(SpriteCollection group)
+		{
 			this.groups.Remove(group);
 		}
 
@@ -748,6 +746,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="disposing"></param>
 		protected virtual void Dispose(bool disposing)
 		{
+			this.Kill();
 			if (!this.disposed)
 			{
 				if (disposing)

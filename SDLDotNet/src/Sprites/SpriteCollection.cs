@@ -62,14 +62,13 @@ namespace SdlDotNet.Sprites
 		/// <param name="surface"></param>
 		public virtual RectangleCollection Draw(Surface surface)
 		{
-			this.lostRects.Clear();
 			RectangleCollection rects = new RectangleCollection();
 			for (int i = 0; i < this.Count; i++)
 			{
 				if (this[i].Visible)
 				{
 					rects.Add(surface.Blit(this[i].Render(), this[i].Rectangle));
-					if (!(this[i].RectangleDirty.Equals(this[i].Rectangle)))
+					if (this[i].Dirty)
 					{
 						rects.Add(this[i].RectangleDirty);
 					}
@@ -90,6 +89,7 @@ namespace SdlDotNet.Sprites
 			{
 				surface.Blit(background, this.lostRects[i], this.lostRects[i]);
 			}
+			surface.Update(this.lostRects);
 
 			for (int i = 0; i < this.Count; i++)
 			{
@@ -98,6 +98,7 @@ namespace SdlDotNet.Sprites
 					surface.Blit(background, this[i].Rectangle, this[i].Rectangle);
 				}
 			}
+			this.lostRects.Clear();
 		}
 
 		#endregion
@@ -108,6 +109,16 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="sprite">Sprite to add</param>
 		public virtual int Add(Sprite sprite)
+		{
+			sprite.AddInternal(this);
+			return (List.Add(sprite));
+		}
+
+		/// <summary>
+		/// Adds sprite to group
+		/// </summary>
+		/// <param name="sprite">Sprite to add</param>
+		public int AddInternal(Sprite sprite)
 		{
 			return (List.Add(sprite));
 		}
@@ -120,6 +131,7 @@ namespace SdlDotNet.Sprites
 		{
 			for (int i = 0; i < spriteCollection.Count; i++)
 			{
+				spriteCollection[i].AddInternal(this);
 				this.List.Add(spriteCollection[i]);
 			}
 			return this.Count;
@@ -136,14 +148,24 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-
 		/// <summary>
 		/// Removes sprite from group
 		/// </summary>
 		/// <param name="sprite">Sprite to remove</param>
 		public virtual void Remove(Sprite sprite)
 		{
-			this.lostRects.Add(sprite.Rectangle);
+			this.lostRects.Add(sprite.RectangleDirty);
+			sprite.RemoveInternal(this);
+			List.Remove(sprite);
+		}
+
+		/// <summary>
+		/// Removes sprite from group
+		/// </summary>
+		/// <param name="sprite">Sprite to remove</param>
+		public void RemoveInternal(Sprite sprite)
+		{
+			this.lostRects.Add(sprite.RectangleDirty);
 			List.Remove(sprite);
 		}
 
@@ -735,16 +757,6 @@ namespace SdlDotNet.Sprites
 		#endregion
 
 		#region Properties
-//		private SpriteCollection lostSprites;
-//
-//		protected SpriteCollection LostSprites
-//		{
-//			get
-//			{
-//				return lostSprites;
-//			}
-//		}
-
 		#endregion
 
 		// Provide the explicit interface member for ICollection.

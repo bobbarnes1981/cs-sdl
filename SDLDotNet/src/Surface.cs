@@ -1170,20 +1170,6 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="rects"></param>
-		/// <param name="background"></param>
-		public void Erase(RectangleCollection rects, Surface background)
-		{
-			for (int i = 0; i < rects.Count; i++)
-			{
-				this.Blit(background, rects[i], rects[i]);
-				//this.Blit(background, rects[i]);
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="rectangle"></param>
 		/// <param name="background"></param>
 		public void Erase(Rectangle rectangle, Surface background)

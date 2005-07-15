@@ -61,7 +61,6 @@ namespace SdlDotNet.Examples
 		#endregion Constructor
 
 		#region Event Update Methods
-		int i;
 		/// <summary>
 		/// Every tick will update the animation frame
 		/// </summary>
@@ -147,7 +146,14 @@ namespace SdlDotNet.Examples
 				// If we are being held down, pick up the marble
 				if (args.ButtonPressed)
 				{
-					this.BeingDragged = true;
+					if (args.Button == MouseButton.PrimaryButton)
+					{
+						this.BeingDragged = true;
+					}
+					else
+					{
+						this.Kill();
+					}
 				}
 				else
 				{
