@@ -2,7 +2,7 @@ Future changes (as of July 2005):
 
 * Update API to mirror Pygame 1.7.0. It mirrors 1.6 right now.
 * Add more docs and tutorials.
-* Create installer for windows and rpms/ebuild/debs/etc... for Linux.
+* Create installer for rpms/ebuild/debs/etc... for Linux.
 * Fix build process to build on Mono.
 * Work on a Mac version.
 * Create custom WinForms control for Surface.
@@ -27,5 +27,3 @@ There is a new comment showing a link to a website talking about glyph materics.
 SDL_gfxPrimitives.h: The version number has changed.
 SDL_imageFilter.h: several new Shift functions.
 SDL_rotozoom.h: RotozoomSurfaceXY and rotozoomSurfaceSizeXY. Notably they can be used to flip a surface horzontally and vertically by using a negative number in the axis parameter. I may replace the C# versions with calls to these functions.
-
-Smpeg: SDL_mixer 1.2.6 does not like Smpeg 0.4.4 or 0.4.5. I will stick to SDL_mixer 1.2.5 until there is a fix for Smpeg.
