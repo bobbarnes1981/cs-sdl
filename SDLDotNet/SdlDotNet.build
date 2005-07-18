@@ -190,11 +190,9 @@
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}/deps">
-	    <fileset basedir="${project.main.dir}/${lib.dir}">
-		<include name="*.dll"/>
-		<exclude name="${native.sdl}.dll"/>
-		<exclude name="${nunit.assembly}.dll"/>
+	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}/win32deps">
+	    <fileset basedir="${project.main.dir}/${lib.dir}/win32deps">
+		<include name="**"/>
 	    </fileset>
 	</copy>
 	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.tutorials.dir}">
