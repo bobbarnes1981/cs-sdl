@@ -3,7 +3,7 @@ David Hudson xx xx 2005
 * Added a more sophisticated SpriteCollection.Draw() method. It now mirrors the RenderUpdate() method in PyGame. You can clear and update just the rects that changed.
 * Fixed major bug with the SpriteCollection/Sprite Add() and Remove() methods. They were causing Dispose() problems.
 * Fixed problems with LostSprites in SpriteCollections. This allows the old Rects to be cleared properly.
-* Removed WeaponFire and Bounce examples. WeaponFire has been integratedinto BombRun (press the space bar to fire).
+* Removed WeaponFire and Bounce examples. WeaponFire has been integrated into BombRun (press the space bar to fire).
 * The BounceSprites example will remove a ball if you right click on it. This uses the Sprite.Kill()/Remove() methods.
 * Updated to Sdl_mixer 1.2.6
 * Created Windows installer.
