@@ -35,6 +35,8 @@ CRCCheck on
 
 Var STARTMENU_FOLDER
 Var INI_VALUE
+Var file_handle
+Var filename
 
 ;--------------------------------
 ;Installer Pages
@@ -239,7 +241,7 @@ Function AddManagedDLL
   Exch
   Exch $R1
  
-  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.432\GacUtil.exe" /i "$R0" /f'
+  call GACInstall
   WriteRegStr HKLM "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" "" "$R0"
   WriteRegStr HKCU "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" "" "$R0"
   WriteRegStr HKLM "SOFTWARE\Microsoft\VisualStudio\7.1\AssemblyFolders\$R1" "" "$R0"
@@ -253,6 +255,7 @@ Function un.DeleteManagedDLLKey
   Exch
   Exch $R1
  
+ Call un.GACUnInstall
   DeleteRegKey HKLM "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
   DeleteRegKey HKCU "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
   DeleteRegKey HKLM "SOFTWARE\Microsoft\VisualStudio\7.1\AssemblyFolders\$R1"
@@ -300,7 +303,7 @@ Section Uninstall
   SetOutPath "$DESKTOP"
   
   RMDir /r "$SMPROGRAMS\SdlDotNet"
-  RMDir /r "$INSTDIR"
+ 
   
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
@@ -308,6 +311,8 @@ Section Uninstall
   Push "SdlDotNet"
   Push $INSTDIR\bin\assemblies
   Call un.DeleteManagedDLLKey
+
+  RMDir /r "$INSTDIR"
 SectionEnd
 
 ; GetWindowsVersion, taken from NSIS help, modified for our purposes
@@ -380,5 +385,22 @@ Function IsSupportedWindowsVersion
 
    Pop $R1
    Exch $R0
+
+FunctionEnd
+
+Function GACInstall
+  FindFirst $file_handle $filename $INSTDIR\bin\assemblies\*.dll
+  loop:
+	StrCmp $filename "" done
+	nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /i "$INSTDIR\bin\assemblies\$filename" /f'
+	FindNext $file_handle $filename
+  	Goto loop
+  done:
+
+FunctionEnd
+
+Function un.GACUnInstall
+  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "Tao.Sdl"'
+  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet"'
 
 FunctionEnd
