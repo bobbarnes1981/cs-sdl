@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 		{
 			screen = Video.SetVideoModeWindow(640, 480, 16, true);
 			background = Graphics.LoadImage("../../Data/background.png", Color.FromArgb(255, 0, 255));
-			Video.WindowCaption = "Snow Demo";
+			Video.WindowCaption = "SdlDotNet - Snow Demo";
 		}
 		
 		/// <summary>

@@ -39,8 +39,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public Bomb()
 		{
-			Game.Debug("Constructing Bomb");
-
 			if(_Image == null)
 			{
 				Surface tempSurface = new Surface("../../Data/Bomb.bmp");
@@ -137,8 +135,6 @@ namespace SdlDotNet.Examples
 		/// <param name="location"></param>
 		public Player(Point location)
 		{
-			Game.Debug("Constructing Player");
-
 			_Location = location;
 			jumpstart = location.Y;
 
@@ -309,24 +305,11 @@ namespace SdlDotNet.Examples
 		ArrayList bullets = new ArrayList();
 		ArrayList mustdispose = new ArrayList(); // see below
 
-		// messages for debugging purposes are sent to this method, therefore it
-		// also is static
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="message"></param>
-		[Conditional("DEBUG")]
-		public static void Debug(string message)
-		{
-			Console.WriteLine("> {0}", message);
-		}
-
 		/// <summary>
 		/// 
 		/// </summary>
 		public void Run()
 		{
-			Game.Debug("Running");
 			_Screen = Video.SetVideoModeWindow(640, 480, true);
 			Surface tempSurface = new Surface("../../Data/Background1.png");
 			_Background = tempSurface.Convert();
@@ -347,13 +330,11 @@ namespace SdlDotNet.Examples
 
 			Video.Mouse.ShowCursor(false);
 			Video.WindowCaption =
-				"Bomb Run, (c) 2003 CL Game Studios (Sijmen Mulder)";
+				"SdlDotNet - Bomb Run";
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(Keyboard);
 			Events.Quit += new QuitEventHandler(Quit);
 			player.WeaponFired += new FireEventHandler(PlayerWeaponFired);
-
-			Game.Debug("Starting game loop");
 
 			int lastupdate = 0;
 			while(!quit)
@@ -426,8 +407,6 @@ namespace SdlDotNet.Examples
 
 		private void PlayerWeaponFired(object sender, FireEventArgs e)
 		{
-			Game.Debug("Fire in the hole!");
-
 			// create a new bullet
 			WeaponParticle bullet = new WeaponParticle(e.Location, new Speed(0,-300));
 			bullet.DisposeRequest += 
@@ -442,7 +421,6 @@ namespace SdlDotNet.Examples
 		/// <param name="e"></param>
 		private void BulletDisposeRequest(object sender, EventArgs e)
 		{
-			Game.Debug("Disposing a bullet");
 			mustdispose.Add(sender); // see Game.Run, the large comment
 		}
 
@@ -466,7 +444,6 @@ namespace SdlDotNet.Examples
 		/// <param name="e"></param>
 		private void Quit(object sender, QuitEventArgs e)
 		{
-			Game.Debug("Quit was requested");
 			quit = true;
 		}
 
@@ -511,29 +488,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public static void Main()
 		{
-			Console.WriteLine("Bomb Run, (C) 2003 Sijmen Mulder");
-
-			try
-			{
-				(new Game()).Run();
-			}
-#if DEBUG // whe dont want this to happen when there is no console
-			catch(Exception e)
-			{
-				Console.WriteLine(e);
-				Console.ReadLine();
-			}
-			catch
-			{
-				Console.WriteLine();
-			}
-#endif
-			finally
-			{
-				//				try { SDL.Instance.Dispose(); } 
-				//				catch {} // = bugfix
-				Console.WriteLine("Bye");
-			}
+			(new Game()).Run();
 		}
 	}
 
@@ -588,8 +543,6 @@ namespace SdlDotNet.Examples
 		/// <param name="speed"></param>
 		public WeaponParticle(Point location, Speed speed)
 		{
-			Game.Debug("Constructing WeaponParticle");
-
 			_Location = location;
 			_Speed = speed;
 
@@ -613,7 +566,6 @@ namespace SdlDotNet.Examples
 				_Location.X > Game.Screen.Width || _Location.Y + _Image.Size.Height <
 				0 || _Location.Y > Game.Screen.Height))
 			{
-				Game.Debug("Requesting disposal of WeaponParticle");
 				DisposeRequest(this, new EventArgs());
 			}
 		}

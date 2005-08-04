@@ -65,7 +65,7 @@ namespace SdlDotNet.Examples
 				Mixer.Music.Play(1);
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
-				Video.WindowCaption = "Rectangles Example";
+				Video.WindowCaption = "SdlDotNet - Rectangles Example";
 				Video.Mouse.ShowCursor(false);
 				Mixer.Music.EnableMusicFinishedCallback();
 

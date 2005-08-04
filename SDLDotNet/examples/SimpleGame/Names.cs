@@ -24,7 +24,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public sealed class Names
 	{
-		static string windowCaption = "Simple SDL.NET Game";
+		static string windowCaption = "SdlDotNet Simple Game";
 		static string logFile = "SimpleGame.log";
 		static string logFile2 = "SimpleGame2.log";
 		static string logFile3 = "SimpleGame3.log";

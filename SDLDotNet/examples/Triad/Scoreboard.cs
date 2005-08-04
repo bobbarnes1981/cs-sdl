@@ -19,6 +19,7 @@
 
 
 using System;
+using System.IO;
 using System.Drawing;
 using SdlDotNet;
 
@@ -35,7 +36,14 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public Scoreboard()
 		{
-			font = new SdlDotNet.Font(@"C:\WINNT\Fonts\arial.ttf",18);
+			string FontName = "FreeSans.ttf";
+			string filepath = @"../../";
+
+			if (File.Exists(FontName))
+			{
+				filepath = @"./";
+			}
+			font = new SdlDotNet.Font(filepath + FontName,18);
 		}
 
 		/// <summary>

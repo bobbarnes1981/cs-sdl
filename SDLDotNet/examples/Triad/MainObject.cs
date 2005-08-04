@@ -49,7 +49,7 @@ namespace SdlDotNet.Examples
 			int width = 800;
 			int height = 600;
 			
-			Video.WindowCaption = "Triad";
+			Video.WindowCaption = "SdlDotNet - Triad";
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.SDL_KeyboardDown); 
 			Events.KeyboardUp += 

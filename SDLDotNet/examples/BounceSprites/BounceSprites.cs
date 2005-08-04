@@ -82,7 +82,7 @@ namespace SdlDotNet.Examples
 			//Set up screen
 			screen = Video.SetVideoModeWindow(width, height, true);
 			screen.Blit(background);
-			Video.WindowCaption = "Bounce Sprites";
+			Video.WindowCaption = "SdlDotNet - Bounce Sprites";
 
 			//instantiate each marble
 			for (int i = 0; i < this.maxBalls; i++)

@@ -220,6 +220,7 @@ namespace SdlDotNet.Examples
 			Particle particle;
 			//Set up screen to display app.
 			Surface screen = Video.SetVideoModeWindow(width, height); 
+			Video.WindowCaption = "SdlDotNet - Particle Engine";
 
 			// Allow for app to respond to keybaord presses.
 			Events.KeyboardDown += 

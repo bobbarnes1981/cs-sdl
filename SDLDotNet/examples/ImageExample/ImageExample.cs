@@ -80,7 +80,7 @@ namespace SdlDotNet.Examples
 				button.Click +=new SdlButtonEventHandler(button_Click);
 				
 				Surface screen = Video.SetVideoModeWindow(width, height, true);
-				Video.WindowCaption = "Surface Example";
+				Video.WindowCaption = "SdlDotNet - Image Example";
 				Video.Mouse.ShowCursor(false); // hide the cursor
 
 				Surface surf = 

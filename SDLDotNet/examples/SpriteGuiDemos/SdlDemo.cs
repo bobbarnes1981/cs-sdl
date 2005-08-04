@@ -55,7 +55,7 @@ namespace SdlDotNet.Examples
 			sdlDemo = this;
 
 			// Start up the SDL
-			Video.WindowCaption = "SDL.NET Demonstration";
+			Video.WindowCaption = "SdlDotNet - Sprite and Gui Demo";
       
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);

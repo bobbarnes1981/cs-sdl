@@ -60,7 +60,7 @@ namespace SdlDotNet.Examples
 			{
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
-				Video.WindowCaption = "Primitives Example";
+				Video.WindowCaption = "SdlDotNet - Primitives Example";
 				Video.Mouse.ShowCursor(false);
 
 				Surface surf = 
@@ -72,7 +72,7 @@ namespace SdlDotNet.Examples
 				Line line;
 				Triangle triangle;
 				Polygon polygon;
-				Pie pie;
+				//Pie pie;
 				Bezier bezier;
 				Box box;
 
@@ -288,45 +288,45 @@ namespace SdlDotNet.Examples
 						{
 							// handle events till the queue is empty
 						} 
-
-						while (times < MAXCOUNT)
-						{
-							pie = new Pie((short)rand.Next(0, width), 
-								(short)rand.Next(0, height), 
-								(short)rand.Next(20, 100), 
-								(short)rand.Next(0, 360), 
-								(short)rand.Next(0, 360));
-
-							surf.DrawPie(pie, 
-								Color.FromArgb(
-								rand.Next(255), 
-								rand.Next(255), 
-								rand.Next(255) ,
-								rand.Next(255)));
-							pie = new Pie((short)rand.Next(0, width), 
-								(short)rand.Next(0, height) , 
-								(short)rand.Next(20, 100), 
-								(short)rand.Next(0, 360), 
-								(short)rand.Next(0, 360));
-
-							surf.DrawFilledPie(pie, 
-								Color.FromArgb(rand.Next(255), 
-								rand.Next(255), 
-								rand.Next(255),
-								rand.Next(255)));
-							times++;
-							screen.Flip();
-							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
-							Thread.Sleep(SLEEPTIME);
-						}
-
-						Thread.Sleep(SLEEPTIME);
-						times = 0;
-						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-						while (Events.Poll()) 
-						{
-							// handle events till the queue is empty
-						} 
+// //Ubuntu Linux has an old version of SDL_gfx that does not support the Pie primitive.
+//						while (times < MAXCOUNT)
+//						{
+//							pie = new Pie((short)rand.Next(0, width), 
+//								(short)rand.Next(0, height), 
+//								(short)rand.Next(20, 100), 
+//								(short)rand.Next(0, 360), 
+//								(short)rand.Next(0, 360));
+//
+//							surf.DrawPie(pie, 
+//								Color.FromArgb(
+//								rand.Next(255), 
+//								rand.Next(255), 
+//								rand.Next(255) ,
+//								rand.Next(255)));
+//							pie = new Pie((short)rand.Next(0, width), 
+//								(short)rand.Next(0, height) , 
+//								(short)rand.Next(20, 100), 
+//								(short)rand.Next(0, 360), 
+//								(short)rand.Next(0, 360));
+//
+//							surf.DrawFilledPie(pie, 
+//								Color.FromArgb(rand.Next(255), 
+//								rand.Next(255), 
+//								rand.Next(255),
+//								rand.Next(255)));
+//							times++;
+//							screen.Flip();
+//							screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
+//							Thread.Sleep(SLEEPTIME);
+//						}
+//
+//						Thread.Sleep(SLEEPTIME);
+//						times = 0;
+//						surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
+//						while (Events.Poll()) 
+//						{
+//							// handle events till the queue is empty
+//						} 
 						
 						while (times < MAXCOUNT)
 						{
