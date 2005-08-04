@@ -1,0 +1,5 @@
+bin
+obj
+SdlDotNet.Windows.csproj
+SdlDotNet.Windows.csproj.user
+SdlDotNet.Windows.xml
