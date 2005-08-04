@@ -1093,7 +1093,7 @@ namespace SdlDotNet
 
 			if (sprite.Visible)
 			{
-				rect = this.Blit(sprite.Render());
+				rect = this.Blit(sprite.Render(), sprite.Rectangle);
 			}
 			return rect;
 		}
