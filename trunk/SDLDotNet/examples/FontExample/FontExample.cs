@@ -86,7 +86,7 @@ namespace SdlDotNet.Examples
 			//channel2.Play(sound);
 
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
-			Video.WindowCaption = "Font Example";
+			Video.WindowCaption = "SdlDotNet - Font Example";
 			//Video.Mouse.ShowCursor(false);
 			System.Drawing.Text.FontCollection installedFonts = FontSystem.SystemFontNames;
 			Console.WriteLine("Installed Fonts: " + installedFonts.ToString());

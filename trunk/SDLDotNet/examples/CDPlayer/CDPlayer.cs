@@ -194,7 +194,7 @@ namespace SdlDotNet.Examples
 			// CDPlayer
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(354, 134);
+			this.ClientSize = new System.Drawing.Size(362, 367);
 			this.Controls.Add(this.buttonPrevious);
 			this.Controls.Add(this.buttonNext);
 			this.Controls.Add(this.labelStatus);
@@ -208,7 +208,8 @@ namespace SdlDotNet.Examples
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "CDPlayer";
-			this.Text = "SDL.NET CD Player";
+			this.Text = "SdlDotNet - CD Player";
+			this.Load += new System.EventHandler(this.CDPlayer_Load);
 			this.ResumeLayout(false);
 
 		}
@@ -313,6 +314,11 @@ namespace SdlDotNet.Examples
 		private void labelStatus_Click(object sender, System.EventArgs e)
 		{
 			
+		}
+
+		private void CDPlayer_Load(object sender, System.EventArgs e)
+		{
+		
 		}
 
 //		private void timer_Tick(object sender, System.EventArgs e) {

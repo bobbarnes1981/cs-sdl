@@ -293,7 +293,7 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.KeyboardDown);
 
-			Video.WindowCaption = "SdlDotNet Gears";
+			Video.WindowCaption = "SdlDotNet - Gears";
 
 			init ();
 			reshape ();
