@@ -1,5 +1,11 @@
+3.1.3
+David Hudson xx xxx 2005
+* Fixed GAC installation and uninstall issues.
+* Fixed Surface.Blit(Sprite). It now blits the sprite to the right location.
+* Examples now run much better on Linux. The Boo example may not run if the distro does not have Boo installed.
+
 3.1.2
-David Hudson xx xx 2005
+David Hudson 18 July 2005
 * Added a more sophisticated SpriteCollection.Draw() method. It now mirrors the RenderUpdate() method in PyGame. You can clear and update just the rects that changed.
 * Fixed major bug with the SpriteCollection/Sprite Add() and Remove() methods. They were causing Dispose() problems.
 * Fixed problems with LostSprites in SpriteCollections. This allows the old Rects to be cleared properly.

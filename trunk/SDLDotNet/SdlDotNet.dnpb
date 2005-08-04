@@ -594,5 +594,36 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
+	<Project name="SdlDotNet.Windows" path="extras\\Windows" language="C#" type="Library" assemblyName="SdlDotNet.Windows" rootNamespace="SdlDotNet.Windows">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>SdlDotNet.Windows.xml</XmlDocFile>
+		    <WarningLevel>4</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>SdlDotNet.Windows.xml</XmlDocFile>
+		    <WarningLevel>1</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="System.Windows.Forms" /> 
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Files>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
     </Solution>
 </DNPreBuild>
