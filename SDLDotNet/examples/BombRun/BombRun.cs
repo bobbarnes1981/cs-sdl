@@ -328,7 +328,7 @@ namespace SdlDotNet.Examples
 				bombs[i] = new Bomb();
 			}
 
-			Video.Mouse.ShowCursor(false);
+			Video.Mouse.ShowCursor = false;
 			Video.WindowCaption =
 				"SdlDotNet - Bomb Run";
 			Events.KeyboardDown +=
