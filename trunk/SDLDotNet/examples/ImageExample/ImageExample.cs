@@ -81,7 +81,7 @@ namespace SdlDotNet.Examples
 				
 				Surface screen = Video.SetVideoModeWindow(width, height, true);
 				Video.WindowCaption = "SdlDotNet - Image Example";
-				Video.Mouse.ShowCursor(false); // hide the cursor
+				Video.Mouse.ShowCursor = false; // hide the cursor
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);

@@ -61,7 +61,7 @@ namespace SdlDotNet.Examples
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
 				Video.WindowCaption = "SdlDotNet - Primitives Example";
-				Video.Mouse.ShowCursor(false);
+				Video.Mouse.ShowCursor = false;
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);

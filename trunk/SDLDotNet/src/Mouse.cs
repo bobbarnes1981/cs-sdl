@@ -47,69 +47,58 @@ namespace SdlDotNet
 			}
 		}
 
-		/// <summary>
-		/// Shows the mouse cursor
-		/// </summary>
-		public void ShowCursor(bool visible) 
-		{
-			if (visible)
-			{
-				Sdl.SDL_ShowCursor(Sdl.SDL_ENABLE);
-			}
-			else
-			{
-				Sdl.SDL_ShowCursor(Sdl.SDL_DISABLE);
-			}
-		}
+		/// <summary> 
+		/// Gets and sets whether or not the mouse cursor is visible. 
+		/// </summary> 
+		public bool ShowCursor 
+		{ 
+			get 
+			{ 
+				return (Sdl.SDL_ShowCursor(Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
+			} 
+			set 
+			{ 
+				Sdl.SDL_ShowCursor(value ? Sdl.SDL_ENABLE : Sdl.SDL_DISABLE);
+			} 
+		} 
 
-		/// <summary>
-		/// Queries the current cursor state
-		/// </summary>
-		/// <returns>True if the cursor is visible, otherwise False</returns>
-		public bool IsCursorVisible() 
-		{
-			return (Sdl.SDL_ShowCursor(Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
-		}
+		/// <summary> 
+		/// Gets and sets the current mouse position. 
+		/// </summary> 
+		public Point MousePosition 
+		{ 
+			get 
+			{ 
+				int x; 
+				int y; 
+				Sdl.SDL_GetMouseState(out x, out y); 
+				return new Point(x, y); 
+			} 
+			set 
+			{ 
+				Sdl.SDL_WarpMouse((short)value.X, (short)value.Y); 
+			} 
+		} 
 
-		/// <summary>
-		/// Move the mouse cursor to a specific location
-		/// </summary>
-		/// <param name="x">The X coordinate</param>
-		/// <param name="y">The Y coordinate</param>
-		public static void MoveCursor(short x, short y) 
-		{
-			Sdl.SDL_WarpMouse(x, y);
-		}
-
-		/// <summary>
-		/// Returns current mouse position
-		/// </summary>
-		/// <returns></returns>
-		public Point MousePosition
-		{
-			get
-			{
-				int x;
-				int y;
-				Sdl.SDL_GetMouseState(out x, out y);
-				return new Point(x, y);
-			}
-		}
-
-		/// <summary>
-		/// Returns change in mouse position
-		/// </summary>
-		/// <returns></returns>
-		public Point MousePositionChange
-		{
-			get
-			{
-				int x;
-				int y;
-				Sdl.SDL_GetRelativeMouseState(out x, out y);
-				return new Point(x, y);
-			}
-		}
+		/// <summary> 
+		/// Gets and sets the relative mouse position. 
+		/// </summary> 
+		public Point MousePositionChange 
+		{ 
+			get 
+			{ 
+				int x; 
+				int y; 
+				Sdl.SDL_GetRelativeMouseState(out x, out y); 
+				return new Point(x, y); 
+			} 
+			set  // Change the relative mouse position 
+			{ 
+				Point mousePos = MousePosition; 
+				Sdl.SDL_WarpMouse((short)(mousePos.X + value.X), 
+					(short)(mousePos.Y + value.Y)); 
+			} 
+		} 
 
 		/// <summary>
 		/// Returns true if app has mouse focus

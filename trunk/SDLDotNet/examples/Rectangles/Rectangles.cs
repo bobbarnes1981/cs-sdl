@@ -66,7 +66,7 @@ namespace SdlDotNet.Examples
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
 				Video.WindowCaption = "SdlDotNet - Rectangles Example";
-				Video.Mouse.ShowCursor(false);
+				Video.Mouse.ShowCursor = false;
 				Mixer.Music.EnableMusicFinishedCallback();
 
 				Surface surf = 

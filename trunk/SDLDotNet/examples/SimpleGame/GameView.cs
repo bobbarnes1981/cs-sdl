@@ -114,7 +114,7 @@ namespace SdlDotNet.Examples
 			//fill the surface with black
 			this.surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
 			Video.WindowCaption = Names.WindowCaption;
-			Video.Mouse.ShowCursor(false);
+			Video.Mouse.ShowCursor = false;
 		}
 
 		/// <summary>
