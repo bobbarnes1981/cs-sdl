@@ -2,7 +2,10 @@
 David Hudson xx xxx 2005
 * Fixed GAC installation and uninstall issues.
 * Fixed Surface.Blit(Sprite). It now blits the sprite to the right location.
-* Examples now run much better on Linux. The Boo example may not run if the distro does not have Boo installed.
+* The Triad Demo now works on Linux. A Windows-specific font was being used.
+* The Primitives Example now works on Linux. Some distrobutions have an old version of SDL_gfx where the Pie primitive has not been implemented and was causing a crash.
+* Updated the Mono Config file. An Ubuntu 5.04 config file was added as well.
+* Merged TiledSurfaceCollection into SurfaceCollection.
 
 3.1.2
 David Hudson 18 July 2005
