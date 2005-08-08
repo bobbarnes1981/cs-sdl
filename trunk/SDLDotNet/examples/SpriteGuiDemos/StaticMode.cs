@@ -42,7 +42,7 @@ namespace SdlDotNet.Examples
 			this.Sprites.Add(s);
 
 			// Create the fragment image
-			TiledSurfaceCollection td = new TiledSurfaceCollection(new Surface("../../Data/marble1.png"), new Size(64, 64));
+			SurfaceCollection td = new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(64, 64));
 			AnimatedDemoSprite an = new AnimatedDemoSprite(td, new Vector(200, 32, 100));
 			an.X = 250;
 			Sprites.Add(an);

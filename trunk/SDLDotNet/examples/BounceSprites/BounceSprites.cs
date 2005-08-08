@@ -84,14 +84,14 @@ namespace SdlDotNet.Examples
 			screen.Blit(background);
 			Video.WindowCaption = "SdlDotNet - Bounce Sprites";
 
-			//instantiate each marble
+			//This loads the various images (provided by Moonfire) 
+			// into a SurfaceCollection for animation
+			SurfaceCollection marbleSurfaces = 
+				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(64, 64)); 
+
 			for (int i = 0; i < this.maxBalls; i++)
 			{
-				//This loads the various images (provided by Moonfire) 
-				// into a SurfaceCollection for animation
-				SurfaceCollection marbleSurfaces = 
-					new SurfaceCollection("../../Data/marble" + (i % 2 + 1), ".png");
-				//Create a new Sprite at a random lcation on the screen
+				//Create a new Sprite at a random location on the screen
 				BounceSprite bounceSprite = 
 					new BounceSprite(marbleSurfaces,
 					new Vector(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
