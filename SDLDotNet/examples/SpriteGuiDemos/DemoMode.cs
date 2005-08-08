@@ -91,12 +91,8 @@ namespace SdlDotNet.Examples
 		protected static SurfaceCollection LoadTiledMarble(string name)
 		{
 			// Load the marble
-			Sprite id = 
-				new Sprite(new Surface("../../Data/" + name + ".png"));
-			SurfaceCollection surfCollection = new SurfaceCollection();
-			surfCollection.Add(id.Surface);
-			TiledSurfaceCollection td = 
-				new TiledSurfaceCollection(new Surface("../../Data/" + name + ".png"), new Size(64, 64));
+			SurfaceCollection td = 
+				new SurfaceCollection(new Surface("../../Data/" + name + ".png"), new Size(64, 64));
 
 			return td;
 		}
