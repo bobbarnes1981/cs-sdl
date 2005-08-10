@@ -25,7 +25,7 @@ namespace SdlDotNet.Examples
 		#region Variables
 		private const int width = 640;
 		private const int height = 480;
-		private const int bpp = 32;
+		//private const int bpp = 32;
 		private Random rand;
 		private bool quit;
 

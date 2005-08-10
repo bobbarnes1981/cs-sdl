@@ -120,7 +120,7 @@ namespace SdlDotNet.Examples
 			}
 			Sprites.EnableTickEvent();
 		}
-		private Surface newSurf = new Surface();
+		//private Surface newSurf = new Surface();
 
 		/// <summary>
 		/// Adds the internal sprite manager to the outer one.

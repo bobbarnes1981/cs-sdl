@@ -52,7 +52,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Start()
 		{
-			sdlDemo = this;
+			//sdlDemo = this;
 
 			// Start up the SDL
 			Video.WindowCaption = "SdlDotNet - Sprite and Gui Demo";
@@ -352,7 +352,7 @@ namespace SdlDotNet.Examples
 		#endregion
 
 		#region Properties
-		private static SdlDemo sdlDemo;
+		//private static SdlDemo sdlDemo;
 		private bool running = true;
 		private static SpriteCollection master = new SpriteCollection();
 		private static SpriteCollection manager = new SpriteCollection();

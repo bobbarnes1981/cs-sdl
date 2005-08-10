@@ -31,7 +31,7 @@ namespace SdlDotNet.Examples
 		int height;
 		int width;
 		Surface surf;
-		Names names;
+		//Names names;
 		EntitySprite entitySprite;
 		Rectangle[] mapRectangles;
 		ArrayList backSprites;
@@ -48,7 +48,7 @@ namespace SdlDotNet.Examples
 			eventManager.OnTickEvent += new EventManager.TickEventHandler(Subscribe);
 			this.width = 424;
 			this.height = 440;
-			this.names = Names.Instance;
+			//this.names = Names.Instance;
 			this.backSprites = new ArrayList();
 			this.frontSprites = new ArrayList();
 			try
