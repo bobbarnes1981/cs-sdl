@@ -83,4 +83,8 @@ using System.Security.Permissions;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.Execution)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
-[assembly: AssemblyKeyFile("..\\..\\..\\..\\src\\SdlDotNet.snk")]
+#if DEBUG
+[assembly: AssemblyKeyFile("")]
+#else
+[assembly: AssemblyKeyFile(@"SdlDotNet.snk")]
+#endif

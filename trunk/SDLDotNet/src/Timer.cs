@@ -27,9 +27,10 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Timer
 	{
-		static readonly Timer instance = new Timer();
-
 		Timer()
+		{}
+
+		static Timer()
 		{
 			Initialize();
 		}

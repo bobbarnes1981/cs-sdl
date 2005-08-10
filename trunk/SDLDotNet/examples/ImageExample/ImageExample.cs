@@ -131,7 +131,14 @@ namespace SdlDotNet.Examples
 
 				int JeepFrame = 0;
 				Mixer.Music.Load(filepath + "fard-two.ogg");
-				Mixer.Music.Play(-1);
+				try
+				{
+					Mixer.Music.Play(-1);
+				}
+				catch (DivideByZeroException)
+				{
+					// Linux audio problem
+				}
 
 				while (!quitFlag) 
 				{

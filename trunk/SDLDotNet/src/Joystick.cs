@@ -136,7 +136,7 @@ namespace SdlDotNet
 		private bool disposed;
 		private const float JOYSTICK_ADJUSTMENT = 32768;
 		private const float JOYSTICK_SCALE = 65535;
-		private const short JOYSTICK_THRESHHOLD = 3277;
+		//private const short JOYSTICK_THRESHHOLD = 3277;
 
 		/// <summary>
 		/// open joystick at index number

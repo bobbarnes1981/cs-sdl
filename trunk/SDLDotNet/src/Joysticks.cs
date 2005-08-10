@@ -32,13 +32,10 @@ namespace SdlDotNet
 	{
 		static private bool disposed;
 
-		static readonly Joysticks instance = new Joysticks();
-
-//		static Joysticks()
-//		{
-//		}
-
 		Joysticks()
+		{}
+
+		static Joysticks()
 		{
 			Initialize();
 		}

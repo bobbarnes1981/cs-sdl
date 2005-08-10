@@ -30,9 +30,10 @@ namespace SdlDotNet
 	public sealed class FontSystem
 	{
 		static private bool disposed;
-		static readonly FontSystem instance = new FontSystem();
-
 		FontSystem()
+		{}
+
+		static FontSystem()
 		{
 			Initialize();
 		}

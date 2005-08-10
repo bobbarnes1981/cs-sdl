@@ -76,7 +76,13 @@ namespace SdlDotNet.Examples
 				grid.BlocksDestroyed += 
 					new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
 
-				levelUpSound = Mixer.Sound("../../Data/levelup.wav");
+				try
+				{
+					levelUpSound = Mixer.Sound("../../Data/levelup.wav");
+				}
+				catch (SdlException)
+				{
+				}
 				
 				while (!quitflag) 
 				{
@@ -140,7 +146,10 @@ namespace SdlDotNet.Examples
 				this.blockCount = 0;
 				this.grid.SpeedFactor = grid.SpeedFactor * 1.025f;
 				this.board.Level += 1;
-				this.levelUpSound.Play();
+				if (this.levelUpSound != null)
+				{
+					this.levelUpSound.Play();
+				}
 			}
 			
 			this.board.BlocksDestroyed += args.BlocksCount;
@@ -155,7 +164,10 @@ namespace SdlDotNet.Examples
 		{
 			grid.Dispose();
 			board.Dispose();
-			levelUpSound.Dispose();
+			if (levelUpSound != null)
+			{
+				levelUpSound.Dispose();
+			}
 		}
 
 		#endregion

@@ -48,13 +48,12 @@ namespace SdlDotNet
 		public Movie(string file)
 		{
 			this.Handle =
-				Smpeg.SMPEG_new(file, out movieInfo, 
+				Smpeg.SMPEG_new(file, out this.movieInfo, 
 				(int) SdlFlag.TrueValue);
 			if (this.Handle == IntPtr.Zero)
 			{
 				throw MovieStatusException.Generate();
 			}
-			this.movieInfo = movieInfo;
 		}
 
 		/// <summary>

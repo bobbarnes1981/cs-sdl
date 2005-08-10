@@ -83,7 +83,14 @@ namespace SdlDotNet.Examples
 			map.Build();
 			Mixer.Music.Load("../../fard-two.ogg");
 			Mixer.Music.Volume = 127;
-			Mixer.Music.Play(-1);
+			try
+			{
+				Mixer.Music.Play(-1);
+			}
+			catch (DivideByZeroException)
+			{
+				// Linux audio problem
+			}
 			this.gameStatus = GameStatus.Started;
 			eventManager.Publish(new GameStatusEventArgs(this, GameStatus.Started));
 		}

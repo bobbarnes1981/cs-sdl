@@ -9,6 +9,13 @@
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
+	<ifnot test="${build.debug}">
+	    <copy todir="${nant.project.basedir}/${build.dir}">
+		<fileset basedir="${nant.project.basedir}">
+		    <include name="${nant.project.name}.snk"/>
+		</fileset>
+	    </copy>
+	</ifnot>
 	<!-- build SDL.NET -->
 	<csc target="library" warnaserror="true" unsafe="true" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
 	    <sources failonempty="true">
@@ -25,7 +32,7 @@
 	<delete dir="${bin.dir}" failonerror="false" />
 	<delete dir="${obj.dir}" failonerror="false" />
     </target>
-   <target name="doc" description="Creates documentation.">
+    <target name="doc" description="Creates documentation.">
 	<ndoc failonerror="true" verbose="true">
 	    <assemblies basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${nant.project.name}.dll" />
