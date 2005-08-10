@@ -115,7 +115,7 @@ namespace SdlDotNet.Examples
 		const Key LEFT = Key.LeftArrow;
 		const Key RIGHT = Key.RightArrow;
 		const Key JUMP = Key.UpArrow;
-		const Key FIRE = Key.Space;
+		//const Key FIRE = Key.Space;
 
 		// weither the respective keys are pressed
 		bool left;

@@ -342,7 +342,7 @@ namespace SdlDotNet.Examples.GuiExample
 		#region Colors
 		private Color backgroundColor = Color.FromArgb(200, 20, 20, 50);
 		private Color frameColor = Color.FromArgb(50, 50, 50);
-		private Color selectedColor = Color.FromArgb(25, 25, 50);
+		//private Color selectedColor = Color.FromArgb(25, 25, 50);
 		private Color traceBoundsColor = Color.FromArgb(200, 25, 25);
 		private Color traceOuterColor = Color.FromArgb(100, 0, 0);
 		private Color traceInnerColor = Color.FromArgb(255, 50, 50);
