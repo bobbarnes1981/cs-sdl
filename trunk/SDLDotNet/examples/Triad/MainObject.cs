@@ -69,8 +69,8 @@ namespace SdlDotNet.Examples
 					screen.CreateCompatibleSurface(width, height, true);
 				surf.Fill(
 					new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-				Rectangle screenRec = 
-					new Rectangle(0,0,screen.Width,screen.Height);
+//				Rectangle screenRec = 
+//					new Rectangle(0,0,screen.Width,screen.Height);
 
 				grid = new BlockGrid(new Point(20,20),new Size(11,13));
 				grid.BlocksDestroyed += 
