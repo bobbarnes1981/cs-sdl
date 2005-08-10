@@ -28,14 +28,14 @@ namespace SdlDotNet.Examples
 	{
 		static FileStream fs;
 
-		static readonly LogFile instance = new LogFile();
-//		static LogFile()
-//		{
-//		}
+		//static readonly LogFile instance = new LogFile();
+		static LogFile()
+		{
+			Initialize();
+		}
 
 		LogFile()
 		{
-			Initialize();
 		}
 
 		/// <summary>
