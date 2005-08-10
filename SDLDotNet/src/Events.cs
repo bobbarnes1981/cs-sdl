@@ -745,6 +745,9 @@ namespace SdlDotNet
 
 				// Perform the actual threaded tick
 				tickerThread = new Thread(new ThreadStart(RunTicker));
+				tickerThread.IsBackground = true;
+				tickerThread.Priority = ThreadPriority.Normal; // ThreadPriority.Lowest; Almost disregards thread
+				tickerThread.Name = "Server Thread Tick";
 				tickerThread.Start();
 			}
 		}
@@ -784,7 +787,8 @@ namespace SdlDotNet
 			stopThread = false;
 			serverThread = new Thread(new ThreadStart(Run));
 			serverThread.IsBackground = true;
-			serverThread.Priority = ThreadPriority.Lowest;
+			serverThread.Priority = ThreadPriority.Normal; // ThreadPriority.Lowest; - Almost disregards tick events
+			serverThread.Name = "Server Thread";
 			serverThread.Start();
 		}
 
@@ -845,7 +849,7 @@ namespace SdlDotNet
 				if (value > 1 && value <= 1000)
 				{
 					int temp = 1000 / value;
-					tickSpan = temp; 
+					tickSpan = temp;
 				}
 			}
 		}
