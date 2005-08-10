@@ -53,6 +53,24 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Internal constructor which makes reference to the given object.
+		/// </summary>
+		/// <param name="sound">The sound object to make reference to.</param>
+		internal Sound(Sound sound) : this(sound.Handle, sound.size)
+		{
+			channels = sound.channels;
+			this.Volume = sound.Volume;
+		}
+
+		/// <summary>
+		/// Loads a .wav file into memory.
+		/// </summary>
+		/// <param name="file">The file to load into memory.</param>
+		public Sound(string file) : this(Mixer.Sound(file))
+		{
+		}
+
+		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
 		/// <param name="disposing"></param>
