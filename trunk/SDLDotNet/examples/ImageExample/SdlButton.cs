@@ -32,14 +32,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class SdlButtonEventArgs : EventArgs
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		private int posX;
-		/// <summary>
-		/// 
-		/// </summary>
-		private int posY;
+		//private int posX;
+		//private int posY;
 
 		/// <summary>
 		/// 
@@ -48,8 +42,8 @@ namespace SdlDotNet.Examples
 		/// <param name="y"></param>
 		public SdlButtonEventArgs(int x, int y)
 		{
-			posX = x;
-			posY = y;
+//			posX = x;
+//			posY = y;
 		}
 	}
 
