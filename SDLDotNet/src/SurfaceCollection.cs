@@ -60,7 +60,7 @@ namespace SdlDotNet
 		public SurfaceCollection(string baseName, string extension)
 		{
 			// Save the fields
-			this.filename = baseName + "-*" + extension;
+			//this.filename = baseName + "-*" + extension;
       
 			// Load the images into memory
 			int i = 0;
@@ -118,8 +118,6 @@ namespace SdlDotNet
 				} 
 			} 
 		}
-
-		private string filename;
 
 		/// <summary>
 		/// Indexer for the Items in the Collection

@@ -39,9 +39,10 @@ namespace SdlDotNet
 	{
 		static private bool disposed;
 		static ResourceManager stringManager;
-		static readonly CDRom instance = new CDRom();
-
 		CDRom()
+		{}
+
+		static CDRom()
 		{
 			Initialize();
 		}

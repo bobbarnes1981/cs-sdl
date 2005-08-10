@@ -51,7 +51,14 @@ namespace SdlDotNet.Examples
 			this.names = Names.Instance;
 			this.backSprites = new ArrayList();
 			this.frontSprites = new ArrayList();
-			this.sound = Mixer.Sound("../../boing.wav");
+			try
+			{
+				this.sound = Mixer.Sound("../../boing.wav");
+			}
+			catch (SdlException)
+			{
+				// Linux audio problem
+			}
 		}
 
 		/// <summary>
@@ -156,7 +163,10 @@ namespace SdlDotNet.Examples
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
 			this.entitySprite.CenterX = sectSprite.CenterX;
 			this.entitySprite.CenterY = sectSprite.CenterY;
-			this.sound.Play();
+			if (this.sound != null)
+			{
+				this.sound.Play();
+			}
 		}
 
 		/// <summary>

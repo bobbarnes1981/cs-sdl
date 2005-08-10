@@ -44,12 +44,14 @@ namespace SdlDotNet
 		private const int DEFAULT_CHUNK_SIZE = 1024;
 		private const int DEFAULT_NUMBER_OF_CHANNELS = 8;
 		//private static ChannelList channelList = null;
-		private Music music = Music.Instance;
+		//private Music music = Music.Instance;
 		
 		static private byte distance;
-		static Mixer instance = new Mixer();
 
 		Mixer()
+		{}
+
+		static Mixer()
 		{
 			Initialize();	
 		}

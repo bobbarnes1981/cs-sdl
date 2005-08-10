@@ -72,18 +72,29 @@ namespace SdlDotNet.Examples
 			Mixer.Music.Load(filepath + "fard-two.ogg");
 			Mixer.Music.Volume = 128;
 			Mixer.Music.EnableMusicFinishedCallback();
-			Mixer.Music.Play(1);
-			Sound sound = Mixer.Sound(filepath + "test.wav");
-			//Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
-			//Sound sound2 = Mixer.Sound(filepath + "test.wav");
-			Channel channel = new Channel(0);
-			//Channel channel2 = new Channel(1);
-			channel.EnableChannelFinishedCallback();
-			//channel2.EnableChannelFinishedCallback();
-			//channel.QueuedSound = queuedSound;
-			channel.Volume = 32;
-			channel.Play(sound);
-			//channel2.Play(sound);
+			try
+			{
+				Mixer.Music.Play(1);
+				Sound sound = Mixer.Sound(filepath + "test.wav");
+				//Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
+				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
+				Channel channel = new Channel(0);
+				//Channel channel2 = new Channel(1);
+				channel.EnableChannelFinishedCallback();
+				//channel2.EnableChannelFinishedCallback();
+				//channel.QueuedSound = queuedSound;
+				channel.Volume = 32;
+				channel.Play(sound);
+				//channel2.Play(sound);
+			}
+			catch (DivideByZeroException)
+			{
+				// Linux audio problem
+			}
+			catch (SdlException)
+			{
+				// Linux audio problem
+			}
 
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			Video.WindowCaption = "SdlDotNet - Font Example";

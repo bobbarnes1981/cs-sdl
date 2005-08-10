@@ -33,10 +33,13 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class VideoInfo
 	{
-		static readonly VideoInfo instance = new VideoInfo();
 		static ResourceManager stringManager;
 
 		VideoInfo()
+		{
+		}
+
+		static VideoInfo()
 		{
 			stringManager = 
 				new ResourceManager("en-US", Assembly.GetExecutingAssembly());

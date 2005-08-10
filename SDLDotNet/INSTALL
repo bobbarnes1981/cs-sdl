@@ -18,3 +18,7 @@ Copy the files from /lib/win32deps into a directory in your path.
 C:\winnt or c:\winnt\system32 are common choices.
 
 If you plan to compile SdlDotNet, you will have to run one of the scripts in the /scripts directory. There are scripts to create project files for Visual Studio 2003 and Sharpdevelop.
+
+Install binfmt-support
+libgdiplus
+mono

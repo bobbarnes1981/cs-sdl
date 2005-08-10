@@ -27,9 +27,10 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Keyboard
 	{
-		static readonly Keyboard instance = new Keyboard();
+		Keyboard()
+		{}
 
-		Keyboard() 
+		static Keyboard() 
 		{
 		}
 

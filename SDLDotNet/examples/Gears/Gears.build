@@ -16,6 +16,13 @@
 		<include name="Tao.OpenGL.ExtensionLoader.dll"/>
 	    </fileset>
 	</copy>
+	<ifnot test="${build.debug}">
+	    <copy todir="${nant.project.basedir}/${build.dir}">
+		<fileset basedir="${project.main.dir}/${src.dir}">
+		    <include name="${project.name}.snk"/>
+		</fileset>
+	    </copy>
+	</ifnot>
 	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
 	    <sources failonempty="true">
 		<include name="*.cs" />
