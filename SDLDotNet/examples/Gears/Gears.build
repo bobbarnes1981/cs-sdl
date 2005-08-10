@@ -12,8 +12,8 @@
 	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
-		<include name="Tao.OpenGL.dll"/>
-		<include name="Tao.OpenGL.ExtensionLoader.dll"/>
+		<include name="Tao.OpenGl.dll"/>
+		<include name="Tao.OpenGl.ExtensionLoader.dll"/>
 	    </fileset>
 	</copy>
 	<ifnot test="${build.debug}">
@@ -30,8 +30,8 @@
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>
-		<include name="Tao.OpenGL.dll"/>
-		<include name="Tao.OpenGL.ExtensionLoader.dll"/>
+		<include name="Tao.OpenGl.dll"/>
+		<include name="Tao.OpenGl.ExtensionLoader.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
 	    </references>
 	</csc>

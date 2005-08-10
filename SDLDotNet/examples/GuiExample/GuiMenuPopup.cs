@@ -102,7 +102,7 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 
 		#region Geometry
-		private Point translate = new Point();
+		//private Point translate = new Point();
 		#endregion
 
 		#region Events
