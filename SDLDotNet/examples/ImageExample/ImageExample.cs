@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 		private bool quitFlag;
 		Point position = new Point(100,100);
 		private int AxesCount;
-		private Joystick joystick;
+		//private Joystick joystick;
 		int width = 640;
 		int height = 480;
 		MouseMotionEventHandler MouseMotionHandler;
@@ -218,7 +218,7 @@ namespace SdlDotNet.Examples
 			{
 				Events.MouseMotion -= MouseMotionHandler;
 				Events.JoystickAxisMotion += JoystickAxisHandler;
-				joystick = Joysticks.OpenJoystick(0);
+				Joysticks.OpenJoystick(0);
 			}
 			else if (e.Key == Key.M)
 			{
