@@ -46,6 +46,9 @@
 	    <documenters>
 		<documenter name="MSDN">
 		    <property name="OutputDirectory" value="${nant.project.basedir}/${build.dir}/doc/" />
+		    <if test="${framework::get-runtime-framework()} = 'mono-1.0'">
+			<property name="OutputTarget" value="Web" />
+		    </if>
 		    <property name="HtmlHelpName" value="${nant.project.name}" />
 		    <!--<property name="HtmlHelpCompilerFilename" value="${project.html-help.dir}\hhc.exe" />-->
 		    <property name="IncludeFavorites" value="False" />
