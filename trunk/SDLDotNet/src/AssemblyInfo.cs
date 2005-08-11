@@ -83,8 +83,8 @@ using System.Resources;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyDelaySign(false)]
-#if DEBUG
-[assembly: AssemblyKeyFile("")]
+#if NET
+[assembly: AssemblyKeyFile("..\\..\\SdlDotNet.snk")]
 #else
 [assembly: AssemblyKeyFile(@"SdlDotNet.snk")]
 #endif

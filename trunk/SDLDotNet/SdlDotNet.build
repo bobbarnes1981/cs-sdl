@@ -156,9 +156,11 @@
 		<include name="src/*.csproj" />
 		<include name="src/*.prjx" />
 		<include name="examples/**" />
-		<exclude name="examples/**/*j.user" />
+		<include name="examples/**" />
+		<exclude name="examples/**/*.snk" />
 		<exclude name="examples/**/${obj.dir}/**" />
 		<include name="extras/**" />
+		<exclude name="extras/**/*.snk" />
 		<exclude name="extras/**/*j.user" />
 		<exclude name="extras/**/${obj.dir}/**" />
 		<include name="tests/**" />
