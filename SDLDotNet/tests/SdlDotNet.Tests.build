@@ -27,10 +27,13 @@
 		</fileset>
 	    </copy>
 	</ifnot>
-	<csc target="library" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" >
+	<csc target="library" warnaserror="true" unsafe="false" nowarn="219, 169" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" >
 	    <sources failonempty="true">
 		<include name="*.cs" />
 	    </sources>
+	    <nowarn>
+		<warning number="0219,0169"/>
+	    </nowarn>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<include name="GuiExample.dll"/>
 		<include name="nunit.framework.dll"/>

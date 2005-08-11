@@ -40,6 +40,9 @@
 	    <summaries basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${nant.project.name}.xml"/>
 	    </summaries>
+	    <referencepaths>
+		<include name="${nant.project.basedir}/${build.dir}" />
+	    </referencepaths>
 	    <documenters>
 		<documenter name="MSDN">
 		    <property name="OutputDirectory" value="${nant.project.basedir}/${build.dir}/doc/" />
