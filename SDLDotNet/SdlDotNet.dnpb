@@ -3,7 +3,7 @@
     <Solution name="SdlDotNet">
 	<Configuration name="Debug">
 	    <Options>
-		<CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		<CompilerDefines>DEBUG;TRACE;NET;NET</CompilerDefines>
 		<OptimizeCode>false</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>.\bin\Debug</OutputPath>
@@ -13,7 +13,7 @@
 	</Configuration>
 	<Configuration name="Release">
 	    <Options>
-		<CompilerDefines>TRACE</CompilerDefines>
+		<CompilerDefines>TRACE;NET</CompilerDefines>
 		<OptimizeCode>true</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>.\bin\Release</OutputPath>
@@ -27,7 +27,7 @@
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -38,7 +38,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -57,7 +57,7 @@
 	<Project name="Rectangles" path="examples\\Rectangles" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Rectangles" assemblyName="Rectangles" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -68,7 +68,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -89,7 +89,7 @@
 	<Project name="ParticleEngine" path="examples\\ParticleEngine" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.ParticleEngine" assemblyName="ParticleEngine" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -100,7 +100,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -121,7 +121,7 @@
 	<Project name="PrimitivesExample" path="examples\\PrimitivesExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.PrimitivesExample" assemblyName="PrimitivesExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -132,7 +132,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -153,7 +153,7 @@
 	<Project name="ImageExample" path="examples\\ImageExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.ImageExample" assemblyName="ImageExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -164,7 +164,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -184,7 +184,7 @@
 	<Project name="Gears" path="examples\\Gears" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Gears" assemblyName="Gears" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -195,7 +195,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -217,7 +217,7 @@
 	<Project name="FontExample" path="examples\\FontExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.FontExample" assemblyName="FontExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -228,7 +228,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -248,7 +248,7 @@
 	<Project name="CDPlayer" path="examples\\CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -259,7 +259,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -281,7 +281,7 @@
 	<Project name="MoviePlayer" path="examples\\MoviePlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.MoviePlayer" assemblyName="MoviePlayer" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -292,7 +292,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -313,7 +313,7 @@
 	<Project name="SimpleGame" path="examples\\SimpleGame" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.GameMain" assemblyName="SimpleGame" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -324,7 +324,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -344,7 +344,7 @@
 <Project name="SimpleExample" path="examples\\SimpleExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SimpleExample" assemblyName="SimpleExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -355,7 +355,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -376,7 +376,7 @@
 	<Project name="BombRun" path="examples\\BombRun" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BombRun" assemblyName="BombRun" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -387,7 +387,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -407,7 +407,7 @@
 	<Project name="SnowDemo" path="examples\\SnowDemo" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SnowDemo" assemblyName="SnowDemo" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -418,7 +418,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -438,7 +438,7 @@
 	<Project name="BounceSprites" path="examples\\BounceSprites" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BounceSprites" assemblyName="BounceSprites" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -449,7 +449,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -470,7 +470,7 @@
 	<Project name="Triad" path="examples\\Triad" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.MainObject" assemblyName="Triad" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -481,7 +481,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -502,7 +502,7 @@
 	<Project name="GuiExample" path="examples\\GuiExample" language="C#" type="Library" assemblyName="GuiExample" rootNamespace="GuiExample">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -513,7 +513,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -532,7 +532,7 @@
 	<Project name="SpriteGuiDemos" path="examples\\SpriteGuiDemos" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SdlDemo" assemblyName="SpriteGuiDemo" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -543,7 +543,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -564,7 +564,7 @@
 	<Project name="Tests" path="tests" language="C#" type="Library" assemblyName="SdlDotNet.Tests" rootNamespace="SdlDotNet.Tests">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -575,7 +575,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -597,7 +597,7 @@
 	<Project name="SdlDotNet.Windows" path="extras\\Windows" language="C#" type="Library" assemblyName="SdlDotNet.Windows" rootNamespace="SdlDotNet.Windows">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -608,7 +608,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -628,7 +628,7 @@
 	<Project name="AudioExample" path="examples\\AudioExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.AudioExample" assemblyName="AudioExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -639,7 +639,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
