@@ -34,8 +34,8 @@ namespace SdlDotNet.Examples
 		private Surface screen; 
 		private bool quit = false; 
 
-		//private const string music1 = "../../music.mid"; 
-		private const string music1 = "../../fard-two.ogg";
+		private const string music1 = "../../mason2.mid"; 
+		//private const string music1 = "../../fard-two.ogg";
 		private const string music2 = "../../fard-two.ogg"; 
 		private Sound boing; 
 
