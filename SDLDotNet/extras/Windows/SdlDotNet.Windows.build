@@ -38,6 +38,10 @@
 	<delete dir="${obj.dir}" failonerror="false" />
     </target>
     <target name="doc" description="Creates documentation.">
+	<property name="doc.target" value="" />
+	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
+	    <property name="doc.target" value="Web" />
+	</if>
 	<ndoc failonerror="true" verbose="true">
 	    <assemblies basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${nant.project.name}.dll" />
@@ -48,6 +52,7 @@
 	    <documenters>
 		<documenter name="MSDN">
 		    <property name="OutputDirectory" value="${nant.project.basedir}/${build.dir}/doc/" />
+		    <property name="OutputTarget" value="${doc.target}" />
 		    <property name="HtmlHelpName" value="${nant.project.name}" />
 		    <!--<property name="HtmlHelpCompilerFilename" value="${project.html-help.dir}\hhc.exe" />-->
 		    <property name="IncludeFavorites" value="False" />
