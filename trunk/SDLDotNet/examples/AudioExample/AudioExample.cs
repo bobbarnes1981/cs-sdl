@@ -52,6 +52,7 @@ namespace SdlDotNet.Examples
 			Events.MouseButtonDown += 
 				new MouseButtonEventHandler(Events_MouseButtonDown); 
 			screen = Video.SetVideoModeWindow(width, height); 
+			Video.WindowCaption = "SdlDotNet - AudioExample";
 
 			boing = Mixer.Sound("../../boing.wav"); 
 			Mixer.Music.Load(music1); 
