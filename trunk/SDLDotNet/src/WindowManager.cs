@@ -25,11 +25,27 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public struct Version {
+		/// <summary>
+		/// 
+		/// </summary>
 		public byte Major;
+		/// <summary>
+		/// 
+		/// </summary>
 		public byte Minor;
+		/// <summary>
+		/// 
+		/// </summary>
 		public byte Patch;
 		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString() {
 			return String.Format("{0}.{1}.{2}", Major, Minor, Patch);
 		}
@@ -42,10 +58,19 @@ namespace SdlDotNet
 		}
 	}
 	
+	/// <summary>
+	/// 
+	/// </summary>
 	public struct WMInfo {
 		
 		#region OS-Neutral Members
+		/// <summary>
+		/// 
+		/// </summary>
 		public int     Data;
+		/// <summary>
+		/// 
+		/// </summary>
 		public Version WMVersion;
 		#endregion
 		
@@ -69,20 +94,20 @@ namespace SdlDotNet
 		/// This property allows access to a structure containing information about the window
 		/// manager currently running.
 		/// </summary>
-		public static WMInfo Info {
-			get {
+		public static WMInfo Info 
+		{
+			get 
+			{
 				// Get the info struct from Tao.
-				Sdl.SDL_SysWMinfo inf = new Sdl.SDL_SysWMinfo();
+				//Sdl.SDL_SysWMinfo inf = new Sdl.SDL_SysWMinfo();
+				object inf = new object();
 				//int result;
 					
 				//result = Sdl.SDL_GetWMInfo(ref inf);
 				Sdl.SDL_GetWMInfo(ref inf);
-				return new WMInfo(inf);
-				
+				return new WMInfo((Sdl.SDL_SysWMinfo)inf);
 				
 				// branch for client OS.
-				
-				
 			}
 		}
 		
