@@ -73,9 +73,10 @@ namespace SdlDotNet
 			get {
 				// Get the info struct from Tao.
 				Sdl.SDL_SysWMinfo inf = new Sdl.SDL_SysWMinfo();
-				int result;
+				//int result;
 					
-				result = Sdl.SDL_GetWMInfo(ref inf);
+				//result = Sdl.SDL_GetWMInfo(ref inf);
+				Sdl.SDL_GetWMInfo(ref inf);
 				return new WMInfo(inf);
 				
 				
