@@ -1,6 +1,6 @@
 /*
  * $RCSfile$
- * Copyright (C) 2005 Rob Loach
+ * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,6 +21,10 @@ using System;
 using System.Drawing; 
 using SdlDotNet; 
 
+// SDL.NET Audio Example
+// Simple example to demonstrate audio in SDL.NET.
+// Click plays the sound, space changes the music, arrows change volume.
+
 namespace SdlDotNet.Examples
 { 
 	/// <summary>
@@ -34,31 +38,40 @@ namespace SdlDotNet.Examples
 		private Surface screen; 
 		private bool quit = false; 
 
-		private const string music1 = "../../mason2.mid"; 
-		//private const string music1 = "../../fard-two.ogg";
+		private const string music1 = "../../mason2.mid";
 		private const string music2 = "../../fard-two.ogg"; 
-		private Sound boing; 
+		private Sound boing;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public AudioExample() 
 		{ 
-			Events.TickEvent += new TickEventHandler(Events_TickEvent); 
-			Events.TickSpan = 100; 
+			// Setup events
+			Events.TickEvent += new TickEventHandler(Events_TickEvent);
 			Events.Quit += new QuitEventHandler(Events_Quit); 
+
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(Events_KeyboardDown); 
 			Events.MouseButtonDown += 
-				new MouseButtonEventHandler(Events_MouseButtonDown); 
+				new MouseButtonEventHandler(Events_MouseButtonDown);
+
+			Events.ChannelFinished +=
+				new ChannelFinishedEventHandler(Events_ChannelFinished);
+			Events.MusicFinished +=
+				new MusicFinishedEventHandler(Events_MusicFinished);
+
+			// Start up SDL
 			screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowCaption = "SdlDotNet - AudioExample";
 
+			// Load the music and sounds
 			boing = Mixer.Sound("../../boing.wav"); 
 			Mixer.Music.Load(music1); 
 			Mixer.Music.QueuedMusicFilename = music2; 
 			Mixer.Music.Play(true); 
           
+			// Begin the SDL ticker
 			Events.StartTicker(); 
 		} 
 
@@ -76,7 +89,7 @@ namespace SdlDotNet.Examples
 		private void Events_TickEvent(object sender, TickEventArgs e) 
 		{ 
 			screen.Fill(Color.FromArgb(
-				rand.Next(255),rand.Next(255),rand.Next(255))); 
+				rand.Next(255), rand.Next(255), rand.Next(255) )); 
 			screen.Flip(); 
 		} 
 
@@ -98,7 +111,7 @@ namespace SdlDotNet.Examples
 		{ 
 			switch(e.Key)
 			{ 
-				case Key.Escape: 
+				case Key.Escape:
 					quit = true; 
 					break; 
 				case Key.Space: 
@@ -107,14 +120,10 @@ namespace SdlDotNet.Examples
 					Mixer.Music.Fadeout(1000); 
 					Mixer.Music.Load(Mixer.Music.QueuedMusicFilename); 
 					Mixer.Music.Play(true); 
-					if (Mixer.Music.QueuedMusicFilename == music1) 
-					{
-						Mixer.Music.QueuedMusicFilename = music2; 
-					}
-					else 
-					{
+					if (Mixer.Music.QueuedMusicFilename == music1)
+						Mixer.Music.QueuedMusicFilename = music2;
+					else
 						Mixer.Music.QueuedMusicFilename = music1;
-					}
 
 					break; 
 
@@ -124,23 +133,35 @@ namespace SdlDotNet.Examples
 				case Key.DownArrow: 
 					Mixer.Music.Volume -= 15; 
 					break; 
+				case Key.Return:
+					boing.Play();
+					break;
 			} 
 		} 
 
-		private void Events_MouseButtonDown(
-			object sender, MouseButtonEventArgs e) 
+		private void Events_MouseButtonDown(object sender, MouseButtonEventArgs e) 
 		{ 
 			switch(e.Button) 
 			{ 
 				case MouseButton.PrimaryButton: 
-					// Play on left side 
+					// Play on left side
 					boing.Play().SetPanning(205, 50); 
 					break; 
 				case MouseButton.SecondaryButton: 
 					// Play on right side 
-					boing.Play().SetPanning(50, 205); 
-					break; 
+					boing.Play().SetPanning(50, 205);
+					break;
 			} 
-		} 
+		}
+
+		private void Events_ChannelFinished(object sender, ChannelFinishedEventArgs e)
+		{
+			// Code run when a sound channel finishes
+		}
+
+		private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
+		{
+			// Code run when music finishes
+		}
 	} 
 } 
