@@ -59,7 +59,6 @@ namespace SdlDotNet
 		internal Sound(Sound sound) : this(sound.Handle, sound.size)
 		{
 			channels = sound.channels;
-			this.Volume = sound.Volume;
 		}
 
 		/// <summary>
