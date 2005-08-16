@@ -1,7 +1,7 @@
 !verbose 3
 
 !define PRODUCT_NAME "SdlDotNet"
-!define PRODUCT_VERSION "3.1.2"
+!define PRODUCT_VERSION "3.2.0"
 !define PRODUCT_BUILD "1"
 !define PRODUCT_PUBLISHER "SdlDotNet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
@@ -127,6 +127,9 @@ Section "Source" SecSrc
 
   SetOutPath "$INSTDIR\src"
   File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\src\*.*
+  
+  SetOutPath "$INSTDIR\extras"
+  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\extras\*.*
 
   SetOutPath "$INSTDIR\scripts"
   File /r /x CVS ${PRODUCT_PATH}\scripts\*.*
@@ -146,6 +149,9 @@ Section "Runtime" SecRuntime
 
   SetOutPath "$INSTDIR\lib"
   File /r /x CVS ${PRODUCT_PATH}\lib\*.*
+  
+  SetOutPath "$INSTDIR\extras"
+  File /r /x CVS ${PRODUCT_PATH}\extras\*.*
 
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
