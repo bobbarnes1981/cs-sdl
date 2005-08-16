@@ -25,13 +25,22 @@ using System.Threading;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// 
+	/// Indicates that a framerate tick is allowed.
 	/// </summary>
 	public delegate void FramerateTickEventHandler(object sender, FramerateTickEventArgs e);
 
 	/// <summary>
-	/// Summary description for Framerate.
+	/// This interface is used to insert delays into the graphics loop to maintain a constant framerate.
 	/// </summary>
+	/// <remarks>This is pretty much a direct C# translation of SDL_gfx's framerate control, except for the delegates and events.</remarks>
+	/// <example>
+	/// <code>
+	/// Framerate.FrameTick += new FramerateTickEventHandler(Render);
+	/// Framerate.FrameTick += new FramerateTickEventHandler(Update);
+	/// Framerate.Rate = 60;
+	/// Framerate.StartTicker();
+	/// </code>
+	/// </example>
 	public sealed class Framerate
 	{
 		private static int m_Framecount;
@@ -57,7 +66,6 @@ namespace SdlDotNet
 		/// </summary>
 		public static void StartTicker()
 		{
-			Thread.Sleep(1); // Give a gap so that any other initialization threads can catch up.
 			m_Thread.Start();
 		}
 
@@ -87,26 +95,13 @@ namespace SdlDotNet
 			set
 			{
 				m_Framecount = 0;
-				m_Rate = value;
-				m_Framerate = (1000.0F / (float)m_Rate);
-			}
-		}
-
-		/// <summary>
-		/// Gets and sets whether the framerate manager is running.
-		/// </summary>
-		public static bool IsRunning
-		{
-			get
-			{
-				return (m_Thread.ThreadState == ThreadState.Running) || (m_Thread.ThreadState == ThreadState.WaitSleepJoin);
-			}
-			set
-			{
-				if(value)
-					m_Thread.Resume();
+				if(value < 1)
+					m_Rate = 1;
+				else if(value > 200)
+					m_Rate = 200;
 				else
-					m_Thread.Suspend();
+					m_Rate = value;
+				m_Framerate = (1000.0F / (float)m_Rate);
 			}
 		}
 
@@ -138,10 +133,8 @@ namespace SdlDotNet
 					m_LastTick = current_ticks;
 				}
 
-				
 				if(FrameTick != null)
 					FrameTick(null, new FramerateTickEventArgs(current_ticks, m_LastTick));
-
 
 				curTime = Sdl.SDL_GetTicks();
 				frames++;
@@ -190,6 +183,17 @@ namespace SdlDotNet
 			get
 			{
 				return m_Tick;
+			}
+		}
+		
+		/// <summary>
+		/// Gets the difference in time between the current tick and the last tick.
+		/// </summary>
+		public int Delay
+		{
+			get
+			{
+				return m_Tick - m_LastTick;
 			}
 		}
 
