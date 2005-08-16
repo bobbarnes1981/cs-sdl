@@ -118,6 +118,33 @@ namespace SdlDotNet
 				} 
 			} 
 		}
+		
+		/// <summary>
+		/// Loads only one row of tiled surfaces from a larger surface.
+		/// </summary>
+		/// <param name="fullImage">
+		/// The larger surface which contains all the tiles.
+		/// </param> 
+		/// <param name="tileSize">
+		/// The size of each tile.
+		/// </param>
+		/// <param name="rowNumber">
+		/// The row to be loaded.
+		/// </param>
+		public SurfaceCollection(Surface fullImage, Size tileSize, int rowNumber)
+		{
+			fullImage.SetAlpha(Alphas.RleEncoded, 0);
+			for(int tileX = 0; tileX * tileSize.Width < fullImage.Width; tileX++)
+			{
+				Surface tile = fullImage.CreateCompatibleSurface(tileSize.Width, tileSize.Height, true);
+				tile.Blit(
+					fullImage, 
+					new Point(0,0), 
+					new Rectangle(tileX * tileSize.Width, 
+					rowNumber * tileSize.Height, tileSize.Width, tileSize.Height)); 
+				this.List.Add(tile); 
+			}
+		}
 
 		/// <summary>
 		/// Indexer for the Items in the Collection
