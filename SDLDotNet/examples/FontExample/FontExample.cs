@@ -36,10 +36,10 @@ namespace SdlDotNet.Examples
 		int size = 12;
 		int width = 640;
 		int height = 480;
-		bool musicFinishedFlag;
-		bool channelFinishedFlag;
-		private int currentChannel;
-		private int positionY = 200;
+//		bool musicFinishedFlag;
+//		bool channelFinishedFlag;
+//		private int currentChannel;
+//		private int positionY = 200;
 
 		string[] textArray = {"Hello World!","This is a test", "FontExample"};
 		int[] styleArray = {0, 1, 2, 4};
@@ -63,38 +63,38 @@ namespace SdlDotNet.Examples
 			Events.KeyboardUp += 
 				new KeyboardEventHandler(this.KeyboardUp);
 			Events.Quit += new QuitEventHandler(this.Quit);
-			Events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
-			Events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);	
+//			Events.MusicFinished += new MusicFinishedEventHandler(this.MusicFinished);
+//			Events.ChannelFinished += new ChannelFinishedEventHandler(this.ChannelFinished);	
 			//timerDelegate = new Sdl.SDL_TimerCallback(this.TimerCall);
 			//int result2 = Sdl.SDL_SetTimer(500, timerDelegate);
 
 			font = new Font(filepath + FontName, size);
-			Mixer.Music.Load(filepath + "fard-two.ogg");
-			Mixer.Music.Volume = 128;
-			Mixer.Music.EnableMusicFinishedCallback();
-			try
-			{
-				Mixer.Music.Play(1);
-				Sound sound = Mixer.Sound(filepath + "test.wav");
-				//Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
-				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
-				Channel channel = new Channel(0);
-				//Channel channel2 = new Channel(1);
-				channel.EnableChannelFinishedCallback();
-				//channel2.EnableChannelFinishedCallback();
-				//channel.QueuedSound = queuedSound;
-				channel.Volume = 32;
-				channel.Play(sound);
-				//channel2.Play(sound);
-			}
-			catch (DivideByZeroException)
-			{
-				// Linux audio problem
-			}
-			catch (SdlException)
-			{
-				// Linux audio problem
-			}
+//			Mixer.Music.Load(filepath + "fard-two.ogg");
+//			Mixer.Music.Volume = 128;
+//			Mixer.Music.EnableMusicFinishedCallback();
+//			try
+//			{
+//				Mixer.Music.Play(1);
+//				Sound sound = Mixer.Sound(filepath + "test.wav");
+//				//Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
+//				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
+//				Channel channel = new Channel(0);
+//				//Channel channel2 = new Channel(1);
+//				channel.EnableChannelFinishedCallback();
+//				//channel2.EnableChannelFinishedCallback();
+//				//channel.QueuedSound = queuedSound;
+//				channel.Volume = 32;
+//				channel.Play(sound);
+//				//channel2.Play(sound);
+//			}
+//			catch (DivideByZeroException)
+//			{
+//				// Linux audio problem
+//			}
+//			catch (SdlException)
+//			{
+//				// Linux audio problem
+//			}
 
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			Video.WindowCaption = "SdlDotNet - Font Example";
@@ -171,33 +171,33 @@ namespace SdlDotNet.Examples
 						text.Size));
 					screen.Flip();
 					
-					if (musicFinishedFlag)
-					{
-						text = font.Render(
-							"MusicChannelFinishedDelegate was called.", 
-							Color.FromArgb(0, 254, 
-							254,254));
-						screen.Blit(
-							text, 
-							new Rectangle(new Point(100,100), 
-							text.Size));
-						screen.Flip();
-						musicFinishedFlag = false;
-					} 
-					else if (channelFinishedFlag)
-					{
-						text = font.Render(
-							"ChannelFinishedDelegate was called for channel " + currentChannel.ToString(CultureInfo.CurrentCulture), 
-							Color.FromArgb(0, 154, 
-							154,154));
-						screen.Blit(
-							text, 
-							new Rectangle(new Point(100,positionY + 50 * currentChannel), 
-							text.Size));
-						screen.Flip();
-						channelFinishedFlag = false;
-						positionY += 20;
-					}
+//					if (musicFinishedFlag)
+//					{
+//						text = font.Render(
+//							"MusicChannelFinishedDelegate was called.", 
+//							Color.FromArgb(0, 254, 
+//							254,254));
+//						screen.Blit(
+//							text, 
+//							new Rectangle(new Point(100,100), 
+//							text.Size));
+//						screen.Flip();
+//						musicFinishedFlag = false;
+//					} 
+//					else if (channelFinishedFlag)
+//					{
+//						text = font.Render(
+//							"ChannelFinishedDelegate was called for channel " + currentChannel.ToString(CultureInfo.CurrentCulture), 
+//							Color.FromArgb(0, 154, 
+//							154,154));
+//						screen.Blit(
+//							text, 
+//							new Rectangle(new Point(100,positionY + 50 * currentChannel), 
+//							text.Size));
+//						screen.Flip();
+//						channelFinishedFlag = false;
+//						positionY += 20;
+//					}
 					Thread.Sleep(1000);
 					text.Dispose();
 					//GC.Collect();
@@ -238,19 +238,19 @@ namespace SdlDotNet.Examples
 			quitFlag  = true;
 		}
 
-		private void ChannelFinished(object sender, ChannelFinishedEventArgs e)
-		{
-			//Console.WriteLine("channel: " + e.Channel.ToString());
-			//Console.WriteLine("Channel Finished");
-			channelFinishedFlag = true;
-			currentChannel = e.Channel;
-		}
-
-		private void MusicFinished(object sender, MusicFinishedEventArgs e)
-		{
-			//Console.WriteLine("Music Finished");
-			musicFinishedFlag = true;
-		}
+//		private void ChannelFinished(object sender, ChannelFinishedEventArgs e)
+//		{
+//			//Console.WriteLine("channel: " + e.Channel.ToString());
+//			//Console.WriteLine("Channel Finished");
+//			channelFinishedFlag = true;
+//			currentChannel = e.Channel;
+//		}
+//
+//		private void MusicFinished(object sender, MusicFinishedEventArgs e)
+//		{
+//			//Console.WriteLine("Music Finished");
+//			musicFinishedFlag = true;
+//		}
 
 		[STAThread]
 		static void Main() 

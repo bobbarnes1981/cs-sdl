@@ -47,11 +47,11 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run() 
 		{
-			string filepath = @"../../";
-			if (File.Exists("fard-two.ogg"))
-			{
-				filepath = "";
-			}
+//			string filepath = @"../../";
+//			if (File.Exists("fard-two.ogg"))
+//			{
+//				filepath = "";
+//			}
 			int width = 640;
 			int height = 480;
 			Random rand = new Random();
@@ -61,20 +61,20 @@ namespace SdlDotNet.Examples
 			Events.Quit += new QuitEventHandler(this.Quit);
 
 			try {
-				try
-				{
-					Mixer.Music.Load(filepath + "fard-two.ogg");
-					Mixer.Music.Play(1);
-				}
-				catch (DivideByZeroException)
-				{
-					// Linux audio problem
-				}
+//				try
+//				{
+//					Mixer.Music.Load(filepath + "fard-two.ogg");
+//					Mixer.Music.Play(1);
+//				}
+//				catch (DivideByZeroException)
+//				{
+//					// Linux audio problem
+//				}
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
 				Video.WindowCaption = "SdlDotNet - Rectangles Example";
 				Video.Mouse.ShowCursor = false;
-				Mixer.Music.EnableMusicFinishedCallback();
+//				Mixer.Music.EnableMusicFinishedCallback();
 
 				Surface surf = 
 					screen.CreateCompatibleSurface(width, height, true);

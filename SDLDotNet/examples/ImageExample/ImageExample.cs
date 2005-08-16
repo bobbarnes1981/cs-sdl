@@ -70,14 +70,14 @@ namespace SdlDotNet.Examples
 			try 
 			{
 				string filepath = @"../../";
-				if (File.Exists("fard-two.ogg"))
+				if (File.Exists("FreeSans.ttf"))
 				{
 					filepath = "";
 				}
-				SdlButton button = new SdlButton(200, 200, 75, 50, Color.Green, "Hello");
-
-				SdlTextBox textBox = new SdlTextBox(300, 300, 300);
-				button.Click +=new SdlButtonEventHandler(button_Click);
+//				SdlButton button = new SdlButton(200, 200, 75, 50, Color.Green, "Hello");
+//
+//				SdlTextBox textBox = new SdlTextBox(300, 300, 300);
+//				button.Click +=new SdlButtonEventHandler(button_Click);
 				
 				Surface screen = Video.SetVideoModeWindow(width, height, true);
 				Video.WindowCaption = "SdlDotNet - Image Example";
@@ -130,15 +130,15 @@ namespace SdlDotNet.Examples
 				Tree.AlphaValue = 0;
 
 				int JeepFrame = 0;
-				Mixer.Music.Load(filepath + "fard-two.ogg");
-				try
-				{
-					Mixer.Music.Play(-1);
-				}
-				catch (DivideByZeroException)
-				{
-					// Linux audio problem
-				}
+//				Mixer.Music.Load(filepath + "fard-two.ogg");
+//				try
+//				{
+//					Mixer.Music.Play(-1);
+//				}
+//				catch (DivideByZeroException)
+//				{
+//					// Linux audio problem
+//				}
 
 				while (!quitFlag) 
 				{
@@ -174,9 +174,9 @@ namespace SdlDotNet.Examples
 
 						// Draw Textbox
 						surf.Blit(sdlimg,new Rectangle(new Point(230,440),Background.Size));
-						button.Draw(surf);
-						
-						textBox.Draw(surf);
+//						button.Draw(surf);
+//						
+//						textBox.Draw(surf);
 						surf.Blit(Cursor,new Rectangle(position, screen.Size));
 						
 
@@ -235,10 +235,10 @@ namespace SdlDotNet.Examples
 			quitFlag = true;
 		}
 
-		private void button_Click(object source, SdlButtonEventArgs e)
-		{
-			Console.WriteLine("Button was clicked");
-		}
+//		private void button_Click(object source, SdlButtonEventArgs e)
+//		{
+//			Console.WriteLine("Button was clicked");
+//		}
 
 		private void JoystickAxisChanged(object sender, JoystickAxisEventArgs e)
 		{
