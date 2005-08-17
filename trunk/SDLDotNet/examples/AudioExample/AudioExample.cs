@@ -156,12 +156,12 @@ namespace SdlDotNet.Examples
 
 		private void Events_ChannelFinished(object sender, ChannelFinishedEventArgs e)
 		{
-			// Code run when a sound channel finishes
+			Console.WriteLine("Channel: " + e.Channel.ToString() + " Finished");
 		}
 
 		private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
-			// Code run when music finishes
+			Console.WriteLine("Music Finished");
 		}
 	} 
 } 
