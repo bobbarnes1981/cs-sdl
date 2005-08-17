@@ -36,6 +36,13 @@
 	<property name="doc.target" value="" />
 	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
 	    <property name="doc.target" value="Web" />
+	    <!--Bug in Ubuntu NAnt 0.85 RC1 - You must copy the assemblies to one directory above the code-->
+	    <copy todir="${project.main.dir}/..">
+		<fileset basedir="${nant.project.basedir}/${build.dir}">
+		    <include name="${native.sdl}.dll"/>
+		    <include name="${nant.project.name}.dll" />
+		</fileset>
+	    </copy>
 	</if>
 	<ndoc failonerror="true" verbose="true">
 	    <assemblies basedir="${nant.project.basedir}/${build.dir}">
@@ -44,8 +51,8 @@
 	    <summaries basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${nant.project.name}.xml"/>
 	    </summaries>
-	    <referencepaths basedir="${nant.project.basedir}/${bin.dir}">
-		<include name="${project.config}" />
+	    <referencepaths basedir="${nant.project.basedir}">
+		<include name="${build.dir}" />
 	    </referencepaths>
 	    <documenters>
 		<documenter name="MSDN">
