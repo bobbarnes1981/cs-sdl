@@ -104,7 +104,7 @@
 	</foreach>
     </target>
 
-   <target name="extras" depends="build" description="Build examples">
+    <target name="extras" depends="build" description="Build examples">
 	<echo message="Building extras" />
 	<foreach item="File" property="filename">
 	    <in>
@@ -251,22 +251,40 @@
     </target>
 
     <!-- create zip file -->
-    <target name="zip" description="zip files">
+    <target name="zip" description="zip/gzip files">
 	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${nant.project.name}-${project.version}-${release.version}"/>
-	<zip zipfile="${project.zip-path}.zip">
-	    <fileset basedir="${bin.dir}">
-		<include name="${project.zip-path}/bin/**" />
-		<include name="${project.zip-path}/doc/**" />
-		<include name="${project.zip-path}/lib/**" />
-		<include name="${project.zip-path}/src/**" />
-		<include name="${project.zip-path}/examples/**" />
-		<include name="${project.zip-path}/extras/**" />
-		<include name="${project.zip-path}/tests/**" />
-		<include name="${project.zip-path}/scripts/**" />
-		<include name="${project.zip-path}/tools/**" />
-		<include name="${project.zip-path}/*" />	
-	    </fileset>
-	</zip>
+	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
+	    <tar destfile="${project.gzip-path}.tar.gz" compression="GZip">
+		<fileset basedir="${bin.dir}">
+		    <include name="${project.zip-path}/bin/**" />
+		    <include name="${project.zip-path}/doc/**" />
+		    <include name="${project.zip-path}/lib/**" />
+		    <include name="${project.zip-path}/src/**" />
+		    <include name="${project.zip-path}/examples/**" />
+		    <include name="${project.zip-path}/extras/**" />
+		    <include name="${project.zip-path}/tests/**" />
+		    <include name="${project.zip-path}/scripts/**" />
+		    <include name="${project.zip-path}/tools/**" />
+		    <include name="${project.zip-path}/*" />	
+		</fileset>
+	    </tar>
+	</if>
+	<ifnot test="${framework::get-runtime-framework() == 'mono-1.0'}">
+	    <zip zipfile="${project.zip-path}.zip">
+		<fileset basedir="${bin.dir}">
+		    <include name="${project.zip-path}/bin/**" />
+		    <include name="${project.zip-path}/doc/**" />
+		    <include name="${project.zip-path}/lib/**" />
+		    <include name="${project.zip-path}/src/**" />
+		    <include name="${project.zip-path}/examples/**" />
+		    <include name="${project.zip-path}/extras/**" />
+		    <include name="${project.zip-path}/tests/**" />
+		    <include name="${project.zip-path}/scripts/**" />
+		    <include name="${project.zip-path}/tools/**" />
+		    <include name="${project.zip-path}/*" />	
+		</fileset>
+	    </zip>
+	</ifnot>
 	<echo message="Created '${project.config}' packages at ${project.zip-path}" />
     </target>
 </project>

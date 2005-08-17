@@ -19,6 +19,21 @@ C:\winnt or c:\winnt\system32 are common choices.
 
 If you plan to compile SdlDotNet, you will have to run one of the scripts in the /scripts directory. There are scripts to create project files for Visual Studio 2003 and Sharpdevelop.
 
-Install binfmt-support
+
+If you are installing on Ubuntu Linux (5.04 Hoary Hedgehog)
+Add a Universe/Multiverse repository to the list in Synaptic.
+Add a Backports and Backports extras repository to the list in Synaptic.
+
+Install
+binfmt-support
 libgdiplus
 mono
+Sdl
+Sdl_mixer
+Sdl_image
+Sdl_ttf
+smpeg
+Sdl_gfx
+NAnt
+
+You can now build SDL.NET on Linux.
