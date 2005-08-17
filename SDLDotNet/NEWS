@@ -1,13 +1,16 @@
-3.1.3
+3.2.0
 David Hudson xx xxx 2005
 * Fixed GAC installation and uninstall issues.
 * Fixed Surface.Blit(Sprite). It now blits the sprite to the right location. Thanks to Ekim_Gram for the bug report.
-* The Primitives Example now works on Linux. Some distributions have an old version of SDL_gfx where the Pie primitive has not been implemented and was causing a crash.
-* The Rectangles, ImageExample, SimpleGame and Triad demos now work on Linux, but have no audio (at least for an Ubuntu 5.04 setup).
+* SDL.NET now builds on Linux using NAnt.
+* The SimpleGame and Triad demos now work on Linux, but have no audio (at least for an Ubuntu 5.04 setup).
 * The MoviePlayer works on Linux, but has no audio and runs very slowly.
-* FontExample, CDPlayer do not work on Linux.
+* The CDPlayer demo does not work on Linux.
 * Updated the Mono Config file. An Ubuntu 5.04 config file was added as well.
-* Merged TiledSurfaceCollection into SurfaceCollection. (Rob Loach)
+* Merged TiledSurfaceCollection into SurfaceCollection. Added a new constructor to SurfaceCollection that loads one row of a graphic. (Rob Loach)
+* Added SoundCollection class.
+* Simplified some of the examples.
+* Added Audio Example. (Rob Loach)
 
 3.1.2
 David Hudson 18 July 2005
