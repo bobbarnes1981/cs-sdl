@@ -115,6 +115,11 @@ namespace SdlDotNet
 	/// Handles the ticks as they are processed by the system.
 	/// </summary>
 	public delegate void TickEventHandler(object sender, TickEventArgs e);
+	
+	/// <summary>
+	/// Indicates that a framerate tick is to be processed.
+	/// </summary>
+	public delegate void FramerateTickEventHandler(object sender, FramerateTickEventArgs e);
 
 	/// <summary>
 	/// Contains events which can be attached to to read user input and other miscellaneous occurances.
@@ -201,6 +206,10 @@ namespace SdlDotNet
 		/// Fires every frame.
 		/// </summary>
 		public static event TickEventHandler TickEvent;
+		/// <summary>
+		/// Fires whenever a frame tick is to be processed.
+		/// </summary>
+		public static event FramerateTickEventHandler FramerateTick;
 
 		static readonly Events instance = new Events();
 
@@ -641,6 +650,14 @@ namespace SdlDotNet
 			}
 		}
 
+		internal static void NotifyFramerateTickEvent(FramerateTickEventArgs e)
+		{
+			if (FramerateTick != null) 
+			{
+				FramerateTick(instance, e);
+			}
+		}
+
 		static void OnQuitEvent(QuitEventArgs e)
 		{
 			if (Quit != null) 
@@ -874,5 +891,6 @@ namespace SdlDotNet
 			}
 		}
 		#endregion
+		
 	}
 }
