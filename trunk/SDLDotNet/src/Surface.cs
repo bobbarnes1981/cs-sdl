@@ -1038,6 +1038,21 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Copies another surface to this surface at the point 0,0
+		/// </summary>
+		/// <param name="sourceSurface">
+		/// The surface to copy from
+		/// </param>
+		public Rectangle Blit(Surface sourceSurface) 
+		{
+			System.Drawing.Point zerozero = new Point(0,0);
+			return this.Blit(
+				sourceSurface, 
+				zerozero,
+				new Rectangle(zerozero, sourceSurface.Size));
+		}
+
+		/// <summary>
 		/// Copies another surface to this surface
 		/// </summary>
 		/// <param name="sourceSurface">
