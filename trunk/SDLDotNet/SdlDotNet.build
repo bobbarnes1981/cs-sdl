@@ -254,7 +254,7 @@
     <target name="zip" description="zip/gzip files">
 	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${nant.project.name}-${project.version}-${release.version}"/>
 	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
-	    <tar destfile="${project.gzip-path}.tar.gz" compression="GZip">
+	    <tar destfile="${project.zip-path}.tar.gz" compression="GZip">
 		<fileset basedir="${bin.dir}">
 		    <include name="${project.zip-path}/bin/**" />
 		    <include name="${project.zip-path}/doc/**" />
