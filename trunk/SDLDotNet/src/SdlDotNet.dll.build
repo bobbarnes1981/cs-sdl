@@ -44,8 +44,8 @@
 	    <summaries basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${nant.project.name}.xml"/>
 	    </summaries>
-	    <referencepaths>
-		<include name="${nant.project.basedir}/${build.dir}" />
+	    <referencepaths basedir="${nant.project.basedir}/${bin.dir}">
+		<include name="${project.config}" />
 	    </referencepaths>
 	    <documenters>
 		<documenter name="MSDN">
