@@ -17,28 +17,31 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 using System;
-using Tao.Sdl;
 using System.Threading;
+
+using Tao.Sdl;
 
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Indicates that a framerate tick is allowed.
-	/// </summary>
-	public delegate void FramerateTickEventHandler(object sender, FramerateTickEventArgs e);
-
-	/// <summary>
-	/// This interface is used to insert delays into the graphics loop to maintain a constant framerate.
+	/// This framerate manager is used to insert delays into the graphic loop to maintain a constant framerate.
 	/// </summary>
 	/// <remarks>This is pretty much a direct C# translation of SDL_gfx's framerate control, except for the delegates and events.</remarks>
 	/// <example>
 	/// <code>
-	/// Framerate.FrameTick += new FramerateTickEventHandler(Render);
-	/// Framerate.FrameTick += new FramerateTickEventHandler(Update);
+	/// // Setup event calls
+	/// Events.FrameTick += new FramerateTickEventHandler(Render);
+	/// Events.FrameTick += new FramerateTickEventHandler(Update);
+	/// 
+	/// // Change constant framerate
 	/// Framerate.Rate = 60;
-	/// Framerate.StartTicker();
+	/// 
+	/// // Start the ticker
+	/// Framerate.Run();
+	/// 
+	/// // Get the FPS
+	/// Debug.WriteLine("FPS: " + Framerate.FPS);
 	/// </code>
 	/// </example>
 	public sealed class Framerate
@@ -48,12 +51,11 @@ namespace SdlDotNet
 		private static int m_LastTick;
 		private static int m_Rate;
 		private static int m_FPS;
-
 		private static Thread m_Thread;
 
 		static Framerate()
 		{
-			Rate = 60;
+			Rate = 30;
 			m_LastTick = 0;
 			m_Thread = new Thread(new ThreadStart(ThreadTicker));
 			m_Thread.Priority = ThreadPriority.Normal;
@@ -64,7 +66,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Starts the framerate ticker. Must be called to start the manager interface.
 		/// </summary>
-		public static void StartTicker()
+		public static void Run()
 		{
 			m_Thread.Start();
 		}
@@ -89,7 +91,8 @@ namespace SdlDotNet
 		/// </summary>
 		public static int Rate
 		{
-			get{
+			get
+			{
 				return m_Rate;
 			}
 			set
@@ -105,17 +108,20 @@ namespace SdlDotNet
 			}
 		}
 
+		/// <summary>
+		/// The private method, run by the ticker thread, that controls timing to call the event.
+		/// </summary>
 		private static void ThreadTicker()
 		{
 			int frames = 0;
 			int lastTime = Sdl.SDL_GetTicks();
 			int curTime;
+			int current_ticks;
+			int target_ticks;
+			int the_delay;
+			
 			while(m_Thread.IsAlive)
 			{
-				int current_ticks;
-				int target_ticks;
-				int the_delay;
-
 				m_Framecount++;
 
 				current_ticks = Sdl.SDL_GetTicks();
@@ -133,8 +139,7 @@ namespace SdlDotNet
 					m_LastTick = current_ticks;
 				}
 
-				if(FrameTick != null)
-					FrameTick(null, new FramerateTickEventArgs(current_ticks, m_LastTick));
+				Events.NotifyFramerateTickEvent(new FramerateTickEventArgs(current_ticks, m_LastTick));
 
 				curTime = Sdl.SDL_GetTicks();
 				frames++;
@@ -146,16 +151,9 @@ namespace SdlDotNet
 				}
 			}
 		}
-
-		/// <summary>
-		/// Fires whenever a frame tick is allowed.
-		/// </summary>
-		public static event FramerateTickEventHandler FrameTick;
-
-
-		
 	}
-
+		
+		
 	/// <summary>
 	/// Event arguments for a Framerate tick.
 	/// </summary>
@@ -172,6 +170,14 @@ namespace SdlDotNet
 			get
 			{
 				return m_LastTick;
+			}
+		}
+		
+		public int FPS
+		{
+			get
+			{
+				return Framerate.FPS;
 			}
 		}
 
@@ -200,15 +206,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="tick"></param>
-		/// <param name="lastTick"></param>
+		/// <param name="tick">The current tick.</param>
+		/// <param name="lastTick">The tick count that it was at last frame.</param>
 		public FramerateTickEventArgs(int tick, int lastTick)
 		{
 			m_Tick = tick;
 			m_LastTick = lastTick;
 		}
-
-
-
 	}
 }
