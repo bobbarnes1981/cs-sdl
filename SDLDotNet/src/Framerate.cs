@@ -31,8 +31,8 @@ namespace SdlDotNet
 	/// <example>
 	/// <code>
 	/// // Setup event calls
-	/// Events.FrameTick += new FramerateTickEventHandler(Render);
-	/// Events.FrameTick += new FramerateTickEventHandler(Update);
+	/// Events.FramerateTick += new FramerateTickEventHandler(Render);
+	/// Events.FramerateTick += new FramerateTickEventHandler(Update);
 	/// 
 	/// // Change constant framerate
 	/// Framerate.Rate = 60;
@@ -139,7 +139,7 @@ namespace SdlDotNet
 					m_LastTick = current_ticks;
 				}
 
-				Events.NotifyFramerateTickEvent(new FramerateTickEventArgs(current_ticks, m_LastTick));
+				Events.NotifyFramerateTickEvent(new FramerateTickEventArgs(current_ticks, m_LastTick, m_FPS));
 
 				curTime = Sdl.SDL_GetTicks();
 				frames++;
@@ -161,6 +161,7 @@ namespace SdlDotNet
 	{
 		private int m_LastTick;
 		private int m_Tick;
+		private int m_FPS;
 
 		/// <summary>
 		/// Gets when the last frame tick occurred.
@@ -173,11 +174,14 @@ namespace SdlDotNet
 			}
 		}
 		
+		/// <summary>
+		/// Gets the FPS as of the event call. Framerate.FPS is an alternative.
+		/// </summary>
 		public int FPS
 		{
 			get
 			{
-				return Framerate.FPS;
+				return m_FPS;
 			}
 		}
 
@@ -208,10 +212,11 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="tick">The current tick.</param>
 		/// <param name="lastTick">The tick count that it was at last frame.</param>
-		public FramerateTickEventArgs(int tick, int lastTick)
+		public FramerateTickEventArgs(int tick, int lastTick, int fps)
 		{
 			m_Tick = tick;
 			m_LastTick = lastTick;
+			m_FPS = fps;
 		}
 	}
 }
