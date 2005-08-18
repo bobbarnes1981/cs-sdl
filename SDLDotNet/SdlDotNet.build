@@ -148,7 +148,7 @@
 
     <!-- copy project files -->
     <target name="copyfiles">
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}">
 	    <fileset>
 		<include name="src/**.cs" />
 		<include name="src/**.build" />
@@ -191,59 +191,59 @@
 	    </fileset>
 	</copy>
 
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.html.dir}/${nant.project.name}">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.html.dir}/${nant.project.name}">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
 		<include name="*" />
 		<exclude name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.chm.dir}">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.chm.dir}">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
 		<include name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.html.dir}/${nant.project.name}.Windows">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.html.dir}/${nant.project.name}.Windows">
 	    <fileset basedir="${extras.dir}/Windows/${bin.dir}/${project.config}/doc">
 		<include name="*" />
 		<exclude name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.chm.dir}">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.chm.dir}">
 	    <fileset basedir="${extras.dir}/Windows/${bin.dir}/${project.config}/doc">
 		<include name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}/assemblies">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}/assemblies">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}/assemblies">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${extras.dir}/Windows/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${bin.dir}/win32deps">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/win32deps">
 	    <fileset basedir="${project.main.dir}/${lib.dir}/win32deps">
 		<include name="**"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.tutorials.dir}">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.tutorials.dir}">
 	    <fileset basedir="${examples.dir}/ParticleEngine">
 		<include name="ParticleEngine.html" />
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.tutorials.dir}">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.tutorials.dir}">
 	    <fileset basedir="${examples.dir}/SimpleExample">
 		<include name="SimpleExample.pdf" />
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${nant.project.name}-${project.version}-${release.version}/${doc.tutorials.dir}">
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.tutorials.dir}">
 	    <fileset basedir="${examples.dir}/BounceSprites">
 		<include name="BounceSprites.html" />
 	    </fileset>
@@ -252,7 +252,7 @@
 
     <!-- create zip file -->
     <target name="zip" description="zip/gzip files">
-	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${nant.project.name}-${project.version}-${release.version}"/>
+	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}"/>
 	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
 	    <tar destfile="${project.zip-path}.tar.gz" compression="GZip">
 		<fileset basedir="${bin.dir}">
