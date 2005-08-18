@@ -147,7 +147,7 @@ namespace SdlDotNet.Sprites
 		{
 			if (TextString == null)
 			{
-				this.textItem = " ";
+				this.TextString = " ";
 			}
 
 			// Render it (Solid or Blended)

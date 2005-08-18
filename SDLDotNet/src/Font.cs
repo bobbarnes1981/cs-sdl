@@ -339,6 +339,10 @@ namespace SdlDotNet
 				SdlColor.ConvertColor(foregroundColor);
 			Sdl.SDL_Color backgroundColorSdl = 
 				SdlColor.ConvertColor(backgroundColor);
+			if (textItem == "" | textItem == null)
+			{
+				textItem = " ";
+			}
 			return new Surface(SdlTtf.TTF_RenderUNICODE_Shaded(
 				this.Handle, textItem, foregroundColorSdl, backgroundColorSdl));
 		}
@@ -353,6 +357,10 @@ namespace SdlDotNet
 			string textItem, Color color) 
 		{
 			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
+			if (textItem == "" | textItem == null)
+			{
+				textItem = " ";
+			}
 			return new Surface(SdlTtf.TTF_RenderUNICODE_Blended(
 				this.Handle, textItem, colorSdl));
 		}
