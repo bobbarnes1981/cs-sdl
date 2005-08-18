@@ -2234,6 +2234,16 @@ namespace SdlDotNet
 				return this.SurfaceStruct.flags;
 			}
 		}	
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool FullScreen
+		{
+			get
+			{
+				return ((this.SurfaceStruct.flags & (int) VideoModes.Fullscreen) == (int) VideoModes.Fullscreen);
+			}
+		}	
 		#region ICloneable Members
 		/// <summary>
 		/// Creates a shallow copy of the Surface.
