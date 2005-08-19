@@ -2,8 +2,7 @@
 David Hudson xx xxx 2005
 * Fixed GAC installation and uninstall issues.
 * Fixed Surface.Blit(Sprite). It now blits the sprite to the right location. Thanks to Ekim_Gram for the bug report.
-* SDL.NET now builds on Linux using NAnt.
-* The SimpleGame and Triad demos now work on Linux, but have no audio (at least for an Ubuntu 5.04 setup).
+* SDL.NET now builds on Linux using NAnt. The build generates Web docs, but not chm help files.
 * The MoviePlayer works on Linux, but has no audio and runs very slowly.
 * The CDPlayer demo does not work on Linux.
 * Updated the Mono Config file. An Ubuntu 5.04 config file was added as well.
