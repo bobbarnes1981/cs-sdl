@@ -34,6 +34,9 @@ Sdl_image
 Sdl_ttf
 smpeg
 Sdl_gfx
+timidity
 NAnt
 
 You can now build SDL.NET on Linux.
+The audio will not work. You have to open up a terminal and type 'killall esd' before starting an SDL.NET (or any SDL) app.
+For a more complete audio solution read this thread from the ubuntu forums: http://ubuntuforums.org/showthread.php?t=44753

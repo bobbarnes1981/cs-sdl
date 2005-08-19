@@ -76,13 +76,7 @@ namespace SdlDotNet.Examples
 				grid.BlocksDestroyed += 
 					new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
 
-				try
-				{
-					levelUpSound = Mixer.Sound("../../Data/levelup.wav");
-				}
-				catch (SdlException)
-				{
-				}
+				levelUpSound = Mixer.Sound("../../Data/levelup.wav");
 				
 				while (!quitflag) 
 				{

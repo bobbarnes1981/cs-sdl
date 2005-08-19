@@ -67,9 +67,20 @@ namespace SdlDotNet.Examples
 
 			// Load the music and sounds
 			boing = Mixer.Sound("../../boing.wav"); 
+			Mixer.Music.EnableMusicFinishedCallback();
 			Mixer.Music.Load(music1); 
 			Mixer.Music.QueuedMusicFilename = music2; 
 			Mixer.Music.Play(true); 
+//				Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
+//				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
+//				Channel channel = new Channel(0);
+//				//Channel channel2 = new Channel(1);
+//				channel.EnableChannelFinishedCallback();
+//				//channel2.EnableChannelFinishedCallback();
+//				//channel.QueuedSound = queuedSound;
+//				channel.Volume = 32;
+//				channel.Play(sound);
+//				//channel2.Play(sound);
           
 			// Begin the SDL ticker
 			Events.StartTicker(); 
