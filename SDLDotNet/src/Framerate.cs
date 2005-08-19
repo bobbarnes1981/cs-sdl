@@ -25,9 +25,13 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// This framerate manager is used to insert delays into the graphic loop to maintain a constant framerate.
+	/// This framerate manager is used to insert delays into the graphic 
+	/// loop to maintain a constant framerate.
 	/// </summary>
-	/// <remarks>This is pretty much a direct C# translation of SDL_gfx's framerate control, except for the delegates and events.</remarks>
+	/// <remarks>
+	/// This is pretty much a direct C# translation of SDL_gfx's 
+	/// framerate control, except for the delegates and events.
+	/// </remarks>
 	/// <example>
 	/// <code>
 	/// // Setup event calls
@@ -64,7 +68,8 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Starts the framerate ticker. Must be called to start the manager interface.
+		/// Starts the framerate ticker. 
+		/// Must be called to start the manager interface.
 		/// </summary>
 		public static void Run()
 		{
@@ -109,7 +114,8 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// The private method, run by the ticker thread, that controls timing to call the event.
+		/// The private method, run by the ticker thread, 
+		/// that controls timing to call the event.
 		/// </summary>
 		private static void ThreadTicker()
 		{
@@ -139,7 +145,8 @@ namespace SdlDotNet
 					m_LastTick = current_ticks;
 				}
 
-				Events.NotifyFramerateTickEvent(new FramerateTickEventArgs(current_ticks, m_LastTick, m_FPS));
+				Events.NotifyFramerateTickEvent(
+					new FramerateTickEventArgs(current_ticks, m_LastTick, m_FPS));
 
 				curTime = Sdl.SDL_GetTicks();
 				frames++;
@@ -150,73 +157,6 @@ namespace SdlDotNet
 					lastTime = curTime;
 				}
 			}
-		}
-	}
-		
-		
-	/// <summary>
-	/// Event arguments for a Framerate tick.
-	/// </summary>
-	public class FramerateTickEventArgs : SdlEventArgs 
-	{
-		private int m_LastTick;
-		private int m_Tick;
-		private int m_FPS;
-
-		/// <summary>
-		/// Gets when the last frame tick occurred.
-		/// </summary>
-		public int LastTick
-		{
-			get
-			{
-				return m_LastTick;
-			}
-		}
-		
-		/// <summary>
-		/// Gets the FPS as of the event call. Framerate.FPS is an alternative.
-		/// </summary>
-		public int FPS
-		{
-			get
-			{
-				return m_FPS;
-			}
-		}
-
-		/// <summary>
-		/// Gets the current SDL tick time.
-		/// </summary>
-		public int Tick
-		{
-			get
-			{
-				return m_Tick;
-			}
-		}
-		
-		/// <summary>
-		/// Gets the difference in time between the current tick and the last tick.
-		/// </summary>
-		public int Delay
-		{
-			get
-			{
-				return m_Tick - m_LastTick;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="tick">The current tick.</param>
-		/// <param name="lastTick">The tick count that it was at last frame.</param>
-		public FramerateTickEventArgs(int tick, int lastTick, int fps)
-		{
-			m_Tick = tick;
-			m_LastTick = lastTick;
-			m_FPS = fps;
 		}
 	}
 }
