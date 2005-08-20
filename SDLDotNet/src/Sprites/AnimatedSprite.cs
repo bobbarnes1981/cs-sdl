@@ -72,6 +72,13 @@ namespace SdlDotNet.Sprites
 		{
 			this.surfaces.Add(surfaces);
 		}
+		
+		/// <summary>
+		/// Retrieves the current frame's surface.
+		/// </summary>
+		public virtual Surface Render(){
+			return this.surfaces[frame];
+		}
 
 		/// <summary>
 		/// 
