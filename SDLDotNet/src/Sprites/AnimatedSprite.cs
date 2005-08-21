@@ -76,7 +76,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Retrieves the current frame's surface.
 		/// </summary>
-		public virtual Surface Render(){
+		public override Surface Render(){
 			return this.surfaces[frame];
 		}
 
