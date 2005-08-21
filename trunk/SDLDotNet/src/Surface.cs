@@ -2244,6 +2244,23 @@ namespace SdlDotNet
 				return ((this.SurfaceStruct.flags & (int) VideoModes.Fullscreen) == (int) VideoModes.Fullscreen);
 			}
 		}	
+
+		/// <summary> 
+		/// Makes a new surface which 
+		/// contains a portion of the current surface. 
+		/// </summary> 
+		/// <param name="clip">
+		/// The rectangle on the current surface to be clipped.
+		/// </param> 
+		/// <returns>A clip of the new surface.</returns> 
+		public Surface CreateSurfaceFromClipRectangle(Rectangle clip) 
+		{ 
+			Surface final = 
+				this.CreateCompatibleSurface(clip.Width, clip.Height); 
+			final.Blit(this, clip); 
+			return final; 
+		}
+
 		#region ICloneable Members
 		/// <summary>
 		/// Creates a shallow copy of the Surface.
