@@ -81,11 +81,11 @@ namespace SdlDotNet.Examples
 			GameView gameView = new GameView(eventManager);
 			gameView.CreateView();
 			map.Build();
-			Mixer.Music.Load("../../fard-two.ogg");
-			Mixer.Music.Volume = 127;
+			Music music = new Music("../../fard-two.ogg");
+			Music.Volume = 127;
 			try
 			{
-				Mixer.Music.Play(-1);
+				music.Play(-1);
 			}
 			catch (DivideByZeroException)
 			{
