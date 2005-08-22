@@ -101,7 +101,11 @@ namespace SdlDotNet
         /// <param name="soundCollection">The SoundCollection to copy.</param>
         public SoundCollection(SoundCollection soundCollection)
         {
-            this.Add(soundCollection);
+			IDictionaryEnumerator enumer = soundCollection.GetEnumerator();
+			while(enumer.MoveNext())
+			{
+				this.Add((string)enumer.Key, (Sound)enumer.Value);
+			}
         }
         
         /// <summary>
@@ -197,7 +201,18 @@ namespace SdlDotNet
         {
         	Dictionary.Add(key, Mixer.Sound(filename));
         	return Dictionary.Count;
-        }
+		}
+        
+		/// <summary>
+		/// Loads and adds a new sound object to the collection.
+		/// </summary>
+		/// <param name="sound">The sound sample to add. Uses ToString() as the key.</param>
+		/// <returns>The final number of elements within the collection.</returns>
+		public int Add(Sound sound)
+		{
+			Dictionary.Add(sound.ToString(), sound);
+			return Dictionary.Count;
+		}		
         
         /// <summary>
         /// Removes an element from the collection.
@@ -207,6 +222,15 @@ namespace SdlDotNet
         {
             Dictionary.Remove(key);
         }
+
+		/// <summary>
+		/// Stops every sound within the collection.
+		/// </summary>
+		public void Stop()
+		{
+			foreach(Sound sound in this.Dictionary.Values)
+				sound.Stop();
+		}
         
         /// <summary>
         /// Plays every sound within the collection.
