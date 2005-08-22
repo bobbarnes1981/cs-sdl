@@ -38,9 +38,10 @@ namespace SdlDotNet.Examples
 		private Surface screen; 
 		private bool quit = false; 
 
-		private const string music1 = "../../mason2.mid";
-		private const string music2 = "../../fard-two.ogg"; 
-		private Sound boing;
+		// Load the music and sound.
+		private Music music1 = new Music("../../mason2.mid");
+		private Music music2 = new Music("../../fard-two.ogg");
+		private Sound boing = new Sound("../../boing.wav");
 
 		/// <summary>
 		/// 
@@ -65,12 +66,14 @@ namespace SdlDotNet.Examples
 			screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowCaption = "SdlDotNet - AudioExample";
 
-			// Load the music and sounds
-			boing = Mixer.Sound("../../boing.wav"); 
-			Mixer.Music.EnableMusicFinishedCallback();
-			Mixer.Music.Load(music1); 
-			Mixer.Music.QueuedMusicFilename = music2; 
-			Mixer.Music.Play(true); 
+			// Play the music and setup the queues.
+			music1.Play();
+
+			music1.QueuedMusic = music2; // Play music2 when music1 finishes.
+			music2.QueuedMusic = music1; // Play music1 when music2 finishes.
+
+			Music.EnableMusicFinishedCallback(); // Enable queueing
+
 //				Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
 //				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
 //				Channel channel = new Channel(0);
@@ -128,21 +131,17 @@ namespace SdlDotNet.Examples
 				case Key.Space: 
 
 					// Switch the music 
-					Mixer.Music.Fadeout(1000); 
-					Mixer.Music.Load(Mixer.Music.QueuedMusicFilename); 
-					Mixer.Music.Play(true); 
-					if (Mixer.Music.QueuedMusicFilename == music1)
-						Mixer.Music.QueuedMusicFilename = music2;
-					else
-						Mixer.Music.QueuedMusicFilename = music1;
+					Music.Fadeout(1500);
+ 
+					// The next music sample plays because queuing is enabled.
 
 					break; 
 
 				case Key.UpArrow: 
-					Mixer.Music.Volume += 15; 
+					Music.Volume += 20; 
 					break; 
 				case Key.DownArrow: 
-					Mixer.Music.Volume -= 15; 
+					Music.Volume -= 20;
 					break; 
 				case Key.Return:
 					boing.Play();
