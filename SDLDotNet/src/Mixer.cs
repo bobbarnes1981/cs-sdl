@@ -33,7 +33,7 @@ namespace SdlDotNet
 	/// </summary>
 	/// <remarks>
 	/// Before instantiating an instance of Movie,
-	/// you must call Mxier.Close() to turn off the default mixer.
+	/// you must call Mixer.Close() to turn off the default mixer.
 	/// If you do not do this, any movie will play very slowly. 
 	/// Smpeg uses a custom mixer for audio playback. 
 	/// </remarks>
@@ -207,18 +207,6 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Access to music system.
-		/// </summary>
-		/// <returns></returns>
-		public static Music Music
-		{
-			get
-			{
-				return Music.Instance;
-			}
-		}
-
-		/// <summary>
 		/// Loads a .wav file into memory
 		/// </summary>
 		/// <param name="file">The filename to load</param>
@@ -256,6 +244,20 @@ namespace SdlDotNet
 				throw SdlException.Generate();
 			}
 			return new Sound(p, data.Length);
+		}
+
+		/// <summary>
+		/// Loads a music sample from a filename returning the pointer to the sample.
+		/// </summary>
+		/// <param name="filename">The file path to load.</param>
+		/// <returns>The IntPtr handle to the music sample in memory.</returns>
+		/// <exception cref="SdlException">Thrown if an error occurs when loading the sample.</exception>
+		internal static IntPtr LoadMus(string filename)
+		{
+			IntPtr handle = SdlMixer.Mix_LoadMUS(filename);
+			if (handle == IntPtr.Zero)
+				throw SdlException.Generate();
+			return handle;
 		}
 
 		/// <summary>
