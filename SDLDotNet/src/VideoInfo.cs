@@ -20,7 +20,7 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Globalization;
+//using System.Globalization;
 using System.Reflection;
 using System.Resources;
 
@@ -33,7 +33,7 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class VideoInfo
 	{
-		static ResourceManager stringManager;
+//		static ResourceManager stringManager;
 
 		VideoInfo()
 		{
@@ -41,8 +41,8 @@ namespace SdlDotNet
 
 		static VideoInfo()
 		{
-			stringManager = 
-				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
+//			stringManager = 
+//				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
 		}
 
 		private static Sdl.SDL_VideoInfo VideoInfoStruct
@@ -52,8 +52,10 @@ namespace SdlDotNet
 				IntPtr videoInfoPointer = Sdl.SDL_GetVideoInfo();
 				if(videoInfoPointer == IntPtr.Zero) 
 				{
-					throw new SdlException(stringManager.GetString("Video query failed: " 
-						+ Sdl.SDL_GetError(), CultureInfo.CurrentUICulture));
+//					throw new SdlException(stringManager.GetString("Video query failed: " 
+//						+ Sdl.SDL_GetError(), CultureInfo.CurrentUICulture));
+					throw new SdlException("Video query failed: " 
+						+ Sdl.SDL_GetError());
 				}
 				return (Sdl.SDL_VideoInfo)
 					Marshal.PtrToStructure(videoInfoPointer, 

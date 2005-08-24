@@ -104,8 +104,9 @@ namespace SdlDotNet
 				//int result;
 					
 				//result = Sdl.SDL_GetWMInfo(ref inf);
-				Sdl.SDL_GetWMInfo(ref inf);
-				return new WMInfo((Sdl.SDL_SysWMinfo)inf);
+				//Sdl.SDL_GetWMInfo(ref inf);
+				//return new WMInfo((Sdl.SDL_SysWMinfo)inf);
+				return new WMInfo();
 				
 				// branch for client OS.
 			}
