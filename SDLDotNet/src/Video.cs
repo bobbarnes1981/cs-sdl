@@ -664,5 +664,31 @@ namespace SdlDotNet
 			Video.Screen.Update(rectangles);
 		}
 
+		/// <summary>
+		/// This returns the platform window handle for the SDL window.
+		/// </summary>
+		/// <remarks>
+		/// TODO: The Unix SysWMinfo struct has not been finished. 
+		/// This only runs on Windows right now.
+		/// </remarks>
+		public static IntPtr WindowHandle
+		{
+			get
+			{
+				int p = (int) Environment.OSVersion.Platform;
+				if ((p == 4) || (p == 128)) 
+				{
+					Sdl.SDL_SysWMinfo wmInfo; 
+					Sdl.SDL_GetWMInfo(out wmInfo); 
+					return new IntPtr(wmInfo.data); 
+				} 
+				else 
+				{
+					Sdl.SDL_SysWMinfo_Windows wmInfo; 
+					Sdl.SDL_GetWMInfo(out wmInfo); 
+					return new IntPtr(wmInfo.window); 
+				}
+			}
+		}
 	}
 }
