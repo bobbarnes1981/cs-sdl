@@ -24,7 +24,6 @@ using System.Runtime.InteropServices;
 using System.Text; 
 
 using SdlDotNet; 
-using Tao.Sdl; 
 
 namespace SdlDotNet.Examples
 {
@@ -38,7 +37,6 @@ namespace SdlDotNet.Examples
 		private const int bpp = 32; 
 		private Random rand; 
 		private bool quit; 
-		private System.Windows.Forms.Label label1;
 		private Surface screen; 
 
 		/// <summary>
@@ -51,16 +49,6 @@ namespace SdlDotNet.Examples
 			screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowCaption = "SdlDotNet - Windows Example";
 			rand = new Random();  
-			this.label1 = new System.Windows.Forms.Label();
-			// 
-			// label1
-			// 
-			this.label1.Location = new System.Drawing.Point(16, 8);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(80, 24);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Select Drive:";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 		} 
 		private void KeyDown(object sender, KeyboardEventArgs e) 
 		{ 
@@ -80,9 +68,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run() 
 		{
-			Sdl.SDL_SysWMinfo_Windows info;
-			Sdl.SDL_GetWMInfo(out info);
-			IntPtr frmhandle = new IntPtr(info.window);
 			while (quit == false) 
 			{ 
 				while (Events.Poll()) 
@@ -93,7 +78,7 @@ namespace SdlDotNet.Examples
 				System.Threading.Thread.Sleep(100); 
 				screen.Unlock(); 
 				screen.Flip(); 
-				ControlPaint.DrawButton(System.Drawing.Graphics.FromHwnd(frmhandle), 0, 0, 100, 100, ButtonState.Normal); 
+				ControlPaint.DrawButton(System.Drawing.Graphics.FromHwnd(Video.WindowHandle), 0, 0, 100, 100, ButtonState.Normal); 
 			} 
 		} 
 		static void Main() 
