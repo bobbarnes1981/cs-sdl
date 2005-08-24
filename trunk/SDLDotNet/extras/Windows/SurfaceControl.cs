@@ -38,7 +38,7 @@ namespace SdlDotNet.Windows
 	///     Sdl Surface applications.
 	/// </summary>
 	#endregion Class Documentation
-	public class SurfaceControl : PictureBox
+	public class SurfaceControl : UserControl
 	{
 		Surface surface;
 
