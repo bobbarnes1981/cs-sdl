@@ -89,6 +89,20 @@ namespace SdlDotNet
 			}
 		}
 
+		/// <summary>
+		/// Loads a collection of tiled surfaces from one larger surface. 
+		/// </summary>
+		/// <param name="filename">
+		/// The filename of the surface which contains all the tiles.
+		/// </param>
+		/// <param name="tileSize">
+		/// The size of each tile.
+		/// </param>
+		public SurfaceCollection(string filename, Size tileSize) : 
+			this(new Surface(filename), tileSize)
+		{
+		}
+
 		/// <summary> 
 		/// Loads a collection of tiled surfaces from one larger surface. 
 		/// </summary> 

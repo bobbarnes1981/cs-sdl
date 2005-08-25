@@ -88,7 +88,7 @@ namespace SdlDotNet.Examples
 			//This loads the various images (provided by Moonfire) 
 			// into a SurfaceCollection for animation
 			SurfaceCollection marbleSurfaces = 
-				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(64, 64)); 
+				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50)); 
 
 			for (int i = 0; i < this.maxBalls; i++)
 			{
