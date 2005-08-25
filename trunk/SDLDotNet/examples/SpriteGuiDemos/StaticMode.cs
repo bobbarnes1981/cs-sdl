@@ -42,7 +42,7 @@ namespace SdlDotNet.Examples
 			this.Sprites.Add(s);
 
 			// Create the fragment image
-			SurfaceCollection td = new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(64, 64));
+			SurfaceCollection td = new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50));
 			AnimatedDemoSprite an = new AnimatedDemoSprite(td, new Vector(200, 32, 100));
 			an.X = 250;
 			Sprites.Add(an);
@@ -54,11 +54,11 @@ namespace SdlDotNet.Examples
 			{
 				Thread.Sleep(10);
 				AnimatedDemoSprite as1 = new AnimatedDemoSprite(m1,
-					new Vector(50 + i * 32,
+					new Vector(50 + i * 25,
 					436, i));
 				Thread.Sleep(10);
 				AnimatedDemoSprite as2 = new AnimatedDemoSprite(m1,
-					new Vector(50 + i * 32,
+					new Vector(50 + i * 25,
 					468, 10 - i));
 				Sprites.Add(as1);
 				Sprites.Add(as2);
