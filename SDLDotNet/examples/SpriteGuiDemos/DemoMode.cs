@@ -71,7 +71,7 @@ namespace SdlDotNet.Examples
 			}
 
 			// Load the marble and cache it before returning
-			icd = new SurfaceCollection("../../Data/" + name, ".png");
+			icd = new SurfaceCollection("../../Data/" + name + ".png", new Size(50,50));
 			marbles["icd:" + name] = icd;
 			return icd;
 		}
@@ -92,8 +92,7 @@ namespace SdlDotNet.Examples
 		{
 			// Load the marble
 			SurfaceCollection td = 
-				new SurfaceCollection(new Surface("../../Data/" + name + ".png"), new Size(64, 64));
-
+				new SurfaceCollection(new Surface("../../Data/" + name + ".png"), new Size(50, 50));
 			return td;
 		}
 		#endregion

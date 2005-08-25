@@ -38,8 +38,8 @@ namespace SdlDotNet.Examples
 			// Create the fragment marbles
 			int rows = 5;
 			int cols = 5;
-			int sx = (800 - cols * 64) / 2;
-			int sy = (600 - rows * 64) / 2;
+			int sx = (800 - cols * 50) / 2;
+			int sy = (600 - rows * 50) / 2;
 			SurfaceCollection m1 = LoadMarble("marble1");
 			SurfaceCollection m2 = LoadMarble("marble2");
 
@@ -50,7 +50,7 @@ namespace SdlDotNet.Examples
 				{
 					Thread.Sleep(10);
 					Sprites.Add(new DragSprite(m1, m2,
-						new Point(sx + i * 64, sy + j * 64),
+						new Point(sx + i * 50, sy + j * 50),
 						new Rectangle(new Point(0, 0), SdlDemo.Size)));
 				}
 			}
