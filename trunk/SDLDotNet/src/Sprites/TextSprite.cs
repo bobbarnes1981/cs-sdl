@@ -143,11 +143,12 @@ namespace SdlDotNet.Sprites
 		/// Renders the font, if both the text and color and font are
 		/// set. It stores the render in memory until it is used.
 		/// </summary>
+		/// <returns>The new renderation surface of the text.</returns>
 		public override Surface Render()
 		{
-			if (TextString == null)
+			if (textItem == null)
 			{
-				this.TextString = " ";
+				textItem = " ";
 			}
 
 			// Render it (Solid or Blended)
@@ -155,13 +156,12 @@ namespace SdlDotNet.Sprites
 			{
 				if (backgroundColor.IsEmpty)
 				{
-					this.Surface = font.Render(TextString, color);
+					this.Surface = font.Render(textItem, color);
 				}
 				else
 				{
-					this.Surface = font.Render(TextString, color, backgroundColor);
+					this.Surface = font.Render(textItem, color, backgroundColor);
 				}
-				
 				this.Size = new Size(this.Surface.Width, this.Surface.Height);
 				return this.Surface;
 			}
@@ -183,7 +183,7 @@ namespace SdlDotNet.Sprites
 		private Color backgroundColor;
 
 		/// <summary>
-		/// 
+		/// Gets and sets the color to be used with the text.
 		/// </summary>
 		public Color Color
 		{
@@ -193,14 +193,14 @@ namespace SdlDotNet.Sprites
 			}
 			set 
 			{ 
-				color = value; 
-				this.Surface = this.Render(); 
+				color = value;
 			}
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the background color to be used with the text.
 		/// </summary>
+		/// <remarks>Defaults as Color.Transparent.</remarks>
 		public Color BackgroundColor
 		{
 			get 
@@ -209,19 +209,18 @@ namespace SdlDotNet.Sprites
 			}
 			set 
 			{ 
-				backgroundColor = value; 
-				this.Surface = this.Render(); 
+				backgroundColor = value;
 			}
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the font to be used with the text.
 		/// </summary>
 		public SdlDotNet.Font Font
 		{
 			get 
 			{ 
-				return font; 
+				return font;
 			}
 			set 
 			{ 
@@ -229,15 +228,14 @@ namespace SdlDotNet.Sprites
 				{
 					throw new SdlException("Cannot assign a null manager");
 				}
-				font = value; 
-				this.Surface = this.Render(); 
+				font = value;
 			}
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the text to be rendered.
 		/// </summary>
-		public string TextString
+		public string Text
 		{
 			get 
 			{ 
@@ -245,8 +243,7 @@ namespace SdlDotNet.Sprites
 			}
 			set 
 			{ 
-				textItem = value; 
-				this.Surface = this.Render(); 
+				textItem = value;
 			}
 		}
 		#endregion
