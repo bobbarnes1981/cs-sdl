@@ -1084,18 +1084,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Blits a sprite onto the current surface.
 		/// </summary>
-		/// <param name="sprite"></param>
+		/// <param name="sprite">The sprite to blit.</param>
+		/// <returns>A rectangle describing the location of the updated surface.</returns>
 		public Rectangle Blit(Sprite sprite)
 		{
-			Rectangle rect = new Rectangle();
-
-			if (sprite.Visible)
-			{
-				rect = this.Blit(sprite.Render(), sprite.Rectangle);
-			}
-			return rect;
+			if(sprite.Visible)
+				return this.Blit(sprite.Render(), sprite.Rectangle);
+			else
+				return new Rectangle();
 		}
 
 		/// <summary>
