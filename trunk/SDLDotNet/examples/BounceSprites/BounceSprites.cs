@@ -36,7 +36,6 @@ namespace SdlDotNet.Examples
 	{
 		#region Fields
 		private Surface screen; //video screen
-		private bool quitflag; //flag to tell the app to shutdown
 		private SpriteCollection master = new SpriteCollection(); //holds all sprites
 		private int width = 640; //screen width
 		private int height = 480; //screen height
@@ -51,15 +50,8 @@ namespace SdlDotNet.Examples
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
-				//Console.WriteLine("Keyboard");
-				quitflag = true;
+				Events.QuitApp();
 			}
-		}
-
-		//The app will exit if the 'x' in the window is clicked
-		private void OnQuit(object sender, QuitEventArgs e) 
-		{
-			quitflag = true;
 		}
 
 		RectangleCollection rects = new RectangleCollection();
@@ -110,30 +102,10 @@ namespace SdlDotNet.Examples
 			//These bind the events to the above methods.
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
-			Events.Quit += new QuitEventHandler(this.OnQuit);
 			Events.Tick += new TickEventHandler(this.OnTick);
 
 			//Start the event ticker
 			Events.Run();
-
-			
-			try 
-			{
-				while (!quitflag) 
-				{
-					//Console.WriteLine("Hello there!");
-					// handle events till the queue is empty
-					while (Events.Poll()) 
-					{} 
-					//Events.Wait();
-				}
-				//Stop the ticker when the app quits.
-				//Events.StopTicker();
-			} 
-			catch 
-			{
-				throw;
-			}
 		}
 
 		/// <summary>

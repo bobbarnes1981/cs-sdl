@@ -334,6 +334,15 @@ namespace SdlDotNet
 				throw SdlException.Generate();
 			}
 		}
+
+		/// <summary>
+		/// Raises Event and places it on the event queue
+		/// </summary>
+		/// <param name="sdlEvent">Event to be raised</param>
+		public static void RaiseEvent(SdlEventArgs sdlEvent)
+		{
+			Events.Add(sdlEvent);
+		}
 		/// <summary>
 		/// Returns an array of events in the event queue.
 		/// </summary>
@@ -721,12 +730,28 @@ namespace SdlDotNet
 		private static int m_FPS;
 		private static Thread m_Thread;
 
+		static bool quitflag;
+
+		//The app will exit if the 'x' in the window is clicked
+		private void OnQuit(object sender, QuitEventArgs e) 
+		{
+			quitflag = true;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void QuitApp()
+		{
+			Events.RaiseEvent(new QuitEventArgs());
+		}
 		/// <summary>
 		/// Starts the framerate ticker. 
 		/// Must be called to start the manager interface.
 		/// </summary>
 		public static void Run()
 		{
+			Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
 			Rate = 30;
 			m_LastTick = 0;
 			m_Thread = new Thread(new ThreadStart(ThreadTicker));
@@ -734,6 +759,19 @@ namespace SdlDotNet
 			m_Thread.IsBackground = true;
 			m_Thread.Name = "SDL.NET - Framerate Manager";
 			m_Thread.Start();
+			try 
+			{
+				while (!quitflag) 
+				{
+					// handle events till the queue is empty
+					while (Events.Poll()) 
+					{} 
+				}
+			} 
+			catch 
+			{
+				throw;
+			}
 		}
 
 		/// <summary>
@@ -818,6 +856,6 @@ namespace SdlDotNet
 				}
 			}
 		}
+		#endregion Thread Management
 	}
 }
-#endregion 
