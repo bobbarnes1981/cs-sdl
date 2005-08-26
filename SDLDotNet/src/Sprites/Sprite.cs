@@ -138,7 +138,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		private Surface surf;
 		/// <summary>
-		/// 
+		/// Gets and sets the surface of the sprite.
 		/// </summary>
 		public Surface Surface
 		{
@@ -153,11 +153,21 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Returns a surface of the rendered sprite.
 		/// </summary>
 		public virtual Surface Render()
 		{
-				return this.surf;
+			return this.surf;
+		}
+
+		/// <summary>
+		/// Renders the sprite onto the destination surface.
+		/// </summary>
+		/// <param name="destination">The surface to be rendered onto.</param>
+		/// <returns></returns>
+		public virtual Rectangle Render(Surface destination)
+		{
+			return destination.Blit(this);
 		}
 		#endregion
 
@@ -290,7 +300,7 @@ namespace SdlDotNet.Sprites
 
 		private Rectangle rect;
 		/// <summary>
-		/// 
+		/// Gets and sets the sprite's surface rectangle.
 		/// </summary>
 		public Rectangle Rectangle
 		{
@@ -325,7 +335,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the sprites current x,y location.
 		/// </summary>
 		public Point Position
 		{
@@ -343,7 +353,7 @@ namespace SdlDotNet.Sprites
 		private int coordinateZ;
 
 		/// <summary>
-		/// 
+		/// Gets and sets the sprites current x,y,z coordinates.
 		/// </summary>
 		public Vector Coordinates
 		{
@@ -359,7 +369,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the sprite's x location.
 		/// </summary>
 		public int X
 		{
@@ -374,7 +384,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the sprite's y location.
 		/// </summary>
 		public int Y
 		{
@@ -389,7 +399,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the sprite's z coordinate.
 		/// </summary>
 		public int Z
 		{
@@ -404,7 +414,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the sprite's size.
 		/// </summary>
 		public Size Size
 		{
@@ -420,7 +430,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the sprite's height.
 		/// </summary>
 		public int Height
 		{
@@ -435,7 +445,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the sprite's width.
 		/// </summary>
 		public int Width
 		{
@@ -721,7 +731,7 @@ namespace SdlDotNet.Sprites
 		private bool visible = true;
 
 		/// <summary>
-		/// 
+		/// Gets and sets whether or not the sprite is visible when rendered.
 		/// </summary>
 		public bool Visible
 		{
