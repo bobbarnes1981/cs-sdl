@@ -1091,9 +1091,13 @@ namespace SdlDotNet
 		public Rectangle Blit(Sprite sprite)
 		{
 			if(sprite.Visible)
+			{
 				return this.Blit(sprite.Render(), sprite.Rectangle);
+			}
 			else
+			{
 				return new Rectangle();
+			}
 		}
 
 		/// <summary>

@@ -20,6 +20,8 @@ using SdlDotNet;
 using System.Drawing;
 using System.Globalization;
 
+using SdlDotNet.Sprites;
+
 namespace SdlDotNet.Examples
 {
 	enum TextFadeState
@@ -34,11 +36,8 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class TextItem
+	public class TextItem : Sprite
 	{
-		Rectangle _Position;
-		Surface _Image;
-
 		const float inspeed = 510;
 		const float outspeed = 64;
 
@@ -54,20 +53,17 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="number"></param>
 		/// <param name="y"></param>
-		public TextItem(int number, int y)
+		public TextItem(int number, int y) : 
+			base(new Surface(string.Format(
+			CultureInfo.CurrentCulture,"../../Data/Text{0}.bmp", number)), new Point(25, y))
 		{
-			if(_Image == null)
-			{
-				_Image = 
-					Graphics.LoadText(string.Format(CultureInfo.CurrentCulture,"../../Data/Text{0}.bmp", number));
-			}
+			this.Rectangle = new Rectangle(25, y, this.Surface.Width, this.Surface.Height);
 
-			_Position = new Rectangle(25, y, _Image.Width, _Image.Height);
-
+			this.Surface.SetColorKey(Color.FromArgb(255, 0, 255), true);
 			starttime = number * 2;
 			endtime = starttime + 4.5f;
 
-			_Image.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 0);
+			this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 0);
 		}
 
 		/// <summary>
@@ -103,7 +99,7 @@ namespace SdlDotNet.Examples
 						state = TextFadeState.BeforeFadeOut;
 					}
 
-					_Image.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, (byte)alpha);
+					this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, (byte)alpha);
 					break;
 
 				case TextFadeState.BeforeFadeOut:
@@ -122,29 +118,8 @@ namespace SdlDotNet.Examples
 						state = TextFadeState.Finished;
 					}
 
-					_Image.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, (byte)alpha);
+					this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, (byte)alpha);
 					break;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Rectangle Position
-		{ 
-			get
-			{ 
-				return _Position; 
-			}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public Surface Image
-		{ 
-			get
-			{ 
-				return _Image; 
 			}
 		}
 	}
@@ -165,7 +140,7 @@ namespace SdlDotNet.Examples
 
 			for(int i = 1; i < texts.Length; i++)
 			{
-				texts[i] = new TextItem(i, texts[i-1].Position.Bottom + 10);
+				texts[i] = new TextItem(i, texts[i-1].Rectangle.Bottom + 10);
 			}
 		}
 
