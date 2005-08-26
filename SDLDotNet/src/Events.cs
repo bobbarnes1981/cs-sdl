@@ -723,11 +723,11 @@ namespace SdlDotNet
 		}
 
 		#region Thread Management
+		private static int m_Rate = 30;
+		private static int m_FPS = 30;
 		private static int m_Framecount;
-		private static float m_Framerate;
 		private static int m_LastTick;
-		private static int m_Rate;
-		private static int m_FPS;
+		private static float m_Framerate = (1000.0F / (float)m_Rate);
 		private static Thread m_Thread;
 
 		static bool quitflag;
@@ -752,7 +752,6 @@ namespace SdlDotNet
 		public static void Run()
 		{
 			Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
-			Rate = 30;
 			m_LastTick = 0;
 			m_Thread = new Thread(new ThreadStart(ThreadTicker));
 			m_Thread.Priority = ThreadPriority.Normal;
