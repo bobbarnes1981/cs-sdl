@@ -30,7 +30,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class AnimatedDemoSprite : AnimatedSprite
 	{
-		Random rand = new Random();
+		static Random rand = new Random();
 		// Randomly assign the direction we show the frames
 		private bool frameRight;
 

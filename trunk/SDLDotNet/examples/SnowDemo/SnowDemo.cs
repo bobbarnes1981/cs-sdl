@@ -1,5 +1,6 @@
 /* This file is part of SnowDemo
-* SnowDemo.cs, (c) 2003 Sijmen Mulder
+* SnowDemo.cs, (c) 2005 David Hudson
+* based on code by (c) 2003 Sijmen Mulder
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -16,9 +17,11 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 ****************************************************************************/
 
-using SdlDotNet;
 using System;
 using System.Drawing;
+
+using SdlDotNet;
+using SdlDotNet.Sprites;
 
 namespace SdlDotNet.Examples
 {
@@ -27,7 +30,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	class SnowDemo
 	{
-		static Snowflake[] snowflakes;
+		SpriteCollection snowflakes = new SpriteCollection();
 		static Texts texts;
 		Surface screen;
 		Surface background;
@@ -38,14 +41,6 @@ namespace SdlDotNet.Examples
 		float frametime = 0;
 		int frames = 0;
 
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static Snowflake[] GetSnowflakes()
-		{
-			return snowflakes;
-		}
 
 		/// <summary>
 		/// 
@@ -65,32 +60,14 @@ namespace SdlDotNet.Examples
 		{
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="numberOfSnowflakes"></param>
-		public static void Init(int numberOfSnowflakes)
+		void Initialize(int numberOfSnowflakes)
 		{
-			snowflakes = new Snowflake[numberOfSnowflakes];
-
-			for(int i = 0; i < snowflakes.Length; i++)
+			for(int i = 0; i < numberOfSnowflakes; i++)
 			{
-				snowflakes[i] = new Snowflake();
+				snowflakes.Add(new Snowflake());
 			}
+			snowflakes.EnableTickEvent();
 			texts = new Texts();
-		}
-
-		static int numberOfSnowflakes = 250;
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static int NumberOfSnowflakes
-		{
-			get
-			{
-				return numberOfSnowflakes;
-			}
 		}
 
 		[STAThread]
@@ -109,7 +86,7 @@ namespace SdlDotNet.Examples
 			background = new Surface("../../Data/background.png");
 			background.SetColorKey(Color.FromArgb(255, 0, 255), true);
 			Video.WindowCaption = "SdlDotNet - Snow Demo";
-			Init(250);
+			Initialize(250);
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
 			Events.KeyboardDown +=
@@ -129,16 +106,8 @@ namespace SdlDotNet.Examples
 
 			if(frametime >= 5)
 			{
-				Console.WriteLine("Frames per second: {0}",
-					(int)(frames / frametime));
-
 				frametime = 0;
 				frames = 0;
-			}
-
-			for(int i = 0; i < SnowDemo.GetSnowflakes().Length; i++)
-			{
-				SnowDemo.GetSnowflakes()[i].Update(seconds);
 			}
 
 			for(int i = 0; i < SnowDemo.texts.Length; i++)
@@ -146,22 +115,15 @@ namespace SdlDotNet.Examples
 				SnowDemo.Texts[i].Update(seconds);
 			}
 
-
-			screen.Fill(new Rectangle(new Point(0, 0), screen.Size),
-				Color.FromArgb(64, 175, 239));
-			
-			for(int i = 0; i < SnowDemo.NumberOfSnowflakes; i++)
-			{
-				screen.Blit(SnowDemo.GetSnowflakes()[i].Surface, SnowDemo.GetSnowflakes()[i].Position);
-			}
-			
-			screen.Blit(background, new Rectangle(new Point(0, 280), background.Size));
+			screen.Fill(Color.FromArgb(64, 175, 239));
+			screen.Blit(snowflakes);
+			screen.Blit(background, new Point(0, 280));
 			
 			for(int i = 0; i < SnowDemo.Texts.Length; i++)
 			{
 				screen.Blit(SnowDemo.Texts[i].Surface, SnowDemo.Texts[i].Position);
 			}
-			screen.Flip();
+			screen.Update();
 
 			lastframe = newframe;
 		}

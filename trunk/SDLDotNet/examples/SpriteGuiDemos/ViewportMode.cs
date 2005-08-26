@@ -34,6 +34,7 @@ namespace SdlDotNet.Examples
 		private Sprite sprite;
 		SpriteSingleCollection spriteSingle = new SpriteSingleCollection();
 		private Size size;
+		static Random rand = new Random();
 
 		Rectangle rect;
 
@@ -64,7 +65,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public ViewportMode()
 		{
-			Random rand = new Random();
 			// Create the fragment marbles
 			SurfaceCollection td = LoadMarble("marble1");
 			SurfaceCollection td2 = LoadMarble("marble2");

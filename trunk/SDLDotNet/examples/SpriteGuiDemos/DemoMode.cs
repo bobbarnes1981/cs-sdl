@@ -43,7 +43,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		private SpriteCollection sprites = new SpriteCollection();
-		Random rand = new Random();
+		static Random rand = new Random();
 
 		#region Drawables
 		/// <summary>

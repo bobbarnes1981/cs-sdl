@@ -31,7 +31,7 @@ namespace SdlDotNet.Examples
 	public class GuiMode : DemoMode
 	{
 		private GuiTicker ticker;
-		Random rand = new Random();
+		static Random rand = new Random();
 		GuiMenuTitle gm;
 		GuiMenuTitle gm2;
 		GuiMenuTitle gm3;

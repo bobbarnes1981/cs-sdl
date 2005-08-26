@@ -1,5 +1,6 @@
 /* This file is part of SnowDemo
-* (c) 2003 Sijmen Mulder
+* (c) 2005 David Hudson
+* Based on code by Sijmen Mulder
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -23,16 +24,38 @@ using SdlDotNet.Sprites;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// Summary description for Class1.
+	/// Snowflake Sprite Class
 	/// </summary>
+	/// <remarks>
+	/// A snowflakes is simply a 5x5 pixel white Surface. 
+	/// It will start out at a random speed and sideways movement.
+	/// </remarks>
 	public class Snowflake : Sprite
 	{
 		static Random random = new Random();
 
 		float speed;
 		float wind;
+		float delta = 0.05f;
 		
-		void reset()
+		/// <summary>
+		/// 
+		/// </summary>
+		public Snowflake() : base(new Surface(5, 5))
+		{
+			Initialize();
+			Reset();
+			this.Y = -1 * random.Next(5000 - this.Surface.Height);
+		}
+
+		void Initialize()
+		{
+			this.Surface.Fill(Color.White);
+			this.Surface.SetColorKey(Color.FromArgb(255, 0, 255), true);
+			this.Rectangle = new Rectangle(this.Surface.Width, this.Surface.Height, 0, 0);
+		}
+
+		void Reset()
 		{
 			wind = random.Next(3) / 10.0f;
 
@@ -48,36 +71,17 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Snowflake() : base(new Surface(5, 5))
+		/// <param name="args"></param>
+		public override void Update(TickEventArgs args)
 		{
-			Initialize();
-
-			reset();
-			this.Y = -1 * random.Next(5000 - this.Surface.Height);
-		}
-
-		private void Initialize()
-		{
-			this.Surface.Fill(Color.White);
-			this.Surface.SetColorKey(Color.FromArgb(255, 0, 255), true);
-			this.Rectangle = new Rectangle(this.Surface.Width, this.Surface.Height, 0, 0);
-		}
-
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="seconds"></param>
-		public void Update(float seconds)
-		{
-			float change = seconds * speed;
+			float change = delta * speed;
 
 			this.Y += (int)change;
 			this.X += (int)Math.Ceiling(change * wind);
 
-			if(this.Y > 480)
+			if (this.Y > 480)
 			{
-				reset();
+				Reset();
 			}
 		}
 	}
