@@ -51,6 +51,7 @@ namespace SdlDotNet.Examples
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
+				//Console.WriteLine("Keyboard");
 				quitflag = true;
 			}
 		}
@@ -110,21 +111,24 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
 			Events.Quit += new QuitEventHandler(this.OnQuit);
-			Events.TickEvent += new TickEventHandler(this.OnTick);
+			Events.Tick += new TickEventHandler(this.OnTick);
 
 			//Start the event ticker
-			Events.StartTicker();
+			Events.Run();
 
+			
 			try 
 			{
 				while (!quitflag) 
 				{
+					//Console.WriteLine("Hello there!");
 					// handle events till the queue is empty
 					while (Events.Poll()) 
 					{} 
+					//Events.Wait();
 				}
 				//Stop the ticker when the app quits.
-				Events.StopTicker();
+				//Events.StopTicker();
 			} 
 			catch 
 			{

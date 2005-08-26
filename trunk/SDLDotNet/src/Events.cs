@@ -115,11 +115,6 @@ namespace SdlDotNet
 	/// Handles the ticks as they are processed by the system.
 	/// </summary>
 	public delegate void TickEventHandler(object sender, TickEventArgs e);
-	
-	/// <summary>
-	/// Indicates that a framerate tick is to be processed.
-	/// </summary>
-	public delegate void FramerateTickEventHandler(object sender, FramerateTickEventArgs e);
 
 	/// <summary>
 	/// Contains events which can be attached to to read user input and other miscellaneous occurances.
@@ -205,11 +200,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Fires every frame.
 		/// </summary>
-		public static event TickEventHandler TickEvent;
-		/// <summary>
-		/// Fires whenever a frame tick is to be processed.
-		/// </summary>
-		public static event FramerateTickEventHandler FramerateTick;
+		public static event TickEventHandler Tick;
 
 		static readonly Events instance = new Events();
 
@@ -650,11 +641,11 @@ namespace SdlDotNet
 			}
 		}
 
-		internal static void NotifyFramerateTickEvent(FramerateTickEventArgs e)
+		internal static void OnTick(TickEventArgs e)
 		{
-			if (FramerateTick != null) 
+			if (Tick != null) 
 			{
-				FramerateTick(instance, e);
+				Tick(instance, e);
 			}
 		}
 
@@ -723,174 +714,110 @@ namespace SdlDotNet
 		}
 
 		#region Thread Management
-		private static Thread serverThread = null;
-		private static Thread tickerThread = null;
-		private static bool stopThread = true;
-		private static int skippedTicks = 0;
-		private static int processSkipped = 0;
-		private static bool processing = false;
-		private static long lastTick = DateTime.Now.Ticks;
+		private static int m_Framecount;
+		private static float m_Framerate;
+		private static int m_LastTick;
+		private static int m_Rate;
+		private static int m_FPS;
+		private static Thread m_Thread;
 
 		/// <summary>
-		/// Processes the tick server thread. This keeps track of the
-		/// number of skipped ticks, to give a more accurate count or
-		/// status of each tick.
+		/// Starts the framerate ticker. 
+		/// Must be called to start the manager interface.
 		/// </summary>
-		private static void Run()
+		public static void Run()
 		{
-			// Loops until the system indicates a stop
-			while (!stopThread)
-			{
-				// Sleep for a little bit
-				Thread.Sleep(tickSpan);
-
-				// Lock to see if we are processing
-				lock (Events.instance) 
-				{
-					// If we are processing, just increment it
-					if (processing)
-					{
-						skippedTicks++;
-						continue;
-					}
-
-					// Process the counter
-					processSkipped = skippedTicks;
-					skippedTicks = 0;
-					processing = true;
-				}
-
-				// Perform the actual threaded tick
-				tickerThread = new Thread(new ThreadStart(RunTicker));
-				tickerThread.IsBackground = true;
-				tickerThread.Priority = ThreadPriority.Normal; // ThreadPriority.Lowest; Almost disregards thread
-				tickerThread.Name = "Server Thread Tick";
-				tickerThread.Start();
-			}
+			Rate = 30;
+			m_LastTick = 0;
+			m_Thread = new Thread(new ThreadStart(ThreadTicker));
+			m_Thread.Priority = ThreadPriority.Normal;
+			m_Thread.IsBackground = true;
+			m_Thread.Name = "SDL.NET - Framerate Manager";
+			m_Thread.Start();
 		}
 
 		/// <summary>
-		/// Executes a single tick statement in a second thread.
+		/// Gets the current FPS and sets the wanted framerate.
 		/// </summary>
-		//private static void RunTicker(object stateInfo)
-		private static void RunTicker()
+		public static int FPS
 		{
-			// Execute the tick
-			if (Events.TickEvent != null)
+			get
 			{
-				// Create the arguments
-				long now = DateTime.Now.Ticks;
-				TickEventArgs args = new TickEventArgs(processSkipped, now - lastTick);
-				lastTick = now;
-			
-				// Trigger the ticker
-				Events.TickEvent(Events.instance, args);
-			}
-      
-			// Clear the flag. This is in a locked block because the testing
-			// of it is also in the same lock.
-			lock (Events.instance)
-			{
-				processing = false;
-			}
-		}
-
-		/// <summary>
-		/// Start ticker thread
-		/// </summary>
-		public static void StartTicker()
-		{
-			// Prepare for the server thread
-			stopThread = false;
-			serverThread = new Thread(new ThreadStart(Run));
-			serverThread.IsBackground = true;
-			serverThread.Priority = ThreadPriority.Normal; // ThreadPriority.Lowest; - Almost disregards tick events
-			serverThread.Name = "Server Thread";
-			serverThread.Start();
-		}
-
-		/// <summary>
-		/// Stop ticker thread
-		/// </summary>
-		public static void StopTicker()
-		{
-			// Mark everything to stop
-			stopThread = true;
-
-			// Join the ticker
-			if (tickerThread != null)
-			{
-				try
-				{
-					tickerThread.Join();
-				}
-				catch
-				{
-					throw new SdlException("StopTicker Problem");
-				}
-			}
-
-			// Join the server
-			try
-			{
-				serverThread.Join();
-				serverThread = null;
-			}
-			catch
-			{
-				throw new SdlException("Thread Join exception");
-			}
-
-			// Make noise
-			while (processing)
-			{
-				Thread.Sleep(tickSpan);
-			}
-		}
-		#endregion
-
-		#region Tick Duration
-		private static int tickSpan = 50;
-
-		/// <summary>
-		/// Ticks per second
-		/// </summary>
-		public static int TicksPerSecond
-		{
-			get 
-			{ 
-				return 1000 / tickSpan; 
-			}
-			set 
-			{ 
-				if (value > 1 && value <= 1000)
-				{
-					int temp = 1000 / value;
-					tickSpan = temp;
-				}
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static int TickSpan
-		{
-			get 
-			{ 
-				return tickSpan; 
+				return m_FPS;
 			}
 			set
 			{
-				if (value < 1)
-				{
-					throw new SdlException("Cannot set a negative or zero sleep time.");
-				}
-
-				tickSpan = value;
+				Rate = value;
 			}
 		}
-		#endregion
-		
+
+		/// <summary>
+		/// Gets and sets the wanted framerate of the ticker.
+		/// </summary>
+		public static int Rate
+		{
+			get
+			{
+				return m_Rate;
+			}
+			set
+			{
+				m_Framecount = 0;
+				if(value < 1)
+					m_Rate = 1;
+				else if(value > 200)
+					m_Rate = 200;
+				else
+					m_Rate = value;
+				m_Framerate = (1000.0F / (float)m_Rate);
+			}
+		}
+
+		/// <summary>
+		/// The private method, run by the ticker thread, 
+		/// that controls timing to call the event.
+		/// </summary>
+		private static void ThreadTicker()
+		{
+			int frames = 0;
+			int lastTime = Sdl.SDL_GetTicks();
+			int curTime;
+			int current_ticks;
+			int target_ticks;
+			int the_delay;
+			
+			while(m_Thread.IsAlive)
+			{
+				m_Framecount++;
+
+				current_ticks = Sdl.SDL_GetTicks();
+				target_ticks = m_LastTick + (int)((float)m_Framecount * m_Framerate);
+
+				if (current_ticks <= target_ticks) 
+				{
+					the_delay = target_ticks - current_ticks;
+					//Sdl.SDL_Delay(the_delay);
+					Thread.Sleep(the_delay);
+				} 
+				else 
+				{
+					m_Framecount = 0;
+					m_LastTick = current_ticks;
+				}
+
+				Events.OnTick(
+					new TickEventArgs(current_ticks, m_LastTick, m_FPS));
+
+				curTime = Sdl.SDL_GetTicks();
+				frames++;
+				if(lastTime + 1000 <= curTime)
+				{
+					m_FPS = frames;
+					frames = 0;
+					lastTime = curTime;
+				}
+			}
+		}
 	}
 }
+#endregion 

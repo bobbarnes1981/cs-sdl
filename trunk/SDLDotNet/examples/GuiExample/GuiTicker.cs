@@ -82,7 +82,7 @@ namespace SdlDotNet.Examples.GuiExample
 			// Figure out the rates. 
 			// The min and max start on opposite sides
 			// of the ticker.
-			int offset = args.RatePerSecond(Delta);
+			//int offset = args.RatePerSecond(Delta);
 
 			if (this.Sprites.Count != 0)
 			{
@@ -99,7 +99,7 @@ namespace SdlDotNet.Examples.GuiExample
 					}
 					else
 					{
-						s.X += offset;
+						s.X += 10;
 					}
 					s.Y = 0;
 				}

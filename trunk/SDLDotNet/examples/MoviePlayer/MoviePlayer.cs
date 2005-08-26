@@ -34,8 +34,6 @@ namespace SdlDotNet.Examples
 	/// To quit, you can close the window, 
 	/// press the Escape key or press the 'q' key
 	/// <p>Written by David Hudson (jendave@yahoo.com)</p>
-	/// <p>This is a reimplementation of an example 
-	/// written by Will Weisser (ogl@9mm.com)</p>
 	/// </remarks>
 	#endregion Class Documentation
 	class MoviePlayer 
@@ -62,8 +60,6 @@ namespace SdlDotNet.Examples
 				new KeyboardEventHandler(this.KeyboardDown); 
 			Events.Quit += new QuitEventHandler(this.Quit);
 
-			//SdlMixer.MixFunctionDelegate audioMixer = new SdlMixer.MixFunctionDelegate(this.player);
-			//(Smpeg.SMPEG_playAudioSDL);
 			Mixer.Initialize();
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
 			Video.WindowCaption = "SdlDotNet - Movie Player";
@@ -73,21 +69,6 @@ namespace SdlDotNet.Examples
 			Console.WriteLine("Width: " + movie.Size.Width);
 			Console.WriteLine("Height: " + movie.Size.Height);
 			Console.WriteLine("HasAudio: " + movie.HasAudio);
-//			movie.DisableAudio();
-//			int freq;
-//			short format;
-//			int channels;
-//			SdlMixer.Mix_QuerySpec(out freq, out unchecked(format), out channels);
-//			Sdl.SDL_AudioSpec audiofmt = new Tao.Sdl.Sdl.SDL_AudioSpec();
-//			audiofmt.freq = freq;
-//			audiofmt.format = unchecked(format);
-//			audiofmt.channels = (byte) channels;
-//			Console.WriteLine("Freq: " + audiofmt.freq);
-//			Console.WriteLine("Format: " + audiofmt.format);
-//			Console.WriteLine("Channels: " + audiofmt.channels);
-//			Smpeg.SMPEG_actualSpec(movie.GetHandle, ref audiofmt); 
-//			SdlMixer.Mix_HookMusic(audioMixer, movie.GetHandle);
-//			movie.EnableAudio();
 			movie.Display(screen);
 			
 			movie.Play();
@@ -103,8 +84,6 @@ namespace SdlDotNet.Examples
 				throw;
 			}
 			movie.Stop();
-			//mixer.Open();
-			//SdlMixer.Mix_HookMusic(null, IntPtr.Zero);
 			movie.Close();
 
 		} 
@@ -134,14 +113,5 @@ namespace SdlDotNet.Examples
 		{
 			quitFlag = true;
 		}
-
-//		private void player(IntPtr one, IntPtr two, int len)
-//		{
-//
-//			byte[] testbyte = new byte[len];
-//			Marshal.Copy(two, testbyte, 0, len);
-//			Smpeg.SMPEG_playAudioSDL(one, testbyte, len);
-//
-//		}
 	}
 }

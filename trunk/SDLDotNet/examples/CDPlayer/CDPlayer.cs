@@ -27,7 +27,8 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples 
 {
-	class CDPlayer : System.Windows.Forms.Form {
+	class CDPlayer : System.Windows.Forms.Form 
+	{
 		private CDDrive _drive;
 		private int _track;
 
@@ -39,6 +40,7 @@ namespace SdlDotNet.Examples
 		private System.Windows.Forms.Button buttonEject;
 		private System.Windows.Forms.Label labelStatus;
 		private System.Windows.Forms.Button buttonPrevious;
+		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Button buttonNext;
 		//private System.Windows.Forms.Timer timer;
 		//private System.ComponentModel.IContainer components;
@@ -46,29 +48,35 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public CDPlayer() {
+		public CDPlayer() 
+		{
 			//
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
 			//_drive = null;
 
-			try {
+			try 
+			{
 				int num = CDRom.NumberOfDrives;
 				_drive = CDRom.OpenDrive(0);
 				for (int i = 0; i < num; i++)
 					comboBoxDrive.Items.Add(CDRom.DriveName(i));
 
-				if (comboBoxDrive.Items.Count > 0) {
+				if (comboBoxDrive.Items.Count > 0) 
+				{
 					comboBoxDrive.SelectedIndex = 0;
 				//	timer.Start();
 				}
-			} catch (SdlException ex) {
+			} 
+			catch (SdlException ex) 
+			{
 				HandleError(ex);
 			}
 		}
 
-		private static void HandleError(SdlException ex) {
+		private static void HandleError(SdlException ex) 
+		{
 			MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
@@ -94,6 +102,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(CDPlayer));
 			this.label1 = new System.Windows.Forms.Label();
 			this.comboBoxDrive = new System.Windows.Forms.ComboBox();
 			this.buttonPlay = new System.Windows.Forms.Button();
@@ -103,6 +112,7 @@ namespace SdlDotNet.Examples
 			this.labelStatus = new System.Windows.Forms.Label();
 			this.buttonNext = new System.Windows.Forms.Button();
 			this.buttonPrevious = new System.Windows.Forms.Button();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -186,10 +196,22 @@ namespace SdlDotNet.Examples
 			this.buttonPrevious.Text = "Prev";
 			this.buttonPrevious.Click += new System.EventHandler(this.buttonPrev_Click);
 			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
+			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+			this.pictureBox1.Location = new System.Drawing.Point(16, 144);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(328, 208);
+			this.pictureBox1.TabIndex = 9;
+			this.pictureBox1.TabStop = false;
+			// 
 			// CDPlayer
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.ClientSize = new System.Drawing.Size(362, 367);
+			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.buttonPrevious);
 			this.Controls.Add(this.buttonNext);
 			this.Controls.Add(this.labelStatus);
@@ -219,8 +241,10 @@ namespace SdlDotNet.Examples
 			Application.Run(new CDPlayer());
 		}
 
-		private void comboBoxDrive_SelectedIndexChanged(object sender, System.EventArgs e) {
-			try {
+		private void comboBoxDrive_SelectedIndexChanged(object sender, System.EventArgs e) 
+		{
+			try 
+			{
 //				if (_drive != null) {
 //					_drive.Stop();
 //					_drive.Close();
@@ -228,19 +252,6 @@ namespace SdlDotNet.Examples
 
 				//_drive = _cd.OpenDrive(comboBoxDrive.SelectedIndex);
 				//_drive = _cd.OpenDrive(0);
-			} catch (SdlException ex) {
-				HandleError(ex);
-			}
-		}
-
-		private void buttonPlay_Click(object sender, System.EventArgs e) {
-			try {
-				if (_drive != null)
-				{
-					_drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
-				}
-				TimeSpan timeSpan = Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
-				this.labelStatus.Text = "Track: " + _drive.CurrentTrack + "     Length: " + timeSpan.Minutes + ":" + timeSpan.Seconds;
 			} 
 			catch (SdlException ex) 
 			{
@@ -248,70 +259,113 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void buttonPause_Click(object sender, System.EventArgs e) {
-			try {
+		private void buttonPlay_Click(object sender, System.EventArgs e) 
+		{
+			try 
+			{
 				if (_drive != null)
-					_drive.Pause();
-			} catch (SdlException ex) {
+				{
+					_drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
+				}
+				TimeSpan timeSpan = Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
+				this.labelStatus.Text = "Track: " + 
+					_drive.CurrentTrack + "     Length: " + 
+					timeSpan.Minutes + ":" + timeSpan.Seconds;
+			} 
+			catch (SdlException ex) 
+			{
 				HandleError(ex);
 			}
 		}
 
-		private void buttonStop_Click(object sender, System.EventArgs e) {
-			try {
-				if (_drive != null) {
+		private void buttonPause_Click(object sender, System.EventArgs e) 
+		{
+			try 
+			{
+				if (_drive != null)
+				{
+					_drive.Pause();
+				}
+			} 
+			catch (SdlException ex) 
+			{
+				HandleError(ex);
+			}
+		}
+
+		private void buttonStop_Click(object sender, System.EventArgs e) 
+		{
+			try 
+			{
+				if (_drive != null) 
+				{
 					_drive.Stop();
 					_track = 0;
 				}
 				this.labelStatus.Text = "Track: " + _drive.CurrentTrack;
-			} catch (SdlException ex) {
+			} 
+			catch (SdlException ex) 
+			{
 				HandleError(ex);
 			}
 		}
 
-		private void buttonEject_Click(object sender, System.EventArgs e) {
-			try {
-				if (_drive != null) {
+		private void buttonEject_Click(object sender, System.EventArgs e) 
+		{
+			try 
+			{
+				if (_drive != null) 
+				{
 					_drive.Eject();
 					_track = 0;
 				}
-			} catch (SdlException ex) {
+			} 
+			catch (SdlException ex) 
+			{
 				HandleError(ex);
 			}
 		}
 
-		private void buttonPrev_Click(object sender, System.EventArgs e) {
-			try {
-				if (_drive != null) {
+		private void buttonPrev_Click(object sender, System.EventArgs e) 
+		{
+			try 
+			{
+				if (_drive != null) 
+				{
 					if (_track != 0)
 						_track--;
 					buttonPlay_Click(null, null);
 				}
-			} catch (SdlException ex) {
+			} 
+			catch (SdlException ex) 
+			{
 				HandleError(ex);
 			}
 		}
 
-		private void buttonNext_Click(object sender, System.EventArgs e) {
-			try {
-				if (_drive != null) {
+		private void buttonNext_Click(object sender, System.EventArgs e) 
+		{
+			try 
+			{
+				if (_drive != null) 
+				{
 					if (_track != _drive.NumberOfTracks - 1)
 						_track++;
 					buttonPlay_Click(null, null);
 				}
-			} catch (SdlException ex) {
+			} 
+			catch (SdlException ex) 
+			{
 				HandleError(ex);
 			}
 		}
 
 		private void labelStatus_Click(object sender, System.EventArgs e)
 		{
-			
 		}
 
 		private void CDPlayer_Load(object sender, System.EventArgs e)
 		{
-		
 		}
 
 //		private void timer_Tick(object sender, System.EventArgs e) {

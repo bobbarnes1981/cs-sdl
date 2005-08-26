@@ -174,7 +174,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Update(TickEventArgs args)
 		{
-			double dx = args.RatePerSecond(delta);
+		//	double dx = args.RatePerSecond(delta);
+			double dx = 10;
 			this.HorizontalWeight += dx;
 
 			if (this.HorizontalWeight > 1.0)

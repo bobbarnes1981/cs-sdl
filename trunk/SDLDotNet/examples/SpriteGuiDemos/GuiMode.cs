@@ -89,7 +89,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void EnableTickEvent()
 		{
-			Events.TickEvent += new TickEventHandler(OnTick);
+			Events.Tick += new TickEventHandler(OnTick);
 		}
 
 		/// <summary>
@@ -176,7 +176,7 @@ namespace SdlDotNet.Examples
 
 		#region Events
 		private double threshold = 100.0;
-		private double rate = 0.009;
+		//private double rate = 0.009;
 
 		/// <summary>
 		/// 
@@ -204,7 +204,8 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		private void OnTick(object sender, TickEventArgs args)
 		{
-			threshold += args.RatePerSecond(rate);
+			//threshold += args.RatePerSecond(rate);
+			threshold += 10;
 
 			// Keep track of the counter (the point to trigger)
 			if (threshold > 1.0)
