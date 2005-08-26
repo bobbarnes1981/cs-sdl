@@ -185,9 +185,9 @@ namespace SdlDotNet
 		/// Specify 1 to play a single time, -1 to loop forever.</param>
 		public void Play(int numberOfTimes) 
 		{
+			m_CurrentMusic = this;
 			if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
 				throw SdlException.Generate();
-			m_CurrentMusic = this;
 		}
 
 		/// <summary>
@@ -198,9 +198,9 @@ namespace SdlDotNet
 		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
 		public void FadeIn(int numberOfTimes, int milliseconds) 
 		{
+			m_CurrentMusic = this;
 			if (SdlMixer.Mix_FadeInMusic(this.Handle, numberOfTimes, milliseconds) != 0)
 				throw SdlException.Generate();
-			m_CurrentMusic = this;
 		}
 		/// <summary>
 		/// Plays the music sample, starting from a specific 
@@ -213,13 +213,12 @@ namespace SdlDotNet
 		/// <param name="position">A format-defined position value. 
 		/// For Ogg Vorbis, this is the number of seconds from the
 		///  beginning of the song</param>
-		public void FadeInPosition(int numberOfTimes, 
-			int milliseconds, double position) 
+		public void FadeInPosition(int numberOfTimes, int milliseconds, double position) 
 		{
+			m_CurrentMusic = this;
 			if (SdlMixer.Mix_FadeInMusicPos(this.Handle, 
 				numberOfTimes, milliseconds, position) != 0)
 				throw SdlException.Generate();
-			m_CurrentMusic = this;
 		}
 		/// <summary>
 		/// Sets the music volume between 0 and 128.
@@ -369,8 +368,13 @@ namespace SdlDotNet
 		private static void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
 			if(Music.IsPlaying == false)
+			{
 				if(m_CurrentMusic.m_QueuedMusic != null)
-					m_CurrentMusic.m_QueuedMusic.Play();
+				{
+					m_CurrentMusic = m_CurrentMusic.m_QueuedMusic;
+					m_CurrentMusic.Play();
+				}
+			}
 		}
 	}
 }
