@@ -96,7 +96,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Style Property
+		/// Gets and sets the font style of the text.
 		/// </summary>
 		public Styles Style 
 		{
@@ -114,13 +114,13 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Bold Property
+		/// Gets and sets whether or not the font is bold.
 		/// </summary>
 		public bool Bold 
 		{
 			set 
 			{ 
-				if (value == true)
+				if (value)
 				{
 					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
 					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style | (int) Styles.Bold); 
@@ -149,7 +149,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Italic Property
+		/// Gets and sets whether or not the font is italicized.
 		/// </summary>
 		public bool Italic
 		{
@@ -184,7 +184,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Underline Property
+		/// Gets and sets whether the font is underlined.
 		/// </summary>
 		public bool Underline
 		{
@@ -219,7 +219,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Normal Property
+		/// Gets and sets whether the font style is not underlined, italic or bold.
 		/// </summary>
 		public bool Normal
 		{
@@ -247,7 +247,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Height Property
+		/// Gets the height of the font.
 		/// </summary>
 		public int Height 
 		{
@@ -299,10 +299,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Size
+		/// Gets the size of the given text in the current font.
 		/// </summary>
 		/// <param name="textItem">String to display</param>
-		/// <returns></returns>
+		/// <returns>The size of the text in pixels.</returns>
 		public Size SizeText(string textItem) 
 		{
 			int width;
