@@ -24,20 +24,35 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// 
+	/// Triggered for a sound event.
 	/// </summary>
 	public delegate void SoundEventHandler(object sender, SoundEventArgs e);
 	/// <summary>
 	/// Represents a sound sample.
-	/// Create with Mixer.LoadWav().
 	/// </summary>
+	/// <example>
+	/// <code>
+	/// // Load the sound
+	/// Sound boing = new Sound("boing.wav");
+	/// 
+	/// // Play the sound
+	/// boing.Play();
+	/// boing.Volume = 50;
+	/// 
+	/// // Play the sound on the right side only
+	/// boing.Play().SetPanning(0, 255);
+	/// 
+	/// // Fade out the sound in 500 milliseconds
+	/// boing.FadeOut(500);
+	/// </code>
+	/// </example>
 	public class Sound : BaseSdlResource 
 	{
 		private int channels;
 		private bool disposed;
 		private long size;
 		/// <summary>
-		/// 
+		/// Triggered when there was an event passed to the sound sample (ex. the sound stopped)
 		/// </summary>
 		public event SoundEventHandler SoundEvent;
 		
@@ -107,7 +122,7 @@ namespace SdlDotNet
 //		}
 
 		/// <summary>
-		/// Closes Music handle
+		/// Closes sound handle
 		/// </summary>
 		protected override void CloseHandle() 
 		{
@@ -120,7 +135,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Gets/Set the volume of the sound. Should be between 0 and 128 inclusive.
+		/// Gets and sets the volume of the sound. Should be between 0 and 128 inclusive.
 		/// </summary>
 		public int Volume
 		{
@@ -151,29 +166,29 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Plays the sound.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>The channel used to play the sound.</returns>
 		public Channel Play()
 		{
 			return this.Play(0);
 		}
 
 		/// <summary>
-		/// 
+		/// Plays the sound for a desired number of loops.
 		/// </summary>
-		/// <param name="loops"></param>
-		/// <returns></returns>
+		/// <param name="loops">The number of loops to play.</param>
+		/// <returns>The channel used to play the sound.</returns>
 		public Channel Play(int loops) 
 		{
 			return this.Play(loops, (int) SdlFlag.InfiniteLoop);
 		}
 
 		/// <summary>
-		/// 
+		/// Plays the sound.
 		/// </summary>
-		/// <param name="loopIndefinitely"></param>
-		/// <returns></returns>
+		/// <param name="loopIndefinitely">True to play sound indefinately.</param>
+		/// <returns>The channel used to play the sound.</returns>
 		public Channel Play(bool loopIndefinitely) 
 		{
 			if (loopIndefinitely == true)
@@ -187,11 +202,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Plays a sound for a desired number of milliseconds or loops.
 		/// </summary>
-		/// <param name="loops"></param>
-		/// <param name="milliseconds"></param>
-		/// <returns></returns>
+		/// <param name="loops">The maximum number of loops to play.  -1 for indefinate.</param>
+		/// <param name="milliseconds">The number of milliseconds to play the sound loop.</param>
+		/// <returns>The channel used to play the sound.</returns>
 		public Channel Play(int loops, int milliseconds) 
 		{
 			int index = 
@@ -288,7 +303,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the number of channels used to play this sound sample.
 		/// </summary>
 		public int NumberOfChannels
 		{
@@ -303,7 +318,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Stops the sound sample.
 		/// </summary>
 		public void Stop()
 		{
@@ -312,7 +327,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Fades out the sound sample.
 		/// </summary>
 		public void Fadeout(int fadeoutTime)
 		{
