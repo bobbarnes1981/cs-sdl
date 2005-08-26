@@ -207,10 +207,8 @@ namespace SdlDotNet.Examples
 			master.Add(manager);
 
 			// Load the actual demos
-			LoadDemo(new StaticMode());
 			LoadDemo(new FontMode());
 			LoadDemo(new BounceMode());
-			LoadDemo(new ClickMode());
 			LoadDemo(new DragMode());
 			LoadDemo(new ViewportMode());
 			LoadDemo(new MultipleMode());
