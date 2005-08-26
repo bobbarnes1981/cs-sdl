@@ -61,15 +61,8 @@ namespace SdlDotNet.Examples
 			Events.Quit += new QuitEventHandler(this.Quit);
 
 			try {
-//				try
-//				{
-//					Mixer.Music.Load(filepath + "fard-two.ogg");
-//					Mixer.Music.Play(1);
-//				}
-//				catch (DivideByZeroException)
-//				{
-//					// Linux audio problem
-//				}
+//				Mixer.Music.Load(filepath + "fard-two.ogg");
+//				Mixer.Music.Play(1);
 				// set the video mode
 				Surface screen = Video.SetVideoModeWindow(width, height, true); 
 				Video.WindowCaption = "SdlDotNet - Rectangles Example";

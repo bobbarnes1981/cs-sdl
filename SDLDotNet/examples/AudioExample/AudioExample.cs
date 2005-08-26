@@ -36,7 +36,6 @@ namespace SdlDotNet.Examples
 		private const int height = 480; 
 		private Random rand = new Random(); 
 		private Surface screen; 
-		private bool quit = false; 
 
 		// Load the music and sound.
 		private Music music1 = new Music("../../mason2.mid");
@@ -50,8 +49,6 @@ namespace SdlDotNet.Examples
 		{ 
 			// Setup events
 			Events.Tick += new TickEventHandler(Events_TickEvent);
-			Events.Quit += new QuitEventHandler(Events_Quit); 
-
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(Events_KeyboardDown); 
 			Events.MouseButtonDown += 
@@ -87,7 +84,6 @@ namespace SdlDotNet.Examples
           
 			// Begin the SDL ticker
 			Events.FPS = 10; 
-			Events.Run(); 
 		} 
 
 		/// <summary>
@@ -95,10 +91,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run() 
 		{ 
-			while(!quit) 
-			{ 
-				while(Events.Poll()){} 
-			} 
+			Events.Run(); 
 		} 
 
 		private void Events_TickEvent(object sender, TickEventArgs e) 
@@ -106,11 +99,6 @@ namespace SdlDotNet.Examples
 			screen.Fill(Color.FromArgb(
 				rand.Next(255), rand.Next(255), rand.Next(255) )); 
 			screen.Flip(); 
-		} 
-
-		private void Events_Quit(object sender, QuitEventArgs e) 
-		{ 
-			quit = true; 
 		} 
 
 		/// <summary>
@@ -127,7 +115,7 @@ namespace SdlDotNet.Examples
 			switch(e.Key)
 			{ 
 				case Key.Escape:
-					quit = true; 
+					Events.QuitApp(); 
 					break; 
 				case Key.Space: 
 
