@@ -386,9 +386,8 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public void EnableTickEvent()
 		{
-			Events.TickEvent += new TickEventHandler(Update);
+			Events.Tick += new TickEventHandler(Update);
 		}
-
 
 		/// <summary>
 		/// 
@@ -558,7 +557,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		public void DisableTickEvent()
 		{
-			Events.TickEvent -= new TickEventHandler(Update);
+			Events.Tick -= new TickEventHandler(Update);
 		}
 
 

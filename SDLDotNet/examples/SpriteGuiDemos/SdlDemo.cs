@@ -60,7 +60,7 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
 			Events.Quit += new QuitEventHandler(this.OnQuit);
-			Events.TickEvent += new TickEventHandler(this.OnTick);
+			Events.Tick += new TickEventHandler(this.OnTick);
 
 			// Create the screen
 			int width = 800;
@@ -75,8 +75,8 @@ namespace SdlDotNet.Examples
 			LoadDemos();
 
 			// Start up the ticker (and animation)
-			Events.TicksPerSecond = 15;
-			Events.StartTicker();
+			Events.FPS = 15;
+			Events.Run();
 
 			// Loop until the system indicates it should stop
 			Console.WriteLine("Welcome to the SDL.NET Demo!");
@@ -92,7 +92,7 @@ namespace SdlDotNet.Examples
 
 			// Stop the ticker and the current demo
 			SwitchDemo(-1);
-			Events.StopTicker();
+		//	Events.StopTicker();
 		}
 
 		#region GUI
@@ -329,7 +329,7 @@ namespace SdlDotNet.Examples
 
 		private void OnMenuFps(object sender, MenuItemEventArgs e)
 		{
-			Events.TicksPerSecond = fpsSpeeds[e.Index];
+			Events.FPS = fpsSpeeds[e.Index];
 		}
 
 		private void OnMenuQuit(object sender, MenuItemEventArgs e)
@@ -360,17 +360,17 @@ namespace SdlDotNet.Examples
 		private GuiWindow statusWindow;
 		private GuiTicker statusTicker;
 		private static GuiMenuBar gmb;
-		private static Clock clock = new Clock(5);
-		/// <summary>
-		/// 
-		/// </summary>
-		public static Clock Fps
-		{
-			get
-			{
-				return clock;
-			}
-		}
+//		private static Clock clock = new Clock(5);
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public static Clock Fps
+//		{
+//			get
+//			{
+//				return clock;
+//			}
+//		}
 
 		/// <summary>
 		/// 

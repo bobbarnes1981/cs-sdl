@@ -132,17 +132,17 @@ namespace SdlDotNet.Examples
 		public override void Update(TickEventArgs args)
 		{
 			tps.TextString = 
-				String.Format(CultureInfo.CurrentCulture, "{0}", Events.TicksPerSecond);
+				String.Format(CultureInfo.CurrentCulture, "{0}", Events.FPS);
 
-			if (SdlDemo.Fps.IsFull)
-			{
-				fps.TextString = 
-					SdlDemo.Fps.FramesPerSecond.ToString("#0.00", CultureInfo.CurrentCulture);
-			}
-			else
-			{
-				fps.TextString = "---";
-			}
+//			if (SdlDemo.IsFull)
+//			{
+//				fps.TextString = 
+//					SdlDemo.Fps.FramesPerSecond.ToString("#0.00", CultureInfo.CurrentCulture);
+//			}
+//			else
+//			{
+//				fps.TextString = "---";
+//			}
 
 			if (SdlDemo.CurrentDemo == null)
 			{

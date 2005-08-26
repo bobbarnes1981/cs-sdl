@@ -49,7 +49,7 @@ namespace SdlDotNet.Examples
 		public AudioExample() 
 		{ 
 			// Setup events
-			Events.TickEvent += new TickEventHandler(Events_TickEvent);
+			Events.Tick += new TickEventHandler(Events_TickEvent);
 			Events.Quit += new QuitEventHandler(Events_Quit); 
 
 			Events.KeyboardDown += 
@@ -86,7 +86,7 @@ namespace SdlDotNet.Examples
 //				//channel2.Play(sound);
           
 			// Begin the SDL ticker
-			Events.StartTicker(); 
+			Events.Run(); 
 		} 
 
 		/// <summary>
