@@ -30,7 +30,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class BounceMode : DemoMode
 	{
-		Random rand = new Random();
+		static Random rand = new Random();
 		/// <summary>
 		/// Constructs the internal sprites needed for our demo.
 		/// </summary>

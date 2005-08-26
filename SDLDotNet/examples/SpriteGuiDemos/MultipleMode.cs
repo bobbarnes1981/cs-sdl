@@ -33,6 +33,7 @@ namespace SdlDotNet.Examples
 		private Sprite sprite2;
 		private Sprite sprite3;
 		private Sprite sprite4;
+		static Random rand = new Random();
 
 		private Size size;
 
@@ -45,7 +46,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public MultipleMode()
 		{
-			Random rand = new Random();
+			
 			// Create the fragment marbles
 			SurfaceCollection td = LoadMarble("marble1");
 			SurfaceCollection td2 = LoadMarble("marble2");

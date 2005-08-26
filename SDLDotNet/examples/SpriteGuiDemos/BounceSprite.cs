@@ -30,7 +30,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class BounceSprite : BoundedSprite
 	{
-		Random rand = new Random();
+		static Random rand = new Random();
 		private int dx;
 		private int dy;
 
