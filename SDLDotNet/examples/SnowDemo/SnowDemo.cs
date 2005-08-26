@@ -29,6 +29,15 @@ namespace SdlDotNet.Examples
 	{
 		static Snowflake[] snowflakes;
 		static Texts texts;
+		Surface screen;
+		Surface background;
+		int lastframe = Timer.Ticks;
+		int newframe;
+		float seconds;
+
+		float frametime = 0;
+		int frames = 0;
+
 
 		/// <summary>
 		/// 
@@ -71,7 +80,6 @@ namespace SdlDotNet.Examples
 			texts = new Texts();
 		}
 
-		static bool run = true;
 		static int numberOfSnowflakes = 250;
 
 		/// <summary>
@@ -90,7 +98,6 @@ namespace SdlDotNet.Examples
 		{
 			SnowDemo snowdemo = new SnowDemo();
 			snowdemo.Run();
-			
 		}
 
 		/// <summary>
@@ -98,84 +105,74 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run()
 		{
-			Graphics.Init();
+			screen = Video.SetVideoModeWindow(640, 480, 16, true);
+			background = new Surface("../../Data/background.png");
+			background.SetColorKey(Color.FromArgb(255, 0, 255), true);
+			Video.WindowCaption = "SdlDotNet - Snow Demo";
 			Init(250);
-			Console.WriteLine("Setting video mode");
-			Console.WriteLine("Initializing game data");
 			Events.KeyboardDown +=
-				new KeyboardEventHandler(this.KeyboardDown);
-			Console.WriteLine("Binding quit event");
-			Events.Quit += new QuitEventHandler(this.Quit);
-			Console.WriteLine("Starting the loop");
+				new KeyboardEventHandler(this.OnKeyboardDown);
+			Events.KeyboardDown +=
+				new KeyboardEventHandler(this.OnKeyboardDown);
+			Events.Tick += new TickEventHandler(this.OnTick);
+			Events.Run();
+		}
+		
+		private void OnTick(object sender, TickEventArgs args)
+		{	
 
-			int lastframe = Timer.Ticks;
-			int newframe;
-			float seconds;
+			newframe = Timer.Ticks;
+			seconds = (newframe - lastframe) / 1000.0f;
 
-			float frametime = 0;
-			int frames = 0;
+			frames += 1;
+			frametime += seconds;
 
-			
-			try
+			if(frametime >= 5)
 			{
-				while(run)
-				{
-					while (Events.Poll()) 
-					{
-						// handle events till the queue is empty
-					}
-			
-					newframe = Timer.Ticks;
-					seconds = (newframe - lastframe) / 1000.0f;
+				Console.WriteLine("Frames per second: {0}",
+					(int)(frames / frametime));
 
-					frames += 1;
-					frametime += seconds;
-
-					if(frametime >= 5)
-					{
-						Console.WriteLine("Frames per second: {0}",
-							(int)(frames / frametime));
-
-						frametime = 0;
-						frames = 0;
-					}
-
-					Events.Poll();
-
-					for(int i = 0; i < SnowDemo.GetSnowflakes().Length; i++)
-					{
-						SnowDemo.GetSnowflakes()[i].Update(seconds);
-					}
-
-					for(int i = 0; i < SnowDemo.texts.Length; i++)
-					{
-						SnowDemo.Texts[i].Update(seconds);
-					}
-
-					Graphics.DrawFrame();
-
-					lastframe = newframe;
-				}
-			}
-			catch (NullReferenceException e)
-			{
-				Console.WriteLine(e);
+				frametime = 0;
+				frames = 0;
 			}
 
+			for(int i = 0; i < SnowDemo.GetSnowflakes().Length; i++)
+			{
+				SnowDemo.GetSnowflakes()[i].Update(seconds);
+			}
+
+			for(int i = 0; i < SnowDemo.texts.Length; i++)
+			{
+				SnowDemo.Texts[i].Update(seconds);
+			}
+
+
+			screen.Fill(new Rectangle(new Point(0, 0), screen.Size),
+				Color.FromArgb(64, 175, 239));
+			
+			for(int i = 0; i < SnowDemo.NumberOfSnowflakes; i++)
+			{
+				screen.Blit(SnowDemo.GetSnowflakes()[i].Surface, SnowDemo.GetSnowflakes()[i].Position);
+			}
+			
+			screen.Blit(background, new Rectangle(new Point(0, 280), background.Size));
+			
+			for(int i = 0; i < SnowDemo.Texts.Length; i++)
+			{
+				screen.Blit(SnowDemo.Texts[i].Surface, SnowDemo.Texts[i].Position);
+			}
+			screen.Flip();
+
+			lastframe = newframe;
 		}
 
-		private void KeyboardDown(object sender, KeyboardEventArgs e)
+		private void OnKeyboardDown(object sender, KeyboardEventArgs e)
 		{
 			if (e.Key == Key.Escape ||
 				e.Key == Key.Q)
 			{
-				run = false;
+				Events.QuitApp();
 			}
-		}
-
-		private void Quit(object sender, QuitEventArgs e)
-		{
-			run = false;
 		}
 	}
 }

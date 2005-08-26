@@ -18,56 +18,51 @@
 using System;
 using System.Drawing;
 
+using SdlDotNet.Sprites;
+
 namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// Summary description for Class1.
 	/// </summary>
-	public class Snowflake
+	public class Snowflake : Sprite
 	{
-		Rectangle _Position;
-		Surface _Image;
 		static Random random = new Random();
 
-		float x;
-		float y;
 		float speed;
 		float wind;
-
+		
 		void reset()
 		{
 			wind = random.Next(3) / 10.0f;
 
-			x = random.Next(-1 * (int)(wind * 640), 640 - _Image.Width);
-			y = 0 - _Image.Width;
+			this.X = (int)random.Next(-1 * (int)(wind * 640), 640 - this.Surface.Width);
+			this.Y = 0 - this.Width;
 
 			speed = random.Next(50, 150);
 
-			_Image.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded,
+			this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded,
 				(byte)((150 - 50) / (speed - 50) * -255));
-		}
-
-		void updaterectangle()
-		{
-			_Position.X = (int)x;
-			_Position.Y = (int)y;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public Snowflake()
+		public Snowflake() : base(new Surface(5, 5))
 		{
-			_Image = Graphics.LoadImage("../../Data/snowflake.bmp",
-				Color.FromArgb(255, 0, 255));
-
-			_Position = new Rectangle(_Image.Width, _Image.Height, 0, 0);
+			Initialize();
 
 			reset();
-			y = -1 * random.Next(5000 - _Image.Height);
-
-			updaterectangle();
+			this.Y = -1 * random.Next(5000 - this.Surface.Height);
 		}
+
+		private void Initialize()
+		{
+			this.Surface.Fill(Color.White);
+			this.Surface.SetColorKey(Color.FromArgb(255, 0, 255), true);
+			this.Rectangle = new Rectangle(this.Surface.Width, this.Surface.Height, 0, 0);
+		}
+
 
 		/// <summary>
 		/// 
@@ -77,35 +72,12 @@ namespace SdlDotNet.Examples
 		{
 			float change = seconds * speed;
 
-			y += change;
-			x += change * wind;
+			this.Y += (int)change;
+			this.X += (int)Math.Ceiling(change * wind);
 
-			if(y > 480)
+			if(this.Y > 480)
 			{
 				reset();
-			}
-
-			updaterectangle();
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Rectangle Position
-		{
-			get
-			{
-				return _Position;
-			}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public Surface Image
-		{
-			get
-			{
-				return _Image;
 			}
 		}
 	}
