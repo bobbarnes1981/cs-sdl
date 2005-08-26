@@ -341,38 +341,6 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-<Project name="SimpleExample" path="examples\\SimpleExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SimpleExample" assemblyName="SimpleExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>SimpleExample.xml</XmlDocFile>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE;NET</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>SimpleExample.xml</XmlDocFile>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="Content">App.ico</File>
-		<File buildAction="Content">SimpleExample.pdf</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
 	<Project name="BombRun" path="examples\\BombRun" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BombRun" assemblyName="BombRun" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>

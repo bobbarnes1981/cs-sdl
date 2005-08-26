@@ -86,6 +86,7 @@ namespace SdlDotNet.Examples
 //				//channel2.Play(sound);
           
 			// Begin the SDL ticker
+			Events.FPS = 10; 
 			Events.Run(); 
 		} 
 
