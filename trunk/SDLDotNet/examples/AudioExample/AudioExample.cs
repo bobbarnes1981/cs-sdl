@@ -35,7 +35,7 @@ namespace SdlDotNet.Examples
 	{ 
 		private const int width = 640; 
 		private const int height = 480; 
-		private Random rand = new Random(); 
+		//private Random rand = new Random(); 
 		private Surface screen; 
 
 		// Load the music and sound.
