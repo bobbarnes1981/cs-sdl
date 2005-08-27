@@ -20,6 +20,7 @@
 using System; 
 using System.Drawing; 
 using SdlDotNet; 
+using SdlDotNet.Sprites;
 
 // SDL.NET Audio Example
 // Simple example to demonstrate audio in SDL.NET.
@@ -38,9 +39,11 @@ namespace SdlDotNet.Examples
 		private Surface screen; 
 
 		// Load the music and sound.
-		private Music music1 = new Music("../../mason2.mid");
-		private Music music2 = new Music("../../fard-two.ogg");
-		private Sound boing = new Sound("../../boing.wav");
+		private Music music1 = new Music("../../Data/mason2.mid");
+		private Music music2 = new Music("../../Data/fard-two.ogg");
+		private Sound boing = new Sound("../../Data/boing.wav");
+
+		private Sprites.TextSprite instructions = new TextSprite(" ", new Font("../../Data/FreeSans.ttf", 20), Color.Red);
 
 		/// <summary>
 		/// 
@@ -83,7 +86,10 @@ namespace SdlDotNet.Examples
 //				//channel2.Play(sound);
           
 			// Begin the SDL ticker
-			Events.FPS = 10; 
+			Events.FPS = 50;
+
+			/// TODO: Instructions and other descriptions.
+			instructions.Text = "Do Stuff";
 		} 
 
 		/// <summary>
@@ -96,8 +102,10 @@ namespace SdlDotNet.Examples
 
 		private void Events_TickEvent(object sender, TickEventArgs e) 
 		{ 
-			screen.Fill(Color.FromArgb(
-				rand.Next(255), rand.Next(255), rand.Next(255) )); 
+			screen.Fill(Color.Black);
+			
+			screen.Blit(instructions);
+
 			screen.Flip(); 
 		} 
 
