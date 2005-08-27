@@ -131,7 +131,7 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
-			tps.TextString = 
+			tps.Text = 
 				String.Format(CultureInfo.CurrentCulture, "{0}", Events.FPS);
 
 //			if (SdlDemo.IsFull)
@@ -146,11 +146,11 @@ namespace SdlDotNet.Examples
 
 			if (SdlDemo.CurrentDemo == null)
 			{
-				mode.TextString = "<none>";
+				mode.Text = "<none>";
 			}
 			else
 			{
-				mode.TextString = SdlDemo.CurrentDemo.ToString();
+				mode.Text = SdlDemo.CurrentDemo.ToString();
 			}
 		}
 		#endregion
