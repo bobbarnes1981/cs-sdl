@@ -30,28 +30,19 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	class SnowDemo
 	{
+		static string[] textArray = {
+										"when the cold of winter comes",
+										"starless night", "will cover day",
+										"in the veiling of the sun", 
+										"we will walk",
+										"in bitter rain"
+									};
 		SpriteCollection snowflakes = new SpriteCollection();
-		static Texts texts;
+		SpriteCollection textItems = new SpriteCollection();
 		Surface screen;
 		Surface background;
 		int lastframe = Timer.Ticks;
-		int newframe;
-		float seconds;
-
-		float frametime = 0;
-		int frames = 0;
-
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static Texts Texts
-		{
-			get
-			{
-				return SnowDemo.texts;
-			}
-		}
+		string fontName = @"../../Data/FreeSans.ttf";
 
 		/// <summary>
 		/// 
@@ -66,8 +57,20 @@ namespace SdlDotNet.Examples
 			{
 				snowflakes.Add(new Snowflake());
 			}
+			Font font = new Font(fontName, 24);
+			font.Style = Styles.Bold;
+
+			textItems.Add(new TextItem(textArray[0], font, 25, 0));
+			for (int i = 1; i < textArray.Length; i++)
+			{
+				textItems.Add(
+					new TextItem(textArray[i], 
+					font, textItems[i-1].Rectangle.Bottom + 10, 
+					i * 2));
+			}
+
 			snowflakes.EnableTickEvent();
-			texts = new Texts();
+			textItems.EnableTickEvent();
 		}
 
 		[STAThread]
@@ -85,6 +88,7 @@ namespace SdlDotNet.Examples
 			screen = Video.SetVideoModeWindow(640, 480, 16, true);
 			background = new Surface("../../Data/background.png");
 			background.SetColorKey(Color.FromArgb(255, 0, 255), true);
+			//background.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 40);
 			Video.WindowCaption = "SdlDotNet - Snow Demo";
 			Initialize(250);
 			Events.KeyboardDown +=
@@ -97,35 +101,20 @@ namespace SdlDotNet.Examples
 		
 		private void OnTick(object sender, TickEventArgs args)
 		{	
-
-			newframe = Timer.Ticks;
-			seconds = (newframe - lastframe) / 1000.0f;
-
-			frames += 1;
-			frametime += seconds;
-
-			if(frametime >= 5)
-			{
-				frametime = 0;
-				frames = 0;
-			}
-
-			for(int i = 0; i < SnowDemo.texts.Length; i++)
-			{
-				SnowDemo.Texts[i].Update(seconds);
-			}
-
 			screen.Fill(Color.FromArgb(64, 175, 239));
 			screen.Blit(snowflakes);
 			screen.Blit(background, new Point(0, 280));
-			
-			for(int i = 0; i < SnowDemo.Texts.Length; i++)
+			for (int i =0; i < textItems.Count;i++)
 			{
-				screen.Blit(SnowDemo.Texts[i].Surface, SnowDemo.Texts[i].Position);
+				//textItems[i].Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 30);
+				screen.Blit(textItems[i].Surface, textItems[i].Rectangle);
 			}
+			//background.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 30);
+			//screen.Blit(textItems);
+			//textItems[0].Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 30);
+			//screen.Blit(textItems[0].Surface, new Rectangle(100,100,0,0));
 			screen.Update();
 
-			lastframe = newframe;
 		}
 
 		private void OnKeyboardDown(object sender, KeyboardEventArgs e)

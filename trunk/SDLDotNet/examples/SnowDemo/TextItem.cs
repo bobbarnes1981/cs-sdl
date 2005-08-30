@@ -17,6 +17,7 @@
 ****************************************************************************/
 
 using SdlDotNet;
+using System;
 using System.Drawing;
 using System.Globalization;
 
@@ -32,18 +33,19 @@ namespace SdlDotNet.Examples
 		FadeOut,
 		Finished
 	}
-
 	/// <summary>
 	/// 
 	/// </summary>
-	public class TextItem : Sprite
+	public class TextItem : TextSprite
 	{
-		const float inspeed = 510;
-		const float outspeed = 64;
+		
+	
+		const float inSpeed = 10;
+			//510;
+		const float outSpeed = 10;
 
 		float time;
-		float starttime;
-		float endtime;
+		float startTime;
 
 		TextFadeState state = TextFadeState.BeforeFadeIn;
 		float alpha;
@@ -51,42 +53,66 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="number"></param>
+		/// <param name="font"></param>
 		/// <param name="y"></param>
-		public TextItem(int number, int y) : 
-			base(new Surface(string.Format(
-			CultureInfo.CurrentCulture,"../../Data/Text{0}.bmp", number)), new Point(25, y))
+		/// <param name="phrase"></param>
+		/// <param name="startTime"></param>
+		public TextItem(string phrase, Font font, int y, float startTime) : 
+			base(phrase, font, false, new Point(25, y))
 		{
-			this.Rectangle = new Rectangle(25, y, this.Surface.Width, this.Surface.Height);
-
-			this.Surface.SetColorKey(Color.FromArgb(255, 0, 255), true);
-			starttime = number * 2;
-			endtime = starttime + 4.5f;
-
+			//this.Surface.SetColorKey(Color.FromArgb(255, 0, 255), true);
 			this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 0);
+			this.startTime = startTime;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="seconds"></param>
-		public void Update(float seconds)
+		public float StartTime
 		{
+			get
+			{
+				return startTime;
+			}
+			set
+			{
+				startTime = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public float EndTime
+		{
+			get
+			{
+				return startTime + 4.5f;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		public override void Update(TickEventArgs args)
+		{
+			float seconds = args.SecondsElapsed;
 			time += seconds;
 
 			switch(state)
 			{
 				case TextFadeState.BeforeFadeIn:
-					if(time >= starttime)
+					if(time >= startTime)
 					{
 						state = TextFadeState.FadeIn;
 					}
 					break;
 
 				case TextFadeState.FadeIn:
-					if (seconds <= (float.MaxValue / inspeed) - alpha)
+					if (seconds <= (float.MaxValue / inSpeed) - alpha)
 					{
-						alpha += seconds * inspeed;
+						alpha += seconds * inSpeed;
 					}
 					else
 					{
@@ -98,71 +124,26 @@ namespace SdlDotNet.Examples
 						alpha = 255;
 						state = TextFadeState.BeforeFadeOut;
 					}
-
 					this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, (byte)alpha);
 					break;
 
 				case TextFadeState.BeforeFadeOut:
-					if(time >= endtime)
+					if(time >= this.EndTime)
 					{
 						state = TextFadeState.FadeOut;
 					}
 					break;
 
 				case TextFadeState.FadeOut:
-					alpha -= seconds * outspeed;
+					alpha -= seconds * outSpeed;
 
 					if(alpha <= 0)
 					{
 						alpha = 0;
 						state = TextFadeState.Finished;
 					}
-
 					this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, (byte)alpha);
 					break;
-			}
-		}
-	}
-
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Texts
-	{
-		TextItem[] texts = new TextItem[6];
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Texts()
-		{
-			texts[0] = new TextItem(0, 25);
-
-			for(int i = 1; i < texts.Length; i++)
-			{
-				texts[i] = new TextItem(i, texts[i-1].Rectangle.Bottom + 10);
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Length
-		{
-			get
-			{
-				return texts.Length;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public TextItem this[int index]
-		{
-			get
-			{
-				return texts[index];
 			}
 		}
 	}

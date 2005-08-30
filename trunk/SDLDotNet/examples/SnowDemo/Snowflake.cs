@@ -41,7 +41,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Snowflake() : base(new Surface(5, 5))
+		public Snowflake() : base(new Surface(4, 4))
 		{
 			Initialize();
 			Reset();

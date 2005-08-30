@@ -80,6 +80,17 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		public float SecondsElapsed
+		{
+			get
+			{
+				return (this.Delay / 1000.0f);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="tick">The current tick.</param>
 		/// <param name="lastTick">The tick count that it was at last frame.</param>
 		/// <param name="fps"></param>

@@ -1550,6 +1550,8 @@ namespace SdlDotNet
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
 			int result = Sdl.SDL_SetAlpha(this.Handle, (int)flag, alpha);
+			this.alphaFlags = flag;
+			this.alphaValue = alpha;
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success) 
 			{

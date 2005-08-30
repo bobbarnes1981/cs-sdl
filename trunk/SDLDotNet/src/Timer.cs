@@ -85,6 +85,18 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Gets the number of milliseconds since Sdl was initialized.  
+		/// This is not a high-resolution timer.
+		/// </summary>
+		public static int SecondsFromStart
+		{
+			get
+			{
+				return Timer.Ticks / 1000;
+			}
+		}
+
+		/// <summary>
 		/// Wait a number of milliseconds.
 		/// </summary>
 		/// <param name="delayTime">Delay time in milliseconds</param>
