@@ -30,6 +30,7 @@ namespace SdlDotNet.Sprites
 	/// </summary>
 	public class TextSprite : Sprite
 	{
+		bool antiAlias = true;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -41,6 +42,7 @@ namespace SdlDotNet.Sprites
 		{
 			this.textItem = textItem;
 			this.font = font;
+			this.RenderInternal();
 		}
 
 		/// <summary>
@@ -57,6 +59,26 @@ namespace SdlDotNet.Sprites
 			this.textItem = textItem;
 			this.font = font;
 			this.color = color;
+			this.RenderInternal();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="textItem"></param>
+		/// <param name="font"></param>
+		/// <param name="color"></param>
+		/// <param name="antiAlias"></param>
+		public TextSprite(
+			string textItem, 
+			SdlDotNet.Font font, 
+			Color color, bool antiAlias) : base(font.Render(textItem, color))
+		{
+			this.textItem = textItem;
+			this.font = font;
+			this.color = color;
+			this.antiAlias = antiAlias;
+			this.RenderInternal();
 		}
 		/// <summary>
 		/// 
@@ -73,6 +95,7 @@ namespace SdlDotNet.Sprites
 			: this(textItem, font, textColor)
 		{
 			this.backgroundColor = backgroundColor;
+			this.RenderInternal();
 		}
 
 		/// <summary>
@@ -87,6 +110,25 @@ namespace SdlDotNet.Sprites
 			Point position) : this(textItem, font)
 		{
 			this.Position = position;
+			this.RenderInternal();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="textItem"></param>
+		/// <param name="font"></param>
+		/// <param name="antiAlias"></param>
+		/// <param name="position"></param>
+		public TextSprite(
+			string textItem, 
+			SdlDotNet.Font font,
+			bool antiAlias,
+			Point position) : this(textItem, font)
+		{
+			this.Position = position;
+			this.antiAlias = antiAlias;
+			this.RenderInternal();
 		}
 
 		/// <summary>
@@ -104,6 +146,28 @@ namespace SdlDotNet.Sprites
 			: this(textItem, font, position)
 		{
 			this.color = color;
+			this.RenderInternal();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="textItem"></param>
+		/// <param name="font"></param>
+		/// <param name="color"></param>
+		/// <param name="antiAlias"></param>
+		/// <param name="position"></param>
+		public TextSprite(
+			string textItem, 
+			SdlDotNet.Font font, 
+			Color color,
+			bool antiAlias,
+			Point position)
+			: this(textItem, font, position)
+		{
+			this.color = color;
+			this.antiAlias = antiAlias;
+			this.RenderInternal();
 		}
 
 		/// <summary>
@@ -119,6 +183,7 @@ namespace SdlDotNet.Sprites
 			: this(textItem, font, coordinates.Point)
 		{
 			this.Z = coordinates.Z;
+			this.RenderInternal();
 		}
 
 		/// <summary>
@@ -136,6 +201,28 @@ namespace SdlDotNet.Sprites
 			: this(textItem, font, coordinates)
 		{
 			this.color = color;
+			this.RenderInternal();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="textItem"></param>
+		/// <param name="font"></param>
+		/// <param name="color"></param>
+		/// <param name="antiAlias"></param>
+		/// <param name="coordinates"></param>
+		public TextSprite(
+			string textItem, 
+			SdlDotNet.Font font, 
+			Color color,
+			bool antiAlias,
+			Vector coordinates)
+			: this(textItem, font, coordinates)
+		{
+			this.color = color;
+			this.antiAlias = antiAlias;
+			this.RenderInternal();
 		}
 
 		#region Drawing
@@ -144,7 +231,7 @@ namespace SdlDotNet.Sprites
 		/// set. It stores the render in memory until it is used.
 		/// </summary>
 		/// <returns>The new renderation surface of the text.</returns>
-		public override Surface Render()
+		private void RenderInternal()
 		{
 			if (textItem == null)
 			{
@@ -156,14 +243,13 @@ namespace SdlDotNet.Sprites
 			{
 				if (backgroundColor.IsEmpty)
 				{
-					this.Surface = font.Render(textItem, color);
+					this.Surface = font.Render(textItem, antiAlias, color);
 				}
 				else
 				{
 					this.Surface = font.Render(textItem, color, backgroundColor);
 				}
 				this.Size = new Size(this.Surface.Width, this.Surface.Height);
-				return this.Surface;
 			}
 			catch (SpriteException e)
 			{
@@ -194,6 +280,7 @@ namespace SdlDotNet.Sprites
 			set 
 			{ 
 				color = value;
+				this.RenderInternal();
 			}
 		}
 
@@ -210,6 +297,7 @@ namespace SdlDotNet.Sprites
 			set 
 			{ 
 				backgroundColor = value;
+				this.RenderInternal();
 			}
 		}
 
@@ -229,6 +317,7 @@ namespace SdlDotNet.Sprites
 					throw new SdlException("Cannot assign a null manager");
 				}
 				font = value;
+				this.RenderInternal();
 			}
 		}
 
@@ -244,6 +333,7 @@ namespace SdlDotNet.Sprites
 			set 
 			{ 
 				textItem = value;
+				this.RenderInternal();
 			}
 		}
 		#endregion

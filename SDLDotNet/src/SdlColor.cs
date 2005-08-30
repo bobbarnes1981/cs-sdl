@@ -42,7 +42,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		internal static Sdl.SDL_Color ConvertColor(Color color)
 		{
-			return new Sdl.SDL_Color(color.R, color.G, color.B);
+			return new Sdl.SDL_Color(color.R, color.G, color.B, color.A);
 		}
 
 //		/// <summary>
