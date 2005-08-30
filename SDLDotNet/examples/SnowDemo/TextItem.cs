@@ -38,15 +38,10 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class TextItem : TextSprite
 	{
-		
-	
-		const float inSpeed = 10;
-			//510;
-		const float outSpeed = 10;
-
+		const float inSpeed = 5;
+		const float outSpeed = 5;
 		float time;
 		float startTime;
-
 		TextFadeState state = TextFadeState.BeforeFadeIn;
 		float alpha;
 
@@ -60,7 +55,6 @@ namespace SdlDotNet.Examples
 		public TextItem(string phrase, Font font, int y, float startTime) : 
 			base(phrase, font, false, new Point(25, y))
 		{
-			//this.Surface.SetColorKey(Color.FromArgb(255, 0, 255), true);
 			this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 0);
 			this.startTime = startTime;
 		}
