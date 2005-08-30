@@ -314,7 +314,7 @@ namespace SdlDotNet.Sprites
 			{ 
 				if (value == null)
 				{
-					throw new SdlException("Cannot assign a null manager");
+					throw new SdlException("Cannot assign a null Font");
 				}
 				font = value;
 				this.RenderInternal();

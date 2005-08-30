@@ -58,7 +58,6 @@ namespace SdlDotNet.Examples
 				snowflakes.Add(new Snowflake());
 			}
 			Font font = new Font(fontName, 24);
-			font.Style = Styles.Bold;
 
 			textItems.Add(new TextItem(textArray[0], font, 25, 0));
 			for (int i = 1; i < textArray.Length; i++)
@@ -68,7 +67,6 @@ namespace SdlDotNet.Examples
 					font, textItems[i-1].Rectangle.Bottom + 10, 
 					i * 2));
 			}
-
 			snowflakes.EnableTickEvent();
 			textItems.EnableTickEvent();
 		}
@@ -88,7 +86,6 @@ namespace SdlDotNet.Examples
 			screen = Video.SetVideoModeWindow(640, 480, 16, true);
 			background = new Surface("../../Data/background.png");
 			background.SetColorKey(Color.FromArgb(255, 0, 255), true);
-			//background.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 40);
 			Video.WindowCaption = "SdlDotNet - Snow Demo";
 			Initialize(250);
 			Events.KeyboardDown +=
@@ -104,17 +101,8 @@ namespace SdlDotNet.Examples
 			screen.Fill(Color.FromArgb(64, 175, 239));
 			screen.Blit(snowflakes);
 			screen.Blit(background, new Point(0, 280));
-			for (int i =0; i < textItems.Count;i++)
-			{
-				//textItems[i].Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 30);
-				screen.Blit(textItems[i].Surface, textItems[i].Rectangle);
-			}
-			//background.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 30);
-			//screen.Blit(textItems);
-			//textItems[0].Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 30);
-			//screen.Blit(textItems[0].Surface, new Rectangle(100,100,0,0));
+			screen.Blit(textItems);
 			screen.Update();
-
 		}
 
 		private void OnKeyboardDown(object sender, KeyboardEventArgs e)
