@@ -91,7 +91,7 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
-			float seconds = args.SecondsElapsed;
+			float seconds = args.Delay /1000;
 			time += seconds;
 
 			switch(state)
@@ -99,6 +99,7 @@ namespace SdlDotNet.Examples
 				case TextFadeState.BeforeFadeIn:
 					if(time >= startTime)
 					{
+						Console.WriteLine("Start" + time);
 						state = TextFadeState.FadeIn;
 					}
 					break;
