@@ -860,7 +860,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public Surface CreateCompatibleSurface() 
 		{
-			return this.CreateCompatibleSurface(this.Size.Width, this.Size.Height, true);
+			return this.CreateCompatibleSurface(this.Size.Width, this.Size.Height, false);
 		}
 		/// <summary>
 		/// 
@@ -868,7 +868,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public Surface CreateCompatibleSurface(Rectangle rectangle) 
 		{
-			return this.CreateCompatibleSurface(rectangle.Width, rectangle.Height, true);
+			return this.CreateCompatibleSurface(rectangle.Width, rectangle.Height, false);
 		}
 
 		/// <summary>
@@ -878,7 +878,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public Surface CreateCompatibleSurface(Size size) 
 		{
-			return this.CreateCompatibleSurface(size.Width, size.Height, true);
+			return this.CreateCompatibleSurface(size.Width, size.Height, false);
 		}
 
 		/// <summary>
@@ -901,7 +901,7 @@ namespace SdlDotNet
 		public Surface CreateCompatibleSurface(
 			int width, int height) 
 		{
-			return this.CreateCompatibleSurface(width, height, true);
+			return this.CreateCompatibleSurface(width, height, false);
 		}
 		/// <summary>
 		/// Create a surface with the same pixel format as this one
@@ -976,7 +976,7 @@ namespace SdlDotNet
 		/// <returns>The new surface</returns>
 		public Surface Convert(Surface source) 
 		{
-			return this.Convert(source, true, false);
+			return this.Convert(source, false, false);
 		}
 
 		/// <summary>

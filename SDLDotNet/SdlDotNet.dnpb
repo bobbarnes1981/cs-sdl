@@ -182,37 +182,6 @@
 		<File>Gears.cs</File>
 	    </Files>
 	</Project>
-	<Project name="FontExample" path="examples\\FontExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.FontExample" assemblyName="FontExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>FontExample.xml</XmlDocFile>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE;NET</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>FontExample.xml</XmlDocFile>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="Content">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
 	<Project name="CDPlayer" path="examples\\CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>

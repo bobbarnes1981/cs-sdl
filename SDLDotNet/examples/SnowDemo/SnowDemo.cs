@@ -41,7 +41,6 @@ namespace SdlDotNet.Examples
 		SpriteCollection textItems = new SpriteCollection();
 		Surface screen;
 		Surface background;
-		int lastframe = Timer.Ticks;
 		string fontName = @"../../Data/FreeSans.ttf";
 
 		/// <summary>
@@ -65,7 +64,7 @@ namespace SdlDotNet.Examples
 				textItems.Add(
 					new TextItem(textArray[i], 
 					font, textItems[i-1].Rectangle.Bottom + 10, 
-					i * 2));
+					i * 5));
 			}
 			snowflakes.EnableTickEvent();
 			textItems.EnableTickEvent();
