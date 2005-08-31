@@ -86,38 +86,6 @@
 		<File>Rectangles.cs</File>
 	    </Files>
 	</Project>
-	<Project name="PrimitivesExample" path="examples\\PrimitivesExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.PrimitivesExample" assemblyName="PrimitivesExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>PrimitivesExample.xml</XmlDocFile>
-		    <WarningLevel>4</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE;NET</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>.\bin\Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>PrimitivesExample.xml</XmlDocFile>
-		    <WarningLevel>1</WarningLevel>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>PrimitivesExample.cs</File>
-	    </Files>
-	</Project>
 	<Project name="Gears" path="examples\\Gears" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Gears" assemblyName="Gears" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
