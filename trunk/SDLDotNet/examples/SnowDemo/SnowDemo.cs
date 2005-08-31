@@ -41,6 +41,8 @@ namespace SdlDotNet.Examples
 		SpriteCollection textItems = new SpriteCollection();
 		Surface screen;
 		Surface background;
+		Surface tree;
+		Surface treeStretch;
 		string fontName = @"../../Data/FreeSans.ttf";
 
 		/// <summary>
@@ -83,8 +85,14 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			screen = Video.SetVideoModeWindow(640, 480, 16, true);
-			background = new Surface("../../Data/background.png");
-			background.SetColorKey(Color.FromArgb(255, 0, 255), true);
+			background = new Surface(@"../../Data/background.png");
+			background.TransparentColor = Color.FromArgb(255, 0, 255);
+			background.Transparent = true;
+			tree = new Surface(@"../../Data/Tree.bmp");
+			tree.TransparentColor = System.Drawing.Color.Magenta;
+			tree.Transparent = true;
+			treeStretch = tree.Stretch(new Size(100,100));
+			treeStretch.Transparent = true;
 			Video.WindowCaption = "SdlDotNet - Snow Demo";
 			Initialize(250);
 			Events.KeyboardDown +=
@@ -101,6 +109,11 @@ namespace SdlDotNet.Examples
 			screen.Blit(snowflakes);
 			screen.Blit(background, new Point(0, 280));
 			screen.Blit(textItems);
+			screen.Blit(tree, new Point(100, 300));
+			screen.Blit(tree, new Point(130, 295));
+			screen.Blit(tree, new Point(155, 302));
+			screen.Blit(tree, new Point(230, 302));
+			screen.Blit(treeStretch, new Point(180, 290));
 			screen.Update();
 		}
 

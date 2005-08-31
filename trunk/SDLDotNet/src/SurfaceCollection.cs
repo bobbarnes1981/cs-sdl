@@ -116,7 +116,7 @@ namespace SdlDotNet
 			Surface fullImage, 
 			Size tileSize) 
 		{ 
-			fullImage.SetAlpha(Alphas.RleEncoded, 0);
+			fullImage.Alpha =  0;
 			for(int tileY = 0; tileY * tileSize.Height < fullImage.Height; tileY++) 
 			{ 
 				for(int tileX = 0; tileX * tileSize.Width < fullImage.Width; tileX++) 
@@ -147,7 +147,7 @@ namespace SdlDotNet
 		/// </param>
 		public SurfaceCollection(Surface fullImage, Size tileSize, int rowNumber)
 		{
-			fullImage.SetAlpha(Alphas.RleEncoded, 0);
+			fullImage.Alpha = 0;
 			for(int tileX = 0; tileX * tileSize.Width < fullImage.Width; tileX++)
 			{
 				Surface tile = fullImage.CreateCompatibleSurface(tileSize.Width, tileSize.Height, true);

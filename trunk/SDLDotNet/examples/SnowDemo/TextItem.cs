@@ -55,7 +55,7 @@ namespace SdlDotNet.Examples
 		public TextItem(string phrase, Font font, int y, float startTime) : 
 			base(phrase, font, false, new Point(25, y))
 		{
-			this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, 0);
+			this.Surface.Alpha = 0;
 			this.startTime = startTime;
 		}
 
@@ -119,7 +119,7 @@ namespace SdlDotNet.Examples
 						alpha = 255;
 						state = TextFadeState.BeforeFadeOut;
 					}
-					this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, (byte)alpha);
+					this.Surface.Alpha = (byte)alpha;
 					break;
 
 				case TextFadeState.BeforeFadeOut:
@@ -137,7 +137,7 @@ namespace SdlDotNet.Examples
 						alpha = 0;
 						state = TextFadeState.Finished;
 					}
-					this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded, (byte)alpha);
+					this.Surface.Alpha = (byte)alpha;
 					break;
 			}
 		}

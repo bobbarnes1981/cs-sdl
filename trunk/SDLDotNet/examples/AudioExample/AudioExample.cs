@@ -88,7 +88,7 @@ namespace SdlDotNet.Examples
 			// Begin the SDL ticker
 			Events.FPS = 50;
 
-			/// TODO: Instructions and other descriptions.
+			// TODO: Instructions and other descriptions.
 			instructions.Text = "Do Stuff";
 		} 
 

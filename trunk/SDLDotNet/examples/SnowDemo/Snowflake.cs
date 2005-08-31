@@ -51,7 +51,7 @@ namespace SdlDotNet.Examples
 		void Initialize()
 		{
 			this.Surface.Fill(Color.White);
-			this.Surface.SetColorKey(Color.FromArgb(255, 0, 255), true);
+			this.Surface.TransparentColor = Color.FromArgb(255, 0, 255);
 			this.Rectangle = new Rectangle(this.Surface.Width, this.Surface.Height, 0, 0);
 		}
 
@@ -64,8 +64,8 @@ namespace SdlDotNet.Examples
 
 			speed = random.Next(50, 150);
 
-			this.Surface.SetAlpha(Alphas.SourceAlphaBlending | Alphas.RleEncoded,
-				(byte)((150 - 50) / (speed - 50) * -255));
+			this.Surface.Alpha = 
+				(byte)((150 - 50) / (speed - 50) * -255);
 		}
 
 		/// <summary>

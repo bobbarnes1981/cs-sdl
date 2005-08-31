@@ -43,7 +43,7 @@ namespace SdlDotNet.Examples
 			{
 				Surface tempSurface = new Surface("../../Data/Bomb.bmp");
 				_Image = tempSurface.Convert();
-				_Image.SetColorKey(Color.White, true);
+				_Image.TransparentColor = Color.White;
 			}
 
 			Reset();
@@ -140,7 +140,7 @@ namespace SdlDotNet.Examples
 
 			Surface tempSurface = new Surface("../../Data/Head.bmp");
 			_Image = tempSurface.Convert();
-			_Image.SetColorKey(Color.White, true);
+			_Image.TransparentColor = Color.White;
 
 			Events.KeyboardDown += new KeyboardEventHandler(Keyboard);
 			Events.KeyboardUp += new KeyboardEventHandler(Keyboard);
@@ -317,7 +317,7 @@ namespace SdlDotNet.Examples
 			_AlternateBackground = tempSurface.Convert();
 
 			_Temporary = _Screen.CreateCompatibleSurface(32, 32, true);
-			_Temporary.SetColorKey(Color.FromArgb(0, 255, 0, 255), true);
+			_Temporary.TransparentColor = Color.FromArgb(0, 255, 0, 255);
 
 			player = new Player(new Point(_Screen.Width / 2 - 16,
 				_Screen.Height - 32));

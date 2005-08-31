@@ -35,29 +35,11 @@ namespace SdlDotNet
 	/// </summary>
 	public class Surface : BaseSdlResource, ICloneable
 	{
-		/// <summary>
-		/// Private field. Used by the Transparent property 
-		/// </summary>
-		private bool transparent;
-
-		/// <summary>
-		/// Private field. Used by the TransparentColor property 
-		/// </summary>
-		private Color transparentcolor;
-
-		/// <summary>
-		/// Private field. Used by the AlphaFlags property 
-		/// int SDL_RLEACCEL = 0X00004000
-		/// int SDL_SRCALPHA = 0x00010000
-		/// </summary>
-		private Alphas alphaFlags;
-
-		/// <summary>
-		/// Private field. Used by the AlphaValue property 
-		/// </summary>
 		private byte alphaValue;
-		private int colorKey;
+		private Color colorKey;
 		private bool disposed;
+		private bool transparent;
+		private Color transparentColor;
 
 		#region Constructors and Destructors
 		/// <summary>
@@ -1164,7 +1146,8 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="spriteCollection"></param>
 		/// <param name="background"></param>
-		public void Erase(SpriteCollection spriteCollection, Surface background)
+		public void Erase(SpriteCollection spriteCollection, 
+			Surface background)
 		{
 			spriteCollection.Erase(this, background);
 		}
@@ -1279,48 +1262,79 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Sets a colorkey for the surface
+		/// Get/set the transparency of the image.  
 		/// </summary>
-		/// <param name="transparent">The transparent color</param>
-		/// <param name="accelerationRle">
-		/// A flag indicating whether or not to use hardware acceleration for RLE
-		/// </param>
-		public void SetColorKey(Color transparent, bool accelerationRle) 
+		public bool Transparent
 		{
-			SetColorKey(this.GetColorValue(transparent), accelerationRle);
+			get 
+			{
+				return transparent;
+			}
+			set	
+			{
+				transparent = value;
+				if (value)
+				{
+					this.ColorKey = transparentColor;
+				}
+				else 
+				{
+					this.ClearColorKey();
+				}
+			}
 		}
 
 		/// <summary>
-		/// Sets a colorkey for the surface
+		/// Get/set the transparent color of the image.
 		/// </summary>
-		/// <param name="key">The transparent pixel value</param>
-		/// <param name="accelerationRle">
-		/// A flag indicating whether or not to use hardware acceleration for RLE
-		/// </param>
-		public void SetColorKey(int key, bool accelerationRle) 
+		public Color TransparentColor
 		{
-			if (this.disposed)
+			get 
 			{
-				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				return transparentColor;
 			}
-			int flag = Sdl.SDL_SRCCOLORKEY;
-			if (accelerationRle)
+			set	
 			{
-				flag |= Sdl.SDL_RLEACCELOK;
+				transparentColor = value;
+				if (Transparent) 
+				{
+					this.ColorKey = transparentColor;
+				}
 			}
-			int result = Sdl.SDL_SetColorKey(this.Handle, (int)flag, key);
-			GC.KeepAlive(this);
-			if (result != (int) SdlFlag.Success)
+		}
+
+		/// <summary>
+		/// Get/set the transparent color of the image. 
+		/// The transparent color is also know as 
+		/// a colorkey for the surface
+		/// </summary>
+		private Color ColorKey
+		{
+			get
 			{
-				throw SdlException.Generate();
+				return this.colorKey;
 			}
-			this.colorKey = key;
+			set
+			{
+				if (this.disposed)
+				{
+					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				}
+				int flag = Sdl.SDL_SRCCOLORKEY | Sdl.SDL_RLEACCELOK;
+				int result = Sdl.SDL_SetColorKey(this.Handle, (int)flag, this.GetColorValue(value));
+				GC.KeepAlive(this);
+				if (result != (int) SdlFlag.Success)
+				{
+					throw SdlException.Generate();
+				}
+				this.colorKey = value;
+			}
 		}
 
 		/// <summary>
 		/// Clears the colorkey for the surface
 		/// </summary>
-		public void ClearColorKey() 
+		private void ClearColorKey() 
 		{
 			if (this.disposed)
 			{
@@ -1331,17 +1345,6 @@ namespace SdlDotNet
 			if (result != (int) SdlFlag.Success)
 			{
 				throw SdlException.Generate();
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Color ColorKey
-		{
-			get
-			{
-				return this.GetColor(this.colorKey);
 			}
 		}
 
@@ -1539,23 +1542,29 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Sets the alpha value of a surface
+		/// Get/set the Alpha value of the image. 
+		/// 0 indicates that the image fully transparent. 
+		/// 255 indicates that the image is not tranparent.
 		/// </summary>
-		/// <param name="flag">The alpha flags</param>
-		/// <param name="alpha">The alpha value</param>
-		public void SetAlpha(Alphas flag, byte alpha) 
+		public byte Alpha
 		{
-			if (this.disposed)
+			get
 			{
-				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				return this.alphaValue;
 			}
-			int result = Sdl.SDL_SetAlpha(this.Handle, (int)flag, alpha);
-			this.alphaFlags = flag;
-			this.alphaValue = alpha;
-			GC.KeepAlive(this);
-			if (result != (int) SdlFlag.Success) 
+			set
 			{
-				throw SdlException.Generate();
+				if (this.disposed)
+				{
+					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				}
+				int result = Sdl.SDL_SetAlpha(this.Handle, (int)(Alphas.RleEncoded | Alphas.SourceAlphaBlending), value);
+				this.alphaValue = value;
+				GC.KeepAlive(this);
+				if (result != (int) SdlFlag.Success) 
+				{
+					throw SdlException.Generate();
+				}
 			}
 		}
 
@@ -1893,9 +1902,25 @@ namespace SdlDotNet
 		{
 			Surface surface = new Surface(sourceRectangle);
 			surface.Blit(this, new Point(0,0), sourceRectangle);
-			surface.Transparent = true;
+			this.Transparent = true;
 			double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
 			double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
+			surface.Scale(stretchWidth, stretchHeight);
+			return surface;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="destinationSize"></param>
+		/// <returns></returns>
+		public Surface Stretch(Size destinationSize)
+		{
+			Surface surface = new Surface(this.Size);
+			surface.Blit(this, new Point(0,0));
+			surface.Transparent = true;
+			double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
+			double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
 			surface.Scale(stretchWidth, stretchHeight);
 			return surface;
 		}
@@ -1918,83 +1943,6 @@ namespace SdlDotNet
 				this.Scale(transformation.ScaleX, transformation.ScaleY, transformation.AntiAlias);
 			}
 		}
-
-		/// <summary>
-		/// Get/set the transparency of the image.  
-		/// </summary>
-		public bool Transparent
-		{
-			get 
-			{
-				return transparent;
-			}
-			set	
-			{
-				transparent = value;
-				if (value)
-				{
-					this.SetColorKey(transparentcolor,true);
-				}
-				else 
-				{
-					this.ClearColorKey();
-				}
-			}
-		}
-
-		/// <summary>
-		/// Get/set the transparent color of the image.
-		/// </summary>
-		public Color TransparentColor
-		{
-			get 
-			{
-				return transparentcolor;
-			}
-			set	
-			{
-				transparentcolor = value;
-				if (Transparent) 
-				{
-					this.SetColorKey(transparentcolor,true);
-				}
-			}
-		}
-
-		/// <summary>
-		/// Get/set the Alpha flags of the image.
-		/// </summary>
-		public Alphas AlphaFlags
-		{
-			get 
-			{
-				return alphaFlags;
-			}
-			set	
-			{
-				this.alphaFlags = value;
-				this.SetAlpha(this.alphaFlags, this.alphaValue);
-			}
-		}
-
-		/// <summary>
-		/// Get/set the Alpha value of the image. 
-		/// 0 indicates that the image fully transparent. 
-		/// 255 indicates that the image is not tranparent.
-		/// </summary>
-		public byte AlphaValue
-		{
-			get 
-			{
-				return alphaValue;
-			}
-			set	
-			{
-				this.alphaValue = value;
-				this.SetAlpha(this.alphaFlags, this.alphaValue);
-			}
-		}
-
 
 		/// <summary>
 		/// Updates rectangle

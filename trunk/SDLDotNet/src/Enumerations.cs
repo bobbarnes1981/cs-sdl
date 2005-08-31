@@ -107,7 +107,7 @@ namespace SdlDotNet
 	public enum Alphas
 	{
 		/// <summary>
-		/// Equivalent to SDL_RLEACC
+		/// Equivalent to SDL_RLEACCEL
 		/// </summary>
 		RleEncoded = Sdl.SDL_RLEACCEL,
 
