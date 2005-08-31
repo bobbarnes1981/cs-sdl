@@ -51,22 +51,6 @@ namespace SdlDotNet.Windows
 		}
 
 		/// <summary>
-		/// Get/set the transparency of the image.  
-		/// </summary>
-		[Category("Sdl Properties"), Description("Set Transparency")]
-		public bool Transparent
-		{
-			get 
-			{
-				return surface.Transparent;
-			}
-			set	
-			{
-				surface.Transparent = value;
-			}
-		}
-
-		/// <summary>
 		/// Get/set the Alpha flags of the image.
 		/// </summary>
 		[Category("Sdl Properties"), Description("Set Alpha flags")]
@@ -74,11 +58,11 @@ namespace SdlDotNet.Windows
 		{
 			get 
 			{
-				return surface.AlphaFlags;
+				return (Alphas) surface.Alpha;
 			}
 			set	
 			{
-				surface.AlphaFlags = value;
+				surface.Alpha = (byte)value;
 			}
 		}
 	}

@@ -52,10 +52,9 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Start()
 		{
-			//sdlDemo = this;
-
 			// Start up the SDL
 			Video.WindowCaption = "SdlDotNet - Sprite and Gui Demo";
+			Video.Mouse.ShowCursor = false;
       
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
@@ -67,6 +66,11 @@ namespace SdlDotNet.Examples
 			int height = 600;
 
 			screen = Video.SetVideoModeWindow(width, height, true);
+			cursor = 
+				new Surface(@"../../Data/cursor.png");
+
+			MouseMotionHandler = new MouseMotionEventHandler(this.MouseMotion);
+			Events.MouseMotion += MouseMotionHandler;
 
 			// Set up the master sprite container
 			SetupGui();
@@ -75,20 +79,13 @@ namespace SdlDotNet.Examples
 			LoadDemos();
 
 			// Start up the ticker (and animation)
-			Events.FPS = 15;
+			Events.FPS = 30;
 			Events.Run();
 
 			// Loop until the system indicates it should stop
 			Console.WriteLine("Welcome to the SDL.NET Demo!");
 
-			while (running)
-			{
-				// Sleep a little (60 fps)
-				while(Events.Poll())
-				{
-				}
-				Thread.Sleep(1000 / 60);
-			}
+			Events.Run();
 
 			// Stop the ticker and the current demo
 			SwitchDemo(-1);
@@ -266,7 +263,7 @@ namespace SdlDotNet.Examples
 			{
 				case Key.Escape:
 				case Key.Q:
-					running = false;
+					Events.QuitApp();
 					break;
 				case Key.C:
 					StopDemo();
@@ -300,8 +297,7 @@ namespace SdlDotNet.Examples
 
 		private void OnQuit(object sender, QuitEventArgs e) 
 		{
-			// Mark the system to quit
-			running = false;
+			Events.QuitApp();
 		}
 
 		/// <summary>
@@ -316,7 +312,8 @@ namespace SdlDotNet.Examples
 			{
 				screen.Blit(currentDemo.RenderSurface());
 			}
-			screen.Blit(master); 
+			screen.Blit(master);
+			screen.Blit(cursor, position);
 			screen.Update();
 		}
 
@@ -332,7 +329,15 @@ namespace SdlDotNet.Examples
 
 		private void OnMenuQuit(object sender, MenuItemEventArgs e)
 		{
-			running = false;
+			Events.QuitApp();
+		}
+
+		private void MouseMotion(
+			object sender, 
+			MouseMotionEventArgs e)
+		{
+			position.X = e.X;
+			position.Y = e.Y;
 		}
 
 		/// <summary>
@@ -350,14 +355,15 @@ namespace SdlDotNet.Examples
 		#endregion
 
 		#region Properties
-		//private static SdlDemo sdlDemo;
-		private bool running = true;
 		private static SpriteCollection master = new SpriteCollection();
 		private static SpriteCollection manager = new SpriteCollection();
+		MouseMotionEventHandler MouseMotionHandler;
 		private Surface screen;
 		private GuiWindow statusWindow;
 		private GuiTicker statusTicker;
 		private static GuiMenuBar gmb;
+		Surface cursor;
+		Point position = new Point(100,100);
 //		private static Clock clock = new Clock(5);
 //		/// <summary>
 //		/// 
