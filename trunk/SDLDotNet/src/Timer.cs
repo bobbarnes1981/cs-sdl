@@ -53,9 +53,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Queries if the Timer subsystem has been intialized.
 		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		/// <returns>True if Timer subsystem has been initialized, false if it has not.</returns>
+		/// <returns>
+		/// True if Timer subsystem has been initialized, false if it has not.
+		/// </returns>
 		public static bool IsInitialized
 		{
 			get
@@ -76,7 +76,7 @@ namespace SdlDotNet
 		/// Gets the number of milliseconds since Sdl was initialized.  
 		/// This is not a high-resolution timer.
 		/// </summary>
-		public static int Ticks 
+		public static int TicksElapsed
 		{
 			get
 			{
@@ -85,14 +85,14 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Gets the number of milliseconds since Sdl was initialized.  
+		/// Gets the number of seconds since Sdl was initialized.  
 		/// This is not a high-resolution timer.
 		/// </summary>
-		public static int SecondsFromStart
+		public static int SecondsElapsed
 		{
 			get
 			{
-				return Timer.Ticks / 1000;
+				return Timer.TicksElapsed / 1000;
 			}
 		}
 
@@ -106,7 +106,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Converts number of frames to seconds
+		/// Converts number of CD frames to seconds
 		/// </summary>
 		/// <param name="frames">Number of frames</param>
 		/// <returns></returns>
@@ -116,7 +116,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Converts seconds to number of frames
+		/// Converts seconds to number of CD frames
 		/// </summary>
 		/// <param name="seconds">Number of seconds</param>
 		/// <returns></returns>

@@ -751,6 +751,7 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Run()
 		{
+			Timer.Initialize();
 			Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
 			m_LastTick = 0;
 			m_Thread = new Thread(new ThreadStart(ThreadTicker));

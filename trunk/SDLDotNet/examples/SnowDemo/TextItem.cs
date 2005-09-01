@@ -1,26 +1,26 @@
 /* This file is part of SnowDemo
-* Text.cs, (c) 2003 Sijmen Mulder
-*
-* This program is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program; if not, write to the Free Software
-* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-****************************************************************************/
+ * Text.cs, (c) 2003 Sijmen Mulder
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 
-using SdlDotNet;
 using System;
 using System.Drawing;
 using System.Globalization;
 
+using SdlDotNet;
 using SdlDotNet.Sprites;
 
 namespace SdlDotNet.Examples
@@ -38,8 +38,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class TextItem : TextSprite
 	{
-		const float inSpeed = 5;
-		const float outSpeed = 5;
+		const float inSpeed = 1;
+		const float outSpeed = 1;
 		float time;
 		float startTime;
 		TextFadeState state = TextFadeState.BeforeFadeIn;
@@ -92,14 +92,13 @@ namespace SdlDotNet.Examples
 		public override void Update(TickEventArgs args)
 		{
 			float seconds = args.Delay /1000;
-			time += seconds;
+			time = Timer.SecondsElapsed;
 
 			switch(state)
 			{
 				case TextFadeState.BeforeFadeIn:
 					if(time >= startTime)
 					{
-						Console.WriteLine("Start" + time);
 						state = TextFadeState.FadeIn;
 					}
 					break;
