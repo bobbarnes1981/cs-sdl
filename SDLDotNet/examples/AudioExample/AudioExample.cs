@@ -29,13 +29,13 @@ using SdlDotNet.Sprites;
 namespace SdlDotNet.Examples
 { 
 	/// <summary>
-	/// 
+	/// A simple SDL.NET example which demonstrates audio in SDL.NET.
+	/// Click plays sound, space changes music and the arrow keys change volume.
 	/// </summary>
 	public class AudioExample 
 	{ 
 		private const int width = 640; 
-		private const int height = 480; 
-		//private Random rand = new Random(); 
+		private const int height = 480;
 		private Surface screen; 
 
 		// Load the music and sound.
@@ -43,7 +43,9 @@ namespace SdlDotNet.Examples
 		private Music music2 = new Music("../../Data/fard-two.ogg");
 		private Sound boing = new Sound("../../Data/boing.wav");
 
-		private Sprites.TextSprite instructions = new TextSprite(" ", new Font("../../Data/FreeSans.ttf", 20), Color.Red);
+		// TODO: Demonstrate use of MusicCollection and SoundCollection.
+
+		private Sprites.TextSprite textDisplay = new TextSprite(" ", new Font("../../Data/FreeSans.ttf", 20), Color.Red);
 
 		/// <summary>
 		/// 
@@ -51,15 +53,16 @@ namespace SdlDotNet.Examples
 		public AudioExample() 
 		{ 
 			// Setup events
-			Events.Tick += new TickEventHandler(Events_TickEvent);
+			Events.Tick += 
+				new TickEventHandler(Events_TickEvent);
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(Events_KeyboardDown); 
 			Events.MouseButtonDown += 
 				new MouseButtonEventHandler(Events_MouseButtonDown);
 
-			Events.ChannelFinished +=
+			Events.ChannelFinished += 
 				new ChannelFinishedEventHandler(Events_ChannelFinished);
-			Events.MusicFinished +=
+			Events.MusicFinished += 
 				new MusicFinishedEventHandler(Events_MusicFinished);
 
 			// Start up SDL
@@ -88,8 +91,7 @@ namespace SdlDotNet.Examples
 			// Begin the SDL ticker
 			Events.FPS = 50;
 
-			// TODO: Instructions and other descriptions.
-			instructions.Text = "Do Stuff";
+			textDisplay.Text = "Press Arrow Keys, Space and Click Mouse.";
 		} 
 
 		/// <summary>
@@ -104,7 +106,7 @@ namespace SdlDotNet.Examples
 		{ 
 			screen.Fill(Color.Black);
 			
-			screen.Blit(instructions);
+			screen.Blit(textDisplay);
 
 			screen.Flip(); 
 		} 
@@ -139,9 +141,6 @@ namespace SdlDotNet.Examples
 					break; 
 				case Key.DownArrow: 
 					Music.Volume -= 20;
-					break; 
-				case Key.Return:
-					boing.Play();
 					break;
 			} 
 		} 
@@ -153,10 +152,12 @@ namespace SdlDotNet.Examples
 				case MouseButton.PrimaryButton: 
 					// Play on left side
 					boing.Play().SetPanning(205, 50); 
+					textDisplay.Text = "Sound played on Left.";
 					break; 
 				case MouseButton.SecondaryButton: 
 					// Play on right side 
 					boing.Play().SetPanning(50, 205);
+					textDisplay.Text = "Sound played on Right.";
 					break;
 			} 
 		}
@@ -168,6 +169,7 @@ namespace SdlDotNet.Examples
 
 		private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
+			textDisplay.Text = "Music switched...";
 			Console.WriteLine("Music Finished");
 		}
 	} 
