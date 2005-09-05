@@ -20,7 +20,7 @@
 
 using System;
 using System.Drawing;
-using System.IO;
+
 using SdlDotNet;
 
 // Simple SDL.NET Example
@@ -29,11 +29,20 @@ using SdlDotNet;
 namespace SdlDotNet.Examples 
 {
 	/// <summary>
-	/// 
+	/// A simple SDL.NET Example that draws a bunch of rectangles on the screen. Pressing Q or Escape will exit.
 	/// </summary>
 	class Rectangles 
 	{
-		private bool quitFlag;
+		// The screen elements
+		private Surface screen;
+		private int width = 640;
+		private int height = 480;
+
+		// A random number generator to be used for placing the rectangles
+		private Random rand = new Random();
+
+		// Backend surface to hold old rectangles.
+		private Surface surf;
 		
 		/// <summary>
 		/// 
@@ -47,81 +56,49 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run() 
 		{
-//			string filepath = @"../../";
-//			if (File.Exists("fard-two.ogg"))
-//			{
-//				filepath = "";
-//			}
-			int width = 640;
-			int height = 480;
-			Random rand = new Random();
-				
-			Events.KeyboardDown += 
-				new KeyboardEventHandler(this.KeyboardDown); 
-			Events.Quit += new QuitEventHandler(this.Quit);
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
+			Events.Tick += new TickEventHandler(this.Tick);
+			Events.FPS = 50;
 
-			try {
-//				Mixer.Music.Load(filepath + "fard-two.ogg");
-//				Mixer.Music.Play(1);
-				// set the video mode
-				Surface screen = Video.SetVideoModeWindow(width, height, true); 
-				Video.WindowCaption = "SdlDotNet - Rectangles Example";
-				Video.Mouse.ShowCursor = false;
-//				Mixer.Music.EnableMusicFinishedCallback();
+			screen = Video.SetVideoModeWindow(width, height, true);
 
-				Surface surf = 
-					screen.CreateCompatibleSurface(width, height, true);
-				//fill the surface with black
-				surf.Fill(Color.Black); 
+			Video.WindowCaption = "SdlDotNet - Rectangles Example";
+			Video.Mouse.ShowCursor = false;
 
-				while (!quitFlag) 
-				{
-					while (Events.Poll()) 
-					{
-						// handle events till the queue is empty
-					} 
-					
-					try 
-					{
-						surf.Fill(
-							new Rectangle(rand.Next(-300, width), 
-							rand.Next(-300, height), rand.Next(20, 300), 
-							rand.Next(20, 300)),
-						Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
-						screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
-						screen.Flip();
-					} 
-					catch (SurfaceLostException) 
-					{
-						// if we are fullscreen and the user hits alt-tab 
-						// we can get this, for this simple app we can ignore it
-					}
-				}
-			} 
-			catch 
-			{
-				// quit sdl so the window goes away, then handle the error...
-				throw; // for this example we'll just throw it to the debugger
-			}
+			surf = screen.CreateCompatibleSurface(width, height, true);
+			surf.Fill(Color.Black);
+
+			Events.Run();
 		}
 
-		private void KeyboardDown(
-			object sender,
-			KeyboardEventArgs e) {
-			if (e.Key == Key.Escape ||
-				e.Key == Key.Q)
-			{
-				quitFlag = true;
-			}
-		}
-
-		private void Quit(object sender, QuitEventArgs e) 
+		private void KeyboardDown(object sender, KeyboardEventArgs e)
 		{
-			quitFlag = true;
+			// Check if the key pressed was a Q or Escape
+			if (e.Key == Key.Escape || e.Key == Key.Q)
+			{
+				Events.QuitApp();
+			}
+		}
+
+		private void Tick(object sender, TickEventArgs e)
+		{
+			// Draw a new random rectangle
+			surf.Fill(
+				new Rectangle(
+					rand.Next(-300, width), rand.Next(-300, height),
+					rand.Next(20, 300), rand.Next(20, 300)),
+				Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
+
+			// Draw the rectangles onto the screen
+			screen.Blit(surf);
+
+			// Flip the back buffer onto the screen.
+			screen.Flip();
 		}
 
 		[STAThread]
-		static void Main() {
+		static void Main() 
+		{
 			Rectangles rectangles = new Rectangles();
 			rectangles.Run();
 		}
