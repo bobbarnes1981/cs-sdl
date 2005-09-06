@@ -109,7 +109,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Entry point for App.
 		/// </summary>
 		static void Main() 
 		{

@@ -202,7 +202,7 @@ namespace SdlDotNet.Examples
 			Video.GLSwapBuffers();
 
 			Frames++;
-			int t = Timer.Ticks;
+			int t = Timer.TicksElapsed;
 			if (t - T0 >= 5000)
 			{
 				double seconds = (t - T0) / 1000.0;

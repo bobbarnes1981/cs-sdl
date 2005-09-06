@@ -109,8 +109,8 @@ namespace SdlDotNet.Examples
 
 			triad = new Triad(this);			
 			AddObject(triad);
-			lastTriadMove = Timer.Ticks;
-			lastTriadLeftRight = Timer.Ticks;
+			lastTriadMove = Timer.TicksElapsed;
+			lastTriadLeftRight = Timer.TicksElapsed;
 
 			grid = new Block[gridSize.Width,gridSize.Height];
 
@@ -189,7 +189,7 @@ namespace SdlDotNet.Examples
 					return;
 				}
 
-				timeNow = Timer.Ticks;
+				timeNow = Timer.TicksElapsed;
 				triad.Update();
 
 				int deltaTime = timeNow - lastTriadMove;
@@ -198,14 +198,14 @@ namespace SdlDotNet.Examples
 				if((this.moveTriadLeft == true)  &&   (deltaTimeLeftRight > 250) )
 				{
 					triad.MoveLeft();
-					this.lastTriadLeftRight = Timer.Ticks;
+					this.lastTriadLeftRight = Timer.TicksElapsed;
 					moveSound.Play();
 				}
 
 				if((this.moveTriadRight == true)  &&   (deltaTimeLeftRight > 250) )
 				{
 					triad.MoveRight();
-					this.lastTriadLeftRight = Timer.Ticks;
+					this.lastTriadLeftRight = Timer.TicksElapsed;
 					moveSound.Play();
 				}
 			
@@ -225,7 +225,7 @@ namespace SdlDotNet.Examples
 						currentState = BlockGridState.MarkBlocksToDestroy;
 					}
 					
-					lastTriadMove = Timer.Ticks;
+					lastTriadMove = Timer.TicksElapsed;
 				}
 			}
 			catch (SdlException)
@@ -409,11 +409,11 @@ namespace SdlDotNet.Examples
 		void showBlocksDestroyed()
 		{
 			
-			int start = Timer.Ticks;
-			int delta = Timer.Ticks - start;
+			int start = Timer.TicksElapsed;
+			int delta = Timer.TicksElapsed - start;
 			while(delta <=250)
 			{
-				delta = Timer.Ticks - start;				
+				delta = Timer.TicksElapsed - start;				
 			}
 		}
 
@@ -578,7 +578,7 @@ namespace SdlDotNet.Examples
 							moveTriadLeft = true;	
 							triad.MoveLeft();
 							this.moveSound.Play();
-							this.lastTriadLeftRight = Timer.Ticks;
+							this.lastTriadLeftRight = Timer.TicksElapsed;
 						}
 
 						break;
@@ -588,7 +588,7 @@ namespace SdlDotNet.Examples
 							moveTriadRight = true;	
 							triad.MoveRight();
 							this.moveSound.Play();
-							this.lastTriadLeftRight = Timer.Ticks;
+							this.lastTriadLeftRight = Timer.TicksElapsed;
 						}
 						break;
 					case Key.DownArrow:
