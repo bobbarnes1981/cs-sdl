@@ -75,8 +75,8 @@ namespace SdlDotNet.Examples
 		[STAThread]
 		static void Main()
 		{
-			SnowDemo snowdemo = new SnowDemo();
-			snowdemo.Run();
+			SnowDemo snowDemo = new SnowDemo();
+			snowDemo.Run();
 		}
 
 		/// <summary>
@@ -86,10 +86,10 @@ namespace SdlDotNet.Examples
 		{
 			screen = Video.SetVideoModeWindow(640, 480, 16, true);
 			background = new Surface(@"../../Data/background.png");
-			background.TransparentColor = Color.FromArgb(255, 0, 255);
+			background.TransparentColor = Color.Magenta;
 			background.Transparent = true;
 			tree = new Surface(@"../../Data/Tree.bmp");
-			tree.TransparentColor = System.Drawing.Color.Magenta;
+			tree.TransparentColor = Color.Magenta;
 			tree.Transparent = true;
 			treeStretch = tree.Stretch(new Size(100,100));
 			treeStretch.Transparent = true;

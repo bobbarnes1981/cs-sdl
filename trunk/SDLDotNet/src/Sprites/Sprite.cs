@@ -17,10 +17,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet;
 using System;
 using System.Drawing;
 using System.Collections;
+
+using SdlDotNet;
 
 namespace SdlDotNet.Sprites
 {
@@ -29,6 +30,13 @@ namespace SdlDotNet.Sprites
 	/// </summary>
 	public class Sprite : IComparable, IDisposable
 	{
+		/// <summary>
+		/// 
+		/// </summary>
+		public Sprite()
+		{
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>

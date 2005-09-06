@@ -84,7 +84,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (this.Delay / Events.FPS / 10);
+				return (this.Delay / 1000);
 			}
 		}
 
