@@ -93,15 +93,11 @@ Tutorials
 	The FontExample shows how Fonts are rendered in SDL.NET
 	The GuiTest show some very basic widgets created by SDL.NET.
 	The JoystickExample shows how to use a joystick. It is sluggish and still needs work.
-	The PrimitiveExmaple draws primitives such as ellipses, triangles, bezier curves.
+	The PrimitiveExample draws primitives such as ellipses, triangles, bezier curves.
 	The SimpleGame is more interesting from a code standpoint because it is strict Model-View-Controller design pattern. It is based on a Pygame tutorial.
 
 TODO items:
 
-gacutil installation.
-
 Sijmen Mulder
 - Things like Lock() and Unlock() should become a property 
 - Multiple windows. Really. Then I will make a Managed DirectDraw implementation **WILL NOT BE DONE UNTIL SDL SUPPORTS IT**
-
-Could use some sort of TextOut function for blitting to a surface.
