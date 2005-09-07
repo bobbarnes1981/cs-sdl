@@ -71,10 +71,6 @@ namespace SdlDotNet.Examples
 
 		private void KeyboardDown(object sender, KeyboardEventArgs e)
 		{
-			if (KeyboardState.IsKeyPressed(Key.A))
-			{
-				Console.WriteLine("A is pressed");
-			}
 			// Check if the key pressed was a Q or Escape
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
