@@ -85,14 +85,5 @@ namespace SdlDotNet
 		{ 
 			return m_Keys[(int)key] == 1; 
 		} 
-
-		/// <summary> 
-		/// Creates a new KeyboardState object with the given key data. 
-		/// </summary> 
-		/// <param name="keys">The key data.</param> 
-		public KeyboardState(byte[] keys) 
-		{ 
-			m_Keys = keys; 
-		} 
 	} 
 } 

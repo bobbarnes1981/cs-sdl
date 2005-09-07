@@ -23,13 +23,11 @@ using System.Drawing;
 
 using SdlDotNet;
 
-// Simple SDL.NET Example
-// Just draws a bunch of rectangles to the screen, to quit hit 'Q' or Esc.
-
 namespace SdlDotNet.Examples 
 {
 	/// <summary>
-	/// A simple SDL.NET Example that draws a bunch of rectangles on the screen. Pressing Q or Escape will exit.
+	/// A simple SDL.NET Example that draws a bunch of rectangles on the screen. 
+	/// Pressing Q or Escape will exit.
 	/// </summary>
 	class Rectangles 
 	{
@@ -73,6 +71,10 @@ namespace SdlDotNet.Examples
 
 		private void KeyboardDown(object sender, KeyboardEventArgs e)
 		{
+			if (KeyboardState.IsKeyPressed(Key.A))
+			{
+				Console.WriteLine("A is pressed");
+			}
 			// Check if the key pressed was a Q or Escape
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
