@@ -64,23 +64,23 @@ namespace SdlDotNet.Examples
 			float change = 5f;
 			float jumpspeed = 10f;
 
-			if(jump || falling)
+			if (jump || falling)
 			{
 				change = change / 2;
 			}
 
-			if(left)
+			if (left)
 			{
 				this.X -= (int)change;
 			}
-			if(right)
+			if (right)
 			{
 				this.X += (int)change;
 			}
 
 			if (jump)
 			{
-				if(this.Y < jumpstart - Video.Screen.Height / 3)
+				if (this.Y < jumpstart - Video.Screen.Height / 3)
 				{
 					jump = false;
 					falling = true;
@@ -102,20 +102,20 @@ namespace SdlDotNet.Examples
 			}
 
 			// collision detection
-			if(this.X < 0)
+			if (this.X < 0)
 			{
 				this.X = 0;
 			}
 
-			if(this.X + this.Surface.Size.Width > Video.Screen.Width)
+			if (this.X + this.Surface.Size.Width > Video.Screen.Width)
 			{
 				this.X = Video.Screen.Width - this.Surface.Width;
 			}
 
 			// fire if needed. the 250 stands for the delay between two shots
-			if(fire && lastfire + 250 < Timer.TicksElapsed)
+			if (fire && lastfire + 250 < Timer.TicksElapsed)
 			{
-				if(WeaponFired != null)
+				if (WeaponFired != null)
 				{
 					WeaponFired(this, new FireEventArgs(this.Position));
 				}
@@ -131,7 +131,7 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(KeyboardEventArgs args)
 		{
-			switch(args.Key)
+			switch (args.Key)
 			{
 					// the =Down trick works quite well
 				case Key.LeftArrow: 
@@ -143,11 +143,11 @@ namespace SdlDotNet.Examples
 					break;
 
 				case Key.UpArrow:
-					if(args.Down && !falling)
+					if (args.Down && !falling)
 					{
 						jump = true;
 					}
-					else if(!args.Down)
+					else if (!args.Down)
 					{
 						jump = false;
 						falling = true;

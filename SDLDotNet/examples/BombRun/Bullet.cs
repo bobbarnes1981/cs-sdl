@@ -29,11 +29,6 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class Bullet : Sprite
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		public event DisposeRequestEventHandler DisposeRequest;
-
 		int speedX;
 		int speedY;
 
@@ -49,13 +44,12 @@ namespace SdlDotNet.Examples
 			this.speedX = speedX;
 			this.speedY = speedY;
 
-			// a white box for now
 			this.Surface = Video.Screen.CreateCompatibleSurface(8, 16, true);
 			this.Surface.Fill(new Rectangle(new Point(0,0), this.Surface.Size), Color.DarkBlue);
 		}
 
 		/// <summary>
-		/// 
+		/// If the bullet goes off the screen, it is removed from the collection.
 		/// </summary>
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
@@ -63,13 +57,11 @@ namespace SdlDotNet.Examples
 			this.X += (int)(args.SecondsElapsed * this.speedX);
 			this.Y += (int)(args.SecondsElapsed * this.speedY);
 
-			// check if the particle is outside the visible area of the game, it
-			// should be disposed. this request is handled by the Game class
-			if(DisposeRequest != null && (this.Position.X + this.Surface.Size.Width < 0 ||
+			if (this.Position.X + this.Surface.Size.Width < 0 ||
 				this.Position.X > Video.Screen.Width || this.Position.Y + this.Surface.Size.Height <
-				0 || this.Position.Y > Video.Screen.Height))
+				0 || this.Position.Y > Video.Screen.Height)
 			{
-				DisposeRequest(this, new EventArgs());
+				this.Kill();
 			}
 		}
 	}
