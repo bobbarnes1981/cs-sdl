@@ -34,13 +34,13 @@ namespace SdlDotNet.Examples
 		Surface screen;
 		static float bombSpeed = 1;
 		Surface background;
-		Surface alternateBackground;
+		//Surface alternateBackground;
 		Surface temporary;
 		Player player;
 		SpriteCollection bombs = new SpriteCollection();
 		SpriteCollection players = new SpriteCollection();
-		ArrayList bullets = new ArrayList();
-		ArrayList mustdispose = new ArrayList(); // see below
+		SpriteCollection bullets = new SpriteCollection();
+		SpriteCollection playerHit = new SpriteCollection();
 
 		/// <summary>
 		/// 
@@ -50,15 +50,14 @@ namespace SdlDotNet.Examples
 			screen = Video.SetVideoModeWindow(640, 480, true);
 			Surface tempSurface = new Surface("../../Data/Background1.png");
 			background = tempSurface.Convert();
-			Surface tempSurface2 = new Surface("../../Data/Background2.png");
-			alternateBackground = tempSurface.Convert();
+			//Surface tempSurface2 = new Surface("../../Data/Background2.png");
+			//alternateBackground = tempSurface2.Convert();
 			//alternateBackground.SetColorKey(Color.Magenta, true);
 			//alternateBackground.TransparentColor = Color.Magenta;
 			//alternateBackground.Transparent = true;
 
 			temporary = screen.CreateCompatibleSurface(32, 32, true);
 			temporary.TransparentColor = Color.Magenta;
-			//FromArgb(0, 255, 0, 255);
 			temporary.Transparent = true;
 
 			player = new Player(new Point(screen.Width / 2 - 16,
@@ -66,6 +65,7 @@ namespace SdlDotNet.Examples
 			players.Add(player);
 			players.EnableTickEvent();
 			players.EnableKeyboardEvent();
+			bullets.EnableTickEvent();
 
 			for(int i = 0; i < 25; i++)
 			{
@@ -93,16 +93,8 @@ namespace SdlDotNet.Examples
 
 		private void PlayerWeaponFired(object sender, FireEventArgs e)
 		{
-			// create a new bullet
-			Bullet bullet = new Bullet(e.Location, 0, -300);
-			bullet.DisposeRequest += 
-				new DisposeRequestEventHandler(BulletDisposeRequest);
+			Bullet bullet = new Bullet(e.Location, 0, -5);
 			bullets.Add(bullet);
-		}
-
-		private void BulletDisposeRequest(object sender, EventArgs e)
-		{
-			mustdispose.Add(sender); // see Game.Run, the large comment
 		}
 
 		private void Keyboard(object sender, KeyboardEventArgs e)
@@ -115,43 +107,23 @@ namespace SdlDotNet.Examples
 
 		private void OnTick(object sender, TickEventArgs args)
 		{
-			screen.Blit(background, new Rectangle(new Point(0, 0),
-				background.Size));
+			screen.Blit(background);
 			//alternateBackground.Blit(players);
-			screen.Blit(alternateBackground);
+			//screen.Blit(alternateBackground);
 			//screen.Blit(temporary);
 			screen.Blit(players);
 			screen.Blit(bombs);
+			screen.Blit(bullets);
+			playerHit = bombs.IntersectsWith(player);
+			if (playerHit.Count > 0)
+			{
+				player.Kill();
+				foreach (Sprite o in playerHit)
+				{
+					o.Kill();
+				}
 
-			//			foreach(Bullet o in bullets)
-			//				screen.Blit(o.Surface, new
-			//					Rectangle(o.Position,
-			//					o.Surface.Size));
-			//
-			//			screen.Fill(new Rectangle(3, 3, (int)bombSpeed, 2), Color.White);
-
-			//			// if lastupdate is 0 and the part below is done, one would get quite
-			//			// a funny result. it is set later in this method
-			//			if(lastupdate != 0)
-			//			{
-			//				float seconds = (float)(Timer.TicksElapsed - lastupdate) / 1000;
-			//
-			//				bombSpeed += seconds * 3;
-			//
-			//				// things can't be deleted from a collection in a foreach loop when
-			//				// the foreach-ed collection and the target collection are the same.
-			//				// that is why i put the must-be-deleted objects in a serperate
-			//				// collection
-			//				foreach(object o in mustdispose)
-			//				{
-			//					bullets.Remove(o);
-			//				}
-			//
-			//				// which ofcourse must be emptied
-			//				mustdispose = new ArrayList();
-			//			}
-			//
-			//			lastupdate = Timer.TicksElapsed;
+			}
 			screen.Flip();
 
 		}

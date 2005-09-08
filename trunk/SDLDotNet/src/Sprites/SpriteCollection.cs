@@ -758,6 +758,24 @@ namespace SdlDotNet.Sprites
 		#region Properties
 		#endregion
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sprite"></param>
+		/// <returns></returns>
+		public virtual SpriteCollection IntersectsWith(Sprite sprite)
+		{
+			SpriteCollection intersection = new SpriteCollection();
+			for (int i = 0; i < this.Count; i++)
+			{
+				if (this[i].IntersectsWith(sprite))
+				{
+					this.Add(intersection);
+				}
+			}
+			return intersection;
+		}
+
 		// Provide the explicit interface member for ICollection.
 		void ICollection.CopyTo(Array array, int index)
 		{

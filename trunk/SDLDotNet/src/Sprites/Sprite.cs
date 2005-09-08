@@ -491,6 +491,16 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="sprite"></param>
+		/// <returns></returns>
+		public virtual bool IntersectsWith(Sprite sprite)
+		{
+			return this.rect.IntersectsWith(sprite.Rectangle);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="rectangle"></param>
 		/// <returns></returns>
 		public virtual bool IntersectsWith(Rectangle rectangle)
