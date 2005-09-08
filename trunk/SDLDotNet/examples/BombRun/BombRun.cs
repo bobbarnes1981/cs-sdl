@@ -215,7 +215,7 @@ namespace SdlDotNet.Examples
 			}
 
 			// fire if needed. the 250 stands for the delay between two shots
-			if(fire && lastfire + 250 < Timer.Ticks)
+			if(fire && lastfire + 250 < Timer.TicksElapsed)
 			{
 				if(WeaponFired != null)
 				{
@@ -223,7 +223,7 @@ namespace SdlDotNet.Examples
 				}
 
 				// dont forget this
-				lastfire = Timer.Ticks;
+				lastfire = Timer.TicksElapsed;
 			}
 		}
 
@@ -372,7 +372,7 @@ namespace SdlDotNet.Examples
 				// a funny result. it is set later in this method
 				if(lastupdate != 0)
 				{
-					float seconds = (float)(Timer.Ticks - lastupdate) / 1000;
+					float seconds = (float)(Timer.TicksElapsed - lastupdate) / 1000;
 
 					player.Update(seconds);
 
@@ -400,7 +400,7 @@ namespace SdlDotNet.Examples
 					mustdispose = new ArrayList();
 				}
 
-				lastupdate = Timer.Ticks;
+				lastupdate = Timer.TicksElapsed;
 				_Screen.Flip();
 			}
 		}
