@@ -114,14 +114,17 @@ namespace SdlDotNet.Examples
 			screen.Blit(players);
 			screen.Blit(bombs);
 			screen.Blit(bullets);
+			//Console.WriteLine("Player: " + player.Rectangle);
+			//Console.WriteLine("bomb: " + bombs[0].Rectangle);
 			playerHit = bombs.IntersectsWith(player);
 			if (playerHit.Count > 0)
 			{
-				player.Kill();
-				foreach (Sprite o in playerHit)
-				{
-					o.Kill();
-				}
+				Console.WriteLine("I'm hit!");
+				//player.Kill();
+				//foreach (Sprite o in playerHit)
+				//{
+					Console.WriteLine("Reset!");
+				//}
 
 			}
 			screen.Flip();

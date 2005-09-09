@@ -41,6 +41,7 @@ namespace SdlDotNet.Examples
 			this.Surface = new Surface("../../Data/Bomb.bmp");
 			this.Surface.TransparentColor = Color.White;
 			this.Surface.Transparent = true;
+			this.Size = this.Surface.Size;
 			Reset();
 		}
 

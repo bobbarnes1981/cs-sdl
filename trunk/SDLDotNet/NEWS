@@ -1,15 +1,24 @@
-3.2.0
+4.0.0
 David Hudson xx xxx 2005
 * Fixed GAC installation and uninstall issues.
 * Fixed Surface.Blit(Sprite). It now blits the sprite to the right location. Thanks to Ekim_Gram for the bug report.
 * SDL.NET now builds on Linux using NAnt. The build generates Web docs, but not chm help files.
-* The MoviePlayer works on Linux, but has no audio and runs very slowly.
 * The CDPlayer demo does not work on Linux.
 * Updated the Mono Config file. An Ubuntu 5.04 config file was added as well.
+* Added MacOS X config file.
 * Merged TiledSurfaceCollection into SurfaceCollection. Added a new constructor to SurfaceCollection that loads one row of a graphic. (Rob Loach)
 * Added SoundCollection class.
-* Simplified some of the examples.
+* Simplified and removed some of the examples.
 * Added Audio Example. (Rob Loach)
+* Improved Sprite collision detection.
+* Re-worked the Event class. It now provides a processing loop.
+* Added KeyboardState Class.
+* Fixed several bugs in the TextSprite class
+* Updated Mouse class to use more properties.
+* Updated ColorKey and Alpha in Surface class to use properties.
+* Audio system was re-worked by Rob Loach to make the API more intuitive.
+* New website using a Wiki.
+* Removed SpriteSingleCollection class.
 
 3.1.2
 David Hudson 18 July 2005
