@@ -810,7 +810,14 @@ namespace SdlDotNet.Sprites
 				for (int j = 0; j < spriteCollection.Count; j++)
 				if (this[i].IntersectsWith(spriteCollection[j]))
 				{
-					intersection.Add(this[i], spriteCollection[j]);
+					if (intersection.Contains(this[i]))
+					{
+						((SpriteCollection)intersection[this[i]]).Add(spriteCollection[j]);
+					}
+					else
+					{
+						intersection.Add(this[i], spriteCollection[j]);
+					}
 				}
 			}
 			return intersection;
