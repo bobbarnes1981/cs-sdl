@@ -32,7 +32,7 @@ namespace SdlDotNet.Examples
 	public class ViewportMode : DemoMode
 	{
 		private Sprite sprite;
-		SpriteSingleCollection spriteSingle = new SpriteSingleCollection();
+		SpriteCollection spriteSingle = new SpriteCollection();
 		private Size size;
 		static Random rand = new Random();
 
@@ -41,7 +41,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public SpriteSingleCollection CenterSprite
+		public SpriteCollection CenterSprite
 		{
 			get
 			{

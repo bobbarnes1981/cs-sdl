@@ -105,6 +105,8 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		Hashtable bulletCollisions = new Hashtable();
+
 		private void OnTick(object sender, TickEventArgs args)
 		{
 			screen.Blit(background);
@@ -116,6 +118,17 @@ namespace SdlDotNet.Examples
 			screen.Blit(bullets);
 			//Console.WriteLine("Player: " + player.Rectangle);
 			//Console.WriteLine("bomb: " + bombs[0].Rectangle);
+
+			bulletCollisions = bullets.IntersectsWith(bombs);
+			if (bulletCollisions.Count > 0)
+			{
+				Console.WriteLine("Bullet hits: " + bulletCollisions.Count);
+				IDictionaryEnumerator myEnumerator = bulletCollisions.GetEnumerator();
+				Console.WriteLine( "\t-KEY-\t-VALUE-" );
+				while ( myEnumerator.MoveNext() )
+					Console.WriteLine("\t{0}:\t{1}", myEnumerator.Key, myEnumerator.Value);
+				Console.WriteLine();
+			}
 			playerHit = bombs.IntersectsWith(player);
 			if (playerHit.Count > 0)
 			{
