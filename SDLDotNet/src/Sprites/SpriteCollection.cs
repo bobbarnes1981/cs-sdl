@@ -759,10 +759,24 @@ namespace SdlDotNet.Sprites
 		#endregion
 
 		/// <summary>
-		/// 
+		/// Removes sprites from all SpriteCollections
 		/// </summary>
-		/// <param name="sprite"></param>
-		/// <returns></returns>
+		public virtual void Kill()
+		{
+			for (int i = 0; i < this.Count; i++)
+			{
+				this[i].Kill();
+			}
+		}
+
+		/// <summary>
+		/// Detects if a given sprite intersects with any sprites in this sprite collection.
+		/// </summary>
+		/// <param name="sprite">Sprite to intersect with</param>
+		/// <returns>
+		/// SpriteCollection of sprite in this SpriteCollection that 
+		/// intersect with the given Sprite
+		/// </returns>
 		public virtual SpriteCollection IntersectsWith(Sprite sprite)
 		{
 			SpriteCollection intersection = new SpriteCollection();
@@ -770,7 +784,33 @@ namespace SdlDotNet.Sprites
 			{
 				if (this[i].IntersectsWith(sprite))
 				{
-					this.Add(intersection);
+					intersection.Add(this[i]);
+				}
+			}
+			return intersection;
+		}
+
+		/// <summary>
+		/// Detects if any sprites in a given SpriteCollection 
+		/// intersect with any sprites in this SpriteCollection.
+		/// </summary>
+		/// <param name="spriteCollection">
+		/// SpriteCollection to check intersections
+		/// </param>
+		/// <returns>
+		/// Hashtable with sprites in this SpriteCollection as 
+		/// keys and SpriteCollections containing sprites they 
+		/// intersect with from the given SpriteCollection
+		/// </returns>
+		public virtual Hashtable IntersectsWith(SpriteCollection spriteCollection)
+		{
+			Hashtable intersection = new Hashtable();
+			for (int i = 0; i < this.Count; i++)
+			{
+				for (int j = 0; j < spriteCollection.Count; j++)
+				if (this[i].IntersectsWith(spriteCollection[j]))
+				{
+					intersection.Add(this[i], spriteCollection[j]);
 				}
 			}
 			return intersection;
