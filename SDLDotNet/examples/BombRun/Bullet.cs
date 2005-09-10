@@ -45,11 +45,13 @@ namespace SdlDotNet.Examples
 			this.speedY = speedY;
 
 			this.Surface = Video.Screen.CreateCompatibleSurface(8, 16, true);
-			this.Surface.Fill(new Rectangle(new Point(0,0), this.Surface.Size), Color.DarkBlue);
+			this.Surface.Fill(new Rectangle(new Point(0,0),
+				this.Surface.Size), Color.DarkBlue);
 		}
 
 		/// <summary>
-		/// If the bullet goes off the screen, it is removed from the collection.
+		/// If the bullet goes off the screen, 
+		/// it is removed from the collection.
 		/// </summary>
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
@@ -58,8 +60,9 @@ namespace SdlDotNet.Examples
 			this.Y += (int)(args.SecondsElapsed * this.speedY);
 
 			if (this.Position.X + this.Surface.Size.Width < 0 ||
-				this.Position.X > Video.Screen.Width || this.Position.Y + this.Surface.Size.Height <
-				0 || this.Position.Y > Video.Screen.Height)
+				this.Position.X > Video.Screen.Width ||
+				this.Position.Y + this.Surface.Size.Height < 0 ||
+				this.Position.Y > Video.Screen.Height)
 			{
 				this.Kill();
 			}

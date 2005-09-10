@@ -52,7 +52,6 @@ namespace SdlDotNet.Examples
 
 			this.Surface = new Surface("../../Data/Head.bmp");
 			this.Surface.TransparentColor = Color.White;
-			this.Surface.Transparent = true;
 			this.Size = this.Surface.Size;
 		}
 
@@ -102,7 +101,6 @@ namespace SdlDotNet.Examples
 				}
 			}
 
-			// collision detection
 			if (this.X < 0)
 			{
 				this.X = 0;
@@ -134,7 +132,7 @@ namespace SdlDotNet.Examples
 		{
 			switch (args.Key)
 			{
-					// the =Down trick works quite well
+				// the =Down trick works quite well
 				case Key.LeftArrow: 
 					left = args.Down; 
 					break;

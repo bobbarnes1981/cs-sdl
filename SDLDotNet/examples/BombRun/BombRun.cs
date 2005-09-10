@@ -30,17 +30,18 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class BombRun
 	{
-		//int lastupdate = 0;	
 		Surface screen;
 		static float bombSpeed = 1;
 		Surface background;
-		//Surface alternateBackground;
+		Surface alternateBackground;
 		Surface temporary;
 		Player player;
+		Surface tempSurface;
 		SpriteCollection bombs = new SpriteCollection();
 		SpriteCollection players = new SpriteCollection();
 		SpriteCollection bullets = new SpriteCollection();
 		SpriteCollection playerHit = new SpriteCollection();
+		SpriteCollection master = new SpriteCollection();
 
 		/// <summary>
 		/// 
@@ -48,30 +49,28 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			screen = Video.SetVideoModeWindow(640, 480, true);
-			Surface tempSurface = new Surface("../../Data/Background1.png");
+			tempSurface = new Surface("../../Data/Background1.png");
 			background = tempSurface.Convert();
-			//Surface tempSurface2 = new Surface("../../Data/Background2.png");
-			//alternateBackground = tempSurface2.Convert();
-			//alternateBackground.SetColorKey(Color.Magenta, true);
-			//alternateBackground.TransparentColor = Color.Magenta;
-			//alternateBackground.Transparent = true;
+			tempSurface = new Surface("../../Data/Background2.png");
+			alternateBackground = tempSurface.Convert();
 
 			temporary = screen.CreateCompatibleSurface(32, 32, true);
-			temporary.TransparentColor = Color.Magenta;
-			temporary.Transparent = true;
+			temporary.TransparentColor = Color.FromArgb(0, 255, 0, 255);
 
 			player = new Player(new Point(screen.Width / 2 - 16,
 				screen.Height - 32));
 			players.Add(player);
-			players.EnableTickEvent();
 			players.EnableKeyboardEvent();
 			bullets.EnableTickEvent();
+			master.EnableTickEvent();
 
 			for(int i = 0; i < 25; i++)
 			{
 				bombs.Add(new Bomb());
 			}
-			bombs.EnableTickEvent();
+
+			master.Add(bombs);
+			master.Add(players);
 
 			Video.Mouse.ShowCursor = false;
 			Video.WindowCaption =
@@ -106,42 +105,47 @@ namespace SdlDotNet.Examples
 		}
 
 		Hashtable bulletCollisions = new Hashtable();
+		IDictionaryEnumerator myEnumerator;
+		Rectangle src;
+		Rectangle dest;
 
 		private void OnTick(object sender, TickEventArgs args)
 		{
 			screen.Blit(background);
-			//alternateBackground.Blit(players);
-			//screen.Blit(alternateBackground);
-			//screen.Blit(temporary);
-			screen.Blit(players);
-			screen.Blit(bombs);
+
+			for(int i = 0; i < master.Count; i++)
+			{
+				src = new Rectangle(new Point(0, 0), master[i].Size);
+				dest = new Rectangle(master[i].Position, master[i].Size);
+
+				temporary.Blit(alternateBackground, src, dest);
+				temporary.Blit(master[i].Surface, src);
+				screen.Blit(temporary, dest);
+			}
+
 			screen.Blit(bullets);
-			//Console.WriteLine("Player: " + player.Rectangle);
-			//Console.WriteLine("bomb: " + bombs[0].Rectangle);
 
 			bulletCollisions = bullets.IntersectsWith(bombs);
 			if (bulletCollisions.Count > 0)
 			{
 				Console.WriteLine("Bullet hits: " + bulletCollisions.Count);
-				IDictionaryEnumerator myEnumerator = bulletCollisions.GetEnumerator();
-				Console.WriteLine( "\t-KEY-\t-VALUE-" );
+				myEnumerator = bulletCollisions.GetEnumerator();
 				while ( myEnumerator.MoveNext() )
-					Console.WriteLine("\t{0}:\t{1}", myEnumerator.Key, myEnumerator.Value);
+				{
+					Console.WriteLine("\t{0}:\t{1}", 
+						myEnumerator.Key, 
+						myEnumerator.Value);
+				}
 				Console.WriteLine();
+
 			}
 			playerHit = bombs.IntersectsWith(player);
 			if (playerHit.Count > 0)
 			{
 				Console.WriteLine("I'm hit!");
-				//player.Kill();
-				//foreach (Sprite o in playerHit)
-				//{
-					Console.WriteLine("Reset!");
-				//}
-
 			}
-			screen.Flip();
 
+			screen.Flip();
 		}
 
 		/// <summary>

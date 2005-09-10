@@ -36,9 +36,7 @@ namespace SdlDotNet
 	public class Surface : BaseSdlResource, ICloneable
 	{
 		private byte alphaValue;
-		private Color colorKey;
 		private bool disposed;
-		private bool transparent;
 		private Color transparentColor;
 
 		#region Constructors and Destructors
@@ -1262,29 +1260,6 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Get/set the transparency of the image.  
-		/// </summary>
-		public bool Transparent
-		{
-			get 
-			{
-				return transparent;
-			}
-			set	
-			{
-				transparent = value;
-				if (value)
-				{
-					this.ColorKey = transparentColor;
-				}
-				else 
-				{
-					this.ClearColorKey();
-				}
-			}
-		}
-
-		/// <summary>
 		/// Get/set the transparent color of the image.
 		/// </summary>
 		public Color TransparentColor
@@ -1296,26 +1271,6 @@ namespace SdlDotNet
 			set	
 			{
 				transparentColor = value;
-				if (Transparent) 
-				{
-					this.ColorKey = transparentColor;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Get/set the transparent color of the image. 
-		/// The transparent color is also know as 
-		/// a colorkey for the surface
-		/// </summary>
-		private Color ColorKey
-		{
-			get
-			{
-				return this.colorKey;
-			}
-			set
-			{
 				if (this.disposed)
 				{
 					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
@@ -1327,14 +1282,13 @@ namespace SdlDotNet
 				{
 					throw SdlException.Generate();
 				}
-				this.colorKey = value;
 			}
 		}
 
 		/// <summary>
-		/// Clears the colorkey for the surface
+		/// Clears the transparent color for the surface
 		/// </summary>
-		private void ClearColorKey() 
+		public void ClearTransparentColor() 
 		{
 			if (this.disposed)
 			{
@@ -1902,7 +1856,7 @@ namespace SdlDotNet
 		{
 			Surface surface = new Surface(sourceRectangle);
 			surface.Blit(this, new Point(0,0), sourceRectangle);
-			this.Transparent = true;
+			surface.TransparentColor = Color.Black;
 			double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
 			double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
 			surface.Scale(stretchWidth, stretchHeight);
@@ -1918,7 +1872,7 @@ namespace SdlDotNet
 		{
 			Surface surface = new Surface(this.Size);
 			surface.Blit(this, new Point(0,0));
-			surface.Transparent = true;
+			surface.TransparentColor = Color.Black;
 			double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
 			double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
 			surface.Scale(stretchWidth, stretchHeight);
