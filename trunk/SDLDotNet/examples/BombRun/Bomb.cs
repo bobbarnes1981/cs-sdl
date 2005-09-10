@@ -40,16 +40,18 @@ namespace SdlDotNet.Examples
 		{
 			this.Surface = new Surface("../../Data/Bomb.bmp");
 			this.Surface.TransparentColor = Color.White;
-			this.Surface.Transparent = true;
 			this.Size = this.Surface.Size;
 			Reset();
 		}
 
 		private void Reset()
 		{
-			this.Position = new Point(random.Next(Video.Screen.Width - this.Surface.Width), 0 -
-				this.Surface.Height - random.Next(Video.Screen.Height));
-			this.speed = random.Next((int)BombRun.BombSpeed, (int)BombRun.BombSpeed * 2);
+			this.Position = 
+				new Point(random.Next(Video.Screen.Width - this.Surface.Width),
+				0 - this.Surface.Height - random.Next(Video.Screen.Height));
+			this.speed = 
+				random.Next((int)BombRun.BombSpeed,
+				(int)BombRun.BombSpeed * 2);
 		}
 
 		/// <summary>
