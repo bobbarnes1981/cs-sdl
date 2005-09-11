@@ -507,6 +507,31 @@ namespace SdlDotNet.Sprites
 		{
 			return this.rect.IntersectsWith(rectangle);
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sprite"></param>
+		/// <returns></returns>
+		public virtual bool IntersectsWith(Sprite sprite)
+		{
+			return this.IntersectsWith(sprite.Rectangle);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="spriteCollection"></param>
+		/// <returns></returns>
+		public virtual bool IntersectsWith(SpriteCollection spriteCollection)
+		{
+			foreach(Sprite sprite in spriteCollection)
+			{
+				if(this.IntersectsWith(sprite))
+					return true;
+			}
+			return false;
+		}
 		#endregion
 
 		#region Operators
