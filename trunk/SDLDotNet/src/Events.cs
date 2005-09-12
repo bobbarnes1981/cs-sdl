@@ -723,19 +723,19 @@ namespace SdlDotNet
 		}
 
 		#region Thread Management
-		private static int m_Rate = 30;
-		private static int m_FPS = 30;
-		private static int m_Framecount;
-		private static int m_LastTick;
-		private static float m_Framerate = (1000.0F / (float)m_Rate);
-		private static Thread m_Thread;
+		private static int rate = 30;
+		private static int fps = 30;
+		private static int framecount;
+		private static int lastTick;
+		private static float framerate = (1000.0F / (float)rate);
+		private static Thread thread;
 
-		static bool quitflag;
+		static bool quitFlag;
 
 		//The app will exit if the 'x' in the window is clicked
 		private void OnQuit(object sender, QuitEventArgs e) 
 		{
-			quitflag = true;
+			quitFlag = true;
 		}
 
 		/// <summary>
@@ -753,15 +753,15 @@ namespace SdlDotNet
 		{
 			Timer.Initialize();
 			Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
-			m_LastTick = 0;
-			m_Thread = new Thread(new ThreadStart(ThreadTicker));
-			m_Thread.Priority = ThreadPriority.Normal;
-			m_Thread.IsBackground = true;
-			m_Thread.Name = "SDL.NET - Event Manager";
-			m_Thread.Start();
+			lastTick = 0;
+			thread = new Thread(new ThreadStart(ThreadTicker));
+			thread.Priority = ThreadPriority.Normal;
+			thread.IsBackground = true;
+			thread.Name = "SDL.NET - Event Manager";
+			thread.Start();
 			try 
 			{
-				while (!quitflag) 
+				while (!quitFlag) 
 				{
 					// handle events till the queue is empty
 					while (Events.Poll()) 
@@ -781,7 +781,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return m_FPS;
+				return fps;
 			}
 			set
 			{
@@ -796,18 +796,24 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return m_Rate;
+				return rate;
 			}
 			set
 			{
-				m_Framecount = 0;
-				if(value < 1)
-					m_Rate = 1;
-				else if(value > 200)
-					m_Rate = 200;
+				framecount = 0;
+				if (value < 1)
+				{
+					rate = 1;
+				}
+				else if (value > 200)
+				{
+					rate = 200;
+				}
 				else
-					m_Rate = value;
-				m_Framerate = (1000.0F / (float)m_Rate);
+				{
+					rate = value;
+				}
+				framerate = (1000.0F / (float)rate);
 			}
 		}
 
@@ -819,39 +825,39 @@ namespace SdlDotNet
 		{
 			int frames = 0;
 			int lastTime = Sdl.SDL_GetTicks();
-			int curTime;
-			int current_ticks;
-			int target_ticks;
-			int the_delay;
+			int currentTime;
+			int currentTicks;
+			int targetTicks;
+			int delay;
 			
-			while(m_Thread.IsAlive)
+			while(thread.IsAlive)
 			{
-				m_Framecount++;
+				framecount++;
 
-				current_ticks = Sdl.SDL_GetTicks();
-				target_ticks = m_LastTick + (int)((float)m_Framecount * m_Framerate);
+				currentTicks = Sdl.SDL_GetTicks();
+				targetTicks = lastTick + (int)((float)framecount * framerate);
 
-				if (current_ticks <= target_ticks) 
+				if (currentTicks <= targetTicks) 
 				{
-					the_delay = target_ticks - current_ticks;
-					Thread.Sleep(the_delay);
+					delay = targetTicks - currentTicks;
+					Thread.Sleep(delay);
 				} 
 				else 
 				{
-					m_Framecount = 0;
-					m_LastTick = current_ticks;
+					framecount = 0;
+					lastTick = currentTicks;
 				}
 
 				Events.OnTick(
-					new TickEventArgs(current_ticks, m_LastTick, m_FPS));
+					new TickEventArgs(currentTicks, lastTick, fps));
 
-				curTime = Sdl.SDL_GetTicks();
+				currentTime = Sdl.SDL_GetTicks();
 				frames++;
-				if(lastTime + 1000 <= curTime)
+				if(lastTime + 1000 <= currentTime)
 				{
-					m_FPS = frames;
+					fps = frames;
 					frames = 0;
-					lastTime = curTime;
+					lastTime = currentTime;
 				}
 			}
 		}

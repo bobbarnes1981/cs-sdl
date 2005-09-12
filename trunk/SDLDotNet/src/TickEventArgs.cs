@@ -27,11 +27,11 @@ namespace SdlDotNet
 	/// <summary>
 	/// Event arguments for a Framerate tick.
 	/// </summary>
-	public class TickEventArgs : SdlEventArgs 
+	public class  TickEventArgs : SdlEventArgs 
 	{
-		private int m_LastTick;
-		private int m_Tick;
-		private int m_FPS;
+		private int lastTick;
+		private int tick;
+		private int fps;
 
 		/// <summary>
 		/// 
@@ -45,9 +45,9 @@ namespace SdlDotNet
 		/// <param name="fps">Frames per second</param>
 		public TickEventArgs(int tick, int lastTick, int fps)
 		{
-			m_Tick = tick;
-			m_LastTick = lastTick;
-			m_FPS = fps;
+			this.tick = tick;
+			this.lastTick = lastTick;
+			this.fps = fps;
 		}
 
 		/// <summary>
@@ -57,7 +57,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return m_LastTick;
+				return this.lastTick;
 			}
 		}
 		
@@ -68,7 +68,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return m_FPS;
+				return this.fps;
 			}
 		}
 
@@ -79,7 +79,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return m_Tick;
+				return this.tick;
 			}
 		}
 		
@@ -91,7 +91,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return m_Tick - m_LastTick;
+				return this.tick - this.lastTick;
 			}
 		}
 
@@ -115,7 +115,7 @@ namespace SdlDotNet
 		/// </summary>
 		public int RatePerSecond(int rate)
 		{
-			double off = (double) LastTick / 1000000.0 * (double) rate;
+			double off = (double) this.LastTick / 1000000.0 * (double) rate;
 			return (int) off;
 		}
 
@@ -128,7 +128,7 @@ namespace SdlDotNet
 		/// </summary>
 		public double RatePerSecond(double rate)
 		{
-			return (double) LastTick / 1000000.0 * (double) rate;
+			return (double) this.LastTick / 1000000.0 * (double) rate;
 		}
 	}
 }
