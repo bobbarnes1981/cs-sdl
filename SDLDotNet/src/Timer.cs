@@ -88,7 +88,7 @@ namespace SdlDotNet
 		/// Gets the number of seconds since Sdl was initialized.  
 		/// This is not a high-resolution timer.
 		/// </summary>
-		public static int SecondsElapsed
+		public static float SecondsElapsed
 		{
 			get
 			{
