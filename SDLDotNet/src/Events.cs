@@ -757,7 +757,7 @@ namespace SdlDotNet
 			m_Thread = new Thread(new ThreadStart(ThreadTicker));
 			m_Thread.Priority = ThreadPriority.Normal;
 			m_Thread.IsBackground = true;
-			m_Thread.Name = "SDL.NET - Framerate Manager";
+			m_Thread.Name = "SDL.NET - Event Manager";
 			m_Thread.Start();
 			try 
 			{
@@ -834,7 +834,6 @@ namespace SdlDotNet
 				if (current_ticks <= target_ticks) 
 				{
 					the_delay = target_ticks - current_ticks;
-					//Sdl.SDL_Delay(the_delay);
 					Thread.Sleep(the_delay);
 				} 
 				else 

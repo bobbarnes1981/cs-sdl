@@ -91,7 +91,7 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
-			float seconds = args.Delay /1000;
+			float seconds = args.SecondsElapsed;
 			time = Timer.SecondsElapsed;
 
 			switch(state)
