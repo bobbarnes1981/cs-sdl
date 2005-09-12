@@ -34,6 +34,23 @@ namespace SdlDotNet
 		private int m_FPS;
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="tick">
+		/// The current tick.
+		/// </param>
+		/// <param name="lastTick">
+		/// The tick count that it was at last frame.
+		/// </param>
+		/// <param name="fps">Frames per second</param>
+		public TickEventArgs(int tick, int lastTick, int fps)
+		{
+			m_Tick = tick;
+			m_LastTick = lastTick;
+			m_FPS = fps;
+		}
+
+		/// <summary>
 		/// Gets when the last frame tick occurred.
 		/// </summary>
 		public int LastTick
@@ -45,7 +62,7 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// Gets the FPS as of the event call. Framerate.FPS is an alternative.
+		/// Gets the FPS as of the event call. Events.FPS is an alternative.
 		/// </summary>
 		public int FPS
 		{
@@ -67,9 +84,10 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// Gets the difference in time between the current tick and the last tick.
+		/// Gets the difference in time between the 
+		/// current tick and the last tick.
 		/// </summary>
-		public int Delay
+		public int TicksElapsed
 		{
 			get
 			{
@@ -78,28 +96,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Seconds elapsed between the last tick and the current tick
 		/// </summary>
 		public float SecondsElapsed
 		{
 			get
 			{
-				return (this.Delay / 1000);
+				return (this.TicksElapsed / 1000);
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="tick">The current tick.</param>
-		/// <param name="lastTick">The tick count that it was at last frame.</param>
-		/// <param name="fps"></param>
-		public TickEventArgs(int tick, int lastTick, int fps)
-		{
-			m_Tick = tick;
-			m_LastTick = lastTick;
-			m_FPS = fps;
-		}
 		/// <summary>
 		/// Calculates a rate, adjusted for seconds. This method takes the
 		/// rate that something should happen every second and adjusts it

@@ -61,6 +61,7 @@ namespace SdlDotNet.Examples
 		public override void Update(TickEventArgs args)
 		{
 			this.Y += (int)(args.SecondsElapsed * speed);
+			//Console.WriteLine(args.SecondsElapsed);
 
 			if(this.Y > Video.Screen.Height)
 			{

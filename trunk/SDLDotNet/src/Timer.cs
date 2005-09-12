@@ -100,9 +100,18 @@ namespace SdlDotNet
 		/// Wait a number of milliseconds.
 		/// </summary>
 		/// <param name="delayTime">Delay time in milliseconds</param>
-		public static void Delay(int delayTime)
+		public static void DelayTicks(int delayTime)
 		{
 			Sdl.SDL_Delay(delayTime);
+		}
+
+		/// <summary>
+		/// Wait a number of milliseconds.
+		/// </summary>
+		/// <param name="delayTime">Delay time in seconds</param>
+		public static void DelaySeconds(int delayTime)
+		{
+			Sdl.SDL_Delay(delayTime * 1000);
 		}
 
 		/// <summary>

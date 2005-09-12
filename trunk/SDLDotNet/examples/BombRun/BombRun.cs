@@ -111,6 +111,7 @@ namespace SdlDotNet.Examples
 
 		private void OnTick(object sender, TickEventArgs args)
 		{
+			Console.WriteLine(args.SecondsElapsed);
 			screen.Blit(background);
 
 			for(int i = 0; i < master.Count; i++)
