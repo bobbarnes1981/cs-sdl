@@ -116,18 +116,23 @@ namespace SdlDotNet
 			Surface fullImage, 
 			Size tileSize) 
 		{ 
-			fullImage.Alpha =  0;
+			fullImage.Alpha = 255;
 			for(int tileY = 0; tileY * tileSize.Height < fullImage.Height; tileY++) 
 			{ 
 				for(int tileX = 0; tileX * tileSize.Width < fullImage.Width; tileX++) 
 				{ 
-					Surface tile = fullImage.CreateCompatibleSurface(tileSize.Width, tileSize.Height, true);
+					Surface tile = fullImage.CreateCompatibleSurface(tileSize.Width, tileSize.Height);
 
+					//tile.ClearTransparentColor();
+					//fullImage.ClearTransparentColor();
+					//Surface tile = new Surface(tileSize.Width, tileSize.Height);
+					//tile.TransparentColor = Color.Black;
+					
 					tile.Blit(
 						fullImage, 
 						new Point(0,0), 
 						new Rectangle(tileX * tileSize.Width, 
-						tileY * tileSize.Height, tileSize.Width, tileSize.Height)); 
+						tileY * tileSize.Height, tileSize.Width, tileSize.Height));
 					this.List.Add(tile); 
 				} 
 			} 

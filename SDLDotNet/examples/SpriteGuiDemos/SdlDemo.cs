@@ -58,7 +58,6 @@ namespace SdlDotNet.Examples
       
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
-			Events.Quit += new QuitEventHandler(this.OnQuit);
 			Events.Tick += new TickEventHandler(this.OnTick);
 
 			// Create the screen
@@ -84,8 +83,6 @@ namespace SdlDotNet.Examples
 
 			// Loop until the system indicates it should stop
 			Console.WriteLine("Welcome to the SDL.NET Demo!");
-
-			Events.Run();
 
 			// Stop the ticker and the current demo
 			SwitchDemo(-1);
@@ -293,11 +290,6 @@ namespace SdlDotNet.Examples
 					SwitchDemo(7); 
 					break;
 			}
-		}
-
-		private void OnQuit(object sender, QuitEventArgs e) 
-		{
-			Events.QuitApp();
 		}
 
 		/// <summary>

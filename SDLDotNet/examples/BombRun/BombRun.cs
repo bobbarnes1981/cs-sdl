@@ -92,7 +92,7 @@ namespace SdlDotNet.Examples
 
 		private void PlayerWeaponFired(object sender, FireEventArgs e)
 		{
-			Bullet bullet = new Bullet(e.Location, 0, -5);
+			Bullet bullet = new Bullet(e.Location, 0, -250);
 			bullets.Add(bullet);
 		}
 
