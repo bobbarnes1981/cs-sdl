@@ -105,30 +105,5 @@ namespace SdlDotNet
 				return (this.TicksElapsed / 1000.0f);
 			}
 		}
-
-		/// <summary>
-		/// Calculates a rate, adjusted for seconds. This method takes the
-		/// rate that something should happen every second and adjusts it
-		/// by the amount of time since the last tick (typically less than
-		/// the rate, but potential by more if there are a lot of skipped
-		/// cycles).
-		/// </summary>
-		public int RatePerSecond(int rate)
-		{
-			double off = (double) this.LastTick / 1000000.0f * (double) rate;
-			return (int) off;
-		}
-
-		/// <summary>
-		/// Calculates a rate, adjusted for seconds. This method takes the
-		/// rate that something should happen every second and adjusts it
-		/// by the amount of time since the last tick (typically less than
-		/// the rate, but potential by more if there are a lot of skipped
-		/// cycles).
-		/// </summary>
-		public double RatePerSecond(double rate)
-		{
-			return (double) this.LastTick / 1000000.0f * (double) rate;
-		}
 	}
 }

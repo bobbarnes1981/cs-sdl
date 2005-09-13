@@ -53,10 +53,8 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
-			this.X += args.RatePerSecond(dx);
-			this.Y += args.RatePerSecond(dy);
-			//this.X += 10;
-			//this.Y +=10;
+			this.X += (int) (args.SecondsElapsed * 10 * dx);
+			this.Y += (int) (args.SecondsElapsed * 10 * dy);
 
 			// Adjust our entropy
 			dx += rand.Next(-5, 6);
