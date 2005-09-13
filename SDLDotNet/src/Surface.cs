@@ -1885,14 +1885,14 @@ namespace SdlDotNet
 		/// <param name="transformation"></param>
 		public void Transform(Transformation transformation)
 		{
-			if (Math.Round(transformation.Zoom, 1) != 1.0 && Math.Round(transformation.Zoom, 1) != 0.0)
+			if (Math.Round(transformation.Zoom, 1) != 1.0f && Math.Round(transformation.Zoom, 1) != 0.0f)
 			{
 				this.RotationZoom(transformation.DegreesOfRotation, transformation.Zoom, transformation.AntiAlias);
 			}
-			if (Math.Round(transformation.ScaleX, 1) != 1.0 && 
-				Math.Round(transformation.ScaleY, 1) != 1.0 && 
-				Math.Round(transformation.ScaleX, 1) != 0.0 && 
-				Math.Round(transformation.ScaleY, 1) != 0.0)
+			if (Math.Round(transformation.ScaleX, 1) != 1.0f && 
+				Math.Round(transformation.ScaleY, 1) != 1.0f && 
+				Math.Round(transformation.ScaleX, 1) != 0.0f && 
+				Math.Round(transformation.ScaleY, 1) != 0.0f)
 			{
 				this.Scale(transformation.ScaleX, transformation.ScaleY, transformation.AntiAlias);
 			}

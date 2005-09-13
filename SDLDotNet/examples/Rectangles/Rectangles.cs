@@ -56,7 +56,7 @@ namespace SdlDotNet.Examples
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
 			Events.Tick += new TickEventHandler(this.Tick);
-			Events.FPS = 50;
+			Events.Fps = 50;
 
 			screen = Video.SetVideoModeWindow(width, height, true);
 

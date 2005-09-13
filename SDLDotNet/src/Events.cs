@@ -723,11 +723,10 @@ namespace SdlDotNet
 		}
 
 		#region Thread Management
-		private static int rate = 30;
+		private static int targetFps = 30;
 		private static int fps = 30;
-		private static int framecount;
 		private static int lastTick;
-		private static float framerate = (1000.0F / (float)rate);
+		private static float ticksPerFrame = (1000.0f / (float)targetFps);
 		private static Thread thread;
 
 		static bool quitFlag;
@@ -751,9 +750,9 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Run()
 		{
+			lastTick = 0;
 			Timer.Initialize();
 			Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
-			lastTick = 0;
 			thread = new Thread(new ThreadStart(ThreadTicker));
 			thread.Priority = ThreadPriority.Normal;
 			thread.IsBackground = true;
@@ -777,7 +776,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the current FPS and sets the wanted framerate.
 		/// </summary>
-		public static int FPS
+		public static int Fps
 		{
 			get
 			{
@@ -785,35 +784,34 @@ namespace SdlDotNet
 			}
 			set
 			{
-				Rate = value;
+				TargetFps = value;
 			}
 		}
 
 		/// <summary>
 		/// Gets and sets the wanted framerate of the ticker.
 		/// </summary>
-		public static int Rate
+		public static int TargetFps
 		{
 			get
 			{
-				return rate;
+				return targetFps;
 			}
 			set
 			{
-				framecount = 0;
 				if (value < 1)
 				{
-					rate = 1;
+					targetFps = 1;
 				}
 				else if (value > 200)
 				{
-					rate = 200;
+					targetFps = 200;
 				}
 				else
 				{
-					rate = value;
+					targetFps = value;
 				}
-				framerate = (1000.0F / (float)rate);
+				ticksPerFrame = (1000.0f / (float)targetFps);
 			}
 		}
 
@@ -824,34 +822,26 @@ namespace SdlDotNet
 		private static void ThreadTicker()
 		{
 			int frames = 0;
-			int lastTime = Sdl.SDL_GetTicks();
+			int lastTime = Timer.TicksElapsed;
 			int currentTime;
-			int currentTicks;
-			int targetTicks;
-			int delay;
+			int currentTick;
+			int targetTick;
 			
 			while(thread.IsAlive)
 			{
-				framecount++;
+				currentTick = Timer.TicksElapsed;
+				targetTick = lastTick + (int)ticksPerFrame;
 
-				currentTicks = Sdl.SDL_GetTicks();
-				targetTicks = lastTick + (int)((float)framecount * framerate);
-
-				if (currentTicks <= targetTicks) 
+				if (currentTick <= targetTick) 
 				{
-					delay = targetTicks - currentTicks;
-					Thread.Sleep(delay);
+					Thread.Sleep(targetTick - currentTick);
 				} 
-				else 
-				{
-					framecount = 0;
-					lastTick = currentTicks;
-				}
-
+				currentTick = Timer.TicksElapsed;
+				
 				Events.OnTick(
-					new TickEventArgs(currentTicks, lastTick, fps));
-
-				currentTime = Sdl.SDL_GetTicks();
+					new TickEventArgs(currentTick, lastTick, fps));
+				lastTick = currentTick;
+				currentTime = Timer.TicksElapsed;
 				frames++;
 				if(lastTime + 1000 <= currentTime)
 				{

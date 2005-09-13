@@ -79,7 +79,7 @@ namespace SdlDotNet.Examples
 			LoadDemos();
 
 			// Start up the ticker (and animation)
-			Events.FPS = 30;
+			Events.Fps = 30;
 			Events.Run();
 
 			// Loop until the system indicates it should stop
@@ -324,7 +324,7 @@ namespace SdlDotNet.Examples
 
 		private void OnMenuFps(object sender, MenuItemEventArgs e)
 		{
-			Events.FPS = fpsSpeeds[e.Index];
+			Events.Fps = fpsSpeeds[e.Index];
 		}
 
 		private void OnMenuQuit(object sender, MenuItemEventArgs e)

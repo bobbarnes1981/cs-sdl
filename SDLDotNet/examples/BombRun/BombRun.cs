@@ -31,7 +31,7 @@ namespace SdlDotNet.Examples
 	public class BombRun
 	{
 		Surface screen;
-		static float bombSpeed = 1;
+		static float bombSpeed = 100;
 		Surface background;
 		Surface alternateBackground;
 		Surface temporary;
@@ -111,7 +111,7 @@ namespace SdlDotNet.Examples
 
 		private void OnTick(object sender, TickEventArgs args)
 		{
-			Console.WriteLine(args.SecondsElapsed);
+			//Console.WriteLine(args.SecondsElapsed);
 			screen.Blit(background);
 
 			for(int i = 0; i < master.Count; i++)
