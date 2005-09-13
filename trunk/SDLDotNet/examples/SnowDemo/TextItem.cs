@@ -38,8 +38,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class TextItem : TextSprite
 	{
-		const float inSpeed = 1;
-		const float outSpeed = 1;
+		const float inSpeed = 40;
+		const float outSpeed = 40;
 		float time;
 		float startTime;
 		TextFadeState state = TextFadeState.BeforeFadeIn;

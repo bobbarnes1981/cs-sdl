@@ -89,7 +89,7 @@ namespace SdlDotNet.Examples
 //				//channel2.Play(sound);
           
 			// Begin the SDL ticker
-			Events.FPS = 50;
+			Events.Fps = 50;
 
 			textDisplay.Text = "Press Arrow Keys, Space and Click Mouse.";
 		} 

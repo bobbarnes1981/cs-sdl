@@ -102,7 +102,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (this.TicksElapsed / 1000);
+				return (this.TicksElapsed / 1000.0f);
 			}
 		}
 
@@ -115,7 +115,7 @@ namespace SdlDotNet
 		/// </summary>
 		public int RatePerSecond(int rate)
 		{
-			double off = (double) this.LastTick / 1000000.0 * (double) rate;
+			double off = (double) this.LastTick / 1000000.0f * (double) rate;
 			return (int) off;
 		}
 
@@ -128,7 +128,7 @@ namespace SdlDotNet
 		/// </summary>
 		public double RatePerSecond(double rate)
 		{
-			return (double) this.LastTick / 1000000.0 * (double) rate;
+			return (double) this.LastTick / 1000000.0f * (double) rate;
 		}
 	}
 }

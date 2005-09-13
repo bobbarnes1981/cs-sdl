@@ -132,7 +132,7 @@ namespace SdlDotNet.Examples
 		public override void Update(TickEventArgs args)
 		{
 			tps.Text = 
-				String.Format(CultureInfo.CurrentCulture, "{0}", Events.FPS);
+				String.Format(CultureInfo.CurrentCulture, "{0}", Events.Fps);
 
 //			if (SdlDemo.IsFull)
 //			{
