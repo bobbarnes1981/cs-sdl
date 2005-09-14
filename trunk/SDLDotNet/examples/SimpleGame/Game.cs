@@ -50,6 +50,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		Stopped
 	}
+
 	/// <summary>
 	/// Summary description for Game.
 	/// </summary>
@@ -116,6 +117,5 @@ namespace SdlDotNet.Examples
 				return this.map;
 			}
 		}
-
 	}
 }

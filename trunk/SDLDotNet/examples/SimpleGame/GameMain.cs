@@ -63,7 +63,6 @@ namespace SdlDotNet.Examples
 					//Make sure that the process is running from the exe file. 
 					if (Assembly.GetExecutingAssembly().Location.
 						Replace("/", "\\") == current.MainModule.FileName) 
- 
 					{  
 						//Return the other process instance.  
 						return process;  
