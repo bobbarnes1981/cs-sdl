@@ -1495,6 +1495,24 @@ namespace SdlDotNet
 			}
 		}
 
+		private bool alphaBlending;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool AlphaBlending
+		{
+			get
+			{
+				return alphaBlending;
+			}
+			set
+			{
+				alphaBlending = value;
+				this.Alpha = this.alphaValue;
+			}
+		}
+
 		/// <summary>
 		/// Get/set the Alpha value of the image. 
 		/// 0 indicates that the image fully transparent. 
@@ -1508,11 +1526,17 @@ namespace SdlDotNet
 			}
 			set
 			{
+				Alphas alphaFlags = Alphas.RleEncoded;
 				if (this.disposed)
 				{
 					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 				}
-				int result = Sdl.SDL_SetAlpha(this.Handle, (int)(Alphas.RleEncoded | Alphas.SourceAlphaBlending), value);
+				if (alphaBlending)
+				{
+					alphaFlags = alphaFlags | Alphas.SourceAlphaBlending;
+				}
+				int result = 
+					Sdl.SDL_SetAlpha(this.Handle, (int)(alphaFlags), value);
 				this.alphaValue = value;
 				GC.KeepAlive(this);
 				if (result != (int) SdlFlag.Success) 
