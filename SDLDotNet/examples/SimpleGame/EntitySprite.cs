@@ -18,80 +18,26 @@
 using System;
 using System.Collections;
 using System.Drawing;
+
 using SdlDotNet;
+using SdlDotNet.Sprites;
 
 namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// Derived class
 	/// </summary>
-	public class EntitySprite
+	public class EntitySprite : Sprite
 	{
-		Surface sprite;
-		Rectangle rect;
 		/// <summary>
 		/// constructor
 		/// </summary>
 		public EntitySprite(Surface screen)
 		{
-			this.sprite = screen.CreateCompatibleSurface(70, 70, true);
-			this.sprite.Fill(Color.FromArgb(0, 255, 128));
-			this.sprite.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
-			this.rect = new Rectangle(0,0,70,70);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public Rectangle Rect
-		{
-			get
-			{
-				return this.rect;
-			}
-			set
-			{
-				this.rect = value;
-			}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public int CenterX
-		{
-			get
-			{
-				return (this.rect.X + this.rect.Width)/2;
-			}
-			set
-			{
-				this.rect.X = (2*value - this.rect.Width)/2;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public int CenterY
-		{
-			get
-			{
-				return (this.rect.Y + this.rect.Height)/2;
-			}
-			set
-			{
-				this.rect.Y = (2*value - this.rect.Height)/2;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Surface Surface
-		{
-			get
-			{
-				return this.sprite;
-			}
+			this.Surface = screen.CreateCompatibleSurface(70, 70, true);
+			this.Surface.Fill(Color.FromArgb(0, 255, 128));
+			this.Surface.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
+			this.Rectangle = new Rectangle(0,0,70,70);
 		}
 	}
 }

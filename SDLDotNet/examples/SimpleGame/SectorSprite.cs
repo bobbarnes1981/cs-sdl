@@ -18,19 +18,19 @@
 using System;
 using System.Collections;
 using System.Drawing;
+
 using SdlDotNet;
+using SdlDotNet.Sprites;
 
 namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// Summary description for Sector.
 	/// </summary>
-	public class SectorSprite
+	public class SectorSprite : Sprite
 	{
 		Sector sector;
-		Rectangle rect;
-		//ArrayList arrayList;
-		Surface sprite;
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -39,9 +39,8 @@ namespace SdlDotNet.Examples
 		public SectorSprite(Surface screen, Sector sector)
 		{
 			this.sector = sector;
-			//this.arrayList = arrayList;
-			this.sprite = screen.CreateCompatibleSurface(128, 128, true);
-			this.sprite.Fill(Color.FromArgb(0, 255, 128));
+			this.Surface = screen.CreateCompatibleSurface(128, 128, true);
+			this.Surface.Fill(Color.FromArgb(0, 255, 128));
 		}
 
 		/// <summary>
@@ -53,10 +52,9 @@ namespace SdlDotNet.Examples
 		public SectorSprite(Surface screen, Sector sector, Rectangle rect)
 		{
 			this.sector = sector;
-			//this.arrayList = arrayList;
-			this.sprite = screen.CreateCompatibleSurface(128, 128, true);
-			this.sprite.Fill(Color.FromArgb(0, 255, 128));
-			this.rect = rect;
+			this.Surface = screen.CreateCompatibleSurface(128, 128, true);
+			this.Surface.Fill(Color.FromArgb(0, 255, 128));
+			this.Rectangle = rect;
 		}
 
 		/// <summary>
@@ -67,61 +65,6 @@ namespace SdlDotNet.Examples
 			get
 			{
 				return this.sector;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Surface Surface
-		{
-			get
-			{
-				return this.sprite;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Rectangle Rect
-		{
-			get
-			{ 
-				return this.rect;
-			}
-			set
-			{
-				this.rect = value;
-			}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public int CenterX
-		{
-			get
-			{
-				return ((this.rect.X) + (this.rect.Width)/2);
-			}
-			set
-			{
-				this.rect.X = (value - this.rect.Width/2);
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public int CenterY
-		{
-			get
-			{
-				return ((this.rect.Y) + (this.rect.Height)/2);
-			}
-			set
-			{
-				this.rect.Y = (value - this.rect.Height/2);
 			}
 		}
 	}

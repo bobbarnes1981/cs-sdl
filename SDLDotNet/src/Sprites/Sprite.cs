@@ -358,6 +358,23 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Center
+		{
+			get
+			{
+				return new Point(((this.X) + (this.Width)/2),
+					((this.Y) + (this.Height)/2));
+			}
+			set
+			{
+				this.X = (value.X - this.Width/2);
+				this.Y = (value.Y - this.Height/2);
+			}
+		}
+
 		private int coordinateZ;
 
 		/// <summary>

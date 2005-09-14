@@ -37,7 +37,8 @@ namespace SdlDotNet.Examples
 			if (CheckInstance() == null)
 			{
 				EventManager eventManager = new EventManager();
-				InputController inputController = new InputController(eventManager);
+				InputController inputController = 
+					new InputController(eventManager);
 				Game game = new Game(eventManager);
 				game.Start();
 				inputController.Run();
