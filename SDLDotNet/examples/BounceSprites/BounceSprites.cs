@@ -94,6 +94,7 @@ namespace SdlDotNet.Examples
 				//Add the sprite to the SpriteCollection
 				master.Add(bounceSprite);
 			}
+
 			//The collection will respond to mouse button clicks, mouse movement and the ticker.
 			master.EnableMouseButtonEvent();
 			master.EnableMouseMotionEvent();

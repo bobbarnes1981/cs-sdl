@@ -20,6 +20,7 @@
 
 using SdlDotNet;
 using SdlDotNet.Sprites;
+using System.Collections;
 using System.Drawing;
 using System.Threading;
 
@@ -42,6 +43,9 @@ namespace SdlDotNet.Examples
 			int sy = (600 - rows * 50) / 2;
 			SurfaceCollection m1 = LoadMarble("marble1");
 			SurfaceCollection m2 = LoadMarble("marble2");
+			Hashtable frames = new Hashtable();
+			frames.Add("marble1", m1);
+			frames.Add("marble2", m2);
 
 			for (int i = 0; i < cols; i++)
 			{
@@ -49,7 +53,7 @@ namespace SdlDotNet.Examples
 				for (int j = 0; j < rows; j++)
 				{
 					Thread.Sleep(10);
-					Sprites.Add(new DragSprite(m1, m2,
+					Sprites.Add(new DragSprite(frames, "marble1",
 						new Point(sx + i * 50, sy + j * 50),
 						new Rectangle(new Point(0, 0), SdlDemo.Size)));
 				}

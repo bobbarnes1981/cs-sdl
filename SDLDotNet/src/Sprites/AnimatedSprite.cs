@@ -17,10 +17,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Sprites;
-using SdlDotNet;
 using System;
+using System.Collections;
 using System.Drawing;
+
+using SdlDotNet;
+using SdlDotNet.Sprites;
 
 namespace SdlDotNet.Sprites
 {
@@ -36,7 +38,28 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite(SurfaceCollection surfaces)
 			: base(surfaces[0])
 		{
-			this.surfaces.Add(surfaces);
+			this.frameCollections["default"] = surfaces;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="frameCollections"></param>
+		public AnimatedSprite(Hashtable frameCollections)
+			: base(((SurfaceCollection)frameCollections[0])[0])
+		{
+			this.frameCollections = frameCollections;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="frameCollections"></param>
+		public AnimatedSprite(Hashtable frameCollections, string frameKey)
+			: base(((SurfaceCollection)frameCollections[0])[0])
+		{
+			this.frameCollections = frameCollections;
+			this.key = frameKey;
 		}
 
 		/// <summary>
@@ -47,7 +70,7 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite(SurfaceCollection surfaces, int frame)
 			: base(surfaces[0])
 		{
-			this.surfaces.Add(surfaces);
+			this.frameCollections["default"] = surfaces;
 			this.frame = frame;
 		}
 
@@ -59,7 +82,7 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite(SurfaceCollection surfaces, Point position)
 			: base(surfaces[0], position)
 		{
-			this.surfaces.Add(surfaces);
+			this.frameCollections["default"] = surfaces;
 		}
 
 		/// <summary>
@@ -70,14 +93,7 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite(SurfaceCollection surfaces, Vector coordinates)
 			: base(surfaces[0], coordinates)
 		{
-			this.surfaces.Add(surfaces);
-		}
-		
-		/// <summary>
-		/// Retrieves the current frame's surface.
-		/// </summary>
-		public override Surface Render(){
-			return this.surfaces[frame];
+			this.frameCollections["default"] = surfaces;
 		}
 
 		/// <summary>
@@ -89,7 +105,7 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite(SurfaceCollection surfaces, int frame, Point position)
 			: base(surfaces[0], position)
 		{
-			this.surfaces = surfaces;
+			this.frameCollections["default"] = surfaces;
 			this.frame = frame;
 		}
 
@@ -102,7 +118,8 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite(SurfaceCollection surfaces, int frame, Vector coordinates)
 			: base(surfaces[0], coordinates)
 		{
-			this.surfaces = surfaces;
+			//this.surfaces = surfaces;
+			this.frameCollections["default"] = surfaces;
 			this.frame = frame;
 		}
 
@@ -126,6 +143,47 @@ namespace SdlDotNet.Sprites
 				}
 				return surfaces;
 			}
+		}
+
+		Hashtable frameCollections = new Hashtable();
+		string key = "default";
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string FrameCollectionKey
+		{
+			get
+			{
+				return key;
+			}
+			set
+			{
+				key = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Hashtable FrameCollections
+		{
+			get
+			{
+				return frameCollections;
+			}
+			set
+			{
+				frameCollections = value;
+			}
+		}
+
+		/// <summary>
+		/// Retrieves the current frame's surface.
+		/// </summary>
+		public override Surface Render()
+		{
+			return ((SurfaceCollection)this.frameCollections[key])[frame];
 		}
 
 		/// <summary>
@@ -158,13 +216,46 @@ namespace SdlDotNet.Sprites
 				}
 				else
 				{
-					return surfaces.Count;
+					return ((SurfaceCollection)this.frameCollections[key]).Count;
 				}
 			}
 		}
 		#endregion
 
 		#region Properties
+		bool loop = true;
+
+		/// <summary>
+		/// If true, the animation will loop.
+		/// </summary>
+		public bool Loop
+		{
+			get
+			{
+				return loop;
+			}
+			set
+			{
+				loop = value;
+			}
+		}
+
+		bool animate = true;
+
+		/// <summary>
+		/// If true, sprite will be animated
+		/// </summary>
+		public bool Animate
+		{
+			get
+			{
+				return animate;
+			}
+			set
+			{
+				animate = value;
+			}
+		}
 		#endregion
 
 		private bool disposed;

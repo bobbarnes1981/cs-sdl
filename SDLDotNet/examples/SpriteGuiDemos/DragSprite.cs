@@ -22,6 +22,7 @@ using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Drawing;
+using System.Collections;
 using System.Globalization;
 
 namespace SdlDotNet.Examples
@@ -31,23 +32,20 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class DragSprite : BoundedSprite
 	{
-		private SurfaceCollection d1;
-		private SurfaceCollection d2;
-
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d1"></param>
-		/// <param name="d2"></param>
+		/// <param name="frames"></param>
+		/// <param name="key"></param>
 		/// <param name="coordinates"></param>
 		/// <param name="bounds"></param>
-		public DragSprite(SurfaceCollection d1, SurfaceCollection d2, Point coordinates,
+		public DragSprite(Hashtable frames, string key, Point coordinates,
 			Rectangle bounds)
-			: base(d1, bounds, new Vector(coordinates))
+			: base((SurfaceCollection)frames[key], bounds, new Vector(coordinates))
 		{
-			this.d1 = d1;
-			this.d2 = d2;
-			this.Size = d1.Size;
+			this.FrameCollections = frames;
+			this.FrameCollectionKey = key;
+			this.Size = ((SurfaceCollection)frames[key]).Size;
 			this.AllowDrag = true;
 		}
 
@@ -75,15 +73,13 @@ namespace SdlDotNet.Examples
 				{
 					this.Z += 100;
 					this.BeingDragged = true;
-					this.Surfaces.Clear();
-					this.Surfaces.Add(d2);		
+					this.FrameCollectionKey = "marble2";	
 				}
 				else
 				{
 					this.Z -= 100;
 					this.BeingDragged = false;
-					this.Surfaces.Clear();
-					this.Surfaces.Add(d1);	
+					this.FrameCollectionKey = "marble1";
 				}
 			}
 		}
@@ -107,28 +103,6 @@ namespace SdlDotNet.Examples
 			}
 		}
 		#endregion
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool IsMouseMotionLocked
-		{
-			get
-			{
-				return this.BeingDragged;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool IsMouseButtonLocked
-		{
-			get
-			{
-				return true;
-			}
-		}
 
 		private bool disposed;
 
