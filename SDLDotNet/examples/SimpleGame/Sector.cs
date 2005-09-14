@@ -35,7 +35,6 @@ namespace SdlDotNet.Examples
 		/// <param name="eventManager"></param>
 		public Sector(EventManager eventManager)
 		{
-			//this.eventManager = eventManager;
 			this.neighbors = new Sector[4];
 		}
 

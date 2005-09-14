@@ -81,20 +81,6 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public delegate void TickEventHandler(object sender, TickEventArgs e);
-		/// <summary>
-		/// 
-		/// </summary>
-		public event TickEventHandler OnTickEvent;
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public event QuitEventHandler OnQuitEvent;
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="obj"></param>
 		public void Publish(Object obj)
 		{
@@ -104,14 +90,6 @@ namespace SdlDotNet.Examples
 				{
 					LogFile.WriteLine("EventManager has received GameStatus event");
 					OnGameStatusEvent(this, (GameStatusEventArgs) obj);
-				}
-			}
-			else if (obj.GetType().Name == "QuitEventArgs")
-			{
-				if (OnQuitEvent != null) 
-				{
-					LogFile.WriteLine("EventManager has received Quit event");
-					OnQuitEvent(this, (SdlDotNet.QuitEventArgs) obj);
 				}
 			}
 			else if (obj.GetType().Name == "EntityMoveRequestEventArgs")
@@ -129,15 +107,7 @@ namespace SdlDotNet.Examples
 					LogFile.WriteLine("EventManager has received a MapBuilt event");
 					OnMapBuiltEvent(this, (MapBuiltEventArgs) obj);
 				}
-			}
-			else if (obj.GetType().Name == "TickEventArgs")
-			{
-				if (OnTickEvent != null) 
-				{
-					//LogFile.Instance.WriteLine("EventManager has received a Tick event");
-					OnTickEvent(this, (TickEventArgs) obj);
-				}
-			}		
+			}	
 			else if (obj.GetType().Name == "EntityMoveEventArgs")
 			{
 				if (OnEntityMoveEvent != null) 
@@ -155,8 +125,5 @@ namespace SdlDotNet.Examples
 				}
 			}
 		}
-
 	}
 }
-
-

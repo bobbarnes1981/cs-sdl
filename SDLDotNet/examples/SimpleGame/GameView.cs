@@ -45,10 +45,9 @@ namespace SdlDotNet.Examples
 			eventManager.OnMapBuiltEvent += new EventManager.MapBuiltEventHandler(Subscribe);
 			eventManager.OnEntityPlaceEvent += new EventManager.EntityPlaceEventHandler(Subscribe);
 			eventManager.OnEntityMoveEvent += new EventManager.EntityMoveEventHandler(Subscribe);
-			eventManager.OnTickEvent += new EventManager.TickEventHandler(Subscribe);
+			Events.Tick +=new TickEventHandler(this.Tick);
 			this.width = 424;
 			this.height = 440;
-			//this.names = Names.Instance;
 			this.backSprites = new ArrayList();
 			this.frontSprites = new ArrayList();
 			try
@@ -71,9 +70,8 @@ namespace SdlDotNet.Examples
 			int y = 10;
 			int width = 128;
 			int height = 128;
-			
 			int i = 0;
-			//for (int i=0; i < 9; i++)
+
 			foreach (Sector sec in map.GetSectors())
 			{
 				if (i < 3)
@@ -204,17 +202,6 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="eventManager"></param>
-		/// <param name="e"></param>
-		void Subscribe(object eventManager, TickEventArgs e)
-		{
-			//LogFile.WriteLine("GameView received a Tick event");
-			UpdateView();
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="sector"></param>
 		/// <returns></returns>
 		public SectorSprite GetSectorSprite(Sector sector)
@@ -228,6 +215,12 @@ namespace SdlDotNet.Examples
 				}
 			}
 			return sectSprite;
+		}
+
+		private void Tick(object sender, TickEventArgs e)
+		{
+			LogFile.WriteLine("GameView received a Tick event");
+			UpdateView();
 		}
 	}
 }

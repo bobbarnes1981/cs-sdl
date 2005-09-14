@@ -48,7 +48,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class InputController
 	{
-		bool quitFlag;
+		//bool quitFlag;
 
 		EventManager eventManager;
 		/// <summary>
@@ -57,21 +57,7 @@ namespace SdlDotNet.Examples
 		public InputController(EventManager eventManager)
 		{
 			this.eventManager = eventManager;
-			this.eventManager.OnQuitEvent += new QuitEventHandler(Subscribe);
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown); 
-			Events.Quit += new QuitEventHandler(this.Quit);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="eventManager"></param>
-		/// <param name="e"></param>
-		private void Subscribe(object eventManager, QuitEventArgs e)
-		{
-			LogFile.WriteLine("InputController received a Quit event");
-			Events.QuitApplication();
-			//quitFlag = true;
 		}
 
 		/// <summary>
@@ -83,7 +69,7 @@ namespace SdlDotNet.Examples
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
-				eventManager.Publish(new QuitEventArgs());
+				Events.QuitApplication();
 			}
 			else if (e.Key == Key.UpArrow)
 			{
@@ -103,37 +89,12 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void Quit(object sender, QuitEventArgs e) 
-		{
-			eventManager.Publish(new QuitEventArgs());
-		}
 		/// <summary>
 		/// 
 		/// </summary>
 		public void Run()
 		{
-			try 
-			{
-				while (!quitFlag) 
-				{
-					while (Events.Poll()) 
-					{
-						// handle events till the queue is empty
-					} 
-					
-					try 
-					{
-						eventManager.Publish(new TickEventArgs(3,2,30));
-					} 
-					catch (SurfaceLostException) 
-					{
-					}
-				}
-			} 
-			catch 
-			{
-				throw; // for this example we'll just throw it to the debugger
-			}
+			Events.Run();
 		}
 	}
 }

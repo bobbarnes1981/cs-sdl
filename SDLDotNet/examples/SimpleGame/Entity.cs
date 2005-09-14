@@ -38,11 +38,6 @@ namespace SdlDotNet.Examples
 			this.eventManager = eventManager;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="eventManager"></param>
-		/// <param name="e"></param>
 		private void Subscribe(object eventManager, GameStatusEventArgs e)
 		{
 			LogFile.WriteLine("Entity received a GameStatus event: " + e.GameStatus);
@@ -52,11 +47,6 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="eventManager"></param>
-		/// <param name="e"></param>
 		private void Subscribe(object eventManager, EntityMoveRequestEventArgs e)
 		{
 			LogFile.WriteLine("Entity received a EntityMoveRequest event: " + e.Direction);
