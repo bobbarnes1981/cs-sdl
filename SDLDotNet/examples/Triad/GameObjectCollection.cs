@@ -78,10 +78,12 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// Adds the elements of another GameObjectCollection to the end of this GameObjectCollection.
+		/// Adds the elements of another GameObjectCollection 
+		/// to the end of this GameObjectCollection.
 		/// </summary>
 		/// <param name="items">
-		/// The GameObjectCollection whose elements are to be added to the end of this GameObjectCollection.
+		/// The GameObjectCollection whose elements are to be 
+		/// added to the end of this GameObjectCollection.
 		/// </param>
 		public void AddRange(GameObjectCollection items)
 		{

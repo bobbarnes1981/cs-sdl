@@ -29,7 +29,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public abstract class  GameObject
 	{
-		private GameObject _Parent;
+		private GameObject parent;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -37,15 +37,15 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _Parent;
+				return parent;
 			}
 			set
 			{
-				_Parent = value;				
+				parent = value;				
 			}
 		}
 	
-		private int  _X;
+		private int  x;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -53,11 +53,11 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _X;
+				return x;
 			}
 			set
 			{
-				_X = value;				
+				x = value;				
 			}
 		}
 
@@ -68,10 +68,10 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				int x = this._X;
-				if(this._Parent != null)
+				int x = this.x;
+				if(this.parent != null)
 				{
-					x += this._Parent.ScreenX;
+					x += this.parent.ScreenX;
 				}
 				return x;
 			}
@@ -84,16 +84,16 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				int y = this._Y;
-				if(this._Parent != null)
+				int y = this.y;
+				if(this.parent != null)
 				{
-					y += this._Parent.ScreenY;
+					y += this.parent.ScreenY;
 				}
 				return y;
 			}
 		}
 	
-		private int  _Y;
+		private int  y;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -101,15 +101,15 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _Y;
+				return y;
 			}
 			set
 			{
-				_Y = value;				
+				y = value;				
 			}
 		}
 
-		private int  _Width;
+		private int  width;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -117,20 +117,20 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _Width;
+				return width;
 			}
 			set
 			{
-				if(_Width <= 0)
+				if(width <= 0)
 				{
 					throw new GameException("Width is set to zero or negative value.");
 				}
 
-				_Width = value;				
+				width = value;				
 			}
 		}
 
-		private int  _Height;
+		private int  height;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -138,7 +138,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _Height;
+				return height;
 			}
 			set
 			{
@@ -147,11 +147,10 @@ namespace SdlDotNet.Examples
 					throw new GameException("Height is set to zero or negative value.");
 				}
 
-				_Height = value;				
+				height = value;				
 			}
 		}
 	
-		//private int _X2;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -159,11 +158,10 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _X + _Width;
+				return x + width;
 			}
 		}
 	
-		//private int _Y2;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -171,21 +169,21 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _Y + _Height;
+				return y + height;
 			}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public int  ScreenX2
+		public int ScreenX2
 		{
 			get
 			{
 				int offSetX = 0;
-				if(this._Parent != null)
+				if(this.parent != null)
 				{
-					offSetX = this._Parent.ScreenX;
+					offSetX = this.parent.ScreenX;
 				}
 				return this.X2 + offSetX;
 			}
@@ -194,21 +192,21 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public int  ScreenY2
+		public int ScreenY2
 		{
 			get
 			{
 				int offSetY = 0;
-				if(this._Parent != null)
+				if (this.parent != null)
 				{
-					offSetY = this._Parent.ScreenY;
+					offSetY = this.parent.ScreenY;
 				}
-				return _Y + _Height + offSetY;
+				return y + height + offSetY;
 			}
 		}
 		
-		int _previousWidth;
-		int _previousHeight;
+		int previousWidth;
+		int previousHeight;
 		Size currentSize;
 		/// <summary>
 		/// 
@@ -217,20 +215,20 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				if((_previousWidth != _Width )||(_previousHeight != _Height))
+				if((previousWidth != width )||(previousHeight != height))
 				{
-					currentSize = new Size(_Width,_Height);					
+					currentSize = new Size(width, height);					
 				}
 
-				_previousWidth = _Width;
-				_previousHeight = _Height;
+				previousWidth = width;
+				previousHeight = height;
 
 				return currentSize;
 			}
 			set
 			{
-				this._Width = value.Width;
-				this._Height = value.Height;
+				this.width = value.Width;
+				this.height = value.Height;
 			}
 		}
 
@@ -279,12 +277,12 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return new Point(_X,_Y);
+				return new Point(x, y);
 			}
 			set
 			{	
-				_X = value.X;
-				_Y = value.Y;
+				this.x = value.X;
+				this.y = value.Y;
 			}
 		}
 
@@ -295,7 +293,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return new Point(this.ScreenX,ScreenY);
+				return new Point(this.ScreenX, this.ScreenY);
 			}
 		}
 

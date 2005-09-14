@@ -33,7 +33,7 @@ namespace SdlDotNet.Examples
 		Triad triad;
 		BlockCollection blockList = new BlockCollection();
 		int delayFactor = 400;
-		private float _SpeedFactor = 1.0f;
+		private float speedFactor = 1.0f;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -41,7 +41,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _SpeedFactor;
+				return speedFactor;
 			}
 			set
 			{
@@ -51,7 +51,7 @@ namespace SdlDotNet.Examples
 				}
 
 				this.delayFactor = (int)(this.delayFactor / value);
-				_SpeedFactor = value;				
+				speedFactor = value;				
 			}
 		}
 
@@ -220,8 +220,7 @@ namespace SdlDotNet.Examples
 						this.hitBottomSound.Play();
 						markBlocks(triad);
 						RemoveObject(triad);
-						//triad.Dispose();
-						triad=null;
+						triad = null;
 						currentState = BlockGridState.MarkBlocksToDestroy;
 					}
 					
@@ -337,7 +336,6 @@ namespace SdlDotNet.Examples
 					}   
 				}
 			}
-
 		}
 
 		void removeEmptySpacesInGrid()
@@ -599,7 +597,8 @@ namespace SdlDotNet.Examples
 						gameIsPaused = !gameIsPaused;
 						break;
 					default:
-						System.Diagnostics.Debug.WriteLine("Key not handled: " + args.Key.ToString());
+						System.Diagnostics.Debug.WriteLine("Key not handled: " + 
+							args.Key.ToString());
 						break;
 				}		
 			}
@@ -619,21 +618,6 @@ namespace SdlDotNet.Examples
 			moveTriadLeft = false;
 		}
 
-		//		void drawGrid(Surface surface)
-		//		{
-		//			Point location;
-		//			for(int row=0; row<sizeOfGrid.Height;  row++)
-		//			{
-		//				for(int col=0;  col<sizeOfGrid.Width;  col++)
-		//				{
-		//					location = new Point(col*Block.BlockWidth+ this.Location.X,row*Block.BlockWidth +this.Location.Y);
-		//					Utils.DrawRect(surface,location,Block.BlockSize,Color.SlateGray);
-		//				}
-		//			}
-		//
-		//			Utils.DrawRect(surface,this.Location,this.Size,Color.Silver);
-		//		}
-
 		Surface gameOverImage;
 		/// <summary>
 		/// 
@@ -641,7 +625,6 @@ namespace SdlDotNet.Examples
 		/// <param name="surface"></param>
 		protected override void DrawGameObject(Surface surface)
 		{
-			//drawGrid(surface);
 			this.DrawGameObjects(surface);
 
 			if(gameIsPaused)

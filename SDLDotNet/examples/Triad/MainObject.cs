@@ -27,8 +27,6 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	class MainObject : IDisposable
 	{
-		private bool quitflag;
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -38,6 +36,8 @@ namespace SdlDotNet.Examples
 		
 		BlockGrid grid;
 		Scoreboard board;
+		Surface screen;
+		Surface surf;
 		
 		Sound levelUpSound;
 
@@ -51,10 +51,10 @@ namespace SdlDotNet.Examples
 			
 			Video.WindowCaption = "SdlDotNet - Triad";
 			Events.KeyboardDown += 
-				new KeyboardEventHandler(this.SDL_KeyboardDown); 
+				new KeyboardEventHandler(this.KeyboardDown); 
 			Events.KeyboardUp += 
-				new KeyboardEventHandler(this.SDL_KeyboardUp); 
-			Events.Quit += new QuitEventHandler(this.SDL_Quit);
+				new KeyboardEventHandler(this.KeyboardUp); 
+			Events.Tick += new TickEventHandler(Tick);
 
 			board = new Scoreboard();
 			board.X = 600;
@@ -63,40 +63,18 @@ namespace SdlDotNet.Examples
 
 			try 
 			{
-				Surface screen = 
+				screen = 
 					Video.SetVideoModeWindow(width, height, true);
-				Surface surf = 
+				surf = 
 					screen.CreateCompatibleSurface(width, height, true);
 				surf.Fill(
 					new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
-//				Rectangle screenRec = 
-//					new Rectangle(0,0,screen.Width,screen.Height);
-
 				grid = new BlockGrid(new Point(20,20),new Size(11,13));
 				grid.BlocksDestroyed += 
 					new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
 
 				levelUpSound = Mixer.Sound("../../Data/levelup.wav");
-				
-				while (!quitflag) 
-				{
-					while (Events.Poll()) {} 
-
-					//Clear and draw the space for the grid...
-					surf.Fill(grid.Rectangle, Color.Black); 
-					grid.Update();
-					grid.Draw(surf);
-				
-					//Clear and draw the space for the score board...
-					surf.Fill(board.Rectangle, Color.Black); 
-					board.Update();
-					board.Draw(surf);
-
-					//Blit the grid and the board to the screen surface...
-					screen.Blit(surf, board.Rectangle);
-					screen.Blit(surf, grid.Rectangle);	
-					screen.Flip();
-				}
+				Events.Run();
 			} 
 			catch 
 			{
@@ -104,23 +82,18 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void SDL_KeyboardDown(object sender, KeyboardEventArgs e) 
+		private void KeyboardDown(object sender, KeyboardEventArgs e) 
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
-				quitflag = true;
+				Events.QuitApplication();
 			}
 			grid.HandleSdlKeyDownEvent(e);
 		}
 
-		private void SDL_KeyboardUp(object sender, KeyboardEventArgs e) 
+		private void KeyboardUp(object sender, KeyboardEventArgs e) 
 		{
 			grid.HandleSdlKeyUpEvent(e);
-		}
-
-		private void SDL_Quit(object sender, QuitEventArgs e) 
-		{
-			quitflag = true;
 		}
 
 		[STAThread]
@@ -165,5 +138,23 @@ namespace SdlDotNet.Examples
 		}
 
 		#endregion
+
+		private void Tick(object sender, TickEventArgs e)
+		{
+			//Clear and draw the space for the grid...
+			surf.Fill(grid.Rectangle, Color.Black); 
+			grid.Update();
+			grid.Draw(surf);
+				
+			//Clear and draw the space for the score board...
+			surf.Fill(board.Rectangle, Color.Black); 
+			board.Update();
+			board.Draw(surf);
+
+			//Blit the grid and the board to the screen surface...
+			screen.Blit(surf, board.Rectangle);
+			screen.Blit(surf, grid.Rectangle);	
+			screen.Flip();
+		}
 	}
 }

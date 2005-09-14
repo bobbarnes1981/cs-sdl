@@ -36,6 +36,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public readonly static Size BlockSize = 
 			new System.Drawing.Size(BlockWidth,BlockWidth);
+
 		BlockType blockType;
 		/// <summary>
 		/// 
@@ -53,6 +54,7 @@ namespace SdlDotNet.Examples
 			}
 
 		}
+
 		static Random random;
 
 		/// <summary>
@@ -62,7 +64,7 @@ namespace SdlDotNet.Examples
 		{
 			this.Size = BlockSize;
 
-			if(random==null)
+			if (random==null)
 			{
 				random = new Random(DateTime.Now.Millisecond);
 			}
@@ -70,7 +72,7 @@ namespace SdlDotNet.Examples
 			blockType = (BlockType)random.Next(5);
 		}
 
-		private int _GridX;
+		private int gridX;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -78,15 +80,15 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _GridX;
+				return gridX;
 			}
 			set
 			{
-				_GridX = value;				
+				gridX = value;				
 			}
 		}
 	
-		private int _GridY;
+		private int gridY;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -94,11 +96,11 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _GridY;
+				return gridY;
 			}
 			set
 			{
-				_GridY = value;				
+				gridY = value;				
 			}
 		}
 
@@ -109,12 +111,12 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return new Point(_GridX,_GridY);
+				return new Point(gridX,gridY);
 			}
 			set
 			{
-				_GridX = value.X;
-				_GridY = value.Y;
+				gridX = value.X;
+				gridY = value.Y;
 			}
 
 		}
@@ -137,63 +139,61 @@ namespace SdlDotNet.Examples
 		}
 	
 		static Surface redBlock;
+
 		Surface getRedBlock()
 		{
-			if(redBlock==null)
+			if (redBlock == null)
 			{
 				Bitmap bmp = new System.Drawing.Bitmap("../../Data/redBlock.bmp");
 				redBlock = new Surface(bmp);
 			}
-
 			return redBlock;
 		}
 
 		static Surface whiteBlock;
+
 		Surface getWhiteBlock()
 		{
-			if(whiteBlock==null)
+			if (whiteBlock == null)
 			{
 				Bitmap bmp = new System.Drawing.Bitmap("../../Data/whiteBlock.bmp");
 				whiteBlock = new Surface(bmp);
 			}
-
 			return whiteBlock;
 		}
 		
-
 		static Surface yellowBlock;
+
 		Surface getYellowBlock()
 		{
-			if(yellowBlock==null)
+			if (yellowBlock == null)
 			{
 				Bitmap bmp = new System.Drawing.Bitmap("../../Data/yellowBlock.bmp");
 				yellowBlock = new Surface(bmp);
 			}
-
 			return yellowBlock;
 		}
 
 		static Surface purpleBlock;
+
 		Surface getPurpleBlock()
 		{
-			if(purpleBlock==null)
+			if (purpleBlock == null)
 			{
 				Bitmap bmp = new System.Drawing.Bitmap("../../Data/purpleBlock.bmp");
 				purpleBlock = new Surface(bmp);
 			}
-
 			return purpleBlock;
 		}
 
 		static Surface blueBlock;
 		Surface getBlueBlock()
 		{
-			if(blueBlock==null)
+			if (blueBlock == null)
 			{
 				Bitmap bmp = new System.Drawing.Bitmap("../../Data/blueBlock.bmp");
 				blueBlock = new Surface(bmp);
 			}
-
 			return blueBlock;
 		}
 
@@ -215,13 +215,12 @@ namespace SdlDotNet.Examples
 				default: image = this.getBlueBlock(); break;
 			}
 
-			if(!this.Destroy)
+			if (!this.Destroy)
 			{
 				if(image != null)
 				{
 					surface.Blit(image,this.ScreenRectangle);	
 				}
-				//surface.FillRect(this.ScreenRectangle, currentColor);
 			}
 			else
 			{
