@@ -1081,6 +1081,40 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Blits a sprite onto the current surface.
+		/// </summary>
+		/// <param name="sprite">The sprite to blit.</param>
+		/// <returns>A rectangle describing the location of the updated surface.</returns>
+		public Rectangle Blit(Sprite sprite, Point destinationPosition)
+		{
+			if(sprite.Visible)
+			{
+				return this.Blit(sprite.Render(), destinationPosition);
+			}
+			else
+			{
+				return new Rectangle();
+			}
+		}
+
+		/// <summary>
+		/// Blits a sprite onto the current surface.
+		/// </summary>
+		/// <param name="sprite">The sprite to blit.</param>
+		/// <returns>A rectangle describing the location of the updated surface.</returns>
+		public Rectangle Blit(Sprite sprite, Rectangle destinationRectangle)
+		{
+			if(sprite.Visible)
+			{
+				return this.Blit(sprite.Render(), destinationRectangle);
+			}
+			else
+			{
+				return new Rectangle();
+			}
+		}
+
+		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="spriteCollection"></param>

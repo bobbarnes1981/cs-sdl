@@ -1,1099 +1,333 @@
-<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"
-	xmlns="http://www.w3.org/TR/REC-html40">
-	<head>
-		<title>Using Sprites in SDL</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-		<meta name="ProgId" content="Word.Document">
-		<meta name="Generator" content="Microsoft Word 9">
-		<meta name="Originator" content="Microsoft Word 9">
-		<link rel="File-List" href="./BounceSprites_files/filelist.xml"><!--[if gte mso 9]><xml>
- <o:DocumentProperties>
-  <o:Author>DYYH</o:Author>
-  <o:LastAuthor>DYYH</o:LastAuthor>
-  <o:Revision>5</o:Revision>
-  <o:TotalTime>198</o:TotalTime>
-  <o:Created>2005-05-18T16:59:00Z</o:Created>
-  <o:LastSaved>2005-05-18T17:05:00Z</o:LastSaved>
-  <o:Pages>6</o:Pages>
-  <o:Words>1689</o:Words>
-  <o:Characters>9631</o:Characters>
-  <o:Company>The Capital Group Companies, Inc.</o:Company>
-  <o:Lines>80</o:Lines>
-  <o:Paragraphs>19</o:Paragraphs>
-  <o:CharactersWithSpaces>11827</o:CharactersWithSpaces>
-  <o:Version>9.7616</o:Version>
- </o:DocumentProperties>
-</xml><![endif]--><!--[if gte mso 9]><xml>
- <w:WordDocument>
-  <w:DrawingGridHorizontalSpacing>9.35 pt</w:DrawingGridHorizontalSpacing>
-  <w:DrawingGridVerticalSpacing>6.35 pt</w:DrawingGridVerticalSpacing>
-  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
-  <w:DisplayVerticalDrawingGridEvery>2</w:DisplayVerticalDrawingGridEvery>
-  <w:Compatibility>
-   <w:FootnoteLayoutLikeWW8/>
-   <w:ShapeLayoutLikeWW8/>
-   <w:AlignTablesRowByRow/>
-   <w:ForgetLastTabAlignment/>
-   <w:LayoutRawTableWidth/>
-   <w:LayoutTableRowsApart/>
-  </w:Compatibility>
- </w:WordDocument>
-</xml><![endif]-->
-			<style> <!-- /* Font Definitions */ @font-face {font-family:"Quest Font"; panose-1:2 7 3 9 2 2 5 2 4 4; mso-font-charset:0; mso-generic-font-family:modern; mso-font-pitch:fixed; mso-font-signature:536902279 -2147483648 8 0 511 0;}
-	/* Style Definitions */ p.MsoNormal, li.MsoNormal, div.MsoNormal {mso-style-parent:""; margin:0in; margin-bottom:.0001pt; mso-pagination:widow-orphan; font-size:10.0pt; font-family:"Times New Roman"; mso-fareast-font-family:"Times New Roman";}
-	h1 {mso-style-next:Normal; margin-top:12.0pt; margin-right:0in; margin-bottom:3.0pt; margin-left:0in; mso-pagination:widow-orphan; page-break-after:avoid; mso-outline-level:1; font-size:16.0pt; font-family:Arial; mso-font-kerning:16.0pt;}
-	h2 {mso-style-next:Normal; margin:0in; margin-bottom:.0001pt; mso-pagination:widow-orphan; page-break-after:avoid; mso-outline-level:2; font-size:12.0pt; mso-bidi-font-size:10.0pt; font-family:"Times New Roman";}
-	p.MsoBodyText, li.MsoBodyText, div.MsoBodyText {margin:0in; margin-bottom:.0001pt; mso-pagination:widow-orphan; font-size:12.0pt; mso-bidi-font-size:10.0pt; font-family:"Times New Roman"; mso-fareast-font-family:"Times New Roman";}
-	/* Page Definitions */ @page {mso-facing-pages:yes;}
-	@page Section1 {size:8.5in 11.0in; margin:1.0in 1.0in 1.0in 1.0in; mso-header-margin:0in; mso-footer-margin:1.0in; mso-title-page:yes; mso-paper-source:0;}
-	div.Section1 {page:Section1;}
-	--> 
-	</style>
-	</head>
-	<body lang="EN-US" style='tab-interval:.5in'>
-		<div class="Section1">
-			<h1 align="center" style='TEXT-ALIGN:center'>Using Sprites in SDL.NET</h1>
-			<p class="MsoNormal"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>A
-tutorial by David Hudson (jendave at yahoo dot com)<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><b><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>Introduction:<o:p></o:p></span></b></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>At
-the simplest level, sprite is a 2D object that can be shown on and moved around
-the screen. Each sprite has a </span><span style="FONT-SIZE:12pt;FONT-FAMILY:'Courier New';mso-bidi-font-size:10.0pt;mso-bidi-font-family:'Times New Roman'">Surface</span><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'> and a </span><span style="FONT-SIZE:12pt;FONT-FAMILY:'Courier New';mso-bidi-font-size:10.0pt;mso-bidi-font-family:'Times New Roman'">Rectangle</span><span style='FONT-SIZE:
-12pt;mso-bidi-font-size:
-10.0pt'> to define what the sprite looks like and
-where it is located.<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>This
-tutorial will provide some insight into creating sprites, displaying them and
-having them respond to input events such as the mouse or keyboard.<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<h2>Sprite Class</h2>
-			<p class="MsoNormal"><b><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></b></p>
-			<p class="MsoBodyText">The sprite class consists of a
-				<span style="FONT-FAMILY:
-'Courier New'; mso-bidi-font-family:
-'Times New Roman'">Surface</span>
-				and a
-				<span style="FONT-FAMILY:'Courier New'; mso-bidi-font-family:'Times New Roman'">Rectangle</span>. 
-				The
-				<span style="FONT-FAMILY:'Courier New'; mso-bidi-font-family:'Times New Roman'">Surface</span>
-				object is displayed when the
-				<span style="FONT-FAMILY:'Courier New'">Sprite</span>
-				is Blitted to the screen. The
-				<span style="FONT-FAMILY:'Courier New'; mso-bidi-font-family:'Times New Roman'">Surface</span>
-				can consist of a graphic image, a rendered text string or a primitive for 
-				example.</p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>The
-rectangle is used to show what part of the </span><span style="FONT-SIZE:12pt;
-FONT-FAMILY:'Courier New';
-mso-bidi-font-size:10.0pt">Surface</span><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'> should be displayed.
-Typically, the rectangle should encompass the entire surface, but there may be
-reasons that the rectangle differs from the size of the surface. For example if
-the Surface actually consists of multiple images to be used for animation, the rectangle
-can be used to mark which part of the image is to be currently displayed.<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>The
-Sprite class has virtual </span><span style="FONT-SIZE:12pt;FONT-FAMILY:'Courier New';mso-bidi-font-size:10.0pt;mso-bidi-font-family:'Times New Roman'">Update()</span><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'> methods which are to be
-overridden by inheriting classes. These methods, used in conjunction with
-SpriteCollections will update the Sprite’s position and/or Surface when input
-events such as mouse button presses, mouse motion, keyboard presses occur.<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>The
-</span><span style="FONT-SIZE:12pt;FONT-FAMILY:'Courier New';mso-bidi-font-size:10.0pt;mso-bidi-font-family:'Times New Roman'">Render()</span><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'> method is provided to
-perform an action on a Surface before it is Blit to the Screen. In the Sprite
-class, the Render() method simply returns the Surface. In an inherited class,
-however, this method is often overridden to perform a task on the surface
-before it is </span><span style="FONT-SIZE:12pt;FONT-FAMILY:'Courier New';mso-bidi-font-size:10.0pt">Blit</span><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>. For example, when a text string may need to be converted to a Surface
-before it is </span><span style="FONT-SIZE:12pt;FONT-FAMILY:'Courier New';mso-bidi-font-size:10.0pt">Blit </span><span style='FONT-SIZE:12pt;
-mso-bidi-font-size:10.0pt'>to the screen. The Render() method can be overridden
-to do that.<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>The
-are some other properties of a Sprite:<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<table border="1" cellspacing="0" cellpadding="0" style='BORDER-RIGHT:medium none; BORDER-TOP:medium none; MARGIN-LEFT:5.4pt; BORDER-LEFT:medium none; BORDER-BOTTOM:medium none; BORDER-COLLAPSE:collapse; mso-border-alt:solid windowtext .5pt; mso-padding-alt:0in 5.4pt 0in 5.4pt'>
-				<tr style='HEIGHT:31.1pt'>
-					<td width="251" valign="top" height="41">
-						<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>AllowDrag
-  (bool)<o:p></o:p></span></p>
-						<p class="MsoNormal"><![if !supportEmptyParas]><![endif]>&nbsp;<span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><o:p></o:p>
-							</span></p>
-					</td>
-					<td width="248" valign="top" height="41">
-						<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>Can
-  the sprite be dragged (usually with the mouse)?<o:p></o:p></span></p>
-						<p class="MsoNormal"><![if !supportEmptyParas]><![endif]>&nbsp;<span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><o:p></o:p>
-							</span></p>
-					</td>
-				</tr>
-				<tr style='HEIGHT:33.7pt'>
-					<td width="251" valign="top" height="45">
-						<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>Visible
-  (bool)<o:p></o:p></span></p>
-					</td>
-					<td width="248" valign="top" height="45">
-						<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>Is
-  the Sprite supposed to visible on the screen?<o:p></o:p></span></p>
-					</td>
-				</tr>
-				<tr style='HEIGHT:30.9pt'>
-					<td width="251" valign="top" height="41">
-						<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>BeingDragged
-  (bool)<o:p></o:p></span></p>
-					</td>
-					<td width="248" valign="top" height="41">
-						<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>Is
-  the Sprite currently being dragged?<o:p></o:p></span></p>
-					</td>
-				</tr>
-			</table>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>The
-Sprite class itself does not do much; its Update()<span style="mso-spacerun:
-yes">&nbsp; </span>methods are empty. The Sprite class is really meant to be
-extended with its Update() methods overridden by new logic. The BounceSprite class
-has overridden Update methods that determine what happens when a mouse button,
-mouse motion or tick event happens.<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>Some
-classes extended from Sprite are included in SDL.NET. The TextSprite displays
-text rendered as a sprite. The AnimatedSprite provides a basis for displaying
-multiple surfaces over time to create the animation.<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<h2>SpriteCollection class</h2>
-			<p class="MsoNormal"><b><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></b></p>
-			<p class="MsoBodyText">The SpriteCollection&nbsp;class is a strongly-typed collection 
-				that helps aggregate sprites and execute events on them.</p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>Besides
-having methods for adding, removing and accessing the Sprites in the
-collection, SpriteCollection has methods for enabling events on the Sprites it
-contains. For example, the SpriteCollection.EnableMouseButtonEvent() allows all
-the sprites in the collection to respond to mouse button clicks. Once the event
-is fired, the SpriteCollection passes the event and EventArgs to each sprite. <o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">private</span><span style="FONT-FAMILY:'Quest Font'"> <span style='COLOR:blue'>void</span> Update(<span style='COLOR:blue'>object</span> sender, MouseButtonEventArgs e)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>for</span> (<span style='COLOR:blue'>int</span> i = 0; i
-&lt; <span style='COLOR:blue'>this</span>.Count; i++)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>[i].Update(e);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}</span><span style='FONT-SIZE:12pt;
-mso-bidi-font-size:10.0pt'><o:p></o:p>
-				</span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'>The 
-sprite can then decide how to respond. Usually, the sprite will have logic to 
-check if the mouse click happened on which sprite. For example:<![if !supportEmptyParas]><![endif]></span></p>
-<P class=MsoNormal><SPAN 
-style="FONT-SIZE: 12pt; mso-bidi-font-size: 10.0pt"></SPAN>&nbsp;</P>
-<P class=MsoNormal><SPAN 
-style="FONT-SIZE: 12pt; mso-bidi-font-size: 10.0pt"></SPAN><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><o:p><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="COLOR: blue">public</SPAN> <SPAN style="COLOR: blue">override</SPAN> 
-<SPAN style="COLOR: blue">void</SPAN> Update(MouseButtonEventArgs args)</SPAN></o:p></SPAN></P>
-<P class=MsoNormal><SPAN style="FONT-FAMILY: 'Quest Font'">
-<o:p><SPAN 
-style="FONT-FAMILY: 'Quest Font'"></SPAN><SPAN 
-style="FONT-FAMILY: 'Quest Font'">{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: blue">if</SPAN> (<SPAN 
-style="COLOR: blue">this</SPAN>.IntersectsWith(<SPAN 
-style="COLOR: blue">new</SPAN> Point(args.X, args.Y)))
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: green">// If we are being held down, pick up the 
-marble
-<o:p></o:p></SPAN></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: blue">if</SPAN> (args.ButtonPressed)
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: blue">if</SPAN> (args.Button == 
-MouseButton.PrimaryButton)
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: blue">this</SPAN>.BeingDragged =    <SPAN 
-style="COLOR: blue">true</SPAN>;
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: blue">else
-<o:p></o:p></SPAN></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: blue">this</SPAN>.Kill();
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: blue">else
-<o:p></o:p></SPAN></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: blue">this</SPAN>.BeingDragged =    <SPAN 
-style="COLOR: blue">false</SPAN>;
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="MARGIN-RIGHT: -89.5pt"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp; </SPAN>}</SPAN></P>
-<P class=MsoNormal style="MARGIN-RIGHT: -89.5pt"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"></SPAN></o:p></SPAN></P>
-			<p class="MsoBodyText">If you click on the spirte with the primary mouse button, 
-				you can drag the sprite. If you click on it 
-				with the secondary button, it will remove the sprite from the screen and the 
-				SpriteCollection.</p>
-<P class=MsoBodyText>&nbsp;</P>
-<P class=MsoBodyText>SpriteCollections can be used to categorize sprites into 
-logical groups. A program may have SpriteCollection for the player’s spaceship 
-and another collection for the enemies. Another SpriteCollection could contain 
-only those sprites that are close to the player’s ship to do faster collision 
-detection.</P>
-			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoBodyText"><b>SpriteContainer<o:p></o:p></b></p>
-			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoBodyText">SpriteContainer extends from Sprite and includes a field 
-				that holds a SpriteCollection. The Render() method has been overridden to 
-				Blit() the Sprites contained in the collection to the SpriteContainer’s Surface 
-				before rendering it to the screen.
-			</p>
-			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoBodyText">This class is particularly useful if the app wants to have a 
-				sprite that contains other Sprites and move the SpriteContainer as a whole. Gui 
-				windows are a good example of this. Take a look at the SpriteGuiDemo and the 
-				GuiExample included in the SDL.NET source to see how this works.</p>
-			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoBodyText"><b>BounceSprites Demo<o:p></o:p></b></p>
-			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoBodyText">Let’s take a look at the Sprites in action. This demo is 
-				included with the SDL.NET source. BounceSprite.cs is the sprite class. 
-				BounceSprites.cs is the demo app itself.</p>
-			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoBodyText"><b>BounceSprite.cs<o:p></o:p></b></p>
-			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">using</span><span style="FONT-FAMILY:
-'Quest Font'"> System;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">using</span><span style="FONT-FAMILY:
-'Quest Font'"> System.Drawing;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">using</span><span style="FONT-FAMILY:
-'Quest Font'"> SdlDotNet;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">using</span><span style="FONT-FAMILY:
-'Quest Font'"> SdlDotNet.Sprites;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">namespace</span><span style="FONT-FAMILY:'Quest Font'"> SdlDotNet.Examples<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'">{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'>
-						<o:p></o:p>
-					</span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;/summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>public</span> <span style='COLOR:blue'>class</span>
-BounceSprite : AnimatedSprite<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#region</span><span style="FONT-FAMILY:'Quest Font'"> Fields<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Move sprites 10 pixels per tick<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>int</span> dx = 10;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>int</span> dy = 10;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Sprites will be bounded by the screen edges minus <o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//their size so they will not go off the screen<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> Rectangle bounds = <span style='COLOR:blue'>new</span>
-Rectangle();<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#endregion</span><span style="FONT-FAMILY:'Quest Font'"> Fields<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#region</span><span style="FONT-FAMILY:'Quest Font'"> Constructor<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'>
-						<o:p></o:p>
-					</span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;/summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;param name="d"&gt;&lt;/param&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;param name="coordinates"&gt;&lt;/param&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>public</span> BounceSprite(SurfaceCollection d, Vector
-coordinates)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>:
-<span style='COLOR:blue'>base</span>(d, coordinates)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Sprites will be bounded by the screen edges minus <o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//their size so they will not go off the screen<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.bounds = <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>new</span> Rectangle(0, 0, Video.Screen.Rectangle.Width - <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(<span style='COLOR:blue'>int</span>) d.Size.Width, Video.Screen.Rectangle.Height - <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(<span style='COLOR:blue'>int</span>) d.Size.Height);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//The sprite can be dragged<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.AllowDrag =      <span style='COLOR:blue'>true</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#endregion</span><span style="FONT-FAMILY:'Quest Font'"> Constructor<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#region</span><span style="FONT-FAMILY:'Quest Font'"> Event Update Methods<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'> Every tick will update
-the animation frame<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;/summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;param name="args"&gt;&lt;/param&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>public</span> <span style='COLOR:blue'>override</span> <span style='COLOR:blue'>void</span> Update(TickEventArgs args)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Call the base method<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>base</span>.Update(args);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// Increment the frame<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (Frame == 0)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Frame
-= FrameCount -1;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:blue'>else<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Frame--;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//set the surface to point to the new frame. This creates
-the animation<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Surface =     <span style='COLOR:blue'>this</span>.Surfaces[Frame];<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Change the sprite coordinates if the sprite is not being
-dragged<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (!<span style='COLOR:blue'>this</span>.BeingDragged)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X += dx;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y += dy;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// Bounce off the left<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.X &lt;
-bounds.Left)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X =      bounds.Left;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// Bounce off the top<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.Y &lt;
-bounds.Top)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y =      bounds.Top;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// Bounce off the bottom<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.Y &gt;
-bounds.Bottom)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y =      bounds.Bottom;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// Bounce off the right<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.X &gt;
-bounds.Right)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X =      bounds.Right;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// Revrse the directions when the sprite hits an edge<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.X == 
-bounds.Left)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>dx
-= (Math.Abs(<span style='COLOR:blue'>this</span>.dx));<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.X == 
-bounds.Right)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>dx
-= -1*(Math.Abs(<span style='COLOR:blue'>this</span>.dx));<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.Y == 
-bounds.Top)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>dy
-= (Math.Abs(<span style='COLOR:blue'>this</span>.dy));<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.Y == 
-bounds.Bottom)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>dy
-= -1*(Math.Abs(<span style='COLOR:blue'>this</span>.dy));<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'> If the mouse click hits
-a sprite, <o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'> then the sprite will be
-marked as 'being dragged'<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;/summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;param name="args"&gt;&lt;/param&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><o:p></o:p></span></p><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="COLOR: blue">public</SPAN> <SPAN style="COLOR: blue">override</SPAN> 
-<SPAN style="COLOR: blue">void</SPAN> Update(MouseButtonEventArgs 
-args)
-<o:p></o:p></SPAN>
-<P></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </SPAN><SPAN 
-style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="COLOR: blue">if</SPAN> (<SPAN 
-style="COLOR: blue">this</SPAN>.IntersectsWith(<SPAN 
-style="COLOR: blue">new</SPAN> Point(args.X, args.Y)))
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="COLOR: green">// If we are being held down, pick up the 
-marble
-<o:p></o:p></SPAN></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="COLOR: blue">if</SPAN> 
-(args.ButtonPressed)
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="COLOR: blue">if</SPAN> (args.Button == 
-MouseButton.PrimaryButton)
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="COLOR: blue">this</SPAN>.BeingDragged =    <SPAN 
-style="COLOR: blue">true</SPAN>;
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="COLOR: blue">else
-<o:p></o:p></SPAN></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="COLOR: blue">this</SPAN>.Kill();
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="COLOR: blue">else
-<o:p></o:p></SPAN></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>{
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="COLOR: blue">this</SPAN>.BeingDragged = <SPAN 
-style="COLOR: blue">false</SPAN>;
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN><SPAN style="mso-tab-count: 1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}
-<o:p></o:p></SPAN></P>
-<P class=MsoNormal style="MARGIN-RIGHT: -89.5pt"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN>}</SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none">&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'> If the sprite is picked
-up, this moved the sprite to follow<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'> the mouse.<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;/summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>public</span> <span style='COLOR:blue'>override</span> <span style='COLOR:blue'>void</span> Update(MouseMotionEventArgs args)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (!AllowDrag)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>return</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// Move the window as appropriate<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (<span style='COLOR:blue'>this</span>.BeingDragged)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.X +=      args.RelativeX;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>this</span>.Y +=      args.RelativeY;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoBodyText"><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#endregion</span><span style="FONT-FAMILY:'Quest Font'"> Event Update Methods<o:p></o:p></span></p>
-			<p class="MsoBodyText"><span style="FONT-FAMILY:'Quest Font'">}</span></p>
-			<p class="MsoBodyText"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></p>
-			<p class="MsoBodyText"><b>BounceSprites.cs<o:p></o:p></b></p>
-			<p class="MsoBodyText"><b><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></b></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">using</span><span style="FONT-FAMILY:
-'Quest Font'"> System;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">using</span><span style="FONT-FAMILY:
-'Quest Font'"> System.Drawing;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">using</span><span style="FONT-FAMILY:
-'Quest Font'"> System.Collections;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">using</span><span style="FONT-FAMILY:
-'Quest Font'"> SdlDotNet;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">using</span><span style="FONT-FAMILY:
-'Quest Font'"> SdlDotNet.Sprites;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'">namespace</span><span style="FONT-FAMILY:'Quest Font'"> SdlDotNet.Examples <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'">{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'> Demo of Bouncing Balls
-using Sprites. <o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'> The Bouncesprites will respond
-to Tick Events by spinning. <o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'> You can click on each
-sprite and move them around the <o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'> screen as well
-(MouseButton and MouseMotion events).<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;/summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>class</span> BounceSprites<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#region</span><span style="FONT-FAMILY:'Quest Font'"> Fields<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> Surface screen; <span style='COLOR:green'>//video
-screen<o:p></o:p></span></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>bool</span>
-quitflag; <span style='COLOR:green'>//flag to tell the app to shutdown<o:p></o:p></span></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> SpriteCollection master = <span style='COLOR:blue'>new</span> SpriteCollection(); <span style='COLOR:green'>//holds
-all sprites<o:p></o:p></span></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>int</span> width =  
-800; <span style='COLOR:green'>//screen width<o:p></o:p></span></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>int</span> height =  
-600; <span style='COLOR:green'>//screen height<o:p></o:p></span></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>int</span> maxBalls
-= 10; <span style='COLOR:green'>//number of balls to display<o:p></o:p></span></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> Random rand = <span style='COLOR:blue'>new</span>
-Random(); <span style='COLOR:green'>//randomizer<o:p></o:p></span></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#endregion</span><span style="FONT-FAMILY:'Quest Font'"> Fields<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#region</span><span style="FONT-FAMILY:'Quest Font'"> EventHandler Methods<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Handles keyboard events. The 'Escape' and 'Q'keys will
-cause the app to exit<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>void</span>
-OnKeyboardDown(<span style='COLOR:blue'>object</span> sender, KeyboardEventArgs
-e) <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>if</span> (e.Key ==           Key.Escape || e.Key == Key.Q)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>quitflag
-= <span style='COLOR:blue'>true</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//The app will exit if the 'x' in the window is clicked<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>void</span> OnQuit(<span style='COLOR:blue'>object</span> sender, QuitEventArgs e) <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>quitflag
-= <span style='COLOR:blue'>true</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//A ticker is running to update the sprites constantly.<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//This method will fill the screen with black to clear it
-of the sprites.<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Then it will Blit all of the sprites to the screen.<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Then it will refresh the screen and display it.<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>void</span> OnTick(<span style='COLOR:blue'>object</span> sender, TickEventArgs args)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></p>
-<P class=MsoNormal style="mso-layout-grid-align: none"><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-rects = screen.Blit(master); </span></span></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></SPAN><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">screen.Update(rects); </SPAN></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</SPAN></SPAN><SPAN style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">screen.Erase(master, background);</SPAN></SPAN></P>
-<P class=MsoNormal style="mso-layout-grid-align: none"><SPAN 
-style="FONT-FAMILY: 'Quest Font'"><SPAN 
-style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>}<o:p></o:p></SPAN></P>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#endregion</span><span style="FONT-FAMILY:'Quest Font'"> EventHandler Methods<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#region</span><span style="FONT-FAMILY:'Quest Font'"> Methods<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Main program loop<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>private</span> <span style='COLOR:blue'>void</span> Go() <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Set up screen<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>screen
-= Video.SetVideoModeWindow(width, height, <span style='COLOR:blue'>true</span>);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Video.WindowCaption
-= <span style='COLOR:fuchsia'>"Bounce Sprites"</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//instantiate each marble<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>for</span> (<span style='COLOR:blue'>int</span> i = 0; i
-&lt; <span style='COLOR:blue'>this</span>.maxBalls; i++)<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//This loads the various images (provided by Moonfire) <o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// into a SurfaceCollection for animation<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SurfaceCollection
-marbleSurfaces = <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>new</span> SurfaceCollection(<span style='COLOR:fuchsia'>"../../Data/marble"</span>
-+ (i % 2 + 1), <span style='COLOR:fuchsia'>".png"</span>);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Create a new Sprite at a random lcation on the screen<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>BounceSprite
-bounceSprite = <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>new</span> BounceSprite(marbleSurfaces,<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>new</span> Vector(rand.Next(screen.Rectangle.Left,
-screen.Rectangle.Right),<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>rand.Next(screen.Rectangle.Top,
-screen.Rectangle.Bottom),<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>0));<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Add the sprite to the SpriteCollection<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>master.Add(bounceSprite);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//The collection will respond to mouse button clicks, mouse
-movement and the ticker.<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>master.EnableMouseButtonEvent();<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>master.EnableMouseMotionEvent();<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>master.EnableTickEvent();<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<o:p></o:p>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//These bind the events to the above methods.<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Events.KeyboardDown
-+=<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>new</span> KeyboardEventHandler(<span style='COLOR:blue'>this</span>.OnKeyboardDown);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Events.Quit
-+= <span style='COLOR:blue'>new</span> QuitEventHandler(<span style='COLOR:
-blue'>this</span>.OnQuit);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Events.TickEvent
-+= <span style='COLOR:blue'>new</span> TickEventHandler(<span style='COLOR:
-blue'>this</span>.OnTick);<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Start the event ticker<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Events.StartTicker();<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:blue'>try</span>
-					<o:p></o:p>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>while</span> (!quitflag) <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>// handle events till the queue is empty<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>while</span> (Events.Poll()) <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:5'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{}
-<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:green'>//Stop the ticker when the app quits.<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Events.StopTicker();<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}
-<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:blue'>catch</span>
-					<o:p></o:p>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>throw</span>;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'>
-						<o:p></o:p>
-					</span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style='COLOR:gray'>///</span>
-					<span style='COLOR:green'></span>
-					<span style='COLOR:gray'>&lt;/summary&gt;<o:p></o:p></span>
-				</span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style='COLOR:blue'>static</span> <span style='COLOR:blue'>void</span> Main() <o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>BounceSprites
-bounce = <span style='COLOR:blue'>new</span> BounceSprites();<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:3'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bounce.Go();<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="COLOR:blue; FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>#endregion</span><span style="FONT-FAMILY:'Quest Font'"> Methods<o:p></o:p></span></p>
-			<p class="MsoNormal" style='mso-layout-grid-align:none'><span style="FONT-FAMILY:'Quest Font'"><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
-			<p class="MsoBodyText"><span style="FONT-FAMILY:'Quest Font'">}<o:p></o:p></span></p>
-			<p class="MsoBodyText"><span style="FONT-FAMILY:'Quest Font'"><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-			<p class="MsoBodyText">The demo app will create a 800x600 screen that features 10 
-				sprites 5 of which are gray and 5 which are purple. The will respond to Tick 
-				events by spinning. If a user clicks on one with a mouse, the marble will stop 
-				moving and be dragged along with the mouse (MouseButton and MouseMotion 
-				events).</p>
-			<P class="MsoBodyText">&nbsp;</P>
-			<P class="MsoBodyText">Sprite surfaces were created by D.R.E. Moonfire (<A>d.moonfire 
-					AT mfgames DOT com</A>)</P>
-			<p class="MsoNormal"><span style='FONT-SIZE:12pt;mso-bidi-font-size:10.0pt'><![if !supportEmptyParas]><![endif]>&nbsp;<o:p></o:p></span></p>
-		</div>
-	</body>
+<html>
+<head>
+    <title>Using Sprites in SDL</title>
+</head>
+<h1 align="center" style='TEXT-ALIGN:center'>Using Sprites in SDL.NET</h1> 
+A tutorial by David Hudson (jendave at yahoo dot com)
+ 
+<h2>Introduction:</h2>
+
+At the simplest level, sprite is a 2D object that can be shown on and moved around the screen. Each sprite has a Surface and a Rectangle to define what the sprite looks like and where it is located.
+<p>
+
+This tutorial will provide some insight into creating sprites, displaying them and having them respond to input events such as the mouse or keyboard.
+
+<h2>Sprite Class</h2>
+
+The sprite class consists of a Surface and a Rectangle. The Surface object is displayed when the Sprite is Blitted to the screen. The Surface can consist of a graphic image, a rendered text string or a primitive for example.
+<p>
+
+The rectangle is used to show what part of the Surface should be displayed. Typically, the rectangle should encompass the entire surface, but there may be reasons that the rectangle differs from the size of the surface. For example if the Surface actually consists of multiple images to be used for animation, the rectangle can be used to mark which part of the image is to be currently displayed.
+<p>
+
+The Sprite class has virtual Update() methods which are to be overridden by inheriting classes. These methods, used in conjunction with SpriteCollections will update the Sprite’s position and/or Surface when input events such as mouse button presses, mouse motion, keyboard presses occur.
+<p>
+
+The Render() method is provided to perform an action on a Surface before it is Blit to the Screen. In the Sprite class, the Render() method simply returns the Surface. In an inherited class, however, this method is often overridden to perform a task on the surface before it is Blit. For example, when a text string may need to be converted to a Surface before it is Blit to the screen. The Render() method can be overridden to do that.
+<p>
+
+The are some other properties of a Sprite:
+<p>
+<table border="1" cellspacing="0" cellpadding="0" >
+<tr>
+<td width="251" valign="top" height="41">
+AllowDrag (bool)
+</td>
+<td>
+Can the sprite be dragged (usually with the mouse)?
+</td>
+</tr>
+<tr>
+<td width="251" valign="top" height="41"> 
+Visible (bool)
+</td>
+<td>
+Is the Sprite supposed to visible on the screen?
+</td>
+</tr>
+<tr>
+<td width="251" valign="top" height="41">
+BeingDragged (bool)
+</td>
+<td>
+Is the Sprite currently being dragged?
+</td>
+</table>
+<p>
+The Sprite class itself does not do much; its Update()  methods are empty. The Sprite class is really meant to be extended with its Update() methods overridden by new logic. The BounceSprite class has overridden Update methods that determine what happens when a mouse button, mouse motion or tick event happens.
+<p>
+Some classes extended from Sprite are included in SDL.NET. The TextSprite displays text rendered as a sprite. The AnimatedSprite provides a basis for displaying multiple surfaces over time to create the animation.
+<p>
+<h2>SpriteCollection class</h2>
+The SpriteCollection class is a strongly-typed collection that helps aggregate sprites and execute events on them.
+<p>
+Besides having methods for adding, removing and accessing the Sprites in the collection, SpriteCollection has methods for enabling events on the Sprites it contains. For example, the SpriteCollection.EnableMouseButtonEvent() allows all the sprites in the collection to respond to mouse button clicks. Once the event is fired, the SpriteCollection passes the event and EventArgs to each sprite. 
+<p>
+
+<pre>
+private void Update(object sender, MouseButtonEventArgs e)
+            {
+                  for (int i = 0; i < this.Count; i++)
+                  {
+                        this[i].Update(e);
+                  }
+            } 
+</pre>
+<p>
+The sprite can then decide how to respond. Usually, the sprite will have logic to check if the mouse click happened on which sprite. For example:
+<p>
+<pre>
+public override void Update(MouseButtonEventArgs args)
+{ 
+          if (this.IntersectsWith(new Point(args.X, args.Y))) 
+          { 
+                // If we are being held down, pick up the marble 
+                if (args.ButtonPressed) 
+                { 
+                      if (args.Button == MouseButton.PrimaryButton) 
+                      { 
+                            this.BeingDragged = true; 
+                      } 
+                      else 
+                      { 
+                            this.Kill(); 
+                      } 
+                } 
+                else 
+                { 
+                      this.BeingDragged = false; 
+                } 
+          } 
+    }
+</pre>
+<p>
+If you click on the spirte with the primary mouse button, you can drag the sprite. If you click on it with the secondary button, it will remove the sprite from the screen and the SpriteCollection.
+<p>
+SpriteCollections can be used to categorize sprites into logical groups. A program may have SpriteCollection for the player’s spaceship and another collection for the enemies. Another SpriteCollection could contain only those sprites that are close to the player’s ship to do faster collision detection.
+<p>
+<h2>SpriteContainer</h2>
+SpriteContainer extends from Sprite and includes a field that holds a SpriteCollection. The Render() method has been overridden to Blit() the Sprites contained in the collection to the SpriteContainer’s Surface before rendering it to the screen. 
+<p>
+This class is particularly useful if the app wants to have a sprite that contains other Sprites and move the SpriteContainer as a whole. Gui windows are a good example of this. Take a look at the SpriteGuiDemo and the GuiExample included in the SDL.NET source to see how this works.
+<p>
+<h2>BounceSprites Demo</h2>
+Let’s take a look at the Sprites in action. This demo is included with the SDL.NET source. BounceSprite.cs is the sprite class. BounceSprites.cs is the demo app itself.
+<p>
+<h3>BounceSprite.cs</h3>
+<p>
+<pre>
+using System;
+using System.Drawing;
+using System.Collections;
+
+using SdlDotNet;
+using SdlDotNet.Sprites;
+
+namespace SdlDotNet.Examples 
+{
+	/// <summary>
+	/// Demo of Bouncing Balls using Sprites. 
+	/// The Bouncesprites will respond to Tick Events by spinning. 
+	/// You can click on each sprite and move them around the 
+	/// screen as well (MouseButton and MouseMotion events).
+	/// </summary>
+	class BounceSprites
+	{
+		#region Fields
+		private Surface screen; //video screen
+		private SpriteCollection master = new SpriteCollection(); //holds all sprites
+		private int width = 640; //screen width
+		private int height = 480; //screen height
+		private int maxBalls = 10; //number of balls to display
+		private Random rand = new Random(); //randomizer
+		private Surface background = new Surface("../../Data/background.png");
+		#endregion Fields
+
+		#region EventHandler Methods
+		//Handles keyboard events. The 'Escape' and 'Q'keys will cause the app to exit
+		private void OnKeyboardDown(object sender, KeyboardEventArgs e) 
+		{
+			if (e.Key == Key.Escape || e.Key == Key.Q)
+			{
+				Events.QuitApplication();
+			}
+		}
+
+		RectangleCollection rects = new RectangleCollection();
+
+		//A ticker is running to update the sprites constantly.
+		//This method will fill the screen with black to clear it of the sprites.
+		//Then it will Blit all of the sprites to the screen.
+		//Then it will refresh the screen and display it.
+		private void OnTick(object sender, TickEventArgs args)
+		{	
+			rects = screen.Blit(master);
+			screen.Update(rects);	
+			screen.Erase(master, background);
+		}
+		#endregion EventHandler Methods
+
+		#region Methods
+		//Main program loop
+		private void Go() 
+		{
+			//Set up screen
+			screen = Video.SetVideoModeWindow(width, height, true);
+			screen.Blit(background);
+			screen.Update();
+			Video.WindowCaption = "SdlDotNet - Bounce Sprites";
+
+			//This loads the various images (provided by Moonfire) 
+			// into a SurfaceCollection for animation
+			SurfaceCollection marbleSurfaces = 
+				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50)); 
+
+			for (int i = 0; i < this.maxBalls; i++)
+			{
+				//Create a new Sprite at a random location on the screen
+				BounceSprite bounceSprite = 
+					new BounceSprite(marbleSurfaces,
+					new Vector(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
+					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom),
+					0));
+				//Add the sprite to the SpriteCollection
+				master.Add(bounceSprite);
+			}
+			//The collection will respond to mouse button clicks, mouse movement and the ticker.
+			master.EnableMouseButtonEvent();
+			master.EnableMouseMotionEvent();
+			master.EnableTickEvent();
+      
+			//These bind the events to the above methods.
+			Events.KeyboardDown +=
+				new KeyboardEventHandler(this.OnKeyboardDown);
+			Events.Tick += new TickEventHandler(this.OnTick);
+
+			//Start the event ticker
+			Events.Run();
+		}
+
+		/// <summary>
+		/// Entry point for App.
+		/// </summary>
+		static void Main() 
+		{
+			BounceSprites bounce = new BounceSprites();
+			bounce.Go();
+		}
+		#endregion Methods
+	}
+}
+</pre>
+<p>
+<h3>BounceSprites.cs</h3>
+<p>
+<pre>
+using System;
+using System.Drawing;
+using System.Collections;
+
+using SdlDotNet;
+using SdlDotNet.Sprites;
+
+namespace SdlDotNet.Examples 
+{
+	/// <summary>
+	/// Demo of Bouncing Balls using Sprites. 
+	/// The Bouncesprites will respond to Tick Events by spinning. 
+	/// You can click on each sprite and move them around the 
+	/// screen as well (MouseButton and MouseMotion events).
+	/// </summary>
+	class BounceSprites
+	{
+		#region Fields
+		private Surface screen; //video screen
+		private SpriteCollection master = new SpriteCollection(); //holds all sprites
+		private int width = 640; //screen width
+		private int height = 480; //screen height
+		private int maxBalls = 10; //number of balls to display
+		private Random rand = new Random(); //randomizer
+		private Surface background = new Surface("../../Data/background.png");
+		#endregion Fields
+
+		#region EventHandler Methods
+		//Handles keyboard events. The 'Escape' and 'Q'keys will cause the app to exit
+		private void OnKeyboardDown(object sender, KeyboardEventArgs e) 
+		{
+			if (e.Key == Key.Escape || e.Key == Key.Q)
+			{
+				Events.QuitApplication();
+			}
+		}
+
+		RectangleCollection rects = new RectangleCollection();
+
+		//A ticker is running to update the sprites constantly.
+		//This method will fill the screen with black to clear it of the sprites.
+		//Then it will Blit all of the sprites to the screen.
+		//Then it will refresh the screen and display it.
+		private void OnTick(object sender, TickEventArgs args)
+		{	
+			rects = screen.Blit(master);
+			screen.Update(rects);	
+			screen.Erase(master, background);
+		}
+		#endregion EventHandler Methods
+
+		#region Methods
+		//Main program loop
+		private void Go() 
+		{
+			//Set up screen
+			screen = Video.SetVideoModeWindow(width, height, true);
+			screen.Blit(background);
+			screen.Update();
+			Video.WindowCaption = "SdlDotNet - Bounce Sprites";
+
+			//This loads the various images (provided by Moonfire) 
+			// into a SurfaceCollection for animation
+			SurfaceCollection marbleSurfaces = 
+				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50)); 
+
+			for (int i = 0; i < this.maxBalls; i++)
+			{
+				//Create a new Sprite at a random location on the screen
+				BounceSprite bounceSprite = 
+					new BounceSprite(marbleSurfaces,
+					new Vector(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
+					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom),
+					0));
+				//Add the sprite to the SpriteCollection
+				master.Add(bounceSprite);
+			}
+			//The collection will respond to mouse button clicks, mouse movement and the ticker.
+			master.EnableMouseButtonEvent();
+			master.EnableMouseMotionEvent();
+			master.EnableTickEvent();
+      
+			//These bind the events to the above methods.
+			Events.KeyboardDown +=
+				new KeyboardEventHandler(this.OnKeyboardDown);
+			Events.Tick += new TickEventHandler(this.OnTick);
+
+			//Start the event ticker
+			Events.Run();
+		}
+
+		/// <summary>
+		/// Entry point for App.
+		/// </summary>
+		static void Main() 
+		{
+			BounceSprites bounce = new BounceSprites();
+			bounce.Go();
+		}
+		#endregion Methods
+	}
+}
+</pre>
+<p>
+The demo app will create a 800x600 screen that features 10 rotating gray sprites. They will respond to Tick events by spinning. If a user clicks on one with a mouse, the marble will stop moving and be dragged along with the mouse (MouseButton and MouseMotion events).
+<p> 
+Sprite surfaces were created by D.R.E. Moonfire (d.moonfire AT mfgames DOT com)
 </html>

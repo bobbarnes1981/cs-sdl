@@ -155,7 +155,7 @@ namespace SdlDotNet.Examples
 			{
 				Rectangle offsetRect = s.Rectangle;
 				offsetRect.Offset(AdjustBoundedViewport());
-				base.Surface.Blit(s.Surface, offsetRect);
+				base.Surface.Blit(s, offsetRect);
 			}
 			return base.Surface;
 		}

@@ -70,17 +70,20 @@ namespace SdlDotNet.Examples
 			//Call the base method
 			base.Update(args);
 
-			// Increment the frame
-			if (Frame == 0)
+			if (this.Animate)
 			{
-				Frame = FrameCount -1;
-			}
-			else
-			{
-				Frame--;
+				// Increment the frame
+				if (Frame == 0)
+				{
+					Frame = FrameCount -1;
+				}
+				else
+				{
+					Frame--;
+				}
 			}
 			//set the surface to point to the new frame. This creates the animation
-			this.Surface = this.Surfaces[Frame];
+			//this.Surface = this.Surfaces[Frame];
 
 			//Change the sprite coordinates if the sprite is not being dragged
 			if (!this.BeingDragged)
@@ -149,6 +152,7 @@ namespace SdlDotNet.Examples
 					if (args.Button == MouseButton.PrimaryButton)
 					{
 						this.BeingDragged = true;
+						this.Animate = false;
 					}
 					else
 					{
@@ -158,6 +162,7 @@ namespace SdlDotNet.Examples
 				else
 				{
 					this.BeingDragged = false;
+					this.Animate = true;
 				}
 			}
 		}

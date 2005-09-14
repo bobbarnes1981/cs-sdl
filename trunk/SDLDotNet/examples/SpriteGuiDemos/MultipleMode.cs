@@ -150,16 +150,16 @@ namespace SdlDotNet.Examples
 			{
 				Rectangle offsetRect = s.Rectangle;
 				offsetRect.Offset(AdjustBoundedViewport(sprite1, surf1));
-				surf1.Blit(s.Surface, offsetRect);
+				surf1.Blit(s, offsetRect);
 				offsetRect = s.Rectangle;
 				offsetRect.Offset(AdjustBoundedViewport(sprite2, surf2));
-				surf2.Blit(s.Surface, offsetRect);
+				surf2.Blit(s, offsetRect);
 				offsetRect = s.Rectangle;
 				offsetRect.Offset(AdjustBoundedViewport(sprite3, surf3));
-				surf3.Blit(s.Surface, offsetRect);
+				surf3.Blit(s, offsetRect);
 				offsetRect = s.Rectangle;
 				offsetRect.Offset(AdjustBoundedViewport(sprite4, surf4));
-				surf4.Blit(s.Surface, offsetRect);
+				surf4.Blit(s, offsetRect);
 			}
 			this.Surface.Blit(surf1, new Point(10, 10));
 			this.Surface.Blit(surf2, new Point(410, 10));
