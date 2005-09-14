@@ -28,7 +28,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public abstract class GameArea : GameObject
 	{
-		GameObjectCollection _objectList = new GameObjectCollection();
+		GameObjectCollection objectList = new GameObjectCollection();
 		/// <summary>
 		/// 
 		/// </summary>
@@ -36,7 +36,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _objectList;
+				return objectList;
 			}
 		}
 
@@ -47,7 +47,7 @@ namespace SdlDotNet.Examples
 		public void AddObject(GameObject obj)
 		{
 			
-			_objectList.Add(obj);
+			objectList.Add(obj);
 			obj.Parent = this;
 			
 		}
@@ -58,7 +58,7 @@ namespace SdlDotNet.Examples
 		/// <param name="obj"></param>
 		public void RemoveObject(GameObject obj)
 		{
-			_objectList.Remove(obj);			
+			objectList.Remove(obj);			
 		}
 
 		/// <summary>
@@ -66,7 +66,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Update()
 		{
-			foreach(GameObject obj in _objectList)
+			foreach(GameObject obj in objectList)
 			{
 				obj.Update();			
 			}
@@ -78,7 +78,7 @@ namespace SdlDotNet.Examples
 		/// <param name="surface"></param>
 		protected void DrawGameObjects(Surface surface)
 		{
-			foreach(GameObject obj in _objectList)
+			foreach(GameObject obj in objectList)
 			{
 				obj.Draw(surface);
 			}

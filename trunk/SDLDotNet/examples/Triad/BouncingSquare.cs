@@ -48,7 +48,6 @@ namespace SdlDotNet.Examples
 			
 			this.xinc = rnd.Next(5)+1;
 			this.yinc = rnd.Next(5)+1;
-
 		}
 
 		int xinc = 5;

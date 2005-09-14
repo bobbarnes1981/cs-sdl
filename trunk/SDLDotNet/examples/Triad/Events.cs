@@ -32,7 +32,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class BlocksDestroyedEventArgs : EventArgs
 	{
-		private int _ReductionCount;
+		private int reductionCount;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -40,11 +40,11 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _ReductionCount;
+				return reductionCount;
 			}
 		}
 	
-		private int _BlocksCount;
+		private int blocksCount;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -52,7 +52,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return _BlocksCount;
+				return blocksCount;
 			}
 		}
 				
@@ -63,8 +63,8 @@ namespace SdlDotNet.Examples
 		/// <param name="blockCount"></param>
 		public BlocksDestroyedEventArgs(int reductionCount, int blockCount)
 		{
-			this._BlocksCount = blockCount;
-			this._ReductionCount = reductionCount;
+			this.blocksCount = blockCount;
+			this.reductionCount = reductionCount;
 
 		}	
 	}
