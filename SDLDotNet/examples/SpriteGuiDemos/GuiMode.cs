@@ -100,18 +100,14 @@ namespace SdlDotNet.Examples
 		public void CreateMenus(GuiManager gui, SpriteCollection sm)
 		{
 			// Create the menubar
-			//Size dd = SdlDemo.Sprites.Size;
 			GuiMenuBar gmb = new GuiMenuBar(gui, 0, 40, 20);
 			gmb.Sprites.EnableMouseButtonEvent();
 			sm.Add(gmb);
 		
 			// First menu
 			gm = new GuiMenuTitle(gui, gmb, "Test Menu");
-			//gm.MenuBar = gmb;
 			gm.Sprites.EnableMouseButtonEvent();
 			gmb.AddLeft(gm);
-			//sm.Add(gm.Popup);
-
 		
 			// Create a menu items
 			gm.Add(new GuiMenuItem(gui, "Test #1"));
@@ -133,18 +129,12 @@ namespace SdlDotNet.Examples
 			gmb.AddLeft(gm2);
 			gm2.Popup.Add(gmi2);
 			gm2.Popup.Add(new GuiMenuItem(gui, "Test 2.2"));
-			//gm2.IsTraced = true;
-			//gm2.Popup.IsTraced = true;
-			//gmi2.IsTraced = true;
-			//sm.Add(gm2.Popup);
 		
 			// Create a third menu
 			gm3 = new GuiMenuTitle(gui, gmb, "Right Menu");
 			gm3.Popup.Add(new GuiMenuItem(gui, "Test #6"));
 			gm3.Popup.Add(new GuiMenuItem(gui, "Really Long Title for a Menu Item"));
-			//gmb.AddRight(new TextSprite("NonMenu", gui.BaseFont));
 			gmb.AddRight(gm3);
-			//sm.Add(gm3.Popup);
 		}
 
 		/// <summary>
@@ -176,7 +166,6 @@ namespace SdlDotNet.Examples
 
 		#region Events
 		private double threshold = 100.0;
-		//private double rate = 0.009;
 
 		/// <summary>
 		/// 
@@ -204,7 +193,6 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		private void OnTick(object sender, TickEventArgs args)
 		{
-			//threshold += args.RatePerSecond(rate);
 			threshold += 10;
 
 			// Keep track of the counter (the point to trigger)
@@ -252,7 +240,6 @@ namespace SdlDotNet.Examples
 							new Point(0, 0)));
 						break;
 				}
-				
 			}
 		}
 		#endregion
