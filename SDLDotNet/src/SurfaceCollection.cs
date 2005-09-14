@@ -117,6 +117,7 @@ namespace SdlDotNet
 			Size tileSize) 
 		{ 
 			fullImage.Alpha = 255;
+			
 			for(int tileY = 0; tileY * tileSize.Height < fullImage.Height; tileY++) 
 			{ 
 				for(int tileX = 0; tileX * tileSize.Width < fullImage.Width; tileX++) 
