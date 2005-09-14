@@ -56,6 +56,7 @@ namespace SdlDotNet.Examples
 			base(phrase, font, false, new Point(25, y))
 		{
 			this.Surface.Alpha = 0;
+			this.Surface.AlphaBlending = true;
 			this.startTime = startTime;
 		}
 

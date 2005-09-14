@@ -77,7 +77,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Destroys this object
 		/// </summary>
-		/// <param name="disposing">If true, all managed and unmanaged objects will be destroyed.</param>
+		/// <param name="disposing">
+		/// If true, all managed and unmanaged objects will be destroyed.
+		/// </param>
 		public static void Dispose(bool disposing)
 		{
 			if (!disposed)

@@ -1,4 +1,3 @@
-
 /*
 * 3-D gear wheels. This program is in the public domain.
 *
@@ -47,117 +46,142 @@ namespace SdlDotNet.Examples
 
 			double da = 2.0 * Math.PI / teeth / 4.0;
 
-			Tao.OpenGl.Gl.glShadeModel(Tao.OpenGl.Gl.GL_FLAT);
+			Gl.glShadeModel(Gl.GL_FLAT);
 
-			Tao.OpenGl.Gl.glNormal3d(0.0, 0.0, 1.0);
+			Gl.glNormal3d(0.0, 0.0, 1.0);
 
 			/* draw front face */
-			Tao.OpenGl.Gl.glBegin(Tao.OpenGl.Gl.GL_QUAD_STRIP);
+			Gl.glBegin(Gl.GL_QUAD_STRIP);
 			for (i = 0; i <= teeth; i++)
 			{
 				angle = i * 2.0 * Math.PI / teeth;
-				Tao.OpenGl.Gl.glVertex3d(r0 * Math.Cos(angle), r0 * Math.Sin(angle), width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle), r1 * Math.Sin(angle), width * 0.5);
+				Gl.glVertex3d(r0 * Math.Cos(angle), 
+					r0 * Math.Sin(angle), width * 0.5);
+				Gl.glVertex3d(r1 * Math.Cos(angle), 
+					r1 * Math.Sin(angle), width * 0.5);
 				if (i < teeth)
 				{
-					Tao.OpenGl.Gl.glVertex3d(r0 * Math.Cos(angle), r0 * Math.Sin(angle), width * 0.5);
-					Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), r1 * Math.Sin(angle + 3 * da), width * 0.5);
+					Gl.glVertex3d(r0 * Math.Cos(angle), 
+						r0 * Math.Sin(angle), width * 0.5);
+					Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), 
+						r1 * Math.Sin(angle + 3 * da), width * 0.5);
 				}
 			}
-			Tao.OpenGl.Gl.glEnd();
+			Gl.glEnd();
 
 			/* draw front sides of teeth */
-			Tao.OpenGl.Gl.glBegin(Tao.OpenGl.Gl.GL_QUADS);
+			Gl.glBegin(Gl.GL_QUADS);
 			da = 2.0 * Math.PI / teeth / 4.0;
 			for (i = 0; i < teeth; i++)
 			{
 				angle = i * 2.0 * Math.PI / teeth;
 
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle), r1 * Math.Sin(angle), width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r2 * Math.Cos(angle + da), r2 * Math.Sin(angle + da), width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r2 * Math.Cos(angle + 2 * da), r2 * Math.Sin(angle + 2 * da), width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), r1 * Math.Sin(angle + 3 * da), width * 0.5);
+				Gl.glVertex3d(r1 * Math.Cos(angle), 
+					r1 * Math.Sin(angle), width * 0.5);
+				Gl.glVertex3d(r2 * Math.Cos(angle + da), 
+					r2 * Math.Sin(angle + da), width * 0.5);
+				Gl.glVertex3d(r2 * Math.Cos(angle + 2 * da), 
+					r2 * Math.Sin(angle + 2 * da), width * 0.5);
+				Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), 
+					r1 * Math.Sin(angle + 3 * da), width * 0.5);
 			}
-			Tao.OpenGl.Gl.glEnd();
+			Gl.glEnd();
 
-			Tao.OpenGl.Gl.glNormal3d (0.0, 0.0, -1.0);
+			Gl.glNormal3d (0.0, 0.0, -1.0);
 
 			/* draw back face */
-			Tao.OpenGl.Gl.glBegin(Tao.OpenGl.Gl.GL_QUAD_STRIP);
+			Gl.glBegin(Gl.GL_QUAD_STRIP);
 
 			for (i = 0; i <= teeth; i++)
 			{
 				angle = i * 2.0 * Math.PI / teeth;
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle), r1 * Math.Sin(angle), -width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r0 * Math.Cos(angle), r0 * Math.Sin(angle), -width * 0.5);
+				Gl.glVertex3d(r1 * Math.Cos(angle), 
+					r1 * Math.Sin(angle), -width * 0.5);
+				Gl.glVertex3d(r0 * Math.Cos(angle), 
+					r0 * Math.Sin(angle), -width * 0.5);
 				if (i < teeth)
 				{
-					Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), r1 * Math.Sin(angle + 3 * da), -width * 0.5);
-					Tao.OpenGl.Gl.glVertex3d(r0 * Math.Cos(angle), r0 * Math.Sin(angle), -width * 0.5);
+					Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), 
+						r1 * Math.Sin(angle + 3 * da), -width * 0.5);
+					Gl.glVertex3d(r0 * Math.Cos(angle), 
+						r0 * Math.Sin(angle), -width * 0.5);
 				}
 			}
-			Tao.OpenGl.Gl.glEnd();
+			Gl.glEnd();
 
 			/* draw back sides of teeth */
-			Tao.OpenGl.Gl.glBegin(Tao.OpenGl.Gl.GL_QUADS);
+			Gl.glBegin(Gl.GL_QUADS);
 			da = 2.0 * Math.PI / teeth / 4.0;
 			for (i = 0; i < teeth; i++)
 			{
 				angle = i * 2.0 * Math.PI / teeth;
 
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), r1 * Math.Sin(angle + 3 * da), -width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r2 * Math.Cos(angle + 2 * da), r2 * Math.Sin(angle + 2 * da), -width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r2 * Math.Cos(angle + da), r2 * Math.Sin(angle + da), -width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle), r1 * Math.Sin(angle), -width * 0.5);
+				Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), 
+					r1 * Math.Sin(angle + 3 * da), -width * 0.5);
+				Gl.glVertex3d(r2 * Math.Cos(angle + 2 * da), 
+					r2 * Math.Sin(angle + 2 * da), -width * 0.5);
+				Gl.glVertex3d(r2 * Math.Cos(angle + da), 
+					r2 * Math.Sin(angle + da), -width * 0.5);
+				Gl.glVertex3d(r1 * Math.Cos(angle), 
+					r1 * Math.Sin(angle), -width * 0.5);
 			}
-			Tao.OpenGl.Gl.glEnd();
+			Gl.glEnd();
 
 			/* draw outward faces of teeth */
-			Tao.OpenGl.Gl.glBegin(Tao.OpenGl.Gl.GL_QUAD_STRIP);
+			Gl.glBegin(Gl.GL_QUAD_STRIP);
 			for (i = 0; i < teeth; i++)
 			{
 				angle = i * 2.0 * Math.PI / teeth;
 
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle), r1 * Math.Sin(angle), width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle), r1 * Math.Sin(angle), -width * 0.5);
+				Gl.glVertex3d(r1 * Math.Cos(angle), 
+					r1 * Math.Sin(angle), width * 0.5);
+				Gl.glVertex3d(r1 * Math.Cos(angle), 
+					r1 * Math.Sin(angle), -width * 0.5);
 				u = r2 * Math.Cos(angle + da) - r1 * Math.Cos(angle);
 				v = r2 * Math.Sin(angle + da) - r1 * Math.Sin(angle);
 				len = Math.Sqrt(u * u + v * v);
 				u /= len;
 				v /= len;
-				Tao.OpenGl.Gl.glNormal3d(v, -u, 0.0);
-				Tao.OpenGl.Gl.glVertex3d(r2 * Math.Cos(angle + da), r2 * Math.Sin(angle + da), width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r2 * Math.Cos(angle + da), r2 * Math.Sin(angle + da), -width * 0.5);
-				Tao.OpenGl.Gl.glNormal3d(Math.Cos(angle), Math.Sin(angle), 0.0);
-				Tao.OpenGl.Gl.glVertex3d(r2 * Math.Cos(angle + 2 * da), r2 * Math.Sin(angle + 2 * da), width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r2 * Math.Cos(angle + 2 * da), r2 * Math.Sin(angle + 2 * da), -width * 0.5);
+				Gl.glNormal3d(v, -u, 0.0);
+				Gl.glVertex3d(r2 * Math.Cos(angle + da), 
+					r2 * Math.Sin(angle + da), width * 0.5);
+				Gl.glVertex3d(r2 * Math.Cos(angle + da), 
+					r2 * Math.Sin(angle + da), -width * 0.5);
+				Gl.glNormal3d(Math.Cos(angle), Math.Sin(angle), 0.0);
+				Gl.glVertex3d(r2 * Math.Cos(angle + 2 * da), 
+					r2 * Math.Sin(angle + 2 * da), width * 0.5);
+				Gl.glVertex3d(r2 * Math.Cos(angle + 2 * da), 
+					r2 * Math.Sin(angle + 2 * da), -width * 0.5);
 				u = r1 * Math.Cos(angle + 3 * da) - r2 * Math.Cos(angle + 2 * da);
 				v = r1 * Math.Sin(angle + 3 * da) - r2 * Math.Sin(angle + 2 * da);
-				Tao.OpenGl.Gl.glNormal3d(v, -u, 0.0);
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), r1 * Math.Sin(angle + 3 * da), width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), r1 * Math.Sin(angle + 3 * da), -width * 0.5);
-				Tao.OpenGl.Gl.glNormal3d(Math.Cos(angle), Math.Sin(angle), 0.0);
+				Gl.glNormal3d(v, -u, 0.0);
+				Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), 
+					r1 * Math.Sin(angle + 3 * da), width * 0.5);
+				Gl.glVertex3d(r1 * Math.Cos(angle + 3 * da), 
+					r1 * Math.Sin(angle + 3 * da), -width * 0.5);
+				Gl.glNormal3d(Math.Cos(angle), Math.Sin(angle), 0.0);
 			}
 
-			Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(0), r1 * Math.Sin(0), width * 0.5);
-			Tao.OpenGl.Gl.glVertex3d(r1 * Math.Cos(0), r1 * Math.Sin(0), -width * 0.5);
+			Gl.glVertex3d(r1 * Math.Cos(0), r1 * Math.Sin(0), width * 0.5);
+			Gl.glVertex3d(r1 * Math.Cos(0), r1 * Math.Sin(0), -width * 0.5);
 
-			Tao.OpenGl.Gl.glEnd();
+			Gl.glEnd();
 
-			Tao.OpenGl.Gl.glShadeModel(Tao.OpenGl.Gl.GL_SMOOTH);
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 
 			/* draw inside radius cylinder */
-			Tao.OpenGl.Gl.glBegin(Tao.OpenGl.Gl.GL_QUAD_STRIP);
+			Gl.glBegin(Gl.GL_QUAD_STRIP);
 			for (i = 0; i <= teeth; i++)
 			{
 				angle = i * 2.0 * Math.PI / teeth;
-				Tao.OpenGl.Gl.glNormal3d(-Math.Cos(angle), -Math.Sin(angle), 0.0);
-				Tao.OpenGl.Gl.glVertex3d(r0 * Math.Cos(angle), r0 * Math.Sin(angle), -width * 0.5);
-				Tao.OpenGl.Gl.glVertex3d(r0 * Math.Cos(angle), r0 * Math.Sin(angle), width * 0.5);
+				Gl.glNormal3d(-Math.Cos(angle), -Math.Sin(angle), 0.0);
+				Gl.glVertex3d(r0 * Math.Cos(angle), 
+					r0 * Math.Sin(angle), -width * 0.5);
+				Gl.glVertex3d(r0 * Math.Cos(angle), 
+					r0 * Math.Sin(angle), width * 0.5);
 			}
-			Tao.OpenGl.Gl.glEnd();
+			Gl.glEnd();
 		}
-
 
 		static double view_rotx = 20.0f; 
 		static double view_roty = 30.0f; 
@@ -172,32 +196,32 @@ namespace SdlDotNet.Examples
 
 		static void draw ()
 		{
-			Tao.OpenGl.Gl.glClear (Tao.OpenGl.Gl.GL_COLOR_BUFFER_BIT | Tao.OpenGl.Gl.GL_DEPTH_BUFFER_BIT);
+			Gl.glClear (Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 
-			Tao.OpenGl.Gl.glPushMatrix();
-			Tao.OpenGl.Gl.glRotated(view_rotx, 1.0, 0.0, 0.0);
-			Tao.OpenGl.Gl.glRotated(view_roty, 0.0, 1.0, 0.0);
-			Tao.OpenGl.Gl.glRotated(view_rotz, 0.0, 0.0, 1.0);
+			Gl.glPushMatrix();
+			Gl.glRotated(view_rotx, 1.0, 0.0, 0.0);
+			Gl.glRotated(view_roty, 0.0, 1.0, 0.0);
+			Gl.glRotated(view_rotz, 0.0, 0.0, 1.0);
 
-			Tao.OpenGl.Gl.glPushMatrix();
-			Tao.OpenGl.Gl.glTranslated(-3.0, -2.0, 0.0);
-			Tao.OpenGl.Gl.glRotated(angle, 0.0, 0.0, 1.0);
-			Tao.OpenGl.Gl.glCallList(gear1);
-			Tao.OpenGl.Gl.glPopMatrix();
+			Gl.glPushMatrix();
+			Gl.glTranslated(-3.0, -2.0, 0.0);
+			Gl.glRotated(angle, 0.0, 0.0, 1.0);
+			Gl.glCallList(gear1);
+			Gl.glPopMatrix();
 
-			Tao.OpenGl.Gl.glPushMatrix();
-			Tao.OpenGl.Gl.glTranslated(3.1, -2.0, 0.0);
-			Tao.OpenGl.Gl.glRotated(-2.0 * angle - 9.0, 0.0, 0.0, 1.0);
-			Tao.OpenGl.Gl.glCallList(gear2);
-			Tao.OpenGl.Gl.glPopMatrix();
+			Gl.glPushMatrix();
+			Gl.glTranslated(3.1, -2.0, 0.0);
+			Gl.glRotated(-2.0 * angle - 9.0, 0.0, 0.0, 1.0);
+			Gl.glCallList(gear2);
+			Gl.glPopMatrix();
 
-			Tao.OpenGl.Gl.glPushMatrix();
-			Tao.OpenGl.Gl.glTranslated(-3.1, 4.2, 0.0);
-			Tao.OpenGl.Gl.glRotated(-2.0 * angle - 25.0, 0.0, 0.0, 1.0);
-			Tao.OpenGl.Gl.glCallList(gear3);
-			Tao.OpenGl.Gl.glPopMatrix();
+			Gl.glPushMatrix();
+			Gl.glTranslated(-3.1, 4.2, 0.0);
+			Gl.glRotated(-2.0 * angle - 25.0, 0.0, 0.0, 1.0);
+			Gl.glCallList(gear3);
+			Gl.glPopMatrix();
 
-			Tao.OpenGl.Gl.glPopMatrix();
+			Gl.glPopMatrix();
 
 			Video.GLSwapBuffers();
 
@@ -207,7 +231,7 @@ namespace SdlDotNet.Examples
 			{
 				double seconds = (t - T0) / 1000.0;
 				double fps = Frames / seconds;
-				System.Console.WriteLine ("c#: {0} frames in {1} seconds = {2} FPS", Frames, seconds, fps);
+				System.Console.WriteLine("c#: {0} frames in {1} seconds = {2} FPS", Frames, seconds, fps);
 				T0 = t;
 				Frames = 0;
 			}
@@ -229,13 +253,13 @@ namespace SdlDotNet.Examples
 			m_newH = m_screen.Height;
 			double h = (double)m_newH / (double)m_newW;
 
-			Tao.OpenGl.Gl.glViewport (0, 0, m_newW, m_newH);
-			Tao.OpenGl.Gl.glMatrixMode (Tao.OpenGl.Gl.GL_PROJECTION);
-			Tao.OpenGl.Gl.glLoadIdentity ();
-			Tao.OpenGl.Gl.glFrustum (-1.0, 1.0, -h, h, 5.0, 60.0);
-			Tao.OpenGl.Gl.glMatrixMode (Tao.OpenGl.Gl.GL_MODELVIEW);
-			Tao.OpenGl.Gl.glLoadIdentity ();
-			Tao.OpenGl.Gl.glTranslated (0.0, 0.0, -40.0);
+			Gl.glViewport (0, 0, m_newW, m_newH);
+			Gl.glMatrixMode (Gl.GL_PROJECTION);
+			Gl.glLoadIdentity ();
+			Gl.glFrustum (-1.0, 1.0, -h, h, 5.0, 60.0);
+			Gl.glMatrixMode (Gl.GL_MODELVIEW);
+			Gl.glLoadIdentity ();
+			Gl.glTranslated (0.0, 0.0, -40.0);
 		}
 
 		static void init ()
@@ -245,39 +269,42 @@ namespace SdlDotNet.Examples
 			float[] green = {0.0f, 0.8f, 0.2f, 1.0f};
 			float[] blue = {0.2f, 0.2f, 1.0f, 1.0f};
 
-			Tao.OpenGl.Gl.glLightfv(Tao.OpenGl.Gl.GL_LIGHT0, Tao.OpenGl.Gl.GL_POSITION, pos);
-			Tao.OpenGl.Gl.glEnable(Tao.OpenGl.Gl.GL_CULL_FACE);
-			Tao.OpenGl.Gl.glEnable(Tao.OpenGl.Gl.GL_LIGHTING);
-			Tao.OpenGl.Gl.glEnable(Tao.OpenGl.Gl.GL_LIGHT0);
-			Tao.OpenGl.Gl.glEnable(Tao.OpenGl.Gl.GL_DEPTH_TEST);
+			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, pos);
+			Gl.glEnable(Gl.GL_CULL_FACE);
+			Gl.glEnable(Gl.GL_LIGHTING);
+			Gl.glEnable(Gl.GL_LIGHT0);
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
 
 			/* make the gears */
-			gear1 = Tao.OpenGl.Gl.glGenLists(1);
-			Tao.OpenGl.Gl.glNewList(gear1, Tao.OpenGl.Gl.GL_COMPILE);
-			Tao.OpenGl.Gl.glMaterialfv(Tao.OpenGl.Gl.GL_FRONT, Tao.OpenGl.Gl.GL_AMBIENT_AND_DIFFUSE, red);
+			gear1 = Gl.glGenLists(1);
+			Gl.glNewList(gear1, Gl.GL_COMPILE);
+			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_AMBIENT_AND_DIFFUSE, red);
 			gear(1.0, 4.0, 1.0, 20, 0.7);
-			Tao.OpenGl.Gl.glEndList();
+			Gl.glEndList();
 
-			gear2 = Tao.OpenGl.Gl.glGenLists(1);
-			Tao.OpenGl.Gl.glNewList(gear2, Tao.OpenGl.Gl.GL_COMPILE);
-			Tao.OpenGl.Gl.glMaterialfv(Tao.OpenGl.Gl.GL_FRONT, Tao.OpenGl.Gl.GL_AMBIENT_AND_DIFFUSE, green);
+			gear2 = Gl.glGenLists(1);
+			Gl.glNewList(gear2, Gl.GL_COMPILE);
+			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_AMBIENT_AND_DIFFUSE, green);
 			gear(0.5, 2.0, 2.0, 10, 0.7);
-			Tao.OpenGl.Gl.glEndList();
+			Gl.glEndList();
 
-			gear3 = Tao.OpenGl.Gl.glGenLists(1);
-			Tao.OpenGl.Gl.glNewList(gear3, Tao.OpenGl.Gl.GL_COMPILE);
-			Tao.OpenGl.Gl.glMaterialfv(Tao.OpenGl.Gl.GL_FRONT, Tao.OpenGl.Gl.GL_AMBIENT_AND_DIFFUSE, blue);
+			gear3 = Gl.glGenLists(1);
+			Gl.glNewList(gear3, Gl.GL_COMPILE);
+			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_AMBIENT_AND_DIFFUSE, blue);
 			gear(1.3, 2.0, 0.5, 10, 0.7);
-			Tao.OpenGl.Gl.glEndList();
+			Gl.glEndList();
 
-			Tao.OpenGl.Gl.glEnable(Tao.OpenGl.Gl.GL_NORMALIZE);
+			Gl.glEnable(Gl.GL_NORMALIZE);
 
-				Console.WriteLine ("GL_RENDERER = {0}", Tao.OpenGl.Gl.glGetString(Tao.OpenGl.Gl.GL_RENDERER));
-				Console.WriteLine ("GL_VERSION = {0}", Tao.OpenGl.Gl.glGetString(Tao.OpenGl.Gl.GL_VERSION));
-				Console.WriteLine ("GL_VENDOR = {0}", Tao.OpenGl.Gl.glGetString(Tao.OpenGl.Gl.GL_VENDOR));
-				Console.WriteLine ("GL_EXTENSIONS = {0}", Tao.OpenGl.Gl.glGetString(Tao.OpenGl.Gl.GL_EXTENSIONS));
+				Console.WriteLine ("GL_RENDERER = {0}", 
+					Gl.glGetString(Gl.GL_RENDERER));
+				Console.WriteLine ("GL_VERSION = {0}", 
+					Gl.glGetString(Gl.GL_VERSION));
+				Console.WriteLine ("GL_VENDOR = {0}", 
+					Gl.glGetString(Gl.GL_VENDOR));
+				Console.WriteLine ("GL_EXTENSIONS = {0}", 
+					Gl.glGetString(Gl.GL_EXTENSIONS));
 		}
-
 
 		static bool quitFlag = false;
 		static Surface m_screen;

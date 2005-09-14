@@ -27,12 +27,38 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Timer
 	{
+		static private bool disposed;
+
 		Timer()
 		{}
 
 		static Timer()
 		{
 			Initialize();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		~Timer()
+		{
+			Dispose(false);
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <param name="disposing"></param>
+		public static void Dispose(bool disposing)
+		{
+			if (!disposed)
+			{
+				if (disposing)
+				{
+					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_TIMER);
+				}
+				disposed = true;
+			}
 		}
 
 		/// <summary>

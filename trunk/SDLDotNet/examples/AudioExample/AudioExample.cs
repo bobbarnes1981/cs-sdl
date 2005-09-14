@@ -125,7 +125,7 @@ namespace SdlDotNet.Examples
 			switch(e.Key)
 			{ 
 				case Key.Escape:
-					Events.QuitApp(); 
+					Events.QuitApplication(); 
 					break; 
 				case Key.Space: 
 

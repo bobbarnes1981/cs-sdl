@@ -168,6 +168,14 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		~Joystick()
+		{
+			Dispose(false);
+		}
+
+		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
 		/// <param name="disposing"></param>
