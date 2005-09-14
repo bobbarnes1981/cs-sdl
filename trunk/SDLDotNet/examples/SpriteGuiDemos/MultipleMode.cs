@@ -255,9 +255,6 @@ namespace SdlDotNet.Examples
 			return new Point(offset.X, offset.Y);
 		}
 
-
-
-
 		/// <summary>
 		/// Adds the internal sprite manager to the outer one.
 		/// </summary>
@@ -278,8 +275,13 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		public override string ToString() { return "Multiple"; }
+		public override string ToString() 
+		{ 
+			return "Multiple"; 
+		}
+
 		private bool disposed;
+
 		/// <summary>
 		/// 
 		/// </summary>

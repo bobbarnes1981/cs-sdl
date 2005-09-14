@@ -174,7 +174,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Update(TickEventArgs args)
 		{
-		//	double dx = args.RatePerSecond(delta);
 			double dx = 10;
 			this.HorizontalWeight += dx;
 
@@ -208,7 +207,6 @@ namespace SdlDotNet.Examples
       
 			// Change the text
 			this.Text = this.X.ToString();
-				//this.HorizontalWeight.ToString("#0.0000000", CultureInfo.CurrentCulture);
 		}
 		private bool disposed;
 

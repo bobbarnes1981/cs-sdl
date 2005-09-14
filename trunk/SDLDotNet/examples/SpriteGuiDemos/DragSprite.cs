@@ -61,9 +61,6 @@ namespace SdlDotNet.Examples
 		}
 
 		#region Events
-		//private bool beingDragged = false;
-		
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -79,16 +76,14 @@ namespace SdlDotNet.Examples
 					this.Z += 100;
 					this.BeingDragged = true;
 					this.Surfaces.Clear();
-					this.Surfaces.Add(d2);
-					//SdlDemo.MasterSpriteContainer.EventLock = this;		
+					this.Surfaces.Add(d2);		
 				}
 				else
 				{
 					this.Z -= 100;
 					this.BeingDragged = false;
 					this.Surfaces.Clear();
-					this.Surfaces.Add(d1);
-					//SdlDemo.MasterSpriteContainer.EventLock = null;	
+					this.Surfaces.Add(d1);	
 				}
 			}
 		}
@@ -160,5 +155,4 @@ namespace SdlDotNet.Examples
 			}
 		}
 	}
-
 }

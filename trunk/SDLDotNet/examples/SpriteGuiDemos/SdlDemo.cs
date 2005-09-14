@@ -54,7 +54,7 @@ namespace SdlDotNet.Examples
 		{
 			// Start up the SDL
 			Video.WindowCaption = "SdlDotNet - Sprite and Gui Demo";
-			Video.Mouse.ShowCursor = false;
+//			Video.Mouse.ShowCursor = false;
       
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.OnKeyboardDown);
@@ -65,12 +65,12 @@ namespace SdlDotNet.Examples
 			int height = 600;
 
 			screen = Video.SetVideoModeWindow(width, height, true);
-			cursor = 
-				new Surface(@"../../Data/cursor.png");
-			cursor.TransparentColor = Color.Black;
+//			cursor = 
+//				new Surface(@"../../Data/cursor.png");
+//			cursor.TransparentColor = Color.Black;
 
-			MouseMotionHandler = new MouseMotionEventHandler(this.MouseMotion);
-			Events.MouseMotion += MouseMotionHandler;
+//			MouseMotionHandler = new MouseMotionEventHandler(this.MouseMotion);
+//			Events.MouseMotion += MouseMotionHandler;
 
 			// Set up the master sprite container
 			SetupGui();
@@ -78,16 +78,15 @@ namespace SdlDotNet.Examples
 			// Load demos
 			LoadDemos();
 
+			// Loop until the system indicates it should stop
+			Console.WriteLine("Welcome to the SDL.NET Demo!");
+
 			// Start up the ticker (and animation)
 			Events.Fps = 30;
 			Events.Run();
 
-			// Loop until the system indicates it should stop
-			Console.WriteLine("Welcome to the SDL.NET Demo!");
-
 			// Stop the ticker and the current demo
 			SwitchDemo(-1);
-		//	Events.StopTicker();
 		}
 
 		#region GUI
@@ -116,10 +115,7 @@ namespace SdlDotNet.Examples
 
 			statusWindow = new StatusWindow(gui);
 			// Set up the status window
-			master.Add(statusWindow);
-			//statusWindow.Add(fps);
-			//fps.EnableTickEvent();
-			
+			master.Add(statusWindow);			
 
 			// Create the menu
 			CreateMenu(gui);
@@ -306,7 +302,7 @@ namespace SdlDotNet.Examples
 				screen.Blit(currentDemo.RenderSurface());
 			}
 			screen.Blit(master);
-			screen.Blit(cursor, position);
+			//screen.Blit(cursor, position);
 			screen.Update();
 		}
 
@@ -325,13 +321,13 @@ namespace SdlDotNet.Examples
 			Events.QuitApplication();
 		}
 
-		private void MouseMotion(
-			object sender, 
-			MouseMotionEventArgs e)
-		{
-			position.X = e.X;
-			position.Y = e.Y;
-		}
+//		private void MouseMotion(
+//			object sender, 
+//			MouseMotionEventArgs e)
+//		{
+//			position.X = e.X;
+//			position.Y = e.Y;
+//		}
 
 		/// <summary>
 		/// 
@@ -350,24 +346,13 @@ namespace SdlDotNet.Examples
 		#region Properties
 		private static SpriteCollection master = new SpriteCollection();
 		private static SpriteCollection manager = new SpriteCollection();
-		MouseMotionEventHandler MouseMotionHandler;
+//		MouseMotionEventHandler MouseMotionHandler;
 		private Surface screen;
 		private GuiWindow statusWindow;
 		private GuiTicker statusTicker;
 		private static GuiMenuBar gmb;
-		Surface cursor;
+//		Surface cursor;
 		Point position = new Point(100,100);
-//		private static Clock clock = new Clock(5);
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public static Clock Fps
-//		{
-//			get
-//			{
-//				return clock;
-//			}
-//		}
 
 		/// <summary>
 		/// 
