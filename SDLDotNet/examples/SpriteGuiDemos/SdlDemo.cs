@@ -67,6 +67,7 @@ namespace SdlDotNet.Examples
 			screen = Video.SetVideoModeWindow(width, height, true);
 			cursor = 
 				new Surface(@"../../Data/cursor.png");
+			cursor.TransparentColor = Color.Black;
 
 			MouseMotionHandler = new MouseMotionEventHandler(this.MouseMotion);
 			Events.MouseMotion += MouseMotionHandler;
@@ -260,7 +261,7 @@ namespace SdlDotNet.Examples
 			{
 				case Key.Escape:
 				case Key.Q:
-					Events.QuitApp();
+					Events.QuitApplication();
 					break;
 				case Key.C:
 					StopDemo();
@@ -321,7 +322,7 @@ namespace SdlDotNet.Examples
 
 		private void OnMenuQuit(object sender, MenuItemEventArgs e)
 		{
-			Events.QuitApp();
+			Events.QuitApplication();
 		}
 
 		private void MouseMotion(

@@ -50,7 +50,7 @@ namespace SdlDotNet.Examples
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
-				Events.QuitApp();
+				Events.QuitApplication();
 			}
 		}
 

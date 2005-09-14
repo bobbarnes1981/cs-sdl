@@ -207,8 +207,8 @@ namespace SdlDotNet.Examples
 			move++;
       
 			// Change the text
-			this.Text = 
-				this.HorizontalWeight.ToString("#0.0000000", CultureInfo.CurrentCulture);
+			this.Text = this.X.ToString();
+				//this.HorizontalWeight.ToString("#0.0000000", CultureInfo.CurrentCulture);
 		}
 		private bool disposed;
 

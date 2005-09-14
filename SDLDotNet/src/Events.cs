@@ -740,7 +740,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		public static void QuitApp()
+		public static void QuitApplication()
 		{
 			Events.RaiseEvent(new QuitEventArgs());
 		}

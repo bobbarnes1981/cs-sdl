@@ -74,7 +74,7 @@ namespace SdlDotNet.Examples
 			// Check if the key pressed was a Q or Escape
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
-				Events.QuitApp();
+				Events.QuitApplication();
 			}
 		}
 
