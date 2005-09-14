@@ -10,6 +10,7 @@ David Hudson xx xxx 2005
 * Added SoundCollection class.
 * Simplified and removed some of the examples.
 * Added Audio Example. (Rob Loach)
+* Added MusicCollection class.
 * Improved Sprite collision detection.
 * Re-worked the Event class. It now provides a processing loop.
 * Added KeyboardState Class.
