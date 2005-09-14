@@ -132,11 +132,11 @@ namespace SdlDotNet.Examples
 			this.surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
 			foreach (SectorSprite i in this.backSprites)
 			{
-				Video.Screen.Blit(i.Surface, i.Rect);
+				Video.Screen.Blit(i.Surface, i.Rectangle);
 			}
 			foreach (EntitySprite j in this.frontSprites)
 			{
-				Video.Screen.Blit(j.Surface, j.Rect);
+				Video.Screen.Blit(j.Surface, j.Rectangle);
 			}
 			Video.Screen.Flip();
 		}
@@ -150,8 +150,7 @@ namespace SdlDotNet.Examples
 			this.entitySprite = new EntitySprite(surf);
 			this.frontSprites.Add(this.entitySprite);
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
-			this.entitySprite.CenterX = sectSprite.CenterX;
-			this.entitySprite.CenterY = sectSprite.CenterY;
+			this.entitySprite.Center = sectSprite.Center;
 		}
 
 		/// <summary>
@@ -161,8 +160,7 @@ namespace SdlDotNet.Examples
 		public void MoveEntity(Entity entity)
 		{
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
-			this.entitySprite.CenterX = sectSprite.CenterX;
-			this.entitySprite.CenterY = sectSprite.CenterY;
+			this.entitySprite.Center = sectSprite.Center;
 			if (this.sound != null)
 			{
 				this.sound.Play();

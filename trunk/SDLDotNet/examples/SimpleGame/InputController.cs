@@ -70,7 +70,8 @@ namespace SdlDotNet.Examples
 		private void Subscribe(object eventManager, QuitEventArgs e)
 		{
 			LogFile.WriteLine("InputController received a Quit event");
-			quitFlag = true;
+			Events.QuitApplication();
+			//quitFlag = true;
 		}
 
 		/// <summary>
@@ -100,14 +101,8 @@ namespace SdlDotNet.Examples
 			{
 				eventManager.Publish(new EntityMoveRequestEventArgs(Direction.Right));
 			}
-			
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		private void Quit(object sender, QuitEventArgs e) 
 		{
 			eventManager.Publish(new QuitEventArgs());
@@ -128,7 +123,7 @@ namespace SdlDotNet.Examples
 					
 					try 
 					{
-						eventManager.Publish(new TickEventArgs());
+						eventManager.Publish(new TickEventArgs(3,2,30));
 					} 
 					catch (SurfaceLostException) 
 					{
