@@ -40,7 +40,6 @@ namespace SdlDotNet.Examples
 		private System.Windows.Forms.Button buttonEject;
 		private System.Windows.Forms.Label labelStatus;
 		private System.Windows.Forms.Button buttonPrevious;
-		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Button buttonNext;
 		//private System.Windows.Forms.Timer timer;
 		//private System.ComponentModel.IContainer components;
@@ -66,7 +65,7 @@ namespace SdlDotNet.Examples
 				if (comboBoxDrive.Items.Count > 0) 
 				{
 					comboBoxDrive.SelectedIndex = 0;
-				//	timer.Start();
+					//	timer.Start();
 				}
 			} 
 			catch (SdlException ex) 
@@ -87,10 +86,10 @@ namespace SdlDotNet.Examples
 		{
 			if( disposing )
 			{
-//				if (components != null) 
-//				{
-//					components.Dispose();
-//				}
+				//				if (components != null) 
+				//				{
+				//					components.Dispose();
+				//				}
 			}
 			base.Dispose( disposing );
 		}
@@ -102,7 +101,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(CDPlayer));
 			this.label1 = new System.Windows.Forms.Label();
 			this.comboBoxDrive = new System.Windows.Forms.ComboBox();
 			this.buttonPlay = new System.Windows.Forms.Button();
@@ -112,7 +110,6 @@ namespace SdlDotNet.Examples
 			this.labelStatus = new System.Windows.Forms.Label();
 			this.buttonNext = new System.Windows.Forms.Button();
 			this.buttonPrevious = new System.Windows.Forms.Button();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -196,22 +193,10 @@ namespace SdlDotNet.Examples
 			this.buttonPrevious.Text = "Prev";
 			this.buttonPrevious.Click += new System.EventHandler(this.buttonPrev_Click);
 			// 
-			// pictureBox1
-			// 
-			this.pictureBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
-			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-			this.pictureBox1.Location = new System.Drawing.Point(16, 144);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(328, 208);
-			this.pictureBox1.TabIndex = 9;
-			this.pictureBox1.TabStop = false;
-			// 
 			// CDPlayer
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.ClientSize = new System.Drawing.Size(362, 367);
-			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.buttonPrevious);
 			this.Controls.Add(this.buttonNext);
 			this.Controls.Add(this.labelStatus);
@@ -245,10 +230,10 @@ namespace SdlDotNet.Examples
 		{
 			try 
 			{
-//				if (_drive != null) {
-//					_drive.Stop();
-//					_drive.Close();
-//				}
+				//				if (_drive != null) {
+				//					_drive.Stop();
+				//					_drive.Close();
+				//				}
 
 				//_drive = _cd.OpenDrive(comboBoxDrive.SelectedIndex);
 				//_drive = _cd.OpenDrive(0);
@@ -268,9 +253,7 @@ namespace SdlDotNet.Examples
 					_drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
 				}
 				TimeSpan timeSpan = Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
-				this.labelStatus.Text = "Track: " + 
-					_drive.CurrentTrack + "     Length: " + 
-					timeSpan.Minutes + ":" + timeSpan.Seconds;
+				this.labelStatus.Text = "Track: " + _drive.CurrentTrack + "     Length: " + timeSpan.Minutes + ":" + timeSpan.Seconds;
 			} 
 			catch (SdlException ex) 
 			{
@@ -283,9 +266,7 @@ namespace SdlDotNet.Examples
 			try 
 			{
 				if (_drive != null)
-				{
 					_drive.Pause();
-				}
 			} 
 			catch (SdlException ex) 
 			{
@@ -362,30 +343,32 @@ namespace SdlDotNet.Examples
 
 		private void labelStatus_Click(object sender, System.EventArgs e)
 		{
+			
 		}
 
 		private void CDPlayer_Load(object sender, System.EventArgs e)
 		{
+		
 		}
 
-//		private void timer_Tick(object sender, System.EventArgs e) {
-//			try {
-//				if (_drive != null) {
-//					Tao.Sdl.Sdl.CDstatus status = _drive.Status;
-//					StringBuilder statstr = new StringBuilder();
-//					statstr.Append(status.ToString());
-//					statstr.Append("\r\n");
-//					if (status == Tao.Sdl.Sdl.CDstatus.CD_PLAYING) {
-//						int min, sec, f;
-//						CDAudio.FramesToMinSecFrames(_drive.CurrentFrame, out min, out sec, out f);
-//						statstr.AppendFormat("{0:00} {1:00}:{2:00}", _drive.CurrentTrack, min, sec);
-//					}
-//					labelStatus.Text = statstr.ToString();
-//				}
-//			} catch (SdlException ex) {
-//				HandleError(ex);
-//				labelStatus.Text = "Error";
-//			}
-//		}
+		//		private void timer_Tick(object sender, System.EventArgs e) {
+		//			try {
+		//				if (_drive != null) {
+		//					Tao.Sdl.Sdl.CDstatus status = _drive.Status;
+		//					StringBuilder statstr = new StringBuilder();
+		//					statstr.Append(status.ToString());
+		//					statstr.Append("\r\n");
+		//					if (status == Tao.Sdl.Sdl.CDstatus.CD_PLAYING) {
+		//						int min, sec, f;
+		//						CDAudio.FramesToMinSecFrames(_drive.CurrentFrame, out min, out sec, out f);
+		//						statstr.AppendFormat("{0:00} {1:00}:{2:00}", _drive.CurrentTrack, min, sec);
+		//					}
+		//					labelStatus.Text = statstr.ToString();
+		//				}
+		//			} catch (SdlException ex) {
+		//				HandleError(ex);
+		//				labelStatus.Text = "Error";
+		//			}
+		//		}
 	}
 }
