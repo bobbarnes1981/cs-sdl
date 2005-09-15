@@ -109,7 +109,7 @@ namespace SdlDotNet.Sprites
 			SdlDotNet.Font font, 
 			Point position) : this(textItem, font)
 		{
-			this.Point = position;
+			this.Position = position;
 			this.RenderInternal();
 		}
 
@@ -126,7 +126,7 @@ namespace SdlDotNet.Sprites
 			bool antiAlias,
 			Point position) : this(textItem, font)
 		{
-			this.Point = position;
+			this.Position = position;
 			this.antiAlias = antiAlias;
 			this.RenderInternal();
 		}

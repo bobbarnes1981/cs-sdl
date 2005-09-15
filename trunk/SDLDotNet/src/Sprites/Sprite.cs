@@ -334,7 +334,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Gets and sets the sprites current x,y location.
 		/// </summary>
-		public Point Point
+		public Point Position
 		{
 			get 
 			{ 
