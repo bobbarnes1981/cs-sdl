@@ -68,24 +68,24 @@ namespace SdlDotNet.Examples
 			base.Update(args);
 
 			// Bounce off the left
-			if (Coordinates.X < bounds.Left)
+			if (this.X < bounds.Left)
 			{
 				this.X = bounds.Left;
 			}
 
 			// Bounce off the top
-			if (Coordinates.Y < bounds.Top)
+			if (this.Y < bounds.Top)
 			{
 				this.Y = bounds.Top;
 			}
 
 			// Bounce off the bottom
-			if (Coordinates.Y > bounds.Bottom)
+			if (this.Y > bounds.Bottom)
 			{
 				this.Y = bounds.Bottom;
 			}
 			// Bounce off the right
-			if (Coordinates.X > bounds.Right)
+			if (this.X > bounds.Right)
 			{
 				this.X = bounds.Right;
 			}

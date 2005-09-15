@@ -8,10 +8,18 @@ namespace SdlDotNet.Sprites
 	/// </summary>
 	public class AnimationCollection : DictionaryBase
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public AnimationCollection() : base()
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="anim"></param>
 		public AnimationCollection(string key, Animation anim)
 		{
 			this.Add(key, anim);
@@ -21,12 +29,15 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new AnimationCollection with the contents of an existing AnimationCollection.
 		/// </summary>
-		/// <param name="musicCollection">The existing music collection to add.</param>
+		/// <param name="animCollection">The existing music collection to add.</param>
 		public AnimationCollection(AnimationCollection animCollection)
 		{
 			this.Add(animCollection);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Animation this[string key]
 		{
 			get 
@@ -61,6 +72,12 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="anim"></param>
+		/// <returns></returns>
 		public int Add(string key, Animation anim) 
 		{
 			Dictionary.Add(key, anim);

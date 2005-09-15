@@ -193,12 +193,12 @@ namespace SdlDotNet.Examples
 			rectangle.Offset(3 * direction * move, 0);
 			this.Rectangle = rectangle;
 
-			if (this.Position.X >= (Video.Screen.Width - 150))
+			if (this.X >= (Video.Screen.Width - 150))
 			{
 				move = 0;
 				direction = -1;
 			}
-			else if (this.Position.X < 50)
+			else if (this.X < 50)
 			{
 				move = 0;
 				direction = 1;

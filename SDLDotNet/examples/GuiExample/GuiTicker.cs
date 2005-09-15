@@ -63,7 +63,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="sprite"></param>
 		public void Add(Sprite sprite)
 		{
-			sprite.Position = new Point(this.Size.Width, this.Position.Y);
+			sprite.Point = new Point(this.Size.Width, this.Position.Y);
 			base.Sprites.Add(sprite);
 		}
 		#endregion
