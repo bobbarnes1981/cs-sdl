@@ -137,7 +137,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Gets and sets the surface of the sprite.
 		/// </summary>
-		public Surface Surface
+		public virtual Surface Surface
 		{
 			get
 			{
