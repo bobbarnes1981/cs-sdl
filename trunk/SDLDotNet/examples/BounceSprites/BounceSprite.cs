@@ -46,7 +46,25 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="d"></param>
 		/// <param name="coordinates"></param>
-		public BounceSprite(SurfaceCollection d, Vector coordinates)
+		/// <param name="z"></param>
+		public BounceSprite(SurfaceCollection d, Point coordinates, int z)
+			: base(d, coordinates, z)
+		{
+			//Sprites will be bounded by the screen edges minus 
+			//their size so they will not go off the screen
+			this.bounds = 
+				new Rectangle(0, 0, Video.Screen.Rectangle.Width - 
+				(int) d.Size.Width, Video.Screen.Rectangle.Height - 
+				(int) d.Size.Height);
+			//The sprite can be dragged
+			this.AllowDrag = true;
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="d"></param>
+		/// <param name="coordinates"></param>
+		public BounceSprite(SurfaceCollection d, Point coordinates)
 			: base(d, coordinates)
 		{
 			//Sprites will be bounded by the screen edges minus 

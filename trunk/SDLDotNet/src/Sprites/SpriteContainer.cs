@@ -32,15 +32,15 @@ namespace SdlDotNet.Sprites
 	/// </summary>
 	public class SpriteContainer : Sprite
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="coordinates"></param>
-		/// <param name="surface"></param>
-		public SpriteContainer(Surface surface, Vector coordinates) : 
-			base(surface, coordinates)
-		{
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="coordinates"></param>
+//		/// <param name="surface"></param>
+//		public SpriteContainer(Surface surface, Vector coordinates) : 
+//			base(surface, coordinates)
+//		{
+//		}
 
 		/// <summary>
 		/// 

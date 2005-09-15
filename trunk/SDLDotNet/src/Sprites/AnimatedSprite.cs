@@ -51,16 +51,16 @@ namespace SdlDotNet.Sprites
 			this.frameCollections = frameCollections;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="frameCollections"></param>
-		public AnimatedSprite(Hashtable frameCollections, string frameKey)
-			: base(((SurfaceCollection)frameCollections[0])[0])
-		{
-			this.frameCollections = frameCollections;
-			this.key = frameKey;
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="frameCollections"></param>
+//		public AnimatedSprite(Hashtable frameCollections, string frameKey)
+//			: base(((SurfaceCollection)frameCollections[0])[0])
+//		{
+//			this.frameCollections = frameCollections;
+//			this.key = frameKey;
+//		}
 
 		/// <summary>
 		/// 
@@ -90,8 +90,9 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="surfaces"></param>
 		/// <param name="coordinates"></param>
-		public AnimatedSprite(SurfaceCollection surfaces, Vector coordinates)
-			: base(surfaces[0], coordinates)
+		/// <param name="z"></param>
+		public AnimatedSprite(SurfaceCollection surfaces, Point coordinates, int z)
+			: base(surfaces[0], coordinates, z)
 		{
 			this.frameCollections["default"] = surfaces;
 		}
@@ -109,19 +110,19 @@ namespace SdlDotNet.Sprites
 			this.frame = frame;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surfaces"></param>
-		/// <param name="frame"></param>
-		/// <param name="coordinates"></param>
-		public AnimatedSprite(SurfaceCollection surfaces, int frame, Vector coordinates)
-			: base(surfaces[0], coordinates)
-		{
-			//this.surfaces = surfaces;
-			this.frameCollections["default"] = surfaces;
-			this.frame = frame;
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="surfaces"></param>
+//		/// <param name="frame"></param>
+//		/// <param name="coordinates"></param>
+//		public AnimatedSprite(SurfaceCollection surfaces, int frame, Vector coordinates)
+//			: base(surfaces[0], coordinates)
+//		{
+//			//this.surfaces = surfaces;
+//			this.frameCollections["default"] = surfaces;
+//			this.frame = frame;
+//		}
 
 		#region Drawable
 		private SurfaceCollection surfaces = new SurfaceCollection();

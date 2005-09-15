@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 		/// <param name="speedY"></param>
 		public Bullet(Point location, int speedX, int speedY)
 		{
-			this.Position = location;
+			this.Point = location;
 			this.speedX = speedX;
 			this.speedY = speedY;
 
@@ -59,10 +59,10 @@ namespace SdlDotNet.Examples
 			this.X += (int)(args.SecondsElapsed * this.speedX);
 			this.Y += (int)(args.SecondsElapsed * this.speedY);
 
-			if (this.Position.X + this.Surface.Size.Width < 0 ||
-				this.Position.X > Video.Screen.Width ||
-				this.Position.Y + this.Surface.Size.Height < 0 ||
-				this.Position.Y > Video.Screen.Height)
+			if (this.X + this.Surface.Size.Width < 0 ||
+				this.X > Video.Screen.Width ||
+				this.Y + this.Surface.Size.Height < 0 ||
+				this.Y > Video.Screen.Height)
 			{
 				this.Kill();
 			}

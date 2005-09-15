@@ -109,7 +109,7 @@ namespace SdlDotNet.Sprites
 			SdlDotNet.Font font, 
 			Point position) : this(textItem, font)
 		{
-			this.Position = position;
+			this.Point = position;
 			this.RenderInternal();
 		}
 
@@ -126,7 +126,7 @@ namespace SdlDotNet.Sprites
 			bool antiAlias,
 			Point position) : this(textItem, font)
 		{
-			this.Position = position;
+			this.Point = position;
 			this.antiAlias = antiAlias;
 			this.RenderInternal();
 		}
@@ -164,61 +164,6 @@ namespace SdlDotNet.Sprites
 			bool antiAlias,
 			Point position)
 			: this(textItem, font, position)
-		{
-			this.color = color;
-			this.antiAlias = antiAlias;
-			this.RenderInternal();
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="textItem"></param>
-		/// <param name="font"></param>
-		/// <param name="coordinates"></param>
-		public TextSprite(
-			string textItem, 
-			SdlDotNet.Font font,
-			Vector coordinates) 
-			: this(textItem, font, coordinates.Point)
-		{
-			this.Z = coordinates.Z;
-			this.RenderInternal();
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="textItem"></param>
-		/// <param name="font"></param>
-		/// <param name="color"></param>
-		/// <param name="coordinates"></param>
-		public TextSprite(
-			string textItem, 
-			SdlDotNet.Font font, 
-			Color color,
-			Vector coordinates)
-			: this(textItem, font, coordinates)
-		{
-			this.color = color;
-			this.RenderInternal();
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="textItem"></param>
-		/// <param name="font"></param>
-		/// <param name="color"></param>
-		/// <param name="antiAlias"></param>
-		/// <param name="coordinates"></param>
-		public TextSprite(
-			string textItem, 
-			SdlDotNet.Font font, 
-			Color color,
-			bool antiAlias,
-			Vector coordinates)
-			: this(textItem, font, coordinates)
 		{
 			this.color = color;
 			this.antiAlias = antiAlias;

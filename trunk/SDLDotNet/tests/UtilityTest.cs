@@ -49,7 +49,6 @@ namespace SdlDotNet.Tests
 			Vector v = new Vector();
 			Assert.AreEqual(0, v.X);
 			Assert.AreEqual(0, v.Y);
-			Assert.AreEqual(0, v.Z);
 		}
 	}
 }

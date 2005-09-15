@@ -88,9 +88,8 @@ namespace SdlDotNet.Examples
 				//Create a new Sprite at a random location on the screen
 				BounceSprite bounceSprite = 
 					new BounceSprite(marbleSurfaces,
-					new Vector(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
-					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom),
-					0));
+					new Point(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
+					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom)));
 				//Add the sprite to the SpriteCollection
 				master.Add(bounceSprite);
 			}
