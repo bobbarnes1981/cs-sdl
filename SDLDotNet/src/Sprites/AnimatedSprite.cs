@@ -17,12 +17,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using System;
-using System.Collections;
-using System.Drawing;
-
-using SdlDotNet;
 using SdlDotNet.Sprites;
+using SdlDotNet;
+using System;
+using System.Drawing;
 
 namespace SdlDotNet.Sprites
 {
@@ -31,230 +29,156 @@ namespace SdlDotNet.Sprites
 	/// </summary>
 	public class AnimatedSprite : Sprite
 	{
+
+		#region Constructors
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="surfaces"></param>
-		public AnimatedSprite(SurfaceCollection surfaces)
-			: base(surfaces[0])
+		public AnimatedSprite() : base()
 		{
-			this.frameCollections["default"] = surfaces;
+			m_Timer.Elapsed += new System.Timers.ElapsedEventHandler(m_Timer_Elapsed);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="frameCollections"></param>
-		public AnimatedSprite(Hashtable frameCollections)
-			: base(((SurfaceCollection)frameCollections[0])[0])
+		/// <param name="name"></param>
+		/// <param name="anim"></param>
+		public AnimatedSprite(string name, Animation anim) : this()
 		{
-			this.frameCollections = frameCollections;
-		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="frameCollections"></param>
-//		public AnimatedSprite(Hashtable frameCollections, string frameKey)
-//			: base(((SurfaceCollection)frameCollections[0])[0])
-//		{
-//			this.frameCollections = frameCollections;
-//			this.key = frameKey;
-//		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surfaces"></param>
-		/// <param name="frame"></param>
-		public AnimatedSprite(SurfaceCollection surfaces, int frame)
-			: base(surfaces[0])
-		{
-			this.frameCollections["default"] = surfaces;
-			this.frame = frame;
+			m_Animations.Add(name, anim);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="surfaces"></param>
-		/// <param name="position"></param>
-		public AnimatedSprite(SurfaceCollection surfaces, Point position)
-			: base(surfaces[0], position)
+		/// <param name="anim"></param>
+		public AnimatedSprite(Animation anim) : this()
 		{
-			this.frameCollections["default"] = surfaces;
+			m_Animations.Add("Default", anim);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="surfaces"></param>
+		/// <param name="d"></param>
 		/// <param name="coordinates"></param>
 		/// <param name="z"></param>
-		public AnimatedSprite(SurfaceCollection surfaces, Point coordinates, int z)
-			: base(surfaces[0], coordinates, z)
+		public AnimatedSprite(SurfaceCollection d, Point coordinates, int z) : this()
 		{
-			this.frameCollections["default"] = surfaces;
+			m_Animations.Add("Default", new Animation(d));
+			this.Point = coordinates;
+			this.Z = z;
 		}
+		#endregion Constructors
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surfaces"></param>
-		/// <param name="frame"></param>
-		/// <param name="position"></param>
-		public AnimatedSprite(SurfaceCollection surfaces, int frame, Point position)
-			: base(surfaces[0], position)
-		{
-			this.frameCollections["default"] = surfaces;
-			this.frame = frame;
-		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="surfaces"></param>
-//		/// <param name="frame"></param>
-//		/// <param name="coordinates"></param>
-//		public AnimatedSprite(SurfaceCollection surfaces, int frame, Vector coordinates)
-//			: base(surfaces[0], coordinates)
-//		{
-//			//this.surfaces = surfaces;
-//			this.frameCollections["default"] = surfaces;
-//			this.frame = frame;
-//		}
-
-		#region Drawable
-		private SurfaceCollection surfaces = new SurfaceCollection();
-
-		private int frame;
-
-		/// <summary>
-		/// Retrieves the drawable associated with this sprite. This will
-		/// never return null (it will throw an exception if there is no
-		/// drawable).
-		/// </summary>
-		public SurfaceCollection Surfaces
-		{
-			get
-			{
-				if (surfaces == null)
-				{
-					throw new DrawableException("No surface to return");
-				}
-				return surfaces;
-			}
-		}
-
-		Hashtable frameCollections = new Hashtable();
-		string key = "default";
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public string FrameCollectionKey
-		{
-			get
-			{
-				return key;
-			}
-			set
-			{
-				key = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public Hashtable FrameCollections
-		{
-			get
-			{
-				return frameCollections;
-			}
-			set
-			{
-				frameCollections = value;
-			}
-		}
-
-		/// <summary>
-		/// Retrieves the current frame's surface.
-		/// </summary>
-		public override Surface Render()
-		{
-			return ((SurfaceCollection)this.frameCollections[key])[frame];
-		}
-
-		/// <summary>
-		/// Frame is the current frame number (drawable image) for the
-		/// current sprite.
-		/// </summary>
-		public int Frame
-		{
-			get 
-			{ 
-				return frame; 
-			}
-			set 
-			{ 
-				frame = value; 
-			}
-		}
-
-		/// <summary>
-		/// Contains a read-only count of the number of frames in the
-		/// sprite.
-		/// </summary>
-		public int FrameCount
-		{
-			get
-			{
-				if (surfaces == null)
-				{
-					return 0;
-				}
-				else
-				{
-					return ((SurfaceCollection)this.frameCollections[key]).Count;
-				}
-			}
-		}
-		#endregion
 
 		#region Properties
-		bool loop = true;
+ 
+		
+		private AnimationCollection m_Animations = new AnimationCollection();
 
 		/// <summary>
-		/// If true, the animation will loop.
+		/// The collection of animations for the animated sprite
 		/// </summary>
-		public bool Loop
+		public AnimationCollection Animations
 		{
 			get
 			{
-				return loop;
+				return m_Animations;
 			}
 			set
 			{
-				loop = value;
+				m_Animations = value;
 			}
 		}
 
-		bool animate = true;
+		
 
 		/// <summary>
-		/// If true, sprite will be animated
+		/// Gets and sets whether the animation is going.
 		/// </summary>
 		public bool Animate
 		{
 			get
 			{
-				return animate;
+				return m_Timer.Enabled;
 			}
 			set
 			{
-				animate = value;
+				m_Timer.Enabled = value;
+			}
+		}
+
+		private string m_CurrentAnimation = "Default";
+		/// <summary>
+		/// Gets and sets the current animation.
+		/// </summary>
+		public string CurrentAnimation
+		{
+			get
+			{
+				return m_CurrentAnimation; 
+			}
+			set
+			{ 
+				m_CurrentAnimation = value;
+				m_Timer.Interval = m_Animations[m_CurrentAnimation].Delay;
+			}
+		}
+
+		/// <summary>
+		/// Gets the current animations surface
+		/// </summary>
+		public override Surface Surface
+		{
+			get
+			{
+				return this.m_Animations[m_CurrentAnimation][m_Frame];
+			}
+			set
+			{
+				// don't set
+			}
+		}
+		
+		/// <summary>
+		/// Renders the surface
+		/// </summary>
+		/// <returns>A surface representing the rendered animated sprite.</returns>
+		public override Surface Render()
+		{
+			return this.m_Animations[m_CurrentAnimation][m_Frame];
+		}
+
+
+
+		private int m_Frame = 0;
+		/// <summary>
+		/// Gets and sets the current frame in the animation.
+		/// </summary>
+		public int Frame
+		{
+			get{ return m_Frame; }
+			set{ m_Frame = value; }
+		}
+
+
+		#endregion
+
+		#region Private Methods
+		private System.Timers.Timer m_Timer = new System.Timers.Timer(500);
+		private void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+		{
+			Animation current = m_Animations[m_CurrentAnimation];
+			if(m_Frame < current.Count)
+			{
+				m_Frame++;
+			}
+			else
+			{
+				if(current.Loop)
+					m_Frame = 0;
 			}
 		}
 		#endregion
@@ -273,10 +197,7 @@ namespace SdlDotNet.Sprites
 				{
 					if (disposing)
 					{
-						foreach (Surface s in this.surfaces)
-						{
-							s.Dispose();
-						}
+						// Perform disposing
 					}
 				}
 				finally
