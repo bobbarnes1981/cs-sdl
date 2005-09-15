@@ -106,6 +106,27 @@ namespace SdlDotNet.Sprites
 				this.Add((string)dict.Key, (Animation)dict.Value);
 			return Dictionary.Count;
 		}
+
+		/// <summary>
+		/// Gets the average delay of all animations in the collection.  Sets the delay of every animation in the collection.
+		/// </summary>
+		public double Delay
+		{
+			get
+			{
+				double average = 0;
+				IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+				while(dict.MoveNext())
+					average += ((Animation)dict.Value).Delay;
+				return average / this.Count;
+			}
+			set
+			{
+				IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+				while(dict.MoveNext())
+					((Animation)dict.Value).Delay = value;
+			}
+		}
         
 		/// <summary>
 		/// Removes an element from the collection.
