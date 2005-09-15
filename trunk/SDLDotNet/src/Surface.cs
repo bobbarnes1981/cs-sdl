@@ -270,6 +270,23 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Bitmap ToBitmap() 
+		{ 
+			Bitmap newBitmap = new Bitmap(this.Width, this.Height); 
+			for(int x = 0; x < newBitmap.Width; x++)
+			{
+				for(int y = 0; y < newBitmap.Height; y++)
+				{
+					newBitmap.SetPixel(x,y,this.GetPixel(x,y));
+				}
+			}
+			return newBitmap; 
+		}
+
+		/// <summary>
 		/// If the surface is double-buffered, 
 		/// this method will flip the back buffer onto the screen
 		/// </summary>

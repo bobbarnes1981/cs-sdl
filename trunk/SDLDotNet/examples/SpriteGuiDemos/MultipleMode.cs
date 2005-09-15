@@ -178,10 +178,10 @@ namespace SdlDotNet.Examples
 			return new Point(
 				surf.Size.Width / 2 - 
 				sprite.Size.Width / 2 - 
-				sprite.Coordinates.X,
+				sprite.X,
 				surf.Size.Height / 2 - 
 				sprite.Size.Height / 2 - 
-				sprite.Coordinates.Y);
+				sprite.Y);
 		}
 
 		/// <summary>
@@ -223,8 +223,8 @@ namespace SdlDotNet.Examples
 			}
 			
 			// Find out the "half" point for the sprite in the view
-			int mx = sprite.Coordinates.X + sprite.Size.Width / 2;
-			int my = sprite.Coordinates.Y + sprite.Size.Height / 2;
+			int mx = sprite.X + sprite.Size.Width / 2;
+			int my = sprite.Y + sprite.Size.Height / 2;
 			
 			// Figure out the coordinates
 			int x1 = mx - surf.Size.Width / 2;

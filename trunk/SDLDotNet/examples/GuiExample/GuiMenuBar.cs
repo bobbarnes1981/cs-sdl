@@ -58,7 +58,7 @@ namespace SdlDotNet.Examples.GuiExample
 		public void AddLeft(SpriteContainer s)
 		{
 			AddHead(s);
-			s.Position = new Point(0, 0);
+			s.Point = new Point(0, 0);
 
 			if (s.GetType().Name == "GuiMenuTitle")
 			{
