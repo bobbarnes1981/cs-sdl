@@ -1084,6 +1084,7 @@ namespace SdlDotNet
 		/// Blits a sprite onto the current surface.
 		/// </summary>
 		/// <param name="sprite">The sprite to blit.</param>
+		/// <param name="destinationPosition">The location where to blit the surface.</param>
 		/// <returns>A rectangle describing the location of the updated surface.</returns>
 		public Rectangle Blit(Sprite sprite, Point destinationPosition)
 		{
@@ -1101,6 +1102,7 @@ namespace SdlDotNet
 		/// Blits a sprite onto the current surface.
 		/// </summary>
 		/// <param name="sprite">The sprite to blit.</param>
+		/// <param name="destinationRectangle">The location of the sprite on the destination.</param>
 		/// <returns>A rectangle describing the location of the updated surface.</returns>
 		public Rectangle Blit(Sprite sprite, Rectangle destinationRectangle)
 		{

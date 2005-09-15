@@ -50,17 +50,6 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="coordinates"></param>
-		/// <param name="surface"></param>
-		public Sprite(Surface surface, Vector coordinates) : 
-			this(surface, coordinates.Point)
-		{
-			this.coordinateZ = coordinates.Z;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="surface"></param>
 		public Sprite(Surface surface)
 		{
@@ -103,17 +92,17 @@ namespace SdlDotNet.Sprites
 			this.coordinateZ = z;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="coordinates"></param>
-		/// <param name="surface"></param>
-		/// <param name="group"></param>
-		public Sprite(Surface surface, Vector coordinates, SpriteCollection group) : 
-			this(surface, coordinates)
-		{
-			this.AddInternal(group);
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="coordinates"></param>
+//		/// <param name="surface"></param>
+//		/// <param name="group"></param>
+//		public Sprite(Surface surface, Vector coordinates, SpriteCollection group) : 
+//			this(surface, coordinates)
+//		{
+//			this.AddInternal(group);
+//		}
 
 		/// <summary>
 		/// 
@@ -345,7 +334,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Gets and sets the sprites current x,y location.
 		/// </summary>
-		public Point Position
+		public Point Point
 		{
 			get 
 			{ 
@@ -376,22 +365,6 @@ namespace SdlDotNet.Sprites
 		}
 
 		private int coordinateZ;
-
-		/// <summary>
-		/// Gets and sets the sprites current x,y,z coordinates.
-		/// </summary>
-		public Vector Coordinates
-		{
-			get
-			{
-				return new Vector(this.Position, this.coordinateZ);
-			}
-			set
-			{
-				this.Position = new Point(value.X, value.Y);
-				this.coordinateZ = value.Z;
-			}
-		}
 
 		/// <summary>
 		/// Gets and sets the sprite's x location.
@@ -556,7 +529,7 @@ namespace SdlDotNet.Sprites
 			Sprite s = (Sprite) obj;
 
 			// Compare the Z-Order first
-			int res = this.Coordinates.Z.CompareTo(s.Coordinates.Z);
+			int res = this.Z.CompareTo(s.Z);
 
 			if (res != 0)
 			{
@@ -586,8 +559,7 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public override int GetHashCode()
 		{
-			return this.Coordinates.X ^ this.Coordinates.Y ^ 
-				this.Coordinates.Z; 
+			return this.X ^ this.Y;
 				//^ this.surf.Size.Height ^ 
 				//this.surf.Size.Width ^ this.surf.GetHashCode();
 		}  

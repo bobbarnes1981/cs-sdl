@@ -47,7 +47,7 @@ namespace SdlDotNet.Examples
 		/// <param name="location"></param>
 		public Player(Point location)
 		{
-			this.Position = location;
+			this.Point = location;
 			jumpstart = location.Y;
 
 			this.Surface = new Surface("../../Data/Head.bmp");
@@ -116,7 +116,7 @@ namespace SdlDotNet.Examples
 			{
 				if (WeaponFired != null)
 				{
-					WeaponFired(this, new FireEventArgs(this.Position));
+					WeaponFired(this, new FireEventArgs(this.Point));
 				}
 
 				// dont forget this
