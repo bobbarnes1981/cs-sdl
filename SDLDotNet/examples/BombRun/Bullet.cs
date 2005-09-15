@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 		/// <param name="speedY"></param>
 		public Bullet(Point location, int speedX, int speedY)
 		{
-			this.Point = location;
+			this.Position = location;
 			this.speedX = speedX;
 			this.speedY = speedY;
 

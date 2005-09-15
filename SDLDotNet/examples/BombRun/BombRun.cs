@@ -117,7 +117,7 @@ namespace SdlDotNet.Examples
 			for(int i = 0; i < master.Count; i++)
 			{
 				src = new Rectangle(new Point(0, 0), master[i].Size);
-				dest = new Rectangle(master[i].Point, master[i].Size);
+				dest = new Rectangle(master[i].Position, master[i].Size);
 
 				temporary.Blit(alternateBackground, src, dest);
 				temporary.Blit(master[i].Surface, src);

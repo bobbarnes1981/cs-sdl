@@ -63,11 +63,22 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="d"></param>
 		/// <param name="coordinates"></param>
+		public AnimatedSprite(SurfaceCollection d, Point coordinates) :this()
+		{
+			m_Animations.Add("Default", new Animation(d));
+			this.Position = coordinates;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="d"></param>
+		/// <param name="coordinates"></param>
 		/// <param name="z"></param>
 		public AnimatedSprite(SurfaceCollection d, Point coordinates, int z) : this()
 		{
 			m_Animations.Add("Default", new Animation(d));
-			this.Point = coordinates;
+			this.Position = coordinates;
 			this.Z = z;
 		}
 		#endregion Constructors
