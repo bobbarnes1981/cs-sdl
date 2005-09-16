@@ -108,7 +108,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Creates a surface with the designated size.
 		/// </summary>
 		/// <param name="size"></param>
 		public Surface(Size size) : this(size.Width, size.Height)
@@ -116,7 +116,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Creates a surface with the designated rectangle size.
 		/// </summary>
 		/// <param name="rectangle"></param>
 		public Surface(Rectangle rectangle) : this(rectangle.Width, rectangle.Height)
@@ -270,15 +270,15 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Creates a Bitmap representing the Surface.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>A new bitmap image representing the surface.</returns>
 		public Bitmap ToBitmap() 
 		{ 
 			Bitmap newBitmap = new Bitmap(this.Width, this.Height); 
-			for(int x = 0; x < newBitmap.Width; x++)
+			for(int y = 0; y < newBitmap.Height; y++)
 			{
-				for(int y = 0; y < newBitmap.Height; y++)
+				for(int x = 0; x < newBitmap.Width; x++)
 				{
 					newBitmap.SetPixel(x,y,this.GetPixel(x,y));
 				}
@@ -879,10 +879,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create a surface with the same pixel format as this one
 		/// </summary>
-		/// <param name="hardware"></param>
-		/// <param name="size"></param>
+		/// <param name="size">The size of the surface.</param>
+		/// <param name="hardware">Flag whether to hold the surface in video memory.</param>
 		/// <returns></returns>
 		public Surface CreateCompatibleSurface(Size size, bool hardware) 
 		{
@@ -890,7 +890,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create a surface with the same pixel format as this one
 		/// </summary>
 		/// <param name="width"></param>
 		/// <param name="height"></param>
@@ -1069,10 +1069,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Blits the given surface onto the current one.
 		/// </summary>
-		/// <param name="sourceSurface"></param>
-		/// <returns></returns>
+		/// <param name="sourceSurface">The source surface to blit onto the current one.</param>
+		/// <returns>A rectangle describing the location of the updated surface.</returns>
 		public Rectangle Blit(Surface sourceSurface) 
 		{
 			return this.Blit(
@@ -2164,7 +2164,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the percision loss for the alpha component.
 		/// </summary>
 		public int AlphaLoss
 		{
@@ -2175,7 +2175,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the percision loss for the red component.
 		/// </summary>
 		public int RedLoss
 		{
@@ -2186,7 +2186,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the percision loss for the green component.
 		/// </summary>
 		public int GreenLoss
 		{
@@ -2197,7 +2197,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the percision loss for the blue component.
 		/// </summary>
 		public int BlueLoss
 		{
