@@ -1543,7 +1543,7 @@ namespace SdlDotNet
 				}
 				default: //Should never come here
 				{
-					return this.GetColor(0);
+					throw new SdlException("Unknown amount of bytes per pixel.");
 				}
 			}
 		}
