@@ -32,9 +32,9 @@ namespace SdlDotNet.Sprites
 			this.Add(surface);
 		}
 
-		private double m_Delay = 800;
+		private double m_Delay = 30;
 		/// <summary>
-		/// 
+		/// Gets and sets the amount of time delay that should be had before moving onto the next frame.
 		/// </summary>
 		public double Delay
 		{
@@ -48,10 +48,25 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
+        /// <summary>
+        /// Gets and sets how long the animation should take to finish.
+        /// </summary>
+        public double AnimationTime
+        {
+            get
+            {
+                return m_Delay * this.Count;
+            }
+            set 
+            {
+                m_Delay = this.Count / value;
+            }
+        }
+
 
 		private bool m_Loop = true;
 		/// <summary>
-		/// 
+		/// Gets and sets whether or not the animation should loop.
 		/// </summary>
 		public bool Loop
 		{
