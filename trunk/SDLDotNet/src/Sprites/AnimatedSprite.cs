@@ -37,6 +37,7 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite() : base()
 		{
 			m_Timer.Elapsed += new System.Timers.ElapsedEventHandler(m_Timer_Elapsed);
+			m_Timer.Interval = 20;
 		}
 
 		/// <summary>
@@ -149,7 +150,7 @@ namespace SdlDotNet.Sprites
 			}
 			set
 			{
-				// don't set
+				// TODO:  Something?
 			}
 		}
 		
