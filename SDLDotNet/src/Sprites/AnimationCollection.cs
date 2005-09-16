@@ -9,14 +9,23 @@ namespace SdlDotNet.Sprites
 	public class AnimationCollection : DictionaryBase
 	{
 		/// <summary>
-		/// 
+		/// Creates an empty AnimationCollection.
 		/// </summary>
 		public AnimationCollection() : base()
 		{
 		}
 
+        /// <summary>
+        /// Creates an AnimationCollection with one animation with the key "Default".
+        /// </summary>
+        /// <param name="anim"></param>
+        public AnimationCollection(Animation anim)
+        {
+            this.Add("Default", anim);
+        }
+
 		/// <summary>
-		/// 
+		/// Creates an AnimationCollection with one element within it.
 		/// </summary>
 		/// <param name="key"></param>
 		/// <param name="anim"></param>
@@ -36,7 +45,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets an animation object within the collection using the animation's key.
 		/// </summary>
 		public Animation this[string key]
 		{
@@ -73,11 +82,11 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Adds an animation to the collection.
 		/// </summary>
-		/// <param name="key"></param>
-		/// <param name="anim"></param>
-		/// <returns></returns>
+		/// <param name="key">The name of the animation.</param>
+		/// <param name="anim">The animation object.</param>
+		/// <returns>The final number of elements within the collection.</returns>
 		public int Add(string key, Animation anim) 
 		{
 			Dictionary.Add(key, anim);
@@ -108,7 +117,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// Gets the average delay of all animations in the collection.  Sets the delay of every animation in the collection.
+		/// Gets the average delay of all animations in the collection, sets the delay of every animation in the collection.
 		/// </summary>
 		public double Delay
 		{
@@ -127,6 +136,26 @@ namespace SdlDotNet.Sprites
 					((Animation)dict.Value).Delay = value;
 			}
 		}
+
+        /// <summary>
+        /// Gets whether the first animation is looping, sets whether every animation in the collection is to be looped.
+        /// </summary>
+        public bool Loop
+        {
+            get
+            {
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                    return ((Animation)dict.Value).Loop;
+                return false;
+            }
+            set
+            {
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                    ((Animation)dict.Value).Loop = value;
+            }
+        }
         
 		/// <summary>
 		/// Removes an element from the collection.

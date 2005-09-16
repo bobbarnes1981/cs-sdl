@@ -20,6 +20,7 @@ David Hudson xx xxx 2005
 * Audio system was re-worked by Rob Loach to make the API more intuitive.
 * New website using a Wiki.
 * Removed SpriteSingleCollection class.
+* Re-worked AnimationSprite and added Animation and AnimationCollection classes.
 
 3.1.2
 David Hudson 18 July 2005
