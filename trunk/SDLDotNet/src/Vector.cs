@@ -324,11 +324,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// The x coordinate
 		/// </summary>
-		private double m_x;
+		private double m_x = 0.00001;
 		/// <summary>
 		/// The y coordinate
 		/// </summary>
-		private double m_y;
+		private double m_y = 0.00001;
 
 		/// <summary>
 		/// Contains the x coordinate of the vector.
@@ -405,7 +405,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (m_x == 0 && m_y == 0);
+				return (m_x == 0.00001 && m_y == 0.00001);
 			}
 		}
 
