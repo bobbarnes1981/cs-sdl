@@ -64,9 +64,10 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="d"></param>
 		/// <param name="coordinates"></param>
-		public AnimatedSprite(SurfaceCollection d, Point coordinates) :this()
-		{
+		public AnimatedSprite(SurfaceCollection d, Point coordinates) :this()	{
 			m_Animations.Add("Default", new Animation(d));
+			this.Surface = d[0];
+			this.Rectangle = d[0].Rectangle;
 			this.Position = coordinates;
 		}
 
@@ -79,6 +80,8 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite(SurfaceCollection d, Point coordinates, int z) : this()
 		{
 			m_Animations.Add("Default", new Animation(d));
+			this.Surface = d[0];
+			this.Rectangle = d[0].Rectangle;
 			this.Position = coordinates;
 			this.Z = z;
 		}
@@ -150,7 +153,7 @@ namespace SdlDotNet.Sprites
 			}
 			set
 			{
-				// TODO:  Something?
+				base.Surface = value;
 			}
 		}
 		
