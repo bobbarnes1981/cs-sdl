@@ -59,8 +59,7 @@ namespace SdlDotNet.Examples
 			Events.Fps = 50;
 
 			screen = Video.SetVideoModeWindow(width, height, true);
-
-			Video.WindowCaption = "SdlDotNet - Rectangles Example";
+			Video.WindowCaption = "SDL.NET - Rectangles Example";
 			Video.Mouse.ShowCursor = false;
 
 			surf = screen.CreateCompatibleSurface(width, height, true);

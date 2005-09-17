@@ -74,7 +74,7 @@ namespace SdlDotNet.Examples
 
 			Video.Mouse.ShowCursor = false;
 			Video.WindowCaption =
-				"SdlDotNet - Bomb Run";
+				"SDL.NET - Bomb Run";
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(Keyboard);
 			player.WeaponFired += new FireEventHandler(PlayerWeaponFired);

@@ -65,7 +65,8 @@ namespace SdlDotNet.Examples
 			speed = random.Next(50, 150);
 
 			this.Surface.Alpha = 
-				(byte)((150 - 50) / (speed - 50) * -255);
+				(byte)((150 - 50) / (speed - 50) * - 255);
+			this.Surface.AlphaBlending = true;
 		}
 
 		/// <summary>

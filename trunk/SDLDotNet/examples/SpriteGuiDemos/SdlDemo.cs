@@ -53,7 +53,7 @@ namespace SdlDotNet.Examples
 		public void Start()
 		{
 			// Start up the SDL
-			Video.WindowCaption = "SdlDotNet - Sprite and Gui Demo";
+			Video.WindowCaption = "SDL.NET - Sprite and Gui Demo";
 //			Video.Mouse.ShowCursor = false;
       
 			Events.KeyboardDown +=

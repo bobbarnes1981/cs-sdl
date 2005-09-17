@@ -76,7 +76,7 @@ namespace SdlDotNet.Examples
 			screen = Video.SetVideoModeWindow(width, height, true);
 			screen.Blit(background);
 			screen.Update();
-			Video.WindowCaption = "SdlDotNet - Bounce Sprites";
+			Video.WindowCaption = "SDL.NET - Bounce Sprites";
 
 			//This loads the various images (provided by Moonfire) 
 			// into a SurfaceCollection for animation
