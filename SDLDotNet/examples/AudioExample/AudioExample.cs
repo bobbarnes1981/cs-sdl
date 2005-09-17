@@ -67,7 +67,7 @@ namespace SdlDotNet.Examples
 
 			// Start up SDL
 			screen = Video.SetVideoModeWindow(width, height); 
-			Video.WindowCaption = "SdlDotNet - AudioExample";
+			Video.WindowCaption = "SDL.NET - AudioExample";
 
 			// Play the music and setup the queues.
 			music1.Play();

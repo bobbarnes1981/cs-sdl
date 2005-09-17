@@ -47,7 +47,7 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown); 
 			Events.Quit += new QuitEventHandler(this.Quit); 
 			screen = Video.SetVideoModeWindow(width, height); 
-			Video.WindowCaption = "SdlDotNet - Windows Example";
+			Video.WindowCaption = "SDL.NET - Windows Example";
 			rand = new Random();  
 		} 
 		private void KeyDown(object sender, KeyboardEventArgs e) 

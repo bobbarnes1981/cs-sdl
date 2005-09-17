@@ -210,7 +210,7 @@ namespace SdlDotNet.Examples
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "CDPlayer";
-			this.Text = "SdlDotNet - CD Player";
+			this.Text = "SDL.NET - CD Player";
 			this.Load += new System.EventHandler(this.CDPlayer_Load);
 			this.ResumeLayout(false);
 
