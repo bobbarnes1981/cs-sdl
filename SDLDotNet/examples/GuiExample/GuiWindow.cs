@@ -41,8 +41,8 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(manager, rectangle, coordinateZ)
 		{
 			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
-				new Vector(0, 0, coordinateZ));
-			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Vector(0,0,-1));
+				new Point(0, 0));
+			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Point(0,0));
 			titleBar.Surface.Fill(manager.FrameColor);
 			base.Sprites.Add(titleSprite);
 			this.title = string.Empty;
@@ -57,8 +57,8 @@ namespace SdlDotNet.Examples.GuiExample
 			: this(manager, rectangle, 0)
 		{
 			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
-				new Vector(0, 0, 0));
-			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Vector(0,0,-1));
+				new Point(0, 0));
+			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Point(0,0));
 			titleBar.Surface.Fill(manager.FrameColor);
 			
 			base.Sprites.Add(titleSprite);

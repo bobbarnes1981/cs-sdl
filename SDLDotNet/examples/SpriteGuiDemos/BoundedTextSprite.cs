@@ -86,22 +86,22 @@ namespace SdlDotNet.Examples
 			this.Size = size;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="textItem"></param>
-		/// <param name="font"></param>
-		/// <param name="size"></param>
-		/// <param name="coordinates"></param>
-		public BoundedTextSprite(
-			string textItem, 
-			SdlDotNet.Font font,
-			Size size,
-			Vector coordinates)
-			: base(textItem, font, coordinates)
-		{
-			this.Size = size;
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="textItem"></param>
+//		/// <param name="font"></param>
+//		/// <param name="size"></param>
+//		/// <param name="coordinates"></param>
+//		public BoundedTextSprite(
+//			string textItem, 
+//			SdlDotNet.Font font,
+//			Size size,
+//			Point coordinates)
+//			: base(textItem, font, coordinates)
+//		{
+//			this.Size = size;
+//		}
 
 		/// <summary>
 		/// 

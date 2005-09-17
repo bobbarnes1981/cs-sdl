@@ -87,19 +87,17 @@ namespace SdlDotNet.Examples
 					// Create the floor tile sprites
 					AnimatedSprite dw =
 						new AnimatedSprite(floorTiles,
-						new Vector(i * floorTiles[0].Size.Width,
-						j * floorTiles[0].Size.Height,
-						-1000));
+						new Point(i * floorTiles[0].Size.Width,
+						j * floorTiles[0].Size.Height));
 					Sprites.Add(dw);
 				}
 			}
 
 			// Load the trigger sprite
-			sprite = new BounceSprite(td2, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+			sprite = new BounceSprite(td2, rect, new Point(rand.Next(rect.Left, rect.Right - 
 				(int) td2.Size.Width),
 				rand.Next(rect.Top, rect.Bottom - 
-				(int) td2.Size.Height),
-				100));
+				(int) td2.Size.Height)));
 			Sprites.Add(sprite);
 			CenterSprite.Add(sprite);
 			//OnMenuBounded(0);
@@ -111,11 +109,10 @@ namespace SdlDotNet.Examples
 				BounceSprite bounceSprite = 
 					new BounceSprite(td,
 					rect, 
-					new Vector(rand.Next(rect.Left, rect.Right - 
+					new Point(rand.Next(rect.Left, rect.Right - 
 					(int) td.Size.Width),
 					rand.Next(rect.Top, rect.Bottom - 
-					(int) td.Size.Height),
-					0));
+					(int) td.Size.Height)));
 				Sprites.Add(bounceSprite);
 			}
 			Sprites.EnableTickEvent();

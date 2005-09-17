@@ -31,8 +31,6 @@ namespace SdlDotNet.Examples
 	public class AnimatedDemoSprite : AnimatedSprite
 	{
 		static Random rand = new Random();
-		// Randomly assign the direction we show the frames
-		private bool frameRight;
 
 		/// <summary>
 		/// 
@@ -43,20 +41,29 @@ namespace SdlDotNet.Examples
 			: base(d, position)
 		{
 			base.Frame = rand.Next(d.Count);
-			this.frameRight = (rand.Next(2) % 2 == 0);
+			if (rand.Next(2) % 2 == 0)
+			{
+				this.AnimateForward = true;
+			}
+			else
+			{
+				this.AnimateForward = false;
+			}
+
+			this.Animate = true;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="d"></param>
-		/// <param name="coordinates"></param>
-		public AnimatedDemoSprite(SurfaceCollection d, Vector coordinates)
-			: base(d, coordinates)
-		{
-			base.Frame = rand.Next(d.Count);
-			this.frameRight = (rand.Next(2) % 2 == 0);
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="d"></param>
+//		/// <param name="coordinates"></param>
+//		public AnimatedDemoSprite(SurfaceCollection d, Point coordinates)
+//			: base(d, coordinates)
+//		{
+//			base.Frame = rand.Next(d.Count);
+//			this.frameRight = (rand.Next(2) % 2 == 0);
+//		}
 
 		#region Animation and Drawing
 		/// <summary>
@@ -65,19 +72,19 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
-			// Increment the frame
-			if (frameRight)
-			{
-				Frame++;
-			}
-			else if (Frame == 0)
-			{
-				Frame = FrameCount -1;
-			}
-			else
-			{
-				Frame--;
-			}
+//			// Increment the frame
+//			if (frameRight)
+//			{
+//				Frame++;
+//			}
+//			else if (Frame == 0)
+//			{
+//				//Frame = FrameCount -1;
+//			}
+//			else
+//			{
+//				Frame--;
+//			}
 		}
 		#endregion
 

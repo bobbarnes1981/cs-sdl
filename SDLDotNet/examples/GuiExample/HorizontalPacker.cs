@@ -52,15 +52,15 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="p"></param>
-		public HorizontalPacker(GuiManager manager, Vector p)
-			: base(manager, p)
-		{
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="manager"></param>
+//		/// <param name="p"></param>
+//		public HorizontalPacker(GuiManager manager, Point p)
+//			: base(manager, p)
+//		{
+//		}
 
 		/// <summary>
 		/// 

@@ -89,11 +89,13 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
+		/// <param name="z"></param>
 		/// <param name="coordinates"></param>
-		public GuiComponent(GuiManager manager, Vector coordinates)
+		public GuiComponent(GuiManager manager, Point coordinates, int z)
 			: this(manager)
 		{
-			this.Coordinates = coordinates;
+			this.Z = z;
+			this.Position = coordinates;
 		}
 
 		/// <summary>

@@ -178,6 +178,32 @@ namespace SdlDotNet.Sprites
 			set{ m_Frame = value; }
 		}
 
+		private bool animateForward = true;
+		private int animateDirection = 1;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool AnimateForward
+		{
+			get
+			{
+				return animateForward;
+			}
+			set
+			{
+				animateForward = value;
+				if (value)
+				{
+					animateDirection = 1;
+				}
+				else
+				{
+					animateDirection = -1;
+				}
+			}
+		}
+
 
 		#endregion
 
@@ -186,14 +212,20 @@ namespace SdlDotNet.Sprites
 		private void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			Animation current = m_Animations[m_CurrentAnimation];
-			if(m_Frame < current.Count)
-			{
-				m_Frame++;
-			}
-			else
+
+			if(m_Frame == current.Count && animateForward)
 			{
 				if(current.Loop)
 					m_Frame = 0;
+			}
+			else if(m_Frame == 0 && !animateForward)
+			{
+				if(current.Loop)
+					m_Frame = current.Count -1;
+			}
+			else if(m_Frame < current.Count)
+			{
+				m_Frame = m_Frame + 1 * animateDirection;
 			}
 		}
 		#endregion

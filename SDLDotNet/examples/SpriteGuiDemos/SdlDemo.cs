@@ -109,7 +109,7 @@ namespace SdlDotNet.Examples
 			gui.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
 
 			// Set up the ticker
-			statusTicker = new GuiTicker(gui, new Vector(0, Video.Screen.Height - 20, 3000), 20);
+			statusTicker = new GuiTicker(gui, new Vector(0, Video.Screen.Height - 20),100);
 			master.Add(statusTicker);
 			Report("SDL.NET Demo started");
 
