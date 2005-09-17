@@ -52,7 +52,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="coordinates"></param>
 		/// <param name="height"></param>
 		public GuiTicker(GuiManager gui, Vector coordinates, int height)
-			: base(gui, new Rectangle(coordinates.X, coordinates.Y, Video.Screen.Width, height), coordinates.Z)
+			: base(gui, new Rectangle((int)coordinates.X, (int)coordinates.Y, Video.Screen.Width, height), 100)
 		{
 		}
 
@@ -63,7 +63,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="sprite"></param>
 		public void Add(Sprite sprite)
 		{
-			sprite.Point = new Point(this.Size.Width, this.Position.Y);
+			sprite.Position = new Point(this.Size.Width, this.Position.Y);
 			base.Sprites.Add(sprite);
 		}
 		#endregion

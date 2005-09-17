@@ -45,9 +45,8 @@ namespace SdlDotNet.Examples
 				BounceSprite bounceSprite = 
 					new BounceSprite(d,
 					new Rectangle(new Point(0,0), SdlDemo.Size), 
-					new Vector(rand.Next(rect.Left, rect.Right),
-					rand.Next(rect.Top, rect.Bottom),
-					0));
+					new Point(rand.Next(rect.Left, rect.Right),
+					rand.Next(rect.Top, rect.Bottom)));
 				Sprites.Add(bounceSprite);
 			}
 			Sprites.EnableTickEvent();

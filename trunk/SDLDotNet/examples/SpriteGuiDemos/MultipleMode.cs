@@ -72,9 +72,8 @@ namespace SdlDotNet.Examples
 					// Create the sprite
 					AnimatedSprite dw =
 						new AnimatedSprite(floorTiles,
-						new Vector(i * floorTiles[0].Size.Width,
-						j * floorTiles[0].Size.Height,
-						-1000));
+						new Point(i * floorTiles[0].Size.Width,
+						j * floorTiles[0].Size.Height));
 					all.Add(dw);
 				}
 			}
@@ -85,11 +84,10 @@ namespace SdlDotNet.Examples
 				BounceSprite d = 
 					new BounceSprite(td,
 					rect, 
-					new Vector(rand.Next(rect.Left, rect.Right - 
+					new Point(rand.Next(rect.Left, rect.Right - 
 					(int) td.Size.Width),
 					rand.Next(rect.Top, rect.Bottom - 
-					(int) td.Size.Height),
-					0));
+					(int) td.Size.Height)));
 				all.Add(d);
 			}
 
@@ -97,35 +95,31 @@ namespace SdlDotNet.Examples
 			// same inner tick manager.
 
 			// Set up container #1
-			sprite1 = new BounceSprite(td2, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+			sprite1 = new BounceSprite(td2, rect, new Point(rand.Next(rect.Left, rect.Right - 
 				(int) td2.Size.Width),
 				rand.Next(rect.Top, rect.Bottom - 
-				(int) td2.Size.Height),
-				100));
+				(int) td2.Size.Height)));
 			all.Add(sprite1);
 
 			// Set up container #2
-			sprite2 = new BounceSprite(td3, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+			sprite2 = new BounceSprite(td3, rect, new Point(rand.Next(rect.Left, rect.Right - 
 				(int) td3.Size.Width),
 				rand.Next(rect.Top, rect.Bottom - 
-				(int) td3.Size.Height),
-				100));
+				(int) td3.Size.Height)));
 			all.Add(sprite2);
 
 			// Set up container #3
-			sprite3 = new BounceSprite(td4, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+			sprite3 = new BounceSprite(td4, rect, new Point(rand.Next(rect.Left, rect.Right - 
 				(int) td4.Size.Width),
 				rand.Next(rect.Top, rect.Bottom - 
-				(int) td4.Size.Height),
-				100));
+				(int) td4.Size.Height)));
 			all.Add(sprite3);
       
 			// Set up container #4
-			sprite4 = new BounceSprite(td5, rect, new Vector(rand.Next(rect.Left, rect.Right - 
+			sprite4 = new BounceSprite(td5, rect, new Point(rand.Next(rect.Left, rect.Right - 
 				(int) td5.Size.Width),
 				rand.Next(rect.Top, rect.Bottom - 
-				(int) td5.Size.Height),
-				100));
+				(int) td5.Size.Height)));
 			all.Add(sprite4);
 
 			all.EnableTickEvent();

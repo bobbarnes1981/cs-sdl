@@ -36,7 +36,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		/// <param name="manager"></param>
 		public GuiMenuPopup(GuiManager manager)
-			: base(manager, new Vector(12000))
+			: base(manager, 12000)
 		{
 			this.Visible = false;
 		}

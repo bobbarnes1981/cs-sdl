@@ -36,7 +36,7 @@ namespace SdlDotNet.Examples
 		/// <param name="d"></param>
 		/// <param name="bounds"></param>
 		/// <param name="coordinates"></param>
-		public BoundedSprite(SurfaceCollection d, Rectangle bounds, Vector coordinates)
+		public BoundedSprite(SurfaceCollection d, Rectangle bounds, Point coordinates)
 			: base(d, coordinates)
 		{
 			this.bounds = bounds;

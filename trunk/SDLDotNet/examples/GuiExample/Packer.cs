@@ -72,16 +72,16 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(manager, rectangle)
 		{
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="p"></param>
-		public Packer(GuiManager manager, Vector p)
-			: base(manager, p)
-		{
-		}
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="manager"></param>
+//		/// <param name="p"></param>
+//		public Packer(GuiManager manager, Point p)
+//			: base(manager, p)
+//		{
+//		}
 		#endregion
 
 		#region Sprites

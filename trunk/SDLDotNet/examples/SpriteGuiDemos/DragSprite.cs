@@ -41,10 +41,10 @@ namespace SdlDotNet.Examples
 		/// <param name="bounds"></param>
 		public DragSprite(Hashtable frames, string key, Point coordinates,
 			Rectangle bounds)
-			: base((SurfaceCollection)frames[key], bounds, new Vector(coordinates))
+			: base((SurfaceCollection)frames[key], bounds, coordinates)
 		{
-			this.FrameCollections = frames;
-			this.FrameCollectionKey = key;
+			//this.FrameCollections = frames;
+			//this.Animations[key];
 			this.Size = ((SurfaceCollection)frames[key]).Size;
 			this.AllowDrag = true;
 		}
@@ -73,13 +73,13 @@ namespace SdlDotNet.Examples
 				{
 					this.Z += 100;
 					this.BeingDragged = true;
-					this.FrameCollectionKey = "marble2";	
+					//this.FrameCollectionKey = "marble2";	
 				}
 				else
 				{
 					this.Z -= 100;
 					this.BeingDragged = false;
-					this.FrameCollectionKey = "marble1";
+					//this.FrameCollectionKey = "marble1";
 				}
 			}
 		}
