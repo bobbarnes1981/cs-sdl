@@ -90,6 +90,10 @@ namespace SdlDotNet.Examples
 					new BounceSprite(marbleSurfaces,
 					new Point(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
 					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom)));
+
+                // Randomize rotation direction
+                bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
+
 				//Add the sprite to the SpriteCollection
 				master.Add(bounceSprite);
 			}
