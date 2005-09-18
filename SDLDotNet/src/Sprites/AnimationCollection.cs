@@ -7,8 +7,9 @@ namespace SdlDotNet.Sprites
 	/// Summary description for AnimationCollection.
 	/// </summary>
 	public class AnimationCollection : DictionaryBase
-	{
-		/// <summary>
+    {
+        #region Constructors
+        /// <summary>
 		/// Creates an empty AnimationCollection.
 		/// </summary>
 		public AnimationCollection() : base()
@@ -34,6 +35,15 @@ namespace SdlDotNet.Sprites
 			this.Add(key, anim);
 		}
 
+        /// <summary>
+        /// Creates an AnimationCollection with a "Default" animation of surfaces.
+        /// </summary>
+        /// <param name="surfaces"></param>
+        public AnimationCollection(SurfaceCollection surfaces)
+        {
+            this.Add("Default", surfaces);
+        }
+
 
 		/// <summary>
 		/// Creates a new AnimationCollection with the contents of an existing AnimationCollection.
@@ -42,9 +52,11 @@ namespace SdlDotNet.Sprites
 		public AnimationCollection(AnimationCollection animCollection)
 		{
 			this.Add(animCollection);
-		}
+        }
+        #endregion Constructors
 
-		/// <summary>
+        #region Properties
+        /// <summary>
 		/// Gets and sets an animation object within the collection using the animation's key.
 		/// </summary>
 		public Animation this[string key]
@@ -79,9 +91,99 @@ namespace SdlDotNet.Sprites
 			{
 				return Dictionary.Values;
 			}
-		}
+        }
 
-		/// <summary>
+        /// <summary>
+        /// Gets the average delay of all animations in the collection, sets the delay of every animation in the collection.
+        /// </summary>
+        public double Delay
+        {
+            get
+            {
+                double average = 0;
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                    average += ((Animation)dict.Value).Delay;
+                return average / this.Count;
+            }
+            set
+            {
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                    ((Animation)dict.Value).Delay = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the average FrameIncrement for each Animation.  Sets the FrameIncrement of each Animation in the collection.
+        /// </summary>
+        public int FrameIncrement
+        {
+            get
+            {
+                int average = 0;
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                    average += ((Animation)dict.Value).FrameIncrement;
+                return average / this.Count;
+            }
+            set
+            {
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                    ((Animation)dict.Value).FrameIncrement = value;
+            }
+        }
+
+
+        /// <summary>
+        /// Gets whether all animations animate forward and sets whether all animations in the collection are to animate forward.
+        /// </summary>
+        public bool AnimateForward
+        {
+            get
+            {
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                {
+                    if (!((Animation)dict.Value).AnimateForward)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            set
+            {
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                    ((Animation)dict.Value).AnimateForward = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets whether the first animation is looping, sets whether every animation in the collection is to be looped.
+        /// </summary>
+        public bool Loop
+        {
+            get
+            {
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                    return ((Animation)dict.Value).Loop;
+                return true;
+            }
+            set
+            {
+                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                while (dict.MoveNext())
+                    ((Animation)dict.Value).Loop = value;
+            }
+        }
+        #endregion Properties
+        
+        #region Functions
+        /// <summary>
 		/// Adds an animation to the collection.
 		/// </summary>
 		/// <param name="key">The name of the animation.</param>
@@ -92,16 +194,18 @@ namespace SdlDotNet.Sprites
 			Dictionary.Add(key, anim);
 			return Dictionary.Count;
 		}
-        
-		/// <summary>
-		/// Returns true if the collection contains the given key.
-		/// </summary>
-		/// <param name="key"></param>
-		/// <returns></returns>
-		public bool Contains(string key)
-		{
-			return Dictionary.Contains(key);
-		}
+
+        /// <summary>
+        /// Adds a surface collection to the collection as an animation.
+        /// </summary>
+        /// <param name="key">The name of the animation.</param>
+        /// <param name="surfaces">The SurfaceCollection that represents the animation.</param>
+        /// <returns>The final number of elements within the collection.</returns>
+        public int Add(string key, SurfaceCollection surfaces)
+        {
+            Dictionary.Add(key, new Animation(surfaces));
+            return Dictionary.Count;
+        }
 		
 		/// <summary>
 		/// Adds a collection of music to the current music collection.
@@ -114,47 +218,16 @@ namespace SdlDotNet.Sprites
 			while(dict.MoveNext())
 				this.Add((string)dict.Key, (Animation)dict.Value);
 			return Dictionary.Count;
-		}
-
-		/// <summary>
-		/// Gets the average delay of all animations in the collection, sets the delay of every animation in the collection.
-		/// </summary>
-		public double Delay
-		{
-			get
-			{
-				double average = 0;
-				IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-				while(dict.MoveNext())
-					average += ((Animation)dict.Value).Delay;
-				return average / this.Count;
-			}
-			set
-			{
-				IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-				while(dict.MoveNext())
-					((Animation)dict.Value).Delay = value;
-			}
-		}
+        }
 
         /// <summary>
-        /// Gets whether the first animation is looping, sets whether every animation in the collection is to be looped.
+        /// Returns true if the collection contains the given key.
         /// </summary>
-        public bool Loop
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool Contains(string key)
         {
-            get
-            {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
-                    return ((Animation)dict.Value).Loop;
-                return false;
-            }
-            set
-            {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
-                    ((Animation)dict.Value).Loop = value;
-            }
+            return Dictionary.Contains(key);
         }
         
 		/// <summary>
@@ -165,5 +238,7 @@ namespace SdlDotNet.Sprites
 		{
 			Dictionary.Remove(key);
 		}
+        #endregion Functions
+
 	}
 }
