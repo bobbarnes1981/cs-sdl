@@ -154,6 +154,53 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="color"></param>
+		/// <returns></returns>
+		public static Color Invert(Color color)
+		{
+			byte r;
+			byte g;
+			byte b;
+			byte a;
+
+			if (Color.White.R - color.R < byte.MinValue)
+			{
+				r = byte.MinValue;
+			}
+			else
+			{
+				r = (byte)(Color.White.R - color.R);
+			}
+			if (Color.White.G - color.G < byte.MinValue)
+			{
+				g = byte.MinValue;
+			}
+			else
+			{
+				g = (byte)(Color.White.G - color.G);
+			}
+			if (Color.White.B - color.B < byte.MinValue)
+			{
+				b = byte.MinValue;
+			}
+			else
+			{
+				b = (byte)(Color.White.B - color.B);
+			}
+			if (Color.White.A - color.A < byte.MinValue)
+			{
+				a = byte.MinValue;
+			}
+			else
+			{
+				a = (byte)(Color.White.A - color.A);
+			}
+			return Color.FromArgb(a, r, g, b);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="color1"></param>
 		/// <param name="color2"></param>
 		/// <returns></returns>

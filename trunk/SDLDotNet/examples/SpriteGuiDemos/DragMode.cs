@@ -43,19 +43,28 @@ namespace SdlDotNet.Examples
 			int sy = (600 - rows * 50) / 2;
 			SurfaceCollection m1 = LoadMarble("marble1");
 			SurfaceCollection m2 = LoadMarble("marble2");
+			Animation anim1 = new Animation(m1);
+						
+			Animation anim2 = new Animation(m2);
+
 			Hashtable frames = new Hashtable();
 			frames.Add("marble1", m1);
 			frames.Add("marble2", m2);
 
+			DragSprite dragSprite;
 			for (int i = 0; i < cols; i++)
 			{
 				Thread.Sleep(10);
 				for (int j = 0; j < rows; j++)
 				{
-					Thread.Sleep(10);
-					Sprites.Add(new DragSprite(frames, "marble1",
+					dragSprite = new DragSprite(frames, "marble1",
 						new Point(sx + i * 50, sy + j * 50),
-						new Rectangle(new Point(0, 0), SdlDemo.Size)));
+						new Rectangle(new Point(0, 0), SdlDemo.Size));
+					dragSprite.Animations.Add("marble1", anim1);
+					dragSprite.Animations.Add("marble2", anim2);
+
+					Thread.Sleep(10);
+					Sprites.Add(dragSprite);
 				}
 			}
 			Sprites.EnableMouseButtonEvent();

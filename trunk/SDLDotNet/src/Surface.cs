@@ -315,6 +315,22 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public Surface InvertColors()
+		{ 
+			for (int i = 0; i < this.Width; i++) 
+			{ 
+				for (int j = 0; j < this.Height; j++) 
+				{
+					this.DrawPixel(i,j,SdlColor.Invert(this.GetPixel(i,j))); 
+				} 
+			} 
+			return this; 
+		}
+
+		/// <summary>
 		/// Draws a rectangle onto the surface
 		/// </summary>
 		/// <param name="rectangle">The rectangle coordinates</param>
@@ -399,7 +415,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Drawe circle onto surface
+		/// Draw circle onto surface
 		/// </summary>
 		/// <param name="circle"></param>
 		/// <param name="color"></param>
