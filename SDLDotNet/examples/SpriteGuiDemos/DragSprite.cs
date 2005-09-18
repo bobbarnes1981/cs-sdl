@@ -73,13 +73,13 @@ namespace SdlDotNet.Examples
 				{
 					this.Z += 100;
 					this.BeingDragged = true;
-					//this.FrameCollectionKey = "marble2";	
+					this.CurrentAnimation = "marble2";
 				}
 				else
 				{
 					this.Z -= 100;
 					this.BeingDragged = false;
-					//this.FrameCollectionKey = "marble1";
+					this.CurrentAnimation = "marble1";
 				}
 			}
 		}
