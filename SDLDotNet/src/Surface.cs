@@ -179,6 +179,20 @@ namespace SdlDotNet
 				throw SdlException.Generate();
 			}
 		}
+
+        /// <summary>
+        /// Surface copy constructor.
+        /// </summary>
+        /// <remarks>Creates a copy of the surface at a different memory location.</remarks>
+        /// <param name="surface">The surface to copy.</param>
+        public Surface(Surface surface)
+        {
+            this.Handle = SdlGfx.zoomSurface(surface.Handle, 1, 1, SdlGfx.SMOOTHING_OFF);
+            if (this.Handle == IntPtr.Zero)
+            {
+                throw SdlException.Generate();
+            }
+        }
 	
 		/// <summary>
 		/// Allows an Object to attempt to free resources 
@@ -315,16 +329,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Inverts all the colors on the surface, giving it a negative effect.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>The surface.</returns>
 		public Surface InvertColors()
 		{ 
-			for (int i = 0; i < this.Width; i++) 
+			for (int x = 0; x < this.Width; x++) 
 			{ 
-				for (int j = 0; j < this.Height; j++) 
+				for (int y = 0; y < this.Height; y++) 
 				{
-					this.DrawPixel(i,j,SdlColor.Invert(this.GetPixel(i,j))); 
+					this.DrawPixel(x,y,SdlColor.Invert(this.GetPixel(x,y))); 
 				} 
 			} 
 			return this; 
