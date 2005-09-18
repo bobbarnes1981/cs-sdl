@@ -56,11 +56,11 @@ namespace SdlDotNet
 //		}
 
 		/// <summary>
-		/// 
+		/// Adds the values of one color to another color.
 		/// </summary>
-		/// <param name="color1"></param>
-		/// <param name="color2"></param>
-		/// <returns></returns>
+		/// <param name="color1">The first color.</param>
+		/// <param name="color2">The second color.</param>
+		/// <returns>The resultant color.</returns>
 		public static Color Add(Color color1, Color color2)
 		{
 			byte r;
@@ -104,11 +104,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Subtracts the values of one color from another color.
 		/// </summary>
-		/// <param name="color1"></param>
-		/// <param name="color2"></param>
-		/// <returns></returns>
+		/// <param name="color1">The first color.</param>
+		/// <param name="color2">The second color, the color to subtract.</param>
+		/// <returns>The resultant color.</returns>
 		public static Color Subtract(Color color1, Color color2)
 		{
 			byte r;
@@ -152,58 +152,60 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Inverts the color, giving it a negative effect.
 		/// </summary>
-		/// <param name="color"></param>
-		/// <returns></returns>
+		/// <param name="color">The color to invert.</param>
+		/// <returns>The inverted color.</returns>
 		public static Color Invert(Color color)
 		{
-			byte r;
-			byte g;
-			byte b;
-			byte a;
+            // The following line of code works as well.
+            //return SdlColor.Subtract(Color.White, color);
+            byte r;
+            byte g;
+            byte b;
+            byte a;
 
-			if (Color.White.R - color.R < byte.MinValue)
-			{
-				r = byte.MinValue;
-			}
-			else
-			{
-				r = (byte)(Color.White.R - color.R);
-			}
-			if (Color.White.G - color.G < byte.MinValue)
-			{
-				g = byte.MinValue;
-			}
-			else
-			{
-				g = (byte)(Color.White.G - color.G);
-			}
-			if (Color.White.B - color.B < byte.MinValue)
-			{
-				b = byte.MinValue;
-			}
-			else
-			{
-				b = (byte)(Color.White.B - color.B);
-			}
-			if (Color.White.A - color.A < byte.MinValue)
-			{
-				a = byte.MinValue;
-			}
-			else
-			{
-				a = (byte)(Color.White.A - color.A);
-			}
-			return Color.FromArgb(a, r, g, b);
-		}
+            if (Color.White.R - color.R < byte.MinValue)
+            {
+                r = byte.MinValue;
+            }
+            else
+            {
+                r = (byte)(Color.White.R - color.R);
+            }
+            if (Color.White.G - color.G < byte.MinValue)
+            {
+                g = byte.MinValue;
+            }
+            else
+            {
+                g = (byte)(Color.White.G - color.G);
+            }
+            if (Color.White.B - color.B < byte.MinValue)
+            {
+                b = byte.MinValue;
+            }
+            else
+            {
+                b = (byte)(Color.White.B - color.B);
+            }
+            if (Color.White.A - color.A < byte.MinValue)
+            {
+                a = byte.MinValue;
+            }
+            else
+            {
+                a = (byte)(Color.White.A - color.A);
+            }
+            return Color.FromArgb(a, r, g, b);
+        }
 
 		/// <summary>
-		/// 
+		/// Multiplies the values of one color with another color.
 		/// </summary>
-		/// <param name="color1"></param>
-		/// <param name="color2"></param>
-		/// <returns></returns>
+		/// <param name="color1">The first color.</param>
+		/// <param name="color2">The second color.</param>
+		/// <returns>The resultant color of the first and the second color multiplied.</returns>
 		public static Color Multiply(Color color1, Color color2)
 		{
 			byte r;
