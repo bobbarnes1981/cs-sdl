@@ -85,8 +85,20 @@ namespace SdlDotNet.Sprites
 			this.Position = coordinates;
 			this.Z = z;
 		}
-		#endregion Constructors
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="d"></param>
+        public AnimatedSprite(SurfaceCollection d) : this()
+        {
+            m_Animations.Add("Default", new Animation(d));
+            this.Surface = d[0];
+            this.Rectangle = d[0].Rectangle;
+            this.Position = new Point(0, 0);
+            this.Z = 0;
+        }
+		#endregion Constructors
 
 		#region Properties
  
@@ -178,29 +190,18 @@ namespace SdlDotNet.Sprites
 			set{ m_Frame = value; }
 		}
 
-		private bool animateForward = true;
-		private int animateDirection = 1;
-
 		/// <summary>
-		/// 
+		/// Gets and sets the AnimateForward flag for all animations in this sprite's Animations.
 		/// </summary>
 		public bool AnimateForward
 		{
 			get
 			{
-				return animateForward;
+				return m_Animations.AnimateForward;
 			}
 			set
 			{
-				animateForward = value;
-				if (value)
-				{
-					animateDirection = 1;
-				}
-				else
-				{
-					animateDirection = -1;
-				}
+                m_Animations.AnimateForward = value;
 			}
 		}
 
@@ -213,46 +214,26 @@ namespace SdlDotNet.Sprites
 		{
 			Animation current = m_Animations[m_CurrentAnimation];
 
-			if(m_Frame == current.Count && animateForward)
+            if (m_Frame >= current.Count && current.AnimateForward) // Going forwards and past last frame
 			{
 				if(current.Loop)
 					m_Frame = 0;
 			}
-			else if(m_Frame == 0 && !animateForward)
+            else if (m_Frame <= 0 && !current.AnimateForward) // Going backwards and past first frame
 			{
 				if(current.Loop)
-					m_Frame = current.Count -1;
+					m_Frame = current.Count - 1;
 			}
-			else if(m_Frame < current.Count)
+            else // Still going
 			{
-				m_Frame = m_Frame + 1 * animateDirection;
+                m_Frame = m_Frame + current.FrameIncrement;
 			}
 		}
 		#endregion
 
-		private bool disposed;
+        #region IDisposable Members
+        // TODO: AnimatedSprite Disposable Members
+        #endregion IDisposable Members
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected override void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				try
-				{
-					if (disposing)
-					{
-						// Perform disposing
-					}
-				}
-				finally
-				{
-					base.Dispose(disposing);
-					this.disposed = true;
-				}
-			}
-		}
-	}
+    }
 }
