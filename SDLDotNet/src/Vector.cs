@@ -100,7 +100,7 @@ namespace SdlDotNet
 		/// <returns>A string containing something like "X, Y".</returns>
 		public override string ToString()
 		{
-			return String.Format(CultureInfo.CurrentCulture, "({0}, {1})", X.ToString("D.000"), Y.ToString("D.000"));
+			return String.Format(CultureInfo.CurrentCulture, "{0}, {1}", X.ToString("#.000"), Y.ToString("#.000"));
 		}
 
 		/// <summary>
@@ -450,25 +450,38 @@ namespace SdlDotNet
 			return (m_x * other.m_x) + (m_y * other.m_y);
 		}
 
+        /// <summary>
+        /// Gets the midpoint between the two vectors.
+        /// </summary>
+        /// <param name="vec">The other vector to compare this one to.</param>
+        /// <returns>A new vector representing the midpoint between the two vectors.</returns>
+        public Vector MidPoint(Vector vec)
+        {
+            return new Vector(( m_x + vec.X ) * 0.5, ( m_y + vec.Y ) * 0.5 );
+        }
+
 		/// <summary>
-		/// Normalizes the vector, making the length equal to one.
+		/// Normalizes the vector.
 		/// </summary>
-		/// <returns></returns>
-		public void Normalize()
+		/// <returns>The original length.</returns>
+		public double Normalize()
 		{
-			double len = this.Length;
-			m_x /= len;
-			m_y /= len;
+            double length = this.Length;
+            double invLength = 1.0 / length;
+            m_x *= invLength;
+            m_y *= invLength;
+            return length;
 		}
 		
 		/// <summary>
 		/// Returns a new vector equal to the normalized version of this one.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>A new vector representing the normalized vector.</returns>
 		public Vector Normalized()
 		{
-			double len = this.Length;
-			return new Vector(m_x / len, m_y / len);
+            Vector ret = new Vector(this);
+            ret.Normalize();
+            return ret;
 		}
 
 		/// <summary>
@@ -479,6 +492,41 @@ namespace SdlDotNet
 			m_x*=-1;
 			m_y*=-1;
 		}
+
+        /// <summary>
+        /// Calculates the reflection angle of the current vector using the given normal vector.
+        /// </summary>
+        /// <param name="normal">The normal angle.</param>
+        /// <returns>A new vector representing the reflection angle.</returns>
+        /// <remarks>Make sure the length of the vector is 1 or it will have an effect on the resulting vector.</remarks>
+        public Vector Reflection(Vector normal)
+        {
+            return this - ( 2 * this.DotProduct(normal) * normal );
+        }
+
+        /// <summary>
+        /// Calculates the reflection angle of the current vector using the given normal in degrees.
+        /// </summary>
+        /// <param name="normalDeg">The normal angle in degrees.</param>
+        /// <returns>A new vector representing the reflection angle.</returns>
+        public Vector Reflection(int normalDeg)
+        {
+            Vector vecNormal = new Vector(0, 1);
+            vecNormal.DirectionDeg = normalDeg;
+            return Reflection(vecNormal);
+        }
+
+        /// <summary>
+        /// Calculates the reflection angle of the current vector using the given normal in radians.
+        /// </summary>
+        /// <param name="normalRad">The normal angle in radians.</param>
+        /// <returns>A new vector representing the reflection angle.</returns>
+        public Vector Reflection(double normalRad)
+        {
+            Vector vecNormal = new Vector(0, 1);
+            vecNormal.Direction = normalRad;
+            return Reflection(vecNormal);
+        }
 
 		#endregion Math
 
