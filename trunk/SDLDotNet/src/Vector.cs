@@ -37,10 +37,27 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates point at 0, 0
 		/// </summary>
-		public Vector()
-		{
-			m_x = m_y = 0;
-		}
+        public Vector() : this(0, 0) { }
+
+        /// <summary>
+        /// Creates a vector with a specific direction in degrees and a length of 1.
+        /// </summary>
+        /// <param name="directionDeg">The direction of the vector, in degrees.</param>
+        public Vector(int directionDeg)
+        {
+            Length = 1;
+            DirectionDeg = directionDeg;
+        }
+
+        /// <summary>
+        /// Creates a vector with a specific direction in radians and a length of 1.
+        /// </summary>
+        /// <param name="directionRad">The direction of the vector, in radians.</param>
+        public Vector(double directionRad)
+        {
+            Length = 1;
+            Direction = directionRad;
+        }
 
 		/// <summary>
 		/// Creates a vector using doubles.
@@ -58,32 +75,30 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="x">Coordinate on the X-axis</param>
 		/// <param name="y">Coordinate on the Y-axis</param>
-		public Vector(int x, int y)
-		{
-			m_x = x;
-			m_y = y;
-		}
+		public Vector(int x, int y) : this((double)x,(double)y) {}
 
 		/// <summary>
-		/// Creates point in XYZ space.
+        /// Creates a vector based on a Point object.
 		/// </summary>
-		/// <param name="v">Point in X-Y plane</param>
-		public Vector(Point v)
-		{
-			this.m_x = v.X;
-			this.m_y = v.Y;
-		}
+        /// <param name="point">The point representing the XY values.</param>
+		public Vector(Point point) : this(point.X, point.Y) {}
+
+        /// <summary>
+        /// Creates a vector based on a PointF object.
+        /// </summary>
+        /// <param name="point">The point representing the XY values.</param>
+        public Vector(PointF point) : this(point.X, point.Y) {}
 
 		/// <summary>
 		/// Copy constructor
 		/// </summary>
-		/// <param name="vIn">The set values to use in the new vector.</param>
-		public Vector(Vector vIn)
+        /// <param name="vector">The vector to copy.</param>
+		public Vector(Vector vector)
 		{
-			if(vIn != null)
+            if (vector != null)
 			{
-				m_x = vIn.m_x;
-				m_y = vIn.m_y;
+                m_x = vector.m_x;
+                m_y = vector.m_y;
 			}
 			else
 				m_x = m_y = 0;
