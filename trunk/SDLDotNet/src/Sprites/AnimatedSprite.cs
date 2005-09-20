@@ -148,7 +148,12 @@ namespace SdlDotNet.Sprites
 				return m_CurrentAnimation; 
 			}
 			set
-			{ 
+			{
+                // Check to see if it exists.
+                if (!m_Animations.Contains(value))
+                    throw new SdlException("The given animation (" + value + ") does not exist in this AnimatedSprite AnimationCollection.");
+
+                // Set the animation settings.
 				m_CurrentAnimation = value;
 				m_Timer.Interval = m_Animations[m_CurrentAnimation].Delay;
 			}
