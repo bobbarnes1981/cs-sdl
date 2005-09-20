@@ -228,5 +228,22 @@ namespace SdlDotNet
 		{
 			Dictionary.Remove(key);
 		}
+
+        /// <summary>
+        /// Makes all items in the collection queued to each other for a playlist effect.
+        /// </summary>
+        public void CreateQueueList()
+        {
+            IDictionaryEnumerator enumer = Dictionary.GetEnumerator();
+            Music currItem = null;
+            Music prevItem = null;
+            while(enumer.MoveNext())
+            {
+                currItem = (Music)enumer.Value;
+                if (prevItem != null)
+                    prevItem.QueuedMusic = currItem;
+                prevItem = currItem;
+            }
+        }
 	}
 }
