@@ -26,48 +26,54 @@ using System.Globalization;
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
-	/// The SpriteCollection is a special case of sprite. It is used to
-	/// group other sprites into an easily managed whole. The sprite
-	/// manager has no size.
+	/// The SpriteCollection is used to group sprites into an easily managed whole. 
 	/// </summary>
+	/// <remarks>The sprite manager has no size.</remarks>
 	public class SpriteCollection : CollectionBase, ICollection
 	{
-		RectangleCollection lostRects = new RectangleCollection();
+		#region Constructors
 		/// <summary>
-		/// 
+		/// Creates a new SpriteCollection without any elements in it.
 		/// </summary>
 		public SpriteCollection() : base()
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Creates a new SpriteCollection with one sprite element in it.
 		/// </summary>
-		public Sprite this[int index]
+		/// <param name="sprite"></param>
+		public SpriteCollection(Sprite sprite) : base()
 		{
-			get
-			{
-				return ((Sprite)List[index]);
-			}
-			set
-			{
-				List[index] = value;
-			}
+			this.Add(sprite);
 		}
 
-		#region Display
 		/// <summary>
-		/// 
+		/// Creates a new SpriteCollection based off a different sprite collection.
 		/// </summary>
-		/// <param name="surface"></param>
-		public virtual RectangleCollection Draw(Surface surface)
+		/// <param name="spriteCollection"></param>
+		public SpriteCollection(SpriteCollection spriteCollection) : base()
+		{
+			this.Add(spriteCollection);
+		}
+
+
+		#endregion
+
+		#region Display
+		private RectangleCollection lostRects = new RectangleCollection();
+		/// <summary>
+		/// Draws all surfaces within the collection on the given destination.
+		/// </summary>
+		/// <param name="destination">The destination surface.</param>
+		public virtual RectangleCollection Draw(Surface destination)
 		{
 			RectangleCollection rects = new RectangleCollection();
 			for (int i = 0; i < this.Count; i++)
 			{
 				if (this[i].Visible)
 				{
-					rects.Add(surface.Blit(this[i].Render(), this[i].Rectangle));
+					rects.Add(destination.Blit(this[i].Render(), this[i].Rectangle));
 					if (this[i].Dirty)
 					{
 						rects.Add(this[i].RectangleDirty);
@@ -199,9 +205,9 @@ namespace SdlDotNet.Sprites
 		#region Geometry
 
 		/// <summary>
-		/// 
+		/// Gets the size of the first sprite in the collection, otherwise a size of 0,0.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>The size of the first sprite in the collection.</returns>
 		public virtual Size Size
 		{
 			get
@@ -756,6 +762,20 @@ namespace SdlDotNet.Sprites
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// Gets and sets a sprite in the collection based on the index.
+		/// </summary>
+		public Sprite this[int index]
+		{
+			get
+			{
+				return ((Sprite)List[index]);
+			}
+			set
+			{
+				List[index] = value;
+			}
+		}
 		#endregion
 
 		/// <summary>
@@ -823,7 +843,11 @@ namespace SdlDotNet.Sprites
 			return intersection;
 		}
 
-		// Provide the explicit interface member for ICollection.
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array"></param>
+		/// <param name="index"></param>
 		void ICollection.CopyTo(Array array, int index)
 		{
 			this.List.CopyTo(array, index);
@@ -850,10 +874,10 @@ namespace SdlDotNet.Sprites
 		} 
 
 		/// <summary>
-		/// 
+		/// Gets the index of the given sprite in the collection.
 		/// </summary>
-		/// <param name="sprite"></param>
-		/// <returns></returns>
+		/// <param name="sprite">The sprite to search for.</param>
+		/// <returns>The index of the given sprite.</returns>
 		public virtual int IndexOf(Sprite sprite)
 		{
 			return List.IndexOf(sprite);
