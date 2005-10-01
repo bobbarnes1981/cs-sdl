@@ -26,7 +26,10 @@ namespace SdlDotNet
 	/// <summary>
 	/// Event args for gaining focus.
 	/// </summary>
-	/// <remarks>The app can gain focus from the mouse, keyboard or from being de-inconified.</remarks>
+	/// <remarks>
+	/// The app can gain focus from the mouse, 
+	/// keyboard or from being de-inconified.
+	/// </remarks>
 	public class ActiveEventArgs : SdlEventArgs
 	{
 		internal ActiveEventArgs(Sdl.SDL_Event ev)
@@ -37,11 +40,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor for ActiveEventArgs
 		/// </summary>
-		/// <remarks>Creates EventArgs that can be passed to the event queue</remarks>
+		/// <remarks>
+		/// Creates EventArgs that can be passed to the event queue
+		/// </remarks>
 		/// <param name="gainedFocus">
 		/// True if the focus was gained, False if it was lost
 		/// </param>
-		/// <param name="state">Set to type of input that gave the app focus</param>
+		/// <param name="state">
+		/// Set to type of input that gave the app focus
+		/// </param>
 		public ActiveEventArgs(bool gainedFocus, Focus state)
 		{
 			this.eventStruct = new Sdl.SDL_Event();
@@ -60,7 +67,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns true is the app has gained focus
 		/// </summary>
-		/// <remarks>The keyboard, mouse or de-iconified app can give the app focus</remarks>
+		/// <remarks>
+		/// The keyboard, mouse or de-iconified app can give the app focus
+		/// </remarks>
 		public bool GainedFocus
 		{
 			get
@@ -78,7 +87,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns the type of input that gave the app focus
 		/// </summary>
-		/// <remarks>The keyboard, mouse or de-iconified app can give the app focus</remarks>
+		/// <remarks>
+		/// The keyboard, mouse or de-iconified app can give the app focus
+		/// </remarks>
 		public Focus State
 		{
 			get

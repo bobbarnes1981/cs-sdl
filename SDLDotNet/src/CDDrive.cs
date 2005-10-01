@@ -40,7 +40,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Represents a CDROM drive on the system
 		/// </summary>
-		/// <param name="handle">handle to CDDrive</param>
+		/// <param name="handle">Handle to CDDrive</param>
 		/// <param name="index">Index number of drive</param>
 		/// <remarks>used internally</remarks>
 		internal CDDrive(IntPtr handle, int index) 
@@ -64,7 +64,7 @@ namespace SdlDotNet
 		/// <param name="index">Index number of drive</param>
 		/// <remarks>Initializes drive</remarks>
 		/// <exception cref="SdlException">
-		/// An exaception will be thrown if the drive number 
+		/// An exception will be thrown if the drive number 
 		/// is below zero or above the number of drive on the system.
 		/// </exception>
 		public CDDrive(int index) : this(Sdl.SDL_CDOpen(index), index)
@@ -101,7 +101,9 @@ namespace SdlDotNet
 		/// Disposes object.
 		/// </summary>
 		/// <remarks>Destroys unmanaged resources</remarks>
-		/// <param name="disposing">If true, it disposes the handle to the drive</param>
+		/// <param name="disposing">
+		/// If true, it disposes the handle to the drive
+		/// </param>
 		protected override void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -140,7 +142,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the current drive status
 		/// </summary>
-		/// <remarks>used to determine if the drive is busy, stopped, empty.</remarks>
+		/// <remarks>
+		/// used to determine if the drive is busy, stopped, empty.
+		/// </remarks>
 		public CDStatus Status 
 		{
 			get 
@@ -153,7 +157,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks to see if the CD is currently playing.
 		/// </summary>
-		/// <remarks>Returns true if the drive is in use.</remarks>
+		/// <remarks>
+		/// Returns true if the drive is in use.
+		/// </remarks>
 		public bool IsBusy 
 		{
 			get 
@@ -173,7 +179,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks to see if the CD drive is currently empty.
 		/// </summary>
-		/// <remarks>Returns true if the drive is empty.</remarks>
+		/// <remarks>
+		/// Returns true if the drive is empty.
+		/// </remarks>
 		public bool IsEmpty
 		{
 			get 
@@ -214,7 +222,9 @@ namespace SdlDotNet
 		/// Checks to see if the track has audio data.
 		/// </summary>
 		/// <remarks></remarks>
-		/// <param name="trackNumber">Returns true if the track is an audio track</param>
+		/// <param name="trackNumber">
+		/// Returns true if the track is an audio track
+		/// </param>
 		public bool IsAudioTrack(int trackNumber)
 		{
 				int result = Sdl.CD_INDRIVE((int)this.Status);
@@ -244,7 +254,9 @@ namespace SdlDotNet
 		/// Checks to see if the track is a data track.
 		/// </summary>
 		/// <remarks></remarks>
-		/// <param name="trackNumber">Returns true if the track is a data track</param>
+		/// <param name="trackNumber">
+		/// Returns true if the track is a data track
+		/// </param>
 		public bool IsDataTrack(int trackNumber)
 		{
 				int result = Sdl.CD_INDRIVE((int)this.Status);

@@ -68,7 +68,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">
+		/// If true, it will dispose close the handle
+		/// </param>
 		/// <remarks></remarks>
 		public static void Dispose(bool disposing)
 		{
@@ -117,7 +119,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <remarks>
 		/// </remarks>
-		/// <returns>True if CDRom subsystem has been initialized, false if it has not.</returns>
+		/// <returns>
+		/// True if CDRom subsystem has been initialized, false if it has not.
+		/// </returns>
 		public static bool IsInitialized
 		{
 			get

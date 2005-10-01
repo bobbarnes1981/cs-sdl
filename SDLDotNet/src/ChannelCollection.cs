@@ -98,7 +98,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Removes a specified Channel from the list.
 		/// </summary>
-		/// <param name="channel">The Channel to remove from the ChannelCollection. </param>
+		/// <param name="channel">
+		/// The Channel to remove from the ChannelCollection.
+		/// </param>
 		/// <remarks></remarks>
 		public void Remove(Channel channel)
 		{
@@ -138,8 +140,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Provide the strongly typed member for ICollection.
 		/// </summary>
-		/// <param name="array"></param>
-		/// <param name="index"></param>
+		/// <param name="array">Array to copy collection to.</param>
+		/// <param name="index">Index to copy to.</param>
 		/// <remarks>Provide the strongly typed member for ICollection.</remarks> 
 		public void CopyTo(SdlException[] array, int index)
 		{

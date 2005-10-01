@@ -109,7 +109,7 @@ namespace SdlDotNet
 		/// Plays a sound the specified number of times on a specific channel
 		/// </summary>
 		/// <param name="sound">The sound to play</param>
-		/// <param name="continuous"></param>
+		/// <param name="continuous">If true, sound will be looped.</param>
 		/// <returns>The channel used to play the sound</returns>
 		/// <remarks></remarks>
 		public int Play(Sound sound, bool continuous) 
@@ -216,7 +216,9 @@ namespace SdlDotNet
 		/// specific channel
 		/// </summary>
 		/// <param name="sound">The sound to play</param>
-		/// <param name="ms">The number of milliseconds to fade in for</param>
+		/// <param name="ms">
+		/// The number of milliseconds to fade in for
+		/// </param>
 		/// <param name="loops">
 		/// The number of loops.  
 		/// Specify 1 to have the sound play twice
@@ -351,7 +353,9 @@ namespace SdlDotNet
 		/// Sets the distance (attenuate sounds based on distance 
 		/// from listener) for a specific channel
 		/// </summary>
-		/// <param name="distanceValue">Distance value from 0-255 inclusive</param>
+		/// <param name="distanceValue">
+		/// Distance value from 0-255 inclusive
+		/// </param>
 		/// <remarks></remarks>
 		public void Distance(byte distanceValue)
 		{
@@ -394,7 +398,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Enables the callback for this channel
 		/// </summary>
-		/// <remarks>When the sound stops playing, the delegate will be called.</remarks>
+		/// <remarks>
+		/// When the sound stops playing, the delegate will be called.
+		/// </remarks>
 		public void EnableChannelFinishedCallback() 
 		{
 			channelFinishedDelegate = new SdlMixer.ChannelFinishedDelegate(ChannelFinished);
