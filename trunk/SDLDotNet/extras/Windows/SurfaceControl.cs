@@ -38,7 +38,7 @@ namespace SdlDotNet.Windows
 	///     Sdl Surface applications.
 	/// </summary>
 	#endregion Class Documentation
-	public class SurfaceControl : UserControl
+	public class SurfaceControl : System.Windows.Forms.PictureBox
 	{
 		Surface surface;
 
@@ -47,23 +47,56 @@ namespace SdlDotNet.Windows
 		/// </summary>
 		public SurfaceControl()
 		{
-			surface = new Surface(0,0);
+			surface = Video.CreateRgbSurface(this.Width,this.Height);
+			this.Image = (Image)surface.ToBitmap();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Surface Surface
+		{
+			get
+			{
+							
+				//this.Image = (Image)surface.ToBitmap();
+				//this.InvokePaint(this, new /PaintEventArgs();
+				return surface;
+			}
+			set
+			{
+				surface = value;
+				this.Image = (Image)surface.ToBitmap();
+			}
 		}
 
 		/// <summary>
 		/// Get/set the Alpha flags of the image.
 		/// </summary>
-		[Category("Sdl Properties"), Description("Set Alpha flags")]
-		public Alphas AlphaFlags
+		[Category("Sdl Properties"), Description("Set Alpha")]
+		public byte Alpha
 		{
 			get 
 			{
-				return (Alphas) surface.Alpha;
+				return surface.Alpha;
 			}
 			set	
 			{
-				surface.Alpha = (byte)value;
+				surface.Alpha = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			//this.Image = (Image)surface.ToBitmap();
+			base.OnPaint (e);
+			//e.Graphics.DrawImage(this.picture, this.pictureLocation);
+			
+		}
+
 	}
 }

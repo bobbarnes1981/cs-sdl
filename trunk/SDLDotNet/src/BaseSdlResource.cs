@@ -27,7 +27,9 @@ namespace SdlDotNet
 	/// <summary>
 	/// Base class for SdlResources
 	/// </summary>
-	/// <remarks>Several SdlDotNet classes inherit from this class</remarks>
+	/// <remarks>
+	/// Several SdlDotNet classes inherit from this class
+	/// </remarks>
 	public abstract class BaseSdlResource : IDisposable 
 	{
 		private bool disposed;
@@ -36,8 +38,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates class using a handle.
 		/// </summary>
-		/// <param name="handle">Pointer to unmanaged Sdl resource</param>
-		/// <remarks>Often used by internal classes.</remarks>
+		/// <param name="handle">
+		/// Pointer to unmanaged Sdl resource
+		/// </param>
+		/// <remarks>
+		/// Often used by internal classes.
+		/// </remarks>
 		protected BaseSdlResource(IntPtr handle) 
 		{
 			this.handle = handle;
@@ -46,7 +52,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		/// <remarks>Used by outside classes.</remarks>
+		/// <remarks>
+		/// Used by outside classes.
+		/// </remarks>
 		protected BaseSdlResource() 
 		{
 		}
@@ -56,7 +64,9 @@ namespace SdlDotNet
 		/// and perform other cleanup operations before the Object 
 		/// is reclaimed by garbage collection.
 		/// </summary>
-		/// <remarks>Frees managed resources</remarks>
+		/// <remarks>
+		/// Frees managed resources
+		/// </remarks>
 		~BaseSdlResource() 
 		{
 			Dispose(false);
@@ -82,7 +92,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
-		/// <remarks>Destroys managed and unmanaged objects</remarks>
+		/// <remarks>
+		/// Destroys managed and unmanaged objects
+		/// </remarks>
 		public void Dispose() 
 		{
 			Dispose(true);
@@ -91,8 +103,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Dispose objects
 		/// </summary>
-		/// <param name="disposing">If true,. it will dispose close the handle</param>
-		/// <remarks>Will dispose managed and unmanaged resources.</remarks>
+		/// <param name="disposing">
+		/// If true, it will dispose close the handle
+		/// </param>
+		/// <remarks>
+		/// Will dispose managed and unmanaged resources.
+		/// </remarks>
 		protected virtual void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -109,13 +125,17 @@ namespace SdlDotNet
 		/// <summary>
 		/// Close the handle.
 		/// </summary>
-		/// <remarks>Used to close handle to unmanaged SDL resources</remarks>
+		/// <remarks>
+		/// Used to close handle to unmanaged SDL resources
+		/// </remarks>
 		protected abstract void CloseHandle();
 		
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
-		/// <remarks>Same as Dispose(true)</remarks>
+		/// <remarks>
+		/// Same as Dispose(true)
+		/// </remarks>
 		public void Close() 
 		{
 			Dispose();
