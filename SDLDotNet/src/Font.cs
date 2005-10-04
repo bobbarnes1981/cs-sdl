@@ -26,8 +26,11 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Font Class
+	/// Font Class.
 	/// </summary>
+	/// <remarks>
+	/// This class is used to instantiate fonts in an SDL.NET application.
+	/// </remarks>
 	public class Font : BaseSdlResource
 	{
 		private bool disposed;
@@ -39,15 +42,57 @@ namespace SdlDotNet
 		/// <param name="pointSize">Size of font</param>
 		public Font(string filename, int pointSize) 
 		{
-			if (!FontSystem.IsInitialized)
+			if (!this.IsFontSystemInitialized)
 			{
-				FontSystem.Initialize();
+				this.InitializeFontSystem();
 			}
 
 			this.Handle = SdlTtf.TTF_OpenFont(filename, pointSize);
 			if (this.Handle == IntPtr.Zero) 
 			{
 				throw FontException.Generate();
+			}
+		}
+		/// <summary>
+		/// Queries if the Font subsystem has been intialized.
+		/// </summary>
+		/// <remarks>
+		/// </remarks>
+		/// <returns>True if Font subsystem has been initialized, false if it has not.</returns>
+		private bool IsFontSystemInitialized
+		{
+			get
+			{
+
+				if (SdlTtf.TTF_WasInit() == (int) SdlFlag.TrueValue)
+				{
+					return true;
+				}
+				else 
+				{
+					return false;
+				}
+			}
+		}
+		/// <summary>
+		/// Initialize Font subsystem.
+		/// </summary>
+		private void InitializeFontSystem()
+		{
+			if (SdlTtf.TTF_Init() != (int) SdlFlag.Success)
+			{
+				FontException.Generate();
+			}
+		}
+		/// <summary>
+		/// Get System Font Names
+		/// </summary>
+		/// <returns></returns>
+		public static System.Drawing.Text.FontCollection SystemFontNames
+		{
+			get
+			{
+				return new System.Drawing.Text.InstalledFontCollection();
 			}
 		}
 

@@ -111,7 +111,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">True to manually dispose</param>
 		public static void Dispose(bool disposing)
 		{
 			if (!disposed)
@@ -135,7 +135,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns the number of joysticks on this system
 		/// </summary>
-		/// <returns>The number of joysticks</returns>
+		/// <returns>
+		/// The number of joysticks
+		/// </returns>
 		public static int NumberOfJoysticks 
 		{
 			get
@@ -147,8 +149,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks to see if joystick number is valid
 		/// </summary>
-		/// <param name="index"></param>
-		/// <returns></returns>
+		/// <param name="index">Index of joystick to query</param>
+		/// <returns>True if joystick is valid</returns>
 		public static bool IsValidJoystickNumber(int index)
 		{
 			if (index >= 0 && index < NumberOfJoysticks)

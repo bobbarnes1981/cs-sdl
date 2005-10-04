@@ -44,7 +44,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Create movie object from file
 		/// </summary>
-		/// <param name="file"></param>
+		/// <param name="file">filename of mpeg-1 movie.</param>
 		public Movie(string file)
 		{
 			this.Handle =
@@ -59,7 +59,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">Manually dispose if true.</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -132,7 +132,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Display video surface
 		/// </summary>
-		/// <param name="surface"></param>
+		/// <param name="surface">Surface to display movie object on</param>
 		public void Display(Surface surface)
 		{
 			Smpeg.SMPEG_setdisplay(
@@ -144,7 +144,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Sets the volume for the movie.
 		/// </summary>
-		/// <param name="volume"></param>
+		/// <param name="volume">volume to set movie to.</param>
 		public void AdjustVolume(int volume)
 		{
 			Smpeg.SMPEG_setvolume(this.Handle, volume);
@@ -404,8 +404,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Resize movie
 		/// </summary>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
+		/// <param name="width">Scale movie height to this width in pixels</param>
+		/// <param name="height">Scale movie height to this height in pixels</param>
 		public void ScaleXY( int width, int height)
 		{
 			Smpeg.SMPEG_scaleXY(this.Handle, width, height );
@@ -414,7 +414,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Change size of movie by the same amount in both axes
 		/// </summary>
-		/// <param name="scalingFactor"></param>
+		/// <param name="scalingFactor">scale both width and height by this factor</param>
 		public void ScaleSize(int scalingFactor)
 		{
 			Smpeg.SMPEG_scale(this.Handle, scalingFactor);
@@ -439,8 +439,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Move the video display area within the destination surface
 		/// </summary>
-		/// <param name="axisX"></param>
-		/// <param name="axisY"></param>
+		/// <param name="axisX">move the display area to this</param>
+		/// <param name="axisY">move the display area to this</param>
 		public void Move( int axisX, int axisY)
 		{
 			Smpeg.SMPEG_move(this.Handle, axisX, axisY );
@@ -449,10 +449,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Move the video display area within the destination surface
 		/// </summary>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
-		/// <param name="axisX"></param>
-		/// <param name="axisY"></param>
+		/// <param name="width">change width of display area</param>
+		/// <param name="height">change height of display area</param>
+		/// <param name="axisX">move the display area to this</param>
+		/// <param name="axisY">move the display area to this</param>
 		public void DisplayRegion( 
 			int width, int height, 
 			int axisX, int axisY)
@@ -463,7 +463,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Skip forward a certain number of seconds
 		/// </summary>
-		/// <param name="seconds"></param>
+		/// <param name="seconds">number of seconds to skip</param>
 		public void Skip(float seconds)
 		{
 			Smpeg.SMPEG_skip(this.Handle, seconds);
@@ -472,7 +472,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Seeks a specified number of bytes forward in the movie stream.
 		/// </summary>
-		/// <param name="bytes"></param>
+		/// <param name="bytes">number of bytes to move forward in movie</param>
 		public void Seek(int bytes)
 		{
 			Smpeg.SMPEG_seek(this.Handle, bytes);
@@ -481,7 +481,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Renders specified frame of movie.
 		/// </summary>
-		/// <param name="frameNumber"></param>
+		/// <param name="frameNumber">frame number</param>
 		public void RenderFrame(int frameNumber)
 		{
 			Smpeg.SMPEG_renderFrame(this.Handle, frameNumber);
@@ -498,7 +498,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Renders final frame of movie and puts it on a surface
 		/// </summary>
-		/// <param name="surface"></param>
+		/// <param name="surface">surface to display frame to</param>
 		public void RenderFinalFrame(Surface surface)
 		{
 			Smpeg.SMPEG_renderFinal(this.Handle, surface.Handle, 0, 0);

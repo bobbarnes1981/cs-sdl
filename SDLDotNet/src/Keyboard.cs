@@ -23,7 +23,7 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for Keyboard.
+	/// Keyboard class
 	/// </summary>
 	public sealed class Keyboard
 	{

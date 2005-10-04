@@ -25,7 +25,7 @@ using SdlDotNet;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Sdl Ttf Exception Class
+	/// Sdl Font Exception Class
 	/// </summary>
 	[Serializable()]
 	public class FontException : SdlException 
@@ -50,7 +50,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Font Exception
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">
+		/// The string representing the error message
+		/// </param>
 		/// <param name="exception"></param>
 		public FontException(string message, Exception exception) : base(message, exception)
 		{

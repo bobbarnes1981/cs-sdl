@@ -24,7 +24,7 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for KeyboardEventArgs.
+	/// Event arguments for Keyboard Events.
 	/// </summary>
 	public class KeyboardEventArgs : SdlEventArgs
 	{

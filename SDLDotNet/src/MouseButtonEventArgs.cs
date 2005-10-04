@@ -25,7 +25,7 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for MouseMotionEventArgs.
+	/// Event arguments for MouseMotion Events.
 	/// </summary>
 	public class MouseButtonEventArgs : SdlEventArgs 
 	{
