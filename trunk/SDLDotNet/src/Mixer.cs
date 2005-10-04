@@ -184,8 +184,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates sound channel
 		/// </summary>
-		/// <param name="index"></param>
-		/// <returns></returns>
+		/// <param name="index">Index of new channel</param>
+		/// <returns>new Channel</returns>
 		public static Channel CreateChannel(int index)
 		{
 			if (index < 0 | index >= Mixer.ChannelsAllocated)
@@ -201,8 +201,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Loads a .wav file into memory
 		/// </summary>
-		/// <param name="file"></param>
-		/// <returns></returns>
+		/// <param name="file">sound file name</param>
+		/// <returns>Sound object</returns>
 		public static Sound Sound(string file)
 		{
 			return Mixer.LoadWav(file);
@@ -281,15 +281,17 @@ namespace SdlDotNet
 		/// <summary>
 		/// These channels will be resrved
 		/// </summary>
-		/// <param name="numberOfChannels"></param>
-		/// <returns></returns>
+		/// <param name="numberOfChannels">number of channels to reserve</param>
+		/// <returns>
+		/// Number of channels actually reserved. This may be fewer than the number requested.
+		/// </returns>
 		public static int ReserveChannels(int numberOfChannels)
 		{
 			return SdlMixer.Mix_ReserveChannels(numberOfChannels);
 		}
 
 		/// <summary>
-		/// Stop reserving any channels
+		/// Stop reserving any channels.
 		/// </summary>
 		public static void CancelReserveChannels()
 		{
@@ -299,7 +301,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns the index of an available channel
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>Index of available channel</returns>
 		public static int FindAvailableChannel()
 		{
 			return SdlMixer.Mix_GroupAvailable(-1);

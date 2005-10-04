@@ -31,10 +31,6 @@ namespace SdlDotNet
 	{
 		static readonly Mouse instance = new Mouse();
 
-//		static Mouse()
-//		{
-//		}
-
 		Mouse()
 		{
 		}

@@ -76,7 +76,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// String output
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>String repesentation.</returns>
 		public override string ToString()
 		{
 			return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2})", x, y);
@@ -84,8 +84,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Equals
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">Object for comparison</param>
+		/// <returns>If objects are equal, this returns true.</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(BallMotion))
@@ -98,20 +98,20 @@ namespace SdlDotNet
 		/// <summary>
 		/// Equals operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
-		/// <returns></returns>
+		/// <param name="c1">object to compare</param>
+		/// <param name="c2">object to compare</param>
+		/// <returns>If objects are equal, this returns true.</returns>
 		public static bool operator== (BallMotion c1, BallMotion c2)
 		{
 			return ((c1.x == c2.x) && (c1.y == c2.y));
 		}
 		
 		/// <summary>
-		/// no equals operator
+		/// Not equals operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
-		/// <returns></returns>
+		/// <param name="c1">object to compare</param>
+		/// <param name="c2">object to compare</param>
+		/// <returns>If objects are not equal, this returns true.</returns>
 		public static bool operator!= (BallMotion c1, BallMotion c2)
 		{
 			return !(c1 == c2);
@@ -120,7 +120,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// GetHashCode openrator
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>Hash code</returns>
 		public override int GetHashCode()
 		{
 			return x ^ y;
@@ -178,7 +178,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">True for manual disposing</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -311,8 +311,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the current axis position
 		/// </summary>
-		/// <param name="axis"></param>
-		/// <returns></returns>
+		/// <param name="axis">Vertical or horizontal axis</param>
+		/// <returns>Joystick position</returns>
 		public float GetAxisPosition(JoystickAxis axis)
 		{
 			return  ((float)(Sdl.SDL_JoystickGetAxis(this.Handle, (int) axis) + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE);
@@ -321,8 +321,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the ball motion
 		/// </summary>
-		/// <param name="ball"></param>
-		/// <returns></returns>
+		/// <param name="ball">ball</param>
+		/// <returns>Ballmotion struct</returns>
 		public BallMotion GetBallMotion(int ball)
 		{
 			int motionX;
@@ -343,8 +343,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the current button state
 		/// </summary>
-		/// <param name="button"></param>
-		/// <returns></returns>
+		/// <param name="button">Button to query</param>
+		/// <returns>Pressed or not pressed</returns>
 		public ButtonKeyState GetButtonState(int button)
 		{
 			return (ButtonKeyState) Sdl.SDL_JoystickGetButton(this.Handle, button);
@@ -353,8 +353,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the current Hat state
 		/// </summary>
-		/// <param name="hat"></param>
-		/// <returns></returns>
+		/// <param name="hat">Hat to query</param>
+		/// <returns>Hat state</returns>
 		public JoystickHatStates GetHatState(int hat)
 		{
 			return (JoystickHatStates) Sdl.SDL_JoystickGetHat(this.Handle, (int) hat);

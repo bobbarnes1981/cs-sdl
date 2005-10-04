@@ -35,45 +35,45 @@ namespace SdlDotNet
 	/// <summary>
 	/// Indicates that a joystick has moved on an axis
 	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
+	/// <param name="sender">Object sending the event</param>
+	/// <param name="e">Event parameters</param>
 	/// 
 	public delegate void JoystickAxisEventHandler(object sender, JoystickAxisEventArgs e);
 	/// <summary>
 	/// Indicates a joystick trackball has changed position
 	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
+	/// <param name="sender">Object sending the event</param>
+	/// <param name="e">Event parameters</param>
 	public delegate void JoystickBallEventHandler(object sender, JoystickBallEventArgs e);
 	/// <summary>
 	/// Indicates that a joystick button has been pressed or released
 	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
+	/// <param name="sender">Object sending the event</param>
+	/// <param name="e">Event parameters</param>
 	public delegate void JoystickButtonEventHandler(object sender, JoystickButtonEventArgs e);
 	/// <summary>
 	/// Indicates a joystick hat has changed position
 	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
+	/// <param name="sender">Object sending the event</param>
+	/// <param name="e">Event parameters</param>
 	public delegate void JoystickHatEventHandler(object sender, JoystickHatEventArgs e);
 	/// <summary>
 	/// Indicates that the keyboard state has changed
 	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
+	/// <param name="sender">Object sending the event</param>
+	/// <param name="e">Event parameters</param>
 	public delegate void KeyboardEventHandler(object sender, KeyboardEventArgs e);
 	/// <summary>
 	/// Indicates that a mouse button has been pressed or released
 	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
+	/// <param name="sender">Object sending the event</param>
+	/// <param name="e">Event parameters</param>
 	public delegate void MouseButtonEventHandler(object sender, MouseButtonEventArgs e);
 	/// <summary>
 	/// Indicates that the mouse has moved
 	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param> 
+	/// <param name="sender">Object sending the event</param>
+	/// <param name="e">Event parameters</param> 
 	public delegate void MouseMotionEventHandler(object sender, MouseMotionEventArgs e);
 	/// <summary>
 	/// Indicates that the user has closed the main window
@@ -84,31 +84,31 @@ namespace SdlDotNet
 	/// <summary>
 	/// Indicates a user event has fired
 	/// </summary>
-	/// <param name="sender"></param>
+	/// <param name="sender">Object sending the event</param>
 	/// <param name="e"></param>
 	public delegate void UserEventHandler(object sender, UserEventArgs e);
 	/// <summary>
 	/// Indicates that a portion of the window has been exposed
 	/// </summary>
-	/// <param name="sender"></param>
+	/// <param name="sender">Object sending the event</param>
 	/// <param name="e"></param>
 	public delegate void VideoExposeEventHandler(object sender, VideoExposeEventArgs e);
 	/// <summary>
 	/// Indicates the user has resized the window
 	/// </summary>
-	/// <param name="sender"></param>
+	/// <param name="sender">Object sending the event</param>
 	/// <param name="e"></param>
 	public delegate void VideoResizeEventHandler(object sender, VideoResizeEventArgs e);
 	/// <summary>
 	/// Indicates that a sound channel has stopped playing
 	/// </summary>
-	/// <param name="sender"></param>
+	/// <param name="sender">Object sending the event</param>
 	/// <param name="e"></param>
 	public delegate void ChannelFinishedEventHandler(object sender, ChannelFinishedEventArgs e);
 	/// <summary>
 	/// Indicates that a music sample has stopped playing
 	/// </summary>
-	/// <param name="sender"></param>
+	/// <param name="sender">Object sending the event</param>
 	/// <param name="e"></param>
 	public delegate void MusicFinishedEventHandler(object sender, MusicFinishedEventArgs e);
 	/// <summary>
@@ -238,7 +238,9 @@ namespace SdlDotNet
 		/// Polls and processes a given number of events before returning false
 		/// </summary>
 		/// <remarks>If the are no more events, the method will return false</remarks>
-		/// <param name="numberOfEvents">Nunmber of events to process at a time at most</param>
+		/// <param name="numberOfEvents">
+		/// Nunmber of events to process at a time at most
+		/// </param>
 		/// <returns>Returns false when done processing events</returns>
 		public static bool Poll(int numberOfEvents) 
 		{
@@ -265,6 +267,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Checks the event queue, and waits until an event is available
 		/// </summary>
+		/// <remarks></remarks>
 		public static void Wait() 
 		{
 			Sdl.SDL_Event ev;
@@ -278,9 +281,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Pushes a user-defined event on the event queue
 		/// </summary>
+		/// <remarks></remarks>
 		/// <param name="userEventArgs">
 		/// An opaque object representing a user-defined event.
-		/// Will be passed back to the UserEvent handler delegate when this event is processed.</param>
+		/// Will be passed back to the UserEvent handler delegate when this event is processed.
+		/// </param>
 		public static void PushUserEvent(UserEventArgs userEventArgs) 
 		{
 			//Sdl.SDL_UserEvent sdlev = new Sdl.SDL_UserEvent();
@@ -302,8 +307,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Adds an event to the Event queue.
 		/// </summary>
-		/// <param name="sdlEvent"></param>
-		/// <returns></returns>
+		/// <param name="sdlEvent">Event to add to queue</param>
 		public static void Add(SdlEventArgs sdlEvent)
 		{
 			SdlEventArgs[] events = new SdlEventArgs[1];
@@ -314,7 +318,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Adds an array of events to the event queue.
 		/// </summary>
-		/// <param name="sdlEvents"></param>
+		/// <param name="sdlEvents">Array of events to add to queue.</param>
 		/// <returns></returns>
 		public static void Add(SdlEventArgs[] sdlEvents)
 		{
@@ -346,9 +350,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns an array of events in the event queue.
 		/// </summary>
-		/// <param name="eventMask"></param>
-		/// <param name="numberOfEvents"></param>
-		/// <returns></returns>
+		/// <param name="eventMask">Mask for event that will be removed from queue</param>
+		/// <param name="numberOfEvents">Number of events to remove</param>
 		public static void Remove(EventMask eventMask, int numberOfEvents)
 		{
 			Sdl.SDL_Event[] events = new Sdl.SDL_Event[numberOfEvents];
@@ -367,7 +370,6 @@ namespace SdlDotNet
 		/// <summary>
 		/// Remove all events from the queue
 		/// </summary>
-		/// <returns></returns>
 		public static void Remove()
 		{
 			Remove(EventMask.AllEvents, QUERY_EVENTS_MAX);
@@ -385,7 +387,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Remove all events of a certain type
 		/// </summary>
-		/// <param name="eventMask">Events to remove</param>
+		/// <param name="eventMask">
+		/// Events to remove
+		/// </param>
 		public static void Remove(EventMask eventMask)
 		{
 			Remove(eventMask, QUERY_EVENTS_MAX);
@@ -394,9 +398,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns an array of events in the event queue.
 		/// </summary>
-		/// <param name="eventMask"></param>
-		/// <param name="numberOfEvents"></param>
-		/// <returns></returns>
+		/// <param name="eventMask">Mask of events to find in queue</param>
+		/// <param name="numberOfEvents">Number of events to find in queue</param>
+		/// <returns>Array of events in queue.</returns>
 		public static SdlEventArgs[] Peek(EventMask eventMask, int numberOfEvents)
 		{
 			Sdl.SDL_Event[] events = new Sdl.SDL_Event[numberOfEvents];
@@ -421,7 +425,7 @@ namespace SdlDotNet
 		/// View number of events in the queue
 		/// </summary>
 		/// <param name="numberOfEvents">number of events to retrieve</param>
-		/// <returns></returns>
+		/// <returns>Array of events from queue</returns>
 		public static SdlEventArgs[] Peek(int numberOfEvents)
 		{
 			return Peek(EventMask.AllEvents, numberOfEvents);
@@ -430,7 +434,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// View all events in the queue
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>Array of all events in queue</returns>
 		public static SdlEventArgs[] Peek()
 		{
 			return Peek(EventMask.AllEvents, QUERY_EVENTS_MAX);
@@ -440,7 +444,7 @@ namespace SdlDotNet
 		/// View all events of a certain type in the queue
 		/// </summary>
 		/// <param name="eventMask">Type of events to view</param>
-		/// <returns></returns>
+		/// <returns>Array of events</returns>
 		public static SdlEventArgs[] Peek(EventMask eventMask)
 		{
 			return Peek(eventMask, QUERY_EVENTS_MAX);
@@ -449,8 +453,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// check to se if a certain kind of event is queued
 		/// </summary>
-		/// <param name="eventMask"></param>
-		/// <returns></returns>
+		/// <param name="eventMask">Mask for event to check for</param>
+		/// <returns>If event is queued, then method returns true</returns>
 		public static bool IsEventQueued(EventMask eventMask)
 		{
 			SdlEventArgs[] eventArray = Peek(eventMask, QUERY_EVENTS_MAX);
@@ -467,7 +471,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Disables event from appearing in the queue
 		/// </summary>
-		/// <param name="eventType"></param>
+		/// <param name="eventType">Event to disable</param>
 		public static void IgnoreEvent(EventTypes eventType)
 		{
 			Sdl.SDL_EventState((byte)eventType, Sdl.SDL_IGNORE);
@@ -477,7 +481,7 @@ namespace SdlDotNet
 		/// Event type will be processed by queue.
 		/// </summary>
 		/// <remarks>all events are enabled by default</remarks>
-		/// <param name="eventType"></param>
+		/// <param name="eventType">Event to enable</param>
 		public static void EnableEvent(EventTypes eventType)
 		{
 			Sdl.SDL_EventState((byte)eventType, Sdl.SDL_ENABLE);
@@ -486,8 +490,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Check to see if this type of event is enabled
 		/// </summary>
-		/// <param name="eventType"></param>
-		/// <returns></returns>
+		/// <param name="eventType">Event to check to see if it is enabled</param>
+		/// <returns>If event is enabled, the method returns true.</returns>
 		public static bool IsEventEnabled(EventTypes eventType)
 		{
 			return (Sdl.SDL_EventState((byte)eventType, Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
@@ -738,7 +742,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Quits application by raising and quit event.
 		/// </summary>
 		public static void QuitApplication()
 		{
