@@ -23,7 +23,7 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for QuitEventArgs.
+	/// Arguments for the QuitEvent.
 	/// </summary>
 	public class QuitEventArgs : SdlEventArgs 
 	{

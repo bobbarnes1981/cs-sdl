@@ -24,7 +24,8 @@ using System.IO;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Represents a collection of music samples held together by a dictionary key-value base.
+	/// Represents a collection of music samples 
+	/// held together by a dictionary key-value base.
 	/// </summary>
 	/// <example>
 	/// <code>
@@ -49,8 +50,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a new MusicCollection with one element in it.
 		/// </summary>
-		/// <param name="key">The key you would like to refer to the music sample as.</param>
-		/// <param name="music">The sample object itself.</param>
+		/// <param name="key">
+		/// The key you would like to refer to the music sample as.
+		/// </param>
+		/// <param name="music">
+		/// The sample object itself.
+		/// </param>
 		public MusicCollection(string key, Music music)
 		{
 			this.Add(key, music);
@@ -59,7 +64,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a new MusicCollection with one element in it.
 		/// </summary>
-		/// <param name="filename">The filename and key of the single Music object to load.</param>
+		/// <param name="filename">
+		/// The filename and key of the single Music object to load.
+		/// </param>
 		public MusicCollection(string filename)
 		{    
 			this.Add(filename);
@@ -68,7 +75,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a new MusicCollection with one element in it.
 		/// </summary>
-		/// <param name="music">The single music sample to start off the collection.</param>
+		/// <param name="music">
+		/// The single music sample to start off the collection.
+		/// </param>
 		public MusicCollection(Music music)
 		{
 			this.Add(music);
@@ -77,8 +86,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Loads multiple files from a directory into the collection.
 		/// </summary>
-		/// <param name="baseName">The name held before the file index.</param>
-		/// <param name="extension">The extension of the files (.mp3)</param>
+		/// <param name="baseName">
+		/// The name held before the file index.
+		/// </param>
+		/// <param name="extension">
+		/// The extension of the files (.mp3)
+		/// </param>
 		public MusicCollection(string baseName, string extension)
 		{
 			// Save the fields
@@ -88,12 +101,18 @@ namespace SdlDotNet
 			{
 				string fn = null;
 				if (i < 10)
+				{
 					fn = baseName + "-0" + i + extension;
+				}
 				else
+				{
 					fn = baseName + "-" + i + extension;
+				}
                 
 				if (!File.Exists(fn))
+				{
 					break;
+				}
                 
 				// Load it
 				this.Dictionary.Add(fn, new Music(fn));
@@ -102,9 +121,12 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Creates a new MusicCollection with the contents of an existing MusicCollection.
+		/// Creates a new MusicCollection with the contents 
+		/// of an existing MusicCollection.
 		/// </summary>
-		/// <param name="musicCollection">The existing music collection to add.</param>
+		/// <param name="musicCollection">
+		/// The existing music collection to add.
+		/// </param>
 		public MusicCollection(MusicCollection musicCollection)
 		{
 			IDictionaryEnumerator enumer = musicCollection.GetEnumerator();
@@ -154,9 +176,16 @@ namespace SdlDotNet
 		/// <summary>
 		/// Adds a music sample to the collection.
 		/// </summary>
-		/// <param name="key">The key to use as reference to the music object.</param>
-		/// <param name="music">The sample to add.</param>
-		/// <returns>The total number of elements within the collection after adding the sample.</returns>
+		/// <param name="key">
+		/// The key to use as reference to the music object.
+		/// </param>
+		/// <param name="music">
+		/// The sample to add.
+		/// </param>
+		/// <returns>
+		/// The total number of elements within the 
+		/// collection after adding the sample.
+		/// </returns>
 		public int Add(string key, Music music) 
 		{
 			Dictionary.Add(key, music);
@@ -164,10 +193,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Adds a music sample to the collection using the filename as the key.
+		/// Adds a music sample to the collection 
+		/// using the filename as the key.
 		/// </summary>
-		/// <param name="filename">The music filename to load as well as the key to use as the reference.</param>
-		/// <returns>The total number of elements within the collection after adding the sample.</returns>
+		/// <param name="filename">
+		/// The music filename to load as well 
+		/// as the key to use as the reference.
+		/// </param>
+		/// <returns>The total number of elements 
+		/// within the collection after adding the sample.
+		/// </returns>
 		public int Add(string filename)
 		{
 			Dictionary.Add(filename, new Music(filename));
@@ -175,10 +210,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Adds a music sample to the collection using the Music's ToString method as the key.
+		/// Adds a music sample to the collection using 
+		/// the Music's ToString method as the key.
 		/// </summary>
-		/// <param name="music">The music object to add.</param>
-		/// <returns>The total number of elements within the collection after adding the sample.</returns>
+		/// <param name="music">
+		/// The music object to add.
+		/// </param>
+		/// <returns>
+		/// The total number of elements within the collection 
+		/// after adding the sample.
+		/// </returns>
 		public int Add(Music music)
 		{
 			Dictionary.Add(music.ToString(), music);
@@ -188,8 +229,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns true if the collection contains the given key.
 		/// </summary>
-		/// <param name="key"></param>
-		/// <returns></returns>
+		/// <param name="key">key for item in collection</param>
+		/// <returns>Returns true if collection contains the key.</returns>
 		public bool Contains(string key)
 		{
 			return Dictionary.Contains(key);
@@ -198,22 +239,36 @@ namespace SdlDotNet
 		/// <summary>
 		/// Adds a collection of music to the current music collection.
 		/// </summary>
-		/// <param name="musicCollection">The collection of music samples to add.</param>
-		/// <returns>The total number of elements within the collection after adding the sample.</returns>
+		/// <param name="musicCollection">
+		/// The collection of music samples to add.
+		/// </param>
+		/// <returns>
+		/// The total number of elements within the collection after 
+		/// adding the sample.
+		/// </returns>
 		public int Add(MusicCollection musicCollection)
 		{
 			IDictionaryEnumerator dict = musicCollection.GetEnumerator();
 			while(dict.MoveNext())
+			{
 				this.Add((string)dict.Key, (Music)dict.Value);
+			}
 			return Dictionary.Count;
 		}
 
 		/// <summary>
 		/// Adds a music sample to the collection.
 		/// </summary>
-		/// <param name="key">The reference value for the music sample.</param>
-		/// <param name="filename">The filename of the music sample to load.</param>
-		/// <returns>The total number of elements within the collection after adding the sample.</returns>
+		/// <param name="key">
+		/// The reference value for the music sample.
+		/// </param>
+		/// <param name="filename">
+		/// The filename of the music sample to load.
+		/// </param>
+		/// <returns>
+		/// The total number of elements within the collection 
+		/// after adding the sample.
+		/// </returns>
 		public int Add(string key, string filename)
 		{
 			Dictionary.Add(key, new Music(filename));
@@ -230,7 +285,8 @@ namespace SdlDotNet
 		}
 
         /// <summary>
-        /// Makes all items in the collection queued to each other for a playlist effect.
+        /// Makes all items in the collection 
+        /// queued to each other for a playlist effect.
         /// </summary>
         public void CreateQueueList()
         {
@@ -240,8 +296,10 @@ namespace SdlDotNet
             while(enumer.MoveNext())
             {
                 currItem = (Music)enumer.Value;
-                if (prevItem != null)
-                    prevItem.QueuedMusic = currItem;
+				if (prevItem != null)
+				{
+					prevItem.QueuedMusic = currItem;
+				}
                 prevItem = currItem;
             }
         }

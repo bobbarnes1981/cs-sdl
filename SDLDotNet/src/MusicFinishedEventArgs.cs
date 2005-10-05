@@ -23,12 +23,13 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for MusicFinishedEventArgs.
+	/// Event arguments for MusicFinished Event.
 	/// </summary>
 	public class MusicFinishedEventArgs : UserEventArgs 
 	{
 		/// <summary>
-		/// 
+		/// When music finishes, the MusicFinished event 
+		/// will fire and send these args.
 		/// </summary>
 		public MusicFinishedEventArgs()
 		{
