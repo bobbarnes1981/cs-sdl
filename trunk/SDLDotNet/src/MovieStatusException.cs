@@ -39,7 +39,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Represents an error resulting from a movie not playing correctly
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Execption string</param>
 		public MovieStatusException(string message): base(message)
 		{
 		}
@@ -47,7 +47,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Represents an error resulting from a movie not playing correctly
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Exception string</param>
 		/// <param name="exception"></param>
 		public MovieStatusException(string message, Exception exception) : base(message, exception)
 		{

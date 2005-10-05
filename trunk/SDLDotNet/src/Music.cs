@@ -86,7 +86,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets and sets the next queued music sample after this one completes.
 		/// </summary>
-		/// <remarks>You must call Music.EnableMusicFinishedCallback before this can work.</remarks>
+		/// <remarks>
+		/// You must call Music.EnableMusicFinishedCallback before this can work.
+		/// </remarks>
 		public Music QueuedMusic
 		{
 			get
@@ -181,8 +183,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Plays the music sample
 		/// </summary>
-		/// <param name="numberOfTimes">The number of times to play. 
-		/// Specify 1 to play a single time, -1 to loop forever.</param>
+		/// <param name="numberOfTimes">
+		/// The number of times to play. 
+		/// Specify 1 to play a single time, -1 to loop forever.
+		/// </param>
 		public void Play(int numberOfTimes) 
 		{
 			m_CurrentMusic = this;
@@ -193,9 +197,13 @@ namespace SdlDotNet
 		/// <summary>
 		/// Plays the music sample and fades it in
 		/// </summary>
-		/// <param name="numberOfTimes">The number of times to play. 
-		/// Specify 1 to play a single time, -1 to loop forever.</param>
-		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
+		/// <param name="numberOfTimes">
+		/// The number of times to play. 
+		/// Specify 1 to play a single time, -1 to loop forever.
+		/// </param>
+		/// <param name="milliseconds">
+		/// The number of milliseconds to fade in for
+		/// </param>
 		public void FadeIn(int numberOfTimes, int milliseconds) 
 		{
 			m_CurrentMusic = this;
@@ -206,13 +214,18 @@ namespace SdlDotNet
 		/// Plays the music sample, starting from a specific 
 		/// position and fades it in
 		/// </summary>
-		/// <param name="numberOfTimes">The number of times to play.
-		///  Specify 1 to play a single time, -1 to loop forever.</param>
-		/// <param name="milliseconds">The number of milliseconds to fade in for
+		/// <param name="numberOfTimes">
+		/// The number of times to play.
+		///  Specify 1 to play a single time, -1 to loop forever.
+		///  </param>
+		/// <param name="milliseconds">
+		/// The number of milliseconds to fade in for
 		/// </param>
-		/// <param name="position">A format-defined position value. 
+		/// <param name="position">
+		/// A format-defined position value. 
 		/// For Ogg Vorbis, this is the number of seconds from the
-		///  beginning of the song</param>
+		///  beginning of the song
+		///  </param>
 		public void FadeInPosition(int numberOfTimes, int milliseconds, double position) 
 		{
 			m_CurrentMusic = this;
@@ -270,10 +283,12 @@ namespace SdlDotNet
 
 		/// <summary>
 		/// Sets the music position to a format-defined value.
-		/// For Ogg Vorbis and Mp3, this is the number of seconds 
+		/// For Ogg Vorbis and mp3, this is the number of seconds 
 		/// from the beginning of the song
 		/// </summary>
-		/// <param name="musicPosition"></param>
+		/// <param name="musicPosition">
+		/// Number of seconds from beginning of song
+		/// </param>
 		public static void Position(double musicPosition) 
 		{
 			if (m_CurrentMusic.MusicType == MusicType.Mp3)
@@ -332,8 +347,8 @@ namespace SdlDotNet
 
 		/// <summary>
 		/// For performance reasons, you must call this method
-		///  to enable the Events.ChannelFinished and 
-		///  Events.MusicFinished events
+		/// to enable the Events.ChannelFinished and 
+		/// Events.MusicFinished events
 		/// </summary>
 		public static void EnableMusicFinishedCallback() 
 		{
@@ -345,7 +360,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns a System.String that represents the current Music object.
 		/// </summary>
-		/// <returns>A System.String that represents the Music object (the filename).</returns>
+		/// <returns>
+		/// A System.String that represents the Music object (the filename).
+		/// </returns>
 		public override string ToString()
 		{
 			return m_Filename;
