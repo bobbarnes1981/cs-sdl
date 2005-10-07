@@ -32,7 +32,7 @@ namespace SdlDotNet.Sprites
 
 		#region Constructors
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
 		public AnimatedSprite() : base()
 		{
@@ -41,29 +41,29 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Create AnimatedSprite from Animation
 		/// </summary>
-		/// <param name="name"></param>
-		/// <param name="anim"></param>
+		/// <param name="name">Name of animation</param>
+		/// <param name="anim">animation</param>
 		public AnimatedSprite(string name, Animation anim) : this()
 		{
 			m_Animations.Add(name, anim);
 		}
 
 		/// <summary>
-		/// 
+		/// Create AnimatedSprite from Animation
 		/// </summary>
-		/// <param name="anim"></param>
+		/// <param name="anim">animation</param>
 		public AnimatedSprite(Animation anim) : this()
 		{
 			m_Animations.Add("Default", anim);
 		}
 
 		/// <summary>
-		/// 
+		/// Create Animated Sprite from SurfaceCollection
 		/// </summary>
-		/// <param name="d"></param>
-		/// <param name="coordinates"></param>
+		/// <param name="d">SurfaceCollection</param>
+		/// <param name="coordinates">Initial Coordinates</param>
 		public AnimatedSprite(SurfaceCollection d, Point coordinates) :this()	{
 			m_Animations.Add("Default", new Animation(d));
 			this.Surface = d[0];
@@ -72,11 +72,11 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Creates AnumatedSprite from Surface Collection
 		/// </summary>
-		/// <param name="d"></param>
-		/// <param name="coordinates"></param>
-		/// <param name="z"></param>
+		/// <param name="d">SurfaceCollection</param>
+		/// <param name="coordinates">Starting coordinates</param>
+		/// <param name="z">initial Z position</param>
 		public AnimatedSprite(SurfaceCollection d, Point coordinates, int z) : this()
 		{
 			m_Animations.Add("Default", new Animation(d));
@@ -87,9 +87,9 @@ namespace SdlDotNet.Sprites
 		}
 
         /// <summary>
-        /// 
+        /// Creates AnimatedSprite from SurfaceCollection
         /// </summary>
-        /// <param name="d"></param>
+        /// <param name="d">SurfaceCollection</param>
         public AnimatedSprite(SurfaceCollection d) : this()
         {
             m_Animations.Add("Default", new Animation(d));
@@ -150,8 +150,10 @@ namespace SdlDotNet.Sprites
 			set
 			{
                 // Check to see if it exists.
-                if (!m_Animations.Contains(value))
-                    throw new SdlException("The given animation (" + value + ") does not exist in this AnimatedSprite AnimationCollection.");
+				if (!m_Animations.Contains(value))
+				{
+					throw new SdlException("The given animation (" + value + ") does not exist in this AnimatedSprite AnimationCollection.");
+				}
 
                 // Set the animation settings.
 				m_CurrentAnimation = value;
@@ -177,7 +179,9 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Renders the surface
 		/// </summary>
-		/// <returns>A surface representing the rendered animated sprite.</returns>
+		/// <returns>
+		/// A surface representing the rendered animated sprite.
+		/// </returns>
 		public override Surface Render()
 		{
 			return this.m_Animations[m_CurrentAnimation][m_Frame];
@@ -222,12 +226,16 @@ namespace SdlDotNet.Sprites
             if (m_Frame >= current.Count && current.AnimateForward) // Going forwards and past last frame
 			{
 				if(current.Loop)
+				{
 					m_Frame = 0;
+				}
 			}
             else if (m_Frame <= 0 && !current.AnimateForward) // Going backwards and past first frame
 			{
 				if(current.Loop)
+				{
 					m_Frame = current.Count - 1;
+				}
 			}
             else // Still going
 			{

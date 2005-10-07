@@ -76,7 +76,8 @@ namespace SdlDotNet.Sprites
 
         #region Properties
         /// <summary>
-		/// Gets and sets an animation object within the collection using the animation's key.
+		/// Gets and sets an animation object within the 
+		/// collection using the animation's key.
 		/// </summary>
 		public Animation this[string key]
 		{
@@ -113,7 +114,8 @@ namespace SdlDotNet.Sprites
         }
 
         /// <summary>
-        /// Gets the average delay of all animations in the collection, sets the delay of every animation in the collection.
+        /// Gets the average delay of all animations in the collection, 
+        /// sets the delay of every animation in the collection.
         /// </summary>
         public double Delay
         {
@@ -121,20 +123,25 @@ namespace SdlDotNet.Sprites
             {
                 double average = 0;
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
-                    average += ((Animation)dict.Value).Delay;
+				while (dict.MoveNext())
+				{
+					average += ((Animation)dict.Value).Delay;
+				}
                 return average / this.Count;
             }
             set
             {
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
-                    ((Animation)dict.Value).Delay = value;
+				while (dict.MoveNext())
+				{
+					((Animation)dict.Value).Delay = value;
+				}
             }
         }
 
         /// <summary>
-        /// Gets the average FrameIncrement for each Animation.  Sets the FrameIncrement of each Animation in the collection.
+        /// Gets the average FrameIncrement for each Animation.  
+        /// Sets the FrameIncrement of each Animation in the collection.
         /// </summary>
         public int FrameIncrement
         {
@@ -142,21 +149,27 @@ namespace SdlDotNet.Sprites
             {
                 int average = 0;
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
-                    average += ((Animation)dict.Value).FrameIncrement;
+				while (dict.MoveNext())
+				{
+					average += ((Animation)dict.Value).FrameIncrement;
+				}
                 return average / this.Count;
             }
             set
             {
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
-                    ((Animation)dict.Value).FrameIncrement = value;
+				while (dict.MoveNext())
+				{
+					((Animation)dict.Value).FrameIncrement = value;
+				}
             }
         }
 
 
         /// <summary>
-        /// Gets whether all animations animate forward and sets whether all animations in the collection are to animate forward.
+        /// Gets whether all animations animate forward and 
+        /// sets whether all animations in the collection 
+        /// are to animate forward.
         /// </summary>
         public bool AnimateForward
         {
@@ -175,8 +188,10 @@ namespace SdlDotNet.Sprites
             set
             {
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
-                    ((Animation)dict.Value).AnimateForward = value;
+				while (dict.MoveNext())
+				{
+					((Animation)dict.Value).AnimateForward = value;
+				}
             }
         }
 
@@ -188,15 +203,19 @@ namespace SdlDotNet.Sprites
             get
             {
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
-                    return ((Animation)dict.Value).Loop;
+				while (dict.MoveNext())
+				{
+					return ((Animation)dict.Value).Loop;
+				}
                 return true;
             }
             set
             {
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
-                    ((Animation)dict.Value).Loop = value;
+				while (dict.MoveNext())
+				{
+					((Animation)dict.Value).Loop = value;
+				}
             }
         }
         #endregion Properties
@@ -229,13 +248,17 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Adds a collection of music to the current music collection.
 		/// </summary>
-		/// <param name="animCollection">The collection of music samples to add.</param>
-		/// <returns>The total number of elements within the collection after adding the sample.</returns>
+		/// <param name="animCollection">The collection of 
+		/// music samples to add.</param>
+		/// <returns>The total number of elements within 
+		/// the collection after adding the sample.</returns>
 		public int Add(AnimationCollection animCollection)
 		{
 			IDictionaryEnumerator dict = animCollection.GetEnumerator();
 			while(dict.MoveNext())
+			{
 				this.Add((string)dict.Key, (Animation)dict.Value);
+			}
 			return Dictionary.Count;
         }
 

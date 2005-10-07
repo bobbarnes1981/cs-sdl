@@ -42,7 +42,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new TextSprite with given the text and font.
 		/// </summary>
-		/// <param name="textItem"></param>
+		/// <param name="textItem">Text to display</param>
 		/// <param name="font">The font to use when rendering.</param>
 		public TextSprite(
 			string textItem, 
@@ -56,9 +56,9 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new TextSprite given the text, font and color.
 		/// </summary>
-		/// <param name="textItem"></param>
+		/// <param name="textItem">Text to display</param>
 		/// <param name="font">The font to use when rendering.</param>
-		/// <param name="color"></param>
+		/// <param name="color">color of Text</param>
 		public TextSprite(
 			string textItem, 
 			SdlDotNet.Font font, 
@@ -73,10 +73,11 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new TextSprite given the text, font, color and anti-aliasing flag.
 		/// </summary>
-		/// <param name="textItem"></param>
+		/// <param name="textItem">Text to display</param>
 		/// <param name="font">The font to use when rendering.</param>
-		/// <param name="color"></param>
-		/// <param name="antiAlias">A flag determining if it's to use anti-aliasing when rendering. Defaults to true.</param>
+		/// <param name="color">Color of Text</param>
+		/// <param name="antiAlias">A flag determining if it's to 
+		/// use anti-aliasing when rendering. Defaults to true.</param>
 		public TextSprite(
 			string textItem, 
 			SdlDotNet.Font font, 
@@ -91,10 +92,10 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new TextSprite given the text, font, color and background color.
 		/// </summary>
-		/// <param name="textItem"></param>
+		/// <param name="textItem">Text to display</param>
 		/// <param name="font">The font to use when rendering.</param>
-		/// <param name="textColor"></param>
-		/// <param name="backgroundColor"></param>
+		/// <param name="textColor">Text Color</param>
+		/// <param name="backgroundColor">Background color</param>
 		public TextSprite(
 			string textItem, 
 			SdlDotNet.Font font, 
@@ -124,10 +125,11 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new TextSprite given the text, font, anti-aliasing flag and position.
 		/// </summary>
-		/// <param name="textItem"></param>
+		/// <param name="textItem">Text to display</param>
 		/// <param name="font">The font to use when rendering.</param>
-		/// <param name="antiAlias">A flag determining if it's to use anti-aliasing when rendering. Defaults to true.</param>
-		/// <param name="position"></param>
+		/// <param name="antiAlias">A flag determining if it's to use 
+		/// anti-aliasing when rendering. Defaults to true.</param>
+		/// <param name="position">Position of sprite</param>
 		public TextSprite(
 			string textItem, 
 			SdlDotNet.Font font,
@@ -142,10 +144,10 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new TextSprite given the text, font, color and position.
 		/// </summary>
-		/// <param name="textItem"></param>
+		/// <param name="textItem">Text to display</param>
 		/// <param name="font">The font to use when rendering.</param>
-		/// <param name="color"></param>
-		/// <param name="position"></param>
+		/// <param name="color">Color of Text</param>
+		/// <param name="position">Position of Sprite</param>
 		public TextSprite(
 			string textItem, 
 			SdlDotNet.Font font, 
@@ -160,11 +162,11 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new TextSprite given the text, font, color, anti-aliasing flag and position.
 		/// </summary>
-		/// <param name="textItem"></param>
+		/// <param name="textItem">Text to display</param>
 		/// <param name="font">The font to use when rendering.</param>
-		/// <param name="color"></param>
+		/// <param name="color">Color of Text</param>
 		/// <param name="antiAlias">A flag determining if it's to use anti-aliasing when rendering. Defaults to true.</param>
-		/// <param name="position"></param>
+		/// <param name="position">Position of Sprite</param>
 		public TextSprite(
 			string textItem, 
 			SdlDotNet.Font font, 
@@ -295,7 +297,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Converts the text sprite to a string.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>Returns string representation of object</returns>
 		public override string ToString()
 		{
 			return String.Format(CultureInfo.CurrentCulture, "(text \"{0}\",{1})", textItem, base.ToString());
@@ -308,7 +310,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (!this.disposed)

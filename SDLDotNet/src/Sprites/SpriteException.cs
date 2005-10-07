@@ -23,21 +23,21 @@ using System.Runtime.Serialization;
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
-	/// 
+	/// Exception for Sprite
 	/// </summary>
 	[Serializable()]
 	public class SpriteException : SdlException
 	{
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
 		public SpriteException()
 		{
 		}
 		/// <summary>
-		/// 
+		/// Generate exception with given message
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Exception message</param>
 		public SpriteException(string message)
 			: base(message)
 		{

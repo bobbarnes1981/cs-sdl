@@ -22,7 +22,7 @@ using System;
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
-	/// Summary description for Animation.
+	/// Animation.
 	/// </summary>
 	public class Animation : SurfaceCollection
     {
@@ -46,7 +46,8 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates an Animation with one surface to start off the animation.
 		/// </summary>
-		/// <param name="surface">The surface representing the animation.</param>
+		/// <param name="surface">The surface representing the animation.
+		/// </param>
 		public Animation(Surface surface) : this()
 		{
 			this.Add(surface);
@@ -55,9 +56,13 @@ namespace SdlDotNet.Sprites
         /// <summary>
         /// Creates a new Animation with a SurfaceCollection representing the animation.
         /// </summary>
-        /// <param name="surfaces">The collection of surfaces in the animation.</param>
-        /// <param name="delay">The amount of delay to be had between each frame.</param>\
-        /// <param name="loop">Whether or not the animation is to loop when reached the end. Defaults to true.</param>
+        /// <param name="surfaces">The collection of surfaces in the animation.
+        /// </param>
+        /// <param name="delay">The amount of delay to be had between each frame.
+        /// </param>
+        /// <param name="loop">Whether or not the animation is 
+        /// to loop when reached the end. Defaults to true.
+        /// </param>
         public Animation(SurfaceCollection surfaces, double delay, bool loop) : this()
         {
             this.Add(surfaces);
@@ -68,8 +73,10 @@ namespace SdlDotNet.Sprites
         /// <summary>
         /// Creates a new Animation with a SurfaceCollection representing the animation.
         /// </summary>
-        /// <param name="surfaces">The collection of surfaces in the animation.</param>
-        /// <param name="delay">The amount of delay to be had between each frame. Defaults to 30.</param>
+        /// <param name="surfaces">The collection of 
+        /// surfaces in the animation.</param>
+        /// <param name="delay">The amount of delay to be 
+        /// had between each frame. Defaults to 30.</param>
         public Animation(SurfaceCollection surfaces, double delay) : this()
         {
             this.Add(surfaces);
@@ -80,7 +87,8 @@ namespace SdlDotNet.Sprites
         #region Properties
         private double m_Delay = 30;
 		/// <summary>
-		/// Gets and sets the amount of time delay that should be had before moving onto the next frame.
+		/// Gets and sets the amount of time delay that 
+		/// should be had before moving onto the next frame.
 		/// </summary>
 		public double Delay
 		{
@@ -128,9 +136,13 @@ namespace SdlDotNet.Sprites
 
         private int m_FrameIncrement = 1;
         /// <summary>
-        /// Gets and sets the number of frames to go forward when moving onto the next frame.
+        /// Gets and sets the number of frames to go forward 
+        /// when moving onto the next frame.
         /// </summary>
-        /// <remarks>Making this one would result in the animation going forwards one frame. -1 would mean that the animation would go backwards. Cannot be 0.</remarks>
+        /// <remarks>Making this one would result in the 
+        /// animation going forwards one frame. 
+        /// -1 would mean that the animation would go backwards. 
+        /// Cannot be 0.</remarks>
         public int FrameIncrement
         {
             get
@@ -160,14 +172,18 @@ namespace SdlDotNet.Sprites
                 if (value)
                 {
                     // Make positive
-                    if (m_FrameIncrement < 0)
-                        m_FrameIncrement *= -1;
+					if (m_FrameIncrement < 0)
+					{
+						m_FrameIncrement *= -1;
+					}
                 }
                 else
                 {
                     // Make negative
-                    if (m_FrameIncrement > 0)
-                        m_FrameIncrement *= -1;
+					if (m_FrameIncrement > 0)
+					{
+						m_FrameIncrement *= -1;
+					}
                 }
 
             }

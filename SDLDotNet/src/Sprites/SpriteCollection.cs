@@ -42,7 +42,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new SpriteCollection with one sprite element in it.
 		/// </summary>
-		/// <param name="sprite"></param>
+		/// <param name="sprite">Sprite to add to collection</param>
 		public SpriteCollection(Sprite sprite) : base()
 		{
 			this.Add(sprite);
@@ -51,7 +51,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new SpriteCollection based off a different sprite collection.
 		/// </summary>
-		/// <param name="spriteCollection"></param>
+		/// <param name="spriteCollection">Add Spritecollection to this SpriteCollection</param>
 		public SpriteCollection(SpriteCollection spriteCollection) : base()
 		{
 			this.Add(spriteCollection);
@@ -85,10 +85,13 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Erases SpriteCollection from surface
 		/// </summary>
-		/// <param name="surface"></param>
-		/// <param name="background"></param>
+		/// <param name="surface">
+		/// Surface to remove the SpriteCollection from</param>
+		/// <param name="background">B
+		/// ackground to use to paint over Sprites in SpriteCollection
+		/// </param>
 		public void Erase(Surface surface, Surface background)
 		{
 			for (int i = 0; i < this.lostRects.Count; i++)
@@ -144,8 +147,12 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Rectangles of Sprites that have been removed
 		/// </summary>
+		/// <remarks>
+		/// These Rectangles are kept temprorily until their 
+		/// positions can be properly erased.
+		/// </remarks>
 		protected RectangleCollection LostRects
 		{
 			get
@@ -178,7 +185,9 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Removes sprite from this group if they are contained in the given group
 		/// </summary>
-		/// <param name="spriteCollection"></param>
+		/// <param name="spriteCollection">
+		/// Remove SpriteCollection from this SpriteCollection.
+		/// </param>
 		public virtual void Remove(SpriteCollection spriteCollection)
 		{
 			for (int i = 0; i < spriteCollection.Count; i++)
@@ -225,8 +234,9 @@ namespace SdlDotNet.Sprites
 		#endregion
 
  		#region Events
+
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableActiveEvent()
 		{
@@ -234,7 +244,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableJoystickAxisEvent()
 		{
@@ -242,7 +252,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableJoystickBallEvent()
 		{
@@ -250,7 +260,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableJoystickButtonEvent()
 		{
@@ -259,7 +269,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableJoystickButtonDownEvent()
 		{
@@ -267,7 +277,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableJoystickButtonUpEvent()
 		{
@@ -275,7 +285,7 @@ namespace SdlDotNet.Sprites
 		}		
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableJoystickHatEvent()
 		{
@@ -283,7 +293,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableKeyboardEvent()
 		{
@@ -292,14 +302,14 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableKeyboardDownEvent()
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(Update);
 		}
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableKeyboardUpEvent()
 		{
@@ -307,7 +317,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableMouseButtonEvent()
 		{
@@ -316,7 +326,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableMouseButtonDownEvent()
 		{
@@ -324,7 +334,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableMouseButtonUpEvent()
 		{
@@ -332,7 +342,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableMouseMotionEvent()
 		{
@@ -340,7 +350,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableUserEvent()
 		{
@@ -348,7 +358,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableQuitEvent()
 		{
@@ -356,7 +366,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableVideoExposeEvent()
 		{
@@ -364,7 +374,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableVideoResizeEvent()
 		{
@@ -372,7 +382,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableChannelFinishedEvent()
 		{
@@ -380,7 +390,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableMusicFinishedEvent()
 		{
@@ -388,7 +398,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Enables Event for SpriteCollection
 		/// </summary>
 		public void EnableTickEvent()
 		{
@@ -396,7 +406,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableActiveEvent()
 		{
@@ -404,7 +414,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableJoystickAxisEvent()
 		{
@@ -412,7 +422,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableJoystickBallEvent()
 		{
@@ -420,7 +430,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableJoystickButtonEvent()
 		{
@@ -429,7 +439,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableJoystickButtonDownEvent()
 		{
@@ -437,7 +447,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableJoystickButtonUpEvent()
 		{
@@ -445,7 +455,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableJoystickHatEvent()
 		{
@@ -453,7 +463,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableKeyboardEvent()
 		{
@@ -462,7 +472,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableKeyboardDownEvent()
 		{
@@ -470,7 +480,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableKeyboardUpEvent()
 		{
@@ -478,7 +488,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableMouseButtonEvent()
 		{
@@ -487,7 +497,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableMouseButtonDownEvent()
 		{
@@ -495,7 +505,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableMouseButtonUpEvent()
 		{
@@ -503,7 +513,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableMouseMotionEvent()
 		{
@@ -511,7 +521,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableUserEvent()
 		{
@@ -519,7 +529,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableQuitEvent()
 		{
@@ -527,7 +537,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableVideoExposeEvent()
 		{
@@ -535,7 +545,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableVideoResizeEvent()
 		{
@@ -543,7 +553,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableChannelFinishedEvent()
 		{
@@ -551,7 +561,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableMusicFinishedEvent()
 		{
@@ -559,7 +569,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Disables Event for SpriteCollection
 		/// </summary>
 		public void DisableTickEvent()
 		{
@@ -568,10 +578,10 @@ namespace SdlDotNet.Sprites
 
 
 		/// <summary>
-		/// 
+		/// Processes an active event.
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, ActiveEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -585,6 +595,8 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, JoystickAxisEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -598,6 +610,8 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, JoystickBallEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -611,6 +625,8 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, JoystickButtonEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -624,6 +640,8 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, JoystickHatEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -635,6 +653,8 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Processes the keyboard.
 		/// </summary>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, KeyboardEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -647,6 +667,8 @@ namespace SdlDotNet.Sprites
 		/// Processes a mouse button. This event is trigger by the SDL
 		/// system. 
 		/// </summary>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, MouseButtonEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -660,6 +682,8 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are MouseSensitive are processed.
 		/// </summary>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, MouseMotionEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -669,10 +693,10 @@ namespace SdlDotNet.Sprites
 		}
 		
 		/// <summary>
-		/// 
+		/// Processes a Quit event
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, QuitEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -682,10 +706,10 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Processes a user event
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, UserEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -695,10 +719,10 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Processes a VideoExposeEvent
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, VideoExposeEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -708,10 +732,10 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Processes a VideoResizeEvent
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, VideoResizeEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -721,10 +745,10 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Processes a ChannelFinishedEvent
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, ChannelFinishedEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -734,10 +758,10 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Processes a MusicfinishedEvent
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, MusicFinishedEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -751,6 +775,8 @@ namespace SdlDotNet.Sprites
 		/// anything. This ensures that the functionality is there, to be
 		/// overridden as needed.
 		/// </summary>
+		/// <param name="sender">Object that sent event</param>
+		/// <param name="e">Event arguments</param>
 		private void Update(object sender, TickEventArgs e)
 		{
 			for (int i = 0; i < this.Count; i++)
@@ -846,28 +872,28 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Provide the explicit interface member for ICollection.
 		/// </summary>
-		/// <param name="array"></param>
-		/// <param name="index"></param>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
 		void ICollection.CopyTo(Array array, int index)
 		{
 			this.List.CopyTo(array, index);
 		}
 
 		/// <summary>
-		/// 
+		/// Provide the explicit interface member for ICollection.
 		/// </summary>
-		/// <param name="array"></param>
-		/// <param name="index"></param>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
 		public virtual void CopyTo(Sprite[] array, int index)
 		{
 			((ICollection)this).CopyTo(array, index);
 		}
 
 		/// <summary>
-		/// 
+		/// Insert a Sprite into the collection
 		/// </summary>
-		/// <param name="index"></param>
-		/// <param name="sprite"></param>
+		/// <param name="index">Index at which to insert the sprite</param>
+		/// <param name="sprite">Sprite to insert</param>
 		public virtual void Insert(int index, Sprite sprite)
 		{
 			List.Insert(index, sprite);

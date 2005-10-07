@@ -26,31 +26,36 @@ using SdlDotNet;
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
-	/// 
+	/// Sprite class contains both a Surface and a Rectangle so that 
+	/// an object can be easily displayed and manipulated.
 	/// </summary>
 	public class Sprite : IComparable, IDisposable
 	{
 		/// <summary>
-		/// 
+		/// Basic constructor. 
 		/// </summary>
+		/// <remarks>
+		/// Use this with caution. 
+		/// This is provided as a convenience. 
+		/// Please give the spirte a Surface and a rectangle.</remarks>
 		public Sprite()
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Create a new Sprite
 		/// </summary>
-		/// <param name="position"></param>
-		/// <param name="surface"></param>
+		/// <param name="position">Starting position</param>
+		/// <param name="surface">Surface of Sprite</param>
 		public Sprite(Surface surface, Point position) : 
 			this(surface, new Rectangle(position.X, position.Y, surface.Width, surface.Height))
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Create new Sprite at (0, 0)
 		/// </summary>
-		/// <param name="surface"></param>
+		/// <param name="surface">Surface of Sprite</param>
 		public Sprite(Surface surface)
 		{
 			this.rect = new Rectangle(0, 0, surface.Width, surface.Height);
@@ -58,11 +63,11 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Create new Sprite
 		/// </summary>
-		/// <param name="position"></param>
-		/// <param name="z"></param>
-		/// <param name="surface"></param>
+		/// <param name="position">Position of Sprite</param>
+		/// <param name="z">Z coordinate of Sprite</param>
+		/// <param name="surface">Surface of Sprite</param>
 		public Sprite(Surface surface, Point position, int z ) : 
 			this(surface, position)
 		{
@@ -70,10 +75,10 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Create new Sprite
 		/// </summary>
-		/// <param name="surface"></param>
-		/// <param name="rectangle"></param>
+		/// <param name="surface">Surface of Sprite</param>
+		/// <param name="rectangle">Rectangle of sprite indicating position and size.</param>
 		public Sprite(Surface surface, Rectangle rectangle)
 		{
 			this.surf = surface;
@@ -81,11 +86,11 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Create new Sprite
 		/// </summary>
-		/// <param name="surface"></param>
-		/// <param name="rectangle"></param>
-		/// <param name="z"></param>
+		/// <param name="surface">Surface of Sprite</param>
+		/// <param name="rectangle">Rectangle of sprite indicating position and size.</param>
+		/// <param name="z">Z coordinate of Sprite</param>
 		public Sprite(Surface surface, Rectangle rectangle, int z): 
 			this(surface, rectangle)
 		{
@@ -105,12 +110,12 @@ namespace SdlDotNet.Sprites
 //		}
 
 		/// <summary>
-		/// 
+		/// Create new sprite
 		/// </summary>
-		/// <param name="position"></param>
-		/// <param name="z"></param>
-		/// <param name="surface"></param>
-		/// <param name="group"></param>
+		/// <param name="position">position of Sprite</param>
+		/// <param name="z">Z coordinate of Sprite</param>
+		/// <param name="surface">Surface of Sprite</param>
+		/// <param name="group">SpriteCollection group to put Sprite into.</param>
 		public Sprite(Surface surface, Point position, int z, SpriteCollection group): 
 			this(surface, position, z)
 		{
@@ -118,11 +123,11 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Create new sprite
 		/// </summary>
-		/// <param name="position"></param>
-		/// <param name="surface"></param>
-		/// <param name="group"></param>
+		/// <param name="position">position of Sprite</param>
+		/// <param name="surface">Surface of Sprite</param>
+		/// <param name="group">SpriteCollection group to put Sprite into.</param>
 		public Sprite(Surface surface, Point position , SpriteCollection group):
 			this(surface, position)
 		{
@@ -130,9 +135,6 @@ namespace SdlDotNet.Sprites
 		}
 
 		#region Display
-		/// <summary>
-		/// 
-		/// </summary>
 		private Surface surf;
 		/// <summary>
 		/// Gets and sets the surface of the sprite.
@@ -160,8 +162,12 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Renders the sprite onto the destination surface.
 		/// </summary>
-		/// <param name="destination">The surface to be rendered onto.</param>
-		/// <returns></returns>
+		/// <param name="destination">
+		/// The surface to be rendered onto.
+		/// </param>
+		/// <returns>
+		/// Actual rectangle blit to by method. Sometime clipping may occur.
+		/// </returns>
 		public virtual Rectangle Render(Surface destination)
 		{
 			return destination.Blit(this);
@@ -170,16 +176,17 @@ namespace SdlDotNet.Sprites
 
 		#region Events
 		/// <summary>
-		/// 
+		/// Processes Active events
 		/// </summary>
-		/// <param name="e"></param>
-		public virtual void Update(ActiveEventArgs e)
+		/// <param name="args">Event args</param>
+		public virtual void Update(ActiveEventArgs args)
 		{
 		}
 		/// <summary>
 		/// Processes the keyboard.
 		/// </summary>
-		public virtual void Update(KeyboardEventArgs e)
+		/// <param name="args">Event args</param>
+		public virtual void Update(KeyboardEventArgs args)
 		{
 		}
 
@@ -187,6 +194,7 @@ namespace SdlDotNet.Sprites
 		/// Processes a mouse button. This event is trigger by the SDL
 		/// system. 
 		/// </summary>
+		/// <param name="args">Event args</param>
 		public virtual void Update(MouseButtonEventArgs args)
 		{
 		}
@@ -196,6 +204,7 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are MouseSensitive are processed.
 		/// </summary>
+		/// <param name="args">Event args</param>
 		public virtual void Update(MouseMotionEventArgs args)
 		{
 		}
@@ -205,6 +214,7 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
+		/// <param name="args">Event args</param>
 		public virtual void Update(JoystickAxisEventArgs args)
 		{
 		}
@@ -214,6 +224,7 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
+		/// <param name="args">Event args</param>
 		public virtual void Update(JoystickButtonEventArgs args)
 		{
 		}
@@ -223,6 +234,7 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
+		/// <param name="args">Event args</param>
 		public virtual void Update(JoystickHatEventArgs args)
 		{
 		}
@@ -232,54 +244,55 @@ namespace SdlDotNet.Sprites
 		/// SDL. Only
 		/// sprites that are JoystickSensitive are processed.
 		/// </summary>
+		/// <param name="args">Event args</param>
 		public virtual void Update(JoystickBallEventArgs args)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Processes Quit Events
 		/// </summary>
-		/// <param name="e"></param>
-		public virtual void Update(QuitEventArgs e)
+		/// <param name="args">Event args</param>
+		public virtual void Update(QuitEventArgs args)
 		{
 		}
 		/// <summary>
-		/// 
+		/// Process User Events
 		/// </summary>
-		/// <param name="e"></param>
-		public virtual void Update(UserEventArgs e)
-		{
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
-		public virtual void Update(VideoExposeEventArgs e)
+		/// <param name="args">Event args</param>
+		public virtual void Update(UserEventArgs args)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Process VideoExposeEvents
 		/// </summary>
-		/// <param name="e"></param>
-		public virtual void Update(VideoResizeEventArgs e)
+		/// <param name="args">Event args</param>
+		public virtual void Update(VideoExposeEventArgs args)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Process VideoResizeEvents
 		/// </summary>
-		/// <param name="e"></param>
-		public virtual void Update(ChannelFinishedEventArgs e)
+		/// <param name="args">Event args</param>
+		public virtual void Update(VideoResizeEventArgs args)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Process ChannelFinishedEvents
 		/// </summary>
-		/// <param name="e"></param>
-		public virtual void Update(MusicFinishedEventArgs e)
+		/// <param name="args">Event args</param>
+		public virtual void Update(ChannelFinishedEventArgs args)
+		{
+		}
+
+		/// <summary>
+		/// Process MusicFinishedEvents
+		/// </summary>
+		/// <param name="args">Event args</param>
+		public virtual void Update(MusicFinishedEventArgs args)
 		{
 		}
 		
@@ -288,6 +301,7 @@ namespace SdlDotNet.Sprites
 		/// anything. This ensures that the functionality is there, to be
 		/// overridden as needed.
 		/// </summary>
+		/// <param name="args">Event args</param>
 		public virtual void Update(TickEventArgs args)
 		{
 		}
@@ -317,7 +331,7 @@ namespace SdlDotNet.Sprites
 
 		private Rectangle rectDirty;
 		/// <summary>
-		/// 
+		/// Rectangles that have changed and need to be updated
 		/// </summary>
 		public Rectangle RectangleDirty
 		{
@@ -348,7 +362,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Center point of Sprite
 		/// </summary>
 		public Point Center
 		{
@@ -458,7 +472,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Sprite has changed and need to be redisplayed
 		/// </summary>
 		public bool Dirty
 		{
@@ -469,40 +483,41 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if Sprite intersects with a point
 		/// </summary>
-		/// <param name="point"></param>
-		/// <returns></returns>
+		/// <param name="point">Point to intersect with</param>
+		/// <returns>True if Sprite intersects with the Point</returns>
 		public virtual bool IntersectsWith(Point point)
 		{
 			return this.rect.IntersectsWith(new Rectangle(point, new Size(0, 0)));
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if Sprite intersects with a rectangle
 		/// </summary>
-		/// <param name="rectangle"></param>
-		/// <returns></returns>
+		/// <param name="rectangle">rectangle to intersect with
+		/// </param>
+		/// <returns>True if Sprite intersect with Rectangle</returns>
 		public virtual bool IntersectsWith(Rectangle rectangle)
 		{
 			return this.rect.IntersectsWith(rectangle);
 		}
 
 		/// <summary>
-		/// 
+		/// Check if two Sprites intersect
 		/// </summary>
-		/// <param name="sprite"></param>
-		/// <returns></returns>
+		/// <param name="sprite">Sprite to check intersection with</param>
+		/// <returns>True if sprites intersect</returns>
 		public virtual bool IntersectsWith(Sprite sprite)
 		{
 			return this.IntersectsWith(sprite.Rectangle);
 		}
 
 		/// <summary>
-		/// 
+		/// Check to see if Sprite intersects with any sprite in a SpriteCollection
 		/// </summary>
-		/// <param name="spriteCollection"></param>
-		/// <returns></returns>
+		/// <param name="spriteCollection">Collection to chekc the intersection with</param>
+		/// <returns>True if sprite intersects with any sprite in collection</returns>
 		public virtual bool IntersectsWith(SpriteCollection spriteCollection)
 		{
 			foreach(Sprite sprite in spriteCollection)
@@ -518,7 +533,7 @@ namespace SdlDotNet.Sprites
 
 		#region Operators
 		/// <summary>
-		/// 
+		/// Sorts sprite in Z-order
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
@@ -539,8 +554,9 @@ namespace SdlDotNet.Sprites
 			// Compare the hashes
 			return GetHashCode().CompareTo(s.GetHashCode());
 		}
+
 		/// <summary>
-		/// 
+		/// checks if Sprites are at the same Z coordinate
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
@@ -554,9 +570,9 @@ namespace SdlDotNet.Sprites
 		}  
 
 		/// <summary>
-		/// 
+		/// Hash Code
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>Hash Code</returns>
 		public override int GetHashCode()
 		{
 			return this.X ^ this.Y;
@@ -565,7 +581,7 @@ namespace SdlDotNet.Sprites
 		}  
 
 		/// <summary>
-		/// 
+		/// Equality operator
 		/// </summary>
 		/// <param name="sprite1"></param>
 		/// <param name="sprite2"></param>
@@ -590,7 +606,7 @@ namespace SdlDotNet.Sprites
 		}  
 		
 		/// <summary>
-		/// 
+		/// not equals operator
 		/// </summary>
 		/// <param name="sprite1"></param>
 		/// <param name="sprite2"></param>
@@ -615,7 +631,7 @@ namespace SdlDotNet.Sprites
 		}  
 		
 		/// <summary>
-		/// 
+		/// Less than operator
 		/// </summary>
 		/// <param name="sprite1"></param>
 		/// <param name="sprite2"></param>
@@ -626,7 +642,7 @@ namespace SdlDotNet.Sprites
 		}  
 		
 		/// <summary>
-		/// 
+		/// Greater than operator
 		/// </summary>
 		/// <param name="sprite1"></param>
 		/// <param name="sprite2"></param>
@@ -637,9 +653,9 @@ namespace SdlDotNet.Sprites
 		} 
 
 		/// <summary>
-		/// 
+		/// Returns a String representation of Sprite
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>String representation of Sprite</returns>
 		public override string ToString()
 		{
 			return this.Rectangle.ToString();
@@ -648,7 +664,7 @@ namespace SdlDotNet.Sprites
 
 		#region Properties
 		/// <summary>
-		/// 
+		/// True if Sprite is a member of a SpriteCollection
 		/// </summary>
 		public virtual bool Alive
 		{
@@ -660,7 +676,7 @@ namespace SdlDotNet.Sprites
 
 		ArrayList groups = new ArrayList();
 		/// <summary>
-		/// 
+		/// collections that the Sprite is a member of.
 		/// </summary>
 		public virtual ArrayList Collections
 		{
@@ -671,7 +687,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// remove sprite from all collections
 		/// </summary>
 		public virtual void Kill()
 		{
@@ -682,9 +698,9 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Add Sprite to collection
 		/// </summary>
-		/// <param name="group"></param>
+		/// <param name="group">collection to add to</param>
 		public virtual void Add(SpriteCollection group)
 		{
 			this.groups.Add(group);
@@ -692,18 +708,18 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Add Sprite to collection. Use in special situations
 		/// </summary>
-		/// <param name="group"></param>
+		/// <param name="group">Collection to add to</param>
 		public void AddInternal(SpriteCollection group)
 		{
 			this.groups.Add(group);
 		}
 
 		/// <summary>
-		/// 
+		/// remove Sprite from Collection
 		/// </summary>
-		/// <param name="group"></param>
+		/// <param name="group">collection to remove sprite from</param>
 		public virtual void Remove(SpriteCollection group)
 		{
 			this.groups.Remove(group);
@@ -711,9 +727,9 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// remove Sprite from collection. Use in special situations
 		/// </summary>
-		/// <param name="group"></param>
+		/// <param name="group">collection to remove sprite from</param>
 		public void RemoveInternal(SpriteCollection group)
 		{
 			this.groups.Remove(group);
@@ -721,7 +737,7 @@ namespace SdlDotNet.Sprites
 
 		private bool allowDrag;
 		/// <summary>
-		/// 
+		/// Allows sprite to be dragged via the mouse
 		/// </summary>
 		public bool AllowDrag
 		{
@@ -738,7 +754,7 @@ namespace SdlDotNet.Sprites
 		private bool beingDragged;
 
 		/// <summary>
-		/// 
+		/// true when sprite is being dragged by the mouse
 		/// </summary>
 		public bool BeingDragged
 		{
@@ -775,9 +791,9 @@ namespace SdlDotNet.Sprites
 		private bool disposed;
 
 		/// <summary>
-		/// 
+		/// Destroy sprite
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If true, remove all unamanged resources</param>
 		protected virtual void Dispose(bool disposing)
 		{
 			this.Kill();
@@ -792,7 +808,7 @@ namespace SdlDotNet.Sprites
 			}
 		}
 		/// <summary>
-		/// 
+		/// Destroy object
 		/// </summary>
 		public void Dispose()
 		{
@@ -800,7 +816,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Destroy object
 		/// </summary>
 		public void Close() 
 		{
@@ -808,7 +824,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// 
+		/// Destroy object
 		/// </summary>
 		~Sprite() 
 		{

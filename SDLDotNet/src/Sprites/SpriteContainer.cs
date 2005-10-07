@@ -30,6 +30,9 @@ namespace SdlDotNet.Sprites
 	/// group other sprites into an easily managed whole. The sprite
 	/// manager has no size.
 	/// </summary>
+	/// <remarks>
+	/// This class is useful for GUIs when you wantto  group sprites into one larger sprite.
+	/// </remarks>
 	public class SpriteContainer : Sprite
 	{
 //		/// <summary>
@@ -43,30 +46,30 @@ namespace SdlDotNet.Sprites
 //		}
 
 		/// <summary>
-		/// 
+		/// Creates SpriteContainer from a Surface
 		/// </summary>
-		/// <param name="surface"></param>
+		/// <param name="surface">Main sprite Surface</param>
 		public SpriteContainer(Surface surface) : 
 			base(surface)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Creates SpriteContainer from a Surface
 		/// </summary>
-		/// <param name="surface"></param>
-		/// <param name="rectangle"></param>
+		/// <param name="surface">Main sprite surface</param>
+		/// <param name="rectangle">Rectangle for spirte</param>
 		public SpriteContainer(Surface surface, Rectangle rectangle) : 
 			base(surface, rectangle)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Creates SpriteContainer from a Surface
 		/// </summary>
-		/// <param name="surface"></param>
-		/// <param name="rectangle"></param>
-		/// <param name="z"></param>
+		/// <param name="surface">Main sprite surface</param>
+		/// <param name="rectangle">Rectangle for spirte</param>
+		/// <param name="z">Z coordinate of sprite</param>
 		public SpriteContainer(Surface surface, Rectangle rectangle, int z) : 
 base(surface, rectangle, z)
 		{
@@ -74,8 +77,11 @@ base(surface, rectangle, z)
 
 		private SpriteCollection sprites = new SpriteCollection();
 		/// <summary>
-		/// 
+		/// Collection of sprites that make up the SpriteContainer
 		/// </summary>
+		/// <remarks>
+		/// These sprites will be blit onto the main Surface of the SpriteContainer.
+		/// </remarks>
 		public SpriteCollection Sprites
 		{
 			get
@@ -86,9 +92,9 @@ base(surface, rectangle, z)
 
 		private bool disposed;
 		/// <summary>
-		/// 
+		/// Destroy object
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If true, dispose unmanaged resources.</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -113,9 +119,9 @@ base(surface, rectangle, z)
 		}
 
 		/// <summary>
-		/// 
+		/// Displays all spirtes stored in the Collection as one Sprite
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>Surface that has all sprites blit onto it.</returns>
 		public override Surface Render()
 		{
 			this.sprites.Draw(this.Surface);
