@@ -47,6 +47,35 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Constructor for Circle
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="r"></param>
+		public Circle(Point p, short r)
+		{
+			this.x = (short)p.X;
+			this.y = (short)p.Y;
+			this.r = r;
+		}
+
+		/// <summary>
+		/// Center of circle
+		/// </summary>
+		public Point Point
+		{
+			get
+			{
+				return new Point(this.x, this.y);
+			}
+			set
+			{
+				this.x = (short)value.X;
+				this.y = (short)value.Y;
+			}
+		}
+
+		/// <summary>
 		/// X position of circle
 		/// </summary>
 		public short XPosition
