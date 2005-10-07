@@ -87,7 +87,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">
+		/// If true, dispose all unmanaged resources
+		/// </param>
 		protected override void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -135,7 +137,8 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Gets and sets the volume of the sound. Should be between 0 and 128 inclusive.
+		/// Gets and sets the volume of the sound. 
+		/// Should be between 0 and 128 inclusive.
 		/// </summary>
 		public int Volume
 		{
@@ -187,7 +190,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Plays the sound.
 		/// </summary>
-		/// <param name="loopIndefinitely">True to play sound indefinately.</param>
+		/// <param name="loopIndefinitely">
+		/// True to play sound indefinately.
+		/// </param>
 		/// <returns>The channel used to play the sound.</returns>
 		public Channel Play(bool loopIndefinitely) 
 		{
@@ -204,8 +209,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Plays a sound for a desired number of milliseconds or loops.
 		/// </summary>
-		/// <param name="loops">The maximum number of loops to play.  -1 for indefinate.</param>
-		/// <param name="milliseconds">The number of milliseconds to play the sound loop.</param>
+		/// <param name="loops">
+		/// The maximum number of loops to play.  -1 for indefinate.
+		/// </param>
+		/// <param name="milliseconds">
+		/// The number of milliseconds to play the sound loop.
+		/// </param>
 		/// <returns>The channel used to play the sound.</returns>
 		public Channel Play(int loops, int milliseconds) 
 		{
@@ -229,7 +238,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Fades in a sample once using the first available channel
 		/// </summary>
-		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
+		/// <param name="milliseconds">
+		/// The number of milliseconds to fade in for
+		/// </param>
 		/// <returns>The channel used to play the sample</returns>
 		public Channel FadeIn(int milliseconds) 
 		{
@@ -267,7 +278,9 @@ namespace SdlDotNet
 		/// Fades in a sample once using the first available channel, 
 		/// stopping after the specified number of ms
 		/// </summary>
-		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
+		/// <param name="milliseconds">
+		/// The number of milliseconds to fade in for
+		/// </param>
 		/// <param name="ticks">The time limit in milliseconds</param>
 		/// <returns>The channel used to play the sample</returns>
 		public Channel FadeInTimed(int milliseconds, int ticks) 
@@ -286,7 +299,9 @@ namespace SdlDotNet
 		/// the first available channel, stopping after the 
 		/// specified number of ms
 		/// </summary>
-		/// <param name="milliseconds">The number of milliseconds to fade in for</param>
+		/// <param name="milliseconds">
+		/// The number of milliseconds to fade in for
+		/// </param>
 		/// <param name="loops">The number of loops.  
 		/// Specify 1 to have the sample play twice</param>
 		/// <param name="ticks">The time limit in milliseconds</param>
@@ -303,7 +318,8 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Gets and sets the number of channels used to play this sound sample.
+		/// Gets and sets the number of channels 
+		/// used to play this sound sample.
 		/// </summary>
 		public int NumberOfChannels
 		{
@@ -336,9 +352,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Raises SoundEvent
 		/// </summary>
-		/// <param name="e"></param>
+		/// <param name="e">SoundEvent Args</param>
 		protected void OnSoundEvent(SoundEventArgs e)
 		{
 			if (SoundEvent != null)

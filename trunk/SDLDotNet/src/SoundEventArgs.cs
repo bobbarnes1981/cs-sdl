@@ -24,15 +24,15 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for soundEventArgs.
+	/// SoundEvent Arguments.
 	/// </summary>
 	public class SoundEventArgs : EventArgs 
 	{
 		/// <summary>
-		/// 
+		/// SoundEventsArgs describe the action to take on a Sound
 		/// </summary>
-		/// <param name="action"></param>
-		/// <param name="fadeoutTime"></param>
+		/// <param name="action">Stop or Fade out</param>
+		/// <param name="fadeoutTime">time to faseout</param>
 		public SoundEventArgs(SoundAction action, int fadeoutTime)
 		{
 			this.action = action;
@@ -40,7 +40,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
 		/// <param name="action"></param>
 		public SoundEventArgs(SoundAction action)
@@ -51,7 +51,7 @@ namespace SdlDotNet
 		private int fadeoutTime;
 		private SoundAction action;
 		/// <summary>
-		/// 
+		/// Get/Set Fadeout Time
 		/// </summary>
 		public int FadeoutTime
 		{
@@ -62,7 +62,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get/Set Action to take on Sound
 		/// </summary>
 		public SoundAction Action
 		{

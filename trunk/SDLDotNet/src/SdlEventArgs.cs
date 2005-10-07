@@ -28,19 +28,19 @@ namespace SdlDotNet
 	public class SdlEventArgs : EventArgs
 	{
 		/// <summary>
-		/// 
+		/// Corrresponding internal SDL_Event
 		/// </summary>
 		internal Sdl.SDL_Event eventStruct;
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
 		public SdlEventArgs()
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Holds SDL_Event
 		/// </summary>
 		internal SdlEventArgs(Sdl.SDL_Event ev)
 		{
@@ -90,7 +90,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns Event type
 		/// </summary>
 		public EventTypes Type
 		{

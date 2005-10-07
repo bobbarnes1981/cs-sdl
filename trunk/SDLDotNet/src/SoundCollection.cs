@@ -26,7 +26,9 @@ namespace SdlDotNet
     /// <summary>
     /// Encapulates a collection of Sound objects in a Sound Dictionary.
     /// </summary>
-    /// <remarks>Every sound object within the collection is indexed by a string key.</remarks>
+    /// <remarks>
+    /// Every sound object within the collection is indexed by a string key.
+    /// </remarks>
     /// <example>
     /// <code>
     /// SoundCollection sounds = new SoundCollection();
@@ -62,7 +64,9 @@ namespace SdlDotNet
         /// <summary>
         /// Creates a SoundCollection with one loaded item.
         /// </summary>
-        /// <param name="filename">The sound item's filename to load and set as the key.</param>
+        /// <param name="filename">
+        /// The sound item's filename to load and set as the key.
+        /// </param>
         public SoundCollection(string filename)
         {    
             this.Add(filename);
@@ -71,7 +75,9 @@ namespace SdlDotNet
         /// <summary>
         /// Loads a number of files.
         /// </summary>
-        /// <param name="baseName">The string contained before the file index number.</param>
+        /// <param name="baseName">
+        /// The string contained before the file index number.
+        /// </param>
         /// <param name="extension">The extension of each file.</param>
         public SoundCollection(string baseName, string extension)
         {
@@ -81,13 +87,19 @@ namespace SdlDotNet
             while (true)
             {
                 string fn = null;
-                if (i < 10)
-                    fn = baseName + "-0" + i + extension;
-                else
-                    fn = baseName + "-" + i + extension;
+				if (i < 10)
+				{
+					fn = baseName + "-0" + i + extension;
+				}
+				else
+				{
+					fn = baseName + "-" + i + extension;
+				}
                 
-                if (!File.Exists(fn))
-                    break;
+				if (!File.Exists(fn))
+				{
+					break;
+				}
                 
                 // Load it
                 this.Dictionary.Add(fn, Mixer.Sound(fn));
@@ -98,7 +110,9 @@ namespace SdlDotNet
         /// <summary>
         /// Adds the contents of an existing SoundCollection to a new one.
         /// </summary>
-        /// <param name="soundCollection">The SoundCollection to copy.</param>
+        /// <param name="soundCollection">
+        /// The SoundCollection to copy.
+        /// </param>
         public SoundCollection(SoundCollection soundCollection)
         {
 			IDictionaryEnumerator enumer = soundCollection.GetEnumerator();
@@ -148,9 +162,13 @@ namespace SdlDotNet
         /// <summary>
         /// Adds a Sound object to the Collection.
         /// </summary>
-        /// <param name="key">The key to make reference to the object.</param>
+        /// <param name="key">
+        /// The key to make reference to the object.
+        /// </param>
         /// <param name="sound">The sound object to add.</param>
-        /// <returns>The final number of elements within the collection.</returns>
+        /// <returns>
+        /// The final number of elements within the collection.
+        /// </returns>
         public int Add(string key, Sound sound) 
         {
             Dictionary.Add(key, sound);
@@ -161,7 +179,9 @@ namespace SdlDotNet
         /// Adds a newly loaded file to the collection.
         /// </summary>
         /// <param name="filename">The filename to load.</param>
-        /// <returns>The final number of elements within the collection.</returns>
+        /// <returns>
+        /// The final number of elements within the collection.
+        /// </returns>
         public int Add(string filename)
         {
             Dictionary.Add(filename, Mixer.Sound(filename));
@@ -181,22 +201,34 @@ namespace SdlDotNet
         /// <summary>
         /// Adds an existing SoundCollection to the collection.
         /// </summary>
-        /// <param name="soundCollection">The SoundCollection to add.</param>
-        /// <returns>The final number of objects within the collection.</returns>
+        /// <param name="soundCollection">
+        /// The SoundCollection to add.
+        /// </param>
+        /// <returns>
+        /// The final number of objects within the collection.
+        /// </returns>
         public int Add(SoundCollection soundCollection)
         {
             IDictionaryEnumerator dict = soundCollection.GetEnumerator();
-            while(dict.MoveNext())
-                this.Add((string)dict.Key, (Sound)dict.Value);
+			while(dict.MoveNext())
+			{
+				this.Add((string)dict.Key, (Sound)dict.Value);
+			}
             return Dictionary.Count;
         }
         
         /// <summary>
         /// Loads and adds a new sound object to the collection.
         /// </summary>
-        /// <param name="key">The key to give the sound object.</param>
-        /// <param name="filename">The sound file to load.</param>
-        /// <returns>The final number of elements within the collection.</returns>
+        /// <param name="key">
+        /// The key to give the sound object.
+        /// </param>
+        /// <param name="filename">
+        /// The sound file to load.
+        /// </param>
+        /// <returns>
+        /// The final number of elements within the collection.
+        /// </returns>
         public int Add(string key, string filename)
         {
         	Dictionary.Add(key, Mixer.Sound(filename));
@@ -206,8 +238,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Loads and adds a new sound object to the collection.
 		/// </summary>
-		/// <param name="sound">The sound sample to add. Uses ToString() as the key.</param>
-		/// <returns>The final number of elements within the collection.</returns>
+		/// <param name="sound">
+		/// The sound sample to add. Uses ToString() as the key.
+		/// </param>
+		/// <returns>
+		/// The final number of elements within the collection.
+		/// </returns>
 		public int Add(Sound sound)
 		{
 			Dictionary.Add(sound.ToString(), sound);
@@ -217,7 +253,9 @@ namespace SdlDotNet
         /// <summary>
         /// Removes an element from the collection.
         /// </summary>
-        /// <param name="key">The element's key to remove.</param>
+        /// <param name="key">
+        /// The element's key to remove.
+        /// </param>
         public void Remove(string key)
         {
             Dictionary.Remove(key);
@@ -229,7 +267,9 @@ namespace SdlDotNet
 		public void Stop()
 		{
 			foreach(Sound sound in this.Dictionary.Values)
+			{
 				sound.Stop();
+			}
 		}
         
         /// <summary>
@@ -237,30 +277,41 @@ namespace SdlDotNet
         /// </summary>
         public void Play()
         {
-        	foreach(Sound sound in this.Dictionary.Values)
-        		sound.Play();
+			foreach(Sound sound in this.Dictionary.Values)
+			{
+				sound.Play();
+			}
         }
         
         /// <summary>
-        /// Sets the volume of every sound object within the collection. Gets the average volume of all sound objects within the collection.
+        /// Sets the volume of every sound object within the collection. 
+        /// Gets the average volume of all sound 
+        /// objects within the collection.
         /// </summary>
         public int Volume
         {
         	get
         	{
-        		if(Dictionary.Count > 0){
-	        		int total = 0;
-	        		foreach(Sound sound in this.Dictionary.Values)
-	        			total += sound.Volume;
-	        		return total / Dictionary.Count;
-        		}
-        		else
-        			return 0;
+				if(Dictionary.Count > 0)
+				{
+					int total = 0;
+					foreach(Sound sound in this.Dictionary.Values)
+					{
+						total += sound.Volume;
+					}
+					return total / Dictionary.Count;
+				}
+				else
+				{
+					return 0;
+				}
         	}
         	set
         	{
-        		foreach(Sound sound in this.Dictionary.Values)
-        			sound.Volume = value;
+				foreach(Sound sound in this.Dictionary.Values)
+				{
+					sound.Volume = value;
+				}
         	}
         }
     }

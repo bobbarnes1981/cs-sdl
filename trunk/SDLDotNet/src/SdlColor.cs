@@ -24,7 +24,7 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// 
+	/// Contains basic color conversions and operations
 	/// </summary>
 	public sealed class SdlColor
 	{
@@ -36,7 +36,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Converts .NET Color struct to SDL_Color
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
@@ -106,8 +106,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Subtracts the values of one color from another color.
 		/// </summary>
-		/// <param name="color1">The first color.</param>
-		/// <param name="color2">The second color, the color to subtract.</param>
+		/// <param name="color1">
+		/// The first color.
+		/// </param>
+		/// <param name="color2">
+		/// The second color, the color to subtract.
+		/// </param>
 		/// <returns>The resultant color.</returns>
 		public static Color Subtract(Color color1, Color color2)
 		{
@@ -203,9 +207,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// Multiplies the values of one color with another color.
 		/// </summary>
-		/// <param name="color1">The first color.</param>
-		/// <param name="color2">The second color.</param>
-		/// <returns>The resultant color of the first and the second color multiplied.</returns>
+		/// <param name="color1">
+		/// The first color.
+		/// </param>
+		/// <param name="color2">
+		/// The second color.
+		/// </param>
+		/// <returns>
+		/// The resultant color of the first and the second color multiplied.
+		/// </returns>
 		public static Color Multiply(Color color1, Color color2)
 		{
 			byte r;
