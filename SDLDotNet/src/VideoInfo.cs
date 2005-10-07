@@ -140,7 +140,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Binary left shift of blue component
 		/// </summary>
 		public static int BlueShift
 		{
@@ -151,7 +151,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Binary left shift of red component
 		/// </summary>
 		public static int RedShift
 		{
@@ -162,7 +162,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Binary left shift of green component
 		/// </summary>
 		public static int GreenShift
 		{
@@ -173,7 +173,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Binary left shift of alpha component
 		/// </summary>
 		public static int AlphaShift
 		{
@@ -184,7 +184,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Precision loss of alpha component
 		/// </summary>
 		public static int AlphaLoss
 		{
@@ -195,7 +195,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Precision loss of red component
 		/// </summary>
 		public static int RedLoss
 		{
@@ -206,7 +206,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Precision loss of green component
 		/// </summary>
 		public static int GreenLoss
 		{
@@ -217,7 +217,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Precision loss of blue component
 		/// </summary>
 		public static int BlueLoss
 		{
@@ -228,7 +228,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if the video system has a hardware surface
 		/// </summary>
 		public static bool HasHardwareSurfaces
 		{
@@ -239,7 +239,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// checks if window manager is available
 		/// </summary>
 		public static bool HasWindowManager
 		{
@@ -250,7 +250,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if hardware blits are available
 		/// </summary>
 		public static bool HasHardwareBlits
 		{
@@ -261,7 +261,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if hardware colorkey blits are accelerated
 		/// </summary>
 		public static bool HasHardwareColorKeyBlits
 		{
@@ -272,7 +272,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if hardware alpha blits are accelerated
 		/// </summary>
 		public static bool HasHardwareAlphaBlits
 		{
@@ -283,7 +283,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if software to hardware blits are accelerated
 		/// </summary>
 		public static bool HasSoftwareBlits
 		{
@@ -294,7 +294,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Checks if software to hardware colorkey blits are accelerated
 		/// </summary>
 		public static bool HasSoftwareColorKeyBlits
 		{
@@ -305,7 +305,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Software to hardware alpha blits are accelerated
 		/// </summary>
 		public static bool HasSoftwareAlphaBlits
 		{
@@ -316,7 +316,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Color fills are accelerated
 		/// </summary>
 		public static bool HasColorFills
 		{
@@ -327,7 +327,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Total video memory
 		/// </summary>
 		public static int VideoMemory
 		{

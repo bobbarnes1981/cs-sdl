@@ -38,7 +38,7 @@ namespace SdlDotNet
 			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
 		}
 		/// <summary>
-		/// 
+		/// Constructor for using a given use event
 		/// </summary>
 		/// <param name="userEvent">The user event object</param>
 		public UserEventArgs(object userEvent)
@@ -70,7 +70,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// User code that uniquely defines this user event.
 		/// </summary>
 		public int UserCode
 		{

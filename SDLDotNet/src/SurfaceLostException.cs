@@ -39,9 +39,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Exception with specified string
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Exception message</param>
 		public SurfaceLostException(string message): base(message)
 		{
 		}

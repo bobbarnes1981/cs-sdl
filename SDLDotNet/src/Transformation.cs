@@ -36,11 +36,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Basic constructor
 		/// </summary>
-		/// <param name="scaleX"></param>
-		/// <param name="scaleY"></param>
-		/// <param name="zoom"></param>
-		/// <param name="antiAlias"></param>
-		/// <param name="degreesOfRotation"></param>
+		/// <param name="scaleX">X-axis scaling factor</param>
+		/// <param name="scaleY">Y-axis scaling factor</param>
+		/// <param name="zoom">scaling in both X and Y axes</param>
+		/// <param name="antiAlias">Antialias</param>
+		/// <param name="degreesOfRotation">Rotate surface by given degrees</param>
 		public Transformation(double scaleX, double scaleY, double zoom, bool antiAlias, int degreesOfRotation)
 		{
 			this.scaleX = scaleX;
@@ -51,39 +51,47 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Anti-aliasing is on
+		/// Transform with Anti-aliasing is on
 		/// </summary>
-		/// <param name="scaleX"></param>
-		/// <param name="scaleY"></param>
-		/// <param name="zoom"></param>
-		/// <param name="degreesOfRotation"></param>
+		/// <param name="scaleX">X-axis scaling factor
+		/// </param>
+		/// <param name="scaleY">Y-axis scaling factor
+		/// </param>
+		/// <param name="zoom">scaling in both X and Y axes
+		/// </param>
+		/// <param name="degreesOfRotation">Rotate surface by given degrees
+		/// </param>
 		public Transformation(double scaleX, double scaleY, double zoom, int degreesOfRotation) : this(scaleX, scaleY, zoom, true, degreesOfRotation)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Transform with Anti-aliasing on and zoom off.
 		/// </summary>
-		/// <param name="scaleX"></param>
-		/// <param name="scaleY"></param>
-		/// <param name="degreesOfRotation"></param>
+		/// <param name="scaleX">X-axis scaling factor
+		/// </param>
+		/// <param name="scaleY">Y-axis scaling factor
+		/// </param>
+		/// <param name="degreesOfRotation">
+		/// Rotate surface by given degrees
+		/// </param>
 		public Transformation(double scaleX, double scaleY, int degreesOfRotation) : this(scaleX, scaleY, 1.0, true, degreesOfRotation)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Transform with Anti-aliasing on and scaling off.
 		/// </summary>
-		/// <param name="zoom"></param>
-		/// <param name="degreesOfRotation"></param>
+		/// <param name="zoom">Zoom factor</param>
+		/// <param name="degreesOfRotation">Degrees to rotate surface</param>
 		public Transformation(double zoom, int degreesOfRotation) : this(1.0, 1.0, zoom, true, degreesOfRotation)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Rotate surface
 		/// </summary>
-		/// <param name="degreesOfRotation"></param>
+		/// <param name="degreesOfRotation">Degrees to rotate surface</param>
 		public Transformation(int degreesOfRotation) : this(1.0, 1.0, 1.0, true, degreesOfRotation)
 		{
 		}

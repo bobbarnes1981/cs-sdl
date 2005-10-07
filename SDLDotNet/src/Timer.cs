@@ -48,7 +48,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If true, dipose unmanaged resources</param>
 		public static void Dispose(bool disposing)
 		{
 			if (!disposed)
@@ -144,7 +144,7 @@ namespace SdlDotNet
 		/// Converts number of CD frames to seconds
 		/// </summary>
 		/// <param name="frames">Number of frames</param>
-		/// <returns></returns>
+		/// <returns>Seconds</returns>
 		public static double FramesToSeconds(int frames) 
 		{
 			return (double)(frames / Sdl.CD_FPS);
@@ -154,7 +154,7 @@ namespace SdlDotNet
 		/// Converts seconds to number of CD frames
 		/// </summary>
 		/// <param name="seconds">Number of seconds</param>
-		/// <returns></returns>
+		/// <returns>Frames</returns>
 		public static int SecondsToFrames(int seconds) 
 		{
 			if (seconds <= Int32.MaxValue / Sdl.CD_FPS)
@@ -171,7 +171,7 @@ namespace SdlDotNet
 		/// Converts frames to Timespan
 		/// </summary>
 		/// <param name="frames">Number of frames</param>
-		/// <returns></returns>
+		/// <returns>Timespan</returns>
 		public static TimeSpan FramesToTime(int frames)
 		{
 			return new TimeSpan((long)Timer.FramesToSeconds(frames) * TimeSpan.TicksPerSecond);
@@ -181,7 +181,7 @@ namespace SdlDotNet
 		/// Converts seconds to Timespan
 		/// </summary>
 		/// <param name="seconds">Number of seconds</param>
-		/// <returns></returns>
+		/// <returns>Timespan</returns>
 		public static TimeSpan SecondsToTime(int seconds)
 		{
 			return new TimeSpan(seconds * TimeSpan.TicksPerSecond);
