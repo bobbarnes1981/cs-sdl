@@ -31,7 +31,7 @@ namespace SdlDotNet
 	public class SdlException : Exception 
 	{
 		/// <summary>
-		/// 
+		/// Returns basic exception
 		/// </summary>
 		public SdlException() 
 		{
@@ -48,16 +48,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Returns exception
 		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
+		/// <param name="message">Exception message</param>
+		/// <param name="exception">Exception type</param>
 		public SdlException(string message, Exception exception) : base(message, exception)
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Returns SerializationInfo
 		/// </summary>
 		/// <param name="info"></param>
 		/// <param name="context"></param>
