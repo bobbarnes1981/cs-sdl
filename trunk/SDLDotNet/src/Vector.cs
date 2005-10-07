@@ -40,9 +40,12 @@ namespace SdlDotNet
         public Vector() : this(0, 0) { }
 
         /// <summary>
-        /// Creates a vector with a specific direction in degrees and a length of 1.
+        /// Creates a vector with a specific direction in 
+        /// degrees and a length of 1.
         /// </summary>
-        /// <param name="directionDeg">The direction of the vector, in degrees.</param>
+        /// <param name="directionDeg">
+        /// The direction of the vector, in degrees.
+        /// </param>
         public Vector(int directionDeg)
         {
             Length = 1;
@@ -50,9 +53,12 @@ namespace SdlDotNet
         }
 
         /// <summary>
-        /// Creates a vector with a specific direction in radians and a length of 1.
+        /// Creates a vector with a specific direction in 
+        /// radians and a length of 1.
         /// </summary>
-        /// <param name="directionRad">The direction of the vector, in radians.</param>
+        /// <param name="directionRad">
+        /// The direction of the vector, in radians.
+        /// </param>
         public Vector(double directionRad)
         {
             Length = 1;
@@ -80,13 +86,17 @@ namespace SdlDotNet
 		/// <summary>
         /// Creates a vector based on a Point object.
 		/// </summary>
-        /// <param name="point">The point representing the XY values.</param>
+        /// <param name="point">
+        /// The point representing the XY values.
+        /// </param>
 		public Vector(Point point) : this(point.X, point.Y) {}
 
         /// <summary>
         /// Creates a vector based on a PointF object.
         /// </summary>
-        /// <param name="point">The point representing the XY values.</param>
+        /// <param name="point">
+        /// The point representing the XY values.
+        /// </param>
         public Vector(PointF point) : this(point.X, point.Y) {}
 
 		/// <summary>
@@ -106,23 +116,24 @@ namespace SdlDotNet
 
 		#endregion Constructors
 
-
 		#region Operators
 
 		/// <summary>
 		/// Converts to String
 		/// </summary>
-		/// <returns>A string containing something like "X, Y".</returns>
+		/// <returns>
+		/// A string containing something like "X, Y".
+		/// </returns>
 		public override string ToString()
 		{
 			return String.Format(CultureInfo.CurrentCulture, "{0}, {1}", X.ToString("#.000"), Y.ToString("#.000"));
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">Object to compare</param>
+		/// <returns>If true, objects are equal</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(Vector))
@@ -134,7 +145,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -145,7 +156,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Greater than or equals operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -155,7 +166,7 @@ namespace SdlDotNet
 			return (c1.Length >= c2.Length) && (c1.Length >= c2.Length);
 		}
 		/// <summary>
-		/// 
+		/// Greater than operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -165,7 +176,7 @@ namespace SdlDotNet
 			return (c1.Length > c2.Length) && (c1.Length > c2.Length);
 		}
 		/// <summary>
-		/// 
+		/// Less than operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -175,7 +186,7 @@ namespace SdlDotNet
 			return (c1.Length < c2.Length) && (c1.Length < c2.Length);
 		}
 		/// <summary>
-		/// 
+		/// Less than or equals operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -186,7 +197,7 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Not equals operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -197,7 +208,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Addition operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -208,7 +219,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Minus operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -219,7 +230,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Multiplication operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -230,7 +241,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Division operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -243,7 +254,7 @@ namespace SdlDotNet
 
 
 		/// <summary>
-		/// 
+		/// Addition operator
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>
@@ -253,7 +264,7 @@ namespace SdlDotNet
 			return new Vector(a.m_x + b, a.m_y + b);
 		}
 		/// <summary>
-		/// 
+		/// Minus operator
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>
@@ -263,7 +274,7 @@ namespace SdlDotNet
 			return new Vector(a.m_x - b, a.m_y - b);
 		}
 		/// <summary>
-		/// 
+		/// Multiplication operator
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>
@@ -273,7 +284,7 @@ namespace SdlDotNet
 			return new Vector(a.m_x * b, a.m_y * b);
 		}
 		/// <summary>
-		/// 
+		/// Division poerator
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>
@@ -283,7 +294,7 @@ namespace SdlDotNet
 			return new Vector(a.m_x / b, a.m_y / b);
 		}
 		/// <summary>
-		/// 
+		/// Addition operator
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>
@@ -293,7 +304,7 @@ namespace SdlDotNet
 			return new Vector(a + b.m_x, a + b.m_y);
 		}
 		/// <summary>
-		/// 
+		/// Minus operator
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>
@@ -303,7 +314,7 @@ namespace SdlDotNet
 			return new Vector(a - b.m_x, a - b.m_y);
 		}
 		/// <summary>
-		/// 
+		/// Muliplication operator
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>
@@ -313,7 +324,7 @@ namespace SdlDotNet
 			return new Vector(a * b.m_x, a * b.m_y);
 		}
 		/// <summary>
-		/// 
+		/// Division operator
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>
@@ -332,7 +343,6 @@ namespace SdlDotNet
 			return (int)m_x ^ (int)m_y;
 		}
 		#endregion
-
 
 		#region Properties
 
@@ -452,7 +462,6 @@ namespace SdlDotNet
 		}
 		#endregion
 
-
 		#region Math
 
 		/// <summary>
@@ -491,7 +500,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns a new vector equal to the normalized version of this one.
 		/// </summary>
-		/// <returns>A new vector representing the normalized vector.</returns>
+		/// <returns>
+		/// A new vector representing the normalized vector.
+		/// </returns>
 		public Vector Normalized()
 		{
             Vector ret = new Vector(this);
@@ -509,21 +520,34 @@ namespace SdlDotNet
 		}
 
         /// <summary>
-        /// Calculates the reflection angle of the current vector using the given normal vector.
+        /// Calculates the reflection angle of the current 
+        /// vector using the given normal vector.
         /// </summary>
-        /// <param name="normal">The normal angle.</param>
-        /// <returns>A new vector representing the reflection angle.</returns>
-        /// <remarks>Make sure the length of the vector is 1 or it will have an effect on the resulting vector.</remarks>
+        /// <param name="normal">
+        /// The normal angle.
+        /// </param>
+        /// <returns>
+        /// A new vector representing the reflection angle.
+        /// </returns>
+        /// <remarks>
+        /// Make sure the length of the vector is 1 or it will 
+        /// have an effect on the resulting vector.
+        /// </remarks>
         public Vector Reflection(Vector normal)
         {
             return this - ( 2 * this.DotProduct(normal) * normal );
         }
 
         /// <summary>
-        /// Calculates the reflection angle of the current vector using the given normal in degrees.
+        /// Calculates the reflection angle of the current 
+        /// vector using the given normal in degrees.
         /// </summary>
-        /// <param name="normalDeg">The normal angle in degrees.</param>
-        /// <returns>A new vector representing the reflection angle.</returns>
+        /// <param name="normalDeg">
+        /// The normal angle in degrees.
+        /// </param>
+        /// <returns>
+        /// A new vector representing the reflection angle.
+        /// </returns>
         public Vector Reflection(int normalDeg)
         {
             Vector vecNormal = new Vector(0, 1);
@@ -532,10 +556,15 @@ namespace SdlDotNet
         }
 
         /// <summary>
-        /// Calculates the reflection angle of the current vector using the given normal in radians.
+        /// Calculates the reflection angle of the current vector 
+        /// using the given normal in radians.
         /// </summary>
-        /// <param name="normalRad">The normal angle in radians.</param>
-        /// <returns>A new vector representing the reflection angle.</returns>
+        /// <param name="normalRad">
+        /// The normal angle in radians.
+        /// </param>
+        /// <returns>
+        /// A new vector representing the reflection angle.
+        /// </returns>
         public Vector Reflection(double normalRad)
         {
             Vector vecNormal = new Vector(0, 1);
@@ -544,7 +573,6 @@ namespace SdlDotNet
         }
 
 		#endregion Math
-
 
 		#region Interface Members
 		#region ICloneable Members
@@ -591,8 +619,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// IComparable.CompareTo implementation.
 		/// </summary>
-		/// <param name="obj">The object to compare to.</param>
-		/// <returns>-1 if its length is less then obj, 0 if it's equal and 1 if it's greater.</returns>
+		/// <param name="obj">
+		/// The object to compare to.
+		/// </param>
+		/// <returns>
+		/// -1 if its length is less then obj, 0 if it's equal and 1 if it's greater.
+		/// </returns>
 		public int CompareTo(object obj)
 		{
 			if(obj is Vector) 

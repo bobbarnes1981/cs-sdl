@@ -118,7 +118,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a surface with the designated rectangle size.
 		/// </summary>
-		/// <param name="rectangle"></param>
+		/// <param name="rectangle">Rectangle size of surface</param>
 		public Surface(Rectangle rectangle) : this(rectangle.Width, rectangle.Height)
 		{
 		}
@@ -126,8 +126,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Create surface of a given width and height
 		/// </summary>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
+		/// <param name="width">Width of surface</param>
+		/// <param name="height">Height of surface</param>
 		public Surface(int width, int height)
 		{
 			this.Handle = 
@@ -208,7 +208,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If true, dispose unmanaged objects</param>
 		protected override void Dispose(bool disposing)
 		{
 			if (!this.disposed)
@@ -286,7 +286,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a Bitmap representing the Surface.
 		/// </summary>
-		/// <returns>A new bitmap image representing the surface.</returns>
+		/// <returns>A new bitmap image representing the surface.
+		/// </returns>
 		public Bitmap ToBitmap() 
 		{ 
 			Bitmap newBitmap = new Bitmap(this.Width, this.Height); 
@@ -400,9 +401,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Draw circle onto surface
 		/// </summary>
-		/// <param name="circle"></param>
-		/// <param name="color"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="circle">Circle to create</param>
+		/// <param name="color">Color of circle</param>
+		/// <param name="antiAlias">Antialias circle</param>
 		public void DrawCircle(Circle circle, System.Drawing.Color color, bool antiAlias)
 		{
 			if (this.disposed)
@@ -431,8 +432,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Draw circle onto surface
 		/// </summary>
-		/// <param name="circle"></param>
-		/// <param name="color"></param>
+		/// <param name="circle">Circle to create</param>
+		/// <param name="color">Color of circle</param>
 		public void DrawCircle(Circle circle, System.Drawing.Color color)
 		{
 			DrawCircle(circle, color, true);
@@ -441,9 +442,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Draw ellipse onto surface
 		/// </summary>
-		/// <param name="ellipse"></param>
-		/// <param name="color"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="ellipse">Ellipse to create</param>
+		/// <param name="color">Color of ellipse</param>
+		/// <param name="antiAlias">antialias ellipse</param>
 		public void DrawEllipse(Ellipse ellipse, System.Drawing.Color color, bool antiAlias)
 		{
 			if (this.disposed)
@@ -479,18 +480,18 @@ namespace SdlDotNet
 		/// <summary>
 		/// Draw ellipse onto surface
 		/// </summary>
-		/// <param name="ellipse"></param>
-		/// <param name="color"></param>
+		/// <param name="ellipse">Ellipse to create</param>
+		/// <param name="color">Color of ellipse</param>
 		public void DrawEllipse(Ellipse ellipse, System.Drawing.Color color)
 		{
 			DrawEllipse(ellipse, color, true);
 		}
 
 		/// <summary>
-		/// 
+		/// Draw filled ellipse
 		/// </summary>
-		/// <param name="ellipse"></param>
-		/// <param name="color"></param>
+		/// <param name="ellipse">Ellipse to create</param>
+		/// <param name="color">Color of ellipse</param>
 		public void DrawFilledEllipse(Ellipse ellipse, System.Drawing.Color color)
 		{
 			if (this.disposed)
@@ -507,11 +508,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw line onto surface
 		/// </summary>
-		/// <param name="line"></param>
-		/// <param name="color"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="line">Line to draw</param>
+		/// <param name="color">Color of line</param>
+		/// <param name="antiAlias">Anitalias line</param>
 		public void DrawLine(Line line, System.Drawing.Color color, bool antiAlias)
 		{
 			if (this.disposed)
@@ -545,21 +546,21 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw line onto surface
 		/// </summary>
-		/// <param name="line"></param>
-		/// <param name="color"></param>
+		/// <param name="line">Line to draw</param>
+		/// <param name="color">Color of line</param>
 		public void DrawLine(Line line, System.Drawing.Color color)
 		{
 			DrawLine(line, color, true);
 		}
 
 		/// <summary>
-		/// 
+		/// Draw triangle onto surface
 		/// </summary>
-		/// <param name="triangle"></param>
-		/// <param name="color"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="triangle">Triangle to draw</param>
+		/// <param name="color">Color of triangle</param>
+		/// <param name="antiAlias">antitalias</param>
 		public void DrawTriangle(Triangle triangle, System.Drawing.Color color, bool antiAlias)
 		{
 			if (this.disposed)
@@ -595,20 +596,20 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Triangle to draw onto surface
 		/// </summary>
-		/// <param name="triangle"></param>
-		/// <param name="color"></param>
+		/// <param name="triangle">Triangle to draw</param>
+		/// <param name="color">Color of triangle</param>
 		public void DrawTriangle(Triangle triangle, System.Drawing.Color color)
 		{
 			DrawTriangle(triangle, color, true);
 		}
 
 		/// <summary>
-		/// 
+		/// Filled Triangle to draw onto surface
 		/// </summary>
-		/// <param name="triangle"></param>
-		/// <param name="color"></param>
+		/// <param name="triangle">Triangle to draw</param>
+		/// <param name="color">Color of triangle</param>
 		public void DrawFilledTriangle(Triangle triangle, System.Drawing.Color color)
 		{
 			if (this.disposed)
@@ -631,10 +632,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw polygon to surface
 		/// </summary>
-		/// <param name="polygon"></param>
-		/// <param name="color"></param>
+		/// <param name="polygon">Polygon to draw</param>
+		/// <param name="color">Color of polygon</param>
 		public void DrawFilledPolygon(Polygon polygon, System.Drawing.Color color)
 		{
 			if (this.disposed)
@@ -651,11 +652,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw polygon to surface
 		/// </summary>
-		/// <param name="polygon"></param>
-		/// <param name="color"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="polygon">Polygon to draw</param>
+		/// <param name="color">Color of polygon</param>
+		/// <param name="antiAlias">Antialias</param>
 		public void DrawPolygon(Polygon polygon, System.Drawing.Color color, bool antiAlias)
 		{
 			if (this.disposed)
@@ -682,20 +683,20 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw polygon to surface
 		/// </summary>
-		/// <param name="polygon"></param>
-		/// <param name="color"></param>
+		/// <param name="polygon">Polygon to draw</param>
+		/// <param name="color">Color of polygon</param>
 		public void DrawPolygon(Polygon polygon, System.Drawing.Color color)
 		{
 			DrawPolygon(polygon, color, true);
 		}
 
 		/// <summary>
-		/// 
+		/// Draw pie-shaped primitive to surface
 		/// </summary>
-		/// <param name="pie"></param>
-		/// <param name="color"></param>
+		/// <param name="pie">Pie to draw</param>
+		/// <param name="color">Color of pie</param>
 		public void DrawPie(Pie pie, System.Drawing.Color color)
 		{
 			if (this.disposed)
@@ -719,10 +720,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw filled pie-shaped primitive to surface
 		/// </summary>
-		/// <param name="pie"></param>
-		/// <param name="color"></param>
+		/// <param name="pie">Pie to draw</param>
+		/// <param name="color">Color of pie</param>
 		public void DrawFilledPie(Pie pie, System.Drawing.Color color)
 		{
 			if (this.disposed)
@@ -739,10 +740,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw bezier curve to surface
 		/// </summary>
-		/// <param name="bezier"></param>
-		/// <param name="color"></param>
+		/// <param name="bezier">Bezier curve to draw</param>
+		/// <param name="color">Color of curve</param>
 		public void DrawBezier(Bezier bezier, System.Drawing.Color color)
 		{
 			if (this.disposed)
@@ -763,19 +764,20 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw box to surface
 		/// </summary>
-		/// <param name="rectangle"></param>
-		/// <param name="color"></param>
+		/// <param name="rectangle">Rectangular coordinates</param>
+		/// <param name="color">color of box</param>
 		public void DrawBox(Rectangle rectangle, System.Drawing.Color color)
 		{
 			this.DrawBox(new Box((short)rectangle.X, (short)rectangle.Y, (short)rectangle.Right, (short)rectangle.Bottom), color);
 		}
+
 		/// <summary>
-		/// 
+		/// Draw box to surface
 		/// </summary>
-		/// <param name="box"></param>
-		/// <param name="color"></param>
+		/// <param name="box">Box to draw</param>
+		/// <param name="color">color of box</param>
 		public void DrawBox(Box box, System.Drawing.Color color)
 		{
 			if (this.disposed)
@@ -798,20 +800,20 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Draw filled box to surface
 		/// </summary>
-		/// <param name="rectangle"></param>
-		/// <param name="color"></param>
+		/// <param name="rectangle">Rectangular coordinates</param>
+		/// <param name="color">color of box</param>
 		public void DrawFilledBox(Rectangle rectangle, System.Drawing.Color color)
 		{
 			this.DrawFilledBox(new Box((short)rectangle.X, (short)rectangle.Y, (short)rectangle.Right, (short)rectangle.Bottom), color);
 		}
 
 		/// <summary>
-		/// 
+		/// Draw filled box to surface
 		/// </summary>
-		/// <param name="box"></param>
-		/// <param name="color"></param>
+		/// <param name="box">box to draw</param>
+		/// <param name="color">color of box</param>
 		public void DrawFilledBox(Box box, System.Drawing.Color color)
 		{
 			if (this.disposed)
@@ -882,27 +884,29 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Creates new surface that is the same size and compatible with this one.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>new Surface</returns>
 		public Surface CreateCompatibleSurface() 
 		{
 			return this.CreateCompatibleSurface(this.Size.Width, this.Size.Height, false);
 		}
+
 		/// <summary>
-		/// 
+		/// Creates new surface that is compatible with this one.
 		/// </summary>
-		/// <returns></returns>
+		/// <param name="rectangle">Size of surface</param>
+		/// <returns>new Surface</returns>
 		public Surface CreateCompatibleSurface(Rectangle rectangle) 
 		{
 			return this.CreateCompatibleSurface(rectangle.Width, rectangle.Height, false);
 		}
 
 		/// <summary>
-		/// 
+		/// Creates new surface that is compatible with this one.
 		/// </summary>
-		/// <param name="size"></param>
-		/// <returns></returns>
+		/// <param name="size">Size of surface</param>
+		/// <returns>new Surface</returns>
 		public Surface CreateCompatibleSurface(Size size) 
 		{
 			return this.CreateCompatibleSurface(size.Width, size.Height, false);
@@ -922,9 +926,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Create a surface with the same pixel format as this one
 		/// </summary>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
-		/// <returns></returns>
+		/// <param name="width">width of surface</param>
+		/// <param name="height">height of surface</param>
+		/// <returns>new Surface</returns>
 		public Surface CreateCompatibleSurface(
 			int width, int height) 
 		{
@@ -973,7 +977,7 @@ namespace SdlDotNet
 		/// A flag indicating whether or not to 
 		/// attempt to place the new surface in video memory
 		/// </param>
-		/// <param name="alpha"></param>
+		/// <param name="alpha">Use alpha blending on surface</param>
 		/// <returns>The new surface</returns>
 		public Surface Convert(Surface source, bool hardware, bool alpha) 
 		{
@@ -1164,21 +1168,27 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Blit entire SpriteCollection to Surface
 		/// </summary>
-		/// <param name="spriteCollection"></param>
+		/// <param name="spriteCollection">SpriteCollection to Blit</param>
+		/// <returns>Collection of Rectangles acutally blit to since 
+		/// ere have may been some clipping.
+		/// </returns>
 		public RectangleCollection Blit(SpriteCollection spriteCollection)
 		{
 			return spriteCollection.Draw(this);
 		}
 
 		/// <summary>
-		/// 
+		/// Blit surface to this surface
 		/// </summary>
-		/// <param name="sourceSurface"></param>
-		/// <param name="destinationRectangle"></param>
-		/// <param name="sourceRectangle"></param>
-		/// <returns></returns>
+		/// <param name="sourceSurface">Source surface</param>
+		/// <param name="destinationRectangle">
+		/// Destination Reectangle on this surface
+		/// </param>
+		/// <param name="sourceRectangle">Source rectangel on source Surface</param>
+		/// <returns>Actual blitted rectangle since there may have been clipping
+		/// </returns>
 		public Rectangle Blit( 
 			Surface sourceSurface, 
 			System.Drawing.Rectangle destinationRectangle,
@@ -1223,10 +1233,12 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Erases SpriteCollection from surface
 		/// </summary>
-		/// <param name="spriteCollection"></param>
-		/// <param name="background"></param>
+		/// <param name="spriteCollection">SpriteCollection to erase</param>
+		/// <param name="background">
+		/// Background Surface to cover up SpriteCollection
+		/// </param>
 		public void Erase(SpriteCollection spriteCollection, 
 			Surface background)
 		{
@@ -1234,10 +1246,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Erase Rectangles from surface
 		/// </summary>
-		/// <param name="rectangle"></param>
-		/// <param name="background"></param>
+		/// <param name="rectangle">Rectangle to erase</param>
+		/// <param name="background">background to use to erase rectangle.</param>
 		public void Erase(Rectangle rectangle, Surface background)
 		{
 			this.Blit(background, rectangle, rectangle);
@@ -1581,7 +1593,7 @@ namespace SdlDotNet
 		private bool alphaBlending;
 
 		/// <summary>
-		/// 
+		/// AlphaBlending on Surface
 		/// </summary>
 		public bool AlphaBlending
 		{
@@ -1666,21 +1678,21 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Creates new Rotated Surface
 		/// </summary>
-		/// <param name="degreesOfRotation"></param>
-		/// <returns></returns>
+		/// <param name="degreesOfRotation">Degrees to rotate Surface</param>
+		/// <returns>new Surface</returns>
 		public Surface CreateRotatedSurface(int degreesOfRotation)
 		{
 			return this.CreateRotatedSurface(degreesOfRotation, true);
 		}
 
 		/// <summary>
-		/// 
+		/// Creates new Rotated Surface
 		/// </summary>
-		/// <param name="degreesOfRotation"></param>
-		/// <param name="antiAlias"></param>
-		/// <returns></returns>
+		/// <param name="degreesOfRotation">Degrees to rotate Surface</param>
+		/// <param name="antiAlias">Antialias</param>
+		/// <returns>new Surface</returns>
 		public Surface CreateRotatedSurface(int degreesOfRotation, bool antiAlias)
 		{
 			if (this.disposed)
@@ -1702,10 +1714,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create new rotated and zoomed surface
 		/// </summary>
-		/// <param name="degreesOfRotation"></param>
-		/// <param name="zoom"></param>
+		/// <param name="degreesOfRotation">degrees of rotation</param>
+		/// <param name="zoom">scale of zoom</param>
 		/// <returns></returns>
 		public Surface CreateRotoZoomedSurface(int degreesOfRotation, double zoom)
 		{
@@ -1713,11 +1725,12 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create new rotated and zoomed surface
 		/// </summary>
-		/// <param name="degreesOfRotation"></param>
-		/// <param name="zoom"></param>
-		/// <param name="antiAlias"></param>
+		/// <param name="degreesOfRotation">degrees of rotation</param>
+		/// <param name="zoom">scale of zoom</param>
+		/// <param name="antiAlias">If true, moothing is turned on.</param>
+		/// <returns></returns>
 		public Surface CreateRotoZoomedSurface(int degreesOfRotation, 
 			double zoom, bool antiAlias)
 		{
@@ -1755,7 +1768,6 @@ namespace SdlDotNet
 		/// <param name="degreesOfRotation">degrees of rotation</param>
 		/// <param name="zoom">scale of zoom</param>
 		/// <param name="antiAlias">If true, moothing is turned on.</param>
-		/// <returns></returns>
 		public void RotationZoom(int degreesOfRotation, 
 			double zoom, bool antiAlias)
 		{
@@ -1778,12 +1790,12 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create rescaled surface
 		/// </summary>
-		/// <param name="zoomX"></param>
-		/// <param name="zoomY"></param>
-		/// <param name="antiAlias"></param>
-		/// <returns></returns>
+		/// <param name="zoomX">Scale on X-axis</param>
+		/// <param name="zoomY">Scale on Y-axis</param>
+		/// <param name="antiAlias">If true, smoothing is turned on.</param>
+		/// <returns>new Surface</returns>
 		public Surface CreateScaledSurface(double zoomX, double zoomY, bool antiAlias)
 		{
 			if (this.disposed)
@@ -1805,11 +1817,12 @@ namespace SdlDotNet
 			}
 		}
 
+
 		/// <summary>
-		/// 
+		/// Create rescaled surface
 		/// </summary>
-		/// <param name="zoomX"></param>
-		/// <param name="zoomY"></param>
+		/// <param name="zoomX">Scale on X-axis</param>
+		/// <param name="zoomY">Scale on Y-axis</param>
 		/// <returns></returns>
 		public Surface CreateScaledSurface(double zoomX, double zoomY)
 		{
@@ -1817,21 +1830,21 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Create rescaled surface
 		/// </summary>
-		/// <param name="zoom"></param>
-		/// <returns></returns>
+		/// <param name="zoom">Scale on both X and Y axes</param>
+		/// <returns>new Surface</returns>
 		public Surface CreateScaledSurface(double zoom)
 		{
 			return this.CreateScaledSurface(zoom, zoom);
 		}
 
 		/// <summary>
-		/// 
+		/// Create rescaled surface
 		/// </summary>
-		/// <param name="zoom"></param>
-		/// <param name="antiAlias"></param>
-		/// <returns></returns>
+		/// <param name="zoom">Scale on both X and Y axes</param>
+		/// <param name="antiAlias">antialias</param>
+		/// <returns>new Surface</returns>
 		public Surface CreateScaledSurface(double zoom, bool antiAlias)
 		{
 			return this.CreateScaledSurface(zoom, zoom, antiAlias);
@@ -1842,7 +1855,6 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="zoomX">Scale on X-axis</param>
 		/// <param name="zoomY">Scale on Y-axis</param>
-		/// <returns></returns>
 		public void Scale(double zoomX, double zoomY)
 		{
 			if (this.disposed)
@@ -1858,7 +1870,6 @@ namespace SdlDotNet
 		/// <param name="zoomX">Scale on X-axis</param>
 		/// <param name="zoomY">Scale on Y-axis</param>
 		/// <param name="antiAlias">If true, smoothing is turned on.</param>
-		/// <returns></returns>
 		public void Scale(double zoomX, double zoomY, bool antiAlias)
 		{
 			if (this.disposed)
@@ -1899,7 +1910,6 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="zoom">Scale amount</param>
 		/// <param name="antiAlias">If true, smoothing is turned on</param>
-		/// <returns></returns>
 		public void Scale(double zoom, bool antiAlias)
 		{
 			if (this.disposed)
@@ -1910,18 +1920,18 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Doubles the size of the surface
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>new Surface</returns>
 		public Surface CreateScaleDoubleSurface()
 		{
 			return this.CreateScaledSurface(2);
 		}
 
 		/// <summary>
-		/// 
+		/// Doubles the size of the surface
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>new Surface</returns>
 		public Surface CreateScaleDoubleSurface(bool antiAlias)
 		{
 			return this.CreateScaledSurface(2, antiAlias);
@@ -1930,7 +1940,6 @@ namespace SdlDotNet
 		/// <summary>
 		/// Doubles the size of the surface
 		/// </summary>
-		/// <returns></returns>
 		public void ScaleDouble()
 		{
 			if (this.disposed)
@@ -1953,12 +1962,13 @@ namespace SdlDotNet
 			}
 			this.Scale(2, 2, antiAlias);
 		}
+
 		/// <summary>
-		/// 
+		/// Stretch Surface
 		/// </summary>
-		/// <param name="sourceRectangle"></param>
-		/// <param name="destinationRectangle"></param>
-		/// <returns></returns>
+		/// <param name="sourceRectangle">Source Rectangle</param>
+		/// <param name="destinationRectangle">Destination of stretch</param>
+		/// <returns>new Surface</returns>
 		public Surface Stretch(Rectangle sourceRectangle, Rectangle destinationRectangle)
 		{
 			Surface surface = new Surface(sourceRectangle);
@@ -1971,10 +1981,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Stretch Surface
 		/// </summary>
-		/// <param name="destinationSize"></param>
-		/// <returns></returns>
+		/// <param name="destinationSize">Destination of stretch</param>
+		/// <returns>new Surface</returns>
 		public Surface Stretch(Size destinationSize)
 		{
 			Surface surface = new Surface(this.Size);
@@ -1989,7 +1999,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Uses a Transformation object to perform rotation, zooming and scaling
 		/// </summary>
-		/// <param name="transformation"></param>
+		/// <param name="transformation">Transformation object</param>
 		public void Transform(Transformation transformation)
 		{
 			if (Math.Round(transformation.Zoom, 1) != 1.0f && Math.Round(transformation.Zoom, 1) != 0.0f)
@@ -2008,7 +2018,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Updates rectangle
 		/// </summary>
-		/// <param name="rectangle"></param>
+		/// <param name="rectangle">Rectangle to update</param>
 		public void Update(System.Drawing.Rectangle rectangle)
 		{
 			if (this.disposed)
@@ -2046,7 +2056,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Update an array of rectangles
 		/// </summary>
-		/// <param name="rectangles"></param>
+		/// <param name="rectangles">Array of Rectangles to update</param>
 		public void Update(System.Drawing.Rectangle[] rectangles)
 		{
 			if (this.disposed)
@@ -2065,7 +2075,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Update an array of rectangles
 		/// </summary>
-		/// <param name="rectangles"></param>
+		/// <param name="rectangles">Collection of rectangles to update</param>
 		public void Update(RectangleCollection rectangles)
 		{
 			if (this.disposed)
@@ -2106,7 +2116,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// AlphaMask
 		/// </summary>
 		public int AlphaMask
 		{
@@ -2117,7 +2127,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Mask for Red channel
 		/// </summary>
 		public int RedMask
 		{
@@ -2128,7 +2138,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Mask for Green channel
 		/// </summary>
 		public int GreenMask
 		{
@@ -2139,7 +2149,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Mask for Blue channel
 		/// </summary>
 		public int BlueMask
 		{
@@ -2150,7 +2160,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Left Shift for blue channel
 		/// </summary>
 		public int BlueShift
 		{
@@ -2161,7 +2171,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Left shift for red channel
 		/// </summary>
 		public int RedShift
 		{
@@ -2172,7 +2182,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Left shift for green channel
 		/// </summary>
 		public int GreenShift
 		{
@@ -2183,7 +2193,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Left shift for Alpha channel
 		/// </summary>
 		public int AlphaShift
 		{
@@ -2238,7 +2248,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Surface flags
 		/// </summary>
 		public int Flags
 		{
@@ -2248,7 +2258,7 @@ namespace SdlDotNet
 			}
 		}	
 		/// <summary>
-		/// 
+		/// Surface is fullscreen
 		/// </summary>
 		public bool FullScreen
 		{
@@ -2290,7 +2300,7 @@ namespace SdlDotNet
 		/// Creates a copy of the Surface
 		/// </summary>
 		/// <param name="doDeepCopy">If true, a deep copy is created</param>
-		/// <returns></returns>
+		/// <returns>clooned object</returns>
 		public object Clone(bool doDeepCopy)
 		{
 			if (doDeepCopy)

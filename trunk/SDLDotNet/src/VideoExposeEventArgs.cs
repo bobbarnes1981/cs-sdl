@@ -23,12 +23,12 @@ using Tao.Sdl;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Summary description for ExposeEventArgs.
+	/// event args for the Video Expose event.
 	/// </summary>
 	public class VideoExposeEventArgs : SdlEventArgs 
 	{
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
 		public VideoExposeEventArgs()
 		{

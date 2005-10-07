@@ -33,15 +33,18 @@ namespace SdlDotNet
 	public class SurfaceCollection : CollectionBase, ICollection
 	{
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
 		public SurfaceCollection() : base()
 		{
 		}
 
 		/// <summary>
-		/// 
+		/// Create collection with image as the first surface
 		/// </summary>
+		/// <param name="filename">
+		/// filename of surface to put into collection
+		/// </param>
 		public SurfaceCollection(string filename)
 		{
 			this.List.Add(new Surface(filename));
@@ -53,10 +56,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Load in multiple files as surfaces
 		/// </summary>
-		/// <param name="baseName"></param>
-		/// <param name="extension"></param>
+		/// <param name="baseName">Base name of files</param>
+		/// <param name="extension">file extension of images</param>
 		public SurfaceCollection(string baseName, string extension)
 		{
 			// Save the fields
@@ -231,8 +234,10 @@ namespace SdlDotNet
 		/// Load a SdlImage with the specified filename and add 
 		/// it to the end of the SdlImageList.
 		/// </summary>
-		/// <param name="filename">The filename of the SdlImage 
-		/// to be added to the end of the SdlImageList.</param>
+		/// <param name="filename">
+		/// The filename of the SdlImage 
+		/// to be added to the end of the SdlImageList.
+		/// </param>
 		/// <returns>
 		/// The index at which the SdlImage has been added.
 		/// </returns>
@@ -262,8 +267,10 @@ namespace SdlDotNet
 		/// Create a SdlImage from a System.Drawing.Bitmap and add it 
 		/// to the end of the SdlImageList.
 		/// </summary>
-		/// <param name="bitmap">The System.Drawing.Bitmap to create the 
-		/// Image from.</param>
+		/// <param name="bitmap">
+		/// The System.Drawing.Bitmap to create the 
+		/// Image from.
+		/// </param>
 		/// <returns>
 		/// The index at which the SdlImage has been added.
 		/// </returns>
@@ -275,8 +282,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Adds the specified SdlImage to the SdlImageList.
 		/// </summary>
-		/// <param name="index"></param>
-		/// <param name="surface"></param>
+		/// <param name="index">Index at which to insert to new surface</param>
+		/// <param name="surface">Surface to insert</param>
 		public void Insert(int index, Surface surface)
 		{
 			List.Insert(index, surface);
@@ -285,7 +292,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Removes a specified SdlImage from the list.
 		/// </summary>
-		/// <param name="surface">The SdlImage to remove from the SdlImageList. </param>
+		/// <param name="surface">
+		/// The SdlImage to remove from the SdlImageList.
+		/// </param>
 		public void Remove(Surface surface)
 		{
 			List.Remove(surface);
@@ -304,7 +313,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Indicates whether a specified SdlImage is contained in the list.
 		/// </summary>
-		/// <param name="surface">The SdlImage to find in the list.</param>
+		/// <param name="surface">
+		/// The SdlImage to find in the list.
+		/// </param>
 		/// <returns>
 		/// true if the SdlImage is found in the list; otherwise, false.
 		/// </returns>
@@ -314,7 +325,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Size of first surface
 		/// </summary>
 		public virtual Size Size
 		{
@@ -325,10 +336,10 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Copy surface collection to array
 		/// </summary>
-		/// <param name="array"></param>
-		/// <param name="index"></param>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Start at this index</param>
 		public virtual void CopyTo(Surface[] array, int index)
 		{
 			((ICollection)this).CopyTo(array, index);

@@ -44,7 +44,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Destroy object
 		/// </summary>
 		~Video() 
 		{
@@ -61,7 +61,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">
+		/// If true, then dispose unmanaged objects
+		/// </param>
 		public static void Dispose(bool disposing)
 		{
 			if (!disposed)
@@ -83,7 +85,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Initializes Video subsystem.
 		/// </summary>
 		public static void Initialize()
 		{
@@ -125,9 +127,13 @@ namespace SdlDotNet
 		/// <param name="width">Width of mode</param>
 		/// <param name="height">Height of mode</param>
 		/// <param name="fullscreen">Fullscreen or not</param>
-		/// <param name="bitsPerPixel">Bits per pixel. Typically 8, 16, 24 or 32</param>
+		/// <param name="bitsPerPixel">
+		/// Bits per pixel. Typically 8, 16, 24 or 32
+		/// </param>
 		/// <remarks></remarks>
-		/// <returns>True is mode is supported, false if it is not.</returns>
+		/// <returns>
+		/// True is mode is supported, false if it is not.
+		/// </returns>
 		public static bool IsVideoModeOK(int width, int height, bool fullscreen, int bitsPerPixel)
 		{
 			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
@@ -162,7 +168,8 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// Returns the highest bitsperpixel supported for the given width and height
+		/// Returns the highest bitsperpixel supported 
+		/// for the given width and height
 		/// </summary>
 		/// <param name="width">Width of mode</param>
 		/// <param name="height">Height of mode</param>
@@ -387,11 +394,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Creates a new empty surface
 		/// </summary>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
-		/// <returns></returns>
+		/// <param name="width">The width of the surface</param>
+		/// <param name="height">The height of the surface</param>
+		/// <returns>A new surface</returns>
 		public static Surface CreateRgbSurface(int width, int height)
 		{
 			return Video.CreateRgbSurface(width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask, false);
@@ -547,7 +554,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Sets gamma for all colors
 		/// </summary>
-		/// <param name="gammaValue"></param>
+		/// <param name="gammaValue">Gamma to set for all colors</param>
 		public static void Gamma(float gammaValue)
 		{
 			int result = Sdl.SDL_SetGamma(gammaValue, gammaValue, gammaValue);
@@ -558,7 +565,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets red gamma ramp
 		/// </summary>
 		public short[] GetGammaRampRed()
 		{
@@ -572,7 +579,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Sets red gamma ramp
 		/// </summary>
 		/// <param name="gammaArray"></param>
 		public static void SetGammaRampRed(short[] gammaArray)
@@ -585,7 +592,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets blue gamma ramp
 		/// </summary>
 		public short[] GetGammaRampBlue()
 		{
@@ -599,7 +606,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Sets blue gamma ramp
 		/// </summary>
 		/// <param name="gammaArray"></param>
 		public static void SetGammaRampBlue(short[] gammaArray)
@@ -612,7 +619,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Gets green gamma ramp
 		/// </summary>
 		public short[] GetGammaRampGreen()
 		{
@@ -626,7 +633,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Sets green gamma ramp
 		/// </summary>
 		/// <param name="gammaArray"></param>
 		public static void SetGammaRampGreen(short[] gammaArray)
@@ -649,7 +656,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Updates rectangle
 		/// </summary>
-		/// <param name="rectangle"></param>
+		/// <param name="rectangle">
+		/// Rectangle to update
+		/// </param>
 		public static void Update(System.Drawing.Rectangle rectangle)
 		{
 			Video.Screen.Update(rectangle);
@@ -658,7 +667,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Update an array of rectangles
 		/// </summary>
-		/// <param name="rectangles"></param>
+		/// <param name="rectangles">
+		/// Array of rectangles to update
+		/// </param>
 		public static void Update(System.Drawing.Rectangle[] rectangles)
 		{
 			Video.Screen.Update(rectangles);
