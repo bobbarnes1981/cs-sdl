@@ -383,10 +383,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="x1"></param>
-		/// <param name="y1"></param>
-		/// <param name="x2"></param>
-		/// <param name="y2"></param>
+		/// <param name="x1">X coordinate of first point</param>
+		/// <param name="y1">Y coordinate of first point</param>
+		/// <param name="x2">X coordinate of second point</param>
+		/// <param name="y2">Y coordinate of second point</param>
 		public Line(short x1, short y1, short x2, short y2)
 		{
 			this.x1 = x1;
@@ -398,8 +398,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="point1"></param>
-		/// <param name="point2"></param>
+		/// <param name="point1">First point</param>
+		/// <param name="point2">Second point</param>
 		public Line(Point point1, Point point2)
 		{
 			this.x1 = (short)point1.X;
@@ -518,16 +518,16 @@ namespace SdlDotNet
 		/// <summary>
 		/// String representation of line
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>String represenation of line</returns>
 		public override string ToString()
 		{
 			return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2}, {3})", x1, y1, x2, y2);
 		}
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">line to compare</param>
+		/// <returns>True if lines are equal</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(Line))
@@ -545,9 +545,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Equals operator
 		/// </summary>
-		/// <param name="line1"></param>
-		/// <param name="line2"></param>
-		/// <returns></returns>
+		/// <param name="line1">Line to compare</param>
+		/// <param name="line2">Line to compare</param>
+		/// <returns>True if lines are equal</returns>
 		public static bool operator== (Line line1, Line line2)
 		{
 			return (
@@ -559,20 +559,20 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Not equals operator
 		/// </summary>
-		/// <param name="line1"></param>
-		/// <param name="line2"></param>
-		/// <returns></returns>
+		/// <param name="line1">Line to compare</param>
+		/// <param name="line2">Line to compare</param>
+		/// <returns>True if lines are equal</returns>
 		public static bool operator!= (Line line1, Line line2)
 		{
 			return !(line1 == line2);
 		}
 
 		/// <summary>
-		/// 
+		/// hash code
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>hash code</returns>
 		public override int GetHashCode()
 		{
 			return x1 ^ y1 ^ x2 ^ y2;
@@ -581,7 +581,7 @@ namespace SdlDotNet
 		#region IPrimitive Members
 
 		/// <summary>
-		/// 
+		/// Center of line
 		/// </summary>
 		public Point Center
 		{
@@ -602,7 +602,7 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// Triangle primitive
 	/// </summary>
 	public struct Triangle : IPrimitive
 	{
