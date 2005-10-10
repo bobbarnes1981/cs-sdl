@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Drawing;
 using System.Globalization;
 
@@ -25,7 +26,7 @@ using System.Globalization;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Circle
+	/// Circle Primitive
 	/// </summary>
 	public struct Circle : IPrimitive
 	{
@@ -121,7 +122,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// String representation of circle
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>string representation of circle</returns>
 		public override string ToString()
 		{
 			return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2})", x, y, r);
@@ -129,8 +130,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Equals operator
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">Circle to compare</param>
+		/// <returns>true if circles are equal</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(Circle))
@@ -143,20 +144,20 @@ namespace SdlDotNet
 		/// <summary>
 		/// Equals operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
-		/// <returns></returns>
+		/// <param name="c1">Circle to compare</param>
+		/// <param name="c2">Circle to compare</param>
+		/// <returns>True if circles are equal</returns>
 		public static bool operator== (Circle c1, Circle c2)
 		{
 			return ((c1.x == c2.x) && (c1.y == c2.y) && (c1.r == c2.r));
 		}
-		
+
 		/// <summary>
 		/// Not equals operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
-		/// <returns></returns>
+		/// <param name="c1">Circle to compare</param>
+		/// <param name="c2">Circle to compare</param>
+		/// <returns>True if circles are not equal</returns>
 		public static bool operator!= (Circle c1, Circle c2)
 		{
 			return !(c1 == c2);
@@ -165,7 +166,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Hash Code
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>Hash code</returns>
 		public override int GetHashCode()
 		{
 			return x ^ y ^ r;
@@ -202,7 +203,7 @@ namespace SdlDotNet
 		/// Constructor
 		/// </summary>
 		/// <param name="point">Center</param>
-		/// <param name="size">Wdith and height of ellipse</param>
+		/// <param name="size">Width and height of ellipse</param>
 		public Ellipse(Point point, Size size)
 		{
 			this.x = (short)point.X;
@@ -305,7 +306,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// String representation of ellipse
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>string representation of ellipse</returns>
 		public override string ToString()
 		{
 			return String.Format(
@@ -315,8 +316,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Equals operator
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">Ellipse to compare</param>
+		/// <returns>True if ellipses are equal</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(Ellipse))
@@ -332,11 +333,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="e1"></param>
-		/// <param name="e2"></param>
-		/// <returns></returns>
+		/// <param name="e1">Ellipse to compare</param>
+		/// <param name="e2">Ellipse to compare</param>
+		/// <returns>True if ellipses are equal</returns>
 		public static bool operator== (Ellipse e1, Ellipse e2)
 		{
 			return (
@@ -348,20 +349,20 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Not equals operator
 		/// </summary>
-		/// <param name="e1"></param>
-		/// <param name="e2"></param>
-		/// <returns></returns>
+		/// <param name="e1">Ellipse to compare</param>
+		/// <param name="e2">Ellipse to compare</param>
+		/// <returns>True if ellipses are not equal</returns>
 		public static bool operator!= (Ellipse e1, Ellipse e2)
 		{
 			return !(e1 == e2);
 		}
 
 		/// <summary>
-		/// 
+		/// Hash code
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>hash code</returns>
 		public override int GetHashCode()
 		{
 			return x ^ y ^ radiusX ^ radiusY;
@@ -408,7 +409,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// X position of first point
 		/// </summary>
 		public short XPosition1
 		{
@@ -423,7 +424,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of first point
 		/// </summary>
 		public short YPosition1
 		{
@@ -437,7 +438,7 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// X position of second point
 		/// </summary>
 		public short XPosition2
 		{
@@ -452,7 +453,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of second point
 		/// </summary>
 		public short YPosition2
 		{
@@ -467,7 +468,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// First point
 		/// </summary>
 		public Point Point1
 		{
@@ -483,7 +484,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Second point
 		/// </summary>
 		public Point Point2
 		{
@@ -499,7 +500,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Set to vertical line
 		/// </summary>
 		public void Vertical()
 		{
@@ -507,7 +508,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Set to horizontal line
 		/// </summary>
 		public void Horizontal()
 		{
@@ -515,7 +516,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// String representation of line
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
@@ -542,7 +543,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
 		/// <param name="line1"></param>
 		/// <param name="line2"></param>
@@ -879,11 +880,15 @@ namespace SdlDotNet
 	/// <summary>
 	/// 
 	/// </summary>
-	public struct Polygon
+	public struct Polygon : IPrimitive
 	{
 		short[] x;
 		short[] y;
 		int n;
+		ArrayList list;
+		short xTotal;
+		short yTotal;
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -894,6 +899,9 @@ namespace SdlDotNet
 			this.x = x;
 			this.y = y;
 			this.n = 0;
+			this.list = new ArrayList();
+			this.xTotal = 0;
+			this.yTotal = 0;
 			
 			if (x.Length != y.Length)
 			{
@@ -903,6 +911,21 @@ namespace SdlDotNet
 			{
 				this.n = x.Length;
 			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="points"></param>
+		public Polygon(ArrayList points)
+		{
+			this.x = new short[points.Count];
+			this.y = new short[points.Count];
+			this.n = 0;
+			this.list = new ArrayList();
+			this.xTotal = 0;
+			this.yTotal = 0;
+			this.Points = points;
 		}
 
 		/// <summary>
@@ -961,6 +984,30 @@ namespace SdlDotNet
 			get
 			{
 				return this.n;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public ArrayList Points
+		{
+			get
+			{
+				list.Clear();
+				for (int i = 0; i < this.n; i++)
+				{
+					list.Add(new Point(x[i], y[i]));	
+				}
+				return list;
+			}
+			set
+			{
+				for (int i = 0; i < value.Count; i++)
+				{
+					x[i] = (short)((Point)value[i]).X;
+					y[i] = (short)((Point)value[i]).Y;
+				}
 			}
 		}
 		/// <summary>
@@ -1027,12 +1074,42 @@ namespace SdlDotNet
 			return x.GetHashCode() ^ y.GetHashCode() ^ n;
 
 		}
+		#region IPrimitive Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Center
+		{
+			get
+			{
+				xTotal = 0;
+				yTotal = 0;
+				
+				for (int i = 0; i < list.Count; i++)
+				{
+					xTotal += (short)((Point)list[i]).X;
+					yTotal += (short)((Point)list[i]).Y;
+				}
+				return new Point((xTotal/this.n), (yTotal/this.n));
+			}
+			set
+			{
+				Point centerTemp = new Point(this.Center.X, this.Center.Y);
+				foreach (Point i in this.Points)
+				{
+					i.Offset(value.X - centerTemp.X, value.Y - centerTemp.Y);
+				}
+			}
+		}
+
+		#endregion
 	}
 
 	/// <summary>
 	/// 
 	/// </summary>
-	public struct Pie 
+	public struct Pie : IPrimitive
 	{
 		short x;
 		short y;
@@ -1232,18 +1309,41 @@ namespace SdlDotNet
 			return x ^ y ^ r ^ startingAngle ^ endingAngle;
 
 		}
+		#region IPrimitive Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Center
+		{
+			get
+			{
+				// TODO:  Add Pie.Center getter implementation
+				return new Point((int)(this.r * Math.Sin(((this.startingAngle - this.endingAngle)*2*Math.PI/360)/(this.startingAngle - this.endingAngle)*2*Math.PI/360)),(int)(this.r * Math.Cos(1-(this.startingAngle - this.endingAngle)*2*Math.PI/360)/(this.startingAngle - this.endingAngle)*2*Math.PI/360));
+			}
+			set
+			{
+				Point centerTemp = new Point(this.Center.X, this.Center.Y);
+				this.Point.Offset(value.X - centerTemp.X, value.Y - centerTemp.Y);
+			}
+		}
+
+		#endregion
 	}
 
 	/// <summary>
 	/// 
 	/// </summary>
-	public struct Bezier
+	public struct Bezier : IPrimitive
 	{
 		const int MINIMUMSTEPS = 2;
 		short[] x;
 		short[] y;
 		int n;
 		int steps;
+		ArrayList list;
+		short xTotal;
+		short yTotal;
 
 		/// <summary>
 		/// 
@@ -1256,6 +1356,10 @@ namespace SdlDotNet
 			this.x = x;
 			this.y = y;
 			this.n = 0;
+			this.xTotal = 0;
+			this.yTotal = 0;
+			this.steps = steps;
+			this.list = new ArrayList();
 
 			if (steps < MINIMUMSTEPS)
 			{
@@ -1274,6 +1378,22 @@ namespace SdlDotNet
 			{
 				this.n = x.Length;
 			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="points"></param>
+		public Bezier(ArrayList points)
+		{
+			this.x = new short[points.Count];
+			this.y = new short[points.Count];
+			this.n = 0;
+			this.list = new ArrayList();
+			this.xTotal = 0;
+			this.yTotal = 0;
+			this.steps = points.Count;
+			this.Points = points;
 		}
 
 		/// <summary>
@@ -1423,6 +1543,59 @@ namespace SdlDotNet
 			return x.GetHashCode() ^ y.GetHashCode() ^ n ^ steps;
 
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public ArrayList Points
+		{
+			get
+			{
+				list.Clear();
+				for (int i = 0; i < this.n; i++)
+				{
+					list.Add(new Point(x[i], y[i]));	
+				}
+				return list;
+			}
+			set
+			{
+				for (int i = 0; i < value.Count; i++)
+				{
+					x[i] = (short)((Point)value[i]).X;
+					y[i] = (short)((Point)value[i]).Y;
+				}
+			}
+		}
+		#region IPrimitive Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Center
+		{
+			get
+			{
+				xTotal = 0;
+				yTotal = 0;
+				
+				for (int i = 0; i < list.Count; i++)
+				{
+					xTotal += (short)((Point)list[i]).X;
+					yTotal += (short)((Point)list[i]).Y;
+				}
+				return new Point((xTotal/this.n), (yTotal/this.n));
+			}
+			set
+			{
+				Point centerTemp = new Point(this.Center.X, this.Center.Y);
+				foreach (Point i in this.Points)
+				{
+					i.Offset(value.X - centerTemp.X, value.Y - centerTemp.Y);
+				}
+			}
+		}
+
+		#endregion
 	}
 	/// <summary>
 	/// 
