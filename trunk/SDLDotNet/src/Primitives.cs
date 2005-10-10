@@ -27,7 +27,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Circle
 	/// </summary>
-	public struct Circle
+	public struct Circle : IPrimitive
 	{
 		short x;
 		short y;
@@ -36,9 +36,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor for Circle
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="r"></param>
+		/// <param name="x">X coordinate of Center</param>
+		/// <param name="y">Y coordinate of Center</param>
+		/// <param name="r">Radius</param>
 		public Circle(short x, short y, short r)
 		{
 			this.x = x;
@@ -49,9 +49,8 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor for Circle
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="r"></param>
+		/// <param name="p">Center point</param>
+		/// <param name="r">Radius</param>
 		public Circle(Point p, short r)
 		{
 			this.x = (short)p.X;
@@ -62,7 +61,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Center of circle
 		/// </summary>
-		public Point Point
+		public Point Center
 		{
 			get
 			{
@@ -120,7 +119,7 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// string representation of circle
+		/// String representation of circle
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
@@ -128,7 +127,7 @@ namespace SdlDotNet
 			return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2})", x, y, r);
 		}
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
@@ -142,7 +141,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -153,7 +152,7 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Not equals operator
 		/// </summary>
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
@@ -164,7 +163,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Hash Code
 		/// </summary>
 		/// <returns></returns>
 		public override int GetHashCode()
@@ -175,9 +174,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// Ellipse Primitive
 	/// </summary>
-	public struct Ellipse
+	public struct Ellipse : IPrimitive
 	{
 		short x;
 		short y;
@@ -185,12 +184,12 @@ namespace SdlDotNet
 		short radiusY;
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="radiusX"></param>
-		/// <param name="radiusY"></param>
+		/// <param name="x">X coordinate of center</param>
+		/// <param name="y">Y coordinate of center</param>
+		/// <param name="radiusX">Radius on X axis</param>
+		/// <param name="radiusY">Radius on Y axis</param>
 		public Ellipse(short x, short y, short radiusX, short radiusY)
 		{
 			this.x = x;
@@ -200,7 +199,52 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Constructor
+		/// </summary>
+		/// <param name="point">Center</param>
+		/// <param name="size">Wdith and height of ellipse</param>
+		public Ellipse(Point point, Size size)
+		{
+			this.x = (short)point.X;
+			this.y = (short)point.Y;
+			this.radiusX = (short)size.Width;
+			this.radiusY = (short)size.Height;
+		}
+
+		/// <summary>
+		/// Center of ellipse
+		/// </summary>
+		public Point Center
+		{
+			get
+			{
+				return new Point(this.x, this.y);
+			}
+			set
+			{
+				this.x = (short)value.X;
+				this.y = (short)value.Y;
+			}
+		}
+
+		/// <summary>
+		/// Size struct representing width and height of ellipse
+		/// </summary>
+		public Size Size
+		{
+			get
+			{
+				return new Size(this.radiusX, this.radiusY);
+			}
+			set
+			{
+				this.radiusX = (short)value.Width;
+				this.radiusY = (short)value.Height;
+			}
+		}
+
+		/// <summary>
+		/// X position of center of ellipse
 		/// </summary>
 		public short XPosition
 		{
@@ -215,7 +259,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of center of ellipse
 		/// </summary>
 		public short YPosition
 		{
@@ -230,7 +274,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Width of ellipse
 		/// </summary>
 		public short RadiusX
 		{
@@ -245,7 +289,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Height of ellipse
 		/// </summary>
 		public short RadiusY
 		{
@@ -259,7 +303,7 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// String representation of ellipse
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
@@ -269,7 +313,7 @@ namespace SdlDotNet
 				"({0},{1}, {2}, {3}, {4})", x, y, radiusX, radiusY);
 		}
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
@@ -326,9 +370,9 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// Line primitive
 	/// </summary>
-	public struct Line
+	public struct Line : IPrimitive
 	{
 		short x1;
 		short y1;
@@ -336,7 +380,7 @@ namespace SdlDotNet
 		short y2;
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
 		/// <param name="x1"></param>
 		/// <param name="y1"></param>
@@ -348,6 +392,19 @@ namespace SdlDotNet
 			this.y1 = y1;
 			this.x2 = x2;
 			this.y2 = y2;
+		}
+
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="point1"></param>
+		/// <param name="point2"></param>
+		public Line(Point point1, Point point2)
+		{
+			this.x1 = (short)point1.X;
+			this.y1 = (short)point1.Y;
+			this.x2 = (short)point2.X;
+			this.y2 = (short)point2.Y;
 		}
 
 		/// <summary>
@@ -406,6 +463,38 @@ namespace SdlDotNet
 			set
 			{
 				this.y2 = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Point1
+		{
+			get
+			{
+				return new Point(this.x1, this.y1);
+			}
+			set
+			{
+				this.x1 = (short)value.X;
+				this.y1 = (short)value.Y;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Point2
+		{
+			get
+			{
+				return new Point(this.x2, this.y2);
+			}
+			set
+			{
+				this.x2 = (short)value.X;
+				this.y2 = (short)value.Y;
 			}
 		}
 
@@ -488,12 +577,33 @@ namespace SdlDotNet
 			return x1 ^ y1 ^ x2 ^ y2;
 
 		}
+		#region IPrimitive Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Center
+		{
+			get
+			{
+				return new Point((x1 + x2)/2, (y1 + y2)/2);
+			}
+			set
+			{
+				this.x1 += (short)(value.X - (x1 + x2)/2);
+				this.x2 += (short)(value.X - (x1 + x2)/2);
+				this.y1 += (short)(value.Y - (y1 + y2)/2);
+				this.y2 += (short)(value.Y - (y1 + y2)/2);
+			}
+		}
+
+		#endregion
 	}
 
 	/// <summary>
 	/// 
 	/// </summary>
-	public struct Triangle
+	public struct Triangle : IPrimitive
 	{
 		short x1;
 		short y1;
@@ -519,6 +629,70 @@ namespace SdlDotNet
 			this.y2 = y2;
 			this.x3 = x3;
 			this.y3 = y3;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="point1"></param>
+		/// <param name="point2"></param>
+		/// <param name="point3"></param>
+		public Triangle(Point point1, Point point2, Point point3)
+		{
+			this.x1 = (short)point1.X;
+			this.y1 = (short)point1.Y;
+			this.x2 = (short)point2.X;
+			this.y2 = (short)point2.Y;
+			this.x3 = (short)point3.X;
+			this.y3 = (short)point3.Y;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Point1
+		{
+			get
+			{
+				return new Point(this.x1, this.y1);
+			}
+			set
+			{
+				this.x1 = (short)value.X;
+				this.y1 = (short)value.Y;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Point2
+		{
+			get
+			{
+				return new Point(this.x2, this.y2);
+			}
+			set
+			{
+				this.x2 = (short)value.X;
+				this.y2 = (short)value.Y;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Point3
+		{
+			get
+			{
+				return new Point(this.x3, this.y3);
+			}
+			set
+			{
+				this.x3 = (short)value.X;
+				this.y3 = (short)value.Y;
+			}
 		}
 
 		/// <summary>
@@ -677,6 +851,29 @@ namespace SdlDotNet
 			return x1 ^ y1 ^ x2 ^ y2 ^ x3 ^ y3;
 
 		}
+		#region IPrimitive Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Center
+		{
+			get
+			{
+				return new Point ((this.x1 + this.x2 + this.x3)/3, (this.y1 + this.y2 + this.y3)/3);
+			}
+			set
+			{
+				this.x1 += (short)(value.X - (x1 + x2 + x3)/3);
+				this.x2 += (short)(value.X - (x1 + x2 + x3)/3);
+				this.x3 += (short)(value.X - (x1 + x2 + x3)/3);
+				this.y1 += (short)(value.Y - (y1 + y2 + y3)/3);
+				this.y2 += (short)(value.Y - (y1 + y2 + y3)/3);
+				this.y3 += (short)(value.Y - (y1 + y2 + y3)/3);
+			}
+		}
+
+		#endregion
 	}
 
 	/// <summary>
@@ -835,13 +1032,13 @@ namespace SdlDotNet
 	/// <summary>
 	/// 
 	/// </summary>
-	public struct Pie
+	public struct Pie 
 	{
 		short x;
 		short y;
 		short r;
-		short startingPoint;
-		short endingPoint;
+		short startingAngle;
+		short endingAngle;
 
 		/// <summary>
 		/// 
@@ -849,15 +1046,31 @@ namespace SdlDotNet
 		/// <param name="x"></param>
 		/// <param name="y"></param>
 		/// <param name="r"></param>
-		/// <param name="startingPoint"></param>
-		/// <param name="endingPoint"></param>
-		public Pie(short x, short y, short r, short startingPoint, short endingPoint)
+		/// <param name="startingAngle"></param>
+		/// <param name="endingAngle"></param>
+		public Pie(short x, short y, short r, short startingAngle, short endingAngle)
 		{
 			this.x = x;
 			this.y = y;
 			this.r = r;
-			this.startingPoint = startingPoint;
-			this.endingPoint = endingPoint;
+			this.startingAngle = startingAngle;
+			this.endingAngle = endingAngle;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="point"></param>
+		/// <param name="r"></param>
+		/// <param name="startingAngle"></param>
+		/// <param name="endingAngle"></param>
+		public Pie(Point point, short r, short startingAngle, short endingAngle)
+		{
+			this.x = (short)point.X;
+			this.y = (short)point.Y;
+			this.r = r;
+			this.startingAngle = startingAngle;
+			this.endingAngle = endingAngle;
 		}
 
 		/// <summary>
@@ -893,6 +1106,22 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		public Point Point
+		{
+			get
+			{
+				return new Point(this.x, this.y);
+			}
+			set
+			{
+				this.x = (short)value.X;
+				this.y = (short)value.Y;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public short Radius
 		{
 			get
@@ -908,30 +1137,30 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
-		public short StartingPoint
+		public short StartingAngle
 		{
 			get
 			{
-				return this.startingPoint;
+				return this.startingAngle;
 			}
 			set
 			{
-				this.startingPoint = value;
+				this.startingAngle = value;
 			}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public short EndingPoint
+		public short EndingAngle
 		{
 			get
 			{
-				return this.endingPoint;
+				return this.endingAngle;
 			}
 			set
 			{
-				this.endingPoint = value;
+				this.endingAngle = value;
 			}
 		}
 
@@ -944,7 +1173,7 @@ namespace SdlDotNet
 			return String.Format(
 				CultureInfo.CurrentCulture, 
 				"({0}, {1}, {2}, {3}, {4}, {5})", 
-				x, y, r, startingPoint, endingPoint);
+				x, y, r, startingAngle, endingAngle);
 		}
 		/// <summary>
 		/// 
@@ -961,8 +1190,8 @@ namespace SdlDotNet
 				(this.x == pie.x) && 
 				(this.y == pie.y) && 
 				(this.r == pie.r) && 
-				(this.startingPoint == pie.startingPoint) &&
-				(this.endingPoint == pie.endingPoint) 
+				(this.startingAngle == pie.startingAngle) &&
+				(this.endingAngle == pie.endingAngle) 
 				);
 		}
 
@@ -978,8 +1207,8 @@ namespace SdlDotNet
 				(pie1.x == pie2.x) && 
 				(pie1.y == pie2.y) && 
 				(pie1.r == pie2.r) && 
-				(pie1.startingPoint == pie2.startingPoint) && 
-				(pie1.endingPoint == pie2.endingPoint) 
+				(pie1.startingAngle == pie2.startingAngle) && 
+				(pie1.endingAngle == pie2.endingAngle) 
 				);
 		}
 		
@@ -1000,7 +1229,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public override int GetHashCode()
 		{
-			return x ^ y ^ r ^ startingPoint ^ endingPoint;
+			return x ^ y ^ r ^ startingAngle ^ endingAngle;
 
 		}
 	}
@@ -1198,7 +1427,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// 
 	/// </summary>
-	public struct Box
+	public struct Box : IPrimitive
 	{
 		short x1;
 		short y1;
@@ -1218,6 +1447,19 @@ namespace SdlDotNet
 			this.y1 = y1;
 			this.x2 = x2;
 			this.y2 = y2;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="point"></param>
+		/// <param name="size"></param>
+		public Box(Point point, Size size)
+		{
+			this.x1 = (short)point.X;
+			this.y1 = (short)point.Y;
+			this.x2 = (short)(point.X + size.Width);
+			this.y2 = (short)(point.Y + size.Height);
 		}
 
 		/// <summary>
@@ -1277,6 +1519,7 @@ namespace SdlDotNet
 			}
 		}
 
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -1346,6 +1589,22 @@ namespace SdlDotNet
 		/// <summary>
 		/// 
 		/// </summary>
+		public Size Size
+		{
+			get
+			{
+				return new Size(this.Width, this.Height);
+			}
+			set
+			{
+				this.Width = (short)value.Width;
+				this.Height = (short)value.Height;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
 		{
@@ -1406,5 +1665,26 @@ namespace SdlDotNet
 			return x1 ^ y1 ^ x2 ^ y2;
 
 		}
+		#region IPrimitive Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Point Center
+		{
+			get
+			{
+				return new Point((x1 + x2)/2, (y1 + y2)/2);
+			}
+			set
+			{
+				this.x1 += (short)(value.X - (x1 + x2)/2);
+				this.x2 += (short)(value.X - (x1 + x2)/2);
+				this.y1 += (short)(value.Y - (y1 + y2)/2);
+				this.y2 += (short)(value.Y - (y1 + y2)/2);
+			}
+		}
+
+		#endregion
 	}
 }

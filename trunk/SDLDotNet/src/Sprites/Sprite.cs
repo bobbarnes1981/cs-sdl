@@ -588,21 +588,47 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public static bool operator == (Sprite sprite1, Sprite sprite2)
 		{
-			try
-			{
-				return sprite1.Equals(sprite2);
-			}
-			catch (NullReferenceException)
-			{
-				try
+			object o1 = sprite1; 
+			object o2 = sprite2; 
+
+			if (o1 == null) 
+			{ 
+				if (o2 == null) 
 				{
-					return sprite2.Equals(sprite1);
+					return true; 
 				}
-				catch (NullReferenceException)
+				else 
 				{
 					return false;
 				}
+			} 
+			else 
+			{ 
+				if (o2 == null)
+				{
+					return false;
+				}
+				else 
+				{
+					return sprite1.Equals(sprite2); 
+				}
 			}
+
+//			try
+//			{
+//				return sprite1.Equals(sprite2);
+//			}
+//			catch (NullReferenceException)
+//			{
+//				try
+//				{
+//					return sprite2.Equals(sprite1);
+//				}
+//				catch (NullReferenceException)
+//				{
+//					return true;
+//				}
+//			}
 		}  
 		
 		/// <summary>

@@ -708,7 +708,7 @@ namespace SdlDotNet
 			result = SdlGfx.pieRGBA(
 				this.Handle, pie.XPosition, pie.YPosition, 
 				pie.Radius,
-				pie.StartingPoint, pie.EndingPoint, 
+				pie.StartingAngle, pie.EndingAngle, 
 				color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
@@ -730,7 +730,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			int result = SdlGfx.filledPieRGBA(this.Handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingPoint, pie.EndingPoint,color.R, color.G, color.B,
+			int result = SdlGfx.filledPieRGBA(this.Handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingAngle, pie.EndingAngle,color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
