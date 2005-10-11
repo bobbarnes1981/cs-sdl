@@ -614,14 +614,14 @@ namespace SdlDotNet
 		short y3;
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="x1"></param>
-		/// <param name="y1"></param>
-		/// <param name="x2"></param>
-		/// <param name="y2"></param>
-		/// <param name="x3"></param>
-		/// <param name="y3"></param>
+		/// <param name="x1">X position of first point</param>
+		/// <param name="y1">Y position of first point</param>
+		/// <param name="x2">X position of second point</param>
+		/// <param name="y2">Y position of second point</param>
+		/// <param name="x3">X position of third point</param>
+		/// <param name="y3">Y position of third point</param>
 		public Triangle(short x1, short y1, short x2, short y2, short x3, short y3)
 		{
 			this.x1 = x1;
@@ -633,11 +633,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="point1"></param>
-		/// <param name="point2"></param>
-		/// <param name="point3"></param>
+		/// <param name="point1">First point</param>
+		/// <param name="point2">Second point</param>
+		/// <param name="point3">Third point</param>
 		public Triangle(Point point1, Point point2, Point point3)
 		{
 			this.x1 = (short)point1.X;
@@ -649,7 +649,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// First point
 		/// </summary>
 		public Point Point1
 		{
@@ -665,7 +665,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Second point
 		/// </summary>
 		public Point Point2
 		{
@@ -681,7 +681,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Third point
 		/// </summary>
 		public Point Point3
 		{
@@ -697,7 +697,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// X position of first point
 		/// </summary>
 		public short XPosition1
 		{
@@ -712,7 +712,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of first point
 		/// </summary>
 		public short YPosition1
 		{
@@ -726,7 +726,7 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// X position of second point
 		/// </summary>
 		public short XPosition2
 		{
@@ -741,7 +741,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of second point
 		/// </summary>
 		public short YPosition2
 		{
@@ -755,7 +755,7 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// X position of third point
 		/// </summary>
 		public short XPosition3
 		{
@@ -770,7 +770,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of third point
 		/// </summary>
 		public short YPosition3
 		{
@@ -784,9 +784,9 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// String representation of triangle
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>string representation</returns>
 		public override string ToString()
 		{
 			return String.Format(
@@ -794,10 +794,10 @@ namespace SdlDotNet
 				"({0}, {1}, {2}, {3}, {4}, {5})", x1, y1, x2, y2, x3, y3);
 		}
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">triangle to compare</param>
+		/// <returns>true if triangles are equal</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(Triangle))
@@ -815,11 +815,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="triangle1"></param>
-		/// <param name="triangle2"></param>
-		/// <returns></returns>
+		/// <param name="triangle1">triangle to compare</param>
+		/// <param name="triangle2">triangle to compare</param>
+		/// <returns>true if triangles are equal</returns>
 		public static bool operator== (Triangle triangle1, Triangle triangle2)
 		{
 			return (
@@ -833,20 +833,20 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Not equals operator
 		/// </summary>
-		/// <param name="triangle1"></param>
-		/// <param name="triangle2"></param>
-		/// <returns></returns>
+		/// <param name="triangle1">triangle to compare</param>
+		/// <param name="triangle2">triangle to compare</param>
+		/// <returns>true if triangles are not equal</returns>
 		public static bool operator!= (Triangle triangle1, Triangle triangle2)
 		{
 			return !(triangle1 == triangle2);
 		}
 
 		/// <summary>
-		/// 
+		/// Hash code
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>hash code</returns>
 		public override int GetHashCode()
 		{
 			return x1 ^ y1 ^ x2 ^ y2 ^ x3 ^ y3;
@@ -855,7 +855,7 @@ namespace SdlDotNet
 		#region IPrimitive Members
 
 		/// <summary>
-		/// 
+		/// Center of triangle
 		/// </summary>
 		public Point Center
 		{
@@ -878,7 +878,7 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// Polygon primitive
 	/// </summary>
 	public struct Polygon : IPrimitive
 	{
@@ -890,10 +890,10 @@ namespace SdlDotNet
 		short yTotal;
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="x">array of x positions of points</param>
+		/// <param name="y">array of y positions of points</param>
 		public Polygon(short[] x, short[] y)
 		{
 			this.x = x;
@@ -914,9 +914,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="points"></param>
+		/// <param name="points">ArrayList of points</param>
 		public Polygon(ArrayList points)
 		{
 			this.x = new short[points.Count];
@@ -929,16 +929,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get Array of all X positions
 		/// </summary>
 		public short[] XPositions()
 		{
 			return this.x;
 		}
 		/// <summary>
-		/// 
+		/// Set array of X positions
 		/// </summary>
-		/// <param name="x"></param>
+		/// <param name="x">x positions</param>
 		public void XPositions(short[] x)
 		{
 			if (x.Length != y.Length)
@@ -953,16 +953,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get array of Y positions
 		/// </summary>
 		public short[] YPositions()
 		{
 			return this.y;
 		}
 		/// <summary>
-		/// 
+		/// Set array of Y positions
 		/// </summary>
-		/// <param name="y"></param>
+		/// <param name="y">array of Y positions</param>
 		public void YPositions(short[] y)
 		{
 			if (this.x.Length != y.Length)
@@ -977,7 +977,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Number of sides of the polygon
 		/// </summary>
 		public int NumberOfSides
 		{
@@ -988,7 +988,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Arraylist of all the points of the polygon
 		/// </summary>
 		public ArrayList Points
 		{
@@ -1011,9 +1011,9 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// String representation of polygon
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>string representation</returns>
 		public override string ToString()
 		{
 			return String.Format(
@@ -1022,10 +1022,10 @@ namespace SdlDotNet
 				x, y, n);
 		}
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">polygon to compare</param>
+		/// <returns>true if the polygons are equal</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(Polygon))
@@ -1040,11 +1040,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="polygon1"></param>
-		/// <param name="polygon2"></param>
-		/// <returns></returns>
+		/// <param name="polygon1">polygon to compare</param>
+		/// <param name="polygon2">polygon to compare</param>
+		/// <returns>true if the polygons are equal</returns>
 		public static bool operator== (Polygon polygon1, Polygon polygon2)
 		{
 			return (
@@ -1055,20 +1055,20 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Not equals operator
 		/// </summary>
-		/// <param name="polygon1"></param>
-		/// <param name="polygon2"></param>
-		/// <returns></returns>
+		/// <param name="polygon1">polygon to compare</param>
+		/// <param name="polygon2">polygon to compare</param>
+		/// <returns>true if the polygons are equal</returns>
 		public static bool operator!= (Polygon polygon1, Polygon polygon2)
 		{
 			return !(polygon1 == polygon2);
 		}
 
 		/// <summary>
-		/// 
+		/// Hash code
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>hash code</returns>
 		public override int GetHashCode()
 		{
 			return x.GetHashCode() ^ y.GetHashCode() ^ n;
@@ -1077,7 +1077,7 @@ namespace SdlDotNet
 		#region IPrimitive Members
 
 		/// <summary>
-		/// 
+		/// Center of polygon
 		/// </summary>
 		public Point Center
 		{
@@ -1107,7 +1107,7 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// Pie-shaped primitive
 	/// </summary>
 	public struct Pie : IPrimitive
 	{
@@ -1118,13 +1118,13 @@ namespace SdlDotNet
 		short endingAngle;
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="r"></param>
-		/// <param name="startingAngle"></param>
-		/// <param name="endingAngle"></param>
+		/// <param name="x">X position of vertex</param>
+		/// <param name="y">Y position of vertex</param>
+		/// <param name="r">Radius</param>
+		/// <param name="startingAngle">Starting angle in degrees</param>
+		/// <param name="endingAngle">Ending angle in degrees</param>
 		public Pie(short x, short y, short r, short startingAngle, short endingAngle)
 		{
 			this.x = x;
@@ -1135,12 +1135,12 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="point"></param>
-		/// <param name="r"></param>
-		/// <param name="startingAngle"></param>
-		/// <param name="endingAngle"></param>
+		/// <param name="point">Position of vertex</param>
+		/// <param name="r">Radius</param>
+		/// <param name="startingAngle">Starting angle in degrees</param>
+		/// <param name="endingAngle">Ending angle in degrees</param>
 		public Pie(Point point, short r, short startingAngle, short endingAngle)
 		{
 			this.x = (short)point.X;
@@ -1151,7 +1151,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// X position of vertex
 		/// </summary>
 		public short XPosition
 		{
@@ -1166,7 +1166,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of vertex
 		/// </summary>
 		public short YPosition
 		{
@@ -1181,7 +1181,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Vertex
 		/// </summary>
 		public Point Point
 		{
@@ -1197,7 +1197,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Radius
 		/// </summary>
 		public short Radius
 		{
@@ -1212,7 +1212,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Starting angle in degrees
 		/// </summary>
 		public short StartingAngle
 		{
@@ -1227,7 +1227,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Ending angle in degrees
 		/// </summary>
 		public short EndingAngle
 		{
@@ -1242,9 +1242,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// String representation of pie
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>String representation</returns>
 		public override string ToString()
 		{
 			return String.Format(
@@ -1253,10 +1253,10 @@ namespace SdlDotNet
 				x, y, r, startingAngle, endingAngle);
 		}
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">pie to compare</param>
+		/// <returns>true if pies are equal</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(Pie))
@@ -1273,11 +1273,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="pie1"></param>
-		/// <param name="pie2"></param>
-		/// <returns></returns>
+		/// <param name="pie1">pie to compare</param>
+		/// <param name="pie2">pie to compare</param>
+		/// <returns>true if pies are equal</returns>
 		public static bool operator== (Pie pie1, Pie pie2)
 		{
 			return (
@@ -1290,20 +1290,20 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// not equals operator
 		/// </summary>
-		/// <param name="pie1"></param>
-		/// <param name="pie2"></param>
-		/// <returns></returns>
+		/// <param name="pie1">pie to compare</param>
+		/// <param name="pie2">pie to comapre</param>
+		/// <returns>true if pies are not equal</returns>
 		public static bool operator!= (Pie pie1, Pie pie2)
 		{
 			return !(pie1 == pie2);
 		}
 
 		/// <summary>
-		/// 
+		/// hash code
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>hash code</returns>
 		public override int GetHashCode()
 		{
 			return x ^ y ^ r ^ startingAngle ^ endingAngle;
@@ -1312,13 +1312,12 @@ namespace SdlDotNet
 		#region IPrimitive Members
 
 		/// <summary>
-		/// 
+		/// Center of pie
 		/// </summary>
 		public Point Center
 		{
 			get
 			{
-				// TODO:  Add Pie.Center getter implementation
 				return new Point((int)(this.r * Math.Sin(((this.startingAngle - this.endingAngle)*2*Math.PI/360)/(this.startingAngle - this.endingAngle)*2*Math.PI/360)),(int)(this.r * Math.Cos(1-(this.startingAngle - this.endingAngle)*2*Math.PI/360)/(this.startingAngle - this.endingAngle)*2*Math.PI/360));
 			}
 			set
@@ -1332,7 +1331,7 @@ namespace SdlDotNet
 	}
 
 	/// <summary>
-	/// 
+	/// Bezier curve
 	/// </summary>
 	public struct Bezier : IPrimitive
 	{
@@ -1346,11 +1345,11 @@ namespace SdlDotNet
 		short yTotal;
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="steps"></param>
+		/// <param name="x">array of x positions</param>
+		/// <param name="y">array of y positions</param>
+		/// <param name="steps">number of steps in curve</param>
 		public Bezier(short[] x, short[] y, int steps)
 		{
 			this.x = x;
@@ -1381,10 +1380,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="points"></param>
-		public Bezier(ArrayList points)
+		/// <param name="points">Points of curve</param>
+		/// <param name="steps">number of steps in curve</param>
+		public Bezier(ArrayList points, int steps)
 		{
 			this.x = new short[points.Count];
 			this.y = new short[points.Count];
@@ -1394,17 +1394,27 @@ namespace SdlDotNet
 			this.yTotal = 0;
 			this.steps = points.Count;
 			this.Points = points;
+			this.steps = steps;
+
+			if (steps < MINIMUMSTEPS)
+			{
+				this.steps = MINIMUMSTEPS;
+			}
+			else
+			{
+				this.steps = steps;
+			}
 		}
 
 		/// <summary>
-		/// 
+		/// Get array of x positions of point
 		/// </summary>
 		public short[] XPositions()
 		{
 			return this.x;
 		}
 		/// <summary>
-		/// 
+		/// Set array of x positions of points
 		/// </summary>
 		/// <param name="x"></param>
 		public void XPositions(short[] x)
@@ -1421,14 +1431,14 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Get array of y positions of points
 		/// </summary>
 		public short[] YPositions()
 		{
 			return this.y;
 		}
 		/// <summary>
-		/// 
+		/// Set array of y positions of points
 		/// </summary>
 		/// <param name="y"></param>
 		public void YPositions(short[] y)
@@ -1445,7 +1455,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Number of points in curve
 		/// </summary>
 		public int NumberOfPoints
 		{
@@ -1456,7 +1466,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Number of steps in curve
 		/// </summary>
 		public int Steps
 		{
@@ -1478,9 +1488,9 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// String representation of bezier curve
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>string representation</returns>
 		public override string ToString()
 		{
 			return String.Format(
@@ -1489,10 +1499,10 @@ namespace SdlDotNet
 				x, y, n, steps);
 		}
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">bezier to compare</param>
+		/// <returns>true if bezier curves are equals</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(Bezier))
@@ -1508,11 +1518,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="bezier1"></param>
-		/// <param name="bezier2"></param>
-		/// <returns></returns>
+		/// <param name="bezier1">curve to compare</param>
+		/// <param name="bezier2">curve to compare</param>
+		/// <returns>true if curves are equal</returns>
 		public static bool operator== (Bezier bezier1, Bezier bezier2)
 		{
 			return (
@@ -1524,27 +1534,27 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Not equals operator
 		/// </summary>
-		/// <param name="bezier1"></param>
-		/// <param name="bezier2"></param>
-		/// <returns></returns>
+		/// <param name="bezier1">curve to compare</param>
+		/// <param name="bezier2">curve to compare</param>
+		/// <returns>true if curves are not equal</returns>
 		public static bool operator!= (Bezier bezier1, Bezier bezier2)
 		{
 			return !(bezier1 == bezier2);
 		}
 
 		/// <summary>
-		/// 
+		/// Hash code
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>hash code</returns>
 		public override int GetHashCode()
 		{
 			return x.GetHashCode() ^ y.GetHashCode() ^ n ^ steps;
 
 		}
 		/// <summary>
-		/// 
+		/// List of point that make up curve
 		/// </summary>
 		public ArrayList Points
 		{
@@ -1569,7 +1579,7 @@ namespace SdlDotNet
 		#region IPrimitive Members
 
 		/// <summary>
-		/// 
+		/// Center of curve
 		/// </summary>
 		public Point Center
 		{
@@ -1598,7 +1608,7 @@ namespace SdlDotNet
 		#endregion
 	}
 	/// <summary>
-	/// 
+	/// Box primitive
 	/// </summary>
 	public struct Box : IPrimitive
 	{
@@ -1608,12 +1618,12 @@ namespace SdlDotNet
 		short y2;
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="x1"></param>
-		/// <param name="y1"></param>
-		/// <param name="x2"></param>
-		/// <param name="y2"></param>
+		/// <param name="x1">X position of upper-left point</param>
+		/// <param name="y1">Y position of upper-left point</param>
+		/// <param name="x2">X position of lower-right point</param>
+		/// <param name="y2">Y position of lower-right point</param>
 		public Box(short x1, short y1, short x2, short y2)
 		{
 			this.x1 = x1;
@@ -1623,33 +1633,33 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="point"></param>
-		/// <param name="size"></param>
-		public Box(Point point, Size size)
+		/// <param name="upperLeftPoint">Position of upper-left point</param>
+		/// <param name="size">Size of box</param>
+		public Box(Point upperLeftPoint, Size size)
 		{
-			this.x1 = (short)point.X;
-			this.y1 = (short)point.Y;
-			this.x2 = (short)(point.X + size.Width);
-			this.y2 = (short)(point.Y + size.Height);
+			this.x1 = (short)upperLeftPoint.X;
+			this.y1 = (short)upperLeftPoint.Y;
+			this.x2 = (short)(upperLeftPoint.X + size.Width);
+			this.y2 = (short)(upperLeftPoint.Y + size.Height);
 		}
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
-		/// <param name="point1"></param>
-		/// <param name="point2"></param>
-		public Box(Point point1, Point point2)
+		/// <param name="upperLeftPoint">Position of upper-left point</param>
+		/// <param name="lowerRightPoint">Position of lower-right point</param>
+		public Box(Point upperLeftPoint, Point lowerRightPoint)
 		{
-			this.x1 = (short)point1.X;
-			this.y1 = (short)point1.Y;
-			this.x2 = (short)point2.X;
-			this.y2 = (short)point2.Y;
+			this.x1 = (short)upperLeftPoint.X;
+			this.y1 = (short)upperLeftPoint.Y;
+			this.x2 = (short)lowerRightPoint.X;
+			this.y2 = (short)lowerRightPoint.Y;
 		}
 
 		/// <summary>
-		/// 
+		/// X position of upper-left point
 		/// </summary>
 		public short XPosition1
 		{
@@ -1664,7 +1674,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Y position of upper-left point
 		/// </summary>
 		public short YPosition1
 		{
@@ -1678,7 +1688,7 @@ namespace SdlDotNet
 			}
 		}
 		/// <summary>
-		/// 
+		/// X position of lower-right point
 		/// </summary>
 		public short XPosition2
 		{
@@ -1694,7 +1704,7 @@ namespace SdlDotNet
 
 		
 		/// <summary>
-		/// 
+		/// Y position of lower-right point
 		/// </summary>
 		public short YPosition2
 		{
@@ -1709,7 +1719,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Height of box
 		/// </summary>
 		public short Height
 		{
@@ -1725,7 +1735,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Width of box
 		/// </summary>
 		public short Width
 		{
@@ -1741,7 +1751,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Position of upper-left point
 		/// </summary>
 		public Point Location
 		{
@@ -1760,7 +1770,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Size of box
 		/// </summary>
 		public Size Size
 		{
@@ -1776,7 +1786,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// String representation of box
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString()
@@ -1784,10 +1794,10 @@ namespace SdlDotNet
 			return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2}, {3})", x1, y1, x2, y2);
 		}
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
+		/// <param name="obj">box to compare</param>
+		/// <returns>true if boxes are the same</returns>
 		public override bool Equals(object obj)
 		{
 			if (obj.GetType() != typeof(Box))
@@ -1803,11 +1813,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Equals operator
 		/// </summary>
-		/// <param name="box1"></param>
-		/// <param name="box2"></param>
-		/// <returns></returns>
+		/// <param name="box1">box to compare</param>
+		/// <param name="box2">box to compare</param>
+		/// <returns>true if boxes are the equal</returns>
 		public static bool operator== (Box box1, Box box2)
 		{
 			return (
@@ -1819,20 +1829,20 @@ namespace SdlDotNet
 		}
 		
 		/// <summary>
-		/// 
+		/// Not equals operator
 		/// </summary>
-		/// <param name="box1"></param>
-		/// <param name="box2"></param>
-		/// <returns></returns>
+		/// <param name="box1">box to compare</param>
+		/// <param name="box2">box to compare</param>
+		/// <returns>true if boxes are not equal</returns>
 		public static bool operator!= (Box box1, Box box2)
 		{
 			return !(box1 == box2);
 		}
 
 		/// <summary>
-		/// 
+		/// Hash code
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>hash code</returns>
 		public override int GetHashCode()
 		{
 			return x1 ^ y1 ^ x2 ^ y2;
@@ -1841,7 +1851,7 @@ namespace SdlDotNet
 		#region IPrimitive Members
 
 		/// <summary>
-		/// 
+		/// Center of box
 		/// </summary>
 		public Point Center
 		{
