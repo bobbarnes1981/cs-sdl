@@ -29,6 +29,7 @@
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Data.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Windows.Forms.dll"/>
 	    </references>
 	</csc>
