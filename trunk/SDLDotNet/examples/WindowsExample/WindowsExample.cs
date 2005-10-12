@@ -17,74 +17,127 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using System; 
-using System.Drawing; 
-using System.Windows.Forms; 
-using System.Runtime.InteropServices; 
-using System.Text; 
-
-using SdlDotNet; 
+using System;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Data;
+using System.Threading;
+using System.Drawing.Imaging;
 
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Summary description for WindowsExample.
 	/// </summary>
-	public class WindowsExample 
-	{ 
-		private const int width = 640; 
-		private const int height = 480; 
-		//private const int bpp = 32; 
-		private Random rand; 
-		private bool quit; 
-		private Surface screen; 
+	public class WindowsExample : System.Windows.Forms.Form
+	{
+		private System.Windows.Forms.Button button1;
+
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.Container components = null;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public WindowsExample() 
-		{ 
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown); 
-			Events.Quit += new QuitEventHandler(this.Quit); 
-			screen = Video.SetVideoModeWindow(width, height); 
-			Video.WindowCaption = "SDL.NET - Windows Example";
-			rand = new Random();  
-		} 
-		private void KeyDown(object sender, KeyboardEventArgs e) 
-		{ 
-			if (e.Key == Key.Escape) 
-			{ 
-				quit = true; 
-			} 
-		} 
-
-		private void Quit(object sender, QuitEventArgs e) 
-		{ 
-			quit = true; 
-		} 
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Run() 
+		public WindowsExample()
 		{
-			while (quit == false) 
-			{ 
-				while (Events.Poll()) 
-				{ 
-				} 
-				screen.Lock(); 
-				screen.Fill(Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255))); 
-				System.Threading.Thread.Sleep(100); 
-				screen.Unlock(); 
-				screen.Flip(); 
-				ControlPaint.DrawButton(System.Drawing.Graphics.FromHwnd(Video.WindowHandle), 0, 0, 100, 100, ButtonState.Normal); 
-			} 
-		} 
+			//
+			// Required for Windows Form Designer support
+			//
+			InitializeComponent();
+			surf = new Surface(this.ClientSize.Width,this.ClientSize.Height, false);
+		}
+
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		protected override void Dispose( bool disposing )
+		{
+			if( disposing )
+			{
+				if (components != null) 
+				{
+					components.Dispose();
+				}
+			}
+			base.Dispose( disposing );
+		}
+
+		#region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			this.button1 = new System.Windows.Forms.Button();
+			this.SuspendLayout();
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(128, 96);
+			this.button1.Name = "button1";
+			this.button1.TabIndex = 0;
+			this.button1.Text = "button1";
+			// 
+			// WindowsExample
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.ClientSize = new System.Drawing.Size(300, 300);
+			this.Controls.Add(this.button1);
+			this.Name = "SDL.NET - WindowsExample";
+			this.Text = "SDL.NET - WindowsExample";
+			this.Load += new System.EventHandler(this.WindowsExample_Load);
+			this.ResumeLayout(false);
+
+		}
+		#endregion
+
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		[STAThread]
 		static void Main() 
-		{ 
-			WindowsExample t = new WindowsExample(); 
-			t.Run(); 
-		} 
-	} 
+		{
+			SdlDotNet.Events.Fps = 30;
+			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(Events_Tick);
+			Application.Run(WindowsExample.Instance = new WindowsExample());
+		}
+
+		private static System.Random rand = new Random();
+		private Graphics gfx;
+		private static WindowsExample Instance;
+		private static SdlDotNet.Surface surf;
+		private static Bitmap img;
+
+		private static void Events_Tick(object sender, SdlDotNet.TickEventArgs e)
+		{
+			surf.Fill(Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)));
+			surf.Update();
+			WindowsExample.Instance.UpdateForm();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void UpdateForm()
+		{
+			img = surf.ToBitmap();
+			WindowsExample.Instance.gfx.DrawImage(img,0,0);
+		}
+
+		private void WindowsExample_Load(object sender, System.EventArgs e)
+		{
+			WindowsExample.Instance.gfx = Graphics.FromHwnd(this.Handle);
+			Thread a = new Thread(new ThreadStart(SdlDotNet.Events.Run));
+			a.IsBackground = true;
+			a.Name = "SDL";
+			a.Priority = ThreadPriority.Normal;
+			a.Start();
+		}
+	}
 }
