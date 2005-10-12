@@ -39,6 +39,11 @@ namespace SdlDotNet
 		private bool disposed;
 		private Color transparentColor;
 
+		// Bmp files have a header of 54 bytes. 
+		// This is used to turn the Surface into a byte array to 
+		// load into a Bitmap object
+		private readonly int BmpHeader = 54;
+		
 		#region Constructors and Destructors
 		/// <summary>
 		/// 
@@ -46,6 +51,10 @@ namespace SdlDotNet
 		/// <param name="handle"></param>
 		internal Surface(IntPtr handle) 
 		{
+			if (!Video.IsInitialized)
+			{
+				Video.Initialize();
+			}
 			this.Handle = handle;
 		}
 
@@ -100,6 +109,10 @@ namespace SdlDotNet
 		/// </summary> 
 		public Surface(string file)
 		{
+			if (!Video.IsInitialized)
+			{
+				Video.Initialize();
+			}
 			this.Handle = SdlImage.IMG_Load(file);
 			if (this.Handle == IntPtr.Zero)
 			{
@@ -130,11 +143,62 @@ namespace SdlDotNet
 		/// <param name="height">Height of surface</param>
 		public Surface(int width, int height)
 		{
+			if (!Video.IsInitialized)
+			{
+				Video.Initialize();
+			}
 			this.Handle = 
 				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
 			if (this.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
+		/// Create surface of a given width and height
+		/// </summary>
+		/// <param name="width">Width of surface</param>
+		/// <param name="height">Height of surface</param>
+		/// <param name="useScreen">
+		/// Use screen attributes. If false, BitsPerPixel will be 32.
+		/// </param>
+		public Surface(int width, int height, bool useScreen)
+		{
+			if (!Video.IsInitialized)
+			{
+				Video.Initialize();
+			}
+			if (useScreen)
+			{
+				this.Handle = 
+					Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
+				if (this.Handle == IntPtr.Zero)
+				{
+					throw SdlException.Generate();
+				}
+			}
+			else
+			{
+				int Rmask = 0x00000000;
+				int Gmask = 0x00ff0000;
+				int Bmask = 0x0000ff00;
+				int Amask = 0x000000ff;
+				int bpp = 32;
+
+				this.Handle = Sdl.SDL_CreateRGBSurface(
+					(int)VideoModes.None,
+					width, 
+					height, 
+					bpp,
+					Rmask, 
+					Gmask, 
+					Bmask, 
+					Amask);
+				if (this.Handle == IntPtr.Zero)
+				{
+					throw SdlException.Generate();
+				}
 			}
 		}
 
@@ -153,6 +217,10 @@ namespace SdlDotNet
 		/// </param>
 		public Surface(byte[] array)
 		{
+			if (!Video.IsInitialized)
+			{
+				Video.Initialize();
+			}
 			this.Handle = 
 				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
 			if (this.Handle == IntPtr.Zero) 
@@ -169,6 +237,10 @@ namespace SdlDotNet
 		/// <param name="bitmap">A System.Drawing.Bitmap object</param>
 		public Surface(System.Drawing.Bitmap bitmap)
 		{
+			if (!Video.IsInitialized)
+			{
+				Video.Initialize();
+			}
 			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
@@ -187,6 +259,10 @@ namespace SdlDotNet
         /// <param name="surface">The surface to copy.</param>
         public Surface(Surface surface)
         {
+			if (!Video.IsInitialized)
+			{
+				Video.Initialize();
+			}
             this.Handle = SdlGfx.zoomSurface(surface.Handle, 1, 1, SdlGfx.SMOOTHING_OFF);
             if (this.Handle == IntPtr.Zero)
             {
@@ -286,19 +362,20 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a Bitmap representing the Surface.
 		/// </summary>
-		/// <returns>A new bitmap image representing the surface.
+		/// <returns>
+		/// A new bitmap image representing the surface.
 		/// </returns>
 		public Bitmap ToBitmap() 
 		{ 
-			Bitmap newBitmap = new Bitmap(this.Width, this.Height); 
-			for(int y = 0; y < newBitmap.Height; y++)
+			byte[] arr = new byte[this.Width * this.Height * this.BytesPerPixel + this.BmpHeader];
+			int result = 
+				Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(arr, arr.Length), 1);
+
+			if (result != (int) SdlFlag.Success)
 			{
-				for(int x = 0; x < newBitmap.Width; x++)
-				{
-					newBitmap.SetPixel(x,y,this.GetPixel(x,y));
-				}
+				throw SdlException.Generate();
 			}
-			return newBitmap; 
+			return new Bitmap(new MemoryStream(arr));
 		}
 
 		/// <summary>
