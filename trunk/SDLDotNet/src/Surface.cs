@@ -367,7 +367,7 @@ namespace SdlDotNet
 		/// </returns>
 		public Bitmap ToBitmap() 
 		{ 
-			byte[] arr = new byte[this.Width * this.Height * this.BytesPerPixel + this.BmpHeader];
+			byte[] arr = new byte[(this.Width * this.Height * this.BytesPerPixel) + this.BmpHeader];
 			int result = 
 				Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(arr, arr.Length), 1);
 
