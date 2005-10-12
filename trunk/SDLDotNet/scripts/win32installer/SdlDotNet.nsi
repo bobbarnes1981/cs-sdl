@@ -1,7 +1,7 @@
 !verbose 3
 
 !define PRODUCT_NAME "SdlDotNet"
-!define PRODUCT_VERSION "3.2.0"
+!define PRODUCT_VERSION "4.0.0alpha1"
 !define PRODUCT_BUILD "1"
 !define PRODUCT_PUBLISHER "SdlDotNet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
