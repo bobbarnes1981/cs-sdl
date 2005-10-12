@@ -482,6 +482,7 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
+		#region IntersectsWith
 		/// <summary>
 		/// Checks if Sprite intersects with a point
 		/// </summary>
@@ -514,6 +515,138 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
+		/// Checks for collision between two sprites using a radius from the center of the sprites.
+		/// </summary>
+		/// <param name="sprite">The sprite to compare to.</param>
+		/// <param name="radius">The radius of the current sprite. Defaults to the radius of the sprite.</param>
+		/// <param name="radiusOther">The other sprite's radius. Defaults to the radius of the sprite.</param>
+		/// <param name="offset">The size of the buffer zone for collision detection. Defaults to 0.</param>
+		/// <returns>True if they intersect, false if they don't.</returns>
+		/// <remarks>If they radius is not given, it calculates it for you using half the width plus half the height.</remarks>
+		public virtual bool IntersectsWithRadius(Sprite sprite, int radius, int radiusOther, int offset)
+		{
+			Point center1 = this.Center;
+			Point center2 = sprite.Center;
+			int xdiff = center2.X - center1.X;	// x plane difference
+			int ydiff = center2.Y - center1.Y;	// y plane difference
+	
+			// distance between the circles centres squared
+			int dcentre_sq = (ydiff*ydiff) + (xdiff*xdiff);
+	
+			// calculate sum of radiuses squared
+			int r_sum_sq = radius + radiusOther;
+			r_sum_sq *= r_sum_sq;
+
+			return (dcentre_sq - r_sum_sq <= (offset*offset));
+		}
+
+		/// <summary>
+		/// Checks for collision between two sprites using a radius from the center of the sprites.
+		/// </summary>
+		/// <param name="sprite">The sprite to compare to.</param>
+		/// <param name="radius">The radius of the current sprite. Defaults to the radius of the sprite.</param>
+		/// <param name="radiusOther">The other sprite's radius. Defaults to the radius of the sprite.</param>
+		/// <returns>True if they intersect, false if they don't.</returns>
+		/// <remarks>The offset defaults to 0.</remarks>
+		public virtual bool IntersectsWithRadius(Sprite sprite, int radius, int radiusOther)
+		{
+			return IntersectsWithRadius(sprite, radius, radiusOther, 0);
+		}
+
+		/// <summary>
+		/// Checks for collision between two sprites using a radius from the center of the sprites.
+		/// </summary>
+		/// <param name="sprite">The sprite to compare to.</param>
+		/// <param name="radius">The radius of the sprites.</param>
+		/// <returns>True if they intersect, false if they don't.</returns>
+		public virtual bool IntersectsWithRadius(Sprite sprite, int radius)
+		{
+			return IntersectsWithRadius(sprite, radius, radius, 0);
+		}
+
+		/// <summary>
+		/// Checks for collision between two sprites using a radius from the center of the sprites.
+		/// </summary>
+		/// <param name="sprite">The sprite to compare to.</param>
+		/// <returns>True if they intersect, false if they don't.</returns>
+		/// <remarks>The radius for both the sprites is calculated by using half the width and half the height.</remarks>
+		public virtual bool IntersectsWithRadius(Sprite sprite)
+		{
+			int r1 = (this.Width + this.Height) / 4;
+			int r2 = (sprite.Width + sprite.Height) / 4;
+			return IntersectsWithRadius(sprite, r1, r2, 0);
+		}
+
+		/// <summary>
+		/// Checks for a collisions between two sprites using Pixel Perfect Precision. DOES NOT WORK!
+		/// </summary>
+		/// <param name="sprite">The sprite to compare to.</param>
+		/// <returns>True if they intersect, false if they don't.</returns>
+		public virtual bool IntersectsWithPixelPrecision(Sprite sprite)
+		{
+
+			// To implement into Bouncing sprites, change the following:
+			// In BouncingSprites.cs at top:
+			//		private int maxBalls = 2; //number of balls to display
+			// In BouncingSprites.cs in OnTick:
+			//		if(master[0].IntersectsWithPixelPrecision(master[1]))
+			//			SdlDotNet.Video.WindowCaption = "Collision";
+			//		else
+			//			SdlDotNet.Video.WindowCaption = "No collision";
+			int ax = this.X;
+			int ay = this.Y;
+			int bx = sprite.X;
+			int by = sprite.Y;
+			int ax1 = ax + this.Width - 1;
+			int ay1 = ay + this.Height - 1;
+			int bx1 = bx + sprite.Width - 1;
+			int by1 = by + sprite.Height - 1;
+
+			/*check if bounding boxes intersect*/
+			if((bx1 < ax) || (ax1 < bx))
+				return false;
+			if((by1 < ay) || (ay1 < by))
+				return false;
+
+			// Make intersection points
+			int inter_x0 = ax>bx?ax:bx;
+			int inter_x1 = ax1>bx1?ax1:bx1;
+			int inter_y0 = ay>by?ay:by;
+			int inter_y1 = ay1>by1?ay1:by1;
+
+			// Check for pixel collision
+			for(int y = inter_y0 ; y <= inter_y1 ; y++)
+			{
+				for(int x = inter_x0 ; x <= inter_x1 ; x++)
+				{
+					// TODO: Fix PixelPresicion
+					// Get the pixel colors
+					System.Drawing.Color col1 = this.Surface.GetPixel(x-ax,y-ay);
+					System.Drawing.Color col2 = sprite.Surface.GetPixel(x-bx,y-by);
+
+					// Check alphas
+//					if(col1.A != 0)
+//						if(col2.A != 0)
+//							return true;
+
+					// Check color keys
+					if(this.Surface.GetColorValue(col1)!=this.Surface.PixelFormat.colorkey)
+						if(sprite.Surface.GetColorValue(col2)!=sprite.Surface.PixelFormat.colorkey)
+							return true;
+
+					// Why isn't it working?!
+
+					
+					// This is the Clippet from SDL_Collide
+					//if((SDL_CollideTransparentPixelTest(as , x-ax , y-ay))
+					//&& (SDL_CollideTransparentPixelTest(bs , x-bx , y-by)))
+						//return 1;
+				}
+			}
+			return false;
+		}
+
+		/// <summary>
 		/// Check to see if Sprite intersects with any sprite in a SpriteCollection
 		/// </summary>
 		/// <param name="spriteCollection">Collection to chekc the intersection with</param>
@@ -529,6 +662,7 @@ namespace SdlDotNet.Sprites
 			}
 			return false;
 		}
+		#endregion IntersectsWith
 		#endregion
 
 		#region Operators
