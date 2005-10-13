@@ -362,20 +362,20 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a Bitmap representing the Surface.
 		/// </summary>
-		/// <returns>
-		/// A new bitmap image representing the surface.
-		/// </returns>
-		public Bitmap ToBitmap() 
+		public Bitmap Bitmap 
 		{ 
-			byte[] arr = new byte[(this.Width * this.Height * this.BytesPerPixel) + this.BmpHeader];
-			int result = 
-				Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(arr, arr.Length), 1);
-
-			if (result != (int) SdlFlag.Success)
+			get
 			{
-				throw SdlException.Generate();
+				byte[] arr = new byte[(this.Width * this.Height * this.BytesPerPixel) + this.BmpHeader];
+				int result = 
+					Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(arr, arr.Length), 1);
+
+				if (result != (int) SdlFlag.Success)
+				{
+					throw SdlException.Generate();
+				}
+				return new Bitmap(new MemoryStream(arr));
 			}
-			return new Bitmap(new MemoryStream(arr));
 		}
 
 		/// <summary>

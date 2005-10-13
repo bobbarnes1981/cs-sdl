@@ -38,17 +38,20 @@ namespace SdlDotNet.Windows
 	///     Sdl Surface applications.
 	/// </summary>
 	#endregion Class Documentation
+	[ToolboxBitmap(typeof(Bitmap),"SurfaceControl.bmp")]
 	public class SurfaceControl : System.Windows.Forms.PictureBox
 	{
 		Surface surface;
+		Bitmap bitmap;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public SurfaceControl()
 		{
-			surface = Video.CreateRgbSurface(this.Width,this.Height);
-			this.Image = (Image)surface.ToBitmap();
+			SdlDotNet.Events.Tick +=new TickEventHandler(OnTick);
+			surface = new Surface(this.Width,this.Height, false);
+			this.Image = surface.Bitmap;
 		}
 
 		/// <summary>
@@ -58,15 +61,12 @@ namespace SdlDotNet.Windows
 		{
 			get
 			{
-							
-				//this.Image = (Image)surface.ToBitmap();
-				//this.InvokePaint(this, new /PaintEventArgs();
 				return surface;
 			}
 			set
 			{
 				surface = value;
-				this.Image = (Image)surface.ToBitmap();
+				this.Image = (Image)surface.Bitmap;
 			}
 		}
 
@@ -92,11 +92,13 @@ namespace SdlDotNet.Windows
 		/// <param name="e"></param>
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			//this.Image = (Image)surface.ToBitmap();
-			base.OnPaint (e);
-			//e.Graphics.DrawImage(this.picture, this.pictureLocation);
-			
+			this.Image = this.bitmap;
+			base.OnPaint (e);			
 		}
 
+		private void OnTick(object sender, TickEventArgs e)
+		{
+			this.bitmap = this.surface.Bitmap;
+		}
 	}
 }

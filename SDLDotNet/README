@@ -8,9 +8,9 @@ Assembly:
 	Name: SdlDotNet.dll
 	Namespace: SdlDotNet
 	Notes:
-		There is one assembly. Supporting separate assemblies was too much trouble. 
-		Tao.Sdl (http://taoframework.com, or http:/cs-sdl.sourceforge.net) contains 
-		the low-level bindings to the six C lbraries (SDL, SDL_image, SDL_ttf, SDL_mixer, SDL_gfx, smpeg)
+		There is one assembly. 
+		Tao.Sdl (http://www.mono-project.com/Tao) contains 
+		the low-level bindings to the seven C libraries (SDL, SDL_image, SDL_ttf, SDL_mixer, SDL_gfx, smpeg, SDL_net)
 
 Zip file contains:
 	/* - info files, Strong name keys, build/solution files.
@@ -26,9 +26,8 @@ Zip file contains:
 		
 Development Environment:
 	Runtimes/Compilers:
-		.NET SDK 1.1 SP1 for now.
+		.NET SDK 1.1 SP1.
 		Mono on Windows
-		Future:
 		Mono on Linux
 		Mono on MacOSX
 		
@@ -50,7 +49,7 @@ Development Environment:
 
 	Dependencies (make sure these are in your path):
 		C libraries
-		SDL 1.2.8
+		SDL 1.2.9
 		SDL_image 1.2.4
 		SDL_mixer 1.2.5
 		SDL_ttf 2.0.7
@@ -83,21 +82,14 @@ Tutorials
 	The names of the tutorials correspond to projects in the /examples directory.
 	
 	To start read the install file and install SdlDotNet.dll and Tao.Sdl.dll.
-	The best examples to start with are probably the Rectangles and PixelExample. They show the basics of how the Video, Surface and Event classes works.
-	The ImageExample and Bounce Example show basic animation.
+	The best examples to start with are probably the Rectangles. It show the basics of how the Video, Surface and Event classes works.
+	The BounceSprites Example show basic animation.
 	The DelegateExample show how the ChannelFinished and Musicfinished events/delegates work.
-	The BombRun, WeaponFire, SnowDemo show some more animation.
-	The Gears demo shows how SDL.NET works with OpenGl.
+	The BombRun, SnowDemo show some more animation.
+	The Gears demo shows how SDL.NET works with OpenGL.
 	The MoviePlayer plays a short MPEG-1 file.
 	The CDPlayer uses the CDRom subsystem and show how SDL.NET can use WinForms.
-	The FontExample shows how Fonts are rendered in SDL.NET
-	The GuiTest show some very basic widgets created by SDL.NET.
-	The JoystickExample shows how to use a joystick. It is sluggish and still needs work.
-	The PrimitiveExample draws primitives such as ellipses, triangles, bezier curves.
+	The AudioExample shows how the music and sound system work.
 	The SimpleGame is more interesting from a code standpoint because it is strict Model-View-Controller design pattern. It is based on a Pygame tutorial.
-
-TODO items:
-
-Sijmen Mulder
-- Things like Lock() and Unlock() should become a property 
-- Multiple windows. Really. Then I will make a Managed DirectDraw implementation **WILL NOT BE DONE UNTIL SDL SUPPORTS IT**
+	The SpriteGuiDemo shows several sprite examples and uses a simple GUI.
+	The Triad example is a full Tetris-like game.
