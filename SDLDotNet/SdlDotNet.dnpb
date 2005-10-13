@@ -147,6 +147,7 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Reference name="SdlDotNet.Windows" localCopy="true"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<File>AssemblyInfo.cs</File>
