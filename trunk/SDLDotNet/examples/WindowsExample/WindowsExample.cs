@@ -126,7 +126,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void UpdateForm()
 		{
-			img = surf.ToBitmap();
+			img = surf.Bitmap;
 			WindowsExample.Instance.gfx.DrawImage(img,0,0);
 		}
 

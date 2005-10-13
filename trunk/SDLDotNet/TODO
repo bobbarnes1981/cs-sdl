@@ -1,9 +1,7 @@
-Future changes (as of July 2005):
+Future changes (as of Oct 2005):
 
-* Update API to mirror Pygame 1.7.0. It mirrors 1.6 right now.
 * Add more docs and tutorials.
 * Create installer for rpms/ebuild/debs/etc... for Linux.
-* Fix build process to build on Mono.
 * Work on a Mac version.
 * Create custom WinForms control for Surface.
 * Work on SDL.NET Renderer for CEGUI.

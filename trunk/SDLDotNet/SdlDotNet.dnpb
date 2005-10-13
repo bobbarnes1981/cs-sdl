@@ -23,6 +23,7 @@
 	</Configuration>
 	<Files>
 		<File buildAction="Content">SdlDotNet.build</File>
+		<File buildAction="Content">SdlDotNet.dnpb</File>
 	</Files>
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
 	    <Configuration name="Debug">
@@ -465,6 +466,7 @@
 	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
+		<File buildAction="EmbeddedResource">SurfaceControl.bmp</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
