@@ -59,11 +59,33 @@ namespace SdlDotNet
         /// <param name="directionRad">
         /// The direction of the vector, in radians.
         /// </param>
-        public Vector(double directionRad)
+        public Vector(float directionRad)
         {
             Length = 1;
             Direction = directionRad;
-        }
+		}
+
+		/// <summary>
+		/// Creates a vector using integers.
+		/// </summary>
+		/// <param name="x">Coordinate on X-axis</param>
+		/// <param name="y">Coordinate on Y-axis</param>
+		public Vector(int x, int y)
+		{
+			m_x = (float)x;
+			m_y = (float)y;
+		}
+
+		/// <summary>
+		/// Creates a vector using floats.
+		/// </summary>
+		/// <param name="x">Coordinate on X-axis</param>
+		/// <param name="y">Coordinate on Y-axis</param>
+		public Vector(float x, float y)
+		{
+			m_x = x;
+			m_y = y;
+		}
 
 		/// <summary>
 		/// Creates a vector using doubles.
@@ -72,16 +94,9 @@ namespace SdlDotNet
 		/// <param name="y">Coordinate on Y-axis</param>
 		public Vector(double x, double y)
 		{
-			m_x = x;
-			m_y = y;
+			m_x = (float)x;
+			m_y = (float)y;
 		}
-
-		/// <summary>
-		/// Creates a vector using integers.
-		/// </summary>
-		/// <param name="x">Coordinate on the X-axis</param>
-		/// <param name="y">Coordinate on the Y-axis</param>
-		public Vector(int x, int y) : this((double)x,(double)y) {}
 
 		/// <summary>
         /// Creates a vector based on a Point object.
@@ -163,7 +178,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator >= (Vector c1, Vector c2)
 		{
-			return (c1.Length >= c2.Length) && (c1.Length >= c2.Length);
+			return (c1.X >= c2.X) && (c1.Y >= c2.Y);
 		}
 		/// <summary>
 		/// Greater than operator
@@ -173,7 +188,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator > (Vector c1, Vector c2)
 		{
-			return (c1.Length > c2.Length) && (c1.Length > c2.Length);
+			return (c1.X > c2.X) && (c1.Y > c2.Y);
 		}
 		/// <summary>
 		/// Less than operator
@@ -183,7 +198,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator < (Vector c1, Vector c2)
 		{
-			return (c1.Length < c2.Length) && (c1.Length < c2.Length);
+			return (c1.X < c2.X) && (c1.Y < c2.Y);
 		}
 		/// <summary>
 		/// Less than or equals operator
@@ -193,7 +208,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator <= (Vector c1, Vector c2)
 		{
-			return (c1.Length <= c2.Length) && (c1.Length <= c2.Length);
+			return (c1.X <= c2.X) && (c1.Y <= c2.Y);
 		}
 		
 		/// <summary>
@@ -259,7 +274,7 @@ namespace SdlDotNet
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static Vector operator +(Vector a, double b)
+		public static Vector operator +(Vector a, float b)
 		{
 			return new Vector(a.m_x + b, a.m_y + b);
 		}
@@ -269,7 +284,7 @@ namespace SdlDotNet
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static Vector operator -(Vector a, double b)
+		public static Vector operator -(Vector a, float b)
 		{
 			return new Vector(a.m_x - b, a.m_y - b);
 		}
@@ -279,7 +294,7 @@ namespace SdlDotNet
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static Vector operator *(Vector a, double b)
+		public static Vector operator *(Vector a, float b)
 		{
 			return new Vector(a.m_x * b, a.m_y * b);
 		}
@@ -289,7 +304,7 @@ namespace SdlDotNet
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static Vector operator /(Vector a, double b)
+		public static Vector operator /(Vector a, float b)
 		{
 			return new Vector(a.m_x / b, a.m_y / b);
 		}
@@ -299,7 +314,7 @@ namespace SdlDotNet
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static Vector operator +(double a, Vector b)
+		public static Vector operator +(float a, Vector b)
 		{
 			return new Vector(a + b.m_x, a + b.m_y);
 		}
@@ -309,7 +324,7 @@ namespace SdlDotNet
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static Vector operator -(double a, Vector b)
+		public static Vector operator -(float a, Vector b)
 		{
 			return new Vector(a - b.m_x, a - b.m_y);
 		}
@@ -319,7 +334,7 @@ namespace SdlDotNet
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static Vector operator *(double a, Vector b)
+		public static Vector operator *(float a, Vector b)
 		{
 			return new Vector(a * b.m_x, a * b.m_y);
 		}
@@ -329,7 +344,7 @@ namespace SdlDotNet
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public static Vector operator /(double a, Vector b)
+		public static Vector operator /(float a, Vector b)
 		{
 			return new Vector(a / b.m_x, a / b.m_y);
 		}
@@ -349,16 +364,16 @@ namespace SdlDotNet
 		/// <summary>
 		/// The x coordinate
 		/// </summary>
-		private double m_x = 0.00001;
+		private float m_x = 0.00001F;
 		/// <summary>
 		/// The y coordinate
 		/// </summary>
-		private double m_y = 0.00001;
+		private float m_y = 0.00001F;
 
 		/// <summary>
 		/// Contains the x coordinate of the vector.
 		/// </summary>
-		public double X
+		public float X
 		{
 			get { return m_x; }
 			set { m_x = value; }
@@ -367,7 +382,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Contains the y coordinate of the vector.
 		/// </summary>
-		public double Y
+		public float Y
 		{
 			get { return m_y; }
 			set { m_y = value; }
@@ -376,49 +391,49 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets and sets the length of the vector.
 		/// </summary>
-		public double Length
+		public float Length
 		{
 			get
 			{
-				return Math.Sqrt(m_x * m_x + m_y * m_y);
+				return (float)(Math.Sqrt(m_x * m_x + m_y * m_y));
 			}
 			set
 			{
-				double direction = this.Direction;
-				m_x = Math.Cos(direction) * value;
-				m_y = Math.Sin(direction) * value;
+				float direction = this.Direction;
+				m_x = (float)(Math.Cos(direction) * value);
+				m_y = (float)(Math.Sin(direction) * value);
 			}
 		}
 
 		/// <summary>
 		/// Gets and sets the direction of the vector, in radians.
 		/// </summary>
-		public double Direction
+		public float Direction
 		{
 			get
 			{
-				return Math.Atan2(m_y, m_x);
+				return (float)Math.Atan2(m_y, m_x);
 			}
 			set
 			{
-				double length = this.Length;
-				m_x = Math.Cos(value) * length;
-				m_y = Math.Sin(value) * length;
+				float length = this.Length;
+				m_x = (float)(Math.Cos(value) * length);
+				m_y = (float)(Math.Sin(value) * length);
 			}
 		}
 
 		/// <summary>
 		/// Gets and sets the direction of the vector, in degrees.
 		/// </summary>
-		public double DirectionDeg
+		public float DirectionDeg
 		{
 			get
 			{
-				return this.Direction * 180 / Math.PI;
+				return (float)(this.Direction * 180 / Math.PI);
 			}
 			set
 			{
-				this.Direction = value * Math.PI / 180;
+				this.Direction = (float)(value * Math.PI / 180);
 			}
 		}
 
@@ -455,7 +470,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="x"></param>
 		/// <param name="y"></param>
-		public void Offset(double x, double y)
+		public void Offset(float x, float y)
 		{
 			this.m_x += x;
 			this.m_y += y;
@@ -469,7 +484,7 @@ namespace SdlDotNet
 		/// </summary>	
 		/// <param name="other">The other vector to use when getting the dot product.</param>
 		/// <returns>The dot product of the two vectors.</returns>
-		public double DotProduct(Vector other) 
+		public float DotProduct(Vector other) 
 		{
 			return (m_x * other.m_x) + (m_y * other.m_y);
 		}
@@ -488,12 +503,12 @@ namespace SdlDotNet
 		/// Normalizes the vector.
 		/// </summary>
 		/// <returns>The original length.</returns>
-		public double Normalize()
+		public float Normalize()
 		{
-            double length = this.Length;
-            double invLength = 1.0 / length;
-            m_x *= invLength;
-            m_y *= invLength;
+            float length = this.Length;
+            float invLength = (float)(1.0 / length);
+            m_x = m_x * invLength;
+            m_y = m_y * invLength;
             return length;
 		}
 		
@@ -565,7 +580,7 @@ namespace SdlDotNet
         /// <returns>
         /// A new vector representing the reflection angle.
         /// </returns>
-        public Vector Reflection(double normalRad)
+        public Vector Reflection(float normalRad)
         {
             Vector vecNormal = new Vector(0, 1);
             vecNormal.Direction = normalRad;
@@ -596,8 +611,8 @@ namespace SdlDotNet
 		public Vector(SerializationInfo info, StreamingContext ctxt)
 		{
 			//Get the values from info and assign them to the appropriate properties
-			m_x = (double)info.GetValue("x", typeof(double));
-			m_y = (double)info.GetValue("y", typeof(double));
+			m_x = (float)info.GetValue("x", typeof(float));
+			m_y = (float)info.GetValue("y", typeof(float));
 		}
 
 		/// <summary>
