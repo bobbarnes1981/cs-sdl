@@ -50,7 +50,7 @@ namespace SdlDotNet.Examples
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
-			surf = new Surface(this.ClientSize.Width,this.ClientSize.Height, false);
+			surf = new Surface(this.surfaceControl1.Width,this.surfaceControl1.Height, false);
 		}
 
 		/// <summary>
