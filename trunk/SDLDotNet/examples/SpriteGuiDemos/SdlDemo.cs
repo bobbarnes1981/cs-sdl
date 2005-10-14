@@ -352,7 +352,7 @@ namespace SdlDotNet.Examples
 		private GuiTicker statusTicker;
 		private static GuiMenuBar gmb;
 //		Surface cursor;
-		Point position = new Point(100,100);
+//		Point position = new Point(100,100);
 
 		/// <summary>
 		/// 
