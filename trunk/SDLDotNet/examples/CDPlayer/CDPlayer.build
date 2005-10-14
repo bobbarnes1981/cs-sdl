@@ -10,6 +10,11 @@
 	    </fileset>
 	</copy>
 	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${extras.dir}/${Windows}/${build.dir}">
+		<include name="${project.name}.${Windows}.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${nant.project.basedir}/${build.dir}">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
@@ -26,6 +31,7 @@
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>
+		<include name="${project.name}.${Windows}.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Windows.Forms.dll"/>
 	    </references>
