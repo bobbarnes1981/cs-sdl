@@ -19,9 +19,11 @@
  */
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Resources;
+using System.Threading;
 
 using SdlDotNet;
 
@@ -40,9 +42,11 @@ namespace SdlDotNet.Examples
 		private System.Windows.Forms.Button buttonEject;
 		private System.Windows.Forms.Label labelStatus;
 		private System.Windows.Forms.Button buttonPrevious;
+		private SdlDotNet.Windows.SurfaceControl surfaceControl1;
 		private System.Windows.Forms.Button buttonNext;
 		//private System.Windows.Forms.Timer timer;
 		//private System.ComponentModel.IContainer components;
+		private static CDPlayer Instance;
 
 		/// <summary>
 		/// 
@@ -53,6 +57,7 @@ namespace SdlDotNet.Examples
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
+			surf = new Surface(this.surfaceControl1.Width,this.surfaceControl1.Height, false);
 			//_drive = null;
 
 			try 
@@ -110,6 +115,7 @@ namespace SdlDotNet.Examples
 			this.labelStatus = new System.Windows.Forms.Label();
 			this.buttonNext = new System.Windows.Forms.Button();
 			this.buttonPrevious = new System.Windows.Forms.Button();
+			this.surfaceControl1 = new SdlDotNet.Windows.SurfaceControl();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -193,10 +199,20 @@ namespace SdlDotNet.Examples
 			this.buttonPrevious.Text = "Prev";
 			this.buttonPrevious.Click += new System.EventHandler(this.buttonPrev_Click);
 			// 
+			// surfaceControl1
+			// 
+			this.surfaceControl1.Alpha = ((System.Byte)(0));
+			this.surfaceControl1.Location = new System.Drawing.Point(16, 144);
+			this.surfaceControl1.Name = "surfaceControl1";
+			this.surfaceControl1.Size = new System.Drawing.Size(336, 192);
+			this.surfaceControl1.TabIndex = 9;
+			this.surfaceControl1.TabStop = false;
+			// 
 			// CDPlayer
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 			this.ClientSize = new System.Drawing.Size(362, 367);
+			this.Controls.Add(this.surfaceControl1);
 			this.Controls.Add(this.buttonPrevious);
 			this.Controls.Add(this.buttonNext);
 			this.Controls.Add(this.labelStatus);
@@ -223,7 +239,30 @@ namespace SdlDotNet.Examples
 		[STAThread]
 		static void Main() 
 		{
-			Application.Run(new CDPlayer());
+			SdlDotNet.Events.Fps = 30;
+			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(Events_Tick);
+			Application.Run(CDPlayer.Instance = new CDPlayer());
+		}
+
+		private static System.Random rand = new Random();
+		//private static WindowsExample Instance;
+		private static SdlDotNet.Surface surf;
+
+		private static void Events_Tick(object sender, SdlDotNet.TickEventArgs e)
+		{
+			surf.Fill(Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)));
+			surf.Update();
+			CDPlayer.Instance.UpdateForm();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void UpdateForm()
+		{
+			//img = surf.Bitmap;
+			//WindowsExample.Instance.gfx.DrawImage(img,0,0);
+			this.surfaceControl1.Surface.Blit(surf);
 		}
 
 		private void comboBoxDrive_SelectedIndexChanged(object sender, System.EventArgs e) 
@@ -348,6 +387,11 @@ namespace SdlDotNet.Examples
 
 		private void CDPlayer_Load(object sender, System.EventArgs e)
 		{
+			Thread a = new Thread(new ThreadStart(SdlDotNet.Events.Run));
+			a.IsBackground = true;
+			a.Name = "SDL";
+			a.Priority = ThreadPriority.Normal;
+			a.Start();
 		
 		}
 

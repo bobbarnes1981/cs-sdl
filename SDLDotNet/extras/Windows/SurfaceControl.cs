@@ -51,7 +51,7 @@ namespace SdlDotNet.Windows
 		{
 			SdlDotNet.Events.Tick +=new TickEventHandler(OnTick);
 			surface = new Surface(this.Width,this.Height, false);
-			this.Image = surface.Bitmap;
+			this.bitmap = surface.Bitmap;
 		}
 
 		/// <summary>
@@ -66,7 +66,7 @@ namespace SdlDotNet.Windows
 			set
 			{
 				surface = value;
-				this.Image = (Image)surface.Bitmap;
+				this.Image = surface.Bitmap;
 			}
 		}
 
@@ -92,13 +92,14 @@ namespace SdlDotNet.Windows
 		/// <param name="e"></param>
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			this.Image = this.bitmap;
+			//this.Image = this.bitmap;
 			base.OnPaint (e);			
 		}
 
 		private void OnTick(object sender, TickEventArgs e)
 		{
-			this.bitmap = this.surface.Bitmap;
+			//this.bitmap = this.surface.Bitmap;
+			this.Image = this.surface.Bitmap;
 		}
 	}
 }
