@@ -80,6 +80,17 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Returns which button was pressed
+		/// </summary>
+		public MouseButton Button
+		{
+			get
+			{
+				return (MouseButton)this.eventStruct.motion.which;
+			}
+		}
+
+		/// <summary>
 		/// X position of mouse
 		/// </summary>
 		public short X

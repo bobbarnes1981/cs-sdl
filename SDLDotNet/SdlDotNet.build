@@ -35,6 +35,7 @@
     <property name="native.sdl" value="Tao.Sdl"/>
     <property name="nunit.assembly" value="nunit.framework"/>
     <property name="log.assembly" value="log4net"/>
+    <property name="Windows" value="Windows" />
 
     <!-- default configuration -->
     <property name="project.config" value="Debug" /> <!-- Debug|Release -->
@@ -89,7 +90,7 @@
 	<call target="${project.config}" />
     </target>
 
-    <target name="examples" depends="build" description="Build examples">
+    <target name="examples" depends="build, extras" description="Build examples">
 	<echo message="Building examples" />
 	<foreach item="File" property="filename">
 	    <in>
@@ -134,7 +135,7 @@
 	</foreach>
     </target>
 
-    <target name="buildrelease" depends="clean, setrelease, examples, extras, tests" description="Build all Release assemblies">
+    <target name="buildrelease" depends="clean, setrelease, examples, tests" description="Build all Release assemblies">
 	<echo message="Building all Release assemblies" />
     </target>
 
