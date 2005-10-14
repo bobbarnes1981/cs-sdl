@@ -23,6 +23,9 @@ namespace SdlDotNet.Windows
 		private Image m_Image;
 		private Graphics m_Graphics;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Surface Surface
 		{
 			get
@@ -31,6 +34,9 @@ namespace SdlDotNet.Windows
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public SurfaceForm()
 		{
 			//
@@ -57,6 +63,10 @@ namespace SdlDotNet.Windows
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
 		protected override void OnResize(EventArgs e)
 		{
 			try
@@ -103,6 +113,10 @@ namespace SdlDotNet.Windows
 		}
 		#endregion
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			try
