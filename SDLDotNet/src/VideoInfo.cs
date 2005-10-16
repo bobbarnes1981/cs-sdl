@@ -41,8 +41,24 @@ namespace SdlDotNet
 
 		static VideoInfo()
 		{
+			Initialize();
 //			stringManager = 
 //				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
+		}
+
+		/// <summary>
+		/// Initializes Video subsystem.
+		/// </summary>
+		public static void Initialize()
+		{
+			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
+				== (int) SdlFlag.FalseValue)
+			{
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
+				{
+					throw SdlException.Generate();
+				}
+			}
 		}
 
 		private static Sdl.SDL_VideoInfo VideoInfoStruct

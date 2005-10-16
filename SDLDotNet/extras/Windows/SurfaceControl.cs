@@ -42,17 +42,14 @@ namespace SdlDotNet.Windows
 	public class SurfaceControl : System.Windows.Forms.PictureBox
 	{
 		Surface surface;
-		Bitmap bitmap;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public SurfaceControl()
 		{
-			SdlDotNet.Events.Tick +=new TickEventHandler(OnTick);
-			surface = new Surface(this.Width,this.Height, false);
-			this.bitmap = surface.Bitmap;
-			this.Image = this.bitmap;
+			this.surface = new Surface(this.Width,this.Height);
+			this.Image = this.surface.Bitmap;
 		}
 
 		/// <summary>
@@ -62,6 +59,7 @@ namespace SdlDotNet.Windows
 		{
 			get
 			{
+				this.Image = surface.Bitmap;
 				return surface;
 			}
 			set
@@ -72,36 +70,15 @@ namespace SdlDotNet.Windows
 		}
 
 		/// <summary>
-		/// Get/set the Alpha flags of the image.
-		/// </summary>
-		[Category("Sdl Properties"), Description("Set Alpha")]
-		public byte Alpha
-		{
-			get 
-			{
-				return surface.Alpha;
-			}
-			set	
-			{
-				surface.Alpha = value;
-			}
-		}
-
-		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="e"></param>
 		protected override void OnSizeChanged(EventArgs e)
 		{
-			//this.surface = new Surface(this.Width,this.Height, false);
-			base.OnSizeChanged (e);
-		}
-
-
-		private void OnTick(object sender, TickEventArgs e)
-		{
-			//this.bitmap = this.surface.Bitmap;
+			this.surface = new Surface(this.Width,this.Height);
+			this.surface.Fill(Color.FromArgb(0,0,0));
 			this.Image = this.surface.Bitmap;
+			base.OnSizeChanged (e);
 		}
 	}
 }
