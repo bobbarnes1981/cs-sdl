@@ -156,53 +156,6 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Create surface of a given width and height
-		/// </summary>
-		/// <param name="width">Width of surface</param>
-		/// <param name="height">Height of surface</param>
-		/// <param name="useScreen">
-		/// Use screen attributes. If false, BitsPerPixel will be 32.
-		/// </param>
-		public Surface(int width, int height, bool useScreen)
-		{
-			if (!Video.IsInitialized)
-			{
-				Video.Initialize();
-			}
-			if (useScreen)
-			{
-				this.Handle = 
-					Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
-				if (this.Handle == IntPtr.Zero)
-				{
-					throw SdlException.Generate();
-				}
-			}
-			else
-			{
-				int Rmask = 0x00000000;
-				int Gmask = 0x00ff0000;
-				int Bmask = 0x0000ff00;
-				int Amask = 0x000000ff;
-				int bpp = 32;
-
-				this.Handle = Sdl.SDL_CreateRGBSurface(
-					(int)VideoModes.None,
-					width, 
-					height, 
-					bpp,
-					Rmask, 
-					Gmask, 
-					Bmask, 
-					Amask);
-				if (this.Handle == IntPtr.Zero)
-				{
-					throw SdlException.Generate();
-				}
-			}
-		}
-
-		/// <summary>
 		/// Create surface that has the same size as the screen
 		/// </summary>
 		public Surface() : this(Video.Screen.Width, Video.Screen.Height)
