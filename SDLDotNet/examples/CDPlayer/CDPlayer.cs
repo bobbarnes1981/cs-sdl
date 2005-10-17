@@ -272,43 +272,6 @@ namespace SdlDotNet.Examples
 		#endregion
 
 		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		//[STAThread]
-		private void Go() 
-		{
-			//This loads the various images (provided by Moonfire) 
-			// into a SurfaceCollection for animation
-			SurfaceCollection marbleSurfaces = 
-				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50)); 
-
-			for (int i = 0; i < 1; i++)
-			{
-				//Create a new Sprite at a random location on the screen
-				BounceSprite bounceSprite = 
-					new BounceSprite(marbleSurfaces,
-					new Point(rand.Next(0, 350),
-					rand.Next(0, 200)));
-				bounceSprite.Bounds = new Rectangle(0, 0, 300, 200);
-
-				// Randomize rotation direction
-				bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
-
-				//Add the sprite to the SpriteCollection
-				master.Add(bounceSprite);
-			}
-
-			//The collection will respond to mouse button clicks, mouse movement and the ticker.
-			master.EnableMouseButtonEvent();
-			master.EnableMouseMotionEvent();
-			master.EnableTickEvent();
-
-			SdlDotNet.Events.Fps = 10;
-			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(Events_Tick);
-			Application.Run(new CDPlayer());
-		}
-
-		/// <summary>
 		/// Entry point for App.
 		/// </summary>
 		[STAThread]
