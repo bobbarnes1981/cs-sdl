@@ -26,6 +26,8 @@ using System.Resources;
 using System.Threading;
 
 using SdlDotNet;
+using SdlDotNet.Sprites;
+using SdlDotNet.Windows;
 
 namespace SdlDotNet.Examples 
 {
@@ -46,7 +48,6 @@ namespace SdlDotNet.Examples
 		private System.Windows.Forms.Button buttonNext;
 		//private System.Windows.Forms.Timer timer;
 		//private System.ComponentModel.IContainer components;
-		private static CDPlayer Instance;
 
 		/// <summary>
 		/// 
@@ -57,7 +58,36 @@ namespace SdlDotNet.Examples
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
-			surf = new Surface(this.surfaceControl1.Width,this.surfaceControl1.Height, false);
+			surf = 
+				new Surface(
+				this.surfaceControl1.Width,
+				this.surfaceControl1.Height);
+			SurfaceCollection marbleSurfaces = 
+				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50)); 
+
+			for (int i = 0; i < 1; i++)
+			{
+				//Create a new Sprite at a random location on the screen
+				BounceSprite bounceSprite = 
+					new BounceSprite(marbleSurfaces,
+					new Point(rand.Next(0, 350),
+					rand.Next(0, 200)));
+				bounceSprite.Bounds = new Rectangle(new Point(0,0), this.surfaceControl1.Size);
+
+				// Randomize rotation direction
+				bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
+
+				//Add the sprite to the SpriteCollection
+				master.Add(bounceSprite);
+			}
+
+			//The collection will respond to mouse button clicks, mouse movement and the ticker.
+			master.EnableMouseButtonEvent();
+			master.EnableMouseMotionEvent();
+			master.EnableTickEvent();
+
+			SdlDotNet.Events.Fps = 10;
+			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(this.Events_Tick);
 			//_drive = null;
 
 			try 
@@ -65,7 +95,9 @@ namespace SdlDotNet.Examples
 				int num = CDRom.NumberOfDrives;
 				_drive = CDRom.OpenDrive(0);
 				for (int i = 0; i < num; i++)
+				{
 					comboBoxDrive.Items.Add(CDRom.DriveName(i));
+				}
 
 				if (comboBoxDrive.Items.Count > 0) 
 				{
@@ -81,7 +113,11 @@ namespace SdlDotNet.Examples
 
 		private static void HandleError(SdlException ex) 
 		{
-			MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			MessageBox.Show(
+				ex.Message, 
+				"Error", 
+				MessageBoxButtons.OK, 
+				MessageBoxIcon.Error);
 		}
 
 		/// <summary>
@@ -98,6 +134,8 @@ namespace SdlDotNet.Examples
 			}
 			base.Dispose( disposing );
 		}
+		//private int maxBalls = 1; 
+		private static SpriteCollection master = new SpriteCollection();
 
 		#region Windows Form Designer generated code
 		/// <summary>
@@ -106,6 +144,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(CDPlayer));
 			this.label1 = new System.Windows.Forms.Label();
 			this.comboBoxDrive = new System.Windows.Forms.ComboBox();
 			this.buttonPlay = new System.Windows.Forms.Button();
@@ -179,7 +218,6 @@ namespace SdlDotNet.Examples
 			this.labelStatus.Size = new System.Drawing.Size(328, 40);
 			this.labelStatus.TabIndex = 6;
 			this.labelStatus.Text = "Track:";
-			this.labelStatus.Click += new System.EventHandler(this.labelStatus_Click);
 			// 
 			// buttonNext
 			// 
@@ -201,10 +239,10 @@ namespace SdlDotNet.Examples
 			// 
 			// surfaceControl1
 			// 
-			this.surfaceControl1.Alpha = ((System.Byte)(0));
-			this.surfaceControl1.Location = new System.Drawing.Point(16, 144);
+			this.surfaceControl1.Image = ((System.Drawing.Image)(resources.GetObject("surfaceControl1.Image")));
+			this.surfaceControl1.Location = new System.Drawing.Point(8, 144);
 			this.surfaceControl1.Name = "surfaceControl1";
-			this.surfaceControl1.Size = new System.Drawing.Size(336, 192);
+			this.surfaceControl1.Size = new System.Drawing.Size(350, 200);
 			this.surfaceControl1.TabIndex = 9;
 			this.surfaceControl1.TabStop = false;
 			// 
@@ -236,23 +274,57 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
+		//[STAThread]
+		private void Go() 
+		{
+			//This loads the various images (provided by Moonfire) 
+			// into a SurfaceCollection for animation
+			SurfaceCollection marbleSurfaces = 
+				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50)); 
+
+			for (int i = 0; i < 1; i++)
+			{
+				//Create a new Sprite at a random location on the screen
+				BounceSprite bounceSprite = 
+					new BounceSprite(marbleSurfaces,
+					new Point(rand.Next(0, 350),
+					rand.Next(0, 200)));
+				bounceSprite.Bounds = new Rectangle(0, 0, 300, 200);
+
+				// Randomize rotation direction
+				bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
+
+				//Add the sprite to the SpriteCollection
+				master.Add(bounceSprite);
+			}
+
+			//The collection will respond to mouse button clicks, mouse movement and the ticker.
+			master.EnableMouseButtonEvent();
+			master.EnableMouseMotionEvent();
+			master.EnableTickEvent();
+
+			SdlDotNet.Events.Fps = 10;
+			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(Events_Tick);
+			Application.Run(new CDPlayer());
+		}
+
+		/// <summary>
+		/// Entry point for App.
+		/// </summary>
 		[STAThread]
 		static void Main() 
 		{
-			SdlDotNet.Events.Fps = 30;
-			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(Events_Tick);
-			Application.Run(CDPlayer.Instance = new CDPlayer());
+			Application.Run(new CDPlayer());
 		}
 
 		private static System.Random rand = new Random();
-		//private static WindowsExample Instance;
-		private static SdlDotNet.Surface surf;
+		private SdlDotNet.Surface surf;
 
-		private static void Events_Tick(object sender, SdlDotNet.TickEventArgs e)
+		private void Events_Tick(object sender, SdlDotNet.TickEventArgs e)
 		{
-			surf.Fill(Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)));
-			surf.Update();
-			CDPlayer.Instance.UpdateForm();
+			surf.Fill(Color.Black);
+			surf.Blit(master);
+			this.UpdateForm();
 		}
 
 		/// <summary>
@@ -260,8 +332,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void UpdateForm()
 		{
-			//img = surf.Bitmap;
-			//WindowsExample.Instance.gfx.DrawImage(img,0,0);
 			this.surfaceControl1.Surface.Blit(surf);
 		}
 
@@ -305,7 +375,9 @@ namespace SdlDotNet.Examples
 			try 
 			{
 				if (_drive != null)
+				{
 					_drive.Pause();
+				}
 			} 
 			catch (SdlException ex) 
 			{
@@ -353,7 +425,9 @@ namespace SdlDotNet.Examples
 				if (_drive != null) 
 				{
 					if (_track != 0)
+					{
 						_track--;
+					}
 					buttonPlay_Click(null, null);
 				}
 			} 
@@ -370,7 +444,9 @@ namespace SdlDotNet.Examples
 				if (_drive != null) 
 				{
 					if (_track != _drive.NumberOfTracks - 1)
+					{
 						_track++;
+					}
 					buttonPlay_Click(null, null);
 				}
 			} 
@@ -380,11 +456,6 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void labelStatus_Click(object sender, System.EventArgs e)
-		{
-			
-		}
-
 		private void CDPlayer_Load(object sender, System.EventArgs e)
 		{
 			Thread a = new Thread(new ThreadStart(SdlDotNet.Events.Run));
@@ -392,7 +463,6 @@ namespace SdlDotNet.Examples
 			a.Name = "SDL";
 			a.Priority = ThreadPriority.Normal;
 			a.Start();
-		
 		}
 
 		//		private void timer_Tick(object sender, System.EventArgs e) {
