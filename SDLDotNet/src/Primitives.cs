@@ -591,10 +591,13 @@ namespace SdlDotNet
 			}
 			set
 			{
-				this.x1 += (short)(value.X - (x1 + x2)/2);
-				this.x2 += (short)(value.X - (x1 + x2)/2);
-				this.y1 += (short)(value.Y - (y1 + y2)/2);
-				this.y2 += (short)(value.Y - (y1 + y2)/2);
+				short xDelta = (short)(value.X - (x2 + x1)/2);
+				short yDelta = (short)(value.Y - (y2 + y1)/2);
+
+				this.x1 += xDelta;
+				this.x2 += xDelta;
+				this.y1 += yDelta;
+				this.y2 += yDelta;
 			}
 		}
 
@@ -865,12 +868,15 @@ namespace SdlDotNet
 			}
 			set
 			{
-				this.x1 += (short)(value.X - (x1 + x2 + x3)/3);
-				this.x2 += (short)(value.X - (x1 + x2 + x3)/3);
-				this.x3 += (short)(value.X - (x1 + x2 + x3)/3);
-				this.y1 += (short)(value.Y - (y1 + y2 + y3)/3);
-				this.y2 += (short)(value.Y - (y1 + y2 + y3)/3);
-				this.y3 += (short)(value.Y - (y1 + y2 + y3)/3);
+				short xDelta = (short)(value.X - (x3 + x2 + x1)/3);
+				short yDelta = (short)(value.Y - (y3 + y2 + y1)/3);
+
+				this.x1 += xDelta;
+				this.x2 += xDelta;
+				this.x3 += xDelta;
+				this.y1 += yDelta;
+				this.y2 += yDelta;
+				this.y3 += yDelta;
 			}
 		}
 
@@ -1861,7 +1867,6 @@ namespace SdlDotNet
 			}
 			set
 			{
-
 				short xDelta = (short)(value.X - (x2 + x1)/2);
 				short yDelta = (short)(value.Y - (y2 + y1)/2);
 
