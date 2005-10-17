@@ -1464,6 +1464,11 @@ namespace SdlDotNet
 		/// <param name="color">The color of the pixel</param>
 		public void DrawPixel(int x, int y, System.Drawing.Color color) 
 		{
+			if(x >= Width || x < 0)
+				return;
+			if(y >= Height || y < 0)
+				return;
+
 			if (this.disposed)
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
