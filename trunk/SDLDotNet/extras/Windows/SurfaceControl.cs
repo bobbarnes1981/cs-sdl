@@ -44,7 +44,7 @@ namespace SdlDotNet.Windows
 		Surface surface;
 
 		/// <summary>
-		/// 
+		/// Constructor
 		/// </summary>
 		public SurfaceControl()
 		{
@@ -53,7 +53,7 @@ namespace SdlDotNet.Windows
 		}
 
 		/// <summary>
-		/// 
+		/// The Surface of the control
 		/// </summary>
 		public Surface Surface
 		{
@@ -70,15 +70,74 @@ namespace SdlDotNet.Windows
 		}
 
 		/// <summary>
-		/// 
+		/// Raises the SizeChanged event
 		/// </summary>
-		/// <param name="e"></param>
+		/// <param name="e">Contains the event data</param>
 		protected override void OnSizeChanged(EventArgs e)
 		{
 			this.surface = new Surface(this.Width,this.Height);
-			this.surface.Fill(Color.FromArgb(0,0,0));
+			this.surface.Update();
 			this.Image = this.surface.Bitmap;
 			base.OnSizeChanged (e);
+		}
+
+		/// <summary>
+		/// Raises the MouseDown event
+		/// </summary>
+		/// <param name="e">Contains the event data</param>
+		protected override void OnMouseDown(MouseEventArgs e)
+		{
+			base.OnMouseDown (e);
+			SdlDotNet.Events.Add(new MouseButtonEventArgs(this.ConvertMouseButtons(e), true, (short)e.X, (short)e.Y));
+		}
+
+		/// <summary>
+		/// Raises the MouseUp event
+		/// </summary>
+		/// <param name="e">Contains the event data</param>
+		protected override void OnMouseUp(MouseEventArgs e)
+		{
+			base.OnMouseUp (e);
+			SdlDotNet.Events.Add(new MouseButtonEventArgs(this.ConvertMouseButtons(e), false, (short)e.X, (short)e.Y));
+		}
+		
+		int lastX;
+		int lastY;
+
+		/// <summary>
+		/// Raises the MouseMove event
+		/// </summary>
+		/// <param name="e">Contains the event data</param>
+		protected override void OnMouseMove(MouseEventArgs e)
+		{
+			base.OnMouseMove (e);
+			
+			if (e.Button != MouseButtons.None)
+			{
+				SdlDotNet.Events.Add(new MouseMotionEventArgs(true,(short)e.X, (short)e.Y, (short)(e.X - lastX), (short)(e.Y - lastY)));
+			}
+			lastX = e.X;
+			lastY = e.Y;
+		}
+
+		private MouseButton ConvertMouseButtons(MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left)
+			{
+				return MouseButton.PrimaryButton;
+			}
+			else if (e.Button == MouseButtons.Right)
+			{
+				return MouseButton.SecondaryButton;
+			}
+			else if (e.Button == MouseButtons.Middle)
+			{
+				return MouseButton.MiddleButton;
+			}
+			else
+			{
+				return MouseButton.None;
+			}
 		}
 	}
 }

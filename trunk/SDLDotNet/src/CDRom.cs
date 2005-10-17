@@ -102,8 +102,6 @@ namespace SdlDotNet
 		/// </remarks>
 		public static void Initialize()
 		{
-//			stringManager = 
-//				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
 			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) & Sdl.SDL_INIT_CDROM) 
 				!= (int) SdlFlag.TrueValue)
 			{
