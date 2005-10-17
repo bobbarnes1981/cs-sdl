@@ -33,19 +33,20 @@ namespace SdlDotNet
 		/// MouseMotion
 		/// </summary>
 		/// <param name="buttonPressed">The current mouse button state</param>
+		/// <param name="button">Button pressed</param>
 		/// <param name="x">The current X coordinate</param>
 		/// <param name="y">The current Y coordinate</param>
 		/// <param name="relativeX">
 		/// The difference between the last X coordinate and current</param>
 		/// <param name="relativeY">
 		/// The difference between the last Y coordinate and current</param>
-		public MouseMotionEventArgs(bool buttonPressed, short x, short y, 
+		public MouseMotionEventArgs(bool buttonPressed, MouseButton button, short x, short y, 
 			short relativeX, short relativeY)
 		{
 			this.eventStruct = new Sdl.SDL_Event();
 			this.eventStruct.motion.xrel = relativeX;
 			this.eventStruct.motion.yrel = relativeY;
-			this.eventStruct.motion.which = 0;
+			this.eventStruct.motion.which = (byte)button;
 			this.eventStruct.motion.x = x;
 			this.eventStruct.motion.y = y;
 			this.eventStruct.type = (byte)EventTypes.MouseMotion;
