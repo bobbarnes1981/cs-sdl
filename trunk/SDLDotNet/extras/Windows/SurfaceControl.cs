@@ -114,7 +114,7 @@ namespace SdlDotNet.Windows
 			
 			if (e.Button != MouseButtons.None)
 			{
-				SdlDotNet.Events.Add(new MouseMotionEventArgs(true,(short)e.X, (short)e.Y, (short)(e.X - lastX), (short)(e.Y - lastY)));
+				SdlDotNet.Events.Add(new MouseMotionEventArgs(true, this.ConvertMouseButtons(e), (short)e.X, (short)e.Y, (short)(e.X - lastX), (short)(e.Y - lastY)));
 			}
 			lastX = e.X;
 			lastY = e.Y;
