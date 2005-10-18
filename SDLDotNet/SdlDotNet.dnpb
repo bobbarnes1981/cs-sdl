@@ -22,8 +22,8 @@
 	    </Options>
 	</Configuration>
 	<Files>
-		<File buildAction="Content">SdlDotNet.build</File>
-		<File buildAction="Content">SdlDotNet.dnpb</File>
+	    <File buildAction="Content">SdlDotNet.build</File>
+	    <File buildAction="Content">SdlDotNet.dnpb</File>
 	</Files>
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
 	    <Configuration name="Debug">
@@ -83,8 +83,7 @@
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>Rectangles.cs</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
 	<Project name="Gears" path="examples\\Gears" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Gears" assemblyName="Gears" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -116,8 +115,7 @@
 	    <Reference name="Tao.OpenGl" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>Gears.cs</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
 	<Project name="CDPlayer" path="examples\\CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -150,8 +148,7 @@
 	    <Reference name="SdlDotNet.Windows" localCopy="true"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>CDPlayer.cs</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
 	<Project name="MoviePlayer" path="examples\\MoviePlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.MoviePlayer" assemblyName="MoviePlayer" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -182,8 +179,7 @@
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
-		<File>AssemblyInfo.cs</File>
-		<File>MoviePlayer.cs</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
 	<Project name="SimpleGame" path="examples\\SimpleGame" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.GameMain" assemblyName="SimpleGame" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -497,6 +493,69 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Files>
+		<File buildAction="Content">App.ico</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
+	<Project name="SdlDotNet.Particles" path="extras\\Particles" language="C#" type="Library" assemblyName="SdlDotNet.Particles" rootNamespace="SdlDotNet.Particles">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>SdlDotNet.Particles.xml</XmlDocFile>
+		    <WarningLevel>4</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>SdlDotNet.Particles.xml</XmlDocFile>
+		    <WarningLevel>1</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Files>
+		<File buildAction="Content">App.ico</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
+	<Project name="ParticlesExample" path="examples\\ParticlesExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.ParticlesExample" assemblyName="ParticlesExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>ParticlesExample.xml</XmlDocFile>
+		    <WarningLevel>4</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>.\bin\Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>ParticlesExample.xml</XmlDocFile>
+		    <WarningLevel>1</WarningLevel>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Reference name="SdlDotNet.Particles" localCopy="true"/>
 	    <Files>
 		<File buildAction="Content">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>

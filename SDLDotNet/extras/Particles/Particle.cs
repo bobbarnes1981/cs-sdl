@@ -96,8 +96,13 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Draws the particle onto the destination.
 		/// </summary>
-		/// <param name="surf">The destination surface of the particle.</param>
+		/// <param name="destination">The destination surface of the particle.</param>
 		public abstract void Render(Surface destination);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		public virtual bool Update()
 		{
 			m_X += m_Velocity.X;

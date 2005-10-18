@@ -119,6 +119,9 @@ namespace SdlDotNet.Particles
 
 		#region ICollection Members
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool IsSynchronized
 		{
 			get
@@ -136,11 +139,19 @@ namespace SdlDotNet.Particles
 //			}
 //		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="array"></param>
+		/// <param name="index"></param>
 		public void CopyTo(Array array, int index)
 		{
 			List.CopyTo(array,index);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public object SyncRoot
 		{
 			get
