@@ -226,7 +226,12 @@
 	    </fileset>
 	</copy>
 	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">
-	    <fileset basedir="${extras.dir}/Windows/${bin.dir}/${project.config}">
+	    <fileset basedir="${extras.dir}/${Windows}/${bin.dir}/${project.config}">
+		<include name="*.dll"/>
+	    </fileset>
+	</copy>
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">
+	    <fileset basedir="${extras.dir}/${Particles}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>
