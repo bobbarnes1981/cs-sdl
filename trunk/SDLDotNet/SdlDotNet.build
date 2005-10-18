@@ -36,6 +36,7 @@
     <property name="nunit.assembly" value="nunit.framework"/>
     <property name="log.assembly" value="log4net"/>
     <property name="Windows" value="Windows" />
+    <property name="Particles" value="Particles" />
 
     <!-- default configuration -->
     <property name="project.config" value="Debug" /> <!-- Debug|Release -->

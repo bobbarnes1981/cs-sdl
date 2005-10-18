@@ -4,7 +4,7 @@ using SdlDotNet.Particles;
 using SdlDotNet.Sprites;
 using System.Drawing;
 
-namespace ParticlesExample
+namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// An example program using particles.
@@ -33,6 +33,7 @@ namespace ParticlesExample
 
 			// Setup SDL.NET!
 			Video.SetVideoModeWindow(400,300);
+			Video.WindowCaption = "SDL.NET - ParticlesExample";
 			Events.Tick+=new TickEventHandler(Events_Tick);
 		}
 
