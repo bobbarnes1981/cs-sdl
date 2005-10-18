@@ -70,7 +70,9 @@ namespace SdlDotNet.Particles
 		public override void Update()
 		{
 			foreach(Particle particle in this.List)
+			{
 				particle.Velocity += m_Gravity;
+			}
 			base.Update ();
 		}
 	}

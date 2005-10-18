@@ -109,7 +109,9 @@ namespace SdlDotNet.Particles
 			m_Y += m_Velocity.Y;
 			m_Life--;
 			if(m_Life <= 0)
+			{
 				return false;
+			}
 			return true;
 		}
 	}

@@ -69,7 +69,9 @@ namespace SdlDotNet.Particles
 		public void Add(ParticleCollection collection)
 		{
 			foreach(Particle particle in collection)
+			{
 				List.Add(particle);
+			}
 		}
 
 		/// <summary>
@@ -97,7 +99,9 @@ namespace SdlDotNet.Particles
 		public void Render(Surface destination)
 		{
 			foreach(Particle particle in List)
+			{
 				particle.Render(destination);
+			}
 		}
 
 		/// <summary>
