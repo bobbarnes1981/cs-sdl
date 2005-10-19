@@ -28,6 +28,14 @@ namespace SdlDotNet.Particles
 	/// </summary>
 	public class ParticleSystem : ParticleCollection
 	{
+
+		internal static Random random = new Random();
+
+		internal static float Range(float min, float max)
+		{
+			return min + (float)random.NextDouble() * (max - min);
+		}
+
 		private ParticleManipulatorCollection m_Manipulators;
 
 		public ParticleManipulatorCollection Manipulators
@@ -56,6 +64,12 @@ namespace SdlDotNet.Particles
 		{
 			m_Manipulators.Add(manipulator);
 		}
+
+		public void Add(int minParticles, int maxParticles, System.Type particleType)
+		{
+
+		}
+		
 
 
 

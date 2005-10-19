@@ -4,37 +4,73 @@ using System.Drawing;
 namespace SdlDotNet.Particles
 {
 	/// <summary>
-	/// Summary description for ParticleBoundry.
+	/// A particle manipulator the keeps particles within a boundry.
 	/// </summary>
 	public class ParticleBoundry : IParticleManipulator
 	{
+		/// <summary>
+		/// Create a ParticleBoundry with an empty boundry.
+		/// </summary>
 		public ParticleBoundry()
 		{
 			m_Boundry = new RectangleF(0,0,0,0);
 		}
+		/// <summary>
+		/// Create a ParticleBoundry from a given size.
+		/// </summary>
+		/// <param name="size"></param>
 		public ParticleBoundry(SizeF size)
 		{
 			m_Boundry = new RectangleF(0,0,size.Width,size.Height);
 		}
+		/// <summary>
+		/// Create a ParticleBoundry from a given size.
+		/// </summary>
+		/// <param name="size">The width and height of the boundry.</param>
 		public ParticleBoundry(Size size)
 		{
 			m_Boundry = new RectangleF(0,0,size.Width,size.Height);
 		}
+		/// <summary>
+		/// Create a ParticleBoundry in the given rectangle boundry.
+		/// </summary>
+		/// <param name="rect">The rectangle representing the boundry.</param>
 		public ParticleBoundry(Rectangle rect)
 		{
 			m_Boundry = rect;
 		}
+		/// <summary>
+		/// Create a ParticleBoundry from a given rectangle boundry.
+		/// </summary>
+		/// <param name="rect">The rectangle representing the boundry.</param>
 		public ParticleBoundry(RectangleF rect)
 		{
 			m_Boundry = rect;
 		}
+		/// <summary>
+		/// Create a ParticleBoundry from a given bounds.
+		/// </summary>
+		/// <param name="x">The x-coordinate of the upper-left corner of the rectangle.</param>
+		/// <param name="y">The y-coordinate of the upper-left corner of the rectangle.</param>
+		/// <param name="width">The width of the boundry.</param>
+		/// <param name="height">The height of the boundry.</param>
 		public ParticleBoundry(float x, float y, float width, float height)
 		{
 			m_Boundry = new RectangleF(x,y,width,height);
 		}
+		/// <summary>
+		/// Create a ParticleBoundry from a given size.
+		/// </summary>
+		/// <param name="width">The width of the boundry.</param>
+		/// <param name="height">The height of the boundry.</param>
+		public ParticleBoundry(float width, float height) : this(0,0,width,height)
+		{
+		}
 
 		private RectangleF m_Boundry;
-
+		/// <summary>
+		/// Gets and sets the boundry rectangle.
+		/// </summary>
 		public RectangleF Boundry
 		{
 			get
@@ -47,6 +83,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// Gets and set the x-coordinate of the upper-left corner of the rectangle.</param>
+		/// </summary>
 		public float X
 		{
 			get
@@ -59,6 +98,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// Gets and sets the y-coordinate of the upper-left corner of the rectangle.</param>
+		/// </summary>
 		public float Y
 		{
 			get
@@ -71,6 +113,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public float Left
 		{
 			get
@@ -79,6 +124,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public float Right
 		{
 			get
@@ -87,6 +135,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public float Top
 		{
 			get
@@ -95,6 +146,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public float Bottom
 		{
 			get
@@ -103,6 +157,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public float Width
 		{
 			get
@@ -115,6 +172,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public float Height
 		{
 			get
@@ -127,6 +187,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public SizeF Size
 		{
 			get
@@ -139,6 +202,9 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public PointF Location
 		{
 			get
@@ -154,6 +220,11 @@ namespace SdlDotNet.Particles
 
 		#region IParticleManipulator Members
 
+		/// <summary>
+		/// Makes sure that every particle is within the given boundry.
+		/// </summary>
+		/// <param name="particles">The particle collection to set inside the bounds.</param>
+		/// <remarks>Particles that reach the outside the rectangle are bounced back into bounds.</remarks>
 		public void Manipulate(ParticleCollection particles)
 		{
 			foreach(Particle p in particles)
@@ -178,8 +249,6 @@ namespace SdlDotNet.Particles
 					p.Y = this.Bottom;
 					p.Velocity.Y*=-1;
 				}
-
-
 			}
 		}
 
