@@ -1522,6 +1522,54 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Draws a pixel on the surface using the provided alpha quantity.
+		/// </summary>
+		/// <param name="x">The x coordinate of where to plot the pixel</param>
+		/// <param name="y">The y coordinate of where to plot the pixel</param>
+		/// <param name="color">The color of the pixel.  The alpha of this color is overwriten by the alpha value.</param>
+		/// <param name="alpha">The alpha transparency to use for the color.</param>
+		public void DrawPixel(int x, int y, Color color, int alpha)
+		{
+			if(alpha <= 0)
+				return;
+			if(alpha >= 255)
+				DrawPixel(x,y,color);
+			else
+				DrawPixel(x,y,Color.FromArgb(alpha, color),true);
+		}
+
+		/// <summary>
+		/// Draws a pixel on the surface with the option of alpha transparency.
+		/// </summary>
+		/// <param name="x">The x coordinate of where to plot the pixel</param>
+		/// <param name="y">The y coordinate of where to plot the pixel</param>
+		/// <param name="color">The color of the pixel. The alpha value of this color is used if the alpha flag is true.</param>
+		/// <param name="alpha">A flag saying to use or not use alpha transparency (defaults to false).</param>
+		/// <remarks>If alpha transparency is to be used, the color's alpha value is used.  This uses SDL_gfx's pixelRGBA method.</remarks>
+		public void DrawPixel(int x, int y, Color color, bool alpha)
+		{
+			if(alpha)
+			{
+				if (this.disposed)
+				{
+					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				}
+				int result = SdlGfx.pixelRGBA(
+					this.Handle, (short)x, (short)y, 
+					color.R, color.G, color.B, color.A);
+				GC.KeepAlive(this);
+				if (result != (int) SdlFlag.Success)
+				{
+					throw SdlException.Generate();
+				}
+			}
+			else
+			{
+				DrawPixel(x,y,color);
+			}
+		}
+
+		/// <summary>
 		/// Flips the rows of a surface, for use in an OpenGL texture for example
 		/// </summary>
 		public void FlipVertical() 
