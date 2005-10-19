@@ -24,56 +24,48 @@ using SdlDotNet;
 namespace SdlDotNet.Particles
 {
 	/// <summary>
-	/// A collection of particles manipulated by a common gravity.
+	/// A collection of particles manipulated by a number of common manipulators.
 	/// </summary>
 	public class ParticleSystem : ParticleCollection
 	{
-		private Vector m_Gravity;
+		private ParticleManipulatorCollection m_Manipulators;
 
-		/// <summary>
-		/// Creates a new ParticleSystem with a common gravity.
-		/// </summary>
-		/// <param name="gravity">The gravity (horizontal and vertical) of the particle system.</param>
-		public ParticleSystem(Vector gravity)
+		public ParticleManipulatorCollection Manipulators
 		{
-			m_Gravity = gravity;
+			get
+			{
+				return m_Manipulators;
+			}
+			set
+			{
+				m_Manipulators = value;
+			}
 		}
 
-		/// <summary>
-		/// Creates a new ParticleSystem using gravity and wind.
-		/// </summary>
-		/// <param name="gravity">The vertical gravity of the system.</param>
-		/// <param name="wind">The horizontal gravity of the system.  This is commonly refered to as wind.</param>
-		public ParticleSystem(float gravity, float wind) : this(new Vector(wind, gravity))
+		public ParticleSystem()
 		{
+			m_Manipulators = new ParticleManipulatorCollection();
 		}
 
-		/// <summary>
-		/// Creates a new ParticleSystem with a vertical gravity.
-		/// </summary>
-		/// <param name="gravity">The vertical gravity of the system.</param>
-		public ParticleSystem(float gravity) : this(new Vector(0,gravity))
+		public ParticleSystem(ParticleManipulatorCollection manipulators)
 		{
+			m_Manipulators = manipulators;
 		}
 
-		/// <summary>
-		/// Creates a new ParticleSystem.
-		/// </summary>
-		/// <remarks>The gravity defaults as "new Vector()".</remarks>
-		public ParticleSystem() : this(new Vector())
+		public ParticleSystem(IParticleManipulator manipulator)
 		{
+			m_Manipulators.Add(manipulator);
 		}
+
+
 
 		/// <summary>
 		/// Updates all particles within this system using the given gravity.
 		/// </summary>
 		public override void Update()
 		{
-			foreach(Particle particle in this.List)
-			{
-				particle.Velocity += m_Gravity;
-			}
-			base.Update ();
+			m_Manipulators.Manipulate(this);
+			base.Update();
 		}
 	}
 }
