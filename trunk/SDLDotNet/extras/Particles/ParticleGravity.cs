@@ -3,7 +3,7 @@ using System;
 namespace SdlDotNet.Particles
 {
 	/// <summary>
-	/// Summary description for ParticleGravity.
+	/// A particle manipulator that pulls all particles by a common gravity.
 	/// </summary>
 	public class ParticleGravity : IParticleManipulator
 	{
@@ -90,6 +90,10 @@ namespace SdlDotNet.Particles
 
 		#region IParticleManipulator Members
 
+		/// <summary>
+		/// Manipulate particles by the gravity.
+		/// </summary>
+		/// <param name="particles">The particles to pull by the gravity.</param>
 		public void Manipulate(ParticleCollection particles)
 		{
 			foreach(Particle p in particles)
