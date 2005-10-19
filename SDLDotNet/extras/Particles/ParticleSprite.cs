@@ -88,6 +88,7 @@ namespace SdlDotNet.Particles
 			this.Velocity = velocity;
 			m_Sprite = sprite;
 			this.Life = life;
+			this.LifeFull = life;
 		}
 
 		/// <summary>
@@ -99,6 +100,7 @@ namespace SdlDotNet.Particles
 		{
 			m_Sprite = sprite;
 			this.Life = life;
+			this.LifeFull = life;
 		}
 
 		/// <summary>
@@ -116,6 +118,7 @@ namespace SdlDotNet.Particles
 			this.Velocity = velocity;
 			m_Sprite = sprite;
 			this.Life = life;
+			this.LifeFull = life;
 		}
 
 		private Sprite m_Sprite;
