@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Drawing;
 
 using SdlDotNet;
 using SdlDotNet.Sprites;
@@ -25,13 +26,28 @@ using SdlDotNet.Sprites;
 namespace SdlDotNet.Particles
 {
 	/// <summary>
-	/// Summary description for Class1.
+	/// An abstract class describing a base particle.
 	/// </summary>
+	/// <remarks>Some implementations of the particle class include ParticlePixel and ParticleSprite.</remarks>
 	public abstract class Particle
 	{
+		public static Particle Randomize(Particle p, Rectangle bounds, float minSpeed, float maxSpeed, int minLife, int maxLife, float minDir, float maxDir)
+		{
+			p.X = ParticleSystem.Range(bounds.Left,bounds.Right);
+			p.Y = ParticlesSystem.Range(bounds.Top,bounds.Bottom);
+			p.Life = ParticleSystem.random.Next(minLife,maxLife);
+			p.Velocity.Length = ParticleSystem.Range(minSpeed, maxSpeed);
+			p.Velocity.Direction = ParticleSystem.Range(minDir, maxDir);
+			return p;
+		}
+		public static Particle Randomize(Particle p, Rectangle bounds, float minSpeed, float maxSpeed, int minLife, int maxLife)
+		{
+			return Randomize(p, bounds, minSpeed, maxSpeed, minLife, maxLife, 0, ParticleSystem.random.NextDouble() * Math.PI * 2);
+		}
+
 		private int m_Life = -1;
 		/// <summary>
-		/// The current life of the particle.
+		/// The current life of the particle. -1 means infinate life.
 		/// </summary>
 		/// <remarks>This is decreased when the Update method is called.</remarks>
 		public int Life
@@ -43,6 +59,23 @@ namespace SdlDotNet.Particles
 			set
 			{
 				m_Life = value;
+			}
+		}
+
+		private int m_LifeFull = 100;
+		/// <summary>
+		/// Gets and sets the value representing the full life of the particle.
+		/// </summary>
+		/// <remarks>This is usually used when distinguishing when the particle should start dying out with alpha transparency.</remarks>
+		public int LifeFull
+		{
+			get
+			{
+				return m_LifeFull;
+			}
+			set
+			{
+				m_LifeFull = value;
 			}
 		}
 

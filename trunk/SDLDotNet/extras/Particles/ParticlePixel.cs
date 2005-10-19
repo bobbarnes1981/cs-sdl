@@ -70,6 +70,7 @@ namespace SdlDotNet.Particles
 			this.Y = y;
 			m_Color = color;
 			Life = life;
+			LifeFull = life;
 		}
 
 		/// <summary>
@@ -87,6 +88,7 @@ namespace SdlDotNet.Particles
 			this.Y = y;
 			m_Color = color;
 			Life = life;
+			LifeFull = life;
 		}
 		/// <summary>
 		/// 
@@ -155,8 +157,33 @@ namespace SdlDotNet.Particles
 		/// <param name="destination">The destination surface where to draw the particle.</param>
 		public override void Render(Surface destination)
 		{
-			destination.DrawPixel((int)this.X,(int)this.Y, m_Color);
+			if(this.LifeFull != -1)
+			{
+				float alpha;
+				if(this.Life >= this.LifeFull)
+					alpha = 255;
+				else if (this.Life <= 0)
+					alpha = 0;
+				else
+					alpha = ((float)this.Life / this.LifeFull) * 255F;
+
+				destination.DrawPixel((int)this.X,(int)this.Y, m_Color, (int)alpha);
+			}
+			else
+			{
+				destination.DrawPixel((int)this.X,(int)this.Y, m_Color, true);
+			}
 		}
+
+		public static override Particle FromRange(Rectangle bounds, float minSpeed, float maxSpeed, int minLife, int maxLife, float minDir, float maxDir)
+		{
+			ParticlePixel p = new ParticlePixel(ParticleSystem.Range(bounds.Left,bounds.Right), ParticlesSystem.Range(bounds.Top,bounds.Bottom));
+			p.Life = 
+			return
+		}
+
+
+
 
 
 		#endregion
