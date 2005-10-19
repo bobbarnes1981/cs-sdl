@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Drawing;
 
 using SdlDotNet.Sprites;
 
@@ -138,8 +139,7 @@ namespace SdlDotNet.Particles
 		/// <param name="destination">The surface to render the sprite.</param>
 		public override void Render(Surface destination)
 		{
-			m_Sprite.X = (int)this.X;
-			m_Sprite.Y = (int)this.Y;
+			m_Sprite.Center = new Point((int)this.X, (int)this.Y);
 			m_Sprite.Render(destination);
 		}
 	}

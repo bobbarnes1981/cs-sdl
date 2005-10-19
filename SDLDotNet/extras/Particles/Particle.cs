@@ -29,7 +29,7 @@ namespace SdlDotNet.Particles
 	/// </summary>
 	public abstract class Particle
 	{
-		private int m_Life = 1000;
+		private int m_Life = -1;
 		/// <summary>
 		/// The current life of the particle.
 		/// </summary>
@@ -77,7 +77,7 @@ namespace SdlDotNet.Particles
 			}
 		}
 
-		private Vector m_Velocity;
+		private Vector m_Velocity = new Vector(0,0);
 		/// <summary>
 		/// The speed and direction the particle is going.
 		/// </summary>
@@ -100,17 +100,19 @@ namespace SdlDotNet.Particles
 		public abstract void Render(Surface destination);
 
 		/// <summary>
-		/// 
+		/// Updates the location and life of the particle.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>True if the particle is still alive, false if the particle is to be destroyed.</returns>
 		public virtual bool Update()
 		{
 			m_X += m_Velocity.X;
 			m_Y += m_Velocity.Y;
-			m_Life--;
-			if(m_Life <= 0)
+			if(m_Life != -1) // -1 is alife forever.
 			{
-				return false;
+				if(--m_Life == 0)
+				{
+					return false;
+				}
 			}
 			return true;
 		}

@@ -1,0 +1,103 @@
+using System;
+
+namespace SdlDotNet.Particles
+{
+	/// <summary>
+	/// Summary description for ParticleGravity.
+	/// </summary>
+	public class ParticleGravity : IParticleManipulator
+	{
+		private Vector m_Velocity = new Vector(0f,0.2f);
+		/// <summary>
+		/// Creates a new ParticleSystem with a common gravity.
+		/// </summary>
+		/// <param name="velocity">The velocity (horizontal and vertical) of the particle system.</param>
+		public ParticleGravity(Vector velocity)
+		{
+			m_Velocity = velocity;
+		}
+
+		/// <summary>
+		/// Creates a new ParticleSystem using gravity and wind.
+		/// </summary>
+		/// <param name="gravity">The vertical gravity of the system.</param>
+		/// <param name="wind">The horizontal gravity of the system.  This is commonly refered to as wind.</param>
+		public ParticleGravity(float gravity, float wind) : this(new Vector(wind, gravity))
+		{
+		}
+
+		/// <summary>
+		/// Creates a new ParticleSystem with a vertical gravity.
+		/// </summary>
+		/// <param name="gravity">The vertical gravity of the system.</param>
+		public ParticleGravity(float gravity) : this(new Vector(0,gravity))
+		{
+		}
+
+		/// <summary>
+		/// Creates a new ParticleSystem.
+		/// </summary>
+		/// <remarks>The gravity defaults as "new Vector()".</remarks>
+		public ParticleGravity() : this(new Vector())
+		{
+		}
+
+		/// <summary>
+		/// Gets and sets the velocity (direction and speed) of the gravity as a vector.
+		/// </summary>
+		public Vector Velocity
+		{
+			get
+			{
+				return m_Velocity;
+			}
+			set
+			{
+				m_Velocity = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets and sets the vertical pull of the gravity.
+		/// </summary>
+		public float Gravity
+		{
+			get
+			{
+				return m_Velocity.Y;
+			}
+			set
+			{
+				m_Velocity.Y = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets and sets the horizontal push of the gravity.
+		/// </summary>
+		public float Wind
+		{
+			get
+			{
+				return m_Velocity.X;
+			}
+			set
+			{
+				m_Velocity.X = value;
+			}
+		}
+
+
+		#region IParticleManipulator Members
+
+		public void Manipulate(ParticleCollection particles)
+		{
+			foreach(Particle p in particles)
+			{
+				p.Velocity += m_Velocity;
+			}
+		}
+
+		#endregion
+	}
+}
