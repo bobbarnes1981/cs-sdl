@@ -115,6 +115,41 @@ namespace SdlDotNet
         public Vector(PointF point) : this(point.X, point.Y) {}
 
 		/// <summary>
+		/// Creates a vector based on the difference between the two given points.
+		/// </summary>
+		/// <param name="p1">The first point.</param>
+		/// <param name="p2">The second offset point.</param>
+		public Vector(PointF p1, PointF p2)
+		{
+			m_x = p2.X - p1.X;
+			m_y = p2.Y - p1.Y;
+		}
+
+		/// <summary>
+		/// Creates a vector based on the difference between the two given points.
+		/// </summary>
+		/// <param name="x1">The X coordinate of the first point.</param>
+		/// <param name="y1">The Y coordinate of the first point.</param>
+		/// <param name="x2">The X coordinate of the second point.</param>
+		/// <param name="y2">The Y coordinate of the second point.</param>
+		public Vector(float x1, float y1, float x2, float y2)
+		{
+			m_x = x2 - x1;
+			m_y = y2 - y1;
+		}
+
+		/// <summary>
+		/// Creates a vector based on the difference between the two given points.
+		/// </summary>
+		/// <param name="p1">The first point.</param>
+		/// <param name="p2">The second offset point.</param>
+		public Vector(Point p1, Point p2)
+		{
+			m_x = p2.X - p1.X;
+			m_y = p2.Y - p1.Y;
+		}
+
+		/// <summary>
 		/// Copy constructor
 		/// </summary>
         /// <param name="vector">The vector to copy.</param>
