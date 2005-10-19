@@ -14,13 +14,11 @@
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	<ifnot test="${build.debug}">
-	    <copy todir="${nant.project.basedir}/${build.dir}">
-		<fileset basedir="${project.main.dir}/${src.dir}">
-		    <include name="${project.name}.snk"/>
-		</fileset>
-	    </copy>
-	</ifnot>
+	<copy todir="${nant.project.basedir}/${build.dir}">
+	    <fileset basedir="${project.main.dir}/${src.dir}">
+		<include name="${project.name}.snk"/>
+	    </fileset>
+	</copy>
 	<csc target="library" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" >
 	    <sources failonempty="true">
 		<include name="*.cs" />
@@ -32,6 +30,10 @@
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Data.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Windows.Forms.dll"/>
 	    </references>
+	    <resources>
+		<include name="*.resx"/>
+		<include name="SurfaceControl.bmp"/>
+	    </resources>
 	</csc>
     </target>
     <target name="clean">

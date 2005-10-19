@@ -69,6 +69,7 @@
 		<items>
 		    <include name="${src.dir}/**/*.build" />
 		    <include name="${examples.dir}/**/*.build" />
+		    <include name="${extras.dir}/**/*.build" />
 		    <include name="${tests.dir}/**/*.build" />
 		</items>
 	    </in>

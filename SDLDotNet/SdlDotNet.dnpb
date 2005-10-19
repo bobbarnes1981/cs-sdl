@@ -3,7 +3,7 @@
     <Solution name="SdlDotNet">
 	<Configuration name="Debug">
 	    <Options>
-		<CompilerDefines>DEBUG;TRACE;NET;NET</CompilerDefines>
+		<CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		<OptimizeCode>false</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>.\bin\Debug</OutputPath>
@@ -501,7 +501,7 @@
 	<Project name="SdlDotNet.Particles" path="extras\\Particles" language="C#" type="Library" assemblyName="SdlDotNet.Particles" rootNamespace="SdlDotNet.Particles">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -512,7 +512,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
@@ -532,7 +532,7 @@
 	<Project name="ParticlesExample" path="examples\\ParticlesExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.ParticlesExample" assemblyName="ParticlesExample" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Debug</OutputPath>
@@ -543,7 +543,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>.\bin\Release</OutputPath>
