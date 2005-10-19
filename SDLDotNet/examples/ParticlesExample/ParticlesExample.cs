@@ -12,7 +12,7 @@ namespace SdlDotNet.Examples
 	public class ParticlesExample
 	{
 		// Make a new particle system with some gravity
-		ParticleSystem particles = new ParticleSystem(0.3f);
+		ParticleSystem particles = new ParticleSystem();
 
 		/// <summary>
 		/// Constructor
@@ -21,20 +21,31 @@ namespace SdlDotNet.Examples
 		{
 			
 			// Make the first particle (a pixel)
-			Particle first = new ParticlePixel(Color.White, 100,100,new Vector(-1,-7),70);
+			Particle first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
 			particles.Add(first); // Add it to the system
 
 			// Make the second particle (an animated sprite)
 			Animation anim = new Animation(new SurfaceCollection("../../Data/marble1.png", new Size(50,50)),1);
 			AnimatedSprite marble = new AnimatedSprite(anim);
 			marble.Animate = true;
-			Particle second = new ParticleSprite(marble, 200, 200, new Vector(2,-10), 500);
+			Particle second = new ParticleSprite(marble, 200, 200, new Vector(-7,-9), 500);
+			second.Life = -1;
 			particles.Add(second); // Add it to the system
+
+			ParticleGravity grav = new ParticleGravity(0.5f);
+			particles.Manipulators.Add(grav);
+
+			ParticleFriction frict = new ParticleFriction(0.1f);
+			particles.Manipulators.Add(frict);
 
 			// Setup SDL.NET!
 			Video.SetVideoModeWindow(400,300);
 			Video.WindowCaption = "SDL.NET - ParticlesExample";
 			Events.Tick+=new TickEventHandler(Events_Tick);
+			Events.KeyboardDown+=new KeyboardEventHandler(Events_KeyboardDown);
+
+			ParticleBoundry bound = new ParticleBoundry(SdlDotNet.Video.Screen.Size);
+			particles.Manipulators.Add(bound);
 		}
 
 		/// <summary>
@@ -68,6 +79,12 @@ namespace SdlDotNet.Examples
 			Video.Screen.Fill(Color.Black);
 			particles.Render(Video.Screen);
 			Video.Screen.Update();
+		}
+
+		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
+		{
+			if(e.Key == Key.Escape)
+				Events.QuitApplication();
 		}
 	}
 }
