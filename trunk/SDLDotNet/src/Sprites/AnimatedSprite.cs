@@ -45,7 +45,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="name">Name of animation</param>
 		/// <param name="anim">animation</param>
-		public AnimatedSprite(string name, Animation anim) : this()
+		public AnimatedSprite(string name, AnimationCollection anim) : this()
 		{
 			m_Animations.Add(name, anim);
 		}
@@ -54,7 +54,7 @@ namespace SdlDotNet.Sprites
 		/// Create AnimatedSprite from Animation
 		/// </summary>
 		/// <param name="anim">animation</param>
-		public AnimatedSprite(Animation anim) : this()
+		public AnimatedSprite(AnimationCollection anim) : this()
 		{
 			m_Animations.Add("Default", anim);
 		}
@@ -65,7 +65,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="d">SurfaceCollection</param>
 		/// <param name="coordinates">Initial Coordinates</param>
 		public AnimatedSprite(SurfaceCollection d, Point coordinates) :this()	{
-			m_Animations.Add("Default", new Animation(d));
+			m_Animations.Add("Default", new AnimationCollection(d));
 			this.Surface = d[0];
 			this.Rectangle = d[0].Rectangle;
 			this.Position = coordinates;
@@ -79,7 +79,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="z">initial Z position</param>
 		public AnimatedSprite(SurfaceCollection d, Point coordinates, int z) : this()
 		{
-			m_Animations.Add("Default", new Animation(d));
+			m_Animations.Add("Default", new AnimationCollection(d));
 			this.Surface = d[0];
 			this.Rectangle = d[0].Rectangle;
 			this.Position = coordinates;
@@ -92,7 +92,7 @@ namespace SdlDotNet.Sprites
         /// <param name="d">SurfaceCollection</param>
         public AnimatedSprite(SurfaceCollection d) : this()
         {
-            m_Animations.Add("Default", new Animation(d));
+            m_Animations.Add("Default", new AnimationCollection(d));
             this.Surface = d[0];
             this.Rectangle = d[0].Rectangle;
             this.Position = new Point(0, 0);
@@ -103,12 +103,12 @@ namespace SdlDotNet.Sprites
 		#region Properties
  
 		
-		private AnimationCollection m_Animations = new AnimationCollection();
+		private AnimationDictionary m_Animations = new AnimationDictionary();
 
 		/// <summary>
 		/// The collection of animations for the animated sprite
 		/// </summary>
-		public AnimationCollection Animations
+		public AnimationDictionary Animations
 		{
 			get
 			{
@@ -221,7 +221,7 @@ namespace SdlDotNet.Sprites
 		private System.Timers.Timer m_Timer = new System.Timers.Timer(500);
 		private void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			Animation current = m_Animations[m_CurrentAnimation];
+			AnimationCollection current = m_Animations[m_CurrentAnimation];
 
             if (m_Frame >= current.Count && current.AnimateForward) // Going forwards and past last frame
 			{

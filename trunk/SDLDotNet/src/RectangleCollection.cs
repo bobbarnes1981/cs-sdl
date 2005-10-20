@@ -83,26 +83,25 @@ namespace SdlDotNet
 		#region ICollection Members
 
 		/// <summary>
-		/// Copies collection to array
+		/// Provide the explicit interface member for ICollection.
 		/// </summary>
-		/// <param name="array">Arrayto copy the collection to</param>
-		/// <param name="index">index value</param>
-		public void CopyTo(Array array, int index)
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		void ICollection.CopyTo(Array array, int index)
+		{
+			this.List.CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		public virtual void CopyTo(Rectangle[] array, int index)
 		{
 			((ICollection)this).CopyTo(array, index);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public object SyncRoot
-		{
-			get
-			{
-				// TODO:  Add RectangleCollection.SyncRoot getter implementation
-				return null;
-			}
-		}
 		#endregion
 	}
 
