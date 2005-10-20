@@ -42,10 +42,10 @@ namespace SdlDotNet.Particles
 			{
 				return m_Children;
 			}
-			set
-			{
-				m_Children = value;
-			}
+//			set
+//			{
+//				m_Children = value;
+//			}
 		}
 
 		/// <summary>

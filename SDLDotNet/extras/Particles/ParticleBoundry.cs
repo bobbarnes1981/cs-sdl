@@ -229,6 +229,10 @@ namespace SdlDotNet.Particles
 		/// <remarks>Particles that reach the outside the rectangle are bounced back into bounds.</remarks>
 		public void Manipulate(ParticleCollection particles)
 		{
+			if (particles == null)
+			{
+				throw new ArgumentNullException("particles");
+			}
 			foreach(Particle p in particles)
 			{
 				if(p is ParticleEmitter)

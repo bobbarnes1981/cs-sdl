@@ -231,7 +231,9 @@ namespace SdlDotNet
 			m_CurrentMusic = this;
 			if (SdlMixer.Mix_FadeInMusicPos(this.Handle, 
 				numberOfTimes, milliseconds, position) != 0)
+			{
 				throw SdlException.Generate();
+			}
 		}
 		/// <summary>
 		/// Sets the music volume between 0 and 128.
@@ -292,9 +294,13 @@ namespace SdlDotNet
 		public static void Position(double musicPosition) 
 		{
 			if (m_CurrentMusic.MusicType == MusicType.Mp3)
+			{
 				Rewind();
+			}
 			if (SdlMixer.Mix_SetMusicPosition(musicPosition) != 0)
+			{
 				throw SdlException.Generate();
+			}
 		}
 		/// <summary>
 		/// Stops playing music
@@ -312,7 +318,9 @@ namespace SdlDotNet
 		public static void Fadeout(int ms) 
 		{
 			if (SdlMixer.Mix_FadeOutMusic(ms) != 1)
+			{
 				throw SdlException.Generate();
+			}
 		}
 		/// <summary>
 		/// Gets a flag indicating whether or not music is playing

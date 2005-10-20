@@ -1392,6 +1392,10 @@ namespace SdlDotNet
 		/// <param name="steps">number of steps in curve</param>
 		public Bezier(ArrayList points, int steps)
 		{
+			if (points == null)
+			{
+				throw new ArgumentNullException("points");
+			}
 			this.x = new short[points.Count];
 			this.y = new short[points.Count];
 			this.n = 0;
@@ -1575,6 +1579,10 @@ namespace SdlDotNet
 			}
 			set
 			{
+				if (value == null)
+				{
+					throw new ArgumentNullException("value");
+				}
 				for (int i = 0; i < value.Count; i++)
 				{
 					x[i] = (short)((Point)value[i]).X;

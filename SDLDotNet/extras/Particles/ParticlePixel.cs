@@ -157,6 +157,10 @@ namespace SdlDotNet.Particles
 		/// <param name="destination">The destination surface where to draw the particle.</param>
 		public override void Render(Surface destination)
 		{
+			if (destination == null)
+			{
+				throw new ArgumentNullException("destination");
+			}
 			if(this.LifeFull != -1)
 			{
 				float alpha;

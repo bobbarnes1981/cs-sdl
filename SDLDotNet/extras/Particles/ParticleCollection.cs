@@ -68,6 +68,10 @@ namespace SdlDotNet.Particles
 		/// <param name="collection">The collection of particles to add.</param>
 		public void Add(ParticleCollection collection)
 		{
+			if (collection == null)
+			{
+				throw new ArgumentNullException("collection");
+			}
 			foreach(Particle particle in collection)
 			{
 				List.Add(particle);

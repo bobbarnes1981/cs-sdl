@@ -224,16 +224,53 @@ namespace SdlDotNet.Examples
 			placeBlocks();
 		}
 
+		#region IDisposable Members
+
+		private bool disposed;
+
 		/// <summary>
-		/// 
+		/// Destroy sprite
+		/// </summary>
+		/// <param name="disposing">If true, remove all unamanged resources</param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					this.blockGrid.Dispose();
+					this.bottomBlock.Dispose();
+					this.middleBlock.Dispose();;
+					this.Parent = null;
+					this.topBlock.Dispose();
+					GC.SuppressFinalize(this);
+				}
+				this.disposed = true;
+			}
+		}
+		/// <summary>
+		/// Destroy object
 		/// </summary>
 		public void Dispose()
-		{	
-			this.blockGrid.Dispose();
-			this.bottomBlock.Dispose();
-			this.middleBlock.Dispose();;
-			this.Parent = null;
-			this.topBlock.Dispose();
+		{
+			this.Dispose(true);
 		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~Triad() 
+		{
+			Dispose(false);
+		}
+		#endregion
 	}
 }

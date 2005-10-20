@@ -132,15 +132,48 @@ namespace SdlDotNet.Examples
 		}
 		#region IDisposable Members
 
+		private bool disposed;
+
 		/// <summary>
-		/// 
+		/// Destroy sprite
+		/// </summary>
+		/// <param name="disposing">If true, remove all unamanged resources</param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					font.Dispose();
+					GC.SuppressFinalize(this);
+				}
+				this.disposed = true;
+			}
+		}
+		/// <summary>
+		/// Destroy object
 		/// </summary>
 		public void Dispose()
 		{
-			font.Dispose();
-			// TODO:  Add Scoreboard.Dispose implementation
+			this.Dispose(true);
 		}
 
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~Scoreboard() 
+		{
+			Dispose(false);
+		}
 		#endregion
+
 	}
 }
