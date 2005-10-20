@@ -79,7 +79,7 @@ namespace SdlDotNet
 		/// <returns>String repesentation.</returns>
 		public override string ToString()
 		{
-			return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2})", x, y);
+			return String.Format(CultureInfo.CurrentCulture, "({0},{1})", x, y);
 		}
 		/// <summary>
 		/// Equals
@@ -88,6 +88,10 @@ namespace SdlDotNet
 		/// <returns>If objects are equal, this returns true.</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(BallMotion))
 				return false;
                 
@@ -167,13 +171,13 @@ namespace SdlDotNet
 			this.index = Sdl.SDL_JoystickIndex(handle); 
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		~Joystick()
-		{
-			Dispose(false);
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		~Joystick()
+//		{
+//			Dispose(false);
+//		}
 
 		/// <summary>
 		/// Destroys the surface object and frees its memory

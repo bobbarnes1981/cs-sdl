@@ -68,6 +68,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="destination">The destination surface.</param>
 		public virtual RectangleCollection Draw(Surface destination)
 		{
+			if (destination == null)
+			{
+				throw new ArgumentNullException("destination");
+			}
 			RectangleCollection rects = new RectangleCollection();
 			for (int i = 0; i < this.Count; i++)
 			{
@@ -94,6 +98,10 @@ namespace SdlDotNet.Sprites
 		/// </param>
 		public void Erase(Surface surface, Surface background)
 		{
+			if (surface == null)
+			{
+				throw new ArgumentNullException("surface");
+			}
 			for (int i = 0; i < this.lostRects.Count; i++)
 			{
 				surface.Blit(background, this.lostRects[i], this.lostRects[i]);
@@ -119,6 +127,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="sprite">Sprite to add</param>
 		public virtual int Add(Sprite sprite)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			sprite.AddInternal(this);
 			return (List.Add(sprite));
 		}
@@ -138,6 +150,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="spriteCollection">SpriteCollection to add Sprites from</param>
 		public virtual int Add(SpriteCollection spriteCollection)
 		{
+			if (spriteCollection == null)
+			{
+				throw new ArgumentNullException("spriteCollection");
+			}
 			for (int i = 0; i < spriteCollection.Count; i++)
 			{
 				spriteCollection[i].AddInternal(this);
@@ -167,6 +183,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="sprite">Sprite to remove</param>
 		public virtual void Remove(Sprite sprite)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			this.lostRects.Add(sprite.RectangleDirty);
 			sprite.RemoveInternal(this);
 			List.Remove(sprite);
@@ -178,6 +198,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="sprite">Sprite to remove</param>
 		public void RemoveInternal(Sprite sprite)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			this.lostRects.Add(sprite.RectangleDirty);
 			List.Remove(sprite);
 		}
@@ -190,6 +214,10 @@ namespace SdlDotNet.Sprites
 		/// </param>
 		public virtual void Remove(SpriteCollection spriteCollection)
 		{
+			if (spriteCollection == null)
+			{
+				throw new ArgumentNullException("spriteCollection");
+			}
 			for (int i = 0; i < spriteCollection.Count; i++)
 			{
 				if (this.Contains(spriteCollection[i]))
@@ -850,6 +878,10 @@ namespace SdlDotNet.Sprites
 		/// </returns>
 		public virtual Hashtable IntersectsWith(SpriteCollection spriteCollection)
 		{
+			if (spriteCollection == null)
+			{
+				throw new ArgumentNullException("spriteCollection");
+			}
 			Hashtable intersection = new Hashtable();
 			for (int i = 0; i < this.Count; i++)
 			{

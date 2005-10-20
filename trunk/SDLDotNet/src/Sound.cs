@@ -56,10 +56,10 @@ namespace SdlDotNet
 		/// </summary>
 		public event SoundEventHandler SoundEvent;
 		
-		internal Sound(IntPtr handle) 
-		{
-			this.Handle = handle;
-		}
+//		internal Sound(IntPtr handle) 
+//		{
+//			this.Handle = handle;
+//		}
 
 		internal Sound(IntPtr handle, long size) 
 		{

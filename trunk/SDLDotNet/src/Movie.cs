@@ -36,10 +36,10 @@ namespace SdlDotNet
 		private Smpeg.SMPEG_Info movieInfo;
 		private bool disposed;
 
-		internal Movie(IntPtr handle) 
-		{
-			this.Handle = handle;
-		}
+//		internal Movie(IntPtr handle) 
+//		{
+//			this.Handle = handle;
+//		}
 
 		/// <summary>
 		/// Create movie object from file
@@ -136,6 +136,10 @@ namespace SdlDotNet
 		/// <param name="surface">Surface to display movie object on</param>
 		public void Display(Surface surface)
 		{
+			if (surface == null)
+			{
+				throw new ArgumentNullException("surface");
+			}
 			Smpeg.SMPEG_setdisplay(
 				this.Handle, 
 				surface.Handle, 
@@ -502,6 +506,10 @@ namespace SdlDotNet
 		/// <param name="surface">surface to display frame to</param>
 		public void RenderFinalFrame(Surface surface)
 		{
+			if (surface == null)
+			{
+				throw new ArgumentNullException("surface");
+			}
 			Smpeg.SMPEG_renderFinal(this.Handle, surface.Handle, 0, 0);
 		}
 	}

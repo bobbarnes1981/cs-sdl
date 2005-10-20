@@ -30,12 +30,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="w">The new window width</param>
-		/// <param name="h">The new window height</param>
-		public VideoResizeEventArgs(int w, int h)
+		/// <param name="width">The new window width</param>
+		/// <param name="height">The new window height</param>
+		public VideoResizeEventArgs(int width, int height)
 		{
-			this.eventStruct.resize.w = w;
-			this.eventStruct.resize.h = h;
+			this.eventStruct.resize.w = width;
+			this.eventStruct.resize.h = height;
 			this.eventStruct.type = (byte)EventTypes.VideoResize;
 		}
 
@@ -47,7 +47,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Width of window
 		/// </summary>
-		public int W
+		public int Width
 		{
 			get
 			{
@@ -58,7 +58,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Height of window
 		/// </summary>
-		public int H
+		public int Height
 		{
 			get
 			{

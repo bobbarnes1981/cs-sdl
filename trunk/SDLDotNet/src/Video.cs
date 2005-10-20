@@ -134,7 +134,7 @@ namespace SdlDotNet
 		/// <returns>
 		/// True is mode is supported, false if it is not.
 		/// </returns>
-		public static bool IsVideoModeOK(int width, int height, bool fullscreen, int bitsPerPixel)
+		public static bool IsVideoModeOk(int width, int height, bool fullscreen, int bitsPerPixel)
 		{
 			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
 			if (fullscreen)
@@ -488,6 +488,10 @@ namespace SdlDotNet
 		/// <param name="icon">the surface containing the image</param>
 		public static void WindowIcon(Surface icon) 
 		{
+			if (icon == null)
+			{
+				throw new ArgumentNullException("icon");
+			}
 			Sdl.SDL_WM_SetIcon(icon.Handle, null);
 		}
 
@@ -527,7 +531,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns video driver name
 		/// </summary>
-		public string VideoDriver
+		public static string VideoDriver
 		{
 			get
 			{

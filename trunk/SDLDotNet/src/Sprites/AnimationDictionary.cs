@@ -254,6 +254,10 @@ namespace SdlDotNet.Sprites
 		/// the Dictionary after adding the sample.</returns>
 		public int Add(AnimationDictionary animDictionary)
 		{
+			if (animDictionary == null)
+			{
+				throw new ArgumentNullException("animDictionary");
+			}
 			IDictionaryEnumerator dict = animDictionary.GetEnumerator();
 			while(dict.MoveNext())
 			{

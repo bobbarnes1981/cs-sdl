@@ -350,7 +350,7 @@ namespace SdlDotNet.Examples
 
 		private void Resize (object sender, VideoResizeEventArgs e)
 		{
-			m_screen = Video.SetVideoModeWindowOpenGL(e.W, e.H, true);
+			m_screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		}
 		private void KeyboardDown(
 			object sender,
