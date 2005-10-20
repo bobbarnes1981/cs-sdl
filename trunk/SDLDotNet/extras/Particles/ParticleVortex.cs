@@ -147,6 +147,10 @@ namespace SdlDotNet.Particles
 		/// <param name="particles">The collection of particles to manipulate.</param>
 		public void Manipulate(ParticleCollection particles)
 		{
+			if (particles == null)
+			{
+				throw new ArgumentNullException("particles");
+			}
 			foreach(Particle p in particles)
 			{
 				if(p is ParticleEmitter)

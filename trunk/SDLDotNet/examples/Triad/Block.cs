@@ -140,7 +140,7 @@ namespace SdlDotNet.Examples
 	
 		static Surface redBlock;
 
-		Surface getRedBlock()
+		static Surface getRedBlock()
 		{
 			if (redBlock == null)
 			{
@@ -152,7 +152,7 @@ namespace SdlDotNet.Examples
 
 		static Surface whiteBlock;
 
-		Surface getWhiteBlock()
+		static Surface getWhiteBlock()
 		{
 			if (whiteBlock == null)
 			{
@@ -164,7 +164,7 @@ namespace SdlDotNet.Examples
 		
 		static Surface yellowBlock;
 
-		Surface getYellowBlock()
+		static Surface getYellowBlock()
 		{
 			if (yellowBlock == null)
 			{
@@ -176,7 +176,7 @@ namespace SdlDotNet.Examples
 
 		static Surface purpleBlock;
 
-		Surface getPurpleBlock()
+		static Surface getPurpleBlock()
 		{
 			if (purpleBlock == null)
 			{
@@ -187,7 +187,7 @@ namespace SdlDotNet.Examples
 		}
 
 		static Surface blueBlock;
-		Surface getBlueBlock()
+		static Surface getBlueBlock()
 		{
 			if (blueBlock == null)
 			{
@@ -207,12 +207,12 @@ namespace SdlDotNet.Examples
 			
 			switch(blockType)
 			{
-				case BlockType.Purple:	image = this.getPurpleBlock();	break;
-				case BlockType.Red:		image = this.getRedBlock();		break;
-				case BlockType.White:	image = this.getWhiteBlock();	break;
-				case BlockType.Yellow:	image = this.getYellowBlock();	break;
-				case BlockType.Blue:	image = this.getBlueBlock();	break;
-				default: image = this.getBlueBlock(); break;
+				case BlockType.Purple:	image = Block.getPurpleBlock();	break;
+				case BlockType.Red:		image = Block.getRedBlock();		break;
+				case BlockType.White:	image = Block.getWhiteBlock();	break;
+				case BlockType.Yellow:	image = Block.getYellowBlock();	break;
+				case BlockType.Blue:	image = Block.getBlueBlock();	break;
+				default: image = Block.getBlueBlock(); break;
 			}
 
 			if (!this.Destroy)
@@ -235,12 +235,50 @@ namespace SdlDotNet.Examples
 		{
 		}
 
+		#region IDisposable Members
+
+		private bool disposed;
+
 		/// <summary>
-		/// 
+		/// Destroy sprite
+		/// </summary>
+		/// <param name="disposing">If true, remove all unamanged resources</param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					this.Parent = null;	
+					GC.SuppressFinalize(this);
+				}
+				this.disposed = true;
+			}
+		}
+		/// <summary>
+		/// Destroy object
 		/// </summary>
 		public void Dispose()
 		{
-			this.Parent = null;			
+			this.Dispose(true);
 		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~Block() 
+		{
+			Dispose(false);
+		}
+		#endregion
+
 	}
 }

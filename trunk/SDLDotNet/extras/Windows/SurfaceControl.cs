@@ -64,6 +64,10 @@ namespace SdlDotNet.Windows
 			}
 			set
 			{
+				if (value == null)
+				{
+					throw new ArgumentNullException("value");
+				}
 				surface = value;
 				this.Image = surface.Bitmap;
 			}
@@ -88,7 +92,7 @@ namespace SdlDotNet.Windows
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
 			base.OnMouseDown (e);
-			SdlDotNet.Events.Add(new MouseButtonEventArgs(this.ConvertMouseButtons(e), true, (short)e.X, (short)e.Y));
+			SdlDotNet.Events.Add(new MouseButtonEventArgs(SurfaceControl.ConvertMouseButtons(e), true, (short)e.X, (short)e.Y));
 		}
 
 		/// <summary>
@@ -98,7 +102,7 @@ namespace SdlDotNet.Windows
 		protected override void OnMouseUp(MouseEventArgs e)
 		{
 			base.OnMouseUp (e);
-			SdlDotNet.Events.Add(new MouseButtonEventArgs(this.ConvertMouseButtons(e), false, (short)e.X, (short)e.Y));
+			SdlDotNet.Events.Add(new MouseButtonEventArgs(SurfaceControl.ConvertMouseButtons(e), false, (short)e.X, (short)e.Y));
 		}
 		
 		int lastX;
@@ -114,13 +118,13 @@ namespace SdlDotNet.Windows
 			
 			if (e.Button != MouseButtons.None)
 			{
-				SdlDotNet.Events.Add(new MouseMotionEventArgs(true, this.ConvertMouseButtons(e), (short)e.X, (short)e.Y, (short)(e.X - lastX), (short)(e.Y - lastY)));
+				SdlDotNet.Events.Add(new MouseMotionEventArgs(true, SurfaceControl.ConvertMouseButtons(e), (short)e.X, (short)e.Y, (short)(e.X - lastX), (short)(e.Y - lastY)));
 			}
 			lastX = e.X;
 			lastY = e.Y;
 		}
 
-		private MouseButton ConvertMouseButtons(MouseEventArgs e)
+		private static MouseButton ConvertMouseButtons(MouseEventArgs e)
 		{
 			if (e.Button == MouseButtons.Left)
 			{

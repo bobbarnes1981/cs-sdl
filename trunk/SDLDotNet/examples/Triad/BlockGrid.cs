@@ -31,7 +31,7 @@ namespace SdlDotNet.Examples
 	{
 		Size sizeOfGrid;
 		Triad triad;
-		BlockCollection blockList = new BlockCollection();
+		static BlockCollection blockList = new BlockCollection();
 		int delayFactor = 400;
 		private float speedFactor = 1.0f;
 		/// <summary>
@@ -62,7 +62,7 @@ namespace SdlDotNet.Examples
 		BlockGridState currentState;
 		bool rapidDropTriad;
 		bool gameIsPaused;
-		bool reductionOccured;
+		static bool reductionOccured;
 		
 		/// <summary>
 		/// 
@@ -404,9 +404,8 @@ namespace SdlDotNet.Examples
 			removeDestroyedBlocks();
 		}
 
-		void showBlocksDestroyed()
+		static void showBlocksDestroyed()
 		{
-			
 			int start = Timer.TicksElapsed;
 			int delta = Timer.TicksElapsed - start;
 			while(delta <=250)
@@ -415,7 +414,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		void markBlockToDestroyUsingBlockList()
+		static void markBlockToDestroyUsingBlockList()
 		{
 			//Using the blockList, determine which blocks need to be destroyed.
 
@@ -666,27 +665,55 @@ namespace SdlDotNet.Examples
 		}
 		#region IDisposable Members
 
+		private bool disposed;
+
 		/// <summary>
-		/// 
+		/// Destroy sprite
+		/// </summary>
+		/// <param name="disposing">If true, remove all unamanged resources</param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					reductionSound.Dispose();
+					hitBottomSound.Dispose();
+					moveSound.Dispose();
+					gameOverSound.Dispose();
+					gameOverImage.Dispose();
+					gamePausedImage.Dispose();
+					permuteSound.Dispose();
+					triad.Dispose();
+					GC.SuppressFinalize(this);
+				}
+				this.disposed = true;
+			}
+		}
+		/// <summary>
+		/// Destroy object
 		/// </summary>
 		public void Dispose()
 		{
-			try
-			{
-				reductionSound.Dispose();
-				hitBottomSound.Dispose();
-				moveSound.Dispose();
-				gameOverSound.Dispose();
-				gameOverImage.Dispose();
-				gamePausedImage.Dispose();
-				permuteSound.Dispose();
-				triad.Dispose();
-			}
-			catch (SdlException)
-			{
-			}
+			this.Dispose(true);
 		}
 
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~BlockGrid() 
+		{
+			Dispose(false);
+		}
 		#endregion
+
 	}
 }

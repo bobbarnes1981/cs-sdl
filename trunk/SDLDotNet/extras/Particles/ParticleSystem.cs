@@ -47,10 +47,10 @@ namespace SdlDotNet.Particles
 			{
 				return m_Manipulators;
 			}
-			set
-			{
-				m_Manipulators = value;
-			}
+//			set
+//			{
+//				m_Manipulators = value;
+//			}
 		}
 
 		/// <summary>

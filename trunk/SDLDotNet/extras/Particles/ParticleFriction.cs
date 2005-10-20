@@ -65,6 +65,10 @@ namespace SdlDotNet.Particles
 		/// <param name="particles">The particles to apply the friction to.</param>
 		public void Manipulate(ParticleCollection particles)
 		{
+			if (particles == null)
+			{
+				throw new ArgumentNullException("particles");
+			}
 			foreach(Particle p in particles)
 			{
 				if(p is ParticleEmitter)

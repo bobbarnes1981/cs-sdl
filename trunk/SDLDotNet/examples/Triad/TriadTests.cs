@@ -92,7 +92,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public void TestGameObjectCollection()
+		public static void TestGameObjectCollection()
 		{
 			GameObjectCollection objectList = new GameObjectCollection();
 
@@ -145,7 +145,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public void TestGameArea()
+		public static void TestGameArea()
 		{
 			MyGameArea area = new MyGameArea();
 			try

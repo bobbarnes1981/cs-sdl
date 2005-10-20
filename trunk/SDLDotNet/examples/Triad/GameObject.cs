@@ -300,7 +300,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Point BottomRightCorner
+		public static Point BottomRightCorner
 		{
 			get
 			{
@@ -334,23 +334,13 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <returns></returns>
-		public bool Contains(int x, int y)
-		{
-			bool inSideX = (ScreenX <= x)&&(x<=ScreenX2);
-			bool inSideY = (ScreenY <= y)&&(y<=ScreenY2);
-			return inSideX&&inSideY;
-		}
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="point"></param>
 		/// <returns></returns>
 		public bool Contains(Point point)
 		{
-			return Contains(point.X,point.Y);
+			bool inSideX = (ScreenX <= point.X)&&(point.X<=ScreenX2);
+			bool inSideY = (ScreenY <= point.Y)&&(point.Y<=ScreenY2);
+			return inSideX&&inSideY;
 		}
 
 		/// <summary>
@@ -365,7 +355,7 @@ namespace SdlDotNet.Examples
 				return false;
 			}
 
-			return Contains(obj.Location) || Contains(obj.BottomRightCorner) ;
+			return Contains(obj.Location) || Contains(GameObject.BottomRightCorner) ;
 		}
 	}
 }
