@@ -210,7 +210,7 @@ namespace SdlDotNet.Particles
 			}
 			m_ClipRectangle = clip;
 			m_Surface = surface;
-			this.X = positionY;
+			this.X = positionX;
 			this.Y = positionY;
 		}
 		/// <summary>
@@ -229,7 +229,7 @@ namespace SdlDotNet.Particles
 			}
 			m_ClipRectangle = clip;
 			m_Surface = surface;
-			this.X = positionY;
+			this.X = positionX;
 			this.Y = positionY;
 			this.Life = life;
 			this.LifeFull = life;
