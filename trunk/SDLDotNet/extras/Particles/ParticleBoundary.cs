@@ -37,7 +37,9 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Create a ParticleBoundary from a given size.
 		/// </summary>
-		/// <param name="size"></param>
+		/// <param name="size">
+		/// The width and height of the boundary.
+		/// </param>
 		public ParticleBoundary(SizeF size)
 		{
 			m_Boundary = new RectangleF(0,0,size.Width,size.Height);
@@ -45,7 +47,9 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Create a ParticleBoundary from a given size.
 		/// </summary>
-		/// <param name="size">The width and height of the boundary.</param>
+		/// <param name="size">
+		/// The width and height of the boundary.
+		/// </param>
 		public ParticleBoundary(Size size)
 		{
 			m_Boundary = new RectangleF(0,0,size.Width,size.Height);
@@ -53,7 +57,9 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Create a ParticleBoundary in the given rectangle boundary.
 		/// </summary>
-		/// <param name="rect">The rectangle representing the boundary.</param>
+		/// <param name="rect">
+		/// The rectangle representing the boundary.
+		/// </param>
 		public ParticleBoundary(Rectangle rect)
 		{
 			m_Boundary = rect;
@@ -61,7 +67,9 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Create a ParticleBoundary from a given rectangle boundary.
 		/// </summary>
-		/// <param name="rect">The rectangle representing the boundary.</param>
+		/// <param name="rect">
+		/// The rectangle representing the boundary.
+		/// </param>
 		public ParticleBoundary(RectangleF rect)
 		{
 			m_Boundary = rect;
@@ -69,10 +77,18 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Create a ParticleBoundary from a given bounds.
 		/// </summary>
-		/// <param name="positionX">The x-coordinate of the upper-left corner of the rectangle.</param>
-		/// <param name="positionY">The y-coordinate of the upper-left corner of the rectangle.</param>
-		/// <param name="width">The width of the boundary.</param>
-		/// <param name="height">The height of the boundary.</param>
+		/// <param name="positionX">
+		/// The x-coordinate of the upper-left corner of the rectangle.
+		/// </param>
+		/// <param name="positionY">
+		/// The y-coordinate of the upper-left corner of the rectangle.
+		/// </param>
+		/// <param name="width">
+		/// The width of the boundary.
+		/// </param>
+		/// <param name="height">
+		/// The height of the boundary.
+		/// </param>
 		public ParticleBoundary(float positionX, float positionY, float width, float height)
 		{
 			m_Boundary = new RectangleF(positionX, positionY,width,height);
@@ -80,8 +96,12 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Create a ParticleBoundary from a given size.
 		/// </summary>
-		/// <param name="width">The width of the boundary.</param>
-		/// <param name="height">The height of the boundary.</param>
+		/// <param name="width">
+		/// The width of the boundary.
+		/// </param>
+		/// <param name="height">
+		/// The height of the boundary.
+		/// </param>
 		public ParticleBoundary(float width, float height) : this(0,0,width,height)
 		{
 		}
@@ -238,7 +258,6 @@ namespace SdlDotNet.Particles
 			}
 		}
 
-
 		#region IParticleManipulator Members
 
 		/// <summary>
@@ -285,7 +304,6 @@ namespace SdlDotNet.Particles
 		}
 
 		#endregion
-
 
 	}
 }
