@@ -229,25 +229,32 @@ namespace SdlDotNet.Particles
 		{
 			foreach(Particle p in particles)
 			{
-				if(p.X < this.X)
+				if(p is ParticleEmitter)
 				{
-					p.X = this.X;
-					p.Velocity.X*=-1;
+					Manipulate(((ParticleEmitter)p).Children);
 				}
-				else if(p.X > this.Right)
+				else
 				{
-					p.X = this.Right;
-					p.Velocity.X*=-1;
-				}
-				else if(p.Y < this.Y)
-				{
-					p.Y = this.Y;
-					p.Velocity.Y*=-1;
-				}
-				else if(p.Y > this.Bottom)
-				{
-					p.Y = this.Bottom;
-					p.Velocity.Y*=-1;
+					if(p.X < this.X)
+					{
+						p.X = this.X;
+						p.Velocity.X*=-1;
+					}
+					else if(p.X > this.Right)
+					{
+						p.X = this.Right;
+						p.Velocity.X*=-1;
+					}
+					else if(p.Y < this.Y)
+					{
+						p.Y = this.Y;
+						p.Velocity.Y*=-1;
+					}
+					else if(p.Y > this.Bottom)
+					{
+						p.Y = this.Bottom;
+						p.Velocity.Y*=-1;
+					}
 				}
 			}
 		}

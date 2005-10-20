@@ -13,12 +13,17 @@ namespace SdlDotNet.Examples
 	{
 		// Make a new particle system with some gravity
 		ParticleSystem particles = new ParticleSystem();
+		ParticleEmitter emit = new ParticleEmitter();
 
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		public ParticlesExample()
 		{
+
+			particles.Add(emit);
+
+			emit.AddParticle+=new AddParticleEvent(emit_AddParticle);
 			
 			// Make the first particle (a pixel)
 			Particle first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
@@ -46,6 +51,8 @@ namespace SdlDotNet.Examples
 
 			ParticleBoundry bound = new ParticleBoundry(SdlDotNet.Video.Screen.Size);
 			particles.Manipulators.Add(bound);
+
+			SdlDotNet.Events.MouseMotion+=new MouseMotionEventHandler(Events_MouseMotion);
 		}
 
 		/// <summary>
@@ -85,6 +92,17 @@ namespace SdlDotNet.Examples
 		{
 			if(e.Key == Key.Escape)
 				Events.QuitApplication();
+		}
+
+		private Particle emit_AddParticle(ParticleEmitter sender, EventArgs e)
+		{
+			return new ParticlePixel(Color.Red, sender.X,sender.Y,new Vector(1,1),30);
+		}
+
+		private void Events_MouseMotion(object sender, MouseMotionEventArgs e)
+		{
+			emit.X = e.X;
+			emit.Y = e.Y;
 		}
 	}
 }
