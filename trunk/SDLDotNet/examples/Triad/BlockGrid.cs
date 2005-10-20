@@ -556,6 +556,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			System.Diagnostics.Debug.WriteLine(args.Key.ToString());
 			
 			try

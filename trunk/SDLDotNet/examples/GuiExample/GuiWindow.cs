@@ -109,8 +109,8 @@ namespace SdlDotNet.Examples.GuiExample
 				title = value;
 
 				// Set the bounds
-				titleSize = GuiManager.GetTextSize(this.GuiManager.TitleFont, title);
-				titleSprite.X = (this.Rectangle.Width - titleSize.Width)/2;
+				titleSize = GuiManager.GetTextSize(base.GuiManager.TitleFont, title);
+				titleSprite.X = (base.Rectangle.Width - titleSize.Width)/2;
 				base.Sprites.Insert(0, titleBar);
 				titleSprite.Text = value;
 			}

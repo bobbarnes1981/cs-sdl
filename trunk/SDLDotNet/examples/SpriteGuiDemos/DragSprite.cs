@@ -43,8 +43,6 @@ namespace SdlDotNet.Examples
 			Rectangle bounds)
 			: base((SurfaceCollection)frames[key], bounds, coordinates)
 		{
-			//this.FrameCollections = frames;
-			//this.Animations[key];
 			this.Size = ((SurfaceCollection)frames[key]).Size;
 			this.AllowDrag = true;
 		}
