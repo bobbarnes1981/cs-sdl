@@ -36,38 +36,38 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Creates a new ParticlePixel.
 		/// </summary>
-		/// <param name="x">The X coordinate.</param>
-		/// <param name="y">The Y coordinate.</param>
+		/// <param name="positionX">The X coordinate.</param>
+		/// <param name="positionY">The Y coordinate.</param>
 		/// <param name="color">The color of the pixel on the destination surface.</param>
-		public ParticlePixel(Color color, float x, float y)
+		public ParticlePixel(Color color, float positionX, float positionY)
 		{
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			m_Color = color;
 		}
 		/// <summary>
 		/// Creates a new ParticlePixel.
 		/// </summary>
-		/// <param name="x">The X coordinate.</param>
-		/// <param name="y">The Y coordinate.</param>
+		/// <param name="positionX">The X coordinate.</param>
+		/// <param name="positionY">The Y coordinate.</param>
 		/// <param name="velocity">The speed and direction of the particle.</param>
-		public ParticlePixel(float x, float y, Vector velocity)
+		public ParticlePixel(float positionX, float positionY, Vector velocity)
 		{
 			this.Velocity = velocity;
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 		}
 		/// <summary>
 		/// Creates a new ParticlePixel.
 		/// </summary>
 		/// <param name="color">The color of the pixel on the destination surface.</param>
-		/// <param name="x">The X coordinate.</param>
-		/// <param name="y">The Y coordinate.</param>
+		/// <param name="positionX">The X coordinate.</param>
+		/// <param name="positionY">The Y coordinate.</param>
 		/// <param name="life">How long the particle is to stay alive.</param>
-		public ParticlePixel(Color color, float x, float y, int life)
+		public ParticlePixel(Color color, float positionX, float positionY, int life)
 		{
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			m_Color = color;
 			Life = life;
 			LifeFull = life;
@@ -77,15 +77,15 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <param name="color"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
 		/// <param name="velocity"></param>
 		/// <param name="life"></param>
-		public ParticlePixel(Color color, float x, float y, Vector velocity, int life)
+		public ParticlePixel(Color color, float positionX, float positionY, Vector velocity, int life)
 		{
 			this.Velocity = velocity;
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			m_Color = color;
 			Life = life;
 			LifeFull = life;
@@ -94,14 +94,14 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <param name="color"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
 		/// <param name="velocity"></param>
-		public ParticlePixel(Color color, float x, float y, Vector velocity)
+		public ParticlePixel(Color color, float positionX, float positionY, Vector velocity)
 		{
 			this.Velocity = velocity;
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			m_Color = color;
 		}
 		/// <summary>
@@ -117,12 +117,12 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		public ParticlePixel(float x, float y)
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
+		public ParticlePixel(float positionX, float positionY)
 		{
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 		}
 		/// <summary>
 		/// 

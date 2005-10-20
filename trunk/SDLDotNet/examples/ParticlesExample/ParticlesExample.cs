@@ -49,7 +49,7 @@ namespace SdlDotNet.Examples
 			Events.Tick+=new TickEventHandler(Events_Tick);
 			Events.KeyboardDown+=new KeyboardEventHandler(Events_KeyboardDown);
 
-			ParticleBoundry bound = new ParticleBoundry(SdlDotNet.Video.Screen.Size);
+			ParticleBoundary bound = new ParticleBoundary(SdlDotNet.Video.Screen.Size);
 			particles.Manipulators.Add(bound);
 
 			SdlDotNet.Events.MouseMotion+=new MouseMotionEventHandler(Events_MouseMotion);
