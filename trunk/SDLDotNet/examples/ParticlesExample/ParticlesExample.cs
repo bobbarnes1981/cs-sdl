@@ -49,7 +49,7 @@ namespace SdlDotNet.Examples
 			particles.Add(first); // Add it to the system
 
 			// Make the second particle (an animated sprite)
-			Animation anim = new Animation(new SurfaceCollection("../../Data/marble1.png", new Size(50,50)),1);
+			AnimationCollection anim = new AnimationCollection(new SurfaceCollection("../../Data/marble1.png", new Size(50,50)),1);
 			AnimatedSprite marble = new AnimatedSprite(anim);
 			marble.Animate = true;
 			Particle second = new ParticleSprite(marble, 200, 200, new Vector(-7,-9), 500);
