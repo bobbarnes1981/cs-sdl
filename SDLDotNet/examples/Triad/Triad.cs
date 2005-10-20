@@ -33,6 +33,10 @@ namespace SdlDotNet.Examples
 		/// <param name="blockGridObject"></param>
 		public Triad(BlockGrid blockGridObject)
 		{
+			if (blockGridObject == null)
+			{
+				throw new ArgumentNullException("blockGridObject");
+			}
 			this.topBlock = new Block();
 			this.middleBlock = new Block();
 			this.bottomBlock = new Block();

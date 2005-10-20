@@ -46,10 +46,12 @@ namespace SdlDotNet.Examples
 		/// <param name="obj"></param>
 		public void AddObject(GameObject obj)
 		{
-			
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			objectList.Add(obj);
 			obj.Parent = this;
-			
 		}
 
 		/// <summary>

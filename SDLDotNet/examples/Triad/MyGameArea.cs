@@ -68,8 +68,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
 		{
-			//if(!args.Down)return;
-
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			switch(args.Key)
 			{
 				case Key.Keypad2 :

@@ -29,9 +29,9 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public sealed class Utils
+	public sealed class Utilities
 	{
-		private Utils()
+		private Utilities()
 		{}
 		/// <summary>
 		/// 
@@ -41,7 +41,7 @@ namespace SdlDotNet.Examples
 		/// <param name="color"></param>
 		public static void DrawRect(Surface surface, Rectangle rectangle, Color color)
 		{
-			Utils.DrawRect(surface,rectangle.Location,rectangle.Size,color);
+			Utilities.DrawRect(surface,rectangle.Location,rectangle.Size,color);
 		}
 
 		/// <summary>
@@ -53,6 +53,10 @@ namespace SdlDotNet.Examples
 		/// <param name="color"></param>
 		public static void DrawRect(Surface surface, Point location, Size size, Color color)
 		{
+			if (surface == null)
+			{
+				throw new ArgumentNullException("surface");
+			}
 			int x;
 			int y;
 
@@ -73,7 +77,6 @@ namespace SdlDotNet.Examples
 			{
 				surface.DrawPixel(location.X,y,color);
 			}
-
 
 			//Draw right line... 
 			for(y=location.Y; y<location.Y+size.Height;y++)

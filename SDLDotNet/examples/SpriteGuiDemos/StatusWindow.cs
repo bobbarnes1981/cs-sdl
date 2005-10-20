@@ -44,7 +44,7 @@ namespace SdlDotNet.Examples
 				throw new ArgumentNullException("manager");
 			}
 			// Set up our title
-			Title = "Demo Status";
+			base.Title = "Demo Status";
 
 			// Add some text
 			int labelOffset = 2;
@@ -54,15 +54,15 @@ namespace SdlDotNet.Examples
 			int labelWidth = 48;
 			int dataWidth = 96;
 			int i = 0;
-			this.AllowDrag = true;
-			this.TitleBackgroundColor = manager.FrameColor;
+			base.AllowDrag = true;
+			base.TitleBackgroundColor = manager.FrameColor;
 
-			if (this.Title != null)
+			if (base.Title != null)
 			{
 				i++;
 			}
 			// Add the ticks per second
-			this.Sprites.Add(new BoundedTextSprite("TPS:", manager.TitleFont,
+			base.Sprites.Add(new BoundedTextSprite("TPS:", manager.TitleFont,
 				new Size(labelWidth, labelHeight),
 				1.0, 0.5,
 				new Point(labelOffset,
@@ -73,11 +73,11 @@ namespace SdlDotNet.Examples
 				0.0, 0.5,
 				new Point(dataOffset,
 				(labelHeight + labelPad) * i + 2));
-			this.Sprites.Add(tps);
+			base.Sprites.Add(tps);
 
 			// Add the frames per second
 			i++;
-			this.Sprites.Add(new BoundedTextSprite("FPS:", manager.TitleFont,
+			base.Sprites.Add(new BoundedTextSprite("FPS:", manager.TitleFont,
 				new Size(labelWidth, labelHeight),
 				1.0, 0.5,
 				new Point(labelOffset,
@@ -88,11 +88,11 @@ namespace SdlDotNet.Examples
 				0.0, 0.5,
 				new Point(dataOffset,
 				(labelHeight + labelPad) * i + 2));
-			this.Sprites.Add(fps);
+			base.Sprites.Add(fps);
 
 			// Add the current mode
 			i++;
-			this.Sprites.Add(new BoundedTextSprite("Mode:", manager.TitleFont,
+			base.Sprites.Add(new BoundedTextSprite("Mode:", manager.TitleFont,
 				new Size(labelWidth, labelHeight),
 				1.0, 0.5,
 				new Point(labelOffset,
@@ -104,11 +104,11 @@ namespace SdlDotNet.Examples
 				new Point(dataOffset,
 				(labelHeight + labelPad)
 				* i + 2));
-			this.Sprites.Add(mode);
+			base.Sprites.Add(mode);
 
 			// Add the instructions
 			i++;
-			this.Sprites.Add(new BoundedTextSprite("Press the number keys",
+			base.Sprites.Add(new BoundedTextSprite("Press the number keys",
 				manager.BaseFont,
 				new Size(150, labelHeight),
 				0.5, 0.5,
@@ -119,7 +119,7 @@ namespace SdlDotNet.Examples
 			// Adjust our height
 			i++;
 			//int tempHeight = (labelHeight + labelPad) * i + 4;
-			this.Surface = new Surface(150, 100);
+			base.Surface = new Surface(150, 100);
 		}
 
 		#region Data Components

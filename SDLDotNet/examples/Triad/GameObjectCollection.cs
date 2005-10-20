@@ -87,6 +87,10 @@ namespace SdlDotNet.Examples
 		/// </param>
 		public void AddRange(GameObjectCollection items)
 		{
+			if (items == null)
+			{
+				throw new ArgumentNullException("items");
+			}
 			foreach (GameObject item in items)
 			{
 				this.List.Add(item);
@@ -203,6 +207,10 @@ namespace SdlDotNet.Examples
 			/// <param name="collection"></param>
 			public Enumerator(GameObjectCollection collection)
 			{
+				if (collection == null)
+				{
+					throw new ArgumentNullException("collection");
+				}
 				this.wrapped = ((System.Collections.CollectionBase)collection).GetEnumerator();
 			}
 
