@@ -76,10 +76,10 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Updates all particles within this system using the given gravity.
 		/// </summary>
-		public override void Update()
+		public override bool Update()
 		{
 			m_Manipulators.Manipulate(this);
-			base.Update();
+			return base.Update();
 		}
 	}
 }

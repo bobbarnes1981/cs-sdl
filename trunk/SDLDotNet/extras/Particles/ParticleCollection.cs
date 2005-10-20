@@ -77,7 +77,8 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Updates all particles in the collection.
 		/// </summary>
-		public virtual void Update()
+		/// <returns>True if a particle is still alive.</returns>
+		public virtual bool Update()
 		{
 			Particle particle;
 			int count = List.Count;
@@ -90,6 +91,7 @@ namespace SdlDotNet.Particles
 					count--;
 				}
 			}
+			return count > 0;
 		}
 
 		/// <summary>

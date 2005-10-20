@@ -98,7 +98,14 @@ namespace SdlDotNet.Particles
 		{
 			foreach(Particle p in particles)
 			{
-				p.Velocity += m_Velocity;
+				if(p is ParticleEmitter)
+				{
+					Manipulate(((ParticleEmitter)p).Children);
+				}
+				else
+				{
+					p.Velocity += m_Velocity;
+				}
 			}
 		}
 

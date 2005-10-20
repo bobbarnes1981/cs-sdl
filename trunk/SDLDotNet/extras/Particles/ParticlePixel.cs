@@ -175,12 +175,12 @@ namespace SdlDotNet.Particles
 			}
 		}
 
-		public static override Particle FromRange(Rectangle bounds, float minSpeed, float maxSpeed, int minLife, int maxLife, float minDir, float maxDir)
-		{
-			ParticlePixel p = new ParticlePixel(ParticleSystem.Range(bounds.Left,bounds.Right), ParticlesSystem.Range(bounds.Top,bounds.Bottom));
-			p.Life = 
-			return
-		}
+//		public static override Particle Random()
+//		{
+//			ParticlePixel p = new ParticlePixel();
+//			p.Color = Color.FromArgb(ParticleSystem.random.Next(0,255),ParticleSystem.random.Next(0,255),ParticleSystem.random.Next(0,255));
+//			return p;
+//		}
 
 
 

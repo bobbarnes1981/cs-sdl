@@ -67,7 +67,14 @@ namespace SdlDotNet.Particles
 		{
 			foreach(Particle p in particles)
 			{
-				p.Velocity.Length -= m_Friction;
+				if(p is ParticleEmitter)
+				{
+					Manipulate(((ParticleEmitter)p).Children);
+				}
+				else
+				{
+					p.Velocity.Length -= m_Friction;
+				}
 			}
 		}
 

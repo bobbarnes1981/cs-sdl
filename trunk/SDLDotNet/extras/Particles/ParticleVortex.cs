@@ -149,18 +149,25 @@ namespace SdlDotNet.Particles
 		{
 			foreach(Particle p in particles)
 			{
-				Vector v = new Vector(p.X,p.Y,m_x,m_y);
-				if(m_Radius == -1f)
+				if(p is ParticleEmitter)
 				{
-					v.Length = m_Strength;
+					Manipulate(((ParticleEmitter)p).Children);
 				}
 				else
 				{
-					if(v.Length > m_Radius)
-						continue;
-					v.Length = (1f - v.Length / m_Radius) * m_Strength;
+					Vector v = new Vector(p.X,p.Y,m_x,m_y);
+					if(m_Radius == -1f)
+					{
+						v.Length = m_Strength;
+					}
+					else
+					{
+						if(v.Length > m_Radius)
+							continue;
+						v.Length = (1f - v.Length / m_Radius) * m_Strength;
+					}
+					p.Velocity += v;
 				}
-				p.Velocity += v;
 			}
 		}
 

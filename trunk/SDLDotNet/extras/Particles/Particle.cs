@@ -31,19 +31,20 @@ namespace SdlDotNet.Particles
 	/// <remarks>Some implementations of the particle class include ParticlePixel and ParticleSprite.</remarks>
 	public abstract class Particle
 	{
-		public static Particle Randomize(Particle p, Rectangle bounds, float minSpeed, float maxSpeed, int minLife, int maxLife, float minDir, float maxDir)
-		{
-			p.X = ParticleSystem.Range(bounds.Left,bounds.Right);
-			p.Y = ParticlesSystem.Range(bounds.Top,bounds.Bottom);
-			p.Life = ParticleSystem.random.Next(minLife,maxLife);
-			p.Velocity.Length = ParticleSystem.Range(minSpeed, maxSpeed);
-			p.Velocity.Direction = ParticleSystem.Range(minDir, maxDir);
-			return p;
-		}
-		public static Particle Randomize(Particle p, Rectangle bounds, float minSpeed, float maxSpeed, int minLife, int maxLife)
-		{
-			return Randomize(p, bounds, minSpeed, maxSpeed, minLife, maxLife, 0, ParticleSystem.random.NextDouble() * Math.PI * 2);
-		}
+//		public static Particle Randomize(Particle p, Rectangle bounds, float minSpeed, float maxSpeed, int minLife, int maxLife, float minDir, float maxDir)
+//		{
+//			p.X = ParticleSystem.Range(bounds.Left,bounds.Right);
+//			p.Y = ParticlesSystem.Range(bounds.Top,bounds.Bottom);
+//			p.Life = ParticleSystem.random.Next(minLife,maxLife);
+//			p.LifeFull = p.Life;
+//			p.Velocity.Length = ParticleSystem.Range(minSpeed, maxSpeed);
+//			p.Velocity.Direction = ParticleSystem.Range(minDir, maxDir);
+//			return p;
+//		}
+//		public static Particle Randomize(Particle p, Rectangle bounds, float minSpeed, float maxSpeed, int minLife, int maxLife)
+//		{
+//			return Randomize(p, bounds, minSpeed, maxSpeed, minLife, maxLife, 0, ParticleSystem.random.NextDouble() * Math.PI * 2);
+//		}
 
 		private int m_Life = -1;
 		/// <summary>
@@ -138,6 +139,10 @@ namespace SdlDotNet.Particles
 		/// <returns>True if the particle is still alive, false if the particle is to be destroyed.</returns>
 		public virtual bool Update()
 		{
+			if(m_Life == 0)
+			{
+				return false;
+			}
 			m_X += m_Velocity.X;
 			m_Y += m_Velocity.Y;
 			if(m_Life != -1) // -1 is alife forever.
