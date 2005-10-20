@@ -43,6 +43,10 @@ namespace SdlDotNet.Examples.GuiExample
 			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
 				new Point(0, 0));
 			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Point(0,0));
+			if (manager == null)
+			{
+				throw new ArgumentNullException("manager");
+			}
 			titleBar.Surface.Fill(manager.FrameColor);
 			base.Sprites.Add(titleSprite);
 			this.title = string.Empty;
@@ -59,6 +63,10 @@ namespace SdlDotNet.Examples.GuiExample
 			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
 				new Point(0, 0));
 			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Point(0,0));
+			if (manager == null)
+			{
+				throw new ArgumentNullException("manager");
+			}
 			titleBar.Surface.Fill(manager.FrameColor);
 			
 			base.Sprites.Add(titleSprite);
@@ -160,6 +168,8 @@ namespace SdlDotNet.Examples.GuiExample
 								disposableObj.Dispose( );
 							}
 						}
+						titleSprite.Dispose();
+						titleBar.Dispose();
 					}
 					this.disposed = true;
 				}
@@ -169,6 +179,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

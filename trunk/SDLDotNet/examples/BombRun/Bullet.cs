@@ -38,15 +38,11 @@ namespace SdlDotNet.Examples
 		/// <param name="location"></param>
 		/// <param name="speedX"></param>
 		/// <param name="speedY"></param>
-		public Bullet(Point location, int speedX, int speedY)
+		public Bullet(Point location, int speedX, int speedY) : base(Video.Screen.CreateCompatibleSurface(8, 16, true), location)
 		{
-			this.Position = location;
 			this.speedX = speedX;
 			this.speedY = speedY;
-
-			this.Surface = Video.Screen.CreateCompatibleSurface(8, 16, true);
-			this.Surface.Fill(new Rectangle(new Point(0,0),
-				this.Surface.Size), Color.DarkBlue);
+			base.Surface.Fill(new Rectangle(new Point(0,0), new Size(8, 16)), Color.DarkBlue);
 		}
 
 		/// <summary>
@@ -56,6 +52,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			this.X += (int)(args.SecondsElapsed * this.speedX);
 			this.Y += (int)(args.SecondsElapsed * this.speedY);
 

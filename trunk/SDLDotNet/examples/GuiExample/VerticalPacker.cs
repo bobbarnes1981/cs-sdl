@@ -45,31 +45,21 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="p"></param>
-		public VerticalPacker(GuiManager manager, Point p)
-			: base(manager, p)
+		/// <param name="point"></param>
+		public VerticalPacker(GuiManager manager, Point point)
+			: base(manager, point)
 		{
 		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="manager"></param>
-//		/// <param name="p"></param>
-//		public VerticalPacker(GuiManager manager, Vector p)
-//			: base(manager, p)
-//		{
-//		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="z"></param>
-		public VerticalPacker(GuiManager manager, int z)
+		/// <param name="positionZ"></param>
+		public VerticalPacker(GuiManager manager, int positionZ)
 			: base(manager, new Point(0,0))
 		{
-			base.Z = z;
+			base.Z = positionZ;
 		}
 		#endregion
 
@@ -154,6 +144,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

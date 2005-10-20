@@ -19,6 +19,7 @@
 
 using SdlDotNet;
 using SdlDotNet.Sprites;
+using System;
 using System.Drawing;
 
 namespace SdlDotNet.Examples
@@ -33,17 +34,21 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d"></param>
+		/// <param name="surfaces"></param>
 		/// <param name="bounds"></param>
 		/// <param name="coordinates"></param>
-		public BoundedSprite(SurfaceCollection d, Rectangle bounds, Point coordinates)
-			: base(d, coordinates)
+		public BoundedSprite(SurfaceCollection surfaces, Rectangle bounds, Point coordinates)
+			: base(surfaces, coordinates)
 		{
+			if (surfaces == null)
+			{
+				throw new ArgumentNullException("surfaces");
+			}
 			this.bounds = bounds;
 			int tempHeight;
 			int tempWidth;
-			tempWidth = this.bounds.Size.Width - (int) d.Size.Width;
-			tempHeight = this.bounds.Size.Height - (int) d.Size.Height;
+			tempWidth = this.bounds.Size.Width - (int) surfaces.Size.Width;
+			tempHeight = this.bounds.Size.Height - (int) surfaces.Size.Height;
 			this.bounds.Size = new Size(tempWidth, tempHeight);
 		}
 
@@ -64,6 +69,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			// Animate
 			base.Update(args);
 
@@ -114,6 +123,7 @@ namespace SdlDotNet.Examples
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

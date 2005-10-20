@@ -32,6 +32,10 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public Entity(EventManager eventManager)
 		{
+			if (eventManager == null)
+			{
+				throw new ArgumentNullException("eventManager");
+			}
 			eventManager.OnGameStatusEvent += new EventManager.GameStatusEventHandler(Subscribe);
 			eventManager.OnEntityMoveRequestEvent += 
 				new EventManager.EntityMoveRequestEventHandler(Subscribe);

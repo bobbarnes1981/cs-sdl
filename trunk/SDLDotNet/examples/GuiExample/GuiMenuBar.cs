@@ -38,11 +38,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="gui"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="point"></param>
 		/// <param name="height"></param>
-		public GuiMenuBar(GuiManager gui, int x, int y, int height)
-			: base(gui, new Rectangle(x, y, Video.Screen.Width, height))
+		public GuiMenuBar(GuiManager gui, Point point, int height)
+			: base(gui, new Rectangle(point.X, point.Y, Video.Screen.Width, height))
 		{
 			this.Z = 10000;
 		}
@@ -54,29 +53,37 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="s"></param>
-		public void AddLeft(SpriteContainer s)
+		/// <param name="spriteContainer"></param>
+		public void AddLeft(SpriteContainer spriteContainer)
 		{
-			AddHead(s);
-			s.Position = new Point(0, 0);
-
-			if (s.GetType().Name == "GuiMenuTitle")
+			if (spriteContainer == null)
 			{
-				((GuiMenuTitle) s).MenuBar = this;
+				throw new ArgumentNullException("spriteContainer");
+			}
+			AddHead(spriteContainer);
+			spriteContainer.Position = new Point(0, 0);
+
+			if (spriteContainer.GetType().Name == "GuiMenuTitle")
+			{
+				((GuiMenuTitle) spriteContainer).MenuBar = this;
 			}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="s"></param>
-		public void AddRight(SpriteContainer s)
+		/// <param name="spriteContainer"></param>
+		public void AddRight(SpriteContainer spriteContainer)
 		{
-			AddTail(s);
-
-			if (s.GetType().Name == "GuiMenuTitle")
+			if (spriteContainer == null)
 			{
-				((GuiMenuTitle) s).MenuBar = this;
+				throw new ArgumentNullException("spriteContainer");
+			}
+			AddTail(spriteContainer);
+
+			if (spriteContainer.GetType().Name == "GuiMenuTitle")
+			{
+				((GuiMenuTitle) spriteContainer).MenuBar = this;
 			}
 		}
 		#endregion
@@ -89,7 +96,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get 
 			{ 
-				return base.GuiManager.MenuTitlePadding; 
+				return GuiManager.MenuTitlePadding; 
 			}
 		}
 
@@ -100,7 +107,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get 
 			{ 
-				return base.GuiManager.MenuBarPadding; 
+				return GuiManager.MenuBarPadding; 
 			}
 		}
 		#endregion
@@ -146,6 +153,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

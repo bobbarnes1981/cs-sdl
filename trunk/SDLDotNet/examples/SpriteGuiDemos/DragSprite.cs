@@ -65,6 +65,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(MouseButtonEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			if (this.IntersectsWith(new Point(args.X, args.Y)))
 			{
 				// If we are being held down, pick up the marble
@@ -90,6 +94,10 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Update(MouseMotionEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			if (!AllowDrag)
 			{
 				return;
@@ -127,6 +135,7 @@ namespace SdlDotNet.Examples
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

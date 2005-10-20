@@ -107,17 +107,8 @@ namespace SdlDotNet.Examples
 			} 
 			catch (SdlException ex) 
 			{
-				HandleError(ex);
+				Console.WriteLine(ex);
 			}
-		}
-
-		private static void HandleError(SdlException ex) 
-		{
-			MessageBox.Show(
-				ex.Message, 
-				"Error", 
-				MessageBoxButtons.OK, 
-				MessageBoxIcon.Error);
 		}
 
 		/// <summary>
@@ -312,7 +303,7 @@ namespace SdlDotNet.Examples
 			} 
 			catch (SdlException ex) 
 			{
-				HandleError(ex);
+				Console.WriteLine(ex);
 			}
 		}
 
@@ -329,7 +320,7 @@ namespace SdlDotNet.Examples
 			} 
 			catch (SdlException ex) 
 			{
-				HandleError(ex);
+				Console.WriteLine(ex);
 			}
 		}
 
@@ -344,7 +335,7 @@ namespace SdlDotNet.Examples
 			} 
 			catch (SdlException ex) 
 			{
-				HandleError(ex);
+				Console.WriteLine(ex);
 			}
 		}
 
@@ -361,7 +352,7 @@ namespace SdlDotNet.Examples
 			} 
 			catch (SdlException ex) 
 			{
-				HandleError(ex);
+				Console.WriteLine(ex);
 			}
 		}
 
@@ -377,7 +368,7 @@ namespace SdlDotNet.Examples
 			} 
 			catch (SdlException ex) 
 			{
-				HandleError(ex);
+				Console.WriteLine(ex);
 			}
 		}
 
@@ -396,7 +387,7 @@ namespace SdlDotNet.Examples
 			} 
 			catch (SdlException ex) 
 			{
-				HandleError(ex);
+				Console.WriteLine(ex);
 			}
 		}
 
@@ -415,7 +406,7 @@ namespace SdlDotNet.Examples
 			} 
 			catch (SdlException ex) 
 			{
-				HandleError(ex);
+				Console.WriteLine(ex);
 			}
 		}
 

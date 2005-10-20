@@ -45,14 +45,12 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="location"></param>
-		public Player(Point location)
+		public Player(Point location) : 
+			base(new Surface("../../Data/Head.bmp"), location)
 		{
-			this.Position = location;
 			jumpstart = location.Y;
-
-			this.Surface = new Surface("../../Data/Head.bmp");
-			this.Surface.TransparentColor = Color.White;
-			this.Size = this.Surface.Size;
+			base.Surface.TransparentColor = Color.White;
+			base.Size = base.Surface.Size;
 		}
 
 		/// <summary>
@@ -61,6 +59,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			float change = 5f;
 			float jumpspeed = 10f;
 
@@ -130,6 +132,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(KeyboardEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			switch (args.Key)
 			{
 				// the =Down trick works quite well

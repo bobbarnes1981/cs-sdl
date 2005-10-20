@@ -46,31 +46,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="p"></param>
-		public HorizontalPacker(GuiManager manager, Point p)
-			: base(manager, p)
-		{
-		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="manager"></param>
-//		/// <param name="p"></param>
-//		public HorizontalPacker(GuiManager manager, Point p)
-//			: base(manager, p)
-//		{
-//		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="gui"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="point"></param>
 		/// <param name="height"></param>
-		public HorizontalPacker(GuiManager gui, int x, int y, int height)
-			: base(gui, x, y, height)
+		public HorizontalPacker(GuiManager manager, Point point, int height)
+			: base(manager, point, height)
 		{
 		}
 
@@ -167,6 +146,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

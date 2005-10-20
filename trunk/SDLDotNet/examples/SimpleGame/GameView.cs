@@ -25,7 +25,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// Derived class
 	/// </summary>
-	public class GameView
+	public class GameView : IDisposable
 	{
 		Map map;
 		int height;
@@ -42,6 +42,10 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public GameView (EventManager eventManager)
 		{
+			if (eventManager == null)
+			{
+				throw new ArgumentNullException("eventManager");
+			}
 			eventManager.OnMapBuiltEvent += new EventManager.MapBuiltEventHandler(Subscribe);
 			eventManager.OnEntityPlaceEvent += new EventManager.EntityPlaceEventHandler(Subscribe);
 			eventManager.OnEntityMoveEvent += new EventManager.EntityMoveEventHandler(Subscribe);
@@ -72,6 +76,10 @@ namespace SdlDotNet.Examples
 			int height = 128;
 			int i = 0;
 
+			if (map == null)
+			{
+				throw new ArgumentNullException("map");
+			}
 			foreach (Sector sec in map.GetSectors())
 			{
 				if (i < 3)
@@ -145,6 +153,10 @@ namespace SdlDotNet.Examples
 		/// <param name="entity"></param>
 		public void ShowEntity(Entity entity)
 		{
+			if (entity == null)
+			{
+				throw new ArgumentNullException("entity");
+			}
 			this.entitySprite = new EntitySprite(surf);
 			this.frontSprites.Add(this.entitySprite);
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
@@ -157,6 +169,10 @@ namespace SdlDotNet.Examples
 		/// <param name="entity"></param>
 		public void MoveEntity(Entity entity)
 		{
+			if (entity == null)
+			{
+				throw new ArgumentNullException("entity");
+			}
 			SectorSprite sectSprite = this.GetSectorSprite(entity.Sector);
 			this.entitySprite.Center = sectSprite.Center;
 			if (this.sound != null)
@@ -222,5 +238,50 @@ namespace SdlDotNet.Examples
 			LogFile.WriteLine("GameView received a Tick event");
 			UpdateView();
 		}
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Destroy sprite
+		/// </summary>
+		/// <param name="disposing">If true, remove all unamanged resources</param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					GC.SuppressFinalize(this);
+					entitySprite.Dispose();
+				}
+				this.disposed = true;
+			}
+		}
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Dispose()
+		{
+			this.Dispose(true);
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~GameView() 
+		{
+			Dispose(false);
+		}
+
+		#endregion
 	}
 }

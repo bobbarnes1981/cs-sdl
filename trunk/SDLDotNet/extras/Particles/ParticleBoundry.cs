@@ -84,7 +84,8 @@ namespace SdlDotNet.Particles
 		}
 
 		/// <summary>
-		/// Gets and set the x-coordinate of the upper-left corner of the rectangle.</param>
+		/// Gets and set the x-coordinate 
+		/// of the upper-left corner of the rectangle.
 		/// </summary>
 		public float X
 		{
@@ -99,7 +100,8 @@ namespace SdlDotNet.Particles
 		}
 
 		/// <summary>
-		/// Gets and sets the y-coordinate of the upper-left corner of the rectangle.</param>
+		/// Gets and sets the y-coordinate of 
+		/// the upper-left corner of the rectangle.
 		/// </summary>
 		public float Y
 		{

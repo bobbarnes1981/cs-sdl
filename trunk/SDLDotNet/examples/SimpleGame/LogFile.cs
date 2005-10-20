@@ -26,7 +26,7 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public sealed class LogFile
 	{
-		static FileStream fs;
+		static FileStream fs = new FileStream("log.txt",  FileMode.Append);
 
 		static LogFile()
 		{

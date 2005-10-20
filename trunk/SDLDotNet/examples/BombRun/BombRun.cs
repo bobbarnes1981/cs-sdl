@@ -28,7 +28,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class BombRun
+	public class BombRun : IDisposable
 	{
 		Surface screen;
 		static float bombSpeed = 100;
@@ -163,5 +163,35 @@ namespace SdlDotNet.Examples
 				bombSpeed = value; 
 			}
 		}
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks>Destroys managed and unmanaged objects</remarks>
+		public void Dispose() 
+		{
+			Dispose(true);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					tempSurface.Dispose();
+					player.Dispose();
+				}
+				this.disposed = true;
+			}
+		}
+
+		#endregion
 	}
 }

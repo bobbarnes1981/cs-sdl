@@ -1531,11 +1531,17 @@ namespace SdlDotNet
 		public void DrawPixel(int x, int y, Color color, int alpha)
 		{
 			if(alpha <= 0)
+			{
 				return;
+			}
 			if(alpha >= 255)
+			{
 				DrawPixel(x,y,color);
+			}
 			else
+			{
 				DrawPixel(x,y,Color.FromArgb(alpha, color),true);
+			}
 		}
 
 		/// <summary>

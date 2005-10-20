@@ -44,17 +44,22 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d"></param>
+		/// <param name="surfaces"></param>
 		/// <param name="coordinates"></param>
-		public BounceSprite(SurfaceCollection d, Point coordinates)
-			: base(d, coordinates)
+		public BounceSprite(SurfaceCollection surfaces, Point coordinates)
+			: base(surfaces, coordinates)
 		{
+
+			if (surfaces == null)
+			{
+				throw new ArgumentNullException("surfaces");
+			}
 			//Sprites will be bounded by the screen edges minus 
 			//their size so they will not go off the screen
 			this.bounds = 
 				new Rectangle(0, 0, Video.Screen.Rectangle.Width - 
-				(int) d.Size.Width, Video.Screen.Rectangle.Height - 
-				(int) d.Size.Height);
+				(int) surfaces.Size.Width, Video.Screen.Rectangle.Height - 
+				(int) surfaces.Size.Height);
 			//The sprite can be dragged
 			this.Animate = true;
 			this.AllowDrag = true;
@@ -68,6 +73,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			//Call the base method
 			base.Update(args);
 
@@ -133,6 +142,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(MouseButtonEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			if (this.IntersectsWith(new Point(args.X, args.Y)))
 			{
 				// If we are being held down, pick up the marble
@@ -162,6 +175,10 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Update(MouseMotionEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			if (!AllowDrag)
 			{
 				return;
@@ -200,6 +217,7 @@ namespace SdlDotNet.Examples
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 		#endregion IDisposable
 	}

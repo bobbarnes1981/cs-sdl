@@ -169,6 +169,14 @@ namespace SdlDotNet.Examples
 		/// <returns></returns>
 		public static Point AdjustViewport(Sprite sprite, Surface surf)
 		{
+			if (surf == null)
+			{
+				throw new ArgumentNullException("surf");
+			}
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			return new Point(
 				surf.Size.Width / 2 - 
 				sprite.Size.Width / 2 - 
@@ -195,6 +203,14 @@ namespace SdlDotNet.Examples
 		/// <returns></returns>
 		public Point AdjustBoundedViewport(Sprite sprite, Surface surf)
 		{
+			if (surf == null)
+			{
+				throw new ArgumentNullException("surf");
+			}
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			Point offset = AdjustViewport(sprite, surf);
 
 			// Check to see if the window is too small
@@ -314,6 +330,7 @@ namespace SdlDotNet.Examples
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

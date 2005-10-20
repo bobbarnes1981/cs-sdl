@@ -19,6 +19,7 @@
 
 using System; 
 using System.Drawing; 
+using System.Globalization;
 using SdlDotNet; 
 using SdlDotNet.Sprites;
 
@@ -32,7 +33,7 @@ namespace SdlDotNet.Examples
 	/// A simple SDL.NET example which demonstrates audio in SDL.NET.
 	/// Click plays sound, space changes music and the arrow keys change volume.
 	/// </summary>
-	public class AudioExample 
+	public class AudioExample : IDisposable
 	{ 
 		private const int width = 640; 
 		private const int height = 480;
@@ -164,7 +165,7 @@ namespace SdlDotNet.Examples
 
 		private void Events_ChannelFinished(object sender, ChannelFinishedEventArgs e)
 		{
-			Console.WriteLine("Channel: " + e.Channel.ToString() + " Finished");
+			Console.WriteLine("Channel: " + e.Channel.ToString(CultureInfo.CurrentCulture) + " Finished");
 		}
 
 		private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
@@ -172,5 +173,37 @@ namespace SdlDotNet.Examples
 			textDisplay.Text = "Music switched...";
 			Console.WriteLine("Music Finished");
 		}
+		#region IDisposable Members
+
+		private bool disposed;
+
+		
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks>Destroys managed and unmanaged objects</remarks>
+		public void Dispose() 
+		{
+			Dispose(true);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					textDisplay.Dispose();
+					boing.Dispose();
+					music2.Dispose();
+					music1.Dispose();
+				}
+				this.disposed = true;
+			}
+		}
+		#endregion
 	} 
 } 

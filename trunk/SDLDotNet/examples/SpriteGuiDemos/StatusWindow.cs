@@ -39,6 +39,10 @@ namespace SdlDotNet.Examples
 		public StatusWindow(GuiManager manager)
 			: base(manager, new Rectangle(625, 475, 150, 100), 2000)
 		{
+			if (manager == null)
+			{
+				throw new ArgumentNullException("manager");
+			}
 			// Set up our title
 			Title = "Demo Status";
 
