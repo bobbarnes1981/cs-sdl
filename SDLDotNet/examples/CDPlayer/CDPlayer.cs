@@ -44,7 +44,7 @@ namespace SdlDotNet.Examples
 		private System.Windows.Forms.Button buttonEject;
 		private System.Windows.Forms.Label labelStatus;
 		private System.Windows.Forms.Button buttonPrevious;
-		private SdlDotNet.Windows.SurfaceControl surfaceControl1;
+		private SdlDotNet.Windows.SurfaceControl surfaceControl;
 		private System.Windows.Forms.Button buttonNext;
 		//private System.Windows.Forms.Timer timer;
 		//private System.ComponentModel.IContainer components;
@@ -60,8 +60,8 @@ namespace SdlDotNet.Examples
 			InitializeComponent();
 			surf = 
 				new Surface(
-				this.surfaceControl1.Width,
-				this.surfaceControl1.Height);
+				this.surfaceControl.Width,
+				this.surfaceControl.Height);
 			SurfaceCollection marbleSurfaces = 
 				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50)); 
 
@@ -72,7 +72,7 @@ namespace SdlDotNet.Examples
 					new BounceSprite(marbleSurfaces,
 					new Point(rand.Next(0, 350),
 					rand.Next(0, 200)));
-				bounceSprite.Bounds = new Rectangle(new Point(0,0), this.surfaceControl1.Size);
+				bounceSprite.Bounds = new Rectangle(new Point(0,0), this.surfaceControl.Size);
 
 				// Randomize rotation direction
 				bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
@@ -145,7 +145,7 @@ namespace SdlDotNet.Examples
 			this.labelStatus = new System.Windows.Forms.Label();
 			this.buttonNext = new System.Windows.Forms.Button();
 			this.buttonPrevious = new System.Windows.Forms.Button();
-			this.surfaceControl1 = new SdlDotNet.Windows.SurfaceControl();
+			this.surfaceControl = new SdlDotNet.Windows.SurfaceControl();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -228,20 +228,20 @@ namespace SdlDotNet.Examples
 			this.buttonPrevious.Text = "Prev";
 			this.buttonPrevious.Click += new System.EventHandler(this.buttonPrev_Click);
 			// 
-			// surfaceControl1
+			// surfaceControl
 			// 
-			this.surfaceControl1.Image = ((System.Drawing.Image)(resources.GetObject("surfaceControl1.Image")));
-			this.surfaceControl1.Location = new System.Drawing.Point(8, 144);
-			this.surfaceControl1.Name = "surfaceControl1";
-			this.surfaceControl1.Size = new System.Drawing.Size(350, 200);
-			this.surfaceControl1.TabIndex = 9;
-			this.surfaceControl1.TabStop = false;
+			this.surfaceControl.Image = ((System.Drawing.Image)(resources.GetObject("surfaceControl.Image")));
+			this.surfaceControl.Location = new System.Drawing.Point(16, 136);
+			this.surfaceControl.Name = "surfaceControl";
+			this.surfaceControl.Size = new System.Drawing.Size(336, 224);
+			this.surfaceControl.TabIndex = 9;
+			this.surfaceControl.TabStop = false;
 			// 
 			// CDPlayer
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 			this.ClientSize = new System.Drawing.Size(362, 367);
-			this.Controls.Add(this.surfaceControl1);
+			this.Controls.Add(this.surfaceControl);
 			this.Controls.Add(this.buttonPrevious);
 			this.Controls.Add(this.buttonNext);
 			this.Controls.Add(this.labelStatus);
@@ -286,7 +286,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void UpdateForm()
 		{
-			this.surfaceControl1.Surface.Blit(surf);
+			this.surfaceControl.Surface.Blit(surf);
 		}
 
 		private void comboBoxDrive_SelectedIndexChanged(object sender, System.EventArgs e) 

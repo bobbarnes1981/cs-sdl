@@ -28,7 +28,9 @@ namespace SdlDotNet.Particles
 	/// <summary>
 	/// An abstract class describing a base particle.
 	/// </summary>
-	/// <remarks>Some implementations of the particle class include ParticlePixel and ParticleSprite.</remarks>
+	/// <remarks>
+	/// Some implementations of the particle class 
+	/// include ParticlePixel and ParticleSprite.</remarks>
 	public abstract class Particle
 	{
 //		public static Particle Randomize(Particle p, Rectangle bounds, float minSpeed, float maxSpeed, int minLife, int maxLife, float minDir, float maxDir)
@@ -50,7 +52,9 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// The current life of the particle. -1 means infinate life.
 		/// </summary>
-		/// <remarks>This is decreased when the Update method is called.</remarks>
+		/// <remarks>
+		/// This is decreased when the Update method is called.
+		/// </remarks>
 		public int Life
 		{
 			get
@@ -67,7 +71,10 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Gets and sets the value representing the full life of the particle.
 		/// </summary>
-		/// <remarks>This is usually used when distinguishing when the particle should start dying out with alpha transparency.</remarks>
+		/// <remarks>
+		/// This is usually used when distinguishing when the 
+		/// particle should start dying out with alpha transparency.
+		/// </remarks>
 		public int LifeFull
 		{
 			get
@@ -130,13 +137,18 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Draws the particle onto the destination.
 		/// </summary>
-		/// <param name="destination">The destination surface of the particle.</param>
+		/// <param name="destination">
+		/// The destination surface of the particle.
+		/// </param>
 		public abstract void Render(Surface destination);
 
 		/// <summary>
 		/// Updates the location and life of the particle.
 		/// </summary>
-		/// <returns>True if the particle is still alive, false if the particle is to be destroyed.</returns>
+		/// <returns>
+		/// True if the particle is still alive, 
+		/// false if the particle is to be destroyed.
+		/// </returns>
 		public virtual bool Update()
 		{
 			if(m_Life == 0)
