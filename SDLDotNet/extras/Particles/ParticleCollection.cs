@@ -38,16 +38,21 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Creates a new ParticleCollection with one particle element.
 		/// </summary>
-		/// <param name="particle">The particle to start off the collection.</param>
+		/// <param name="particle">
+		/// The particle to start off the collection.
+		/// </param>
 		public ParticleCollection(Particle particle)
 		{
 			Add(particle);
 		}
 
 		/// <summary>
-		/// Creates a new ParticleCollection from an already existing collection of particles.
+		/// Creates a new ParticleCollection from an 
+		/// already existing collection of particles.
 		/// </summary>
-		/// <param name="collection">The collection to add.</param>
+		/// <param name="collection">
+		/// The collection to add.
+		/// </param>
 		public ParticleCollection(ParticleCollection collection)
 		{
 			Add(collection);
@@ -56,7 +61,9 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Adds a particle to the collection.
 		/// </summary>
-		/// <param name="particle">The particle to add.</param>
+		/// <param name="particle">
+		/// The particle to add.
+		/// </param>
 		public void Add(Particle particle)
 		{
 			List.Add(particle);

@@ -29,8 +29,12 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// Manipulates the given group of particles by the manipulators force.
 		/// </summary>
-		/// <param name="particles">The collection of particles to manipulate.</param>
-		/// <remarks>This should only affect the particles' velocity.</remarks>
+		/// <param name="particles">
+		/// The collection of particles to manipulate.
+		/// </param>
+		/// <remarks>
+		/// This should only affect the particles' velocity.
+		/// </remarks>
 		void Manipulate(ParticleCollection particles);
 	}
 }
