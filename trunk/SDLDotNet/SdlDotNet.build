@@ -141,9 +141,19 @@
 	<echo message="Building all Release assemblies" />
     </target>
 
-    <target name="doc" depends="init, build">
+    <target name="doc" depends="extras">
 	<nant buildfile="${src.dir}/${project.name}.dll.build" target="doc" />	
-	<nant buildfile="${extras.dir}/Windows/SdlDotNet.Windows.build" target="doc" />	
+	<foreach item="File" property="filename">
+	    <in>
+		<items>
+		    <include name="${extras.dir}/**/*.build" />
+		</items>
+	    </in>
+	    <do>
+		<echo message="${filename}" />
+		<nant buildfile="${filename}" target="doc" />
+	    </do>
+	</foreach>
     </target>
 
     <target name="package" depends="buildrelease, doc, copyfiles, zip" description="Package">
@@ -213,6 +223,17 @@
 	</copy>
 	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.chm.dir}">
 	    <fileset basedir="${extras.dir}/Windows/${bin.dir}/${project.config}/doc">
+		<include name="*.chm"/>
+	    </fileset>
+	</copy>
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.html.dir}/${nant.project.name}.Particles">
+	    <fileset basedir="${extras.dir}/Particles/${bin.dir}/${project.config}/doc">
+		<include name="*" />
+		<exclude name="*.chm"/>
+	    </fileset>
+	</copy>
+	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.chm.dir}">
+	    <fileset basedir="${extras.dir}/Particles/${bin.dir}/${project.config}/doc">
 		<include name="*.chm"/>
 	    </fileset>
 	</copy>
