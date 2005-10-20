@@ -25,7 +25,7 @@ namespace SdlDotNet.Particles
 	/// <summary>
 	/// Summary description for ParticleEmitter.
 	/// </summary>
-	public delegate Particle AddParticleEvent(ParticleEmitter sender, EventArgs e);
+	public delegate void AddParticleEventHandler(object sender, AddParticleEventArgs e);
 
 	/// <summary>
 	/// 
@@ -42,10 +42,6 @@ namespace SdlDotNet.Particles
 			{
 				return m_Children;
 			}
-//			set
-//			{
-//				m_Children = value;
-//			}
 		}
 
 		/// <summary>
@@ -58,7 +54,7 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// 
 		/// </summary>
-		public event AddParticleEvent AddParticle;
+		public event AddParticleEventHandler AddParticle;
 
 
 		private bool m_Static = true;
@@ -91,7 +87,7 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		public override bool Update()
+		public void Update(AddParticleEventArgs args)
 		{
 			bool stillAlive = false;
 			PointF pos = new PointF(this.X,this.Y);
@@ -100,8 +96,8 @@ namespace SdlDotNet.Particles
 				// Add particles?
 				if(AddParticle != null)
 				{
-					Particle p = AddParticle(this,null);
-					m_Children.Add(p);
+//					Particle p = AddParticle(this,null);
+//					m_Children.Add(p);
 				}
 			}
 			if(m_Static)
@@ -109,7 +105,8 @@ namespace SdlDotNet.Particles
 				this.X = pos.X;
 				this.Y = pos.Y;
 			}
-			return stillAlive || m_Children.Update();
+			m_Children.Update();
+			//return stillAlive || 
 		}
 	}
 }

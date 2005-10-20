@@ -31,7 +31,7 @@ namespace SdlDotNet.Examples
 	public class ParticlesExample
 	{
 		// Make a new particle system with some gravity
-		ParticleSystem particles = new ParticleSystem();
+		ParticleSystemCollection particles = new ParticleSystemCollection();
 		ParticleEmitter emit = new ParticleEmitter();
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace SdlDotNet.Examples
 
 			particles.Add(emit);
 
-			emit.AddParticle+=new AddParticleEvent(emit_AddParticle);
+			emit.AddParticle += new AddParticleEventHandler(Events_AddParticle);
 			
 			// Make the first particle (a pixel)
 			Particle first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
@@ -110,12 +110,14 @@ namespace SdlDotNet.Examples
 		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
 		{
 			if(e.Key == Key.Escape)
+			{
 				Events.QuitApplication();
+			}
 		}
 
-		private Particle emit_AddParticle(ParticleEmitter sender, EventArgs e)
+		private void Events_AddParticle(object sender, AddParticleEventArgs e)
 		{
-			return new ParticlePixel(Color.Red, sender.X,sender.Y,new Vector(1,1),30);
+			//return new ParticlePixel(Color.Red, sender.X,sender.Y,new Vector(1,1),30);
 		}
 
 		private void Events_MouseMotion(object sender, MouseMotionEventArgs e)

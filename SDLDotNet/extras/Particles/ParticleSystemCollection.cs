@@ -26,15 +26,15 @@ namespace SdlDotNet.Particles
 	/// <summary>
 	/// A collection of particles manipulated by a number of common manipulators.
 	/// </summary>
-	public class ParticleSystem : ParticleCollection
+	public class ParticleSystemCollection : ParticleCollection
 	{
 
-		internal static Random random = new Random();
+//		internal static Random random = new Random();
 
-		internal static float Range(float min, float max)
-		{
-			return min + (float)random.NextDouble() * (max - min);
-		}
+//		internal static float Range(float min, float max)
+//		{
+//			return min + (float)random.NextDouble() * (max - min);
+//		}
 
 		private ParticleManipulatorCollection m_Manipulators;
 
@@ -56,7 +56,7 @@ namespace SdlDotNet.Particles
 		/// <summary>
 		/// 
 		/// </summary>
-		public ParticleSystem()
+		public ParticleSystemCollection()
 		{
 			m_Manipulators = new ParticleManipulatorCollection();
 		}
@@ -65,7 +65,7 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <param name="manipulators"></param>
-		public ParticleSystem(ParticleManipulatorCollection manipulators)
+		public ParticleSystemCollection(ParticleManipulatorCollection manipulators)
 		{
 			m_Manipulators = manipulators;
 		}
@@ -74,20 +74,20 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <param name="manipulator"></param>
-		public ParticleSystem(IParticleManipulator manipulator)
+		public ParticleSystemCollection(IParticleManipulator manipulator)
 		{
 			m_Manipulators.Add(manipulator);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="minParticles"></param>
-		/// <param name="maxParticles"></param>
-		/// <param name="particleType"></param>
-		public void Add(int minParticles, int maxParticles, System.Type particleType)
-		{
-		}
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		/// <param name="minParticles"></param>
+//		/// <param name="maxParticles"></param>
+//		/// <param name="particleType"></param>
+//		public void Add(int minParticles, int maxParticles, System.Type particleType)
+//		{
+//		}
 
 		/// <summary>
 		/// Updates all particles within this system using the given gravity.

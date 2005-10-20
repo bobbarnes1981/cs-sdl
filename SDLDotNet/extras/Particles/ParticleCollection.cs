@@ -124,5 +124,64 @@ namespace SdlDotNet.Particles
 				List[index] = value;
 			}
 		}
+
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		void ICollection.CopyTo(Array array, int index)
+		{
+			this.List.CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		public virtual void CopyTo(Particle[] array, int index)
+		{
+			((ICollection)this).CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// Removes particle from collection
+		/// </summary>
+		/// <param name="particle">Particle to remove</param>
+		public virtual void Remove(Particle particle)
+		{
+			List.Remove(particle);
+		}
+
+		/// <summary>
+		/// Insert a Particle into the collection
+		/// </summary>
+		/// <param name="index">Index at which to insert the particle</param>
+		/// <param name="particle">Particle to insert</param>
+		public virtual void Insert(int index, Particle particle)
+		{
+			List.Insert(index, particle);
+		} 
+
+		/// <summary>
+		/// Gets the index of the given Particle in the collection.
+		/// </summary>
+		/// <param name="particle">The particle to search for.</param>
+		/// <returns>The index of the given Particle.</returns>
+		public virtual int IndexOf(Particle particle)
+		{
+			return List.IndexOf(particle);
+		} 
+
+		/// <summary>
+		/// Checks if particle is in the container
+		/// </summary>
+		/// <param name="particle">Particle to query for</param>
+		/// <returns>True is the Particle is in the container.</returns>
+		public bool Contains(Particle particle)
+		{
+			return (List.Contains(particle));
+		}
 	}
 }

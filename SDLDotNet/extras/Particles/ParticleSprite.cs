@@ -52,12 +52,12 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <param name="sprite"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		public ParticleSprite(Sprite sprite, float x, float y)
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
+		public ParticleSprite(Sprite sprite, float positionX, float positionY)
 		{
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			m_Sprite = sprite;
 		}
 
@@ -65,13 +65,13 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <param name="sprite"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
 		/// <param name="velocity"></param>
-		public ParticleSprite(Sprite sprite, float x, float y, Vector velocity)
+		public ParticleSprite(Sprite sprite, float positionX, float positionY, Vector velocity)
 		{
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			this.Velocity = velocity;
 			m_Sprite = sprite;
 		}
@@ -107,14 +107,14 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <param name="sprite"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
 		/// <param name="velocity"></param>
 		/// <param name="life"></param>
-		public ParticleSprite(Sprite sprite, float x, float y, Vector velocity, int life)
+		public ParticleSprite(Sprite sprite, float positionX, float positionY, Vector velocity, int life)
 		{
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			this.Velocity = velocity;
 			m_Sprite = sprite;
 			this.Life = life;

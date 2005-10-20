@@ -25,7 +25,7 @@ namespace SdlDotNet.Particles
 	/// <summary>
 	/// Describes a collection of particle manipulators.
 	/// </summary>
-	public class ParticleManipulatorCollection : CollectionBase, IParticleManipulator
+	public class ParticleManipulatorCollection : CollectionBase, IParticleManipulator, ICollection
 	{
 		/// <summary>
 		/// Create an empty Particle Manipulator collection.
@@ -94,6 +94,93 @@ namespace SdlDotNet.Particles
 			{
 				manipulator.Manipulate(particles);
 			}
+		}
+
+		#endregion
+
+		#region ICollection Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public bool IsSynchronized
+		{
+			get
+			{
+				// TODO:  Add ParticleManipulatorCollection.IsSynchronized getter implementation
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public object SyncRoot
+		{
+			get
+			{
+				// TODO:  Add ParticleManipulatorCollection.SyncRoot getter implementation
+				return null;
+			}
+		}
+
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		void ICollection.CopyTo(Array array, int index)
+		{
+			this.List.CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		public virtual void CopyTo(IParticleManipulator[] array, int index)
+		{
+			((ICollection)this).CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// Removes particleManipulator from collection
+		/// </summary>
+		/// <param name="particleManipulator">ParticleManipulator to remove</param>
+		public virtual void Remove(IParticleManipulator particleManipulator)
+		{
+			List.Remove(particleManipulator);
+		}
+
+		/// <summary>
+		/// Insert a ParticleManipulator into the collection
+		/// </summary>
+		/// <param name="index">Index at which to insert the particleManipulator</param>
+		/// <param name="particleManipulator">ParticleManipulator to insert</param>
+		public virtual void Insert(int index, IParticleManipulator particleManipulator)
+		{
+			List.Insert(index, particleManipulator);
+		} 
+
+		/// <summary>
+		/// Gets the index of the given ParticleManipulator in the collection.
+		/// </summary>
+		/// <param name="particleManipulator">The particleManipulator to search for.</param>
+		/// <returns>The index of the given ParticleManipulator.</returns>
+		public virtual int IndexOf(IParticleManipulator particleManipulator)
+		{
+			return List.IndexOf(particleManipulator);
+		} 
+
+		/// <summary>
+		/// Checks if particleManipulator is in the container
+		/// </summary>
+		/// <param name="particleManipulator">ParticleManipulator to query for</param>
+		/// <returns>True is the ParticleManipulator is in the container.</returns>
+		public bool Contains(IParticleManipulator particleManipulator)
+		{
+			return (List.Contains(particleManipulator));
 		}
 
 		#endregion
