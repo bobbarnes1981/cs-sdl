@@ -19,7 +19,7 @@
 		<include name="${project.name}.snk"/>
 	    </fileset>
 	</copy>
-	<csc target="library" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" >
+	<csc target="library" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
 	    <sources failonempty="true">
 		<include name="*.cs" />
 	    </sources>
