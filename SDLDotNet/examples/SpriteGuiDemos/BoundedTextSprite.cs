@@ -206,7 +206,7 @@ namespace SdlDotNet.Examples
 			move++;
       
 			// Change the text
-			this.Text = this.X.ToString();
+			this.Text = this.X.ToString(CultureInfo.CurrentCulture);
 		}
 		private bool disposed;
 
@@ -234,6 +234,7 @@ namespace SdlDotNet.Examples
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

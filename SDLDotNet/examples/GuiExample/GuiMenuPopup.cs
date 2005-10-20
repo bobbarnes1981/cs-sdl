@@ -113,6 +113,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override void Update(MouseButtonEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			if (this.Visible)
 			{
 				// If we are being held down, pick up the marble
@@ -151,6 +155,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public override void Update(MouseMotionEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			// Retrieve the item for these coordinates
 			int ndx = 0;
 			GuiMenuItem gmi = 
@@ -191,6 +199,10 @@ namespace SdlDotNet.Examples.GuiExample
 			set 
 			{
 				menuTitle = value;
+				if (value == null)
+				{
+					throw new ArgumentNullException("value");
+				}
 				this.Position = menuTitle.Position;
 			}
 		}
@@ -228,6 +240,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

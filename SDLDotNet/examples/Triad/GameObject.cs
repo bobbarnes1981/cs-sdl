@@ -346,11 +346,11 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="p"></param>
+		/// <param name="point"></param>
 		/// <returns></returns>
-		public bool Contains(Point p)
+		public bool Contains(Point point)
 		{
-			return Contains(p.X,p.Y);
+			return Contains(point.X,point.Y);
 		}
 
 		/// <summary>

@@ -46,7 +46,7 @@ namespace SdlDotNet.Examples
 		{
 			for (int i = 0; i < 9; i++)
 			{
-				this.sectors[i] = new Sector(this.eventManager);
+				this.sectors[i] = new Sector();
 			}
 			this.sectors[3].SetNeighbors(Direction.Up,this.sectors[0]);
 			this.sectors[4].SetNeighbors(Direction.Up,this.sectors[1]);

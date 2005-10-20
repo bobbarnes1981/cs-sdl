@@ -36,11 +36,15 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="screen"></param>
 		/// <param name="sector"></param>
-		public SectorSprite(Surface screen, Sector sector)
+		public SectorSprite(Surface screen, Sector sector) : base()
 		{
+			if (screen == null)
+			{
+				throw new ArgumentNullException("screen");
+			}
 			this.sector = sector;
-			this.Surface = screen.CreateCompatibleSurface(128, 128, true);
-			this.Surface.Fill(Color.FromArgb(0, 255, 128));
+			base.Surface = screen.CreateCompatibleSurface(128, 128, true);
+			base.Surface.Fill(Color.FromArgb(0, 255, 128));
 		}
 
 		/// <summary>
@@ -49,12 +53,16 @@ namespace SdlDotNet.Examples
 		/// <param name="screen"></param>
 		/// <param name="sector"></param>
 		/// <param name="rect"></param>
-		public SectorSprite(Surface screen, Sector sector, Rectangle rect)
+		public SectorSprite(Surface screen, Sector sector, Rectangle rect) :base()
 		{
+			if (screen == null)
+			{
+				throw new ArgumentNullException("screen");
+			}
 			this.sector = sector;
-			this.Surface = screen.CreateCompatibleSurface(128, 128, true);
-			this.Surface.Fill(Color.FromArgb(0, 255, 128));
-			this.Rectangle = rect;
+			base.Surface = screen.CreateCompatibleSurface(128, 128, true);
+			base.Surface.Fill(Color.FromArgb(0, 255, 128));
+			base.Rectangle = rect;
 		}
 
 		/// <summary>

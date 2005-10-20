@@ -131,6 +131,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public static Size GetTextSize(SdlDotNet.Font font, string textItem)
 		{
+			if (font == null)
+			{
+				throw new ArgumentNullException("font");
+			}
 			// Render the text
 			Surface ts = font.Render(textItem, Color.FromArgb(255, 255, 255));
       
@@ -142,7 +146,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public Padding TickerPadding
+		public static Padding TickerPadding
 		{
 			get 
 			{ 
@@ -165,7 +169,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public Padding MenuBarPadding
+		public static Padding MenuBarPadding
 		{
 			get 
 			{ 
@@ -176,7 +180,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public Padding MenuItemPadding
+		public static Padding MenuItemPadding
 		{
 			get 
 			{ 
@@ -187,7 +191,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public Padding MenuItemInnerPadding
+		public static Padding MenuItemInnerPadding
 		{
 			get 
 			{ 
@@ -198,7 +202,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public Padding MenuPopupPadding
+		public static Padding MenuPopupPadding
 		{
 			get 
 			{ 
@@ -209,7 +213,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public Padding MenuSpacerPadding
+		public static Padding MenuSpacerPadding
 		{
 			get 
 			{ 
@@ -220,7 +224,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public Padding MenuTitlePadding
+		public static Padding MenuTitlePadding
 		{
 			get 
 			{ 
@@ -239,6 +243,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <returns></returns>
 		public Padding GetPadding(GuiWindow window)
 		{
+			if (window == null)
+			{
+				throw new ArgumentNullException("window");
+			}
 			// Create a new padding
 			Padding pad = new Padding(windowPad);
 
@@ -259,6 +267,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public static void DrawRect(Surface surface, Rectangle bounds, Color color)
 		{
+			if (surface == null)
+			{
+				throw new ArgumentNullException("surface");
+			}
 			// FIX: Very sloppy code.
 
 			// Ignore blanks

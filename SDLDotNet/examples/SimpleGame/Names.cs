@@ -32,23 +32,8 @@ namespace SdlDotNet.Examples
 		static string quittingSimpleGame = "Quitting SimpleGame.";
 		static int startingSector = 0;
 
-		static readonly Names instance = new Names();
-
 		Names()
 		{
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public static Names Instance
-		{
-			get
-			{
-				return instance;
-			}
-
 		}
 
 		/// <summary>

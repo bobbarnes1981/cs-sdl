@@ -49,14 +49,14 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="font"></param>
-		/// <param name="y"></param>
+		/// <param name="positionY"></param>
 		/// <param name="phrase"></param>
 		/// <param name="startTime"></param>
-		public TextItem(string phrase, Font font, int y, float startTime) : 
-			base(phrase, font, false, new Point(25, y))
+		public TextItem(string phrase, Font font, int positionY, float startTime) : 
+			base(phrase, font, false, new Point(25, positionY))
 		{
-			this.Surface.Alpha = 0;
-			this.Surface.AlphaBlending = true;
+			base.Surface.Alpha = 0;
+			base.Surface.AlphaBlending = true;
 			this.startTime = startTime;
 		}
 
@@ -92,6 +92,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			float seconds = args.SecondsElapsed;
 			time = Timer.SecondsElapsed;
 

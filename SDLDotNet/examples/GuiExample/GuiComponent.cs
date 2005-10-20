@@ -44,11 +44,11 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="z"></param>
-		public GuiComponent(GuiManager manager, int z)
+		/// <param name="positionZ"></param>
+		public GuiComponent(GuiManager manager, int positionZ)
 			: this(manager)
 		{
-			this.Z = z;
+			this.Z = positionZ;
 		}
 
 		/// <summary>
@@ -78,23 +78,23 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		/// <param name="manager"></param>
 		/// <param name="rectangle"></param>
-		/// <param name="z"></param>
-		public GuiComponent(GuiManager manager, Rectangle rectangle, int z)
+		/// <param name="positionZ"></param>
+		public GuiComponent(GuiManager manager, Rectangle rectangle, int positionZ)
 			: this(manager, rectangle)
 		{
-			this.Z = z;
+			this.Z = positionZ;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="z"></param>
+		/// <param name="positionZ"></param>
 		/// <param name="coordinates"></param>
-		public GuiComponent(GuiManager manager, Point coordinates, int z)
+		public GuiComponent(GuiManager manager, Point coordinates, int positionZ)
 			: this(manager)
 		{
-			this.Z = z;
+			this.Z = positionZ;
 			this.Position = coordinates;
 		}
 
@@ -104,7 +104,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <returns></returns>
 		public override string ToString()
 		{
-			return String.Format(CultureInfo.CurrentCulture, "(gui {0})", this.Rectangle, base.ToString());
+			return String.Format(CultureInfo.CurrentCulture, "(gui {0} {1})", this.Rectangle, base.ToString());
 		}
 
 		#region Drawing
@@ -129,6 +129,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(MouseButtonEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			// Return immediately if component cannt be dragged
 			if (!AllowDrag)
 			{
@@ -158,6 +162,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(MouseMotionEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			if (!AllowDrag)
 			{
 				return;
@@ -177,6 +185,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			for (int i = 0; i < this.Sprites.Count; i++)
 			{
 				this.Sprites[i].Update(args);
@@ -245,6 +257,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

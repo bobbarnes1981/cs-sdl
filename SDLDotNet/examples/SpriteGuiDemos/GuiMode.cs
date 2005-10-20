@@ -76,7 +76,7 @@ namespace SdlDotNet.Examples
 			CreateMenus(manager, Sprites);
 
 			// Create the ticker
-			ticker = new GuiTicker(manager, 0, 500, 64);
+			ticker = new GuiTicker(manager, new Point(0, 500), 64);
 			Sprites.Add(ticker);
 			this.EnableTickEvent();
 			Sprites.EnableMouseButtonEvent();
@@ -96,13 +96,21 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="gui"></param>
-		/// <param name="sm"></param>
-		public void CreateMenus(GuiManager gui, SpriteCollection sm)
+		/// <param name="sprites"></param>
+		public void CreateMenus(GuiManager gui, SpriteCollection sprites)
 		{
+			if (sprites == null)
+			{
+				throw new ArgumentNullException("sprites");
+			}
+			if (gui == null)
+			{
+				throw new ArgumentNullException("gui");
+			}
 			// Create the menubar
-			GuiMenuBar gmb = new GuiMenuBar(gui, 0, 40, 20);
+			GuiMenuBar gmb = new GuiMenuBar(gui, new Point(0, 40), 20);
 			gmb.Sprites.EnableMouseButtonEvent();
-			sm.Add(gmb);
+			sprites.Add(gmb);
 		
 			// First menu
 			gm = new GuiMenuTitle(gui, gmb, "Test Menu");
@@ -142,6 +150,10 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Start(SpriteCollection manager)
 		{
+			if (manager == null)
+			{
+				throw new ArgumentNullException("manager");
+			}
 			manager.Add(Sprites);
 			base.Start(manager);
 			manager.Add(gm.Popup);
@@ -154,6 +166,10 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void Stop(SpriteCollection manager)
 		{
+			if (manager == null)
+			{
+				throw new ArgumentNullException("manager");
+			}
 			manager.Remove(Sprites);
 			base.Stop(manager);
 		}

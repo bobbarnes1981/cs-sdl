@@ -38,6 +38,9 @@ namespace SdlDotNet.Particles
 
 		private ParticleManipulatorCollection m_Manipulators;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public ParticleManipulatorCollection Manipulators
 		{
 			get
@@ -50,28 +53,41 @@ namespace SdlDotNet.Particles
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public ParticleSystem()
 		{
 			m_Manipulators = new ParticleManipulatorCollection();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manipulators"></param>
 		public ParticleSystem(ParticleManipulatorCollection manipulators)
 		{
 			m_Manipulators = manipulators;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="manipulator"></param>
 		public ParticleSystem(IParticleManipulator manipulator)
 		{
 			m_Manipulators.Add(manipulator);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="minParticles"></param>
+		/// <param name="maxParticles"></param>
+		/// <param name="particleType"></param>
 		public void Add(int minParticles, int maxParticles, System.Type particleType)
 		{
-
 		}
-		
-
-
 
 		/// <summary>
 		/// Updates all particles within this system using the given gravity.

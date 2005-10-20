@@ -47,8 +47,12 @@ namespace SdlDotNet.Examples.GuiExample
 		public GuiMenuItem(GuiManager manager, string text)
 			: base(manager)
 		{
+			if (manager == null)
+			{
+				throw new ArgumentNullException("manager");
+			}
 			TextSprite ts = new TextSprite(text, manager.BaseFont);
-			this.Surface = ts.Surface;
+			base.Surface = ts.Surface;
 			AddLeft(ts);
 		}
 
@@ -56,19 +60,19 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="s"></param>
-		public void AddLeft(Sprite s)
+		/// <param name="sprite"></param>
+		public void AddLeft(Sprite sprite)
 		{
-			AddHead(s);
+			AddHead(sprite);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="s"></param>
-		public void AddRight(Sprite s)
+		/// <param name="sprite"></param>
+		public void AddRight(Sprite sprite)
 		{
-			AddTail(s);
+			AddTail(sprite);
 		}
 		#endregion
 
@@ -180,7 +184,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get 
 			{ 
-				return base.GuiManager.MenuItemInnerPadding; 
+				return GuiManager.MenuItemInnerPadding; 
 			}
 		}
 
@@ -191,7 +195,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			get 
 			{ 
-				return base.GuiManager.MenuItemPadding; 
+				return GuiManager.MenuItemPadding; 
 			}
 		}
 		#endregion
@@ -226,6 +230,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 

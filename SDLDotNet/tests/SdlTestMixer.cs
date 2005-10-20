@@ -106,7 +106,7 @@ namespace SdlDotNet.Tests
 		/// 
 		/// </summary>
 		[Test]
-		public void LoadWAV_RW()
+		public void LoadWav_RW()
 		{
 			InitAudio();		
 			IntPtr resultPtr = SdlMixer.Mix_LoadWAV_RW(Sdl.SDL_RWFromFile("test.wav", "rb"), 1);
@@ -117,7 +117,7 @@ namespace SdlDotNet.Tests
 		/// 
 		/// </summary>
 		[Test]
-		public void LoadWAV()
+		public void LoadWav()
 		{
 			InitAudio();		
 			IntPtr resultPtr = SdlMixer.Mix_LoadWAV("test.wav");
@@ -128,7 +128,7 @@ namespace SdlDotNet.Tests
 		/// 
 		/// </summary>
 		[Test]
-		public void LoadMUSwav()
+		public void LoadMusWav()
 		{
 			InitAudio();		
 			IntPtr resultPtr = SdlMixer.Mix_LoadMUS("test.wav");
@@ -139,7 +139,7 @@ namespace SdlDotNet.Tests
 		/// 
 		/// </summary>
 		[Test]
-		public void LoadMUSmp3()
+		public void LoadMusMp3()
 		{
 			InitAudio();		
 			IntPtr resultPtr = SdlMixer.Mix_LoadMUS("test.mp3");
@@ -150,7 +150,7 @@ namespace SdlDotNet.Tests
 		/// 
 		/// </summary>
 		[Test]
-		public void LoadMUSOGG()
+		public void LoadMusOgg()
 		{
 			InitAudio();		
 			IntPtr resultPtr = SdlMixer.Mix_LoadMUS("test.ogg");
@@ -172,7 +172,7 @@ namespace SdlDotNet.Tests
 		/// 
 		/// </summary>
 		[Test]
-		public void QuickLoad_WAV()
+		public void QuickLoad_Wav()
 		{
 			InitAudio();		
 			IntPtr resultPtr = SdlMixer.Mix_QuickLoad_WAV(Sdl.SDL_RWFromFile("test.wav", "rb"));
@@ -183,7 +183,7 @@ namespace SdlDotNet.Tests
 		/// 
 		/// </summary>
 		[Test]
-		public void QuickLoad_RAW()
+		public void QuickLoad_Raw()
 		{
 			InitAudio();		
 			IntPtr resultPtr = SdlMixer.Mix_QuickLoad_RAW(Sdl.SDL_RWFromFile("test.wav", "rb"), 1000);

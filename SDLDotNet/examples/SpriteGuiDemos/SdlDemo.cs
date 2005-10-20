@@ -124,7 +124,7 @@ namespace SdlDotNet.Examples
 		private void CreateMenu(GuiManager gui)
 		{
 			// Create the menu
-			gmb = new GuiMenuBar(gui, 0, 1, 20);
+			gmb = new GuiMenuBar(gui, new Point(0, 1), 20);
 			gmb.Sprites.EnableTickEvent();
 			gmb.Sprites.EnableMouseButtonEvent();
 			master.Add(gmb);
@@ -209,7 +209,7 @@ namespace SdlDotNet.Examples
 			CreateMenuQuit(gui);
 		}
 
-		private void StopDemo()
+		private static void StopDemo()
 		{
 			// Stop the demo, if any
 			if (currentDemo != null)

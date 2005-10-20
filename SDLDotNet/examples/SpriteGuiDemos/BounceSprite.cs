@@ -37,11 +37,11 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d"></param>
+		/// <param name="surfaces"></param>
 		/// <param name="rect"></param>
 		/// <param name="coordinates"></param>
-		public BounceSprite(SurfaceCollection d, Rectangle rect, Point coordinates)
-			: base(d, rect, coordinates)
+		public BounceSprite(SurfaceCollection surfaces, Rectangle rect, Point coordinates)
+			: base(surfaces, rect, coordinates)
 		{
 			this.dx = rand.Next(-10, 11);
 			this.dy = rand.Next(-10, 11);
@@ -53,6 +53,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			this.X += (int) (args.SecondsElapsed * 10 * dx);
 			this.Y += (int) (args.SecondsElapsed * 10 * dy);
 
@@ -108,6 +112,7 @@ namespace SdlDotNet.Examples
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

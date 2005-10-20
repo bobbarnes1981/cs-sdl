@@ -41,15 +41,14 @@ namespace SdlDotNet.Examples.GuiExample
 			: base(manager)
 		{
 		}
+
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="gui"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="height"></param>
-		public Packer(GuiManager gui, int x, int y, int height)
-			: base(gui, new Rectangle(x, y, Video.Screen.Width, height))
+		/// <param name="manager"></param>
+		/// <param name="point"></param>
+		public Packer(GuiManager manager, Point point)
+			: base(manager, point)
 		{
 		}
 
@@ -57,9 +56,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="manager"></param>
-		/// <param name="p"></param>
-		public Packer(GuiManager manager, Point p)
-			: base(manager, p)
+		/// <param name="point"></param>
+		/// <param name="height"></param>
+		public Packer(GuiManager manager, Point point, int height)
+			: base(manager, point, height)
 		{
 		}
 
@@ -119,21 +119,21 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="s"></param>
-		protected void AddHead(Sprite s)
+		/// <param name="sprite"></param>
+		protected void AddHead(Sprite sprite)
 		{
-			head.Add(s);
-			this.Sprites.Add(s);
+			head.Add(sprite);
+			this.Sprites.Add(sprite);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="s"></param>
-		protected void AddTail(Sprite s)
+		/// <param name="sprite"></param>
+		protected void AddTail(Sprite sprite)
 		{
-			tail.Add(s);
-			this.Sprites.Add(s);
+			tail.Add(sprite);
+			this.Sprites.Add(sprite);
 		}
 
 		/// <summary>
@@ -211,6 +211,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

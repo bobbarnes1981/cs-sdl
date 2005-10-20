@@ -84,6 +84,10 @@ namespace SdlDotNet.Examples
 		/// <param name="obj"></param>
 		public void Publish(Object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType().Name == "GameStatusEventArgs")
 			{
 				if (OnGameStatusEvent != null) 

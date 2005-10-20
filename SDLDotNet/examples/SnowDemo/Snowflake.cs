@@ -50,23 +50,23 @@ namespace SdlDotNet.Examples
 
 		void Initialize()
 		{
-			this.Surface.Fill(Color.White);
-			this.Surface.TransparentColor = Color.FromArgb(255, 0, 255);
-			this.Rectangle = new Rectangle(this.Surface.Width, this.Surface.Height, 0, 0);
+			base.Surface.Fill(Color.White);
+			base.Surface.TransparentColor = Color.FromArgb(255, 0, 255);
+			base.Rectangle = new Rectangle(this.Surface.Width, this.Surface.Height, 0, 0);
 		}
 
 		void Reset()
 		{
 			wind = random.Next(3) / 10.0f;
 
-			this.X = (int)random.Next(-1 * (int)(wind * 640), 640 - this.Surface.Width);
-			this.Y = 0 - this.Width;
+			base.X = (int)random.Next(-1 * (int)(wind * 640), 640 - this.Surface.Width);
+			base.Y = 0 - this.Width;
 
 			speed = random.Next(50, 150);
 
-			this.Surface.Alpha = 
+			base.Surface.Alpha = 
 				(byte)((150 - 50) / (speed - 50) * - 255);
-			this.Surface.AlphaBlending = true;
+			base.Surface.AlphaBlending = true;
 		}
 
 		/// <summary>

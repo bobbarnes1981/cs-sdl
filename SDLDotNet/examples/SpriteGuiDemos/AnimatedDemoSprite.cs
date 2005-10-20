@@ -35,12 +35,16 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="d"></param>
+		/// <param name="surfaces"></param>
 		/// <param name="position"></param>
-		public AnimatedDemoSprite(SurfaceCollection d, Point position)
-			: base(d, position)
+		public AnimatedDemoSprite(SurfaceCollection surfaces, Point position)
+			: base(surfaces, position)
 		{
-			base.Frame = rand.Next(d.Count);
+			if (surfaces == null)
+			{
+				throw new ArgumentNullException("surfaces");
+			}
+			base.Frame = rand.Next(surfaces.Count);
 			if (rand.Next(2) % 2 == 0)
 			{
 				this.AnimateForward = true;
@@ -120,6 +124,7 @@ namespace SdlDotNet.Examples
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

@@ -37,11 +37,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// 
 		/// </summary>
 		/// <param name="gui"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="point"></param>
 		/// <param name="height"></param>
-		public GuiTicker(GuiManager gui, int x, int y, int height)
-			: base(gui, new Rectangle(x, y, Video.Screen.Width, height))
+		public GuiTicker(GuiManager gui, Point point, int height)
+			: base(gui, new Rectangle(point.X, point.Y, Video.Screen.Width, height))
 		{			
 		}
 
@@ -52,7 +51,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="coordinates"></param>
 		/// <param name="height"></param>
 		public GuiTicker(GuiManager gui, Vector coordinates, int height)
-			: base(gui, new Rectangle((int)coordinates.X, (int)coordinates.Y, Video.Screen.Width, height), 100)
+			: base(gui, new Rectangle((int)coordinates.X , (int)coordinates.Y, Video.Screen.Width, height), 100)
 		{
 		}
 
@@ -63,6 +62,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="sprite"></param>
 		public void Add(Sprite sprite)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			sprite.Position = new Point(this.Size.Width, this.Position.Y);
 			base.Sprites.Add(sprite);
 		}
@@ -170,6 +173,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

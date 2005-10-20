@@ -32,12 +32,16 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// constructor
 		/// </summary>
-		public EntitySprite(Surface screen)
+		public EntitySprite(Surface screen) : base()
 		{
-			this.Surface = screen.CreateCompatibleSurface(70, 70, true);
-			this.Surface.Fill(Color.FromArgb(0, 255, 128));
-			this.Surface.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
-			this.Rectangle = new Rectangle(0,0,70,70);
+			if (screen == null)
+			{
+				throw new ArgumentNullException("screen");
+			}
+			base.Surface = screen.CreateCompatibleSurface(70, 70, true);
+			base.Surface.Fill(Color.FromArgb(0, 255, 128));
+			base.Surface.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
+			base.Rectangle = new Rectangle(0,0,70,70);
 		}
 	}
 }

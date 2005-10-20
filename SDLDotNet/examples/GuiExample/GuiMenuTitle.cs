@@ -44,6 +44,10 @@ namespace SdlDotNet.Examples.GuiExample
 			this.popup = new GuiMenuPopup(manager);
 			this.popup.MenuTitle = this;
       
+			if (manager == null)
+			{
+				throw new ArgumentNullException("manager");
+			}
 			TextSprite ts = new TextSprite(title, manager.MenuFont);
 			this.Rectangle = ts.Rectangle;
 			this.Position = menubar.Position;
@@ -89,6 +93,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(MouseButtonEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			if (!args.ButtonPressed)
 			{
 				IsSelected = false;
@@ -174,6 +182,7 @@ namespace SdlDotNet.Examples.GuiExample
 								disposableObj.Dispose( );
 							}
 						}
+						popup.Dispose();
 					}
 					this.disposed = true;
 				}
@@ -183,6 +192,7 @@ namespace SdlDotNet.Examples.GuiExample
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 	}
 }

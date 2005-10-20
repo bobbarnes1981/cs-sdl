@@ -49,7 +49,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Loads a floor title into memory.
 		/// </summary>
-		protected SurfaceCollection LoadFloor()
+		protected static SurfaceCollection LoadFloor()
 		{
 			SurfaceCollection id = new SurfaceCollection("../../Data/floor", ".png");
 			return id;
@@ -80,7 +80,7 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		protected SurfaceCollection LoadRandomMarble()
+		protected static SurfaceCollection LoadRandomMarble()
 		{
 			return LoadMarble("marble" + (rand.Next() % 6 + 1));
 		}
@@ -104,6 +104,10 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public virtual void Start(SpriteCollection manager)
 		{
+			if (manager == null)
+			{
+				throw new ArgumentNullException("manager");
+			}
 			manager.Add(Sprites);
 		}
 
@@ -113,6 +117,10 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public virtual void Stop(SpriteCollection manager)
 		{
+			if (manager == null)
+			{
+				throw new ArgumentNullException("manager");
+			}
 			manager.Remove(Sprites);
 		}
 		#endregion

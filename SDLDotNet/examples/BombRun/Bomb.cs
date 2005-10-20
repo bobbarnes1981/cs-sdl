@@ -36,11 +36,10 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Bomb()
+		public Bomb() : base(new Surface("../../Data/Bomb.bmp"))
 		{
-			this.Surface = new Surface("../../Data/Bomb.bmp");
-			this.Surface.TransparentColor = Color.White;
-			this.Size = this.Surface.Size;
+			base.Surface.TransparentColor = Color.White;
+			base.Size = this.Surface.Size;
 			Reset();
 		}
 
@@ -59,6 +58,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
+			if (args == null)
+			{
+				throw new ArgumentNullException("args");
+			}
 			this.Y += (int)(args.SecondsElapsed * speed);
 			//Console.WriteLine(args.SecondsElapsed);
 
