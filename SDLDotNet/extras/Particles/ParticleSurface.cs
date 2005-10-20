@@ -65,19 +65,19 @@ namespace SdlDotNet.Particles
 		/// Creates a particle surface.
 		/// </summary>
 		/// <param name="surface"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
 		/// <param name="velocity"></param>
 		/// <param name="life"></param>
-		public ParticleSurface(Surface surface, float x, float y, Vector velocity, int life)
+		public ParticleSurface(Surface surface, float positionX, float positionY, Vector velocity, int life)
 		{
 			if (surface == null)
 			{
 				throw new ArgumentNullException("surface");
 			}
 			m_Surface = surface;
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			this.Velocity = velocity;
 			this.Life = life;
 			this.LifeFull = life;
@@ -87,18 +87,18 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <param name="surface"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
 		/// <param name="velocity"></param>
-		public ParticleSurface(Surface surface, float x, float y, Vector velocity)
+		public ParticleSurface(Surface surface, float positionX, float positionY, Vector velocity)
 		{
 			if (surface == null)
 			{
 				throw new ArgumentNullException("surface");
 			}
 			m_Surface = surface;
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			this.Velocity = velocity;
 			m_ClipRectangle = new Rectangle(0, 0, m_Surface.Width, m_Surface.Height);
 		}
@@ -106,35 +106,35 @@ namespace SdlDotNet.Particles
 		/// 
 		/// </summary>
 		/// <param name="surface"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		public ParticleSurface(Surface surface, float x, float y)
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
+		public ParticleSurface(Surface surface, float positionX, float positionY)
 		{
 			if (surface == null)
 			{
 				throw new ArgumentNullException("surface");
 			}
 			m_Surface = surface;
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			m_ClipRectangle = new Rectangle(0, 0, m_Surface.Width, m_Surface.Height);
 		}
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="surface"></param>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
 		/// <param name="life"></param>
-		public ParticleSurface(Surface surface, float x, float y, int life)
+		public ParticleSurface(Surface surface, float positionX, float positionY, int life)
 		{
 			if (surface == null)
 			{
 				throw new ArgumentNullException("surface");
 			}
 			m_Surface = surface;
-			this.X = x;
-			this.Y = y;
+			this.X = positionX;
+			this.Y = positionY;
 			this.Life = life;
 			m_ClipRectangle = new Rectangle(0, 0, m_Surface.Width, m_Surface.Height);
 		}
