@@ -42,12 +42,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Create collection with image as the first surface
 		/// </summary>
-		/// <param name="filename">
+		/// <param name="fileName">
 		/// filename of surface to put into collection
 		/// </param>
-		public SurfaceCollection(string filename)
+		public SurfaceCollection(string fileName)
 		{
-			this.List.Add(new Surface(filename));
+			this.List.Add(new Surface(fileName));
 		}
 
 		void ICollection.CopyTo(Array array, int index)
@@ -95,14 +95,14 @@ namespace SdlDotNet
 		/// <summary>
 		/// Loads a collection of tiled surfaces from one larger surface. 
 		/// </summary>
-		/// <param name="filename">
+		/// <param name="fileName">
 		/// The filename of the surface which contains all the tiles.
 		/// </param>
 		/// <param name="tileSize">
 		/// The size of each tile.
 		/// </param>
-		public SurfaceCollection(string filename, Size tileSize) : 
-			this(new Surface(filename), tileSize)
+		public SurfaceCollection(string fileName, Size tileSize) : 
+			this(new Surface(fileName), tileSize)
 		{
 		}
 
@@ -119,6 +119,10 @@ namespace SdlDotNet
 			Surface fullImage, 
 			Size tileSize) 
 		{ 
+			if (fullImage == null)
+			{
+				throw new ArgumentNullException("fullImage");
+			}
 			fullImage.Alpha = 255;
 			
 			for(int tileY = 0; tileY * tileSize.Height < fullImage.Height; tileY++) 
@@ -156,6 +160,10 @@ namespace SdlDotNet
 		/// </param>
 		public SurfaceCollection(Surface fullImage, Size tileSize, int rowNumber)
 		{
+			if (fullImage == null)
+			{
+				throw new ArgumentNullException("fullImage");
+			}
 			fullImage.Alpha = 0;
 			for(int tileX = 0; tileX * tileSize.Width < fullImage.Width; tileX++)
 			{
@@ -223,6 +231,10 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(SurfaceCollection surfaceCollection)
 		{
+			if (surfaceCollection == null)
+			{
+				throw new ArgumentNullException("surfaceCollection");
+			}
 			for (int i = 0; i < surfaceCollection.Count; i++)
 			{
 				this.List.Add(surfaceCollection[i]);
@@ -234,16 +246,16 @@ namespace SdlDotNet
 		/// Load a SdlImage with the specified filename and add 
 		/// it to the end of the SdlImageList.
 		/// </summary>
-		/// <param name="filename">
+		/// <param name="fileName">
 		/// The filename of the SdlImage 
 		/// to be added to the end of the SdlImageList.
 		/// </param>
 		/// <returns>
 		/// The index at which the SdlImage has been added.
 		/// </returns>
-		public int Add(string filename)
+		public int Add(string fileName)
 		{
-			return (this.Add(new Surface(filename)));
+			return (this.Add(new Surface(fileName)));
 		} 
 
 

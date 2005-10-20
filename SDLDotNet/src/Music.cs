@@ -52,16 +52,16 @@ namespace SdlDotNet
 		private static SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
 		private bool disposed;
 
-		private string m_Filename = "";
+		private string m_FileName = "";
 
 		/// <summary>
 		/// Gets the filename of the music sample.
 		/// </summary>
-		public string Filename
+		public string FileName
 		{
 			get
 			{
-				return m_Filename;
+				return m_FileName;
 			}
 		}
 
@@ -104,20 +104,20 @@ namespace SdlDotNet
 		/// <summary>
 		/// Loads a music sample from a file.
 		/// </summary>
-		/// <param name="filename">The file path to load from.</param>
-		public Music(string filename)
+		/// <param name="fileName">The file path to load from.</param>
+		public Music(string fileName)
 		{
-			this.Handle = Mixer.LoadMus(filename);
-			m_Filename = filename;
+			this.Handle = Mixer.LoadMus(fileName);
+			m_FileName = fileName;
 		}
 
-		/// <summary>
-		/// Disposes the music sample.
-		/// </summary>
-		~Music()
-		{
-			Dispose(false);
-		}
+//		/// <summary>
+//		/// Disposes the music sample.
+//		/// </summary>
+//		~Music()
+//		{
+//			Dispose(false);
+//		}
 
 		/// <summary>
 		/// Destroys the surface object and frees its memory
@@ -374,7 +374,7 @@ namespace SdlDotNet
 		/// </returns>
 		public override string ToString()
 		{
-			return m_Filename;
+			return m_FileName;
 		}
 
 

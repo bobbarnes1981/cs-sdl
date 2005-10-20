@@ -64,12 +64,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a new MusicCollection with one element in it.
 		/// </summary>
-		/// <param name="filename">
+		/// <param name="fileName">
 		/// The filename and key of the single Music object to load.
 		/// </param>
-		public MusicDictionary(string filename)
+		public MusicDictionary(string fileName)
 		{    
-			this.Add(filename);
+			this.Add(fileName);
 		}
 
 		/// <summary>
@@ -129,6 +129,10 @@ namespace SdlDotNet
 		/// </param>
 		public MusicDictionary(MusicDictionary musicDictionary)
 		{
+			if (musicDictionary == null)
+			{
+				throw new ArgumentNullException("musicDictionary");
+			}
 			IDictionaryEnumerator enumer = musicDictionary.GetEnumerator();
 			while(enumer.MoveNext())
 			{
@@ -196,16 +200,16 @@ namespace SdlDotNet
 		/// Adds a music sample to the collection 
 		/// using the filename as the key.
 		/// </summary>
-		/// <param name="filename">
+		/// <param name="fileName">
 		/// The music filename to load as well 
 		/// as the key to use as the reference.
 		/// </param>
 		/// <returns>The total number of elements 
 		/// within the collection after adding the sample.
 		/// </returns>
-		public int Add(string filename)
+		public int Add(string fileName)
 		{
-			Dictionary.Add(filename, new Music(filename));
+			Dictionary.Add(fileName, new Music(fileName));
 			return Dictionary.Count;
 		}
 
@@ -222,6 +226,10 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(Music music)
 		{
+			if (music == null)
+			{
+				throw new ArgumentNullException("music");
+			}
 			Dictionary.Add(music.ToString(), music);
 			return Dictionary.Count;
 		}
@@ -248,6 +256,10 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(MusicDictionary musicDictionary)
 		{
+			if (musicDictionary == null)
+			{
+				throw new ArgumentNullException("musicDictionary");
+			}
 			IDictionaryEnumerator dict = musicDictionary.GetEnumerator();
 			while(dict.MoveNext())
 			{
@@ -262,16 +274,16 @@ namespace SdlDotNet
 		/// <param name="key">
 		/// The reference value for the music sample.
 		/// </param>
-		/// <param name="filename">
+		/// <param name="fileName">
 		/// The filename of the music sample to load.
 		/// </param>
 		/// <returns>
 		/// The total number of elements within the collection 
 		/// after adding the sample.
 		/// </returns>
-		public int Add(string key, string filename)
+		public int Add(string key, string fileName)
 		{
-			Dictionary.Add(key, new Music(filename));
+			Dictionary.Add(key, new Music(fileName));
 			return Dictionary.Count;
 		}
         

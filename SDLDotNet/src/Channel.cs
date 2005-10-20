@@ -95,7 +95,10 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public int Play(Sound sound, int loops, int milliseconds) 
 		{
-			
+			if (sound == null)
+			{
+				throw new ArgumentNullException("sound");
+			}
 			int ret = SdlMixer.Mix_PlayChannelTimed(this.index, sound.Handle, loops, milliseconds);
 			if (ret == (int) SdlFlag.Error)
 			{
@@ -134,13 +137,17 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public int PlayTimed(Sound sound, int milliseconds) 
 		{
-				int ret = SdlMixer.Mix_PlayChannelTimed(this.index, sound.Handle, -1, milliseconds);
-				if (ret == (int) SdlFlag.Error)
-				{
-					throw SdlException.Generate();
-				}
-				this.Sound = sound;
-				return ret;
+			if (sound == null)
+			{
+				throw new ArgumentNullException("sound");
+			}
+			int ret = SdlMixer.Mix_PlayChannelTimed(this.index, sound.Handle, -1, milliseconds);
+			if (ret == (int) SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+			this.Sound = sound;
+			return ret;
 		}
 
 		/// <summary>
@@ -172,6 +179,10 @@ namespace SdlDotNet
 			}
 			set
 			{
+				if (value == null)
+				{
+					throw new ArgumentNullException("value");
+				}
 				if (this.sound != null)
 				{
 					this.lastSound = this.sound;
@@ -227,6 +238,10 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public int FadeIn(Sound sound, int ms, int loops) 
 		{
+			if (sound == null)
+			{
+				throw new ArgumentNullException("sound");
+			}
 			int ret = SdlMixer.Mix_FadeInChannelTimed(this.index, sound.Handle, loops, ms, -1);
 			if (ret == (int) SdlFlag.Error)
 			{
@@ -249,6 +264,10 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public int FadeIn(Sound sound, int ms, int loops, int ticks) 
 		{
+			if (sound == null)
+			{
+				throw new ArgumentNullException("sound");
+			}
 			int ret = SdlMixer.Mix_FadeInChannelTimed(this.index, sound.Handle, loops, ms, ticks);
 			if (ret == (int) SdlFlag.Error)
 			{

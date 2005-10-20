@@ -288,6 +288,10 @@ namespace SdlDotNet
 		/// </param>
 		public static void PushUserEvent(UserEventArgs userEventArgs) 
 		{
+			if (userEventArgs == null)
+			{
+				throw new ArgumentNullException("userEventArgs");
+			}
 			//Sdl.SDL_UserEvent sdlev = new Sdl.SDL_UserEvent();
 			//sdlev.type = (byte)Sdl.SDL_USEREVENT;
 			lock (instance) 

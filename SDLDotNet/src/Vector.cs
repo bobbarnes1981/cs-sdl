@@ -155,13 +155,15 @@ namespace SdlDotNet
         /// <param name="vector">The vector to copy.</param>
 		public Vector(Vector vector)
 		{
-            if (vector != null)
+			if (vector != null)
 			{
-                m_x = vector.m_x;
-                m_y = vector.m_y;
+				m_x = vector.m_x;
+				m_y = vector.m_y;
 			}
 			else
+			{
 				m_x = m_y = 0;
+			}
 		}
 
 		#endregion Constructors
@@ -176,7 +178,7 @@ namespace SdlDotNet
 		/// </returns>
 		public override string ToString()
 		{
-			return String.Format(CultureInfo.CurrentCulture, "{0}, {1}", X.ToString("#.000"), Y.ToString("#.000"));
+			return String.Format(CultureInfo.CurrentCulture, "{0}, {1}", X.ToString("#.000", CultureInfo.CurrentCulture), Y.ToString("#.000", CultureInfo.CurrentCulture));
 		}
 
 		/// <summary>
@@ -186,6 +188,10 @@ namespace SdlDotNet
 		/// <returns>If true, objects are equal</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(Vector))
 			{
 				return false;
@@ -202,6 +208,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator== (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return ((c1.m_x == c2.m_x) && (c1.m_y == c2.m_y));
 		}
 
@@ -213,6 +227,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator >= (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return (c1.X >= c2.X) && (c1.Y >= c2.Y);
 		}
 		/// <summary>
@@ -223,6 +245,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator > (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return (c1.X > c2.X) && (c1.Y > c2.Y);
 		}
 		/// <summary>
@@ -233,6 +263,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator < (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return (c1.X < c2.X) && (c1.Y < c2.Y);
 		}
 		/// <summary>
@@ -243,6 +281,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator <= (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return (c1.X <= c2.X) && (c1.Y <= c2.Y);
 		}
 		
@@ -254,6 +300,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator!= (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return !(c1 == c2);
 		}
 
@@ -265,6 +319,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static Vector operator + (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return new Vector(c1.m_x + c2.m_x, c1.m_y + c2.m_y);
 		}
 
@@ -276,6 +338,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static Vector operator - (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return new Vector(c1.m_x - c2.m_x, c1.m_y - c2.m_y);
 		}
 
@@ -287,6 +357,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static Vector operator * (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return new Vector(c1.m_x * c2.m_x, c1.m_y * c2.m_y);
 		}
 
@@ -298,10 +376,16 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static Vector operator / (Vector c1, Vector c2)
 		{
+			if (c1 == null)
+			{
+				throw new ArgumentNullException("c1");
+			}
+			if (c2 == null)
+			{
+				throw new ArgumentNullException("c2");
+			}
 			return new Vector(c1.m_x / c2.m_x, c1.m_y / c2.m_y);
 		}
-
-
 
 		/// <summary>
 		/// Addition operator
@@ -527,11 +611,15 @@ namespace SdlDotNet
         /// <summary>
         /// Gets the midpoint between the two vectors.
         /// </summary>
-        /// <param name="vec">The other vector to compare this one to.</param>
+        /// <param name="vector">The other vector to compare this one to.</param>
         /// <returns>A new vector representing the midpoint between the two vectors.</returns>
-        public Vector MidPoint(Vector vec)
+        public Vector Midpoint(Vector vector)
         {
-            return new Vector(( m_x + vec.X ) * 0.5, ( m_y + vec.Y ) * 0.5 );
+			if (vector == null)
+			{
+				throw new ArgumentNullException("vector");
+			}
+            return new Vector(( m_x + vector.X ) * 0.5, ( m_y + vector.Y ) * 0.5 );
         }
 
 		/// <summary>
@@ -642,9 +730,13 @@ namespace SdlDotNet
 		/// Deserialization constructor.
 		/// </summary>
 		/// <param name="info"></param>
-		/// <param name="ctxt"></param>
-		public Vector(SerializationInfo info, StreamingContext ctxt)
+		/// <param name="context"></param>
+		protected Vector(SerializationInfo info, StreamingContext context)
 		{
+			if (info == null)
+			{
+				throw new ArgumentNullException("info");
+			}
 			//Get the values from info and assign them to the appropriate properties
 			m_x = (float)info.GetValue("x", typeof(float));
 			m_y = (float)info.GetValue("y", typeof(float));
@@ -654,9 +746,13 @@ namespace SdlDotNet
 		/// Serialization function
 		/// </summary>
 		/// <param name="info"></param>
-		/// <param name="ctxt"></param>
-		public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+		/// <param name="context"></param>
+		public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
 		{
+			if (info == null)
+			{
+				throw new ArgumentNullException("info");
+			}
 			//You can use any custom name for your name-value pair. But make sure you
 			// read the values with the same name. For ex:- If you write EmpId as "EmployeeId"
 			// then you should read the same with "EmployeeId"

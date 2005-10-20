@@ -38,16 +38,16 @@ namespace SdlDotNet
 		/// <summary>
 		/// Font Constructor
 		/// </summary>
-		/// <param name="filename">Font filename</param>
+		/// <param name="fileName">Font filename</param>
 		/// <param name="pointSize">Size of font</param>
-		public Font(string filename, int pointSize) 
+		public Font(string fileName, int pointSize) 
 		{
-			if (!this.IsFontSystemInitialized)
+			if (!Font.IsFontSystemInitialized)
 			{
-				this.InitializeFontSystem();
+				Font.InitializeFontSystem();
 			}
 
-			this.Handle = SdlTtf.TTF_OpenFont(filename, pointSize);
+			this.Handle = SdlTtf.TTF_OpenFont(fileName, pointSize);
 			if (this.Handle == IntPtr.Zero) 
 			{
 				throw FontException.Generate();
@@ -59,7 +59,7 @@ namespace SdlDotNet
 		/// <remarks>
 		/// </remarks>
 		/// <returns>True if Font subsystem has been initialized, false if it has not.</returns>
-		private bool IsFontSystemInitialized
+		private static bool IsFontSystemInitialized
 		{
 			get
 			{
@@ -77,7 +77,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Initialize Font subsystem.
 		/// </summary>
-		private void InitializeFontSystem()
+		private static void InitializeFontSystem()
 		{
 			if (SdlTtf.TTF_Init() != (int) SdlFlag.Success)
 			{
@@ -96,10 +96,10 @@ namespace SdlDotNet
 			}
 		}
 
-		internal Font(IntPtr handle) 
-		{
-			this.Handle = handle;
-		}
+//		internal Font(IntPtr handle) 
+//		{
+//			this.Handle = handle;
+//		}
 
 		/// <summary>
 		/// Destroys the surface object and frees its memory
@@ -385,7 +385,7 @@ namespace SdlDotNet
 				SdlColor.ConvertColor(foregroundColor);
 			Sdl.SDL_Color backgroundColorSdl = 
 				SdlColor.ConvertColor(backgroundColor);
-			if (textItem == "" | textItem == null)
+			if ((textItem.Length == 0 && textItem != null) | textItem == null)
 			{
 				textItem = " ";
 			}
@@ -403,7 +403,7 @@ namespace SdlDotNet
 			string textItem, Color color) 
 		{
 			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
-			if (textItem == "" | textItem == null)
+			if ((textItem.Length == 0 && textItem != null) | textItem == null)
 			{
 				textItem = " ";
 			}

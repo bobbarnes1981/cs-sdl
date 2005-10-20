@@ -134,6 +134,10 @@ namespace SdlDotNet
 		/// <returns>true if circles are equal</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(Circle))
 				return false;
                 
@@ -311,7 +315,7 @@ namespace SdlDotNet
 		{
 			return String.Format(
 				CultureInfo.CurrentCulture,
-				"({0},{1}, {2}, {3}, {4})", x, y, radiusX, radiusY);
+				"({0}, {1}, {2}, {3})", x, y, radiusX, radiusY);
 		}
 		/// <summary>
 		/// Equals operator
@@ -320,6 +324,10 @@ namespace SdlDotNet
 		/// <returns>True if ellipses are equal</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(Ellipse))
 				return false;
                 
@@ -530,6 +538,10 @@ namespace SdlDotNet
 		/// <returns>True if lines are equal</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(Line))
 				return false;
                 
@@ -803,6 +815,10 @@ namespace SdlDotNet
 		/// <returns>true if triangles are equal</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(Triangle))
 				return false;
                 
@@ -925,6 +941,10 @@ namespace SdlDotNet
 		/// <param name="points">ArrayList of points</param>
 		public Polygon(ArrayList points)
 		{
+			if (points == null)
+			{
+				throw new ArgumentNullException("points");
+			}
 			this.x = new short[points.Count];
 			this.y = new short[points.Count];
 			this.n = 0;
@@ -1009,6 +1029,10 @@ namespace SdlDotNet
 			}
 			set
 			{
+				if (value == null)
+				{
+					throw new ArgumentNullException("value");
+				}
 				for (int i = 0; i < value.Count; i++)
 				{
 					x[i] = (short)((Point)value[i]).X;
@@ -1034,6 +1058,10 @@ namespace SdlDotNet
 		/// <returns>true if the polygons are equal</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(Polygon))
 				return false;
                 
@@ -1255,7 +1283,7 @@ namespace SdlDotNet
 		{
 			return String.Format(
 				CultureInfo.CurrentCulture, 
-				"({0}, {1}, {2}, {3}, {4}, {5})", 
+				"({0}, {1}, {2}, {3}, {4})", 
 				x, y, r, startingAngle, endingAngle);
 		}
 		/// <summary>
@@ -1265,6 +1293,10 @@ namespace SdlDotNet
 		/// <returns>true if pies are equal</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(Pie))
 				return false;
                 
@@ -1515,8 +1547,14 @@ namespace SdlDotNet
 		/// <returns>true if bezier curves are equals</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(Bezier))
+			{
 				return false;
+			}
                 
 			Bezier bezier = (Bezier)obj;   
 			return (
@@ -1814,6 +1852,10 @@ namespace SdlDotNet
 		/// <returns>true if boxes are the same</returns>
 		public override bool Equals(object obj)
 		{
+			if (obj == null)
+			{
+				throw new ArgumentNullException("obj");
+			}
 			if (obj.GetType() != typeof(Box))
 				return false;
                 

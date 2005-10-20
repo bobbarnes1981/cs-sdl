@@ -190,6 +190,10 @@ namespace SdlDotNet
 		/// <param name="bitmap">A System.Drawing.Bitmap object</param>
 		public Surface(System.Drawing.Bitmap bitmap)
 		{
+			if (bitmap == null)
+			{
+				throw new ArgumentNullException("bitmap");
+			}
 			if (!Video.IsInitialized)
 			{
 				Video.Initialize();
@@ -212,6 +216,10 @@ namespace SdlDotNet
         /// <param name="surface">The surface to copy.</param>
         public Surface(Surface surface)
         {
+			if (surface == null)
+			{
+				throw new ArgumentNullException("surface");
+			}
 			if (!Video.IsInitialized)
 			{
 				Video.Initialize();
@@ -223,15 +231,15 @@ namespace SdlDotNet
             }
         }
 	
-		/// <summary>
-		/// Allows an Object to attempt to free resources 
-		/// and perform other cleanup operations before the Object 
-		/// is reclaimed by garbage collection.
-		/// </summary>
-		~Surface() 
-		{
-			Dispose(false);
-		}
+//		/// <summary>
+//		/// Allows an Object to attempt to free resources 
+//		/// and perform other cleanup operations before the Object 
+//		/// is reclaimed by garbage collection.
+//		/// </summary>
+//		~Surface() 
+//		{
+//			Dispose(false);
+//		}
 		#endregion Constructors and Destructors
 
 		/// <summary>
@@ -1012,6 +1020,10 @@ namespace SdlDotNet
 		/// <returns>The new surface</returns>
 		public Surface Convert(Surface source, bool hardware, bool alpha) 
 		{
+			if (source == null)
+			{
+				throw new ArgumentNullException("source");
+			}
 			if (this.disposed)
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
@@ -1110,6 +1122,10 @@ namespace SdlDotNet
 		/// </param>
 		public Rectangle Blit(Surface sourceSurface, System.Drawing.Point destinationPosition) 
 		{
+			if (sourceSurface == null)
+			{
+				throw new ArgumentNullException("sourceSurface");
+			}
 			return this.Blit(
 				sourceSurface, 
 				destinationPosition,
@@ -1127,6 +1143,10 @@ namespace SdlDotNet
 		/// </param>
 		public Rectangle Blit(Surface sourceSurface, System.Drawing.Rectangle destinationRectangle) 
 		{
+			if (sourceSurface == null)
+			{
+				throw new ArgumentNullException("sourceSurface");
+			}
 			return this.Blit(
 				sourceSurface, 
 				destinationRectangle.Location,
@@ -1152,6 +1172,10 @@ namespace SdlDotNet
 		/// <returns>A rectangle describing the location of the updated surface.</returns>
 		public Rectangle Blit(Sprite sprite)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			if(sprite.Visible)
 			{
 				return this.Blit(sprite.Render(), sprite.Rectangle);
@@ -1170,6 +1194,10 @@ namespace SdlDotNet
 		/// <returns>A rectangle describing the location of the updated surface.</returns>
 		public Rectangle Blit(Sprite sprite, Point destinationPosition)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			if(sprite.Visible)
 			{
 				return this.Blit(sprite.Render(), destinationPosition);
@@ -1188,6 +1216,10 @@ namespace SdlDotNet
 		/// <returns>A rectangle describing the location of the updated surface.</returns>
 		public Rectangle Blit(Sprite sprite, Rectangle destinationRectangle)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			if(sprite.Visible)
 			{
 				return this.Blit(sprite.Render(), destinationRectangle);
@@ -1207,6 +1239,10 @@ namespace SdlDotNet
 		/// </returns>
 		public RectangleCollection Blit(SpriteCollection spriteCollection)
 		{
+			if (spriteCollection == null)
+			{
+				throw new ArgumentNullException("spriteCollection");
+			}
 			return spriteCollection.Draw(this);
 		}
 
@@ -1225,6 +1261,10 @@ namespace SdlDotNet
 			System.Drawing.Rectangle destinationRectangle,
 			System.Drawing.Rectangle sourceRectangle) 
 		{
+			if (sourceSurface == null)
+			{
+				throw new ArgumentNullException("sourceSurface");
+			}
 			if (this.disposed)
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
@@ -1273,6 +1313,10 @@ namespace SdlDotNet
 		public void Erase(SpriteCollection spriteCollection, 
 			Surface background)
 		{
+			if (spriteCollection == null)
+			{
+				throw new ArgumentNullException("spriteCollection");
+			}
 			spriteCollection.Erase(this, background);
 		}
 
@@ -1901,9 +1945,9 @@ namespace SdlDotNet
 			{
 				return new Surface(SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter));
 			}
-			catch (NullReferenceException e)
+			catch
 			{
-				throw e;
+				throw;
 			}
 		}
 
@@ -1976,9 +2020,9 @@ namespace SdlDotNet
 				this.Handle = 
 					SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter);
 			}
-			catch (NullReferenceException e)
+			catch
 			{
-				throw e;
+				throw;
 			}
 		}
 
@@ -2092,6 +2136,10 @@ namespace SdlDotNet
 		/// <param name="transformation">Transformation object</param>
 		public void Transform(Transformation transformation)
 		{
+			if (transformation == null)
+			{
+				throw new ArgumentNullException("transformation");
+			}
 			if (Math.Round(transformation.Zoom, 1) != 1.0f && Math.Round(transformation.Zoom, 1) != 0.0f)
 			{
 				this.RotationZoom(transformation.DegreesOfRotation, transformation.Zoom, transformation.AntiAlias);
@@ -2168,6 +2216,10 @@ namespace SdlDotNet
 		/// <param name="rectangles">Collection of rectangles to update</param>
 		public void Update(RectangleCollection rectangles)
 		{
+			if (rectangles == null)
+			{
+				throw new ArgumentNullException("rectangles");
+			}
 			if (this.disposed)
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));

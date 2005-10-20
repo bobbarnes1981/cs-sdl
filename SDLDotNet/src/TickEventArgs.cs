@@ -64,7 +64,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets the FPS as of the event call. Events.FPS is an alternative.
 		/// </summary>
-		public int FPS
+		public int Fps
 		{
 			get
 			{

@@ -64,12 +64,12 @@ namespace SdlDotNet
         /// <summary>
         /// Creates a SoundDictionary with one loaded item.
         /// </summary>
-        /// <param name="filename">
+        /// <param name="fileName">
         /// The sound item's filename to load and set as the key.
         /// </param>
-        public SoundDictionary(string filename)
+        public SoundDictionary(string fileName)
         {    
-            this.Add(filename);
+            this.Add(fileName);
         }
         
         /// <summary>
@@ -115,6 +115,10 @@ namespace SdlDotNet
         /// </param>
         public SoundDictionary(SoundDictionary soundDictionary)
         {
+			if (soundDictionary == null)
+			{
+				throw new ArgumentNullException("soundDictionary");
+			}
 			IDictionaryEnumerator enumer = soundDictionary.GetEnumerator();
 			while(enumer.MoveNext())
 			{
@@ -178,13 +182,13 @@ namespace SdlDotNet
         /// <summary>
         /// Adds a newly loaded file to the Dictionary.
         /// </summary>
-        /// <param name="filename">The filename to load.</param>
+        /// <param name="fileName">The filename to load.</param>
         /// <returns>
         /// The final number of elements within the Dictionary.
         /// </returns>
-        public int Add(string filename)
+        public int Add(string fileName)
         {
-            Dictionary.Add(filename, Mixer.Sound(filename));
+            Dictionary.Add(fileName, Mixer.Sound(fileName));
             return Dictionary.Count;
         }
         
@@ -209,6 +213,10 @@ namespace SdlDotNet
         /// </returns>
         public int Add(SoundDictionary soundDictionary)
         {
+			if (soundDictionary == null)
+			{
+				throw new ArgumentNullException("soundDictionary");
+			}
             IDictionaryEnumerator dict = soundDictionary.GetEnumerator();
 			while(dict.MoveNext())
 			{
@@ -223,15 +231,15 @@ namespace SdlDotNet
         /// <param name="key">
         /// The key to give the sound object.
         /// </param>
-        /// <param name="filename">
+        /// <param name="fileName">
         /// The sound file to load.
         /// </param>
         /// <returns>
         /// The final number of elements within the Dictionary.
         /// </returns>
-        public int Add(string key, string filename)
+        public int Add(string key, string fileName)
         {
-        	Dictionary.Add(key, Mixer.Sound(filename));
+        	Dictionary.Add(key, Mixer.Sound(fileName));
         	return Dictionary.Count;
 		}
         
@@ -246,6 +254,10 @@ namespace SdlDotNet
 		/// </returns>
 		public int Add(Sound sound)
 		{
+			if (sound == null)
+			{
+				throw new ArgumentNullException("sound");
+			}
 			Dictionary.Add(sound.ToString(), sound);
 			return Dictionary.Count;
 		}		

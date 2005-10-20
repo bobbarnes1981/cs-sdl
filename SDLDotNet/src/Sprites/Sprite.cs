@@ -59,6 +59,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="surface">Surface of Sprite</param>
 		public Sprite(Surface surface)
 		{
+			if (surface == null)
+			{
+				throw new ArgumentNullException("surface");
+			}
 			this.rect = new Rectangle(0, 0, surface.Width, surface.Height);
 			this.surf = surface;
 		}
@@ -171,6 +175,10 @@ namespace SdlDotNet.Sprites
 		/// </returns>
 		public virtual Rectangle Render(Surface destination)
 		{
+			if (destination == null)
+			{
+				throw new ArgumentNullException("destination");
+			}
 			return destination.Blit(this);
 		}
 		#endregion
@@ -512,6 +520,10 @@ namespace SdlDotNet.Sprites
 		/// <returns>True if sprites intersect</returns>
 		public virtual bool IntersectsWith(Sprite sprite)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			return this.IntersectsWith(sprite.Rectangle);
 		}
 
@@ -526,6 +538,10 @@ namespace SdlDotNet.Sprites
 		/// <remarks>If they radius is not given, it calculates it for you using half the width plus half the height.</remarks>
 		public virtual bool IntersectsWithRadius(Sprite sprite, int radius, int radiusOther, int offset)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			Point center1 = this.Center;
 			Point center2 = sprite.Center;
 			int xdiff = center2.X - center1.X;	// x plane difference
@@ -573,6 +589,10 @@ namespace SdlDotNet.Sprites
 		/// <remarks>The radius for both the sprites is calculated by using half the width and half the height.</remarks>
 		public virtual bool IntersectsWithRadius(Sprite sprite)
 		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
 			int r1 = (this.Width + this.Height) / 4;
 			int r2 = (sprite.Width + sprite.Height) / 4;
 			return IntersectsWithRadius(sprite, r1, r2, 0);
@@ -585,6 +605,10 @@ namespace SdlDotNet.Sprites
 		/// <returns>True if sprite intersects with any sprite in collection</returns>
 		public virtual bool IntersectsWith(SpriteCollection spriteCollection)
 		{
+			if (spriteCollection == null)
+			{
+				throw new ArgumentNullException("spriteCollection");
+			}
 			foreach(Sprite sprite in spriteCollection)
 			{
 				if(this.IntersectsWith(sprite))
@@ -705,6 +729,14 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public static bool operator != (Sprite sprite1, Sprite sprite2)
 		{
+			if (sprite1 == null)
+			{
+				throw new ArgumentNullException("sprite1");
+			}
+			if (sprite2 == null)
+			{
+				throw new ArgumentNullException("sprite2");
+			}
 			try
 			{
 				return !sprite1.Equals(sprite2);
@@ -730,6 +762,10 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public static bool operator < (Sprite sprite1, Sprite sprite2)
 		{
+			if (sprite1 == null)
+			{
+				throw new ArgumentNullException("sprite1");
+			}
 			return (sprite1.CompareTo(sprite2) < 0);
 		}  
 		
@@ -741,6 +777,10 @@ namespace SdlDotNet.Sprites
 		/// <returns></returns>
 		public static bool operator > (Sprite sprite1, Sprite sprite2)
 		{
+			if (sprite1 == null)
+			{
+				throw new ArgumentNullException("sprite1");
+			}
 			return (sprite1.CompareTo(sprite2) > 0);
 		} 
 
@@ -795,6 +835,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="group">collection to add to</param>
 		public virtual void Add(SpriteCollection group)
 		{
+			if (group == null)
+			{
+				throw new ArgumentNullException("group");
+			}
 			this.groups.Add(group);
 			group.AddInternal(this);
 		}
@@ -814,6 +858,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="group">collection to remove sprite from</param>
 		public virtual void Remove(SpriteCollection group)
 		{
+			if (group == null)
+			{
+				throw new ArgumentNullException("group");
+			}
 			this.groups.Remove(group);
 			group.RemoveInternal(this);
 		}

@@ -37,7 +37,7 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite() : base()
 		{
 			m_Timer.Elapsed += new System.Timers.ElapsedEventHandler(m_Timer_Elapsed);
-			m_Timer.Interval = 20;
+			m_Timer.Interval = 1000;
 		}
 
 		/// <summary>
@@ -62,26 +62,35 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Create Animated Sprite from SurfaceCollection
 		/// </summary>
-		/// <param name="d">SurfaceCollection</param>
+		/// <param name="surfaces">SurfaceCollection</param>
 		/// <param name="coordinates">Initial Coordinates</param>
-		public AnimatedSprite(SurfaceCollection d, Point coordinates) :this()	{
-			m_Animations.Add("Default", new AnimationCollection(d));
-			this.Surface = d[0];
-			this.Rectangle = d[0].Rectangle;
+		public AnimatedSprite(SurfaceCollection surfaces, Point coordinates) :this()	
+		{
+			if (surfaces == null)
+			{
+				throw new ArgumentNullException("surfaces");
+			}
+			m_Animations.Add("Default", new AnimationCollection(surfaces));
+			this.Surface = surfaces[0];
+			this.Rectangle = surfaces[0].Rectangle;
 			this.Position = coordinates;
 		}
 
 		/// <summary>
 		/// Creates AnumatedSprite from Surface Collection
 		/// </summary>
-		/// <param name="d">SurfaceCollection</param>
+		/// <param name="surfaces">SurfaceCollection</param>
 		/// <param name="coordinates">Starting coordinates</param>
 		/// <param name="z">initial Z position</param>
-		public AnimatedSprite(SurfaceCollection d, Point coordinates, int z) : this()
+		public AnimatedSprite(SurfaceCollection surfaces, Point coordinates, int z) : this()
 		{
-			m_Animations.Add("Default", new AnimationCollection(d));
-			this.Surface = d[0];
-			this.Rectangle = d[0].Rectangle;
+			if (surfaces == null)
+			{
+				throw new ArgumentNullException("surfaces");
+			}
+			m_Animations.Add("Default", new AnimationCollection(surfaces));
+			this.Surface = surfaces[0];
+			this.Rectangle = surfaces[0].Rectangle;
 			this.Position = coordinates;
 			this.Z = z;
 		}
@@ -89,12 +98,16 @@ namespace SdlDotNet.Sprites
         /// <summary>
         /// Creates AnimatedSprite from SurfaceCollection
         /// </summary>
-        /// <param name="d">SurfaceCollection</param>
-        public AnimatedSprite(SurfaceCollection d) : this()
+        /// <param name="surfaces">SurfaceCollection</param>
+        public AnimatedSprite(SurfaceCollection surfaces) : this()
         {
-            m_Animations.Add("Default", new AnimationCollection(d));
-            this.Surface = d[0];
-            this.Rectangle = d[0].Rectangle;
+			if (surfaces == null)
+			{
+				throw new ArgumentNullException("surfaces");
+			}
+            m_Animations.Add("Default", new AnimationCollection(surfaces));
+            this.Surface = surfaces[0];
+            this.Rectangle = surfaces[0].Rectangle;
             this.Position = new Point(0, 0);
             this.Z = 0;
         }
@@ -218,7 +231,7 @@ namespace SdlDotNet.Sprites
 		#endregion
 
 		#region Private Methods
-		private System.Timers.Timer m_Timer = new System.Timers.Timer(500);
+		private System.Timers.Timer m_Timer = new System.Timers.Timer(1000);
 		private void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			AnimationCollection current = m_Animations[m_CurrentAnimation];
