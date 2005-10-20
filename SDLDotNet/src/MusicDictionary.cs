@@ -38,12 +38,12 @@ namespace SdlDotNet
 	/// tunes["jazz.mid"].Play();
 	/// </code>
 	/// </example>
-	public class MusicCollection : DictionaryBase
+	public class MusicDictionary : DictionaryBase, IDictionary
 	{
 		/// <summary>
 		/// Creates a new empty MusicCollection.
 		/// </summary>
-		public MusicCollection() : base()
+		public MusicDictionary() : base()
 		{
 		}
 
@@ -56,7 +56,7 @@ namespace SdlDotNet
 		/// <param name="music">
 		/// The sample object itself.
 		/// </param>
-		public MusicCollection(string key, Music music)
+		public MusicDictionary(string key, Music music)
 		{
 			this.Add(key, music);
 		}
@@ -67,7 +67,7 @@ namespace SdlDotNet
 		/// <param name="filename">
 		/// The filename and key of the single Music object to load.
 		/// </param>
-		public MusicCollection(string filename)
+		public MusicDictionary(string filename)
 		{    
 			this.Add(filename);
 		}
@@ -78,7 +78,7 @@ namespace SdlDotNet
 		/// <param name="music">
 		/// The single music sample to start off the collection.
 		/// </param>
-		public MusicCollection(Music music)
+		public MusicDictionary(Music music)
 		{
 			this.Add(music);
 		}
@@ -92,7 +92,7 @@ namespace SdlDotNet
 		/// <param name="extension">
 		/// The extension of the files (.mp3)
 		/// </param>
-		public MusicCollection(string baseName, string extension)
+		public MusicDictionary(string baseName, string extension)
 		{
 			// Save the fields
 			//this.filename = baseName + "-*" + extension;
@@ -124,12 +124,12 @@ namespace SdlDotNet
 		/// Creates a new MusicCollection with the contents 
 		/// of an existing MusicCollection.
 		/// </summary>
-		/// <param name="musicCollection">
+		/// <param name="musicDictionary">
 		/// The existing music collection to add.
 		/// </param>
-		public MusicCollection(MusicCollection musicCollection)
+		public MusicDictionary(MusicDictionary musicDictionary)
 		{
-			IDictionaryEnumerator enumer = musicCollection.GetEnumerator();
+			IDictionaryEnumerator enumer = musicDictionary.GetEnumerator();
 			while(enumer.MoveNext())
 			{
 				this.Add((string)enumer.Key, (Music)enumer.Value);
@@ -239,16 +239,16 @@ namespace SdlDotNet
 		/// <summary>
 		/// Adds a collection of music to the current music collection.
 		/// </summary>
-		/// <param name="musicCollection">
+		/// <param name="musicDictionary">
 		/// The collection of music samples to add.
 		/// </param>
 		/// <returns>
 		/// The total number of elements within the collection after 
 		/// adding the sample.
 		/// </returns>
-		public int Add(MusicCollection musicCollection)
+		public int Add(MusicDictionary musicDictionary)
 		{
-			IDictionaryEnumerator dict = musicCollection.GetEnumerator();
+			IDictionaryEnumerator dict = musicDictionary.GetEnumerator();
 			while(dict.MoveNext())
 			{
 				this.Add((string)dict.Key, (Music)dict.Value);
@@ -303,5 +303,45 @@ namespace SdlDotNet
                 prevItem = currItem;
             }
         }
+
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		void ICollection.CopyTo(Array array, int index)
+		{
+			this.CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		public virtual void CopyTo(Music[] array, int index)
+		{
+			((ICollection)this).CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// Insert a item into the collection
+		/// </summary>
+		/// <param name="index">Index at which to insert the item</param>
+		/// <param name="music">item to insert</param>
+		public virtual void Insert(int index, Music music)
+		{
+			this.Insert(index, music);
+		} 
+
+		/// <summary>
+		/// Gets the index of the given item in the collection.
+		/// </summary>
+		/// <param name="music">The item to search for.</param>
+		/// <returns>The index of the given sprite.</returns>
+		public virtual int IndexOf(Music music)
+		{
+			return this.IndexOf(music);
+		} 
 	}
 }

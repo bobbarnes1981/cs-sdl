@@ -329,6 +329,7 @@ namespace SdlDotNet.Sprites
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 		#endregion Disposing
 	}

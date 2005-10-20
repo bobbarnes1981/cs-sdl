@@ -143,6 +143,7 @@ namespace SdlDotNet
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 
 		/// <summary>

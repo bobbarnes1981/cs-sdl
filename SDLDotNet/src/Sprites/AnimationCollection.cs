@@ -18,269 +18,177 @@
  */
 
 using System;
-using System.Collections;
 
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
-	/// Summary description for AnimationCollection.
+	/// Animation.
 	/// </summary>
-	public class AnimationCollection : DictionaryBase
+	public class AnimationCollection : SurfaceCollection
     {
         #region Constructors
         /// <summary>
-		/// Creates an empty AnimationCollection.
+		/// Creates a new empty AnimationCollection.
 		/// </summary>
-		public AnimationCollection() : base()
+		public AnimationCollection()
 		{
 		}
 
-        /// <summary>
-        /// Creates an AnimationCollection with one animation with the key "Default".
-        /// </summary>
-        /// <param name="anim"></param>
-        public AnimationCollection(Animation anim)
-        {
-            this.Add("Default", anim);
-        }
-
 		/// <summary>
-		/// Creates an AnimationCollection with one element within it.
+		/// Creates a new Animation with a SurfaceCollection representing the animation.
 		/// </summary>
-		/// <param name="key"></param>
-		/// <param name="anim"></param>
-		public AnimationCollection(string key, Animation anim)
+		/// <param name="surfaces">The collection of surfaces in the animation.</param>
+		public AnimationCollection(SurfaceCollection surfaces) : this()
 		{
-			this.Add(key, anim);
+			this.Add(surfaces);
 		}
 
-        /// <summary>
-        /// Creates an AnimationCollection with a "Default" animation of surfaces.
-        /// </summary>
-        /// <param name="surfaces"></param>
-        public AnimationCollection(SurfaceCollection surfaces)
-        {
-            this.Add("Default", surfaces);
+		/// <summary>
+		/// Creates an Animation with one surface to start off the animation.
+		/// </summary>
+		/// <param name="surface">The surface representing the animation.
+		/// </param>
+		public AnimationCollection(Surface surface) : this()
+		{
+			this.Add(surface);
         }
 
+        /// <summary>
+        /// Creates a new Animation with a SurfaceCollection representing the animation.
+        /// </summary>
+        /// <param name="surfaces">The collection of surfaces in the animation.
+        /// </param>
+        /// <param name="delay">The amount of delay to be had between each frame.
+        /// </param>
+        /// <param name="loop">Whether or not the animation is 
+        /// to loop when reached the end. Defaults to true.
+        /// </param>
+        public AnimationCollection(SurfaceCollection surfaces, double delay, bool loop) : this()
+        {
+            this.Add(surfaces);
+            m_Delay = delay;
+            m_Loop = loop;
+        }
 
-		/// <summary>
-		/// Creates a new AnimationCollection with the contents of an existing AnimationCollection.
-		/// </summary>
-		/// <param name="animCollection">The existing music collection to add.</param>
-		public AnimationCollection(AnimationCollection animCollection)
-		{
-			this.Add(animCollection);
+        /// <summary>
+        /// Creates a new Animation with a SurfaceCollection representing the animation.
+        /// </summary>
+        /// <param name="surfaces">The collection of 
+        /// surfaces in the animation.</param>
+        /// <param name="delay">The amount of delay to be 
+        /// had between each frame. Defaults to 30.</param>
+        public AnimationCollection(SurfaceCollection surfaces, double delay) : this()
+        {
+            this.Add(surfaces);
+            m_Delay = delay;
         }
         #endregion Constructors
 
         #region Properties
-        /// <summary>
-		/// Gets and sets an animation object within the 
-		/// collection using the animation's key.
+        private double m_Delay = 30;
+		/// <summary>
+		/// Gets and sets the amount of time delay that 
+		/// should be had before moving onto the next frame.
 		/// </summary>
-		public Animation this[string key]
+		public double Delay
 		{
-			get 
+			get
 			{
-				return((Animation)Dictionary[key]);
+				return m_Delay;
 			}
 			set
 			{
-				Dictionary[key] = value;
+				m_Delay = value;
 			}
 		}
-		
-		/// <summary>
-		/// Gets all the Keys in the Collection.
-		/// </summary>
-		public ICollection Keys  
-		{
-			get  
-			{
-				return Dictionary.Keys;
-			}
-		}
-        
-		/// <summary>
-		/// Gets all the Values in the Collection.
-		/// </summary>
-		public ICollection Values  
-		{
-			get  
-			{
-				return Dictionary.Values;
-			}
-        }
 
         /// <summary>
-        /// Gets the average delay of all animations in the collection, 
-        /// sets the delay of every animation in the collection.
+        /// Gets and sets how long the animation should take to finish.
         /// </summary>
-        public double Delay
+        public double AnimationTime
         {
             get
             {
-                double average = 0;
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-				while (dict.MoveNext())
-				{
-					average += ((Animation)dict.Value).Delay;
-				}
-                return average / this.Count;
+                return m_Delay * this.Count;
             }
-            set
+            set 
             {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-				while (dict.MoveNext())
-				{
-					((Animation)dict.Value).Delay = value;
-				}
+                m_Delay = this.Count / value;
             }
         }
 
+
+		private bool m_Loop = true;
+		/// <summary>
+		/// Gets and sets whether or not the animation should loop.
+		/// </summary>
+		public bool Loop
+		{
+			get
+			{ 
+				return m_Loop;
+			}
+			set
+			{ 
+				m_Loop = value; 
+			}
+        }
+
+        private int m_FrameIncrement = 1;
         /// <summary>
-        /// Gets the average FrameIncrement for each Animation.  
-        /// Sets the FrameIncrement of each Animation in the collection.
+        /// Gets and sets the number of frames to go forward 
+        /// when moving onto the next frame.
         /// </summary>
+        /// <remarks>Making this one would result in the 
+        /// animation going forwards one frame. 
+        /// -1 would mean that the animation would go backwards. 
+        /// Cannot be 0.</remarks>
         public int FrameIncrement
         {
             get
             {
-                int average = 0;
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-				while (dict.MoveNext())
-				{
-					average += ((Animation)dict.Value).FrameIncrement;
-				}
-                return average / this.Count;
+                return m_FrameIncrement;
             }
             set
             {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-				while (dict.MoveNext())
-				{
-					((Animation)dict.Value).FrameIncrement = value;
-				}
+                if (value == 0)
+                    m_FrameIncrement = 1;
+                else
+                    m_FrameIncrement = value;
             }
         }
 
-
         /// <summary>
-        /// Gets whether all animations animate forward and 
-        /// sets whether all animations in the collection 
-        /// are to animate forward.
+        /// Gets and sets whether the animation goes forwards or backwards.
         /// </summary>
         public bool AnimateForward
         {
             get
             {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-                while (dict.MoveNext())
+                return m_FrameIncrement >= 0;
+            }
+            set
+            {
+                if (value)
                 {
-                    if (!((Animation)dict.Value).AnimateForward)
-                    {
-                        return false;
-                    }
+                    // Make positive
+					if (m_FrameIncrement < 0)
+					{
+						m_FrameIncrement *= -1;
+					}
                 }
-                return true;
-            }
-            set
-            {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-				while (dict.MoveNext())
-				{
-					((Animation)dict.Value).AnimateForward = value;
-				}
+                else
+                {
+                    // Make negative
+					if (m_FrameIncrement > 0)
+					{
+						m_FrameIncrement *= -1;
+					}
+                }
+
             }
         }
 
-        /// <summary>
-        /// Gets whether the first animation is looping, sets whether every animation in the collection is to be looped.
-        /// </summary>
-        public bool Loop
-        {
-            get
-            {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-				while (dict.MoveNext())
-				{
-					return ((Animation)dict.Value).Loop;
-				}
-                return true;
-            }
-            set
-            {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
-				while (dict.MoveNext())
-				{
-					((Animation)dict.Value).Loop = value;
-				}
-            }
-        }
         #endregion Properties
-        
-        #region Functions
-        /// <summary>
-		/// Adds an animation to the collection.
-		/// </summary>
-		/// <param name="key">The name of the animation.</param>
-		/// <param name="anim">The animation object.</param>
-		/// <returns>The final number of elements within the collection.</returns>
-		public int Add(string key, Animation anim) 
-		{
-			Dictionary.Add(key, anim);
-			return Dictionary.Count;
-		}
-
-        /// <summary>
-        /// Adds a surface collection to the collection as an animation.
-        /// </summary>
-        /// <param name="key">The name of the animation.</param>
-        /// <param name="surfaces">The SurfaceCollection that represents the animation.</param>
-        /// <returns>The final number of elements within the collection.</returns>
-        public int Add(string key, SurfaceCollection surfaces)
-        {
-            Dictionary.Add(key, new Animation(surfaces));
-            return Dictionary.Count;
-        }
-		
-		/// <summary>
-		/// Adds a collection of music to the current music collection.
-		/// </summary>
-		/// <param name="animCollection">The collection of 
-		/// music samples to add.</param>
-		/// <returns>The total number of elements within 
-		/// the collection after adding the sample.</returns>
-		public int Add(AnimationCollection animCollection)
-		{
-			IDictionaryEnumerator dict = animCollection.GetEnumerator();
-			while(dict.MoveNext())
-			{
-				this.Add((string)dict.Key, (Animation)dict.Value);
-			}
-			return Dictionary.Count;
-        }
-
-        /// <summary>
-        /// Returns true if the collection contains the given key.
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public bool Contains(string key)
-        {
-            return Dictionary.Contains(key);
-        }
-        
-		/// <summary>
-		/// Removes an element from the collection.
-		/// </summary>
-		/// <param name="key">The element's key to remove.</param>
-		public void Remove(string key)
-		{
-			Dictionary.Remove(key);
-		}
-        #endregion Functions
-
-	}
+    }
 }

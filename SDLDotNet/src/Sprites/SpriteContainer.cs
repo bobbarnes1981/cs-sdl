@@ -116,6 +116,7 @@ base(surface, rectangle, z)
 					this.disposed = true;
 				}
 			}
+			base.Dispose(disposing);
 		}
 
 		/// <summary>
