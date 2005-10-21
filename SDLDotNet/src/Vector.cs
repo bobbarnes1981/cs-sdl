@@ -27,8 +27,15 @@ using System.Security.Permissions;
 namespace SdlDotNet
 {
 	/// <summary>
-	/// Class for coordinates in three dimensions.
+	/// Represents a direction and length in two-dimensional space.
 	/// </summary>
+	/// <example>
+	/// <code>
+	/// Vector vec = new Vector(4,3);
+	/// vec.Length = 100;
+	/// vec.DirectionDeg = 90;
+	/// </code>
+	/// </example>
 	[Serializable]
 	public class Vector : ISerializable, ICloneable, IComparable
 	{
@@ -189,203 +196,183 @@ namespace SdlDotNet
 		/// <returns>If true, objects are equal</returns>
 		public override bool Equals(object obj)
 		{
-			if (obj == null)
-			{
-				throw new ArgumentNullException("obj");
-			}
-			if (obj.GetType() != typeof(Vector))
-			{
-				return false;
-			}
-			Vector c = (Vector)obj;   
-			return this == c;
+			if (!(obj is Vector)) { return false; }
+			return this == (Vector) obj;
 		}
 
 		/// <summary>
 		/// Equals operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
 		/// <returns></returns>
-		public static bool operator== (Vector c1, Vector c2)
+		public static bool operator== (Vector v1, Vector v2)
 		{
-			//			if (c1 == null)
-			//			{
-			//				throw new ArgumentNullException("c1");
-			//			}
-			//			if (c2 == null)
-			//			{
-			//				throw new ArgumentNullException("c2");
-			//			}
-			return ((c1.m_x == c2.m_x) && (c1.m_y == c2.m_y));
+			if(object.ReferenceEquals(v1, v2))
+				return true;
+			else if(object.ReferenceEquals(v1, null) || object.ReferenceEquals(v2, null))
+				return false;
+			return (v1.m_x == v2.m_x) && (v1.m_y == v2.m_y);
+		}
+
+		/// <summary>
+		/// Not equal operator
+		/// </summary>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
+		/// <returns></returns>
+		public static bool operator!= (Vector v1, Vector v2)
+		{
+			return !(v1 == v2);
 		}
 
 		/// <summary>
 		/// Greater than or equals operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
 		/// <returns></returns>
-		public static bool operator >= (Vector c1, Vector c2)
+		public static bool operator >= (Vector v1, Vector v2)
 		{
-			if (c1 == null)
+			if (v1 == null)
 			{
-				throw new ArgumentNullException("c1");
+				throw new ArgumentNullException("v1");
 			}
-			if (c2 == null)
+			if (v2 == null)
 			{
-				throw new ArgumentNullException("c2");
+				throw new ArgumentNullException("v2");
 			}
-			return (c1.X >= c2.X) && (c1.Y >= c2.Y);
+			return (v1.X >= v2.X) && (v1.Y >= v2.Y);
 		}
 		/// <summary>
 		/// Greater than operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
 		/// <returns></returns>
-		public static bool operator > (Vector c1, Vector c2)
+		public static bool operator > (Vector v1, Vector v2)
 		{
-			if (c1 == null)
+			if (v1 == null)
 			{
-				throw new ArgumentNullException("c1");
+				throw new ArgumentNullException("v1");
 			}
-			if (c2 == null)
+			if (v2 == null)
 			{
-				throw new ArgumentNullException("c2");
+				throw new ArgumentNullException("v2");
 			}
-			return (c1.X > c2.X) && (c1.Y > c2.Y);
+			return (v1.X > v2.X) && (v1.Y > v2.Y);
 		}
 		/// <summary>
 		/// Less than operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
 		/// <returns></returns>
-		public static bool operator < (Vector c1, Vector c2)
+		public static bool operator < (Vector v1, Vector v2)
 		{
-			if (c1 == null)
+			if (v1 == null)
 			{
-				throw new ArgumentNullException("c1");
+				throw new ArgumentNullException("v1");
 			}
-			if (c2 == null)
+			if (v2 == null)
 			{
-				throw new ArgumentNullException("c2");
+				throw new ArgumentNullException("v2");
 			}
-			return (c1.X < c2.X) && (c1.Y < c2.Y);
+			return (v1.X < v2.X) && (v1.Y < v2.Y);
 		}
 		/// <summary>
 		/// Less than or equals operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
 		/// <returns></returns>
-		public static bool operator <= (Vector c1, Vector c2)
+		public static bool operator <= (Vector v1, Vector v2)
 		{
-			if (c1 == null)
+			if (v1 == null)
 			{
-				throw new ArgumentNullException("c1");
+				throw new ArgumentNullException("v1");
 			}
-			if (c2 == null)
+			if (v2 == null)
 			{
-				throw new ArgumentNullException("c2");
+				throw new ArgumentNullException("v2");
 			}
-			return (c1.X <= c2.X) && (c1.Y <= c2.Y);
-		}
-		
-		/// <summary>
-		/// Not equals operator
-		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
-		/// <returns></returns>
-		public static bool operator!= (Vector c1, Vector c2)
-		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
-			return !(c1 == c2);
+			return (v1.X <= v2.X) && (v1.Y <= v2.Y);
 		}
 
 		/// <summary>
 		/// Addition operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
 		/// <returns></returns>
-		public static Vector operator + (Vector c1, Vector c2)
+		public static Vector operator + (Vector v1, Vector v2)
 		{
-			if (c1 == null)
+			if (v1 == null)
 			{
-				throw new ArgumentNullException("c1");
+				throw new ArgumentNullException("v1");
 			}
-			if (c2 == null)
+			if (v2 == null)
 			{
-				throw new ArgumentNullException("c2");
+				throw new ArgumentNullException("v2");
 			}
-			return new Vector(c1.m_x + c2.m_x, c1.m_y + c2.m_y);
+			return new Vector(v1.m_x + v2.m_x, v1.m_y + v2.m_y);
 		}
 
 		/// <summary>
 		/// Minus operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
 		/// <returns></returns>
-		public static Vector operator - (Vector c1, Vector c2)
+		public static Vector operator - (Vector v1, Vector v2)
 		{
-			if (c1 == null)
+			if (v1 == null)
 			{
-				throw new ArgumentNullException("c1");
+				throw new ArgumentNullException("v1");
 			}
-			if (c2 == null)
+			if (v2 == null)
 			{
-				throw new ArgumentNullException("c2");
+				throw new ArgumentNullException("v2");
 			}
-			return new Vector(c1.m_x - c2.m_x, c1.m_y - c2.m_y);
+			return new Vector(v1.m_x - v2.m_x, v1.m_y - v2.m_y);
 		}
 
 		/// <summary>
 		/// Multiplication operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
 		/// <returns></returns>
-		public static Vector operator * (Vector c1, Vector c2)
+		public static Vector operator * (Vector v1, Vector v2)
 		{
-			if (c1 == null)
+			if (v1 == null)
 			{
-				throw new ArgumentNullException("c1");
+				throw new ArgumentNullException("v1");
 			}
-			if (c2 == null)
+			if (v2 == null)
 			{
-				throw new ArgumentNullException("c2");
+				throw new ArgumentNullException("v2");
 			}
-			return new Vector(c1.m_x * c2.m_x, c1.m_y * c2.m_y);
+			return new Vector(v1.m_x * v2.m_x, v1.m_y * v2.m_y);
 		}
 
 		/// <summary>
 		/// Division operator
 		/// </summary>
-		/// <param name="c1"></param>
-		/// <param name="c2"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
 		/// <returns></returns>
-		public static Vector operator / (Vector c1, Vector c2)
+		public static Vector operator / (Vector v1, Vector v2)
 		{
-			if (c1 == null)
+			if (v1 == null)
 			{
-				throw new ArgumentNullException("c1");
+				throw new ArgumentNullException("v1");
 			}
-			if (c2 == null)
+			if (v2 == null)
 			{
-				throw new ArgumentNullException("c2");
+				throw new ArgumentNullException("v2");
 			}
-			return new Vector(c1.m_x / c2.m_x, c1.m_y / c2.m_y);
+			return new Vector(v1.m_x / v2.m_x, v1.m_y / v2.m_y);
 		}
 
 		/// <summary>
@@ -529,11 +516,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// The x coordinate
 		/// </summary>
-		private float m_x = 0.00001F;
+		private float m_x = 0.00001f;
 		/// <summary>
 		/// The y coordinate
 		/// </summary>
-		private float m_y = 0.00001F;
+		private float m_y = 0.00001f;
 
 		/// <summary>
 		/// Contains the x coordinate of the vector.
@@ -610,18 +597,34 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (m_x == 0.00001 && m_y == 0.00001);
+				return (m_x == 0.00001f && m_y == 0.00001f);
 			}
 		}
 
 		/// <summary>
-		/// Gets and sets the vectors x and y points using integers.
+		/// Gets and sets the vector x and y points using integers.
 		/// </summary>
 		public Point Point
 		{
 			get
 			{
 				return new Point((int)m_x, (int)m_y);
+			}
+			set
+			{
+				m_x = value.X;
+				m_y = value.Y;
+			}
+		}
+
+		/// <summary>
+		/// Gets and sets the vector x and y points using floats.
+		/// </summary>
+		public PointF PointF
+		{
+			get
+			{
+				return new PointF(m_x, m_y);
 			}
 			set
 			{
@@ -651,6 +654,10 @@ namespace SdlDotNet
 		/// <returns>The dot product of the two vectors.</returns>
 		public float DotProduct(Vector other) 
 		{
+			if(other == null)
+			{
+				throw new ArgumentNullException("other");
+			}
 			return (m_x * other.m_x) + (m_y * other.m_y);
 		}
 
