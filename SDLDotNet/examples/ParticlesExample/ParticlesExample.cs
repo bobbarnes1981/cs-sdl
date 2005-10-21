@@ -20,6 +20,9 @@
 using System;
 using SdlDotNet;
 using SdlDotNet.Particles;
+using SdlDotNet.Particles.Emitters;
+using SdlDotNet.Particles.Manipulators;
+using SdlDotNet.Particles.Particle;
 using SdlDotNet.Sprites;
 using System.Drawing;
 
@@ -31,28 +34,38 @@ namespace SdlDotNet.Examples
 	public class ParticlesExample
 	{
 		// Make a new particle system with some gravity
-		ParticleSystemCollection particles = new ParticleSystemCollection();
-		ParticleEmitter emit = new ParticleEmitter();
+		ParticleSystem particles = new ParticleSystem();
+		ParticlePixelEmitter emit = new ParticlePixelEmitter();
 
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		public ParticlesExample()
 		{
-
+			emit.Frequency = 10000f;
+			emit.LifeFullMin = 50;
+			emit.LifeFullMax = 50;
+			emit.LifeMin = 10;
+			emit.LifeMax = 60;
+			emit.MaxR = 255;
+			emit.MinR = 255;
+			emit.MaxG = 255;
+			emit.MinG = 0;
+			emit.MaxB = 255;
+			emit.MinB = 0;
+			emit.SpeedMin = 0f;
+			emit.SpeedMax = 10f;
 			particles.Add(emit);
-
-			emit.AddParticle += new AddParticleEventHandler(Events_AddParticle);
 			
 			// Make the first particle (a pixel)
-			Particle first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
+			ParticlePixel first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
 			particles.Add(first); // Add it to the system
 
 			// Make the second particle (an animated sprite)
-			AnimationCollection anim = new AnimationCollection(new SurfaceCollection("../../Data/marble1.png", new Size(50,50)),1);
+			Animation anim = new Animation(new SurfaceCollection("../../Data/marble1.png", new Size(50,50)),1);
 			AnimatedSprite marble = new AnimatedSprite(anim);
 			marble.Animate = true;
-			Particle second = new ParticleSprite(marble, 200, 200, new Vector(-7,-9), 500);
+			ParticleSprite second = new ParticleSprite(marble, 200, 200, new Vector(-7,-9), 500);
 			second.Life = -1;
 			particles.Add(second); // Add it to the system
 
@@ -114,12 +127,6 @@ namespace SdlDotNet.Examples
 				Events.QuitApplication();
 			}
 		}
-
-		private void Events_AddParticle(object sender, AddParticleEventArgs e)
-		{
-			//return new ParticlePixel(Color.Red, sender.X,sender.Y,new Vector(1,1),30);
-		}
-
 		private void Events_MouseMotion(object sender, MouseMotionEventArgs e)
 		{
 			emit.X = e.X;
