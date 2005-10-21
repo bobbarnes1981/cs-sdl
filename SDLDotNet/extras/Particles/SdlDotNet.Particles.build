@@ -21,7 +21,7 @@
 	</copy>
 	<csc target="library" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
 	    <sources failonempty="true">
-		<include name="*.cs" />
+		<include name="**.cs" />
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${project.name}.dll"/>
