@@ -69,6 +69,63 @@ namespace SdlDotNet.Particles
 				List[index] = value;
 			}
 		}
+//		/// <summary>
+//		/// Provide the explicit interface member for ICollection.
+//		/// </summary>
+//		/// <param name="array">Array to copy collection to</param>
+//		/// <param name="index">Index at which to insert the collection items</param>
+//		void ICollection.CopyTo(Array array, int index)
+//		{
+//			this.List.CopyTo(array, index);
+//		}
 
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		public virtual void CopyTo(ParticleSystem[] array, int index)
+		{
+			((ICollection)this).CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// Insert a ParticleSystem into the collection
+		/// </summary>
+		/// <param name="index">Index at which to insert the sprite</param>
+		/// <param name="particleSystem">ParticleSystem to insert</param>
+		public virtual void Insert(int index, ParticleSystem particleSystem)
+		{
+			List.Insert(index, particleSystem);
+		} 
+
+		/// <summary>
+		/// Gets the index of the given particleSystem in the collection.
+		/// </summary>
+		/// <param name="particleSystem">The particleSystem to search for.</param>
+		/// <returns>The index of the given particleSystem.</returns>
+		public virtual int IndexOf(ParticleSystem particleSystem)
+		{
+			return List.IndexOf(particleSystem);
+		}
+
+		/// <summary>
+		/// Removes particleSystem from group
+		/// </summary>
+		/// <param name="particleSystem">particleSystem to remove</param>
+		public virtual void Remove(ParticleSystem particleSystem)
+		{
+			List.Remove(particleSystem);
+		}
+
+		/// <summary>
+		/// Checks if particleSystem is in the container
+		/// </summary>
+		/// <param name="particleSystem">particleSystem to query for</param>
+		/// <returns>True is the particleSystem is in the container.</returns>
+		public bool Contains(ParticleSystem particleSystem)
+		{
+			return (List.Contains(particleSystem));
+		}
 	}
 }

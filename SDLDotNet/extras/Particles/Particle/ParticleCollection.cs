@@ -80,9 +80,16 @@ namespace SdlDotNet.Particles.Particle
 		/// <param name="changeEmitterTarget">Flag to chage the emitter's target particle collection.  Defaults to true.</param>
 		public void Add(ParticleEmitter emitter, bool changeEmitterTarget)
 		{
+			if (emitter == null)
+			{
+				throw new ArgumentNullException("emitter");
+			}
 			List.Add(emitter);
 			if(changeEmitterTarget)
-				emitter.Target = this;
+			{
+				emitter.Target.Clear();
+				emitter.Target.Add(this);
+			}
 		}
 
 		/// <summary>
