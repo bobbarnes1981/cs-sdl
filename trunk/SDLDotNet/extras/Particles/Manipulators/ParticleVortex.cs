@@ -39,37 +39,37 @@ namespace SdlDotNet.Particles.Manipulators
 		/// <summary>
 		/// Creates a particle vortex manipulator from just the location.
 		/// </summary>
-		/// <param name="x">The X coordinate of the vortex.</param>
-		/// <param name="y">The Y coordinate of the vortex.</param>
-		public ParticleVortex(float x, float y)
+		/// <param name="positionX">The X coordinate of the vortex.</param>
+		/// <param name="positionY">The Y coordinate of the vortex.</param>
+		public ParticleVortex(float positionX, float positionY)
 		{
-			m_X = x;
-			m_Y = y;
+			m_X = positionX;
+			m_Y = positionY;
 		}
 		/// <summary>
 		/// Creates a particle vortex manipulator.
 		/// </summary>
-		/// <param name="x">The X coordinate of the vortex.</param>
-		/// <param name="y">The Y coordinate of the vortex.</param>
+		/// <param name="positionX">The X coordinate of the vortex.</param>
+		/// <param name="positionY">The Y coordinate of the vortex.</param>
 		/// <param name="strength">The amount of pull applied to the particles.</param>
 		/// <param name="radius">The size of the vortex. -1 is infinate size.</param>
-		public ParticleVortex(float x, float y, float strength, float radius)
+		public ParticleVortex(float positionX, float positionY, float strength, float radius)
 		{
-			m_X = x;
-			m_Y = y;
+			m_X = positionX;
+			m_Y = positionY;
 			m_Strength = strength;
 			m_Radius = radius;
 		}
 		/// <summary>
 		/// Creates a particle vortex manipulator with an infinate size.
 		/// </summary>
-		/// <param name="x">The X coordinate of the vortex.</param>
-		/// <param name="y">The Y coordinate of the vortex.</param>
+		/// <param name="positionX">The X coordinate of the vortex.</param>
+		/// <param name="positionY">The Y coordinate of the vortex.</param>
 		/// <param name="strength">The amount of pull applied to the particles.</param>
-		public ParticleVortex(float x, float y, float strength)
+		public ParticleVortex(float positionX, float positionY, float strength)
 		{
-			m_X = x;
-			m_Y = y;
+			m_X = positionX;
+			m_Y = positionY;
 			m_Strength = strength;
 		}
 		/// <summary>

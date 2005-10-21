@@ -33,7 +33,7 @@ namespace SdlDotNet.Particles
 		private ParticleManipulatorCollection m_Manipulators;
 
 		/// <summary>
-		/// Gets and sets the collection of manipulators to manipulate the particles in the system.
+		/// Gets the collection of manipulators to manipulate the particles in the system.
 		/// </summary>
 		public ParticleManipulatorCollection Manipulators
 		{
@@ -41,10 +41,10 @@ namespace SdlDotNet.Particles
 			{
 				return m_Manipulators;
 			}
-			set
-			{
-				m_Manipulators = value;
-			}
+//			set
+//			{
+//				m_Manipulators = value;
+//			}
 		}
 
 		/// <summary>
@@ -71,6 +71,10 @@ namespace SdlDotNet.Particles
 		/// <param name="system">The particle system to copy.</param>
 		public ParticleSystem(ParticleSystem system)
 		{
+			if (system == null)
+			{
+				throw new ArgumentNullException("system");
+			}
 			m_Manipulators = new ParticleManipulatorCollection(system.Manipulators);
 			this.Add(system);
 		}

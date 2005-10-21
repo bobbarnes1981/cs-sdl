@@ -30,12 +30,19 @@ namespace SdlDotNet.Particles.Emitters
 	/// </summary>
 	public abstract class ParticleEmitter : BaseParticle
 	{
-		private ParticleCollection m_Target = null;
+		private ParticleCollection m_Target = new ParticleCollection();
+		private static Random random = new Random();
 
 		/// <summary>
 		/// The random number generator associated with the particle emitters.
 		/// </summary>
-		protected static Random Random = new Random();
+		protected static Random Random
+		{
+			get
+			{
+				return random;
+			}
+		}
 		/// <summary>
 		/// A helper method to get a random float between the given range.
 		/// </summary>
@@ -46,7 +53,6 @@ namespace SdlDotNet.Particles.Emitters
 		{
 			return min + (float)Random.NextDouble() * (max - min);
 		}
-
 
 		private float m_Width = 1f;
 		private float m_Height = 1f;
@@ -142,7 +148,7 @@ namespace SdlDotNet.Particles.Emitters
 			}
 		}
 
-		private float m_DirectionMin = 0f;
+		private float m_DirectionMin;
 		private float m_DirectionMax = (float)(2 * Math.PI);
 
 		/// <summary>
@@ -207,7 +213,7 @@ namespace SdlDotNet.Particles.Emitters
 		}
 
 
-		private float m_FrequencyCounter = 0f;
+		private float m_FrequencyCounter;
 		private float m_Frequency = 1000f;
 		/// <summary>
 		/// Gets and sets the frequency of particle emission.  Measured in particle per 1000 updates.
@@ -226,7 +232,7 @@ namespace SdlDotNet.Particles.Emitters
 		
 
 		/// <summary>
-		/// Gets and sets the particle collection where this emitter is to send its particles.
+		/// Gets the particle collection where this emitter is to send its particles.
 		/// </summary>
 		public ParticleCollection Target
 		{
@@ -234,16 +240,16 @@ namespace SdlDotNet.Particles.Emitters
 			{
 				return m_Target;
 			}
-			set
-			{
-				m_Target = value;
-			}
+//			set
+//			{
+//				m_Target = value;
+//			}
 		}
 
 		/// <summary>
 		/// Creates a new particle emitter.
 		/// </summary>
-		public ParticleEmitter()
+		protected ParticleEmitter()
 		{
 			this.Static = true;
 		}
@@ -255,7 +261,8 @@ namespace SdlDotNet.Particles.Emitters
 		public override bool Update()
 		{
 			m_FrequencyCounter += m_Frequency / 1000f;
-			while(m_FrequencyCounter >= 1){
+			while(m_FrequencyCounter >= 1)
+			{
 				m_Target.Add(CreateParticle());
 				m_FrequencyCounter -= 1f;
 			}
@@ -265,18 +272,22 @@ namespace SdlDotNet.Particles.Emitters
 		/// <summary>
 		/// A protected method that will change the attributes of the passed in particle to fit the emitter's description.
 		/// </summary>
-		/// <param name="p">The particle to change.</param>
+		/// <param name="particle">The particle to change.</param>
 		/// <returns>The particle with the changed properties.</returns>
 		/// <remarks>Use this method when overriding the CreateParticle method.</remarks>
-		protected BaseParticle CreateParticle(BaseParticle p)
+		protected BaseParticle CreateParticle(BaseParticle particle)
 		{
-			p.Life = Random.Next(m_LifeMin, m_LifeMax);
-			p.LifeFull = Random.Next(m_LifeFullMin, m_LifeFullMax);
-			p.Velocity = new Vector(GetRange(m_DirectionMin, m_DirectionMax));
-			p.Velocity.Length = GetRange(m_SpeedMin, m_SpeedMax);
-			p.X = GetRange(this.X, this.X + m_Width);
-			p.Y = GetRange(this.Y, this.Y + m_Height);
-			return p;
+			if (particle == null)
+			{
+				throw new ArgumentNullException("particle");
+			}
+			particle.Life = Random.Next(m_LifeMin, m_LifeMax);
+			particle.LifeFull = Random.Next(m_LifeFullMin, m_LifeFullMax);
+			particle.Velocity = new Vector(GetRange(m_DirectionMin, m_DirectionMax));
+			particle.Velocity.Length = GetRange(m_SpeedMin, m_SpeedMax);
+			particle.X = GetRange(this.X, this.X + m_Width);
+			particle.Y = GetRange(this.Y, this.Y + m_Height);
+			return particle;
 		}
 
 		/// <summary>
