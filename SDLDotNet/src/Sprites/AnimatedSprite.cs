@@ -44,19 +44,19 @@ namespace SdlDotNet.Sprites
 		/// Create AnimatedSprite from Animation
 		/// </summary>
 		/// <param name="name">Name of animation</param>
-		/// <param name="anim">animation</param>
-		public AnimatedSprite(string name, AnimationCollection anim) : this()
+		/// <param name="animation">animation</param>
+		public AnimatedSprite(string name, AnimationCollection animation) : this()
 		{
-			m_Animations.Add(name, anim);
+			m_Animations.Add(name, animation);
 		}
 
 		/// <summary>
 		/// Create AnimatedSprite from Animation
 		/// </summary>
-		/// <param name="anim">animation</param>
-		public AnimatedSprite(AnimationCollection anim) : this()
+		/// <param name="animation">animation</param>
+		public AnimatedSprite(AnimationCollection animation) : this()
 		{
-			m_Animations.Add("Default", anim);
+			m_Animations.Add("Default", animation);
 		}
 
 		/// <summary>
@@ -71,9 +71,9 @@ namespace SdlDotNet.Sprites
 				throw new ArgumentNullException("surfaces");
 			}
 			m_Animations.Add("Default", new AnimationCollection(surfaces));
-			this.Surface = surfaces[0];
-			this.Rectangle = surfaces[0].Rectangle;
-			this.Position = coordinates;
+			base.Surface = surfaces[0];
+			base.Rectangle = surfaces[0].Rectangle;
+			base.Position = coordinates;
 		}
 
 		/// <summary>
@@ -81,18 +81,18 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="surfaces">SurfaceCollection</param>
 		/// <param name="coordinates">Starting coordinates</param>
-		/// <param name="z">initial Z position</param>
-		public AnimatedSprite(SurfaceCollection surfaces, Point coordinates, int z) : this()
+		/// <param name="positionZ">initial Z position</param>
+		public AnimatedSprite(SurfaceCollection surfaces, Point coordinates, int positionZ) : this()
 		{
 			if (surfaces == null)
 			{
 				throw new ArgumentNullException("surfaces");
 			}
 			m_Animations.Add("Default", new AnimationCollection(surfaces));
-			this.Surface = surfaces[0];
-			this.Rectangle = surfaces[0].Rectangle;
-			this.Position = coordinates;
-			this.Z = z;
+			base.Surface = surfaces[0];
+			base.Rectangle = surfaces[0].Rectangle;
+			base.Position = coordinates;
+			base.Z = positionZ;
 		}
 
         /// <summary>
@@ -106,10 +106,10 @@ namespace SdlDotNet.Sprites
 				throw new ArgumentNullException("surfaces");
 			}
             m_Animations.Add("Default", new AnimationCollection(surfaces));
-            this.Surface = surfaces[0];
-            this.Rectangle = surfaces[0].Rectangle;
-            this.Position = new Point(0, 0);
-            this.Z = 0;
+            base.Surface = surfaces[0];
+            base.Rectangle = surfaces[0].Rectangle;
+            base.Position = new Point(0, 0);
+            base.Z = 0;
         }
 		#endregion Constructors
 

@@ -71,12 +71,12 @@ namespace SdlDotNet.Sprites
 		/// Create new Sprite
 		/// </summary>
 		/// <param name="position">Position of Sprite</param>
-		/// <param name="z">Z coordinate of Sprite</param>
+		/// <param name="positionZ">Z coordinate of Sprite</param>
 		/// <param name="surface">Surface of Sprite</param>
-		public Sprite(Surface surface, Point position, int z ) : 
+		public Sprite(Surface surface, Point position, int positionZ) : 
 			this(surface, position)
 		{
-			this.coordinateZ = z;
+			this.coordinateZ = positionZ;
 		}
 
 		/// <summary>
@@ -95,11 +95,11 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="surface">Surface of Sprite</param>
 		/// <param name="rectangle">Rectangle of sprite indicating position and size.</param>
-		/// <param name="z">Z coordinate of Sprite</param>
-		public Sprite(Surface surface, Rectangle rectangle, int z): 
+		/// <param name="positionZ">Z coordinate of Sprite</param>
+		public Sprite(Surface surface, Rectangle rectangle, int positionZ): 
 			this(surface, rectangle)
 		{
-			this.coordinateZ = z;
+			this.coordinateZ = positionZ;
 		}
 
 //		/// <summary>
@@ -118,11 +118,11 @@ namespace SdlDotNet.Sprites
 		/// Create new sprite
 		/// </summary>
 		/// <param name="position">position of Sprite</param>
-		/// <param name="z">Z coordinate of Sprite</param>
+		/// <param name="positionZ">Z coordinate of Sprite</param>
 		/// <param name="surface">Surface of Sprite</param>
 		/// <param name="group">SpriteCollection group to put Sprite into.</param>
-		public Sprite(Surface surface, Point position, int z, SpriteCollection group): 
-			this(surface, position, z)
+		public Sprite(Surface surface, Point position, int positionZ, SpriteCollection group): 
+			this(surface, position, positionZ)
 		{
 			this.AddInternal(group);
 		}

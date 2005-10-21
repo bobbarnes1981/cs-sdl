@@ -31,10 +31,6 @@ namespace SdlDotNet
 		SdlColor()
 		{}
 
-		static SdlColor()
-		{
-		}
-
 		/// <summary>
 		/// Converts .NET Color struct to SDL_Color
 		/// </summary>

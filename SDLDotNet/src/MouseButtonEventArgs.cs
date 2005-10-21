@@ -35,15 +35,15 @@ namespace SdlDotNet
 		/// <param name="button">The mouse button</param>
 		/// <param name="buttonPressed">True if the button is pressed, 
 		/// False if it is released</param>
-		/// <param name="x">The current X coordinate</param>
-		/// <param name="y">The current Y coordinate</param>
-		public MouseButtonEventArgs(MouseButton button, bool buttonPressed, short x, short y)
+		/// <param name="positionX">The current X coordinate</param>
+		/// <param name="positionY">The current Y coordinate</param>
+		public MouseButtonEventArgs(MouseButton button, bool buttonPressed, short positionX, short positionY)
 		{
 			this.eventStruct = new Sdl.SDL_Event();
 			this.eventStruct.button.button = (byte)button;
 			this.eventStruct.button.which = 0;
-			this.eventStruct.button.x = x;
-			this.eventStruct.button.y = y;
+			this.eventStruct.button.x = positionX;
+			this.eventStruct.button.y = positionY;
 			if (buttonPressed)
 			{
 				this.eventStruct.button.state = (byte)ButtonKeyState.Pressed;

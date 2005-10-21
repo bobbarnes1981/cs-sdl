@@ -38,20 +38,20 @@ namespace SdlDotNet.Sprites
         /// <summary>
         /// Creates an AnimationDictionary with one animation with the key "Default".
         /// </summary>
-        /// <param name="anim"></param>
-        public AnimationDictionary(AnimationCollection anim)
+        /// <param name="animation"></param>
+        public AnimationDictionary(AnimationCollection animation)
         {
-            this.Add("Default", anim);
+            this.Add("Default", animation);
         }
 
 		/// <summary>
 		/// Creates an AnimationDictionary with one element within it.
 		/// </summary>
 		/// <param name="key"></param>
-		/// <param name="anim"></param>
-		public AnimationDictionary(string key, AnimationCollection anim)
+		/// <param name="animation"></param>
+		public AnimationDictionary(string key, AnimationCollection animation)
 		{
-			this.Add(key, anim);
+			this.Add(key, animation);
 		}
 
         /// <summary>
@@ -67,10 +67,10 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Creates a new AnimationDictionary with the contents of an existing AnimationDictionary.
 		/// </summary>
-		/// <param name="animDictionary">The existing music Dictionary to add.</param>
-		public AnimationDictionary(AnimationDictionary animDictionary)
+		/// <param name="animationDictionary">The existing music Dictionary to add.</param>
+		public AnimationDictionary(AnimationDictionary animationDictionary)
 		{
-			this.Add(animDictionary);
+			this.Add(animationDictionary);
         }
         #endregion Constructors
 
@@ -225,11 +225,11 @@ namespace SdlDotNet.Sprites
 		/// Adds an animation to the Dictionary.
 		/// </summary>
 		/// <param name="key">The name of the animation.</param>
-		/// <param name="anim">The animation object.</param>
+		/// <param name="animation">The animation object.</param>
 		/// <returns>The final number of elements within the Dictionary.</returns>
-		public int Add(string key, AnimationCollection anim) 
+		public int Add(string key, AnimationCollection animation) 
 		{
-			Dictionary.Add(key, anim);
+			Dictionary.Add(key, animation);
 			return Dictionary.Count;
 		}
 
@@ -248,17 +248,21 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Adds a Dictionary of music to the current music Dictionary.
 		/// </summary>
-		/// <param name="animDictionary">The Dictionary of 
-		/// music samples to add.</param>
-		/// <returns>The total number of elements within 
-		/// the Dictionary after adding the sample.</returns>
-		public int Add(AnimationDictionary animDictionary)
+		/// <param name="animationDictionary">
+		/// The Dictionary of 
+		/// music samples to add.
+		/// </param>
+		/// <returns>
+		/// The total number of elements within 
+		/// the Dictionary after adding the sample.
+		/// </returns>
+		public int Add(AnimationDictionary animationDictionary)
 		{
-			if (animDictionary == null)
+			if (animationDictionary == null)
 			{
-				throw new ArgumentNullException("animDictionary");
+				throw new ArgumentNullException("animationDictionary");
 			}
-			IDictionaryEnumerator dict = animDictionary.GetEnumerator();
+			IDictionaryEnumerator dict = animationDictionary.GetEnumerator();
 			while(dict.MoveNext())
 			{
 				this.Add((string)dict.Key, (AnimationCollection)dict.Value);

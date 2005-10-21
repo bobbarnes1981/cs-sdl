@@ -35,12 +35,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Ball motion
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		public BallMotion(int x, int y)
+		/// <param name="positionX"></param>
+		/// <param name="positionY"></param>
+		public BallMotion(int positionX, int positionY)
 		{
-			this.x = x;
-			this.y = y;
+			this.x = positionX;
+			this.y = positionY;
 		}
 
 		/// <summary>

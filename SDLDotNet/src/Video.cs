@@ -32,7 +32,6 @@ namespace SdlDotNet
 	public sealed class Video
 	{
 		static private bool disposed;
-		static Mouse mouse = Mouse.Instance;
 
 		static Video()
 		{
@@ -404,29 +403,6 @@ namespace SdlDotNet
 			return Video.CreateRgbSurface(width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask, false);
 		}
 
-
-		/// <summary>
-		/// Mouse object
-		/// </summary>
-		public static Mouse Mouse
-		{
-			get
-			{
-				return Video.mouse;
-			}
-		}
-//
-//		/// <summary>
-//		/// Returns VideoInfo object
-//		/// </summary>
-//		public static VideoInfo VideoInfo
-//		{
-//			get
-//			{
-//				return Video.VideoInfo;
-//			}
-//		}
-
 		/// <summary>
 		/// Swaps the OpenGL screen, only if the double-buffered 
 		/// attribute was set.
@@ -571,7 +547,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets red gamma ramp
 		/// </summary>
-		public short[] GetGammaRampRed()
+		public static short[] GetGammaRampRed()
 		{
 			short[] red = new short[256];
 			int result = Sdl.SDL_GetGammaRamp(red, null, null);
@@ -598,7 +574,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets blue gamma ramp
 		/// </summary>
-		public short[] GetGammaRampBlue()
+		public static short[] GetGammaRampBlue()
 		{
 			short[] blue = new short[256];
 			int result = Sdl.SDL_GetGammaRamp(null, null, blue);
@@ -625,7 +601,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Gets green gamma ramp
 		/// </summary>
-		public short[] GetGammaRampGreen()
+		public static short[] GetGammaRampGreen()
 		{
 			short[] green = new short[256];
 			int result = Sdl.SDL_GetGammaRamp(null, green, null);
