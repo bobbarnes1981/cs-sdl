@@ -39,37 +39,37 @@ namespace SdlDotNet.Particles.Manipulators
 		/// <summary>
 		/// Creates a particle vortex manipulator from just the location.
 		/// </summary>
-		/// <param name="positionX">The X coordinate of the vortex.</param>
-		/// <param name="positionY">The Y coordinate of the vortex.</param>
-		public ParticleVortex(float positionX, float positionY)
+		/// <param name="x">The X coordinate of the vortex.</param>
+		/// <param name="y">The Y coordinate of the vortex.</param>
+		public ParticleVortex(float x, float y)
 		{
-			m_positionX = positionX;
-			m_positionY = positionY;
+			m_X = x;
+			m_Y = y;
 		}
 		/// <summary>
 		/// Creates a particle vortex manipulator.
 		/// </summary>
-		/// <param name="positionX">The X coordinate of the vortex.</param>
-		/// <param name="positionY">The Y coordinate of the vortex.</param>
+		/// <param name="x">The X coordinate of the vortex.</param>
+		/// <param name="y">The Y coordinate of the vortex.</param>
 		/// <param name="strength">The amount of pull applied to the particles.</param>
 		/// <param name="radius">The size of the vortex. -1 is infinate size.</param>
-		public ParticleVortex(float positionX, float positionY, float strength, float radius)
+		public ParticleVortex(float x, float y, float strength, float radius)
 		{
-			m_positionX = positionX;
-			m_positionY = positionY;
+			m_X = x;
+			m_Y = y;
 			m_Strength = strength;
 			m_Radius = radius;
 		}
 		/// <summary>
 		/// Creates a particle vortex manipulator with an infinate size.
 		/// </summary>
-		/// <param name="positionX">The X coordinate of the vortex.</param>
-		/// <param name="positionY">The Y coordinate of the vortex.</param>
+		/// <param name="x">The X coordinate of the vortex.</param>
+		/// <param name="y">The Y coordinate of the vortex.</param>
 		/// <param name="strength">The amount of pull applied to the particles.</param>
-		public ParticleVortex(float positionX, float positionY, float strength)
+		public ParticleVortex(float x, float y, float strength)
 		{
-			m_positionX = positionX;
-			m_positionY = positionY;
+			m_X = x;
+			m_Y = y;
 			m_Strength = strength;
 		}
 		/// <summary>
@@ -81,8 +81,8 @@ namespace SdlDotNet.Particles.Manipulators
 			m_Strength = strength;
 		}
 
-		private float m_positionX = 0;
-		private float m_positionY = 0;
+		private float m_X;
+		private float m_Y;
 		/// <summary>
 		/// Gets and sets the Y coordinate of the vortex.
 		/// </summary>
@@ -90,11 +90,11 @@ namespace SdlDotNet.Particles.Manipulators
 		{
 			get
 			{
-				return m_positionY;
+				return m_Y;
 			}
 			set
 			{
-				m_positionY = value;
+				m_Y = value;
 			}
 		}
 		/// <summary>
@@ -104,11 +104,11 @@ namespace SdlDotNet.Particles.Manipulators
 		{
 			get
 			{
-				return m_positionX;
+				return m_X;
 			}
 			set
 			{
-				m_positionX = value;
+				m_X = value;
 			}
 		}
 		private float m_Radius = -1f;
@@ -155,7 +155,7 @@ namespace SdlDotNet.Particles.Manipulators
 			}
 			foreach(BaseParticle p in particles)
 			{
-				Vector v = new Vector(p.X,p.Y,m_positionX,m_positionY);
+				Vector v = new Vector(p.X,p.Y,m_X,m_Y);
 				if(m_Radius == -1f)
 				{
 					v.Length = m_Strength;
