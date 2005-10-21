@@ -10,6 +10,9 @@ namespace SdlDotNet.Particles.Emitters
 	/// </summary>
 	public class ParticlePixelEmitter : ParticleEmitter
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public ParticlePixelEmitter()
 		{
 		}
@@ -21,6 +24,9 @@ namespace SdlDotNet.Particles.Emitters
 		private byte m_MaxG = 255;
 		private byte m_MaxB = 255;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public byte MinR
 		{
 			get
@@ -33,6 +39,9 @@ namespace SdlDotNet.Particles.Emitters
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public byte MaxR
 		{
 			get
@@ -45,6 +54,9 @@ namespace SdlDotNet.Particles.Emitters
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public byte MinG
 		{
 			get
@@ -57,6 +69,9 @@ namespace SdlDotNet.Particles.Emitters
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public byte MaxG
 		{
 			get
@@ -69,6 +84,9 @@ namespace SdlDotNet.Particles.Emitters
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public byte MinB
 		{
 			get
@@ -81,6 +99,9 @@ namespace SdlDotNet.Particles.Emitters
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public byte MaxB
 		{
 			get
@@ -93,6 +114,10 @@ namespace SdlDotNet.Particles.Emitters
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		protected override SdlDotNet.Particles.Particle.BaseParticle CreateParticle()
 		{
 			ParticlePixel p = (ParticlePixel)CreateParticle(new ParticlePixel());
@@ -103,6 +128,10 @@ namespace SdlDotNet.Particles.Emitters
 			return p;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="destination"></param>
 		public override void Render(Surface destination)
 		{
 
