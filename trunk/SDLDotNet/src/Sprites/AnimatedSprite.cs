@@ -37,7 +37,7 @@ namespace SdlDotNet.Sprites
 		public AnimatedSprite() : base()
 		{
 			m_Timer.Elapsed += new System.Timers.ElapsedEventHandler(m_Timer_Elapsed);
-			m_Timer.Interval = 1000;
+			m_Timer.Interval = 20;
 		}
 
 		/// <summary>
@@ -231,7 +231,7 @@ namespace SdlDotNet.Sprites
 		#endregion
 
 		#region Private Methods
-		private System.Timers.Timer m_Timer = new System.Timers.Timer(1000);
+		private System.Timers.Timer m_Timer = new System.Timers.Timer(500);
 		private void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			AnimationCollection current = m_Animations[m_CurrentAnimation];
