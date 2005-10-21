@@ -347,7 +347,7 @@ namespace SdlDotNet
 		/// Raises Event and places it on the event queue
 		/// </summary>
 		/// <param name="sdlEvent">Event to be raised</param>
-		public static void RaiseEvent(SdlEventArgs sdlEvent)
+		public static void AddEvent(SdlEventArgs sdlEvent)
 		{
 			Events.Add(sdlEvent);
 		}
@@ -750,7 +750,7 @@ namespace SdlDotNet
 		/// </summary>
 		public static void QuitApplication()
 		{
-			Events.RaiseEvent(new QuitEventArgs());
+			Events.AddEvent(new QuitEventArgs());
 		}
 		/// <summary>
 		/// Starts the framerate ticker. 

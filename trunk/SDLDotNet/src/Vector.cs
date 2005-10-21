@@ -22,6 +22,7 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace SdlDotNet
 {
@@ -37,82 +38,82 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates point at 0, 0
 		/// </summary>
-        public Vector() : this(0, 0) { }
+		public Vector() : this(0, 0) { }
 
-        /// <summary>
-        /// Creates a vector with a specific direction in 
-        /// degrees and a length of 1.
-        /// </summary>
-        /// <param name="directionDeg">
-        /// The direction of the vector, in degrees.
-        /// </param>
-        public Vector(int directionDeg)
-        {
-            Length = 1;
-            DirectionDeg = directionDeg;
-        }
+		/// <summary>
+		/// Creates a vector with a specific direction in 
+		/// degrees and a length of 1.
+		/// </summary>
+		/// <param name="directionDeg">
+		/// The direction of the vector, in degrees.
+		/// </param>
+		public Vector(int directionDeg)
+		{
+			Length = 1;
+			DirectionDeg = directionDeg;
+		}
 
-        /// <summary>
-        /// Creates a vector with a specific direction in 
-        /// radians and a length of 1.
-        /// </summary>
-        /// <param name="directionRad">
-        /// The direction of the vector, in radians.
-        /// </param>
-        public Vector(float directionRad)
-        {
-            Length = 1;
-            Direction = directionRad;
+		/// <summary>
+		/// Creates a vector with a specific direction in 
+		/// radians and a length of 1.
+		/// </summary>
+		/// <param name="directionRadians">
+		/// The direction of the vector, in radians.
+		/// </param>
+		public Vector(float directionRadians)
+		{
+			Length = 1;
+			Direction = directionRadians;
 		}
 
 		/// <summary>
 		/// Creates a vector using integers.
 		/// </summary>
-		/// <param name="x">Coordinate on X-axis</param>
-		/// <param name="y">Coordinate on Y-axis</param>
-		public Vector(int x, int y)
+		/// <param name="positionX">Coordinate on X-axis</param>
+		/// <param name="positionY">Coordinate on Y-axis</param>
+		public Vector(int positionX, int positionY)
 		{
-			m_x = (float)x;
-			m_y = (float)y;
+			m_x = (float)positionX;
+			m_y = (float)positionY;
 		}
 
 		/// <summary>
 		/// Creates a vector using floats.
 		/// </summary>
-		/// <param name="x">Coordinate on X-axis</param>
-		/// <param name="y">Coordinate on Y-axis</param>
-		public Vector(float x, float y)
+		/// <param name="positionX">Coordinate on X-axis</param>
+		/// <param name="positionY">Coordinate on Y-axis</param>
+		public Vector(float positionX, float positionY)
 		{
-			m_x = x;
-			m_y = y;
+			m_x = positionX;
+			m_y = positionY;
 		}
 
 		/// <summary>
 		/// Creates a vector using doubles.
 		/// </summary>
-		/// <param name="x">Coordinate on X-axis</param>
-		/// <param name="y">Coordinate on Y-axis</param>
-		public Vector(double x, double y)
+		/// <param name="positionX">Coordinate on X-axis</param>
+		/// <param name="positionY">Coordinate on Y-axis</param>
+		public Vector(double positionX, double positionY)
 		{
-			m_x = (float)x;
-			m_y = (float)y;
+			m_x = (float)positionX;
+			m_y = (float)positionY;
 		}
 
 		/// <summary>
-        /// Creates a vector based on a Point object.
+		/// Creates a vector based on a Point object.
 		/// </summary>
-        /// <param name="point">
-        /// The point representing the XY values.
-        /// </param>
+		/// <param name="point">
+		/// The point representing the XY values.
+		/// </param>
 		public Vector(Point point) : this(point.X, point.Y) {}
 
-        /// <summary>
-        /// Creates a vector based on a PointF object.
-        /// </summary>
-        /// <param name="point">
-        /// The point representing the XY values.
-        /// </param>
-        public Vector(PointF point) : this(point.X, point.Y) {}
+		/// <summary>
+		/// Creates a vector based on a PointF object.
+		/// </summary>
+		/// <param name="point">
+		/// The point representing the XY values.
+		/// </param>
+		public Vector(PointF point) : this(point.X, point.Y) {}
 
 		/// <summary>
 		/// Creates a vector based on the difference between the two given points.
@@ -152,7 +153,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Copy constructor
 		/// </summary>
-        /// <param name="vector">The vector to copy.</param>
+		/// <param name="vector">The vector to copy.</param>
 		public Vector(Vector vector)
 		{
 			if (vector != null)
@@ -208,14 +209,14 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static bool operator== (Vector c1, Vector c2)
 		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
+			//			if (c1 == null)
+			//			{
+			//				throw new ArgumentNullException("c1");
+			//			}
+			//			if (c2 == null)
+			//			{
+			//				throw new ArgumentNullException("c2");
+			//			}
 			return ((c1.m_x == c2.m_x) && (c1.m_y == c2.m_y));
 		}
 
@@ -390,82 +391,127 @@ namespace SdlDotNet
 		/// <summary>
 		/// Addition operator
 		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector operator +(Vector a, float b)
+		public static Vector operator +(Vector vector, float scalar)
 		{
-			return new Vector(a.m_x + b, a.m_y + b);
+			return new Vector(vector.m_x + scalar, vector.m_y + scalar);
+		}
+
+		/// <summary>
+		/// Addition operator
+		/// </summary>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
+		/// <returns></returns>
+		public static Vector Add(Vector vector, float scalar)
+		{
+			return new Vector(vector.m_x + scalar, vector.m_y + scalar);
 		}
 		/// <summary>
 		/// Minus operator
 		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector operator -(Vector a, float b)
+		public static Vector operator -(Vector vector, float scalar)
 		{
-			return new Vector(a.m_x - b, a.m_y - b);
+			return new Vector(vector.m_x - scalar, vector.m_y - scalar);
+		}
+
+		/// <summary>
+		/// Minus operator
+		/// </summary>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
+		/// <returns></returns>
+		public static Vector Subtract(Vector vector, float scalar)
+		{
+			return new Vector(vector.m_x - scalar, vector.m_y - scalar);
 		}
 		/// <summary>
 		/// Multiplication operator
 		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector operator *(Vector a, float b)
+		public static Vector operator *(Vector vector, float scalar)
 		{
-			return new Vector(a.m_x * b, a.m_y * b);
+			return new Vector(vector.m_x * scalar, vector.m_y * scalar);
 		}
+
 		/// <summary>
-		/// Division poerator
+		/// Multiplication operator
 		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector operator /(Vector a, float b)
+		public static Vector Multiply(Vector vector, float scalar)
 		{
-			return new Vector(a.m_x / b, a.m_y / b);
+			return new Vector(vector.m_x * scalar, vector.m_y * scalar);
+		}
+
+		/// <summary>
+		/// Division operator
+		/// </summary>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
+		/// <returns></returns>
+		public static Vector operator /(Vector vector, float scalar)
+		{
+			return new Vector(vector.m_x / scalar, vector.m_y / scalar);
+		}
+
+		/// <summary>
+		/// Division operator
+		/// </summary>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
+		/// <returns></returns>
+		public static Vector Divide(Vector vector, float scalar)
+		{
+			return new Vector(vector.m_x / scalar, vector.m_y / scalar);
 		}
 		/// <summary>
 		/// Addition operator
 		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector operator +(float a, Vector b)
+		public static Vector operator +(float scalar, Vector vector)
 		{
-			return new Vector(a + b.m_x, a + b.m_y);
+			return new Vector(scalar + vector.m_x, scalar + vector.m_y);
 		}
 		/// <summary>
 		/// Minus operator
 		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector operator -(float a, Vector b)
+		public static Vector operator -(float scalar, Vector vector)
 		{
-			return new Vector(a - b.m_x, a - b.m_y);
+			return new Vector(scalar - vector.m_x, scalar - vector.m_y);
 		}
 		/// <summary>
 		/// Muliplication operator
 		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector operator *(float a, Vector b)
+		public static Vector operator *(float scalar, Vector vector)
 		{
-			return new Vector(a * b.m_x, a * b.m_y);
+			return new Vector(scalar * vector.m_x, scalar * vector.m_y);
 		}
 		/// <summary>
 		/// Division operator
 		/// </summary>
-		/// <param name="a"></param>
-		/// <param name="b"></param>
+		/// <param name="vector"></param>
+		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector operator /(float a, Vector b)
+		public static Vector operator /(float scalar, Vector vector)
 		{
-			return new Vector(a / b.m_x, a / b.m_y);
+			return new Vector(scalar / vector.m_x, scalar / vector.m_y);
 		}
 
 		/// <summary>
@@ -587,12 +633,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Offsets the vector by the given x, y and z coordinates.
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		public void Offset(float x, float y)
+		/// <param name="offsetX"></param>
+		/// <param name="offsetY"></param>
+		public void Offset(float offsetX, float offsetY)
 		{
-			this.m_x += x;
-			this.m_y += y;
+			this.m_x += offsetX;
+			this.m_y += offsetY;
 		}
 		#endregion
 
@@ -608,19 +654,19 @@ namespace SdlDotNet
 			return (m_x * other.m_x) + (m_y * other.m_y);
 		}
 
-        /// <summary>
-        /// Gets the midpoint between the two vectors.
-        /// </summary>
-        /// <param name="vector">The other vector to compare this one to.</param>
-        /// <returns>A new vector representing the midpoint between the two vectors.</returns>
-        public Vector Midpoint(Vector vector)
-        {
+		/// <summary>
+		/// Gets the midpoint between the two vectors.
+		/// </summary>
+		/// <param name="vector">The other vector to compare this one to.</param>
+		/// <returns>A new vector representing the midpoint between the two vectors.</returns>
+		public Vector Midpoint(Vector vector)
+		{
 			if (vector == null)
 			{
 				throw new ArgumentNullException("vector");
 			}
-            return new Vector(( m_x + vector.X ) * 0.5, ( m_y + vector.Y ) * 0.5 );
-        }
+			return new Vector(( m_x + vector.X ) * 0.5, ( m_y + vector.Y ) * 0.5 );
+		}
 
 		/// <summary>
 		/// Normalizes the vector.
@@ -628,11 +674,11 @@ namespace SdlDotNet
 		/// <returns>The original length.</returns>
 		public float Normalize()
 		{
-            float length = this.Length;
-            float invLength = (float)(1.0 / length);
-            m_x = m_x * invLength;
-            m_y = m_y * invLength;
-            return length;
+			float length = this.Length;
+			float invLength = (float)(1.0 / length);
+			m_x = m_x * invLength;
+			m_y = m_y * invLength;
+			return length;
 		}
 		
 		/// <summary>
@@ -643,9 +689,9 @@ namespace SdlDotNet
 		/// </returns>
 		public Vector Normalized()
 		{
-            Vector ret = new Vector(this);
-            ret.Normalize();
-            return ret;
+			Vector ret = new Vector(this);
+			ret.Normalize();
+			return ret;
 		}
 
 		/// <summary>
@@ -657,58 +703,58 @@ namespace SdlDotNet
 			m_y*=-1;
 		}
 
-        /// <summary>
-        /// Calculates the reflection angle of the current 
-        /// vector using the given normal vector.
-        /// </summary>
-        /// <param name="normal">
-        /// The normal angle.
-        /// </param>
-        /// <returns>
-        /// A new vector representing the reflection angle.
-        /// </returns>
-        /// <remarks>
-        /// Make sure the length of the vector is 1 or it will 
-        /// have an effect on the resulting vector.
-        /// </remarks>
-        public Vector Reflection(Vector normal)
-        {
-            return this - ( 2 * this.DotProduct(normal) * normal );
-        }
+		/// <summary>
+		/// Calculates the reflection angle of the current 
+		/// vector using the given normal vector.
+		/// </summary>
+		/// <param name="normal">
+		/// The normal angle.
+		/// </param>
+		/// <returns>
+		/// A new vector representing the reflection angle.
+		/// </returns>
+		/// <remarks>
+		/// Make sure the length of the vector is 1 or it will 
+		/// have an effect on the resulting vector.
+		/// </remarks>
+		public Vector Reflection(Vector normal)
+		{
+			return this - ( 2 * this.DotProduct(normal) * normal );
+		}
 
-        /// <summary>
-        /// Calculates the reflection angle of the current 
-        /// vector using the given normal in degrees.
-        /// </summary>
-        /// <param name="normalDeg">
-        /// The normal angle in degrees.
-        /// </param>
-        /// <returns>
-        /// A new vector representing the reflection angle.
-        /// </returns>
-        public Vector Reflection(int normalDeg)
-        {
-            Vector vecNormal = new Vector(0, 1);
-            vecNormal.DirectionDeg = normalDeg;
-            return Reflection(vecNormal);
-        }
+		/// <summary>
+		/// Calculates the reflection angle of the current 
+		/// vector using the given normal in degrees.
+		/// </summary>
+		/// <param name="normalDeg">
+		/// The normal angle in degrees.
+		/// </param>
+		/// <returns>
+		/// A new vector representing the reflection angle.
+		/// </returns>
+		public Vector Reflection(int normalDeg)
+		{
+			Vector vecNormal = new Vector(0, 1);
+			vecNormal.DirectionDeg = normalDeg;
+			return Reflection(vecNormal);
+		}
 
-        /// <summary>
-        /// Calculates the reflection angle of the current vector 
-        /// using the given normal in radians.
-        /// </summary>
-        /// <param name="normalRad">
-        /// The normal angle in radians.
-        /// </param>
-        /// <returns>
-        /// A new vector representing the reflection angle.
-        /// </returns>
-        public Vector Reflection(float normalRad)
-        {
-            Vector vecNormal = new Vector(0, 1);
-            vecNormal.Direction = normalRad;
-            return Reflection(vecNormal);
-        }
+		/// <summary>
+		/// Calculates the reflection angle of the current vector 
+		/// using the given normal in radians.
+		/// </summary>
+		/// <param name="normalRadians">
+		/// The normal angle in radians.
+		/// </param>
+		/// <returns>
+		/// A new vector representing the reflection angle.
+		/// </returns>
+		public Vector Reflection(float normalRadians)
+		{
+			Vector vecNormal = new Vector(0, 1);
+			vecNormal.Direction = normalRadians;
+			return Reflection(vecNormal);
+		}
 
 		#endregion Math
 
@@ -746,7 +792,9 @@ namespace SdlDotNet
 		/// Serialization function
 		/// </summary>
 		/// <param name="info"></param>
-		/// <param name="context"></param>
+		/// <param name="context"></param> 
+		[SecurityPermissionAttribute(
+			 SecurityAction.Demand, SerializationFormatter=true)]
 		public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
 		{
 			if (info == null)
@@ -773,12 +821,8 @@ namespace SdlDotNet
 		/// </returns>
 		public int CompareTo(object obj)
 		{
-			if(obj is Vector) 
-			{
-				Vector temp = (Vector)obj;
-				return Length.CompareTo(temp.Length);
-			}
-			throw new ArgumentException("object is not a Vector");    
+			Vector temp = (Vector)obj;
+			return Length.CompareTo(temp.Length);
 		}
 
 		#endregion IComparable Members

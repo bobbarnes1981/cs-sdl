@@ -69,9 +69,9 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="surface">Main sprite surface</param>
 		/// <param name="rectangle">Rectangle for spirte</param>
-		/// <param name="z">Z coordinate of sprite</param>
-		public SpriteContainer(Surface surface, Rectangle rectangle, int z) : 
-base(surface, rectangle, z)
+		/// <param name="positionZ">Z coordinate of sprite</param>
+		public SpriteContainer(Surface surface, Rectangle rectangle, int positionZ) : 
+base(surface, rectangle, positionZ)
 		{
 		}
 

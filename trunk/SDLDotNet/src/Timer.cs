@@ -137,7 +137,16 @@ namespace SdlDotNet
 		/// <param name="delayTime">Delay time in seconds</param>
 		public static void DelaySeconds(int delayTime)
 		{
-			Sdl.SDL_Delay(delayTime * 1000);
+			int delayTimeMax = Int32.MaxValue / 1000;
+			int delayTimeTemp = delayTime * 1000;
+			if (delayTime <= delayTimeMax)
+			{
+				Sdl.SDL_Delay(delayTimeTemp);
+			}
+			else
+			{
+				throw new OverflowException("delayTime is too large");
+			}
 		}
 
 		/// <summary>

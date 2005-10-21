@@ -29,24 +29,34 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Mouse
 	{
-		static readonly Mouse instance = new Mouse();
-
 		Mouse()
 		{
 		}
 
-		internal static Mouse Instance
+		static Mouse()
 		{
-			get
+			Initialize();
+		}
+
+		/// <summary>
+		/// Initializes Video subsystem.
+		/// </summary>
+		public static void Initialize()
+		{
+			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
+				== (int) SdlFlag.FalseValue)
 			{
-				return instance;
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
+				{
+					throw SdlException.Generate();
+				}
 			}
 		}
 
 		/// <summary> 
 		/// Gets and sets whether or not the mouse cursor is visible. 
 		/// </summary> 
-		public bool ShowCursor 
+		public static bool ShowCursor 
 		{ 
 			get 
 			{ 
@@ -61,7 +71,7 @@ namespace SdlDotNet
 		/// <summary> 
 		/// Gets and sets the current mouse position. 
 		/// </summary> 
-		public Point MousePosition 
+		public static Point MousePosition 
 		{ 
 			get 
 			{ 
@@ -79,7 +89,7 @@ namespace SdlDotNet
 		/// <summary> 
 		/// Gets and sets the relative mouse position. 
 		/// </summary> 
-		public Point MousePositionChange 
+		public static Point MousePositionChange 
 		{ 
 			get 
 			{ 
@@ -99,7 +109,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns true if app has mouse focus
 		/// </summary>
-		public bool HasMouseFocus
+		public static bool HasMouseFocus
 		{
 			get
 			{
@@ -114,7 +124,7 @@ namespace SdlDotNet
 		/// <returns>
 		/// If the button is pressed, returns True, otherwise returns False
 		/// </returns>
-		public bool IsButtonPressed(MouseButton button) 
+		public static bool IsButtonPressed(MouseButton button) 
 		{
 			int dummyX;
 			int dummyY;

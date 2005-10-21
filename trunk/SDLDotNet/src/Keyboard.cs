@@ -30,10 +30,6 @@ namespace SdlDotNet
 		Keyboard()
 		{}
 
-		static Keyboard() 
-		{
-		}
-
 		/// <summary>
 		/// Enable keyboard autorepeat
 		/// </summary>

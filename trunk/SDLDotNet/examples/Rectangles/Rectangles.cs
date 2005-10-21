@@ -60,7 +60,7 @@ namespace SdlDotNet.Examples
 
 			screen = Video.SetVideoModeWindow(width, height, true);
 			Video.WindowCaption = "SDL.NET - Rectangles Example";
-			Video.Mouse.ShowCursor = false;
+			Mouse.ShowCursor = false;
 
 			surf = screen.CreateCompatibleSurface(width, height, true);
 			surf.Fill(Color.Black);

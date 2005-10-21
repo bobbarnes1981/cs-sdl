@@ -37,26 +37,26 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor for Circle
 		/// </summary>
-		/// <param name="x">X coordinate of Center</param>
-		/// <param name="y">Y coordinate of Center</param>
-		/// <param name="r">Radius</param>
-		public Circle(short x, short y, short r)
+		/// <param name="positionX">X coordinate of Center</param>
+		/// <param name="positionY">Y coordinate of Center</param>
+		/// <param name="radius">Radius</param>
+		public Circle(short positionX, short positionY, short radius)
 		{
-			this.x = x;
-			this.y = y;
-			this.r = r;
+			this.x = positionX;
+			this.y = positionY;
+			this.r = radius;
 		}
 
 		/// <summary>
 		/// Constructor for Circle
 		/// </summary>
-		/// <param name="p">Center point</param>
-		/// <param name="r">Radius</param>
-		public Circle(Point p, short r)
+		/// <param name="center">Center point</param>
+		/// <param name="radius">Radius</param>
+		public Circle(Point center, short radius)
 		{
-			this.x = (short)p.X;
-			this.y = (short)p.Y;
-			this.r = r;
+			this.x = (short)center.X;
+			this.y = (short)center.Y;
+			this.r = radius;
 		}
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// X position of circle
 		/// </summary>
-		public short XPosition
+		public short PositionX
 		{
 			get
 			{
@@ -93,7 +93,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Y position of circle
 		/// </summary>
-		public short YPosition
+		public short PositionY
 		{
 			get
 			{
@@ -191,14 +191,14 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="x">X coordinate of center</param>
-		/// <param name="y">Y coordinate of center</param>
+		/// <param name="positionX">X coordinate of center</param>
+		/// <param name="positionY">Y coordinate of center</param>
 		/// <param name="radiusX">Radius on X axis</param>
 		/// <param name="radiusY">Radius on Y axis</param>
-		public Ellipse(short x, short y, short radiusX, short radiusY)
+		public Ellipse(short positionX, short positionY, short radiusX, short radiusY)
 		{
-			this.x = x;
-			this.y = y;
+			this.x = positionX;
+			this.y = positionY;
 			this.radiusX = radiusX;
 			this.radiusY = radiusY;
 		}
@@ -251,7 +251,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// X position of center of ellipse
 		/// </summary>
-		public short XPosition
+		public short PositionX
 		{
 			get
 			{
@@ -266,7 +266,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Y position of center of ellipse
 		/// </summary>
-		public short YPosition
+		public short PositionY
 		{
 			get
 			{
@@ -914,12 +914,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="x">array of x positions of points</param>
-		/// <param name="y">array of y positions of points</param>
-		public Polygon(short[] x, short[] y)
+		/// <param name="positionsX">array of x positions of points</param>
+		/// <param name="positionsY">array of y positions of points</param>
+		public Polygon(short[] positionsX, short[] positionsY)
 		{
-			this.x = x;
-			this.y = y;
+			this.x = positionsX;
+			this.y = positionsY;
 			this.n = 0;
 			this.list = new ArrayList();
 			this.xTotal = 0;
@@ -957,48 +957,48 @@ namespace SdlDotNet
 		/// <summary>
 		/// Get Array of all X positions
 		/// </summary>
-		public short[] XPositions()
+		public short[] PositionsX()
 		{
 			return this.x;
 		}
 		/// <summary>
 		/// Set array of X positions
 		/// </summary>
-		/// <param name="x">x positions</param>
-		public void XPositions(short[] x)
+		/// <param name="arrayX">x positions</param>
+		public void PositionsX(short[] arrayX)
 		{
-			if (x.Length != y.Length)
+			if (arrayX.Length != this.y.Length)
 			{
 				throw SdlException.Generate();
 			}
 			else
 			{
-				this.x = x;
-				this.n = x.Length;
+				this.x = arrayX;
+				this.n = arrayX.Length;
 			}
 		}
 
 		/// <summary>
 		/// Get array of Y positions
 		/// </summary>
-		public short[] YPositions()
+		public short[] PositionsY()
 		{
 			return this.y;
 		}
 		/// <summary>
 		/// Set array of Y positions
 		/// </summary>
-		/// <param name="y">array of Y positions</param>
-		public void YPositions(short[] y)
+		/// <param name="arrayY">array of Y positions</param>
+		public void PositionsY(short[] arrayY)
 		{
-			if (this.x.Length != y.Length)
+			if (this.x.Length != arrayY.Length)
 			{
 				throw SdlException.Generate();
 			}
 			else
 			{
-				this.y = y;
-				this.n = x.Length;
+				this.y = arrayY;
+				this.n = arrayY.Length;
 			}
 		}
 
@@ -1154,16 +1154,16 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="x">X position of vertex</param>
-		/// <param name="y">Y position of vertex</param>
-		/// <param name="r">Radius</param>
+		/// <param name="positionX">X position of vertex</param>
+		/// <param name="positionY">Y position of vertex</param>
+		/// <param name="radius">Radius</param>
 		/// <param name="startingAngle">Starting angle in degrees</param>
 		/// <param name="endingAngle">Ending angle in degrees</param>
-		public Pie(short x, short y, short r, short startingAngle, short endingAngle)
+		public Pie(short positionX, short positionY, short radius, short startingAngle, short endingAngle)
 		{
-			this.x = x;
-			this.y = y;
-			this.r = r;
+			this.x = positionX;
+			this.y = positionY;
+			this.r = radius;
 			this.startingAngle = startingAngle;
 			this.endingAngle = endingAngle;
 		}
@@ -1172,14 +1172,14 @@ namespace SdlDotNet
 		/// Constructor
 		/// </summary>
 		/// <param name="point">Position of vertex</param>
-		/// <param name="r">Radius</param>
+		/// <param name="radius">Radius</param>
 		/// <param name="startingAngle">Starting angle in degrees</param>
 		/// <param name="endingAngle">Ending angle in degrees</param>
-		public Pie(Point point, short r, short startingAngle, short endingAngle)
+		public Pie(Point point, short radius, short startingAngle, short endingAngle)
 		{
 			this.x = (short)point.X;
 			this.y = (short)point.Y;
-			this.r = r;
+			this.r = radius;
 			this.startingAngle = startingAngle;
 			this.endingAngle = endingAngle;
 		}
@@ -1187,7 +1187,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// X position of vertex
 		/// </summary>
-		public short XPosition
+		public short PositionX
 		{
 			get
 			{
@@ -1202,7 +1202,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Y position of vertex
 		/// </summary>
-		public short YPosition
+		public short PositionY
 		{
 			get
 			{
@@ -1385,13 +1385,13 @@ namespace SdlDotNet
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="x">array of x positions</param>
-		/// <param name="y">array of y positions</param>
+		/// <param name="positionsX">array of x positions</param>
+		/// <param name="positionsY">array of y positions</param>
 		/// <param name="steps">number of steps in curve</param>
-		public Bezier(short[] x, short[] y, int steps)
+		public Bezier(short[] positionsX, short[] positionsY, int steps)
 		{
-			this.x = x;
-			this.y = y;
+			this.x = positionsX;
+			this.y = positionsY;
 			this.n = 0;
 			this.xTotal = 0;
 			this.yTotal = 0;
@@ -1407,13 +1407,13 @@ namespace SdlDotNet
 				this.steps = steps;
 			}
 			
-			if (x.Length != y.Length)
+			if (positionsX.Length != positionsY.Length)
 			{
 				throw SdlException.Generate();
 			}
 			else
 			{
-				this.n = x.Length;
+				this.n = positionsX.Length;
 			}
 		}
 
@@ -1451,15 +1451,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// Get array of x positions of point
 		/// </summary>
-		public short[] XPositions()
+		public short[] PositionsX()
 		{
 			return this.x;
 		}
 		/// <summary>
 		/// Set array of x positions of points
 		/// </summary>
-		/// <param name="x"></param>
-		public void XPositions(short[] x)
+		/// <param name="arrayX">array of positions</param>
+		public void PositionsX(short[] arrayX)
 		{
 			if (x.Length != y.Length)
 			{
@@ -1467,32 +1467,32 @@ namespace SdlDotNet
 			}
 			else
 			{
-				this.x = x;
-				this.n = x.Length;
+				this.x = arrayX;
+				this.n = arrayX.Length;
 			}
 		}
 
 		/// <summary>
 		/// Get array of y positions of points
 		/// </summary>
-		public short[] YPositions()
+		public short[] PositionsY()
 		{
 			return this.y;
 		}
 		/// <summary>
 		/// Set array of y positions of points
 		/// </summary>
-		/// <param name="y"></param>
-		public void YPositions(short[] y)
+		/// <param name="arrayY">array of positions</param>
+		public void PositionsY(short[] arrayY)
 		{
-			if (this.x.Length != y.Length)
+			if (this.x.Length != arrayY.Length)
 			{
 				throw SdlException.Generate();
 			}
 			else
 			{
-				this.y = y;
-				this.n = x.Length;
+				this.y = arrayY;
+				this.n = arrayY.Length;
 			}
 		}
 

@@ -428,7 +428,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			int result = SdlGfx.filledCircleRGBA(this.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.G, color.B,
+			int result = SdlGfx.filledCircleRGBA(this.Handle, circle.PositionX, circle.PositionY, circle.Radius, color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -452,13 +452,13 @@ namespace SdlDotNet
 			int result = 0;
 			if (antiAlias)
 			{
-				result = SdlGfx.aacircleRGBA(this.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.G, color.B,
+				result = SdlGfx.aacircleRGBA(this.Handle, circle.PositionX, circle.PositionY, circle.Radius, color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
 			else
 			{
-				result = SdlGfx.circleRGBA(this.Handle, circle.XPosition, circle.YPosition, circle.Radius, color.R, color.G, color.B,
+				result = SdlGfx.circleRGBA(this.Handle, circle.PositionX, circle.PositionY, circle.Radius, color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
@@ -495,7 +495,7 @@ namespace SdlDotNet
 			if (antiAlias)
 			{
 				result = SdlGfx.aaellipseRGBA(
-					this.Handle, ellipse.XPosition, ellipse.YPosition, 
+					this.Handle, ellipse.PositionX, ellipse.PositionY, 
 					ellipse.RadiusX, ellipse.RadiusY, 
 					color.R, color.G, color.B,
 					color.A);
@@ -504,7 +504,7 @@ namespace SdlDotNet
 			else
 			{
 				result = SdlGfx.ellipseRGBA(
-					this.Handle, ellipse.XPosition, ellipse.YPosition, 
+					this.Handle, ellipse.PositionX, ellipse.PositionY, 
 					ellipse.RadiusX, ellipse.RadiusY, 
 					color.R, color.G, color.B,
 					color.A);
@@ -537,7 +537,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			int result = SdlGfx.filledEllipseRGBA(this.Handle, ellipse.XPosition, ellipse.YPosition, ellipse.RadiusX, ellipse.RadiusY,color.R, color.G, color.B,
+			int result = SdlGfx.filledEllipseRGBA(this.Handle, ellipse.PositionX, ellipse.PositionY, ellipse.RadiusX, ellipse.RadiusY,color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -681,7 +681,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			int result = SdlGfx.filledPolygonRGBA(this.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.G, color.G,
+			int result = SdlGfx.filledPolygonRGBA(this.Handle, polygon.PositionsX(), polygon.PositionsY(), polygon.NumberOfSides, color.R, color.G, color.G,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != 0)
@@ -705,13 +705,13 @@ namespace SdlDotNet
 			int result = 0;
 			if (antiAlias)
 			{
-				result = SdlGfx.aapolygonRGBA(this.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.G, color.B,
+				result = SdlGfx.aapolygonRGBA(this.Handle, polygon.PositionsX(), polygon.PositionsY(), polygon.NumberOfSides, color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
 			else
 			{
-				result = SdlGfx.polygonRGBA(this.Handle, polygon.XPositions(), polygon.YPositions(), polygon.NumberOfSides, color.R, color.G, color.B,
+				result = SdlGfx.polygonRGBA(this.Handle, polygon.PositionsX(), polygon.PositionsY(), polygon.NumberOfSides, color.R, color.G, color.B,
 					color.A);
 				GC.KeepAlive(this);
 			}
@@ -745,7 +745,7 @@ namespace SdlDotNet
 			int result = 0;
 
 			result = SdlGfx.pieRGBA(
-				this.Handle, pie.XPosition, pie.YPosition, 
+				this.Handle, pie.PositionX, pie.PositionY, 
 				pie.Radius,
 				pie.StartingAngle, pie.EndingAngle, 
 				color.R, color.G, color.B,
@@ -769,7 +769,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			int result = SdlGfx.filledPieRGBA(this.Handle, pie.XPosition, pie.YPosition, pie.Radius, pie.StartingAngle, pie.EndingAngle,color.R, color.G, color.B,
+			int result = SdlGfx.filledPieRGBA(this.Handle, pie.PositionX, pie.PositionY, pie.Radius, pie.StartingAngle, pie.EndingAngle,color.R, color.G, color.B,
 				color.A);
 			GC.KeepAlive(this);
 			if (result != (int) SdlFlag.Success)
@@ -791,7 +791,7 @@ namespace SdlDotNet
 			}
 			int result = 0;
 			result = SdlGfx.bezierRGBA(
-				this.Handle, bezier.XPositions(), bezier.YPositions(), 
+				this.Handle, bezier.PositionsX(), bezier.PositionsY(), 
 				bezier.NumberOfPoints, bezier.Steps, 
 				color.R, color.G, color.B,
 				color.A);
@@ -1504,15 +1504,19 @@ namespace SdlDotNet
 		/// <remarks>
 		/// copied from http://cone3d.gamedev.net/cgi-bin/index.pl?page=tutorials/gfxsdl/tut1
 		/// </remarks>
-		/// <param name="x">The x coordinate of where to plot the pixel</param>
-		/// <param name="y">The y coordinate of where to plot the pixel</param>
+		/// <param name="positionX">The x coordinate of where to plot the pixel</param>
+		/// <param name="positionY">The y coordinate of where to plot the pixel</param>
 		/// <param name="color">The color of the pixel</param>
-		public void DrawPixel(int x, int y, System.Drawing.Color color) 
+		public void DrawPixel(int positionX, int positionY, System.Drawing.Color color) 
 		{
-			if(x >= Width || x < 0)
+			if(positionX >= Width || positionX < 0)
+			{
 				return;
-			if(y >= Height || y < 0)
+			}
+			if(positionY >= Height || positionY < 0)
+			{
 				return;
+			}
 
 			if (this.disposed)
 			{
@@ -1526,7 +1530,7 @@ namespace SdlDotNet
 					byte pixelColorValue = (byte) this.GetColorValue(color);
 					//IntPtr pixelColorValuePtr = 
 					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + y*this.SurfaceStruct.pitch + 2*x), pixelColorValue);
+					Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 2*positionX), pixelColorValue);
 				}
 					break;
 				case 2: // Probably 15-bpp or 16-bpp
@@ -1534,7 +1538,7 @@ namespace SdlDotNet
 					short pixelColorValue = (short) this.GetColorValue(color);
 					//IntPtr pixelColorValuePtr = 
 					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + y*this.SurfaceStruct.pitch + 2*x), pixelColorValue);
+					Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 2*positionX), pixelColorValue);
 				}
 					break;
 				case 3: // Slow 24-bpp mode, usually not used
@@ -1560,7 +1564,7 @@ namespace SdlDotNet
 					int pixelColorValue = this.GetColorValue(color);
 					//IntPtr pixelColorValuePtr = 
 					//	new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
-					Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (y*this.SurfaceStruct.pitch + 4*x)), pixelColorValue);
+					Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY*this.SurfaceStruct.pitch + 4*positionX)), pixelColorValue);
 				}
 					break;
 			}
@@ -1569,11 +1573,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Draws a pixel on the surface using the provided alpha quantity.
 		/// </summary>
-		/// <param name="x">The x coordinate of where to plot the pixel</param>
-		/// <param name="y">The y coordinate of where to plot the pixel</param>
+		/// <param name="positionX">The x coordinate of where to plot the pixel</param>
+		/// <param name="positionY">The y coordinate of where to plot the pixel</param>
 		/// <param name="color">The color of the pixel.  The alpha of this color is overwriten by the alpha value.</param>
 		/// <param name="alpha">The alpha transparency to use for the color.</param>
-		public void DrawPixel(int x, int y, Color color, int alpha)
+		public void DrawPixel(int positionX, int positionY, Color color, int alpha)
 		{
 			if(alpha <= 0)
 			{
@@ -1581,23 +1585,23 @@ namespace SdlDotNet
 			}
 			if(alpha >= 255)
 			{
-				DrawPixel(x,y,color);
+				DrawPixel(positionX, positionY, color);
 			}
 			else
 			{
-				DrawPixel(x,y,Color.FromArgb(alpha, color),true);
+				DrawPixel(positionX, positionY, Color.FromArgb(alpha, color),true);
 			}
 		}
 
 		/// <summary>
 		/// Draws a pixel on the surface with the option of alpha transparency.
 		/// </summary>
-		/// <param name="x">The x coordinate of where to plot the pixel</param>
-		/// <param name="y">The y coordinate of where to plot the pixel</param>
+		/// <param name="positionX">The x coordinate of where to plot the pixel</param>
+		/// <param name="positionY">The y coordinate of where to plot the pixel</param>
 		/// <param name="color">The color of the pixel. The alpha value of this color is used if the alpha flag is true.</param>
 		/// <param name="alpha">A flag saying to use or not use alpha transparency (defaults to false).</param>
 		/// <remarks>If alpha transparency is to be used, the color's alpha value is used.  This uses SDL_gfx's pixelRGBA method.</remarks>
-		public void DrawPixel(int x, int y, Color color, bool alpha)
+		public void DrawPixel(int positionX, int positionY, Color color, bool alpha)
 		{
 			if(alpha)
 			{
@@ -1606,7 +1610,7 @@ namespace SdlDotNet
 					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 				}
 				int result = SdlGfx.pixelRGBA(
-					this.Handle, (short)x, (short)y, 
+					this.Handle, (short)positionX, (short)positionY, 
 					color.R, color.G, color.B, color.A);
 				GC.KeepAlive(this);
 				if (result != (int) SdlFlag.Success)
@@ -1616,7 +1620,7 @@ namespace SdlDotNet
 			}
 			else
 			{
-				DrawPixel(x,y,color);
+				DrawPixel(positionX,positionY,color);
 			}
 		}
 
@@ -1677,10 +1681,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Attempting to code GetPixel. The getter equivalent of DrawPixel.
 		/// </summary>
-		/// <param name="x">The x coordinate of the surface</param>
-		/// <param name="y">The y coordinate of the surface</param>
+		/// <param name="positionX">The x coordinate of the surface</param>
+		/// <param name="positionY">The y coordinate of the surface</param>
 		/// <returns>ColorValue of pixel</returns>
-		public Color GetPixel(int x, int y) 
+		public Color GetPixel(int positionX, int positionY) 
 		{
 			if (this.disposed)
 			{
@@ -1693,11 +1697,29 @@ namespace SdlDotNet
 			{
 				case 1: //Assuming 8-bpp
 				{
-					return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + y*this.SurfaceStruct.pitch + 2*x)));
+					int positionXMax = Int32.MaxValue /2;
+					int positionXTemp = positionX * 2;
+					if (positionX <= positionXMax)
+					{
+						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 2*positionXTemp)));
+					}
+					else
+					{
+						throw new OverflowException("positionX is too large");
+					}
 				}
 				case 2:
 				{
-					return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + y*this.SurfaceStruct.pitch + 2*x)));
+					int positionXMax = Int32.MaxValue /2;
+					int positionXTemp = positionX * 2;
+					if (positionX <= positionXMax)
+					{
+						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 2*positionXTemp)));
+					}
+					else
+					{
+						throw new OverflowException("positionX is too large");
+					}
 				}
 				case 3: //Assuming this is not going to be used much... 
 				{
@@ -1715,7 +1737,16 @@ namespace SdlDotNet
 				}
 				case 4:
 				{
-					return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (y*this.SurfaceStruct.pitch + 4*x))));
+					int positionXMax = Int32.MaxValue / 4;
+					int positionXTemp = positionX * 4;
+					if (positionX <= positionXMax)
+					{
+						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 4*positionXTemp)));
+					}
+					else
+					{
+						throw new OverflowException("positionX is too large");
+					}
 				}
 				default: //Should never come here
 				{
@@ -1853,9 +1884,9 @@ namespace SdlDotNet
 		/// <param name="degreesOfRotation">degrees of rotation</param>
 		/// <param name="zoom">scale of zoom</param>
 		/// <returns></returns>
-		public Surface CreateRotoZoomedSurface(int degreesOfRotation, double zoom)
+		public Surface CreateRotatedZoomedSurface(int degreesOfRotation, double zoom)
 		{
-			return this.CreateRotoZoomedSurface(degreesOfRotation, zoom, true);
+			return this.CreateRotatedZoomedSurface(degreesOfRotation, zoom, true);
 		}
 
 		/// <summary>
@@ -1865,7 +1896,7 @@ namespace SdlDotNet
 		/// <param name="zoom">scale of zoom</param>
 		/// <param name="antiAlias">If true, moothing is turned on.</param>
 		/// <returns></returns>
-		public Surface CreateRotoZoomedSurface(int degreesOfRotation, 
+		public Surface CreateRotatedZoomedSurface(int degreesOfRotation, 
 			double zoom, bool antiAlias)
 		{
 			if (this.disposed)
