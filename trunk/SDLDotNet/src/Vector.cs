@@ -207,6 +207,12 @@ namespace SdlDotNet
 			return ((c1.m_x == c2.m_x) && (c1.m_y == c2.m_y));
 		}
 
+		/// <summary>
+		/// Not equal operator
+		/// </summary>
+		/// <param name="c1"></param>
+		/// <param name="c2"></param>
+		/// <returns></returns>
 		public static bool operator!= (Vector c1, Vector c2)
 		{
 			return !(c1 == c2);
