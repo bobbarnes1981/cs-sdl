@@ -29,13 +29,13 @@ using System.Security.Permissions;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly: AssemblyTitle("")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SdlDotNet.Windows")]
+[assembly: AssemblyDescription("The SDL.NET Windows Integration")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("The SDL.NET Project")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("David Hudson")]
+[assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
@@ -51,7 +51,7 @@ using System.Security.Permissions;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("0.1.*")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
