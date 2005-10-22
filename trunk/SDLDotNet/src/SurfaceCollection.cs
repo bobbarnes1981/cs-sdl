@@ -56,6 +56,15 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Create a collection with one surface element.
+		/// </summary>
+		/// <param name="surface">The surface to add to the new collection.</param>
+		public SurfaceCollection(Surface surface)
+		{
+			Add(surface);
+		}
+
+		/// <summary>
 		/// Load in multiple files as surfaces
 		/// </summary>
 		/// <param name="baseName">Base name of files</param>
