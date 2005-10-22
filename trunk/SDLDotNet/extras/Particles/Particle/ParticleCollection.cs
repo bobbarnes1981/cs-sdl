@@ -56,6 +56,15 @@ namespace SdlDotNet.Particles.Particle
 		}
 
 		/// <summary>
+		/// Creates a particle collection from the particles in the provided system.
+		/// </summary>
+		/// <param name="system">The system containing all the particles to add.</param>
+		public ParticleCollection(ParticleSystem system)
+		{
+			Add(system);
+		}
+
+		/// <summary>
 		/// Adds a particle to the collection.
 		/// </summary>
 		/// <param name="particle">The particle to add.</param>
@@ -87,8 +96,7 @@ namespace SdlDotNet.Particles.Particle
 			List.Add(emitter);
 			if(changeEmitterTarget)
 			{
-				emitter.Target.Clear();
-				emitter.Target.Add(this);
+				emitter.Target = this;
 			}
 		}
 
@@ -106,6 +114,19 @@ namespace SdlDotNet.Particles.Particle
 			{
 				List.Add(particle);
 			}
+		}
+
+		/// <summary>
+		/// Adds a collection of particles from a particle system.
+		/// </summary>
+		/// <param name="system">The system containing all the particles.</param>
+		public void Add(ParticleSystem system)
+		{
+			if(system == null)
+			{
+				throw new ArgumentNullException("system");
+			}
+			Add(system.Particles);
 		}
 
 		/// <summary>
