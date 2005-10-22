@@ -213,12 +213,12 @@ namespace SdlDotNet.Particles.Emitters
 		}
 
 
-		private float m_FrequencyCounter;
-		private float m_Frequency = 1000f;
+		private double m_FrequencyCounter;
+		private double m_Frequency = 1000.0;
 		/// <summary>
 		/// Gets and sets the frequency of particle emission.  Measured in particle per 1000 updates.
 		/// </summary>
-		public float Frequency
+		public double Frequency
 		{
 			get
 			{
@@ -232,7 +232,7 @@ namespace SdlDotNet.Particles.Emitters
 		
 
 		/// <summary>
-		/// Gets the particle collection where this emitter is to send its particles.
+		/// Gets and sets where the particle collection where this emitter is to send its particles.
 		/// </summary>
 		public ParticleCollection Target
 		{
@@ -240,10 +240,10 @@ namespace SdlDotNet.Particles.Emitters
 			{
 				return m_Target;
 			}
-//			set
-//			{
-//				m_Target = value;
-//			}
+			set
+			{
+				m_Target = value;
+			}
 		}
 
 		/// <summary>
@@ -255,12 +255,25 @@ namespace SdlDotNet.Particles.Emitters
 		}
 
 		/// <summary>
+		/// Creates a new pixel particle emitter inside a particle system.
+		/// </summary>
+		/// <param name="system">The system to add to.</param>
+		protected ParticleEmitter(ParticleSystem system) : this()
+		{
+			if(system == null)
+			{
+				throw new ArgumentNullException("system");
+			}
+			system.Add(this, true);
+		}
+
+		/// <summary>
 		/// Updates the particle emitter.
 		/// </summary>
 		/// <returns>True if it's still alive, false if not.</returns>
 		public override bool Update()
 		{
-			m_FrequencyCounter += m_Frequency / 1000f;
+			m_FrequencyCounter = m_FrequencyCounter + (m_Frequency / 1000.0);
 			while(m_FrequencyCounter >= 1)
 			{
 				m_Target.Add(CreateParticle());
@@ -295,6 +308,16 @@ namespace SdlDotNet.Particles.Emitters
 		/// </summary>
 		/// <returns></returns>
 		protected abstract BaseParticle CreateParticle();
+
+		/// <summary>
+		/// Renders the emitter onto the surface.
+		/// </summary>
+		/// <param name="destination">The destination surface.</param>
+		/// <remarks>In most cases, this does nothing as nothing is represented by the emitter.</remarks>
+		public override void Render(Surface destination)
+		{
+		}
+
 
 	}
 }

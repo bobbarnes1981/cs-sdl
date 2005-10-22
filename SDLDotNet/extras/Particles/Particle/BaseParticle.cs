@@ -65,7 +65,7 @@ namespace SdlDotNet.Particles.Particle
 			}
 		}
 
-		private bool m_Static = false;
+		private bool m_Static;
 		/// <summary>
 		/// Gets and sets whether the particle's velocity will change its location.
 		/// </summary>
@@ -82,7 +82,7 @@ namespace SdlDotNet.Particles.Particle
 			}
 		}
 
-		private float m_X = 0;
+		private float m_X;
 		/// <summary>
 		/// The X coordinate of the particle.
 		/// </summary>
@@ -97,7 +97,7 @@ namespace SdlDotNet.Particles.Particle
 				m_X = value;
 			}
 		}
-		private float m_Y = 0;
+		private float m_Y;
 		/// <summary>
 		/// The Y coordinate of the particle.
 		/// </summary>

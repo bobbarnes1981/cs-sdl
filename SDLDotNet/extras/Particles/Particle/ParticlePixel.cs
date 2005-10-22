@@ -178,18 +178,6 @@ namespace SdlDotNet.Particles.Particle
 				destination.DrawPixel((int)this.X,(int)this.Y, m_Color, true);
 			}
 		}
-
-//		public static override Particle Random()
-//		{
-//			ParticlePixel p = new ParticlePixel();
-//			p.Color = Color.FromArgb(ParticleSystem.random.Next(0,255),ParticleSystem.random.Next(0,255),ParticleSystem.random.Next(0,255));
-//			return p;
-//		}
-
-
-
-
-
 		#endregion
 	}
 }

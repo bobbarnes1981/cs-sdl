@@ -22,15 +22,17 @@ using System;
 using SdlDotNet;
 using SdlDotNet.Particles.Particle;
 using SdlDotNet.Particles.Manipulators;
+using SdlDotNet.Particles.Emitters;
 
 namespace SdlDotNet.Particles
 {
 	/// <summary>
 	/// A collection of particles manipulated by a number of common manipulators.
 	/// </summary>
-	public class ParticleSystem : ParticleCollection
+	public class ParticleSystem
 	{
 		private ParticleManipulatorCollection m_Manipulators;
+		private ParticleCollection m_Particles;
 
 		/// <summary>
 		/// Gets the collection of manipulators to manipulate the particles in the system.
@@ -41,10 +43,18 @@ namespace SdlDotNet.Particles
 			{
 				return m_Manipulators;
 			}
-//			set
-//			{
-//				m_Manipulators = value;
-//			}
+		}
+
+
+		/// <summary>
+		/// Gets the particles contained in the system.
+		/// </summary>
+		public ParticleCollection Particles
+		{
+			get
+			{
+				return m_Particles;
+			}
 		}
 
 		/// <summary>
@@ -53,6 +63,7 @@ namespace SdlDotNet.Particles
 		public ParticleSystem()
 		{
 			m_Manipulators = new ParticleManipulatorCollection();
+			m_Particles = new ParticleCollection();
 		}
 
 		/// <summary>
@@ -62,7 +73,7 @@ namespace SdlDotNet.Particles
 		public ParticleSystem(ParticleCollection particles)
 		{
 			m_Manipulators = new ParticleManipulatorCollection();
-			this.Add(particles);
+			m_Particles = new ParticleCollection(particles);
 		}
 
 		/// <summary>
@@ -76,7 +87,7 @@ namespace SdlDotNet.Particles
 				throw new ArgumentNullException("system");
 			}
 			m_Manipulators = new ParticleManipulatorCollection(system.Manipulators);
-			this.Add(system);
+			m_Particles = new ParticleCollection(system);
 		}
 
 		/// <summary>
@@ -87,7 +98,7 @@ namespace SdlDotNet.Particles
 		public ParticleSystem(ParticleManipulatorCollection manipulators, ParticleCollection particles)
 		{
 			m_Manipulators = manipulators;
-			this.Add(particles);
+			m_Particles = new ParticleCollection(particles);
 		}
 
 		/// <summary>
@@ -97,6 +108,7 @@ namespace SdlDotNet.Particles
 		public ParticleSystem(ParticleManipulatorCollection manipulators)
 		{
 			m_Manipulators = manipulators;
+			m_Particles = new ParticleCollection();
 		}
 
 		/// <summary>
@@ -107,15 +119,74 @@ namespace SdlDotNet.Particles
 		{
 			m_Manipulators = new ParticleManipulatorCollection();
 			m_Manipulators.Add(manipulator);
+			m_Particles = new ParticleCollection();
 		}
 
 		/// <summary>
 		/// Updates all particles within this system using the given gravity.
 		/// </summary>
-		public override bool Update()
+		/// <returns>True if the system contains particles.</returns>
+		public bool Update()
 		{
-			m_Manipulators.Manipulate(this);
-			return base.Update();
+			m_Manipulators.Manipulate(m_Particles);
+			return m_Particles.Update();
+		}
+
+		/// <summary>
+		/// Adds a particle to the system.
+		/// </summary>
+		/// <param name="particle"></param>
+		public void Add(BaseParticle particle)
+		{
+			m_Particles.Add(particle);
+		}
+
+		/// <summary>
+		/// Add a particle emitter to the particles.
+		/// </summary>
+		/// <param name="emitter">The emitter to add.</param>
+		public void Add(ParticleEmitter emitter)
+		{
+			Add(emitter, true);
+		}
+
+		/// <summary>
+		/// Adds a particle emitter to the particles.
+		/// </summary>
+		/// <param name="emitter">The emitter to add.</param>
+		/// <param name="changeEmitterTarget">Flag to change the emitters target to the particles of this system. Defaults to true.</param>
+		public void Add(ParticleEmitter emitter, bool changeEmitterTarget)
+		{
+			if(emitter == null)
+			{
+				throw new ArgumentNullException("emitter");
+			}
+			if(changeEmitterTarget)
+			{
+				emitter.Target = m_Particles;
+			}
+			m_Particles.Add(emitter);
+		}
+
+		/// <summary>
+		/// Renders all particles on the surface destination.
+		/// </summary>
+		/// <param name="destination">The destination surface.</param>
+		public void Render(Surface destination)
+		{
+			foreach(BaseParticle particle in m_Particles)
+			{
+				particle.Render(destination);
+			}
+		}
+
+		/// <summary>
+		/// Adds a particle manipulator to the system.
+		/// </summary>
+		/// <param name="manipulator"></param>
+		public void Add(IParticleManipulator manipulator)
+		{
+			m_Manipulators.Add(manipulator);
 		}
 	}
 }

@@ -35,27 +35,32 @@ namespace SdlDotNet.Examples
 	{
 		// Make a new particle system with some gravity
 		ParticleSystem particles = new ParticleSystem();
-		ParticlePixelEmitter emit = new ParticlePixelEmitter();
+
+		// Make a new emitter and add it to the particle system.
+		ParticlePixelEmitter emit;
+		ParticleVortex vort = new ParticleVortex(1f, 200f);
 
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		public ParticlesExample()
 		{
-			emit.Frequency = 10000f;
-			emit.LifeFullMin = 50;
+			emit = new ParticlePixelEmitter(particles);
+			emit.Frequency = 100000f;
+			emit.LifeFullMin = 20;
 			emit.LifeFullMax = 50;
-			emit.LifeMin = 10;
-			emit.LifeMax = 60;
+			emit.LifeMin = 20;
+			emit.LifeMax = 30;
+			emit.DirectionMin = -2f;
+			emit.DirectionMax = -1f;
 			emit.MaxR = 255;
-			emit.MinR = 255;
-			emit.MaxG = 255;
+			emit.MinR = 200;
+			emit.MaxG = 50;
 			emit.MinG = 0;
-			emit.MaxB = 255;
+			emit.MaxB = 50;
 			emit.MinB = 0;
-			emit.SpeedMin = 0f;
-			emit.SpeedMax = 10f;
-			particles.Add(emit);
+			emit.SpeedMin = 3f;
+			emit.SpeedMax = 20f;
 			
 			// Make the first particle (a pixel)
 			ParticlePixel first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
@@ -74,6 +79,9 @@ namespace SdlDotNet.Examples
 
 			ParticleFriction frict = new ParticleFriction(0.1f);
 			particles.Manipulators.Add(frict);
+
+			particles.Manipulators.Add(vort);
+			
 
 			// Setup SDL.NET!
 			Video.SetVideoModeWindow(400,300);
@@ -131,6 +139,8 @@ namespace SdlDotNet.Examples
 		{
 			emit.X = e.X;
 			emit.Y = e.Y;
+			vort.X = e.X;
+			vort.Y = e.Y;
 		}
 	}
 }
