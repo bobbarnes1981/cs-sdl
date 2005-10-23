@@ -276,23 +276,27 @@ namespace SdlDotNet.Particles.Emitters
 			m_FrequencyCounter = m_FrequencyCounter + (m_Frequency / 1000.0);
 			while(m_FrequencyCounter >= 1)
 			{
-				m_Target.Add(CreateParticle());
+				BaseParticle p = SetParticleBaseAttributes(CreateParticle());
+				if(p != null)
+				{
+					m_Target.Add(p);
+				}
 				m_FrequencyCounter -= 1f;
 			}
 			return base.Update();
 		}
 
 		/// <summary>
-		/// A protected method that will change the attributes of the passed in particle to fit the emitter's description.
+		/// A private method that will change the attributes of the passed in particle to fit the emitter's description.
 		/// </summary>
 		/// <param name="particle">The particle to change.</param>
 		/// <returns>The particle with the changed properties.</returns>
 		/// <remarks>Use this method when overriding the CreateParticle method.</remarks>
-		protected BaseParticle CreateParticle(BaseParticle particle)
+		private BaseParticle SetParticleBaseAttributes(BaseParticle particle)
 		{
 			if (particle == null)
 			{
-				throw new ArgumentNullException("particle");
+				return null;
 			}
 			particle.Life = Random.Next(m_LifeMin, m_LifeMax);
 			particle.LifeFull = Random.Next(m_LifeFullMin, m_LifeFullMax);

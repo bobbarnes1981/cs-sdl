@@ -65,11 +65,12 @@ namespace SdlDotNet.Particles.Emitters
 		protected override BaseParticle CreateParticle()
 		{
 			if(m_Surfaces.Count == 0)
+			{
 				return null;
-			return CreateParticle(
-				new ParticleSurface(
+			}
+			return new ParticleSurface(
 				m_Surfaces[Random.Next(0,m_Surfaces.Count-1)]
-				));
+				);
 		}
 	}
 }
