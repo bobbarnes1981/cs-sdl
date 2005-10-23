@@ -1,5 +1,5 @@
 /*
- * $RCSfile: AudioExample.cs,v $
+ * $RCSfile: ParticlesExample.cs,v $
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
  *
  * This library is free software; you can redistribute it and/or
@@ -36,7 +36,7 @@ namespace SdlDotNet.Examples
 		// Make a new particle system with some gravity
 		ParticleSystem particles = new ParticleSystem();
 
-		// Make a new emitter and add it to the particle system.
+		// Make a new emitter and a particle vortex for manipulating the particles.
 		ParticlePixelEmitter emit;
 		ParticleVortex vort = new ParticleVortex(1f, 200f);
 
@@ -45,22 +45,27 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public ParticlesExample()
 		{
+			// Setup SDL.NET!
+			Video.SetVideoModeWindow(400,300);
+			Video.WindowCaption = "SDL.NET - ParticlesExample";
+			Events.Tick+=new TickEventHandler(Events_Tick);
+			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
+			Events.MouseButtonDown += new MouseButtonEventHandler(Events_MouseButtonDown);
+			Events.MouseMotion += new MouseMotionEventHandler(Events_MouseMotion);
+
+			// Make the particle emitter.
 			emit = new ParticlePixelEmitter(particles);
-			emit.Frequency = 100000f;
+			emit.Frequency = 100000; // 100000 every 1000 updates.
 			emit.LifeFullMin = 20;
 			emit.LifeFullMax = 50;
-			emit.LifeMin = 20;
+			emit.LifeMin = 10;
 			emit.LifeMax = 30;
-			emit.DirectionMin = -2f;
-			emit.DirectionMax = -1f;
-			emit.MaxR = 255;
-			emit.MinR = 200;
-			emit.MaxG = 50;
-			emit.MinG = 0;
-			emit.MaxB = 50;
-			emit.MinB = 0;
-			emit.SpeedMin = 3f;
-			emit.SpeedMax = 20f;
+			emit.DirectionMin = -2; // shoot up in radians.
+			emit.DirectionMax = -1;
+			emit.ColorMax = Color.FromArgb(255,100,100);
+			emit.ColorMin = Color.FromArgb(230,0,0);
+			emit.SpeedMin = 5;
+			emit.SpeedMax = 20;
 			
 			// Make the first particle (a pixel)
 			ParticlePixel first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
@@ -74,25 +79,12 @@ namespace SdlDotNet.Examples
 			second.Life = -1;
 			particles.Add(second); // Add it to the system
 
+			// Add some manipulators to the particle system.
 			ParticleGravity grav = new ParticleGravity(0.5f);
-			particles.Manipulators.Add(grav);
-
-			ParticleFriction frict = new ParticleFriction(0.1f);
-			particles.Manipulators.Add(frict);
-
-			particles.Manipulators.Add(vort);
-			
-
-			// Setup SDL.NET!
-			Video.SetVideoModeWindow(400,300);
-			Video.WindowCaption = "SDL.NET - ParticlesExample";
-			Events.Tick+=new TickEventHandler(Events_Tick);
-			Events.KeyboardDown+=new KeyboardEventHandler(Events_KeyboardDown);
-
-			ParticleBoundary bound = new ParticleBoundary(SdlDotNet.Video.Screen.Size);
-			particles.Manipulators.Add(bound);
-
-			SdlDotNet.Events.MouseMotion+=new MouseMotionEventHandler(Events_MouseMotion);
+			particles.Manipulators.Add(grav); // Gravity of 0.5f
+			particles.Manipulators.Add(new ParticleFriction(0.1f)); // Slow down particles
+			particles.Manipulators.Add(vort); // A particle vortex fixed on the mouse
+			particles.Manipulators.Add(new ParticleBoundary(SdlDotNet.Video.Screen.Size)); // fix particles on screen.
 		}
 
 		/// <summary>
@@ -137,10 +129,30 @@ namespace SdlDotNet.Examples
 		}
 		private void Events_MouseMotion(object sender, MouseMotionEventArgs e)
 		{
+			// Fix the emitter and the vortex manipulator to the mouse.
 			emit.X = e.X;
 			emit.Y = e.Y;
 			vort.X = e.X;
 			vort.Y = e.Y;
+		}
+
+		private void Events_MouseButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			// Toogle the emitter off and on.
+			emit.Emitting = !emit.Emitting;
+
+			// Make an explosion of pixels on the particle system..
+			ParticlePixelEmitter explosion = new ParticlePixelEmitter(particles, Color.Gray, Color.White);
+			explosion.X = emit.X; // location
+			explosion.Y = emit.Y;
+			explosion.Life = 3; // life of the explosion
+			explosion.Frequency = 100000;
+			explosion.LifeMin = 5;
+			explosion.LifeMax = 15;
+			explosion.LifeFullMin = 5;
+			explosion.LifeFullMax = 5;
+			explosion.SpeedMin = 8;
+			explosion.SpeedMax = 20;
 		}
 	}
 }
