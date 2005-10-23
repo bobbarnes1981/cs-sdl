@@ -43,6 +43,23 @@ namespace SdlDotNet.Particles.Emitters
 				return random;
 			}
 		}
+
+		private bool m_Emitting = true;
+		/// <summary>
+		/// Get and set whether the particle emitter is to be emitting particles.
+		/// </summary>
+		public bool Emitting
+		{
+			get
+			{
+				return m_Emitting;
+			}
+			set
+			{
+				m_Emitting = value;
+			}
+		}
+
 		/// <summary>
 		/// A helper method to get a random float between the given range.
 		/// </summary>
@@ -273,15 +290,18 @@ namespace SdlDotNet.Particles.Emitters
 		/// <returns>True if it's still alive, false if not.</returns>
 		public override bool Update()
 		{
-			m_FrequencyCounter = m_FrequencyCounter + (m_Frequency / 1000.0);
-			while(m_FrequencyCounter >= 1)
+			if(m_Emitting)
 			{
-				BaseParticle p = SetParticleBaseAttributes(CreateParticle());
-				if(p != null)
+				m_FrequencyCounter = m_FrequencyCounter + (m_Frequency / 1000.0);
+				while(m_FrequencyCounter >= 1)
 				{
-					m_Target.Add(p);
+					BaseParticle p = SetParticleBaseAttributes(CreateParticle());
+					if(p != null)
+					{
+						m_Target.Add(p);
+					}
+					m_FrequencyCounter -= 1f;
 				}
-				m_FrequencyCounter -= 1f;
 			}
 			return base.Update();
 		}
