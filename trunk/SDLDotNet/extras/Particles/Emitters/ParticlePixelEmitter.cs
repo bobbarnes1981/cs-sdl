@@ -185,7 +185,7 @@ namespace SdlDotNet.Particles.Emitters
 		/// <returns>A new particle pixel with the new color values.</returns>
 		protected override SdlDotNet.Particles.Particle.BaseParticle CreateParticle()
 		{
-			ParticlePixel p = (ParticlePixel)CreateParticle(new ParticlePixel());
+			ParticlePixel p = new ParticlePixel();
 			p.Color = Color.FromArgb(
 				Random.Next(m_MinR, m_MaxR),
 				Random.Next(m_MinG, m_MaxG),
