@@ -70,8 +70,8 @@ namespace SdlDotNet.Examples
 			emit.LifeMax = 30;
 			emit.DirectionMin = -2; // shoot up in radians.
 			emit.DirectionMax = -1;
-			emit.ColorMax = Color.FromArgb(255,100,100);
-			emit.ColorMin = Color.FromArgb(230,0,0);
+			emit.ColorMin = Color.DarkBlue;
+			emit.ColorMax = Color.LightBlue;
 			emit.SpeedMin = 5;
 			emit.SpeedMax = 20;
 			
@@ -121,10 +121,8 @@ namespace SdlDotNet.Examples
 			Video.Screen.Fill(Color.Black);
 			particles.Render(Video.Screen);
 
-			string windowTitle = "SDL.NET - ParticlesExample - Particles: " + particles.Particles.Count;
-			//if(Video.WindowCaption != windowTitle)
-				Video.WindowCaption = windowTitle;
 			Video.Screen.Update();
+			Video.WindowCaption = "SDL.NET - ParticlesExample - Particles: " + particles.Particles.Count;
 		}
 
 		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
@@ -149,7 +147,7 @@ namespace SdlDotNet.Examples
 			emit.Emitting = !emit.Emitting;
 
 			// Make an explosion of pixels on the particle system..
-			ParticleCircleEmitter explosion = new ParticleCircleEmitter(particles, Color.Gray, Color.White, 1, 2);
+			ParticleCircleEmitter explosion = new ParticleCircleEmitter(particles, Color.Red, Color.Orange, 1, 2);
 			explosion.X = emit.X; // location
 			explosion.Y = emit.Y;
 			explosion.Life = 3; // life of the explosion
