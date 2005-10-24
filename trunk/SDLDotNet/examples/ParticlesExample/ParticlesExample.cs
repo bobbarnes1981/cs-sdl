@@ -48,10 +48,18 @@ namespace SdlDotNet.Examples
 			// Setup SDL.NET!
 			Video.SetVideoModeWindow(400,300);
 			Video.WindowCaption = "SDL.NET - ParticlesExample";
-			Events.Tick+=new TickEventHandler(Events_Tick);
 			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
 			Events.MouseButtonDown += new MouseButtonEventHandler(Events_MouseButtonDown);
 			Events.MouseMotion += new MouseMotionEventHandler(Events_MouseMotion);
+			Events.Fps = 30;
+			Events.Tick+=new TickEventHandler(Events_Tick);
+		}
+
+		/// <summary>
+		/// Run the application
+		/// </summary>
+		public void Run()
+		{
 
 			// Make the particle emitter.
 			emit = new ParticlePixelEmitter(particles);
@@ -85,13 +93,8 @@ namespace SdlDotNet.Examples
 			particles.Manipulators.Add(new ParticleFriction(0.1f)); // Slow down particles
 			particles.Manipulators.Add(vort); // A particle vortex fixed on the mouse
 			particles.Manipulators.Add(new ParticleBoundary(SdlDotNet.Video.Screen.Size)); // fix particles on screen.
-		}
 
-		/// <summary>
-		/// Run the application
-		/// </summary>
-		public void Run()
-		{
+
 			Events.Run();
 		}
 
@@ -117,6 +120,10 @@ namespace SdlDotNet.Examples
 			// Draw scene
 			Video.Screen.Fill(Color.Black);
 			particles.Render(Video.Screen);
+
+			string windowTitle = "SDL.NET - ParticlesExample - Particles: " + particles.Particles.Count;
+			//if(Video.WindowCaption != windowTitle)
+				Video.WindowCaption = windowTitle;
 			Video.Screen.Update();
 		}
 
@@ -142,11 +149,11 @@ namespace SdlDotNet.Examples
 			emit.Emitting = !emit.Emitting;
 
 			// Make an explosion of pixels on the particle system..
-			ParticlePixelEmitter explosion = new ParticlePixelEmitter(particles, Color.Gray, Color.White);
+			ParticleCircleEmitter explosion = new ParticleCircleEmitter(particles, Color.Gray, Color.White, 1, 2);
 			explosion.X = emit.X; // location
 			explosion.Y = emit.Y;
 			explosion.Life = 3; // life of the explosion
-			explosion.Frequency = 100000;
+			explosion.Frequency = 150000;
 			explosion.LifeMin = 5;
 			explosion.LifeMax = 15;
 			explosion.LifeFullMin = 5;
