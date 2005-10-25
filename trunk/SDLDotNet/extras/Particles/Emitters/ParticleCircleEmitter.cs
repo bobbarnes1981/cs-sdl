@@ -25,8 +25,16 @@ using SdlDotNet.Particles.Particle;
 namespace SdlDotNet.Particles.Emitters
 {
 	/// <summary>
-	/// A particle emitter that emits pixel particles.
+	/// A particle emitter that emits circle-based particles.
 	/// </summary>
+	/// <example><code>
+	/// ParticleCircleEmitter emitter = new ParticleCircleEmitter();
+	/// emitter.ColorMin = Color.Black;
+	/// emitter.ColorMax = Color.White;
+	/// emitter.RadiusMin = 1;
+	/// emitter.RadiusMax = 3;
+	/// particleSystem.Add(emitter);
+	/// </code></example>
 	public class ParticleCircleEmitter : ParticlePixelEmitter
 	{
 		/// <summary>

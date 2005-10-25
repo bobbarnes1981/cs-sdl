@@ -27,6 +27,12 @@ namespace SdlDotNet.Particles.Emitters
 	/// <summary>
 	/// A particle emitter that emits pixel particles.
 	/// </summary>
+	/// <example>
+	/// <code>
+	/// ParticlePixelEmitter emitter = new ParticlePixelEmitter(Color.Black, Color.White);
+	/// particleSystem.Add(emitter);
+	/// </code>
+	/// </example>
 	public class ParticlePixelEmitter : ParticleEmitter
 	{
 		/// <summary>

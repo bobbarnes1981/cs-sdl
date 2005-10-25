@@ -26,8 +26,23 @@ using SdlDotNet.Particles.Particle;
 namespace SdlDotNet.Particles.Emitters
 {
 	/// <summary>
-	/// 
+	/// The base abstract particle emitter class. This is to be derived from when creating new particle emitters.
 	/// </summary>
+	/// <example>
+	/// The following example creates a particle emitter that emits blue pixels. The example is pretty much useless as there is already a ParticlePixelEmitter class available.
+	/// <code>
+	/// public class BluePixelEmitter : ParticleEmitter
+	/// {
+	///		protected override SdlDotNet.Particles.Particle.BaseParticle CreateParticle()
+	///		{
+	///			ParticlePixel p = new ParticlePixel();
+	///			p.Color = Color.Blue;
+	///			return p;
+	///		}
+	///	}
+	/// </code>
+	/// </example>
+	/// <remarks>You can use the Random property to get random numbers or the GetRange function to retrieve ranged random numbers. The base particle attributes are handled by the particle system.  All you have to change are the derived properties.</remarks>
 	public abstract class ParticleEmitter : BaseParticle
 	{
 		private ParticleCollection m_Target = new ParticleCollection();
