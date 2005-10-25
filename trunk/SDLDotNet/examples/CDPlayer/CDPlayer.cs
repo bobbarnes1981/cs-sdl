@@ -231,10 +231,10 @@ namespace SdlDotNet.Examples
 			// surfaceControl
 			// 
 			this.surfaceControl.Image = ((System.Drawing.Image)(resources.GetObject("surfaceControl.Image")));
-			this.surfaceControl.Location = new System.Drawing.Point(16, 136);
+			this.surfaceControl.Location = new System.Drawing.Point(8, 136);
 			this.surfaceControl.Name = "surfaceControl";
-			this.surfaceControl.Size = new System.Drawing.Size(336, 224);
-			this.surfaceControl.TabIndex = 9;
+			this.surfaceControl.Size = new System.Drawing.Size(344, 224);
+			this.surfaceControl.TabIndex = 0;
 			this.surfaceControl.TabStop = false;
 			// 
 			// CDPlayer
