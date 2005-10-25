@@ -28,6 +28,12 @@ namespace SdlDotNet.Particles.Manipulators
 	/// <summary>
 	/// A particle manipulator the keeps particles within a boundary.
 	/// </summary>
+	/// <example>
+	/// The following example will keep all particles in the particleSystem in a rectangle of 0,0,100,100.
+	/// <code>
+	/// ParticleBoundry bounds = new ParticleBoundry(0,0,100,100);
+	/// particleSystem.Add(bounds);
+	/// </code></example>
 	public class ParticleBoundary : IParticleManipulator
 	{
 		/// <summary>
@@ -138,7 +144,7 @@ namespace SdlDotNet.Particles.Manipulators
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the x-coordinate of the left edge of the boundry.
 		/// </summary>
 		public float Left
 		{
@@ -149,7 +155,7 @@ namespace SdlDotNet.Particles.Manipulators
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the x-coordinate of the right edge of the boundry.
 		/// </summary>
 		public float Right
 		{
@@ -160,7 +166,7 @@ namespace SdlDotNet.Particles.Manipulators
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the y-coordinate of the top edge of the boundry.
 		/// </summary>
 		public float Top
 		{
@@ -171,7 +177,7 @@ namespace SdlDotNet.Particles.Manipulators
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the y-coordinate of the bottom edge of the boundry.
 		/// </summary>
 		public float Bottom
 		{
