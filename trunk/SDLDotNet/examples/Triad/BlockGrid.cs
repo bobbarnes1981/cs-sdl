@@ -18,7 +18,9 @@
 //*****************************************************************************
 
 using System;
+using System.IO;
 using System.Drawing;
+
 using SdlDotNet;
 using System.Collections;
 
@@ -34,6 +36,9 @@ namespace SdlDotNet.Examples
 		static BlockCollection blockList = new BlockCollection();
 		int delayFactor = 400;
 		private float speedFactor = 1.0f;
+		string data_directory = @"Data/";
+		string filepath = @"../../";
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -115,6 +120,10 @@ namespace SdlDotNet.Examples
 			grid = new Block[gridSize.Width,gridSize.Height];
 
 			currentState = BlockGridState.MoveTriad;
+			if (File.Exists(data_directory + "move.wav"))
+			{
+				filepath = "";
+			}
 
 			try
 			{
@@ -134,27 +143,27 @@ namespace SdlDotNet.Examples
 		{
 			if(moveSound == null)
 			{
-				moveSound = Mixer.Sound("../../Data/move.wav");
+				moveSound = Mixer.Sound(filepath + data_directory + "move.wav");
 			}
 
 			if(permuteSound==null)
 			{
-				permuteSound = Mixer.Sound("../../Data/permute.wav");
+				permuteSound = Mixer.Sound(filepath + data_directory + "permute.wav");
 			}
 
 			if(reductionSound==null)
 			{
-				reductionSound = Mixer.Sound("../../Data/reduction.wav");
+				reductionSound = Mixer.Sound(filepath + data_directory + "reduction.wav");
 			}
 
 			if(hitBottomSound==null)
 			{
-				hitBottomSound = Mixer.Sound("../../Data/hitBottom.wav");
+				hitBottomSound = Mixer.Sound(filepath + data_directory + "hitBottom.wav");
 			}
 
 			if(gameOverSound == null)
 			{
-				gameOverSound = Mixer.Sound("../../Data/gameOver.wav");
+				gameOverSound = Mixer.Sound(filepath + data_directory + "gameOver.wav");
 			}
 		}
 	
@@ -645,7 +654,7 @@ namespace SdlDotNet.Examples
 		{
 			if(gameOverImage==null)
 			{
-				gameOverImage = new Surface(new Bitmap("../../Data/gameOver.bmp"));
+				gameOverImage = new Surface(new Bitmap(filepath + data_directory + "gameOver.bmp"));
 			}
 
 			int xPosition = this.ScreenX + (int)((this.Width-gameOverImage.Width)/2); 
@@ -657,7 +666,7 @@ namespace SdlDotNet.Examples
 		{
 			if(gamePausedImage==null)
 			{
-				gamePausedImage = new Surface(new Bitmap("../..gamePause.bmp"));
+				gamePausedImage = new Surface(new Bitmap(filepath + data_directory + "gamePause.bmp"));
 			}
 
 			int xPosition = this.ScreenX + (int)((this.Width-gamePausedImage.Width)/2); 

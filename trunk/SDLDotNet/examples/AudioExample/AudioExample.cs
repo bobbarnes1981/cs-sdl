@@ -17,10 +17,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using System; 
-using System.Drawing; 
+using System;
+using System.IO;
+using System.Drawing;
 using System.Globalization;
-using SdlDotNet; 
+
+using SdlDotNet;
 using SdlDotNet.Sprites;
 
 // SDL.NET Audio Example
@@ -38,15 +40,17 @@ namespace SdlDotNet.Examples
 		private const int width = 640; 
 		private const int height = 480;
 		private Surface screen; 
+		string data_directory = @"Data/";
+		string filepath = @"../../";
 
 		// Load the music and sound.
-		private Music music1 = new Music("../../Data/mason2.mid");
-		private Music music2 = new Music("../../Data/fard-two.ogg");
-		private Sound boing = new Sound("../../Data/boing.wav");
+		private Music music1;
+		private Music music2;
+		private Sound boing;
 
 		// TODO: Demonstrate use of MusicCollection and SoundCollection.
 
-		private Sprites.TextSprite textDisplay = new TextSprite(" ", new Font("../../Data/FreeSans.ttf", 20), Color.Red);
+		private Sprites.TextSprite textDisplay;
 
 		/// <summary>
 		/// 
@@ -66,6 +70,14 @@ namespace SdlDotNet.Examples
 			Events.MusicFinished += 
 				new MusicFinishedEventHandler(Events_MusicFinished);
 
+			if (File.Exists(data_directory + "boing.wav"))
+			{
+				filepath = "";
+			}
+			music1 = new Music(filepath + data_directory + "mason2.mid");
+			music2 = new Music(filepath + data_directory + "fard-two.ogg");
+			boing = new Sound(filepath + data_directory + "boing.wav");
+			textDisplay = new TextSprite(" ", new Font(filepath + data_directory + "FreeSans.ttf", 20), Color.Red);
 			// Start up SDL
 			screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowCaption = "SDL.NET - AudioExample";
@@ -78,16 +90,16 @@ namespace SdlDotNet.Examples
 
 			Music.EnableMusicFinishedCallback(); // Enable queueing
 
-//				Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
-//				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
-//				Channel channel = new Channel(0);
-//				//Channel channel2 = new Channel(1);
-//				channel.EnableChannelFinishedCallback();
-//				//channel2.EnableChannelFinishedCallback();
-//				//channel.QueuedSound = queuedSound;
-//				channel.Volume = 32;
-//				channel.Play(sound);
-//				//channel2.Play(sound);
+			//				Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
+			//				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
+			//				Channel channel = new Channel(0);
+			//				//Channel channel2 = new Channel(1);
+			//				channel.EnableChannelFinishedCallback();
+			//				//channel2.EnableChannelFinishedCallback();
+			//				//channel.QueuedSound = queuedSound;
+			//				channel.Volume = 32;
+			//				channel.Play(sound);
+			//				//channel2.Play(sound);
           
 			// Begin the SDL ticker
 			Events.Fps = 50;

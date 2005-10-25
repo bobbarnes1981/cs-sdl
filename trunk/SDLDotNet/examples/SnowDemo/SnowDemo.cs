@@ -87,12 +87,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run()
 		{
-			if (File.Exists(data_directory + "background.png"))
+			if (File.Exists(data_directory + "snowbackground.png"))
 			{
 				filepath = "";
 			}
 			screen = Video.SetVideoModeWindow(640, 480, 16, true);
-			background = new Surface(filepath + data_directory + "background.png");
+			background = new Surface(filepath + data_directory + "snowbackground.png");
 			background.TransparentColor = Color.Magenta;
 			tree = new Surface(filepath + data_directory + "Tree.bmp");
 			tree.TransparentColor = Color.Magenta;

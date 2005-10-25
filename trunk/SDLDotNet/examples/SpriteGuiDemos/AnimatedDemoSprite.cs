@@ -57,39 +57,7 @@ namespace SdlDotNet.Examples
 			this.Animate = true;
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="d"></param>
-//		/// <param name="coordinates"></param>
-//		public AnimatedDemoSprite(SurfaceCollection d, Point coordinates)
-//			: base(d, coordinates)
-//		{
-//			base.Frame = rand.Next(d.Count);
-//			this.frameRight = (rand.Next(2) % 2 == 0);
-//		}
-
 		#region Animation and Drawing
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(TickEventArgs args)
-		{
-//			// Increment the frame
-//			if (frameRight)
-//			{
-//				Frame++;
-//			}
-//			else if (Frame == 0)
-//			{
-//				//Frame = FrameCount -1;
-//			}
-//			else
-//			{
-//				Frame--;
-//			}
-		}
 		#endregion
 
 		#region Operators

@@ -17,6 +17,7 @@
 //*****************************************************************************
 
 using System;
+using System.IO;
 using System.Drawing;
 using SdlDotNet;
 
@@ -27,6 +28,9 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class Block : GameObject, System.IDisposable
 	{
+		static string data_directory = @"Data/";
+		static string filepath = @"../../";
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -144,7 +148,7 @@ namespace SdlDotNet.Examples
 		{
 			if (redBlock == null)
 			{
-				Bitmap bmp = new System.Drawing.Bitmap("../../Data/redBlock.bmp");
+				Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "redBlock.bmp");
 				redBlock = new Surface(bmp);
 			}
 			return redBlock;
@@ -156,7 +160,7 @@ namespace SdlDotNet.Examples
 		{
 			if (whiteBlock == null)
 			{
-				Bitmap bmp = new System.Drawing.Bitmap("../../Data/whiteBlock.bmp");
+				Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "whiteBlock.bmp");
 				whiteBlock = new Surface(bmp);
 			}
 			return whiteBlock;
@@ -168,7 +172,7 @@ namespace SdlDotNet.Examples
 		{
 			if (yellowBlock == null)
 			{
-				Bitmap bmp = new System.Drawing.Bitmap("../../Data/yellowBlock.bmp");
+				Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "yellowBlock.bmp");
 				yellowBlock = new Surface(bmp);
 			}
 			return yellowBlock;
@@ -180,7 +184,7 @@ namespace SdlDotNet.Examples
 		{
 			if (purpleBlock == null)
 			{
-				Bitmap bmp = new System.Drawing.Bitmap("../../Data/purpleBlock.bmp");
+				Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "purpleBlock.bmp");
 				purpleBlock = new Surface(bmp);
 			}
 			return purpleBlock;
@@ -191,7 +195,7 @@ namespace SdlDotNet.Examples
 		{
 			if (blueBlock == null)
 			{
-				Bitmap bmp = new System.Drawing.Bitmap("../../Data/blueBlock.bmp");
+				Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "blueBlock.bmp");
 				blueBlock = new Surface(bmp);
 			}
 			return blueBlock;
@@ -204,6 +208,10 @@ namespace SdlDotNet.Examples
 		protected override void DrawGameObject(Surface surface)
 		{
 			Surface image;
+			if (File.Exists(data_directory + "blueBlock.bmp"))
+			{
+				filepath = "";
+			}
 			
 			switch(blockType)
 			{

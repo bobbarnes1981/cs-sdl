@@ -37,13 +37,14 @@ namespace SdlDotNet.Examples
 		public Scoreboard()
 		{
 			string FontName = "FreeSans.ttf";
+			string data_directory = @"Data/";
 			string filepath = @"../../";
 
-			if (File.Exists(FontName))
+			if (File.Exists(data_directory + FontName))
 			{
-				filepath = @"./";
+				filepath = "";
 			}
-			font = new SdlDotNet.Font(filepath + FontName,18);
+			font = new SdlDotNet.Font(filepath + data_directory + FontName,18);
 		}
 
 		/// <summary>

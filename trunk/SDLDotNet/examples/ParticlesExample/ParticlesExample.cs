@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.IO;
 using SdlDotNet;
 using SdlDotNet.Particles;
 using SdlDotNet.Particles.Emitters;
@@ -39,6 +40,8 @@ namespace SdlDotNet.Examples
 		// Make a new emitter and a particle vortex for manipulating the particles.
 		ParticlePixelEmitter emit;
 		ParticleVortex vort = new ParticleVortex(1f, 200f);
+		string data_directory = @"Data/";
+		string filepath = @"../../";
 
 		/// <summary>
 		/// Constructor
@@ -79,8 +82,14 @@ namespace SdlDotNet.Examples
 			ParticlePixel first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
 			particles.Add(first); // Add it to the system
 
+			if (File.Exists(data_directory + "marble1.png"))
+			{
+				filepath = "";
+			}
+
 			// Make the second particle (an animated sprite)
-			AnimationCollection anim = new AnimationCollection(new SurfaceCollection("../../Data/marble1.png", new Size(50,50)),1);
+			AnimationCollection anim = 
+				new AnimationCollection(new SurfaceCollection(filepath + data_directory + "marble1.png", new Size(50,50)),1);
 			AnimatedSprite marble = new AnimatedSprite(anim);
 			marble.Animate = true;
 			ParticleSprite second = new ParticleSprite(marble, 200, 200, new Vector(-7,-9), 500);

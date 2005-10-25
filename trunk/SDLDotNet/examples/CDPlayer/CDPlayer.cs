@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
@@ -46,6 +47,8 @@ namespace SdlDotNet.Examples
 		private System.Windows.Forms.Button buttonPrevious;
 		private SdlDotNet.Windows.SurfaceControl surfaceControl;
 		private System.Windows.Forms.Button buttonNext;
+		string data_directory = @"Data/";
+		string filepath = @"../../";
 		//private System.Windows.Forms.Timer timer;
 		//private System.ComponentModel.IContainer components;
 
@@ -62,8 +65,12 @@ namespace SdlDotNet.Examples
 				new Surface(
 				this.surfaceControl.Width,
 				this.surfaceControl.Height);
+			if (File.Exists(data_directory + "marble1.png"))
+			{
+				filepath = "";
+			}
 			SurfaceCollection marbleSurfaces = 
-				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50)); 
+				new SurfaceCollection(new Surface(filepath + data_directory + "marble1.png"), new Size(50, 50)); 
 
 			for (int i = 0; i < 1; i++)
 			{
