@@ -182,7 +182,7 @@ namespace SdlDotNet.Particles.Manipulators
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the width of the boundry.
 		/// </summary>
 		public float Width
 		{
@@ -197,7 +197,7 @@ namespace SdlDotNet.Particles.Manipulators
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the height of the boundry.
 		/// </summary>
 		public float Height
 		{
@@ -212,7 +212,7 @@ namespace SdlDotNet.Particles.Manipulators
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the size of the boundry (width and height).
 		/// </summary>
 		public SizeF Size
 		{
@@ -227,7 +227,7 @@ namespace SdlDotNet.Particles.Manipulators
 		}
 
 		/// <summary>
-		/// 
+		/// Gets and sets the location of the boundry.
 		/// </summary>
 		public PointF Location
 		{

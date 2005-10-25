@@ -24,7 +24,7 @@ using SdlDotNet.Particles.Particle;
 namespace SdlDotNet.Particles.Emitters
 {
 	/// <summary>
-	/// A particle emitter that shoots out sprites from a sprite collection.
+	/// A particle emitter that shoots out random sprites from a sprite collection.
 	/// </summary>
 	public class ParticleSpriteEmitter : ParticleEmitter
 	{
