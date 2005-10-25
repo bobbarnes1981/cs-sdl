@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.IO;
 using System.Drawing;
 using System.Collections;
 
@@ -41,7 +42,9 @@ namespace SdlDotNet.Examples
 		private int height = 480; //screen height
 		private int maxBalls = 10; //number of balls to display
 		private Random rand = new Random(); //randomizer
-		private Surface background = new Surface("../../Data/background.png");
+		string data_directory = @"Data/";
+		string filepath = @"../../";
+		private Surface background;
 		#endregion Fields
 
 		#region EventHandler Methods
@@ -73,6 +76,11 @@ namespace SdlDotNet.Examples
 		private void Go() 
 		{
 			//Set up screen
+			if (File.Exists(data_directory + "background.png"))
+			{
+				filepath = "";
+			}
+			background = new Surface(filepath + data_directory + "background.png");
 			screen = Video.SetVideoModeWindow(width, height, true);
 			screen.Blit(background);
 			screen.Update();
@@ -81,7 +89,7 @@ namespace SdlDotNet.Examples
 			//This loads the various images (provided by Moonfire) 
 			// into a SurfaceCollection for animation
 			SurfaceCollection marbleSurfaces = 
-				new SurfaceCollection(new Surface("../../Data/marble1.png"), new Size(50, 50)); 
+				new SurfaceCollection(new Surface(filepath + data_directory + "marble1.png"), new Size(50, 50)); 
 
 			for (int i = 0; i < this.maxBalls; i++)
 			{

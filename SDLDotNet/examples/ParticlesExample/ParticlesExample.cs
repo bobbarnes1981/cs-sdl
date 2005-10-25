@@ -116,10 +116,12 @@ namespace SdlDotNet.Examples
 		{
 			// Update all particles
 			particles.Update();
+			//emit.Target.Update();
 
 			// Draw scene
 			Video.Screen.Fill(Color.Black);
 			particles.Render(Video.Screen);
+			//emit.Target.Render(Video.Screen);
 
 			Video.Screen.Update();
 			Video.WindowCaption = "SDL.NET - ParticlesExample - Particles: " + particles.Particles.Count;
