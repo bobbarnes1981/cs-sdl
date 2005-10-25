@@ -10,13 +10,25 @@ namespace SdlDotNet.Gui
 	/// </summary>
 	public abstract class Widget
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public Widget()
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="destination"></param>
+		/// <param name="skin"></param>
 		public abstract void Render(Surface destination, GuiSkin skin);
 
 		private Rectangle m_RelativePosition;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle RelativePosition
 		{
 			get
@@ -28,6 +40,10 @@ namespace SdlDotNet.Gui
 				m_RelativePosition = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public Rectangle AbsolutePosition
 		{
 			get
@@ -46,12 +62,19 @@ namespace SdlDotNet.Gui
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Remove()
 		{
 			m_Parent.Children.Remove(this);
 		}
 
 		private bool m_Visible = true;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool Visible
 		{
 			get
@@ -65,6 +88,9 @@ namespace SdlDotNet.Gui
 		}
 
 		private string m_Text = "";
+		/// <summary>
+		/// 
+		/// </summary>
 		public string Text
 		{
 			get
@@ -79,6 +105,9 @@ namespace SdlDotNet.Gui
 
 
 		private bool m_Enabled = true;
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool Enabled
 		{
 			get
@@ -91,7 +120,11 @@ namespace SdlDotNet.Gui
 			}
 		}
 
-		public WidgetCollection m_Children;
+		private WidgetCollection m_Children;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public WidgetCollection Children
 		{
 			get
@@ -100,7 +133,10 @@ namespace SdlDotNet.Gui
 			}
 		}
 
-		public Widget m_Parent;
+		private Widget m_Parent;
+		/// <summary>
+		/// 
+		/// </summary>
 		public Widget Parent
 		{
 			get

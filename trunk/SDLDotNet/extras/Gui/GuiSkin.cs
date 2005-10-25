@@ -7,6 +7,9 @@ namespace SdlDotNet.Gui
 	/// </summary>
 	public class GuiSkin
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public GuiSkin()
 		{
 		}

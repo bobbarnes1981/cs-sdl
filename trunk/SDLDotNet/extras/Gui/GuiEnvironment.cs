@@ -10,11 +10,17 @@ namespace SdlDotNet.Gui
 	/// <remarks>This is based off of the Irrlicht Gui system.</remarks>
 	public class GuiEnvironment
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public GuiEnvironment()
 		{
 		}
 
 		private WidgetCollection m_Widgets;
+		/// <summary>
+		/// 
+		/// </summary>
 		public WidgetCollection Widgets
 		{
 			get
@@ -24,6 +30,9 @@ namespace SdlDotNet.Gui
 		}
 
 		private GuiSkin m_Skin;
+		/// <summary>
+		/// 
+		/// </summary>
 		public GuiSkin Skin
 		{
 			get

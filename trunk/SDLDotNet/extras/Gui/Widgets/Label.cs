@@ -10,11 +10,17 @@ namespace SdlDotNet.Gui.Widgets
 	/// </summary>
 	public class Label : Widget
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public Label()
 		{
 		}
 
 		private SdlDotNet.Font m_Font;
+		/// <summary>
+		/// 
+		/// </summary>
 		public SdlDotNet.Font Font
 		{
 			get
@@ -28,6 +34,9 @@ namespace SdlDotNet.Gui.Widgets
 		}
 
 		private Color m_Color;
+		/// <summary>
+		/// 
+		/// </summary>
 		public Color Color
 		{
 			get
