@@ -118,7 +118,7 @@ namespace SdlDotNet.Sprites
 			SdlDotNet.Font font, 
 			Point position) : this(textItem, font)
 		{
-			this.Position = position;
+			base.Position = position;
 			this.RenderInternal();
 		}
 
@@ -136,7 +136,7 @@ namespace SdlDotNet.Sprites
 			bool antiAlias,
 			Point position) : this(textItem, font)
 		{
-			this.Position = position;
+			base.Position = position;
 			this.antiAlias = antiAlias;
 			this.RenderInternal();
 		}
@@ -190,24 +190,26 @@ namespace SdlDotNet.Sprites
 		private void RenderInternal()
 		{
 			if (textItem == null)
+			{
 				textItem = " ";
+			}
 
 			// Render it (Solid or Blended)
 			try
 			{
 				if (backgroundColor.IsEmpty)
 				{
-					this.Surface = font.Render(textItem, antiAlias, color);
+					base.Surface = font.Render(textItem, antiAlias, color);
 				}
 				else
 				{
-					this.Surface = font.Render(textItem, color, backgroundColor);
+					base.Surface = font.Render(textItem, color, backgroundColor);
 				}
-				this.Size = new Size(this.Surface.Width, this.Surface.Height);
+				base.Size = new Size(base.Surface.Width, base.Surface.Height);
 			}
 			catch (SpriteException e)
 			{
-				this.Surface = null;
+				base.Surface = null;
 				throw new SdlException(e.ToString());
 			}
 		}

@@ -13,7 +13,7 @@ namespace SdlDotNet.Gui
 		/// <summary>
 		/// 
 		/// </summary>
-		public Widget()
+		protected Widget()
 		{
 		}
 

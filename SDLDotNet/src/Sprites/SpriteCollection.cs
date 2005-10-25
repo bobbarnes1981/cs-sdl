@@ -45,7 +45,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="sprite">Sprite to add to collection</param>
 		public SpriteCollection(Sprite sprite) : base()
 		{
-			this.Add(sprite);
+			this.AddInternal(sprite);
 		}
 
 		/// <summary>
@@ -54,7 +54,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="spriteCollection">Add Spritecollection to this SpriteCollection</param>
 		public SpriteCollection(SpriteCollection spriteCollection) : base()
 		{
-			this.Add(spriteCollection);
+			this.AddInternal(spriteCollection);
 		}
 
 
@@ -158,6 +158,20 @@ namespace SdlDotNet.Sprites
 			{
 				spriteCollection[i].AddInternal(this);
 				this.List.Add(spriteCollection[i]);
+			}
+			return this.Count;
+		}
+
+		private int AddInternal(SpriteCollection spriteCollection)
+		{
+			if (spriteCollection == null)
+			{
+				throw new ArgumentNullException("spriteCollection");
+			}
+			for (int i = 0; i < spriteCollection.Count; i++)
+			{
+				spriteCollection[i].AddInternal(this);
+				List.Add(spriteCollection[i]);
 			}
 			return this.Count;
 		}

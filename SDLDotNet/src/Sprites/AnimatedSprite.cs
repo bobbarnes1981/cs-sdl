@@ -127,10 +127,10 @@ namespace SdlDotNet.Sprites
 			{
 				return m_Animations;
 			}
-			set
-			{
-				m_Animations = value;
-			}
+//			set
+//			{
+//				m_Animations = value;
+//			}
 		}
 
 		

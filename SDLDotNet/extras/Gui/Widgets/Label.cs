@@ -56,6 +56,10 @@ namespace SdlDotNet.Gui.Widgets
 		/// <param name="skin"></param>
 		public override void Render(Surface destination, GuiSkin skin)
 		{
+			if (destination == null)
+			{
+				throw new ArgumentNullException("destination");
+			}
 			destination.Blit(m_Font.Render(this.Text, m_Color),AbsolutePosition);
 		}
 	}

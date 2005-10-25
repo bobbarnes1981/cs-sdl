@@ -951,7 +951,11 @@ namespace SdlDotNet
 			this.list = new ArrayList();
 			this.xTotal = 0;
 			this.yTotal = 0;
-			this.Points = points;
+			for (int i = 0; i < points.Count; i++)
+			{
+				x[i] = (short)((Point)points[i]).X;
+				y[i] = (short)((Point)points[i]).Y;
+			}
 		}
 
 		/// <summary>
@@ -1026,18 +1030,6 @@ namespace SdlDotNet
 					list.Add(new Point(x[i], y[i]));	
 				}
 				return list;
-			}
-			set
-			{
-				if (value == null)
-				{
-					throw new ArgumentNullException("value");
-				}
-				for (int i = 0; i < value.Count; i++)
-				{
-					x[i] = (short)((Point)value[i]).X;
-					y[i] = (short)((Point)value[i]).Y;
-				}
 			}
 		}
 		/// <summary>
@@ -1434,9 +1426,6 @@ namespace SdlDotNet
 			this.list = new ArrayList();
 			this.xTotal = 0;
 			this.yTotal = 0;
-			this.steps = points.Count;
-			this.Points = points;
-			this.steps = steps;
 
 			if (steps < MINIMUMSTEPS)
 			{
@@ -1445,6 +1434,12 @@ namespace SdlDotNet
 			else
 			{
 				this.steps = steps;
+			}
+
+			for (int i = 0; i < points.Count; i++)
+			{
+				x[i] = (short)((Point)points[i]).X;
+				y[i] = (short)((Point)points[i]).Y;
 			}
 		}
 
@@ -1614,18 +1609,6 @@ namespace SdlDotNet
 					list.Add(new Point(x[i], y[i]));	
 				}
 				return list;
-			}
-			set
-			{
-				if (value == null)
-				{
-					throw new ArgumentNullException("value");
-				}
-				for (int i = 0; i < value.Count; i++)
-				{
-					x[i] = (short)((Point)value[i]).X;
-					y[i] = (short)((Point)value[i]).Y;
-				}
 			}
 		}
 		#region IPrimitive Members
