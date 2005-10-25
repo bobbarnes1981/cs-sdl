@@ -7,6 +7,9 @@ namespace SdlDotNet.Gui.Widgets
 	/// </summary>
 	public class Button : Widget
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public Button()
 		{
 
@@ -15,6 +18,10 @@ namespace SdlDotNet.Gui.Widgets
 			//
 		}
 		private bool m_Pressed;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool Pressed
 		{
 			get
@@ -26,5 +33,16 @@ namespace SdlDotNet.Gui.Widgets
 				m_Pressed = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="destination"></param>
+		/// <param name="skin"></param>
+		public override void Render(Surface destination, GuiSkin skin)
+		{
+			//TODO: provide implementation
+		}
+
 	}
 }
