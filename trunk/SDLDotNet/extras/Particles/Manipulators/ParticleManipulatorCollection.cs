@@ -109,8 +109,7 @@ namespace SdlDotNet.Particles.Manipulators
 		{
 			get
 			{
-				// TODO:  Add ParticleManipulatorCollection.IsSynchronized getter implementation
-				return false;
+				return List.IsSynchronized;
 			}
 		}
 
@@ -121,8 +120,7 @@ namespace SdlDotNet.Particles.Manipulators
 		{
 			get
 			{
-				// TODO:  Add ParticleManipulatorCollection.SyncRoot getter implementation
-				return null;
+				return List.SyncRoot;
 			}
 		}
 

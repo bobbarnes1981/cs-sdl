@@ -28,6 +28,15 @@ namespace SdlDotNet.Particles.Manipulators
 	/// A particle manipulator that pulls particles towards a point.
 	/// </summary>
 	/// <remarks>If the radius is set to -1, the pull (strength) on all particles is constant.</remarks>
+	/// <example>
+	/// The following example creates a particle vortex that pulls particles towards the middle of the screen.
+	/// <code>
+	/// ParticleVortex vortex = new ParticleVortex(0.3f);
+	/// vortex.X = (float)(Video.Screen.Width / 2);
+	/// vortex.Y = (float)(Video.Screen.Height / 2);
+	/// particleSystem.Add(vortex);
+	/// </code>
+	/// </example>
 	public class ParticleVortex : IParticleManipulator
 	{
 		/// <summary>

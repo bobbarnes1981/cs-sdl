@@ -26,6 +26,13 @@ namespace SdlDotNet.Particles.Manipulators
 	/// <summary>
 	/// A particle manipulator that slows down particles by a given amount of speed.
 	/// </summary>
+	/// <example>
+	/// The following example creates a particle friction manipulator that slows particles down by 0.5f every update.
+	/// <code>
+	/// ParticleFriction friction = new ParticleFriction(0.5f);
+	/// particleSystem.Add(friction);
+	/// </code>
+	/// </example>
 	public class ParticleFriction : IParticleManipulator
 	{
 		/// <summary>

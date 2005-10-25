@@ -26,6 +26,13 @@ namespace SdlDotNet.Particles.Manipulators
 	/// <summary>
 	/// A particle manipulator that pulls all particles by a common gravity.
 	/// </summary>
+	/// <example>
+	/// The following example puts a vertical gravity of 0.4f in the particleSystem.
+	/// <code>
+	/// ParticleGravity grav = new ParticleGravity(0.4f);
+	/// particleSystem.Add(grav);
+	/// </code>
+	/// </example>
 	public class ParticleGravity : IParticleManipulator
 	{
 		private Vector m_Velocity = new Vector(0f,0.2f);
