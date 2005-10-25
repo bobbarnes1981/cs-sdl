@@ -17,6 +17,7 @@
 //*****************************************************************************
 
 using System;
+using System.IO;
 using System.Drawing;
 using SdlDotNet;
 
@@ -38,6 +39,8 @@ namespace SdlDotNet.Examples
 		Scoreboard board;
 		Surface screen;
 		Surface surf;
+		string data_directory = @"Data/";
+		string filepath = @"../../";
 		
 		Sound levelUpSound;
 
@@ -73,7 +76,12 @@ namespace SdlDotNet.Examples
 				grid.BlocksDestroyed += 
 					new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
 
-				levelUpSound = Mixer.Sound("../../Data/levelup.wav");
+				if (File.Exists(data_directory + "levelup.wav"))
+				{
+					filepath = "";
+				}
+
+				levelUpSound = Mixer.Sound(filepath + data_directory + "levelup.wav");
 				Events.Run();
 			} 
 			catch 

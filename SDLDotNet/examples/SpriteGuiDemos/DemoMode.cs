@@ -23,6 +23,7 @@ using SdlDotNet.Sprites;
 using System.Collections;
 using System.Drawing;
 using System;
+using System.IO;
 
 namespace SdlDotNet.Examples
 {
@@ -44,6 +45,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private SpriteCollection sprites = new SpriteCollection();
 		static Random rand = new Random();
+		static string data_directory = @"Data/";
+		static string filepath = @"../../";
 
 		#region Drawables
 		/// <summary>
@@ -51,7 +54,11 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected static SurfaceCollection LoadFloor()
 		{
-			SurfaceCollection id = new SurfaceCollection("../../Data/floor", ".png");
+			if (File.Exists(data_directory + "floor-00.png"))
+			{
+				filepath = "";
+			}
+			SurfaceCollection id = new SurfaceCollection(filepath + data_directory + "floor", ".png");
 			return id;
 		}
 
@@ -69,9 +76,13 @@ namespace SdlDotNet.Examples
 			{
 				return icd;
 			}
+			if (File.Exists(data_directory + name + ".png"))
+			{
+				filepath = "";
+			}
 
 			// Load the marble and cache it before returning
-			icd = new SurfaceCollection("../../Data/" + name + ".png", new Size(50,50));
+			icd = new SurfaceCollection(filepath + data_directory + name + ".png", new Size(50,50));
 			marbles["icd:" + name] = icd;
 			return icd;
 		}
@@ -90,9 +101,13 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected static SurfaceCollection LoadTiledMarble(string name)
 		{
+			if (File.Exists(data_directory + name + ".png"))
+			{
+				filepath = "";
+			}
 			// Load the marble
 			SurfaceCollection td = 
-				new SurfaceCollection(new Surface("../../Data/" + name + ".png"), new Size(50, 50));
+				new SurfaceCollection(new Surface(filepath + data_directory + name + ".png"), new Size(50, 50));
 			return td;
 		}
 		#endregion

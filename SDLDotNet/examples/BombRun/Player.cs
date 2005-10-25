@@ -45,8 +45,9 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		/// <param name="location"></param>
-		public Player(Point location) : 
-			base(new Surface("../../Data/Head.bmp"), location)
+		/// <param name="playerSurface"></param>
+		public Player(Surface playerSurface, Point location) : 
+			base(playerSurface, location)
 		{
 			jumpstart = location.Y;
 			base.Surface.TransparentColor = Color.White;

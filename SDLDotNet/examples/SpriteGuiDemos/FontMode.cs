@@ -21,6 +21,7 @@
 using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
+using System.IO;
 using System.Drawing;
 
 namespace SdlDotNet.Examples
@@ -31,22 +32,28 @@ namespace SdlDotNet.Examples
 	public class FontMode : DemoMode
 	{
 		private BoundedTextSprite moving;
+		string data_directory = @"Data/";
+		string filepath = @"../../";
 
 		/// <summary>
 		/// Constructs the internal sprites needed for our demo.
 		/// </summary>
 		public FontMode()
 		{
+			if (File.Exists(data_directory + "comic.ttf"))
+			{
+				filepath = "";
+			}
 			Console.WriteLine("Hello from FontMode");
 			// Create our fonts
 			SdlDotNet.Font f1 = 
-				new SdlDotNet.Font("../../Data/comicbd.ttf", 24);
+				new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 24);
 			SdlDotNet.Font f2 = 
-				new SdlDotNet.Font("../../Data/comicbd.ttf", 48);
+				new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 48);
 			SdlDotNet.Font f3 = 
-				new SdlDotNet.Font("../../Data/comicbd.ttf", 72);
+				new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 72);
 			SdlDotNet.Font f4 = 
-				new SdlDotNet.Font("../../Data/comicbd.ttf", 15);
+				new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 15);
 
 			// Create our text sprites
 			Color c2 = Color.FromArgb(255, 0, 123);

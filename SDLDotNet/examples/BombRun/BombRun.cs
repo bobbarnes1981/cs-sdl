@@ -17,6 +17,7 @@
  */
 
 using System;
+using System.IO;
 using System.Drawing;
 using System.Collections;
 
@@ -63,7 +64,7 @@ namespace SdlDotNet.Examples
 			temporary = screen.CreateCompatibleSurface(32, 32, true);
 			temporary.TransparentColor = Color.FromArgb(0, 255, 0, 255);
 
-			player = new Player(new Point(screen.Width / 2 - 16,
+			player = new Player(new Surface(filepath + data_directory + "Head.bmp"), new Point(screen.Width / 2 - 16,
 				screen.Height - 32));
 			players.Add(player);
 			players.EnableKeyboardEvent();
@@ -72,7 +73,7 @@ namespace SdlDotNet.Examples
 
 			for(int i = 0; i < 25; i++)
 			{
-				bombs.Add(new Bomb());
+				bombs.Add(new Bomb(new Surface(filepath + data_directory + "Bomb.bmp")));
 			}
 
 			master.Add(bombs);

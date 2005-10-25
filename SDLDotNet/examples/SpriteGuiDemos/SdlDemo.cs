@@ -20,7 +20,9 @@
 using SdlDotNet.Sprites;
 using SdlDotNet.Examples.GuiExample;
 using SdlDotNet;
+
 using System;
+using System.IO;
 using System.Collections;
 using System.Drawing;
 using System.Threading;
@@ -95,6 +97,8 @@ namespace SdlDotNet.Examples
 
 		private int [] fpsSpeeds = 
 			new int [] {1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
+		string data_directory = @"Data/";
+		string filepath = @"../../";
 		private void SetupGui()
 		{
 			// Set up the demo sprite containers
@@ -102,11 +106,15 @@ namespace SdlDotNet.Examples
 			master.EnableMouseMotionEvent();
 			master.EnableTickEvent();
 
+			if (File.Exists(data_directory + "comic.ttf"))
+			{
+				filepath = "";
+			}
 			// Set up the gui manager
 			gui = new GuiManager(master,
-				new SdlDotNet.Font("../../Data/comic.ttf", 12),
+				new SdlDotNet.Font(filepath + data_directory + "comic.ttf", 12),
 				Size);
-			gui.TitleFont = new SdlDotNet.Font("../../Data/comicbd.ttf", 12);
+			gui.TitleFont = new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 12);
 
 			// Set up the ticker
 			statusTicker = new GuiTicker(gui, new Vector(0, Video.Screen.Height - 20),100);

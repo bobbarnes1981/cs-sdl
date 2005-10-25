@@ -36,7 +36,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public Bomb() : base(new Surface("../../Data/Bomb.bmp"))
+		public Bomb(Surface bombSurface) : base(bombSurface)
 		{
 			base.Surface.TransparentColor = Color.White;
 			base.Size = this.Surface.Size;
