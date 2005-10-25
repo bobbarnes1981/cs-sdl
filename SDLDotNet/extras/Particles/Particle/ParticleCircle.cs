@@ -5,6 +5,7 @@ namespace SdlDotNet.Particles.Particle
 	/// <summary>
 	/// A particle represented by a circle.
 	/// </summary>
+	/// <remarks>Use ParticleCircleEmitter to emit this particle.</remarks>
 	public class ParticleCircle : ParticlePixel
 	{
 		/// <summary>

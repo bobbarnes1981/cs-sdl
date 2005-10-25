@@ -29,6 +29,17 @@ namespace SdlDotNet.Particles.Particle
 	/// An abstract class describing a base particle.
 	/// </summary>
 	/// <remarks>Some implementations of the particle class include ParticlePixel and ParticleSprite.</remarks>
+	/// <example>This is an example of implementing a new kind of particle.  It creates a ParticleBox that uses blue boxes to represent particles:
+	/// <code>
+	/// public class ParticleBox : BaseParticle
+	/// {
+	///		public override void Render(Surface destination)
+	///		{
+	///			destination.DrawBox(new Rectangle((int)this.X, (int)this.Y, 100,100), Color.Blue);
+	///		}
+	/// }
+	/// </code>
+	/// </example>
 	public abstract class BaseParticle
 	{
 		private int m_Life = -1;
@@ -41,6 +52,7 @@ namespace SdlDotNet.Particles.Particle
 			get
 			{
 				return m_Life;
+				Surface a = new Surface();
 			}
 			set
 			{

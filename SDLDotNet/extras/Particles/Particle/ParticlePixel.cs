@@ -25,6 +25,7 @@ namespace SdlDotNet.Particles.Particle
 	/// <summary>
 	/// A particle represented by a pixel on the destination surface.
 	/// </summary>
+	/// <remarks>Use ParticlePixelEmitter to emit this particle.</remarks>
 	public class ParticlePixel : BaseParticle
 	{
 		/// <summary>

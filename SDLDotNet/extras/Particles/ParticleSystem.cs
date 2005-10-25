@@ -29,6 +29,15 @@ namespace SdlDotNet.Particles
 	/// <summary>
 	/// A collection of particles manipulated by a number of common manipulators.
 	/// </summary>
+	/// <example>
+	/// The following example creates a particle system with an pixel emitter and a vortex manipulator.
+	/// <code>
+	/// ParticleSystem system = new ParticleSystem();
+	/// system.Add(new ParticleVortex(0.3f));
+	/// system.Add(new ParticlePixelEmitter(Color.Black, Color.White));
+	/// </code>
+	/// </example>
+	/// <remarks>Every tick you should call the Update method.  Every time you paint, you should call the Render function.</remarks>
 	public class ParticleSystem
 	{
 		private ParticleManipulatorCollection m_Manipulators;
