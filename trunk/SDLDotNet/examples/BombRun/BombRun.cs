@@ -42,16 +42,22 @@ namespace SdlDotNet.Examples
 		SpriteCollection bullets = new SpriteCollection();
 		SpriteCollection playerHit = new SpriteCollection();
 		SpriteCollection master = new SpriteCollection();
+		string data_directory = @"Data/";
+		string filepath = @"../../";
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public void Run()
 		{
+			if (File.Exists(data_directory + "Background1.png"))
+			{
+				filepath = "";
+			}
 			screen = Video.SetVideoModeWindow(640, 480, true);
-			tempSurface = new Surface("../../Data/Background1.png");
+			tempSurface = new Surface(filepath + data_directory + "Background1.png");
 			background = tempSurface.Convert();
-			tempSurface = new Surface("../../Data/Background2.png");
+			tempSurface = new Surface(filepath + data_directory + "Background2.png");
 			alternateBackground = tempSurface.Convert();
 
 			temporary = screen.CreateCompatibleSurface(32, 32, true);

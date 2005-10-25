@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
+using System.IO;
 using System.Drawing;
 using System.Collections;
 using SdlDotNet;
@@ -37,6 +38,8 @@ namespace SdlDotNet.Examples
 		ArrayList backSprites;
 		ArrayList frontSprites;
 		Sound sound;
+		string data_directory = @"Data/";
+		string filepath = @"../../";
 		/// <summary>
 		/// constructor
 		/// </summary>
@@ -54,9 +57,13 @@ namespace SdlDotNet.Examples
 			this.height = 440;
 			this.backSprites = new ArrayList();
 			this.frontSprites = new ArrayList();
+			if (File.Exists(data_directory + "boing.wav"))
+			{
+				filepath = "";
+			}
 			try
 			{
-				this.sound = Mixer.Sound("../../boing.wav");
+				this.sound = Mixer.Sound(filepath + data_directory + "boing.wav");
 			}
 			catch (SdlException)
 			{

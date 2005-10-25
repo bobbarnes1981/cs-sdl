@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.IO;
 using System.Drawing;
 
 using SdlDotNet;
@@ -43,7 +44,9 @@ namespace SdlDotNet.Examples
 		Surface background;
 		Surface tree;
 		Surface treeStretch;
-		string fontName = @"../../Data/FreeSans.ttf";
+		string data_directory = @"Data/";
+		string filepath = @"../../";
+		string fontName = "FreeSans.ttf";
 
 		/// <summary>
 		/// 
@@ -58,7 +61,7 @@ namespace SdlDotNet.Examples
 			{
 				snowflakes.Add(new Snowflake());
 			}
-			Font font = new Font(fontName, 24);
+			Font font = new Font(filepath + data_directory + fontName, 24);
 
 			textItems.Add(new TextItem(textArray[0], font, 25, 0));
 			for (int i = 1; i < textArray.Length; i++)
@@ -84,10 +87,14 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run()
 		{
+			if (File.Exists(data_directory + "background.png"))
+			{
+				filepath = "";
+			}
 			screen = Video.SetVideoModeWindow(640, 480, 16, true);
-			background = new Surface(@"../../Data/background.png");
+			background = new Surface(filepath + data_directory + "background.png");
 			background.TransparentColor = Color.Magenta;
-			tree = new Surface(@"../../Data/Tree.bmp");
+			tree = new Surface(filepath + data_directory + "Tree.bmp");
 			tree.TransparentColor = Color.Magenta;
 			treeStretch = tree.Stretch(new Size(100,100));
 			Video.WindowCaption = "SDL.NET - Snow Demo";

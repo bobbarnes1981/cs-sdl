@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
+using System.IO;
 using System.Collections;
 using System.Reflection;
 using System.Diagnostics;
@@ -60,6 +61,8 @@ namespace SdlDotNet.Examples
 		EventManager eventManager;
 		ArrayList players;
 		Map map;
+		string data_directory = @"Data/";
+		string filepath = @"../../";
 
 		/// <summary>
 		/// 
@@ -79,10 +82,14 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Start() 
 		{
+			if (File.Exists(data_directory + "fard-two.ogg"))
+			{
+				filepath = "";
+			}
 			GameView gameView = new GameView(eventManager);
 			gameView.CreateView();
 			map.Build();
-			Music music = new Music("../../fard-two.ogg");
+			Music music = new Music(filepath + data_directory + "fard-two.ogg");
 			Music.Volume = 127;
 			try
 			{
