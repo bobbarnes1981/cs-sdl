@@ -52,7 +52,7 @@ namespace SdlDotNet.Particles.Particle
 			get
 			{
 				return m_Life;
-				Surface a = new Surface();
+				//Surface a = new Surface();
 			}
 			set
 			{
