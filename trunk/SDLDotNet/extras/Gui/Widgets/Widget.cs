@@ -120,7 +120,7 @@ namespace SdlDotNet.Gui
 			}
 		}
 
-		private WidgetCollection m_Children;
+		private WidgetCollection m_Children = new WidgetCollection();
 
 		/// <summary>
 		/// 
