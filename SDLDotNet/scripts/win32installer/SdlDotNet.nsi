@@ -1,14 +1,15 @@
 !verbose 3
 
-!define PRODUCT_NAME "SdlDotNet"
-!define PRODUCT_VERSION "4.0.0alpha1"
+!define PRODUCT_NAME "SDL.NET"
+!define PRODUCT_VERSION "4.0.0beta1"
 !define PRODUCT_BUILD "1"
-!define PRODUCT_PUBLISHER "SdlDotNet"
+!define PRODUCT_PUBLISHER "SDL.NET"
+!define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNet"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNet"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
-!define PRODUCT_PATH "../../bin/${PRODUCT_PUBLISHER}-${PRODUCT_VERSION}-${PRODUCT_BUILD}"
+!define PRODUCT_PATH "../../bin/${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_BUILD}"
 
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP_NOSTRETCH
@@ -84,7 +85,7 @@ ReserveFile "runtime.ini"
 
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "..\..\bin\${PRODUCT_PUBLISHER}-${PRODUCT_VERSION}-${PRODUCT_BUILD}-Setup.exe"
+OutFile "..\..\bin\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_BUILD}-setup.exe"
 InstallDir "$PROGRAMFILES\SdlDotNet"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
@@ -130,6 +131,9 @@ Section "Source" SecSrc
   
   SetOutPath "$INSTDIR\extras"
   File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\extras\*.*
+  
+  SetOutPath "$INSTDIR\examples"
+  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\examples\*.*
 
   SetOutPath "$INSTDIR\scripts"
   File /r /x CVS ${PRODUCT_PATH}\scripts\*.*
@@ -150,9 +154,6 @@ Section "Runtime" SecRuntime
   SetOutPath "$INSTDIR\lib"
   File /r /x CVS ${PRODUCT_PATH}\lib\*.*
   
-  SetOutPath "$INSTDIR\extras"
-  File /r /x CVS ${PRODUCT_PATH}\extras\*.*
-
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
   
@@ -163,58 +164,45 @@ Section "Runtime" SecRuntime
   File /r /x CVS ${PRODUCT_PATH}\lib\win32deps\*.*
   
   !insertmacro MUI_INSTALLOPTIONS_READ $INI_VALUE "runtime.ini" "Field 2" "State"
-  StrCmp $INI_VALUE "1" "" +2
+  StrCmp $INI_VALUE "1" "" +10
   Push "SdlDotNet"
   Push $INSTDIR\bin\assemblies
   Call AddManagedDLL
+  Push "SdlDotNet.Windows"
+  Push $INSTDIR\bin\assemblies
+  Call AddManagedDLL
+  Push "SdlDotNet.Particles"
+  Push $INSTDIR\bin\assemblies
+  Call AddManagedDLL
+  
 SectionEnd
 
 Section "Examples" SecExamples
   SetOverwrite ifnewer
 
-  SetOutPath "$INSTDIR\examples"
-  File /r /x obj /x CVS ${PRODUCT_PATH}\examples\*.*
-
   CreateDirectory "$SMPROGRAMS\SdlDotNet"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Examples"
-  SetOutPath "$INSTDIR\examples\BombRun\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BombRun.lnk" "$INSTDIR\examples\BombRun\bin\Release\BombRun.exe"
-  SetOutPath "$INSTDIR\examples\BounceSprites\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BounceSprites.lnk" "$INSTDIR\examples\BounceSprites\bin\Release\BounceSprites.exe"
-  SetOutPath "$INSTDIR\examples\CDPlayer\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\examples\CDPlayer\bin\Release\CDPlayer.exe"
-  SetOutPath "$INSTDIR\examples\FontExample\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\FontExample.lnk" "$INSTDIR\examples\FontExample\bin\Release\FontExample.exe"
-  SetOutPath "$INSTDIR\examples\Gears\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Gears.lnk" "$INSTDIR\examples\Gears\bin\Release\Gears.exe"
-  SetOutPath "$INSTDIR\examples\ImageExample\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ImageExample.lnk" "$INSTDIR\examples\ImageExample\bin\Release\ImageExample.exe"
-  SetOutPath "$INSTDIR\examples\MoviePlayer\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\examples\MoviePlayer\bin\Release\MoviePlayer.exe"
-  SetOutPath "$INSTDIR\examples\ParticleEngine\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleEngine.lnk" "$INSTDIR\examples\ParticleEngine\bin\Release\ParticleEngine.exe"
-  SetOutPath "$INSTDIR\examples\PrimitivesExample\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\PrimitivesExample.lnk" "$INSTDIR\examples\PrimitivesExample\bin\Release\PrimitivesExample.exe"
-  SetOutPath "$INSTDIR\examples\Rectangles\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Rectangles.lnk" "$INSTDIR\examples\Rectangles\bin\Release\Rectangles.exe"
-  SetOutPath "$INSTDIR\examples\SimpleExample\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SimpleExample.lnk" "$INSTDIR\examples\SimpleExample\bin\Release\SimpleExample.exe"
-  SetOutPath "$INSTDIR\examples\SimpleGame\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SimpleGame.lnk" "$INSTDIR\examples\SimpleGame\bin\Release\SimpleGame.exe"
-  SetOutPath "$INSTDIR\examples\SnowDemo\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SnowDemo.lnk" "$INSTDIR\examples\SnowDemo\bin\Release\SnowDemo.exe"
-  SetOutPath "$INSTDIR\examples\SpriteGuiDemos\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SpriteGuiDemos.lnk" "$INSTDIR\examples\SpriteGuiDemos\bin\Release\SpriteGuiDemos.exe"
-  SetOutPath "$INSTDIR\examples\Triad\bin\Release"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Triad.lnk" "$INSTDIR\examples\Triad\bin\Release\Triad.exe"
+  SetOutPath "$INSTDIR\bin\examples"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\AudioExample.lnk" "$INSTDIR\bin\examples\AudioExample.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BombRun.lnk" "$INSTDIR\bin\examples\BombRun.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BounceSprites.lnk" "$INSTDIR\bin\examples\BounceSprites.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\bin\examples\CDPlayer.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Gears.lnk" "$INSTDIR\bin\examples\Gears.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\bin\examples\MoviePlayer.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleExample.lnk" "$INSTDIR\bin\examples\ParticlesExample.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Rectangles.lnk" "$INSTDIR\bin\examples\Rectangles.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SimpleGame.lnk" "$INSTDIR\bin\examples\SimpleGame.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SnowDemo.lnk" "$INSTDIR\bin\examples\SnowDemo.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SpriteGuiDemos.lnk" "$INSTDIR\bin\examples\SpriteGuiDemos.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Triad.lnk" "$INSTDIR\bin\examples\Triad.exe"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Help File.lnk" "$INSTDIR\doc\chm\SdlDotNet.chm"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.chm"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Windows Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Windows.chm"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Particles.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\HTML Help.lnk" "$INSTDIR\doc\html\index.html"
   
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials\BounceSprites.lnk" "$INSTDIR\doc\tutorials\BounceSprites.html"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials\ParticleEngine.lnk" "$INSTDIR\doc\tutorials\ParticleEngine.html"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials\SimpleExample.lnk" "$INSTDIR\doc\tutorials\SimpleExample.pdf"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
