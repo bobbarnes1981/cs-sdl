@@ -159,6 +159,9 @@
 
     <target name="package" depends="buildrelease, doc, copyfiles, zip" description="Package">
     </target>
+    
+    <target name="packagedebug" depends="clean, examples, copyfiles, zip" description="Package Debug">
+    </target>
 
     <!-- copy project files -->
     <target name="copyfiles">

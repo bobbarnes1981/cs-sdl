@@ -19,6 +19,7 @@
 
 using System;
 using System.Drawing;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Tao.Sdl;
 
@@ -470,6 +471,27 @@ namespace SdlDotNet
 			}
 			Sdl.SDL_WM_SetIcon(icon.Handle, null);
 		}
+
+		/// <summary>
+		/// sets the icon for the current window
+		/// </summary>
+		/// <param name="icon">Icon to use</param>
+		public static void WindowIcon(Icon icon)
+		{
+			if (icon == null)
+			{
+				throw new ArgumentNullException("icon");
+			}
+			Bitmap bitmap = icon.ToBitmap();
+			Surface surface = new Surface(bitmap);
+			surface.TransparentColor = Color.Empty;
+			WindowIcon(surface);
+		}
+
+//		public static void WindowIcon()
+//		{
+//			Assembly a = Assembly.GetExecutingAssembly
+//		}
 
 		/// <summary>
 		/// Iconifies (minimizes) the current window
