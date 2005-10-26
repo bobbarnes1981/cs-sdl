@@ -111,8 +111,6 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		Hashtable bulletCollisions = new Hashtable();
-		IDictionaryEnumerator myEnumerator;
 		Rectangle src;
 		Rectangle dest;
 
@@ -132,27 +130,6 @@ namespace SdlDotNet.Examples
 			}
 
 			screen.Blit(bullets);
-
-			bulletCollisions = bullets.IntersectsWith(bombs);
-			if (bulletCollisions.Count > 0)
-			{
-				Console.WriteLine("Bullet hits: " + bulletCollisions.Count);
-				myEnumerator = bulletCollisions.GetEnumerator();
-				while ( myEnumerator.MoveNext() )
-				{
-					Console.WriteLine("\t{0}:\t{1}", 
-						myEnumerator.Key, 
-						myEnumerator.Value);
-				}
-				Console.WriteLine();
-
-			}
-			playerHit = bombs.IntersectsWith(player);
-			if (playerHit.Count > 0)
-			{
-				Console.WriteLine("I'm hit!");
-			}
-
 			screen.Flip();
 		}
 

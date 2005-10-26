@@ -275,7 +275,7 @@ namespace SdlDotNet.Sprites
 		}
 		#endregion
 
- 		#region Events
+		#region Events
 
 		/// <summary>
 		/// Enables Event for SpriteCollection
@@ -900,17 +900,17 @@ namespace SdlDotNet.Sprites
 			for (int i = 0; i < this.Count; i++)
 			{
 				for (int j = 0; j < spriteCollection.Count; j++)
-				if (this[i].IntersectsWith(spriteCollection[j]))
-				{
-					if (intersection.Contains(this[i]))
+					if (this[i].IntersectsWith(spriteCollection[j]))
 					{
-						((SpriteCollection)intersection[this[i]]).Add(spriteCollection[j]);
+						if (intersection.Contains(this[i]))
+						{
+							((SpriteCollection)intersection[this[i]]).Add(spriteCollection[j]);
+						}
+						else
+						{
+							intersection.Add(this[i], spriteCollection[j]);
+						}
 					}
-					else
-					{
-						intersection.Add(this[i], spriteCollection[j]);
-					}
-				}
 			}
 			return intersection;
 		}

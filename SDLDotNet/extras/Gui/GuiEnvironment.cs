@@ -17,7 +17,7 @@ namespace SdlDotNet.Gui
 		{
 		}
 
-		private WidgetCollection m_Widgets;
+		private WidgetCollection m_Widgets = new WidgetCollection();
 		/// <summary>
 		/// 
 		/// </summary>
