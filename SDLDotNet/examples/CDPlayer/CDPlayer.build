@@ -24,7 +24,7 @@
 		<include name="${project.name}.snk"/>
 	    </fileset>
 	</copy>
-	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" >
+	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" win32icon="App.ico">
 	    <sources failonempty="true">
 		<include name="*.cs" />
 	    </sources>
