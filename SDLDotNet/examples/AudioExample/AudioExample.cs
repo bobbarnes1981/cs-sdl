@@ -35,22 +35,18 @@ namespace SdlDotNet.Examples
 	/// A simple SDL.NET example which demonstrates audio in SDL.NET.
 	/// Click plays sound, space changes music and the arrow keys change volume.
 	/// </summary>
-	public class AudioExample : IDisposable
+	public class AudioExample
 	{ 
-		private const int width = 640; 
-		private const int height = 480;
+		private const int width = 400; 
+		private const int height = 100;
 		private Surface screen; 
 		string data_directory = @"Data/";
 		string filepath = @"../../";
-
-		// Load the music and sound.
-		private Music music1;
-		private Music music2;
-		private Sound boing;
-
-		// TODO: Demonstrate use of MusicCollection and SoundCollection.
-
 		private Sprites.TextSprite textDisplay;
+
+		// Create the music and sound variables.
+		private MusicDictionary music = new MusicDictionary();
+		private Sound boing; // There is also a SoundDictionary class.
 
 		/// <summary>
 		/// 
@@ -65,8 +61,6 @@ namespace SdlDotNet.Examples
 			Events.MouseButtonDown += 
 				new MouseButtonEventHandler(Events_MouseButtonDown);
 
-			Events.ChannelFinished += 
-				new ChannelFinishedEventHandler(Events_ChannelFinished);
 			Events.MusicFinished += 
 				new MusicFinishedEventHandler(Events_MusicFinished);
 
@@ -74,32 +68,25 @@ namespace SdlDotNet.Examples
 			{
 				filepath = "";
 			}
-			music1 = new Music(filepath + data_directory + "mason2.mid");
-			music2 = new Music(filepath + data_directory + "fard-two.ogg");
+
+			// Load the music and sounds.
+			music["mason2"] = new Music(filepath + data_directory + "mason2.mid");
+			music["fard-two"] = new Music(filepath + data_directory + "fard-two.ogg");
 			boing = new Sound(filepath + data_directory + "boing.wav");
+
 			textDisplay = new TextSprite(" ", new Font(filepath + data_directory + "FreeSans.ttf", 20), Color.Red);
+
 			// Start up SDL
 			screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowCaption = "SDL.NET - AudioExample";
 
 			// Play the music and setup the queues.
-			music1.Play();
+			music["mason2"].Play();
 
-			music1.QueuedMusic = music2; // Play music2 when music1 finishes.
-			music2.QueuedMusic = music1; // Play music1 when music2 finishes.
-
-			Music.EnableMusicFinishedCallback(); // Enable queueing
-
-			//				Sound queuedSound = Mixer.Sound(filepath + "boing.wav");
-			//				//Sound sound2 = Mixer.Sound(filepath + "test.wav");
-			//				Channel channel = new Channel(0);
-			//				//Channel channel2 = new Channel(1);
-			//				channel.EnableChannelFinishedCallback();
-			//				//channel2.EnableChannelFinishedCallback();
-			//				//channel.QueuedSound = queuedSound;
-			//				channel.Volume = 32;
-			//				channel.Play(sound);
-			//				//channel2.Play(sound);
+			// Set up the music queue and start it
+			music["mason2"].QueuedMusic = music["fard-two"];
+			music["fard-two"].QueuedMusic = music["mason2"];
+			Music.EnableMusicFinishedCallback();
           
 			// Begin the SDL ticker
 			Events.Fps = 50;
@@ -121,7 +108,7 @@ namespace SdlDotNet.Examples
 			
 			screen.Blit(textDisplay);
 
-			screen.Flip(); 
+			screen.Flip();
 		} 
 
 		/// <summary>
@@ -137,24 +124,46 @@ namespace SdlDotNet.Examples
 		{ 
 			switch(e.Key)
 			{ 
-				case Key.Escape:
-					Events.QuitApplication(); 
-					break; 
 				case Key.Space: 
-
-					// Switch the music 
-					Music.Fadeout(1500);
+					try
+					{
+						// Switch the music 
+						Music.Fadeout(1500);
+						textDisplay.Text = "Music is fading";
  
-					// The next music sample plays because queuing is enabled.
+						// The next music sample plays because queuing is enabled.
+					}
+					catch
+					{
+						textDisplay.Text = "Music is already fading";
+					}
 
 					break; 
 
 				case Key.UpArrow: 
-					Music.Volume += 20; 
+					// Increase the music volume.
+					Music.Volume += 10; 
+					textDisplay.Text = "Music Volume: " + Music.Volume;
 					break; 
 				case Key.DownArrow: 
-					Music.Volume -= 20;
+					// Decrease the music volume.
+					Music.Volume -= 10;
+					textDisplay.Text = "Music Volume: " + Music.Volume;
 					break;
+				case Key.RightArrow:
+					// Play the sound on the right
+					boing.Play().SetPanning(50, 205);
+					textDisplay.Text = "Sound played on Right.";
+					break;
+				case Key.LeftArrow:
+					// Play the sound on the left
+					boing.Play().SetPanning(205, 50);
+					textDisplay.Text = "Sound played on Left.";
+					break;
+				case Key.Escape:
+					// Quit the example
+					Events.QuitApplication(); 
+					break; 
 			} 
 		} 
 
@@ -174,48 +183,11 @@ namespace SdlDotNet.Examples
 					break;
 			} 
 		}
-
-		private void Events_ChannelFinished(object sender, ChannelFinishedEventArgs e)
-		{
-			Console.WriteLine("Channel: " + e.Channel.ToString(CultureInfo.CurrentCulture) + " Finished");
-		}
-
 		private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
+			// Switch the music....
 			textDisplay.Text = "Music switched...";
 			Console.WriteLine("Music Finished");
 		}
-		#region IDisposable Members
-
-		private bool disposed;
-
-		
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		/// <remarks>Destroys managed and unmanaged objects</remarks>
-		public void Dispose() 
-		{
-			Dispose(true);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					textDisplay.Dispose();
-					boing.Dispose();
-					music2.Dispose();
-					music1.Dispose();
-				}
-				this.disposed = true;
-			}
-		}
-		#endregion
 	} 
 } 
