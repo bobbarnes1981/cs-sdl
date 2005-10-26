@@ -45,8 +45,8 @@ namespace SdlDotNet.Examples
 
 		private void Reset()
 		{
-			this.X=random.Next(Video.Screen.Width - this.Surface.Width);
-			this.Y=this.Surface.Height - random.Next(Video.Screen.Height);
+			this.X = random.Next(Video.Screen.Width - this.Surface.Width);
+			this.Y = this.Surface.Height - random.Next(Video.Screen.Height);
 			this.speed = 
 				random.Next((int)BombRun.BombSpeed,
 				(int)BombRun.BombSpeed * 2);
