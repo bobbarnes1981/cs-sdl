@@ -41,7 +41,6 @@ namespace SdlDotNet.Examples
 		SpriteCollection bombs = new SpriteCollection();
 		SpriteCollection players = new SpriteCollection();
 		SpriteCollection bullets = new SpriteCollection();
-		SpriteCollection playerHit = new SpriteCollection();
 		SpriteCollection master = new SpriteCollection();
 		string data_directory = @"Data/";
 		string filepath = @"../../";
