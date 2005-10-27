@@ -77,7 +77,7 @@ Coding Style
 	Follow .NET naming conventions. **DONE**
 	CLS compliance **Done**
 
-Tutorials
+Demos
 	To start read the install file and install SdlDotNet.dll and Tao.Sdl.dll.
 	The best examples to start with are probably the Rectangles. It show the basics of how the Video, Surface and Event classes works.
 	The BounceSprites Example show basic animation.
@@ -90,4 +90,6 @@ Tutorials
 	The SpriteGuiDemo shows several sprite examples and uses a simple GUI.
 	The Triad example is a full Tetris-like game.
 	The ParticleSExample show a fireworks type display that uses the SdldotNet.Particles engine.
-	
+
+Tutorials can be found at:
+http://cs-sdl.sourceforge.net/index.php/Category:Tutorials
