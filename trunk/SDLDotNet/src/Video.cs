@@ -488,10 +488,28 @@ namespace SdlDotNet
 			WindowIcon(surface);
 		}
 
-//		public static void WindowIcon()
-//		{
-//			Assembly a = Assembly.GetExecutingAssembly
-//		}
+		/// <summary>
+		/// Sets the icon for the current window. 
+		/// This method assumes there is an embedded 
+		/// resource named &quot;App.ico&quot;.
+		/// </summary>
+		public static void WindowIcon()
+		{
+			Assembly callingAssembly = Assembly.GetCallingAssembly();
+			string iconName = "";
+			foreach (string s in Assembly.GetCallingAssembly().GetManifestResourceNames())
+			{
+				if (s.EndsWith("App.ico"))
+				{
+					iconName = s;
+					break;
+				}
+			}
+			if (iconName.Length > 0)
+			{
+				Video.WindowIcon(new Icon(callingAssembly.GetManifestResourceStream(iconName)));
+			}
+		}
 
 		/// <summary>
 		/// Iconifies (minimizes) the current window

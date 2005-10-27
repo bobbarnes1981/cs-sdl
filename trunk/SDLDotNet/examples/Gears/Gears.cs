@@ -320,6 +320,7 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.KeyboardDown);
 
+			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Gears";
 
 			init ();

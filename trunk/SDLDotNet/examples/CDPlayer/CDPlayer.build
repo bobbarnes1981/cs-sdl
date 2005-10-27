@@ -37,6 +37,7 @@
 	    </references>
 	    <resources>
 		<include name="*.resx"/>
+		<include name="App.ico"/>
 	    </resources>
 	</csc>
     </target>

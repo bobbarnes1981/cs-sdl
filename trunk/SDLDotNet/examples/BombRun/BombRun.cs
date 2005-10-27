@@ -79,6 +79,7 @@ namespace SdlDotNet.Examples
 			master.Add(players);
 
 			Mouse.ShowCursor = false;
+			Video.WindowIcon();
 			Video.WindowCaption =
 				"SDL.NET - Bomb Run";
 			Events.KeyboardDown +=
