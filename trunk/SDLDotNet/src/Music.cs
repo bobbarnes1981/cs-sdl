@@ -313,12 +313,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Fades out music
 		/// </summary>
-		/// <param name="ms">
+		/// <param name="milliseconds">
 		/// The number of milliseconds to fade out for
 		/// </param>
-		public static void Fadeout(int ms) 
+		public static void Fadeout(int milliseconds) 
 		{
-			if (SdlMixer.Mix_FadeOutMusic(ms) != 1)
+			if (SdlMixer.Mix_FadeOutMusic(milliseconds) != 1)
 			{
 				throw SdlException.Generate();
 			}

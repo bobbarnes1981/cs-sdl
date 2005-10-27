@@ -2,25 +2,38 @@
 David Hudson xx xxx 2005
 * Fixed GAC installation and uninstall issues.
 * Fixed Surface.Blit(Sprite). It now blits the sprite to the right location. Thanks to Ekim_Gram for the bug report.
-* SDL.NET now builds on Linux using NAnt. The build generates Web docs, but not chm help files.
-* The CDPlayer demo does not work on Linux.
-* Updated the Mono Config file. An Ubuntu 5.04 config file was added as well.
+* SDL.NET now builds on Linux and OSX using NAnt. The build generates Web docs, but not chm help files.
+* Updated the Mono Config file. An Ubuntu 5.10 config file was added as well.
 * Added MacOS X config file.
 * Merged TiledSurfaceCollection into SurfaceCollection. Added a new constructor to SurfaceCollection that loads one row of a graphic. (Rob Loach)
-* Added SoundCollection class.
+* Added SoundDictionary class.
 * Simplified and removed some of the examples.
+* Fixed several bugs in TextSprite
 * Added Audio Example. (Rob Loach)
-* Added MusicCollection class.
-* Improved Sprite collision detection.
+* Added MusicDictionary class.
+* Improved Sprite collision detection. (Rob Loach and Jendave)
 * Re-worked the Event class. It now provides a processing loop.
-* Added KeyboardState Class.
+* Added KeyboardState Class. (Rob Loach)
 * Fixed several bugs in the TextSprite class
-* Updated Mouse class to use more properties.
+* Updated Mouse class to use more properties. Made Mouse class a singleton.
 * Updated ColorKey and Alpha in Surface class to use properties.
 * Audio system was re-worked by Rob Loach to make the API more intuitive.
-* New website using a Wiki.
+* New website using MediaWiki.
+* Upgraded website to use MySql 4.1
 * Removed SpriteSingleCollection class.
 * Re-worked AnimationSprite and added Animation and AnimationCollection classes.
+* New SdlDotNet.Particles assembly contains the SdlDotNet Particle system.
+* Added ParticleExample
+* New SdlDotNet.Windows assembly contains a SurfaceControl class that displays a Surface on a Winform.
+* CDPlayer includes and SurfaceControl example.
+* Fixed bug with MouseMotion events when the button is pressed.
+* Surface can now be converted to a Bitmap.
+* Examples now use the new logo.
+* Ran all assemblies and examples through FXCop
+* Fixed missing button property with MouseMotionEventArgs.
+* All primitives implement IPrimtives interface and include a Center property.
+* Dispose has works better for many classes.
+* Removed FontSystem. The Font class now initializes the SDL_ttf subsystem properly.
 
 3.1.2
 David Hudson 18 July 2005
