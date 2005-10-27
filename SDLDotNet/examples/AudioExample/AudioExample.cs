@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 	/// A simple SDL.NET example which demonstrates audio in SDL.NET.
 	/// Click plays sound, space changes music and the arrow keys change volume.
 	/// </summary>
-	public class AudioExample
+	public class AudioExample : IDisposable
 	{ 
 		private const int width = 400; 
 		private const int height = 100;
@@ -136,8 +136,9 @@ namespace SdlDotNet.Examples
  
 						// The next music sample plays because queuing is enabled.
 					}
-					catch
+					catch (SdlException exception)
 					{
+						exception.ToString();
 						textDisplay.Text = "Music is already fading";
 					}
 
@@ -192,5 +193,36 @@ namespace SdlDotNet.Examples
 			textDisplay.Text = "Music switched...";
 			Console.WriteLine("Music Finished");
 		}
+
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks>Destroys managed and unmanaged objects</remarks>
+		public void Dispose() 
+		{
+			Dispose(true);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					textDisplay.Dispose();
+					boing.Dispose();
+				}
+				this.disposed = true;
+			}
+		}
+
+		#endregion
 	} 
 } 
