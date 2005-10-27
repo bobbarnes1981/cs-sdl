@@ -2,6 +2,9 @@ Project Name: SDL.NET
 Project Description: SDL.NET is a set of object-oriented .NET bindings for the SDL gaming library (http://libsdl.org) - a cross-platform multimedia library designed to provide level access to audio, keyboard, mouse, joystick, 3D hardware via OpenGL, and 2D video framebuffer.
 
 Home Page: http://cs-sdl.sourceforge.net
+
+Please go to the homepage to get the latest information about SDL.NET.
+
 Current maintainer: David Hudson (jendave@yahoo.com)
 
 Assembly:
@@ -18,6 +21,7 @@ Zip file contains:
 	/doc - HTML, CHM and tutorial docs.
 	/lib - library dependencies. Please put these libs in your path.
 	/examples - demo apps for the library
+	/extras - Extra libraries based on SDL.NET
 	/src - source
 	/scripts - build scripts
 	/tools - utils
@@ -35,7 +39,6 @@ Development Environment:
 		Visual Studio 2003
 		SharpDevelop
 		VIM
-		Use dnpb for creating VS and SharpDevelop project files
 		
 	Tools:
 		NAnt 0.85 RC3
@@ -43,9 +46,6 @@ Development Environment:
 		dnpb 1.1.0
 		
 		Notes: NAnt will be the primary way to create release builds.
-		Using Nunit with GUI oriented programs is problematic, 
-		but I hope to use it as much as possible to reduce the ad hoc tests 
-		I do on the code.
 
 	Dependencies (make sure these are in your path):
 		C libraries
@@ -66,7 +66,7 @@ Development Environment:
 		SDL.NET will focus on the higher-level features.
 
 Approach:
-	I plan to model the API somewhat after pygame. Since pygame is a successful object-oriented wrapper around SDL, 
+	The API is modeled somewhat after pygame. Since pygame is a successful object-oriented wrapper around SDL, 
 	it makes sense to look to pygame for inspiration. Obviously there will be areas 
 	where they will differ. 
 	There is also a Java-based set of bindings (SDLjava).  
@@ -78,13 +78,9 @@ Coding Style
 	CLS compliance **Done**
 
 Tutorials
-	Two tutorials have finally been added. Check out the /docs/tutorials directory.
-	The names of the tutorials correspond to projects in the /examples directory.
-	
 	To start read the install file and install SdlDotNet.dll and Tao.Sdl.dll.
 	The best examples to start with are probably the Rectangles. It show the basics of how the Video, Surface and Event classes works.
 	The BounceSprites Example show basic animation.
-	The DelegateExample show how the ChannelFinished and Musicfinished events/delegates work.
 	The BombRun, SnowDemo show some more animation.
 	The Gears demo shows how SDL.NET works with OpenGL.
 	The MoviePlayer plays a short MPEG-1 file.
@@ -93,3 +89,5 @@ Tutorials
 	The SimpleGame is more interesting from a code standpoint because it is strict Model-View-Controller design pattern. It is based on a Pygame tutorial.
 	The SpriteGuiDemo shows several sprite examples and uses a simple GUI.
 	The Triad example is a full Tetris-like game.
+	The ParticleSExample show a fireworks type display that uses the SdldotNet.Particles engine.
+	

@@ -1,5 +1,8 @@
+The latest changelog can be foudn at:
+http://cs-sdl.sourceforge.net/index.php/Changelog
+
 4.0.0
-David Hudson xx xxx 2005
+David Hudson 27 Oct 2005
 * Fixed GAC installation and uninstall issues.
 * Fixed Surface.Blit(Sprite). It now blits the sprite to the right location. Thanks to Ekim_Gram for the bug report.
 * SDL.NET now builds on Linux and OSX using NAnt. The build generates Web docs, but not chm help files.
@@ -28,12 +31,14 @@ David Hudson xx xxx 2005
 * CDPlayer includes and SurfaceControl example.
 * Fixed bug with MouseMotion events when the button is pressed.
 * Surface can now be converted to a Bitmap.
+* New Logo (Rob Loach)
 * Examples now use the new logo.
 * Ran all assemblies and examples through FXCop
 * Fixed missing button property with MouseMotionEventArgs.
 * All primitives implement IPrimtives interface and include a Center property.
 * Dispose has works better for many classes.
 * Removed FontSystem. The Font class now initializes the SDL_ttf subsystem properly.
+* Many improvements to the NAnt build process.
 
 3.1.2
 David Hudson 18 July 2005

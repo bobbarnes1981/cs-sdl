@@ -1,9 +1,11 @@
+The full ToDo list can be found at:
+http://cs-sdl.sourceforge.net/index.php/Todo
+
 Future changes (as of Oct 2005):
 
 * Add more docs and tutorials.
 * Create installer for rpms/ebuild/debs/etc... for Linux.
-* Work on a Mac version.
-* Create custom WinForms control for Surface.
-* Work on SDL.NET Renderer for CEGUI.
+* Improve the OSX version.
+* Improve SDL.NET Renderer for CEGUI.
 * TileMapper for SDL.NET
 * Add Side Scroller Drawing methods.
