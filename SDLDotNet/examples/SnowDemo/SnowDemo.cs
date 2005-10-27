@@ -97,6 +97,7 @@ namespace SdlDotNet.Examples
 			tree = new Surface(filepath + data_directory + "Tree.bmp");
 			tree.TransparentColor = Color.Magenta;
 			treeStretch = tree.Stretch(new Size(100,100));
+			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Snow Demo";
 			Initialize(250);
 			Events.KeyboardDown +=

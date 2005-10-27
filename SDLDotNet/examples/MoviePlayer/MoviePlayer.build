@@ -23,6 +23,9 @@
 	    <sources failonempty="true">
 		<include name="*.cs" />
 	    </sources>
+	    <resources>
+		<include name="App.ico"/>
+	    </resources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>

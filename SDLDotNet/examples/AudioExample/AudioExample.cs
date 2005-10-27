@@ -18,6 +18,8 @@
  */
 
 using System;
+using System.Resources;
+using System.Reflection;
 using System.IO;
 using System.Drawing;
 using System.Globalization;
@@ -78,6 +80,7 @@ namespace SdlDotNet.Examples
 
 			// Start up SDL
 			screen = Video.SetVideoModeWindow(width, height); 
+			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - AudioExample";
 
 			// Play the music and setup the queues.

@@ -66,13 +66,8 @@ namespace SdlDotNet.Examples
 			int width = 800;
 			int height = 600;
 
+			Video.WindowIcon();
 			screen = Video.SetVideoModeWindow(width, height, true);
-//			cursor = 
-//				new Surface(@"../../Data/cursor.png");
-//			cursor.TransparentColor = Color.Black;
-
-//			MouseMotionHandler = new MouseMotionEventHandler(this.MouseMotion);
-//			Events.MouseMotion += MouseMotionHandler;
 
 			// Set up the master sprite container
 			SetupGui();
@@ -328,14 +323,6 @@ namespace SdlDotNet.Examples
 		{
 			Events.QuitApplication();
 		}
-
-//		private void MouseMotion(
-//			object sender, 
-//			MouseMotionEventArgs e)
-//		{
-//			position.X = e.X;
-//			position.Y = e.Y;
-//		}
 
 		/// <summary>
 		/// 

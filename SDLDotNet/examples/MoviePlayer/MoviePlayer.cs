@@ -63,6 +63,7 @@ namespace SdlDotNet.Examples
 
 			Mixer.Initialize();
 			Surface screen = Video.SetVideoModeWindow(width, height, true); 
+			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Movie Player";
 			Mixer.Close();
 			Console.WriteLine(filepath + data_directory + "test.mpg");
