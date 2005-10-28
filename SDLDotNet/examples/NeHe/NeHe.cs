@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 	{    
 		public static void Main()
 		{
-			NeHe010 t = new NeHe010();
+			NeHe011 t = new NeHe011();
 			t.Run();
 		}
 	}
