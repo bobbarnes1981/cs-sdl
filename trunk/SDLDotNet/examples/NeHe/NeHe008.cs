@@ -38,17 +38,9 @@ namespace SdlDotNet.Examples
 {
 	class NeHe008 : NeHe007
 	{    
-		private float xspeed;                                            
-		// X Rotation Speed
-		private float yspeed;                                            
-		// Y Rotation Speed
-		private float z = -5;
-		private int filter;  
         private bool blend; 
         private bool bp;                           
-		// Which Filter To Use
-		private int[] texture = new int[3];                              
-		// Storage For 3 Textures
+		// Which Filter To Use                     
 
 		public NeHe008()
 		{
@@ -64,8 +56,6 @@ namespace SdlDotNet.Examples
 			// Full Brightness.  50% Alpha
 			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);                         
 			// Set The Blending Function For Translucency
-
-
 		}
 
 		private void KeyDown(object sender, KeyboardEventArgs e)
@@ -110,10 +100,10 @@ namespace SdlDotNet.Examples
 					if (!this.Fp)
 					{
 						this.Fp = true;
-						filter += 1;
-						if(filter > 2) 
+						this.Filter += 1;
+						if(this.Filter > 2) 
 						{
-							filter = 0;
+							this.Filter = 0;
 						}
 					}
 					else
@@ -122,22 +112,22 @@ namespace SdlDotNet.Examples
 					}
 					break;
 				case Key.PageUp:
-					z -= 0.02f;
+					this.Z -= 0.02f;
 					break;
 				case Key.PageDown:
-					z += 0.02f;
+					this.Z += 0.02f;
 					break;
 				case Key.UpArrow: 
-					xspeed -= 0.01f;
+					this.XSpeed -= 0.01f;
 					break;
 				case Key.DownArrow:
-					xspeed += 0.01f;
+					this.XSpeed += 0.01f;
 					break;
 				case Key.RightArrow:
-					yspeed += 0.01f;
+					this.YSpeed += 0.01f;
 					break;
 				case Key.LeftArrow:
-					yspeed -= 0.01f;
+					this.YSpeed -= 0.01f;
 					break;
 				case Key.B:
 					// Blending Code Starts Here
@@ -166,6 +156,28 @@ namespace SdlDotNet.Examples
 					}
 					// Blending Code Ends Here
 					break;
+			}
+		}
+		protected bool Blend
+		{
+			get
+			{
+				return blend;
+			}
+			set
+			{
+				blend = value;
+			}
+		}
+		protected bool Bp
+		{
+			get
+			{
+				return bp;
+			}
+			set
+			{
+				bp = value;
 			}
 		}
 

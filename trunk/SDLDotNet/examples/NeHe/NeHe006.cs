@@ -211,7 +211,7 @@ namespace SdlDotNet.Examples
 				}
 			}                                                     
 		}
-		#endregion bool LoadGLTextures()
+		#endregion void LoadGLTextures()
 
 	}
 }
