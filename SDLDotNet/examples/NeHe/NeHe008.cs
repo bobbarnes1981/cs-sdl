@@ -38,12 +38,6 @@ namespace SdlDotNet.Examples
 {
 	class NeHe008 : NeHe007
 	{    
-		private float xrot;                                              
-		// X Rotation ( NEW )
-		private float yrot;                                              
-		// Y Rotation ( NEW )
-		private float zrot;                                              
-		// Z Rotation ( NEW )
 		private float xspeed;                                            
 		// X Rotation Speed
 		private float yspeed;                                            
