@@ -36,14 +36,20 @@ namespace SdlDotNet.Examples
 {
 	class NeHe011 : NeHeBase
 	{
-		public float[][][] points;				// The Array For The Points On The Grid Of Our "Wave"
-		public int wiggle_count = 0;			// Counter Used To Control How Fast Flag Waves
+		public float[][][] points;				
+		// The Array For The Points On The Grid Of Our "Wave"
+		public int wiggle_count = 0;			
+		// Counter Used To Control How Fast Flag Waves
 
-		public float xrot = 0.0f;				// X Rotation ( NEW )
-		public float yrot = 0.0f;				// Y Rotation ( NEW )
-		public float zrot = 0.0f;				// Z Rotation ( NEW )
+		public float xrot = 0.0f;				
+		// X Rotation ( NEW )
+		public float yrot = 0.0f;				
+		// Y Rotation ( NEW )
+		public float zrot = 0.0f;				
+		// Z Rotation ( NEW )
 		
-		public uint[] texture = new uint[1];	// Texture array
+		public uint[] texture = new uint[1];	
+		// Texture array
 
 		public NeHe011()
 		{
@@ -63,15 +69,23 @@ namespace SdlDotNet.Examples
 			LoadTextures();
 
 			Gl.glEnable(Gl.GL_TEXTURE_2D);									// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);									// Enable Smooth Shading
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);						// Black Background
-			Gl.glClearDepth(1.0f);											// Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);									// Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);									// The Type Of Depth Testing To Do
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);		// Really Nice Perspective Calculations
+			Gl.glShadeModel(Gl.GL_SMOOTH);									
+			// Enable Smooth Shading
+			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);						
+			// Black Background
+			Gl.glClearDepth(1.0f);											
+			// Depth Buffer Setup
+			Gl.glEnable(Gl.GL_DEPTH_TEST);									
+			// Enables Depth Testing
+			Gl.glDepthFunc(Gl.GL_LEQUAL);									
+			// The Type Of Depth Testing To Do
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);		
+			// Really Nice Perspective Calculations
 
-			Gl.glPolygonMode(Gl.GL_BACK, Gl.GL_FILL);						// Back Face Is Solid
-			Gl.glPolygonMode(Gl.GL_FRONT, Gl.GL_LINE);						// Front Face Is Made Of Lines
+			Gl.glPolygonMode(Gl.GL_BACK, Gl.GL_FILL);						
+			// Back Face Is Solid
+			Gl.glPolygonMode(Gl.GL_FRONT, Gl.GL_LINE);						
+			// Front Face Is Made Of Lines
 			
 			this.points = new float[45][][];
 			for (int i=0; i < this.points.Length; i++)
@@ -162,8 +176,10 @@ namespace SdlDotNet.Examples
 					Gl.glVertex3f(this.points[i+1][j][0], this.points[i+1][j][1], this.points[i+1][j][2]);
 				}
 			}
-			Gl.glEnd();				// Done Drawing Our Quads
-			Video.GLSwapBuffers();	// Flip the SDL OpenGL buffers with SDL.NET
+			Gl.glEnd();				
+			// Done Drawing Our Quads
+			Video.GLSwapBuffers();	
+			// Flip the SDL OpenGL buffers with SDL.NET
 
 			float hold = 0.0f;
 			if (this.wiggle_count == 2)
