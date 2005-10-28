@@ -84,6 +84,6 @@ namespace SdlDotNet
 		public bool IsKeyPressed(Key key) 
 		{ 
 			return m_Keys[(int)key] == 1; 
-		} 
+		}
 	} 
 } 

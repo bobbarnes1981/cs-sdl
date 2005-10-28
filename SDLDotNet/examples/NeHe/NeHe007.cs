@@ -212,7 +212,7 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
-		#region bool override LoadGLTextures()
+		#region override void LoadGLTextures()
 		/// <summary>
 		///     Load bitmaps and convert to textures.
 		/// </summary>
@@ -272,7 +272,7 @@ namespace SdlDotNet.Examples
 				}
 			}
 		}
-		#endregion bool LoadGLTextures()
+		#endregion override void LoadGLTextures()
 
 		protected bool Lp
 		{
@@ -307,6 +307,72 @@ namespace SdlDotNet.Examples
 			set
 			{
 				light = value;
+			}
+		}
+		protected float XRot
+		{
+			get
+			{
+				return xrot;
+			}
+			set
+			{
+				xrot = value;
+			}
+		}
+		protected float YRot
+		{
+			get
+			{
+				return yrot;
+			}
+			set
+			{
+				yrot = value;
+			}
+		}
+		protected float XSpeed
+		{
+			get
+			{
+				return xspeed;
+			}
+			set
+			{
+				xspeed = value;
+			}
+		}
+		protected float YSpeed
+		{
+			get
+			{
+				return yspeed;
+			}
+			set
+			{
+				yspeed = value;
+			}
+		}
+		protected float Z
+		{
+			get
+			{
+				return z;
+			}
+			set
+			{
+				z = value;
+			}
+		}
+		protected int Filter
+		{
+			get
+			{
+				return filter;
+			}
+			set
+			{
+				filter = value;
 			}
 		}
 	}
