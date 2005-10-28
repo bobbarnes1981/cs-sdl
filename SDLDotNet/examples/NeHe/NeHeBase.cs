@@ -127,5 +127,49 @@ namespace SdlDotNet.Examples
 				DrawGLScene();
 			}
 		}
+
+		protected bool QuitFlag
+		{
+			get
+			{
+				return quit;
+			}
+			set
+			{
+				quit = value;
+			}
+		}
+		protected Surface Screen
+		{
+			get
+			{
+				return screen;
+			}
+			set
+			{
+				screen = value;
+			}
+		}
+		protected int Width
+		{
+			get
+			{
+				return width;
+			}
+		}
+		protected int Height
+		{
+			get
+			{
+				return height;
+			}
+		}
+		protected int Bpp
+		{
+			get
+			{
+				return bpp;
+			}
+		}
 	}
 }

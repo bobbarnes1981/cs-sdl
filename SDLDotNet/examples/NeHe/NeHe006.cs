@@ -37,17 +37,71 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	class NeHe006 : NeHeBase
-	{    
+	{
 		private float xrot;                                              
 		// X Rotation ( NEW )
 		private float yrot;                                              
 		// Y Rotation ( NEW )
 		private float zrot;                                              
 		// Z Rotation ( NEW )
-		private int[] texture = new int[1];                              
+		private int[] texture;                              
 		// Storage For One Texture ( NEW )
-		string data_directory = @"Data/";
-		string filepath = @"../../";
+		string dataDirectory = @"Data/";
+		string filePath = @"../../";
+		string textureName;
+		public NeHe006()
+		{
+			textureName = "NeHe006.bmp";
+			texture = new int[1];
+		}
+
+		protected string TextureName
+		{
+			get
+			{
+				return textureName;
+			}
+			set
+			{
+				textureName = value;
+			}
+		}
+
+		protected int [] Texture
+		{
+			get
+			{
+				return texture;
+			}
+			set
+			{
+				texture = value;
+			}
+		}
+
+		protected string DataDirectory
+		{
+			get
+			{
+				return dataDirectory;
+			}
+			set
+			{
+				dataDirectory = value;
+			}
+		}
+
+		protected string FilePath
+		{
+			get
+			{
+				return filePath;
+			}
+			set
+			{
+				filePath = value;
+			}
+		}
 
 		public override void InitGL()
 		{
@@ -69,7 +123,7 @@ namespace SdlDotNet.Examples
 			Gl.glRotatef(yrot, 0, 1, 0);
 			Gl.glRotatef(zrot, 0, 0, 1);
 
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
 
 			Gl.glBegin(Gl.GL_QUADS);
 			// Front Face
@@ -116,20 +170,20 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected virtual void LoadGLTextures() 
 		{
-			if (File.Exists(data_directory + "NeHe006.bmp"))
+			if (File.Exists(this.DataDirectory + this.TextureName))
 			{
-				filepath = "";
+				this.FilePath = "";
 			}                                              
 			// Status Indicator
 			Bitmap[] textureImage = new Bitmap[1];                              
 			// Create Storage Space For The Texture
 
-			textureImage[0] = new Bitmap(filepath + data_directory + "NeHe006.bmp");                
+			textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName); 
 			// Load The Bitmap
 			// Check For Errors, If Bitmap's Not Found, Quit
 			if(textureImage[0] != null) 
 			{
-				Gl.glGenTextures(1, out texture[0]);                            
+				Gl.glGenTextures(1, out this.Texture[0]);                            
 				// Create The Texture
 
 				textureImage[0].RotateFlip(RotateFlipType.RotateNoneFlipY);     
@@ -142,7 +196,7 @@ namespace SdlDotNet.Examples
 					textureImage[0].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
 				// Typical Texture Generation Using Data From The Bitmap
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
+				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
 				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[0].Width, textureImage[0].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
