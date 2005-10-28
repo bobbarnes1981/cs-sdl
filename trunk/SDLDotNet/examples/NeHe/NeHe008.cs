@@ -36,7 +36,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe008 : NeHe006
+	class NeHe008 : NeHe007
 	{    
 		private float xrot;                                              
 		// X Rotation ( NEW )
@@ -49,117 +49,131 @@ namespace SdlDotNet.Examples
 		private float yspeed;                                            
 		// Y Rotation Speed
 		private float z = -5;
-		private int filter;                                              
+		private int filter;  
+        private bool blend; 
+        private bool bp;                           
 		// Which Filter To Use
 		private int[] texture = new int[3];                              
 		// Storage For 3 Textures
 
-		string data_directory = @"Data/";
-		string filepath = @"../../";
-
-		public override void DrawGLScene()
+		public NeHe008()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        // Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();                                                // Reset The View
-			Gl.glTranslatef(0, 0, z);
-
-			Gl.glRotatef(xrot, 1, 0, 0);
-			Gl.glRotatef(yrot, 0, 1, 0);
-
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[filter]);
-
-			Gl.glBegin(Gl.GL_QUADS);
-			// Front Face
-			Gl.glNormal3f(0, 0, 1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, 1);
-			// Back Face
-			Gl.glNormal3f(0, 0, -1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, -1);
-			// Top Face
-			Gl.glNormal3f(0, 1, 0);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, 1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
-			// Bottom Face
-			Gl.glNormal3f(0, -1, 0);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, -1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
-			// Right face
-			Gl.glNormal3f(1, 0, 0);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, -1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
-			// Left Face
-			Gl.glNormal3f(-1, 0, 0);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, 1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glEnd();
-
-			xrot += xspeed;
-			yrot += yspeed;
-			Video.GLSwapBuffers();
+			this.TextureName = "NeHe008.bmp";
+			this.Texture = new int[3];
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 		}
 
-		#region void LoadGLTextures()
-		/// <summary>
-		///     Load bitmaps and convert to textures.
-		/// </summary>
-		protected override void LoadGLTextures() 
+		public override void InitGL()
 		{
-			if (File.Exists(data_directory + "NeHe008.bmp"))
-			{
-				filepath = "";
-			}                                              
-			// Status Indicator
-			Bitmap[] textureImage = new Bitmap[1];                              
-			// Create Storage Space For The Texture
+			base.InitGL ();
+			Gl.glColor4f(1, 1, 1, 0.5f);                                        
+			// Full Brightness.  50% Alpha
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);                         
+			// Set The Blending Function For Translucency
 
-			textureImage[0] = new Bitmap(filepath + data_directory + "NeHe008.bmp");                
-			// Load The Bitmap
-			// Check For Errors, If Bitmap's Not Found, Quit
-			if(textureImage[0] != null) 
-			{
-				Gl.glGenTextures(1, out texture[0]);                            
-				// Create The Texture
 
-				textureImage[0].RotateFlip(RotateFlipType.RotateNoneFlipY);     
-				// Flip The Bitmap Along The Y-Axis
-				// Rectangle For Locking The Bitmap In Memory
-				Rectangle rectangle = 
-					new Rectangle(0, 0, textureImage[0].Width, textureImage[0].Height);
-				// Get The Bitmap's Pixel Data From The Locked Bitmap
-				BitmapData bitmapData = 
-					textureImage[0].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-
-				// Typical Texture Generation Using Data From The Bitmap
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
-				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[0].Width, textureImage[0].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-
-				if(textureImage[0] != null) 
-				{                                   
-					// If Texture Exists
-					textureImage[0].UnlockBits(bitmapData);                     
-					// Unlock The Pixel Data From Memory
-					textureImage[0].Dispose();                                  
-					// Dispose The Bitmap
-				}
-			}                                                     
 		}
-		#endregion bool LoadGLTextures()
+
+		private void KeyDown(object sender, KeyboardEventArgs e)
+		{
+			switch (e.Key) 
+			{
+				case Key.Escape:
+					this.QuitFlag = true;
+					break;
+				case Key.F1:
+					if ((this.Screen.FullScreen)) 
+					{
+						this.Screen = Video.SetVideoModeWindowOpenGL(this.Width, this.Height, true);
+						this.WindowAttributes();
+					}
+					else 
+					{
+						this.Screen = Video.SetVideoModeOpenGL(this.Width, this.Height, this.Bpp);
+					}
+					Reshape();
+					break;
+				case Key.L: 
+					if (!this.Lp)
+					{
+						this.Lp = true;
+						this.Light = !this.Light;
+						if(!this.Light) 
+						{
+							Gl.glDisable(Gl.GL_LIGHTING);
+						}
+						else 
+						{
+							Gl.glEnable(Gl.GL_LIGHTING);
+						}
+					}
+					else
+					{ 
+						this.Lp = false;
+					}
+					break;	
+				case Key.F:
+					if (!this.Fp)
+					{
+						this.Fp = true;
+						filter += 1;
+						if(filter > 2) 
+						{
+							filter = 0;
+						}
+					}
+					else
+					{
+						this.Fp = false;
+					}
+					break;
+				case Key.PageUp:
+					z -= 0.02f;
+					break;
+				case Key.PageDown:
+					z += 0.02f;
+					break;
+				case Key.UpArrow: 
+					xspeed -= 0.01f;
+					break;
+				case Key.DownArrow:
+					xspeed += 0.01f;
+					break;
+				case Key.RightArrow:
+					yspeed += 0.01f;
+					break;
+				case Key.LeftArrow:
+					yspeed -= 0.01f;
+					break;
+				case Key.B:
+					// Blending Code Starts Here
+					if(!bp) 
+					{
+						bp = true;
+						blend = !blend;
+						if(blend) 
+						{
+							Gl.glEnable(Gl.GL_BLEND);                           
+							// Turn Blending On
+							Gl.glDisable(Gl.GL_DEPTH_TEST);                     
+							// Turn Depth Testing Off
+						}
+						else 
+						{
+							Gl.glDisable(Gl.GL_BLEND);                          
+							// Turn Blending Off
+							Gl.glEnable(Gl.GL_DEPTH_TEST);                      
+							// Turn Depth Testing On
+						}
+					}
+					else
+					{
+						bp = false;
+					}
+					// Blending Code Ends Here
+					break;
+			}
+		}
 
 	}
 }
