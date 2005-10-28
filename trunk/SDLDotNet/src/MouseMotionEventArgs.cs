@@ -76,7 +76,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (this.eventStruct.motion.state == (byte)ButtonKeyState.Pressed);
+				return (this.eventStruct.motion.state != (byte)ButtonKeyState.NotPressed);
 			}
 		}
 
@@ -87,7 +87,30 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (MouseButton)this.eventStruct.motion.which;
+				if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON_LMASK) != 0)
+				{
+					return MouseButton.PrimaryButton;
+				}
+				else if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON_RMASK) != 0)
+				{
+					return MouseButton.SecondaryButton;
+				}
+				else if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON_MMASK) != 0)
+				{
+					return MouseButton.MiddleButton;
+				}
+				else if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON((byte)MouseButton.WheelDown)) != 0)
+				{
+					return MouseButton.WheelDown;
+				}
+				else if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON((byte)MouseButton.WheelUp)) != 0)
+				{
+					return MouseButton.WheelUp;
+				}
+				else
+				{
+					return MouseButton.None;
+				}				
 			}
 		}
 
