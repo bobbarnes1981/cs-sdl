@@ -161,21 +161,6 @@ namespace SdlDotNet.Examples
 		{
 			switch (e.Key) 
 			{
-				case Key.Escape:
-					this.QuitFlag = true;
-					break;
-				case Key.F1:
-					if ((this.Screen.FullScreen)) 
-					{
-						this.Screen = Video.SetVideoModeWindowOpenGL(this.Width, this.Height, true);
-						this.WindowAttributes();
-					}
-					else 
-					{
-						this.Screen = Video.SetVideoModeOpenGL(this.Width, this.Height, this.Bpp);
-					}
-					Reshape();
-					break;
 				case Key.T: 
 					if (!tp)
 					{
