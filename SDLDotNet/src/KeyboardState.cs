@@ -70,11 +70,48 @@ namespace SdlDotNet
 		/// <summary> 
 		/// Creates a new KeyboardState object with the current state of the keyboard. 
 		/// </summary> 
-		public KeyboardState() 
+		/// <remarks>This calls update on creation.</remarks>
+		public KeyboardState() : this(true)
 		{ 
+		} 
+
+		/// <summary>
+		/// Creates a new KeyboardState with an option to update on creation.
+		/// </summary>
+		/// <param name="updateNow">Update the key array on object creation.  Defaults to true.</param>
+		public KeyboardState(bool updateNow)
+		{
+			if(updateNow)
+			{
+				Update();
+			}
+		}
+
+		/// <summary>
+		/// Updates the keyboard state within this object.
+		/// </summary>
+		public void Update()
+		{
 			int numberOfKeys; 
 			m_Keys = Sdl.SDL_GetKeyState(out numberOfKeys); 
-		} 
+		}
+
+		/// <summary>
+		/// An update method call used for events.
+		/// </summary>
+		/// <param name="sender">The sender object.</param>
+		/// <param name="e">The keyboard event arguments.</param>
+		/// <remarks>This is just used as as a shortcut for event calls.</remarks>
+		/// <example>
+		/// <code>
+		/// KeyboardState keys = new KeyboardState();
+		/// Events.KeyboardDown += new KeyboardEventHandler(keys.Update);
+		/// </code>
+		/// </example>
+		public void Update(object sender, SdlDotNet.KeyboardEventArgs e)
+		{
+			Update();
+		}
 
 		/// <summary> 
 		/// Checks a key state in the KeyboardState. 
