@@ -146,7 +146,7 @@ namespace SdlDotNet.Particles.Emitters
 			p.Color = Color.FromArgb(
 				Random.Next(this.MinR, this.MaxR),
 				Random.Next(this.MinG, this.MaxG),
-				Random.Next(this.MaxB, this.MaxB));
+				Random.Next(this.MinB, this.MaxB));
 			p.Radius = (short)Random.Next((int)m_RadiusMin, (int)m_RadiusMax);
 			return p;
 		}
