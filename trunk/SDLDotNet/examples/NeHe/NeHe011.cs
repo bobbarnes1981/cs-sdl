@@ -53,15 +53,6 @@ namespace SdlDotNet.Examples
 
 		public NeHe011()
 		{
-			Events.KeyboardDown += new KeyboardEventHandler(NeHe011_KeyboardDown);
-		}
-
-		private void NeHe011_KeyboardDown(object sender, KeyboardEventArgs e)
-		{
-			if(e.Key == Key.Escape)
-			{
-				this.QuitFlag = true;
-			}
 		}
 
 		public override void InitGL()
