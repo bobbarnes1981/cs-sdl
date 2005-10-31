@@ -46,13 +46,18 @@ namespace SdlDotNet.Examples
 		}
 
 		private float zspeed;                                            
-		// Z Rotation Speed
-		private float cx;                                                
-		// X Position
-		private float cy;                                                
-		// Y Position
-		private float cz = -15;                                          
-		// Z Position
+		private float ypos;
+		public float YPos
+		{
+			get
+			{
+				return ypos;
+			}
+			set
+			{
+				ypos = value;
+			}
+		}
 		private Random rand = new Random();
 
 		private int key = 1;                                             
@@ -71,7 +76,7 @@ namespace SdlDotNet.Examples
 		private Thing helper, source, destination;
 
 		private struct Vertex 
-		{                                                 
+		{                                     
 			// Structure For 3d Points
 			public float X;                                                     
 			// X Coordinate
@@ -91,6 +96,7 @@ namespace SdlDotNet.Examples
 
 		public NeHe025()
 		{
+			this.ZPos = -15;
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
 		}
@@ -157,7 +163,7 @@ namespace SdlDotNet.Examples
 			// Clear The Screen And The Depth Buffer
 			Gl.glLoadIdentity();
 			// Reset The View
-			Gl.glTranslatef(cx, cy, cz);  
+			Gl.glTranslatef(this.XPos, this.YPos, this.ZPos);  
 			// Translate The The Current Position To Start Drawing
 			Gl.glRotatef(this.XRot, 1, 0, 0);
 			// Rotate On The X Axis By xrot
@@ -270,22 +276,22 @@ namespace SdlDotNet.Examples
 					this.YSpeed -= 0.01f;
 					break;
 				case Key.Q:
-					cz -= 0.01f;
+					this.ZPos -= 0.01f;
 					break;
 				case Key.Z:
-					cz += 0.01f;
+					this.ZPos += 0.01f;
 					break;				
 				case Key.W:
-					cy += 0.01f;
+					this.ypos += 0.01f;
 					break;
 				case Key.S:
-					cy -= 0.01f;
+					this.ypos -= 0.01f;
 					break;
 				case Key.D:
-					cx += 0.01f;
+					this.XPos += 0.01f;
 					break;
 				case Key.A:
-					cx -= 0.01f;
+					this.XPos -= 0.01f;
 					break;
 				case Key.One:
 					if (key != 1 && !morph)
@@ -467,7 +473,6 @@ namespace SdlDotNet.Examples
 			thing.Points = new Vertex[number];
 		}
 		#endregion AllocateThing(ref Thing thing, int number)
-
 		#region Vertex Calculate(int i)
 		/// <summary>
 		///     Calculates movement of points during morphing.
