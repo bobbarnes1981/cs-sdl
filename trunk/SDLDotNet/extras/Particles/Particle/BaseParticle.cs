@@ -171,5 +171,67 @@ namespace SdlDotNet.Particles.Particle
 			}
 			return true;
 		}
+
+		/// <summary>
+		/// Gets and sets the width of the particle.
+		/// </summary>
+		public abstract float Width
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Gets and sets the height of the particle.
+		/// </summary>
+		public abstract float Height
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// Gets the y-coordinate of the bottom edge of the particle.
+		/// </summary>
+		public virtual float Bottom
+		{
+			get
+			{
+				return m_Y + Height;
+			}
+		}
+
+		/// <summary>
+		/// Gets the x-coordinate of the right edge of the particle.
+		/// </summary>
+		public virtual float Right
+		{
+			get
+			{
+				return m_X + Width;
+			}
+		}
+
+		/// <summary>
+		/// Gets the x-coordinate of the left edge of the particle.
+		/// </summary>
+		public virtual float Left
+		{
+			get
+			{
+				return m_X;
+			}
+		}
+
+		/// <summary>
+		/// Gets the y-coordinate of the top edge of the particle.
+		/// </summary>
+		public virtual float Top
+		{
+			get
+			{
+				return m_Y;
+			}
+		}
 	}
 }

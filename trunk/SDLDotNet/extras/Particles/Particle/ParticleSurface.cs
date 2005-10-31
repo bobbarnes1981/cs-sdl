@@ -262,5 +262,34 @@ namespace SdlDotNet.Particles.Particle
 			destination.Blit(m_Surface, new Point((int)this.X, (int)this.Y), m_ClipRectangle);
 		}
 
+		/// <summary>
+		/// Gets the width of the particle's surface.
+		/// </summary>
+		public override float Width
+		{
+			get
+			{
+				return m_Surface.Width;
+			}
+			set
+			{
+			}
+		}
+		/// <summary>
+		/// Gets the height of the particle's surface.
+		/// </summary>
+		public override float Height
+		{
+			get
+			{
+				return m_Surface.Height;
+			}
+			set
+			{
+			}
+		}
+
+
+
 	}
 }

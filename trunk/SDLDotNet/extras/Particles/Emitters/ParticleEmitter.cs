@@ -91,7 +91,7 @@ namespace SdlDotNet.Particles.Emitters
 		/// <summary>
 		/// Gets and sets the height of the particle emitter.
 		/// </summary>
-		public float Height
+		public override float Height
 		{
 			get
 			{
@@ -106,7 +106,7 @@ namespace SdlDotNet.Particles.Emitters
 		/// <summary>
 		/// Gets and sets the width of the particle emitter.
 		/// </summary>
-		public float Width
+		public override float Width
 		{
 			get
 			{

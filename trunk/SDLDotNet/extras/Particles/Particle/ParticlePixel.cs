@@ -149,9 +149,6 @@ namespace SdlDotNet.Particles.Particle
 			}
 		}
 
-		#region IParticle Members
-
-
 		/// <summary>
 		/// Draws the particle on the destination surface represented by a pixel.
 		/// </summary>
@@ -179,6 +176,35 @@ namespace SdlDotNet.Particles.Particle
 				destination.DrawPixel((int)this.X,(int)this.Y, m_Color, true);
 			}
 		}
-		#endregion
+
+		/// <summary>
+		/// Gets the height of the particle.
+		/// </summary>
+		public override float Height
+		{
+			get
+			{
+				return 1;
+			}
+			set
+			{
+			}
+		}
+
+		/// <summary>
+		/// Gets the width of the particle.
+		/// </summary>
+		public override float Width
+		{
+			get
+			{
+				return 1;
+			}
+			set
+			{
+			}
+		}
+
+
 	}
 }
