@@ -37,15 +37,12 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	class NeHe007 : NeHe006
-	{    
-		private static string title = "Lesson 7: Texture Filters, Lighting, and Keyboard Control";
-		public new static string Title
+	{
+		static NeHe007()
 		{
-			get
-			{
-				return title;
-			}
+			m_Title = "Lesson 7: Texture Filters, Lighting, and Keyboard Control";
 		}
+
 		private float xspeed;                                            
 		// X Rotation Speed
 		private float yspeed;                                            

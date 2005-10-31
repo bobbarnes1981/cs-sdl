@@ -38,14 +38,11 @@ namespace SdlDotNet.Examples
 {
 	class NeHe009 : NeHe006
 	{    
-		private static string title = "Lesson 9: Moving Bitmaps in 3D Space";
-		public new static string Title
+		static NeHe009()
 		{
-			get
-			{
-				return title;
-			}
+			m_Title = "Lesson 9: Moving Bitmaps in 3D Space";
 		}
+
 		private static Random rand = new Random();                              
 		// Random Number Generator
 		private static bool twinkle;                                            

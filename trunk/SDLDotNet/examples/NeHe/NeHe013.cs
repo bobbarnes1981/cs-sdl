@@ -35,13 +35,9 @@ namespace SdlDotNet.Examples
 {
 	class NeHe013 : NeHe001 
 	{
-		private static string title = "Lesson 13: Bitmap Fonts";
-		public new static string Title
+		static NeHe013()
 		{
-			get
-			{
-				return title;
-			}
+			m_Title = "Lesson 13: Bitmap Fonts";
 		}
 		private IntPtr hDC;
 		private static int fontbase;                                            // Base Display List For The Font Set

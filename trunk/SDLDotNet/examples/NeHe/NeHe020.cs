@@ -36,13 +36,9 @@ namespace SdlDotNet.Examples
 {
 	class NeHe020 : NeHe001
 	{
-		private static string title = "Lesson 20: Masking";
-		public new static string Title
+		static NeHe020()
 		{
-			get
-			{
-				return title;
-			}
+			m_Title = "Lesson 20: Masking";
 		}
 		bool scene = false;				// Which Scene To Draw
 		bool masking = true;

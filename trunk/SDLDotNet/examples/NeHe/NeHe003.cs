@@ -35,13 +35,9 @@ namespace SdlDotNet.Examples
 {
 	class NeHe003 : NeHe001
 	{    
-		private static string title = "Lesson 3: Adding Color";
-		public new static string Title
+		static NeHe003()
 		{
-			get
-			{
-				return title;
-			}
+			m_Title = "Lesson 3: Adding Color";
 		}
 		public override void DrawGLScene()
 		{
