@@ -14,6 +14,7 @@
 		<include name="${native.sdl}.dll"/>
 		<include name="Tao.OpenGl.dll"/>
 		<include name="Tao.OpenGl.Glu.dll"/>
+		<include name="Tao.Platform.Windows.dll"/>
 	    </fileset>
 	</copy>
 	<copy todir="${nant.project.basedir}/${build.dir}">
@@ -33,7 +34,9 @@
 		<include name="${native.sdl}.dll"/>
 		<include name="Tao.OpenGl.dll"/>
 		<include name="Tao.OpenGl.Glu.dll"/>
+		<include name="Tao.Platform.Windows.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Windows.Forms.dll"/>
 	    </references>
 	</csc>
     </target>
