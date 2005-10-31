@@ -36,13 +36,9 @@ namespace SdlDotNet.Examples
 {
 	class NeHe016 : NeHe001
 	{
-		private static string title = "Lesson 16: Cool Looking Fog";
-		public new static string Title
+		static NeHe016()
 		{
-			get
-			{
-				return title;
-			}
+			m_Title = "Lesson 16: Cool Looking Fog";
 		}
 		public bool	light = true;				// Lighting ON/OFF
 

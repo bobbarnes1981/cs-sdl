@@ -38,14 +38,11 @@ namespace SdlDotNet.Examples
 {
 	class NeHe006 : NeHe001
 	{
-		private static string title = "Lesson 6: Texture Mapping";
-		public new static string Title
+		static NeHe006()
 		{
-			get
-			{
-				return title;
-			}
+			m_Title = "Lesson 6: Texture Mapping";
 		}
+
 		private float xrot;                                              
 		// X Rotation ( NEW )
 		private float yrot;                                              

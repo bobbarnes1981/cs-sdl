@@ -40,14 +40,11 @@ namespace SdlDotNet.Examples
 {
 	class NeHe025 : NeHe010
 	{
-		private static string title = "Lesson 25: Morphing and Loading Objects from a File";
-		public new static string Title
+		static NeHe025()
 		{
-			get
-			{
-				return title;
-			}
+			m_Title = "Lesson 25: Morphing and Loading Objects from a File";
 		}
+
 		private float zspeed;                                            
 		// Z Rotation Speed
 		private float cx;                                                

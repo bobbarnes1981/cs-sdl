@@ -175,12 +175,18 @@ namespace SdlDotNet.Examples
 				return bpp;
 			}
 		}
-		private static string title = "Lesson 1: Setting Up An OpenGL Window";
+
+		static NeHe001()
+		{
+			m_Title = "Lesson 1: Setting Up An OpenGL Window";
+		}
+
+		protected static string m_Title = "Unknown Lesson";
 		public static string Title
 		{
 			get
 			{
-				return title;
+				return m_Title;
 			}
 		}
 	}
