@@ -143,8 +143,39 @@ namespace SdlDotNet.Particles.Particle
 		/// <param name="destination">The surface to render the sprite.</param>
 		public override void Render(Surface destination)
 		{
-			m_Sprite.Center = new Point((int)this.X, (int)this.Y);
+			m_Sprite.Position = new Point((int)this.X, (int)this.Y);
 			m_Sprite.Render(destination);
 		}
+
+		/// <summary>
+		/// Gets the height of the particle's sprite.
+		/// </summary>
+		public override float Height
+		{
+			get
+			{
+				return m_Sprite.Height;
+			}
+			set
+			{
+				m_Sprite.Height = (int)value;
+			}
+		}
+		/// <summary>
+		/// Gets the width of the particle's sprite.
+		/// </summary>
+		public override float Width
+		{
+			get
+			{
+				return m_Sprite.Width;
+			}
+			set
+			{
+				m_Sprite.Width = (int)value;
+			}
+		}
+
+
 	}
 }
