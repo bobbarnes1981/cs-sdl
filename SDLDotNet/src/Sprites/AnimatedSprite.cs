@@ -227,6 +227,37 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
+		/// <summary>
+		/// Gets the sprite's current surface's width.
+		/// </summary>
+		public override int Width
+		{
+			get
+			{
+				return Surface.Width;
+			}
+			set
+			{
+				base.Width = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets the sprite's current surface's height.
+		/// </summary>
+		public override int Height
+		{
+			get
+			{
+				return Surface.Height;
+			}
+			set
+			{
+				base.Height = value;
+			}
+		}
+
+
 
 		#endregion
 
