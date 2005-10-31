@@ -38,7 +38,7 @@ namespace SdlDotNet.Examples
 	class NeHe019 : NeHe001
 	{
 		private static string title = "Lesson 19: Particle Engine Using Triangle Strips";
-		public static string Title
+		public new static string Title
 		{
 			get
 			{

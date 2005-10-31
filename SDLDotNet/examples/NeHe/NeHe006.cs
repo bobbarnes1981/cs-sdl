@@ -39,7 +39,7 @@ namespace SdlDotNet.Examples
 	class NeHe006 : NeHe001
 	{
 		private static string title = "Lesson 6: Texture Mapping";
-		public static string Title
+		public new static string Title
 		{
 			get
 			{
@@ -221,5 +221,38 @@ namespace SdlDotNet.Examples
 		}
 		#endregion void LoadGLTextures()
 
+		protected float XRot
+		{
+			get
+			{
+				return xrot;
+			}
+			set
+			{
+				xrot = value;
+			}
+		}
+		protected float YRot
+		{
+			get
+			{
+				return yrot;
+			}
+			set
+			{
+				yrot = value;
+			}
+		}
+		protected float ZRot
+		{
+			get
+			{
+				return zrot;
+			}
+			set
+			{
+				zrot = value;
+			}
+		}
 	}
 }

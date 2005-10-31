@@ -76,6 +76,7 @@ namespace SdlDotNet.Examples
 			this.TextureName = "NeHe010.bmp";
 			this.Texture = new int[3];
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(150,50);
 			this.Z = 0;
 		}
 
@@ -372,6 +373,28 @@ namespace SdlDotNet.Examples
 					}
 					// Blending Code Ends Here
 					break;
+			}
+		}
+		protected float XPos
+		{
+			get
+			{
+				return xpos;
+			}
+			set
+			{
+				xpos = value;
+			}
+		}
+		protected float ZPos
+		{
+			get
+			{
+				return zpos;
+			}
+			set
+			{
+				zpos = value;
 			}
 		}
 	}

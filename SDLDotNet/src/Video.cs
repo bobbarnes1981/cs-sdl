@@ -89,6 +89,7 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Initialize()
 		{
+			disposed = false;
 			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
 				== (int) SdlFlag.FalseValue)
 			{
