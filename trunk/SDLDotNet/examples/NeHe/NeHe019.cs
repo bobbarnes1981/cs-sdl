@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 {
 	class NeHe019 : NeHeBase
 	{
-		readonly static int MaxParticles = 100;	// Number of particles to create
+		readonly static int MaxParticles = 1000;	// Number of particles to create
 		bool rainbow = true;			// Rainbow Mode?
 
 		float slowdown = 2.0f;			// Slow Down Particles
