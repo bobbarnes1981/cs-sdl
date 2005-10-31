@@ -36,7 +36,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe020 : NeHeBase
 	{
-
+		private static string title = "Lesson 20: Masking";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		bool scene = false;				// Which Scene To Draw
 		bool masking = true;
 		float roll = 0.0f;				// Rolling Texture

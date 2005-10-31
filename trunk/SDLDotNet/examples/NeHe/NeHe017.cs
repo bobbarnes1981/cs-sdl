@@ -36,6 +36,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe017 : NeHeBase
 	{
+		private static string title = "Lesson 17: 2D Texture Font";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		public int baseList = 0;		// Base Display List For The Font
 		
 		public float cnt1 = 0.0f;		// 1st Counter Used To Move Text & For Coloring

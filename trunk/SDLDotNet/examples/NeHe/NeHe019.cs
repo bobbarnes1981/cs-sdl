@@ -37,6 +37,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe019 : NeHeBase
 	{
+		private static string title = "Lesson 19: Particle Engine Using Triangle Strips";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		readonly static int MaxParticles = 1000;	// Number of particles to create
 		bool rainbow = true;			// Rainbow Mode?
 

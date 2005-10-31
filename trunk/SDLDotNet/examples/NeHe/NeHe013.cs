@@ -35,6 +35,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe013 : NeHeBase 
 	{
+		private static string title = "Lesson 13: Bitmap Fonts";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		private IntPtr hDC;
 		private static int fontbase;                                            // Base Display List For The Font Set
 		private static float cnt1;                                              // 1st Counter Used To Move Text & For Coloring

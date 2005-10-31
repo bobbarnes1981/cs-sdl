@@ -37,6 +37,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe023 : NeHeBase
 	{
+		private static string title = "Lesson 23: Sphere Mapping, Multi-Texturing and Extensions";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		bool light;                                              // Lighting ON/OFF
 		float xrot;                                              // X Rotation
 		float yrot;                                              // Y Rotation

@@ -35,6 +35,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe003 : NeHeBase
 	{    
+		private static string title = "Lesson 3: Adding Color";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		public override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);

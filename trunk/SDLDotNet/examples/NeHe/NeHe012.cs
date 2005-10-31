@@ -36,6 +36,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe012 : NeHeBase
 	{
+		private static string title = "Lesson 12: Display Lists";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		uint box = 0;			// Storage For The Box Display List
 		uint top = 0;			// Storage For The Top Display List
 		

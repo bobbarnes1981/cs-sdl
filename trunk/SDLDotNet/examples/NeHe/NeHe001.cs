@@ -35,17 +35,20 @@ namespace SdlDotNet.Examples
 {
 	class NeHe001 : NeHeBase
 	{
-		public NeHe001()
-		{
-			NeHe001.Title = "Lesson 1: Setting Up An OpenGL Window";
-		}
-
-
 		public override void DrawGLScene()
 		{
 			Gl.glClear((Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT));
 			Gl.glLoadIdentity();
 			Video.GLSwapBuffers();
 		}
+
+		private static string title = "Lesson 1: Setting Up An OpenGL Window";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}	
 	}
 }

@@ -36,6 +36,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe011 : NeHeBase
 	{
+		private static string title = "Lesson 11: Flag Effect (Waving Texture)";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		public float[][][] points;				
 		// The Array For The Points On The Grid Of Our "Wave"
 		public int wiggle_count = 0;			

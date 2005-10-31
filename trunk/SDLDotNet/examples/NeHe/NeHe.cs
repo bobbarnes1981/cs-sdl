@@ -92,11 +92,30 @@ namespace SdlDotNet.Examples
 			// 
 			// label2
 			// 
-			this.label2.Location = new System.Drawing.Point(8, 16);
+			this.label2.Location = new System.Drawing.Point(0, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(376, 368);
+			this.label2.Size = new System.Drawing.Size(392, 376);
 			this.label2.TabIndex = 3;
-			this.label2.Text = "test";
+			this.label2.Text = 
+				NeHe001.Title + "\r\n" + 
+				NeHe002.Title + "\r\n" + 
+				NeHe003.Title + "\r\n" + 
+				NeHe004.Title + "\r\n" + 
+				NeHe005.Title + "\r\n" + 
+				NeHe006.Title + "\r\n" + 
+				NeHe007.Title + "\r\n" + 
+				NeHe008.Title + "\r\n" + 
+				NeHe009.Title + "\r\n" + 
+				NeHe010.Title + "\r\n" + 
+				NeHe011.Title + "\r\n" + 
+				NeHe012.Title + "\r\n" + 
+				NeHe013.Title + "\r\n" + 
+				NeHe016.Title + "\r\n" + 
+				NeHe017.Title + "\r\n" + 
+				NeHe018.Title + "\r\n" + 
+				NeHe019.Title + "\r\n" + 
+				NeHe020.Title + "\r\n" + 
+				NeHe023.Title + "\r\n";
 			// 
 			// NeHe
 			// 

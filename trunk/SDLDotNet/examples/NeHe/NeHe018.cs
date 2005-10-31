@@ -36,6 +36,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe018 : NeHeBase
 	{
+		private static string title = "Lesson 18: Quadrics";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		bool light = true;				// Lighting ON/OFF
 
 		int part1 = 0;					// Start Of Disc ( NEW )
