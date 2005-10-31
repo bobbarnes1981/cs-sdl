@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe012 : NeHeBase
+	class NeHe012 : NeHe001
 	{
 		private static string title = "Lesson 12: Display Lists";
 		public static string Title

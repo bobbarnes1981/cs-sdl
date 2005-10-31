@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe011 : NeHeBase
+	class NeHe011 : NeHe001
 	{
 		private static string title = "Lesson 11: Flag Effect (Waving Texture)";
 		public static string Title

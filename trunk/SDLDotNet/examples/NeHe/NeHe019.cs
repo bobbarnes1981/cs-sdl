@@ -35,7 +35,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe019 : NeHeBase
+	class NeHe019 : NeHe001
 	{
 		private static string title = "Lesson 19: Particle Engine Using Triangle Strips";
 		public static string Title

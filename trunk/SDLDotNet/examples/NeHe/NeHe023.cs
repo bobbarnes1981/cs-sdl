@@ -35,7 +35,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe023 : NeHeBase
+	class NeHe023 : NeHe001
 	{
 		private static string title = "Lesson 23: Sphere Mapping, Multi-Texturing and Extensions";
 		public static string Title

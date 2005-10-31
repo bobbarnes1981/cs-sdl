@@ -33,7 +33,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe004 : NeHeBase
+	class NeHe004 : NeHe001
 	{
 		private static string title = "Lesson 4: Rotation";
 		public static string Title
