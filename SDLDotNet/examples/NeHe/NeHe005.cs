@@ -33,7 +33,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe005 : NeHeBase
+	class NeHe005 : NeHe001
 	{
 		private static string title = "Lesson 5: 3D Shapes";
 		public static string Title

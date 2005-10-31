@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe018 : NeHeBase
+	class NeHe018 : NeHe001
 	{
 		private static string title = "Lesson 18: Quadrics";
 		public static string Title

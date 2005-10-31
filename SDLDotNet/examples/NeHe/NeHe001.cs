@@ -33,15 +33,147 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe001 : NeHeBase
+	class NeHe001
 	{
-		public override void DrawGLScene()
+		#region Variables
+		private const int width = 640;
+		private const int height = 480;
+		private const int bpp = 16;
+		private bool quit;
+		private Surface screen;
+		#endregion
+    
+		public NeHe001()
+		{
+			Initialize();
+		}
+    
+		public void Initialize()
+		{
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Events.Quit += new QuitEventHandler(this.Quit);
+			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			this.WindowAttributes();
+			Reshape();
+		}
+
+		protected void WindowAttributes()
+		{
+			Video.WindowIcon();
+			Video.WindowCaption = 
+				"SDL.NET - NeHe Lesson " + this.GetType().ToString().Substring(this.GetType().ToString().Length-3);
+		}
+    
+		public void Reshape()
+		{
+			Gl.glViewport(0, 0, width, height);
+			Gl.glMatrixMode(Gl.GL_PROJECTION);
+			Gl.glLoadIdentity();
+			//  Calculate The Aspect Ratio Of The Window
+			Glu.gluPerspective(45.0F, (width / (double)height), 0.1F, 100.0F);
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+			Gl.glLoadIdentity();
+		}
+    
+		public virtual void InitGL()
+		{
+			Gl.glShadeModel(Gl.GL_SMOOTH);
+			Gl.glClearColor(0.0F, 0.0F, 0.0F, 0.5F);
+			Gl.glClearDepth(1.0F);
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+		}
+    
+		public virtual void DrawGLScene()
 		{
 			Gl.glClear((Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT));
 			Gl.glLoadIdentity();
 			Video.GLSwapBuffers();
+		}	
+    
+		private void KeyDown(object sender, KeyboardEventArgs e)
+		{
+			switch (e.Key) 
+			{
+				case Key.Escape:
+					quit = true;
+					break;
+				case Key.F1:
+					if ((screen.FullScreen)) 
+					{
+						screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+						this.WindowAttributes();
+					}
+					else 
+					{
+						screen = Video.SetVideoModeOpenGL(width, height, bpp);
+					}
+					Reshape();
+					break;
+			}
+		}
+    
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			quit = true;
+		}
+    
+		public void Run()
+		{
+			InitGL();
+			while ((!quit)) 
+			{
+				while (Events.Poll()) 
+				{
+				}
+				DrawGLScene();
+			}
 		}
 
+		protected bool QuitFlag
+		{
+			get
+			{
+				return quit;
+			}
+			set
+			{
+				quit = value;
+			}
+		}
+		protected Surface Screen
+		{
+			get
+			{
+				return screen;
+			}
+			set
+			{
+				screen = value;
+			}
+		}
+		protected int Width
+		{
+			get
+			{
+				return width;
+			}
+		}
+		protected int Height
+		{
+			get
+			{
+				return height;
+			}
+		}
+		protected int Bpp
+		{
+			get
+			{
+				return bpp;
+			}
+		}
 		private static string title = "Lesson 1: Setting Up An OpenGL Window";
 		public static string Title
 		{
@@ -49,6 +181,6 @@ namespace SdlDotNet.Examples
 			{
 				return title;
 			}
-		}	
+		}
 	}
 }

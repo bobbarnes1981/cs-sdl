@@ -33,7 +33,7 @@ using Tao.Platform.Windows;
 
 namespace SdlDotNet.Examples 
 {
-	class NeHe013 : NeHeBase 
+	class NeHe013 : NeHe001 
 	{
 		private static string title = "Lesson 13: Bitmap Fonts";
 		public static string Title

@@ -33,7 +33,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe002 : NeHeBase
+	class NeHe002 : NeHe001
 	{
 		private static string title = "Lesson 2: Your First Polygon";
 		public static string Title

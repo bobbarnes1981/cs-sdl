@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe017 : NeHeBase
+	class NeHe017 : NeHe001
 	{
 		private static string title = "Lesson 17: 2D Texture Font";
 		public static string Title

@@ -36,7 +36,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe006 : NeHeBase
+	class NeHe006 : NeHe001
 	{
 		private static string title = "Lesson 6: Texture Mapping";
 		public static string Title
