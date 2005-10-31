@@ -12,10 +12,10 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe : System.Windows.Forms.Form
 	{
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button startButton;
+		private System.Windows.Forms.TextBox lessonBox;
+		private System.Windows.Forms.Label lessonLabel;
+		private System.Windows.Forms.Label lessonDescriptions;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -59,72 +59,72 @@ namespace SdlDotNet.Examples
 		private void InitializeComponent()
 		{
 			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(NeHe));
-			this.button1 = new System.Windows.Forms.Button();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
+			this.startButton = new System.Windows.Forms.Button();
+			this.lessonBox = new System.Windows.Forms.TextBox();
+			this.lessonLabel = new System.Windows.Forms.Label();
+			this.lessonDescriptions = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
-			// button1
+			// startButton
 			// 
-			this.button1.Location = new System.Drawing.Point(144, 432);
-			this.button1.Name = "button1";
-			this.button1.TabIndex = 0;
-			this.button1.Text = "Start Demo";
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.startButton.Location = new System.Drawing.Point(144, 432);
+			this.startButton.Name = "startButton";
+			this.startButton.TabIndex = 2;
+			this.startButton.Text = "Start Demo";
+			this.startButton.Click += new System.EventHandler(this.button1_Click);
 			// 
-			// textBox1
+			// lessonBox
 			// 
-			this.textBox1.Location = new System.Drawing.Point(152, 392);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(72, 20);
-			this.textBox1.TabIndex = 1;
-			this.textBox1.Text = "";
-			this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+			this.lessonBox.AcceptsTab = true;
+			this.lessonBox.Location = new System.Drawing.Point(152, 392);
+			this.lessonBox.Name = "lessonBox";
+			this.lessonBox.Size = new System.Drawing.Size(72, 20);
+			this.lessonBox.TabIndex = 1;
+			this.lessonBox.Text = "";
 			// 
-			// label1
+			// lessonLabel
 			// 
-			this.label1.Location = new System.Drawing.Point(88, 392);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(56, 24);
-			this.label1.TabIndex = 2;
-			this.label1.Text = "Lesson";
+			this.lessonLabel.Location = new System.Drawing.Point(88, 392);
+			this.lessonLabel.Name = "lessonLabel";
+			this.lessonLabel.Size = new System.Drawing.Size(56, 24);
+			this.lessonLabel.TabIndex = 0;
+			this.lessonLabel.Text = "Lesson";
 			// 
-			// label2
+			// lessonDescriptions
 			// 
-			this.label2.Location = new System.Drawing.Point(0, 0);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(392, 376);
-			this.label2.TabIndex = 3;
-			this.label2.Text = 
-				NeHe001.Title + "\r\n" + 
-				NeHe002.Title + "\r\n" + 
-				NeHe003.Title + "\r\n" + 
-				NeHe004.Title + "\r\n" + 
-				NeHe005.Title + "\r\n" + 
-				NeHe006.Title + "\r\n" + 
-				NeHe007.Title + "\r\n" + 
-				NeHe008.Title + "\r\n" + 
-				NeHe009.Title + "\r\n" + 
-				NeHe010.Title + "\r\n" + 
-				NeHe011.Title + "\r\n" + 
-				NeHe012.Title + "\r\n" + 
-				NeHe013.Title + "\r\n" + 
-				NeHe016.Title + "\r\n" + 
-				NeHe017.Title + "\r\n" + 
-				NeHe018.Title + "\r\n" + 
-				NeHe019.Title + "\r\n" + 
-				NeHe020.Title + "\r\n" + 
-				NeHe023.Title + "\r\n";
+			this.lessonDescriptions.Location = new System.Drawing.Point(0, 0);
+			this.lessonDescriptions.Name = "lessonDescriptions";
+			this.lessonDescriptions.Size = new System.Drawing.Size(392, 376);
+			this.lessonDescriptions.TabIndex = 3;
+			this.lessonDescriptions.Text = @"Lesson 1: Setting Up An OpenGL Window
+Lesson 2: Your First Polygon
+Lesson 3: Adding Color
+Lesson 4: Rotation
+Lesson 5: 3D Shapes
+Lesson 6: Texture Mapping
+Lesson 7: Texture Filters, Lighting, and Keyboard Control
+Lesson 8: Blending
+Lesson 9: Moving Bitmaps in 3D Space
+Lesson 10: Loading and Moving through a 3D World
+Lesson 11: Flag Effect (Waving Texture)
+Lesson 12: Display Lists
+Lesson 13: Bitmap Fonts
+Lesson 16: Cool Looking Fog
+Lesson 17: 2D Texture Font
+Lesson 18: Quadrics
+Lesson 19: Particle Engine Using Triangle Strips
+Lesson 20: Masking
+Lesson 23: Sphere Mapping, Multi-Texturing and Extensions";
 			// 
 			// NeHe
 			// 
+			this.AcceptButton = this.startButton;
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 			this.ClientSize = new System.Drawing.Size(392, 473);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.label1);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.lessonDescriptions);
+			this.Controls.Add(this.lessonLabel);
+			this.Controls.Add(this.lessonBox);
+			this.Controls.Add(this.startButton);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "NeHe";
 			this.Text = "SDL.NET - NeHe OpenGL Examples";
@@ -148,6 +148,8 @@ namespace SdlDotNet.Examples
 			Assembly asm = Assembly.GetExecutingAssembly();
 			try
 			{
+				string tempLesson = this.lessonBox.Text.Trim();
+				this.lesson = padding.Substring(tempLesson.Length - 1) + this.lessonBox.Text.Trim();
 				Type dynClassType = asm.GetType("SdlDotNet.Examples.NeHe" + lesson, true, false);
 				object dynObj = Activator.CreateInstance(dynClassType);
 				if (dynObj != null) 
@@ -165,11 +167,5 @@ namespace SdlDotNet.Examples
 
 		private string lesson;
 		private string padding = "00";
-
-		private void textBox1_TextChanged(object sender, System.EventArgs e)
-		{
-			string tempLesson = textBox1.Text.Trim();
-			this.lesson = padding.Substring(tempLesson.Length - 1) + textBox1.Text.Trim();
-		}
 	}
 }
