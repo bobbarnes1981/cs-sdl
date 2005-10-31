@@ -171,5 +171,19 @@ namespace SdlDotNet.Examples
 				return bpp;
 			}
 		}
+
+		private static string title;
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+			set
+			{
+				title = value;
+			}
+		}
+
 	}
 }

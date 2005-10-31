@@ -615,9 +615,11 @@
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
+	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.OpenGl" localCopy="true" path="..\\..\\lib"/>
 	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="..\\..\\lib"/>
+	    <Reference name="Tao.Platform.Windows" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
