@@ -453,7 +453,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Gets and sets the sprite's height.
 		/// </summary>
-		public int Height
+		public virtual int Height
 		{
 			get
 			{
@@ -468,7 +468,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Gets and sets the sprite's width.
 		/// </summary>
-		public int Width
+		public virtual int Width
 		{
 			get
 			{
