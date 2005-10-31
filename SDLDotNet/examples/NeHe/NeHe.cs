@@ -115,7 +115,8 @@ Lesson 18: Quadrics
 Lesson 19: Particle Engine Using Triangle Strips
 Lesson 20: Masking
 Lesson 23: Sphere Mapping, Multi-Texturing and Extensions
-Lesson 25: Morphing and Loading Objects from a File";
+Lesson 25: Morphing and Loading Objects from a File
+Lesson 26: Clipping & Reflections Using The Stencil Buffer";
 			// 
 			// NeHe
 			// 
