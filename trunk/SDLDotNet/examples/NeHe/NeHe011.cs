@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 	class NeHe011 : NeHe001
 	{
 		private static string title = "Lesson 11: Flag Effect (Waving Texture)";
-		public static string Title
+		public new static string Title
 		{
 			get
 			{

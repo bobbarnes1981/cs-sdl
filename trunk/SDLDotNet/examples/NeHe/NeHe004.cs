@@ -36,7 +36,7 @@ namespace SdlDotNet.Examples
 	class NeHe004 : NeHe001
 	{
 		private static string title = "Lesson 4: Rotation";
-		public static string Title
+		public new static string Title
 		{
 			get
 			{

@@ -46,11 +46,6 @@ namespace SdlDotNet.Examples
 				return title;
 			}
 		}
-		private float xrot;                                              
-		// X Rotation ( NEW )
-		private float yrot;                                              
-		// Y Rotation ( NEW )
-		
 		private float xspeed;                                            
 		// X Rotation Speed
 		private float yspeed;                                            
@@ -74,6 +69,7 @@ namespace SdlDotNet.Examples
 			this.TextureName = "NeHe007.bmp";
 			this.Texture = new int[3];
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(150,50);
 		}
 
 		public override void InitGL()
@@ -98,8 +94,8 @@ namespace SdlDotNet.Examples
 			// Reset The View
 			Gl.glTranslatef(0, 0, z);
 
-			Gl.glRotatef(xrot, 1, 0, 0);
-			Gl.glRotatef(yrot, 0, 1, 0);
+			Gl.glRotatef(this.XRot, 1, 0, 0);
+			Gl.glRotatef(this.YRot, 0, 1, 0);
 
 			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[filter]);
 
@@ -142,8 +138,8 @@ namespace SdlDotNet.Examples
 			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
 			Gl.glEnd();
 
-			xrot += xspeed;
-			yrot += yspeed;
+			this.XRot += this.XSpeed;
+			this.YRot += this.YSpeed;
 
 			Video.GLSwapBuffers();
 		}
@@ -300,28 +296,6 @@ namespace SdlDotNet.Examples
 			set
 			{
 				light = value;
-			}
-		}
-		protected float XRot
-		{
-			get
-			{
-				return xrot;
-			}
-			set
-			{
-				xrot = value;
-			}
-		}
-		protected float YRot
-		{
-			get
-			{
-				return yrot;
-			}
-			set
-			{
-				yrot = value;
 			}
 		}
 		protected float XSpeed

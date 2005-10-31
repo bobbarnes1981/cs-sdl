@@ -55,6 +55,7 @@ namespace SdlDotNet.Examples
 			this.TextureName = "NeHe008.bmp";
 			this.Texture = new int[3];
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(150,50);
 		}
 
 		public override void InitGL()

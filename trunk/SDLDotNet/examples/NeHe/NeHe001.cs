@@ -129,6 +129,7 @@ namespace SdlDotNet.Examples
 				}
 				DrawGLScene();
 			}
+			Video.Dispose(true);
 		}
 
 		protected bool QuitFlag
