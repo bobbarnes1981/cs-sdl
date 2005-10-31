@@ -33,7 +33,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHeBase
+	abstract class NeHeBase
 	{
 		#region Variables
 		private const int width = 640;
@@ -171,19 +171,5 @@ namespace SdlDotNet.Examples
 				return bpp;
 			}
 		}
-
-		private static string title;
-		public static string Title
-		{
-			get
-			{
-				return title;
-			}
-			set
-			{
-				title = value;
-			}
-		}
-
 	}
 }

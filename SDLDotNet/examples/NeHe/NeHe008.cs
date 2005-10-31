@@ -38,6 +38,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe008 : NeHe007
 	{    
+		private static string title = "Lesson 8: Blending";
+		public new static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
         private bool blend; 
         private bool bp;                           
 		// Which Filter To Use                     

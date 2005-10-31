@@ -36,6 +36,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe016 : NeHeBase
 	{
+		private static string title = "Lesson 16: Cool Looking Fog";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		public bool	light = true;				// Lighting ON/OFF
 
 		public float xrot = 0.0f;				// X Rotation

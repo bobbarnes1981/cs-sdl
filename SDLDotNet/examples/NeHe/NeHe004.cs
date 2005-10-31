@@ -35,6 +35,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe004 : NeHeBase
 	{
+		private static string title = "Lesson 4: Rotation";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		// Angle For The Triangle ( NEW )
 		private float rtri;                                              
 		private float rquad;

@@ -35,6 +35,15 @@ namespace SdlDotNet.Examples
 {
 	class NeHe002 : NeHeBase
 	{
+		private static string title = "Lesson 2: Your First Polygon";
+		public static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
+
 		public override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        

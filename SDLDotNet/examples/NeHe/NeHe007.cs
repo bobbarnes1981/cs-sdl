@@ -38,6 +38,14 @@ namespace SdlDotNet.Examples
 {
 	class NeHe007 : NeHe006
 	{    
+		private static string title = "Lesson 7: Texture Filters, Lighting, and Keyboard Control";
+		public new static string Title
+		{
+			get
+			{
+				return title;
+			}
+		}
 		private float xrot;                                              
 		// X Rotation ( NEW )
 		private float yrot;                                              
