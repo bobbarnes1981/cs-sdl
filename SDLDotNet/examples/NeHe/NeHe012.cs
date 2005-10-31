@@ -57,7 +57,7 @@ namespace SdlDotNet.Examples
 
 		uint[] texture = new uint[1];	
 
-		KeyboardState keyData = new KeyboardState();
+		KeyboardState keyData = new KeyboardState(false);
 
 		public NeHe012()
 		{
