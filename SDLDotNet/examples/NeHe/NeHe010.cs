@@ -39,9 +39,12 @@ namespace SdlDotNet.Examples
 {
 	class NeHe010 : NeHe008
 	{
-		static NeHe010()
+		public new static string Title
 		{
-			m_Title = "Lesson 10: Loading and Moving through a 3D World";
+			get
+			{
+				return "Lesson 10: Loading and Moving through a 3D World";
+			}
 		}
 		private float xpos;
 		private float zpos;

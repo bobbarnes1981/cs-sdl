@@ -36,11 +36,13 @@ namespace SdlDotNet.Examples
 {
 	class NeHe018 : NeHe001
 	{
-		static NeHe018()
+		public new static string Title
 		{
-			m_Title = "Lesson 18: Quadrics";
+			get
+			{
+				return "Lesson 18: Quadrics";
+			}
 		}
-
 		bool light = true;				// Lighting ON/OFF
 
 		int part1 = 0;					// Start Of Disc ( NEW )

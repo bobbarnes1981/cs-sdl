@@ -34,10 +34,13 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	class NeHe003 : NeHe001
-	{    
-		static NeHe003()
+	{
+		public new static string Title
 		{
-			m_Title = "Lesson 3: Adding Color";
+			get
+			{
+				return "Lesson 3: Adding Color";
+			}
 		}
 		public override void DrawGLScene()
 		{

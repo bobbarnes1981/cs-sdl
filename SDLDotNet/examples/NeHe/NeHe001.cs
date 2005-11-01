@@ -42,6 +42,7 @@ namespace SdlDotNet.Examples
 		private bool quit;
 		private Surface screen;
 		#endregion
+
     
 		public NeHe001()
 		{
@@ -176,17 +177,11 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		static NeHe001()
-		{
-			m_Title = "Lesson 1: Setting Up An OpenGL Window";
-		}
-
-		protected static string m_Title = "Unknown Lesson";
 		public static string Title
 		{
 			get
 			{
-				return m_Title;
+				return "Lesson 1: Setting Up An OpenGL Window";
 			}
 		}
 	}

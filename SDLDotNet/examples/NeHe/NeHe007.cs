@@ -38,9 +38,12 @@ namespace SdlDotNet.Examples
 {
 	class NeHe007 : NeHe006
 	{
-		static NeHe007()
+		public new static string Title
 		{
-			m_Title = "Lesson 7: Texture Filters, Lighting, and Keyboard Control";
+			get
+			{
+				return "Lesson 7: Texture Filters, Lighting, and Keyboard Control";
+			}
 		}
 
 		private float xspeed;                                            

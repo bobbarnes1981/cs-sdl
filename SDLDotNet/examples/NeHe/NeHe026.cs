@@ -40,9 +40,12 @@ namespace SdlDotNet.Examples
 {
 	class NeHe026 : NeHe025
 	{
-		static NeHe026()
+		public new static string Title
 		{
-			m_Title = "Lesson 26: Clipping & Reflections Using The Stencil Buffer";
+			get
+			{
+				return "Lesson 26: Clipping & Reflections Using The Stencil Buffer";
+			}
 		}
 		
 		private Glu.GLUquadric q;                                        // Quadratic For Drawing A Sphere

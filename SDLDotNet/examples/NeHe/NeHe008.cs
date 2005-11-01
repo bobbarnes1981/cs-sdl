@@ -37,10 +37,13 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	class NeHe008 : NeHe007
-	{    
-		static NeHe008()
+	{  
+		public new static string Title
 		{
-			m_Title = "Lesson 8: Blending";
+			get
+			{
+				return "Lesson 8: Blending";
+			}
 		}
 
         private bool blend; 

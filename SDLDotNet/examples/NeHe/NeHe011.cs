@@ -36,16 +36,11 @@ namespace SdlDotNet.Examples
 {
 	class NeHe011 : NeHe001
 	{
-		static NeHe011()
-		{
-			m_Title = "Lesson 10: Loading and Moving through a 3D World";
-		}
-		private static string title = "Lesson 11: Flag Effect (Waving Texture)";
 		public new static string Title
 		{
 			get
 			{
-				return title;
+				return "Lesson 11: Flag Effect (Waving Texture)";
 			}
 		}
 		public float[][][] points;				

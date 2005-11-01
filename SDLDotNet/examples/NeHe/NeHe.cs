@@ -1,7 +1,7 @@
 using System;
-using System.Reflection;
 using System.Drawing;
 using System.Collections;
+using System.Reflection;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -12,18 +12,14 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe : System.Windows.Forms.Form
 	{
+		private System.Windows.Forms.ListBox lstExamples;
 		private System.Windows.Forms.Button startButton;
-		private System.Windows.Forms.TextBox lessonBox;
-		private System.Windows.Forms.Label lessonLabel;
-		private System.Windows.Forms.Label lessonDescriptions;
+		private System.Collections.ArrayList neheTypes = new ArrayList();
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		/// <summary>
-		/// 
-		/// </summary>
 		public NeHe()
 		{
 			//
@@ -59,81 +55,90 @@ namespace SdlDotNet.Examples
 		private void InitializeComponent()
 		{
 			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(NeHe));
+			this.lstExamples = new System.Windows.Forms.ListBox();
 			this.startButton = new System.Windows.Forms.Button();
-			this.lessonBox = new System.Windows.Forms.TextBox();
-			this.lessonLabel = new System.Windows.Forms.Label();
-			this.lessonDescriptions = new System.Windows.Forms.Label();
 			this.SuspendLayout();
+			// 
+			// lstExamples
+			// 
+			this.lstExamples.Location = new System.Drawing.Point(8, 8);
+			this.lstExamples.Name = "lstExamples";
+			this.lstExamples.Size = new System.Drawing.Size(280, 225);
+			this.lstExamples.TabIndex = 0;
+			this.lstExamples.DoubleClick += new System.EventHandler(this.startButton_Click);
 			// 
 			// startButton
 			// 
-			this.startButton.Location = new System.Drawing.Point(144, 432);
+			this.startButton.Location = new System.Drawing.Point(111, 240);
 			this.startButton.Name = "startButton";
-			this.startButton.TabIndex = 2;
+			this.startButton.TabIndex = 1;
 			this.startButton.Text = "Start Demo";
-			this.startButton.Click += new System.EventHandler(this.button1_Click);
-			// 
-			// lessonBox
-			// 
-			this.lessonBox.AcceptsTab = true;
-			this.lessonBox.Location = new System.Drawing.Point(152, 392);
-			this.lessonBox.Name = "lessonBox";
-			this.lessonBox.Size = new System.Drawing.Size(72, 20);
-			this.lessonBox.TabIndex = 1;
-			this.lessonBox.Text = "";
-			// 
-			// lessonLabel
-			// 
-			this.lessonLabel.Location = new System.Drawing.Point(88, 392);
-			this.lessonLabel.Name = "lessonLabel";
-			this.lessonLabel.Size = new System.Drawing.Size(56, 24);
-			this.lessonLabel.TabIndex = 0;
-			this.lessonLabel.Text = "Lesson";
-			// 
-			// lessonDescriptions
-			// 
-			this.lessonDescriptions.Location = new System.Drawing.Point(0, 0);
-			this.lessonDescriptions.Name = "lessonDescriptions";
-			this.lessonDescriptions.Size = new System.Drawing.Size(392, 376);
-			this.lessonDescriptions.TabIndex = 3;
-			this.lessonDescriptions.Text = @"Lesson 1: Setting Up An OpenGL Window
-Lesson 2: Your First Polygon
-Lesson 3: Adding Color
-Lesson 4: Rotation
-Lesson 5: 3D Shapes
-Lesson 6: Texture Mapping
-Lesson 7: Texture Filters, Lighting, and Keyboard Control
-Lesson 8: Blending
-Lesson 9: Moving Bitmaps in 3D Space
-Lesson 10: Loading and Moving through a 3D World
-Lesson 11: Flag Effect (Waving Texture)
-Lesson 12: Display Lists
-Lesson 13: Bitmap Fonts
-Lesson 16: Cool Looking Fog
-Lesson 17: 2D Texture Font
-Lesson 18: Quadrics
-Lesson 19: Particle Engine Using Triangle Strips
-Lesson 20: Masking
-Lesson 23: Sphere Mapping, Multi-Texturing and Extensions
-Lesson 25: Morphing and Loading Objects from a File
-Lesson 26: Clipping & Reflections Using The Stencil Buffer";
+			this.startButton.Click += new System.EventHandler(this.startButton_Click);
 			// 
 			// NeHe
 			// 
-			this.AcceptButton = this.startButton;
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(392, 473);
-			this.Controls.Add(this.lessonDescriptions);
-			this.Controls.Add(this.lessonLabel);
-			this.Controls.Add(this.lessonBox);
+			this.ClientSize = new System.Drawing.Size(292, 269);
 			this.Controls.Add(this.startButton);
+			this.Controls.Add(this.lstExamples);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MaximizeBox = false;
 			this.Name = "NeHe";
 			this.Text = "SDL.NET - NeHe OpenGL Examples";
+			this.Load += new System.EventHandler(this.NeHe_Load);
+			this.Closed += new System.EventHandler(this.NeHe_Closed);
 			this.ResumeLayout(false);
 
 		}
 		#endregion
+
+		private void NeHe_Load(object sender, System.EventArgs e)
+		{
+			Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+			foreach(Type type in types)
+			{
+				if(type.Name.StartsWith("NeHe") && type.Name.Length == 7) // NeHeXXX
+				{
+					try
+					{
+						// Get the title of the NeHe example class
+						object result = type.InvokeMember("Title",
+							BindingFlags.GetProperty, null, type, null);
+
+						// Add the example to the array and display it on the listbox
+						lstExamples.Items.Add((string)result);
+						neheTypes.Add(type);
+					}
+					catch(System.MissingMethodException)
+					{
+						// NeHe demo missing static Title property - do nothing
+					}
+				}
+			}
+		}
+
+		private void startButton_Click(object sender, System.EventArgs e)
+		{
+			try
+			{
+				// Get the desired NeHe example type.
+				Type dynClassType = (Type)neheTypes[lstExamples.SelectedIndex];
+
+				// Make an instance of it.
+				object dynObj = Activator.CreateInstance(dynClassType);
+				if(dynObj != null)
+				{
+					this.SendToBack(); // Make the SDL window appear ontop of this form.
+					MethodInfo invokedMethod = dynClassType.GetMethod("Run");
+					invokedMethod.Invoke(dynObj, null);
+				}
+			}
+			catch(System.Reflection.TargetInvocationException)
+			{
+				// User changed demo - do nothing
+			}
+		}
 
 		/// <summary>
 		/// 
@@ -145,29 +150,21 @@ Lesson 26: Clipping & Reflections Using The Stencil Buffer";
 			Application.Run(new NeHe());
 		}
 
-		private void button1_Click(object sender, System.EventArgs e)
+		private void NeHe_Closed(object sender, System.EventArgs e)
 		{
-			Assembly asm = Assembly.GetExecutingAssembly();
+			// Quit SDL if it's not quit already
 			try
 			{
-				string tempLesson = this.lessonBox.Text.Trim();
-				this.lesson = padding.Substring(tempLesson.Length - 1) + this.lessonBox.Text.Trim();
-				Type dynClassType = asm.GetType("SdlDotNet.Examples.NeHe" + lesson, true, false);
-				object dynObj = Activator.CreateInstance(dynClassType);
-				if (dynObj != null) 
-				{
-					// Verify that the method exists and get its MethodInfo obj
-					MethodInfo invokedMethod = dynClassType.GetMethod("Run");
-					invokedMethod.Invoke(dynObj, null);
-				}
+				SdlDotNet.Events.QuitApplication();
 			}
-			catch (System.TypeLoadException)
+			catch(SdlDotNet.SdlException)
 			{
-				MessageBox.Show("Lesson does not exist");
+				// already quit SDL - Do nothing
 			}
-		}
 
-		private string lesson;
-		private string padding = "00";
+			// End the thread and the application.
+			Application.Exit();
+			System.Threading.Thread.CurrentThread.Abort();
+		}
 	}
 }

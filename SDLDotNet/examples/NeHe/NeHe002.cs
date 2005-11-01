@@ -35,9 +35,12 @@ namespace SdlDotNet.Examples
 {
 	class NeHe002 : NeHe001
 	{
-		static NeHe002()
+		public new static string Title
 		{
-			m_Title = "Lesson 2: Your First Polygon";
+			get
+			{
+				return "Lesson 2: Your First Polygon";
+			}
 		}
 
 		public override void DrawGLScene()
