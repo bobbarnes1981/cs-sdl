@@ -85,7 +85,6 @@ namespace SdlDotNet.Examples
 			this.Controls.Add(this.startButton);
 			this.Controls.Add(this.lstExamples);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Name = "NeHe";
 			this.Text = "SDL.NET - NeHe OpenGL Examples";
@@ -98,7 +97,24 @@ namespace SdlDotNet.Examples
 
 		private void NeHe_Load(object sender, System.EventArgs e)
 		{
-			Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+			// Load app.ico as the form icon.
+			Assembly asm = Assembly.GetExecutingAssembly();
+			string iconName = "";
+			foreach (string s in asm.GetManifestResourceNames())
+			{
+				if (s.EndsWith("App.ico"))
+				{
+					iconName = s;
+					break;
+				}
+			}
+			if (iconName.Length > 0)
+			{
+				this.Icon = new Icon(asm.GetManifestResourceStream(iconName));
+			}
+
+			// Get the NeHe examples.
+			Type[] types = asm.GetTypes();
 			foreach(Type type in types)
 			{
 				if(type.Name.StartsWith("NeHe") && type.Name.Length == 7) // NeHeXXX
