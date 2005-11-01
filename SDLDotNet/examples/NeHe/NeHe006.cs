@@ -36,8 +36,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe006 : NeHe001
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe006 : NeHe001
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -57,12 +63,19 @@ namespace SdlDotNet.Examples
 		string dataDirectory = @"Data/";
 		string filePath = @"../../";
 		string textureName;
+		
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe006()
 		{
 			textureName = "NeHe006.bmp";
 			texture = new int[1];
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected string TextureName
 		{
 			get
@@ -75,6 +88,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected int [] Texture
 		{
 			get
@@ -87,6 +103,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected string DataDirectory
 		{
 			get
@@ -99,6 +118,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected string FilePath
 		{
 			get
@@ -111,6 +133,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void InitGL()
 		{
 			this.LoadGLTextures();
@@ -119,6 +144,9 @@ namespace SdlDotNet.Examples
 			base.InitGL ();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
@@ -169,7 +197,6 @@ namespace SdlDotNet.Examples
 			xrot += 0.3f;
 			yrot += 0.2f;
 			zrot += 0.4f;
-			Video.GLSwapBuffers();
 		}
 
 		#region void LoadGLTextures()
@@ -221,6 +248,9 @@ namespace SdlDotNet.Examples
 		}
 		#endregion void LoadGLTextures()
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected float XRot
 		{
 			get
@@ -232,6 +262,10 @@ namespace SdlDotNet.Examples
 				xrot = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected float YRot
 		{
 			get
@@ -243,6 +277,10 @@ namespace SdlDotNet.Examples
 				yrot = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected float ZRot
 		{
 			get

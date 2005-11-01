@@ -35,7 +35,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe023 : NeHe001
+	public class NeHe023 : NeHe001
 	{
 		public new static string Title
 		{
@@ -235,8 +235,6 @@ namespace SdlDotNet.Examples
 			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-13.3f, 10, 10);
 			Gl.glEnd();
 			Gl.glPopMatrix();
-
-			Video.GLSwapBuffers();
 
 			xrot += xspeed;
 			yrot += yspeed;

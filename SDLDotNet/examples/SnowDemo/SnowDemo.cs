@@ -29,7 +29,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	class SnowDemo
+	public class SnowDemo
 	{
 		static string[] textArray = {
 										"when the cold of winter comes",

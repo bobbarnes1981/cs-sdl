@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe020 : NeHe001
+	public class NeHe020 : NeHe001
 	{
 		public new static string Title
 		{
@@ -178,8 +178,6 @@ namespace SdlDotNet.Examples
 
 			Gl.glEnable(Gl.GL_DEPTH_TEST);							// Enable Depth Testing
 			Gl.glDisable(Gl.GL_BLEND);								// Disable Blending
-
-			Video.GLSwapBuffers();
 
 			this.roll += 0.002f;										// Increase Our Texture Roll Variable
 			if (this.roll > 1.0f)										// Is Roll Greater Than One

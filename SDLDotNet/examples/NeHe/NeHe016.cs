@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe016 : NeHe001
+	public class NeHe016 : NeHe001
 	{
 		public new static string Title
 		{
@@ -56,9 +56,9 @@ namespace SdlDotNet.Examples
 		public float[] LightPosition = {0.0f, 0.0f, 2.0f, 1.0f};
 
 		public int filter = 0;					// Which Filter To Use
-		public uint[] texture = new uint[3];	// Texture array
+		public int[] texture = new int[3];	// Texture array
 
-		public uint[] fogMode = {Gl.GL_EXP, Gl.GL_EXP2, Gl.GL_LINEAR};	// Storage For Three Types Of Fog
+		public int[] fogMode = {Gl.GL_EXP, Gl.GL_EXP2, Gl.GL_LINEAR};	// Storage For Three Types Of Fog
 		public int fogfilter = 0;										// Which Fog Mode To Use 
 		public float[] fogColor = {0.5f, 0.5f, 0.5f, 1.0f};				// Fog Color
 
@@ -194,7 +194,6 @@ namespace SdlDotNet.Examples
 			Gl.glTexCoord2f(1.0f, 1.0f); Gl.glVertex3f(-1.0f,  1.0f,  1.0f);
 			Gl.glTexCoord2f(0.0f, 1.0f); Gl.glVertex3f(-1.0f,  1.0f, -1.0f);
 			Gl.glEnd();
-			Video.GLSwapBuffers();
 
 			this.xrot += this.xspeed;
 			this.yrot += this.yspeed;

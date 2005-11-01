@@ -38,7 +38,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe025 : NeHe010
+	public class NeHe025 : NeHe010
 	{
 		public new static string Title
 		{
@@ -252,7 +252,6 @@ namespace SdlDotNet.Examples
 				source = destination;
 				step = 0;
 			}
-			Video.GLSwapBuffers();
 		}
 		#endregion DrawGLScene()
 

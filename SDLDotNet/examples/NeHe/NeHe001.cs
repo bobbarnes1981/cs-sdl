@@ -33,7 +33,10 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe001
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe001
 	{
 		#region Variables
 		private const int width = 640;
@@ -43,12 +46,17 @@ namespace SdlDotNet.Examples
 		private Surface screen;
 		#endregion
 
-    
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe001()
 		{
 			Initialize();
 		}
     
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Initialize()
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
@@ -58,6 +66,9 @@ namespace SdlDotNet.Examples
 			Reshape();
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected void WindowAttributes()
 		{
 			Video.WindowIcon();
@@ -65,17 +76,32 @@ namespace SdlDotNet.Examples
 				"SDL.NET - NeHe Lesson " + this.GetType().ToString().Substring(this.GetType().ToString().Length-3);
 		}
     
-		public void Reshape()
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual void Reshape()
+		{
+			this.Reshape(100.0F);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="distance"></param>
+		public virtual void Reshape(float distance)
 		{
 			Gl.glViewport(0, 0, width, height);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
 			Gl.glLoadIdentity();
 			//  Calculate The Aspect Ratio Of The Window
-			Glu.gluPerspective(45.0F, (width / (double)height), 0.1F, 100.0F);
+			Glu.gluPerspective(45.0F, (width / (double)height), 0.1F, distance);
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity();
 		}
     
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual void InitGL()
 		{
 			Gl.glShadeModel(Gl.GL_SMOOTH);
@@ -86,11 +112,13 @@ namespace SdlDotNet.Examples
 			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
 		}
     
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual void DrawGLScene()
 		{
 			Gl.glClear((Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT));
 			Gl.glLoadIdentity();
-			Video.GLSwapBuffers();
 		}	
     
 		private void KeyDown(object sender, KeyboardEventArgs e)
@@ -120,6 +148,9 @@ namespace SdlDotNet.Examples
 			quit = true;
 		}
     
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Run()
 		{
 			InitGL();
@@ -129,10 +160,14 @@ namespace SdlDotNet.Examples
 				{
 				}
 				DrawGLScene();
+				Video.GLSwapBuffers();
 			}
 			Video.Dispose(true);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected bool QuitFlag
 		{
 			get
@@ -144,6 +179,10 @@ namespace SdlDotNet.Examples
 				quit = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected Surface Screen
 		{
 			get
@@ -155,6 +194,10 @@ namespace SdlDotNet.Examples
 				screen = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected int Width
 		{
 			get
@@ -162,6 +205,10 @@ namespace SdlDotNet.Examples
 				return width;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected int Height
 		{
 			get
@@ -169,6 +216,10 @@ namespace SdlDotNet.Examples
 				return height;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected int Bpp
 		{
 			get
@@ -177,6 +228,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static string Title
 		{
 			get

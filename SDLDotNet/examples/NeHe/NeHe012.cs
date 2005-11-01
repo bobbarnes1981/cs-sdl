@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe012 : NeHe001
+	public class NeHe012 : NeHe001
 	{
 		public new static string Title
 		{
@@ -208,7 +208,6 @@ namespace SdlDotNet.Examples
 					Gl.glCallList(this.top);
 				}
 			}
-			Video.GLSwapBuffers();
 		}
 	}
 }

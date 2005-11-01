@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe018 : NeHe001
+	public class NeHe018 : NeHe001
 	{
 		public new static string Title
 		{
@@ -195,8 +195,6 @@ namespace SdlDotNet.Examples
 					Glu.gluPartialDisk(this.quadratic, 0.5f, 1.5f, 32, 32, this.part1, this.part2 - this.part1);	// A Disk Like The One Before
 					break;
 			};
-
-			Video.GLSwapBuffers();
 
 			this.xrot += this.xspeed;
 			this.yrot += this.yspeed;

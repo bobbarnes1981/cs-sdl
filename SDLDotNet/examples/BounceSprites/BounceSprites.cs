@@ -33,7 +33,7 @@ namespace SdlDotNet.Examples
 	/// You can click on each sprite and move them around the 
 	/// screen as well (MouseButton and MouseMotion events).
 	/// </summary>
-	class BounceSprites
+	public class BounceSprites
 	{
 		#region Fields
 		private Surface screen; //video screen

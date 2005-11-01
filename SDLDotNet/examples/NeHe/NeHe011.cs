@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe011 : NeHe001
+	public class NeHe011 : NeHe001
 	{
 		public new static string Title
 		{
@@ -55,7 +55,7 @@ namespace SdlDotNet.Examples
 		public float zrot = 0.0f;				
 		// Z Rotation ( NEW )
 		
-		public uint[] texture = new uint[1];	
+		public int[] texture = new int[1];	
 		// Texture array
 
 		public NeHe011()
@@ -176,8 +176,6 @@ namespace SdlDotNet.Examples
 			}
 			Gl.glEnd();				
 			// Done Drawing Our Quads
-			Video.GLSwapBuffers();	
-			// Flip the SDL OpenGL buffers with SDL.NET
 
 			float hold = 0.0f;
 			if (this.wiggle_count == 2)

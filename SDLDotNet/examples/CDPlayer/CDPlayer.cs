@@ -32,7 +32,10 @@ using SdlDotNet.Windows;
 
 namespace SdlDotNet.Examples 
 {
-	class CDPlayer : System.Windows.Forms.Form 
+	/// <summary>
+	/// 
+	/// </summary>
+	public class CDPlayer : System.Windows.Forms.Form 
 	{
 		private CDDrive _drive;
 		private int _track;
