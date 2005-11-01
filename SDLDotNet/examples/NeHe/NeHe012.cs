@@ -49,8 +49,10 @@ namespace SdlDotNet.Examples
 				return "Lesson 12: Display Lists";
 			}
 		}
-		int box = 0;			// Storage For The Box Display List
-		int top = 0;			// Storage For The Top Display List
+		int box = 0;			
+		// Storage For The Box Display List
+		int top = 0;			
+		// Storage For The Top Display List
 
 		float[][] boxcol = new float[5][] { 
 			new float[3] {1.0f, 0.0f, 0.0f}, 

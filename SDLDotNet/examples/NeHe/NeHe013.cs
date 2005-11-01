@@ -36,7 +36,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class NeHe013 : NeHe001 
+	public class NeHe013 : NeHe012 
 	{
 		/// <summary>
 		/// 
@@ -49,12 +49,42 @@ namespace SdlDotNet.Examples
 			}
 		}
 		private IntPtr hDC;
-		private static int fontbase;
+		private int fontbase;
 		// Base Display List For The Font Set
-		private static float cnt1;
+		private float cnt1;
 		// 1st Counter Used To Move Text & For Coloring
-		private static float cnt2;
+		private float cnt2;
 		// 2nd Counter Used To Move Text & For Coloring
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public float Cnt1
+		{
+			get
+			{
+				return cnt1;
+			}
+			set
+			{
+				cnt1 = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public float Cnt2
+		{
+			get
+			{
+				return cnt2;
+			}
+			set
+			{
+				cnt2 = value;
+			}
+		}
 
 		/// <summary>
 		/// 
@@ -93,13 +123,13 @@ namespace SdlDotNet.Examples
 			Gl.glTranslatef(0, 0, -1);
 			// Move One Unit Into The Screen
 			// Pulsing Colors Based On Text Position
-			Gl.glColor3f(1.0f * ((float) (Math.Cos(cnt1))), 1.0f * ((float) (Math.Sin(cnt2))), 1.0f - 0.5f* ((float) (Math.Cos(cnt1 + cnt2))));
+			Gl.glColor3f(1.0f * ((float) (Math.Cos(Cnt1))), 1.0f * ((float) (Math.Sin(cnt2))), 1.0f - 0.5f* ((float) (Math.Cos(Cnt1 + cnt2))));
 
 			// Position The Text On The Screen
-			Gl.glRasterPos2f(-0.45f + 0.05f * ((float) (Math.Cos(cnt1))), 0.32f * ((float) (Math.Sin(cnt2))));
+			Gl.glRasterPos2f(-0.45f + 0.05f * ((float) (Math.Cos(Cnt1))), 0.32f * ((float) (Math.Sin(cnt2))));
 			// Print GL Text To The Screen
-			glPrint(string.Format("Active OpenGL Text With NeHe - {0:0.00}", cnt1));
-			cnt1 += 0.051f;
+			glPrint(string.Format("Active OpenGL Text With NeHe - {0:0.00}", Cnt1));
+			Cnt1 += 0.051f;
 			// Increase The First Counter
 			cnt2 += 0.005f;
 			// Increase The First Counter
@@ -134,21 +164,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void InitGL()
 		{
-			Gl.glShadeModel(Gl.GL_SMOOTH);
-			// Enable Smooth Shading
-			Gl.glClearColor(0, 0, 0, 0.5f);
-			
-			// Black Background
-			Gl.glClearDepth(1);
-			// Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
-			// Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);
-			// The Type Of Depth Testing To Do
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
-			// Really Nice Perspective Calculations
+			base.InitGL();
 			hDC = User.GetDC(Video.WindowHandle);
-
 			BuildFont();     
 		}
 

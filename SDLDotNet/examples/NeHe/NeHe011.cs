@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class NeHe011 : NeHe010
+	public class NeHe011 : NeHe009
 	{
 		/// <summary>
 		/// 
@@ -60,6 +60,7 @@ namespace SdlDotNet.Examples
 		public NeHe011()
 		{
 			this.Texture = new int[1];
+			this.TextureName = "NeHe011.bmp";
 		}
 
 		/// <summary>
@@ -67,9 +68,10 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void InitGL()
 		{
-			LoadTextures();
+			LoadGLTextures();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);									// Enable Texture Mapping
+			Gl.glEnable(Gl.GL_TEXTURE_2D);									
+			// Enable Texture Mapping
 			Gl.glShadeModel(Gl.GL_SMOOTH);									
 			// Enable Smooth Shading
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);						
@@ -100,43 +102,6 @@ namespace SdlDotNet.Examples
 					this.points[i][j][2] = (float)(Math.Sin((((i / 5.0f) * 40.0f) / 360.0f) * Math.PI * 2.0f));
 				}
 			}
-		}
-
-		private bool LoadTextures()
-		{
-			// Load The Bitmap
-			string file1 = "NeHe011.bmp";
-			string file2 = "Data" + Path.DirectorySeparatorChar + file1;
-			string file3 = ".." + Path.DirectorySeparatorChar + ".."  + Path.DirectorySeparatorChar + file2;
-			string file = "";
-			if(File.Exists(file1))
-				file = file1;
-			else if(File.Exists(file2))
-				file = file2;
-			else if(File.Exists(file3))
-				file = file3;
-			else
-				throw new FileNotFoundException(file1);
-
-			using(Bitmap image = new Bitmap(file))
-			{
-				image.RotateFlip(RotateFlipType.RotateNoneFlipY);
-				System.Drawing.Imaging.BitmapData bitmapdata;
-				Rectangle rect = new Rectangle(Point.Empty, image.Size);
-
-				bitmapdata = image.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-
-				Gl.glGenTextures(1, this.Texture);
-			
-				// Create Linear Filtered Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, (int)Gl.GL_RGB, image.Width, image.Height, 0, Gl.GL_BGR_EXT, Gl.GL_UNSIGNED_BYTE, bitmapdata.Scan0);
-
-				image.UnlockBits(bitmapdata);
-			}
-			return true;
 		}
 
 		/// <summary>
