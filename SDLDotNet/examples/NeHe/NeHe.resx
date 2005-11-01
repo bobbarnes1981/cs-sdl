@@ -118,6 +118,9 @@
   <data name="$this.Locked" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </data>
+  <data name="$this.Name">
+    <value>NeHe</value>
+  </data>
   <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>(Default)</value>
   </data>
@@ -133,9 +136,6 @@
   <data name="$this.DrawGrid" type="System.Boolean, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </data>
-  <data name="$this.Name">
-    <value>NeHe</value>
-  </data>
   <data name="$this.TrayHeight" type="System.Int32, mscorlib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>80</value>
   </data>
@@ -144,47 +144,5 @@
   </data>
   <data name="$this.DefaultModifiers" type="System.CodeDom.MemberAttributes, System, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>Private</value>
-  </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAICAAAAEACACoCAAAFgAAACgAAAAgAAAAQAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAOEx4AKR8VAEYtGwBVMhEAVjMTAFc0FABYNRUAWTYWAFo3GQBXORgALTE9AFc4IQBfPB4AWTskAEU6
-        LwBcPx8AXT8gAGVCGgBfQSIAZEAjAEQ9NgBiRCUAY0UmAFhDMABlRygAaEkrAFJGPABqSy0AZkw0ABpM
-        UwBnTTUAaE42AGlONwBpTzgAB1FaAGpQOQBrUTkAblU1AG1TOwBuVDwAclhAAHNZQQB0WkIAX1hQAHVb
-        QwByXkMAeF1GAHFaTwB6X0gAdmFHAGRdVgB7YEkAd2JIAHhjSAB9YksAc2NNAHlkSQBdYF4AemVKAHtm
-        SwB6ZFEAZGBiAFpkXgB8Z0wAgWZPAIJnUAB+aFUAgGtQAH9pVgCBbFEAgm1SAGtpZACBa1gAgmtZAINu
-        UwCEb1QAcmtjAIVwVQCGcVYAh3JXAIJyWwCIc1gAiHFfAIl0WQB3cGgAi3RhAIx3XACOeV4AjndkAHB7
-        bgCMe2UAVXCUAJN+YwCOfWcAfHh6AI9+aAB4e3kAkH9pAJaBZgCSgWsAkX9wAJOCbACYgW4Ak4FyAI6C
-        dgCWhW8AlYN0AH+CgACGg34AmIdxAJqIeQCbiXoAnIp7AIyJhACIi4kAn41+AKCQeQCiknsAo5N8AKWS
-        gwCmk4QAp5SFAKmYgQBlmJsAqZaHALCafwCrmoMArJmKAK2chQCvnocAqZ6LAKmckQCqnZIArJ6TAJue
-        nACuoJUAnZ6jAJigoQCwopcAr6CcAGyYygDRqIcAsqWZAK6mngC7qpIAtqqXAL2slAC2qZ0Av66WALir
-        nwC8rqIAm7afAL+xpQCtsK4AwLKnAMGzqADCtKkAyrihAL62rgDGuqcAxbisAMC4sAC4u7kAxLyzANLA
-        qADFvbQAx7+2AMjAuADEwr0Ay8O7AMHEwgDNxb0Az8a+ANDHvwDYyr4A38u8AODOtgDTy8IA1c3EANbO
-        xgDf078A2NDIAObSwgDb0soA49XJAN7XxwDS1dMA3tbNAOXZxQDf184A2tjSANXY1gDb2dQA4trSANza
-        1QDk29MA3dvWAN/c1wDm3dUA4N3YAOHe2QDt39MA4t/aAO7g1ADj4NsA3eDeAOXj3QDs5NsA5uTfAOjl
-        4ADp5uEA4+bkAPXl4QDw598A6ufiAJDu9gDr6OMA5ejmAPHp4ADs6eQA5unnAO3q5QDn6ugA8+viAO7s
-        5gDv7ecA8O7pAPLv6gDz8OsA9PHsAPXy7QDv8vAA9vPuAPDz8QD39e8A+PbwAPn38gD7+PMA/Pn0AP36
-        9QD3+vgA/vv2APj7+QD5/PoA//33APr9+wD//vgA+/3/APv//AD8//4AAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn2+fn5+fn5+fn5+fn5+fn5+fn5+fn59/f3
-        9/n5+fn3+ff2+fn5+fn5+fn5+fn5+fn5+fn39/f58OHOwcjKzNvY6vf3+fn5+fn5+fn5+fn59/f2+ezh
-        z7vJybi4pK+2r7zGzuH39vf5+fn5+fn5+ff37+Lf2uLt7tZyocXtclkaK1R9kT2o5PT3+fn5+fn39Orm
-        7ff5+fn5zT1rmfY5lyLXiZxUN32yx+n5+fn3+fn29/n59vf2+ff594iL1F66HXuG2IiIgHSYwub3+fb3
-        9/b29vf39vf59vb2iC+NPdw96F6MW9j3wFJ0wfT53Z5VKCdAhOz3bmZkZHlsbEyqnBcOAQoAFM35s2N3
-        2/eCCAcWGQkDQs8NCwMMCwdA0flaBAwSEQIj7fn3zj+e9W8zo+b3sxkJfycPdLOVGwkp6G4ILLW1tb3z
-        +fnqZlzk0ff39/axIw1pLBiW+fm1GxGedxBB+fn5+fn5+ff3dp/59q5lPyMcGZMwHJX59/ZGF3dzFUb3
-        +fn5+fn5+etif/aEJyAbJzCH6zEllfn2+VggcHoeUvX5+fn5+fn57X2QszQqO3ml3fnpPyqa9/fwSyd/
-        giVX9/n5+fn5+fnjlsGeQjSp9vn3wbtSMaDz8Y41OMKKL1z1+fn5+fn5+bOS+eJkMWWlp3lOq1Y/ZINk
-        OkB/+YI4Yvf5+fn5+fnnneb5+c9pRkVFUFq+WlBPTVNhnvn5f0tp8/n5+ff5+a7B+fn5+fnBq6vC7fnS
-        0dHR4fX5+fnj0Nv5+fn59/DB1fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+ff04+35+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fT5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
-        +fn5+fn5+fn5+QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAA
-</value>
   </data>
 </root>

@@ -162,20 +162,20 @@ namespace SdlDotNet.Examples
 			// Reset The View
 			// Pulsing Colors Based On Text Position
 			Gl.glColor3f(1.0f*(float)Math.Cos(this.Cnt1), 1.0f*(float)Math.Sin(this.Cnt2), 1.0f-0.5f*(float)Math.Cos(this.Cnt1+this.Cnt2));
-			glPrint((int)(280+250*Math.Cos(this.Cnt1)), (int)(235+200*Math.Sin(this.Cnt2)), "NeHe", 0);
+			GlPrint((int)(280+250*Math.Cos(this.Cnt1)), (int)(235+200*Math.Sin(this.Cnt2)), "NeHe", 0);
 			// Pr(int) Gl.GL Text To The Screen
 
 			Gl.glColor3f(1.0f*(float)(Math.Sin(this.Cnt2)), 1.0f-0.5f*(float)(Math.Cos(this.Cnt1+this.Cnt2)), 1.0f*(float)(Math.Cos(this.Cnt1)));
-			glPrint((int)(280+230*Math.Cos(this.Cnt2)), (int)(235+200*Math.Sin(this.Cnt1)), "OpenGL", 0);
+			GlPrint((int)(280+230*Math.Cos(this.Cnt2)), (int)(235+200*Math.Sin(this.Cnt1)), "OpenGL", 0);
 			// Pr(int) Gl.GL Text To The Screen
 
 			Gl.glColor3f(0.0f, 0.0f, 1.0f);
 			// Set Color To Blue
-			glPrint((int)(240+200*Math.Cos((this.Cnt2+this.Cnt1)/5)), 2, "Giuseppe D'Agata", 0);
+			GlPrint((int)(240+200*Math.Cos((this.Cnt2+this.Cnt1)/5)), 2, "Giuseppe D'Agata", 0);
 
 			Gl.glColor3f(1.0f, 1.0f, 1.0f);
 			// Set Color To White
-			glPrint((int)(242+200*Math.Cos((this.Cnt2+this.Cnt1)/5)), 2, "Giuseppe D'Agata", 0);
+			GlPrint((int)(242+200*Math.Cos((this.Cnt2+this.Cnt1)/5)), 2, "Giuseppe D'Agata", 0);
 
 
 			this.Cnt1 += 0.01f;
@@ -239,7 +239,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public void BuildFont()
+		protected override void BuildFont()
 		{
 			float cx;											
 			// Holds Our X Character Coord
@@ -294,7 +294,7 @@ namespace SdlDotNet.Examples
 		/// <param name="y"></param>
 		/// <param name="str"></param>
 		/// <param name="charSet"></param>
-		public void glPrint(int x, int y, string str, int charSet)	
+		public void GlPrint(int x, int y, string str, int charSet)	
 			// Where The Printing Happens
 		{
 			if (charSet > 1)
@@ -340,15 +340,6 @@ namespace SdlDotNet.Examples
 		private void Events_Quit(object sender, QuitEventArgs e)
 		{
 			KillFont();
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		public void KillFont()
-		{
-			Gl.glDeleteLists(this.baseList, 256);				
-			// Delete All 256 Display Lists
 		}
 	}
 }

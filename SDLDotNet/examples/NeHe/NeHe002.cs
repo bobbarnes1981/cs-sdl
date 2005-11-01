@@ -45,7 +45,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Lesson 2: Your First Polygon";
+				return "Lesson 02: Your First Polygon";
 			}
 		}
 

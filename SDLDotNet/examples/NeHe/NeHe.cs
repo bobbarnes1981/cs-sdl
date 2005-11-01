@@ -57,7 +57,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(NeHe));
 			this.lstExamples = new System.Windows.Forms.ListBox();
 			this.startButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
@@ -67,6 +66,7 @@ namespace SdlDotNet.Examples
 			this.lstExamples.Location = new System.Drawing.Point(8, 8);
 			this.lstExamples.Name = "lstExamples";
 			this.lstExamples.Size = new System.Drawing.Size(360, 381);
+			this.lstExamples.Sorted = true;
 			this.lstExamples.TabIndex = 0;
 			this.lstExamples.DoubleClick += new System.EventHandler(this.startButton_Click);
 			// 
@@ -115,6 +115,7 @@ namespace SdlDotNet.Examples
 
 			// Get the NeHe examples.
 			Type[] types = asm.GetTypes();
+
 			foreach(Type type in types)
 			{
 				if(type.Name.StartsWith("NeHe") && type.Name.Length == 7) // NeHeXXX
