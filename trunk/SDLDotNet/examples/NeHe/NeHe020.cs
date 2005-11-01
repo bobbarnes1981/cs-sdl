@@ -36,9 +36,12 @@ namespace SdlDotNet.Examples
 {
 	class NeHe020 : NeHe001
 	{
-		static NeHe020()
+		public new static string Title
 		{
-			m_Title = "Lesson 20: Masking";
+			get
+			{
+				return "Lesson 20: Masking";
+			}
 		}
 		bool scene = false;				// Which Scene To Draw
 		bool masking = true;
@@ -49,6 +52,7 @@ namespace SdlDotNet.Examples
 		public NeHe020()
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
+			Keyboard.EnableKeyRepeat(0,0);
 		}
 
 		public override void InitGL()

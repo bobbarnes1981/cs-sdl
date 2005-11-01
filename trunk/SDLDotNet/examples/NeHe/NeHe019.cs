@@ -37,9 +37,12 @@ namespace SdlDotNet.Examples
 {
 	class NeHe019 : NeHe001
 	{
-		static NeHe019()
+		public new static string Title
 		{
-			m_Title = "Lesson 19: Particle Engine Using Triangle Strips";
+			get
+			{
+				return "Lesson 19: Particle Engine Using Triangle Strips";
+			}
 		}
 		readonly static int MaxParticles = 1000;	// Number of particles to create
 		bool rainbow = true;			// Rainbow Mode?

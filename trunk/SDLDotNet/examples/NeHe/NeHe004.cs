@@ -35,11 +35,13 @@ namespace SdlDotNet.Examples
 {
 	class NeHe004 : NeHe001
 	{
-		static NeHe004()
+		public new static string Title
 		{
-			m_Title = "Lesson 4: Rotation";
+			get
+			{
+				return "Lesson 4: Rotation";
+			}
 		}
-
 		// Angle For The Triangle ( NEW )
 		private float rtri;                                              
 		private float rquad;
