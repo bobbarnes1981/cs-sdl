@@ -96,21 +96,29 @@ namespace SdlDotNet.Examples
 		public override void InitGL()
 		{
 			this.LoadGLTextures();
-			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
+                                      
 			// Enable Texture Mapping
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);                         
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);
+                        
 			// Set The Blending Function For Translucency
-			Gl.glClearColor(0, 0, 0, 0);                                        
+			Gl.glClearColor(0, 0, 0, 0);
+                                        
 			// This Will Clear The Background Color To Black
-			Gl.glClearDepth(1);                                                 
+			Gl.glClearDepth(1);
+                                                 
 			// Enables Clearing Of The Depth Buffer
-			Gl.glDepthFunc(Gl.GL_LESS);                                         
+			Gl.glDepthFunc(Gl.GL_LESS);
+                                         
 			// The Type Of Depth Test To Do
-			Gl.glEnable(Gl.GL_DEPTH_TEST);                                      
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
+                                      
 			// Enables Depth Testing
-			Gl.glShadeModel(Gl.GL_SMOOTH);                                      
+			Gl.glShadeModel(Gl.GL_SMOOTH);
+                                      
 			// Enables Smooth Color Shading
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);         
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+         
 			// Really Nice Perspective Calculations
 			this.SetupWorld();
 		}
@@ -133,31 +141,40 @@ namespace SdlDotNet.Examples
 			// The World.txt File To Remove Comments, Empty Lines And 
 			// Excess Spaces.  Sorry For The
 			// Ugliness, I'm Too Lazy To Clean It Up.
-			float x, y, z, u, v;                                                
+			float x, y, z, u, v;
+                                                
 			// Local Vertex Information
-			int numtriangles;                                                   
+			int numtriangles;
+                                                   
 			// Local Number Of Triangles
-			string oneline = "";                                                
+			string oneline = "";
+                                                
 			// The Line We've Read
-			string[] splitter;                                                  
+			string[] splitter;
+                                                  
 			// Array For Split Values
-			StreamReader reader = null;                                         
+			StreamReader reader = null;
+                                        
 			// Our StreamReader
-			ASCIIEncoding encoding = new ASCIIEncoding();                       
+			ASCIIEncoding encoding = new ASCIIEncoding();
+                       
 			// ASCII Encoding
 			string fileName = @"NeHe010.World.txt";                       
 			// The File To Load
 			string fileName1 = string.Format("Data{0}{1}",                      
 				// Look For Data\Filename
 				Path.DirectorySeparatorChar, fileName);
+
 			string fileName2 = string.Format("{0}{1}{0}{1}Data{1}{2}",          
 				// Look For ..\..\Data\Filename
 				"..", Path.DirectorySeparatorChar, fileName);
 
+
 			// Make Sure The File Exists In One Of The Usual Directories
 			if(!File.Exists(fileName) && !File.Exists(fileName1) && !File.Exists(fileName2)) 
 			{
-				throw new FileNotFoundException();                                              
+				throw new FileNotFoundException(); 
+                                             
 			}
 
 			if(File.Exists(fileName)) 
@@ -169,74 +186,96 @@ namespace SdlDotNet.Examples
 			else if(File.Exists(fileName1)) 
 			{                                   
 				// Does The File Exist Here?
-				fileName = fileName1;                                           
+				fileName = fileName1;
+                                           
 				// Swap Filename
 			}
 			else if(File.Exists(fileName2)) 
 			{                                   
 				// Does The File Exist Here?
-				fileName = fileName2;                                           
+				fileName = fileName2;
+                                           
 				// Swap Filename
 			}
 
-			reader = new StreamReader(fileName, encoding);                      
+			reader = new StreamReader(fileName, encoding);
+                      
 			// Open The File As ASCII Text
 
-			oneline = reader.ReadLine();                                        
+			oneline = reader.ReadLine();
+                                        
 			// Read The First Line
-			splitter = oneline.Split();                                         
+			splitter = oneline.Split();
+                                         
 			// Split The Line On Spaces
 
 			// The First Item In The Array Will Contain The String "NUMPOLLIES",
 			// Which We Will Ignore
-			numtriangles = Convert.ToInt32(splitter[1]);                        
+			numtriangles = Convert.ToInt32(splitter[1]);
+                        
 			// Save The Number Of Triangles As An int
 
-			sector.triangle = new Triangle[numtriangles];                       
+			sector.triangle = new Triangle[numtriangles];
+                       
 			// Initialize The Triangles And Save To sector
-			sector.numtriangles = numtriangles;                                 
+			sector.numtriangles = numtriangles;
+                                 
 			// Save The Number Of Triangles In sector
 
 			for(int triloop = 0; triloop < numtriangles; triloop++) 
 			{           
 				// For Every Triangle
-				sector.triangle[triloop].vertex = new Vertex[3];                
+				sector.triangle[triloop].vertex = new Vertex[3];
+                
 				// Initialize The Vertices In sector
 				for(int vertloop = 0; vertloop < 3; vertloop++) 
 				{               // For Every Vertex
-					oneline = reader.ReadLine();                                
+					oneline = reader.ReadLine();
+                                
 					// Read A Line
 					if(oneline != null) 
 					{                                      
 						// If The Line Isn't null
-						splitter = oneline.Split();                             
+						splitter = oneline.Split();
+                             
 						// Split The Line On Spaces
-						x = Single.Parse(splitter[0]);                          
+						x = Single.Parse(splitter[0]);
+                          
 						// Save x As A float
-						y = Single.Parse(splitter[1]);                          
+						y = Single.Parse(splitter[1]);
+                          
 						// Save y As A float
-						z = Single.Parse(splitter[2]);                          
+						z = Single.Parse(splitter[2]);
+                          
 						// Save z As A float
-						u = Single.Parse(splitter[3]);                          
+						u = Single.Parse(splitter[3]);
+                          
 						// Save u As A float
-						v = Single.Parse(splitter[4]);                          
+						v = Single.Parse(splitter[4]);
+                          
 						// Save v As A float
-						sector.triangle[triloop].vertex[vertloop].x = x;        
+						sector.triangle[triloop].vertex[vertloop].x = x;
+        
 						// Save x To sector's Current triangle's vertex x
-						sector.triangle[triloop].vertex[vertloop].y = y;        
+						sector.triangle[triloop].vertex[vertloop].y = y;
+        
 						// Save y To sector's Current triangle's vertex y
-						sector.triangle[triloop].vertex[vertloop].z = z;        
+						sector.triangle[triloop].vertex[vertloop].z = z;
+        
 						// Save z To sector's Current triangle's vertex z
-						sector.triangle[triloop].vertex[vertloop].u = u;        
+						sector.triangle[triloop].vertex[vertloop].u = u;
+        
 						// Save u To sector's Current triangle's vertex u
-						sector.triangle[triloop].vertex[vertloop].v = v;        
+						sector.triangle[triloop].vertex[vertloop].v = v;
+        
 						// Save v To sector's Current triangle's vertex v
 					}
 				}
 			}
 			if(reader != null) 
 			{
-				reader.Close();                                                 
+				reader.Close();
+                                                 
 				// Close The StreamReader
 			}
 		}
@@ -251,9 +290,11 @@ namespace SdlDotNet.Examples
 		/// </returns>
 		public override void DrawGLScene() 
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+        
 			// Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();                                                
+			Gl.glLoadIdentity();
+                                                
 			// Reset The View
 
 			float x_m, y_m, z_m, u_m, v_m;
@@ -365,16 +406,20 @@ namespace SdlDotNet.Examples
 						this.Blend = !this.Blend;
 						if(this.Blend) 
 						{
-							Gl.glEnable(Gl.GL_BLEND);                           
+							Gl.glEnable(Gl.GL_BLEND);
+                           
 							// Turn Blending On
-							Gl.glDisable(Gl.GL_DEPTH_TEST);                     
+							Gl.glDisable(Gl.GL_DEPTH_TEST);
+                     
 							// Turn Depth Testing Off
 						}
 						else 
 						{
-							Gl.glDisable(Gl.GL_BLEND);                          
+							Gl.glDisable(Gl.GL_BLEND);
+                          
 							// Turn Blending Off
-							Gl.glEnable(Gl.GL_DEPTH_TEST);                      
+							Gl.glEnable(Gl.GL_DEPTH_TEST);
+                      
 							// Turn Depth Testing On
 						}
 					}

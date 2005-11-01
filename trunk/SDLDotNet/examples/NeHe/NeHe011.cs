@@ -34,8 +34,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	public class NeHe011 : NeHe001
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe011 : NeHe010
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -43,25 +49,22 @@ namespace SdlDotNet.Examples
 				return "Lesson 11: Flag Effect (Waving Texture)";
 			}
 		}
-		public float[][][] points;				
+		private float[][][] points;				
 		// The Array For The Points On The Grid Of Our "Wave"
-		public int wiggle_count = 0;			
+		private int wiggle_count = 0;			
 		// Counter Used To Control How Fast Flag Waves
 
-		public float xrot = 0.0f;				
-		// X Rotation ( NEW )
-		public float yrot = 0.0f;				
-		// Y Rotation ( NEW )
-		public float zrot = 0.0f;				
-		// Z Rotation ( NEW )
-		
-		public int[] texture = new int[1];	
-		// Texture array
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe011()
 		{
+			this.Texture = new int[1];
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void InitGL()
 		{
 			LoadTextures();
@@ -123,10 +126,10 @@ namespace SdlDotNet.Examples
 
 				bitmapdata = image.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
-				Gl.glGenTextures(1, this.texture);
+				Gl.glGenTextures(1, this.Texture);
 			
 				// Create Linear Filtered Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.texture[0]);
+				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
 				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, (int)Gl.GL_RGB, image.Width, image.Height, 0, Gl.GL_BGR_EXT, Gl.GL_UNSIGNED_BYTE, bitmapdata.Scan0);
@@ -136,6 +139,9 @@ namespace SdlDotNet.Examples
 			return true;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
@@ -145,11 +151,11 @@ namespace SdlDotNet.Examples
 
 			Gl.glTranslatef(0.0f, 0.0f, -12.0f);
 	  
-			Gl.glRotatef(this.xrot, 1.0f, 0.0f, 0.0f);
-			Gl.glRotatef(this.yrot, 0.0f, 1.0f, 0.0f);  
-			Gl.glRotatef(this.zrot, 0.0f, 0.0f, 1.0f);
+			Gl.glRotatef(this.XRot, 1.0f, 0.0f, 0.0f);
+			Gl.glRotatef(this.YRot, 0.0f, 1.0f, 0.0f);  
+			Gl.glRotatef(this.ZRot, 0.0f, 0.0f, 1.0f);
 
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.texture[0]);
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
 
 			Gl.glBegin(Gl.GL_QUADS);
 			for (int i=0; i < 44; i++ )
@@ -194,9 +200,9 @@ namespace SdlDotNet.Examples
 
 			this.wiggle_count++;
 
-			this.xrot += 0.3f;
-			this.yrot += 0.2f;
-			this.zrot += 0.4f;
+			this.XRot += 0.3f;
+			this.YRot += 0.2f;
+			this.ZRot += 0.4f;
 		}
 	}
 }
