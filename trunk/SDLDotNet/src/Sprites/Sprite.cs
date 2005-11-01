@@ -598,6 +598,100 @@ namespace SdlDotNet.Sprites
 			return IntersectsWithRadius(sprite, r1, r2, 0);
 		}
 
+		public virtual bool IntersectsWithPixelPrecision(Sprite sprite)
+		{
+			if(sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
+
+			if(!this.IntersectsWith(sprite))
+				return false;
+
+			int ax1 = this.X + this.Width - 1;
+			int ay1 = this.Y + this.Height - 1;
+	
+			/*b - bottom right co-ordinates*/
+			int bx1 = sprite.X + sprite.Width- 1;
+			int by1 = sprite.Y + sprite.Height - 1;
+
+			/*check if bounding boxes intersect*/
+			if((bx1 < this.X) || (ax1 < sprite.X))
+				return false;
+			if((by1 < this.Y) || (ay1 < sprite.Y))
+				return false;
+
+
+			/*Now lets make the bouding box for which we check for a pixel collision*/
+
+			/*To get the bounding box we do
+				Ax1,Ay1_____________
+				|		|
+				|		|
+				|		|
+				|    Bx1,By1_____________
+				|	|	|	|
+				|	|	|	|
+				|_______|_______|	|
+					|    Ax2,Ay2	|
+					|		|
+					|		|
+					|____________Bx2,By2
+
+			To find that overlap we find the biggest left hand cordinate
+			AND the smallest right hand co-ordinate
+
+			To find it for y we do the biggest top y value
+			AND the smallest bottom y value
+
+			Therefore the overlap here is Bx1,By1 --> Ax2,Ay2
+
+			Remember	Ax2 = Ax1 + SA->w
+					Bx2 = Bx1 + SB->w
+
+					Ay2 = Ay1 + SA->h
+					By2 = By1 + SB->h
+			*/
+
+			/*now we loop round every pixel in area of
+			intersection
+				if 2 pixels alpha values on 2 surfaces at the
+				same place != 0 then we have a collision*/
+			int ax = this.X;
+			int bx = sprite.X;
+			int ay = this.Y;
+			int by = sprite.Y;
+			int inter_x0 = ax > bx ? ax : bx;
+			int inter_x1 = ax1<bx1 ? ax1 : bx1;
+
+			int inter_y0 = ay > by ? ay : by;
+			int inter_y1 = ay1 < by1 ? ay1 : by1;
+
+			for(int y = inter_y0; y <= inter_y1; y++)
+			{
+				for(int x = inter_x0; x <= inter_x1; x++)
+				{
+					// Check if the colors on the surfaces are transparent
+					Color col1 = this.Surface.GetPixel(x-ax, y-ay);
+					Color col2 = sprite.Surface.GetPixel(x-bx, y-by);
+
+//					if(col1 == this.Surface.TransparentColor
+//						&& col2 == sprite.Surface.TransparentColor)
+//						return true;
+
+					if(col1.A != 0 && col2.A != 0)
+						return true;
+
+					// hmmmmmm......
+					System.Diagnostics.Debug.WriteLine("x: " + (x-ax) + "," + (y-ay));
+					System.Diagnostics.Debug.WriteLine("y: " + (x-bx) + "," +  (y-by));
+
+					// Grrr.. not working.
+				}
+			}
+			return false;
+		}
+
 		/// <summary>
 		/// Check to see if Sprite intersects with any sprite in a SpriteCollection
 		/// </summary>
