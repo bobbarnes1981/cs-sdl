@@ -598,6 +598,12 @@ namespace SdlDotNet.Sprites
 			return IntersectsWithRadius(sprite, r1, r2, 0);
 		}
 
+		/// <summary>
+		/// Checks if there is a collision with another sprite with Pixel Precision.
+		/// </summary>
+		/// <param name="sprite">The other sprite.</param>
+		/// <returns>True if they collide, false otherwise.</returns>
+		/// <remarks>It is recommended that you use another collision algorithm if speed is an issue.</remarks>
 		public virtual bool IntersectsWithPixelPrecision(Sprite sprite)
 		{
 			if(sprite == null)
@@ -605,88 +611,62 @@ namespace SdlDotNet.Sprites
 				throw new ArgumentNullException("sprite");
 			}
 
+			// Check bounding box first
 			if(!this.IntersectsWith(sprite))
 				return false;
 
-			int ax1 = this.X + this.Width - 1;
-			int ay1 = this.Y + this.Height - 1;
-	
-			/*b - bottom right co-ordinates*/
-			int bx1 = sprite.X + sprite.Width- 1;
-			int by1 = sprite.Y + sprite.Height - 1;
+			// Get the intersecting rectangle
+			Rectangle intersect = this.rect;
+			intersect.Intersect(sprite.rect);
+			
+			//Video.Screen.DrawFilledBox(intersect,Color.Red);
 
-			/*check if bounding boxes intersect*/
-			if((bx1 < this.X) || (ax1 < sprite.X))
-				return false;
-			if((by1 < this.Y) || (ay1 < sprite.Y))
-				return false;
-
-
-			/*Now lets make the bouding box for which we check for a pixel collision*/
-
-			/*To get the bounding box we do
-				Ax1,Ay1_____________
-				|		|
-				|		|
-				|		|
-				|    Bx1,By1_____________
-				|	|	|	|
-				|	|	|	|
-				|_______|_______|	|
-					|    Ax2,Ay2	|
-					|		|
-					|		|
-					|____________Bx2,By2
-
-			To find that overlap we find the biggest left hand cordinate
-			AND the smallest right hand co-ordinate
-
-			To find it for y we do the biggest top y value
-			AND the smallest bottom y value
-
-			Therefore the overlap here is Bx1,By1 --> Ax2,Ay2
-
-			Remember	Ax2 = Ax1 + SA->w
-					Bx2 = Bx1 + SB->w
-
-					Ay2 = Ay1 + SA->h
-					By2 = By1 + SB->h
-			*/
-
-			/*now we loop round every pixel in area of
-			intersection
-				if 2 pixels alpha values on 2 surfaces at the
-				same place != 0 then we have a collision*/
-			int ax = this.X;
-			int bx = sprite.X;
-			int ay = this.Y;
-			int by = sprite.Y;
-			int inter_x0 = ax > bx ? ax : bx;
-			int inter_x1 = ax1<bx1 ? ax1 : bx1;
-
-			int inter_y0 = ay > by ? ay : by;
-			int inter_y1 = ay1 < by1 ? ay1 : by1;
-
-			for(int y = inter_y0; y <= inter_y1; y++)
+			// Loop through the intersecting rectangle.
+			for(int x = intersect.Left; x < intersect.Right; x++)
 			{
-				for(int x = inter_x0; x <= inter_x1; x++)
+				for(int y = intersect.Top; y < intersect.Bottom; y++)
 				{
-					// Check if the colors on the surfaces are transparent
-					Color col1 = this.Surface.GetPixel(x-ax, y-ay);
-					Color col2 = sprite.Surface.GetPixel(x-bx, y-by);
+					try
+					{
+						Video.Screen.DrawBox(intersect,Color.Red);
+						
+						// Something is wrong with getting the right pixel.
+						Color col1 = this.Surface.GetPixel(
+							x - this.X,
+							y - this.Y);
+						Color col2 = sprite.Surface.GetPixel(
+							x - sprite.X,
+							y - sprite.Y);
 
-//					if(col1 == this.Surface.TransparentColor
-//						&& col2 == sprite.Surface.TransparentColor)
-//						return true;
 
-					if(col1.A != 0 && col2.A != 0)
-						return true;
+						// Using Alpha test
+						if(col1.A != 0 && col2.A != 0)
+						{
+							Video.Screen.DrawPixel(x,y,Color.Green);
+							//System.Diagnostics.Debug.WriteLine(col1.A + "," + col2.A);
+						}
+						else
+						{	
+							Video.Screen.DrawPixel(x,y,Color.Blue);
+						}
 
-					// hmmmmmm......
-					System.Diagnostics.Debug.WriteLine("x: " + (x-ax) + "," + (y-ay));
-					System.Diagnostics.Debug.WriteLine("y: " + (x-bx) + "," +  (y-by));
+						// Using colorkey
+//						Color col1Key = this.Surface.GetColor(this.Surface.PixelFormat.colorkey);
+//						Color col2Key = sprite.Surface.GetColor(sprite.Surface.PixelFormat.colorkey);
+//						if(col1 != col1Key && col2 != col2Key)
+//						{
+//							Video.Screen.DrawPixel(x,y,Color.Green);
+//						}
+//						else
+//						{	
+//							Video.Screen.DrawPixel(x,y,Color.Blue);
+//						}
+					}
 
-					// Grrr.. not working.
+					catch
+					{
+					}
+
 				}
 			}
 			return false;
