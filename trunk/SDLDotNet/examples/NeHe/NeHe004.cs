@@ -33,8 +33,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe004 : NeHe001
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe004 : NeHe001
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -46,6 +52,9 @@ namespace SdlDotNet.Examples
 		private float rtri;                                              
 		private float rquad;
     
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
@@ -96,7 +105,6 @@ namespace SdlDotNet.Examples
 			// Increase The Rotation Variable For The Triangle ( NEW )
 			rquad -= 0.15f;                                                     
 			// Decrease The Rotation Variable For The Quad ( NEW )
-			Video.GLSwapBuffers();
 		}
 	}
 }

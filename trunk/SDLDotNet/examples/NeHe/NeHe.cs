@@ -20,6 +20,9 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe()
 		{
 			//
@@ -63,13 +66,13 @@ namespace SdlDotNet.Examples
 			// 
 			this.lstExamples.Location = new System.Drawing.Point(8, 8);
 			this.lstExamples.Name = "lstExamples";
-			this.lstExamples.Size = new System.Drawing.Size(280, 225);
+			this.lstExamples.Size = new System.Drawing.Size(360, 381);
 			this.lstExamples.TabIndex = 0;
 			this.lstExamples.DoubleClick += new System.EventHandler(this.startButton_Click);
 			// 
 			// startButton
 			// 
-			this.startButton.Location = new System.Drawing.Point(111, 240);
+			this.startButton.Location = new System.Drawing.Point(136, 400);
 			this.startButton.Name = "startButton";
 			this.startButton.TabIndex = 1;
 			this.startButton.Text = "Start Demo";
@@ -78,7 +81,7 @@ namespace SdlDotNet.Examples
 			// NeHe
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(292, 269);
+			this.ClientSize = new System.Drawing.Size(378, 475);
 			this.Controls.Add(this.startButton);
 			this.Controls.Add(this.lstExamples);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

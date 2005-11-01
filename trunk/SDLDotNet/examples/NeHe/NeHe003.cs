@@ -33,8 +33,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe003 : NeHe001
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe003 : NeHe001
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -42,6 +48,10 @@ namespace SdlDotNet.Examples
 				return "Lesson 3: Adding Color";
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
@@ -81,8 +91,6 @@ namespace SdlDotNet.Examples
 			Gl.glVertex3f(-1, -1, 0);                                       
 			// Bottom Left
 			Gl.glEnd();
-			Video.GLSwapBuffers();
-
 		}
 	}
 }

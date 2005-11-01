@@ -34,7 +34,7 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe017 : NeHe001
+	public class NeHe017 : NeHe001
 	{
 		public new static string Title
 		{
@@ -48,7 +48,7 @@ namespace SdlDotNet.Examples
 		public float cnt1 = 0.0f;		// 1st Counter Used To Move Text & For Coloring
 		public float cnt2 = 0.0f;		// 2nd Counter Used To Move Text & For Coloring
 
-		public uint[] texture = new uint[2];	// Texture array
+		public int[] texture = new int[2];	// Texture array
 
 		public NeHe017()
 		{
@@ -119,9 +119,9 @@ namespace SdlDotNet.Examples
 			Gl.glColor3f(1.0f, 1.0f, 1.0f);							// Set Color To White
 			glPrint((int)(242+200*Math.Cos((this.cnt2+this.cnt1)/5)), 2, "Giuseppe D'Agata", 0);
 
-			Video.GLSwapBuffers();
 
-			this.cnt1 += 0.01f;										// Increase The First Counter
+			this.cnt1 += 0.01f;
+			// Increase The First Counter
 			this.cnt2 += 0.0081f;	
 		}
 

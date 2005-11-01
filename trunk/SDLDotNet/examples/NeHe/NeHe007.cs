@@ -36,8 +36,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe007 : NeHe006
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe007 : NeHe006
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -64,6 +70,9 @@ namespace SdlDotNet.Examples
 		private float[] lightDiffuse = {1, 1, 1, 1};
 		private float[] lightPosition = {0, 0, 2, 1};
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe007()
 		{
 			this.TextureName = "NeHe007.bmp";
@@ -72,6 +81,9 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(150,50);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void InitGL()
 		{
 			base.InitGL ();
@@ -85,7 +97,9 @@ namespace SdlDotNet.Examples
 			// Enable Light One
 		}
 
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
@@ -140,8 +154,6 @@ namespace SdlDotNet.Examples
 
 			this.XRot += this.XSpeed;
 			this.YRot += this.YSpeed;
-
-			Video.GLSwapBuffers();
 		}
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
@@ -263,6 +275,9 @@ namespace SdlDotNet.Examples
 		}
 		#endregion override void LoadGLTextures()
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected bool Lp
 		{
 			get
@@ -275,6 +290,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected bool Fp
 		{
 			get
@@ -287,6 +305,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected bool Light
 		{
 			get
@@ -298,6 +319,10 @@ namespace SdlDotNet.Examples
 				light = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected float XSpeed
 		{
 			get
@@ -309,6 +334,10 @@ namespace SdlDotNet.Examples
 				xspeed = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected float YSpeed
 		{
 			get
@@ -320,6 +349,10 @@ namespace SdlDotNet.Examples
 				yspeed = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected float Z
 		{
 			get
@@ -331,6 +364,10 @@ namespace SdlDotNet.Examples
 				z = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected int Filter
 		{
 			get

@@ -36,8 +36,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe008 : NeHe007
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe008 : NeHe007
 	{  
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -50,6 +56,9 @@ namespace SdlDotNet.Examples
         private bool bp;                           
 		// Which Filter To Use                     
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe008()
 		{
 			this.TextureName = "NeHe008.bmp";
@@ -58,6 +67,9 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(150,50);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void InitGL()
 		{
 			base.InitGL ();
@@ -152,6 +164,10 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected bool Blend
 		{
 			get
@@ -163,6 +179,10 @@ namespace SdlDotNet.Examples
 				blend = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected bool Bp
 		{
 			get

@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 	/// directory has a "test/" directory underneath it containing
 	/// various images.
 	/// </summary>
-	class SdlDemo : IDisposable
+	public class SdlDemo : IDisposable
 	{
 		/// <summary>
 		/// 

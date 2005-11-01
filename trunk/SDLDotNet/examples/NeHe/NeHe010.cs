@@ -37,8 +37,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe010 : NeHe008
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe010 : NeHe008
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -59,10 +65,12 @@ namespace SdlDotNet.Examples
 			public float x, y, z;
 			public float u, v;
 		}
+
 		private struct Triangle 
 		{
 			public Vertex[] vertex;
 		}
+
 		private struct Sector 
 		{
 			public int numtriangles;
@@ -70,6 +78,9 @@ namespace SdlDotNet.Examples
 		};
 		private Sector sector;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe010()
 		{
 			this.TextureName = "NeHe010.bmp";
@@ -79,6 +90,9 @@ namespace SdlDotNet.Examples
 			this.Z = 0;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void InitGL()
 		{
 			this.LoadGLTextures();
@@ -280,8 +294,6 @@ namespace SdlDotNet.Examples
 				v_m = sector.triangle[loop_m].vertex[2].v;
 				Gl.glTexCoord2f(u_m, v_m); Gl.glVertex3f(x_m, y_m, z_m);
 				Gl.glEnd();
-
-				Video.GLSwapBuffers();
 			}
 		}
 		#endregion bool DrawGLScene()
@@ -374,6 +386,10 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
 		protected float XPos
 		{
 			get
@@ -385,6 +401,10 @@ namespace SdlDotNet.Examples
 				xpos = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		protected float ZPos
 		{
 			get

@@ -33,8 +33,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe002 : NeHe001
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe002 : NeHe001
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -43,6 +49,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
@@ -73,9 +82,8 @@ namespace SdlDotNet.Examples
 			// Bottom Right
 			Gl.glVertex3f(-1, -1, 0);                                       
 			// Bottom Left
-			Gl.glEnd();                                                         
+			Gl.glEnd();                                                       
 			// Done Drawing The Quad
-			Video.GLSwapBuffers();
 		}
 	}
 }

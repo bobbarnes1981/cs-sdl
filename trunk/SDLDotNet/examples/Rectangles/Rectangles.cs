@@ -29,7 +29,7 @@ namespace SdlDotNet.Examples
 	/// A simple SDL.NET Example that draws a bunch of rectangles on the screen. 
 	/// Pressing Q or Escape will exit.
 	/// </summary>
-	class Rectangles 
+	public class Rectangles 
 	{
 		// The screen elements
 		private Surface screen;

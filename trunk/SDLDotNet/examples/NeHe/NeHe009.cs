@@ -36,8 +36,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	class NeHe009 : NeHe006
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe009 : NeHe006
 	{    
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -74,6 +80,9 @@ namespace SdlDotNet.Examples
 		// Spin Stars
 		private static int loop; 
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe009()
 		{
 			this.TextureName = "NeHe009.bmp";
@@ -82,6 +91,9 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(150,50);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void InitGL()
 		{
 			this.LoadGLTextures();
@@ -109,7 +121,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
@@ -163,8 +177,6 @@ namespace SdlDotNet.Examples
 					stars[loop].b = (byte) (rand.Next() % 256);
 				}
 			}
-
-			Video.GLSwapBuffers();
 		}
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
