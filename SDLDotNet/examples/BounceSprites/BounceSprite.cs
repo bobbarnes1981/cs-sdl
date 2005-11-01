@@ -32,8 +32,8 @@ namespace SdlDotNet.Examples
 	{
 		#region Fields
 		//Move sprites 10 pixels per tick
-		private int dx = 10;
-		private int dy = 10;
+		private int dx = 0;
+		private int dy = 0;
 
 		//Sprites will be bounded by the screen edges minus 
 		//their size so they will not go off the screen
