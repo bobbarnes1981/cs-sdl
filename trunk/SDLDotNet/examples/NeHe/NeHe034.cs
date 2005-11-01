@@ -38,6 +38,9 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class NeHe034 : NeHe025
 	{
 		/// <summary>

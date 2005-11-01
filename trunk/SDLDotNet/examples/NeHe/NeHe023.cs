@@ -35,8 +35,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
-	public class NeHe023 : NeHe001
+	/// <summary>
+	/// 
+	/// </summary>
+	public class NeHe023 : NeHe020
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -45,23 +51,22 @@ namespace SdlDotNet.Examples
 			}
 		}
 		bool light;                                              // Lighting ON/OFF
-		float xrot;                                              // X Rotation
-		float yrot;                                              // Y Rotation
-		float xspeed;                                            // X Rotation Speed
-		float yspeed;                                            // Y Rotation Speed
-		float z = -10;                                           // Depth Into The Screen
 		Glu.GLUquadric quadratic;                                // Storage For Our Quadratic Objects
 		float[] LightAmbient = {0.5f, 0.5f, 0.5f, 1};
 		float[] LightDiffuse = {1, 1, 1, 1};
 		float[] LightPosition = {0, 0, 2, 1};
-		int filter;                                              // Which Filter To Use
-		int[] texture = new int[6];                              // Storage For 6 Textures (MODIFIED)
 		int objectToDraw = 1;                                    // Which Object To Draw
 		
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe023()
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
 			Keyboard.EnableKeyRepeat(150,50);
+			this.Texture = new int[6];    
+            this.Z = -10;
+			// Storage For 6 Textures (MODIFIED)
 		}
 
 		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
@@ -76,63 +81,85 @@ namespace SdlDotNet.Examples
 						Gl.glEnable(Gl.GL_LIGHTING);
 					break;
 				case Key.F:
-					filter += 1;
-					if(filter > 2) 
-						filter = 0;
+					this.Filter += 1;
+					if(this.Filter > 2) 
+					{
+						this.Filter = 0;
+					}
 					break;
 				case Key.Space:
 					if(++objectToDraw > 3) 
 						objectToDraw = 0;
 					break;
-
 				case Key.PageUp:
-					z -= 0.02f;
+					this.Z -= 0.02f;
 					break;
 				case Key.PageDown:
-					z += 0.02f;
+					this.Z += 0.02f;
 					break;
-
 				case Key.UpArrow:
-					xspeed -= 0.01f;
+					this.XSpeed -= 0.01f;
 					break;
 				case Key.DownArrow:
-					xspeed += 0.01f;
+					this.XSpeed += 0.01f;
 					break;
 				case Key.RightArrow:
-					yspeed += 0.01f;
+					this.YSpeed += 0.01f;
 					break;
 				case Key.LeftArrow: 
-					yspeed -= 0.01f;
+					this.YSpeed -= 0.01f;
 					break;
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void InitGL()
 		{
-			LoadTextures();
+			LoadGLTextures();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      // Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);                                      // Enable Smooth Shading
-			Gl.glClearColor(0, 0, 0, 0.5f);                                     // Black Background
-			Gl.glClearDepth(1);                                                 // Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);                                      // Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);                                       // The Type Of Depth Testing To Do
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);         // Really Nice Perspective Calculations
+			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      
+			// Enable Texture Mapping
+			Gl.glShadeModel(Gl.GL_SMOOTH);                                      
+			// Enable Smooth Shading
+			Gl.glClearColor(0, 0, 0, 0.5f);                                     
+			// Black Background
+			Gl.glClearDepth(1);                                                 
+			// Depth Buffer Setup
+			Gl.glEnable(Gl.GL_DEPTH_TEST);                                      
+			// Enables Depth Testing
+			Gl.glDepthFunc(Gl.GL_LEQUAL);                                       
+			// The Type Of Depth Testing To Do
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);         
+			// Really Nice Perspective Calculations
 
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, LightAmbient);            // Setup The Ambient Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, LightDiffuse);            // Setup The Diffuse Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION,LightPosition);           // Position The Light
-			Gl.glEnable(Gl.GL_LIGHT1);                                          // Enable Light One
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, LightAmbient);            
+			// Setup The Ambient Light
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, LightDiffuse);            
+			// Setup The Diffuse Light
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION,LightPosition);           
+			// Position The Light
+			Gl.glEnable(Gl.GL_LIGHT1);                                          
+			// Enable Light One
 
-			quadratic = Glu.gluNewQuadric();                                    // Create A Pointer To The Quadric Object (Return 0 If No Memory)
-			Glu.gluQuadricNormals(quadratic, Glu.GLU_SMOOTH);                   // Create Smooth Normals 
-			Glu.gluQuadricTexture(quadratic, Gl.GL_TRUE);                       // Create Texture Coords 
+			quadratic = Glu.gluNewQuadric();                                    
+			// Create A Pointer To The Quadric Object (Return 0 If No Memory)
+			Glu.gluQuadricNormals(quadratic, Glu.GLU_SMOOTH);                   
+			// Create Smooth Normals 
+			Glu.gluQuadricTexture(quadratic, Gl.GL_TRUE);                       
+			// Create Texture Coords 
 
-			Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);    // Set The Texture Generation Mode For S To Sphere Mapping (NEW)
-			Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);    // Set The Texture Generation Mode For T To Sphere Mapping (NEW)
+			Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);    
+			// Set The Texture Generation Mode For S To Sphere Mapping (NEW)
+			Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);    
+			// Set The Texture Generation Mode For T To Sphere Mapping (NEW)
 		}
 
-		public void LoadTextures()
+		/// <summary>
+		/// 
+		/// </summary>
+		protected override void LoadGLTextures()
 		{
 			string[] file = {"NeHe023.BG.bmp", "NeHe023.Reflect.bmp"};
 			Bitmap[] textureImage = new Bitmap[2];
@@ -153,7 +180,8 @@ namespace SdlDotNet.Examples
 				textureImage[i] = new Bitmap(finalFile);
 			}
 
-			Gl.glGenTextures(6, texture);                                   // Create Three Textures
+			Gl.glGenTextures(6, Texture);                                   
+			// Create Three Textures
 			for(int i = 0; i < textureImage.Length; i++) 
 			{
 				// Flip The Bitmap Along The Y-Axis
@@ -164,67 +192,87 @@ namespace SdlDotNet.Examples
 				BitmapData bitmapData = textureImage[i].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
 				// Create Nearest Filtered Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[i]);          // Gen Tex 0 and 1
+				Gl.glBindTexture(Gl.GL_TEXTURE_2D, Texture[i]);          
+				// Gen Tex 0 and 1
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST);
 				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 
 				// Create Linear Filtered Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[i+2]);        // Gen Tex 2 and 3
+				Gl.glBindTexture(Gl.GL_TEXTURE_2D, Texture[i+2]);        
+				// Gen Tex 2 and 3
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
 				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 
 				// Create MipMapped Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[i+4]);        // Gen Tex 4 and 5
+				Gl.glBindTexture(Gl.GL_TEXTURE_2D, Texture[i+4]);        
+				// Gen Tex 4 and 5
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR_MIPMAP_NEAREST);
 				Glu.gluBuild2DMipmaps(Gl.GL_TEXTURE_2D, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 
 				if(textureImage[i] != null) 
-				{                            // If Texture Exists
-					textureImage[i].UnlockBits(bitmapData);              // Unlock The Pixel Data From Memory
-					textureImage[i].Dispose();                           // Dispose The Bitmap
+				{                            
+					// If Texture Exists
+					textureImage[i].UnlockBits(bitmapData);              
+					// Unlock The Pixel Data From Memory
+					textureImage[i].Dispose();                           
+					// Dispose The Bitmap
 				}
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void DrawGLScene()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        // Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();                                                // Reset The View
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
+			// Clear The Screen And The Depth Buffer
+			Gl.glLoadIdentity();                                                
+			// Reset The View
 
-			Gl.glTranslatef(0, 0, z);
+			Gl.glTranslatef(0, 0, this.Z);
 
-			Gl.glEnable(Gl.GL_TEXTURE_GEN_S);                                   // Enable Texture Coord Generation For S (NEW)
-			Gl.glEnable(Gl.GL_TEXTURE_GEN_T);                                   // Enable Texture Coord Generation For T (NEW)
+			Gl.glEnable(Gl.GL_TEXTURE_GEN_S);                                   
+			// Enable Texture Coord Generation For S (NEW)
+			Gl.glEnable(Gl.GL_TEXTURE_GEN_T);                                   
+			// Enable Texture Coord Generation For T (NEW)
 
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[filter + (filter + 1)]); // This Will Select The Sphere Map
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter + (this.Filter + 1)]); 
+			// This Will Select The Sphere Map
 			Gl.glPushMatrix();
-			Gl.glRotatef(xrot, 1, 0, 0);
-			Gl.glRotatef(yrot, 0, 1, 0);
+			Gl.glRotatef(this.XRot, 1, 0, 0);
+			Gl.glRotatef(this.YRot, 0, 1, 0);
 			switch(objectToDraw) 
 			{
 				case 0:
 					GlDrawCube();
 					break;
 				case 1:
-					Gl.glTranslatef(0, 0, -1.5f);                           // Center The Cylinder
-					Glu.gluCylinder(quadratic, 1, 1, 3, 32, 32);            // A Cylinder With A Radius Of 0.5 And A Height Of 2
+					Gl.glTranslatef(0, 0, -1.5f);                           
+					// Center The Cylinder
+					Glu.gluCylinder(quadratic, 1, 1, 3, 32, 32);            
+					// A Cylinder With A Radius Of 0.5 And A Height Of 2
 					break;
 				case 2:
-					Glu.gluSphere(quadratic, 1.3, 32, 32);                  // Draw A Sphere With A Radius Of 1 And 16 Longitude And 16 Latitude Segments
+					Glu.gluSphere(quadratic, 1.3, 32, 32);                  
+					// Draw A Sphere With A Radius Of 1 And 16 Longitude And 16 Latitude Segments
 					break;
 				case 3:
-					Gl.glTranslatef(0, 0, -1.5f);                           // Center The Cone
-					Glu.gluCylinder(quadratic, 1, 0, 3, 32, 32);            // A Cone With A Bottom Radius Of .5 And A Height Of 2
+					Gl.glTranslatef(0, 0, -1.5f);                           
+					// Center The Cone
+					Glu.gluCylinder(quadratic, 1, 0, 3, 32, 32);            
+					// A Cone With A Bottom Radius Of .5 And A Height Of 2
 					break;
 			};
 			Gl.glPopMatrix();
 			Gl.glDisable(Gl.GL_TEXTURE_GEN_S);
 			Gl.glDisable(Gl.GL_TEXTURE_GEN_T);
 
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[filter * 2]);            // This Will Select The BG Maps...
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter * 2]);            
+			// This Will Select The BG Maps...
 			Gl.glPushMatrix();
 			Gl.glTranslatef(0, 0, -24);
 			Gl.glBegin(Gl.GL_QUADS);
@@ -236,51 +284,8 @@ namespace SdlDotNet.Examples
 			Gl.glEnd();
 			Gl.glPopMatrix();
 
-			xrot += xspeed;
-			yrot += yspeed;
-		}
-
-		public void GlDrawCube()
-		{
-			Gl.glBegin(Gl.GL_QUADS);
-			// Front Face
-			Gl.glNormal3f(0, 0, 0.5f);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, 1);
-			// Back Face
-			Gl.glNormal3f(0, 0,-0.5f);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, -1);
-			// Top Face
-			Gl.glNormal3f(0, 0.5f, 0);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, 1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f( 1, 1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f( 1, 1, -1);
-			// Bottom Face
-			Gl.glNormal3f(0,-0.5f, 0);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, -1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
-			// Right Face
-			Gl.glNormal3f(0.5f, 0, 0);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, -1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
-			// Left Face
-			Gl.glNormal3f(-0.5f, 0, 0);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, 1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glEnd();
-
+			this.XRot += this.XSpeed;
+			this.XRot += this.YSpeed;
 		}
 	}
 }

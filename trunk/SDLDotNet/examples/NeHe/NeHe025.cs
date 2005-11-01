@@ -38,8 +38,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class NeHe025 : NeHe010
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -50,6 +56,9 @@ namespace SdlDotNet.Examples
 
 		private float zspeed;                                            
 		private float ypos;
+		/// <summary>
+		/// 
+		/// </summary>
 		public float YPos
 		{
 			get
@@ -97,6 +106,9 @@ namespace SdlDotNet.Examples
 			// Vertices
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe025()
 		{
 			this.ZPos = -15;
@@ -104,6 +116,9 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(150,50);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public override void InitGL()
 		{
 			// All Setup For OpenGL Goes Here
@@ -475,6 +490,7 @@ namespace SdlDotNet.Examples
 			thing.Points = new Vertex[number];
 		}
 		#endregion AllocateThing(ref Thing thing, int number)
+
 		#region Vertex Calculate(int i)
 		/// <summary>
 		///     Calculates movement of points during morphing.

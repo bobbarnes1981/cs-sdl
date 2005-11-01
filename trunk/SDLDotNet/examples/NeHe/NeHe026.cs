@@ -38,8 +38,14 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class NeHe026 : NeHe025
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public new static string Title
 		{
 			get
@@ -68,6 +74,9 @@ namespace SdlDotNet.Examples
 		private float[] LightPos = {4, 4, 6, 1};
 		// Light Position
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public NeHe026()
 		{
 			this.ballHeight = 2;
