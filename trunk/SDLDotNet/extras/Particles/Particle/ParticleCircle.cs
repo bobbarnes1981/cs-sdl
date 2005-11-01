@@ -122,7 +122,7 @@ namespace SdlDotNet.Particles.Particle
 			{
 				throw new ArgumentNullException("destination");
 			}
-			if(this.LifeFull != -1)
+			if(this.Life != -1)
 			{
 				float alpha;
 				if(this.Life >= this.LifeFull)
