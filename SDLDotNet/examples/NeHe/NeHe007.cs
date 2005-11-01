@@ -77,8 +77,6 @@ namespace SdlDotNet.Examples
 		{
 			this.TextureName = "NeHe007.bmp";
 			this.Texture = new int[3];
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-			Keyboard.EnableKeyRepeat(150,50);
 		}
 
 		/// <summary>
@@ -87,6 +85,8 @@ namespace SdlDotNet.Examples
 		public override void InitGL()
 		{
 			base.InitGL ();
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(150,50);
 			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, lightAmbient);            
 			// Setup The Ambient Light
 			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, lightDiffuse);            

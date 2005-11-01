@@ -60,7 +60,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe017()
 		{
-			Events.Quit += new QuitEventHandler(Events_Quit);
+			Events.Quit += new QuitEventHandler(this.Quit);
 			this.Texture = new int[2];	
 			this.TextureName = "NeHe017.Font.bmp";
 			// Texture array
@@ -337,7 +337,7 @@ namespace SdlDotNet.Examples
 			// Enables Depth Testing
 		}
 
-		private void Events_Quit(object sender, QuitEventArgs e)
+		private void Quit(object sender, QuitEventArgs e)
 		{
 			KillFont();
 		}

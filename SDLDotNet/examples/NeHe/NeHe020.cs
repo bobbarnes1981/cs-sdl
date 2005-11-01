@@ -60,8 +60,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe020()
 		{
-			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
-			Keyboard.EnableKeyRepeat(0,0);
 			this.Texture = new int[5];
 		}
 
@@ -70,6 +68,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void InitGL()
 		{
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(0,0);
 			LoadGLTextures();
 
 			Gl.glEnable(Gl.GL_TEXTURE_2D);									
@@ -261,7 +261,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
+		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch(e.Key)
 			{

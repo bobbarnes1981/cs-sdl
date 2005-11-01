@@ -62,14 +62,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe023()
 		{
-			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
-			Keyboard.EnableKeyRepeat(150,50);
 			this.Texture = new int[6];    
             this.Z = -10;
 			// Storage For 6 Textures (MODIFIED)
 		}
 
-		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
+		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch(e.Key)
 			{
@@ -117,6 +115,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void InitGL()
 		{
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(150,50);
 			LoadGLTextures();
 
 			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      

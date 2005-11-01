@@ -70,9 +70,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe034()
 		{
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
-			Keyboard.EnableKeyRepeat(150,50);
 		}
 
 		#region bool DrawGLScene()
@@ -133,7 +130,11 @@ namespace SdlDotNet.Examples
 		///     Returns <c>true</c> on success, otherwise <c>false</c>.
 		/// </returns>
 		public override void InitGL() 
-		{                                          
+		{               
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
+			Keyboard.EnableKeyRepeat(150,50);
+               
 			// All Setup For OpenGL Goes Here
 			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Enable Smooth Shading

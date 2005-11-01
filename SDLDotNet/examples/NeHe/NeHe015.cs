@@ -67,7 +67,7 @@ namespace SdlDotNet.Examples
 			// One Texture Map
 			this.Texture = new int[1];
 			this.TextureName = "NeHe015.bmp";
-			Events.Quit += new QuitEventHandler(Events_Quit);
+			Events.Quit += new QuitEventHandler(this.Quit);
 		}
 
 		/// <summary>
@@ -256,7 +256,7 @@ namespace SdlDotNet.Examples
 		}
 		#endregion GlPrint(string text)
 
-		private void Events_Quit(object sender, QuitEventArgs e)
+		private void Quit(object sender, QuitEventArgs e)
 		{
 			KillFont();
 		}
