@@ -77,7 +77,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe014() 
 		{
-			Events.Quit += new QuitEventHandler(Events_Quit);
+			Events.Quit += new QuitEventHandler(this.Quit);
 		}
 
 		/// <summary>
@@ -236,7 +236,7 @@ namespace SdlDotNet.Examples
 //			// Build The Font  
 //		}
 
-		private void Events_Quit(object sender, QuitEventArgs e)
+		private void Quit(object sender, QuitEventArgs e)
 		{
 			KillFont();
 		}

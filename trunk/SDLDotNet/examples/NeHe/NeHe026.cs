@@ -81,8 +81,6 @@ namespace SdlDotNet.Examples
 		{
 			this.ballHeight = 2;
 			this.TextureName = "NeHe026.EnvWall.bmp";
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-			Keyboard.EnableKeyRepeat(150,50);
 		}
 
 		#region DrawFloor()
@@ -149,7 +147,11 @@ namespace SdlDotNet.Examples
 		///     Returns <c>true</c> on success, otherwise <c>false</c>.
 		/// </returns>
 		public override void InitGL() 
-		{                                          // All Setup For OpenGL Goes Here
+		{
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(150,50);
+
+			// All Setup For OpenGL Goes Here
 			LoadGLTextures();
 			
 			Gl.glShadeModel(Gl.GL_SMOOTH);                                      // Enable Smooth Shading

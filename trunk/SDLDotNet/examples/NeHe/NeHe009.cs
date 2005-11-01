@@ -87,8 +87,6 @@ namespace SdlDotNet.Examples
 		{
 			this.TextureName = "NeHe009.bmp";
 			this.Texture = new int[1];
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-			Keyboard.EnableKeyRepeat(150,50);
 		}
 
 		/// <summary>
@@ -96,6 +94,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void InitGL()
 		{
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(150,50);
 			this.LoadGLTextures();
 			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      
 			// Enable Texture Mapping

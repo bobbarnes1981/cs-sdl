@@ -77,9 +77,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe018()
 		{
-			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
-			Keyboard.EnableKeyRepeat(60,60);
-			Events.Quit += new QuitEventHandler(Events_Quit);
+			Events.Quit += new QuitEventHandler(this.Quit);
 			this.Texture = new int[3];
 			this.TextureName = "NeHe018.bmp";
 			this.Z = -5.0f;
@@ -90,6 +88,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void InitGL()
 		{
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(60,60);
 			LoadGLTextures();
 
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
@@ -242,7 +242,7 @@ namespace SdlDotNet.Examples
 			Gl.glEnd();
 		}
 
-		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
+		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch(e.Key)
 			{
@@ -284,7 +284,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void Events_Quit(object sender, QuitEventArgs e)
+		private void Quit(object sender, QuitEventArgs e)
 		{
 			Glu.gluDeleteQuadric(this.quadratic);
 			// Delete The Quadratic To Free System Resources

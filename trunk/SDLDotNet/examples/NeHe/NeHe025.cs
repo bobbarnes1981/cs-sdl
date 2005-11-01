@@ -112,8 +112,6 @@ namespace SdlDotNet.Examples
 		public NeHe025()
 		{
 			this.ZPos = -15;
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-			Keyboard.EnableKeyRepeat(150,50);
 		}
 
 		/// <summary>
@@ -121,6 +119,9 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public override void InitGL()
 		{
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Keyboard.EnableKeyRepeat(150,50);
+
 			// All Setup For OpenGL Goes Here
 			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);                         
 			// Set The Blending Function For Translucency

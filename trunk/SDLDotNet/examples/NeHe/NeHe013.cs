@@ -119,7 +119,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe013() 
 		{
-			Events.Quit += new QuitEventHandler(Events_Quit);
+			Events.Quit += new QuitEventHandler(this.Quit);
 		}
 
 		/// <summary>
@@ -213,7 +213,7 @@ namespace SdlDotNet.Examples
 			// Delete All 96 Characters
 		}
 
-		private void Events_Quit(object sender, QuitEventArgs e)
+		private void Quit(object sender, QuitEventArgs e)
 		{
 			KillFont();
 		}
