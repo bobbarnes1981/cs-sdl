@@ -48,7 +48,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Lesson 9: Moving Bitmaps in 3D Space";
+				return "Lesson 09: Moving Bitmaps in 3D Space";
 			}
 		}
 

@@ -45,7 +45,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Lesson 3: Adding Color";
+				return "Lesson 03: Adding Color";
 			}
 		}
 

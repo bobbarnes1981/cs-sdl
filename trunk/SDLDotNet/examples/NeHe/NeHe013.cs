@@ -49,8 +49,36 @@ namespace SdlDotNet.Examples
 			}
 		}
 		private IntPtr hDC;
-		private int fontbase;
+		/// <summary>
+		/// 
+		/// </summary>
+		public IntPtr Hdc
+		{
+			get
+			{
+				return hDC;
+			}
+			set
+			{
+				hDC = value;
+			}
+	}
+		private int fontBase;
 		// Base Display List For The Font Set
+		/// <summary>
+		/// 
+		/// </summary>
+		public int FontBase
+		{
+			get
+			{
+				return fontBase;
+			}
+			set
+			{
+				fontBase = value;
+			}
+		}
 		private float cnt1;
 		// 1st Counter Used To Move Text & For Coloring
 		private float cnt2;
@@ -94,9 +122,12 @@ namespace SdlDotNet.Examples
 			Events.Quit += new QuitEventHandler(Events_Quit);
 		}
 
-		private void BuildFont() 
+		/// <summary>
+		/// 
+		/// </summary>
+		protected virtual void BuildFont() 
 		{
-			fontbase = Gl.glGenLists(96);
+			fontBase = Gl.glGenLists(96);
 
 			System.Drawing.Font font = new System.Drawing.Font(
 				"Courier New", 
@@ -105,7 +136,7 @@ namespace SdlDotNet.Examples
 			
 			IntPtr oldfont = Gdi.SelectObject(hDC, font.ToHfont());
 			// Selects The Font We Want
-			Wgl.wglUseFontBitmaps(hDC, 32, 96, fontbase);
+			Wgl.wglUseFontBitmaps(hDC, 32, 96, fontBase);
 			// Builds 96 Characters Starting At Character 32
 			Gdi.SelectObject(hDC, oldfont);
 			// Selects The Font We Want
@@ -128,14 +159,18 @@ namespace SdlDotNet.Examples
 			// Position The Text On The Screen
 			Gl.glRasterPos2f(-0.45f + 0.05f * ((float) (Math.Cos(Cnt1))), 0.32f * ((float) (Math.Sin(cnt2))));
 			// Print GL Text To The Screen
-			glPrint(string.Format("Active OpenGL Text With NeHe - {0:0.00}", Cnt1));
+			GlPrint(string.Format("Active OpenGL Text With NeHe - {0:0.00}", Cnt1));
 			Cnt1 += 0.051f;
 			// Increase The First Counter
 			cnt2 += 0.005f;
 			// Increase The First Counter
 		}
 
-		private void glPrint(string text) 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="text"></param>
+		protected virtual void GlPrint(string text) 
 		{
 			if(text == null || text.Length == 0) 
 			{
@@ -145,7 +180,7 @@ namespace SdlDotNet.Examples
 			}
 			Gl.glPushAttrib(Gl.GL_LIST_BIT);
 			// Pushes The Display List Bits
-			Gl.glListBase(fontbase - 32);
+			Gl.glListBase(fontBase - 32);
 			// Sets The Base Character to 32
 			// .NET -- we can't just pass text, we need to convert
 			byte [] textbytes = new byte[text.Length];
@@ -169,9 +204,12 @@ namespace SdlDotNet.Examples
 			BuildFont();     
 		}
 
-		private void KillFont() 
+		/// <summary>
+		/// 
+		/// </summary>
+		protected virtual void KillFont() 
 		{
-			Gl.glDeleteLists(fontbase, 96);
+			Gl.glDeleteLists(fontBase, 96);
 			// Delete All 96 Characters
 		}
 

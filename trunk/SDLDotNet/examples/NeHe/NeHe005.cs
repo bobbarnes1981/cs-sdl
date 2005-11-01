@@ -45,7 +45,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Lesson 5: 3D Shapes";
+				return "Lesson 05: 3D Shapes";
 			}
 		}
 

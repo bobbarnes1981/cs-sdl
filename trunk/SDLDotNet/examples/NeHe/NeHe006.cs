@@ -48,7 +48,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Lesson 6: Texture Mapping";
+				return "Lesson 06: Texture Mapping";
 			}
 		}
 

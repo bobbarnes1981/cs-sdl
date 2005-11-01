@@ -45,7 +45,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Lesson 4: Rotation";
+				return "Lesson 04: Rotation";
 			}
 		}
 		// Angle For The Triangle ( NEW )

@@ -241,7 +241,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Lesson 1: Setting Up An OpenGL Window";
+				return "Lesson 01: Setting Up An OpenGL Window";
 			}
 		}
 	}

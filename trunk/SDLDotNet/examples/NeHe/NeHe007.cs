@@ -48,7 +48,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Lesson 7: Texture Filters, Lighting, and Keyboard Control";
+				return "Lesson 07: Texture Filters, Lighting, and Keyboard Control";
 			}
 		}
 
