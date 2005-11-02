@@ -80,6 +80,7 @@ namespace SdlDotNet.Examples
 			// 
 			// NeHe
 			// 
+			this.AcceptButton = this.startButton;
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
 			this.ClientSize = new System.Drawing.Size(378, 475);
 			this.Controls.Add(this.startButton);
@@ -157,6 +158,9 @@ namespace SdlDotNet.Examples
 			catch(System.Reflection.TargetInvocationException)
 			{
 				// User changed demo - do nothing
+			}
+			catch(System.ArgumentOutOfRangeException)
+			{
 			}
 		}
 
