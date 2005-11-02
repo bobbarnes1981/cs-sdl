@@ -50,12 +50,15 @@ namespace SdlDotNet.Examples
 				return "Lesson 23: Sphere Mapping, Multi-Texturing and Extensions";
 			}
 		}
-		bool light;                                              // Lighting ON/OFF
-		Glu.GLUquadric quadratic;                                // Storage For Our Quadratic Objects
+		bool light;                                              
+		// Lighting ON/OFF
+		Glu.GLUquadric quadratic;                                
+		// Storage For Our Quadratic Objects
 		float[] LightAmbient = {0.5f, 0.5f, 0.5f, 1};
 		float[] LightDiffuse = {1, 1, 1, 1};
 		float[] LightPosition = {0, 0, 2, 1};
-		int objectToDraw = 1;                                    // Which Object To Draw
+		int objectToDraw = 1;                                    
+		// Which Object To Draw
 		
 		/// <summary>
 		/// 
@@ -285,7 +288,7 @@ namespace SdlDotNet.Examples
 			Gl.glPopMatrix();
 
 			this.XRot += this.XSpeed;
-			this.XRot += this.YSpeed;
+			this.YRot += this.YSpeed;
 		}
 	}
 }
