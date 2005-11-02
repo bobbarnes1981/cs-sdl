@@ -96,23 +96,6 @@ namespace SdlDotNet
 			m_Keys = Sdl.SDL_GetKeyState(out numberOfKeys); 
 		}
 
-		/// <summary>
-		/// An update method call used for events.
-		/// </summary>
-		/// <param name="sender">The sender object.</param>
-		/// <param name="e">The keyboard event arguments.</param>
-		/// <remarks>This is just used as as a shortcut for event calls.</remarks>
-		/// <example>
-		/// <code>
-		/// KeyboardState keys = new KeyboardState();
-		/// Events.KeyboardDown += new KeyboardEventHandler(keys.Update);
-		/// </code>
-		/// </example>
-		public void Update(object sender, SdlDotNet.KeyboardEventArgs e)
-		{
-			Update();
-		}
-
 		/// <summary> 
 		/// Checks a key state in the KeyboardState. 
 		/// </summary> 

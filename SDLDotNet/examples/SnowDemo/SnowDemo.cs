@@ -29,7 +29,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class SnowDemo
+	public class SnowDemo : IDisposable
 	{
 		static string[] textArray = {
 										"when the cold of winter comes",
@@ -130,5 +130,35 @@ namespace SdlDotNet.Examples
 				Events.QuitApplication();
 			}
 		}
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks>Destroys managed and unmanaged objects</remarks>
+		public void Dispose() 
+		{
+			Dispose(true);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					tree.Dispose();
+					background.Dispose();
+				}
+				this.disposed = true;
+			}
+		}
+
+		#endregion
 	}
 }
