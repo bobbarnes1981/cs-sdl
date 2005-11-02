@@ -45,7 +45,7 @@ namespace SdlDotNet.Examples
 		{
 			Initialize();
 			Reset();
-			this.Y = -1 * random.Next(5000 - this.Surface.Height);
+			base.Y = -1 * random.Next(5000 - base.Surface.Height);
 		}
 
 		void Initialize()
@@ -59,8 +59,8 @@ namespace SdlDotNet.Examples
 		{
 			wind = random.Next(3) / 10.0f;
 
-			base.X = (int)random.Next(-1 * (int)(wind * 640), 640 - this.Surface.Width);
-			base.Y = 0 - this.Width;
+			base.X = (int)random.Next(-1 * (int)(wind * 640), 640 - base.Surface.Width);
+			base.Y = 0 - base.Width;
 
 			speed = random.Next(50, 150);
 
