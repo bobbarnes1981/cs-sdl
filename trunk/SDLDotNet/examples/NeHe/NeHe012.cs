@@ -67,8 +67,6 @@ namespace SdlDotNet.Examples
 			new float[3] {0.0f, 0.5f, 0.0f},
 			new float[3] {0.0f, 0.5f, 0.5f} };
 
-		KeyboardState keyData = new KeyboardState(false);
-
 		/// <summary>
 		/// 
 		/// </summary>

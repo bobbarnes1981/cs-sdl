@@ -1,7 +1,7 @@
 #region License
 /*
 MIT License
-Copyright ©2003-2005 Tao Framework Team
+Copyright 2003-2005 Tao Framework Team
 http://www.taoframework.com
 All rights reserved.
 
@@ -68,58 +68,283 @@ namespace SdlDotNet.Examples
 		// Random number generator
 		
 		/// <summary>
-		/// 
+		/// Create A Structure For Particle
 		/// </summary>
 		public class Particle					
-			// Create A Structure For Particle
 		{
 			/// <summary>
 			/// 
 			/// </summary>
-			public bool	active;					
-			// Active (Yes/No)
+			private bool active;
+			
+			/// <summary>
+			/// Active (Yes/No)
+			/// </summary>
+			public bool Active
+			{
+				get
+				{
+					return active;
+				}
+				set
+				{
+					active = value;
+				}
+			}
+
 			/// <summary>
 			/// 
 			/// </summary>
-			public float life;					
-			// Particle Life
+			private float life;	
+			/// <summary>
+			/// Particle Life
+			/// </summary>
+			public float Life
+			{
+				get
+				{
+					return life;
+				}
+				set
+				{
+					life = value;
+				}
+			}
+
+			private float fade;	
+			/// <summary>
+			/// Fade Speed
+			/// </summary>
+			public float Fade
+			{
+				get
+				{
+					return fade;
+				}
+				set
+				{
+					fade = value;
+				}
+			}
+
+
+			float r;
+			float g; 
+			float b;
+			
 			/// <summary>
 			/// 
 			/// </summary>
-			public float fade;					
-			// Fade Speed
+			public float B 
+			{
+				get 
+				{
+					return b;
+				}
+				set 
+				{
+					b = value;
+				}
+			}
+
 			/// <summary>
 			/// 
 			/// </summary>
-			public float r, g, b;				
+			public float G 
+			{
+				get 
+				{
+					return g;
+				}
+				set 
+				{
+					g = value;
+				}
+			}
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public float R 
+			{
+				get 
+				{
+					return r;
+				}
+				set 
+				{
+					r = value;
+				}
+			}
 			// Color
-			/// <summary>
-			/// 
-			/// </summary>
-			public float x, y, z;				
+
+			float x;
+			float y;
+			float z;
 			// Position
 			/// <summary>
 			/// 
 			/// </summary>
-			public float xi, yi, zi;			
+			public float X 
+			{
+				get 
+				{
+					return x;
+				}
+				set 
+				{
+					x = value;
+				}
+			}
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Y 
+			{
+				get 
+				{
+					return y;
+				}
+				set 
+				{
+					y = value;
+				}
+			}
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Z 
+			{
+				get 
+				{
+					return z;
+				}
+				set 
+				{
+					z = value;
+				}
+			}
+			
+			/// <summary>
+			/// 
+			/// </summary>
+			float xi;
+			float yi;
+			float zi;
+			
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Xi 
+			{
+				get 
+				{
+					return xi;
+				}
+				set 
+				{
+					xi = value;
+				}
+			}
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Yi 
+			{
+				get 
+				{
+					return yi;
+				}
+				set 
+				{
+					yi = value;
+				}
+			}
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Zi 
+			{
+				get 
+				{
+					return zi;
+				}
+				set 
+				{
+					zi = value;
+				}
+			}
+			
 			// Direction
 			/// <summary>
 			/// 
 			/// </summary>
-			public float xg, yg, zg;			
+			float xg;
+			float yg;
+			float zg;
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Xg 
+			{
+				get 
+				{
+					return xg;
+				}
+				set 
+				{
+					xg = value;
+				}
+			}
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Yg 
+			{
+				get 
+				{
+					return yg;
+				}
+				set 
+				{
+					yg = value;
+				}
+			}
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Zg 
+			{
+				get 
+				{
+					return zg;
+				}
+				set 
+				{
+					zg = value;
+				}
+			}
+			
 			// Gravity
 		}
 
 		Particle[] particle = new Particle[MaxParticles];
 
-		float[][] colors = new float[12][] {
-											   // Rainbow Of Colors
-			new float[3] {1.0f,0.5f,0.5f}, new float[3] {1.0f,0.75f,0.5f}, 
-			new float[3] {1.0f,1.0f,0.5f}, new float[3] {0.75f,1.0f,0.5f},
-			new float[3] {0.5f,1.0f,0.5f}, new float[3] {0.5f,1.0f,0.75f}, 
-			new float[3] {0.5f,1.0f,1.0f}, new float[3] {0.5f,0.75f,1.0f},
-			new float[3] {0.5f,0.5f,1.0f}, new float[3] {0.75f,0.5f,1.0f}, 
-			new float[3] {1.0f,0.5f,1.0f}, new float[3] {1.0f,0.5f,0.75f} };
+		float[][] colors = new float[12][] 
+{
+	// Rainbow Of Colors
+	new float[3] {1.0f,0.5f,0.5f}, new float[3] {1.0f,0.75f,0.5f}, 
+	new float[3] {1.0f,1.0f,0.5f}, new float[3] {0.75f,1.0f,0.5f},
+	new float[3] {0.5f,1.0f,0.5f}, new float[3] {0.5f,1.0f,0.75f}, 
+	new float[3] {0.5f,1.0f,1.0f}, new float[3] {0.5f,0.75f,1.0f},
+	new float[3] {0.5f,0.5f,1.0f}, new float[3] {0.75f,0.5f,1.0f}, 
+	new float[3] {1.0f,0.5f,1.0f}, new float[3] {1.0f,0.5f,0.75f} 
+};
 
 		/// <summary>
 		/// 
@@ -166,29 +391,29 @@ namespace SdlDotNet.Examples
 				// Initials All The Textures
 			{
 				particle[loop] = new Particle();
-				particle[loop].active = true;								
+				particle[loop].Active = true;								
 				// Make All The Particles Active
-				particle[loop].life = 1.0f;								
+				particle[loop].Life = 1.0f;								
 				// Give All The this.particles Full Life
-				particle[loop].fade = (float)(this.rand.Next(100))/1000.0f+0.003f;	
+				particle[loop].Fade = (float)(this.rand.Next(100))/1000.0f+0.003f;	
 				// Random Fade Speed
-				particle[loop].r = colors[loop*(12/MaxParticles)][0];	
+				particle[loop].R = colors[loop*(12/MaxParticles)][0];	
 				// Select Red Rainbow Color
-				particle[loop].g = colors[loop*(12/MaxParticles)][1];	
+				particle[loop].G = colors[loop*(12/MaxParticles)][1];	
 				// Select Red Rainbow Color
-				particle[loop].b = colors[loop*(12/MaxParticles)][2];	
+				particle[loop].B = colors[loop*(12/MaxParticles)][2];	
 				// Select Red Rainbow Color
-				particle[loop].xi = (float)((this.rand.Next(50))-26.0f)*10.0f;	
+				particle[loop].Xi = (float)((this.rand.Next(50))-26.0f)*10.0f;	
 				// Random Speed On X Axis
-				particle[loop].yi = (float)((this.rand.Next(50))-25.0f)*10.0f;	
+				particle[loop].Yi = (float)((this.rand.Next(50))-25.0f)*10.0f;	
 				// Random Speed On Y Axis
-				particle[loop].zi = (float)((this.rand.Next(50))-25.0f)*10.0f;	
+				particle[loop].Zi = (float)((this.rand.Next(50))-25.0f)*10.0f;	
 				// Random Speed On Z Axis
-				particle[loop].xg = 0.0f;									
+				particle[loop].Xg = 0.0f;									
 				// Set Horizontal Pull To Zero
-				particle[loop].yg = -0.8f;									
+				particle[loop].Yg = -0.8f;									
 				// Set Vertical Pull Downward
-				particle[loop].zg = 0.0f;									
+				particle[loop].Zg = 0.0f;									
 				// Set Pull On Z Axis To Zero
 			}
 		}
@@ -204,18 +429,18 @@ namespace SdlDotNet.Examples
 			for (int loop=0; loop < particle.Length; loop++)	
 				// Loop Through All The Particles
 			{
-				if (this.particle[loop].active)							
+				if (this.particle[loop].Active)							
 					// If The Particle Is Active
 				{
-					float x = this.particle[loop].x;					
+					float x = this.particle[loop].X;					
 					// Grab Our Particle X Position
-					float y = this.particle[loop].y;					
+					float y = this.particle[loop].Y;					
 					// Grab Our Particle Y Position
-					float z = this.particle[loop].z+zoom;				
+					float z = this.particle[loop].Z+zoom;				
 					// Particle Z Pos + Zoom
 
 					// Draw The Particle Using Our RGB Values, Fade The Particle Based On It's Life
-					Gl.glColor4f(this.particle[loop].r, this.particle[loop].g, this.particle[loop].b, this.particle[loop].life);
+					Gl.glColor4f(this.particle[loop].R, this.particle[loop].G, this.particle[loop].B, this.particle[loop].Life);
 
 					Gl.glBegin(Gl.GL_TRIANGLE_STRIP);						
 					// Build Quad From A TrianGL.gle Strip
@@ -230,47 +455,47 @@ namespace SdlDotNet.Examples
 					Gl.glEnd();										
 					// Done Building TrianGL.gle Strip
 
-					this.particle[loop].x += this.particle[loop].xi/(slowdown*1000);
+					this.particle[loop].X += this.particle[loop].Xi/(slowdown*1000);
 					// Move On The X Axis By X Speed
-					this.particle[loop].y += this.particle[loop].yi/(slowdown*1000);
+					this.particle[loop].Y += this.particle[loop].Yi/(slowdown*1000);
 					// Move On The Y Axis By Y Speed
-					this.particle[loop].z += this.particle[loop].zi/(slowdown*1000);
+					this.particle[loop].Z += this.particle[loop].Zi/(slowdown*1000);
 					// Move On The Z Axis By Z Speed
 
-					this.particle[loop].xi += this.particle[loop].xg;			
+					this.particle[loop].Xi += this.particle[loop].Xg;			
 					// Take Pull On X Axis Into Account
-					this.particle[loop].yi += this.particle[loop].yg;			
+					this.particle[loop].Yi += this.particle[loop].Yg;			
 					// Take Pull On Y Axis Into Account
-					this.particle[loop].zi += this.particle[loop].zg;			
+					this.particle[loop].Zi += this.particle[loop].Zg;			
 					// Take Pull On Z Axis Into Account
-					this.particle[loop].life -= this.particle[loop].fade;		
+					this.particle[loop].Life -= this.particle[loop].Fade;		
 					// Reduce Particles Life By 'Fade'
 
-					if (this.particle[loop].life < 0.0f)					
+					if (this.particle[loop].Life < 0.0f)					
 						// If Particle Is Burned Out
 					{
-						this.particle[loop].life = 1.0f;					
+						this.particle[loop].Life = 1.0f;					
 						// Give It New Life
-						this.particle[loop].fade = (float)(this.rand.Next(100))/1000.0f+0.003f;	
+						this.particle[loop].Fade = (float)(this.rand.Next(100))/1000.0f+0.003f;	
 						// Random Fade Value
-						this.particle[loop].x = 0.0f;						
+						this.particle[loop].X = 0.0f;						
 						// Center On X Axis
-						this.particle[loop].y = 0.0f;						
+						this.particle[loop].Y = 0.0f;						
 						// Center On Y Axis
-						this.particle[loop].z = 0.0f;						
+						this.particle[loop].Z = 0.0f;						
 						// Center On Z Axis
-						this.particle[loop].xi = this.XSpeed+(float)(this.rand.Next(60)-32.0f);	
+						this.particle[loop].Xi = this.XSpeed+(float)(this.rand.Next(60)-32.0f);	
 						// X Axis Speed And Direction
-						this.particle[loop].yi = this.YSpeed+(float)(this.rand.Next(60)-30.0f);	
+						this.particle[loop].Yi = this.YSpeed+(float)(this.rand.Next(60)-30.0f);	
 						// Y Axis Speed And Direction
-						this.particle[loop].zi = (float)(this.rand.Next(60)-30.0f);	
+						this.particle[loop].Zi = (float)(this.rand.Next(60)-30.0f);	
 						// Z Axis Speed And Direction
-						this.particle[loop].r = colors[this.col][0];			
+						this.particle[loop].R = colors[this.col][0];			
 						
 						// Select Red From Color Table
-						this.particle[loop].g = colors[this.col][1];			
+						this.particle[loop].G = colors[this.col][1];			
 						// Select Green From Color Table
-						this.particle[loop].b = colors[this.col][2];			
+						this.particle[loop].B = colors[this.col][2];			
 						// Select Blue From Color Table
 					}
 				}
@@ -292,11 +517,15 @@ namespace SdlDotNet.Examples
 			{
 				case Key.Equals:
 					if(this.slowdown > 1.0f)
+					{
 						this.slowdown -= 0.01f;
+					}
 					break;
 				case Key.Plus:
 					if(this.slowdown < 4.0f)
+					{
 						this.slowdown+=0.01f;
+					}
 					break;
 				case Key.PageUp:
 					this.zoom -= 0.1f;
@@ -315,38 +544,54 @@ namespace SdlDotNet.Examples
 					break;
 				case Key.W:
 					foreach(Particle p in particle)
-						if(p.yg < 1.5f)
-							p.yg += 0.01f;
+					{
+						if(p.Yg < 1.5f)
+						{
+							p.Yg += 0.01f;
+						}
+					}
 					break;
 				case Key.S:
 					foreach(Particle p in particle)
-						if(p.yg > -1.5f)
-							p.yg -= 0.01f;
+					{
+						if(p.Yg > -1.5f)
+						{
+							p.Yg -= 0.01f;
+						}
+					}
 					break;
 				case Key.D:
 					foreach(Particle p in particle)
-						if(p.xg < 1.5f)
-							p.xg += 0.01f;
+					{
+						if(p.Xg < 1.5f)
+						{
+							p.Xg += 0.01f;
+						}
+					}
 					break;
 				case Key.A:
 					foreach(Particle p in particle)
-						if(p.xg > -1.5f)
-							p.xg -= 0.01f;
+					{
+						if(p.Xg > -1.5f)
+						{
+							p.Xg -= 0.01f;
+						}
+					}
 					break;
 				case Key.Tab:
 					foreach(Particle p in particle)
 					{
-						p.x = 0.0f;
+						p.X = 0.0f;
 						// Center On X Axis
-						p.y = 0.0f;
+						p.Y = 0.0f;
 						// Center On Y Axis
-						p.z = 0.0f;
+						p.Z = 0.0f;
 						// Center On Z Axis
-						p.xi = (float)(this.rand.Next(50)-26.0f)*10.0f;	
+						p.Xi = (float)(this.rand.Next(50)-26.0f)*10.0f;	
 						// Random Speed On X Axis
-						p.yi = (float)(this.rand.Next(50)-25.0f)*10.0f;	
+						p.Yi = (float)(this.rand.Next(50)-25.0f)*10.0f;	
 						// Random Speed On Y Axis
-						p.zi = (float)(this.rand.Next(50)-25.0f)*10.0f;	
+						p.Zi = (float)(this.rand.Next(50)-25.0f)*10.0f;	
 						// Random Speed On Z Axis
 					}
 					break;

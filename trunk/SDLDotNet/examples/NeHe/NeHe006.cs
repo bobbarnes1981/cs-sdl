@@ -139,8 +139,8 @@ namespace SdlDotNet.Examples
 		public override void InitGL()
 		{
 			this.LoadGLTextures();
-			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      
 			// Enable Texture Mapping ( NEW )
+			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      
 			base.InitGL ();
 		}
 
