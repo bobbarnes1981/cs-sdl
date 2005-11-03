@@ -26,6 +26,7 @@ SOFTWARE.
 #endregion License
 
 using System;
+using System.Globalization;
 using System.Drawing;
 
 using Tao.OpenGl;
@@ -161,7 +162,7 @@ namespace SdlDotNet.Examples
 			// Rotate On The Z Axis
 			// Pulsing Colors Based On The Rotation
 			Gl.glColor3f(1.0f * ((float) (Math.Cos(rot / 20.0f))), 1.0f * ((float) (Math.Sin(rot / 25.0f))), 1.0f - 0.5f * ((float) (Math.Cos(rot / 17.0f))));
-			GlPrint(string.Format("NeHe - {0:0.00}", rot / 50));                
+			GlPrint(string.Format(CultureInfo.CurrentCulture,"NeHe - {0:0.00}", rot / 50));                
 			// Print GL Text To The Screen
 			rot += 0.5f;                                                        
 			// Increase The Rotation Variable

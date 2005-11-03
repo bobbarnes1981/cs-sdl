@@ -28,6 +28,7 @@ SOFTWARE.
 using System;
 using System.IO;
 using System.Text;
+using System.Globalization;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -379,10 +380,10 @@ namespace SdlDotNet.Examples
 					// If Not Return
 				}
 
-				string fileName1 = string.Format("Data{0}{1}", 
+				string fileName1 = string.Format(CultureInfo.CurrentCulture,"Data{0}{1}", 
 					// Look For Data\Filename
 					Path.DirectorySeparatorChar, filename);
-				string fileName2 = string.Format("{0}{1}{0}{1}Data{1}{2}",
+				string fileName2 = string.Format(CultureInfo.CurrentCulture,"{0}{1}{0}{1}Data{1}{2}",
 					// Look For ..\..\Data\Filename
 					"..", Path.DirectorySeparatorChar, filename);
 
