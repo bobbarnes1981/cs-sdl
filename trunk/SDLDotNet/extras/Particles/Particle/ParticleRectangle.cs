@@ -40,7 +40,7 @@ namespace SdlDotNet.Particles.Particle
 		/// <param name="color">The color of the rectangle.</param>
 		public ParticleRectangle(Color color)
 		{
-			this.Color = color;
+			base.Color = color;
 		}
 		/// <summary>
 		/// Creates a new particle rectangle with a color and a size.
@@ -49,9 +49,9 @@ namespace SdlDotNet.Particles.Particle
 		/// <param name="color"></param>
 		public ParticleRectangle(SizeF size, Color color)
 		{
-			this.Color = color;
-			this.Width = size.Width;
-			this.Height = size.Height;
+			base.Color = color;
+			this.m_Width = size.Width;
+			this.m_Height = size.Height;
 		}
 
 		/// <summary>
@@ -60,8 +60,8 @@ namespace SdlDotNet.Particles.Particle
 		/// <param name="size">The size of the rectangle.</param>
 		public ParticleRectangle(SizeF size)
 		{
-			this.Width = size.Width;
-			this.Height = size.Height;
+			this.m_Width = size.Width;
+			this.m_Height = size.Height;
 		}
 		/// <summary>
 		/// Creates a new particle rectangle with a position and color.
@@ -70,9 +70,9 @@ namespace SdlDotNet.Particles.Particle
 		/// <param name="color"></param>
 		public ParticleRectangle(PointF pos, Color color)
 		{
-			this.Color = color;
-			this.X = pos.X;
-			this.Y = pos.Y;
+			base.Color = color;
+			base.X = pos.X;
+			base.Y = pos.Y;
 		}
 
 		/// <summary>
@@ -93,11 +93,11 @@ namespace SdlDotNet.Particles.Particle
 		/// <param name="color"></param>
 		public ParticleRectangle(RectangleF rect, Color color)
 		{
-			this.Color = color;
-			this.X = rect.X;
-			this.Y = rect.Y;
-			this.Width = rect.Width;
-			this.Height = rect.Height;
+			base.Color = color;
+			base.X = rect.X;
+			base.Y = rect.Y;
+			this.m_Width = rect.Width;
+			this.m_Height = rect.Height;
 		}
 
 		/// <summary>
@@ -106,10 +106,10 @@ namespace SdlDotNet.Particles.Particle
 		/// <param name="rect"></param>
 		public ParticleRectangle(RectangleF rect)
 		{
-			this.X = rect.X;
-			this.Y = rect.Y;
-			this.Width = rect.Width;
-			this.Height = rect.Height;
+			base.X = rect.X;
+			base.Y = rect.Y;
+			this.m_Width = rect.Width;
+			this.m_Height = rect.Height;
 		}
 
 		private float m_Width = 10;

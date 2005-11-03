@@ -50,32 +50,31 @@ namespace SdlDotNet.Examples
 				return "Lesson 19: Particle Engine Using Triangle Strips";
 			}
 		}
-		readonly static int MaxParticles = 1000;	
 		// Number of particles to create
-		bool rainbow = true;			
+		readonly static int MaxParticles = 1000;
+	
 		// Rainbow Mode?
-
-		float slowdown = 2.0f;			
+		bool rainbow = true;			
+		
 		// Slow Down Particles
-		float zoom = -40f;			
+		float slowdown = 2.0f;
+		
 		// Used To Zoom Out
-
-		int col = 0;					
+		float zoom = -40f;
+			
 		// Current Color Selection
-		int delay = 0;					
+		int col = 0;					
 		// Rainbow Effect Delay
-		Random rand = new Random();		
+		int delay = 0;					
 		// Random number generator
+		Random rand = new Random();		
 		
 		/// <summary>
 		/// Create A Structure For Particle
 		/// </summary>
 		public class Particle					
 		{
-			/// <summary>
-			/// 
-			/// </summary>
-			private bool active;
+			bool active;
 			
 			/// <summary>
 			/// Active (Yes/No)
@@ -92,10 +91,7 @@ namespace SdlDotNet.Examples
 				}
 			}
 
-			/// <summary>
-			/// 
-			/// </summary>
-			private float life;	
+			float life;	
 			/// <summary>
 			/// Particle Life
 			/// </summary>
@@ -111,7 +107,7 @@ namespace SdlDotNet.Examples
 				}
 			}
 
-			private float fade;	
+			float fade;	
 			/// <summary>
 			/// Fade Speed
 			/// </summary>
@@ -126,7 +122,6 @@ namespace SdlDotNet.Examples
 					fade = value;
 				}
 			}
-
 
 			float r;
 			float g; 
@@ -181,9 +176,9 @@ namespace SdlDotNet.Examples
 			float x;
 			float y;
 			float z;
-			// Position
+			// 
 			/// <summary>
-			/// 
+			/// Position
 			/// </summary>
 			public float X 
 			{
@@ -197,7 +192,7 @@ namespace SdlDotNet.Examples
 				}
 			}
 			/// <summary>
-			/// 
+			/// Position
 			/// </summary>
 			public float Y 
 			{
@@ -211,7 +206,7 @@ namespace SdlDotNet.Examples
 				}
 			}
 			/// <summary>
-			/// 
+			/// Position
 			/// </summary>
 			public float Z 
 			{
@@ -225,9 +220,6 @@ namespace SdlDotNet.Examples
 				}
 			}
 			
-			/// <summary>
-			/// 
-			/// </summary>
 			float xi;
 			float yi;
 			float zi;
@@ -286,7 +278,7 @@ namespace SdlDotNet.Examples
 			float zg;
 
 			/// <summary>
-			/// 
+			/// Gravity
 			/// </summary>
 			public float Xg 
 			{
@@ -301,7 +293,7 @@ namespace SdlDotNet.Examples
 			}
 
 			/// <summary>
-			/// 
+			/// Gravity
 			/// </summary>
 			public float Yg 
 			{
@@ -316,7 +308,7 @@ namespace SdlDotNet.Examples
 			}
 
 			/// <summary>
-			/// 
+			/// Gravity
 			/// </summary>
 			public float Zg 
 			{
@@ -329,8 +321,6 @@ namespace SdlDotNet.Examples
 					zg = value;
 				}
 			}
-			
-			// Gravity
 		}
 
 		Particle[] particle = new Particle[MaxParticles];
