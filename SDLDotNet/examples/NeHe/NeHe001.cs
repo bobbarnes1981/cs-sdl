@@ -63,7 +63,6 @@ namespace SdlDotNet.Examples
 			Events.Quit += new QuitEventHandler(this.Quit);
 			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
 			this.WindowAttributes();
-			Reshape();
 		}
 
 		/// <summary>
@@ -159,6 +158,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run()
 		{
+			Reshape();
 			InitGL();
 			while ((!quit)) 
 			{

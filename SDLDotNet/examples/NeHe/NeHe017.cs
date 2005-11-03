@@ -294,12 +294,12 @@ namespace SdlDotNet.Examples
 		/// <param name="y"></param>
 		/// <param name="str"></param>
 		/// <param name="charSet"></param>
-		public void GlPrint(int x, int y, string str, int charSet)	
+		public void GlPrint(int x, int y, string str, int characterSet)	
 			// Where The Printing Happens
 		{
-			if (charSet > 1)
+			if (characterSet > 1)
 			{
-				charSet = 1;
+				characterSet = 1;
 			}
 			Gl.glBindTexture(Gl.GL_TEXTURE_2D, Texture[0]);			
 			// Select Our Font Texture
@@ -321,7 +321,7 @@ namespace SdlDotNet.Examples
 			// Reset The Modelview Matrix
 			Gl.glTranslated(x,y,0);									
 			// Position The Text (0,0 - Bottom Left)
-			Gl.glListBase(this.baseList - 32 + (128 * charSet));	
+			Gl.glListBase(this.baseList - 32 + (128 * characterSet));	
 			// Choose The Font Set (0 or 1)
 			Gl.glCallLists(str.Length, Gl.GL_UNSIGNED_BYTE, str);	
 			// Write The Text To The Screen
