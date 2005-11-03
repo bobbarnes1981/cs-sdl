@@ -612,10 +612,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="sprite">The sprite to compare to.</param>
 		/// <param name="radius">The radius of the current sprite. Defaults to the radius of the sprite.</param>
 		/// <param name="radiusOther">The other sprite's radius. Defaults to the radius of the sprite.</param>
-		/// <param name="offset">The size of the buffer zone for collision detection. Defaults to 0.</param>
+		/// <param name="tolerance">The size of the buffer zone for collision detection. Defaults to 0.</param>
 		/// <returns>True if they intersect, false if they don't.</returns>
 		/// <remarks>If they radius is not given, it calculates it for you using half the width plus half the height.</remarks>
-		public virtual bool IntersectsWithRadius(Sprite sprite, int radius, int radiusOther, int offset)
+		public virtual bool IntersectsWithRadius(Sprite sprite, int radius, int radiusOther, int tolerance)
 		{
 			if (sprite == null)
 			{
@@ -633,7 +633,7 @@ namespace SdlDotNet.Sprites
 			int r_sum_sq = radius + radiusOther;
 			r_sum_sq *= r_sum_sq;
 
-			return (dcentre_sq - r_sum_sq <= (offset*offset));
+			return (dcentre_sq - r_sum_sq <= (tolerance * tolerance));
 		}
 
 		/// <summary>
