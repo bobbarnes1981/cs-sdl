@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 		private SpriteCollection master = new SpriteCollection(); //holds all sprites
 		private int width = 640; //screen width
 		private int height = 480; //screen height
-		private int maxBalls = 2; //number of balls to display
+		private int maxBalls = 10; //number of balls to display
 		private Random rand = new Random(); //randomizer
 		string data_directory = @"Data/";
 		string filepath = @"../../";
@@ -67,7 +67,6 @@ namespace SdlDotNet.Examples
 		{	
 			rects = screen.Blit(master);
 			screen.Update(rects);	
-			Video.WindowCaption = "Collision: " + master[0].IntersectsWithPixelPrecision(master[1]);
 			screen.Erase(master, background);
 		}
 		#endregion EventHandler Methods
@@ -101,8 +100,8 @@ namespace SdlDotNet.Examples
 					new Point(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
 					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom)));
 
-                // Randomize rotation direction
-                bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
+				// Randomize rotation direction
+				bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
 
 				//Add the sprite to the SpriteCollection
 				master.Add(bounceSprite);
