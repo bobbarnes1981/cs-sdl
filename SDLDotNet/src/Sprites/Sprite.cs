@@ -435,9 +435,53 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// Gets and sets the sprite's size.
+		/// Gets the left edge of the sprite.
 		/// </summary>
-		public Size Size
+		public int Left
+		{
+			get
+			{
+				return this.X;
+			}
+		}
+
+		/// <summary>
+		/// Gets the right edge of the sprite.
+		/// </summary>
+		public int Right
+		{
+			get
+			{
+				return this.X + this.Width;
+			}
+		}
+
+		/// <summary>
+		/// Gets the top edge of the sprite.
+		/// </summary>
+		public int Top
+		{
+			get
+			{
+				return this.Y;
+			}
+		}
+
+		/// <summary>
+		/// Gets the bottom edge of the sprite.
+		/// </summary>
+		public int Bottom
+		{
+			get
+			{
+				return this.Y + this.Height;
+			}
+		}
+
+			/// <summary>
+			/// Gets and sets the sprite's size.
+			/// </summary>
+			public Size Size
 		{
 			get 
 			{ 
@@ -528,6 +572,41 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
+		/// Checks if Sprite intersects with a rectangle with tolerance
+		/// </summary>
+		/// <param name="rect">rectangle to intersect with
+		/// </param>
+		/// <param name="tolerance">The tolerance of the collision check</param>
+		/// <returns>True if Sprite intersect with Rectangle</returns>
+		public virtual bool IntersectsWith(Rectangle rect, int tolerance)
+		{
+			if(rect.Right - this.Left < tolerance)	return false;
+			if(rect.X - this.Right > -tolerance)	return false;
+			if(rect.Bottom - this.Y < tolerance)	return false;
+			if(rect.Y - this.Bottom > -tolerance)	return false;
+			return true;
+		}
+
+		/// <summary>
+		/// Check if two Sprites intersect
+		/// </summary>
+		/// <param name="sprite">Sprite to check intersection with</param>
+		/// <param name="tolerance">The amount of tolerance to give the collision.</param>
+		/// <returns>True if sprites intersect</returns>
+		public virtual bool IntersectsWith(Sprite sprite, int tolerance)
+		{
+			if (sprite == null)
+			{
+				throw new ArgumentNullException("sprite");
+			}
+			if(sprite.Right - this.Left < tolerance)	return false;
+			if(sprite.X - this.Right > -tolerance)		return false;
+			if(sprite.Bottom - this.Y < tolerance)		return false;
+			if(sprite.Y - this.Bottom > -tolerance)		return false;
+			return true;
+		}
+
+		/// <summary>
 		/// Checks for collision between two sprites using a radius from the center of the sprites.
 		/// </summary>
 		/// <param name="sprite">The sprite to compare to.</param>
@@ -596,80 +675,6 @@ namespace SdlDotNet.Sprites
 			int r1 = (this.Width + this.Height) / 4;
 			int r2 = (sprite.Width + sprite.Height) / 4;
 			return IntersectsWithRadius(sprite, r1, r2, 0);
-		}
-
-		/// <summary>
-		/// Checks if there is a collision with another sprite with Pixel Precision.
-		/// </summary>
-		/// <param name="sprite">The other sprite.</param>
-		/// <returns>True if they collide, false otherwise.</returns>
-		/// <remarks>It is recommended that you use another collision algorithm if speed is an issue.</remarks>
-		public virtual bool IntersectsWithPixelPrecision(Sprite sprite)
-		{
-			if(sprite == null)
-			{
-				throw new ArgumentNullException("sprite");
-			}
-
-			// Check bounding box first
-			if(!this.IntersectsWith(sprite))
-				return false;
-
-			// Get the intersecting rectangle
-			Rectangle intersect = this.rect;
-			intersect.Intersect(sprite.rect);
-			
-			//Video.Screen.DrawFilledBox(intersect,Color.Red);
-
-			// Loop through the intersecting rectangle.
-			for(int x = intersect.Left; x < intersect.Right; x++)
-			{
-				for(int y = intersect.Top; y < intersect.Bottom; y++)
-				{
-					try
-					{
-						Video.Screen.DrawBox(intersect,Color.Red);
-						
-						// Something is wrong with getting the right pixel.
-						Color col1 = this.Surface.GetPixel(
-							x - this.X,
-							y - this.Y);
-						Color col2 = sprite.Surface.GetPixel(
-							x - sprite.X,
-							y - sprite.Y);
-
-
-						// Using Alpha test
-						if(col1.A != 0 && col2.A != 0)
-						{
-							Video.Screen.DrawPixel(x,y,Color.Green);
-							//System.Diagnostics.Debug.WriteLine(col1.A + "," + col2.A);
-						}
-						else
-						{	
-							Video.Screen.DrawPixel(x,y,Color.Blue);
-						}
-
-						// Using colorkey
-//						Color col1Key = this.Surface.GetColor(this.Surface.PixelFormat.colorkey);
-//						Color col2Key = sprite.Surface.GetColor(sprite.Surface.PixelFormat.colorkey);
-//						if(col1 != col1Key && col2 != col2Key)
-//						{
-//							Video.Screen.DrawPixel(x,y,Color.Green);
-//						}
-//						else
-//						{	
-//							Video.Screen.DrawPixel(x,y,Color.Blue);
-//						}
-					}
-
-					catch
-					{
-					}
-
-				}
-			}
-			return false;
 		}
 
 		/// <summary>
