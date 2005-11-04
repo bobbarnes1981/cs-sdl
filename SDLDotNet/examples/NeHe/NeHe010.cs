@@ -181,7 +181,7 @@ namespace SdlDotNet.Examples
 			if(File.Exists(fileName)) 
 			{                                         
 				// Does The File Exist Here?
-				fileName = fileName;                                            
+				//fileName = fileName;                                            
 				// Do Nothing
 			}
 			else if(File.Exists(fileName1)) 
