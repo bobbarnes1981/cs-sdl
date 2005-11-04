@@ -36,10 +36,10 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	public class NeHe013 : NeHe012 
+	public class NeHe013 : NeHe012, IDisposable
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -143,7 +143,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene() 
 		{
@@ -201,7 +201,7 @@ namespace SdlDotNet.Examples
 		{
 			base.InitGL();
 			hDC = User.GetDC(Video.WindowHandle);
-			BuildFont();     
+			BuildFont(); 
 		}
 
 		/// <summary>
@@ -217,5 +217,50 @@ namespace SdlDotNet.Examples
 		{
 			KillFont();
 		}
+
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Destroy sprite
+		/// </summary>
+		/// <param name="disposing">If true, remove all unamanged resources</param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					GC.SuppressFinalize(this);
+				}
+				this.disposed = true;
+			}
+		}
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Dispose()
+		{
+			this.Dispose(true);
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~NeHe013() 
+		{
+			Dispose(false);
+		}
+
+		#endregion
 	}
 }

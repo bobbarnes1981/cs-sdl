@@ -34,11 +34,11 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 01: Setting Up An OpenGL Window
 	/// </summary>
 	public class NeHe001
 	{
-		#region Variables
+		#region Fields
 
 		//Width of screen
 		const int width = 640;
@@ -95,7 +95,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		#endregion
+		#endregion Fields
 
 		#region Constructors
 
@@ -108,16 +108,20 @@ namespace SdlDotNet.Examples
 		}
 
 		#endregion Constructors
-    
+
 		#region Lesson Setup
 		/// <summary>
 		/// Initializes methods common to all NeHe lessons
 		/// </summary>
 		protected void Initialize()
 		{
+			// Sets keyboard events
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			// Sets event ot quit application
 			Events.Quit += new QuitEventHandler(this.Quit);
+			// Creates SDL.NET Surface to hold an OpenGL scene
 			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			// Sets Window icon and title
 			this.WindowAttributes();
 		}
 
@@ -128,9 +132,11 @@ namespace SdlDotNet.Examples
 		{
 			Video.WindowIcon();
 			Video.WindowCaption = 
-				"SDL.NET - NeHe Lesson " + this.GetType().ToString().Substring(this.GetType().ToString().Length-3);
+				"SDL.NET - NeHe Lesson " + 
+				this.GetType().ToString().Substring(
+				this.GetType().ToString().Length-3);
 		}
-    
+
 		/// <summary>
 		/// Resizes window
 		/// </summary>
@@ -145,15 +151,20 @@ namespace SdlDotNet.Examples
 		/// <param name="distance"></param>
 		protected virtual void Reshape(float distance)
 		{
+			// Reset The Current Viewport
 			Gl.glViewport(0, 0, width, height);
+			// Select The Projection Matrix
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
+			// Reset The Projection Matrix
 			Gl.glLoadIdentity();
-			//  Calculate The Aspect Ratio Of The Window
+			// Calculate The Aspect Ratio Of The Window
 			Glu.gluPerspective(45.0F, (width / (double)height), 0.1F, distance);
+			// Select The Modelview Matrix
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+			// Reset The Modelview Matrix
 			Gl.glLoadIdentity();
 		}
-    
+
 		/// <summary>
 		/// Initializes the OpenGL system
 		/// </summary>
@@ -182,28 +193,32 @@ namespace SdlDotNet.Examples
 		}
 
 		#endregion Lesson Setup
-    
-		#region Rendering
+
+		#region void DrawGLScene
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
 		protected virtual void DrawGLScene()
 		{
+			// Clear Screen And Depth Buffer
 			Gl.glClear((Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT));
+			// Reset The Current Modelview Matrix
 			Gl.glLoadIdentity();
 		}
-		#endregion Rendering
+		#endregion void DrawGLScene
 
 		#region Event Handlers
-    
+
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch (e.Key) 
 			{
 				case Key.Escape:
+					// Will stop the app loop
 					quit = true;
 					break;
 				case Key.F1:
+					// Toggle fullscreen
 					if ((screen.FullScreen)) 
 					{
 						screen = Video.SetVideoModeWindowOpenGL(width, height, true);
@@ -217,14 +232,14 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
-    
+
 		private void Quit(object sender, QuitEventArgs e)
 		{
 			quit = true;
 		}
 
 		#endregion Event Handlers
-    
+
 		#region Run Loop
 		/// <summary>
 		/// Starts lesson
@@ -241,6 +256,7 @@ namespace SdlDotNet.Examples
 				DrawGLScene();
 				Video.GLSwapBuffers();
 			}
+			// Quits video
 			Video.Dispose(true);
 		}
 		#endregion Run Loop

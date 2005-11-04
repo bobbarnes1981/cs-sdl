@@ -45,7 +45,7 @@ namespace SdlDotNet.Examples
 	public class NeHe034 : NeHe025
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -75,11 +75,8 @@ namespace SdlDotNet.Examples
 
 		#region bool DrawGLScene()
 		/// <summary>
-		///     Draws everything.
+		/// Renders the scene
 		/// </summary>
-		/// <returns>
-		///     Returns <c>true</c> on success, otherwise <c>false</c>.
-		/// </returns>
 		protected override void DrawGLScene() 
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
@@ -96,22 +93,22 @@ namespace SdlDotNet.Examples
 
 		#region int GetHeight(byte[] heightMap, int x, int y)
 		/// <summary>
-		///     Returns the height from a height map index.
+		/// Returns the height from a height map index.
 		/// </summary>
 		/// <param name="heightMap">
-		///     Height map data.
+		/// Height map data.
 		/// </param>
 		/// <param name="x">
-		///     X coordinate value.
+		/// X coordinate value.
 		/// </param>
 		/// <param name="y">
-		///     Y coordinate value.
+		/// Y coordinate value.
 		/// </param>
 		/// <returns>
-		///     Returns int with height data.
+		/// Returns int with height data.
 		/// </returns>
 		private static int GetHeight(byte[] heightMap, int x, int y) 
-		{          
+		{  
 			// This Returns The Height From A Height Map Index
 			x = x % MAP_SIZE;
 			// Error Check Our x Value
@@ -125,17 +122,17 @@ namespace SdlDotNet.Examples
 
 		#region void InitGL()
 		/// <summary>
-		///     All setup for OpenGL goes here.
+		/// All setup for OpenGL goes here.
 		/// </summary>
 		/// <returns>
-		///     Returns <c>true</c> on success, otherwise <c>false</c>.
+		/// Returns <c>true</c> on success, otherwise <c>false</c>.
 		/// </returns>
 		protected override void InitGL() 
-		{               
+		{   
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
 			Keyboard.EnableKeyRepeat(150,50);
-               
+   
 			// All Setup For OpenGL Goes Here
 			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Enable Smooth Shading
@@ -157,23 +154,23 @@ namespace SdlDotNet.Examples
 
 		#region void LoadRawFile(string name, int size, ref byte[] heightMap)
 		/// <summary>
-		///     Read data from file.
+		/// Read data from file.
 		/// </summary>
 		/// <param name="name">
-		///     Name of file where data resides.
+		/// Name of file where data resides.
 		/// </param>
 		/// <param name="size">
-		///     Size of file to be read.
+		/// Size of file to be read.
 		/// </param>
 		/// <param name="heightMap">
-		///     Where data is put when read.
+		/// Where data is put when read.
 		/// </param>
 		/// <returns>
-		///     Returns <c>true</c> if success, <c>false</c> failure.
+		/// Returns <c>true</c> if success, <c>false</c> failure.
 		/// </returns>
 		private void LoadRawFile(string name, int size, ref byte[] heightMap) 
 		{
-			if(name == null || name == string.Empty) 
+			if(name == null || name.Length == 0) 
 			{
 			}
 
@@ -216,10 +213,10 @@ namespace SdlDotNet.Examples
 
 		#region void RenderHeightMap(byte[] heightMap)
 		/// <summary>
-		///     This renders the height map as quads.
+		/// This renders the height map as quads.
 		/// </summary>
 		/// <param name="heightMap">
-		///     Height map data.
+		/// Height map data.
 		/// </param>
 		private void RenderHeightMap(byte[] heightMap) 
 		{
@@ -295,7 +292,7 @@ namespace SdlDotNet.Examples
 
 		#region Reshape()
 		/// <summary>
-		///     Resizes and initializes the GL window.
+		/// Resizes and initializes the GL window.
 		/// </summary>
 		protected override void Reshape() 
 		{
@@ -305,17 +302,17 @@ namespace SdlDotNet.Examples
 
 		#region SetVertexColor(byte[] heightMap, int x, int y)
 		/// <summary>
-		///     Sets the color value for a particular index, 
-		///     depending on the height index.
+		/// Sets the color value for a particular index, 
+		/// depending on the height index.
 		/// </summary>
 		/// <param name="heightMap">
-		///     Height map data.
+		/// Height map data.
 		/// </param>
 		/// <param name="x">
-		///     X coordinate value.
+		/// X coordinate value.
 		/// </param>
 		/// <param name="y">
-		///     Y coordinate value.
+		/// Y coordinate value.
 		/// </param>
 		private void SetVertexColor(byte[] heightMap, int x, int y) 
 		{

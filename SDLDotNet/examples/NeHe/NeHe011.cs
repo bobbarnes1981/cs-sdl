@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 	public class NeHe011 : NeHe009
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -51,7 +51,7 @@ namespace SdlDotNet.Examples
 		}
 		private float[][][] points;				
 		// The Array For The Points On The Grid Of Our "Wave"
-		private int wiggle_count = 0;			
+		private int wiggle_count;			
 		// Counter Used To Control How Fast Flag Waves
 
 		/// <summary>
@@ -60,7 +60,8 @@ namespace SdlDotNet.Examples
 		public NeHe011()
 		{
 			this.Texture = new int[1];
-			this.TextureName = "NeHe011.bmp";
+			this.TextureName = new string[1];
+			this.TextureName[0] = "NeHe011.bmp";
 		}
 
 		/// <summary>
@@ -105,7 +106,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
@@ -116,9 +117,9 @@ namespace SdlDotNet.Examples
 
 			Gl.glTranslatef(0.0f, 0.0f, -12.0f);
 	  
-			Gl.glRotatef(this.XRot, 1.0f, 0.0f, 0.0f);
-			Gl.glRotatef(this.YRot, 0.0f, 1.0f, 0.0f);  
-			Gl.glRotatef(this.ZRot, 0.0f, 0.0f, 1.0f);
+			Gl.glRotatef(this.RotationX, 1.0f, 0.0f, 0.0f);
+			Gl.glRotatef(this.RotationY, 0.0f, 1.0f, 0.0f);  
+			Gl.glRotatef(this.RotationZ, 0.0f, 0.0f, 1.0f);
 
 			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
 
@@ -165,9 +166,9 @@ namespace SdlDotNet.Examples
 
 			this.wiggle_count++;
 
-			this.XRot += 0.3f;
-			this.YRot += 0.2f;
-			this.ZRot += 0.4f;
+			this.RotationX += 0.3f;
+			this.RotationY += 0.2f;
+			this.RotationZ += 0.4f;
 		}
 	}
 }

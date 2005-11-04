@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 	public class NeHe020 : NeHe019
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -49,10 +49,10 @@ namespace SdlDotNet.Examples
 				return "Lesson 20: Masking";
 			}
 		}
-		bool scene = false;				
+		bool scene;				
 		// Which Scene To Draw
 		bool masking = true;
-		float roll = 0.0f;				
+		float roll;				
 		// Rolling Texture
 
 		/// <summary>
@@ -61,6 +61,12 @@ namespace SdlDotNet.Examples
 		public NeHe020()
 		{
 			this.Texture = new int[5];
+			this.TextureName = new string[5];
+			this.TextureName[0] = "NeHe020.Logo.bmp";
+			this.TextureName[1] = "NeHe020.Mask1.bmp";
+			this.TextureName[2] = "NeHe020.Image1.bmp";
+			this.TextureName[3] = "NeHe020.Mask2.bmp";
+			this.TextureName[4] = "NeHe020.Image2.bmp";
 		}
 
 		/// <summary>
@@ -84,52 +90,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
-		/// </summary>
-		protected override void LoadGLTextures()
-		{
-			string[] file = {"NeHe020.Logo.bmp", "NeHe020.Mask1.bmp", "NeHe020.Image1.bmp", "NeHe020.Mask2.bmp", "NeHe020.Image2.bmp"};
-			Bitmap[] image = new Bitmap[5];
-
-			for(int i = 0; i < file.Length; i++)
-			{
-				string finalFile = "";
-				string file2 = "Data" + Path.DirectorySeparatorChar + file[i];
-				string file3 = ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + file2;
-				if(File.Exists(file[i]))
-					finalFile = file[i];
-				else if(File.Exists(file2))
-					finalFile = file2;
-				else if(File.Exists(file3))
-					finalFile = file3;
-				else
-					throw new FileNotFoundException(file[i]);
-				image[i] = new Bitmap(finalFile);
-			}
-
-			Gl.glGenTextures(image.Length, this.Texture);
-		
-			for (int i=0; i < image.Length; i++)
-			{
-				image[i].RotateFlip(RotateFlipType.RotateNoneFlipY);
-				System.Drawing.Imaging.BitmapData bitmapdata;
-				Rectangle rect = new Rectangle(0, 0, image[i].Width, image[i].Height);
-
-				bitmapdata = image[i].LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-
-				// Create Linear Filtered Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i]);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, (int)Gl.GL_RGB, image[i].Width, image[i].Height, 0, Gl.GL_BGR_EXT, Gl.GL_UNSIGNED_BYTE, bitmapdata.Scan0);
-
-				image[i].UnlockBits(bitmapdata);
-				image[i].Dispose();
-			}
-		}
-
-		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{

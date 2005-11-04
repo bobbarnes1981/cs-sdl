@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 	public class NeHe012 : NeHe006
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -49,9 +49,9 @@ namespace SdlDotNet.Examples
 				return "Lesson 12: Display Lists";
 			}
 		}
-		int box = 0;			
+		int box;			
 		// Storage For The Box Display List
-		int top = 0;			
+		int top;			
 		// Storage For The Top Display List
 
 		float[][] boxcol = new float[5][] { 
@@ -73,7 +73,8 @@ namespace SdlDotNet.Examples
 		public NeHe012()
 		{
 			this.Texture = new int[1];
-			this.TextureName = "NeHe012.bmp";
+			this.TextureName = new string[1];
+			this.TextureName[0] = "NeHe012.bmp";
 		}
 
 		/// <summary>
@@ -166,7 +167,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
@@ -180,8 +181,8 @@ namespace SdlDotNet.Examples
 					Gl.glLoadIdentity();
 					// Reset The View
 					Gl.glTranslatef(1.4f + ((float)xloop * 2.8f) - ((float)yloop * 1.4f), ((6.0f - (float)yloop) * 2.4f) - 7.0f, -20.0f);
-					Gl.glRotatef(45.0f - (2.0f * yloop) + this.XRot, 1.0f, 0.0f, 0.0f);
-					Gl.glRotatef(45.0f + this.YRot, 0.0f, 1.0f, 0.0f);
+					Gl.glRotatef(45.0f - (2.0f * yloop) + this.RotationX, 1.0f, 0.0f, 0.0f);
+					Gl.glRotatef(45.0f + this.RotationY, 0.0f, 1.0f, 0.0f);
 					Gl.glColor3fv(boxcol[yloop-1]);
 					Gl.glCallList(this.box);
 					Gl.glColor3fv(topcol[yloop-1]);
@@ -195,16 +196,16 @@ namespace SdlDotNet.Examples
 			switch (e.Key) 
 			{
 				case Key.UpArrow: 
-					this.XRot -= 0.2f;
+					this.RotationX -= 0.2f;
 					break;
 				case Key.DownArrow:
-					this.XRot += 0.2f;
+					this.RotationX += 0.2f;
 					break;
 				case Key.RightArrow:
-					this.YRot += 0.2f;
+					this.RotationY += 0.2f;
 					break;
 				case Key.LeftArrow:
-					this.YRot -= 0.2f;
+					this.RotationY -= 0.2f;
 					break;
 			}
 		}

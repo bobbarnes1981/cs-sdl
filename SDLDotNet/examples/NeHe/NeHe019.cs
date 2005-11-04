@@ -41,7 +41,7 @@ namespace SdlDotNet.Examples
 	public class NeHe019 : NeHe018
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -51,7 +51,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 		// Number of particles to create
-		readonly static int MaxParticles = 1000;
+		const int MaxParticles = 1000;
 	
 		// Rainbow Mode?
 		bool rainbow = true;			
@@ -63,9 +63,9 @@ namespace SdlDotNet.Examples
 		float zoom = -40f;
 			
 		// Current Color Selection
-		int col = 0;					
+		int col;					
 		// Rainbow Effect Delay
-		int delay = 0;					
+		int delay;					
 		// Random number generator
 		Random rand = new Random();		
 		
@@ -341,7 +341,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe019()
 		{
-			this.TextureName = "NeHe019.bmp";
+			this.TextureName = new string[1];
+			this.TextureName[0] = "NeHe019.bmp";
 			this.Texture = new int[3];
 		}
 
@@ -409,7 +410,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{

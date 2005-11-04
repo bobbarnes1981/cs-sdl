@@ -41,7 +41,7 @@ namespace SdlDotNet.Examples
 	public class NeHe015 : NeHe014
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -66,7 +66,8 @@ namespace SdlDotNet.Examples
 		{
 			// One Texture Map
 			this.Texture = new int[1];
-			this.TextureName = "NeHe015.bmp";
+			this.TextureName = new string[1];
+			this.TextureName[0] = "NeHe015.bmp";
 			Events.Quit += new QuitEventHandler(this.Quit);
 		}
 
@@ -85,84 +86,84 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected override void BuildFont() 
 		{
-			IntPtr font;                                                        
+			IntPtr font;   
 			// Windows Font ID
-			this.FontBase = Gl.glGenLists(256);                                      
+			this.FontBase = Gl.glGenLists(256);   
 			// Storage For 256 Characters
 
-			font = Gdi.CreateFont(                                              
+			font = Gdi.CreateFont( 
 				// Create The Font
-				-12,                                                            
+				-12,   
 				// Height Of Font
-				0,                                                              
+				0, 
 				// Width Of Font
-				0,                                                              
+				0, 
 				// Angle Of Escapement
-				0,                                                              
+				0, 
 				// Orientation Angle
-				Gdi.FW_BOLD,                                                    
+				Gdi.FW_BOLD,   
 				// Font Weight
-				false,                                                          
+				false, 
 				// Italic
-				false,                                                          
+				false, 
 				// Underline
-				false,                                                          
+				false, 
 				// Strikeout
-				Gdi.SYMBOL_CHARSET,                                            
+				Gdi.SYMBOL_CHARSET,   
 				// Character Set Identifier
-				Gdi.OUT_TT_PRECIS,                                              
+				Gdi.OUT_TT_PRECIS, 
 				// Output Precision
-				Gdi.CLIP_DEFAULT_PRECIS,                                        
+				Gdi.CLIP_DEFAULT_PRECIS,
 				// Clipping Precision
-				Gdi.ANTIALIASED_QUALITY,                                        
+				Gdi.ANTIALIASED_QUALITY,
 				// Output Quality
-				Gdi.FF_DONTCARE | Gdi.DEFAULT_PITCH,                            
+				Gdi.FF_DONTCARE | Gdi.DEFAULT_PITCH, 
 				// Family And Pitch
-				"Wingdings");                                               
+				"Wingdings");  
 			// Font Name
 
-			Gdi.SelectObject(this.Hdc, font);                                        
+			Gdi.SelectObject(this.Hdc, font);
 			// Selects The Font We Created
 			Wgl.wglUseFontOutlines(
-				this.Hdc,                                                            
+				this.Hdc,   
 				// Select The Current DC
-				0,                                                              
+				0, 
 				// Starting Character
-				255,                                                            
+				255,   
 				// Number Of Display Lists To Build
-				this.FontBase,                                                       
+				this.FontBase,  
 				// Starting Display Lists
-				0,                                                              
+				0, 
 				// Deviation From The True Outlines
-				0.2f,                                                           
+				0.2f,  
 				// Font Thickness In The Z Direction
-				Wgl.WGL_FONT_POLYGONS,                                          
+				Wgl.WGL_FONT_POLYGONS, 
 				// Use Polygons, Not Lines
-				gmf);                                                           
+				gmf);  
 			// Address Of Buffer To Recieve Data
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene() 
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear Screen And Depth Buffer
-			Gl.glLoadIdentity();                                                
+			Gl.glLoadIdentity();   
 			// Reset The Current Modelview Matrix
 			Gl.glTranslatef(1.1f * ((float) (Math.Cos(this.Rotation / 16.0f))), 0.8f * ((float) (Math.Sin(this.Rotation / 20.0f))), -3.0f);
-			Gl.glRotatef(this.Rotation, 1, 0, 0);                                         
+			Gl.glRotatef(this.Rotation, 1, 0, 0);
 			// Rotate On The X Axis
-			Gl.glRotatef(this.Rotation * 1.2f, 0, 1, 0);                                  
+			Gl.glRotatef(this.Rotation * 1.2f, 0, 1, 0);   
 			// Rotate On The Y Axis
-			Gl.glRotatef(this.Rotation * 1.4f, 0, 0, 1);                                  
+			Gl.glRotatef(this.Rotation * 1.4f, 0, 0, 1);   
 			// Rotate On The Z Axis
-			Gl.glTranslatef(-0.35f, -0.35f, 0.1f);                              
+			Gl.glTranslatef(-0.35f, -0.35f, 0.1f);   
 			// Center On X, Y, Z Axis
-			GlPrint("N");                                                       
+			GlPrint("N");  
 			// Draw A Skull And Crossbones Symbol
-			this.Rotation += 0.1f;                                                        
+			this.Rotation += 0.1f;   
 			// Increase The Rotation Variable
 		}
 
@@ -174,19 +175,19 @@ namespace SdlDotNet.Examples
 			if (File.Exists(this.DataDirectory + this.TextureName))
 			{																	
 				this.FilePath = "";															
-			}                                              
+			} 
 			// Status Indicator
-			Bitmap[] textureImage = new Bitmap[1];                              
+			Bitmap[] textureImage = new Bitmap[this.TextureName.Length];   
 			// Create Storage Space For The Texture
 
-			textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName);
+			textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName[0]);
 			// Load The Bitmap
 			// Check For Errors, If Bitmap's Not Found, Quit
 			if(textureImage[0] != null) 
 			{
-				Gl.glGenTextures(1, out this.Texture[0]);                                   
+				Gl.glGenTextures(this.Texture.Length, this.Texture);
 
-				textureImage[0].RotateFlip(RotateFlipType.RotateNoneFlipY);     
+				textureImage[0].RotateFlip(RotateFlipType.RotateNoneFlipY); 
 				// Flip The Bitmap Along The Y-Axis
 				// Rectangle For Locking The Bitmap In Memory
 				Rectangle rectangle = new Rectangle(0, 0, textureImage[0].Width, textureImage[0].Height);
@@ -204,11 +205,11 @@ namespace SdlDotNet.Examples
 				Gl.glEnable(Gl.GL_TEXTURE_GEN_T);
 				
 				if(textureImage[0] != null) 
-				{                                   
+				{
 					// If Texture Exists
-					textureImage[0].UnlockBits(bitmapData);                     
+					textureImage[0].UnlockBits(bitmapData); 
 					// Unlock The Pixel Data From Memory
-					textureImage[0].Dispose();                                  
+					textureImage[0].Dispose();   
 					// Dispose The Bitmap
 				}
 			}
@@ -216,42 +217,42 @@ namespace SdlDotNet.Examples
 
 		#region GlPrint(string text)
 		/// <summary>
-		///     Custom GL "print" routine.
+		/// Custom GL "print" routine.
 		/// </summary>
 		/// <param name="text">
-		///     The text to print.
+		/// The text to print.
 		/// </param>
 		protected override void GlPrint(string text) 
 		{
 			if(text == null || text.Length == 0) 
-			{                              
+			{   
 				// If There's No Text
-				return;                                                         
+				return;
 				// Do Nothing
 			}
-			float length = 0;                                                   
+			float length = 0;  
 			// Used To Find The Length Of The Text
-			char[] chars = text.ToCharArray();                                  
+			char[] chars = text.ToCharArray();   
 			// Holds Our String
 
 			for(int loop = 0; loop < text.Length; loop++) 
-			{                     // Loop To Find Text Length
-				length += gmf[chars[loop]].gmfCellIncX;                         
+			{ // Loop To Find Text Length
+				length += gmf[chars[loop]].gmfCellIncX; 
 				// Increase Length By Each Characters Width
 			}
 
-			Gl.glTranslatef(-length / 2, 0, 0);                                 
+			Gl.glTranslatef(-length / 2, 0, 0);  
 			// Center Our Text On The Screen
-			Gl.glPushAttrib(Gl.GL_LIST_BIT);                                    
+			Gl.glPushAttrib(Gl.GL_LIST_BIT); 
 			// Pushes The Display List Bits
-			Gl.glListBase(this.FontBase);                                        
+			Gl.glListBase(this.FontBase);
 			// Sets The Base Character to 0
 			// .NET - can't call text, it's a string!
 			byte [] textbytes = new byte[text.Length];
 			for (int i = 0; i < text.Length; i++) textbytes[i] = (byte) text[i];
-			Gl.glCallLists(text.Length, Gl.GL_UNSIGNED_BYTE, textbytes);         
+			Gl.glCallLists(text.Length, Gl.GL_UNSIGNED_BYTE, textbytes); 
 			// Draws The Display List Text
-			Gl.glPopAttrib();                                                   
+			Gl.glPopAttrib();  
 			// Pops The Display List Bits
 		}
 		#endregion GlPrint(string text)

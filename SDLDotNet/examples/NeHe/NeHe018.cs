@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 	public class NeHe018 : NeHe016
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -52,11 +52,11 @@ namespace SdlDotNet.Examples
 		bool light = true;				
 		// Lighting ON/OFF
 
-		int part1 = 0;					
+		int part1;					
 		// Start Of Disc ( NEW )
-		int part2 = 0;					
+		int part2;					
 		// End Of Disc ( NEW )
-		int p1 = 0;						
+		int p1;						
 		// Increase 1 ( NEW )
 		int p2 = 1;						
 		// Increase 2 ( NEW )
@@ -79,7 +79,8 @@ namespace SdlDotNet.Examples
 		{
 			Events.Quit += new QuitEventHandler(this.Quit);
 			this.Texture = new int[3];
-			this.TextureName = "NeHe018.bmp";
+			this.TextureName = new string[1];
+			this.TextureName[0] = "NeHe018.bmp";
 			this.Z = -5.0f;
 		}
 
@@ -131,7 +132,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
@@ -139,8 +140,8 @@ namespace SdlDotNet.Examples
 			Gl.glLoadIdentity();
 			Gl.glTranslatef(0.0f, 0.0f, this.Z);
 
-			Gl.glRotatef(this.XRot, 1.0f, 0.0f, 0.0f);
-			Gl.glRotatef(this.YRot, 0.0f, 1.0f, 0.0f);
+			Gl.glRotatef(this.RotationX, 1.0f, 0.0f, 0.0f);
+			Gl.glRotatef(this.RotationY, 0.0f, 1.0f, 0.0f);
 
 			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter]);
 
@@ -192,8 +193,8 @@ namespace SdlDotNet.Examples
 					break;
 			};
 
-			this.XRot += this.XSpeed;
-			this.YRot += this.YSpeed;
+			this.RotationX += this.XSpeed;
+			this.RotationY += this.YSpeed;
 
 		}
 

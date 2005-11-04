@@ -37,12 +37,14 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 06: Texture Mapping
 	/// </summary>
 	public class NeHe006 : NeHe001
 	{
+		#region Fields
+
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -52,31 +54,70 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private float xrot;                                              
 		// X Rotation ( NEW )
-		private float yrot;                                              
+		float rotationX; 
 		// Y Rotation ( NEW )
-		private float zrot;                                              
+		float rotationY;
 		// Z Rotation ( NEW )
-		private int[] texture;                              
+		float rotationZ;
 		// Storage For One Texture ( NEW )
+		int[] texture;
+		// Directory to find the data files
 		string dataDirectory = @"Data/";
+		// Path to Data directory
 		string filePath = @"../../";
-		string textureName;
-		
+		// Name of texture
+		string[] textureName;
+
 		/// <summary>
-		/// 
+		/// Rotation on the X axis
 		/// </summary>
-		public NeHe006()
+		protected float RotationX
 		{
-			textureName = "NeHe006.bmp";
-			texture = new int[1];
+			get
+			{
+				return this.rotationX;
+			}
+			set
+			{
+				this.rotationX = value;
+			}
+		}
+
+		/// <summary>
+		/// rotation on the Y axis
+		/// </summary>
+		protected float RotationY
+		{
+			get
+			{
+				return this.rotationY;
+			}
+			set
+			{
+				this.rotationY = value;
+			}
+		}
+
+		/// <summary>
+		/// rotation on the Z axis
+		/// </summary>
+		protected float RotationZ
+		{
+			get
+			{
+				return this.rotationZ;
+			}
+			set
+			{
+				this.rotationZ = value;
+			}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		protected string TextureName
+		protected string[] TextureName
 		{
 			get
 			{
@@ -104,7 +145,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Directory to find the data files
 		/// </summary>
 		protected string DataDirectory
 		{
@@ -119,7 +160,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Path to Data directory
 		/// </summary>
 		protected string FilePath
 		{
@@ -133,31 +174,54 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		#endregion Fields
+		
+		#region Constructor
+
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		public NeHe006()
+		{
+			textureName = new string[1];
+			textureName[0] = "NeHe006.bmp";
+			texture = new int[1];
+		}
+
+		#endregion Constructor
+
+		#region Lesson Setup
+
 		/// <summary>
 		/// 
 		/// </summary>
 		protected override void InitGL()
 		{
+			// Loads bitmaps and converts to textures
 			this.LoadGLTextures();
 			// Enable Texture Mapping ( NEW )
-			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      
-			base.InitGL ();
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
+			this.InitGLBase();
 		}
 
+		#endregion Lesson Setup
+
+		#region void DrawGLScene()
+
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
 			// Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();                                                
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Reset The View
+			Gl.glLoadIdentity();   
 			Gl.glTranslatef(0, 0, -5);
 
-			Gl.glRotatef(xrot, 1, 0, 0);
-			Gl.glRotatef(yrot, 0, 1, 0);
-			Gl.glRotatef(zrot, 0, 0, 1);
+			Gl.glRotatef(this.rotationX, 1, 0, 0);
+			Gl.glRotatef(this.rotationY, 0, 1, 0);
+			Gl.glRotatef(this.rotationZ, 0, 0, 1);
 
 			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
 
@@ -194,103 +258,69 @@ namespace SdlDotNet.Examples
 			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
 			Gl.glEnd();
 
-			xrot += 0.3f;
-			yrot += 0.2f;
-			zrot += 0.4f;
+			this.rotationX += 0.3f;
+			this.rotationY += 0.2f;
+			this.rotationZ += 0.4f;
 		}
 
+		#endregion void DrawGLScene()
+
 		#region void LoadGLTextures()
+
 		/// <summary>
-		///     Load bitmaps and convert to textures.
+		/// Load bitmaps and convert to textures.
 		/// </summary>
 		protected virtual void LoadGLTextures() 
 		{
-			if (File.Exists(this.DataDirectory + this.TextureName))
+			if (File.Exists(this.DataDirectory + this.TextureName[0]))
 			{
 				this.FilePath = "";
-			}                                              
+			} 
 			// Status Indicator
-			Bitmap[] textureImage = new Bitmap[1];                              
+			Bitmap[] textureImage = new Bitmap[this.TextureName.Length];   
 			// Create Storage Space For The Texture
 
-			textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName); 
+			for(int i=0; i<this.TextureName.Length; i++)
+			{
+				textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName[i]); 
+			}
+			
 			// Load The Bitmap
 			// Check For Errors, If Bitmap's Not Found, Quit
 			if(textureImage[0] != null) 
 			{
-				Gl.glGenTextures(1, out this.Texture[0]);                            
 				// Create The Texture
+				Gl.glGenTextures(this.Texture.Length, this.Texture); 
 
-				textureImage[0].RotateFlip(RotateFlipType.RotateNoneFlipY);     
-				// Flip The Bitmap Along The Y-Axis
-				// Rectangle For Locking The Bitmap In Memory
-				Rectangle rectangle = 
-					new Rectangle(0, 0, textureImage[0].Width, textureImage[0].Height);
-				// Get The Bitmap's Pixel Data From The Locked Bitmap
-				BitmapData bitmapData = 
-					textureImage[0].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+				for(int i = 0; i < textureImage.Length; i++) 
+				{
+					textureImage[i].RotateFlip(RotateFlipType.RotateNoneFlipY); 
+					// Flip The Bitmap Along The Y-Axis
+					// Rectangle For Locking The Bitmap In Memory
+					Rectangle rectangle = 
+						new Rectangle(0, 0, textureImage[i].Width, textureImage[i].Height);
+					// Get The Bitmap's Pixel Data From The Locked Bitmap
+					BitmapData bitmapData = 
+						textureImage[i].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
-				// Typical Texture Generation Using Data From The Bitmap
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
-				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[0].Width, textureImage[0].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
+					// Typical Texture Generation Using Data From The Bitmap
+					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i]);
+					Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
+					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
+					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
 
-				if(textureImage[0] != null) 
-				{                                   
-					// If Texture Exists
-					textureImage[0].UnlockBits(bitmapData);                     
-					// Unlock The Pixel Data From Memory
-					textureImage[0].Dispose();                                  
-					// Dispose The Bitmap
+					if(textureImage[i] != null) 
+					{
+						// If Texture Exists
+						textureImage[i].UnlockBits(bitmapData); 
+						// Unlock The Pixel Data From Memory
+						textureImage[i].Dispose();   
+						// Dispose The Bitmap
+					}
 				}
-			}                                                     
+			}
 		}
+
 		#endregion void LoadGLTextures()
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected float XRot
-		{
-			get
-			{
-				return xrot;
-			}
-			set
-			{
-				xrot = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected float YRot
-		{
-			get
-			{
-				return yrot;
-			}
-			set
-			{
-				yrot = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected float ZRot
-		{
-			get
-			{
-				return zrot;
-			}
-			set
-			{
-				zrot = value;
-			}
-		}
 	}
 }

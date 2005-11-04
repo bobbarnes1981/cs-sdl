@@ -45,7 +45,7 @@ namespace SdlDotNet.Examples
 	public class NeHe025 : NeHe010
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -55,7 +55,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private float zspeed;                                            
+		private float zspeed;   
 		private float ypos;
 		/// <summary>
 		/// 
@@ -73,37 +73,37 @@ namespace SdlDotNet.Examples
 		}
 		private Random rand = new Random();
 
-		private int key = 1;                                             
+		private int key = 1;
 		// Make Sure Same Morph Key Is Not Pressed
-		private int step = 0;                                            
+		private int step;   
 		// Step Counter
-		private int steps = 200;                                         
+		private int steps = 200;
 		// Maximum Number Of Steps
-		private bool morph;                                              
+		private bool morph; 
 		// Morphing?
 
-		private int maxver;                                              
+		private int maxver; 
 		// Maximum Number Of Vertices
-		private Thing morph1, morph2, morph3, morph4;                   
+		private Thing morph1, morph2, morph3, morph4;   
 		// Our 4 Morphable Objects
 		private Thing helper, source, destination;
 
 		private struct Vertex 
-		{                                     
+		{  
 			// Structure For 3d Points
-			public float X;                                                     
+			public float X;
 			// X Coordinate
-			public float Y;                                                     
+			public float Y;
 			// Y Coordinate
-			public float Z;                                                     
+			public float Z;
 			// Z Coordinate
 		}
 		private struct Thing 
-		{                                                  
+		{ 
 			// Structure For An Object
-			public int Verts;                                                   
+			public int Verts;  
 			// Number Of Vertices For The Object
-			public Vertex[] Points;                                             
+			public Vertex[] Points;
 			// Vertices
 		}
 
@@ -124,35 +124,35 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(150,50);
 
 			// All Setup For OpenGL Goes Here
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);                         
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
 			// Set The Blending Function For Translucency
-			Gl.glClearColor(0, 0, 0, 0);                                       
+			Gl.glClearColor(0, 0, 0, 0);
 			// This Will Clear The Background Color To Black
-			Gl.glClearDepth(1);                                                 
+			Gl.glClearDepth(1);
 			// Enables Clearing Of The Depth Buffer
-			Gl.glDepthFunc(Gl.GL_LESS);                                         
+			Gl.glDepthFunc(Gl.GL_LESS);
 			// The Type Of Depth Test To Do
-			Gl.glEnable(Gl.GL_DEPTH_TEST);                                      
+			Gl.glEnable(Gl.GL_DEPTH_TEST);   
 			// Enables Depth Testing
-			Gl.glShadeModel(Gl.GL_SMOOTH);                                      
+			Gl.glShadeModel(Gl.GL_SMOOTH);   
 			// Enables Smooth Color Shading
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);         
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
 			// Really Nice Perspective Calculations
 
-			maxver = 0;                                                         
+			maxver = 0;
 			// Sets Max Vertices To 0 By Default
 
-			LoadThing("NeHe025.Sphere.txt", ref morph1);                  
+			LoadThing("NeHe025.Sphere.txt", ref morph1);  
 			// Load The First Object Into morph1 From File sphere.txt
-			LoadThing("NeHe025.Torus.txt", ref morph2);                   
+			LoadThing("NeHe025.Torus.txt", ref morph2);   
 			// Load The Second Object Into morph2 From File torus.txt
-			LoadThing("NeHe025.Tube.txt", ref morph3);                    
+			LoadThing("NeHe025.Tube.txt", ref morph3);
 			// Load The Third Object Into morph3 From File tube.txt
 
-			AllocateThing(ref morph4, 486);                                     
+			AllocateThing(ref morph4, 486);  
 			// Manually Reserver Ram For A 4th 468 Vertice Object (morph4)
 			for(int i = 0; i < 486; i++) 
-			{                                     
+			{  
 				// Loop Through All 468 Vertices
 				morph4.Points[i].X = ((float) (rand.Next() % 14000) / 1000) - 7;
 				// morph4 X Point Becomes A Random Float Value From -7 to 7
@@ -171,10 +171,10 @@ namespace SdlDotNet.Examples
 
 		#region DrawGLScene()
 		/// <summary>
-		///     Draws everything.
+		///  Renders the scene
 		/// </summary>
 		protected override void DrawGLScene() 
-		{                                    
+		{ 
 			// Here's Where We Do All The Drawing
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear The Screen And The Depth Buffer
@@ -182,16 +182,16 @@ namespace SdlDotNet.Examples
 			// Reset The View
 			Gl.glTranslatef(this.XPos, this.YPos, this.ZPos);  
 			// Translate The The Current Position To Start Drawing
-			Gl.glRotatef(this.XRot, 1, 0, 0);
+			Gl.glRotatef(this.RotationX, 1, 0, 0);
 			// Rotate On The X Axis By xrot
-			Gl.glRotatef(this.YRot, 0, 1, 0);
+			Gl.glRotatef(this.RotationY, 0, 1, 0);
 			// Rotate On The Y Axis By yrot
-			Gl.glRotatef(this.ZRot, 0, 0, 1);
+			Gl.glRotatef(this.RotationZ, 0, 0, 1);
 			// Rotate On The Z Axis By zrot
 
-			this.XRot += this.XSpeed;
-			this.YRot += this.YSpeed;
-			this.ZRot += zspeed;
+			this.RotationX += this.XSpeed;
+			this.RotationY += this.YSpeed;
+			this.RotationZ += zspeed;
 			// Increase xrot,yrot & zrot by xspeed, yspeed & zspeed
 
 			float tx, ty, tz;
@@ -345,13 +345,13 @@ namespace SdlDotNet.Examples
 		}
 		#region LoadThing(string filename, ref Thing k)
 		/// <summary>
-		///     Loads Object from a file.
+		/// Loads Object from a file.
 		/// </summary>
 		/// <param name="filename">
-		///     The file to load.
+		/// The file to load.
 		/// </param>
 		/// <param name="k">
-		///     The Object to save to.
+		/// The Object to save to.
 		/// </param>
 		private void LoadThing(string filename, ref Thing k) 
 		{
@@ -370,8 +370,8 @@ namespace SdlDotNet.Examples
 
 			try 
 			{
-				if(filename == null || filename == string.Empty) 
-				{                      
+				if(filename == null || filename.Length == 0) 
+				{  
 					// Make Sure A Filename Was Given
 					return; 
 					// If Not Return
@@ -392,19 +392,19 @@ namespace SdlDotNet.Examples
 				}
 
 				if(File.Exists(filename)) 
-				{                                             
+				{
 					// Does The File Exist Here?
 					reader = new StreamReader(filename, encoding); 
 					// Open The File As ASCII Text
 				}
 				else if(File.Exists(fileName1)) 
-				{                                       
+				{
 					// Does The File Exist Here?
 					reader = new StreamReader(fileName1, encoding);
 					// Open The File As ASCII Text
 				}
 				else if(File.Exists(fileName2)) 
-				{                                       
+				{
 					// Does The File Exist Here?
 					reader = new StreamReader(fileName2, encoding);
 					// Open The File As ASCII Text
@@ -425,7 +425,7 @@ namespace SdlDotNet.Examples
 				// Jumps To Code That Allocates Ram To Hold The Object
 
 				for(int vertloop = 0; vertloop < ver; vertloop++) 
-				{                     
+				{ 
 					// Loop Through The Vertices
 					oneline = reader.ReadLine();
 					// Reads In The Next Line Of Text
@@ -451,11 +451,11 @@ namespace SdlDotNet.Examples
 				}
 
 				if(ver > maxver) 
-				{                                                      
+				{ 
 					// If ver Is Greater Than maxver
 					// maxver Keeps Track Of The Highest Number Of 
 					// Vertices Used In Any Of The Objects
-					maxver = ver;                                                       // Set maxver Equal To ver
+					maxver = ver;  // Set maxver Equal To ver
 				}
 			}
 			catch(Exception e) 
@@ -468,7 +468,7 @@ namespace SdlDotNet.Examples
 			{
 				if(reader != null) 
 				{
-					reader.Close();                                                     // Close The StreamReader
+					reader.Close();// Close The StreamReader
 				}
 			}
 		}
@@ -476,13 +476,13 @@ namespace SdlDotNet.Examples
 
 		#region AllocateThing(ref Thing thing, int number)
 		/// <summary>
-		///     Allocate memory for each object.
+		/// Allocate memory for each object.
 		/// </summary>
 		/// <param name="thing">
-		///     The object.
+		/// The object.
 		/// </param>
 		/// <param name="number">
-		///     The number of points to allocate.
+		/// The number of points to allocate.
 		/// </param>
 		private void AllocateThing(ref Thing thing, int number) 
 		{
@@ -492,13 +492,13 @@ namespace SdlDotNet.Examples
 
 		#region Vertex Calculate(int i)
 		/// <summary>
-		///     Calculates movement of points during morphing.
+		/// Calculates movement of points during morphing.
 		/// </summary>
 		/// <param name="i">
-		///     The number of the point to calculate.
+		/// The number of the point to calculate.
 		/// </param>
 		/// <returns>
-		///     A Vertex.
+		/// A Vertex.
 		/// </returns>
 		private Vertex Calculate(int i) 
 		{

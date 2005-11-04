@@ -26,20 +26,20 @@ SOFTWARE.
 #endregion License
 
 using System;
-using System.Reflection;
 
-using SdlDotNet;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 02: Your First Polygon
 	/// </summary>
 	public class NeHe002 : NeHe001
 	{
+		#region Fields
+
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -49,41 +49,45 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		#endregion Fields
+
+		#region void DrawGLScene
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
 			// Clear Screen And Depth Buffer
-			Gl.glLoadIdentity();                                                
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Reset The Current Modelview Matrix
-			Gl.glTranslatef(-1.5f, 0, -6);                                      
+			Gl.glLoadIdentity(); 
 			// Move Left 1.5 Units And Into The Screen 6.0
-			Gl.glBegin(Gl.GL_TRIANGLES);                                        
+			Gl.glTranslatef(-1.5f, 0, -6);
 			// Drawing Using Triangles
-			Gl.glVertex3f(0, 1, 0);                                         
+			Gl.glBegin(Gl.GL_TRIANGLES); 
 			// Top
-			Gl.glVertex3f(-1, -1, 0);                                       
+			Gl.glVertex3f(0, 1, 0);  
 			// Bottom Left
-			Gl.glVertex3f(1, -1, 0);                                        
+			Gl.glVertex3f(-1, -1, 0);
 			// Bottom Right
-			Gl.glEnd();                                                         
+			Gl.glVertex3f(1, -1, 0); 
 			// Finished Drawing The Triangle
-			Gl.glTranslatef(3, 0, 0);                                           
+			Gl.glEnd();  
 			// Move Right 3 Units
-			Gl.glBegin(Gl.GL_QUADS);                                            
+			Gl.glTranslatef(3, 0, 0);
 			// Draw A Quad
-			Gl.glVertex3f(-1, 1, 0);                                        
+			Gl.glBegin(Gl.GL_QUADS); 
 			// Top Left
-			Gl.glVertex3f(1, 1, 0);                                         
+			Gl.glVertex3f(-1, 1, 0); 
 			// Top Right
-			Gl.glVertex3f(1, -1, 0);                                        
+			Gl.glVertex3f(1, 1, 0);  
 			// Bottom Right
-			Gl.glVertex3f(-1, -1, 0);                                       
+			Gl.glVertex3f(1, -1, 0); 
 			// Bottom Left
-			Gl.glEnd();                                                       
+			Gl.glVertex3f(-1, -1, 0);
 			// Done Drawing The Quad
+			Gl.glEnd();   
 		}
+		#endregion void DrawGLScene
 	}
 }
