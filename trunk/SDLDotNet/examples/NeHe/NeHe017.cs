@@ -41,7 +41,7 @@ namespace SdlDotNet.Examples
 	public class NeHe017 : NeHe013
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -51,9 +51,8 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private int baseList = 0;		
 		// Base Display List For The Font
-		private string textureName2;
+		int baseList;	
 
 		/// <summary>
 		/// 
@@ -62,9 +61,10 @@ namespace SdlDotNet.Examples
 		{
 			Events.Quit += new QuitEventHandler(this.Quit);
 			this.Texture = new int[2];	
-			this.TextureName = "NeHe017.Font.bmp";
+			this.TextureName = new string[2];
+			this.TextureName[0] = "NeHe017.Font.bmp";
 			// Texture array
-			this.textureName2 = "NeHe017.Bumps.bmp";
+			this.TextureName[1] = "NeHe017.Bumps.bmp";
 		}
 
 		/// <summary>
@@ -95,7 +95,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
@@ -183,59 +183,6 @@ namespace SdlDotNet.Examples
 			this.Cnt2 += 0.0081f;	
 		}
 
-		#region void LoadGLTextures()
-		/// <summary>
-		///     Load bitmaps and convert to textures.
-		/// </summary>
-		/// <returns>
-		///     <c>true</c> on success, otherwise <c>false</c>.
-		/// </returns>
-		protected override void LoadGLTextures() 
-		{
-			if (File.Exists(this.DataDirectory + this.TextureName))
-			{																	
-				this.FilePath = "";															
-			}                                              
-			// Status Indicator
-			Bitmap[] textureImage = new Bitmap[2];                                
-			// Create Storage Space For The Texture
-
-			textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName);
-			textureImage[1] = new Bitmap(this.FilePath + this.DataDirectory + this.textureName2);     
-			         
-			// Check For Errors, If Bitmap's Not Found, Quit
-			if(textureImage[0] != null && textureImage[1] != null &&
-				textureImage[1] != null) 
-			{
-				Gl.glGenTextures(2, this.Texture);
-				// Create Three Textures
-				for(int loop = 0; loop < textureImage.Length; loop++) 
-				{         // Loop Through All 3 Textures
-					// Flip The Bitmap Along The Y-Axis
-					textureImage[loop].RotateFlip(RotateFlipType.RotateNoneFlipY);
-					// Rectangle For Locking The Bitmap In Memory
-					Rectangle rectangle = new Rectangle(0, 0, textureImage[loop].Width, textureImage[loop].Height);
-					// Get The Bitmap's Pixel Data From The Locked Bitmap
-					BitmapData bitmapData = textureImage[loop].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-
-					// Create Linear Filtered Texture
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[loop]);
-					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-					Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[loop].Width, textureImage[loop].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
-
-					if(textureImage[loop] != null) 
-					{                            // If Texture Exists
-						textureImage[loop].UnlockBits(bitmapData);
-						// Unlock The Pixel Data From Memory
-						textureImage[loop].Dispose();
-						// Dispose The Bitmap
-					}
-				}
-			}
-		}
-		#endregion void LoadGLTextures()
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -290,13 +237,18 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="str"></param>
+		/// <param name="displayText">Text to display</param>
+		/// <param name="positionX">X position to display the text</param>
+		/// <param name="positionY">Y position to display the text</param>
 		/// <param name="characterSet"></param>
-		public void GlPrint(int x, int y, string str, int characterSet)	
+		public void GlPrint(int positionX, int positionY, string displayText, int characterSet)	
 			// Where The Printing Happens
 		{
+			if (displayText == null || displayText.Length == 0)
+			{
+				displayText = " ";
+			}
+
 			if (characterSet > 1)
 			{
 				characterSet = 1;
@@ -319,11 +271,11 @@ namespace SdlDotNet.Examples
 			// Store The Modelview Matrix
 			Gl.glLoadIdentity();									
 			// Reset The Modelview Matrix
-			Gl.glTranslated(x,y,0);									
+			Gl.glTranslated(positionX, positionY,0);									
 			// Position The Text (0,0 - Bottom Left)
 			Gl.glListBase(this.baseList - 32 + (128 * characterSet));	
 			// Choose The Font Set (0 or 1)
-			Gl.glCallLists(str.Length, Gl.GL_UNSIGNED_BYTE, str);	
+			Gl.glCallLists(displayText.Length, Gl.GL_UNSIGNED_BYTE, displayText);	
 			// Write The Text To The Screen
 			Gl.glMatrixMode(Gl.GL_PROJECTION);						
 			// Select The Projection Matrix

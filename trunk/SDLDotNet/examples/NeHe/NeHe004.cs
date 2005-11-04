@@ -26,20 +26,20 @@ SOFTWARE.
 #endregion License
 
 using System;
-using System.Reflection;
 
-using SdlDotNet;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 04: Rotation
 	/// </summary>
 	public class NeHe004 : NeHe001
 	{
+		#region Fields
+
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -48,63 +48,71 @@ namespace SdlDotNet.Examples
 				return "Lesson 04: Rotation";
 			}
 		}
+
 		// Angle For The Triangle ( NEW )
-		private float rtri;                                              
-		private float rquad;
-    
+		float rtri;  
+		// Angle For The Quad ( NEW ) 
+		float rquad;
+
+		#endregion Fields
+
+		#region void DrawGLScene
+
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
 			// Clear Screen And Depth Buffer
-			Gl.glLoadIdentity();                                                
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Reset The Current Modelview Matrix
-			Gl.glTranslatef(-1.5f, 0, -6);                                      
+			Gl.glLoadIdentity();   
 			// Move Left 1.5 Units And Into The Screen 6.0
-			Gl.glRotatef(rtri, 0, 1, 0);                                        
+			Gl.glTranslatef(-1.5f, 0, -6);   
 			// Rotate The Triangle On The Y axis ( NEW )
-			Gl.glBegin(Gl.GL_TRIANGLES);                                        
+			Gl.glRotatef(rtri, 0, 1, 0);
 			// Drawing Using Triangles
-			Gl.glColor3f(1, 0, 0);                                          
+			Gl.glBegin(Gl.GL_TRIANGLES);
 			// Set The Color To Red
-			Gl.glVertex3f(0, 1, 0);                                         
+			Gl.glColor3f(1, 0, 0); 
 			// Top
-			Gl.glColor3f(0, 1, 0);                                          
+			Gl.glVertex3f(0, 1, 0);
 			// Set The Color To Green
-			Gl.glVertex3f(-1, -1, 0);                                       
+			Gl.glColor3f(0, 1, 0); 
 			// Bottom Left
-			Gl.glColor3f(0, 0, 1);                                          
+			Gl.glVertex3f(-1, -1, 0);
 			// Set The Color To Blue
-			Gl.glVertex3f(1, -1, 0);                                        
+			Gl.glColor3f(0, 0, 1); 
 			// Bottom Right
-			Gl.glEnd();                                                         
+			Gl.glVertex3f(1, -1, 0);
 			// Finished Drawing The Triangle
-			Gl.glLoadIdentity();                                                
+			Gl.glEnd();
 			// Reset The Current Modelview Matrix
-			Gl.glTranslatef(1.5f, 0, -6);                                       
+			Gl.glLoadIdentity();   
 			// Move Right 1.5 Units And Into The Screen 6.0
-			Gl.glRotatef(rquad, 1, 0, 0);                                       
+			Gl.glTranslatef(1.5f, 0, -6);
 			// Rotate The Quad On The X axis ( NEW )
-			Gl.glColor3f(0.5f, 0.5f, 1);                                        
+			Gl.glRotatef(rquad, 1, 0, 0);
 			// Set The Color To Blue One Time Only
-			Gl.glBegin(Gl.GL_QUADS);                                            
+			Gl.glColor3f(0.5f, 0.5f, 1);
 			// Draw A Quad
-			Gl.glVertex3f(-1, 1, 0);                                        
+			Gl.glBegin(Gl.GL_QUADS);   
 			// Top Left
-			Gl.glVertex3f(1, 1, 0);                                         
+			Gl.glVertex3f(-1, 1, 0);
 			// Top Right
-			Gl.glVertex3f(1, -1, 0);                                        
+			Gl.glVertex3f(1, 1, 0);
 			// Bottom Right
-			Gl.glVertex3f(-1, -1, 0);                                       
+			Gl.glVertex3f(1, -1, 0);
 			// Bottom Left
-			Gl.glEnd();                                                         
+			Gl.glVertex3f(-1, -1, 0);
 			// Done Drawing The Quad
-			rtri += 0.2f;                                                       
+			Gl.glEnd();
 			// Increase The Rotation Variable For The Triangle ( NEW )
-			rquad -= 0.15f;                                                     
+			rtri += 0.2f;  
 			// Decrease The Rotation Variable For The Quad ( NEW )
+			rquad -= 0.15f;
 		}
+
+		#endregion void DrawGLScene
 	}
 }

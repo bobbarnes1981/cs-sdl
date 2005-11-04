@@ -52,16 +52,17 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-        private bool blend; 
-        private bool bp;                           
-		// Which Filter To Use                     
+private bool blend; 
+private bool bp;
+		// Which Filter To Use 
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public NeHe008()
 		{
-			this.TextureName = "NeHe008.bmp";
+			this.TextureName = new string[1];
+			this.TextureName[0] = "NeHe008.bmp";
 			this.Texture = new int[3];
 		}
 
@@ -73,9 +74,9 @@ namespace SdlDotNet.Examples
 			base.InitGL ();
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
-			Gl.glColor4f(1, 1, 1, 0.5f);                                        
+			Gl.glColor4f(1, 1, 1, 0.5f);
 			// Full Brightness.  50% Alpha
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);                         
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
 			// Set The Blending Function For Translucency
 		}
 
@@ -84,9 +85,9 @@ namespace SdlDotNet.Examples
 			switch (e.Key) 
 			{
 				case Key.L: 
-					if (!this.Lp)
+					if (!this.KeyPressedL)
 					{
-						this.Lp = true;
+						this.KeyPressedL = true;
 						this.Light = !this.Light;
 						if(!this.Light) 
 						{
@@ -99,13 +100,13 @@ namespace SdlDotNet.Examples
 					}
 					else
 					{ 
-						this.Lp = false;
+						this.KeyPressedL = false;
 					}
 					break;	
 				case Key.F:
-					if (!this.Fp)
+					if (!this.KeyPressedF)
 					{
-						this.Fp = true;
+						this.KeyPressedF = true;
 						this.Filter += 1;
 						if(this.Filter > 2) 
 						{
@@ -114,7 +115,7 @@ namespace SdlDotNet.Examples
 					}
 					else
 					{
-						this.Fp = false;
+						this.KeyPressedF = false;
 					}
 					break;
 				case Key.PageUp:
@@ -143,16 +144,16 @@ namespace SdlDotNet.Examples
 						blend = !blend;
 						if(blend) 
 						{
-							Gl.glEnable(Gl.GL_BLEND);                           
+							Gl.glEnable(Gl.GL_BLEND);
 							// Turn Blending On
-							Gl.glDisable(Gl.GL_DEPTH_TEST);                     
+							Gl.glDisable(Gl.GL_DEPTH_TEST); 
 							// Turn Depth Testing Off
 						}
 						else 
 						{
-							Gl.glDisable(Gl.GL_BLEND);                          
+							Gl.glDisable(Gl.GL_BLEND);  
 							// Turn Blending Off
-							Gl.glEnable(Gl.GL_DEPTH_TEST);                      
+							Gl.glEnable(Gl.GL_DEPTH_TEST);  
 							// Turn Depth Testing On
 						}
 					}

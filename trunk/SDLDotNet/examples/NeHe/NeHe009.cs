@@ -40,9 +40,9 @@ namespace SdlDotNet.Examples
 	/// 
 	/// </summary>
 	public class NeHe009 : NeHe006
-	{    
+	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -52,31 +52,31 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private static Random rand = new Random();                              
+		private static Random rand = new Random();   
 		// Random Number Generator
-		private static bool twinkle;                                            
+		private static bool twinkle;   
 		// Twinkling Stars
-		private static bool tp;                                                 
+		private static bool tp;
 		// 'T' Key Pressed?
-		private const int num = 50;                                             
+		private const int num = 50;
 		// Number Of Stars To Draw
 		private struct star 
-		{                                                   
+		{  
 			// Create A Structure For Star
-			public byte r, g, b;                                                
+			public byte r, g, b;   
 			// Stars Color
-			public float dist;                                                  
+			public float dist; 
 			// Stars Distance From Center
-			public float angle;                                                 
+			public float angle;
 			// Stars Current Angle
 		}
-		private static star[] stars = new star[num];                            
+		private static star[] stars = new star[num]; 
 		// Need To Keep Track Of 'num' Stars
-		private static float zoom = -15;                                        
+		private static float zoom = -15;
 		// Distance Away From Stars
-		private static float tilt = 90;                                         
+		private static float tilt = 90;
 		// Tilt The View
-		private static float spin;                                              
+		private static float spin; 
 		// Spin Stars
 		private static int loop; 
 
@@ -85,7 +85,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe009()
 		{
-			this.TextureName = "NeHe009.bmp";
+			this.TextureName = new string[1];
+			this.TextureName[0] = "NeHe009.bmp";
 			this.Texture = new int[1];
 		}
 
@@ -97,17 +98,17 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
 			this.LoadGLTextures();
-			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      
+			Gl.glEnable(Gl.GL_TEXTURE_2D);   
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);                                      
+			Gl.glShadeModel(Gl.GL_SMOOTH);   
 			// Enable Smooth Shading
-			Gl.glClearColor(0, 0, 0, 0.5f);                                     
+			Gl.glClearColor(0, 0, 0, 0.5f);  
 			// Black Background
-			Gl.glClearDepth(1);                                                 
+			Gl.glClearDepth(1);
 			// Depth Buffer Setup
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);         
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
 			// Really Nice Perspective Calculations
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);                         
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
 			// Set The Blending Function For Translucency
 			Gl.glEnable(Gl.GL_BLEND);
 
@@ -122,31 +123,31 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear The Screen And The Depth Buffer
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);                     
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]); 
 			// Select Our Texture
 
 			for(loop = 0; loop < num; loop++) 
-			{                                 
+			{  
 				// Loop Through All The Stars
-				Gl.glLoadIdentity();                                            
+				Gl.glLoadIdentity();   
 				// Reset The View Before We Draw Each Star
-				Gl.glTranslatef(0, 0, zoom);                                    
+				Gl.glTranslatef(0, 0, zoom); 
 				// Zoom Into The Screen (Using The Value In 'zoom')
-				Gl.glRotatef(tilt, 1, 0, 0);                                    
+				Gl.glRotatef(tilt, 1, 0, 0); 
 				// Tilt The View (Using The Value In 'tilt')
-				Gl.glRotatef(stars[loop].angle, 0, 1, 0);                       
+				Gl.glRotatef(stars[loop].angle, 0, 1, 0);   
 				// Rotate To The Current Stars Angle
-				Gl.glTranslatef(stars[loop].dist, 0, 0);                        
+				Gl.glTranslatef(stars[loop].dist, 0, 0);
 				// Move Forward On The X Plane
-				Gl.glRotatef(-stars[loop].angle, 0, 1, 0);                      
+				Gl.glRotatef(-stars[loop].angle, 0, 1, 0);  
 				// Cancel The Current Stars Angle
-				Gl.glRotatef(-tilt, 1, 0, 0);                                   
+				Gl.glRotatef(-tilt, 1, 0, 0);
 				// Cancel The Screen Tilt
 				if(twinkle) 
 				{
@@ -207,53 +208,5 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
-		#region bool override LoadGLTextures()
-		/// <summary>
-		///     Load bitmaps and convert to textures.
-		/// </summary>
-		/// <returns>
-		///     <c>true</c> on success, otherwise <c>false</c>.
-		/// </returns>
-		protected override void LoadGLTextures() 
-		{                                           
-			if (File.Exists(this.DataDirectory + this.TextureName))
-			{																	
-				this.FilePath = "";															
-			}                                              
-			// Status Indicator
-			Bitmap[] textureImage = new Bitmap[1];                              
-			// Create Storage Space For The Texture
-
-			textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName);
-			// Load The Bitmap
-			// Check For Errors, If Bitmap's Not Found, Quit
-			if(textureImage[0] != null) 
-			{
-				Gl.glGenTextures(1, out this.Texture[0]);                                   
-
-				textureImage[0].RotateFlip(RotateFlipType.RotateNoneFlipY);     
-				// Flip The Bitmap Along The Y-Axis
-				// Rectangle For Locking The Bitmap In Memory
-				Rectangle rectangle = new Rectangle(0, 0, textureImage[0].Width, textureImage[0].Height);
-				// Get The Bitmap's Pixel Data From The Locked Bitmap
-				BitmapData bitmapData = textureImage[0].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-
-				// Create Linear Filtered Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
-				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[0].Width, textureImage[0].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
-				
-				if(textureImage[0] != null) 
-				{                                   
-					// If Texture Exists
-					textureImage[0].UnlockBits(bitmapData);                     
-					// Unlock The Pixel Data From Memory
-					textureImage[0].Dispose();                                  
-					// Dispose The Bitmap
-				}
-			}
-		}
-		#endregion bool LoadGLTextures()
 	}
 }

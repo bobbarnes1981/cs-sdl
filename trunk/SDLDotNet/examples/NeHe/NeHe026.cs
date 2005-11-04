@@ -44,7 +44,7 @@ namespace SdlDotNet.Examples
 	public class NeHe026 : NeHe025
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -58,14 +58,12 @@ namespace SdlDotNet.Examples
 		// Quadratic For Drawing A Sphere
 		private float ballHeight;
 
-		private string textureName2 = "NeHe026.Ball.bmp";
-		private string textureName3 = "NeHe026.EnvRoll.bmp";       
-		private float xrotspeed = 0;                                     
+		private float xrotspeed;  
 		// X Rotation Speed
-		private float yrotspeed = 0;                                     
+		private float yrotspeed;  
 		// Y Rotation Speed
 		private static float zoom = -7;
-                                         
+
 		// Maximum Number Of Vertices
 		private float[] LightAmb = {0.7f, 0.7f, 0.7f, 1};
 		// Ambient Light
@@ -80,12 +78,16 @@ namespace SdlDotNet.Examples
 		public NeHe026()
 		{
 			this.ballHeight = 2;
-			this.TextureName = "NeHe026.EnvWall.bmp";
+			this.Texture = new int[3];
+			this.TextureName = new string[3];
+			this.TextureName[0] = "NeHe026.EnvWall.bmp";
+			this.TextureName[1] = "NeHe026.Ball.bmp";
+			this.TextureName[2] = "NeHe026.EnvRoll.bmp";
 		}
 
 		#region DrawFloor()
 		/// <summary>
-		///     Draws the floor.
+		/// Draws the floor.
 		/// </summary>
 		private void DrawFloor() 
 		{
@@ -118,33 +120,33 @@ namespace SdlDotNet.Examples
 
 		#region DrawObject()
 		/// <summary>
-		///     Draws our ball.
+		/// Draws our ball.
 		/// </summary>
 		private void DrawObject() 
 		{
-			Gl.glColor3f(1, 1, 1);                                              // Set Color To White
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);                     // Select Texture 2 (1)
-			Glu.gluSphere(q, 0.35f, 32, 16);                                    // Draw First Sphere
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]);                     // Select Texture 3 (2)
-			Gl.glColor4f(1, 1, 1, 0.4f);                                        // Set Color To White With 40% Alpha
-			Gl.glEnable(Gl.GL_BLEND);                                           // Enable Blending
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);                         // Set Blending Mode To Mix Based On SRC Alpha
-			Gl.glEnable(Gl.GL_TEXTURE_GEN_S);                                   // Enable Sphere Mapping
-			Gl.glEnable(Gl.GL_TEXTURE_GEN_T);                                   // Enable Sphere Mapping
-			Glu.gluSphere(q, 0.35f, 32, 16);                                    // Draw Another Sphere Using New Texture
+			Gl.glColor3f(1, 1, 1); // Set Color To White
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]); // Select Texture 2 (1)
+			Glu.gluSphere(q, 0.35f, 32, 16); // Draw First Sphere
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]); // Select Texture 3 (2)
+			Gl.glColor4f(1, 1, 1, 0.4f);// Set Color To White With 40% Alpha
+			Gl.glEnable(Gl.GL_BLEND);  // Enable Blending
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); // Set Blending Mode To Mix Based On SRC Alpha
+			Gl.glEnable(Gl.GL_TEXTURE_GEN_S);// Enable Sphere Mapping
+			Gl.glEnable(Gl.GL_TEXTURE_GEN_T);// Enable Sphere Mapping
+			Glu.gluSphere(q, 0.35f, 32, 16); // Draw Another Sphere Using New Texture
 			// Textures Will Mix Creating A MultiTexture Effect (Reflection)
-			Gl.glDisable(Gl.GL_TEXTURE_GEN_S);                                  // Disable Sphere Mapping
-			Gl.glDisable(Gl.GL_TEXTURE_GEN_T);                                  // Disable Sphere Mapping
-			Gl.glDisable(Gl.GL_BLEND);                                          // Disable Blending
+			Gl.glDisable(Gl.GL_TEXTURE_GEN_S);   // Disable Sphere Mapping
+			Gl.glDisable(Gl.GL_TEXTURE_GEN_T);   // Disable Sphere Mapping
+			Gl.glDisable(Gl.GL_BLEND); // Disable Blending
 		}
 		#endregion DrawObject()
 
 		#region void InitGL()
 		/// <summary>
-		///     All setup for OpenGL goes here.
+		/// All setup for OpenGL goes here.
 		/// </summary>
 		/// <returns>
-		///     Returns <c>true</c> on success, otherwise <c>false</c>.
+		/// Returns <c>true</c> on success, otherwise <c>false</c>.
 		/// </returns>
 		protected override void InitGL() 
 		{
@@ -154,35 +156,32 @@ namespace SdlDotNet.Examples
 			// All Setup For OpenGL Goes Here
 			LoadGLTextures();
 			
-			Gl.glShadeModel(Gl.GL_SMOOTH);                                      // Enable Smooth Shading
-			Gl.glClearColor(0.2f, 0.5f, 1, 1);                                  // Background
-			Gl.glClearDepth(1);                                                 // Depth Buffer Setup
-			Gl.glClearStencil(0);                                               // Clear The Stencil Buffer To 0
-			Gl.glEnable(Gl.GL_DEPTH_TEST);                                      // Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);                                       // The Type Of Depth Testing To Do
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);         // Really Nice Perspective Calculations
-			Gl.glEnable(Gl.GL_TEXTURE_2D);                                      // Enable 2D Texture Mapping
-			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_AMBIENT, LightAmb);                // Set The Ambient Lighting For Light0
-			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, LightDif);                // Set The Diffuse Lighting For Light0
-			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, LightPos);               // Set The Position For Light0
-			Gl.glEnable(Gl.GL_LIGHT0);                                          // Enable Light 0
-			Gl.glEnable(Gl.GL_LIGHTING);                                        // Enable Lighting
-			q = Glu.gluNewQuadric();                                            // Create A New Quadratic
-			Glu.gluQuadricNormals(q, Gl.GL_SMOOTH);                             // Generate Smooth Normals For The Quad
-			Glu.gluQuadricTexture(q, Gl.GL_TRUE);                               // Enable Texture Coords For The Quad
-			Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);    // Set Up Sphere Mapping
-			Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);    // Set Up Sphere Mapping
+			Gl.glShadeModel(Gl.GL_SMOOTH);   // Enable Smooth Shading
+			Gl.glClearColor(0.2f, 0.5f, 1, 1);   // Background
+			Gl.glClearDepth(1);// Depth Buffer Setup
+			Gl.glClearStencil(0);  // Clear The Stencil Buffer To 0
+			Gl.glEnable(Gl.GL_DEPTH_TEST);   // Enables Depth Testing
+			Gl.glDepthFunc(Gl.GL_LEQUAL);// The Type Of Depth Testing To Do
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); // Really Nice Perspective Calculations
+			Gl.glEnable(Gl.GL_TEXTURE_2D);   // Enable 2D Texture Mapping
+			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_AMBIENT, LightAmb);// Set The Ambient Lighting For Light0
+			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, LightDif);// Set The Diffuse Lighting For Light0
+			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, LightPos);   // Set The Position For Light0
+			Gl.glEnable(Gl.GL_LIGHT0); // Enable Light 0
+			Gl.glEnable(Gl.GL_LIGHTING);// Enable Lighting
+			q = Glu.gluNewQuadric();   // Create A New Quadratic
+			Glu.gluQuadricNormals(q, Gl.GL_SMOOTH);  // Generate Smooth Normals For The Quad
+			Glu.gluQuadricTexture(q, Gl.GL_TRUE);// Enable Texture Coords For The Quad
+			Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);// Set Up Sphere Mapping
+			Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);// Set Up Sphere Mapping
 
 		}
 		#endregion void InitGL()
 
 		#region void DrawGLScene()
 		/// <summary>
-		///     Draws everything.
+		/// Renders the scene
 		/// </summary>
-		/// <returns>
-		///     Returns <c>true</c> on success, otherwise <c>false</c>.
-		/// </returns>
 		protected override void DrawGLScene() 
 		{
 			// Clear Screen, Depth Buffer & Stencil Buffer
@@ -233,9 +232,9 @@ namespace SdlDotNet.Examples
 			// Set Up Light0
 			Gl.glTranslatef(0, this.Height, 0);
 			// Position The Object
-			Gl.glRotatef(this.XRot, 1, 0, 0);
+			Gl.glRotatef(this.RotationX, 1, 0, 0);
 			// Rotate Local Coordinate System On X Axis
-			Gl.glRotatef(this.YRot, 0, 1, 0);
+			Gl.glRotatef(this.RotationY, 0, 1, 0);
 			// Rotate Local Coordinate System On Y Axis
 			DrawObject();
 			// Draw The Sphere (Reflection)
@@ -263,15 +262,15 @@ namespace SdlDotNet.Examples
 			// Disable Blending
 			Gl.glTranslatef(0, this.ballHeight, 0); 
 			// Position The Ball At Proper Height
-			Gl.glRotatef(this.XRot, 1, 0, 0);
+			Gl.glRotatef(this.RotationX, 1, 0, 0);
 			// Rotate On The X Axis
-			Gl.glRotatef(this.YRot, 0, 1, 0);
+			Gl.glRotatef(this.RotationY, 0, 1, 0);
 			// Rotate On The Y Axis
 			DrawObject();
 			// Draw The Ball
-			this.XRot += xrotspeed; 
+			this.RotationX += xrotspeed; 
 			// Update X Rotation Angle By xrotspeed
-			this.YRot += yrotspeed;
+			this.RotationY += yrotspeed;
 			// Update Y Rotation Angle By yrotspeed
 			Gl.glFlush();
 			// Flush The GL Pipeline
@@ -308,59 +307,5 @@ namespace SdlDotNet.Examples
 					break;				
 			}
 		}
-		#region void LoadGLTextures()
-		/// <summary>
-		///     Load bitmaps and convert to textures.
-		/// </summary>
-		/// <returns>
-		///     <c>true</c> on success, otherwise <c>false</c>.
-		/// </returns>
-		protected override void LoadGLTextures() 
-		{
-			if (File.Exists(this.DataDirectory + this.TextureName))
-			{																	
-				this.FilePath = "";															
-			}                                              
-			// Status Indicator
-			Bitmap[] textureImage = new Bitmap[3];                                
-			// Create Storage Space For The Texture
-
-			// Load The Floor Texture
-			textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName);
-			// Load the Light Texture
-			textureImage[1] = new Bitmap(this.FilePath + this.DataDirectory + this.textureName2);         
-			
-			// Load the Wall Texture
-			textureImage[2] = new Bitmap(this.FilePath + this.DataDirectory + this.textureName3);          
-			         
-			// Check For Errors, If Bitmap's Not Found, Quit
-			if(textureImage[0] != null && textureImage[1] != null &&
-				textureImage[2] != null) 
-			{
-				Gl.glGenTextures(3, this.Texture);                                   // Create Three Textures
-				for(int loop = 0; loop < textureImage.Length; loop++) 
-				{         // Loop Through All 3 Textures
-					// Flip The Bitmap Along The Y-Axis
-					textureImage[loop].RotateFlip(RotateFlipType.RotateNoneFlipY);
-					// Rectangle For Locking The Bitmap In Memory
-					Rectangle rectangle = new Rectangle(0, 0, textureImage[loop].Width, textureImage[loop].Height);
-					// Get The Bitmap's Pixel Data From The Locked Bitmap
-					BitmapData bitmapData = textureImage[loop].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-
-					// Create Linear Filtered Texture
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[loop]);
-					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-					Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[loop].Width, textureImage[loop].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
-
-					if(textureImage[loop] != null) 
-					{                            // If Texture Exists
-						textureImage[loop].UnlockBits(bitmapData);              // Unlock The Pixel Data From Memory
-						textureImage[loop].Dispose();                           // Dispose The Bitmap
-					}
-				}
-			}
-		}
-		#endregion void LoadGLTextures()
 	}
 }

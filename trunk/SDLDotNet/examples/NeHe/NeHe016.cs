@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples
 	public class NeHe016 : NeHe010
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -56,7 +56,7 @@ namespace SdlDotNet.Examples
 
 		private int[] fogMode = {Gl.GL_EXP, Gl.GL_EXP2, Gl.GL_LINEAR};	
 		// Storage For Three Types Of Fog
-		private int fogfilter = 0;										
+		private int fogfilter;										
 		// Which Fog Mode To Use 
 		private float[] fogColor = {0.5f, 0.5f, 0.5f, 1.0f};				
 		// Fog Color
@@ -69,7 +69,8 @@ namespace SdlDotNet.Examples
 			this.Z = -5.0f;
 			// Depth Into The Screen
 			this.Texture = new int[3];
-			this.TextureName = "NeHe016.bmp";
+			this.TextureName = new string[1];
+			this.TextureName[0] = "NeHe016.bmp";
 		}
 
 		/// <summary>
@@ -128,7 +129,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
@@ -136,8 +137,8 @@ namespace SdlDotNet.Examples
 			Gl.glLoadIdentity();
 			Gl.glTranslatef(0.0f, 0.0f, this.Z);
 
-			Gl.glRotatef(this.XRot, 1.0f, 0.0f, 0.0f);
-			Gl.glRotatef(this.YRot, 0.0f, 1.0f, 0.0f);
+			Gl.glRotatef(this.RotationX, 1.0f, 0.0f, 0.0f);
+			Gl.glRotatef(this.RotationY, 0.0f, 1.0f, 0.0f);
 
 			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter]);
 
@@ -180,8 +181,8 @@ namespace SdlDotNet.Examples
 			Gl.glTexCoord2f(0.0f, 1.0f); Gl.glVertex3f(-1.0f,  1.0f, -1.0f);
 			Gl.glEnd();
 
-			this.XRot += this.XSpeed;
-			this.YRot += this.YSpeed;
+			this.RotationX += this.XSpeed;
+			this.RotationY += this.YSpeed;
 		}
 
 		private void KeyDown(object sender, KeyboardEventArgs e)

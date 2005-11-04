@@ -26,20 +26,20 @@ SOFTWARE.
 #endregion License
 
 using System;
-using System.Reflection;
 
-using SdlDotNet;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 05: 3D Shapes
 	/// </summary>
 	public class NeHe005 : NeHe001
 	{
+		#region Fields
+
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -50,152 +50,159 @@ namespace SdlDotNet.Examples
 		}
 
 		// Angle For The Triangle ( NEW )
-		float rtri;                                              
+		float rtri;
+		// Angle For The Quad ( NEW ) 
 		float rquad;
-    
+
+		#endregion Fields
+
+		#region void DrawGLScene
+
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
 			// Clear Screen And Depth Buffer
-			Gl.glLoadIdentity();                                                
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Reset The Current Modelview Matrix
-			Gl.glTranslatef(-1.5f, 0, -6);                                      
+			Gl.glLoadIdentity();   
 			// Move Left 1.5 Units And Into The Screen 6.0
-			Gl.glRotatef(rtri, 0, 1, 0);                                        
+			Gl.glTranslatef(-1.5f, 0, -6);   
 			// Rotate The Triangle On The Y axis ( NEW )
-			Gl.glBegin(Gl.GL_TRIANGLES);                                        
+			Gl.glRotatef(rtri, 0, 1, 0);
 			// Drawing Using Triangles
-			Gl.glColor3f(1, 0, 0);                                          
+			Gl.glBegin(Gl.GL_TRIANGLES);
 			// Red
-			Gl.glVertex3f(0, 1, 0);                                         
+			Gl.glColor3f(1, 0, 0); 
 			// Top Of Triangle (Front)
-			Gl.glColor3f(0, 1, 0);                                          
+			Gl.glVertex3f(0, 1, 0);
 			// Green
-			Gl.glVertex3f(-1, -1, 1);                                       
+			Gl.glColor3f(0, 1, 0); 
 			// Left Of Triangle (Front)
-			Gl.glColor3f(0, 0, 1);                                          
+			Gl.glVertex3f(-1, -1, 1);
 			// Blue
-			Gl.glVertex3f(1, -1, 1);                                        
+			Gl.glColor3f(0, 0, 1); 
 			// Right Of Triangle (Front)
-			Gl.glColor3f(1, 0, 0);                                          
+			Gl.glVertex3f(1, -1, 1);
 			// Red
-			Gl.glVertex3f(0, 1, 0);                                         
+			Gl.glColor3f(1, 0, 0); 
 			// Top Of Triangle (Right)
-			Gl.glColor3f(0, 0, 1);                                          
+			Gl.glVertex3f(0, 1, 0);
 			// Blue
-			Gl.glVertex3f(1, -1, 1);                                        
+			Gl.glColor3f(0, 0, 1); 
 			// Left Of Triangle (Right)
-			Gl.glColor3f(0, 1, 0);                                          
+			Gl.glVertex3f(1, -1, 1);
 			// Green
-			Gl.glVertex3f(1, -1, -1);                                       
+			Gl.glColor3f(0, 1, 0); 
 			// Right Of Triangle (Right)
-			Gl.glColor3f(1, 0, 0);                                          
+			Gl.glVertex3f(1, -1, -1);
 			// Red
-			Gl.glVertex3f(0, 1, 0);                                         
+			Gl.glColor3f(1, 0, 0); 
 			// Top Of Triangle (Back)
-			Gl.glColor3f(0, 1, 0);                                          
+			Gl.glVertex3f(0, 1, 0);
 			// Green
-			Gl.glVertex3f(1, -1, -1);                                       
+			Gl.glColor3f(0, 1, 0); 
 			// Left Of Triangle (Back)
-			Gl.glColor3f(0, 0, 1);                                          
+			Gl.glVertex3f(1, -1, -1);
 			// Blue
-			Gl.glVertex3f(-1, -1, -1);                                      
+			Gl.glColor3f(0, 0, 1); 
 			// Right Of Triangle (Back)
-			Gl.glColor3f(1, 0, 0);                                          
+			Gl.glVertex3f(-1, -1, -1);   
 			// Red
-			Gl.glVertex3f(0, 1, 0);                                         
+			Gl.glColor3f(1, 0, 0); 
 			// Top Of Triangle (Left)
-			Gl.glColor3f(0, 0, 1);                                          
+			Gl.glVertex3f(0, 1, 0);
 			// Blue
-			Gl.glVertex3f(-1, -1, -1);                                      
+			Gl.glColor3f(0, 0, 1); 
 			// Left Of Triangle (Left)
-			Gl.glColor3f(0, 1, 0);                                          
+			Gl.glVertex3f(-1, -1, -1);   
 			// Green
-			Gl.glVertex3f(-1, -1, 1);                                       
+			Gl.glColor3f(0, 1, 0); 
 			// Right Of Triangle (Left)
-			Gl.glEnd();                                                         
+			Gl.glVertex3f(-1, -1, 1);
 			// Finished Drawing The Triangle
-			Gl.glLoadIdentity();                                                
+			Gl.glEnd();
 			// Reset The Current Modelview Matrix
-			Gl.glTranslatef(1.5f, 0, -7);                                       
+			Gl.glLoadIdentity();   
 			// Move Right 1.5 Units And Into The Screen 7.0
-			Gl.glRotatef(rquad, 1, 1, 1);                                       
+			Gl.glTranslatef(1.5f, 0, -7);
 			// Rotate The Quad On The X, Y, and Z Axis ( NEW )
-			Gl.glColor3f(0.5f, 0.5f, 1);                                        
+			Gl.glRotatef(rquad, 1, 1, 1);
 			// Set The Color To Blue One Time Only
-			Gl.glBegin(Gl.GL_QUADS);                                            
+			Gl.glColor3f(0.5f, 0.5f, 1);
 			// Draw A Quad
-			Gl.glColor3f(0, 1, 0);                                          
+			Gl.glBegin(Gl.GL_QUADS);   
 			// Set The Color To Green
-			Gl.glVertex3f(1, 1, -1);                                        
+			Gl.glColor3f(0, 1, 0); 
 			// Top Right Of The Quad (Top)
-			Gl.glVertex3f(-1, 1, -1);                                       
+			Gl.glVertex3f(1, 1, -1);
 			// Top Left Of The Quad (Top)
-			Gl.glVertex3f(-1, 1, 1);                                        
+			Gl.glVertex3f(-1, 1, -1);
 			// Bottom Left Of The Quad (Top)
-			Gl.glVertex3f(1, 1, 1);                                         
+			Gl.glVertex3f(-1, 1, 1);
 			// Bottom Right Of The Quad (Top)
-			Gl.glColor3f(1, 0.5f, 0);                                       
+			Gl.glVertex3f(1, 1, 1);
 			// Set The Color To Orange
-			Gl.glVertex3f(1, -1, 1);                                        
+			Gl.glColor3f(1, 0.5f, 0);
 			// Top Right Of The Quad (Bottom)
-			Gl.glVertex3f(-1, -1, 1);                                       
+			Gl.glVertex3f(1, -1, 1);
 			// Top Left Of The Quad (Bottom)
-			Gl.glVertex3f(-1, -1, -1);                                      
+			Gl.glVertex3f(-1, -1, 1);
 			// Bottom Left Of The Quad (Bottom)
-			Gl.glVertex3f(1, -1, -1);                                       
+			Gl.glVertex3f(-1, -1, -1);   
 			// Bottom Right Of The Quad (Bottom)
-			Gl.glColor3f(1, 0, 0);                                          
+			Gl.glVertex3f(1, -1, -1);
 			// Set The Color To Red
-			Gl.glVertex3f(1, 1, 1);                                         
+			Gl.glColor3f(1, 0, 0); 
 			// Top Right Of The Quad (Front)
-			Gl.glVertex3f(-1, 1, 1);                                        
+			Gl.glVertex3f(1, 1, 1);
 			// Top Left Of The Quad (Front)
-			Gl.glVertex3f(-1, -1, 1);                                       
+			Gl.glVertex3f(-1, 1, 1);
 			// Bottom Left Of The Quad (Front)
-			Gl.glVertex3f(1, -1, 1);                                        
+			Gl.glVertex3f(-1, -1, 1);
 			// Bottom Right Of The Quad (Front)
-			Gl.glColor3f(1, 1, 0);                                          
+			Gl.glVertex3f(1, -1, 1);
 			// Set The Color To Yellow
-			Gl.glVertex3f(1, -1, -1);                                       
+			Gl.glColor3f(1, 1, 0); 
 			// Top Right Of The Quad (Back)
-			Gl.glVertex3f(-1, -1, -1);                                      
+			Gl.glVertex3f(1, -1, -1);
 			// Top Left Of The Quad (Back)
-			Gl.glVertex3f(-1, 1, -1);                                       
+			Gl.glVertex3f(-1, -1, -1);   
 			// Bottom Left Of The Quad (Back)
-			Gl.glVertex3f(1, 1, -1);                                        
+			Gl.glVertex3f(-1, 1, -1);
 			// Bottom Right Of The Quad (Back)
-			Gl.glColor3f(0, 0, 1);                                          
+			Gl.glVertex3f(1, 1, -1);
 			// Set The Color To Blue
-			Gl.glVertex3f(-1, 1, 1);                                        
+			Gl.glColor3f(0, 0, 1); 
 			// Top Right Of The Quad (Left)
-			Gl.glVertex3f(-1, 1, -1);                                       
+			Gl.glVertex3f(-1, 1, 1);
 			// Top Left Of The Quad (Left)
-			Gl.glVertex3f(-1, -1, -1);                                      
+			Gl.glVertex3f(-1, 1, -1);
 			// Bottom Left Of The Quad (Left)
-			Gl.glVertex3f(-1, -1, 1);                                       
+			Gl.glVertex3f(-1, -1, -1);   
 			// Bottom Right Of The Quad (Left)
-
-			Gl.glColor3f(1, 0, 1);                                          
+			Gl.glVertex3f(-1, -1, 1);
+			
 			// Set The Color To Violet
-			Gl.glVertex3f(1, 1, -1);                                        
+			Gl.glColor3f(1, 0, 1); 
 			// Top Right Of The Quad (Right)
-			Gl.glVertex3f(1, 1, 1);                                         
+			Gl.glVertex3f(1, 1, -1);
 			// Top Left Of The Quad (Right)
-			Gl.glVertex3f(1, -1, 1);                                        
+			Gl.glVertex3f(1, 1, 1);
 			// Bottom Left Of The Quad (Right)
-			Gl.glVertex3f(1, -1, -1);                                       
+			Gl.glVertex3f(1, -1, 1);
 			// Bottom Right Of The Quad (Right)
-			Gl.glEnd();                                                         
+			Gl.glVertex3f(1, -1, -1);
 			// Done Drawing The Quad
-
-			rtri += 0.2f;                                                       
+			Gl.glEnd();
+			
 			// Increase The Rotation Variable For The Triangle ( NEW )
-			rquad -= 0.15f;                                                     
+			rtri += 0.2f;
 			// Decrease The Rotation Variable For The Quad ( NEW )
+			rquad -= 0.15f;
 		}
+
+		#endregion void DrawGLScene
 	}
 }

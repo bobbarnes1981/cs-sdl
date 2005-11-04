@@ -42,7 +42,7 @@ namespace SdlDotNet.Examples
 	public class NeHe007 : NeHe006
 	{
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -52,19 +52,19 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private float xspeed;                                            
+		private float xspeed;   
 		// X Rotation Speed
-		private float yspeed;                                            
+		private float yspeed;   
 		// Y Rotation Speed
-		private float z = -5;                                            
+		private float z = -5;   
 		// Depth Into The Screen
-		private int filter;    
+		private int filter;
 		// Lighting ON/OFF ( NEW )
-        private bool light;   
-		private bool lp;                                                
+		bool light;   
 		// L Pressed? ( NEW )
-		private bool fp;                                                
+		bool keyPressedL;   	
 		// F Pressed? ( NEW )
+		bool keyPressedF;   
 		// Storage For One Texture ( NEW )
 		private float[] lightAmbient = {0.5f, 0.5f, 0.5f, 1};
 		private float[] lightDiffuse = {1, 1, 1, 1};
@@ -75,7 +75,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe007()
 		{
-			this.TextureName = "NeHe007.bmp";
+			this.TextureName = new string[1];
+			this.TextureName[0] = "NeHe007.bmp";
 			this.Texture = new int[3];
 		}
 
@@ -84,32 +85,35 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected override void InitGL()
 		{
-			base.InitGL ();
+			this.InitGLBase();
+			// Enable Texture Mapping ( NEW )
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
+			this.LoadGLFilteredTextures();
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, lightAmbient);            
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, lightAmbient);
 			// Setup The Ambient Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, lightDiffuse);            
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, lightDiffuse);
 			// Setup The Diffuse Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, lightPosition);          
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, lightPosition);  
 			// Position The Light
-			Gl.glEnable(Gl.GL_LIGHT1);                                          
+			Gl.glEnable(Gl.GL_LIGHT1); 
 			// Enable Light One
 		}
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();                                                
+			Gl.glLoadIdentity();   
 			// Reset The View
 			Gl.glTranslatef(0, 0, z);
 
-			Gl.glRotatef(this.XRot, 1, 0, 0);
-			Gl.glRotatef(this.YRot, 0, 1, 0);
+			Gl.glRotatef(this.RotationX, 1, 0, 0);
+			Gl.glRotatef(this.RotationY, 0, 1, 0);
 
 			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[filter]);
 
@@ -152,17 +156,17 @@ namespace SdlDotNet.Examples
 			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
 			Gl.glEnd();
 
-			this.XRot += this.XSpeed;
-			this.YRot += this.YSpeed;
+			this.RotationX += this.XSpeed;
+			this.RotationY += this.YSpeed;
 		}
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch (e.Key) 
 			{
 				case Key.L: 
-					if (!lp)
+					if (!keyPressedL)
 					{
-						lp = true;
+						keyPressedL = true;
 						light = !light;
 						if(!light) 
 						{
@@ -175,13 +179,13 @@ namespace SdlDotNet.Examples
 					}
 					else
 					{ 
-						lp = false;
+						keyPressedL = false;
 					}
 					break;	
 				case Key.F:
-					if (!fp)
+					if (!keyPressedF)
 					{
-						fp = true;
+						keyPressedF = true;
 						filter += 1;
 						if(filter > 2) 
 						{
@@ -190,7 +194,7 @@ namespace SdlDotNet.Examples
 					}
 					else
 					{
-						fp = false;
+						keyPressedF = false;
 					}
 					break;
 				case Key.PageUp:
@@ -215,61 +219,67 @@ namespace SdlDotNet.Examples
 		}
 		#region override void LoadGLTextures()
 		/// <summary>
-		///     Load bitmaps and convert to textures.
+		/// Load bitmaps and convert to textures.
 		/// </summary>
 		/// <returns>
-		///     <c>true</c> on success, otherwise <c>false</c>.
+		/// <c>true</c> on success, otherwise <c>false</c>.
 		/// </returns>
-		protected override void LoadGLTextures() 
-		{                                           
-			if (File.Exists(this.DataDirectory + this.TextureName))
+		protected virtual void LoadGLFilteredTextures() 
+		{  
+			if (File.Exists(this.DataDirectory + this.TextureName[0]))
 			{																	
 				this.FilePath = "";															
-			}                                              
+			} 
 			// Status Indicator
-			Bitmap[] textureImage = new Bitmap[1];                              
+			Bitmap[] textureImage = new Bitmap[this.TextureName.Length];   
 			// Create Storage Space For The Texture
 
-			textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName);
+			for(int i=0; i<this.TextureName.Length; i++)
+			{
+				textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName[i]);
+			}
 			// Load The Bitmap
 			// Check For Errors, If Bitmap's Not Found, Quit
 			if(textureImage[0] != null) 
 			{
-				Gl.glGenTextures(3, this.Texture);                                   
-				// Create Three Textures
+				// Create The Texture
+				Gl.glGenTextures(this.Texture.Length, this.Texture); 
 
-				textureImage[0].RotateFlip(RotateFlipType.RotateNoneFlipY);     
-				// Flip The Bitmap Along The Y-Axis
-				// Rectangle For Locking The Bitmap In Memory
-				Rectangle rectangle = new Rectangle(0, 0, textureImage[0].Width, textureImage[0].Height);
-				// Get The Bitmap's Pixel Data From The Locked Bitmap
-				BitmapData bitmapData = textureImage[0].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+				for(int i = 0; i < textureImage.Length; i++) 
+				{
+					textureImage[i].RotateFlip(RotateFlipType.RotateNoneFlipY); 
+					// Flip The Bitmap Along The Y-Axis
+					// Rectangle For Locking The Bitmap In Memory
+					Rectangle rectangle = new Rectangle(0, 0, textureImage[i].Width, textureImage[i].Height);
+					// Get The Bitmap's Pixel Data From The Locked Bitmap
+					BitmapData bitmapData = textureImage[i].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
-				// Create Nearest Filtered Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST);
-				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[0].Width, textureImage[0].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
+					// Create Nearest Filtered Texture
+					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i]);
+					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
+					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST);
+					Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 
-				// Create Linear Filtered Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[0].Width, textureImage[0].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
+					// Create Linear Filtered Texture
+					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i+1]);
+					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
+					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
+					Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 
-				// Create MipMapped Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR_MIPMAP_NEAREST);
-				Glu.gluBuild2DMipmaps(Gl.GL_TEXTURE_2D, Gl.GL_RGB8, textureImage[0].Width, textureImage[0].Height, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
+					// Create MipMapped Texture
+					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i+2]);
+					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
+					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR_MIPMAP_NEAREST);
+					Glu.gluBuild2DMipmaps(Gl.GL_TEXTURE_2D, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 
-				if(textureImage[0] != null) 
-				{                                   
-					// If Texture Exists
-					textureImage[0].UnlockBits(bitmapData);                     
-					// Unlock The Pixel Data From Memory
-					textureImage[0].Dispose();                                  
-					// Dispose The Bitmap
+					if(textureImage[i] != null) 
+					{
+						// If Texture Exists
+						textureImage[i].UnlockBits(bitmapData); 
+						// Unlock The Pixel Data From Memory
+						textureImage[i].Dispose();   
+						// Dispose The Bitmap
+					}
 				}
 			}
 		}
@@ -278,30 +288,30 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		protected bool Lp
+		protected bool KeyPressedL
 		{
 			get
 			{
-				return lp;
+				return keyPressedL;
 			}
 			set
 			{
-				lp = value;
+				keyPressedL = value;
 			}
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		protected bool Fp
+		protected bool KeyPressedF
 		{
 			get
 			{
-				return fp;
+				return keyPressedF;
 			}
 			set
 			{
-				fp = value;
+				keyPressedF = value;
 			}
 		}
 
