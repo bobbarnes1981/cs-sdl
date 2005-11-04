@@ -254,11 +254,13 @@ namespace SdlDotNet
 		/// <param name="filename">The file path to load.</param>
 		/// <returns>The IntPtr handle to the music sample in memory.</returns>
 		/// <exception cref="SdlException">Thrown if an error occurs when loading the sample.</exception>
-		internal static IntPtr LoadMus(string filename)
+		internal static IntPtr LoadMusic(string filename)
 		{
 			IntPtr handle = SdlMixer.Mix_LoadMUS(filename);
 			if (handle == IntPtr.Zero)
+			{
 				throw SdlException.Generate();
+			}
 			return handle;
 		}
 

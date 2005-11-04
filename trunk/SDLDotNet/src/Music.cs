@@ -107,7 +107,7 @@ namespace SdlDotNet
 		/// <param name="fileName">The file path to load from.</param>
 		public Music(string fileName)
 		{
-			this.Handle = Mixer.LoadMus(fileName);
+			this.Handle = Mixer.LoadMusic(fileName);
 			m_FileName = fileName;
 		}
 
