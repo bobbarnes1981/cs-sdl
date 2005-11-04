@@ -146,7 +146,7 @@ namespace SdlDotNet.Examples
 		/// <returns>
 		///     Returns <c>true</c> on success, otherwise <c>false</c>.
 		/// </returns>
-		public override void InitGL() 
+		protected override void InitGL() 
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
@@ -183,7 +183,7 @@ namespace SdlDotNet.Examples
 		/// <returns>
 		///     Returns <c>true</c> on success, otherwise <c>false</c>.
 		/// </returns>
-		public override void DrawGLScene() 
+		protected override void DrawGLScene() 
 		{
 			// Clear Screen, Depth Buffer & Stencil Buffer
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT | Gl.GL_STENCIL_BUFFER_BIT);

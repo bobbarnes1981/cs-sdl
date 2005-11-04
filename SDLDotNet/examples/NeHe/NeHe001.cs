@@ -39,25 +39,81 @@ namespace SdlDotNet.Examples
 	public class NeHe001
 	{
 		#region Variables
-		private const int width = 640;
-		private const int height = 480;
-		private const int bpp = 16;
-		private bool quit;
-		private Surface screen;
-		#endregion
+
+		//Width of screen
+		const int width = 640;
+		//Height of screen
+		const int height = 480;
+		// Bits per pixel of screen
+		const int bpp = 16;
+		// quit flag
+		bool quit;
+		// Surface to render on
+		Surface screen;
 
 		/// <summary>
-		/// 
+		/// Width of window
+		/// </summary>
+		protected int Width
+		{
+			get
+			{
+				return width;
+			}
+		}
+
+		/// <summary>
+		/// Height of window
+		/// </summary>
+		protected int Height
+		{
+			get
+			{
+				return height;
+			}
+		}
+
+		/// <summary>
+		/// Bits per pixel of surface
+		/// </summary>
+		protected int BitsPerPixel
+		{
+			get
+			{
+				return bpp;
+			}
+		}
+
+		/// <summary>
+		/// Lesson title
+		/// </summary>
+		public static string Title
+		{
+			get
+			{
+				return "Lesson 01: Setting Up An OpenGL Window";
+			}
+		}
+
+		#endregion
+
+		#region Constructors
+
+		/// <summary>
+		/// Basic constructor
 		/// </summary>
 		public NeHe001()
 		{
 			Initialize();
 		}
+
+		#endregion Constructors
     
+		#region Lesson Setup
 		/// <summary>
-		/// 
+		/// Initializes methods common to all NeHe lessons
 		/// </summary>
-		public void Initialize()
+		protected void Initialize()
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Events.Quit += new QuitEventHandler(this.Quit);
@@ -66,7 +122,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Sets Window icon and caption
 		/// </summary>
 		protected void WindowAttributes()
 		{
@@ -76,18 +132,18 @@ namespace SdlDotNet.Examples
 		}
     
 		/// <summary>
-		/// 
+		/// Resizes window
 		/// </summary>
-		public virtual void Reshape()
+		protected virtual void Reshape()
 		{
 			this.Reshape(100.0F);
 		}
 
 		/// <summary>
-		/// 
+		/// Resizes window
 		/// </summary>
 		/// <param name="distance"></param>
-		public virtual void Reshape(float distance)
+		protected virtual void Reshape(float distance)
 		{
 			Gl.glViewport(0, 0, width, height);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -99,9 +155,17 @@ namespace SdlDotNet.Examples
 		}
     
 		/// <summary>
-		/// 
+		/// Initializes the OpenGL system
 		/// </summary>
-		public virtual void InitGL()
+		protected virtual void InitGL()
+		{
+			InitGLBase();
+		}
+
+		/// <summary>
+		/// Initializes methods common to all NeHe lessons
+		/// </summary>
+		protected virtual void InitGLBase()
 		{
 			// Enable Smooth Shading
 			Gl.glShadeModel(Gl.GL_SMOOTH);
@@ -116,15 +180,21 @@ namespace SdlDotNet.Examples
 			// Really Nice Perspective Calculations
 			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
 		}
+
+		#endregion Lesson Setup
     
+		#region Rendering
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
-		public virtual void DrawGLScene()
+		protected virtual void DrawGLScene()
 		{
 			Gl.glClear((Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT));
 			Gl.glLoadIdentity();
-		}	
+		}
+		#endregion Rendering
+
+		#region Event Handlers
     
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
@@ -152,9 +222,12 @@ namespace SdlDotNet.Examples
 		{
 			quit = true;
 		}
+
+		#endregion Event Handlers
     
+		#region Run Loop
 		/// <summary>
-		/// 
+		/// Starts lesson
 		/// </summary>
 		public void Run()
 		{
@@ -170,79 +243,6 @@ namespace SdlDotNet.Examples
 			}
 			Video.Dispose(true);
 		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected bool QuitFlag
-		{
-			get
-			{
-				return quit;
-			}
-			set
-			{
-				quit = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected Surface Screen
-		{
-			get
-			{
-				return screen;
-			}
-			set
-			{
-				screen = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected int Width
-		{
-			get
-			{
-				return width;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected int Height
-		{
-			get
-			{
-				return height;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected int Bpp
-		{
-			get
-			{
-				return bpp;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string Title
-		{
-			get
-			{
-				return "Lesson 01: Setting Up An OpenGL Window";
-			}
-		}
+		#endregion Run Loop
 	}
 }
