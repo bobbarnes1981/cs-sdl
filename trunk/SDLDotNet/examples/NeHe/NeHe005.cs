@@ -50,13 +50,13 @@ namespace SdlDotNet.Examples
 		}
 
 		// Angle For The Triangle ( NEW )
-		private float rtri;                                              
-		private float rquad;
+		float rtri;                                              
+		float rquad;
     
 		/// <summary>
 		/// 
 		/// </summary>
-		public override void DrawGLScene()
+		protected override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
 			// Clear Screen And Depth Buffer

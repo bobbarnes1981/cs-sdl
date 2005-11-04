@@ -82,7 +82,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public override void InitGL()
+		protected override void InitGL()
 		{
 			base.InitGL ();
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
@@ -100,7 +100,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public override void DrawGLScene()
+		protected override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);        
 			// Clear The Screen And The Depth Buffer

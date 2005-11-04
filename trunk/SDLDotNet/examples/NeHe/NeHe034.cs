@@ -80,7 +80,7 @@ namespace SdlDotNet.Examples
 		/// <returns>
 		///     Returns <c>true</c> on success, otherwise <c>false</c>.
 		/// </returns>
-		public override void DrawGLScene() 
+		protected override void DrawGLScene() 
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear The Screen And The Depth Buffer
@@ -130,7 +130,7 @@ namespace SdlDotNet.Examples
 		/// <returns>
 		///     Returns <c>true</c> on success, otherwise <c>false</c>.
 		/// </returns>
-		public override void InitGL() 
+		protected override void InitGL() 
 		{               
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
@@ -297,7 +297,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		///     Resizes and initializes the GL window.
 		/// </summary>
-		public override void Reshape() 
+		protected override void Reshape() 
 		{
 			base.Reshape(500.0F);
 		}

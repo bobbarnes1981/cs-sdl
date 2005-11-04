@@ -70,7 +70,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public override void InitGL()
+		protected override void InitGL()
 		{
 			LoadGLTextures();
 
@@ -97,7 +97,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public override void DrawGLScene()
+		protected override void DrawGLScene()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glLoadIdentity();
@@ -293,7 +293,7 @@ namespace SdlDotNet.Examples
 		/// <param name="x"></param>
 		/// <param name="y"></param>
 		/// <param name="str"></param>
-		/// <param name="charSet"></param>
+		/// <param name="characterSet"></param>
 		public void GlPrint(int x, int y, string str, int characterSet)	
 			// Where The Printing Happens
 		{
