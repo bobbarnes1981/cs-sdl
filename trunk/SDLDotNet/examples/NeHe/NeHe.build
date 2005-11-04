@@ -14,6 +14,7 @@
 		<include name="${native.sdl}.dll"/>
 		<include name="Tao.OpenGl.dll"/>
 		<include name="Tao.OpenGl.Glu.dll"/>
+		<include name="Tao.OpenGl.ExtensionLoader.dll"/>
 		<include name="Tao.Platform.Windows.dll"/>
 	    </fileset>
 	</copy>
@@ -34,6 +35,7 @@
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>
 		<include name="Tao.OpenGl.dll"/>
+		<include name="Tao.OpenGl.ExtensionLoader.dll"/>
 		<include name="Tao.OpenGl.Glu.dll"/>
 		<include name="Tao.Platform.Windows.dll"/>
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
