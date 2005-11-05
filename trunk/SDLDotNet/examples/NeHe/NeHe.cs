@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Collections;
 using System.Reflection;
+using System.Globalization;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -167,9 +168,8 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="args"></param>
 		[STAThread]
-		public static void Main(string[] args)
+		public static void Main()
 		{
 			Application.Run(new NeHe());
 		}

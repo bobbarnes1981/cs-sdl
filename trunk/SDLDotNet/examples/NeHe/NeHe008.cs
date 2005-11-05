@@ -52,8 +52,8 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-private bool blend; 
-private bool bp;
+bool blend; 
+bool keyPressedB;
 		// Which Filter To Use 
 
 		/// <summary>
@@ -119,10 +119,10 @@ private bool bp;
 					}
 					break;
 				case Key.PageUp:
-					this.Z -= 0.02f;
+					this.DepthZ -= 0.02f;
 					break;
 				case Key.PageDown:
-					this.Z += 0.02f;
+					this.DepthZ += 0.02f;
 					break;
 				case Key.UpArrow: 
 					this.XSpeed -= 0.01f;
@@ -138,9 +138,9 @@ private bool bp;
 					break;
 				case Key.B:
 					// Blending Code Starts Here
-					if(!bp) 
+					if(!keyPressedB) 
 					{
-						bp = true;
+						keyPressedB = true;
 						blend = !blend;
 						if(blend) 
 						{
@@ -159,7 +159,7 @@ private bool bp;
 					}
 					else
 					{
-						bp = false;
+						keyPressedB = false;
 					}
 					// Blending Code Ends Here
 					break;
@@ -184,15 +184,15 @@ private bool bp;
 		/// <summary>
 		/// 
 		/// </summary>
-		protected bool Bp
+		protected bool KeyPressedB
 		{
 			get
 			{
-				return bp;
+				return keyPressedB;
 			}
 			set
 			{
-				bp = value;
+				keyPressedB = value;
 			}
 		}
 

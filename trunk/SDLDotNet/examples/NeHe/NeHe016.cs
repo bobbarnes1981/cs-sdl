@@ -66,7 +66,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe016()
 		{
-			this.Z = -5.0f;
+			this.DepthZ = -5.0f;
 			// Depth Into The Screen
 			this.Texture = new int[3];
 			this.TextureName = new string[1];
@@ -135,7 +135,7 @@ namespace SdlDotNet.Examples
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glLoadIdentity();
-			Gl.glTranslatef(0.0f, 0.0f, this.Z);
+			Gl.glTranslatef(0.0f, 0.0f, this.DepthZ);
 
 			Gl.glRotatef(this.RotationX, 1.0f, 0.0f, 0.0f);
 			Gl.glRotatef(this.RotationY, 0.0f, 1.0f, 0.0f);
@@ -207,10 +207,10 @@ namespace SdlDotNet.Examples
 
 				// Zoom in cube with Page Up/Down
 				case Key.PageUp:
-					this.Z -= 0.02f;
+					this.DepthZ -= 0.02f;
 					break;
 				case Key.PageDown:
-					this.Z += 0.02f;
+					this.DepthZ += 0.02f;
 					break;
 
 				// Rotate cube with arrows.

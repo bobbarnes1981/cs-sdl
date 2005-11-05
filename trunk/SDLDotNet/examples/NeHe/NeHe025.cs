@@ -417,7 +417,7 @@ namespace SdlDotNet.Examples
 
 				// The First Item In The Array 
 				// Will Contain The String "Vertices:", Which We Will Ignore
-				ver = Convert.ToInt32(splitter[1]);
+				ver = Convert.ToInt32(splitter[1],CultureInfo.CurrentCulture);
 				// Save The Number Of Triangles To ver As An int
 				k.Verts = ver;
 				// Sets PointObjects (k) verts Variable To Equal The Value Of ver
@@ -434,12 +434,12 @@ namespace SdlDotNet.Examples
 						// If The Line's Not null
 						splitter = oneline.Split();
 						// Split The Line On Spaces
-						rx = float.Parse(splitter[0]);
+						rx = float.Parse(splitter[0],CultureInfo.CurrentCulture);
 						// Save The X Value As A Float
 
-						ry = float.Parse(splitter[1]);
+						ry = float.Parse(splitter[1],CultureInfo.CurrentCulture);
 						// Save The Y Value As A Float
-						rz = float.Parse(splitter[2]);
+						rz = float.Parse(splitter[2],CultureInfo.CurrentCulture);
 						// Save The Z Value As A Float
 						k.Points[vertloop].X = rx;
 						// Sets PointObjects (k) points.x Value To rx
@@ -462,7 +462,8 @@ namespace SdlDotNet.Examples
 			{
 				// Handle Any Exceptions While Loading Object Data, Exit App
 				string errorMsg = "An Error Occurred While Loading And Parsing Object Data:\n\t" + filename + "\n" + "\n\nStack Trace:\n\t" + e.StackTrace + "\n";
-				MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+				MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+				throw;
 			}
 			finally 
 			{
