@@ -71,7 +71,7 @@ namespace SdlDotNet.Examples
 			this.TextureName[0] = "NeHe023.BG.bmp";
 			this.TextureName[1] = "NeHe023.Reflect.bmp";
 
-			this.Z = -10;
+			this.DepthZ = -10;
 			
 		}
 
@@ -98,10 +98,10 @@ namespace SdlDotNet.Examples
 						objectToDraw = 0;
 					break;
 				case Key.PageUp:
-					this.Z -= 0.02f;
+					this.DepthZ -= 0.02f;
 					break;
 				case Key.PageDown:
-					this.Z += 0.02f;
+					this.DepthZ += 0.02f;
 					break;
 				case Key.UpArrow:
 					this.XSpeed -= 0.01f;
@@ -174,7 +174,7 @@ namespace SdlDotNet.Examples
 			Gl.glLoadIdentity();   
 			// Reset The View
 
-			Gl.glTranslatef(0, 0, this.Z);
+			Gl.glTranslatef(0, 0, this.DepthZ);
 
 			Gl.glEnable(Gl.GL_TEXTURE_GEN_S);
 			// Enable Texture Coord Generation For S (NEW)

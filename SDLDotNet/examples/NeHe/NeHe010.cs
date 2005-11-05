@@ -87,7 +87,7 @@ namespace SdlDotNet.Examples
 			this.TextureName = new string[1];
 			this.TextureName[0] = "NeHe010.bmp";
 			this.Texture = new int[3];
-			this.Z = 0;
+			this.DepthZ = 0;
 		}
 
 		/// <summary>
@@ -213,7 +213,7 @@ namespace SdlDotNet.Examples
 
 			// The First Item In The Array Will Contain The String "NUMPOLLIES",
 			// Which We Will Ignore
-			numtriangles = Convert.ToInt32(splitter[1]);
+			numtriangles = Convert.ToInt32(splitter[1],CultureInfo.CurrentCulture);
 
 			// Save The Number Of Triangles As An int
 
@@ -241,19 +241,19 @@ namespace SdlDotNet.Examples
 						splitter = oneline.Split();
   
 						// Split The Line On Spaces
-						x = Single.Parse(splitter[0]);
+						x = Single.Parse(splitter[0],CultureInfo.CurrentCulture);
   
 						// Save x As A float
-						y = Single.Parse(splitter[1]);
+						y = Single.Parse(splitter[1],CultureInfo.CurrentCulture);
   
 						// Save y As A float
-						z = Single.Parse(splitter[2]);
+						z = Single.Parse(splitter[2],CultureInfo.CurrentCulture);
   
 						// Save z As A float
-						u = Single.Parse(splitter[3]);
+						u = Single.Parse(splitter[3],CultureInfo.CurrentCulture);
   
 						// Save u As A float
-						v = Single.Parse(splitter[4]);
+						v = Single.Parse(splitter[4],CultureInfo.CurrentCulture);
   
 						// Save v As A float
 						sector.triangle[triloop].vertex[vertloop].x = x;
@@ -358,11 +358,11 @@ namespace SdlDotNet.Examples
 					}
 					break;
 				case Key.PageUp:
-					this.Z -= 0.02f;
+					this.DepthZ -= 0.02f;
 					this.lookupdown -= 0.02f;
 					break;
 				case Key.PageDown:
-					this.Z += 0.02f;
+					this.DepthZ += 0.02f;
 					this.lookupdown+= 0.02f;
 					break;
 				case Key.UpArrow: 
@@ -401,9 +401,9 @@ namespace SdlDotNet.Examples
 					break;
 				case Key.B:
 					// Blending Code Starts Here
-					if(!this.Bp) 
+					if(!this.KeyPressedB) 
 					{
-						this.Bp = true;
+						this.KeyPressedB = true;
 						this.Blend = !this.Blend;
 						if(this.Blend) 
 						{
@@ -426,7 +426,7 @@ namespace SdlDotNet.Examples
 					}
 					else
 					{
-						this.Bp = false;
+						this.KeyPressedB = false;
 					}
 					// Blending Code Ends Here
 					break;

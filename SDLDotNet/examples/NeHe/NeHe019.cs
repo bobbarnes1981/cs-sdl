@@ -72,7 +72,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Create A Structure For Particle
 		/// </summary>
-		public class Particle					
+		class Particle					
 		{
 			bool active;
 			

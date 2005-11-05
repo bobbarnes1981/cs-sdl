@@ -37,10 +37,12 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 07: Texture Filters, Lighting, and Keyboard Control
 	/// </summary>
 	public class NeHe007 : NeHe006
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -52,26 +54,136 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private float xspeed;   
 		// X Rotation Speed
-		private float yspeed;   
+		float xspeed;   
 		// Y Rotation Speed
-		private float z = -5;   
+		float yspeed;   
 		// Depth Into The Screen
-		private int filter;
+		float depthZ = -5;   
 		// Lighting ON/OFF ( NEW )
-		bool light;   
+		int filter;
 		// L Pressed? ( NEW )
-		bool keyPressedL;   	
+		bool light;   
 		// F Pressed? ( NEW )
-		bool keyPressedF;   
+		bool keyPressedL;   	
 		// Storage For One Texture ( NEW )
-		private float[] lightAmbient = {0.5f, 0.5f, 0.5f, 1};
-		private float[] lightDiffuse = {1, 1, 1, 1};
-		private float[] lightPosition = {0, 0, 2, 1};
+		bool keyPressedF; 
+  
+		float[] lightAmbient = {0.5f, 0.5f, 0.5f, 1};
+		float[] lightDiffuse = {1, 1, 1, 1};
+		float[] lightPosition = {0, 0, 2, 1};
 
 		/// <summary>
-		/// 
+		/// Is 'L' key pressed
+		/// </summary>
+		protected bool KeyPressedL
+		{
+			get
+			{
+				return keyPressedL;
+			}
+			set
+			{
+				keyPressedL = value;
+			}
+		}
+
+		/// <summary>
+		/// Is 'F' key pressed
+		/// </summary>
+		protected bool KeyPressedF
+		{
+			get
+			{
+				return keyPressedF;
+			}
+			set
+			{
+				keyPressedF = value;
+			}
+		}
+
+		/// <summary>
+		/// Is the light shining
+		/// </summary>
+		protected bool Light
+		{
+			get
+			{
+				return light;
+			}
+			set
+			{
+				light = value;
+			}
+		}
+
+		/// <summary>
+		/// Speed in X direction
+		/// </summary>
+		protected float XSpeed
+		{
+			get
+			{
+				return xspeed;
+			}
+			set
+			{
+				xspeed = value;
+			}
+		}
+
+		/// <summary>
+		/// Speed in Y direction
+		/// </summary>
+		protected float YSpeed
+		{
+			get
+			{
+				return yspeed;
+			}
+			set
+			{
+				yspeed = value;
+			}
+		}
+
+		/// <summary>
+		/// Depth
+		/// </summary>
+		protected float DepthZ
+		{
+			get
+			{
+				return depthZ;
+			}
+			set
+			{
+				depthZ = value;
+			}
+		}
+
+		/// <summary>
+		/// Filtering
+		/// </summary>
+		protected int Filter
+		{
+			get
+			{
+				return filter;
+			}
+			set
+			{
+				filter = value;
+			}
+		}
+
+		#endregion Fields
+
+		#region Constructor
+
+		/// <summary>
+		/// Basic constructor
 		/// </summary>
 		public NeHe007()
 		{
@@ -80,8 +192,12 @@ namespace SdlDotNet.Examples
 			this.Texture = new int[3];
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
+
 		/// <summary>
-		/// 
+		/// Initializes the OpenGL system
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -91,133 +207,17 @@ namespace SdlDotNet.Examples
 			this.LoadGLFilteredTextures();
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, lightAmbient);
 			// Setup The Ambient Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, lightDiffuse);
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, lightAmbient);
 			// Setup The Diffuse Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, lightPosition);  
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, lightDiffuse);
 			// Position The Light
-			Gl.glEnable(Gl.GL_LIGHT1); 
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, lightPosition);  
 			// Enable Light One
+			Gl.glEnable(Gl.GL_LIGHT1); 
 		}
 
-		/// <summary>
-		/// Renders the scene
-		/// </summary>
-		protected override void DrawGLScene()
-		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			// Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();   
-			// Reset The View
-			Gl.glTranslatef(0, 0, z);
-
-			Gl.glRotatef(this.RotationX, 1, 0, 0);
-			Gl.glRotatef(this.RotationY, 0, 1, 0);
-
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[filter]);
-
-			Gl.glBegin(Gl.GL_QUADS);
-			// Front Face
-			Gl.glNormal3f(0, 0, 1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, 1);
-			// Back Face
-			Gl.glNormal3f(0, 0, -1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, -1);
-			// Top Face
-			Gl.glNormal3f(0, 1, 0);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, 1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
-			// Bottom Face
-			Gl.glNormal3f(0, -1, 0);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, -1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
-			// Right face
-			Gl.glNormal3f(1, 0, 0);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, -1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
-			// Left Face
-			Gl.glNormal3f(-1, 0, 0);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, 1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glEnd();
-
-			this.RotationX += this.XSpeed;
-			this.RotationY += this.YSpeed;
-		}
-		private void KeyDown(object sender, KeyboardEventArgs e)
-		{
-			switch (e.Key) 
-			{
-				case Key.L: 
-					if (!keyPressedL)
-					{
-						keyPressedL = true;
-						light = !light;
-						if(!light) 
-						{
-							Gl.glDisable(Gl.GL_LIGHTING);
-						}
-						else 
-						{
-							Gl.glEnable(Gl.GL_LIGHTING);
-						}
-					}
-					else
-					{ 
-						keyPressedL = false;
-					}
-					break;	
-				case Key.F:
-					if (!keyPressedF)
-					{
-						keyPressedF = true;
-						filter += 1;
-						if(filter > 2) 
-						{
-							filter = 0;
-						}
-					}
-					else
-					{
-						keyPressedF = false;
-					}
-					break;
-				case Key.PageUp:
-					z -= 0.02f;
-					break;
-				case Key.PageDown:
-					z += 0.02f;
-					break;
-				case Key.UpArrow: 
-					xspeed -= 0.01f;
-					break;
-				case Key.DownArrow:
-					xspeed += 0.01f;
-					break;
-				case Key.RightArrow:
-					yspeed += 0.01f;
-					break;
-				case Key.LeftArrow:
-					yspeed -= 0.01f;
-					break;
-			}
-		}
-		#region override void LoadGLTextures()
+		#region override void LoadGLFilteredTextures()
 		/// <summary>
 		/// Load bitmaps and convert to textures.
 		/// </summary>
@@ -283,111 +283,133 @@ namespace SdlDotNet.Examples
 				}
 			}
 		}
-		#endregion override void LoadGLTextures()
+		#endregion override void LoadGLFilteredTextures()
+
+		#endregion Lesson Setup
+
+		#region Rendering
 
 		/// <summary>
-		/// 
+		/// Renders the scene
 		/// </summary>
-		protected bool KeyPressedL
+		protected override void DrawGLScene()
 		{
-			get
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+			// Clear The Screen And The Depth Buffer
+			Gl.glLoadIdentity();   
+			// Reset The View
+			Gl.glTranslatef(0, 0, depthZ);
+
+			Gl.glRotatef(this.RotationX, 1, 0, 0);
+			Gl.glRotatef(this.RotationY, 0, 1, 0);
+
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[filter]);
+
+			Gl.glBegin(Gl.GL_QUADS);
+			// Front Face
+			Gl.glNormal3f(0, 0, 1);
+			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, 1);
+			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, 1);
+			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, 1);
+			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, 1);
+			// Back Face
+			Gl.glNormal3f(0, 0, -1);
+			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, -1);
+			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, -1);
+			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, -1);
+			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, -1);
+			// Top Face
+			Gl.glNormal3f(0, 1, 0);
+			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
+			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, 1, 1);
+			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, 1, 1);
+			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
+			// Bottom Face
+			Gl.glNormal3f(0, -1, 0);
+			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, -1, -1);
+			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, -1, -1);
+			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
+			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
+			// Right face
+			Gl.glNormal3f(1, 0, 0);
+			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, -1);
+			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
+			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, 1);
+			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
+			// Left Face
+			Gl.glNormal3f(-1, 0, 0);
+			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, -1);
+			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
+			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, 1);
+			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
+			Gl.glEnd();
+
+			this.RotationX += this.XSpeed;
+			this.RotationY += this.YSpeed;
+		}
+
+		#endregion Rendering
+
+		#region Event Handlers
+		private void KeyDown(object sender, KeyboardEventArgs e)
+		{
+			switch (e.Key) 
 			{
-				return keyPressedL;
-			}
-			set
-			{
-				keyPressedL = value;
+				case Key.L: 
+					if (!keyPressedL)
+					{
+						keyPressedL = true;
+						light = !light;
+						if(!light) 
+						{
+							Gl.glDisable(Gl.GL_LIGHTING);
+						}
+						else 
+						{
+							Gl.glEnable(Gl.GL_LIGHTING);
+						}
+					}
+					else
+					{ 
+						keyPressedL = false;
+					}
+					break;	
+				case Key.F:
+					if (!keyPressedF)
+					{
+						keyPressedF = true;
+						filter += 1;
+						if(filter > 2) 
+						{
+							filter = 0;
+						}
+					}
+					else
+					{
+						keyPressedF = false;
+					}
+					break;
+				case Key.PageUp:
+					depthZ -= 0.02f;
+					break;
+				case Key.PageDown:
+					depthZ += 0.02f;
+					break;
+				case Key.UpArrow: 
+					xspeed -= 0.01f;
+					break;
+				case Key.DownArrow:
+					xspeed += 0.01f;
+					break;
+				case Key.RightArrow:
+					yspeed += 0.01f;
+					break;
+				case Key.LeftArrow:
+					yspeed -= 0.01f;
+					break;
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		protected bool KeyPressedF
-		{
-			get
-			{
-				return keyPressedF;
-			}
-			set
-			{
-				keyPressedF = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected bool Light
-		{
-			get
-			{
-				return light;
-			}
-			set
-			{
-				light = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected float XSpeed
-		{
-			get
-			{
-				return xspeed;
-			}
-			set
-			{
-				xspeed = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected float YSpeed
-		{
-			get
-			{
-				return yspeed;
-			}
-			set
-			{
-				yspeed = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected float Z
-		{
-			get
-			{
-				return z;
-			}
-			set
-			{
-				z = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected int Filter
-		{
-			get
-			{
-				return filter;
-			}
-			set
-			{
-				filter = value;
-			}
-		}
+		#endregion Event Handlers
 	}
 }

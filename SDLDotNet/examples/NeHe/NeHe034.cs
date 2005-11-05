@@ -186,7 +186,7 @@ namespace SdlDotNet.Examples
 				!File.Exists(fileName2)) 
 			{
 				MessageBox.Show("Can't Find The Height Map!", 
-					"ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+					"ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
 			}
 
 			if(File.Exists(fileName1)) 

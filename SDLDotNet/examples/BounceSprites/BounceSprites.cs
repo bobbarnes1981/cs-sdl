@@ -33,7 +33,7 @@ namespace SdlDotNet.Examples
 	/// You can click on each sprite and move them around the 
 	/// screen as well (MouseButton and MouseMotion events).
 	/// </summary>
-	public class BounceSprites
+	public class BounceSprites : IDisposable
 	{
 		#region Fields
 		private Surface screen; //video screen
@@ -130,5 +130,35 @@ namespace SdlDotNet.Examples
 			bounce.Go();
 		}
 		#endregion Methods
+
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks>Destroys managed and unmanaged objects</remarks>
+		public void Dispose() 
+		{
+			Dispose(true);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					background.Dispose();
+				}
+				this.disposed = true;
+			}
+		}
+
+		#endregion
 	}
 }

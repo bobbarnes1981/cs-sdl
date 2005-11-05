@@ -27,6 +27,7 @@ SOFTWARE.
 
 using System;
 using System.Drawing;
+using System.Globalization;
 
 using Tao.OpenGl;
 using Tao.Platform.Windows;
@@ -127,6 +128,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected virtual void BuildFont() 
 		{
+			GC.KeepAlive(this);
 			fontBase = Gl.glGenLists(96);
 
 			System.Drawing.Font font = new System.Drawing.Font(
@@ -159,7 +161,7 @@ namespace SdlDotNet.Examples
 			// Position The Text On The Screen
 			Gl.glRasterPos2f(-0.45f + 0.05f * ((float) (Math.Cos(Cnt1))), 0.32f * ((float) (Math.Sin(cnt2))));
 			// Print GL Text To The Screen
-			GlPrint(string.Format("Active OpenGL Text With NeHe - {0:0.00}", Cnt1));
+			GlPrint(string.Format(CultureInfo.CurrentCulture,"Active OpenGL Text With NeHe - {0:0.00}", Cnt1));
 			Cnt1 += 0.051f;
 			// Increase The First Counter
 			cnt2 += 0.005f;
@@ -199,6 +201,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected override void InitGL()
 		{
+			GC.KeepAlive(this);
 			base.InitGL();
 			hDC = User.GetDC(Video.WindowHandle);
 			BuildFont(); 

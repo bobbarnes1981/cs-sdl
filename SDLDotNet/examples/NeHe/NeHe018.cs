@@ -69,7 +69,7 @@ namespace SdlDotNet.Examples
 		float[] LightDiffuse =  {1.0f, 1.0f, 1.0f, 1.0f};
 		float[] LightPosition = {0.0f, 0.0f, 2.0f, 1.0f};
 
-		int obj = 0;
+		int obj;
 		// Which Object To Draw
 
 		/// <summary>
@@ -81,7 +81,7 @@ namespace SdlDotNet.Examples
 			this.Texture = new int[3];
 			this.TextureName = new string[1];
 			this.TextureName[0] = "NeHe018.bmp";
-			this.Z = -5.0f;
+			this.DepthZ = -5.0f;
 		}
 
 		/// <summary>
@@ -138,7 +138,7 @@ namespace SdlDotNet.Examples
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glLoadIdentity();
-			Gl.glTranslatef(0.0f, 0.0f, this.Z);
+			Gl.glTranslatef(0.0f, 0.0f, this.DepthZ);
 
 			Gl.glRotatef(this.RotationX, 1.0f, 0.0f, 0.0f);
 			Gl.glRotatef(this.RotationY, 0.0f, 1.0f, 0.0f);
@@ -265,10 +265,10 @@ namespace SdlDotNet.Examples
 					this.obj = (this.obj + 1) % 6;
 					break;
 				case Key.PageUp:
-					this.Z -= 0.02f;
+					this.DepthZ -= 0.02f;
 					break;
 				case Key.PageDown:
-					this.Z += 0.02f;
+					this.DepthZ += 0.02f;
 					break;
 				case Key.UpArrow:
 					this.XSpeed -= 0.1f;

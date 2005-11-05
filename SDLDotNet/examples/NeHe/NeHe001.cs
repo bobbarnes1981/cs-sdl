@@ -41,11 +41,11 @@ namespace SdlDotNet.Examples
 		#region Fields
 
 		//Width of screen
-		const int width = 640;
+		int width = 640;
 		//Height of screen
-		const int height = 480;
+		int height = 480;
 		// Bits per pixel of screen
-		const int bpp = 16;
+		int bpp = 16;
 		// quit flag
 		bool quit;
 		// Surface to render on
@@ -80,7 +80,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return bpp;
+				return this.bpp;
 			}
 		}
 

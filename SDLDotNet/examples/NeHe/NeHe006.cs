@@ -193,7 +193,7 @@ namespace SdlDotNet.Examples
 		#region Lesson Setup
 
 		/// <summary>
-		/// 
+		/// Initializes the OpenGL system
 		/// </summary>
 		protected override void InitGL()
 		{
