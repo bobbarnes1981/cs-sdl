@@ -35,7 +35,7 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 16: Cool Looking Fog
 	/// </summary>
 	public class NeHe016 : NeHe010
 	{
@@ -100,44 +100,44 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(30,30);
 			LoadGLTextures();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);									
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);									
+			Gl.glEnable(Gl.GL_TEXTURE_2D);									
 			// Enable Smooth Shading
-			Gl.glClearColor(0.5f, 0.5f, 0.5f, 1.0f);						
+			Gl.glShadeModel(Gl.GL_SMOOTH);									
 			// Black Background
-			Gl.glClearDepth(1.0f);											
+			Gl.glClearColor(0.5f, 0.5f, 0.5f, 1.0f);						
 			// Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);									
+			Gl.glClearDepth(1.0f);											
 			// Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);									
+			Gl.glEnable(Gl.GL_DEPTH_TEST);									
 			// The Type Of Depth Testing To Do
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			// Really Nice Perspective Calculations					
 			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);		
-			// Really Nice Perspective Calculations
 
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT,  this.LightAmbient);	
 			// Setup The Ambient Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE,  this.LightDiffuse);	
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT,  this.LightAmbient);	
 			// Setup The Diffuse Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, this.LightPosition);	
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE,  this.LightDiffuse);	
 			// Position The Light
-			Gl.glEnable(Gl.GL_LIGHT1);										
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, this.LightPosition);	
 			// Enable Light One
+			Gl.glEnable(Gl.GL_LIGHT1);	
 
-			Gl.glFogi(Gl.GL_FOG_MODE, (int)this.fogMode[this.fogfilter]);	
 			// Fog Mode
-			Gl.glFogfv(Gl.GL_FOG_COLOR, this.fogColor);						
+			Gl.glFogi(Gl.GL_FOG_MODE, (int)this.fogMode[this.fogfilter]);	
 			// Set Fog Color
-			Gl.glFogf(Gl.GL_FOG_DENSITY, 0.35f);							
+			Gl.glFogfv(Gl.GL_FOG_COLOR, this.fogColor);						
 			// How Dense Will The Fog Be
-			Gl.glHint(Gl.GL_FOG_HINT, Gl.GL_DONT_CARE);						
+			Gl.glFogf(Gl.GL_FOG_DENSITY, 0.35f);							
 			// Fog Hint Value
-			Gl.glFogf(Gl.GL_FOG_START, 1.0f);								
+			Gl.glHint(Gl.GL_FOG_HINT, Gl.GL_DONT_CARE);						
 			// Fog Start Depth
-			Gl.glFogf(Gl.GL_FOG_END, 5.0f);									
+			Gl.glFogf(Gl.GL_FOG_START, 1.0f);								
 			// Fog End Depth
+			Gl.glFogf(Gl.GL_FOG_END, 5.0f);	
+			// Enables GL_FOG					
 			Gl.glEnable(Gl.GL_FOG);											
-			// Enables GL_FOG
 			
 			if (this.Light)	
 			{								
