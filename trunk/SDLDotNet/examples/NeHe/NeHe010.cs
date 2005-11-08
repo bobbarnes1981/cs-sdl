@@ -39,10 +39,11 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 10: Loading and Moving through a 3D World
 	/// </summary>
 	public class NeHe010 : NeHe008
 	{
+		#region Fields
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -60,6 +61,41 @@ namespace SdlDotNet.Examples
 		float walkbiasangle;
 		float lookupdown;
 		const float piover180 = 0.0174532925f;
+		Sector sector;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		protected float XPos
+		{
+			get
+			{
+				return xpos;
+			}
+			set
+			{
+				xpos = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		protected float ZPos
+		{
+			get
+			{
+				return zpos;
+			}
+			set
+			{
+				zpos = value;
+			}
+		}
+
+		#endregion Fields
+
+		#region Structs
 
 		private struct Vertex 
 		{
@@ -77,10 +113,13 @@ namespace SdlDotNet.Examples
 			public int numtriangles;
 			public Triangle[] triangle;
 		};
-		Sector sector;
+
+		#endregion Structs
+
+		#region Constructor
 
 		/// <summary>
-		/// 
+		/// Basic Constructor
 		/// </summary>
 		public NeHe010()
 		{
@@ -90,42 +129,39 @@ namespace SdlDotNet.Examples
 			this.DepthZ = 0;
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
+
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-			Keyboard.EnableKeyRepeat(150,50);
+			Keyboard.EnableKeyRepeat(75,25);
 			this.LoadGLFilteredTextures();
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
-   
 			// Enable Texture Mapping
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);
-
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Set The Blending Function For Translucency
-			Gl.glClearColor(0, 0, 0, 0);
-
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);
 			// This Will Clear The Background Color To Black
-			Gl.glClearDepth(1);
-
+			Gl.glClearColor(0, 0, 0, 0);
 			// Enables Clearing Of The Depth Buffer
-			Gl.glDepthFunc(Gl.GL_LESS);
-
+			Gl.glClearDepth(1);
 			// The Type Of Depth Test To Do
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
-   
+			Gl.glDepthFunc(Gl.GL_LESS);
 			// Enables Depth Testing
-			Gl.glShadeModel(Gl.GL_SMOOTH);
-   
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			// Enables Smooth Color Shading
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
- 
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Really Nice Perspective Calculations
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
 			this.SetupWorld();
 		}
 
 		#region SetupWorld()
+
 		/// <summary>
 		/// Loads and parses the world.
 		/// </summary>
@@ -200,88 +236,88 @@ namespace SdlDotNet.Examples
 				// Swap Filename
 			}
 
+			// Open The File As ASCII Text
 			reader = new StreamReader(fileName, encoding);
   
-			// Open The File As ASCII Text
-
+			// Read The First Line
 			oneline = reader.ReadLine();
 
-			// Read The First Line
-			splitter = oneline.Split();
-
 			// Split The Line On Spaces
+			splitter = oneline.Split();
 
 			// The First Item In The Array Will Contain The String "NUMPOLLIES",
 			// Which We Will Ignore
-			numtriangles = Convert.ToInt32(splitter[1],CultureInfo.CurrentCulture);
 
 			// Save The Number Of Triangles As An int
+			numtriangles = Convert.ToInt32(splitter[1],CultureInfo.CurrentCulture);
 
+			// Initialize The Triangles And Save To sector
 			sector.triangle = new Triangle[numtriangles];
    
-			// Initialize The Triangles And Save To sector
-			sector.numtriangles = numtriangles;
-  
 			// Save The Number Of Triangles In sector
-
+			sector.numtriangles = numtriangles;
+		
+			// For Every Triangle
 			for(int triloop = 0; triloop < numtriangles; triloop++) 
 			{   
-				// For Every Triangle
+				// Initialize The Vertices In sector
 				sector.triangle[triloop].vertex = new Vertex[3];
 
-				// Initialize The Vertices In sector
+				// For Every Vertex
 				for(int vertloop = 0; vertloop < 3; vertloop++) 
-				{   // For Every Vertex
+				{   
+					// Read A Line
 					oneline = reader.ReadLine();
  
-					// Read A Line
+					// If The Line Isn't null
 					if(oneline != null) 
 					{   
-						// If The Line Isn't null
+						// Split The Line On Spaces
 						splitter = oneline.Split();
   
-						// Split The Line On Spaces
+						// Save x As A float
 						x = Single.Parse(splitter[0],CultureInfo.CurrentCulture);
   
-						// Save x As A float
+						// Save y As A float
 						y = Single.Parse(splitter[1],CultureInfo.CurrentCulture);
   
-						// Save y As A float
+						// Save z As A float
 						z = Single.Parse(splitter[2],CultureInfo.CurrentCulture);
   
-						// Save z As A float
+						// Save u As A float
 						u = Single.Parse(splitter[3],CultureInfo.CurrentCulture);
   
-						// Save u As A float
+						// Save v As A float
 						v = Single.Parse(splitter[4],CultureInfo.CurrentCulture);
   
-						// Save v As A float
+						// Save x To sector's Current triangle's vertex x
 						sector.triangle[triloop].vertex[vertloop].x = x;
 
-						// Save x To sector's Current triangle's vertex x
+						// Save y To sector's Current triangle's vertex y
 						sector.triangle[triloop].vertex[vertloop].y = y;
 
-						// Save y To sector's Current triangle's vertex y
+						// Save z To sector's Current triangle's vertex z
 						sector.triangle[triloop].vertex[vertloop].z = z;
 
-						// Save z To sector's Current triangle's vertex z
+						// Save u To sector's Current triangle's vertex u
 						sector.triangle[triloop].vertex[vertloop].u = u;
 
-						// Save u To sector's Current triangle's vertex u
-						sector.triangle[triloop].vertex[vertloop].v = v;
-
 						// Save v To sector's Current triangle's vertex v
+						sector.triangle[triloop].vertex[vertloop].v = v;
 					}
 				}
 			}
 			if(reader != null) 
 			{
-				reader.Close();
-
 				// Close The StreamReader
+				reader.Close();
 			}
 		}
 		#endregion SetupWorld()
+
+		#endregion Lesson Setup
+
+		#region Rendering
 
 		#region void DrawGLScene()
 		/// <summary>
@@ -289,13 +325,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected override void DrawGLScene() 
 		{
+			// Clear The Screen And The Depth Buffer
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 
-			// Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();
-   
 			// Reset The View
-
+			Gl.glLoadIdentity();
+	
 			float x_m, y_m, z_m, u_m, v_m;
 			float xtrans = -xpos;
 			float ztrans = -zpos;
@@ -338,23 +373,19 @@ namespace SdlDotNet.Examples
 		}
 		#endregion bool DrawGLScene()
 
+		#endregion Rendering
+
+		#region Event Handlers
+
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch (e.Key) 
 			{
 				case Key.F:
-					if (!this.KeyPressedF)
+					this.Filter += 1;
+					if(this.Filter > 2) 
 					{
-						this.KeyPressedF = true;
-						this.Filter += 1;
-						if(this.Filter > 2) 
-						{
-							this.Filter = 0;
-						}
-					}
-					else
-					{
-						this.KeyPressedF = false;
+						this.Filter = 0;
 					}
 					break;
 				case Key.PageUp:
@@ -400,67 +431,25 @@ namespace SdlDotNet.Examples
 					this.RotationY = heading;
 					break;
 				case Key.B:
-					// Blending Code Starts Here
-					if(!this.KeyPressedB) 
+					this.Blend = !this.Blend;
+					if(this.Blend) 
 					{
-						this.KeyPressedB = true;
-						this.Blend = !this.Blend;
-						if(this.Blend) 
-						{
-							Gl.glEnable(Gl.GL_BLEND);
-
-							// Turn Blending On
-							Gl.glDisable(Gl.GL_DEPTH_TEST);
- 
-							// Turn Depth Testing Off
-						}
-						else 
-						{
-							Gl.glDisable(Gl.GL_BLEND);
-  
-							// Turn Blending Off
-							Gl.glEnable(Gl.GL_DEPTH_TEST);
-  
-							// Turn Depth Testing On
-						}
+						// Turn Blending On
+						Gl.glEnable(Gl.GL_BLEND);
+						// Turn Depth Testing Off
+						Gl.glDisable(Gl.GL_DEPTH_TEST);
 					}
-					else
+					else 
 					{
-						this.KeyPressedB = false;
+						// Turn Blending Off
+						Gl.glDisable(Gl.GL_BLEND);
+						// Turn Depth Testing On
+						Gl.glEnable(Gl.GL_DEPTH_TEST);
 					}
-					// Blending Code Ends Here
 					break;
 			}
 		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		protected float XPos
-		{
-			get
-			{
-				return xpos;
-			}
-			set
-			{
-				xpos = value;
-			}
-		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		protected float ZPos
-		{
-			get
-			{
-				return zpos;
-			}
-			set
-			{
-				zpos = value;
-			}
-		}
+		#endregion Event Handlers
 	}
 }

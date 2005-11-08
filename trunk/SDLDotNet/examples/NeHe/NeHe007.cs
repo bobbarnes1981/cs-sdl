@@ -55,51 +55,62 @@ namespace SdlDotNet.Examples
 		}
 
 		// X Rotation Speed
-		float xspeed;   
+		float xspeed;
 		// Y Rotation Speed
-		float yspeed;   
+		float yspeed;
 		// Depth Into The Screen
-		float depthZ = -5;   
-		// Lighting ON/OFF ( NEW )
+		float depthZ = -5;
+		//filter
 		int filter;
-		// L Pressed? ( NEW )
-		bool light;   
-		// F Pressed? ( NEW )
-		bool keyPressedL;   	
-		// Storage For One Texture ( NEW )
-		bool keyPressedF; 
+		// Lighting ON/OFF ( NEW )
+		bool light;
   
 		float[] lightAmbient = {0.5f, 0.5f, 0.5f, 1};
 		float[] lightDiffuse = {1, 1, 1, 1};
 		float[] lightPosition = {0, 0, 2, 1};
 
 		/// <summary>
-		/// Is 'L' key pressed
+		/// Ambient light array
 		/// </summary>
-		protected bool KeyPressedL
+		protected float[] LightAmbient
 		{
 			get
 			{
-				return keyPressedL;
+				return lightAmbient;
 			}
 			set
 			{
-				keyPressedL = value;
+				lightAmbient = value;
 			}
 		}
 
 		/// <summary>
-		/// Is 'F' key pressed
+		/// Diffure light array
 		/// </summary>
-		protected bool KeyPressedF
+		protected float[] LightDiffuse
 		{
 			get
 			{
-				return keyPressedF;
+				return lightDiffuse;
 			}
 			set
 			{
-				keyPressedF = value;
+				lightDiffuse = value;
+			}
+		}
+
+		/// <summary>
+		/// Light position array
+		/// </summary>
+		protected float[] LightPosition
+		{
+			get
+			{
+				return lightPosition;
+			}
+			set
+			{
+				lightPosition = value;
 			}
 		}
 
@@ -356,37 +367,21 @@ namespace SdlDotNet.Examples
 			switch (e.Key) 
 			{
 				case Key.L: 
-					if (!keyPressedL)
+					light = !light;
+					if(!light) 
 					{
-						keyPressedL = true;
-						light = !light;
-						if(!light) 
-						{
-							Gl.glDisable(Gl.GL_LIGHTING);
-						}
-						else 
-						{
-							Gl.glEnable(Gl.GL_LIGHTING);
-						}
+						Gl.glDisable(Gl.GL_LIGHTING);
 					}
-					else
-					{ 
-						keyPressedL = false;
+					else 
+					{
+						Gl.glEnable(Gl.GL_LIGHTING);
 					}
 					break;	
 				case Key.F:
-					if (!keyPressedF)
+					filter += 1;
+					if(filter > 2) 
 					{
-						keyPressedF = true;
-						filter += 1;
-						if(filter > 2) 
-						{
-							filter = 0;
-						}
-					}
-					else
-					{
-						keyPressedF = false;
+						filter = 0;
 					}
 					break;
 				case Key.PageUp:

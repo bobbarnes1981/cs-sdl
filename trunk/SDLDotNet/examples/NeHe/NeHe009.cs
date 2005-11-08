@@ -37,10 +37,11 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 09: Moving Bitmaps in 3D Space
 	/// </summary>
 	public class NeHe009 : NeHe006
 	{
+		#region Fields
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -52,36 +53,122 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private static Random rand = new Random();   
 		// Random Number Generator
-		private static bool twinkle;   
+		Random rand = new Random();
 		// Twinkling Stars
-		private static bool tp;
-		// 'T' Key Pressed?
-		private const int num = 50;
+		bool twinkle;   
 		// Number Of Stars To Draw
-		private struct star 
-		{  
-			// Create A Structure For Star
-			public byte r, g, b;   
-			// Stars Color
-			public float dist; 
-			// Stars Distance From Center
-			public float angle;
-			// Stars Current Angle
-		}
-		private static star[] stars = new star[num]; 
+		const int num = 50;
+
 		// Need To Keep Track Of 'num' Stars
-		private static float zoom = -15;
+		float zoom = -15;
 		// Distance Away From Stars
-		private static float tilt = 90;
+		float tilt = 90;
 		// Tilt The View
-		private static float spin; 
+		float spin; 
 		// Spin Stars
-		private static int loop; 
+		int loop; 
+		// Array to hold stars
+		Star[] stars = new Star[num]; 
+
+		#endregion Fields
+		
+		#region Structs
+
+		// Create A Structure For Star
+		private struct Star 
+		{						
+			// Stars Color
+			byte r;
+			byte g;
+			byte b;   
+			// Stars Distance From Center
+			float dist; 
+			// Stars Current Angle
+			float angle;
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public byte Red
+			{
+				get
+				{
+					return r;
+				}
+				set
+				{
+					this.r = value;
+				}
+			}
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public byte Blue
+			{
+				get
+				{
+					return b;
+				}
+				set
+				{
+					this.b = value;
+				}
+			}
+			/// <summary>
+			/// 
+			/// </summary>
+			public byte Green
+			{
+				get
+				{
+					return g;
+				}
+				set
+				{
+					this.g = value;
+				}
+			}
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Distance
+			{
+				get
+				{
+					return dist;
+				}
+				set
+				{
+					dist = value;
+				}
+			}
+
+			/// <summary>
+			/// 
+			/// </summary>
+			public float Angle
+			{
+				get
+				{
+					return angle;
+				}
+				set
+				{
+					angle = value;
+				}
+			}
+
+		}
+
+		#endregion Structs
+
+		#region Constructor
 
 		/// <summary>
-		/// 
+		/// Basic Constructor
 		/// </summary>
 		public NeHe009()
 		{
@@ -90,68 +177,76 @@ namespace SdlDotNet.Examples
 			this.Texture = new int[1];
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
 		/// <summary>
-		/// 
+		/// Initializes OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
 			this.LoadGLTextures();
-			Gl.glEnable(Gl.GL_TEXTURE_2D);   
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);   
+			Gl.glEnable(Gl.GL_TEXTURE_2D);   
 			// Enable Smooth Shading
-			Gl.glClearColor(0, 0, 0, 0.5f);  
+			Gl.glShadeModel(Gl.GL_SMOOTH);   
 			// Black Background
-			Gl.glClearDepth(1);
+			Gl.glClearColor(0, 0, 0, 0.5f);  
 			// Depth Buffer Setup
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
+			Gl.glClearDepth(1);
 			// Really Nice Perspective Calculations
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
 			// Set The Blending Function For Translucency
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
 			Gl.glEnable(Gl.GL_BLEND);
 
 			for(loop = 0; loop < num; loop++) 
 			{
-				stars[loop].angle = 0;
-				stars[loop].dist = ((float) loop / num) * 5;
-				stars[loop].r = (byte) (rand.Next() % 256);
-				stars[loop].g = (byte) (rand.Next() % 256);
-				stars[loop].b = (byte) (rand.Next() % 256);
+				stars[loop].Angle = 0;
+				stars[loop].Distance = ((float) loop / num) * 5;
+				stars[loop].Red = (byte) (rand.Next() % 256);
+				stars[loop].Green = (byte) (rand.Next() % 256);
+				stars[loop].Blue = (byte) (rand.Next() % 256);
 			}
 		}
+
+		#endregion Lesson Setup
+
+		#region Render
 
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear The Screen And The Depth Buffer
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]); 
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Select Our Texture
-
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]); 
+			
+			// Loop Through All The Stars		
 			for(loop = 0; loop < num; loop++) 
 			{  
-				// Loop Through All The Stars
-				Gl.glLoadIdentity();   
 				// Reset The View Before We Draw Each Star
-				Gl.glTranslatef(0, 0, zoom); 
+				Gl.glLoadIdentity();   
 				// Zoom Into The Screen (Using The Value In 'zoom')
-				Gl.glRotatef(tilt, 1, 0, 0); 
+				Gl.glTranslatef(0, 0, zoom); 
 				// Tilt The View (Using The Value In 'tilt')
-				Gl.glRotatef(stars[loop].angle, 0, 1, 0);   
+				Gl.glRotatef(tilt, 1, 0, 0); 
 				// Rotate To The Current Stars Angle
-				Gl.glTranslatef(stars[loop].dist, 0, 0);
+				Gl.glRotatef(stars[loop].Angle, 0, 1, 0);   
 				// Move Forward On The X Plane
-				Gl.glRotatef(-stars[loop].angle, 0, 1, 0);  
+				Gl.glTranslatef(stars[loop].Distance, 0, 0);
 				// Cancel The Current Stars Angle
-				Gl.glRotatef(-tilt, 1, 0, 0);
+				Gl.glRotatef(-stars[loop].Angle, 0, 1, 0);  
 				// Cancel The Screen Tilt
+				Gl.glRotatef(-tilt, 1, 0, 0);
+
 				if(twinkle) 
 				{
-					Gl.glColor4ub(stars[(num - loop) - 1].r, stars[(num - loop) - 1].g, stars[(num - loop) - 1].b, 255);
+					Gl.glColor4ub(stars[(num - loop) - 1].Red, stars[(num - loop) - 1].Green, stars[(num - loop) - 1].Blue, 255);
 					Gl.glBegin(Gl.GL_QUADS);
 					Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, 0);
 					Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, 0);
@@ -160,7 +255,7 @@ namespace SdlDotNet.Examples
 					Gl.glEnd();
 				}
 				Gl.glRotatef(spin, 0, 0, 1);
-				Gl.glColor4ub(stars[loop].r, stars[loop].g, stars[loop].b, 255);
+				Gl.glColor4ub(stars[loop].Red, stars[loop].Green, stars[loop].Blue, 255);
 				Gl.glBegin(Gl.GL_QUADS);
 				Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, 0);
 				Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, 0);
@@ -168,31 +263,28 @@ namespace SdlDotNet.Examples
 				Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, 0);
 				Gl.glEnd();
 				spin += 0.01f;
-				stars[loop].angle += ((float) loop / num);
-				stars[loop].dist -= 0.01f;
-				if(stars[loop].dist < 0) 
+				stars[loop].Angle += ((float) loop / num);
+				stars[loop].Distance -= 0.01f;
+				if(stars[loop].Distance < 0) 
 				{
-					stars[loop].dist += 5;
-					stars[loop].r = (byte) (rand.Next() % 256);
-					stars[loop].g = (byte) (rand.Next() % 256);
-					stars[loop].b = (byte) (rand.Next() % 256);
+					stars[loop].Distance += 5;
+					stars[loop].Red = (byte) (rand.Next() % 256);
+					stars[loop].Green = (byte) (rand.Next() % 256);
+					stars[loop].Blue = (byte) (rand.Next() % 256);
 				}
 			}
 		}
+
+		#endregion Render
+
+		#region Event Handlers
+
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch (e.Key) 
 			{
 				case Key.T: 
-					if (!tp)
-					{
-						tp = true;
-						twinkle = !twinkle;
-					}
-					else
-					{ 
-						tp = false;
-					}
+					twinkle = !twinkle;
 					break;	
 				case Key.PageUp:
 					zoom -= 0.2f;
@@ -208,5 +300,7 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
+
+		#endregion Event Handlers
 	}
 }

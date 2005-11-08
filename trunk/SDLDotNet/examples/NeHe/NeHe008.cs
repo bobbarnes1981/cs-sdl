@@ -37,12 +37,14 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 08: Blending
 	/// </summary>
 	public class NeHe008 : NeHe007
-	{  
+	{
+		#region Fields
+
 		/// <summary>
-		/// 
+		/// Lesson Title
 		/// </summary>
 		public new static string Title
 		{
@@ -52,12 +54,30 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-bool blend; 
-bool keyPressedB;
-		// Which Filter To Use 
+		// is blended?
+		bool blend; 
 
 		/// <summary>
-		/// 
+		/// Is the object blended?
+		/// </summary>
+		protected bool Blend
+		{
+			get
+			{
+				return blend;
+			}
+			set
+			{
+				blend = value;
+			}
+		}
+
+		#endregion Fields
+
+		#region Constructor
+
+		/// <summary>
+		/// Basic constructor
 		/// </summary>
 		public NeHe008()
 		{
@@ -66,56 +86,58 @@ bool keyPressedB;
 			this.Texture = new int[3];
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
-			base.InitGL ();
+			this.InitGLBase();
+			// Enable Texture Mapping ( NEW )
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
+			this.LoadGLFilteredTextures();
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
-			Gl.glColor4f(1, 1, 1, 0.5f);
+			// Setup The Ambient Light
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, this.LightAmbient);
+			// Setup The Diffuse Light
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, this.LightDiffuse);
+			// Position The Light
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, this.LightPosition);  
+			// Enable Light One
+			Gl.glEnable(Gl.GL_LIGHT1); 
 			// Full Brightness.  50% Alpha
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
+			Gl.glColor4f(1, 1, 1, 0.5f);
 			// Set The Blending Function For Translucency
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
 		}
+
+		#endregion Lesson Setup
+
+		#region Event Handlers
 
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch (e.Key) 
 			{
 				case Key.L: 
-					if (!this.KeyPressedL)
+					this.Light = !this.Light;
+					if(!this.Light) 
 					{
-						this.KeyPressedL = true;
-						this.Light = !this.Light;
-						if(!this.Light) 
-						{
-							Gl.glDisable(Gl.GL_LIGHTING);
-						}
-						else 
-						{
-							Gl.glEnable(Gl.GL_LIGHTING);
-						}
+						Gl.glDisable(Gl.GL_LIGHTING);
 					}
-					else
-					{ 
-						this.KeyPressedL = false;
+					else 
+					{
+						Gl.glEnable(Gl.GL_LIGHTING);
 					}
 					break;	
 				case Key.F:
-					if (!this.KeyPressedF)
+					this.Filter += 1;
+					if(this.Filter > 2) 
 					{
-						this.KeyPressedF = true;
-						this.Filter += 1;
-						if(this.Filter > 2) 
-						{
-							this.Filter = 0;
-						}
-					}
-					else
-					{
-						this.KeyPressedF = false;
+						this.Filter = 0;
 					}
 					break;
 				case Key.PageUp:
@@ -138,63 +160,26 @@ bool keyPressedB;
 					break;
 				case Key.B:
 					// Blending Code Starts Here
-					if(!keyPressedB) 
+					blend = !blend;
+					if(blend) 
 					{
-						keyPressedB = true;
-						blend = !blend;
-						if(blend) 
-						{
-							Gl.glEnable(Gl.GL_BLEND);
-							// Turn Blending On
-							Gl.glDisable(Gl.GL_DEPTH_TEST); 
-							// Turn Depth Testing Off
-						}
-						else 
-						{
-							Gl.glDisable(Gl.GL_BLEND);  
-							// Turn Blending Off
-							Gl.glEnable(Gl.GL_DEPTH_TEST);  
-							// Turn Depth Testing On
-						}
+						Gl.glEnable(Gl.GL_BLEND);
+						// Turn Blending On
+						Gl.glDisable(Gl.GL_DEPTH_TEST); 
+						// Turn Depth Testing Off
 					}
-					else
+					else 
 					{
-						keyPressedB = false;
+						Gl.glDisable(Gl.GL_BLEND);  
+						// Turn Blending Off
+						Gl.glEnable(Gl.GL_DEPTH_TEST);  
+						// Turn Depth Testing On
 					}
 					// Blending Code Ends Here
 					break;
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		protected bool Blend
-		{
-			get
-			{
-				return blend;
-			}
-			set
-			{
-				blend = value;
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		protected bool KeyPressedB
-		{
-			get
-			{
-				return keyPressedB;
-			}
-			set
-			{
-				keyPressedB = value;
-			}
-		}
-
+		#endregion Event Handlers
 	}
 }
