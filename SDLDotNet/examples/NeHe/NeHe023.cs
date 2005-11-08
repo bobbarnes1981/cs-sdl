@@ -54,9 +54,9 @@ namespace SdlDotNet.Examples
 		// Lighting ON/OFF
 		Glu.GLUquadric quadratic; 
 		// Storage For Our Quadratic Objects
-		float[] LightAmbient = {0.5f, 0.5f, 0.5f, 1};
-		float[] LightDiffuse = {1, 1, 1, 1};
-		float[] LightPosition = {0, 0, 2, 1};
+//		float[] LightAmbient = {0.5f, 0.5f, 0.5f, 1};
+//		float[] LightDiffuse = {1, 1, 1, 1};
+//		float[] LightPosition = {0, 0, 2, 1};
 		int objectToDraw = 1; 
 		// Which Object To Draw
 		
@@ -70,7 +70,18 @@ namespace SdlDotNet.Examples
 			this.TextureName = new string[2];
 			this.TextureName[0] = "NeHe023.BG.bmp";
 			this.TextureName[1] = "NeHe023.Reflect.bmp";
-
+			this.LightAmbient[0] = 0.5f;
+			this.LightAmbient[1] = 0.5f;
+			this.LightAmbient[2] = 0.5f;
+			this.LightAmbient[3] = 1.0f;
+			this.LightDiffuse[0] = 1.0f;
+			this.LightDiffuse[1] = 1.0f;
+			this.LightDiffuse[2] = 1.0f;
+			this.LightDiffuse[3] = 1.0f;
+			this.LightPosition[0] = 0.0f;
+			this.LightPosition[1] = 0.0f;
+			this.LightPosition[2] = 2.0f;
+			this.LightPosition[3] = 1.0f;
 			this.DepthZ = -10;
 			
 		}

@@ -50,9 +50,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private float[] LightAmbient = {0.5f, 0.5f, 0.5f, 1.0f};
-		private float[] LightDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
-		private float[] LightPosition = {0.0f, 0.0f, 2.0f, 1.0f};
+//		private float[] LightAmbient = {0.5f, 0.5f, 0.5f, 1.0f};
+//		private float[] LightDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
+//		private float[] LightPosition = {0.0f, 0.0f, 2.0f, 1.0f};
 
 		private int[] fogMode = {Gl.GL_EXP, Gl.GL_EXP2, Gl.GL_LINEAR};	
 		// Storage For Three Types Of Fog
@@ -71,6 +71,18 @@ namespace SdlDotNet.Examples
 			this.Texture = new int[3];
 			this.TextureName = new string[1];
 			this.TextureName[0] = "NeHe016.bmp";
+			this.LightAmbient[0] = 0.5f;
+			this.LightAmbient[1] = 0.5f;
+			this.LightAmbient[2] = 0.5f;
+			this.LightAmbient[3] = 1.0f;
+			this.LightDiffuse[0] = 1.0f;
+			this.LightDiffuse[1] = 1.0f;
+			this.LightDiffuse[2] = 1.0f;
+			this.LightDiffuse[3] = 1.0f;
+			this.LightPosition[0] = 0.0f;
+			this.LightPosition[1] = 0.0f;
+			this.LightPosition[2] = 2.0f;
+			this.LightPosition[3] = 1.0f;
 		}
 
 		/// <summary>
