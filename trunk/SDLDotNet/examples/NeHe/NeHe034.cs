@@ -44,6 +44,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe034 : NeHe025
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -65,6 +67,10 @@ namespace SdlDotNet.Examples
 		private byte[] heightMap = new byte[MAP_SIZE * MAP_SIZE];
 		// Holds The Height Map Data (NEW)
 		private float scaleValue = 0.15f;
+		
+		#endregion Fields
+
+		#region Constructor
 
 		/// <summary>
 		/// 
@@ -73,52 +79,9 @@ namespace SdlDotNet.Examples
 		{
 		}
 
-		#region bool DrawGLScene()
-		/// <summary>
-		/// Renders the scene
-		/// </summary>
-		protected override void DrawGLScene() 
-		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			// Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();
-			// Reset The Matrix
+		#endregion Constructor
 
-			Glu.gluLookAt(212, 60, 194, 186, 55, 171, 0, 1, 0);
-			// This Determines Where The Camera's Position And View Is
-			Gl.glScalef(scaleValue, scaleValue * HEIGHT_RATIO, scaleValue);
-			RenderHeightMap(heightMap);
-		}
-		#endregion void DrawGLScene()
-
-		#region int GetHeight(byte[] heightMap, int x, int y)
-		/// <summary>
-		/// Returns the height from a height map index.
-		/// </summary>
-		/// <param name="heightMap">
-		/// Height map data.
-		/// </param>
-		/// <param name="x">
-		/// X coordinate value.
-		/// </param>
-		/// <param name="y">
-		/// Y coordinate value.
-		/// </param>
-		/// <returns>
-		/// Returns int with height data.
-		/// </returns>
-		private static int GetHeight(byte[] heightMap, int x, int y) 
-		{  
-			// This Returns The Height From A Height Map Index
-			x = x % MAP_SIZE;
-			// Error Check Our x Value
-			y = y % MAP_SIZE;  
-			// Error Check Our y Value
-
-			return heightMap[x + (y * MAP_SIZE)];
-			// Index Into Our Height Array And Return The Height
-		}
-		#endregion int GetHeight(byte[] heightMap, int x, int y)
+		#region Lesson Setup
 
 		#region void InitGL()
 		/// <summary>
@@ -210,6 +173,57 @@ namespace SdlDotNet.Examples
 			}
 		}
 		#endregion void LoadRawFile(string name, int size, ref byte[] heightMap)
+
+		#endregion Lesson Setup
+
+		#region Render
+
+		#region bool DrawGLScene()
+		/// <summary>
+		/// Renders the scene
+		/// </summary>
+		protected override void DrawGLScene() 
+		{
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+			// Clear The Screen And The Depth Buffer
+			Gl.glLoadIdentity();
+			// Reset The Matrix
+
+			Glu.gluLookAt(212, 60, 194, 186, 55, 171, 0, 1, 0);
+			// This Determines Where The Camera's Position And View Is
+			Gl.glScalef(scaleValue, scaleValue * HEIGHT_RATIO, scaleValue);
+			RenderHeightMap(heightMap);
+		}
+		#endregion void DrawGLScene()
+
+		#region int GetHeight(byte[] heightMap, int x, int y)
+		/// <summary>
+		/// Returns the height from a height map index.
+		/// </summary>
+		/// <param name="heightMap">
+		/// Height map data.
+		/// </param>
+		/// <param name="x">
+		/// X coordinate value.
+		/// </param>
+		/// <param name="y">
+		/// Y coordinate value.
+		/// </param>
+		/// <returns>
+		/// Returns int with height data.
+		/// </returns>
+		private static int GetHeight(byte[] heightMap, int x, int y) 
+		{  
+			// This Returns The Height From A Height Map Index
+			x = x % MAP_SIZE;
+			// Error Check Our x Value
+			y = y % MAP_SIZE;  
+			// Error Check Our y Value
+
+			return heightMap[x + (y * MAP_SIZE)];
+			// Index Into Our Height Array And Return The Height
+		}
+		#endregion int GetHeight(byte[] heightMap, int x, int y)
 
 		#region void RenderHeightMap(byte[] heightMap)
 		/// <summary>
@@ -322,6 +336,10 @@ namespace SdlDotNet.Examples
 		}
 		#endregion SetVertexColor(byte[] heightMap, int x, int y)
 
+		#endregion Render
+
+		#region Event Handlers
+
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch (e.Key) 
@@ -341,5 +359,7 @@ namespace SdlDotNet.Examples
 		{
 			bRender = !bRender;
 		}
+
+		#endregion Event Handlers
 	}
 }

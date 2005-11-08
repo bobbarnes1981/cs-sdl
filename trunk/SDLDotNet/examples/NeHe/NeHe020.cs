@@ -39,6 +39,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe020 : NeHe019
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -55,6 +57,10 @@ namespace SdlDotNet.Examples
 		float roll;				
 		// Rolling Texture
 
+		#endregion Fields
+
+		#region Constructor
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -68,9 +74,13 @@ namespace SdlDotNet.Examples
 			this.TextureName[3] = "NeHe020.Mask2.bmp";
 			this.TextureName[4] = "NeHe020.Image2.bmp";
 		}
+		
+		#endregion Constructor
+
+		#region Lesson Setup
 
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -88,6 +98,11 @@ namespace SdlDotNet.Examples
 			// Depth Buffer Setup
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
 		}
+
+		
+		#endregion Lesson Setup
+
+		#region Render
 
 		/// <summary>
 		/// Renders the scene
@@ -221,6 +236,10 @@ namespace SdlDotNet.Examples
 				this.roll -= 1.0f;
 			}
 		}
+				
+		#endregion Render
+
+		#region Event Handlers
 
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
@@ -234,5 +253,7 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
+
+		#endregion Event Handlers
 	}
 }

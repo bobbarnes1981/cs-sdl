@@ -43,6 +43,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe026 : NeHe025
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -71,6 +73,10 @@ namespace SdlDotNet.Examples
 		// Diffuse Light
 		private float[] LightPos = {4, 4, 6, 1};
 		// Light Position
+		
+		#endregion Fields
+
+		#region Constructor
 
 		/// <summary>
 		/// 
@@ -84,6 +90,8 @@ namespace SdlDotNet.Examples
 			this.TextureName[1] = "NeHe026.Ball.bmp";
 			this.TextureName[2] = "NeHe026.EnvRoll.bmp";
 		}
+		
+		#endregion Constructor
 
 		#region DrawFloor()
 		/// <summary>
@@ -141,6 +149,8 @@ namespace SdlDotNet.Examples
 		}
 		#endregion DrawObject()
 
+		#region Lesson Setup
+
 		#region void InitGL()
 		/// <summary>
 		/// All setup for OpenGL goes here.
@@ -177,6 +187,10 @@ namespace SdlDotNet.Examples
 
 		}
 		#endregion void InitGL()
+
+		#endregion Lesson Setup
+
+		#region Render
 
 		#region void DrawGLScene()
 		/// <summary>
@@ -277,6 +291,10 @@ namespace SdlDotNet.Examples
 		}
 		#endregion void DrawGLScene()
 
+		#endregion Render
+
+		#region Event Handlers
+
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch (e.Key) 
@@ -307,5 +325,7 @@ namespace SdlDotNet.Examples
 					break;				
 			}
 		}
+
+		#endregion Event Handlers
 	}
 }

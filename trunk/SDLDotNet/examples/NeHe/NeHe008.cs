@@ -94,7 +94,18 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected override void InitGL()
 		{
-			this.InitGLBase();
+			// Enable Smooth Shading
+			Gl.glShadeModel(Gl.GL_SMOOTH);
+			// Black Background
+			Gl.glClearColor(0.0F, 0.0F, 0.0F, 0.5F);
+			// Depth Buffer Setup
+			Gl.glClearDepth(1.0F);
+			// Enables Depth Testing
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			// The Type Of Depth Testing To Do
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			// Really Nice Perspective Calculations
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
 			// Enable Texture Mapping ( NEW )
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			this.LoadGLFilteredTextures();

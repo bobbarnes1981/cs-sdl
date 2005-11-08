@@ -40,6 +40,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe019 : NeHe018
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -68,6 +70,8 @@ namespace SdlDotNet.Examples
 		int delay;					
 		// Random number generator
 		Random rand = new Random();		
+		
+		#endregion Fields	
 		
 		/// <summary>
 		/// Create A Structure For Particle
@@ -336,6 +340,8 @@ namespace SdlDotNet.Examples
 	new float[3] {1.0f,0.5f,1.0f}, new float[3] {1.0f,0.5f,0.75f} 
 };
 
+		#region Constructor
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -346,8 +352,12 @@ namespace SdlDotNet.Examples
 			this.Texture = new int[3];
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
+
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -408,6 +418,11 @@ namespace SdlDotNet.Examples
 				// Set Pull On Z Axis To Zero
 			}
 		}
+
+		
+		#endregion Lesson Setup
+
+		#region Render
 
 		/// <summary>
 		/// Renders the scene
@@ -501,6 +516,10 @@ namespace SdlDotNet.Examples
 			}
 			delay++;
 		}
+				
+		#endregion Render
+
+		#region Event Handlers
 
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
@@ -600,5 +619,7 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
+
+		#endregion Event Handlers
 	}
 }

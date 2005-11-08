@@ -40,6 +40,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe017 : NeHe013
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -52,7 +54,11 @@ namespace SdlDotNet.Examples
 		}
 
 		// Base Display List For The Font
-		int baseList;	
+		int baseList;
+
+		#endregion Fields	
+
+		#region Constructor
 
 		/// <summary>
 		/// 
@@ -66,9 +72,13 @@ namespace SdlDotNet.Examples
 			// Texture array
 			this.TextureName[1] = "NeHe017.Bumps.bmp";
 		}
+		
+		#endregion Constructor
+
+		#region Lesson Setup
 
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -93,6 +103,61 @@ namespace SdlDotNet.Examples
 
 			BuildFont();
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		protected override void BuildFont()
+		{
+			float cx;											
+			// Holds Our X Character Coord
+			float cy;											
+			// Holds Our Y Character Coord
+
+			this.baseList = Gl.glGenLists(256);					
+			// Creating 256 Display Lists
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);	
+			// Select Our Font Texture
+			for (int loop=0; loop < 256; loop++)				
+				// Loop Through All 256 Lists
+			{
+				cx = (float)(loop % 16) / 16.0f;				
+				// X Position Of Current Character
+				cy = (float)(loop / 16) / 16.0f;				
+				// Y Position Of Current Character
+
+				Gl.glNewList((uint)(this.baseList+loop), Gl.GL_COMPILE);
+				// Start Building A List
+				Gl.glBegin(Gl.GL_QUADS);						
+				// Use A Quad For Each Character
+				Gl.glTexCoord2f(cx, 1 - cy - 0.0625f);			
+				// Texture Coord (Bottom Left)
+				Gl.glVertex2i(0, 0);							
+				// Vertex Coord (Bottom Left)
+				Gl.glTexCoord2f(cx + 0.0625f, 1 - cy - 0.0625f);
+				// Texture Coord (Bottom Right)
+				Gl.glVertex2i(16, 0);							
+				// Vertex Coord (Bottom Right)
+				Gl.glTexCoord2f(cx + 0.0625f, 1 - cy);			
+				// Texture Coord (Top Right)
+				Gl.glVertex2i(16, 16);							
+				// Vertex Coord (Top Right)
+				Gl.glTexCoord2f(cx, 1 - cy);					
+				// Texture Coord (Top Left)
+				Gl.glVertex2i(0, 16);							
+				// Vertex Coord (Top Left)
+				Gl.glEnd();										
+				// Done Building Our Quad (Character)
+				Gl.glTranslated(10, 0, 0);						
+				// Move To The Right Of The Character
+				Gl.glEndList();									
+				// Done Building The Display List
+			}
+		}		
+		
+		#endregion Lesson Setup
+
+		#region Render
 
 		/// <summary>
 		/// Renders the scene
@@ -186,57 +251,6 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		protected override void BuildFont()
-		{
-			float cx;											
-			// Holds Our X Character Coord
-			float cy;											
-			// Holds Our Y Character Coord
-
-			this.baseList = Gl.glGenLists(256);					
-			// Creating 256 Display Lists
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);	
-			// Select Our Font Texture
-			for (int loop=0; loop < 256; loop++)				
-				// Loop Through All 256 Lists
-			{
-				cx = (float)(loop % 16) / 16.0f;				
-				// X Position Of Current Character
-				cy = (float)(loop / 16) / 16.0f;				
-				// Y Position Of Current Character
-
-				Gl.glNewList((uint)(this.baseList+loop), Gl.GL_COMPILE);
-				// Start Building A List
-				Gl.glBegin(Gl.GL_QUADS);						
-				// Use A Quad For Each Character
-				Gl.glTexCoord2f(cx, 1 - cy - 0.0625f);			
-				// Texture Coord (Bottom Left)
-				Gl.glVertex2i(0, 0);							
-				// Vertex Coord (Bottom Left)
-				Gl.glTexCoord2f(cx + 0.0625f, 1 - cy - 0.0625f);
-				// Texture Coord (Bottom Right)
-				Gl.glVertex2i(16, 0);							
-				// Vertex Coord (Bottom Right)
-				Gl.glTexCoord2f(cx + 0.0625f, 1 - cy);			
-				// Texture Coord (Top Right)
-				Gl.glVertex2i(16, 16);							
-				// Vertex Coord (Top Right)
-				Gl.glTexCoord2f(cx, 1 - cy);					
-				// Texture Coord (Top Left)
-				Gl.glVertex2i(0, 16);							
-				// Vertex Coord (Top Left)
-				Gl.glEnd();										
-				// Done Building Our Quad (Character)
-				Gl.glTranslated(10, 0, 0);						
-				// Move To The Right Of The Character
-				Gl.glEndList();									
-				// Done Building The Display List
-			}
-		}		
-
-		/// <summary>
-		/// 
-		/// </summary>
 		/// <param name="displayText">Text to display</param>
 		/// <param name="positionX">X position to display the text</param>
 		/// <param name="positionY">Y position to display the text</param>
@@ -289,9 +303,15 @@ namespace SdlDotNet.Examples
 			// Enables Depth Testing
 		}
 
+		#endregion Render
+
+		#region Event Handlers
+
 		private void Quit(object sender, QuitEventArgs e)
 		{
 			KillFont();
 		}
+
+		#endregion Event Handlers
 	}
 }
