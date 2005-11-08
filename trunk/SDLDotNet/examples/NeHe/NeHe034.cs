@@ -73,7 +73,7 @@ namespace SdlDotNet.Examples
 		#region Constructor
 
 		/// <summary>
-		/// 
+		/// Basic constructor
 		/// </summary>
 		public NeHe034()
 		{

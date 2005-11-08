@@ -36,7 +36,7 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 17: 2D Texture Font
 	/// </summary>
 	public class NeHe017 : NeHe013
 	{
@@ -53,23 +53,20 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		// Base Display List For The Font
-		int baseList;
-
 		#endregion Fields	
 
 		#region Constructor
 
 		/// <summary>
-		/// 
+		/// Basic constructor
 		/// </summary>
 		public NeHe017()
 		{
 			Events.Quit += new QuitEventHandler(this.Quit);
 			this.Texture = new int[2];	
 			this.TextureName = new string[2];
-			this.TextureName[0] = "NeHe017.Font.bmp";
 			// Texture array
+			this.TextureName[0] = "NeHe017.Font.bmp";
 			this.TextureName[1] = "NeHe017.Bumps.bmp";
 		}
 		
@@ -114,7 +111,7 @@ namespace SdlDotNet.Examples
 			float cy;											
 			// Holds Our Y Character Coord
 
-			this.baseList = Gl.glGenLists(256);					
+			this.FontBase = Gl.glGenLists(256);					
 			// Creating 256 Display Lists
 			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);	
 			// Select Our Font Texture
@@ -126,7 +123,7 @@ namespace SdlDotNet.Examples
 				cy = (float)(loop / 16) / 16.0f;				
 				// Y Position Of Current Character
 
-				Gl.glNewList((uint)(this.baseList+loop), Gl.GL_COMPILE);
+				Gl.glNewList((uint)(this.FontBase+loop), Gl.GL_COMPILE);
 				// Start Building A List
 				Gl.glBegin(Gl.GL_QUADS);						
 				// Use A Quad For Each Character
@@ -287,7 +284,7 @@ namespace SdlDotNet.Examples
 			// Reset The Modelview Matrix
 			Gl.glTranslated(positionX, positionY,0);									
 			// Position The Text (0,0 - Bottom Left)
-			Gl.glListBase(this.baseList - 32 + (128 * characterSet));	
+			Gl.glListBase(this.FontBase - 32 + (128 * characterSet));	
 			// Choose The Font Set (0 or 1)
 			Gl.glCallLists(displayText.Length, Gl.GL_UNSIGNED_BYTE, displayText);	
 			// Write The Text To The Screen
