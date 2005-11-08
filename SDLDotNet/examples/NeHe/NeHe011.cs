@@ -35,10 +35,12 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 11: Flag Effect (Waving Texture)
 	/// </summary>
-	public class NeHe011 : NeHe009
+	public class NeHe011 : NeHe006
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -49,13 +51,18 @@ namespace SdlDotNet.Examples
 				return "Lesson 11: Flag Effect (Waving Texture)";
 			}
 		}
-		private float[][][] points;				
+
 		// The Array For The Points On The Grid Of Our "Wave"
-		private int wiggle_count;			
+		float[][][] points;				
 		// Counter Used To Control How Fast Flag Waves
+		int wiggle_count;	
+		
+		#endregion Fields
+		
+		#region Constructor
 
 		/// <summary>
-		/// 
+		/// Basic Constructor
 		/// </summary>
 		public NeHe011()
 		{
@@ -64,32 +71,35 @@ namespace SdlDotNet.Examples
 			this.TextureName[0] = "NeHe011.bmp";
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
+
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
 			LoadGLTextures();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);									
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);									
+			Gl.glEnable(Gl.GL_TEXTURE_2D);									
 			// Enable Smooth Shading
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);						
+			Gl.glShadeModel(Gl.GL_SMOOTH);									
 			// Black Background
-			Gl.glClearDepth(1.0f);											
+			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);						
 			// Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);									
+			Gl.glClearDepth(1.0f);											
 			// Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);									
+			Gl.glEnable(Gl.GL_DEPTH_TEST);									
 			// The Type Of Depth Testing To Do
+			Gl.glDepthFunc(Gl.GL_LEQUAL);		
+			// Really Nice Perspective Calculations					
 			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);		
-			// Really Nice Perspective Calculations
-
-			Gl.glPolygonMode(Gl.GL_BACK, Gl.GL_FILL);						
 			// Back Face Is Solid
-			Gl.glPolygonMode(Gl.GL_FRONT, Gl.GL_LINE);						
+			Gl.glPolygonMode(Gl.GL_BACK, Gl.GL_FILL);
 			// Front Face Is Made Of Lines
+			Gl.glPolygonMode(Gl.GL_FRONT, Gl.GL_LINE);						
 			
 			this.points = new float[45][][];
 			for (int i=0; i < this.points.Length; i++)
@@ -104,6 +114,10 @@ namespace SdlDotNet.Examples
 				}
 			}
 		}
+
+		#endregion Lesson Setup
+
+		#region Render
 
 		/// <summary>
 		/// Renders the scene
@@ -145,9 +159,9 @@ namespace SdlDotNet.Examples
 					Gl.glTexCoord2f(float_xb, float_y);
 					Gl.glVertex3f(this.points[i+1][j][0], this.points[i+1][j][1], this.points[i+1][j][2]);
 				}
-			}
-			Gl.glEnd();				
+			}	
 			// Done Drawing Our Quads
+			Gl.glEnd();				
 
 			float hold = 0.0f;
 			if (this.wiggle_count == 2)
@@ -170,5 +184,7 @@ namespace SdlDotNet.Examples
 			this.RotationY += 0.2f;
 			this.RotationZ += 0.4f;
 		}
+
+		#endregion Render
 	}
 }

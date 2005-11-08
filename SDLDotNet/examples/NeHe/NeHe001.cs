@@ -170,14 +170,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected virtual void InitGL()
 		{
-			InitGLBase();
-		}
-
-		/// <summary>
-		/// Initializes methods common to all NeHe lessons
-		/// </summary>
-		protected virtual void InitGLBase()
-		{
 			// Enable Smooth Shading
 			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background

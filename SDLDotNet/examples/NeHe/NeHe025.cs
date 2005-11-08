@@ -44,6 +44,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe025 : NeHe010
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -87,6 +89,8 @@ namespace SdlDotNet.Examples
 		private Thing morph1, morph2, morph3, morph4;   
 		// Our 4 Morphable Objects
 		private Thing helper, source, destination;
+		
+		#endregion Fields
 
 		private struct Vertex 
 		{  
@@ -107,6 +111,8 @@ namespace SdlDotNet.Examples
 			// Vertices
 		}
 
+		#region Constructor
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -114,9 +120,13 @@ namespace SdlDotNet.Examples
 		{
 			this.ZPos = -15;
 		}
+		
+		#endregion Constructor
+
+		#region Lesson Setup
 
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -168,6 +178,11 @@ namespace SdlDotNet.Examples
 			// Source & Destination Are Set To Equal First Object (morph1)
 
 		}
+
+		
+		#endregion Lesson Setup
+
+		#region Render
 
 		#region DrawGLScene()
 		/// <summary>
@@ -269,6 +284,10 @@ namespace SdlDotNet.Examples
 		}
 		#endregion DrawGLScene()
 
+		#endregion Render
+
+		#region Event Handlers
+
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch (e.Key) 
@@ -343,6 +362,9 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
+
+		#endregion Event Handlers
+
 		#region LoadThing(string filename, ref Thing k)
 		/// <summary>
 		/// Loads Object from a file.

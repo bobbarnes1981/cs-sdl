@@ -39,6 +39,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe016 : NeHe010
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -50,16 +52,16 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-//		private float[] LightAmbient = {0.5f, 0.5f, 0.5f, 1.0f};
-//		private float[] LightDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
-//		private float[] LightPosition = {0.0f, 0.0f, 2.0f, 1.0f};
-
-		private int[] fogMode = {Gl.GL_EXP, Gl.GL_EXP2, Gl.GL_LINEAR};	
 		// Storage For Three Types Of Fog
-		private int fogfilter;										
+		int[] fogMode = {Gl.GL_EXP, Gl.GL_EXP2, Gl.GL_LINEAR};	
 		// Which Fog Mode To Use 
-		private float[] fogColor = {0.5f, 0.5f, 0.5f, 1.0f};				
+		int fogfilter;										
 		// Fog Color
+		float[] fogColor = {0.5f, 0.5f, 0.5f, 1.0f};	
+		
+		#endregion Fields
+
+		#region Constructor
 
 		/// <summary>
 		/// 
@@ -85,8 +87,12 @@ namespace SdlDotNet.Examples
 			this.LightPosition[3] = 1.0f;
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
+
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -139,6 +145,10 @@ namespace SdlDotNet.Examples
 				Gl.glEnable(Gl.GL_LIGHTING);
 			}
 		}
+		
+		#endregion Lesson Setup
+
+		#region Render
 
 		/// <summary>
 		/// Renders the scene
@@ -197,6 +207,10 @@ namespace SdlDotNet.Examples
 			this.RotationY += this.YSpeed;
 		}
 
+		#endregion Render
+
+		#region Event Handlers
+
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch(e.Key)
@@ -240,5 +254,7 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
+				
+		#endregion Event Handlers
 	}
 }

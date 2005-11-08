@@ -36,10 +36,12 @@ using Tao.Platform.Windows;
 namespace SdlDotNet.Examples 
 {
 	/// <summary>
-	/// 
+	/// Lesson 15: Texture Mapped Outline Fonts
 	/// </summary>
 	public class NeHe015 : NeHe014
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -50,17 +52,16 @@ namespace SdlDotNet.Examples
 				return "Lesson 15: Texture Mapped Outline Fonts";
 			}
 		}
-		//		// Private GDI Device Context
-		//		private IntPtr hDC;
-		// Base Display List For The Font Set
-		//		private int fontbase;
-		// Used To Rotate The Text
-		//		private float rot;
+
 		// Storage For Information About Our Outline Font Characters
 		private Gdi.GLYPHMETRICSFLOAT[] gmf = new Gdi.GLYPHMETRICSFLOAT[256];
 
+		#endregion Fields
+
+		#region Constructor
+
 		/// <summary>
-		/// 
+		/// Basic Constructor
 		/// </summary>
 		public NeHe015() 
 		{
@@ -71,8 +72,12 @@ namespace SdlDotNet.Examples
 			Events.Quit += new QuitEventHandler(this.Quit);
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
+
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -80,95 +85,70 @@ namespace SdlDotNet.Examples
 			base.InitGL ();
 		}
 
-
 		/// <summary>
-		/// 
+		/// Build Font
 		/// </summary>
 		protected override void BuildFont() 
 		{
-			IntPtr font;   
 			// Windows Font ID
-			this.FontBase = Gl.glGenLists(256);   
+			IntPtr font;   
 			// Storage For 256 Characters
+			this.FontBase = Gl.glGenLists(256);   
 
+			// Create The Font
 			font = Gdi.CreateFont( 
-				// Create The Font
-				-12,   
 				// Height Of Font
-				0, 
+				-12,   
 				// Width Of Font
 				0, 
 				// Angle Of Escapement
 				0, 
 				// Orientation Angle
-				Gdi.FW_BOLD,   
+				0, 
 				// Font Weight
-				false, 
+				Gdi.FW_BOLD,   
 				// Italic
 				false, 
 				// Underline
 				false, 
 				// Strikeout
-				Gdi.SYMBOL_CHARSET,   
+				false, 
 				// Character Set Identifier
-				Gdi.OUT_TT_PRECIS, 
+				Gdi.SYMBOL_CHARSET,   
 				// Output Precision
-				Gdi.CLIP_DEFAULT_PRECIS,
+				Gdi.OUT_TT_PRECIS, 
 				// Clipping Precision
-				Gdi.ANTIALIASED_QUALITY,
+				Gdi.CLIP_DEFAULT_PRECIS,
 				// Output Quality
-				Gdi.FF_DONTCARE | Gdi.DEFAULT_PITCH, 
+				Gdi.ANTIALIASED_QUALITY,
 				// Family And Pitch
+				Gdi.FF_DONTCARE | Gdi.DEFAULT_PITCH, 
+				// Font Name
 				"Wingdings");  
-			// Font Name
 
-			Gdi.SelectObject(this.Hdc, font);
 			// Selects The Font We Created
+			Gdi.SelectObject(this.Hdc, font);
 			Wgl.wglUseFontOutlines(
-				this.Hdc,   
 				// Select The Current DC
-				0, 
+				this.Hdc,
 				// Starting Character
-				255,   
+				0,
 				// Number Of Display Lists To Build
-				this.FontBase,  
+				255,
 				// Starting Display Lists
-				0, 
+				this.FontBase,
 				// Deviation From The True Outlines
-				0.2f,  
+				0,
 				// Font Thickness In The Z Direction
-				Wgl.WGL_FONT_POLYGONS, 
+				0.2f,
 				// Use Polygons, Not Lines
+				Wgl.WGL_FONT_POLYGONS,
+				// Address Of Buffer To Recieve Data
 				gmf);  
-			// Address Of Buffer To Recieve Data
 		}
 
 		/// <summary>
-		/// Renders the scene
-		/// </summary>
-		protected override void DrawGLScene() 
-		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			// Clear Screen And Depth Buffer
-			Gl.glLoadIdentity();   
-			// Reset The Current Modelview Matrix
-			Gl.glTranslatef(1.1f * ((float) (Math.Cos(this.Rotation / 16.0f))), 0.8f * ((float) (Math.Sin(this.Rotation / 20.0f))), -3.0f);
-			Gl.glRotatef(this.Rotation, 1, 0, 0);
-			// Rotate On The X Axis
-			Gl.glRotatef(this.Rotation * 1.2f, 0, 1, 0);   
-			// Rotate On The Y Axis
-			Gl.glRotatef(this.Rotation * 1.4f, 0, 0, 1);   
-			// Rotate On The Z Axis
-			Gl.glTranslatef(-0.35f, -0.35f, 0.1f);   
-			// Center On X, Y, Z Axis
-			GlPrint("N");  
-			// Draw A Skull And Crossbones Symbol
-			this.Rotation += 0.1f;   
-			// Increase The Rotation Variable
-		}
-
-		/// <summary>
-		/// 
+		/// Load textures
 		/// </summary>
 		protected override void LoadGLTextures()
 		{
@@ -215,6 +195,34 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		#endregion Lesson Setup
+
+		#region Render
+
+		/// <summary>
+		/// Renders the scene
+		/// </summary>
+		protected override void DrawGLScene() 
+		{
+			// Clear Screen And Depth Buffer
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+			// Reset The Current Modelview Matrix
+			Gl.glLoadIdentity();   
+			Gl.glTranslatef(1.1f * ((float) (Math.Cos(this.Rotation / 16.0f))), 0.8f * ((float) (Math.Sin(this.Rotation / 20.0f))), -3.0f);
+			// Rotate On The X Axis
+			Gl.glRotatef(this.Rotation, 1, 0, 0);
+			// Rotate On The Y Axis
+			Gl.glRotatef(this.Rotation * 1.2f, 0, 1, 0);   
+			// Rotate On The Z Axis
+			Gl.glRotatef(this.Rotation * 1.4f, 0, 0, 1);   
+			// Center On X, Y, Z Axis
+			Gl.glTranslatef(-0.35f, -0.35f, 0.1f);   
+			// Draw A Skull And Crossbones Symbol
+			GlPrint("N");  
+			// Increase The Rotation Variable
+			this.Rotation += 0.1f;   
+		}
+
 		#region GlPrint(string text)
 		/// <summary>
 		/// Custom GL "print" routine.
@@ -257,9 +265,15 @@ namespace SdlDotNet.Examples
 		}
 		#endregion GlPrint(string text)
 
+		#endregion Render
+
+		#region Event Handlers
+
 		private void Quit(object sender, QuitEventArgs e)
 		{
 			KillFont();
 		}
+
+		#endregion Event Handlers
 	}
 }

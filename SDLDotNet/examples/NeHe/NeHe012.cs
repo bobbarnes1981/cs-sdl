@@ -35,10 +35,12 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 12: Display Lists
 	/// </summary>
 	public class NeHe012 : NeHe006
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -49,11 +51,12 @@ namespace SdlDotNet.Examples
 				return "Lesson 12: Display Lists";
 			}
 		}
-		int box;			
-		// Storage For The Box Display List
-		int top;			
-		// Storage For The Top Display List
 
+		// Storage For The Box Display List
+		int box;			
+		// Storage For The Top Display List
+		int top;			
+		
 		float[][] boxcol = new float[5][] { 
 			new float[3] {1.0f, 0.0f, 0.0f}, 
 			new float[3] {1.0f, 0.5f, 0.0f},
@@ -67,8 +70,12 @@ namespace SdlDotNet.Examples
 			new float[3] {0.0f, 0.5f, 0.0f},
 			new float[3] {0.0f, 0.5f, 0.5f} };
 
+		#endregion Fields
+
+		#region Constructor
+
 		/// <summary>
-		/// 
+		/// Basic Constructor
 		/// </summary>
 		public NeHe012()
 		{
@@ -77,8 +84,12 @@ namespace SdlDotNet.Examples
 			this.TextureName[0] = "NeHe012.bmp";
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
+
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -87,37 +98,37 @@ namespace SdlDotNet.Examples
 			LoadGLTextures();
 			BuildLists();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Enable Smooth Shading
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
-			Gl.glClearDepth(1.0f);
+			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 			// Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			Gl.glClearDepth(1.0f);
 			// Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			// The Type Of Depth Testing To Do
-			Gl.glEnable(Gl.GL_LIGHT0);
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
 			// Quick and dirty lighting
-			Gl.glEnable(Gl.GL_LIGHTING);
+			Gl.glEnable(Gl.GL_LIGHT0);
 			// Enable lighting
-			Gl.glEnable(Gl.GL_COLOR_MATERIAL);
+			Gl.glEnable(Gl.GL_LIGHTING);
 			// Enable material coloring
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+			Gl.glEnable(Gl.GL_COLOR_MATERIAL);
 			// Really Nice Perspective Calculations
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
 		}
 
 		/// <summary>
-		/// 
+		/// Build Lists
 		/// </summary>
 		public void BuildLists()
 		{
-			this.box = Gl.glGenLists(2);
 			// Generate 2 Different Lists
-			Gl.glNewList(this.box, Gl.GL_COMPILE);
+			this.box = Gl.glGenLists(2);
 			// Start With The Box List
+			Gl.glNewList(this.box, Gl.GL_COMPILE);
 			Gl.glBegin(Gl.GL_QUADS);
 			// Bottom Face
 			Gl.glNormal3f( 0.0f,-1.0f, 0.0f);
@@ -166,20 +177,23 @@ namespace SdlDotNet.Examples
 			Gl.glEndList();
 		}
 
+		#endregion Lesson Setup
+
+		#region Render
+
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene()
 		{
-			// Draw the scene
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
 			for (int yloop=1; yloop < 6; yloop++)
 			{
 				for (int xloop=0; xloop < yloop; xloop++)
 				{
-					Gl.glLoadIdentity();
 					// Reset The View
+					Gl.glLoadIdentity();
 					Gl.glTranslatef(1.4f + ((float)xloop * 2.8f) - ((float)yloop * 1.4f), ((6.0f - (float)yloop) * 2.4f) - 7.0f, -20.0f);
 					Gl.glRotatef(45.0f - (2.0f * yloop) + this.RotationX, 1.0f, 0.0f, 0.0f);
 					Gl.glRotatef(45.0f + this.RotationY, 0.0f, 1.0f, 0.0f);
@@ -190,6 +204,10 @@ namespace SdlDotNet.Examples
 				}
 			}
 		}
+
+		#endregion Render
+
+		#region Event Handlers
 
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
@@ -209,5 +227,7 @@ namespace SdlDotNet.Examples
 					break;
 			}
 		}
+
+		#endregion Event Handlers
 	}
 }

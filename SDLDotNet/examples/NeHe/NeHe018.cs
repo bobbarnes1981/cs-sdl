@@ -39,6 +39,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe018 : NeHe016
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -71,6 +73,10 @@ namespace SdlDotNet.Examples
 
 		int obj;
 		// Which Object To Draw
+		
+		#endregion Fields	
+
+		#region Constructor
 
 		/// <summary>
 		/// 
@@ -95,9 +101,13 @@ namespace SdlDotNet.Examples
 			this.LightPosition[2] = 2.0f;
 			this.LightPosition[3] = 1.0f;
 		}
+		
+		#endregion Constructor
+
+		#region Lesson Setup
 
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -142,6 +152,11 @@ namespace SdlDotNet.Examples
 				Gl.glEnable(Gl.GL_LIGHTING);
 			}
 		}
+
+		
+		#endregion Lesson Setup
+
+		#region Render
 
 		/// <summary>
 		/// Renders the scene
@@ -255,6 +270,10 @@ namespace SdlDotNet.Examples
 			Gl.glEnd();
 		}
 
+		#endregion Render
+
+		#region Event Handlers
+
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
 			switch(e.Key)
@@ -302,5 +321,7 @@ namespace SdlDotNet.Examples
 			Glu.gluDeleteQuadric(this.quadratic);
 			// Delete The Quadratic To Free System Resources
 		}
+
+		#endregion Event Handlers
 	}
 }

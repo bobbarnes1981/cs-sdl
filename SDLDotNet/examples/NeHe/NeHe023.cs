@@ -40,6 +40,8 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class NeHe023 : NeHe020
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -54,12 +56,13 @@ namespace SdlDotNet.Examples
 		// Lighting ON/OFF
 		Glu.GLUquadric quadratic; 
 		// Storage For Our Quadratic Objects
-//		float[] LightAmbient = {0.5f, 0.5f, 0.5f, 1};
-//		float[] LightDiffuse = {1, 1, 1, 1};
-//		float[] LightPosition = {0, 0, 2, 1};
 		int objectToDraw = 1; 
 		// Which Object To Draw
 		
+		#endregion Fields
+		
+		#region Constructor
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -83,54 +86,14 @@ namespace SdlDotNet.Examples
 			this.LightPosition[2] = 2.0f;
 			this.LightPosition[3] = 1.0f;
 			this.DepthZ = -10;
-			
 		}
-
-		private void KeyDown(object sender, KeyboardEventArgs e)
-		{
-			switch(e.Key)
-			{
-				case Key.L:
-					light = !light;
-					if(light)
-						Gl.glDisable(Gl.GL_LIGHTING);
-					else 
-						Gl.glEnable(Gl.GL_LIGHTING);
-					break;
-				case Key.F:
-					this.Filter += 1;
-					if(this.Filter > 2) 
-					{
-						this.Filter = 0;
-					}
-					break;
-				case Key.Space:
-					if(++objectToDraw > 3) 
-						objectToDraw = 0;
-					break;
-				case Key.PageUp:
-					this.DepthZ -= 0.02f;
-					break;
-				case Key.PageDown:
-					this.DepthZ += 0.02f;
-					break;
-				case Key.UpArrow:
-					this.XSpeed -= 0.01f;
-					break;
-				case Key.DownArrow:
-					this.XSpeed += 0.01f;
-					break;
-				case Key.RightArrow:
-					this.YSpeed += 0.01f;
-					break;
-				case Key.LeftArrow: 
-					this.YSpeed -= 0.01f;
-					break;
-			}
-		}
+		
+		#endregion Constructor
+		
+		#region Lesson Setup
 
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
 		/// </summary>
 		protected override void InitGL()
 		{
@@ -174,6 +137,11 @@ namespace SdlDotNet.Examples
 			Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
 			// Set The Texture Generation Mode For T To Sphere Mapping (NEW)
 		}
+
+		
+		#endregion Lesson Setup
+
+		#region Render
 
 		/// <summary>
 		/// Renders the scene
@@ -239,5 +207,54 @@ namespace SdlDotNet.Examples
 			this.RotationX += this.XSpeed;
 			this.RotationY += this.YSpeed;
 		}
+				
+		#endregion Render
+
+		#region Event Handlers
+
+		private void KeyDown(object sender, KeyboardEventArgs e)
+		{
+			switch(e.Key)
+			{
+				case Key.L:
+					light = !light;
+					if(light)
+						Gl.glDisable(Gl.GL_LIGHTING);
+					else 
+						Gl.glEnable(Gl.GL_LIGHTING);
+					break;
+				case Key.F:
+					this.Filter += 1;
+					if(this.Filter > 2) 
+					{
+						this.Filter = 0;
+					}
+					break;
+				case Key.Space:
+					if(++objectToDraw > 3) 
+						objectToDraw = 0;
+					break;
+				case Key.PageUp:
+					this.DepthZ -= 0.02f;
+					break;
+				case Key.PageDown:
+					this.DepthZ += 0.02f;
+					break;
+				case Key.UpArrow:
+					this.XSpeed -= 0.01f;
+					break;
+				case Key.DownArrow:
+					this.XSpeed += 0.01f;
+					break;
+				case Key.RightArrow:
+					this.YSpeed += 0.01f;
+					break;
+				case Key.LeftArrow: 
+					this.YSpeed -= 0.01f;
+					break;
+			}
+		}
+
+		#endregion Event Handlers
 	}
 }

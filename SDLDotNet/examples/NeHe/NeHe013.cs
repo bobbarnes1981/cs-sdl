@@ -35,10 +35,12 @@ using Tao.Platform.Windows;
 namespace SdlDotNet.Examples 
 {
 	/// <summary>
-	/// 
+	/// Lesson 13: Bitmap Fonts
 	/// </summary>
-	public class NeHe013 : NeHe012, IDisposable
+	public class NeHe013 : NeHe006, IDisposable
 	{
+		#region Fields
+
 		/// <summary>
 		/// Lesson Title
 		/// </summary>
@@ -49,9 +51,11 @@ namespace SdlDotNet.Examples
 				return "Lesson 13: Bitmap Fonts";
 			}
 		}
-		private IntPtr hDC;
+		
+		IntPtr hDC;
+
 		/// <summary>
-		/// 
+		/// Window Handle
 		/// </summary>
 		public IntPtr Hdc
 		{
@@ -63,11 +67,12 @@ namespace SdlDotNet.Examples
 			{
 				hDC = value;
 			}
-	}
-		private int fontBase;
-		// Base Display List For The Font Set
+		}
+
+		int fontBase; 
+
 		/// <summary>
-		/// 
+		/// Base Display List For The Font Set
 		/// </summary>
 		public int FontBase
 		{
@@ -80,13 +85,11 @@ namespace SdlDotNet.Examples
 				fontBase = value;
 			}
 		}
-		private float cnt1;
-		// 1st Counter Used To Move Text & For Coloring
-		private float cnt2;
-		// 2nd Counter Used To Move Text & For Coloring
 
+		float cnt1;
+		
 		/// <summary>
-		/// 
+		/// 1st Counter Used To Move Text &amp; For Coloring
 		/// </summary>
 		public float Cnt1
 		{
@@ -100,8 +103,10 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		float cnt2;
+
 		/// <summary>
-		/// 
+		/// 2nd Counter Used To Move Text &amp; For Coloring
 		/// </summary>
 		public float Cnt2
 		{
@@ -114,17 +119,48 @@ namespace SdlDotNet.Examples
 				cnt2 = value;
 			}
 		}
+	
+		#endregion Fields
+
+		#region Constructor
 
 		/// <summary>
-		/// 
+		/// Basic Constructor
 		/// </summary>
 		public NeHe013() 
 		{
 			Events.Quit += new QuitEventHandler(this.Quit);
 		}
 
+		#endregion Constructor
+
+		#region Lesson Setup
+
 		/// <summary>
-		/// 
+		/// Initialize OpenGL
+		/// </summary>
+		protected override void InitGL()
+		{
+			GC.KeepAlive(this);
+			hDC = User.GetDC(Video.WindowHandle);
+
+			// Enable Smooth Shading
+			Gl.glShadeModel(Gl.GL_SMOOTH);
+			// Black Background
+			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+			// Depth Buffer Setup
+			Gl.glClearDepth(1.0f);
+			// Enables Depth Testing
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			// The Type Of Depth Testing To Do
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			// Really Nice Perspective Calculations
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+			BuildFont(); 
+		}
+
+		/// <summary>
+		/// Create Font
 		/// </summary>
 		protected virtual void BuildFont() 
 		{
@@ -144,82 +180,87 @@ namespace SdlDotNet.Examples
 			// Selects The Font We Want
 		}
 
+		#endregion Lesson Setup
+
+		#region Render
+
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
 		protected override void DrawGLScene() 
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear Screen And Depth Buffer
-			Gl.glLoadIdentity();
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Reset The Current Modelview Matrix
-			Gl.glTranslatef(0, 0, -1);
+			Gl.glLoadIdentity();
 			// Move One Unit Into The Screen
+			Gl.glTranslatef(0, 0, -1);
 			// Pulsing Colors Based On Text Position
 			Gl.glColor3f(1.0f * ((float) (Math.Cos(Cnt1))), 1.0f * ((float) (Math.Sin(cnt2))), 1.0f - 0.5f* ((float) (Math.Cos(Cnt1 + cnt2))));
-
 			// Position The Text On The Screen
 			Gl.glRasterPos2f(-0.45f + 0.05f * ((float) (Math.Cos(Cnt1))), 0.32f * ((float) (Math.Sin(cnt2))));
 			// Print GL Text To The Screen
 			GlPrint(string.Format(CultureInfo.CurrentCulture,"Active OpenGL Text With NeHe - {0:0.00}", Cnt1));
+			// Increase The First Counter
 			Cnt1 += 0.051f;
 			// Increase The First Counter
 			cnt2 += 0.005f;
-			// Increase The First Counter
 		}
 
 		/// <summary>
-		/// 
+		/// Print font to screen
 		/// </summary>
 		/// <param name="text"></param>
 		protected virtual void GlPrint(string text) 
 		{
+			// If There's No Text
 			if(text == null || text.Length == 0) 
 			{
-				// If There's No Text
-				return;
 				// Do Nothing
+				return;
+				
 			}
-			Gl.glPushAttrib(Gl.GL_LIST_BIT);
 			// Pushes The Display List Bits
-			Gl.glListBase(fontBase - 32);
+			Gl.glPushAttrib(Gl.GL_LIST_BIT);
 			// Sets The Base Character to 32
+			Gl.glListBase(fontBase - 32);
 			// .NET -- we can't just pass text, we need to convert
 			byte [] textbytes = new byte[text.Length];
 
 			for (int i = 0; i < text.Length; i++)
+			{
 				textbytes[i] = (byte) text[i];
+			}
 
-			Gl.glCallLists(text.Length, Gl.GL_UNSIGNED_BYTE, textbytes);
 			// Draws The Display List Text
-			Gl.glPopAttrib();
+			Gl.glCallLists(text.Length, Gl.GL_UNSIGNED_BYTE, textbytes);
 			// Pops The Display List Bits
+			Gl.glPopAttrib();
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		protected override void InitGL()
-		{
-			GC.KeepAlive(this);
-			base.InitGL();
-			hDC = User.GetDC(Video.WindowHandle);
-			BuildFont(); 
-		}
+		#endregion Render
+
+		#region Close Lesson
 
 		/// <summary>
-		/// 
+		/// Close font
 		/// </summary>
 		protected virtual void KillFont() 
 		{
-			Gl.glDeleteLists(fontBase, 96);
 			// Delete All 96 Characters
+			Gl.glDeleteLists(fontBase, 96);
 		}
+
+		#endregion Close Lesson
+
+		#region Event Handlers
 
 		private void Quit(object sender, QuitEventArgs e)
 		{
-			KillFont();
+			this.KillFont();
 		}
+
+		#endregion Event Handlers
 
 		#region IDisposable Members
 
