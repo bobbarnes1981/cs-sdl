@@ -390,11 +390,11 @@ namespace SdlDotNet.Examples
 					break;
 				case Key.PageUp:
 					this.DepthZ -= 0.02f;
-					this.lookupdown -= 0.02f;
+					this.lookupdown -= 1.0f;
 					break;
 				case Key.PageDown:
 					this.DepthZ += 0.02f;
-					this.lookupdown+= 0.02f;
+					this.lookupdown+= 1.0f;
 					break;
 				case Key.UpArrow: 
 					xpos -= (float) Math.Sin(heading * piover180) * 0.05f;
