@@ -153,8 +153,8 @@ namespace SdlDotNet.Examples
 		protected override void LoadGLTextures()
 		{
 			if (File.Exists(this.DataDirectory + this.TextureName))
-			{																	
-				this.FilePath = "";															
+			{		
+				this.FilePath = "";
 			} 
 			// Status Indicator
 			Bitmap[] textureImage = new Bitmap[this.TextureName.Length];   

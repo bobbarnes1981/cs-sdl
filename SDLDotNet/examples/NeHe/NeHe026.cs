@@ -39,7 +39,7 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 26: Clipping &amp; Reflections Using The Stencil Buffer
 	/// </summary>
 	public class NeHe026 : NeHe025
 	{
@@ -56,23 +56,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 		
-		private Glu.GLUquadric q;
-		// Quadratic For Drawing A Sphere
-		private float ballHeight;
-
-		private float xrotspeed;  
-		// X Rotation Speed
-		private float yrotspeed;  
-		// Y Rotation Speed
-		private static float zoom = -7;
-
-		// Maximum Number Of Vertices
-		private float[] LightAmb = {0.7f, 0.7f, 0.7f, 1};
-		// Ambient Light
-		private float[] LightDif = {1, 1, 1, 1};
-		// Diffuse Light
-		private float[] LightPos = {4, 4, 6, 1};
-		// Light Position
+		float ballHeight;
 		
 		#endregion Fields
 
@@ -84,70 +68,27 @@ namespace SdlDotNet.Examples
 		public NeHe026()
 		{
 			this.ballHeight = 2;
+			this.DepthZ = -7;
 			this.Texture = new int[3];
 			this.TextureName = new string[3];
 			this.TextureName[0] = "NeHe026.EnvWall.bmp";
 			this.TextureName[1] = "NeHe026.Ball.bmp";
 			this.TextureName[2] = "NeHe026.EnvRoll.bmp";
+			this.LightAmbient[0] = 0.7f;
+			this.LightAmbient[1] = 0.7f;
+			this.LightAmbient[2] = 0.7f;
+			this.LightAmbient[3] = 1.0f;
+			this.LightDiffuse[0] = 1.0f;
+			this.LightDiffuse[1] = 1.0f;
+			this.LightDiffuse[2] = 1.0f;
+			this.LightDiffuse[3] = 1.0f;
+			this.LightPosition[0] = 4.0f;
+			this.LightPosition[1] = 4.0f;
+			this.LightPosition[2] = 6.0f;
+			this.LightPosition[3] = 1.0f;
 		}
 		
 		#endregion Constructor
-
-		#region DrawFloor()
-		/// <summary>
-		/// Draws the floor.
-		/// </summary>
-		private void DrawFloor() 
-		{
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
-			// Select Texture 1 (0)
-			Gl.glBegin(Gl.GL_QUADS);
-			// Begin Drawing A Quad
-			Gl.glNormal3f(0, 1, 0);
-			// Normal Pointing Up
-			Gl.glTexCoord2f(0, 1);
-			// Bottom Left Of Texture
-			Gl.glVertex3f(-2, 0, 2);
-			// Bottom Left Corner Of Floor
-			Gl.glTexCoord2f(0, 0);
-			// Top Left Of Texture
-			Gl.glVertex3f(-2, 0, -2);
-			// Top Left Corner Of Floor
-			Gl.glTexCoord2f(1, 0);
-			// Top Right Of Texture
-			Gl.glVertex3f(2, 0,-2);
-			// Top Right Corner Of Floor
-			Gl.glTexCoord2f(1, 1);
-			// Bottom Right Of Texture
-			Gl.glVertex3f(2, 0, 2);
-			// Bottom Right Corner Of Floor
-			Gl.glEnd();
-			// Done Drawing The Quad
-		}
-		#endregion DrawFloor()
-
-		#region DrawObject()
-		/// <summary>
-		/// Draws our ball.
-		/// </summary>
-		private void DrawObject() 
-		{
-			Gl.glColor3f(1, 1, 1); // Set Color To White
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]); // Select Texture 2 (1)
-			Glu.gluSphere(q, 0.35f, 32, 16); // Draw First Sphere
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]); // Select Texture 3 (2)
-			Gl.glColor4f(1, 1, 1, 0.4f);// Set Color To White With 40% Alpha
-			Gl.glEnable(Gl.GL_BLEND);  // Enable Blending
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); // Set Blending Mode To Mix Based On SRC Alpha
-			Gl.glEnable(Gl.GL_TEXTURE_GEN_S);// Enable Sphere Mapping
-			Gl.glEnable(Gl.GL_TEXTURE_GEN_T);// Enable Sphere Mapping
-			Glu.gluSphere(q, 0.35f, 32, 16); // Draw Another Sphere Using New Texture
-			// Textures Will Mix Creating A MultiTexture Effect (Reflection)
-			Gl.glDisable(Gl.GL_TEXTURE_GEN_S);   // Disable Sphere Mapping
-			Gl.glDisable(Gl.GL_TEXTURE_GEN_T);   // Disable Sphere Mapping
-			Gl.glDisable(Gl.GL_BLEND); // Disable Blending
-		}
-		#endregion DrawObject()
 
 		#region Lesson Setup
 
@@ -165,25 +106,42 @@ namespace SdlDotNet.Examples
 
 			// All Setup For OpenGL Goes Here
 			LoadGLTextures();
-			
-			Gl.glShadeModel(Gl.GL_SMOOTH);   // Enable Smooth Shading
-			Gl.glClearColor(0.2f, 0.5f, 1, 1);   // Background
-			Gl.glClearDepth(1);// Depth Buffer Setup
-			Gl.glClearStencil(0);  // Clear The Stencil Buffer To 0
-			Gl.glEnable(Gl.GL_DEPTH_TEST);   // Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);// The Type Of Depth Testing To Do
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); // Really Nice Perspective Calculations
-			Gl.glEnable(Gl.GL_TEXTURE_2D);   // Enable 2D Texture Mapping
-			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_AMBIENT, LightAmb);// Set The Ambient Lighting For Light0
-			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, LightDif);// Set The Diffuse Lighting For Light0
-			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, LightPos);   // Set The Position For Light0
-			Gl.glEnable(Gl.GL_LIGHT0); // Enable Light 0
-			Gl.glEnable(Gl.GL_LIGHTING);// Enable Lighting
-			q = Glu.gluNewQuadric();   // Create A New Quadratic
-			Glu.gluQuadricNormals(q, Gl.GL_SMOOTH);  // Generate Smooth Normals For The Quad
-			Glu.gluQuadricTexture(q, Gl.GL_TRUE);// Enable Texture Coords For The Quad
-			Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);// Set Up Sphere Mapping
-			Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);// Set Up Sphere Mapping
+			// Enable Smooth Shading
+			Gl.glShadeModel(Gl.GL_SMOOTH);
+			// Background   
+			Gl.glClearColor(0.2f, 0.5f, 1, 1); 
+			// Depth Buffer Setup
+			Gl.glClearDepth(1);
+			// Clear The Stencil Buffer To 0
+			Gl.glClearStencil(0);  
+			// Enables Depth Testing
+			Gl.glEnable(Gl.GL_DEPTH_TEST);   
+			// The Type Of Depth Testing To Do
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			// Really Nice Perspective Calculations
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
+			// Enable 2D Texture Mapping
+			Gl.glEnable(Gl.GL_TEXTURE_2D);   
+			// Set The Ambient Lighting For Light0
+			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_AMBIENT, this.LightAmbient);
+			// Set The Diffuse Lighting For Light0
+			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, this.LightDiffuse);
+			// Set The Position For Light0
+			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, this.LightPosition);   
+			// Enable Light 0
+			Gl.glEnable(Gl.GL_LIGHT0);
+			// Enable Lighting
+			Gl.glEnable(Gl.GL_LIGHTING);
+			// Create A New Quadratic
+			this.Quadratic = Glu.gluNewQuadric();
+			// Generate Smooth Normals For The Quad
+			Glu.gluQuadricNormals(this.Quadratic, Gl.GL_SMOOTH);
+			// Enable Texture Coords For The Quad
+			Glu.gluQuadricTexture(this.Quadratic, Gl.GL_TRUE);
+			// Set Up Sphere Mapping
+			Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
+			// Set Up Sphere Mapping
+			Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
 
 		}
 		#endregion void InitGL()
@@ -202,94 +160,163 @@ namespace SdlDotNet.Examples
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT | Gl.GL_STENCIL_BUFFER_BIT);
 
 			// Clip Plane Equations
-			double[] eqr = {0,-1, 0, 0};
 			// Plane Equation To Use For The Reflected Objects
+			double[] eqr = {0,-1, 0, 0};
 
-			Gl.glLoadIdentity();
 			// Reset The Modelview Matrix
-			Gl.glTranslatef(0, -0.6f, zoom);
+			Gl.glLoadIdentity();
 			// Zoom And Raise Camera Above The Floor (Up 0.6 Units)
-			Gl.glColorMask(0, 0, 0, 0);
+			Gl.glTranslatef(0, -0.6f, this.DepthZ);
 			// Set Color Mask
-			Gl.glEnable(Gl.GL_STENCIL_TEST);
+			Gl.glColorMask(0, 0, 0, 0);
 			// Enable Stencil Buffer For "marking" The Floor
-			Gl.glStencilFunc(Gl.GL_ALWAYS, 1, 1);
+			Gl.glEnable(Gl.GL_STENCIL_TEST);
 			// Always Passes, 1 Bit Plane, 1 As Mask
-			Gl.glStencilOp(Gl.GL_KEEP, Gl.GL_KEEP, Gl.GL_REPLACE);
+			Gl.glStencilFunc(Gl.GL_ALWAYS, 1, 1);
 			// We Set The Stencil Buffer To 1 Where We Draw Any Polygon
 			// Keep If Test Fails, Keep If Test Passes But Buffer Test Fails
 			// Replace If Test Passes
-			Gl.glDisable(Gl.GL_DEPTH_TEST);
+			Gl.glStencilOp(Gl.GL_KEEP, Gl.GL_KEEP, Gl.GL_REPLACE);
 			// Disable Depth Testing
-			DrawFloor();
+			Gl.glDisable(Gl.GL_DEPTH_TEST);
 			// Draw The Floor (Draws To The Stencil Buffer)
 			// We Only Want To Mark It In The Stencil Buffer
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			DrawFloor();
 			// Enable Depth Testing
-			Gl.glColorMask(1, 1, 1, 1);
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			// Set Color Mask to TRUE, TRUE, TRUE, TRUE
-			Gl.glStencilFunc(Gl.GL_EQUAL, 1, 1);
+			Gl.glColorMask(1, 1, 1, 1);
 			// We Draw Only Where The Stencil Is 1
 			// (I.E. Where The Floor Was Drawn)
-			Gl.glStencilOp(Gl.GL_KEEP, Gl.GL_KEEP, Gl.GL_KEEP);
+			Gl.glStencilFunc(Gl.GL_EQUAL, 1, 1);
 			// Don't Change The Stencil Buffer
-			Gl.glEnable(Gl.GL_CLIP_PLANE0);
+			Gl.glStencilOp(Gl.GL_KEEP, Gl.GL_KEEP, Gl.GL_KEEP);
 			// Enable Clip Plane For Removing Artifacts
 			// (When The Object Crosses The Floor)
-			Gl.glClipPlane(Gl.GL_CLIP_PLANE0, eqr);
+			Gl.glEnable(Gl.GL_CLIP_PLANE0);
 			// Equation For Reflected Objects
-			Gl.glPushMatrix();
+			Gl.glClipPlane(Gl.GL_CLIP_PLANE0, eqr);
 			// Push The Matrix Onto The Stack
-			Gl.glScalef(1, -1, 1);
+			Gl.glPushMatrix();
 			// Mirror Y Axis
-			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, LightPos);
+			Gl.glScalef(1, -1, 1);
 			// Set Up Light0
-			Gl.glTranslatef(0, this.Height, 0);
+			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, this.LightPosition);
 			// Position The Object
-			Gl.glRotatef(this.RotationX, 1, 0, 0);
+			Gl.glTranslatef(0, this.Height, 0);
 			// Rotate Local Coordinate System On X Axis
-			Gl.glRotatef(this.RotationY, 0, 1, 0);
-			// Rotate Local Coordinate System On Y Axis
-			DrawObject();
-			// Draw The Sphere (Reflection)
-			Gl.glPopMatrix();
-			// Pop The Matrix Off The Stack
-			Gl.glDisable(Gl.GL_CLIP_PLANE0);
-			// Disable Clip Plane For Drawing The Floor
-			Gl.glDisable(Gl.GL_STENCIL_TEST);
-			// We Don't Need The Stencil Buffer Any More (Disable)
-			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, LightPos);
-			// Set Up Light0 Position
-			Gl.glEnable(Gl.GL_BLEND);
-			// Enable Blending (Otherwise The Reflected Object Wont Show)
-			Gl.glDisable(Gl.GL_LIGHTING);
-			// Since We Use Blending, We Disable Lighting
-			Gl.glColor4f(1, 1, 1, 0.8f);
-			// Set Color To White With 80% Alpha
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
-			// Blending Based On Source Alpha And 1 Minus Dest Alpha
-			DrawFloor();
-			// Draw The Floor To The Screen
-			Gl.glEnable(Gl.GL_LIGHTING);
-			// Enable Lighting
-			Gl.glDisable(Gl.GL_BLEND);
-			// Disable Blending
-			Gl.glTranslatef(0, this.ballHeight, 0); 
-			// Position The Ball At Proper Height
 			Gl.glRotatef(this.RotationX, 1, 0, 0);
-			// Rotate On The X Axis
+			// Rotate Local Coordinate System On Y Axis
 			Gl.glRotatef(this.RotationY, 0, 1, 0);
-			// Rotate On The Y Axis
+			// Draw The Sphere (Reflection)
 			DrawObject();
+			// Pop The Matrix Off The Stack
+			Gl.glPopMatrix();
+			// Disable Clip Plane For Drawing The Floor
+			Gl.glDisable(Gl.GL_CLIP_PLANE0);
+			// We Don't Need The Stencil Buffer Any More (Disable)
+			Gl.glDisable(Gl.GL_STENCIL_TEST);
+			// Set Up Light0 Position
+			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, this.LightPosition);
+			// Enable Blending (Otherwise The Reflected Object Wont Show)
+			Gl.glEnable(Gl.GL_BLEND);
+			// Since We Use Blending, We Disable Lighting
+			Gl.glDisable(Gl.GL_LIGHTING);
+			// Set Color To White With 80% Alpha
+			Gl.glColor4f(1, 1, 1, 0.8f);
+			// Blending Based On Source Alpha And 1 Minus Dest Alpha
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+			// Draw The Floor To The Screen
+			DrawFloor();
+			// Enable Lighting
+			Gl.glEnable(Gl.GL_LIGHTING);
+			// Disable Blending
+			Gl.glDisable(Gl.GL_BLEND);
+			// Position The Ball At Proper Height
+			Gl.glTranslatef(0, this.ballHeight, 0); 
+			// Rotate On The X Axis
+			Gl.glRotatef(this.RotationX, 1, 0, 0);
+			// Rotate On The Y Axis
+			Gl.glRotatef(this.RotationY, 0, 1, 0);
 			// Draw The Ball
-			this.RotationX += xrotspeed; 
+			DrawObject();
 			// Update X Rotation Angle By xrotspeed
-			this.RotationY += yrotspeed;
+			this.RotationX += this.XSpeed; 
 			// Update Y Rotation Angle By yrotspeed
-			Gl.glFlush();
+			this.RotationY += this.YSpeed;
 			// Flush The GL Pipeline
+			Gl.glFlush();
 		}
 		#endregion void DrawGLScene()
+
+		#region DrawFloor()
+		/// <summary>
+		/// Draws the floor.
+		/// </summary>
+		private void DrawFloor() 
+		{
+			// Select Texture 1 (0)
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+			// Begin Drawing A Quad
+			Gl.glBegin(Gl.GL_QUADS);
+			// Normal Pointing Up
+			Gl.glNormal3f(0, 1, 0);
+			// Bottom Left Of Texture
+			Gl.glTexCoord2f(0, 1);
+			// Bottom Left Corner Of Floor
+			Gl.glVertex3f(-2, 0, 2);
+			// Top Left Of Texture
+			Gl.glTexCoord2f(0, 0);
+			// Top Left Corner Of Floor
+			Gl.glVertex3f(-2, 0, -2);
+			// Top Right Of Texture
+			Gl.glTexCoord2f(1, 0);
+			// Top Right Corner Of Floor
+			Gl.glVertex3f(2, 0,-2);
+			// Bottom Right Of Texture
+			Gl.glTexCoord2f(1, 1);
+			// Bottom Right Corner Of Floor
+			Gl.glVertex3f(2, 0, 2);
+			// Done Drawing The Quad
+			Gl.glEnd();
+		}
+		#endregion DrawFloor()
+
+		#region DrawObject()
+		/// <summary>
+		/// Draws our ball.
+		/// </summary>
+		private void DrawObject() 
+		{
+			// Set Color To White
+			Gl.glColor3f(1, 1, 1); 
+			// Select Texture 2 (1)
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]); 
+			// Draw First Sphere
+			Glu.gluSphere(this.Quadratic, 0.35f, 32, 16); 
+			// Select Texture 3 (2)
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]); 
+			// Set Color To White With 40% Alpha
+			Gl.glColor4f(1, 1, 1, 0.4f);
+			// Enable Blending
+			Gl.glEnable(Gl.GL_BLEND);  
+			// Set Blending Mode To Mix Based On SRC Alpha
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
+			// Enable Sphere Mapping
+			Gl.glEnable(Gl.GL_TEXTURE_GEN_S);
+			// Enable Sphere Mapping
+			Gl.glEnable(Gl.GL_TEXTURE_GEN_T);
+			// Draw Another Sphere Using New Texture
+			Glu.gluSphere(this.Quadratic, 0.35f, 32, 16); 
+			// Textures Will Mix Creating A MultiTexture Effect (Reflection)
+			// Disable Sphere Mapping
+			Gl.glDisable(Gl.GL_TEXTURE_GEN_S);
+			// Disable Sphere Mapping
+			Gl.glDisable(Gl.GL_TEXTURE_GEN_T);   
+			// Disable Blending
+			Gl.glDisable(Gl.GL_BLEND); 
+		}
+		#endregion DrawObject()
 
 		#endregion Render
 
@@ -306,22 +333,22 @@ namespace SdlDotNet.Examples
 					this.ballHeight -= 0.03f;
 					break;
 				case Key.UpArrow: 
-					this.xrotspeed -= 0.08f;
+					this.XSpeed -= 0.08f;
 					break;
 				case Key.DownArrow:
-					this.xrotspeed += 0.08f;
+					this.XSpeed += 0.08f;
 					break;
 				case Key.RightArrow:
-					this.yrotspeed += 0.08f;
+					this.YSpeed += 0.08f;
 					break;
 				case Key.LeftArrow:
-					this.yrotspeed -= 0.08f;
+					this.YSpeed -= 0.08f;
 					break;
 				case Key.A:
-					zoom += 0.05f;
+					this.DepthZ += 0.05f;
 					break;
 				case Key.Z:
-					zoom -= 0.05f;
+					this.DepthZ -= 0.05f;
 					break;				
 			}
 		}

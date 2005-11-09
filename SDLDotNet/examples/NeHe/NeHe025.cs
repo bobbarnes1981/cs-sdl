@@ -40,9 +40,9 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 25: Morphing and Loading Objects from a File
 	/// </summary>
-	public class NeHe025 : NeHe010
+	public class NeHe025 : NeHe020
 	{
 		#region Fields
 
@@ -57,8 +57,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private float zspeed;   
-		private float ypos;
+		float zspeed;   
+		float ypos;
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -73,43 +74,48 @@ namespace SdlDotNet.Examples
 				ypos = value;
 			}
 		}
-		private Random rand = new Random();
+		Random rand = new Random();
 
-		private int key = 1;
 		// Make Sure Same Morph Key Is Not Pressed
-		private int step;   
+		int key = 1;
 		// Step Counter
-		private int steps = 200;
+		int step;   
 		// Maximum Number Of Steps
-		private bool morph; 
+		int steps = 200;
 		// Morphing?
 
-		private int maxver; 
+		bool morph; 
 		// Maximum Number Of Vertices
-		private Thing morph1, morph2, morph3, morph4;   
+		int maxver; 
 		// Our 4 Morphable Objects
-		private Thing helper, source, destination;
+		Thing morph1, morph2, morph3, morph4;   
+		Thing helper, source, destination;
 		
 		#endregion Fields
 
+		#region Structs
+
+		// Structure For 3d Points
 		private struct Vertex 
 		{  
-			// Structure For 3d Points
-			public float X;
 			// X Coordinate
-			public float Y;
+			public float X;
 			// Y Coordinate
-			public float Z;
+			public float Y;
 			// Z Coordinate
+			public float Z;
 		}
+
+		// Structure For An Object
 		private struct Thing 
 		{ 
-			// Structure For An Object
-			public int Verts;  
 			// Number Of Vertices For The Object
-			public Vertex[] Points;
+			public int Verts; 
 			// Vertices
+			public Vertex[] Points;
 		}
+
+		#endregion Structs
 
 		#region Constructor
 
@@ -133,53 +139,200 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
 
-			// All Setup For OpenGL Goes Here
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
 			// Set The Blending Function For Translucency
-			Gl.glClearColor(0, 0, 0, 0);
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE); 
 			// This Will Clear The Background Color To Black
-			Gl.glClearDepth(1);
+			Gl.glClearColor(0, 0, 0, 0);
 			// Enables Clearing Of The Depth Buffer
-			Gl.glDepthFunc(Gl.GL_LESS);
+			Gl.glClearDepth(1);
 			// The Type Of Depth Test To Do
-			Gl.glEnable(Gl.GL_DEPTH_TEST);   
+			Gl.glDepthFunc(Gl.GL_LESS);
 			// Enables Depth Testing
-			Gl.glShadeModel(Gl.GL_SMOOTH);   
+			Gl.glEnable(Gl.GL_DEPTH_TEST);   
 			// Enables Smooth Color Shading
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
+			Gl.glShadeModel(Gl.GL_SMOOTH);   
 			// Really Nice Perspective Calculations
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
 
-			maxver = 0;
 			// Sets Max Vertices To 0 By Default
+			maxver = 0;
 
-			LoadThing("NeHe025.Sphere.txt", ref morph1);  
 			// Load The First Object Into morph1 From File sphere.txt
-			LoadThing("NeHe025.Torus.txt", ref morph2);   
+			LoadThing("NeHe025.Sphere.txt", ref morph1);  
 			// Load The Second Object Into morph2 From File torus.txt
-			LoadThing("NeHe025.Tube.txt", ref morph3);
+			LoadThing("NeHe025.Torus.txt", ref morph2);   
 			// Load The Third Object Into morph3 From File tube.txt
+			LoadThing("NeHe025.Tube.txt", ref morph3);
 
-			AllocateThing(ref morph4, 486);  
 			// Manually Reserver Ram For A 4th 468 Vertice Object (morph4)
+			AllocateThing(ref morph4, 486);  
+			// Loop Through All 468 Vertices
 			for(int i = 0; i < 486; i++) 
 			{  
-				// Loop Through All 468 Vertices
-				morph4.Points[i].X = ((float) (rand.Next() % 14000) / 1000) - 7;
 				// morph4 X Point Becomes A Random Float Value From -7 to 7
-				morph4.Points[i].Y = ((float) (rand.Next() % 14000) / 1000) - 7;
+				morph4.Points[i].X = ((float) (rand.Next() % 14000) / 1000) - 7;
 				// morph4 Y Point Becomes A Random Float Value From -7 to 7
-				morph4.Points[i].Z = ((float) (rand.Next() % 14000) / 1000) - 7;
+				morph4.Points[i].Y = ((float) (rand.Next() % 14000) / 1000) - 7;
 				// morph4 Z Point Becomes A Random Float Value From -7 to 7
+				morph4.Points[i].Z = ((float) (rand.Next() % 14000) / 1000) - 7;
 			}
 
-			LoadThing("NeHe025.Sphere.txt", ref helper);
 			// Load sphere.txt Object Into Helper (Used As Starting Point)
-			source = destination = morph1;
+			LoadThing("NeHe025.Sphere.txt", ref helper);
 			// Source & Destination Are Set To Equal First Object (morph1)
-
+			source = destination = morph1;
 		}
 
-		
+		#region LoadThing(string filename, ref Thing k)
+		/// <summary>
+		/// Loads Object from a file.
+		/// </summary>
+		/// <param name="filename">
+		/// The file to load.
+		/// </param>
+		/// <param name="k">
+		/// The Object to save to.
+		/// </param>
+		private void LoadThing(string filename, ref Thing k) 
+		{
+			// Will Hold Vertice Count
+			int ver;  
+			// Hold Vertex X, Y & Z Position
+			float rx, ry, rz;
+			// The Line We've Read
+			string oneline = "";
+			// Array For Split Values
+			string[] splitter;
+			// Our StreamReader
+			StreamReader reader = null;
+			// ASCII Encoding
+			ASCIIEncoding encoding = new ASCIIEncoding();
+			
+			try 
+			{
+				// Make Sure A Filename Was Given
+				if(filename == null || filename.Length == 0) 
+				{  
+					// If Not Return
+					return; 
+				}
+
+				// Look For Data\Filename
+				string fileName1 = string.Format(CultureInfo.CurrentCulture,"Data{0}{1}", 
+					Path.DirectorySeparatorChar, filename);
+				// Look For ..\..\Data\Filename
+				string fileName2 = string.Format(CultureInfo.CurrentCulture,"{0}{1}{0}{1}Data{1}{2}",
+					"..", Path.DirectorySeparatorChar, filename);
+
+				// Make Sure The File Exists In One Of The Usual Directories
+				if(!File.Exists(filename) && !File.Exists(fileName1) && !File.Exists(fileName2)) 
+				{
+					// If Not Return Null
+					return;
+					
+				}
+
+				// Does The File Exist Here?
+				if(File.Exists(filename)) 
+				{
+					// Open The File As ASCII Text
+					reader = new StreamReader(filename, encoding); 
+				}
+					// Does The File Exist Here?
+				else if(File.Exists(fileName1)) 
+				{
+					// Open The File As ASCII Text
+					reader = new StreamReader(fileName1, encoding);
+				}
+					// Does The File Exist Here?
+				else if(File.Exists(fileName2)) 
+				{
+					// Open The File As ASCII Text
+					reader = new StreamReader(fileName2, encoding);
+				}
+
+				// Read The First Line
+				oneline = reader.ReadLine();
+				// Split The Line On Spaces
+				splitter = oneline.Split();
+
+				// The First Item In The Array 
+				// Will Contain The String "Vertices:", Which We Will Ignore
+				// Save The Number Of Triangles To ver As An int
+				ver = Convert.ToInt32(splitter[1],CultureInfo.CurrentCulture);
+				// Sets PointObjects (k) verts Variable To Equal The Value Of ver
+				k.Verts = ver;
+				// Jumps To Code That Allocates Ram To Hold The Object
+				AllocateThing(ref k, ver); 
+
+				// Loop Through The Vertices
+				for(int vertloop = 0; vertloop < ver; vertloop++) 
+				{ 
+					// Reads In The Next Line Of Text
+					oneline = reader.ReadLine();
+					// If The Line's Not null
+					if(oneline != null) 
+					{
+						// Split The Line On Spaces
+						splitter = oneline.Split();
+						// Save The X Value As A Float
+						rx = float.Parse(splitter[0],CultureInfo.CurrentCulture);
+						// Save The Y Value As A Float			
+						ry = float.Parse(splitter[1],CultureInfo.CurrentCulture);
+						// Save The Z Value As A Float
+						rz = float.Parse(splitter[2],CultureInfo.CurrentCulture);
+						// Sets PointObjects (k) points.x Value To rx
+						k.Points[vertloop].X = rx;
+						// Sets PointObjects (k) points.y Value To ry
+						k.Points[vertloop].Y = ry;
+						// Sets PointObjects (k) points.z Value To rz
+						k.Points[vertloop].Z = rz;
+					}
+				}
+
+				// If ver Is Greater Than maxver
+				// maxver Keeps Track Of The Highest Number Of 
+				// Vertices Used In Any Of The Objects
+				if(ver > maxver) 
+				{ 
+					// Set maxver Equal To ver
+					maxver = ver;  
+				}
+			}
+			catch(Exception e) 
+			{
+				// Handle Any Exceptions While Loading Object Data, Exit App
+				string errorMsg = "An Error Occurred While Loading And Parsing Object Data:\n\t" + filename + "\n" + "\n\nStack Trace:\n\t" + e.StackTrace + "\n";
+				MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+				throw;
+			}
+			finally 
+			{
+				if(reader != null) 
+				{
+					// Close The StreamReader
+					reader.Close();
+				}
+			}
+		}
+		#endregion LoadThing(string filename, ref Thing k)
+
+		#region AllocateThing(ref Thing thing, int number)
+		/// <summary>
+		/// Allocate memory for each object.
+		/// </summary>
+		/// <param name="thing">
+		/// The object.
+		/// </param>
+		/// <param name="number">
+		/// The number of points to allocate.
+		/// </param>
+		private void AllocateThing(ref Thing thing, int number) 
+		{
+			thing.Points = new Vertex[number];
+		}
+		#endregion AllocateThing(ref Thing thing, int number)
+
 		#endregion Lesson Setup
 
 		#region Render
@@ -190,35 +343,35 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected override void DrawGLScene() 
 		{ 
-			// Here's Where We Do All The Drawing
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Reset The View
-			Gl.glTranslatef(this.XPos, this.YPos, this.ZPos);  
+			Gl.glLoadIdentity();
 			// Translate The The Current Position To Start Drawing
-			Gl.glRotatef(this.RotationX, 1, 0, 0);
+			Gl.glTranslatef(this.XPos, this.YPos, this.ZPos);  
 			// Rotate On The X Axis By xrot
-			Gl.glRotatef(this.RotationY, 0, 1, 0);
+			Gl.glRotatef(this.RotationX, 1, 0, 0);
 			// Rotate On The Y Axis By yrot
-			Gl.glRotatef(this.RotationZ, 0, 0, 1);
+			Gl.glRotatef(this.RotationY, 0, 1, 0);
 			// Rotate On The Z Axis By zrot
+			Gl.glRotatef(this.RotationZ, 0, 0, 1);
 
+			// Increase xrot,yrot & zrot by xspeed, yspeed & zspeed
 			this.RotationX += this.XSpeed;
 			this.RotationY += this.YSpeed;
 			this.RotationZ += zspeed;
-			// Increase xrot,yrot & zrot by xspeed, yspeed & zspeed
 
-			float tx, ty, tz;
 			// Temp X, Y & Z Variables
-			Vertex q;
+			float tx, ty, tz;
 			// Holds Returned Calculated Values For One Vertex
+			Vertex q;
 
-			Gl.glBegin(Gl.GL_POINTS); 
 			// Begin Drawing Points
+			Gl.glBegin(Gl.GL_POINTS); 
+			// Loop Through All The Verts Of morph1 (All Objects Have
 			for(int i = 0; i < morph1.Verts; i++) 
 			{
-				// Loop Through All The Verts Of morph1 (All Objects Have
+				// If morph Is True Calculate Movement Otherwise Movement=0
 				if(morph) 
 				{
 					// The Same Amount Of Verts For Simplicity, Could Use maxver Also)
@@ -227,46 +380,46 @@ namespace SdlDotNet.Examples
 				else 
 				{
 					q.X = q.Y = q.Z = 0;
-					// If morph Is True Calculate Movement Otherwise Movement=0
 				}
-				helper.Points[i].X -= q.X; 
 				// Subtract q.x Units From helper.points[i].x (Move On X Axis)
-				helper.Points[i].Y -= q.Y;
+				helper.Points[i].X -= q.X; 
 				// Subtract q.y Units From helper.points[i].y (Move On Y Axis)
-				helper.Points[i].Z -= q.Z;
+				helper.Points[i].Y -= q.Y;
 				// Subtract q.z Units From helper.points[i].z (Move On Z Axis)
-				tx = helper.Points[i].X;
+				helper.Points[i].Z -= q.Z;
 				// Make Temp X Variable Equal To Helper's X Variable
-				ty = helper.Points[i].Y;
+				tx = helper.Points[i].X;
 				// Make Temp Y Variable Equal To Helper's Y Variable
-				tz = helper.Points[i].Z;
+				ty = helper.Points[i].Y;
 				// Make Temp Z Variable Equal To Helper's Z Variable
+				tz = helper.Points[i].Z;
 
-				Gl.glColor3f(0, 1, 1); 
 				// Set Color To A Bright Shade Of Off Blue
-				Gl.glVertex3f(tx, ty, tz); 
+				Gl.glColor3f(0, 1, 1); 
 				// Draw A Point At The Current Temp Values (Vertex)
-				Gl.glColor3f(0, 0.5f, 1);
+				Gl.glVertex3f(tx, ty, tz); 
 				// Darken Color A Bit
+				Gl.glColor3f(0, 0.5f, 1);
+				// Calculate Two Positions Ahead
 				tx -= 2 * q.X;
 				ty -= 2 * q.Y;
 				ty -= 2 * q.Y;
-				// Calculate Two Positions Ahead
-				Gl.glVertex3f(tx, ty, tz); 
 				// Draw A Second Point At The Newly Calculate Position
-				Gl.glColor3f(0, 0, 1);
+				Gl.glVertex3f(tx, ty, tz); 
 				// Set Color To A Very Dark Blue
+				Gl.glColor3f(0, 0, 1);
 				tx -= 2 * q.X;
 				ty -= 2 * q.Y;
 				ty -= 2 * q.Y;
 				// Calculate Two More Positions Ahead
 				Gl.glVertex3f(tx, ty, tz);
 				// Draw A Third Point At The Second New Position
+				// This Creates A Ghostly Tail As Points Move
+			
 			}
-			// This Creates A Ghostly Tail As Points Move
-			Gl.glEnd();
 			// Done Drawing Points
-
+			Gl.glEnd();
+			
 			// If We're Morphing And We Haven't 
 			// Gone Through All 200 Steps Increase Our Step Counter
 			// Otherwise Set Morphing To False, 
@@ -283,6 +436,33 @@ namespace SdlDotNet.Examples
 			}
 		}
 		#endregion DrawGLScene()
+
+		#region Vertex Calculate(int i)
+		/// <summary>
+		/// Calculates movement of points during morphing.
+		/// </summary>
+		/// <param name="i">
+		/// The number of the point to calculate.
+		/// </param>
+		/// <returns>
+		/// A Vertex.
+		/// </returns>
+		private Vertex Calculate(int i) 
+		{
+			// This Makes Points Move At A Speed So They All Get To 
+			// Their Destination At The Same Time
+			// Temporary Vertex Called a
+			Vertex a;
+			// a.X Value Equals Source X - Destination X Divided By Steps
+			a.X = (source.Points[i].X - destination.Points[i].X) / steps;
+			// a.Y Value Equals Source Y - Destination Y Divided By Steps
+			a.Y = (source.Points[i].Y - destination.Points[i].Y) / steps;
+			// a.Z Value Equals Source Z - Destination Z Divided By Steps
+			a.Z = (source.Points[i].Z - destination.Points[i].Z) / steps;
+			// Return The Results
+			return a; 
+		}
+		#endregion Vertex Calculate(int i)
 
 		#endregion Render
 
@@ -364,180 +544,5 @@ namespace SdlDotNet.Examples
 		}
 
 		#endregion Event Handlers
-
-		#region LoadThing(string filename, ref Thing k)
-		/// <summary>
-		/// Loads Object from a file.
-		/// </summary>
-		/// <param name="filename">
-		/// The file to load.
-		/// </param>
-		/// <param name="k">
-		/// The Object to save to.
-		/// </param>
-		private void LoadThing(string filename, ref Thing k) 
-		{
-			int ver;  
-			// Will Hold Vertice Count
-			float rx, ry, rz;
-			// Hold Vertex X, Y & Z Position
-			string oneline = "";
-			// The Line We've Read
-			string[] splitter;
-			// Array For Split Values
-			StreamReader reader = null;
-			// Our StreamReader
-			ASCIIEncoding encoding = new ASCIIEncoding();
-			// ASCII Encoding
-
-			try 
-			{
-				if(filename == null || filename.Length == 0) 
-				{  
-					// Make Sure A Filename Was Given
-					return; 
-					// If Not Return
-				}
-
-				string fileName1 = string.Format(CultureInfo.CurrentCulture,"Data{0}{1}", 
-					// Look For Data\Filename
-					Path.DirectorySeparatorChar, filename);
-				string fileName2 = string.Format(CultureInfo.CurrentCulture,"{0}{1}{0}{1}Data{1}{2}",
-					// Look For ..\..\Data\Filename
-					"..", Path.DirectorySeparatorChar, filename);
-
-				// Make Sure The File Exists In One Of The Usual Directories
-				if(!File.Exists(filename) && !File.Exists(fileName1) && !File.Exists(fileName2)) 
-				{
-					return;
-					// If Not Return Null
-				}
-
-				if(File.Exists(filename)) 
-				{
-					// Does The File Exist Here?
-					reader = new StreamReader(filename, encoding); 
-					// Open The File As ASCII Text
-				}
-				else if(File.Exists(fileName1)) 
-				{
-					// Does The File Exist Here?
-					reader = new StreamReader(fileName1, encoding);
-					// Open The File As ASCII Text
-				}
-				else if(File.Exists(fileName2)) 
-				{
-					// Does The File Exist Here?
-					reader = new StreamReader(fileName2, encoding);
-					// Open The File As ASCII Text
-				}
-
-				oneline = reader.ReadLine();
-				// Read The First Line
-				splitter = oneline.Split();
-				// Split The Line On Spaces
-
-				// The First Item In The Array 
-				// Will Contain The String "Vertices:", Which We Will Ignore
-				ver = Convert.ToInt32(splitter[1],CultureInfo.CurrentCulture);
-				// Save The Number Of Triangles To ver As An int
-				k.Verts = ver;
-				// Sets PointObjects (k) verts Variable To Equal The Value Of ver
-				AllocateThing(ref k, ver); 
-				// Jumps To Code That Allocates Ram To Hold The Object
-
-				for(int vertloop = 0; vertloop < ver; vertloop++) 
-				{ 
-					// Loop Through The Vertices
-					oneline = reader.ReadLine();
-					// Reads In The Next Line Of Text
-					if(oneline != null) 
-					{
-						// If The Line's Not null
-						splitter = oneline.Split();
-						// Split The Line On Spaces
-						rx = float.Parse(splitter[0],CultureInfo.CurrentCulture);
-						// Save The X Value As A Float
-
-						ry = float.Parse(splitter[1],CultureInfo.CurrentCulture);
-						// Save The Y Value As A Float
-						rz = float.Parse(splitter[2],CultureInfo.CurrentCulture);
-						// Save The Z Value As A Float
-						k.Points[vertloop].X = rx;
-						// Sets PointObjects (k) points.x Value To rx
-						k.Points[vertloop].Y = ry;
-						// Sets PointObjects (k) points.y Value To ry
-						k.Points[vertloop].Z = rz;
-						// Sets PointObjects (k) points.z Value To rz
-					}
-				}
-
-				if(ver > maxver) 
-				{ 
-					// If ver Is Greater Than maxver
-					// maxver Keeps Track Of The Highest Number Of 
-					// Vertices Used In Any Of The Objects
-					maxver = ver;  // Set maxver Equal To ver
-				}
-			}
-			catch(Exception e) 
-			{
-				// Handle Any Exceptions While Loading Object Data, Exit App
-				string errorMsg = "An Error Occurred While Loading And Parsing Object Data:\n\t" + filename + "\n" + "\n\nStack Trace:\n\t" + e.StackTrace + "\n";
-				MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-				throw;
-			}
-			finally 
-			{
-				if(reader != null) 
-				{
-					reader.Close();// Close The StreamReader
-				}
-			}
-		}
-		#endregion LoadThing(string filename, ref Thing k)
-
-		#region AllocateThing(ref Thing thing, int number)
-		/// <summary>
-		/// Allocate memory for each object.
-		/// </summary>
-		/// <param name="thing">
-		/// The object.
-		/// </param>
-		/// <param name="number">
-		/// The number of points to allocate.
-		/// </param>
-		private void AllocateThing(ref Thing thing, int number) 
-		{
-			thing.Points = new Vertex[number];
-		}
-		#endregion AllocateThing(ref Thing thing, int number)
-
-		#region Vertex Calculate(int i)
-		/// <summary>
-		/// Calculates movement of points during morphing.
-		/// </summary>
-		/// <param name="i">
-		/// The number of the point to calculate.
-		/// </param>
-		/// <returns>
-		/// A Vertex.
-		/// </returns>
-		private Vertex Calculate(int i) 
-		{
-			// This Makes Points Move At A Speed So They All Get To 
-			// Their Destination At The Same Time
-			Vertex a;
-			// Temporary Vertex Called a
-			a.X = (source.Points[i].X - destination.Points[i].X) / steps;
-			// a.X Value Equals Source X - Destination X Divided By Steps
-			a.Y = (source.Points[i].Y - destination.Points[i].Y) / steps;
-			// a.Y Value Equals Source Y - Destination Y Divided By Steps
-			a.Z = (source.Points[i].Z - destination.Points[i].Z) / steps;
-			// a.Z Value Equals Source Z - Destination Z Divided By Steps
-			return a; 
-			// Return The Results
-		}
-		#endregion Vertex Calculate(int i)
 	}
 }

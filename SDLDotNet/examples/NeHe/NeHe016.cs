@@ -55,7 +55,7 @@ namespace SdlDotNet.Examples
 		// Storage For Three Types Of Fog
 		int[] fogMode = {Gl.GL_EXP, Gl.GL_EXP2, Gl.GL_LINEAR};	
 		// Which Fog Mode To Use 
-		int fogfilter;										
+		int fogfilter;	
 		// Fog Color
 		float[] fogColor = {0.5f, 0.5f, 0.5f, 1.0f};	
 		
@@ -101,15 +101,15 @@ namespace SdlDotNet.Examples
 			LoadGLTextures();
 
 			// Enable Texture Mapping
-			Gl.glEnable(Gl.GL_TEXTURE_2D);									
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Enable Smooth Shading
-			Gl.glShadeModel(Gl.GL_SMOOTH);									
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
-			Gl.glClearColor(0.5f, 0.5f, 0.5f, 1.0f);						
+			Gl.glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 			// Depth Buffer Setup
-			Gl.glClearDepth(1.0f);											
+			Gl.glClearDepth(1.0f);		
 			// Enables Depth Testing
-			Gl.glEnable(Gl.GL_DEPTH_TEST);									
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			// The Type Of Depth Testing To Do
 			Gl.glDepthFunc(Gl.GL_LEQUAL);
 			// Really Nice Perspective Calculations					
@@ -127,20 +127,20 @@ namespace SdlDotNet.Examples
 			// Fog Mode
 			Gl.glFogi(Gl.GL_FOG_MODE, (int)this.fogMode[this.fogfilter]);	
 			// Set Fog Color
-			Gl.glFogfv(Gl.GL_FOG_COLOR, this.fogColor);						
+			Gl.glFogfv(Gl.GL_FOG_COLOR, this.fogColor);
 			// How Dense Will The Fog Be
-			Gl.glFogf(Gl.GL_FOG_DENSITY, 0.35f);							
+			Gl.glFogf(Gl.GL_FOG_DENSITY, 0.35f);	
 			// Fog Hint Value
-			Gl.glHint(Gl.GL_FOG_HINT, Gl.GL_DONT_CARE);						
+			Gl.glHint(Gl.GL_FOG_HINT, Gl.GL_DONT_CARE);
 			// Fog Start Depth
-			Gl.glFogf(Gl.GL_FOG_START, 1.0f);								
+			Gl.glFogf(Gl.GL_FOG_START, 1.0f);		
 			// Fog End Depth
 			Gl.glFogf(Gl.GL_FOG_END, 5.0f);	
 			// Enables GL_FOG					
-			Gl.glEnable(Gl.GL_FOG);											
+			Gl.glEnable(Gl.GL_FOG);		
 			
 			if (this.Light)	
-			{								
+			{		
 				// If lighting, enable it to start
 				Gl.glEnable(Gl.GL_LIGHTING);
 			}
@@ -215,7 +215,7 @@ namespace SdlDotNet.Examples
 		{
 			switch(e.Key)
 			{
-				// L, F and G.
+					// L, F and G.
 				case Key.L:
 					this.Light = !this.Light;
 					if (this.Light)
@@ -231,7 +231,7 @@ namespace SdlDotNet.Examples
 					Gl.glFogi(Gl.GL_FOG_MODE, (int)this.fogMode[this.fogfilter]);	
 					break;
 
-				// Zoom in cube with Page Up/Down
+					// Zoom in cube with Page Up/Down
 				case Key.PageUp:
 					this.DepthZ -= 0.02f;
 					break;
@@ -239,7 +239,7 @@ namespace SdlDotNet.Examples
 					this.DepthZ += 0.02f;
 					break;
 
-				// Rotate cube with arrows.
+					// Rotate cube with arrows.
 				case Key.UpArrow:
 					this.XSpeed -= 0.1f;
 					break;

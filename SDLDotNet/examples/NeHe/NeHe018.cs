@@ -35,7 +35,7 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 18: Quadrics
 	/// </summary>
 	public class NeHe018 : NeHe016
 	{
@@ -50,29 +50,36 @@ namespace SdlDotNet.Examples
 			{
 				return "Lesson 18: Quadrics";
 			}
-		}
-		bool light = true;				
-		// Lighting ON/OFF
+		}			
 
-		int part1;					
 		// Start Of Disc ( NEW )
-		int part2;					
+		int part1;					
 		// End Of Disc ( NEW )
-		int p1;						
+		int part2;					
 		// Increase 1 ( NEW )
-		int p2 = 1;						
+		int p1;						
 		// Increase 2 ( NEW )
+		int p2 = 1;						
+		
+		// Which Object To Draw
+		int obj;
 
 		Glu.GLUquadric quadratic;
-		// Storage For Our Quadratic Objects 
 
-		// Lighting components for the cube
-//		float[] LightAmbient =  {0.5f, 0.5f, 0.5f, 1.0f};
-//		float[] LightDiffuse =  {1.0f, 1.0f, 1.0f, 1.0f};
-//		float[] LightPosition = {0.0f, 0.0f, 2.0f, 1.0f};
-
-		int obj;
-		// Which Object To Draw
+		/// <summary>
+		/// Storage For Our Quadratic Objects 
+		/// </summary>
+		protected Glu.GLUquadric Quadratic
+		{
+			get
+			{
+				return quadratic;
+			}
+			set
+			{
+				quadratic = value;
+			}
+		}
 		
 		#endregion Fields	
 
@@ -115,45 +122,43 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(60,60);
 			LoadGLTextures();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Enable Smooth Shading
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
-			Gl.glClearDepth(1.0f);		
+			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 			// Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			Gl.glClearDepth(1.0f);		
 			// Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			// The Type Of Depth Testing To Do
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
 			// Really Nice Perspective Calculations
-
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT,  this.LightAmbient);
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
 			// Setup The Ambient Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE,  this.LightDiffuse);
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT,  this.LightAmbient);
 			// Setup The Diffuse Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, this.LightPosition);
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE,  this.LightDiffuse);
 			// Position The Light
-			Gl.glEnable(Gl.GL_LIGHT1);
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, this.LightPosition);
 			// Enable Light One
+			Gl.glEnable(Gl.GL_LIGHT1);
 
-			this.quadratic = Glu.gluNewQuadric();
 			// Create A Pointer To The Quadric Object (Return 0 If No Memory) (NEW)
-			Glu.gluQuadricNormals(this.quadratic, Glu.GLU_SMOOTH);
+			this.quadratic = Glu.gluNewQuadric();
 			// Create Smooth Normals (NEW)
-			Glu.gluQuadricTexture(this.quadratic, (byte)Gl.GL_TRUE);
+			Glu.gluQuadricNormals(this.quadratic, Glu.GLU_SMOOTH);
 			// Create Texture Coords (NEW)
+			Glu.gluQuadricTexture(this.quadratic, (byte)Gl.GL_TRUE);
 
-			if (this.light)	
+			if (this.Light)	
 			{
 				// If lighting, enable it to start
 				Gl.glEnable(Gl.GL_LIGHTING);
 			}
 		}
 
-		
 		#endregion Lesson Setup
 
 		#region Render
@@ -226,7 +231,7 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
-		/// 
+		/// Draw cube
 		/// </summary>
 		public void GlDrawCube()
 		{
@@ -279,8 +284,8 @@ namespace SdlDotNet.Examples
 			switch(e.Key)
 			{
 				case Key.L:
-					this.light = !this.light;
-					if (this.light)
+					this.Light = !this.Light;
+					if (this.Light)
 					{
 						Gl.glEnable(Gl.GL_LIGHTING);
 					}

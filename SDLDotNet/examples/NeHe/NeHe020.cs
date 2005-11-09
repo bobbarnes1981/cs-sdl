@@ -35,7 +35,7 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 20: Masking
 	/// </summary>
 	public class NeHe020 : NeHe019
 	{
@@ -51,11 +51,12 @@ namespace SdlDotNet.Examples
 				return "Lesson 20: Masking";
 			}
 		}
-		bool scene;				
+
 		// Which Scene To Draw
+		bool scene;				
 		bool masking = true;
-		float roll;				
 		// Rolling Texture
+		float roll;				
 
 		#endregion Fields
 
@@ -88,14 +89,14 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(0,0);
 			LoadGLTextures();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);									
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);									
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Enable Smooth Shading
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);						
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
-			Gl.glClearDepth(1.0f);											
+			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			// Depth Buffer Setup
+			Gl.glClearDepth(1.0f);		
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
 		}
 
@@ -112,127 +113,128 @@ namespace SdlDotNet.Examples
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glLoadIdentity();
 			
-			Gl.glTranslatef(0.0f, 0.0f, -2.0f);						
 			// Move Into The Screen 5 Units
+			Gl.glTranslatef(0.0f, 0.0f, -2.0f);
 
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);			
 			// Select Our Logo Texture
-			Gl.glBegin(Gl.GL_QUADS);									
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);			
 			// Start Drawing A Textured Quad
-			Gl.glTexCoord2f(0.0f, -this.roll+0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
+			Gl.glBegin(Gl.GL_QUADS);
 			// Bottom Left
-			Gl.glTexCoord2f(3.0f, -this.roll+0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
+			Gl.glTexCoord2f(0.0f, -this.roll+0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
 			// Bottom Right
-			Gl.glTexCoord2f(3.0f, -this.roll+3.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
+			Gl.glTexCoord2f(3.0f, -this.roll+0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
 			// Top Right
-			Gl.glTexCoord2f(0.0f, -this.roll+3.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
+			Gl.glTexCoord2f(3.0f, -this.roll+3.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
 			// Top Left
-			Gl.glEnd();											
+			Gl.glTexCoord2f(0.0f, -this.roll+3.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
 			// Done Drawing The Quad
+			Gl.glEnd();		
 
-			Gl.glEnable(Gl.GL_BLEND);									
 			// Enable Blending
-			Gl.glDisable(Gl.GL_DEPTH_TEST);							
+			Gl.glEnable(Gl.GL_BLEND);
 			// Disable Depth Testing
+			Gl.glDisable(Gl.GL_DEPTH_TEST);	
 
-			if (this.masking)										
-				// Is Masking Enabled?
-				Gl.glBlendFunc(Gl.GL_DST_COLOR, Gl.GL_ZERO);				
-			// Blend Screen Color With Zero (Black)
+			// Is Masking Enabled?
+			if (this.masking)	
+			{
+				// Blend Screen Color With Zero (Black)
+				Gl.glBlendFunc(Gl.GL_DST_COLOR, Gl.GL_ZERO);
+			}
 			
-			if (this.scene)											
-				// Are We Drawing The Second Scene?
+			// Are We Drawing The Second Scene?
+			if (this.scene)		
 			{
-				Gl.glTranslatef(0.0f, 0.0f, -1.0f);					
 				// Translate Into The Screen One Unit
-				Gl.glRotatef(this.roll*360, 0.0f, 0.0f, 1.0f);				
+				Gl.glTranslatef(0.0f, 0.0f, -1.0f);					
 				// Rotate On The Z Axis 360 Degrees.
-				if (this.masking)									
-					// Is Masking On?
+				Gl.glRotatef(this.roll*360, 0.0f, 0.0f, 1.0f);				
+				// Is Masking On?
+				if (this.masking)
 				{
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[3]);	
 					// Select The Second Mask Texture
-					Gl.glBegin(Gl.GL_QUADS);							
+					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[3]);	
 					// Start Drawing A Textured Quad
+					Gl.glBegin(Gl.GL_QUADS);	
+					// Bottom Left
 					Gl.glTexCoord2f(0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
-					// Bottom Left
+					// Bottom Right
 					Gl.glTexCoord2f(1.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
-					// Bottom Right
+					// Top Right
 					Gl.glTexCoord2f(1.0f, 1.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
-					// Top Right
+					// Top Left
 					Gl.glTexCoord2f(0.0f, 1.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
-					// Top Left
-					Gl.glEnd();									
 					// Done Drawing The Quad
+					Gl.glEnd();
 				}
 
-				Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);					
 				// Copy Image 2 Color To The Screen
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[4]);		
+				Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);					
 				// Select The Second Image Texture
-				Gl.glBegin(Gl.GL_QUADS);								
+				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[4]);		
 				// Start Drawing A Textured Quad
-				Gl.glTexCoord2f(0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
+				Gl.glBegin(Gl.GL_QUADS);		
 				// Bottom Left
-				Gl.glTexCoord2f(1.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
+				Gl.glTexCoord2f(0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
 				// Bottom Right
-				Gl.glTexCoord2f(1.0f, 1.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
+				Gl.glTexCoord2f(1.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
 				// Top Right
-				Gl.glTexCoord2f(0.0f, 1.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
+				Gl.glTexCoord2f(1.0f, 1.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
 				// Top Left
-				Gl.glEnd();										
+				Gl.glTexCoord2f(0.0f, 1.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
 				// Done Drawing The Quad
+				Gl.glEnd();	
 			}
-			else												
-				// Otherwise
+			else			
 			{
-				if (this.masking)									
-					// Is Masking On?
+				// Is Masking On?
+				if (this.masking)
 				{
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);	
 					// Select The First Mask Texture
-					Gl.glBegin(Gl.GL_QUADS);							
+					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);	
 					// Start Drawing A Textured Quad
-					Gl.glTexCoord2f(this.roll+0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
+					Gl.glBegin(Gl.GL_QUADS);	
 					// Bottom Left
-					Gl.glTexCoord2f(this.roll+4.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
+					Gl.glTexCoord2f(this.roll+0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
 					// Bottom Right
-					Gl.glTexCoord2f(this.roll+4.0f, 4.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
+					Gl.glTexCoord2f(this.roll+4.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
 					// Top Right
-					Gl.glTexCoord2f(this.roll+0.0f, 4.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
+					Gl.glTexCoord2f(this.roll+4.0f, 4.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
 					// Top Left
-					Gl.glEnd();									
+					Gl.glTexCoord2f(this.roll+0.0f, 4.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
 					// Done Drawing The Quad
+					Gl.glEnd();
 				}
 
-				Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);					
 				// Copy Image 1 Color To The Screen
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]);		
+				Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);					
 				// Select The First Image Texture
-				Gl.glBegin(Gl.GL_QUADS);								
+				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]);		
 				// Start Drawing A Textured Quad
-				Gl.glTexCoord2f(roll+0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
+				Gl.glBegin(Gl.GL_QUADS);		
 				// Bottom Left
-				Gl.glTexCoord2f(roll+4.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
+				Gl.glTexCoord2f(roll+0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
 				// Bottom Right
-				Gl.glTexCoord2f(roll+4.0f, 4.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
+				Gl.glTexCoord2f(roll+4.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
 				// Top Right
-				Gl.glTexCoord2f(roll+0.0f, 4.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
+				Gl.glTexCoord2f(roll+4.0f, 4.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
 				// Top Left
-				Gl.glEnd();										
+				Gl.glTexCoord2f(roll+0.0f, 4.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
 				// Done Drawing The Quad
+				Gl.glEnd();	
 			}
 
-			Gl.glEnable(Gl.GL_DEPTH_TEST);							
 			// Enable Depth Testing
-			Gl.glDisable(Gl.GL_BLEND);								
+			Gl.glEnable(Gl.GL_DEPTH_TEST);	
 			// Disable Blending
+			Gl.glDisable(Gl.GL_BLEND);		
 
-			this.roll += 0.002f;										
 			// Increase Our Texture Roll Variable
+			this.roll += 0.002f;	
+			// Is Roll Greater Than One
 			if (this.roll > 1.0f)
 			{
-				// Is Roll Greater Than One
 				this.roll -= 1.0f;
 			}
 		}

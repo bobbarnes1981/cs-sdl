@@ -249,8 +249,8 @@ namespace SdlDotNet.Examples
 		protected virtual void LoadGLFilteredTextures() 
 		{  
 			if (File.Exists(this.DataDirectory + this.TextureName[0]))
-			{																	
-				this.FilePath = "";															
+			{		
+				this.FilePath = "";
 			} 
 			// Status Indicator
 			Bitmap[] textureImage = new Bitmap[this.TextureName.Length];   
