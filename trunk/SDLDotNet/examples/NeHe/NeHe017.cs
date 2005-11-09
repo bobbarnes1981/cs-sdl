@@ -81,74 +81,74 @@ namespace SdlDotNet.Examples
 		{
 			LoadGLTextures();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);									
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);									
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Enable Smooth Shading
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);						
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
-			Gl.glClearDepth(1.0f);											
+			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 			// Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);									
+			Gl.glClearDepth(1.0f);		
 			// Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);									
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			// The Type Of Depth Testing To Do
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);						
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
 			// Select The Type Of Blending
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);
+			// Really Nice Perspective Calculations	
 			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);		
-			// Really Nice Perspective Calculations
 
 			BuildFont();
 		}
 
 		/// <summary>
-		/// 
+		/// Build Font
 		/// </summary>
 		protected override void BuildFont()
 		{
-			float cx;											
 			// Holds Our X Character Coord
-			float cy;											
+			float cx;		
 			// Holds Our Y Character Coord
-
-			this.FontBase = Gl.glGenLists(256);					
+			float cy;		
+			
 			// Creating 256 Display Lists
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);	
+			this.FontBase = Gl.glGenLists(256);				
 			// Select Our Font Texture
-			for (int loop=0; loop < 256; loop++)				
-				// Loop Through All 256 Lists
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+			// Loop Through All 256 Lists
+			for (int loop=0; loop < 256; loop++)			
 			{
-				cx = (float)(loop % 16) / 16.0f;				
 				// X Position Of Current Character
-				cy = (float)(loop / 16) / 16.0f;				
+				cx = (float)(loop % 16) / 16.0f;
 				// Y Position Of Current Character
+				cy = (float)(loop / 16) / 16.0f;
 
-				Gl.glNewList((uint)(this.FontBase+loop), Gl.GL_COMPILE);
 				// Start Building A List
-				Gl.glBegin(Gl.GL_QUADS);						
+				Gl.glNewList((uint)(this.FontBase+loop), Gl.GL_COMPILE);
 				// Use A Quad For Each Character
-				Gl.glTexCoord2f(cx, 1 - cy - 0.0625f);			
+				Gl.glBegin(Gl.GL_QUADS);
 				// Texture Coord (Bottom Left)
-				Gl.glVertex2i(0, 0);							
+				Gl.glTexCoord2f(cx, 1 - cy - 0.0625f);			
 				// Vertex Coord (Bottom Left)
-				Gl.glTexCoord2f(cx + 0.0625f, 1 - cy - 0.0625f);
+				Gl.glVertex2i(0, 0);	
 				// Texture Coord (Bottom Right)
-				Gl.glVertex2i(16, 0);							
+				Gl.glTexCoord2f(cx + 0.0625f, 1 - cy - 0.0625f);
 				// Vertex Coord (Bottom Right)
-				Gl.glTexCoord2f(cx + 0.0625f, 1 - cy);			
+				Gl.glVertex2i(16, 0);	
 				// Texture Coord (Top Right)
-				Gl.glVertex2i(16, 16);							
+				Gl.glTexCoord2f(cx + 0.0625f, 1 - cy);			
 				// Vertex Coord (Top Right)
-				Gl.glTexCoord2f(cx, 1 - cy);					
+				Gl.glVertex2i(16, 16);	
 				// Texture Coord (Top Left)
-				Gl.glVertex2i(0, 16);							
+				Gl.glTexCoord2f(cx, 1 - cy);					
 				// Vertex Coord (Top Left)
-				Gl.glEnd();										
+				Gl.glVertex2i(0, 16);	
 				// Done Building Our Quad (Character)
-				Gl.glTranslated(10, 0, 0);						
+				Gl.glEnd();	
 				// Move To The Right Of The Character
-				Gl.glEndList();									
+				Gl.glTranslated(10, 0, 0);
 				// Done Building The Display List
+				Gl.glEndList();
 			}
 		}		
 		
@@ -163,97 +163,91 @@ namespace SdlDotNet.Examples
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glLoadIdentity();
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);	
 			// Select Our Second Texture
-			Gl.glTranslatef(0.0f, 0.0f, -5.0f);						
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);	
 			// Move Into The Screen 5 Units
-			Gl.glRotatef(45.0f, 0.0f, 0.0f, 1.0f);					
+			Gl.glTranslatef(0.0f, 0.0f, -5.0f);
 			// Rotate On The Z Axis 45 Degrees (Clockwise)
-			Gl.glRotatef(this.Cnt1 * 30.0f, 1.0f, 1.0f, 0.0f);		
+			Gl.glRotatef(45.0f, 0.0f, 0.0f, 1.0f);					
 			// Rotate On The X & Y Axis By Cnt1 (Left To Right)
-			Gl.glDisable(Gl.GL_BLEND);								
+			Gl.glRotatef(this.Cnt1 * 30.0f, 1.0f, 1.0f, 0.0f);		
 			// Disable Blending Before We Draw In 3D
-			Gl.glColor3f(1.0f, 1.0f, 1.0f);							
+			Gl.glDisable(Gl.GL_BLEND);		
 			// Bright White
-			Gl.glBegin(Gl.GL_QUADS);								
+			Gl.glColor3f(1.0f, 1.0f, 1.0f);	
 			// Draw Our First Texture Mapped Quad
-			Gl.glTexCoord2d(0.0f, 0.0f);						
+			Gl.glBegin(Gl.GL_QUADS);		
 			// First Texture Coord
-			Gl.glVertex2f(-1.0f, 1.0f);							
+			Gl.glTexCoord2d(0.0f, 0.0f);
 			// First Vertex
-			Gl.glTexCoord2d(1.0f, 0.0f);						
+			Gl.glVertex2f(-1.0f, 1.0f);	
 			// Second Texture Coord
-			Gl.glVertex2f( 1.0f, 1.0f);							
+			Gl.glTexCoord2d(1.0f, 0.0f);
 			// Second Vertex
-			Gl.glTexCoord2d(1.0f, 1.0f);						
+			Gl.glVertex2f( 1.0f, 1.0f);	
 			// Third Texture Coord
-			Gl.glVertex2f( 1.0f, -1.0f);						
+			Gl.glTexCoord2d(1.0f, 1.0f);
 			// Third Vertex
-			Gl.glTexCoord2d(0.0f, 1.0f);						
+			Gl.glVertex2f( 1.0f, -1.0f);
 			// Fourth Texture Coord
-			Gl.glVertex2f(-1.0f, -1.0f);						
+			Gl.glTexCoord2d(0.0f, 1.0f);
 			// Fourth Vertex
-			Gl.glEnd();												
+			Gl.glVertex2f(-1.0f, -1.0f);
 			// Done Drawing The First Quad
-			Gl.glRotatef(90.0f, 1.0f, 1.0f, 0.0f);					
+			Gl.glEnd();			
 			// Rotate On The X & Y Axis By 90 Degrees (Left To Right)
-			Gl.glBegin(Gl.GL_QUADS);									
+			Gl.glRotatef(90.0f, 1.0f, 1.0f, 0.0f);					
 			// Draw Our Second Texture Mapped Quad
-			Gl.glTexCoord2d(0.0f, 0.0f);						
+			Gl.glBegin(Gl.GL_QUADS);
 			// First Texture Coord
-			Gl.glVertex2f(-1.0f, 1.0f);							
+			Gl.glTexCoord2d(0.0f, 0.0f);
 			// First Vertex
-			Gl.glTexCoord2d(1.0f, 0.0f);						
+			Gl.glVertex2f(-1.0f, 1.0f);	
 			// Second Texture Coord
-			Gl.glVertex2f( 1.0f, 1.0f);							
+			Gl.glTexCoord2d(1.0f, 0.0f);
 			// Second Vertex
-			Gl.glTexCoord2d(1.0f, 1.0f);						
+			Gl.glVertex2f( 1.0f, 1.0f);	
 			// Third Texture Coord
-			Gl.glVertex2f( 1.0f, -1.0f);						
+			Gl.glTexCoord2d(1.0f, 1.0f);
 			// Third Vertex
-			Gl.glTexCoord2d(0.0f, 1.0f);						
+			Gl.glVertex2f( 1.0f, -1.0f);
 			// Fourth Texture Coord
-			Gl.glVertex2f(-1.0f, -1.0f);						
+			Gl.glTexCoord2d(0.0f, 1.0f);
 			// Fourth Vertex
-			Gl.glEnd();												
+			Gl.glVertex2f(-1.0f, -1.0f);
 			// Done Drawing Our Second Quad
-			Gl.glEnable(Gl.GL_BLEND);									
+			Gl.glEnd();			
 			// Enable Blending
-
-			Gl.glLoadIdentity();									
+			Gl.glEnable(Gl.GL_BLEND);
 			// Reset The View
+			Gl.glLoadIdentity();		
 			// Pulsing Colors Based On Text Position
 			Gl.glColor3f(1.0f*(float)Math.Cos(this.Cnt1), 1.0f*(float)Math.Sin(this.Cnt2), 1.0f-0.5f*(float)Math.Cos(this.Cnt1+this.Cnt2));
-			GlPrint((int)(280+250*Math.Cos(this.Cnt1)), (int)(235+200*Math.Sin(this.Cnt2)), "NeHe", 0);
 			// Pr(int) Gl.GL Text To The Screen
+			GlPrint((int)(280+250*Math.Cos(this.Cnt1)), (int)(235+200*Math.Sin(this.Cnt2)), "NeHe", 0);
 
 			Gl.glColor3f(1.0f*(float)(Math.Sin(this.Cnt2)), 1.0f-0.5f*(float)(Math.Cos(this.Cnt1+this.Cnt2)), 1.0f*(float)(Math.Cos(this.Cnt1)));
-			GlPrint((int)(280+230*Math.Cos(this.Cnt2)), (int)(235+200*Math.Sin(this.Cnt1)), "OpenGL", 0);
 			// Pr(int) Gl.GL Text To The Screen
-
-			Gl.glColor3f(0.0f, 0.0f, 1.0f);
+			GlPrint((int)(280+230*Math.Cos(this.Cnt2)), (int)(235+200*Math.Sin(this.Cnt1)), "OpenGL", 0);
 			// Set Color To Blue
+			Gl.glColor3f(0.0f, 0.0f, 1.0f);
 			GlPrint((int)(240+200*Math.Cos((this.Cnt2+this.Cnt1)/5)), 2, "Giuseppe D'Agata", 0);
-
-			Gl.glColor3f(1.0f, 1.0f, 1.0f);
 			// Set Color To White
+			Gl.glColor3f(1.0f, 1.0f, 1.0f);
 			GlPrint((int)(242+200*Math.Cos((this.Cnt2+this.Cnt1)/5)), 2, "Giuseppe D'Agata", 0);
-
-
-			this.Cnt1 += 0.01f;
 			// Increase The First Counter
+			this.Cnt1 += 0.01f;
 			this.Cnt2 += 0.0081f;	
 		}
 
 		/// <summary>
-		/// 
+		/// Print to screen
 		/// </summary>
 		/// <param name="displayText">Text to display</param>
 		/// <param name="positionX">X position to display the text</param>
 		/// <param name="positionY">Y position to display the text</param>
 		/// <param name="characterSet"></param>
 		public void GlPrint(int positionX, int positionY, string displayText, int characterSet)	
-			// Where The Printing Happens
 		{
 			if (displayText == null || displayText.Length == 0)
 			{
@@ -264,40 +258,40 @@ namespace SdlDotNet.Examples
 			{
 				characterSet = 1;
 			}
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, Texture[0]);			
 			// Select Our Font Texture
-			Gl.glDisable(Gl.GL_DEPTH_TEST);							
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, Texture[0]);			
 			// Disables Depth Testing
-			Gl.glMatrixMode(Gl.GL_PROJECTION);						
+			Gl.glDisable(Gl.GL_DEPTH_TEST);	
 			// Select The Projection Matrix
-			Gl.glPushMatrix();										
+			Gl.glMatrixMode(Gl.GL_PROJECTION);
 			// Store The Projection Matrix
-			Gl.glLoadIdentity();									
+			Gl.glPushMatrix();	
 			// Reset The Projection Matrix
-			Gl.glOrtho(0, 640, 0, 480, -1, 1);						
+			Gl.glLoadIdentity();
 			// Set Up An Ortho Screen
-			Gl.glMatrixMode(Gl.GL_MODELVIEW);						
+			Gl.glOrtho(0, 640, 0, 480, -1, 1);
 			// Select The Modelview Matrix
-			Gl.glPushMatrix();										
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			// Store The Modelview Matrix
-			Gl.glLoadIdentity();									
+			Gl.glPushMatrix();	
 			// Reset The Modelview Matrix
-			Gl.glTranslated(positionX, positionY,0);									
+			Gl.glLoadIdentity();
 			// Position The Text (0,0 - Bottom Left)
-			Gl.glListBase(this.FontBase - 32 + (128 * characterSet));	
+			Gl.glTranslated(positionX, positionY,0);		
 			// Choose The Font Set (0 or 1)
-			Gl.glCallLists(displayText.Length, Gl.GL_UNSIGNED_BYTE, displayText);	
+			Gl.glListBase(this.FontBase - 32 + (128 * characterSet));	
 			// Write The Text To The Screen
-			Gl.glMatrixMode(Gl.GL_PROJECTION);						
+			Gl.glCallLists(displayText.Length, Gl.GL_UNSIGNED_BYTE, displayText);	
 			// Select The Projection Matrix
-			Gl.glPopMatrix();										
+			Gl.glMatrixMode(Gl.GL_PROJECTION);
 			// Restore The Old Projection Matrix
-			Gl.glMatrixMode(Gl.GL_MODELVIEW);						
+			Gl.glPopMatrix();	
 			// Select The Modelview Matrix
-			Gl.glPopMatrix();										
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			// Restore The Old Projection Matrix
-			Gl.glEnable(Gl.GL_DEPTH_TEST);							
-			// Enables Depth Testing
+			Gl.glPopMatrix();		
+			// Enables Depth Testing					
+			Gl.glEnable(Gl.GL_DEPTH_TEST);	
 		}
 
 		#endregion Render

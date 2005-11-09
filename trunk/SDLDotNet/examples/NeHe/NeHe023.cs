@@ -36,7 +36,7 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 23: Sphere Mapping, Multi-Texturing and Extensions
 	/// </summary>
 	public class NeHe023 : NeHe020
 	{
@@ -52,12 +52,9 @@ namespace SdlDotNet.Examples
 				return "Lesson 23: Sphere Mapping, Multi-Texturing and Extensions";
 			}
 		}
-		bool light; 
-		// Lighting ON/OFF
-		Glu.GLUquadric quadratic; 
-		// Storage For Our Quadratic Objects
-		int objectToDraw = 1; 
+
 		// Which Object To Draw
+		int objectToDraw = 1; 
 		
 		#endregion Fields
 		
@@ -68,7 +65,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public NeHe023()
 		{
-			// Storage For 6 Textures (MODIFIED)
+			// Storage For 6 Textures
 			this.Texture = new int[6];
 			this.TextureName = new string[2];
 			this.TextureName[0] = "NeHe023.BG.bmp";
@@ -101,44 +98,43 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(150,50);
 			LoadGLFilteredTextures();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);   
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);   
+			Gl.glEnable(Gl.GL_TEXTURE_2D);   
 			// Enable Smooth Shading
-			Gl.glClearColor(0, 0, 0, 0.5f);  
+			Gl.glShadeModel(Gl.GL_SMOOTH);   
 			// Black Background
-			Gl.glClearDepth(1);
+			Gl.glClearColor(0, 0, 0, 0.5f);  
 			// Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);   
+			Gl.glClearDepth(1);
 			// Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			Gl.glEnable(Gl.GL_DEPTH_TEST);   
 			// The Type Of Depth Testing To Do
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
 			// Really Nice Perspective Calculations
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST); 
 
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, LightAmbient);
 			// Setup The Ambient Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, LightDiffuse);
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, LightAmbient);
 			// Setup The Diffuse Light
-			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION,LightPosition);   
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, LightDiffuse);
 			// Position The Light
-			Gl.glEnable(Gl.GL_LIGHT1); 
+			Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION,LightPosition);   
 			// Enable Light One
+			Gl.glEnable(Gl.GL_LIGHT1); 
 
-			quadratic = Glu.gluNewQuadric(); 
 			// Create A Pointer To The Quadric Object (Return 0 If No Memory)
-			Glu.gluQuadricNormals(quadratic, Glu.GLU_SMOOTH);   
+			this.Quadratic = Glu.gluNewQuadric(); 
 			// Create Smooth Normals 
-			Glu.gluQuadricTexture(quadratic, Gl.GL_TRUE);   
+			Glu.gluQuadricNormals(this.Quadratic, Glu.GLU_SMOOTH);   
 			// Create Texture Coords 
+			Glu.gluQuadricTexture(this.Quadratic, Gl.GL_TRUE);   
 
-			Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
 			// Set The Texture Generation Mode For S To Sphere Mapping (NEW)
-			Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
+			Gl.glTexGeni(Gl.GL_S, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
 			// Set The Texture Generation Mode For T To Sphere Mapping (NEW)
+			Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_SPHERE_MAP);
 		}
 
-		
 		#endregion Lesson Setup
 
 		#region Render
@@ -148,20 +144,20 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected override void DrawGLScene()
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();   
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Reset The View
+			Gl.glLoadIdentity();   
 
 			Gl.glTranslatef(0, 0, this.DepthZ);
 
-			Gl.glEnable(Gl.GL_TEXTURE_GEN_S);
 			// Enable Texture Coord Generation For S (NEW)
-			Gl.glEnable(Gl.GL_TEXTURE_GEN_T);
+			Gl.glEnable(Gl.GL_TEXTURE_GEN_S);
 			// Enable Texture Coord Generation For T (NEW)
+			Gl.glEnable(Gl.GL_TEXTURE_GEN_T);
 
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter + (this.Filter + 1)]); 
 			// This Will Select The Sphere Map
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter + (this.Filter + 1)]); 
 			Gl.glPushMatrix();
 			Gl.glRotatef(this.RotationX, 1, 0, 0);
 			Gl.glRotatef(this.RotationY, 0, 1, 0);
@@ -171,28 +167,28 @@ namespace SdlDotNet.Examples
 					GlDrawCube();
 					break;
 				case 1:
-					Gl.glTranslatef(0, 0, -1.5f);
 					// Center The Cylinder
-					Glu.gluCylinder(quadratic, 1, 1, 3, 32, 32);
+					Gl.glTranslatef(0, 0, -1.5f);
 					// A Cylinder With A Radius Of 0.5 And A Height Of 2
+					Glu.gluCylinder(this.Quadratic, 1, 1, 3, 32, 32);
 					break;
 				case 2:
-					Glu.gluSphere(quadratic, 1.3, 32, 32);  
 					// Draw A Sphere With A Radius Of 1 And 16 Longitude And 16 Latitude Segments
+					Glu.gluSphere(this.Quadratic, 1.3, 32, 32);  
 					break;
 				case 3:
-					Gl.glTranslatef(0, 0, -1.5f);
 					// Center The Cone
-					Glu.gluCylinder(quadratic, 1, 0, 3, 32, 32);
+					Gl.glTranslatef(0, 0, -1.5f);
 					// A Cone With A Bottom Radius Of .5 And A Height Of 2
+					Glu.gluCylinder(this.Quadratic, 1, 0, 3, 32, 32);
 					break;
 			};
 			Gl.glPopMatrix();
 			Gl.glDisable(Gl.GL_TEXTURE_GEN_S);
 			Gl.glDisable(Gl.GL_TEXTURE_GEN_T);
 
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter * 2]);
 			// This Will Select The BG Maps...
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter * 2]);
 			Gl.glPushMatrix();
 			Gl.glTranslatef(0, 0, -24);
 			Gl.glBegin(Gl.GL_QUADS);
@@ -217,11 +213,15 @@ namespace SdlDotNet.Examples
 			switch(e.Key)
 			{
 				case Key.L:
-					light = !light;
-					if(light)
+					this.Light = !this.Light;
+					if(this.Light)
+					{
 						Gl.glDisable(Gl.GL_LIGHTING);
+					}
 					else 
+					{
 						Gl.glEnable(Gl.GL_LIGHTING);
+					}
 					break;
 				case Key.F:
 					this.Filter += 1;
@@ -232,7 +232,9 @@ namespace SdlDotNet.Examples
 					break;
 				case Key.Space:
 					if(++objectToDraw > 3) 
+					{
 						objectToDraw = 0;
+					}
 					break;
 				case Key.PageUp:
 					this.DepthZ -= 0.02f;

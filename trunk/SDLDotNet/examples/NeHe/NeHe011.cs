@@ -83,15 +83,15 @@ namespace SdlDotNet.Examples
 			LoadGLTextures();
 
 			// Enable Texture Mapping
-			Gl.glEnable(Gl.GL_TEXTURE_2D);									
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Enable Smooth Shading
-			Gl.glShadeModel(Gl.GL_SMOOTH);									
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);						
+			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 			// Depth Buffer Setup
-			Gl.glClearDepth(1.0f);											
+			Gl.glClearDepth(1.0f);		
 			// Enables Depth Testing
-			Gl.glEnable(Gl.GL_DEPTH_TEST);									
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			// The Type Of Depth Testing To Do
 			Gl.glDepthFunc(Gl.GL_LEQUAL);		
 			// Really Nice Perspective Calculations					
@@ -99,7 +99,7 @@ namespace SdlDotNet.Examples
 			// Back Face Is Solid
 			Gl.glPolygonMode(Gl.GL_BACK, Gl.GL_FILL);
 			// Front Face Is Made Of Lines
-			Gl.glPolygonMode(Gl.GL_FRONT, Gl.GL_LINE);						
+			Gl.glPolygonMode(Gl.GL_FRONT, Gl.GL_LINE);
 			
 			this.points = new float[45][][];
 			for (int i=0; i < this.points.Length; i++)

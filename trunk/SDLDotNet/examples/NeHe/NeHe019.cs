@@ -36,7 +36,7 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 19: Particle Engine Using Triangle Strips
 	/// </summary>
 	public class NeHe019 : NeHe018
 	{
@@ -70,8 +70,23 @@ namespace SdlDotNet.Examples
 		int delay;					
 		// Random number generator
 		Random rand = new Random();		
+
+		Particle[] particle = new Particle[MaxParticles];
+
+		float[][] colors = new float[12][] 
+{
+	// Rainbow Of Colors
+	new float[3] {1.0f,0.5f,0.5f}, new float[3] {1.0f,0.75f,0.5f}, 
+	new float[3] {1.0f,1.0f,0.5f}, new float[3] {0.75f,1.0f,0.5f},
+	new float[3] {0.5f,1.0f,0.5f}, new float[3] {0.5f,1.0f,0.75f}, 
+	new float[3] {0.5f,1.0f,1.0f}, new float[3] {0.5f,0.75f,1.0f},
+	new float[3] {0.5f,0.5f,1.0f}, new float[3] {0.75f,0.5f,1.0f}, 
+	new float[3] {1.0f,0.5f,1.0f}, new float[3] {1.0f,0.5f,0.75f} 
+};
 		
 		#endregion Fields	
+
+		#region Structs and Classes
 		
 		/// <summary>
 		/// Create A Structure For Particle
@@ -132,7 +147,7 @@ namespace SdlDotNet.Examples
 			float blue;
 			
 			/// <summary>
-			/// 
+			/// Blue color
 			/// </summary>
 			public float Blue
 			{
@@ -147,7 +162,7 @@ namespace SdlDotNet.Examples
 			}
 
 			/// <summary>
-			/// 
+			/// Green color
 			/// </summary>
 			public float Green
 			{
@@ -162,7 +177,7 @@ namespace SdlDotNet.Examples
 			}
 
 			/// <summary>
-			/// 
+			/// Red Color
 			/// </summary>
 			public float Red 
 			{
@@ -175,12 +190,11 @@ namespace SdlDotNet.Examples
 					red = value;
 				}
 			}
-			// Color
 
 			float positionX;
 			float positionY;
 			float positionZ;
-			// 
+
 			/// <summary>
 			/// Position
 			/// </summary>
@@ -229,7 +243,7 @@ namespace SdlDotNet.Examples
 			float directionZ;
 			
 			/// <summary>
-			/// 
+			/// Direction
 			/// </summary>
 			public float DirectionX 
 			{
@@ -244,7 +258,7 @@ namespace SdlDotNet.Examples
 			}
 
 			/// <summary>
-			/// 
+			/// Direction
 			/// </summary>
 			public float DirectionY 
 			{
@@ -259,7 +273,7 @@ namespace SdlDotNet.Examples
 			}
 
 			/// <summary>
-			/// 
+			/// Direction
 			/// </summary>
 			public float DirectionZ 
 			{
@@ -273,7 +287,6 @@ namespace SdlDotNet.Examples
 				}
 			}
 			
-			// Direction
 			/// <summary>
 			/// 
 			/// </summary>
@@ -327,18 +340,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		Particle[] particle = new Particle[MaxParticles];
-
-		float[][] colors = new float[12][] 
-{
-	// Rainbow Of Colors
-	new float[3] {1.0f,0.5f,0.5f}, new float[3] {1.0f,0.75f,0.5f}, 
-	new float[3] {1.0f,1.0f,0.5f}, new float[3] {0.75f,1.0f,0.5f},
-	new float[3] {0.5f,1.0f,0.5f}, new float[3] {0.5f,1.0f,0.75f}, 
-	new float[3] {0.5f,1.0f,1.0f}, new float[3] {0.5f,0.75f,1.0f},
-	new float[3] {0.5f,0.5f,1.0f}, new float[3] {0.75f,0.5f,1.0f}, 
-	new float[3] {1.0f,0.5f,1.0f}, new float[3] {1.0f,0.5f,0.75f} 
-};
+		#endregion Structs and Classes
 
 		#region Constructor
 
@@ -365,61 +367,58 @@ namespace SdlDotNet.Examples
 			Keyboard.EnableKeyRepeat(50,10);
 			LoadGLTextures();
 
-			Gl.glEnable(Gl.GL_TEXTURE_2D);									
 			// Enable Texture Mapping
-			Gl.glShadeModel(Gl.GL_SMOOTH);									
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			// Enable Smooth Shading
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);						
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
-			Gl.glClearDepth(1.0f);											
+			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 			// Depth Buffer Setup
-			Gl.glDisable(Gl.GL_DEPTH_TEST);									
+			Gl.glClearDepth(1.0f);		
 			// Enables Depth Testing
-			Gl.glEnable(Gl.GL_BLEND);										
+			Gl.glDisable(Gl.GL_DEPTH_TEST);
 			// Enable Blending
-			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);						
+			Gl.glEnable(Gl.GL_BLEND);	
 			// Type Of Blending To Perform
+			Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);		
+			// Really Nice Perspective Calculations	
 			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);		
-			// Really Nice Perspective Calculations
-
-			Gl.glHint(Gl.GL_POINT_SMOOTH_HINT, Gl.GL_NICEST);				
 			// Really Nice Point Smoothing
-
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);			
+			Gl.glHint(Gl.GL_POINT_SMOOTH_HINT, Gl.GL_NICEST);
 			// Select Our Texture
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);			
 
+			// Initials All The Textures
 			for (int loop=0; loop < particle.Length; loop++)		
-				// Initials All The Textures
 			{
 				particle[loop] = new Particle();
-				particle[loop].Active = true;								
 				// Make All The Particles Active
-				particle[loop].Life = 1.0f;								
+				particle[loop].Active = true;		
 				// Give All The this.particles Full Life
-				particle[loop].Fade = (float)(this.rand.Next(100))/1000.0f+0.003f;	
+				particle[loop].Life = 1.0f;		
 				// Random Fade Speed
+				particle[loop].Fade = (float)(this.rand.Next(100))/1000.0f+0.003f;	
+				// Select Red Rainbow Color
 				particle[loop].Red = colors[loop*(12/MaxParticles)][0];	
 				// Select Red Rainbow Color
 				particle[loop].Green = colors[loop*(12/MaxParticles)][1];	
 				// Select Red Rainbow Color
 				particle[loop].Blue = colors[loop*(12/MaxParticles)][2];	
-				// Select Red Rainbow Color
-				particle[loop].DirectionX = (float)((this.rand.Next(50))-26.0f)*10.0f;	
 				// Random Speed On X Axis
-				particle[loop].DirectionY = (float)((this.rand.Next(50))-25.0f)*10.0f;	
+				particle[loop].DirectionX = (float)((this.rand.Next(50))-26.0f)*10.0f;	
 				// Random Speed On Y Axis
-				particle[loop].DirectionZ = (float)((this.rand.Next(50))-25.0f)*10.0f;	
+				particle[loop].DirectionY = (float)((this.rand.Next(50))-25.0f)*10.0f;	
 				// Random Speed On Z Axis
-				particle[loop].GravityX = 0.0f;									
+				particle[loop].DirectionZ = (float)((this.rand.Next(50))-25.0f)*10.0f;	
 				// Set Horizontal Pull To Zero
-				particle[loop].GravityY = -0.8f;									
+				particle[loop].GravityX = 0.0f;
 				// Set Vertical Pull Downward
-				particle[loop].GravityZ = 0.0f;									
-				// Set Pull On Z Axis To Zero
+				particle[loop].GravityY = -0.8f;	
+				// Set Pull On Z Axis To Zero				
+				particle[loop].GravityZ = 0.0f;
 			}
 		}
 
-		
 		#endregion Lesson Setup
 
 		#region Render
@@ -432,87 +431,86 @@ namespace SdlDotNet.Examples
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glLoadIdentity();
 			
+			// Loop Through All The Particles
 			for (int loop=0; loop < particle.Length; loop++)	
-				// Loop Through All The Particles
 			{
-				if (this.particle[loop].Active)							
-					// If The Particle Is Active
+				// If The Particle Is Active
+				if (this.particle[loop].Active)	
 				{
-					float x = this.particle[loop].PositionX;					
 					// Grab Our Particle X Position
-					float y = this.particle[loop].PositionY;					
+					float x = this.particle[loop].PositionX;					
 					// Grab Our Particle Y Position
-					float z = this.particle[loop].PositionZ+zoom;				
+					float y = this.particle[loop].PositionY;
 					// Particle Z Pos + Zoom
+					float z = this.particle[loop].PositionZ+zoom;				
 
 					// Draw The Particle Using Our RGB Values, Fade The Particle Based On It's Life
 					Gl.glColor4f(this.particle[loop].Red, this.particle[loop].Green, this.particle[loop].Blue, this.particle[loop].Life);
 
-					Gl.glBegin(Gl.GL_TRIANGLE_STRIP);						
 					// Build Quad From A TrianGL.gle Strip
-					Gl.glTexCoord2d(1, 1); Gl.glVertex3f(x+0.5f, y+0.5f, z); 
+					Gl.glBegin(Gl.GL_TRIANGLE_STRIP);
 					// Top Right
-					Gl.glTexCoord2d(0, 1); Gl.glVertex3f(x-0.5f, y+0.5f, z); 
+					Gl.glTexCoord2d(1, 1); Gl.glVertex3f(x+0.5f, y+0.5f, z); 
 					// Top Left
-					Gl.glTexCoord2d(1, 0); Gl.glVertex3f(x+0.5f, y-0.5f, z); 
+					Gl.glTexCoord2d(0, 1); Gl.glVertex3f(x-0.5f, y+0.5f, z); 
 					// Bottom Right
-					Gl.glTexCoord2d(0, 0); Gl.glVertex3f(x-0.5f, y-0.5f, z); 
+					Gl.glTexCoord2d(1, 0); Gl.glVertex3f(x+0.5f, y-0.5f, z); 
 					// Bottom Left
-					Gl.glEnd();										
+					Gl.glTexCoord2d(0, 0); Gl.glVertex3f(x-0.5f, y-0.5f, z); 
 					// Done Building TrianGL.gle Strip
+					Gl.glEnd();
 
-					this.particle[loop].PositionX += this.particle[loop].DirectionX/(slowdown*1000);
 					// Move On The X Axis By X Speed
-					this.particle[loop].PositionY += this.particle[loop].DirectionY/(slowdown*1000);
+					this.particle[loop].PositionX += this.particle[loop].DirectionX/(slowdown*1000);
 					// Move On The Y Axis By Y Speed
-					this.particle[loop].PositionZ += this.particle[loop].DirectionZ/(slowdown*1000);
+					this.particle[loop].PositionY += this.particle[loop].DirectionY/(slowdown*1000);
 					// Move On The Z Axis By Z Speed
+					this.particle[loop].PositionZ += this.particle[loop].DirectionZ/(slowdown*1000);
 
-					this.particle[loop].DirectionX += this.particle[loop].GravityX;			
 					// Take Pull On X Axis Into Account
-					this.particle[loop].DirectionY += this.particle[loop].GravityY;			
+					this.particle[loop].DirectionX += this.particle[loop].GravityX;		
 					// Take Pull On Y Axis Into Account
-					this.particle[loop].DirectionZ += this.particle[loop].GravityZ;			
+					this.particle[loop].DirectionY += this.particle[loop].GravityY;	
 					// Take Pull On Z Axis Into Account
-					this.particle[loop].Life -= this.particle[loop].Fade;		
+					this.particle[loop].DirectionZ += this.particle[loop].GravityZ;
 					// Reduce Particles Life By 'Fade'
+					this.particle[loop].Life -= this.particle[loop].Fade;
 
+					// If Particle Is Burned Out
 					if (this.particle[loop].Life < 0.0f)					
-						// If Particle Is Burned Out
 					{
-						this.particle[loop].Life = 1.0f;					
 						// Give It New Life
-						this.particle[loop].Fade = (float)(this.rand.Next(100))/1000.0f+0.003f;	
+						this.particle[loop].Life = 1.0f;					
 						// Random Fade Value
-						this.particle[loop].PositionX = 0.0f;						
+						this.particle[loop].Fade = (float)(this.rand.Next(100))/1000.0f+0.003f;	
 						// Center On X Axis
-						this.particle[loop].PositionY = 0.0f;						
+						this.particle[loop].PositionX = 0.0f;
 						// Center On Y Axis
-						this.particle[loop].PositionZ = 0.0f;						
+						this.particle[loop].PositionY = 0.0f;
 						// Center On Z Axis
-						this.particle[loop].DirectionX = this.XSpeed+(float)(this.rand.Next(60)-32.0f);	
+						this.particle[loop].PositionZ = 0.0f;
 						// X Axis Speed And Direction
-						this.particle[loop].DirectionY = this.YSpeed+(float)(this.rand.Next(60)-30.0f);	
+						this.particle[loop].DirectionX = this.XSpeed+(float)(this.rand.Next(60)-32.0f);	
 						// Y Axis Speed And Direction
-						this.particle[loop].DirectionZ = (float)(this.rand.Next(60)-30.0f);	
+						this.particle[loop].DirectionY = this.YSpeed+(float)(this.rand.Next(60)-30.0f);	
 						// Z Axis Speed And Direction
-						this.particle[loop].Red = colors[this.col][0];			
-						
+						this.particle[loop].DirectionZ = (float)(this.rand.Next(60)-30.0f);	
 						// Select Red From Color Table
-						this.particle[loop].Green = colors[this.col][1];			
+						this.particle[loop].Red = colors[this.col][0];			
 						// Select Green From Color Table
-						this.particle[loop].Blue = colors[this.col][2];			
+						this.particle[loop].Green = colors[this.col][1];
 						// Select Blue From Color Table
+						this.particle[loop].Blue = colors[this.col][2];	
 					}
 				}
 			}
 
 			if (this.rainbow && (this.delay > 25))
 			{
-				this.delay = 0;
 				// Reset The Rainbow Color Cycling Delay
-				this.col = (this.col + 1) % 12;
+				this.delay = 0;
 				// Change The Particle Color
+				this.col = (this.col + 1) % 12;
 			}
 			delay++;
 		}
@@ -547,10 +545,10 @@ namespace SdlDotNet.Examples
 					this.rainbow = !this.rainbow;
 					break;
 				case Key.Space:
-					this.delay = 0;
 					// Reset The Rainbow Color Cycling Delay
-					this.col = (this.col + 1) % 12;
+					this.delay = 0;
 					// Change The Particle Color
+					this.col = (this.col + 1) % 12;
 					break;
 				case Key.W:
 					foreach(Particle p in particle)
@@ -591,18 +589,18 @@ namespace SdlDotNet.Examples
 				case Key.Tab:
 					foreach(Particle p in particle)
 					{
-						p.PositionX = 0.0f;
 						// Center On X Axis
-						p.PositionY = 0.0f;
+						p.PositionX = 0.0f;
 						// Center On Y Axis
-						p.PositionZ = 0.0f;
+						p.PositionY = 0.0f;
 						// Center On Z Axis
-						p.DirectionX = (float)(this.rand.Next(50)-26.0f)*10.0f;	
+						p.PositionZ = 0.0f;
 						// Random Speed On X Axis
-						p.DirectionY = (float)(this.rand.Next(50)-25.0f)*10.0f;	
+						p.DirectionX = (float)(this.rand.Next(50)-26.0f)*10.0f;	
 						// Random Speed On Y Axis
-						p.DirectionZ = (float)(this.rand.Next(50)-25.0f)*10.0f;	
+						p.DirectionY = (float)(this.rand.Next(50)-25.0f)*10.0f;	
 						// Random Speed On Z Axis
+						p.DirectionZ = (float)(this.rand.Next(50)-25.0f)*10.0f;	
 					}
 					break;
 				case Key.UpArrow:

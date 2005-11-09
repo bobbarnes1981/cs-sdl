@@ -40,7 +40,7 @@ using Tao.OpenGl;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// 
+	/// Lesson 34: Beautiful Landscapes By Means Of Height Mapping
 	/// </summary>
 	public class NeHe034 : NeHe025
 	{
@@ -56,17 +56,18 @@ namespace SdlDotNet.Examples
 				return "Lesson 34: Beautiful Landscapes By Means Of Height Mapping";
 			}
 		}
-		private const int MAP_SIZE = 1024;
+
 		// Size Of Our .RAW Height Map (NEW)
-		private const int STEP_SIZE = 16;
+		const int MAP_SIZE = 1024;
 		// Width And Height Of Each Quad (NEW)
-		private const float HEIGHT_RATIO = 1.5f;
+		const int STEP_SIZE = 16;
 		// Ratio That The Y Is Scaled According To The X And Z (NEW)
-		private bool bRender = true;
+		const float HEIGHT_RATIO = 1.5f;
 		// Polygon Flag Set To TRUE By Default (NEW)
-		private byte[] heightMap = new byte[MAP_SIZE * MAP_SIZE];
+		bool bRender = true;
 		// Holds The Height Map Data (NEW)
-		private float scaleValue = 0.15f;
+		byte[] heightMap = new byte[MAP_SIZE * MAP_SIZE];
+		float scaleValue = 0.15f;
 		
 		#endregion Fields
 
@@ -87,29 +88,25 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// All setup for OpenGL goes here.
 		/// </summary>
-		/// <returns>
-		/// Returns <c>true</c> on success, otherwise <c>false</c>.
-		/// </returns>
 		protected override void InitGL() 
 		{   
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
 			Keyboard.EnableKeyRepeat(150,50);
    
-			// All Setup For OpenGL Goes Here
-			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Enable Smooth Shading
-			Gl.glClearColor(0, 0, 0, 0.5f);
+			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
-			Gl.glClearDepth(1);
+			Gl.glClearColor(0, 0, 0, 0.5f);
 			// Depth Buffer Setup
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			Gl.glClearDepth(1);
 			// Enables Depth Testing
-			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			// The Type Of Depth Testing To Do
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
 			// Really Nice Perspective Calculations
-
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+			
 			LoadRawFile("NeHe034.Terrain.raw", MAP_SIZE * MAP_SIZE, 
 				ref heightMap); 
 		}
@@ -128,20 +125,20 @@ namespace SdlDotNet.Examples
 		/// <param name="heightMap">
 		/// Where data is put when read.
 		/// </param>
-		/// <returns>
-		/// Returns <c>true</c> if success, <c>false</c> failure.
-		/// </returns>
 		private void LoadRawFile(string name, int size, ref byte[] heightMap) 
 		{
 			if(name == null || name.Length == 0) 
 			{
+				return;
 			}
 
+			// Look For Data\Filename
 			string fileName1 = string.Format(CultureInfo.CurrentCulture,"Data{0}{1}",
-				// Look For Data\Filename
+				
 				Path.DirectorySeparatorChar, name);
+			// Look For ..\..\Data\Filename
 			string fileName2 = string.Format(CultureInfo.CurrentCulture,"{0}{1}{0}{1}Data{1}{2}",
-				// Look For ..\..\Data\Filename
+				
 				"..", Path.DirectorySeparatorChar, name);
 
 			// Make Sure The File Exists In One Of The Usual Directories
@@ -152,17 +149,16 @@ namespace SdlDotNet.Examples
 					"ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
 			}
 
+			// Does The File Exist Here?
 			if(File.Exists(fileName1)) 
 			{
-				// Does The File Exist Here?
-				name = fileName1;
 				// Set To Correct File Path
+				name = fileName1;
 			}
 			else if(File.Exists(fileName2)) 
 			{
-				// Does The File Exist Here?
-				name = fileName2;
 				// Set To Correct File Path
+				name = fileName2;
 			}
 
 			// Open The File In Read / Binary Mode
@@ -184,13 +180,13 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected override void DrawGLScene() 
 		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Clear The Screen And The Depth Buffer
-			Gl.glLoadIdentity();
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			// Reset The Matrix
+			Gl.glLoadIdentity();
 
-			Glu.gluLookAt(212, 60, 194, 186, 55, 171, 0, 1, 0);
 			// This Determines Where The Camera's Position And View Is
+			Glu.gluLookAt(212, 60, 194, 186, 55, 171, 0, 1, 0);
 			Gl.glScalef(scaleValue, scaleValue * HEIGHT_RATIO, scaleValue);
 			RenderHeightMap(heightMap);
 		}
@@ -214,14 +210,13 @@ namespace SdlDotNet.Examples
 		/// </returns>
 		private static int GetHeight(byte[] heightMap, int x, int y) 
 		{  
-			// This Returns The Height From A Height Map Index
-			x = x % MAP_SIZE;
 			// Error Check Our x Value
-			y = y % MAP_SIZE;  
+			x = x % MAP_SIZE;
 			// Error Check Our y Value
+			y = y % MAP_SIZE;  
 
-			return heightMap[x + (y * MAP_SIZE)];
 			// Index Into Our Height Array And Return The Height
+			return heightMap[x + (y * MAP_SIZE)];
 		}
 		#endregion int GetHeight(byte[] heightMap, int x, int y)
 
@@ -234,22 +229,24 @@ namespace SdlDotNet.Examples
 		/// </param>
 		private void RenderHeightMap(byte[] heightMap) 
 		{
-			// This Renders The Height Map As Quads
-			int X, Y;
 			// Create Some Variables To Walk The Array With.
-			int x, y, z;
+			int X;
+			int Y;
 			// Create Some Variables For Readability
+			int x;
+			int y;
+			int z;
 
+			// What We Want To Render
 			if(bRender) 
 			{
-				// What We Want To Render
-				Gl.glBegin(Gl.GL_QUADS);
 				// Render Polygons
+				Gl.glBegin(Gl.GL_QUADS);
 			}
 			else 
 			{
-				Gl.glBegin(Gl.GL_LINES);
 				// Render Lines Instead
+				Gl.glBegin(Gl.GL_LINES);
 			}
 
 			for(X = 0; X < (MAP_SIZE - STEP_SIZE); X += STEP_SIZE) 
@@ -261,46 +258,46 @@ namespace SdlDotNet.Examples
 					y = GetHeight(heightMap, X, Y);
 					z = Y;
 
-					SetVertexColor(heightMap, x, z);
 					// Set The Color Value Of The Current Vertex
-					Gl.glVertex3i(x, y, z);
+					SetVertexColor(heightMap, x, z);
 					// Send This Vertex To OpenGL To Be Rendered 
 					// (Integer Points Are Faster)
+					Gl.glVertex3i(x, y, z);
 
 					// Get The (X, Y, Z) Value For The Top Left Vertex
 					x = X;
 					y = GetHeight(heightMap, X, Y + STEP_SIZE);
 					z = Y + STEP_SIZE;
 
-					SetVertexColor(heightMap, x, z);
 					// Set The Color Value Of The Current Vertex
-					Gl.glVertex3i(x, y, z);
+					SetVertexColor(heightMap, x, z);
 					// Send This Vertex To OpenGL To Be Rendered
+					Gl.glVertex3i(x, y, z);
 
 					// Get The (X, Y, Z) Value For The Top Right Vertex
 					x = X + STEP_SIZE;
 					y = GetHeight(heightMap, X + STEP_SIZE, Y + STEP_SIZE);
 					z = Y + STEP_SIZE;
 
-					SetVertexColor(heightMap, x, z);
 					// Set The Color Value Of The Current Vertex
-					Gl.glVertex3i(x, y, z);
+					SetVertexColor(heightMap, x, z);
 					// Send This Vertex To OpenGL To Be Rendered
+					Gl.glVertex3i(x, y, z);
 
 					// Get The (X, Y, Z) Value For The Bottom Right Vertex
 					x = X + STEP_SIZE;
 					y = GetHeight(heightMap, X + STEP_SIZE, Y);
 					z = Y;
 
-					SetVertexColor(heightMap, x, z);
 					// Set The Color Value Of The Current Vertex
-					Gl.glVertex3i(x, y, z);
+					SetVertexColor(heightMap, x, z);
 					// Send This Vertex To OpenGL To Be Rendered
+					Gl.glVertex3i(x, y, z);
 				}
 			}
 			Gl.glEnd();
-			Gl.glColor4f(1, 1, 1, 1);
 			// Reset The Color
+			Gl.glColor4f(1, 1, 1, 1);
 		}
 		#endregion void RenderHeightMap(byte[] heightMap)
 
@@ -331,8 +328,8 @@ namespace SdlDotNet.Examples
 		private void SetVertexColor(byte[] heightMap, int x, int y) 
 		{
 			float fColor = -0.15f + (GetHeight(heightMap, x, y ) / 256.0f);
-			Gl.glColor3f(0, 0, fColor);
 			// Assign This Blue Shade To The Current Vertex
+			Gl.glColor3f(0, 0, fColor);
 		}
 		#endregion SetVertexColor(byte[] heightMap, int x, int y)
 
@@ -345,12 +342,12 @@ namespace SdlDotNet.Examples
 			switch (e.Key) 
 			{
 				case Key.UpArrow: 
-					scaleValue += 0.001f;
 					// Increase the scale value to zoom in
+					scaleValue += 0.001f;
 					break;
 				case Key.DownArrow:
-					scaleValue -= 0.001f;
 					// Increase the scale value to zoom in
+					scaleValue -= 0.001f;
 					break;				
 			}
 		}
