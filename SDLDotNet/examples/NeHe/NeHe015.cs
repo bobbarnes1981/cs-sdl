@@ -81,8 +81,31 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected override void InitGL()
 		{
-			LoadGLTextures();
-			base.InitGL ();
+			GC.KeepAlive(this);
+			this.Hdc = User.GetDC(Video.WindowHandle);
+
+			this.LoadGLTextures();
+			this.BuildFont();
+			// Enable Smooth Shading
+			Gl.glShadeModel(Gl.GL_SMOOTH);
+			// Black Background
+			Gl.glClearColor(0.0F, 0.0F, 0.0F, 0.5F);
+			// Depth Buffer Setup
+			Gl.glClearDepth(1.0F);
+			// Enables Depth Testing
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			// The Type Of Depth Testing To Do
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			// Quick And Dirty Lighting (Assumes Light0 Is Set Up)
+			Gl.glEnable(Gl.GL_LIGHT0);
+			// Enable Lighting
+			Gl.glEnable(Gl.GL_LIGHTING);
+			// Really Nice Perspective Calculations
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+			// Enable Texture Mapping ( NEW )
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
+			// Select The Texture
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
 		}
 
 		/// <summary>
@@ -183,14 +206,14 @@ namespace SdlDotNet.Examples
 				Gl.glTexGeni(Gl.GL_T, Gl.GL_TEXTURE_GEN_MODE, Gl.GL_OBJECT_LINEAR);
 				Gl.glEnable(Gl.GL_TEXTURE_GEN_S);
 				Gl.glEnable(Gl.GL_TEXTURE_GEN_T);
-				
+
+				// If Texture Exists
 				if(textureImage[0] != null) 
 				{
-					// If Texture Exists
-					textureImage[0].UnlockBits(bitmapData); 
 					// Unlock The Pixel Data From Memory
-					textureImage[0].Dispose();   
+					textureImage[0].UnlockBits(bitmapData); 
 					// Dispose The Bitmap
+					textureImage[0].Dispose();   
 				}
 			}
 		}

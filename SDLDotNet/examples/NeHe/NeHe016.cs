@@ -98,7 +98,7 @@ namespace SdlDotNet.Examples
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(30,30);
-			LoadGLTextures();
+			LoadGLFilteredTextures();
 
 			// Enable Texture Mapping
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
@@ -215,19 +215,31 @@ namespace SdlDotNet.Examples
 		{
 			switch(e.Key)
 			{
-					// L, F and G.
+				// L, F and G.
 				case Key.L:
 					this.Light = !this.Light;
 					if (this.Light)
+					{
 						Gl.glEnable(Gl.GL_LIGHTING);
+					}
 					else
+					{
 						Gl.glDisable(Gl.GL_LIGHTING);
+					}
 					break;
 				case Key.F:
-					this.Filter = (this.Filter + 1) % 3;
+					this.Filter += 1;
+					if(this.Filter > 2) 
+					{
+						this.Filter = 0;
+					}
 					break;
 				case Key.G:
-					this.fogfilter = (this.fogfilter + 1) % 3;
+					this.fogfilter += 1;
+					if(this.fogfilter > 2) 
+					{
+						this.fogfilter = 0;
+					}
 					Gl.glFogi(Gl.GL_FOG_MODE, (int)this.fogMode[this.fogfilter]);	
 					break;
 
