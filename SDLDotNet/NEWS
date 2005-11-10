@@ -49,6 +49,7 @@ David Hudson 18 July 2005
 * The BounceSprites example will remove a ball if you right click on it. This uses the Sprite.Kill()/Remove() methods.
 * Updated to Sdl_mixer 1.2.6
 * Created Windows installer.
+* Added many NeHe OpenGL examples.
 
 3.1.1
 David Hudson 21 June 2005

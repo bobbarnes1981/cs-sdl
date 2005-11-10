@@ -69,9 +69,6 @@ Approach:
 	The API is modeled somewhat after pygame. Since pygame is a successful object-oriented wrapper around SDL, 
 	it makes sense to look to pygame for inspiration. Obviously there will be areas 
 	where they will differ. 
-	There is also a Java-based set of bindings (SDLjava).  
-	Since Java and C# are so closely 
-	related, it is worth a look.
 
 Coding Style
 	Follow .NET naming conventions. **DONE**
@@ -90,6 +87,7 @@ Demos
 	The SpriteGuiDemo shows several sprite examples and uses a simple GUI.
 	The Triad example is a full Tetris-like game.
 	The ParticleSExample show a fireworks type display that uses the SdldotNet.Particles engine.
+	The NeHe examples show how to use OpenGL with SDL.NET.
 
 Tutorials can be found at:
 http://cs-sdl.sourceforge.net/index.php/Category:Tutorials
