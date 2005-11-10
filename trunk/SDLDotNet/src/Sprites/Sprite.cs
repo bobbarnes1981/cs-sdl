@@ -67,6 +67,14 @@ namespace SdlDotNet.Sprites
 			this.surf = surface;
 		}
 
+        /// <summary>
+        /// Creates a new sprite using the given surface file.
+        /// </summary>
+        /// <param name="surfaceFile">The file path of the surface to use as the sprite.</param>
+        public Sprite(string surfaceFile) : this(new Surface(surfaceFile))
+        {
+        }
+
 		/// <summary>
 		/// Create new Sprite
 		/// </summary>
