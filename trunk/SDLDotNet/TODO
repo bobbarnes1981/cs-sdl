@@ -6,6 +6,5 @@ Future changes (as of Oct 2005):
 * Add more docs and tutorials.
 * Create installer for rpms/ebuild/debs/etc... for Linux.
 * Improve the OSX version.
-* Improve SDL.NET Renderer for CEGUI.
 * TileMapper for SDL.NET
 * Add Side Scroller Drawing methods.
