@@ -26,7 +26,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// 
 	/// </summary>
-	class MainObject : IDisposable
+	public class MainObject : IDisposable
 	{
 		/// <summary>
 		/// 

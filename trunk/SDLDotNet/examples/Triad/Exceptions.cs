@@ -21,8 +21,15 @@ using System;
 
 namespace SdlDotNet.Examples
 {
-	class GameException : Exception
+	/// <summary>
+	/// 
+	/// </summary>
+	public class GameException : Exception
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="GameException"/> class.
+		/// </summary>
+		/// <param name="message">The message.</param>
 		public GameException(string message) : base(message)
 		{
 			if(message == null)
