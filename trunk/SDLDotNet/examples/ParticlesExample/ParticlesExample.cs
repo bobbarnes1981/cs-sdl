@@ -38,7 +38,7 @@ namespace SdlDotNet.Examples
 		ParticleSystem particles = new ParticleSystem();
 
 		// Make a new emitter and a particle vortex for manipulating the particles.
-		ParticlePixelEmitter emit;
+		ParticleRectangleEmitter emit;
 		ParticleVortex vort = new ParticleVortex(1f, 200f);
 		string data_directory = @"Data/";
 		string filepath = @"../../";
@@ -66,8 +66,8 @@ namespace SdlDotNet.Examples
 		{
 
 			// Make the particle emitter.
-			emit = new ParticlePixelEmitter(particles);
-			emit.Frequency = 100000; // 100000 every 1000 updates.
+			emit = new ParticleRectangleEmitter(particles);
+			emit.Frequency = 50000; // 100000 every 1000 updates.
 			emit.LifeFullMin = 20;
 			emit.LifeFullMax = 50;
 			emit.LifeMin = 10;
@@ -78,6 +78,8 @@ namespace SdlDotNet.Examples
 			emit.ColorMax = Color.LightBlue;
 			emit.SpeedMin = 5;
 			emit.SpeedMax = 20;
+			emit.MaxSize = new SizeF(5,5);
+			emit.MinSize = new SizeF(1,1);
 			
 			// Make the first particle (a pixel)
 			ParticlePixel first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
@@ -131,7 +133,7 @@ namespace SdlDotNet.Examples
 			// Draw scene
 			Video.Screen.Fill(Color.Black);
 			particles.Render(Video.Screen);
-			//emit.Target.Render(Video.Screen);
+			//emit.Target.Render(Video.Screen);    
 
 			Video.Screen.Update();
 			Video.WindowCaption = "SDL.NET - ParticlesExample - Particles: " + particles.Particles.Count;
@@ -142,6 +144,10 @@ namespace SdlDotNet.Examples
 			if(e.Key == Key.Escape)
 			{
 				Events.QuitApplication();
+			}
+			else if(e.Key == Key.Space)
+			{
+				CreateExplosion();
 			}
 		}
 		private void Events_MouseMotion(object sender, MouseMotionEventArgs e)
@@ -158,14 +164,19 @@ namespace SdlDotNet.Examples
 			// Toogle the emitter off and on.
 			emit.Emitting = !emit.Emitting;
 
+			CreateExplosion();
+		}
+
+		private void CreateExplosion()
+		{
 			// Make an explosion of pixels on the particle system..
 			ParticleCircleEmitter explosion = new ParticleCircleEmitter(particles, Color.Red, Color.Orange, 1, 2);
 			explosion.X = emit.X; // location
 			explosion.Y = emit.Y;
 			explosion.Life = 3; // life of the explosion
-			explosion.Frequency = 150000;
+			explosion.Frequency = 100000;
 			explosion.LifeMin = 5;
-			explosion.LifeMax = 15;
+			explosion.LifeMax = 20;
 			explosion.LifeFullMin = 5;
 			explosion.LifeFullMax = 5;
 			explosion.SpeedMin = 8;
