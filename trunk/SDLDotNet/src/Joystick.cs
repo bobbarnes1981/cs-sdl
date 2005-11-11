@@ -171,13 +171,13 @@ namespace SdlDotNet
 			this.index = Sdl.SDL_JoystickIndex(handle); 
 		}
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		~Joystick()
-//		{
-//			Dispose(false);
-//		}
+		//		/// <summary>
+		//		/// 
+		//		/// </summary>
+		//		~Joystick()
+		//		{
+		//			Dispose(false);
+		//		}
 
 		/// <summary>
 		/// Destroys the surface object and frees its memory
@@ -211,10 +211,17 @@ namespace SdlDotNet
 		/// </summary>
 		protected override void CloseHandle() 
 		{
-			if (this.Handle != IntPtr.Zero)
+			try
 			{
-				Sdl.SDL_JoystickClose(this.Handle);
-				GC.KeepAlive(this);
+				if (this.Handle != IntPtr.Zero)
+				{
+					Sdl.SDL_JoystickClose(this.Handle);
+					GC.KeepAlive(this);
+					this.Handle = IntPtr.Zero;
+				}
+			}
+			catch (NullReferenceException)
+			{
 				this.Handle = IntPtr.Zero;
 			}
 		}
