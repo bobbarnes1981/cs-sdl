@@ -51,7 +51,7 @@ gcvs
  <dllmap dll="smpeg" target="libsmpeg-0.4.so.0" />
  <dllmap dll="SDL_gfx" target="libSDL_gfx.so.0" />
  
-* You may want to add these as well to run the Gears OpenGL Demo
+* You may want to add these as well to run the OpenGL Demos
  <dllmap dll="opengl32.dll" target="libGL.so.1" />
  <dllmap dll="glu32.dll" target="libGLU.so.1" />
 
