@@ -31,6 +31,7 @@ Zip file contains:
 Development Environment:
 	Runtimes/Compilers:
 		.NET SDK 1.1 SP1.
+		.NET SDK 2.0 SP1.
 		Mono on Windows
 		Mono on Linux
 		Mono on MacOSX
