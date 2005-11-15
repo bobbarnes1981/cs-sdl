@@ -114,6 +114,7 @@
 	    <in>
 		<items>
 		    <include name="${extras.dir}/**/*.build" />
+		    <exclude name="${extras.dir}/**/SdlDotNet.Gui.build" />
 		</items>
 	    </in>
 	    <do>
@@ -148,6 +149,7 @@
 	    <in>
 		<items>
 		    <include name="${extras.dir}/**/*.build" />
+		    <exclude name="${extras.dir}/**/SdlDotNet.Gui.build" />
 		</items>
 	    </in>
 	    <do>
@@ -178,7 +180,7 @@
 		<exclude name="examples/**/${obj.dir}/**" />
 		<exclude name="${examples.dir}/**/${bin.dir}/**" />
 		<include name="extras/**" />
-		<exclude name="extras/Gui" />
+		<exclude name="extras/Gui/**" />
 		<exclude name="extras/**/*.snk" />
 		<exclude name="extras/**/*j.user" />
 		<exclude name="extras/**/${obj.dir}/**" />
@@ -275,11 +277,11 @@
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">
+	<!--<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${extras.dir}/${Gui}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 	    </fileset>
-	</copy>
+	</copy>-->
 	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/win32deps">
 	    <fileset basedir="${project.main.dir}/${lib.dir}/win32deps">
 		<include name="**"/>
