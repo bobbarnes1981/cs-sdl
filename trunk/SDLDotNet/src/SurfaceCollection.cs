@@ -40,6 +40,15 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Constructor to make a new surface collection based off of an existing one.
+		/// </summary>
+		/// <param name="surfaces">The surface collection to copy.</param>
+		public SurfaceCollection(SurfaceCollection surfaces)
+		{
+			this.Add(surfaces);
+		}
+
+		/// <summary>
 		/// Create collection with image as the first surface
 		/// </summary>
 		/// <param name="fileName">
@@ -112,6 +121,23 @@ namespace SdlDotNet
 		/// </param>
 		public SurfaceCollection(string fileName, Size tileSize) : 
 			this(new Surface(fileName), tileSize)
+		{
+		}
+
+		/// <summary>
+		/// Loads a row of tiled surfaces from one larger surface.
+		/// </summary>
+		/// <param name="fileName">
+		/// The filename of the large surface.
+		/// </param>
+		/// <param name="tileSize">
+		/// The size of each tile.
+		/// </param>
+		/// <param name="rowNumber">
+		/// The row number of which to load the surface collection.
+		/// </param>
+		public SurfaceCollection(string fileName, Size tileSize, int rowNumber) :
+			this(new Surface(fileName), tileSize, rowNumber)
 		{
 		}
 
