@@ -24,63 +24,65 @@ namespace SdlDotNet.Sprites
 	/// <summary>
 	/// Animation.
 	/// </summary>
-	public class AnimationCollection : SurfaceCollection
+	public class Animation : System.Collections.ICollection
     {
+
         #region Constructors
         /// <summary>
-		/// Creates a new empty AnimationCollection.
+		/// Creates a new empty Animation.
 		/// </summary>
-		public AnimationCollection()
+		public Animation()
 		{
+			m_Frames = new SurfaceCollection();
 		}
 
 		/// <summary>
 		/// Creates a new Animation with a SurfaceCollection representing the animation.
 		/// </summary>
-		/// <param name="surfaces">The collection of surfaces in the animation.</param>
-		public AnimationCollection(SurfaceCollection surfaces) : this()
+		/// <param name="frames">The collection of surfaces in the animation.</param>
+		public Animation(SurfaceCollection frames)
 		{
-			this.Add(surfaces);
+			m_Frames = frames;
 		}
 
 		/// <summary>
 		/// Creates an Animation with one surface to start off the animation.
 		/// </summary>
-		/// <param name="surface">The surface representing the animation.
+		/// <param name="firstFrame">The surface representing the animation.
 		/// </param>
-		public AnimationCollection(Surface surface) : this()
+		public Animation(Surface firstFrame)
 		{
-			this.Add(surface);
+			m_Frames = new SurfaceCollection(firstFrame);
         }
 
         /// <summary>
         /// Creates a new Animation with a SurfaceCollection representing the animation.
         /// </summary>
-        /// <param name="surfaces">The collection of surfaces in the animation.
+        /// <param name="frames">The collection of surfaces in the animation.
         /// </param>
         /// <param name="delay">The amount of delay to be had between each frame.
         /// </param>
         /// <param name="loop">Whether or not the animation is 
         /// to loop when reached the end. Defaults to true.
         /// </param>
-        public AnimationCollection(SurfaceCollection surfaces, double delay, bool loop) : this()
+        public Animation(SurfaceCollection frames, double delay, bool loop)
         {
-            this.Add(surfaces);
-            m_Delay = delay;
-            m_Loop = loop;
+            m_Frames = frames;
+            Delay = delay;
+            Loop = loop;
         }
 
         /// <summary>
         /// Creates a new Animation with a SurfaceCollection representing the animation.
         /// </summary>
-        /// <param name="surfaces">The collection of 
+        /// <param name="frames">The collection of 
         /// surfaces in the animation.</param>
         /// <param name="delay">The amount of delay to be 
         /// had between each frame. Defaults to 30.</param>
-        public AnimationCollection(SurfaceCollection surfaces, double delay) : this()
+        public Animation(SurfaceCollection frames, double delay)
         {
-            this.Add(surfaces);
-            m_Delay = delay;
+            m_Frames = frames;
+            Delay = delay;
         }
         #endregion Constructors
 
@@ -117,6 +119,17 @@ namespace SdlDotNet.Sprites
             }
         }
 
+		private SurfaceCollection m_Frames;
+		/// <summary>
+		/// Gets the SurfaceCollection used to create the frames of the animation.
+		/// </summary>
+		public SurfaceCollection Frames
+		{
+			get
+			{
+				return m_Frames;
+			}
+		}
 
 		private bool m_Loop = true;
 		/// <summary>
@@ -189,6 +202,81 @@ namespace SdlDotNet.Sprites
             }
         }
 
+		/// <summary>
+		/// Indexer of the frames.
+		/// </summary>
+		public Surface this[int index]
+		{
+			get
+			{
+				return m_Frames[index];
+			}
+			set
+			{
+				m_Frames[index] = value;
+			}
+		}
+
         #endregion Properties
-    }
+
+		#region ICollection Members
+
+		/// <summary>
+		/// Gets whether the collection is synchronized.
+		/// </summary>
+		public bool IsSynchronized
+		{
+			get
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Gets the number of frames in the animation.
+		/// </summary>
+		public int Count
+		{
+			get
+			{
+				return m_Frames.Count;
+			}
+		}
+
+		/// <summary>
+		/// Copies the frames of the animation to the given array.
+		/// </summary>
+		/// <param name="array">The array to copy to.</param>
+		/// <param name="index">The start index.</param>
+		public void CopyTo(Array array, int index)
+		{
+			m_Frames.CopyTo(array, index);
+		}
+
+		/// <summary>
+		/// Gets an object representing the syncroot of the frames.
+		/// </summary>
+		public object SyncRoot
+		{
+			get
+			{
+				return null;
+			}
+		}
+
+		#endregion
+
+		#region IEnumerable Members
+
+		/// <summary>
+		/// Returns an enumerator that can iterate through the frames collection base.
+		/// </summary>
+		/// <returns></returns>
+		public System.Collections.IEnumerator GetEnumerator()
+		{
+			return m_Frames.GetEnumerator();
+		}
+
+		#endregion
+	}
 }

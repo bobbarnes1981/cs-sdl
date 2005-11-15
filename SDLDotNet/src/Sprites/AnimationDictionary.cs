@@ -23,7 +23,7 @@ using System.Collections;
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
-	/// Summary description for AnimationCollection.
+	/// Summary description for Animation.
 	/// </summary>
 	public class AnimationDictionary : DictionaryBase, IDictionary
     {
@@ -39,7 +39,7 @@ namespace SdlDotNet.Sprites
         /// Creates an AnimationDictionary with one animation with the key "Default".
         /// </summary>
         /// <param name="animation"></param>
-        public AnimationDictionary(AnimationCollection animation)
+        public AnimationDictionary(Animation animation)
         {
             this.Add("Default", animation);
         }
@@ -49,7 +49,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="key"></param>
 		/// <param name="animation"></param>
-		public AnimationDictionary(string key, AnimationCollection animation)
+		public AnimationDictionary(string key, Animation animation)
 		{
 			this.Add(key, animation);
 		}
@@ -79,11 +79,11 @@ namespace SdlDotNet.Sprites
 		/// Gets and sets an animation object within the 
 		/// Dictionary using the animation's key.
 		/// </summary>
-		public AnimationCollection this[string key]
+		public Animation this[string key]
 		{
 			get 
 			{
-				return((AnimationCollection)Dictionary[key]);
+				return((Animation)Dictionary[key]);
 			}
 			set
 			{
@@ -125,7 +125,7 @@ namespace SdlDotNet.Sprites
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
 				while (dict.MoveNext())
 				{
-					average += ((AnimationCollection)dict.Value).Delay;
+					average += ((Animation)dict.Value).Delay;
 				}
                 return average / this.Count;
             }
@@ -134,7 +134,7 @@ namespace SdlDotNet.Sprites
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
 				while (dict.MoveNext())
 				{
-					((AnimationCollection)dict.Value).Delay = value;
+					((Animation)dict.Value).Delay = value;
 				}
             }
         }
@@ -151,7 +151,7 @@ namespace SdlDotNet.Sprites
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
 				while (dict.MoveNext())
 				{
-					average += ((AnimationCollection)dict.Value).FrameIncrement;
+					average += ((Animation)dict.Value).FrameIncrement;
 				}
                 return average / this.Count;
             }
@@ -160,7 +160,7 @@ namespace SdlDotNet.Sprites
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
 				while (dict.MoveNext())
 				{
-					((AnimationCollection)dict.Value).FrameIncrement = value;
+					((Animation)dict.Value).FrameIncrement = value;
 				}
             }
         }
@@ -178,7 +178,7 @@ namespace SdlDotNet.Sprites
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
                 while (dict.MoveNext())
                 {
-                    if (!((AnimationCollection)dict.Value).AnimateForward)
+                    if (!((Animation)dict.Value).AnimateForward)
                     {
                         return false;
                     }
@@ -190,7 +190,7 @@ namespace SdlDotNet.Sprites
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
 				while (dict.MoveNext())
 				{
-					((AnimationCollection)dict.Value).AnimateForward = value;
+					((Animation)dict.Value).AnimateForward = value;
 				}
             }
         }
@@ -205,7 +205,7 @@ namespace SdlDotNet.Sprites
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
 				while (dict.MoveNext())
 				{
-					return ((AnimationCollection)dict.Value).Loop;
+					return ((Animation)dict.Value).Loop;
 				}
                 return true;
             }
@@ -214,7 +214,7 @@ namespace SdlDotNet.Sprites
                 IDictionaryEnumerator dict = Dictionary.GetEnumerator();
 				while (dict.MoveNext())
 				{
-					((AnimationCollection)dict.Value).Loop = value;
+					((Animation)dict.Value).Loop = value;
 				}
             }
         }
@@ -227,7 +227,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="key">The name of the animation.</param>
 		/// <param name="animation">The animation object.</param>
 		/// <returns>The final number of elements within the Dictionary.</returns>
-		public int Add(string key, AnimationCollection animation) 
+		public int Add(string key, Animation animation) 
 		{
 			Dictionary.Add(key, animation);
 			return Dictionary.Count;
@@ -241,7 +241,7 @@ namespace SdlDotNet.Sprites
         /// <returns>The final number of elements within the Dictionary.</returns>
         public int Add(string key, SurfaceCollection surfaces)
         {
-            Dictionary.Add(key, new AnimationCollection(surfaces));
+            Dictionary.Add(key, new Animation(surfaces));
             return Dictionary.Count;
         }
 		
@@ -265,7 +265,7 @@ namespace SdlDotNet.Sprites
 			IDictionaryEnumerator dict = animationDictionary.GetEnumerator();
 			while(dict.MoveNext())
 			{
-				this.Add((string)dict.Key, (AnimationCollection)dict.Value);
+				this.Add((string)dict.Key, (Animation)dict.Value);
 			}
 			return Dictionary.Count;
         }
@@ -307,7 +307,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="array">Array to copy Dictionary to</param>
 		/// <param name="index">Index at which to insert the Dictionary items</param>
-		public virtual void CopyTo(AnimationCollection[] array, int index)
+		public virtual void CopyTo(Animation[] array, int index)
 		{
 			((IDictionary)this).CopyTo(array, index);
 		}
@@ -317,7 +317,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="index">Index at which to insert the item</param>
 		/// <param name="animation">item to insert</param>
-		public virtual void Insert(int index, AnimationCollection animation)
+		public virtual void Insert(int index, Animation animation)
 		{
 			this.Insert(index, animation);
 		} 
@@ -327,7 +327,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="animation">The item to search for.</param>
 		/// <returns>The index of the given sprite.</returns>
-		public virtual int IndexOf(AnimationCollection animation)
+		public virtual int IndexOf(Animation animation)
 		{
 			return this.IndexOf(animation);
 		} 

@@ -391,5 +391,15 @@ namespace SdlDotNet
 		{
 			((ICollection)this).CopyTo(array, index);
 		}
+
+		/// <summary>
+		/// Copy array
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Start index</param>
+		public virtual void CopyTo(Array array, int index)
+		{
+			this.List.CopyTo(array,index);
+		}
 	}	
 }

@@ -45,7 +45,7 @@ namespace SdlDotNet.Sprites
 		/// </summary>
 		/// <param name="name">Name of animation</param>
 		/// <param name="animation">animation</param>
-		public AnimatedSprite(string name, AnimationCollection animation) : this()
+		public AnimatedSprite(string name, Animation animation) : this()
 		{
 			m_Animations.Add(name, animation);
 		}
@@ -54,7 +54,7 @@ namespace SdlDotNet.Sprites
 		/// Create AnimatedSprite from Animation
 		/// </summary>
 		/// <param name="animation">animation</param>
-		public AnimatedSprite(AnimationCollection animation) : this()
+		public AnimatedSprite(Animation animation) : this()
 		{
 			m_Animations.Add("Default", animation);
 		}
@@ -70,7 +70,7 @@ namespace SdlDotNet.Sprites
 			{
 				throw new ArgumentNullException("surfaces");
 			}
-			m_Animations.Add("Default", new AnimationCollection(surfaces));
+			m_Animations.Add("Default", new Animation(surfaces));
 			base.Surface = surfaces[0];
 			base.Rectangle = surfaces[0].Rectangle;
 			base.Position = coordinates;
@@ -88,7 +88,7 @@ namespace SdlDotNet.Sprites
 			{
 				throw new ArgumentNullException("surfaces");
 			}
-			m_Animations.Add("Default", new AnimationCollection(surfaces));
+			m_Animations.Add("Default", new Animation(surfaces));
 			base.Surface = surfaces[0];
 			base.Rectangle = surfaces[0].Rectangle;
 			base.Position = coordinates;
@@ -105,7 +105,7 @@ namespace SdlDotNet.Sprites
 			{
 				throw new ArgumentNullException("surfaces");
 			}
-            m_Animations.Add("Default", new AnimationCollection(surfaces));
+            m_Animations.Add("Default", new Animation(surfaces));
             base.Surface = surfaces[0];
             base.Rectangle = surfaces[0].Rectangle;
             base.Position = new Point(0, 0);
@@ -165,7 +165,7 @@ namespace SdlDotNet.Sprites
                 // Check to see if it exists.
 				if (!m_Animations.Contains(value))
 				{
-					throw new SdlException("The given animation (" + value + ") does not exist in this AnimatedSprite AnimationCollection.");
+					throw new SdlException("The given animation (" + value + ") does not exist in this AnimatedSprite Animation.");
 				}
 
                 // Set the animation settings.
@@ -265,7 +265,8 @@ namespace SdlDotNet.Sprites
 		private System.Timers.Timer m_Timer = new System.Timers.Timer(500);
 		private void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			AnimationCollection current = m_Animations[m_CurrentAnimation];
+			Animation current = m_Animations[m_CurrentAnimation];
+			m_Timer.Interval = current.Delay;
 
             if (m_Frame >= current.Count && current.AnimateForward) // Going forwards and past last frame
 			{
