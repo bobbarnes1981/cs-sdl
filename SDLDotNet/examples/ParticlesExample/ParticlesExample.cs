@@ -135,7 +135,7 @@ namespace SdlDotNet.Examples
 			particles.Render(Video.Screen);
 			//emit.Target.Render(Video.Screen);    
 
-			Video.Screen.Update();
+			Video.Screen.Flip();
 			Video.WindowCaption = "SDL.NET - ParticlesExample - Particles: " + particles.Particles.Count;
 		}
 
