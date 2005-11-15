@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: Animation.cs,v $
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
  *
  * This library is free software; you can redistribute it and/or
@@ -25,10 +25,10 @@ namespace SdlDotNet.Sprites
 	/// Animation.
 	/// </summary>
 	public class Animation : System.Collections.ICollection
-    {
+	{
 
-        #region Constructors
-        /// <summary>
+		#region Constructors
+		/// <summary>
 		/// Creates a new empty Animation.
 		/// </summary>
 		public Animation()
@@ -53,41 +53,41 @@ namespace SdlDotNet.Sprites
 		public Animation(Surface firstFrame)
 		{
 			m_Frames = new SurfaceCollection(firstFrame);
-        }
+		}
 
-        /// <summary>
-        /// Creates a new Animation with a SurfaceCollection representing the animation.
-        /// </summary>
-        /// <param name="frames">The collection of surfaces in the animation.
-        /// </param>
-        /// <param name="delay">The amount of delay to be had between each frame.
-        /// </param>
-        /// <param name="loop">Whether or not the animation is 
-        /// to loop when reached the end. Defaults to true.
-        /// </param>
-        public Animation(SurfaceCollection frames, double delay, bool loop)
-        {
-            m_Frames = frames;
-            Delay = delay;
-            Loop = loop;
-        }
+		/// <summary>
+		/// Creates a new Animation with a SurfaceCollection representing the animation.
+		/// </summary>
+		/// <param name="frames">The collection of surfaces in the animation.
+		/// </param>
+		/// <param name="delay">The amount of delay to be had between each frame.
+		/// </param>
+		/// <param name="loop">Whether or not the animation is 
+		/// to loop when reached the end. Defaults to true.
+		/// </param>
+		public Animation(SurfaceCollection frames, double delay, bool loop)
+		{
+			m_Frames = frames;
+			Delay = delay;
+			Loop = loop;
+		}
 
-        /// <summary>
-        /// Creates a new Animation with a SurfaceCollection representing the animation.
-        /// </summary>
-        /// <param name="frames">The collection of 
-        /// surfaces in the animation.</param>
-        /// <param name="delay">The amount of delay to be 
-        /// had between each frame. Defaults to 30.</param>
-        public Animation(SurfaceCollection frames, double delay)
-        {
-            m_Frames = frames;
-            Delay = delay;
-        }
-        #endregion Constructors
+		/// <summary>
+		/// Creates a new Animation with a SurfaceCollection representing the animation.
+		/// </summary>
+		/// <param name="frames">The collection of 
+		/// surfaces in the animation.</param>
+		/// <param name="delay">The amount of delay to be 
+		/// had between each frame. Defaults to 30.</param>
+		public Animation(SurfaceCollection frames, double delay)
+		{
+			m_Frames = frames;
+			Delay = delay;
+		}
+		#endregion Constructors
 
-        #region Properties
-        private double m_Delay = 30;
+		#region Properties
+		private double m_Delay = 30;
 		/// <summary>
 		/// Gets and sets the amount of time delay that 
 		/// should be had before moving onto the next frame.
@@ -104,20 +104,20 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-        /// <summary>
-        /// Gets and sets how long the animation should take to finish.
-        /// </summary>
-        public double AnimationTime
-        {
-            get
-            {
-                return m_Delay * this.Count;
-            }
-            set 
-            {
-                m_Delay = this.Count / value;
-            }
-        }
+		/// <summary>
+		/// Gets and sets how long the animation should take to finish.
+		/// </summary>
+		public double AnimationTime
+		{
+			get
+			{
+				return m_Delay * this.Count;
+			}
+			set 
+			{
+				m_Delay = this.Count / value;
+			}
+		}
 
 		private SurfaceCollection m_Frames;
 		/// <summary>
@@ -145,62 +145,62 @@ namespace SdlDotNet.Sprites
 			{ 
 				m_Loop = value; 
 			}
-        }
+		}
 
-        private int m_FrameIncrement = 1;
-        /// <summary>
-        /// Gets and sets the number of frames to go forward 
-        /// when moving onto the next frame.
-        /// </summary>
-        /// <remarks>Making this one would result in the 
-        /// animation going forwards one frame. 
-        /// -1 would mean that the animation would go backwards. 
-        /// Cannot be 0.</remarks>
-        public int FrameIncrement
-        {
-            get
-            {
-                return m_FrameIncrement;
-            }
-            set
-            {
-                if (value == 0)
-                    m_FrameIncrement = 1;
-                else
-                    m_FrameIncrement = value;
-            }
-        }
+		private int m_FrameIncrement = 1;
+		/// <summary>
+		/// Gets and sets the number of frames to go forward 
+		/// when moving onto the next frame.
+		/// </summary>
+		/// <remarks>Making this one would result in the 
+		/// animation going forwards one frame. 
+		/// -1 would mean that the animation would go backwards. 
+		/// Cannot be 0.</remarks>
+		public int FrameIncrement
+		{
+			get
+			{
+				return m_FrameIncrement;
+			}
+			set
+			{
+				if (value == 0)
+					m_FrameIncrement = 1;
+				else
+					m_FrameIncrement = value;
+			}
+		}
 
-        /// <summary>
-        /// Gets and sets whether the animation goes forwards or backwards.
-        /// </summary>
-        public bool AnimateForward
-        {
-            get
-            {
-                return m_FrameIncrement >= 0;
-            }
-            set
-            {
-                if (value)
-                {
-                    // Make positive
+		/// <summary>
+		/// Gets and sets whether the animation goes forwards or backwards.
+		/// </summary>
+		public bool AnimateForward
+		{
+			get
+			{
+				return m_FrameIncrement >= 0;
+			}
+			set
+			{
+				if (value)
+				{
+					// Make positive
 					if (m_FrameIncrement < 0)
 					{
 						m_FrameIncrement *= -1;
 					}
-                }
-                else
-                {
-                    // Make negative
+				}
+				else
+				{
+					// Make negative
 					if (m_FrameIncrement > 0)
 					{
 						m_FrameIncrement *= -1;
 					}
-                }
+				}
 
-            }
-        }
+			}
+		}
 
 		/// <summary>
 		/// Indexer of the frames.
@@ -217,7 +217,7 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-        #endregion Properties
+		#endregion Properties
 
 		#region ICollection Members
 
