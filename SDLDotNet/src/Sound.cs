@@ -85,6 +85,14 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Loads sound from a byte array.
+		/// </summary>
+		/// <param name="data">The sound byte information.</param>
+		public Sound(byte[] data) : this(Mixer.Sound(data))
+		{
+		}
+
+		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
 		/// <param name="disposing">
