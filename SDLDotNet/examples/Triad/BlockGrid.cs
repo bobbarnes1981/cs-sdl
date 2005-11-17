@@ -674,7 +674,7 @@ namespace SdlDotNet.Examples
 		}
 		#region IDisposable Members
 
-		private bool disposed;
+		bool disposed;
 
 		/// <summary>
 		/// Destroy sprite

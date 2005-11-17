@@ -133,17 +133,43 @@ namespace SdlDotNet.Examples
 		}
 		#region IDisposable Members
 
+		bool disposed;
+
 		/// <summary>
-		/// 
+		/// Destroy sprite
+		/// </summary>
+		/// <param name="disposing">If true, remove all unamanged resources</param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					grid.Dispose();
+					board.Dispose();
+					if (levelUpSound != null)
+					{
+						levelUpSound.Dispose();
+					}
+					GC.SuppressFinalize(this);
+				}
+				this.disposed = true;
+			}
+		}
+		/// <summary>
+		/// Destroy object
 		/// </summary>
 		public void Dispose()
 		{
-			grid.Dispose();
-			board.Dispose();
-			if (levelUpSound != null)
-			{
-				levelUpSound.Dispose();
-			}
+			this.Dispose(true);
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~MainObject() 
+		{
+			Dispose(false);
 		}
 
 		#endregion

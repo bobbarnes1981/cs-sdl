@@ -39,6 +39,9 @@
 	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
 	    <property name="doc.target" value="Web" />
 	</if>
+	<if test="${framework::get-runtime-framework() == 'mono-2.0'}">
+	    <property name="doc.target" value="Web" />
+	</if>
 	<ndoc failonerror="true" verbose="true">
 	    <assemblies basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${nant.project.name}.dll" />

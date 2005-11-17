@@ -18,13 +18,15 @@
 //*****************************************************************************
 
 using System;
+using System.Runtime.Serialization;
 
 namespace SdlDotNet.Examples
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public class GameException : Exception
+	[Serializable()]
+	public class GameException : SdlException
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="GameException"/> class.
@@ -36,6 +38,32 @@ namespace SdlDotNet.Examples
 			{
 				throw new ApplicationException("Please provide a message.");
 			}
+		}
+
+		/// <summary>
+		/// Basic Exception
+		/// </summary>
+		public GameException()
+		{
+			GameException.Generate();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="exception"></param>
+		public GameException(string message, Exception exception) : base(message, exception)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="info"></param>
+		/// <param name="context"></param>
+		protected GameException(SerializationInfo info, StreamingContext context) : base( info, context )
+		{
 		}
 	}
 }
