@@ -2453,7 +2453,7 @@ namespace SdlDotNet
 		{ 
 			Surface final = 
 				this.CreateCompatibleSurface(clip.Width, clip.Height); 
-			final.Blit(this, clip); 
+			final.Blit(this, new Point(0, 0), clip); 
 			return final; 
 		}
 
