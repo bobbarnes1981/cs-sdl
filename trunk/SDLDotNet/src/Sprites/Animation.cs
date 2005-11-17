@@ -18,13 +18,14 @@
  */
 
 using System;
+using System.Collections;
 
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
 	/// Animation.
 	/// </summary>
-	public class Animation : System.Collections.ICollection
+	public class Animation : CollectionBase, ICollection
 	{
 
 		#region Constructors
@@ -131,6 +132,54 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
+		/// <summary>
+		/// Adds surface to group
+		/// </summary>
+		/// <param name="surface">Surface to add</param>
+		public virtual int Add(Surface surface)
+		{
+			return (List.Add(surface));
+		}
+
+		/// <summary>
+		/// Removes surface from group
+		/// </summary>
+		/// <param name="surface">Surface to remove</param>
+		public virtual void Remove(Surface surface)
+		{
+			List.Remove(surface);
+		}
+
+		/// <summary>
+		/// Insert a Surface into the collection
+		/// </summary>
+		/// <param name="index">Index at which to insert the surface</param>
+		/// <param name="surface">Surface to insert</param>
+		public virtual void Insert(int index, Surface surface)
+		{
+			List.Insert(index, surface);
+		} 
+
+		/// <summary>
+		/// Gets the index of the given surface in the collection.
+		/// </summary>
+		/// <param name="surface">The surface to search for.</param>
+		/// <returns>The index of the given surface.</returns>
+		public virtual int IndexOf(Surface surface)
+		{
+			return List.IndexOf(surface);
+		} 
+
+		/// <summary>
+		/// Checks if surface is in the container
+		/// </summary>
+		/// <param name="surface">Surface to query for</param>
+		/// <returns>True is the surface is in the container.</returns>
+		public bool Contains(Surface surface)
+		{
+			return (List.Contains(surface));
+		}
+
 		private bool m_Loop = true;
 		/// <summary>
 		/// Gets and sets whether or not the animation should loop.
@@ -232,16 +281,16 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		/// <summary>
-		/// Gets the number of frames in the animation.
-		/// </summary>
-		public int Count
-		{
-			get
-			{
-				return m_Frames.Count;
-			}
-		}
+//		/// <summary>
+//		/// Gets the number of frames in the animation.
+//		/// </summary>
+//		public override int Count
+//		{
+//			get
+//			{
+//				return m_Frames.Count;
+//			}
+//		}
 
 		/// <summary>
 		/// Copies the frames of the animation to the given array.
@@ -264,19 +313,39 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		#endregion
-
-		#region IEnumerable Members
+		/// <summary>
+		/// Provide the explicit interface member for ICollection.
+		/// </summary>
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		void ICollection.CopyTo(Array array, int index)
+		{
+			this.List.CopyTo(array, index);
+		}
 
 		/// <summary>
-		/// Returns an enumerator that can iterate through the frames collection base.
+		/// Provide the explicit interface member for ICollection.
 		/// </summary>
-		/// <returns></returns>
-		public System.Collections.IEnumerator GetEnumerator()
+		/// <param name="array">Array to copy collection to</param>
+		/// <param name="index">Index at which to insert the collection items</param>
+		public virtual void CopyTo(Surface[] array, int index)
 		{
-			return m_Frames.GetEnumerator();
+			((ICollection)this).CopyTo(array, index);
 		}
 
 		#endregion
+
+//		#region IEnumerable Members
+//
+//		/// <summary>
+//		/// Returns an enumerator that can iterate through the frames collection base.
+//		/// </summary>
+//		/// <returns></returns>
+//		public override System.Collections.IEnumerator GetEnumerator()
+//		{
+//			return m_Frames.GetEnumerator();
+//		}
+//
+//		#endregion
 	}
 }
