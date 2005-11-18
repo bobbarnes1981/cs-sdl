@@ -302,7 +302,6 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
-		<File buildAction="Content">BounceSprites.html</File>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>

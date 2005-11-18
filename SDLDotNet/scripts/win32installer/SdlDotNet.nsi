@@ -6,6 +6,8 @@
 !define PRODUCT_PUBLISHER "SDL.NET"
 !define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
+!define PRODUCT_TUTORIALS_WEB_SITE "http://cs-sdl.sourceforge.net/index.php/Category:Tutorials"
+!define PRODUCT_EXAMPLES_WEB_SITE "http://cs-sdl.sourceforge.net/index.php/Category:Examples"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNet"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNet"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
@@ -199,10 +201,15 @@ Section "Examples" SecExamples
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Windows Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Windows.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Particles.chm"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\HTML Help.lnk" "$INSTDIR\doc\html\index.html"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet\index.html"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet.Particles\index.html"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Windows HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet.Windows\index.html"
   
-  CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials\BounceSprites.lnk" "$INSTDIR\doc\tutorials\BounceSprites.html"
+  CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples"
+  WriteIniStr "$INSTDIR\${PRODUCT_NAME}_Tutorials.url" "InternetShortcut" "URL" "${PRODUCT_TUTORIALS_WEB_SITE}"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples\Tutorials.lnk" "$INSTDIR\${PRODUCT_NAME}_Tutorials.url"
+  WriteIniStr "$INSTDIR\${PRODUCT_NAME}_Examples.url" "InternetShortcut" "URL" "${PRODUCT_EXAMPLES_WEB_SITE}"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples\Examples.lnk" "$INSTDIR\${PRODUCT_NAME}_Examples.url"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
@@ -396,5 +403,7 @@ FunctionEnd
 Function un.GACUnInstall
   nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "Tao.Sdl"'
   nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet"'
+  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet.Particles"'
+  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet.Windows"'
 
 FunctionEnd
