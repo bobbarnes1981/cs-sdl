@@ -18,77 +18,86 @@
  */
 
 using System;
-using System.Collections;
 
 namespace SdlDotNet.Sprites
 {
 	/// <summary>
 	/// Animation.
 	/// </summary>
-	public class Animation : CollectionBase, ICollection
+	public class Animation : SurfaceCollection
 	{
 
 		#region Constructors
 		/// <summary>
 		/// Creates a new empty Animation.
 		/// </summary>
-		public Animation()
+		public Animation() : base()
 		{
-			m_Frames = new SurfaceCollection();
 		}
 
 		/// <summary>
-		/// Creates a new Animation with a SurfaceCollection representing the animation.
+		/// Creates a new Animation with a SurfaceCollection representing 
+		/// the animation.
 		/// </summary>
-		/// <param name="frames">The collection of surfaces in the animation.</param>
-		public Animation(SurfaceCollection frames)
+		/// <param name="frames">
+		/// The collection of surfaces in the animation.
+		/// </param>
+		public Animation(SurfaceCollection frames) : base(frames)
 		{
-			m_Frames = frames;
 		}
 
 		/// <summary>
 		/// Creates an Animation with one surface to start off the animation.
 		/// </summary>
-		/// <param name="firstFrame">The surface representing the animation.
+		/// <param name="firstFrame">
+		/// The surface representing the animation.
 		/// </param>
-		public Animation(Surface firstFrame)
+		public Animation(Surface firstFrame) : base(firstFrame)
 		{
-			m_Frames = new SurfaceCollection(firstFrame);
 		}
 
 		/// <summary>
-		/// Creates a new Animation with a SurfaceCollection representing the animation.
+		/// Creates a new Animation with a SurfaceCollection representing the 
+		/// animation.
 		/// </summary>
-		/// <param name="frames">The collection of surfaces in the animation.
+		/// <param name="frames">
+		/// The collection of surfaces in the animation.
 		/// </param>
-		/// <param name="delay">The amount of delay to be had between each frame.
+		/// <param name="delay">
+		/// The amount of delay to be had between each frame.
 		/// </param>
-		/// <param name="loop">Whether or not the animation is 
+		/// <param name="loop">
+		/// Whether or not the animation is 
 		/// to loop when reached the end. Defaults to true.
 		/// </param>
-		public Animation(SurfaceCollection frames, double delay, bool loop)
+		public Animation(SurfaceCollection frames, double delay, bool loop) : base(frames)
 		{
-			m_Frames = frames;
-			Delay = delay;
-			Loop = loop;
+			this.m_Delay = delay;
+			this.m_Loop = loop;
 		}
 
 		/// <summary>
-		/// Creates a new Animation with a SurfaceCollection representing the animation.
+		/// Creates a new Animation with a SurfaceCollection 
+		/// representing the animation.
 		/// </summary>
-		/// <param name="frames">The collection of 
-		/// surfaces in the animation.</param>
-		/// <param name="delay">The amount of delay to be 
-		/// had between each frame. Defaults to 30.</param>
-		public Animation(SurfaceCollection frames, double delay)
+		/// <param name="frames">
+		/// The collection of 
+		/// surfaces in the animation.
+		/// </param>
+		/// <param name="delay">
+		/// The amount of delay to be 
+		/// had between each frame. Defaults to 30.
+		/// </param>
+		public Animation(SurfaceCollection frames, double delay) : base(frames)
 		{
-			m_Frames = frames;
-			Delay = delay;
+			this.m_Delay = delay;
 		}
 		#endregion Constructors
 
 		#region Properties
-		private double m_Delay = 30;
+
+		double m_Delay = 30;
+
 		/// <summary>
 		/// Gets and sets the amount of time delay that 
 		/// should be had before moving onto the next frame.
@@ -120,67 +129,8 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		private SurfaceCollection m_Frames;
-		/// <summary>
-		/// Gets the SurfaceCollection used to create the frames of the animation.
-		/// </summary>
-		public SurfaceCollection Frames
-		{
-			get
-			{
-				return m_Frames;
-			}
-		}
+		bool m_Loop = true;
 
-		/// <summary>
-		/// Adds surface to group
-		/// </summary>
-		/// <param name="surface">Surface to add</param>
-		public virtual int Add(Surface surface)
-		{
-			return (List.Add(surface));
-		}
-
-		/// <summary>
-		/// Removes surface from group
-		/// </summary>
-		/// <param name="surface">Surface to remove</param>
-		public virtual void Remove(Surface surface)
-		{
-			List.Remove(surface);
-		}
-
-		/// <summary>
-		/// Insert a Surface into the collection
-		/// </summary>
-		/// <param name="index">Index at which to insert the surface</param>
-		/// <param name="surface">Surface to insert</param>
-		public virtual void Insert(int index, Surface surface)
-		{
-			List.Insert(index, surface);
-		} 
-
-		/// <summary>
-		/// Gets the index of the given surface in the collection.
-		/// </summary>
-		/// <param name="surface">The surface to search for.</param>
-		/// <returns>The index of the given surface.</returns>
-		public virtual int IndexOf(Surface surface)
-		{
-			return List.IndexOf(surface);
-		} 
-
-		/// <summary>
-		/// Checks if surface is in the container
-		/// </summary>
-		/// <param name="surface">Surface to query for</param>
-		/// <returns>True is the surface is in the container.</returns>
-		public bool Contains(Surface surface)
-		{
-			return (List.Contains(surface));
-		}
-
-		private bool m_Loop = true;
 		/// <summary>
 		/// Gets and sets whether or not the animation should loop.
 		/// </summary>
@@ -196,15 +146,18 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		private int m_FrameIncrement = 1;
+		int m_FrameIncrement = 1;
+
 		/// <summary>
 		/// Gets and sets the number of frames to go forward 
 		/// when moving onto the next frame.
 		/// </summary>
-		/// <remarks>Making this one would result in the 
+		/// <remarks>
+		/// Making this one would result in the 
 		/// animation going forwards one frame. 
 		/// -1 would mean that the animation would go backwards. 
-		/// Cannot be 0.</remarks>
+		/// Cannot be 0.
+		/// </remarks>
 		public int FrameIncrement
 		{
 			get
@@ -214,9 +167,13 @@ namespace SdlDotNet.Sprites
 			set
 			{
 				if (value == 0)
+				{
 					m_FrameIncrement = 1;
+				}
 				else
+				{
 					m_FrameIncrement = value;
+				}
 			}
 		}
 
@@ -251,101 +208,6 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		/// <summary>
-		/// Indexer of the frames.
-		/// </summary>
-		public Surface this[int index]
-		{
-			get
-			{
-				return m_Frames[index];
-			}
-			set
-			{
-				m_Frames[index] = value;
-			}
-		}
-
 		#endregion Properties
-
-		#region ICollection Members
-
-		/// <summary>
-		/// Gets whether the collection is synchronized.
-		/// </summary>
-		public bool IsSynchronized
-		{
-			get
-			{
-				return false;
-			}
-		}
-
-//		/// <summary>
-//		/// Gets the number of frames in the animation.
-//		/// </summary>
-//		public override int Count
-//		{
-//			get
-//			{
-//				return m_Frames.Count;
-//			}
-//		}
-
-		/// <summary>
-		/// Copies the frames of the animation to the given array.
-		/// </summary>
-		/// <param name="array">The array to copy to.</param>
-		/// <param name="index">The start index.</param>
-		public void CopyTo(Array array, int index)
-		{
-			m_Frames.CopyTo(array, index);
-		}
-
-		/// <summary>
-		/// Gets an object representing the syncroot of the frames.
-		/// </summary>
-		public object SyncRoot
-		{
-			get
-			{
-				return null;
-			}
-		}
-
-		/// <summary>
-		/// Provide the explicit interface member for ICollection.
-		/// </summary>
-		/// <param name="array">Array to copy collection to</param>
-		/// <param name="index">Index at which to insert the collection items</param>
-		void ICollection.CopyTo(Array array, int index)
-		{
-			this.List.CopyTo(array, index);
-		}
-
-		/// <summary>
-		/// Provide the explicit interface member for ICollection.
-		/// </summary>
-		/// <param name="array">Array to copy collection to</param>
-		/// <param name="index">Index at which to insert the collection items</param>
-		public virtual void CopyTo(Surface[] array, int index)
-		{
-			((ICollection)this).CopyTo(array, index);
-		}
-
-		#endregion
-
-//		#region IEnumerable Members
-//
-//		/// <summary>
-//		/// Returns an enumerator that can iterate through the frames collection base.
-//		/// </summary>
-//		/// <returns></returns>
-//		public override System.Collections.IEnumerator GetEnumerator()
-//		{
-//			return m_Frames.GetEnumerator();
-//		}
-//
-//		#endregion
 	}
 }
