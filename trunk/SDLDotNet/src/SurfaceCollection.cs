@@ -28,7 +28,7 @@ using Tao.Sdl;
 namespace SdlDotNet 
 {
 	/// <summary>
-	/// Encapsulates the collection of Surface objects in a SurfaceList.
+	/// Encapsulates the collection of Surface objects.
 	/// </summary>
 	public class SurfaceCollection : CollectionBase, ICollection
 	{
@@ -242,13 +242,13 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Adds the specified SdlImage to the end of the SdlImageList.
+		/// Adds the specified Surface to the end of the SurfaceCollection.
 		/// </summary>
 		/// <param name="surface">
-		/// The SdlImage to be added to the end of the SdlImageList.
+		/// The Surface to be added to the end of the SurfaceCollection.
 		/// </param>
 		/// <returns>
-		/// The index at which the SdlImage has been added.
+		/// The index at which the Surface has been added.
 		/// </returns>
 		public int Add(Surface surface)
 		{
@@ -256,13 +256,13 @@ namespace SdlDotNet
 		} 
 
 		/// <summary>
-		/// Adds the specified SdlImage to the end of the SdlImageList.
+		/// Adds the specified Surface to the end of the SurfaceCollection.
 		/// </summary>
 		/// <param name="surfaceCollection">
-		/// The SdlImage to be added to the end of the SdlImageList.
+		/// The Surface to be added to the end of the SurfaceCollection.
 		/// </param>
 		/// <returns>
-		/// The index at which the SdlImage has been added.
+		/// The index at which the Surface has been added.
 		/// </returns>
 		public int Add(SurfaceCollection surfaceCollection)
 		{
@@ -278,15 +278,15 @@ namespace SdlDotNet
 		} 
 
 		/// <summary>
-		/// Load a SdlImage with the specified filename and add 
-		/// it to the end of the SdlImageList.
+		/// Load a Surface with the specified filename and add 
+		/// it to the end of the SurfaceCollection.
 		/// </summary>
 		/// <param name="fileName">
-		/// The filename of the SdlImage 
-		/// to be added to the end of the SdlImageList.
+		/// The filename of the Surface 
+		/// to be added to the end of the SurfaceCollection.
 		/// </param>
 		/// <returns>
-		/// The index at which the SdlImage has been added.
+		/// The index at which the Surface has been added.
 		/// </returns>
 		public int Add(string fileName)
 		{
@@ -295,15 +295,15 @@ namespace SdlDotNet
 
 
 		/// <summary>
-		/// Create a SdlImage from a byte array and add it to the end 
-		/// of the SdlImageList.
+		/// Create a Surface from a byte array and add it to the end 
+		/// of the SurfaceCollection.
 		/// </summary>
 		/// <param name="array">
 		/// The array of byte to create the Image 
 		/// from.
 		/// </param>
 		/// <returns>
-		/// The index at which the SdlImage has been added.
+		/// The index at which the Surface has been added.
 		/// </returns>
 		public int Add(byte[] array)
 		{
@@ -311,15 +311,15 @@ namespace SdlDotNet
 		} 
 
 		/// <summary>
-		/// Create a SdlImage from a System.Drawing.Bitmap and add it 
-		/// to the end of the SdlImageList.
+		/// Create a Surface from a System.Drawing.Bitmap and add it 
+		/// to the end of the SurfaceCollection.
 		/// </summary>
 		/// <param name="bitmap">
 		/// The System.Drawing.Bitmap to create the 
 		/// Image from.
 		/// </param>
 		/// <returns>
-		/// The index at which the SdlImage has been added.
+		/// The index at which the Surface has been added.
 		/// </returns>
 		public int Add(Bitmap bitmap)
 		{
@@ -327,7 +327,7 @@ namespace SdlDotNet
 		} 			
 
 		/// <summary>
-		/// Adds the specified SdlImage to the SdlImageList.
+		/// Adds the specified Surface to the SurfaceCollection.
 		/// </summary>
 		/// <param name="index">Index at which to insert to new surface</param>
 		/// <param name="surface">Surface to insert</param>
@@ -337,10 +337,10 @@ namespace SdlDotNet
 		} 
 
 		/// <summary>
-		/// Removes a specified SdlImage from the list.
+		/// Removes a specified Surface from the collection.
 		/// </summary>
 		/// <param name="surface">
-		/// The SdlImage to remove from the SdlImageList.
+		/// The Surface to remove from the SurfaceCollection.
 		/// </param>
 		public void Remove(Surface surface)
 		{
@@ -348,23 +348,23 @@ namespace SdlDotNet
 		} 
 
 		/// <summary>
-		/// Returns the index of a specified SdlImage in the list.
+		/// Returns the index of a specified Surface in the collection.
 		/// </summary>
 		/// <param name="surface">The surface object</param>
-		/// <returns>The index of specified surface in the list</returns>
+		/// <returns>The index of specified surface in the collection</returns>
 		public int IndexOf(Surface surface)
 		{
 			return (List.IndexOf(surface));
 		} 
 
 		/// <summary>
-		/// Indicates whether a specified SdlImage is contained in the list.
+		/// Indicates whether a specified Surface is contained in the collection.
 		/// </summary>
 		/// <param name="surface">
-		/// The SdlImage to find in the list.
+		/// The Surface to find in the collection.
 		/// </param>
 		/// <returns>
-		/// true if the SdlImage is found in the list; otherwise, false.
+		/// true if the Surface is found in the collection; otherwise, false.
 		/// </returns>
 		public bool Contains(Surface surface)
 		{

@@ -103,8 +103,8 @@ namespace SdlDotNet
 		/// 
 		/// <para>Usage:</para>
 		/// <code>
-		/// SdlImage image = SdlImage("mybitmap.jpg")
-		/// image.Draw(screen, new Rectangle(new Point(0,0),image.Size))
+		/// Surface image = Surface"mybitmap.jpg")
+		/// image.Blit(screen, new Rectangle(new Point(0,0),image.Size))
 		/// </code>
 		/// </summary> 
 		public Surface(string file)
