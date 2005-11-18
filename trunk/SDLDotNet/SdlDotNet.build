@@ -161,7 +161,7 @@
 
     <target name="package" depends="buildrelease, doc, copyfiles, zip" description="Package">
     </target>
-    
+
     <target name="packagedebug" depends="clean, examples, copyfiles, zip" description="Package Debug">
     </target>
 
@@ -282,11 +282,13 @@
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>-->
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/win32deps">
-	    <fileset basedir="${project.main.dir}/${lib.dir}/win32deps">
-		<include name="**"/>
-	    </fileset>
-	</copy>
+	<ifnot test="${framework::get-runtime-framework() == 'mono-1.0'}">
+	    <copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/win32deps">
+		<fileset basedir="${project.main.dir}/${lib.dir}/win32deps">
+		    <include name="**"/>
+		</fileset>
+	    </copy>
+	</ifnot>
 	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/${examples.dir}" flatten="true">
 	    <fileset>
 		<include name="examples/**/*.exe" />
@@ -296,21 +298,6 @@
 	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/${examples.dir}/Data" flatten="true">
 	    <fileset>
 		<include name="examples/**/Data/**" />
-	    </fileset>
-	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.tutorials.dir}">
-	    <fileset basedir="${examples.dir}/ParticleEngine">
-		<include name="ParticleEngine.html" />
-	    </fileset>
-	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.tutorials.dir}">
-	    <fileset basedir="${examples.dir}/SimpleExample">
-		<include name="SimpleExample.pdf" />
-	    </fileset>
-	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.tutorials.dir}">
-	    <fileset basedir="${examples.dir}/BounceSprites">
-		<include name="BounceSprites.html" />
 	    </fileset>
 	</copy>
     </target>
