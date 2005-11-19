@@ -476,6 +476,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// sets the icon for the current window
 		/// </summary>
+		/// <remarks>
+		/// On OS X, this method returns nothing since OS X does not use window icons.
+		/// </remarks>
 		/// <param name="icon">Icon to use</param>
 		public static void WindowIcon(Icon icon)
 		{
@@ -483,10 +486,17 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("icon");
 			}
-			Bitmap bitmap = icon.ToBitmap();
-			Surface surface = new Surface(bitmap);
-			surface.TransparentColor = Color.Empty;
-			WindowIcon(surface);
+			try
+			{
+				Bitmap bitmap = icon.ToBitmap();
+				Surface surface = new Surface(bitmap);
+				surface.TransparentColor = Color.Empty;
+				WindowIcon(surface);
+			}
+			catch
+			{
+				return;
+			}
 		}
 
 		/// <summary>
