@@ -3,4 +3,5 @@ obj
 *.user
 *.csproj
 *.prjx
+*.mdp
 MoviePlayer.xml

@@ -2,6 +2,7 @@ CDTest.csproj.user
 bin
 obj
 build
+*.mdp
 CDPlayer.csproj.user
 *.prjx
 *.xml

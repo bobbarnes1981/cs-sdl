@@ -3,6 +3,7 @@ obj
 *.user
 *.csproj
 *.prjx
+*.mdp
 MfGames.Sdl.Gui.xml
 MfGames.Sdl.Gui.fxcop
 GuiExample.fxcop

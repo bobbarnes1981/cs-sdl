@@ -4,3 +4,4 @@ SdlDotNet.Gui.csproj
 SdlDotNet.Gui.csproj.user
 bin
 SdlDotNet.Gui.prjx
+*.mdp

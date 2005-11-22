@@ -12,3 +12,4 @@ SdlDotNet.FxCop
 *.sln
 cvs2cl.pl
 *.swp
+*.mdp

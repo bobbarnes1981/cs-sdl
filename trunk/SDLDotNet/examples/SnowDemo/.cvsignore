@@ -3,4 +3,5 @@ obj
 *.user
 *.prjx
 *.csproj
+*.mdp
 SnowDemo.xml
