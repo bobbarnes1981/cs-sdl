@@ -3,5 +3,6 @@ obj
 *.user
 *.csproj
 *.prjx
+*.mdp
 MFGames.Sdl.Demos.xml
 SpriteGuiDemos.xml

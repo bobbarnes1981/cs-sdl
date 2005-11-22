@@ -4,3 +4,4 @@ SdlDotNet.Particles.csproj
 SdlDotNet.Particles.csproj.user
 SdlDotNet.Particles.prjx
 bin
+*.mdp

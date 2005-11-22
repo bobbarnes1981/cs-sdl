@@ -8,3 +8,5 @@ SdlDotNet.csproj.user
 *.xml
 *.csproj
 *.swp
+.\.\bin\Release
+*.mdp

@@ -4,3 +4,4 @@ obj
 *.csproj
 Triad.prjx
 Triad.xml
+*.mdp

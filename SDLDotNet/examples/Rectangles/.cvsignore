@@ -6,3 +6,4 @@ gc.log
 *.prjx
 *.xml
 *.csproj
+*.mdp
