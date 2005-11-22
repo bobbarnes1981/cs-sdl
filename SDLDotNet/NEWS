@@ -2,6 +2,23 @@ The latest changelog can be found at:
 http://cs-sdl.sourceforge.net/index.php/Changelog
 
 4.0.0
+David Hudson 22 Nov 2005
+* Minor SdlDotNet.Particles additions and fixes.
+* NeHe Examples.
+* Video disposes correctly.
+* MouseMotionEventArgs.ButtonPressed bug fix (thanks dogwatch).
+* TextSprite Blit bug fix (thanks dogwatch).
+* Sprites now have Left, Top, Right and Bottom properties. Width and Height are now virtual.
+* Sprite IntersectsWith now has tolerance values for more flexible collision detection.
+* Sprite(string filename) constructor for fast creation of sprites.
+* Added many tutorials to the website.
+* AnimationCollection renamed to Animation.
+* Animation now extends from SurfaceCollection.
+* Cleaned up some very old SurfaceCollection documentation.
+* Fixed a positioning bug in the Surface.CreateCompatibleSurfaceFromClipRectangle. (thanks dogwatch)
+* Video.WindowIcon does not freeze on OS X anymore.
+
+4.0.0beta1
 David Hudson 27 Oct 2005
 * Fixed GAC installation and uninstall issues.
 * Fixed Surface.Blit(Sprite). It now blits the sprite to the right location. Thanks to Ekim_Gram for the bug report.
