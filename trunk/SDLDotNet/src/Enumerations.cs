@@ -1627,7 +1627,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Mask for all events
 		/// </summary>
-		AllEvents = Sdl.SDL_ALLEVENTS
+		AllEvents = Sdl.SDL_ALLEVENTS,
+		/// <summary>
+		/// Mask for User Events
+		/// </summary>
+		UserEvent = 1 << Sdl.SDL_USEREVENT
 	}
 
 	/// <summary>
