@@ -38,7 +38,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		private Surface surf = new Surface();
+		private Surface surf = new Surface(Video.Screen.Width, Video.Screen.Height);
 
 		/// <summary>
 		/// 

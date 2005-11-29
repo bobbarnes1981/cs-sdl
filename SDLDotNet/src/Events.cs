@@ -331,6 +331,7 @@ namespace SdlDotNet
 			{
 				events[ i ] = sdlEvents[ i ].EventStruct;
 			}
+			Sdl.SDL_PumpEvents();
 			int result = 
 				Sdl.SDL_PeepEvents(
 				events, 
@@ -359,6 +360,7 @@ namespace SdlDotNet
 		public static void Remove(EventMask eventMask, int numberOfEvents)
 		{
 			Sdl.SDL_Event[] events = new Sdl.SDL_Event[numberOfEvents];
+			Sdl.SDL_PumpEvents();
 			int result = 
 				Sdl.SDL_PeepEvents(
 				events, 
@@ -400,6 +402,68 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Retrieve events of a certain type
+		/// </summary>
+		/// <param name="eventMask">Event to retrieve</param>
+		/// <param name="numberOfEvents">Number of events to retrieve</param>
+		/// <returns>Array containing events</returns>
+		public static SdlEventArgs[] Retrieve(EventMask eventMask, int numberOfEvents)
+		{
+			Sdl.SDL_PumpEvents();
+
+			Sdl.SDL_Event[] events = new Sdl.SDL_Event[numberOfEvents];
+
+			int result = Sdl.SDL_PeepEvents(
+				events,
+				events.Length,
+				Sdl.SDL_GETEVENT,
+				(int)eventMask
+				);
+
+			if (result == (int)SdlFlag.Error)
+			{
+				throw SdlException.Generate();
+			}
+
+			SdlEventArgs[] eventsArray = new SdlEventArgs[result];
+			for ( int i = 0; i < eventsArray.Length; i++ )
+			{
+				eventsArray[i] = SdlEventArgs.CreateEventArgs(events[i]);
+			}
+
+			return eventsArray;
+		}
+
+		/// <summary>
+		/// Retrieve a certain number of events
+		/// </summary>
+		/// <param name="numberOfEvents">Number of events to retrieve</param>
+		/// <returns>Array of Events</returns>
+		public static SdlEventArgs[] Retrieve(int numberOfEvents)
+		{
+			return Retrieve(EventMask.AllEvents, numberOfEvents);
+		}
+
+		/// <summary>
+		/// Retrieve all events
+		/// </summary>
+		/// <returns>Array of events</returns>
+		public static SdlEventArgs[] Retrieve()
+		{
+			return Retrieve(EventMask.AllEvents, QUERY_EVENTS_MAX);
+		}
+
+		/// <summary>
+		/// Retrieve events of a certain type
+		/// </summary>
+		/// <param name="eventMask">Event to retrieve</param>
+		/// <returns>Array containing events</returns>
+		public static SdlEventArgs[] Retrieve(EventMask eventMask)
+		{
+			return Retrieve(eventMask, QUERY_EVENTS_MAX);
+		}
+
+		/// <summary>
 		/// Returns an array of events in the event queue.
 		/// </summary>
 		/// <param name="eventMask">Mask of events to find in queue</param>
@@ -408,6 +472,7 @@ namespace SdlDotNet
 		public static SdlEventArgs[] Peek(EventMask eventMask, int numberOfEvents)
 		{
 			Sdl.SDL_Event[] events = new Sdl.SDL_Event[numberOfEvents];
+			Sdl.SDL_PumpEvents();
 			int result = 
 				Sdl.SDL_PeepEvents(
 				events, 

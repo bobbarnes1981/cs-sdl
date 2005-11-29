@@ -156,13 +156,6 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Create surface that has the same size as the screen
-		/// </summary>
-		public Surface() : this(Video.Screen.Width, Video.Screen.Height)
-		{
-		}
-
-		/// <summary>
 		/// Create a Surface from a byte array in memory.
 		/// </summary>
 		/// <param name="array">
@@ -1701,7 +1694,7 @@ namespace SdlDotNet
 					int positionXTemp = positionX * 2;
 					if (positionX <= positionXMax)
 					{
-						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 2*positionXTemp)));
+						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + positionXTemp)));
 					}
 					else
 					{
@@ -1714,7 +1707,7 @@ namespace SdlDotNet
 					int positionXTemp = positionX * 2;
 					if (positionX <= positionXMax)
 					{
-						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 2*positionXTemp)));
+						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + positionXTemp)));
 					}
 					else
 					{
@@ -1741,7 +1734,7 @@ namespace SdlDotNet
 					int positionXTemp = positionX * 4;
 					if (positionX <= positionXMax)
 					{
-						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 4*positionXTemp)));
+						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + positionXTemp)));
 					}
 					else
 					{
@@ -1870,12 +1863,15 @@ namespace SdlDotNet
 				antiAliasParameter = SdlGfx.SMOOTHING_ON;
 			}
 			
-			return new Surface(
+			Surface surface = new Surface(
 				SdlGfx.rotozoomSurface(
 				this.Handle, 
 				degreesOfRotation, 
 				1, 
 				antiAliasParameter));
+			surface.transparentColor = this.transparentColor;
+			surface.alphaValue = this.alphaValue;
+			return surface; 
 		}
 
 		/// <summary>
@@ -1908,12 +1904,15 @@ namespace SdlDotNet
 			{
 				antiAliasParameter = SdlGfx.SMOOTHING_ON;
 			}
-			
-			return new Surface(SdlGfx.rotozoomSurface(
+		
+			Surface surface = new Surface(SdlGfx.rotozoomSurface(
 				this.Handle, 
 				degreesOfRotation, 
 				zoom, 
 				antiAliasParameter));
+			surface.transparentColor = this.transparentColor;
+			surface.alphaValue = this.alphaValue;
+			return surface; 
 		}
 
 		/// <summary>
@@ -1974,7 +1973,10 @@ namespace SdlDotNet
 			}
 			try
 			{
-				return new Surface(SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter));
+				Surface surface = new Surface(SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter));
+				surface.transparentColor = this.transparentColor;
+				surface.alphaValue = this.alphaValue;
+				return surface;
 			}
 			catch
 			{
@@ -2142,6 +2144,8 @@ namespace SdlDotNet
 			double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
 			double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
 			surface.Scale(stretchWidth, stretchHeight);
+			surface.transparentColor = this.transparentColor;
+			surface.alphaValue = this.alphaValue;
 			return surface;
 		}
 
@@ -2158,6 +2162,8 @@ namespace SdlDotNet
 			double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
 			double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
 			surface.Scale(stretchWidth, stretchHeight);
+			surface.transparentColor = this.transparentColor;
+			surface.alphaValue = this.alphaValue;
 			return surface;
 		}
 
@@ -2478,7 +2484,10 @@ namespace SdlDotNet
 		{
 			if (doDeepCopy)
 			{
-				return (new Surface(SdlGfx.zoomSurface(this.Handle, 1, 1, SdlGfx.SMOOTHING_OFF)));
+				Surface surf = new Surface(SdlGfx.zoomSurface(this.Handle, 1, 1, SdlGfx.SMOOTHING_OFF));
+				surf.transparentColor = this.transparentColor;
+				surf.alphaValue = this.alphaValue;
+				return (surf);
 			}
 			else
 			{
