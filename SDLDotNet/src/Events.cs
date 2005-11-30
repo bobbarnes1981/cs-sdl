@@ -795,14 +795,13 @@ namespace SdlDotNet
 			PushUserEvent(new MusicFinishedEventArgs());
 		}
 
-		#region Thread Management
+		#region Event Ticker
 		private static int targetFps = 30;
 		private static int fps = 30;
 		private static int lastTick;
 		private static float ticksPerFrame = (1000.0f / (float)targetFps);
-		private static Thread thread;
 
-		static bool quitFlag;
+		private static bool quitFlag;
 
 		//The app will exit if the 'x' in the window is clicked
 		private void OnQuit(object sender, QuitEventArgs e) 
@@ -817,6 +816,7 @@ namespace SdlDotNet
 		{
 			Events.AddEvent(new QuitEventArgs());
 		}
+
 		/// <summary>
 		/// Starts the framerate ticker. 
 		/// Must be called to start the manager interface.
@@ -826,24 +826,7 @@ namespace SdlDotNet
 			lastTick = 0;
 			Timer.Initialize();
 			Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
-			thread = new Thread(new ThreadStart(ThreadTicker));
-			thread.Priority = ThreadPriority.Normal;
-			thread.IsBackground = true;
-			thread.Name = "SDL.NET - Event Manager";
-			thread.Start();
-			try 
-			{
-				while (!quitFlag) 
-				{
-					// handle events till the queue is empty
-					while (Events.Poll()) 
-					{} 
-				}
-			} 
-			catch 
-			{
-				throw;
-			}
+			ThreadTicker();
 		}
 
 		/// <summary>
@@ -900,19 +883,20 @@ namespace SdlDotNet
 			int currentTick;
 			int targetTick;
 			
-			while(thread.IsAlive)
+			while(!quitFlag)
 			{
+				while(Events.Poll()); // Poll all events
 				currentTick = Timer.TicksElapsed;
 				targetTick = lastTick + (int)ticksPerFrame;
 
 				if (currentTick <= targetTick) 
 				{
-					Thread.Sleep(targetTick - currentTick);
+					Thread.Sleep(targetTick - currentTick);			// Using Thread
+					//Timer.DelayTicks(targetTick - currentTick);	// Using SDL
 				} 
 				currentTick = Timer.TicksElapsed;
 				
-				Events.OnTick(
-					new TickEventArgs(currentTick, lastTick, fps));
+				Events.OnTick(new TickEventArgs(currentTick, lastTick, fps));
 				lastTick = currentTick;
 				currentTime = Timer.TicksElapsed;
 				frames++;
