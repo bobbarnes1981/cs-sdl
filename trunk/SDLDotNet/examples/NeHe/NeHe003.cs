@@ -51,6 +51,29 @@ namespace SdlDotNet.Examples
 
 		#endregion Fields
 
+		#region Lesson Setup
+
+		/// <summary>
+		/// Initializes the OpenGL system
+		/// </summary>
+		protected override void InitGL()
+		{
+			// Enable Smooth Shading
+			Gl.glShadeModel(Gl.GL_SMOOTH);
+			// Black Background
+			Gl.glClearColor(0.0F, 0.0F, 0.0F, 0.5F);
+			// Depth Buffer Setup
+			Gl.glClearDepth(1.0F);
+			// Enables Depth Testing
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			// The Type Of Depth Testing To Do
+			Gl.glDepthFunc(Gl.GL_LEQUAL);
+			// Really Nice Perspective Calculations
+			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+		}
+
+		#endregion Lesson Setup
+
 		#region void DrawGLScene
 
 		/// <summary>

@@ -46,8 +46,6 @@ namespace SdlDotNet.Examples
 		int height = 480;
 		// Bits per pixel of screen
 		int bpp = 16;
-		// quit flag
-		bool quit;
 		// Surface to render on
 		Surface screen;
 
@@ -117,8 +115,10 @@ namespace SdlDotNet.Examples
 		{
 			// Sets keyboard events
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-			// Sets event ot quit application
-			Events.Quit += new QuitEventHandler(this.Quit);
+			// Sets the ticker to update OpenGL Context
+			Events.Tick += new TickEventHandler(this.Tick);
+			// Set the Frames per second.
+			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
 			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
@@ -169,7 +169,9 @@ namespace SdlDotNet.Examples
 		/// Initializes the OpenGL system
 		/// </summary>
 		protected virtual void InitGL()
-		{
+		{ 
+			//this.Ticker = new TickEventHandler(this.Tick);
+			//Events.Tick += ticker;
 			// Enable Smooth Shading
 			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
@@ -207,7 +209,7 @@ namespace SdlDotNet.Examples
 			{
 				case Key.Escape:
 					// Will stop the app loop
-					quit = true;
+					Events.QuitApplication();
 					break;
 				case Key.F1:
 					// Toggle fullscreen
@@ -225,9 +227,10 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void Quit(object sender, QuitEventArgs e)
+		private void Tick(object sender, TickEventArgs e)
 		{
-			quit = true;
+			DrawGLScene();
+			Video.GLSwapBuffers();
 		}
 
 		#endregion Event Handlers
@@ -240,17 +243,11 @@ namespace SdlDotNet.Examples
 		{
 			Reshape();
 			InitGL();
-			while ((!quit)) 
-			{
-				while (Events.Poll()) 
-				{
-				}
-				DrawGLScene();
-				Video.GLSwapBuffers();
-			}
+			Events.Run();
 			// Quits video
-			Video.Dispose(true);
+			Video.Dispose();
 		}
+
 		#endregion Run Loop
 	}
 }

@@ -197,7 +197,7 @@ namespace SdlDotNet.Examples
 		static int T0 = 0;
 		static int Frames = 0;
 
-		static void draw ()
+		static void Draw()
 		{
 			Gl.glClear (Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 
@@ -227,7 +227,7 @@ namespace SdlDotNet.Examples
 			Gl.glPopMatrix();
 
 			Video.GLSwapBuffers();
-
+			
 			Frames++;
 			int t = Timer.TicksElapsed;
 			if (t - T0 >= 5000)
@@ -240,8 +240,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-
-		static void idle ()
+		static void Idle ()
 		{
 			angle += 2.0;
 		}
@@ -250,7 +249,7 @@ namespace SdlDotNet.Examples
 		static int m_newH;
 
 		/* new window size or exposure */
-		static void reshape ()
+		static void Reshape ()
 		{
 			m_newW = m_screen.Width;
 			m_newH = m_screen.Height;
@@ -265,7 +264,7 @@ namespace SdlDotNet.Examples
 			Gl.glTranslated (0.0, 0.0, -40.0);
 		}
 
-		static void init ()
+		static void Init ()
 		{
 			float[] pos = {5.0f, 5.0f, 10.0f, 0.0f};
 			float[] red = {0.8f, 0.1f, 0.0f, 1.0f};
@@ -309,7 +308,6 @@ namespace SdlDotNet.Examples
 					Gl.glGetString(Gl.GL_EXTENSIONS));
 		}
 
-		static bool quitFlag = false;
 		static Surface m_screen;
 
 		/// <summary>
@@ -318,7 +316,7 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			m_screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
-			Events.Quit += new QuitEventHandler (this.Quit);
+			Events.Tick += new TickEventHandler(this.Tick);
 			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.KeyboardDown);
@@ -326,18 +324,9 @@ namespace SdlDotNet.Examples
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Gears";
 
-			init ();
-			reshape ();
-			while ( ! quitFlag )
-			{
-				idle();
-				while (Events.Poll()) ;
-				if (m_screen.Width != m_newW || m_screen.Height != m_newH)
-				{
-					reshape ();
-				}
-				draw ();
-			}
+			Init();
+			Reshape();
+			Events.Run();
 		}
 
 		[STAThread]
@@ -347,15 +336,11 @@ namespace SdlDotNet.Examples
 			gears.Run();
 		}
 
-		private void Quit (object sender, QuitEventArgs e)
-		{
-			quitFlag = true;
-		}
-
 		private void Resize (object sender, VideoResizeEventArgs e)
 		{
 			m_screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		}
+
 		private void KeyboardDown(
 			object sender,
 			KeyboardEventArgs e)
@@ -363,8 +348,20 @@ namespace SdlDotNet.Examples
 			if (e.Key == Key.Escape ||
 				e.Key == Key.Q)
 			{
-				quitFlag = true;
+				Events.QuitApplication();
 			}
+		}
+
+		private void Tick(object sender, TickEventArgs e)
+		{
+			Idle();
+			if (m_screen.Width != m_newW || m_screen.Height != m_newH)
+			{
+				Init();
+				Reshape();
+			}
+			Draw();
+			
 		}
 	}
 }

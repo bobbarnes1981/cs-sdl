@@ -140,18 +140,33 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		object dynObj;
+
 		private void startButton_Click(object sender, System.EventArgs e)
 		{
 			try
 			{
+				try
+				{
+					if (dynObj != null)
+					{
+						SdlDotNet.Events.QuitApplication();
+						dynObj = null;
+					}
+				}
+				catch(SdlDotNet.SdlException)
+				{
+					// already quit SDL - Do nothing
+				}
+				
 				// Get the desired NeHe example type.
 				Type dynClassType = (Type)neheTypes[lstExamples.SelectedIndex];
 
 				// Make an instance of it.
-				object dynObj = Activator.CreateInstance(dynClassType);
+				dynObj = Activator.CreateInstance(dynClassType);
 				if(dynObj != null)
 				{
-					this.SendToBack(); // Make the SDL window appear ontop of this form.
+					this.SendToBack(); // Make the SDL window appear on top of this form.
 					MethodInfo invokedMethod = dynClassType.GetMethod("Run");
 					invokedMethod.Invoke(dynObj, null);
 				}
@@ -188,7 +203,7 @@ namespace SdlDotNet.Examples
 
 			// End the thread and the application.
 			Application.Exit();
-			System.Threading.Thread.CurrentThread.Abort();
+			//System.Threading.Thread.CurrentThread.Abort();
 		}
 	}
 }
