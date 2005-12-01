@@ -38,9 +38,6 @@ namespace SdlDotNet.Examples
 
 		// A random number generator to be used for placing the rectangles
 		private Random rand = new Random();
-
-		// Backend surface to hold old rectangles.
-		private Surface surf;
 		
 		/// <summary>
 		/// 
@@ -56,17 +53,21 @@ namespace SdlDotNet.Examples
 		{
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
 			Events.Tick += new TickEventHandler(this.Tick);
+			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
 			Events.Fps = 50;
 
 			screen = Video.SetVideoModeWindow(width, height, true);
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Rectangles Example";
-			Mouse.ShowCursor = false;
-
-			surf = screen.CreateCompatibleSurface(width, height, true);
-			surf.Fill(Color.Black);
 
 			Events.Run();
+		}
+
+		private void Resize (object sender, VideoResizeEventArgs e)
+		{
+			screen = Video.SetVideoModeWindow(e.Width, e.Height, true);
+			this.width = e.Width;
+			this.height = e.Height;
 		}
 
 		private void KeyboardDown(object sender, KeyboardEventArgs e)
@@ -81,17 +82,14 @@ namespace SdlDotNet.Examples
 		private void Tick(object sender, TickEventArgs e)
 		{
 			// Draw a new random rectangle
-			surf.Fill(
+			screen.Fill(
 				new Rectangle(
-					rand.Next(-300, width), rand.Next(-300, height),
-					rand.Next(20, 300), rand.Next(20, 300)),
+				rand.Next(-300, width), rand.Next(-300, height),
+				rand.Next(20, 300), rand.Next(20, 300)),
 				Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
 
-			// Draw the rectangles onto the screen
-			screen.Blit(surf);
-
 			// Flip the back buffer onto the screen.
-			screen.Flip();
+			screen.Update();
 		}
 
 		[STAThread]
