@@ -508,7 +508,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="attribute">The attribute to set</param>
 		/// <param name="attributeValue">The new attribute value</param>
-		public static void GLSetAttribute(OpenGLAttr attribute, int attributeValue) 
+		public static void GLSetAttribute(OpenGLAttrib attribute, int attributeValue) 
 		{
 			if (Sdl.SDL_GL_SetAttribute((int)attribute, attributeValue) != 0)
 			{
@@ -520,15 +520,322 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="attribute">The attribute to get</param>
 		/// <returns>The current attribute value</returns>
-		public static int GLGetAttribute(OpenGLAttr attribute) 
+		public static int GLGetAttribute(OpenGLAttrib attribute) 
 		{
-			int ret;
-			if (Sdl.SDL_GL_GetAttribute((int)attribute, out ret) != 0)
+			int returnValue;
+			if (Sdl.SDL_GL_GetAttribute((int)attribute, out returnValue) != 0)
 			{
 				throw SdlException.Generate();
 			}
-			return ret;
+			return returnValue;
 		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL red framebuffer.
+		/// </summary>
+		/// <value>The size of the GL red framebuffer.</value>
+		public static int GLRedFrameBufferSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.RedSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.RedSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL green framebuffer.
+		/// </summary>
+		/// <value>The size of the GL green framebuffer.</value>
+		public static int GLGreenFrameBufferSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.GreenSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.GreenSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL blue framebuffer.
+		/// </summary>
+		/// <value>The size of the GL blue framebuffer.</value>
+		public static int GLBlueFrameBufferSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.BlueSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.BlueSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL alpha framebuffer.
+		/// </summary>
+		/// <value>The size of the GL alpha framebuffer.</value>
+		public static int GLAlphaFrameBufferSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.AlphaSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.AlphaSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL framebuffer.
+		/// </summary>
+		/// <value>The size of the GL framebuffer.</value>
+		public static int GLFrameBufferSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.BufferSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.BufferSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL depth.
+		/// </summary>
+		/// <value>The size of the GL depth.</value>
+		public static int GLDepthSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.DepthSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.DepthSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL stencil.
+		/// </summary>
+		/// <value>The size of the GL stencil.</value>
+		public static int GLStencilSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.StencilSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.StencilSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL red accumulation buffer.
+		/// </summary>
+		/// <value>The size of the GL red accumulation buffer.</value>
+		public static int GLRedAccumulationBufferSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.AccumulationRedSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.AccumulationRedSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL green accumulation buffer.
+		/// </summary>
+		/// <value>The size of the GL green accumulation buffer.</value>
+		public static int GLGreenAccumulationBufferSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.AccumulationGreenSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.AccumulationGreenSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL blue accumulation buffer.
+		/// </summary>
+		/// <value>The size of the GL blue accumulation buffer.</value>
+		public static int GLBlueAccumulationBufferSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.AccumulationBlueSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.AccumulationBlueSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the size of the GL alpha accumulation buffer.
+		/// </summary>
+		/// <value>The size of the GL alpha accumulation buffer.</value>
+		public static int GLAlphaAccumulationBufferSize
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.AccumulationAlphaSize);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.AccumulationAlphaSize, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the GL stereo rendering.
+		/// </summary>
+		/// <value>The GL stereo rendering.</value>
+		public static int GLStereoRendering
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.StereoRendering);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.StereoRendering, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this instance is GL double buffer enabled.
+		/// </summary>
+		/// <value>
+		/// 	<c>true</c> if this instance is GL double buffer enabled; otherwise, <c>false</c>.
+		/// </value>
+		public static bool IsGLDoubleBufferEnabled
+		{
+			get
+			{
+				int result = Video.GLGetAttribute(OpenGLAttrib.DoubleBuffer);
+				if (result == 1)
+				{
+					return false;
+				}
+				else if (result == 0)
+				{
+					return true;
+				}
+				else
+				{
+					throw new SdlException("Video.GLGetAttribute returned an improper result for DoubleBuffer");
+				}
+			}
+			set
+			{
+				if (value == true)
+				{
+					Video.GLSetAttribute(OpenGLAttrib.DoubleBuffer, 0);
+				}
+				else
+				{
+					Video.GLSetAttribute(OpenGLAttrib.DoubleBuffer, 1);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this instance is GL stereo rendering enabled.
+		/// </summary>
+		/// <value>
+		/// 	<c>true</c> if this instance is GL stereo rendering enabled; otherwise, <c>false</c>.
+		/// </value>
+		public static bool IsGLStereoRenderingEnabled
+		{
+			get
+			{
+				int result = Video.GLGetAttribute(OpenGLAttrib.StereoRendering);
+				if (result == 1)
+				{
+					return false;
+				}
+				else if (result == 0)
+				{
+					return true;
+				}
+				else
+				{
+					throw new SdlException("Video.GLGetAttribute returned an improper result for StereoRendering");
+				}
+			}
+			set
+			{
+				if (value == true)
+				{
+					Video.GLSetAttribute(OpenGLAttrib.StereoRendering, 0);
+				}
+				else
+				{
+					Video.GLSetAttribute(OpenGLAttrib.DoubleBuffer, 1);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the GL multi sample buffers.
+		/// </summary>
+		/// <value>The GL multi sample buffers.</value>
+		public static int GLMultiSampleBuffers
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.MultiSampleBuffers);
+			}
+			set
+			{
+				if (value < 0)
+				{
+					value = 0;
+				}
+				else if (value > 1)
+				{
+					value = 1;
+				}
+				Video.GLSetAttribute(OpenGLAttrib.MultiSampleBuffers, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the GL multi sample samples.
+		/// </summary>
+		/// <value>The GL multi sample samples.</value>
+		public static int GLMultiSampleSamples
+		{
+			get
+			{
+				return Video.GLGetAttribute(OpenGLAttrib.MultiSampleSamples);
+			}
+			set
+			{
+				Video.GLSetAttribute(OpenGLAttrib.MultiSampleBuffers, value);
+			}
+		}
+
 
 		/// <summary>
 		/// gets or sets the text for the current window
@@ -582,8 +889,9 @@ namespace SdlDotNet
 				surface.TransparentColor = Color.Empty;
 				WindowIcon(surface);
 			}
-			catch
+			catch (SdlException e)
 			{
+				e.ToString();
 				return;
 			}
 		}
