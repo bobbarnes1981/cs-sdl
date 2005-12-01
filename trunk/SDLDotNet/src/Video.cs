@@ -50,6 +50,7 @@ namespace SdlDotNet
 		{
 			Dispose(false);
 		}
+
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
@@ -137,10 +138,10 @@ namespace SdlDotNet
 		/// </returns>
 		public static bool IsVideoModeOk(int width, int height, bool fullscreen, int bitsPerPixel)
 		{
-			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
+			VideoModes flags = VideoModes.None;
 			if (fullscreen)
 			{
-				flags |= VideoModes.Fullscreen;
+				flags = VideoModes.Fullscreen;
 			}
 			int result = Sdl.SDL_VideoModeOK(
 				width, 
@@ -177,10 +178,10 @@ namespace SdlDotNet
 		/// <param name="fullscreen">Fullscreen mode</param>
 		public static int BestBitsPerPixel(int width, int height, bool fullscreen)
 		{
-			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
+			VideoModes flags = VideoModes.None;
 			if (fullscreen)
 			{
-				flags |= VideoModes.Fullscreen;
+				flags = VideoModes.Fullscreen;
 			}
 			return Sdl.SDL_VideoModeOK(
 				width, 
@@ -197,10 +198,10 @@ namespace SdlDotNet
 		/// <returns>Array of Size structs</returns>
 		public static Size[] ListModes(bool fullscreen)
 		{
-			int flags = (int)(VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
+			int flags = (int)VideoModes.None;
 			if (fullscreen)
 			{
-				flags |= (int)VideoModes.Fullscreen;
+				flags = (int)VideoModes.Fullscreen;
 			}
 			IntPtr format = IntPtr.Zero;
 			Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, flags);
@@ -221,7 +222,7 @@ namespace SdlDotNet
 		public static Surface SetVideoMode(int width, int height) 
 		{
 			return SetVideoMode(width, height, 0,
-				(VideoModes.HardwareSurface|VideoModes.DoubleBuffering|VideoModes.Fullscreen));
+				(VideoModes.Fullscreen));
 		}
 		/// <summary>
 		/// Sets the video mode of a fullscreen application
@@ -233,7 +234,7 @@ namespace SdlDotNet
 		public static Surface SetVideoMode(int width, int height, int bitsPerPixel) 
 		{
 			return SetVideoMode(width, height, bitsPerPixel,
-				(VideoModes.HardwareSurface|VideoModes.DoubleBuffering|VideoModes.Fullscreen));
+				(VideoModes.Fullscreen));
 		}
 
 		/// <summary>
@@ -253,24 +254,78 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
+		/// <param name="resizable">
+		/// If true, the window will be resizable
+		/// </param>
+		/// <returns>a surface to draw to</returns>
+		public static Surface SetVideoModeWindow(int width, int height, bool resizable) 
+		{
+			VideoModes flags = VideoModes.None;
+			if (resizable)
+			{
+				flags = VideoModes.Resizable;
+			}
+			return SetVideoMode(width, height, 0, flags);
+		}
+
+		/// <summary>
+		/// Sets the windowed video mode using current screen bpp
+		/// </summary>
+		/// <param name="width">The width of the window</param>
+		/// <param name="height">The height of the window</param>
+		/// <param name="resizable">
+		/// If true, the window will be resizable
+		/// </param>
 		/// <param name="frame">
 		/// if true, the window will have a frame around it
 		/// </param>
 		/// <returns>a surface to draw to</returns>
-		public static Surface SetVideoModeWindow(int width, int height, bool frame) 
+		public static Surface SetVideoModeWindow(int width, int height, bool resizable, bool frame) 
 		{
-			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
+			VideoModes flags = VideoModes.None;
+			if (resizable)
+			{
+				flags = VideoModes.Resizable;
+			}
 			if (!frame)
 			{
-				flags |= VideoModes.NoFrame;
+				flags = VideoModes.NoFrame;
 			}
 			return SetVideoMode(width, height, 0, flags);
 		}
+
 		/// <summary>
 		/// Sets the windowed video mode
 		/// </summary>
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
+		/// <param name="resizable">
+		/// If true, the window will be resizable
+		/// </param>
+		/// <param name="bitsPerPixel">bits per pixel</param>
+		/// <returns>a surface to draw to</returns>
+		public static Surface SetVideoModeWindow(
+			int width, 
+			int height, 
+			int bitsPerPixel, 
+			bool resizable) 
+		{
+			VideoModes flags = VideoModes.None;
+			if (resizable)
+			{
+				flags = VideoModes.Resizable;
+			}
+			return SetVideoMode(width, height, bitsPerPixel, flags);
+		}
+
+		/// <summary>
+		/// Sets the windowed video mode
+		/// </summary>
+		/// <param name="width">The width of the window</param>
+		/// <param name="height">The height of the window</param>
+		/// <param name="resizable">
+		/// If true, the window will be resizable
+		/// </param>
 		/// <param name="frame">
 		/// if true, the window will have a frame around it
 		/// </param>
@@ -279,13 +334,18 @@ namespace SdlDotNet
 		public static Surface SetVideoModeWindow(
 			int width, 
 			int height, 
-			int bitsPerPixel, 
+			int bitsPerPixel,
+			bool resizable,
 			bool frame) 
 		{
-			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.DoubleBuffering);
+			VideoModes flags = VideoModes.None;
+			if (resizable)
+			{
+				flags = VideoModes.Resizable;
+			}
 			if (!frame)
 			{
-				flags |= VideoModes.NoFrame;
+				flags = VideoModes.NoFrame;
 			}
 			return SetVideoMode(width, height, bitsPerPixel, flags);
 		}
@@ -300,13 +360,37 @@ namespace SdlDotNet
 		public static Surface SetVideoModeOpenGL(int width, int height, int bitsPerPixel) 
 		{
 			return SetVideoMode(width, height, bitsPerPixel,
-				(VideoModes.HardwareSurface|VideoModes.OpenGL|VideoModes.Fullscreen));
+				(VideoModes.OpenGL|VideoModes.Fullscreen));
 		}
 		/// <summary>
 		/// Sets a windowed video mode suitable for drawing with OpenGL
 		/// </summary>
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
+		/// <param name="resizable">
+		/// If true, the window will be resizable
+		/// </param>
+		/// <returns>A Surface representing the window</returns>
+		public static Surface SetVideoModeWindowOpenGL(
+			int width, 
+			int height, 
+			bool resizable) 
+		{
+			VideoModes flags = VideoModes.OpenGL;
+			if (resizable)
+			{
+				flags |= VideoModes.Resizable;
+			}
+			return SetVideoMode(width, height, 0, flags);
+		}
+		/// <summary>
+		/// Sets a windowed video mode suitable for drawing with OpenGL
+		/// </summary>
+		/// <param name="width">The width of the window</param>
+		/// <param name="height">The height of the window</param>
+		/// <param name="resizable">
+		/// If true, the window will be resizable
+		/// </param>
 		/// <param name="frame">
 		/// If true, the window will have a frame around it
 		/// </param>
@@ -314,9 +398,14 @@ namespace SdlDotNet
 		public static Surface SetVideoModeWindowOpenGL(
 			int width, 
 			int height, 
+			bool resizable,
 			bool frame) 
 		{
-			VideoModes flags = (VideoModes.HardwareSurface|VideoModes.OpenGL);
+			VideoModes flags = (VideoModes.OpenGL);
+			if (resizable)
+			{
+				flags |= VideoModes.Resizable;
+			}
 			if (!frame)
 			{
 				flags |= VideoModes.NoFrame;
