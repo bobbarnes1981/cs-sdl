@@ -197,15 +197,17 @@ namespace SdlDotNet
 		/// </summary>
 		AccumulationAlphaSize = Sdl.SDL_GL_ACCUM_ALPHA_SIZE,
 		/// <summary>
-		/// Stereo rendering. Left and right buffers.
+		/// Enable or disable stereo (left and right) buffers (0 or 1).
 		/// </summary>
-		Stereo = Sdl.SDL_GL_STEREO,
+		StereoRendering = Sdl.SDL_GL_STEREO,
 		/// <summary>
-		/// For fullscreen anitaliasing
+		/// Number of multisample buffers (0 or 1). 
+		/// Requires the GL_ARB_MULTISAMPLE extension.
 		/// </summary>
 		MultiSampleBuffers = Sdl.SDL_GL_MULTISAMPLEBUFFERS,
 		/// <summary>
-		/// For fullscreen anitaliasing
+		/// Number of samples per pixel when multisampling is enabled. 
+		/// Requires the GL_ARB_MULTISAMPLE extension.
 		/// </summary>
 		MultiSampleSamples = Sdl.SDL_GL_MULTISAMPLESAMPLES
 	}
