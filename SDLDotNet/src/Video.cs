@@ -508,7 +508,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="attribute">The attribute to set</param>
 		/// <param name="attributeValue">The new attribute value</param>
-		public static void GLSetAttribute(OpenGLAttrib attribute, int attributeValue) 
+		public static void GLSetAttribute(OpenGLAttr attribute, int attributeValue) 
 		{
 			if (Sdl.SDL_GL_SetAttribute((int)attribute, attributeValue) != 0)
 			{
@@ -520,7 +520,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="attribute">The attribute to get</param>
 		/// <returns>The current attribute value</returns>
-		public static int GLGetAttribute(OpenGLAttrib attribute) 
+		public static int GLGetAttribute(OpenGLAttr attribute) 
 		{
 			int returnValue;
 			if (Sdl.SDL_GL_GetAttribute((int)attribute, out returnValue) != 0)
@@ -538,11 +538,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.RedSize);
+				return Video.GLGetAttribute(OpenGLAttr.RedSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.RedSize, value);
+				Video.GLSetAttribute(OpenGLAttr.RedSize, value);
 			}
 		}
 
@@ -554,11 +554,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.GreenSize);
+				return Video.GLGetAttribute(OpenGLAttr.GreenSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.GreenSize, value);
+				Video.GLSetAttribute(OpenGLAttr.GreenSize, value);
 			}
 		}
 
@@ -570,11 +570,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.BlueSize);
+				return Video.GLGetAttribute(OpenGLAttr.BlueSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.BlueSize, value);
+				Video.GLSetAttribute(OpenGLAttr.BlueSize, value);
 			}
 		}
 
@@ -586,11 +586,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.AlphaSize);
+				return Video.GLGetAttribute(OpenGLAttr.AlphaSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.AlphaSize, value);
+				Video.GLSetAttribute(OpenGLAttr.AlphaSize, value);
 			}
 		}
 
@@ -602,11 +602,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.BufferSize);
+				return Video.GLGetAttribute(OpenGLAttr.BufferSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.BufferSize, value);
+				Video.GLSetAttribute(OpenGLAttr.BufferSize, value);
 			}
 		}
 
@@ -618,11 +618,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.DepthSize);
+				return Video.GLGetAttribute(OpenGLAttr.DepthSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.DepthSize, value);
+				Video.GLSetAttribute(OpenGLAttr.DepthSize, value);
 			}
 		}
 
@@ -634,11 +634,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.StencilSize);
+				return Video.GLGetAttribute(OpenGLAttr.StencilSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.StencilSize, value);
+				Video.GLSetAttribute(OpenGLAttr.StencilSize, value);
 			}
 		}
 
@@ -650,11 +650,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.AccumulationRedSize);
+				return Video.GLGetAttribute(OpenGLAttr.AccumulationRedSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.AccumulationRedSize, value);
+				Video.GLSetAttribute(OpenGLAttr.AccumulationRedSize, value);
 			}
 		}
 
@@ -666,11 +666,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.AccumulationGreenSize);
+				return Video.GLGetAttribute(OpenGLAttr.AccumulationGreenSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.AccumulationGreenSize, value);
+				Video.GLSetAttribute(OpenGLAttr.AccumulationGreenSize, value);
 			}
 		}
 
@@ -682,11 +682,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.AccumulationBlueSize);
+				return Video.GLGetAttribute(OpenGLAttr.AccumulationBlueSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.AccumulationBlueSize, value);
+				Video.GLSetAttribute(OpenGLAttr.AccumulationBlueSize, value);
 			}
 		}
 
@@ -698,11 +698,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.AccumulationAlphaSize);
+				return Video.GLGetAttribute(OpenGLAttr.AccumulationAlphaSize);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.AccumulationAlphaSize, value);
+				Video.GLSetAttribute(OpenGLAttr.AccumulationAlphaSize, value);
 			}
 		}
 
@@ -714,11 +714,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.StereoRendering);
+				return Video.GLGetAttribute(OpenGLAttr.StereoRendering);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.StereoRendering, value);
+				Video.GLSetAttribute(OpenGLAttr.StereoRendering, value);
 			}
 		}
 
@@ -732,7 +732,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				int result = Video.GLGetAttribute(OpenGLAttrib.DoubleBuffer);
+				int result = Video.GLGetAttribute(OpenGLAttr.DoubleBuffer);
 				if (result == 1)
 				{
 					return false;
@@ -750,11 +750,11 @@ namespace SdlDotNet
 			{
 				if (value == true)
 				{
-					Video.GLSetAttribute(OpenGLAttrib.DoubleBuffer, 0);
+					Video.GLSetAttribute(OpenGLAttr.DoubleBuffer, 0);
 				}
 				else
 				{
-					Video.GLSetAttribute(OpenGLAttrib.DoubleBuffer, 1);
+					Video.GLSetAttribute(OpenGLAttr.DoubleBuffer, 1);
 				}
 			}
 		}
@@ -769,7 +769,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				int result = Video.GLGetAttribute(OpenGLAttrib.StereoRendering);
+				int result = Video.GLGetAttribute(OpenGLAttr.StereoRendering);
 				if (result == 1)
 				{
 					return false;
@@ -787,11 +787,11 @@ namespace SdlDotNet
 			{
 				if (value == true)
 				{
-					Video.GLSetAttribute(OpenGLAttrib.StereoRendering, 0);
+					Video.GLSetAttribute(OpenGLAttr.StereoRendering, 0);
 				}
 				else
 				{
-					Video.GLSetAttribute(OpenGLAttrib.DoubleBuffer, 1);
+					Video.GLSetAttribute(OpenGLAttr.DoubleBuffer, 1);
 				}
 			}
 		}
@@ -804,7 +804,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.MultiSampleBuffers);
+				return Video.GLGetAttribute(OpenGLAttr.MultiSampleBuffers);
 			}
 			set
 			{
@@ -816,7 +816,7 @@ namespace SdlDotNet
 				{
 					value = 1;
 				}
-				Video.GLSetAttribute(OpenGLAttrib.MultiSampleBuffers, value);
+				Video.GLSetAttribute(OpenGLAttr.MultiSampleBuffers, value);
 			}
 		}
 
@@ -828,11 +828,11 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Video.GLGetAttribute(OpenGLAttrib.MultiSampleSamples);
+				return Video.GLGetAttribute(OpenGLAttr.MultiSampleSamples);
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttrib.MultiSampleBuffers, value);
+				Video.GLSetAttribute(OpenGLAttr.MultiSampleBuffers, value);
 			}
 		}
 
