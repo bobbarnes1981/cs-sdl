@@ -22,20 +22,19 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class Gears
 	{
-//		Draw a gear wheel. You'll probably want to call this function when
-//		building a display list since we do a lot of trig here.
-//
-//		Input: inner_radius - radius of hole at center
-//		outer_radius - radius at center of teeth
-//		width - width of gear
-//		teeth - number of teeth
-//		tooth_depth - depth of tooth
-
-		static private void gear (double inner_radius,
-			double outer_radius,
+		//		Draw a gear wheel. You'll probably want to call this function when
+		//		building a display list since we do a lot of trig here.
+		//
+		//		Input: inner_radius - radius of hole at center
+		//		outer_radius - radius at center of teeth
+		//		width - width of gear
+		//		teeth - number of teeth
+		//		tooth_depth - depth of tooth
+		static void CreateGear (double innerRadius,
+			double outerRadius,
 			double width,
 			int teeth,
-			double tooth_depth)
+			double toothDepth)
 		{
 			int i;
 			double angle;
@@ -43,9 +42,9 @@ namespace SdlDotNet.Examples
 			double v; 
 			double len;
 
-			double r0 = inner_radius;
-			double r1 = outer_radius - tooth_depth / 2.0;
-			double r2 = outer_radius + tooth_depth / 2.0;
+			double r0 = innerRadius;
+			double r1 = outerRadius - toothDepth / 2.0;
+			double r2 = outerRadius + toothDepth / 2.0;
 
 			double da = 2.0 * Math.PI / teeth / 4.0;
 
@@ -186,25 +185,25 @@ namespace SdlDotNet.Examples
 			Gl.glEnd();
 		}
 
-		static double view_rotx = 20.0f; 
-		static double view_roty = 30.0f; 
-		static double view_rotz = 0.0f;
-		static int gear1;
-		static int gear2; 
-		static int gear3;
-		static double angle = 0.0f;
+		double viewRotX = 20.0f; 
+		double viewRotY = 30.0f; 
+		double viewRotZ = 0.0f;
+		int gear1;
+		int gear2; 
+		int gear3;
+		double angle = 0.0f;
 
-		static int T0 = 0;
-		static int Frames = 0;
+		int timeMarker = 0;
+		int frames = 0;
 
-		static void Draw()
+		void Draw()
 		{
 			Gl.glClear (Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 
 			Gl.glPushMatrix();
-			Gl.glRotated(view_rotx, 1.0, 0.0, 0.0);
-			Gl.glRotated(view_roty, 0.0, 1.0, 0.0);
-			Gl.glRotated(view_rotz, 0.0, 0.0, 1.0);
+			Gl.glRotated(viewRotX, 1.0, 0.0, 0.0);
+			Gl.glRotated(viewRotY, 0.0, 1.0, 0.0);
+			Gl.glRotated(viewRotZ, 0.0, 0.0, 1.0);
 
 			Gl.glPushMatrix();
 			Gl.glTranslated(-3.0, -2.0, 0.0);
@@ -228,34 +227,34 @@ namespace SdlDotNet.Examples
 
 			Video.GLSwapBuffers();
 			
-			Frames++;
+			frames++;
 			int t = Timer.TicksElapsed;
-			if (t - T0 >= 5000)
+			if (t - timeMarker >= 5000)
 			{
-				double seconds = (t - T0) / 1000.0;
-				double fps = Frames / seconds;
-				System.Console.WriteLine("c#: {0} frames in {1} seconds = {2} FPS", Frames, seconds, fps);
-				T0 = t;
-				Frames = 0;
+				double seconds = (t - timeMarker) / 1000.0;
+				double fps = frames / seconds;
+				System.Console.WriteLine("c#: {0} frames in {1} seconds = {2} FPS", frames, seconds, fps);
+				timeMarker = t;
+				frames = 0;
 			}
 		}
 
-		static void Idle ()
+		void Idle()
 		{
 			angle += 2.0;
 		}
 
-		static int m_newW;
-		static int m_newH;
+		int newWidth;
+		int newHeight;
 
 		/* new window size or exposure */
-		static void Reshape ()
+		void Reshape()
 		{
-			m_newW = m_screen.Width;
-			m_newH = m_screen.Height;
-			double h = (double)m_newH / (double)m_newW;
+			newWidth = screen.Width;
+			newHeight = screen.Height;
+			double h = (double)newHeight / (double)newWidth;
 
-			Gl.glViewport (0, 0, m_newW, m_newH);
+			Gl.glViewport (0, 0, newWidth, newHeight);
 			Gl.glMatrixMode (Gl.GL_PROJECTION);
 			Gl.glLoadIdentity ();
 			Gl.glFrustum (-1.0, 1.0, -h, h, 5.0, 60.0);
@@ -264,7 +263,7 @@ namespace SdlDotNet.Examples
 			Gl.glTranslated (0.0, 0.0, -40.0);
 		}
 
-		static void Init ()
+		void Init()
 		{
 			float[] pos = {5.0f, 5.0f, 10.0f, 0.0f};
 			float[] red = {0.8f, 0.1f, 0.0f, 1.0f};
@@ -281,41 +280,41 @@ namespace SdlDotNet.Examples
 			gear1 = Gl.glGenLists(1);
 			Gl.glNewList(gear1, Gl.GL_COMPILE);
 			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_AMBIENT_AND_DIFFUSE, red);
-			gear(1.0, 4.0, 1.0, 20, 0.7);
+			CreateGear(1.0, 4.0, 1.0, 20, 0.7);
 			Gl.glEndList();
 
 			gear2 = Gl.glGenLists(1);
 			Gl.glNewList(gear2, Gl.GL_COMPILE);
 			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_AMBIENT_AND_DIFFUSE, green);
-			gear(0.5, 2.0, 2.0, 10, 0.7);
+			CreateGear(0.5, 2.0, 2.0, 10, 0.7);
 			Gl.glEndList();
 
 			gear3 = Gl.glGenLists(1);
 			Gl.glNewList(gear3, Gl.GL_COMPILE);
 			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_AMBIENT_AND_DIFFUSE, blue);
-			gear(1.3, 2.0, 0.5, 10, 0.7);
+			CreateGear(1.3, 2.0, 0.5, 10, 0.7);
 			Gl.glEndList();
 
 			Gl.glEnable(Gl.GL_NORMALIZE);
 
-				Console.WriteLine ("GL_RENDERER = {0}", 
-					Gl.glGetString(Gl.GL_RENDERER));
-				Console.WriteLine ("GL_VERSION = {0}", 
-					Gl.glGetString(Gl.GL_VERSION));
-				Console.WriteLine ("GL_VENDOR = {0}", 
-					Gl.glGetString(Gl.GL_VENDOR));
-				Console.WriteLine ("GL_EXTENSIONS = {0}", 
-					Gl.glGetString(Gl.GL_EXTENSIONS));
+			Console.WriteLine ("GL_RENDERER = {0}", 
+				Gl.glGetString(Gl.GL_RENDERER));
+			Console.WriteLine ("GL_VERSION = {0}", 
+				Gl.glGetString(Gl.GL_VERSION));
+			Console.WriteLine ("GL_VENDOR = {0}", 
+				Gl.glGetString(Gl.GL_VENDOR));
+			Console.WriteLine ("GL_EXTENSIONS = {0}", 
+				Gl.glGetString(Gl.GL_EXTENSIONS));
 		}
 
-		static Surface m_screen;
+		Surface screen;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public void Run()
 		{
-			m_screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
+			screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
 			Events.Tick += new TickEventHandler(this.Tick);
 			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
 			Events.KeyboardDown +=
@@ -338,7 +337,7 @@ namespace SdlDotNet.Examples
 
 		private void Resize (object sender, VideoResizeEventArgs e)
 		{
-			m_screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		}
 
 		private void KeyboardDown(
@@ -355,13 +354,12 @@ namespace SdlDotNet.Examples
 		private void Tick(object sender, TickEventArgs e)
 		{
 			Idle();
-			if (m_screen.Width != m_newW || m_screen.Height != m_newH)
+			if (screen.Width != newWidth || screen.Height != newHeight)
 			{
 				Init();
 				Reshape();
 			}
 			Draw();
-			
 		}
 	}
 }
