@@ -62,10 +62,27 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void Dispose() 
+		{
+			Dispose(true);
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
 		/// Initialize timer.
 		/// </summary>
 		public static void Initialize()
 		{
+			disposed = false;
 			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER) & Sdl.SDL_INIT_TIMER) 
 				!= (int) SdlFlag.TrueValue)
 			{

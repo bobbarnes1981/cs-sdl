@@ -331,7 +331,7 @@ namespace SdlDotNet
 			{
 				events[ i ] = sdlEvents[ i ].EventStruct;
 			}
-			Sdl.SDL_PumpEvents();
+
 			int result = 
 				Sdl.SDL_PeepEvents(
 				events, 
@@ -824,6 +824,7 @@ namespace SdlDotNet
 		public static void Run()
 		{
 			lastTick = 0;
+			quitFlag = false;
 			Timer.Initialize();
 			Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
 			ThreadTicker();
@@ -907,6 +908,7 @@ namespace SdlDotNet
 					lastTime = currentTime;
 				}
 			}
+			Tick = null;
 		}
 		#endregion Thread Management
 	}
