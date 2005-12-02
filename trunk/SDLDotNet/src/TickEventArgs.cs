@@ -27,7 +27,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// Event arguments for a Framerate tick.
 	/// </summary>
-	public class  TickEventArgs : SdlEventArgs 
+	public class  TickEventArgs : UserEventArgs 
 	{
 		private int lastTick;
 		private int tick;

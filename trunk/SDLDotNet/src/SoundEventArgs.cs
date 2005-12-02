@@ -26,7 +26,7 @@ namespace SdlDotNet
 	/// <summary>
 	/// SoundEvent Arguments.
 	/// </summary>
-	public class SoundEventArgs : EventArgs 
+	public class SoundEventArgs : UserEventArgs 
 	{
 		/// <summary>
 		/// SoundEventsArgs describe the action to take on a Sound

@@ -34,14 +34,15 @@ namespace SdlDotNet
 		/// <param name="height">The new window height</param>
 		public VideoResizeEventArgs(int width, int height)
 		{
-			this.eventStruct.resize.w = width;
-			this.eventStruct.resize.h = height;
-			this.eventStruct.type = (byte)EventTypes.VideoResize;
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.resize.w = width;
+			evt.resize.h = height;
+			evt.type = (byte)EventTypes.VideoResize;
+			this.EventStruct = evt;
 		}
 
-		internal VideoResizeEventArgs(Sdl.SDL_Event ev)
+		internal VideoResizeEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 		
 		/// <summary>
@@ -50,8 +51,8 @@ namespace SdlDotNet
 		public int Width
 		{
 			get
-			{
-				return this.eventStruct.resize.w;
+			{	
+				return this.EventStruct.resize.w;
 			}
 		}
 
@@ -62,7 +63,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.resize.h;
+				return this.EventStruct.resize.h;
 			}
 		}
 

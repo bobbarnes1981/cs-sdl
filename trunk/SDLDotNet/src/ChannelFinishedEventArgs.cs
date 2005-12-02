@@ -37,15 +37,12 @@ namespace SdlDotNet
 		/// </summary>
 		/// <remarks>Can be passed into the event queue.</remarks>
 		/// <param name="channel">The channel which has finished</param>
-		public ChannelFinishedEventArgs(int channel)
+		public ChannelFinishedEventArgs(int channel) : base()
 		{
 			this.channel = channel;
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.type = (byte)EventTypes.UserEvent;
-			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
 		}
 		
-		private int channel;
+		int channel;
 
 		/// <summary>
 		/// Return channel number

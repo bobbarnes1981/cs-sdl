@@ -41,21 +41,22 @@ namespace SdlDotNet
 			ModifierKeys modifierKeys,
 			bool down)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.key.which = 0;
-			this.eventStruct.key.keysym.scancode = 0;
-			this.eventStruct.key.keysym.sym = (int)key;
-			this.eventStruct.key.keysym.mod = (int)modifierKeys;
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.key.which = 0;
+			evt.key.keysym.scancode = 0;
+			evt.key.keysym.sym = (int)key;
+			evt.key.keysym.mod = (int)modifierKeys;
 			if (down)
 			{
-				this.eventStruct.key.state = (byte)ButtonKeyState.Pressed;
-				this.eventStruct.type = (byte)EventTypes.KeyDown;
+				evt.key.state = (byte)ButtonKeyState.Pressed;
+				evt.type = (byte)EventTypes.KeyDown;
 			}
 			else
 			{
-				this.eventStruct.key.state = (byte)ButtonKeyState.NotPressed;
-				this.eventStruct.type = (byte)EventTypes.KeyUp;
+				evt.key.state = (byte)ButtonKeyState.NotPressed;
+				evt.type = (byte)EventTypes.KeyUp;
 			}
+			this.EventStruct = evt;
 		}
 
 		/// <summary>
@@ -69,9 +70,8 @@ namespace SdlDotNet
 		{
 		}
 
-		internal KeyboardEventArgs(Sdl.SDL_Event ev)
+		internal KeyboardEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 		
 		/// <summary>
@@ -81,7 +81,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.key.which;
+				return this.EventStruct.key.which;
 			}
 		}
 
@@ -92,7 +92,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (this.eventStruct.key.state == Sdl.SDL_PRESSED);
+				return (this.EventStruct.key.state == Sdl.SDL_PRESSED);
 			}
 		}
 
@@ -103,7 +103,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.key.keysym.scancode;
+				return this.EventStruct.key.keysym.scancode;
 			}
 		}
 
@@ -115,7 +115,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (Key)this.eventStruct.key.keysym.sym;
+				return (Key)this.EventStruct.key.keysym.sym;
 			}
 		}
         
@@ -126,7 +126,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (ModifierKeys)this.eventStruct.key.keysym.mod;
+				return (ModifierKeys)this.EventStruct.key.keysym.mod;
 			}
 		}
 	}

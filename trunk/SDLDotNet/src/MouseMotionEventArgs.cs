@@ -43,30 +43,26 @@ namespace SdlDotNet
 		public MouseMotionEventArgs(bool buttonPressed, MouseButton button, short positionX, short positionY, 
 			short relativeX, short relativeY)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.motion.xrel = relativeX;
-			this.eventStruct.motion.yrel = relativeY;
-			this.eventStruct.motion.which = (byte)button;
-			this.eventStruct.motion.x = positionX;
-			this.eventStruct.motion.y = positionY;
-			this.eventStruct.type = (byte)EventTypes.MouseMotion;
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.motion.xrel = relativeX;
+			evt.motion.yrel = relativeY;
+			evt.motion.which = (byte)button;
+			evt.motion.x = positionX;
+			evt.motion.y = positionY;
+			evt.type = (byte)EventTypes.MouseMotion;
 			if (buttonPressed)
 			{
-				this.eventStruct.motion.state = (byte)ButtonKeyState.Pressed;
+				evt.motion.state = (byte)ButtonKeyState.Pressed;
 			}
 			else
 			{
-				this.eventStruct.motion.state = (byte)ButtonKeyState.NotPressed;
+				evt.motion.state = (byte)ButtonKeyState.NotPressed;
 			}
+			this.EventStruct = evt;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="ev"></param>
-		internal MouseMotionEventArgs(Sdl.SDL_Event ev)
+		internal MouseMotionEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 
 		/// <summary>
@@ -76,7 +72,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (this.eventStruct.motion.state != (byte)ButtonKeyState.NotPressed);
+				return (this.EventStruct.motion.state != (byte)ButtonKeyState.NotPressed);
 			}
 		}
 
@@ -87,23 +83,23 @@ namespace SdlDotNet
 		{
 			get
 			{
-				if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON_LMASK) != 0)
+				if ((this.EventStruct.motion.state&Sdl.SDL_BUTTON_LMASK) != 0)
 				{
 					return MouseButton.PrimaryButton;
 				}
-				else if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON_RMASK) != 0)
+				else if ((this.EventStruct.motion.state&Sdl.SDL_BUTTON_RMASK) != 0)
 				{
 					return MouseButton.SecondaryButton;
 				}
-				else if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON_MMASK) != 0)
+				else if ((this.EventStruct.motion.state&Sdl.SDL_BUTTON_MMASK) != 0)
 				{
 					return MouseButton.MiddleButton;
 				}
-				else if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON((byte)MouseButton.WheelDown)) != 0)
+				else if ((this.EventStruct.motion.state&Sdl.SDL_BUTTON((byte)MouseButton.WheelDown)) != 0)
 				{
 					return MouseButton.WheelDown;
 				}
-				else if ((this.eventStruct.motion.state&Sdl.SDL_BUTTON((byte)MouseButton.WheelUp)) != 0)
+				else if ((this.EventStruct.motion.state&Sdl.SDL_BUTTON((byte)MouseButton.WheelUp)) != 0)
 				{
 					return MouseButton.WheelUp;
 				}
@@ -121,7 +117,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.motion.x;
+				return this.EventStruct.motion.x;
 			}
 		}
 
@@ -132,7 +128,7 @@ namespace SdlDotNet
 		{
 			get
 			{ 
-				return this.eventStruct.motion.y;
+				return this.EventStruct.motion.y;
 			}
 		}
 
@@ -143,7 +139,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.motion.xrel;
+				return this.EventStruct.motion.xrel;
 			}
 		}
 
@@ -154,7 +150,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.motion.yrel;
+				return this.EventStruct.motion.yrel;
 			}
 		}
 		/// <summary>
@@ -164,7 +160,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return new Point(this.eventStruct.motion.x, this.eventStruct.motion.y);
+				return new Point(this.EventStruct.motion.x, this.EventStruct.motion.y);
 			}
 		}
 	}

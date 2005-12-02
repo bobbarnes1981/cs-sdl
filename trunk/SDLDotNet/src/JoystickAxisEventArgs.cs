@@ -40,17 +40,17 @@ namespace SdlDotNet
 		/// <param name="axisValue">The new axis value</param>
 		public JoystickAxisEventArgs(byte device, byte axisIndex, float axisValue)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.jaxis.which = device;
-			this.eventStruct.jaxis.axis = axisIndex;
-			this.eventStruct.jaxis.val = 
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.jaxis.which = device;
+			evt.jaxis.axis = axisIndex;
+			evt.jaxis.val = 
 				(short)((axisValue * JOYSTICK_SCALE) - JOYSTICK_ADJUSTMENT);
-			this.eventStruct.type = (byte)EventTypes.JoystickAxisMotion;
+			evt.type = (byte)EventTypes.JoystickAxisMotion;
+			this.EventStruct = evt;
 		}
 
-		internal JoystickAxisEventArgs(Sdl.SDL_Event ev)
+		internal JoystickAxisEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jaxis.which;
+				return this.EventStruct.jaxis.which;
 			}
 		}
 
@@ -71,7 +71,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jaxis.axis;
+				return this.EventStruct.jaxis.axis;
 			}
 		}
 
@@ -83,7 +83,7 @@ namespace SdlDotNet
 			get
 			{ 
 				float jaxisValue = 
-					((float)this.eventStruct.jaxis.val + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE;
+					((float)this.EventStruct.jaxis.val + JOYSTICK_ADJUSTMENT) / JOYSTICK_SCALE;
 				if (jaxisValue < 0)
 				{
 					jaxisValue = 0;
@@ -99,7 +99,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jaxis.val;
+				return this.EventStruct.jaxis.val;
 			}
 		}
 

@@ -39,24 +39,24 @@ namespace SdlDotNet
 		/// </param>
 		public JoystickButtonEventArgs(byte device, byte button, bool buttonPressed)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.jbutton.which = device;
-			this.eventStruct.jbutton.button = button;
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.jbutton.which = device;
+			evt.jbutton.button = button;
 			if (buttonPressed)
 			{
-				this.eventStruct.jbutton.state = (byte)ButtonKeyState.Pressed;
-				this.eventStruct.type = (byte)EventTypes.JoystickButtonDown;
+				evt.jbutton.state = (byte)ButtonKeyState.Pressed;
+				evt.type = (byte)EventTypes.JoystickButtonDown;
 			}
 			else
 			{
-				this.eventStruct.jbutton.state = (byte)ButtonKeyState.NotPressed;
-				this.eventStruct.type = (byte)EventTypes.JoystickButtonUp;
+				evt.jbutton.state = (byte)ButtonKeyState.NotPressed;
+				evt.type = (byte)EventTypes.JoystickButtonUp;
 			}
+			this.EventStruct = evt;
 		}
 
-		internal JoystickButtonEventArgs(Sdl.SDL_Event ev)
+		internal JoystickButtonEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 
 		/// <summary>
@@ -66,7 +66,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jbutton.which;
+				return this.EventStruct.jbutton.which;
 			}
 		}
 
@@ -77,7 +77,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jbutton.button;
+				return this.EventStruct.jbutton.button;
 			}
 		}
 
@@ -88,7 +88,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (this.eventStruct.jbutton.state == (byte)ButtonKeyState.Pressed);
+				return (this.EventStruct.jbutton.state == (byte)ButtonKeyState.Pressed);
 			}
 		}
 	}

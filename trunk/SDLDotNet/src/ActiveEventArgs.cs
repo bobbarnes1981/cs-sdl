@@ -32,9 +32,8 @@ namespace SdlDotNet
 	/// </remarks>
 	public class ActiveEventArgs : SdlEventArgs
 	{
-		internal ActiveEventArgs(Sdl.SDL_Event ev)
+		internal ActiveEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 
 		/// <summary>
@@ -51,17 +50,19 @@ namespace SdlDotNet
 		/// </param>
 		public ActiveEventArgs(bool gainedFocus, Focus state)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+
 			if (gainedFocus)
 			{
-				this.eventStruct.active.gain = 1;
+				evt.active.gain = 1;
 			}
 			else
 			{
-				this.eventStruct.active.gain = 0;
+				evt.active.gain = 0;
 			}
-			this.eventStruct.type = (byte)EventTypes.ActiveEvent;
-			this.eventStruct.active.state = (byte)state;
+			evt.type = (byte)EventTypes.ActiveEvent;
+			evt.active.state = (byte)state;
+			this.EventStruct = evt;
 		}
 		
 		/// <summary>
@@ -74,7 +75,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				if (this.eventStruct.active.gain != 0)
+				if (this.EventStruct.active.gain != 0)
 				{
 					return true;
 				}
@@ -94,7 +95,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (Focus)this.eventStruct.active.state;
+				return (Focus)this.EventStruct.active.state;
 			}
 		}
 	}

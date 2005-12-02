@@ -123,8 +123,8 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Events 
 	{
-		private static Hashtable UserEvents = new Hashtable();
-		private static int UserEventId = 0;		
+		private static Hashtable userEvents = new Hashtable();
+		private static int userEventId = 0;		
 		private const int QUERY_EVENTS_MAX = 254;
 
 		/// <summary>
@@ -206,6 +206,11 @@ namespace SdlDotNet
 
 		Events()
 		{
+		}
+
+		static Events()
+		{
+			Video.Initialize();
 		}
 
 		/// <summary>
@@ -292,13 +297,12 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("userEventArgs");
 			}
-			//Sdl.SDL_UserEvent sdlev = new Sdl.SDL_UserEvent();
-			//sdlev.type = (byte)Sdl.SDL_USEREVENT;
+
 			lock (instance) 
 			{
-				UserEvents[UserEventId] = userEventArgs;
-				userEventArgs.UserCode = UserEventId;
-				UserEventId++;
+				userEvents[userEventId] = userEventArgs;
+				userEventArgs.UserCode = userEventId;
+				userEventId++;
 			}
 
 			Sdl.SDL_Event evt = userEventArgs.EventStruct;
@@ -428,7 +432,14 @@ namespace SdlDotNet
 			SdlEventArgs[] eventsArray = new SdlEventArgs[result];
 			for ( int i = 0; i < eventsArray.Length; i++ )
 			{
-				eventsArray[i] = SdlEventArgs.CreateEventArgs(events[i]);
+				if (events[i].type == (byte)EventTypes.UserEvent)
+				{
+					eventsArray[i] = (UserEventArgs)userEvents[events[i].user.code];
+				}
+				else
+				{
+					eventsArray[i] = SdlEventArgs.CreateEventArgs(events[i]);
+				}
 			}
 
 			return eventsArray;
@@ -486,7 +497,14 @@ namespace SdlDotNet
 			SdlEventArgs[] eventsArray = new SdlEventArgs[result];
 			for (int i = 0; i < eventsArray.Length; i++)
 			{
-				eventsArray[ i ] = SdlEventArgs.CreateEventArgs(events[ i ]);
+				if (events[i].type == (byte)EventTypes.UserEvent)
+				{
+					eventsArray[i] = (UserEventArgs)userEvents[events[i].user.code];
+				}
+				else
+				{
+					eventsArray[ i ] = SdlEventArgs.CreateEventArgs(events[ i ]);
+				}
 			}
 			return eventsArray;
 		}
@@ -746,7 +764,7 @@ namespace SdlDotNet
 				object ret;
 				lock (instance) 
 				{
-					ret = (UserEventArgs)UserEvents[e.UserCode];
+					ret = (UserEventArgs)userEvents[e.UserCode];
 				}
 				if (ret != null) 
 				{
@@ -765,7 +783,12 @@ namespace SdlDotNet
 						}
 					} 
 					else
-						UserEvent(instance, (UserEventArgs)ret);
+					{
+						if (UserEvent != null)
+						{
+							UserEvent(instance, (UserEventArgs)ret);
+						}
+					}
 				}
 			}
 		}

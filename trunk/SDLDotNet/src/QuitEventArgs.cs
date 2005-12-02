@@ -32,15 +32,13 @@ namespace SdlDotNet
 		/// </summary>
 		public QuitEventArgs()
 		{	
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.type = (byte)EventTypes.Quit;
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.type = (byte)EventTypes.Quit;
+			this.EventStruct = evt;
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		internal QuitEventArgs(Sdl.SDL_Event ev)
+
+		internal QuitEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 	}
 }

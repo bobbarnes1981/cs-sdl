@@ -37,17 +37,17 @@ namespace SdlDotNet
 		/// <param name="relativeY">The relative Y position</param>
 		public JoystickBallEventArgs(byte device, byte ball, short relativeX, short relativeY)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.jball.which = device;
-			this.eventStruct.jball.ball = ball;
-			this.eventStruct.jball.xrel = relativeX;
-			this.eventStruct.jball.yrel = relativeY;
-			this.eventStruct.type = (byte)EventTypes.JoystickBallMotion;
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.jball.which = device;
+			evt.jball.ball = ball;
+			evt.jball.xrel = relativeX;
+			evt.jball.yrel = relativeY;
+			evt.type = (byte)EventTypes.JoystickBallMotion;
+			this.EventStruct = evt;
 		}
 
-		internal JoystickBallEventArgs(Sdl.SDL_Event ev)
+		internal JoystickBallEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 
 		/// <summary>
@@ -57,7 +57,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jball.which;
+				return this.EventStruct.jball.which;
 			}
 		}
 
@@ -68,7 +68,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jball.ball;
+				return this.EventStruct.jball.ball;
 			}
 		}
 
@@ -79,7 +79,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jball.xrel;
+				return this.EventStruct.jball.xrel;
 			}
 		}
 
@@ -90,7 +90,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jball.yrel;
+				return this.EventStruct.jball.yrel;
 			}
 		}
 	}

@@ -32,11 +32,13 @@ namespace SdlDotNet
 		/// </summary>
 		public VideoExposeEventArgs()
 		{
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.type = (byte)EventTypes.VideoExpose;
+			this.EventStruct = evt;
 		}
 
-		internal VideoExposeEventArgs(Sdl.SDL_Event ev)
+		internal VideoExposeEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 	}
 }
