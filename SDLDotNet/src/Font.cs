@@ -385,7 +385,7 @@ namespace SdlDotNet
 				SdlColor.ConvertColor(foregroundColor);
 			Sdl.SDL_Color backgroundColorSdl = 
 				SdlColor.ConvertColor(backgroundColor);
-			if ((textItem.Length == 0 && textItem != null) | textItem == null)
+			if (textItem == null || textItem.Length == 0)
 			{
 				textItem = " ";
 			}
@@ -403,7 +403,7 @@ namespace SdlDotNet
 			string textItem, Color color) 
 		{
 			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
-			if ((textItem.Length == 0 && textItem != null) | textItem == null)
+			if (textItem == null || textItem.Length == 0)
 			{
 				textItem = " ";
 			}
