@@ -356,7 +356,7 @@ namespace SdlDotNet
 		/// </summary>
 		public void Fadeout(int fadeoutTime)
 		{
-			SoundEventArgs args = new SoundEventArgs(SoundAction.Stop, fadeoutTime);
+			SoundEventArgs args = new SoundEventArgs(SoundAction.Fadeout, fadeoutTime);
 			OnSoundEvent(args);
 		}
 

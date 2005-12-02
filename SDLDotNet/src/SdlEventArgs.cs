@@ -28,9 +28,9 @@ namespace SdlDotNet
 	public class SdlEventArgs : EventArgs
 	{
 		/// <summary>
-		/// Corrresponding internal SDL_Event
+		/// Corrresponding SDL_Event
 		/// </summary>
-		internal Sdl.SDL_Event eventStruct;
+		Sdl.SDL_Event eventStruct;
 
 		/// <summary>
 		/// Constructor
@@ -42,16 +42,24 @@ namespace SdlDotNet
 		/// <summary>
 		/// Holds SDL_Event
 		/// </summary>
-		internal SdlEventArgs(Sdl.SDL_Event ev)
+		/// <param name="evt">Event Struct</param>
+		protected SdlEventArgs(Sdl.SDL_Event evt)
 		{
-			this.eventStruct = ev;
+			this.eventStruct = evt;
 		}
 
-		internal Sdl.SDL_Event EventStruct
+		/// <summary>
+		/// 
+		/// </summary>
+		protected internal Sdl.SDL_Event EventStruct
 		{
 			get
 			{
 				return this.eventStruct;
+			}
+			set
+			{
+				this.eventStruct = value;
 			}
 		}
 
@@ -60,7 +68,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="ev"></param>
 		/// <returns></returns>
-		internal static SdlEventArgs CreateEventArgs( Sdl.SDL_Event ev )
+		protected internal static SdlEventArgs CreateEventArgs( Sdl.SDL_Event ev )
 		{
 			switch ((EventTypes)ev.type) 
 			{

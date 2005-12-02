@@ -36,16 +36,16 @@ namespace SdlDotNet
 		/// <param name="hatValue">The new hat position</param>
 		public JoystickHatEventArgs(byte device, byte hatIndex, byte hatValue)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.jhat.which = device;
-			this.eventStruct.jhat.hat = hatIndex;
-			this.eventStruct.jhat.val = hatValue;
-			this.eventStruct.type = (byte)EventTypes.JoystickHatMotion;
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.jhat.which = device;
+			evt.jhat.hat = hatIndex;
+			evt.jhat.val = hatValue;
+			evt.type = (byte)EventTypes.JoystickHatMotion;
+			this.EventStruct = evt;
 		}
 
-		internal JoystickHatEventArgs(Sdl.SDL_Event ev)
+		internal JoystickHatEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 
 		/// <summary>
@@ -55,7 +55,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jhat.which;
+				return this.EventStruct.jhat.which;
 			}
 		}
 
@@ -66,7 +66,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.jhat.hat;
+				return this.EventStruct.jhat.hat;
 			}
 		}
 
@@ -77,7 +77,7 @@ namespace SdlDotNet
 		{
 			get
 			{ 
-				return this.eventStruct.jhat.val;
+				return this.EventStruct.jhat.val;
 			}
 		}
 	}

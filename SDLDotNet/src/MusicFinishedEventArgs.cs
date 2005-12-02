@@ -31,11 +31,8 @@ namespace SdlDotNet
 		/// When music finishes, the MusicFinished event 
 		/// will fire and send these args.
 		/// </summary>
-		public MusicFinishedEventArgs()
+		public MusicFinishedEventArgs() : base()
 		{
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.type = (byte)EventTypes.UserEvent;
-			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
 		}
 	}
 }

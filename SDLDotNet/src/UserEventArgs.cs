@@ -33,31 +33,32 @@ namespace SdlDotNet
 		/// </summary>
 		public UserEventArgs()
 		{
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.type = (byte)EventTypes.UserEvent;
-			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.type = (byte)EventTypes.UserEvent;
+			evt.user.type =  (byte)EventTypes.UserEvent;
+			this.EventStruct = evt;
 		}
 		/// <summary>
-		/// Constructor for using a given use event
+		/// Constructor for using a given user event
 		/// </summary>
 		/// <param name="userEvent">The user event object</param>
 		public UserEventArgs(object userEvent)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
 			this.userEvent = userEvent;
-			this.eventStruct.type = (byte)EventTypes.UserEvent;
-			this.eventStruct.user.type =  (byte)EventTypes.UserEvent;
+			evt.type = (byte)EventTypes.UserEvent;
+			evt.user.type =  (byte)EventTypes.UserEvent;
+			this.EventStruct = evt;
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		internal UserEventArgs(Sdl.SDL_Event ev)
+		internal UserEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 		
-		private object userEvent;
+		object userEvent;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -76,11 +77,13 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.user.code;
+				return this.EventStruct.user.code;
 			}
 			set
 			{
-				this.eventStruct.user.code = value;
+				Sdl.SDL_Event evt = this.EventStruct;
+				evt.user.code = value;
+				this.EventStruct = evt;
 			}
 		}
 	}

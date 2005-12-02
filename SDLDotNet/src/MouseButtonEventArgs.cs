@@ -39,26 +39,26 @@ namespace SdlDotNet
 		/// <param name="positionY">The current Y coordinate</param>
 		public MouseButtonEventArgs(MouseButton button, bool buttonPressed, short positionX, short positionY)
 		{
-			this.eventStruct = new Sdl.SDL_Event();
-			this.eventStruct.button.button = (byte)button;
-			this.eventStruct.button.which = 0;
-			this.eventStruct.button.x = positionX;
-			this.eventStruct.button.y = positionY;
+			Sdl.SDL_Event evt = new Sdl.SDL_Event();
+			evt.button.button = (byte)button;
+			evt.button.which = 0;
+			evt.button.x = positionX;
+			evt.button.y = positionY;
 			if (buttonPressed)
 			{
-				this.eventStruct.button.state = (byte)ButtonKeyState.Pressed;
-				this.eventStruct.type = (byte)EventTypes.MouseButtonDown;
+				evt.button.state = (byte)ButtonKeyState.Pressed;
+				evt.type = (byte)EventTypes.MouseButtonDown;
 			}
 			else
 			{
-				this.eventStruct.button.state = (byte)ButtonKeyState.NotPressed;
-				this.eventStruct.type = (byte)EventTypes.MouseButtonUp;
+				evt.button.state = (byte)ButtonKeyState.NotPressed;
+				evt.type = (byte)EventTypes.MouseButtonUp;
 			}
+			this.EventStruct = evt;
 		}
 
-		internal MouseButtonEventArgs(Sdl.SDL_Event ev)
+		internal MouseButtonEventArgs(Sdl.SDL_Event evt) : base(evt)
 		{
-			this.eventStruct = ev;
 		}
 
 		/// <summary>
@@ -68,7 +68,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (MouseButton)this.eventStruct.button.button;
+				return (MouseButton)this.EventStruct.button.button;
 			}
 		}
 
@@ -79,7 +79,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return (this.eventStruct.button.state == (byte)ButtonKeyState.Pressed);
+				return (this.EventStruct.button.state == (byte)ButtonKeyState.Pressed);
 			}
 		}
 
@@ -90,7 +90,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return this.eventStruct.button.x;
+				return this.EventStruct.button.x;
 			}
 		}
 
@@ -101,7 +101,7 @@ namespace SdlDotNet
 		{
 			get
 			{ 
-				return this.eventStruct.button.y;
+				return this.EventStruct.button.y;
 			}
 		}
 
@@ -112,7 +112,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return new Point(this.eventStruct.button.x, this.eventStruct.button.y);
+				return new Point(this.EventStruct.button.x, this.EventStruct.button.y);
 			}
 		}
 	}
