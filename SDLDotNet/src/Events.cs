@@ -210,6 +210,10 @@ namespace SdlDotNet
 
 		static Events()
 		{
+			// This is very strange. 
+			// The Event queue will not work unless 
+			// the Video has been initialized.
+			// This fix was for using PushEvent.
 			Video.Initialize();
 		}
 
