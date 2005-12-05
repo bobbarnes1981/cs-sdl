@@ -104,7 +104,7 @@ namespace SdlDotNet
 			get
 			{
 				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER) & Sdl.SDL_INIT_TIMER) 
-					== (int) SdlFlag.TrueValue)
+					!= (int) SdlFlag.FalseValue)
 				{
 					return true;
 				}

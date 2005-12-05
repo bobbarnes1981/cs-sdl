@@ -92,9 +92,9 @@ namespace SdlDotNet
 		{
 			disposed = false;
 			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
-				== (int) SdlFlag.FalseValue)
+				!= (int) SdlFlag.TrueValue)
 			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
+				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO) != (int) SdlFlag.Success)
 				{
 					throw SdlException.Generate();
 				}
@@ -112,7 +112,7 @@ namespace SdlDotNet
 			get
 			{
 				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
-					== (int) SdlFlag.TrueValue)
+					!= (int) SdlFlag.FalseValue)
 				{
 					return true;
 				}
