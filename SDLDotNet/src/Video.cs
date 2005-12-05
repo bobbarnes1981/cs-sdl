@@ -728,7 +728,7 @@ namespace SdlDotNet
 		/// <value>
 		/// 	<c>true</c> if this instance is GL double buffer enabled; otherwise, <c>false</c>.
 		/// </value>
-		public static bool IsGLDoubleBufferEnabled
+		public static bool GLDoubleBufferEnabled
 		{
 			get
 			{
@@ -765,7 +765,7 @@ namespace SdlDotNet
 		/// <value>
 		/// 	<c>true</c> if this instance is GL stereo rendering enabled; otherwise, <c>false</c>.
 		/// </value>
-		public static bool IsGLStereoRenderingEnabled
+		public static bool GLStereoRenderingEnabled
 		{
 			get
 			{
