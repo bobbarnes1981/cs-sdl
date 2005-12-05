@@ -439,6 +439,7 @@ namespace SdlDotNet
 				if (events[i].type == (byte)EventTypes.UserEvent)
 				{
 					eventsArray[i] = (UserEventArgs)userEvents[events[i].user.code];
+					userEvents.Remove(events[i].user.code);
 				}
 				else
 				{
@@ -794,6 +795,7 @@ namespace SdlDotNet
 						}
 					}
 				}
+				userEvents.Remove(e.UserCode);
 			}
 		}
 
