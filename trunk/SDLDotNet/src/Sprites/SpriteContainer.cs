@@ -31,7 +31,7 @@ namespace SdlDotNet.Sprites
 	/// manager has no size.
 	/// </summary>
 	/// <remarks>
-	/// This class is useful for GUIs when you wantto  group sprites into one larger sprite.
+	/// This class is useful for GUIs when you want to group sprites into one larger sprite.
 	/// </remarks>
 	public class SpriteContainer : Sprite
 	{
