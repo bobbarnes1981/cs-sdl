@@ -74,7 +74,7 @@ namespace SdlDotNet
 			get
 			{
 				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_JOYSTICK) & Sdl.SDL_INIT_JOYSTICK) 
-					== (int) SdlFlag.TrueValue)
+					!= (int) SdlFlag.FalseValue)
 				{
 					return true;
 				}
@@ -90,7 +90,7 @@ namespace SdlDotNet
 		/// </summary>
 		public static bool IsJoystickInitialized(int index)
 		{
-				if (Sdl.SDL_JoystickOpened(index) == (int) SdlFlag.TrueValue)
+				if (Sdl.SDL_JoystickOpened(index) != (int) SdlFlag.FalseValue)
 				{
 					return true;
 				}

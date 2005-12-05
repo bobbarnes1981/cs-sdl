@@ -128,7 +128,7 @@ namespace SdlDotNet
 			get
 			{
 				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) & Sdl.SDL_INIT_AUDIO) 
-					== (int) SdlFlag.TrueValue)
+					!= (int) SdlFlag.FalseValue)
 				{
 					return true;
 				}

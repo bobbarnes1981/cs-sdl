@@ -27,22 +27,24 @@ namespace SdlDotNet.Tests
 		[Test]
 		public void InitVideo()
 		{
-			Tao.Sdl.Sdl.SDL_Quit();
-			Assert.AreEqual( 0, Tao.Sdl.Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO));
-			Assert.IsTrue(Tao.Sdl.Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO)!= 0);
-			this.Quit();
+			Video.Close();
+			Assert.IsFalse(Video.IsInitialized);
+			Video.Initialize();
+			Assert.IsTrue(Video.IsInitialized);
+			Video.Close();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[Test]
-		public void InitAudio()
+		public void InitMixer()
 		{
-			Tao.Sdl.Sdl.SDL_Quit();
-			Assert.AreEqual( 0, Tao.Sdl.Sdl.SDL_Init(Sdl.SDL_INIT_AUDIO));
-			Assert.IsTrue(Tao.Sdl.Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO)!= 0);
-			this.Quit();
+			Mixer.Close();
+			Assert.IsFalse(Mixer.IsInitialized);
+			Mixer.Initialize();
+			Assert.IsTrue(Mixer.IsInitialized);
+			Mixer.Close();
 		}
 
 		/// <summary>
@@ -51,10 +53,11 @@ namespace SdlDotNet.Tests
 		[Test]
 		public void InitTimer()
 		{
-			Tao.Sdl.Sdl.SDL_Quit();
-			Assert.AreEqual( 0, Tao.Sdl.Sdl.SDL_Init(Sdl.SDL_INIT_TIMER));
-			Assert.IsTrue(Tao.Sdl.Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER)!= 0);
-			this.Quit();
+			Timer.Close();
+			Assert.IsFalse(Timer.IsInitialized);
+			Timer.Initialize();
+			Assert.IsTrue(Timer.IsInitialized);
+			Timer.Close();
 		}
 
 		/// <summary>
@@ -63,10 +66,11 @@ namespace SdlDotNet.Tests
 		[Test]
 		public void InitCDRom()
 		{
-			Tao.Sdl.Sdl.SDL_Quit();
-			Assert.AreEqual( 0, Tao.Sdl.Sdl.SDL_Init(Sdl.SDL_INIT_CDROM));
-			Assert.IsTrue(Tao.Sdl.Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM)!= 0);
-			this.Quit();
+			CDRom.Close();
+			Assert.IsFalse(CDRom.IsInitialized);
+			CDRom.Initialize();
+			Assert.IsTrue(CDRom.IsInitialized);
+			CDRom.Close();
 		}
 
 		/// <summary>
@@ -75,10 +79,11 @@ namespace SdlDotNet.Tests
 		[Test]
 		public void InitJoystick()
 		{
-			Tao.Sdl.Sdl.SDL_Quit();
-			Assert.AreEqual( 0, Tao.Sdl.Sdl.SDL_Init(Sdl.SDL_INIT_JOYSTICK));
-			Assert.IsTrue(Tao.Sdl.Sdl.SDL_WasInit(Sdl.SDL_INIT_JOYSTICK)!= 0);
-			this.Quit();
+			Joysticks.Close();
+			Assert.IsFalse(Joysticks.IsInitialized);
+			Joysticks.Initialize();
+			Assert.IsTrue(Joysticks.IsInitialized);
+			Joysticks.Close();
 		}
 
 		/// <summary>
