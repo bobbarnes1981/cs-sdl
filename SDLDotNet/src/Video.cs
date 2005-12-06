@@ -101,27 +101,27 @@ namespace SdlDotNet
 			}
 		}
 
-		/// <summary>
-		/// Queries if the Video subsystem has been intialized.
-		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		/// <returns>True if Video subsystem has been initialized, false if it has not.</returns>
-		public static bool IsInitialized
-		{
-			get
-			{
-				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
-					!= (int) SdlFlag.FalseValue)
-				{
-					return true;
-				}
-				else 
-				{
-					return false;
-				}
-			}
-		}
+//		/// <summary>
+//		/// Queries if the Video subsystem has been intialized.
+//		/// </summary>
+//		/// <remarks>
+//		/// </remarks>
+//		/// <returns>True if Video subsystem has been initialized, false if it has not.</returns>
+//		public static bool IsInitialized
+//		{
+//			get
+//			{
+//				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
+//					!= (int) SdlFlag.FalseValue)
+//				{
+//					return true;
+//				}
+//				else 
+//				{
+//					return false;
+//				}
+//			}
+//		}
 
 		/// <summary>
 		/// Checks if the requested video mode is supported

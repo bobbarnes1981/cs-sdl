@@ -148,10 +148,10 @@ namespace SdlDotNet
 		/// <param name="index"></param>
 		public Joystick(int index)
 		{
-			if (!Joysticks.IsInitialized)
-			{
-				Joysticks.Initialize();
-			}
+//			if (!Joysticks.IsInitialized)
+//			{
+//				Joysticks.Initialize();
+//			}
 			if (Joysticks.IsValidJoystickNumber(index))
 			{
 				this.Handle = Sdl.SDL_JoystickOpen(index);
@@ -227,23 +227,23 @@ namespace SdlDotNet
 		}
 		
 
-		/// <summary>
-		/// Returns true if the joystick has been initialized
-		/// </summary>
-		public bool IsInitialized
-		{
-			get
-			{
-				if (Sdl.SDL_JoystickOpened(this.index) == (int) SdlFlag.TrueValue)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-		}
+//		/// <summary>
+//		/// Returns true if the joystick has been initialized
+//		/// </summary>
+//		public bool IsInitialized
+//		{
+//			get
+//			{
+//				if (Sdl.SDL_JoystickOpened(this.index) == (int) SdlFlag.TrueValue)
+//				{
+//					return true;
+//				}
+//				else
+//				{
+//					return false;
+//				}
+//			}
+//		}
 		/// <summary>
 		/// Gets the 0-based numeric index of this joystick
 		/// </summary>

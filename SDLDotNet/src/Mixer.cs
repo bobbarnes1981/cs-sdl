@@ -117,27 +117,27 @@ namespace SdlDotNet
 			Mixer.PrivateOpen();
 		}
 
-		/// <summary>
-		/// Queries if the Mixer subsystem has been intialized.
-		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		/// <returns>True if Mixer subsystem has been initialized, false if it has not.</returns>
-		public static bool IsInitialized
-		{
-			get
-			{
-				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) & Sdl.SDL_INIT_AUDIO) 
-					!= (int) SdlFlag.FalseValue)
-				{
-					return true;
-				}
-				else 
-				{
-					return false;
-				}
-			}
-		}
+//		/// <summary>
+//		/// Queries if the Mixer subsystem has been intialized.
+//		/// </summary>
+//		/// <remarks>
+//		/// </remarks>
+//		/// <returns>True if Mixer subsystem has been initialized, false if it has not.</returns>
+//		public static bool IsInitialized
+//		{
+//			get
+//			{
+//				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) & Sdl.SDL_INIT_AUDIO) 
+//					!= (int) SdlFlag.FalseValue)
+//				{
+//					return true;
+//				}
+//				else 
+//				{
+//					return false;
+//				}
+//			}
+//		}
 
 		/// <summary>
 		/// Re-opens the sound system with default values.  
