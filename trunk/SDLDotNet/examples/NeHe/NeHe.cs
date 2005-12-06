@@ -30,10 +30,6 @@ namespace SdlDotNet.Examples
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
-
-			//
-			// TODO: Add any constructor code after InitializeComponent call
-			//
 		}
 
 		/// <summary>
@@ -141,10 +137,9 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		object dynObj;
-
 		private void startButton_Click(object sender, System.EventArgs e)
 		{
+			object dynObj;
 			try
 			{
 				try
@@ -185,14 +180,21 @@ namespace SdlDotNet.Examples
 		[STAThread]
 		public static void Main()
 		{
-			Application.Run(new NeHe());
+			try
+			{
+				Application.Run(new NeHe());
+			}
+			catch(System.ObjectDisposedException)
+			{
+				Application.Exit();
+			}
 		}
 
 		private void NeHe_Closed(object sender, System.EventArgs e)
 		{
-			// Quit SDL if it's not quit already
 			try
 			{
+				// Quit SDL if it's not quit already
 				SdlDotNet.Events.QuitApplication();
 			}
 			catch(SdlDotNet.SdlException)
