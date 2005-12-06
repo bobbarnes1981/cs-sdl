@@ -40,7 +40,6 @@ namespace SdlDotNet
 	public sealed class Mixer
 	{
 		//static private SdlMixer.ChannelFinishedDelegate ChannelFinishedDelegate;
-		static private bool disposed;
 		private const int DEFAULT_CHUNK_SIZE = 1024;
 		private const int DEFAULT_NUMBER_OF_CHANNELS = 8;
 		//private static ChannelList channelList = null;
@@ -57,48 +56,12 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Allows an Object to attempt to free resources 
-		/// and perform other cleanup operations before the Object 
-		/// is reclaimed by garbage collection.
-		/// </summary>
-		~Mixer() 
-		{
-			Dispose(false);
-		}
-
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		public static void Dispose() 
-		{
-			Dispose(true);
-		}
-
-		/// <summary>
-		/// Destroys this object
-		/// </summary>
-		/// <param name="disposing">
-		/// If true, all managed and unmanaged objects will be destroyed.
-		/// </param>
-		public static void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-					SdlMixer.Mix_CloseAudio();
-					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
-				}
-				disposed = true;
-			}
-		}
-
-		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
 		public static void Close() 
 		{
-			Dispose();
+			SdlMixer.Mix_CloseAudio();
+			Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
 		}
 
 		/// <summary>

@@ -120,7 +120,8 @@ namespace SdlDotNet.Examples
 
 			foreach(Type type in types)
 			{
-				if(type.Name.StartsWith("NeHe") && type.Name.Length == 7) // NeHeXXX
+				// NeHeXXX
+				if(type.Name.StartsWith("NeHe") && type.Name.Length == 7)
 				{
 					try
 					{
@@ -148,11 +149,8 @@ namespace SdlDotNet.Examples
 			{
 				try
 				{
-					if (dynObj != null)
-					{
-						SdlDotNet.Events.QuitApplication();
-						dynObj = null;
-					}
+					dynObj = null;
+					SdlDotNet.Events.QuitApplication();
 				}
 				catch(SdlDotNet.SdlException)
 				{
@@ -166,7 +164,8 @@ namespace SdlDotNet.Examples
 				dynObj = Activator.CreateInstance(dynClassType);
 				if(dynObj != null)
 				{
-					this.SendToBack(); // Make the SDL window appear on top of this form.
+					// Make the SDL window appear on top of this form.
+					this.SendToBack();
 					MethodInfo invokedMethod = dynClassType.GetMethod("Run");
 					invokedMethod.Invoke(dynObj, null);
 				}
@@ -203,7 +202,6 @@ namespace SdlDotNet.Examples
 
 			// End the thread and the application.
 			Application.Exit();
-			//System.Threading.Thread.CurrentThread.Abort();
 		}
 	}
 }

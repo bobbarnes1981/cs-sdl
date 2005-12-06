@@ -32,8 +32,6 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Video
 	{
-		static private bool disposed;
-
 		static Video()
 		{
 			Initialize();
@@ -44,45 +42,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Destroy object
-		/// </summary>
-		~Video() 
-		{
-			Dispose(false);
-		}
-
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		public static void Dispose() 
-		{
-			Dispose(true);
-		}
-
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		/// <param name="disposing">
-		/// If true, then dispose unmanaged objects
-		/// </param>
-		public static void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
-				}
-				disposed = true;
-			}
-		}
-
-		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
 		public static void Close() 
 		{
-			Dispose();
+			Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
 		}
 
 		/// <summary>
@@ -90,7 +54,6 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Initialize()
 		{
-			disposed = false;
 			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
 				!= (int) SdlFlag.TrueValue)
 			{

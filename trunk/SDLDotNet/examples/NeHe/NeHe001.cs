@@ -117,6 +117,8 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			// Sets the ticker to update OpenGL Context
 			Events.Tick += new TickEventHandler(this.Tick);
+//			// Sets the resize window event
+//			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
@@ -170,8 +172,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		protected virtual void InitGL()
 		{ 
-			//this.Ticker = new TickEventHandler(this.Tick);
-			//Events.Tick += ticker;
 			// Enable Smooth Shading
 			Gl.glShadeModel(Gl.GL_SMOOTH);
 			// Black Background
@@ -233,6 +233,16 @@ namespace SdlDotNet.Examples
 			Video.GLSwapBuffers();
 		}
 
+//		private void Resize (object sender, VideoResizeEventArgs e)
+//		{
+//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+//			if (screen.Width != e.Width || screen.Height != e.Height)
+//			{
+//				//this.InitGL();
+//				this.Reshape();
+//			}
+//		}
+
 		#endregion Event Handlers
 
 		#region Run Loop
@@ -245,7 +255,7 @@ namespace SdlDotNet.Examples
 			InitGL();
 			Events.Run();
 			// Quits video
-			Video.Dispose();
+			//Video.Dispose();
 		}
 
 		#endregion Run Loop
