@@ -27,8 +27,6 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Timer
 	{
-		static private bool disposed;
-
 		Timer()
 		{}
 
@@ -38,43 +36,11 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
-		/// </summary>
-		~Timer()
-		{
-			Dispose(false);
-		}
-
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		/// <param name="disposing">If true, dipose unmanaged resources</param>
-		public static void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_TIMER);
-				}
-				disposed = true;
-			}
-		}
-
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		public static void Dispose() 
-		{
-			Dispose(true);
-		}
-
-		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
 		public static void Close() 
 		{
-			Dispose();
+			Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_TIMER);
 		}
 
 		/// <summary>
@@ -82,7 +48,6 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Initialize()
 		{
-			disposed = false;
 			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER) & Sdl.SDL_INIT_TIMER) 
 				!= (int) SdlFlag.TrueValue)
 			{

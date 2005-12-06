@@ -30,22 +30,12 @@ namespace SdlDotNet
 	/// </summary>
 	public sealed class Joysticks 
 	{
-		static private bool disposed;
-
 		Joysticks()
 		{}
 
 		static Joysticks()
 		{
 			Initialize();
-		}
-
-		/// <summary>
-		/// Destroys joystick system
-		/// </summary>
-		~Joysticks() 
-		{
-			Dispose(false);
 		}
 
 		/// <summary>
@@ -103,33 +93,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
-		public static void Dispose() 
-		{
-			Dispose(true);
-		}
-
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		/// <param name="disposing">True to manually dispose</param>
-		public static void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_JOYSTICK);
-				}
-				disposed = true;
-			}
-		}
-
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
 		public static void Close() 
 		{
-			Dispose();
+			Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_JOYSTICK);
 		}
 
 		/// <summary>

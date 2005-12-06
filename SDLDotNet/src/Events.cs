@@ -218,6 +218,37 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Closes all SDL subsystems
+		/// </summary>
+		public static void Close() 
+		{
+			AppActive = null;
+			KeyboardDown = null;
+			KeyboardUp = null;
+			MouseMotion = null;
+			MouseButtonDown = null;
+			MouseButtonUp = null;
+			JoystickAxisMotion = null;
+			Tick = null;
+			MusicFinished = null;
+			ChannelFinished = null;
+			VideoExpose = null;
+			VideoResize = null;
+			UserEvent = null;
+			//Quit = null;
+			JoystickBallMotion = null;
+			JoystickHatMotion = null;
+			JoystickButtonUp = null;
+			JoystickButtonDown = null;
+
+			Video.Close();
+			CDRom.Close();
+			Mixer.Close();
+			Timer.Close();
+			Joysticks.Close();
+		}
+
+		/// <summary>
 		/// Checks the event queue, and processes 
 		/// any events it finds by invoking the event properties
 		/// </summary>
@@ -845,6 +876,7 @@ namespace SdlDotNet
 		public static void QuitApplication()
 		{
 			Events.AddEvent(new QuitEventArgs());
+			Events.Close();
 		}
 
 		/// <summary>
@@ -938,7 +970,6 @@ namespace SdlDotNet
 					lastTime = currentTime;
 				}
 			}
-			Tick = null;
 		}
 		#endregion Thread Management
 	}

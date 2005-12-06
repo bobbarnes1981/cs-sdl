@@ -37,7 +37,6 @@ namespace SdlDotNet
 	/// </remarks>
 	public sealed class CDRom
 	{
-		static private bool disposed;
 //		static ResourceManager stringManager;
 		CDRom()
 		{}
@@ -48,49 +47,12 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Closes and destroys the object
-		/// </summary>
-		/// <remarks></remarks>
-		~CDRom() 
-		{
-			Dispose(false);
-		}
-
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		/// <remarks></remarks>
-		public static void Dispose() 
-		{
-			Dispose(true);
-		}
-
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		/// <param name="disposing">
-		/// If true, it will dispose close the handle
-		/// </param>
-		/// <remarks></remarks>
-		public static void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-					Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_CDROM);
-				}
-				disposed = true;
-			}
-		}
-
-		/// <summary>
 		/// Closes and destroys this object
 		/// </summary>
 		/// <remarks></remarks>
 		public static void Close() 
 		{
-			Dispose();
+			Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_CDROM);
 		}
 
 		/// <summary>
