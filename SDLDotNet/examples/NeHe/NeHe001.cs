@@ -254,8 +254,6 @@ namespace SdlDotNet.Examples
 			Reshape();
 			InitGL();
 			Events.Run();
-			// Quits video
-			//Video.Dispose();
 		}
 
 		#endregion Run Loop

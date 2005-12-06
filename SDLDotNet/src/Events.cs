@@ -241,11 +241,12 @@ namespace SdlDotNet
 			JoystickButtonUp = null;
 			JoystickButtonDown = null;
 
-			Video.Close();
+			Joysticks.Close();
 			CDRom.Close();
 			Mixer.Close();
 			Timer.Close();
-			Joysticks.Close();
+			Video.Close();
+			quitFlag = true;
 		}
 
 		/// <summary>
@@ -948,14 +949,15 @@ namespace SdlDotNet
 			
 			while(!quitFlag)
 			{
-				while(Events.Poll()); // Poll all events
+				// Poll all events
+				while(Events.Poll());
 				currentTick = Timer.TicksElapsed;
 				targetTick = lastTick + (int)ticksPerFrame;
 
 				if (currentTick <= targetTick) 
 				{
-					Thread.Sleep(targetTick - currentTick);			// Using Thread
-					//Timer.DelayTicks(targetTick - currentTick);	// Using SDL
+					// Using Thread
+					Thread.Sleep(targetTick - currentTick);
 				} 
 				currentTick = Timer.TicksElapsed;
 				
@@ -970,6 +972,7 @@ namespace SdlDotNet
 					lastTime = currentTime;
 				}
 			}
+			Events.Close();
 		}
 		#endregion Thread Management
 	}
