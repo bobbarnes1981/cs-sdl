@@ -480,7 +480,8 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Returns an array of events in the event queue.
+		/// Returns an array of events in the event queue. 
+		/// It does not remove them from the event queue.
 		/// </summary>
 		/// <param name="eventMask">Mask of events to find in queue</param>
 		/// <param name="numberOfEvents">Number of events to find in queue</param>

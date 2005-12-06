@@ -51,10 +51,10 @@ namespace SdlDotNet
 		/// <param name="handle"></param>
 		internal Surface(IntPtr handle) 
 		{
-			if (!Video.IsInitialized)
-			{
-				Video.Initialize();
-			}
+//			if (!Video.IsInitialized)
+//			{
+			Video.Initialize();
+//			}
 			this.Handle = handle;
 		}
 
@@ -109,10 +109,10 @@ namespace SdlDotNet
 		/// </summary> 
 		public Surface(string file)
 		{
-			if (!Video.IsInitialized)
-			{
-				Video.Initialize();
-			}
+			//if (!Video.IsInitialized)
+			//{
+			Video.Initialize();
+			//}
 			this.Handle = SdlImage.IMG_Load(file);
 			if (this.Handle == IntPtr.Zero)
 			{
@@ -143,10 +143,10 @@ namespace SdlDotNet
 		/// <param name="height">Height of surface</param>
 		public Surface(int width, int height)
 		{
-			if (!Video.IsInitialized)
-			{
-				Video.Initialize();
-			}
+			//if (!Video.IsInitialized)
+			//{
+			Video.Initialize();
+			//}
 			this.Handle = 
 				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
 			if (this.Handle == IntPtr.Zero)
@@ -163,10 +163,10 @@ namespace SdlDotNet
 		/// </param>
 		public Surface(byte[] array)
 		{
-			if (!Video.IsInitialized)
-			{
-				Video.Initialize();
-			}
+			//if (!Video.IsInitialized)
+			//{
+			Video.Initialize();
+			//}
 			this.Handle = 
 				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
 			if (this.Handle == IntPtr.Zero) 
@@ -187,10 +187,10 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("bitmap");
 			}
-			if (!Video.IsInitialized)
-			{
-				Video.Initialize();
-			}
+			//if (!Video.IsInitialized)
+			//{
+			Video.Initialize();
+			//}
 			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
@@ -213,10 +213,10 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("surface");
 			}
-			if (!Video.IsInitialized)
-			{
-				Video.Initialize();
-			}
+			//if (!Video.IsInitialized)
+			//{
+			Video.Initialize();
+			//}
             this.Handle = SdlGfx.zoomSurface(surface.Handle, 1, 1, SdlGfx.SMOOTHING_OFF);
             if (this.Handle == IntPtr.Zero)
             {

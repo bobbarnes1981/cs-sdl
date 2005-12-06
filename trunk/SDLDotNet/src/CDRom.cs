@@ -112,29 +112,29 @@ namespace SdlDotNet
 			}
 		}
 
-		/// <summary>
-		/// Queries if the CDRom subsystem has been intialized.
-		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		/// <returns>
-		/// True if CDRom subsystem has been initialized, false if it has not.
-		/// </returns>
-		public static bool IsInitialized
-		{
-			get
-			{
-				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) & Sdl.SDL_INIT_CDROM) 
-					!= (int) SdlFlag.FalseValue)
-				{
-					return true;
-				}
-				else 
-				{
-					return false;
-				}
-			}
-		}
+//		/// <summary>
+//		/// Queries if the CDRom subsystem has been intialized.
+//		/// </summary>
+//		/// <remarks>
+//		/// </remarks>
+//		/// <returns>
+//		/// True if CDRom subsystem has been initialized, false if it has not.
+//		/// </returns>
+//		public static bool IsInitialized
+//		{
+//			get
+//			{
+//				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) & Sdl.SDL_INIT_CDROM) 
+//					!= (int) SdlFlag.FalseValue)
+//				{
+//					return true;
+//				}
+//				else 
+//				{
+//					return false;
+//				}
+//			}
+//		}
 
 		/// <summary>
 		/// Gets the number of CD-ROM drives available on the system
