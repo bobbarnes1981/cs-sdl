@@ -191,6 +191,7 @@ Section "Examples" SecExamples
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\bin\examples\CDPlayer.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Gears.lnk" "$INSTDIR\bin\examples\Gears.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\bin\examples\MoviePlayer.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\NeHe.lnk" "$INSTDIR\bin\examples\NeHe.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleExample.lnk" "$INSTDIR\bin\examples\ParticlesExample.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Rectangles.lnk" "$INSTDIR\bin\examples\Rectangles.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SimpleGame.lnk" "$INSTDIR\bin\examples\SimpleGame.exe"
