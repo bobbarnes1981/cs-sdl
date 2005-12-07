@@ -47,7 +47,7 @@ namespace SdlDotNet
 		{
 //			stringManager = 
 //				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
-			if ((handle == IntPtr.Zero) | !CDRom.IsValidDriveNumber(index))
+			if ((handle == IntPtr.Zero) || !CDRom.IsValidDriveNumber(index))
 			{
 				throw SdlException.Generate();
 			}
