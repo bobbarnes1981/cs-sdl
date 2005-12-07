@@ -55,7 +55,7 @@ namespace SdlDotNet.Sprites
 		/// Creates a new AnimatedSprite from a surface collection and a name
 		/// </summary>
 		/// <param name="name">The name of the animation</param>
-		/// <param name="animation">The surface collection containing the frames of the animation.</param>
+		/// <param name="surfaces">The surface collection containing the frames of the animation.</param>
 		public AnimatedSprite(string name, SurfaceCollection surfaces) : this(name, new Animation(surfaces))
 		{
 		}
