@@ -202,7 +202,7 @@ namespace SdlDotNet
 			fullImage.Alpha = 0;
 			for(int tileX = 0; tileX * tileSize.Width < fullImage.Width; tileX++)
 			{
-				Surface tile = fullImage.CreateCompatibleSurface(tileSize.Width, tileSize.Height, true);
+				Surface tile = fullImage.CreateCompatibleSurface(tileSize.Width, tileSize.Height);
 				tile.Blit(
 					fullImage, 
 					new Point(0,0), 

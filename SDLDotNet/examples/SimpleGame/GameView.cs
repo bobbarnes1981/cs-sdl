@@ -129,8 +129,8 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void CreateView()
 		{
-			Video.SetVideoModeWindow(this.width, this.height, true);
-			this.surf = Video.Screen.CreateCompatibleSurface(width, height, true);
+			Video.SetVideoModeWindow(this.width, this.height);
+			this.surf = Video.Screen.CreateCompatibleSurface(width, height);
 			//fill the surface with black
 			this.surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
 			Video.WindowIcon();

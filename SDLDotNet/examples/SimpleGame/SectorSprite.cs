@@ -43,7 +43,7 @@ namespace SdlDotNet.Examples
 				throw new ArgumentNullException("screen");
 			}
 			this.sector = sector;
-			base.Surface = screen.CreateCompatibleSurface(128, 128, true);
+			base.Surface = screen.CreateCompatibleSurface(128, 128);
 			base.Surface.Fill(Color.FromArgb(0, 255, 128));
 		}
 
@@ -60,7 +60,7 @@ namespace SdlDotNet.Examples
 				throw new ArgumentNullException("screen");
 			}
 			this.sector = sector;
-			base.Surface = screen.CreateCompatibleSurface(128, 128, true);
+			base.Surface = screen.CreateCompatibleSurface(128, 128);
 			base.Surface.Fill(Color.FromArgb(0, 255, 128));
 			base.Rectangle = rect;
 		}

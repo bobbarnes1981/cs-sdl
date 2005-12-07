@@ -68,9 +68,9 @@ namespace SdlDotNet.Examples
 			try 
 			{
 				screen = 
-					Video.SetVideoModeWindow(width, height, true);
+					Video.SetVideoModeWindow(width, height);
 				surf = 
-					screen.CreateCompatibleSurface(width, height, true);
+					screen.CreateCompatibleSurface(width, height);
 				surf.Fill(
 					new Rectangle(new Point(0, 0), surf.Size), Color.Black); 
 				grid = new BlockGrid(new Point(20,20),new Size(11,13));
