@@ -989,8 +989,7 @@ namespace SdlDotNet
 			{
 				flag = (int)VideoModes.HardwareSurface;
 			}
-
-			return new Surface(Sdl.SDL_CreateRGBSurface(
+			Surface surface = new Surface(Sdl.SDL_CreateRGBSurface(
 				flag,
 				width, 
 				height, 
@@ -999,6 +998,9 @@ namespace SdlDotNet
 				this.PixelFormat.Gmask, 
 				this.PixelFormat.Bmask, 
 				this.PixelFormat.Amask));
+			surface.transparentColor = this.transparentColor;
+			surface.alphaValue = this.alphaValue;
+			return surface;
 		}
 
 		/// <summary>
