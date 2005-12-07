@@ -151,7 +151,7 @@ namespace SdlDotNet
 		/// <returns>new Channel</returns>
 		public static Channel CreateChannel(int index)
 		{
-			if (index < 0 | index >= Mixer.ChannelsAllocated)
+			if (index < 0 || index >= Mixer.ChannelsAllocated)
 			{
 				throw new SdlException();
 			}
