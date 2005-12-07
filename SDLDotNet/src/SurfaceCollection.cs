@@ -403,5 +403,41 @@ namespace SdlDotNet
 		{
 			this.List.CopyTo(array,index);
 		}
+
+		/// <summary>
+		/// Sets the alpha property of every surface in the collection. Gets the alpha of the first surface.
+		/// </summary>
+		public byte Alpha
+		{
+			get
+			{
+				return this[0].Alpha;
+			}
+			set
+			{
+				foreach(Surface surface in this.List)
+				{
+					surface.Alpha = value;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the transparent color of the first surface.  Sets the transparent color of every surface in the collection.
+		/// </summary>
+		public Color TransparentColor
+		{
+			get
+			{
+				return this[0].TransparentColor;
+			}
+			set
+			{
+				foreach(Surface surface in this.List)
+				{
+					surface.TransparentColor = value;
+				}
+			}
+		}
 	}	
 }
