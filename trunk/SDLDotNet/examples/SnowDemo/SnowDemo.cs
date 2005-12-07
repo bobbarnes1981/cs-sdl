@@ -91,7 +91,7 @@ namespace SdlDotNet.Examples
 			{
 				filepath = "";
 			}
-			screen = Video.SetVideoModeWindow(640, 480, 16, true);
+			screen = Video.SetVideoModeWindow(640, 480, 16);
 			background = new Surface(filepath + data_directory + "snowbackground.png");
 			background.TransparentColor = Color.Magenta;
 			tree = new Surface(filepath + data_directory + "Tree.bmp");

@@ -61,7 +61,7 @@ namespace SdlDotNet.Examples
 				new KeyboardEventHandler(this.KeyboardDown); 
 			Events.Quit += new QuitEventHandler(this.Quit);
 
-			Surface screen = Video.SetVideoModeWindow(width, height, true); 
+			Surface screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Movie Player";
 			Mixer.Close();

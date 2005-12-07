@@ -38,7 +38,7 @@ namespace SdlDotNet.Examples
 		/// <param name="location"></param>
 		/// <param name="speedX"></param>
 		/// <param name="speedY"></param>
-		public Bullet(Point location, int speedX, int speedY) : base(Video.Screen.CreateCompatibleSurface(8, 16, true), location)
+		public Bullet(Point location, int speedX, int speedY) : base(Video.Screen.CreateCompatibleSurface(8, 16), location)
 		{
 			this.speedX = speedX;
 			this.speedY = speedY;

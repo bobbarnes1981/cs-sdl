@@ -209,7 +209,20 @@ namespace SdlDotNet
 		/// <returns>a surface to draw to</returns>
 		public static Surface SetVideoModeWindow(int width, int height) 
 		{
-			return Video.SetVideoModeWindow(width, height, true);
+			return Video.SetVideoModeWindow(width, height, false);
+		}
+
+		/// <summary>
+		/// Sets the windowed video mode using current screen bpp
+		/// </summary>
+		/// <param name="width">The width of the window</param>
+		/// <param name="height">The height of the window</param>
+		/// <param name="bitsPerPixel">bits per pixel</param>
+		/// <remarks>It puts a frame around the window</remarks>
+		/// <returns>a surface to draw to</returns>
+		public static Surface SetVideoModeWindow(int width, int height, int bitsPerPixel) 
+		{
+			return Video.SetVideoModeWindow(width, height, bitsPerPixel, false);
 		}
 
 		/// <summary>
@@ -226,7 +239,7 @@ namespace SdlDotNet
 			VideoModes flags = VideoModes.None;
 			if (resizable)
 			{
-				flags = VideoModes.Resizable;
+				flags |= VideoModes.Resizable;
 			}
 			return SetVideoMode(width, height, 0, flags);
 		}
@@ -248,11 +261,11 @@ namespace SdlDotNet
 			VideoModes flags = VideoModes.None;
 			if (resizable)
 			{
-				flags = VideoModes.Resizable;
+				flags |= VideoModes.Resizable;
 			}
 			if (!frame)
 			{
-				flags = VideoModes.NoFrame;
+				flags |= VideoModes.NoFrame;
 			}
 			return SetVideoMode(width, height, 0, flags);
 		}
@@ -276,7 +289,7 @@ namespace SdlDotNet
 			VideoModes flags = VideoModes.None;
 			if (resizable)
 			{
-				flags = VideoModes.Resizable;
+				flags |= VideoModes.Resizable;
 			}
 			return SetVideoMode(width, height, bitsPerPixel, flags);
 		}
@@ -304,11 +317,11 @@ namespace SdlDotNet
 			VideoModes flags = VideoModes.None;
 			if (resizable)
 			{
-				flags = VideoModes.Resizable;
+				flags |= VideoModes.Resizable;
 			}
 			if (!frame)
 			{
-				flags = VideoModes.NoFrame;
+				flags |= VideoModes.NoFrame;
 			}
 			return SetVideoMode(width, height, bitsPerPixel, flags);
 		}

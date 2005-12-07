@@ -54,13 +54,13 @@ namespace SdlDotNet.Examples
 			{
 				filepath = "";
 			}
-			screen = Video.SetVideoModeWindow(640, 480, true);
+			screen = Video.SetVideoModeWindow(640, 480);
 			tempSurface = new Surface(filepath + data_directory + "Background1.png");
 			background = tempSurface.Convert();
 			tempSurface = new Surface(filepath + data_directory + "Background2.png");
 			alternateBackground = tempSurface.Convert();
 
-			temporary = screen.CreateCompatibleSurface(32, 32, true);
+			temporary = screen.CreateCompatibleSurface(32, 32);
 			temporary.TransparentColor = Color.FromArgb(0, 255, 0, 255);
 
 			player = new Player(new Surface(filepath + data_directory + "Head.bmp"), new Point(screen.Width / 2 - 16,

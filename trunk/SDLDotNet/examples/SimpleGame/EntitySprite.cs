@@ -38,7 +38,7 @@ namespace SdlDotNet.Examples
 			{
 				throw new ArgumentNullException("screen");
 			}
-			base.Surface = screen.CreateCompatibleSurface(70, 70, true);
+			base.Surface = screen.CreateCompatibleSurface(70, 70);
 			base.Surface.Fill(Color.FromArgb(0, 255, 128));
 			base.Surface.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
 			base.Rectangle = new Rectangle(0,0,70,70);

@@ -67,7 +67,7 @@ namespace SdlDotNet.Examples
 			int height = 600;
 
 			Video.WindowIcon();
-			screen = Video.SetVideoModeWindow(width, height, true);
+			screen = Video.SetVideoModeWindow(width, height);
 
 			// Set up the master sprite container
 			SetupGui();
