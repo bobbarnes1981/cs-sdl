@@ -203,13 +203,13 @@ namespace SdlDotNet
 			for(int tileX = 0; tileX * tileSize.Width < fullImage.Width; tileX++)
 			{
 				Surface tile = fullImage.CreateCompatibleSurface(tileSize.Width, tileSize.Height);
-				tile.Fill(fullImage.TransparentColor);
+				//tile.Fill(fullImage.TransparentColor);
 				tile.Blit(
 					fullImage, 
 					new Point(0,0), 
 					new Rectangle(tileX * tileSize.Width, 
 					rowNumber * tileSize.Height, tileSize.Width, tileSize.Height)); 
-				tile.TransparentColor = fullImage.TransparentColor;
+				//tile.TransparentColor = fullImage.TransparentColor;
 				this.List.Add(tile); 
 			}
 		}
