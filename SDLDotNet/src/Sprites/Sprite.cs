@@ -850,6 +850,36 @@ namespace SdlDotNet.Sprites
 				visible = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets and sets the alpha associated with the sprite's surface.
+		/// </summary>
+		public virtual byte Alpha
+		{
+			get
+			{
+				return surf.Alpha;
+			}
+			set
+			{
+				surf.Alpha = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets and sets the transparent color associated with the sprite's surface.
+		/// </summary>
+		public virtual Color TransparentColor
+		{
+			get
+			{
+				return surf.TransparentColor;
+			}
+			set
+			{
+				surf.TransparentColor = value;
+			}
+		}
 		#endregion
 
 		#region IDisposable Members
