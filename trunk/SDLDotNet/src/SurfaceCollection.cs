@@ -405,7 +405,8 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Sets the alpha property of every surface in the collection. Gets the alpha of the first surface.
+		/// Sets the alpha property of every surface in the collection.
+		/// Gets the alpha of the first surface.
 		/// </summary>
 		public byte Alpha
 		{
@@ -423,7 +424,8 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Gets the transparent color of the first surface.  Sets the transparent color of every surface in the collection.
+		/// Gets the transparent color of the first surface.
+		/// Sets the transparent color of every surface in the collection.
 		/// </summary>
 		public Color TransparentColor
 		{
