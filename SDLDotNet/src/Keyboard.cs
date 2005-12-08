@@ -40,8 +40,10 @@ namespace SdlDotNet
 		/// <param name="rate">
 		/// Rate in system ticks at which key repeats.
 		/// </param>
+		/// <remarks>This method will initialize the Video subsystem as well.</remarks>
 		public static void EnableKeyRepeat(int delay, int rate) 
 		{
+			Video.Initialize();
 			if (Sdl.SDL_EnableKeyRepeat(delay, rate) == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();
