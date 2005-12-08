@@ -25,7 +25,7 @@ namespace SdlDotNet.Sprites
 	/// <summary>
 	/// Summary description for Animation.
 	/// </summary>
-	public class AnimationDictionary : DictionaryBase, IDictionary
+	public class AnimationDictionary : DictionaryBase
     {
         #region Constructors
         /// <summary>
@@ -94,22 +94,22 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Gets all the Keys in the Dictionary.
 		/// </summary>
-		public IDictionary Keys  
+		public ICollection Keys  
 		{
 			get  
 			{
-				return this.Keys;
+				return Dictionary.Keys;
 			}
 		}
         
 		/// <summary>
 		/// Gets all the Values in the Dictionary.
 		/// </summary>
-		public IDictionary Values  
+		public ICollection Values  
 		{
 			get  
 			{
-				return this.Values;
+				return Dictionary.Values;
 			}
         }
 
@@ -292,16 +292,6 @@ namespace SdlDotNet.Sprites
 
 		#region IDictionary Members
 
-//		/// <summary>
-//		/// Provide the explicit interface member for IDictionary.
-//		/// </summary>
-//		/// <param name="array">Array to copy Dictionary to</param>
-//		/// <param name="index">Index at which to insert the Dictionary items</param>
-//		void IDictionary.CopyTo(Array array, int index)
-//		{
-//			this.CopyTo(array, index);
-//		}
-
 		/// <summary>
 		/// Provide the explicit interface member for IDictionary.
 		/// </summary>
@@ -320,7 +310,7 @@ namespace SdlDotNet.Sprites
 		public virtual void Insert(int index, Animation animation)
 		{
 			this.Insert(index, animation);
-		} 
+		}
 
 		/// <summary>
 		/// Gets the index of the given item in the Dictionary.
