@@ -1,6 +1,34 @@
 The latest changelog can be found at:
 http://cs-sdl.sourceforge.net/index.php/Changelog
 
+===4.0.1===
+David Hudson 16 Dec 2005 
+
+Many thanks to dogwatch for submitting numerous bug reports.
+* Fixed Surface.TransparentColor not being retained after rotating Surface.
+* Fixed Alpha not being retained after rotating Surface.
+* Fixed problem with GetPixel getting wrong pixel.
+* Removed Surface() default constructor. It required that Video.SetVideoMode be called first which led to confusion since the other constructors do not require the call.
+* Added a User Event mask to EventMask enum.
+* Added PumpEvents() before PeepEvents() in the Events.Remove() method.
+* Added a Events.Retrieve() set of methods.
+* Events Ticker is no longer multithreaded. This fixed a problem where OpenGL contexts would not work with the Event ticker.
+* Tick Event handlers are now removed when the Events.QuitApplication() method is called. This help the NeHe demos close a lesson's SDL window then start a new one.
+* Video.SetVideoMode can use the Resizable parameter much more easily.
+* All OpenGL demos (NeHe and Gears) now use the Events ticker. The NeHe lesson dialog can close and start lessons more cleanly.
+* UserEvents work. Users can now define new UserEvents and put them into the Event queue.
+* Sound.Fadeout works.
+* Font check for empty string has been fixed.
+* Rectangles and Gears demos are now resizable.
+* Cleaned up Gears code.
+* All of the EventArgs classes have been revised. No API changes but the code is much cleaner.
+* All OpenGL attributes can now be accessed using properties.
+* Removed IsInitialized() from subsystems due to problem with the method.
+* Removed Dispose() from Video, Timer, CDRom, Mixer and Joysticks since they do not actually implement IDisposable and are singletons. Also, the methods did not work correctly. The Close() method for each singleton class will shut down the SDL subsystems.
+* Very minor AnimatedSprite fix.
+* Added OpenGL Programming Guide Red Book to the Wiki.
+* TransparentColor and Alpha properties now exist in Sprite and SurfaceCollection to make life easier.
+
 4.0.0
 David Hudson 22 Nov 2005
 * Minor SdlDotNet.Particles additions and fixes.
