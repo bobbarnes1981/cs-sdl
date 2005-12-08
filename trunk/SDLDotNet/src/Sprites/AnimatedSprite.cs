@@ -21,6 +21,7 @@ using SdlDotNet.Sprites;
 using SdlDotNet;
 using System;
 using System.Drawing;
+using System.Collections;
 
 namespace SdlDotNet.Sprites
 {
@@ -266,6 +267,44 @@ namespace SdlDotNet.Sprites
 				base.Height = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets and alpha of the sprite's current animation.  Sets the alpha of every animation made for the sprite.
+		/// </summary>
+		public override byte Alpha
+		{
+			get
+			{
+				return m_Animations[m_CurrentAnimation].Alpha;
+			}
+			set
+			{
+				foreach(Animation anim in m_Animations.Values)
+				{
+					anim.Alpha = value;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets and transparent color of the sprite's current animation.  Sets the transparent color of every animation made for the sprite.
+		/// </summary>
+		public override Color TransparentColor
+		{
+			get
+			{
+				return m_Animations[m_CurrentAnimation].TransparentColor;
+			}
+			set
+			{
+				foreach(Animation anim in m_Animations.Values)
+				{
+					anim.TransparentColor = value;
+				}
+			}
+		}
+
+
 
 
 
