@@ -4,6 +4,8 @@ http://cs-sdl.sourceforge.net/index.php/Changelog
 ===4.0.1===
 David Hudson 16 Dec 2005 
 
+This release fixes numerous bugs in the library, particularly in the Events class. The Events loop now supports OpenGL applications better. OpenGL attributes can now be accessed using properties. User-defined events work much better. Creating Resizable windows is much easier. A Wiki-version of OpenGL Red Book was added to the SDL.NET website.
+
 Many thanks to dogwatch for submitting numerous bug reports.
 * Fixed Surface.TransparentColor not being retained after rotating Surface.
 * Fixed Alpha not being retained after rotating Surface.
