@@ -160,7 +160,7 @@ namespace SdlDotNet.Examples
 			// Reset The Projection Matrix
 			Gl.glLoadIdentity();
 			// Calculate The Aspect Ratio Of The Window
-			Glu.gluPerspective(45.0F, (width / (double)height), 0.1F, distance);
+			Glu.gluPerspective(45.0F, (width / (float)height), 0.1F, distance);
 			// Select The Modelview Matrix
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			// Reset The Modelview Matrix
