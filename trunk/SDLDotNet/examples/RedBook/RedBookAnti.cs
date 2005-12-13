@@ -62,11 +62,6 @@ namespace SdlDotNet.Examples
 		
 		// Surface to render on
 		Surface screen;
-		private const float MAXZ = 8.0f;
-		private const float MINZ = -8.0f;
-		private const float ZINC = 0.4f;
-		private static float solidZ = MAXZ;
-		private static float transparentZ = MINZ;
 
 		/// <summary>
 		/// Lesson title
@@ -209,7 +204,7 @@ namespace SdlDotNet.Examples
 					// Toggle fullscreen
 					if ((screen.FullScreen)) 
 					{
-						screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+						screen = Video.SetVideoModeWindowOpenGL(width, height);
 						this.WindowAttributes();
 					}
 					else 
@@ -217,14 +212,6 @@ namespace SdlDotNet.Examples
 						screen = Video.SetVideoModeOpenGL(width, height);
 					}
 					Reshape();
-					break;
-				case Key.A:
-					solidZ = MINZ;
-					transparentZ = MAXZ;
-					break;
-				case Key.R:
-					solidZ = MAXZ;
-					transparentZ = MINZ;
 					break;
 			}
 		}
