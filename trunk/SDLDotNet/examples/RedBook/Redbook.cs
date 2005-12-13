@@ -9,16 +9,16 @@ using System.Windows.Forms;
 namespace SdlDotNet.Examples
 {
 	/// <summary>
-	/// Summary description for NeHe.
+	/// Summary description for RedBook.
 	/// </summary>
-	public class NeHe : System.Windows.Forms.Form
+	public class RedBook : System.Windows.Forms.Form
 	{
 		private System.Windows.Forms.ListBox lstExamples;
 		private System.Windows.Forms.Button startButton;
-		private System.Collections.ArrayList neheTypes = new ArrayList();
+		private System.Collections.ArrayList redBookTypes = new ArrayList();
 		private System.Windows.Forms.MainMenu mainMenu1;
 		private System.Windows.Forms.MenuItem menuItem1;
-		private System.Windows.Forms.MenuItem menuItem2;
+		private System.Windows.Forms.MenuItem menuExit;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -27,7 +27,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-		public NeHe()
+		public RedBook()
 		{
 			//
 			// Required for Windows Form Designer support
@@ -61,21 +61,21 @@ namespace SdlDotNet.Examples
 			this.startButton = new System.Windows.Forms.Button();
 			this.mainMenu1 = new System.Windows.Forms.MainMenu();
 			this.menuItem1 = new System.Windows.Forms.MenuItem();
-			this.menuItem2 = new System.Windows.Forms.MenuItem();
+			this.menuExit = new System.Windows.Forms.MenuItem();
 			this.SuspendLayout();
 			// 
 			// lstExamples
 			// 
 			this.lstExamples.Location = new System.Drawing.Point(8, 8);
 			this.lstExamples.Name = "lstExamples";
-			this.lstExamples.Size = new System.Drawing.Size(360, 381);
+			this.lstExamples.Size = new System.Drawing.Size(360, 537);
 			this.lstExamples.Sorted = true;
 			this.lstExamples.TabIndex = 0;
 			this.lstExamples.DoubleClick += new System.EventHandler(this.startButton_Click);
 			// 
 			// startButton
 			// 
-			this.startButton.Location = new System.Drawing.Point(136, 400);
+			this.startButton.Location = new System.Drawing.Point(152, 560);
 			this.startButton.Name = "startButton";
 			this.startButton.TabIndex = 1;
 			this.startButton.Text = "Start Demo";
@@ -90,35 +90,35 @@ namespace SdlDotNet.Examples
 			// 
 			this.menuItem1.Index = 0;
 			this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					  this.menuItem2});
+																					  this.menuExit});
 			this.menuItem1.Text = "File";
 			// 
-			// menuItem2
+			// menuExit
 			// 
-			this.menuItem2.Index = 0;
-			this.menuItem2.Text = "Exit";
-			this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
+			this.menuExit.Index = 0;
+			this.menuExit.Text = "Exit";
+			this.menuExit.Click += new System.EventHandler(this.menuItem2_Click);
 			// 
-			// NeHe
+			// RedBook
 			// 
 			this.AcceptButton = this.startButton;
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(378, 475);
+			this.ClientSize = new System.Drawing.Size(378, 599);
 			this.Controls.Add(this.startButton);
 			this.Controls.Add(this.lstExamples);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.Menu = this.mainMenu1;
-			this.Name = "NeHe";
-			this.Text = "SDL.NET - NeHe OpenGL Examples";
-			this.Load += new System.EventHandler(this.NeHe_Load);
-			this.Closed += new System.EventHandler(this.NeHe_Closed);
+			this.Name = "RedBook";
+			this.Text = "SDL.NET - RedBook OpenGL Examples";
+			this.Load += new System.EventHandler(this.RedBook_Load);
+			this.Closed += new System.EventHandler(this.RedBook_Closed);
 			this.ResumeLayout(false);
 
 		}
 		#endregion
 
-		private void NeHe_Load(object sender, System.EventArgs e)
+		private void RedBook_Load(object sender, System.EventArgs e)
 		{
 			// Load app.ico as the form icon.
 			Assembly asm = Assembly.GetExecutingAssembly();
@@ -136,27 +136,27 @@ namespace SdlDotNet.Examples
 				this.Icon = new Icon(asm.GetManifestResourceStream(iconName));
 			}
 
-			// Get the NeHe examples.
+			// Get the RedBook examples.
 			Type[] types = asm.GetTypes();
 
 			foreach(Type type in types)
 			{
-				// NeHeXXX
-				if(type.Name.StartsWith("NeHe") && type.Name.Length == 7)
+				// RedBookXXX
+				if(type.Name.StartsWith("RedBook") && type.Name.Length > 7)
 				{
 					try
 					{
-						// Get the title of the NeHe example class
+						// Get the title of the RedBook example class
 						object result = type.InvokeMember("Title",
 							BindingFlags.GetProperty, null, type, null);
 
 						// Add the example to the array and display it on the listbox
 						lstExamples.Items.Add((string)result);
-						neheTypes.Add(type);
+						redBookTypes.Add(type);
 					}
 					catch(System.MissingMethodException)
 					{
-						// NeHe demo missing static Title property - do nothing
+						// RedBook demo missing static Title property - do nothing
 					}
 				}
 			}
@@ -177,8 +177,8 @@ namespace SdlDotNet.Examples
 					// already quit SDL - Do nothing
 				}
 				
-				// Get the desired NeHe example type.
-				Type dynClassType = (Type)neheTypes[lstExamples.SelectedIndex];
+				// Get the desired RedBook example type.
+				Type dynClassType = (Type)redBookTypes[lstExamples.SelectedIndex];
 
 				// Make an instance of it.
 				dynObj = Activator.CreateInstance(dynClassType);
@@ -207,7 +207,7 @@ namespace SdlDotNet.Examples
 		{
 			try
 			{
-				Application.Run(new NeHe());
+				Application.Run(new RedBook());
 			}
 			catch(System.ObjectDisposedException)
 			{
@@ -215,20 +215,22 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void NeHe_Closed(object sender, System.EventArgs e)
+		private void RedBook_Closed(object sender, System.EventArgs e)
 		{
 			try
 			{
 				// Quit SDL if it's not quit already
 				SdlDotNet.Events.QuitApplication();
+				Application.Exit();
 			}
 			catch(SdlDotNet.SdlException)
 			{
 				// already quit SDL - Do nothing
+				Application.Exit();
 			}
 
 			// End the thread and the application.
-			Application.Exit();
+			//Application.Exit();
 		}
 
 		private void menuItem2_Click(object sender, System.EventArgs e)
@@ -242,7 +244,7 @@ namespace SdlDotNet.Examples
 			catch(SdlDotNet.SdlException)
 			{
 				this.Close();
-			}	
+			}
 		}
 	}
 }
