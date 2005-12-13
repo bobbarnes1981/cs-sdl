@@ -338,6 +338,18 @@ namespace SdlDotNet
 			return SetVideoMode(width, height, bitsPerPixel,
 				(VideoModes.OpenGL|VideoModes.Fullscreen));
 		}
+
+		/// <summary>
+		/// Sets a full-screen video mode suitable for drawing with OpenGL
+		/// </summary>
+		/// <param name="width">the horizontal resolution</param>
+		/// <param name="height">the vertical resolution</param>
+		/// <returns>A Surface representing the screen</returns>
+		public static Surface SetVideoModeOpenGL(int width, int height) 
+		{
+			return SetVideoMode(width, height, 0,
+				(VideoModes.OpenGL|VideoModes.Fullscreen));
+		}
 		/// <summary>
 		/// Sets a windowed video mode suitable for drawing with OpenGL
 		/// </summary>
@@ -387,6 +399,20 @@ namespace SdlDotNet
 				flags |= VideoModes.NoFrame;
 			}
 			return SetVideoMode(width, height, 0, flags);
+		}
+
+		/// <summary>
+		/// Sets a windowed video mode suitable for drawing with OpenGL
+		/// </summary>
+		/// <param name="width">The width of the window</param>
+		/// <param name="height">The height of the window</param>
+		/// <returns>A Surface representing the window</returns>
+		public static Surface SetVideoModeWindowOpenGL(
+			int width, 
+			int height)
+		{
+			return SetVideoModeWindowOpenGL(width, height, false);
+
 		}
 		/// <summary>
 		/// Sets the video mode of a fullscreen application
