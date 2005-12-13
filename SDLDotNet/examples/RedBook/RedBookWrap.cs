@@ -80,7 +80,6 @@ namespace SdlDotNet.Examples
 	///     wrapping for the t parameter.
 	/// </summary>
 	/// <remarks>
-	/// <remarks>
 	///     <para>
 	///         Original Author:    Silicon Graphics, Inc.
 	///         http://www.opengl.org/developers/code/examples/redbook/wrap.c
