@@ -55,8 +55,8 @@ namespace SdlDotNet.Examples
 		int width = 500;
 		//Height of screen
 		int height = 200;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -97,7 +97,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -119,12 +119,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		// --- Application Methods ---
 		#region DrawPlane()
-		private void DrawPlane() 
+		private static void DrawPlane() 
 		{
 			Gl.glBegin(Gl.GL_QUADS);
 			Gl.glNormal3f(0.0f, 0.0f, 1.0f);
@@ -160,7 +160,7 @@ namespace SdlDotNet.Examples
 		///         Initialize light source, material property, and lighting model.
 		///     </para>
 		/// </summary>
-		private void Init() 
+		private static void Init() 
 		{
 			// materialSpecular and materialShininess are NOT default values
 			float[] materialAmbient = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -190,7 +190,7 @@ namespace SdlDotNet.Examples
 
 		// --- Callbacks ---
 		#region Display()
-		private void Display() 
+		private static void Display() 
 		{
 			float[] infiniteLight = {1.0f, 1.0f, 1.0f, 0.0f};
 			float[] localLight = {1.0f, 1.0f, 1.0f, 1.0f};
@@ -213,7 +213,7 @@ namespace SdlDotNet.Examples
 		#endregion Display()
 
 		#region Reshape(int w, int h)
-		private void Reshape(int w, int h) 
+		private static void Reshape(int w, int h) 
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -245,16 +245,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.Display();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}

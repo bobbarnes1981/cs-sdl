@@ -66,8 +66,8 @@ namespace SdlDotNet.Examples
 		int width = 500;
 		//Height of screen
 		int height = 500;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -112,7 +112,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -134,12 +134,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		// --- Application Methods ---
 		#region Init()
-		private void Init() 
+		private static void Init() 
 		{
 			Glu.GLUtesselator tess;
 			double[][] rect = new double[4][] {
@@ -215,7 +215,7 @@ namespace SdlDotNet.Examples
 
 		// --- Callbacks ---
 		#region Begin(int which)
-		private void Begin(int which) 
+		private static void Begin(int which) 
 		{
 			Gl.glBegin(which);
 		}
@@ -230,7 +230,7 @@ namespace SdlDotNet.Examples
 		///         is weighted.
 		///     </para>
 		/// </summary>
-		private void Combine(double[] coordinates, double[] vertexData, float[] weight, double[] dataOut) 
+		private static void Combine(double[] coordinates, double[] vertexData, float[] weight, double[] dataOut) 
 		{
 			double[] vertex = new double[6];
 			int i;
@@ -249,7 +249,7 @@ namespace SdlDotNet.Examples
 		#endregion Combine(double[] coordinates, double[][] vertexData, float[] weight, double[] dataOut)
 
 		#region Display()
-		private void Display() 
+		private static void Display() 
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
 			Gl.glColor3f(1.0f, 1.0f, 1.0f);
@@ -260,14 +260,14 @@ namespace SdlDotNet.Examples
 		#endregion Display()
 
 		#region End()
-		private void End() 
+		private static void End() 
 		{
 			Gl.glEnd();
 		}
 		#endregion End()
 
 		#region Error(int errorCode)
-		private void Error(int errorCode) 
+		private static void Error(int errorCode) 
 		{
 			Console.WriteLine("Tessellation Error: {0}", Glu.gluErrorString(errorCode));
 			Environment.Exit(1);
@@ -275,7 +275,7 @@ namespace SdlDotNet.Examples
 		#endregion Error(int errorCode)
 
 		#region Reshape(int w, int h)
-		private void Reshape(int w, int h) 
+		private static void Reshape(int w, int h) 
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -285,7 +285,7 @@ namespace SdlDotNet.Examples
 		#endregion Reshape(int w, int h)
 
 		#region Vertex(double[] vertex)
-		private void Vertex(double[] vertex) 
+		private static void Vertex(double[] vertex) 
 		{
 			double[] pointer;
 
@@ -313,16 +313,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.Display();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}

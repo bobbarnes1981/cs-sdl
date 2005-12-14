@@ -64,8 +64,8 @@ namespace SdlDotNet.Examples
 		int width = 256;
 		//Height of screen
 		int height = 256;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -83,15 +83,15 @@ namespace SdlDotNet.Examples
 		#endregion Private Constants
 
 		#region Private Fields
-		private byte[] stripeImage = new byte[STRIPEWIDTH * 4];
-		private int texture;
+		private static byte[] stripeImage = new byte[STRIPEWIDTH * 4];
+		private static int texture;
 
 		// planes for texture coordinate generation
-		private float[] xequalzero = {1.0f, 0.0f, 0.0f, 0.0f};
-		private float[] slanted = {1.0f, 1.0f, 1.0f, 0.0f};
-		private float[] currentCoeff;
-		private int currentPlane;
-		private int currentGenMode;
+		private static float[] xequalzero = {1.0f, 0.0f, 0.0f, 0.0f};
+		private static float[] slanted = {1.0f, 1.0f, 1.0f, 0.0f};
+		private static float[] currentCoeff;
+		private static int currentPlane;
+		private static int currentGenMode;
 		#endregion Private Fields
 
 		#region Constructors
@@ -122,7 +122,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -144,12 +144,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		// --- Application Methods ---
 		#region Init()
-		private void Init() 
+		private static void Init() 
 		{
 			Glut.glutInit();
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -187,7 +187,7 @@ namespace SdlDotNet.Examples
 		#endregion Init()
 
 		#region MakeStripeImage()
-		private void MakeStripeImage() 
+		private static void MakeStripeImage() 
 		{
 			for(int j = 0; j < STRIPEWIDTH; j++) 
 			{
@@ -201,7 +201,7 @@ namespace SdlDotNet.Examples
 
 		// --- Callbacks ---
 		#region Display()
-		private void Display() 
+		private static void Display() 
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glPushMatrix();
@@ -214,7 +214,7 @@ namespace SdlDotNet.Examples
 		#endregion Display()
 
 		#region Reshape(int w, int h)
-		private void Reshape(int w, int h) 
+		private static void Reshape(int w, int h) 
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -269,16 +269,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.Display();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}

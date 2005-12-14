@@ -65,8 +65,8 @@ namespace SdlDotNet.Examples
 		int width = 200;
 		//Height of screen
 		int height = 200;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -111,7 +111,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -131,7 +131,7 @@ namespace SdlDotNet.Examples
 
 		// --- Application Methods ---
 		#region Init()
-		private void Init() 
+		private static void Init() 
 		{
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			Gl.glShadeModel(Gl.GL_FLAT);
@@ -144,7 +144,7 @@ namespace SdlDotNet.Examples
 		///         Draws 4 triangles and a wire frame which represents the viewing volume.
 		///     </para>
 		/// </summary>
-		private void DrawScene() 
+		private static void DrawScene() 
 		{
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
 			Gl.glLoadIdentity();
@@ -171,7 +171,7 @@ namespace SdlDotNet.Examples
 		///         away from the origin
 		///     </para>
 		/// </summary>
-		private void DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float z) 
+		private static void DrawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, float z) 
 		{
 			Gl.glBegin(Gl.GL_TRIANGLES);
 			Gl.glVertex3f(x1, y1, z);
@@ -187,7 +187,7 @@ namespace SdlDotNet.Examples
 		///         Draws a rectangular box with these outer x, y, and z values.
 		///     </para>
 		/// </summary>
-		private void DrawViewVolume(float x1, float x2, float y1, float y2, float z1, float z2) 
+		private static void DrawViewVolume(float x1, float x2, float y1, float y2, float z1, float z2) 
 		{
 			Gl.glColor3f(1.0f, 1.0f, 1.0f);
 			Gl.glBegin(Gl.GL_LINE_LOOP);
@@ -223,7 +223,7 @@ namespace SdlDotNet.Examples
 		///         ProcessHits prints out the contents of the selection array.
 		///     </para>
 		/// </summary>
-		private void ProcessHits(int hits, int[] buffer) 
+		private static void ProcessHits(int hits, int[] buffer) 
 		{
 			int i, j;
 			int names;
@@ -261,7 +261,7 @@ namespace SdlDotNet.Examples
 		///         only one hit will be registered.
 		///     </para>
 		/// </summary>
-		private void SelectObjects() 
+		private static void SelectObjects() 
 		{
 			int[] selectBuffer = new int[BUFSIZE];
 			int hits;
@@ -295,7 +295,7 @@ namespace SdlDotNet.Examples
 
 		// --- Callbacks ---
 		#region Display()
-		private void Display() 
+		private static void Display() 
 		{
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
@@ -322,16 +322,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.Display();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}

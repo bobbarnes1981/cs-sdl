@@ -57,8 +57,8 @@ namespace SdlDotNet.Examples
 		int width = 400;
 		//Height of screen
 		int height = 150;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		private const int CHECKWIDTH = 64;
 		private const int CHECKHEIGHT = 64;
@@ -107,7 +107,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -128,7 +128,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		/// <summary>
@@ -136,7 +136,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="h"></param>
 		/// <param name="w"></param>
-		private void Reshape(int w, int h)
+		private static void Reshape(int w, int h)
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -147,7 +147,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Initializes the OpenGL system
 		/// </summary>
-		private void InitGL()
+		private static void Init()
 		{
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			Gl.glShadeModel(Gl.GL_FLAT);
@@ -169,7 +169,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
-		private void DisplayGL()
+		private static void Display()
 		{
 			int i;
 
@@ -234,19 +234,6 @@ namespace SdlDotNet.Examples
 					// Will stop the app loop
 					Events.QuitApplication();
 					break;
-				case Key.F1:
-					// Toggle fullscreen
-					if ((screen.FullScreen)) 
-					{
-						screen = Video.SetVideoModeWindowOpenGL(width, height, true);
-						this.WindowAttributes();
-					}
-					else 
-					{
-						screen = Video.SetVideoModeOpenGL(width, height);
-					}
-					Reshape();
-					break;
 				case Key.R:
 					zoomFactor = 1.0;
 					Console.WriteLine("zoomFactor reset to 1.0");
@@ -270,29 +257,18 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		#region Motion(int x, int y)
-		private void Motion(int x, int y) 
-		{
-			Gl.glRasterPos2i(x, height - y);
-			Gl.glPixelZoom((float) zoomFactor, (float) zoomFactor);
-			Gl.glCopyPixels(0, 0, CHECKWIDTH, CHECKHEIGHT, Gl.GL_COLOR);
-			Gl.glPixelZoom(1.0f, 1.0f);
-			Gl.glFlush();
-		}
-		#endregion Motion(int x, int y)
-
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.DisplayGL();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}
@@ -306,7 +282,7 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			Reshape();
-			InitGL();
+			Init();
 			Events.Run();
 		}
 

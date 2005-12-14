@@ -64,8 +64,8 @@ namespace SdlDotNet.Examples
 		int height = 500;
 		
 		
-		// Surface to render on
-		Surface screen;
+		
+		
 		private const float MAXZ = 8.0f;
 		private const float MINZ = -8.0f;
 		private const float ZINC = 0.4f;
@@ -114,7 +114,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -135,7 +135,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		/// <summary>
@@ -143,7 +143,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="h"></param>
 		/// <param name="w"></param>
-		private void Reshape(int w, int h)
+		private static void Reshape(int w, int h)
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -163,7 +163,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Initializes the OpenGL system
 		/// </summary>
-		private void InitGL()
+		private static void Init()
 		{
 			Glut.glutInit();
 			float[] materialSpecular = {1.0f, 1.0f, 1.0f, 0.15f};
@@ -195,7 +195,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
-		private void DisplayGL()
+		private static void Display()
 		{
 			float[] materialSolid = {0.75f, 0.75f, 0.0f, 1.0f};
 			float[] materialZero = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -239,19 +239,6 @@ namespace SdlDotNet.Examples
 					// Will stop the app loop
 					Events.QuitApplication();
 					break;
-				case Key.F1:
-					// Toggle fullscreen
-					if ((screen.FullScreen)) 
-					{
-						screen = Video.SetVideoModeWindowOpenGL(width, height, true);
-						this.WindowAttributes();
-					}
-					else 
-					{
-						screen = Video.SetVideoModeOpenGL(width, height);
-					}
-					Reshape();
-					break;
 				case Key.A:
 					solidZ = MINZ;
 					transparentZ = MAXZ;
@@ -265,16 +252,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.DisplayGL();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}
@@ -288,7 +275,7 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			Reshape();
-			InitGL();
+			Init();
 			Events.Run();
 		}
 

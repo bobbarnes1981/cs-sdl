@@ -57,8 +57,8 @@ namespace SdlDotNet.Examples
 		int width = 500;
 		//Height of screen
 		int height = 500;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -101,7 +101,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -122,7 +122,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		/// <summary>
@@ -131,7 +131,7 @@ namespace SdlDotNet.Examples
 		/// <param name="h"></param>
 		/// <param name="w"></param>
 		#region Reshape(int w, int h)
-		private void Reshape(int w, int h) 
+		private static void Reshape(int w, int h) 
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -151,7 +151,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Initializes the OpenGL system
 		/// </summary>
-		private void InitGL()
+		private static void Init()
 		{
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			Gl.glShadeModel(Gl.GL_FLAT);
@@ -185,7 +185,7 @@ namespace SdlDotNet.Examples
 			*
 			*   Gl.glTranslatef() is used to move spheres to their appropriate locations.
 			*/
-		private void DisplayGL()
+		private static void Display()
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
 			Gl.glColor3f(1.0f, 1.0f, 1.0f);
@@ -230,16 +230,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.DisplayGL();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}
@@ -253,7 +253,7 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			Reshape();
-			InitGL();
+			Init();
 			Events.Run();
 		}
 

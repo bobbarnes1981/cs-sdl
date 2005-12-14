@@ -99,7 +99,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// 
 		/// </summary>
-        public const int MAX_SAMPLES = 66;
+        public const int MaxSamples = 66;
         #endregion Public Constants
 
         #region Public Structs
@@ -110,11 +110,34 @@ namespace SdlDotNet.Examples
 			/// <summary>
 			/// 
 			/// </summary>
-            public float X;
+			public float X
+			{
+				get
+				{
+					return x;
+				}
+				set
+				{
+					x = value;
+				}
+			}
+            float x;
 			/// <summary>
 			/// 
 			/// </summary>
-            public float Y;
+			public float Y
+			{
+				get
+				{
+					return y;
+				}
+				set
+				{
+					y = value;
+				}
+			}
+
+            float y;
 
 			/// <summary>
 			/// 
@@ -122,8 +145,8 @@ namespace SdlDotNet.Examples
 			/// <param name="x"></param>
 			/// <param name="y"></param>
             public JitterPoint(float x, float y) {
-                X = x;
-                Y = y;
+                this.x = x;
+                this.y = y;
             }
         };
         #endregion Public Structs

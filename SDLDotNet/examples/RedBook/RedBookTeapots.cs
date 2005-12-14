@@ -58,8 +58,8 @@ namespace SdlDotNet.Examples
 		int width = 500;
 		//Height of screen
 		int height = 600;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -103,7 +103,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -125,7 +125,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		// --- Application Methods ---
@@ -134,7 +134,7 @@ namespace SdlDotNet.Examples
 		/// Initialize depth buffer, projection matrix, light source, and lighting model.
 		/// Do not specify a material property here.
 		/// </summary>
-		private void Init() 
+		private static void Init() 
 		{
 			Glut.glutInit();
 			float[] ambient = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -173,7 +173,7 @@ namespace SdlDotNet.Examples
 		///         material property.  Draw a teapot.
 		///     </para>
 		/// </summary>
-		private void RenderTeapot(float x, float y, float ambr, float ambg, float ambb, float difr, float difg, float difb, float specr, float specg, float specb, float shine) 
+		private static void RenderTeapot(float x, float y, float ambr, float ambg, float ambb, float difr, float difg, float difb, float specr, float specg, float specb, float shine) 
 		{
 			float[] mat = new float[4];
 
@@ -214,7 +214,7 @@ namespace SdlDotNet.Examples
 		///         4th column:  black, cyan, green, red, white, yellow rubber.
 		///     </para>
 		/// </summary>
-		private void Display() 
+		private static void Display() 
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			RenderTeapot(2.0f, 17.0f, 0.0215f, 0.1745f, 0.0215f, 0.07568f, 0.61424f, 0.07568f, 0.633f, 0.727811f, 0.633f, 0.6f);
@@ -246,7 +246,7 @@ namespace SdlDotNet.Examples
 		#endregion Display()
 
 		#region Reshape(int w, int h)
-		private void Reshape(int w, int h) 
+		private static void Reshape(int w, int h) 
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -280,16 +280,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.Display();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}

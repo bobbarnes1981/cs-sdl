@@ -1,10 +1,13 @@
-The latest changelog can be found at:
-http://cs-sdl.sourceforge.net/index.php/Changelog
+This release fixes numerous bugs in the library, particularly in the Events class. The Events loop now supports OpenGL applications better. OpenGL attributes can now be accessed using properties. User-defined events work much better. Creating Resizable and OpenGL windows is easier. All of the OpenGL Red Book examples have been ported to SDL.NET and a Wiki-version of OpenGL Red Book was added to the SDL.NET website.
+
+Documentation and downloads are available at http://cs-sdl.sourceforge.net.
+
+A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changelog
+
+SDL.NET is licensed under the LGPL.
 
 ===4.0.1===
 David Hudson 16 Dec 2005 
-
-This release fixes numerous bugs in the library, particularly in the Events class. The Events loop now supports OpenGL applications better. OpenGL attributes can now be accessed using properties. User-defined events work much better. Creating Resizable windows is much easier. A Wiki-version of OpenGL Red Book was added to the SDL.NET website.
 
 Many thanks to dogwatch for submitting numerous bug reports.
 * Fixed Surface.TransparentColor not being retained after rotating Surface.
@@ -29,7 +32,10 @@ Many thanks to dogwatch for submitting numerous bug reports.
 * Removed Dispose() from Video, Timer, CDRom, Mixer and Joysticks since they do not actually implement IDisposable and are singletons. Also, the methods did not work correctly. The Close() method for each singleton class will shut down the SDL subsystems.
 * Very minor AnimatedSprite fix.
 * Added OpenGL Programming Guide Red Book to the Wiki.
+* All OpenGL Redbook examples have been added.
 * TransparentColor and Alpha properties now exist in Sprite and SurfaceCollection to make life easier.
+* Added some overloads for Video.SetVideoModeOpenGL and Video.SetVideoModeWindowOpenGL
+
 
 4.0.0
 David Hudson 22 Nov 2005

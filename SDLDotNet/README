@@ -88,7 +88,7 @@ Demos
 	The SpriteGuiDemo shows several sprite examples and uses a simple GUI.
 	The Triad example is a full Tetris-like game.
 	The ParticleSExample show a fireworks type display that uses the SdldotNet.Particles engine.
-	The NeHe examples show how to use OpenGL with SDL.NET.
+	The NeHe and RedBook examples show how to use OpenGL with SDL.NET.
 
 Tutorials can be found at:
 http://cs-sdl.sourceforge.net/index.php/Category:Tutorials

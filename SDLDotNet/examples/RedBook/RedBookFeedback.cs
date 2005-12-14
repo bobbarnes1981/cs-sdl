@@ -59,8 +59,8 @@ namespace SdlDotNet.Examples
 		int width = 100;
 		//Height of screen
 		int height = 100;	
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -201,7 +201,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -222,7 +222,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		/// <summary>
@@ -230,7 +230,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="h"></param>
 		/// <param name="w"></param>
-		private void Reshape(int w, int h)
+		private static void Reshape(int w, int h)
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -246,7 +246,7 @@ namespace SdlDotNet.Examples
 		///         and width.
 		///     </para>
 		/// </summary>
-		private void InitGL()
+		private static void Init()
 		{
 			Gl.glEnable(Gl.GL_LIGHTING);
 			Gl.glEnable(Gl.GL_LIGHT0);
@@ -258,7 +258,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
-		private void DisplayGL()
+		private static void Display()
 		{
 			float[] feedBuffer = new float[1024];
 			int size;
@@ -290,34 +290,21 @@ namespace SdlDotNet.Examples
 					// Will stop the app loop
 					Events.QuitApplication();
 					break;
-				case Key.F1:
-					// Toggle fullscreen
-					if ((screen.FullScreen)) 
-					{
-						screen = Video.SetVideoModeWindowOpenGL(width, height, true);
-						this.WindowAttributes();
-					}
-					else 
-					{
-						screen = Video.SetVideoModeOpenGL(width, height);
-					}
-					Reshape();
-					break;
 			}
 		}
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.DisplayGL();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}
@@ -331,7 +318,7 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			Reshape();
-			InitGL();
+			Init();
 			Events.Run();
 		}
 
