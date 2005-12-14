@@ -68,7 +68,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "TexProx - texture proxies.";
+				return "TexProx - texture proxies. TODO";
 			}
 		}
 
