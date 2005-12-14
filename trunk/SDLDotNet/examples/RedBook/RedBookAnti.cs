@@ -154,7 +154,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private static void Init()
 		{
-			Glut.glutInit();
+			
 			float[] values = new float[2];
             
 			Gl.glGetFloatv(Gl.GL_LINE_WIDTH_GRANULARITY, values);

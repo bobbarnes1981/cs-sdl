@@ -159,7 +159,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private static void Init()
 		{
-			Glut.glutInit();
+			
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
 
 			for(int i = 0; i < NUMCOLORS; i++) 

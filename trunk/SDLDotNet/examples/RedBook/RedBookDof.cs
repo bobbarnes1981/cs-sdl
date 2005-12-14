@@ -149,7 +149,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private static void Init()
 		{
-			Glut.glutInit();
+			
 			float[] ambient = {0.0f, 0.0f, 0.0f, 1.0f};
 			float[] diffuse = {1.0f, 1.0f, 1.0f, 1.0f};
 			float[] specular = {1.0f, 1.0f, 1.0f, 1.0f};

@@ -165,7 +165,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private static void Init()
 		{
-			Glut.glutInit();
+			
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			Gl.glShadeModel(Gl.GL_SMOOTH);
 			Gl.glEnable(Gl.GL_LIGHTING);

@@ -137,7 +137,7 @@ namespace SdlDotNet.Examples
 		{
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			Gl.glShadeModel(Gl.GL_FLAT);
-			Glut.glutInit();
+			
 		}
 		#endregion Init()
 

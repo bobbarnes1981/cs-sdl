@@ -139,7 +139,7 @@ namespace SdlDotNet.Examples
 		#region Init()
 		private static void Init() 
 		{
-			Glut.glutInit();
+			
 			float[] lightAmbient = {0.0f, 0.0f, 0.0f, 1.0f};
 			float[] lightDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
 			float[] lightSpecular = {1.0f, 1.0f, 1.0f, 1.0f};

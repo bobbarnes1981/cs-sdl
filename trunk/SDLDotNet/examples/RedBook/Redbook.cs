@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Globalization;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Tao.FreeGlut;
 
 namespace SdlDotNet.Examples
 {
@@ -32,6 +33,7 @@ namespace SdlDotNet.Examples
 			//
 			// Required for Windows Form Designer support
 			//
+			Glut.glutInit();
 			InitializeComponent();
 		}
 
