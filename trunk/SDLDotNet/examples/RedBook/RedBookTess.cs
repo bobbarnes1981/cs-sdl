@@ -76,7 +76,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Tess - tessellation";
+				return "Tess - tessellation TODO";
 			}
 		}
 
