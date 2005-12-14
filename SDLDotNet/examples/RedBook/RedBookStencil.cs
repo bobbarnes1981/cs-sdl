@@ -136,7 +136,7 @@ namespace SdlDotNet.Examples
 		#region Init()
 		private static void Init() 
 		{
-			Glut.glutInit();
+			
 			float[] yellowDiffuse = {0.7f, 0.7f, 0.0f, 1.0f};
 			float[] yellowSpecular = {1.0f, 1.0f, 1.0f, 1.0f};
 			float[] blueDiffuse = {0.1f, 0.1f, 0.7f, 1.0f};

@@ -163,7 +163,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private static void Init()
 		{
-			Glut.glutInit();
+			
 			float[] materialSpecular = {1.0f, 1.0f, 1.0f, 1.0f};
 			float[] materialShininess = {50.0f};
 			float[] lightPosition = {1.0f, 1.0f, 1.0f, 0.0f};

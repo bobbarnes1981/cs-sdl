@@ -158,7 +158,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private static void Init()
 		{
-			Glut.glutInit();
+			
 			int i;
 
 			Gl.glEnable(Gl.GL_DEPTH_TEST);

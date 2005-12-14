@@ -151,7 +151,7 @@ namespace SdlDotNet.Examples
 		#region Init()
 		private static void Init() 
 		{
-			Glut.glutInit();
+			
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
 			Gl.glShadeModel(Gl.GL_SMOOTH);

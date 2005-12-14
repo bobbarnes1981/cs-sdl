@@ -159,7 +159,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private static void Init()
 		{
-			Glut.glutInit();
+			
 			float[] position = {0.0f, 3.0f, 3.0f, 0.0f};
 			float[] localView = {0.0f};
 			float[] fogColor = {0.5f, 0.5f, 0.5f, 1.0f};

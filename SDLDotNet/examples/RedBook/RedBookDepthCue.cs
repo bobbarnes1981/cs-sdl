@@ -154,7 +154,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private static void Init()
 		{
-			Glut.glutInit();
+			
 			float[] fogColor = {0.0f, 0.0f, 0.0f, 1.0f};
 
 			Gl.glEnable(Gl.GL_FOG);

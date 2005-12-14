@@ -158,7 +158,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private static void Init()
 		{
-			Glut.glutInit();
+			
 			float[] position = {0.5f, 0.5f, 3.0f, 0.0f};
 
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
