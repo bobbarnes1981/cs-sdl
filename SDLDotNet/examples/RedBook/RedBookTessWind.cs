@@ -68,7 +68,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "TessWind - winding rule polygon tessellation";
+				return "TessWind - winding rule polygon tessellation TODO";
 			}
 		}
 
