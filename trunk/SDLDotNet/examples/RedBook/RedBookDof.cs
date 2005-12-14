@@ -65,9 +65,9 @@ namespace SdlDotNet.Examples
 		int height = 400;
 		
 		
-		// Surface to render on
-		Surface screen;
-        private int teapotList;
+		
+		
+        private static int teapotList;
 
 		/// <summary>
 		/// Lesson title
@@ -110,7 +110,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -131,7 +131,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="h"></param>
 		/// <param name="w"></param>
-		private void Reshape(int w, int h)
+		private static void Reshape(int w, int h)
 		{
             Gl.glViewport(0, 0, w, h);
 		}
@@ -147,7 +147,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Initializes the OpenGL system
 		/// </summary>
-		private void InitGL()
+		private static void Init()
 		{
 			Glut.glutInit();
 			float[] ambient = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -264,7 +264,7 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
-		private void DisplayGL()
+		private static void Display()
 		{
 			int jitter;
 			int[] viewport = new int[4];
@@ -291,7 +291,7 @@ namespace SdlDotNet.Examples
 		#endregion void DisplayGL
 
 		#region RenderTeapot(float x, float y, float z, float ambr, float ambg, float ambb, float difr, float difg, float difb, float specr, float specg, float specb, float shine)
-		private void RenderTeapot(float x, float y, float z, float ambr, float ambg, float ambb, float difr, float difg, float difb, float specr, float specg, float specb, float shine) 
+		private static void RenderTeapot(float x, float y, float z, float ambr, float ambg, float ambb, float difr, float difg, float difb, float specr, float specg, float specb, float shine) 
 		{
 			float[] mat = new float[4];
 
@@ -326,34 +326,21 @@ namespace SdlDotNet.Examples
 					// Will stop the app loop
 					Events.QuitApplication();
 					break;
-				case Key.F1:
-					// Toggle fullscreen
-					if ((screen.FullScreen)) 
-					{
-						screen = Video.SetVideoModeWindowOpenGL(width, height, true);
-						this.WindowAttributes();
-					}
-					else 
-					{
-						screen = Video.SetVideoModeOpenGL(width, height);
-					}
-					Reshape();
-					break;
 			}
 		}
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.DisplayGL();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}
@@ -367,7 +354,7 @@ namespace SdlDotNet.Examples
 		public void Run()
 		{
 			Reshape();
-			InitGL();
+			Init();
 			Events.Run();
 		}
 

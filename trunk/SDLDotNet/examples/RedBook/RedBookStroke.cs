@@ -59,8 +59,8 @@ namespace SdlDotNet.Examples
 		int width = 440;
 		//Height of screen
 		int height = 120;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -80,10 +80,10 @@ namespace SdlDotNet.Examples
 		#endregion Private Constants
 
 		#region Private Fields
-		private string test1 = "A SPARE SERAPE APPEARS AS";
-		private string test2 = "APES PREPARE RARE PEPPERS";
+		private static string test1 = "A SPARE SERAPE APPEARS AS";
+		private static string test2 = "APES PREPARE RARE PEPPERS";
 
-		private CharPoint[] Adata = {
+		private static CharPoint[] Adata = {
 											   new CharPoint(0, 0, PT),
 											   new CharPoint(0, 9, PT),
 											   new CharPoint(1, 10, PT),
@@ -94,7 +94,7 @@ namespace SdlDotNet.Examples
 											   new CharPoint(5, 5, END)
 										   };
 
-		private CharPoint[] Edata = {
+		private static CharPoint[] Edata = {
 											   new CharPoint(5, 0, PT),
 											   new CharPoint(0, 0, PT),
 											   new CharPoint(0, 10, PT),
@@ -103,7 +103,7 @@ namespace SdlDotNet.Examples
 											   new CharPoint(4, 5, END)
 										   };
 
-		private CharPoint[] Pdata = {
+		private static CharPoint[] Pdata = {
 											   new CharPoint(0, 0, PT),
 											   new CharPoint(0, 10, PT),
 											   new CharPoint(4, 10, PT),
@@ -113,7 +113,7 @@ namespace SdlDotNet.Examples
 											   new CharPoint(0, 5, END)
 										   };
 
-		private CharPoint[] Rdata = {
+		private static CharPoint[] Rdata = {
 											   new CharPoint(0, 0, PT),
 											   new CharPoint(0, 10, PT),
 											   new CharPoint(4, 10, PT),
@@ -125,7 +125,7 @@ namespace SdlDotNet.Examples
 											   new CharPoint(5, 0, END)
 										   };
 
-		private CharPoint[] Sdata = {
+		private static CharPoint[] Sdata = {
 											   new CharPoint(0, 1, PT),
 											   new CharPoint(1, 0, PT),
 											   new CharPoint(4, 0, PT),
@@ -185,7 +185,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -207,7 +207,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		// --- Application Methods ---
@@ -218,7 +218,7 @@ namespace SdlDotNet.Examples
 		///         the letter with line segments.
 		///     </para>
 		/// </summary>
-		private void DrawLetter(CharPoint[] letter) 
+		private static void DrawLetter(CharPoint[] letter) 
 		{
 			int i = 0;
 
@@ -252,7 +252,7 @@ namespace SdlDotNet.Examples
 		///         Create a display list for each of 6 characters.
 		///     </para>
 		/// </summary>
-		private void Init() 
+		private static void Init() 
 		{
 
 			int list;
@@ -283,7 +283,7 @@ namespace SdlDotNet.Examples
 		#endregion Init()
 
 		#region PrintStrokedString(string text)
-		private void PrintStrokedString(string text) 
+		private static void PrintStrokedString(string text) 
 		{
 			byte [] textbytes = new byte[text.Length];
 			for (int i = 0; i < text.Length; i++) textbytes[i] = (byte) text[i];
@@ -293,7 +293,7 @@ namespace SdlDotNet.Examples
 
 		// --- Callbacks ---
 		#region Display()
-		private void Display() 
+		private static void Display() 
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
 			Gl.glColor3f(1.0f, 1.0f, 1.0f);
@@ -312,7 +312,7 @@ namespace SdlDotNet.Examples
 		#endregion Display()
 
 		#region Reshape(int w, int h)
-		private void Reshape(int w, int h) 
+		private static void Reshape(int w, int h) 
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -338,16 +338,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.Display();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}

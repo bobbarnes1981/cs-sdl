@@ -56,8 +56,8 @@ namespace SdlDotNet.Examples
 		int width = 350;
 		//Height of screen
 		int height = 350;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -79,10 +79,10 @@ namespace SdlDotNet.Examples
 		#endregion Private Constants
 
 		#region Private Fields
-		private int setupMethod = POINTER;
-		private int derefMethod = DRAWARRAY;
+		private static int setupMethod = POINTER;
+		private static int derefMethod = DRAWARRAY;
 
-		private float[] intertwined = {
+		private static float[] intertwined = {
 										  1.0f, 0.2f, 1.0f, 100.0f, 100.0f, 0.0f,
 										  1.0f, 0.2f, 0.2f, 0.0f, 200.0f, 0.0f,
 										  1.0f, 1.0f, 0.2f, 100.0f, 300.0f, 0.0f,
@@ -91,7 +91,7 @@ namespace SdlDotNet.Examples
 										  0.2f, 0.2f, 1.0f, 200.0f, 100.0f, 0.0f
 									  };
 
-		private int[] vertices = {
+		private static int[] vertices = {
 									 25, 25,
 									 100, 325,
 									 175, 25,
@@ -100,7 +100,7 @@ namespace SdlDotNet.Examples
 									 325, 325
 								 };
 
-		private float[] colors = {
+		private static float[] colors = {
 									 1.0f, 0.2f, 0.2f,
 									 0.2f, 0.2f, 1.0f,
 									 0.8f, 1.0f, 0.2f,
@@ -139,7 +139,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -161,12 +161,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		// --- Application Methods ---
 		#region Init()
-		private void Init() 
+		private static void Init() 
 		{
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			Gl.glShadeModel(Gl.GL_SMOOTH);
@@ -175,14 +175,14 @@ namespace SdlDotNet.Examples
 		#endregion Init()
 
 		#region SetupInterleave()
-		private void SetupInterleave() 
+		private static void SetupInterleave() 
 		{
 			Gl.glInterleavedArrays(Gl.GL_C3F_V3F, 0, intertwined);
 		}
 		#endregion SetupInterleave()
 
 		#region SetupPointers()
-		private void SetupPointers() 
+		private static void SetupPointers() 
 		{
 			Gl.glEnableClientState(Gl.GL_VERTEX_ARRAY);
 			Gl.glEnableClientState(Gl.GL_COLOR_ARRAY);
@@ -194,7 +194,7 @@ namespace SdlDotNet.Examples
 
 		// --- Callbacks ---
 		#region Display()
-		private void Display() 
+		private static void Display() 
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
 
@@ -221,7 +221,7 @@ namespace SdlDotNet.Examples
 		#endregion Display()
 
 		#region Reshape(int w, int h)
-		private void Reshape(int w, int h) 
+		private static void Reshape(int w, int h) 
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -247,7 +247,7 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.Display();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
@@ -289,10 +289,10 @@ namespace SdlDotNet.Examples
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}

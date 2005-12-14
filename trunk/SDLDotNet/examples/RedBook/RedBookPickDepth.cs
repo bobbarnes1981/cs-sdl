@@ -60,8 +60,8 @@ namespace SdlDotNet.Examples
 		int width = 200;
 		//Height of screen
 		int height = 200;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -107,7 +107,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -129,12 +129,12 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		// --- Application Methods ---
 		#region DrawRectangles(int mode)
-		private void DrawRectangles(int mode) 
+		private static void DrawRectangles(int mode) 
 		{
 			if(mode == Gl.GL_SELECT) 
 			{
@@ -175,7 +175,7 @@ namespace SdlDotNet.Examples
 		#endregion DrawRectangles(int mode)
 
 		#region Init()
-		private void Init() 
+		private static void Init() 
 		{
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
@@ -190,7 +190,7 @@ namespace SdlDotNet.Examples
 		///         Prints out the contents of the selection array.
 		///     </para>
 		/// </summary>
-		private void ProcessHits(int hits, int[] buffer) 
+		private static void ProcessHits(int hits, int[] buffer) 
 		{
 			int i, j;
 			int names;
@@ -221,7 +221,7 @@ namespace SdlDotNet.Examples
 
 		// --- Callbacks ---
 		#region Display()
-		private void Display() 
+		private static void Display() 
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			DrawRectangles(Gl.GL_RENDER);
@@ -230,7 +230,7 @@ namespace SdlDotNet.Examples
 		#endregion Display()
 
 		#region Reshape(int w, int h)
-		private void Reshape(int w, int h) 
+		private static void Reshape(int w, int h) 
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -256,16 +256,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.Display();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}

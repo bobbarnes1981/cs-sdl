@@ -59,8 +59,8 @@ namespace SdlDotNet.Examples
 		int width = 500;
 		//Height of screen
 		int height = 500;
-		// Surface to render on
-		Surface screen;
+		
+		
 
 		/// <summary>
 		/// Lesson title
@@ -74,9 +74,9 @@ namespace SdlDotNet.Examples
 		}
 
 		#region Private Fields
-		private float[ , , ] controlPoints = new float[4, 4, 3];
-		private bool showPoints = false;
-		private Glu.GLUnurbs nurb;
+		private static float[ , , ] controlPoints = new float[4, 4, 3];
+		private static bool showPoints = false;
+		private static Glu.GLUnurbs nurb;
 		#endregion Private Fields
 
 		#region Constructors
@@ -107,7 +107,7 @@ namespace SdlDotNet.Examples
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
 		}
@@ -129,7 +129,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		private void Reshape()
 		{
-			this.Reshape(this.width, this.height);
+			Reshape(this.width, this.height);
 		}
 
 		// --- Application Methods ---
@@ -139,7 +139,7 @@ namespace SdlDotNet.Examples
 		///         Initialize material property and depth buffer.
 		///     </para>
 		/// </summary>
-		private void Init() 
+		private static void Init() 
 		{
 			float[] materialDiffuse = {0.7f, 0.7f, 0.7f, 1.0f};
 			float[] materialSpecular = {1.0f, 1.0f, 1.0f, 1.0f};
@@ -166,7 +166,7 @@ namespace SdlDotNet.Examples
 		#endregion Init()
 
 		#region InitSurface()
-		private void InitSurface() 
+		private static void InitSurface() 
 		{
 			int u, v;
 			for(u = 0; u < 4; u++) 
@@ -191,7 +191,7 @@ namespace SdlDotNet.Examples
 
 		// --- Callbacks ---
 		#region Display()
-		private void Display() 
+		private static void Display() 
 		{
 			float[] knots = {0, 0, 0, 0, 1, 1, 1, 1};
 			int i, j;
@@ -228,7 +228,7 @@ namespace SdlDotNet.Examples
 		#endregion Display()
 
 		#region Error(int errorCode)
-		private void Error(int errorCode) 
+		private static void Error(int errorCode) 
 		{
 			Console.WriteLine("Nurbs Error: {0}", Glu.gluErrorString(errorCode));
 			Environment.Exit(1);
@@ -236,7 +236,7 @@ namespace SdlDotNet.Examples
 		#endregion Error(int errorCode)
 
 		#region Reshape(int w, int h)
-		private void Reshape(int w, int h) 
+		private static void Reshape(int w, int h) 
 		{
 			Gl.glViewport(0, 0, w, h);
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
@@ -267,16 +267,16 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, TickEventArgs e)
 		{
-			this.Display();
+			Display();
 			Video.GLSwapBuffers();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)
 		//		{
-		//			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+		//			Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
 		//			if (screen.Width != e.Width || screen.Height != e.Height)
 		//			{
-		//				//this.InitGL();
+		//				//this.Init();
 		//				this.Reshape();
 		//			}
 		//		}
