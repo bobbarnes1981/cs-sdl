@@ -201,6 +201,11 @@ namespace SdlDotNet.Examples
 		{
 			SdlDotNet.Events.QuitApplication();
 				
+			if (thread != null)
+			{
+				thread.Abort();	
+			}
+
 			thread = new System.Threading.Thread(new System.Threading.ThreadStart(RunDemo));
 			thread.Priority = System.Threading.ThreadPriority.Normal;
 			thread.IsBackground = true;

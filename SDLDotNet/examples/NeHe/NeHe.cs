@@ -198,6 +198,11 @@ namespace SdlDotNet.Examples
 		private void startButton_Click(object sender, System.EventArgs e)
 		{
 			SdlDotNet.Events.QuitApplication();
+
+			if (thread != null)
+			{
+				thread.Abort();	
+			}
 				
 			thread = new System.Threading.Thread(new System.Threading.ThreadStart(RunDemo));
 			thread.Priority = System.Threading.ThreadPriority.Normal;
