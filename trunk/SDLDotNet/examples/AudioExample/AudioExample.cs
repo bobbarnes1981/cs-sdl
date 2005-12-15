@@ -108,9 +108,7 @@ namespace SdlDotNet.Examples
 		private void Events_TickEvent(object sender, TickEventArgs e) 
 		{ 
 			screen.Fill(Color.Black);
-			
 			screen.Blit(textDisplay);
-
 			screen.Flip();
 		} 
 
