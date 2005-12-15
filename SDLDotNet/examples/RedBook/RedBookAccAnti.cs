@@ -223,7 +223,7 @@ namespace SdlDotNet.Examples
 		}
 		#endregion DisplayObjects()
 
-		#region void DisplayGL
+		#region void Display
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
@@ -248,7 +248,7 @@ namespace SdlDotNet.Examples
 			Gl.glAccum(Gl.GL_RETURN, 1.0f);
 			Gl.glFlush();
 		}
-		#endregion void DisplayGL
+		#endregion void Display
 
 		#region Event Handlers
 

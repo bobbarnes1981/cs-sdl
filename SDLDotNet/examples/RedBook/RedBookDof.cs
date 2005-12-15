@@ -260,7 +260,7 @@ namespace SdlDotNet.Examples
 
 		#endregion Lesson Setup
 
-		#region void DisplayGL
+		#region void Display
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
@@ -288,7 +288,7 @@ namespace SdlDotNet.Examples
 			Gl.glAccum(Gl.GL_RETURN, 1.0f);
 			Gl.glFlush();
 		}
-		#endregion void DisplayGL
+		#endregion void Display
 
 		#region RenderTeapot(float x, float y, float z, float ambr, float ambg, float ambb, float difr, float difg, float difb, float specr, float specg, float specb, float shine)
 		private static void RenderTeapot(float x, float y, float z, float ambr, float ambg, float ambb, float difr, float difg, float difb, float specr, float specg, float specb, float shine) 

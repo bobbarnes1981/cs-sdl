@@ -166,18 +166,10 @@ namespace SdlDotNet.Examples
 
 		private void startButton_Click(object sender, System.EventArgs e)
 		{
-			object dynObj;
 			try
 			{
-				try
-				{
-					dynObj = null;
-					SdlDotNet.Events.QuitApplication();
-				}
-				catch(SdlDotNet.SdlException)
-				{
-					// already quit SDL - Do nothing
-				}
+				object dynObj;
+				SdlDotNet.Events.QuitApplication();
 				
 				// Get the desired RedBook example type.
 				Type dynClassType = (Type)redBookTypes[lstExamples.SelectedIndex];
@@ -199,6 +191,10 @@ namespace SdlDotNet.Examples
 			catch(System.ArgumentOutOfRangeException)
 			{
 			}
+			catch(System.MissingMethodException)
+			{
+				// RedBook demo missing static Title property - do nothing
+			}
 		}
 
 		/// <summary>
@@ -219,34 +215,13 @@ namespace SdlDotNet.Examples
 
 		private void RedBook_Closed(object sender, System.EventArgs e)
 		{
-			try
-			{
-				// Quit SDL if it's not quit already
-				SdlDotNet.Events.QuitApplication();
-				Application.Exit();
-			}
-			catch(SdlDotNet.SdlException)
-			{
-				// already quit SDL - Do nothing
-				Application.Exit();
-			}
-
-			// End the thread and the application.
-			//Application.Exit();
+			// Quit SDL if it's not quit already
+			SdlDotNet.Events.QuitApplication();
 		}
 
 		private void menuItem2_Click(object sender, System.EventArgs e)
 		{
-			try
-			{
-				// Quit SDL if it's not quit already
-				SdlDotNet.Events.QuitApplication();
-				this.Close();
-			}
-			catch(SdlDotNet.SdlException)
-			{
-				this.Close();
-			}
+			this.Close();
 		}
 	}
 }

@@ -378,9 +378,13 @@ namespace SdlDotNet
 				events.Length, 
 				Sdl.SDL_ADDEVENT, 
 				(int)EventMask.AllEvents);
+
 			if (result == (int)SdlFlag.Error)
 			{
-				throw SdlException.Generate();
+				if (quitFlag == false)
+				{
+					throw SdlException.Generate();
+				}
 			}
 		}
 
