@@ -162,22 +162,12 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void startButton_Click(object sender, System.EventArgs e)
+		private void RunDemo()
 		{
-			object dynObj;
 			try
 			{
-				try
-				{
-					dynObj = null;
-					SdlDotNet.Events.QuitApplication();
-				}
-				catch(SdlDotNet.SdlException)
-				{
-					// already quit SDL - Do nothing
-				}
-				
-				// Get the desired NeHe example type.
+				object dynObj;
+				// Get the desired RedBook example type.
 				Type dynClassType = (Type)neheTypes[lstExamples.SelectedIndex];
 
 				// Make an instance of it.
@@ -197,6 +187,23 @@ namespace SdlDotNet.Examples
 			catch(System.ArgumentOutOfRangeException)
 			{
 			}
+			catch(System.MissingMethodException)
+			{
+				// missing method - do nothing
+			}
+		}
+
+		System.Threading.Thread thread;
+
+		private void startButton_Click(object sender, System.EventArgs e)
+		{
+			SdlDotNet.Events.QuitApplication();
+				
+			thread = new System.Threading.Thread(new System.Threading.ThreadStart(RunDemo));
+			thread.Priority = System.Threading.ThreadPriority.Normal;
+			thread.IsBackground = true;
+			thread.Name = "SDL.NET - Demo Thread";
+			thread.Start();
 		}
 
 		/// <summary>
@@ -217,32 +224,13 @@ namespace SdlDotNet.Examples
 
 		private void NeHe_Closed(object sender, System.EventArgs e)
 		{
-			try
-			{
-				// Quit SDL if it's not quit already
-				SdlDotNet.Events.QuitApplication();
-			}
-			catch(SdlDotNet.SdlException)
-			{
-				// already quit SDL - Do nothing
-			}
-
-			// End the thread and the application.
-			Application.Exit();
+			// Quit SDL if it's not quit already
+			SdlDotNet.Events.QuitApplication();
 		}
 
 		private void menuItem2_Click(object sender, System.EventArgs e)
 		{
-			try
-			{
-				// Quit SDL if it's not quit already
-				SdlDotNet.Events.QuitApplication();
-				this.Close();
-			}
-			catch(SdlDotNet.SdlException)
-			{
-				this.Close();
-			}	
+			this.Close();
 		}
 	}
 }

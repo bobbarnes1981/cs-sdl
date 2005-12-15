@@ -164,13 +164,11 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void startButton_Click(object sender, System.EventArgs e)
+		private void RunDemo()
 		{
 			try
 			{
 				object dynObj;
-				SdlDotNet.Events.QuitApplication();
-				
 				// Get the desired RedBook example type.
 				Type dynClassType = (Type)redBookTypes[lstExamples.SelectedIndex];
 
@@ -193,8 +191,21 @@ namespace SdlDotNet.Examples
 			}
 			catch(System.MissingMethodException)
 			{
-				// RedBook demo missing static Title property - do nothing
+				// missing method - do nothing
 			}
+		}
+
+		System.Threading.Thread thread;
+
+		private void startButton_Click(object sender, System.EventArgs e)
+		{
+			SdlDotNet.Events.QuitApplication();
+				
+			thread = new System.Threading.Thread(new System.Threading.ThreadStart(RunDemo));
+			thread.Priority = System.Threading.ThreadPriority.Normal;
+			thread.IsBackground = true;
+			thread.Name = "SDL.NET - Demo Thread";
+			thread.Start();
 		}
 
 		/// <summary>
@@ -209,6 +220,7 @@ namespace SdlDotNet.Examples
 			}
 			catch(System.ObjectDisposedException)
 			{
+				Console.WriteLine("HELLO");
 				Application.Exit();
 			}
 		}
