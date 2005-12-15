@@ -167,7 +167,7 @@ namespace SdlDotNet.Examples
 
 		#endregion Lesson Setup
 
-		#region void DisplayGL
+		#region void Display
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
@@ -178,7 +178,7 @@ namespace SdlDotNet.Examples
 			Gl.glDrawPixels(CHECKWIDTH, CHECKHEIGHT, Gl.GL_RGB, Gl.GL_UNSIGNED_BYTE, checkImage);
 			Gl.glFlush();
 		}
-		#endregion void DisplayGL
+		#endregion void Display
 
 		#region MakeCheckImage()
 		private static void MakeCheckImage() 

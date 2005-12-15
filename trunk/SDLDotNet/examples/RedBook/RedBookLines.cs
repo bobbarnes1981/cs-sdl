@@ -165,7 +165,7 @@ namespace SdlDotNet.Examples
 		}
 		#endregion DrawOneLine(float x1, float y1, float x2, float y2)
 
-		#region void DisplayGL
+		#region void Display
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
@@ -222,7 +222,7 @@ namespace SdlDotNet.Examples
 			Gl.glDisable(Gl.GL_LINE_STIPPLE);
 			Gl.glFlush();
 		}
-		#endregion void DisplayGL
+		#endregion void Display
 
 		#region Event Handlers
 

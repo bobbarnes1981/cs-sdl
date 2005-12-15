@@ -195,7 +195,7 @@ namespace SdlDotNet.Examples
 
 		#endregion Lesson Setup
 
-		#region void DisplayGL
+		#region void Display
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
@@ -210,7 +210,7 @@ namespace SdlDotNet.Examples
 			Gl.glFlush();
 
 		}
-		#endregion void DisplayGL
+		#endregion void Display
 
 		#region RenderSphere(float x, float y, float z)
 		private static void RenderSphere(float x, float y, float z) 

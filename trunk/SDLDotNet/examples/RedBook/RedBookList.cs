@@ -182,7 +182,7 @@ namespace SdlDotNet.Examples
 		}
 		#endregion DrawLine()
 
-		#region void DisplayGL
+		#region void Display
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
@@ -199,7 +199,7 @@ namespace SdlDotNet.Examples
 			// where is the line drawn?
 			Gl.glFlush();
 		}
-		#endregion void DisplayGL
+		#endregion void Display
 
 		#region Event Handlers
 

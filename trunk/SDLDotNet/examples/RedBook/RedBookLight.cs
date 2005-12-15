@@ -182,7 +182,7 @@ namespace SdlDotNet.Examples
 
 		#endregion Lesson Setup
 
-		#region void DisplayGL
+		#region void Display
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
@@ -192,7 +192,7 @@ namespace SdlDotNet.Examples
 			Glut.glutSolidSphere(1.0, 20, 16);
 			Gl.glFlush();
 		}
-		#endregion void DisplayGL
+		#endregion void Display
 
 		#region Event Handlers
 

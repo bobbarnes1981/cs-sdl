@@ -202,7 +202,7 @@ namespace SdlDotNet.Examples
 
 		#endregion Lesson Setup
 
-		#region void DisplayGL
+		#region void Display
 		/// <summary>
 		/// Renders the scene
 		/// </summary>
@@ -221,7 +221,7 @@ namespace SdlDotNet.Examples
 			Gl.glTexCoord2f(1.0f, 0.0f); Gl.glVertex3f(2.41421f, -1.0f, -1.41421f);
 			Gl.glEnd();
 		}
-		#endregion void DisplayGL
+		#endregion void Display
 
 		#region Event Handlers
 

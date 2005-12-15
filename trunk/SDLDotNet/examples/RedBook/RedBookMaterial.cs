@@ -182,7 +182,7 @@ namespace SdlDotNet.Examples
 
 		#endregion Lesson Setup
 
-		#region void DisplayGL
+		#region void Display
 		/*  Draw twelve spheres in 3 rows with 4 columns.  
 			*   The spheres in the first row have materials with no ambient reflection.
 			*   The second row has materials with significant ambient reflection.
@@ -357,7 +357,7 @@ namespace SdlDotNet.Examples
 
 		Gl.glFlush();
 		}
-		#endregion void DisplayGL
+		#endregion void Display
 
 		#region Event Handlers
 
