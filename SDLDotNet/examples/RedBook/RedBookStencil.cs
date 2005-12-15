@@ -70,7 +70,7 @@ namespace SdlDotNet.Examples
 		{
 			get
 			{
-				return "Smooth - smooth shading";
+				return "Stencil - stencil buffer";
 			}
 		}
 
