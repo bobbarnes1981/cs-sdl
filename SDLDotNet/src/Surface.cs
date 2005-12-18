@@ -1873,6 +1873,7 @@ namespace SdlDotNet
 				antiAliasParameter));
 			surface.transparentColor = this.transparentColor;
 			surface.alphaValue = this.alphaValue;
+			surface.AlphaBlending = this.AlphaBlending;
 			return surface; 
 		}
 
