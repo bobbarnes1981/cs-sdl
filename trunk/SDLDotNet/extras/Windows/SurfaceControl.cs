@@ -59,6 +59,7 @@ namespace SdlDotNet.Windows
 		{
 			get
 			{
+				this.Image.Dispose();
 				this.Image = surface.Bitmap;
 				return surface;
 			}
@@ -69,7 +70,6 @@ namespace SdlDotNet.Windows
 					throw new ArgumentNullException("value");
 				}
 				surface = value;
-				this.Image = surface.Bitmap;
 			}
 		}
 
