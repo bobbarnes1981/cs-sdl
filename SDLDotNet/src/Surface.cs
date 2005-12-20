@@ -1829,13 +1829,14 @@ namespace SdlDotNet
 			{
 				antiAliasParameter = SdlGfx.SMOOTHING_ON;
 			}
-			
-			this.Handle = 
-				SdlGfx.rotozoomSurface(
+
+			IntPtr tempHandle = SdlGfx.rotozoomSurface(
 				this.Handle, 
 				degreesOfRotation, 
 				1, 
 				antiAliasParameter);
+			this.CloseHandle();
+			this.Handle = tempHandle;
 		}
 
 		/// <summary>
@@ -1949,12 +1950,15 @@ namespace SdlDotNet
 				antiAliasParameter = SdlGfx.SMOOTHING_ON;
 			}
 			
-			this.Handle = 
+			IntPtr tempHandle = 
 				SdlGfx.rotozoomSurface(
 				this.Handle, 
 				degreesOfRotation, 
 				zoom, 
 				antiAliasParameter);
+
+			this.CloseHandle();
+			this.Handle = tempHandle;
 		}
 
 		/// <summary>
@@ -2054,8 +2058,10 @@ namespace SdlDotNet
 			}
 			try
 			{
-				this.Handle = 
+				IntPtr tempHandle = 
 					SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter);
+				this.CloseHandle();
+				this.Handle = tempHandle;
 			}
 			catch
 			{
