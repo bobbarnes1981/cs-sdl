@@ -1728,7 +1728,8 @@ namespace SdlDotNet
 					//					{
 					//						return p[0] | p[1] << 8 | p[2] << 16;
 					//					}
-					return this.GetColor(0);
+					//return this.GetColor(0);
+					throw new System.NotSupportedException("24 bit color is not supported.");
 				}
 				case 4:
 				{
