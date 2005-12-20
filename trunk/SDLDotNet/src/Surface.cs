@@ -1809,7 +1809,7 @@ namespace SdlDotNet
 		/// <param name="degreesOfRotation">degrees of rotation</param>
 		public void Rotate(int degreesOfRotation)
 		{
-			this.Rotate(degreesOfRotation, true);
+			this.Rotate(degreesOfRotation, false);
 		}
 
 		/// <summary>
@@ -1846,7 +1846,7 @@ namespace SdlDotNet
 		/// <returns>new Surface</returns>
 		public Surface CreateRotatedSurface(int degreesOfRotation)
 		{
-			return this.CreateRotatedSurface(degreesOfRotation, true);
+			return this.CreateRotatedSurface(degreesOfRotation, false);
 		}
 
 		/// <summary>
@@ -1887,7 +1887,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public Surface CreateRotatedZoomedSurface(int degreesOfRotation, double zoom)
 		{
-			return this.CreateRotatedZoomedSurface(degreesOfRotation, zoom, true);
+			return this.CreateRotatedZoomedSurface(degreesOfRotation, zoom, false);
 		}
 
 		/// <summary>
@@ -1928,7 +1928,7 @@ namespace SdlDotNet
 		/// <remarks>Smoothing is turned on.</remarks>
 		public void RotationZoom(int degreesOfRotation, double zoom)
 		{
-			this.RotationZoom(degreesOfRotation, zoom, true);
+			this.RotationZoom(degreesOfRotation, zoom, false);
 		}
 
 		/// <summary>
@@ -2001,7 +2001,7 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public Surface CreateScaledSurface(double zoomX, double zoomY)
 		{
-			return this.CreateScaledSurface(zoomX, zoomY, true);
+			return this.CreateScaledSurface(zoomX, zoomY, false);
 		}
 
 		/// <summary>
@@ -2036,7 +2036,7 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
-			this.Scale(zoomX, zoomY, true);
+			this.Scale(zoomX, zoomY, false);
 		}
 
 		/// <summary>
