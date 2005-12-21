@@ -1517,50 +1517,25 @@ namespace SdlDotNet
 			{
 				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 			}
+			int pixelColorValueInt;
 
 			switch (this.PixelFormat.BytesPerPixel) 
 			{
-				case 1: // Assuming 8-bpp
-				{
-					byte pixelColorValue = (byte) this.GetColorValue(color);
-					//IntPtr pixelColorValuePtr = 
-					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 2*positionX), pixelColorValue);
-				}
+				case 1: // 8-bpp
+					byte pixelColorValueByte = (byte) this.GetColorValue(color);
+					Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + positionX), pixelColorValueByte);
 					break;
-				case 2: // Probably 15-bpp or 16-bpp
-				{
-					short pixelColorValue = (short) this.GetColorValue(color);
-					//IntPtr pixelColorValuePtr = 
-					//	new IntPtr(surface.pixels.ToInt32() + y*surface.pitch + 2*x);
-					Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 2*positionX), pixelColorValue);
-				}
+				case 2: // 15-bpp or 16-bpp
+					short pixelColorValueShort = (short) this.GetColorValue(color);
+					Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + 2*positionX), pixelColorValueShort);
 					break;
-				case 3: // Slow 24-bpp mode, usually not used
-				{
-					//					byte *bufp;
-					//					bufp = (byte *)_surface->pixels + y*_surface->pitch + x * 3;
-					//					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
-					//					{
-					//						bufp[0] = color;
-					//						bufp[1] = color >> 8;
-					//						bufp[2] = color >> 16;
-					//					} 
-					//					else 
-					//					{
-					//						bufp[2] = color;
-					//						bufp[1] = color >> 8;
-					//						bufp[0] = color >> 16;
-					//					}
-				}
+				case 3: // 24-bpp mode
+					pixelColorValueInt = this.GetColorValue(color);
+					Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY*this.SurfaceStruct.pitch + 3*positionX)), pixelColorValueInt);
 					break;
-				case 4: // Probably 32-bpp
-				{
-					int pixelColorValue = this.GetColorValue(color);
-					//IntPtr pixelColorValuePtr = 
-					//	new IntPtr(surface.pixels.ToInt32() + (y*surface.pitch + 4*x));
-					Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY*this.SurfaceStruct.pitch + 4*positionX)), pixelColorValue);
-				}
+				case 4: // 32-bpp mode
+					pixelColorValueInt = this.GetColorValue(color);
+					Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY*this.SurfaceStruct.pitch + 4*positionX)), pixelColorValueInt);
 					break;
 			}
 		}
@@ -1688,66 +1663,22 @@ namespace SdlDotNet
 
 			int bytesPerPixel = this.PixelFormat.BytesPerPixel;
 
-			switch (bytesPerPixel) 
+			if (bytesPerPixel > 0)
 			{
-				case 1: //Assuming 8-bpp
+				int positionXMax = Int32.MaxValue / bytesPerPixel;
+				int positionXTemp = positionX * bytesPerPixel;
+				if (positionX <= positionXMax)
 				{
-					int positionXMax = Int32.MaxValue /2;
-					int positionXTemp = positionX * 2;
-					if (positionX <= positionXMax)
-					{
-						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + positionXTemp)));
-					}
-					else
-					{
-						throw new OverflowException("positionX is too large");
-					}
+					return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + positionXTemp)));
 				}
-				case 2:
+				else
 				{
-					int positionXMax = Int32.MaxValue /2;
-					int positionXTemp = positionX * 2;
-					if (positionX <= positionXMax)
-					{
-						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + positionXTemp)));
-					}
-					else
-					{
-						throw new OverflowException("positionX is too large");
-					}
+					throw new OverflowException("positionX is too large");
 				}
-				case 3: //Assuming this is not going to be used much... 
-				{
-					//					byte *bufp;
-					//					bufp = (byte *)screen->pixels + y*screen->pitch + x * 3;
-					//					if(SDL_BYTEORDER == SDL_LIL_ENDIAN)
-					//					{
-					//						return p[0] << 16 | p[1] << 8 | p[2];
-					//					}
-					//					else
-					//					{
-					//						return p[0] | p[1] << 8 | p[2] << 16;
-					//					}
-					//return this.GetColor(0);
-					throw new System.NotSupportedException("24 bit color is not supported.");
-				}
-				case 4:
-				{
-					int positionXMax = Int32.MaxValue / 4;
-					int positionXTemp = positionX * 4;
-					if (positionX <= positionXMax)
-					{
-						return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY*this.SurfaceStruct.pitch + positionXTemp)));
-					}
-					else
-					{
-						throw new OverflowException("positionX is too large");
-					}
-				}
-				default: //Should never come here
-				{
-					throw new SdlException("Unknown amount of bytes per pixel.");
-				}
+			}
+			else
+			{
+				throw new SdlException("Unknown amount of bytes per pixel.");
 			}
 		}
 
@@ -1917,6 +1848,7 @@ namespace SdlDotNet
 				antiAliasParameter));
 			surface.transparentColor = this.transparentColor;
 			surface.alphaValue = this.alphaValue;
+			surface.AlphaBlending = this.AlphaBlending;
 			return surface; 
 		}
 
@@ -1984,6 +1916,7 @@ namespace SdlDotNet
 				Surface surface = new Surface(SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter));
 				surface.transparentColor = this.transparentColor;
 				surface.alphaValue = this.alphaValue;
+				surface.AlphaBlending = this.AlphaBlending;
 				return surface;
 			}
 			catch

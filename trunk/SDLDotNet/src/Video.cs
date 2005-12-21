@@ -213,7 +213,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Sets the windowed video mode using current screen bpp
+		/// Sets the windowed video mode using a given bpp
 		/// </summary>
 		/// <param name="width">The width of the window</param>
 		/// <param name="height">The height of the window</param>
