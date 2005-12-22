@@ -862,8 +862,8 @@ namespace SdlDotNet
 		}
 
 		#region Event Ticker
-		private static int targetFps = 60;
-		private static int fps = 60;
+		private static int targetFps = 30;
+		private static int fps = 30;
 		private static int lastTick;
 		private static float ticksPerFrame = (1000.0f / (float)targetFps);
 
