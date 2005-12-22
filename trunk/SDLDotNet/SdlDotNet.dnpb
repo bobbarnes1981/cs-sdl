@@ -558,7 +558,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="SdlDotNet.Gui" path="extras\\Gui" language="C#" type="Library" assemblyName="SdlDotNet.Gui" rootNamespace="SdlDotNet.Gui">
+	<!--<Project name="SdlDotNet.Gui" path="extras\\Gui" language="C#" type="Library" assemblyName="SdlDotNet.Gui" rootNamespace="SdlDotNet.Gui">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE;NET</CompilerDefines>
@@ -587,7 +587,7 @@
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
-	</Project>
+	</Project>-->
 	<Project name="NeHe" path="examples\\NeHe" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.NeHe" assemblyName="NeHe" rootNamespace="SdlDotNet.Examples" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
