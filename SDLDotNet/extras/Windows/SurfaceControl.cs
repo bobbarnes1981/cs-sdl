@@ -60,7 +60,7 @@ namespace SdlDotNet.Windows
 			get
 			{
 				this.Image.Dispose();
-				this.Image = surface.Image;
+				this.Image = surface.Bitmap;
 				return surface;
 			}
 			set
