@@ -138,6 +138,16 @@ namespace SdlDotNet.Examples
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		public override void Update(VideoResizeEventArgs args)
+		{
+			this.bounds = new Rectangle(0, 0, args.Width, args.Height);
+		}
+
+
+		/// <summary>
 		/// If the sprite is picked up, this moved the sprite to follow
 		/// the mouse.
 		/// </summary>

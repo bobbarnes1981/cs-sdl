@@ -60,7 +60,7 @@ namespace SdlDotNet.Windows
 			get
 			{
 				this.Image.Dispose();
-				this.Image = surface.Bitmap;
+				this.Image = surface.Image;
 				return surface;
 			}
 			set
@@ -72,6 +72,20 @@ namespace SdlDotNet.Windows
 				surface = value;
 			}
 		}
+		
+		/// <summary>
+		/// Raises the OnResize event
+		/// </summary>
+		/// <param name="e">Contains the event data</param>
+		protected override void OnResize(EventArgs e)
+		{
+			base.OnResize (e);
+			this.surface = new Surface(this.Width,this.Height);
+			this.surface.Update();
+			this.Image.Dispose();
+			this.Image = surface.Bitmap;
+			SdlDotNet.Events.Add(new VideoResizeEventArgs(this.Width,this.Height));
+		}
 
 		/// <summary>
 		/// Raises the SizeChanged event
@@ -79,12 +93,14 @@ namespace SdlDotNet.Windows
 		/// <param name="e">Contains the event data</param>
 		protected override void OnSizeChanged(EventArgs e)
 		{
+			base.OnSizeChanged (e);
 			this.surface = new Surface(this.Width,this.Height);
 			this.surface.Update();
-			this.Image = this.surface.Bitmap;
-			base.OnSizeChanged (e);
+			this.Image.Dispose();
+			this.Image = surface.Bitmap;
+			SdlDotNet.Events.Add(new VideoResizeEventArgs(this.Width,this.Height));
 		}
-
+		
 		/// <summary>
 		/// Raises the MouseDown event
 		/// </summary>

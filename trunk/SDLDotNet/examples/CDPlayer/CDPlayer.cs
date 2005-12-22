@@ -52,8 +52,6 @@ namespace SdlDotNet.Examples
 		private System.Windows.Forms.Button buttonNext;
 		string data_directory = @"Data/";
 		string filepath = @"../../";
-		//private System.Windows.Forms.Timer timer;
-		//private System.ComponentModel.IContainer components;
 
 		/// <summary>
 		/// 
@@ -94,11 +92,11 @@ namespace SdlDotNet.Examples
 			//The collection will respond to mouse button clicks, mouse movement and the ticker.
 			master.EnableMouseButtonEvent();
 			master.EnableMouseMotionEvent();
+			master.EnableVideoResizeEvent();
 			master.EnableTickEvent();
 
 			SdlDotNet.Events.Fps = 10;
 			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(this.Events_Tick);
-			//_drive = null;
 
 			try 
 			{
@@ -128,14 +126,10 @@ namespace SdlDotNet.Examples
 		{
 			if( disposing )
 			{
-				//				if (components != null) 
-				//				{
-				//					components.Dispose();
-				//				}
 			}
 			base.Dispose( disposing );
 		}
-		//private int maxBalls = 1; 
+
 		private static SpriteCollection master = new SpriteCollection();
 
 		#region Windows Form Designer generated code
@@ -240,6 +234,9 @@ namespace SdlDotNet.Examples
 			// 
 			// surfaceControl
 			// 
+			this.surfaceControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+				| System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
 			this.surfaceControl.Image = ((System.Drawing.Image)(resources.GetObject("surfaceControl.Image")));
 			this.surfaceControl.Location = new System.Drawing.Point(16, 136);
 			this.surfaceControl.Name = "surfaceControl";
@@ -261,7 +258,6 @@ namespace SdlDotNet.Examples
 			this.Controls.Add(this.buttonPlay);
 			this.Controls.Add(this.comboBoxDrive);
 			this.Controls.Add(this.label1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -269,7 +265,6 @@ namespace SdlDotNet.Examples
 			this.Text = "SDL.NET - CD Player";
 			this.Load += new System.EventHandler(this.CDPlayer_Load);
 			this.ResumeLayout(false);
-
 		}
 		#endregion
 
@@ -289,14 +284,6 @@ namespace SdlDotNet.Examples
 		{
 			surf.Fill(Color.Black);
 			surf.Blit(master);
-			this.UpdateForm();
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public void UpdateForm()
-		{
 			this.surfaceControl.Surface.Blit(surf);
 		}
 
@@ -304,13 +291,6 @@ namespace SdlDotNet.Examples
 		{
 			try 
 			{
-				//				if (_drive != null) {
-				//					_drive.Stop();
-				//					_drive.Close();
-				//				}
-
-				//_drive = _cd.OpenDrive(comboBoxDrive.SelectedIndex);
-				//_drive = _cd.OpenDrive(0);
 			} 
 			catch (SdlException ex) 
 			{
@@ -423,31 +403,25 @@ namespace SdlDotNet.Examples
 
 		private void CDPlayer_Load(object sender, System.EventArgs e)
 		{
-			Thread a = new Thread(new ThreadStart(SdlDotNet.Events.Run));
-			a.IsBackground = true;
-			a.Name = "SDL";
-			a.Priority = ThreadPriority.Normal;
-			a.Start();
+			Thread thread = new Thread(new ThreadStart(SdlDotNet.Events.Run));
+			thread.IsBackground = true;
+			thread.Name = "SDL";
+			thread.Priority = ThreadPriority.Normal;
+			thread.Start();
 		}
 
-		//		private void timer_Tick(object sender, System.EventArgs e) {
-		//			try {
-		//				if (_drive != null) {
-		//					Tao.Sdl.Sdl.CDstatus status = _drive.Status;
-		//					StringBuilder statstr = new StringBuilder();
-		//					statstr.Append(status.ToString());
-		//					statstr.Append("\r\n");
-		//					if (status == Tao.Sdl.Sdl.CDstatus.CD_PLAYING) {
-		//						int min, sec, f;
-		//						CDAudio.FramesToMinSecFrames(_drive.CurrentFrame, out min, out sec, out f);
-		//						statstr.AppendFormat("{0:00} {1:00}:{2:00}", _drive.CurrentTrack, min, sec);
-		//					}
-		//					labelStatus.Text = statstr.ToString();
-		//				}
-		//			} catch (SdlException ex) {
-		//				HandleError(ex);
-		//				labelStatus.Text = "Error";
-		//			}
-		//		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		protected override void OnResize(EventArgs e)
+		{
+			base.OnResize (e);
+			surf = 
+				new Surface(
+				this.surfaceControl.Width,
+				this.surfaceControl.Height);
+		}
+
 	}
 }
