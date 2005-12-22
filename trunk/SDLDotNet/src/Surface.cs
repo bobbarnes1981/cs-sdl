@@ -317,25 +317,6 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Creates a Bitmap representing the Surface.
-		/// </summary>
-		public Image Image 
-		{ 
-			get
-			{
-				byte[] arr = new byte[(this.Width * this.Height * this.BytesPerPixel) + this.BmpHeader];
-				int result = 
-					Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(arr, arr.Length), 1);
-				if (result != (int) SdlFlag.Success)
-				{
-					throw SdlException.Generate();
-				}
-				stream.Write(arr, 0, arr.Length);
-				return Image.FromStream(stream);
-			}
-		}
-
-		/// <summary>
 		/// If the surface is double-buffered, 
 		/// this method will flip the back buffer onto the screen
 		/// </summary>
