@@ -133,6 +133,16 @@ namespace SdlDotNet
 		/// Adds the specified Music to the MusicCollection.
 		/// </summary>
 		/// <param name="index">Index at which to insert to new music</param>
+		/// <param name="filename">Filename to the music to insert</param>
+		public void Insert(int index, string filename)
+		{
+			List.Insert(index, new Music(music));
+		}
+
+		/// <summary>
+		/// Adds the specified Music to the MusicCollection.
+		/// </summary>
+		/// <param name="index">Index at which to insert to new music</param>
 		/// <param name="music">Music to insert</param>
 		public void Insert(int index, Music music)
 		{
