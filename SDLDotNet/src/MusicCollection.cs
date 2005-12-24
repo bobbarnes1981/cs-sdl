@@ -136,7 +136,7 @@ namespace SdlDotNet
 		/// <param name="filename">Filename to the music to insert</param>
 		public void Insert(int index, string filename)
 		{
-			List.Insert(index, new Music(music));
+			List.Insert(index, new Music(filename));
 		}
 
 		/// <summary>
