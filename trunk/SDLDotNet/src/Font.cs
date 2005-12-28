@@ -133,10 +133,17 @@ namespace SdlDotNet
 		/// </summary>
 		protected override void CloseHandle() 
 		{
-			if (this.Handle != IntPtr.Zero)
+			try
 			{
-				SdlTtf.TTF_CloseFont(this.Handle);
-				GC.KeepAlive(this);
+				if (this.Handle != IntPtr.Zero)
+				{
+					SdlTtf.TTF_CloseFont(this.Handle);
+					GC.KeepAlive(this);
+					this.Handle = IntPtr.Zero;
+				}
+			}
+			catch (NullReferenceException)
+			{
 				this.Handle = IntPtr.Zero;
 			}
 		}
