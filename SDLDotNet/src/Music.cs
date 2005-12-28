@@ -151,9 +151,16 @@ namespace SdlDotNet
 		/// </summary>
 		protected override void CloseHandle() 
 		{
-			if (this.Handle != IntPtr.Zero)
+			try
 			{
-				SdlMixer.Mix_FreeMusic(this.Handle);
+				if (this.Handle != IntPtr.Zero)
+				{
+					SdlMixer.Mix_FreeMusic(this.Handle);
+					this.Handle = IntPtr.Zero;
+				}
+			}
+			catch (NullReferenceException)
+			{
 				this.Handle = IntPtr.Zero;
 			}
 		}

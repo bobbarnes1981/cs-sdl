@@ -132,10 +132,17 @@ namespace SdlDotNet
 		/// <remarks>Closes handle to unmanaged SDL resource</remarks>
 		protected override void CloseHandle() 
 		{
-			if (this.Handle != IntPtr.Zero)
+			try
 			{
-				Sdl.SDL_CDClose(this.Handle);
-				GC.KeepAlive(this);
+				if (this.Handle != IntPtr.Zero)
+				{
+					Sdl.SDL_CDClose(this.Handle);
+					GC.KeepAlive(this);
+					this.Handle = IntPtr.Zero;
+				}
+			}
+			catch (NullReferenceException)
+			{
 				this.Handle = IntPtr.Zero;
 			}
 		}

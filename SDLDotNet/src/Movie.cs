@@ -88,10 +88,17 @@ namespace SdlDotNet
 		/// </summary>
 		protected override void CloseHandle() 
 		{
-			if (this.Handle != IntPtr.Zero)
+			try
 			{
-				Smpeg.SMPEG_delete(this.Handle);
-				GC.KeepAlive(this);
+				if (this.Handle != IntPtr.Zero)
+				{
+					Smpeg.SMPEG_delete(this.Handle);
+					GC.KeepAlive(this);
+					this.Handle = IntPtr.Zero;
+				}
+			}
+			catch (NullReferenceException)
+			{
 				this.Handle = IntPtr.Zero;
 			}
 		}
