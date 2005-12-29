@@ -143,6 +143,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(VideoResizeEventArgs args)
 		{
+			if( args == null )
+			{
+				throw new ArgumentNullException("args");
+			}
 			this.bounds = new Rectangle(0, 0, args.Width, args.Height);
 		}
 

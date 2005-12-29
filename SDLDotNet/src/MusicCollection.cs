@@ -56,10 +56,10 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a new MusicCollection with the given music file in it.
 		/// </summary>
-		/// <param name="filename">The music file to load as the first element.</param>
-		public MusicCollection(string filename)
+		/// <param name="fileName">The music file to load as the first element.</param>
+		public MusicCollection(string fileName)
 		{
-			Add(filename);
+			Add(fileName);
 		}
 
 		/// <summary>
@@ -104,11 +104,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Adds a music object to the collection from its file path.
 		/// </summary>
-		/// <param name="filename">The file to add in as music.</param>
+		/// <param name="fileName">The file to add in as music.</param>
 		/// <returns>The index of the music object in the collection.</returns>
-		public int Add(string filename)
+		public int Add(string fileName)
 		{
-			return Add(new Music(filename));
+			return Add(new Music(fileName));
 		}
 
 		/// <summary>
@@ -133,10 +133,10 @@ namespace SdlDotNet
 		/// Adds the specified Music to the MusicCollection.
 		/// </summary>
 		/// <param name="index">Index at which to insert to new music</param>
-		/// <param name="filename">Filename to the music to insert</param>
-		public void Insert(int index, string filename)
+		/// <param name="fileName">Filename to the music to insert</param>
+		public void Insert(int index, string fileName)
 		{
-			List.Insert(index, new Music(filename));
+			List.Insert(index, new Music(fileName));
 		}
 
 		/// <summary>
@@ -156,6 +156,10 @@ namespace SdlDotNet
 		/// <param name="musicCollection">The music collection to add to the current collection.</param>
 		public void Insert(int index, MusicCollection musicCollection)
 		{
+			if( musicCollection == null )
+			{
+				throw new ArgumentNullException("musicCollection");
+			}
 			for(int i = 0; i < musicCollection.Count; i++)
 			{
 				List.Insert(index + i, musicCollection[i]);
@@ -247,8 +251,9 @@ namespace SdlDotNet
 				{
 					collection.Add(file.FullName);
 				}
-				catch
+				catch (System.IO.FileNotFoundException e)
 				{
+					e.ToString();
 					// Do nothing and move onto next file
 				}
 			}

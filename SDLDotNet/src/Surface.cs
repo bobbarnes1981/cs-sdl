@@ -236,6 +236,7 @@ namespace SdlDotNet
 					{
 					}
 					CloseHandle();
+					stream.Close();
 					GC.SuppressFinalize(this);
 					this.disposed = true;
 				}
