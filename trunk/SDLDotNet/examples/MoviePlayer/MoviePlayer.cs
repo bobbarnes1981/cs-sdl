@@ -38,7 +38,7 @@ namespace SdlDotNet.Examples
 	#endregion Class Documentation
 	public class MoviePlayer 
 	{		
-		bool quitFlag;
+		Movie movie;
 
 		#region Run()
 		/// <summary>
@@ -46,7 +46,6 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		public void Run() 
 		{
-			quitFlag = false;
 			string data_directory = @"Data/";
 			string filepath = @"../../";
 			if (File.Exists(data_directory + "test.mpg"))
@@ -59,35 +58,20 @@ namespace SdlDotNet.Examples
 
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
-			Events.Quit += new QuitEventHandler(this.Quit);
+			Events.Tick += new TickEventHandler(this.Tick);
 
 			Surface screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Movie Player";
 			Mixer.Close();
-			Console.WriteLine(filepath + data_directory + "test.mpg");
-			Movie movie = new Movie(filepath + data_directory + "test.mpg");
+			movie = new Movie(filepath + data_directory + "test.mpg");
 			Console.WriteLine("Time: " + movie.Length);
 			Console.WriteLine("Width: " + movie.Size.Width);
 			Console.WriteLine("Height: " + movie.Size.Height);
 			Console.WriteLine("HasAudio: " + movie.HasAudio);
 			movie.Display(screen);
-			
 			movie.Play();
-
-			try
-			{
-				while (movie.IsPlaying && (quitFlag == false))
-				{
-					while (Events.Poll()){}
-				}
-			} catch (MovieStatusException)
-			{
-				throw;
-			}
-			movie.Stop();
-			movie.Close();
-
+			Events.Run();
 		} 
 		#endregion Run()
 
@@ -100,20 +84,29 @@ namespace SdlDotNet.Examples
 		}
 		#endregion Main()
 
-		private void KeyboardDown(
-			object sender,
-			KeyboardEventArgs e) 
+		private void KeyboardDown(object sender, KeyboardEventArgs e)
 		{
-			if (e.Key == Key.Escape ||
-				e.Key == Key.Q)
+			// Check if the key pressed was a Q or Escape
+			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
-				quitFlag = true;
+				movie.Stop();
+				movie.Close();
+				Events.QuitApplication();
 			}
 		}
 
-		private void Quit(object sender, QuitEventArgs e) 
+		private void Tick(object sender, TickEventArgs e)
 		{
-			quitFlag = true;
+			if (movie.IsPlaying)
+			{
+				return;
+			}
+			else
+			{
+				movie.Stop();
+				movie.Close();
+				Events.QuitApplication();
+			}
 		}
 	}
 }
