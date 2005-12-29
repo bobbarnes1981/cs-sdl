@@ -1668,7 +1668,7 @@ namespace SdlDotNet
 		/// All drawing will take place on the surface that is not displayed 
 		/// at the moment. If double buffering could not be enabled then 
 		/// <see cref="Surface.Flip"/> will just perform a 
-		/// <see cref="Surface.Update"/> on the entire screen.
+		/// <see cref="Surface.Update()"/> on the entire screen.
 		/// </summary>
 		DoubleBuffering = Sdl.SDL_DOUBLEBUF,
 		/// <summary>
