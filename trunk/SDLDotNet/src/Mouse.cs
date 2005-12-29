@@ -35,22 +35,7 @@ namespace SdlDotNet
 
 		static Mouse()
 		{
-			Initialize();
-		}
-
-		/// <summary>
-		/// Initializes Video subsystem.
-		/// </summary>
-		public static void Initialize()
-		{
-			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) & Sdl.SDL_INIT_VIDEO) 
-				== (int) SdlFlag.FalseValue)
-			{
-				if (Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO)!= (int) SdlFlag.Success)
-				{
-					throw SdlException.Generate();
-				}
-			}
+			Video.Initialize();
 		}
 
 		/// <summary> 

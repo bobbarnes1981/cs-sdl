@@ -30,6 +30,11 @@ namespace SdlDotNet
 		Keyboard()
 		{}
 
+		static Keyboard()
+		{
+			Video.Initialize();
+		}
+
 		/// <summary>
 		/// Enable keyboard autorepeat
 		/// </summary>
@@ -43,7 +48,6 @@ namespace SdlDotNet
 		/// <remarks>This method will initialize the Video subsystem as well.</remarks>
 		public static void EnableKeyRepeat(int delay, int rate) 
 		{
-			Video.Initialize();
 			if (Sdl.SDL_EnableKeyRepeat(delay, rate) == (int) SdlFlag.Error)
 			{
 				throw SdlException.Generate();

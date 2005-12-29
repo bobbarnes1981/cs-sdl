@@ -46,13 +46,17 @@ namespace SdlDotNet
 		private readonly int BmpHeader = 54;
 		
 		#region Constructors and Destructors
+		static Surface()
+		{
+			Video.Initialize();
+		}
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="handle"></param>
 		internal Surface(IntPtr handle) 
 		{
-			Video.Initialize();
+			//Video.Initialize();
 			this.Handle = handle;
 		}
 
@@ -107,7 +111,7 @@ namespace SdlDotNet
 		/// </summary> 
 		public Surface(string file)
 		{
-			Video.Initialize();
+			//Video.Initialize();
 			this.Handle = SdlImage.IMG_Load(file);
 			if (this.Handle == IntPtr.Zero)
 			{
@@ -138,7 +142,7 @@ namespace SdlDotNet
 		/// <param name="height">Height of surface</param>
 		public Surface(int width, int height)
 		{
-			Video.Initialize();
+			//Video.Initialize();
 			this.Handle = 
 				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
 			if (this.Handle == IntPtr.Zero)
@@ -155,7 +159,7 @@ namespace SdlDotNet
 		/// </param>
 		public Surface(byte[] array)
 		{
-			Video.Initialize();
+			//Video.Initialize();
 			this.Handle = 
 				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
 			if (this.Handle == IntPtr.Zero) 
@@ -176,7 +180,7 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("bitmap");
 			}
-			Video.Initialize();
+			//Video.Initialize();
 			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
@@ -199,7 +203,7 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("surface");
 			}
-			Video.Initialize();
+			//Video.Initialize();
             this.Handle = SdlGfx.zoomSurface(surface.Handle, 1, 1, SdlGfx.SMOOTHING_OFF);
             if (this.Handle == IntPtr.Zero)
             {

@@ -48,8 +48,8 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Initialize()
 		{
-			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER) & Sdl.SDL_INIT_TIMER) 
-				!= (int) SdlFlag.TrueValue)
+			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER)) 
+				== (int) SdlFlag.FalseValue)
 			{
 				if (Sdl.SDL_Init(Sdl.SDL_INIT_TIMER) != (int) SdlFlag.Success)
 				{

@@ -79,7 +79,7 @@ namespace SdlDotNet.Examples
 			Console.WriteLine("Welcome to the SDL.NET Demo!");
 
 			// Start up the ticker (and animation)
-			Events.Fps = 30;
+			Events.Fps = 100;
 			Events.Run();
 
 			// Stop the ticker and the current demo

@@ -81,7 +81,7 @@ namespace SdlDotNet.Examples
 				filepath = "";
 			}
 			background = new Surface(filepath + data_directory + "background.png");
-			screen = Video.SetVideoModeWindow(width, height, true);
+			screen = Video.SetVideoModeWindow(width, height);
 			screen.Blit(background);
 			screen.Update();
 			Video.WindowIcon();
