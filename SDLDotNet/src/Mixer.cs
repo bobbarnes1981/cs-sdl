@@ -69,8 +69,8 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Initialize()
 		{
-			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) & Sdl.SDL_INIT_AUDIO) 
-				!= (int) SdlFlag.TrueValue)
+			if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO)) 
+				== (int) SdlFlag.FalseValue)
 			{
 				if (Sdl.SDL_Init(Sdl.SDL_INIT_AUDIO) != (int) SdlFlag.Success)
 				{

@@ -142,6 +142,11 @@ namespace SdlDotNet
 		private const float JOYSTICK_SCALE = 65535;
 		//private const short JOYSTICK_THRESHHOLD = 3277;
 
+		static Joystick()
+		{
+			Joysticks.Initialize();
+		}
+
 		/// <summary>
 		/// open joystick at index number
 		/// </summary>

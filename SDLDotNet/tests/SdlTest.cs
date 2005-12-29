@@ -104,6 +104,8 @@ namespace SdlDotNet.Tests
 		[Test]
 		public void InitSubSystemVideo()
 		{
+			Assert.IsTrue(Tao.Sdl.Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) == 0);
+			Assert.AreEqual( 0, Tao.Sdl.Sdl.SDL_InitSubSystem(Sdl.SDL_INIT_AUDIO));
 			Assert.AreEqual( 0, Tao.Sdl.Sdl.SDL_InitSubSystem(Sdl.SDL_INIT_VIDEO));
 			Assert.IsTrue(Tao.Sdl.Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO)!= 0);
 			this.Quit();
