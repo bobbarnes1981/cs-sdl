@@ -63,7 +63,7 @@ namespace SdlDotNet.Examples
 		private const int CHECKWIDTH = 64;
 		private const int CHECKHEIGHT = 64;
 
-		private byte[ , , ] checkImage = new byte[CHECKWIDTH, CHECKHEIGHT, 3];
+		//private byte[ , , ] checkImage = new byte[CHECKWIDTH, CHECKHEIGHT, 3];
 		private double zoomFactor = 1.0;
 
 		/// <summary>

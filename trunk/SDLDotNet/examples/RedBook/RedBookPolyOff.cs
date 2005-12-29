@@ -167,9 +167,9 @@ namespace SdlDotNet.Examples
 		#region Display()
 		private static void Display() 
 		{
-			float[] materialAmbient = {0.8f, 0.8f, 0.8f, 1.0f};
-			float[] materialDiffuse = {1.0f, 0.0f, 0.5f, 1.0f};
-			float[] materialSpecular = {1.0f, 1.0f, 1.0f, 1.0f};
+			//float[] materialAmbient = {0.8f, 0.8f, 0.8f, 1.0f};
+			//float[] materialDiffuse = {1.0f, 0.0f, 0.5f, 1.0f};
+			//float[] materialSpecular = {1.0f, 1.0f, 1.0f, 1.0f};
 			float[] gray = {0.8f, 0.8f, 0.8f, 1.0f};
 			float[] black = {0.0f, 0.0f, 0.0f, 1.0f};
 

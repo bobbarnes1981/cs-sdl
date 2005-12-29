@@ -24,7 +24,7 @@
 		<include name="${project.name}.snk"/>
 	    </fileset>
 	</copy>
-	<ifnot test="${framework::get-runtime-framework() == 'mono-1.0'}">
+<!--	<ifnot test="${framework::get-runtime-framework() == 'mono-1.0'}"> -->
 	    <csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" win32icon="App.ico">
 		<sources failonempty="true">
 		    <include name="*.cs" />
@@ -41,7 +41,7 @@
 		    <include name="App.ico"/>
 		</resources>
 	    </csc>
-	</ifnot>
+<!--	</ifnot> -->
     </target>
     <target name="clean">
 	<delete dir="${bin.dir}" failonerror="false" />

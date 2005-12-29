@@ -287,9 +287,9 @@ namespace SdlDotNet.Examples
 		#region Vertex(double[] vertex)
 		private static void Vertex(double[] vertex) 
 		{
-			double[] pointer;
+			//double[] pointer;
 
-			pointer = vertex;
+			//pointer = vertex;
 			//Gl.glColor3dv(pointer);
 			Gl.glColor3f(1.0f, 1.0f, 1.0f);
 			Gl.glVertex3dv(vertex);

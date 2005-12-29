@@ -139,7 +139,7 @@ namespace SdlDotNet.Examples
 			
 			float[] ambient = {0.0f, 0.0f, 0.0f, 1.0f};
 			float[] diffuse = {1.0f, 1.0f, 1.0f, 1.0f};
-			float[] specular = {1.0f, 1.0f, 1.0f, 1.0f};
+			//float[] specular = {1.0f, 1.0f, 1.0f, 1.0f};
 			float[] position = {0.0f, 3.0f, 3.0f, 0.0f};
 
 			float[] lmodel_ambient = {0.2f, 0.2f, 0.2f, 1.0f};
