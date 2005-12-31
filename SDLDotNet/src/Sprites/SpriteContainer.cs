@@ -97,9 +97,9 @@ base(surface, rectangle, positionZ)
 		/// <param name="disposing">If true, dispose unmanaged resources.</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
@@ -110,13 +110,11 @@ base(surface, rectangle, positionZ)
 					}
 					this.disposed = true;
 				}
-				finally
-				{
-					base.Dispose(disposing);
-					this.disposed = true;
-				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 
 		/// <summary>

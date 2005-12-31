@@ -27,7 +27,7 @@ namespace SdlDotNet
 	/// </summary>
 	/// <remarks>
 	/// Before instantiating an instance of Movie,
-	/// you must call Mxier.Close() to turn off the default mixer.
+	/// you must call Mixer.Close() to turn off the default mixer.
 	/// If you do not do this, any movie will play very slowly. 
 	/// Smpeg uses a custom mixer for audio playback. 
 	/// </remarks>
@@ -35,11 +35,6 @@ namespace SdlDotNet
 	{
 		private Smpeg.SMPEG_Info movieInfo;
 		private bool disposed;
-
-//		internal Movie(IntPtr handle) 
-//		{
-//			this.Handle = handle;
-//		}
 
 		/// <summary>
 		/// Create movie object from file
@@ -62,25 +57,21 @@ namespace SdlDotNet
 		/// <param name="disposing">Manually dispose if true.</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
 					}
 					CloseHandle();
-					//GC.KeepAlive(this);
-					GC.SuppressFinalize(this);
-					this.disposed = true;
-				}
-				finally
-				{
-					base.Dispose(disposing);
 					this.disposed = true;
 				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 
 		/// <summary>
@@ -93,11 +84,13 @@ namespace SdlDotNet
 				if (this.Handle != IntPtr.Zero)
 				{
 					Smpeg.SMPEG_delete(this.Handle);
-					GC.KeepAlive(this);
-					this.Handle = IntPtr.Zero;
 				}
 			}
 			catch (NullReferenceException)
+			{
+				this.Handle = IntPtr.Zero;
+			}
+			finally
 			{
 				this.Handle = IntPtr.Zero;
 			}

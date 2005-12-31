@@ -289,6 +289,9 @@ namespace SdlDotNet.Examples
 				case Key.Eight: 
 					SwitchDemo(7); 
 					break;
+				case Key.M:
+					Video.IconifyWindow();
+					break;
 			}
 		}
 

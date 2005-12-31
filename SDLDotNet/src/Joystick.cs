@@ -153,10 +153,6 @@ namespace SdlDotNet
 		/// <param name="index"></param>
 		public Joystick(int index)
 		{
-//			if (!Joysticks.IsInitialized)
-//			{
-//				Joysticks.Initialize();
-//			}
 			if (Joysticks.IsValidJoystickNumber(index))
 			{
 				this.Handle = Sdl.SDL_JoystickOpen(index);
@@ -176,39 +172,27 @@ namespace SdlDotNet
 			this.index = Sdl.SDL_JoystickIndex(handle); 
 		}
 
-		//		/// <summary>
-		//		/// 
-		//		/// </summary>
-		//		~Joystick()
-		//		{
-		//			Dispose(false);
-		//		}
-
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
 		/// <param name="disposing">True for manual disposing</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
 					}
 					CloseHandle();
-					//GC.KeepAlive(this);
-					GC.SuppressFinalize(this);
-					this.disposed = true;
-				}
-				finally
-				{
-					base.Dispose(disposing);
 					this.disposed = true;
 				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 
 		/// <summary>
@@ -221,11 +205,13 @@ namespace SdlDotNet
 				if (this.Handle != IntPtr.Zero)
 				{
 					Sdl.SDL_JoystickClose(this.Handle);
-					GC.KeepAlive(this);
-					this.Handle = IntPtr.Zero;
 				}
 			}
 			catch (NullReferenceException)
+			{
+				this.Handle = IntPtr.Zero;
+			}
+			finally
 			{
 				this.Handle = IntPtr.Zero;
 			}
