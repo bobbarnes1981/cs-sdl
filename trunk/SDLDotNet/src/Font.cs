@@ -96,36 +96,26 @@ namespace SdlDotNet
 			}
 		}
 
-//		internal Font(IntPtr handle) 
-//		{
-//			this.Handle = handle;
-//		}
-
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
 		/// <param name="disposing">If true, it will dispose all obejects</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
 					}
-					CloseHandle();
-					//GC.KeepAlive(this);
-					GC.SuppressFinalize(this);
-					this.disposed = true;
-				}
-				finally
-				{
-					base.Dispose(disposing);
 					this.disposed = true;
 				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 
 		/// <summary>
@@ -138,11 +128,13 @@ namespace SdlDotNet
 				if (this.Handle != IntPtr.Zero)
 				{
 					SdlTtf.TTF_CloseFont(this.Handle);
-					GC.KeepAlive(this);
-					this.Handle = IntPtr.Zero;
 				}
 			}
 			catch (NullReferenceException)
+			{
+				this.Handle = IntPtr.Zero;
+			}
+			finally
 			{
 				this.Handle = IntPtr.Zero;
 			}

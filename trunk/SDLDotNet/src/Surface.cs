@@ -56,7 +56,7 @@ namespace SdlDotNet
 		/// <param name="handle"></param>
 		internal Surface(IntPtr handle) 
 		{
-			//Video.Initialize();
+			
 			this.Handle = handle;
 		}
 
@@ -111,7 +111,7 @@ namespace SdlDotNet
 		/// </summary> 
 		public Surface(string file)
 		{
-			//Video.Initialize();
+			
 			this.Handle = SdlImage.IMG_Load(file);
 			if (this.Handle == IntPtr.Zero)
 			{
@@ -142,7 +142,7 @@ namespace SdlDotNet
 		/// <param name="height">Height of surface</param>
 		public Surface(int width, int height)
 		{
-			//Video.Initialize();
+			
 			this.Handle = 
 				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
 			if (this.Handle == IntPtr.Zero)
@@ -159,7 +159,7 @@ namespace SdlDotNet
 		/// </param>
 		public Surface(byte[] array)
 		{
-			//Video.Initialize();
+			
 			this.Handle = 
 				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
 			if (this.Handle == IntPtr.Zero) 
@@ -180,7 +180,7 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("bitmap");
 			}
-			//Video.Initialize();
+			
 			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
@@ -192,34 +192,24 @@ namespace SdlDotNet
 			}
 		}
 
-        /// <summary>
-        /// Surface copy constructor.
-        /// </summary>
-        /// <remarks>Creates a copy of the surface at a different memory location.</remarks>
-        /// <param name="surface">The surface to copy.</param>
-        public Surface(Surface surface)
-        {
+		/// <summary>
+		/// Surface copy constructor.
+		/// </summary>
+		/// <remarks>Creates a copy of the surface at a different memory location.</remarks>
+		/// <param name="surface">The surface to copy.</param>
+		public Surface(Surface surface)
+		{
 			if (surface == null)
 			{
 				throw new ArgumentNullException("surface");
 			}
-			//Video.Initialize();
-            this.Handle = SdlGfx.zoomSurface(surface.Handle, 1, 1, SdlGfx.SMOOTHING_OFF);
-            if (this.Handle == IntPtr.Zero)
-            {
-                throw SdlException.Generate();
-            }
-        }
-	
-//		/// <summary>
-//		/// Allows an Object to attempt to free resources 
-//		/// and perform other cleanup operations before the Object 
-//		/// is reclaimed by garbage collection.
-//		/// </summary>
-//		~Surface() 
-//		{
-//			Dispose(false);
-//		}
+			this.Handle = SdlGfx.zoomSurface(surface.Handle, 1, 1, SdlGfx.SMOOTHING_OFF);
+			if (this.Handle == IntPtr.Zero)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
 		#endregion Constructors and Destructors
 
 		/// <summary>
@@ -228,25 +218,25 @@ namespace SdlDotNet
 		/// <param name="disposing">If true, dispose unmanaged objects</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
+						if (this.stream != null)
+						{
+							stream.Close();
+							this.stream = null;
+						}
 					}
-					CloseHandle();
-					stream.Close();
-					GC.SuppressFinalize(this);
-					this.disposed = true;
-				}
-				finally
-				{
-					base.Dispose(disposing);
 					this.disposed = true;
 				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 
 		/// <summary>
@@ -259,11 +249,13 @@ namespace SdlDotNet
 				if (this.Handle != IntPtr.Zero)
 				{
 					Sdl.SDL_FreeSurface(this.Handle);
-					GC.KeepAlive(this);
-					this.Handle = IntPtr.Zero;
 				}
 			}
 			catch (NullReferenceException)
+			{
+				this.Handle = IntPtr.Zero;
+			}
+			finally
 			{
 				this.Handle = IntPtr.Zero;
 			}

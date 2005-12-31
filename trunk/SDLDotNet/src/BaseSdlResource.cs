@@ -79,7 +79,6 @@ namespace SdlDotNet
 		{
 			get
 			{
-				GC.KeepAlive(this);
 				return this.handle;
 			}
 			set
@@ -98,6 +97,7 @@ namespace SdlDotNet
 		public void Dispose() 
 		{
 			Dispose(true);
+			GC.SuppressFinalize(this); 
 		}
 
 		/// <summary>
@@ -117,9 +117,9 @@ namespace SdlDotNet
 				{
 				}
 				CloseHandle();
-				GC.SuppressFinalize(this);
-				this.disposed = true;
+				handle = IntPtr.Zero;
 			}
+			this.disposed = true;
 		}
 
 		/// <summary>

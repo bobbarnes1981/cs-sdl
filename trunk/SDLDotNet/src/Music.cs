@@ -125,25 +125,21 @@ namespace SdlDotNet
 		/// <param name="disposing"></param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
 					}
 					CloseHandle();
-					//GC.KeepAlive(this);
-					GC.SuppressFinalize(this);
-					this.disposed = true;
-				}
-				finally
-				{
-					base.Dispose(disposing);
 					this.disposed = true;
 				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 
 		/// <summary>
@@ -156,10 +152,13 @@ namespace SdlDotNet
 				if (this.Handle != IntPtr.Zero)
 				{
 					SdlMixer.Mix_FreeMusic(this.Handle);
-					this.Handle = IntPtr.Zero;
 				}
 			}
 			catch (NullReferenceException)
+			{
+				this.Handle = IntPtr.Zero;
+			}
+			finally
 			{
 				this.Handle = IntPtr.Zero;
 			}

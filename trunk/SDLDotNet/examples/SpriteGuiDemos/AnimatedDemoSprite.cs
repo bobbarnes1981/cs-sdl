@@ -75,24 +75,23 @@ namespace SdlDotNet.Examples
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
 					}
-				}
-				finally
-				{
-					base.Dispose(disposing);
 					this.disposed = true;
 				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 	}
 }

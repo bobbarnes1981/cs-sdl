@@ -125,8 +125,7 @@ namespace SdlDotNet.Sprites
 		#endregion Constructors
 
 		#region Properties
- 
-		
+		private bool disposed;		
 		private AnimationDictionary m_Animations = new AnimationDictionary();
 
 		/// <summary>
@@ -339,7 +338,27 @@ namespace SdlDotNet.Sprites
 		#endregion
 
         #region IDisposable Members
-        // TODO: AnimatedSprite Disposable Members
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				if (!this.disposed)
+				{
+					if (disposing)
+					{
+					}
+					this.disposed = true;
+				}
+			}
+			finally
+			{
+				base.Dispose(disposing);
+			}
+		}
         #endregion IDisposable Members
 
     }

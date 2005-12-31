@@ -892,13 +892,13 @@ namespace SdlDotNet.Sprites
 		/// <param name="disposing">If true, remove all unamanged resources</param>
 		protected virtual void Dispose(bool disposing)
 		{
-			this.Kill();
 			if (!this.disposed)
 			{
 				if (disposing)
 				{
 					this.surf.Dispose();
-					GC.SuppressFinalize(this);
+					this.surf = null;
+					this.Kill();
 				}
 				this.disposed = true;
 			}
@@ -909,6 +909,7 @@ namespace SdlDotNet.Sprites
 		public void Dispose()
 		{
 			this.Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 
 		/// <summary>

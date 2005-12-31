@@ -55,11 +55,6 @@ namespace SdlDotNet
 		/// Triggered when there was an event passed to the sound sample (ex. the sound stopped)
 		/// </summary>
 		public event SoundEventHandler SoundEvent;
-		
-//		internal Sound(IntPtr handle) 
-//		{
-//			this.Handle = handle;
-//		}
 
 		internal Sound(IntPtr handle, long size) 
 		{
@@ -100,37 +95,22 @@ namespace SdlDotNet
 		/// </param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
 					}
 					CloseHandle();
-					//GC.KeepAlive(this);
-					GC.SuppressFinalize(this);
-					this.disposed = true;
-				}
-				finally
-				{
-					base.Dispose(disposing);
 					this.disposed = true;
 				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
-
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		public override bool HasBeenDisposed
-//		{
-//			get
-//			{
-//				return this.disposed;
-//			}
-//		}
 
 		/// <summary>
 		/// Closes sound handle
@@ -142,11 +122,13 @@ namespace SdlDotNet
 				if (this.Handle != IntPtr.Zero)
 				{
 					SdlMixer.Mix_FreeChunk(this.Handle);
-					GC.KeepAlive(this);
-					this.Handle = IntPtr.Zero;
 				}
 			}
 			catch (NullReferenceException)
+			{
+				this.Handle = IntPtr.Zero;
+			}
+			finally
 			{
 				this.Handle = IntPtr.Zero;
 			}

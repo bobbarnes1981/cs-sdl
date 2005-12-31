@@ -315,23 +315,25 @@ namespace SdlDotNet.Sprites
 		/// <param name="disposing">If ture, dispose unmanaged resources</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
-						this.font.Dispose();
+						if (this.font != null)
+						{
+							this.font.Dispose();
+							this.font = null;
+						}
 					}
 					this.disposed = true;
 				}
-				finally
-				{
-					base.Dispose(disposing);
-					this.disposed = true;
-				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 		#endregion Disposing
 	}

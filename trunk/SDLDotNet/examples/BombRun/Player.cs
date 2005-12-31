@@ -29,7 +29,6 @@ namespace SdlDotNet.Examples
 	/// </summary>
 	public class Player : Sprite
 	{
-		// weither the respective keys are pressed
 		bool left;
 		bool right;
 		bool jump;
@@ -168,5 +167,29 @@ namespace SdlDotNet.Examples
 		/// 
 		/// </summary>
 		public event FireEventHandler WeaponFired;
+
+		private bool disposed;
+
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				if (!this.disposed)
+				{
+					if (disposing)
+					{
+					}
+					this.disposed = true;
+				}
+			}
+			finally
+			{
+				base.Dispose(disposing);
+			}
+		}
 	}
 }
