@@ -193,16 +193,19 @@ namespace SdlDotNet.Examples
 			{
 				if (disposing)
 				{
-					this.surf.Dispose();
+					if (this.surf != null)
+					{
+						this.surf.Dispose();
+						this.surf = null;
+					}
 					foreach (Sprite s in this.sprites)
 					{
-						IDisposable disposableObj = s as IDisposable;
-						if (disposableObj != null)
+						if (s != null)
 						{
-							disposableObj.Dispose( );
+							s.Dispose();
+							this.sprites.Remove(s);
 						}
 					}
-					GC.SuppressFinalize(this);
 				}
 				this.disposed = true;
 			}
@@ -213,6 +216,7 @@ namespace SdlDotNet.Examples
 		public void Dispose()
 		{
 			this.Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 
 		/// <summary>

@@ -123,8 +123,12 @@ namespace SdlDotNet.Examples
 			}
 			set 
 			{ 
-				horizontal = value; 
-				this.Surface = null; 
+				horizontal = value;
+				if (this.Surface != null)
+				{
+					this.Surface.Dispose();
+					this.Surface = null; 
+				}
 			}
 		}
 
@@ -140,7 +144,11 @@ namespace SdlDotNet.Examples
 			set 
 			{ 
 				vertical = value; 
-				this.Surface = null; 
+				if (this.Surface != null)
+				{
+					this.Surface.Dispose();
+					this.Surface = null; 
+				}
 			}
 		}
 		#endregion

@@ -77,7 +77,6 @@ namespace SdlDotNet.Examples.GuiExample
 		public void Add(Sprite menuItem)
 		{
 			AddHead(menuItem);
-			
 			Redo();
 		}
 
@@ -99,10 +98,6 @@ namespace SdlDotNet.Examples.GuiExample
 			this.Rectangle = new Rectangle(this.menuTitle.X, this.menuTitle.Y + this.menuTitle.Height, width, height);
 			base.Render();
 		}
-		#endregion
-
-		#region Geometry
-		//private Point translate = new Point();
 		#endregion
 
 		#region Events
@@ -211,36 +206,27 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 		private bool disposed;
 		/// <summary>
-		/// 
+		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
-						this.Surface.Dispose();
-						foreach (Sprite s in this.Sprites)
-						{
-							IDisposable disposableObj = s as IDisposable;
-							if (disposableObj != null)
-							{
-								disposableObj.Dispose( );
-							}
-						}
+						this.menuTitle.Dispose();
+						this.selected.Dispose();
 					}
 					this.disposed = true;
 				}
-				finally
-				{
-					base.Dispose(disposing);
-					this.disposed = true;
-				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 	}
 }

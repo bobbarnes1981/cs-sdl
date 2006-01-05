@@ -158,5 +158,32 @@ namespace SdlDotNet.Examples
 			}
 		}
 		#endregion
+
+		private bool disposed;
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				if (!this.disposed)
+				{
+					if (disposing)
+					{
+						this.tps.Dispose();
+						this.fps.Dispose();
+						this.mode.Dispose();
+
+					}
+					this.disposed = true;
+				}
+			}
+			finally
+			{
+				base.Dispose(disposing);
+			}
+		}
 	}
 }

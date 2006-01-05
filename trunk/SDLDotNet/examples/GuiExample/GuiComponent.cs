@@ -196,9 +196,6 @@ namespace SdlDotNet.Examples.GuiExample
 		}
 		#endregion
 
-		#region Geometry
-		#endregion
-
 		#region Properties
 		/// <summary>
 		/// 
@@ -228,36 +225,25 @@ namespace SdlDotNet.Examples.GuiExample
 
 		private bool disposed;
 		/// <summary>
-		/// 
+		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
-						this.Surface.Dispose();
-						foreach (Sprite s in this.Sprites)
-						{
-							IDisposable disposableObj = s as IDisposable;
-							if (disposableObj != null)
-							{
-								disposableObj.Dispose( );
-							}
-						}
 					}
 					this.disposed = true;
 				}
-				finally
-				{
-					base.Dispose(disposing);
-					this.disposed = true;
-				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 	}
 }
