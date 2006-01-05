@@ -57,9 +57,6 @@ namespace SdlDotNet.Examples
 			this.Animate = true;
 		}
 
-		#region Animation and Drawing
-		#endregion
-
 		#region Operators
 		/// <summary>
 		/// 

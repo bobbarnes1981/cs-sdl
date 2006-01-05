@@ -6,3 +6,5 @@ obj
 *.mdp
 MFGames.Sdl.Demos.xml
 SpriteGuiDemos.xml
+*.counters
+*.csps

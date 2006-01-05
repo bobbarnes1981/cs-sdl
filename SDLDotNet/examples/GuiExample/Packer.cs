@@ -109,9 +109,6 @@ namespace SdlDotNet.Examples.GuiExample
 		}
 		#endregion
 
-		#region Events
-		#endregion
-
 		#region Properties
 		private SpriteCollection head = new SpriteCollection();
 		private SpriteCollection tail = new SpriteCollection();
@@ -182,36 +179,33 @@ namespace SdlDotNet.Examples.GuiExample
 		#endregion
 		private bool disposed;
 		/// <summary>
-		/// 
+		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
-						this.Surface.Dispose();
-						foreach (Sprite s in this.Sprites)
+						foreach (Sprite s in this.head)
 						{
-							IDisposable disposableObj = s as IDisposable;
-							if (disposableObj != null)
-							{
-								disposableObj.Dispose( );
-							}
+							s.Dispose();
+						}
+						foreach (Sprite s in this.tail)
+						{
+							s.Dispose();
 						}
 					}
 					this.disposed = true;
 				}
-				finally
-				{
-					base.Dispose(disposing);
-					this.disposed = true;
-				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 	}
 }

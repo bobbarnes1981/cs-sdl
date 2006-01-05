@@ -209,14 +209,14 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		private void OnTick(object sender, TickEventArgs args)
 		{
-			threshold += 10;
+			threshold += 11;
 
 			// Keep track of the counter (the point to trigger)
 			if (threshold > 1.0)
 			{
 				threshold = 0.0;
 
-				switch (rand.Next() % 5)
+				switch ( rand.Next()% 5)
 				{
 					case 0: // Switch autohide
 						if (ticker.IsAutoHide)
@@ -259,5 +259,32 @@ namespace SdlDotNet.Examples
 			}
 		}
 		#endregion
+
+		private bool disposed;
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				if (!this.disposed)
+				{
+					if (disposing)
+					{
+						gm.Dispose();
+						gm2.Dispose();
+						gm3.Dispose();
+						ticker.Dispose();
+					}
+					this.disposed = true;
+				}
+			}
+			finally
+			{
+				base.Dispose(disposing);
+			}
+		}
 	}
 }

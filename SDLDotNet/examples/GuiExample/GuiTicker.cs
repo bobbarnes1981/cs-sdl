@@ -71,9 +71,6 @@ namespace SdlDotNet.Examples.GuiExample
 		}
 		#endregion
 
-		#region Geometry
-		#endregion
-
 		#region Events
 		/// <summary>
 		/// 
@@ -120,8 +117,14 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public bool IsAutoHide
 		{
-			get { return isAutoHide; }
-			set { isAutoHide = value; }
+			get 
+			{ 
+				return isAutoHide; 
+			}
+			set 
+			{ 
+				isAutoHide = value; 
+			}
 		}
 
 		/// <summary>
@@ -129,7 +132,10 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public bool IsHidden
 		{
-			get { return (isAutoHide && this.Sprites.Count == 0); }
+			get 
+			{ 
+				return (isAutoHide && this.Sprites.Count == 0); 
+			}
 		}
 
 		/// <summary>
@@ -138,42 +144,37 @@ namespace SdlDotNet.Examples.GuiExample
 		/// </summary>
 		public int Delta
 		{
-			get { return delta; }
-			set { delta = value; }
+			get 
+			{ 
+				return delta; 
+			}
+			set 
+			{ 
+				delta = value; 
+			}
 		}
 		#endregion
 		private bool disposed;
 		/// <summary>
-		/// 
+		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing"></param>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
-						this.Surface.Dispose();
-						foreach (Sprite s in this.Sprites)
-						{
-							IDisposable disposableObj = s as IDisposable;
-							if (disposableObj != null)
-							{
-								disposableObj.Dispose( );
-							}
-						}
 					}
 					this.disposed = true;
 				}
-				finally
-				{
-					base.Dispose(disposing);
-					this.disposed = true;
-				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 	}
 }
