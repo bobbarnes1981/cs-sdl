@@ -31,15 +31,12 @@ namespace SdlDotNet
 	/// <remarks></remarks>
 	public class ChannelCollection : CollectionBase, ICollection
 	{
-		private ArrayList data;
-
 		/// <summary>
 		/// Create a Collection to hold channels
 		/// </summary>
 		/// <remarks></remarks>
-		public ChannelCollection()
+		public ChannelCollection() : base()
 		{
-			data = new ArrayList();
 		}
 
 		/// <summary>
@@ -134,7 +131,7 @@ namespace SdlDotNet
 		// Provide the explicit interface member for ICollection.
 		void ICollection.CopyTo(Array array, int index)
 		{
-			data.CopyTo(array, index);
+			this.List.CopyTo(array, index);
 		}
 
 		/// <summary>
@@ -143,10 +140,9 @@ namespace SdlDotNet
 		/// <param name="array">Array to copy collection to.</param>
 		/// <param name="index">Index to copy to.</param>
 		/// <remarks>Provide the strongly typed member for ICollection.</remarks> 
-		public void CopyTo(SdlException[] array, int index)
+		public void CopyTo(Channel[] array, int index)
 		{
 			((ICollection)this).CopyTo(array, index);
 		}
-
 	}	
 }
