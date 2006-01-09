@@ -24,8 +24,13 @@
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Windows.Forms.dll"/>
 		<include name="${native.sdl}.dll"/>
 	    </references>
+	    <resources>
+		<include name="*.resx"/>
+		<include name="SurfaceControl.bmp"/>
+	    </resources>
 	</csc>
     </target>
     <target name="clean">
@@ -37,6 +42,15 @@
 	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
 	    <property name="doc.target" value="Web" />
 	    <!--Bug in Ubuntu NAnt 0.85 RC1 - You must copy the assemblies to one directory above the code-->
+	    <copy todir="${project.main.dir}/..">
+		<fileset basedir="${nant.project.basedir}/${build.dir}">
+		    <include name="${native.sdl}.dll"/>
+		    <include name="${nant.project.name}.dll" />
+		</fileset>
+	    </copy>
+	</if>
+	<if test="${framework::get-runtime-framework() == 'mono-2.0'}">
+	    <property name="doc.target" value="Web" />
 	    <copy todir="${project.main.dir}/..">
 		<fileset basedir="${nant.project.basedir}/${build.dir}">
 		    <include name="${native.sdl}.dll"/>

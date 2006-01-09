@@ -35,7 +35,6 @@
     <property name="native.sdl" value="Tao.Sdl"/>
     <property name="nunit.assembly" value="nunit.framework"/>
     <property name="log.assembly" value="log4net"/>
-    <property name="Windows" value="Windows" />
     <property name="Particles" value="Particles" />
     <property name="Gui" value="Gui" />
 
@@ -175,6 +174,8 @@
 		<include name="src/*.csproj" />
 		<include name="src/*.prjx" />
 		<include name="src/*.mdp" />
+		<include name="src/**.bmp" />
+		<include name="src/**.resx" />
 		<include name="examples/**" />
 		<include name="examples/**" />
 		<exclude name="examples/**/*.snk" />
@@ -225,17 +226,6 @@
 		<include name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.html.dir}/${nant.project.name}.Windows">
-	    <fileset basedir="${extras.dir}/Windows/${bin.dir}/${project.config}/doc">
-		<include name="*" />
-		<exclude name="*.chm"/>
-	    </fileset>
-	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.chm.dir}">
-	    <fileset basedir="${extras.dir}/Windows/${bin.dir}/${project.config}/doc">
-		<include name="*.chm"/>
-	    </fileset>
-	</copy>
 	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${doc.html.dir}/${nant.project.name}.Particles">
 	    <fileset basedir="${extras.dir}/Particles/${bin.dir}/${project.config}/doc">
 		<include name="*" />
@@ -266,11 +256,6 @@
 	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
-	    </fileset>
-	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">
-	    <fileset basedir="${extras.dir}/${Windows}/${bin.dir}/${project.config}">
-		<include name="*.dll"/>
 	    </fileset>
 	</copy>
 	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/assemblies">

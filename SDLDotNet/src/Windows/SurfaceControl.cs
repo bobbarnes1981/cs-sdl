@@ -38,6 +38,7 @@ namespace SdlDotNet.Windows
 	///     Sdl Surface applications.
 	/// </summary>
 	#endregion Class Documentation
+	[DefaultProperty("Surface")]
 	[ToolboxBitmap(typeof(Bitmap),"SurfaceControl.bmp")]
 	public class SurfaceControl : System.Windows.Forms.PictureBox
 	{
