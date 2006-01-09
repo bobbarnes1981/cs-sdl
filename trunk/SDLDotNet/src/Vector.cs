@@ -167,6 +167,60 @@ namespace SdlDotNet
 			}
 		}
 
+		#region Static Constructors
+
+		/// <summary>
+		/// Creates a new vector based on the given length and direction (in radians).
+		/// </summary>
+		/// <param name="directionRad">The direction of the vector in radians.</param>
+		/// <param name="length">The length of the vector.</param>
+		/// <returns>The newly created vector.</returns>
+		public static Vector FromDirection(float directionRad, float length)
+		{
+			Vector vec = new Vector(directionRad);
+			vec.Length = length;
+			return vec;
+		}
+
+		/// <summary>
+		/// Creates a new vector based on the given length and direction (in degrees).
+		/// </summary>
+		/// <param name="directionDeg">The direction of the vector in degrees.</param>
+		/// <param name="length">The length of the vector.</param>
+		/// <returns>The newly created vector.</returns>
+		public static Vector FromDirection(int directionDeg, float length)
+		{
+			Vector vec = new Vector(directionDeg);
+			vec.Length = length;
+			return vec;
+		}
+
+		/// <summary>
+		/// Creates a new vector based on the given length and direction (in degrees) with a length of 1.
+		/// </summary>
+		/// <param name="directionDeg">The direction of the vector in degrees.</param>
+		/// <returns>The newly created vector.</returns>
+		public static Vector FromDirection(int directionDeg)
+		{
+			Vector vec = new Vector(directionDeg);
+			vec.Length = 1;
+			return vec;
+		}
+
+		/// <summary>
+		/// Creates a new vector based on the given direction (in radians) with a length of 1.
+		/// </summary>
+		/// <param name="directionRad">The direction of the vector in radians.</param>
+		/// <returns>The newly created vector.</returns>
+		public static Vector FromDirection(float directionRad)
+		{
+			Vector vec = new Vector(directionRad);
+			vec.Length = 1;
+			return vec;
+		}
+
+		#endregion Static Constructors
+
 		#endregion Constructors
 
 		#region Operators
