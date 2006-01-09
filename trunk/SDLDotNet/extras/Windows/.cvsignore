@@ -1,7 +1,0 @@
-bin
-obj
-SdlDotNet.Windows.csproj
-SdlDotNet.Windows.csproj.user
-SdlDotNet.Windows.xml
-SdlDotNet.Windows.prjx
-*.mdp
