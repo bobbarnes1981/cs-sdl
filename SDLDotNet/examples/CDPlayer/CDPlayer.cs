@@ -242,7 +242,6 @@ namespace SdlDotNet.Examples
 			this.surfaceControl.Name = "surfaceControl";
 			this.surfaceControl.Size = new System.Drawing.Size(336, 224);
 			this.surfaceControl.TabIndex = 0;
-			this.surfaceControl.TabStop = false;
 			// 
 			// CDPlayer
 			// 
@@ -259,12 +258,11 @@ namespace SdlDotNet.Examples
 			this.Controls.Add(this.comboBoxDrive);
 			this.Controls.Add(this.label1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MaximizeBox = false;
-			this.MinimizeBox = false;
 			this.Name = "CDPlayer";
 			this.Text = "SDL.NET - CD Player";
 			this.Load += new System.EventHandler(this.CDPlayer_Load);
 			this.ResumeLayout(false);
+
 		}
 		#endregion
 
@@ -284,7 +282,7 @@ namespace SdlDotNet.Examples
 		{
 			surf.Fill(Color.Black);
 			surf.Blit(master);
-			this.surfaceControl.Surface.Blit(surf);
+			this.surfaceControl.Image = surf.Bitmap;
 		}
 
 		private void comboBoxDrive_SelectedIndexChanged(object sender, System.EventArgs e) 

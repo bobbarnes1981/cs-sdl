@@ -38,40 +38,15 @@ namespace SdlDotNet.Windows
 	///     Sdl Surface applications.
 	/// </summary>
 	#endregion Class Documentation
-	[DefaultProperty("Surface")]
+	[DefaultProperty("Image")]
 	[ToolboxBitmap(typeof(Bitmap),"SurfaceControl.bmp")]
 	public class SurfaceControl : System.Windows.Forms.PictureBox
 	{
-		Surface surface;
-
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		public SurfaceControl()
 		{
-			this.surface = new Surface(this.Width,this.Height);
-			this.Image = this.surface.Bitmap;
-		}
-
-		/// <summary>
-		/// The Surface of the control
-		/// </summary>
-		public Surface Surface
-		{
-			get
-			{
-				this.Image.Dispose();
-				this.Image = surface.Bitmap;
-				return surface;
-			}
-			set
-			{
-				if (value == null)
-				{
-					throw new ArgumentNullException("value");
-				}
-				surface = value;
-			}
 		}
 		
 		/// <summary>
@@ -81,10 +56,6 @@ namespace SdlDotNet.Windows
 		protected override void OnResize(EventArgs e)
 		{
 			base.OnResize (e);
-			this.surface = new Surface(this.Width,this.Height);
-			this.surface.Update();
-			this.Image.Dispose();
-			this.Image = surface.Bitmap;
 			SdlDotNet.Events.Add(new VideoResizeEventArgs(this.Width,this.Height));
 		}
 
@@ -95,10 +66,6 @@ namespace SdlDotNet.Windows
 		protected override void OnSizeChanged(EventArgs e)
 		{
 			base.OnSizeChanged (e);
-			this.surface = new Surface(this.Width,this.Height);
-			this.surface.Update();
-			this.Image.Dispose();
-			this.Image = surface.Bitmap;
 			SdlDotNet.Events.Add(new VideoResizeEventArgs(this.Width,this.Height));
 		}
 		
@@ -139,6 +106,34 @@ namespace SdlDotNet.Windows
 			}
 			lastX = e.X;
 			lastY = e.Y;
+		}
+
+		/// <summary>
+		/// Raises the 
+		/// <see cref="E:System.Windows.Forms.Control.KeyDown"/> event.
+		/// </summary>
+		/// <param name="e">A 
+		/// <see cref="T:System.Windows.Forms.KeyEventArgs"/> 
+		/// that contains the event data.</param>
+		protected override void OnKeyDown(KeyEventArgs e)
+		{
+			base.OnKeyDown (e);
+			Console.WriteLine(e.KeyCode);
+			SdlDotNet.Events.Add(new KeyboardEventArgs((SdlDotNet.Key)e.KeyCode, (ModifierKeys)e.Modifiers, true));
+		}
+
+		/// <summary>
+		/// Raises the 
+		/// <see cref="E:System.Windows.Forms.Control.KeyUp"/> 
+		/// event.
+		/// </summary>
+		/// <param name="e">A 
+		/// <see cref="T:System.Windows.Forms.KeyEventArgs"/> 
+		/// that contains the event data.</param>
+		protected override void OnKeyUp(KeyEventArgs e)
+		{
+			base.OnKeyUp (e);
+			SdlDotNet.Events.Add(new KeyboardEventArgs((SdlDotNet.Key)e.KeyCode, (ModifierKeys)e.Modifiers, false));
 		}
 
 		private static MouseButton ConvertMouseButtons(MouseEventArgs e)
