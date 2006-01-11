@@ -108,34 +108,6 @@ namespace SdlDotNet.Windows
 			lastY = e.Y;
 		}
 
-		/// <summary>
-		/// Raises the 
-		/// <see cref="E:System.Windows.Forms.Control.KeyDown"/> event.
-		/// </summary>
-		/// <param name="e">A 
-		/// <see cref="T:System.Windows.Forms.KeyEventArgs"/> 
-		/// that contains the event data.</param>
-		protected override void OnKeyDown(KeyEventArgs e)
-		{
-			base.OnKeyDown (e);
-			Console.WriteLine(e.KeyCode);
-			SdlDotNet.Events.Add(new KeyboardEventArgs((SdlDotNet.Key)e.KeyCode, (ModifierKeys)e.Modifiers, true));
-		}
-
-		/// <summary>
-		/// Raises the 
-		/// <see cref="E:System.Windows.Forms.Control.KeyUp"/> 
-		/// event.
-		/// </summary>
-		/// <param name="e">A 
-		/// <see cref="T:System.Windows.Forms.KeyEventArgs"/> 
-		/// that contains the event data.</param>
-		protected override void OnKeyUp(KeyEventArgs e)
-		{
-			base.OnKeyUp (e);
-			SdlDotNet.Events.Add(new KeyboardEventArgs((SdlDotNet.Key)e.KeyCode, (ModifierKeys)e.Modifiers, false));
-		}
-
 		private static MouseButton ConvertMouseButtons(MouseEventArgs e)
 		{
 			if (e.Button == MouseButtons.Left)
