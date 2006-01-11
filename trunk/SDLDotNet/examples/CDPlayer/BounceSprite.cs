@@ -83,23 +83,27 @@ namespace SdlDotNet.Examples
 				if (this.X < bounds.Left)
 				{
 					dx = (Math.Abs(this.dx));
+					this.X = bounds.Left;
 				}
 
 				// Bounce off the top
 				if (this.Y < bounds.Top)
 				{
 					dy = (Math.Abs(this.dy));
+					this.Y = bounds.Top;
 				}
 
 				// Bounce off the bottom
 				if ((this.Y + this.Height) > bounds.Bottom)
 				{
 					dy = -1*(Math.Abs(this.dy));
+					this.Y = bounds.Bottom - this.Height;
 				}
 				// Bounce off the right
 				if (this.X + this.Width > bounds.Right)
 				{
 					dx = -1*(Math.Abs(this.dx));
+					this.X = bounds.Right - this.Width;
 				}
 			}
 		}
@@ -173,6 +177,7 @@ namespace SdlDotNet.Examples
 				this.Y += args.RelativeY;
 			}
 		}
+
 		#endregion Event Update Methods
 
 		/// <summary>

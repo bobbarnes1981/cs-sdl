@@ -56,7 +56,6 @@ namespace SdlDotNet
 		/// <param name="handle"></param>
 		internal Surface(IntPtr handle) 
 		{
-			
 			this.Handle = handle;
 		}
 
@@ -111,7 +110,6 @@ namespace SdlDotNet
 		/// </summary> 
 		public Surface(string file)
 		{
-			
 			this.Handle = SdlImage.IMG_Load(file);
 			if (this.Handle == IntPtr.Zero)
 			{
@@ -142,7 +140,6 @@ namespace SdlDotNet
 		/// <param name="height">Height of surface</param>
 		public Surface(int width, int height)
 		{
-			
 			this.Handle = 
 				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
 			if (this.Handle == IntPtr.Zero)
@@ -159,7 +156,6 @@ namespace SdlDotNet
 		/// </param>
 		public Surface(byte[] array)
 		{
-			
 			this.Handle = 
 				SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
 			if (this.Handle == IntPtr.Zero) 
@@ -180,8 +176,6 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("bitmap");
 			}
-			
-			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
 			this.Handle = 
