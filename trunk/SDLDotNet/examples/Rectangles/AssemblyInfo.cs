@@ -23,6 +23,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
+using System.Resources;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -38,7 +39,8 @@ using System.Security.Permissions;
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]		
+[assembly: AssemblyCulture("")]
+[assembly: NeutralResourcesLanguageAttribute("en-US")]		
 
 //
 // Version information for an assembly consists of the following four values:
