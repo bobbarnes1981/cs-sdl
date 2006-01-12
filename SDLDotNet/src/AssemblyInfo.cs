@@ -39,7 +39,7 @@ using System.Resources;
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
 [assembly: AssemblyVersion("4.0.2.0")]
 [assembly: AssemblyCulture("")]		
-//[assembly: NeutralResourcesLanguageAttribute("en-US")]
+[assembly: NeutralResourcesLanguageAttribute("en-US")]
 
 //
 // Version information for an assembly consists of the following four values:
@@ -49,12 +49,15 @@ using System.Resources;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Revision and Build Numbers 
+// You can specify all the values or you can default the Revision 
+// and Build Numbers 
 // by using the '*' as shown below:
 
 //
-// In order to sign your assembly you must specify a key to use. Refer to the 
-// Microsoft .NET Framework documentation for more information on assembly signing.
+// In order to sign your assembly you must specify a key to use. 
+// Refer to the 
+// Microsoft .NET Framework documentation for more information on 
+// assembly signing.
 //
 // Use the attributes below to control which key is used for signing. 
 //

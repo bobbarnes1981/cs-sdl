@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
+using System.Resources;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -40,6 +41,7 @@ using System.Security.Permissions;
 [assembly: AssemblyVersion("0.2.*")]	
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
+[assembly: NeutralResourcesLanguageAttribute("en-US")]
 
 //
 // Version information for an assembly consists of the following four values:
