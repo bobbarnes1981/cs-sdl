@@ -183,6 +183,7 @@
 		<exclude name="${examples.dir}/**/${bin.dir}/**" />
 		<include name="extras/**" />
 		<exclude name="extras/Gui/**" />
+		<exclude name="extras/PhysFs/**" />
 		<exclude name="extras/**/*.snk" />
 		<exclude name="extras/**/*j.user" />
 		<exclude name="extras/**/${obj.dir}/**" />
