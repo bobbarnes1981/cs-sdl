@@ -1,0 +1,11 @@
+Rectangles.csproj.user
+bin
+obj
+build
+gc.log
+*.prjx
+*.xml
+*.csproj
+*.mdp
+*.counters
+PhysFsTest.csproj.user
