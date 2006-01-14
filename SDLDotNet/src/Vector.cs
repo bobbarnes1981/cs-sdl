@@ -172,12 +172,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a new vector based on the given length and direction (in radians).
 		/// </summary>
-		/// <param name="directionRad">The direction of the vector in radians.</param>
+		/// <param name="directionRadians">The direction of the vector in radians.</param>
 		/// <param name="length">The length of the vector.</param>
 		/// <returns>The newly created vector.</returns>
-		public static Vector FromDirection(float directionRad, float length)
+		public static Vector FromDirection(float directionRadians, float length)
 		{
-			Vector vec = new Vector(directionRad);
+			Vector vec = new Vector(directionRadians);
 			vec.Length = length;
 			return vec;
 		}
@@ -210,11 +210,11 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates a new vector based on the given direction (in radians) with a length of 1.
 		/// </summary>
-		/// <param name="directionRad">The direction of the vector in radians.</param>
+		/// <param name="directionRadians">The direction of the vector in radians.</param>
 		/// <returns>The newly created vector.</returns>
-		public static Vector FromDirection(float directionRad)
+		public static Vector FromDirection(float directionRadians)
 		{
-			Vector vec = new Vector(directionRad);
+			Vector vec = new Vector(directionRadians);
 			vec.Length = 1;
 			return vec;
 		}

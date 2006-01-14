@@ -350,6 +350,7 @@ namespace SdlDotNet.Sprites
 				{
 					if (disposing)
 					{
+						m_Timer.Dispose();
 					}
 					this.disposed = true;
 				}

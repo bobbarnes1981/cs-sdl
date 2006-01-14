@@ -36,7 +36,7 @@ namespace SdlDotNet.Examples
 	/// <p>Written by David Hudson (jendave@yahoo.com)</p>
 	/// </remarks>
 	#endregion Class Documentation
-	public class MoviePlayer 
+	public class MoviePlayer : IDisposable
 	{		
 		Movie movie;
 
@@ -108,5 +108,34 @@ namespace SdlDotNet.Examples
 				Events.QuitApplication();
 			}
 		}
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks>Destroys managed and unmanaged objects</remarks>
+		public void Dispose() 
+		{
+			Dispose(true);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					movie.Dispose();
+				}
+				this.disposed = true;
+			}
+		}
+
+		#endregion
 	}
 }
