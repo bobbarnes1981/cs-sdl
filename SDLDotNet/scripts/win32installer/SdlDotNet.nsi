@@ -193,6 +193,7 @@ Section "Examples" SecExamples
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\bin\examples\MoviePlayer.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\NeHe.lnk" "$INSTDIR\bin\examples\NeHe.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleExample.lnk" "$INSTDIR\bin\examples\ParticlesExample.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\PhysFsTest.lnk" "$INSTDIR\bin\examples\PhysFsTest.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Rectangles.lnk" "$INSTDIR\bin\examples\Rectangles.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\RedBook.lnk" "$INSTDIR\bin\examples\RedBook.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SimpleGame.lnk" "$INSTDIR\bin\examples\SimpleGame.exe"
@@ -201,11 +202,9 @@ Section "Examples" SecExamples
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Triad.lnk" "$INSTDIR\bin\examples\Triad.exe"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.chm"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Windows Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Windows.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Particles.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet\index.html"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet.Particles\index.html"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Windows HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet.Windows\index.html"
   
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples"
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}_Tutorials.url" "InternetShortcut" "URL" "${PRODUCT_TUTORIALS_WEB_SITE}"
@@ -406,6 +405,5 @@ Function un.GACUnInstall
   nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "Tao.Sdl"'
   nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet"'
   nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet.Particles"'
-  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet.Windows"'
 
 FunctionEnd
