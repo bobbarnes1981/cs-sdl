@@ -1,10 +1,27 @@
-This release fixes numerous bugs in the library, particularly in the Events class. The Events loop now supports OpenGL applications better. OpenGL attributes can now be accessed using properties. User-defined events work much better. Creating Resizable and OpenGL windows is easier. All of the OpenGL Red Book examples have been ported to SDL.NET and a Wiki-version of OpenGL Red Book was added to the SDL.NET website.
+This release fixes numerous bugs in the library including a Surface rotation memory leak and a Surface initialization problem that affected performance. The SurfaceControl is much more stable and is no longer contained in a separate library. A new example using Tao.PhysFs that reads images from zip files was added.
 
 Documentation and downloads are available at http://cs-sdl.sourceforge.net.
 
 A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changelog
 
 SDL.NET is licensed under the LGPL.
+
+===4.0.2===
+David Hudson 14 Jan 2006
+* Surface.CreateRotatedSurface was not copying AlphaBlending to the new Surface.
+* Rotating the Surface no longer uses anti-aliasing by default.
+* Fixed huge memory leak in Surface Rotating methods.
+* Surface.GetPixel() and Surface.DrawPixel() are now implemented for 24-bit surfaces.
+* Added a OnResize() to SurfaceControl.
+* CDPlayer demo can now be resized and the bouncing ball will respond to the new size of the SurfaceControl.
+* Optimized Surface.Bitmap.
+* MusicCollection added to encapsulate a playlist of music.
+* CloseHandle() catches and NullReferenceException if the handle of the class does not exist.
+* Fixed performance problem introduced in 4.0.1.
+* Minor bug fixes in ChannelCollection.
+* Static factory Vector.FromDirection for fast Vector creation (PaulA and dave).
+* SurfaceControl is much more stable and now part of SdlDotNet.dll instead of a separate dll.
+* Included a new example that uses Tao.PhysFs to read an image from a zip file.
 
 ===4.0.1===
 David Hudson 16 Dec 2005 

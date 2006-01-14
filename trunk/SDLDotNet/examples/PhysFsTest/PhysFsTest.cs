@@ -51,6 +51,8 @@ namespace SdlDotNet.Examples
 		{
 			// setup SDL.NET
 			Video.SetVideoModeWindow(400, 300);
+			Video.WindowIcon();
+			Video.WindowCaption = "SDL.NET - PhysFsTest";
 			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
 			Events.Tick += new TickEventHandler(Events_Tick);
 			Events.Fps = 30;
