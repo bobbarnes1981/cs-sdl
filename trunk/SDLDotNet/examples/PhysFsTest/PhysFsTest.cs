@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// Summary description for PhysFsTest.
 	/// </summary>
-	public class PhysFsTest
+	public class PhysFsTest : IDisposable
 	{
 		private Surface surf;
 		string data_directory = @"Data/";
@@ -116,6 +116,35 @@ namespace SdlDotNet.Examples
 
 			Video.Screen.Flip();
 		}
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks>Destroys managed and unmanaged objects</remarks>
+		public void Dispose() 
+		{
+			Dispose(true);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					surf.Dispose();
+				}
+				this.disposed = true;
+			}
+		}
+
+		#endregion
 	}
 } 
 
