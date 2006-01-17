@@ -269,13 +269,13 @@
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>-->
-	<ifnot test="${framework::get-runtime-framework() == 'mono-1.0'}">
+	<if test="${platform::is-win32()}">
 	    <copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/win32deps">
 		<fileset basedir="${project.main.dir}/${lib.dir}/win32deps">
 		    <include name="**"/>
 		</fileset>
 	    </copy>
-	</ifnot>
+	</if>
 	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}/${bin.dir}/${examples.dir}" flatten="true">
 	    <fileset>
 		<include name="examples/**/*.exe" />
@@ -292,7 +292,7 @@
     <!-- create zip file -->
     <target name="zip" description="zip/gzip files">
 	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}-${release.version}"/>
-	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
+	<if test="${platform::is-unix()}">
 	    <tar destfile="${project.zip-path}.tar.gz" compression="GZip">
 		<fileset basedir="${bin.dir}">
 		    <include name="${project.zip-path}/bin/**" />
@@ -308,7 +308,7 @@
 		</fileset>
 	    </tar>
 	</if>
-	<ifnot test="${framework::get-runtime-framework() == 'mono-1.0'}">
+	<if test="${platform::is-win32()}">
 	    <zip zipfile="${project.zip-path}.zip">
 		<fileset basedir="${bin.dir}">
 		    <include name="${project.zip-path}/bin/**" />
@@ -323,7 +323,7 @@
 		    <include name="${project.zip-path}/*" />	
 		</fileset>
 	    </zip>
-	</ifnot>
+	</if>
 	<echo message="Created '${project.config}' packages at ${project.zip-path}" />
     </target>
 </project>

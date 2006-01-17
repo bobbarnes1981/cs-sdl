@@ -13,7 +13,7 @@ namespace SdlDotNet.Tests
 	[TestFixture]
 	public class SdlTestImage
 	{
-		int init;
+		//int init;
 		int flags;
 		int bpp;
 		int width;
@@ -33,7 +33,7 @@ namespace SdlDotNet.Tests
 		public void Init()
 		{
 			Sdl.SDL_Quit();
-			init = Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO);
+			Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO);
 			flags = (Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT);
 			bpp = 16;
 			width = 640;

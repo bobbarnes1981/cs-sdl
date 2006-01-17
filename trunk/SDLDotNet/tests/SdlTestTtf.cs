@@ -13,7 +13,7 @@ namespace SdlDotNet.Tests
 	[TestFixture]
 	public class SdlTestTtf
 	{
-		int init;
+		//int init;
 		int flags;
 		int bpp;
 		int width;
@@ -35,7 +35,7 @@ namespace SdlDotNet.Tests
 		{
 			this.Quit();
 			SdlTtf.TTF_Init();
-			init = Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
+			Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
 			flags = (Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT);
 			bpp = 16;
 			width = 640;
@@ -50,7 +50,7 @@ namespace SdlDotNet.Tests
 		private IntPtr VideoSetup()
 		{
 			this.Quit();
-			init = Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO);
+			Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO);
 			IntPtr surfacePtr;
 			//Assert.IsNotNull(surfacePtr);
 			//Sdl.SDL_FreeSurface(surfacePtr);

@@ -9,18 +9,15 @@
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	<ifnot test="${build.debug}">
 	    <copy todir="${nant.project.basedir}/${build.dir}">
 		<fileset basedir="${nant.project.basedir}">
 		    <include name="${nant.project.name}.snk"/>
 		</fileset>
 	    </copy>
-	</ifnot>
 	<!-- build SDL.NET -->
 	<csc target="library" warnaserror="true" unsafe="true" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
 	    <sources failonempty="true">
 		<include name="**.cs" />
-		<!-- task currently does not work on Mono and is temporarily included in the NAnt.Win32 assembly -->
 	    </sources>
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
@@ -39,24 +36,8 @@
     </target>
     <target name="doc" description="Creates documentation.">
 	<property name="doc.target" value="" />
-	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
+	<if test="${platform::is-unix()}">
 	    <property name="doc.target" value="Web" />
-	    <!--Bug in Ubuntu NAnt 0.85 RC1 - You must copy the assemblies to one directory above the code-->
-	    <copy todir="${project.main.dir}/..">
-		<fileset basedir="${nant.project.basedir}/${build.dir}">
-		    <include name="${native.sdl}.dll"/>
-		    <include name="${nant.project.name}.dll" />
-		</fileset>
-	    </copy>
-	</if>
-	<if test="${framework::get-runtime-framework() == 'mono-2.0'}">
-	    <property name="doc.target" value="Web" />
-	    <copy todir="${project.main.dir}/..">
-		<fileset basedir="${nant.project.basedir}/${build.dir}">
-		    <include name="${native.sdl}.dll"/>
-		    <include name="${nant.project.name}.dll" />
-		</fileset>
-	    </copy>
 	</if>
 	<ndoc failonerror="true" verbose="true">
 	    <assemblies basedir="${nant.project.basedir}/${build.dir}">
