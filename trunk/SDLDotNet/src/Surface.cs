@@ -350,13 +350,35 @@ namespace SdlDotNet
 			} 
 			return this; 
 		}
+        
+        /// <summary>
+        /// Replaces the given color with a different color on the whole surface.
+        /// </summary>
+        /// <param name="original">The original color to be replaced.</param>
+        /// <param name="replacement">The new color to replace the original color.</param>
+        /// <returns>The surface.</returns>
+        public Surface ReplaceColor(Color original, Color replacement)
+        {
+            int colVal = this.GetColorValue(replacement);
+            for (int x = 0; x < this.Width; x++)
+            {
+                for (int y = 0; y < this.Height; y++)
+                {
+                    if (this.GetPixel(x, y) == original)
+                    {
+                        this.DrawPixel(x, y, colVal);
+                    }
+                }
+            }
+            return this;
+        }
 
-		/// <summary>
-		/// Draws a rectangle onto the surface
-		/// </summary>
-		/// <param name="rectangle">The rectangle coordinates</param>
-		/// <param name="color">The color to draw</param>
-		public Rectangle Fill(System.Drawing.Rectangle rectangle,
+        /// <summary>
+        /// Draws a rectangle onto the surface
+        /// </summary>
+        /// <param name="rectangle">The rectangle coordinates</param>
+        /// <param name="color">The color to draw</param>
+        public Rectangle Fill(System.Drawing.Rectangle rectangle,
 			System.Drawing.Color color) 
 		{
 			if (this.disposed)
@@ -1465,6 +1487,52 @@ namespace SdlDotNet
 				GC.KeepAlive(this);
 			}
 		}
+
+        /// <summary>
+        /// Draws a pixel to this surface using the color value to speed things up - uses 1,2 or 4 BytesPerPixel modes.
+        /// Call Lock() before calling this method.
+        /// </summary>
+        /// <param name="positionX">The x coordinate of where to plot the pixel</param>
+        /// <param name="positionY">The y coordinate of where to plot the pixel</param>
+        /// <param name="color">The color value of the pixel</param>
+        public void DrawPixel(int positionX, int positionY, int color)
+        {
+            if (positionX >= Width || positionX < 0)
+            {
+                return;
+            }
+            if (positionY >= Height || positionY < 0)
+            {
+                return;
+            }
+
+            if (this.disposed)
+            {
+                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+            }
+            int pixelColorValueInt;
+
+            switch (this.PixelFormat.BytesPerPixel)
+            {
+                case 1: // 8-bpp
+                    byte pixelColorValueByte = (byte)color;
+                    Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY * this.SurfaceStruct.pitch + positionX), pixelColorValueByte);
+                    break;
+                case 2: // 15-bpp or 16-bpp
+                    short pixelColorValueShort = (short)color;
+                    Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY * this.SurfaceStruct.pitch + 2 * positionX), pixelColorValueShort);
+                    break;
+                case 3: // 24-bpp mode
+                    pixelColorValueInt = color;
+                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY * this.SurfaceStruct.pitch + 3 * positionX)), pixelColorValueInt);
+                    break;
+                case 4: // 32-bpp mode
+                    pixelColorValueInt = color;
+                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY * this.SurfaceStruct.pitch + 4 * positionX)), pixelColorValueInt);
+                    break;
+            }
+        }
+
 
 		/// <summary>
 		/// Draws a pixel to this surface - uses 1,2 or 4 BytesPerPixel modes.
