@@ -15,7 +15,7 @@ namespace SdlDotNet.Tests
 	[TestFixture]
 	public class SdlTestVideo
 	{
-		int init;
+		//int init;
 		int bpp;
 		int width;
 		int height;
@@ -26,7 +26,7 @@ namespace SdlDotNet.Tests
 		[SetUp]
 		public void Init()
 		{
-			init = Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO);
+			Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO);
 			//flags = (Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT);
 			bpp = 16;
 			width = 640;
@@ -314,7 +314,7 @@ namespace SdlDotNet.Tests
 		public void ListModes()
 		{
 			Sdl.SDL_Quit();
-			init = Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO);
+			Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO);
 			IntPtr format = IntPtr.Zero;
 			Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, Sdl.SDL_FULLSCREEN|Sdl.SDL_HWSURFACE);
 			Console.WriteLine("ListModes: " + rects.Length);

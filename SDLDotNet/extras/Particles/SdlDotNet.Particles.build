@@ -36,10 +36,7 @@
     </target>
     <target name="doc" description="Creates documentation.">
 	<property name="doc.target" value="" />
-	<if test="${framework::get-runtime-framework() == 'mono-1.0'}">
-	    <property name="doc.target" value="Web" />
-	</if>
-	<if test="${framework::get-runtime-framework() == 'mono-2.0'}">
+	<if test="${platform::is-unix()}">
 	    <property name="doc.target" value="Web" />
 	</if>
 	<ndoc failonerror="true" verbose="true">
