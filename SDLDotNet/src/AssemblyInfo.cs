@@ -31,15 +31,18 @@ using System.Resources;
 // associated with an assembly.
 //
 [assembly: AssemblyTitle("SdlDotNet")]
+[assembly: AssemblyCopyright("Copyright ©2003-2006 David Hudson.  All rights reserved.")]
 [assembly: AssemblyDescription(".NET Bindings for SDL")]
+[assembly: AssemblyDefaultAlias("SdlDotNet")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The SDL.NET Project")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("David Hudson")]
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
-[assembly: AssemblyVersion("4.0.2.0")]
+[assembly: AssemblyVersion("4.0.3.0")]
 [assembly: AssemblyCulture("")]		
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
+[assembly: AssemblyFileVersion("4.0.3.0")]
+[assembly: AssemblyInformationalVersion("4.0.3.0")]
 
 //
 // Version information for an assembly consists of the following four values:

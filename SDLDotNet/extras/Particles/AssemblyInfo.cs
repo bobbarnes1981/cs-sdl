@@ -31,11 +31,12 @@ using System.Resources;
 // associated with an assembly.
 //
 [assembly: AssemblyTitle("SdlDotNet.Particles")]
+[assembly: AssemblyCopyright("Copyright ©2005 Rob Loach.  All rights reserved.")]
 [assembly: AssemblyDescription("SDL.NET Particle Engine")]
+[assembly: AssemblyDefaultAlias("SdlDotNet.Particles")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The SDL.NET Project")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Rob Loach")]
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
 [assembly: AssemblyCulture("")]		
 [assembly: ComVisible(false)]
@@ -53,7 +54,7 @@ using System.Resources;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("0.1.*")]
+[assembly: AssemblyVersion("1.0.0.*")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

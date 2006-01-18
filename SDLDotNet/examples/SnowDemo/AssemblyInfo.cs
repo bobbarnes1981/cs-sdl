@@ -33,7 +33,7 @@ using System.Resources;
 [assembly: AssemblyTitle("SnowDemo")]
 [assembly: AssemblyDescription("My first cool demo")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Nobody, just me, Sijmen Mulder")]
+[assembly: AssemblyCompany("Sijmen Mulder")]
 [assembly: AssemblyProduct("SnowDemo")]
 [assembly: AssemblyCopyright("Copyright (c) 2003 Sijmen Mulder")]
 [assembly: AssemblyTrademark("")]
