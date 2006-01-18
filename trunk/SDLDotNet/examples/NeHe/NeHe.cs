@@ -130,7 +130,7 @@ namespace SdlDotNet.Examples
 			// 
 			this.AcceptButton = this.startButton;
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(378, 395);
+			this.ClientSize = new System.Drawing.Size(378, 405);
 			this.Controls.Add(this.startButton);
 			this.Controls.Add(this.lstExamples);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
