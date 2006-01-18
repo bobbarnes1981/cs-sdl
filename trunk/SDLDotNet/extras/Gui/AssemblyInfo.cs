@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
+using System.Resources;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -31,13 +32,15 @@ using System.Security.Permissions;
 [assembly: AssemblyTitle("SdlDotNet.Gui")]
 [assembly: AssemblyDescription("SDL.NET Gui")]
 [assembly: AssemblyConfiguration("")]
+[assembly: AssemblyDefaultAlias("SdlDotNet.Gui")]
 [assembly: AssemblyCompany("The SDL.NET Project")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Rob Loach")]
+[assembly: AssemblyCopyright("Copyright ©2005 Rob Loach.  All rights reserved.")]
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
 [assembly: AssemblyCulture("")]		
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
+[assembly: NeutralResourcesLanguageAttribute("en-US")]
 
 //
 // Version information for an assembly consists of the following four values:
@@ -50,7 +53,7 @@ using System.Security.Permissions;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.*")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

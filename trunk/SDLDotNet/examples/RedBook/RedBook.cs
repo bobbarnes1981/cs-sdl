@@ -97,14 +97,14 @@ namespace SdlDotNet.Examples
 			// 
 			this.lstExamples.Location = new System.Drawing.Point(8, 8);
 			this.lstExamples.Name = "lstExamples";
-			this.lstExamples.Size = new System.Drawing.Size(360, 537);
+			this.lstExamples.Size = new System.Drawing.Size(360, 342);
 			this.lstExamples.Sorted = true;
 			this.lstExamples.TabIndex = 0;
 			this.lstExamples.DoubleClick += new System.EventHandler(this.startButton_Click);
 			// 
 			// startButton
 			// 
-			this.startButton.Location = new System.Drawing.Point(152, 560);
+			this.startButton.Location = new System.Drawing.Point(144, 360);
 			this.startButton.Name = "startButton";
 			this.startButton.TabIndex = 1;
 			this.startButton.Text = "Start Demo";
@@ -132,7 +132,7 @@ namespace SdlDotNet.Examples
 			// 
 			this.AcceptButton = this.startButton;
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(378, 599);
+			this.ClientSize = new System.Drawing.Size(378, 395);
 			this.Controls.Add(this.startButton);
 			this.Controls.Add(this.lstExamples);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
