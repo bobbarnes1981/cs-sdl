@@ -38,7 +38,7 @@ namespace SdlDotNet
 		private byte alphaValue;
 		private bool disposed;
 		private Color transparentColor;
-		MemoryStream stream = new MemoryStream();
+		//MemoryStream stream = new MemoryStream();
 
 		// Bmp files have a header of 54 bytes. 
 		// This is used to turn the Surface into a byte array to 
@@ -176,6 +176,7 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("bitmap");
 			}
+			MemoryStream stream = new MemoryStream();
 			bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
 			byte[] arr = stream.ToArray();
 			this.Handle = 
@@ -218,11 +219,11 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
-						if (this.stream != null)
-						{
-							stream.Close();
-							this.stream = null;
-						}
+//						if (this.stream != null)
+//						{
+//							stream.Close();
+//							this.stream = null;
+//						}
 					}
 					this.disposed = true;
 				}
@@ -302,7 +303,8 @@ namespace SdlDotNet
 				{
 					throw SdlException.Generate();
 				}
-				stream.Write(arr, 0, arr.Length);
+				MemoryStream stream = new MemoryStream(arr, 0, arr.Length);
+				//stream.Write(arr, 0, arr.Length);
 				return (Bitmap)Bitmap.FromStream(stream);
 			}
 		}
