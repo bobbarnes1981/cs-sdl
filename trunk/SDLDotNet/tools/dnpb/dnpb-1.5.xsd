@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <xs:schema elementFormDefault="qualified" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://dnpb.sourceforge.net/schemas/dnpb-1.4.xsd"
-	xmlns="http://dnpb.sourceforge.net/schemas/dnpb-1.4.xsd"
+	targetNamespace="http://dnpb.sourceforge.net/schemas/dnpb-1.5.xsd"
+	xmlns="http://dnpb.sourceforge.net/schemas/dnpb-1.5.xsd"
 >
 	<xs:annotation>
 		<xs:documentation>
 			Copyright (c) 2004-2005 Matthew Holmes (calefaction at houston . rr . com), Dan Moorehead (dan05a at gmail . com)
 
-			.NET Pre-Build is a cross-platform XML-driven pre-build tool which
+			.NET Prebuild is a cross-platform XML-driven pre-build tool which
 			allows developers to easily generate project or make files for major
 			IDE's and .NET development tools including: Visual Studio .NET 2002 and
 			2003, SharpDevelop, MonoDevelop, and NAnt.
@@ -60,6 +60,7 @@
 			</xs:sequence>
 
 			<xs:attribute name="name" type="xs:string" use="required" />
+			<xs:attribute name="activeConfig" type="xs:string" default="Debug" />
 			<xs:attribute name="path" type="xs:string" default="" />
 		</xs:complexType>
 	</xs:element>
@@ -84,6 +85,7 @@
 			</xs:sequence>
 
 			<xs:attribute name="name" type="xs:string" use="required" />
+			<xs:attribute name="filterGroups" type="xs:string" default="" />
 			<xs:attribute name="path" type="xs:string" default="" />
 			<xs:attribute name="icon" type="xs:string" default="" />
 
@@ -149,6 +151,7 @@
 				<xs:element name="WarningsAsErrors" type="xs:boolean" minOccurs="0" />
 				<xs:element name="SupressWarnings" type="xs:string" minOccurs="0" />
 				<xs:element name="OutputPath" type="xs:string" minOccurs="0" />
+				<xs:element name="GenerateXmlDocFile" type="xs:boolean" minOccurs="0" />
 				<xs:element name="XmlDocFile" type="xs:string" minOccurs="0" />
 				<xs:element name="DebugInformation" type="xs:boolean" minOccurs="0" />
 				<xs:element name="RegisterCOMInterop" type="xs:boolean" minOccurs="0" />
@@ -207,3 +210,5 @@
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
+
+

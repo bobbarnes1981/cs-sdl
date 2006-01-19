@@ -1,2 +1,2 @@
 @ECHO OFF
-..\tools\dnpb\dnpb.exe /target sharpdev /file ..\SdlDotNet.dnpb /pause
+..\tools\dnpb\Prebuild.exe /target sharpdev /file ..\prebuild.xml /pause

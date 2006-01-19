@@ -1,2 +1,2 @@
 @ECHO OFF
-..\tools\dnpb\dnpb.exe /target vs2003 /file ..\SdlDotNet.dnpb /pause
+..\tools\dnpb\Prebuild.exe /target vs2003 /file ..\prebuild.xml /pause
