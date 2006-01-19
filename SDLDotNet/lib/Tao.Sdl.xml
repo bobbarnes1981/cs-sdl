@@ -4776,6 +4776,76 @@
             <param name="size"></param>
             <returns>IntPtr to SDL_RWops</returns>
         </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_RWFromFP(System.IntPtr,System.Int32)">
+            <summary>
+            SDL_RWFromFP creates a new SDL_RWops structure from a file pointer, opened with stdio. If autoclose is nonzero, the file will be automatically closed when the RWops structure is closed.
+            </summary>
+            <remarks>This is not available under Win32, since files opened in an application on that platform cannot be used by a dynamically linked library.</remarks>
+            <param name="fp"></param>
+            <param name="autoclose"></param>
+            <returns>Returns pointer to a new RWops structure, or NULL if it fails.</returns>
+            <example>
+            <code>
+            FILE *fp;
+            SDL_RWops *rw;
+            
+            fp = fopen("myfile.dat", "rb");
+            rw = SDL_RWFromFP(fp, 1);
+            
+            // Do things with rw...
+            SDL_RWclose(rw); // Automatically does an fclose(fp)
+            </code></example>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_RWFromFile(System.String,System.String)"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_RWFromConstMem(System.IntPtr,System.Int32)">
+            <summary>
+            Prepares a constant memory area for use with RWops.
+            </summary>
+            <remarks><see cref="M:Tao.Sdl.Sdl.SDL_RWFromConstMem(System.IntPtr,System.Int32)"/> sets up a RWops struct based on a memory area of a certain size. It assumes the memory area is not writable.</remarks>
+            <param name="mem"></param>
+            <param name="size"></param>
+            <returns>Returns a pointer to a new RWops struct, or NULL if it fails.</returns>
+            <example>
+            <code>
+            char bitmap[] = {
+            	66, 77, 86, 2, 0, 0, 0, 0 ...
+            }
+             SDL_RWops *rw;
+             SDL_Surface *img;
+             
+             rw = SDL_RWFromConstMem(bitmap, sizeof(bitmap));
+             img = SDL_LoadBMP_RW(rw, 1); // Automatically frees the RWops struct for us
+             
+             //Do something with img...
+            </code></example>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_RWFromMem(System.Byte[],System.Int32)"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_AllocRW">
+            <summary>
+            Allocates an empty, unpopulated SDL_RWops structure.
+            </summary>
+            <remarks>SDL_AllocRW allocates an empty, unpopulated SDL_RWops structure. You must fill out the fields yourself.</remarks>
+            <returns>Returns a pointer to the allocated memory on success, or NULL on error.
+            <p>You must free any memory allocated with <see cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/> with <see cref="M:Tao.Sdl.Sdl.SDL_FreeRW(System.IntPtr)"/>. Depending on your operating system and compiler, there may be a difference between the malloc() and free() your program uses and the versions SDL calls internally. Trying to mix the two can cause crashing such as segmentation faults.</p></returns>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_FreeRW(System.IntPtr)">
+            <summary>
+            Frees an SDL_RWops structure allocated by <see cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>.
+            </summary>
+            <remarks><see cref="M:Tao.Sdl.Sdl.SDL_FreeRW(System.IntPtr)"/> frees an SDL_RWops structure previously allocated by <see cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>. Only use it on memory allocated by <see cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>. Any extra memory allocated during creation of the RWops is not freed by <see cref="M:Tao.Sdl.Sdl.SDL_FreeRW(System.IntPtr)"/>; the programmer must be responsible for it.</remarks>
+            <param name="context"></param>
+            <example>
+            <code>
+            #include "SDL_rwops.h"
+            void dumb_example()
+            {
+                SDL_RWops *rw=SDL_AllocRW();
+                if(rw==NULL) return;
+                SDL_FreeRW(rw);
+            }
+            </code></example>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
         <member name="M:Tao.Sdl.Sdl.SDL_GetWMInfo(Tao.Sdl.Sdl.SDL_SysWMinfo_Unix@)">
             <summary>
             Gives you custom hooks into the window manager information.
