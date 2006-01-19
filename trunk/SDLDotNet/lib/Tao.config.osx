@@ -7,4 +7,6 @@
 	<dllmap dll="smpeg.dll" target="libsmpeg.dylib" />
 	<dllmap dll="SDL_gfx.dll" target="libSDL_gfx.dylib" />
 	<dllmap dll="libCocoaSharpGlue.dylib" target="/Library/Frameworks/Mono.framework/Libraries/libCocoaSharpGlue.dylib" />
+	<dllmap dll="opengl32.dll" target="/System/Library/Frameworks/OpenGL.framework/OpenGL" />
+	<dllmap dll="glu32.dll" target="/System/Library/Frameworks/OpenGL.framework/Libraries/libGLU.dylib" />
 </configuration>
