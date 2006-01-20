@@ -53,7 +53,7 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\lib"/>
 	    <Files>
-		<File buildAction="EmbeddedResource">Windows/SurfaceControl.bmp</File>
+		<Match path="." pattern="*.bmp" buildAction="EmbeddedResource" recurse="true"/>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
