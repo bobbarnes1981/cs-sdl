@@ -83,7 +83,7 @@ namespace SdlDotNet.Sprites
 						rects.Add(this[i].RectangleDirty);
 					}
 				}
-				this[i].RectangleDirty = this[i].Rectangle;
+				this[i].RectangleDirty = Rectangle.Intersect(this[i].Rectangle, destination.Rectangle);
 			}
 			return rects;
 		}
