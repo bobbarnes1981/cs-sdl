@@ -23,7 +23,7 @@
 	</Configuration>
 	<Files>
 	    <File buildAction="Content">SdlDotNet.build</File>
-	    <File buildAction="Content">SdlDotNet.dnpb</File>
+	    <File buildAction="Content">prebuild.xml</File>
 	</Files>
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
 	    <Configuration name="Debug">
@@ -53,7 +53,7 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="Tao.Sdl" localCopy="true" path="..\\lib"/>
 	    <Files>
-		<File buildAction="EmbeddedResource">Windows\\SurfaceControl.bmp</File>
+		<File buildAction="EmbeddedResource">Windows/SurfaceControl.bmp</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
