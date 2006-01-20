@@ -1,2 +1,2 @@
 #!/bin/sh
-./prebuild /target vs2003 /file ../prebuild.xml /pause
+../tools/dnpb/prebuild /target sharpdev /file ../prebuild.xml /pause
