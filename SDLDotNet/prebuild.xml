@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<DNPreBuild xmlns="http://dnpb.sourceforge.net/schemas/dnpb-1.4.xsd" version="1.4">
+<DNPreBuild xmlns="http://dnpb.sourceforge.net/schemas/dnpb-1.5.xsd" version="1.5">
     <Solution name="SdlDotNet">
 	<Configuration name="Debug">
 	    <Options>
