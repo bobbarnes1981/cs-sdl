@@ -1,2 +1,2 @@
 #!/bin/sh
-../tools/dnpb/prebuild /target sharpdev /file ../prebuild.xml /pause
+../tools/dnpb/prebuild /target monodev /file ../prebuild.xml /pause
