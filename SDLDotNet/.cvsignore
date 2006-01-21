@@ -14,3 +14,4 @@ cvs2cl.pl
 *.swp
 *.mdp
 *.mds
+*.pidb

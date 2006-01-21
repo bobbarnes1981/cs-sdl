@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/bin/mono ./Prebuild.exe "$@"
+exec /usr/bin/mono ../tools/dnpb/Prebuild.exe "$@"

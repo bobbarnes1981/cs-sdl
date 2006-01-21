@@ -9,3 +9,4 @@ SdlDotNet.csproj.user
 *.csproj
 *.swp
 *.mdp
+*.pidb
