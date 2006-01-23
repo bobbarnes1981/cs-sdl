@@ -87,7 +87,7 @@ using System.Resources;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 #if NET
-[assembly: AssemblyKeyFile("..\\..\\..\\..\\src\\SdlDotNet.snk")]
+[assembly: AssemblyKeyFile(@"../../../../src/SdlDotNet.snk")]
 #else
 [assembly: AssemblyKeyFile(@"SdlDotNet.snk")]
 #endif

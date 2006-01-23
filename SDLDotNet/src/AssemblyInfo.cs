@@ -24,6 +24,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Resources;
+using System.IO;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -90,7 +91,7 @@ using System.Resources;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyDelaySign(false)]
 #if NET
-[assembly: AssemblyKeyFile("..\\..\\SdlDotNet.snk")]
+[assembly: AssemblyKeyFile(@"../../SdlDotNet.snk")]
 #else
 [assembly: AssemblyKeyFile(@"SdlDotNet.snk")]
 #endif
