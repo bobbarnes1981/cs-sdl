@@ -8,3 +8,4 @@ gc.log
 *.csproj
 *.mdp
 *.counters
+*.swp
