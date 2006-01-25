@@ -5,3 +5,4 @@ AudioExample.mdp
 AudioExample.csproj.user
 AudioExample.prjx
 bin
+*.swp
