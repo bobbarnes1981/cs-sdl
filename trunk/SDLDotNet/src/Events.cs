@@ -246,7 +246,7 @@ namespace SdlDotNet
 			Mixer.Close();
 			Timer.Close();
 			Video.Close();
-			quitFlag = true;
+			//quitFlag = true;
 		}
 
 		/// <summary>
@@ -377,7 +377,7 @@ namespace SdlDotNet
 				events, 
 				events.Length, 
 				Sdl.SDL_ADDEVENT, 
-				(int)EventMask.AllEvents);
+				(int)EventMask.None);
 
 			if (result == (int)SdlFlag.Error)
 			{

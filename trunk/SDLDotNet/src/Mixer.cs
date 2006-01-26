@@ -61,7 +61,10 @@ namespace SdlDotNet
 		public static void Close() 
 		{
 			SdlMixer.Mix_CloseAudio();
-			Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
+			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != 0)
+			{
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
+			}
 		}
 
 		/// <summary>

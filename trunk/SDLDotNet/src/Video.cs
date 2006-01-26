@@ -46,7 +46,10 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Close() 
 		{
-			Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
+			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) != 0)
+			{
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
+			}
 		}
 
 		/// <summary>

@@ -40,7 +40,10 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Close() 
 		{
-			Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_TIMER);
+			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER) != 0)
+			{
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_TIMER);
+			}
 		}
 
 		/// <summary>
