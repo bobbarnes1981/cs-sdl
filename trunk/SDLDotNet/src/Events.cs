@@ -246,7 +246,7 @@ namespace SdlDotNet
 			Mixer.Close();
 			Timer.Close();
 			Video.Close();
-			//quitFlag = true;
+			quitFlag = true;
 		}
 
 		/// <summary>
@@ -880,7 +880,8 @@ namespace SdlDotNet
 		/// </summary>
 		public static void QuitApplication()
 		{
-			Events.AddEvent(new QuitEventArgs());
+			quitFlag = true;
+			//Events.AddEvent(new QuitEventArgs());
 			Events.Close();
 		}
 
