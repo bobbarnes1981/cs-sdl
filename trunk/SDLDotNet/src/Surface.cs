@@ -288,7 +288,7 @@ namespace SdlDotNet
 					typeof(Sdl.SDL_PixelFormat));
 			}
 		}
-
+		
 		/// <summary>
 		/// Creates a Bitmap representing the Surface.
 		/// </summary>
@@ -303,8 +303,6 @@ namespace SdlDotNet
 				{
 					throw SdlException.Generate();
 				}
-				//MemoryStream stream = new MemoryStream(arr, 0, arr.Length);
-				//stream.Write(arr, 0, arr.Length);
 				return (Bitmap)Bitmap.FromStream(new MemoryStream(arr, 0, arr.Length));
 			}
 		}
