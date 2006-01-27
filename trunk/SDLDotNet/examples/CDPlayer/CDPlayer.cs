@@ -51,6 +51,9 @@ namespace SdlDotNet.Examples
 		private SdlDotNet.Windows.SurfaceControl surfaceControl;
 		private System.Windows.Forms.Button buttonNext;
 		string data_directory = @"Data/";
+		private System.Windows.Forms.MainMenu mainMenu1;
+		private System.Windows.Forms.MenuItem menuItem1;
+		private System.Windows.Forms.MenuItem menuItem2;
 		string filepath = @"../../";
 
 		/// <summary>
@@ -151,6 +154,9 @@ namespace SdlDotNet.Examples
 			this.buttonNext = new System.Windows.Forms.Button();
 			this.buttonPrevious = new System.Windows.Forms.Button();
 			this.surfaceControl = new SdlDotNet.Windows.SurfaceControl();
+			this.mainMenu1 = new System.Windows.Forms.MainMenu();
+			this.menuItem1 = new System.Windows.Forms.MenuItem();
+			this.menuItem2 = new System.Windows.Forms.MenuItem();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -238,11 +244,29 @@ namespace SdlDotNet.Examples
 			this.surfaceControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 				| System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right)));
-			this.surfaceControl.Image = ((System.Drawing.Image)(resources.GetObject("surfaceControl.Image")));
 			this.surfaceControl.Location = new System.Drawing.Point(16, 136);
 			this.surfaceControl.Name = "surfaceControl";
 			this.surfaceControl.Size = new System.Drawing.Size(336, 224);
 			this.surfaceControl.TabIndex = 0;
+			this.surfaceControl.TabStop = false;
+			// 
+			// mainMenu1
+			// 
+			this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																					  this.menuItem1});
+			// 
+			// menuItem1
+			// 
+			this.menuItem1.Index = 0;
+			this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																					  this.menuItem2});
+			this.menuItem1.Text = "File";
+			// 
+			// menuItem2
+			// 
+			this.menuItem2.Index = 0;
+			this.menuItem2.Text = "Exit";
+			this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
 			// 
 			// CDPlayer
 			// 
@@ -259,6 +283,7 @@ namespace SdlDotNet.Examples
 			this.Controls.Add(this.comboBoxDrive);
 			this.Controls.Add(this.label1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Menu = this.mainMenu1;
 			this.Name = "CDPlayer";
 			this.Text = "SDL.NET - CD Player";
 			this.Load += new System.EventHandler(this.CDPlayer_Load);
@@ -278,12 +303,13 @@ namespace SdlDotNet.Examples
 
 		private static System.Random rand = new Random();
 		private SdlDotNet.Surface surf;
+		//RectangleCollection rects = new RectangleCollection();
 
 		private void Tick(object sender, SdlDotNet.TickEventArgs e)
 		{
 			surf.Fill(Color.Black);
 			surf.Blit(master);
-			this.surfaceControl.Image = surf.Bitmap;
+			this.surfaceControl.Blit(surf);
 		}
 
 		private void Quit(object sender, QuitEventArgs e)
@@ -427,5 +453,9 @@ namespace SdlDotNet.Examples
 				this.surfaceControl.Height);
 		}
 
+		private void menuItem2_Click(object sender, System.EventArgs e)
+		{
+			this.Close();		
+		}
 	}
 }

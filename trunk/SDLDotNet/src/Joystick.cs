@@ -185,7 +185,7 @@ namespace SdlDotNet
 					if (disposing)
 					{
 					}
-					CloseHandle();
+					//CloseHandle();
 					this.disposed = true;
 				}
 			}
