@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<DNPreBuild xmlns="http://dnpb.sourceforge.net/schemas/dnpb-1.6.xsd" version="1.6">
+<Prebuild xmlns="http://dnpb.sourceforge.net/schemas/dnpb-1.6.xsd" version="1.6">
     <Solution name="SdlDotNet">
 	<Configuration name="Debug">
 	    <Options>
@@ -55,6 +55,7 @@
 	    <Files>
 		<Match path="." pattern="*.bmp" buildAction="EmbeddedResource" recurse="true"/>
 		<Match path="." pattern="*.cs" recurse="true"/>
+		<Match path="." pattern="SurfaceControl.cs" recurse="true" subType="Component"/>
 	    </Files>
 	</Project>
 	<Project name="Rectangles" path="examples\\Rectangles" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Rectangles" assemblyName="Rectangles" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -150,6 +151,7 @@
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
+		<Match path="." pattern="CDPlayer.cs" recurse="true" subType="Form"/>
 	    </Files>
 	</Project>
 	<Project name="MoviePlayer" path="examples\\MoviePlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.MoviePlayer" assemblyName="MoviePlayer" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -590,6 +592,7 @@
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
+		<Match path="." pattern="NeHe.cs" recurse="true" subType="Form"/>
 	    </Files>
 	</Project>
 	<Project name="RedBook" path="examples\\RedBook" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.RedBook" assemblyName="RedBook" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -625,6 +628,7 @@
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
+		<Match path="." pattern="RedBook.cs" recurse="true" subType="Form"/>
 	    </Files>
 	</Project>
 	<Project name="PhysFsTest" path="examples\\PhysFsTest" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.PhysFsTest" assemblyName="PhysFsTest" rootNamespace="SdlDotNet.Examples" icon="App.ico">
@@ -660,4 +664,4 @@
 	    </Files>
 	</Project>
     </Solution>
-</DNPreBuild>
+</Prebuild>
