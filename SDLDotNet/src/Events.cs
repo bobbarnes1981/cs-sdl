@@ -354,9 +354,14 @@ namespace SdlDotNet
 		/// <param name="sdlEvent">Event to add to queue</param>
 		public static void Add(SdlEventArgs sdlEvent)
 		{
-			SdlEventArgs[] events = new SdlEventArgs[1];
-			events[0] = sdlEvent;
-			Add(events);
+//			SdlEventArgs[] events = new SdlEventArgs[1];
+//			events[0] = sdlEvent;
+//			Add(events);
+			Sdl.SDL_Event evt = sdlEvent.EventStruct;
+			if (Sdl.SDL_PushEvent(out evt) != (int) SdlFlag.Success)
+			{
+				throw SdlException.Generate();
+			}
 		}
 
 		/// <summary>
@@ -366,26 +371,26 @@ namespace SdlDotNet
 		/// <returns></returns>
 		public static void Add(SdlEventArgs[] sdlEvents)
 		{
-			Sdl.SDL_Event[] events = new Sdl.SDL_Event[sdlEvents.Length];
+			//Sdl.SDL_Event[] events = new Sdl.SDL_Event[sdlEvents.Length];
 			for (int i = 0; i < sdlEvents.Length; i++)
 			{
-				events[ i ] = sdlEvents[ i ].EventStruct;
+				Add(sdlEvents[ i ]);
 			}
-
-			int result = 
-				Sdl.SDL_PeepEvents(
-				events, 
-				events.Length, 
-				Sdl.SDL_ADDEVENT, 
-				(int)EventMask.None);
-
-			if (result == (int)SdlFlag.Error)
-			{
-				if (quitFlag == false)
-				{
-					throw SdlException.Generate();
-				}
-			}
+//
+//			int result = 
+//				Sdl.SDL_PeepEvents(
+//				events, 
+//				events.Length, 
+//				Sdl.SDL_ADDEVENT, 
+//				(int)EventMask.None);
+//
+//			if (result == (int)SdlFlag.Error)
+//			{
+//				if (quitFlag == false)
+//				{
+//					throw SdlException.Generate();
+//				}
+//			}
 		}
 
 		/// <summary>
@@ -869,11 +874,11 @@ namespace SdlDotNet
 
 		private static bool quitFlag;
 
-		//The app will exit if the 'x' in the window is clicked
-		private void OnQuit(object sender, QuitEventArgs e) 
-		{
-			quitFlag = true;
-		}
+//		//The app will exit if the 'x' in the window is clicked
+//		private void OnQuit(object sender, QuitEventArgs e) 
+//		{
+//			quitFlag = true;
+//		}
 
 		/// <summary>
 		/// Quits application by raising and quit event.
@@ -894,7 +899,7 @@ namespace SdlDotNet
 			lastTick = 0;
 			quitFlag = false;
 			Timer.Initialize();
-			Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
+			//Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
 			ThreadTicker();
 		}
 
@@ -977,7 +982,7 @@ namespace SdlDotNet
 					lastTime = currentTime;
 				}
 			}
-			Events.Close();
+			//Events.Close();
 		}
 		#endregion Thread Management
 	}

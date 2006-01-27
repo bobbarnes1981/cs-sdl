@@ -98,7 +98,8 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
 			// Sets the ticker to update OpenGL Context
-			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Tick += new TickEventHandler(this.Tick); 
+			Events.Quit += new QuitEventHandler(this.Quit);
 			//			// Sets the resize window event
 			//			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
 			// Set the Frames per second.
@@ -290,6 +291,11 @@ namespace SdlDotNet.Examples
 		{
 			Display();
 			Video.GLSwapBuffers();
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 
 		//		private void Resize (object sender, VideoResizeEventArgs e)

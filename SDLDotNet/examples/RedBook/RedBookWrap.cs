@@ -148,7 +148,8 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 
 			// Sets the ticker to update OpenGL Context
-			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Tick += new TickEventHandler(this.Tick); 
+			Events.Quit += new QuitEventHandler(this.Quit);
 
 			// Set the Frames per second.
 			Events.Fps = 60;
@@ -322,6 +323,11 @@ namespace SdlDotNet.Examples
 		{
 			Display();
 			Video.GLSwapBuffers();
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 
 		#endregion Event Handlers

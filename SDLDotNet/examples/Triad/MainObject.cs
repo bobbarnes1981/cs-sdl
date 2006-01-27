@@ -58,7 +58,8 @@ namespace SdlDotNet.Examples
 				new KeyboardEventHandler(this.KeyboardDown); 
 			Events.KeyboardUp += 
 				new KeyboardEventHandler(this.KeyboardUp); 
-			Events.Tick += new TickEventHandler(Tick);
+			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
 
 			board = new Scoreboard();
 			board.X = 600;
@@ -103,6 +104,11 @@ namespace SdlDotNet.Examples
 		private void KeyboardUp(object sender, KeyboardEventArgs e) 
 		{
 			grid.HandleSdlKeyUpEvent(e);
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 
 		[STAThread]

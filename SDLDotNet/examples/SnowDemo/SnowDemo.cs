@@ -101,14 +101,15 @@ namespace SdlDotNet.Examples
 			Video.WindowCaption = "SDL.NET - Snow Demo";
 			Initialize(250);
 			Events.KeyboardDown +=
-				new KeyboardEventHandler(this.OnKeyboardDown);
+				new KeyboardEventHandler(this.KeyboardDown);
 			Events.KeyboardDown +=
-				new KeyboardEventHandler(this.OnKeyboardDown);
-			Events.Tick += new TickEventHandler(this.OnTick);
+				new KeyboardEventHandler(this.KeyboardDown);
+			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
 			Events.Run();
 		}
 		
-		private void OnTick(object sender, TickEventArgs args)
+		private void Tick(object sender, TickEventArgs args)
 		{	
 			screen.Fill(Color.FromArgb(64, 175, 239));
 			screen.Blit(snowflakes);
@@ -122,7 +123,7 @@ namespace SdlDotNet.Examples
 			screen.Update();
 		}
 
-		private void OnKeyboardDown(object sender, KeyboardEventArgs e)
+		private void KeyboardDown(object sender, KeyboardEventArgs e)
 		{
 			if (e.Key == Key.Escape ||
 				e.Key == Key.Q)
@@ -130,6 +131,12 @@ namespace SdlDotNet.Examples
 				Events.QuitApplication();
 			}
 		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
+		}
+
 		#region IDisposable Members
 
 		private bool disposed;

@@ -316,6 +316,7 @@ namespace SdlDotNet.Examples
 		{
 			screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
 			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
 			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.KeyboardDown);
@@ -361,6 +362,11 @@ namespace SdlDotNet.Examples
 				Reshape();
 			}
 			Draw();
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 	}
 }
