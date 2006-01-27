@@ -117,7 +117,7 @@ namespace SdlDotNet
 				{
 				}
 				CloseHandle();
-				handle = IntPtr.Zero;
+				//handle = IntPtr.Zero;
 			}
 			this.disposed = true;
 		}

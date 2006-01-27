@@ -48,6 +48,15 @@ namespace SdlDotNet.Windows
 		public SurfaceControl()
 		{
 		}
+
+		/// <summary>
+		/// Copies surface to this surface
+		/// </summary>
+		/// <param name="surface">surface to copy onto control</param>
+		public void Blit(Surface surface)
+		{
+			this.Image = surface.Bitmap;
+		}
 		
 		/// <summary>
 		/// Raises the OnResize event
@@ -58,6 +67,12 @@ namespace SdlDotNet.Windows
 			base.OnResize (e);
 			SdlDotNet.Events.Add(new VideoResizeEventArgs(this.Width,this.Height));
 		}
+
+//		protected override void OnPaint(PaintEventArgs e)
+//		{
+//			e.Graphics.DrawImage(this.Image,new Point(0,0));
+//			//base.OnPaint (e);
+//		}
 
 		/// <summary>
 		/// Raises the SizeChanged event

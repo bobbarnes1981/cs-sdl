@@ -303,9 +303,9 @@ namespace SdlDotNet
 				{
 					throw SdlException.Generate();
 				}
-				MemoryStream stream = new MemoryStream(arr, 0, arr.Length);
+				//MemoryStream stream = new MemoryStream(arr, 0, arr.Length);
 				//stream.Write(arr, 0, arr.Length);
-				return (Bitmap)Bitmap.FromStream(stream);
+				return (Bitmap)Bitmap.FromStream(new MemoryStream(arr, 0, arr.Length));
 			}
 		}
 
