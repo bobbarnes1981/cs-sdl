@@ -55,6 +55,10 @@ namespace SdlDotNet.Windows
 		/// <param name="surface">surface to copy onto control</param>
 		public void Blit(Surface surface)
 		{
+			if (surface == null)
+			{
+				throw new ArgumentNullException("surface");
+			}
 			this.Image = surface.Bitmap;
 		}
 		
