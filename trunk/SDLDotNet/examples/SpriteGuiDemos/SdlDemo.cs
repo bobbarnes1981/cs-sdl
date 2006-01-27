@@ -59,8 +59,9 @@ namespace SdlDotNet.Examples
 //			Video.Mouse.ShowCursor = false;
       
 			Events.KeyboardDown +=
-				new KeyboardEventHandler(this.OnKeyboardDown);
-			Events.Tick += new TickEventHandler(this.OnTick);
+				new KeyboardEventHandler(this.KeyboardDown);
+			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
 
 			// Create the screen
 			int width = 800;
@@ -149,7 +150,7 @@ namespace SdlDotNet.Examples
 				int spd = fpsSpeeds[i];
 
 				fmi = new GuiMenuItem(gui, spd.ToString(CultureInfo.CurrentCulture) + " FPS");
-				fmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuFps);
+				fmi.ItemSelectedEvent += new MenuItemEventHandler(MenuFps);
 				gm.Add(fmi);
 			}
 		}
@@ -158,7 +159,7 @@ namespace SdlDotNet.Examples
 		{
 			GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
 			gmi.AddRight(new TextSprite("Q", gui.BaseFont));
-			gmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuQuit);
+			gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuQuit);
 			demoMenu.Add(gmi);
 		}
 		#endregion
@@ -191,7 +192,7 @@ namespace SdlDotNet.Examples
 			GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
 			gmi.AddRight(new TextSprite(String.Format(CultureInfo.CurrentCulture, "{0}", cnt),
 				gui.BaseFont));
-			gmi.ItemSelectedEvent += new MenuItemEventHandler(OnMenuDemo);
+			gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuDemo);
 			demoMenu.Add(gmi);
 		}
 
@@ -254,7 +255,7 @@ namespace SdlDotNet.Examples
 		}
 
 		#region Events
-		private void OnKeyboardDown(object sender, KeyboardEventArgs e) 
+		private void KeyboardDown(object sender, KeyboardEventArgs e) 
 		{
 			switch (e.Key)
 			{
@@ -300,7 +301,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		private void OnTick(object sender, TickEventArgs args)
+		private void Tick(object sender, TickEventArgs args)
 		{	
 			screen.Fill(Color.Black);
 			if (currentDemo != null)
@@ -312,17 +313,22 @@ namespace SdlDotNet.Examples
 			screen.Update();
 		}
 
-		private void OnMenuDemo(object sender, MenuItemEventArgs e)
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
+		}
+
+		private void MenuDemo(object sender, MenuItemEventArgs e)
 		{
 			SwitchDemo(e.Index);
 		}
 
-		private void OnMenuFps(object sender, MenuItemEventArgs e)
+		private void MenuFps(object sender, MenuItemEventArgs e)
 		{
 			Events.Fps = fpsSpeeds[e.Index];
 		}
 
-		private void OnMenuQuit(object sender, MenuItemEventArgs e)
+		private void MenuQuit(object sender, MenuItemEventArgs e)
 		{
 			Events.QuitApplication();
 		}

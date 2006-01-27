@@ -52,11 +52,12 @@ namespace SdlDotNet.Examples
 			Video.SetVideoModeWindow(400,300);
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - ParticlesExample";
-			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
-			Events.MouseButtonDown += new MouseButtonEventHandler(Events_MouseButtonDown);
-			Events.MouseMotion += new MouseMotionEventHandler(Events_MouseMotion);
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
+			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
+			Events.MouseMotion += new MouseMotionEventHandler(this.MouseMotion);
 			Events.Fps = 30;
-			Events.Tick+=new TickEventHandler(Events_Tick);
+			Events.Tick+=new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
 		}
 
 		/// <summary>
@@ -124,7 +125,7 @@ namespace SdlDotNet.Examples
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void Events_Tick(object sender, TickEventArgs e)
+		private void Tick(object sender, TickEventArgs e)
 		{
 			// Update all particles
 			particles.Update();
@@ -139,7 +140,7 @@ namespace SdlDotNet.Examples
 			Video.WindowCaption = "SDL.NET - ParticlesExample - Particles: " + particles.Particles.Count;
 		}
 
-		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
+		private void KeyboardDown(object sender, KeyboardEventArgs e)
 		{
 			if(e.Key == Key.Escape)
 			{
@@ -150,7 +151,12 @@ namespace SdlDotNet.Examples
 				CreateExplosion();
 			}
 		}
-		private void Events_MouseMotion(object sender, MouseMotionEventArgs e)
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
+		}
+		private void MouseMotion(object sender, MouseMotionEventArgs e)
 		{
 			// Fix the emitter and the vortex manipulator to the mouse.
 			emit.X = e.X;
@@ -159,7 +165,7 @@ namespace SdlDotNet.Examples
 			vort.Y = e.Y;
 		}
 
-		private void Events_MouseButtonDown(object sender, MouseButtonEventArgs e)
+		private void MouseButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			// Toogle the emitter off and on.
 			emit.Emitting = !emit.Emitting;

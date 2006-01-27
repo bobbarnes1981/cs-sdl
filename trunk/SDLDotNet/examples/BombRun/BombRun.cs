@@ -83,7 +83,8 @@ namespace SdlDotNet.Examples
 			Video.WindowCaption =
 				"SDL.NET - Bomb Run";
 			Events.KeyboardDown +=
-				new KeyboardEventHandler(Keyboard);
+				new KeyboardEventHandler(this.Keyboard);
+			Events.Quit += new QuitEventHandler(this.Quit);
 			player.WeaponFired += new FireEventHandler(PlayerWeaponFired);
 
 			Events.Tick += new TickEventHandler(this.OnTick);
@@ -109,6 +110,11 @@ namespace SdlDotNet.Examples
 			{
 				Events.QuitApplication();
 			}
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 
 		Rectangle src;

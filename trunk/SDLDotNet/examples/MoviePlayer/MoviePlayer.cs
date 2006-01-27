@@ -59,6 +59,7 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(this.KeyboardDown); 
 			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
 
 			Surface screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowIcon();
@@ -93,6 +94,11 @@ namespace SdlDotNet.Examples
 				movie.Close();
 				Events.QuitApplication();
 			}
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 
 		private void Tick(object sender, TickEventArgs e)

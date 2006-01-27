@@ -53,6 +53,7 @@ namespace SdlDotNet.Examples
 			eventManager.OnEntityPlaceEvent += new EventManager.EntityPlaceEventHandler(Subscribe);
 			eventManager.OnEntityMoveEvent += new EventManager.EntityMoveEventHandler(Subscribe);
 			Events.Tick +=new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
 			this.width = 424;
 			this.height = 440;
 			this.backSprites = new ArrayList();
@@ -291,5 +292,10 @@ namespace SdlDotNet.Examples
 		}
 
 		#endregion
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
+		}
 	}
 }

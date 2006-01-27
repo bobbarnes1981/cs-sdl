@@ -54,6 +54,8 @@ namespace SdlDotNet.Examples
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
 			Events.Tick += new TickEventHandler(this.Tick);
 			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
+			Events.Quit += new QuitEventHandler(this.Quit);
+			
 			Events.Fps = 50;
 
 			screen = Video.SetVideoModeWindow(width, height, true);
@@ -77,6 +79,11 @@ namespace SdlDotNet.Examples
 			{
 				Events.QuitApplication();
 			}
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 
 		private void Tick(object sender, TickEventArgs e)

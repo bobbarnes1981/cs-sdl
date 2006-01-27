@@ -53,8 +53,9 @@ namespace SdlDotNet.Examples
 			Video.SetVideoModeWindow(400, 300);
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - PhysFsTest";
-			Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
-			Events.Tick += new TickEventHandler(Events_Tick);
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
+			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
 			Events.Fps = 30;
 		}
 
@@ -97,7 +98,7 @@ namespace SdlDotNet.Examples
 			app.Run();
 		}
 
-		private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
+		private void KeyboardDown(object sender, KeyboardEventArgs e)
 		{
 			if(e.Key == Key.Escape)
 			{
@@ -106,7 +107,7 @@ namespace SdlDotNet.Examples
 			}
 		}
 
-		private void Events_Tick(object sender, TickEventArgs e)
+		private void Tick(object sender, TickEventArgs e)
 		{
 			Video.Screen.Fill(Color.White);
          
@@ -115,6 +116,11 @@ namespace SdlDotNet.Examples
 			Video.Screen.Blit(surf, location);
 
 			Video.Screen.Flip();
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 		#region IDisposable Members
 

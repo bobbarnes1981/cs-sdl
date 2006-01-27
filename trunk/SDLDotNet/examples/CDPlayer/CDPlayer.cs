@@ -96,7 +96,8 @@ namespace SdlDotNet.Examples
 			master.EnableTickEvent();
 
 			SdlDotNet.Events.Fps = 10;
-			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(this.Events_Tick);
+			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(this.Tick);
+			SdlDotNet.Events.Quit += new QuitEventHandler(this.Quit);
 
 			try 
 			{
@@ -278,11 +279,16 @@ namespace SdlDotNet.Examples
 		private static System.Random rand = new Random();
 		private SdlDotNet.Surface surf;
 
-		private void Events_Tick(object sender, SdlDotNet.TickEventArgs e)
+		private void Tick(object sender, SdlDotNet.TickEventArgs e)
 		{
 			surf.Fill(Color.Black);
 			surf.Blit(master);
 			this.surfaceControl.Image = surf.Bitmap;
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			SdlDotNet.Events.QuitApplication();
 		}
 
 		private void comboBoxDrive_SelectedIndexChanged(object sender, System.EventArgs e) 

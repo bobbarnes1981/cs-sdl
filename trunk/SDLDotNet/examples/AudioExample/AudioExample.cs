@@ -62,7 +62,7 @@ namespace SdlDotNet.Examples
 				new KeyboardEventHandler(Events_KeyboardDown); 
 			Events.MouseButtonDown += 
 				new MouseButtonEventHandler(Events_MouseButtonDown);
-
+			Events.Quit += new QuitEventHandler(this.Quit);
 			Events.MusicFinished += 
 				new MusicFinishedEventHandler(Events_MusicFinished);
 
@@ -185,11 +185,17 @@ namespace SdlDotNet.Examples
 					break;
 			} 
 		}
+
 		private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
 		{
 			// Switch the music....
 			textDisplay.Text = "Music switched...";
 			Console.WriteLine("Music Finished");
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 
 		#region IDisposable Members

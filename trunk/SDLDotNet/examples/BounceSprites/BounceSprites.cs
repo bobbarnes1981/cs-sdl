@@ -49,7 +49,7 @@ namespace SdlDotNet.Examples
 
 		#region EventHandler Methods
 		//Handles keyboard events. The 'Escape' and 'Q'keys will cause the app to exit
-		private void OnKeyboardDown(object sender, KeyboardEventArgs e) 
+		private void KeyboardDown(object sender, KeyboardEventArgs e) 
 		{
 			if (e.Key == Key.Escape || e.Key == Key.Q)
 			{
@@ -63,11 +63,16 @@ namespace SdlDotNet.Examples
 		//This method will fill the screen with black to clear it of the sprites.
 		//Then it will Blit all of the sprites to the screen.
 		//Then it will refresh the screen and display it.
-		private void OnTick(object sender, TickEventArgs args)
+		private void Tick(object sender, TickEventArgs args)
 		{	
 			rects = screen.Blit(master);
 			screen.Update(rects);	
 			screen.Erase(master, background);
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Events.QuitApplication();
 		}
 		#endregion EventHandler Methods
 
@@ -114,8 +119,9 @@ namespace SdlDotNet.Examples
       
 			//These bind the events to the above methods.
 			Events.KeyboardDown +=
-				new KeyboardEventHandler(this.OnKeyboardDown);
-			Events.Tick += new TickEventHandler(this.OnTick);
+				new KeyboardEventHandler(this.KeyboardDown);
+			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
 
 			//Start the event ticker
 			Events.Run();
