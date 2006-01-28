@@ -241,11 +241,12 @@ namespace SdlDotNet
 			JoystickButtonUp = null;
 			JoystickButtonDown = null;
 
-			Joysticks.Close();
-			CDRom.Close();
-			Mixer.Close();
-			Timer.Close();
-			Video.Close();
+//			Joysticks.Close();
+//			CDRom.Close();
+//			Mixer.Close();
+//			Timer.Close();
+//			Video.Close();
+			Sdl.SDL_Quit();
 			quitFlag = true;
 		}
 
@@ -986,7 +987,7 @@ namespace SdlDotNet
 					lastTime = currentTime;
 				}
 			}
-			//Events.Close();
+			Events.Close();
 		}
 		#endregion Thread Management
 	}

@@ -65,6 +65,11 @@ namespace SdlDotNet
 			}
 		}
 
+		static Music()
+		{
+			Mixer.Initialize();
+		}
+
 		private static Music m_CurrentMusic;
 
 		/// <summary>

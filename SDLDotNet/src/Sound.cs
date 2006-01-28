@@ -71,6 +71,11 @@ namespace SdlDotNet
 			channels = sound.channels;
 		}
 
+		static Sound()
+		{
+			Mixer.Initialize();
+		}
+
 		/// <summary>
 		/// Loads a .wav file into memory.
 		/// </summary>
