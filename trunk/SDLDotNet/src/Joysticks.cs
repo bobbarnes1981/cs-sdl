@@ -95,10 +95,7 @@ namespace SdlDotNet
 		/// </summary>
 		public static void Close() 
 		{
-			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_JOYSTICK) != 0)
-			{
-				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_JOYSTICK);
-			}
+			Events.CloseJoysticks();
 		}
 
 		/// <summary>
