@@ -52,10 +52,7 @@ namespace SdlDotNet
 		/// <remarks></remarks>
 		public static void Close() 
 		{
-			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) != 0)
-			{
-				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_CDROM);
-			}
+			Events.CloseCDRom();
 		}
 
 		/// <summary>

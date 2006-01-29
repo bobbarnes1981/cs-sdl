@@ -241,13 +241,70 @@ namespace SdlDotNet
 			JoystickButtonUp = null;
 			JoystickButtonDown = null;
 
-//			Joysticks.Close();
-//			CDRom.Close();
-//			Mixer.Close();
-//			Timer.Close();
-//			Video.Close();
-			Sdl.SDL_Quit();
+			Events.CloseJoysticks();
+			Events.CloseCDRom();
+			Events.CloseMixer();
+			Events.CloseTimer();
+			Events.CloseVideo();
 			quitFlag = true;
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void CloseVideo() 
+		{
+			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) != 0)
+			{
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
+			}
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void CloseTimer() 
+		{
+			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER) != 0)
+			{
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_TIMER);
+			}
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void CloseJoysticks() 
+		{
+			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_JOYSTICK) != 0)
+			{
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_JOYSTICK);
+			}
+		}
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		/// <remarks></remarks>
+		public static void CloseCDRom() 
+		{
+			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) != 0)
+			{
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_CDROM);
+			}
+		}
+
+
+		/// <summary>
+		/// Closes and destroys this object
+		/// </summary>
+		public static void CloseMixer() 
+		{
+			SdlMixer.Mix_CloseAudio();
+			if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != 0)
+			{
+				Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
+			}
 		}
 
 		/// <summary>
