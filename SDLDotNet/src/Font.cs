@@ -34,8 +34,9 @@ namespace SdlDotNet
 	public class Font : BaseSdlResource
 	{
 		private bool disposed;
-	
-		/// <summary>
+
+        #region Constructors
+        /// <summary>
 		/// Font Constructor
 		/// </summary>
 		/// <param name="fileName">Font filename</param>
@@ -52,8 +53,29 @@ namespace SdlDotNet
 			{
 				throw FontException.Generate();
 			}
-		}
-		/// <summary>
+        }
+
+        /// <summary>
+        /// Create a Font from a byte array in memory.
+        /// </summary>
+        /// <param name="array">A array of byte that should be the font data</param>
+        /// <param name="pointSize">Size of font</param>
+        public Font(byte[] array, int pointSize)
+        {
+            if (!Font.IsFontSystemInitialized)
+            {
+                Font.InitializeFontSystem();
+            }
+
+            this.Handle = SdlTtf.TTF_OpenFontRW(Sdl.SDL_RWFromMem(array, array.Length), 0, pointSize);
+            if (this.Handle == IntPtr.Zero)
+            {
+                throw FontException.Generate();
+            }
+        }
+        #endregion Constructors
+
+        /// <summary>
 		/// Queries if the Font subsystem has been intialized.
 		/// </summary>
 		/// <remarks>
