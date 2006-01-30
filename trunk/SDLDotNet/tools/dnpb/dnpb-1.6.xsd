@@ -171,6 +171,7 @@
 								<xs:enumeration value="Code" />
 								<xs:enumeration value="Component" />
 								<xs:enumeration value="Form" />
+								<xs:enumeration value="UserControl" />
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:attribute>
@@ -180,6 +181,9 @@
 	</xs:element>
 	<xs:element name="Match">
 		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Exclude" minOccurs="0" />
+			</xs:sequence>
 			<xs:attribute name="path" type="xs:string" />
 			<xs:attribute name="pattern" type="xs:string" use="required" />
 			<xs:attribute name="recurse" type="xs:boolean" default="false" />
@@ -206,4 +210,9 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
+		<xs:element name="Exclude">
+			<xs:complexType>
+				<xs:attribute name="name" type="xs:string" use="required" />
+			</xs:complexType>
+		</xs:element>
 </xs:schema>
