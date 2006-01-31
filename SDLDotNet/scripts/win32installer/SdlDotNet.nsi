@@ -1,7 +1,7 @@
 !verbose 3
 
 !define PRODUCT_NAME "SDL.NET"
-!define PRODUCT_VERSION "4.0.2"
+!define PRODUCT_VERSION "4.0.3"
 !define PRODUCT_BUILD "1"
 !define PRODUCT_PUBLISHER "SDL.NET"
 !define PRODUCT_PACKAGE "sdldotnet"
