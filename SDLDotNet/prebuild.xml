@@ -9,6 +9,7 @@
 		<OutputPath>bin\Debug</OutputPath>
 		<DebugInformation>true</DebugInformation>
 		<WarningLevel>4</WarningLevel>
+		<SuppressWarnings>1595</SuppressWarnings>
 	    </Options>
 	</Configuration>
 	<Configuration name="Release">
@@ -19,6 +20,7 @@
 		<OutputPath>bin\Release</OutputPath>
 		<DebugInformation>false</DebugInformation>
 		<WarningLevel>1</WarningLevel>
+		<SuppressWarnings>1595</SuppressWarnings>
 	    </Options>
 	</Configuration>
 	<Files>
@@ -35,6 +37,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>SdlDotNet.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -46,6 +49,7 @@
 		    <XmlDocFile>SdlDotNet.xml</XmlDocFile>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" />
@@ -70,6 +74,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>Rectangles.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -81,6 +86,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>Rectangles.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -101,6 +107,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>Gears.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -112,6 +119,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>Gears.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -133,6 +141,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>CDPlayer.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -144,6 +153,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>CDPlayer.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -168,6 +178,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>MoviePlayer.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -179,6 +190,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>MoviePlayer.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -199,6 +211,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>SimpleGame.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -210,6 +223,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>SimpleGame.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -230,6 +244,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>BombRun.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -241,6 +256,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>BombRun.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -261,6 +277,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>SnowDemo.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -272,6 +289,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>SnowDemo.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -292,6 +310,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>BounceSprites.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -303,6 +322,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>BounceSprites.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -323,6 +343,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>Triad.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -334,6 +355,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>Triad.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -355,6 +377,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>GuiExample.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -366,6 +389,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>GuiExample.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -385,6 +409,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>SpriteGuiDemos.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -396,6 +421,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>SpriteGuiDemos.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -417,6 +443,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>SdlDotNet.Tests.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -428,6 +455,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>SdlDotNet.Tests.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -450,6 +478,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>AudioExample.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -461,6 +490,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>AudioExample.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -481,6 +511,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>SdlDotNet.Particles.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -492,6 +523,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>SdlDotNet.Particles.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -511,6 +543,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>ParticlesExample.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -522,6 +555,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>ParticlesExample.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -573,6 +607,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>NeHe.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -584,6 +619,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>NeHe.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -611,6 +647,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>RedBook.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -622,6 +659,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>RedBook.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
@@ -649,6 +687,7 @@
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>PhysFsTest.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -660,6 +699,7 @@
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>PhysFsTest.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
