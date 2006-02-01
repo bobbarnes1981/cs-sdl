@@ -299,6 +299,7 @@ namespace SdlDotNet.Examples
 		static void Main() 
 		{
 			Application.Run(new CDPlayer());
+			SdlDotNet.Events.QuitApplication();
 		}
 
 		private static System.Random rand = new Random();
@@ -311,6 +312,7 @@ namespace SdlDotNet.Examples
 			surf.Blit(master);
 			this.surfaceControl.Blit(surf);
 		}
+
 
 		private void Quit(object sender, QuitEventArgs e)
 		{
@@ -455,6 +457,7 @@ namespace SdlDotNet.Examples
 
 		private void menuItem2_Click(object sender, System.EventArgs e)
 		{
+			SdlDotNet.Events.QuitApplication();
 			this.Close();		
 		}
 	}
