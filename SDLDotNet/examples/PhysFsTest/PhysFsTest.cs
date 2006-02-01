@@ -70,7 +70,7 @@ namespace SdlDotNet.Examples
 			}
 
 			// Initiate PhysFS
-			Fs.PHYSFS_init(null);
+			Fs.PHYSFS_init("init");
 
 			// Allow PhysFS to look in data.zip for files
 			Fs.PHYSFS_addToSearchPath(filepath + data_directory + "data.zip", 1);
