@@ -38,7 +38,7 @@ namespace SdlDotNet
 		private byte alphaValue;
 		private bool disposed;
 		private Color transparentColor;
-		//MemoryStream stream = new MemoryStream();
+		private bool isVideoMode;
 
 		// Bmp files have a header of 54 bytes. 
 		// This is used to turn the Surface into a byte array to 
@@ -57,6 +57,16 @@ namespace SdlDotNet
 		internal Surface(IntPtr handle) 
 		{
 			this.Handle = handle;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="handle"></param>
+		internal Surface(IntPtr handle, bool isVideoMode) 
+		{
+			this.Handle = handle;
+			this.isVideoMode = isVideoMode;
 		}
 
 		/// <summary>
@@ -241,14 +251,10 @@ namespace SdlDotNet
 		{
 			try
 			{
-				if (this.Handle != IntPtr.Zero)
+				if (this.Handle != IntPtr.Zero && !this.isVideoMode)
 				{
 					Sdl.SDL_FreeSurface(this.Handle);
 				}
-			}
-			catch (NullReferenceException)
-			{
-				this.Handle = IntPtr.Zero;
 			}
 			finally
 			{

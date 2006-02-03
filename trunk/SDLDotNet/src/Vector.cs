@@ -38,7 +38,9 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates point at 0, 0
 		/// </summary>
-		public Vector() : this(0, 0) { }
+		public Vector() : this(0, 0) 
+		{ 
+		}
 
 		/// <summary>
 		/// Creates a vector with a specific direction in 
@@ -105,7 +107,9 @@ namespace SdlDotNet
 		/// <param name="point">
 		/// The point representing the XY values.
 		/// </param>
-		public Vector(Point point) : this(point.X, point.Y) {}
+		public Vector(Point point) : this(point.X, point.Y) 
+		{
+		}
 
 		/// <summary>
 		/// Creates a vector based on a PointF object.
@@ -113,7 +117,9 @@ namespace SdlDotNet
 		/// <param name="point">
 		/// The point representing the XY values.
 		/// </param>
-		public Vector(PointF point) : this(point.X, point.Y) {}
+		public Vector(PointF point) : this(point.X, point.Y) 
+		{
+		}
 
 		/// <summary>
 		/// Creates a vector based on the difference between the two given points.
@@ -573,8 +579,14 @@ namespace SdlDotNet
 		/// </summary>
 		public float X
 		{
-			get { return m_x; }
-			set { m_x = value; }
+			get 
+			{ 
+				return m_x; 
+			}
+			set 
+			{ 
+				m_x = value; 
+			}
 		}
 
 		/// <summary>
@@ -582,8 +594,14 @@ namespace SdlDotNet
 		/// </summary>
 		public float Y
 		{
-			get { return m_y; }
-			set { m_y = value; }
+			get 
+			{ 
+				return m_y; 
+			}
+			set 
+			{ 
+				m_y = value; 
+			}
 		}
 
 		/// <summary>

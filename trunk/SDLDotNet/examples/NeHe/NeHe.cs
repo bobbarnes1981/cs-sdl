@@ -62,19 +62,31 @@ namespace SdlDotNet.Examples
 			InitializeComponent();
 		}
 
+		private bool disposed;
+
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
 		protected override void Dispose( bool disposing )
 		{
-			if( disposing )
+			try
 			{
-				if(components != null)
+				if (!this.disposed)
 				{
-					components.Dispose();
+					if (disposing)
+					{
+						if(components != null)
+						{
+							components.Dispose();
+						}
+					}
+					this.disposed = true;
 				}
 			}
-			base.Dispose( disposing );
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 
 		#region Windows Form Designer generated code

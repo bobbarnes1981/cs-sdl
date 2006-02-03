@@ -113,7 +113,6 @@ namespace SdlDotNet
 					if (disposing)
 					{
 					}
-					//CloseHandle();
 					this.disposed = true;
 				}
 			}
@@ -135,10 +134,6 @@ namespace SdlDotNet
 				{
 					Sdl.SDL_CDClose(this.Handle);
 				}
-			}
-			catch (NullReferenceException)
-			{
-				this.Handle = IntPtr.Zero;
 			}
 			finally
 			{

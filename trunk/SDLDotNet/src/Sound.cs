@@ -129,10 +129,6 @@ namespace SdlDotNet
 					SdlMixer.Mix_FreeChunk(this.Handle);
 				}
 			}
-			catch (NullReferenceException)
-			{
-				this.Handle = IntPtr.Zero;
-			}
 			finally
 			{
 				this.Handle = IntPtr.Zero;

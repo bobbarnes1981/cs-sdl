@@ -27,7 +27,7 @@ namespace SdlDotNet
 	/// Create with Mixer.LoadWav().
 	/// </summary>
 	/// <remarks></remarks>
-	public class Channel
+	public class Channel : IDisposable
 	{
 		private int index;
 		private Sound sound;
@@ -456,5 +456,65 @@ namespace SdlDotNet
 				throw new SdlException();
 			}
 		}
+
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Destroy sprite
+		/// </summary>
+		/// <param name="disposing">If true, remove all unamanged resources</param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					if (this.sound != null)
+					{
+						this.sound.Dispose();
+						this.sound = null;
+					}
+					if (this.queuedSound != null)
+					{
+						this.queuedSound.Dispose();
+						this.queuedSound = null;
+					}
+					if (this.lastSound != null)
+					{
+						this.lastSound.Dispose();
+						this.lastSound = null;
+					}
+				}
+				this.disposed = true;
+			}
+		}
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Dispose()
+		{
+			this.Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~Channel() 
+		{
+			Dispose(false);
+		}
+
+		#endregion
 	}
 }

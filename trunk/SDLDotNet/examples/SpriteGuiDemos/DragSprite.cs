@@ -118,22 +118,21 @@ namespace SdlDotNet.Examples
 		/// <param name="disposing"></param>
 		protected override void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+			
+			try
 			{
-				try
+				if (!this.disposed)
 				{
 					if (disposing)
 					{
 					}
 					this.disposed = true;
 				}
-				finally
-				{
-					base.Dispose(disposing);
-					this.disposed = true;
-				}
 			}
-			base.Dispose(disposing);
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 	}
 }

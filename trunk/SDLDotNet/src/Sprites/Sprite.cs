@@ -896,8 +896,11 @@ namespace SdlDotNet.Sprites
 			{
 				if (disposing)
 				{
-					this.surf.Dispose();
-					this.surf = null;
+					if (this.surf != null)
+					{
+						this.surf.Dispose();
+						this.surf = null;
+					}
 					this.Kill();
 				}
 				this.disposed = true;

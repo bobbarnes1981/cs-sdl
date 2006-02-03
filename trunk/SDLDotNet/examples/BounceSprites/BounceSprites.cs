@@ -142,12 +142,28 @@ namespace SdlDotNet.Examples
 		private bool disposed;
 
 		/// <summary>
-		/// Closes and destroys this object
+		/// Destroy object
 		/// </summary>
-		/// <remarks>Destroys managed and unmanaged objects</remarks>
-		public void Dispose() 
+		public void Dispose()
 		{
-			Dispose(true);
+			this.Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~BounceSprites() 
+		{
+			Dispose(false);
 		}
 		/// <summary>
 		/// 
@@ -159,7 +175,11 @@ namespace SdlDotNet.Examples
 			{
 				if (disposing)
 				{
-					background.Dispose();
+					if (this.background != null)
+					{
+						this.background.Dispose();
+						this.background = null;
+					}
 				}
 				this.disposed = true;
 			}
