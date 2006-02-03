@@ -43,5 +43,30 @@ namespace SdlDotNet.Examples
 			base.Surface.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
 			base.Rectangle = new Rectangle(0,0,70,70);
 		}
+		#region IDisposable
+		private bool disposed;
+
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				if (!this.disposed)
+				{
+					if (disposing)
+					{
+					}
+					this.disposed = true;
+				}
+			}
+			finally
+			{
+				base.Dispose(disposing);
+			}
+		}
+		#endregion IDisposable
 	}
 }

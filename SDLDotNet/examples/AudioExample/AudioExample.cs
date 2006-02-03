@@ -139,7 +139,6 @@ namespace SdlDotNet.Examples
 						exception.ToString();
 						textDisplay.Text = "Music is already fading";
 					}
-
 					break; 
 
 				case Key.UpArrow: 

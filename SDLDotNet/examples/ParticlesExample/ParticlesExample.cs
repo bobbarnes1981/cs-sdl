@@ -32,7 +32,7 @@ namespace SdlDotNet.Examples
 	/// <summary>
 	/// An example program using particles.
 	/// </summary>
-	public class ParticlesExample
+	public class ParticlesExample : IDisposable
 	{
 		// Make a new particle system with some gravity
 		ParticleSystem particles = new ParticleSystem();
@@ -188,5 +188,55 @@ namespace SdlDotNet.Examples
 			explosion.SpeedMin = 8;
 			explosion.SpeedMax = 20;
 		}
+
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Dispose()
+		{
+			this.Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~ParticlesExample() 
+		{
+			Dispose(false);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+//					if (this.background != null)
+//					{
+//						this.background.Dispose();
+//						this.background = null;
+//					}
+				}
+				this.disposed = true;
+			}
+		}
+
+		#endregion
 	}
 }
