@@ -426,7 +426,7 @@ namespace SdlDotNet
 		/// <returns>A Surface representing the screen</returns>
 		public static Surface SetVideoMode(int width, int height, int bitsPerPixel, VideoModes flags) 
 		{
-			return new Surface(Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, (int)flags));
+			return new Surface(Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, (int)flags), true);
 		}
 
 
@@ -919,6 +919,15 @@ namespace SdlDotNet
 			{
 				Video.WindowIcon(new Icon(callingAssembly.GetManifestResourceStream(iconName)));
 			}
+		}
+
+		/// <summary>
+		/// Minimizes the current window
+		/// </summary>
+		/// <returns>True if the action succeeded, otherwise False</returns>
+		public static bool Hide()
+		{
+			return Video.IconifyWindow();
 		}
 
 		/// <summary>

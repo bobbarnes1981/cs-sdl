@@ -136,8 +136,17 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
+						if (this.m_QueuedMusic != null)
+						{
+							this.m_QueuedMusic.Dispose();
+							this.m_QueuedMusic = null;
+						}
+						if (Music.m_CurrentMusic != null)
+						{
+							Music.m_CurrentMusic.Dispose();
+							Music.m_CurrentMusic = null;
+						}
 					}
-					//CloseHandle();
 					this.disposed = true;
 				}
 			}
@@ -158,10 +167,6 @@ namespace SdlDotNet
 				{
 					SdlMixer.Mix_FreeMusic(this.Handle);
 				}
-			}
-			catch (NullReferenceException)
-			{
-				this.Handle = IntPtr.Zero;
 			}
 			finally
 			{

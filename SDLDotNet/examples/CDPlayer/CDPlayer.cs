@@ -55,6 +55,10 @@ namespace SdlDotNet.Examples
 		private System.Windows.Forms.MenuItem menuItem1;
 		private System.Windows.Forms.MenuItem menuItem2;
 		string filepath = @"../../";
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.Container components = null;
 
 		/// <summary>
 		/// 
@@ -123,18 +127,45 @@ namespace SdlDotNet.Examples
 			}
 		}
 
+		private bool disposed;
+
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
 		protected override void Dispose( bool disposing )
 		{
-			if( disposing )
+			try
 			{
+				if (!this.disposed)
+				{
+					if (disposing)
+					{
+						if(components != null)
+						{
+							this.components.Dispose();
+							this.components = null;
+						}
+						if (this.surf != null)
+						{
+							this.surf.Dispose();
+							this.surf = null;
+						}
+						if (this.surfaceControl != null)
+						{
+							this.surfaceControl.Dispose();
+							this.surfaceControl = null;
+						}
+					}
+					this.disposed = true;
+				}
 			}
-			base.Dispose( disposing );
+			finally
+			{
+				base.Dispose(disposing);
+			}
 		}
 
-		private static SpriteCollection master = new SpriteCollection();
+		private SpriteCollection master = new SpriteCollection();
 
 		#region Windows Form Designer generated code
 		/// <summary>

@@ -143,8 +143,6 @@ namespace SdlDotNet.Sprites
 //			}
 		}
 
-		
-
 		/// <summary>
 		/// Gets and sets whether the animation is going.
 		/// </summary>
@@ -210,16 +208,20 @@ namespace SdlDotNet.Sprites
 			return this.m_Animations[m_CurrentAnimation][m_Frame];
 		}
 
-
-
 		private int m_Frame = 0;
 		/// <summary>
 		/// Gets and sets the current frame in the animation.
 		/// </summary>
 		public int Frame
 		{
-			get{ return m_Frame; }
-			set{ m_Frame = value; }
+			get
+			{ 
+				return m_Frame; 
+			}
+			set
+			{ 
+				m_Frame = value; 
+			}
 		}
 
 		/// <summary>
@@ -303,10 +305,6 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-
-
-
-
 		#endregion
 
 		#region Private Methods
@@ -350,7 +348,11 @@ namespace SdlDotNet.Sprites
 				{
 					if (disposing)
 					{
-						m_Timer.Dispose();
+						if (m_Timer != null)
+						{
+							m_Timer.Dispose();
+							m_Timer = null;
+						}
 					}
 					this.disposed = true;
 				}

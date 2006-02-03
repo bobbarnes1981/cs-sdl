@@ -126,6 +126,22 @@ namespace SdlDotNet.Examples
 		{
 			Dispose(true);
 		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~MoviePlayer() 
+		{
+			Dispose(false);
+		}
 		/// <summary>
 		/// 
 		/// </summary>

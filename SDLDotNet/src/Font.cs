@@ -152,10 +152,6 @@ namespace SdlDotNet
 					SdlTtf.TTF_CloseFont(this.Handle);
 				}
 			}
-			catch (NullReferenceException)
-			{
-				this.Handle = IntPtr.Zero;
-			}
 			finally
 			{
 				this.Handle = IntPtr.Zero;

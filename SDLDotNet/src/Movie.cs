@@ -86,10 +86,6 @@ namespace SdlDotNet
 					Smpeg.SMPEG_delete(this.Handle);
 				}
 			}
-			catch (NullReferenceException)
-			{
-				this.Handle = IntPtr.Zero;
-			}
 			finally
 			{
 				this.Handle = IntPtr.Zero;

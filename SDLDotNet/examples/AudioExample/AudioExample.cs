@@ -203,12 +203,28 @@ namespace SdlDotNet.Examples
 		private bool disposed;
 
 		/// <summary>
-		/// Closes and destroys this object
+		/// Destroy object
 		/// </summary>
-		/// <remarks>Destroys managed and unmanaged objects</remarks>
-		public void Dispose() 
+		public void Dispose()
 		{
-			Dispose(true);
+			this.Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~AudioExample() 
+		{
+			Dispose(false);
 		}
 		/// <summary>
 		/// 
@@ -220,8 +236,16 @@ namespace SdlDotNet.Examples
 			{
 				if (disposing)
 				{
-					textDisplay.Dispose();
-					boing.Dispose();
+					if (textDisplay != null)
+					{
+						textDisplay.Dispose();
+						textDisplay = null;
+					}
+					if (boing != null)
+					{
+						boing.Dispose();
+						boing = null;
+					}
 				}
 				this.disposed = true;
 			}
