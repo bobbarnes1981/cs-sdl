@@ -152,7 +152,11 @@ namespace SdlDotNet.Examples
 			{
 				if (disposing)
 				{
-					movie.Dispose();
+					if (this.movie != null)
+					{
+						this.movie.Dispose();
+						this.movie = null;
+					}
 				}
 				this.disposed = true;
 			}

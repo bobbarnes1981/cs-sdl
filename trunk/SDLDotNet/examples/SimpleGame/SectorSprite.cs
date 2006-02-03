@@ -75,5 +75,31 @@ namespace SdlDotNet.Examples
 				return this.sector;
 			}
 		}
+
+		#region IDisposable
+		private bool disposed;
+
+		/// <summary>
+		/// Destroys the surface object and frees its memory
+		/// </summary>
+		/// <param name="disposing">If ture, dispose unmanaged resources</param>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				if (!this.disposed)
+				{
+					if (disposing)
+					{
+					}
+					this.disposed = true;
+				}
+			}
+			finally
+			{
+				base.Dispose(disposing);
+			}
+		}
+		#endregion IDisposable
 	}
 }

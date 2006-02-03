@@ -261,8 +261,11 @@ namespace SdlDotNet.Examples
 			{
 				if (disposing)
 				{
-					GC.SuppressFinalize(this);
-					entitySprite.Dispose();
+					if (this.entitySprite != null)
+					{
+						this.entitySprite.Dispose();
+						this.entitySprite = null;
+					}
 				}
 				this.disposed = true;
 			}
@@ -273,6 +276,7 @@ namespace SdlDotNet.Examples
 		public void Dispose()
 		{
 			this.Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 
 		/// <summary>
