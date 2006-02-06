@@ -56,6 +56,11 @@ namespace SdlDotNet
 		/// </summary>
 		public event SoundEventHandler SoundEvent;
 
+        /// <summary>
+        /// Internal constructor to assemble a Sound object from the handle and size.
+        /// </summary>
+        /// <param name="handle">The handle</param>
+        /// <param name="size">The size of the sound.</param>
 		internal Sound(IntPtr handle, long size) 
 		{
 			this.Handle = handle;
@@ -63,33 +68,21 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Internal constructor which makes reference to the given object.
-		/// </summary>
-		/// <param name="sound">The sound object to make reference to.</param>
-		internal Sound(Sound sound) : this(sound.Handle, sound.size)
-		{
-			channels = sound.channels;
-		}
-
-		static Sound()
-		{
-			Mixer.Initialize();
-		}
-
-		/// <summary>
 		/// Loads a .wav file into memory.
 		/// </summary>
 		/// <param name="file">The file to load into memory.</param>
-		public Sound(string file) : this(Mixer.Sound(file))
+		public Sound(string file)
 		{
+            this.Handle = Mixer.LoadWav(file, out this.size);
 		}
 
 		/// <summary>
 		/// Loads sound from a byte array.
 		/// </summary>
 		/// <param name="data">The sound byte information.</param>
-		public Sound(byte[] data) : this(Mixer.Sound(data))
+		public Sound(byte[] data)
 		{
+            this.Handle = Mixer.LoadWav(data, out this.size);
 		}
 
 		/// <summary>
@@ -107,7 +100,7 @@ namespace SdlDotNet
 					if (disposing)
 					{
 					}
-					//CloseHandle();
+					CloseHandle();
 					this.disposed = true;
 				}
 			}
@@ -128,6 +121,10 @@ namespace SdlDotNet
 				{
 					SdlMixer.Mix_FreeChunk(this.Handle);
 				}
+			}
+			catch (NullReferenceException)
+			{
+				this.Handle = IntPtr.Zero;
 			}
 			finally
 			{

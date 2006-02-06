@@ -52,7 +52,7 @@ namespace SdlDotNet
 
 		static Mixer()
 		{
-			Initialize();	
+            Initialize();
 		}
 
 		/// <summary>
@@ -167,22 +167,24 @@ namespace SdlDotNet
 		/// <returns>Sound object</returns>
 		public static Sound Sound(string file)
 		{
-			return Mixer.LoadWav(file);
+			return new Sound(file);
 		}
 
 		/// <summary>
 		/// Loads a .wav file into memory
 		/// </summary>
 		/// <param name="file">The filename to load</param>
+        /// <param name="size">Output long variable for the size of the sound object.</param>
 		/// <returns>A new Sound object</returns>
-		private static Sound LoadWav(string file) 
+		internal static IntPtr LoadWav(string file, out long size) 
 		{
 			IntPtr p = SdlMixer.Mix_LoadWAV_RW(Sdl.SDL_RWFromFile(file, "rb"), 1);
 			if (p == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
-			return new Sound(p, new FileInfo(file).Length);
+            size = new FileInfo(file).Length;
+			return p;
 		}
 
 		/// <summary>
@@ -192,22 +194,24 @@ namespace SdlDotNet
 		/// <returns>A new Sound object</returns>
 		public static Sound Sound(byte[] data)
 		{
-			return Mixer.LoadWav(data);
+			return new Sound(data);
 		}
 
 		/// <summary>
 		/// Loads a .wav file from a byte array
 		/// </summary>
 		/// <param name="data">The data to load</param>
+        /// <param name="size">Output variable for the size of the sound object.</param>
 		/// <returns>A new Sound object</returns>
-		private static Sound LoadWav(byte[] data) 
+        internal static IntPtr LoadWav(byte[] data, out long size) 
 		{
 			IntPtr p = SdlMixer.Mix_LoadWAV_RW(Sdl.SDL_RWFromMem(data, data.Length), 1);
 			if (p == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
-			return new Sound(p, data.Length);
+            size = data.Length;
+			return p;
 		}
 
 		/// <summary>
