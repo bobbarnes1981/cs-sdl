@@ -241,7 +241,7 @@ namespace SdlDotNet
 			JoystickButtonUp = null;
 			JoystickButtonDown = null;
 
-			while(Events.Poll());
+			//while(Events.Poll());
 			Events.CloseJoysticks();
 			Events.CloseCDRom();
 			Events.CloseMixer();
@@ -961,7 +961,6 @@ namespace SdlDotNet
 			lastTick = 0;
 			quitFlag = false;
 			Timer.Initialize();
-			//Events.Quit += new QuitEventHandler(Events.instance.OnQuit);
 			ThreadTicker();
 		}
 
