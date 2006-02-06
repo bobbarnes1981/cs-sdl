@@ -37,7 +37,7 @@ namespace SdlDotNet.Examples
 	/// A simple SDL.NET example which demonstrates audio in SDL.NET.
 	/// Click plays sound, space changes music and the arrow keys change volume.
 	/// </summary>
-	public class AudioExample : IDisposable
+	public class AudioExample
 	{ 
 		private const int width = 400; 
 		private const int height = 100;
@@ -196,60 +196,5 @@ namespace SdlDotNet.Examples
 		{
 			Events.QuitApplication();
 		}
-
-		#region IDisposable Members
-
-		private bool disposed;
-
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Dispose()
-		{
-			this.Dispose(true);
-			GC.SuppressFinalize(this);
-		}
-
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Close() 
-		{
-			Dispose();
-		}
-
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		~AudioExample() 
-		{
-			Dispose(false);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					if (textDisplay != null)
-					{
-						textDisplay.Dispose();
-						textDisplay = null;
-					}
-					if (boing != null)
-					{
-						boing.Dispose();
-						boing = null;
-					}
-				}
-				this.disposed = true;
-			}
-		}
-
-		#endregion
 	} 
 } 
