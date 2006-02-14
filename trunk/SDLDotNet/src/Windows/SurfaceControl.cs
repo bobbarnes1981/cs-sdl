@@ -147,6 +147,50 @@ namespace SdlDotNet.Windows
 			}			
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		public void KeyPressed(KeyEventArgs e)
+		{
+			this.OnKeyDown(e);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
+		public void KeyReleased(KeyEventArgs e)
+		{
+			this.OnKeyUp(e);
+		}
+
+		/// <summary>
+		/// Raises the 
+		/// <see cref="E:System.Windows.Forms.Control.KeyDown"/> event.
+		/// </summary>
+		/// <param name="e">A 
+		/// <see cref="T:System.Windows.Forms.KeyEventArgs"/> 
+		/// that contains the event data.</param>
+		protected override void OnKeyDown(KeyEventArgs e)
+		{
+			base.OnKeyDown (e);
+			SdlDotNet.Events.Add(new KeyboardEventArgs((SdlDotNet.Key)Enum.Parse(typeof(SdlDotNet.Key),e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, true));
+		}
+
+		/// <summary>
+		/// Raises the 
+		/// <see cref="E:System.Windows.Forms.Control.KeyUp"/> 
+		/// event.
+		/// </summary>
+		/// <param name="e">A 
+		/// <see cref="T:System.Windows.Forms.KeyEventArgs"/> 
+		/// that contains the event data.</param>
+		protected override void OnKeyUp(KeyEventArgs e)
+		{
+			base.OnKeyUp (e);
+			SdlDotNet.Events.Add(new KeyboardEventArgs((SdlDotNet.Key)Enum.Parse(typeof(SdlDotNet.Key),e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, false));
+		}
+
 		#region Disposing
 		private bool disposed;
 

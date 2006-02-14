@@ -136,7 +136,7 @@ namespace SdlDotNet
 				{
 					if (disposing)
 					{
-						if (this.m_QueuedMusic != null)
+						if (this.m_QueuedMusic != null && this.m_QueuedMusic != this)
 						{
 							this.m_QueuedMusic.Dispose();
 							this.m_QueuedMusic = null;

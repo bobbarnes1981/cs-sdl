@@ -69,6 +69,7 @@ namespace SdlDotNet.Examples
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
+			this.KeyPreview = true;
 			surf = 
 				new Surface(
 				this.surfaceControl.Width,
@@ -100,6 +101,7 @@ namespace SdlDotNet.Examples
 			master.EnableMouseButtonEvent();
 			master.EnableMouseMotionEvent();
 			master.EnableVideoResizeEvent();
+			master.EnableKeyboardEvent();
 			master.EnableTickEvent();
 
 			SdlDotNet.Events.Fps = 10;
@@ -319,7 +321,6 @@ namespace SdlDotNet.Examples
 			this.Text = "SDL.NET - CD Player";
 			this.Load += new System.EventHandler(this.CDPlayer_Load);
 			this.ResumeLayout(false);
-
 		}
 		#endregion
 
@@ -490,6 +491,17 @@ namespace SdlDotNet.Examples
 		{
 			SdlDotNet.Events.QuitApplication();
 			this.Close();		
+		}
+
+		protected override void OnKeyDown(KeyEventArgs e)
+		{
+			this.surfaceControl.KeyPressed(e);
+			base.OnKeyDown (e);
+		}
+		protected override void OnKeyUp(KeyEventArgs e)
+		{
+			this.surfaceControl.KeyReleased(e);
+			base.OnKeyUp (e);
 		}
 	}
 }
