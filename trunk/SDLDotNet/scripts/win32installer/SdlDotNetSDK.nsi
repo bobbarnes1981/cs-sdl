@@ -1,6 +1,7 @@
 !verbose 3
 
-!define PRODUCT_NAME "SDL.NET"
+!define PRODUCT_NAME "SDL.NET SDK"
+!define PRODUCT_TYPE "sdk"
 !define PRODUCT_VERSION "4.0.3"
 !define PRODUCT_BUILD "1"
 !define PRODUCT_PUBLISHER "SDL.NET"
@@ -87,7 +88,7 @@ ReserveFile "runtime.ini"
 
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "..\..\bin\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_BUILD}-setup.exe"
+OutFile "..\..\bin\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_BUILD}-${PRODUCT_TYPE}-setup.exe"
 InstallDir "$PROGRAMFILES\SdlDotNet"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
