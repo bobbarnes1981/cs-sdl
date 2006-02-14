@@ -154,6 +154,24 @@ namespace SdlDotNet.Examples
 			this.bounds = new Rectangle(0, 0, args.Width, args.Height);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		public override void Update(KeyboardEventArgs args)
+		{
+			if (args.Key == SdlDotNet.Key.S && args.Down == true)
+			{
+				this.BeingDragged = true;
+				this.Animate = false;
+			}
+			else if (args.Key == SdlDotNet.Key.S && args.Down == false)
+			{
+				this.BeingDragged = false;
+				this.Animate = true;
+			}
+		}
+
 
 		/// <summary>
 		/// If the sprite is picked up, this moved the sprite to follow
