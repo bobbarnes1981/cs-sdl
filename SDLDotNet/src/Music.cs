@@ -50,7 +50,6 @@ namespace SdlDotNet
 	public sealed class Music : BaseSdlResource
 	{
 		private static SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
-		private bool disposed;
 
 		private string m_FileName = "";
 
@@ -114,46 +113,6 @@ namespace SdlDotNet
 		{
 			this.Handle = Mixer.LoadMusic(fileName);
 			m_FileName = fileName;
-		}
-
-//		/// <summary>
-//		/// Disposes the music sample.
-//		/// </summary>
-//		~Music()
-//		{
-//			Dispose(false);
-//		}
-
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-						if (this.m_QueuedMusic != null && this.m_QueuedMusic != this)
-						{
-							this.m_QueuedMusic.Dispose();
-							this.m_QueuedMusic = null;
-						}
-						if (Music.m_CurrentMusic != null)
-						{
-							Music.m_CurrentMusic.Dispose();
-							Music.m_CurrentMusic = null;
-						}
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
 		}
 
 		/// <summary>
