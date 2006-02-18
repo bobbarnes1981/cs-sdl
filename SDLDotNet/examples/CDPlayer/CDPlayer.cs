@@ -319,8 +319,10 @@ namespace SdlDotNet.Examples
 			this.Menu = this.mainMenu1;
 			this.Name = "CDPlayer";
 			this.Text = "SDL.NET - CD Player";
+			this.Closing += new System.ComponentModel.CancelEventHandler(this.CDPlayer_Closing);
 			this.Load += new System.EventHandler(this.CDPlayer_Load);
 			this.ResumeLayout(false);
+
 		}
 		#endregion
 
@@ -340,9 +342,12 @@ namespace SdlDotNet.Examples
 
 		private void Tick(object sender, SdlDotNet.TickEventArgs e)
 		{
-			surf.Fill(Color.Black);
-			surf.Blit(master);
-			this.surfaceControl.Blit(surf);
+			if(surf != null)
+			{
+				surf.Fill(Color.Black);
+				surf.Blit(master);
+				this.surfaceControl.Blit(surf);
+			}
 		}
 
 
@@ -502,6 +507,12 @@ namespace SdlDotNet.Examples
 		{
 			this.surfaceControl.KeyReleased(e);
 			base.OnKeyUp (e);
+		}
+
+		private void CDPlayer_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			// Force the surface to be disposed.
+			surf.Dispose();
 		}
 	}
 }
