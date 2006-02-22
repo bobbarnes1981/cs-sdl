@@ -171,9 +171,6 @@ Section "Runtime" SecRuntime
   Push "SdlDotNet"
   Push $INSTDIR\bin\assemblies
   Call AddManagedDLL
-  Push "SdlDotNet.Windows"
-  Push $INSTDIR\bin\assemblies
-  Call AddManagedDLL
   Push "SdlDotNet.Particles"
   Push $INSTDIR\bin\assemblies
   Call AddManagedDLL
