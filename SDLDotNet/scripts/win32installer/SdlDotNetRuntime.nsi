@@ -46,8 +46,8 @@ Var filename
 ; License page
 !insertmacro MUI_PAGE_LICENSE "..\..\COPYING"
 
-Page custom CustomPageC 
 ; Instfiles page
+!define MUI_FINISHPAGE_NOAUTOCLOSE
 !insertmacro MUI_PAGE_INSTFILES
 
 ; Finish page
@@ -57,6 +57,7 @@ Page custom CustomPageC
 ; Uninstaller pages
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
+!define MUI_UNFINISHPAGE_NOAUTOCLOSE 
 !insertmacro MUI_UNPAGE_FINISH
 ;------------------------------------
 
@@ -103,7 +104,7 @@ FunctionEnd
 Section "Runtime" SecRuntime
   SetOverwrite ifnewer
   SetOutPath "$INSTDIR\bin"
-  File /r /x CVS ${PRODUCT_PATH}\bin\assemblies\*.*
+  File /r /x CVS /x *Particles* ${PRODUCT_PATH}\bin\assemblies\*.*
 
   SetOutPath "$INSTDIR\lib"
   File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
@@ -115,22 +116,13 @@ Section "Runtime" SecRuntime
   File /r /x CVS ${PRODUCT_PATH}\lib\win32deps\*.*
   
   Push "SdlDotNet"
-  Push $INSTDIR\bin\assemblies
+  Push $INSTDIR\bin
   Call AddManagedDLL
-  Push "SdlDotNet.Windows"
-  Push $INSTDIR\bin\assemblies
-  Call AddManagedDLL
-  Push "SdlDotNet.Particles"
-  Push $INSTDIR\bin\assemblies
+  Push "Tao.Sdl"
+  Push $INSTDIR\bin
   Call AddManagedDLL
   
 SectionEnd
-
-Function CustomPageC
-
-  !insertmacro MUI_HEADER_TEXT "$(TEXT_IO_TITLE)" "$(TEXT_IO_SUBTITLE)"
-
-FunctionEnd
 
 ; Usage:
 ;   Push $SYSDIR\myDll.dll
@@ -176,8 +168,6 @@ LangString DESC_SecRuntime ${LANG_ENGLISH} "Copies the runtime libaries to the S
 
 Section -AdditionalIcons
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Uninstall.lnk" "$INSTDIR\uninst.exe"
 SectionEnd
 
 Section -Post
@@ -282,10 +272,10 @@ Function IsSupportedWindowsVersion
 FunctionEnd
 
 Function GACInstall
-  FindFirst $file_handle $filename $INSTDIR\bin\assemblies\*.dll
+  FindFirst $file_handle $filename $INSTDIR\bin\*.dll
   loop:
 	StrCmp $filename "" done
-	nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /i "$INSTDIR\bin\assemblies\$filename" /f'
+	nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /i "$INSTDIR\bin\$filename" /f'
 	FindNext $file_handle $filename
   	Goto loop
   done:
