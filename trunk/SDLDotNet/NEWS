@@ -6,6 +6,23 @@ A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changel
 
 SDL.NET is licensed under the LGPL.
 
+===4.0.3===
+David Hudson (xx Feb 2006.)
+* Surface.ReplaceColor replaces all pixels of one color on a surface.
+* Surface.DrawPixel(int,int,int) to draw pixels by color value (faster).
+* Fixed dirty rectangle clipping bug that crashed the BounceSprite demo on Linux.
+* Greatly improved the Linux nant build.
+* SurfaceControl no longer offsets the bitmap.
+* SurfaceControl is now editable in Design Mode.
+* Updated Prebuild (aka dnpb) to latest version. Can now create Monodevelop project files.
+* Font constructor to open a font from a byte array (PaulA).
+* Fixed a segfault when an examples exited under Mono.
+* PhysFs example now works on Linux.
+* Fixed Sound constuctors.
+* Disposing Music doesn't destroy the Music queue.
+* Created separate Runtime and SDK installers for Windows.
+* SurfaceControl can respond to keyboard events.
+
 ===4.0.2===
 David Hudson 14 Jan 2006
 * Surface.CreateRotatedSurface was not copying AlphaBlending to the new Surface.
