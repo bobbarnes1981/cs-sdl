@@ -103,10 +103,10 @@ FunctionEnd
 
 Section "Runtime" SecRuntime
   SetOverwrite ifnewer
-  SetOutPath "$INSTDIR\bin"
+  SetOutPath "$INSTDIR\runtime\bin"
   File /r /x CVS /x *Particles* ${PRODUCT_PATH}\bin\assemblies\*.*
 
-  SetOutPath "$INSTDIR\lib"
+  SetOutPath "$INSTDIR\runtime\lib"
   File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
   
   ;Store installation folder
@@ -116,10 +116,10 @@ Section "Runtime" SecRuntime
   File /r /x CVS ${PRODUCT_PATH}\lib\win32deps\*.*
   
   Push "SdlDotNet"
-  Push $INSTDIR\bin
+  Push $INSTDIR\runtime\bin
   Call AddManagedDLL
   Push "Tao.Sdl"
-  Push $INSTDIR\bin
+  Push $INSTDIR\runtime\bin
   Call AddManagedDLL
   
 SectionEnd
@@ -167,13 +167,13 @@ LangString DESC_SecRuntime ${LANG_ENGLISH} "Copies the runtime libaries to the S
 
 
 Section -AdditionalIcons
-  WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
+  WriteIniStr "$INSTDIR\runtime\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
 SectionEnd
 
 Section -Post
-  WriteUninstaller "$INSTDIR\uninst.exe"
+  WriteUninstaller "$INSTDIR\runtime\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\runtime\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
@@ -192,7 +192,11 @@ Section Uninstall
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
 
   Push "SdlDotNet"
-  Push $INSTDIR\bin\assemblies
+  Push $INSTDIR\runtime\bin\assemblies
+  Call un.DeleteManagedDLLKey
+  
+  Push "Tao.Sdl"
+  Push $INSTDIR\runtime\bin\assemblies
   Call un.DeleteManagedDLLKey
 
   RMDir /r "$INSTDIR"
@@ -272,10 +276,10 @@ Function IsSupportedWindowsVersion
 FunctionEnd
 
 Function GACInstall
-  FindFirst $file_handle $filename $INSTDIR\bin\*.dll
+  FindFirst $file_handle $filename $INSTDIR\runtime\bin\*.dll
   loop:
 	StrCmp $filename "" done
-	nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /i "$INSTDIR\bin\$filename" /f'
+	nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /i "$INSTDIR\runtime\bin\$filename" /f'
 	FindNext $file_handle $filename
   	Goto loop
   done:

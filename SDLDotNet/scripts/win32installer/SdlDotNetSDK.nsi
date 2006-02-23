@@ -19,7 +19,7 @@
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP_NOSTRETCH
 
-BrandingText "© 2003-2005 David Hudson, http://cs-sdl.sourceforge.net/"
+BrandingText "© 2003-2006 David Hudson, http://cs-sdl.sourceforge.net/"
 SetCompressor lzma
 CRCCheck on
 
@@ -38,10 +38,6 @@ CRCCheck on
 ;Variables
 
 Var STARTMENU_FOLDER
-Var INI_VALUE
-Var file_handle
-Var filename
-
 ;--------------------------------
 ;Installer Pages
 
@@ -61,8 +57,8 @@ Var filename
   
 !insertmacro MUI_PAGE_STARTMENU Application $STARTMENU_FOLDER
 
-Page custom CustomPageC 
 ; Instfiles page
+!define MUI_FINISHPAGE_NOAUTOCLOSE
 !insertmacro MUI_PAGE_INSTFILES
 
 ; Finish page
@@ -72,20 +68,14 @@ Page custom CustomPageC
 ; Uninstaller pages
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
+!define MUI_UNFINISHPAGE_NOAUTOCLOSE 
 !insertmacro MUI_UNPAGE_FINISH
 ;------------------------------------
 
 ; Language files
 !insertmacro MUI_LANGUAGE "English"
 
-; Reserve files
-!insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
-
 ; MUI end ------
-
-ReserveFile "runtime.ini"
-!insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
-
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "..\..\bin\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_BUILD}-${PRODUCT_TYPE}-setup.exe"
@@ -98,7 +88,6 @@ ShowUnInstDetails show
 ; http://msdn.microsoft.com/netframework/default.aspx?pull=/library/en-us/dnnetdep/html/redistdeploy1_1.asp
 ; Section "Detecting that the .NET Framework 1.1 is installed"
 Function .onInit
-!insertmacro MUI_INSTALLOPTIONS_EXTRACT "runtime.ini"
 	ReadRegDWORD $R0 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\v1.1.4322" Install
 	StrCmp $R0 "" 0 CheckPreviousVersion
 	MessageBox MB_OK "Microsoft .NET Framework 1.1 was not found on this system.$\r$\n$\r$\nUnable to continue this installation."
@@ -149,7 +138,7 @@ Section "Source" SecSrc
   
 SectionEnd
 
-Section "Runtime" SecRuntime
+Section "Libraries" SecRuntime
   SetOverwrite ifnewer
   SetOutPath "$INSTDIR\bin"
   File /r /x CVS ${PRODUCT_PATH}\bin\*.*
@@ -161,19 +150,8 @@ Section "Runtime" SecRuntime
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
   
   ;Read a value from an InstallOptions INI file
-  !insertmacro MUI_INSTALLOPTIONS_READ $INI_VALUE "runtime.ini" "Field 3" "State"
-  StrCmp $INI_VALUE "1" "" +2
   SetOutPath "$SYSDIR"
   File /r /x CVS ${PRODUCT_PATH}\lib\win32deps\*.*
-  
-  !insertmacro MUI_INSTALLOPTIONS_READ $INI_VALUE "runtime.ini" "Field 2" "State"
-  StrCmp $INI_VALUE "1" "" +10
-  Push "SdlDotNet"
-  Push $INSTDIR\bin\assemblies
-  Call AddManagedDLL
-  Push "SdlDotNet.Particles"
-  Push $INSTDIR\bin\assemblies
-  Call AddManagedDLL
   
 SectionEnd
 
@@ -224,53 +202,13 @@ Section "Documentation" SecDocs
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
 SectionEnd
 
-Function CustomPageC
-
-  !insertmacro MUI_HEADER_TEXT "$(TEXT_IO_TITLE)" "$(TEXT_IO_SUBTITLE)"
-  !insertmacro MUI_INSTALLOPTIONS_DISPLAY "runtime.ini"
-
-FunctionEnd
-
-; Usage:
-;   Push $SYSDIR\myDll.dll
-;   Push "MyAssemblyName"
-;   Call AddManagedDLL
-;
-Function AddManagedDLL
-  Exch $R0
-  Exch
-  Exch $R1
- 
-  call GACInstall
-  WriteRegStr HKLM "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" "" "$R0"
-  WriteRegStr HKCU "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" "" "$R0"
-  WriteRegStr HKLM "SOFTWARE\Microsoft\VisualStudio\7.1\AssemblyFolders\$R1" "" "$R0"
- 
-  Pop $R1
-  Pop $R0
-FunctionEnd
-
-Function un.DeleteManagedDLLKey
-  Exch $R0
-  Exch
-  Exch $R1
- 
- Call un.GACUnInstall
-  DeleteRegKey HKLM "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
-  DeleteRegKey HKCU "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
-  DeleteRegKey HKLM "SOFTWARE\Microsoft\VisualStudio\7.1\AssemblyFolders\$R1"
- 
-  Pop $R1
-  Pop $R0
-FunctionEnd
-
 ;Language strings
 LangString TEXT_IO_TITLE ${LANG_ENGLISH} "Installation Options"
 LangString TEXT_IO_SUBTITLE ${LANG_ENGLISH} "SdlDotNet Installation Options."
 LangString DESC_SecExamples ${LANG_ENGLISH} "Installs examples using various features of SdlDotNet."
 LangString DESC_SecSrc ${LANG_ENGLISH} "Installs the source code."
 LangString DESC_SecDocs ${LANG_ENGLISH} "Installs documentation"
-LangString DESC_SecRuntime ${LANG_ENGLISH} "Copies the runtime libaries to the SdlDotNet directory. It does not install them into the GAC."
+LangString DESC_SecRuntime ${LANG_ENGLISH} "Copies the libaries to the SdlDotNet directory. It does not install them into the GAC."
 
 ;Assign language strings to sections
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -307,10 +245,6 @@ Section Uninstall
   
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
-
-  Push "SdlDotNet"
-  Push $INSTDIR\bin\assemblies
-  Call un.DeleteManagedDLLKey
 
   RMDir /r "$INSTDIR"
 SectionEnd
@@ -385,23 +319,5 @@ Function IsSupportedWindowsVersion
 
    Pop $R1
    Exch $R0
-
-FunctionEnd
-
-Function GACInstall
-  FindFirst $file_handle $filename $INSTDIR\bin\assemblies\*.dll
-  loop:
-	StrCmp $filename "" done
-	nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /i "$INSTDIR\bin\assemblies\$filename" /f'
-	FindNext $file_handle $filename
-  	Goto loop
-  done:
-
-FunctionEnd
-
-Function un.GACUnInstall
-  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "Tao.Sdl"'
-  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet"'
-  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet.Particles"'
 
 FunctionEnd
