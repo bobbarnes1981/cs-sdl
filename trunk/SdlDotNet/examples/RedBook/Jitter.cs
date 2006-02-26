@@ -64,36 +64,88 @@ SOFTWARE.
  */
 #endregion Original Credits / License
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
-    #region Class Documentation
-    /// <summary>
-    ///     <para>
-    ///         Contains jitter point arrays for 2, 3, 4, 8, 15, 24 and 66 jitters.  The arrays
-    ///         are named j2, j3, etc. Each element in the array has the form, for example,
-    ///         j8[0].x and j8[0].y.
-    ///     </para>
-    ///     <para>
-    ///         Values are floating point in the range [-0.5 &lt; x &lt; 0.5],
-    ///         [-0.5 &lt; y &lt; 0.5], and have a gaussian distribution around the origin.
-    ///     </para>
-    ///     <para>
-    ///         Use these to do model jittering for scene anti-aliasing and view volume jittering
-    ///         for depth of field effects.  Use in conjunction with the accwindow() routine.
-    ///     </para>
-    /// </summary>
-    /// <remarks>
-    ///     <para>
-    ///         Original Author:    Silicon Graphics, Inc.
-    ///         http://www.opengl.org/developers/code/examples/redbook/jitter.h
-    ///     </para>
-    ///     <para>
-    ///         C# Implementation:  Randy Ridge
-    ///         http://www.taoframework.com
-    ///     </para>
-    /// </remarks>
-    #endregion Class Documentation
-    public sealed class Jitter {
+	#region Public Structs
+	/// <summary>
+	/// 
+	/// </summary>
+	public struct JitterPoint 
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		public float X
+		{
+			get
+			{
+				return x;
+			}
+			set
+			{
+				x = value;
+			}
+		}
+		float x;
+		/// <summary>
+		/// 
+		/// </summary>
+		public float Y
+		{
+			get
+			{
+				return y;
+			}
+			set
+			{
+				y = value;
+			}
+		}
+
+		float y;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		public JitterPoint(float x, float y) 
+		{
+			this.x = x;
+			this.y = y;
+		}
+	};
+	#endregion Public Structs
+
+	#region Class Documentation
+	/// <summary>
+	///     <para>
+	///         Contains jitter point arrays for 2, 3, 4, 8, 15, 24 and 66 jitters.  The arrays
+	///         are named j2, j3, etc. Each element in the array has the form, for example,
+	///         j8[0].x and j8[0].y.
+	///     </para>
+	///     <para>
+	///         Values are floating point in the range [-0.5 &lt; x &lt; 0.5],
+	///         [-0.5 &lt; y &lt; 0.5], and have a gaussian distribution around the origin.
+	///     </para>
+	///     <para>
+	///         Use these to do model jittering for scene anti-aliasing and view volume jittering
+	///         for depth of field effects.  Use in conjunction with the accwindow() routine.
+	///     </para>
+	/// </summary>
+	/// <remarks>
+	///     <para>
+	///         Original Author:    Silicon Graphics, Inc.
+	///         http://www.opengl.org/developers/code/examples/redbook/jitter.h
+	///     </para>
+	///     <para>
+	///         C# Implementation:  Randy Ridge
+	///         http://www.taoframework.com
+	///     </para>
+	/// </remarks>
+	#endregion Class Documentation
+    public sealed class Jitter 
+	{
         // --- Fields ---
         #region Public Constants
 		/// <summary>
@@ -102,62 +154,13 @@ namespace SdlDotNet.Examples
         public const int MaxSamples = 66;
         #endregion Public Constants
 
-        #region Public Structs
-		/// <summary>
-		/// 
-		/// </summary>
-        public struct JitterPoint {
-			/// <summary>
-			/// 
-			/// </summary>
-			public float X
-			{
-				get
-				{
-					return x;
-				}
-				set
-				{
-					x = value;
-				}
-			}
-            float x;
-			/// <summary>
-			/// 
-			/// </summary>
-			public float Y
-			{
-				get
-				{
-					return y;
-				}
-				set
-				{
-					y = value;
-				}
-			}
-
-            float y;
-
-			/// <summary>
-			/// 
-			/// </summary>
-			/// <param name="x"></param>
-			/// <param name="y"></param>
-            public JitterPoint(float x, float y) {
-                this.x = x;
-                this.y = y;
-            }
-        };
-        #endregion Public Structs
-
         #region Public Fields
         /// <summary>
         ///     <para>
         ///         2 jitter points.
         ///     </para>
         /// </summary>
-        public static JitterPoint[] j2 = {
+        public static readonly JitterPoint[] J2 = {
             new JitterPoint( 0.246490f,  0.249999f),
             new JitterPoint(-0.246490f, -0.249999f)
         };
@@ -167,7 +170,7 @@ namespace SdlDotNet.Examples
         ///         3 jitter points.
         ///     </para>
         /// </summary>
-        public static JitterPoint[] j3 = {
+        public static readonly JitterPoint[] J3 = {
             new JitterPoint(-0.373411f, -0.250550f),
             new JitterPoint( 0.256263f,  0.368119f),
             new JitterPoint( 0.117148f, -0.117570f)
@@ -178,7 +181,7 @@ namespace SdlDotNet.Examples
         ///         4 jitter points.
         ///     </para>
         /// </summary>
-        public static JitterPoint[] j4 = {
+        public static readonly JitterPoint[] J4 = {
             new JitterPoint(-0.208147f,  0.353730f),
             new JitterPoint( 0.203849f, -0.353780f),
             new JitterPoint(-0.292626f, -0.149945f),
@@ -190,7 +193,7 @@ namespace SdlDotNet.Examples
         ///         8 jitter points.
         ///     </para>
         /// </summary>
-        public static JitterPoint[] j8 = {
+        public static readonly JitterPoint[] J8 = {
             new JitterPoint(-0.334818f,  0.435331f),
             new JitterPoint( 0.286438f, -0.393495f),
             new JitterPoint( 0.459462f,  0.141540f),
@@ -206,7 +209,7 @@ namespace SdlDotNet.Examples
         ///         15 jitter points.
         ///     </para>
         /// </summary>
-        public static JitterPoint[] j15 = {
+        public static readonly JitterPoint[] J15 = {
             new JitterPoint( 0.285561f,  0.188437f),
             new JitterPoint( 0.360176f, -0.065688f),
             new JitterPoint(-0.111751f,  0.275019f),
@@ -229,7 +232,7 @@ namespace SdlDotNet.Examples
         ///         24 jitter points.
         ///     </para>
         /// </summary>
-        public static JitterPoint[] j24 = {
+        public static readonly JitterPoint[] J24 = {
             new JitterPoint( 0.030245f,  0.136384f),
             new JitterPoint( 0.018865f, -0.348867f),
             new JitterPoint(-0.350114f, -0.472309f),
@@ -261,7 +264,7 @@ namespace SdlDotNet.Examples
         ///         66 jitter points.
         ///     </para>
         /// </summary>
-        public static JitterPoint[] j66 = {
+        public static readonly JitterPoint[] J66 = {
             new JitterPoint( 0.266377f, -0.218171f),
             new JitterPoint(-0.170919f, -0.429368f),
             new JitterPoint( 0.047356f, -0.387135f),

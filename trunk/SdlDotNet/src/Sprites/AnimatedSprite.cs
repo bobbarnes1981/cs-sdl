@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: AnimatedSprite.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -208,7 +208,7 @@ namespace SdlDotNet.Sprites
 			return this.m_Animations[m_CurrentAnimation][m_Frame];
 		}
 
-		private int m_Frame = 0;
+		private int m_Frame;
 		/// <summary>
 		/// Gets and sets the current frame in the animation.
 		/// </summary>

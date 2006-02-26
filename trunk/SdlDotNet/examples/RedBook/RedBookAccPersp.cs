@@ -32,7 +32,7 @@ using SdlDotNet;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     Use the accumulation buffer to do full-scene antialiasing on a scene with
@@ -317,7 +317,7 @@ namespace SdlDotNet.Examples
 			for(int jitter = 0; jitter < ACSIZE; jitter++) 
 			{
 				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-				AccPerspective(50.0, (double) viewport[2] / (double) viewport[3], 1.0, 15.0, Jitter.j8[jitter].X, Jitter.j8[jitter].Y, 0.0, 0.0, 1.0);
+				AccPerspective(50.0, (double) viewport[2] / (double) viewport[3], 1.0, 15.0, Jitter.J8[jitter].X, Jitter.J8[jitter].Y, 0.0, 0.0, 1.0);
 				DisplayObjects();
 				Gl.glAccum(Gl.GL_ACCUM, 1.0f / ACSIZE);
 			}

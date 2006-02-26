@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: Rectangles.cs,v $
  * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  *
@@ -23,7 +23,7 @@ using System.Drawing;
 
 using SdlDotNet;
 
-namespace SdlDotNet.Examples 
+namespace SdlDotNet.Examples.Rectangles
 {
 	/// <summary>
 	/// A simple SDL.NET Example that draws a bunch of rectangles on the screen. 

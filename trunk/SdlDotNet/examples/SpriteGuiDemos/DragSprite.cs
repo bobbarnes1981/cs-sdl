@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: DragSprite.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@ using System.Drawing;
 using System.Collections;
 using System.Globalization;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SpriteGuiDemos
 {
 	/// <summary>
 	/// 

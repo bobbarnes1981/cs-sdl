@@ -33,7 +33,7 @@ using System.IO;
 using Tao.OpenGl;
 using Tao.Platform.Windows;
 
-namespace SdlDotNet.Examples 
+namespace SdlDotNet.Examples.NeHe 
 {
 	/// <summary>
 	/// Lesson 15: Texture Mapped Outline Fonts

@@ -21,7 +21,7 @@
 using System;
 using NUnit.Framework;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.Triad
 {
 	/// <summary>
 	/// 

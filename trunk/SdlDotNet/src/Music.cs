@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: Music.cs,v $
  * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
  *
@@ -126,6 +126,9 @@ namespace SdlDotNet
 				{
 					SdlMixer.Mix_FreeMusic(this.Handle);
 				}
+			}
+			catch (NullReferenceException)
+			{
 			}
 			finally
 			{

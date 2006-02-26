@@ -19,7 +19,7 @@
 using System;
 using System.Collections;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.Triad
 {
 	/// <summary>
 	/// A collection of elements of type Block

@@ -33,7 +33,7 @@ using System.Drawing.Imaging;
 using SdlDotNet;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.NeHe
 {
 	/// <summary>
 	/// Lesson 17: 2D Texture Font

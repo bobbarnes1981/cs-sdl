@@ -33,7 +33,7 @@ using System.Collections;
 using SdlDotNet;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.NeHe
 {
 	/// <summary>
 	/// Lesson 19: Particle Engine Using Triangle Strips

@@ -9,8 +9,8 @@
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
 !define PRODUCT_TUTORIALS_WEB_SITE "http://cs-sdl.sourceforge.net/index.php/Category:Tutorials"
 !define PRODUCT_EXAMPLES_WEB_SITE "http://cs-sdl.sourceforge.net/index.php/Category:Examples"
-!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNet"
-!define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNet"
+!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNetSDK"
+!define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNetSDK"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_PATH "../../bin/${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_BUILD}"
 

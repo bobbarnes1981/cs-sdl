@@ -32,7 +32,7 @@ using SdlDotNet;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     Use the accumulation buffer to do full-scene antialiasing on a scene with
@@ -241,7 +241,7 @@ namespace SdlDotNet.Examples
 				Gl.glPushMatrix();
 				// Note that 4.5 is the distance in world space between left and right and bottom
 				// and top.  This formula converts fractional pixel movement to world coordinates.
-				Gl.glTranslatef((Jitter.j8[jitter].X * 4.5f) / viewport[2], (Jitter.j8[jitter].Y * 4.5f) / viewport[3], 0.0f);
+				Gl.glTranslatef((Jitter.J8[jitter].X * 4.5f) / viewport[2], (Jitter.J8[jitter].Y * 4.5f) / viewport[3], 0.0f);
 				DisplayObjects();
 				Gl.glPopMatrix();
 				Gl.glAccum(Gl.GL_ACCUM, 1.0f / ACSIZE);

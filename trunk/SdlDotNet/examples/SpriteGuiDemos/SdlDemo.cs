@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: SdlDemo.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -28,7 +28,7 @@ using System.Drawing;
 using System.Threading;
 using System.Globalization;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SpriteGuiDemos
 {
 	/// <summary>
 	/// The SdlDemo is a general testbed and display of various features

@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: Events.cs,v $
  * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -124,7 +124,7 @@ namespace SdlDotNet
 	public sealed class Events 
 	{
 		private static Hashtable userEvents = new Hashtable();
-		private static int userEventId = 0;		
+		private static int userEventId;		
 		private const int QUERY_EVENTS_MAX = 254;
 
 		/// <summary>

@@ -23,7 +23,7 @@ using System;
 using System.Drawing;
 using SdlDotNet;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.Triad
 {
 
 	/// <summary>

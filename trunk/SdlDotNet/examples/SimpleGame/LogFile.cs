@@ -19,7 +19,7 @@ using System;
 using System.IO;
 using System.Globalization;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SimpleGame
 {
 	/// <summary>
 	/// Summary description for LogFile.

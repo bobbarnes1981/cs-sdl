@@ -7,8 +7,8 @@
 !define PRODUCT_PUBLISHER "SDL.NET"
 !define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
-!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNet"
-!define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNet"
+!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNetRuntime"
+!define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNetRuntime"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define PRODUCT_PATH "../../bin/${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_BUILD}"
 
@@ -180,13 +180,6 @@ Section -Post
 SectionEnd
 
 Section Uninstall
-  Delete "$SMPROGRAMS\SdlDotNet\*.*"
-
-  ; set OutPath to somewhere else because the current working directory cannot be deleted!
-  SetOutPath "$DESKTOP"
-  
-  RMDir /r "$SMPROGRAMS\SdlDotNet"
- 
   
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"

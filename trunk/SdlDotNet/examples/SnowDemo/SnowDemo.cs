@@ -24,7 +24,7 @@ using System.Drawing;
 using SdlDotNet;
 using SdlDotNet.Sprites;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SnowDemo
 {
 	/// <summary>
 	/// 
@@ -97,6 +97,7 @@ namespace SdlDotNet.Examples
 			tree = new Surface(filepath + data_directory + "Tree.bmp");
 			tree.TransparentColor = Color.Magenta;
 			treeStretch = tree.Stretch(new Size(100,100));
+			//treeStretch.TransparentColor = Color.Black;
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Snow Demo";
 			Initialize(250);

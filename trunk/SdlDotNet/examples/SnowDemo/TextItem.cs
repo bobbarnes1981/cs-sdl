@@ -23,7 +23,7 @@ using System.Globalization;
 using SdlDotNet;
 using SdlDotNet.Sprites;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SnowDemo
 {
 	enum TextFadeState
 	{

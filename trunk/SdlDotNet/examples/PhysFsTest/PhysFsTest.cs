@@ -32,7 +32,7 @@ using System.IO;
 using Tao.PhysFs;
 using SdlDotNet;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.PhysFsTest
 {
 	/// <summary>
 	/// Summary description for PhysFsTest.

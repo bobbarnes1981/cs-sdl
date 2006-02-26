@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: DemoMode.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@ using System.Drawing;
 using System;
 using System.IO;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SpriteGuiDemos
 {
 	/// <summary>
 	/// An abstract page to encapsulates the common functionality of all

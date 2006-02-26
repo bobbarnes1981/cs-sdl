@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: BounceSprite.cs,v $
  * Copyright (C) 2005 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@ using System.Drawing;
 using SdlDotNet;
 using SdlDotNet.Sprites;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.CDPlayer
 {
 	/// <summary>
 	/// 
@@ -160,6 +160,10 @@ namespace SdlDotNet.Examples
 		/// <param name="args"></param>
 		public override void Update(KeyboardEventArgs args)
 		{
+			if( args == null )
+			{
+				throw new ArgumentNullException("args");
+			}
 			if (args.Key == SdlDotNet.Key.S && args.Down == true)
 			{
 				this.BeingDragged = true;
@@ -171,7 +175,6 @@ namespace SdlDotNet.Examples
 				this.Animate = true;
 			}
 		}
-
 
 		/// <summary>
 		/// If the sprite is picked up, this moved the sprite to follow

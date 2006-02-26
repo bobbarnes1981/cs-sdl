@@ -29,7 +29,7 @@ using System;
 
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.NeHe
 {
 	/// <summary>
 	/// Lesson 05: 3D Shapes

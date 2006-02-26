@@ -22,7 +22,7 @@ using System.Drawing;
 using SdlDotNet;
 using SdlDotNet.Sprites;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SimpleGame
 {
 	/// <summary>
 	/// Summary description for Sector.

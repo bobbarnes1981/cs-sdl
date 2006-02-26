@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: BounceSprites.cs,v $
  * Copyright (C) 2005 David Hudson (jendave@yahoo.com) 
  *
  * This library is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@ using System.Collections;
 using SdlDotNet;
 using SdlDotNet.Sprites;
 
-namespace SdlDotNet.Examples 
+namespace SdlDotNet.Examples.BounceSprites
 {
 	/// <summary>
 	/// Demo of Bouncing Balls using Sprites. 

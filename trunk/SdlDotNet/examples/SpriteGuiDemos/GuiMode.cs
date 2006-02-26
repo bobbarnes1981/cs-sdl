@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: GuiMode.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@ using SdlDotNet.Examples.GuiExample;
 using System.Drawing;
 using System;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SpriteGuiDemos
 {
 	/// <summary>
 	/// 
