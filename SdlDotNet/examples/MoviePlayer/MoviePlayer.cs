@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: MoviePlayer.cs,v $
  * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -23,7 +23,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using SdlDotNet;
 
-namespace SdlDotNet.Examples 
+namespace SdlDotNet.Examples.MoviePlayer
 {
 	#region Class Documentation
 	/// <summary>

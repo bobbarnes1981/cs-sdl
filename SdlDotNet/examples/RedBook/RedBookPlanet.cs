@@ -32,7 +32,7 @@ using SdlDotNet;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     This program shows how to composite modeling transformations to draw translated

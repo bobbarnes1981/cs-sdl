@@ -31,7 +31,7 @@ using System.Reflection;
 using SdlDotNet;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     This program draws shows how to draw anti-aliased lines.  It draws two diagonal

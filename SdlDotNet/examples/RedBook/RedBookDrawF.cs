@@ -31,7 +31,7 @@ using System.Reflection;
 using SdlDotNet;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     Draws the bitmapped letter F on the screen (several times).  This demonstrates

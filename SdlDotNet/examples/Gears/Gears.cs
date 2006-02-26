@@ -15,7 +15,7 @@ using System;
 using SdlDotNet;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.Gears
 {
 	/// <summary>
 	/// 

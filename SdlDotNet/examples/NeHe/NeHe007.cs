@@ -34,7 +34,7 @@ using System.Reflection;
 using SdlDotNet;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.NeHe
 {
 	/// <summary>
 	/// Lesson 07: Texture Filters, Lighting, and Keyboard Control

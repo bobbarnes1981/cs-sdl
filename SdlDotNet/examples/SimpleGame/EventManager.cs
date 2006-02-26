@@ -19,7 +19,7 @@ using System;
 using System.Collections;
 using SdlDotNet;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SimpleGame
 {
 	/// <summary>
 	/// Summary description for EventManager.

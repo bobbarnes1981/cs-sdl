@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: Video.cs,v $
  * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -888,7 +888,7 @@ namespace SdlDotNet
 			{
 				Bitmap bitmap = icon.ToBitmap();
 				Surface surface = new Surface(bitmap);
-				surface.TransparentColor = Color.Empty;
+				surface.ClearTransparentColor();
 				WindowIcon(surface);
 			}
 			catch (SdlException e)
@@ -909,6 +909,7 @@ namespace SdlDotNet
 			string iconName = "";
 			foreach (string s in Assembly.GetCallingAssembly().GetManifestResourceNames())
 			{
+				Console.WriteLine(s);
 				if (s.EndsWith("App.ico"))
 				{
 					iconName = s;

@@ -31,7 +31,7 @@ using System.Reflection;
 using SdlDotNet;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     This program draws a NURBS surface in the shape of a symmetrical hill.  The 'c'

@@ -32,7 +32,7 @@ using System.Globalization;
 using Tao.OpenGl;
 using Tao.Platform.Windows;
 
-namespace SdlDotNet.Examples 
+namespace SdlDotNet.Examples.NeHe 
 {
 	/// <summary>
 	/// Lesson 13: Bitmap Fonts

@@ -34,7 +34,7 @@ using System.Reflection;
 using SdlDotNet;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.NeHe
 {
 	/// <summary>
 	/// Lesson 09: Moving Bitmaps in 3D Space

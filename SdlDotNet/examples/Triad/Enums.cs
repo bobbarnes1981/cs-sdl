@@ -18,7 +18,7 @@
 
 using System;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.Triad
 {
 	/// <summary>
 	/// 

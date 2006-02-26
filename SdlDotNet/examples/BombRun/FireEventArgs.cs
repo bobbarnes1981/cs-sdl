@@ -18,7 +18,7 @@
 using System;
 using System.Drawing;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.BombRun
 {
 	/// <summary>
 	/// 

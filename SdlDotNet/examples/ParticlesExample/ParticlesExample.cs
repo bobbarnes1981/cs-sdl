@@ -27,7 +27,7 @@ using SdlDotNet.Particles.Particle;
 using SdlDotNet.Sprites;
 using System.Drawing;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.ParticlesExample
 {
 	/// <summary>
 	/// An example program using particles.

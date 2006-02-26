@@ -32,7 +32,7 @@ using SdlDotNet;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     This program renders three lighted, shaded teapots, with different ambient values.

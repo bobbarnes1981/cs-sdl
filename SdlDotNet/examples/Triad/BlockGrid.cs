@@ -24,7 +24,7 @@ using System.Drawing;
 using SdlDotNet;
 using System.Collections;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.Triad
 {
 	/// <summary>
 	/// 

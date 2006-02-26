@@ -32,7 +32,7 @@ using SdlDotNet;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     This program demonstrates use of the accumulation buffer to create an
@@ -276,7 +276,7 @@ namespace SdlDotNet.Examples
 			for(jitter = 0; jitter < 8; jitter++) 
 			{
 				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-				AccPerspective(45.0, (double) viewport[2] / (double) viewport[3], 1.0, 15.0, 0.0, 0.0, 0.33 * Jitter.j8[jitter].X, 0.33 * Jitter.j8[jitter].Y, 5.0);
+				AccPerspective(45.0, (double) viewport[2] / (double) viewport[3], 1.0, 15.0, 0.0, 0.0, 0.33 * Jitter.J8[jitter].X, 0.33 * Jitter.J8[jitter].Y, 5.0);
 
 				// ruby, gold, silver, emerald, and cyan teapots
 				RenderTeapot(-1.1f, -0.5f, -4.5f, 0.1745f, 0.01175f, 0.01175f, 0.61424f, 0.04136f, 0.04136f, 0.727811f, 0.626959f, 0.626959f, 0.6f);

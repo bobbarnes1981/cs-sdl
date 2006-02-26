@@ -33,7 +33,7 @@ using System.Globalization;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.NeHe
 {
 	/// <summary>
 	/// Summary description for NeHe.

@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: MultipleMode.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@ using SdlDotNet;
 using System.Drawing;
 using System;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SpriteGuiDemos
 {
 	/// <summary>
 	/// 

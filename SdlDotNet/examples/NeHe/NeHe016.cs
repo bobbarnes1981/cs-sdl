@@ -32,7 +32,7 @@ using System.Drawing;
 using SdlDotNet;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.NeHe
 {
 	/// <summary>
 	/// Lesson 16: Cool Looking Fog

@@ -32,7 +32,7 @@ using SdlDotNet;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     This is an illustration of the selection mode and name stack, which detects

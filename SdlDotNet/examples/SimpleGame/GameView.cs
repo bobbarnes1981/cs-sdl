@@ -21,7 +21,7 @@ using System.Drawing;
 using System.Collections;
 using SdlDotNet;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SimpleGame
 {
 	/// <summary>
 	/// Derived class

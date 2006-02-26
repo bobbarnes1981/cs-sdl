@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: Sound.cs,v $
  * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -56,16 +56,16 @@ namespace SdlDotNet
 		/// </summary>
 		public event SoundEventHandler SoundEvent;
 
-        /// <summary>
-        /// Internal constructor to assemble a Sound object from the handle and size.
-        /// </summary>
-        /// <param name="handle">The handle</param>
-        /// <param name="size">The size of the sound.</param>
-		internal Sound(IntPtr handle, long size) 
-		{
-			this.Handle = handle;
-			this.size = size;
-		}
+//        /// <summary>
+//        /// Internal constructor to assemble a Sound object from the handle and size.
+//        /// </summary>
+//        /// <param name="handle">The handle</param>
+//        /// <param name="size">The size of the sound.</param>
+//		internal Sound(IntPtr handle, long size) 
+//		{
+//			this.Handle = handle;
+//			this.size = size;
+//		}
 
 		/// <summary>
 		/// Loads a .wav file into memory.

@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: DragMode.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -24,7 +24,7 @@ using System.Collections;
 using System.Drawing;
 using System.Threading;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SpriteGuiDemos
 {
 	/// <summary>
 	/// 

@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: Surface.cs,v $
  * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -258,6 +258,9 @@ namespace SdlDotNet
 				{
 					Sdl.SDL_FreeSurface(this.Handle);
 				}
+			}
+			catch (NullReferenceException)
+			{
 			}
 			finally
 			{
@@ -2133,12 +2136,14 @@ namespace SdlDotNet
 		public Surface Stretch(Rectangle sourceRectangle, Rectangle destinationRectangle)
 		{
 			Surface surface = new Surface(sourceRectangle);
+			Color colorTemp = this.TransparentColor;
+			this.ClearTransparentColor();
 			surface.Blit(this, new Point(0,0), sourceRectangle);
-			surface.TransparentColor = Color.Black;
+			this.TransparentColor = colorTemp;
 			double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
 			double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
 			surface.Scale(stretchWidth, stretchHeight);
-			surface.transparentColor = this.transparentColor;
+			surface.TransparentColor = this.TransparentColor;
 			surface.alphaValue = this.alphaValue;
 			return surface;
 		}
@@ -2151,12 +2156,14 @@ namespace SdlDotNet
 		public Surface Stretch(Size destinationSize)
 		{
 			Surface surface = new Surface(this.Size);
+			Color colorTemp = this.TransparentColor;
+			this.ClearTransparentColor();
 			surface.Blit(this, new Point(0,0));
-			surface.TransparentColor = Color.Black;
+			this.TransparentColor = colorTemp;
 			double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
 			double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
 			surface.Scale(stretchWidth, stretchHeight);
-			surface.transparentColor = this.transparentColor;
+			surface.TransparentColor = this.TransparentColor;
 			surface.alphaValue = this.alphaValue;
 			return surface;
 		}

@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: CDPlayer.cs,v $
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
  * Copyright (C) 2004,2005 David Hudson (jendave@yahoo.com)
  *
@@ -30,7 +30,7 @@ using SdlDotNet;
 using SdlDotNet.Sprites;
 using SdlDotNet.Windows;
 
-namespace SdlDotNet.Examples 
+namespace SdlDotNet.Examples.CDPlayer
 {
 	/// <summary>
 	/// 
@@ -498,11 +498,19 @@ namespace SdlDotNet.Examples
 			this.Close();		
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
 		protected override void OnKeyDown(KeyEventArgs e)
 		{
 			this.surfaceControl.KeyPressed(e);
 			base.OnKeyDown (e);
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="e"></param>
 		protected override void OnKeyUp(KeyEventArgs e)
 		{
 			this.surfaceControl.KeyReleased(e);

@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: AudioExample.cs,v $
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
  *
  * This library is free software; you can redistribute it and/or
@@ -31,13 +31,13 @@ using SdlDotNet.Sprites;
 // Simple example to demonstrate audio in SDL.NET.
 // Click plays the sound, space changes the music, arrows change volume.
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.AudioExample
 { 
 	/// <summary>
 	/// A simple SDL.NET example which demonstrates audio in SDL.NET.
 	/// Click plays sound, space changes music and the arrow keys change volume.
 	/// </summary>
-	public class AudioExample
+	public class AudioExample : IDisposable
 	{ 
 		private const int width = 400; 
 		private const int height = 100;
@@ -196,5 +196,60 @@ namespace SdlDotNet.Examples
 		{
 			Events.QuitApplication();
 		}
+
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Dispose()
+		{
+			this.Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~AudioExample() 
+		{
+			Dispose(false);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					if (this.textDisplay != null)
+					{
+						this.textDisplay.Dispose();
+						this.textDisplay = null;
+					}
+					if (this.boing != null)
+					{
+						this.boing.Dispose();
+						this.boing = null;
+					}
+				}
+				this.disposed = true;
+			}
+		}
+
+		#endregion
 	} 
 } 

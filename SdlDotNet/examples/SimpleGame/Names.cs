@@ -17,7 +17,7 @@
 
 using System;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SimpleGame
 {
 	/// <summary>
 	/// Summary description for Class1.

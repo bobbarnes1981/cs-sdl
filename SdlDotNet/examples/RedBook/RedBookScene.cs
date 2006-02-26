@@ -32,7 +32,7 @@ using SdlDotNet;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.RedBook
 {
 	/// <summary>
 	///     This program demonstrates the use of the GL lighting model.  Objects are drawn

@@ -20,7 +20,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.Triad
 {
 	/// <summary>
 	/// 

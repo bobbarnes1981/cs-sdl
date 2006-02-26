@@ -21,7 +21,7 @@ using System.Diagnostics;
 
 using SdlDotNet;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SimpleGame
 {
 	/// <summary>
 	/// Summary description for Game.

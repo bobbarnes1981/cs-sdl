@@ -1,5 +1,5 @@
 /*
- * $RCSfile$
+ * $RCSfile: Sprite.cs,v $
  * Copyright (C) 2005 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -49,8 +49,9 @@ namespace SdlDotNet.Sprites
 		/// <param name="position">Starting position</param>
 		/// <param name="surface">Surface of Sprite</param>
 		public Sprite(Surface surface, Point position) : 
-			this(surface, new Rectangle(position.X, position.Y, surface.Width, surface.Height))
+			this(surface)
 		{
+			this.rect = new Rectangle(position.X, position.Y, surface.Width, surface.Height);
 		}
 
 		/// <summary>

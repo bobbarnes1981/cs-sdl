@@ -21,7 +21,7 @@ using System.Drawing;
 
 using SdlDotNet.Sprites;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.SnowDemo
 {
 	/// <summary>
 	/// Snowflake Sprite Class
