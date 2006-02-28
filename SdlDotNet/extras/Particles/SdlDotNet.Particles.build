@@ -14,11 +14,6 @@
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${src.dir}">
-		<include name="${project.name}.snk"/>
-	    </fileset>
-	</copy>
 	<csc target="library" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
 	    <sources failonempty="true">
 		<include name="**.cs" />

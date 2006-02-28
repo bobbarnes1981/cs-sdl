@@ -18,32 +18,25 @@
 		<include name="Tao.FreeGlut.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${src.dir}">
-		<include name="${project.name}.snk"/>
-	    </fileset>
-	</copy>
-<!--	<ifnot test="${framework::get-runtime-framework() == 'mono-1.0'}"> -->
-	    <csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" win32icon="App.ico">
-		<sources failonempty="true">
-		    <include name="*.cs" />
-		</sources>
-		<resources>
-		    <include name="*.resx"/>
-		    <include name="App.ico"/>
-		</resources>
-		<references basedir="${nant.project.basedir}/${build.dir}">
-		    <include name="${project.name}.dll"/>
-		    <include name="${native.sdl}.dll"/>
-		    <include name="Tao.OpenGl.dll"/>
-		    <include name="Tao.OpenGl.Glu.dll"/>
-		    <include name="Tao.FreeGlut.dll"/>
-		    <include name="Tao.OpenGl.ExtensionLoader.dll"/>
-		    <include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
-		    <include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Windows.Forms.dll"/>
-		</references>
-	    </csc>
-<!--	</ifnot> -->
+	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" win32icon="App.ico">
+	    <sources failonempty="true">
+		<include name="*.cs" />
+	    </sources>
+	    <resources>
+		<include name="*.resx"/>
+		<include name="App.ico"/>
+	    </resources>
+	    <references basedir="${nant.project.basedir}/${build.dir}">
+		<include name="${project.name}.dll"/>
+		<include name="${native.sdl}.dll"/>
+		<include name="Tao.OpenGl.dll"/>
+		<include name="Tao.OpenGl.Glu.dll"/>
+		<include name="Tao.FreeGlut.dll"/>
+		<include name="Tao.OpenGl.ExtensionLoader.dll"/>
+		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Windows.Forms.dll"/>
+	    </references>
+	</csc>
     </target>
     <target name="clean">
 	<delete dir="${bin.dir}" failonerror="false" />
