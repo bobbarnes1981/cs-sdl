@@ -90,8 +90,4 @@ using System.IO;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyDelaySign(false)]
-#if NET
 [assembly: AssemblyKeyFile(@"../../SdlDotNet.snk")]
-#else
-[assembly: AssemblyKeyFile(@"SdlDotNet.snk")]
-#endif

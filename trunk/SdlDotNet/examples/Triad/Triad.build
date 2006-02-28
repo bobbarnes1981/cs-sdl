@@ -15,11 +15,6 @@
 		<include name="nunit.framework.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${nant.project.basedir}/${build.dir}">
-	    <fileset basedir="${project.main.dir}/${src.dir}">
-		<include name="${project.name}.snk"/>
-	    </fileset>
-	</copy>
 	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.exe" win32icon="App.ico">
 	    <sources failonempty="true">
 		<include name="*.cs" />

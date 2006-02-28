@@ -9,11 +9,6 @@
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	    <copy todir="${nant.project.basedir}/${build.dir}">
-		<fileset basedir="${nant.project.basedir}">
-		    <include name="${nant.project.name}.snk"/>
-		</fileset>
-	    </copy>
 	<!-- build SDL.NET -->
 	<csc target="library" warnaserror="true" unsafe="true" debug="${build.debug}" output="${nant.project.basedir}/${build.dir}/${nant.project.name}.dll" doc="${nant.project.basedir}/${build.dir}/${nant.project.name}.xml">
 	    <sources failonempty="true">
