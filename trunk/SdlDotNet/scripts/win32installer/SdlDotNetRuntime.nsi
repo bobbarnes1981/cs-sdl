@@ -45,7 +45,8 @@ Var filename
 !insertmacro MUI_PAGE_WELCOME
 ; License page
 !insertmacro MUI_PAGE_LICENSE "..\..\COPYING"
-
+; Components Page
+!insertmacro MUI_PAGE_COMPONENTS
 ; Instfiles page
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !insertmacro MUI_PAGE_INSTFILES
@@ -158,7 +159,7 @@ Function un.DeleteManagedDLLKey
 FunctionEnd
 
 ;Language strings
-LangString DESC_SecRuntime ${LANG_ENGLISH} "Copies the runtime libaries to the SdlDotNet directory. It will install them into the GAC."
+LangString DESC_SecRuntime ${LANG_ENGLISH} "Installs the runtime libaries "
 
 ;Assign language strings to sections
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN

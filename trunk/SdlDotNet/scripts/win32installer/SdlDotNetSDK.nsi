@@ -79,7 +79,7 @@ Var STARTMENU_FOLDER
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "..\..\bin\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_BUILD}-${PRODUCT_TYPE}-setup.exe"
-InstallDir "$PROGRAMFILES\SdlDotNet"
+InstallDir "$PROGRAMFILES\SdlDotNet\sdk"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
@@ -208,7 +208,7 @@ LangString TEXT_IO_SUBTITLE ${LANG_ENGLISH} "SdlDotNet Installation Options."
 LangString DESC_SecExamples ${LANG_ENGLISH} "Installs examples using various features of SdlDotNet."
 LangString DESC_SecSrc ${LANG_ENGLISH} "Installs the source code."
 LangString DESC_SecDocs ${LANG_ENGLISH} "Installs documentation"
-LangString DESC_SecRuntime ${LANG_ENGLISH} "Copies the libaries to the SdlDotNet directory. It does not install them into the GAC."
+LangString DESC_SecRuntime ${LANG_ENGLISH} "Installs the libaries into the SdlDotNet directory. It does not install them into the GAC."
 
 ;Assign language strings to sections
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
