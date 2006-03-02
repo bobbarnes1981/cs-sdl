@@ -50,9 +50,9 @@ namespace SdlDotNet.Examples.PhysFsTest
 		public PhysFsTest()
 		{
 			// setup SDL.NET
-			Video.SetVideoModeWindow(400, 300);
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - PhysFsTest";
+			Video.SetVideoModeWindow(400, 300);
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
 			Events.Tick += new TickEventHandler(this.Tick);
 			Events.Quit += new QuitEventHandler(this.Quit);

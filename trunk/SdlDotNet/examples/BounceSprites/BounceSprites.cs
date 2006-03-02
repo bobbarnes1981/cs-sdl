@@ -86,11 +86,11 @@ namespace SdlDotNet.Examples.BounceSprites
 				filepath = "";
 			}
 			background = new Surface(filepath + data_directory + "background.png");
+			Video.WindowIcon();
+			Video.WindowCaption = "SDL.NET - Bounce Sprites";
 			screen = Video.SetVideoModeWindow(width, height);
 			screen.Blit(background);
 			screen.Update();
-			Video.WindowIcon();
-			Video.WindowCaption = "SDL.NET - Bounce Sprites";
 
 			//This loads the various images (provided by Moonfire) 
 			// into a SurfaceCollection for animation

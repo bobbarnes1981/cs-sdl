@@ -862,6 +862,7 @@ namespace SdlDotNet
 		/// sets the icon for the current window
 		/// </summary>
 		/// <param name="icon">the surface containing the image</param>
+		/// <remarks>This should be called before Video.SetVideoMode</remarks>
 		public static void WindowIcon(Surface icon) 
 		{
 			if (icon == null)
@@ -878,6 +879,7 @@ namespace SdlDotNet
 		/// On OS X, this method returns nothing since OS X does not use window icons.
 		/// </remarks>
 		/// <param name="icon">Icon to use</param>
+		/// <remarks>This should be called before Video.SetVideoMode</remarks>
 		public static void WindowIcon(Icon icon)
 		{
 			if (icon == null)
@@ -888,7 +890,8 @@ namespace SdlDotNet
 			{
 				Bitmap bitmap = icon.ToBitmap();
 				Surface surface = new Surface(bitmap);
-				surface.ClearTransparentColor();
+				surface.TransparentColor = Color.Empty;
+				//surface.ClearTransparentColor();
 				WindowIcon(surface);
 			}
 			catch (SdlException e)
@@ -903,6 +906,7 @@ namespace SdlDotNet
 		/// This method assumes there is an embedded 
 		/// resource named &quot;App.ico&quot;.
 		/// </summary>
+		/// <remarks>This should be called before Video.SetVideoMode</remarks>
 		public static void WindowIcon()
 		{
 			Assembly callingAssembly = Assembly.GetCallingAssembly();

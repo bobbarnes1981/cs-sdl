@@ -54,6 +54,9 @@ namespace SdlDotNet.Examples.BombRun
 			{
 				filepath = "";
 			}
+			Video.WindowIcon();
+			Video.WindowCaption =
+				"SDL.NET - Bomb Run";
 			screen = Video.SetVideoModeWindow(640, 480);
 			tempSurface = new Surface(filepath + data_directory + "Background1.png");
 			background = tempSurface.Convert();
@@ -79,9 +82,6 @@ namespace SdlDotNet.Examples.BombRun
 			master.Add(players);
 
 			Mouse.ShowCursor = false;
-			Video.WindowIcon();
-			Video.WindowCaption =
-				"SDL.NET - Bomb Run";
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.Keyboard);
 			Events.Quit += new QuitEventHandler(this.Quit);

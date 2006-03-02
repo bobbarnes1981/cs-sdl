@@ -39,6 +39,7 @@ namespace SdlDotNet.Examples.MoviePlayer
 	public class MoviePlayer : IDisposable
 	{		
 		Movie movie;
+		Surface screen;
 
 		#region Run()
 		/// <summary>
@@ -61,15 +62,16 @@ namespace SdlDotNet.Examples.MoviePlayer
 			Events.Tick += new TickEventHandler(this.Tick);
 			Events.Quit += new QuitEventHandler(this.Quit);
 
-			Surface screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Movie Player";
+			screen = Video.SetVideoModeWindow(width, height); 
 			Mixer.Close();
 			movie = new Movie(filepath + data_directory + "test.mpg");
 			Console.WriteLine("Time: " + movie.Length);
 			Console.WriteLine("Width: " + movie.Size.Width);
 			Console.WriteLine("Height: " + movie.Size.Height);
 			Console.WriteLine("HasAudio: " + movie.HasAudio);
+			Console.WriteLine("HasVideo: " + movie.HasVideo);
 			movie.Display(screen);
 			movie.Play();
 			Events.Run();
