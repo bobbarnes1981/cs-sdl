@@ -51,6 +51,11 @@ namespace SdlDotNet
 			}
 		}
 
+		static Movie()
+		{
+			Video.Initialize();
+		}
+
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
@@ -64,7 +69,6 @@ namespace SdlDotNet
 					if (disposing)
 					{
 					}
-					//CloseHandle();
 					this.disposed = true;
 				}
 			}

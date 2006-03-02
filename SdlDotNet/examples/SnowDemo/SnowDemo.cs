@@ -91,15 +91,14 @@ namespace SdlDotNet.Examples.SnowDemo
 			{
 				filepath = "";
 			}
+			Video.WindowIcon();
+			Video.WindowCaption = "SDL.NET - Snow Demo";
 			screen = Video.SetVideoModeWindow(640, 480, 16);
 			background = new Surface(filepath + data_directory + "snowbackground.png");
 			background.TransparentColor = Color.Magenta;
 			tree = new Surface(filepath + data_directory + "Tree.bmp");
 			tree.TransparentColor = Color.Magenta;
 			treeStretch = tree.Stretch(new Size(100,100));
-			//treeStretch.TransparentColor = Color.Black;
-			Video.WindowIcon();
-			Video.WindowCaption = "SDL.NET - Snow Demo";
 			Initialize(250);
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.KeyboardDown);

@@ -79,9 +79,9 @@ namespace SdlDotNet.Examples.AudioExample
 			textDisplay = new TextSprite(" ", new Font(filepath + data_directory + "FreeSans.ttf", 20), Color.Red);
 
 			// Start up SDL
-			screen = Video.SetVideoModeWindow(width, height); 
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - AudioExample";
+			screen = Video.SetVideoModeWindow(width, height); 
 
 			// Play the music and setup the queues.
 			music["mason2"].Play();

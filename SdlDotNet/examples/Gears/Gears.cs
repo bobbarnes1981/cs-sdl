@@ -314,6 +314,8 @@ namespace SdlDotNet.Examples.Gears
 		/// </summary>
 		public void Run()
 		{
+			Video.WindowIcon();
+			Video.WindowCaption = "SDL.NET - Gears";
 			screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
 			Events.Tick += new TickEventHandler(this.Tick);
 			Events.Quit += new QuitEventHandler(this.Quit);
@@ -322,8 +324,6 @@ namespace SdlDotNet.Examples.Gears
 				new KeyboardEventHandler(this.KeyboardDown);
 
 			Events.Fps = 200;
-			Video.WindowIcon();
-			Video.WindowCaption = "SDL.NET - Gears";
 
 			Init();
 			Reshape();

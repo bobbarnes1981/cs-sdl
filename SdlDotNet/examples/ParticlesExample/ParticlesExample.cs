@@ -49,9 +49,9 @@ namespace SdlDotNet.Examples.ParticlesExample
 		public ParticlesExample()
 		{
 			// Setup SDL.NET!
-			Video.SetVideoModeWindow(400,300);
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - ParticlesExample";
+			Video.SetVideoModeWindow(400,300);
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
 			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
 			Events.MouseMotion += new MouseMotionEventHandler(this.MouseMotion);
