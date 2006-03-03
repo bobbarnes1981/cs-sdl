@@ -1,4 +1,4 @@
-SDL.NET is a set of object-oriented .NET bindings for the SDL gaming library (http://libsdl.org) - a cross-platform multimedia library designed to provide level access to audio, keyboard, mouse, joystick, 3D hardware via OpenGL, and 2D video framebuffer.
+SDL.NET is a set of object-oriented CLS-compliant .NET bindings for the SDL multimedia library that provides high-level access to audio, keyboard, mouse, joystick, TrueType fonts, various image formats, sound mixing, MPEG-1 movies, 2D video framebuffer and 3D hardware via OpenGL.
 
 This release fixes numerous bugs in the library including a SurfaceControl bug where the Surface would be offset by a few pixels. The Windows installer has been separated into an SDK and a Runtime installer. There were numerous improvements to the Sound and Music classes. The demos work better under Linux. The build process has been updated to the latest version of Prebuild so creating project files for Sharpdevelop and Monodevelop is easier.
 
