@@ -1,4 +1,6 @@
-This release fixes numerous bugs in the library including a Surface rotation memory leak and a Surface initialization problem that affected performance. The SurfaceControl is much more stable and is no longer contained in a separate library. A new example using Tao.PhysFs that reads images from zip files was added.
+SDL.NET is a set of object-oriented .NET bindings for the SDL gaming library (http://libsdl.org) - a cross-platform multimedia library designed to provide level access to audio, keyboard, mouse, joystick, 3D hardware via OpenGL, and 2D video framebuffer.
+
+This release fixes numerous bugs in the library including a SurfaceControl bug where the Surface would be offset by a few pixels. The Windows installer has been separated into an SDK and a Runtime installer. There were numerous improvements to the Sound and Music classes. The demos work better under Linux. The build process has been updated to the latest version of Prebuild so creating project files for Sharpdevelop and Monodevelop is easier.
 
 Documentation and downloads are available at http://cs-sdl.sourceforge.net.
 
@@ -7,7 +9,7 @@ A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changel
 SDL.NET is licensed under the LGPL.
 
 ===4.0.3===
-David Hudson (xx Feb 2006.)
+David Hudson (3 Mar 2006.)
 * Surface.ReplaceColor replaces all pixels of one color on a surface.
 * Surface.DrawPixel(int,int,int) to draw pixels by color value (faster).
 * Fixed dirty rectangle clipping bug that crashed the BounceSprite demo on Linux.
