@@ -153,12 +153,12 @@ namespace SdlDotNet.Examples.RedBook
 
 			// Set the Frames per second.
 			Events.Fps = 60;
+			
+			// Sets Window icon and title
+			this.WindowAttributes();
 
 			// Creates SDL.NET Surface to hold an OpenGL scene
 			Video.SetVideoModeWindowOpenGL(width, height, true);
-
-			// Sets Window icon and title
-			this.WindowAttributes();
 		}
 
 		/// <summary>

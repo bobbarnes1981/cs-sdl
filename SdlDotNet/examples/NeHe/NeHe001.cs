@@ -122,10 +122,10 @@ namespace SdlDotNet.Examples.NeHe
 //			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
 			// Set the Frames per second.
 			Events.Fps = 60;
-			// Creates SDL.NET Surface to hold an OpenGL scene
-			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
 			// Sets Window icon and title
 			this.WindowAttributes();
+			// Creates SDL.NET Surface to hold an OpenGL scene
+			screen = Video.SetVideoModeWindowOpenGL(width, height, true);
 		}
 
 		/// <summary>
