@@ -793,7 +793,7 @@ namespace SdlDotNet
 				}
 				else
 				{
-					Video.GLSetAttribute(OpenGLAttr.DoubleBuffer, 1);
+					Video.GLSetAttribute(OpenGLAttr.StereoRendering, 1);
 				}
 			}
 		}
@@ -834,7 +834,7 @@ namespace SdlDotNet
 			}
 			set
 			{
-				Video.GLSetAttribute(OpenGLAttr.MultiSampleBuffers, value);
+				Video.GLSetAttribute(OpenGLAttr.MultiSampleSamples, value);
 			}
 		}
 
