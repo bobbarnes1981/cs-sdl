@@ -1043,7 +1043,6 @@ namespace SdlDotNet
 					lastTime = currentTime;
 				}
 			}
-			//Events.Close();
 		}
 		#endregion Thread Management
 	}

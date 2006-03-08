@@ -20,6 +20,7 @@
 using System;
 using System.Drawing;
 using System.Reflection;
+using System.IO;
 using System.Runtime.InteropServices;
 using Tao.Sdl;
 
@@ -869,6 +870,7 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("icon");
 			}
+			Video.Initialize();
 			Sdl.SDL_WM_SetIcon(icon.Handle, null);
 		}
 
@@ -891,7 +893,6 @@ namespace SdlDotNet
 				Bitmap bitmap = icon.ToBitmap();
 				Surface surface = new Surface(bitmap);
 				surface.TransparentColor = Color.Empty;
-				//surface.ClearTransparentColor();
 				WindowIcon(surface);
 			}
 			catch (SdlException e)
@@ -913,7 +914,6 @@ namespace SdlDotNet
 			string iconName = "";
 			foreach (string s in Assembly.GetCallingAssembly().GetManifestResourceNames())
 			{
-				Console.WriteLine(s);
 				if (s.EndsWith("App.ico"))
 				{
 					iconName = s;

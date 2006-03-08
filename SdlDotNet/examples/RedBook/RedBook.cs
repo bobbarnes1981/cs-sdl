@@ -188,11 +188,11 @@ namespace SdlDotNet.Examples.RedBook
 					try
 					{
 						// Get the title of the RedBook example class
-						object result = type.InvokeMember("Title",
+						string result = (string)type.InvokeMember("Title",
 							BindingFlags.GetProperty, null, type, null);
 
 						// Add the example to the array and display it on the listbox
-						lstExamples.Items.Add((string)result);
+						lstExamples.Items.Add(result);
 						redBookTypes.Add(type);
 					}
 					catch(System.MissingMethodException)
@@ -213,10 +213,11 @@ namespace SdlDotNet.Examples.RedBook
 
 				// Make an instance of it.
 				dynObj = Activator.CreateInstance(dynClassType);
+
 				if(dynObj != null)
 				{
 					// Make the SDL window appear on top of this form.
-					this.SendToBack();
+					//this.SendToBack();
 					MethodInfo invokedMethod = dynClassType.GetMethod("Run");
 					invokedMethod.Invoke(dynObj, null);
 				}
@@ -264,7 +265,6 @@ namespace SdlDotNet.Examples.RedBook
 			}
 			catch(System.ObjectDisposedException)
 			{
-				Console.WriteLine("HELLO");
 				Application.Exit();
 			}
 		}
