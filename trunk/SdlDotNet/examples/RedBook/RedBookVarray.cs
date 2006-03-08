@@ -57,8 +57,6 @@ namespace SdlDotNet.Examples.RedBook
 		//Height of screen
 		int height = 350;
 		
-		
-
 		/// <summary>
 		/// Lesson title
 		/// </summary>
