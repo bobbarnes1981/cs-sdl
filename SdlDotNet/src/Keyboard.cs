@@ -66,6 +66,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Returns the actual keyboard character that was pressed.
+		/// </summary>
+		/// <param name="key">Key to translate into the actual keyboard character.</param>
+		/// <returns>Actual keyvboard character that was pressed.</returns>
+		public static string KeyboardCharacter(Key key)
+		{
+			return Sdl.SDL_GetKeyName((int)key);
+		}
+
+		/// <summary>
 		/// Returns which modifier keys are pressed
 		/// </summary>
 		public static ModifierKeys ModifierKeyState

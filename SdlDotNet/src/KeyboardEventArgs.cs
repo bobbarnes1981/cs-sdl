@@ -107,7 +107,6 @@ namespace SdlDotNet
 			}
 		}
 
-
 		/// <summary>
 		/// Key
 		/// </summary>
@@ -118,9 +117,20 @@ namespace SdlDotNet
 				return (Key)this.EventStruct.key.keysym.sym;
 			}
 		}
+
+		/// <summary>
+		/// Unicode
+		/// </summary>
+		public short Unicode
+		{
+			get
+			{
+				return this.EventStruct.key.keysym.unicode;
+			}
+		}
         
 		/// <summary>
-		/// modifier Key
+		/// Modifier Key
 		/// </summary>
 		public ModifierKeys Mod
 		{
