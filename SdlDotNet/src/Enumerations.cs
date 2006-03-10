@@ -1400,7 +1400,15 @@ namespace SdlDotNet
 		/// <summary>
 		/// Vertical Axis
 		/// </summary>
-		Vertical = 1
+		Vertical = 1,
+		/// <summary>
+		/// For some controllers
+		/// </summary>
+		Axis3 = 2,
+		/// <summary>
+		/// For some controllers
+		/// </summary>
+		Axis4 = 3
 	}
 
 	/// <summary>
