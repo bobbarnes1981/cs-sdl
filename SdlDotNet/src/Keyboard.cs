@@ -99,5 +99,27 @@ namespace SdlDotNet
 				return false;
 			}
 		}
+
+		/// <summary>
+		/// Checks if Unicode is enabled
+		/// </summary>
+		public static bool UnicodeEnabled
+		{
+			get
+			{
+				return (Sdl.SDL_EnableUNICODE(-1) == 1);
+			}
+			set
+			{
+				if (value == true)
+				{
+					Sdl.SDL_EnableUNICODE(1);
+				}
+				else
+				{
+					Sdl.SDL_EnableUNICODE(0);
+				}
+			}
+		}
 	}
 }
