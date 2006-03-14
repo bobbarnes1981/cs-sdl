@@ -119,7 +119,18 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Unicode
+		/// Returns the actual keyboard character that was pressed.
+		/// </summary>
+		public string KeyboardCharacter
+		{
+			get
+			{
+				return Keyboard.KeyboardCharacter(this.Key);
+			}
+		}
+
+		/// <summary>
+		/// Unicode 
 		/// </summary>
 		public short Unicode
 		{
@@ -128,11 +139,22 @@ namespace SdlDotNet
 				return this.EventStruct.key.keysym.unicode;
 			}
 		}
-        
+
 		/// <summary>
-		/// Modifier Key
+		/// Unicode Character
 		/// </summary>
-		public ModifierKeys Mod
+		public char UnicodeCharacter
+		{
+			get
+			{
+				return Keyboard.ShortToUnicode(this.EventStruct.key.keysym.unicode);
+			}
+		}
+        
+			/// <summary>
+			/// Modifier Key
+			/// </summary>
+			public ModifierKeys Mod
 		{
 			get
 			{

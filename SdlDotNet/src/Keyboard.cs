@@ -18,6 +18,8 @@
  */
 
 using System;
+using System.Text;
+using System.Text.RegularExpressions;
 using Tao.Sdl;
 
 namespace SdlDotNet
@@ -87,6 +89,36 @@ namespace SdlDotNet
 			set
 			{
 				Sdl.SDL_SetModState((int)value);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		public static char ShortToUnicode(short input)
+		{
+			Encoding unicode;
+			unicode = Encoding.Unicode;
+			string hexString = Convert.ToString(input, 16);
+			string finalString = "";
+			if (hexString.Length >= 2)
+			{
+				finalString =  Regex.Unescape(@"\x" + hexString);
+			}
+			
+			byte[] codes;
+			char[] chars = new char[0];
+			codes = unicode.GetBytes(finalString);
+			chars = unicode.GetChars(codes);
+			if (chars.Length > 0 )
+			{
+				return chars[0];
+			}
+			else
+			{
+				return ' ';
 			}
 		}
 
