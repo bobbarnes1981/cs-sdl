@@ -23,7 +23,6 @@ using System.Reflection;
 using System.IO;
 using System.Drawing;
 using System.Globalization;
-
 using SdlDotNet;
 using SdlDotNet.Sprites;
 
@@ -118,11 +117,16 @@ namespace SdlDotNet.Examples.AudioExample
 		public static void Main() 
 		{ 
 			AudioExample t = new AudioExample(); 
+			Keyboard.UnicodeEnabled = true;
 			t.Run(); 
-		} 
+		}
 
 		private void Events_KeyboardDown(object sender, KeyboardEventArgs e) 
 		{ 
+			Console.WriteLine(e.Key + ": " + e.Unicode);
+			Console.WriteLine(e.KeyboardCharacter);
+			Console.WriteLine(e.UnicodeCharacter);
+			
 			switch(e.Key)
 			{ 
 				case Key.Space: 
