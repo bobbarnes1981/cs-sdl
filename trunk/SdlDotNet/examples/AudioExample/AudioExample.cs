@@ -123,9 +123,8 @@ namespace SdlDotNet.Examples.AudioExample
 
 		private void Events_KeyboardDown(object sender, KeyboardEventArgs e) 
 		{ 
-			Console.WriteLine(e.Key + ": " + e.Unicode);
-			Console.WriteLine(e.KeyboardCharacter);
-			Console.WriteLine(e.UnicodeCharacter);
+			Console.WriteLine("Keyboard: " + e.KeyboardCharacter);
+			Console.WriteLine("Unicode: " + e.UnicodeCharacter);
 			
 			switch(e.Key)
 			{ 

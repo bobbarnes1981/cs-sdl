@@ -143,7 +143,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Unicode Character
 		/// </summary>
-		public char UnicodeCharacter
+		public string UnicodeCharacter
 		{
 			get
 			{
