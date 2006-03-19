@@ -59,6 +59,8 @@ namespace SdlDotNet.Examples.AudioExample
 				new TickEventHandler(Events_TickEvent);
 			Events.KeyboardDown += 
 				new KeyboardEventHandler(Events_KeyboardDown); 
+			Events.KeyboardUp += 
+				new KeyboardEventHandler(Events_KeyboardUp); 
 			Events.MouseButtonDown += 
 				new MouseButtonEventHandler(Events_MouseButtonDown);
 			Events.Quit += new QuitEventHandler(this.Quit);
@@ -121,10 +123,16 @@ namespace SdlDotNet.Examples.AudioExample
 			t.Run(); 
 		}
 
+		private void Events_KeyboardUp(object sender, KeyboardEventArgs e) 
+		{ 
+			Console.WriteLine("Keyboard Up: " + e.KeyboardCharacter);
+			Console.WriteLine("Unicode Up: " + e.UnicodeCharacter);
+		}
+
 		private void Events_KeyboardDown(object sender, KeyboardEventArgs e) 
 		{ 
-			Console.WriteLine("Keyboard: " + e.KeyboardCharacter);
-			Console.WriteLine("Unicode: " + e.UnicodeCharacter);
+			Console.WriteLine("Keyboard Down: " + e.KeyboardCharacter);
+			Console.WriteLine("Unicode Down: " + e.UnicodeCharacter);
 			
 			switch(e.Key)
 			{ 
