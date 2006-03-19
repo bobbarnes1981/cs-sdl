@@ -30,7 +30,7 @@
     <property name="doc.html.dir" value="doc/html" />
     <property name="doc.chm.dir" value="doc/chm" />
     <property name="doc.tutorials.dir" value="doc/tutorials" />
-    <property name="project.main.dir" value="${nant.project.basedir}" />
+    <property name="project.main.dir" value="${project::get-base-directory()}" />
     <property name="native.sdl" value="Tao.Sdl"/>
     <property name="nunit.assembly" value="nunit.framework"/>
     <property name="log.assembly" value="log4net"/>
@@ -61,8 +61,8 @@
 
     <target name="clean" description="Deletes every build configuration">
 	<echo message="Deleting all builds from all configurations" />
-	<delete dir="${nant.project.basedir}/${bin.dir}" failonerror="false" />
-	<delete dir="${nant.project.basedir}/${obj.dir}" failonerror="false" />
+	<delete dir="${project::get-base-directory()}/${bin.dir}" failonerror="false" />
+	<delete dir="${project::get-base-directory()}/${obj.dir}" failonerror="false" />
 	<foreach item="File" property="filename">
 	    <in>
 		<items>
@@ -82,7 +82,7 @@
 
     <target name="build" depends="init" description="Builds current configuration">
 	<!-- build SDLDotNet assembly -->
-	<nant buildfile="${src.dir}/${nant.project.name}.dll.build" target="build" />
+	<nant buildfile="${src.dir}/${project::get-name()}.dll.build" target="build" />
     </target>
 
     <target name="setrelease" description="Sets Release configuration">
@@ -165,7 +165,7 @@
 
     <!-- copy project files -->
     <target name="copyfiles">
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}">
 	    <fileset>
 		<include name="src/**.cs" />
 		<include name="src/**.build" />
@@ -215,73 +215,73 @@
 	    </fileset>
 	</copy>
 
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${doc.html.dir}/${nant.project.name}">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.html.dir}/${(project::get-name())}">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
 		<include name="*" />
 		<exclude name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${doc.chm.dir}">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.chm.dir}">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
 		<include name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${doc.html.dir}/${nant.project.name}.Particles">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.html.dir}/${project::get-name()}.Particles">
 	    <fileset basedir="${extras.dir}/Particles/${bin.dir}/${project.config}/doc">
 		<include name="*" />
 		<exclude name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${doc.chm.dir}">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.chm.dir}">
 	    <fileset basedir="${extras.dir}/Particles/${bin.dir}/${project.config}/doc">
 		<include name="*.chm"/>
 	    </fileset>
 	</copy>
-	<!-- <copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${doc.html.dir}/${nant.project.name}.Gui">
+	<!-- <copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.html.dir}/${(project::get-name()}.Gui">
 	    <fileset basedir="${extras.dir}/Gui/${bin.dir}/${project.config}/doc">
 		<include name="*" />
 		<exclude name="*.chm"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${doc.chm.dir}">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.chm.dir}">
 	    <fileset basedir="${extras.dir}/Gui/${bin.dir}/${project.config}/doc">
 		<include name="*.chm"/>
 	    </fileset>
 	</copy> -->
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${bin.dir}/assemblies">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${bin.dir}/assemblies">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${bin.dir}/assemblies">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${extras.dir}/${Particles}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>
-	<!--<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${bin.dir}/assemblies">
+	<!--<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${extras.dir}/${Gui}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 	    </fileset>
 	</copy>-->
 	<if test="${platform::is-win32()}">
-	    <copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${bin.dir}/win32deps">
+	    <copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/win32deps">
 		<fileset basedir="${project.main.dir}/${lib.dir}/win32deps">
 		    <include name="**"/>
 		</fileset>
 	    </copy>
 	</if>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
 	    <fileset>
 		<include name="examples/**/*.exe" />
 		<include name="examples/**/*.dll" />
 	    </fileset>
 	</copy>
-	<copy todir="${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}/${bin.dir}/${examples.dir}/Data" flatten="true">
+	<copy todir="${bin.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}/Data" flatten="true">
 	    <fileset>
 		<include name="examples/**/Data/**" />
 	    </fileset>
@@ -290,7 +290,7 @@
 
     <!-- create zip file -->
     <target name="zip" description="zip/gzip files">
-	<property name="project.zip-path" value="${nant.project.basedir}/${bin.dir}/${string::to-lower(nant.project.name)}-${project.version}"/>
+	<property name="project.zip-path" value="${project::get-base-directory()}/${bin.dir}/${string::to-lower(project::get-name())}-${project.version}"/>
 	<if test="${platform::is-unix()}">
 	    <tar destfile="${project.zip-path}.tar.gz" compression="GZip">
 		<fileset basedir="${bin.dir}">

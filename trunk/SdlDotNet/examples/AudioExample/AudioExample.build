@@ -24,7 +24,7 @@
 	    <references basedir="${nant.project.basedir}/${build.dir}">
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>
-		<include name="${nant.settings.currentframework.frameworkassemblydirectory}/System.Drawing.dll"/>
+		<include name="${framework::get-assembly-directory(framework::get-target-framework())}/System.Drawing.dll"/>
 	    </references>
 	</csc>
     </target>
