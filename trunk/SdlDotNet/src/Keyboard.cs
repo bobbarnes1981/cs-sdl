@@ -97,7 +97,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="input"></param>
 		/// <returns></returns>
-		public static string ShortToUnicode(short input)
+		public static string UnicodeCharacter(short input)
 		{
 			Encoding unicode;
 			unicode = Encoding.Unicode;

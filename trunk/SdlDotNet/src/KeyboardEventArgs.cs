@@ -147,7 +147,7 @@ namespace SdlDotNet
 		{
 			get
 			{
-				return Keyboard.ShortToUnicode(this.EventStruct.key.keysym.unicode);
+				return Keyboard.UnicodeCharacter(this.EventStruct.key.keysym.unicode);
 			}
 		}
         
