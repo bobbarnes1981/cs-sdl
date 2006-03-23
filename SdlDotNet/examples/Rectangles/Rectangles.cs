@@ -58,9 +58,9 @@ namespace SdlDotNet.Examples.Rectangles
 			
 			Events.Fps = 50;
 
-			screen = Video.SetVideoModeWindow(width, height, true);
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Rectangles Example";
+			screen = Video.SetVideoModeWindow(width, height, true);
 
 			Events.Run();
 		}
