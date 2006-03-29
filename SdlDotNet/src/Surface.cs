@@ -117,7 +117,7 @@ namespace SdlDotNet
 		/// 
 		/// <para>Usage:</para>
 		/// <code>
-		/// Surface image = Surface"mybitmap.jpg")
+		/// Surface image = Surface("mybitmap.jpg")
 		/// image.Blit(screen, new Rectangle(new Point(0,0),image.Size))
 		/// </code>
 		/// </summary> 
