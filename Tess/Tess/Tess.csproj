@@ -110,7 +110,7 @@
             <Include>
                 <File
                     RelPath = "App.ico"
-                    BuildAction = "Content"
+                    BuildAction = "EmbeddedResource"
                 />
                 <File
                     RelPath = "AssemblyInfo.cs"

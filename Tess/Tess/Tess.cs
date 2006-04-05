@@ -23,8 +23,8 @@ namespace Tess
 		DynamicEntity player1;
 
 		int NUMGUNS = 9;
-		int scr_w = 640;
-		int scr_h = 480;
+		int screenWidth = 640;
+		int screenHeight = 480;
 		int gamespeed = 100;
 		int lastmillis = 0;
 		bool demoplayback;
@@ -37,12 +37,8 @@ namespace Tess
 		[STAThread]
 		static void Main(string[] args)
 		{
-			//Cube.native_main(args.Length, args);
-			//while (true)
-			//{};
-			Tess t = new Tess();
-			t.Run(args);
-
+			Tess tess = new Tess();
+			tess.Run(args);
 		}
 		void Log(string input)
 		{
@@ -86,10 +82,10 @@ namespace Tess
 							fs = 0; 
 							break;
 						case "w": 
-							scr_w  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
+							screenWidth  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
 							break;
 						case "h": 
-							scr_h  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
+							screenHeight  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
 							break;
 						case "u": 
 							uprate = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
@@ -119,11 +115,6 @@ namespace Tess
 					Log("unknown commandline argument");
 				}
 			};
-    
-			if(Sdl.SDL_Init(Sdl.SDL_INIT_TIMER|Sdl.SDL_INIT_VIDEO)<0)
-			{
-				Fatal("Unable to initialize SDL");
-			}
 			
 			Log("net");
 			if(Cube.enet_initialize()<0)
@@ -135,38 +126,25 @@ namespace Tess
 			Log("world");
 			Cube.empty_world(7, true);
 			Log("video: sdl");
-			if(Sdl.SDL_InitSubSystem(Sdl.SDL_INIT_VIDEO)<0) 
-			{
-				Fatal("Unable to initialize SDL Video");
-			}
-//			Video.GLDoubleBufferEnabled = true;
+			Video.GLDoubleBufferEnabled = false;
 			Log("video: mode");
-			Sdl.SDL_GL_SetAttribute(Sdl.SDL_GL_DOUBLEBUFFER, 1);
-			//Video.WindowCaption = "Tess Engine";
-			Sdl.SDL_WM_SetCaption("cube engine", null);
-			//Video.GrabInput();
-			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_ON);
-			//Video.SetVideoModeWindowOpenGL(scr_w, scr_h);
-			if(Sdl.SDL_SetVideoMode(scr_w, scr_h, 0, Sdl.SDL_OPENGL|fs)== IntPtr.Zero)
-			{
-				Fatal("Unable to create OpenGL screen");
-			}
+			Video.WindowIcon();
+			Video.WindowCaption = "Tess Engine";
+			Video.GrabInput();
+			Video.SetVideoModeWindowOpenGL(screenWidth, screenHeight);
 			
 			Log("video: misc");
-			//Keyboard.KeyRepeat = false;
-			Cube.keyrepeat(false);
-			//Timer.Initialize();
-			//Mouse.ShowCursor = false;
-			Sdl.SDL_ShowCursor(0);
+			Keyboard.KeyRepeat = false;
+			Mouse.ShowCursor = false;
 			
 			Log("gl");
 						
-			Cube.gl_init(scr_w, scr_h);
+			Cube.gl_init(screenWidth, screenHeight);
 
-			string data_directory = @"game/";
+			string dataDirectory = @"game/";
 			string filepath = @"../../";
 
-			if (File.Exists(data_directory + "newchars.png"))
+			if (File.Exists(dataDirectory + "newchars.png"))
 			{
 				filepath = "";
 			}
@@ -174,15 +152,15 @@ namespace Tess
 			Log("basetex");
 			int xs = 0;
 			int ys = 0;
-			if(!Cube.installtex(2, filepath + data_directory + "data/newchars.png", out xs, out ys, false) ||
-				!Cube.installtex(3, filepath + data_directory + "data/martin/base.png", out xs, out ys, false) ||
-				!Cube.installtex(6, filepath + data_directory + "data/martin/ball1.png", out xs, out ys, false) ||
-				!Cube.installtex(7, filepath + data_directory + "data/martin/smoke.png", out xs, out ys, false) ||
-				!Cube.installtex(8, filepath + data_directory + "data/martin/ball2.png", out xs, out ys, false) ||
-				!Cube.installtex(9, filepath + data_directory + "data/martin/ball3.png", out xs, out ys, false) ||
-				!Cube.installtex(4, filepath + data_directory + "data/explosion.jpg", out xs, out ys, false) ||
-				!Cube.installtex(5, filepath + data_directory + "data/items.png", out xs, out ys, false) ||
-				!Cube.installtex(1, filepath + data_directory + "data/crosshair.png", out xs, out ys, false)) 
+			if(!Cube.installtex(2, filepath + dataDirectory + "data/newchars.png", out xs, out ys, false) ||
+				!Cube.installtex(3, filepath + dataDirectory + "data/martin/base.png", out xs, out ys, false) ||
+				!Cube.installtex(6, filepath + dataDirectory + "data/martin/ball1.png", out xs, out ys, false) ||
+				!Cube.installtex(7, filepath + dataDirectory + "data/martin/smoke.png", out xs, out ys, false) ||
+				!Cube.installtex(8, filepath + dataDirectory + "data/martin/ball2.png", out xs, out ys, false) ||
+				!Cube.installtex(9, filepath + dataDirectory + "data/martin/ball3.png", out xs, out ys, false) ||
+				!Cube.installtex(4, filepath + dataDirectory + "data/explosion.jpg", out xs, out ys, false) ||
+				!Cube.installtex(5, filepath + dataDirectory + "data/items.png", out xs, out ys, false) ||
+				!Cube.installtex(1, filepath + dataDirectory + "data/crosshair.png", out xs, out ys, false)) 
 			{
 				Fatal("could not find core textures (hint: run cube from the parent of the bin directory)");
 			}
@@ -193,16 +171,16 @@ namespace Tess
 			Log("cfg");
 			Cube.newmenu("frags\tpj\tping\tteam\tname");
 			Cube.newmenu("ping\tplr\tserver");
-			Cube.exec( filepath + data_directory + "data/keymap.cfg");
-			Cube.exec( filepath + data_directory + "data/menus.cfg");
-			Cube.exec( filepath + data_directory + "data/prefabs.cfg");
-			Cube.exec( filepath + data_directory + "data/sounds.cfg");
-			Cube.exec( filepath + data_directory + "servers.cfg");
-			if(!Cube.execfile( filepath + data_directory + "config.cfg")) 
+			Cube.exec( filepath + dataDirectory + "data/keymap.cfg");
+			Cube.exec( filepath + dataDirectory + "data/menus.cfg");
+			Cube.exec( filepath + dataDirectory + "data/prefabs.cfg");
+			Cube.exec( filepath + dataDirectory + "data/sounds.cfg");
+			Cube.exec( filepath + dataDirectory + "servers.cfg");
+			if(!Cube.execfile( filepath + dataDirectory + "config.cfg")) 
 			{
-				Cube.execfile( filepath + data_directory + "data/defaults.cfg");
+				Cube.execfile( filepath + dataDirectory + "data/defaults.cfg");
 			}
-			Cube.exec( filepath + data_directory + "autoexec.cfg");
+			Cube.exec( filepath + dataDirectory + "autoexec.cfg");
 			
 			Log("localconnect");
 			Cube.localconnect();
@@ -217,7 +195,7 @@ namespace Tess
 
 			while (true)
 			{
-				int millis = Sdl.SDL_GetTicks()*gamespeed/100;
+				int millis = Timer.TicksElapsed*gamespeed/100;
 				if(millis-lastmillis>200) 
 				{
 					lastmillis = millis-200;
@@ -228,7 +206,7 @@ namespace Tess
 				}
 				if(millis-lastmillis<minmillis) 
 				{
-					Sdl.SDL_Delay(minmillis-(millis-lastmillis));
+					Timer.DelayTicks(minmillis-(millis-lastmillis));
 				}
 				Cube.cleardlights();
 				Cube.updateworld(millis);
@@ -239,31 +217,23 @@ namespace Tess
 
 				fps = 30.0f;
 				//fps = (1000.0f/curtime+fps*50)/51;
-				//System.Threading.Thread.Sleep(1000);
-				//Cube.setplayer1yaw(5);
-				//Console.WriteLine("Yaw: " + Cube.getplayer1yaw());
 				player1Ptr = Cube.getplayer1();
 				player1 = (DynamicEntity)Marshal.PtrToStructure(player1Ptr, typeof(DynamicEntity));
-				//Console.WriteLine("Yaw2: " + player1.yaw);
 				Cube.computeraytable(player1.o.x, player1.o.y);
-				Cube.readdepth(scr_w, scr_h);
+				Cube.readdepth(screenWidth, screenHeight);
 					
-				Sdl.SDL_GL_SwapBuffers(); 
+				Video.GLSwapBuffers();
 				Cube.updatevol();
 				
 				if(framesinmap++<5)	// cheap hack to get rid of initial sparklies, even when triple buffering etc.
 				{
 					player1.yaw += 5;
-					//Console.WriteLine("Yaw3: " + player1.yaw);
 					Marshal.StructureToPtr(player1, player1Ptr, false);
-					//Console.WriteLine("Yaw3.5: " + Cube.getplayer1yaw());
-					Cube.gl_drawframe(scr_w, scr_h, fps);
+					Cube.gl_drawframe(screenWidth, screenHeight, fps);
 					player1.yaw -= 5;
-					//Console.WriteLine("Yaw4: " + player1.yaw);
 					Marshal.StructureToPtr(player1, player1Ptr, false);
-					//Console.WriteLine("Yaw4.5: " + Cube.getplayer1yaw());
 				};
-				Cube.gl_drawframe(scr_w, scr_h, fps);
+				Cube.gl_drawframe(screenWidth, screenHeight, fps);
 				Sdl.SDL_Event sdlevent;
 				byte lasttype = 0;
 				byte lastbut = 0;
