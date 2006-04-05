@@ -117,7 +117,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Wait a number of milliseconds.
+		/// Wait a number of seconds.
 		/// </summary>
 		/// <param name="delayTime">Delay time in seconds</param>
 		public static void DelaySeconds(int delayTime)
