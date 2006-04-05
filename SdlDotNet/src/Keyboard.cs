@@ -57,6 +57,24 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		public static bool KeyRepeat
+		{
+			set
+			{
+				if (value)
+				{
+					EnableKeyRepeat(Sdl.SDL_DEFAULT_REPEAT_DELAY, Sdl.SDL_DEFAULT_REPEAT_INTERVAL);
+				}
+				else
+				{
+					Sdl.SDL_EnableKeyRepeat(0, Sdl.SDL_DEFAULT_REPEAT_INTERVAL);
+				}
+			}
+		}
+
+		/// <summary>
 		/// Returns true if the application has keyboard focus.
 		/// </summary>
 		public static bool HasFocus
