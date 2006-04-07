@@ -118,12 +118,12 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ClientGame.cs"
+                    RelPath = "Bindings.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Cube.cs"
+                    RelPath = "ClientGame.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

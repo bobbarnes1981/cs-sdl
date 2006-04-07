@@ -53,7 +53,7 @@ namespace Tess
 		void Fatal(string s, string o)
 		{
 			Console.WriteLine(s + o + Sdl.SDL_GetError());
-			Cube.cleanup(s + o + Sdl.SDL_GetError());
+			Bindings.cleanup(s + o + Sdl.SDL_GetError());
 		}
 		void Fatal(string s)
 		{
@@ -120,14 +120,14 @@ namespace Tess
 			};
 			
 			Log("net");
-			if(Cube.enet_initialize()<0)
+			if(Bindings.enet_initialize()<0)
 			{
 				Fatal("Unable to initialise network module");
 			}
-			Cube.initclient();
-			Cube.initserver(dedicated, uprate, sdesc, ip, out master, passwd, maxcl);  // never returns if dedicated    
+			Bindings.initclient();
+			Bindings.initserver(dedicated, uprate, sdesc, ip, out master, passwd, maxcl);  // never returns if dedicated    
 			Log("world");
-			Cube.empty_world(7, true);
+			Bindings.empty_world(7, true);
 			Log("video: sdl");
 			Video.GLDoubleBufferEnabled = false;
 			Log("video: mode");
@@ -142,7 +142,7 @@ namespace Tess
 			
 			Log("gl");
 						
-			Cube.gl_init(screenWidth, screenHeight);
+			Bindings.gl_init(screenWidth, screenHeight);
 
 			string dataDirectory = @"game/";
 			string filepath = @"../../";
@@ -155,40 +155,40 @@ namespace Tess
 			Log("basetex");
 			int xs = 0;
 			int ys = 0;
-			if(!Cube.installtex(2, filepath + dataDirectory + "data/newchars.png", out xs, out ys, false) ||
-				!Cube.installtex(3, filepath + dataDirectory + "data/martin/base.png", out xs, out ys, false) ||
-				!Cube.installtex(6, filepath + dataDirectory + "data/martin/ball1.png", out xs, out ys, false) ||
-				!Cube.installtex(7, filepath + dataDirectory + "data/martin/smoke.png", out xs, out ys, false) ||
-				!Cube.installtex(8, filepath + dataDirectory + "data/martin/ball2.png", out xs, out ys, false) ||
-				!Cube.installtex(9, filepath + dataDirectory + "data/martin/ball3.png", out xs, out ys, false) ||
-				!Cube.installtex(4, filepath + dataDirectory + "data/explosion.jpg", out xs, out ys, false) ||
-				!Cube.installtex(5, filepath + dataDirectory + "data/items.png", out xs, out ys, false) ||
-				!Cube.installtex(1, filepath + dataDirectory + "data/crosshair.png", out xs, out ys, false)) 
+			if(!Bindings.installtex(2, filepath + dataDirectory + "data/newchars.png", out xs, out ys, false) ||
+				!Bindings.installtex(3, filepath + dataDirectory + "data/martin/base.png", out xs, out ys, false) ||
+				!Bindings.installtex(6, filepath + dataDirectory + "data/martin/ball1.png", out xs, out ys, false) ||
+				!Bindings.installtex(7, filepath + dataDirectory + "data/martin/smoke.png", out xs, out ys, false) ||
+				!Bindings.installtex(8, filepath + dataDirectory + "data/martin/ball2.png", out xs, out ys, false) ||
+				!Bindings.installtex(9, filepath + dataDirectory + "data/martin/ball3.png", out xs, out ys, false) ||
+				!Bindings.installtex(4, filepath + dataDirectory + "data/explosion.jpg", out xs, out ys, false) ||
+				!Bindings.installtex(5, filepath + dataDirectory + "data/items.png", out xs, out ys, false) ||
+				!Bindings.installtex(1, filepath + dataDirectory + "data/crosshair.png", out xs, out ys, false)) 
 			{
 				Fatal("could not find core textures (hint: run cube from the parent of the bin directory)");
 			}
 			
 			Log("sound");
-			Cube.initsound();
+			Bindings.initsound();
 			
 			Log("cfg");
-			Cube.newmenu("frags\tpj\tping\tteam\tname");
-			Cube.newmenu("ping\tplr\tserver");
-			Cube.exec( filepath + dataDirectory + "data/keymap.cfg");
-			Cube.exec( filepath + dataDirectory + "data/menus.cfg");
-			Cube.exec( filepath + dataDirectory + "data/prefabs.cfg");
-			Cube.exec( filepath + dataDirectory + "data/sounds.cfg");
-			Cube.exec( filepath + dataDirectory + "servers.cfg");
-			if(!Cube.execfile( filepath + dataDirectory + "config.cfg")) 
+			Bindings.newmenu("frags\tpj\tping\tteam\tname");
+			Bindings.newmenu("ping\tplr\tserver");
+			Bindings.exec( filepath + dataDirectory + "data/keymap.cfg");
+			Bindings.exec( filepath + dataDirectory + "data/menus.cfg");
+			Bindings.exec( filepath + dataDirectory + "data/prefabs.cfg");
+			Bindings.exec( filepath + dataDirectory + "data/sounds.cfg");
+			Bindings.exec( filepath + dataDirectory + "servers.cfg");
+			if(!Bindings.execfile( filepath + dataDirectory + "config.cfg")) 
 			{
-				Cube.execfile( filepath + dataDirectory + "data/defaults.cfg");
+				Bindings.execfile( filepath + dataDirectory + "data/defaults.cfg");
 			}
-			Cube.exec( filepath + dataDirectory + "autoexec.cfg");
+			Bindings.exec( filepath + dataDirectory + "autoexec.cfg");
 			
 			Log("localconnect");
-			Cube.localconnect();
+			Bindings.localconnect();
 			// if this map is changed, also change depthcorrect()   
-			Cube.changemap("metl3");		
+			Bindings.changemap("metl3");		
 			Log("mainloop");
 			
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
@@ -215,48 +215,48 @@ namespace Tess
 			{
 				Timer.DelayTicks(minmillis-(millis-lastmillis));
 			}
-			Cube.cleardlights();
-			Cube.updateworld(millis);
+			Bindings.cleardlights();
+			Bindings.updateworld(millis);
 			if(!demoplayback)
 			{
-				Cube.serverslice(DateTime.Now.Second, 0);
+				Bindings.serverslice(DateTime.Now.Second, 0);
 			}
 
 			fps = 30.0f;
 			//fps = (1000.0f/curtime+fps*50)/51;
-			player1Ptr = Cube.getplayer1();
+			player1Ptr = Bindings.getplayer1();
 			player1 = (DynamicEntity)Marshal.PtrToStructure(player1Ptr, typeof(DynamicEntity));
-			Cube.computeraytable(player1.o.x, player1.o.y);
-			Cube.readdepth(screenWidth, screenHeight);
+			Bindings.computeraytable(player1.o.x, player1.o.y);
+			Bindings.readdepth(screenWidth, screenHeight);
 					
 			Video.GLSwapBuffers();
-			Cube.updatevol();
+			Bindings.updatevol();
 				
 			if(framesinmap++<5)	// cheap hack to get rid of initial sparklies, even when triple buffering etc.
 			{
 				player1.yaw += 5;
 				Marshal.StructureToPtr(player1, player1Ptr, false);
-				Cube.gl_drawframe(screenWidth, screenHeight, fps);
+				Bindings.gl_drawframe(screenWidth, screenHeight, fps);
 				player1.yaw -= 5;
 				Marshal.StructureToPtr(player1, player1Ptr, false);
 			};
-			Cube.gl_drawframe(screenWidth, screenHeight, fps);
+			Bindings.gl_drawframe(screenWidth, screenHeight, fps);
 		}
 
 		private void Quit(object sender, QuitEventArgs e)
 		{
-			Cube.writeservercfg();
-			Cube.cleanup(null);
+			Bindings.writeservercfg();
+			Bindings.cleanup(null);
 		}
 
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
-			Cube.keypress((int)e.Key, e.Down == true, e.Unicode);	
+			Bindings.keypress((int)e.Key, e.Down == true, e.Unicode);	
 		}
 
 		private void KeyUp(object sender, KeyboardEventArgs e)
 		{
-			Cube.keypress((int)e.Key, e.Down == true, e.Unicode);
+			Bindings.keypress((int)e.Key, e.Down == true, e.Unicode);
 		}
 
 		private void MouseMotion(object sender, MouseMotionEventArgs e)
@@ -267,7 +267,7 @@ namespace Tess
 			}
 			else
 			{
-				Cube.mousemove(e.RelativeX, e.RelativeY);
+				Bindings.mousemove(e.RelativeX, e.RelativeY);
 			}
 		}
 
@@ -278,7 +278,7 @@ namespace Tess
 			}
 			else
 			{
-				Cube.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
+				Bindings.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
 				lasttype = (byte)e.Type;
 				lastbut = (byte)e.Button;
 			}
@@ -291,7 +291,7 @@ namespace Tess
 			}
 			else
 			{
-				Cube.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
+				Bindings.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
 				lasttype = (byte)e.Type;
 				lastbut = (byte)e.Button;
 			}

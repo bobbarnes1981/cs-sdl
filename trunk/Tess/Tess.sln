@@ -3,7 +3,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tess", "Tess\Tess.csproj", 
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cube", "cube\cube.vcproj", "{7923259E-4B01-4566-9B36-EA5173A0C60C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TessLib", "TessLib\TessLib.vcproj", "{7923259E-4B01-4566-9B36-EA5173A0C60C}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
