@@ -12,18 +12,18 @@ namespace Tess
 	#region Class Documentation
 	#endregion Class Documentation
 	[SuppressUnmanagedCodeSecurityAttribute()]
-	public sealed class Cube
+	public sealed class Bindings
 	{
 		#region Private Constants
-		#region string CUBE_NATIVE_LIBRARY
+		#region string TESS_NATIVE_LIBRARY
 		/// <summary>
-		///     Specifies Cube's native library archive.
+		///     Specifies Tess's native library archive.
 		/// </summary>
 		/// <remarks>
-		///     Specifies cube.dll everywhere; will be mapped via .config for mono.
+		///     Specifies TessLib.dll everywhere; will be mapped via .config for mono.
 		/// </remarks>
-		private const string CUBE_NATIVE_LIBRARY = "cube.dll";
-		#endregion string CUBE_NATIVE_LIBRARY
+		private const string TESS_NATIVE_LIBRARY = "TessLib.dll";
+		#endregion string TESS_NATIVE_LIBRARY
 
 		#region CallingConvention CALLING_CONVENTION
 		/// <summary>
@@ -58,36 +58,35 @@ namespace Tess
 		#endregion Private Static Fields
 
 		#region Constructors & Destructors
-		#region Cube()
+		#region Bindings()
 		/// <summary>
 		///     Prevents instantiation.
 		/// </summary>
-		private Cube() 
+		private Bindings() 
 		{
 		}
-		#endregion Cube()
+		#endregion Bindings()
 		#endregion Constructors & Destructors
 
 		#region Public Delegates
 		#endregion Public Delegates
 
-		#region Cube Methods
-		#region cube.h
-		#region int native_main()
-		/// <summary>
-		///     Executes Cube's main function
-		/// </summary>
-		/// <returns>
-		///     1 when app quits.
-		/// </returns>
-		/// <remarks>
-		/// <p>Binds to C-function call in main.cpp:
-		///     <code>int main(int argc, char **argv)</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern int native_main(int argc, string[] argv);
-		#endregion int native_main()
+		#region Bindings Methods
+//		#region int native_main()
+//		/// <summary>
+//		///     Executes Bindings's main function
+//		/// </summary>
+//		/// <returns>
+//		///     1 when app quits.
+//		/// </returns>
+//		/// <remarks>
+//		/// <p>Binds to C-function call in main.cpp:
+//		///     <code>int main(int argc, char **argv)</code>
+//		///     </p>
+//		/// </remarks>
+//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+//		public static extern int native_main(int argc, string[] argv);
+//		#endregion int native_main()
 
 		#region void cleanup(string msg)
 		/// <summary>
@@ -98,7 +97,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL cleanup(char *msg);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void cleanup(string msg);
 		#endregion void cleanup(string msg)
 
@@ -111,7 +110,7 @@ namespace Tess
 		///     <code>extern DECLSPEC bool CDECL installtex(int tnum, char *texname, int &xs, int &ys, bool clamp = false);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern bool installtex(int tnum, string texname, out int xs, out int ys, bool clamp);
 		#endregion bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
 
@@ -124,22 +123,22 @@ namespace Tess
 		///     <code>ENET_API DECLSPEC int CDECL enet_initialize (void);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern int enet_initialize();
 		#endregion int enet_initialize()
 
-		#region void keyrepeat(bool on)
-		/// <summary>
-		///     Keyrepeat
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in main.cpp:
-		///     <code>extern void keyrepeat(bool on);</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void keyrepeat(bool on);
-		#endregion void keyrepeat(bool on)
+//		#region void keyrepeat(bool on)
+//		/// <summary>
+//		///     Keyrepeat
+//		/// </summary>
+//		/// <remarks>
+//		/// <p>Binds to C-function call in main.cpp:
+//		///     <code>extern void keyrepeat(bool on);</code>
+//		///     </p>
+//		/// </remarks>
+//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+//		public static extern void keyrepeat(bool on);
+//		#endregion void keyrepeat(bool on)
 
 		#region void computeraytable(float vx, float vy)
 		/// <summary>
@@ -150,7 +149,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL computeraytable(float vx, float vy);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void computeraytable(float vx, float vy);
 		#endregion void computeraytable(float vx, float vy)
 
@@ -163,7 +162,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL readdepth(int w, int h);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void readdepth(int w, int h);
 		#endregion void readdepth(int w, int h)
 
@@ -176,7 +175,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL gl_init(int w, int h);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void gl_init(int w, int h);
 		#endregion void gl_init(int w, int h)
 
@@ -189,7 +188,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL gl_drawframe(int w, int h, float curfps);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void gl_drawframe(int w, int h, float curfps);
 		#endregion void gl_drawframe(int w, int h, float curfps)
 
@@ -202,7 +201,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL empty_world(int factor, bool force);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void empty_world(int factor, bool force);
 		#endregion void empty_world(int factor, bool force)
 
@@ -215,7 +214,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL serverslice(int seconds, unsigned int timeout);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void serverslice(int seconds, int timeout);
 		#endregion void serverslice(int seconds, int timeout)
 
@@ -228,22 +227,35 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL calclight();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void calclight();
 		#endregion void calclight()
 
-		#region void quit()
+//		#region void quit()
+//		/// <summary>
+//		///     quit
+//		/// </summary>
+//		/// <remarks>
+//		/// <p>Binds to C-function call in main.cpp:
+//		///     <code>extern DECLSPEC void CDECL quit();</code>
+//		///     </p>
+//		/// </remarks>
+//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+//		public static extern void quit();
+//		#endregion void quit()
+
+		#region void writeservercfg()
 		/// <summary>
-		///     quit
+		///     writeservercfg
 		/// </summary>
 		/// <remarks>
-		/// <p>Binds to C-function call in main.cpp:
-		///     <code>extern DECLSPEC void CDECL quit();</code>
+		/// <p>Binds to C-function call in serverbrowser.cpp:
+		///     <code>extern DECLSPEC void CDECL writeservercfg();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void quit();
-		#endregion void quit()
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void writeservercfg();
+		#endregion void writeservercfg()
 
 		#region void updatevol()
 		/// <summary>
@@ -254,7 +266,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL updatevol();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void updatevol();
 		#endregion void updatevol()
 
@@ -267,7 +279,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL initclient();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void initclient();
 		#endregion void initclient()
 
@@ -280,7 +292,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master, char *passwd, int maxcl);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void initserver(bool dedicated, int uprate, string sdesc, string ip, out string master, string passwd, int maxcl);
 		#endregion void initserver()
 
@@ -293,7 +305,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL initsound();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void initsound();
 		#endregion void initsound()
 
@@ -306,7 +318,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL localconnect();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void localconnect();
 		#endregion void localconnect()
 
@@ -319,7 +331,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL cleardlights();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void cleardlights();
 		#endregion void cleardlights()
 
@@ -332,7 +344,7 @@ namespace Tess
 		///     <code>extern DECLSPEC dynent * CDECL getplayer1();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern IntPtr getplayer1();
 		#endregion IntPtr getplayer1()
 
@@ -345,7 +357,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL setplayer1yaw(float yaw);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void setplayer1yaw(float yaw);
 		#endregion void setplayer1yaw(float yaw)
 
@@ -358,7 +370,7 @@ namespace Tess
 		///     <code>extern DECLSPEC float CDECL getplayer1yaw();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern float getplayer1yaw();
 		#endregion float getplayer1yaw()
 
@@ -371,7 +383,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL updateworld(int millis);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void updateworld(int millis);
 		#endregion void updateworld(int millis)
 
@@ -384,7 +396,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL mousemove(int dx, int dy)</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void mousemove(int dx, int dy);
 		#endregion void mousemove(int dx, int dy)
 
@@ -397,7 +409,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL newmenu(char *name);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void newmenu(string name);
 		#endregion void newmenu(string name)
 
@@ -410,7 +422,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL changemap(char *name);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void changemap(string name);
 		#endregion void changemap(string name)
 
@@ -423,7 +435,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL keypress(int code, bool isdown, int cooked)</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void keypress(int code, bool isdown, int cooked);
 		#endregion void keypress(int code, bool isdown, int cooked)
 
@@ -436,7 +448,7 @@ namespace Tess
 		///     <code>extern DECLSPEC void CDECL exec(char *cfgfile);;</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void exec(string cfgfile);
 		#endregion void exec(string cfgfile)
 
@@ -449,11 +461,10 @@ namespace Tess
 		///     <code>extern DECLSPEC bool CDECL execfile(char *cfgfile);;</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(CUBE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern bool execfile(string cfgfile);
 		#endregion bool execfile(string cfgfile)
 
-		#endregion cube.h
-		#endregion Cube Methods
+		#endregion Tess Methods
 	}
 }

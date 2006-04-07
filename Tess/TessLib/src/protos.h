@@ -138,12 +138,12 @@ extern DECLSPEC int CDECL isoccluded(float vx, float vy, float cx, float cy, flo
 extern DECLSPEC void CDECL fatal(char *s, char *o = "");
 extern DECLSPEC void CDECL *alloc(int s);
 extern DECLSPEC void CDECL keyrepeat(bool on);
-extern DECLSPEC int CDECL native_main(int argc, char **argv);
+//extern DECLSPEC int CDECL native_main(int argc, char **argv);
 extern DECLSPEC void CDECL cleanup(char *msg);
 extern DECLSPEC void CDECL quit();
 extern DECLSPEC dynent * CDECL getplayer1();
-extern DECLSPEC float CDECL getplayer1yaw();
-extern DECLSPEC void CDECL setplayer1yaw(float yaw);
+//extern DECLSPEC float CDECL getplayer1yaw();
+//extern DECLSPEC void CDECL setplayer1yaw(float yaw);
 
 // rendertext
 extern DECLSPEC void CDECL draw_text(char *str, int left, int top, int gl_num);
