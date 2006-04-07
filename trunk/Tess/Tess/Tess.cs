@@ -21,8 +21,10 @@ namespace Tess
 	class Tess
 	{
 		DynamicEntity player1;
-
 		int NUMGUNS = 9;
+		int ignore = 5;
+		IntPtr player1Ptr;
+		float fps = 30.0f;
 		int screenWidth = 640;
 		int screenHeight = 480;
 		int gamespeed = 100;
@@ -30,6 +32,9 @@ namespace Tess
 		bool demoplayback;
 		int curtime;
 		int framesinmap = 0;
+		byte lasttype = 0;
+		byte lastbut = 0;
+		int minmillis = 5;
 
 		/// <summary>
 		/// The main entry point for the application.
@@ -58,8 +63,6 @@ namespace Tess
 		void Run(string[] args)
 		{
 			bool dedicated = false;
-			int fs = 0; // normally Sdl.SDL_FULLSCREEN;
-			//int par = 0;
 			int uprate = 0;
 			int maxcl = 4;
 			string sdesc = "";
@@ -79,7 +82,7 @@ namespace Tess
 							dedicated = true; 
 							break;
 						case "t": 
-							fs = 0; 
+							//fs = 0; 
 							break;
 						case "w": 
 							screenWidth  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
@@ -187,87 +190,110 @@ namespace Tess
 			// if this map is changed, also change depthcorrect()   
 			Cube.changemap("metl3");		
 			Log("mainloop");
-			int ignore = 5;
-			int minmillis = 5;
-			float fps = 30.0f;
-			IntPtr player1Ptr;
-			DynamicEntity player1;
-
-			while (true)
+			
+			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Events.KeyboardUp += new KeyboardEventHandler(this.KeyUp);
+			Events.Tick += new TickEventHandler(this.Tick);
+			Events.Quit += new QuitEventHandler(this.Quit);
+			Events.MouseMotion += new MouseMotionEventHandler(this.MouseMotion);
+			Events.MouseButtonUp += new MouseButtonEventHandler(this.MouseButtonUp);
+			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
+			Events.Run();
+		}
+		private void Tick(object sender, TickEventArgs e)
+		{
+			int millis = Timer.TicksElapsed*gamespeed/100;
+			if(millis-lastmillis>200) 
 			{
-				int millis = Timer.TicksElapsed*gamespeed/100;
-				if(millis-lastmillis>200) 
-				{
-					lastmillis = millis-200;
-				}
-				else if(millis-lastmillis<1) 
-				{
-					lastmillis = millis-1;
-				}
-				if(millis-lastmillis<minmillis) 
-				{
-					Timer.DelayTicks(minmillis-(millis-lastmillis));
-				}
-				Cube.cleardlights();
-				Cube.updateworld(millis);
-				if(!demoplayback)
-				{
-					Cube.serverslice(DateTime.Now.Second, 0);
-				}
+				lastmillis = millis-200;
+			}
+			else if(millis-lastmillis<1) 
+			{
+				lastmillis = millis-1;
+			}
+			if(millis-lastmillis<minmillis) 
+			{
+				Timer.DelayTicks(minmillis-(millis-lastmillis));
+			}
+			Cube.cleardlights();
+			Cube.updateworld(millis);
+			if(!demoplayback)
+			{
+				Cube.serverslice(DateTime.Now.Second, 0);
+			}
 
-				fps = 30.0f;
-				//fps = (1000.0f/curtime+fps*50)/51;
-				player1Ptr = Cube.getplayer1();
-				player1 = (DynamicEntity)Marshal.PtrToStructure(player1Ptr, typeof(DynamicEntity));
-				Cube.computeraytable(player1.o.x, player1.o.y);
-				Cube.readdepth(screenWidth, screenHeight);
+			fps = 30.0f;
+			//fps = (1000.0f/curtime+fps*50)/51;
+			player1Ptr = Cube.getplayer1();
+			player1 = (DynamicEntity)Marshal.PtrToStructure(player1Ptr, typeof(DynamicEntity));
+			Cube.computeraytable(player1.o.x, player1.o.y);
+			Cube.readdepth(screenWidth, screenHeight);
 					
-				Video.GLSwapBuffers();
-				Cube.updatevol();
+			Video.GLSwapBuffers();
+			Cube.updatevol();
 				
-				if(framesinmap++<5)	// cheap hack to get rid of initial sparklies, even when triple buffering etc.
-				{
-					player1.yaw += 5;
-					Marshal.StructureToPtr(player1, player1Ptr, false);
-					Cube.gl_drawframe(screenWidth, screenHeight, fps);
-					player1.yaw -= 5;
-					Marshal.StructureToPtr(player1, player1Ptr, false);
-				};
+			if(framesinmap++<5)	// cheap hack to get rid of initial sparklies, even when triple buffering etc.
+			{
+				player1.yaw += 5;
+				Marshal.StructureToPtr(player1, player1Ptr, false);
 				Cube.gl_drawframe(screenWidth, screenHeight, fps);
-				Sdl.SDL_Event sdlevent;
-				byte lasttype = 0;
-				byte lastbut = 0;
-				while(Sdl.SDL_PollEvent(out sdlevent) > 0)
-				{
-					switch(sdlevent.type)
-					{
-						case Sdl.SDL_QUIT:
-							Cube.quit();
-							break;
-						case Sdl.SDL_KEYDOWN: 
-						case Sdl.SDL_KEYUP: 
-							Cube.keypress(sdlevent.key.keysym.sym, sdlevent.key.state==Sdl.SDL_PRESSED, sdlevent.key.keysym.unicode);
-							break;
-						case Sdl.SDL_MOUSEMOTION:
-							if(ignore > 0)
-							{ 
-								ignore--; 
-								break;
-							}
-							Cube.mousemove(sdlevent.motion.xrel, sdlevent.motion.yrel);
-							break;
-						case Sdl.SDL_MOUSEBUTTONDOWN:
-						case Sdl.SDL_MOUSEBUTTONUP:
-							if(lasttype==sdlevent.type && lastbut==sdlevent.button.button) 
-							{
-								break; // why?? get event twice without it
-							}
-							Cube.keypress(-sdlevent.button.button, sdlevent.button.state!=0, 0);
-							lasttype = sdlevent.type;
-							lastbut = sdlevent.button.button;
-							break;
-					}
-				}
+				player1.yaw -= 5;
+				Marshal.StructureToPtr(player1, player1Ptr, false);
+			};
+			Cube.gl_drawframe(screenWidth, screenHeight, fps);
+		}
+
+		private void Quit(object sender, QuitEventArgs e)
+		{
+			Cube.writeservercfg();
+			Cube.cleanup(null);
+		}
+
+		private void KeyDown(object sender, KeyboardEventArgs e)
+		{
+			Cube.keypress((int)e.Key, e.Down == true, e.Unicode);	
+		}
+
+		private void KeyUp(object sender, KeyboardEventArgs e)
+		{
+			Cube.keypress((int)e.Key, e.Down == true, e.Unicode);
+		}
+
+		private void MouseMotion(object sender, MouseMotionEventArgs e)
+		{
+			if(ignore > 0)
+			{ 
+				ignore--; 
+			}
+			else
+			{
+				Cube.mousemove(e.RelativeX, e.RelativeY);
+			}
+		}
+
+		private void MouseButtonUp(object sender, MouseButtonEventArgs e)
+		{
+			if(lasttype==(byte)e.Type && lastbut == (byte)e.Button)
+			{
+			}
+			else
+			{
+				Cube.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
+				lasttype = (byte)e.Type;
+				lastbut = (byte)e.Button;
+			}
+		}
+
+		private void MouseButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			if(lasttype==(byte)e.Type && lastbut == (byte)e.Button)
+			{
+			}
+			else
+			{
+				Cube.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
+				lasttype = (byte)e.Type;
+				lastbut = (byte)e.Button;
 			}
 		}
 	}
