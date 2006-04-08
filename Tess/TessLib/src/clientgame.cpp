@@ -424,11 +424,11 @@ dynent *getclient(int cn)   // ensure valid entity
     return players[cn] ? players[cn] : (players[cn] = newdynent());
 };
 
-void initclient()
-{
-    clientmap[0] = 0;
-    initclientnet();
-};
+//void initclient()
+//{
+//    clientmap[0] = 0;
+//    initclientnet();
+//};
 
 void startmap(char *name)   // called just after a map load
 {

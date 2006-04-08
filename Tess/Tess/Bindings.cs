@@ -166,18 +166,18 @@ namespace Tess
 		public static extern void readdepth(int w, int h);
 		#endregion void readdepth(int w, int h)
 
-		#region void gl_init(int w, int h)
+		#region void purgetextures()
 		/// <summary>
 		///     gl_init
 		/// </summary>
 		/// <remarks>
 		/// <p>Binds to C-function call in rendergl.cpp:
-		///     <code>extern DECLSPEC void CDECL gl_init(int w, int h);</code>
+		///     <code>extern DECLSPEC void CDECL purgetextures();</code>
 		///     </p>
 		/// </remarks>
 		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void gl_init(int w, int h);
-		#endregion void gl_init(int w, int h)
+		public static extern void purgetextures();
+		#endregion void purgetextures()
 
 		#region void gl_drawframe(int w, int h, float curfps)
 		/// <summary>
@@ -270,18 +270,44 @@ namespace Tess
 		public static extern void updatevol();
 		#endregion void updatevol()
 
-		#region void initclient()
+//		#region void initclient()
+//		/// <summary>
+//		///     initserver
+//		/// </summary>
+//		/// <remarks>
+//		/// <p>Binds to C-function call in clientgame.cpp:
+//		///     <code>extern DECLSPEC void CDECL initclient();</code>
+//		///     </p>
+//		/// </remarks>
+//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+//		public static extern void initclient();
+//		#endregion void initclient()
+
+		#region void initclientnet()
 		/// <summary>
-		///     initserver
+		///     initclientmap
 		/// </summary>
 		/// <remarks>
 		/// <p>Binds to C-function call in clientgame.cpp:
-		///     <code>extern DECLSPEC void CDECL initclient();</code>
+		///     <code>extern DECLSPEC void CDECL initclientnet();</code>
 		///     </p>
 		/// </remarks>
 		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void initclient();
-		#endregion void initclient()
+		public static extern void initclientnet();
+		#endregion void initclientnet()
+
+		#region string getclientmap()
+		/// <summary>
+		///     getclientmap
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in clientgame.cpp:
+		///     <code>extern DECLSPEC char CDECL *getclientmap();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern string getclientmap();
+		#endregion string getclientmap()
 
 		#region void initserver()
 		/// <summary>
@@ -296,18 +322,18 @@ namespace Tess
 		public static extern void initserver(bool dedicated, int uprate, string sdesc, string ip, out string master, string passwd, int maxcl);
 		#endregion void initserver()
 
-		#region void initsound()
-		/// <summary>
-		///     initsound
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in sound.cpp:
-		///     <code>extern DECLSPEC void CDECL initsound();</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void initsound();
-		#endregion void initsound()
+//		#region void initsound()
+//		/// <summary>
+//		///     initsound
+//		/// </summary>
+//		/// <remarks>
+//		/// <p>Binds to C-function call in sound.cpp:
+//		///     <code>extern DECLSPEC void CDECL initsound();</code>
+//		///     </p>
+//		/// </remarks>
+//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+//		public static extern void initsound();
+//		#endregion void initsound()
 
 		#region void localconnect()
 		/// <summary>
