@@ -46,8 +46,9 @@ extern DECLSPEC char CDECL *getservername(int n);
 extern DECLSPEC void CDECL writeservercfg();
 
 // rendergl
-extern DECLSPEC void CDECL gl_init(int w, int h);
+//extern DECLSPEC void CDECL gl_init(int w, int h);
 extern DECLSPEC void CDECL cleangl();
+extern DECLSPEC void CDECL purgetextures();
 extern DECLSPEC void CDECL gl_drawframe(int w, int h, float curfps);
 extern DECLSPEC bool CDECL installtex(int tnum, char *texname, int &xs, int &ys, bool clamp = false);
 extern DECLSPEC void CDECL mipstats(int a, int b, int c);
@@ -89,7 +90,7 @@ extern DECLSPEC void CDECL mousemove(int dx, int dy);
 extern DECLSPEC void CDECL updateworld(int millis);
 extern DECLSPEC void CDECL startmap(char *name);
 extern DECLSPEC void CDECL changemap(char *name);
-extern DECLSPEC void CDECL initclient();
+//extern DECLSPEC void CDECL initclient();
 extern DECLSPEC void CDECL spawnplayer(dynent *d);
 extern DECLSPEC void CDECL selfdamage(int damage, int actor, dynent *act);
 extern DECLSPEC dynent CDECL *newdynent();
@@ -204,7 +205,7 @@ extern DECLSPEC void CDECL physicsframe();
 // sound
 extern DECLSPEC void CDECL playsound(int n, vec *loc = 0);
 extern DECLSPEC void CDECL playsoundc(int n);
-extern DECLSPEC void CDECL initsound();
+//extern DECLSPEC void CDECL initsound();
 extern DECLSPEC void CDECL cleansound();
 extern DECLSPEC void CDECL updatevol();
 

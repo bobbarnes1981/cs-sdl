@@ -13,11 +13,11 @@ void cleanup(char *msg)         // single program exit point;
     SDL_ShowCursor(1);
     if(msg)
     {
-        #ifdef WIN32
+        /*#ifdef WIN32
         MessageBox(NULL, msg, "cube fatal error", MB_OK|MB_SYSTEMMODAL);
-        #else
+        #else*/
         printf(msg);
-        #endif
+       /* #endif*/
     };
     SDL_Quit();
     exit(1);
@@ -93,7 +93,7 @@ dynent * getplayer1(void)
 //	return player1->yaw;
 //}
 VARF(gamespeed, 10, 100, 1000, if(multiplayer()) gamespeed = 100);
-VARP(minmillis, 0, 5, 1000);
+//VARP(minmillis, 0, 5, 1000);
 
 int islittleendian = 1;
 int framesinmap = 0;

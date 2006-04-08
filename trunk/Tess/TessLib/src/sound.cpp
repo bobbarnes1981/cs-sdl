@@ -34,16 +34,16 @@ void stopsound()
 
 VAR(soundbufferlen, 128, 1024, 4096);
 
-void initsound()
-{
-    memset(soundlocs, 0, sizeof(soundloc)*MAXCHAN);
-        if(Mix_OpenAudio(SOUNDFREQ, MIX_DEFAULT_FORMAT, 2, soundbufferlen)<0)
-        {
-            conoutf("sound init failed (SDL_mixer): %s", (size_t)Mix_GetError());
-            nosound = true;
-        };
-	    Mix_AllocateChannels(MAXCHAN);	
-};
+//void initsound()
+//{
+//    memset(soundlocs, 0, sizeof(soundloc)*MAXCHAN);
+//        if(Mix_OpenAudio(SOUNDFREQ, MIX_DEFAULT_FORMAT, 2, soundbufferlen)<0)
+//        {
+//            conoutf("sound init failed (SDL_mixer): %s", (size_t)Mix_GetError());
+//            nosound = true;
+//        };
+//	    Mix_AllocateChannels(MAXCHAN);	
+//};
 
 void music(char *name)
 {
