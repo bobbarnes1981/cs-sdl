@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="TessLib"
+	Name="TessManagedLib"
 	ProjectGUID="{7923259E-4B01-4566-9B36-EA5173A0C60C}"
 	RootNamespace="cube"
 	SccProjectName=""
@@ -104,25 +104,26 @@
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
 			CharacterSet="0"
+			ManagedExtensions="TRUE"
 			WholeProgramOptimization="FALSE">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				OptimizeForProcessor="0"
-				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\include&quot;;&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\TessLib\enet\include&quot;"
+				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\include&quot;;&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\TessManagedLib\enet\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;ENET_DEBUG"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
-				UsePrecompiledHeader="2"
-				PrecompiledHeaderThrough="stdAfx.h"
-				PrecompiledHeaderFile="./Debug/cube.pch"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderThrough=""
+				PrecompiledHeaderFile=""
 				AssemblerListingLocation=".\Debug/"
 				ObjectFile=".\Debug/"
 				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				Detect64BitPortabilityProblems="FALSE"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 				CompileAs="0"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
@@ -130,15 +131,17 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
 				AdditionalDependencies="odbc32.lib odbccp32.lib zlib.lib opengl32.lib glu32.lib msvcrt.lib SDLmain.lib SDL.lib SDL_image.lib SDL_mixer.lib ws2_32.lib winmm.lib"
-				OutputFile="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\bin\Debug\TessLib.dll&quot;"
+				OutputFile="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\bin\Debug\TessManagedLib.dll&quot;"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\lib&quot;"
 				IgnoreAllDefaultLibraries="FALSE"
+				ForceSymbolReferences="__DllMainCRTStartup@12"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile=".\Debug/cube_debug.pdb"
+				ProgramDatabaseFile=".\Debug/TessManagedLib_debug.pdb"
 				SubSystem="2"
-				ImportLibrary="./Debug/cube.lib"/>
+				ResourceOnlyDLL="TRUE"
+				ImportLibrary="./Debug/TessManagedLib.lib"/>
 			<Tool
 				Name="VCMIDLTool"
 				TypeLibraryName=".\Debug/cube.tlb"/>
@@ -245,6 +248,9 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{DF0A7A59-91FA-438C-B859-D35C3963A553}"
+			Name="TessLib"/>
 	</References>
 	<Files>
 		<Filter
@@ -970,6 +976,9 @@
 						Name="VCCLCompilerTool"
 						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\src\ManagedWrapper.cpp">
 			</File>
 			<File
 				RelativePath=".\src\monster.cpp">

@@ -14,18 +14,18 @@ struct soundloc { vec loc; bool inuse; } soundlocs[MAXCHAN];
 
     #include "SDL_mixer.h"
     #define MAXVOL MIX_MAX_VOLUME
-    Mix_Music *mod = NULL;
+    //Mix_Music *mod = NULL;
     void *stream = NULL;
 
 void stopsound()
 {
     if(nosound) return;
-    if(mod)
-    {
-            Mix_HaltMusic();
-            Mix_FreeMusic(mod);
-        mod = NULL;
-    };
+    //if(mod)
+   // {
+           // Mix_HaltMusic();
+            //Mix_FreeMusic(mod);
+    //    mod = NULL;
+   // };
     if(stream)
     {
         stream = NULL;
@@ -54,11 +54,11 @@ void music(char *name)
         string sn;
         strcpy_s(sn, "packages/");
         strcat_s(sn, name);
-            if(mod = Mix_LoadMUS(path(sn)))
+            /*if(mod = Mix_LoadMUS(path(sn)))
             {
                 Mix_PlayMusic(mod, -1);
                 Mix_VolumeMusic((musicvol*MAXVOL)/255);
-            };
+            };*/
     };
 };
 
@@ -82,7 +82,7 @@ void cleansound()
 {
     if(nosound) return;
     stopsound();
-        Mix_CloseAudio();
+        //Mix_CloseAudio();
 };
 
 VAR(stereo, 0, 1, 1);
@@ -101,8 +101,8 @@ void updatechanvol(int chan, vec *loc)
         };
     };
     vol = (vol*MAXVOL)/255;
-        Mix_Volume(chan, vol);
-        Mix_SetPanning(chan, 255-pan, pan);
+       // Mix_Volume(chan, vol);
+       // Mix_SetPanning(chan, 255-pan, pan);
 };  
 
 void newsoundloc(int chan, vec *loc)
@@ -117,9 +117,9 @@ void updatevol()
     if(nosound) return;
     loopi(MAXCHAN) if(soundlocs[i].inuse)
     {
-            if(Mix_Playing(i))
+           /* if(Mix_Playing(i))
                 updatechanvol(i, &soundlocs[i].loc);
-            else soundlocs[i].inuse = false;
+            else soundlocs[i].inuse = false;*/
     };
 };
 
@@ -140,12 +140,12 @@ void playsound(int n, vec *loc)
     {
         sprintf_sd(buf)("packages/sounds/%s.wav", snames[n]);
 
-            samples[n] = Mix_LoadWAV(path(buf));
+            //samples[n] = Mix_LoadWAV(path(buf));
 
-        if(!samples[n]) { conoutf("failed to load sample: %s", buf); return; };
+       // if(!samples[n]) { conoutf("failed to load sample: %s", buf); return; };
     };
 
-        int chan = Mix_PlayChannel(-1, samples[n], 0);
+       int chan;// = Mix_PlayChannel(-1, samples[n], 0);
     if(chan<0) return;
     if(loc) newsoundloc(chan, loc);
     updatechanvol(chan, loc);

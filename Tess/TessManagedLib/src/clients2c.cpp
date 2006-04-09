@@ -77,12 +77,12 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             clientnum = cn;                 // we are now fully connected
             if(!getint(p)) strcpy_s(toservermap, getclientmap());   // we are the first client on this server, set map
             sgetstr();
-            if(text[0] && strcmp(text, clientpassword))
+           /* if(text[0] && strcmp(text, clientpassword))
             {
                 conoutf("you need to set the correct password to join this server!");
                 disconnect();
                 return;
-            };
+            };*/
             if(getint(p)==1)
             {
                 conoutf("server is FULL, disconnecting..");
