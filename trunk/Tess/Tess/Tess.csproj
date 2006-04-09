@@ -104,6 +104,16 @@
                     AssemblyName = "SdlDotNet"
                     HintPath = "..\lib\SdlDotNet.dll"
                 />
+                <Reference
+                    Name = "TessLib"
+                    Project = "{DF0A7A59-91FA-438C-B859-D35C3963A553}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "TessManagedLib"
+                    Project = "{7923259E-4B01-4566-9B36-EA5173A0C60C}"
+                    Package = "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
+                />
             </References>
         </Build>
         <Files>
@@ -114,21 +124,6 @@
                 />
                 <File
                     RelPath = "AssemblyInfo.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Bindings.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ClientGame.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "RenderGl.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
