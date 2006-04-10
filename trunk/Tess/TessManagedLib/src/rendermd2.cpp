@@ -1,6 +1,8 @@
 // rendermd2.cpp: loader code adapted from a nehe tutorial
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 struct md2_header
 {
@@ -200,7 +202,7 @@ void delayedload(md2 *m)
     if(!m->loaded)
     {
         sprintf_sd(name1)("packages/models/%s/tris.md2", m->loadname);
-        if(!m->load(path(name1))) fatal("loadmodel: ", name1);
+        if(!m->load(path(name1))) TessLib::Main::Fatal("loadmodel: ", name1);
         sprintf_sd(name2)("packages/models/%s/skin.jpg", m->loadname);
         int xs, ys;
         installtex(FIRSTMDL+m->mdlnum, path(name2), xs, ys);

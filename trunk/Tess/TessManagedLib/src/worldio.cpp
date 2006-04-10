@@ -1,6 +1,8 @@
 // worldio.cpp: loading & saving of maps and savegames
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 void backup(char *name, char *backupname)
 {
@@ -216,9 +218,9 @@ void load_world(char *mname)        // still supports all map formats that have 
     if(!f) { conoutf("could not read map %s", cgzname); return; };
     gzread(f, &hdr, sizeof(header)-sizeof(int)*16);
     endianswap(&hdr.version, sizeof(int), 4);
-    if(strncmp(hdr.head, "CUBE", 4)!=0) fatal("while reading map: header malformatted");
-    if(hdr.version>MAPVERSION) fatal("this map requires a newer version of cube");
-    if(sfactor<SMALLEST_FACTOR || sfactor>LARGEST_FACTOR) fatal("illegal map size");
+    if(strncmp(hdr.head, "CUBE", 4)!=0) TessLib::Main::Fatal("while reading map: header malformatted");
+    if(hdr.version>MAPVERSION) TessLib::Main::Fatal("this map requires a newer version of cube");
+    if(sfactor<SMALLEST_FACTOR || sfactor>LARGEST_FACTOR) TessLib::Main::Fatal("illegal map size");
     if(hdr.version>=4)
     {
         gzread(f, &hdr.waterlevel, sizeof(int)*16);
@@ -285,7 +287,7 @@ void load_world(char *mname)        // still supports all map formats that have 
                 if(type<0 || type>=MAXTYPE)
                 {
                     sprintf_sd(t)("%d @ %d", type, k);
-                    fatal("while reading map: type out of range: ", t);
+                    TessLib::Main::Fatal("while reading map: type out of range: ", t);
                 };
                 s->type = type;
                 s->floor = gzgetc(f);

@@ -1,6 +1,8 @@
 // loading and saving of savegames & demos, dumps the spawn state of all mapents, the full state of all dynents (monsters + player)
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 extern int islittleendian;
 
@@ -17,7 +19,7 @@ void gzput(int i) { gzputc(f, i); };
 void gzputi(int i) { gzwrite(f, &i, sizeof(int)); };
 void gzputv(vec &v) { gzwrite(f, &v, sizeof(vec)); };
 
-void gzcheck(int a, int b) { if(a!=b) fatal("savegame file corrupt (short)"); };
+void gzcheck(int a, int b) { if(a!=b) TessLib::Main::Fatal("savegame file corrupt (short)"); };
 int gzget() { char c = gzgetc(f); return c; };
 int gzgeti() { int i; gzcheck(gzread(f, &i, sizeof(int)), sizeof(int)); return i; };
 void gzgetv(vec &v) { gzcheck(gzread(f, &v, sizeof(vec)), sizeof(vec)); };

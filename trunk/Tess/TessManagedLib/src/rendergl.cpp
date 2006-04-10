@@ -1,6 +1,8 @@
 // rendergl.cpp: core opengl rendering stuff
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 //#ifdef DARWIN
 //#define GL_COMBINE_EXT GL_COMBINE_ARB
@@ -90,7 +92,7 @@ bool installtex(int tnum, char *texname, int &xs, int &ys, bool clamp)
         scaledimg = alloc(xs*ys*3);
         gluScaleImage(GL_RGB, s->w, s->h, GL_UNSIGNED_BYTE, s->pixels, xs, ys, GL_UNSIGNED_BYTE, scaledimg);
     };
-    if(gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, xs, ys, GL_RGB, GL_UNSIGNED_BYTE, scaledimg)) fatal("could not build mipmaps");
+    if(gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, xs, ys, GL_RGB, GL_UNSIGNED_BYTE, scaledimg)) TessLib::Main::Fatal("could not build mipmaps");
     if(xs!=s->w) free(scaledimg);
     SDL_FreeSurface(s);
     return true;
@@ -160,7 +162,7 @@ int lookuptexture(int tex, int &xs, int &ys)
         };
     };
 
-    if(curtex==MAXTEX) fatal("loaded too many textures");
+    if(curtex==MAXTEX) TessLib::Main::Fatal("loaded too many textures");
 
     int tnum = curtex+FIRSTTEX;
     strcpy_s(texname[curtex], mapname[tex][frame]);
