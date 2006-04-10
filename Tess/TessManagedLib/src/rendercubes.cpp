@@ -1,6 +1,8 @@
 // rendercubes.cpp: sits in between worldrender.cpp and rendergl.cpp and fills the vertex array for different cube surfaces.
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 vertex *verts = NULL;
 int curvert;
@@ -17,7 +19,7 @@ void reallocv()
 {
     verts = (vertex *)realloc(verts, (curmaxverts *= 2)*sizeof(vertex));
     curmaxverts -= 10;
-    if(!verts) fatal("no vertex memory!");
+    if(!verts) TessLib::Main::Fatal("no vertex memory!");
     setarraypointers();
 };
 

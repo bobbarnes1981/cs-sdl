@@ -1,6 +1,8 @@
 // main.cpp: initialisation & main loop
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 void cleanup(char *msg)         // single program exit point;
 {
@@ -29,16 +31,16 @@ void quit()                     // normal exit
     cleanup(NULL);
 };
 
-void fatal(char *s, char *o)    // failure exit
-{
-    sprintf_sd(msg)("%s%s (%s)\n", s, o, SDL_GetError());
-    cleanup(msg);
-};
+//void fatal(char *s, char *o)    // failure exit
+//{
+//    sprintf_sd(msg)("%s%s (%s)\n", s, o, SDL_GetError());
+//    cleanup(msg);
+//};
 
 void *alloc(int s)              // for some big chunks... most other allocs use the memory pool
 {
     void *b = calloc(1,s);
-    if(!b) fatal("out of memory!");
+	if(!b) TessLib::Main::Fatal("out of memory!");
     return b;
 };
 

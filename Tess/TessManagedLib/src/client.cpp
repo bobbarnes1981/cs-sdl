@@ -1,6 +1,8 @@
 // client.cpp, mostly network related client game code
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 ENetHost *clienthost = NULL;
 int connecting = 0;
@@ -146,7 +148,7 @@ vector<ivector> messages;
 void addmsg(int rel, int num, int type, ...)
 {
     if(demoplayback) return;
-    if(num!=msgsizelookup(type)) { sprintf_sd(s)("inconsistant msg size for %d (%d != %d)", type, num, msgsizelookup(type)); fatal(s); };
+	//if(num!=msgsizelookup(type)) { sprintf_sd(s)("inconsistant msg size for %d (%d != %d)", type, num, msgsizelookup(type)); TessLib::Main::Fatal(s); };
     if(messages.length()==100) { conoutf("command flood protection (type %d)", type); return; };
     ivector &msg = messages.add();
     msg.add(num);

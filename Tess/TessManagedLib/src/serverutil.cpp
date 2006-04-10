@@ -1,6 +1,8 @@
 // misc useful functions used by the server
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 // all network traffic is in 32bit ints, which are then compressed using the following simple scheme (assumes that most values are small).
 
@@ -90,8 +92,8 @@ ENetPacket *recvmap(int n)
 #ifdef STANDALONE
 
 void localservertoclient(uchar *buf, int len) {};
-void fatal(char *s, char *o) { cleanupserver(); printf("servererror: %s\n", s); exit(1); };
-void *alloc(int s) { void *b = calloc(1,s); if(!b) fatal("no memory!"); return b; };
+//void fatal(char *s, char *o) { cleanupserver(); printf("servererror: %s\n", s); exit(1); };
+void *alloc(int s) { void *b = calloc(1,s); if(!b) TessLib::Main::Fatal("no memory!"); return b; };
 
 int main(int argc, char* argv[])
 {
@@ -113,7 +115,7 @@ int main(int argc, char* argv[])
         };
     };
     
-    if(enet_initialize()<0) fatal("Unable to initialise network module");
+    if(enet_initialize()<0) TessLib::Main::Fatal("Unable to initialise network module");
     initserver(true, uprate, sdesc, ip, master, passwd, maxcl);
     return 0;
 };

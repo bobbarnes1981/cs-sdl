@@ -136,7 +136,7 @@ extern DECLSPEC int CDECL isoccluded(float vx, float vy, float cx, float cy, flo
 
 // main
 
-extern DECLSPEC void CDECL fatal(char *s, char *o = "");
+//extern DECLSPEC void CDECL fatal(char *s, char *o = "");
 extern DECLSPEC void CDECL *alloc(int s);
 extern DECLSPEC void CDECL keyrepeat(bool on);
 //extern DECLSPEC int CDECL native_main(int argc, char **argv);
