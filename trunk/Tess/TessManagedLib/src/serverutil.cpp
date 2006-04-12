@@ -93,7 +93,7 @@ ENetPacket *recvmap(int n)
 
 void localservertoclient(uchar *buf, int len) {};
 //void fatal(char *s, char *o) { cleanupserver(); printf("servererror: %s\n", s); exit(1); };
-void *alloc(int s) { void *b = calloc(1,s); if(!b) TessLib::Main::Fatal("no memory!"); return b; };
+void *alloc(int s) { void *b = calloc(1,s); if(!b) TessLib::GameInit::Fatal("no memory!"); return b; };
 
 int main(int argc, char* argv[])
 {
@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
         };
     };
     
-    if(enet_initialize()<0) TessLib::Main::Fatal("Unable to initialise network module");
+    if(enet_initialize()<0) TessLib::GameInit::Fatal("Unable to initialise network module");
     initserver(true, uprate, sdesc, ip, master, passwd, maxcl);
     return 0;
 };

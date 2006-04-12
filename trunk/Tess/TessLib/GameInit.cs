@@ -84,13 +84,13 @@ namespace TessLib
 	/// <summary>
 	/// Summary description for Main.
 	/// </summary>
-	public class Main
+	public class GameInit
 	{
 		
 		static IntPtr player1Ptr;
 		static DynamicEntity player1;
 
-		public Main()
+		public GameInit()
 		{
 			//
 			// TODO: Add constructor logic here
@@ -104,7 +104,7 @@ namespace TessLib
 		public static void Fatal(string s, string o)
 		{
 			Console.WriteLine(s + o + Sdl.SDL_GetError());
-			Bindings.cleanup(s + o + Sdl.SDL_GetError());
+			Cleanup(s + o + Sdl.SDL_GetError());
 		}
 		public static void Fatal(string s)
 		{
@@ -131,6 +131,27 @@ namespace TessLib
 			{
 				player1Ptr = value;
 			}
+		}
+		public static void Cleanup(string msg)
+		{	
+			Bindings.stop();
+			Bindings.disconnect(true, false);
+			Bindings.writecfg();
+			RenderGl.CleanGl();
+			Bindings.cleansound();
+			Bindings.cleanupserver();
+			Mouse.ShowCursor = true;
+			Video.GrabInput = false;
+			if(msg != null)
+			{				
+				Log(msg);	
+			}
+			Events.QuitApplication();
+		}
+		public static void Quit()
+		{
+			Bindings.writeservercfg();
+			GameInit.Cleanup(null);
 		}
 	}
 }

@@ -148,7 +148,7 @@ vector<ivector> messages;
 void addmsg(int rel, int num, int type, ...)
 {
     if(demoplayback) return;
-	//if(num!=msgsizelookup(type)) { sprintf_sd(s)("inconsistant msg size for %d (%d != %d)", type, num, msgsizelookup(type)); TessLib::Main::Fatal(s); };
+	//if(num!=msgsizelookup(type)) { sprintf_sd(s)("inconsistant msg size for %d (%d != %d)", type, num, msgsizelookup(type)); TessLib::GameInit::Fatal(s); };
     if(messages.length()==100) { conoutf("command flood protection (type %d)", type); return; };
     ivector &msg = messages.add();
     msg.add(num);

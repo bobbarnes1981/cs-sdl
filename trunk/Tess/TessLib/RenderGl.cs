@@ -90,7 +90,7 @@ namespace TessLib
 			Gl.glEndList();
 		}
 
-		static void CleanGl()
+		public static void CleanGl()
 		{
 			//if(qsphere) 
 			//{
@@ -199,11 +199,11 @@ namespace TessLib
 		{
 			Gl.glLoadIdentity();
     
-			Gl.glRotated(TessLib.Main.Player1.roll,0.0,0.0,1.0);
-			Gl.glRotated(TessLib.Main.Player1.pitch,-1.0,0.0,0.0);
-			Gl.glRotated(TessLib.Main.Player1.yaw,0.0,1.0,0.0);
+			Gl.glRotated(TessLib.GameInit.Player1.roll,0.0,0.0,1.0);
+			Gl.glRotated(TessLib.GameInit.Player1.pitch,-1.0,0.0,0.0);
+			Gl.glRotated(TessLib.GameInit.Player1.yaw,0.0,1.0,0.0);
 
-			Gl.glTranslated(-TessLib.Main.Player1.o.x, (TessLib.Main.Player1.state==(int)CSStatus.CS_DEAD ? TessLib.Main.Player1.eyeheight-0.2f : 0)-TessLib.Main.Player1.o.z, -TessLib.Main.Player1.o.y);   
+			Gl.glTranslated(-TessLib.GameInit.Player1.o.x, (TessLib.GameInit.Player1.state==(int)CSStatus.CS_DEAD ? TessLib.GameInit.Player1.eyeheight-0.2f : 0)-TessLib.GameInit.Player1.o.z, -TessLib.GameInit.Player1.o.y);   
 		}
 	}
 }

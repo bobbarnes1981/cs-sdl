@@ -19,7 +19,7 @@ void reallocv()
 {
     verts = (vertex *)realloc(verts, (curmaxverts *= 2)*sizeof(vertex));
     curmaxverts -= 10;
-    if(!verts) TessLib::Main::Fatal("no vertex memory!");
+    if(!verts) TessLib::GameInit::Fatal("no vertex memory!");
     setarraypointers();
 };
 

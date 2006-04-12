@@ -1,6 +1,8 @@
 // editing.cpp: most map editing commands go here, entity editing commands are in world.cpp
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 bool editmode = false; 
 
@@ -48,7 +50,7 @@ void toggleedit()
         if(m_classicsp) monsterclear();                 // all monsters back at their spawns for editing
         projreset();
     };
-    keyrepeat(editmode);
+	SdlDotNet::Keyboard::KeyRepeat = editmode;
     selset = false;
     editing = editmode;
 };
