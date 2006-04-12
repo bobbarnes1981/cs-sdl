@@ -89,12 +89,37 @@ namespace TessLib
 		
 		static IntPtr player1Ptr;
 		static DynamicEntity player1;
+		static int screenWidth = 640;
+		static int screenHeight = 480;
 
 		public GameInit()
 		{
 			//
 			// TODO: Add constructor logic here
 			//
+		}
+
+		public static int ScreenWidth
+		{
+			get
+			{
+				return screenWidth;
+			}
+			set
+			{
+				screenWidth = value;
+			}
+		}
+		public static int ScreenHeight
+		{
+			get
+			{
+				return screenHeight;
+			}
+			set
+			{
+				screenHeight = value;
+			}
 		}
 		public static void Log(string input)
 		{
@@ -152,6 +177,32 @@ namespace TessLib
 		{
 			Bindings.writeservercfg();
 			GameInit.Cleanup(null);
+		}
+
+		/// <summary>
+		/// TODO: OpenGL Color masking is reversed compared to SDL
+		/// </summary>
+		public static void Screenshot()
+		{
+			Surface temp = new Surface(ScreenWidth, ScreenHeight, 24);
+
+			//image = SDL_CreateRGBSurface(SDL_SWSURFACE, scr_w, scr_h, 24, 0x0000FF, 0x00FF00, 0xFF0000, 0))
+			//{
+			//if(temp  = SDL_CreateRGBSurface(SDL_SWSURFACE, scr_w, scr_h, 24, 0x0000FF, 0x00FF00, 0xFF0000, 0))
+			//{
+			Gl.glReadPixels(0, 0, ScreenWidth, ScreenHeight, Gl.GL_RGB, Gl.GL_UNSIGNED_BYTE, temp.Pixels);
+			//glReadPixels(0, 0, scr_w, scr_h, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
+			//					for (idx = 0; idx<scr_h; idx++)
+			//					{
+			//						char *dest = (char *)temp->pixels+3*scr_w*idx;
+			//						memcpy(dest, (char *)image->pixels+3*scr_w*(scr_h-1-idx), 3*scr_w);
+			//						endianswap(dest, 3, scr_w);
+			//					}
+			//sprintf_sd(buf)("screenshots/screenshot_%d.bmp", lastmillis);
+			//temp = new Surface(Video.Screen);
+			temp.FlipVertical();
+			temp.SaveBmp("screenshots/tess_screenshot_"+Timer.TicksElapsed.ToString()+".bmp");					
+			temp.Dispose();
 		}
 	}
 }

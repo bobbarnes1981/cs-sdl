@@ -12,6 +12,7 @@ bool demoplayback = false;
 bool demoloading = false;
 dvector playerhistory;
 int democlientnum = 0;
+int islittleendian = 1;
 
 void startdemo();
 
