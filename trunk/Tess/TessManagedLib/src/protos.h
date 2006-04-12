@@ -205,7 +205,6 @@ extern DECLSPEC void CDECL physicsframe();
 // sound
 extern DECLSPEC void CDECL playsound(int n, vec *loc = 0);
 extern DECLSPEC void CDECL playsoundc(int n);
-//extern DECLSPEC void CDECL initsound();
 extern DECLSPEC void CDECL cleansound();
 extern DECLSPEC void CDECL updatevol();
 
