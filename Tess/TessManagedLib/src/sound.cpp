@@ -1,7 +1,8 @@
 // sound.cpp: uses fmod on windows and sdl_mixer on unix (both had problems on the other platform)
 
 #include "cube.h"
-
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 VARP(soundvol, 0, 255, 255);
 VARP(musicvol, 0, 128, 255);
@@ -17,38 +18,12 @@ struct soundloc { vec loc; bool inuse; } soundlocs[MAXCHAN];
     //Mix_Music *mod = NULL;
     void *stream = NULL;
 
-void stopsound()
-{
-    if(nosound) return;
-    //if(mod)
-   // {
-           // Mix_HaltMusic();
-            //Mix_FreeMusic(mod);
-    //    mod = NULL;
-   // };
-    if(stream)
-    {
-        stream = NULL;
-    };
-};
-
 VAR(soundbufferlen, 128, 1024, 4096);
-
-//void initsound()
-//{
-//    memset(soundlocs, 0, sizeof(soundloc)*MAXCHAN);
-//        if(Mix_OpenAudio(SOUNDFREQ, MIX_DEFAULT_FORMAT, 2, soundbufferlen)<0)
-//        {
-//            conoutf("sound init failed (SDL_mixer): %s", (size_t)Mix_GetError());
-//            nosound = true;
-//        };
-//	    Mix_AllocateChannels(MAXCHAN);	
-//};
 
 void music(char *name)
 {
     if(nosound) return;
-    stopsound();
+	SdlDotNet::Music::Stop();
     if(soundvol && musicvol)
     {
         string sn;
@@ -81,7 +56,7 @@ COMMAND(registersound, ARG_1EST);
 void cleansound()
 {
     if(nosound) return;
-    stopsound();
+	SdlDotNet::Music::Stop();
         //Mix_CloseAudio();
 };
 
