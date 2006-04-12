@@ -162,6 +162,22 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Create surface of a given width and height
+		/// </summary>
+		/// <param name="width">Width of surface</param>
+		/// <param name="height">Height of surface</param>
+		/// <param name="bitsPerPixel">Bits per pixel</param>
+		public Surface(int width, int height, int bitsPerPixel)
+		{
+			this.Handle = 
+				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, bitsPerPixel, VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
+			if (this.Handle == IntPtr.Zero)
+			{
+				throw SdlException.Generate();
+			}
+		}
+
+		/// <summary>
 		/// Create a Surface from a byte array in memory.
 		/// </summary>
 		/// <param name="array">
