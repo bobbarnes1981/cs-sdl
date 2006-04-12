@@ -946,26 +946,23 @@ namespace SdlDotNet
 		/// <summary>
 		/// Forces keyboard focus and prevents the mouse from leaving the window
 		/// </summary>
-		public static void GrabInput() 
-		{
-			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_ON);
-		}
-		/// <summary>
-		/// Queries if input has been grabbed.
-		/// </summary>
-		public static bool IsInputGrabbed
+		public static bool GrabInput 
 		{
 			get
 			{
 				return (Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_QUERY) == Sdl.SDL_GRAB_ON);
 			}
-		}
-		/// <summary>
-		/// Releases keyboard and mouse focus from a previous call to GrabInput()
-		/// </summary>
-		public static void ReleaseInput() 
-		{
-			Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_OFF);
+			set
+			{
+				if (value)
+				{
+					Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_ON);
+				}
+				else
+				{
+					Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_OFF);
+				}
+			}
 		}
 
 		/// <summary>
