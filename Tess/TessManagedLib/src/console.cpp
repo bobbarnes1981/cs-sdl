@@ -2,6 +2,8 @@
 
 #include "cube.h"
 #include <ctype.h>
+#using <mscorlib.dll>
+#using <SdlDotNet.dll>
 
 struct cline { char *cref; int outtime; };
 vector<cline> conlines;
@@ -103,7 +105,7 @@ COMMANDN(bind, bindkey, ARG_2STR);
 void saycommand(char *init)                         // turns input to the command line on or off
 {
     SDL_EnableUNICODE(saycommandon = (init!=NULL));
-    if(!editmode) keyrepeat(saycommandon);
+    if(!editmode) SdlDotNet::Keyboard::KeyRepeat = saycommandon;
     if(!init) init = "";
     strcpy_s(commandbuf, init);
 };

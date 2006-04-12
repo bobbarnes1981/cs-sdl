@@ -9302,7 +9302,7 @@
         </member>
         <member name="M:SdlDotNet.Timer.DelaySeconds(System.Int32)">
             <summary>
-            Wait a number of milliseconds.
+            Wait a number of seconds.
             </summary>
             <param name="delayTime">Delay time in seconds</param>
         </member>
@@ -10193,16 +10193,6 @@
             </summary>
             <returns>True if the action succeeded, otherwise False</returns>
         </member>
-        <member name="M:SdlDotNet.Video.GrabInput">
-            <summary>
-            Forces keyboard focus and prevents the mouse from leaving the window
-            </summary>
-        </member>
-        <member name="M:SdlDotNet.Video.ReleaseInput">
-            <summary>
-            Releases keyboard and mouse focus from a previous call to GrabInput()
-            </summary>
-        </member>
         <member name="M:SdlDotNet.Video.Gamma(System.Single,System.Single,System.Single)">
             <summary>
             Sets gamma
@@ -10389,9 +10379,9 @@
             gets or sets the text for the current window
             </summary>
         </member>
-        <member name="P:SdlDotNet.Video.IsInputGrabbed">
+        <member name="P:SdlDotNet.Video.GrabInput">
             <summary>
-            Queries if input has been grabbed.
+            Forces keyboard focus and prevents the mouse from leaving the window
             </summary>
         </member>
         <member name="P:SdlDotNet.Video.VideoDriver">

@@ -98,8 +98,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\bin\Debug"
-			IntermediateDirectory=".\obj\Debug"
+			OutputDirectory="bin\Debug"
+			IntermediateDirectory="obj\Debug"
 			ConfigurationType="2"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -118,9 +118,9 @@
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderThrough=""
 				PrecompiledHeaderFile=""
-				AssemblerListingLocation=".\Debug/"
-				ObjectFile=".\Debug/"
-				ProgramDataBaseFileName=".\Debug/"
+				AssemblerListingLocation="./obj/Debug/"
+				ObjectFile="./obj/Debug/"
+				ProgramDataBaseFileName="./obj/Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				Detect64BitPortabilityProblems="FALSE"
@@ -132,17 +132,17 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
 				AdditionalDependencies="odbc32.lib odbccp32.lib zlib.lib opengl32.lib glu32.lib msvcrt.lib SDLmain.lib SDL.lib SDL_image.lib SDL_mixer.lib ws2_32.lib winmm.lib"
-				OutputFile="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\bin\Debug\TessManagedLib.dll&quot;"
+				OutputFile="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\TessManagedLib\bin\Debug\TessManagedLib.dll&quot;"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\lib&quot;"
 				IgnoreAllDefaultLibraries="FALSE"
 				ForceSymbolReferences="__DllMainCRTStartup@12"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile=".\Debug/TessManagedLib_debug.pdb"
+				ProgramDatabaseFile="bin/Debug/TessManagedLib_debug.pdb"
 				SubSystem="2"
 				ResourceOnlyDLL="TRUE"
-				ImportLibrary="./Debug/TessManagedLib.lib"/>
+				ImportLibrary="./bin/Debug/TessManagedLib.lib"/>
 			<Tool
 				Name="VCMIDLTool"
 				TypeLibraryName=".\Debug/cube.tlb"/>
@@ -249,6 +249,8 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<AssemblyReference
+			RelativePath="$(SolutionDir)lib\SdlDotNet.dll"/>
 		<ProjectReference
 			ReferencedProjectIdentifier="{DF0A7A59-91FA-438C-B859-D35C3963A553}"
 			Name="TessLib"/>
@@ -305,28 +307,10 @@
 			Name="docs"
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
 			<File
-				RelativePath="..\cube\docs\config.html">
-			</File>
-			<File
 				RelativePath=".\src\CUBE_TODO.txt">
 			</File>
 			<File
-				RelativePath="..\cube\docs\editing.html">
-			</File>
-			<File
-				RelativePath="..\cube\docs\editref.html">
-			</File>
-			<File
-				RelativePath="..\cube\docs\game.html">
-			</File>
-			<File
-				RelativePath="..\cube\docs\history.html">
-			</File>
-			<File
-				RelativePath="..\cube\readme.html">
-			</File>
-			<File
-				RelativePath="..\readme.txt">
+				RelativePath="..\LICENSE.txt">
 			</File>
 		</Filter>
 		<Filter

@@ -88,18 +88,18 @@ namespace TessLib
 //		public static extern int native_main(int argc, string[] argv);
 //		#endregion int native_main()
 
-		#region void cleanup(string msg)
-		/// <summary>
-		///     cleanup
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in main.cpp:
-		///     <code>extern DECLSPEC void CDECL cleanup(char *msg);</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void cleanup(string msg);
-		#endregion void cleanup(string msg)
+//		#region void cleanup(string msg)
+//		/// <summary>
+//		///     cleanup
+//		/// </summary>
+//		/// <remarks>
+//		/// <p>Binds to C-function call in main.cpp:
+//		///     <code>extern DECLSPEC void CDECL cleanup(char *msg);</code>
+//		///     </p>
+//		/// </remarks>
+//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+//		public static extern void cleanup(string msg);
+//		#endregion void cleanup(string msg)
 
 		#region bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
 		/// <summary>
@@ -126,6 +126,19 @@ namespace TessLib
 		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern int enet_initialize();
 		#endregion int enet_initialize()
+
+		#region void stop()
+		/// <summary>
+		///     stop
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in main.cpp:
+		///     <code>extern DECLSPEC void CDECL stop();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void stop();
+		#endregion void stop()
 
 //		#region void keyrepeat(bool on)
 //		/// <summary>
@@ -179,6 +192,45 @@ namespace TessLib
 		public static extern void purgetextures();
 		#endregion void purgetextures()
 
+		#region void writecfg()
+		/// <summary>
+		///     writecfg
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in command.cpp:
+		///     <code>extern DECLSPEC void CDECL writecfg()</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void writecfg();
+		#endregion void writecfg()
+
+		#region void cleansound()
+		/// <summary>
+		///     writecfg
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in command.cpp:
+		///     <code>extern DECLSPEC void CDECL cleansound()</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void cleansound();
+		#endregion void cleansound()
+
+		#region void cleanupserver()
+		/// <summary>
+		///     cleanupserver
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in command.cpp:
+		///     <code>extern DECLSPEC void CDECL cleanupserver()</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void cleanupserver();
+		#endregion void cleanupserver()
+
 		#region void gl_drawframe(int w, int h, float curfps)
 		/// <summary>
 		///     gl_drawframe
@@ -204,6 +256,19 @@ namespace TessLib
 		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void empty_world(int factor, bool force);
 		#endregion void empty_world(int factor, bool force)
+
+		#region void disconnect(bool onlyclean, bool async)
+		/// <summary>
+		///     Empty world
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in client.cpp:
+		///     <code>extern DECLSPEC void CDECL disconnect(int onlyclean = 0, int async = 0)</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void disconnect(bool onlyclean, bool async);
+		#endregion void disconnect(bool onlyclean, bool async)
 
 		#region void serverslice(int seconds, int timeout)
 		/// <summary>

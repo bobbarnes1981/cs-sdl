@@ -20,7 +20,7 @@
                 PostBuildEvent = ""
                 RootNamespace = "Tess"
                 RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = ""
+                StartupObject = "Tess.GameMain"
             >
                 <Config
                     Name = "Debug"
@@ -36,7 +36,7 @@
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "false"
-                    OutputPath = "..\bin\Debug\"
+                    OutputPath = "bin\Debug\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -128,7 +128,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Tess.cs"
+                    RelPath = "GameMain.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

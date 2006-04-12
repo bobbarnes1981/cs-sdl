@@ -44,7 +44,7 @@ namespace Tess
 	/// <summary>
 	/// Summary description for Tess.
 	/// </summary>
-	class Tess
+	class GameMain
 	{
 		float DMF = 16.0f ;
 		float DAF = 1.0f ;
@@ -94,7 +94,7 @@ namespace Tess
 		[STAThread]
 		static void Main(string[] args)
 		{
-			Tess tess = new Tess();
+			GameMain tess = new GameMain();
 			tess.Run(args);
 		}
 
@@ -110,7 +110,7 @@ namespace Tess
 
 			int retval = ManagedWrapper.minitialize();
 
-			TessLib.Main.Log("sdl");
+			TessLib.GameInit.Log("sdl");
     
 			foreach(string a in args)
 			{
@@ -149,50 +149,50 @@ namespace Tess
 							maxcl  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
 							break;
 						default:  
-							TessLib.Main.Log("unknown commandline option");
+							TessLib.GameInit.Log("unknown commandline option");
 							break;
 					}
 				}
 				else
 				{ 
-					TessLib.Main.Log("unknown commandline argument");
+					TessLib.GameInit.Log("unknown commandline argument");
 				}
 			};
 			
-			TessLib.Main.Log("net");
+			TessLib.GameInit.Log("net");
 			if(TessLib.Bindings.enet_initialize()<0)
 			{
-				TessLib.Main.Fatal("Unable to initialise network module");
+				TessLib.GameInit.Fatal("Unable to initialise network module");
 			}
 			TessLib.ClientGame.initclient();
 			TessLib.Bindings.initserver(dedicated, uprate, sdesc, ip, out master, passwd, maxcl);  // never returns if dedicated    
-			TessLib.Main.Log("world");
+			TessLib.GameInit.Log("world");
 			TessLib.Bindings.empty_world(7, true);
-			TessLib.Main.Log("video: sdl");
+			TessLib.GameInit.Log("video: sdl");
 			Video.GLDoubleBufferEnabled = false;
-			TessLib.Main.Log("video: mode");
+			TessLib.GameInit.Log("video: mode");
 			Video.WindowIcon();
 			Video.WindowCaption = "Tess Engine";
-			Video.GrabInput();
+			Video.GrabInput = true;
 			Video.SetVideoModeWindowOpenGL(screenWidth, screenHeight);
 			
-			TessLib.Main.Log("video: misc");
+			TessLib.GameInit.Log("video: misc");
 			Keyboard.KeyRepeat = false;
 			Mouse.ShowCursor = false;
 			
-			TessLib.Main.Log("gl");
+			TessLib.GameInit.Log("gl");
 				
 			TessLib.RenderGl.GlInit(screenWidth, screenHeight);
 
-			string dataDirectory = @"game/";
-			string filepath = @"../../";
+			string dataDirectory = "";
+			string filepath = "";
 
 			if (File.Exists(dataDirectory + "newchars.png"))
 			{
 				filepath = "";
 			}
 			
-			TessLib.Main.Log("basetex");
+			TessLib.GameInit.Log("basetex");
 			int xs = 0;
 			int ys = 0;
 			if(!TessLib.Bindings.installtex(2, filepath + dataDirectory + "data/newchars.png", out xs, out ys, false) ||
@@ -205,13 +205,13 @@ namespace Tess
 				!TessLib.Bindings.installtex(5, filepath + dataDirectory + "data/items.png", out xs, out ys, false) ||
 				!TessLib.Bindings.installtex(1, filepath + dataDirectory + "data/crosshair.png", out xs, out ys, false)) 
 			{
-				TessLib.Main.Fatal("could not find core textures (hint: run cube from the parent of the bin directory)");
+				TessLib.GameInit.Fatal("could not find core textures (hint: run cube from the parent of the bin directory)");
 			}
 			
-			TessLib.Main.Log("sound");
+			TessLib.GameInit.Log("sound");
 			Mixer.Initialize();
 			
-			TessLib.Main.Log("cfg");
+			TessLib.GameInit.Log("cfg");
 			TessLib.Bindings.newmenu("frags\tpj\tping\tteam\tname");
 			TessLib.Bindings.newmenu("ping\tplr\tserver");
 			TessLib.Bindings.exec( filepath + dataDirectory + "data/keymap.cfg");
@@ -225,11 +225,11 @@ namespace Tess
 			}
 			TessLib.Bindings.exec( filepath + dataDirectory + "autoexec.cfg");
 			
-			TessLib.Main.Log("localconnect");
+			TessLib.GameInit.Log("localconnect");
 			TessLib.Bindings.localconnect();
 			// if this map is changed, also change depthcorrect()   
 			TessLib.Bindings.changemap("metl3");		
-			TessLib.Main.Log("mainloop");
+			TessLib.GameInit.Log("mainloop");
 			
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Events.KeyboardUp += new KeyboardEventHandler(this.KeyUp);
@@ -264,10 +264,10 @@ namespace Tess
 
 			fps = 30.0f;
 			//fps = (1000.0f/curtime+fps*50)/51;
-			TessLib.Main.Player1Ptr = TessLib.Bindings.getplayer1();
+			TessLib.GameInit.Player1Ptr = TessLib.Bindings.getplayer1();
 			
 			//player1 = (DynamicEntity)Marshal.PtrToStructure(player1Ptr, typeof(DynamicEntity));
-			TessLib.Bindings.computeraytable(TessLib.Main.Player1.o.x, TessLib.Main.Player1.o.y);
+			TessLib.Bindings.computeraytable(TessLib.GameInit.Player1.o.x, TessLib.GameInit.Player1.o.y);
 			TessLib.Bindings.readdepth(screenWidth, screenHeight);
 					
 			Video.GLSwapBuffers();
@@ -286,8 +286,7 @@ namespace Tess
 
 		private void Quit(object sender, QuitEventArgs e)
 		{
-			TessLib.Bindings.writeservercfg();
-			TessLib.Bindings.cleanup(null);
+			TessLib.GameInit.Quit();
 			ManagedWrapper.mterminate();
 		}
 

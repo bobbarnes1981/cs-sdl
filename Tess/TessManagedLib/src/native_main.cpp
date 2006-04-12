@@ -4,31 +4,31 @@
 #using <mscorlib.dll>
 #using <TessLib.dll>
 
-void cleanup(char *msg)         // single program exit point;
-{
-	stop();
-    disconnect(true);
-    writecfg();
-    cleangl();
-    cleansound();
-    cleanupserver();
-    SDL_ShowCursor(1);
-    if(msg)
-    {
-        /*#ifdef WIN32
-        MessageBox(NULL, msg, "cube fatal error", MB_OK|MB_SYSTEMMODAL);
-        #else*/
-        printf(msg);
-       /* #endif*/
-    };
-    SDL_Quit();
-    exit(1);
-};
+//void cleanup(char *msg)         // single program exit point;
+//{
+//	stop();
+//    disconnect(true);
+//    writecfg();
+////    cleangl();
+//    cleansound();
+//    cleanupserver();
+//    SDL_ShowCursor(1);
+//    if(msg)
+//    {
+//        /*#ifdef WIN32
+//        MessageBox(NULL, msg, "cube fatal error", MB_OK|MB_SYSTEMMODAL);
+//        #else*/
+//        printf(msg);
+//       /* #endif*/
+//    };
+//    SDL_Quit();
+//    exit(1);
+//};
 
 void quit()                     // normal exit
 {
-    writeservercfg();
-    cleanup(NULL);
+	TessLib::GameInit::Quit();
+	//ManagedWrapper::mterminate();
 };
 
 //void fatal(char *s, char *o)    // failure exit
@@ -40,7 +40,7 @@ void quit()                     // normal exit
 void *alloc(int s)              // for some big chunks... most other allocs use the memory pool
 {
     void *b = calloc(1,s);
-	if(!b) TessLib::Main::Fatal("out of memory!");
+	if(!b) TessLib::GameInit::Fatal("out of memory!");
     return b;
 };
 
@@ -74,11 +74,11 @@ void screenshot()
 COMMAND(screenshot, ARG_NONE);
 COMMAND(quit, ARG_NONE);
 
-void keyrepeat(bool on)
-{
-    SDL_EnableKeyRepeat(on ? SDL_DEFAULT_REPEAT_DELAY : 0,
-                             SDL_DEFAULT_REPEAT_INTERVAL);
-};
+//void keyrepeat(bool on)
+//{
+//    SDL_EnableKeyRepeat(on ? SDL_DEFAULT_REPEAT_DELAY : 0,
+//                             SDL_DEFAULT_REPEAT_INTERVAL);
+//};
 
 dynent * getplayer1(void)
 {
