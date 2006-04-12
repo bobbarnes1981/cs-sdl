@@ -36,11 +36,10 @@ using Tao.Sdl;
 using Tao.OpenGl;
 using SdlDotNet;
 using System.Runtime.InteropServices;
+using TessLib;
 
 namespace Tess
 {
-	
-
 	/// <summary>
 	/// Summary description for Tess.
 	/// </summary>
@@ -76,8 +75,8 @@ namespace Tess
 		int ignore = 5;
 		
 		float fps = 30.0f;
-		int screenWidth = 640;
-		int screenHeight = 480;
+		//int screenWidth = 640;
+		//int screenHeight = 480;
 		int gamespeed = 100;
 		int lastmillis = 0;
 		bool demoplayback;
@@ -125,10 +124,10 @@ namespace Tess
 							//fs = 0; 
 							break;
 						case "w": 
-							screenWidth  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
+							GameInit.ScreenWidth  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
 							break;
 						case "h": 
-							screenHeight  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
+							GameInit.ScreenHeight  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
 							break;
 						case "u": 
 							uprate = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
@@ -174,7 +173,7 @@ namespace Tess
 			Video.WindowIcon();
 			Video.WindowCaption = "Tess Engine";
 			Video.GrabInput = true;
-			Video.SetVideoModeWindowOpenGL(screenWidth, screenHeight);
+			Video.SetVideoModeWindowOpenGL(GameInit.ScreenWidth, GameInit.ScreenHeight);
 			
 			TessLib.GameInit.Log("video: misc");
 			Keyboard.KeyRepeat = false;
@@ -182,7 +181,7 @@ namespace Tess
 			
 			TessLib.GameInit.Log("gl");
 				
-			TessLib.RenderGl.GlInit(screenWidth, screenHeight);
+			TessLib.RenderGl.GlInit(GameInit.ScreenWidth, GameInit.ScreenHeight);
 
 			string dataDirectory = "";
 			string filepath = "";
@@ -266,9 +265,8 @@ namespace Tess
 			//fps = (1000.0f/curtime+fps*50)/51;
 			TessLib.GameInit.Player1Ptr = TessLib.Bindings.getplayer1();
 			
-			//player1 = (DynamicEntity)Marshal.PtrToStructure(player1Ptr, typeof(DynamicEntity));
 			TessLib.Bindings.computeraytable(TessLib.GameInit.Player1.o.x, TessLib.GameInit.Player1.o.y);
-			TessLib.Bindings.readdepth(screenWidth, screenHeight);
+			TessLib.Bindings.readdepth(GameInit.ScreenWidth, GameInit.ScreenHeight);
 					
 			Video.GLSwapBuffers();
 			TessLib.Bindings.updatevol();
@@ -277,11 +275,11 @@ namespace Tess
 			{
 				//player1.yaw += 5;
 				//TessLib.Main.Player1 = player1;
-				TessLib.Bindings.gl_drawframe(screenWidth, screenHeight, fps);
+				TessLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
 				//player1.yaw -= 5;
 				//TessLib.Main.Player1 = player1;
 			};
-			TessLib.Bindings.gl_drawframe(screenWidth, screenHeight, fps);
+			TessLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
 		}
 
 		private void Quit(object sender, QuitEventArgs e)
@@ -292,6 +290,10 @@ namespace Tess
 
 		private void KeyDown(object sender, KeyboardEventArgs e)
 		{
+			if (e.Key == Key.F12)
+			{
+				TessLib.GameInit.Screenshot();
+			}
 			TessLib.Bindings.keypress((int)e.Key, e.Down == true, e.Unicode);	
 		}
 

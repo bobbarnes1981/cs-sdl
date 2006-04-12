@@ -430,6 +430,8 @@ dynent *getclient(int cn)   // ensure valid entity
 //    initclientnet();
 //};
 
+int framesinmap = 0;
+
 void startmap(char *name)   // called just after a map load
 {
     if(netmapstart() && m_sp) { gamemode = 0; conoutf("coop sp not supported yet"); };

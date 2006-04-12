@@ -8352,6 +8352,14 @@
             <param name="width">Width of surface</param>
             <param name="height">Height of surface</param>
         </member>
+        <member name="M:SdlDotNet.Surface.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Create surface of a given width and height
+            </summary>
+            <param name="width">Width of surface</param>
+            <param name="height">Height of surface</param>
+            <param name="bitsPerPixel">Bits per pixel</param>
+        </member>
         <member name="M:SdlDotNet.Surface.#ctor(System.Byte[])">
             <summary>
             Create a Surface from a byte array in memory.

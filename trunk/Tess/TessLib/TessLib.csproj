@@ -104,6 +104,11 @@
                     AssemblyName = "Tao.OpenGl"
                     HintPath = "..\lib\Tao.OpenGl.dll"
                 />
+                <Reference
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                />
             </References>
         </Build>
         <Files>
