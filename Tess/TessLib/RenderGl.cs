@@ -110,102 +110,108 @@ namespace TessLib
 			//}
 		}
 
-//		static void GlDrawFrame(int w, int h, float currentFps)
-//		{
-//			float hf = hdr.waterlevel-0.3f;
-//			float fovy = (float)fov*h/w;
-//			float aspect = w/(float)h;
-//			bool underwater = player1->o.z<hf;
-//    
-//			Gl.glFogi(Gl.GL_FOG_START, (fog+64)/8);
-//			Gl.glFogi(Gl.GL_FOG_END, fog);
-//			float fogc[4] = { (fogcolour>>16)/256.0f, ((fogcolour>>8)&255)/256.0f, (fogcolour&255)/256.0f, 1.0f };
-//			Gl.glFogfv(GL_FOG_COLOR, fogc);
-//			Gl.glClearColor(fogc[0], fogc[1], fogc[2], 1.0f);
-//
-//			if(underwater)
-//			{
-//				fovy += (float)sin(lastmillis/1000.0)*2.0f;
-//				aspect += (float)sin(lastmillis/1000.0+PI)*0.1f;
-//				Gl.glFogi(Gl.GL_FOG_START, 0);
-//				Gl.glFogi(Gl.GL_FOG_END, (fog+96)/8);
-//			};
-//    
-//			Gl.glClear((player1->outsidemap ? Gl.GL_COLOR_BUFFER_BIT : 0) | GL_DEPTH_BUFFER_BIT);
-//
-//			Gl.glMatrixMode(Gl.GL_PROJECTION);
-//			Gl.glLoadIdentity();
-//			int farplane = fog*5/2;
-//			Gl.gluPerspective(fovy, aspect, 0.15f, farplane);
-//			Gl.glMatrixMode(Gl.GL_MODELVIEW);
-//
-//			transplayer();
-//
-//			Gl.glEnable(Gl.GL_TEXTURE_2D);
-//    
-//			int xs, ys;
-//			skyoglid = lookuptexture(TextureNumbers.DEFAULT_SKY, xs, ys);
-//   
-//			resetcubes();
-//            
-//			curvert = 0;
-//			strips.setsize(0);
-//  
-//			render_world(player1->o.x, player1->o.y, player1->o.z, 
-//				(int)player1->yaw, (int)player1->pitch, (float)fov, w, h);
-//			finishstrips();
-//
-//			setupworld();
-//
-//			renderstripssky();
-//
-//			Gl.glLoadIdentity();
-//			Gl.glRotated(player1->pitch, -1.0, 0.0, 0.0);
-//			Gl.glRotated(player1->yaw,   0.0, 1.0, 0.0);
-//			Gl.glRotated(90.0, 1.0, 0.0, 0.0);
-//			Gl.glColor3f(1.0f, 1.0f, 1.0f);
-//			Gl.glDisable(Gl.GL_FOG);
-//			Gl.glDepthFunc(Gl.GL_GREATER);
-//			draw_envbox(14, fog*4/3);
-//			Gl.glDepthFunc(Gl.GL_LESS);
-//			Gl.glEnable(Gl.GL_FOG);
-//
-//			transplayer();
-//        
-//			overbright(2);
-//    
-//			renderstrips();
-//
-//			xtraverts = 0;
-//
-//			renderclients();
-//			monsterrender();
-//
-//			renderentities();
-//
-//			renderspheres(curtime);
-//			renderents();
-//
-//			Gl.glDisable(Gl.GL_CULL_FACE);
-//
-//			drawhudgun(fovy, aspect, farplane);
-//
-//			overbright(1);
-//			int nquads = renderwater(hf);
-//    
-//			overbright(2);
-//			render_particles(curtime);
-//			overbright(1);
-//
-//			Gl.glDisable(Gl.GL_FOG);
-//
-//			Gl.glDisable(Gl.GL_TEXTURE_2D);
-//
-//			gl_drawhud(w, h, (int)currentFps, nquads, curvert, underwater);
-//
-//			Gl.glEnable(Gl.GL_CULL_FACE);
-//			Gl.glEnable(Gl.GL_FOG);
-//		}
+		/// <summary>
+		/// TODO: Still a long way to go on this one.
+		/// </summary>
+		/// <param name="w"></param>
+		/// <param name="h"></param>
+		/// <param name="currentFps"></param>
+		static void GlDrawFrame(int w, int h, float currentFps)
+		{
+			//float hf = hdr.waterlevel-0.3f;
+			//float fovy = (float)fov*h/w;
+			float aspect = w/(float)h;
+			//bool underwater = GameInit.Player1.o.z<hf;
+    
+			//Gl.glFogi(Gl.GL_FOG_START, (fog+64)/8);
+			//Gl.glFogi(Gl.GL_FOG_END, fog);
+			//float fogc[4] = { (fogcolour>>16)/256.0f, ((fogcolour>>8)&255)/256.0f, (fogcolour&255)/256.0f, 1.0f };
+			//Gl.glFogfv(GL_FOG_COLOR, fogc);
+			//Gl.glClearColor(fogc[0], fogc[1], fogc[2], 1.0f);
+
+			//if(underwater)
+			//{
+				//fovy += (float)sin(lastmillis/1000.0)*2.0f;
+				//aspect += (float)sin(lastmillis/1000.0+PI)*0.1f;
+				Gl.glFogi(Gl.GL_FOG_START, 0);
+				//Gl.glFogi(Gl.GL_FOG_END, (fog+96)/8);
+			//};
+    
+			Gl.glClear((GameInit.Player1.outsidemap ? Gl.GL_COLOR_BUFFER_BIT : 0) | Gl.GL_DEPTH_BUFFER_BIT);
+
+			Gl.glMatrixMode(Gl.GL_PROJECTION);
+			Gl.glLoadIdentity();
+			//int farplane = fog*5/2;
+			//Glu.gluPerspective(fovy, aspect, 0.15f, farplane);
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+
+			TransPlayer();
+
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
+    
+			int xs, ys;
+			//skyoglid = lookuptexture(TextureNumbers.DEFAULT_SKY, xs, ys);
+   
+			//resetcubes();
+            
+			//curvert = 0;
+			//strips.setsize(0);
+  
+			//render_world(player1->o.x, player1->o.y, player1->o.z, 
+				//(int)player1->yaw, (int)player1->pitch, (float)fov, w, h);
+			//finishstrips();
+
+			//setupworld();
+
+			//renderstripssky();
+
+			Gl.glLoadIdentity();
+			Gl.glRotated(GameInit.Player1.pitch, -1.0, 0.0, 0.0);
+			Gl.glRotated(GameInit.Player1.yaw,   0.0, 1.0, 0.0);
+			Gl.glRotated(90.0, 1.0, 0.0, 0.0);
+			Gl.glColor3f(1.0f, 1.0f, 1.0f);
+			Gl.glDisable(Gl.GL_FOG);
+			Gl.glDepthFunc(Gl.GL_GREATER);
+			//RenderText.DrawEnvBox(14, fog*4/3);
+			Gl.glDepthFunc(Gl.GL_LESS);
+			Gl.glEnable(Gl.GL_FOG);
+
+			//transplayer();
+        
+			//overbright(2);
+    
+			//renderstrips();
+
+			xtraverts = 0;
+
+			//renderclients();
+			//monsterrender();
+
+			//renderentities();
+
+			//renderspheres(curtime);
+			//renderents();
+
+			Gl.glDisable(Gl.GL_CULL_FACE);
+
+			//drawhudgun(fovy, aspect, farplane);
+
+			//overbright(1);
+			//int nquads = renderwater(hf);
+    
+			//overbright(2);
+			//render_particles(curtime);
+			//overbright(1);
+
+			Gl.glDisable(Gl.GL_FOG);
+
+			Gl.glDisable(Gl.GL_TEXTURE_2D);
+
+			//gl_drawhud(w, h, (int)currentFps, nquads, curvert, underwater);
+
+			Gl.glEnable(Gl.GL_CULL_FACE);
+			Gl.glEnable(Gl.GL_FOG);
+		}
 
 		static void TransPlayer()
 		{

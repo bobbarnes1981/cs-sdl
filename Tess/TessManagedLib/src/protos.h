@@ -46,8 +46,6 @@ extern DECLSPEC char CDECL *getservername(int n);
 extern DECLSPEC void CDECL writeservercfg();
 
 // rendergl
-//extern DECLSPEC void CDECL gl_init(int w, int h);
-//extern DECLSPEC void CDECL cleangl();
 extern DECLSPEC void CDECL purgetextures();
 extern DECLSPEC void CDECL gl_drawframe(int w, int h, float curfps);
 extern DECLSPEC bool CDECL installtex(int tnum, char *texname, int &xs, int &ys, bool clamp = false);
@@ -136,21 +134,14 @@ extern DECLSPEC int CDECL isoccluded(float vx, float vy, float cx, float cy, flo
 
 // main
 
-//extern DECLSPEC void CDECL fatal(char *s, char *o = "");
 extern DECLSPEC void CDECL *alloc(int s);
-//extern DECLSPEC void CDECL keyrepeat(bool on);
-//extern DECLSPEC int CDECL native_main(int argc, char **argv);
-//extern DECLSPEC void CDECL cleanup(char *msg);
 extern DECLSPEC void CDECL quit();
 extern DECLSPEC dynent * CDECL getplayer1();
-//extern DECLSPEC float CDECL getplayer1yaw();
-//extern DECLSPEC void CDECL setplayer1yaw(float yaw);
 
 // rendertext
 extern DECLSPEC void CDECL draw_text(char *str, int left, int top, int gl_num);
 extern DECLSPEC void CDECL draw_textf(char *fstr, int left, int top, int gl_num, ...);
 extern DECLSPEC int CDECL text_width(char *str);
-extern DECLSPEC void CDECL draw_envbox(int t, int fogdist);
 
 // editing
 extern DECLSPEC void CDECL cursorupdate();

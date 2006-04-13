@@ -301,7 +301,7 @@ void gl_drawframe(int w, int h, float curfps)
     glColor3f(1.0f, 1.0f, 1.0f);
     glDisable(GL_FOG);
     glDepthFunc(GL_GREATER);
-    draw_envbox(14, fog*4/3);
+	TessLib::RenderText::DrawEnvBox(14, fog*4/3);
     glDepthFunc(GL_LESS);
     glEnable(GL_FOG);
 
