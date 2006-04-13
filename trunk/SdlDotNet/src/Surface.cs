@@ -151,14 +151,8 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="width">Width of surface</param>
 		/// <param name="height">Height of surface</param>
-		public Surface(int width, int height)
+		public Surface(int width, int height) : this(width, height, VideoInfo.BitsPerPixel)
 		{
-			this.Handle = 
-				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, VideoInfo.BitsPerPixel,VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
-			if (this.Handle == IntPtr.Zero)
-			{
-				throw SdlException.Generate();
-			}
 		}
 
 		/// <summary>
@@ -167,15 +161,30 @@ namespace SdlDotNet
 		/// <param name="width">Width of surface</param>
 		/// <param name="height">Height of surface</param>
 		/// <param name="bitsPerPixel">Bits per pixel</param>
-		public Surface(int width, int height, int bitsPerPixel)
+		public Surface(int width, int height, int bitsPerPixel) : this(width, height, bitsPerPixel, VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask)
+		{
+		}
+
+		/// <summary>
+		/// Create surface of a given width and height
+		/// </summary>
+		/// <param name="width">Width of surface</param>
+		/// <param name="height">Height of surface</param>
+		/// <param name="bitsPerPixel">Bits per pixel</param>
+		/// <param name="alphaMask">Alpha Mask</param>
+		/// <param name="blueMask">Blue Mask</param>
+		/// <param name="greenMask">Green Mask</param>
+		/// <param name="redMask">Red Mask</param>
+		public Surface(int width, int height, int bitsPerPixel, int redMask, int greenMask, int blueMask, int alphaMask)
 		{
 			this.Handle = 
-				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, bitsPerPixel, VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask);
+				Sdl.SDL_CreateRGBSurface((int)VideoModes.None, width, height, bitsPerPixel, redMask, greenMask, blueMask, alphaMask);
 			if (this.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
 		}
+
 
 		/// <summary>
 		/// Create a Surface from a byte array in memory.
