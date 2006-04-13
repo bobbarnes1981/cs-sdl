@@ -1,6 +1,8 @@
 // entities.cpp: map entity related functions (pickup etc.)
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 vector<entity> ents;
 

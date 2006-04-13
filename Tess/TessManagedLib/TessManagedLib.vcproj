@@ -111,7 +111,7 @@
 				Optimization="0"
 				OptimizeForProcessor="0"
 				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\include&quot;;&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\TessManagedLib\enet\include&quot;"
-				AdditionalUsingDirectories="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\bin\Debug&quot;"
+				AdditionalUsingDirectories=""
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;ENET_DEBUG"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"

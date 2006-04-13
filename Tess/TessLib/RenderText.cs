@@ -172,10 +172,18 @@ namespace TessLib
 			return x;
 		}
 
-		public static void DrawTextF(string fstr, int left, int top, int gl_num)
+		/// <summary>
+		/// TODO: does not work
+		/// </summary>
+		/// <param name="fstr"></param>
+		/// <param name="left"></param>
+		/// <param name="top"></param>
+		/// <param name="gl_num"></param>
+		/// <param name="str"></param>
+		public static void DrawTextF(string fstr, int left, int top, int gl_num, string str)
 		{
 			//sprintf_sdlv(str, gl_num, fstr);
-			//DrawText(str, left, top, gl_num);
+			DrawText(str, left, top, gl_num);
 		}
 
 		public static void DrawText(string str, int left, int top, int gl_num)

@@ -139,7 +139,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
     if(displaylist && frame==0 && range==1)
     {
 		glCallList(displaylist);
-		xtraverts += displaylistverts;
+		TessLib::RenderGl::XtraVerts += displaylistverts;
     }
     else
     {
@@ -147,7 +147,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 		{
 			static int displaylistn = 10;
 			glNewList(displaylist = displaylistn++, GL_COMPILE);
-			displaylistverts = xtraverts;
+			displaylistverts = TessLib::RenderGl::XtraVerts;
 		};
 		
 		int time = lastmillis-basetime;
@@ -178,7 +178,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 				glVertex3f(ip(x), ip(z), ip(y));
 			};
 
-			xtraverts += numVertex;
+			TessLib::RenderGl::XtraVerts += numVertex;
 
 			glEnd();
 		};
@@ -186,7 +186,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 		if(displaylist)
 		{
 			glEndList();
-			displaylistverts = xtraverts-displaylistverts;
+			displaylistverts = TessLib::RenderGl::XtraVerts-displaylistverts;
 		};
 	};
 
