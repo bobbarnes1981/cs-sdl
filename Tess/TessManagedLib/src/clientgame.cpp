@@ -1,9 +1,13 @@
 // clientgame.cpp: core game related stuff
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 int nextmode = 0;         // nextmode becomes gamemode after next map load
 VAR(gamemode, 1, 0, 0);
+
+VARF(gamespeed, 10, 100, 1000, if(multiplayer()) gamespeed = 100);
 
 void mode(int n) { addmsg(1, 2, SV_GAMEMODE, nextmode = n); };
 COMMAND(mode, ARG_1INT);
@@ -11,7 +15,12 @@ COMMAND(mode, ARG_1INT);
 bool intermission = false;
 
 dynent *player1 = newdynent();          // our client
-dvector players;                        // other clients
+dvector players;   // other clients
+
+dynent * getplayer1(void)
+{
+	return player1;
+}
 
 VARP(sensitivity, 0, 10, 10000);
 VARP(sensitivityscale, 1, 1, 10000);
@@ -455,3 +464,16 @@ void startmap(char *name)   // called just after a map load
 }; 
 
 COMMANDN(map, changemap, ARG_1STR);
+
+void quit()                     // normal exit
+{
+	TessLib::GameInit::Quit();
+};
+
+void screenshot()
+{
+	TessLib::GameInit::Screenshot();
+};
+
+COMMAND(screenshot, ARG_NONE);
+COMMAND(quit, ARG_NONE);
