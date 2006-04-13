@@ -1,6 +1,8 @@
 // renderparticles.cpp
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 const int MAXPARTICLES = 10500;
 const int NUMPARTCUTOFF = 20;
@@ -85,7 +87,7 @@ void render_particles(int time)
         glTexCoord2f(1.0, 0.0); glVertex3d(p->o.x+( right.x-up.x)*sz, p->o.z+( right.y-up.y)*sz, p->o.y+( right.z-up.z)*sz);
         glTexCoord2f(0.0, 0.0); glVertex3d(p->o.x+(-right.x-up.x)*sz, p->o.z+(-right.y-up.y)*sz, p->o.y+(-right.z-up.z)*sz);
         glEnd();
-        xtraverts += 4;
+        TessLib::RenderGl::XtraVerts += 4;
 
         if(numrender++>maxparticles || (p->fade -= time)<0)
         {

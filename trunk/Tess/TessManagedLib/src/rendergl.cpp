@@ -6,8 +6,6 @@
 
 extern int curvert;
 
-bool hasoverbright = false;
-
 void purgetextures();
 
 GLUquadricObj *qsphere = NULL;
@@ -50,7 +48,6 @@ const int MAXTEX = 1000;
 int texx[MAXTEX];                           // ( loaded texture ) -> ( name, size )
 int texy[MAXTEX];                           
 string texname[MAXTEX];
-int curtex = 0;
 const int FIRSTTEX = 1000;                  // opengl id = loaded id + FIRSTTEX
 // std 1+, sky 14+, mdls 20+
 
@@ -63,13 +60,14 @@ void purgetextures()
     loopi(256) loop(j,MAXFRAMES) mapping[i][j] = 0;
 };
 
-int curtexnum = 0;
-
-void texturereset() { curtexnum = 0; };
+void texturereset() 
+{
+	TessLib::RenderGl::TextureReset(); 
+};
 
 void texture(char *aframe, char *name)
 {
-    int num = curtexnum++, frame = atoi(aframe);
+	int num = TessLib::RenderGl::CurrentTextureNumber++, frame = atoi(aframe);
     if(num<0 || num>=256 || frame<0 || frame>=MAXFRAMES) return;
     mapping[num][frame] = 1;
     char *n = mapname[num][frame];
@@ -95,7 +93,7 @@ int lookuptexture(int tex, int &xs, int &ys)
     xs = ys = 16;
     if(!tid) return 1;                  // crosshair :)
 
-    loopi(curtex)       // lazily happens once per "texture" command, basically
+    loopi(TessLib::RenderGl::CurrentTextureNumber)       // lazily happens once per "texture" command, basically
     {
         if(strcmp(mapname[tex][frame], texname[i])==0)
         {
@@ -106,40 +104,24 @@ int lookuptexture(int tex, int &xs, int &ys)
         };
     };
 
-    if(curtex==MAXTEX) TessLib::GameInit::Fatal("loaded too many textures");
+    if(TessLib::RenderGl::CurrentTextureNumber==MAXTEX) TessLib::GameInit::Fatal("loaded too many textures");
 
-    int tnum = curtex+FIRSTTEX;
-    strcpy_s(texname[curtex], mapname[tex][frame]);
+    int tnum = TessLib::RenderGl::CurrentTextureNumber+FIRSTTEX;
+    strcpy_s(texname[TessLib::RenderGl::CurrentTextureNumber], mapname[tex][frame]);
 
-    sprintf_sd(name)("packages%c%s", PATHDIV, texname[curtex]);
+    sprintf_sd(name)("packages%c%s", PATHDIV, texname[TessLib::RenderGl::CurrentTextureNumber]);
 
     if(installtex(tnum, name, xs, ys))
     {
         mapping[tex][frame] = tnum;
-        texx[curtex] = xs;
-        texy[curtex] = ys;
-        curtex++;
+        texx[TessLib::RenderGl::CurrentTextureNumber] = xs;
+        texy[TessLib::RenderGl::CurrentTextureNumber] = ys;
+        TessLib::RenderGl::CurrentTextureNumber++;
         return tnum;
     }
     else
     {
         return mapping[tex][frame] = FIRSTTEX;  // temp fix
-    };
-};
-
-void setupworld()
-{
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY); 
-    setarraypointers();
-
-    if(hasoverbright)
-    {
-        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_EXT); 
-        glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB_EXT, GL_MODULATE);
-        glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE0_RGB_EXT, GL_TEXTURE);
-        glTexEnvi(GL_TEXTURE_ENV, GL_SOURCE1_RGB_EXT, GL_PRIMARY_COLOR_EXT);
     };
 };
 
@@ -168,7 +150,7 @@ void renderstrips()
     };   
 };
 
-void overbright(float amount) { if(hasoverbright) glTexEnvf(GL_TEXTURE_ENV, GL_RGB_SCALE_EXT, amount ); };
+//void overbright(float amount) { if(hasoverbright) glTexEnvf(GL_TEXTURE_ENV, GL_RGB_SCALE_EXT, amount ); };
 
 void addstrip(int tex, int start, int n)
 {
@@ -188,32 +170,18 @@ VARFP(gamma, 30, 100, 300,
     };
 });
 
-void transplayer()
-{
-    glLoadIdentity();
-    
-    glRotated(player1->roll,0.0,0.0,1.0);
-    glRotated(player1->pitch,-1.0,0.0,0.0);
-    glRotated(player1->yaw,0.0,1.0,0.0);
-
-    glTranslated(-player1->o.x, (player1->state==CS_DEAD ? player1->eyeheight-0.2f : 0)-player1->o.z, -player1->o.y);   
-};
-
 VARP(fov, 10, 105, 120);
-
-int xtraverts;
-
 VAR(fog, 64, 180, 1024);
 VAR(fogcolour, 0, 0x8099B3, 0xFFFFFF);
 
 VARP(hudgun,0,1,1);
 
-char *hudgunnames[] = { "hudguns/fist", "hudguns/shotg", "hudguns/chaing", "hudguns/rocket", "hudguns/rifle" };
+//char *hudgunnames[] = { "hudguns/fist", "hudguns/shotg", "hudguns/chaing", "hudguns/rocket", "hudguns/rifle" };
 
-void drawhudmodel(int start, int end, float speed, int base)
-{
-    rendermodel(hudgunnames[player1->gunselect], start, end, 0, 1.0f, player1->o.x, player1->o.z, player1->o.y, player1->yaw+90, player1->pitch, false, 1.0f, speed, 0, base);
-};
+//void drawhudmodel(int start, int end, float speed, int base)
+//{
+//    rendermodel(hudgunnames[player1->gunselect], start, end, 0, 1.0f, player1->o.x, player1->o.z, player1->o.y, player1->yaw+90, player1->pitch, false, 1.0f, speed, 0, base);
+//};
 
 void drawhudgun(float fovy, float aspect, int farplane)
 {
@@ -230,11 +198,11 @@ void drawhudgun(float fovy, float aspect, int farplane)
     int rtime = reloadtime(player1->gunselect);
     if(player1->lastaction && player1->lastattackgun==player1->gunselect && lastmillis-player1->lastaction<rtime)
     {
-        drawhudmodel(7, 18, rtime/18.0f, player1->lastaction);
+		TessLib::RenderGl::DrawHudModel(7, 18, rtime/18.0f, player1->lastaction);
     }
     else
     {
-        drawhudmodel(6, 1, 100, 0);
+        TessLib::RenderGl::DrawHudModel(6, 1, 100, 0);
     };
 
     glMatrixMode(GL_PROJECTION);
@@ -274,7 +242,7 @@ void gl_drawframe(int w, int h, float curfps)
     gluPerspective(fovy, aspect, 0.15f, farplane);
     glMatrixMode(GL_MODELVIEW);
 
-    transplayer();
+	TessLib::RenderGl::TransPlayer();
 
     glEnable(GL_TEXTURE_2D);
     
@@ -290,7 +258,7 @@ void gl_drawframe(int w, int h, float curfps)
             (int)player1->yaw, (int)player1->pitch, (float)fov, w, h);
     finishstrips();
 
-    setupworld();
+	TessLib::RenderGl::SetupWorld();
 
     renderstripssky();
 
@@ -305,13 +273,13 @@ void gl_drawframe(int w, int h, float curfps)
     glDepthFunc(GL_LESS);
     glEnable(GL_FOG);
 
-    transplayer();
+	TessLib::RenderGl::TransPlayer();
         
-    overbright(2);
+    TessLib::RenderGl::OverBright(2);
     
     renderstrips();
 
-    xtraverts = 0;
+    TessLib::RenderGl::XtraVerts = 0;
 
     renderclients();
     monsterrender();
@@ -325,12 +293,12 @@ void gl_drawframe(int w, int h, float curfps)
 
     drawhudgun(fovy, aspect, farplane);
 
-    overbright(1);
+    TessLib::RenderGl::OverBright(1);
     int nquads = renderwater(hf);
     
-    overbright(2);
+    TessLib::RenderGl::OverBright(2);
     render_particles(curtime);
-    overbright(1);
+    TessLib::RenderGl::OverBright(1);
 
     glDisable(GL_FOG);
 

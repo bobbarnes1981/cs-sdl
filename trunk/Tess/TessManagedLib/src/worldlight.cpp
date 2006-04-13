@@ -1,8 +1,10 @@
 // worldlight.cpp
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
-extern bool hasoverbright;
+//extern bool hasoverbright;
 
 VAR(lightscale,1,4,100);
 
@@ -25,7 +27,7 @@ void lightray(float bx, float by, persistent_entity &light)     // done in realt
     int stepy = (int)(dy/(float)steps*PRECF);
     int stepl = fast_f2nat(l/(float)steps); // incorrect: light will fade quicker if near edge of the world
 
-    if(hasoverbright)
+	if(TessLib::RenderGl::HasOverBright)
     {
         l /= lightscale;
         stepl /= lightscale;

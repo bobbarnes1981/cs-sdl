@@ -42,8 +42,59 @@ namespace TessLib
 	{
 		static Glu.GLUquadric qsphere;
 		static int glmaxtexsize = 256;
+		static bool hasOverBright = false;
+		static string[] hudGunNames = 
+{ 
+	"hudguns/fist",
+	"hudguns/shotg",
+	"hudguns/chaing", 
+	"hudguns/rocket", 
+	"hudguns/rifle" 
+};
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static string[] HudGunNames
+		{
+			get
+			{
+				return hudGunNames;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="start"></param>
+		/// <param name="end"></param>
+		/// <param name="speed"></param>
+		/// <param name="baseItem"></param>
+		public static void DrawHudModel(int start, int end, float speed, int baseItem)
+		{
+			Bindings.rendermodel(HudGunNames[GameInit.Player1.gunselect], start, end, 0, 1.0f, GameInit.Player1.o.x, GameInit.Player1.o.z, GameInit.Player1.o.y, GameInit.Player1.yaw+90, GameInit.Player1.pitch, false, 1.0f, speed, 0, baseItem);
+		}
+
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static bool HasOverBright
+		{
+			get
+			{
+				return hasOverBright;
+			}
+			set
+			{
+				hasOverBright = value;
+			}
+		}
 
 		static int xtraverts;
+		/// <summary>
+		/// 
+		/// </summary>
 		public static int XtraVerts
 		{
 			get
@@ -55,6 +106,43 @@ namespace TessLib
 				xtraverts = value;
 			}
 		}
+
+		static int currentTextureNumber = 0;
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int CurrentTextureNumber
+		{
+			get
+			{
+				return currentTextureNumber;
+			}
+			set
+			{
+				currentTextureNumber = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void TextureReset() 
+		{ 
+			currentTextureNumber = 0; 
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="amount"></param>
+		public static void OverBright(float amount) 
+		{ 
+			if(hasOverBright) 
+			{
+				Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_RGB_SCALE_EXT, amount ); 
+			}
+		}
+
 		public static void GlInit(int w, int h)
 		{
 			//#define fogvalues 0.5f, 0.6f, 0.7f, 1.0f
@@ -92,7 +180,7 @@ namespace TessLib
 			qsphere = Glu.gluNewQuadric();
 			//if(!(qsphere = Glu.gluNewQuadric())) 
 			//{
-				//Tess.Fatal("glu sphere");
+			//Tess.Fatal("glu sphere");
 			//}
 			Glu.gluQuadricDrawStyle(qsphere, Glu.GLU_FILL);
 			Glu.gluQuadricOrientation(qsphere, Glu.GLU_INSIDE);
@@ -106,7 +194,7 @@ namespace TessLib
 		{
 			//if(qsphere) 
 			//{
-				Glu.gluDeleteQuadric(qsphere);
+			Glu.gluDeleteQuadric(qsphere);
 			//}
 		}
 
@@ -131,10 +219,10 @@ namespace TessLib
 
 			//if(underwater)
 			//{
-				//fovy += (float)sin(lastmillis/1000.0)*2.0f;
-				//aspect += (float)sin(lastmillis/1000.0+PI)*0.1f;
-				Gl.glFogi(Gl.GL_FOG_START, 0);
-				//Gl.glFogi(Gl.GL_FOG_END, (fog+96)/8);
+			//fovy += (float)sin(lastmillis/1000.0)*2.0f;
+			//aspect += (float)sin(lastmillis/1000.0+PI)*0.1f;
+			Gl.glFogi(Gl.GL_FOG_START, 0);
+			//Gl.glFogi(Gl.GL_FOG_END, (fog+96)/8);
 			//};
     
 			Gl.glClear((GameInit.Player1.outsidemap ? Gl.GL_COLOR_BUFFER_BIT : 0) | Gl.GL_DEPTH_BUFFER_BIT);
@@ -158,7 +246,7 @@ namespace TessLib
 			//strips.setsize(0);
   
 			//render_world(player1->o.x, player1->o.y, player1->o.z, 
-				//(int)player1->yaw, (int)player1->pitch, (float)fov, w, h);
+			//(int)player1->yaw, (int)player1->pitch, (float)fov, w, h);
 			//finishstrips();
 
 			//setupworld();
@@ -178,7 +266,7 @@ namespace TessLib
 
 			//transplayer();
         
-			//overbright(2);
+			OverBright(2);
     
 			//renderstrips();
 
@@ -196,12 +284,12 @@ namespace TessLib
 
 			//drawhudgun(fovy, aspect, farplane);
 
-			//overbright(1);
+			OverBright(1);
 			//int nquads = renderwater(hf);
     
-			//overbright(2);
+			OverBright(2);
 			//render_particles(curtime);
-			//overbright(1);
+			OverBright(1);
 
 			Gl.glDisable(Gl.GL_FOG);
 
@@ -213,7 +301,10 @@ namespace TessLib
 			Gl.glEnable(Gl.GL_FOG);
 		}
 
-		static void TransPlayer()
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void TransPlayer()
 		{
 			Gl.glLoadIdentity();
     
@@ -222,6 +313,25 @@ namespace TessLib
 			Gl.glRotated(TessLib.GameInit.Player1.yaw,0.0,1.0,0.0);
 
 			Gl.glTranslated(-TessLib.GameInit.Player1.o.x, (TessLib.GameInit.Player1.state==(int)CSStatus.CS_DEAD ? TessLib.GameInit.Player1.eyeheight-0.2f : 0)-TessLib.GameInit.Player1.o.z, -TessLib.GameInit.Player1.o.y);   
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void SetupWorld()
+		{
+			Gl.glEnableClientState(Gl.GL_VERTEX_ARRAY);
+			Gl.glEnableClientState(Gl.GL_COLOR_ARRAY);
+			Gl.glEnableClientState(Gl.GL_TEXTURE_COORD_ARRAY); 
+			Bindings.setarraypointers();
+
+			if(HasOverBright)
+			{
+				Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_COMBINE_EXT); 
+				Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_COMBINE_RGB_EXT, Gl.GL_MODULATE);
+				Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_SOURCE0_RGB_EXT, Gl.GL_TEXTURE);
+				Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_SOURCE1_RGB_EXT, Gl.GL_PRIMARY_COLOR_EXT);
+			}
 		}
 	}
 }

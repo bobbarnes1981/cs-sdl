@@ -171,7 +171,7 @@ namespace Tess
 			TessLib.GameInit.Log("video: mode");
 			Video.WindowIcon();
 			Video.WindowCaption = "Tess Engine";
-			Video.GrabInput = true;
+			//Video.GrabInput = true;
 			Video.SetVideoModeWindowOpenGL(GameInit.ScreenWidth, GameInit.ScreenHeight);
 			
 			TessLib.GameInit.Log("video: misc");

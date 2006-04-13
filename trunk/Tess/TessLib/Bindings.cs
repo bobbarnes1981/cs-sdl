@@ -362,6 +362,19 @@ namespace TessLib
 		public static extern void cleardlights();
 		#endregion void cleardlights()
 
+		#region void setarraypointers()
+		/// <summary>
+		///     setarraypointers
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in rendercubes.cpp:
+		///     <code>extern DECLSPEC void CDECL setarraypointers();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void setarraypointers();
+		#endregion void setarraypointers()
+
 		#region IntPtr getplayer1()
 		/// <summary>
 		///     cleardlights
@@ -465,6 +478,19 @@ namespace TessLib
 		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern bool execfile(string cfgfile);
 		#endregion bool execfile(string cfgfile)
+
+		#region void rendermodel(string mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime))
+		/// <summary>
+		///     keypress
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in console.cpp:
+		///     <code>extern DECLSPEC void CDECL rendermodel(char *mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap = 0, int basetime = 0)</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void rendermodel(string mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime);
+		#endregion void rendermodel(string mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime))
 
 		#endregion Tess Methods
 	}

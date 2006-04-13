@@ -200,7 +200,6 @@ extern vec worldpos;                    // current target of the crosshair in th
 extern int lastmillis;                  // last time
 extern int curtime;                     // current frame time
 extern int gamemode, nextmode;
-extern int xtraverts;
 extern bool demoplayback;
 
 
