@@ -205,7 +205,7 @@ namespace TessLib
 			Bindings.disconnect(true, false);
 			Bindings.writecfg();
 			RenderGl.CleanGl();
-			Bindings.cleansound();
+			Sound.CleanSound();
 			Bindings.cleanupserver();
 			Mouse.ShowCursor = true;
 			Video.GrabInput = false;

@@ -101,34 +101,6 @@ namespace TessLib
 		#endregion Public Delegates
 
 		#region Bindings Methods
-//		#region int native_main()
-//		/// <summary>
-//		///     Executes Bindings's main function
-//		/// </summary>
-//		/// <returns>
-//		///     1 when app quits.
-//		/// </returns>
-//		/// <remarks>
-//		/// <p>Binds to C-function call in main.cpp:
-//		///     <code>int main(int argc, char **argv)</code>
-//		///     </p>
-//		/// </remarks>
-//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-//		public static extern int native_main(int argc, string[] argv);
-//		#endregion int native_main()
-
-//		#region void cleanup(string msg)
-//		/// <summary>
-//		///     cleanup
-//		/// </summary>
-//		/// <remarks>
-//		/// <p>Binds to C-function call in main.cpp:
-//		///     <code>extern DECLSPEC void CDECL cleanup(char *msg);</code>
-//		///     </p>
-//		/// </remarks>
-//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-//		public static extern void cleanup(string msg);
-//		#endregion void cleanup(string msg)
 
 		#region bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
 		/// <summary>
@@ -168,19 +140,6 @@ namespace TessLib
 		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void stop();
 		#endregion void stop()
-
-//		#region void keyrepeat(bool on)
-//		/// <summary>
-//		///     Keyrepeat
-//		/// </summary>
-//		/// <remarks>
-//		/// <p>Binds to C-function call in main.cpp:
-//		///     <code>extern void keyrepeat(bool on);</code>
-//		///     </p>
-//		/// </remarks>
-//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-//		public static extern void keyrepeat(bool on);
-//		#endregion void keyrepeat(bool on)
 
 		#region void computeraytable(float vx, float vy)
 		/// <summary>
@@ -233,19 +192,6 @@ namespace TessLib
 		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void writecfg();
 		#endregion void writecfg()
-
-		#region void cleansound()
-		/// <summary>
-		///     writecfg
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in command.cpp:
-		///     <code>extern DECLSPEC void CDECL cleansound()</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void cleansound();
-		#endregion void cleansound()
 
 		#region void cleanupserver()
 		/// <summary>
@@ -325,19 +271,6 @@ namespace TessLib
 		public static extern void calclight();
 		#endregion void calclight()
 
-//		#region void quit()
-//		/// <summary>
-//		///     quit
-//		/// </summary>
-//		/// <remarks>
-//		/// <p>Binds to C-function call in main.cpp:
-//		///     <code>extern DECLSPEC void CDECL quit();</code>
-//		///     </p>
-//		/// </remarks>
-//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-//		public static extern void quit();
-//		#endregion void quit()
-
 		#region void writeservercfg()
 		/// <summary>
 		///     writeservercfg
@@ -363,19 +296,6 @@ namespace TessLib
 		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void updatevol();
 		#endregion void updatevol()
-
-//		#region void initclient()
-//		/// <summary>
-//		///     initserver
-//		/// </summary>
-//		/// <remarks>
-//		/// <p>Binds to C-function call in clientgame.cpp:
-//		///     <code>extern DECLSPEC void CDECL initclient();</code>
-//		///     </p>
-//		/// </remarks>
-//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-//		public static extern void initclient();
-//		#endregion void initclient()
 
 		#region void initclientnet()
 		/// <summary>
@@ -416,19 +336,6 @@ namespace TessLib
 		public static extern void initserver(bool dedicated, int uprate, string sdesc, string ip, out string master, string passwd, int maxcl);
 		#endregion void initserver()
 
-//		#region void initsound()
-//		/// <summary>
-//		///     initsound
-//		/// </summary>
-//		/// <remarks>
-//		/// <p>Binds to C-function call in sound.cpp:
-//		///     <code>extern DECLSPEC void CDECL initsound();</code>
-//		///     </p>
-//		/// </remarks>
-//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-//		public static extern void initsound();
-//		#endregion void initsound()
-
 		#region void localconnect()
 		/// <summary>
 		///     localconnect
@@ -467,32 +374,6 @@ namespace TessLib
 		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern IntPtr getplayer1();
 		#endregion IntPtr getplayer1()
-
-		#region void setplayer1yaw(float yaw)
-		/// <summary>
-		///     player1yaw
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in worldlight.cpp:
-		///     <code>extern DECLSPEC void CDECL setplayer1yaw(float yaw);</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void setplayer1yaw(float yaw);
-		#endregion void setplayer1yaw(float yaw)
-
-		#region float getplayer1yaw()
-		/// <summary>
-		///     player1yaw
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in worldlight.cpp:
-		///     <code>extern DECLSPEC float CDECL getplayer1yaw();</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern float getplayer1yaw();
-		#endregion float getplayer1yaw()
 
 		#region void updateworld(int millis)
 		/// <summary>
