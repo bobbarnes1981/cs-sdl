@@ -2,6 +2,8 @@
 // is largely backwards compatible with the quake console language.
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 enum { ID_VAR, ID_COMMAND, ID_ALIAS };
 

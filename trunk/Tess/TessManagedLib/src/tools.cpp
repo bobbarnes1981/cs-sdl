@@ -1,7 +1,10 @@
 // implementation of generic tools
 
+#include "cube.h"
 #include "tools.h"
 #include <new>
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 //////////////////////////// pool ///////////////////////////
 
@@ -138,3 +141,10 @@ void endianswap(void *memory, int stride, int length)   // little indians as sto
         p[stride-i-1] = t;
     };
 }
+
+void *alloc(int s)              // for some big chunks... most other allocs use the memory pool
+{
+    void *b = calloc(1,s);
+	if(!b) TessLib::GameInit::Fatal("out of memory!");
+    return b;
+};
