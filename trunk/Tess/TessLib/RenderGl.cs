@@ -43,6 +43,18 @@ namespace TessLib
 		static Glu.GLUquadric qsphere;
 		static int glmaxtexsize = 256;
 
+		static int xtraverts;
+		public static int XtraVerts
+		{
+			get
+			{
+				return xtraverts;
+			}
+			set
+			{
+				xtraverts = value;
+			}
+		}
 		public static void GlInit(int w, int h)
 		{
 			//#define fogvalues 0.5f, 0.6f, 0.7f, 1.0f
