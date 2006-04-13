@@ -51,8 +51,7 @@ namespace Tess
 
 		int VIRTW = 2400;                      // virtual screen size for text & HUD
 		int VIRTH = 1800;
-		int FONTH = 64;
-		//int PIXELTAB = (VIRTW/12);
+		
 		//#define SWS(w,x,y,s) (&(w)[(y)*(s)+(x)])
 		//#define SW(w,x,y) SWS(w,x,y,ssize)
 		//#define S(x,y) SW(world,x,y)            // convenient lookup of a lowest mip cube

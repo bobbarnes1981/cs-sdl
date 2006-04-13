@@ -41,19 +41,23 @@ namespace TessLib
 {
 	// sound.cpp: uses fmod on windows and sdl_mixer on unix (both had problems on the other platform)
 
+	public struct SoundLocation 
+	{ 
+		public Vector Location; 
+		public bool InUse; 
+	} 
+	
+
 	public class Sound
 	{
-		//VARP(soundvol, 0, 255, 255);
-		//VARP(musicvol, 0, 128, 255);
 		static bool noSound = false;
 		static int soundVolume = 255;
 		static int musicVolume = 128;
 		static SdlDotNet.Music music;
+		static SoundLocation[] soundLocations = new SoundLocation[MAXCHAN];
 
-		//#define MAXCHAN 32
+		static int MAXCHAN = 32;
 		//#define SOUNDFREQ 22050
-
-		//struct soundloc { vec loc; bool inuse; } soundlocs[MAXCHAN];
 
 		//#define MAXVOL MIX_MAX_VOLUME
 		//Mix_Music *mod = NULL;
@@ -101,30 +105,31 @@ namespace TessLib
 
 		//VAR(stereo, 0, 1, 1);
 
-		//		void updatechanvol(int chan, vec *loc)
-		//		{
-		//			int vol = soundvol, pan = 255/2;
-		//			if(loc)
-		//			{
-		//				vdist(dist, v, *loc, player1->o);
-		//				vol -= (int)(dist*3*soundvol/255); // simple mono distance attenuation
-		//				if(stereo && (v.x != 0 || v.y != 0))
+		public static void UpdateChannelVolume(int channel, Vector location)
+		{
+			int volume = soundVolume;
+			int pan = 255/2;
+			//if(location = )
+			//{
+			//vdist(dist, v, location, GameInit.Player1.o);
+			//volume -= (int)(dist*3*soundVolume/255); // simple mono distance attenuation
+			//if(stereo && (v.x != 0 || v.y != 0))
+			//{
+			//	float yaw = -Math.Atan2(v.x, v.y) - player1->yaw*(PI / 180.0f); // relative angle of sound along X-Y axis
+				//pan = int(255.9f*(0.5*sin(yaw)+0.5f)); // range is from 0 (left) to 255 (right)
+			//};
+			//};
+			//volume = (volume*MAXVOL)/255;
+			// Mix_Volume(chan, vol);
+			// Mix_SetPanning(chan, 255-pan, pan);
+		}  
+		
+		//				void newsoundloc(int chan, vec *loc)
 		//				{
-		//					float yaw = -atan2(v.x, v.y) - player1->yaw*(PI / 180.0f); // relative angle of sound along X-Y axis
-		//					pan = int(255.9f*(0.5*sin(yaw)+0.5f)); // range is from 0 (left) to 255 (right)
+		//					assert(chan>=0 && chan<MAXCHAN);
+		//					soundlocs[chan].loc = *loc;
+		//					soundlocs[chan].inuse = true;
 		//				};
-		//			};
-		//			vol = (vol*MAXVOL)/255;
-		//			// Mix_Volume(chan, vol);
-		//			// Mix_SetPanning(chan, 255-pan, pan);
-		//		};  
-		//
-		//		void newsoundloc(int chan, vec *loc)
-		//		{
-		//			assert(chan>=0 && chan<MAXCHAN);
-		//			soundlocs[chan].loc = *loc;
-		//			soundlocs[chan].inuse = true;
-		//		};
 		//
 		//		void updatevol()
 		//		{
