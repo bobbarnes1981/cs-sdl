@@ -105,8 +105,8 @@ VAR(flrceil,0,0,2);
 float sheight(sqr *s, sqr *t, float z)                  // finds out z height when cursor points at wall
 {
     return !flrceil //z-s->floor<s->ceil-z
-        ? (s->type==FHF ? s->floor-t->vdelta/4.0f : (float)s->floor)
-        : (s->type==CHF ? s->ceil+t->vdelta/4.0f : (float)s->ceil);
+        ? (s->type==TessLib::BlockTypes::FHF ? s->floor-t->vdelta/4.0f : (float)s->floor)
+        : (s->type==TessLib::BlockTypes::CHF ? s->ceil+t->vdelta/4.0f : (float)s->ceil);
 };
 
 void cursorupdate()                                     // called every frame from hud
@@ -154,7 +154,7 @@ void cursorupdate()                                     // called every frame fr
         float h3 = sheight(s, SWS(s,1,1,ssize), z);
         float h4 = sheight(s, SWS(s,0,1,ssize), z);
         if(s->tag) linestyle(GRIDW, 0xFF, 0x40, 0x40);
-        else if(s->type==FHF || s->type==CHF) linestyle(GRIDW, 0x80, 0xFF, 0x80);
+        else if(s->type==TessLib::BlockTypes::FHF || s->type==TessLib::BlockTypes::CHF) linestyle(GRIDW, 0x80, 0xFF, 0x80);
         else linestyle(GRIDW, 0x80, 0x80, 0x80);
         block b = { ix, iy, 1, 1 };
         box(b, h1, h2, h3, h4);
@@ -342,16 +342,16 @@ void edittypexy(int type, block &sel)
 void edittype(int type)
 {
     EDITSEL;
-    if(type==CORNER && (sel.xs!=sel.ys || sel.xs==3 || sel.xs>4 && sel.xs!=8
+    if(type==TessLib::BlockTypes::CORNER && (sel.xs!=sel.ys || sel.xs==3 || sel.xs>4 && sel.xs!=8
                    || sel.x&~-sel.xs || sel.y&~-sel.ys))
                    { conoutf("corner selection must be power of 2 aligned"); return; };
     edittypexy(type, sel);
     addmsg(1, 6, SV_EDITS, sel.x, sel.y, sel.xs, sel.ys, type);
 };
 
-void heightfield(int t) { edittype(t==0 ? FHF : CHF); };
-void solid(int t)       { edittype(t==0 ? SPACE : SOLID); };
-void corner()           { edittype(CORNER); };
+void heightfield(int t) { edittype(t==0 ? TessLib::BlockTypes::FHF : TessLib::BlockTypes::CHF); };
+void solid(int t)       { edittype(t==0 ? TessLib::BlockTypes::SPACE : TessLib::BlockTypes::SOLID); };
+void corner()           { edittype(TessLib::BlockTypes::CORNER); };
 
 COMMAND(heightfield, ARG_1INT);
 COMMAND(solid, ARG_1INT);

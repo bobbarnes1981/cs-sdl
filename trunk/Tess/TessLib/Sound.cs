@@ -39,15 +39,21 @@ using System.Runtime.InteropServices;
 
 namespace TessLib
 {
-	// sound.cpp: uses fmod on windows and sdl_mixer on unix (both had problems on the other platform)
-
+	/// <summary>
+	/// 
+	/// </summary>
 	public struct SoundLocation 
 	{ 
+		/// <summary>
+		/// 
+		/// </summary>
 		public Vector Location; 
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool InUse; 
 	} 
 	
-
 	public class Sound
 	{
 		static bool noSound = false;

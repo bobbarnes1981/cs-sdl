@@ -117,9 +117,9 @@ bool los(float lx, float ly, float lz, float bx, float by, float bz, vec &v) // 
         sqr *s = S(fast_f2nat(x), fast_f2nat(y));
         if(SOLID(s)) break;
         float floor = s->floor;
-        if(s->type==FHF) floor -= s->vdelta/4.0f;
+        if(s->type==TessLib::BlockTypes::FHF) floor -= s->vdelta/4.0f;
         float ceil = s->ceil;
-        if(s->type==CHF) ceil += s->vdelta/4.0f;
+        if(s->type==TessLib::BlockTypes::CHF) ceil += s->vdelta/4.0f;
         float rz = lz-((lz-bz)*(i/(float)steps));
         if(rz<floor || rz>ceil) break;
         v.x = x;

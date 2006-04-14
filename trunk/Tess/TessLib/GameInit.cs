@@ -123,7 +123,22 @@ namespace TessLib
 		static DynamicEntity player1;
 		static int screenWidth = 640;
 		static int screenHeight = 480;
-		
+		static int lastmillis = 0;	
+	
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int LastMillis
+		{
+			get
+			{
+				return lastmillis;
+			}
+			set
+			{
+				lastmillis = value;
+			}
+		}
 
 		public static int FontH
 		{

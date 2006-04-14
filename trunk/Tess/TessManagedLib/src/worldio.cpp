@@ -41,7 +41,7 @@ void setnames(char *name)
 // the reason it is done on save is to reduce the amount spend in the mipmapper (as that is done
 // in realtime).
 
-inline bool nhf(sqr *s) { return s->type!=FHF && s->type!=CHF; };
+inline bool nhf(sqr *s) { return s->type!=TessLib::BlockTypes::FHF && s->type!=TessLib::BlockTypes::CHF; };
 
 void voptimize()        // reset vdeltas on non-hf cubes
 {
@@ -268,9 +268,9 @@ void load_world(char *mname)        // still supports all map formats that have 
                 gzgetc(f);
                 break;
             };
-            case SOLID:
+            case TessLib::BlockTypes::SOLID:
             {
-                s->type = SOLID;
+                s->type = TessLib::BlockTypes::SOLID;
                 s->wtex = gzgetc(f);
                 s->vdelta = gzgetc(f);
                 if(hdr.version<=2) { gzgetc(f); gzgetc(f); };
@@ -284,7 +284,7 @@ void load_world(char *mname)        // still supports all map formats that have 
             };
             default:
             {
-                if(type<0 || type>=MAXTYPE)
+                if(type<0 || type>=TessLib::BlockTypes::MAXTYPE)
                 {
                     sprintf_sd(t)("%d @ %d", type, k);
                     TessLib::GameInit::Fatal("while reading map: type out of range: ", t);
