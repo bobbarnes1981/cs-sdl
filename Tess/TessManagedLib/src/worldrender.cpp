@@ -2,17 +2,19 @@
 // be rendered and how (depending on neighbouring cubes), then calls functions in rendercubes.cpp
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 void render_wall(sqr *o, sqr *s, int x1, int y1, int x2, int y2, int mip, sqr *d1, sqr *d2, bool topleft)
 {
-    if(SOLID(o) || o->type==SEMISOLID)
+    if(SOLID(o) || o->type==TessLib::BlockTypes::SEMISOLID)
     {
         float c1 = s->floor;
         float c2 = s->floor;
-        if(s->type==FHF) { c1 -= d1->vdelta/4.0f; c2 -= d2->vdelta/4.0f; };
+        if(s->type==TessLib::BlockTypes::FHF) { c1 -= d1->vdelta/4.0f; c2 -= d2->vdelta/4.0f; };
         float f1 = s->ceil;
         float f2 = s->ceil;
-        if(s->type==CHF) { f1 += d1->vdelta/4.0f; f2 += d2->vdelta/4.0f; };
+        if(s->type==TessLib::BlockTypes::CHF) { f1 += d1->vdelta/4.0f; f2 += d2->vdelta/4.0f; };
         //if(f1-c1<=0 && f2-c2<=0) return;
         render_square(o->wtex, c1, c2, f1, f2, x1<<mip, y1<<mip, x2<<mip, y2<<mip, 1<<mip, d1, d2, topleft);
         return;
@@ -22,12 +24,12 @@ void render_wall(sqr *o, sqr *s, int x1, int y1, int x2, int y2, int mip, sqr *d
         float f2 = s->floor;
         float c1 = o->floor;
         float c2 = o->floor;
-        if(o->type==FHF && s->type!=FHF)
+        if(o->type==TessLib::BlockTypes::FHF && s->type!=TessLib::BlockTypes::FHF)
         {
             c1 -= d1->vdelta/4.0f;
             c2 -= d2->vdelta/4.0f;
         }
-        if(s->type==FHF && o->type!=FHF)
+        if(s->type==TessLib::BlockTypes::FHF && o->type!=TessLib::BlockTypes::FHF)
         {
             f1 -= d1->vdelta/4.0f;
             f2 -= d2->vdelta/4.0f;
@@ -41,12 +43,12 @@ void render_wall(sqr *o, sqr *s, int x1, int y1, int x2, int y2, int mip, sqr *d
         float f2 = o->ceil;
         float c1 = s->ceil;
         float c2 = s->ceil;
-        if(o->type==CHF && s->type!=CHF)
+        if(o->type==TessLib::BlockTypes::CHF && s->type!=TessLib::BlockTypes::CHF)
         {
             f1 += d1->vdelta/4.0f;
             f2 += d2->vdelta/4.0f;
         }
-        else if(s->type==CHF && o->type!=CHF)
+        else if(s->type==TessLib::BlockTypes::CHF && o->type!=TessLib::BlockTypes::CHF)
         {
             c1 += d1->vdelta/4.0f;
             c2 += d2->vdelta/4.0f;
@@ -78,16 +80,16 @@ bool issemi(int mip, int x, int y, int x1, int y1, int x2, int y2)
     y *= 2;
     switch(SWS(w, x+x1, y+y1, msize)->type)
     {
-        case SEMISOLID: if(issemi(mip, x+x1, y+y1, x1, y1, x2, y2)) return true;
-        case CORNER:
-        case SOLID: break;
+        case TessLib::BlockTypes::SEMISOLID: if(issemi(mip, x+x1, y+y1, x1, y1, x2, y2)) return true;
+        case TessLib::BlockTypes::CORNER:
+        case TessLib::BlockTypes::SOLID: break;
         default: return true;
     };
     switch(SWS(w, x+x2, y+y2, msize)->type)
     {
-        case SEMISOLID: if(issemi(mip, x+x2, y+y2, x1, y1, x2, y2)) return true;
-        case CORNER:
-        case SOLID: break;
+        case TessLib::BlockTypes::SEMISOLID: if(issemi(mip, x+x2, y+y2, x1, y1, x2, y2)) return true;
+        case TessLib::BlockTypes::CORNER:
+        case TessLib::BlockTypes::SOLID: break;
         default: return true;
     };
     return false;
@@ -150,20 +152,20 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
         };
         stats[mip]++;
         LOOPD
-        if((s->type==SPACE || s->type==FHF) && s->ceil>=vh && render_ceil)
+        if((s->type==TessLib::BlockTypes::SPACE || s->type==TessLib::BlockTypes::FHF) && s->ceil>=vh && render_ceil)
             render_flat(s->ctex, xx<<mip, yy<<mip, 1<<mip, s->ceil, s, t, u, v, true);
-        if(s->type==CHF) //if(s->ceil>=vh)
+        if(s->type==TessLib::BlockTypes::CHF) //if(s->ceil>=vh)
             render_flatdelta(s->ctex, xx<<mip, yy<<mip, 1<<mip, dc(s), dc(t), dc(u), dc(v), s, t, u, v, true);
     }};
 
     LOOPH continue;     // floors
         LOOPD
-        if((s->type==SPACE || s->type==CHF) && s->floor<=vh && render_floor)
+        if((s->type==TessLib::BlockTypes::SPACE || s->type==TessLib::BlockTypes::CHF) && s->floor<=vh && render_floor)
         {
             render_flat(s->ftex, xx<<mip, yy<<mip, 1<<mip, s->floor, s, t, u, v, false);
 			if(s->floor<hdr.waterlevel && !SOLID(s)) addwaterquad(xx<<mip, yy<<mip, 1<<mip);
         };
-        if(s->type==FHF)
+        if(s->type==TessLib::BlockTypes::FHF)
         {
             render_flatdelta(s->ftex, xx<<mip, yy<<mip, 1<<mip, df(s), df(t), df(u), df(v), s, t, u, v, false);
 			if(s->floor-s->vdelta/4.0f<hdr.waterlevel && !SOLID(s)) addwaterquad(xx<<mip, yy<<mip, 1<<mip);
@@ -180,7 +182,7 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
         sqr *z = SWS(s,-1,0,sz);
         bool normalwall = true;
 
-        if(s->type==CORNER)
+        if(s->type==TessLib::BlockTypes::CORNER)
         {
             // cull also
             bool topleft = true;
@@ -218,17 +220,17 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
         {
             bool inner = xx!=sz-1 && yy!=sz-1;
 
-            if(xx>=vxx && xx!=0 && yy!=sz-1 && !SOLID(z) && (!SOLID(s) || z->type!=CORNER)
-                && (z->type!=SEMISOLID || issemi(mip, xx-1, yy, 1, 0, 1, 1)))
+            if(xx>=vxx && xx!=0 && yy!=sz-1 && !SOLID(z) && (!SOLID(s) || z->type!=TessLib::BlockTypes::CORNER)
+                && (z->type!=TessLib::BlockTypes::SEMISOLID || issemi(mip, xx-1, yy, 1, 0, 1, 1)))
                 render_wall(s, z, xx,   yy,   xx,   yy+1, mip, s, v, true);
-            if(xx<=vxx && inner && !SOLID(t) && (!SOLID(s) || t->type!=CORNER)
-                && (t->type!=SEMISOLID || issemi(mip, xx+1, yy, 0, 0, 0, 1)))
+            if(xx<=vxx && inner && !SOLID(t) && (!SOLID(s) || t->type!=TessLib::BlockTypes::CORNER)
+                && (t->type!=TessLib::BlockTypes::SEMISOLID || issemi(mip, xx+1, yy, 0, 0, 0, 1)))
                 render_wall(s, t, xx+1, yy,   xx+1, yy+1, mip, t, u, false);
-            if(yy>=vyy && yy!=0 && xx!=sz-1 && !SOLID(w) && (!SOLID(s) || w->type!=CORNER)
-                && (w->type!=SEMISOLID || issemi(mip, xx, yy-1, 0, 1, 1, 1)))
+            if(yy>=vyy && yy!=0 && xx!=sz-1 && !SOLID(w) && (!SOLID(s) || w->type!=TessLib::BlockTypes::CORNER)
+                && (w->type!=TessLib::BlockTypes::SEMISOLID || issemi(mip, xx, yy-1, 0, 1, 1, 1)))
                 render_wall(s, w, xx,   yy,   xx+1, yy,   mip, s, t, false);
-            if(yy<=vyy && inner && !SOLID(v) && (!SOLID(s) || v->type!=CORNER)
-                && (v->type!=SEMISOLID || issemi(mip, xx, yy+1, 0, 0, 1, 0)))
+            if(yy<=vyy && inner && !SOLID(v) && (!SOLID(s) || v->type!=TessLib::BlockTypes::CORNER)
+                && (v->type!=TessLib::BlockTypes::SEMISOLID || issemi(mip, xx, yy+1, 0, 0, 1, 0)))
                 render_wall(s, v, xx,   yy+1, xx+1, yy+1, mip, v, u, true);
         };
     }};

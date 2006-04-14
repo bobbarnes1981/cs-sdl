@@ -4,6 +4,8 @@
 // very robust (uses discrete steps at fixed fps).
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 bool plcollide(dynent *d, dynent *o, float &headspace, float &hi, float &lo) // collide with player or monster
 {
@@ -30,7 +32,7 @@ bool cornertest(int mip, int x, int y, int dx, int dy, int &bx, int &by, int &bs
     mip++;
     x /= 2;
     y /= 2;
-    if(SWS(wmip[mip], x, y, ssize>>mip)->type==CORNER)
+    if(SWS(wmip[mip], x, y, ssize>>mip)->type==TessLib::BlockTypes::CORNER)
     {
         bx = x<<mip;
         by = y<<mip;
@@ -83,10 +85,10 @@ bool collide(dynent *d, bool spawn, float drop, float rise)
         float floor = s->floor;
         switch(s->type)
         {
-            case SOLID:
+		case TessLib::BlockTypes::SOLID:
                 return false;
 
-            case CORNER:
+            case TessLib::BlockTypes::CORNER:
             {
                 int bx = x, by = y, bs = 1;
                 if(x==x1 && y==y1 && cornertest(0, x, y, -1, -1, bx, by, bs) && fx1-bx+fy1-by<=bs
@@ -97,11 +99,11 @@ bool collide(dynent *d, bool spawn, float drop, float rise)
                 break;
             };
 
-            case FHF:       // FIXME: too simplistic collision with slopes, makes it feels like tiny stairs
+            case TessLib::BlockTypes::FHF:       // FIXME: too simplistic collision with slopes, makes it feels like tiny stairs
                 floor -= (s->vdelta+S(x+1,y)->vdelta+S(x,y+1)->vdelta+S(x+1,y+1)->vdelta)/16.0f;
                 break;
 
-            case CHF:
+            case TessLib::BlockTypes::CHF:
                 ceil += (s->vdelta+S(x+1,y)->vdelta+S(x,y+1)->vdelta+S(x+1,y+1)->vdelta)/16.0f;
 
         };
@@ -292,8 +294,8 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
     {
         sqr *s = S((int)pl->o.x, (int)pl->o.y);
         pl->outsidemap = SOLID(s)
-           || pl->o.z < s->floor - (s->type==FHF ? s->vdelta/4 : 0)
-           || pl->o.z > s->ceil  + (s->type==CHF ? s->vdelta/4 : 0);
+           || pl->o.z < s->floor - (s->type==TessLib::BlockTypes::FHF ? s->vdelta/4 : 0)
+           || pl->o.z > s->ceil  + (s->type==TessLib::BlockTypes::CHF ? s->vdelta/4 : 0);
     };
     
     // automatically apply smooth roll when strafing

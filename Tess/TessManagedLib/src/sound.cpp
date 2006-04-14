@@ -22,19 +22,7 @@ VAR(soundbufferlen, 128, 1024, 4096);
 
 void music(char *name)
 {
-    if(nosound) return;
-	SdlDotNet::Music::Stop();
-    if(soundvol && musicvol)
-    {
-        string sn;
-        strcpy_s(sn, "packages/");
-        strcat_s(sn, name);
-            /*if(mod = Mix_LoadMUS(path(sn)))
-            {
-                Mix_PlayMusic(mod, -1);
-                Mix_VolumeMusic((musicvol*MAXVOL)/255);
-            };*/
-    };
+	TessLib::Sound::Music(name);
 };
 
 COMMAND(music, ARG_1STR);
@@ -52,13 +40,6 @@ int registersound(char *name)
 };
 
 COMMAND(registersound, ARG_1EST);
-
-void cleansound()
-{
-    if(nosound) return;
-	SdlDotNet::Music::Stop();
-        //Mix_CloseAudio();
-};
 
 VAR(stereo, 0, 1, 1);
 

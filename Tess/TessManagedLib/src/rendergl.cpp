@@ -150,8 +150,6 @@ void renderstrips()
     };   
 };
 
-//void overbright(float amount) { if(hasoverbright) glTexEnvf(GL_TEXTURE_ENV, GL_RGB_SCALE_EXT, amount ); };
-
 void addstrip(int tex, int start, int n)
 {
     strip &s = strips.add();
@@ -175,13 +173,6 @@ VAR(fog, 64, 180, 1024);
 VAR(fogcolour, 0, 0x8099B3, 0xFFFFFF);
 
 VARP(hudgun,0,1,1);
-
-//char *hudgunnames[] = { "hudguns/fist", "hudguns/shotg", "hudguns/chaing", "hudguns/rocket", "hudguns/rifle" };
-
-//void drawhudmodel(int start, int end, float speed, int base)
-//{
-//    rendermodel(hudgunnames[player1->gunselect], start, end, 0, 1.0f, player1->o.x, player1->o.z, player1->o.y, player1->yaw+90, player1->pitch, false, 1.0f, speed, 0, base);
-//};
 
 void drawhudgun(float fovy, float aspect, int farplane)
 {

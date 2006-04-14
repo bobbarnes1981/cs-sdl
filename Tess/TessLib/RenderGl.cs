@@ -63,6 +63,35 @@ namespace TessLib
 			}
 		}
 
+		public static void DrawHudGun(float fovy, float aspect, int farplane)
+		{
+			//if(!hudgun /*|| !player1->gunselect*/) return;
+    
+			Gl.glEnable(Gl.GL_CULL_FACE);
+    
+			Gl.glMatrixMode(Gl.GL_PROJECTION);
+			Gl.glLoadIdentity();
+			Glu.gluPerspective(fovy, aspect, 0.3f, farplane);
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+    
+			//int rtime = reloadtime(GameInit.Player1.gunselect);
+			//if(GameInit.Player1.lastaction!=0 && GameInit.Player1.lastattackgun==GameInit.Player1.gunselect && (lastmillis-GameInit.Player1.lastaction)<rtime)
+			//{
+			//DrawHudModel(7, 18, rtime/18.0f, GameInit.Player1.lastaction);
+			//}
+			//else
+			//{
+			//DrawHudModel(6, 1, 100, 0);
+			//};
+
+			Gl.glMatrixMode(Gl.GL_PROJECTION);
+			Gl.glLoadIdentity();
+			Glu.gluPerspective(fovy, aspect, 0.15f, farplane);
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+
+			Gl.glDisable(Gl.GL_CULL_FACE);
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>

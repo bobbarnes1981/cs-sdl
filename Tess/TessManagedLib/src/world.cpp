@@ -1,6 +1,8 @@
 // world.cpp: core map management stuff
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
 
 extern char *entnames[];                // lookup from map entities above to strings
 
@@ -19,12 +21,12 @@ void settag(int tag, int type)          // set all cubes with "tag" to space, if
         {
             if(tag)
             {
-                if(tag==s->tag) s->type = SPACE;
+                if(tag==s->tag) s->type = TessLib::BlockTypes::SPACE;
                 else continue;
             }
             else
             {
-                s->type = type ? SOLID : SPACE;
+                s->type = type ? TessLib::BlockTypes::SOLID : TessLib::BlockTypes::SPACE;
             };
             if(x>maxx) maxx = x;
             if(y>maxy) maxy = y;
@@ -79,11 +81,11 @@ void remip(block &b, int level)
         o[3] = SWS(w,x,y+1,ws);
         sqr *r = SWS(v,x/2,y/2,vs);                         // the target cube in the higher mip level
         *r = *o[0];
-        uchar nums[MAXTYPE];
-        loopi(MAXTYPE) nums[i] = 0;
+        uchar nums[TessLib::BlockTypes::MAXTYPE];
+        loopi(TessLib::BlockTypes::MAXTYPE) nums[i] = 0;
         loopj(4) nums[o[j]->type]++;
-        r->type = SEMISOLID;                                // cube contains both solid and space, treated specially in the renderer
-        loopk(MAXTYPE) if(nums[k]==4) r->type = k;
+        r->type = TessLib::BlockTypes::SEMISOLID;                                // cube contains both solid and space, treated specially in the renderer
+        loopk(TessLib::BlockTypes::MAXTYPE) if(nums[k]==4) r->type = k;
         if(!SOLID(r))
         {
             int floor = 127, ceil = -128, num = 0;
@@ -92,10 +94,10 @@ void remip(block &b, int level)
                 num++;
                 int fh = o[i]->floor;
                 int ch = o[i]->ceil;
-                if(r->type==SEMISOLID)
+                if(r->type==TessLib::BlockTypes::SEMISOLID)
                 {
-                    if(o[i]->type==FHF) fh -= o[i]->vdelta/4+2;     // crap hack, needed for rendering large mips next to hfs
-                    if(o[i]->type==CHF) ch += o[i]->vdelta/4+2;     // FIXME: needs to somehow take into account middle vertices on higher mips
+                    if(o[i]->type==TessLib::BlockTypes::FHF) fh -= o[i]->vdelta/4+2;     // crap hack, needed for rendering large mips next to hfs
+                    if(o[i]->type==TessLib::BlockTypes::CHF) ch += o[i]->vdelta/4+2;     // FIXME: needs to somehow take into account middle vertices on higher mips
                 };
                 if(fh<floor) floor = fh;  // take lowest floor and highest ceil, so we never have to see missing lower/upper from the side
                 if(ch>ceil) ceil = ch;
@@ -103,7 +105,7 @@ void remip(block &b, int level)
             r->floor = floor;
             r->ceil = ceil;
         };       
-        if(r->type==CORNER) goto mip;                       // special case: don't ever split even if textures etc are different
+        if(r->type==TessLib::BlockTypes::CORNER) goto mip;                       // special case: don't ever split even if textures etc are different
         r->defer = 1;
         if(SOLID(r))
         {
@@ -127,7 +129,7 @@ void remip(block &b, int level)
                 || o[i]->utex!=o[3]->utex
                 || o[i]->wtex!=o[3]->wtex) goto c;
             };
-            if(r->type==CHF || r->type==FHF)                // can make a perfect mip out of a hf if slopes lie on one line
+            if(r->type==TessLib::BlockTypes::CHF || r->type==TessLib::BlockTypes::FHF)                // can make a perfect mip out of a hf if slopes lie on one line
             {
                 if(o[0]->vdelta-o[1]->vdelta != o[1]->vdelta-SWS(w,x+2,y,ws)->vdelta
                 || o[0]->vdelta-o[2]->vdelta != o[2]->vdelta-SWS(w,x+2,y+2,ws)->vdelta
@@ -316,7 +318,7 @@ void empty_world(int factor, bool force)    // main empty world creation routine
         s->ftex = DEFAULT_FLOOR;
         s->ctex = DEFAULT_CEIL;
         s->wtex = s->utex = DEFAULT_WALL;
-        s->type = SOLID;
+        s->type = TessLib::BlockTypes::SOLID;
         s->floor = 0;
         s->ceil = 16;
         s->vdelta = 0;
@@ -348,7 +350,7 @@ void empty_world(int factor, bool force)    // main empty world creation routine
         loopk(3) loopi(256) hdr.texlists[k][i] = i;
         ents.setsize(0);
         block b = { 8, 8, ssize-16, ssize-16 }; 
-        edittypexy(SPACE, b);
+        edittypexy(TessLib::BlockTypes::SPACE, b);
     };
     
     calclight();

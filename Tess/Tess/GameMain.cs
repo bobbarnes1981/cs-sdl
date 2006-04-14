@@ -77,7 +77,6 @@ namespace Tess
 		//int screenWidth = 640;
 		//int screenHeight = 480;
 		int gamespeed = 100;
-		int lastmillis = 0;
 		bool demoplayback;
 		int curtime;
 		int framesinmap = 0;
@@ -241,17 +240,17 @@ namespace Tess
 		private void Tick(object sender, TickEventArgs e)
 		{
 			int millis = Timer.TicksElapsed*gamespeed/100;
-			if(millis-lastmillis>200) 
+			if(millis-GameInit.LastMillis>200) 
 			{
-				lastmillis = millis-200;
+				GameInit.LastMillis = millis-200;
 			}
-			else if(millis-lastmillis<1) 
+			else if(millis-GameInit.LastMillis<1) 
 			{
-				lastmillis = millis-1;
+				GameInit.LastMillis = millis-1;
 			}
-			if(millis-lastmillis<minmillis) 
+			if(millis-GameInit.LastMillis<minmillis) 
 			{
-				Timer.DelayTicks(minmillis-(millis-lastmillis));
+				Timer.DelayTicks(minmillis-(millis-GameInit.LastMillis));
 			}
 			TessLib.Bindings.cleardlights();
 			TessLib.Bindings.updateworld(millis);
