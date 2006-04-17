@@ -137,16 +137,16 @@ void save_world(char *mname)
     backup(cgzname, bakname);
     gzFile f = gzopen(cgzname, "wb9");
     if(!f) { conoutf("could not write map to %s", cgzname); return; };
-    hdr.version = MAPVERSION;
+    hdr.version = TessLib::GameInit::MapVersion;
     hdr.numents = 0;
-    loopv(ents) if(ents[i].type!=NOTUSED) hdr.numents++;
+    loopv(ents) if(ents[i].type!=TessLib::StaticEntity::NOTUSED) hdr.numents++;
     header tmp = hdr;
     endianswap(&tmp.version, sizeof(int), 4);
     endianswap(&tmp.waterlevel, sizeof(int), 16);
     gzwrite(f, &tmp, sizeof(header));
     loopv(ents) 
     {
-        if(ents[i].type!=NOTUSED) 
+        if(ents[i].type!=TessLib::StaticEntity::NOTUSED) 
         {
             entity tmp = ents[i];
             endianswap(&tmp, sizeof(short), 4);
@@ -219,7 +219,7 @@ void load_world(char *mname)        // still supports all map formats that have 
     gzread(f, &hdr, sizeof(header)-sizeof(int)*16);
     endianswap(&hdr.version, sizeof(int), 4);
     if(strncmp(hdr.head, "CUBE", 4)!=0) TessLib::GameInit::Fatal("while reading map: header malformatted");
-    if(hdr.version>MAPVERSION) TessLib::GameInit::Fatal("this map requires a newer version of cube");
+    if(hdr.version>TessLib::GameInit::MapVersion) TessLib::GameInit::Fatal("this map requires a newer version of cube");
     if(sfactor<SMALLEST_FACTOR || sfactor>LARGEST_FACTOR) TessLib::GameInit::Fatal("illegal map size");
     if(hdr.version>=4)
     {
@@ -237,9 +237,9 @@ void load_world(char *mname)        // still supports all map formats that have 
         gzread(f, &e, sizeof(persistent_entity));
         endianswap(&e, sizeof(short), 4);
         e.spawned = false;
-        if(e.type==LIGHT)
+        if(e.type==TessLib::StaticEntity::LIGHT)
         {
-            if(!e.attr2) e.attr2 = 255;  // needed for MAPVERSION<=2
+            if(!e.attr2) e.attr2 = 255;  // needed for TessLib::GameInit::MapVersion<=2
             if(e.attr1>32) e.attr1 = 32; // 12_03 and below
         };
     };
@@ -261,7 +261,7 @@ void load_world(char *mname)        // still supports all map formats that have 
                 k--;
                 break;
             };
-            case 254: // only in MAPVERSION<=2
+            case 254: // only in TessLib::GameInit::MapVersion<=2
             {
                 memcpy(s, t, sizeof(sqr));
                 s->r = s->g = s->b = gzgetc(f);
@@ -274,8 +274,8 @@ void load_world(char *mname)        // still supports all map formats that have 
                 s->wtex = gzgetc(f);
                 s->vdelta = gzgetc(f);
                 if(hdr.version<=2) { gzgetc(f); gzgetc(f); };
-                s->ftex = DEFAULT_FLOOR;
-                s->ctex = DEFAULT_CEIL;
+                s->ftex = TessLib::TextureNumbers::DEFAULT_FLOOR;
+                s->ctex = TessLib::TextureNumbers::DEFAULT_CEIL;
                 s->utex = s->wtex;
                 s->tag = 0;
                 s->floor = 0;

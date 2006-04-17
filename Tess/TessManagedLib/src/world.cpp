@@ -39,13 +39,13 @@ void settag(int tag, int type)          // set all cubes with "tag" to space, if
 };
 
 void resettagareas() { settag(0, 0); };                                                         // reset for editing or map saving
-void settagareas() { settag(0, 1); loopv(ents) if(ents[i].type==CARROT) setspawn(i, true); };   // set for playing
+void settagareas() { settag(0, 1); loopv(ents) if(ents[i].type==TessLib::StaticEntity::CARROT) setspawn(i, true); };   // set for playing
 
 void trigger(int tag, int type, bool savegame)
 {
     if(!tag) return;
     settag(tag, type);
-    if(!savegame && type!=3) playsound(S_RUMBLE);
+    if(!savegame && type!=3) playsound(TessLib::Sounds::S_RUMBLE);
     sprintf_sd(aliasname)("level_trigger_%d", tag);
     if(identexists(aliasname)) execute(aliasname);
     if(type==2) endsp(false);
@@ -168,7 +168,7 @@ int closestent()        // used for delent and edit mode ent display
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==NOTUSED) continue;
+        if(e.type==TessLib::StaticEntity::NOTUSED) continue;
         vec v = { e.x, e.y, e.z };
         vdist(dist, t, player1->o, v);
         if(dist<bdist)
@@ -199,16 +199,16 @@ void delent()
     if(e<0) { conoutf("no more entities"); return; };
     int t = ents[e].type;
     conoutf("%s entity deleted", entnames[t]);
-    ents[e].type = NOTUSED;
-    addmsg(1, 10, SV_EDITENT, e, NOTUSED, 0, 0, 0, 0, 0, 0, 0);
-    if(t==LIGHT) calclight();
+    ents[e].type = TessLib::StaticEntity::NOTUSED;
+    addmsg(1, 10, TessLib::NetworkMessages::SV_EDITENT, e, TessLib::StaticEntity::NOTUSED, 0, 0, 0, 0, 0, 0, 0);
+    if(t==TessLib::StaticEntity::LIGHT) calclight();
 };
 
 int findtype(char *what)
 {
-    loopi(MAXENTTYPES) if(strcmp(what, entnames[i])==0) return i;
+    loopi(TessLib::StaticEntity::MAXENTTYPES) if(strcmp(what, entnames[i])==0) return i;
     conoutf("unknown entity type \"%s\"", what);
-    return NOTUSED;
+    return TessLib::StaticEntity::NOTUSED;
 }
 
 entity *newentity(int x, int y, int z, char *what, int v1, int v2, int v3, int v4)
@@ -217,25 +217,25 @@ entity *newentity(int x, int y, int z, char *what, int v1, int v2, int v3, int v
     persistent_entity e = { x, y, z, v1, type, v2, v3, v4 };
     switch(type)
     {
-        case LIGHT:
+        case TessLib::StaticEntity::LIGHT:
             if(v1>32) v1 = 32;
             if(!v1) e.attr1 = 16;
             if(!v2 && !v3 && !v4) e.attr2 = 255;          
             break;
             
-        case MAPMODEL:
+        case TessLib::StaticEntity::MAPMODEL:
             e.attr4 = e.attr3;
             e.attr3 = e.attr2;
-        case MONSTER:
-        case TELEDEST:
+        case TessLib::StaticEntity::MONSTER:
+        case TessLib::StaticEntity::TELEDEST:
             e.attr2 = (uchar)e.attr1;
-        case PLAYERSTART:
+        case TessLib::StaticEntity::PLAYERSTART:
             e.attr1 = (int)player1->yaw;
             break;
     };           
-    addmsg(1, 10, SV_EDITENT, ents.length(), type, e.x, e.y, e.z, e.attr1, e.attr2, e.attr3, e.attr4);
+    addmsg(1, 10, TessLib::NetworkMessages::SV_EDITENT, ents.length(), type, e.x, e.y, e.z, e.attr1, e.attr2, e.attr3, e.attr4);
     ents.add(*((entity *)&e)); // unsafe!
-    if(type==LIGHT) calclight();
+    if(type==TessLib::StaticEntity::LIGHT) calclight();
     return &ents.last();
 };
 
@@ -246,9 +246,9 @@ void clearents(char *name)
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==type) e.type = NOTUSED;
+        if(e.type==type) e.type = TessLib::StaticEntity::NOTUSED;
     };
-    if(type==LIGHT) calclight();
+    if(type==TessLib::StaticEntity::LIGHT) calclight();
 };
 
 COMMAND(clearents, ARG_1STR);
@@ -265,7 +265,7 @@ void scalelights(int f, int intens)
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type!=LIGHT) continue;
+        if(e.type!=TessLib::StaticEntity::LIGHT) continue;
         e.attr1 = e.attr1*f/100;
         if(e.attr1<2) e.attr1 = 2;
         if(e.attr1>32) e.attr1 = 32;
@@ -315,9 +315,9 @@ void empty_world(int factor, bool force)    // main empty world creation routine
     {
         sqr *s = S(x,y);
         s->r = s->g = s->b = 150;
-        s->ftex = DEFAULT_FLOOR;
-        s->ctex = DEFAULT_CEIL;
-        s->wtex = s->utex = DEFAULT_WALL;
+        s->ftex = TessLib::TextureNumbers::DEFAULT_FLOOR;
+        s->ctex = TessLib::TextureNumbers::DEFAULT_CEIL;
+        s->wtex = s->utex = TessLib::TextureNumbers::DEFAULT_WALL;
         s->type = TessLib::BlockTypes::SOLID;
         s->floor = 0;
         s->ceil = 16;
@@ -326,7 +326,7 @@ void empty_world(int factor, bool force)    // main empty world creation routine
     };
     
     strncpy(hdr.head, "CUBE", 4);
-    hdr.version = MAPVERSION;
+	hdr.version = TessLib::GameInit::MapVersion;
     hdr.headersize = sizeof(header);
     hdr.sfactor = sfactor;
 

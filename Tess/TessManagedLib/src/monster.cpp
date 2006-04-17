@@ -10,7 +10,7 @@ int nextmonster, spawnremain, numkilled, monstertotal, mtimestart;
 VARF(skill, 1, 3, 10, conoutf("skill is now %d", skill));
 
 dvector &getmonsters() { return monsters; };
-void restoremonsterstate() { loopv(monsters) if(monsters[i]->state==CS_DEAD) numkilled++; };        // for savegames
+void restoremonsterstate() { loopv(monsters) if(monsters[i]->state==TessLib::CSStatus::CS_DEAD) numkilled++; };        // for savegames
 
 #define TOTMFREQ 13
 #define NUMMONSTERTYPES 8
@@ -24,14 +24,14 @@ struct monstertype      // see docs for how these values modify behaviour
 
 monstertypes[NUMMONSTERTYPES] =
 {
-    { GUN_FIREBALL,  15, 100, 3, 0,   100, 800, 1, 10, 10, S_PAINO, S_DIE1,   "an ogre",     "monster/ogro"    },
-    { GUN_CG,        18,  70, 2, 70,   10, 400, 2,  8,  9, S_PAINR, S_DEATHR, "a rhino",     "monster/rhino"   },
-    { GUN_SG,        14, 120, 1, 100, 300, 400, 4, 14, 14, S_PAINE, S_DEATHE, "ratamahatta", "monster/rat"     },
-    { GUN_RIFLE,     15, 200, 1, 80,  300, 300, 4, 18, 18, S_PAINS, S_DEATHS, "a slith",     "monster/slith"   },
-    { GUN_RL,        13, 500, 1, 0,   100, 200, 6, 24, 24, S_PAINB, S_DEATHB, "bauul",       "monster/bauul"   },
-    { GUN_BITE,      22,  50, 3, 0,   100, 400, 1, 12, 15, S_PAINP, S_PIGGR2, "a hellpig",   "monster/hellpig" },
-    { GUN_ICEBALL,   12, 250, 1, 0,    10, 400, 6, 18, 18, S_PAINH, S_DEATHH, "a knight",    "monster/knight"  },
-    { GUN_SLIMEBALL, 15, 100, 1, 0,   200, 400, 2, 13, 10, S_PAIND, S_DEATHD, "a goblin",    "monster/goblin"  },
+    { TessLib::Gun::GUN_FIREBALL,  15, 100, 3, 0,   100, 800, 1, 10, 10, TessLib::Sounds::S_PAINO, TessLib::Sounds::S_DIE1,   "an ogre",     "monster/ogro"    },
+    { TessLib::Gun::GUN_CG,        18,  70, 2, 70,   10, 400, 2,  8,  9, TessLib::Sounds::S_PAINR, TessLib::Sounds::S_DEATHR, "a rhino",     "monster/rhino"   },
+    { TessLib::Gun::GUN_SG,        14, 120, 1, 100, 300, 400, 4, 14, 14, TessLib::Sounds::S_PAINE, TessLib::Sounds::S_DEATHE, "ratamahatta", "monster/rat"     },
+    { TessLib::Gun::GUN_RIFLE,     15, 200, 1, 80,  300, 300, 4, 18, 18, TessLib::Sounds::S_PAINS, TessLib::Sounds::S_DEATHS, "a slith",     "monster/slith"   },
+    { TessLib::Gun::GUN_RL,        13, 500, 1, 0,   100, 200, 6, 24, 24, TessLib::Sounds::S_PAINB, TessLib::Sounds::S_DEATHB, "bauul",       "monster/bauul"   },
+    { TessLib::Gun::GUN_BITE,      22,  50, 3, 0,   100, 400, 1, 12, 15, TessLib::Sounds::S_PAINP, TessLib::Sounds::S_PIGGR2, "a hellpig",   "monster/hellpig" },
+    { TessLib::Gun::GUN_ICEBALL,   12, 250, 1, 0,    10, 400, 6, 18, 18, TessLib::Sounds::S_PAINH, TessLib::Sounds::S_DEATHH, "a knight",    "monster/knight"  },
+    { TessLib::Gun::GUN_SLIMEBALL, 15, 100, 1, 0,   200, 400, 2, 13, 10, TessLib::Sounds::S_PAIND, TessLib::Sounds::S_DEATHD, "a goblin",    "monster/goblin"  },
 };
 
 dynent *basicmonster(int type, int yaw, int state, int trigger, int move)
@@ -49,7 +49,7 @@ dynent *basicmonster(int type, int yaw, int state, int trigger, int move)
     m->eyeheight *= t->bscale/10.0f;
     m->aboveeye *= t->bscale/10.0f;
     m->monsterstate = state;
-    if(state!=M_SLEEP) spawnplayer(m);
+    if(state!=TessLib::MonsterStates::M_SLEEP) spawnplayer(m);
     m->trigger = lastmillis+trigger;
     m->targetyaw = m->yaw = (float)yaw;
     m->move = move;
@@ -58,10 +58,10 @@ dynent *basicmonster(int type, int yaw, int state, int trigger, int move)
     m->maxspeed = (float)t->speed;
     m->health = t->health;
     m->armour = 0;
-    loopi(NUMGUNS) m->ammo[i] = 10000;
+    loopi(TessLib::Gun::NUMGUNS) m->ammo[i] = 10000;
     m->pitch = 0;
     m->roll = 0;
-    m->state = CS_ALIVE;
+    m->state = TessLib::CSStatus::CS_ALIVE;
     m->anger = 0;
     strcpy_s(m->name, t->name);
     monsters.add(m);
@@ -72,7 +72,7 @@ void spawnmonster()     // spawn a random monster according to freq distribution
 {
     int n = rnd(TOTMFREQ), type;
     for(int i = 0; ; i++) if((n -= monstertypes[i].freq)<0) { type = i; break; };
-    basicmonster(type, rnd(360), M_SEARCH, 1000, 1);
+	basicmonster(type, rnd(360), TessLib::MonsterStates::M_SEARCH, 1000, 1);
 };
 
 void monsterclear()     // called after map start of when toggling edit mode to reset/spawn all monsters to initial state
@@ -90,9 +90,9 @@ void monsterclear()     // called after map start of when toggling edit mode to 
     else if(m_classicsp)
     {
         mtimestart = lastmillis;
-        loopv(ents) if(ents[i].type==MONSTER)
+        loopv(ents) if(ents[i].type==TessLib::StaticEntity::MONSTER)
         {
-            dynent *m = basicmonster(ents[i].attr2, ents[i].attr1, M_SLEEP, 100, 0);  
+            dynent *m = basicmonster(ents[i].attr2, ents[i].attr1, TessLib::MonsterStates::M_SLEEP, 100, 0);  
             m->o.x = ents[i].x;
             m->o.y = ents[i].y;
             m->o.z = ents[i].z;
@@ -160,7 +160,7 @@ void normalise(dynent *m, float angle)
 
 void monsteraction(dynent *m)           // main AI thinking routine, called every frame for every monster
 {
-    if(m->enemy->state==CS_DEAD) { m->enemy = player1; m->anger = 0; };
+    if(m->enemy->state==TessLib::CSStatus::CS_DEAD) { m->enemy = player1; m->anger = 0; };
     normalise(m, m->targetyaw);
     if(m->targetyaw>m->yaw)             // slowly turn monster towards his target
     {
@@ -183,10 +183,10 @@ void monsteraction(dynent *m)           // main AI thinking routine, called ever
         {
             m->jumpnext = true;
         }
-        else if(m->trigger<lastmillis && (m->monsterstate!=M_HOME || !rnd(5)))  // search for a way around (common)
+        else if(m->trigger<lastmillis && (m->monsterstate!=TessLib::MonsterStates::M_HOME || !rnd(5)))  // search for a way around (common)
         {
             m->targetyaw += 180+rnd(180);                                       // patented "random walk" AI pathfinding (tm) ;)
-            transition(m, M_SEARCH, 1, 400, 1000);
+            transition(m, TessLib::MonsterStates::M_SEARCH, 1, 400, 1000);
         };
     };
     
@@ -194,13 +194,13 @@ void monsteraction(dynent *m)           // main AI thinking routine, called ever
     
     switch(m->monsterstate)
     {
-        case M_PAIN:
-        case M_ATTACKING:
-        case M_SEARCH:
-            if(m->trigger<lastmillis) transition(m, M_HOME, 1, 100, 200);
+        case TessLib::MonsterStates::M_PAIN:
+        case TessLib::MonsterStates::M_ATTACKING:
+        case TessLib::MonsterStates::M_SEARCH:
+            if(m->trigger<lastmillis) transition(m, TessLib::MonsterStates::M_HOME, 1, 100, 200);
             break;
             
-        case M_SLEEP:                       // state classic sp monster start in, wait for visual contact
+        case TessLib::MonsterStates::M_SLEEP:                       // state classic sp monster start in, wait for visual contact
         {
             vec target;
             if(editmode || !enemylos(m, target)) return;   // skip running physics
@@ -212,41 +212,41 @@ void monsteraction(dynent *m)           // main AI thinking routine, called ever
             ||(disttoenemy<64 && angle<45)
             || angle<10)
             {
-                transition(m, M_HOME, 1, 500, 200);
-                playsound(S_GRUNT1+rnd(2), &m->o);
+                transition(m, TessLib::MonsterStates::M_HOME, 1, 500, 200);
+                playsound(TessLib::Sounds::S_GRUNT1+rnd(2), &m->o);
             };
             break;
         };
         
-        case M_AIMING:                      // this state is the delay between wanting to shoot and actually firing
+        case TessLib::MonsterStates::M_AIMING:                      // this state is the delay between wanting to shoot and actually firing
             if(m->trigger<lastmillis)
             {
                 m->lastaction = 0;
                 m->attacking = true;
                 shoot(m, m->attacktarget);
-                transition(m, M_ATTACKING, 0, 600, 0);
+                transition(m, TessLib::MonsterStates::M_ATTACKING, 0, 600, 0);
             };
             break;
 
-        case M_HOME:                        // monster has visual contact, heads straight for player and may want to shoot at any time
+        case TessLib::MonsterStates::M_HOME:                        // monster has visual contact, heads straight for player and may want to shoot at any time
             m->targetyaw = enemyyaw;
             if(m->trigger<lastmillis)
             {
                 vec target;
                 if(!enemylos(m, target))    // no visual contact anymore, let monster get as close as possible then search for player
                 {
-                    transition(m, M_HOME, 1, 800, 500);
+                    transition(m, TessLib::MonsterStates::M_HOME, 1, 800, 500);
                 }
                 else  // the closer the monster is the more likely he wants to shoot
                 {
-                    if(!rnd((int)disttoenemy/3+1) && m->enemy->state==CS_ALIVE)         // get ready to fire
+                    if(!rnd((int)disttoenemy/3+1) && m->enemy->state==TessLib::CSStatus::CS_ALIVE)         // get ready to fire
                     { 
                         m->attacktarget = target;
-                        transition(m, M_AIMING, 0, monstertypes[m->mtype].lag, 10);
+                        transition(m, TessLib::MonsterStates::M_AIMING, 0, monstertypes[m->mtype].lag, 10);
                     }
                     else                                                                // track player some more
                     {
-                        transition(m, M_HOME, 1, monstertypes[m->mtype].rate, 0);
+                        transition(m, TessLib::MonsterStates::M_HOME, 1, monstertypes[m->mtype].rate, 0);
                     };
                 };
             };
@@ -272,10 +272,10 @@ void monsterpain(dynent *m, int damage, dynent *d)
         m->anger = 0;
         m->enemy = d;
     };
-    transition(m, M_PAIN, 0, monstertypes[m->mtype].pain,200);      // in this state monster won't attack
+    transition(m, TessLib::MonsterStates::M_PAIN, 0, monstertypes[m->mtype].pain,200);      // in this state monster won't attack
     if((m->health -= damage)<=0)
     {
-        m->state = CS_DEAD;
+        m->state = TessLib::CSStatus::CS_DEAD;
         m->lastaction = lastmillis;
         numkilled++;
         player1->frags = numkilled;
@@ -311,10 +311,10 @@ void monsterthink()
     loopv(ents)             // equivalent of player entity touch, but only teleports are used
     {
         entity &e = ents[i];
-        if(e.type!=TELEPORT) continue;
+        if(e.type!=TessLib::StaticEntity::TELEPORT) continue;
         if(OUTBORD(e.x, e.y)) continue;
         vec v = { e.x, e.y, S(e.x, e.y)->floor };
-        loopv(monsters) if(monsters[i]->state==CS_DEAD)
+        loopv(monsters) if(monsters[i]->state==TessLib::CSStatus::CS_DEAD)
         {
 			if(lastmillis-monsters[i]->lastaction<2000)
 			{
@@ -331,7 +331,7 @@ void monsterthink()
         };
     };
     
-    loopv(monsters) if(monsters[i]->state==CS_ALIVE) monsteraction(monsters[i]);
+    loopv(monsters) if(monsters[i]->state==TessLib::CSStatus::CS_ALIVE) monsteraction(monsters[i]);
 };
 
 void monsterrender()

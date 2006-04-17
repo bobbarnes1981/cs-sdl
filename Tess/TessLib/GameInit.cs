@@ -124,6 +124,18 @@ namespace TessLib
 		static int screenWidth = 640;
 		static int screenHeight = 480;
 		static int lastmillis = 0;	
+		static int mapVersion = 5;
+
+		/// <summary>
+		/// bump if map format changes, see worldio.cpp
+		/// </summary>
+		public static int MapVersion
+		{
+			get
+			{
+				return mapVersion;
+			}
+		}
 	
 		/// <summary>
 		/// 

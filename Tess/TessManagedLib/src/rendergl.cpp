@@ -238,7 +238,7 @@ void gl_drawframe(int w, int h, float curfps)
     glEnable(GL_TEXTURE_2D);
     
     int xs, ys;
-    skyoglid = lookuptexture(DEFAULT_SKY, xs, ys);
+    skyoglid = lookuptexture(TessLib::TextureNumbers::DEFAULT_SKY, xs, ys);
    
     resetcubes();
             

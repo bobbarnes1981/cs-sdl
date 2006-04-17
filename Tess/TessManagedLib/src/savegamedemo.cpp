@@ -118,7 +118,7 @@ void loadgamerest()
     loopv(ents)
     {
         ents[i].spawned = gzgetc(f)!=0;   
-        if(ents[i].type==CARROT && !ents[i].spawned) trigger(ents[i].attr1, ents[i].attr2, true);
+        if(ents[i].type==TessLib::StaticEntity::CARROT && !ents[i].spawned) trigger(ents[i].attr1, ents[i].attr2, true);
     };
     restoreserverstate(ents);
     
@@ -133,7 +133,7 @@ void loadgamerest()
         gzread(f, monsters[i], sizeof(dynent));
         monsters[i]->enemy = player1;                                       // lazy, could save id of enemy instead
         monsters[i]->lastaction = monsters[i]->trigger = lastmillis+500;    // also lazy, but no real noticable effect on game
-        if(monsters[i]->state==CS_DEAD) monsters[i]->lastaction = 0;
+        if(monsters[i]->state==TessLib::CSStatus::CS_DEAD) monsters[i]->lastaction = 0;
     };
     restoremonsterstate();
     
@@ -189,7 +189,7 @@ void incomingdemodata(uchar *buf, int len, bool extras)
         gzputi(player1->health);
         gzputi(player1->armour);
         gzput(player1->armourtype);
-        loopi(NUMGUNS) gzput(player1->ammo[i]);
+        loopi(TessLib::Gun::NUMGUNS) gzput(player1->ammo[i]);
         gzput(player1->state);
 		gzputi(bdamage);
 		bdamage = 0;
@@ -294,7 +294,7 @@ void demoplaybackstep()
             target->health = gzgeti();
             target->armour = gzgeti();
             target->armourtype = gzget();
-            loopi(NUMGUNS) target->ammo[i] = gzget();
+            loopi(TessLib::Gun::NUMGUNS) target->ammo[i] = gzget();
             target->state = gzget();
             target->lastmove = playbacktime;
 			if(bdamage = gzgeti()) damageblend(bdamage);
@@ -349,7 +349,7 @@ void demoplaybackstep()
 			};
             break;
         };
-        //if(player1->state!=CS_DEAD) showscores(false);
+        //if(player1->state!=TessLib::CSStatus::CS_DEAD) showscores(false);
     };
 };
 

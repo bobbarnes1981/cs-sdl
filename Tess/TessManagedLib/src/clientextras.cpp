@@ -17,7 +17,7 @@ void renderclient(dynent *d, bool team, char *mdlname, bool hellpig, float scale
     float speed = 100.0f;
     float mz = d->o.z-d->eyeheight+1.55f*scale;
     int basetime = -((int)d&0xFFF);
-    if(d->state==CS_DEAD)
+    if(d->state==TessLib::CSStatus::CS_DEAD)
     {
         int r;
         if(hellpig) { n = 2; r = range[3]; } else { n = (int)d%3; r = range[n]; };
@@ -30,10 +30,10 @@ void renderclient(dynent *d, bool team, char *mdlname, bool hellpig, float scale
         //mz = d->o.z-d->eyeheight+0.2f;
         //scale = 1.2f;
     }
-    else if(d->state==CS_EDITING)                   { n = 16; }
-    else if(d->state==CS_LAGGED)                    { n = 17; }
-    else if(d->monsterstate==M_ATTACKING)           { n = 8;  }
-    else if(d->monsterstate==M_PAIN)                { n = 10; } 
+    else if(d->state==TessLib::CSStatus::CS_EDITING)                   { n = 16; }
+    else if(d->state==TessLib::CSStatus::CS_LAGGED)                    { n = 17; }
+    else if(d->monsterstate==TessLib::MonsterStates::M_ATTACKING)           { n = 8;  }
+    else if(d->monsterstate==TessLib::MonsterStates::M_PAIN)                { n = 10; } 
     else if((!d->move && !d->strafe) || !d->moving) { n = 12; } 
     else if(!d->onfloor && d->timeinair>100)        { n = 18; }
     else                                            { n = 14; speed = 1200/d->maxspeed*scale; if(hellpig) speed = 300/d->maxspeed;  }; 
@@ -66,7 +66,7 @@ void renderscore(dynent *d)
 {
     sprintf_sd(lag)("%d", d->plag);
     sprintf_sd(name) ("(%s)", d->name); 
-    sprintf_s(scorelines.add().s)("%d\t%s\t%d\t%s\t%s", d->frags, d->state==CS_LAGGED ? "LAG" : lag, d->ping, d->team, d->state==CS_DEAD ? name : d->name);
+    sprintf_s(scorelines.add().s)("%d\t%s\t%d\t%s\t%s", d->frags, d->state==TessLib::CSStatus::CS_LAGGED ? "LAG" : lag, d->ping, d->team, d->state==TessLib::CSStatus::CS_DEAD ? name : d->name);
     menumanual(0, scorelines.length()-1, scorelines.last().s); 
 };
 
@@ -121,7 +121,7 @@ void sendmap(char *mapname)
     ENetPacket *packet = enet_packet_create(NULL, MAXTRANS + mapsize, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, SV_SENDMAP);
+    putint(p, TessLib::NetworkMessages::SV_SENDMAP);
     sendstring(mapname, p);
     putint(p, mapsize);
     if(65535 - (p - start) < mapsize)
@@ -147,7 +147,7 @@ void getmap()
     ENetPacket *packet = enet_packet_create(NULL, MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, SV_RECVMAP);
+    putint(p, TessLib::NetworkMessages::SV_RECVMAP);
     *(ushort *)start = ENET_HOST_TO_NET_16(p-start);
     enet_packet_resize(packet, p-start);
     sendpackettoserv(packet);
