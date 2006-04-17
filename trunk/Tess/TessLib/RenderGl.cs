@@ -34,6 +34,7 @@ using System;
 using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
+using SdlDotNet;
 using System.Runtime.InteropServices;
 
 namespace TessLib
@@ -361,6 +362,80 @@ namespace TessLib
 				Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_SOURCE0_RGB_EXT, Gl.GL_TEXTURE);
 				Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_SOURCE1_RGB_EXT, Gl.GL_PRIMARY_COLOR_EXT);
 			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="tnum"></param>
+		/// <param name="texname"></param>
+		/// <param name="xs"></param>
+		/// <param name="ys"></param>
+		/// <returns></returns>
+		public static bool InstallTexture(int tnum, string texname, out int xs, out int ys)
+		{
+			return InstallTexture(tnum, texname, out xs, out ys, false);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="tnum"></param>
+		/// <param name="texname"></param>
+		/// <param name="xs"></param>
+		/// <param name="ys"></param>
+		/// <param name="clamp"></param>
+		/// <returns></returns>
+		public static bool InstallTexture(int tnum, string texname, out int xs, out int ys, bool clamp)
+		{
+			xs = 0;
+			ys = 0;
+			Surface s = new Surface(texname);
+			//SDL_Surface *s = IMG_Load(texname);
+			if(s == null) 
+			{ 
+				Console.WriteLine("couldn't load texture %s", texname);
+				return false; 
+			}
+	
+			if(s.BitsPerPixel!=24) 
+			{ 
+				Console.WriteLine("texture must be 24bpp: %s", texname);
+				return false; 
+			}
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, tnum);
+			Gl.glPixelStorei(Gl.GL_UNPACK_ALIGNMENT, 1);
+			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, clamp ? Gl.GL_CLAMP_TO_EDGE : Gl.GL_REPEAT);
+			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, clamp ? Gl.GL_CLAMP_TO_EDGE : Gl.GL_REPEAT);
+			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
+			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR_MIPMAP_LINEAR); //NEAREST);
+			Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_MODULATE); 
+			xs = s.Width;
+			ys = s.Height;
+			while(xs>glmaxtexsize || ys>glmaxtexsize) 
+			{ 
+				xs /= 2; 
+				ys /= 2; 
+			};
+			IntPtr scaledimg = s.Pixels;
+			if(xs!=s.Width)
+			{
+				Console.WriteLine("warning: quality loss: scaling %s", texname);     // for voodoo cards under linux
+				//scaledimg = alloc(xs*ys*3);
+				Glu.gluScaleImage(Gl.GL_RGB, s.Width, s.Height, Gl.GL_UNSIGNED_BYTE, s.Pixels, xs, ys, Gl.GL_UNSIGNED_BYTE, scaledimg);
+			};
+			if(Glu.gluBuild2DMipmaps(Gl.GL_TEXTURE_2D, Gl.GL_RGB, xs, ys, Gl.GL_RGB, Gl.GL_UNSIGNED_BYTE, scaledimg) != 0) 
+			{
+				GameInit.Fatal("could not build mipmaps");
+			}
+			if(xs!=s.Width) 
+			{
+				scaledimg = IntPtr.Zero;
+				//free(scaledimg);
+			}
+			//SDL_FreeSurface(s);
+			s.Dispose();
+			return true;
 		}
 	}
 }

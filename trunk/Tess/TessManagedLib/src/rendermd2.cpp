@@ -205,7 +205,7 @@ void delayedload(md2 *m)
         if(!m->load(path(name1))) TessLib::GameInit::Fatal("loadmodel: ", name1);
         sprintf_sd(name2)("packages/models/%s/skin.jpg", m->loadname);
         int xs, ys;
-        installtex(FIRSTMDL+m->mdlnum, path(name2), xs, ys);
+		TessLib::RenderGl::InstallTexture(FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
         m->loaded = true;
     };
 };

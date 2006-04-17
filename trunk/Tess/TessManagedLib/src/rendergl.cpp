@@ -9,36 +9,6 @@ extern int curvert;
 void purgetextures();
 
 GLUquadricObj *qsphere = NULL;
-int glmaxtexsize = 256;
-
-bool installtex(int tnum, char *texname, int &xs, int &ys, bool clamp)
-{
-    SDL_Surface *s = IMG_Load(texname);
-    if(!s) { conoutf("couldn't load texture %s", texname); return false; };
-    if(s->format->BitsPerPixel!=24) { conoutf("texture must be 24bpp: %s", texname); return false; };
-    // loopi(s->w*s->h*3) { uchar *p = (uchar *)s->pixels+i; *p = 255-*p; };  
-    glBindTexture(GL_TEXTURE_2D, tnum);
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, clamp ? GL_CLAMP_TO_EDGE : GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, clamp ? GL_CLAMP_TO_EDGE : GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); //NEAREST);
-    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); 
-    xs = s->w;
-    ys = s->h;
-    while(xs>glmaxtexsize || ys>glmaxtexsize) { xs /= 2; ys /= 2; };
-    void *scaledimg = s->pixels;
-    if(xs!=s->w)
-    {
-        conoutf("warning: quality loss: scaling %s", texname);     // for voodoo cards under linux
-        scaledimg = alloc(xs*ys*3);
-        gluScaleImage(GL_RGB, s->w, s->h, GL_UNSIGNED_BYTE, s->pixels, xs, ys, GL_UNSIGNED_BYTE, scaledimg);
-    };
-    if(gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, xs, ys, GL_RGB, GL_UNSIGNED_BYTE, scaledimg)) TessLib::GameInit::Fatal("could not build mipmaps");
-    if(xs!=s->w) free(scaledimg);
-    SDL_FreeSurface(s);
-    return true;
-};
 
 // management of texture slots
 // each texture slot can have multople texture frames, of which currently only the first is used
@@ -111,7 +81,7 @@ int lookuptexture(int tex, int &xs, int &ys)
 
     sprintf_sd(name)("packages%c%s", PATHDIV, texname[TessLib::RenderGl::CurrentTextureNumber]);
 
-    if(installtex(tnum, name, xs, ys))
+	if(TessLib::RenderGl::InstallTexture(tnum, name, &xs, &ys))
     {
         mapping[tex][frame] = tnum;
         texx[TessLib::RenderGl::CurrentTextureNumber] = xs;
@@ -161,11 +131,16 @@ void addstrip(int tex, int start, int n)
 VARFP(gamma, 30, 100, 300,
 {
     float f = gamma/100.0f;
-    if(SDL_SetGamma(f,f,f)==-1)
-    {
-        conoutf("Could not set gamma (card/driver doesn't support it?)");
-        conoutf("sdl: %s", SDL_GetError());
-    };
+    //if(SDL_SetGamma(f,f,f)==-1)
+	//if(SdlDotNet::Video::Gamma(f,f,f)==-1)
+	//SdlDotNet::Video::Gamma(f,f,f); //will throw exception if it cannot set it.
+	//	conoutf("Could not set gamma (card/driver doesn't support it?)");
+	//	conoutf("sdl: %s", SdlDotNet::SdlException::GetError());
+    //{
+       // conoutf("Could not set gamma (card/driver doesn't support it?)");
+		//conoutf("sdl: %s", SdlDotNet::SdlException::GetError()
+        //conoutf("sdl: %s", SDL_GetError());
+   // };
 });
 
 VARP(fov, 10, 105, 120);

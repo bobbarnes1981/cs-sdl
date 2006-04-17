@@ -1,6 +1,8 @@
 // menus.cpp: ingame menu system (also used for scores and serverlist)
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <SdlDotNet.dll>
 
 struct mitem { char *text, *action; };
 
@@ -117,14 +119,14 @@ bool menukey(int code, bool isdown)
     int menusel = menus[vmenu].menusel;
     if(isdown)
     {
-        if(code==SDLK_ESCAPE)
+		if(code==(int)SdlDotNet::Key::Escape)
         {
             menuset(-1);
             if(!menustack.empty()) menuset(menustack.pop());
             return true;
         }
-        else if(code==SDLK_UP || code==-4) menusel--;
-        else if(code==SDLK_DOWN || code==-5) menusel++;
+		else if(code==(int)SdlDotNet::Key::UpArrow || code==-4) menusel--;
+		else if(code==(int)SdlDotNet::Key::DownArrow || code==-5) menusel++;
         int n = menus[vmenu].items.length();
         if(menusel<0) menusel = n-1;
         else if(menusel>=n) menusel = 0;
@@ -132,7 +134,7 @@ bool menukey(int code, bool isdown)
     }
     else
     {
-        if(code==SDLK_RETURN || code==-2)
+		if(code==(int)SdlDotNet::Key::Return || code==-2)
         {
             char *action = menus[vmenu].items[menusel].action;
             if(vmenu==1) connects(getservername(menusel));

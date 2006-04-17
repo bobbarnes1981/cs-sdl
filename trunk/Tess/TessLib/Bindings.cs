@@ -102,18 +102,18 @@ namespace TessLib
 
 		#region Bindings Methods
 
-		#region bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
-		/// <summary>
-		///     install textures
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in rendergl.cpp:
-		///     <code>extern DECLSPEC bool CDECL installtex(int tnum, char *texname, int &xs, int &ys, bool clamp = false);</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern bool installtex(int tnum, string texname, out int xs, out int ys, bool clamp);
-		#endregion bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
+//		#region bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
+//		/// <summary>
+//		///     install textures
+//		/// </summary>
+//		/// <remarks>
+//		/// <p>Binds to C-function call in rendergl.cpp:
+//		///     <code>extern DECLSPEC bool CDECL installtex(int tnum, char *texname, int &xs, int &ys, bool clamp = false);</code>
+//		///     </p>
+//		/// </remarks>
+//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+//		public static extern bool installtex(int tnum, string texname, out int xs, out int ys, bool clamp);
+//		#endregion bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
 
 		#region int enet_initialize()
 		/// <summary>

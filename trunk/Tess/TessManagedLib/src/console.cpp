@@ -104,7 +104,8 @@ COMMANDN(bind, bindkey, ARG_2STR);
 
 void saycommand(char *init)                         // turns input to the command line on or off
 {
-    SDL_EnableUNICODE(saycommandon = (init!=NULL));
+	SdlDotNet::Keyboard::UnicodeEnabled = (saycommandon = (init!=NULL));
+    //SDL_EnableUNICODE(saycommandon = (init!=NULL));
     if(!editmode) SdlDotNet::Keyboard::KeyRepeat = saycommandon;
     if(!init) init = "";
     strcpy_s(commandbuf, init);
@@ -177,30 +178,30 @@ void keypress(int code, bool isdown, int cooked)
         {
             switch(code)
             {
-                case SDLK_RETURN:
+			case (int)SdlDotNet::Key::Return:
                     break;
 
-                case SDLK_BACKSPACE:
-                case SDLK_LEFT:
+				case (int)SdlDotNet::Key::Backspace:
+				case (int)SdlDotNet::Key::LeftArrow:
                 {
                     for(int i = 0; commandbuf[i]; i++) if(!commandbuf[i+1]) commandbuf[i] = 0;
                     resetcomplete();
                     break;
                 };
                     
-                case SDLK_UP:
+				case (int)SdlDotNet::Key::UpArrow:
                     if(histpos) strcpy_s(commandbuf, vhistory[--histpos]);
                     break;
                 
-                case SDLK_DOWN:
+				case (int)SdlDotNet::Key::DownArrow:
                     if(histpos<vhistory.length()) strcpy_s(commandbuf, vhistory[histpos++]);
                     break;
                     
-                case SDLK_TAB:
+				case (int)SdlDotNet::Key::Tab:
                     complete(commandbuf);
                     break;
 
-                case SDLK_v:
+				case (int)SdlDotNet::Key::V:
                     if(SDL_GetModState()&(KMOD_LCTRL|KMOD_RCTRL)) { pasteconsole(); return; };
 
                 default:
@@ -210,7 +211,7 @@ void keypress(int code, bool isdown, int cooked)
         }
         else
         {
-            if(code==SDLK_RETURN)
+			if(code==(int)SdlDotNet::Key::Return)
             {
                 if(commandbuf[0])
                 {
@@ -224,7 +225,7 @@ void keypress(int code, bool isdown, int cooked)
                 };
                 saycommand(NULL);
             }
-            else if(code==SDLK_ESCAPE)
+            else if(code==(int)SdlDotNet::Key::Escape)
             {
                 saycommand(NULL);
             };
