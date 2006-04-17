@@ -202,14 +202,14 @@ void c2sinfo(dynent *d)                     // send update to the server
     if(toservermap[0])                      // suggest server to change map
     {                                       // do this exclusively as map change may invalidate rest of update
         packet->flags = ENET_PACKET_FLAG_RELIABLE;
-        putint(p, SV_MAPCHANGE);
+        putint(p, TessLib::NetworkMessages::SV_MAPCHANGE);
         sendstring(toservermap, p);
         toservermap[0] = 0;
         putint(p, nextmode);
     }
     else
     {
-        putint(p, SV_POS);
+        putint(p, TessLib::NetworkMessages::SV_POS);
         putint(p, clientnum);
         putint(p, (int)(d->o.x*DMF));       // quantize coordinates to 1/16th of a cube, between 1 and 3 bytes
         putint(p, (int)(d->o.y*DMF));
@@ -221,12 +221,12 @@ void c2sinfo(dynent *d)                     // send update to the server
         putint(p, (int)(d->vel.y*DVF));
         putint(p, (int)(d->vel.z*DVF));
         // pack rest in 1 byte: strafe:2, move:2, onfloor:1, state:3
-        putint(p, (d->strafe&3) | ((d->move&3)<<2) | (((int)d->onfloor)<<4) | ((editmode ? CS_EDITING : d->state)<<5) );
+        putint(p, (d->strafe&3) | ((d->move&3)<<2) | (((int)d->onfloor)<<4) | ((editmode ? TessLib::CSStatus::CS_EDITING : d->state)<<5) );
  
         if(senditemstoserver)
         {
             packet->flags = ENET_PACKET_FLAG_RELIABLE;
-            putint(p, SV_ITEMLIST);
+            putint(p, TessLib::NetworkMessages::SV_ITEMLIST);
             if(!m_noitems) putitems(p);
             putint(p, -1);
             senditemstoserver = false;
@@ -235,7 +235,7 @@ void c2sinfo(dynent *d)                     // send update to the server
         if(ctext[0])    // player chat, not flood protected for now
         {
             packet->flags = ENET_PACKET_FLAG_RELIABLE;
-            putint(p, SV_TEXT);
+            putint(p, TessLib::NetworkMessages::SV_TEXT);
             sendstring(ctext, p);
             ctext[0] = 0;
         };
@@ -243,7 +243,7 @@ void c2sinfo(dynent *d)                     // send update to the server
         {
             packet->flags = ENET_PACKET_FLAG_RELIABLE;
             c2sinit = true;
-            putint(p, SV_INITC2S);
+            putint(p, TessLib::NetworkMessages::SV_INITC2S);
             sendstring(player1->name, p);
             sendstring(player1->team, p);
             putint(p, player1->lifesequence);
@@ -257,7 +257,7 @@ void c2sinfo(dynent *d)                     // send update to the server
         messages.setsize(0);
         if(lastmillis-lastping>250)
         {
-            putint(p, SV_PING);
+            putint(p, TessLib::NetworkMessages::SV_PING);
             putint(p, lastmillis);
             lastping = lastmillis;
         };

@@ -9,7 +9,7 @@ VAR(gamemode, 1, 0, 0);
 
 VARF(gamespeed, 10, 100, 1000, if(multiplayer()) gamespeed = 100);
 
-void mode(int n) { addmsg(1, 2, SV_GAMEMODE, nextmode = n); };
+void mode(int n) { addmsg(1, 2, TessLib::NetworkMessages::SV_GAMEMODE, nextmode = n); };
 COMMAND(mode, ARG_1INT);
 
 bool intermission = false;
@@ -53,26 +53,26 @@ void spawnstate(dynent *d)              // reset player state not persistent acc
     d->timeinair = 0;
     d->health = 100;
     d->armour = 50;
-    d->armourtype = A_BLUE;
+    d->armourtype = TessLib::ArmorTypes::A_BLUE;
     d->quadmillis = 0;
-    d->lastattackgun = d->gunselect = GUN_SG;
+    d->lastattackgun = d->gunselect = TessLib::Gun::GUN_SG;
     d->gunwait = 0;
 	d->attacking = false;
     d->lastaction = 0;
-    loopi(NUMGUNS) d->ammo[i] = 0;
-    d->ammo[GUN_FIST] = 1;
+    loopi(TessLib::Gun::NUMGUNS) d->ammo[i] = 0;
+    d->ammo[TessLib::Gun::GUN_FIST] = 1;
     if(m_noitems)
     {
-        d->gunselect = GUN_RIFLE;
+        d->gunselect = TessLib::Gun::GUN_RIFLE;
         d->armour = 0;
         if(m_noitemsrail)
         {
             d->health = 1;
-            d->ammo[GUN_RIFLE] = 100;
+            d->ammo[TessLib::Gun::GUN_RIFLE] = 100;
         }
         else
         {
-            if(gamemode==12) { d->gunselect = GUN_FIST; return; };  // eihrul's secret "instafist" mode
+            if(gamemode==12) { d->gunselect = TessLib::Gun::GUN_FIST; return; };  // eihrul's secret "instafist" mode
             d->health = 256;
             if(m_tarena)
             {
@@ -86,19 +86,19 @@ void spawnstate(dynent *d)              // reset player state not persistent acc
             }
             else if(m_arena)    // insta arena
             {
-                d->ammo[GUN_RIFLE] = 100;
+                d->ammo[TessLib::Gun::GUN_RIFLE] = 100;
             }
             else // efficiency
             {
                 loopi(4) baseammo(i+1);
-                d->gunselect = GUN_CG;
+                d->gunselect = TessLib::Gun::GUN_CG;
             };
-            d->ammo[GUN_CG] /= 2;
+            d->ammo[TessLib::Gun::GUN_CG] /= 2;
         };
     }
     else
     {
-        d->ammo[GUN_SG] = 5;
+        d->ammo[TessLib::Gun::GUN_SG] = 5;
     };
 };
     
@@ -126,7 +126,7 @@ dynent *newdynent()                 // create a new blank player or monster
     d->name[0] = d->team[0] = 0;
     d->blocked = false;
     d->lifesequence = 0;
-    d->state = CS_ALIVE;
+    d->state = TessLib::CSStatus::CS_ALIVE;
     spawnstate(d);
     return d;
 };
@@ -139,7 +139,7 @@ void respawnself()
 
 void arenacount(dynent *d, int &alive, int &dead, char *&lastteam, bool &oneteam)
 {
-    if(d->state!=CS_DEAD)
+    if(d->state!=TessLib::CSStatus::CS_DEAD)
     {
         alive++;
         if(lastteam && strcmp(lastteam, d->team)) oneteam = false;
@@ -198,18 +198,18 @@ void otherplayers()
     loopv(players) if(players[i])
     {
         const int lagtime = lastmillis-players[i]->lastupdate;
-        if(lagtime>1000 && players[i]->state==CS_ALIVE)
+        if(lagtime>1000 && players[i]->state==TessLib::CSStatus::CS_ALIVE)
         {
-            players[i]->state = CS_LAGGED;
+            players[i]->state = TessLib::CSStatus::CS_LAGGED;
             continue;
         };
-        if(lagtime && players[i]->state != CS_DEAD && (!demoplayback || i!=democlientnum)) moveplayer(players[i], 2, false);   // use physics to extrapolate player position
+        if(lagtime && players[i]->state != TessLib::CSStatus::CS_DEAD && (!demoplayback || i!=democlientnum)) moveplayer(players[i], 2, false);   // use physics to extrapolate player position
     };
 };
 
 void respawn()
 {
-    if(player1->state==CS_DEAD)
+    if(player1->state==TessLib::CSStatus::CS_DEAD)
     { 
         player1->attacking = false;
         if(m_arena) { conoutf("waiting for new round to start..."); return; };
@@ -243,7 +243,7 @@ void updateworld(int millis)        // main game update loop
         if(!demoplayback)
         {
             monsterthink();
-            if(player1->state==CS_DEAD)
+            if(player1->state==TessLib::CSStatus::CS_DEAD)
             {
 				if(lastmillis-player1->lastaction<2000)
 				{
@@ -285,7 +285,7 @@ int fixspawn = 2;
 void spawnplayer(dynent *d)   // place at random spawn. also used by monsters!
 {
     int r = fixspawn-->0 ? 4 : rnd(10)+1;
-    loopi(r) spawncycle = findentity(PLAYERSTART, spawncycle+1);
+    loopi(r) spawncycle = findentity(TessLib::StaticEntity::PLAYERSTART, spawncycle+1);
     if(spawncycle!=-1)
     {
         d->o.x = ents[spawncycle].x;
@@ -302,7 +302,7 @@ void spawnplayer(dynent *d)   // place at random spawn. also used by monsters!
     };
     entinmap(d);
     spawnstate(d);
-    d->state = CS_ALIVE;
+    d->state = TessLib::CSStatus::CS_ALIVE;
 };
 
 // movement input code
@@ -342,7 +342,7 @@ void fixplayer1range()
 
 void mousemove(int dx, int dy)
 {
-    if(player1->state==CS_DEAD || intermission) return;
+    if(player1->state==TessLib::CSStatus::CS_DEAD || intermission) return;
     const float SENSF = 33.0f;     // try match quake sens
     player1->yaw += (dx/SENSF)*(sensitivity/(float)sensitivityscale);
     player1->pitch -= (dy/SENSF)*(sensitivity/(float)sensitivityscale)*(invmouse ? -1 : 1);
@@ -353,7 +353,7 @@ void mousemove(int dx, int dy)
 
 void selfdamage(int damage, int actor, dynent *act)
 {
-    if(player1->state!=CS_ALIVE || editmode || intermission) return;
+    if(player1->state!=TessLib::CSStatus::CS_ALIVE || editmode || intermission) return;
     damageblend(damage);
 	demoblend(damage);
     int ad = damage*(player1->armourtype+1)*20/100;     // let armour absorb when possible
@@ -372,7 +372,7 @@ void selfdamage(int damage, int actor, dynent *act)
         {
             actor = getclientnum();
             conoutf("you suicided!");
-            addmsg(1, 2, SV_FRAGS, --player1->frags);
+            addmsg(1, 2, TessLib::NetworkMessages::SV_FRAGS, --player1->frags);
         }
         else
         {
@@ -390,19 +390,19 @@ void selfdamage(int damage, int actor, dynent *act)
             };
         };
         showscores(true);
-        addmsg(1, 2, SV_DIED, actor);
+        addmsg(1, 2, TessLib::NetworkMessages::SV_DIED, actor);
         player1->lifesequence++;
         player1->attacking = false;
-        player1->state = CS_DEAD;
+        player1->state = TessLib::CSStatus::CS_DEAD;
         player1->pitch = 0;
         player1->roll = 60;
-        playsound(S_DIE1+rnd(2));
+        playsound(TessLib::Sounds::S_DIE1+rnd(2));
         spawnstate(player1);
         player1->lastaction = lastmillis;
     }
     else
     {
-        playsound(S_PAIN6);
+        playsound(TessLib::Sounds::S_PAIN6);
     };
 };
 

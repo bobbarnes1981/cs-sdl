@@ -39,14 +39,14 @@ const char *modestr(int n) { return (n>=-2 && n<12) ? modenames[n+2] : "unknown"
 
 char msgsizesl[] =               // size inclusive message token, 0 for variable or not-checked sizes
 { 
-    SV_INITS2C, 4, SV_INITC2S, 0, SV_POS, 12, SV_TEXT, 0, SV_SOUND, 2, SV_CDIS, 2,
-    SV_EDITH, 7, SV_EDITT, 7, SV_EDITS, 6, SV_EDITD, 6, SV_EDITE, 6,
-    SV_DIED, 2, SV_DAMAGE, 4, SV_SHOT, 8, SV_FRAGS, 2,
-    SV_MAPCHANGE, 0, SV_ITEMSPAWN, 2, SV_ITEMPICKUP, 3, SV_DENIED, 2,
-    SV_PING, 2, SV_PONG, 2, SV_CLIENTPING, 2, SV_GAMEMODE, 2,
-    SV_TIMEUP, 2, SV_EDITENT, 10, SV_MAPRELOAD, 2, SV_ITEMACC, 2,
-    SV_SENDMAP, 0, SV_RECVMAP, 1, SV_SERVMSG, 0, SV_ITEMLIST, 0,
-    SV_EXT, 0,
+    TessLib::NetworkMessages::SV_INITS2C, 4, TessLib::NetworkMessages::SV_INITC2S, 0, TessLib::NetworkMessages::SV_POS, 12, TessLib::NetworkMessages::SV_TEXT, 0, TessLib::NetworkMessages::SV_SOUND, 2, TessLib::NetworkMessages::SV_CDIS, 2,
+    TessLib::NetworkMessages::SV_EDITH, 7, TessLib::NetworkMessages::SV_EDITT, 7, TessLib::NetworkMessages::SV_EDITS, 6, TessLib::NetworkMessages::SV_EDITD, 6, TessLib::NetworkMessages::SV_EDITE, 6,
+    TessLib::NetworkMessages::SV_DIED, 2, TessLib::NetworkMessages::SV_DAMAGE, 4, TessLib::NetworkMessages::SV_SHOT, 8, TessLib::NetworkMessages::SV_FRAGS, 2,
+    TessLib::NetworkMessages::SV_MAPCHANGE, 0, TessLib::NetworkMessages::SV_ITEMSPAWN, 2, TessLib::NetworkMessages::SV_ITEMPICKUP, 3, TessLib::NetworkMessages::SV_DENIED, 2,
+    TessLib::NetworkMessages::SV_PING, 2, TessLib::NetworkMessages::SV_PONG, 2, TessLib::NetworkMessages::SV_CLIENTPING, 2, TessLib::NetworkMessages::SV_GAMEMODE, 2,
+    TessLib::NetworkMessages::SV_TIMEUP, 2, TessLib::NetworkMessages::SV_EDITENT, 10, TessLib::NetworkMessages::SV_MAPRELOAD, 2, TessLib::NetworkMessages::SV_ITEMACC, 2,
+    TessLib::NetworkMessages::SV_SENDMAP, 0, TessLib::NetworkMessages::SV_RECVMAP, 1, TessLib::NetworkMessages::SV_SERVMSG, 0, TessLib::NetworkMessages::SV_ITEMLIST, 0,
+    TessLib::NetworkMessages::SV_EXT, 0,
     -1
 };
 
@@ -78,7 +78,7 @@ ENetPacket *recvmap(int n)
     ENetPacket *packet = enet_packet_create(NULL, MAXTRANS + copysize, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, SV_RECVMAP);
+    putint(p, TessLib::NetworkMessages::SV_RECVMAP);
     sendstring(copyname, p);
     putint(p, copysize);
     memcpy(p, copydata, copysize);

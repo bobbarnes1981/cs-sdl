@@ -287,7 +287,7 @@ int renderwater(float hf)
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_SRC_COLOR);
     int sx, sy;
-    glBindTexture(GL_TEXTURE_2D, lookuptexture(DEFAULT_LIQUID, sx, sy));  
+    glBindTexture(GL_TEXTURE_2D, lookuptexture(TessLib::TextureNumbers::DEFAULT_LIQUID, sx, sy));  
 
     wx1 &= ~(watersubdiv-1);
     wy1 &= ~(watersubdiv-1);

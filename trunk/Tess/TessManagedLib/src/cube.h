@@ -17,33 +17,6 @@ struct sqr
     uchar tag;                  // used by triggers
 };
 
-enum                            // hardcoded texture numbers
-{
-    DEFAULT_SKY = 0,
-    DEFAULT_LIQUID,
-    DEFAULT_WALL,
-    DEFAULT_FLOOR,
-    DEFAULT_CEIL
-};
-
-enum                            // static entity types
-{
-    NOTUSED = 0,                // entity slot not in use in map
-    LIGHT,                      // lightsource, attr1 = radius, attr2 = intensity
-    PLAYERSTART,                // attr1 = angle
-    I_SHELLS, I_BULLETS, I_ROCKETS, I_ROUNDS,
-    I_HEALTH, I_BOOST,
-    I_GREENARMOUR, I_YELLOWARMOUR,
-    I_QUAD,
-    TELEPORT,                   // attr1 = idx
-    TELEDEST,                   // attr1 = angle, attr2 = idx
-    MAPMODEL,                   // attr1 = angle, attr2 = idx
-    MONSTER,                    // attr1 = angle, attr2 = monstertype
-    CARROT,                     // attr1 = tag, attr2 = type
-    JUMPPAD,                    // attr1 = zpush, attr2 = ypush, attr3 = xpush
-    MAXENTTYPES
-};
-
 struct persistent_entity        // map entity
 {
     short x, y, z;              // cube aligned position
@@ -56,9 +29,7 @@ struct entity : public persistent_entity
 {
     bool spawned;               // the only dynamic state of a map entity
 };
-
-#define MAPVERSION 5            // bump if map format changes, see worldio.cpp
-
+    
 struct header                   // map file format header
 {
     char head[4];               // "CUBE"
@@ -86,8 +57,6 @@ struct vec { float x, y, z; };
 struct block { int x, y, xs, ys; };
 struct mapmodelinfo { int rad, h, zoff, snap; char *name; };
 
-enum { GUN_FIST = 0, GUN_SG, GUN_CG, GUN_RL, GUN_RIFLE, GUN_FIREBALL, GUN_ICEBALL, GUN_SLIMEBALL, GUN_BITE, NUMGUNS };
-
 struct dynent                           // players & monsters
 {
     vec o, vel;                         // origin, velocity
@@ -108,7 +77,7 @@ struct dynent                           // players & monsters
     int gunselect, gunwait;
     int lastaction, lastattackgun, lastmove;
     bool attacking;
-    int ammo[NUMGUNS];
+    int ammo[9];
     int monsterstate;                   // one of M_* below, M_NONE means human
     int mtype;                          // see monster.cpp
     dynent *enemy;                      // monster wants to kill this entity
@@ -121,53 +90,11 @@ struct dynent                           // players & monsters
 };
 
 #define SAVEGAMEVERSION 4               // bump if dynent/netprotocol changes or any other savegame/demo data
-
-enum { A_BLUE, A_GREEN, A_YELLOW };     // armour types... take 20/40/60 % off
-enum { M_NONE = 0, M_SEARCH, M_HOME, M_ATTACKING, M_PAIN, M_SLEEP, M_AIMING };  // monster states
-
 #define MAXCLIENTS 256                  // in a multiplayer game, can be arbitrarily changed
 #define MAXTRANS 5000                   // max amount of data to swallow in 1 go
 #define CUBE_SERVER_PORT 28765
 #define CUBE_SERVINFO_PORT 28766
 #define PROTOCOL_VERSION 122            // bump when protocol changes
-
-// network messages codes, c2s, c2c, s2c
-enum
-{
-    SV_INITS2C, SV_INITC2S, SV_POS, SV_TEXT, SV_SOUND, SV_CDIS,
-    SV_DIED, SV_DAMAGE, SV_SHOT, SV_FRAGS,
-    SV_TIMEUP, SV_EDITENT, SV_MAPRELOAD, SV_ITEMACC,
-    SV_MAPCHANGE, SV_ITEMSPAWN, SV_ITEMPICKUP, SV_DENIED,
-    SV_PING, SV_PONG, SV_CLIENTPING, SV_GAMEMODE,
-    SV_EDITH, SV_EDITT, SV_EDITS, SV_EDITD, SV_EDITE,
-    SV_SENDMAP, SV_RECVMAP, SV_SERVMSG, SV_ITEMLIST,
-    SV_EXT,
-};     
-
-enum { CS_ALIVE = 0, CS_DEAD, CS_LAGGED, CS_EDITING };
-
-// hardcoded sounds, defined in sounds.cfg
-enum
-{
-    S_JUMP = 0, S_LAND, S_RIFLE, S_PUNCH1, S_SG, S_CG,
-    S_RLFIRE, S_RLHIT, S_WEAPLOAD, S_ITEMAMMO, S_ITEMHEALTH,
-    S_ITEMARMOUR, S_ITEMPUP, S_ITEMSPAWN, S_TELEPORT, S_NOAMMO, S_PUPOUT,
-    S_PAIN1, S_PAIN2, S_PAIN3, S_PAIN4, S_PAIN5, S_PAIN6,
-    S_DIE1, S_DIE2,
-    S_FLAUNCH, S_FEXPLODE,
-    S_SPLASH1, S_SPLASH2,
-    S_GRUNT1, S_GRUNT2, S_RUMBLE,
-    S_PAINO,
-    S_PAINR, S_DEATHR, 
-    S_PAINE, S_DEATHE, 
-    S_PAINS, S_DEATHS,
-    S_PAINB, S_DEATHB, 
-    S_PAINP, S_PIGGR2, 
-    S_PAINH, S_DEATHH,
-    S_PAIND, S_DEATHD,
-    S_PIGR1, S_ICEBALL, S_SLIMEBALL,
-    S_JUMPPAD,
-};
 
 // vertex array format
 

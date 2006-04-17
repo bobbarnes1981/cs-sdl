@@ -158,7 +158,7 @@ void renderents()       // show sparkly thingies for map entities in edit mode
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==NOTUSED) continue;
+        if(e.type==TessLib::StaticEntity::NOTUSED) continue;
         vec v = { e.x, e.y, e.z };
         particle_splash(2, 2, 40, v);
     };
@@ -347,7 +347,7 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
     
     glPopMatrix();
 
-    if(player1->state==CS_ALIVE)
+    if(player1->state==TessLib::CSStatus::CS_ALIVE)
     {
         glPushMatrix();
         glOrtho(0, VIRTW/2, VIRTH/2, 0, -1, 1);

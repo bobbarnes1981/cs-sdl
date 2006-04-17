@@ -79,7 +79,7 @@ void updatevol()
     };
 };
 
-void playsoundc(int n) { addmsg(0, 2, SV_SOUND, n); playsound(n); };
+void playsoundc(int n) { addmsg(0, 2, TessLib::NetworkMessages::SV_SOUND, n); playsound(n); };
 
 int soundsatonce = 0, lastsoundmillis = 0;
 

@@ -151,7 +151,7 @@ void calclight()
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==LIGHT) calclightsource(e);
+        if(e.type==TessLib::StaticEntity::LIGHT) calclightsource(e);
     };
     
     block b = { 1, 1, ssize-2, ssize-2 };
@@ -190,7 +190,7 @@ void dodynlight(vec &vold, vec &v, int reach, int strength, dynent *owner)
 
     dlights.add(blockcopy(b));      // backup area before rendering in dynlight
 
-    persistent_entity l = { (int)v.x, (int)v.y, (int)v.z, reach, LIGHT, strength, 0, 0 };
+    persistent_entity l = { (int)v.x, (int)v.y, (int)v.z, reach, TessLib::StaticEntity::LIGHT, strength, 0, 0 };
     calclightsource(l);
     postlightarea(b);
 };
