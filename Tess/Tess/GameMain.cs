@@ -161,7 +161,7 @@ namespace Tess
 			{
 				TessLib.GameInit.Fatal("Unable to initialise network module");
 			}
-			TessLib.ClientGame.initclient();
+			TessLib.ClientServer.ClientGame.initclient();
 			TessLib.Bindings.initserver(dedicated, uprate, sdesc, ip, out master, passwd, maxcl);  // never returns if dedicated    
 			TessLib.GameInit.Log("world");
 			TessLib.Bindings.empty_world(7, true);
@@ -170,7 +170,7 @@ namespace Tess
 			TessLib.GameInit.Log("video: mode");
 			Video.WindowIcon();
 			Video.WindowCaption = "Tess Engine";
-			//Video.GrabInput = true;
+			//Video.GrabInput = true; 
 			Video.SetVideoModeWindowOpenGL(GameInit.ScreenWidth, GameInit.ScreenHeight);
 			
 			TessLib.GameInit.Log("video: misc");
@@ -179,7 +179,7 @@ namespace Tess
 			
 			TessLib.GameInit.Log("gl");
 				
-			TessLib.RenderGl.GlInit(GameInit.ScreenWidth, GameInit.ScreenHeight);
+			TessLib.Render.RenderGl.GlInit(GameInit.ScreenWidth, GameInit.ScreenHeight);
 
 			string dataDirectory = "";
 			string filepath = "";
@@ -192,24 +192,15 @@ namespace Tess
 			TessLib.GameInit.Log("basetex");
 			int xs = 0;
 			int ys = 0;
-//			if(!TessLib.Bindings.installtex(2, filepath + dataDirectory + "data/newchars.png", out xs, out ys, false) ||
-//				!TessLib.Bindings.installtex(3, filepath + dataDirectory + "data/martin/base.png", out xs, out ys, false) ||
-//				!TessLib.Bindings.installtex(6, filepath + dataDirectory + "data/martin/ball1.png", out xs, out ys, false) ||
-//				!TessLib.Bindings.installtex(7, filepath + dataDirectory + "data/martin/smoke.png", out xs, out ys, false) ||
-//				!TessLib.Bindings.installtex(8, filepath + dataDirectory + "data/martin/ball2.png", out xs, out ys, false) ||
-//				!TessLib.Bindings.installtex(9, filepath + dataDirectory + "data/martin/ball3.png", out xs, out ys, false) ||
-//				!TessLib.Bindings.installtex(4, filepath + dataDirectory + "data/explosion.jpg", out xs, out ys, false) ||
-//				!TessLib.Bindings.installtex(5, filepath + dataDirectory + "data/items.png", out xs, out ys, false) ||
-//				!TessLib.Bindings.installtex(1, filepath + dataDirectory + "data/crosshair.png", out xs, out ys, false)) 
-			if(!TessLib.RenderGl.InstallTexture(2, filepath + dataDirectory + "data/newchars.png", out xs, out ys, false) ||
-				!TessLib.RenderGl.InstallTexture(3, filepath + dataDirectory + "data/martin/base.png", out xs, out ys, false) ||
-				!TessLib.RenderGl.InstallTexture(6, filepath + dataDirectory + "data/martin/ball1.png", out xs, out ys, false) ||
-				!TessLib.RenderGl.InstallTexture(7, filepath + dataDirectory + "data/martin/smoke.png", out xs, out ys, false) ||
-				!TessLib.RenderGl.InstallTexture(8, filepath + dataDirectory + "data/martin/ball2.png", out xs, out ys, false) ||
-				!TessLib.RenderGl.InstallTexture(9, filepath + dataDirectory + "data/martin/ball3.png", out xs, out ys, false) ||
-				!TessLib.RenderGl.InstallTexture(4, filepath + dataDirectory + "data/explosion.jpg", out xs, out ys, false) ||
-				!TessLib.RenderGl.InstallTexture(5, filepath + dataDirectory + "data/items.png", out xs, out ys, false) ||
-				!TessLib.RenderGl.InstallTexture(1, filepath + dataDirectory + "data/crosshair.png", out xs, out ys, false)) 
+			if(!TessLib.Render.RenderGl.InstallTexture(2, filepath + dataDirectory + "data/newchars.png", out xs, out ys, false) ||
+				!TessLib.Render.RenderGl.InstallTexture(3, filepath + dataDirectory + "data/martin/base.png", out xs, out ys, false) ||
+				!TessLib.Render.RenderGl.InstallTexture(6, filepath + dataDirectory + "data/martin/ball1.png", out xs, out ys, false) ||
+				!TessLib.Render.RenderGl.InstallTexture(7, filepath + dataDirectory + "data/martin/smoke.png", out xs, out ys, false) ||
+				!TessLib.Render.RenderGl.InstallTexture(8, filepath + dataDirectory + "data/martin/ball2.png", out xs, out ys, false) ||
+				!TessLib.Render.RenderGl.InstallTexture(9, filepath + dataDirectory + "data/martin/ball3.png", out xs, out ys, false) ||
+				!TessLib.Render.RenderGl.InstallTexture(4, filepath + dataDirectory + "data/explosion.jpg", out xs, out ys, false) ||
+				!TessLib.Render.RenderGl.InstallTexture(5, filepath + dataDirectory + "data/items.png", out xs, out ys, false) ||
+				!TessLib.Render.RenderGl.InstallTexture(1, filepath + dataDirectory + "data/crosshair.png", out xs, out ys, false)) 
 		{
 				TessLib.GameInit.Fatal("could not find core textures (hint: run cube from the parent of the bin directory)");
 			}
