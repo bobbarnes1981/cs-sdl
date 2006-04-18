@@ -36,7 +36,7 @@ using Tao.Sdl;
 using Tao.OpenGl;
 using System.Runtime.InteropServices;
 
-namespace TessLib
+namespace TessLib.ClientServer
 {
 	[StructLayout(LayoutKind.Sequential, Pack=4)]
 	public struct DynamicEntity                           // players & monsters
