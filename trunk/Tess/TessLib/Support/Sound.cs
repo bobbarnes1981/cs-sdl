@@ -37,7 +37,7 @@ using Tao.OpenGl;
 using SdlDotNet;
 using System.Runtime.InteropServices;
 
-namespace TessLib
+namespace TessLib.Support
 {
 	/// <summary>
 	/// 
