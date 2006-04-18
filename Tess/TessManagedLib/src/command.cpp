@@ -5,8 +5,6 @@
 #using <mscorlib.dll>
 #using <TessLib.dll>
 
-enum { ID_VAR, ID_COMMAND, ID_ALIAS };
-
 struct ident
 {
     int type;           // one of ID_* above
@@ -30,12 +28,12 @@ void alias(char *name, char *action)
     if(!b)
     {
         name = newstring(name);
-        ident b = { ID_ALIAS, name, 0, 0, 0, 0, 0, newstring(action), true };
+        ident b = { TessLib::Support::IDCommands::ID_ALIAS, name, 0, 0, 0, 0, 0, newstring(action), true };
         idents->access(name, &b);
     }
     else
     {
-        if(b->type==ID_ALIAS) b->action = exchangestr(b->action, action);
+        if(b->type==TessLib::Support::IDCommands::ID_ALIAS) b->action = exchangestr(b->action, action);
         else conoutf("cannot redefine builtin %s with an alias", name);
     };
 };
@@ -47,7 +45,7 @@ COMMAND(alias, TessLib::Support::FunctionSignatures::ARG_2STR);
 int variable(char *name, int min, int cur, int max, int *storage, void (*fun)(), bool persist)
 {
     if(!idents) idents = new hashtable<ident>;
-    ident v = { ID_VAR, name, min, max, storage, fun, 0, 0, persist };
+    ident v = { TessLib::Support::IDCommands::ID_VAR, name, min, max, storage, fun, 0, 0, persist };
     idents->access(name, &v);
     return cur;
 };
@@ -59,13 +57,13 @@ bool identexists(char *name) { return idents->access(name)!=NULL; };
 char *getalias(char *name)
 {
     ident *i = idents->access(name);
-    return i && i->type==ID_ALIAS ? i->action : NULL;
+    return i && i->type==TessLib::Support::IDCommands::ID_ALIAS ? i->action : NULL;
 };
 
 bool addcommand(char *name, void (*fun)(), int narg)
 {
     if(!idents) idents = new hashtable<ident>;
-    ident c = { ID_COMMAND, name, 0, 0, 0, fun, narg, 0, false };
+    ident c = { TessLib::Support::IDCommands::ID_COMMAND, name, 0, 0, 0, fun, narg, 0, false };
     idents->access(name, &c);
     return false;
 };
@@ -118,8 +116,8 @@ char *lookup(char *n)                           // find value of ident reference
     ident *id = idents->access(n+1);
     if(id) switch(id->type)
     {
-        case ID_VAR: string t; itoa(t, *(id->storage)); return exchangestr(n, t);
-        case ID_ALIAS: return exchangestr(n, id->action);
+        case TessLib::Support::IDCommands::ID_VAR: string t; itoa(t, *(id->storage)); return exchangestr(n, t);
+        case TessLib::Support::IDCommands::ID_ALIAS: return exchangestr(n, id->action);
     };
     conoutf("unknown alias lookup: %s", n+1);
     return n;
@@ -157,7 +155,7 @@ int execute(char *p, bool isdown)               // all evaluation happens here, 
         }
         else switch(id->type)
         {
-            case ID_COMMAND:                    // game defined commands       
+            case TessLib::Support::IDCommands::ID_COMMAND:                    // game defined commands       
                 switch(id->narg)                // use very ad-hoc function signature, and just call it
                 { 
                     case TessLib::Support::FunctionSignatures::ARG_1INT: if(isdown) ((void (__cdecl *)(int))id->fun)(ATOI(w[1])); break;
@@ -191,7 +189,7 @@ int execute(char *p, bool isdown)               // all evaluation happens here, 
                 };
                 break;
        
-            case ID_VAR:                        // game defined variabled 
+            case TessLib::Support::IDCommands::ID_VAR:                        // game defined variabled 
                 if(isdown)
                 {
                     if(!w[1][0]) conoutf("%s = %d", c, *id->storage);      // var with no value just prints its current value
@@ -216,7 +214,7 @@ int execute(char *p, bool isdown)               // all evaluation happens here, 
                 };
                 break;
                 
-            case ID_ALIAS:                              // alias, also used as functions and (global) variables
+            case TessLib::Support::IDCommands::ID_ALIAS:                              // alias, also used as functions and (global) variables
                 for(int i = 1; i<numargs; i++)
                 {
                     sprintf_sd(t)("arg%d", i);          // set any arguments as (global) arg values so functions can access them
@@ -285,7 +283,7 @@ void writecfg()
     writeclientinfo(f);
     fprintf(f, "\n");
     enumerate(idents, ident *, id,
-        if(id->type==ID_VAR && id->persist)
+        if(id->type==TessLib::Support::IDCommands::ID_VAR && id->persist)
         {
             fprintf(f, "%s %d\n", id->name, *id->storage);
         };
@@ -294,7 +292,7 @@ void writecfg()
     writebinds(f);
     fprintf(f, "\n");
     enumerate(idents, ident *, id,
-        if(id->type==ID_ALIAS && !strstr(id->name, "nextmap_"))
+        if(id->type==TessLib::Support::IDCommands::ID_ALIAS && !strstr(id->name, "nextmap_"))
         {
             fprintf(f, "alias \"%s\" [%s]\n", id->name, id->action);
         };

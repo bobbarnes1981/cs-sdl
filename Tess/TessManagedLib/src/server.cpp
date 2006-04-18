@@ -5,8 +5,6 @@
 #using <mscorlib.dll>
 #using <TessLib.dll>
 
-//enum { ST_EMPTY, ST_LOCAL, ST_TCPIP };
-
 struct client                   // server side version of "dynent" type
 {
     int type;
