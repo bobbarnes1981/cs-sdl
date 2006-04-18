@@ -48,7 +48,7 @@ void weapon(char *a1, char *a2, char *a3)
               a3[0] ? atoi(a3) : -1);
 };
 
-COMMAND(weapon, ARG_3STR);
+COMMAND(weapon, TessLib::Support::FunctionSignatures::ARG_3STR);
 
 void createrays(vec &from, vec &to)             // create random spread of rays for the shotgun
 {

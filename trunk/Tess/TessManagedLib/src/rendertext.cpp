@@ -163,7 +163,7 @@ void draw_text(char *str, int left, int top, int gl_num)
         glTexCoord2f(in_left,  in_bottom); glVertex2i(x,            y + in_height);
         glEnd();
         
-        TessLib::RenderGl::XtraVerts += 4;
+		TessLib::Render::RenderGl::XtraVerts += 4;
         x += in_width  + 1;
     }
 }

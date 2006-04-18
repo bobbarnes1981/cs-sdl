@@ -45,8 +45,8 @@ void throttle()
 void newname(char *name) { c2sinit = false; strn0cpy(player1->name, name, 16); };
 void newteam(char *name) { c2sinit = false; strn0cpy(player1->team, name, 5); };
 
-COMMANDN(team, newteam, ARG_1STR);
-COMMANDN(name, newname, ARG_1STR);
+COMMANDN(team, newteam, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMANDN(name, newname, TessLib::Support::FunctionSignatures::ARG_1STR);
 
 void writeclientinfo(FILE *f)
 {
@@ -136,10 +136,10 @@ string ctext;
 void toserver(char *text) { conoutf("%s:\f %s", player1->name, text); strn0cpy(ctext, text, 80); };
 void echo(char *text) { conoutf("%s", text); };
 
-COMMAND(echo, ARG_VARI);
-COMMANDN(say, toserver, ARG_VARI);
-COMMANDN(connect, connects, ARG_1STR);
-COMMANDN(disconnect, trydisconnect, ARG_NONE);
+COMMAND(echo, TessLib::Support::FunctionSignatures::ARG_VARI);
+COMMANDN(say, toserver, TessLib::Support::FunctionSignatures::ARG_VARI);
+COMMANDN(connect, connects, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMANDN(disconnect, trydisconnect, TessLib::Support::FunctionSignatures::ARG_NONE);
 
 // collect c2s messages conveniently
 
@@ -172,7 +172,7 @@ bool senditemstoserver = false;     // after a map change, since server doesn't 
 
 string clientpassword;
 void password(char *p) { strcpy_s(clientpassword, p); };
-COMMAND(password, ARG_1STR);
+COMMAND(password, TessLib::Support::FunctionSignatures::ARG_1STR);
 
 bool netmapstart() { senditemstoserver = true; return clienthost!=NULL; };
 

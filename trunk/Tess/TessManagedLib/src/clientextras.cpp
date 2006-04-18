@@ -154,6 +154,6 @@ void getmap()
     conoutf("requesting map from server...");
 }
 
-COMMAND(sendmap, ARG_1STR);
-COMMAND(getmap, ARG_NONE);
+COMMAND(sendmap, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(getmap, TessLib::Support::FunctionSignatures::ARG_NONE);
 

@@ -55,7 +55,7 @@ void toggleedit()
     editing = editmode;
 };
 
-COMMANDN(edittoggle, toggleedit, ARG_NONE);
+COMMANDN(edittoggle, toggleedit, TessLib::Support::FunctionSignatures::ARG_NONE);
 
 void correctsel()                                       // ensures above invariant
 {
@@ -289,7 +289,7 @@ void editheight(int flr, int amount)
     addmsg(1, 7, TessLib::NetworkMessages::SV_EDITH, sel.x, sel.y, sel.xs, sel.ys, isfloor, amount);
 };
 
-COMMAND(editheight, ARG_2INT);
+COMMAND(editheight, TessLib::Support::FunctionSignatures::ARG_2INT);
 
 void edittexxy(int type, int t, block &sel)            
 {
@@ -353,9 +353,9 @@ void heightfield(int t) { edittype(t==0 ? TessLib::BlockTypes::FHF : TessLib::Bl
 void solid(int t)       { edittype(t==0 ? TessLib::BlockTypes::SPACE : TessLib::BlockTypes::SOLID); };
 void corner()           { edittype(TessLib::BlockTypes::CORNER); };
 
-COMMAND(heightfield, ARG_1INT);
-COMMAND(solid, ARG_1INT);
-COMMAND(corner, ARG_NONE);
+COMMAND(heightfield, TessLib::Support::FunctionSignatures::ARG_1INT);
+COMMAND(solid, TessLib::Support::FunctionSignatures::ARG_1INT);
+COMMAND(corner, TessLib::Support::FunctionSignatures::ARG_NONE);
 
 void editequalisexy(bool isfloor, block &sel)
 {
@@ -380,7 +380,7 @@ void equalize(int flr)
     addmsg(1, 6, TessLib::NetworkMessages::SV_EDITE, sel.x, sel.y, sel.xs, sel.ys, isfloor);
 };
 
-COMMAND(equalize, ARG_1INT);
+COMMAND(equalize, TessLib::Support::FunctionSignatures::ARG_1INT);
 
 void setvdeltaxy(int delta, block &sel)
 {
@@ -457,17 +457,17 @@ void newent(char *what, char *a1, char *a2, char *a3, char *a4)
     newentity(sel.x, sel.y, (int)player1->o.z, what, ATOI(a1), ATOI(a2), ATOI(a3), ATOI(a4));
 };
 
-COMMANDN(select, selectpos, ARG_4INT);
-COMMAND(edittag, ARG_1INT);
-COMMAND(replace, ARG_NONE);
-COMMAND(archvertex, ARG_3INT);
-COMMAND(arch, ARG_2INT);
-COMMAND(slope, ARG_2INT);
-COMMANDN(vdelta, setvdelta, ARG_1INT);
-COMMANDN(undo, editundo, ARG_NONE);
-COMMAND(copy, ARG_NONE);
-COMMAND(paste, ARG_NONE);
-COMMAND(edittex, ARG_2INT);
-COMMAND(newent, ARG_5STR);
+COMMANDN(select, selectpos, TessLib::Support::FunctionSignatures::ARG_4INT);
+COMMAND(edittag, TessLib::Support::FunctionSignatures::ARG_1INT);
+COMMAND(replace, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(archvertex, TessLib::Support::FunctionSignatures::ARG_3INT);
+COMMAND(arch, TessLib::Support::FunctionSignatures::ARG_2INT);
+COMMAND(slope, TessLib::Support::FunctionSignatures::ARG_2INT);
+COMMANDN(vdelta, setvdelta, TessLib::Support::FunctionSignatures::ARG_1INT);
+COMMANDN(undo, editundo, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(copy, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(paste, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(edittex, TessLib::Support::FunctionSignatures::ARG_2INT);
+COMMAND(newent, TessLib::Support::FunctionSignatures::ARG_5STR);
 
 

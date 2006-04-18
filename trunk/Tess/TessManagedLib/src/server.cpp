@@ -5,7 +5,7 @@
 #using <mscorlib.dll>
 #using <TessLib.dll>
 
-enum { ST_EMPTY, ST_LOCAL, ST_TCPIP };
+//enum { ST_EMPTY, ST_LOCAL, ST_TCPIP };
 
 struct client                   // server side version of "dynent" type
 {
@@ -62,14 +62,14 @@ void send(int n, ENetPacket *packet)
 	if(!packet) return;
     switch(clients[n].type)
     {
-        case ST_TCPIP:
+	case TessLib::ClientServer::ServerType::ST_TCPIP:
         {
             enet_peer_send(clients[n].peer, 0, packet);
             bsend += packet->dataLength;
             break;
         };
 
-        case ST_LOCAL:
+        case TessLib::ClientServer::ServerType::ST_LOCAL:
             localservertoclient(packet->data, packet->dataLength);
             break;
 
@@ -107,7 +107,7 @@ void disconnect_client(int n, char *reason)
 {
     printf("disconnecting client (%s) [%s]\n", clients[n].hostname, reason);
     enet_peer_disconnect(clients[n].peer);
-    clients[n].type = ST_EMPTY;
+	clients[n].type = TessLib::ClientServer::ServerType::ST_EMPTY;
     send2(true, -1, TessLib::NetworkMessages::SV_CDIS, n);
 };
 
@@ -134,7 +134,7 @@ bool vote(char *map, int reqmode, int sender)
     strcpy_s(clients[sender].mapvote, map);
     clients[sender].modevote = reqmode;
     int yes = 0, no = 0; 
-    loopv(clients) if(clients[i].type!=ST_EMPTY)
+    loopv(clients) if(clients[i].type!=TessLib::ClientServer::ServerType::ST_EMPTY)
     {
         if(clients[i].mapvote[0]) { if(strcmp(clients[i].mapvote, map)==0 && clients[i].modevote==reqmode) yes++; else no++; }
         else no++;
@@ -221,7 +221,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
         case TessLib::NetworkMessages::SV_POS:
         {
             cn = getint(p);
-            if(cn<0 || cn>=clients.length() || clients[cn].type==ST_EMPTY)
+            if(cn<0 || cn>=clients.length() || clients[cn].type==TessLib::ClientServer::ServerType::ST_EMPTY)
             {
                 disconnect_client(sender, "client num");
                 return;
@@ -304,7 +304,7 @@ void localclienttoserver(ENetPacket *packet)
 
 client &addclient()
 {
-    loopv(clients) if(clients[i].type==ST_EMPTY) return clients[i];
+    loopv(clients) if(clients[i].type==TessLib::ClientServer::ServerType::ST_EMPTY) return clients[i];
     return clients.add();
 };
 
@@ -322,7 +322,7 @@ void startintermission() { minremain = 0; checkintermission(); };
 
 void resetserverifempty()
 {
-    loopv(clients) if(clients[i].type!=ST_EMPTY) return;
+    loopv(clients) if(clients[i].type!=TessLib::ClientServer::ServerType::ST_EMPTY) return;
     clients.setsize(0);
     smapname[0] = 0;
     resetvotes();
@@ -355,7 +355,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
     if(interm && seconds>interm)
     {
         interm = 0;
-        loopv(clients) if(clients[i].type!=ST_EMPTY)
+        loopv(clients) if(clients[i].type!=TessLib::ClientServer::ServerType::ST_EMPTY)
         {
             send2(true, i, TessLib::NetworkMessages::SV_MAPRELOAD, 0);    // ask a client to trigger map reload
             mapreload = true;
@@ -368,13 +368,13 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
     if(!isdedicated) return;     // below is network only
 
 	int numplayers = 0;
-	loopv(clients) if(clients[i].type!=ST_EMPTY) ++numplayers;
+	loopv(clients) if(clients[i].type!=TessLib::ClientServer::ServerType::ST_EMPTY) ++numplayers;
 	serverms(mode, numplayers, minremain, smapname, seconds, clients.length()>=maxclients);
 
     if(seconds-laststatus>60)   // display bandwidth stats, useful for server ops
     {
         nonlocalclients = 0;
-        loopv(clients) if(clients[i].type==ST_TCPIP) nonlocalclients++;
+        loopv(clients) if(clients[i].type==TessLib::ClientServer::ServerType::ST_TCPIP) nonlocalclients++;
         laststatus = seconds;     
         if(nonlocalclients || bsend || brec) printf("status: %d remote clients, %.1f send, %.1f rec (K/sec)\n", nonlocalclients, bsend/60.0f/1024, brec/60.0f/1024);
         bsend = brec = 0;
@@ -388,7 +388,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             case ENET_EVENT_TYPE_CONNECT:
             {
                 client &c = addclient();
-                c.type = ST_TCPIP;
+                c.type = TessLib::ClientServer::ServerType::ST_TCPIP;
                 c.peer = event.peer;
                 c.peer->data = (void *)(&c-&clients[0]);
                 char hn[1024];
@@ -406,7 +406,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             case ENET_EVENT_TYPE_DISCONNECT: 
                 if((int)event.peer->data<0) break;
                 printf("disconnected client (%s)\n", clients[(int)event.peer->data].hostname);
-                clients[(int)event.peer->data].type = ST_EMPTY;
+                clients[(int)event.peer->data].type = TessLib::ClientServer::ServerType::ST_EMPTY;
                 send2(true, -1, TessLib::NetworkMessages::SV_CDIS, (int)event.peer->data);
                 event.peer->data = (void *)-1;
                 break;
@@ -429,13 +429,13 @@ void cleanupserver()
 
 void localdisconnect()
 {
-    loopv(clients) if(clients[i].type==ST_LOCAL) clients[i].type = ST_EMPTY;
+    loopv(clients) if(clients[i].type==TessLib::ClientServer::ServerType::ST_LOCAL) clients[i].type = TessLib::ClientServer::ServerType::ST_EMPTY;
 };
 
 void localconnect()
 {
     client &c = addclient();
-    c.type = ST_LOCAL;
+    c.type = TessLib::ClientServer::ServerType::ST_LOCAL;
     strcpy_s(c.hostname, "local");
     send_welcome(&c-&clients[0]); 
 };

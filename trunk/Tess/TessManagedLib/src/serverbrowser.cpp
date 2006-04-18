@@ -287,9 +287,9 @@ void updatefrommaster()
     servermenu();
 };
 
-COMMAND(addserver, ARG_1STR);
-COMMAND(servermenu, ARG_NONE);
-COMMAND(updatefrommaster, ARG_NONE);
+COMMAND(addserver, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(servermenu, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(updatefrommaster, TessLib::Support::FunctionSignatures::ARG_NONE);
 
 void writeservercfg()
 {

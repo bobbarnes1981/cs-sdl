@@ -87,7 +87,7 @@ void render_particles(int time)
         glTexCoord2f(1.0, 0.0); glVertex3d(p->o.x+( right.x-up.x)*sz, p->o.z+( right.y-up.y)*sz, p->o.y+( right.z-up.z)*sz);
         glTexCoord2f(0.0, 0.0); glVertex3d(p->o.x+(-right.x-up.x)*sz, p->o.z+(-right.y-up.y)*sz, p->o.y+(-right.z-up.z)*sz);
         glEnd();
-        TessLib::RenderGl::XtraVerts += 4;
+        TessLib::Render::RenderGl::XtraVerts += 4;
 
         if(numrender++>maxparticles || (p->fade -= time)<0)
         {

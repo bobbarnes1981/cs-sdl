@@ -355,9 +355,9 @@ void demoplaybackstep()
 
 void stopn() { if(demoplayback) stopreset(); else stop(); conoutf("demo stopped"); };
 
-COMMAND(record, ARG_1STR);
-COMMAND(demo, ARG_1STR);
-COMMANDN(stop, stopn, ARG_NONE);
+COMMAND(record, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(demo, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMANDN(stop, stopn, TessLib::Support::FunctionSignatures::ARG_NONE);
 
-COMMAND(savegame, ARG_1STR);
-COMMAND(loadgame, ARG_1STR);
+COMMAND(savegame, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(loadgame, TessLib::Support::FunctionSignatures::ARG_1STR);
