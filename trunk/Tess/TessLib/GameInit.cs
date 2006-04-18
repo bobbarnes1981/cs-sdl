@@ -167,6 +167,42 @@ namespace TessLib
 		static int FONTH = 64;
 
 		/// <summary>
+		/// determines number of mips there can be
+		/// </summary>
+		public static int SmallestFactor
+		{
+			get
+			{
+				return SMALLEST_FACTOR;
+			}
+		}
+		static int SMALLEST_FACTOR = 6;
+
+		/// <summary>
+		/// 10 is already insane
+		/// </summary>
+		public static int LargestFactor
+		{
+			get
+			{
+				return LARGEST_FACTOR;
+			}
+		}
+		static int LARGEST_FACTOR = 11;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int DefaultFactor
+		{
+			get
+			{
+				return DEFAULT_FACTOR;
+			}
+		}
+		static int DEFAULT_FACTOR = 8;
+
+		/// <summary>
 		/// 
 		/// </summary>
 		public GameInit()
