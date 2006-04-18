@@ -154,6 +154,9 @@ namespace TessLib
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static int FontH
 		{
 			get
@@ -163,6 +166,9 @@ namespace TessLib
 		}
 		static int FONTH = 64;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public GameInit()
 		{
 			//
@@ -170,6 +176,9 @@ namespace TessLib
 			//
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static int ScreenWidth
 		{
 			get
@@ -181,6 +190,10 @@ namespace TessLib
 				screenWidth = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public static int ScreenHeight
 		{
 			get
@@ -192,20 +205,39 @@ namespace TessLib
 				screenHeight = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="input"></param>
 		public static void Log(string input)
 		{
 			Console.WriteLine("init: {0}", input);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
+		/// <param name="o"></param>
 		public static void Fatal(string s, string o)
 		{
 			Console.WriteLine(s + o + Sdl.SDL_GetError());
 			Cleanup(s + o + Sdl.SDL_GetError());
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
 		public static void Fatal(string s)
 		{
 			Fatal(s, "");
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public static DynamicEntity Player1
 		{
 			get
@@ -217,6 +249,10 @@ namespace TessLib
 				Marshal.StructureToPtr(value, player1Ptr, false);
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public static IntPtr Player1Ptr
 		{
 			get
@@ -228,6 +264,11 @@ namespace TessLib
 				player1Ptr = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="msg"></param>
 		public static void Cleanup(string msg)
 		{	
 			Bindings.stop();
@@ -244,6 +285,10 @@ namespace TessLib
 			}
 			Events.QuitApplication();
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public static void Quit()
 		{
 			Bindings.writeservercfg();
