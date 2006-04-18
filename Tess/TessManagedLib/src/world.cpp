@@ -61,7 +61,7 @@ COMMAND(trigger, TessLib::Support::FunctionSignatures::ARG_2INT);
 
 void remip(block &b, int level)
 {
-    if(level>=SMALLEST_FACTOR) return;
+    if(level>=TessLib::GameInit::SmallestFactor) return;
     int lighterr = getvar("lighterror")*3;
     sqr *w = wmip[level];
     sqr *v = wmip[level+1];
@@ -287,8 +287,8 @@ int findentity(int type, int index)
     loopj(index) if(ents[j].type==type) return j;
     return -1;
 };
-
-sqr *wmip[LARGEST_FACTOR*2];
+sqr *wmip[11*2];
+//sqr *wmip[TessLib::GameInit::LargestFactor*2];
 
 void setupworld(int factor)
 {
@@ -296,7 +296,7 @@ void setupworld(int factor)
     cubicsize = ssize*ssize;
     mipsize = cubicsize*134/100;
     sqr *w = world = (sqr *)alloc(mipsize*sizeof(sqr));
-    loopi(LARGEST_FACTOR*2) { wmip[i] = w; w += cubicsize>>(i*2); };
+    loopi(TessLib::GameInit::LargestFactor*2) { wmip[i] = w; w += cubicsize>>(i*2); };
 };
 
 void empty_world(int factor, bool force)    // main empty world creation routine, if passed factor -1 will enlarge old world by 1
@@ -307,8 +307,8 @@ void empty_world(int factor, bool force)    // main empty world creation routine
     sqr *oldworld = world;
     bool copy = false;
     if(oldworld && factor<0) { factor = sfactor+1; copy = true; };
-    if(factor<SMALLEST_FACTOR) factor = SMALLEST_FACTOR;
-    if(factor>LARGEST_FACTOR) factor = LARGEST_FACTOR;
+    if(factor<TessLib::GameInit::SmallestFactor) factor = TessLib::GameInit::SmallestFactor;
+    if(factor>TessLib::GameInit::LargestFactor) factor = TessLib::GameInit::LargestFactor;
     setupworld(factor);
     
     loop(x,ssize) loop(y,ssize)

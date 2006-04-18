@@ -65,8 +65,8 @@ const int MAX_LOD = 1000;
 
 int lod = 40, lodtop, lodbot, lodleft, lodright;
 int min_lod;
-
-int stats[LARGEST_FACTOR];
+int stats[11];
+//int stats[TessLib::GameInit::LargestFactor];
 
 // detect those cases where a higher mip solid has a visible wall next to lower mip cubes
 // (used for wall rendering below)
@@ -250,7 +250,7 @@ void distlod(int &low, int &high, int angle, float widef)
 
 void render_world(float vx, float vy, float vh, int yaw, int pitch, float fov, int w, int h)
 {
-    loopi(LARGEST_FACTOR) stats[i] = 0;
+    loopi(TessLib::GameInit::LargestFactor) stats[i] = 0;
     min_lod = MIN_LOD+abs(pitch)/12;
     yaw = 360-yaw;
     float widef = fov/75.0f;

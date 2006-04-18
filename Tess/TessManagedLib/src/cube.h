@@ -46,9 +46,6 @@ struct header                   // map file format header
 #define SWS(w,x,y,s) (&(w)[(y)*(s)+(x)])
 #define SW(w,x,y) SWS(w,x,y,ssize)
 #define S(x,y) SW(world,x,y)            // convenient lookup of a lowest mip cube
-#define SMALLEST_FACTOR 6               // determines number of mips there can be
-#define DEFAULT_FACTOR 8
-#define LARGEST_FACTOR 11               // 10 is already insane
 #define SOLID(x) ((x)->type==TessLib::BlockTypes::SOLID)
 #define MINBORD 2                       // 2 cubes from the edge of the world are always solid
 #define OUTBORD(x,y) ((x)<MINBORD || (y)<MINBORD || (x)>=ssize-MINBORD || (y)>=ssize-MINBORD)
@@ -181,7 +178,6 @@ extern bool demoplayback;
 #include <GL/glext.h>
 
 #include <SDL.h>
-#include <SDL_image.h>
 
 #include <enet/enet.h>
 
