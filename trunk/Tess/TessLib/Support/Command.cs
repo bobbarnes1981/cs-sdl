@@ -40,6 +40,16 @@ using System.Runtime.InteropServices;
 namespace TessLib.Support
 {
 	/// <summary>
+	/// 
+	/// </summary>
+	public enum IDCommands
+	{ 
+		ID_VAR, 
+		ID_COMMAND, 
+		ID_ALIAS 
+	}
+
+	/// <summary>
 	/// function signatures for script functions, see command.cpp
 	/// </summary>
 	public enum FunctionSignatures 
