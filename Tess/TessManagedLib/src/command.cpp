@@ -40,7 +40,7 @@ void alias(char *name, char *action)
     };
 };
 
-COMMAND(alias, ARG_2STR);
+COMMAND(alias, TessLib::Support::FunctionSignatures::ARG_2STR);
 
 // variable's and commands are registered through globals, see cube.h
 
@@ -160,22 +160,22 @@ int execute(char *p, bool isdown)               // all evaluation happens here, 
             case ID_COMMAND:                    // game defined commands       
                 switch(id->narg)                // use very ad-hoc function signature, and just call it
                 { 
-                    case ARG_1INT: if(isdown) ((void (__cdecl *)(int))id->fun)(ATOI(w[1])); break;
-                    case ARG_2INT: if(isdown) ((void (__cdecl *)(int, int))id->fun)(ATOI(w[1]), ATOI(w[2])); break;
-                    case ARG_3INT: if(isdown) ((void (__cdecl *)(int, int, int))id->fun)(ATOI(w[1]), ATOI(w[2]), ATOI(w[3])); break;
-                    case ARG_4INT: if(isdown) ((void (__cdecl *)(int, int, int, int))id->fun)(ATOI(w[1]), ATOI(w[2]), ATOI(w[3]), ATOI(w[4])); break;
-                    case ARG_NONE: if(isdown) ((void (__cdecl *)())id->fun)(); break;
-                    case ARG_1STR: if(isdown) ((void (__cdecl *)(char *))id->fun)(w[1]); break;
-                    case ARG_2STR: if(isdown) ((void (__cdecl *)(char *, char *))id->fun)(w[1], w[2]); break;
-                    case ARG_3STR: if(isdown) ((void (__cdecl *)(char *, char *, char*))id->fun)(w[1], w[2], w[3]); break;
-                    case ARG_5STR: if(isdown) ((void (__cdecl *)(char *, char *, char*, char*, char*))id->fun)(w[1], w[2], w[3], w[4], w[5]); break;
-                    case ARG_DOWN: ((void (__cdecl *)(bool))id->fun)(isdown); break;
-                    case ARG_DWN1: ((void (__cdecl *)(bool, char *))id->fun)(isdown, w[1]); break;
-                    case ARG_1EXP: if(isdown) val = ((int (__cdecl *)(int))id->fun)(execute(w[1])); break;
-                    case ARG_2EXP: if(isdown) val = ((int (__cdecl *)(int, int))id->fun)(execute(w[1]), execute(w[2])); break;
-                    case ARG_1EST: if(isdown) val = ((int (__cdecl *)(char *))id->fun)(w[1]); break;
-                    case ARG_2EST: if(isdown) val = ((int (__cdecl *)(char *, char *))id->fun)(w[1], w[2]); break;
-                    case ARG_VARI: if(isdown)
+                    case TessLib::Support::FunctionSignatures::ARG_1INT: if(isdown) ((void (__cdecl *)(int))id->fun)(ATOI(w[1])); break;
+                    case TessLib::Support::FunctionSignatures::ARG_2INT: if(isdown) ((void (__cdecl *)(int, int))id->fun)(ATOI(w[1]), ATOI(w[2])); break;
+                    case TessLib::Support::FunctionSignatures::ARG_3INT: if(isdown) ((void (__cdecl *)(int, int, int))id->fun)(ATOI(w[1]), ATOI(w[2]), ATOI(w[3])); break;
+                    case TessLib::Support::FunctionSignatures::ARG_4INT: if(isdown) ((void (__cdecl *)(int, int, int, int))id->fun)(ATOI(w[1]), ATOI(w[2]), ATOI(w[3]), ATOI(w[4])); break;
+                    case TessLib::Support::FunctionSignatures::ARG_NONE: if(isdown) ((void (__cdecl *)())id->fun)(); break;
+                    case TessLib::Support::FunctionSignatures::ARG_1STR: if(isdown) ((void (__cdecl *)(char *))id->fun)(w[1]); break;
+                    case TessLib::Support::FunctionSignatures::ARG_2STR: if(isdown) ((void (__cdecl *)(char *, char *))id->fun)(w[1], w[2]); break;
+                    case TessLib::Support::FunctionSignatures::ARG_3STR: if(isdown) ((void (__cdecl *)(char *, char *, char*))id->fun)(w[1], w[2], w[3]); break;
+                    case TessLib::Support::FunctionSignatures::ARG_5STR: if(isdown) ((void (__cdecl *)(char *, char *, char*, char*, char*))id->fun)(w[1], w[2], w[3], w[4], w[5]); break;
+                    case TessLib::Support::FunctionSignatures::ARG_DOWN: ((void (__cdecl *)(bool))id->fun)(isdown); break;
+                    case TessLib::Support::FunctionSignatures::ARG_DWN1: ((void (__cdecl *)(bool, char *))id->fun)(isdown, w[1]); break;
+                    case TessLib::Support::FunctionSignatures::ARG_1EXP: if(isdown) val = ((int (__cdecl *)(int))id->fun)(execute(w[1])); break;
+                    case TessLib::Support::FunctionSignatures::ARG_2EXP: if(isdown) val = ((int (__cdecl *)(int, int))id->fun)(execute(w[1]), execute(w[2])); break;
+                    case TessLib::Support::FunctionSignatures::ARG_1EST: if(isdown) val = ((int (__cdecl *)(char *))id->fun)(w[1]); break;
+                    case TessLib::Support::FunctionSignatures::ARG_2EST: if(isdown) val = ((int (__cdecl *)(char *, char *))id->fun)(w[1], w[2]); break;
+                    case TessLib::Support::FunctionSignatures::ARG_VARI: if(isdown)
                     {
                         string r;               // limit, remove
                         r[0] = 0;
@@ -302,7 +302,7 @@ void writecfg()
     fclose(f);
 };
 
-COMMAND(writecfg, ARG_NONE);
+COMMAND(writecfg, TessLib::Support::FunctionSignatures::ARG_NONE);
 
 // below the commands that implement a small imperative language. thanks to the semantics of
 // () and [] expressions, any control construct can be defined trivially.
@@ -338,28 +338,28 @@ void at(char *s, char *pos)
     concat(s);
 };
 
-COMMANDN(loop, loopa, ARG_2STR);
-COMMANDN(while, whilea, ARG_2STR);
-COMMANDN(if, ifthen, ARG_3STR); 
-COMMAND(onrelease, ARG_DWN1);
-COMMAND(exec, ARG_1STR);
-COMMAND(concat, ARG_VARI);
-COMMAND(concatword, ARG_VARI);
-COMMAND(at, ARG_2STR);
-COMMAND(listlen, ARG_1EST);
+COMMANDN(loop, loopa, TessLib::Support::FunctionSignatures::ARG_2STR);
+COMMANDN(while, whilea, TessLib::Support::FunctionSignatures::ARG_2STR);
+COMMANDN(if, ifthen, TessLib::Support::FunctionSignatures::ARG_3STR); 
+COMMAND(onrelease, TessLib::Support::FunctionSignatures::ARG_DWN1);
+COMMAND(exec, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(concat, TessLib::Support::FunctionSignatures::ARG_VARI);
+COMMAND(concatword, TessLib::Support::FunctionSignatures::ARG_VARI);
+COMMAND(at, TessLib::Support::FunctionSignatures::ARG_2STR);
+COMMAND(listlen, TessLib::Support::FunctionSignatures::ARG_1EST);
 
-int add(int a, int b)   { return a+b; };         COMMANDN(+, add, ARG_2EXP);
-int mul(int a, int b)   { return a*b; };         COMMANDN(*, mul, ARG_2EXP);
-int sub(int a, int b)   { return a-b; };         COMMANDN(-, sub, ARG_2EXP);
-int divi(int a, int b)  { return b ? a/b : 0; }; COMMANDN(div, divi, ARG_2EXP);
-int mod(int a, int b)   { return b ? a%b : 0; }; COMMAND(mod, ARG_2EXP);
-int equal(int a, int b) { return (int)(a==b); }; COMMANDN(=, equal, ARG_2EXP);
-int lt(int a, int b)    { return (int)(a<b); };  COMMANDN(<, lt, ARG_2EXP);
-int gt(int a, int b)    { return (int)(a>b); };  COMMANDN(>, gt, ARG_2EXP);
+int add(int a, int b)   { return a+b; };         COMMANDN(+, add, TessLib::Support::FunctionSignatures::ARG_2EXP);
+int mul(int a, int b)   { return a*b; };         COMMANDN(*, mul, TessLib::Support::FunctionSignatures::ARG_2EXP);
+int sub(int a, int b)   { return a-b; };         COMMANDN(-, sub, TessLib::Support::FunctionSignatures::ARG_2EXP);
+int divi(int a, int b)  { return b ? a/b : 0; }; COMMANDN(div, divi, TessLib::Support::FunctionSignatures::ARG_2EXP);
+int mod(int a, int b)   { return b ? a%b : 0; }; COMMAND(mod, TessLib::Support::FunctionSignatures::ARG_2EXP);
+int equal(int a, int b) { return (int)(a==b); }; COMMANDN(=, equal, TessLib::Support::FunctionSignatures::ARG_2EXP);
+int lt(int a, int b)    { return (int)(a<b); };  COMMANDN(<, lt, TessLib::Support::FunctionSignatures::ARG_2EXP);
+int gt(int a, int b)    { return (int)(a>b); };  COMMANDN(>, gt, TessLib::Support::FunctionSignatures::ARG_2EXP);
 
-int strcmpa(char *a, char *b) { return strcmp(a,b)==0; };  COMMANDN(strcmp, strcmpa, ARG_2EST);
+int strcmpa(char *a, char *b) { return strcmp(a,b)==0; };  COMMANDN(strcmp, strcmpa, TessLib::Support::FunctionSignatures::ARG_2EST);
 
-int rndn(int a)    { return a>0 ? rnd(a) : 0; };  COMMANDN(rnd, rndn, ARG_1EXP);
+int rndn(int a)    { return a>0 ? rnd(a) : 0; };  COMMANDN(rnd, rndn, TessLib::Support::FunctionSignatures::ARG_1EXP);
 
-int explastmillis() { return lastmillis; };  COMMANDN(millis, explastmillis, ARG_1EXP);
+int explastmillis() { return lastmillis; };  COMMANDN(millis, explastmillis, TessLib::Support::FunctionSignatures::ARG_1EXP);
 

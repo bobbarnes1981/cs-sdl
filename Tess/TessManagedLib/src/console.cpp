@@ -21,7 +21,7 @@ void setconskip(int n)
     if(conskip<0) conskip = 0;
 };
 
-COMMANDN(conskip, setconskip, ARG_1INT);
+COMMANDN(conskip, setconskip, TessLib::Support::FunctionSignatures::ARG_1INT);
 
 void conline(const char *sf, bool highlight)        // add a line to the console buffer
 {
@@ -87,7 +87,7 @@ void keymap(char *code, char *key, char *action)
     keyms[numkm++].action = newstringbuf(action);
 };
 
-COMMAND(keymap, ARG_3STR);
+COMMAND(keymap, TessLib::Support::FunctionSignatures::ARG_3STR);
 
 void bindkey(char *key, char *action)
 {
@@ -100,12 +100,11 @@ void bindkey(char *key, char *action)
     conoutf("unknown key \"%s\"", key);   
 };
 
-COMMANDN(bind, bindkey, ARG_2STR);
+COMMANDN(bind, bindkey, TessLib::Support::FunctionSignatures::ARG_2STR);
 
 void saycommand(char *init)                         // turns input to the command line on or off
 {
 	SdlDotNet::Keyboard::UnicodeEnabled = (saycommandon = (init!=NULL));
-    //SDL_EnableUNICODE(saycommandon = (init!=NULL));
     if(!editmode) SdlDotNet::Keyboard::KeyRepeat = saycommandon;
     if(!init) init = "";
     strcpy_s(commandbuf, init);
@@ -113,8 +112,8 @@ void saycommand(char *init)                         // turns input to the comman
 
 void mapmsg(char *s) { strn0cpy(hdr.maptitle, s, 128); };
 
-COMMAND(saycommand, ARG_VARI);
-COMMAND(mapmsg, ARG_1STR);
+COMMAND(saycommand, TessLib::Support::FunctionSignatures::ARG_VARI);
+COMMAND(mapmsg, TessLib::Support::FunctionSignatures::ARG_1STR);
 
 #ifndef WIN32
 #include <X11/Xlib.h>
@@ -168,7 +167,7 @@ void history(int n)
     };
 };
 
-COMMAND(history, ARG_1INT);
+COMMAND(history, TessLib::Support::FunctionSignatures::ARG_1INT);
 
 void keypress(int code, bool isdown, int cooked)
 {

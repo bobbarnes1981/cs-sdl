@@ -27,7 +27,7 @@ void lightray(float bx, float by, persistent_entity &light)     // done in realt
     int stepy = (int)(dy/(float)steps*PRECF);
     int stepl = fast_f2nat(l/(float)steps); // incorrect: light will fade quicker if near edge of the world
 
-	if(TessLib::RenderGl::HasOverBright)
+	if(TessLib::Render::RenderGl::HasOverBright)
     {
         l /= lightscale;
         stepl /= lightscale;

@@ -22,10 +22,10 @@ VAR(soundbufferlen, 128, 1024, 4096);
 
 void music(char *name)
 {
-	TessLib::Sound::Music(name);
+	TessLib::Support::Sound::Music(name);
 };
 
-COMMAND(music, ARG_1STR);
+COMMAND(music, TessLib::Support::FunctionSignatures::ARG_1STR);
 
 vector<Mix_Chunk *> samples;
 
@@ -39,7 +39,7 @@ int registersound(char *name)
     return samples.length()-1;
 };
 
-COMMAND(registersound, ARG_1EST);
+COMMAND(registersound, TessLib::Support::FunctionSignatures::ARG_1EST);
 
 VAR(stereo, 0, 1, 1);
 
@@ -108,4 +108,4 @@ void playsound(int n, vec *loc)
 };
 
 void sound(int n) { playsound(n, NULL); };
-COMMAND(sound, ARG_1INT);
+COMMAND(sound, TessLib::Support::FunctionSignatures::ARG_1INT);

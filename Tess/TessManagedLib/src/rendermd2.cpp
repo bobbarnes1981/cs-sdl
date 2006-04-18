@@ -139,7 +139,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
     if(displaylist && frame==0 && range==1)
     {
 		glCallList(displaylist);
-		TessLib::RenderGl::XtraVerts += displaylistverts;
+		TessLib::Render::RenderGl::XtraVerts += displaylistverts;
     }
     else
     {
@@ -147,7 +147,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 		{
 			static int displaylistn = 10;
 			glNewList(displaylist = displaylistn++, GL_COMPILE);
-			displaylistverts = TessLib::RenderGl::XtraVerts;
+			displaylistverts = TessLib::Render::RenderGl::XtraVerts;
 		};
 		
 		int time = lastmillis-basetime;
@@ -178,7 +178,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 				glVertex3f(ip(x), ip(z), ip(y));
 			};
 
-			TessLib::RenderGl::XtraVerts += numVertex;
+			TessLib::Render::RenderGl::XtraVerts += numVertex;
 
 			glEnd();
 		};
@@ -186,7 +186,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 		if(displaylist)
 		{
 			glEndList();
-			displaylistverts = TessLib::RenderGl::XtraVerts-displaylistverts;
+			displaylistverts = TessLib::Render::RenderGl::XtraVerts-displaylistverts;
 		};
 	};
 
@@ -205,7 +205,7 @@ void delayedload(md2 *m)
         if(!m->load(path(name1))) TessLib::GameInit::Fatal("loadmodel: ", name1);
         sprintf_sd(name2)("packages/models/%s/skin.jpg", m->loadname);
         int xs, ys;
-		TessLib::RenderGl::InstallTexture(FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
+		TessLib::Render::RenderGl::InstallTexture(FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
         m->loaded = true;
     };
 };
@@ -238,8 +238,8 @@ void mapmodelreset() { mapmodels.setsize(0); };
 
 mapmodelinfo &getmminfo(int i) { return i<mapmodels.length() ? mapmodels[i]->mmi : *(mapmodelinfo *)0; };
 
-COMMAND(mapmodel, ARG_5STR);
-COMMAND(mapmodelreset, ARG_NONE);
+COMMAND(mapmodel, TessLib::Support::FunctionSignatures::ARG_5STR);
+COMMAND(mapmodelreset, TessLib::Support::FunctionSignatures::ARG_NONE);
 
 void rendermodel(char *mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime)
 {

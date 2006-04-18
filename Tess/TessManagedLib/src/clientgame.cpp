@@ -10,7 +10,7 @@ VAR(gamemode, 1, 0, 0);
 VARF(gamespeed, 10, 100, 1000, if(multiplayer()) gamespeed = 100);
 
 void mode(int n) { addmsg(1, 2, TessLib::NetworkMessages::SV_GAMEMODE, nextmode = n); };
-COMMAND(mode, ARG_1INT);
+COMMAND(mode, TessLib::Support::FunctionSignatures::ARG_1INT);
 
 bool intermission = false;
 
@@ -221,7 +221,7 @@ void respawn()
 int sleepwait = 0;
 string sleepcmd;
 void sleepf(char *msec, char *cmd) { sleepwait = atoi(msec)+lastmillis; strcpy_s(sleepcmd, cmd); };
-COMMANDN(sleep, sleepf, ARG_2STR);
+COMMANDN(sleep, sleepf, TessLib::Support::FunctionSignatures::ARG_2STR);
 
 void updateworld(int millis)        // main game update loop
 {
@@ -323,13 +323,13 @@ void attack(bool on)
 
 void jumpn(bool on) { if(!intermission && (player1->jumpnext = on)) respawn(); };
 
-COMMAND(backward, ARG_DOWN);
-COMMAND(forward, ARG_DOWN);
-COMMAND(left, ARG_DOWN);
-COMMAND(right, ARG_DOWN);
-COMMANDN(jump, jumpn, ARG_DOWN);
-COMMAND(attack, ARG_DOWN);
-COMMAND(showscores, ARG_DOWN);
+COMMAND(backward, TessLib::Support::FunctionSignatures::ARG_DOWN);
+COMMAND(forward, TessLib::Support::FunctionSignatures::ARG_DOWN);
+COMMAND(left, TessLib::Support::FunctionSignatures::ARG_DOWN);
+COMMAND(right, TessLib::Support::FunctionSignatures::ARG_DOWN);
+COMMANDN(jump, jumpn, TessLib::Support::FunctionSignatures::ARG_DOWN);
+COMMAND(attack, TessLib::Support::FunctionSignatures::ARG_DOWN);
+COMMAND(showscores, TessLib::Support::FunctionSignatures::ARG_DOWN);
 
 void fixplayer1range()
 {
@@ -463,7 +463,7 @@ void startmap(char *name)   // called just after a map load
     conoutf("game mode is %s", modestr(gamemode));
 }; 
 
-COMMANDN(map, changemap, ARG_1STR);
+COMMANDN(map, changemap, TessLib::Support::FunctionSignatures::ARG_1STR);
 
 void quit()                     // normal exit
 {
@@ -475,5 +475,5 @@ void screenshot()
 	TessLib::GameInit::Screenshot();
 };
 
-COMMAND(screenshot, ARG_NONE);
-COMMAND(quit, ARG_NONE);
+COMMAND(screenshot, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(quit, TessLib::Support::FunctionSignatures::ARG_NONE);

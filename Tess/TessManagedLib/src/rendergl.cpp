@@ -32,12 +32,12 @@ void purgetextures()
 
 void texturereset() 
 {
-	TessLib::RenderGl::TextureReset(); 
+	TessLib::Render::RenderGl::TextureReset(); 
 };
 
 void texture(char *aframe, char *name)
 {
-	int num = TessLib::RenderGl::CurrentTextureNumber++, frame = atoi(aframe);
+	int num = TessLib::Render::RenderGl::CurrentTextureNumber++, frame = atoi(aframe);
     if(num<0 || num>=256 || frame<0 || frame>=MAXFRAMES) return;
     mapping[num][frame] = 1;
     char *n = mapname[num][frame];
@@ -45,8 +45,8 @@ void texture(char *aframe, char *name)
     path(n);
 };
 
-COMMAND(texturereset, ARG_NONE);
-COMMAND(texture, ARG_2STR);
+COMMAND(texturereset, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(texture, TessLib::Support::FunctionSignatures::ARG_2STR);
 
 int lookuptexture(int tex, int &xs, int &ys)
 {
@@ -63,7 +63,7 @@ int lookuptexture(int tex, int &xs, int &ys)
     xs = ys = 16;
     if(!tid) return 1;                  // crosshair :)
 
-    loopi(TessLib::RenderGl::CurrentTextureNumber)       // lazily happens once per "texture" command, basically
+    loopi(TessLib::Render::RenderGl::CurrentTextureNumber)       // lazily happens once per "texture" command, basically
     {
         if(strcmp(mapname[tex][frame], texname[i])==0)
         {
@@ -74,19 +74,19 @@ int lookuptexture(int tex, int &xs, int &ys)
         };
     };
 
-    if(TessLib::RenderGl::CurrentTextureNumber==MAXTEX) TessLib::GameInit::Fatal("loaded too many textures");
+    if(TessLib::Render::RenderGl::CurrentTextureNumber==MAXTEX) TessLib::GameInit::Fatal("loaded too many textures");
 
-    int tnum = TessLib::RenderGl::CurrentTextureNumber+FIRSTTEX;
-    strcpy_s(texname[TessLib::RenderGl::CurrentTextureNumber], mapname[tex][frame]);
+    int tnum = TessLib::Render::RenderGl::CurrentTextureNumber+FIRSTTEX;
+    strcpy_s(texname[TessLib::Render::RenderGl::CurrentTextureNumber], mapname[tex][frame]);
 
-    sprintf_sd(name)("packages%c%s", PATHDIV, texname[TessLib::RenderGl::CurrentTextureNumber]);
+    sprintf_sd(name)("packages%c%s", PATHDIV, texname[TessLib::Render::RenderGl::CurrentTextureNumber]);
 
-	if(TessLib::RenderGl::InstallTexture(tnum, name, &xs, &ys))
+	if(TessLib::Render::RenderGl::InstallTexture(tnum, name, &xs, &ys))
     {
         mapping[tex][frame] = tnum;
-        texx[TessLib::RenderGl::CurrentTextureNumber] = xs;
-        texy[TessLib::RenderGl::CurrentTextureNumber] = ys;
-        TessLib::RenderGl::CurrentTextureNumber++;
+        texx[TessLib::Render::RenderGl::CurrentTextureNumber] = xs;
+        texy[TessLib::Render::RenderGl::CurrentTextureNumber] = ys;
+        TessLib::Render::RenderGl::CurrentTextureNumber++;
         return tnum;
     }
     else
@@ -164,11 +164,11 @@ void drawhudgun(float fovy, float aspect, int farplane)
     int rtime = reloadtime(player1->gunselect);
     if(player1->lastaction && player1->lastattackgun==player1->gunselect && lastmillis-player1->lastaction<rtime)
     {
-		TessLib::RenderGl::DrawHudModel(7, 18, rtime/18.0f, player1->lastaction);
+		TessLib::Render::RenderGl::DrawHudModel(7, 18, rtime/18.0f, player1->lastaction);
     }
     else
     {
-        TessLib::RenderGl::DrawHudModel(6, 1, 100, 0);
+        TessLib::Render::RenderGl::DrawHudModel(6, 1, 100, 0);
     };
 
     glMatrixMode(GL_PROJECTION);
@@ -208,7 +208,7 @@ void gl_drawframe(int w, int h, float curfps)
     gluPerspective(fovy, aspect, 0.15f, farplane);
     glMatrixMode(GL_MODELVIEW);
 
-	TessLib::RenderGl::TransPlayer();
+	TessLib::Render::RenderGl::TransPlayer();
 
     glEnable(GL_TEXTURE_2D);
     
@@ -224,7 +224,7 @@ void gl_drawframe(int w, int h, float curfps)
             (int)player1->yaw, (int)player1->pitch, (float)fov, w, h);
     finishstrips();
 
-	TessLib::RenderGl::SetupWorld();
+	TessLib::Render::RenderGl::SetupWorld();
 
     renderstripssky();
 
@@ -235,17 +235,17 @@ void gl_drawframe(int w, int h, float curfps)
     glColor3f(1.0f, 1.0f, 1.0f);
     glDisable(GL_FOG);
     glDepthFunc(GL_GREATER);
-	TessLib::RenderText::DrawEnvBox(14, fog*4/3);
+	TessLib::Render::RenderText::DrawEnvBox(14, fog*4/3);
     glDepthFunc(GL_LESS);
     glEnable(GL_FOG);
 
-	TessLib::RenderGl::TransPlayer();
+	TessLib::Render::RenderGl::TransPlayer();
         
-    TessLib::RenderGl::OverBright(2);
+    TessLib::Render::RenderGl::OverBright(2);
     
     renderstrips();
 
-    TessLib::RenderGl::XtraVerts = 0;
+    TessLib::Render::RenderGl::XtraVerts = 0;
 
     renderclients();
     monsterrender();
@@ -259,12 +259,12 @@ void gl_drawframe(int w, int h, float curfps)
 
     drawhudgun(fovy, aspect, farplane);
 
-    TessLib::RenderGl::OverBright(1);
+    TessLib::Render::RenderGl::OverBright(1);
     int nquads = renderwater(hf);
     
-    TessLib::RenderGl::OverBright(2);
+    TessLib::Render::RenderGl::OverBright(2);
     render_particles(curtime);
-    TessLib::RenderGl::OverBright(1);
+    TessLib::Render::RenderGl::OverBright(1);
 
     glDisable(GL_FOG);
 
