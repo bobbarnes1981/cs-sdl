@@ -124,11 +124,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ClientGame.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Enumerations.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -139,22 +134,37 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "RenderCubes.cs"
+                    RelPath = "ClientServer\ClientGame.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "RenderGl.cs"
+                    RelPath = "ClientServer\Server.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "RenderText.cs"
+                    RelPath = "Render\RenderCubes.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Sound.cs"
+                    RelPath = "Render\RenderGl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Render\RenderText.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Support\Command.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Support\Sound.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

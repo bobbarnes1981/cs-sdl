@@ -36,7 +36,9 @@ using Tao.Sdl;
 using Tao.OpenGl;
 using SdlDotNet;
 using System.Runtime.InteropServices;
-
+using TessLib.ClientServer;
+using TessLib.Render;
+using TessLib.Support;
 
 namespace TessLib
 {
@@ -232,7 +234,7 @@ namespace TessLib
 			Bindings.disconnect(true, false);
 			Bindings.writecfg();
 			RenderGl.CleanGl();
-			Sound.CleanSound();
+			TessLib.Support.Sound.CleanSound();
 			Bindings.cleanupserver();
 			Mouse.ShowCursor = true;
 			Video.GrabInput = false;
