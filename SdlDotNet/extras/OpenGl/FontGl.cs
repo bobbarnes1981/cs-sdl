@@ -28,18 +28,68 @@ namespace SdlDotNet.OpenGl
 	/// <summary>
 	/// Summary description for FontGl.
 	/// </summary>
-	public class FontGl : Font
+	public class SurfaceGl
 	{
-		Font font;
+		Surface surface;
+		Surface tempSurface;
+		Bitmap textureImage;
+		int texture;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="fileName"></param>
-		/// <param name="pointSize"></param>
-		public FontGl(string fileName, int pointSize) : base(fileName, pointSize)
+		/// <param name="surface"></param>
+		public SurfaceGl(Surface surface)
 		{
-			font = new Font(fileName, pointSize);
+			this.surface = surface;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public SurfaceGl()
+		{
+		}
+
+		static SurfaceGl()
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int TextureID
+		{
+			get
+			{
+				return this.texture;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public int GenerateTexture()
+		{
+			this.tempSurface = new Surface(NextPowerOfTwo(surface.Width), NextPowerOfTwo(surface.Height));
+			this.tempSurface.Blit(surface);
+			// Status Indicator
+			this.textureImage = tempSurface.Bitmap;   
+			// Create Storage Space For The Texture	
+			// Load The Bitmap
+			// Check For Errors, If Bitmap's Not Found, Quit
+			if(textureImage != null) 
+			{
+				// Create The Texture
+				Gl.glGenTextures(1, out this.texture); 
+				return this.texture;
+				
+			}
+			else
+			{
+				return 0;
+			}
 		}
 
 		private static int NextPowerOfTwo(int x)
@@ -51,90 +101,96 @@ namespace SdlDotNet.OpenGl
 		/// <summary>
 		/// Load bitmaps and convert to textures.
 		/// </summary>
-		public void Render(string textItem, Color color, Point location) 
+		public void Draw() 
 		{
-			Surface initial;
-			Surface intermediary;
-			int texture;
+			this.Draw(new Point(0,0));
+		}
 
-			initial = this.font.Render( textItem, color);
-			intermediary = new Surface(NextPowerOfTwo(initial.Width), NextPowerOfTwo(initial.Height));
-			intermediary.Blit(initial);
-			// Status Indicator
-			Bitmap textureImage = intermediary.Bitmap;   
-			// Create Storage Space For The Texture	
-			// Load The Bitmap
-			// Check For Errors, If Bitmap's Not Found, Quit
-			if(textureImage != null) 
+		/// <summary>
+		/// 
+		/// </summary>
+		public Surface Surface
+		{
+			get
 			{
-				// Create The Texture
-				Gl.glGenTextures(1, out texture); 
+				return surface;
+			}
+			set
+			{
+				this.surface = value;
+				this.GenerateTexture();
+			}
+		}
 
-				// Rectangle For Locking The Bitmap In Memory
-				Rectangle rectangle = 
-					new Rectangle(0, 0, textureImage.Width, textureImage.Height);
-				// Get The Bitmap's Pixel Data From The Locked Bitmap
-				BitmapData bitmapData = 
-					textureImage.LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+		/// <summary>
+		/// Load bitmaps and convert to textures.
+		/// </summary>
+		public void Draw(Point location) 
+		{
+			// Rectangle For Locking The Bitmap In Memory
+			Rectangle rectangle = 
+				new Rectangle(0, 0, textureImage.Width, textureImage.Height);
+			// Get The Bitmap's Pixel Data From The Locked Bitmap
+			BitmapData bitmapData = 
+				textureImage.LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 						
-				// Typical Texture Generation Using Data From The Bitmap
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture);
-				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage.Width, textureImage.Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
+			// Typical Texture Generation Using Data From The Bitmap
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture);
+			Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage.Width, textureImage.Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 					
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
+			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
+			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
 
-				int[] vPort= new int[4];
+			int[] vPort= new int[4];
   
-				Gl.glGetIntegerv(Gl.GL_VIEWPORT, vPort);
+			Gl.glGetIntegerv(Gl.GL_VIEWPORT, vPort);
   
-				Gl.glMatrixMode(Gl.GL_PROJECTION);
-				Gl.glPushMatrix();
-				Gl.glLoadIdentity();
+			Gl.glMatrixMode(Gl.GL_PROJECTION);
+			Gl.glPushMatrix();
+			Gl.glLoadIdentity();
   
-				Gl.glOrtho(0, vPort[2], 0, vPort[3], -1, 1);
-				Gl.glMatrixMode(Gl.GL_MODELVIEW);
-				Gl.glPushMatrix();
-				Gl.glLoadIdentity();
+			Gl.glOrtho(0, vPort[2], 0, vPort[3], -1, 1);
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+			Gl.glPushMatrix();
+			Gl.glLoadIdentity();
 
-				Gl.glDisable(Gl.GL_DEPTH_TEST);
-				Gl.glEnable(Gl.GL_TEXTURE_2D);
-				Gl.glColor3f(1.0f, 1.0f, 1.0f);
+			Gl.glDisable(Gl.GL_DEPTH_TEST);
+			Gl.glEnable(Gl.GL_TEXTURE_2D);
+			Gl.glColor3f(1.0f, 1.0f, 1.0f);
 	
-				/* Draw a quad at location */
-				Gl.glBegin(Gl.GL_QUADS);
-				/* Recall that the origin is in the lower-left corner
+			/* Draw a quad at location */
+			Gl.glBegin(Gl.GL_QUADS);
+			/* Recall that the origin is in the lower-left corner
 				   That is why the TexCoords specify different corners
 				   than the Vertex coors seem to. */
-				Gl.glTexCoord2f(0.0f, 1.0f); 
-				Gl.glVertex2f(location.X, location.Y);
-				Gl.glTexCoord2f(1.0f, 1.0f); 
-				Gl.glVertex2f(location.X + textureImage.Width, location.Y);
-				Gl.glTexCoord2f(1.0f, 0.0f); 
-				Gl.glVertex2f(location.X + textureImage.Width, location.Y + textureImage.Height);
-				Gl.glTexCoord2f(0.0f, 0.0f); 
-				Gl.glVertex2f(location.X, location.Y+ textureImage.Height);
-				Gl.glEnd();
+			Gl.glTexCoord2f(0.0f, 1.0f); 
+			Gl.glVertex2f(location.X, location.Y);
+			Gl.glTexCoord2f(1.0f, 1.0f); 
+			Gl.glVertex2f(location.X + textureImage.Width, location.Y);
+			Gl.glTexCoord2f(1.0f, 0.0f); 
+			Gl.glVertex2f(location.X + textureImage.Width, location.Y + textureImage.Height);
+			Gl.glTexCoord2f(0.0f, 0.0f); 
+			Gl.glVertex2f(location.X, location.Y+ textureImage.Height);
+			Gl.glEnd();
 	
-				/* Bad things happen if we delete the texture before it finishes */
-				Gl.glFinish();
+			/* Bad things happen if we delete the texture before it finishes */
+			Gl.glFinish();
 
-				Gl.glDeleteTextures(1, ref texture);
+			Gl.glDeleteTextures(1, ref texture);
 
-				Gl.glEnable(Gl.GL_DEPTH_TEST);
-				Gl.glMatrixMode(Gl.GL_PROJECTION);
-				Gl.glPopMatrix();   
-				Gl.glMatrixMode(Gl.GL_MODELVIEW);
-				Gl.glPopMatrix();
+			Gl.glEnable(Gl.GL_DEPTH_TEST);
+			Gl.glMatrixMode(Gl.GL_PROJECTION);
+			Gl.glPopMatrix();   
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+			Gl.glPopMatrix();
 
-				if(textureImage != null) 
-				{
-					// If Texture Exists
-					textureImage.UnlockBits(bitmapData); 
-					// Unlock The Pixel Data From Memory
-					textureImage.Dispose();   
-					// Dispose The Bitmap
-				}
+			if(textureImage != null) 
+			{
+				// If Texture Exists
+				textureImage.UnlockBits(bitmapData); 
+				// Unlock The Pixel Data From Memory
+				textureImage.Dispose();   
+				// Dispose The Bitmap
 			}
 		}
 	}
