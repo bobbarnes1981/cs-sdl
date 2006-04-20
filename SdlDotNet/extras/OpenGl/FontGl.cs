@@ -52,7 +52,6 @@ namespace SdlDotNet.OpenGl
 			Surface intermediary;
 			int texture;
 
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			initial = this.font.Render( textItem, color);
 			intermediary = new Surface(NextPowerOfTwo(initial.Width), NextPowerOfTwo(initial.Height));
 			intermediary.Blit(initial);

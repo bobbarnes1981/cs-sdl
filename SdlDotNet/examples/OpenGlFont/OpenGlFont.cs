@@ -35,7 +35,9 @@ namespace SdlDotNet.Examples
 		// Path to Data directory
 		string filePath = @"../../";
 		string fontName = "FreeSans.ttf";
-		string phrase = "Hello world! ";
+		string phrase1 = "Hello world! ";
+		string phrase2 = "This is a Truetype font ";
+		string phrase3 = "On an OpenGl Surface ";
 		Surface screen;
 		FontGl font;
 
@@ -108,7 +110,10 @@ namespace SdlDotNet.Examples
 		
 		private void Tick(object sender, TickEventArgs e)
 		{
-			font.Render(phrase + i++, Color.White, new Point(0,0) );
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+			font.Render(phrase1 + i++, Color.White, new Point(100,200) );
+			font.Render(phrase2 + i++, Color.White, new Point(100,100) );
+			font.Render(phrase3 + i++, Color.White, new Point(100,0) );
 			Video.GLSwapBuffers();
 		}
 
