@@ -168,6 +168,7 @@ Section "Examples" SecExamples
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\bin\examples\MoviePlayer.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\NeHe.lnk" "$INSTDIR\bin\examples\NeHe.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleExample.lnk" "$INSTDIR\bin\examples\ParticlesExample.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\OpenGlFont.lnk" "$INSTDIR\bin\examples\OpenGl.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\PhysFsTest.lnk" "$INSTDIR\bin\examples\PhysFsTest.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Rectangles.lnk" "$INSTDIR\bin\examples\Rectangles.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\RedBook.lnk" "$INSTDIR\bin\examples\RedBook.exe"
@@ -178,8 +179,10 @@ Section "Examples" SecExamples
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Particles.chm"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.OpenGl Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.OpenGl.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet\index.html"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet.Particles\index.html"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.OpenGl HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet.OpenGl\index.html"
   
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples"
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}_Tutorials.url" "InternetShortcut" "URL" "${PRODUCT_TUTORIALS_WEB_SITE}"

@@ -32,6 +32,11 @@ namespace SdlDotNet.OpenGl
 	{
 		Font font;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="fileName"></param>
+		/// <param name="pointSize"></param>
 		public FontGl(string fileName, int pointSize) : base(fileName, pointSize)
 		{
 			font = new Font(fileName, pointSize);

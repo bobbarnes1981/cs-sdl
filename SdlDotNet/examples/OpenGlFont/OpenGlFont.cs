@@ -25,9 +25,12 @@ using SdlDotNet;
 using SdlDotNet.OpenGl;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNet.Examples.OpenGlFont
 {
-	public class OpenGlFontExample
+	/// <summary>
+	/// 
+	/// </summary>
+	public class OpenGlFont
 	{
 		int width = 640;
 		int height = 480;
@@ -54,6 +57,9 @@ namespace SdlDotNet.Examples
 
 		#endregion Run Loop
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public void Initialize()
 		{
 			if (File.Exists(dataDirectory + "FreeSans.ttf"))
@@ -71,8 +77,8 @@ namespace SdlDotNet.Examples
 		[STAThread]
 		static void Main()
 		{
-			OpenGlFontExample openGlFontExample = new OpenGlFontExample();
-			openGlFontExample.Run();
+			OpenGlFont openGlFont = new OpenGlFont();
+			openGlFont.Run();
 		}
 
 		/// <summary>
