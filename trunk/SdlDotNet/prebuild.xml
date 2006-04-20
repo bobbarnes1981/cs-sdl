@@ -567,7 +567,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<!--<Project name="SdlDotNet.Gui" path="extras\\Gui" language="C#" type="Library" assemblyName="SdlDotNet.Gui" rootNamespace="SdlDotNet.Gui">
+	<Project name="SdlDotNet.OpenGl" path="extras\\OpenGl" language="C#" type="Library" assemblyName="SdlDotNet.OpenGl" rootNamespace="SdlDotNet.OpenGl">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -575,8 +575,9 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin\Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>SdlDotNet.Gui.xml</XmlDocFile>
+		    <XmlDocFile>SdlDotNet.OpenGl.xml</XmlDocFile>
 		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
@@ -586,17 +587,56 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin\Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>SdlDotNet.Gui.xml</XmlDocFile>
+		    <XmlDocFile>SdlDotNet.OpenGl.xml</XmlDocFile>
 		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="Tao.OpenGl" localCopy="true" path="..\\..\\lib"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="..\\..\\lib"/>
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Files>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
+	<Project name="OpenGlFont" path="examples\\OpenGlFont" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.OpenGlFont.OpenGlFont" assemblyName="OpenGlFont" rootNamespace="SdlDotNet.Examples.OpenGlFont" icon="App.ico">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin\Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>OpenGlFont.xml</XmlDocFile>
+		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin\Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>OpenGlFont.xml</XmlDocFile>
+		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="..\\..\\lib"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
+		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
-	</Project>-->
+	</Project>
 	<Project name="NeHe" path="examples\\NeHe" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.NeHe.NeHe" assemblyName="NeHe" rootNamespace="SdlDotNet.Examples.NeHe" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>

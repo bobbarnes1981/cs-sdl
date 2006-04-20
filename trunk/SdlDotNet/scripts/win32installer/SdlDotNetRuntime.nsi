@@ -104,7 +104,7 @@ FunctionEnd
 Section "Runtime" SecRuntime
   SetOverwrite ifnewer
   SetOutPath "$INSTDIR\runtime\bin"
-  File /r /x CVS /x *Particles* ${PRODUCT_PATH}\bin\assemblies\*.*
+  File /r /x CVS /x *Particles* /x *OpenGl* ${PRODUCT_PATH}\bin\assemblies\*.*
 
   SetOutPath "$INSTDIR\runtime\lib"
   File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
