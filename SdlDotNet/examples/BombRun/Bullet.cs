@@ -56,8 +56,8 @@ namespace SdlDotNet.Examples.BombRun
 			{
 				throw new ArgumentNullException("args");
 			}
-			this.X += (int)(args.SecondsElapsed * this.speedX);
-			this.Y += (int)(args.SecondsElapsed * this.speedY);
+			this.X -= (int)(args.SecondsElapsed * this.speedX);
+			this.Y -= (int)(args.SecondsElapsed * this.speedY);
 
 			if (this.X + this.Surface.Size.Width < 0 ||
 				this.X > Video.Screen.Width ||
