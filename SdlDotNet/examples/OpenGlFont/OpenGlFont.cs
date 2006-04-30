@@ -42,7 +42,7 @@ namespace SdlDotNet.Examples.OpenGlFont
 		string phrase2 = "This is a Truetype font ";
 		string phrase3 = "On an OpenGl Surface ";
 		Surface screen;
-		FontGl font;
+		Font font;
 
 		#region Run Loop
 		/// <summary>
@@ -71,7 +71,7 @@ namespace SdlDotNet.Examples.OpenGlFont
 			screen = Video.SetVideoModeWindowOpenGL(this.width, this.height);
 			Events.Quit += new QuitEventHandler(this.Quit);
 			Events.Tick += new TickEventHandler(this.Tick);
-			font = new FontGl(filePath + dataDirectory + fontName, 20);
+			font = new Font(filePath + dataDirectory + fontName, 20);
 		}
 
 		[STAThread]
@@ -113,13 +113,17 @@ namespace SdlDotNet.Examples.OpenGlFont
 		}
 
 		int i;
+		SurfaceGl surfaceGl = new SurfaceGl();
 		
 		private void Tick(object sender, TickEventArgs e)
 		{
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			font.Render(phrase1 + i++, Color.White, new Point(100,200) );
-			font.Render(phrase2 + i++, Color.White, new Point(100,100) );
-			font.Render(phrase3 + i++, Color.White, new Point(100,0) );
+			surfaceGl.Surface = font.Render(phrase1 + i++, Color.White);
+			surfaceGl.Draw(new Point(0, 0));
+			surfaceGl.Surface = font.Render(phrase2 + i++, Color.White);
+			surfaceGl.Draw(new Point(100,100));
+			surfaceGl.Surface = font.Render(phrase3 + i++, Color.White);
+			surfaceGl.Draw(new Point(200, 200));
 			Video.GLSwapBuffers();
 		}
 
