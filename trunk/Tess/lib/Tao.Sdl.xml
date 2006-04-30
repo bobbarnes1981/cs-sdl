@@ -4750,6 +4750,290 @@
             <param name="x"></param>
             <returns></returns>
         </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CreateMutex">
+            <summary>
+                Create a mutex, initialized unlocked
+            </summary>
+            <returns>
+                IntPtr to mutex
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC SDL_mutex * SDLCALL SDL_CreateMutex(void)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_mutexP(System.IntPtr)">
+            <summary>
+                Lock the mutex  (Returns 0, or -1 on error)
+            </summary>
+            <returns>
+                Lock the mutex  (Returns 0, or -1 on error)
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_mutexP(SDL_mutex *mutex)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_LockMutex(System.IntPtr)">
+            <summary>
+                Lock the mutex  (Returns 0, or -1 on error)
+            </summary>
+            <returns>
+                Lock the mutex  (Returns 0, or -1 on error)
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>#define SDL_LockMutex(m)	SDL_mutexP(m)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_mutexV(System.IntPtr)">
+            <summary>
+                Unlock the mutex  (Returns 0, or -1 on error)
+            </summary>
+            <returns>
+                Unlock the mutex  (Returns 0, or -1 on error)
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_mutexV(SDL_mutex *mutex)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_UnlockMutex(System.IntPtr)">
+            <summary>
+                Unlock the mutex  (Returns 0, or -1 on error)
+            </summary>
+            <returns>
+                unlock the mutex  (Returns 0, or -1 on error)
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>#define SDL_UnlockMutex(m)	SDL_mutexP(m)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_DestroyMutex(System.IntPtr)">
+            <summary>
+                Destroy a mutex
+            </summary>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC void SDLCALL SDL_DestroyMutex(SDL_mutex *mutex)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CreateSemaphore(System.Int32)">
+            <summary>
+                Create a semaphore, initialized with value, returns NULL on failure.
+            </summary>
+            <returns>
+            Create a semaphore, initialized with value, returns NULL on failure.
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC SDL_sem * SDLCALL SDL_CreateSemaphore(Uint32 initial_value)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_DestroySemaphore(System.IntPtr)">
+            <summary>
+            Destroy a semaphore
+            </summary>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC void SDLCALL SDL_DestroySemaphore(SDL_sem *sem)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_SemWait(System.IntPtr)">
+            <summary>
+            This function suspends the calling thread until the semaphore pointed 
+            to by sem has a positive count. 
+            It then atomically decreases the semaphore count.
+            </summary>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_SemWait(SDL_sem *sem)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_SemtryWait(System.IntPtr)">
+            <summary>
+            Non-blocking variant of SDL_SemWait(), 
+            returns 0 if the wait succeeds, 
+            SDL_MUTEX_TIMEDOUT if the wait would block, and -1 on error.
+            </summary>
+            <returns>
+            Non-blocking variant of SDL_SemWait(), 
+            returns 0 if the wait succeeds,
+            SDL_MUTEX_TIMEDOUT if the wait would block, and -1 on error.
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_SemTryWait(SDL_sem *sem)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_SemWaitTimeout(System.IntPtr,System.Int32)">
+            <summary>
+            Variant of SDL_SemWait() with a timeout in milliseconds, returns 0 if
+            the wait succeeds, SDL_MUTEX_TIMEDOUT if the wait does not succeed in
+            the allotted time, and -1 on error.
+            On some platforms this function is implemented by looping with a delay
+            of 1 ms, and so should be avoided if possible.
+            </summary>
+            <returns>
+            Variant of SDL_SemWait() with a timeout in milliseconds, returns 0 if
+            the wait succeeds, SDL_MUTEX_TIMEDOUT if the wait does not succeed in
+            the allotted time, and -1 on error.
+            On some platforms this function is implemented by looping with a delay
+            of 1 ms, and so should be avoided if possible.
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_SemWaitTimeout(SDL_sem *sem, Uint32 ms)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_SemPost(System.IntPtr)">
+            <summary>
+            Atomically increases the semaphore's count (not blocking), 
+            returns 0, or -1 on error.
+            </summary>
+            <returns>
+            Atomically increases the semaphore's count (not blocking), 
+            returns 0, or -1 on error.
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_SemPost(SDL_sem *sem)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_SemValue(System.IntPtr)">
+            <summary>
+            Returns the current count of the semaphore
+            </summary>
+            <returns>
+            Returns the current count of the semaphore
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC Uint32 SDLCALL SDL_SemValue(SDL_sem *sem)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CreateCond">
+            <summary>
+            Create a condition variable
+            </summary>
+            <returns>
+            intPtr to variable
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC SDL_cond * SDLCALL SDL_CreateCond(void)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_DestroyCond(System.IntPtr)">
+            <summary>
+            Destroy a condition variable
+            </summary>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC void SDLCALL SDL_DestroyCond(SDL_cond *cond)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CondSignal(System.IntPtr)">
+            <summary>
+            Restart one of the threads that are waiting on the condition variable,
+            returns 0 or -1 on error.
+            </summary>
+            <returns>
+            Restart one of the threads that are waiting on the condition variable,
+            returns 0 or -1 on error.
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_CondSignal(SDL_cond *cond)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CondBroadcast(System.IntPtr)">
+            <summary>
+            Restart all threads that are waiting on the condition variable, 
+            returns 0 or -1 on error.
+            </summary>
+            <returns>
+            Restart all threads that are waiting on the condition variable,
+            returns 0 or -1 on error.
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_CondBroadcast(SDL_cond *cond)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CondWait(System.IntPtr,System.IntPtr)">
+            <summary>
+            Wait on the condition variable, unlocking the provided mutex.
+            The mutex must be locked before entering this function!
+            Returns 0 when it is signaled, or -1 on error.
+            </summary>
+            <returns>
+            Wait on the condition variable, unlocking the provided mutex.
+            The mutex must be locked before entering this function!
+            Returns 0 when it is signaled, or -1 on error.
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_CondWait(SDL_cond *cond, SDL_mutex *mut)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CondWaitTimeout(System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            Waits for at most 'ms' milliseconds, and returns 0 if the condition 
+            variable is signaled, SDL_MUTEX_TIMEDOUT if the condition is not
+            signaled in the allotted time, and -1 on error.
+            On some platforms this function is implemented by looping with a delay
+            of 1 ms, and so should be avoided if possible.
+            </summary>
+            <returns>
+            returns 0 if the condition 
+            variable is signaled, SDL_MUTEX_TIMEDOUT if the condition is not
+            signaled in the allotted time, and -1 on error
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mutex.h:
+                <code>extern DECLSPEC int SDLCALL SDL_CondWaitTimeout(SDL_cond *cond, SDL_mutex *mutex, Uint32 ms)</code>
+                </p>
+            </remarks>
+        </member>
         <member name="M:Tao.Sdl.Sdl.SDL_RWFromFile(System.String,System.String)">
             <summary>
             Create SDL_RWops structures from file.
@@ -4957,6 +5241,73 @@
             returns 1 if the function is implemented.  If it's not implemented, or
             the version member of the 'info' structure is invalid, it returns 0.
             </returns>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_CreateThread(Tao.Sdl.Sdl.ThreadDelegate,System.Object)">
+            <summary>
+                Create thread
+            </summary>
+            <returns>
+                IntPtr to SDL_Thread struct
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_thread.h:
+                <code>extern DECLSPEC SDL_Thread * SDLCALL SDL_CreateThread(int (SDLCALL *fn)(void *), void *data)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_ThreadID">
+            <summary>
+                Get the 32-bit thread identifier for the current thread
+            </summary>
+            <returns>
+                ID
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_thread.h:
+                <code>extern DECLSPEC Uint32 SDLCALL SDL_ThreadID(void)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_GetThreadID(System.IntPtr)">
+            <summary>
+                Get the 32-bit thread identifier for the specified thread,
+            	equivalent to SDL_ThreadID() if the specified thread is NULL.
+            </summary>
+            <returns>
+                ID
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_thread.h:
+                <code>extern DECLSPEC Uint32 SDLCALL SDL_GetThreadID(SDL_Thread *thread)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_WaitThread(System.IntPtr,System.Int32@)">
+            <summary>
+                Wait for a thread to finish.
+                The return code for the thread function is placed in the area
+                pointed to by 'status', if 'status' is not NULL.
+            </summary>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_thread.h:
+                <code>extern DECLSPEC void SDLCALL SDL_WaitThread(SDL_Thread *thread, int *status)</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_KillThread(System.IntPtr)">
+            <summary>
+                Forcefully kill a thread without worrying about its state
+            </summary>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_thread.h:
+                <code>extern DECLSPEC void SDLCALL SDL_KillThread(SDL_Thread *thread)</code>
+                </p>
+            </remarks>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_GetTicks">
             <summary>
@@ -9382,6 +9733,11 @@
             </remarks>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_SetEventFilter(Tao.Sdl.Sdl.SDL_EventFilter)"/>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_GetEventFilter"/>
+        </member>
+        <member name="T:Tao.Sdl.Sdl.ThreadDelegate">
+            <summary>
+            int (SDLCALL *fn)(void *)
+            </summary>
         </member>
         <member name="T:Tao.Sdl.Sdl.SDL_TimerCallback">
             <summary>

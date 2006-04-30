@@ -31,6 +31,7 @@
 #endregion License
 // rendertext.cpp: based on Don's gl_text.cpp
 using System;
+using System.Text;
 using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
@@ -144,28 +145,34 @@ namespace TessLib.Render
 		public static int TextWidth(string str)
 		{
 			int x = 0;
-			for (int i = 0; str[i] != 0; i++)
-			{
-				char c = str[i]; //int c originally - why?
-				if(c=='\t') 
-				{ 
-					x = (x+PIXELTAB)/PIXELTAB*PIXELTAB;
-					continue; 
-				}; 
-				if(c=='\f')
-				{
-					continue; 
-				}
-				if(c==' ') 
-				{ 
-					x += GameInit.FontH/2; 
-					continue; 
-				};
-				//c -= 33;
-				if(c<0 || c>=95) continue;
-				//int in_width = char_coords[c,0][2] - char_coords[c][0];
-				//x += in_width + 1;
-			}
+//			System.Text.ASCIIEncoding encode = new ASCIIEncoding();
+//			//encode.GetString(
+//			char[] c = new char[0];
+//			for (int i = 0; i<str.Length; i++)
+//			{
+//				
+//				c[0] = str[i]; //int c originally - why?
+//				if(c[0]=='\t') 
+//				{ 
+//					x = (x+PIXELTAB)/PIXELTAB*PIXELTAB;
+//					continue; 
+//				}; 
+//				if(c[0]=='\f')
+//				{
+//					continue; 
+//				}
+//				if(c[0]==' ') 
+//				{ 
+//					x += GameInit.FontH/2; 
+//					continue; 
+//				};
+//				int temp = encode.GetBytes(c);
+//				
+//				//c -= 33;
+//				if(c[0]<0 || c[0]>=95) continue;
+//				int in_width = char_coords[c, 2] - char_coords[c, 0];
+//				x += in_width + 1;
+//			}
 			return x;
 		}
 
@@ -185,16 +192,16 @@ namespace TessLib.Render
 
 		public static void DrawText(string str, int left, int top, int gl_num)
 		{
-						Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);
-						Gl.glBindTexture(Gl.GL_TEXTURE_2D, gl_num);
-						Gl.glColor3ub(255,255,255);
+			Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, gl_num);
+			Gl.glColor3ub(255,255,255);
 			
-						int x = left;
-						int y = top;
+			int x = left;
+			int y = top;
 			
-						int i;
-						float in_left, in_top, in_right, in_bottom;
-						int in_width, in_height;
+			int i;
+			float in_left, in_top, in_right, in_bottom;
+			int in_width, in_height;
 			
 			//			for (i = 0; str[i] != 0; i++)
 			//			{
