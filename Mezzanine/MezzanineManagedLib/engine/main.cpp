@@ -313,9 +313,7 @@ int main(int argc, char **argv)
     crosshair = textureload(newstring("data/crosshair.png"));
 	log("crosshair");
     if(!crosshair) fatal("could not find core textures (run the .bat, not the .exe)");
-	log("crosshair");
     computescreen("initializing...");
-	log("crosshair");
     inbetweenframes = true;
     particleinit();
  
