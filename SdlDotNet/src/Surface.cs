@@ -2174,6 +2174,23 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Resize Surface
+		/// </summary>
+		/// <param name="destinationSize">Size of new Surface</param>
+		/// <returns>new Surface</returns>
+		public Surface Resize(Size destinationSize)
+		{
+			Surface surface = new Surface(destinationSize);
+			Color colorTemp = this.TransparentColor;
+			this.ClearTransparentColor();
+			surface.Blit(this);
+			this.TransparentColor = colorTemp;
+			surface.TransparentColor = this.TransparentColor;
+			surface.alphaValue = this.alphaValue;
+			return surface;
+		}
+
+		/// <summary>
 		/// Stretch Surface
 		/// </summary>
 		/// <param name="destinationSize">Destination of stretch</param>
