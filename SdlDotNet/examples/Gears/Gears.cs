@@ -11,8 +11,11 @@
 */
 
 using System;
+using System.Drawing;
+using System.IO;
 
 using SdlDotNet;
+using SdlDotNet.OpenGl;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.Gears
@@ -225,14 +228,21 @@ namespace SdlDotNet.Examples.Gears
 
 			Gl.glPopMatrix();
 
+//			Console.WriteLine("Gear1: " + gear1);
+//			Console.WriteLine("Gear2: " + gear2);
+//			Console.WriteLine("Gear3: " + gear3);
+//			surface.Surface = font.Render(frames + " frames in " + seconds + " seconds = " + (int)fps + " FPS", Color.White);
+//			Console.WriteLine("surface: " + surface.TextureID);	
+//			surface.Draw();
+
 			Video.GLSwapBuffers();
 			
 			frames++;
 			int t = Timer.TicksElapsed;
 			if (t - timeMarker >= 5000)
 			{
-				double seconds = (t - timeMarker) / 1000.0;
-				double fps = frames / seconds;
+				seconds = (t - timeMarker) / 1000.0;
+				fps = frames / seconds;
 				System.Console.WriteLine("c#: {0} frames in {1} seconds = {2} FPS", frames, seconds, fps);
 				timeMarker = t;
 				frames = 0;
@@ -246,6 +256,8 @@ namespace SdlDotNet.Examples.Gears
 
 		int newWidth;
 		int newHeight;
+		double seconds = 0;
+		double fps = 0;
 
 		/* new window size or exposure */
 		void Reshape()
@@ -308,12 +320,24 @@ namespace SdlDotNet.Examples.Gears
 		}
 
 		Surface screen;
+		Font font;
+		SurfaceGl surface;
+		string dataDirectory = @"Data/";
+		// Path to Data directory
+		string filePath = @"../../";
+		string fontName = "FreeSans.ttf";
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public void Run()
 		{
+			if (File.Exists(dataDirectory + "FreeSans.ttf"))
+			{
+				filePath = "";
+			}
+			font = new Font(filePath + dataDirectory + fontName, 20);
+			surface = new SurfaceGl(font.Render(" ", Color.White));
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Gears";
 			screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
