@@ -115,42 +115,14 @@ void mapmsg(char *s) { strn0cpy(hdr.maptitle, s, 128); };
 COMMAND(saycommand, TessLib::Support::FunctionSignatures::ARG_VARI);
 COMMAND(mapmsg, TessLib::Support::FunctionSignatures::ARG_1STR);
 
-#ifndef WIN32
-#include <X11/Xlib.h>
-#include <SDL_syswm.h>
-#endif
-
 void pasteconsole()
 {
-    #ifdef WIN32
     if(!IsClipboardFormatAvailable(CF_TEXT)) return; 
     if(!OpenClipboard(NULL)) return;
     char *cb = (char *)GlobalLock(GetClipboardData(CF_TEXT));
     strcat_s(commandbuf, cb);
     GlobalUnlock(cb);
     CloseClipboard();
-    #else
-    SDL_SysWMinfo wminfo;
-    SDL_VERSION(&wminfo.version); 
-    wminfo.subsystem = SDL_SYSWM_X11;
-    if(!SDL_GetWMInfo(&wminfo)) return;
-    int cbsize;
-    char *cb = XFetchBytes(wminfo.info.x11.display, &cbsize);
-    if(!cb || !cbsize) return;
-    int commandlen = strlen(commandbuf);
-    for(char *cbline = cb, *cbend; commandlen + 1 < _MAXDEFSTR && cbline < &cb[cbsize]; cbline = cbend + 1)
-    {
-        cbend = (char *)memchr(cbline, '\0', &cb[cbsize] - cbline);
-        if(!cbend) cbend = &cb[cbsize];
-        if(commandlen + cbend - cbline + 1 > _MAXDEFSTR) cbend = cbline + _MAXDEFSTR - commandlen - 1;
-        memcpy(&commandbuf[commandlen], cbline, cbend - cbline);
-        commandlen += cbend - cbline;
-        commandbuf[commandlen] = '\n';
-        if(commandlen + 1 < _MAXDEFSTR && cbend < &cb[cbsize]) ++commandlen;
-        commandbuf[commandlen] = '\0';
-    };
-    XFree(cb);
-    #endif
 };
 
 cvector vhistory;
@@ -201,7 +173,12 @@ void keypress(int code, bool isdown, int cooked)
                     break;
 
 				case (int)SdlDotNet::Key::V:
-                    if(SDL_GetModState()&(KMOD_LCTRL|KMOD_RCTRL)) { pasteconsole(); return; };
+                    //if(SDL_GetModState()&(KMOD_LCTRL|KMOD_RCTRL)) { pasteconsole(); return; };
+					if(SdlDotNet::Keyboard::ModifierKeyState & (SdlDotNet::Key::LeftControl|SdlDotNet::Key::RightControl)) 
+					{ 
+						pasteconsole(); 
+						return; 
+					};
 
                 default:
                     resetcomplete();

@@ -251,6 +251,8 @@
 	<References>
 		<AssemblyReference
 			RelativePath="$(SolutionDir)lib\SdlDotNet.dll"/>
+		<AssemblyReference
+			RelativePath="$(SolutionDir)lib\Tao.Sdl.dll"/>
 		<ProjectReference
 			ReferencedProjectIdentifier="{DF0A7A59-91FA-438C-B859-D35C3963A553}"
 			Name="TessLib"/>

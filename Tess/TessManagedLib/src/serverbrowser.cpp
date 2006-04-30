@@ -2,6 +2,9 @@
 
 #include "cube.h"
 #include "SDL_thread.h"
+#using <mscorlib.dll>
+#using <TessLib.dll>
+#using <Tao.Sdl.dll>
 
 struct resolverthread
 {
@@ -28,6 +31,7 @@ int resolverloop(void * data)
     resolverthread *rt = (resolverthread *)data;
     for(;;)
     {
+		//Tao::Sdl::Sdl::SDL_SemWait(resolversem);
         SDL_SemWait(resolversem);
         SDL_LockMutex(resolvermutex);
         if(resolverqueries.empty())

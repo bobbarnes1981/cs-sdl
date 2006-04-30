@@ -437,5 +437,23 @@ namespace TessLib.Render
 			s.Dispose();
 			return true;
 		}
+
+		const int MAXFRAMES = 2;                    // increase to allow more complex shader defs
+		int[,] mapping= new int[256, MAXFRAMES];                // ( cube texture, frame ) -> ( opengl id, name )
+		string[,] mapname= new string[256, MAXFRAMES];
+
+		public void Texture(string aframe, string name)
+		{
+			int num = CurrentTextureNumber++;
+			int frame = Convert.ToInt32(aframe);
+			if(num<0 || num>=256 || frame<0 || frame>=MAXFRAMES) 
+			{
+				return;
+			}
+			mapping[num, frame] = 1;
+			string n = mapname[num, frame];
+			//strcpy_s(n, name);
+			//path(n);
+		}
 	}
 }
