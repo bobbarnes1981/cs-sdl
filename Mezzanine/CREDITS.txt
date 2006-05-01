@@ -1,5 +1,5 @@
 The following are the authors and contributors of Mezzanine:
 
  * All C# code David Y. Hudson (jendave@yahoo.com)
- * MezzanineManagedLib is based on the Sauerbraten (http://sauerbraten.org) by Wouter van Oortmerssen
+ * MezzanineManagedLib is based on the Sauerbraten (http://sauerbraten.org) source code by Wouter van Oortmerssen
  
