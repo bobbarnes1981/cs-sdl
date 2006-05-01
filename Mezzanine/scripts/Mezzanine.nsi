@@ -1,10 +1,10 @@
-Name "Sauerbraten"
+Name "Mezzanine"
 
-OutFile "sauerbraten_2006_xx_xx_setup.exe"
+OutFile "mezzanine_2006_xx_xx_setup.exe"
 
-InstallDir $PROGRAMFILES\Sauerbraten
+InstallDir $PROGRAMFILES\Mezzanine
 
-InstallDirRegKey HKLM "Software\Sauerbraten" "Install_Dir"
+InstallDirRegKey HKLM "Software\Mezzanine" "Install_Dir"
 
 SetCompressor /SOLID lzma
 XPStyle on
@@ -16,7 +16,7 @@ Page instfiles
 UninstPage uninstConfirm
 UninstPage instfiles
 
-Section "Sauerbraten (required)"
+Section "Mezzanine (required)"
 
   SectionIn RO
   
@@ -26,28 +26,28 @@ Section "Sauerbraten (required)"
   
   WriteRegStr HKLM SOFTWARE\Sauerbraten "Install_Dir" "$INSTDIR"
   
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Sauerbraten" "DisplayName" "Sauerbraten"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Sauerbraten" "UninstallString" '"$INSTDIR\uninstall.exe"'
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Sauerbraten" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Sauerbraten" "NoRepair" 1
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Mezzanine" "DisplayName" "Mezzanine"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Mezzanine" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Mezzanine" "NoModify" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Mezzanine" "NoRepair" 1
   WriteUninstaller "uninstall.exe"
   
 SectionEnd
 
 Section "Start Menu Shortcuts"
 
-  CreateDirectory "$SMPROGRAMS\Sauerbraten"
-  CreateShortCut "$SMPROGRAMS\Sauerbraten\Sauerbraten.lnk" "$INSTDIR\sauerbraten.bat" "" "$INSTDIR\sauerbraten.bat" 0
-  CreateShortCut "$SMPROGRAMS\Sauerbraten\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
+  CreateDirectory "$SMPROGRAMS\Mezzanine"
+  CreateShortCut "$SMPROGRAMS\Mezzanine\Mezzanine.lnk" "$INSTDIR\mezzanine.bat" "" "$INSTDIR\mezzanine.bat" 0
+  CreateShortCut "$SMPROGRAMS\Mezzanine\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
   
 SectionEnd
 
 Section "Uninstall"
   
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Sauerbraten"
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Mezzanine"
   DeleteRegKey HKLM SOFTWARE\Sauerbraten
 
-  RMDir /r "$SMPROGRAMS\Sauerbraten"
+  RMDir /r "$SMPROGRAMS\Mezzanine"
   RMDir /r "$INSTDIR"
 
 SectionEnd
