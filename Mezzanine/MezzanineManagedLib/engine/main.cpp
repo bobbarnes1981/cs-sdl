@@ -242,7 +242,7 @@ void limitfps(int &millis, int curmillis)
 
 bool inbetweenframes = false;
 
-int main(int argc, char **argv)
+int native_main(int argc, char **argv)
 {
     #ifdef WIN32
     //atexit((void (__cdecl *)(void))_CrtDumpMemoryLeaks);

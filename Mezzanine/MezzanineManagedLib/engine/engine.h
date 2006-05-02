@@ -72,6 +72,17 @@ extern const ushort fv[6][4];
 extern Texture *crosshair;
 extern bool inbetweenframes;
 
+#ifndef DECLSPEC 
+define DECLSPEC	__declspec(dllexport)
+#endif
+#ifndef CDECL
+#define CDECL __cdecl
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern int curtime;                     // current frame time
 extern int lastmillis;                  // last time
 
@@ -180,6 +191,7 @@ extern void writebinds(FILE *f);
 // main
 extern void estartmap(char *name);
 extern void computescreen(char *text);
+extern DECLSPEC int CDECL native_main(int argc, char **argv);
 
 // physics
 extern void mousemove(int dx, int dy);
@@ -200,3 +212,8 @@ extern Texture *loadskin(const char *dir, const char *altdir);
 
 // particles
 extern void particleinit();
+
+
+#ifdef __cplusplus
+}
+#endif
