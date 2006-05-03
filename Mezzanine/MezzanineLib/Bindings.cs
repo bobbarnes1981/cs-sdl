@@ -18,7 +18,12 @@
  * misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  * 
- * All code Copyright (C) 2006 David Y. Hudson
+ */
+
+/* 
+ * All C# code Copyright (C) 2006 David Y. Hudson
+ * Mezzanine is a .NET port of Sauerbraten (http://sauerbraten.org).
+ * Sauerbraten is written by Wouter van Oortmerssen
  */
 #endregion License
 

@@ -22,7 +22,8 @@
 
 /* 
  * All C# code Copyright (C) 2006 David Y. Hudson
- * Mezzanine is a .NET port of Sauerbraten (http://sauerbraten.org) by Wouter van Oortmerssen
+ * Mezzanine is a .NET port of Sauerbraten (http://sauerbraten.org).
+ * Sauerbraten is written by Wouter van Oortmerssen
  */
 #endregion License
 
