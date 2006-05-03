@@ -1,0 +1,370 @@
+#region License
+/*
+ * Copyright (C) 2001-2005 Wouter van Oortmerssen.
+ * 
+ * This software is provided 'as-is', without any express or implied
+ * warranty.  In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ * 
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ * 
+ * 1. The origin of this software must not be misrepresented; you must not
+ * claim that you wrote the original software. If you use this software
+ * in a product, an acknowledgment in the product documentation would be
+ * appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ * misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+ * 
+ */
+
+/* 
+ * All C# code Copyright (C) 2006 David Y. Hudson
+ * Mezzanine is a .NET port of Sauerbraten (http://sauerbraten.org).
+ * Sauerbraten is written by Wouter van Oortmerssen
+ */
+#endregion License
+
+using System;
+using System.IO;
+using Tao.Sdl;
+using Tao.OpenGl;
+using SdlDotNet;
+using System.Runtime.InteropServices;
+
+namespace MezzanineLib
+{
+	/// <summary>
+	/// 
+	/// </summary>
+	[StructLayout(LayoutKind.Sequential, Pack=4)]
+	public struct Vector
+	{ 
+		/// <summary>
+		/// 
+		/// </summary>
+		public float x;
+		/// <summary>
+		/// 
+		/// </summary>
+		public float y;
+		/// <summary>
+		/// 
+		/// </summary>
+		public float z; 
+	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	[StructLayout(LayoutKind.Sequential, Pack=4)]
+	public struct Square
+	{
+		char type;                 // one of the BlockTypes
+		char floor, ceil;           // height, in cubes
+		char wtex, ftex, ctex;     // wall/floor/ceil texture ids
+		char r, g, b;              // light value at upper left vertex
+		char vdelta;               // vertex delta, used for heightfield cubes
+		char defer;                 // used in mipmapping, when true this cube is not a perfect mip
+		char occluded;              // true when occluded
+		char utex;                 // upper wall tex id
+		char tag;                  // used by triggers
+	};
+
+	/// <summary>
+	/// 
+	/// </summary>
+	[StructLayout(LayoutKind.Sequential, Pack=4)]
+	public struct MapHeader                   // map file format header
+	{
+		[MarshalAs( UnmanagedType.ByValArray, SizeConst=4 )]
+		char[] head;               // "CUBE"
+		int version;                // any >8bit quantity is a little indian
+		int headersize;             // sizeof(header)
+		int sfactor;                // in bits
+		int numents;
+		[MarshalAs( UnmanagedType.ByValArray, SizeConst=128 )]
+		char[] maptitle;
+		//uchar texlists[3][256];
+		IntPtr texlists;
+		int waterlevel;
+		[MarshalAs( UnmanagedType.ByValArray, SizeConst=15 )]
+		int[] reserved;
+	};
+
+	/// <summary>
+	/// 
+	/// </summary>
+	[StructLayout(LayoutKind.Sequential, Pack=4)]
+	public struct block 
+	{ 
+		int x, y, xs, ys; 
+	};
+
+	/// <summary>
+	/// 
+	/// </summary>
+	[StructLayout(LayoutKind.Sequential, Pack=4)]
+	public struct mapmodelinfo 
+	{ 
+		int rad, h, zoff, snap; 
+		string name; 
+	};
+
+	/// <summary>
+	/// 
+	/// </summary>
+	[StructLayout(LayoutKind.Sequential, Pack=4)]
+	public struct PersistentEntity        // map entity
+	{
+		short x, y, z;              // cube aligned position
+		short attr1;
+		char type;                 // type is one of the above
+		char attr2, attr3, attr4;        
+	};
+
+	/// <summary>
+	/// 
+	/// </summary>
+	[StructLayout(LayoutKind.Sequential, Pack=4)]
+	public struct Entity        // map entity
+	{
+		short x, y, z;              // cube aligned position
+		short attr1;
+		char type;                 // type is one of the above
+		char attr2, attr3, attr4;
+		bool spawned;               // the only dynamic state of a map entity
+	};
+
+	/// <summary>
+	/// Summary description for Main.
+	/// </summary>
+	public class GameInit
+	{
+		
+		static IntPtr player1Ptr;
+		//static DynamicEntity player1;
+		static int screenWidth = 640;
+		static int screenHeight = 480;
+		static int lastmillis = 0;	
+		static int mapVersion = 5;
+
+		/// <summary>
+		/// bump if map format changes, see worldio.cpp
+		/// </summary>
+		public static int MapVersion
+		{
+			get
+			{
+				return mapVersion;
+			}
+		}
+	
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int LastMillis
+		{
+			get
+			{
+				return lastmillis;
+			}
+			set
+			{
+				lastmillis = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int FontH
+		{
+			get
+			{
+				return FONTH;
+			}
+		}
+		static int FONTH = 64;
+
+		/// <summary>
+		/// determines number of mips there can be
+		/// </summary>
+		public static int SmallestFactor
+		{
+			get
+			{
+				return SMALLEST_FACTOR;
+			}
+		}
+		static int SMALLEST_FACTOR = 6;
+
+		/// <summary>
+		/// 10 is already insane
+		/// </summary>
+		public static int LargestFactor
+		{
+			get
+			{
+				return LARGEST_FACTOR;
+			}
+		}
+		static int LARGEST_FACTOR = 11;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int DefaultFactor
+		{
+			get
+			{
+				return DEFAULT_FACTOR;
+			}
+		}
+		static int DEFAULT_FACTOR = 8;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public GameInit()
+		{
+			//
+			// TODO: Add constructor logic here
+			//
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int ScreenWidth
+		{
+			get
+			{
+				return screenWidth;
+			}
+			set
+			{
+				screenWidth = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int ScreenHeight
+		{
+			get
+			{
+				return screenHeight;
+			}
+			set
+			{
+				screenHeight = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="input"></param>
+		public static void Log(string input)
+		{
+			Console.WriteLine("init: {0}", input);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
+		/// <param name="o"></param>
+		public static void Fatal(string s, string o)
+		{
+			Console.WriteLine(s + o + Sdl.SDL_GetError());
+			Cleanup(s + o + Sdl.SDL_GetError());
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="s"></param>
+		public static void Fatal(string s)
+		{
+			Fatal(s, "");
+		}
+
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public static DynamicEntity Player1
+//		{
+//			get
+//			{
+//				return player1 = (DynamicEntity)Marshal.PtrToStructure(player1Ptr, typeof(DynamicEntity));
+//			}
+//			set
+//			{
+//				Marshal.StructureToPtr(value, player1Ptr, false);
+//			}
+//		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static IntPtr Player1Ptr
+		{
+			get
+			{
+				return player1Ptr;
+			}
+			set
+			{
+				player1Ptr = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="msg"></param>
+		public static void Cleanup(string msg)
+		{	
+			Bindings.stop();
+			Bindings.disconnect(true, false);
+			Bindings.writecfg();
+			//RenderGl.CleanGl();
+			//MezzanineLib.Support.Sound.CleanSound();
+			Bindings.cleanupserver();
+			Mouse.ShowCursor = true;
+			Video.GrabInput = false;
+			if(msg != null)
+			{				
+				Log(msg);	
+			}
+			Events.QuitApplication();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void Quit()
+		{
+			Bindings.writeservercfg();
+			GameInit.Cleanup(null);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void Screenshot()
+		{
+			//Note that the openGL surface is flip upside down and the bits are reversed. These lines correct that.
+			Surface temp = new Surface(ScreenWidth, ScreenHeight, 24, 0x0000FF, 0x00FF00, 0xFF0000, 0);
+			Gl.glReadPixels(0, 0, ScreenWidth, ScreenHeight, Gl.GL_RGB, Gl.GL_UNSIGNED_BYTE, temp.Pixels);
+			temp.FlipVertical();
+			temp.SaveBmp("screenshots/screenshot_"+Timer.TicksElapsed.ToString()+".bmp");					
+			temp.Dispose();
+		}
+	}
+}

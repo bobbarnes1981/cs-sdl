@@ -32,6 +32,9 @@ namespace MezzanineLib
 {
 	#region Class Documentation
 	#endregion Class Documentation
+	/// <summary>
+	/// 
+	/// </summary>
 	[SuppressUnmanagedCodeSecurityAttribute()]
 	public sealed class Bindings
 	{

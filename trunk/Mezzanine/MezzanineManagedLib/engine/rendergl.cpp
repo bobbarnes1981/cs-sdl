@@ -8,7 +8,7 @@
 
 bool hasVBO = false, hasOQ = false;
 int renderpath;
-#define log(s) puts("init: " s)
+//#define log(s) puts("init: " s)
 void purgetextures();
 
 GLUquadricObj *qsphere = NULL;

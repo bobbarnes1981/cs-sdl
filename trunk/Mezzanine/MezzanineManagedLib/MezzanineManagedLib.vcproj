@@ -91,8 +91,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\Debug"
-			IntermediateDirectory=".\Debug"
+			OutputDirectory="bin\Debug"
+			IntermediateDirectory="bin\Debug"
 			ConfigurationType="2"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -102,7 +102,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="enet\include;include;engine;fpsgame;shared"
-				AdditionalUsingDirectories="..\lib"
+				AdditionalUsingDirectories=""
 				PreprocessorDefinitions="WIN32,_DEBUG,_CONSOLE"
 				ExceptionHandling="TRUE"
 				BasicRuntimeChecks="0"
@@ -110,9 +110,9 @@
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderThrough=""
 				PrecompiledHeaderFile=""
-				AssemblerListingLocation=".\Debug/"
-				ObjectFile=".\Debug/"
-				ProgramDataBaseFileName=".\Debug/"
+				AssemblerListingLocation=".\bin\Debug/"
+				ObjectFile=".\bin\Debug/"
+				ProgramDataBaseFileName=".\bin\Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				DebugInformationFormat="3"
@@ -123,7 +123,7 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
 				AdditionalDependencies="zlib.lib opengl32.lib glu32.lib SDLmain.lib SDL.lib SDL_image.lib SDL_mixer.lib ws2_32.lib winmm.lib"
-				OutputFile="..\bin\MezzanineManagedLib.dll"
+				OutputFile="bin\Debug\MezzanineManagedLib.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\lib"
@@ -131,7 +131,7 @@
 				ForceSymbolReferences="__DllMainCRTStartup@12"
 				GenerateDebugInformation="TRUE"
 				AssemblyDebug="1"
-				ProgramDatabaseFile=".\Debug/Mezzanine_debug.pdb"
+				ProgramDatabaseFile=".\bin\Debug/Mezzanine_debug.pdb"
 				SubSystem="1"
 				HeapReserveSize="0"
 				HeapCommitSize="0"
@@ -235,6 +235,15 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{DF0A7A59-91FA-438C-B859-D35C3963A553}"
+			Name="MezzanineLib"/>
+		<AssemblyReference
+			RelativePath="$(SolutionDir)lib\SdlDotNet.dll"/>
+		<AssemblyReference
+			RelativePath="$(SolutionDir)lib\Tao.OpenGl.dll"/>
+		<AssemblyReference
+			RelativePath="$(SolutionDir)lib\Tao.OpenGl.Glu.dll"/>
 	</References>
 	<Files>
 		<Filter
