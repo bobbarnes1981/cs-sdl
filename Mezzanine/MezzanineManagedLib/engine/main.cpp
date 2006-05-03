@@ -2,6 +2,9 @@
 
 #include "pch.h"
 #include "engine.h"
+#using <mscorlib.dll>
+#using <MezzanineLib.dll>
+using namespace MezzanineLib;
 
 void cleanup(char *msg)         // single program exit point;
 {
@@ -253,8 +256,8 @@ int native_main(int argc, char **argv)
     
     islittleendian = *((char *)&islittleendian);
     
-    #define log(s) puts("init: " s)
-    log("sdl");
+    //#define log(s) puts("init: " s)
+    GameInit::Log("sdl");
     
     for(int i = 1; i<argc; i++)
     {
@@ -282,20 +285,20 @@ int native_main(int argc, char **argv)
 
     if(SDL_Init(SDL_INIT_TIMER|SDL_INIT_VIDEO|par)<0) fatal("Unable to initialize SDL");
 
-    log("enet");
+    GameInit::Log("enet");
     if(enet_initialize()<0) fatal("Unable to initialise network module");
 
     initserver(dedicated);  // never returns if dedicated
       
-    log("video: sdl");
+    GameInit::Log("video: sdl");
     if(SDL_InitSubSystem(SDL_INIT_VIDEO)<0) fatal("Unable to initialize SDL Video");
 
-    log("video: mode");
+    GameInit::Log("video: mode");
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     screen = SDL_SetVideoMode(scr_w, scr_h, 0, SDL_OPENGL|SDL_RESIZABLE|fs);
     if(screen==NULL) fatal("Unable to create OpenGL screen");
 
-    log("video: misc");
+	GameInit::Log("video: misc");
     SDL_WM_SetCaption("Mezzanine engine", NULL);
     #ifndef WIN32
     if(fs)
@@ -304,27 +307,27 @@ int native_main(int argc, char **argv)
     keyrepeat(false);
     SDL_ShowCursor(0);
 
-    log("console");
+    GameInit::Log("console");
     exec("data/stdlib.cfg");
 
-    log("gl");
+    GameInit::Log("gl");
     gl_init(scr_w, scr_h);
-	log("textureload");
+	GameInit::Log("textureload");
     crosshair = textureload(newstring("data/crosshair.png"));
-	log("crosshair");
+	GameInit::Log("crosshair");
     if(!crosshair) fatal("could not find core textures (run the .bat, not the .exe)");
     computescreen("initializing...");
     inbetweenframes = true;
     particleinit();
  
-    log("world");
+    GameInit::Log("world");
     player = cl->iterdynents(0);
     empty_world(7, true);
 
-    log("sound");
+    GameInit::Log("sound");
     initsound();
         
-    log("cfg");
+    GameInit::Log("cfg");
     newmenu("frags\tpj\tping\tteam\tname");
     newmenu("ping\tplr\tserver");
     exec("data/keymap.cfg");
@@ -335,12 +338,12 @@ int native_main(int argc, char **argv)
     if(!execfile("config.cfg")) exec("data/defaults.cfg");
     exec("autoexec.cfg");
 
-    log("localconnect");
+    GameInit::Log("localconnect");
     localconnect();
     cc->gameconnect(false);
     cc->changemap("curvedm");
 
-    log("mainloop");
+    GameInit::Log("mainloop");
     int ignore = 5, grabmouse = 0;
     while(!done)
     {

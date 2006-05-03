@@ -29,14 +29,14 @@
                     CheckForOverflowUnderflow = "false"
                     ConfigurationOverrideFile = ""
                     DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = ""
+                    DocumentationFile = "MezzanineLib.xml"
                     DebugSymbols = "true"
                     FileAlignment = "4096"
                     IncrementalBuild = "false"
                     NoStdLib = "false"
                     NoWarn = ""
                     Optimize = "false"
-                    OutputPath = "..\bin\"
+                    OutputPath = "bin\Debug\"
                     RegisterForComInterop = "false"
                     RemoveIntegerChecks = "false"
                     TreatWarningsAsErrors = "false"
@@ -80,9 +80,24 @@
                     HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
                 <Reference
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                />
+                <Reference
+                    Name = "Tao.Sdl"
+                    AssemblyName = "Tao.Sdl"
+                    HintPath = "..\lib\Tao.Sdl.dll"
+                />
+                <Reference
                     Name = "SdlDotNet"
                     AssemblyName = "SdlDotNet"
                     HintPath = "..\lib\SdlDotNet.dll"
+                />
+                <Reference
+                    Name = "Tao.OpenGl"
+                    AssemblyName = "Tao.OpenGl"
+                    HintPath = "..\lib\Tao.OpenGl.dll"
                 />
                 <Reference
                     Name = "Tao.OpenGl.ExtensionLoader"
@@ -93,21 +108,6 @@
                     Name = "Tao.OpenGl.Glu"
                     AssemblyName = "Tao.OpenGl.Glu"
                     HintPath = "..\lib\Tao.OpenGl.Glu.dll"
-                />
-                <Reference
-                    Name = "Tao.Sdl"
-                    AssemblyName = "Tao.Sdl"
-                    HintPath = "..\lib\Tao.Sdl.dll"
-                />
-                <Reference
-                    Name = "Tao.OpenGl"
-                    AssemblyName = "Tao.OpenGl"
-                    HintPath = "..\lib\Tao.OpenGl.dll"
-                />
-                <Reference
-                    Name = "System.Drawing"
-                    AssemblyName = "System.Drawing"
-                    HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
                 />
             </References>
         </Build>
@@ -120,6 +120,11 @@
                 />
                 <File
                     RelPath = "Bindings.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GameInit.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
