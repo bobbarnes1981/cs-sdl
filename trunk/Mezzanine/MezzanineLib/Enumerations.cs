@@ -38,7 +38,7 @@ using SdlDotNet;
 using System.Runtime.InteropServices;
 
 
-namespace TessLib
+namespace MezzanineLib
 {
 	public enum BlockTypes                         // block types, order matters!
 	{

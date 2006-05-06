@@ -3,7 +3,7 @@
 
 #include "cube.h" 
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 struct client                   // server side version of "dynent" type
 {
@@ -60,14 +60,14 @@ void send(int n, ENetPacket *packet)
 	if(!packet) return;
     switch(clients[n].type)
     {
-	case TessLib::ClientServer::ServerType::ST_TCPIP:
+	case MezzanineLib::ClientServer::ServerType::ST_TCPIP:
         {
             enet_peer_send(clients[n].peer, 0, packet);
             bsend += packet->dataLength;
             break;
         };
 
-        case TessLib::ClientServer::ServerType::ST_LOCAL:
+        case MezzanineLib::ClientServer::ServerType::ST_LOCAL:
             localservertoclient(packet->data, packet->dataLength);
             break;
 
@@ -93,7 +93,7 @@ void sendservmsg(char *msg)
     ENetPacket *packet = enet_packet_create(NULL, _MAXDEFSTR+10, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, TessLib::NetworkMessages::SV_SERVMSG);
+    putint(p, MezzanineLib::NetworkMessages::SV_SERVMSG);
     sendstring(msg, p);
     *(ushort *)start = ENET_HOST_TO_NET_16(p-start);
     enet_packet_resize(packet, p-start);
@@ -105,8 +105,8 @@ void disconnect_client(int n, char *reason)
 {
     printf("disconnecting client (%s) [%s]\n", clients[n].hostname, reason);
     enet_peer_disconnect(clients[n].peer);
-	clients[n].type = TessLib::ClientServer::ServerType::ST_EMPTY;
-    send2(true, -1, TessLib::NetworkMessages::SV_CDIS, n);
+	clients[n].type = MezzanineLib::ClientServer::ServerType::ST_EMPTY;
+    send2(true, -1, MezzanineLib::NetworkMessages::SV_CDIS, n);
 };
 
 void resetitems() { sents.setsize(0); notgotitems = true; };
@@ -118,7 +118,7 @@ void pickup(uint i, int sec, int sender)         // server side item pickup, ack
     {
         sents[i].spawned = false;
         sents[i].spawnsecs = sec;
-        send2(true, sender, TessLib::NetworkMessages::SV_ITEMACC, i);
+        send2(true, sender, MezzanineLib::NetworkMessages::SV_ITEMACC, i);
     };
 };
 
@@ -132,7 +132,7 @@ bool vote(char *map, int reqmode, int sender)
     strcpy_s(clients[sender].mapvote, map);
     clients[sender].modevote = reqmode;
     int yes = 0, no = 0; 
-    loopv(clients) if(clients[i].type!=TessLib::ClientServer::ServerType::ST_EMPTY)
+    loopv(clients) if(clients[i].type!=MezzanineLib::ClientServer::ServerType::ST_EMPTY)
     {
         if(clients[i].mapvote[0]) { if(strcmp(clients[i].mapvote, map)==0 && clients[i].modevote==reqmode) yes++; else no++; }
         else no++;
@@ -164,18 +164,18 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
     while(p<end) switch(type = getint(p))
     {
-        case TessLib::NetworkMessages::SV_TEXT:
+        case MezzanineLib::NetworkMessages::SV_TEXT:
             sgetstr();
             break;
 
-        case TessLib::NetworkMessages::SV_INITC2S:
+        case MezzanineLib::NetworkMessages::SV_INITC2S:
             sgetstr();
             strcpy_s(clients[cn].name, text);
             sgetstr();
             getint(p);
             break;
 
-        case TessLib::NetworkMessages::SV_MAPCHANGE:
+        case MezzanineLib::NetworkMessages::SV_MAPCHANGE:
         {
             sgetstr();
             int reqmode = getint(p);
@@ -192,7 +192,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             break;
         };
         
-        case TessLib::NetworkMessages::SV_ITEMLIST:
+        case MezzanineLib::NetworkMessages::SV_ITEMLIST:
         {
             int n;
             while((n = getint(p))!=-1) if(notgotitems)
@@ -205,21 +205,21 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             break;
         };
 
-        case TessLib::NetworkMessages::SV_ITEMPICKUP:
+        case MezzanineLib::NetworkMessages::SV_ITEMPICKUP:
         {
             int n = getint(p);
             pickup(n, getint(p), sender);
             break;
         };
 
-        case TessLib::NetworkMessages::SV_PING:
-            send2(false, cn, TessLib::NetworkMessages::SV_PONG, getint(p));
+        case MezzanineLib::NetworkMessages::SV_PING:
+            send2(false, cn, MezzanineLib::NetworkMessages::SV_PONG, getint(p));
             break;
 
-        case TessLib::NetworkMessages::SV_POS:
+        case MezzanineLib::NetworkMessages::SV_POS:
         {
             cn = getint(p);
-            if(cn<0 || cn>=clients.length() || clients[cn].type==TessLib::ClientServer::ServerType::ST_EMPTY)
+            if(cn<0 || cn>=clients.length() || clients[cn].type==MezzanineLib::ClientServer::ServerType::ST_EMPTY)
             {
                 disconnect_client(sender, "client num");
                 return;
@@ -230,7 +230,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             break;
         };
 
-        case TessLib::NetworkMessages::SV_SENDMAP:
+        case MezzanineLib::NetworkMessages::SV_SENDMAP:
         {
             sgetstr();
             int mapsize = getint(p);
@@ -238,11 +238,11 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             return;
         }
 
-        case TessLib::NetworkMessages::SV_RECVMAP:
+        case MezzanineLib::NetworkMessages::SV_RECVMAP:
 			send(sender, recvmap(sender));
             return;
             
-        case TessLib::NetworkMessages::SV_EXT:   // allows for new features that require no server updates 
+        case MezzanineLib::NetworkMessages::SV_EXT:   // allows for new features that require no server updates 
         {
             for(int n = getint(p); n; n--) getint(p);
             break;
@@ -265,7 +265,7 @@ void send_welcome(int n)
     ENetPacket * packet = enet_packet_create (NULL, MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, TessLib::NetworkMessages::SV_INITS2C);
+    putint(p, MezzanineLib::NetworkMessages::SV_INITS2C);
     putint(p, n);
     putint(p, PROTOCOL_VERSION);
     putint(p, smapname[0]);
@@ -273,10 +273,10 @@ void send_welcome(int n)
     putint(p, clients.length()>maxclients);
     if(smapname[0])
     {
-        putint(p, TessLib::NetworkMessages::SV_MAPCHANGE);
+        putint(p, MezzanineLib::NetworkMessages::SV_MAPCHANGE);
         sendstring(smapname, p);
         putint(p, mode);
-        putint(p, TessLib::NetworkMessages::SV_ITEMLIST);
+        putint(p, MezzanineLib::NetworkMessages::SV_ITEMLIST);
         loopv(sents) if(sents[i].spawned) putint(p, i);
         putint(p, -1);
     };
@@ -302,7 +302,7 @@ void localclienttoserver(ENetPacket *packet)
 
 client &addclient()
 {
-    loopv(clients) if(clients[i].type==TessLib::ClientServer::ServerType::ST_EMPTY) return clients[i];
+    loopv(clients) if(clients[i].type==MezzanineLib::ClientServer::ServerType::ST_EMPTY) return clients[i];
     return clients.add();
 };
 
@@ -313,14 +313,14 @@ void checkintermission()
         interm = lastsec+10;
         mapend = lastsec+1000;
     };
-    send2(true, -1, TessLib::NetworkMessages::SV_TIMEUP, minremain--);
+    send2(true, -1, MezzanineLib::NetworkMessages::SV_TIMEUP, minremain--);
 };
 
 void startintermission() { minremain = 0; checkintermission(); };
 
 void resetserverifempty()
 {
-    loopv(clients) if(clients[i].type!=TessLib::ClientServer::ServerType::ST_EMPTY) return;
+    loopv(clients) if(clients[i].type!=MezzanineLib::ClientServer::ServerType::ST_EMPTY) return;
     clients.setsize(0);
     smapname[0] = 0;
     resetvotes();
@@ -343,7 +343,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
         {
             sents[i].spawnsecs = 0;
             sents[i].spawned = true;
-            send2(true, -1, TessLib::NetworkMessages::SV_ITEMSPAWN, i);
+            send2(true, -1, MezzanineLib::NetworkMessages::SV_ITEMSPAWN, i);
         };
     };
     
@@ -353,9 +353,9 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
     if(interm && seconds>interm)
     {
         interm = 0;
-        loopv(clients) if(clients[i].type!=TessLib::ClientServer::ServerType::ST_EMPTY)
+        loopv(clients) if(clients[i].type!=MezzanineLib::ClientServer::ServerType::ST_EMPTY)
         {
-            send2(true, i, TessLib::NetworkMessages::SV_MAPRELOAD, 0);    // ask a client to trigger map reload
+            send2(true, i, MezzanineLib::NetworkMessages::SV_MAPRELOAD, 0);    // ask a client to trigger map reload
             mapreload = true;
             break;
         };
@@ -366,13 +366,13 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
     if(!isdedicated) return;     // below is network only
 
 	int numplayers = 0;
-	loopv(clients) if(clients[i].type!=TessLib::ClientServer::ServerType::ST_EMPTY) ++numplayers;
+	loopv(clients) if(clients[i].type!=MezzanineLib::ClientServer::ServerType::ST_EMPTY) ++numplayers;
 	serverms(mode, numplayers, minremain, smapname, seconds, clients.length()>=maxclients);
 
     if(seconds-laststatus>60)   // display bandwidth stats, useful for server ops
     {
         nonlocalclients = 0;
-        loopv(clients) if(clients[i].type==TessLib::ClientServer::ServerType::ST_TCPIP) nonlocalclients++;
+        loopv(clients) if(clients[i].type==MezzanineLib::ClientServer::ServerType::ST_TCPIP) nonlocalclients++;
         laststatus = seconds;     
         if(nonlocalclients || bsend || brec) printf("status: %d remote clients, %.1f send, %.1f rec (K/sec)\n", nonlocalclients, bsend/60.0f/1024, brec/60.0f/1024);
         bsend = brec = 0;
@@ -386,7 +386,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             case ENET_EVENT_TYPE_CONNECT:
             {
                 client &c = addclient();
-                c.type = TessLib::ClientServer::ServerType::ST_TCPIP;
+                c.type = MezzanineLib::ClientServer::ServerType::ST_TCPIP;
                 c.peer = event.peer;
                 c.peer->data = (void *)(&c-&clients[0]);
                 char hn[1024];
@@ -404,8 +404,8 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             case ENET_EVENT_TYPE_DISCONNECT: 
                 if((int)event.peer->data<0) break;
                 printf("disconnected client (%s)\n", clients[(int)event.peer->data].hostname);
-                clients[(int)event.peer->data].type = TessLib::ClientServer::ServerType::ST_EMPTY;
-                send2(true, -1, TessLib::NetworkMessages::SV_CDIS, (int)event.peer->data);
+                clients[(int)event.peer->data].type = MezzanineLib::ClientServer::ServerType::ST_EMPTY;
+                send2(true, -1, MezzanineLib::NetworkMessages::SV_CDIS, (int)event.peer->data);
                 event.peer->data = (void *)-1;
                 break;
         };
@@ -427,13 +427,13 @@ void cleanupserver()
 
 void localdisconnect()
 {
-    loopv(clients) if(clients[i].type==TessLib::ClientServer::ServerType::ST_LOCAL) clients[i].type = TessLib::ClientServer::ServerType::ST_EMPTY;
+    loopv(clients) if(clients[i].type==MezzanineLib::ClientServer::ServerType::ST_LOCAL) clients[i].type = MezzanineLib::ClientServer::ServerType::ST_EMPTY;
 };
 
 void localconnect()
 {
     client &c = addclient();
-    c.type = TessLib::ClientServer::ServerType::ST_LOCAL;
+    c.type = MezzanineLib::ClientServer::ServerType::ST_LOCAL;
     strcpy_s(c.hostname, "local");
     send_welcome(&c-&clients[0]); 
 };
@@ -449,7 +449,7 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
         ENetAddress address = { ENET_HOST_ANY, CUBE_SERVER_PORT };
         if(*ip && enet_address_set_host(&address, ip)<0) printf("WARNING: server ip not resolved");
         serverhost = enet_host_create(&address, MAXCLIENTS, 0, uprate);
-		if(!serverhost) TessLib::GameInit::Fatal("could not create server host\n");
+		if(!serverhost) MezzanineLib::GameInit::Fatal("could not create server host\n");
         loopi(MAXCLIENTS) serverhost->peers[i].data = (void *)-1;
     };
 

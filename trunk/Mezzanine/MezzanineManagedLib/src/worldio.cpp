@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 void backup(char *name, char *backupname)
 {
@@ -41,7 +41,7 @@ void setnames(char *name)
 // the reason it is done on save is to reduce the amount spend in the mipmapper (as that is done
 // in realtime).
 
-inline bool nhf(sqr *s) { return s->type!=TessLib::BlockTypes::FHF && s->type!=TessLib::BlockTypes::CHF; };
+inline bool nhf(sqr *s) { return s->type!=MezzanineLib::BlockTypes::FHF && s->type!=MezzanineLib::BlockTypes::CHF; };
 
 void voptimize()        // reset vdeltas on non-hf cubes
 {
@@ -137,16 +137,16 @@ void save_world(char *mname)
     backup(cgzname, bakname);
     gzFile f = gzopen(cgzname, "wb9");
     if(!f) { conoutf("could not write map to %s", cgzname); return; };
-    hdr.version = TessLib::GameInit::MapVersion;
+    hdr.version = MezzanineLib::GameInit::MapVersion;
     hdr.numents = 0;
-    loopv(ents) if(ents[i].type!=TessLib::StaticEntity::NOTUSED) hdr.numents++;
+    loopv(ents) if(ents[i].type!=MezzanineLib::StaticEntity::NOTUSED) hdr.numents++;
     header tmp = hdr;
     endianswap(&tmp.version, sizeof(int), 4);
     endianswap(&tmp.waterlevel, sizeof(int), 16);
     gzwrite(f, &tmp, sizeof(header));
     loopv(ents) 
     {
-        if(ents[i].type!=TessLib::StaticEntity::NOTUSED) 
+        if(ents[i].type!=MezzanineLib::StaticEntity::NOTUSED) 
         {
             entity tmp = ents[i];
             endianswap(&tmp, sizeof(short), 4);
@@ -218,9 +218,9 @@ void load_world(char *mname)        // still supports all map formats that have 
     if(!f) { conoutf("could not read map %s", cgzname); return; };
     gzread(f, &hdr, sizeof(header)-sizeof(int)*16);
     endianswap(&hdr.version, sizeof(int), 4);
-    if(strncmp(hdr.head, "CUBE", 4)!=0) TessLib::GameInit::Fatal("while reading map: header malformatted");
-    if(hdr.version>TessLib::GameInit::MapVersion) TessLib::GameInit::Fatal("this map requires a newer version of cube");
-    if(sfactor<TessLib::GameInit::SmallestFactor || sfactor>TessLib::GameInit::LargestFactor) TessLib::GameInit::Fatal("illegal map size");
+    if(strncmp(hdr.head, "CUBE", 4)!=0) MezzanineLib::GameInit::Fatal("while reading map: header malformatted");
+    if(hdr.version>MezzanineLib::GameInit::MapVersion) MezzanineLib::GameInit::Fatal("this map requires a newer version of cube");
+    if(sfactor<MezzanineLib::GameInit::SmallestFactor || sfactor>MezzanineLib::GameInit::LargestFactor) MezzanineLib::GameInit::Fatal("illegal map size");
     if(hdr.version>=4)
     {
         gzread(f, &hdr.waterlevel, sizeof(int)*16);
@@ -237,9 +237,9 @@ void load_world(char *mname)        // still supports all map formats that have 
         gzread(f, &e, sizeof(persistent_entity));
         endianswap(&e, sizeof(short), 4);
         e.spawned = false;
-        if(e.type==TessLib::StaticEntity::LIGHT)
+        if(e.type==MezzanineLib::StaticEntity::LIGHT)
         {
-            if(!e.attr2) e.attr2 = 255;  // needed for TessLib::GameInit::MapVersion<=2
+            if(!e.attr2) e.attr2 = 255;  // needed for MezzanineLib::GameInit::MapVersion<=2
             if(e.attr1>32) e.attr1 = 32; // 12_03 and below
         };
     };
@@ -261,21 +261,21 @@ void load_world(char *mname)        // still supports all map formats that have 
                 k--;
                 break;
             };
-            case 254: // only in TessLib::GameInit::MapVersion<=2
+            case 254: // only in MezzanineLib::GameInit::MapVersion<=2
             {
                 memcpy(s, t, sizeof(sqr));
                 s->r = s->g = s->b = gzgetc(f);
                 gzgetc(f);
                 break;
             };
-            case TessLib::BlockTypes::SOLID:
+            case MezzanineLib::BlockTypes::SOLID:
             {
-                s->type = TessLib::BlockTypes::SOLID;
+                s->type = MezzanineLib::BlockTypes::SOLID;
                 s->wtex = gzgetc(f);
                 s->vdelta = gzgetc(f);
                 if(hdr.version<=2) { gzgetc(f); gzgetc(f); };
-                s->ftex = TessLib::TextureNumbers::DEFAULT_FLOOR;
-                s->ctex = TessLib::TextureNumbers::DEFAULT_CEIL;
+                s->ftex = MezzanineLib::TextureNumbers::DEFAULT_FLOOR;
+                s->ctex = MezzanineLib::TextureNumbers::DEFAULT_CEIL;
                 s->utex = s->wtex;
                 s->tag = 0;
                 s->floor = 0;
@@ -284,10 +284,10 @@ void load_world(char *mname)        // still supports all map formats that have 
             };
             default:
             {
-                if(type<0 || type>=TessLib::BlockTypes::MAXTYPE)
+                if(type<0 || type>=MezzanineLib::BlockTypes::MAXTYPE)
                 {
                     sprintf_sd(t)("%d @ %d", type, k);
-                    TessLib::GameInit::Fatal("while reading map: type out of range: ", t);
+                    MezzanineLib::GameInit::Fatal("while reading map: type out of range: ", t);
                 };
                 s->type = type;
                 s->floor = gzgetc(f);
@@ -326,5 +326,5 @@ void load_world(char *mname)        // still supports all map formats that have 
     execfile(mcfname);
 };
 
-COMMANDN(savemap, save_world, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMANDN(savemap, save_world, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 

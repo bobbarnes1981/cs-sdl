@@ -5,11 +5,11 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 bool plcollide(dynent *d, dynent *o, float &headspace, float &hi, float &lo) // collide with player or monster
 {
-    if(o->state!=TessLib::CSStatus::CS_ALIVE) return true;
+    if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return true;
     const float r = o->radius+d->radius;
     if(fabs(o->o.x-d->o.x)<r && fabs(o->o.y-d->o.y)<r) 
     {
@@ -32,7 +32,7 @@ bool cornertest(int mip, int x, int y, int dx, int dy, int &bx, int &by, int &bs
     mip++;
     x /= 2;
     y /= 2;
-    if(SWS(wmip[mip], x, y, ssize>>mip)->type==TessLib::BlockTypes::CORNER)
+    if(SWS(wmip[mip], x, y, ssize>>mip)->type==MezzanineLib::BlockTypes::CORNER)
     {
         bx = x<<mip;
         by = y<<mip;
@@ -47,7 +47,7 @@ void mmcollide(dynent *d, float &hi, float &lo)           // collide with a mapm
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type!=TessLib::StaticEntity::MAPMODEL) continue;
+        if(e.type!=MezzanineLib::StaticEntity::MAPMODEL) continue;
         mapmodelinfo &mmi = getmminfo(e.attr2);
         if(!&mmi || !mmi.h) continue;
         const float r = mmi.rad+d->radius;
@@ -85,10 +85,10 @@ bool collide(dynent *d, bool spawn, float drop, float rise)
         float floor = s->floor;
         switch(s->type)
         {
-		case TessLib::BlockTypes::SOLID:
+		case MezzanineLib::BlockTypes::SOLID:
                 return false;
 
-            case TessLib::BlockTypes::CORNER:
+            case MezzanineLib::BlockTypes::CORNER:
             {
                 int bx = x, by = y, bs = 1;
                 if(x==x1 && y==y1 && cornertest(0, x, y, -1, -1, bx, by, bs) && fx1-bx+fy1-by<=bs
@@ -99,11 +99,11 @@ bool collide(dynent *d, bool spawn, float drop, float rise)
                 break;
             };
 
-            case TessLib::BlockTypes::FHF:       // FIXME: too simplistic collision with slopes, makes it feels like tiny stairs
+            case MezzanineLib::BlockTypes::FHF:       // FIXME: too simplistic collision with slopes, makes it feels like tiny stairs
                 floor -= (s->vdelta+S(x+1,y)->vdelta+S(x,y+1)->vdelta+S(x+1,y+1)->vdelta)/16.0f;
                 break;
 
-            case TessLib::BlockTypes::CHF:
+            case MezzanineLib::BlockTypes::CHF:
                 ceil += (s->vdelta+S(x+1,y)->vdelta+S(x,y+1)->vdelta+S(x+1,y+1)->vdelta)/16.0f;
 
         };
@@ -190,7 +190,7 @@ void physicsframe()          // optimally schedule physics frames inside the gra
 void moveplayer(dynent *pl, int moveres, bool local, int curtime)
 {
     const bool water = hdr.waterlevel>pl->o.z-0.5f;
-    const bool floating = (editmode && local) || pl->state==TessLib::CSStatus::CS_EDITING;
+    const bool floating = (editmode && local) || pl->state==MezzanineLib::CSStatus::CS_EDITING;
 
     vec d;      // vector of direction we ideally want to move in
 
@@ -236,13 +236,13 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
                 pl->jumpnext = false;
                 pl->vel.z = 1.7f;       // physics impulse upwards
                 if(water) { pl->vel.x /= 8; pl->vel.y /= 8; };      // dampen velocity change even harder, gives correct water feel
-                if(local) playsoundc(TessLib::Sounds::S_JUMP);
-                else if(pl->monsterstate) playsound(TessLib::Sounds::S_JUMP, &pl->o);
+                if(local) playsoundc(MezzanineLib::Sounds::S_JUMP);
+                else if(pl->monsterstate) playsound(MezzanineLib::Sounds::S_JUMP, &pl->o);
             }
             else if(pl->timeinair>800)  // if we land after long time must have been a high jump, make thud sound
             {
-                if(local) playsoundc(TessLib::Sounds::S_LAND);
-                else if(pl->monsterstate) playsound(TessLib::Sounds::S_LAND, &pl->o);
+                if(local) playsoundc(MezzanineLib::Sounds::S_LAND);
+                else if(pl->monsterstate) playsound(MezzanineLib::Sounds::S_LAND, &pl->o);
             };
             pl->timeinair = 0;
         }
@@ -294,8 +294,8 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
     {
         sqr *s = S((int)pl->o.x, (int)pl->o.y);
         pl->outsidemap = SOLID(s)
-           || pl->o.z < s->floor - (s->type==TessLib::BlockTypes::FHF ? s->vdelta/4 : 0)
-           || pl->o.z > s->ceil  + (s->type==TessLib::BlockTypes::CHF ? s->vdelta/4 : 0);
+           || pl->o.z < s->floor - (s->type==MezzanineLib::BlockTypes::FHF ? s->vdelta/4 : 0)
+           || pl->o.z > s->ceil  + (s->type==MezzanineLib::BlockTypes::CHF ? s->vdelta/4 : 0);
     };
     
     // automatically apply smooth roll when strafing
@@ -313,8 +313,8 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
     
     // play sounds on water transitions
     
-    if(!pl->inwater && water) { playsound(TessLib::Sounds::S_SPLASH2, &pl->o); pl->vel.z = 0; }
-    else if(pl->inwater && !water) playsound(TessLib::Sounds::S_SPLASH1, &pl->o);
+    if(!pl->inwater && water) { playsound(MezzanineLib::Sounds::S_SPLASH2, &pl->o); pl->vel.z = 0; }
+    else if(pl->inwater && !water) playsound(MezzanineLib::Sounds::S_SPLASH1, &pl->o);
     pl->inwater = water;
 };
 

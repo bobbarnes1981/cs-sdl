@@ -11,30 +11,30 @@ vec sg[SGRAYS];
 
 guninfo guns[9] =
 {
-    { TessLib::Sounds::S_PUNCH1,    250,  50, 0,   0,  1, "fist"           },
-    { TessLib::Sounds::S_SG,       1400,  10, 0,   0, 20, "shotgun"        },  // *SGRAYS
-    { TessLib::Sounds::S_CG,        100,  30, 0,   0,  7, "chaingun"       },
-    { TessLib::Sounds::S_RLFIRE,    800, 120, 80,  0, 10, "rocketlauncher" },
-    { TessLib::Sounds::S_RIFLE,    1500, 100, 0,   0, 30, "rifle"          },
-    { TessLib::Sounds::S_FLAUNCH,   200,  20, 50,  4,  1, "fireball"       },
-    { TessLib::Sounds::S_ICEBALL,   200,  40, 30,  6,  1, "iceball"        },
-    { TessLib::Sounds::S_SLIMEBALL, 200,  30, 160, 7,  1, "slimeball"      },
-    { TessLib::Sounds::S_PIGR1,     250,  50, 0,   0,  1, "bite"           },
+    { MezzanineLib::Sounds::S_PUNCH1,    250,  50, 0,   0,  1, "fist"           },
+    { MezzanineLib::Sounds::S_SG,       1400,  10, 0,   0, 20, "shotgun"        },  // *SGRAYS
+    { MezzanineLib::Sounds::S_CG,        100,  30, 0,   0,  7, "chaingun"       },
+    { MezzanineLib::Sounds::S_RLFIRE,    800, 120, 80,  0, 10, "rocketlauncher" },
+    { MezzanineLib::Sounds::S_RIFLE,    1500, 100, 0,   0, 30, "rifle"          },
+    { MezzanineLib::Sounds::S_FLAUNCH,   200,  20, 50,  4,  1, "fireball"       },
+    { MezzanineLib::Sounds::S_ICEBALL,   200,  40, 30,  6,  1, "iceball"        },
+    { MezzanineLib::Sounds::S_SLIMEBALL, 200,  30, 160, 7,  1, "slimeball"      },
+    { MezzanineLib::Sounds::S_PIGR1,     250,  50, 0,   0,  1, "bite"           },
 };
 
 void selectgun(int a, int b, int c)
 {
-    if(a<-1 || b<-1 || c<-1 || a>=TessLib::Gun::NUMGUNS || b>=TessLib::Gun::NUMGUNS || c>=TessLib::Gun::NUMGUNS) return;
+    if(a<-1 || b<-1 || c<-1 || a>=MezzanineLib::Gun::NUMGUNS || b>=MezzanineLib::Gun::NUMGUNS || c>=MezzanineLib::Gun::NUMGUNS) return;
     int s = player1->gunselect;
     if(a>=0 && s!=a && player1->ammo[a]) s = a;
     else if(b>=0 && s!=b && player1->ammo[b]) s = b;
     else if(c>=0 && s!=c && player1->ammo[c]) s = c;
-    else if(s!=TessLib::Gun::GUN_RL && player1->ammo[TessLib::Gun::GUN_RL]) s = TessLib::Gun::GUN_RL;
-    else if(s!=TessLib::Gun::GUN_CG && player1->ammo[TessLib::Gun::GUN_CG]) s = TessLib::Gun::GUN_CG;
-    else if(s!=TessLib::Gun::GUN_SG && player1->ammo[TessLib::Gun::GUN_SG]) s = TessLib::Gun::GUN_SG;
-    else if(s!=TessLib::Gun::GUN_RIFLE && player1->ammo[TessLib::Gun::GUN_RIFLE]) s = TessLib::Gun::GUN_RIFLE;
-    else s = TessLib::Gun::GUN_FIST;
-    if(s!=player1->gunselect) playsoundc(TessLib::Sounds::S_WEAPLOAD);
+    else if(s!=MezzanineLib::Gun::GUN_RL && player1->ammo[MezzanineLib::Gun::GUN_RL]) s = MezzanineLib::Gun::GUN_RL;
+    else if(s!=MezzanineLib::Gun::GUN_CG && player1->ammo[MezzanineLib::Gun::GUN_CG]) s = MezzanineLib::Gun::GUN_CG;
+    else if(s!=MezzanineLib::Gun::GUN_SG && player1->ammo[MezzanineLib::Gun::GUN_SG]) s = MezzanineLib::Gun::GUN_SG;
+    else if(s!=MezzanineLib::Gun::GUN_RIFLE && player1->ammo[MezzanineLib::Gun::GUN_RIFLE]) s = MezzanineLib::Gun::GUN_RIFLE;
+    else s = MezzanineLib::Gun::GUN_FIST;
+    if(s!=player1->gunselect) playsoundc(MezzanineLib::Sounds::S_WEAPLOAD);
     player1->gunselect = s;
     //conoutf("%s selected", (int)guns[s].name);
 };
@@ -48,7 +48,7 @@ void weapon(char *a1, char *a2, char *a3)
               a3[0] ? atoi(a3) : -1);
 };
 
-COMMAND(weapon, TessLib::Support::FunctionSignatures::ARG_3STR);
+COMMAND(weapon, MezzanineLib::Support::FunctionSignatures::ARG_3STR);
 
 void createrays(vec &from, vec &to)             // create random spread of rays for the shotgun
 {
@@ -131,7 +131,7 @@ void hit(int target, int damage, dynent *d, dynent *at)
 {
     if(d==player1) selfdamage(damage, at==player1 ? -1 : -2, at);
     else if(d->monsterstate) monsterpain(d, damage, at);
-    else { addmsg(1, 4, TessLib::NetworkMessages::SV_DAMAGE, target, damage, d->lifesequence); playsound(TessLib::Sounds::S_PAIN1+rnd(5), &d->o); };
+    else { addmsg(1, 4, MezzanineLib::NetworkMessages::SV_DAMAGE, target, damage, d->lifesequence); playsound(MezzanineLib::Sounds::S_PAIN1+rnd(5), &d->o); };
     particle_splash(3, damage, 1000, d->o);
 	demodamage(damage, d->o);
 };
@@ -141,7 +141,7 @@ const float RL_DAMRAD = 7;   // hack
 
 void radialeffect(dynent *o, vec &v, int cn, int qdam, dynent *at)
 {
-    if(o->state!=TessLib::CSStatus::CS_ALIVE) return;
+    if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return;
     vdist(dist, temp, v, o->o);
     dist -= 2; // account for eye distance imprecision
     if(dist<RL_DAMRAD) 
@@ -158,14 +158,14 @@ void splash(projectile *p, vec &v, vec &vold, int notthisplayer, int notthismons
 {
     particle_splash(0, 50, 300, v);
     p->inuse = false;
-    if(p->gun!=TessLib::Gun::GUN_RL)
+    if(p->gun!=MezzanineLib::Gun::GUN_RL)
     {
-        playsound(TessLib::Sounds::S_FEXPLODE, &v);
+        playsound(MezzanineLib::Sounds::S_FEXPLODE, &v);
         // no push?
     }
     else
     {
-        playsound(TessLib::Sounds::S_RLHIT, &v);
+        playsound(MezzanineLib::Sounds::S_RLHIT, &v);
         newsphere(v, RL_RADIUS, 0);
         dodynlight(vold, v, 0, 0, p->owner);
         if(!p->local) return;
@@ -184,7 +184,7 @@ void splash(projectile *p, vec &v, vec &vold, int notthisplayer, int notthismons
 
 inline void projdamage(dynent *o, projectile *p, vec &v, int i, int im, int qdam)
 {
-    if(o->state!=TessLib::CSStatus::CS_ALIVE) return;
+    if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return;
     if(intersect(o, p->o, v))
     {
         splash(p, v, p->o, i, im, qdam);
@@ -222,7 +222,7 @@ void moveprojectiles(float time)
             if(time==dtime) splash(p, v, p->o, -1, -1, qdam);
             else
             {
-                if(p->gun==TessLib::Gun::GUN_RL) { dodynlight(p->o, v, 0, 255, p->owner); particle_splash(5, 2, 200, v); }
+                if(p->gun==MezzanineLib::Gun::GUN_RL) { dodynlight(p->o, v, 0, 255, p->owner); particle_splash(5, 2, 200, v); }
                 else { particle_splash(1, 1, 200, v); particle_splash(guns[p->gun].part, 1, 1, v); };
             };       
         };
@@ -236,30 +236,30 @@ void shootv(int gun, vec &from, vec &to, dynent *d, bool local)     // create vi
     int pspeed = 25;
     switch(gun)
     {
-        case TessLib::Gun::GUN_FIST:
+        case MezzanineLib::Gun::GUN_FIST:
             break;
 
-        case TessLib::Gun::GUN_SG:
+        case MezzanineLib::Gun::GUN_SG:
         {
             loopi(SGRAYS) particle_splash(0, 5, 200, sg[i]);
             break;
         };
 
-        case TessLib::Gun::GUN_CG:
+        case MezzanineLib::Gun::GUN_CG:
             particle_splash(0, 100, 250, to);
             //particle_trail(1, 10, from, to);
             break;
 
-        case TessLib::Gun::GUN_RL:
-        case TessLib::Gun::GUN_FIREBALL:
-        case TessLib::Gun::GUN_ICEBALL:
-        case TessLib::Gun::GUN_SLIMEBALL:
+        case MezzanineLib::Gun::GUN_RL:
+        case MezzanineLib::Gun::GUN_FIREBALL:
+        case MezzanineLib::Gun::GUN_ICEBALL:
+        case MezzanineLib::Gun::GUN_SLIMEBALL:
             pspeed = guns[gun].projspeed;
             if(d->monsterstate) pspeed /= 2;
             newprojectile(from, to, (float)pspeed, local, d, gun);
             break;
 
-        case TessLib::Gun::GUN_RIFLE: 
+        case MezzanineLib::Gun::GUN_RIFLE: 
             particle_splash(0, 50, 200, to);
             particle_trail(1, 500, from, to);
             break;
@@ -276,11 +276,11 @@ void hitpush(int target, int damage, dynent *d, dynent *at, vec &from, vec &to)
 
 void raydamage(dynent *o, vec &from, vec &to, dynent *d, int i)
 {
-    if(o->state!=TessLib::CSStatus::CS_ALIVE) return;
+    if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return;
     int qdam = guns[d->gunselect].damage;
     if(d->quadmillis) qdam *= 4;
     if(d->monsterstate) qdam /= MONSTERDAMAGEFACTOR;
-    if(d->gunselect==TessLib::Gun::GUN_SG)
+    if(d->gunselect==MezzanineLib::Gun::GUN_SG)
     {
         int damage = 0;
         loop(r, SGRAYS) if(intersect(o, from, sg[r])) damage += qdam;
@@ -297,7 +297,7 @@ void shoot(dynent *d, vec &targ)
     if(!d->attacking) return;
     d->lastaction = lastmillis;
     d->lastattackgun = d->gunselect;
-    if(!d->ammo[d->gunselect]) { playsoundc(TessLib::Sounds::S_NOAMMO); d->gunwait = 250; d->lastattackgun = -1; return; };
+    if(!d->ammo[d->gunselect]) { playsoundc(MezzanineLib::Sounds::S_NOAMMO); d->gunwait = 250; d->lastattackgun = -1; return; };
     if(d->gunselect) d->ammo[d->gunselect]--;
     vec from = d->o;
     vec to = targ;
@@ -311,17 +311,17 @@ void shoot(dynent *d, vec &targ)
     if(d->pitch<80.0f) d->pitch += guns[d->gunselect].kickamount*0.05f;
     
 
-    if(d->gunselect==TessLib::Gun::GUN_FIST || d->gunselect==TessLib::Gun::GUN_BITE) 
+    if(d->gunselect==MezzanineLib::Gun::GUN_FIST || d->gunselect==MezzanineLib::Gun::GUN_BITE) 
     {
         vmul(unitv, 3); // punch range
         to = from;
         vadd(to, unitv);
     };   
-    if(d->gunselect==TessLib::Gun::GUN_SG) createrays(from, to);
+    if(d->gunselect==MezzanineLib::Gun::GUN_SG) createrays(from, to);
 
-    if(d->quadmillis && attacktime>200) playsoundc(TessLib::Sounds::S_ITEMPUP);
+    if(d->quadmillis && attacktime>200) playsoundc(MezzanineLib::Sounds::S_ITEMPUP);
     shootv(d->gunselect, from, to, d, true);
-    if(!d->monsterstate) addmsg(1, 8, TessLib::NetworkMessages::SV_SHOT, d->gunselect, (int)(from.x*DMF), (int)(from.y*DMF), (int)(from.z*DMF), (int)(to.x*DMF), (int)(to.y*DMF), (int)(to.z*DMF));
+    if(!d->monsterstate) addmsg(1, 8, MezzanineLib::NetworkMessages::SV_SHOT, d->gunselect, (int)(from.x*DMF), (int)(from.y*DMF), (int)(from.z*DMF), (int)(to.x*DMF), (int)(to.y*DMF), (int)(to.z*DMF));
     d->gunwait = guns[d->gunselect].attackdelay;
 
     if(guns[d->gunselect].projspeed) return;

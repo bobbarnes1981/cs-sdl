@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 ENetSocket mssock = ENET_SOCKET_NULL;
 
@@ -138,6 +138,6 @@ void servermsinit(const char *master, char *sdesc, bool listen)
 	{
         ENetAddress address = { ENET_HOST_ANY, CUBE_SERVINFO_PORT };
         pongsock = enet_socket_create(ENET_SOCKET_TYPE_DATAGRAM, &address);
-		if(pongsock == ENET_SOCKET_NULL)TessLib::GameInit::Fatal("could not create server info socket\n");
+		if(pongsock == ENET_SOCKET_NULL)MezzanineLib::GameInit::Fatal("could not create server info socket\n");
 	};
 };

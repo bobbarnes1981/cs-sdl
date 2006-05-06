@@ -109,9 +109,9 @@ void menuitem(char *text, char *action)
     mi.action = action[0] ? newstring(action) : mi.text;
 };
 
-COMMAND(menuitem, TessLib::Support::FunctionSignatures::ARG_2STR);
-COMMAND(showmenu, TessLib::Support::FunctionSignatures::ARG_1STR);
-COMMAND(newmenu, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(menuitem, MezzanineLib::Support::FunctionSignatures::ARG_2STR);
+COMMAND(showmenu, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(newmenu, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 
 bool menukey(int code, bool isdown)
 {

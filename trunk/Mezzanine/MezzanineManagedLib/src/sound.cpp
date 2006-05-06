@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 VARP(soundvol, 0, 255, 255);
 VARP(musicvol, 0, 128, 255);
@@ -22,10 +22,10 @@ VAR(soundbufferlen, 128, 1024, 4096);
 
 void music(char *name)
 {
-	TessLib::Support::Sound::Music(name);
+	MezzanineLib::Support::Sound::Music(name);
 };
 
-COMMAND(music, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(music, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 
 vector<Mix_Chunk *> samples;
 
@@ -39,7 +39,7 @@ int registersound(char *name)
     return samples.length()-1;
 };
 
-COMMAND(registersound, TessLib::Support::FunctionSignatures::ARG_1EST);
+COMMAND(registersound, MezzanineLib::Support::FunctionSignatures::ARG_1EST);
 
 VAR(stereo, 0, 1, 1);
 
@@ -79,7 +79,7 @@ void updatevol()
     };
 };
 
-void playsoundc(int n) { addmsg(0, 2, TessLib::NetworkMessages::SV_SOUND, n); playsound(n); };
+void playsoundc(int n) { addmsg(0, 2, MezzanineLib::NetworkMessages::SV_SOUND, n); playsound(n); };
 
 int soundsatonce = 0, lastsoundmillis = 0;
 
@@ -108,4 +108,4 @@ void playsound(int n, vec *loc)
 };
 
 void sound(int n) { playsound(n, NULL); };
-COMMAND(sound, TessLib::Support::FunctionSignatures::ARG_1INT);
+COMMAND(sound, MezzanineLib::Support::FunctionSignatures::ARG_1INT);

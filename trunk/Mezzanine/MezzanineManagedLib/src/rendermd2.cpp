@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 struct md2_header
 {
@@ -139,7 +139,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
     if(displaylist && frame==0 && range==1)
     {
 		glCallList(displaylist);
-		TessLib::Render::RenderGl::XtraVerts += displaylistverts;
+		MezzanineLib::Render::RenderGl::XtraVerts += displaylistverts;
     }
     else
     {
@@ -147,7 +147,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 		{
 			static int displaylistn = 10;
 			glNewList(displaylist = displaylistn++, GL_COMPILE);
-			displaylistverts = TessLib::Render::RenderGl::XtraVerts;
+			displaylistverts = MezzanineLib::Render::RenderGl::XtraVerts;
 		};
 		
 		int time = lastmillis-basetime;
@@ -178,7 +178,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 				glVertex3f(ip(x), ip(z), ip(y));
 			};
 
-			TessLib::Render::RenderGl::XtraVerts += numVertex;
+			MezzanineLib::Render::RenderGl::XtraVerts += numVertex;
 
 			glEnd();
 		};
@@ -186,7 +186,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 		if(displaylist)
 		{
 			glEndList();
-			displaylistverts = TessLib::Render::RenderGl::XtraVerts-displaylistverts;
+			displaylistverts = MezzanineLib::Render::RenderGl::XtraVerts-displaylistverts;
 		};
 	};
 
@@ -202,10 +202,10 @@ void delayedload(md2 *m)
     if(!m->loaded)
     {
         sprintf_sd(name1)("packages/models/%s/tris.md2", m->loadname);
-        if(!m->load(path(name1))) TessLib::GameInit::Fatal("loadmodel: ", name1);
+        if(!m->load(path(name1))) MezzanineLib::GameInit::Fatal("loadmodel: ", name1);
         sprintf_sd(name2)("packages/models/%s/skin.jpg", m->loadname);
         int xs, ys;
-		TessLib::Render::RenderGl::InstallTexture(FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
+		MezzanineLib::Render::RenderGl::InstallTexture(FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
         m->loaded = true;
     };
 };
@@ -238,8 +238,8 @@ void mapmodelreset() { mapmodels.setsize(0); };
 
 mapmodelinfo &getmminfo(int i) { return i<mapmodels.length() ? mapmodels[i]->mmi : *(mapmodelinfo *)0; };
 
-COMMAND(mapmodel, TessLib::Support::FunctionSignatures::ARG_5STR);
-COMMAND(mapmodelreset, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(mapmodel, MezzanineLib::Support::FunctionSignatures::ARG_5STR);
+COMMAND(mapmodelreset, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
 void rendermodel(char *mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime)
 {

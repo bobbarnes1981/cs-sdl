@@ -36,7 +36,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace TessLib
+namespace MezzanineLib
 {
 	#region Class Documentation
 	#endregion Class Documentation
@@ -44,15 +44,15 @@ namespace TessLib
 	public sealed class Bindings
 	{
 		#region Private Constants
-		#region string TESS_NATIVE_LIBRARY
+		#region string MEZZANINE_NATIVE_LIBRARY
 		/// <summary>
-		///     Specifies Tess's native library archive.
+		///     Specifies Mezzanine's native library archive.
 		/// </summary>
 		/// <remarks>
-		///     Specifies TessLib.dll everywhere; will be mapped via .config for mono.
+		///     Specifies MezzanineLib.dll everywhere; will be mapped via .config for mono.
 		/// </remarks>
-		private const string TESS_NATIVE_LIBRARY = "TessManagedLib.dll";
-		#endregion string TESS_NATIVE_LIBRARY
+		private const string MEZZANINE_NATIVE_LIBRARY = "MezzanineManagedLib.dll";
+		#endregion string MEZZANINE_NATIVE_LIBRARY
 
 		#region CallingConvention CALLING_CONVENTION
 		/// <summary>
@@ -111,7 +111,7 @@ namespace TessLib
 //		///     <code>extern DECLSPEC bool CDECL installtex(int tnum, char *texname, int &xs, int &ys, bool clamp = false);</code>
 //		///     </p>
 //		/// </remarks>
-//		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+//		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 //		public static extern bool installtex(int tnum, string texname, out int xs, out int ys, bool clamp);
 //		#endregion bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
 
@@ -124,7 +124,7 @@ namespace TessLib
 		///     <code>ENET_API DECLSPEC int CDECL enet_initialize (void);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern int enet_initialize();
 		#endregion int enet_initialize()
 
@@ -137,7 +137,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL stop();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void stop();
 		#endregion void stop()
 
@@ -150,7 +150,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL computeraytable(float vx, float vy);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void computeraytable(float vx, float vy);
 		#endregion void computeraytable(float vx, float vy)
 
@@ -163,7 +163,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL readdepth(int w, int h);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void readdepth(int w, int h);
 		#endregion void readdepth(int w, int h)
 
@@ -176,7 +176,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL purgetextures();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void purgetextures();
 		#endregion void purgetextures()
 
@@ -189,7 +189,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL writecfg()</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void writecfg();
 		#endregion void writecfg()
 
@@ -202,7 +202,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL cleanupserver()</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void cleanupserver();
 		#endregion void cleanupserver()
 
@@ -215,7 +215,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL gl_drawframe(int w, int h, float curfps);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void gl_drawframe(int w, int h, float curfps);
 		#endregion void gl_drawframe(int w, int h, float curfps)
 
@@ -228,7 +228,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL empty_world(int factor, bool force);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void empty_world(int factor, bool force);
 		#endregion void empty_world(int factor, bool force)
 
@@ -241,7 +241,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL disconnect(int onlyclean = 0, int async = 0)</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void disconnect(bool onlyclean, bool async);
 		#endregion void disconnect(bool onlyclean, bool async)
 
@@ -254,7 +254,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL serverslice(int seconds, unsigned int timeout);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void serverslice(int seconds, int timeout);
 		#endregion void serverslice(int seconds, int timeout)
 
@@ -267,7 +267,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL calclight();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void calclight();
 		#endregion void calclight()
 
@@ -280,7 +280,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL writeservercfg();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void writeservercfg();
 		#endregion void writeservercfg()
 
@@ -293,7 +293,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL updatevol();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void updatevol();
 		#endregion void updatevol()
 
@@ -306,7 +306,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL initclientnet();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void initclientnet();
 		#endregion void initclientnet()
 
@@ -319,7 +319,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC char CDECL *getclientmap();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern string getclientmap();
 		#endregion string getclientmap()
 
@@ -332,7 +332,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master, char *passwd, int maxcl);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void initserver(bool dedicated, int uprate, string sdesc, string ip, out string master, string passwd, int maxcl);
 		#endregion void initserver()
 
@@ -345,7 +345,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL localconnect();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void localconnect();
 		#endregion void localconnect()
 
@@ -358,7 +358,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL cleardlights();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void cleardlights();
 		#endregion void cleardlights()
 
@@ -371,7 +371,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL setarraypointers();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void setarraypointers();
 		#endregion void setarraypointers()
 
@@ -384,7 +384,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC dynent * CDECL getplayer1();</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern IntPtr getplayer1();
 		#endregion IntPtr getplayer1()
 
@@ -397,7 +397,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL updateworld(int millis);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void updateworld(int millis);
 		#endregion void updateworld(int millis)
 
@@ -410,7 +410,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL mousemove(int dx, int dy)</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void mousemove(int dx, int dy);
 		#endregion void mousemove(int dx, int dy)
 
@@ -423,7 +423,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL newmenu(char *name);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void newmenu(string name);
 		#endregion void newmenu(string name)
 
@@ -436,7 +436,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL changemap(char *name);</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void changemap(string name);
 		#endregion void changemap(string name)
 
@@ -449,7 +449,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL keypress(int code, bool isdown, int cooked)</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void keypress(int code, bool isdown, int cooked);
 		#endregion void keypress(int code, bool isdown, int cooked)
 
@@ -462,7 +462,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL exec(char *cfgfile);;</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void exec(string cfgfile);
 		#endregion void exec(string cfgfile)
 
@@ -475,7 +475,7 @@ namespace TessLib
 		///     <code>extern DECLSPEC bool CDECL execfile(char *cfgfile);;</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern bool execfile(string cfgfile);
 		#endregion bool execfile(string cfgfile)
 
@@ -488,10 +488,10 @@ namespace TessLib
 		///     <code>extern DECLSPEC void CDECL rendermodel(char *mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap = 0, int basetime = 0)</code>
 		///     </p>
 		/// </remarks>
-		[DllImport(TESS_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void rendermodel(string mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime);
 		#endregion void rendermodel(string mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime))
 
-		#endregion Tess Methods
+		#endregion Mezzanine Methods
 	}
 }

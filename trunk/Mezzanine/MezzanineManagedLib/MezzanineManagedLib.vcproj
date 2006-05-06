@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="TessManagedLib"
+	Name="MezzanineManagedLib"
 	ProjectGUID="{7923259E-4B01-4566-9B36-EA5173A0C60C}"
 	RootNamespace="cube"
 	SccProjectName=""
@@ -110,7 +110,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				OptimizeForProcessor="0"
-				AdditionalIncludeDirectories="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\include&quot;;&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\TessManagedLib\enet\include&quot;"
+				AdditionalIncludeDirectories="..\include;enet\include"
 				AdditionalUsingDirectories=""
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;ENET_DEBUG"
 				BasicRuntimeChecks="0"
@@ -132,17 +132,17 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
 				AdditionalDependencies="odbc32.lib odbccp32.lib zlib.lib opengl32.lib glu32.lib msvcrt.lib SDLmain.lib SDL.lib SDL_image.lib SDL_mixer.lib ws2_32.lib winmm.lib"
-				OutputFile="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\TessManagedLib\bin\Debug\TessManagedLib.dll&quot;"
+				OutputFile="bin\Debug\MezzanineManagedLib.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="&quot;C:\Documents and Settings\DYYH\My Documents\workspace\Tess\lib&quot;"
+				AdditionalLibraryDirectories="..\lib"
 				IgnoreAllDefaultLibraries="FALSE"
 				ForceSymbolReferences="__DllMainCRTStartup@12"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="bin/Debug/TessManagedLib_debug.pdb"
+				ProgramDatabaseFile="bin/Debug/MezzanineManagedLib_debug.pdb"
 				SubSystem="2"
 				ResourceOnlyDLL="TRUE"
-				ImportLibrary="./bin/Debug/TessManagedLib.lib"/>
+				ImportLibrary="./bin/Debug/MezzanineManagedLib.lib"/>
 			<Tool
 				Name="VCMIDLTool"
 				TypeLibraryName=".\Debug/cube.tlb"/>

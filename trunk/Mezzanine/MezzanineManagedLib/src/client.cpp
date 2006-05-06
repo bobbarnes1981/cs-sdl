@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 ENetHost *clienthost = NULL;
 int connecting = 0;
@@ -45,8 +45,8 @@ void throttle()
 void newname(char *name) { c2sinit = false; strn0cpy(player1->name, name, 16); };
 void newteam(char *name) { c2sinit = false; strn0cpy(player1->team, name, 5); };
 
-COMMANDN(team, newteam, TessLib::Support::FunctionSignatures::ARG_1STR);
-COMMANDN(name, newname, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMANDN(team, newteam, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMANDN(name, newname, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 
 void writeclientinfo(FILE *f)
 {
@@ -136,10 +136,10 @@ string ctext;
 void toserver(char *text) { conoutf("%s:\f %s", player1->name, text); strn0cpy(ctext, text, 80); };
 void echo(char *text) { conoutf("%s", text); };
 
-COMMAND(echo, TessLib::Support::FunctionSignatures::ARG_VARI);
-COMMANDN(say, toserver, TessLib::Support::FunctionSignatures::ARG_VARI);
-COMMANDN(connect, connects, TessLib::Support::FunctionSignatures::ARG_1STR);
-COMMANDN(disconnect, trydisconnect, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(echo, MezzanineLib::Support::FunctionSignatures::ARG_VARI);
+COMMANDN(say, toserver, MezzanineLib::Support::FunctionSignatures::ARG_VARI);
+COMMANDN(connect, connects, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMANDN(disconnect, trydisconnect, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
 // collect c2s messages conveniently
 
@@ -148,7 +148,7 @@ vector<ivector> messages;
 void addmsg(int rel, int num, int type, ...)
 {
     if(demoplayback) return;
-	//if(num!=msgsizelookup(type)) { sprintf_sd(s)("inconsistant msg size for %d (%d != %d)", type, num, msgsizelookup(type)); TessLib::GameInit::Fatal(s); };
+	//if(num!=msgsizelookup(type)) { sprintf_sd(s)("inconsistant msg size for %d (%d != %d)", type, num, msgsizelookup(type)); MezzanineLib::GameInit::Fatal(s); };
     if(messages.length()==100) { conoutf("command flood protection (type %d)", type); return; };
     ivector &msg = messages.add();
     msg.add(num);
@@ -172,7 +172,7 @@ bool senditemstoserver = false;     // after a map change, since server doesn't 
 
 string clientpassword;
 void password(char *p) { strcpy_s(clientpassword, p); };
-COMMAND(password, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(password, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 
 bool netmapstart() { senditemstoserver = true; return clienthost!=NULL; };
 
@@ -202,14 +202,14 @@ void c2sinfo(dynent *d)                     // send update to the server
     if(toservermap[0])                      // suggest server to change map
     {                                       // do this exclusively as map change may invalidate rest of update
         packet->flags = ENET_PACKET_FLAG_RELIABLE;
-        putint(p, TessLib::NetworkMessages::SV_MAPCHANGE);
+        putint(p, MezzanineLib::NetworkMessages::SV_MAPCHANGE);
         sendstring(toservermap, p);
         toservermap[0] = 0;
         putint(p, nextmode);
     }
     else
     {
-        putint(p, TessLib::NetworkMessages::SV_POS);
+        putint(p, MezzanineLib::NetworkMessages::SV_POS);
         putint(p, clientnum);
         putint(p, (int)(d->o.x*DMF));       // quantize coordinates to 1/16th of a cube, between 1 and 3 bytes
         putint(p, (int)(d->o.y*DMF));
@@ -221,12 +221,12 @@ void c2sinfo(dynent *d)                     // send update to the server
         putint(p, (int)(d->vel.y*DVF));
         putint(p, (int)(d->vel.z*DVF));
         // pack rest in 1 byte: strafe:2, move:2, onfloor:1, state:3
-        putint(p, (d->strafe&3) | ((d->move&3)<<2) | (((int)d->onfloor)<<4) | ((editmode ? TessLib::CSStatus::CS_EDITING : d->state)<<5) );
+        putint(p, (d->strafe&3) | ((d->move&3)<<2) | (((int)d->onfloor)<<4) | ((editmode ? MezzanineLib::CSStatus::CS_EDITING : d->state)<<5) );
  
         if(senditemstoserver)
         {
             packet->flags = ENET_PACKET_FLAG_RELIABLE;
-            putint(p, TessLib::NetworkMessages::SV_ITEMLIST);
+            putint(p, MezzanineLib::NetworkMessages::SV_ITEMLIST);
             if(!m_noitems) putitems(p);
             putint(p, -1);
             senditemstoserver = false;
@@ -235,7 +235,7 @@ void c2sinfo(dynent *d)                     // send update to the server
         if(ctext[0])    // player chat, not flood protected for now
         {
             packet->flags = ENET_PACKET_FLAG_RELIABLE;
-            putint(p, TessLib::NetworkMessages::SV_TEXT);
+            putint(p, MezzanineLib::NetworkMessages::SV_TEXT);
             sendstring(ctext, p);
             ctext[0] = 0;
         };
@@ -243,7 +243,7 @@ void c2sinfo(dynent *d)                     // send update to the server
         {
             packet->flags = ENET_PACKET_FLAG_RELIABLE;
             c2sinit = true;
-            putint(p, TessLib::NetworkMessages::SV_INITC2S);
+            putint(p, MezzanineLib::NetworkMessages::SV_INITC2S);
             sendstring(player1->name, p);
             sendstring(player1->team, p);
             putint(p, player1->lifesequence);
@@ -257,7 +257,7 @@ void c2sinfo(dynent *d)                     // send update to the server
         messages.setsize(0);
         if(lastmillis-lastping>250)
         {
-            putint(p, TessLib::NetworkMessages::SV_PING);
+            putint(p, MezzanineLib::NetworkMessages::SV_PING);
             putint(p, lastmillis);
             lastping = lastmillis;
         };
