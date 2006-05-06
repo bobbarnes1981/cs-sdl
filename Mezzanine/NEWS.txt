@@ -1,1 +1,0 @@
-2006-04-29: The Sauerbraten source has been ported to Managed C++ and renamed Mezzanine. Mezzanine can be used as a drop-in replacement for Sauerbraten.
