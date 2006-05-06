@@ -36,7 +36,7 @@ void updatepos(dynent *d)
     const float dz = player1->o.z-d->o.z;
     const float rz = player1->aboveeye+d->eyeheight;
     const float fx = (float)fabs(dx), fy = (float)fabs(dy), fz = (float)fabs(dz);
-    if(fx<r && fy<r && fz<rz && d->state!=TessLib::CSStatus::CS_DEAD)
+    if(fx<r && fy<r && fz<rz && d->state!=MezzanineLib::CSStatus::CS_DEAD)
     {
         if(fx<fy) d->o.y += dy<0 ? r-fy : -(r-fy);  // push aside
         else      d->o.x += dx<0 ? r-fx : -(r-fx);
@@ -63,7 +63,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
 
     while(p<end) switch(type = getint(p))
     {
-        case TessLib::NetworkMessages::SV_INITS2C:                    // welcome messsage from the server
+        case MezzanineLib::NetworkMessages::SV_INITS2C:                    // welcome messsage from the server
         {
             cn = getint(p);
             int prot = getint(p);
@@ -90,7 +90,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             break;
         };
 
-        case TessLib::NetworkMessages::SV_POS:                        // position of another client
+        case MezzanineLib::NetworkMessages::SV_POS:                        // position of another client
         {
             cn = getint(p);
             d = getclient(cn);
@@ -110,28 +110,28 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             d->move = (f&3)==3 ? -1 : f&3;
             d->onfloor = (f>>2)&1;
             int state = f>>3;
-            if(state==TessLib::CSStatus::CS_DEAD && d->state!=TessLib::CSStatus::CS_DEAD) d->lastaction = lastmillis;
+            if(state==MezzanineLib::CSStatus::CS_DEAD && d->state!=MezzanineLib::CSStatus::CS_DEAD) d->lastaction = lastmillis;
             d->state = state;
             if(!demoplayback) updatepos(d);
             break;
         };
 
-        case TessLib::NetworkMessages::SV_SOUND:
+        case MezzanineLib::NetworkMessages::SV_SOUND:
             playsound(getint(p), &d->o);
             break;
 
-        case TessLib::NetworkMessages::SV_TEXT:
+        case MezzanineLib::NetworkMessages::SV_TEXT:
             sgetstr();
             conoutf("%s:\f %s", d->name, text); 
             break;
 
-        case TessLib::NetworkMessages::SV_MAPCHANGE:     
+        case MezzanineLib::NetworkMessages::SV_MAPCHANGE:     
             sgetstr();
             changemapserv(text, getint(p));
             mapchanged = true;
             break;
         
-        case TessLib::NetworkMessages::SV_ITEMLIST:
+        case MezzanineLib::NetworkMessages::SV_ITEMLIST:
         {
             int n;
             if(mapchanged) { senditemstoserver = false; resetspawns(); };
@@ -139,7 +139,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             break;
         };
 
-        case TessLib::NetworkMessages::SV_MAPRELOAD:          // server requests next map
+        case MezzanineLib::NetworkMessages::SV_MAPRELOAD:          // server requests next map
         {
             getint(p);
             sprintf_sd(nextmapalias)("nextmap_%s", getclientmap());
@@ -148,7 +148,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             break;
         };
 
-        case TessLib::NetworkMessages::SV_INITC2S:            // another client either connected or changed name/team
+        case MezzanineLib::NetworkMessages::SV_INITC2S:            // another client either connected or changed name/team
         {
             sgetstr();
             if(d->name[0])          // already connected
@@ -168,14 +168,14 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             break;
         };
 
-        case TessLib::NetworkMessages::SV_CDIS:
+        case MezzanineLib::NetworkMessages::SV_CDIS:
             cn = getint(p);
             if(!(d = getclient(cn))) break;
 			conoutf("player %s disconnected", d->name[0] ? d->name : "[incompatible client]"); 
             zapdynent(players[cn]);
             break;
 
-        case TessLib::NetworkMessages::SV_SHOT:
+        case MezzanineLib::NetworkMessages::SV_SHOT:
         {
             int gun = getint(p);
             vec s, e;
@@ -185,22 +185,22 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             e.x = getint(p)/DMF;
             e.y = getint(p)/DMF;
             e.z = getint(p)/DMF;
-            if(gun==TessLib::Gun::GUN_SG) createrays(s, e);
+            if(gun==MezzanineLib::Gun::GUN_SG) createrays(s, e);
             shootv(gun, s, e, d);
             break;
         };
 
-        case TessLib::NetworkMessages::SV_DAMAGE:             
+        case MezzanineLib::NetworkMessages::SV_DAMAGE:             
         {
             int target = getint(p);
             int damage = getint(p);
             int ls = getint(p);
             if(target==clientnum) { if(ls==player1->lifesequence) selfdamage(damage, cn, d); }
-            else playsound(TessLib::Sounds::S_PAIN1+rnd(5), &getclient(target)->o);
+            else playsound(MezzanineLib::Sounds::S_PAIN1+rnd(5), &getclient(target)->o);
             break;
         };
 
-        case TessLib::NetworkMessages::SV_DIED:
+        case MezzanineLib::NetworkMessages::SV_DIED:
         {
             int actor = getint(p);
             if(actor==cn)
@@ -220,7 +220,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
                     frags = 1;
                     conoutf("you fragged %s", d->name);
                 };
-                addmsg(1, 2, TessLib::NetworkMessages::SV_FRAGS, player1->frags += frags);
+                addmsg(1, 2, MezzanineLib::NetworkMessages::SV_FRAGS, player1->frags += frags);
             }
             else
             {
@@ -237,39 +237,39 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
                     };
                 };
             };
-            playsound(TessLib::Sounds::S_DIE1+rnd(2), &d->o);
+            playsound(MezzanineLib::Sounds::S_DIE1+rnd(2), &d->o);
             d->lifesequence++;
             break;
         };
 
-        case TessLib::NetworkMessages::SV_FRAGS:
+        case MezzanineLib::NetworkMessages::SV_FRAGS:
             players[cn]->frags = getint(p);
             break;
 
-        case TessLib::NetworkMessages::SV_ITEMPICKUP:
+        case MezzanineLib::NetworkMessages::SV_ITEMPICKUP:
             setspawn(getint(p), false);
             getint(p);
             break;
 
-        case TessLib::NetworkMessages::SV_ITEMSPAWN:
+        case MezzanineLib::NetworkMessages::SV_ITEMSPAWN:
         {
             uint i = getint(p);
             setspawn(i, true);
             if(i>=(uint)ents.length()) break;
             vec v = { ents[i].x, ents[i].y, ents[i].z };
-            playsound(TessLib::Sounds::S_ITEMSPAWN, &v); 
+            playsound(MezzanineLib::Sounds::S_ITEMSPAWN, &v); 
             break;
         };
 
-        case TessLib::NetworkMessages::SV_ITEMACC:            // server acknowledges that I picked up this item
+        case MezzanineLib::NetworkMessages::SV_ITEMACC:            // server acknowledges that I picked up this item
             realpickup(getint(p), player1);
             break;
 
-        case TessLib::NetworkMessages::SV_EDITH:              // coop editing messages, should be extended to include all possible editing ops
-        case TessLib::NetworkMessages::SV_EDITT:
-        case TessLib::NetworkMessages::SV_EDITS:
-        case TessLib::NetworkMessages::SV_EDITD:
-        case TessLib::NetworkMessages::SV_EDITE:
+        case MezzanineLib::NetworkMessages::SV_EDITH:              // coop editing messages, should be extended to include all possible editing ops
+        case MezzanineLib::NetworkMessages::SV_EDITT:
+        case MezzanineLib::NetworkMessages::SV_EDITS:
+        case MezzanineLib::NetworkMessages::SV_EDITD:
+        case MezzanineLib::NetworkMessages::SV_EDITE:
         {
             int x  = getint(p);
             int y  = getint(p);
@@ -279,19 +279,19 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             block b = { x, y, xs, ys };
             switch(type)
             {
-                case TessLib::NetworkMessages::SV_EDITH: editheightxy(v!=0, getint(p), b); break;
-                case TessLib::NetworkMessages::SV_EDITT: edittexxy(v, getint(p), b); break;
-                case TessLib::NetworkMessages::SV_EDITS: edittypexy(v, b); break;
-                case TessLib::NetworkMessages::SV_EDITD: setvdeltaxy(v, b); break;
-                case TessLib::NetworkMessages::SV_EDITE: editequalisexy(v!=0, b); break;
+                case MezzanineLib::NetworkMessages::SV_EDITH: editheightxy(v!=0, getint(p), b); break;
+                case MezzanineLib::NetworkMessages::SV_EDITT: edittexxy(v, getint(p), b); break;
+                case MezzanineLib::NetworkMessages::SV_EDITS: edittypexy(v, b); break;
+                case MezzanineLib::NetworkMessages::SV_EDITD: setvdeltaxy(v, b); break;
+                case MezzanineLib::NetworkMessages::SV_EDITE: editequalisexy(v!=0, b); break;
             };
             break;
         };
 
-        case TessLib::NetworkMessages::SV_EDITENT:            // coop edit of ent
+        case MezzanineLib::NetworkMessages::SV_EDITENT:            // coop edit of ent
         {
             uint i = getint(p);
-            while((uint)ents.length()<=i) ents.add().type = TessLib::StaticEntity::NOTUSED;
+            while((uint)ents.length()<=i) ents.add().type = MezzanineLib::StaticEntity::NOTUSED;
             int to = ents[i].type;
             ents[i].type = getint(p);
             ents[i].x = getint(p);
@@ -302,31 +302,31 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             ents[i].attr3 = getint(p);
             ents[i].attr4 = getint(p);
             ents[i].spawned = false;
-            if(ents[i].type==TessLib::StaticEntity::LIGHT || to==TessLib::StaticEntity::LIGHT) calclight();
+            if(ents[i].type==MezzanineLib::StaticEntity::LIGHT || to==MezzanineLib::StaticEntity::LIGHT) calclight();
             break;
         };
 
-        case TessLib::NetworkMessages::SV_PING:
+        case MezzanineLib::NetworkMessages::SV_PING:
             getint(p);
             break;
 
-        case TessLib::NetworkMessages::SV_PONG: 
-            addmsg(0, 2, TessLib::NetworkMessages::SV_CLIENTPING, player1->ping = (player1->ping*5+lastmillis-getint(p))/6);
+        case MezzanineLib::NetworkMessages::SV_PONG: 
+            addmsg(0, 2, MezzanineLib::NetworkMessages::SV_CLIENTPING, player1->ping = (player1->ping*5+lastmillis-getint(p))/6);
             break;
 
-        case TessLib::NetworkMessages::SV_CLIENTPING:
+        case MezzanineLib::NetworkMessages::SV_CLIENTPING:
             players[cn]->ping = getint(p);
             break;
 
-        case TessLib::NetworkMessages::SV_GAMEMODE:
+        case MezzanineLib::NetworkMessages::SV_GAMEMODE:
             nextmode = getint(p);
             break;
 
-        case TessLib::NetworkMessages::SV_TIMEUP:
+        case MezzanineLib::NetworkMessages::SV_TIMEUP:
             timeupdate(getint(p));
             break;
 
-        case TessLib::NetworkMessages::SV_RECVMAP:
+        case MezzanineLib::NetworkMessages::SV_RECVMAP:
         {
             sgetstr();
             conoutf("received map \"%s\" from server, reloading..", text);
@@ -337,12 +337,12 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             break;
         };
         
-        case TessLib::NetworkMessages::SV_SERVMSG:
+        case MezzanineLib::NetworkMessages::SV_SERVMSG:
             sgetstr();
             conoutf("%s", text);
             break;
 
-        case TessLib::NetworkMessages::SV_EXT:        // so we can messages without breaking previous clients/servers, if necessary
+        case MezzanineLib::NetworkMessages::SV_EXT:        // so we can messages without breaking previous clients/servers, if necessary
         {
             for(int n = getint(p); n; n--) getint(p);
             break;

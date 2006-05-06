@@ -3,7 +3,7 @@
 #include "cube.h"
 #include "SDL_thread.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 #using <Tao.Sdl.dll>
 
 struct resolverthread
@@ -291,9 +291,9 @@ void updatefrommaster()
     servermenu();
 };
 
-COMMAND(addserver, TessLib::Support::FunctionSignatures::ARG_1STR);
-COMMAND(servermenu, TessLib::Support::FunctionSignatures::ARG_NONE);
-COMMAND(updatefrommaster, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(addserver, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(servermenu, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(updatefrommaster, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
 void writeservercfg()
 {

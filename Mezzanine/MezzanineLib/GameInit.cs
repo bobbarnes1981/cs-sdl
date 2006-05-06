@@ -36,11 +36,11 @@ using Tao.Sdl;
 using Tao.OpenGl;
 using SdlDotNet;
 using System.Runtime.InteropServices;
-using TessLib.ClientServer;
-using TessLib.Render;
-using TessLib.Support;
+using MezzanineLib.ClientServer;
+using MezzanineLib.Render;
+using MezzanineLib.Support;
 
-namespace TessLib
+namespace MezzanineLib
 {
 	[StructLayout(LayoutKind.Sequential, Pack=4)]
 	public struct Vector
@@ -311,7 +311,7 @@ namespace TessLib
 			Bindings.disconnect(true, false);
 			Bindings.writecfg();
 			RenderGl.CleanGl();
-			TessLib.Support.Sound.CleanSound();
+			MezzanineLib.Support.Sound.CleanSound();
 			Bindings.cleanupserver();
 			Mouse.ShowCursor = true;
 			Video.GrabInput = false;

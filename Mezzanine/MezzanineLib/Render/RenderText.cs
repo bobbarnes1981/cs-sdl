@@ -38,7 +38,7 @@ using Tao.OpenGl;
 using SdlDotNet;
 using System.Runtime.InteropServices;
 
-namespace TessLib.Render
+namespace MezzanineLib.Render
 {
 	public class RenderText
 	{

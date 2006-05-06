@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 extern char *entnames[];                // lookup from map entities above to strings
 
@@ -21,12 +21,12 @@ void settag(int tag, int type)          // set all cubes with "tag" to space, if
         {
             if(tag)
             {
-                if(tag==s->tag) s->type = TessLib::BlockTypes::SPACE;
+                if(tag==s->tag) s->type = MezzanineLib::BlockTypes::SPACE;
                 else continue;
             }
             else
             {
-                s->type = type ? TessLib::BlockTypes::SOLID : TessLib::BlockTypes::SPACE;
+                s->type = type ? MezzanineLib::BlockTypes::SOLID : MezzanineLib::BlockTypes::SPACE;
             };
             if(x>maxx) maxx = x;
             if(y>maxy) maxy = y;
@@ -39,19 +39,19 @@ void settag(int tag, int type)          // set all cubes with "tag" to space, if
 };
 
 void resettagareas() { settag(0, 0); };                                                         // reset for editing or map saving
-void settagareas() { settag(0, 1); loopv(ents) if(ents[i].type==TessLib::StaticEntity::CARROT) setspawn(i, true); };   // set for playing
+void settagareas() { settag(0, 1); loopv(ents) if(ents[i].type==MezzanineLib::StaticEntity::CARROT) setspawn(i, true); };   // set for playing
 
 void trigger(int tag, int type, bool savegame)
 {
     if(!tag) return;
     settag(tag, type);
-    if(!savegame && type!=3) playsound(TessLib::Sounds::S_RUMBLE);
+    if(!savegame && type!=3) playsound(MezzanineLib::Sounds::S_RUMBLE);
     sprintf_sd(aliasname)("level_trigger_%d", tag);
     if(identexists(aliasname)) execute(aliasname);
     if(type==2) endsp(false);
 };
 
-COMMAND(trigger, TessLib::Support::FunctionSignatures::ARG_2INT);
+COMMAND(trigger, MezzanineLib::Support::FunctionSignatures::ARG_2INT);
 
 // main geometric mipmapping routine, recursively rebuild mipmaps within block b.
 // tries to produce cube out of 4 lower level mips as well as possible,
@@ -61,7 +61,7 @@ COMMAND(trigger, TessLib::Support::FunctionSignatures::ARG_2INT);
 
 void remip(block &b, int level)
 {
-    if(level>=TessLib::GameInit::SmallestFactor) return;
+    if(level>=MezzanineLib::GameInit::SmallestFactor) return;
     int lighterr = getvar("lighterror")*3;
     sqr *w = wmip[level];
     sqr *v = wmip[level+1];
@@ -81,11 +81,11 @@ void remip(block &b, int level)
         o[3] = SWS(w,x,y+1,ws);
         sqr *r = SWS(v,x/2,y/2,vs);                         // the target cube in the higher mip level
         *r = *o[0];
-        uchar nums[TessLib::BlockTypes::MAXTYPE];
-        loopi(TessLib::BlockTypes::MAXTYPE) nums[i] = 0;
+        uchar nums[MezzanineLib::BlockTypes::MAXTYPE];
+        loopi(MezzanineLib::BlockTypes::MAXTYPE) nums[i] = 0;
         loopj(4) nums[o[j]->type]++;
-        r->type = TessLib::BlockTypes::SEMISOLID;                                // cube contains both solid and space, treated specially in the renderer
-        loopk(TessLib::BlockTypes::MAXTYPE) if(nums[k]==4) r->type = k;
+        r->type = MezzanineLib::BlockTypes::SEMISOLID;                                // cube contains both solid and space, treated specially in the renderer
+        loopk(MezzanineLib::BlockTypes::MAXTYPE) if(nums[k]==4) r->type = k;
         if(!SOLID(r))
         {
             int floor = 127, ceil = -128, num = 0;
@@ -94,10 +94,10 @@ void remip(block &b, int level)
                 num++;
                 int fh = o[i]->floor;
                 int ch = o[i]->ceil;
-                if(r->type==TessLib::BlockTypes::SEMISOLID)
+                if(r->type==MezzanineLib::BlockTypes::SEMISOLID)
                 {
-                    if(o[i]->type==TessLib::BlockTypes::FHF) fh -= o[i]->vdelta/4+2;     // crap hack, needed for rendering large mips next to hfs
-                    if(o[i]->type==TessLib::BlockTypes::CHF) ch += o[i]->vdelta/4+2;     // FIXME: needs to somehow take into account middle vertices on higher mips
+                    if(o[i]->type==MezzanineLib::BlockTypes::FHF) fh -= o[i]->vdelta/4+2;     // crap hack, needed for rendering large mips next to hfs
+                    if(o[i]->type==MezzanineLib::BlockTypes::CHF) ch += o[i]->vdelta/4+2;     // FIXME: needs to somehow take into account middle vertices on higher mips
                 };
                 if(fh<floor) floor = fh;  // take lowest floor and highest ceil, so we never have to see missing lower/upper from the side
                 if(ch>ceil) ceil = ch;
@@ -105,7 +105,7 @@ void remip(block &b, int level)
             r->floor = floor;
             r->ceil = ceil;
         };       
-        if(r->type==TessLib::BlockTypes::CORNER) goto mip;                       // special case: don't ever split even if textures etc are different
+        if(r->type==MezzanineLib::BlockTypes::CORNER) goto mip;                       // special case: don't ever split even if textures etc are different
         r->defer = 1;
         if(SOLID(r))
         {
@@ -129,7 +129,7 @@ void remip(block &b, int level)
                 || o[i]->utex!=o[3]->utex
                 || o[i]->wtex!=o[3]->wtex) goto c;
             };
-            if(r->type==TessLib::BlockTypes::CHF || r->type==TessLib::BlockTypes::FHF)                // can make a perfect mip out of a hf if slopes lie on one line
+            if(r->type==MezzanineLib::BlockTypes::CHF || r->type==MezzanineLib::BlockTypes::FHF)                // can make a perfect mip out of a hf if slopes lie on one line
             {
                 if(o[0]->vdelta-o[1]->vdelta != o[1]->vdelta-SWS(w,x+2,y,ws)->vdelta
                 || o[0]->vdelta-o[2]->vdelta != o[2]->vdelta-SWS(w,x+2,y+2,ws)->vdelta
@@ -168,7 +168,7 @@ int closestent()        // used for delent and edit mode ent display
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==TessLib::StaticEntity::NOTUSED) continue;
+        if(e.type==MezzanineLib::StaticEntity::NOTUSED) continue;
         vec v = { e.x, e.y, e.z };
         vdist(dist, t, player1->o, v);
         if(dist<bdist)
@@ -199,16 +199,16 @@ void delent()
     if(e<0) { conoutf("no more entities"); return; };
     int t = ents[e].type;
     conoutf("%s entity deleted", entnames[t]);
-    ents[e].type = TessLib::StaticEntity::NOTUSED;
-    addmsg(1, 10, TessLib::NetworkMessages::SV_EDITENT, e, TessLib::StaticEntity::NOTUSED, 0, 0, 0, 0, 0, 0, 0);
-    if(t==TessLib::StaticEntity::LIGHT) calclight();
+    ents[e].type = MezzanineLib::StaticEntity::NOTUSED;
+    addmsg(1, 10, MezzanineLib::NetworkMessages::SV_EDITENT, e, MezzanineLib::StaticEntity::NOTUSED, 0, 0, 0, 0, 0, 0, 0);
+    if(t==MezzanineLib::StaticEntity::LIGHT) calclight();
 };
 
 int findtype(char *what)
 {
-    loopi(TessLib::StaticEntity::MAXENTTYPES) if(strcmp(what, entnames[i])==0) return i;
+    loopi(MezzanineLib::StaticEntity::MAXENTTYPES) if(strcmp(what, entnames[i])==0) return i;
     conoutf("unknown entity type \"%s\"", what);
-    return TessLib::StaticEntity::NOTUSED;
+    return MezzanineLib::StaticEntity::NOTUSED;
 }
 
 entity *newentity(int x, int y, int z, char *what, int v1, int v2, int v3, int v4)
@@ -217,25 +217,25 @@ entity *newentity(int x, int y, int z, char *what, int v1, int v2, int v3, int v
     persistent_entity e = { x, y, z, v1, type, v2, v3, v4 };
     switch(type)
     {
-        case TessLib::StaticEntity::LIGHT:
+        case MezzanineLib::StaticEntity::LIGHT:
             if(v1>32) v1 = 32;
             if(!v1) e.attr1 = 16;
             if(!v2 && !v3 && !v4) e.attr2 = 255;          
             break;
             
-        case TessLib::StaticEntity::MAPMODEL:
+        case MezzanineLib::StaticEntity::MAPMODEL:
             e.attr4 = e.attr3;
             e.attr3 = e.attr2;
-        case TessLib::StaticEntity::MONSTER:
-        case TessLib::StaticEntity::TELEDEST:
+        case MezzanineLib::StaticEntity::MONSTER:
+        case MezzanineLib::StaticEntity::TELEDEST:
             e.attr2 = (uchar)e.attr1;
-        case TessLib::StaticEntity::PLAYERSTART:
+        case MezzanineLib::StaticEntity::PLAYERSTART:
             e.attr1 = (int)player1->yaw;
             break;
     };           
-    addmsg(1, 10, TessLib::NetworkMessages::SV_EDITENT, ents.length(), type, e.x, e.y, e.z, e.attr1, e.attr2, e.attr3, e.attr4);
+    addmsg(1, 10, MezzanineLib::NetworkMessages::SV_EDITENT, ents.length(), type, e.x, e.y, e.z, e.attr1, e.attr2, e.attr3, e.attr4);
     ents.add(*((entity *)&e)); // unsafe!
-    if(type==TessLib::StaticEntity::LIGHT) calclight();
+    if(type==MezzanineLib::StaticEntity::LIGHT) calclight();
     return &ents.last();
 };
 
@@ -246,12 +246,12 @@ void clearents(char *name)
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==type) e.type = TessLib::StaticEntity::NOTUSED;
+        if(e.type==type) e.type = MezzanineLib::StaticEntity::NOTUSED;
     };
-    if(type==TessLib::StaticEntity::LIGHT) calclight();
+    if(type==MezzanineLib::StaticEntity::LIGHT) calclight();
 };
 
-COMMAND(clearents, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(clearents, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 
 void scalecomp(uchar &c, int intens)
 {
@@ -265,7 +265,7 @@ void scalelights(int f, int intens)
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type!=TessLib::StaticEntity::LIGHT) continue;
+        if(e.type!=MezzanineLib::StaticEntity::LIGHT) continue;
         e.attr1 = e.attr1*f/100;
         if(e.attr1<2) e.attr1 = 2;
         if(e.attr1>32) e.attr1 = 32;
@@ -279,7 +279,7 @@ void scalelights(int f, int intens)
     calclight();
 };
 
-COMMAND(scalelights, TessLib::Support::FunctionSignatures::ARG_2INT);
+COMMAND(scalelights, MezzanineLib::Support::FunctionSignatures::ARG_2INT);
 
 int findentity(int type, int index)
 {
@@ -288,7 +288,7 @@ int findentity(int type, int index)
     return -1;
 };
 sqr *wmip[11*2];
-//sqr *wmip[TessLib::GameInit::LargestFactor*2];
+//sqr *wmip[MezzanineLib::GameInit::LargestFactor*2];
 
 void setupworld(int factor)
 {
@@ -296,7 +296,7 @@ void setupworld(int factor)
     cubicsize = ssize*ssize;
     mipsize = cubicsize*134/100;
     sqr *w = world = (sqr *)alloc(mipsize*sizeof(sqr));
-    loopi(TessLib::GameInit::LargestFactor*2) { wmip[i] = w; w += cubicsize>>(i*2); };
+    loopi(MezzanineLib::GameInit::LargestFactor*2) { wmip[i] = w; w += cubicsize>>(i*2); };
 };
 
 void empty_world(int factor, bool force)    // main empty world creation routine, if passed factor -1 will enlarge old world by 1
@@ -307,18 +307,18 @@ void empty_world(int factor, bool force)    // main empty world creation routine
     sqr *oldworld = world;
     bool copy = false;
     if(oldworld && factor<0) { factor = sfactor+1; copy = true; };
-    if(factor<TessLib::GameInit::SmallestFactor) factor = TessLib::GameInit::SmallestFactor;
-    if(factor>TessLib::GameInit::LargestFactor) factor = TessLib::GameInit::LargestFactor;
+    if(factor<MezzanineLib::GameInit::SmallestFactor) factor = MezzanineLib::GameInit::SmallestFactor;
+    if(factor>MezzanineLib::GameInit::LargestFactor) factor = MezzanineLib::GameInit::LargestFactor;
     setupworld(factor);
     
     loop(x,ssize) loop(y,ssize)
     {
         sqr *s = S(x,y);
         s->r = s->g = s->b = 150;
-        s->ftex = TessLib::TextureNumbers::DEFAULT_FLOOR;
-        s->ctex = TessLib::TextureNumbers::DEFAULT_CEIL;
-        s->wtex = s->utex = TessLib::TextureNumbers::DEFAULT_WALL;
-        s->type = TessLib::BlockTypes::SOLID;
+        s->ftex = MezzanineLib::TextureNumbers::DEFAULT_FLOOR;
+        s->ctex = MezzanineLib::TextureNumbers::DEFAULT_CEIL;
+        s->wtex = s->utex = MezzanineLib::TextureNumbers::DEFAULT_WALL;
+        s->type = MezzanineLib::BlockTypes::SOLID;
         s->floor = 0;
         s->ceil = 16;
         s->vdelta = 0;
@@ -326,7 +326,7 @@ void empty_world(int factor, bool force)    // main empty world creation routine
     };
     
     strncpy(hdr.head, "CUBE", 4);
-	hdr.version = TessLib::GameInit::MapVersion;
+	hdr.version = MezzanineLib::GameInit::MapVersion;
     hdr.headersize = sizeof(header);
     hdr.sfactor = sfactor;
 
@@ -350,7 +350,7 @@ void empty_world(int factor, bool force)    // main empty world creation routine
         loopk(3) loopi(256) hdr.texlists[k][i] = i;
         ents.setsize(0);
         block b = { 8, 8, ssize-16, ssize-16 }; 
-        edittypexy(TessLib::BlockTypes::SPACE, b);
+        edittypexy(MezzanineLib::BlockTypes::SPACE, b);
     };
     
     calclight();
@@ -366,9 +366,9 @@ void empty_world(int factor, bool force)    // main empty world creation routine
 void mapenlarge()  { empty_world(-1, false); };
 void newmap(int i) { empty_world(i, false); };
 
-COMMAND(mapenlarge, TessLib::Support::FunctionSignatures::ARG_NONE);
-COMMAND(newmap, TessLib::Support::FunctionSignatures::ARG_1INT);
-COMMANDN(recalc, calclight, TessLib::Support::FunctionSignatures::ARG_NONE);
-COMMAND(delent, TessLib::Support::FunctionSignatures::ARG_NONE);
-COMMAND(entproperty, TessLib::Support::FunctionSignatures::ARG_2INT);
+COMMAND(mapenlarge, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(newmap, MezzanineLib::Support::FunctionSignatures::ARG_1INT);
+COMMANDN(recalc, calclight, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(delent, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(entproperty, MezzanineLib::Support::FunctionSignatures::ARG_2INT);
 

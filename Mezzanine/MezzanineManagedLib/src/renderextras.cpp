@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 void line(int x1, int y1, float z1, int x2, int y2, float z2)
 {
@@ -12,7 +12,7 @@ void line(int x1, int y1, float z1, int x2, int y2, float z2)
     glVertex3f((float)x2, z2, y2+0.01f);
     glVertex3f((float)x2, z2, (float)y2);
     glEnd();
-	TessLib::Render::RenderGl::XtraVerts += 4;
+	MezzanineLib::Render::RenderGl::XtraVerts += 4;
 };
 
 void linestyle(float width, int r, int g, int b)
@@ -29,7 +29,7 @@ void box(block &b, float z1, float z2, float z3, float z4)
     glVertex3f((float)b.x+b.xs, z3, (float)b.y+b.ys);
     glVertex3f((float)b.x,      z4, (float)b.y+b.ys);
     glEnd();
-    TessLib::Render::RenderGl::XtraVerts += 4;
+    MezzanineLib::Render::RenderGl::XtraVerts += 4;
 };
 
 void dot(int x, int y, float z)
@@ -41,7 +41,7 @@ void dot(int x, int y, float z)
     glVertex3f(x+DOF, (float)z, y+DOF);
     glVertex3f(x-DOF, (float)z, y+DOF);
     glEnd();
-    TessLib::Render::RenderGl::XtraVerts += 4;
+    MezzanineLib::Render::RenderGl::XtraVerts += 4;
 };
 
 void blendbox(int x1, int y1, int x2, int y2, bool border)
@@ -67,7 +67,7 @@ void blendbox(int x1, int y1, int x2, int y2, bool border)
     glVertex2i(x1, y2);
     glEnd();
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    TessLib::Render::RenderGl::XtraVerts += 8;
+    MezzanineLib::Render::RenderGl::XtraVerts += 8;
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     glDepthMask(GL_TRUE);
@@ -121,7 +121,7 @@ void renderspheres(int time)
         glScalef(0.8f, 0.8f, 0.8f);
         glCallList(1);
         glPopMatrix();
-        TessLib::Render::RenderGl::XtraVerts += 12*6*2;
+        MezzanineLib::Render::RenderGl::XtraVerts += 12*6*2;
 
         if(p->size>p->max)
         {
@@ -158,7 +158,7 @@ void renderents()       // show sparkly thingies for map entities in edit mode
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==TessLib::StaticEntity::NOTUSED) continue;
+        if(e.type==MezzanineLib::StaticEntity::NOTUSED) continue;
         vec v = { e.x, e.y, e.z };
         particle_splash(2, 2, 40, v);
     };
@@ -180,12 +180,12 @@ void loadsky(char *basename)
     {
         sprintf_sd(name)("packages/%s_%s.jpg", basename, side[i]);
         int xs, ys;
-		if(!TessLib::Render::RenderGl::InstallTexture(texnum+i, path(name), &xs, &ys, true)) conoutf("could not load sky textures");
+		if(!MezzanineLib::Render::RenderGl::InstallTexture(texnum+i, path(name), &xs, &ys, true)) conoutf("could not load sky textures");
     };
     strcpy_s(lastsky, basename);
 };
 
-COMMAND(loadsky, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(loadsky, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 
 float cursordepth = 0.9f;
 GLint viewport[4];
@@ -238,7 +238,7 @@ void drawicon(float tx, float ty, int x, int y)
     glTexCoord2f(tx+o, ty+o); glVertex2i(x+s, y+s);
     glTexCoord2f(tx,   ty+o); glVertex2i(x,   y+s);
     glEnd();
-    TessLib::Render::RenderGl::XtraVerts += 4;
+    MezzanineLib::Render::RenderGl::XtraVerts += 4;
 };
 
 void invertperspective()
@@ -339,15 +339,15 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
         glPushMatrix();
         glOrtho(0, VIRTW*3/2, VIRTH*3/2, 0, -1, 1);
         draw_textf("fps %d", 3200, 2390, 2, curfps);
-		//TessLib::RenderText::DrawTextF("fps %d", 3200, 2390, 2, curfps.ToString());
+		//MezzanineLib::RenderText::DrawTextF("fps %d", 3200, 2390, 2, curfps.ToString());
         draw_textf("wqd %d", 3200, 2460, 2, nquads); 
         draw_textf("wvt %d", 3200, 2530, 2, curvert);
-        draw_textf("evt %d", 3200, 2600, 2, TessLib::Render::RenderGl::XtraVerts);
+        draw_textf("evt %d", 3200, 2600, 2, MezzanineLib::Render::RenderGl::XtraVerts);
     };
     
     glPopMatrix();
 
-    if(player1->state==TessLib::CSStatus::CS_ALIVE)
+    if(player1->state==MezzanineLib::CSStatus::CS_ALIVE)
     {
         glPushMatrix();
         glOrtho(0, VIRTW/2, VIRTH/2, 0, -1, 1);

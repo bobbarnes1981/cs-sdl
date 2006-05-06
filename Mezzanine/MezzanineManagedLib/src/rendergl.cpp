@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 extern int curvert;
 
@@ -32,12 +32,12 @@ void purgetextures()
 
 void texturereset() 
 {
-	TessLib::Render::RenderGl::TextureReset(); 
+	MezzanineLib::Render::RenderGl::TextureReset(); 
 };
 
 void texture(char *aframe, char *name)
 {
-	int num = TessLib::Render::RenderGl::CurrentTextureNumber++, frame = atoi(aframe);
+	int num = MezzanineLib::Render::RenderGl::CurrentTextureNumber++, frame = atoi(aframe);
     if(num<0 || num>=256 || frame<0 || frame>=MAXFRAMES) return;
     mapping[num][frame] = 1;
     char *n = mapname[num][frame];
@@ -45,8 +45,8 @@ void texture(char *aframe, char *name)
     path(n);
 };
 
-COMMAND(texturereset, TessLib::Support::FunctionSignatures::ARG_NONE);
-COMMAND(texture, TessLib::Support::FunctionSignatures::ARG_2STR);
+COMMAND(texturereset, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(texture, MezzanineLib::Support::FunctionSignatures::ARG_2STR);
 
 int lookuptexture(int tex, int &xs, int &ys)
 {
@@ -63,7 +63,7 @@ int lookuptexture(int tex, int &xs, int &ys)
     xs = ys = 16;
     if(!tid) return 1;                  // crosshair :)
 
-    loopi(TessLib::Render::RenderGl::CurrentTextureNumber)       // lazily happens once per "texture" command, basically
+    loopi(MezzanineLib::Render::RenderGl::CurrentTextureNumber)       // lazily happens once per "texture" command, basically
     {
         if(strcmp(mapname[tex][frame], texname[i])==0)
         {
@@ -74,19 +74,19 @@ int lookuptexture(int tex, int &xs, int &ys)
         };
     };
 
-    if(TessLib::Render::RenderGl::CurrentTextureNumber==MAXTEX) TessLib::GameInit::Fatal("loaded too many textures");
+    if(MezzanineLib::Render::RenderGl::CurrentTextureNumber==MAXTEX) MezzanineLib::GameInit::Fatal("loaded too many textures");
 
-    int tnum = TessLib::Render::RenderGl::CurrentTextureNumber+FIRSTTEX;
-    strcpy_s(texname[TessLib::Render::RenderGl::CurrentTextureNumber], mapname[tex][frame]);
+    int tnum = MezzanineLib::Render::RenderGl::CurrentTextureNumber+FIRSTTEX;
+    strcpy_s(texname[MezzanineLib::Render::RenderGl::CurrentTextureNumber], mapname[tex][frame]);
 
-    sprintf_sd(name)("packages%c%s", PATHDIV, texname[TessLib::Render::RenderGl::CurrentTextureNumber]);
+    sprintf_sd(name)("packages%c%s", PATHDIV, texname[MezzanineLib::Render::RenderGl::CurrentTextureNumber]);
 
-	if(TessLib::Render::RenderGl::InstallTexture(tnum, name, &xs, &ys))
+	if(MezzanineLib::Render::RenderGl::InstallTexture(tnum, name, &xs, &ys))
     {
         mapping[tex][frame] = tnum;
-        texx[TessLib::Render::RenderGl::CurrentTextureNumber] = xs;
-        texy[TessLib::Render::RenderGl::CurrentTextureNumber] = ys;
-        TessLib::Render::RenderGl::CurrentTextureNumber++;
+        texx[MezzanineLib::Render::RenderGl::CurrentTextureNumber] = xs;
+        texy[MezzanineLib::Render::RenderGl::CurrentTextureNumber] = ys;
+        MezzanineLib::Render::RenderGl::CurrentTextureNumber++;
         return tnum;
     }
     else
@@ -164,11 +164,11 @@ void drawhudgun(float fovy, float aspect, int farplane)
     int rtime = reloadtime(player1->gunselect);
     if(player1->lastaction && player1->lastattackgun==player1->gunselect && lastmillis-player1->lastaction<rtime)
     {
-		TessLib::Render::RenderGl::DrawHudModel(7, 18, rtime/18.0f, player1->lastaction);
+		MezzanineLib::Render::RenderGl::DrawHudModel(7, 18, rtime/18.0f, player1->lastaction);
     }
     else
     {
-        TessLib::Render::RenderGl::DrawHudModel(6, 1, 100, 0);
+        MezzanineLib::Render::RenderGl::DrawHudModel(6, 1, 100, 0);
     };
 
     glMatrixMode(GL_PROJECTION);
@@ -208,12 +208,12 @@ void gl_drawframe(int w, int h, float curfps)
     gluPerspective(fovy, aspect, 0.15f, farplane);
     glMatrixMode(GL_MODELVIEW);
 
-	TessLib::Render::RenderGl::TransPlayer();
+	MezzanineLib::Render::RenderGl::TransPlayer();
 
     glEnable(GL_TEXTURE_2D);
     
     int xs, ys;
-    skyoglid = lookuptexture(TessLib::TextureNumbers::DEFAULT_SKY, xs, ys);
+    skyoglid = lookuptexture(MezzanineLib::TextureNumbers::DEFAULT_SKY, xs, ys);
    
     resetcubes();
             
@@ -224,7 +224,7 @@ void gl_drawframe(int w, int h, float curfps)
             (int)player1->yaw, (int)player1->pitch, (float)fov, w, h);
     finishstrips();
 
-	TessLib::Render::RenderGl::SetupWorld();
+	MezzanineLib::Render::RenderGl::SetupWorld();
 
     renderstripssky();
 
@@ -235,17 +235,17 @@ void gl_drawframe(int w, int h, float curfps)
     glColor3f(1.0f, 1.0f, 1.0f);
     glDisable(GL_FOG);
     glDepthFunc(GL_GREATER);
-	TessLib::Render::RenderText::DrawEnvBox(14, fog*4/3);
+	MezzanineLib::Render::RenderText::DrawEnvBox(14, fog*4/3);
     glDepthFunc(GL_LESS);
     glEnable(GL_FOG);
 
-	TessLib::Render::RenderGl::TransPlayer();
+	MezzanineLib::Render::RenderGl::TransPlayer();
         
-    TessLib::Render::RenderGl::OverBright(2);
+    MezzanineLib::Render::RenderGl::OverBright(2);
     
     renderstrips();
 
-    TessLib::Render::RenderGl::XtraVerts = 0;
+    MezzanineLib::Render::RenderGl::XtraVerts = 0;
 
     renderclients();
     monsterrender();
@@ -259,12 +259,12 @@ void gl_drawframe(int w, int h, float curfps)
 
     drawhudgun(fovy, aspect, farplane);
 
-    TessLib::Render::RenderGl::OverBright(1);
+    MezzanineLib::Render::RenderGl::OverBright(1);
     int nquads = renderwater(hf);
     
-    TessLib::Render::RenderGl::OverBright(2);
+    MezzanineLib::Render::RenderGl::OverBright(2);
     render_particles(curtime);
-    TessLib::Render::RenderGl::OverBright(1);
+    MezzanineLib::Render::RenderGl::OverBright(1);
 
     glDisable(GL_FOG);
 

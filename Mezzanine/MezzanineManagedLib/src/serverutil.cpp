@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 // all network traffic is in 32bit ints, which are then compressed using the following simple scheme (assumes that most values are small).
 
@@ -39,14 +39,14 @@ const char *modestr(int n) { return (n>=-2 && n<12) ? modenames[n+2] : "unknown"
 
 char msgsizesl[] =               // size inclusive message token, 0 for variable or not-checked sizes
 { 
-    TessLib::NetworkMessages::SV_INITS2C, 4, TessLib::NetworkMessages::SV_INITC2S, 0, TessLib::NetworkMessages::SV_POS, 12, TessLib::NetworkMessages::SV_TEXT, 0, TessLib::NetworkMessages::SV_SOUND, 2, TessLib::NetworkMessages::SV_CDIS, 2,
-    TessLib::NetworkMessages::SV_EDITH, 7, TessLib::NetworkMessages::SV_EDITT, 7, TessLib::NetworkMessages::SV_EDITS, 6, TessLib::NetworkMessages::SV_EDITD, 6, TessLib::NetworkMessages::SV_EDITE, 6,
-    TessLib::NetworkMessages::SV_DIED, 2, TessLib::NetworkMessages::SV_DAMAGE, 4, TessLib::NetworkMessages::SV_SHOT, 8, TessLib::NetworkMessages::SV_FRAGS, 2,
-    TessLib::NetworkMessages::SV_MAPCHANGE, 0, TessLib::NetworkMessages::SV_ITEMSPAWN, 2, TessLib::NetworkMessages::SV_ITEMPICKUP, 3, TessLib::NetworkMessages::SV_DENIED, 2,
-    TessLib::NetworkMessages::SV_PING, 2, TessLib::NetworkMessages::SV_PONG, 2, TessLib::NetworkMessages::SV_CLIENTPING, 2, TessLib::NetworkMessages::SV_GAMEMODE, 2,
-    TessLib::NetworkMessages::SV_TIMEUP, 2, TessLib::NetworkMessages::SV_EDITENT, 10, TessLib::NetworkMessages::SV_MAPRELOAD, 2, TessLib::NetworkMessages::SV_ITEMACC, 2,
-    TessLib::NetworkMessages::SV_SENDMAP, 0, TessLib::NetworkMessages::SV_RECVMAP, 1, TessLib::NetworkMessages::SV_SERVMSG, 0, TessLib::NetworkMessages::SV_ITEMLIST, 0,
-    TessLib::NetworkMessages::SV_EXT, 0,
+    MezzanineLib::NetworkMessages::SV_INITS2C, 4, MezzanineLib::NetworkMessages::SV_INITC2S, 0, MezzanineLib::NetworkMessages::SV_POS, 12, MezzanineLib::NetworkMessages::SV_TEXT, 0, MezzanineLib::NetworkMessages::SV_SOUND, 2, MezzanineLib::NetworkMessages::SV_CDIS, 2,
+    MezzanineLib::NetworkMessages::SV_EDITH, 7, MezzanineLib::NetworkMessages::SV_EDITT, 7, MezzanineLib::NetworkMessages::SV_EDITS, 6, MezzanineLib::NetworkMessages::SV_EDITD, 6, MezzanineLib::NetworkMessages::SV_EDITE, 6,
+    MezzanineLib::NetworkMessages::SV_DIED, 2, MezzanineLib::NetworkMessages::SV_DAMAGE, 4, MezzanineLib::NetworkMessages::SV_SHOT, 8, MezzanineLib::NetworkMessages::SV_FRAGS, 2,
+    MezzanineLib::NetworkMessages::SV_MAPCHANGE, 0, MezzanineLib::NetworkMessages::SV_ITEMSPAWN, 2, MezzanineLib::NetworkMessages::SV_ITEMPICKUP, 3, MezzanineLib::NetworkMessages::SV_DENIED, 2,
+    MezzanineLib::NetworkMessages::SV_PING, 2, MezzanineLib::NetworkMessages::SV_PONG, 2, MezzanineLib::NetworkMessages::SV_CLIENTPING, 2, MezzanineLib::NetworkMessages::SV_GAMEMODE, 2,
+    MezzanineLib::NetworkMessages::SV_TIMEUP, 2, MezzanineLib::NetworkMessages::SV_EDITENT, 10, MezzanineLib::NetworkMessages::SV_MAPRELOAD, 2, MezzanineLib::NetworkMessages::SV_ITEMACC, 2,
+    MezzanineLib::NetworkMessages::SV_SENDMAP, 0, MezzanineLib::NetworkMessages::SV_RECVMAP, 1, MezzanineLib::NetworkMessages::SV_SERVMSG, 0, MezzanineLib::NetworkMessages::SV_ITEMLIST, 0,
+    MezzanineLib::NetworkMessages::SV_EXT, 0,
     -1
 };
 
@@ -78,7 +78,7 @@ ENetPacket *recvmap(int n)
     ENetPacket *packet = enet_packet_create(NULL, MAXTRANS + copysize, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, TessLib::NetworkMessages::SV_RECVMAP);
+    putint(p, MezzanineLib::NetworkMessages::SV_RECVMAP);
     sendstring(copyname, p);
     putint(p, copysize);
     memcpy(p, copydata, copysize);
@@ -93,7 +93,7 @@ ENetPacket *recvmap(int n)
 
 void localservertoclient(uchar *buf, int len) {};
 //void fatal(char *s, char *o) { cleanupserver(); printf("servererror: %s\n", s); exit(1); };
-void *alloc(int s) { void *b = calloc(1,s); if(!b) TessLib::GameInit::Fatal("no memory!"); return b; };
+void *alloc(int s) { void *b = calloc(1,s); if(!b) MezzanineLib::GameInit::Fatal("no memory!"); return b; };
 
 int main(int argc, char* argv[])
 {
@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
         };
     };
     
-    if(enet_initialize()<0) TessLib::GameInit::Fatal("Unable to initialise network module");
+    if(enet_initialize()<0) MezzanineLib::GameInit::Fatal("Unable to initialise network module");
     initserver(true, uprate, sdesc, ip, master, passwd, maxcl);
     return 0;
 };

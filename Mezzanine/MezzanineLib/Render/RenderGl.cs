@@ -37,7 +37,7 @@ using Tao.OpenGl;
 using SdlDotNet;
 using System.Runtime.InteropServices;
 
-namespace TessLib.Render
+namespace MezzanineLib.Render
 {
 	public class RenderGl
 	{
@@ -210,7 +210,7 @@ namespace TessLib.Render
 			qsphere = Glu.gluNewQuadric();
 			//if(!(qsphere = Glu.gluNewQuadric())) 
 			//{
-			//Tess.Fatal("glu sphere");
+			//Mezzanine.Fatal("glu sphere");
 			//}
 			Glu.gluQuadricDrawStyle(qsphere, Glu.GLU_FILL);
 			Glu.gluQuadricOrientation(qsphere, Glu.GLU_INSIDE);
@@ -338,11 +338,11 @@ namespace TessLib.Render
 		{
 			Gl.glLoadIdentity();
     
-			Gl.glRotated(TessLib.GameInit.Player1.roll,0.0,0.0,1.0);
-			Gl.glRotated(TessLib.GameInit.Player1.pitch,-1.0,0.0,0.0);
-			Gl.glRotated(TessLib.GameInit.Player1.yaw,0.0,1.0,0.0);
+			Gl.glRotated(MezzanineLib.GameInit.Player1.roll,0.0,0.0,1.0);
+			Gl.glRotated(MezzanineLib.GameInit.Player1.pitch,-1.0,0.0,0.0);
+			Gl.glRotated(MezzanineLib.GameInit.Player1.yaw,0.0,1.0,0.0);
 
-			Gl.glTranslated(-TessLib.GameInit.Player1.o.x, (TessLib.GameInit.Player1.state==(int)CSStatus.CS_DEAD ? TessLib.GameInit.Player1.eyeheight-0.2f : 0)-TessLib.GameInit.Player1.o.z, -TessLib.GameInit.Player1.o.y);   
+			Gl.glTranslated(-MezzanineLib.GameInit.Player1.o.x, (MezzanineLib.GameInit.Player1.state==(int)CSStatus.CS_DEAD ? MezzanineLib.GameInit.Player1.eyeheight-0.2f : 0)-MezzanineLib.GameInit.Player1.o.z, -MezzanineLib.GameInit.Player1.o.y);   
 		}
 
 		/// <summary>

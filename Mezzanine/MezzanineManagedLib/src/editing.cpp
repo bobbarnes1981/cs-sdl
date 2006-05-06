@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 bool editmode = false; 
 
@@ -36,7 +36,7 @@ VAR(editing,0,0,1);
 
 void toggleedit()
 {
-    if(player1->state==TessLib::CSStatus::CS_DEAD) return;                 // do not allow dead players to edit to avoid state confusion
+    if(player1->state==MezzanineLib::CSStatus::CS_DEAD) return;                 // do not allow dead players to edit to avoid state confusion
     if(!editmode && !allowedittoggle()) return;         // not in most multiplayer modes
     if(!(editmode = !editmode))
     {
@@ -55,7 +55,7 @@ void toggleedit()
     editing = editmode;
 };
 
-COMMANDN(edittoggle, toggleedit, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMANDN(edittoggle, toggleedit, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
 void correctsel()                                       // ensures above invariant
 {
@@ -105,8 +105,8 @@ VAR(flrceil,0,0,2);
 float sheight(sqr *s, sqr *t, float z)                  // finds out z height when cursor points at wall
 {
     return !flrceil //z-s->floor<s->ceil-z
-        ? (s->type==TessLib::BlockTypes::FHF ? s->floor-t->vdelta/4.0f : (float)s->floor)
-        : (s->type==TessLib::BlockTypes::CHF ? s->ceil+t->vdelta/4.0f : (float)s->ceil);
+        ? (s->type==MezzanineLib::BlockTypes::FHF ? s->floor-t->vdelta/4.0f : (float)s->floor)
+        : (s->type==MezzanineLib::BlockTypes::CHF ? s->ceil+t->vdelta/4.0f : (float)s->ceil);
 };
 
 void cursorupdate()                                     // called every frame from hud
@@ -154,7 +154,7 @@ void cursorupdate()                                     // called every frame fr
         float h3 = sheight(s, SWS(s,1,1,ssize), z);
         float h4 = sheight(s, SWS(s,0,1,ssize), z);
         if(s->tag) linestyle(GRIDW, 0xFF, 0x40, 0x40);
-        else if(s->type==TessLib::BlockTypes::FHF || s->type==TessLib::BlockTypes::CHF) linestyle(GRIDW, 0x80, 0xFF, 0x80);
+        else if(s->type==MezzanineLib::BlockTypes::FHF || s->type==MezzanineLib::BlockTypes::CHF) linestyle(GRIDW, 0x80, 0xFF, 0x80);
         else linestyle(GRIDW, 0x80, 0x80, 0x80);
         block b = { ix, iy, 1, 1 };
         box(b, h1, h2, h3, h4);
@@ -286,10 +286,10 @@ void editheight(int flr, int amount)
     EDITSEL;
     bool isfloor = flr==0;
     editheightxy(isfloor, amount, sel);
-    addmsg(1, 7, TessLib::NetworkMessages::SV_EDITH, sel.x, sel.y, sel.xs, sel.ys, isfloor, amount);
+    addmsg(1, 7, MezzanineLib::NetworkMessages::SV_EDITH, sel.x, sel.y, sel.xs, sel.ys, isfloor, amount);
 };
 
-COMMAND(editheight, TessLib::Support::FunctionSignatures::ARG_2INT);
+COMMAND(editheight, MezzanineLib::Support::FunctionSignatures::ARG_2INT);
 
 void edittexxy(int type, int t, block &sel)            
 {
@@ -313,7 +313,7 @@ void edittex(int type, int dir)
     curedittex[atype] = i = min(max(i, 0), 255);
     int t = lasttex = hdr.texlists[atype][i];
     edittexxy(type, t, sel);
-    addmsg(1, 7, TessLib::NetworkMessages::SV_EDITT, sel.x, sel.y, sel.xs, sel.ys, type, t);
+    addmsg(1, 7, MezzanineLib::NetworkMessages::SV_EDITT, sel.x, sel.y, sel.xs, sel.ys, type, t);
 };
 
 void replace()
@@ -342,20 +342,20 @@ void edittypexy(int type, block &sel)
 void edittype(int type)
 {
     EDITSEL;
-    if(type==TessLib::BlockTypes::CORNER && (sel.xs!=sel.ys || sel.xs==3 || sel.xs>4 && sel.xs!=8
+    if(type==MezzanineLib::BlockTypes::CORNER && (sel.xs!=sel.ys || sel.xs==3 || sel.xs>4 && sel.xs!=8
                    || sel.x&~-sel.xs || sel.y&~-sel.ys))
                    { conoutf("corner selection must be power of 2 aligned"); return; };
     edittypexy(type, sel);
-    addmsg(1, 6, TessLib::NetworkMessages::SV_EDITS, sel.x, sel.y, sel.xs, sel.ys, type);
+    addmsg(1, 6, MezzanineLib::NetworkMessages::SV_EDITS, sel.x, sel.y, sel.xs, sel.ys, type);
 };
 
-void heightfield(int t) { edittype(t==0 ? TessLib::BlockTypes::FHF : TessLib::BlockTypes::CHF); };
-void solid(int t)       { edittype(t==0 ? TessLib::BlockTypes::SPACE : TessLib::BlockTypes::SOLID); };
-void corner()           { edittype(TessLib::BlockTypes::CORNER); };
+void heightfield(int t) { edittype(t==0 ? MezzanineLib::BlockTypes::FHF : MezzanineLib::BlockTypes::CHF); };
+void solid(int t)       { edittype(t==0 ? MezzanineLib::BlockTypes::SPACE : MezzanineLib::BlockTypes::SOLID); };
+void corner()           { edittype(MezzanineLib::BlockTypes::CORNER); };
 
-COMMAND(heightfield, TessLib::Support::FunctionSignatures::ARG_1INT);
-COMMAND(solid, TessLib::Support::FunctionSignatures::ARG_1INT);
-COMMAND(corner, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(heightfield, MezzanineLib::Support::FunctionSignatures::ARG_1INT);
+COMMAND(solid, MezzanineLib::Support::FunctionSignatures::ARG_1INT);
+COMMAND(corner, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
 void editequalisexy(bool isfloor, block &sel)
 {
@@ -377,10 +377,10 @@ void equalize(int flr)
     bool isfloor = flr==0;
     EDITSEL;
     editequalisexy(isfloor, sel);
-    addmsg(1, 6, TessLib::NetworkMessages::SV_EDITE, sel.x, sel.y, sel.xs, sel.ys, isfloor);
+    addmsg(1, 6, MezzanineLib::NetworkMessages::SV_EDITE, sel.x, sel.y, sel.xs, sel.ys, isfloor);
 };
 
-COMMAND(equalize, TessLib::Support::FunctionSignatures::ARG_1INT);
+COMMAND(equalize, MezzanineLib::Support::FunctionSignatures::ARG_1INT);
 
 void setvdeltaxy(int delta, block &sel)
 {
@@ -392,7 +392,7 @@ void setvdelta(int delta)
 {
     EDITSEL;
     setvdeltaxy(delta, sel);
-    addmsg(1, 6, TessLib::NetworkMessages::SV_EDITD, sel.x, sel.y, sel.xs, sel.ys, delta);
+    addmsg(1, 6, MezzanineLib::NetworkMessages::SV_EDITD, sel.x, sel.y, sel.xs, sel.ys, delta);
 };
 
 const int MAXARCHVERT = 50;
@@ -457,17 +457,17 @@ void newent(char *what, char *a1, char *a2, char *a3, char *a4)
     newentity(sel.x, sel.y, (int)player1->o.z, what, ATOI(a1), ATOI(a2), ATOI(a3), ATOI(a4));
 };
 
-COMMANDN(select, selectpos, TessLib::Support::FunctionSignatures::ARG_4INT);
-COMMAND(edittag, TessLib::Support::FunctionSignatures::ARG_1INT);
-COMMAND(replace, TessLib::Support::FunctionSignatures::ARG_NONE);
-COMMAND(archvertex, TessLib::Support::FunctionSignatures::ARG_3INT);
-COMMAND(arch, TessLib::Support::FunctionSignatures::ARG_2INT);
-COMMAND(slope, TessLib::Support::FunctionSignatures::ARG_2INT);
-COMMANDN(vdelta, setvdelta, TessLib::Support::FunctionSignatures::ARG_1INT);
-COMMANDN(undo, editundo, TessLib::Support::FunctionSignatures::ARG_NONE);
-COMMAND(copy, TessLib::Support::FunctionSignatures::ARG_NONE);
-COMMAND(paste, TessLib::Support::FunctionSignatures::ARG_NONE);
-COMMAND(edittex, TessLib::Support::FunctionSignatures::ARG_2INT);
-COMMAND(newent, TessLib::Support::FunctionSignatures::ARG_5STR);
+COMMANDN(select, selectpos, MezzanineLib::Support::FunctionSignatures::ARG_4INT);
+COMMAND(edittag, MezzanineLib::Support::FunctionSignatures::ARG_1INT);
+COMMAND(replace, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(archvertex, MezzanineLib::Support::FunctionSignatures::ARG_3INT);
+COMMAND(arch, MezzanineLib::Support::FunctionSignatures::ARG_2INT);
+COMMAND(slope, MezzanineLib::Support::FunctionSignatures::ARG_2INT);
+COMMANDN(vdelta, setvdelta, MezzanineLib::Support::FunctionSignatures::ARG_1INT);
+COMMANDN(undo, editundo, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(copy, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(paste, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(edittex, MezzanineLib::Support::FunctionSignatures::ARG_2INT);
+COMMAND(newent, MezzanineLib::Support::FunctionSignatures::ARG_5STR);
 
 

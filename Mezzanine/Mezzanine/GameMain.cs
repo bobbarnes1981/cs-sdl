@@ -36,12 +36,12 @@ using Tao.Sdl;
 using Tao.OpenGl;
 using SdlDotNet;
 using System.Runtime.InteropServices;
-using TessLib;
+using MezzanineLib;
 
-namespace Tess
+namespace Mezzanine
 {
 	/// <summary>
-	/// Summary description for Tess.
+	/// Summary description for Mezzanine.
 	/// </summary>
 	class GameMain
 	{
@@ -91,8 +91,8 @@ namespace Tess
 		[STAThread]
 		static void Main(string[] args)
 		{
-			GameMain tess = new GameMain();
-			tess.Run(args);
+			GameMain mezzanine = new GameMain();
+			mezzanine.Run(args);
 		}
 
 		void Run(string[] args)
@@ -107,7 +107,7 @@ namespace Tess
 
 			int retval = ManagedWrapper.minitialize();
 
-			TessLib.GameInit.Log("sdl");
+			MezzanineLib.GameInit.Log("sdl");
     
 			foreach(string a in args)
 			{
@@ -146,40 +146,40 @@ namespace Tess
 							maxcl  = Convert.ToInt32(a.Substring(2, a.Length - 2)); 
 							break;
 						default:  
-							TessLib.GameInit.Log("unknown commandline option");
+							MezzanineLib.GameInit.Log("unknown commandline option");
 							break;
 					}
 				}
 				else
 				{ 
-					TessLib.GameInit.Log("unknown commandline argument");
+					MezzanineLib.GameInit.Log("unknown commandline argument");
 				}
 			};
 			
-			TessLib.GameInit.Log("net");
-			if(TessLib.Bindings.enet_initialize()<0)
+			MezzanineLib.GameInit.Log("net");
+			if(MezzanineLib.Bindings.enet_initialize()<0)
 			{
-				TessLib.GameInit.Fatal("Unable to initialise network module");
+				MezzanineLib.GameInit.Fatal("Unable to initialise network module");
 			}
-			TessLib.ClientServer.ClientGame.initclient();
-			TessLib.Bindings.initserver(dedicated, uprate, sdesc, ip, out master, passwd, maxcl);  // never returns if dedicated    
-			TessLib.GameInit.Log("world");
-			TessLib.Bindings.empty_world(7, true);
-			TessLib.GameInit.Log("video: sdl");
+			MezzanineLib.ClientServer.ClientGame.initclient();
+			MezzanineLib.Bindings.initserver(dedicated, uprate, sdesc, ip, out master, passwd, maxcl);  // never returns if dedicated    
+			MezzanineLib.GameInit.Log("world");
+			MezzanineLib.Bindings.empty_world(7, true);
+			MezzanineLib.GameInit.Log("video: sdl");
 			Video.GLDoubleBufferEnabled = false;
-			TessLib.GameInit.Log("video: mode");
+			MezzanineLib.GameInit.Log("video: mode");
 			Video.WindowIcon();
-			Video.WindowCaption = "Tess Engine";
+			Video.WindowCaption = "Mezzanine Engine";
 			//Video.GrabInput = true; 
 			Video.SetVideoModeWindowOpenGL(GameInit.ScreenWidth, GameInit.ScreenHeight);
 			
-			TessLib.GameInit.Log("video: misc");
+			MezzanineLib.GameInit.Log("video: misc");
 			Keyboard.KeyRepeat = false;
 			Mouse.ShowCursor = false;
 			
-			TessLib.GameInit.Log("gl");
+			MezzanineLib.GameInit.Log("gl");
 				
-			TessLib.Render.RenderGl.GlInit(GameInit.ScreenWidth, GameInit.ScreenHeight);
+			MezzanineLib.Render.RenderGl.GlInit(GameInit.ScreenWidth, GameInit.ScreenHeight);
 
 			string dataDirectory = "";
 			string filepath = "";
@@ -189,44 +189,44 @@ namespace Tess
 				filepath = "";
 			}
 			
-			TessLib.GameInit.Log("basetex");
+			MezzanineLib.GameInit.Log("basetex");
 			int xs = 0;
 			int ys = 0;
-			if(!TessLib.Render.RenderGl.InstallTexture(2, filepath + dataDirectory + "data/newchars.png", out xs, out ys, false) ||
-				!TessLib.Render.RenderGl.InstallTexture(3, filepath + dataDirectory + "data/martin/base.png", out xs, out ys, false) ||
-				!TessLib.Render.RenderGl.InstallTexture(6, filepath + dataDirectory + "data/martin/ball1.png", out xs, out ys, false) ||
-				!TessLib.Render.RenderGl.InstallTexture(7, filepath + dataDirectory + "data/martin/smoke.png", out xs, out ys, false) ||
-				!TessLib.Render.RenderGl.InstallTexture(8, filepath + dataDirectory + "data/martin/ball2.png", out xs, out ys, false) ||
-				!TessLib.Render.RenderGl.InstallTexture(9, filepath + dataDirectory + "data/martin/ball3.png", out xs, out ys, false) ||
-				!TessLib.Render.RenderGl.InstallTexture(4, filepath + dataDirectory + "data/explosion.jpg", out xs, out ys, false) ||
-				!TessLib.Render.RenderGl.InstallTexture(5, filepath + dataDirectory + "data/items.png", out xs, out ys, false) ||
-				!TessLib.Render.RenderGl.InstallTexture(1, filepath + dataDirectory + "data/crosshair.png", out xs, out ys, false)) 
+			if(!MezzanineLib.Render.RenderGl.InstallTexture(2, filepath + dataDirectory + "data/newchars.png", out xs, out ys, false) ||
+				!MezzanineLib.Render.RenderGl.InstallTexture(3, filepath + dataDirectory + "data/martin/base.png", out xs, out ys, false) ||
+				!MezzanineLib.Render.RenderGl.InstallTexture(6, filepath + dataDirectory + "data/martin/ball1.png", out xs, out ys, false) ||
+				!MezzanineLib.Render.RenderGl.InstallTexture(7, filepath + dataDirectory + "data/martin/smoke.png", out xs, out ys, false) ||
+				!MezzanineLib.Render.RenderGl.InstallTexture(8, filepath + dataDirectory + "data/martin/ball2.png", out xs, out ys, false) ||
+				!MezzanineLib.Render.RenderGl.InstallTexture(9, filepath + dataDirectory + "data/martin/ball3.png", out xs, out ys, false) ||
+				!MezzanineLib.Render.RenderGl.InstallTexture(4, filepath + dataDirectory + "data/explosion.jpg", out xs, out ys, false) ||
+				!MezzanineLib.Render.RenderGl.InstallTexture(5, filepath + dataDirectory + "data/items.png", out xs, out ys, false) ||
+				!MezzanineLib.Render.RenderGl.InstallTexture(1, filepath + dataDirectory + "data/crosshair.png", out xs, out ys, false)) 
 		{
-				TessLib.GameInit.Fatal("could not find core textures (hint: run cube from the parent of the bin directory)");
+				MezzanineLib.GameInit.Fatal("could not find core textures (hint: run cube from the parent of the bin directory)");
 			}
 			
-			TessLib.GameInit.Log("sound");
+			MezzanineLib.GameInit.Log("sound");
 			Mixer.Initialize();
 			
-			TessLib.GameInit.Log("cfg");
-			TessLib.Bindings.newmenu("frags\tpj\tping\tteam\tname");
-			TessLib.Bindings.newmenu("ping\tplr\tserver");
-			TessLib.Bindings.exec( filepath + dataDirectory + "data/keymap.cfg");
-			TessLib.Bindings.exec( filepath + dataDirectory + "data/menus.cfg");
-			TessLib.Bindings.exec( filepath + dataDirectory + "data/prefabs.cfg");
-			TessLib.Bindings.exec( filepath + dataDirectory + "data/sounds.cfg");
-			TessLib.Bindings.exec( filepath + dataDirectory + "servers.cfg");
-			if(!TessLib.Bindings.execfile( filepath + dataDirectory + "config.cfg")) 
+			MezzanineLib.GameInit.Log("cfg");
+			MezzanineLib.Bindings.newmenu("frags\tpj\tping\tteam\tname");
+			MezzanineLib.Bindings.newmenu("ping\tplr\tserver");
+			MezzanineLib.Bindings.exec( filepath + dataDirectory + "data/keymap.cfg");
+			MezzanineLib.Bindings.exec( filepath + dataDirectory + "data/menus.cfg");
+			MezzanineLib.Bindings.exec( filepath + dataDirectory + "data/prefabs.cfg");
+			MezzanineLib.Bindings.exec( filepath + dataDirectory + "data/sounds.cfg");
+			MezzanineLib.Bindings.exec( filepath + dataDirectory + "servers.cfg");
+			if(!MezzanineLib.Bindings.execfile( filepath + dataDirectory + "config.cfg")) 
 			{
-				TessLib.Bindings.execfile( filepath + dataDirectory + "data/defaults.cfg");
+				MezzanineLib.Bindings.execfile( filepath + dataDirectory + "data/defaults.cfg");
 			}
-			TessLib.Bindings.exec( filepath + dataDirectory + "autoexec.cfg");
+			MezzanineLib.Bindings.exec( filepath + dataDirectory + "autoexec.cfg");
 			
-			TessLib.GameInit.Log("localconnect");
-			TessLib.Bindings.localconnect();
+			MezzanineLib.GameInit.Log("localconnect");
+			MezzanineLib.Bindings.localconnect();
 			// if this map is changed, also change depthcorrect()   
-			TessLib.Bindings.changemap("metl3");		
-			TessLib.GameInit.Log("mainloop");
+			MezzanineLib.Bindings.changemap("metl3");		
+			MezzanineLib.GameInit.Log("mainloop");
 			
 			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
 			Events.KeyboardUp += new KeyboardEventHandler(this.KeyUp);
@@ -252,37 +252,37 @@ namespace Tess
 			{
 				Timer.DelayTicks(minmillis-(millis-GameInit.LastMillis));
 			}
-			TessLib.Bindings.cleardlights();
-			TessLib.Bindings.updateworld(millis);
+			MezzanineLib.Bindings.cleardlights();
+			MezzanineLib.Bindings.updateworld(millis);
 			if(!demoplayback)
 			{
-				TessLib.Bindings.serverslice(DateTime.Now.Second, 0);
+				MezzanineLib.Bindings.serverslice(DateTime.Now.Second, 0);
 			}
 
 			fps = 30.0f;
 			//fps = (1000.0f/curtime+fps*50)/51;
-			TessLib.GameInit.Player1Ptr = TessLib.Bindings.getplayer1();
+			MezzanineLib.GameInit.Player1Ptr = MezzanineLib.Bindings.getplayer1();
 			
-			TessLib.Bindings.computeraytable(TessLib.GameInit.Player1.o.x, TessLib.GameInit.Player1.o.y);
-			TessLib.Bindings.readdepth(GameInit.ScreenWidth, GameInit.ScreenHeight);
+			MezzanineLib.Bindings.computeraytable(MezzanineLib.GameInit.Player1.o.x, MezzanineLib.GameInit.Player1.o.y);
+			MezzanineLib.Bindings.readdepth(GameInit.ScreenWidth, GameInit.ScreenHeight);
 					
 			Video.GLSwapBuffers();
-			TessLib.Bindings.updatevol();
+			MezzanineLib.Bindings.updatevol();
 				
 			if(framesinmap++<5)	// cheap hack to get rid of initial sparklies, even when triple buffering etc.
 			{
 				//player1.yaw += 5;
-				//TessLib.Main.Player1 = player1;
-				TessLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
+				//MezzanineLib.Main.Player1 = player1;
+				MezzanineLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
 				//player1.yaw -= 5;
-				//TessLib.Main.Player1 = player1;
+				//MezzanineLib.Main.Player1 = player1;
 			};
-			TessLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
+			MezzanineLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
 		}
 
 		private void Quit(object sender, QuitEventArgs e)
 		{
-			TessLib.GameInit.Quit();
+			MezzanineLib.GameInit.Quit();
 			ManagedWrapper.mterminate();
 		}
 
@@ -290,14 +290,14 @@ namespace Tess
 		{
 			if (e.Key == Key.F12)
 			{
-				TessLib.GameInit.Screenshot();
+				MezzanineLib.GameInit.Screenshot();
 			}
-			TessLib.Bindings.keypress((int)e.Key, e.Down == true, e.Unicode);	
+			MezzanineLib.Bindings.keypress((int)e.Key, e.Down == true, e.Unicode);	
 		}
 
 		private void KeyUp(object sender, KeyboardEventArgs e)
 		{
-			TessLib.Bindings.keypress((int)e.Key, e.Down == true, e.Unicode);
+			MezzanineLib.Bindings.keypress((int)e.Key, e.Down == true, e.Unicode);
 		}
 
 		private void MouseMotion(object sender, MouseMotionEventArgs e)
@@ -308,7 +308,7 @@ namespace Tess
 			}
 			else
 			{
-				TessLib.Bindings.mousemove(e.RelativeX, e.RelativeY);
+				MezzanineLib.Bindings.mousemove(e.RelativeX, e.RelativeY);
 			}
 		}
 
@@ -319,7 +319,7 @@ namespace Tess
 			}
 			else
 			{
-				TessLib.Bindings.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
+				MezzanineLib.Bindings.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
 				lasttype = (byte)e.Type;
 				lastbut = (byte)e.Button;
 			}
@@ -332,7 +332,7 @@ namespace Tess
 			}
 			else
 			{
-				TessLib.Bindings.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
+				MezzanineLib.Bindings.keypress(-1*(byte)e.Button, e.ButtonPressed != false, 0);
 				lasttype = (byte)e.Type;
 				lastbut = (byte)e.Button;
 			}

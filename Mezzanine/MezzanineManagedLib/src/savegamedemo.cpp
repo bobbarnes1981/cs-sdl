@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 extern int islittleendian;
 
@@ -20,7 +20,7 @@ void gzput(int i) { gzputc(f, i); };
 void gzputi(int i) { gzwrite(f, &i, sizeof(int)); };
 void gzputv(vec &v) { gzwrite(f, &v, sizeof(vec)); };
 
-void gzcheck(int a, int b) { if(a!=b) TessLib::GameInit::Fatal("savegame file corrupt (short)"); };
+void gzcheck(int a, int b) { if(a!=b) MezzanineLib::GameInit::Fatal("savegame file corrupt (short)"); };
 int gzget() { char c = gzgetc(f); return c; };
 int gzgeti() { int i; gzcheck(gzread(f, &i, sizeof(int)), sizeof(int)); return i; };
 void gzgetv(vec &v) { gzcheck(gzread(f, &v, sizeof(vec)), sizeof(vec)); };
@@ -118,7 +118,7 @@ void loadgamerest()
     loopv(ents)
     {
         ents[i].spawned = gzgetc(f)!=0;   
-        if(ents[i].type==TessLib::StaticEntity::CARROT && !ents[i].spawned) trigger(ents[i].attr1, ents[i].attr2, true);
+        if(ents[i].type==MezzanineLib::StaticEntity::CARROT && !ents[i].spawned) trigger(ents[i].attr1, ents[i].attr2, true);
     };
     restoreserverstate(ents);
     
@@ -133,7 +133,7 @@ void loadgamerest()
         gzread(f, monsters[i], sizeof(dynent));
         monsters[i]->enemy = player1;                                       // lazy, could save id of enemy instead
         monsters[i]->lastaction = monsters[i]->trigger = lastmillis+500;    // also lazy, but no real noticable effect on game
-        if(monsters[i]->state==TessLib::CSStatus::CS_DEAD) monsters[i]->lastaction = 0;
+        if(monsters[i]->state==MezzanineLib::CSStatus::CS_DEAD) monsters[i]->lastaction = 0;
     };
     restoremonsterstate();
     
@@ -189,7 +189,7 @@ void incomingdemodata(uchar *buf, int len, bool extras)
         gzputi(player1->health);
         gzputi(player1->armour);
         gzput(player1->armourtype);
-        loopi(TessLib::Gun::NUMGUNS) gzput(player1->ammo[i]);
+        loopi(MezzanineLib::Gun::NUMGUNS) gzput(player1->ammo[i]);
         gzput(player1->state);
 		gzputi(bdamage);
 		bdamage = 0;
@@ -294,7 +294,7 @@ void demoplaybackstep()
             target->health = gzgeti();
             target->armour = gzgeti();
             target->armourtype = gzget();
-            loopi(TessLib::Gun::NUMGUNS) target->ammo[i] = gzget();
+            loopi(MezzanineLib::Gun::NUMGUNS) target->ammo[i] = gzget();
             target->state = gzget();
             target->lastmove = playbacktime;
 			if(bdamage = gzgeti()) damageblend(bdamage);
@@ -349,15 +349,15 @@ void demoplaybackstep()
 			};
             break;
         };
-        //if(player1->state!=TessLib::CSStatus::CS_DEAD) showscores(false);
+        //if(player1->state!=MezzanineLib::CSStatus::CS_DEAD) showscores(false);
     };
 };
 
 void stopn() { if(demoplayback) stopreset(); else stop(); conoutf("demo stopped"); };
 
-COMMAND(record, TessLib::Support::FunctionSignatures::ARG_1STR);
-COMMAND(demo, TessLib::Support::FunctionSignatures::ARG_1STR);
-COMMANDN(stop, stopn, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(record, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(demo, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMANDN(stop, stopn, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
-COMMAND(savegame, TessLib::Support::FunctionSignatures::ARG_1STR);
-COMMAND(loadgame, TessLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(savegame, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(loadgame, MezzanineLib::Support::FunctionSignatures::ARG_1STR);

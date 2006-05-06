@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 vertex *verts = NULL;
 int curvert;
@@ -19,7 +19,7 @@ void reallocv()
 {
     verts = (vertex *)realloc(verts, (curmaxverts *= 2)*sizeof(vertex));
     curmaxverts -= 10;
-    if(!verts) TessLib::GameInit::Fatal("no vertex memory!");
+    if(!verts) MezzanineLib::GameInit::Fatal("no vertex memory!");
     setarraypointers();
 };
 
@@ -47,7 +47,7 @@ bool showm = false;
 void showmip() { showm = !showm; };
 void mipstats(int a, int b, int c) { if(showm) conoutf("1x1/2x2/4x4: %d / %d / %d", a, b, c); };
 
-COMMAND(showmip, TessLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(showmip, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
 #define stripend() { if(floorstrip || deltastrip) { addstrip(ogltex, firstindex, curvert-firstindex); floorstrip = deltastrip = false; }; };
 void finishstrips() { stripend(); };
@@ -287,7 +287,7 @@ int renderwater(float hf)
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_SRC_COLOR);
     int sx, sy;
-    glBindTexture(GL_TEXTURE_2D, lookuptexture(TessLib::TextureNumbers::DEFAULT_LIQUID, sx, sy));  
+    glBindTexture(GL_TEXTURE_2D, lookuptexture(MezzanineLib::TextureNumbers::DEFAULT_LIQUID, sx, sy));  
 
     wx1 &= ~(watersubdiv-1);
     wy1 &= ~(watersubdiv-1);

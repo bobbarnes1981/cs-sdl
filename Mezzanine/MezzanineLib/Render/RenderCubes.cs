@@ -38,7 +38,7 @@ using SdlDotNet;
 using System.Runtime.InteropServices;
 
 
-namespace TessLib.Render
+namespace MezzanineLib.Render
 {
 	[StructLayout(LayoutKind.Sequential, Pack=4)]
 	public struct vertex 

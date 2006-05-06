@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <TessLib.dll>
+#using <MezzanineLib.dll>
 
 //extern bool hasoverbright;
 
@@ -27,7 +27,7 @@ void lightray(float bx, float by, persistent_entity &light)     // done in realt
     int stepy = (int)(dy/(float)steps*PRECF);
     int stepl = fast_f2nat(l/(float)steps); // incorrect: light will fade quicker if near edge of the world
 
-	if(TessLib::Render::RenderGl::HasOverBright)
+	if(MezzanineLib::Render::RenderGl::HasOverBright)
     {
         l /= lightscale;
         stepl /= lightscale;
@@ -151,7 +151,7 @@ void calclight()
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==TessLib::StaticEntity::LIGHT) calclightsource(e);
+        if(e.type==MezzanineLib::StaticEntity::LIGHT) calclightsource(e);
     };
     
     block b = { 1, 1, ssize-2, ssize-2 };
@@ -190,7 +190,7 @@ void dodynlight(vec &vold, vec &v, int reach, int strength, dynent *owner)
 
     dlights.add(blockcopy(b));      // backup area before rendering in dynlight
 
-    persistent_entity l = { (int)v.x, (int)v.y, (int)v.z, reach, TessLib::StaticEntity::LIGHT, strength, 0, 0 };
+    persistent_entity l = { (int)v.x, (int)v.y, (int)v.z, reach, MezzanineLib::StaticEntity::LIGHT, strength, 0, 0 };
     calclightsource(l);
     postlightarea(b);
 };
