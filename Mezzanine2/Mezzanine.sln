@@ -1,0 +1,63 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MezzanineManagedLib", "MezzanineManagedLib\MezzanineManagedLib.vcproj", "{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mezzanine", "Mezzanine\Mezzanine.csproj", "{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MezzanineLib", "MezzanineLib\MezzanineLib.csproj", "{DF0A7A59-91FA-438C-B859-D35C3963A553}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Profile = Profile
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Debug.ActiveCfg = Debug|Win32
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Debug.Build.0 = Debug|Win32
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Profile.ActiveCfg = Profile|Win32
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Profile.Build.0 = Profile|Win32
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Release.ActiveCfg = Release|Win32
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Release.Build.0 = Release|Win32
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Debug.ActiveCfg = Debug|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Debug.Build.0 = Debug|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Profile.ActiveCfg = Release|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Profile.Build.0 = Release|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Release.ActiveCfg = Release|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Release.Build.0 = Release|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Debug.ActiveCfg = Debug|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Debug.Build.0 = Debug|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Profile.ActiveCfg = Release|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Profile.Build.0 = Release|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Release.ActiveCfg = Release|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		DPBuild = 5
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Debug|Win32.Build.0 = Debug|Win32
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Release|Win32.ActiveCfg = Release|Win32
+		{06594C6D-6DA9-49DC-9A91-8F47221DDCFD}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
+		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
+	EndGlobalSection
+	GlobalSection(DevPartner Solution Properties) = postSolution
+	EndGlobalSection
+EndGlobal

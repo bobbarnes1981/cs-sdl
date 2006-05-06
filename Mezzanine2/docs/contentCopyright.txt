@@ -1,0 +1,268 @@
+As the Copyright/Copyleft/etc. status of some of the files in Sauerbraten has 
+not been made clear by the Sauerbraten team, and there are accusations flying 
+around about Copyright Violation(TM) and other evil sins, I started to look 
+through all the files which were used in EDM unmodified from the Sauerbraten 
+distribution, hoping to clear things up. There are several groups of files which 
+have no copyright or author info. If you know these are yours, and can tell me 
+whether they are either public domain, or GPL'ed, Zlib licensed, or Non-Free 
+(plain copyrighted), that would help us all a lot. Maybe we can sort this all 
+out. I list here all the files as I have them on my hard disk and what I think 
+their "legal status (TM)" is. If you disagree with anything, or know something 
+which I do not, drop a note to me here: j-kroll@gmx.de. Thanks. 
+
+I marked things which I think are problematic to use in Sauerbraten and/or Mods 
+of it with "****", and things where I was not sure with "?". 
+
+
+bin/
+Several DLL files are here. I have: fmod.dll libpng1.dll readme_SDL.txt SDL.dll 
+SDL_mixer.dll jpeg.dll msvcr71.dll SDL_image.dll zlib.dll - Not sure if all of 
+them may be redistributed freely and legally. Maybe someone can clear things up. 
+**** 
+
+bin_unix/
+contains the sauerbraten binaries, no problem here. 
+
+data/
+several .cfg files here, which probably count as source code, and as such fall 
+under zlib licence. Also, 4 PNG files with no readme, copyright info or 
+permission whatsoever. Possibly "illegally redistributed" by Sauerbraten and any 
+Mods, eg EDM. **** 
+
+data/martin/
+several PNG files here without readme, author or permission info. Possibly 
+"illegally redistributed" by Sauerbraten and any Mods, eg EDM. **** 
+
+docs/
+in sauerbraten this contains the sauer docs, in edm there's just a tiny 
+index.html. No problems here 
+
+
+packages/
+
+packages/aard
+Readme by Aard says it's "completely free to use in any way you like", no 
+problems here 
+
+packages/base
+maps base folder -- no copyright info, some maps contain author info, 
+specifically made for Sauerbraten. Not used or repackaged in EDM any more 
+
+packages/cube
+maps converted from cube format get saved here, empty folder 
+
+packages/dash
+includes author info and a "free but please give me credit" Readme, no problems 
+here as the readme is included and credit given 
+
+packages/dg
+and packages/dg_new
+no readme, author or permission info ****
+
+Update: these textures are made by David Gurrea, thanks tentus for giving me 
+this url. The page says they are free to use in non-commercial games. Added 
+readme.txt to EDM. 
+
+packages/edm
+our stuff, no problems using this in sauerbraten or edm 
+
+packages/egyptsoc
+includes author info and a "free but please give me credit" Readme, no problems 
+here as the readme is included and credit given 
+
+packages/golgotha
+2 almost identical water textures, 1 of them darker than the other. No readme, 
+author or copyright info. **** 
+
+packages/ik2k
+ik textures and envmaps, contains author info and a "free but please give me 
+credit" Readme, no problems here 
+
+packages/ikbase
+ik textures, contains author info and a "free but please give me credit" Readme, 
+no problems here 
+
+packages/jf1
+textures, contains author info and a "free but please give me credit" Readme, no 
+problems here (although they look *very very much* like some original quake 1 
+(TM) textures, hehe...) 
+
+packages/kurt
+5 textures, no author info or readme, could be from kurtis84 guessing from the 
+name but no idea **** 
+
+
+packages/models/
+packages/models/boost
+Health powerup, no author info, probably dcp? 
+
+packages/models/bridge
+no author info, ? 
+
+packages/models/bullets
+no author info, dcp? 
+
+packages/models/carrot
+no author info, ? 
+
+packages/models/dcp
+several other models by dcp, this time with Readme saying "if you want to use 
+them for something else than cube, please drop me a line, i just want to 
+know..." (I sent him an email) 
+
+packages/models/edm
+our stuff, no problems using this in edm or sauerbraten 
+
+packages/models/g_armour
+armour model, has author info and Readme with part of the GPL that says "This 
+program is free software;" well we use Von Neumann machines so data is code, and 
+code is data, alright... 
+
+packages/models/gibc
+another model distributed under the GPL 
+
+packages/models/gibc
+another model distributed under the GPL 
+
+packages/models/health
+health, no author info, possibly dcp. ? 
+
+packages/models/hudguns
+Hudguns. "Please-tell-me-if-you-modify"-style Readme says they are by DarthVim, 
+but I think at least the fist and Pistol are by makkE. **** 
+
+Update: Got permission from makkE to use his pistol and fist in EDM. Readme 2
+Status of the rest of the models still unclear, makkE says:
+
+>>The mg-style chaingun is made by dcp. The darthvim models. I have enhanced the 
+skins a little before the last cube update I think.
+
+I had tried to contact Darthvim, and though I found traces of him in a dead 
+doom3 forum and on other places, none of the email, pming and msn and other 
+im´s have been succesful. 
+
+But since he says:
+Copyrihgt info: "Please ask me bevore you want to change things on it and send 
+me you weapon (so that i can have a look on it :=)"
+, and I improved them while keeping the general design direction and made them 
+to stay with the official cube, I assumed I was at least acting in accordance to 
+his will. (I hope) Still, the copyright is with him therefore.
+Unfortunately this is a very grey area. Darthvim was stating the hands on the 
+models were´nt actually made by him, I suspect they have been taken from a q2 
+addon model.<< 
+
+
+
+packages/models/makke
+Models by makkE, no readme. Plain Copyright according to makkE. Removed from 
+EDM. 
+
+packages/models/monsters
+monster models. All of them include readmes and author info, some of them seem 
+to be free to use, but I'm not sure about the Knight ("The PKnight model is 
+copyright 1998 by James Green"), and the Rhino model:
+
+               ---------------------------------------
+                   This work remains the property of
+
+                             The Coven
+                  http://www.planetquake.com/TheCoven/
+               ---------------------------------------
+So it's just plain Copyrighted(TM). I think these should be removed from EDM, 
+and also from Sauerbraten and Cube until Aardappel can show he has permission to 
+use them. **** 
+
+
+packages/models/nieb/nothing
+I will ask nieb for permission to use Nothing. (or maybe just delete it) 
+
+packages/models/objects
+has a readme that says "by nieb". Should be polite and ask for permission for 
+EDM or remove it **** 
+
+packages/models/quad
+GPL, no problem here 
+
+packages/models/rockets
+packages/models/rrounds
+packages/models/shells
+packages/models/switch1+2
+packages/models/teleporter
+No readme, probably dcp. ? 
+
+packages/models/tentus
+tentus' models. These are the only models I ever used in an EDM map, and I got 
+permission from tentus. 
+
+packages/models/tree1
+packages/models/vegetation
+vegetation models, with no readme or other info. **** 
+
+packages/models/y_armor
+GPL 
+
+
+
+
+SOOOOOOOOO...... that were the models. 
+
+
+
+
+packages/nieb
+envmap textures probably by nieb. no other info. **** 
+
+packages/payne
+Textures probably ripped from Max Payne, Readme states they're free, kind of 
+
+packages/rorschach
+includes author info and a "free but please give me credit" Readme, no problems 
+here as the readme is included and credit given 
+
+packages/schwenz
+Readme says "One particularly cool texture from the "asylum" set by Schwenz (who 
+hadn't included a readme with the archive, shame on him)." ? 
+
+
+packages/socksky
+Contains a Readme with contact info but no copyright details. However Sock's 
+download page where you can get the files says "All use of my digital work is 
+covered by this Creative Commons Deed. Please do not not use my work for any 
+commercial purposes." Apparently no problem here. 
+
+
+packages/sounds
+Contains a Readme which says most of the the files should be free. except: 
+there's nothing about the ppm/ subdir and no extra readme there. And the awesund 
+Readme says that "please include this text file and see that everything remains 
+unedited and unchanged." However another Readme says some files were changed. I 
+think this has been in there since Cube. **** 
+
+
+packages/staffy
+some black textures without readme. **** 
+
+
+packages/subverse
+Has a "please give me credit"-Readme, looks ok 
+
+packages/tech1soc
+Has a "please give me credit"-Readme, no problems here 
+
+packages/than_ind
+Has a Readme which only says you may not modify it. ? 
+
+
+
+
+/ (root bin-dir)
+
+
+contains autoexec.cfg, config.cfg and the like, which I guess fall under "source 
+code", and the start scripts, the same. Possibly the readme_*.txt files here are 
+Copyright(C)(TM) Aardappel, and should not be redistributed in a mod or fork. I 
+removed them from edm.
+
+
+
+
