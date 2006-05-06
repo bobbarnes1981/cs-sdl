@@ -1,0 +1,45 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TessManagedLib", "TessManagedLib\TessManagedLib.vcproj", "{7923259E-4B01-4566-9B36-EA5173A0C60C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tess", "Tess\Tess.csproj", "{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TessLib", "TessLib\TessLib.csproj", "{DF0A7A59-91FA-438C-B859-D35C3963A553}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Profile = Profile
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{7923259E-4B01-4566-9B36-EA5173A0C60C}.Debug.ActiveCfg = Debug|Win32
+		{7923259E-4B01-4566-9B36-EA5173A0C60C}.Debug.Build.0 = Debug|Win32
+		{7923259E-4B01-4566-9B36-EA5173A0C60C}.Profile.ActiveCfg = Profile|Win32
+		{7923259E-4B01-4566-9B36-EA5173A0C60C}.Profile.Build.0 = Profile|Win32
+		{7923259E-4B01-4566-9B36-EA5173A0C60C}.Release.ActiveCfg = Release|Win32
+		{7923259E-4B01-4566-9B36-EA5173A0C60C}.Release.Build.0 = Release|Win32
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Debug.ActiveCfg = Debug|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Debug.Build.0 = Debug|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Profile.ActiveCfg = Release|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Profile.Build.0 = Release|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Release.ActiveCfg = Release|.NET
+		{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}.Release.Build.0 = Release|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Debug.ActiveCfg = Debug|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Debug.Build.0 = Debug|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Profile.ActiveCfg = Release|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Profile.Build.0 = Release|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Release.ActiveCfg = Release|.NET
+		{DF0A7A59-91FA-438C-B859-D35C3963A553}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		DPBuild = 5
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
