@@ -2,6 +2,9 @@
 
 #include "pch.h"
 #include "engine.h"
+#using <mscorlib.dll>
+#using <MezzanineLib.dll>
+using namespace MezzanineLib;
 
 void backup(char *name, char *backupname)
 {
@@ -109,7 +112,7 @@ void loadc(gzFile f, cube &c)
         case OCTSAV_NORMAL: gzread(f, c.edges, 12); break;
 
         default:
-            fatal("garbage in map");
+            GameInit::Fatal("garbage in map");
     };
     gzread(f, c.texture, 6);
     if(hdr.version < 7) loopi(3) gzgetc(f); //gzread(f, c.colour, 3);
@@ -208,8 +211,8 @@ void load_world(char *mname)        // still supports all map formats that have 
     computescreen(mname);
     gzread(f, &hdr, sizeof(header));
     endianswap(&hdr.version, sizeof(int), 16);
-    if(strncmp(hdr.head, "OCTA", 4)!=0) fatal("while reading map: header malformatted");
-    if(hdr.version>MAPVERSION) fatal("this map requires a newer version of Mezzanine");
+    if(strncmp(hdr.head, "OCTA", 4)!=0) GameInit::Fatal("while reading map: header malformatted");
+    if(hdr.version>MAPVERSION) GameInit::Fatal("this map requires a newer version of Mezzanine");
     if(!hdr.ambient) hdr.ambient = 25;
     if(!hdr.lerpsubdivsize)
     {

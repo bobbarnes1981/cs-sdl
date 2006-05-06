@@ -40,8 +40,7 @@ void quit()                     // normal exit
 
 void fatal(char *s, char *o)    // failure exit
 {
-    s_sprintfd(msg)("%s%s (%s)\n", s, o, SDL_GetError());
-    cleanup(msg);
+	GameInit::Fatal(s, o);
 };
 
 SDL_Surface *screen = NULL;
@@ -283,20 +282,20 @@ int native_main(int argc, char **argv)
     //SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
     //#endif
 
-    if(SDL_Init(SDL_INIT_TIMER|SDL_INIT_VIDEO|par)<0) fatal("Unable to initialize SDL");
+    if(SDL_Init(SDL_INIT_TIMER|SDL_INIT_VIDEO|par)<0) GameInit::Fatal("Unable to initialize SDL");
 
     GameInit::Log("enet");
-    if(enet_initialize()<0) fatal("Unable to initialise network module");
+    if(enet_initialize()<0) GameInit::Fatal("Unable to initialise network module");
 
     initserver(dedicated);  // never returns if dedicated
       
     GameInit::Log("video: sdl");
-    if(SDL_InitSubSystem(SDL_INIT_VIDEO)<0) fatal("Unable to initialize SDL Video");
+    if(SDL_InitSubSystem(SDL_INIT_VIDEO)<0) GameInit::Fatal("Unable to initialize SDL Video");
 
     GameInit::Log("video: mode");
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     screen = SDL_SetVideoMode(scr_w, scr_h, 0, SDL_OPENGL|SDL_RESIZABLE|fs);
-    if(screen==NULL) fatal("Unable to create OpenGL screen");
+    if(screen==NULL) GameInit::Fatal("Unable to create OpenGL screen");
 
 	GameInit::Log("video: misc");
     SDL_WM_SetCaption("Mezzanine engine", NULL);
@@ -315,7 +314,7 @@ int native_main(int argc, char **argv)
 	GameInit::Log("textureload");
     crosshair = textureload(newstring("data/crosshair.png"));
 	GameInit::Log("crosshair");
-    if(!crosshair) fatal("could not find core textures (run the .bat, not the .exe)");
+    if(!crosshair) GameInit::Fatal("could not find core textures (run the .bat, not the .exe)");
     computescreen("initializing...");
     inbetweenframes = true;
     particleinit();
