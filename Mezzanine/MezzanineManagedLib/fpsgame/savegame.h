@@ -1,5 +1,4 @@
 // loading and saving of savegames, dumps the spawn state of all mapents, the full state of all dynents (monsters + player)
-
 struct gamesaver
 {
     fpsclient &cl;
@@ -18,7 +17,7 @@ struct gamesaver
     int gzgeti(gzFile f)
     {
         int i;
-        if(gzread(f, &i, sizeof(int))<sizeof(int)) fatal("savegame file corrupt (short)");
+		if(gzread(f, &i, sizeof(int))<sizeof(int)) fatal("savegame file corrupt (short)");
         return i;
     };
 

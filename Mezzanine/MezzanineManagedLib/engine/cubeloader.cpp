@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "engine.h"
+#using <mscorlib.dll>
+#using <MezzanineLib.dll>
+using namespace MezzanineLib;
 
 struct cubeloader
 {
@@ -219,8 +222,8 @@ struct cubeloader
         c_header hdr;
         gzread(f, &hdr, sizeof(c_header)-sizeof(int)*16);
         endianswap(&hdr.version, sizeof(int), 4);
-        if(strncmp(hdr.head, "CUBE", 4)!=0) fatal("while reading map: header malformatted");
-        if(hdr.version>5) fatal("this map requires a newer version of cube");
+        if(strncmp(hdr.head, "CUBE", 4)!=0) GameInit::Fatal("while reading map: header malformatted");
+        if(hdr.version>5) GameInit::Fatal("this map requires a newer version of cube");
         if(hdr.version>=4)
         {
             gzread(f, &hdr.waterlevel, sizeof(int)*16);
@@ -278,7 +281,7 @@ struct cubeloader
                     if(type<0 || type>=C_MAXTYPE)
                     {
                         s_sprintfd(t)("%d @ %d", type, k);
-                        fatal("while reading map: type out of range: ", t);
+                        GameInit::Fatal("while reading map: type out of range: ", t);
                     };
                     s->type = type;
                     s->floor = gzgetc(f);

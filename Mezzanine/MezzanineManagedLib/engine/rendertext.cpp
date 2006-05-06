@@ -2,6 +2,9 @@
 
 #include "pch.h"
 #include "engine.h"
+#using <mscorlib.dll>
+#using <MezzanineLib.dll>
+using namespace MezzanineLib;
 
 short char_coords[96][4] = 
 {
@@ -224,7 +227,7 @@ void draw_envbox_aux(float s0, float t0, int x0, int y0, int z0,
 
 void draw_envbox(int w)
 {
-    if(!sky[0]) fatal("no skybox");
+    if(!sky[0]) GameInit::Fatal("no skybox");
 
     glDepthMask(GL_FALSE);
 

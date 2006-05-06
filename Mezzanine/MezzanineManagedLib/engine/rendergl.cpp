@@ -5,6 +5,8 @@
 #using <mscorlib.dll>
 #using <Tao.OpenGl.dll>
 #using <Tao.OpenGl.Glu.dll>
+#using <MezzanineLib.dll>
+using namespace MezzanineLib;
 
 bool hasVBO = false, hasOQ = false;
 int renderpath;
@@ -121,9 +123,9 @@ void gl_init(int w, int h)
     char *exts = (char *)glGetString(GL_EXTENSIONS);
     
     if(!strstr(exts, "GL_EXT_texture_env_combine") && !strstr(exts, "GL_ARB_texture_env_combine")) 
-        fatal("No texture_env_combine extension! (your video card is WAY too old)");
+        GameInit::Fatal("No texture_env_combine extension! (your video card is WAY too old)");
 
-    if(!strstr(exts, "GL_ARB_multitexture")) fatal("no multitexture extension!");
+    if(!strstr(exts, "GL_ARB_multitexture")) GameInit::Fatal("no multitexture extension!");
     glActiveTexture_       = (PFNGLACTIVETEXTUREARBPROC)      getprocaddress("glActiveTextureARB");
     glClientActiveTexture_ = (PFNGLCLIENTACTIVETEXTUREARBPROC)getprocaddress("glClientActiveTextureARB");
 
@@ -189,7 +191,7 @@ void gl_init(int w, int h)
 
     purgetextures();
     //qsphere = gluNewQuadric();
-	if(!(qsphere = gluNewQuadric())) fatal("glu sphere");
+	if(!(qsphere = gluNewQuadric())) GameInit::Fatal("glu sphere");
     gluQuadricDrawStyle(qsphere, GLU_FILL);
     gluQuadricOrientation(qsphere, GLU_OUTSIDE);
     gluQuadricTexture(qsphere, GL_TRUE);
@@ -206,7 +208,7 @@ void gl_init(int w, int h)
 SDL_Surface *rotate(SDL_Surface *s)
 {
     SDL_Surface *d = SDL_CreateRGBSurface(SDL_SWSURFACE, s->h, s->w, s->format->BitsPerPixel, s->format->Rmask, s->format->Gmask, s->format->Bmask, s->format->Amask);
-    if(!d) fatal("create surface");
+    if(!d) GameInit::Fatal("create surface");
     int depth = s->format->BitsPerPixel==24 ? 3 : 4;
     loop(y, s->h) loop(x, s->w)
     {
@@ -228,7 +230,7 @@ void createtexture(int tnum, int w, int h, void *pixels, bool clamp, bool mipit,
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mipit ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR); 
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     int mode = bpp==24 ? GL_RGB : GL_RGBA;
-    if(mipit) { if(gluBuild2DMipmaps(GL_TEXTURE_2D, mode, w, h, mode, GL_UNSIGNED_BYTE, pixels)) fatal("could not build mipmaps"); }
+    if(mipit) { if(gluBuild2DMipmaps(GL_TEXTURE_2D, mode, w, h, mode, GL_UNSIGNED_BYTE, pixels)) GameInit::Fatal("could not build mipmaps"); }
     else glTexImage2D(GL_TEXTURE_2D, 0, mode, w, h, 0, mode, GL_UNSIGNED_BYTE, pixels);
 }
 

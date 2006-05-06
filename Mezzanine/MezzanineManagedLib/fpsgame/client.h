@@ -1,3 +1,4 @@
+
 struct clientcom : iclientcom
 {
     fpsclient &cl;

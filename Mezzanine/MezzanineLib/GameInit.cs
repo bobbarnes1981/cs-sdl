@@ -103,15 +103,15 @@ namespace MezzanineLib
 		int x, y, xs, ys; 
 	};
 
-	/// <summary>
-	/// 
-	/// </summary>
-	[StructLayout(LayoutKind.Sequential, Pack=4)]
-	public struct mapmodelinfo 
-	{ 
-		int rad, h, zoff, snap; 
-		string name; 
-	};
+//	/// <summary>
+//	/// 
+//	/// </summary>
+//	[StructLayout(LayoutKind.Sequential, Pack=4)]
+//	public struct mapmodelinfo 
+//	{ 
+//		int rad, h, zoff, snap; 
+//		string name; 
+//	};
 
 	/// <summary>
 	/// 

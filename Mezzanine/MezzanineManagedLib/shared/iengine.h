@@ -1,3 +1,4 @@
+
 // the interface the game uses to access the engine
 
 extern void lightent(extentity &e, float height = 8.0f);

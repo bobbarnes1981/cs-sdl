@@ -3,10 +3,13 @@
 
 #include "pch.h"
 #include "engine.h" 
+#using <mscorlib.dll>
+#using <MezzanineLib.dll>
+using namespace MezzanineLib;
 
 #ifdef STANDALONE
 void localservertoclient(uchar *buf, int len) {};
-void fatal(char *s, char *o) { cleanupserver(); printf("servererror: %s\n", s); exit(1); };
+//void fatal(char *s, char *o) { cleanupserver(); printf("servererror: %s\n", s); exit(1); };
 #endif
 
 // all network traffic is in 32bit ints, which are then compressed using the following simple scheme (assumes that most values are small).
@@ -477,7 +480,7 @@ icliententities *et = NULL;
 void initgame(char *game)
 {
     igame *ig = (*gamereg)[game];
-    if(!ig) fatal("cannot start game module", game);
+    if(!ig) GameInit::Fatal("cannot start game module", game);
     sv = ig->newserver();
     cl = ig->newclient();
     if(cl)
@@ -507,11 +510,11 @@ void initserver(bool dedicated)
         ENetAddress address = { ENET_HOST_ANY, sv->serverport() };
         if(*ip && enet_address_set_host(&address, ip)<0) printf("WARNING: server ip not resolved");
         serverhost = enet_host_create(&address, MAXCLIENTS, 0, uprate);
-        if(!serverhost) fatal("could not create server host\n");
+        if(!serverhost) GameInit::Fatal("could not create server host\n");
         loopi(MAXCLIENTS) serverhost->peers[i].data = (void *)-1;
         address.port = sv->serverinfoport();
         pongsock = enet_socket_create(ENET_SOCKET_TYPE_DATAGRAM, &address);
-        if(pongsock == ENET_SOCKET_NULL) fatal("could not create server info socket\n");
+        if(pongsock == ENET_SOCKET_NULL) GameInit::Fatal("could not create server info socket\n");
     };
 
     sv->serverinit(sdesc);
@@ -546,7 +549,7 @@ bool serveroption(char *opt)
 int main(int argc, char* argv[])
 {   
     for(int i = 1; i<argc; i++) if(argv[i][0]!='-' || !serveroption(argv[i])) printf("WARNING: unknown commandline option\n");
-    if(enet_initialize()<0) fatal("Unable to initialise network module");
+    if(enet_initialize()<0) GameInit::Fatal("Unable to initialise network module");
     initserver(true);
     return 0;
 };
