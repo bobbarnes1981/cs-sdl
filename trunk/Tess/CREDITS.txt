@@ -1,5 +1,0 @@
-The following are the authors and contributors of Tess:
-
- * All C# code David Y. Hudson (jendave@yahoo.com)
- * TessManagedLib is based on the Cube Engine (http://cubeengine.com) by Wouter van Oortmerssen
- 
