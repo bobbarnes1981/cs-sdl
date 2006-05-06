@@ -3,7 +3,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MezzanineManagedLib", "Mezz
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mezzanine", "Mezzanine\Mezzanine.csproj", "{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mezzanine2", "Mezzanine\Mezzanine2.csproj", "{456AA9A9-6B2C-4710-97A8-8DC7CB2D7A35}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
