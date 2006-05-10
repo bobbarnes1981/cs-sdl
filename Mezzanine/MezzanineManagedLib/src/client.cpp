@@ -147,7 +147,7 @@ vector<ivector> messages;
 
 void addmsg(int rel, int num, int type, ...)
 {
-    if(demoplayback) return;
+    //if(MezzanineLib::GameInit::DemoPlayback) return; TODO
 	//if(num!=msgsizelookup(type)) { sprintf_sd(s)("inconsistant msg size for %d (%d != %d)", type, num, msgsizelookup(type)); MezzanineLib::GameInit::Fatal(s); };
     if(messages.length()==100) { conoutf("command flood protection (type %d)", type); return; };
     ivector &msg = messages.add();
@@ -221,7 +221,7 @@ void c2sinfo(dynent *d)                     // send update to the server
         putint(p, (int)(d->vel.y*MezzanineLib::GameInit::DVF));
         putint(p, (int)(d->vel.z*MezzanineLib::GameInit::DVF));
         // pack rest in 1 byte: strafe:2, move:2, onfloor:1, state:3
-        putint(p, (d->strafe&3) | ((d->move&3)<<2) | (((int)d->onfloor)<<4) | ((editmode ? MezzanineLib::CSStatus::CS_EDITING : d->state)<<5) );
+        putint(p, (d->strafe&3) | ((d->move&3)<<2) | (((int)d->onfloor)<<4) | ((MezzanineLib::GameInit::EditMode ? MezzanineLib::CSStatus::CS_EDITING : d->state)<<5) );
  
         if(senditemstoserver)
         {

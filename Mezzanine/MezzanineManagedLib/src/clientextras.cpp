@@ -46,7 +46,7 @@ extern int democlientnum;
 void renderclients()
 {
     dynent *d;
-    loopv(players) if((d = players[i]) && (!demoplayback || i!=democlientnum)) renderclient(d, isteam(player1->team, d->team), "monster/ogro", false, 1.0f);
+    loopv(players) if((d = players[i]) && (!MezzanineLib::GameInit::DemoPlayback || i!=democlientnum)) renderclient(d, isteam(player1->team, d->team), "monster/ogro", false, 1.0f);
 };
 
 // creation of scoreboard pseudo-menu
@@ -89,14 +89,14 @@ void renderscores()
 {
     if(!scoreson) return;
     scorelines.setsize(0);
-    if(!demoplayback) renderscore(player1);
+    if(!MezzanineLib::GameInit::DemoPlayback) renderscore(player1);
     loopv(players) if(players[i]) renderscore(players[i]);
     sortmenu(0, scorelines.length());
     if(m_teammode)
     {
         teamsused = 0;
         loopv(players) addteamscore(players[i]);
-        if(!demoplayback) addteamscore(player1);
+        if(!MezzanineLib::GameInit::DemoPlayback) addteamscore(player1);
         teamscores[0] = 0;
         loopj(teamsused)
         {

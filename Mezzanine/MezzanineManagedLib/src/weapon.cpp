@@ -96,7 +96,7 @@ bool intersect(dynent *d, vec &from, vec &to)   // if lineseg hits entity boundi
 
 char *playerincrosshair()
 {
-	if(demoplayback) return NULL;
+	if(MezzanineLib::GameInit::DemoPlayback) return NULL;
     loopv(players)
     {
         dynent *o = players[i];

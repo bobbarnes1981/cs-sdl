@@ -106,7 +106,7 @@ COMMANDN(bind, bindkey, MezzanineLib::Support::FunctionSignatures::ARG_2STR);
 void saycommand(char *init)                         // turns input to the command line on or off
 {
 	SdlDotNet::Keyboard::UnicodeEnabled = (saycommandon = (init!=NULL));
-    if(!editmode) SdlDotNet::Keyboard::KeyRepeat = saycommandon;
+    if(!MezzanineLib::GameInit::EditMode) SdlDotNet::Keyboard::KeyRepeat = saycommandon;
     if(!init) init = "";
     strcpy_s(commandbuf, init);
 };

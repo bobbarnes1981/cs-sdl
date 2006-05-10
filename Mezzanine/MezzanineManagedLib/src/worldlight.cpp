@@ -142,7 +142,7 @@ void postlightarea(block &a)    // median filter, smooths out random noise in li
 
 void calclight()
 {
-    loop(x,ssize) loop(y,ssize)
+    loop(x,MezzanineLib::GameInit::SSize) loop(y,MezzanineLib::GameInit::SSize)
     {
         sqr *s = S(x,y);
         s->r = s->g = s->b = 10;
@@ -154,7 +154,7 @@ void calclight()
         if(e.type==MezzanineLib::StaticEntity::LIGHT) calclightsource(e);
     };
     
-    block b = { 1, 1, ssize-2, ssize-2 };
+    block b = { 1, 1, MezzanineLib::GameInit::SSize-2, MezzanineLib::GameInit::SSize-2 };
     postlightarea(b);
     setvar("fullbright", 0);
 };
@@ -178,15 +178,15 @@ void dodynlight(vec &vold, vec &v, int reach, int strength, dynent *owner)
     if(!reach) reach = dynlight;
     if(owner->monsterstate) reach = reach/2;
     if(!reach) return;
-    if(v.x<0 || v.y<0 || v.x>ssize || v.y>ssize) return;
+    if(v.x<0 || v.y<0 || v.x>MezzanineLib::GameInit::SSize || v.y>MezzanineLib::GameInit::SSize) return;
     
     int creach = reach+16;  // dependant on lightray random offsets!
     block b = { (int)v.x-creach, (int)v.y-creach, creach*2+1, creach*2+1 };
 
     if(b.x<1) b.x = 1;   
     if(b.y<1) b.y = 1;
-    if(b.xs+b.x>ssize-2) b.xs = ssize-2-b.x;
-    if(b.ys+b.y>ssize-2) b.ys = ssize-2-b.y;
+    if(b.xs+b.x>MezzanineLib::GameInit::SSize-2) b.xs = MezzanineLib::GameInit::SSize-2-b.x;
+    if(b.ys+b.y>MezzanineLib::GameInit::SSize-2) b.ys = MezzanineLib::GameInit::SSize-2-b.y;
 
     dlights.add(blockcopy(b));      // backup area before rendering in dynlight
 

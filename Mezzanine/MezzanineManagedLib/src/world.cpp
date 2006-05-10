@@ -7,14 +7,14 @@
 extern char *entnames[];                // lookup from map entities above to strings
 
 sqr *world = NULL;
-int sfactor, ssize, cubicsize, mipsize;
+int   cubicsize, mipsize;
 
 header hdr;
 
 void settag(int tag, int type)          // set all cubes with "tag" to space, if tag is 0 then reset ALL tagged cubes according to type
 {
-    int maxx = 0, maxy = 0, minx = ssize, miny = ssize;
-    loop(x, ssize) loop(y, ssize)
+    int maxx = 0, maxy = 0, minx = MezzanineLib::GameInit::SSize, miny = MezzanineLib::GameInit::SSize;
+    loop(x, MezzanineLib::GameInit::SSize) loop(y, MezzanineLib::GameInit::SSize)
     {
         sqr *s = S(x, y);
         if(s->tag)
@@ -65,8 +65,8 @@ void remip(block &b, int level)
     int lighterr = getvar("lighterror")*3;
     sqr *w = wmip[level];
     sqr *v = wmip[level+1];
-    int ws = ssize>>level;
-    int vs = ssize>>(level+1);
+    int ws = MezzanineLib::GameInit::SSize>>level;
+    int vs = MezzanineLib::GameInit::SSize>>(level+1);
     block s = b;
     if(s.x&1) { s.x--; s.xs++; };
     if(s.y&1) { s.y--; s.ys++; };
@@ -155,8 +155,8 @@ void remipmore(block &b, int level)
     block bb = b;
     if(bb.x>1) bb.x--;
     if(bb.y>1) bb.y--;
-    if(bb.xs<ssize-3) bb.xs++;
-    if(bb.ys<ssize-3) bb.ys++;
+    if(bb.xs<MezzanineLib::GameInit::SSize-3) bb.xs++;
+    if(bb.ys<MezzanineLib::GameInit::SSize-3) bb.ys++;
     remip(bb, level);
 };
 
@@ -292,8 +292,9 @@ sqr *wmip[11*2];
 
 void setupworld(int factor)
 {
-    ssize = 1<<(sfactor = factor);
-    cubicsize = ssize*ssize;
+	MezzanineLib::GameInit::SFactor = factor;
+    MezzanineLib::GameInit::SSize = 1<<(MezzanineLib::GameInit::SFactor);
+    cubicsize = MezzanineLib::GameInit::SSize*MezzanineLib::GameInit::SSize;
     mipsize = cubicsize*134/100;
     sqr *w = world = (sqr *)alloc(mipsize*sizeof(sqr));
     loopi(MezzanineLib::GameInit::LargestFactor*2) { wmip[i] = w; w += cubicsize>>(i*2); };
@@ -306,12 +307,12 @@ void empty_world(int factor, bool force)    // main empty world creation routine
     pruneundos();
     sqr *oldworld = world;
     bool copy = false;
-    if(oldworld && factor<0) { factor = sfactor+1; copy = true; };
+    if(oldworld && factor<0) { factor = MezzanineLib::GameInit::SFactor+1; copy = true; };
     if(factor<MezzanineLib::GameInit::SmallestFactor) factor = MezzanineLib::GameInit::SmallestFactor;
     if(factor>MezzanineLib::GameInit::LargestFactor) factor = MezzanineLib::GameInit::LargestFactor;
     setupworld(factor);
     
-    loop(x,ssize) loop(y,ssize)
+    loop(x,MezzanineLib::GameInit::SSize) loop(y,MezzanineLib::GameInit::SSize)
     {
         sqr *s = S(x,y);
         s->r = s->g = s->b = 150;
@@ -328,18 +329,18 @@ void empty_world(int factor, bool force)    // main empty world creation routine
     strncpy(hdr.head, "CUBE", 4);
 	hdr.version = MezzanineLib::GameInit::MapVersion;
     hdr.headersize = sizeof(header);
-    hdr.sfactor = sfactor;
+    hdr.sfactor = MezzanineLib::GameInit::SFactor;
 
     if(copy)
     {
-        loop(x,ssize/2) loop(y,ssize/2)
+        loop(x,MezzanineLib::GameInit::SSize/2) loop(y,MezzanineLib::GameInit::SSize/2)
         {
-            *S(x+ssize/4, y+ssize/4) = *SWS(oldworld, x, y, ssize/2);
+            *S(x+MezzanineLib::GameInit::SSize/4, y+MezzanineLib::GameInit::SSize/4) = *SWS(oldworld, x, y, MezzanineLib::GameInit::SSize/2);
         };
         loopv(ents)
         {
-            ents[i].x += ssize/4;
-            ents[i].y += ssize/4;
+            ents[i].x += MezzanineLib::GameInit::SSize/4;
+            ents[i].y += MezzanineLib::GameInit::SSize/4;
         };
     }
     else
@@ -349,7 +350,7 @@ void empty_world(int factor, bool force)    // main empty world creation routine
         loopi(15) hdr.reserved[i] = 0;
         loopk(3) loopi(256) hdr.texlists[k][i] = i;
         ents.setsize(0);
-        block b = { 8, 8, ssize-16, ssize-16 }; 
+        block b = { 8, 8, MezzanineLib::GameInit::SSize-16, MezzanineLib::GameInit::SSize-16 }; 
         edittypexy(MezzanineLib::BlockTypes::SPACE, b);
     };
     

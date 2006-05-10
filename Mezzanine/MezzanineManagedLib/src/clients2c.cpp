@@ -114,7 +114,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             int state = f>>3;
             if(state==MezzanineLib::CSStatus::CS_DEAD && d->state!=MezzanineLib::CSStatus::CS_DEAD) d->lastaction = MezzanineLib::GameInit::LastMillis;
             d->state = state;
-            if(!demoplayback) updatepos(d);
+            if(!MezzanineLib::GameInit::DemoPlayback) updatepos(d);
             break;
         };
 

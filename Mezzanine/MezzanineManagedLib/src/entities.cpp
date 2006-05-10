@@ -208,7 +208,7 @@ void pickup(int n, dynent *d)
 
 void checkitems()
 {
-    if(editmode) return;
+    if(MezzanineLib::GameInit::EditMode) return;
     loopv(ents)
     {
         entity &e = ents[i];

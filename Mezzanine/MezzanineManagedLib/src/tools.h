@@ -3,27 +3,14 @@
 #ifndef _TOOLS_H
 #define _TOOLS_H
 
-#ifdef __GNUC__
-#define gamma __gamma
-#endif
-
 #include <math.h>
-
-#ifdef __GNUC__
-#undef gamma
-#endif
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <limits.h>
 #include <assert.h>
-#ifdef __GNUC__
-#include <new>
-#else
 #include <new.h>
-#endif
 
 #ifdef NULL
 #undef NULL
@@ -45,16 +32,9 @@ typedef unsigned int uint;
 #define loopk(m) loop(k,m)
 #define loopl(m) loop(l,m)
 
-#ifdef WIN32
 #pragma warning( 3 : 4189 ) 
 //#pragma comment(linker,"/OPT:NOWIN98")
 #define PATHDIV '\\'
-#else
-#define __cdecl
-#define _vsnprintf vsnprintf
-#define PATHDIV '/'
-#endif
-
 
 // easy safe strings
 

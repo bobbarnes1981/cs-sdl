@@ -203,7 +203,7 @@ void monsteraction(dynent *m)           // main AI thinking routine, called ever
         case MezzanineLib::MonsterStates::M_SLEEP:                       // state classic sp monster start in, wait for visual contact
         {
             vec target;
-            if(editmode || !enemylos(m, target)) return;   // skip running physics
+            if(MezzanineLib::GameInit::EditMode || !enemylos(m, target)) return;   // skip running physics
             normalise(m, enemyyaw);
             float angle = (float)fabs(enemyyaw-m->yaw);
             if(disttoenemy<8                   // the better the angle to the player, the further the monster can see/hear

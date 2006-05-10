@@ -27,12 +27,12 @@ bool plcollide(dynent *d, dynent *o, float &headspace, float &hi, float &lo) // 
 bool cornertest(int mip, int x, int y, int dx, int dy, int &bx, int &by, int &bs)    // recursively collide with a mipmapped corner cube
 {
     sqr *w = wmip[mip];
-    int sz = ssize>>mip;
+    int sz = MezzanineLib::GameInit::SSize>>mip;
     bool stest = SOLID(SWS(w, x+dx, y, sz)) && SOLID(SWS(w, x, y+dy, sz));
     mip++;
     x /= 2;
     y /= 2;
-    if(SWS(wmip[mip], x, y, ssize>>mip)->type==MezzanineLib::BlockTypes::CORNER)
+    if(SWS(wmip[mip], x, y, MezzanineLib::GameInit::SSize>>mip)->type==MezzanineLib::BlockTypes::CORNER)
     {
         bx = x<<mip;
         by = y<<mip;
@@ -190,7 +190,7 @@ void physicsframe()          // optimally schedule physics frames inside the gra
 void moveplayer(dynent *pl, int moveres, bool local, int curtime)
 {
     const bool water = hdr.waterlevel>pl->o.z-0.5f;
-    const bool floating = (editmode && local) || pl->state==MezzanineLib::CSStatus::CS_EDITING;
+    const bool floating = (MezzanineLib::GameInit::EditMode && local) || pl->state==MezzanineLib::CSStatus::CS_EDITING;
 
     vec d;      // vector of direction we ideally want to move in
 
@@ -286,7 +286,7 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
 
     // detect wether player is outside map, used for skipping zbuffer clear mostly
 
-    if(pl->o.x < 0 || pl->o.x >= ssize || pl->o.y <0 || pl->o.y > ssize)
+    if(pl->o.x < 0 || pl->o.x >= MezzanineLib::GameInit::SSize || pl->o.y <0 || pl->o.y > MezzanineLib::GameInit::SSize)
     {
         pl->outsidemap = true;
     }

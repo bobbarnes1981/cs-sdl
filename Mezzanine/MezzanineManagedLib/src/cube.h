@@ -42,10 +42,10 @@ struct header                   // map file format header
 };
 
 #define SWS(w,x,y,s) (&(w)[(y)*(s)+(x)])
-#define SW(w,x,y) SWS(w,x,y,ssize)
+#define SW(w,x,y) SWS(w,x,y,MezzanineLib::GameInit::SSize)
 #define S(x,y) SW(world,x,y)            // convenient lookup of a lowest mip cube
 #define SOLID(x) ((x)->type==MezzanineLib::BlockTypes::SOLID)
-#define OUTBORD(x,y) ((x)<MezzanineLib::GameInit::MinBord || (y)<MezzanineLib::GameInit::MinBord || (x)>=ssize-MezzanineLib::GameInit::MinBord || (y)>=ssize-MezzanineLib::GameInit::MinBord)
+#define OUTBORD(x,y) ((x)<MezzanineLib::GameInit::MinBord || (y)<MezzanineLib::GameInit::MinBord || (x)>=MezzanineLib::GameInit::SSize-MezzanineLib::GameInit::MinBord || (y)>=MezzanineLib::GameInit::SSize-MezzanineLib::GameInit::MinBord)
 
 struct vec { float x, y, z; };
 struct block { int x, y, xs, ys; };
@@ -53,9 +53,7 @@ struct mapmodelinfo { int rad, h, zoff, snap; char *name; };
 
 struct dynent                           // players & monsters
 {
-    //vec o, vel;                         // origin, velocity
-	vec o;
-	vec vel;
+    vec o, vel;                         // origin, velocity
     float yaw, pitch, roll;             // used as vec in one place
     float maxspeed;                     // cubes per second, 24 for player
     bool outsidemap;                    // from his eyes
@@ -97,15 +95,12 @@ typedef vector<int> ivector;
 
 extern sqr *world, *wmip[];             // map data, the mips are sequential 2D arrays in memory
 extern header hdr;                      // current map header
-extern int sfactor, ssize;              // ssize = 2^sfactor
 extern int cubicsize, mipsize;          // cubicsize = ssize^2
 extern dynent *player1;                 // special client ent that receives input and acts as camera
 extern dvector players;                 // all the other clients (in multiplayer)
-extern bool editmode;
 extern vector<entity> ents;             // map entities
 extern vec worldpos;                    // current target of the crosshair in the world
 extern int gamemode, nextmode;
-extern bool demoplayback;
 
 // simplistic vector ops
 #define dotprod(u,v) ((u).x * (v).x + (u).y * (v).y + (u).z * (v).z)

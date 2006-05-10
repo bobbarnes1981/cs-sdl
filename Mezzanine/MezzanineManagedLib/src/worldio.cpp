@@ -45,7 +45,7 @@ inline bool nhf(sqr *s) { return s->type!=MezzanineLib::BlockTypes::FHF && s->ty
 
 void voptimize()        // reset vdeltas on non-hf cubes
 {
-    loop(x, ssize) loop(y, ssize)
+    loop(x, MezzanineLib::GameInit::SSize) loop(y, MezzanineLib::GameInit::SSize)
     {
         sqr *s = S(x, y);
         if(x && y) { if(nhf(s) && nhf(S(x-1, y)) && nhf(S(x-1, y-1)) && nhf(S(x, y-1))) s->vdelta = 0; }
@@ -56,10 +56,10 @@ void voptimize()        // reset vdeltas on non-hf cubes
 void topt(sqr *s, bool &wf, bool &uf, int &wt, int &ut)
 {
     sqr *o[4];
-    o[0] = SWS(s,0,-1,ssize);
-    o[1] = SWS(s,0,1,ssize);
-    o[2] = SWS(s,1,0,ssize);
-    o[3] = SWS(s,-1,0,ssize);
+    o[0] = SWS(s,0,-1,MezzanineLib::GameInit::SSize);
+    o[1] = SWS(s,0,1,MezzanineLib::GameInit::SSize);
+    o[2] = SWS(s,1,0,MezzanineLib::GameInit::SSize);
+    o[3] = SWS(s,-1,0,MezzanineLib::GameInit::SSize);
     wf = true;
     uf = true;
     if(SOLID(s))
@@ -86,14 +86,14 @@ void toptimize() // FIXME: only does 2x2, make atleast for 4x4 also
 {
     bool wf[4], uf[4];
     sqr *s[4];
-    for(int x = 2; x<ssize-4; x += 2) for(int y = 2; y<ssize-4; y += 2)
+    for(int x = 2; x<MezzanineLib::GameInit::SSize-4; x += 2) for(int y = 2; y<MezzanineLib::GameInit::SSize-4; y += 2)
     {
         s[0] = S(x,y);
         int wt = s[0]->wtex, ut = s[0]->utex;
         topt(s[0], wf[0], uf[0], wt, ut);
-        topt(s[1] = SWS(s[0],0,1,ssize), wf[1], uf[1], wt, ut);
-        topt(s[2] = SWS(s[0],1,1,ssize), wf[2], uf[2], wt, ut);
-        topt(s[3] = SWS(s[0],1,0,ssize), wf[3], uf[3], wt, ut);
+        topt(s[1] = SWS(s[0],0,1,MezzanineLib::GameInit::SSize), wf[1], uf[1], wt, ut);
+        topt(s[2] = SWS(s[0],1,1,MezzanineLib::GameInit::SSize), wf[2], uf[2], wt, ut);
+        topt(s[3] = SWS(s[0],1,0,MezzanineLib::GameInit::SSize), wf[3], uf[3], wt, ut);
         loopi(4)
         {
             if(wf[i]) s[i]->wtex = wt;
@@ -220,7 +220,7 @@ void load_world(char *mname)        // still supports all map formats that have 
     endianswap(&hdr.version, sizeof(int), 4);
     if(strncmp(hdr.head, "CUBE", 4)!=0) MezzanineLib::GameInit::Fatal("while reading map: header malformatted");
     if(hdr.version>MezzanineLib::GameInit::MapVersion) MezzanineLib::GameInit::Fatal("this map requires a newer version of cube");
-    if(sfactor<MezzanineLib::GameInit::SmallestFactor || sfactor>MezzanineLib::GameInit::LargestFactor) MezzanineLib::GameInit::Fatal("illegal map size");
+    if(MezzanineLib::GameInit::SFactor<MezzanineLib::GameInit::SmallestFactor || MezzanineLib::GameInit::SFactor>MezzanineLib::GameInit::LargestFactor) MezzanineLib::GameInit::Fatal("illegal map size");
     if(hdr.version>=4)
     {
         gzread(f, &hdr.waterlevel, sizeof(int)*16);
