@@ -3,6 +3,7 @@
 #include "cube.h"
 #include <ctype.h>
 #using <mscorlib.dll>
+#using <MezzanineLib.dll>
 #using <SdlDotNet.dll>
 
 struct cline { char *cref; int outtime; };

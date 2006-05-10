@@ -1,6 +1,8 @@
 // client processing of the incoming network stream
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <MezzanineLib.dll>
 
 extern int clientnum;
 extern bool c2sinit, senditemstoserver;
