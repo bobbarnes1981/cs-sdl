@@ -155,15 +155,11 @@ extern DECLSPEC bool CDECL noteditmode();
 extern DECLSPEC void CDECL pruneundos(int maxremain = 0);
 
 // renderextras
-extern DECLSPEC void CDECL line(int x1, int y1, float z1, int x2, int y2, float z2);
 extern DECLSPEC void CDECL box(block &b, float z1, float z2, float z3, float z4);
-extern DECLSPEC void CDECL dot(int x, int y, float z);
-extern DECLSPEC void CDECL linestyle(float width, int r, int g, int b);
 extern DECLSPEC void CDECL newsphere(vec &o, float max, int type);
 extern DECLSPEC void CDECL renderspheres(int time);
 extern DECLSPEC void CDECL gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwater);
 extern DECLSPEC void CDECL readdepth(int w, int h);
-extern DECLSPEC void CDECL blendbox(int x1, int y1, int x2, int y2, bool border);
 extern DECLSPEC void CDECL damageblend(int n);
 
 // renderparticles

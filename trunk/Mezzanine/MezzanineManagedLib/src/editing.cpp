@@ -3,6 +3,7 @@
 #include "cube.h"
 #using <mscorlib.dll>
 #using <MezzanineLib.dll>
+//using namespace MezzanineLib;
 
 bool editmode = false; 
 
@@ -153,32 +154,32 @@ void cursorupdate()                                     // called every frame fr
         float h2 = sheight(s, SWS(s,1,0,ssize), z);
         float h3 = sheight(s, SWS(s,1,1,ssize), z);
         float h4 = sheight(s, SWS(s,0,1,ssize), z);
-        if(s->tag) linestyle(GRIDW, 0xFF, 0x40, 0x40);
-        else if(s->type==MezzanineLib::BlockTypes::FHF || s->type==MezzanineLib::BlockTypes::CHF) linestyle(GRIDW, 0x80, 0xFF, 0x80);
-        else linestyle(GRIDW, 0x80, 0x80, 0x80);
+		if(s->tag) MezzanineLib::Render::RenderExtras::LineStyle(GRIDW, 0xFF, 0x40, 0x40);
+		else if(s->type==MezzanineLib::BlockTypes::FHF || s->type==MezzanineLib::BlockTypes::CHF) MezzanineLib::Render::RenderExtras::LineStyle(GRIDW, 0x80, 0xFF, 0x80);
+        else MezzanineLib::Render::RenderExtras::LineStyle(GRIDW, 0x80, 0x80, 0x80);
         block b = { ix, iy, 1, 1 };
         box(b, h1, h2, h3, h4);
-        linestyle(GRID8, 0x40, 0x40, 0xFF);
-        if(!(ix&GRIDM))   line(ix,   iy,   h1, ix,   iy+1, h4);
-        if(!(ix+1&GRIDM)) line(ix+1, iy,   h2, ix+1, iy+1, h3);
-        if(!(iy&GRIDM))   line(ix,   iy,   h1, ix+1, iy,   h2);
-        if(!(iy+1&GRIDM)) line(ix,   iy+1, h4, ix+1, iy+1, h3);
+		MezzanineLib::Render::RenderExtras::LineStyle(GRID8, 0x40, 0x40, 0xFF);
+        if(!(ix&GRIDM))   MezzanineLib::Render::RenderExtras::Line(ix,   iy,   h1, ix,   iy+1, h4);
+        if(!(ix+1&GRIDM)) MezzanineLib::Render::RenderExtras::Line(ix+1, iy,   h2, ix+1, iy+1, h3);
+        if(!(iy&GRIDM))   MezzanineLib::Render::RenderExtras::Line(ix,   iy,   h1, ix+1, iy,   h2);
+        if(!(iy+1&GRIDM)) MezzanineLib::Render::RenderExtras::Line(ix,   iy+1, h4, ix+1, iy+1, h3);
     };
 
     if(!SOLID(s))
     {
         float ih = sheight(s, s, z);
-        linestyle(GRIDS, 0xFF, 0xFF, 0xFF);
+		MezzanineLib::Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0xFF, 0xFF);
         block b = { cx, cy, 1, 1 };
         box(b, ih, sheight(s, SWS(s,1,0,ssize), z), sheight(s, SWS(s,1,1,ssize), z), sheight(s, SWS(s,0,1,ssize), z));
-        linestyle(GRIDS, 0xFF, 0x00, 0x00);
-        dot(cx, cy, ih);
+		MezzanineLib::Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0x00, 0x00);
+        MezzanineLib::Render::RenderExtras::Dot(cx, cy, ih);
         ch = (int)ih;
     };
 
     if(selset)
     {
-        linestyle(GRIDS, 0xFF, 0x40, 0x40);
+		MezzanineLib::Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0x40, 0x40);
         box(sel, (float)selh, (float)selh, (float)selh, (float)selh);
     };
 };

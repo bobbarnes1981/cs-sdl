@@ -4,23 +4,6 @@
 #using <mscorlib.dll>
 #using <MezzanineLib.dll>
 
-void line(int x1, int y1, float z1, int x2, int y2, float z2)
-{
-    glBegin(GL_POLYGON);
-    glVertex3f((float)x1, z1, (float)y1);
-    glVertex3f((float)x1, z1, y1+0.01f);
-    glVertex3f((float)x2, z2, y2+0.01f);
-    glVertex3f((float)x2, z2, (float)y2);
-    glEnd();
-	MezzanineLib::Render::RenderGl::XtraVerts += 4;
-};
-
-void linestyle(float width, int r, int g, int b)
-{
-    glLineWidth(width);
-    glColor3ub(r,g,b);
-};
-
 void box(block &b, float z1, float z2, float z3, float z4)
 {
     glBegin(GL_POLYGON);
@@ -30,47 +13,6 @@ void box(block &b, float z1, float z2, float z3, float z4)
     glVertex3f((float)b.x,      z4, (float)b.y+b.ys);
     glEnd();
     MezzanineLib::Render::RenderGl::XtraVerts += 4;
-};
-
-void dot(int x, int y, float z)
-{
-    const float DOF = 0.1f;
-    glBegin(GL_POLYGON);
-    glVertex3f(x-DOF, (float)z, y-DOF);
-    glVertex3f(x+DOF, (float)z, y-DOF);
-    glVertex3f(x+DOF, (float)z, y+DOF);
-    glVertex3f(x-DOF, (float)z, y+DOF);
-    glEnd();
-    MezzanineLib::Render::RenderGl::XtraVerts += 4;
-};
-
-void blendbox(int x1, int y1, int x2, int y2, bool border)
-{
-    glDepthMask(GL_FALSE);
-    glDisable(GL_TEXTURE_2D);
-    glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
-    glBegin(GL_QUADS);
-    if(border) glColor3d(0.5, 0.3, 0.4); 
-    else glColor3d(1.0, 1.0, 1.0);
-    glVertex2i(x1, y1);
-    glVertex2i(x2, y1);
-    glVertex2i(x2, y2);
-    glVertex2i(x1, y2);
-    glEnd();
-    glDisable(GL_BLEND);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glBegin(GL_POLYGON);
-    glColor3d(0.2, 0.7, 0.4); 
-    glVertex2i(x1, y1);
-    glVertex2i(x2, y1);
-    glVertex2i(x2, y2);
-    glVertex2i(x1, y2);
-    glEnd();
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    MezzanineLib::Render::RenderGl::XtraVerts += 8;
-    glEnable(GL_BLEND);
-    glEnable(GL_TEXTURE_2D);
-    glDepthMask(GL_TRUE);
 };
 
 const int MAXSPHERES = 50;
@@ -225,21 +167,21 @@ void readdepth(int w, int h)
     setorient(r, u);
 };
 
-void drawicon(float tx, float ty, int x, int y)
-{
-    glBindTexture(GL_TEXTURE_2D, 5);
-    glBegin(GL_QUADS);
-    tx /= 192;
-    ty /= 192;
-    float o = 1/3.0f;
-    int s = 120;
-    glTexCoord2f(tx,   ty);   glVertex2i(x,   y);
-    glTexCoord2f(tx+o, ty);   glVertex2i(x+s, y);
-    glTexCoord2f(tx+o, ty+o); glVertex2i(x+s, y+s);
-    glTexCoord2f(tx,   ty+o); glVertex2i(x,   y+s);
-    glEnd();
-    MezzanineLib::Render::RenderGl::XtraVerts += 4;
-};
+//void drawicon(float tx, float ty, int x, int y)
+//{
+//    glBindTexture(GL_TEXTURE_2D, 5);
+//    glBegin(GL_QUADS);
+//    tx /= 192;
+//    ty /= 192;
+//    float o = 1/3.0f;
+//    int s = 120;
+//    glTexCoord2f(tx,   ty);   glVertex2i(x,   y);
+//    glTexCoord2f(tx+o, ty);   glVertex2i(x+s, y);
+//    glTexCoord2f(tx+o, ty+o); glVertex2i(x+s, y+s);
+//    glTexCoord2f(tx,   ty+o); glVertex2i(x,   y+s);
+//    glEnd();
+//    MezzanineLib::Render::RenderGl::XtraVerts += 4;
+//};
 
 void invertperspective()
 {
@@ -358,12 +300,12 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
         glPushMatrix();
         glOrtho(0, VIRTW, VIRTH, 0, -1, 1);
         glDisable(GL_BLEND);
-        drawicon(128, 128, 20, 1650);
-        if(player1->armour) drawicon((float)(player1->armourtype*64), 0, 620, 1650); 
+		MezzanineLib::Render::RenderExtras::DrawIcon(128, 128, 20, 1650);
+        if(player1->armour) MezzanineLib::Render::RenderExtras::DrawIcon((float)(player1->armourtype*64), 0, 620, 1650); 
         int g = player1->gunselect;
         int r = 64;
         if(g>2) { g -= 3; r = 128; };
-        drawicon((float)(g*64), (float)r, 1220, 1650);   
+        MezzanineLib::Render::RenderExtras::DrawIcon((float)(g*64), (float)r, 1220, 1650);   
         glPopMatrix();
     };
 
