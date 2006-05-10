@@ -192,9 +192,9 @@ namespace SdlDotNet.Examples.OpenGlFont
 //			// Finished Drawing The Triangle
 //			Gl.glEnd();
 			// Reset The Current Modelview Matrix
-			Gl.glLoadIdentity();   
+			//Gl.glLoadIdentity();   
 			// Move Right 1.5 Units And Into The Screen 7.0
-			Gl.glTranslatef(1.5f, 0, -7);
+			//Gl.glTranslatef(1.5f, 0, -7);
 			// Rotate The Quad On The X, Y, and Z Axis ( NEW )
 			Gl.glRotatef(rquad, 1, 1, 1);
 			// Set The Color To Blue One Time Only
@@ -279,10 +279,10 @@ namespace SdlDotNet.Examples.OpenGlFont
 			Gl.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			DrawGLScene();
-			Gl.glPushMatrix();
+			//Gl.glPushMatrix();
 			surfaceGl.Surface = font.Render(phrase1 + i++, Color.White);
 			surfaceGl.Draw(new Point(0, 0));
-			Gl.glPopMatrix();
+			//Gl.glPopMatrix();
 			//surfaceGl.Surface = font.Render(phrase2 + i++, Color.White);
 			//surfaceGl.Draw(new Point(100,100));
 			//surfaceGl.Surface = font.Render(phrase3 + i++, Color.White);

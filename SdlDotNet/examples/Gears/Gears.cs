@@ -15,7 +15,7 @@ using System.Drawing;
 using System.IO;
 
 using SdlDotNet;
-using SdlDotNet.OpenGl;
+//using SdlDotNet.OpenGl;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.Gears
@@ -321,7 +321,7 @@ namespace SdlDotNet.Examples.Gears
 
 		Surface screen;
 		Font font;
-		SurfaceGl surface;
+		//SurfaceGl surface;
 		string dataDirectory = @"Data/";
 		// Path to Data directory
 		string filePath = @"../../";
@@ -337,7 +337,7 @@ namespace SdlDotNet.Examples.Gears
 				filePath = "";
 			}
 			font = new Font(filePath + dataDirectory + fontName, 20);
-			surface = new SurfaceGl(font.Render(" ", Color.White));
+			//surface = new SurfaceGl(font.Render(" ", Color.White));
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Gears";
 			screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
