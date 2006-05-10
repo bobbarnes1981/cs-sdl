@@ -149,6 +149,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Render\RenderExtras.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Render\RenderGl.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

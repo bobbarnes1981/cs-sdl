@@ -3,6 +3,7 @@
 #include "cube.h"
 #using <mscorlib.dll>
 #using <SdlDotNet.dll>
+#using <MezzanineLib.dll>
 
 struct mitem { char *text, *action; };
 
@@ -70,13 +71,13 @@ bool rendermenu()
     int h = (mdisp+2)*step;
     int y = (VIRTH-h)/2;
     int x = (VIRTW-w)/2;
-    blendbox(x-FONTH/2*3, y-FONTH, x+w+FONTH/2*3, y+h+FONTH, true);
+	MezzanineLib::Render::RenderExtras::BlendBox(x-FONTH/2*3, y-FONTH, x+w+FONTH/2*3, y+h+FONTH, true);
     draw_text(title, x, y,2);
     y += FONTH*2;
     if(vmenu)
     {
         int bh = y+m.menusel*step;
-        blendbox(x-FONTH, bh-10, x+w+FONTH, bh+FONTH+10, false);
+        MezzanineLib::Render::RenderExtras::BlendBox(x-FONTH, bh-10, x+w+FONTH, bh+FONTH+10, false);
     };
     loopj(mdisp)
     {
