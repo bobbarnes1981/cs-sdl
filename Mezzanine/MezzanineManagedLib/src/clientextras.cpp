@@ -22,7 +22,7 @@ void renderclient(dynent *d, bool team, char *mdlname, bool hellpig, float scale
         int r;
         if(hellpig) { n = 2; r = range[3]; } else { n = (int)d%3; r = range[n]; };
         basetime = d->lastaction;
-        int t = lastmillis-d->lastaction;
+        int t = MezzanineLib::GameInit::LastMillis-d->lastaction;
         if(t<0 || t>20000) return;
         if(t>(r-1)*100) { n += 4; if(t>(r+10)*100) { t -= (r+10)*100; mz -= t*t/10000000000.0f*t; }; };
         if(mz<-1000) return;
@@ -118,7 +118,7 @@ void sendmap(char *mapname)
     int mapsize;
     uchar *mapdata = readmap(mapname, &mapsize); 
     if(!mapdata) return;
-    ENetPacket *packet = enet_packet_create(NULL, MAXTRANS + mapsize, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS + mapsize, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
     putint(p, MezzanineLib::NetworkMessages::SV_SENDMAP);
@@ -144,7 +144,7 @@ void sendmap(char *mapname)
 
 void getmap()
 {
-    ENetPacket *packet = enet_packet_create(NULL, MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
     putint(p, MezzanineLib::NetworkMessages::SV_RECVMAP);

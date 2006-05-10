@@ -31,7 +31,7 @@ void newparticle(vec &o, vec &d, int fade, int type)
         p->d = d;
         p->fade = fade;
         p->type = type;
-        p->millis = lastmillis;
+        p->millis = MezzanineLib::GameInit::LastMillis;
         p->next = parlist;
         parlist = p;
     };
@@ -97,7 +97,7 @@ void render_particles(int time)
         }
         else
         {
-			if(pt->gr) p->o.z -= ((lastmillis-p->millis)/3.0f)*curtime/(pt->gr*10000);
+			if(pt->gr) p->o.z -= ((MezzanineLib::GameInit::LastMillis-p->millis)/3.0f)*MezzanineLib::GameInit::CurrentTime/(pt->gr*10000);
             vec a = p->d;
             vmul(a,time);
             vdiv(a,20000.0f);

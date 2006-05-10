@@ -47,8 +47,7 @@ struct header                   // map file format header
 #define SW(w,x,y) SWS(w,x,y,ssize)
 #define S(x,y) SW(world,x,y)            // convenient lookup of a lowest mip cube
 #define SOLID(x) ((x)->type==MezzanineLib::BlockTypes::SOLID)
-#define MINBORD 2                       // 2 cubes from the edge of the world are always solid
-#define OUTBORD(x,y) ((x)<MINBORD || (y)<MINBORD || (x)>=ssize-MINBORD || (y)>=ssize-MINBORD)
+#define OUTBORD(x,y) ((x)<MezzanineLib::GameInit::MinBord || (y)<MezzanineLib::GameInit::MinBord || (x)>=ssize-MezzanineLib::GameInit::MinBord || (y)>=ssize-MezzanineLib::GameInit::MinBord)
 
 struct vec { float x, y, z; };
 struct block { int x, y, xs, ys; };
@@ -56,7 +55,9 @@ struct mapmodelinfo { int rad, h, zoff, snap; char *name; };
 
 struct dynent                           // players & monsters
 {
-    vec o, vel;                         // origin, velocity
+    //vec o, vel;                         // origin, velocity
+	vec o;
+	vec vel;
     float yaw, pitch, roll;             // used as vec in one place
     float maxspeed;                     // cubes per second, 24 for player
     bool outsidemap;                    // from his eyes
@@ -86,13 +87,6 @@ struct dynent                           // players & monsters
     string name, team;
 };
 
-#define SAVEGAMEVERSION 4               // bump if dynent/netprotocol changes or any other savegame/demo data
-#define MAXCLIENTS 256                  // in a multiplayer game, can be arbitrarily changed
-#define MAXTRANS 5000                   // max amount of data to swallow in 1 go
-#define CUBE_SERVER_PORT 28765
-#define CUBE_SERVINFO_PORT 28766
-#define PROTOCOL_VERSION 122            // bump when protocol changes
-
 // vertex array format
 
 struct vertex { float u, v, x, y, z; uchar r, g, b, a; }; 
@@ -112,23 +106,8 @@ extern dvector players;                 // all the other clients (in multiplayer
 extern bool editmode;
 extern vector<entity> ents;             // map entities
 extern vec worldpos;                    // current target of the crosshair in the world
-extern int lastmillis;                  // last time
-extern int curtime;                     // current frame time
 extern int gamemode, nextmode;
 extern bool demoplayback;
-
-
-#define DMF 16.0f 
-#define DAF 1.0f 
-#define DVF 100.0f
-
-#define VIRTW 2400                      // virtual screen size for text & HUD
-#define VIRTH 1800
-#define FONTH 64
-#define PIXELTAB (VIRTW/12)
-
-#define PI  (3.1415927f)
-#define PI2 (2*PI)
 
 // simplistic vector ops
 #define dotprod(u,v) ((u).x * (v).x + (u).y * (v).y + (u).z * (v).z)

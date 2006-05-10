@@ -61,7 +61,7 @@ COMMANDN(edittoggle, toggleedit, MezzanineLib::Support::FunctionSignatures::ARG_
 void correctsel()                                       // ensures above invariant
 {
     selset = !OUTBORD(sel.x, sel.y);
-    int bsize = ssize-MINBORD;
+    int bsize = ssize-MezzanineLib::GameInit::MinBord;
     if(sel.xs+sel.x>bsize) sel.xs = bsize-sel.x;
     if(sel.ys+sel.y>bsize) sel.ys = bsize-sel.y;
     if(sel.xs<=0 || sel.ys<=0) selset = false;

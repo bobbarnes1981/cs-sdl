@@ -150,7 +150,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 			displaylistverts = MezzanineLib::Render::RenderGl::XtraVerts;
 		};
 		
-		int time = lastmillis-basetime;
+		int time = MezzanineLib::GameInit::LastMillis-basetime;
 		int fr1 = (int)(time/speed);
 		float frac1 = (time-fr1*speed)/speed;
 		float frac2 = 1-frac1;

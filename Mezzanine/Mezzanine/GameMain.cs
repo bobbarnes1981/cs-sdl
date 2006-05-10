@@ -45,30 +45,7 @@ namespace Mezzanine
 	/// </summary>
 	class GameMain
 	{
-		float DMF = 16.0f ;
-		float DAF = 1.0f ;
-		float DVF = 100.0f;
-
-		int VIRTW = 2400;                      // virtual screen size for text & HUD
-		int VIRTH = 1800;
-		
-		//#define SWS(w,x,y,s) (&(w)[(y)*(s)+(x)])
-		//#define SW(w,x,y) SWS(w,x,y,ssize)
-		//#define S(x,y) SW(world,x,y)            // convenient lookup of a lowest mip cube
-		int SMALLEST_FACTOR = 6;             // determines number of mips there can be
-		int DEFAULT_FACTOR = 8;
-		int LARGEST_FACTOR = 11;               // 10 is already insane
-		//#define SOLID(x) ((x)->type==SOLID)
-		int MINBORD = 2;                       // 2 cubes from the edge of the world are always solid
-		//#define OUTBORD(x,y) ((x)<MINBORD || (y)<MINBORD || (x)>=ssize-MINBORD || (y)>=ssize-MINBORD)
-
 		int mapVersion = 5; // bump if map format changes, see worldio.cpp
-		int SAVEGAMEVERSION = 4;
-		int MAXCLIENTS = 256;               // in a multiplayer game, can be arbitrarily changed
-		int MAXTRANS = 5000;                // max amount of data to swallow in 1 go
-		int CUBE_SERVER_PORT = 28765;
-		int CUBE_SERVINFO_PORT = 28766;
-		int PROTOCOL_VERSION = 122;            // bump when protocol changes
 		
 		int NUMGUNS = 9;
 		int ignore = 5;
@@ -76,7 +53,6 @@ namespace Mezzanine
 		float fps = 30.0f;
 		int gamespeed = 100;
 		bool demoplayback;
-		int curtime;
 		int framesinmap = 0;
 		byte lasttype = 0;
 		byte lastbut = 0;

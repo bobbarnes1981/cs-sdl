@@ -274,8 +274,8 @@ inline void vertw(int v1, float v2, int v3, sqr *c, float t1, float t2, float t)
     vertf((float)v1, v2-(float)sin(v1*v3*0.1+t)*0.2f, (float)v3, c, t1, t2);
 };
 
-inline float dx(float x) { return x+(float)sin(x*2+lastmillis/1000.0f)*0.04f; };
-inline float dy(float x) { return x+(float)sin(x*2+lastmillis/900.0f+PI/5)*0.05f; };
+inline float dx(float x) { return x+(float)sin(x*2+MezzanineLib::GameInit::LastMillis/1000.0f)*0.04f; };
+inline float dy(float x) { return x+(float)sin(x*2+MezzanineLib::GameInit::LastMillis/900.0f+System::Math::PI/5)*0.05f; };
 
 // renders water for bounding rect area that contains water... simple but very inefficient
 
@@ -296,8 +296,8 @@ int renderwater(float hf)
     float yf = TEXTURESCALE/sy;
     float xs = watersubdiv*xf;
     float ys = watersubdiv*yf;
-    float t1 = lastmillis/300.0f;
-    float t2 = lastmillis/4000.0f;
+    float t1 = MezzanineLib::GameInit::LastMillis/300.0f;
+    float t2 = MezzanineLib::GameInit::LastMillis/4000.0f;
     
     sqr dl;
     dl.r = dl.g = dl.b = 255;

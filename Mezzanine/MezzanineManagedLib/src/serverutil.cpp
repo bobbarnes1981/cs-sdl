@@ -75,7 +75,7 @@ void sendmaps(int n, string mapname, int mapsize, uchar *mapdata)
 ENetPacket *recvmap(int n)
 {
     if(!copydata) return NULL;
-    ENetPacket *packet = enet_packet_create(NULL, MAXTRANS + copysize, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS + copysize, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
     putint(p, MezzanineLib::NetworkMessages::SV_RECVMAP);

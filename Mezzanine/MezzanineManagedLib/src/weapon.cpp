@@ -291,11 +291,11 @@ void raydamage(dynent *o, vec &from, vec &to, dynent *d, int i)
 
 void shoot(dynent *d, vec &targ)
 {
-    int attacktime = lastmillis-d->lastaction;
+    int attacktime = MezzanineLib::GameInit::LastMillis-d->lastaction;
     if(attacktime<d->gunwait) return;
     d->gunwait = 0;
     if(!d->attacking) return;
-    d->lastaction = lastmillis;
+    d->lastaction = MezzanineLib::GameInit::LastMillis;
     d->lastattackgun = d->gunselect;
     if(!d->ammo[d->gunselect]) { playsoundc(MezzanineLib::Sounds::S_NOAMMO); d->gunwait = 250; d->lastattackgun = -1; return; };
     if(d->gunselect) d->ammo[d->gunselect]--;
@@ -321,7 +321,7 @@ void shoot(dynent *d, vec &targ)
 
     if(d->quadmillis && attacktime>200) playsoundc(MezzanineLib::Sounds::S_ITEMPUP);
     shootv(d->gunselect, from, to, d, true);
-    if(!d->monsterstate) addmsg(1, 8, MezzanineLib::NetworkMessages::SV_SHOT, d->gunselect, (int)(from.x*DMF), (int)(from.y*DMF), (int)(from.z*DMF), (int)(to.x*DMF), (int)(to.y*DMF), (int)(to.z*DMF));
+    if(!d->monsterstate) addmsg(1, 8, MezzanineLib::NetworkMessages::SV_SHOT, d->gunselect, (int)(from.x*MezzanineLib::GameInit::DMF), (int)(from.y*MezzanineLib::GameInit::DMF), (int)(from.z*MezzanineLib::GameInit::DMF), (int)(to.x*MezzanineLib::GameInit::DMF), (int)(to.y*MezzanineLib::GameInit::DMF), (int)(to.z*MezzanineLib::GameInit::DMF));
     d->gunwait = guns[d->gunselect].attackdelay;
 
     if(guns[d->gunselect].projspeed) return;

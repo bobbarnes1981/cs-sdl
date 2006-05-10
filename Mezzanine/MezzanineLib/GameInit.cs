@@ -154,6 +154,38 @@ namespace MezzanineLib
 			}
 		}
 
+		public const int MinBord = 2; // 2 cubes from the edge of the world are always solid
+		public const int SAVEGAMEVERSION = 4;              // bump if dynent/netprotocol changes or any other savegame/demo data
+		public const int MAXCLIENTS = 256;           // in a multiplayer game, can be arbitrarily changed
+		public const int MAXTRANS = 5000;          // max amount of data to swallow in 1 go
+		public const int CUBE_SERVER_PORT = 28765;
+		public const int CUBE_SERVINFO_PORT = 28766;
+		public const int PROTOCOL_VERSION = 122;       // bump when protocol changes
+		public const float DMF = 16.0f ;
+		public const float DAF = 1.0f ;
+		public const float DVF = 100.0f;
+
+		public const int VIRTW = 2400;                      // virtual screen size for text & HUD
+		public const int VIRTH = 1800;
+		public const int PIXELTAB = (VIRTW/12);
+
+		static int curtime;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int CurrentTime
+		{
+			get
+			{
+				return curtime;
+			}
+			set
+			{
+				curtime = value;
+			}
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>

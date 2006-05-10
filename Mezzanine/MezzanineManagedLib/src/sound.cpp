@@ -52,7 +52,7 @@ void updatechanvol(int chan, vec *loc)
         vol -= (int)(dist*3*soundvol/255); // simple mono distance attenuation
         if(stereo && (v.x != 0 || v.y != 0))
         {
-            float yaw = -atan2(v.x, v.y) - player1->yaw*(PI / 180.0f); // relative angle of sound along X-Y axis
+			float yaw = -atan2(v.x, v.y) - player1->yaw*(System::Math::PI / 180.0f); // relative angle of sound along X-Y axis
             pan = int(255.9f*(0.5*sin(yaw)+0.5f)); // range is from 0 (left) to 255 (right)
         };
     };
@@ -87,8 +87,8 @@ void playsound(int n, vec *loc)
 {
     if(nosound) return;
     if(!soundvol) return;
-    if(lastmillis==lastsoundmillis) soundsatonce++; else soundsatonce = 1;
-    lastsoundmillis = lastmillis;
+    if(MezzanineLib::GameInit::LastMillis==lastsoundmillis) soundsatonce++; else soundsatonce = 1;
+    lastsoundmillis = MezzanineLib::GameInit::LastMillis;
     if(soundsatonce>5) return;  // avoid bursts of sounds with heavy packetloss and in sp
     if(n<0 || n>=samples.length()) { conoutf("unregistered sound: %d", n); return; };
 

@@ -171,9 +171,9 @@ const int MINFRAMETIME = 20; // physics always simulated at 50fps or better
 
 void physicsframe()          // optimally schedule physics frames inside the graphics frames
 {
-    if(curtime>=MINFRAMETIME)
+    if(MezzanineLib::GameInit::CurrentTime>=MINFRAMETIME)
     {
-        int faketime = curtime+physicsfraction;
+        int faketime = MezzanineLib::GameInit::CurrentTime+physicsfraction;
         physicsrepeat = faketime/MINFRAMETIME;
         physicsfraction = faketime-physicsrepeat*MINFRAMETIME;
     }
@@ -320,6 +320,6 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
 
 void moveplayer(dynent *pl, int moveres, bool local)
 {
-    loopi(physicsrepeat) moveplayer(pl, moveres, local, i ? curtime/physicsrepeat : curtime-curtime/physicsrepeat*(physicsrepeat-1));
+    loopi(physicsrepeat) moveplayer(pl, moveres, local, i ? MezzanineLib::GameInit::CurrentTime/physicsrepeat : MezzanineLib::GameInit::CurrentTime-MezzanineLib::GameInit::CurrentTime/physicsrepeat*(physicsrepeat-1));
 };
 
