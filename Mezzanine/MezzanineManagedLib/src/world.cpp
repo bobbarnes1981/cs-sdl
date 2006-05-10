@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+
 
 extern char *entnames[];                // lookup from map entities above to strings
 
@@ -198,7 +198,7 @@ void delent()
     int e = closestent();
     if(e<0) { conoutf("no more entities"); return; };
     int t = ents[e].type;
-    conoutf("%s entity deleted", entnames[t]);
+	conoutf("%s entity deleted", entnames[t]);
     ents[e].type = MezzanineLib::StaticEntity::NOTUSED;
     addmsg(1, 10, MezzanineLib::NetworkMessages::SV_EDITENT, e, MezzanineLib::StaticEntity::NOTUSED, 0, 0, 0, 0, 0, 0, 0);
     if(t==MezzanineLib::StaticEntity::LIGHT) calclight();
@@ -206,7 +206,7 @@ void delent()
 
 int findtype(char *what)
 {
-    loopi(MezzanineLib::StaticEntity::MAXENTTYPES) if(strcmp(what, entnames[i])==0) return i;
+	loopi(MezzanineLib::StaticEntity::MAXENTTYPES) if(strcmp(what, entnames[i])==0) return i;
     conoutf("unknown entity type \"%s\"", what);
     return MezzanineLib::StaticEntity::NOTUSED;
 }

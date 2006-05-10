@@ -3,7 +3,7 @@
 
 #include "cube.h" 
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+
 
 struct client                   // server side version of "dynent" type
 {
