@@ -59,7 +59,7 @@ void connects(char *servername)
     addserver(servername);
 
     conoutf("attempting to connect to %s", servername);
-    ENetAddress address = { ENET_HOST_ANY, CUBE_SERVER_PORT };
+    ENetAddress address = { ENET_HOST_ANY, MezzanineLib::GameInit::CUBE_SERVER_PORT };
     if(enet_address_set_host(&address, servername) < 0)
     {
         conoutf("could not resolve server %s", servername);
@@ -72,7 +72,7 @@ void connects(char *servername)
     {
         enet_host_connect(clienthost, &address, 1); 
         enet_host_flush(clienthost);
-        connecting = lastmillis;
+        connecting = MezzanineLib::GameInit::LastMillis;
         connattempts = 0;
     }
     else
@@ -90,7 +90,7 @@ void disconnect(int onlyclean, int async)
         {
             enet_peer_disconnect(clienthost->peers);
             enet_host_flush(clienthost);
-            disconnecting = lastmillis;
+            disconnecting = MezzanineLib::GameInit::LastMillis;
         };
         if(clienthost->peers->state != ENET_PEER_STATE_DISCONNECTED)
         {
@@ -194,8 +194,8 @@ void sendpackettoserv(void *packet)
 void c2sinfo(dynent *d)                     // send update to the server
 {
     if(clientnum<0) return;                 // we haven't had a welcome message from the server yet
-    if(lastmillis-lastupdate<40) return;    // don't update faster than 25fps
-    ENetPacket *packet = enet_packet_create (NULL, MAXTRANS, 0);
+    if(MezzanineLib::GameInit::LastMillis-lastupdate<40) return;    // don't update faster than 25fps
+    ENetPacket *packet = enet_packet_create (NULL, MezzanineLib::GameInit::MAXTRANS, 0);
     uchar *start = packet->data;
     uchar *p = start+2;
     bool serveriteminitdone = false;
@@ -211,15 +211,15 @@ void c2sinfo(dynent *d)                     // send update to the server
     {
         putint(p, MezzanineLib::NetworkMessages::SV_POS);
         putint(p, clientnum);
-        putint(p, (int)(d->o.x*DMF));       // quantize coordinates to 1/16th of a cube, between 1 and 3 bytes
-        putint(p, (int)(d->o.y*DMF));
-        putint(p, (int)(d->o.z*DMF));
-        putint(p, (int)(d->yaw*DAF));
-        putint(p, (int)(d->pitch*DAF));
-        putint(p, (int)(d->roll*DAF));
-        putint(p, (int)(d->vel.x*DVF));     // quantize to 1/100, almost always 1 byte
-        putint(p, (int)(d->vel.y*DVF));
-        putint(p, (int)(d->vel.z*DVF));
+        putint(p, (int)(d->o.x*MezzanineLib::GameInit::DMF));       // quantize coordinates to 1/16th of a cube, between 1 and 3 bytes
+        putint(p, (int)(d->o.y*MezzanineLib::GameInit::DMF));
+        putint(p, (int)(d->o.z*MezzanineLib::GameInit::DMF));
+        putint(p, (int)(d->yaw*MezzanineLib::GameInit::DAF));
+        putint(p, (int)(d->pitch*MezzanineLib::GameInit::DAF));
+        putint(p, (int)(d->roll*MezzanineLib::GameInit::DAF));
+        putint(p, (int)(d->vel.x*MezzanineLib::GameInit::DVF));     // quantize to 1/100, almost always 1 byte
+        putint(p, (int)(d->vel.y*MezzanineLib::GameInit::DVF));
+        putint(p, (int)(d->vel.z*MezzanineLib::GameInit::DVF));
         // pack rest in 1 byte: strafe:2, move:2, onfloor:1, state:3
         putint(p, (d->strafe&3) | ((d->move&3)<<2) | (((int)d->onfloor)<<4) | ((editmode ? MezzanineLib::CSStatus::CS_EDITING : d->state)<<5) );
  
@@ -255,11 +255,11 @@ void c2sinfo(dynent *d)                     // send update to the server
             loopi(msg[0]) putint(p, msg[i+2]);
         };
         messages.setsize(0);
-        if(lastmillis-lastping>250)
+        if(MezzanineLib::GameInit::LastMillis-lastping>250)
         {
             putint(p, MezzanineLib::NetworkMessages::SV_PING);
-            putint(p, lastmillis);
-            lastping = lastmillis;
+            putint(p, MezzanineLib::GameInit::LastMillis);
+            lastping = MezzanineLib::GameInit::LastMillis;
         };
     };
     *(ushort *)start = ENET_HOST_TO_NET_16(p-start);
@@ -267,7 +267,7 @@ void c2sinfo(dynent *d)                     // send update to the server
     incomingdemodata(start, p-start, true);
     if(clienthost) { enet_host_broadcast(clienthost, 0, packet); enet_host_flush(clienthost); }
     else localclienttoserver(packet);
-    lastupdate = lastmillis;
+    lastupdate = MezzanineLib::GameInit::LastMillis;
     if(serveriteminitdone) loadgamerest();  // hack
 };
 
@@ -275,10 +275,10 @@ void gets2c()           // get updates from the server
 {
     ENetEvent event;
     if(!clienthost) return;
-    if(connecting && lastmillis/3000 > connecting/3000)
+    if(connecting && MezzanineLib::GameInit::LastMillis/3000 > connecting/3000)
     {
         conoutf("attempting to connect...");
-        connecting = lastmillis;
+        connecting = MezzanineLib::GameInit::LastMillis;
         ++connattempts; 
         if(connattempts > 3)
         {

@@ -40,9 +40,9 @@ int resolverloop(void * data)
             continue;
         }
         rt->query = resolverqueries.pop();
-        rt->starttime = lastmillis;
+        rt->starttime = MezzanineLib::GameInit::LastMillis;
         SDL_UnlockMutex(resolvermutex);
-        ENetAddress address = { ENET_HOST_ANY, CUBE_SERVINFO_PORT };
+        ENetAddress address = { ENET_HOST_ANY, MezzanineLib::GameInit::CUBE_SERVINFO_PORT };
         enet_address_set_host(&address, rt->query);
         SDL_LockMutex(resolvermutex);
         resolverresult &rr = resolverresults.add();
@@ -120,7 +120,7 @@ bool resolvercheck(char **name, ENetAddress *address)
         resolverthread &rt = resolverthreads[i];
         if(rt.query)
         {
-            if(lastmillis - rt.starttime > resolverlimit)        
+            if(MezzanineLib::GameInit::LastMillis - rt.starttime > resolverlimit)        
             {
                 resolverstop(rt, true);
                 *name = rt.query;
@@ -163,31 +163,31 @@ void addserver(char *servername)
     si.map[0] = 0;
     si.sdesc[0] = 0;
     si.address.host = ENET_HOST_ANY;
-    si.address.port = CUBE_SERVINFO_PORT;
+    si.address.port = MezzanineLib::GameInit::CUBE_SERVINFO_PORT;
 };
 
 void pingservers()
 {
     ENetBuffer buf;
-    uchar ping[MAXTRANS];
+    uchar ping[MezzanineLib::GameInit::MAXTRANS];
     uchar *p;
     loopv(servers)
     {
         serverinfo &si = servers[i];
         if(si.address.host == ENET_HOST_ANY) continue;
         p = ping;
-        putint(p, lastmillis);
+        putint(p, MezzanineLib::GameInit::LastMillis);
         buf.data = ping;
         buf.dataLength = p - ping;
         enet_socket_send(pingsock, &si.address, &buf, 1);
     };
-    lastinfo = lastmillis;
+    lastinfo = MezzanineLib::GameInit::LastMillis;
 };
   
 void checkresolver()
 {
     char *name = NULL;
-    ENetAddress addr = { ENET_HOST_ANY, CUBE_SERVINFO_PORT };
+    ENetAddress addr = { ENET_HOST_ANY, MezzanineLib::GameInit::CUBE_SERVINFO_PORT };
     while(resolvercheck(&name, &addr))
     {
         if(addr.host == ENET_HOST_ANY) continue;
@@ -209,8 +209,8 @@ void checkpings()
     enet_uint32 events = ENET_SOCKET_WAIT_RECEIVE;
     ENetBuffer buf;
     ENetAddress addr;
-    uchar ping[MAXTRANS], *p;
-    char text[MAXTRANS];
+    uchar ping[MezzanineLib::GameInit::MAXTRANS], *p;
+    char text[MezzanineLib::GameInit::MAXTRANS];
     buf.data = ping; 
     buf.dataLength = sizeof(ping);
     while(enet_socket_wait(pingsock, &events, 0) >= 0 && events)
@@ -222,9 +222,9 @@ void checkpings()
             if(addr.host == si.address.host)
             {
                 p = ping;
-                si.ping = lastmillis - getint(p);
+                si.ping = MezzanineLib::GameInit::LastMillis - getint(p);
                 si.protocol = getint(p);
-                if(si.protocol!=PROTOCOL_VERSION) si.ping = 9998;
+                if(si.protocol!=MezzanineLib::GameInit::PROTOCOL_VERSION) si.ping = 9998;
                 si.mode = getint(p);
                 si.numplayers = getint(p);
                 si.minremain = getint(p);
@@ -247,7 +247,7 @@ void refreshservers()
 {
     checkresolver();
     checkpings();
-    if(lastmillis - lastinfo >= 5000) pingservers();
+    if(MezzanineLib::GameInit::LastMillis - lastinfo >= 5000) pingservers();
     servers.sort((void *)sicompare);
     int maxmenu = 16;
     loopv(servers)
@@ -255,7 +255,7 @@ void refreshservers()
         serverinfo &si = servers[i];
         if(si.address.host != ENET_HOST_ANY && si.ping != 9999)
         {
-            if(si.protocol!=PROTOCOL_VERSION) sprintf_s(si.full)("%s [different cube protocol]", si.name);
+            if(si.protocol!=MezzanineLib::GameInit::PROTOCOL_VERSION) sprintf_s(si.full)("%s [different cube protocol]", si.name);
             else sprintf_s(si.full)("%d\t%d\t%s, %s: %s %s", si.ping, si.numplayers, si.map[0] ? si.map : "[unknown]", modestr(si.mode), si.name, si.sdesc);
         }
         else

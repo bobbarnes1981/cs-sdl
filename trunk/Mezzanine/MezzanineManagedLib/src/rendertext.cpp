@@ -108,9 +108,9 @@ int text_width(char *str)
     for (int i = 0; str[i] != 0; i++)
     {
         int c = str[i];
-        if(c=='\t') { x = (x+PIXELTAB)/PIXELTAB*PIXELTAB; continue; }; 
+		if(c=='\t') { x = (x+MezzanineLib::GameInit::PIXELTAB)/MezzanineLib::GameInit::PIXELTAB*MezzanineLib::GameInit::PIXELTAB; continue; }; 
         if(c=='\f') continue; 
-        if(c==' ') { x += FONTH/2; continue; };
+        if(c==' ') { x += MezzanineLib::GameInit::FontH/2; continue; };
         c -= 33;
         if(c<0 || c>=95) continue;
         int in_width = char_coords[c][2] - char_coords[c][0];
@@ -142,9 +142,9 @@ void draw_text(char *str, int left, int top, int gl_num)
     for (i = 0; str[i] != 0; i++)
     {
         int c = str[i];
-        if(c=='\t') { x = (x-left+PIXELTAB)/PIXELTAB*PIXELTAB+left; continue; }; 
+        if(c=='\t') { x = (x-left+MezzanineLib::GameInit::PIXELTAB)/MezzanineLib::GameInit::PIXELTAB*MezzanineLib::GameInit::PIXELTAB+left; continue; }; 
         if(c=='\f') { glColor3ub(64,255,128); continue; };
-        if(c==' ') { x += FONTH/2; continue; };
+        if(c==' ') { x += MezzanineLib::GameInit::FontH/2; continue; };
         c -= 33;
         if(c<0 || c>=95) continue;
 

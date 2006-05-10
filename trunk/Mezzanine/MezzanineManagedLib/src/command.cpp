@@ -359,5 +359,5 @@ int strcmpa(char *a, char *b) { return strcmp(a,b)==0; };  COMMANDN(strcmp, strc
 
 int rndn(int a)    { return a>0 ? rnd(a) : 0; };  COMMANDN(rnd, rndn, MezzanineLib::Support::FunctionSignatures::ARG_1EXP);
 
-int explastmillis() { return lastmillis; };  COMMANDN(millis, explastmillis, MezzanineLib::Support::FunctionSignatures::ARG_1EXP);
+int explastmillis() { return MezzanineLib::GameInit::LastMillis; };  COMMANDN(millis, explastmillis, MezzanineLib::Support::FunctionSignatures::ARG_1EXP);
 

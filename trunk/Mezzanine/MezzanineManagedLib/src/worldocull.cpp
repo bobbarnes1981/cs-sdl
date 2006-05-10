@@ -23,16 +23,16 @@ void computeraytable(float vx, float vy)
 
     float apitch = (float)fabs(player1->pitch);
     float af = getvar("fov")/2+apitch/1.5f+3;
-    float byaw = (player1->yaw-90+af)/360*PI2;
-    float syaw = (player1->yaw-90-af)/360*PI2;
+    float byaw = (player1->yaw-90+af)/360*System::Math::PI*2;
+    float syaw = (player1->yaw-90-af)/360*System::Math::PI*2;
 
     loopi(MezzanineLib::World::WorldOcull::NumRays)
     {
-        float angle = i*PI2/MezzanineLib::World::WorldOcull::NumRays;
+        float angle = i*System::Math::PI*2/MezzanineLib::World::WorldOcull::NumRays;
         if((apitch>45 // must be bigger if fov>120
         || (angle<byaw && angle>syaw)
-        || (angle<byaw-PI2 && angle>syaw-PI2)
-        || (angle<byaw+PI2 && angle>syaw+PI2))
+        || (angle<byaw-System::Math::PI*2 && angle>syaw-System::Math::PI*2)
+        || (angle<byaw+System::Math::PI*2 && angle>syaw+System::Math::PI*2))
         && !OUTBORD(vx, vy)
         && !SOLID(S(fast_f2nat(vx), fast_f2nat(vy))))       // try to avoid tracing ray if outside of frustrum
         {

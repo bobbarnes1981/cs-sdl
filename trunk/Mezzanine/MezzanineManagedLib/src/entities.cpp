@@ -21,7 +21,7 @@ void renderent(entity &e, char *mdlname, float z, float yaw, int frame = 0, int 
 
 void renderentities()
 {
-	if(lastmillis>triggertime+1000) triggertime = 0;
+	if(MezzanineLib::GameInit::LastMillis>triggertime+1000) triggertime = 0;
     loopv(ents)
     {
         entity &e = ents[i];
@@ -38,7 +38,7 @@ void renderentities()
             {
 				if(!e.spawned && e.type!=MezzanineLib::StaticEntity::TELEPORT) continue;
 				if(e.type<MezzanineLib::StaticEntity::I_SHELLS || e.type>MezzanineLib::StaticEntity::TELEPORT) continue;
-				renderent(e, entmdlnames[e.type-MezzanineLib::StaticEntity::I_SHELLS], (float)(1+sin(lastmillis/100.0+e.x+e.y)/20), lastmillis/10.0f);
+				renderent(e, entmdlnames[e.type-MezzanineLib::StaticEntity::I_SHELLS], (float)(1+sin(MezzanineLib::GameInit::LastMillis/100.0+e.x+e.y)/20), MezzanineLib::GameInit::LastMillis/10.0f);
             }
 			else switch(e.attr2)
             {			
@@ -49,7 +49,7 @@ void renderentities()
                 case 2: 
                 case 0:
 					if(!e.spawned) continue;
-					renderent(e, "carrot", (float)(1+sin(lastmillis/100.0+e.x+e.y)/20), lastmillis/(e.attr2 ? 1.0f : 10.0f));
+					renderent(e, "carrot", (float)(1+sin(MezzanineLib::GameInit::LastMillis/100.0+e.x+e.y)/20), MezzanineLib::GameInit::LastMillis/(e.attr2 ? 1.0f : 10.0f));
 					break;
 					
                 case 4: renderent(e, "switch2", 3,      (float)e.attr3*90, (!e.spawned && !triggertime) ? 1  : 0, (e.spawned || !triggertime) ? 1 : 2,  triggertime, 1050.0f);  break;
@@ -179,15 +179,15 @@ void pickup(int n, dynent *d)
             
         case MezzanineLib::StaticEntity::CARROT:
             ents[n].spawned = false;
-            triggertime = lastmillis;
+            triggertime = MezzanineLib::GameInit::LastMillis;
             trigger(ents[n].attr1, ents[n].attr2, false);  // needs to go over server for multiplayer
             break;
 
         case MezzanineLib::StaticEntity::TELEPORT:
         {
             static int lastteleport = 0;
-            if(lastmillis-lastteleport<500) break;
-            lastteleport = lastmillis;
+            if(MezzanineLib::GameInit::LastMillis-lastteleport<500) break;
+            lastteleport = MezzanineLib::GameInit::LastMillis;
             teleport(n, d);
             break;
         };
@@ -195,8 +195,8 @@ void pickup(int n, dynent *d)
         case MezzanineLib::StaticEntity::JUMPPAD:
         {
             static int lastjumppad = 0;
-            if(lastmillis-lastjumppad<300) break;
-            lastjumppad = lastmillis;
+            if(MezzanineLib::GameInit::LastMillis-lastjumppad<300) break;
+            lastjumppad = MezzanineLib::GameInit::LastMillis;
             vec v = { (int)(char)ents[n].attr3/10.0f, (int)(char)ents[n].attr2/10.0f, ents[n].attr1/10.0f };
             player1->vel.z = 0;
 			vadd(player1->vel, v);

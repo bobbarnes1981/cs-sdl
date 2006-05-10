@@ -159,7 +159,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
         
     uchar *end = packet->data+packet->dataLength;
     uchar *p = packet->data+2;
-    char text[MAXTRANS];
+    char text[MezzanineLib::GameInit::MAXTRANS];
     int cn = -1, type;
 
     while(p<end) switch(type = getint(p))
@@ -262,12 +262,12 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 void send_welcome(int n)
 {
-    ENetPacket * packet = enet_packet_create (NULL, MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket * packet = enet_packet_create (NULL, MezzanineLib::GameInit::MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
     putint(p, MezzanineLib::NetworkMessages::SV_INITS2C);
     putint(p, n);
-    putint(p, PROTOCOL_VERSION);
+    putint(p, MezzanineLib::GameInit::PROTOCOL_VERSION);
     putint(p, smapname[0]);
     sendstring(serverpassword, p);
     putint(p, clients.length()>maxclients);
@@ -446,11 +446,11 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
     
     if(isdedicated = dedicated)
     {
-        ENetAddress address = { ENET_HOST_ANY, CUBE_SERVER_PORT };
+        ENetAddress address = { ENET_HOST_ANY, MezzanineLib::GameInit::CUBE_SERVER_PORT };
         if(*ip && enet_address_set_host(&address, ip)<0) printf("WARNING: server ip not resolved");
-        serverhost = enet_host_create(&address, MAXCLIENTS, 0, uprate);
+        serverhost = enet_host_create(&address, MezzanineLib::GameInit::MAXCLIENTS, 0, uprate);
 		if(!serverhost) MezzanineLib::GameInit::Fatal("could not create server host\n");
-        loopi(MAXCLIENTS) serverhost->peers[i].data = (void *)-1;
+        loopi(MezzanineLib::GameInit::MAXCLIENTS) serverhost->peers[i].data = (void *)-1;
     };
 
     resetserverifempty();

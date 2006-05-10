@@ -49,7 +49,7 @@ void savestate(char *fn)
     if(!f) { conoutf("could not write %s", fn); return; };
     gzwrite(f, (void *)"CUBESAVE", 8);
     gzputc(f, islittleendian);  
-    gzputi(SAVEGAMEVERSION);
+	gzputi(MezzanineLib::GameInit::SAVEGAMEVERSION);
     gzputi(sizeof(dynent));
     gzwrite(f, getclientmap(), _MAXDEFSTR);
     gzputi(gamemode);
@@ -87,7 +87,7 @@ void loadstate(char *fn)
     gzread(f, buf, 8);
     if(strncmp(buf, "CUBESAVE", 8)) goto out;
     if(gzgetc(f)!=islittleendian) goto out;     // not supporting save->load accross incompatible architectures simpifies things a LOT
-    if(gzgeti()!=SAVEGAMEVERSION || gzgeti()!=sizeof(dynent)) goto out;
+    if(gzgeti()!=MezzanineLib::GameInit::SAVEGAMEVERSION || gzgeti()!=sizeof(dynent)) goto out;
     string mapname;
     gzread(f, mapname, _MAXDEFSTR);
     nextmode = gzgeti();
@@ -123,7 +123,7 @@ void loadgamerest()
     restoreserverstate(ents);
     
     gzread(f, player1, sizeof(dynent));
-    player1->lastaction = lastmillis;
+    player1->lastaction = MezzanineLib::GameInit::LastMillis;
     
     int nmonsters = gzgeti();
     dvector &monsters = getmonsters();
@@ -132,7 +132,7 @@ void loadgamerest()
     {
         gzread(f, monsters[i], sizeof(dynent));
         monsters[i]->enemy = player1;                                       // lazy, could save id of enemy instead
-        monsters[i]->lastaction = monsters[i]->trigger = lastmillis+500;    // also lazy, but no real noticable effect on game
+        monsters[i]->lastaction = monsters[i]->trigger = MezzanineLib::GameInit::LastMillis+500;    // also lazy, but no real noticable effect on game
         if(monsters[i]->state==MezzanineLib::CSStatus::CS_DEAD) monsters[i]->lastaction = 0;
     };
     restoremonsterstate();
@@ -166,7 +166,7 @@ void record(char *name)
     gzputi(cn);
     conoutf("started recording demo to %s", fn);
     demorecording = true;
-    starttime = lastmillis;
+    starttime = MezzanineLib::GameInit::LastMillis;
 	ddamage = bdamage = 0;
 };
 
@@ -176,7 +176,7 @@ void demoblend(int damage) { bdamage = damage; };
 void incomingdemodata(uchar *buf, int len, bool extras)
 {
     if(!demorecording) return;
-    gzputi(lastmillis-starttime);
+    gzputi(MezzanineLib::GameInit::LastMillis-starttime);
     gzputi(len);
     gzwrite(f, buf, len);
     gzput(extras);
@@ -208,7 +208,7 @@ void demo(char *name)
 
 void stopreset()
 {
-    conoutf("demo stopped (%d msec elapsed)", lastmillis-starttime);
+    conoutf("demo stopped (%d msec elapsed)", MezzanineLib::GameInit::LastMillis-starttime);
     stop();
     loopv(players) zapdynent(players[i]);
     disconnect(0, 0);
@@ -231,7 +231,7 @@ void startdemo()
 {
     democlientnum = gzgeti();
     demoplayback = true;
-    starttime = lastmillis;
+    starttime = MezzanineLib::GameInit::LastMillis;
     conoutf("now playing demo");
     dynent *d = getclient(democlientnum);
     assert(d);
@@ -268,16 +268,16 @@ void fixwrap(dynent *a, dynent *b)
 
 void demoplaybackstep()
 {
-    while(demoplayback && lastmillis>=playbacktime)
+    while(demoplayback && MezzanineLib::GameInit::LastMillis>=playbacktime)
     {
         int len = gzgeti();
-        if(len<1 || len>MAXTRANS)
+        if(len<1 || len>MezzanineLib::GameInit::MAXTRANS)
         {
             conoutf("error: huge packet during demo play (%d)", len);
             stopreset();
             return;
         };
-        uchar buf[MAXTRANS];
+        uchar buf[MezzanineLib::GameInit::MAXTRANS];
         gzread(f, buf, len);
         localservertoclient(buf, len);  // update game state
         
@@ -321,7 +321,7 @@ void demoplaybackstep()
     
     if(demoplayback)
     {
-        int itime = lastmillis-demodelaymsec;
+        int itime = MezzanineLib::GameInit::LastMillis-demodelaymsec;
         loopvrev(playerhistory) if(playerhistory[i]->lastupdate<itime)      // find 2 positions in history that surround interpolation time point
         {
             dynent *a = playerhistory[i];
@@ -334,7 +334,7 @@ void demoplaybackstep()
 				if(i+2<playerhistory.length()) c = playerhistory[i+2];
 				dynent *z = a;
 				if(i-1>=0) z = playerhistory[i-1];
-				//if(a==z || b==c) printf("* %d\n", lastmillis);
+				//if(a==z || b==c) printf("* %d\n", MezzanineLib::GameInit::LastMillis);
 				float bf = (itime-a->lastupdate)/(float)(b->lastupdate-a->lastupdate);
 				fixwrap(a, player1);
 				fixwrap(c, player1);

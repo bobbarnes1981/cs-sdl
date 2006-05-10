@@ -27,7 +27,7 @@ void setnames(char *name)
         strcpy_s(mapname, name);
     };
     sprintf_s(cgzname)("packages/%s/%s.cgz",      pakname, mapname);
-    sprintf_s(bakname)("packages/%s/%s_%d.BAK",   pakname, mapname, lastmillis);
+    sprintf_s(bakname)("packages/%s/%s_%d.BAK",   pakname, mapname, MezzanineLib::GameInit::LastMillis);
     sprintf_s(pcfname)("packages/%s/package.cfg", pakname);
     sprintf_s(mcfname)("packages/%s/%s.cfg",      pakname, mapname);
 
@@ -313,7 +313,7 @@ void load_world(char *mname)        // still supports all map formats that have 
     settagareas();
     int xs, ys;
     loopi(256) if(texuse) lookuptexture(i, xs, ys);
-	conoutf("read map %s (%d milliseconds)", cgzname, SdlDotNet::Timer::TicksElapsed-lastmillis);
+	conoutf("read map %s (%d milliseconds)", cgzname, SdlDotNet::Timer::TicksElapsed-MezzanineLib::GameInit::LastMillis);
     conoutf("%s", hdr.maptitle);
     startmap(mname);
     loopl(256)

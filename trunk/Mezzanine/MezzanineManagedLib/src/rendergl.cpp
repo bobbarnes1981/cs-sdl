@@ -167,8 +167,8 @@ void gl_drawframe(int w, int h, float curfps)
 
     if(underwater)
     {
-        fovy += (float)sin(lastmillis/1000.0)*2.0f;
-        aspect += (float)sin(lastmillis/1000.0+PI)*0.1f;
+        fovy += (float)sin(MezzanineLib::GameInit::LastMillis/1000.0)*2.0f;
+        aspect += (float)sin(MezzanineLib::GameInit::LastMillis/1000.0+System::Math::PI)*0.1f;
         glFogi(GL_FOG_START, 0);
         glFogi(GL_FOG_END, (fog+96)/8);
     };
@@ -225,7 +225,7 @@ void gl_drawframe(int w, int h, float curfps)
 
     renderentities();
 
-    renderspheres(curtime);
+    renderspheres(MezzanineLib::GameInit::CurrentTime);
     renderents();
 
     glDisable(GL_CULL_FACE);
@@ -236,7 +236,7 @@ void gl_drawframe(int w, int h, float curfps)
     int nquads = renderwater(hf);
     
     Render::RenderGl::OverBright(2);
-    render_particles(curtime);
+    render_particles(MezzanineLib::GameInit::CurrentTime);
     Render::RenderGl::OverBright(1);
 
     glDisable(GL_FOG);

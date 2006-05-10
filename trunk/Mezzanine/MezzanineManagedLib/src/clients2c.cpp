@@ -41,11 +41,11 @@ void updatepos(dynent *d)
         if(fx<fy) d->o.y += dy<0 ? r-fy : -(r-fy);  // push aside
         else      d->o.x += dx<0 ? r-fx : -(r-fx);
     };
-    int lagtime = lastmillis-d->lastupdate;
+    int lagtime = MezzanineLib::GameInit::LastMillis-d->lastupdate;
     if(lagtime)
     {
         d->plag = (d->plag*5+lagtime)/6;
-        d->lastupdate = lastmillis;
+        d->lastupdate = MezzanineLib::GameInit::LastMillis;
     };
 };
 
@@ -56,7 +56,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
     
     uchar *end = buf+len;
     uchar *p = buf+2;
-    char text[MAXTRANS];
+    char text[MezzanineLib::GameInit::MAXTRANS];
     int cn = -1, type;
     dynent *d = NULL;
     bool mapchanged = false;
@@ -67,9 +67,9 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
         {
             cn = getint(p);
             int prot = getint(p);
-            if(prot!=PROTOCOL_VERSION)
+            if(prot!=MezzanineLib::GameInit::PROTOCOL_VERSION)
             {
-                conoutf("you are using a different game protocol (you: %d, server: %d)", PROTOCOL_VERSION, prot);
+                conoutf("you are using a different game protocol (you: %d, server: %d)", MezzanineLib::GameInit::PROTOCOL_VERSION, prot);
                 disconnect();
                 return;
             };
@@ -95,22 +95,22 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             cn = getint(p);
             d = getclient(cn);
             if(!d) return;
-            d->o.x   = getint(p)/DMF;
-            d->o.y   = getint(p)/DMF;
-            d->o.z   = getint(p)/DMF;
-            d->yaw   = getint(p)/DAF;
-            d->pitch = getint(p)/DAF;
-            d->roll  = getint(p)/DAF;
-            d->vel.x = getint(p)/DVF;
-            d->vel.y = getint(p)/DVF;
-            d->vel.z = getint(p)/DVF;
+            d->o.x   = getint(p)/MezzanineLib::GameInit::DMF;
+            d->o.y   = getint(p)/MezzanineLib::GameInit::DMF;
+            d->o.z   = getint(p)/MezzanineLib::GameInit::DMF;
+            d->yaw   = getint(p)/MezzanineLib::GameInit::DAF;
+            d->pitch = getint(p)/MezzanineLib::GameInit::DAF;
+            d->roll  = getint(p)/MezzanineLib::GameInit::DAF;
+            d->vel.x = getint(p)/MezzanineLib::GameInit::DVF;
+            d->vel.y = getint(p)/MezzanineLib::GameInit::DVF;
+            d->vel.z = getint(p)/MezzanineLib::GameInit::DVF;
             int f = getint(p);
             d->strafe = (f&3)==3 ? -1 : f&3;
             f >>= 2; 
             d->move = (f&3)==3 ? -1 : f&3;
             d->onfloor = (f>>2)&1;
             int state = f>>3;
-            if(state==MezzanineLib::CSStatus::CS_DEAD && d->state!=MezzanineLib::CSStatus::CS_DEAD) d->lastaction = lastmillis;
+            if(state==MezzanineLib::CSStatus::CS_DEAD && d->state!=MezzanineLib::CSStatus::CS_DEAD) d->lastaction = MezzanineLib::GameInit::LastMillis;
             d->state = state;
             if(!demoplayback) updatepos(d);
             break;
@@ -179,12 +179,12 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
         {
             int gun = getint(p);
             vec s, e;
-            s.x = getint(p)/DMF;
-            s.y = getint(p)/DMF;
-            s.z = getint(p)/DMF;
-            e.x = getint(p)/DMF;
-            e.y = getint(p)/DMF;
-            e.z = getint(p)/DMF;
+            s.x = getint(p)/MezzanineLib::GameInit::DMF;
+            s.y = getint(p)/MezzanineLib::GameInit::DMF;
+            s.z = getint(p)/MezzanineLib::GameInit::DMF;
+            e.x = getint(p)/MezzanineLib::GameInit::DMF;
+            e.y = getint(p)/MezzanineLib::GameInit::DMF;
+            e.z = getint(p)/MezzanineLib::GameInit::DMF;
             if(gun==MezzanineLib::Gun::GUN_SG) createrays(s, e);
             shootv(gun, s, e, d);
             break;
@@ -311,7 +311,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             break;
 
         case MezzanineLib::NetworkMessages::SV_PONG: 
-            addmsg(0, 2, MezzanineLib::NetworkMessages::SV_CLIENTPING, player1->ping = (player1->ping*5+lastmillis-getint(p))/6);
+            addmsg(0, 2, MezzanineLib::NetworkMessages::SV_CLIENTPING, player1->ping = (player1->ping*5+MezzanineLib::GameInit::LastMillis-getint(p))/6);
             break;
 
         case MezzanineLib::NetworkMessages::SV_CLIENTPING:

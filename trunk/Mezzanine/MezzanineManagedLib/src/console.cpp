@@ -27,7 +27,7 @@ void conline(const char *sf, bool highlight)        // add a line to the console
 {
     cline cl;
     cl.cref = conlines.length()>100 ? conlines.pop().cref : newstringbuf("");   // constrain the buffer size
-    cl.outtime = lastmillis;                        // for how long to keep line on screen
+    cl.outtime = MezzanineLib::GameInit::LastMillis;                        // for how long to keep line on screen
     conlines.insert(0,cl);
     if(highlight)                                   // show line in a different colour, for chat etc.
     {
@@ -64,14 +64,14 @@ void renderconsole()                                // render buffer taking into
 {
     int nd = 0;
     char *refs[ndraw];
-    loopv(conlines) if(conskip ? i>=conskip-1 || i>=conlines.length()-ndraw : lastmillis-conlines[i].outtime<20000)
+    loopv(conlines) if(conskip ? i>=conskip-1 || i>=conlines.length()-ndraw : MezzanineLib::GameInit::LastMillis-conlines[i].outtime<20000)
     {
         refs[nd++] = conlines[i].cref;
         if(nd==ndraw) break;
     };
     loopj(nd)
     {
-        draw_text(refs[j], FONTH/3, (FONTH/4*5)*(nd-j-1)+FONTH/3, 2);
+        draw_text(refs[j], MezzanineLib::GameInit::FontH/3, (MezzanineLib::GameInit::FontH/4*5)*(nd-j-1)+MezzanineLib::GameInit::FontH/3, 2);
     };
 };
 
