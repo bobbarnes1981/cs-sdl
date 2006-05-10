@@ -128,6 +128,19 @@ namespace MezzanineLib
 		public static extern int enet_initialize();
 		#endregion int enet_initialize()
 
+		#region int reloadtime(int gun)
+		/// <summary>
+		///     initialize enet network
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in enet.h:
+		///     <code>extern DECLSPEC int CDECL reloadtime(int gun)</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern int reloadtime(int gun);
+		#endregion int reloadtime(int gun)
+
 		#region void stop()
 		/// <summary>
 		///     stop

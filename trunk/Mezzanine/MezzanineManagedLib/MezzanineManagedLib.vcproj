@@ -255,6 +255,12 @@
 		<AssemblyReference
 			RelativePath="$(SolutionDir)lib\SdlDotNet.dll"/>
 		<AssemblyReference
+			RelativePath="$(SolutionDir)lib\Tao.OpenGl.dll"/>
+		<AssemblyReference
+			RelativePath="$(SolutionDir)lib\Tao.OpenGl.ExtensionLoader.dll"/>
+		<AssemblyReference
+			RelativePath="$(SolutionDir)lib\Tao.OpenGl.Glu.dll"/>
+		<AssemblyReference
 			RelativePath="$(SolutionDir)lib\Tao.Sdl.dll"/>
 	</References>
 	<Files>

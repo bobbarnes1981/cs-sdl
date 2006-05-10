@@ -74,8 +74,6 @@ namespace Mezzanine
 		int ignore = 5;
 		
 		float fps = 30.0f;
-		//int screenWidth = 640;
-		//int screenHeight = 480;
 		int gamespeed = 100;
 		bool demoplayback;
 		int curtime;
