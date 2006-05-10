@@ -1,8 +1,6 @@
 // one big bad include file for the whole engine... nasty!
 
 #include "tools.h"	
-#using <mscorlib.dll>
-#using <MezzanineLib.dll>
  
 struct sqr
 {
@@ -143,7 +141,6 @@ extern bool demoplayback;
 
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"
-#define _WINDOWS
 #define ZLIB_DLL
 
 #include <time.h>

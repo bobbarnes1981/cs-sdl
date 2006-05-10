@@ -1,6 +1,8 @@
 // weapon.cpp: all shooting and effects code
 
 #include "cube.h"
+#using <mscorlib.dll>
+#using <MezzanineLib.dll>
 
 struct guninfo { short sound, attackdelay, damage, projspeed, part, kickamount; char *name; };
 

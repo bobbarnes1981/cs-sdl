@@ -2,6 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
+#using <MezzanineLib.dll>
 
 
 int nextmode = 0;         // nextmode becomes gamemode after next map load

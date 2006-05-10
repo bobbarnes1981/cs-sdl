@@ -1,7 +1,8 @@
 // worldocull.cpp: occlusion map and occlusion test
 
 #include "cube.h"
-
+#using <mscorlib.dll>
+#using <MezzanineLib.dll>
 //#define NUMRAYS 512
 
 float rdist[MezzanineLib::World::WorldOcull::NumRays];
