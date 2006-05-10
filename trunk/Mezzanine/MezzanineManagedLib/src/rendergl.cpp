@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+
 using namespace MezzanineLib;
 //#using <Tao.OpenGl.dll>
 //using namespace Tao.OpenGl;

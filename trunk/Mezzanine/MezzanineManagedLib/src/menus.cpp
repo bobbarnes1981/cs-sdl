@@ -3,7 +3,7 @@
 #include "cube.h"
 #using <mscorlib.dll>
 #using <SdlDotNet.dll>
-#using <MezzanineLib.dll>
+
 
 struct mitem { char *text, *action; };
 

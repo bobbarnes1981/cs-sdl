@@ -3,7 +3,7 @@
 #include "cube.h"
 #include "SDL_thread.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+
 #using <Tao.Sdl.dll>
 
 struct resolverthread

@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+
 
 void box(block &b, float z1, float z2, float z3, float z4)
 {
@@ -108,7 +108,7 @@ void renderents()       // show sparkly thingies for map entities in edit mode
     if(e>=0)
     {
         entity &c = ents[e];
-        sprintf_s(closeent)("closest entity = %s (%d, %d, %d, %d), selection = (%d, %d)", entnames[c.type], c.attr1, c.attr2, c.attr3, c.attr4, getvar("selxs"), getvar("selys"));
+		sprintf_s(closeent)("closest entity = %s (%d, %d, %d, %d), selection = (%d, %d)", entnames[c.type], c.attr1, c.attr2, c.attr3, c.attr4, getvar("selxs"), getvar("selys"));
     };
 };
 
@@ -141,13 +141,6 @@ void readmatrices()
     glGetDoublev(GL_PROJECTION_MATRIX, pm);
 };
 
-// stupid function to cater for stupid ATI linux drivers that return incorrect depth values
-
-float depthcorrect(float d)
-{
-	return (d<=1/256.0f) ? d*256 : d;
-};
-
 // find out the 3d target of the crosshair in the world easily and very acurately.
 // sadly many very old cards and drivers appear to fuck up on glReadPixels() and give false
 // coordinates, making shooting and such impossible.
@@ -158,7 +151,7 @@ void readdepth(int w, int h)
 {
     glReadPixels(w/2, h/2, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &cursordepth);
     double worldx = 0, worldy = 0, worldz = 0;
-    gluUnProject(w/2, h/2, depthcorrect(cursordepth), mm, pm, viewport, &worldx, &worldz, &worldy);
+    gluUnProject(w/2, h/2, MezzanineLib::Render::RenderExtras::DepthCorrect(cursordepth), mm, pm, viewport, &worldx, &worldz, &worldy);
     worldpos.x = (float)worldx;
     worldpos.y = (float)worldy;
     worldpos.z = (float)worldz;
@@ -166,22 +159,6 @@ void readdepth(int w, int h)
     vec u = { (float)mm[1], (float)mm[5], (float)mm[9] };
     setorient(r, u);
 };
-
-//void drawicon(float tx, float ty, int x, int y)
-//{
-//    glBindTexture(GL_TEXTURE_2D, 5);
-//    glBegin(GL_QUADS);
-//    tx /= 192;
-//    ty /= 192;
-//    float o = 1/3.0f;
-//    int s = 120;
-//    glTexCoord2f(tx,   ty);   glVertex2i(x,   y);
-//    glTexCoord2f(tx+o, ty);   glVertex2i(x+s, y);
-//    glTexCoord2f(tx+o, ty+o); glVertex2i(x+s, y+s);
-//    glTexCoord2f(tx,   ty+o); glVertex2i(x,   y+s);
-//    glEnd();
-//    MezzanineLib::Render::RenderGl::XtraVerts += 4;
-//};
 
 void invertperspective()
 {
@@ -199,10 +176,6 @@ void invertperspective()
 };
 
 VARP(crosshairsize, 0, 15, 50);
-
-int dblend = 0;
-void damageblend(int n) { dblend += n; };
-
 VAR(hidestats, 0, 0, 1);
 VARP(crosshairfx, 0, 1, 1);
 
@@ -225,19 +198,19 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
 
     glDepthMask(GL_FALSE);
 
-    if(dblend || underwater)
+	if(MezzanineLib::Render::RenderExtras::DBlend || underwater)
     {
         glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
         glBegin(GL_QUADS);
-        if(dblend) glColor3d(0.0f, 0.9f, 0.9f);
+        if(MezzanineLib::Render::RenderExtras::DBlend) glColor3d(0.0f, 0.9f, 0.9f);
         else glColor3d(0.9f, 0.5f, 0.0f);
         glVertex2i(0, 0);
         glVertex2i(VIRTW, 0);
         glVertex2i(VIRTW, VIRTH);
         glVertex2i(0, VIRTH);
         glEnd();
-        dblend -= curtime/3;
-        if(dblend<0) dblend = 0;
+        MezzanineLib::Render::RenderExtras::DBlend -= curtime/3;
+        if(MezzanineLib::Render::RenderExtras::DBlend<0) MezzanineLib::Render::RenderExtras::DBlend = 0;
     };
 
     glEnable(GL_TEXTURE_2D);

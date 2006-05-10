@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+
 
 vertex *verts = NULL;
 int curvert;

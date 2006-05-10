@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+
 
 extern int islittleendian;
 
@@ -297,7 +297,7 @@ void demoplaybackstep()
             loopi(MezzanineLib::Gun::NUMGUNS) target->ammo[i] = gzget();
             target->state = gzget();
             target->lastmove = playbacktime;
-			if(bdamage = gzgeti()) damageblend(bdamage);
+			if(bdamage = gzgeti()) MezzanineLib::Render::RenderExtras::DamageBlend(bdamage);
 			if(ddamage = gzgeti()) { gzgetv(dorig); particle_splash(3, ddamage, 1000, dorig); };
             // FIXME: set more client state here
         };

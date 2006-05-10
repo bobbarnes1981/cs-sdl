@@ -2,7 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+
 
 int nextmode = 0;         // nextmode becomes gamemode after next map load
 VAR(gamemode, 1, 0, 0);
@@ -354,7 +354,7 @@ void mousemove(int dx, int dy)
 void selfdamage(int damage, int actor, dynent *act)
 {
     if(player1->state!=MezzanineLib::CSStatus::CS_ALIVE || editmode || intermission) return;
-    damageblend(damage);
+    MezzanineLib::Render::RenderExtras::DamageBlend(damage);
 	demoblend(damage);
     int ad = damage*(player1->armourtype+1)*20/100;     // let armour absorb when possible
     if(ad>player1->armour) ad = player1->armour;

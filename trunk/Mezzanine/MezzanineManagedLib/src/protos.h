@@ -160,7 +160,7 @@ extern DECLSPEC void CDECL newsphere(vec &o, float max, int type);
 extern DECLSPEC void CDECL renderspheres(int time);
 extern DECLSPEC void CDECL gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwater);
 extern DECLSPEC void CDECL readdepth(int w, int h);
-extern DECLSPEC void CDECL damageblend(int n);
+//extern DECLSPEC void CDECL damageblend(int n);
 
 // renderparticles
 extern DECLSPEC void CDECL setorient(vec &r, vec &u);

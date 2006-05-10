@@ -51,6 +51,56 @@ namespace MezzanineLib.Render
 			//
 		}
 
+		static int dBlend = 0;
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int DBlend
+		{
+			get
+			{
+				return dBlend;
+			}
+			set
+			{
+				dBlend = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="n"></param>
+		public static void DamageBlend(int n) 
+		{ 
+			dBlend += n; 
+		}
+
+		// stupid function to cater for stupid ATI linux drivers that return incorrect depth values
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="d"></param>
+		/// <returns></returns>
+		public static float DepthCorrect(float d)
+		{
+			return (d<=1/256.0f) ? d*256 : d;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static string[] EntityNames =
+		{
+			"none?", "light", "playerstart",
+			"shells", "bullets", "rockets", "riflerounds",
+			"health", "healthboost", "greenarmour", "yellowarmour", "quaddamage", 
+			"teleport", "teledest", 
+			"mapmodel", "monster", "trigger", "jumppad",
+			"?", "?", "?", "?", "?"
+		};
+
 		/// <summary>
 		/// 
 		/// </summary>

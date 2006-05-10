@@ -162,14 +162,10 @@ extern bool demoplayback;
 
 #define ATOI(s) strtol(s, NULL, 0)		// supports hexadecimal numbers
 
-#ifdef WIN32
-	#define WIN32_LEAN_AND_MEAN
-	#include "windows.h"
-	#define _WINDOWS
-	#define ZLIB_DLL
-#else
-	#include <dlfcn.h>
-#endif
+#define WIN32_LEAN_AND_MEAN
+#include "windows.h"
+#define _WINDOWS
+#define ZLIB_DLL
 
 #include <time.h>
 
