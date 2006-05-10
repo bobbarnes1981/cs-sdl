@@ -203,7 +203,7 @@ void otherplayers()
             players[i]->state = MezzanineLib::CSStatus::CS_LAGGED;
             continue;
         };
-        if(lagtime && players[i]->state != MezzanineLib::CSStatus::CS_DEAD && (!demoplayback || i!=democlientnum)) moveplayer(players[i], 2, false);   // use physics to extrapolate player position
+        if(lagtime && players[i]->state != MezzanineLib::CSStatus::CS_DEAD && (!MezzanineLib::GameInit::DemoPlayback || i!=democlientnum)) moveplayer(players[i], 2, false);   // use physics to extrapolate player position
     };
 };
 
@@ -234,13 +234,13 @@ void updateworld(int millis)        // main game update loop
 		if(m_arena) arenarespawn();
         moveprojectiles((float)MezzanineLib::GameInit::CurrentTime);
         demoplaybackstep();
-        if(!demoplayback)
+        if(!MezzanineLib::GameInit::DemoPlayback)
         {
             if(getclientnum()>=0) shoot(player1, worldpos);     // only shoot when connected to server
             gets2c();           // do this first, so we have most accurate information when our player moves
         };
         otherplayers();
-        if(!demoplayback)
+        if(!MezzanineLib::GameInit::DemoPlayback)
         {
             monsterthink();
             if(player1->state==MezzanineLib::CSStatus::CS_DEAD)
@@ -297,7 +297,7 @@ void spawnplayer(dynent *d)   // place at random spawn. also used by monsters!
     }
     else
     {
-        d->o.x = d->o.y = (float)ssize/2;
+        d->o.x = d->o.y = (float)MezzanineLib::GameInit::SSize/2;
         d->o.z = 4;
     };
     entinmap(d);
@@ -317,7 +317,7 @@ dir(right,    strafe, -1, k_right, k_left);
 void attack(bool on)
 {
     if(intermission) return;
-    if(editmode) editdrag(on);
+    if(MezzanineLib::GameInit::EditMode) editdrag(on);
     else if(player1->attacking = on) respawn();
 };
 
@@ -353,7 +353,7 @@ void mousemove(int dx, int dy)
 
 void selfdamage(int damage, int actor, dynent *act)
 {
-    if(player1->state!=MezzanineLib::CSStatus::CS_ALIVE || editmode || intermission) return;
+    if(player1->state!=MezzanineLib::CSStatus::CS_ALIVE || MezzanineLib::GameInit::EditMode || intermission) return;
     MezzanineLib::Render::RenderExtras::DamageBlend(damage);
 	demoblend(damage);
     int ad = damage*(player1->armourtype+1)*20/100;     // let armour absorb when possible
@@ -447,7 +447,7 @@ void startmap(char *name)   // called just after a map load
     loopv(players) if(players[i]) players[i]->frags = 0;
     resetspawns();
     strcpy_s(clientmap, name);
-    if(editmode) toggleedit();
+    if(MezzanineLib::GameInit::EditMode) toggleedit();
     setvar("gamespeed", 100);
 	setvar("fog", 180);
 	setvar("fogcolour", 0x8099B3);

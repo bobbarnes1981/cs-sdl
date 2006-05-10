@@ -96,7 +96,7 @@ char *entnames[] =
 void renderents()       // show sparkly thingies for map entities in edit mode
 {
     closeent[0] = 0;
-    if(!editmode) return;
+    if(!MezzanineLib::GameInit::EditMode) return;
     loopv(ents)
     {
         entity &e = ents[i];
@@ -182,7 +182,7 @@ VARP(crosshairfx, 0, 1, 1);
 void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwater)
 {
     readmatrices();
-    if(editmode)
+    if(MezzanineLib::GameInit::EditMode)
     {
         if(cursordepth==1.0f) worldpos = player1->o;
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

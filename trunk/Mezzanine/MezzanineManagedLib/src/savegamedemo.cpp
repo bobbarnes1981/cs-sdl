@@ -8,7 +8,6 @@ extern int islittleendian;
 
 gzFile f = NULL;
 bool demorecording = false;
-bool demoplayback = false;
 bool demoloading = false;
 dvector playerhistory;
 int democlientnum = 0;
@@ -34,7 +33,7 @@ void stop()
     };
     f = NULL;
     demorecording = false;
-    demoplayback = false;
+    MezzanineLib::GameInit::DemoPlayback = false;
     demoloading = false;
     loopv(playerhistory) zapdynent(playerhistory[i]);
     playerhistory.setsize(0);
@@ -112,7 +111,7 @@ void loadgameout()
 
 void loadgamerest()
 {
-    if(demoplayback || !f) return;
+    if(MezzanineLib::GameInit::DemoPlayback || !f) return;
         
     if(gzgeti()!=ents.length()) return loadgameout();
     loopv(ents)
@@ -230,7 +229,7 @@ void readdemotime()
 void startdemo()
 {
     democlientnum = gzgeti();
-    demoplayback = true;
+    MezzanineLib::GameInit::DemoPlayback = true;
     starttime = MezzanineLib::GameInit::LastMillis;
     conoutf("now playing demo");
     dynent *d = getclient(democlientnum);
@@ -268,7 +267,7 @@ void fixwrap(dynent *a, dynent *b)
 
 void demoplaybackstep()
 {
-    while(demoplayback && MezzanineLib::GameInit::LastMillis>=playbacktime)
+    while(MezzanineLib::GameInit::DemoPlayback && MezzanineLib::GameInit::LastMillis>=playbacktime)
     {
         int len = gzgeti();
         if(len<1 || len>MezzanineLib::GameInit::MAXTRANS)
@@ -319,7 +318,7 @@ void demoplaybackstep()
         readdemotime();
     };
     
-    if(demoplayback)
+    if(MezzanineLib::GameInit::DemoPlayback)
     {
         int itime = MezzanineLib::GameInit::LastMillis-demodelaymsec;
         loopvrev(playerhistory) if(playerhistory[i]->lastupdate<itime)      // find 2 positions in history that surround interpolation time point
@@ -353,7 +352,7 @@ void demoplaybackstep()
     };
 };
 
-void stopn() { if(demoplayback) stopreset(); else stop(); conoutf("demo stopped"); };
+void stopn() { if(MezzanineLib::GameInit::DemoPlayback) stopreset(); else stop(); conoutf("demo stopped"); };
 
 COMMAND(record, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 COMMAND(demo, MezzanineLib::Support::FunctionSignatures::ARG_1STR);

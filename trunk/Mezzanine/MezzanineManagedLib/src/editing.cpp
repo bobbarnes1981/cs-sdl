@@ -2,11 +2,7 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
-
-//using namespace MezzanineLib;
-
-bool editmode = false; 
+#using <MezzanineLib.dll> 
 
 // the current selection, used by almost all editing commands
 // invariant: all code assumes that these are kept inside MINBORD distance of the edge of the map
@@ -39,8 +35,9 @@ VAR(editing,0,0,1);
 void toggleedit()
 {
     if(player1->state==MezzanineLib::CSStatus::CS_DEAD) return;                 // do not allow dead players to edit to avoid state confusion
-    if(!editmode && !allowedittoggle()) return;         // not in most multiplayer modes
-    if(!(editmode = !editmode))
+    if(!MezzanineLib::GameInit::EditMode && !allowedittoggle()) return;         // not in most multiplayer modes
+    MezzanineLib::GameInit::EditMode = !MezzanineLib::GameInit::EditMode;
+	if(!MezzanineLib::GameInit::EditMode)
     {
         settagareas();                                  // reset triggers to allow quick playtesting
         entinmap(player1);                              // find spawn closest to current floating pos
@@ -52,9 +49,9 @@ void toggleedit()
         if(m_classicsp) monsterclear();                 // all monsters back at their spawns for editing
         projreset();
     };
-	SdlDotNet::Keyboard::KeyRepeat = editmode;
+	SdlDotNet::Keyboard::KeyRepeat = MezzanineLib::GameInit::EditMode;
     selset = false;
-    editing = editmode;
+    editing = MezzanineLib::GameInit::EditMode;
 };
 
 COMMANDN(edittoggle, toggleedit, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
@@ -62,7 +59,7 @@ COMMANDN(edittoggle, toggleedit, MezzanineLib::Support::FunctionSignatures::ARG_
 void correctsel()                                       // ensures above invariant
 {
     selset = !OUTBORD(sel.x, sel.y);
-    int bsize = ssize-MezzanineLib::GameInit::MinBord;
+    int bsize = MezzanineLib::GameInit::SSize-MezzanineLib::GameInit::MinBord;
     if(sel.xs+sel.x>bsize) sel.xs = bsize-sel.x;
     if(sel.ys+sel.y>bsize) sel.ys = bsize-sel.y;
     if(sel.xs<=0 || sel.ys<=0) selset = false;
@@ -71,8 +68,8 @@ void correctsel()                                       // ensures above invaria
 bool noteditmode()
 {
     correctsel();
-    if(!editmode) conoutf("this function is only allowed in edit mode");
-    return !editmode;
+    if(!MezzanineLib::GameInit::EditMode) conoutf("this function is only allowed in edit mode");
+    return !MezzanineLib::GameInit::EditMode;
 };
 
 bool noselection()
@@ -152,9 +149,9 @@ void cursorupdate()                                     // called every frame fr
         sqr *s = S(ix,iy);
         if(SOLID(s)) continue;
         float h1 = sheight(s, s, z);
-        float h2 = sheight(s, SWS(s,1,0,ssize), z);
-        float h3 = sheight(s, SWS(s,1,1,ssize), z);
-        float h4 = sheight(s, SWS(s,0,1,ssize), z);
+        float h2 = sheight(s, SWS(s,1,0,MezzanineLib::GameInit::SSize), z);
+        float h3 = sheight(s, SWS(s,1,1,MezzanineLib::GameInit::SSize), z);
+        float h4 = sheight(s, SWS(s,0,1,MezzanineLib::GameInit::SSize), z);
 		if(s->tag) MezzanineLib::Render::RenderExtras::LineStyle(GRIDW, 0xFF, 0x40, 0x40);
 		else if(s->type==MezzanineLib::BlockTypes::FHF || s->type==MezzanineLib::BlockTypes::CHF) MezzanineLib::Render::RenderExtras::LineStyle(GRIDW, 0x80, 0xFF, 0x80);
         else MezzanineLib::Render::RenderExtras::LineStyle(GRIDW, 0x80, 0x80, 0x80);
@@ -172,7 +169,7 @@ void cursorupdate()                                     // called every frame fr
         float ih = sheight(s, s, z);
 		MezzanineLib::Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0xFF, 0xFF);
         block b = { cx, cy, 1, 1 };
-        box(b, ih, sheight(s, SWS(s,1,0,ssize), z), sheight(s, SWS(s,1,1,ssize), z), sheight(s, SWS(s,0,1,ssize), z));
+        box(b, ih, sheight(s, SWS(s,1,0,MezzanineLib::GameInit::SSize), z), sheight(s, SWS(s,1,1,MezzanineLib::GameInit::SSize), z), sheight(s, SWS(s,0,1,MezzanineLib::GameInit::SSize), z));
 		MezzanineLib::Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0x00, 0x00);
         MezzanineLib::Render::RenderExtras::Dot(cx, cy, ih);
         ch = (int)ih;
@@ -321,7 +318,7 @@ void edittex(int type, int dir)
 void replace()
 {
     EDITSELMP;
-    loop(x,ssize) loop(y,ssize)
+    loop(x,MezzanineLib::GameInit::SSize) loop(y,MezzanineLib::GameInit::SSize)
     {
         sqr *s = S(x, y);
         switch(lasttype)
@@ -332,7 +329,7 @@ void replace()
             case 3: if(s->utex == rtex.utex) s->utex = lasttex; break;
         };
     };
-    block b = { 0, 0, ssize, ssize }; 
+    block b = { 0, 0, MezzanineLib::GameInit::SSize, MezzanineLib::GameInit::SSize }; 
     remip(b);
 };
 

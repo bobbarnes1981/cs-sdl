@@ -47,7 +47,7 @@ void setorient(vec &r, vec &u) { right = r; up = u; };
 
 void render_particles(int time)
 {
-	if(demoplayback && demotracking)
+	if(MezzanineLib::GameInit::DemoPlayback && demotracking)
 	{
 		vec nom = { 0, 0, 0 };
 		newparticle(player1->o, nom, 100000000, 8);

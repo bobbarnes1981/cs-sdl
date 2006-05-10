@@ -154,6 +154,41 @@ namespace MezzanineLib
 			}
 		}
 
+		static bool editmode;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static bool EditMode
+		{
+			get
+			{
+				return editmode;
+			}
+			set
+			{
+				editmode = value;
+			}
+		}
+
+		static bool demoplayback;
+		/// <summary>
+		/// 
+		/// </summary>
+		public static bool DemoPlayback
+		{
+			get
+			{
+				return demoplayback;
+			}
+			set
+			{
+				demoplayback = value;
+			}
+		}
+
+
+
 		public const int MinBord = 2; // 2 cubes from the edge of the world are always solid
 		public const int SAVEGAMEVERSION = 4;              // bump if dynent/netprotocol changes or any other savegame/demo data
 		public const int MAXCLIENTS = 256;           // in a multiplayer game, can be arbitrarily changed
@@ -168,6 +203,40 @@ namespace MezzanineLib
 		public const int VIRTW = 2400;                      // virtual screen size for text & HUD
 		public const int VIRTH = 1800;
 		public const int PIXELTAB = (VIRTW/12);
+		static int sfactor;
+		static int ssize;              // ssize = 2^sfactor
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int SFactor
+		{
+			get
+			{
+				return sfactor;
+			}
+			set
+			{
+				sfactor = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int SSize
+		{
+			get
+			{
+				return ssize;
+			}
+			set
+			{
+				ssize = value;
+			}
+		}
+
+
 
 		static int curtime;
 

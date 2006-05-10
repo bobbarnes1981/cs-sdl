@@ -75,7 +75,7 @@ bool issemi(int mip, int x, int y, int x1, int y1, int x2, int y2)
 {
     if(!(mip--)) return true;
     sqr *w = wmip[mip];
-    int msize = ssize>>mip;
+    int msize = MezzanineLib::GameInit::SSize>>mip;
     x *= 2;
     y *= 2;
     switch(SWS(w, x+x1, y+y1, msize)->type)
@@ -104,7 +104,7 @@ bool render_floor, render_ceil;
 void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs, int ys)
 {
     sqr *w = wmip[mip];
-    int sz = ssize>>mip;
+    int sz = MezzanineLib::GameInit::SSize>>mip;
     int vxx = ((int)vx+(1<<mip)/2)>>mip;
     int vyy = ((int)vy+(1<<mip)/2)>>mip;
     int lx = vxx-lodleft;   // these mark the rect inside the current rest that we want to render using a lower mip level
@@ -286,7 +286,7 @@ void render_world(float vx, float vy, float vh, int yaw, int pitch, float fov, i
     render_floor = pitch<hyfov;
     render_ceil  = -pitch<hyfov;
 
-    render_seg_new(vx, vy, vh, MAX_MIP, 0, 0, ssize>>MAX_MIP, ssize>>MAX_MIP);
+    render_seg_new(vx, vy, vh, MAX_MIP, 0, 0, MezzanineLib::GameInit::SSize>>MAX_MIP, MezzanineLib::GameInit::SSize>>MAX_MIP);
     mipstats(stats[0], stats[1], stats[2]);
 };
 
