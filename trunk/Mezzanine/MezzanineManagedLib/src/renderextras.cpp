@@ -15,21 +15,19 @@ void box(block &b, float z1, float z2, float z3, float z4)
     MezzanineLib::Render::RenderGl::XtraVerts += 4;
 };
 
-const int MAXSPHERES = 50;
 struct sphere { vec o; float size, max; int type; sphere *next; };
-sphere spheres[MAXSPHERES], *slist = NULL, *sempty = NULL;
-bool sinit = false;
+sphere spheres[MezzanineLib::Render::RenderExtras::MAXSPHERES], *slist = NULL, *sempty = NULL;
 
 void newsphere(vec &o, float max, int type)
 {
-    if(!sinit)
+    if(!MezzanineLib::Render::RenderExtras::sinit)
     {
-        loopi(MAXSPHERES)
+        loopi(MezzanineLib::Render::RenderExtras::MAXSPHERES)
         {
             spheres[i].next = sempty;
             sempty = &spheres[i];
         };
-        sinit = true;
+        MezzanineLib::Render::RenderExtras::sinit = true;
     };
     if(sempty)
     {
