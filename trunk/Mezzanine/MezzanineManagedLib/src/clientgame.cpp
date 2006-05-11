@@ -12,8 +12,6 @@ VARF(gamespeed, 10, 100, 1000, if(multiplayer()) gamespeed = 100);
 void mode(int n) { addmsg(1, 2, MezzanineLib::NetworkMessages::SV_GAMEMODE, nextmode = n); };
 COMMAND(mode, MezzanineLib::Support::FunctionSignatures::ARG_1INT);
 
-bool intermission = false;
-
 dynent *player1 = newdynent();          // our client
 dvector players;   // other clients
 
@@ -29,8 +27,6 @@ VARP(invmouse, 0, 0, 1);
 //MezzanineLib::GameInit::CurrentTime = 10;
 string clientmap;
 
-extern int framesinmap;
-
 char *getclientmap() { return clientmap; };
 
 void resetmovement(dynent *d)
@@ -44,7 +40,7 @@ void resetmovement(dynent *d)
     d->move = 0;
 };
 
-void spawnstate(dynent *d)              // reset player state not persistent accross spawns
+void spawnstate(dynent *d)              // reset player state not persistent across spawns
 {
     resetmovement(d);
     d->vel.x = d->vel.y = d->vel.z = 0; 
@@ -150,23 +146,20 @@ void arenacount(dynent *d, int &alive, int &dead, char *&lastteam, bool &oneteam
     };
 };
 
-int arenarespawnwait = 0;
-int arenadetectwait  = 0;
-
 void arenarespawn()
 {
-    if(arenarespawnwait)
+    if(MezzanineLib::ClientServer::ClientGame::arenarespawnwait)
     {
-        if(arenarespawnwait<MezzanineLib::GameInit::LastMillis)
+        if(MezzanineLib::ClientServer::ClientGame::arenarespawnwait<MezzanineLib::GameInit::LastMillis)
         {
-            arenarespawnwait = 0;
+            MezzanineLib::ClientServer::ClientGame::arenarespawnwait = 0;
             conoutf("new round starting... fight!");
             respawnself();
         };
     }
-    else if(arenadetectwait==0 || arenadetectwait<MezzanineLib::GameInit::LastMillis)
+    else if(MezzanineLib::ClientServer::ClientGame::arenadetectwait==0 || MezzanineLib::ClientServer::ClientGame::arenadetectwait<MezzanineLib::GameInit::LastMillis)
     {
-        arenadetectwait = 0;
+        MezzanineLib::ClientServer::ClientGame::arenadetectwait = 0;
         int alive = 0, dead = 0;
         char *lastteam = NULL;
         bool oneteam = true;
@@ -177,8 +170,8 @@ void arenarespawn()
             conoutf("arena round is over! next round in 5 seconds...");
             if(alive) conoutf("team %s is last man standing", lastteam);
             else conoutf("everyone died!");
-            arenarespawnwait = MezzanineLib::GameInit::LastMillis+5000;
-            arenadetectwait  = MezzanineLib::GameInit::LastMillis+10000;
+            MezzanineLib::ClientServer::ClientGame::arenarespawnwait = MezzanineLib::GameInit::LastMillis+5000;
+            MezzanineLib::ClientServer::ClientGame::arenadetectwait  = MezzanineLib::GameInit::LastMillis+10000;
             player1->roll = 0;
         }; 
     };
@@ -190,8 +183,6 @@ void zapdynent(dynent *&d)
     d = NULL;
 };
 
-extern int democlientnum;
-
 void otherplayers()
 {
     loopv(players) if(players[i])
@@ -202,7 +193,7 @@ void otherplayers()
             players[i]->state = MezzanineLib::CSStatus::CS_LAGGED;
             continue;
         };
-        if(lagtime && players[i]->state != MezzanineLib::CSStatus::CS_DEAD && (!MezzanineLib::GameInit::DemoPlayback || i!=democlientnum)) moveplayer(players[i], 2, false);   // use physics to extrapolate player position
+        if(lagtime && players[i]->state != MezzanineLib::CSStatus::CS_DEAD && (!MezzanineLib::GameInit::DemoPlayback || i!=MezzanineLib::ClientServer::ClientGame::DemoClientNum)) moveplayer(players[i], 2, false);   // use physics to extrapolate player position
     };
 };
 
@@ -212,14 +203,13 @@ void respawn()
     { 
         player1->attacking = false;
         if(m_arena) { conoutf("waiting for new round to start..."); return; };
-        if(m_sp) { nextmode = gamemode; changemap(clientmap); return; };    // if we die in SP we try the same map again
+        if(m_sp) { nextmode = gamemode; changemap(getclientmap()); return; };    // if we die in SP we try the same map again
 		respawnself();
 	};
 };
 
-int sleepwait = 0;
 string sleepcmd;
-void sleepf(char *msec, char *cmd) { sleepwait = atoi(msec)+MezzanineLib::GameInit::LastMillis; strcpy_s(sleepcmd, cmd); };
+void sleepf(char *msec, char *cmd) { MezzanineLib::ClientServer::ClientGame::sleepwait = atoi(msec)+MezzanineLib::GameInit::LastMillis; strcpy_s(sleepcmd, cmd); };
 COMMANDN(sleep, sleepf, MezzanineLib::Support::FunctionSignatures::ARG_2STR);
 
 void updateworld(int millis)        // main game update loop
@@ -227,7 +217,7 @@ void updateworld(int millis)        // main game update loop
     if(MezzanineLib::GameInit::LastMillis)
     {     
         MezzanineLib::GameInit::CurrentTime = millis - MezzanineLib::GameInit::LastMillis;
-        if(sleepwait && MezzanineLib::GameInit::LastMillis>sleepwait) { sleepwait = 0; execute(sleepcmd); };
+        if(MezzanineLib::ClientServer::ClientGame::sleepwait && MezzanineLib::GameInit::LastMillis>MezzanineLib::ClientServer::ClientGame::sleepwait) { MezzanineLib::ClientServer::ClientGame::sleepwait = 0; execute(sleepcmd); };
         physicsframe();
         checkquad(MezzanineLib::GameInit::CurrentTime);
 		if(m_arena) arenarespawn();
@@ -251,7 +241,7 @@ void updateworld(int millis)        // main game update loop
 				}
                 else if(!m_arena && !m_sp && MezzanineLib::GameInit::LastMillis-player1->lastaction>10000) respawn();
             }
-            else if(!intermission)
+            else if(!MezzanineLib::ClientServer::ClientGame::intermission)
             {
                 moveplayer(player1, 20, true);
                 checkitems();
@@ -278,19 +268,16 @@ void entinmap(dynent *d)    // brute force but effective way to find a free spaw
     // leave ent at original pos, possibly stuck
 };
 
-int spawncycle = -1;
-int fixspawn = 2;
-
 void spawnplayer(dynent *d)   // place at random spawn. also used by monsters!
 {
-    int r = fixspawn-->0 ? 4 : rnd(10)+1;
-    loopi(r) spawncycle = findentity(MezzanineLib::StaticEntity::PLAYERSTART, spawncycle+1);
-    if(spawncycle!=-1)
+    int r = MezzanineLib::ClientServer::ClientGame::fixspawn-->0 ? 4 : rnd(10)+1;
+    loopi(r) MezzanineLib::ClientServer::ClientGame::spawncycle = findentity(MezzanineLib::StaticEntity::PLAYERSTART, MezzanineLib::ClientServer::ClientGame::spawncycle+1);
+    if(MezzanineLib::ClientServer::ClientGame::spawncycle!=-1)
     {
-        d->o.x = ents[spawncycle].x;
-        d->o.y = ents[spawncycle].y;
-        d->o.z = ents[spawncycle].z;
-        d->yaw = ents[spawncycle].attr1;
+        d->o.x = ents[MezzanineLib::ClientServer::ClientGame::spawncycle].x;
+        d->o.y = ents[MezzanineLib::ClientServer::ClientGame::spawncycle].y;
+        d->o.z = ents[MezzanineLib::ClientServer::ClientGame::spawncycle].z;
+        d->yaw = ents[MezzanineLib::ClientServer::ClientGame::spawncycle].attr1;
         d->pitch = 0;
         d->roll = 0;
     }
@@ -315,12 +302,12 @@ dir(right,    strafe, -1, k_right, k_left);
 
 void attack(bool on)
 {
-    if(intermission) return;
+    if(MezzanineLib::ClientServer::ClientGame::intermission) return;
     if(MezzanineLib::GameInit::EditMode) editdrag(on);
     else if(player1->attacking = on) respawn();
 };
 
-void jumpn(bool on) { if(!intermission && (player1->jumpnext = on)) respawn(); };
+void jumpn(bool on) { if(!MezzanineLib::ClientServer::ClientGame::intermission && (player1->jumpnext = on)) respawn(); };
 
 COMMAND(backward, MezzanineLib::Support::FunctionSignatures::ARG_DOWN);
 COMMAND(forward, MezzanineLib::Support::FunctionSignatures::ARG_DOWN);
@@ -341,7 +328,7 @@ void fixplayer1range()
 
 void mousemove(int dx, int dy)
 {
-    if(player1->state==MezzanineLib::CSStatus::CS_DEAD || intermission) return;
+    if(player1->state==MezzanineLib::CSStatus::CS_DEAD || MezzanineLib::ClientServer::ClientGame::intermission) return;
     const float SENSF = 33.0f;     // try match quake sens
     player1->yaw += (dx/SENSF)*(sensitivity/(float)sensitivityscale);
     player1->pitch -= (dy/SENSF)*(sensitivity/(float)sensitivityscale)*(invmouse ? -1 : 1);
@@ -352,7 +339,7 @@ void mousemove(int dx, int dy)
 
 void selfdamage(int damage, int actor, dynent *act)
 {
-    if(player1->state!=MezzanineLib::CSStatus::CS_ALIVE || MezzanineLib::GameInit::EditMode || intermission) return;
+    if(player1->state!=MezzanineLib::CSStatus::CS_ALIVE || MezzanineLib::GameInit::EditMode || MezzanineLib::ClientServer::ClientGame::intermission) return;
     MezzanineLib::Render::RenderExtras::DamageBlend(damage);
 	demoblend(damage);
     int ad = damage*(player1->armourtype+1)*20/100;     // let armour absorb when possible
@@ -409,7 +396,7 @@ void timeupdate(int timeremain)
 {
     if(!timeremain)
     {
-        intermission = true;
+        MezzanineLib::ClientServer::ClientGame::intermission = true;
         player1->attacking = false;
         conoutf("intermission:");
         conoutf("game has ended!");
@@ -432,27 +419,25 @@ dynent *getclient(int cn)   // ensure valid entity
     return players[cn] ? players[cn] : (players[cn] = newdynent());
 };
 
-int framesinmap = 0;
-
 void startmap(char *name)   // called just after a map load
 {
     if(netmapstart() && m_sp) { gamemode = 0; conoutf("coop sp not supported yet"); };
-    sleepwait = 0;
+    MezzanineLib::ClientServer::ClientGame::sleepwait = 0;
     monsterclear();
     projreset(); 
-    spawncycle = -1;
+    MezzanineLib::ClientServer::ClientGame::spawncycle = -1;
     spawnplayer(player1);
     player1->frags = 0;
     loopv(players) if(players[i]) players[i]->frags = 0;
     resetspawns();
-    strcpy_s(clientmap, name);
+    strcpy_s(getclientmap(), name);
     if(MezzanineLib::GameInit::EditMode) toggleedit();
     setvar("gamespeed", 100);
 	setvar("fog", 180);
 	setvar("fogcolour", 0x8099B3);
     showscores(false);
-    intermission = false;
-    framesinmap = 0;
+    MezzanineLib::ClientServer::ClientGame::intermission = false;
+    MezzanineLib::ClientServer::ClientGame::FramesInMap = 0;
     conoutf("game mode is %s", modestr(gamemode));
 }; 
 

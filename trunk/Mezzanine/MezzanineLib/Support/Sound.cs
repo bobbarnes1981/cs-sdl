@@ -54,7 +54,7 @@ namespace MezzanineLib.Support
 		public bool InUse; 
 	} 
 	
-	public class Sound
+	public sealed class Sound
 	{
 		static bool noSound = false;
 		static int soundVolume = 255;

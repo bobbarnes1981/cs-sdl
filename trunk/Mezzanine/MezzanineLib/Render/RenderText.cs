@@ -40,7 +40,7 @@ using System.Runtime.InteropServices;
 
 namespace MezzanineLib.Render
 {
-	public class RenderText
+	public sealed class RenderText
 	{
 		static short[,] char_coords = new short[,] 
 			{

@@ -118,7 +118,7 @@ namespace MezzanineLib
 	/// <summary>
 	/// Summary description for Main.
 	/// </summary>
-	public class GameInit
+	public sealed class GameInit
 	{
 		
 		static IntPtr player1Ptr;

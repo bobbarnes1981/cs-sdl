@@ -49,7 +49,7 @@ namespace MezzanineLib.ClientServer
 		ST_TCPIP 
 	};
 
-	public class Server
+	public sealed class Server
 	{
 	}
 }

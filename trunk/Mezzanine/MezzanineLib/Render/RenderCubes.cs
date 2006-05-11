@@ -42,7 +42,7 @@ namespace MezzanineLib.Render
 		float u, v, x, y, z; 
 		char r, g, b, a; 
 	}
-	public class RenderCubes
+	public sealed class RenderCubes
 	{
 		public static int curvert;
 		public static int curmaxverts = 10000;
