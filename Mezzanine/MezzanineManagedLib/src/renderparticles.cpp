@@ -4,25 +4,21 @@
 #using <mscorlib.dll>
 #using <MezzanineLib.dll>
 
-
-const int MAXPARTICLES = 10500;
-const int NUMPARTCUTOFF = 20;
 struct particle { vec o, d; int fade, type; int millis; particle *next; };
-particle particles[MAXPARTICLES], *parlist = NULL, *parempty = NULL;
-bool parinit = false;
+particle particles[MezzanineLib::Render::RenderParticles::MAXPARTICLES], *parlist = NULL, *parempty = NULL;
 
-VARP(maxparticles, 100, 2000, MAXPARTICLES-500);
+VARP(maxparticles, 100, 2000, MezzanineLib::Render::RenderParticles::MAXPARTICLES-500);
 
 void newparticle(vec &o, vec &d, int fade, int type)
 {
-    if(!parinit)
+    if(!MezzanineLib::Render::RenderParticles::parinit)
     {
-        loopi(MAXPARTICLES)
+        loopi(MezzanineLib::Render::RenderParticles::MAXPARTICLES)
         {
             particles[i].next = parempty;
             parempty = &particles[i];
         };
-        parinit = true;
+        MezzanineLib::Render::RenderParticles::parinit = true;
     };
     if(parempty)
     {

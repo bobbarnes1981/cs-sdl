@@ -164,6 +164,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Render\RenderParticles.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Render\RenderText.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
