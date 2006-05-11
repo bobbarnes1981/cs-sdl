@@ -8,7 +8,7 @@ using namespace MezzanineLib;
 //#using <Tao.OpenGl.dll>
 //using namespace Tao.OpenGl;
 
-extern int curvert;
+//extern int curvert;
 
 void purgetextures();
 
@@ -191,7 +191,7 @@ void gl_drawframe(int w, int h, float curfps)
    
     resetcubes();
             
-    curvert = 0;
+    MezzanineLib::Render::RenderCubes::curvert = 0;
     strips.setsize(0);
   
     render_world(player1->o.x, player1->o.y, player1->o.z, 
@@ -244,7 +244,7 @@ void gl_drawframe(int w, int h, float curfps)
 
     glDisable(GL_TEXTURE_2D);
 
-    gl_drawhud(w, h, (int)curfps, nquads, curvert, underwater);
+    gl_drawhud(w, h, (int)curfps, nquads, MezzanineLib::Render::RenderCubes::curvert, underwater);
 
     glEnable(GL_CULL_FACE);
     glEnable(GL_FOG);

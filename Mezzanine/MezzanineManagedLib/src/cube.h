@@ -95,12 +95,12 @@ typedef vector<int> ivector;
 
 extern sqr *world, *wmip[];             // map data, the mips are sequential 2D arrays in memory
 extern header hdr;                      // current map header
-extern int cubicsize, mipsize;          // cubicsize = ssize^2
 extern dynent *player1;                 // special client ent that receives input and acts as camera
 extern dvector players;                 // all the other clients (in multiplayer)
 extern vector<entity> ents;             // map entities
 extern vec worldpos;                    // current target of the crosshair in the world
-extern int gamemode, nextmode;
+extern int gamemode;
+extern int nextmode;
 
 // simplistic vector ops
 #define dotprod(u,v) ((u).x * (v).x + (u).y * (v).y + (u).z * (v).z)

@@ -156,7 +156,7 @@ void save_world(char *mname)
     sqr *t = NULL;
     int sc = 0;
     #define spurge while(sc) { gzputc(f, 255); if(sc>255) { gzputc(f, 255); sc -= 255; } else { gzputc(f, sc); sc = 0; } };
-    loopk(cubicsize)
+    loopk(MezzanineLib::GameInit::CubicSize)
     {
         sqr *s = &world[k];
         #define c(f) (s->f==t->f)
@@ -248,7 +248,7 @@ void load_world(char *mname)        // still supports all map formats that have 
 	char texuse[256];
 	loopi(256) texuse[i] = 0;
     sqr *t = NULL;
-    loopk(cubicsize)
+    loopk(MezzanineLib::GameInit::CubicSize)
     {
         sqr *s = &world[k];
         int type = gzgetc(f);

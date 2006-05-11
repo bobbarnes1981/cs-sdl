@@ -415,9 +415,6 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             disconnect_client(lastconnect, "maxclients reached");
         };
     };
-    #ifndef WIN32
-        fflush(stdout);
-    #endif
 };
 
 void cleanupserver()
@@ -457,9 +454,7 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
 
     if(isdedicated)       // do not return, this becomes main loop
     {
-        #ifdef WIN32
         SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
-        #endif
         printf("dedicated server started, waiting for clients...\nCtrl-C to exit\n\n");
         atexit(cleanupserver);
         atexit(enet_deinitialize);
