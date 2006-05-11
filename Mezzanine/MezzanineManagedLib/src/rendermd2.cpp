@@ -108,8 +108,6 @@ bool md2::load(char* filename)
     return true;
 };
 
-float snap(int sn, float f) { return sn ? (float)(((int)(f+sn*0.5f))&(~(sn-1))) : f; };
-
 void md2::scale(int frame, float scale, int sn)
 {
     mverts[frame] = new vec[numVerts];
@@ -119,9 +117,9 @@ void md2::scale(int frame, float scale, int sn)
     {
         uchar *cv = (uchar *)&cf->vertices[vi].vertex;
         vec *v = &(mverts[frame])[vi];
-        v->x =  (snap(sn, cv[0]*cf->scale[0])+cf->translate[0])/sc;
-        v->y = -(snap(sn, cv[1]*cf->scale[1])+cf->translate[1])/sc;
-        v->z =  (snap(sn, cv[2]*cf->scale[2])+cf->translate[2])/sc;
+        v->x =  (MezzanineLib::Render::RenderMD2::Snap(sn, cv[0]*cf->scale[0])+cf->translate[0])/sc;
+        v->y = -(MezzanineLib::Render::RenderMD2::Snap(sn, cv[1]*cf->scale[1])+cf->translate[1])/sc;
+        v->z =  (MezzanineLib::Render::RenderMD2::Snap(sn, cv[2]*cf->scale[2])+cf->translate[2])/sc;
     };
 };
 
@@ -195,7 +193,6 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 
 hashtable<md2 *> *mdllookup = NULL;
 vector<md2 *> mapmodels;
-const int FIRSTMDL = 20;
 
 void delayedload(md2 *m)
 { 
@@ -205,12 +202,10 @@ void delayedload(md2 *m)
         if(!m->load(path(name1))) MezzanineLib::GameInit::Fatal("loadmodel: ", name1);
         sprintf_sd(name2)("packages/models/%s/skin.jpg", m->loadname);
         int xs, ys;
-		MezzanineLib::Render::RenderGl::InstallTexture(FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
+		MezzanineLib::Render::RenderGl::InstallTexture(MezzanineLib::Render::RenderMD2::FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
         m->loaded = true;
     };
 };
-
-int modelnum = 0;
 
 md2 *loadmodel(char *name)
 {
@@ -218,7 +213,7 @@ md2 *loadmodel(char *name)
     md2 **mm = mdllookup->access(name);
     if(mm) return *mm;
     md2 *m = new md2();
-    m->mdlnum = modelnum++;
+    m->mdlnum = MezzanineLib::Render::RenderMD2::modelnum++;
     mapmodelinfo mmi = { 2, 2, 0, 0, "" }; 
     m->mmi = mmi;
     m->loadname = newstring(name);
@@ -250,7 +245,7 @@ void rendermodel(char *mdl, int frame, int range, int tex, float rad, float x, f
     delayedload(m);
     
     int xs, ys;
-    glBindTexture(GL_TEXTURE_2D, tex ? lookuptexture(tex, xs, ys) : FIRSTMDL+m->mdlnum);
+    glBindTexture(GL_TEXTURE_2D, tex ? lookuptexture(tex, xs, ys) : MezzanineLib::Render::RenderMD2::FIRSTMDL+m->mdlnum);
     
     int ix = (int)x;
     int iy = (int)z;

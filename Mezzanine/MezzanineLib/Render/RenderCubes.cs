@@ -32,11 +32,7 @@
 
 using System;
 using System.IO;
-using Tao.Sdl;
-using Tao.OpenGl;
-using SdlDotNet;
 using System.Runtime.InteropServices;
-
 
 namespace MezzanineLib.Render
 {
