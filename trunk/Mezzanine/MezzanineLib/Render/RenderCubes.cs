@@ -46,4 +46,67 @@ namespace MezzanineLib.Render
 		float u, v, x, y, z; 
 		char r, g, b, a; 
 	}
+	public class RenderCubes
+	{
+		public static int curvert;
+		public static int curmaxverts = 10000;
+		public static int nquads;
+		public const float TEXTURESCALE = 32.0f;
+		public static bool floorstrip = false;
+		public static bool deltastrip = false;
+		public static int oh;
+		public static int oy;
+		public static int ox;
+		public static int ogltex;                         // the o* vars are used by the stripification
+		public static int ol3r;
+		public static int ol3g;
+		public static int ol3b;
+		public static int ol4r;
+		public static int ol4g;
+		public static int ol4b;      
+		public static int firstindex;
+		public static bool showm = false;
+		public static int wx1;
+		public static int wy1;
+		public static int wx2;
+		public static int wy2;
+
+		public static float dx(float x) 
+		{ 
+			return x+(float)Math.Sin(x*2+GameInit.LastMillis/1000.0f)*0.04f; 
+		}
+		public static float dy(float x) 
+		{ 
+			return x+(float)Math.Sin(x*2+GameInit.LastMillis/900.0f+Math.PI/5)*0.05f; 
+		}
+
+		public static void AddWaterQuad(int x, int y, int size)       // update bounding rect that contains water
+		{
+			int x2 = x+size;
+			int y2 = y+size;
+			if(RenderCubes.wx1<0)
+			{
+				RenderCubes.wx1 = x;
+				RenderCubes.wy1 = y;
+				RenderCubes.wx2 = x2;
+				RenderCubes.wy2 = y2;
+			}
+			else
+			{
+				if(x<RenderCubes.wx1) RenderCubes.wx1 = x;
+				if(y<RenderCubes.wy1) RenderCubes.wy1 = y;
+				if(x2>RenderCubes.wx2) RenderCubes.wx2 = x2;
+				if(y2>RenderCubes.wy2) RenderCubes.wy2 = y2;
+			};
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void showmip() 
+		{ 
+			showm = !showm; 
+		}
+
+	}
 }

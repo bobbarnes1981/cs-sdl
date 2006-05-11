@@ -41,9 +41,6 @@ void conline(const char *sf, bool highlight)        // add a line to the console
         strcpy_s(cl.cref, sf);
     };
     puts(cl.cref);
-    #ifndef WIN32
-        fflush(stdout);
-    #endif
 };
 
 void conoutf(const char *s, ...)

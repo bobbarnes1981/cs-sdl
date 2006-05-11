@@ -163,12 +163,12 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
         if((s->type==MezzanineLib::BlockTypes::SPACE || s->type==MezzanineLib::BlockTypes::CHF) && s->floor<=vh && render_floor)
         {
             render_flat(s->ftex, xx<<mip, yy<<mip, 1<<mip, s->floor, s, t, u, v, false);
-			if(s->floor<hdr.waterlevel && !SOLID(s)) addwaterquad(xx<<mip, yy<<mip, 1<<mip);
+			if(s->floor<hdr.waterlevel && !SOLID(s)) MezzanineLib::Render::RenderCubes::AddWaterQuad(xx<<mip, yy<<mip, 1<<mip);
         };
         if(s->type==MezzanineLib::BlockTypes::FHF)
         {
             render_flatdelta(s->ftex, xx<<mip, yy<<mip, 1<<mip, df(s), df(t), df(u), df(v), s, t, u, v, false);
-			if(s->floor-s->vdelta/4.0f<hdr.waterlevel && !SOLID(s)) addwaterquad(xx<<mip, yy<<mip, 1<<mip);
+			if(s->floor-s->vdelta/4.0f<hdr.waterlevel && !SOLID(s)) MezzanineLib::Render::RenderCubes::AddWaterQuad(xx<<mip, yy<<mip, 1<<mip);
         };
     }};
 

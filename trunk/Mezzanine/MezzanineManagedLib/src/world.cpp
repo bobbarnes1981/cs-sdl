@@ -7,7 +7,6 @@
 extern char *entnames[];                // lookup from map entities above to strings
 
 sqr *world = NULL;
-int   cubicsize, mipsize;
 
 header hdr;
 
@@ -294,10 +293,10 @@ void setupworld(int factor)
 {
 	MezzanineLib::GameInit::SFactor = factor;
     MezzanineLib::GameInit::SSize = 1<<(MezzanineLib::GameInit::SFactor);
-    cubicsize = MezzanineLib::GameInit::SSize*MezzanineLib::GameInit::SSize;
-    mipsize = cubicsize*134/100;
-    sqr *w = world = (sqr *)alloc(mipsize*sizeof(sqr));
-    loopi(MezzanineLib::GameInit::LargestFactor*2) { wmip[i] = w; w += cubicsize>>(i*2); };
+    MezzanineLib::GameInit::CubicSize = MezzanineLib::GameInit::SSize*MezzanineLib::GameInit::SSize;
+    MezzanineLib::GameInit::MipSize = MezzanineLib::GameInit::CubicSize*134/100;
+    sqr *w = world = (sqr *)alloc(MezzanineLib::GameInit::MipSize*sizeof(sqr));
+    loopi(MezzanineLib::GameInit::LargestFactor*2) { wmip[i] = w; w += MezzanineLib::GameInit::CubicSize>>(i*2); };
 };
 
 void empty_world(int factor, bool force)    // main empty world creation routine, if passed factor -1 will enlarge old world by 1

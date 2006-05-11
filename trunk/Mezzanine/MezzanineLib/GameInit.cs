@@ -171,6 +171,37 @@ namespace MezzanineLib
 			}
 		}
 
+		static int cubicsize;
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int CubicSize
+		{
+			get
+			{
+				return cubicsize;
+			}
+			set
+			{
+				cubicsize = value;
+			}
+		}
+		static int mipsize;          // cubicsize = ssize^2
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int MipSize
+		{
+			get
+			{
+				return mipsize;
+			}
+			set
+			{
+				mipsize = value;
+			}
+		}
+
 		static bool demoplayback;
 		/// <summary>
 		/// 
@@ -233,6 +264,37 @@ namespace MezzanineLib
 			set
 			{
 				ssize = value;
+			}
+		}
+
+		static int gamemode;
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int GameMode
+		{
+			get
+			{
+				return gamemode;
+			}
+			set
+			{
+				gamemode = value;
+			}
+		}
+		static int nextmode;
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int NextMode
+		{
+			get
+			{
+				return nextmode;
+			}
+			set
+			{
+				nextmode = value;
 			}
 		}
 

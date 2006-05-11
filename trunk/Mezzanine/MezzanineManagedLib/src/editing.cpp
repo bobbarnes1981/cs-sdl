@@ -440,7 +440,7 @@ VARF(fullbright, 0, 0, 1,
     if(fullbright)
     {
         if(noteditmode()) return;
-        loopi(mipsize) world[i].r = world[i].g = world[i].b = 176;
+        loopi(MezzanineLib::GameInit::MipSize) world[i].r = world[i].g = world[i].b = 176;
     };
 );
 
