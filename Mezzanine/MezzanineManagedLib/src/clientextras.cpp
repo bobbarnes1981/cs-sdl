@@ -41,12 +41,10 @@ void renderclient(dynent *d, bool team, char *mdlname, bool hellpig, float scale
 	rendermodel(mdlname, frame[n], range[n], 0, 1.5f, d->o.x, mz, d->o.y, d->yaw+90, d->pitch/2, team, scale, speed, 0, basetime);
 };
 
-extern int democlientnum;
-
 void renderclients()
 {
     dynent *d;
-    loopv(players) if((d = players[i]) && (!MezzanineLib::GameInit::DemoPlayback || i!=democlientnum)) renderclient(d, isteam(player1->team, d->team), "monster/ogro", false, 1.0f);
+    loopv(players) if((d = players[i]) && (!MezzanineLib::GameInit::DemoPlayback || i!=MezzanineLib::ClientServer::ClientGame::DemoClientNum)) renderclient(d, isteam(player1->team, d->team), "monster/ogro", false, 1.0f);
 };
 
 // creation of scoreboard pseudo-menu

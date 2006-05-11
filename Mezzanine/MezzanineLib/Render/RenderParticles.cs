@@ -39,7 +39,7 @@ namespace MezzanineLib.Render
 	/// <summary>
 	/// 
 	/// </summary>
-	public class RenderParticles
+	public sealed class RenderParticles
 	{
 		public const int MAXPARTICLES = 10500;
 		public const int NUMPARTCUTOFF = 20;

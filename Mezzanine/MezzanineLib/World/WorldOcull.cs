@@ -42,7 +42,7 @@ namespace MezzanineLib.World
 	/// <summary>
 	/// Summary description for WorldOcull.
 	/// </summary>
-	public class WorldOcull
+	public sealed class WorldOcull
 	{
 		static WorldOcull()
 		{

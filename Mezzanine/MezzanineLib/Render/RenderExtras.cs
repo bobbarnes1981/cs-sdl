@@ -42,7 +42,7 @@ namespace MezzanineLib.Render
 	/// <summary>
 	/// Summary description for RenderExtras.
 	/// </summary>
-	public class RenderExtras
+	public sealed class RenderExtras
 	{
 		static RenderExtras()
 		{

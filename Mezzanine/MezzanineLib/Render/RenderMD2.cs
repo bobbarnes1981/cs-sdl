@@ -39,7 +39,7 @@ namespace MezzanineLib.Render
 	/// <summary>
 	/// 
 	/// </summary>
-	public class RenderMD2
+	public sealed class RenderMD2
 	{
 		public const int FIRSTMDL = 20;
 		public static int modelnum = 0;

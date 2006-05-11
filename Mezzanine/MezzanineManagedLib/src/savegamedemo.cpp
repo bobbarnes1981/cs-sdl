@@ -10,7 +10,6 @@ gzFile f = NULL;
 bool demorecording = false;
 bool demoloading = false;
 dvector playerhistory;
-int democlientnum = 0;
 int islittleendian = 1;
 
 void startdemo();
@@ -228,11 +227,11 @@ void readdemotime()
 
 void startdemo()
 {
-    democlientnum = gzgeti();
+    MezzanineLib::ClientServer::ClientGame::DemoClientNum = gzgeti();
     MezzanineLib::GameInit::DemoPlayback = true;
     starttime = MezzanineLib::GameInit::LastMillis;
     conoutf("now playing demo");
-    dynent *d = getclient(democlientnum);
+    dynent *d = getclient(MezzanineLib::ClientServer::ClientGame::DemoClientNum);
     assert(d);
     *d = *player1;
     readdemotime();
@@ -280,7 +279,7 @@ void demoplaybackstep()
         gzread(f, buf, len);
         localservertoclient(buf, len);  // update game state
         
-        dynent *target = players[democlientnum];
+        dynent *target = players[MezzanineLib::ClientServer::ClientGame::DemoClientNum];
         assert(target); 
         
 		int extras;

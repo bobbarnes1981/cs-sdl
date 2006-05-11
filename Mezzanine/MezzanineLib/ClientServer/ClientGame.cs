@@ -77,8 +77,70 @@ namespace MezzanineLib.ClientServer
 		public char[] team;
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public sealed class ClientGame
 	{
+		public static bool intermission = false;
+		static int framesInMap;
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int FramesInMap
+		{
+			get
+			{
+				return framesInMap;
+			}
+			set
+			{
+				framesInMap = value;
+			}
+		}
+
+//		static string clientMap;
+//
+//		/// <summary>
+//		/// 
+//		/// </summary>
+//		public static string ClientMap 
+//		{
+//			get
+//			{
+//				return clientMap; 
+//			}
+//			set
+//			{
+//				clientMap = value;
+//			}
+//		}
+
+		
+		public static int arenarespawnwait = 0;
+		public static int arenadetectwait  = 0;
+		public static int spawncycle = -1;
+		public static int fixspawn = 2;
+		public static int sleepwait = 0;
+
+		
+		static int demoClientNum;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int DemoClientNum
+		{
+			get
+			{
+				return demoClientNum;
+			}
+			set
+			{
+				demoClientNum = value;
+			}
+		}
+
 		public static void initclient()
 		{
 			//Bindings.getclientmap()[0] = '0';

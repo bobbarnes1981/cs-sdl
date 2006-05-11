@@ -39,7 +39,7 @@ using System.Runtime.InteropServices;
 
 namespace MezzanineLib.Render
 {
-	public class RenderGl
+	public sealed class RenderGl
 	{
 		static Glu.GLUquadric qsphere;
 		static int glmaxtexsize = 256;
