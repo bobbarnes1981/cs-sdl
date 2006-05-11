@@ -51,5 +51,21 @@ namespace MezzanineLib.ClientServer
 
 	public sealed class Server
 	{
+		public static int maxclients = 8;
+		public static bool notgotitems = true;        // true when map has changed and waiting for clients to send item
+		public static int mode = 0;
+
+		public static int interm = 0;
+		public static int minremain = 0;
+		public static int mapend = 0;
+		public static bool mapreload = false;
+		public static bool isdedicated;
+		public static int bsend = 0;
+		public static int brec = 0;
+		public static int laststatus = 0;
+		public static int lastsec = 0;
+		public const int MAXOBUF = 100000;
+		public static int nonlocalclients = 0;
+		public static int lastconnect = 0;
 	}
 }
