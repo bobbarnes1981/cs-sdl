@@ -50,6 +50,8 @@ namespace MezzanineLib.Render
 			// TODO: Add constructor logic here
 			//
 		}
+		public const int MAXSPHERES = 50;
+		public static bool sinit = false;
 
 		static int dBlend = 0;
 		/// <summary>

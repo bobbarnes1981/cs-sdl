@@ -52,6 +52,13 @@ namespace MezzanineLib.Render
 	"hudguns/rocket", 
 	"hudguns/rifle" 
 };
+		public const int MAXTEX = 1000;
+		public const int FIRSTTEX = 1000;                  // opengl id = loaded id + FIRSTTEX
+		// std 1+, sky 14+, mdls 20+
+		public const int MAXFRAMES = 2;                    // increase to allow more complex shader defs
+
+		
+		public static int skyoglid;
 
 		/// <summary>
 		/// 
@@ -438,7 +445,6 @@ namespace MezzanineLib.Render
 			return true;
 		}
 
-		const int MAXFRAMES = 2;                    // increase to allow more complex shader defs
 		int[,] mapping= new int[256, MAXFRAMES];                // ( cube texture, frame ) -> ( opengl id, name )
 		string[,] mapname= new string[256, MAXFRAMES];
 

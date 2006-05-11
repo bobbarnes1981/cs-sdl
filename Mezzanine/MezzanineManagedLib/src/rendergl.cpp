@@ -5,10 +5,6 @@
 #using <MezzanineLib.dll>
 
 using namespace MezzanineLib;
-//#using <Tao.OpenGl.dll>
-//using namespace Tao.OpenGl;
-
-//extern int curvert;
 
 void purgetextures();
 
@@ -18,20 +14,16 @@ GLUquadricObj *qsphere = NULL;
 // each texture slot can have multople texture frames, of which currently only the first is used
 // additional frames can be used for various shaders
 
-const int MAXTEX = 1000;
-int texx[MAXTEX];                           // ( loaded texture ) -> ( name, size )
-int texy[MAXTEX];                           
-string texname[MAXTEX];
-const int FIRSTTEX = 1000;                  // opengl id = loaded id + FIRSTTEX
-// std 1+, sky 14+, mdls 20+
+int texx[MezzanineLib::Render::RenderGl::MAXTEX];                           // ( loaded texture ) -> ( name, size )
+int texy[MezzanineLib::Render::RenderGl::MAXTEX];                           
+string texname[MezzanineLib::Render::RenderGl::MAXTEX];
 
-const int MAXFRAMES = 2;                    // increase to allow more complex shader defs
-int mapping[256][MAXFRAMES];                // ( cube texture, frame ) -> ( opengl id, name )
-string mapname[256][MAXFRAMES];
+int mapping[256][MezzanineLib::Render::RenderGl::MAXFRAMES];                // ( cube texture, frame ) -> ( opengl id, name )
+string mapname[256][MezzanineLib::Render::RenderGl::MAXFRAMES];
 
 void purgetextures()
 {
-    loopi(256) loop(j,MAXFRAMES) mapping[i][j] = 0;
+    loopi(256) loop(j,MezzanineLib::Render::RenderGl::MAXFRAMES) mapping[i][j] = 0;
 };
 
 void texturereset() 
@@ -42,7 +34,7 @@ void texturereset()
 void texture(char *aframe, char *name)
 {
 	int num = Render::RenderGl::CurrentTextureNumber++, frame = atoi(aframe);
-    if(num<0 || num>=256 || frame<0 || frame>=MAXFRAMES) return;
+    if(num<0 || num>=256 || frame<0 || frame>=MezzanineLib::Render::RenderGl::MAXFRAMES) return;
     mapping[num][frame] = 1;
     char *n = mapname[num][frame];
     strcpy_s(n, name);
@@ -57,10 +49,10 @@ int lookuptexture(int tex, int &xs, int &ys)
     int frame = 0;                      // other frames?
     int tid = mapping[tex][frame];
 
-    if(tid>=FIRSTTEX)
+    if(tid>=MezzanineLib::Render::RenderGl::FIRSTTEX)
     {
-        xs = texx[tid-FIRSTTEX];
-        ys = texy[tid-FIRSTTEX];
+        xs = texx[tid-MezzanineLib::Render::RenderGl::FIRSTTEX];
+        ys = texy[tid-MezzanineLib::Render::RenderGl::FIRSTTEX];
         return tid;
     };
 
@@ -71,16 +63,16 @@ int lookuptexture(int tex, int &xs, int &ys)
     {
         if(strcmp(mapname[tex][frame], texname[i])==0)
         {
-            mapping[tex][frame] = tid = i+FIRSTTEX;
+            mapping[tex][frame] = tid = i+MezzanineLib::Render::RenderGl::FIRSTTEX;
             xs = texx[i];
             ys = texy[i];
             return tid;
         };
     };
 
-    if(Render::RenderGl::CurrentTextureNumber==MAXTEX) GameInit::Fatal("loaded too many textures");
+    if(Render::RenderGl::CurrentTextureNumber==MezzanineLib::Render::RenderGl::MAXTEX) GameInit::Fatal("loaded too many textures");
 
-    int tnum = Render::RenderGl::CurrentTextureNumber+FIRSTTEX;
+    int tnum = Render::RenderGl::CurrentTextureNumber+MezzanineLib::Render::RenderGl::FIRSTTEX;
     strcpy_s(texname[Render::RenderGl::CurrentTextureNumber], mapname[tex][frame]);
 
     sprintf_sd(name)("packages%c%s", PATHDIV, texname[Render::RenderGl::CurrentTextureNumber]);
@@ -95,25 +87,23 @@ int lookuptexture(int tex, int &xs, int &ys)
     }
     else
     {
-        return mapping[tex][frame] = FIRSTTEX;  // temp fix
+        return mapping[tex][frame] = MezzanineLib::Render::RenderGl::FIRSTTEX;  // temp fix
     };
 };
-
-int skyoglid;
 
 struct strip { int tex, start, num; };
 vector<strip> strips;
 
 void renderstripssky()
 {
-    glBindTexture(GL_TEXTURE_2D, skyoglid);
-    loopv(strips) if(strips[i].tex==skyoglid) glDrawArrays(GL_TRIANGLE_STRIP, strips[i].start, strips[i].num);
+    glBindTexture(GL_TEXTURE_2D, MezzanineLib::Render::RenderGl::skyoglid);
+    loopv(strips) if(strips[i].tex==MezzanineLib::Render::RenderGl::skyoglid) glDrawArrays(GL_TRIANGLE_STRIP, strips[i].start, strips[i].num);
 };
 
 void renderstrips()
 {
     int lasttex = -1;
-    loopv(strips) if(strips[i].tex!=skyoglid)
+    loopv(strips) if(strips[i].tex!=MezzanineLib::Render::RenderGl::skyoglid)
     {
         if(strips[i].tex!=lasttex)
         {
@@ -187,7 +177,7 @@ void gl_drawframe(int w, int h, float curfps)
     glEnable(GL_TEXTURE_2D);
     
     int xs, ys;
-    skyoglid = lookuptexture(TextureNumbers::DEFAULT_SKY, xs, ys);
+    MezzanineLib::Render::RenderGl::skyoglid = lookuptexture(TextureNumbers::DEFAULT_SKY, xs, ys);
    
     resetcubes();
             
