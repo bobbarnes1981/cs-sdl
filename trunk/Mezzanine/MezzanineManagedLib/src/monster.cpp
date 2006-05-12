@@ -5,15 +5,11 @@
 #using <MezzanineLib.dll>
 
 dvector monsters;
-int nextmonster, spawnremain, numkilled, monstertotal, mtimestart;
 
 VARF(skill, 1, 3, 10, conoutf("skill is now %d", skill));
 
 dvector &getmonsters() { return monsters; };
-void restoremonsterstate() { loopv(monsters) if(monsters[i]->state==MezzanineLib::CSStatus::CS_DEAD) numkilled++; };        // for savegames
-
-#define TOTMFREQ 13
-#define NUMMONSTERTYPES 8
+void restoremonsterstate() { loopv(monsters) if(monsters[i]->state==MezzanineLib::CSStatus::CS_DEAD) MezzanineLib::Game::Monster::numkilled++; };        // for savegames
 
 struct monstertype      // see docs for how these values modify behaviour
 {
@@ -22,7 +18,7 @@ struct monstertype      // see docs for how these values modify behaviour
     char *name, *mdlname;
 }
 
-monstertypes[NUMMONSTERTYPES] =
+monstertypes[MezzanineLib::Game::Monster::NUMMONSTERTYPES] =
 {
     { MezzanineLib::Gun::GUN_FIREBALL,  15, 100, 3, 0,   100, 800, 1, 10, 10, MezzanineLib::Sounds::S_PAINO, MezzanineLib::Sounds::S_DIE1,   "an ogre",     "monster/ogro"    },
     { MezzanineLib::Gun::GUN_CG,        18,  70, 2, 70,   10, 400, 2,  8,  9, MezzanineLib::Sounds::S_PAINR, MezzanineLib::Sounds::S_DEATHR, "a rhino",     "monster/rhino"   },
@@ -36,7 +32,7 @@ monstertypes[NUMMONSTERTYPES] =
 
 dynent *basicmonster(int type, int yaw, int state, int trigger, int move)
 {
-    if(type>=NUMMONSTERTYPES)
+    if(type>=MezzanineLib::Game::Monster::NUMMONSTERTYPES)
     {
         conoutf("warning: unknown monster in spawn: %d", type);
         type = 0;
@@ -70,7 +66,7 @@ dynent *basicmonster(int type, int yaw, int state, int trigger, int move)
 
 void spawnmonster()     // spawn a random monster according to freq distribution in DMSP
 {
-    int n = rnd(TOTMFREQ), type;
+    int n = rnd(MezzanineLib::Game::Monster::TOTMFREQ), type;
     for(int i = 0; ; i++) if((n -= monstertypes[i].freq)<0) { type = i; break; };
 	basicmonster(type, rnd(360), MezzanineLib::MonsterStates::M_SEARCH, 1000, 1);
 };
@@ -79,17 +75,17 @@ void monsterclear()     // called after map start of when toggling edit mode to 
 {
     loopv(monsters) gp()->dealloc(monsters[i], sizeof(dynent)); 
     monsters.setsize(0);
-    numkilled = 0;
-    monstertotal = 0;
-    spawnremain = 0;
+    MezzanineLib::Game::Monster::numkilled = 0;
+    MezzanineLib::Game::Monster::monstertotal = 0;
+    MezzanineLib::Game::Monster::spawnremain = 0;
     if(m_dmsp)
     {
-        nextmonster = mtimestart = MezzanineLib::GameInit::LastMillis+10000;
-        monstertotal = spawnremain = gamemode<0 ? skill*10 : 0;
+        MezzanineLib::Game::Monster::nextmonster = MezzanineLib::Game::Monster::mtimestart = MezzanineLib::GameInit::LastMillis+10000;
+        MezzanineLib::Game::Monster::monstertotal = MezzanineLib::Game::Monster::spawnremain = gamemode<0 ? skill*10 : 0;
     }
     else if(m_classicsp)
     {
-        mtimestart = MezzanineLib::GameInit::LastMillis;
+        MezzanineLib::Game::Monster::mtimestart = MezzanineLib::GameInit::LastMillis;
         loopv(ents) if(ents[i].type==MezzanineLib::StaticEntity::MONSTER)
         {
             dynent *m = basicmonster(ents[i].attr2, ents[i].attr1, MezzanineLib::MonsterStates::M_SLEEP, 100, 0);  
@@ -97,7 +93,7 @@ void monsterclear()     // called after map start of when toggling edit mode to 
             m->o.y = ents[i].y;
             m->o.z = ents[i].z;
             entinmap(m);
-            monstertotal++;
+            MezzanineLib::Game::Monster::monstertotal++;
         };
     };
 };
@@ -277,10 +273,10 @@ void monsterpain(dynent *m, int damage, dynent *d)
     {
         m->state = MezzanineLib::CSStatus::CS_DEAD;
         m->lastaction = MezzanineLib::GameInit::LastMillis;
-        numkilled++;
-        player1->frags = numkilled;
+        MezzanineLib::Game::Monster::numkilled++;
+        player1->frags = MezzanineLib::Game::Monster::numkilled;
         playsound(monstertypes[m->mtype].diesound, &m->o);
-        int remain = monstertotal-numkilled;
+        int remain = MezzanineLib::Game::Monster::monstertotal-MezzanineLib::Game::Monster::numkilled;
         if(remain>0 && remain<=5) conoutf("only %d monster(s) remaining", remain);
     }
     else
@@ -292,21 +288,21 @@ void monsterpain(dynent *m, int damage, dynent *d)
 void endsp(bool allkilled)
 {
     conoutf(allkilled ? "you have cleared the map!" : "you reached the exit!");
-    conoutf("score: %d kills in %d seconds", numkilled, (MezzanineLib::GameInit::LastMillis-mtimestart)/1000);
-    monstertotal = 0;
+    conoutf("score: %d kills in %d seconds", MezzanineLib::Game::Monster::numkilled, (MezzanineLib::GameInit::LastMillis-MezzanineLib::Game::Monster::mtimestart)/1000);
+    MezzanineLib::Game::Monster::monstertotal = 0;
     startintermission();
 };
 
 void monsterthink()
 {
-    if(m_dmsp && spawnremain && MezzanineLib::GameInit::LastMillis>nextmonster)
+    if(m_dmsp && MezzanineLib::Game::Monster::spawnremain && MezzanineLib::GameInit::LastMillis>MezzanineLib::Game::Monster::nextmonster)
     {
-        if(spawnremain--==monstertotal) conoutf("The invasion has begun!");
-        nextmonster = MezzanineLib::GameInit::LastMillis+1000;
+        if(MezzanineLib::Game::Monster::spawnremain--==MezzanineLib::Game::Monster::monstertotal) conoutf("The invasion has begun!");
+        MezzanineLib::Game::Monster::nextmonster = MezzanineLib::GameInit::LastMillis+1000;
         spawnmonster();
     };
     
-    if(monstertotal && !spawnremain && numkilled==monstertotal) endsp(true);
+    if(MezzanineLib::Game::Monster::monstertotal && !MezzanineLib::Game::Monster::spawnremain && MezzanineLib::Game::Monster::numkilled==MezzanineLib::Game::Monster::monstertotal) endsp(true);
     
     loopv(ents)             // equivalent of player entity touch, but only teleports are used
     {

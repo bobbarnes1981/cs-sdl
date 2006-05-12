@@ -232,10 +232,6 @@ int execute(char *p, bool isdown)               // all evaluation happens here, 
 
 // tab-completion of all idents
 
-int completesize = 0, completeidx = 0;
-
-void resetcomplete() { completesize = 0; };
-
 void complete(char *s)
 {
     if(*s!='/')
@@ -246,17 +242,17 @@ void complete(char *s)
         strcat_s(s, t);
     };
     if(!s[1]) return;
-    if(!completesize) { completesize = (int)strlen(s)-1; completeidx = 0; };
+    if(!MezzanineLib::Support::Command::completesize) { MezzanineLib::Support::Command::completesize = (int)strlen(s)-1; MezzanineLib::Support::Command::completeidx = 0; };
     int idx = 0;
     enumerate(idents, ident *, id,
-        if(strncmp(id->name, s+1, completesize)==0 && idx++==completeidx)
+        if(strncmp(id->name, s+1, MezzanineLib::Support::Command::completesize)==0 && idx++==MezzanineLib::Support::Command::completeidx)
         {
             strcpy_s(s, "/");
             strcat_s(s, id->name);
         };
     );
-    completeidx++;
-    if(completeidx>=idx) completeidx = 0;
+    MezzanineLib::Support::Command::completeidx++;
+    if(MezzanineLib::Support::Command::completeidx>=idx) MezzanineLib::Support::Command::completeidx = 0;
 };
 
 bool execfile(char *cfgfile)

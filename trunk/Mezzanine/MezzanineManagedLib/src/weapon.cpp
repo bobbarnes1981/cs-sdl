@@ -6,15 +6,12 @@
 
 struct guninfo { short sound, attackdelay, damage, projspeed, part, kickamount; char *name; };
 
-const int MONSTERDAMAGEFACTOR = 4;
-const int SGRAYS = 20;
-const float SGSPREAD = 2;
-vec sg[SGRAYS];
+vec sg[MezzanineLib::Game::Weapon::SGRAYS];
 
 guninfo guns[9] =
 {
     { MezzanineLib::Sounds::S_PUNCH1,    250,  50, 0,   0,  1, "fist"           },
-    { MezzanineLib::Sounds::S_SG,       1400,  10, 0,   0, 20, "shotgun"        },  // *SGRAYS
+    { MezzanineLib::Sounds::S_SG,       1400,  10, 0,   0, 20, "shotgun"        },  // *MezzanineLib::Game::Weapon::SGRAYS
     { MezzanineLib::Sounds::S_CG,        100,  30, 0,   0,  7, "chaingun"       },
     { MezzanineLib::Sounds::S_RLFIRE,    800, 120, 80,  0, 10, "rocketlauncher" },
     { MezzanineLib::Sounds::S_RIFLE,    1500, 100, 0,   0, 30, "rifle"          },
@@ -55,8 +52,8 @@ COMMAND(weapon, MezzanineLib::Support::FunctionSignatures::ARG_3STR);
 void createrays(vec &from, vec &to)             // create random spread of rays for the shotgun
 {
     vdist(dist, dvec, from, to);
-    float f = dist*SGSPREAD/1000;
-    loopi(SGRAYS)
+    float f = dist*MezzanineLib::Game::Weapon::SGSPREAD/1000;
+    loopi(MezzanineLib::Game::Weapon::SGRAYS)
     {
         #define RNDD (rnd(101)-50)*f
         vec r = { RNDD, RNDD, RNDD };
@@ -106,15 +103,14 @@ char *playerincrosshair()
     return NULL;
 };
 
-const int MAXPROJ = 100;
 struct projectile { vec o, to; float speed; dynent *owner; int gun; bool inuse, local; };
-projectile projs[MAXPROJ];
+projectile projs[MezzanineLib::Game::Weapon::MAXPROJ];
 
-void projreset() { loopi(MAXPROJ) projs[i].inuse = false; };
+void projreset() { loopi(MezzanineLib::Game::Weapon::MAXPROJ) projs[i].inuse = false; };
 
 void newprojectile(vec &from, vec &to, float speed, bool local, dynent *owner, int gun)
 {
-    loopi(MAXPROJ)
+    loopi(MezzanineLib::Game::Weapon::MAXPROJ)
     {
         projectile *p = &projs[i];
         if(p->inuse) continue;
@@ -138,20 +134,17 @@ void hit(int target, int damage, dynent *d, dynent *at)
 	demodamage(damage, d->o);
 };
 
-const float RL_RADIUS = 5;
-const float RL_DAMRAD = 7;   // hack
-
 void radialeffect(dynent *o, vec &v, int cn, int qdam, dynent *at)
 {
     if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return;
     vdist(dist, temp, v, o->o);
     dist -= 2; // account for eye distance imprecision
-    if(dist<RL_DAMRAD) 
+    if(dist<MezzanineLib::Game::Weapon::RL_DAMRAD) 
     {
         if(dist<0) dist = 0;
-        int damage = (int)(qdam*(1-(dist/RL_DAMRAD)));
+        int damage = (int)(qdam*(1-(dist/MezzanineLib::Game::Weapon::RL_DAMRAD)));
         hit(cn, damage, o, at);
-        vmul(temp, (RL_DAMRAD-dist)*damage/800);
+        vmul(temp, (MezzanineLib::Game::Weapon::RL_DAMRAD-dist)*damage/800);
         vadd(o->vel, temp);
     };
 };
@@ -168,7 +161,7 @@ void splash(projectile *p, vec &v, vec &vold, int notthisplayer, int notthismons
     else
     {
         playsound(MezzanineLib::Sounds::S_RLHIT, &v);
-        newsphere(v, RL_RADIUS, 0);
+        newsphere(v, MezzanineLib::Game::Weapon::RL_RADIUS, 0);
         dodynlight(vold, v, 0, 0, p->owner);
         if(!p->local) return;
         radialeffect(player1, v, -1, qdam, p->owner);
@@ -196,12 +189,12 @@ inline void projdamage(dynent *o, projectile *p, vec &v, int i, int im, int qdam
 
 void moveprojectiles(float time)
 {
-    loopi(MAXPROJ)
+    loopi(MezzanineLib::Game::Weapon::MAXPROJ)
     {
         projectile *p = &projs[i];
         if(!p->inuse) continue;
         int qdam = guns[p->gun].damage*(p->owner->quadmillis ? 4 : 1);
-        if(p->owner->monsterstate) qdam /= MONSTERDAMAGEFACTOR;
+        if(p->owner->monsterstate) qdam /= MezzanineLib::Game::Weapon::MONSTERDAMAGEFACTOR;
         vdist(dist, v, p->o, p->to);
         float dtime = dist*1000/p->speed;
         if(time>dtime) dtime = time;
@@ -243,7 +236,7 @@ void shootv(int gun, vec &from, vec &to, dynent *d, bool local)     // create vi
 
         case MezzanineLib::Gun::GUN_SG:
         {
-            loopi(SGRAYS) particle_splash(0, 5, 200, sg[i]);
+            loopi(MezzanineLib::Game::Weapon::SGRAYS) particle_splash(0, 5, 200, sg[i]);
             break;
         };
 
@@ -281,11 +274,11 @@ void raydamage(dynent *o, vec &from, vec &to, dynent *d, int i)
     if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return;
     int qdam = guns[d->gunselect].damage;
     if(d->quadmillis) qdam *= 4;
-    if(d->monsterstate) qdam /= MONSTERDAMAGEFACTOR;
+    if(d->monsterstate) qdam /= MezzanineLib::Game::Weapon::MONSTERDAMAGEFACTOR;
     if(d->gunselect==MezzanineLib::Gun::GUN_SG)
     {
         int damage = 0;
-        loop(r, SGRAYS) if(intersect(o, from, sg[r])) damage += qdam;
+        loop(r, MezzanineLib::Game::Weapon::SGRAYS) if(intersect(o, from, sg[r])) damage += qdam;
         if(damage) hitpush(i, damage, o, d, from, to);
     }
     else if(intersect(o, from, to)) hitpush(i, qdam, o, d, from, to);

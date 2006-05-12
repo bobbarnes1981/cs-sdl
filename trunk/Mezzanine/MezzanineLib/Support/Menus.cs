@@ -39,37 +39,8 @@ using System.Runtime.InteropServices;
 
 namespace MezzanineLib.Support
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public enum IDCommands
-	{ 
-		ID_VAR, 
-		ID_COMMAND, 
-		ID_ALIAS 
-	}
-
-	/// <summary>
-	/// function signatures for script functions, see command.cpp
-	/// </summary>
-	public enum FunctionSignatures 
+	public sealed class Menus
 	{
-		ARG_1INT, ARG_2INT, ARG_3INT, ARG_4INT,
-		ARG_NONE,
-		ARG_1STR, ARG_2STR, ARG_3STR, ARG_5STR,
-		ARG_DOWN, ARG_DWN1,
-		ARG_1EXP, ARG_2EXP,
-		ARG_1EST, ARG_2EST,
-		ARG_VARI
-	}
-	public sealed class Command
-	{
-		public static int completesize = 0;
-		public static int completeidx = 0;
-
-		public static void ResetComplete() 
-		{ 
-			completesize = 0; 
-		}
+		public static int vmenu = -1;
 	}
 }

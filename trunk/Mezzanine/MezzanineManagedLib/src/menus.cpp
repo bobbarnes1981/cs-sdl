@@ -17,14 +17,12 @@ struct gmenu
 
 vector<gmenu> menus;
 
-int vmenu = -1;
-
 ivector menustack;
 
 void menuset(int menu)
 {
-    if((vmenu = menu)>=1) resetmovement(player1);
-    if(vmenu==1) menus[1].menusel = 0;
+    if((MezzanineLib::Support::Menus::vmenu = menu)>=1) resetmovement(player1);
+    if(MezzanineLib::Support::Menus::vmenu==1) menus[1].menusel = 0;
 };
 
 void showmenu(char *name)
@@ -54,10 +52,10 @@ void refreshservers();
 
 bool rendermenu()
 {
-    if(vmenu<0) { menustack.setsize(0); return false; };
-    if(vmenu==1) refreshservers();
-    gmenu &m = menus[vmenu];
-    sprintf_sd(title)(vmenu>1 ? "[ %s menu ]" : "%s", m.name);
+    if(MezzanineLib::Support::Menus::vmenu<0) { menustack.setsize(0); return false; };
+    if(MezzanineLib::Support::Menus::vmenu==1) refreshservers();
+    gmenu &m = menus[MezzanineLib::Support::Menus::vmenu];
+    sprintf_sd(title)(MezzanineLib::Support::Menus::vmenu>1 ? "[ %s menu ]" : "%s", m.name);
     int mdisp = m.items.length();
     int w = 0;
     loopi(mdisp)
@@ -74,7 +72,7 @@ bool rendermenu()
 	MezzanineLib::Render::RenderExtras::BlendBox(x-MezzanineLib::GameInit::FontH/2*3, y-MezzanineLib::GameInit::FontH, x+w+MezzanineLib::GameInit::FontH/2*3, y+h+MezzanineLib::GameInit::FontH, true);
     draw_text(title, x, y,2);
 	y += MezzanineLib::GameInit::FontH*2;
-    if(vmenu)
+    if(MezzanineLib::Support::Menus::vmenu)
     {
         int bh = y+m.menusel*step;
         MezzanineLib::Render::RenderExtras::BlendBox(x-MezzanineLib::GameInit::FontH, bh-10, x+w+MezzanineLib::GameInit::FontH, bh+MezzanineLib::GameInit::FontH+10, false);
@@ -116,8 +114,8 @@ COMMAND(newmenu, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 
 bool menukey(int code, bool isdown)
 {
-    if(vmenu<=0) return false;
-    int menusel = menus[vmenu].menusel;
+    if(MezzanineLib::Support::Menus::vmenu<=0) return false;
+    int menusel = menus[MezzanineLib::Support::Menus::vmenu].menusel;
     if(isdown)
     {
 		if(code==(int)SdlDotNet::Key::Escape)
@@ -128,18 +126,18 @@ bool menukey(int code, bool isdown)
         }
 		else if(code==(int)SdlDotNet::Key::UpArrow || code==-4) menusel--;
 		else if(code==(int)SdlDotNet::Key::DownArrow || code==-5) menusel++;
-        int n = menus[vmenu].items.length();
+        int n = menus[MezzanineLib::Support::Menus::vmenu].items.length();
         if(menusel<0) menusel = n-1;
         else if(menusel>=n) menusel = 0;
-        menus[vmenu].menusel = menusel;
+        menus[MezzanineLib::Support::Menus::vmenu].menusel = menusel;
     }
     else
     {
 		if(code==(int)SdlDotNet::Key::Return || code==-2)
         {
-            char *action = menus[vmenu].items[menusel].action;
-            if(vmenu==1) connects(getservername(menusel));
-            menustack.add(vmenu);
+            char *action = menus[MezzanineLib::Support::Menus::vmenu].items[menusel].action;
+            if(MezzanineLib::Support::Menus::vmenu==1) connects(getservername(menusel));
+            menustack.add(MezzanineLib::Support::Menus::vmenu);
             menuset(-1);
             execute(action, true);
         };

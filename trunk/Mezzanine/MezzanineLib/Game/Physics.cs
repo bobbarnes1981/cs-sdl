@@ -26,7 +26,9 @@
  */
 
 /* 
- * All code Copyright (C) 2006 David Y. Hudson
+ * All C# code Copyright (C) 2006 David Y. Hudson
+ * Mezzanine is a .NET port of Cube (http://cubeengine.com).
+ * Cube is written by Wouter van Oortmerssen
  */
 #endregion License
 
@@ -34,42 +36,22 @@ using System;
 using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
-using SdlDotNet;
 using System.Runtime.InteropServices;
 
-namespace MezzanineLib.Support
+namespace MezzanineLib.Game
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public enum IDCommands
-	{ 
-		ID_VAR, 
-		ID_COMMAND, 
-		ID_ALIAS 
-	}
-
-	/// <summary>
-	/// function signatures for script functions, see command.cpp
-	/// </summary>
-	public enum FunctionSignatures 
+	public sealed class Physics
 	{
-		ARG_1INT, ARG_2INT, ARG_3INT, ARG_4INT,
-		ARG_NONE,
-		ARG_1STR, ARG_2STR, ARG_3STR, ARG_5STR,
-		ARG_DOWN, ARG_DWN1,
-		ARG_1EXP, ARG_2EXP,
-		ARG_1EST, ARG_2EST,
-		ARG_VARI
-	}
-	public sealed class Command
-	{
-		public static int completesize = 0;
-		public static int completeidx = 0;
-
-		public static void ResetComplete() 
+		
+		public static float rad(float x) 
 		{ 
-			completesize = 0; 
+			return (float)(x*Math.PI/180); 
 		}
+		public static int physicsfraction = 0;
+		public static int physicsrepeat = 0;
+		public const int MINFRAMETIME = 20; // physics always simulated at 50fps or better
 	}
 }

@@ -19,7 +19,7 @@ extern DECLSPEC bool CDECL addcommand(char *name, void (*fun)(), int narg);
 extern DECLSPEC int CDECL execute(char *p, bool down = true);
 extern DECLSPEC void CDECL exec(char *cfgfile);
 extern DECLSPEC bool CDECL execfile(char *cfgfile);
-extern DECLSPEC void CDECL resetcomplete();
+//extern DECLSPEC void CDECL resetcomplete();
 extern DECLSPEC void CDECL complete(char *s);
 extern DECLSPEC void CDECL alias(char *name, char *action);
 extern DECLSPEC char CDECL *getalias(char *name);

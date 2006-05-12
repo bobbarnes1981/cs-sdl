@@ -4,13 +4,8 @@
 #using <mscorlib.dll>
 #using <MezzanineLib.dll>
 
-extern int islittleendian;
-
 gzFile f = NULL;
-bool demorecording = false;
-bool demoloading = false;
 dvector playerhistory;
-int islittleendian = 1;
 
 void startdemo();
 
@@ -27,18 +22,18 @@ void stop()
 {
     if(f)
     {
-        if(demorecording) gzputi(-1);
+        if(MezzanineLib::Game::SaveGameDemo::demorecording) gzputi(-1);
         gzclose(f);
     };
     f = NULL;
-    demorecording = false;
+    MezzanineLib::Game::SaveGameDemo::demorecording = false;
     MezzanineLib::GameInit::DemoPlayback = false;
-    demoloading = false;
+    MezzanineLib::Game::SaveGameDemo::demoloading = false;
     loopv(playerhistory) zapdynent(playerhistory[i]);
     playerhistory.setsize(0);
 };
 
-void stopifrecording() { if(demorecording) stop(); };
+void stopifrecording() { if(MezzanineLib::Game::SaveGameDemo::demorecording) stop(); };
 
 void savestate(char *fn)
 {
@@ -46,7 +41,7 @@ void savestate(char *fn)
     f = gzopen(fn, "wb9");
     if(!f) { conoutf("could not write %s", fn); return; };
     gzwrite(f, (void *)"CUBESAVE", 8);
-    gzputc(f, islittleendian);  
+    gzputc(f, MezzanineLib::Game::SaveGameDemo::IsLittleEndian);  
 	gzputi(MezzanineLib::GameInit::SAVEGAMEVERSION);
     gzputi(sizeof(dynent));
     gzwrite(f, getclientmap(), _MAXDEFSTR);
@@ -84,7 +79,7 @@ void loadstate(char *fn)
     string buf;
     gzread(f, buf, 8);
     if(strncmp(buf, "CUBESAVE", 8)) goto out;
-    if(gzgetc(f)!=islittleendian) goto out;     // not supporting save->load accross incompatible architectures simpifies things a LOT
+    if(gzgetc(f)!=MezzanineLib::Game::SaveGameDemo::IsLittleEndian) goto out;     // not supporting save->load accross incompatible architectures simpifies things a LOT
     if(gzgeti()!=MezzanineLib::GameInit::SAVEGAMEVERSION || gzgeti()!=sizeof(dynent)) goto out;
     string mapname;
     gzread(f, mapname, _MAXDEFSTR);
@@ -144,14 +139,11 @@ void loadgamerest()
     };
     
     conoutf("savegame restored");
-    if(demoloading) startdemo(); else stop();
+    if(MezzanineLib::Game::SaveGameDemo::demoloading) startdemo(); else stop();
 };
 
 // demo functions
 
-int starttime = 0;
-int playbacktime = 0;
-int ddamage, bdamage;
 vec dorig;
 
 void record(char *name)
@@ -163,18 +155,18 @@ void record(char *name)
     savestate(fn);
     gzputi(cn);
     conoutf("started recording demo to %s", fn);
-    demorecording = true;
-    starttime = MezzanineLib::GameInit::LastMillis;
-	ddamage = bdamage = 0;
+    MezzanineLib::Game::SaveGameDemo::demorecording = true;
+    MezzanineLib::Game::SaveGameDemo::starttime = MezzanineLib::GameInit::LastMillis;
+	MezzanineLib::Game::SaveGameDemo::ddamage = MezzanineLib::Game::SaveGameDemo::bdamage = 0;
 };
 
-void demodamage(int damage, vec &o) { ddamage = damage; dorig = o; };
-void demoblend(int damage) { bdamage = damage; };
+void demodamage(int damage, vec &o) { MezzanineLib::Game::SaveGameDemo::ddamage = damage; dorig = o; };
+void demoblend(int damage) { MezzanineLib::Game::SaveGameDemo::bdamage = damage; };
 
 void incomingdemodata(uchar *buf, int len, bool extras)
 {
-    if(!demorecording) return;
-    gzputi(MezzanineLib::GameInit::LastMillis-starttime);
+    if(!MezzanineLib::Game::SaveGameDemo::demorecording) return;
+    gzputi(MezzanineLib::GameInit::LastMillis-MezzanineLib::Game::SaveGameDemo::starttime);
     gzputi(len);
     gzwrite(f, buf, len);
     gzput(extras);
@@ -182,17 +174,17 @@ void incomingdemodata(uchar *buf, int len, bool extras)
     {
         gzput(player1->gunselect);
         gzput(player1->lastattackgun);
-        gzputi(player1->lastaction-starttime);
+        gzputi(player1->lastaction-MezzanineLib::Game::SaveGameDemo::starttime);
         gzputi(player1->gunwait);
         gzputi(player1->health);
         gzputi(player1->armour);
         gzput(player1->armourtype);
         loopi(MezzanineLib::Gun::NUMGUNS) gzput(player1->ammo[i]);
         gzput(player1->state);
-		gzputi(bdamage);
-		bdamage = 0;
-		gzputi(ddamage);
-		if(ddamage)	{ gzputv(dorig); ddamage = 0; };
+		gzputi(MezzanineLib::Game::SaveGameDemo::bdamage);
+		MezzanineLib::Game::SaveGameDemo::bdamage = 0;
+		gzputi(MezzanineLib::Game::SaveGameDemo::ddamage);
+		if(MezzanineLib::Game::SaveGameDemo::ddamage)	{ gzputv(dorig); MezzanineLib::Game::SaveGameDemo::ddamage = 0; };
         // FIXME: add all other client state which is not send through the network
     };
 };
@@ -201,35 +193,35 @@ void demo(char *name)
 {
     sprintf_sd(fn)("demos/%s.cdgz", name);
     loadstate(fn);
-    demoloading = true;
+    MezzanineLib::Game::SaveGameDemo::demoloading = true;
 };
 
 void stopreset()
 {
-    conoutf("demo stopped (%d msec elapsed)", MezzanineLib::GameInit::LastMillis-starttime);
+    conoutf("demo stopped (%d msec elapsed)", MezzanineLib::GameInit::LastMillis-MezzanineLib::Game::SaveGameDemo::starttime);
     stop();
     loopv(players) zapdynent(players[i]);
     disconnect(0, 0);
 };
 
 VAR(demoplaybackspeed, 10, 100, 1000);
-int scaletime(int t) { return (int)(t*(100.0f/demoplaybackspeed))+starttime; };
+int scaletime(int t) { return (int)(t*(100.0f/demoplaybackspeed))+MezzanineLib::Game::SaveGameDemo::starttime; };
 
 void readdemotime()
 {   
-    if(gzeof(f) || (playbacktime = gzgeti())==-1)
+    if(gzeof(f) || (MezzanineLib::Game::SaveGameDemo::playbacktime = gzgeti())==-1)
     {
         stopreset();
         return;
     };
-    playbacktime = scaletime(playbacktime);
+    MezzanineLib::Game::SaveGameDemo::playbacktime = scaletime(MezzanineLib::Game::SaveGameDemo::playbacktime);
 };
 
 void startdemo()
 {
     MezzanineLib::ClientServer::ClientGame::DemoClientNum = gzgeti();
     MezzanineLib::GameInit::DemoPlayback = true;
-    starttime = MezzanineLib::GameInit::LastMillis;
+    MezzanineLib::Game::SaveGameDemo::starttime = MezzanineLib::GameInit::LastMillis;
     conoutf("now playing demo");
     dynent *d = getclient(MezzanineLib::ClientServer::ClientGame::DemoClientNum);
     assert(d);
@@ -266,7 +258,7 @@ void fixwrap(dynent *a, dynent *b)
 
 void demoplaybackstep()
 {
-    while(MezzanineLib::GameInit::DemoPlayback && MezzanineLib::GameInit::LastMillis>=playbacktime)
+    while(MezzanineLib::GameInit::DemoPlayback && MezzanineLib::GameInit::LastMillis>=MezzanineLib::Game::SaveGameDemo::playbacktime)
     {
         int len = gzgeti();
         if(len<1 || len>MezzanineLib::GameInit::MAXTRANS)
@@ -294,18 +286,18 @@ void demoplaybackstep()
             target->armourtype = gzget();
             loopi(MezzanineLib::Gun::NUMGUNS) target->ammo[i] = gzget();
             target->state = gzget();
-            target->lastmove = playbacktime;
-			if(bdamage = gzgeti()) MezzanineLib::Render::RenderExtras::DamageBlend(bdamage);
-			if(ddamage = gzgeti()) { gzgetv(dorig); particle_splash(3, ddamage, 1000, dorig); };
+            target->lastmove = MezzanineLib::Game::SaveGameDemo::playbacktime;
+			if(MezzanineLib::Game::SaveGameDemo::bdamage = gzgeti()) MezzanineLib::Render::RenderExtras::DamageBlend(MezzanineLib::Game::SaveGameDemo::bdamage);
+			if(MezzanineLib::Game::SaveGameDemo::ddamage = gzgeti()) { gzgetv(dorig); particle_splash(3, MezzanineLib::Game::SaveGameDemo::ddamage, 1000, dorig); };
             // FIXME: set more client state here
         };
         
         // insert latest copy of player into history
-        if(extras && (playerhistory.empty() || playerhistory.last()->lastupdate!=playbacktime))
+        if(extras && (playerhistory.empty() || playerhistory.last()->lastupdate!=MezzanineLib::Game::SaveGameDemo::playbacktime))
         {
             dynent *d = newdynent();
             *d = *target;
-            d->lastupdate = playbacktime;
+            d->lastupdate = MezzanineLib::Game::SaveGameDemo::playbacktime;
             playerhistory.add(d);
             if(playerhistory.length()>20)
             {

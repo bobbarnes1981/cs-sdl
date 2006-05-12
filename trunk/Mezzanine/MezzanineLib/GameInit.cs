@@ -411,7 +411,7 @@ namespace MezzanineLib
 		/// <param name="input"></param>
 		public static void Log(string input)
 		{
-			Console.WriteLine("init: {0}", input);
+			System.Console.WriteLine("init: {0}", input);
 		}
 
 		/// <summary>
@@ -421,7 +421,7 @@ namespace MezzanineLib
 		/// <param name="o"></param>
 		public static void Fatal(string s, string o)
 		{
-			Console.WriteLine(s + o + Sdl.SDL_GetError());
+			System.Console.WriteLine(s + o + Sdl.SDL_GetError());
 			Cleanup(s + o + Sdl.SDL_GetError());
 		}
 
