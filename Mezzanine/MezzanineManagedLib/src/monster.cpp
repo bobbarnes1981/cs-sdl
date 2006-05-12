@@ -171,7 +171,7 @@ void monsteraction(dynent *m)           // main AI thinking routine, called ever
     };
 
     vdist(disttoenemy, vectoenemy, m->o, m->enemy->o);                         
-    m->pitch = atan2(m->enemy->o.z-m->o.z, disttoenemy)*180/System::Math::PI;         
+    m->pitch = atan2(m->enemy->o.z-m->o.z, disttoenemy)*180/((float)System::Math::PI);         
 
     if(m->blocked)                                                              // special case: if we run into scenery
     {
@@ -187,7 +187,7 @@ void monsteraction(dynent *m)           // main AI thinking routine, called ever
         };
     };
     
-    float enemyyaw = -(float)atan2(m->enemy->o.x - m->o.x, m->enemy->o.y - m->o.y)/System::Math::PI*180+180;
+    float enemyyaw = -(float)atan2(m->enemy->o.x - m->o.x, m->enemy->o.y - m->o.y)/((float)System::Math::PI)*180+180;
     
     switch(m->monsterstate)
     {
