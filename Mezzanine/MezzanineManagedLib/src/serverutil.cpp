@@ -59,14 +59,13 @@ char msgsizelookup(int msg)
 // sending of maps between clients
 
 string copyname;
-int copysize;
 uchar *copydata = NULL;
 
 void sendmaps(int n, string mapname, int mapsize, uchar *mapdata)
 {
     if(mapsize <= 0 || mapsize > 256*256) return;
     strcpy_s(copyname, mapname);
-    copysize = mapsize;
+    MezzanineLib::ClientServer::ServerUtil::copysize = mapsize;
     if(copydata) free(copydata);
     copydata = (uchar *)alloc(mapsize);
     memcpy(copydata, mapdata, mapsize);
@@ -75,14 +74,14 @@ void sendmaps(int n, string mapname, int mapsize, uchar *mapdata)
 ENetPacket *recvmap(int n)
 {
     if(!copydata) return NULL;
-    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS + copysize, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS + MezzanineLib::ClientServer::ServerUtil::copysize, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
     putint(p, MezzanineLib::NetworkMessages::SV_RECVMAP);
     sendstring(copyname, p);
-    putint(p, copysize);
-    memcpy(p, copydata, copysize);
-    p += copysize;
+    putint(p, MezzanineLib::ClientServer::ServerUtil::copysize);
+    memcpy(p, copydata, MezzanineLib::ClientServer::ServerUtil::copysize);
+    p += MezzanineLib::ClientServer::ServerUtil::copysize;
     *(ushort *)start = ENET_HOST_TO_NET_16(p-start);
     enet_packet_resize(packet, p-start);
 	return packet;

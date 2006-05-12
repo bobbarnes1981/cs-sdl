@@ -53,7 +53,6 @@ uchar *stripheader(uchar *b)
 };
 
 ENetAddress masterserver = { ENET_HOST_ANY, 80 };
-int updmaster = 0;
 string masterbase;
 string masterpath;
 uchar masterrep[MezzanineLib::GameInit::MAXTRANS];
@@ -61,14 +60,14 @@ ENetBuffer masterb;
 
 void updatemasterserver(int seconds)
 {
-    if(seconds>updmaster)       // send alive signal to masterserver every hour of uptime
+    if(seconds>MezzanineLib::ClientServer::ServerMS::updmaster)       // send alive signal to masterserver every hour of uptime
     {
 		sprintf_sd(path)("%sregister.do?action=add", masterpath);
 		httpgetsend(masterserver, masterbase, path, "cubeserver", "Cube Server");
 		masterrep[0] = 0;
 		masterb.data = masterrep;
 		masterb.dataLength = MezzanineLib::GameInit::MAXTRANS-1;
-        updmaster = seconds+60*60;
+        MezzanineLib::ClientServer::ServerMS::updmaster = seconds+60*60;
     };
 }; 
 

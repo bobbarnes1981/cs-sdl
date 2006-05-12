@@ -24,7 +24,6 @@ vector<char *> resolverqueries;
 vector<resolverresult> resolverresults;
 SDL_mutex *resolvermutex;
 SDL_sem *resolversem;
-int resolverlimit = 1000;
 
 int resolverloop(void * data)
 {
@@ -57,7 +56,7 @@ int resolverloop(void * data)
 
 void resolverinit(int threads, int limit)
 {
-    resolverlimit = limit;
+    MezzanineLib::ClientServer::ServerBrowser::resolverlimit = limit;
     resolversem = SDL_CreateSemaphore(0);
     resolvermutex = SDL_CreateMutex();
 
@@ -120,7 +119,7 @@ bool resolvercheck(char **name, ENetAddress *address)
         resolverthread &rt = resolverthreads[i];
         if(rt.query)
         {
-            if(MezzanineLib::GameInit::LastMillis - rt.starttime > resolverlimit)        
+            if(MezzanineLib::GameInit::LastMillis - rt.starttime > MezzanineLib::ClientServer::ServerBrowser::resolverlimit)        
             {
                 resolverstop(rt, true);
                 *name = rt.query;
@@ -145,7 +144,6 @@ struct serverinfo
 
 vector<serverinfo> servers;
 ENetSocket pingsock = ENET_SOCKET_NULL;
-int lastinfo = 0;
 
 char *getservername(int n) { return servers[n].name; };
 
@@ -181,7 +179,7 @@ void pingservers()
         buf.dataLength = p - ping;
         enet_socket_send(pingsock, &si.address, &buf, 1);
     };
-    lastinfo = MezzanineLib::GameInit::LastMillis;
+    MezzanineLib::ClientServer::ServerBrowser::lastinfo = MezzanineLib::GameInit::LastMillis;
 };
   
 void checkresolver()
@@ -247,7 +245,7 @@ void refreshservers()
 {
     checkresolver();
     checkpings();
-    if(MezzanineLib::GameInit::LastMillis - lastinfo >= 5000) pingservers();
+    if(MezzanineLib::GameInit::LastMillis - MezzanineLib::ClientServer::ServerBrowser::lastinfo >= 5000) pingservers();
     servers.sort((void *)sicompare);
     int maxmenu = 16;
     loopv(servers)
@@ -303,5 +301,3 @@ void writeservercfg()
     loopvrev(servers) fprintf(f, "addserver %s\n", servers[i].name);
     fclose(f);
 };
-
-
