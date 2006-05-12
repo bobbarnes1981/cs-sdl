@@ -22,8 +22,8 @@ void computeraytable(float vx, float vy)
 
     float apitch = (float)fabs(player1->pitch);
     float af = getvar("fov")/2+apitch/1.5f+3;
-    float byaw = (player1->yaw-90+af)/(float)(360*System::Math::PI*2);
-    float syaw = (player1->yaw-90-af)/(float)(360*System::Math::PI*2);
+    float byaw = (player1->yaw-90+af)/360*System::Math::PI*2;
+    float syaw = (player1->yaw-90-af)/360*System::Math::PI*2;
 
     loopi(WorldOcull::NumRays)
     {
