@@ -27,8 +27,8 @@
 
 /* 
  * All C# code Copyright (C) 2006 David Y. Hudson
- * Mezzanine is a .NET port of Cube (http://cubeengine.com).
- * Cube is written by Wouter van Oortmerssen
+ * Mezzanine is a .NET port of Cube (version released on 2005-Aug-29).
+ * Cube was written by Wouter van Oortmerssen (http://cubeengine.com)
  */
 #endregion License
 
