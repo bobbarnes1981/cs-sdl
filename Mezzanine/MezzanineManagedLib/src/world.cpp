@@ -2,7 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::World;
 
 extern char *entnames[];                // lookup from map entities above to strings
 

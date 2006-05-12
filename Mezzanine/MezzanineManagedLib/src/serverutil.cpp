@@ -2,7 +2,9 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::ClientServer;
+
 
 // all network traffic is in 32bit ints, which are then compressed using the following simple scheme (assumes that most values are small).
 
@@ -65,7 +67,7 @@ void sendmaps(int n, string mapname, int mapsize, uchar *mapdata)
 {
     if(mapsize <= 0 || mapsize > 256*256) return;
     strcpy_s(copyname, mapname);
-    MezzanineLib::ClientServer::ServerUtil::copysize = mapsize;
+    ServerUtil::copysize = mapsize;
     if(copydata) free(copydata);
     copydata = (uchar *)alloc(mapsize);
     memcpy(copydata, mapdata, mapsize);
@@ -74,14 +76,14 @@ void sendmaps(int n, string mapname, int mapsize, uchar *mapdata)
 ENetPacket *recvmap(int n)
 {
     if(!copydata) return NULL;
-    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS + MezzanineLib::ClientServer::ServerUtil::copysize, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS + ServerUtil::copysize, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
     putint(p, MezzanineLib::NetworkMessages::SV_RECVMAP);
     sendstring(copyname, p);
-    putint(p, MezzanineLib::ClientServer::ServerUtil::copysize);
-    memcpy(p, copydata, MezzanineLib::ClientServer::ServerUtil::copysize);
-    p += MezzanineLib::ClientServer::ServerUtil::copysize;
+    putint(p, ServerUtil::copysize);
+    memcpy(p, copydata, ServerUtil::copysize);
+    p += ServerUtil::copysize;
     *(ushort *)start = ENET_HOST_TO_NET_16(p-start);
     enet_packet_resize(packet, p-start);
 	return packet;

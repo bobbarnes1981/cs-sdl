@@ -3,7 +3,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::World;
 
 void render_wall(sqr *o, sqr *s, int x1, int y1, int x2, int y2, int mip, sqr *d1, sqr *d2, bool topleft)
 {
@@ -98,10 +99,10 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
     int sz = MezzanineLib::GameInit::SSize>>mip;
     int vxx = ((int)vx+(1<<mip)/2)>>mip;
     int vyy = ((int)vy+(1<<mip)/2)>>mip;
-    int lx = vxx-MezzanineLib::World::WorldRender::lodleft;   // these mark the rect inside the current rest that we want to render using a lower mip level
-    int ly = vyy-MezzanineLib::World::WorldRender::lodtop;
-    int rx = vxx+MezzanineLib::World::WorldRender::lodright;
-    int ry = vyy+MezzanineLib::World::WorldRender::lodbot;
+    int lx = vxx-WorldRender::lodleft;   // these mark the rect inside the current rest that we want to render using a lower mip level
+    int ly = vyy-WorldRender::lodtop;
+    int rx = vxx+WorldRender::lodright;
+    int ry = vyy+WorldRender::lodbot;
 
     float fsize = (float)(1<<mip);
     for(int ox = x; ox<xs; ox++) for(int oy = y; oy<ys; oy++)       // first collect occlusion information for this block
@@ -143,7 +144,7 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
         };
         stats[mip]++;
         LOOPD
-        if((s->type==MezzanineLib::BlockTypes::SPACE || s->type==MezzanineLib::BlockTypes::FHF) && s->ceil>=vh && MezzanineLib::World::WorldRender::render_ceil)
+        if((s->type==MezzanineLib::BlockTypes::SPACE || s->type==MezzanineLib::BlockTypes::FHF) && s->ceil>=vh && WorldRender::render_ceil)
             render_flat(s->ctex, xx<<mip, yy<<mip, 1<<mip, s->ceil, s, t, u, v, true);
         if(s->type==MezzanineLib::BlockTypes::CHF) //if(s->ceil>=vh)
             render_flatdelta(s->ctex, xx<<mip, yy<<mip, 1<<mip, dc(s), dc(t), dc(u), dc(v), s, t, u, v, true);
@@ -151,7 +152,7 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
 
     LOOPH continue;     // floors
         LOOPD
-        if((s->type==MezzanineLib::BlockTypes::SPACE || s->type==MezzanineLib::BlockTypes::CHF) && s->floor<=vh && MezzanineLib::World::WorldRender::render_floor)
+        if((s->type==MezzanineLib::BlockTypes::SPACE || s->type==MezzanineLib::BlockTypes::CHF) && s->floor<=vh && WorldRender::render_floor)
         {
             render_flat(s->ftex, xx<<mip, yy<<mip, 1<<mip, s->floor, s, t, u, v, false);
 			if(s->floor<hdr.waterlevel && !SOLID(s)) MezzanineLib::Render::RenderCubes::AddWaterQuad(xx<<mip, yy<<mip, 1<<mip);
@@ -230,11 +231,11 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
 
 void distlod(int &low, int &high, int angle, float widef)
 {
-    float f = 90.0f/MezzanineLib::World::WorldRender::lod/widef;
+    float f = 90.0f/WorldRender::lod/widef;
     low = (int)((90-angle)/f);
     high = (int)(angle/f);
-    if(low<MezzanineLib::World::WorldRender::min_lod) low = MezzanineLib::World::WorldRender::min_lod;
-    if(high<MezzanineLib::World::WorldRender::min_lod) high = MezzanineLib::World::WorldRender::min_lod;
+    if(low<WorldRender::min_lod) low = WorldRender::min_lod;
+    if(high<WorldRender::min_lod) high = WorldRender::min_lod;
 };
 
 // does some out of date view frustrum optimisation that doesn't contribute much anymore
@@ -242,42 +243,42 @@ void distlod(int &low, int &high, int angle, float widef)
 void render_world(float vx, float vy, float vh, int yaw, int pitch, float fov, int w, int h)
 {
     loopi(MezzanineLib::GameInit::LargestFactor) stats[i] = 0;
-    MezzanineLib::World::WorldRender::min_lod = MezzanineLib::World::WorldRender::MIN_LOD+abs(pitch)/12;
+    WorldRender::min_lod = WorldRender::MIN_LOD+abs(pitch)/12;
     yaw = 360-yaw;
     float widef = fov/75.0f;
     int cdist = abs(yaw%90-45);
     if(cdist<7)    // hack to avoid popup at high fovs at 45 yaw
     {
-        MezzanineLib::World::WorldRender::min_lod = max(MezzanineLib::World::WorldRender::min_lod, (int)(MezzanineLib::World::WorldRender::MIN_LOD+(10-cdist)/1.0f*widef)); // less if MezzanineLib::World::WorldRender::lod worked better
+        WorldRender::min_lod = max(WorldRender::min_lod, (int)(WorldRender::MIN_LOD+(10-cdist)/1.0f*widef)); // less if WorldRender::lod worked better
         widef = 1.0f;
     };
-    MezzanineLib::World::WorldRender::lod = MezzanineLib::World::WorldRender::MAX_LOD;
-    MezzanineLib::World::WorldRender::lodtop = MezzanineLib::World::WorldRender::lodbot = MezzanineLib::World::WorldRender::lodleft = MezzanineLib::World::WorldRender::lodright = MezzanineLib::World::WorldRender::min_lod;
+    WorldRender::lod = WorldRender::MAX_LOD;
+    WorldRender::lodtop = WorldRender::lodbot = WorldRender::lodleft = WorldRender::lodright = WorldRender::min_lod;
     if(yaw>45 && yaw<=135)
     {
-        MezzanineLib::World::WorldRender::lodleft = MezzanineLib::World::WorldRender::lod;
-        distlod(MezzanineLib::World::WorldRender::lodtop, MezzanineLib::World::WorldRender::lodbot, yaw-45, widef);
+        WorldRender::lodleft = WorldRender::lod;
+        distlod(WorldRender::lodtop, WorldRender::lodbot, yaw-45, widef);
     }
     else if(yaw>135 && yaw<=225)
     {
-        MezzanineLib::World::WorldRender::lodbot = MezzanineLib::World::WorldRender::lod;
-        distlod(MezzanineLib::World::WorldRender::lodleft, MezzanineLib::World::WorldRender::lodright, yaw-135, widef);
+        WorldRender::lodbot = WorldRender::lod;
+        distlod(WorldRender::lodleft, WorldRender::lodright, yaw-135, widef);
     }
     else if(yaw>225 && yaw<=315)
     {
-        MezzanineLib::World::WorldRender::lodright = MezzanineLib::World::WorldRender::lod;
-        distlod(MezzanineLib::World::WorldRender::lodbot, MezzanineLib::World::WorldRender::lodtop, yaw-225, widef);
+        WorldRender::lodright = WorldRender::lod;
+        distlod(WorldRender::lodbot, WorldRender::lodtop, yaw-225, widef);
     }
     else
     {
-        MezzanineLib::World::WorldRender::lodtop = MezzanineLib::World::WorldRender::lod;
-        distlod(MezzanineLib::World::WorldRender::lodright, MezzanineLib::World::WorldRender::lodleft, yaw<=45 ? yaw+45 : yaw-315, widef);
+        WorldRender::lodtop = WorldRender::lod;
+        distlod(WorldRender::lodright, WorldRender::lodleft, yaw<=45 ? yaw+45 : yaw-315, widef);
     };
     float hyfov = fov*h/w/2;
-    MezzanineLib::World::WorldRender::render_floor = pitch<hyfov;
-    MezzanineLib::World::WorldRender::render_ceil  = -pitch<hyfov;
+    WorldRender::render_floor = pitch<hyfov;
+    WorldRender::render_ceil  = -pitch<hyfov;
 
-    render_seg_new(vx, vy, vh, MezzanineLib::World::WorldRender::MAX_MIP, 0, 0, MezzanineLib::GameInit::SSize>>MezzanineLib::World::WorldRender::MAX_MIP, MezzanineLib::GameInit::SSize>>MezzanineLib::World::WorldRender::MAX_MIP);
+    render_seg_new(vx, vy, vh, WorldRender::MAX_MIP, 0, 0, MezzanineLib::GameInit::SSize>>WorldRender::MAX_MIP, MezzanineLib::GameInit::SSize>>WorldRender::MAX_MIP);
     mipstats(stats[0], stats[1], stats[2]);
 };
 

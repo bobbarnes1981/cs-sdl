@@ -2,14 +2,12 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
-//#define NUMRAYS 512
+using namespace MezzanineLib;
+using namespace MezzanineLib::World;
 
-float rdist[MezzanineLib::World::WorldOcull::NumRays];
-//bool ocull = true;
-//float odist = 256;
+float rdist[WorldOcull::NumRays];
 
-void toggleocull() { MezzanineLib::World::WorldOcull::Ocull = !MezzanineLib::World::WorldOcull::Ocull; };
+void toggleocull() { WorldOcull::Ocull = !WorldOcull::Ocull; };
 
 COMMAND(toggleocull, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
@@ -18,18 +16,18 @@ COMMAND(toggleocull, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
 void computeraytable(float vx, float vy)
 {
-    if(!MezzanineLib::World::WorldOcull::Ocull) return;
+    if(!WorldOcull::Ocull) return;
 
-    MezzanineLib::World::WorldOcull::ODist = getvar("fog")*1.5f;
+    WorldOcull::ODist = getvar("fog")*1.5f;
 
     float apitch = (float)fabs(player1->pitch);
     float af = getvar("fov")/2+apitch/1.5f+3;
-    float byaw = (player1->yaw-90+af)/360*System::Math::PI*2;
-    float syaw = (player1->yaw-90-af)/360*System::Math::PI*2;
+    float byaw = (player1->yaw-90+af)/(float)(360*System::Math::PI*2);
+    float syaw = (player1->yaw-90-af)/(float)(360*System::Math::PI*2);
 
-    loopi(MezzanineLib::World::WorldOcull::NumRays)
+    loopi(WorldOcull::NumRays)
     {
-        float angle = i*System::Math::PI*2/MezzanineLib::World::WorldOcull::NumRays;
+        float angle = (float)(i*System::Math::PI*2)/WorldOcull::NumRays;
         if((apitch>45 // must be bigger if fov>120
         || (angle<byaw && angle>syaw)
         || (angle<byaw-System::Math::PI*2 && angle>syaw-System::Math::PI*2)
@@ -37,7 +35,7 @@ void computeraytable(float vx, float vy)
         && !OUTBORD(vx, vy)
         && !SOLID(S(fast_f2nat(vx), fast_f2nat(vy))))       // try to avoid tracing ray if outside of frustrum
         {
-            float ray = i*8/(float)MezzanineLib::World::WorldOcull::NumRays;
+            float ray = i*8/(float)WorldOcull::NumRays;
             float dx, dy;
             if(ray>1 && ray<3) { dx = -(ray-2); dy = 1; }
             else if(ray>=3 && ray<5) { dx = -1; dy = -(ray-4); }
@@ -71,7 +69,7 @@ inline float ma(float x, float y) { return x==0 ? (y>0 ? 2 : -2) : y/x; };
 
 int isoccluded(float vx, float vy, float cx, float cy, float csize)     // v = viewer, c = cube to test 
 {
-    if(!MezzanineLib::World::WorldOcull::Ocull) return 0;
+    if(!WorldOcull::Ocull) return 0;
 
     float nx = vx, ny = vy;     // n = point on the border of the cube that is closest to v
     if(nx<cx) nx = cx;
@@ -80,7 +78,7 @@ int isoccluded(float vx, float vy, float cx, float cy, float csize)     // v = v
     else if(ny>cy+csize) ny = cy+csize;
     float xdist = (float)fabs(nx-vx);
     float ydist = (float)fabs(ny-vy);
-    if(xdist>MezzanineLib::World::WorldOcull::ODist || ydist>MezzanineLib::World::WorldOcull::ODist) return 2;
+    if(xdist>WorldOcull::ODist || ydist>WorldOcull::ODist) return 2;
     float dist = xdist+ydist-1; // 1 needed?
 
     // ABC
@@ -123,13 +121,13 @@ int isoccluded(float vx, float vy, float cx, float cy, float csize)     // v = v
         }
         else                { h = ca(cx+csize-vx, cy-vy); l = ca(cx-vx, cy+csize-vy); };                            // H
     };
-    int si = fast_f2nat(h*(MezzanineLib::World::WorldOcull::NumRays/8))+MezzanineLib::World::WorldOcull::NumRays;     // get indexes into occlusion map from angles
-    int ei = fast_f2nat(l*(MezzanineLib::World::WorldOcull::NumRays/8))+MezzanineLib::World::WorldOcull::NumRays+1; 
-    if(ei<=si) ei += MezzanineLib::World::WorldOcull::NumRays;
+    int si = fast_f2nat(h*(WorldOcull::NumRays/8))+WorldOcull::NumRays;     // get indexes into occlusion map from angles
+    int ei = fast_f2nat(l*(WorldOcull::NumRays/8))+WorldOcull::NumRays+1; 
+    if(ei<=si) ei += WorldOcull::NumRays;
 
     for(int i = si; i<=ei; i++)
     {
-        if(dist<rdist[i&(MezzanineLib::World::WorldOcull::NumRays-1)]) return 0;     // if any value in this segment of the occlusion map is further away then cube is not occluded
+        if(dist<rdist[i&(WorldOcull::NumRays-1)]) return 0;     // if any value in this segment of the occlusion map is further away then cube is not occluded
     };
 
     return 1;                                       // cube is entirely occluded

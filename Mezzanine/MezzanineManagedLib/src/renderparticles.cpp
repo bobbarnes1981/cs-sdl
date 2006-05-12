@@ -2,23 +2,24 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Render;
 
 struct particle { vec o, d; int fade, type; int millis; particle *next; };
-particle particles[MezzanineLib::Render::RenderParticles::MAXPARTICLES], *parlist = NULL, *parempty = NULL;
+particle particles[RenderParticles::MAXPARTICLES], *parlist = NULL, *parempty = NULL;
 
-VARP(maxparticles, 100, 2000, MezzanineLib::Render::RenderParticles::MAXPARTICLES-500);
+VARP(maxparticles, 100, 2000, RenderParticles::MAXPARTICLES-500);
 
 void newparticle(vec &o, vec &d, int fade, int type)
 {
-    if(!MezzanineLib::Render::RenderParticles::parinit)
+    if(!RenderParticles::parinit)
     {
-        loopi(MezzanineLib::Render::RenderParticles::MAXPARTICLES)
+        loopi(RenderParticles::MAXPARTICLES)
         {
             particles[i].next = parempty;
             parempty = &particles[i];
         };
-        MezzanineLib::Render::RenderParticles::parinit = true;
+        RenderParticles::parinit = true;
     };
     if(parempty)
     {
@@ -84,7 +85,7 @@ void render_particles(int time)
         glTexCoord2f(1.0, 0.0); glVertex3d(p->o.x+( right.x-up.x)*sz, p->o.z+( right.y-up.y)*sz, p->o.y+( right.z-up.z)*sz);
         glTexCoord2f(0.0, 0.0); glVertex3d(p->o.x+(-right.x-up.x)*sz, p->o.z+(-right.y-up.y)*sz, p->o.y+(-right.z-up.z)*sz);
         glEnd();
-        MezzanineLib::Render::RenderGl::XtraVerts += 4;
+        RenderGl::XtraVerts += 4;
 
         if(numrender++>maxparticles || (p->fade -= time)<0)
         {

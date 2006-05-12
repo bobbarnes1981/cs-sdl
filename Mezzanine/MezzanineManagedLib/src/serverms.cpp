@@ -2,7 +2,9 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::ClientServer;
+
 
 ENetSocket mssock = ENET_SOCKET_NULL;
 
@@ -60,14 +62,14 @@ ENetBuffer masterb;
 
 void updatemasterserver(int seconds)
 {
-    if(seconds>MezzanineLib::ClientServer::ServerMS::updmaster)       // send alive signal to masterserver every hour of uptime
+    if(seconds>ServerMS::updmaster)       // send alive signal to masterserver every hour of uptime
     {
 		sprintf_sd(path)("%sregister.do?action=add", masterpath);
 		httpgetsend(masterserver, masterbase, path, "cubeserver", "Cube Server");
 		masterrep[0] = 0;
 		masterb.data = masterrep;
 		masterb.dataLength = MezzanineLib::GameInit::MAXTRANS-1;
-        MezzanineLib::ClientServer::ServerMS::updmaster = seconds+60*60;
+        ServerMS::updmaster = seconds+60*60;
     };
 }; 
 

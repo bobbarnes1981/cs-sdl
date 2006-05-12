@@ -36,12 +36,12 @@ using System.Runtime.InteropServices;
 
 namespace MezzanineLib.Render
 {
-	[StructLayout(LayoutKind.Sequential, Pack=4)]
-	public struct vertex 
-	{ 
-		float u, v, x, y, z; 
-		char r, g, b, a; 
-	}
+//	[StructLayout(LayoutKind.Sequential, Pack=4)]
+//	public struct vertex 
+//	{ 
+//		float u, v, x, y, z; 
+//		char r, g, b, a; 
+//	}
 	public sealed class RenderCubes
 	{
 		public static int curvert;

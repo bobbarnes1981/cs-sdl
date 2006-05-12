@@ -2,7 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Render;
 
 void box(block &b, float z1, float z2, float z3, float z4)
 {
@@ -12,22 +13,22 @@ void box(block &b, float z1, float z2, float z3, float z4)
     glVertex3f((float)b.x+b.xs, z3, (float)b.y+b.ys);
     glVertex3f((float)b.x,      z4, (float)b.y+b.ys);
     glEnd();
-    MezzanineLib::Render::RenderGl::XtraVerts += 4;
+    RenderGl::XtraVerts += 4;
 };
 
 struct sphere { vec o; float size, max; int type; sphere *next; };
-sphere spheres[MezzanineLib::Render::RenderExtras::MAXSPHERES], *slist = NULL, *sempty = NULL;
+sphere spheres[RenderExtras::MAXSPHERES], *slist = NULL, *sempty = NULL;
 
 void newsphere(vec &o, float max, int type)
 {
-    if(!MezzanineLib::Render::RenderExtras::sinit)
+    if(!RenderExtras::sinit)
     {
-        loopi(MezzanineLib::Render::RenderExtras::MAXSPHERES)
+        loopi(RenderExtras::MAXSPHERES)
         {
             spheres[i].next = sempty;
             sempty = &spheres[i];
         };
-        MezzanineLib::Render::RenderExtras::sinit = true;
+        RenderExtras::sinit = true;
     };
     if(sempty)
     {
@@ -61,7 +62,7 @@ void renderspheres(int time)
         glScalef(0.8f, 0.8f, 0.8f);
         glCallList(1);
         glPopMatrix();
-        MezzanineLib::Render::RenderGl::XtraVerts += 12*6*2;
+        RenderGl::XtraVerts += 12*6*2;
 
         if(p->size>p->max)
         {
@@ -120,7 +121,7 @@ void loadsky(char *basename)
     {
         sprintf_sd(name)("packages/%s_%s.jpg", basename, side[i]);
         int xs, ys;
-		if(!MezzanineLib::Render::RenderGl::InstallTexture(texnum+i, path(name), &xs, &ys, true)) conoutf("could not load sky textures");
+		if(!RenderGl::InstallTexture(texnum+i, path(name), &xs, &ys, true)) conoutf("could not load sky textures");
     };
     strcpy_s(lastsky, basename);
 };
@@ -149,7 +150,7 @@ void readdepth(int w, int h)
 {
     glReadPixels(w/2, h/2, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &cursordepth);
     double worldx = 0, worldy = 0, worldz = 0;
-    gluUnProject(w/2, h/2, MezzanineLib::Render::RenderExtras::DepthCorrect(cursordepth), mm, pm, viewport, &worldx, &worldz, &worldy);
+    gluUnProject(w/2, h/2, RenderExtras::DepthCorrect(cursordepth), mm, pm, viewport, &worldx, &worldz, &worldy);
     worldpos.x = (float)worldx;
     worldpos.y = (float)worldy;
     worldpos.z = (float)worldz;
@@ -196,19 +197,19 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
 
     glDepthMask(GL_FALSE);
 
-	if(MezzanineLib::Render::RenderExtras::DBlend || underwater)
+	if(RenderExtras::DBlend || underwater)
     {
         glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
         glBegin(GL_QUADS);
-        if(MezzanineLib::Render::RenderExtras::DBlend) glColor3d(0.0f, 0.9f, 0.9f);
+        if(RenderExtras::DBlend) glColor3d(0.0f, 0.9f, 0.9f);
         else glColor3d(0.9f, 0.5f, 0.0f);
         glVertex2i(0, 0);
         glVertex2i(MezzanineLib::GameInit::VIRTW, 0);
         glVertex2i(MezzanineLib::GameInit::VIRTW, MezzanineLib::GameInit::VIRTH);
         glVertex2i(0, MezzanineLib::GameInit::VIRTH);
         glEnd();
-		MezzanineLib::Render::RenderExtras::DBlend -= MezzanineLib::GameInit::CurrentTime/3;
-        if(MezzanineLib::Render::RenderExtras::DBlend<0) MezzanineLib::Render::RenderExtras::DBlend = 0;
+		RenderExtras::DBlend -= MezzanineLib::GameInit::CurrentTime/3;
+        if(RenderExtras::DBlend<0) RenderExtras::DBlend = 0;
     };
 
     glEnable(GL_TEXTURE_2D);
@@ -255,7 +256,7 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
 		//MezzanineLib::RenderText::DrawTextF("fps %d", 3200, 2390, 2, curfps.ToString());
         draw_textf("wqd %d", 3200, 2460, 2, nquads); 
         draw_textf("wvt %d", 3200, 2530, 2, curvert);
-        draw_textf("evt %d", 3200, 2600, 2, MezzanineLib::Render::RenderGl::XtraVerts);
+        draw_textf("evt %d", 3200, 2600, 2, RenderGl::XtraVerts);
     };
     
     glPopMatrix();
@@ -271,12 +272,12 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
         glPushMatrix();
         glOrtho(0, MezzanineLib::GameInit::VIRTW, MezzanineLib::GameInit::VIRTH, 0, -1, 1);
         glDisable(GL_BLEND);
-		MezzanineLib::Render::RenderExtras::DrawIcon(128, 128, 20, 1650);
-        if(player1->armour) MezzanineLib::Render::RenderExtras::DrawIcon((float)(player1->armourtype*64), 0, 620, 1650); 
+		RenderExtras::DrawIcon(128, 128, 20, 1650);
+        if(player1->armour) RenderExtras::DrawIcon((float)(player1->armourtype*64), 0, 620, 1650); 
         int g = player1->gunselect;
         int r = 64;
         if(g>2) { g -= 3; r = 128; };
-        MezzanineLib::Render::RenderExtras::DrawIcon((float)(g*64), (float)r, 1220, 1650);   
+        RenderExtras::DrawIcon((float)(g*64), (float)r, 1220, 1650);   
         glPopMatrix();
     };
 

@@ -2,8 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
-#using <SdlDotNet.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Support;
 
 struct mitem { char *text, *action; };
 
@@ -21,8 +21,8 @@ ivector menustack;
 
 void menuset(int menu)
 {
-    if((MezzanineLib::Support::Menus::vmenu = menu)>=1) resetmovement(player1);
-    if(MezzanineLib::Support::Menus::vmenu==1) menus[1].menusel = 0;
+    if((Menus::vmenu = menu)>=1) resetmovement(player1);
+    if(Menus::vmenu==1) menus[1].menusel = 0;
 };
 
 void showmenu(char *name)
@@ -52,10 +52,10 @@ void refreshservers();
 
 bool rendermenu()
 {
-    if(MezzanineLib::Support::Menus::vmenu<0) { menustack.setsize(0); return false; };
-    if(MezzanineLib::Support::Menus::vmenu==1) refreshservers();
-    gmenu &m = menus[MezzanineLib::Support::Menus::vmenu];
-    sprintf_sd(title)(MezzanineLib::Support::Menus::vmenu>1 ? "[ %s menu ]" : "%s", m.name);
+    if(Menus::vmenu<0) { menustack.setsize(0); return false; };
+    if(Menus::vmenu==1) refreshservers();
+    gmenu &m = menus[Menus::vmenu];
+    sprintf_sd(title)(Menus::vmenu>1 ? "[ %s menu ]" : "%s", m.name);
     int mdisp = m.items.length();
     int w = 0;
     loopi(mdisp)
@@ -72,7 +72,7 @@ bool rendermenu()
 	MezzanineLib::Render::RenderExtras::BlendBox(x-MezzanineLib::GameInit::FontH/2*3, y-MezzanineLib::GameInit::FontH, x+w+MezzanineLib::GameInit::FontH/2*3, y+h+MezzanineLib::GameInit::FontH, true);
     draw_text(title, x, y,2);
 	y += MezzanineLib::GameInit::FontH*2;
-    if(MezzanineLib::Support::Menus::vmenu)
+    if(Menus::vmenu)
     {
         int bh = y+m.menusel*step;
         MezzanineLib::Render::RenderExtras::BlendBox(x-MezzanineLib::GameInit::FontH, bh-10, x+w+MezzanineLib::GameInit::FontH, bh+MezzanineLib::GameInit::FontH+10, false);
@@ -108,14 +108,14 @@ void menuitem(char *text, char *action)
     mi.action = action[0] ? newstring(action) : mi.text;
 };
 
-COMMAND(menuitem, MezzanineLib::Support::FunctionSignatures::ARG_2STR);
-COMMAND(showmenu, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
-COMMAND(newmenu, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(menuitem, FunctionSignatures::ARG_2STR);
+COMMAND(showmenu, FunctionSignatures::ARG_1STR);
+COMMAND(newmenu, FunctionSignatures::ARG_1STR);
 
 bool menukey(int code, bool isdown)
 {
-    if(MezzanineLib::Support::Menus::vmenu<=0) return false;
-    int menusel = menus[MezzanineLib::Support::Menus::vmenu].menusel;
+    if(Menus::vmenu<=0) return false;
+    int menusel = menus[Menus::vmenu].menusel;
     if(isdown)
     {
 		if(code==(int)SdlDotNet::Key::Escape)
@@ -126,18 +126,18 @@ bool menukey(int code, bool isdown)
         }
 		else if(code==(int)SdlDotNet::Key::UpArrow || code==-4) menusel--;
 		else if(code==(int)SdlDotNet::Key::DownArrow || code==-5) menusel++;
-        int n = menus[MezzanineLib::Support::Menus::vmenu].items.length();
+        int n = menus[Menus::vmenu].items.length();
         if(menusel<0) menusel = n-1;
         else if(menusel>=n) menusel = 0;
-        menus[MezzanineLib::Support::Menus::vmenu].menusel = menusel;
+        menus[Menus::vmenu].menusel = menusel;
     }
     else
     {
 		if(code==(int)SdlDotNet::Key::Return || code==-2)
         {
-            char *action = menus[MezzanineLib::Support::Menus::vmenu].items[menusel].action;
-            if(MezzanineLib::Support::Menus::vmenu==1) connects(getservername(menusel));
-            menustack.add(MezzanineLib::Support::Menus::vmenu);
+            char *action = menus[Menus::vmenu].items[menusel].action;
+            if(Menus::vmenu==1) connects(getservername(menusel));
+            menustack.add(Menus::vmenu);
             menuset(-1);
             execute(action, true);
         };

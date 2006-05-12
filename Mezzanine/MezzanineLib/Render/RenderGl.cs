@@ -274,7 +274,7 @@ namespace MezzanineLib.Render
 
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
     
-			int xs, ys;
+			//int xs, ys;
 			//skyoglid = lookuptexture(TextureNumbers.DEFAULT_SKY, xs, ys);
    
 			//resetcubes();

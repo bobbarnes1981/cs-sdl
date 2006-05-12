@@ -2,7 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll> 
+using namespace MezzanineLib;
+using namespace MezzanineLib::World;
 
 // the current selection, used by almost all editing commands
 // invariant: all code assumes that these are kept inside MINBORD distance of the edge of the map
@@ -39,7 +40,7 @@ void toggleedit()
         projreset();
     };
 	SdlDotNet::Keyboard::KeyRepeat = MezzanineLib::GameInit::EditMode;
-    MezzanineLib::World::Editing::selset = false;
+    Editing::selset = false;
     editing = MezzanineLib::GameInit::EditMode;
 };
 
@@ -47,11 +48,11 @@ COMMANDN(edittoggle, toggleedit, MezzanineLib::Support::FunctionSignatures::ARG_
 
 void correctsel()                                       // ensures above invariant
 {
-    MezzanineLib::World::Editing::selset = !OUTBORD(sel.x, sel.y);
+    Editing::selset = !OUTBORD(sel.x, sel.y);
     int bsize = MezzanineLib::GameInit::SSize-MezzanineLib::GameInit::MinBord;
     if(sel.xs+sel.x>bsize) sel.xs = bsize-sel.x;
     if(sel.ys+sel.y>bsize) sel.ys = bsize-sel.y;
-    if(sel.xs<=0 || sel.ys<=0) MezzanineLib::World::Editing::selset = false;
+    if(sel.xs<=0 || sel.ys<=0) Editing::selset = false;
 };
 
 bool noteditmode()
@@ -63,8 +64,8 @@ bool noteditmode()
 
 bool noselection()
 {
-    if(!MezzanineLib::World::Editing::selset) conoutf("no selection");
-    return !MezzanineLib::World::Editing::selset;
+    if(!Editing::selset) conoutf("no selection");
+    return !Editing::selset;
 };
 
 #define EDITSEL   if(noteditmode() || noselection()) return;
@@ -75,17 +76,17 @@ void selectpos(int x, int y, int xs, int ys)
 {
     block s = { x, y, xs, ys };
     sel = s;
-    MezzanineLib::World::Editing::selh = 0;
+    Editing::selh = 0;
     correctsel();
 };
 
 void makesel()
 {
-    block s = { min(MezzanineLib::World::Editing::lastx,MezzanineLib::World::Editing::cx), min(MezzanineLib::World::Editing::lasty,MezzanineLib::World::Editing::cy), abs(MezzanineLib::World::Editing::lastx-MezzanineLib::World::Editing::cx)+1, abs(MezzanineLib::World::Editing::lasty-MezzanineLib::World::Editing::cy)+1 };
+    block s = { min(Editing::lastx,Editing::cx), min(Editing::lasty,Editing::cy), abs(Editing::lastx-Editing::cx)+1, abs(Editing::lasty-Editing::cy)+1 };
     sel = s;
-    MezzanineLib::World::Editing::selh = max(MezzanineLib::World::Editing::lasth,MezzanineLib::World::Editing::ch);
+    Editing::selh = max(Editing::lasth,Editing::ch);
     correctsel();
-    if(MezzanineLib::World::Editing::selset) rtex = *S(sel.x, sel.y);
+    if(Editing::selset) rtex = *S(sel.x, sel.y);
 };
 
 VAR(flrceil,0,0,2);
@@ -105,24 +106,24 @@ void cursorupdate()                                     // called every frame fr
     volatile float y = worldpos.y;
     volatile float z = worldpos.z;
     
-    MezzanineLib::World::Editing::cx = (int)x;
-    MezzanineLib::World::Editing::cy = (int)y;
+    Editing::cx = (int)x;
+    Editing::cy = (int)y;
 
-    if(OUTBORD(MezzanineLib::World::Editing::cx, MezzanineLib::World::Editing::cy)) return;
-    sqr *s = S(MezzanineLib::World::Editing::cx,MezzanineLib::World::Editing::cy);
+    if(OUTBORD(Editing::cx, Editing::cy)) return;
+    sqr *s = S(Editing::cx,Editing::cy);
     
     if(fabs(sheight(s,s,z)-z)>1)                        // selected wall
     {
         x += x>player1->o.x ? 0.5f : -0.5f;             // find right wall cube
         y += y>player1->o.y ? 0.5f : -0.5f;
 
-        MezzanineLib::World::Editing::cx = (int)x;
-        MezzanineLib::World::Editing::cy = (int)y;
+        Editing::cx = (int)x;
+        Editing::cy = (int)y;
 
-        if(OUTBORD(MezzanineLib::World::Editing::cx, MezzanineLib::World::Editing::cy)) return;
+        if(OUTBORD(Editing::cx, Editing::cy)) return;
     };
         
-    if(MezzanineLib::World::Editing::dragging) makesel();
+    if(Editing::dragging) makesel();
 
     const int GRIDSIZE = 5;
     const float GRIDW = 0.5f;
@@ -132,7 +133,7 @@ void cursorupdate()                                     // called every frame fr
     
     // render editing grid
 
-    for(int ix = MezzanineLib::World::Editing::cx-GRIDSIZE; ix<=MezzanineLib::World::Editing::cx+GRIDSIZE; ix++) for(int iy = MezzanineLib::World::Editing::cy-GRIDSIZE; iy<=MezzanineLib::World::Editing::cy+GRIDSIZE; iy++)
+    for(int ix = Editing::cx-GRIDSIZE; ix<=Editing::cx+GRIDSIZE; ix++) for(int iy = Editing::cy-GRIDSIZE; iy<=Editing::cy+GRIDSIZE; iy++)
     {
         if(OUTBORD(ix, iy)) continue;
         sqr *s = S(ix,iy);
@@ -157,17 +158,17 @@ void cursorupdate()                                     // called every frame fr
     {
         float ih = sheight(s, s, z);
 		MezzanineLib::Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0xFF, 0xFF);
-        block b = { MezzanineLib::World::Editing::cx, MezzanineLib::World::Editing::cy, 1, 1 };
+        block b = { Editing::cx, Editing::cy, 1, 1 };
         box(b, ih, sheight(s, SWS(s,1,0,MezzanineLib::GameInit::SSize), z), sheight(s, SWS(s,1,1,MezzanineLib::GameInit::SSize), z), sheight(s, SWS(s,0,1,MezzanineLib::GameInit::SSize), z));
 		MezzanineLib::Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0x00, 0x00);
-        MezzanineLib::Render::RenderExtras::Dot(MezzanineLib::World::Editing::cx, MezzanineLib::World::Editing::cy, ih);
-        MezzanineLib::World::Editing::ch = (int)ih;
+        MezzanineLib::Render::RenderExtras::Dot(Editing::cx, Editing::cy, ih);
+        Editing::ch = (int)ih;
     };
 
-    if(MezzanineLib::World::Editing::selset)
+    if(Editing::selset)
     {
 		MezzanineLib::Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0x40, 0x40);
-        box(sel, (float)MezzanineLib::World::Editing::selh, (float)MezzanineLib::World::Editing::selh, (float)MezzanineLib::World::Editing::selh, (float)MezzanineLib::World::Editing::selh);
+        box(sel, (float)Editing::selh, (float)Editing::selh, (float)Editing::selh, (float)Editing::selh);
     };
 };
 
@@ -215,7 +216,7 @@ void paste()
     sel.xs = copybuf->xs;
     sel.ys = copybuf->ys;
     correctsel();
-    if(!MezzanineLib::World::Editing::selset || sel.xs!=copybuf->xs || sel.ys!=copybuf->ys) { conoutf("incorrect selection"); return; };
+    if(!Editing::selset || sel.xs!=copybuf->xs || sel.ys!=copybuf->ys) { conoutf("incorrect selection"); return; };
     makeundo();
     copybuf->x = sel.x;
     copybuf->y = sel.y;
@@ -240,12 +241,12 @@ void tofronttex()                                       // maintain most recentl
 
 void editdrag(bool isdown)
 {
-    if(MezzanineLib::World::Editing::dragging = isdown)
+    if(Editing::dragging = isdown)
     {
-        MezzanineLib::World::Editing::lastx = MezzanineLib::World::Editing::cx;
-        MezzanineLib::World::Editing::lasty = MezzanineLib::World::Editing::cy;
-        MezzanineLib::World::Editing::lasth = MezzanineLib::World::Editing::ch;
-        MezzanineLib::World::Editing::selset = false;
+        Editing::lastx = Editing::cx;
+        Editing::lasty = Editing::cy;
+        Editing::lasth = Editing::ch;
+        Editing::selset = false;
         tofronttex();
     };
     makesel();
@@ -294,12 +295,12 @@ void edittex(int type, int dir)
 {
     EDITSEL;
     if(type<0 || type>3) return;
-    if(type!=MezzanineLib::World::Editing::lasttype) { tofronttex(); MezzanineLib::World::Editing::lasttype = type; };
+    if(type!=Editing::lasttype) { tofronttex(); Editing::lasttype = type; };
     int atype = type==3 ? 1 : type;
     int i = curedittex[atype];
     i = i<0 ? 0 : i+dir;
     curedittex[atype] = i = min(max(i, 0), 255);
-    int t = MezzanineLib::World::Editing::lasttex = hdr.texlists[atype][i];
+    int t = Editing::lasttex = hdr.texlists[atype][i];
     edittexxy(type, t, sel);
     addmsg(1, 7, MezzanineLib::NetworkMessages::SV_EDITT, sel.x, sel.y, sel.xs, sel.ys, type, t);
 };
@@ -310,12 +311,12 @@ void replace()
     loop(x,MezzanineLib::GameInit::SSize) loop(y,MezzanineLib::GameInit::SSize)
     {
         sqr *s = S(x, y);
-        switch(MezzanineLib::World::Editing::lasttype)
+        switch(Editing::lasttype)
         {
-            case 0: if(s->ftex == rtex.ftex) s->ftex = MezzanineLib::World::Editing::lasttex; break;
-            case 1: if(s->wtex == rtex.wtex) s->wtex = MezzanineLib::World::Editing::lasttex; break;
-            case 2: if(s->ctex == rtex.ctex) s->ctex = MezzanineLib::World::Editing::lasttex; break;
-            case 3: if(s->utex == rtex.utex) s->utex = MezzanineLib::World::Editing::lasttex; break;
+            case 0: if(s->ftex == rtex.ftex) s->ftex = Editing::lasttex; break;
+            case 1: if(s->wtex == rtex.wtex) s->wtex = Editing::lasttex; break;
+            case 2: if(s->ctex == rtex.ctex) s->ctex = Editing::lasttex; break;
+            case 3: if(s->utex == rtex.utex) s->utex = Editing::lasttex; break;
         };
     };
     block b = { 0, 0, MezzanineLib::GameInit::SSize, MezzanineLib::GameInit::SSize }; 
@@ -383,16 +384,16 @@ void setvdelta(int delta)
     addmsg(1, 6, MezzanineLib::NetworkMessages::SV_EDITD, sel.x, sel.y, sel.xs, sel.ys, delta);
 };
 
-int archverts[MezzanineLib::World::Editing::MAXARCHVERT][MezzanineLib::World::Editing::MAXARCHVERT];
+int archverts[Editing::MAXARCHVERT][Editing::MAXARCHVERT];
 
 void archvertex(int span, int vert, int delta)
 {
-    if(!MezzanineLib::World::Editing::archvinit)
+    if(!Editing::archvinit)
     {
-        MezzanineLib::World::Editing::archvinit = true;
-        loop(s,MezzanineLib::World::Editing::MAXARCHVERT) loop(v,MezzanineLib::World::Editing::MAXARCHVERT) archverts[s][v] = 0;
+        Editing::archvinit = true;
+        loop(s,Editing::MAXARCHVERT) loop(v,Editing::MAXARCHVERT) archverts[s][v] = 0;
     };
-    if(span>=MezzanineLib::World::Editing::MAXARCHVERT || vert>=MezzanineLib::World::Editing::MAXARCHVERT || span<0 || vert<0) return;
+    if(span>=Editing::MAXARCHVERT || vert>=Editing::MAXARCHVERT || span<0 || vert<0) return;
     archverts[span][vert] = delta;
 };
 
@@ -401,8 +402,8 @@ void arch(int sidedelta, int _a)
     EDITSELMP;
     sel.xs++;
     sel.ys++;
-    if(sel.xs>MezzanineLib::World::Editing::MAXARCHVERT) sel.xs = MezzanineLib::World::Editing::MAXARCHVERT;
-    if(sel.ys>MezzanineLib::World::Editing::MAXARCHVERT) sel.ys = MezzanineLib::World::Editing::MAXARCHVERT;
+    if(sel.xs>Editing::MAXARCHVERT) sel.xs = Editing::MAXARCHVERT;
+    if(sel.ys>Editing::MAXARCHVERT) sel.ys = Editing::MAXARCHVERT;
     loopselxy(s->vdelta =
         sel.xs>sel.ys
             ? (archverts[sel.xs-1][x] + (y==0 || y==sel.ys-1 ? sidedelta : 0))

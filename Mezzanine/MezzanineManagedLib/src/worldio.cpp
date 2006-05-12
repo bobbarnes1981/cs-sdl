@@ -2,7 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::World;
 
 void backup(char *name, char *backupname)
 {

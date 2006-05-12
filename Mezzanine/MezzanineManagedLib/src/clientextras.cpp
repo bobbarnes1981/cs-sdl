@@ -2,7 +2,9 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::ClientServer;
+
 
 // render players & monsters
 // very messy ad-hoc handling of animation frames, should be made more configurable
@@ -44,14 +46,14 @@ void renderclient(dynent *d, bool team, char *mdlname, bool hellpig, float scale
 void renderclients()
 {
     dynent *d;
-    loopv(players) if((d = players[i]) && (!MezzanineLib::GameInit::DemoPlayback || i!=MezzanineLib::ClientServer::ClientGame::DemoClientNum)) renderclient(d, isteam(player1->team, d->team), "monster/ogro", false, 1.0f);
+    loopv(players) if((d = players[i]) && (!MezzanineLib::GameInit::DemoPlayback || i!=ClientGame::DemoClientNum)) renderclient(d, isteam(player1->team, d->team), "monster/ogro", false, 1.0f);
 };
 
 // creation of scoreboard pseudo-menu
 
 void showscores(bool on)
 {
-    MezzanineLib::ClientServer::ClientExtras::scoreson = on;
+    ClientExtras::scoreson = on;
     menuset(((int)on)-1);
 };
 
@@ -66,33 +68,33 @@ void renderscore(dynent *d)
     menumanual(0, scorelines.length()-1, scorelines.last().s); 
 };
 
-char *teamname[MezzanineLib::ClientServer::ClientExtras::maxteams];
-int teamscore[MezzanineLib::ClientServer::ClientExtras::maxteams];
+char *teamname[ClientExtras::maxteams];
+int teamscore[ClientExtras::maxteams];
 string teamscores;
 
 void addteamscore(dynent *d)
 {
     if(!d) return;
-    loopi(MezzanineLib::ClientServer::ClientExtras::teamsused) if(strcmp(teamname[i], d->team)==0) { teamscore[i] += d->frags; return; };
-    if(MezzanineLib::ClientServer::ClientExtras::teamsused==MezzanineLib::ClientServer::ClientExtras::maxteams) return;
-    teamname[MezzanineLib::ClientServer::ClientExtras::teamsused] = d->team;
-    teamscore[MezzanineLib::ClientServer::ClientExtras::teamsused++] = d->frags;
+    loopi(ClientExtras::teamsused) if(strcmp(teamname[i], d->team)==0) { teamscore[i] += d->frags; return; };
+    if(ClientExtras::teamsused==ClientExtras::maxteams) return;
+    teamname[ClientExtras::teamsused] = d->team;
+    teamscore[ClientExtras::teamsused++] = d->frags;
 };
 
 void renderscores()
 {
-    if(!MezzanineLib::ClientServer::ClientExtras::scoreson) return;
+    if(!ClientExtras::scoreson) return;
     scorelines.setsize(0);
     if(!MezzanineLib::GameInit::DemoPlayback) renderscore(player1);
     loopv(players) if(players[i]) renderscore(players[i]);
     sortmenu(0, scorelines.length());
     if(m_teammode)
     {
-        MezzanineLib::ClientServer::ClientExtras::teamsused = 0;
+        ClientExtras::teamsused = 0;
         loopv(players) addteamscore(players[i]);
         if(!MezzanineLib::GameInit::DemoPlayback) addteamscore(player1);
         teamscores[0] = 0;
-        loopj(MezzanineLib::ClientServer::ClientExtras::teamsused)
+        loopj(ClientExtras::teamsused)
         {
             sprintf_sd(sc)("[ %s: %d ]", teamname[j], teamscore[j]);
             strcat_s(teamscores, sc);

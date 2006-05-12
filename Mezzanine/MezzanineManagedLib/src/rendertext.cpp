@@ -2,7 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Render;
 
 short char_coords[96][4] = 
 {
@@ -163,7 +164,7 @@ void draw_text(char *str, int left, int top, int gl_num)
         glTexCoord2f(in_left,  in_bottom); glVertex2i(x,            y + in_height);
         glEnd();
         
-		MezzanineLib::Render::RenderGl::XtraVerts += 4;
+		RenderGl::XtraVerts += 4;
         x += in_width  + 1;
     }
 }

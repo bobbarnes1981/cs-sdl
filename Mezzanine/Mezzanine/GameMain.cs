@@ -45,14 +45,14 @@ namespace Mezzanine
 	/// </summary>
 	class GameMain
 	{
-		int mapVersion = 5; // bump if map format changes, see worldio.cpp
+		public static int mapVersion = 5; // bump if map format changes, see worldio.cpp
 		
-		int NUMGUNS = 9;
+		public const int NUMGUNS = 9;
 		int ignore = 5;
 		
 		float fps = 30.0f;
 		int gamespeed = 100;
-		bool demoplayback;
+		//bool demoplayback;
 		int framesinmap = 0;
 		byte lasttype = 0;
 		byte lastbut = 0;
@@ -236,10 +236,10 @@ namespace Mezzanine
 			}
 			MezzanineLib.Bindings.cleardlights();
 			MezzanineLib.Bindings.updateworld(millis);
-			if(!demoplayback)
-			{
+			//if(!demoplayback)
+			//{
 				MezzanineLib.Bindings.serverslice(DateTime.Now.Second, 0);
-			}
+			//}
 
 			fps = 30.0f;
 			//fps = (1000.0f/curtime+fps*50)/51;

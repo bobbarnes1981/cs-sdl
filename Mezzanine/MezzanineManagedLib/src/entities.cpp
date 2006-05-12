@@ -2,7 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Game;
 
 vector<entity> ents;
 
@@ -19,7 +20,7 @@ void renderent(entity &e, char *mdlname, float z, float yaw, int frame = 0, int 
 
 void renderentities()
 {
-	if(MezzanineLib::GameInit::LastMillis>MezzanineLib::Game::Entities::triggertime+1000) MezzanineLib::Game::Entities::triggertime = 0;
+	if(MezzanineLib::GameInit::LastMillis>Entities::triggertime+1000) Entities::triggertime = 0;
     loopv(ents)
     {
         entity &e = ents[i];
@@ -50,8 +51,8 @@ void renderentities()
 					renderent(e, "carrot", (float)(1+sin(MezzanineLib::GameInit::LastMillis/100.0+e.x+e.y)/20), MezzanineLib::GameInit::LastMillis/(e.attr2 ? 1.0f : 10.0f));
 					break;
 					
-                case 4: renderent(e, "switch2", 3,      (float)e.attr3*90, (!e.spawned && !MezzanineLib::Game::Entities::triggertime) ? 1  : 0, (e.spawned || !MezzanineLib::Game::Entities::triggertime) ? 1 : 2,  MezzanineLib::Game::Entities::triggertime, 1050.0f);  break;
-                case 5: renderent(e, "switch1", -0.15f, (float)e.attr3*90, (!e.spawned && !MezzanineLib::Game::Entities::triggertime) ? 30 : 0, (e.spawned || !MezzanineLib::Game::Entities::triggertime) ? 1 : 30, MezzanineLib::Game::Entities::triggertime, 35.0f); break;
+                case 4: renderent(e, "switch2", 3,      (float)e.attr3*90, (!e.spawned && !Entities::triggertime) ? 1  : 0, (e.spawned || !Entities::triggertime) ? 1 : 2,  Entities::triggertime, 1050.0f);  break;
+                case 5: renderent(e, "switch1", -0.15f, (float)e.attr3*90, (!e.spawned && !Entities::triggertime) ? 30 : 0, (e.spawned || !Entities::triggertime) ? 1 : 30, Entities::triggertime, 35.0f); break;
             }; 
         };
     };
@@ -177,7 +178,7 @@ void pickup(int n, dynent *d)
             
         case MezzanineLib::StaticEntity::CARROT:
             ents[n].spawned = false;
-            MezzanineLib::Game::Entities::triggertime = MezzanineLib::GameInit::LastMillis;
+            Entities::triggertime = MezzanineLib::GameInit::LastMillis;
             trigger(ents[n].attr1, ents[n].attr2, false);  // needs to go over server for multiplayer
             break;
 

@@ -3,8 +3,8 @@
 #include "cube.h"
 #include <ctype.h>
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
-#using <SdlDotNet.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Support;
 
 struct cline { char *cref; int outtime; };
 vector<cline> conlines;
@@ -13,11 +13,11 @@ string commandbuf;
 
 void setconskip(int n)
 {
-    MezzanineLib::Support::Console::conskip += n;
-    if(MezzanineLib::Support::Console::conskip<0) MezzanineLib::Support::Console::conskip = 0;
+    Console::conskip += n;
+    if(Console::conskip<0) Console::conskip = 0;
 };
 
-COMMANDN(MezzanineLib::Support::Console::conskip, setconskip, MezzanineLib::Support::FunctionSignatures::ARG_1INT);
+COMMANDN(Console::conskip, setconskip, FunctionSignatures::ARG_1INT);
 
 void conline(const char *sf, bool highlight)        // add a line to the console buffer
 {
@@ -43,12 +43,12 @@ void conoutf(const char *s, ...)
     sprintf_sdv(sf, s);
     s = sf;
     int n = 0;
-    while(strlen(s)>MezzanineLib::Support::Console::WORDWRAP)                       // cut strings to fit on screen
+    while(strlen(s)>Console::WORDWRAP)                       // cut strings to fit on screen
     {
         string t;
-        strn0cpy(t, s, MezzanineLib::Support::Console::WORDWRAP+1);
+        strn0cpy(t, s, Console::WORDWRAP+1);
         conline(t, n++!=0);
-        s += MezzanineLib::Support::Console::WORDWRAP;
+        s += Console::WORDWRAP;
     };
     conline(s, n!=0);
 };
@@ -56,11 +56,11 @@ void conoutf(const char *s, ...)
 void renderconsole()                                // render buffer taking into account time & scrolling
 {
     int nd = 0;
-    char *refs[MezzanineLib::Support::Console::ndraw];
-    loopv(conlines) if(MezzanineLib::Support::Console::conskip ? i>=MezzanineLib::Support::Console::conskip-1 || i>=conlines.length()-MezzanineLib::Support::Console::ndraw : MezzanineLib::GameInit::LastMillis-conlines[i].outtime<20000)
+    char *refs[Console::ndraw];
+    loopv(conlines) if(Console::conskip ? i>=Console::conskip-1 || i>=conlines.length()-Console::ndraw : MezzanineLib::GameInit::LastMillis-conlines[i].outtime<20000)
     {
         refs[nd++] = conlines[i].cref;
-        if(nd==MezzanineLib::Support::Console::ndraw) break;
+        if(nd==Console::ndraw) break;
     };
     loopj(nd)
     {
@@ -74,17 +74,17 @@ struct keym { int code; char *name; char *action; } keyms[256];
 
 void keymap(char *code, char *key, char *action)
 {
-    keyms[MezzanineLib::Support::Console::numkm].code = atoi(code);
-    keyms[MezzanineLib::Support::Console::numkm].name = newstring(key);
-    keyms[MezzanineLib::Support::Console::numkm++].action = newstringbuf(action);
+    keyms[Console::numkm].code = atoi(code);
+    keyms[Console::numkm].name = newstring(key);
+    keyms[Console::numkm++].action = newstringbuf(action);
 };
 
-COMMAND(keymap, MezzanineLib::Support::FunctionSignatures::ARG_3STR);
+COMMAND(keymap, FunctionSignatures::ARG_3STR);
 
 void bindkey(char *key, char *action)
 {
     for(char *x = key; *x; x++) *x = toupper(*x);
-    loopi(MezzanineLib::Support::Console::numkm) if(strcmp(keyms[i].name, key)==0)
+    loopi(Console::numkm) if(strcmp(keyms[i].name, key)==0)
     {
         strcpy_s(keyms[i].action, action);
         return;
@@ -92,20 +92,20 @@ void bindkey(char *key, char *action)
     conoutf("unknown key \"%s\"", key);   
 };
 
-COMMANDN(bind, bindkey, MezzanineLib::Support::FunctionSignatures::ARG_2STR);
+COMMANDN(bind, bindkey, FunctionSignatures::ARG_2STR);
 
 void saycommand(char *init)                         // turns input to the command line on or off
 {
-	SdlDotNet::Keyboard::UnicodeEnabled = (MezzanineLib::Support::Console::saycommandon = (init!=NULL));
-    if(!MezzanineLib::GameInit::EditMode) SdlDotNet::Keyboard::KeyRepeat = MezzanineLib::Support::Console::saycommandon;
+	SdlDotNet::Keyboard::UnicodeEnabled = (Console::saycommandon = (init!=NULL));
+    if(!MezzanineLib::GameInit::EditMode) SdlDotNet::Keyboard::KeyRepeat = Console::saycommandon;
     if(!init) init = "";
     strcpy_s(commandbuf, init);
 };
 
 void mapmsg(char *s) { strn0cpy(hdr.maptitle, s, 128); };
 
-COMMAND(saycommand, MezzanineLib::Support::FunctionSignatures::ARG_VARI);
-COMMAND(mapmsg, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(saycommand, FunctionSignatures::ARG_VARI);
+COMMAND(mapmsg, FunctionSignatures::ARG_1STR);
 
 void pasteconsole()
 {
@@ -130,11 +130,11 @@ void history(int n)
     };
 };
 
-COMMAND(history, MezzanineLib::Support::FunctionSignatures::ARG_1INT);
+COMMAND(history, FunctionSignatures::ARG_1INT);
 
 void keypress(int code, bool isdown, int cooked)
 {
-    if(MezzanineLib::Support::Console::saycommandon)                                // keystrokes go to commandline
+    if(Console::saycommandon)                                // keystrokes go to commandline
     {
         if(isdown)
         {
@@ -147,16 +147,16 @@ void keypress(int code, bool isdown, int cooked)
 				case (int)SdlDotNet::Key::LeftArrow:
                 {
                     for(int i = 0; commandbuf[i]; i++) if(!commandbuf[i+1]) commandbuf[i] = 0;
-                    MezzanineLib::Support::Command::ResetComplete();
+                    Command::ResetComplete();
                     break;
                 };
                     
 				case (int)SdlDotNet::Key::UpArrow:
-                    if(MezzanineLib::Support::Console::histpos) strcpy_s(commandbuf, vhistory[--MezzanineLib::Support::Console::histpos]);
+                    if(Console::histpos) strcpy_s(commandbuf, vhistory[--Console::histpos]);
                     break;
                 
 				case (int)SdlDotNet::Key::DownArrow:
-                    if(MezzanineLib::Support::Console::histpos<vhistory.length()) strcpy_s(commandbuf, vhistory[MezzanineLib::Support::Console::histpos++]);
+                    if(Console::histpos<vhistory.length()) strcpy_s(commandbuf, vhistory[Console::histpos++]);
                     break;
                     
 				case (int)SdlDotNet::Key::Tab:
@@ -172,7 +172,7 @@ void keypress(int code, bool isdown, int cooked)
 					};
 
                 default:
-                    MezzanineLib::Support::Command::ResetComplete();
+                    Command::ResetComplete();
                     if(cooked) { char add[] = { cooked, 0 }; strcat_s(commandbuf, add); };
             };
         }
@@ -186,7 +186,7 @@ void keypress(int code, bool isdown, int cooked)
                     {
                         vhistory.add(newstring(commandbuf));  // cap this?
                     };
-                    MezzanineLib::Support::Console::histpos = vhistory.length();
+                    Console::histpos = vhistory.length();
                     if(commandbuf[0]=='/') execute(commandbuf, true);
                     else toserver(commandbuf);
                 };
@@ -200,7 +200,7 @@ void keypress(int code, bool isdown, int cooked)
     }
     else if(!menukey(code, isdown))                 // keystrokes go to menu
     {
-        loopi(MezzanineLib::Support::Console::numkm) if(keyms[i].code==code)        // keystrokes go to game, lookup in keymap and execute
+        loopi(Console::numkm) if(keyms[i].code==code)        // keystrokes go to game, lookup in keymap and execute
         {
             string temp;
             strcpy_s(temp, keyms[i].action);
@@ -212,12 +212,12 @@ void keypress(int code, bool isdown, int cooked)
 
 char *getcurcommand()
 {
-    return MezzanineLib::Support::Console::saycommandon ? commandbuf : NULL;
+    return Console::saycommandon ? commandbuf : NULL;
 };
 
 void writebinds(FILE *f)
 {
-    loopi(MezzanineLib::Support::Console::numkm)
+    loopi(Console::numkm)
     {
         if(*keyms[i].action) fprintf(f, "bind \"%s\" [%s]\n", keyms[i].name, keyms[i].action);
     };

@@ -140,7 +140,7 @@ namespace MezzanineLib.Render
 	{310,448,363,512}  //~
 			};
 		
-		static int PIXELTAB = 200;
+		public const int PIXELTAB = 200;
 
 		public static int TextWidth(string str)
 		{
@@ -199,9 +199,9 @@ namespace MezzanineLib.Render
 			int x = left;
 			int y = top;
 			
-			int i;
-			float in_left, in_top, in_right, in_bottom;
-			int in_width, in_height;
+			//int i;
+			//float in_left, in_top, in_right, in_bottom;
+			//int in_width, in_height;
 			
 			//			for (i = 0; str[i] != 0; i++)
 			//			{

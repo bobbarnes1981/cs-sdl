@@ -4,7 +4,8 @@
 #include "tools.h"
 #include <new>
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Support;
 
 //////////////////////////// pool ///////////////////////////
 
