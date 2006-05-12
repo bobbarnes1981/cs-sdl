@@ -56,14 +56,16 @@ namespace MezzanineLib.Support
 	
 	public sealed class Sound
 	{
-		static bool noSound = false;
+		public const int MAXCHAN = 32;
+		public const int SOUNDFREQ = 22050;
+		public static int soundsatonce = 0;
+		public static int lastsoundmillis = 0;
+
+		public static bool noSound = false;
 		static int soundVolume = 255;
 		static int musicVolume = 128;
 		static SdlDotNet.Music music;
 		static SoundLocation[] soundLocations = new SoundLocation[MAXCHAN];
-
-		static int MAXCHAN = 32;
-		//#define SOUNDFREQ 22050
 
 		//#define MAXVOL MIX_MAX_VOLUME
 		//Mix_Music *mod = NULL;

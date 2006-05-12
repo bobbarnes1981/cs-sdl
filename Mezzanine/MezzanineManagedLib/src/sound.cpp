@@ -6,12 +6,8 @@
 
 VARP(soundvol, 0, 255, 255);
 VARP(musicvol, 0, 128, 255);
-bool nosound = false;
 
-#define MAXCHAN 32
-#define SOUNDFREQ 22050
-
-struct soundloc { vec loc; bool inuse; } soundlocs[MAXCHAN];
+struct soundloc { vec loc; bool inuse; } soundlocs[MezzanineLib::Support::Sound::MAXCHAN];
 
     #include "SDL_mixer.h"
     #define MAXVOL MIX_MAX_VOLUME
@@ -63,15 +59,15 @@ void updatechanvol(int chan, vec *loc)
 
 void newsoundloc(int chan, vec *loc)
 {
-    assert(chan>=0 && chan<MAXCHAN);
+    assert(chan>=0 && chan<MezzanineLib::Support::Sound::MAXCHAN);
     soundlocs[chan].loc = *loc;
     soundlocs[chan].inuse = true;
 };
 
 void updatevol()
 {
-    if(nosound) return;
-    loopi(MAXCHAN) if(soundlocs[i].inuse)
+    if(MezzanineLib::Support::Sound::noSound) return;
+    loopi(MezzanineLib::Support::Sound::MAXCHAN) if(soundlocs[i].inuse)
     {
            /* if(Mix_Playing(i))
                 updatechanvol(i, &soundlocs[i].loc);
@@ -81,15 +77,13 @@ void updatevol()
 
 void playsoundc(int n) { addmsg(0, 2, MezzanineLib::NetworkMessages::SV_SOUND, n); playsound(n); };
 
-int soundsatonce = 0, lastsoundmillis = 0;
-
 void playsound(int n, vec *loc)
 {
-    if(nosound) return;
+    if(MezzanineLib::Support::Sound::noSound) return;
     if(!soundvol) return;
-    if(MezzanineLib::GameInit::LastMillis==lastsoundmillis) soundsatonce++; else soundsatonce = 1;
-    lastsoundmillis = MezzanineLib::GameInit::LastMillis;
-    if(soundsatonce>5) return;  // avoid bursts of sounds with heavy packetloss and in sp
+    if(MezzanineLib::GameInit::LastMillis==MezzanineLib::Support::Sound::lastsoundmillis) MezzanineLib::Support::Sound::soundsatonce++; else MezzanineLib::Support::Sound::soundsatonce = 1;
+    MezzanineLib::Support::Sound::lastsoundmillis = MezzanineLib::GameInit::LastMillis;
+    if(MezzanineLib::Support::Sound::soundsatonce>5) return;  // avoid bursts of sounds with heavy packetloss and in sp
     if(n<0 || n>=samples.length()) { conoutf("unregistered sound: %d", n); return; };
 
     if(!samples[n])
