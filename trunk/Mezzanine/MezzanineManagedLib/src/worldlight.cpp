@@ -2,9 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
-
-//extern bool hasoverbright;
+using namespace MezzanineLib;
+using namespace MezzanineLib::World;
 
 VAR(lightscale,1,4,100);
 

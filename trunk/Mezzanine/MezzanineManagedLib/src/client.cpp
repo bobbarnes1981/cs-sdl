@@ -2,7 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::ClientServer;
 
 ENetHost *clienthost = NULL;
 
@@ -30,13 +31,13 @@ VARF(throttle_decel,    0, 2, 32, throttle());
 
 void throttle()
 {
-    if(!clienthost || MezzanineLib::ClientServer::Client::connecting) return;
+    if(!clienthost || Client::connecting) return;
     assert(ENET_PEER_PACKET_THROTTLE_SCALE==32);
     enet_peer_throttle_configure(clienthost->peers, throttle_interval*1000, throttle_accel, throttle_decel);
 };
 
-void newname(char *name) { MezzanineLib::ClientServer::Client::c2sinit = false; strn0cpy(player1->name, name, 16); };
-void newteam(char *name) { MezzanineLib::ClientServer::Client::c2sinit = false; strn0cpy(player1->team, name, 5); };
+void newname(char *name) { Client::c2sinit = false; strn0cpy(player1->name, name, 16); };
+void newteam(char *name) { Client::c2sinit = false; strn0cpy(player1->team, name, 5); };
 
 COMMANDN(team, newteam, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 COMMANDN(name, newname, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
@@ -65,8 +66,8 @@ void connects(char *servername)
     {
         enet_host_connect(clienthost, &address, 1); 
         enet_host_flush(clienthost);
-        MezzanineLib::ClientServer::Client::connecting = MezzanineLib::GameInit::LastMillis;
-        MezzanineLib::ClientServer::Client::connattempts = 0;
+        Client::connecting = MezzanineLib::GameInit::LastMillis;
+        Client::connattempts = 0;
     }
     else
     {
@@ -79,11 +80,11 @@ void disconnect(int onlyclean, int async)
 {
     if(clienthost) 
     {
-        if(!MezzanineLib::ClientServer::Client::connecting && !MezzanineLib::ClientServer::Client::disconnecting) 
+        if(!Client::connecting && !Client::disconnecting) 
         {
             enet_peer_disconnect(clienthost->peers);
             enet_host_flush(clienthost);
-            MezzanineLib::ClientServer::Client::disconnecting = MezzanineLib::GameInit::LastMillis;
+            Client::disconnecting = MezzanineLib::GameInit::LastMillis;
         };
         if(clienthost->peers->state != ENET_PEER_STATE_DISCONNECTED)
         {
@@ -93,13 +94,13 @@ void disconnect(int onlyclean, int async)
         enet_host_destroy(clienthost);
     };
 
-    if(clienthost && !MezzanineLib::ClientServer::Client::connecting) conoutf("disconnected");
+    if(clienthost && !Client::connecting) conoutf("disconnected");
     clienthost = NULL;
-    MezzanineLib::ClientServer::Client::connecting = 0;
-    MezzanineLib::ClientServer::Client::connattempts = 0;
-    MezzanineLib::ClientServer::Client::disconnecting = 0;
-    MezzanineLib::ClientServer::Client::ClientNum = -1;
-    MezzanineLib::ClientServer::Client::c2sinit = false;
+    Client::connecting = 0;
+    Client::connattempts = 0;
+    Client::disconnecting = 0;
+    Client::ClientNum = -1;
+    Client::c2sinit = false;
     player1->lifesequence = 0;
     loopv(players) zapdynent(players[i]);
     
@@ -115,14 +116,14 @@ void trydisconnect()
         conoutf("not connected");
         return;
     };
-    if(MezzanineLib::ClientServer::Client::connecting) 
+    if(Client::connecting) 
     {
         conoutf("aborting connection attempt");
         disconnect();
         return;
     };
     conoutf("attempting to disconnect...");
-    disconnect(0, !MezzanineLib::ClientServer::Client::disconnecting);
+    disconnect(0, !Client::disconnecting);
 };
 
 string ctext;
@@ -164,7 +165,7 @@ string clientpassword;
 void password(char *p) { strcpy_s(clientpassword, p); };
 COMMAND(password, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
 
-bool netmapstart() { MezzanineLib::ClientServer::Client::SendItemsToServer = true; return clienthost!=NULL; };
+bool netmapstart() { Client::SendItemsToServer = true; return clienthost!=NULL; };
 
 void initclientnet()
 {
@@ -183,8 +184,8 @@ void sendpackettoserv(void *packet)
 
 void c2sinfo(dynent *d)                     // send update to the server
 {
-    if(MezzanineLib::ClientServer::Client::ClientNum<0) return;                 // we haven't had a welcome message from the server yet
-    if(MezzanineLib::GameInit::LastMillis-MezzanineLib::ClientServer::Client::lastupdate<40) return;    // don't update faster than 25fps
+    if(Client::ClientNum<0) return;                 // we haven't had a welcome message from the server yet
+    if(MezzanineLib::GameInit::LastMillis-Client::lastupdate<40) return;    // don't update faster than 25fps
     ENetPacket *packet = enet_packet_create (NULL, MezzanineLib::GameInit::MAXTRANS, 0);
     uchar *start = packet->data;
     uchar *p = start+2;
@@ -200,7 +201,7 @@ void c2sinfo(dynent *d)                     // send update to the server
     else
     {
         putint(p, MezzanineLib::NetworkMessages::SV_POS);
-        putint(p, MezzanineLib::ClientServer::Client::ClientNum);
+        putint(p, Client::ClientNum);
         putint(p, (int)(d->o.x*MezzanineLib::GameInit::DMF));       // quantize coordinates to 1/16th of a cube, between 1 and 3 bytes
         putint(p, (int)(d->o.y*MezzanineLib::GameInit::DMF));
         putint(p, (int)(d->o.z*MezzanineLib::GameInit::DMF));
@@ -213,13 +214,13 @@ void c2sinfo(dynent *d)                     // send update to the server
         // pack rest in 1 byte: strafe:2, move:2, onfloor:1, state:3
         putint(p, (d->strafe&3) | ((d->move&3)<<2) | (((int)d->onfloor)<<4) | ((MezzanineLib::GameInit::EditMode ? MezzanineLib::CSStatus::CS_EDITING : d->state)<<5) );
  
-        if(MezzanineLib::ClientServer::Client::SendItemsToServer)
+        if(Client::SendItemsToServer)
         {
             packet->flags = ENET_PACKET_FLAG_RELIABLE;
             putint(p, MezzanineLib::NetworkMessages::SV_ITEMLIST);
             if(!m_noitems) putitems(p);
             putint(p, -1);
-            MezzanineLib::ClientServer::Client::SendItemsToServer = false;
+            Client::SendItemsToServer = false;
             serveriteminitdone = true;
         };
         if(ctext[0])    // player chat, not flood protected for now
@@ -229,10 +230,10 @@ void c2sinfo(dynent *d)                     // send update to the server
             sendstring(ctext, p);
             ctext[0] = 0;
         };
-        if(!MezzanineLib::ClientServer::Client::c2sinit)    // tell other clients who I am
+        if(!Client::c2sinit)    // tell other clients who I am
         {
             packet->flags = ENET_PACKET_FLAG_RELIABLE;
-            MezzanineLib::ClientServer::Client::c2sinit = true;
+            Client::c2sinit = true;
             putint(p, MezzanineLib::NetworkMessages::SV_INITC2S);
             sendstring(player1->name, p);
             sendstring(player1->team, p);
@@ -245,11 +246,11 @@ void c2sinfo(dynent *d)                     // send update to the server
             loopi(msg[0]) putint(p, msg[i+2]);
         };
         messages.setsize(0);
-        if(MezzanineLib::GameInit::LastMillis-MezzanineLib::ClientServer::Client::lastping>250)
+        if(MezzanineLib::GameInit::LastMillis-Client::lastping>250)
         {
             putint(p, MezzanineLib::NetworkMessages::SV_PING);
             putint(p, MezzanineLib::GameInit::LastMillis);
-            MezzanineLib::ClientServer::Client::lastping = MezzanineLib::GameInit::LastMillis;
+            Client::lastping = MezzanineLib::GameInit::LastMillis;
         };
     };
     *(ushort *)start = ENET_HOST_TO_NET_16(p-start);
@@ -257,7 +258,7 @@ void c2sinfo(dynent *d)                     // send update to the server
     incomingdemodata(start, p-start, true);
     if(clienthost) { enet_host_broadcast(clienthost, 0, packet); enet_host_flush(clienthost); }
     else localclienttoserver(packet);
-    MezzanineLib::ClientServer::Client::lastupdate = MezzanineLib::GameInit::LastMillis;
+    Client::lastupdate = MezzanineLib::GameInit::LastMillis;
     if(serveriteminitdone) loadgamerest();  // hack
 };
 
@@ -265,12 +266,12 @@ void gets2c()           // get updates from the server
 {
     ENetEvent event;
     if(!clienthost) return;
-    if(MezzanineLib::ClientServer::Client::connecting && MezzanineLib::GameInit::LastMillis/3000 > MezzanineLib::ClientServer::Client::connecting/3000)
+    if(Client::connecting && MezzanineLib::GameInit::LastMillis/3000 > Client::connecting/3000)
     {
         conoutf("attempting to connect...");
-        MezzanineLib::ClientServer::Client::connecting = MezzanineLib::GameInit::LastMillis;
-        ++MezzanineLib::ClientServer::Client::connattempts; 
-        if(MezzanineLib::ClientServer::Client::connattempts > 3)
+        Client::connecting = MezzanineLib::GameInit::LastMillis;
+        ++Client::connattempts; 
+        if(Client::connattempts > 3)
         {
             conoutf("could not connect to server");
             disconnect();
@@ -282,18 +283,18 @@ void gets2c()           // get updates from the server
     {
         case ENET_EVENT_TYPE_CONNECT:
             conoutf("connected to server");
-            MezzanineLib::ClientServer::Client::connecting = 0;
+            Client::connecting = 0;
             throttle();
             break;
          
         case ENET_EVENT_TYPE_RECEIVE:
-            if(MezzanineLib::ClientServer::Client::disconnecting) conoutf("attempting to disconnect...");
+            if(Client::disconnecting) conoutf("attempting to disconnect...");
             else localservertoclient(event.packet->data, event.packet->dataLength);
             enet_packet_destroy(event.packet);
             break;
 
         case ENET_EVENT_TYPE_DISCONNECT:
-            if(MezzanineLib::ClientServer::Client::disconnecting) disconnect();
+            if(Client::disconnecting) disconnect();
             else server_err();
             return;
     }

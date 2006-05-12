@@ -2,7 +2,9 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::ClientServer;
+
 
 extern string toservermap;
 extern string clientpassword;
@@ -74,7 +76,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
                 return;
             };
             toservermap[0] = 0;
-            MezzanineLib::ClientServer::Client::ClientNum = cn;                 // we are now fully connected
+            Client::ClientNum = cn;                 // we are now fully connected
             if(!getint(p)) strcpy_s(toservermap, getclientmap());   // we are the first client on this server, set map
             sgetstr();
            /* if(text[0] && strcmp(text, clientpassword))
@@ -134,7 +136,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
         case MezzanineLib::NetworkMessages::SV_ITEMLIST:
         {
             int n;
-            if(mapchanged) { MezzanineLib::ClientServer::Client::SendItemsToServer = false; resetspawns(); };
+            if(mapchanged) { Client::SendItemsToServer = false; resetspawns(); };
             while((n = getint(p))!=-1) if(mapchanged) setspawn(n, true);
             break;
         };
@@ -158,7 +160,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             }
             else                    // new client
             {
-                MezzanineLib::ClientServer::Client::c2sinit = false;    // send new players my info again 
+                Client::c2sinit = false;    // send new players my info again 
                 conoutf("connected: %s", text);
             }; 
             strcpy_s(d->name, text);
@@ -195,7 +197,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             int target = getint(p);
             int damage = getint(p);
             int ls = getint(p);
-            if(target==MezzanineLib::ClientServer::Client::ClientNum) { if(ls==player1->lifesequence) selfdamage(damage, cn, d); }
+            if(target==Client::ClientNum) { if(ls==player1->lifesequence) selfdamage(damage, cn, d); }
             else playsound(MezzanineLib::Sounds::S_PAIN1+rnd(5), &getclient(target)->o);
             break;
         };
@@ -207,7 +209,7 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             {
                 conoutf("%s suicided", d->name);
             }
-            else if(actor==MezzanineLib::ClientServer::Client::ClientNum)
+            else if(actor==Client::ClientNum)
             {
                 int frags;
                 if(isteam(player1->team, d->team))

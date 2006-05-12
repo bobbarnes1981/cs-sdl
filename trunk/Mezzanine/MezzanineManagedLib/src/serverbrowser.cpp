@@ -3,8 +3,8 @@
 #include "cube.h"
 #include "SDL_thread.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
-#using <Tao.Sdl.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::ClientServer;
 
 struct resolverthread
 {
@@ -30,7 +30,6 @@ int resolverloop(void * data)
     resolverthread *rt = (resolverthread *)data;
     for(;;)
     {
-		//Tao::Sdl::Sdl::SDL_SemWait(resolversem);
         SDL_SemWait(resolversem);
         SDL_LockMutex(resolvermutex);
         if(resolverqueries.empty())
@@ -56,7 +55,7 @@ int resolverloop(void * data)
 
 void resolverinit(int threads, int limit)
 {
-    MezzanineLib::ClientServer::ServerBrowser::resolverlimit = limit;
+    ServerBrowser::resolverlimit = limit;
     resolversem = SDL_CreateSemaphore(0);
     resolvermutex = SDL_CreateMutex();
 
@@ -119,7 +118,7 @@ bool resolvercheck(char **name, ENetAddress *address)
         resolverthread &rt = resolverthreads[i];
         if(rt.query)
         {
-            if(MezzanineLib::GameInit::LastMillis - rt.starttime > MezzanineLib::ClientServer::ServerBrowser::resolverlimit)        
+            if(MezzanineLib::GameInit::LastMillis - rt.starttime > ServerBrowser::resolverlimit)        
             {
                 resolverstop(rt, true);
                 *name = rt.query;
@@ -179,7 +178,7 @@ void pingservers()
         buf.dataLength = p - ping;
         enet_socket_send(pingsock, &si.address, &buf, 1);
     };
-    MezzanineLib::ClientServer::ServerBrowser::lastinfo = MezzanineLib::GameInit::LastMillis;
+    ServerBrowser::lastinfo = MezzanineLib::GameInit::LastMillis;
 };
   
 void checkresolver()
@@ -245,7 +244,7 @@ void refreshservers()
 {
     checkresolver();
     checkpings();
-    if(MezzanineLib::GameInit::LastMillis - MezzanineLib::ClientServer::ServerBrowser::lastinfo >= 5000) pingservers();
+    if(MezzanineLib::GameInit::LastMillis - ServerBrowser::lastinfo >= 5000) pingservers();
     servers.sort((void *)sicompare);
     int maxmenu = 16;
     loopv(servers)

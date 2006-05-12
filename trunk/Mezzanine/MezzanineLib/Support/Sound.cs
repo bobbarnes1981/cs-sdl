@@ -116,7 +116,7 @@ namespace MezzanineLib.Support
 		public static void UpdateChannelVolume(int channel, Vector location)
 		{
 			int volume = soundVolume;
-			int pan = 255/2;
+			//int pan = 255/2;
 			//if(location = )
 			//{
 			//vdist(dist, v, location, GameInit.Player1.o);
@@ -152,8 +152,8 @@ namespace MezzanineLib.Support
 		//
 		//		void playsoundc(int n) { addmsg(0, 2, SV_SOUND, n); playsound(n); };
 
-		int soundsAtOnce = 0;
-		int lastSoundMillis = 0;
+		public static int soundsAtOnce = 0;
+		public static int lastSoundMillis = 0;
 
 		//		void playsound(int n, vec *loc)
 		//		{

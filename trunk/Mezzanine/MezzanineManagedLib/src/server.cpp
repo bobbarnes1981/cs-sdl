@@ -3,7 +3,9 @@
 
 #include "cube.h" 
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::ClientServer;
+
 
 struct client                   // server side version of "dynent" type
 {
@@ -48,14 +50,14 @@ void send(int n, ENetPacket *packet)
 	if(!packet) return;
     switch(clients[n].type)
     {
-	case MezzanineLib::ClientServer::ServerType::ST_TCPIP:
+	case ServerType::ST_TCPIP:
         {
             enet_peer_send(clients[n].peer, 0, packet);
-            MezzanineLib::ClientServer::Server::bsend += packet->dataLength;
+            Server::bsend += packet->dataLength;
             break;
         };
 
-        case MezzanineLib::ClientServer::ServerType::ST_LOCAL:
+        case ServerType::ST_LOCAL:
             localservertoclient(packet->data, packet->dataLength);
             break;
 
@@ -93,11 +95,11 @@ void disconnect_client(int n, char *reason)
 {
     printf("disconnecting client (%s) [%s]\n", clients[n].hostname, reason);
     enet_peer_disconnect(clients[n].peer);
-	clients[n].type = MezzanineLib::ClientServer::ServerType::ST_EMPTY;
+	clients[n].type = ServerType::ST_EMPTY;
     send2(true, -1, MezzanineLib::NetworkMessages::SV_CDIS, n);
 };
 
-void resetitems() { sents.setsize(0); MezzanineLib::ClientServer::Server::notgotitems = true; };
+void resetitems() { sents.setsize(0); Server::notgotitems = true; };
 
 void pickup(uint i, int sec, int sender)         // server side item pickup, acknowledge first client that gets it
 {
@@ -120,7 +122,7 @@ bool vote(char *map, int reqmode, int sender)
     strcpy_s(clients[sender].mapvote, map);
     clients[sender].modevote = reqmode;
     int yes = 0, no = 0; 
-    loopv(clients) if(clients[i].type!=MezzanineLib::ClientServer::ServerType::ST_EMPTY)
+    loopv(clients) if(clients[i].type!=ServerType::ST_EMPTY)
     {
         if(clients[i].mapvote[0]) { if(strcmp(clients[i].mapvote, map)==0 && clients[i].modevote==reqmode) yes++; else no++; }
         else no++;
@@ -168,12 +170,12 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             sgetstr();
             int reqmode = getint(p);
             if(reqmode<0) reqmode = 0;
-            if(smapname[0] && !MezzanineLib::ClientServer::Server::mapreload && !vote(text, reqmode, sender)) return;
-            MezzanineLib::ClientServer::Server::mapreload = false;
-            MezzanineLib::ClientServer::Server::mode = reqmode;
-            MezzanineLib::ClientServer::Server::minremain = MezzanineLib::ClientServer::Server::mode&1 ? 15 : 10;
-            MezzanineLib::ClientServer::Server::mapend = MezzanineLib::ClientServer::Server::lastsec+MezzanineLib::ClientServer::Server::minremain*60;
-            MezzanineLib::ClientServer::Server::interm = 0;
+            if(smapname[0] && !Server::mapreload && !vote(text, reqmode, sender)) return;
+            Server::mapreload = false;
+            Server::mode = reqmode;
+            Server::minremain = Server::mode&1 ? 15 : 10;
+            Server::mapend = Server::lastsec+Server::minremain*60;
+            Server::interm = 0;
             strcpy_s(smapname, text);
             resetitems();
             sender = -1;
@@ -183,13 +185,13 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
         case MezzanineLib::NetworkMessages::SV_ITEMLIST:
         {
             int n;
-            while((n = getint(p))!=-1) if(MezzanineLib::ClientServer::Server::notgotitems)
+            while((n = getint(p))!=-1) if(Server::notgotitems)
             {
                 server_entity se = { false, 0 };
                 while(sents.length()<=n) sents.add(se);
                 sents[n].spawned = true;
             };
-            MezzanineLib::ClientServer::Server::notgotitems = false;
+            Server::notgotitems = false;
             break;
         };
 
@@ -207,7 +209,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
         case MezzanineLib::NetworkMessages::SV_POS:
         {
             cn = getint(p);
-            if(cn<0 || cn>=clients.length() || clients[cn].type==MezzanineLib::ClientServer::ServerType::ST_EMPTY)
+            if(cn<0 || cn>=clients.length() || clients[cn].type==ServerType::ST_EMPTY)
             {
                 disconnect_client(sender, "client num");
                 return;
@@ -258,12 +260,12 @@ void send_welcome(int n)
     putint(p, MezzanineLib::GameInit::PROTOCOL_VERSION);
     putint(p, smapname[0]);
     sendstring(serverpassword, p);
-    putint(p, clients.length()>MezzanineLib::ClientServer::Server::maxclients);
+    putint(p, clients.length()>Server::maxclients);
     if(smapname[0])
     {
         putint(p, MezzanineLib::NetworkMessages::SV_MAPCHANGE);
         sendstring(smapname, p);
-        putint(p, MezzanineLib::ClientServer::Server::mode);
+        putint(p, Server::mode);
         putint(p, MezzanineLib::NetworkMessages::SV_ITEMLIST);
         loopv(sents) if(sents[i].spawned) putint(p, i);
         putint(p, -1);
@@ -290,41 +292,41 @@ void localclienttoserver(ENetPacket *packet)
 
 client &addclient()
 {
-    loopv(clients) if(clients[i].type==MezzanineLib::ClientServer::ServerType::ST_EMPTY) return clients[i];
+    loopv(clients) if(clients[i].type==ServerType::ST_EMPTY) return clients[i];
     return clients.add();
 };
 
 void checkintermission()
 {
-    if(!MezzanineLib::ClientServer::Server::minremain)
+    if(!Server::minremain)
     {
-        MezzanineLib::ClientServer::Server::interm = MezzanineLib::ClientServer::Server::lastsec+10;
-        MezzanineLib::ClientServer::Server::mapend = MezzanineLib::ClientServer::Server::lastsec+1000;
+        Server::interm = Server::lastsec+10;
+        Server::mapend = Server::lastsec+1000;
     };
-    send2(true, -1, MezzanineLib::NetworkMessages::SV_TIMEUP, MezzanineLib::ClientServer::Server::minremain--);
+    send2(true, -1, MezzanineLib::NetworkMessages::SV_TIMEUP, Server::minremain--);
 };
 
-void startintermission() { MezzanineLib::ClientServer::Server::minremain = 0; checkintermission(); };
+void startintermission() { Server::minremain = 0; checkintermission(); };
 
 void resetserverifempty()
 {
-    loopv(clients) if(clients[i].type!=MezzanineLib::ClientServer::ServerType::ST_EMPTY) return;
+    loopv(clients) if(clients[i].type!=ServerType::ST_EMPTY) return;
     clients.setsize(0);
     smapname[0] = 0;
     resetvotes();
     resetitems();
-    MezzanineLib::ClientServer::Server::mode = 0;
-    MezzanineLib::ClientServer::Server::mapreload = false;
-    MezzanineLib::ClientServer::Server::minremain = 10;
-    MezzanineLib::ClientServer::Server::mapend = MezzanineLib::ClientServer::Server::lastsec+MezzanineLib::ClientServer::Server::minremain*60;
-    MezzanineLib::ClientServer::Server::interm = 0;
+    Server::mode = 0;
+    Server::mapreload = false;
+    Server::minremain = 10;
+    Server::mapend = Server::lastsec+Server::minremain*60;
+    Server::interm = 0;
 };
 
 void serverslice(int seconds, unsigned int timeout)   // main server update, called from cube main loop in sp, or dedicated server loop
 {
     loopv(sents)        // spawn entities when timer reached
     {
-        if(sents[i].spawnsecs && (sents[i].spawnsecs -= seconds-MezzanineLib::ClientServer::Server::lastsec)<=0)
+        if(sents[i].spawnsecs && (sents[i].spawnsecs -= seconds-Server::lastsec)<=0)
         {
             sents[i].spawnsecs = 0;
             sents[i].spawned = true;
@@ -332,35 +334,35 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
         };
     };
     
-    MezzanineLib::ClientServer::Server::lastsec = seconds;
+    Server::lastsec = seconds;
     
-    if((MezzanineLib::ClientServer::Server::mode>1 || (MezzanineLib::ClientServer::Server::mode==0 && MezzanineLib::ClientServer::Server::nonlocalclients)) && seconds>MezzanineLib::ClientServer::Server::mapend-MezzanineLib::ClientServer::Server::minremain*60) checkintermission();
-    if(MezzanineLib::ClientServer::Server::interm && seconds>MezzanineLib::ClientServer::Server::interm)
+    if((Server::mode>1 || (Server::mode==0 && Server::nonlocalclients)) && seconds>Server::mapend-Server::minremain*60) checkintermission();
+    if(Server::interm && seconds>Server::interm)
     {
-        MezzanineLib::ClientServer::Server::interm = 0;
-        loopv(clients) if(clients[i].type!=MezzanineLib::ClientServer::ServerType::ST_EMPTY)
+        Server::interm = 0;
+        loopv(clients) if(clients[i].type!=ServerType::ST_EMPTY)
         {
             send2(true, i, MezzanineLib::NetworkMessages::SV_MAPRELOAD, 0);    // ask a client to trigger map reload
-            MezzanineLib::ClientServer::Server::mapreload = true;
+            Server::mapreload = true;
             break;
         };
     };
 
     resetserverifempty();
     
-    if(!MezzanineLib::ClientServer::Server::isdedicated) return;     // below is network only
+    if(!Server::isdedicated) return;     // below is network only
 
 	int numplayers = 0;
-	loopv(clients) if(clients[i].type!=MezzanineLib::ClientServer::ServerType::ST_EMPTY) ++numplayers;
-	serverms(MezzanineLib::ClientServer::Server::mode, numplayers, MezzanineLib::ClientServer::Server::minremain, smapname, seconds, clients.length()>=MezzanineLib::ClientServer::Server::maxclients);
+	loopv(clients) if(clients[i].type!=ServerType::ST_EMPTY) ++numplayers;
+	serverms(Server::mode, numplayers, Server::minremain, smapname, seconds, clients.length()>=Server::maxclients);
 
-    if(seconds-MezzanineLib::ClientServer::Server::laststatus>60)   // display bandwidth stats, useful for server ops
+    if(seconds-Server::laststatus>60)   // display bandwidth stats, useful for server ops
     {
-        MezzanineLib::ClientServer::Server::nonlocalclients = 0;
-        loopv(clients) if(clients[i].type==MezzanineLib::ClientServer::ServerType::ST_TCPIP) MezzanineLib::ClientServer::Server::nonlocalclients++;
-        MezzanineLib::ClientServer::Server::laststatus = seconds;     
-        if(MezzanineLib::ClientServer::Server::nonlocalclients || MezzanineLib::ClientServer::Server::bsend || MezzanineLib::ClientServer::Server::brec) printf("status: %d remote clients, %.1f send, %.1f rec (K/sec)\n", MezzanineLib::ClientServer::Server::nonlocalclients, MezzanineLib::ClientServer::Server::bsend/60.0f/1024, MezzanineLib::ClientServer::Server::brec/60.0f/1024);
-        MezzanineLib::ClientServer::Server::bsend = MezzanineLib::ClientServer::Server::brec = 0;
+        Server::nonlocalclients = 0;
+        loopv(clients) if(clients[i].type==ServerType::ST_TCPIP) Server::nonlocalclients++;
+        Server::laststatus = seconds;     
+        if(Server::nonlocalclients || Server::bsend || Server::brec) printf("status: %d remote clients, %.1f send, %.1f rec (K/sec)\n", Server::nonlocalclients, Server::bsend/60.0f/1024, Server::brec/60.0f/1024);
+        Server::bsend = Server::brec = 0;
     };
 
     ENetEvent event;
@@ -371,17 +373,17 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             case ENET_EVENT_TYPE_CONNECT:
             {
                 client &c = addclient();
-                c.type = MezzanineLib::ClientServer::ServerType::ST_TCPIP;
+                c.type = ServerType::ST_TCPIP;
                 c.peer = event.peer;
                 c.peer->data = (void *)(&c-&clients[0]);
                 char hn[1024];
                 strcpy_s(c.hostname, (enet_address_get_host(&c.peer->address, hn, sizeof(hn))==0) ? hn : "localhost");
                 printf("client connected (%s)\n", c.hostname);
-                send_welcome(MezzanineLib::ClientServer::Server::lastconnect = &c-&clients[0]);
+                send_welcome(Server::lastconnect = &c-&clients[0]);
                 break;
             }
             case ENET_EVENT_TYPE_RECEIVE:
-                MezzanineLib::ClientServer::Server::brec += event.packet->dataLength;
+                Server::brec += event.packet->dataLength;
                 process(event.packet, (int)event.peer->data); 
                 if(event.packet->referenceCount==0) enet_packet_destroy(event.packet);
                 break;
@@ -389,15 +391,15 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
             case ENET_EVENT_TYPE_DISCONNECT: 
                 if((int)event.peer->data<0) break;
                 printf("disconnected client (%s)\n", clients[(int)event.peer->data].hostname);
-                clients[(int)event.peer->data].type = MezzanineLib::ClientServer::ServerType::ST_EMPTY;
+                clients[(int)event.peer->data].type = ServerType::ST_EMPTY;
                 send2(true, -1, MezzanineLib::NetworkMessages::SV_CDIS, (int)event.peer->data);
                 event.peer->data = (void *)-1;
                 break;
         };
         
-        if(numplayers>MezzanineLib::ClientServer::Server::maxclients)   
+        if(numplayers>Server::maxclients)   
         {
-            disconnect_client(MezzanineLib::ClientServer::Server::lastconnect, "maxclients reached");
+            disconnect_client(Server::lastconnect, "maxclients reached");
         };
     };
 };
@@ -409,13 +411,13 @@ void cleanupserver()
 
 void localdisconnect()
 {
-    loopv(clients) if(clients[i].type==MezzanineLib::ClientServer::ServerType::ST_LOCAL) clients[i].type = MezzanineLib::ClientServer::ServerType::ST_EMPTY;
+    loopv(clients) if(clients[i].type==ServerType::ST_LOCAL) clients[i].type = ServerType::ST_EMPTY;
 };
 
 void localconnect()
 {
     client &c = addclient();
-    c.type = MezzanineLib::ClientServer::ServerType::ST_LOCAL;
+    c.type = ServerType::ST_LOCAL;
     strcpy_s(c.hostname, "local");
     send_welcome(&c-&clients[0]); 
 };
@@ -423,10 +425,10 @@ void localconnect()
 void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master, char *passwd, int maxcl)
 {
     serverpassword = passwd;
-    MezzanineLib::ClientServer::Server::maxclients = maxcl;
+    Server::maxclients = maxcl;
 	servermsinit(master ? master : "wouter.fov120.com/cube/masterserver/", sdesc, dedicated);
     
-    if(MezzanineLib::ClientServer::Server::isdedicated = dedicated)
+    if(Server::isdedicated = dedicated)
     {
         ENetAddress address = { ENET_HOST_ANY, MezzanineLib::GameInit::CUBE_SERVER_PORT };
         if(*ip && enet_address_set_host(&address, ip)<0) printf("WARNING: server ip not resolved");
@@ -437,7 +439,7 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
 
     resetserverifempty();
 
-    if(MezzanineLib::ClientServer::Server::isdedicated)       // do not return, this becomes main loop
+    if(Server::isdedicated)       // do not return, this becomes main loop
     {
         SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
         printf("dedicated server started, waiting for clients...\nCtrl-C to exit\n\n");

@@ -2,7 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Render;
 
 vertex *verts = NULL;
 
@@ -15,8 +16,8 @@ void setarraypointers()
 
 void reallocv()
 {
-    verts = (vertex *)realloc(verts, (MezzanineLib::Render::RenderCubes::curmaxverts *= 2)*sizeof(vertex));
-    MezzanineLib::Render::RenderCubes::curmaxverts -= 10;
+    verts = (vertex *)realloc(verts, (RenderCubes::curmaxverts *= 2)*sizeof(vertex));
+    RenderCubes::curmaxverts -= 10;
     if(!verts) MezzanineLib::GameInit::Fatal("no vertex memory!");
     setarraypointers();
 };
@@ -25,21 +26,21 @@ void reallocv()
 // leaves of all these functions, and are part of the cpu bottleneck on really slow
 // machines, hence the macros.
 
-#define vertcheck() { if(MezzanineLib::Render::RenderCubes::curvert>=MezzanineLib::Render::RenderCubes::curmaxverts) reallocv(); }
+#define vertcheck() { if(RenderCubes::curvert>=RenderCubes::curmaxverts) reallocv(); }
 
-#define vertf(v1, v2, v3, ls, t1, t2) { vertex &v = verts[MezzanineLib::Render::RenderCubes::curvert++]; \
+#define vertf(v1, v2, v3, ls, t1, t2) { vertex &v = verts[RenderCubes::curvert++]; \
     v.u = t1; v.v = t2; \
     v.x = v1; v.y = v2; v.z = v3; \
     v.r = ls->r; v.g = ls->g; v.b = ls->b; v.a = 255; };
 
 #define vert(v1, v2, v3, ls, t1, t2) { vertf((float)(v1), (float)(v2), (float)(v3), ls, t1, t2); }
 
-void showmip() { MezzanineLib::Render::RenderCubes::showmip; };
-void mipstats(int a, int b, int c) { if(MezzanineLib::Render::RenderCubes::showm) conoutf("1x1/2x2/4x4: %d / %d / %d", a, b, c); };
+void showmip() { RenderCubes::showmip(); };
+void mipstats(int a, int b, int c) { if(RenderCubes::showm) conoutf("1x1/2x2/4x4: %d / %d / %d", a, b, c); };
 
 COMMAND(showmip, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
-#define stripend() { if(MezzanineLib::Render::RenderCubes::floorstrip || MezzanineLib::Render::RenderCubes::deltastrip) { addstrip(MezzanineLib::Render::RenderCubes::ogltex, MezzanineLib::Render::RenderCubes::firstindex, MezzanineLib::Render::RenderCubes::curvert-MezzanineLib::Render::RenderCubes::firstindex); MezzanineLib::Render::RenderCubes::floorstrip = MezzanineLib::Render::RenderCubes::deltastrip = false; }; };
+#define stripend() { if(RenderCubes::floorstrip || RenderCubes::deltastrip) { addstrip(RenderCubes::ogltex, RenderCubes::firstindex, RenderCubes::curvert-RenderCubes::firstindex); RenderCubes::floorstrip = RenderCubes::deltastrip = false; }; };
 void finishstrips() { stripend(); };
 
 sqr sbright, sdark;
@@ -48,27 +49,27 @@ VAR(lighterror,1,8,100);
 void render_flat(int wtex, int x, int y, int size, int h, sqr *l1, sqr *l2, sqr *l3, sqr *l4, bool isceil)  // floor/ceil quads
 {
     vertcheck();
-    if(MezzanineLib::Render::RenderCubes::showm) { l3 = l1 = &sbright; l4 = l2 = &sdark; };
+    if(RenderCubes::showm) { l3 = l1 = &sbright; l4 = l2 = &sdark; };
 
     int sx, sy;
     int gltex = lookuptexture(wtex, sx, sy);
-    float xf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sx;
-    float yf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sy;
+    float xf = RenderCubes::TEXTURESCALE/sx;
+    float yf = RenderCubes::TEXTURESCALE/sy;
     float xs = size*xf;
     float ys = size*yf;
     float xo = xf*x;
     float yo = yf*y;
 
-    bool first = !MezzanineLib::Render::RenderCubes::floorstrip || y!=MezzanineLib::Render::RenderCubes::oy+size || MezzanineLib::Render::RenderCubes::ogltex!=gltex || h!=MezzanineLib::Render::RenderCubes::oh || x!=MezzanineLib::Render::RenderCubes::ox;
+    bool first = !RenderCubes::floorstrip || y!=RenderCubes::oy+size || RenderCubes::ogltex!=gltex || h!=RenderCubes::oh || x!=RenderCubes::ox;
 
     if(first)       // start strip here
     {
         stripend();
-        MezzanineLib::Render::RenderCubes::firstindex = MezzanineLib::Render::RenderCubes::curvert;
-        MezzanineLib::Render::RenderCubes::ogltex = gltex;
-        MezzanineLib::Render::RenderCubes::oh = h;
-        MezzanineLib::Render::RenderCubes::ox = x;
-        MezzanineLib::Render::RenderCubes::floorstrip = true;
+        RenderCubes::firstindex = RenderCubes::curvert;
+        RenderCubes::ogltex = gltex;
+        RenderCubes::oh = h;
+        RenderCubes::ox = x;
+        RenderCubes::floorstrip = true;
         if(isceil)
         {
             vert(x+size, h, y, l2, xo+xs, yo);
@@ -79,33 +80,33 @@ void render_flat(int wtex, int x, int y, int size, int h, sqr *l1, sqr *l2, sqr 
             vert(x,      h, y, l1, xo,    yo);
             vert(x+size, h, y, l2, xo+xs, yo);
         };
-        MezzanineLib::Render::RenderCubes::ol3r = l1->r;
-        MezzanineLib::Render::RenderCubes::ol3g = l1->g;
-        MezzanineLib::Render::RenderCubes::ol3b = l1->b;
-        MezzanineLib::Render::RenderCubes::ol4r = l2->r;
-        MezzanineLib::Render::RenderCubes::ol4g = l2->g;
-        MezzanineLib::Render::RenderCubes::ol4b = l2->b;
+        RenderCubes::ol3r = l1->r;
+        RenderCubes::ol3g = l1->g;
+        RenderCubes::ol3b = l1->b;
+        RenderCubes::ol4r = l2->r;
+        RenderCubes::ol4g = l2->g;
+        RenderCubes::ol4b = l2->b;
     }
     else        // continue strip
     {
         int lighterr = lighterror*2;
-        if((abs(MezzanineLib::Render::RenderCubes::ol3r-l3->r)<lighterr && abs(MezzanineLib::Render::RenderCubes::ol4r-l4->r)<lighterr        // skip vertices if light values are close enough
-        &&  abs(MezzanineLib::Render::RenderCubes::ol3g-l3->g)<lighterr && abs(MezzanineLib::Render::RenderCubes::ol4g-l4->g)<lighterr
-        &&  abs(MezzanineLib::Render::RenderCubes::ol3b-l3->b)<lighterr && abs(MezzanineLib::Render::RenderCubes::ol4b-l4->b)<lighterr) || !wtex)   
+        if((abs(RenderCubes::ol3r-l3->r)<lighterr && abs(RenderCubes::ol4r-l4->r)<lighterr        // skip vertices if light values are close enough
+        &&  abs(RenderCubes::ol3g-l3->g)<lighterr && abs(RenderCubes::ol4g-l4->g)<lighterr
+        &&  abs(RenderCubes::ol3b-l3->b)<lighterr && abs(RenderCubes::ol4b-l4->b)<lighterr) || !wtex)   
         {
-            MezzanineLib::Render::RenderCubes::curvert -= 2;
-            MezzanineLib::Render::RenderCubes::nquads--;
+            RenderCubes::curvert -= 2;
+            RenderCubes::nquads--;
         }
         else
         {
-            uchar *p3 = (uchar *)(&verts[MezzanineLib::Render::RenderCubes::curvert-1].r);
-            MezzanineLib::Render::RenderCubes::ol3r = p3[0];  
-            MezzanineLib::Render::RenderCubes::ol3g = p3[1];  
-            MezzanineLib::Render::RenderCubes::ol3b = p3[2];
-            uchar *p4 = (uchar *)(&verts[MezzanineLib::Render::RenderCubes::curvert-2].r);  
-            MezzanineLib::Render::RenderCubes::ol4r = p4[0];
-            MezzanineLib::Render::RenderCubes::ol4g = p4[1];
-            MezzanineLib::Render::RenderCubes::ol4b = p4[2];
+            uchar *p3 = (uchar *)(&verts[RenderCubes::curvert-1].r);
+            RenderCubes::ol3r = p3[0];  
+            RenderCubes::ol3g = p3[1];  
+            RenderCubes::ol3b = p3[2];
+            uchar *p4 = (uchar *)(&verts[RenderCubes::curvert-2].r);  
+            RenderCubes::ol4r = p4[0];
+            RenderCubes::ol4g = p4[1];
+            RenderCubes::ol4b = p4[2];
         };
     };
 
@@ -120,33 +121,33 @@ void render_flat(int wtex, int x, int y, int size, int h, sqr *l1, sqr *l2, sqr 
         vert(x+size, h, y+size, l3, xo+xs, yo+ys); 
     };
 
-    MezzanineLib::Render::RenderCubes::oy = y;
-    MezzanineLib::Render::RenderCubes::nquads++;
+    RenderCubes::oy = y;
+    RenderCubes::nquads++;
 };
 
 void render_flatdelta(int wtex, int x, int y, int size, float h1, float h2, float h3, float h4, sqr *l1, sqr *l2, sqr *l3, sqr *l4, bool isceil)  // floor/ceil quads on a slope
 {
     vertcheck();
-    if(MezzanineLib::Render::RenderCubes::showm) { l3 = l1 = &sbright; l4 = l2 = &sdark; };
+    if(RenderCubes::showm) { l3 = l1 = &sbright; l4 = l2 = &sdark; };
 
     int sx, sy;
     int gltex = lookuptexture(wtex, sx, sy);
-    float xf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sx;
-    float yf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sy;
+    float xf = RenderCubes::TEXTURESCALE/sx;
+    float yf = RenderCubes::TEXTURESCALE/sy;
     float xs = size*xf;
     float ys = size*yf;
     float xo = xf*x;
     float yo = yf*y;
 
-    bool first = !MezzanineLib::Render::RenderCubes::deltastrip || y!=MezzanineLib::Render::RenderCubes::oy+size || MezzanineLib::Render::RenderCubes::ogltex!=gltex || x!=MezzanineLib::Render::RenderCubes::ox; 
+    bool first = !RenderCubes::deltastrip || y!=RenderCubes::oy+size || RenderCubes::ogltex!=gltex || x!=RenderCubes::ox; 
 
     if(first) 
     {
         stripend();
-        MezzanineLib::Render::RenderCubes::firstindex = MezzanineLib::Render::RenderCubes::curvert;
-        MezzanineLib::Render::RenderCubes::ogltex = gltex;
-        MezzanineLib::Render::RenderCubes::ox = x;
-        MezzanineLib::Render::RenderCubes::deltastrip = true;
+        RenderCubes::firstindex = RenderCubes::curvert;
+        RenderCubes::ogltex = gltex;
+        RenderCubes::ox = x;
+        RenderCubes::deltastrip = true;
         if(isceil)
         {
             vertf((float)x+size, h2, (float)y,      l2, xo+xs, yo);
@@ -157,12 +158,12 @@ void render_flatdelta(int wtex, int x, int y, int size, float h1, float h2, floa
             vertf((float)x,      h1, (float)y,      l1, xo,    yo);
             vertf((float)x+size, h2, (float)y,      l2, xo+xs, yo);
         };
-        MezzanineLib::Render::RenderCubes::ol3r = l1->r;
-        MezzanineLib::Render::RenderCubes::ol3g = l1->g;
-        MezzanineLib::Render::RenderCubes::ol3b = l1->b;
-        MezzanineLib::Render::RenderCubes::ol4r = l2->r;
-        MezzanineLib::Render::RenderCubes::ol4g = l2->g;
-        MezzanineLib::Render::RenderCubes::ol4b = l2->b;
+        RenderCubes::ol3r = l1->r;
+        RenderCubes::ol3g = l1->g;
+        RenderCubes::ol3b = l1->b;
+        RenderCubes::ol4r = l2->r;
+        RenderCubes::ol4g = l2->g;
+        RenderCubes::ol4b = l2->b;
     };
 
     if(isceil)
@@ -176,8 +177,8 @@ void render_flatdelta(int wtex, int x, int y, int size, float h1, float h2, floa
         vertf((float)x+size, h3, (float)y+size, l3, xo+xs, yo+ys); 
     };
 
-    MezzanineLib::Render::RenderCubes::oy = y;
-    MezzanineLib::Render::RenderCubes::nquads++;
+    RenderCubes::oy = y;
+    RenderCubes::nquads++;
 };
 
 void render_2tris(sqr *h, sqr *s, int x1, int y1, int x2, int y2, int x3, int y3, sqr *l1, sqr *l2, sqr *l3)   // floor/ceil tris on a corner cube
@@ -187,23 +188,23 @@ void render_2tris(sqr *h, sqr *s, int x1, int y1, int x2, int y2, int x3, int y3
 
     int sx, sy;
     int gltex = lookuptexture(h->ftex, sx, sy);
-    float xf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sx;
-    float yf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sy;
+    float xf = RenderCubes::TEXTURESCALE/sx;
+    float yf = RenderCubes::TEXTURESCALE/sy;
 
     vertf((float)x1, h->floor, (float)y1, l1, xf*x1, yf*y1);
     vertf((float)x2, h->floor, (float)y2, l2, xf*x2, yf*y2);
     vertf((float)x3, h->floor, (float)y3, l3, xf*x3, yf*y3);
-    addstrip(gltex, MezzanineLib::Render::RenderCubes::curvert-3, 3);
+    addstrip(gltex, RenderCubes::curvert-3, 3);
 
     gltex = lookuptexture(h->ctex, sx, sy);
-    xf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sx;
-    yf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sy;
+    xf = RenderCubes::TEXTURESCALE/sx;
+    yf = RenderCubes::TEXTURESCALE/sy;
 
     vertf((float)x3, h->ceil, (float)y3, l3, xf*x3, yf*y3);
     vertf((float)x2, h->ceil, (float)y2, l2, xf*x2, yf*y2);
     vertf((float)x1, h->ceil, (float)y1, l1, xf*x1, yf*y1);
-    addstrip(gltex, MezzanineLib::Render::RenderCubes::curvert-3, 3);
-    MezzanineLib::Render::RenderCubes::nquads++;
+    addstrip(gltex, RenderCubes::curvert-3, 3);
+    RenderCubes::nquads++;
 };
 
 void render_tris(int x, int y, int size, bool topleft,
@@ -225,12 +226,12 @@ void render_square(int wtex, float floor1, float floor2, float ceil1, float ceil
 {
     stripend();
     vertcheck();
-    if(MezzanineLib::Render::RenderCubes::showm) { l1 = &sbright; l2 = &sdark; };
+    if(RenderCubes::showm) { l1 = &sbright; l2 = &sdark; };
 
     int sx, sy;
     int gltex = lookuptexture(wtex, sx, sy);
-    float xf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sx;
-    float yf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sy;
+    float xf = RenderCubes::TEXTURESCALE/sx;
+    float yf = RenderCubes::TEXTURESCALE/sy;
     float xs = size*xf;
     float xo = xf*(x1==x2 ? min(y1,y2) : min(x1,x2));
 
@@ -249,8 +250,8 @@ void render_square(int wtex, float floor1, float floor2, float ceil1, float ceil
         vertf((float)x2, floor2, (float)y2, l2, xo+xs, -floor2*yf); 
     };
 
-    MezzanineLib::Render::RenderCubes::nquads++;
-    addstrip(gltex, MezzanineLib::Render::RenderCubes::curvert-4, 4);
+    RenderCubes::nquads++;
+    addstrip(gltex, RenderCubes::curvert-4, 4);
 };
 
 VAR(watersubdiv, 1, 4, 64);
@@ -266,7 +267,7 @@ inline void vertw(int v1, float v2, int v3, sqr *c, float t1, float t2, float t)
 
 int renderwater(float hf)
 {
-    if(MezzanineLib::Render::RenderCubes::wx1<0) return MezzanineLib::Render::RenderCubes::nquads;
+    if(RenderCubes::wx1<0) return RenderCubes::nquads;
 
     glDepthMask(GL_FALSE);
     glEnable(GL_BLEND);
@@ -274,11 +275,11 @@ int renderwater(float hf)
     int sx, sy;
     glBindTexture(GL_TEXTURE_2D, lookuptexture(MezzanineLib::TextureNumbers::DEFAULT_LIQUID, sx, sy));  
 
-    MezzanineLib::Render::RenderCubes::wx1 &= ~(watersubdiv-1);
-    MezzanineLib::Render::RenderCubes::wy1 &= ~(watersubdiv-1);
+    RenderCubes::wx1 &= ~(watersubdiv-1);
+    RenderCubes::wy1 &= ~(watersubdiv-1);
 
-    float xf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sx;
-    float yf = MezzanineLib::Render::RenderCubes::TEXTURESCALE/sy;
+    float xf = RenderCubes::TEXTURESCALE/sx;
+    float yf = RenderCubes::TEXTURESCALE/sy;
     float xs = watersubdiv*xf;
     float ys = watersubdiv*yf;
     float t1 = MezzanineLib::GameInit::LastMillis/300.0f;
@@ -287,38 +288,38 @@ int renderwater(float hf)
     sqr dl;
     dl.r = dl.g = dl.b = 255;
     
-    for(int xx = MezzanineLib::Render::RenderCubes::wx1; xx<MezzanineLib::Render::RenderCubes::wx2; xx += watersubdiv)
+    for(int xx = RenderCubes::wx1; xx<RenderCubes::wx2; xx += watersubdiv)
     {
-        for(int yy = MezzanineLib::Render::RenderCubes::wy1; yy<MezzanineLib::Render::RenderCubes::wy2; yy += watersubdiv)
+        for(int yy = RenderCubes::wy1; yy<RenderCubes::wy2; yy += watersubdiv)
         {
             float xo = xf*(xx+t2);
             float yo = yf*(yy+t2);
-            if(yy==MezzanineLib::Render::RenderCubes::wy1)
+            if(yy==RenderCubes::wy1)
             {
-                vertw(xx,             hf, yy,             &dl, MezzanineLib::Render::RenderCubes::dx(xo),    MezzanineLib::Render::RenderCubes::dy(yo), t1);
-                vertw(xx+watersubdiv, hf, yy,             &dl, MezzanineLib::Render::RenderCubes::dx(xo+xs), MezzanineLib::Render::RenderCubes::dy(yo), t1);
+                vertw(xx,             hf, yy,             &dl, RenderCubes::dx(xo),    RenderCubes::dy(yo), t1);
+                vertw(xx+watersubdiv, hf, yy,             &dl, RenderCubes::dx(xo+xs), RenderCubes::dy(yo), t1);
             };
-            vertw(xx,             hf, yy+watersubdiv, &dl, MezzanineLib::Render::RenderCubes::dx(xo),    MezzanineLib::Render::RenderCubes::dy(yo+ys), t1);
-            vertw(xx+watersubdiv, hf, yy+watersubdiv, &dl, MezzanineLib::Render::RenderCubes::dx(xo+xs), MezzanineLib::Render::RenderCubes::dy(yo+ys), t1); 
+            vertw(xx,             hf, yy+watersubdiv, &dl, RenderCubes::dx(xo),    RenderCubes::dy(yo+ys), t1);
+            vertw(xx+watersubdiv, hf, yy+watersubdiv, &dl, RenderCubes::dx(xo+xs), RenderCubes::dy(yo+ys), t1); 
         };   
-        int n = (MezzanineLib::Render::RenderCubes::wy2-MezzanineLib::Render::RenderCubes::wy1-1)/watersubdiv;
-        MezzanineLib::Render::RenderCubes::nquads += n;
+        int n = (RenderCubes::wy2-RenderCubes::wy1-1)/watersubdiv;
+        RenderCubes::nquads += n;
         n = (n+2)*2;
-        glDrawArrays(GL_TRIANGLE_STRIP, MezzanineLib::Render::RenderCubes::curvert -= n, n);
+        glDrawArrays(GL_TRIANGLE_STRIP, RenderCubes::curvert -= n, n);
     };
     
     glDisable(GL_BLEND);
     glDepthMask(GL_TRUE);
     
-    return MezzanineLib::Render::RenderCubes::nquads;
+    return RenderCubes::nquads;
 };
 
 void resetcubes()
 {
     if(!verts) reallocv();
-    MezzanineLib::Render::RenderCubes::floorstrip = MezzanineLib::Render::RenderCubes::deltastrip = false;
-    MezzanineLib::Render::RenderCubes::wx1 = -1;
-    MezzanineLib::Render::RenderCubes::nquads = 0;
+    RenderCubes::floorstrip = RenderCubes::deltastrip = false;
+    RenderCubes::wx1 = -1;
+    RenderCubes::nquads = 0;
     sbright.r = sbright.g = sbright.b = 255;
     sdark.r = sdark.g = sdark.b = 0;
 };

@@ -5,7 +5,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Game;
 
 bool plcollide(dynent *d, dynent *o, float &headspace, float &hi, float &lo) // collide with player or monster
 {
@@ -166,15 +167,15 @@ VARP(maxroll, 0, 3, 20);
 
 void physicsframe()          // optimally schedule physics frames inside the graphics frames
 {
-    if(MezzanineLib::GameInit::CurrentTime>=MezzanineLib::Game::Physics::MINFRAMETIME)
+    if(MezzanineLib::GameInit::CurrentTime>=Physics::MINFRAMETIME)
     {
-        int faketime = MezzanineLib::GameInit::CurrentTime+MezzanineLib::Game::Physics::physicsfraction;
-        MezzanineLib::Game::Physics::physicsrepeat = faketime/MezzanineLib::Game::Physics::MINFRAMETIME;
-        MezzanineLib::Game::Physics::physicsfraction = faketime-MezzanineLib::Game::Physics::physicsrepeat*MezzanineLib::Game::Physics::MINFRAMETIME;
+        int faketime = MezzanineLib::GameInit::CurrentTime+Physics::physicsfraction;
+        Physics::physicsrepeat = faketime/Physics::MINFRAMETIME;
+        Physics::physicsfraction = faketime-Physics::physicsrepeat*Physics::MINFRAMETIME;
     }
     else
     {
-        MezzanineLib::Game::Physics::physicsrepeat = 1;
+        Physics::physicsrepeat = 1;
     };
 };
 
@@ -189,19 +190,19 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
 
     vec d;      // vector of direction we ideally want to move in
 
-    d.x = (float)(pl->move*cos(MezzanineLib::Game::Physics::rad(pl->yaw-90)));
-    d.y = (float)(pl->move*sin(MezzanineLib::Game::Physics::rad(pl->yaw-90)));
+    d.x = (float)(pl->move*cos(Physics::rad(pl->yaw-90)));
+    d.y = (float)(pl->move*sin(Physics::rad(pl->yaw-90)));
     d.z = 0;
 
     if(floating || water)
     {
-        d.x *= (float)cos(MezzanineLib::Game::Physics::rad(pl->pitch));
-        d.y *= (float)cos(MezzanineLib::Game::Physics::rad(pl->pitch));
-        d.z = (float)(pl->move*sin(MezzanineLib::Game::Physics::rad(pl->pitch)));
+        d.x *= (float)cos(Physics::rad(pl->pitch));
+        d.y *= (float)cos(Physics::rad(pl->pitch));
+        d.z = (float)(pl->move*sin(Physics::rad(pl->pitch)));
     };
 
-    d.x += (float)(pl->strafe*cos(MezzanineLib::Game::Physics::rad(pl->yaw-180)));
-    d.y += (float)(pl->strafe*sin(MezzanineLib::Game::Physics::rad(pl->yaw-180)));
+    d.x += (float)(pl->strafe*cos(Physics::rad(pl->yaw-180)));
+    d.y += (float)(pl->strafe*sin(Physics::rad(pl->yaw-180)));
 
     const float speed = curtime/(water ? 2000.0f : 1000.0f)*pl->maxspeed;
     const float friction = water ? 20.0f : (pl->onfloor || floating ? 6.0f : 30.0f);
@@ -315,6 +316,6 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
 
 void moveplayer(dynent *pl, int moveres, bool local)
 {
-    loopi(MezzanineLib::Game::Physics::physicsrepeat) moveplayer(pl, moveres, local, i ? MezzanineLib::GameInit::CurrentTime/MezzanineLib::Game::Physics::physicsrepeat : MezzanineLib::GameInit::CurrentTime-MezzanineLib::GameInit::CurrentTime/MezzanineLib::Game::Physics::physicsrepeat*(MezzanineLib::Game::Physics::physicsrepeat-1));
+    loopi(Physics::physicsrepeat) moveplayer(pl, moveres, local, i ? MezzanineLib::GameInit::CurrentTime/Physics::physicsrepeat : MezzanineLib::GameInit::CurrentTime-MezzanineLib::GameInit::CurrentTime/Physics::physicsrepeat*(Physics::physicsrepeat-1));
 };
 

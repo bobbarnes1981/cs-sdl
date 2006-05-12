@@ -2,7 +2,8 @@
 
 #include "cube.h"
 #using <mscorlib.dll>
-#using <MezzanineLib.dll>
+using namespace MezzanineLib;
+using namespace MezzanineLib::Render;
 
 struct md2_header
 {
@@ -117,9 +118,9 @@ void md2::scale(int frame, float scale, int sn)
     {
         uchar *cv = (uchar *)&cf->vertices[vi].vertex;
         vec *v = &(mverts[frame])[vi];
-        v->x =  (MezzanineLib::Render::RenderMD2::Snap(sn, cv[0]*cf->scale[0])+cf->translate[0])/sc;
-        v->y = -(MezzanineLib::Render::RenderMD2::Snap(sn, cv[1]*cf->scale[1])+cf->translate[1])/sc;
-        v->z =  (MezzanineLib::Render::RenderMD2::Snap(sn, cv[2]*cf->scale[2])+cf->translate[2])/sc;
+        v->x =  (RenderMD2::Snap(sn, cv[0]*cf->scale[0])+cf->translate[0])/sc;
+        v->y = -(RenderMD2::Snap(sn, cv[1]*cf->scale[1])+cf->translate[1])/sc;
+        v->z =  (RenderMD2::Snap(sn, cv[2]*cf->scale[2])+cf->translate[2])/sc;
     };
 };
 
@@ -137,7 +138,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
     if(displaylist && frame==0 && range==1)
     {
 		glCallList(displaylist);
-		MezzanineLib::Render::RenderGl::XtraVerts += displaylistverts;
+		RenderGl::XtraVerts += displaylistverts;
     }
     else
     {
@@ -145,7 +146,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 		{
 			static int displaylistn = 10;
 			glNewList(displaylist = displaylistn++, GL_COMPILE);
-			displaylistverts = MezzanineLib::Render::RenderGl::XtraVerts;
+			displaylistverts = RenderGl::XtraVerts;
 		};
 		
 		int time = MezzanineLib::GameInit::LastMillis-basetime;
@@ -176,7 +177,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 				glVertex3f(ip(x), ip(z), ip(y));
 			};
 
-			MezzanineLib::Render::RenderGl::XtraVerts += numVertex;
+			RenderGl::XtraVerts += numVertex;
 
 			glEnd();
 		};
@@ -184,7 +185,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 		if(displaylist)
 		{
 			glEndList();
-			displaylistverts = MezzanineLib::Render::RenderGl::XtraVerts-displaylistverts;
+			displaylistverts = RenderGl::XtraVerts-displaylistverts;
 		};
 	};
 
@@ -202,7 +203,7 @@ void delayedload(md2 *m)
         if(!m->load(path(name1))) MezzanineLib::GameInit::Fatal("loadmodel: ", name1);
         sprintf_sd(name2)("packages/models/%s/skin.jpg", m->loadname);
         int xs, ys;
-		MezzanineLib::Render::RenderGl::InstallTexture(MezzanineLib::Render::RenderMD2::FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
+		RenderGl::InstallTexture(RenderMD2::FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
         m->loaded = true;
     };
 };
@@ -213,7 +214,7 @@ md2 *loadmodel(char *name)
     md2 **mm = mdllookup->access(name);
     if(mm) return *mm;
     md2 *m = new md2();
-    m->mdlnum = MezzanineLib::Render::RenderMD2::modelnum++;
+    m->mdlnum = RenderMD2::modelnum++;
     mapmodelinfo mmi = { 2, 2, 0, 0, "" }; 
     m->mmi = mmi;
     m->loadname = newstring(name);
@@ -245,7 +246,7 @@ void rendermodel(char *mdl, int frame, int range, int tex, float rad, float x, f
     delayedload(m);
     
     int xs, ys;
-    glBindTexture(GL_TEXTURE_2D, tex ? lookuptexture(tex, xs, ys) : MezzanineLib::Render::RenderMD2::FIRSTMDL+m->mdlnum);
+    glBindTexture(GL_TEXTURE_2D, tex ? lookuptexture(tex, xs, ys) : RenderMD2::FIRSTMDL+m->mdlnum);
     
     int ix = (int)x;
     int iy = (int)z;
