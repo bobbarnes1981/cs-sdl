@@ -49,11 +49,9 @@ void renderclients()
 
 // creation of scoreboard pseudo-menu
 
-bool scoreson = false;
-
 void showscores(bool on)
 {
-    scoreson = on;
+    MezzanineLib::ClientServer::ClientExtras::scoreson = on;
     menuset(((int)on)-1);
 };
 
@@ -68,35 +66,33 @@ void renderscore(dynent *d)
     menumanual(0, scorelines.length()-1, scorelines.last().s); 
 };
 
-const int maxteams = 4;
-char *teamname[maxteams];
-int teamscore[maxteams], teamsused;
+char *teamname[MezzanineLib::ClientServer::ClientExtras::maxteams];
+int teamscore[MezzanineLib::ClientServer::ClientExtras::maxteams];
 string teamscores;
-int timeremain = 0;
 
 void addteamscore(dynent *d)
 {
     if(!d) return;
-    loopi(teamsused) if(strcmp(teamname[i], d->team)==0) { teamscore[i] += d->frags; return; };
-    if(teamsused==maxteams) return;
-    teamname[teamsused] = d->team;
-    teamscore[teamsused++] = d->frags;
+    loopi(MezzanineLib::ClientServer::ClientExtras::teamsused) if(strcmp(teamname[i], d->team)==0) { teamscore[i] += d->frags; return; };
+    if(MezzanineLib::ClientServer::ClientExtras::teamsused==MezzanineLib::ClientServer::ClientExtras::maxteams) return;
+    teamname[MezzanineLib::ClientServer::ClientExtras::teamsused] = d->team;
+    teamscore[MezzanineLib::ClientServer::ClientExtras::teamsused++] = d->frags;
 };
 
 void renderscores()
 {
-    if(!scoreson) return;
+    if(!MezzanineLib::ClientServer::ClientExtras::scoreson) return;
     scorelines.setsize(0);
     if(!MezzanineLib::GameInit::DemoPlayback) renderscore(player1);
     loopv(players) if(players[i]) renderscore(players[i]);
     sortmenu(0, scorelines.length());
     if(m_teammode)
     {
-        teamsused = 0;
+        MezzanineLib::ClientServer::ClientExtras::teamsused = 0;
         loopv(players) addteamscore(players[i]);
         if(!MezzanineLib::GameInit::DemoPlayback) addteamscore(player1);
         teamscores[0] = 0;
-        loopj(teamsused)
+        loopj(MezzanineLib::ClientServer::ClientExtras::teamsused)
         {
             sprintf_sd(sc)("[ %s: %d ]", teamname[j], teamscore[j]);
             strcat_s(teamscores, sc);

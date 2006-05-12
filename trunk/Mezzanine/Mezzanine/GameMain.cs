@@ -57,6 +57,8 @@ namespace Mezzanine
 		byte lasttype = 0;
 		byte lastbut = 0;
 		int minmillis = 5;
+
+		bool grabMouse = true;
 		
 
 		/// <summary>
@@ -89,6 +91,9 @@ namespace Mezzanine
 				{
 					switch(a.Substring(1,1))
 					{
+						case "g":
+							grabMouse = false;
+							break;
 						case "d": 
 							dedicated = true; 
 							break;
@@ -144,7 +149,10 @@ namespace Mezzanine
 			MezzanineLib.GameInit.Log("video: mode");
 			Video.WindowIcon();
 			Video.WindowCaption = "Mezzanine Engine";
-			//Video.GrabInput = true; 
+			if (grabMouse)
+			{
+				Video.GrabInput = true;
+			}
 			Video.SetVideoModeWindowOpenGL(GameInit.ScreenWidth, GameInit.ScreenHeight);
 			
 			MezzanineLib.GameInit.Log("video: misc");

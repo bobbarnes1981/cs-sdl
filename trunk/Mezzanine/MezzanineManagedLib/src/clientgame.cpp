@@ -225,7 +225,7 @@ void updateworld(int millis)        // main game update loop
         demoplaybackstep();
         if(!MezzanineLib::GameInit::DemoPlayback)
         {
-            if(getclientnum()>=0) shoot(player1, worldpos);     // only shoot when connected to server
+            if(MezzanineLib::ClientServer::Client::ClientNum>=0) shoot(player1, worldpos);     // only shoot when connected to server
             gets2c();           // do this first, so we have most accurate information when our player moves
         };
         otherplayers();
@@ -356,7 +356,7 @@ void selfdamage(int damage, int actor, dynent *act)
         }
         else if(actor==-1)
         {
-            actor = getclientnum();
+            actor = MezzanineLib::ClientServer::Client::ClientNum;
             conoutf("you suicided!");
             addmsg(1, 2, MezzanineLib::NetworkMessages::SV_FRAGS, --player1->frags);
         }

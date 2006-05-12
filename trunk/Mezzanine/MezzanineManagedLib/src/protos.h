@@ -77,7 +77,7 @@ extern DECLSPEC void CDECL c2sinfo(dynent *d);
 extern DECLSPEC void CDECL neterr(char *s);
 extern DECLSPEC void CDECL initclientnet();
 extern DECLSPEC bool CDECL netmapstart();
-extern DECLSPEC int CDECL getclientnum();
+//extern DECLSPEC int CDECL getclientnum();
 extern DECLSPEC void CDECL changemapserv(char *name, int mode);
 extern DECLSPEC void CDECL writeclientinfo(FILE *f);
 

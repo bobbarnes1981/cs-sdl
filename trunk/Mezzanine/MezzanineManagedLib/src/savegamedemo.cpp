@@ -157,7 +157,7 @@ vec dorig;
 void record(char *name)
 {
     if(m_sp) { conoutf("cannot record singleplayer games"); return; };
-    int cn = getclientnum();
+    int cn = MezzanineLib::ClientServer::Client::ClientNum;
     if(cn<0) return;
     sprintf_sd(fn)("demos/%s.cdgz", name);
     savestate(fn);
