@@ -40,6 +40,10 @@ using System.Runtime.InteropServices;
 
 namespace MezzanineLib.ClientServer
 {
+//	public struct sline 
+//	{ 
+//		public string s; 
+//	}
 	/// <summary>
 	/// 
 	/// </summary>

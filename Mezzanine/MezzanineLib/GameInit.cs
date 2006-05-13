@@ -82,11 +82,11 @@ namespace MezzanineLib
 		int[] reserved;
 	};
 
-//	[StructLayout(LayoutKind.Sequential, Pack=4)]
-//	public struct block 
-//	{ 
-//		int x, y, xs, ys; 
-//	};
+	[StructLayout(LayoutKind.Sequential, Pack=4)]
+	public struct Block 
+	{ 
+		public int x, y, xs, ys; 
+	};
 
 //	[StructLayout(LayoutKind.Sequential, Pack=4)]
 //	public struct mapmodelinfo 
