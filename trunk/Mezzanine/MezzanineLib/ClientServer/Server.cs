@@ -41,6 +41,11 @@ using System.Runtime.InteropServices;
 
 namespace MezzanineLib.ClientServer
 {	
+//	public struct server_entity            // server side version of "entity" type
+//	{
+//		public bool spawned;
+//		public int spawnsecs;
+//	}
 	/// <summary>
 	/// 
 	/// </summary>

@@ -151,4 +151,5 @@ extern int nextmode;
 #include <zlib.h>
 
 #include "protos.h"				// external function decls
+using namespace MezzanineLib;
 
