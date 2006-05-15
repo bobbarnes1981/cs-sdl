@@ -3,6 +3,7 @@
 #include "cube.h"
 #include "SDL_mixer.h"
 #using <mscorlib.dll>
+//#using <Tao.Sdl.dll>
 using namespace MezzanineLib;
 using namespace MezzanineLib::Support;
 
@@ -89,7 +90,8 @@ void playsound(int n, vec *loc)
 	if(!samples[n])
 	{
 		sprintf_sd(buf)("packages/sounds/%s.wav", snames[n]);
-		samples[n] = Mix_LoadWAV(path(buf));
+		//GameInit::Path = "packages/sounds/"+snames[n]+".wav" ;
+		samples[n] = Mix_LoadWAV(buf);
 		if(!samples[n]) { conoutf("failed to load sample: %s", buf); return; };
 	};
 

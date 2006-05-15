@@ -34,7 +34,6 @@ typedef unsigned int uint;
 
 #pragma warning( 3 : 4189 ) 
 //#pragma comment(linker,"/OPT:NOWIN98")
-#define PATHDIV '\\'
 
 // easy safe strings
 

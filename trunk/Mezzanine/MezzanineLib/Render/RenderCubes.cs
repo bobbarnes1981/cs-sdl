@@ -105,6 +105,19 @@ namespace MezzanineLib.Render
 		{ 
 			showm = !showm; 
 		}
+		/// <summary>
+		/// TODO
+		/// </summary>
+		public static void ResetCubes()
+		{
+			//if(!verts) reallocv();
+			RenderCubes.floorstrip = false;
+			RenderCubes.deltastrip = false;
+			RenderCubes.wx1 = -1;
+			RenderCubes.nquads = 0;
+			//sbright.r = sbright.g = sbright.b = 255;
+			//sdark.r = sdark.g = sdark.b = 0;
+		}
 
 	}
 }

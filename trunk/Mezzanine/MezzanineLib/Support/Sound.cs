@@ -33,6 +33,7 @@
 #endregion License
 
 using System;
+using System.Collections;
 using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
@@ -68,6 +69,24 @@ namespace MezzanineLib.Support
 		static int musicVolume = 128;
 		static SdlDotNet.Music music;
 		static SoundLocation[] soundLocations = new SoundLocation[MAXCHAN];
+		static ArrayList samples = new ArrayList();
+		static ArrayList snames = new ArrayList();
+
+		/// <summary>
+		/// TODO
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		public static int RegisterSound(string name)
+		{
+			if (snames.Contains(name))
+			{
+				return snames.IndexOf(name);
+			}
+			snames.Add(name);
+			samples.Add(null);
+			return samples.Count-1;
+		}
 
 		//#define MAXVOL MIX_MAX_VOLUME
 		//Mix_Music *mod = NULL;

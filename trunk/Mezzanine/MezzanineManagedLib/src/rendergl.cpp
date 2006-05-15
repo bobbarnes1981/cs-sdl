@@ -75,7 +75,7 @@ int lookuptexture(int tex, int &xs, int &ys)
     int tnum = Render::RenderGl::CurrentTextureNumber+RenderGl::FIRSTTEX;
     strcpy_s(texname[Render::RenderGl::CurrentTextureNumber], mapname[tex][frame]);
 
-    sprintf_sd(name)("packages%c%s", PATHDIV, texname[Render::RenderGl::CurrentTextureNumber]);
+	sprintf_sd(name)("packages%c%s", GameInit::PATHDIV, texname[Render::RenderGl::CurrentTextureNumber]);
 
 	if(Render::RenderGl::InstallTexture(tnum, name, &xs, &ys))
     {
