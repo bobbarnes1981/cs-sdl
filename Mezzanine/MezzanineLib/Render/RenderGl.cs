@@ -33,6 +33,7 @@
 #endregion License
 
 using System;
+using System.Collections;
 using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
@@ -59,7 +60,38 @@ namespace MezzanineLib.Render
 		// std 1+, sky 14+, mdls 20+
 		public const int MAXFRAMES = 2;                    // increase to allow more complex shader defs
 
-		
+		public static int[] texx= new int[MAXTEX];                           // ( loaded texture ) -> ( name, size )
+		public static int[] texy = new int[MAXTEX];                           
+		public static char[] texname = new char[MAXTEX];
+
+		public struct strip 
+		{ 
+			public int tex;
+			public int start;
+			public int num; 
+		}
+
+		//VARP(fov, 10, 105, 120);
+		//VAR(fog, 64, 180, 1024);
+		//VAR(fogcolour, 0, 0x8099B3, 0xFFFFFF);
+
+		//VARP(hudgun,0,1,1);
+		static int fov = 0;
+		static int fog = 0;
+		static int fogcolour = 0;
+		//static int handgun = 0;
+
+		public static ArrayList strips = new ArrayList();
+
+		public static void AddStrip(int tex, int start, int n)
+		{
+			strip s = new strip();
+			s.tex = tex;
+			s.start = start;
+			s.num = n;
+			strips.Add(s);
+		}
+
 		public static int skyoglid;
 
 		/// <summary>
@@ -238,59 +270,59 @@ namespace MezzanineLib.Render
 		}
 
 		/// <summary>
-		/// TODO: Still a long way to go on this one.
+		/// TODO
 		/// </summary>
 		/// <param name="w"></param>
 		/// <param name="h"></param>
-		/// <param name="currentFps"></param>
-		static void GlDrawFrame(int w, int h, float currentFps)
+		/// <param name="curfps"></param>
+		public static void GlDrawFrame(int w, int h, float curfps)
 		{
 			//float hf = hdr.waterlevel-0.3f;
-			//float fovy = (float)fov*h/w;
+			float fovy = (float)fov*h/w;
 			float aspect = w/(float)h;
 			//bool underwater = GameInit.Player1.o.z<hf;
     
-			//Gl.glFogi(Gl.GL_FOG_START, (fog+64)/8);
-			//Gl.glFogi(Gl.GL_FOG_END, fog);
-			//float fogc[4] = { (fogcolour>>16)/256.0f, ((fogcolour>>8)&255)/256.0f, (fogcolour&255)/256.0f, 1.0f };
-			//Gl.glFogfv(GL_FOG_COLOR, fogc);
-			//Gl.glClearColor(fogc[0], fogc[1], fogc[2], 1.0f);
+			Gl.glFogi(Gl.GL_FOG_START, (fog+64)/8);
+			Gl.glFogi(Gl.GL_FOG_END, fog);
+			float[] fogc = { (fogcolour>>16)/256.0f, ((fogcolour>>8)&255)/256.0f, (fogcolour&255)/256.0f, 1.0f };
+			Gl.glFogfv(Gl.GL_FOG_COLOR, fogc);
+			Gl.glClearColor(fogc[0], fogc[1], fogc[2], 1.0f);
 
-			//if(underwater)
-			//{
-			//fovy += (float)sin(lastmillis/1000.0)*2.0f;
-			//aspect += (float)sin(lastmillis/1000.0+PI)*0.1f;
-			Gl.glFogi(Gl.GL_FOG_START, 0);
-			//Gl.glFogi(Gl.GL_FOG_END, (fog+96)/8);
-			//};
+//			if(underwater)
+//			{
+//				fovy += (float)Math.Sin(GameInit.LastMillis/1000.0)*2.0f;
+//				aspect += (float)Math.Sin(GameInit.LastMillis/1000.0+System.Math.PI)*0.1f;
+//				Gl.glFogi(Gl.GL_FOG_START, 0);
+//				Gl.glFogi(Gl.GL_FOG_END, (fog+96)/8);
+//			};
     
 			Gl.glClear((GameInit.Player1.outsidemap ? Gl.GL_COLOR_BUFFER_BIT : 0) | Gl.GL_DEPTH_BUFFER_BIT);
 
 			Gl.glMatrixMode(Gl.GL_PROJECTION);
 			Gl.glLoadIdentity();
-			//int farplane = fog*5/2;
-			//Glu.gluPerspective(fovy, aspect, 0.15f, farplane);
+			int farplane = fog*5/2;
+			Glu.gluPerspective(fovy, aspect, 0.15f, farplane);
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 
 			TransPlayer();
 
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
     
-			//int xs, ys;
-			//skyoglid = lookuptexture(TextureNumbers.DEFAULT_SKY, xs, ys);
+			int xs, ys;
+			skyoglid = LookupTexture((int)TextureNumbers.DEFAULT_SKY, out xs, out ys);
    
-			//resetcubes();
+			RenderCubes.ResetCubes();
             
-			//curvert = 0;
+			RenderCubes.curvert = 0;
 			//strips.setsize(0);
   
-			//render_world(player1->o.x, player1->o.y, player1->o.z, 
-			//(int)player1->yaw, (int)player1->pitch, (float)fov, w, h);
+			//render_world(GameInit.Player1.o.x, GameInit.Player1.o.y, GameInit.Player1.o.z, 
+			//	(int)GameInit.Player1.yaw, (int)GameInit.Player1.pitch, (float)fov, w, h);
 			//finishstrips();
 
-			//setupworld();
+			SetupWorld();
 
-			//renderstripssky();
+			RenderStripsSky();
 
 			Gl.glLoadIdentity();
 			Gl.glRotated(GameInit.Player1.pitch, -1.0, 0.0, 0.0);
@@ -299,42 +331,42 @@ namespace MezzanineLib.Render
 			Gl.glColor3f(1.0f, 1.0f, 1.0f);
 			Gl.glDisable(Gl.GL_FOG);
 			Gl.glDepthFunc(Gl.GL_GREATER);
-			//RenderText.DrawEnvBox(14, fog*4/3);
+			RenderText.DrawEnvBox(14, fog*4/3);
 			Gl.glDepthFunc(Gl.GL_LESS);
 			Gl.glEnable(Gl.GL_FOG);
 
-			//transplayer();
+			TransPlayer();
         
 			OverBright(2);
     
 			//renderstrips();
 
-			xtraverts = 0;
+			XtraVerts = 0;
 
 			//renderclients();
 			//monsterrender();
 
 			//renderentities();
 
-			//renderspheres(curtime);
+			//renderspheres(GameInit.CurrentTime);
 			//renderents();
 
 			Gl.glDisable(Gl.GL_CULL_FACE);
 
-			//drawhudgun(fovy, aspect, farplane);
+			DrawHudGun(fovy, aspect, farplane);
 
 			OverBright(1);
 			//int nquads = renderwater(hf);
     
 			OverBright(2);
-			//render_particles(curtime);
+			//render_particles(GameInit.CurrentTime);
 			OverBright(1);
 
 			Gl.glDisable(Gl.GL_FOG);
 
 			Gl.glDisable(Gl.GL_TEXTURE_2D);
 
-			//gl_drawhud(w, h, (int)currentFps, nquads, curvert, underwater);
+			//gl_drawhud(w, h, (int)curfps, nquads, RenderCubes.curvert, underwater);
 
 			Gl.glEnable(Gl.GL_CULL_FACE);
 			Gl.glEnable(Gl.GL_FOG);
@@ -447,8 +479,8 @@ namespace MezzanineLib.Render
 			return true;
 		}
 
-		int[,] mapping= new int[256, MAXFRAMES];                // ( cube texture, frame ) -> ( opengl id, name )
-		string[,] mapname= new string[256, MAXFRAMES];
+		static int[,] mapping= new int[256, MAXFRAMES];                // ( cube texture, frame ) -> ( opengl id, name )
+		//static char[,] mapname= new char[256, MAXFRAMES];
 
 		public void Texture(string aframe, string name)
 		{
@@ -459,9 +491,121 @@ namespace MezzanineLib.Render
 				return;
 			}
 			mapping[num, frame] = 1;
-			string n = mapname[num, frame];
+			//GameInit.Path = mapname[num, frame];
 			//strcpy_s(n, name);
 			//path(n);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void RenderStripsSky()
+		{
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, skyoglid);
+			if(false) 
+			{
+			} 
+			else 
+			{
+				for(int i = 0; i<RenderGl.strips.Count; i++) 
+				{
+					if(((strip)strips[i]).tex==skyoglid) Gl.glDrawArrays(Gl.GL_TRIANGLE_STRIP, ((strip)strips[i]).start, ((strip)strips[i]).num);
+				}
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void PurgeTextures()
+		{
+			for(int i = 0; i<(256); i++)
+			{
+				for(int j = 0; j<(RenderGl.MAXFRAMES); j++)
+				{
+					mapping[i,j] = 0;
+				}
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="tex"></param>
+		/// <param name="xs"></param>
+		/// <param name="ys"></param>
+		/// <returns></returns>
+		public static int LookupTexture(int tex, out int xs, out int ys)
+		{
+			int frame = 0;                      // other frames?
+			int tid = mapping[tex,frame];
+
+			if(tid>=FIRSTTEX)
+			{
+				xs = texx[tid-FIRSTTEX];
+				ys = texy[tid-FIRSTTEX];
+				return tid;
+			}
+
+			xs = ys = 16;
+			if(tid == 0) return 1;                  // crosshair :)
+
+			for(int i = 0; i<(CurrentTextureNumber); i++)       // lazily happens once per "texture" command, basically
+			{
+//				if(mapname[tex,frame] == texname[i])
+//				{
+//					mapping[tex,frame] = tid = i+FIRSTTEX;
+//					xs = texx[i];
+//					ys = texy[i];
+//					return tid;
+//				};
+			};
+
+			if(CurrentTextureNumber==MAXTEX) GameInit.Fatal("loaded too many textures");
+
+			int tnum = CurrentTextureNumber+FIRSTTEX;
+			//texname[CurrentTextureNumber] =  mapname[tex, frame];
+
+			string name = "packages" + GameInit.PATHDIV + texname[CurrentTextureNumber];
+
+			if(InstallTexture(tnum, name, out xs, out ys))
+			{
+				mapping[tex, frame] = tnum;
+				texx[CurrentTextureNumber] = xs;
+				texy[CurrentTextureNumber] = ys;
+				CurrentTextureNumber++;
+				return tnum;
+			}
+			else
+			{
+				return mapping[tex, frame] = FIRSTTEX;  // temp fix
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void RenderStrips()
+		{
+			int lasttex = -1;
+			if(false) 
+			{
+			} 
+			else 
+			{
+				for(int i = 0; i<RenderGl.strips.Count; i++) 
+				{
+					if(((strip)RenderGl.strips[i]).tex!=RenderGl.skyoglid)
+					{
+						if(((strip)RenderGl.strips[i]).tex!=lasttex)
+						{
+							Gl.glBindTexture(Gl.GL_TEXTURE_2D, ((strip)RenderGl.strips[i]).tex); 
+							lasttex = ((strip)RenderGl.strips[i]).tex;
+						}
+						Gl.glDrawArrays(Gl.GL_TRIANGLE_STRIP, ((strip)RenderGl.strips[i]).start, ((strip)RenderGl.strips[i]).num);  
+					}
+				}
+			}
 		}
 	}
 }

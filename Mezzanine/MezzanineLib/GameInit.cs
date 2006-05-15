@@ -127,6 +127,22 @@ namespace MezzanineLib
 		static int screenHeight = 480;
 		static int lastmillis = 0;	
 		static int mapVersion = 5;
+		static string path;
+		public static readonly char PATHDIV = '\\';
+		/// <summary>
+		/// 
+		/// </summary>
+		public static string Path
+		{
+			get
+			{
+				return path;
+			}
+			set
+			{
+				path = value;
+			}
+		}
 
 		/// <summary>
 		/// bump if map format changes, see worldio.cpp

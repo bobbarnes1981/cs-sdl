@@ -106,7 +106,7 @@ pool *gp()  // useful for global buffers that need to be initialisation order in
 
 char *path(char *s)
 {
-    for(char *t = s; t = strpbrk(t, "/\\"); *t++ = PATHDIV);
+	for(char *t = s; t = strpbrk(t, "/\\"); *t++ = GameInit::PATHDIV);
     return s;
 };
 
