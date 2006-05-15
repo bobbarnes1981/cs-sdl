@@ -19,7 +19,6 @@ extern DECLSPEC bool CDECL addcommand(char *name, void (*fun)(), int narg);
 extern DECLSPEC int CDECL execute(char *p, bool down = true);
 extern DECLSPEC void CDECL exec(char *cfgfile);
 extern DECLSPEC bool CDECL execfile(char *cfgfile);
-//extern DECLSPEC void CDECL resetcomplete();
 extern DECLSPEC void CDECL complete(char *s);
 extern DECLSPEC void CDECL alias(char *name, char *action);
 extern DECLSPEC char CDECL *getalias(char *name);
@@ -77,7 +76,6 @@ extern DECLSPEC void CDECL c2sinfo(dynent *d);
 extern DECLSPEC void CDECL neterr(char *s);
 extern DECLSPEC void CDECL initclientnet();
 extern DECLSPEC bool CDECL netmapstart();
-//extern DECLSPEC int CDECL getclientnum();
 extern DECLSPEC void CDECL changemapserv(char *name, int mode);
 extern DECLSPEC void CDECL writeclientinfo(FILE *f);
 
@@ -86,7 +84,6 @@ extern DECLSPEC void CDECL mousemove(int dx, int dy);
 extern DECLSPEC void CDECL updateworld(int millis);
 extern DECLSPEC void CDECL startmap(char *name);
 extern DECLSPEC void CDECL changemap(char *name);
-//extern DECLSPEC void CDECL initclient();
 extern DECLSPEC void CDECL spawnplayer(dynent *d);
 extern DECLSPEC void CDECL selfdamage(int damage, int actor, dynent *act);
 extern DECLSPEC dynent CDECL *newdynent();
@@ -159,7 +156,6 @@ extern DECLSPEC void CDECL newsphere(vec &o, float max, int type);
 extern DECLSPEC void CDECL renderspheres(int time);
 extern DECLSPEC void CDECL gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwater);
 extern DECLSPEC void CDECL readdepth(int w, int h);
-//extern DECLSPEC void CDECL damageblend(int n);
 
 // renderparticles
 extern DECLSPEC void CDECL setorient(vec &r, vec &u);
@@ -216,7 +212,6 @@ extern DECLSPEC void CDECL sendmaps(int n, string mapname, int mapsize, uchar *m
 extern DECLSPEC ENetPacket *recvmap(int n);
 
 // weapon
-extern DECLSPEC void CDECL selectgun(int a = -1, int b = -1, int c =-1);
 extern DECLSPEC void CDECL shoot(dynent *d, vec &to);
 extern DECLSPEC void CDECL shootv(int gun, vec &from, vec &to, dynent *d = 0, bool local = false);
 extern DECLSPEC void CDECL createrays(vec &from, vec &to);

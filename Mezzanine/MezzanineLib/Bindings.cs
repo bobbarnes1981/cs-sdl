@@ -351,6 +351,19 @@ namespace MezzanineLib
 		public static extern void initserver(bool dedicated, int uprate, string sdesc, string ip, out string master, string passwd, int maxcl);
 		#endregion void initserver()
 
+		#region void playsoundc(int n)
+		/// <summary>
+		///     playsoundc
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL playsoundc(int n);</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void playsoundc(int n);
+		#endregion void playsoundc(int n)
+
 		#region void localconnect()
 		/// <summary>
 		///     localconnect
