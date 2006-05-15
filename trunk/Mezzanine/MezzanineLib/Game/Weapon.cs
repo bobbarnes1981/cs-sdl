@@ -37,6 +37,7 @@ using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
 using System.Runtime.InteropServices;
+using MezzanineLib.ClientServer;
 
 namespace MezzanineLib.Game
 {
@@ -51,5 +52,74 @@ namespace MezzanineLib.Game
 		public const int MAXPROJ = 100;
 		public const float RL_RADIUS = 5;
 		public const float RL_DAMRAD = 7;   // hack
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <param name="c"></param>
+		public static void SelectGun(int a, int b, int c)
+		{
+			DynamicEntity tempEntity = GameInit.Player1;
+			if(a<-1 || b<-1 || c<-1 || a>=(int)Gun.NUMGUNS || b>=(int)Gun.NUMGUNS || c>=(int)Gun.NUMGUNS)
+			{
+				return;
+			}
+			int s = GameInit.Player1.gunselect;
+			if(a>=0 && s!=a && GameInit.Player1.ammo[a]!=0) 
+			{
+				s = a;
+			}
+			else if(b>=0 && s!=b && GameInit.Player1.ammo[b]!=0) 
+			{
+				s = b;
+			}
+			else if(c>=0 && s!=c && GameInit.Player1.ammo[c]!=0) 
+			{
+				s = c;
+			}
+			else if(s!=(int)Gun.GUN_RL && GameInit.Player1.ammo[(int)Gun.GUN_RL]!=0) 
+			{
+				s = (int)Gun.GUN_RL;
+			}
+			else if(s!=(int)Gun.GUN_CG && GameInit.Player1.ammo[(int)Gun.GUN_CG]!=0) 
+			{
+				s = (int)Gun.GUN_CG;
+			}
+			else if(s!=(int)Gun.GUN_SG && GameInit.Player1.ammo[(int)Gun.GUN_SG]!=0) 
+			{
+				s = (int)Gun.GUN_SG;
+			}
+			else if(s!=(int)Gun.GUN_RIFLE && GameInit.Player1.ammo[(int)Gun.GUN_RIFLE]!=0) 
+			{
+				s = (int)Gun.GUN_RIFLE;
+			}
+			else 
+			{
+				s = (int)Gun.GUN_FIST;
+			}
+			if(s!=GameInit.Player1.gunselect) 
+			{
+				Bindings.playsoundc((int)Sounds.S_WEAPLOAD);
+			}
+			tempEntity.gunselect = s;
+			GameInit.Player1 = tempEntity;
+			//conoutf("%s selected", (int)guns[s].name);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="a1"></param>
+		/// <param name="a2"></param>
+		/// <param name="a3"></param>
+		public static void WeaponSelect(string a1, string a2, string a3)
+		{
+			SelectGun(a1 != null ? Convert.ToInt32(a1) : -1, 
+				a2 != null ? Convert.ToInt32(a2) : -1,
+				a3 != null ? Convert.ToInt32(a3) : -1
+				);
+		}
 	}
 }

@@ -22,30 +22,11 @@ guninfo guns[9] =
     { MezzanineLib::Sounds::S_PIGR1,     250,  50, 0,   0,  1, "bite"           },
 };
 
-void selectgun(int a, int b, int c)
-{
-    if(a<-1 || b<-1 || c<-1 || a>=MezzanineLib::Gun::NUMGUNS || b>=MezzanineLib::Gun::NUMGUNS || c>=MezzanineLib::Gun::NUMGUNS) return;
-    int s = player1->gunselect;
-    if(a>=0 && s!=a && player1->ammo[a]) s = a;
-    else if(b>=0 && s!=b && player1->ammo[b]) s = b;
-    else if(c>=0 && s!=c && player1->ammo[c]) s = c;
-    else if(s!=MezzanineLib::Gun::GUN_RL && player1->ammo[MezzanineLib::Gun::GUN_RL]) s = MezzanineLib::Gun::GUN_RL;
-    else if(s!=MezzanineLib::Gun::GUN_CG && player1->ammo[MezzanineLib::Gun::GUN_CG]) s = MezzanineLib::Gun::GUN_CG;
-    else if(s!=MezzanineLib::Gun::GUN_SG && player1->ammo[MezzanineLib::Gun::GUN_SG]) s = MezzanineLib::Gun::GUN_SG;
-    else if(s!=MezzanineLib::Gun::GUN_RIFLE && player1->ammo[MezzanineLib::Gun::GUN_RIFLE]) s = MezzanineLib::Gun::GUN_RIFLE;
-    else s = MezzanineLib::Gun::GUN_FIST;
-    if(s!=player1->gunselect) playsoundc(MezzanineLib::Sounds::S_WEAPLOAD);
-    player1->gunselect = s;
-    //conoutf("%s selected", (int)guns[s].name);
-};
-
 int reloadtime(int gun) { return guns[gun].attackdelay; };
 
 void weapon(char *a1, char *a2, char *a3)
 {
-    selectgun(a1[0] ? atoi(a1) : -1,
-              a2[0] ? atoi(a2) : -1,
-              a3[0] ? atoi(a3) : -1);
+	Game::Weapon::WeaponSelect(a1, a2, a3);
 };
 
 COMMAND(weapon, MezzanineLib::Support::FunctionSignatures::ARG_3STR);
