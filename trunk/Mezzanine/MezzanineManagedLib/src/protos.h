@@ -44,15 +44,9 @@ extern DECLSPEC void CDECL addserver(char *servername);
 extern DECLSPEC char CDECL *getservername(int n);
 extern DECLSPEC void CDECL writeservercfg();
 
-// rendergl
-//extern DECLSPEC void CDECL renderstrips();
+// rendercubes
 extern DECLSPEC void CDECL mipstats(int a, int b, int c);
 extern DECLSPEC void CDECL vertf(float v1, float v2, float v3, sqr *ls, float t1, float t2);
-//extern DECLSPEC void CDECL addstrip(int tex, int start, int n);
-//extern DECLSPEC void CDECL setstrips();
-//extern DECLSPEC void CDECL renderstripssky();
-
-// rendercubes
 extern DECLSPEC void CDECL resetcubes();
 extern DECLSPEC void CDECL render_flat(int tex, int x, int y, int size, int h, sqr *l1, sqr *l2, sqr *l3, sqr *l4, bool isceil);
 extern DECLSPEC void CDECL render_flatdelta(int wtex, int x, int y, int size, float h1, float h2, float h3, float h4, sqr *l1, sqr *l2, sqr *l3, sqr *l4, bool isceil);
