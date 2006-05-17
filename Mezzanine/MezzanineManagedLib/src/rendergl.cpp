@@ -6,26 +6,6 @@
 using namespace MezzanineLib;
 using namespace MezzanineLib::Render;
 
-void purgetextures();
-
-GLUquadricObj *qsphere = NULL;
-
-// management of texture slots
-// each texture slot can have multople texture frames, of which currently only the first is used
-// additional frames can be used for various shaders
-
-int texx[RenderGl::MAXTEX];                           // ( loaded texture ) -> ( name, size )
-int texy[RenderGl::MAXTEX];                           
-string texname[RenderGl::MAXTEX];
-
-int mapping[256][RenderGl::MAXFRAMES];                // ( cube texture, frame ) -> ( opengl id, name )
-string mapname[256][RenderGl::MAXFRAMES];
-
-void purgetextures()
-{
-    loopi(256) loop(j,RenderGl::MAXFRAMES) mapping[i][j] = 0;
-};
-
 void texturereset() 
 {
 	Render::RenderGl::TextureReset(); 
@@ -33,63 +13,11 @@ void texturereset()
 
 void texture(char *aframe, char *name)
 {
-	int num = Render::RenderGl::CurrentTextureNumber++, frame = atoi(aframe);
-    if(num<0 || num>=256 || frame<0 || frame>=RenderGl::MAXFRAMES) return;
-    mapping[num][frame] = 1;
-    char *n = mapname[num][frame];
-    strcpy_s(n, name);
-    path(n);
+	RenderGl::Texture(aframe, name);
 };
 
 COMMAND(texturereset, Support::FunctionSignatures::ARG_NONE);
 COMMAND(texture, Support::FunctionSignatures::ARG_2STR);
-
-int lookuptexture(int tex, int &xs, int &ys)
-{
-    int frame = 0;                      // other frames?
-    int tid = mapping[tex][frame];
-
-    if(tid>=RenderGl::FIRSTTEX)
-    {
-        xs = texx[tid-RenderGl::FIRSTTEX];
-        ys = texy[tid-RenderGl::FIRSTTEX];
-        return tid;
-    };
-
-    xs = ys = 16;
-    if(!tid) return 1;                  // crosshair :)
-
-    loopi(Render::RenderGl::CurrentTextureNumber)       // lazily happens once per "texture" command, basically
-    {
-        if(strcmp(mapname[tex][frame], texname[i])==0)
-        {
-            mapping[tex][frame] = tid = i+RenderGl::FIRSTTEX;
-            xs = texx[i];
-            ys = texy[i];
-            return tid;
-        };
-    };
-
-    if(Render::RenderGl::CurrentTextureNumber==RenderGl::MAXTEX) GameInit::Fatal("loaded too many textures");
-
-    int tnum = Render::RenderGl::CurrentTextureNumber+RenderGl::FIRSTTEX;
-    strcpy_s(texname[Render::RenderGl::CurrentTextureNumber], mapname[tex][frame]);
-
-	sprintf_sd(name)("packages%c%s", GameInit::PATHDIV, texname[Render::RenderGl::CurrentTextureNumber]);
-
-	if(Render::RenderGl::InstallTexture(tnum, name, &xs, &ys))
-    {
-        mapping[tex][frame] = tnum;
-        texx[Render::RenderGl::CurrentTextureNumber] = xs;
-        texy[Render::RenderGl::CurrentTextureNumber] = ys;
-        Render::RenderGl::CurrentTextureNumber++;
-        return tnum;
-    }
-    else
-    {
-        return mapping[tex][frame] = RenderGl::FIRSTTEX;  // temp fix
-    };
-};
 
 struct strip { int tex, start, num; };
 vector<strip> strips;
@@ -140,9 +68,3 @@ VARFP(gamma, 30, 100, 300,
         //conoutf("sdl: %s", SDL_GetError());
    // };
 });
-
-//VARP(fov, 10, 105, 120);
-//VAR(fog, 64, 180, 1024);
-//VAR(fogcolour, 0, 0x8099B3, 0xFFFFFF);
-
-VARP(hudgun,0,1,1);

@@ -129,21 +129,18 @@ namespace MezzanineLib
 		static int screenHeight = 480;
 		static int lastmillis = 0;	
 		static int mapVersion = 5;
-		static string path;
+		//static string path;
 		public static readonly char PATHDIV = '\\';
 		/// <summary>
 		/// 
 		/// </summary>
-		public static string Path
+		public static string NormalizePath(string path)
 		{
-			get
+			if (path == null)
 			{
-				return path;
+				throw new ArgumentNullException("path");
 			}
-			set
-			{
-				path = value;
-			}
+			return path.Replace('/', PATHDIV);
 		}
 
 		/// <summary>
