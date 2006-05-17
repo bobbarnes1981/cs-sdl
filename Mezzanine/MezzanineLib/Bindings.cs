@@ -221,6 +221,20 @@ namespace MezzanineLib
 		public static extern void cleanupserver();
 		#endregion void cleanupserver()
 
+		#region void setstrips()
+		/// <summary>
+		///     cleanupserver
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in command.cpp:
+		///     <code>extern DECLSPEC void CDECL setstrips()</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void setstrips();
+		#endregion void setstrips()
+
+
 		#region void gl_drawframe(int w, int h, float curfps)
 		/// <summary>
 		///     gl_drawframe
@@ -312,6 +326,149 @@ namespace MezzanineLib
 		public static extern void updatevol();
 		#endregion void updatevol()
 
+		#region void render_world(float vx, float vy, float vh, int yaw, int pitch, float widef, int w, int h)
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL render_world(float vx, float vy, float vh, int yaw, int pitch, float widef, int w, int h);</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void render_world(float vx, float vy, float vh, int yaw, int pitch, float widef, int w, int h);
+		#endregion void render_world(float vx, float vy, float vh, int yaw, int pitch, float widef, int w, int h)
+
+		#region void finishstrips()
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL finishstrips();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void finishstrips();
+		#endregion void finishstrips()
+
+		#region void renderclients()
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL renderclients();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void renderclients();
+		#endregion void renderclients()
+
+		#region void renderents()
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL renderents();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void renderents();
+		#endregion void renderents()
+
+		#region void renderentities()
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL renderentities();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void renderentities();
+		#endregion void renderentities()
+
+		#region void renderstrips()
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL renderstrips();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void renderstrips();
+		#endregion void renderstrips()
+
+		#region void monsterrender()
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL monsterrender();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void monsterrender();
+		#endregion void monsterrender()
+
+		#region void renderspheres(int time)
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL renderspheres(int time)</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void renderspheres(int time);
+		#endregion void renderspheres(int time)
+
+		#region void render_particles(int time)
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC void CDECL render_particles(int time);</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void render_particles(int time);
+		#endregion void render_particles(int time)
+
+		#region int renderwater(float hf)
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC int CDECL renderwater(float hf);</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern int renderwater(float hf);
+		#endregion int renderwater(float hf)
+
+		#region int lookuptexture(int tex, out int xs, out int ys)
+		/// <summary>
+		///     updatevol
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in sound.cpp:
+		///     <code>extern DECLSPEC int CDECL lookuptexture(int tex, int &xs, int &ys);</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern int lookuptexture(int tex, out int xs, out int ys);
+		#endregion int lookuptexture(int tex, out int xs, out int ys)
+
 		#region void initclientnet()
 		/// <summary>
 		///     initclientmap
@@ -390,6 +547,19 @@ namespace MezzanineLib
 		public static extern void cleardlights();
 		#endregion void cleardlights()
 
+		#region void resetcubes()
+		/// <summary>
+		///     cleardlights
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in worldlight.cpp:
+		///     <code>extern DECLSPEC void CDECL resetcubes();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void resetcubes();
+		#endregion void resetcubes()
+
 		#region void setarraypointers()
 		/// <summary>
 		///     setarraypointers
@@ -415,6 +585,19 @@ namespace MezzanineLib
 		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern IntPtr getplayer1();
 		#endregion IntPtr getplayer1()
+
+		#region IntPtr gethdr()
+		/// <summary>
+		///     cleardlights
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in worldlight.cpp:
+		///     <code>extern DECLSPEC dynent * CDECL gethdr();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern IntPtr gethdr();
+		#endregion IntPtr gethdr()
 
 		#region void updateworld(int millis)
 		/// <summary>
@@ -519,6 +702,20 @@ namespace MezzanineLib
 		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void rendermodel(string mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime);
 		#endregion void rendermodel(string mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime))
+
+		#region void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwater)
+		/// <summary>
+		///     keypress
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in console.cpp:
+		///     <code>extern DECLSPEC void CDECL gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwater);
+		/// </code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwater);
+		#endregion void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwater)
 
 		#endregion Mezzanine Methods
 	}

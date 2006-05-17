@@ -46,11 +46,13 @@ extern DECLSPEC void CDECL writeservercfg();
 
 // rendergl
 extern DECLSPEC void CDECL purgetextures();
-extern DECLSPEC void CDECL gl_drawframe(int w, int h, float curfps);
+extern DECLSPEC void CDECL renderstrips();
+//extern DECLSPEC void CDECL gl_drawframe(int w, int h, float curfps);
 extern DECLSPEC void CDECL mipstats(int a, int b, int c);
 extern DECLSPEC void CDECL vertf(float v1, float v2, float v3, sqr *ls, float t1, float t2);
 extern DECLSPEC void CDECL addstrip(int tex, int start, int n);
 extern DECLSPEC int CDECL lookuptexture(int tex, int &xs, int &ys);
+extern DECLSPEC void CDECL setstrips();
 
 // rendercubes
 extern DECLSPEC void CDECL resetcubes();
@@ -132,6 +134,7 @@ extern DECLSPEC int CDECL isoccluded(float vx, float vy, float cx, float cy, flo
 extern DECLSPEC void CDECL *alloc(int s);
 extern DECLSPEC void CDECL quit();
 extern DECLSPEC dynent * CDECL getplayer1();
+extern DECLSPEC header * CDECL gethdr();
 
 // rendertext
 extern DECLSPEC void CDECL draw_text(char *str, int left, int top, int gl_num);

@@ -10,6 +10,11 @@ extern char *entnames[];                // lookup from map entities above to str
 sqr *world = NULL;
 
 header hdr;
+header * gethdr(void)
+{
+	header * p = &hdr;
+	return p;
+}
 
 void settag(int tag, int type)          // set all cubes with "tag" to space, if tag is 0 then reset ALL tagged cubes according to type
 {

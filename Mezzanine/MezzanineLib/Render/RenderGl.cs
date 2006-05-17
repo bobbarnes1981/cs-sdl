@@ -76,10 +76,77 @@ namespace MezzanineLib.Render
 		//VAR(fogcolour, 0, 0x8099B3, 0xFFFFFF);
 
 		//VARP(hudgun,0,1,1);
-		static int fov = 0;
-		static int fog = 0;
-		static int fogcolour = 0;
-		//static int handgun = 0;
+		static int fov = 105;
+		public static int Fov
+		{
+			get
+			{
+				return fov;
+			}
+			set
+			{
+				if (value > 120)
+				{
+					fov = 120;
+				}
+				else if (value < 10)
+				{
+					fov = 10;
+				}
+				else
+				{
+					fov = value;
+				}
+			}
+		}
+
+		public static int Fog
+		{
+			get
+			{
+				return fog;
+			}
+			set
+			{
+				if (value > 1024)
+				{
+					fog = 1024;
+				}
+				else if (value < 64)
+				{
+					fog = 64;
+				}
+				else
+				{
+					fog = value;
+				}
+			}
+		}
+		public static int FogColour
+		{
+			get
+			{
+				return fogcolour;
+			}
+			set
+			{
+				if (value > 0xFFFFFF)
+				{
+					fogcolour = 0xFFFFFF;
+				}
+				else if (value < 0)
+				{
+					fogcolour = 0;
+				}
+				else
+				{
+					fogcolour = value;
+				}
+			}
+		}
+		static int fog = 180;
+		static int fogcolour = 0x8099B3;
+		static int hudgun = 1;
 
 		public static ArrayList strips = new ArrayList();
 
@@ -277,10 +344,12 @@ namespace MezzanineLib.Render
 		/// <param name="curfps"></param>
 		public static void GlDrawFrame(int w, int h, float curfps)
 		{
-			//float hf = hdr.waterlevel-0.3f;
+			float hf = 0;
+				//GameInit.MapHeader.waterlevel-0.3f;
 			float fovy = (float)fov*h/w;
 			float aspect = w/(float)h;
-			//bool underwater = GameInit.Player1.o.z<hf;
+			bool underwater = false;
+				//GameInit.Player1.o.z<hf;
     
 			Gl.glFogi(Gl.GL_FOG_START, (fog+64)/8);
 			Gl.glFogi(Gl.GL_FOG_END, fog);
@@ -288,13 +357,13 @@ namespace MezzanineLib.Render
 			Gl.glFogfv(Gl.GL_FOG_COLOR, fogc);
 			Gl.glClearColor(fogc[0], fogc[1], fogc[2], 1.0f);
 
-//			if(underwater)
-//			{
-//				fovy += (float)Math.Sin(GameInit.LastMillis/1000.0)*2.0f;
-//				aspect += (float)Math.Sin(GameInit.LastMillis/1000.0+System.Math.PI)*0.1f;
-//				Gl.glFogi(Gl.GL_FOG_START, 0);
-//				Gl.glFogi(Gl.GL_FOG_END, (fog+96)/8);
-//			};
+			if(underwater)
+			{
+				fovy += (float)Math.Sin(GameInit.LastMillis/1000.0)*2.0f;
+				aspect += (float)Math.Sin(GameInit.LastMillis/1000.0+System.Math.PI)*0.1f;
+				Gl.glFogi(Gl.GL_FOG_START, 0);
+				Gl.glFogi(Gl.GL_FOG_END, (fog+96)/8);
+			}
     
 			Gl.glClear((GameInit.Player1.outsidemap ? Gl.GL_COLOR_BUFFER_BIT : 0) | Gl.GL_DEPTH_BUFFER_BIT);
 
@@ -309,16 +378,17 @@ namespace MezzanineLib.Render
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
     
 			int xs, ys;
-			skyoglid = LookupTexture((int)TextureNumbers.DEFAULT_SKY, out xs, out ys);
+			skyoglid = Bindings.lookuptexture((int)TextureNumbers.DEFAULT_SKY, out xs, out ys);
    
-			RenderCubes.ResetCubes();
+			Bindings.resetcubes();
             
 			RenderCubes.curvert = 0;
+			Bindings.setstrips();
 			//strips.setsize(0);
   
-			//render_world(GameInit.Player1.o.x, GameInit.Player1.o.y, GameInit.Player1.o.z, 
-			//	(int)GameInit.Player1.yaw, (int)GameInit.Player1.pitch, (float)fov, w, h);
-			//finishstrips();
+			Bindings.render_world(GameInit.Player1.o.x, GameInit.Player1.o.y, GameInit.Player1.o.z, 
+				(int)GameInit.Player1.yaw, (int)GameInit.Player1.pitch, (float)fov, w, h);
+			Bindings.finishstrips();
 
 			SetupWorld();
 
@@ -339,34 +409,34 @@ namespace MezzanineLib.Render
         
 			OverBright(2);
     
-			//renderstrips();
+			Bindings.renderstrips();
 
 			XtraVerts = 0;
 
-			//renderclients();
-			//monsterrender();
+			Bindings.renderclients();
+			Bindings.monsterrender();
 
-			//renderentities();
+			Bindings.renderentities();
 
-			//renderspheres(GameInit.CurrentTime);
-			//renderents();
+			Bindings.renderspheres(GameInit.CurrentTime);
+			Bindings.renderents();
 
 			Gl.glDisable(Gl.GL_CULL_FACE);
 
 			DrawHudGun(fovy, aspect, farplane);
 
 			OverBright(1);
-			//int nquads = renderwater(hf);
+			int nquads = Bindings.renderwater(hf);
     
 			OverBright(2);
-			//render_particles(GameInit.CurrentTime);
+			Bindings.render_particles(GameInit.CurrentTime);
 			OverBright(1);
 
 			Gl.glDisable(Gl.GL_FOG);
 
 			Gl.glDisable(Gl.GL_TEXTURE_2D);
 
-			//gl_drawhud(w, h, (int)curfps, nquads, RenderCubes.curvert, underwater);
+			Bindings.gl_drawhud(w, h, (int)curfps, nquads, RenderCubes.curvert, underwater);
 
 			Gl.glEnable(Gl.GL_CULL_FACE);
 			Gl.glEnable(Gl.GL_FOG);

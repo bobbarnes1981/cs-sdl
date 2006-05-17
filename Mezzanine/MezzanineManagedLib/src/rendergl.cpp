@@ -99,6 +99,10 @@ void renderstripssky()
     glBindTexture(GL_TEXTURE_2D, RenderGl::skyoglid);
     loopv(strips) if(strips[i].tex==RenderGl::skyoglid) glDrawArrays(GL_TRIANGLE_STRIP, strips[i].start, strips[i].num);
 };
+void setstrips()
+{
+	strips.setsize(0);
+};
 
 void renderstrips()
 {
@@ -137,106 +141,8 @@ VARFP(gamma, 30, 100, 300,
    // };
 });
 
-VARP(fov, 10, 105, 120);
-VAR(fog, 64, 180, 1024);
-VAR(fogcolour, 0, 0x8099B3, 0xFFFFFF);
+//VARP(fov, 10, 105, 120);
+//VAR(fog, 64, 180, 1024);
+//VAR(fogcolour, 0, 0x8099B3, 0xFFFFFF);
 
 VARP(hudgun,0,1,1);
-
-void gl_drawframe(int w, int h, float curfps)
-{
-    float hf = hdr.waterlevel-0.3f;
-    float fovy = (float)fov*h/w;
-    float aspect = w/(float)h;
-    bool underwater = player1->o.z<hf;
-    
-    glFogi(GL_FOG_START, (fog+64)/8);
-    glFogi(GL_FOG_END, fog);
-    float fogc[4] = { (fogcolour>>16)/256.0f, ((fogcolour>>8)&255)/256.0f, (fogcolour&255)/256.0f, 1.0f };
-    glFogfv(GL_FOG_COLOR, fogc);
-    glClearColor(fogc[0], fogc[1], fogc[2], 1.0f);
-
-    if(underwater)
-    {
-        fovy += (float)sin(MezzanineLib::GameInit::LastMillis/1000.0)*2.0f;
-        aspect += (float)sin(MezzanineLib::GameInit::LastMillis/1000.0+System::Math::PI)*0.1f;
-        glFogi(GL_FOG_START, 0);
-        glFogi(GL_FOG_END, (fog+96)/8);
-    };
-    
-    glClear((player1->outsidemap ? GL_COLOR_BUFFER_BIT : 0) | GL_DEPTH_BUFFER_BIT);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    int farplane = fog*5/2;
-    gluPerspective(fovy, aspect, 0.15f, farplane);
-    glMatrixMode(GL_MODELVIEW);
-
-	Render::RenderGl::TransPlayer();
-
-    glEnable(GL_TEXTURE_2D);
-    
-    int xs, ys;
-    RenderGl::skyoglid = lookuptexture(TextureNumbers::DEFAULT_SKY, xs, ys);
-   
-    resetcubes();
-            
-    RenderCubes::curvert = 0;
-    strips.setsize(0);
-  
-    render_world(player1->o.x, player1->o.y, player1->o.z, 
-            (int)player1->yaw, (int)player1->pitch, (float)fov, w, h);
-    finishstrips();
-
-	Render::RenderGl::SetupWorld();
-
-    renderstripssky();
-
-    glLoadIdentity();
-    glRotated(player1->pitch, -1.0, 0.0, 0.0);
-    glRotated(player1->yaw,   0.0, 1.0, 0.0);
-    glRotated(90.0, 1.0, 0.0, 0.0);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    glDisable(GL_FOG);
-    glDepthFunc(GL_GREATER);
-	Render::RenderText::DrawEnvBox(14, fog*4/3);
-    glDepthFunc(GL_LESS);
-    glEnable(GL_FOG);
-
-	Render::RenderGl::TransPlayer();
-        
-    Render::RenderGl::OverBright(2);
-    
-    renderstrips();
-
-    Render::RenderGl::XtraVerts = 0;
-
-    renderclients();
-    monsterrender();
-
-    renderentities();
-
-    renderspheres(MezzanineLib::GameInit::CurrentTime);
-    renderents();
-
-    glDisable(GL_CULL_FACE);
-
-    Render::RenderGl::DrawHudGun(fovy, aspect, farplane);
-
-    Render::RenderGl::OverBright(1);
-    int nquads = renderwater(hf);
-    
-    Render::RenderGl::OverBright(2);
-    render_particles(MezzanineLib::GameInit::CurrentTime);
-    Render::RenderGl::OverBright(1);
-
-    glDisable(GL_FOG);
-
-    glDisable(GL_TEXTURE_2D);
-
-    gl_drawhud(w, h, (int)curfps, nquads, RenderCubes::curvert, underwater);
-
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_FOG);
-};
-
