@@ -400,14 +400,13 @@ namespace MezzanineLib.Render
     
 			int xs;
 			int ys;
-//			skyoglid = Bindings.lookuptexture((int)TextureNumbers.DEFAULT_SKY, out xs, out ys);
 			skyoglid = LookupTexture((int)TextureNumbers.DEFAULT_SKY, out xs, out ys);
    
 			Bindings.resetcubes();
             
 			RenderCubes.curvert = 0;
-			Bindings.setstrips();
-			//strips.setsize(0);
+			//Bindings.setstrips();
+			strips.Clear();
   
 			Bindings.render_world(GameInit.Player1.o.x, GameInit.Player1.o.y, GameInit.Player1.o.z, 
 				(int)GameInit.Player1.yaw, (int)GameInit.Player1.pitch, (float)fov, w, h);
@@ -415,8 +414,8 @@ namespace MezzanineLib.Render
 
 			SetupWorld();
 
-			//RenderStripsSky();
-			Bindings.renderstripssky();
+			RenderStripsSky();
+			//Bindings.renderstripssky();
 
 			Gl.glLoadIdentity();
 			Gl.glRotated(GameInit.Player1.pitch, -1.0, 0.0, 0.0);
@@ -433,7 +432,7 @@ namespace MezzanineLib.Render
         
 			OverBright(2);
     
-			Bindings.renderstrips();
+			RenderStrips();
 
 			XtraVerts = 0;
 

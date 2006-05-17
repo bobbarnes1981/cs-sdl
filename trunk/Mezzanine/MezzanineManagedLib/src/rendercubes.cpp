@@ -40,7 +40,7 @@ void mipstats(int a, int b, int c) { if(RenderCubes::showm) conoutf("1x1/2x2/4x4
 
 COMMAND(showmip, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
-#define stripend() { if(RenderCubes::floorstrip || RenderCubes::deltastrip) { addstrip(RenderCubes::ogltex, RenderCubes::firstindex, RenderCubes::curvert-RenderCubes::firstindex); RenderCubes::floorstrip = RenderCubes::deltastrip = false; }; };
+#define stripend() { if(RenderCubes::floorstrip || RenderCubes::deltastrip) { Render::RenderGl::AddStrip(RenderCubes::ogltex, RenderCubes::firstindex, RenderCubes::curvert-RenderCubes::firstindex); RenderCubes::floorstrip = RenderCubes::deltastrip = false; }; };
 void finishstrips() { stripend(); };
 
 sqr sbright, sdark;
@@ -194,7 +194,7 @@ void render_2tris(sqr *h, sqr *s, int x1, int y1, int x2, int y2, int x3, int y3
     vertf((float)x1, h->floor, (float)y1, l1, xf*x1, yf*y1);
     vertf((float)x2, h->floor, (float)y2, l2, xf*x2, yf*y2);
     vertf((float)x3, h->floor, (float)y3, l3, xf*x3, yf*y3);
-    addstrip(gltex, RenderCubes::curvert-3, 3);
+    Render::RenderGl::AddStrip(gltex, RenderCubes::curvert-3, 3);
 
     gltex = Render::RenderGl::LookupTexture(h->ctex, &sx, &sy);
     xf = RenderCubes::TEXTURESCALE/sx;
@@ -203,7 +203,7 @@ void render_2tris(sqr *h, sqr *s, int x1, int y1, int x2, int y2, int x3, int y3
     vertf((float)x3, h->ceil, (float)y3, l3, xf*x3, yf*y3);
     vertf((float)x2, h->ceil, (float)y2, l2, xf*x2, yf*y2);
     vertf((float)x1, h->ceil, (float)y1, l1, xf*x1, yf*y1);
-    addstrip(gltex, RenderCubes::curvert-3, 3);
+    Render::RenderGl::AddStrip(gltex, RenderCubes::curvert-3, 3);
     RenderCubes::nquads++;
 };
 
@@ -251,7 +251,7 @@ void render_square(int wtex, float floor1, float floor2, float ceil1, float ceil
     };
 
     RenderCubes::nquads++;
-    addstrip(gltex, RenderCubes::curvert-4, 4);
+    Render::RenderGl::AddStrip(gltex, RenderCubes::curvert-4, 4);
 };
 
 VAR(watersubdiv, 1, 4, 64);

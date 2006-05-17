@@ -104,19 +104,6 @@ namespace MezzanineLib
 
 		#region Bindings Methods
 
-//		#region bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
-//		/// <summary>
-//		///     install textures
-//		/// </summary>
-//		/// <remarks>
-//		/// <p>Binds to C-function call in rendergl.cpp:
-//		///     <code>extern DECLSPEC bool CDECL installtex(int tnum, char *texname, int &xs, int &ys, bool clamp = false);</code>
-//		///     </p>
-//		/// </remarks>
-//		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-//		public static extern bool installtex(int tnum, string texname, out int xs, out int ys, bool clamp);
-//		#endregion bool installtex(int tnum, string texname, int xs, int ys, bool clamp)
-
 		#region int enet_initialize()
 		/// <summary>
 		///     initialize enet network
@@ -182,19 +169,6 @@ namespace MezzanineLib
 		public static extern void readdepth(int w, int h);
 		#endregion void readdepth(int w, int h)
 
-		#region void purgetextures()
-		/// <summary>
-		///     gl_init
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in rendergl.cpp:
-		///     <code>extern DECLSPEC void CDECL purgetextures();</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void purgetextures();
-		#endregion void purgetextures()
-
 		#region void writecfg()
 		/// <summary>
 		///     writecfg
@@ -220,33 +194,6 @@ namespace MezzanineLib
 		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void cleanupserver();
 		#endregion void cleanupserver()
-
-		#region void setstrips()
-		/// <summary>
-		///     cleanupserver
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in command.cpp:
-		///     <code>extern DECLSPEC void CDECL setstrips()</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void setstrips();
-		#endregion void setstrips()
-
-
-		#region void gl_drawframe(int w, int h, float curfps)
-		/// <summary>
-		///     gl_drawframe
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in rendergl.cpp:
-		///     <code>extern DECLSPEC void CDECL gl_drawframe(int w, int h, float curfps);</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void gl_drawframe(int w, int h, float curfps);
-		#endregion void gl_drawframe(int w, int h, float curfps)
 
 		#region void empty_world(int factor, bool force)
 		/// <summary>
@@ -391,19 +338,6 @@ namespace MezzanineLib
 		public static extern void renderentities();
 		#endregion void renderentities()
 
-		#region void renderstrips()
-		/// <summary>
-		///     updatevol
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in sound.cpp:
-		///     <code>extern DECLSPEC void CDECL renderstrips();</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void renderstrips();
-		#endregion void renderstrips()
-
 		#region void monsterrender()
 		/// <summary>
 		///     updatevol
@@ -455,19 +389,6 @@ namespace MezzanineLib
 		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern int renderwater(float hf);
 		#endregion int renderwater(float hf)
-
-		#region int lookuptexture(int tex, out int xs, out int ys)
-		/// <summary>
-		///     updatevol
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in sound.cpp:
-		///     <code>extern DECLSPEC int CDECL lookuptexture(int tex, int &xs, int &ys);</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern int lookuptexture(int tex, out int xs, out int ys);
-		#endregion int lookuptexture(int tex, out int xs, out int ys)
 
 		#region void initclientnet()
 		/// <summary>
@@ -559,19 +480,6 @@ namespace MezzanineLib
 		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
 		public static extern void resetcubes();
 		#endregion void resetcubes()
-
-		#region void renderstripssky()
-		/// <summary>
-		///     cleardlights
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in worldlight.cpp:
-		///     <code>extern DECLSPEC void CDECL renderstripssky();</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void renderstripssky();
-		#endregion void renderstripssky()
 
 		#region void setarraypointers()
 		/// <summary>
