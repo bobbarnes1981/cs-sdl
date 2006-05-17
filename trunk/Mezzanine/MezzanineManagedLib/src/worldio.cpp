@@ -313,7 +313,7 @@ void load_world(char *mname)        // still supports all map formats that have 
     calclight();
     settagareas();
     int xs, ys;
-    loopi(256) if(texuse) lookuptexture(i, xs, ys);
+    loopi(256) if(texuse) Render::RenderGl::LookupTexture(i, &xs, &ys);
 	conoutf("read map %s (%d milliseconds)", cgzname, SdlDotNet::Timer::TicksElapsed-MezzanineLib::GameInit::LastMillis);
     conoutf("%s", hdr.maptitle);
     startmap(mname);

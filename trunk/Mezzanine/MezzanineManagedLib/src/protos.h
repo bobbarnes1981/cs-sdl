@@ -45,14 +45,12 @@ extern DECLSPEC char CDECL *getservername(int n);
 extern DECLSPEC void CDECL writeservercfg();
 
 // rendergl
-extern DECLSPEC void CDECL purgetextures();
 extern DECLSPEC void CDECL renderstrips();
-//extern DECLSPEC void CDECL gl_drawframe(int w, int h, float curfps);
 extern DECLSPEC void CDECL mipstats(int a, int b, int c);
 extern DECLSPEC void CDECL vertf(float v1, float v2, float v3, sqr *ls, float t1, float t2);
 extern DECLSPEC void CDECL addstrip(int tex, int start, int n);
-extern DECLSPEC int CDECL lookuptexture(int tex, int &xs, int &ys);
 extern DECLSPEC void CDECL setstrips();
+extern DECLSPEC void CDECL renderstripssky();
 
 // rendercubes
 extern DECLSPEC void CDECL resetcubes();

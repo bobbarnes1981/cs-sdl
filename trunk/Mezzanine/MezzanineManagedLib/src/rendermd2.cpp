@@ -200,7 +200,7 @@ void delayedload(md2 *m)
     if(!m->loaded)
     {
         sprintf_sd(name1)("packages/models/%s/tris.md2", m->loadname);
-        if(!m->load(path(name1))) MezzanineLib::GameInit::Fatal("loadmodel: ", name1);
+		if(!m->load(path(name1))) MezzanineLib::GameInit::Fatal("loadmodel: ", name1);
         sprintf_sd(name2)("packages/models/%s/skin.jpg", m->loadname);
         int xs, ys;
 		RenderGl::InstallTexture(RenderMD2::FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
@@ -246,7 +246,7 @@ void rendermodel(char *mdl, int frame, int range, int tex, float rad, float x, f
     delayedload(m);
     
     int xs, ys;
-    glBindTexture(GL_TEXTURE_2D, tex ? lookuptexture(tex, xs, ys) : RenderMD2::FIRSTMDL+m->mdlnum);
+    glBindTexture(GL_TEXTURE_2D, tex ? Render::RenderGl::LookupTexture(tex, &xs, &ys) : RenderMD2::FIRSTMDL+m->mdlnum);
     
     int ix = (int)x;
     int iy = (int)z;

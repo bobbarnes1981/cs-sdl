@@ -560,6 +560,19 @@ namespace MezzanineLib
 		public static extern void resetcubes();
 		#endregion void resetcubes()
 
+		#region void renderstripssky()
+		/// <summary>
+		///     cleardlights
+		/// </summary>
+		/// <remarks>
+		/// <p>Binds to C-function call in worldlight.cpp:
+		///     <code>extern DECLSPEC void CDECL renderstripssky();</code>
+		///     </p>
+		/// </remarks>
+		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+		public static extern void renderstripssky();
+		#endregion void renderstripssky()
+
 		#region void setarraypointers()
 		/// <summary>
 		///     setarraypointers

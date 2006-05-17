@@ -62,7 +62,7 @@ namespace MezzanineLib.Render
 
 		public static int[] texx= new int[MAXTEX];                           // ( loaded texture ) -> ( name, size )
 		public static int[] texy = new int[MAXTEX];                           
-		public static char[] texname = new char[MAXTEX];
+		public static string[] texname = new string[MAXTEX];
 
 		public struct strip 
 		{ 
@@ -144,6 +144,28 @@ namespace MezzanineLib.Render
 				}
 			}
 		}
+		public static int HudGun
+		{
+			get
+			{
+				return hudgun;
+			}
+			set
+			{
+				if (value > 1)
+				{
+					hudgun = 1;
+				}
+				else if (value < 0)
+				{
+					hudgun = 0;
+				}
+				else
+				{
+					hudgun = value;
+				}
+			}
+		}
 		static int fog = 180;
 		static int fogcolour = 0x8099B3;
 		static int hudgun = 1;
@@ -212,7 +234,6 @@ namespace MezzanineLib.Render
 		{
 			Bindings.rendermodel(HudGunNames[GameInit.Player1.gunselect], start, end, 0, 1.0f, GameInit.Player1.o.x, GameInit.Player1.o.z, GameInit.Player1.o.y, GameInit.Player1.yaw+90, GameInit.Player1.pitch, false, 1.0f, speed, 0, baseItem);
 		}
-
 
 		/// <summary>
 		/// 
@@ -313,7 +334,7 @@ namespace MezzanineLib.Render
         
 			Gl.glGetIntegerv(Gl.GL_MAX_TEXTURE_SIZE, out glmaxtexsize);
         
-			Bindings.purgetextures();
+			PurgeTextures();
 
 			qsphere = Glu.gluNewQuadric();
 			//if(!(qsphere = Glu.gluNewQuadric())) 
@@ -377,8 +398,10 @@ namespace MezzanineLib.Render
 
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
     
-			int xs, ys;
-			skyoglid = Bindings.lookuptexture((int)TextureNumbers.DEFAULT_SKY, out xs, out ys);
+			int xs;
+			int ys;
+//			skyoglid = Bindings.lookuptexture((int)TextureNumbers.DEFAULT_SKY, out xs, out ys);
+			skyoglid = LookupTexture((int)TextureNumbers.DEFAULT_SKY, out xs, out ys);
    
 			Bindings.resetcubes();
             
@@ -392,7 +415,8 @@ namespace MezzanineLib.Render
 
 			SetupWorld();
 
-			RenderStripsSky();
+			//RenderStripsSky();
+			Bindings.renderstripssky();
 
 			Gl.glLoadIdentity();
 			Gl.glRotated(GameInit.Player1.pitch, -1.0, 0.0, 0.0);
@@ -502,7 +526,6 @@ namespace MezzanineLib.Render
 			xs = 0;
 			ys = 0;
 			Surface s = new Surface(texname);
-			//SDL_Surface *s = IMG_Load(texname);
 			if(s == null) 
 			{ 
 				Console.WriteLine("couldn't load texture %s", texname);
@@ -532,7 +555,6 @@ namespace MezzanineLib.Render
 			if(xs!=s.Width)
 			{
 				Console.WriteLine("warning: quality loss: scaling %s", texname);     // for voodoo cards under linux
-				//scaledimg = alloc(xs*ys*3);
 				Glu.gluScaleImage(Gl.GL_RGB, s.Width, s.Height, Gl.GL_UNSIGNED_BYTE, s.Pixels, xs, ys, Gl.GL_UNSIGNED_BYTE, scaledimg);
 			};
 			if(Glu.gluBuild2DMipmaps(Gl.GL_TEXTURE_2D, Gl.GL_RGB, xs, ys, Gl.GL_RGB, Gl.GL_UNSIGNED_BYTE, scaledimg) != 0) 
@@ -542,17 +564,15 @@ namespace MezzanineLib.Render
 			if(xs!=s.Width) 
 			{
 				scaledimg = IntPtr.Zero;
-				//free(scaledimg);
 			}
-			//SDL_FreeSurface(s);
 			s.Dispose();
 			return true;
 		}
 
-		static int[,] mapping= new int[256, MAXFRAMES];                // ( cube texture, frame ) -> ( opengl id, name )
-		//static char[,] mapname= new char[256, MAXFRAMES];
+		static int[,] mapping= new int[256,MAXFRAMES];                // ( cube texture, frame ) -> ( opengl id, name )
+		static string[,] mapname= new string[256,MAXFRAMES];
 
-		public void Texture(string aframe, string name)
+		public static void Texture(string aframe, string name)
 		{
 			int num = CurrentTextureNumber++;
 			int frame = Convert.ToInt32(aframe);
@@ -561,9 +581,7 @@ namespace MezzanineLib.Render
 				return;
 			}
 			mapping[num, frame] = 1;
-			//GameInit.Path = mapname[num, frame];
-			//strcpy_s(n, name);
-			//path(n);
+			mapname[num, frame] = GameInit.NormalizePath(name);
 		}
 
 		/// <summary>
@@ -622,19 +640,19 @@ namespace MezzanineLib.Render
 
 			for(int i = 0; i<(CurrentTextureNumber); i++)       // lazily happens once per "texture" command, basically
 			{
-//				if(mapname[tex,frame] == texname[i])
-//				{
-//					mapping[tex,frame] = tid = i+FIRSTTEX;
-//					xs = texx[i];
-//					ys = texy[i];
-//					return tid;
-//				};
-			};
+				if(mapname[tex,frame] == texname[i])
+				{
+					mapping[tex,frame] = tid = i+FIRSTTEX;
+					xs = texx[i];
+					ys = texy[i];
+					return tid;
+				}
+			}
 
 			if(CurrentTextureNumber==MAXTEX) GameInit.Fatal("loaded too many textures");
 
 			int tnum = CurrentTextureNumber+FIRSTTEX;
-			//texname[CurrentTextureNumber] =  mapname[tex, frame];
+			texname[CurrentTextureNumber] =  mapname[tex, frame];
 
 			string name = "packages" + GameInit.PATHDIV + texname[CurrentTextureNumber];
 
@@ -655,7 +673,7 @@ namespace MezzanineLib.Render
 		/// <summary>
 		/// 
 		/// </summary>
-		public void RenderStrips()
+		public static void RenderStrips()
 		{
 			int lasttex = -1;
 			if(false) 

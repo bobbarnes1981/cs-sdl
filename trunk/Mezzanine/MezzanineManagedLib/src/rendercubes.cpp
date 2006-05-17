@@ -52,7 +52,7 @@ void render_flat(int wtex, int x, int y, int size, int h, sqr *l1, sqr *l2, sqr 
     if(RenderCubes::showm) { l3 = l1 = &sbright; l4 = l2 = &sdark; };
 
     int sx, sy;
-    int gltex = lookuptexture(wtex, sx, sy);
+    int gltex = Render::RenderGl::LookupTexture(wtex, &sx, &sy);
     float xf = RenderCubes::TEXTURESCALE/sx;
     float yf = RenderCubes::TEXTURESCALE/sy;
     float xs = size*xf;
@@ -131,7 +131,7 @@ void render_flatdelta(int wtex, int x, int y, int size, float h1, float h2, floa
     if(RenderCubes::showm) { l3 = l1 = &sbright; l4 = l2 = &sdark; };
 
     int sx, sy;
-    int gltex = lookuptexture(wtex, sx, sy);
+    int gltex = Render::RenderGl::LookupTexture(wtex, &sx, &sy);
     float xf = RenderCubes::TEXTURESCALE/sx;
     float yf = RenderCubes::TEXTURESCALE/sy;
     float xs = size*xf;
@@ -187,7 +187,7 @@ void render_2tris(sqr *h, sqr *s, int x1, int y1, int x2, int y2, int x3, int y3
     vertcheck();
 
     int sx, sy;
-    int gltex = lookuptexture(h->ftex, sx, sy);
+    int gltex = Render::RenderGl::LookupTexture(h->ftex, &sx, &sy);
     float xf = RenderCubes::TEXTURESCALE/sx;
     float yf = RenderCubes::TEXTURESCALE/sy;
 
@@ -196,7 +196,7 @@ void render_2tris(sqr *h, sqr *s, int x1, int y1, int x2, int y2, int x3, int y3
     vertf((float)x3, h->floor, (float)y3, l3, xf*x3, yf*y3);
     addstrip(gltex, RenderCubes::curvert-3, 3);
 
-    gltex = lookuptexture(h->ctex, sx, sy);
+    gltex = Render::RenderGl::LookupTexture(h->ctex, &sx, &sy);
     xf = RenderCubes::TEXTURESCALE/sx;
     yf = RenderCubes::TEXTURESCALE/sy;
 
@@ -229,7 +229,7 @@ void render_square(int wtex, float floor1, float floor2, float ceil1, float ceil
     if(RenderCubes::showm) { l1 = &sbright; l2 = &sdark; };
 
     int sx, sy;
-    int gltex = lookuptexture(wtex, sx, sy);
+    int gltex = Render::RenderGl::LookupTexture(wtex, &sx, &sy);
     float xf = RenderCubes::TEXTURESCALE/sx;
     float yf = RenderCubes::TEXTURESCALE/sy;
     float xs = size*xf;
@@ -273,7 +273,7 @@ int renderwater(float hf)
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_SRC_COLOR);
     int sx, sy;
-    glBindTexture(GL_TEXTURE_2D, lookuptexture(MezzanineLib::TextureNumbers::DEFAULT_LIQUID, sx, sy));  
+    glBindTexture(GL_TEXTURE_2D, Render::RenderGl::LookupTexture(MezzanineLib::TextureNumbers::DEFAULT_LIQUID, &sx, &sy));  
 
     RenderCubes::wx1 &= ~(watersubdiv-1);
     RenderCubes::wy1 &= ~(watersubdiv-1);
