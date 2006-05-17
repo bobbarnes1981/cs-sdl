@@ -69,8 +69,8 @@ namespace MezzanineLib.Support
 		static int musicVolume = 128;
 		static SdlDotNet.Music music;
 		static SoundLocation[] soundLocations = new SoundLocation[MAXCHAN];
-		static ArrayList samples = new ArrayList();
-		static ArrayList snames = new ArrayList();
+		public static ArrayList samples = new ArrayList();
+		public static ArrayList snames = new ArrayList();
 
 		/// <summary>
 		/// TODO
