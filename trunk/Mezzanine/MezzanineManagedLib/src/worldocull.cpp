@@ -18,10 +18,12 @@ void computeraytable(float vx, float vy)
 {
     if(!WorldOcull::Ocull) return;
 
-    WorldOcull::ODist = getvar("fog")*1.5f;
+    /*WorldOcull::ODist = getvar("fog")*1.5f;*/
+	WorldOcull::ODist = Render::RenderGl::Fog*1.5f;
 
     float apitch = (float)fabs(player1->pitch);
-    float af = getvar("fov")/2+apitch/1.5f+3;
+    //float af = getvar("fov")/2+apitch/1.5f+3;
+	float af = Render::RenderGl::Fov/2+apitch/1.5f+3;
     float byaw = (player1->yaw-90+af)/360*((float)System::Math::PI)*2;
     float syaw = (player1->yaw-90-af)/360*((float)System::Math::PI)*2;
 

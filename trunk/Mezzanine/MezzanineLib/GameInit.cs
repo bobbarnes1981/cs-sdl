@@ -68,18 +68,18 @@ namespace MezzanineLib
 	public struct MapHeader                   // map file format header
 	{
 		[MarshalAs( UnmanagedType.ByValArray, SizeConst=4 )]
-		char[] head;               // "CUBE"
-		int version;                // any >8bit quantity is a little indian
-		int headersize;             // sizeof(header)
-		int sfactor;                // in bits
-		int numents;
+		public char[] head;               // "CUBE"
+		public int version;                // any >8bit quantity is a little indian
+		public int headersize;             // sizeof(header)
+		public int sfactor;                // in bits
+		public int numents;
 		[MarshalAs( UnmanagedType.ByValArray, SizeConst=128 )]
-		char[] maptitle;
+		public char[] maptitle;
 		//uchar texlists[3][256];
-		IntPtr texlists;
-		int waterlevel;
+		public IntPtr texlists;
+		public int waterlevel;
 		[MarshalAs( UnmanagedType.ByValArray, SizeConst=15 )]
-		int[] reserved;
+		public int[] reserved;
 	};
 
 	[StructLayout(LayoutKind.Sequential, Pack=4)]
@@ -122,6 +122,8 @@ namespace MezzanineLib
 	{
 		
 		static IntPtr player1Ptr;
+		static IntPtr hdrPtr;
+		static MapHeader hdr;
 		static DynamicEntity player1;
 		static int screenWidth = 640;
 		static int screenHeight = 480;
@@ -462,6 +464,21 @@ namespace MezzanineLib
 			set
 			{
 				Marshal.StructureToPtr(value, player1Ptr, false);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static MapHeader MapHeader
+		{
+			get
+			{
+				return hdr = (MapHeader)Marshal.PtrToStructure(hdrPtr, typeof(MapHeader));
+			}
+			set
+			{
+				Marshal.StructureToPtr(value, hdrPtr, false);
 			}
 		}
 

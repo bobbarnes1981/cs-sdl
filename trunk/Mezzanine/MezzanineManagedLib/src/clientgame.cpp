@@ -435,8 +435,10 @@ void startmap(char *name)   // called just after a map load
     strcpy_s(getclientmap(), name);
     if(MezzanineLib::GameInit::EditMode) toggleedit();
     setvar("gamespeed", 100);
-	setvar("fog", 180);
-	setvar("fogcolour", 0x8099B3);
+	//setvar("fog", 180);
+	//setvar("fogcolour", 0x8099B3);
+	Render::RenderGl::Fog = 180;
+	Render::RenderGl::FogColour = 0x8099B3;
     showscores(false);
     ClientGame::intermission = false;
     ClientGame::FramesInMap = 0;

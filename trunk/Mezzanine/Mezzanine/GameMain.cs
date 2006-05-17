@@ -60,7 +60,7 @@ namespace Mezzanine
 		byte lastbut = 0;
 		int minmillis = 5;
 
-		bool grabMouse = true;
+		bool grabMouse = false;
 		
 
 		/// <summary>
@@ -253,15 +253,17 @@ namespace Mezzanine
 			Video.GLSwapBuffers();
 			MezzanineLib.Bindings.updatevol();
 				
-			if(framesinmap++<5)	// cheap hack to get rid of initial sparklies, even when triple buffering etc.
-			{
+			//if(framesinmap++<5)	// cheap hack to get rid of initial sparklies, even when triple buffering etc.
+			//{
 				//player1.yaw += 5;
 				//MezzanineLib.Main.Player1 = player1;
-				MezzanineLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
+				//MezzanineLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
+				//MezzanineLib.Render.RenderGl.GlDrawFrame(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
 				//player1.yaw -= 5;
 				//MezzanineLib.Main.Player1 = player1;
-			};
-			MezzanineLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
+			//};
+			//MezzanineLib.Bindings.gl_drawframe(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
+			MezzanineLib.Render.RenderGl.GlDrawFrame(GameInit.ScreenWidth, GameInit.ScreenHeight, fps);
 		}
 
 		private void Quit(object sender, QuitEventArgs e)
