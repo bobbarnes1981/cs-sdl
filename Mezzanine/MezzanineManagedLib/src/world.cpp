@@ -5,8 +5,6 @@
 using namespace MezzanineLib;
 using namespace MezzanineLib::World;
 
-extern char *entnames[];                // lookup from map entities above to strings
-
 sqr *world = NULL;
 
 header hdr;
@@ -174,7 +172,7 @@ int closestent()        // used for delent and edit mode ent display
     {
         entity &e = ents[i];
         if(e.type==StaticEntity::NOTUSED) continue;
-        vec v = { e.x, e.y, e.z };
+		vec v = { e.x, e.y, e.z };
         vdist(dist, t, player1->o, v);
         if(dist<bdist)
         {
@@ -203,22 +201,15 @@ void delent()
     int e = closestent();
     if(e<0) { conoutf("no more entities"); return; };
     int t = ents[e].type;
-	conoutf("%s entity deleted", entnames[t]);
+	conoutf("%s entity deleted", Render::RenderExtras::EntityNames[t]);
     ents[e].type = StaticEntity::NOTUSED;
     addmsg(1, 10, NetworkMessages::SV_EDITENT, e, StaticEntity::NOTUSED, 0, 0, 0, 0, 0, 0, 0);
     if(t==StaticEntity::LIGHT) calclight();
 };
 
-int findtype(char *what)
-{
-	loopi(StaticEntity::MAXENTTYPES) if(strcmp(what, entnames[i])==0) return i;
-    conoutf("unknown entity type \"%s\"", what);
-    return StaticEntity::NOTUSED;
-}
-
 entity *newentity(int x, int y, int z, char *what, int v1, int v2, int v3, int v4)
 {
-    int type = findtype(what);
+	int type = MezzanineLib::World::World::FindType(what);
     persistent_entity e = { x, y, z, v1, type, v2, v3, v4 };
     switch(type)
     {
@@ -246,7 +237,7 @@ entity *newentity(int x, int y, int z, char *what, int v1, int v2, int v3, int v
 
 void clearents(char *name)
 {  
-    int type = findtype(name);
+	int type = MezzanineLib::World::World::FindType(name);
     if(noteditmode() || multiplayer()) return;
     loopv(ents)
     {

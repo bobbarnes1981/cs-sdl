@@ -41,6 +41,30 @@ using MezzanineLib.ClientServer;
 
 namespace MezzanineLib.Game
 {
+	[StructLayout(LayoutKind.Sequential, Pack=4)]
+	public struct GunInfo 
+	{ 
+		public short sound;
+		public short attackdelay;
+		public short damage;
+		public short projspeed;
+		public short part;
+		public short kickamount; 
+		public string name; 
+
+		public GunInfo(short sound, short attackdelay, short damage, short projspeed, short part, short kickamount, string name)
+		{
+			this.sound = sound;
+			this.attackdelay = attackdelay;
+			this.damage = damage;
+			this.projspeed = projspeed;
+			this.part = part;
+			this.kickamount = kickamount;
+			this.name = name;
+		}
+
+	}
+
 	/// <summary>
 	/// 
 	/// </summary>
