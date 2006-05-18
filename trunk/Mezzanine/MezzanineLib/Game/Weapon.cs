@@ -61,7 +61,6 @@ namespace MezzanineLib.Game
 		/// <param name="c"></param>
 		public static void SelectGun(int a, int b, int c)
 		{
-			DynamicEntity tempEntity = GameInit.Player1;
 			if(a<-1 || b<-1 || c<-1 || a>=(int)Gun.NUMGUNS || b>=(int)Gun.NUMGUNS || c>=(int)Gun.NUMGUNS)
 			{
 				return;
@@ -103,6 +102,7 @@ namespace MezzanineLib.Game
 			{
 				Bindings.playsoundc((int)Sounds.S_WEAPLOAD);
 			}
+			DynamicEntity tempEntity = GameInit.Player1;
 			tempEntity.gunselect = s;
 			GameInit.Player1 = tempEntity;
 			//conoutf("%s selected", (int)guns[s].name);

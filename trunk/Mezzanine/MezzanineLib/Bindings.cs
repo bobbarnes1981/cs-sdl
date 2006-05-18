@@ -286,19 +286,6 @@ namespace MezzanineLib
 		public static extern void render_world(float vx, float vy, float vh, int yaw, int pitch, float widef, int w, int h);
 		#endregion void render_world(float vx, float vy, float vh, int yaw, int pitch, float widef, int w, int h)
 
-		#region void finishstrips()
-		/// <summary>
-		///     updatevol
-		/// </summary>
-		/// <remarks>
-		/// <p>Binds to C-function call in sound.cpp:
-		///     <code>extern DECLSPEC void CDECL finishstrips();</code>
-		///     </p>
-		/// </remarks>
-		[DllImport(MEZZANINE_NATIVE_LIBRARY, CallingConvention=CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-		public static extern void finishstrips();
-		#endregion void finishstrips()
-
 		#region void renderclients()
 		/// <summary>
 		///     updatevol

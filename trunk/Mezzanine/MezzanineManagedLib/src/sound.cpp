@@ -1,9 +1,8 @@
-// sound.cpp: uses fmod on windows and sdl_mixer on unix (both had problems on the other platform)
-
+// sound.cpp: uses sdl_mixer
 #include "cube.h"
 #include "SDL_mixer.h"
 #using <mscorlib.dll>
-//#using <Tao.Sdl.dll>
+
 using namespace MezzanineLib;
 using namespace MezzanineLib::Support;
 
@@ -11,9 +10,6 @@ VARP(soundvol, 0, 255, 255);
 VARP(musicvol, 0, 128, 255);
 
 struct soundloc { vec loc; bool inuse; } soundlocs[Sound::MAXCHAN];
-
-Mix_Music *mod = NULL;
-void *stream = NULL;
 
 VAR(soundbufferlen, 128, 1024, 4096);
 
@@ -24,16 +20,9 @@ void music(char *name)
 
 COMMAND(music, FunctionSignatures::ARG_1STR);
 
-vector<Mix_Chunk *> samples;
-
-cvector snames;
-
 int registersound(char *name)
 {
-	loopv(snames) if(strcmp(snames[i], name)==0) return i;
-	snames.add(newstring(name));
-	samples.add(NULL);
-	return samples.length()-1;
+	return Sound::RegisterSound(name);
 };
 
 COMMAND(registersound, FunctionSignatures::ARG_1EST);
@@ -80,26 +69,13 @@ void playsoundc(int n) { addmsg(0, 2, MezzanineLib::NetworkMessages::SV_SOUND, n
 
 void playsound(int n, vec *loc)
 {
-	if(Sound::noSound) return;
-	if(!soundvol) return;
-	if(MezzanineLib::GameInit::LastMillis==Sound::lastsoundmillis) Sound::soundsatonce++; else Sound::soundsatonce = 1;
-	Sound::lastsoundmillis = MezzanineLib::GameInit::LastMillis;
-	if(Sound::soundsatonce>5) return;  // avoid bursts of sounds with heavy packetloss and in sp
-	if(n<0 || n>=samples.length()) { conoutf("unregistered sound: %d", n); return; };
-
-	if(!samples[n])
-	{
-		sprintf_sd(buf)("packages/sounds/%s.wav", snames[n]);
-		//GameInit::Path = "packages/sounds/"+snames[n]+".wav" ;
-		samples[n] = Mix_LoadWAV(buf);
-		if(!samples[n]) { conoutf("failed to load sample: %s", buf); return; };
-	};
-
-	int chan = Mix_PlayChannel(-1, samples[n], 0);
-	if(chan<0) return;
-	if(loc) newsoundloc(chan, loc);
-	updatechanvol(chan, loc);
+	Support::Sound::PlaySound(n);
+	//if(loc) newsoundloc(chan, loc);
+	//updatechanvol(chan, loc);
 };
 
-void sound(int n) { playsound(n, NULL); };
+void sound(int n) 
+{ 
+	Support::Sound::PlaySound(n); 
+};
 COMMAND(sound, FunctionSignatures::ARG_1INT);

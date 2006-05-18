@@ -61,8 +61,6 @@ namespace MezzanineLib.Support
 	{
 		public const int MAXCHAN = 32;
 		public const int SOUNDFREQ = 22050;
-		public static int soundsatonce = 0;
-		public static int lastsoundmillis = 0;
 
 		public static bool noSound = false;
 		static int soundVolume = 255;
@@ -145,7 +143,7 @@ namespace MezzanineLib.Support
 			//if(stereo && (v.x != 0 || v.y != 0))
 			//{
 			//	float yaw = -Math.Atan2(v.x, v.y) - player1->yaw*(PI / 180.0f); // relative angle of sound along X-Y axis
-				//pan = int(255.9f*(0.5*sin(yaw)+0.5f)); // range is from 0 (left) to 255 (right)
+			//pan = int(255.9f*(0.5*sin(yaw)+0.5f)); // range is from 0 (left) to 255 (right)
 			//};
 			//};
 			//volume = (volume*MAXVOL)/255;
@@ -176,29 +174,49 @@ namespace MezzanineLib.Support
 		public static int soundsAtOnce = 0;
 		public static int lastSoundMillis = 0;
 
-		//		void playsound(int n, vec *loc)
-		//		{
-		//			if(nosound) return;
-		//			if(!soundvol) return;
-		//			if(lastmillis==lastsoundmillis) soundsatonce++; else soundsatonce = 1;
-		//			lastsoundmillis = lastmillis;
-		//			if(soundsatonce>5) return;  // avoid bursts of sounds with heavy packetloss and in sp
-		//			if(n<0 || n>=samples.length()) { conoutf("unregistered sound: %d", n); return; };
-		//
-		//			if(!samples[n])
-		//			{
-		//				sprintf_sd(buf)("packages/sounds/%s.wav", snames[n]);
-		//
-		//				//samples[n] = Mix_LoadWAV(path(buf));
-		//
-		//				// if(!samples[n]) { conoutf("failed to load sample: %s", buf); return; };
-		//			};
-		//
-		//			int chan;// = Mix_PlayChannel(-1, samples[n], 0);
-		//			if(chan<0) return;
-		//			if(loc) newsoundloc(chan, loc);
-		//			updatechanvol(chan, loc);
-		//		};
+		public static void PlaySound(int n)
+		{
+			if(noSound) 
+			{
+				return;
+			}
+			if(soundVolume == 0) 
+			{
+				return;
+			}
+			if(GameInit.LastMillis==lastSoundMillis) 
+			{
+				soundsAtOnce++; 
+			}
+			else 
+			{
+				soundsAtOnce = 1;
+			}
+			lastSoundMillis = GameInit.LastMillis;
+			if(soundsAtOnce>5) 
+			{
+				return;  // avoid bursts of sounds with heavy packetloss and in sp
+			}
+			if(n<0 || n>=samples.Count) 
+			{ 
+				//conoutf("unregistered sound: %d", n); 
+				return; 
+			}
+		
+			if(samples[n]==null)
+			{
+				samples[n] = new SdlDotNet.Sound(GameInit.NormalizePath("packages/sounds/" + snames[n] + ".wav"));
+				// if(!samples[n]) { conoutf("failed to load sample: %s", buf); return; };
+			}
+		
+			SdlDotNet.Channel channel = ((SdlDotNet.Sound)samples[n]).Play();
+			if(channel.Index<0) 
+			{
+				return;
+			}
+			//if(loc) newsoundloc(chan, loc);
+			//updatechanvol(chan, loc);
+		}
 
 		//		void sound(int n) { playsound(n, NULL); };
 		//		COMMAND(sound, ARG_1INT);
