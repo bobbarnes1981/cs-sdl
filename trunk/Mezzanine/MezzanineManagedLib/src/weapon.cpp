@@ -33,7 +33,7 @@ COMMAND(weapon, Support::FunctionSignatures::ARG_3STR);
 
 void createrays(vec &from, vec &to)             // create random spread of rays for the shotgun
 {
-    vdist(dist, dvec, from, to);
+	vdist(dist, dvec, from, to);
 	float f = dist*Game::Weapon::SGSPREAD/1000;
     loopi(Game::Weapon::SGRAYS)
     {

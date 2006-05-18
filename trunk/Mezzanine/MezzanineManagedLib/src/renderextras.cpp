@@ -82,15 +82,6 @@ void renderspheres(int time)
 };
 
 string closeent;
-char *entnames[] =
-{
-    "none?", "light", "playerstart",
-    "shells", "bullets", "rockets", "riflerounds",
-    "health", "healthboost", "greenarmour", "yellowarmour", "quaddamage", 
-    "teleport", "teledest", 
-    "mapmodel", "monster", "trigger", "jumppad",
-    "?", "?", "?", "?", "?", 
-};
 
 void renderents()       // show sparkly thingies for map entities in edit mode
 {
@@ -107,7 +98,7 @@ void renderents()       // show sparkly thingies for map entities in edit mode
     if(e>=0)
     {
         entity &c = ents[e];
-		sprintf_s(closeent)("closest entity = %s (%d, %d, %d, %d), selection = (%d, %d)", entnames[c.type], c.attr1, c.attr2, c.attr3, c.attr4, getvar("selxs"), getvar("selys"));
+		sprintf_s(closeent)("closest entity = %s (%d, %d, %d, %d), selection = (%d, %d)", RenderExtras::EntityNames[c.type], c.attr1, c.attr2, c.attr3, c.attr4, getvar("selxs"), getvar("selys"));
     };
 };
 
