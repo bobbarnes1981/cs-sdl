@@ -37,6 +37,7 @@ using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
 using System.Runtime.InteropServices;
+using MezzanineLib;
 
 namespace MezzanineLib.World
 {
@@ -45,5 +46,17 @@ namespace MezzanineLib.World
 	/// </summary>
 	public sealed class World
 	{
+		public static int FindType(string what)
+		{
+			for(int i = 0; i<((int)StaticEntity.MAXENTTYPES); i++)
+			{
+				if(what == Render.RenderExtras.EntityNames[i])
+				{
+					return i;
+				}
+			}
+			Console.WriteLine("unknown entity type \"%s\"", what);
+			return (int)StaticEntity.NOTUSED;
+		}
 	}
 }
