@@ -65,7 +65,7 @@ void updatevol()
 	};
 };
 
-void playsoundc(int n) { addmsg(0, 2, MezzanineLib::NetworkMessages::SV_SOUND, n); playsound(n); };
+void playsoundc(int n) { addmsg(0, 2, NetworkMessages::SV_SOUND, n); playsound(n); };
 
 void playsound(int n, vec *loc)
 {

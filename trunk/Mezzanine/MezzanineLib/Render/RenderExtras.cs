@@ -224,5 +224,31 @@ namespace MezzanineLib.Render
 			Gl.glLineWidth(width);
 			Gl.glColor3ub((byte)r,(byte)g,(byte)b);
 		}
+
+		static string lastsky = "";
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="baseName"></param>
+		public static void LoadSky(string baseName)
+		{
+			if(lastsky == baseName) 
+			{
+				return;
+			}
+			string[] side = { "ft", "bk", "lf", "rt", "dn", "up" };
+			int texnum = 14;
+			for(int i = 0; i<(6); i++)
+			{
+				int xs;
+				int ys;
+				if(!RenderGl.InstallTexture(texnum+i, GameInit.NormalizePath("packages/" + baseName + "_" + side[i] + ".jpg" ), out xs, out ys, true))
+				{
+					Console.WriteLine("could not load sky textures");
+				}
+			}
+			lastsky = baseName;
+		}
 	}
 }

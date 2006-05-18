@@ -315,7 +315,7 @@
 			Name="docs"
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
 			<File
-				RelativePath=".\src\CUBE_TODO.txt">
+				RelativePath=".\CUBE_TODO.txt">
 			</File>
 			<File
 				RelativePath="..\LICENSE.txt">

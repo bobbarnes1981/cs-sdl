@@ -41,14 +41,14 @@ const char *modestr(int n) { return (n>=-2 && n<12) ? modenames[n+2] : "unknown"
 
 char msgsizesl[] =               // size inclusive message token, 0 for variable or not-checked sizes
 { 
-    MezzanineLib::NetworkMessages::SV_INITS2C, 4, MezzanineLib::NetworkMessages::SV_INITC2S, 0, MezzanineLib::NetworkMessages::SV_POS, 12, MezzanineLib::NetworkMessages::SV_TEXT, 0, MezzanineLib::NetworkMessages::SV_SOUND, 2, MezzanineLib::NetworkMessages::SV_CDIS, 2,
-    MezzanineLib::NetworkMessages::SV_EDITH, 7, MezzanineLib::NetworkMessages::SV_EDITT, 7, MezzanineLib::NetworkMessages::SV_EDITS, 6, MezzanineLib::NetworkMessages::SV_EDITD, 6, MezzanineLib::NetworkMessages::SV_EDITE, 6,
-    MezzanineLib::NetworkMessages::SV_DIED, 2, MezzanineLib::NetworkMessages::SV_DAMAGE, 4, MezzanineLib::NetworkMessages::SV_SHOT, 8, MezzanineLib::NetworkMessages::SV_FRAGS, 2,
-    MezzanineLib::NetworkMessages::SV_MAPCHANGE, 0, MezzanineLib::NetworkMessages::SV_ITEMSPAWN, 2, MezzanineLib::NetworkMessages::SV_ITEMPICKUP, 3, MezzanineLib::NetworkMessages::SV_DENIED, 2,
-    MezzanineLib::NetworkMessages::SV_PING, 2, MezzanineLib::NetworkMessages::SV_PONG, 2, MezzanineLib::NetworkMessages::SV_CLIENTPING, 2, MezzanineLib::NetworkMessages::SV_GAMEMODE, 2,
-    MezzanineLib::NetworkMessages::SV_TIMEUP, 2, MezzanineLib::NetworkMessages::SV_EDITENT, 10, MezzanineLib::NetworkMessages::SV_MAPRELOAD, 2, MezzanineLib::NetworkMessages::SV_ITEMACC, 2,
-    MezzanineLib::NetworkMessages::SV_SENDMAP, 0, MezzanineLib::NetworkMessages::SV_RECVMAP, 1, MezzanineLib::NetworkMessages::SV_SERVMSG, 0, MezzanineLib::NetworkMessages::SV_ITEMLIST, 0,
-    MezzanineLib::NetworkMessages::SV_EXT, 0,
+    NetworkMessages::SV_INITS2C, 4, NetworkMessages::SV_INITC2S, 0, NetworkMessages::SV_POS, 12, NetworkMessages::SV_TEXT, 0, NetworkMessages::SV_SOUND, 2, NetworkMessages::SV_CDIS, 2,
+    NetworkMessages::SV_EDITH, 7, NetworkMessages::SV_EDITT, 7, NetworkMessages::SV_EDITS, 6, NetworkMessages::SV_EDITD, 6, NetworkMessages::SV_EDITE, 6,
+    NetworkMessages::SV_DIED, 2, NetworkMessages::SV_DAMAGE, 4, NetworkMessages::SV_SHOT, 8, NetworkMessages::SV_FRAGS, 2,
+    NetworkMessages::SV_MAPCHANGE, 0, NetworkMessages::SV_ITEMSPAWN, 2, NetworkMessages::SV_ITEMPICKUP, 3, NetworkMessages::SV_DENIED, 2,
+    NetworkMessages::SV_PING, 2, NetworkMessages::SV_PONG, 2, NetworkMessages::SV_CLIENTPING, 2, NetworkMessages::SV_GAMEMODE, 2,
+    NetworkMessages::SV_TIMEUP, 2, NetworkMessages::SV_EDITENT, 10, NetworkMessages::SV_MAPRELOAD, 2, NetworkMessages::SV_ITEMACC, 2,
+    NetworkMessages::SV_SENDMAP, 0, NetworkMessages::SV_RECVMAP, 1, NetworkMessages::SV_SERVMSG, 0, NetworkMessages::SV_ITEMLIST, 0,
+    NetworkMessages::SV_EXT, 0,
     -1
 };
 
@@ -76,10 +76,10 @@ void sendmaps(int n, string mapname, int mapsize, uchar *mapdata)
 ENetPacket *recvmap(int n)
 {
     if(!copydata) return NULL;
-    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS + ServerUtil::copysize, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(NULL, GameInit::MAXTRANS + ServerUtil::copysize, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, MezzanineLib::NetworkMessages::SV_RECVMAP);
+    putint(p, NetworkMessages::SV_RECVMAP);
     sendstring(copyname, p);
     putint(p, ServerUtil::copysize);
     memcpy(p, copydata, ServerUtil::copysize);
@@ -94,7 +94,7 @@ ENetPacket *recvmap(int n)
 
 void localservertoclient(uchar *buf, int len) {};
 //void fatal(char *s, char *o) { cleanupserver(); printf("servererror: %s\n", s); exit(1); };
-void *alloc(int s) { void *b = calloc(1,s); if(!b) MezzanineLib::GameInit::Fatal("no memory!"); return b; };
+void *alloc(int s) { void *b = calloc(1,s); if(!b) GameInit::Fatal("no memory!"); return b; };
 
 int main(int argc, char* argv[])
 {
@@ -116,7 +116,7 @@ int main(int argc, char* argv[])
         };
     };
     
-    if(enet_initialize()<0) MezzanineLib::GameInit::Fatal("Unable to initialise network module");
+    if(enet_initialize()<0) GameInit::Fatal("Unable to initialise network module");
     initserver(true, uprate, sdesc, ip, master, passwd, maxcl);
     return 0;
 };

@@ -26,7 +26,7 @@ void lightray(float bx, float by, persistent_entity &light)     // done in realt
     int stepy = (int)(dy/(float)steps*PRECF);
     int stepl = fast_f2nat(l/(float)steps); // incorrect: light will fade quicker if near edge of the world
 
-	if(MezzanineLib::Render::RenderGl::HasOverBright)
+	if(Render::RenderGl::HasOverBright)
     {
         l /= lightscale;
         stepl /= lightscale;
@@ -141,7 +141,7 @@ void postlightarea(block &a)    // median filter, smooths out random noise in li
 
 void calclight()
 {
-    loop(x,MezzanineLib::GameInit::SSize) loop(y,MezzanineLib::GameInit::SSize)
+    loop(x,GameInit::SSize) loop(y,GameInit::SSize)
     {
         sqr *s = S(x,y);
         s->r = s->g = s->b = 10;
@@ -150,10 +150,10 @@ void calclight()
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==MezzanineLib::StaticEntity::LIGHT) calclightsource(e);
+        if(e.type==StaticEntity::LIGHT) calclightsource(e);
     };
     
-    block b = { 1, 1, MezzanineLib::GameInit::SSize-2, MezzanineLib::GameInit::SSize-2 };
+    block b = { 1, 1, GameInit::SSize-2, GameInit::SSize-2 };
     postlightarea(b);
     setvar("fullbright", 0);
 };
@@ -177,19 +177,19 @@ void dodynlight(vec &vold, vec &v, int reach, int strength, dynent *owner)
     if(!reach) reach = dynlight;
     if(owner->monsterstate) reach = reach/2;
     if(!reach) return;
-    if(v.x<0 || v.y<0 || v.x>MezzanineLib::GameInit::SSize || v.y>MezzanineLib::GameInit::SSize) return;
+    if(v.x<0 || v.y<0 || v.x>GameInit::SSize || v.y>GameInit::SSize) return;
     
     int creach = reach+16;  // dependant on lightray random offsets!
     block b = { (int)v.x-creach, (int)v.y-creach, creach*2+1, creach*2+1 };
 
     if(b.x<1) b.x = 1;   
     if(b.y<1) b.y = 1;
-    if(b.xs+b.x>MezzanineLib::GameInit::SSize-2) b.xs = MezzanineLib::GameInit::SSize-2-b.x;
-    if(b.ys+b.y>MezzanineLib::GameInit::SSize-2) b.ys = MezzanineLib::GameInit::SSize-2-b.y;
+    if(b.xs+b.x>GameInit::SSize-2) b.xs = GameInit::SSize-2-b.x;
+    if(b.ys+b.y>GameInit::SSize-2) b.ys = GameInit::SSize-2-b.y;
 
     dlights.add(blockcopy(b));      // backup area before rendering in dynlight
 
-    persistent_entity l = { (int)v.x, (int)v.y, (int)v.z, reach, MezzanineLib::StaticEntity::LIGHT, strength, 0, 0 };
+    persistent_entity l = { (int)v.x, (int)v.y, (int)v.z, reach, StaticEntity::LIGHT, strength, 0, 0 };
     calclightsource(l);
     postlightarea(b);
 };

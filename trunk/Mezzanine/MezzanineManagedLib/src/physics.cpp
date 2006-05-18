@@ -10,7 +10,7 @@ using namespace MezzanineLib::Game;
 
 bool plcollide(dynent *d, dynent *o, float &headspace, float &hi, float &lo) // collide with player or monster
 {
-    if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return true;
+    if(o->state!=CSStatus::CS_ALIVE) return true;
     const float r = o->radius+d->radius;
     if(fabs(o->o.x-d->o.x)<r && fabs(o->o.y-d->o.y)<r) 
     {
@@ -28,12 +28,12 @@ bool plcollide(dynent *d, dynent *o, float &headspace, float &hi, float &lo) // 
 bool cornertest(int mip, int x, int y, int dx, int dy, int &bx, int &by, int &bs)    // recursively collide with a mipmapped corner cube
 {
     sqr *w = wmip[mip];
-    int sz = MezzanineLib::GameInit::SSize>>mip;
+    int sz = GameInit::SSize>>mip;
     bool stest = SOLID(SWS(w, x+dx, y, sz)) && SOLID(SWS(w, x, y+dy, sz));
     mip++;
     x /= 2;
     y /= 2;
-    if(SWS(wmip[mip], x, y, MezzanineLib::GameInit::SSize>>mip)->type==MezzanineLib::BlockTypes::CORNER)
+    if(SWS(wmip[mip], x, y, GameInit::SSize>>mip)->type==BlockTypes::CORNER)
     {
         bx = x<<mip;
         by = y<<mip;
@@ -48,7 +48,7 @@ void mmcollide(dynent *d, float &hi, float &lo)           // collide with a mapm
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type!=MezzanineLib::StaticEntity::MAPMODEL) continue;
+        if(e.type!=StaticEntity::MAPMODEL) continue;
         mapmodelinfo &mmi = getmminfo(e.attr2);
         if(!&mmi || !mmi.h) continue;
         const float r = mmi.rad+d->radius;
@@ -86,10 +86,10 @@ bool collide(dynent *d, bool spawn, float drop, float rise)
         float floor = s->floor;
         switch(s->type)
         {
-		case MezzanineLib::BlockTypes::SOLID:
+		case BlockTypes::SOLID:
                 return false;
 
-            case MezzanineLib::BlockTypes::CORNER:
+            case BlockTypes::CORNER:
             {
                 int bx = x, by = y, bs = 1;
                 if(x==x1 && y==y1 && cornertest(0, x, y, -1, -1, bx, by, bs) && fx1-bx+fy1-by<=bs
@@ -100,11 +100,11 @@ bool collide(dynent *d, bool spawn, float drop, float rise)
                 break;
             };
 
-            case MezzanineLib::BlockTypes::FHF:       // FIXME: too simplistic collision with slopes, makes it feels like tiny stairs
+            case BlockTypes::FHF:       // FIXME: too simplistic collision with slopes, makes it feels like tiny stairs
                 floor -= (s->vdelta+S(x+1,y)->vdelta+S(x,y+1)->vdelta+S(x+1,y+1)->vdelta)/16.0f;
                 break;
 
-            case MezzanineLib::BlockTypes::CHF:
+            case BlockTypes::CHF:
                 ceil += (s->vdelta+S(x+1,y)->vdelta+S(x,y+1)->vdelta+S(x+1,y+1)->vdelta)/16.0f;
 
         };
@@ -167,9 +167,9 @@ VARP(maxroll, 0, 3, 20);
 
 void physicsframe()          // optimally schedule physics frames inside the graphics frames
 {
-    if(MezzanineLib::GameInit::CurrentTime>=Physics::MINFRAMETIME)
+    if(GameInit::CurrentTime>=Physics::MINFRAMETIME)
     {
-        int faketime = MezzanineLib::GameInit::CurrentTime+Physics::physicsfraction;
+        int faketime = GameInit::CurrentTime+Physics::physicsfraction;
         Physics::physicsrepeat = faketime/Physics::MINFRAMETIME;
         Physics::physicsfraction = faketime-Physics::physicsrepeat*Physics::MINFRAMETIME;
     }
@@ -186,7 +186,7 @@ void physicsframe()          // optimally schedule physics frames inside the gra
 void moveplayer(dynent *pl, int moveres, bool local, int curtime)
 {
     const bool water = hdr.waterlevel>pl->o.z-0.5f;
-    const bool floating = (MezzanineLib::GameInit::EditMode && local) || pl->state==MezzanineLib::CSStatus::CS_EDITING;
+    const bool floating = (GameInit::EditMode && local) || pl->state==CSStatus::CS_EDITING;
 
     vec d;      // vector of direction we ideally want to move in
 
@@ -232,13 +232,13 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
                 pl->jumpnext = false;
                 pl->vel.z = 1.7f;       // physics impulse upwards
                 if(water) { pl->vel.x /= 8; pl->vel.y /= 8; };      // dampen velocity change even harder, gives correct water feel
-                if(local) playsoundc(MezzanineLib::Sounds::S_JUMP);
-                else if(pl->monsterstate) playsound(MezzanineLib::Sounds::S_JUMP, &pl->o);
+                if(local) playsoundc(Sounds::S_JUMP);
+                else if(pl->monsterstate) playsound(Sounds::S_JUMP, &pl->o);
             }
             else if(pl->timeinair>800)  // if we land after long time must have been a high jump, make thud sound
             {
-                if(local) playsoundc(MezzanineLib::Sounds::S_LAND);
-                else if(pl->monsterstate) playsound(MezzanineLib::Sounds::S_LAND, &pl->o);
+                if(local) playsoundc(Sounds::S_LAND);
+                else if(pl->monsterstate) playsound(Sounds::S_LAND, &pl->o);
             };
             pl->timeinair = 0;
         }
@@ -282,7 +282,7 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
 
     // detect wether player is outside map, used for skipping zbuffer clear mostly
 
-    if(pl->o.x < 0 || pl->o.x >= MezzanineLib::GameInit::SSize || pl->o.y <0 || pl->o.y > MezzanineLib::GameInit::SSize)
+    if(pl->o.x < 0 || pl->o.x >= GameInit::SSize || pl->o.y <0 || pl->o.y > GameInit::SSize)
     {
         pl->outsidemap = true;
     }
@@ -290,8 +290,8 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
     {
         sqr *s = S((int)pl->o.x, (int)pl->o.y);
         pl->outsidemap = SOLID(s)
-           || pl->o.z < s->floor - (s->type==MezzanineLib::BlockTypes::FHF ? s->vdelta/4 : 0)
-           || pl->o.z > s->ceil  + (s->type==MezzanineLib::BlockTypes::CHF ? s->vdelta/4 : 0);
+           || pl->o.z < s->floor - (s->type==BlockTypes::FHF ? s->vdelta/4 : 0)
+           || pl->o.z > s->ceil  + (s->type==BlockTypes::CHF ? s->vdelta/4 : 0);
     };
     
     // automatically apply smooth roll when strafing
@@ -309,13 +309,13 @@ void moveplayer(dynent *pl, int moveres, bool local, int curtime)
     
     // play sounds on water transitions
     
-    if(!pl->inwater && water) { playsound(MezzanineLib::Sounds::S_SPLASH2, &pl->o); pl->vel.z = 0; }
-    else if(pl->inwater && !water) playsound(MezzanineLib::Sounds::S_SPLASH1, &pl->o);
+    if(!pl->inwater && water) { playsound(Sounds::S_SPLASH2, &pl->o); pl->vel.z = 0; }
+    else if(pl->inwater && !water) playsound(Sounds::S_SPLASH1, &pl->o);
     pl->inwater = water;
 };
 
 void moveplayer(dynent *pl, int moveres, bool local)
 {
-    loopi(Physics::physicsrepeat) moveplayer(pl, moveres, local, i ? MezzanineLib::GameInit::CurrentTime/Physics::physicsrepeat : MezzanineLib::GameInit::CurrentTime-MezzanineLib::GameInit::CurrentTime/Physics::physicsrepeat*(Physics::physicsrepeat-1));
+    loopi(Physics::physicsrepeat) moveplayer(pl, moveres, local, i ? GameInit::CurrentTime/Physics::physicsrepeat : GameInit::CurrentTime-GameInit::CurrentTime/Physics::physicsrepeat*(Physics::physicsrepeat-1));
 };
 

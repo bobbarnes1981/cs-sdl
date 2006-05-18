@@ -146,6 +146,6 @@ void endianswap(void *memory, int stride, int length)   // little indians as sto
 void *alloc(int s)              // for some big chunks... most other allocs use the memory pool
 {
     void *b = calloc(1,s);
-	if(!b) MezzanineLib::GameInit::Fatal("out of memory!");
+	if(!b) GameInit::Fatal("out of memory!");
     return b;
 };

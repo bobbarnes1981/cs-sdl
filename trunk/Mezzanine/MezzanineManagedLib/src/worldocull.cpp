@@ -9,7 +9,7 @@ float rdist[WorldOcull::NumRays];
 
 void toggleocull() { WorldOcull::Ocull = !WorldOcull::Ocull; };
 
-COMMAND(toggleocull, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(toggleocull, Support::FunctionSignatures::ARG_NONE);
 
 // constructs occlusion map: cast rays in all directions on the 2d plane and record distance.
 // done exactly once per frame.

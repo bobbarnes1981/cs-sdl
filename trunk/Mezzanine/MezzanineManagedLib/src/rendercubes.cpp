@@ -18,7 +18,7 @@ void reallocv()
 {
     verts = (vertex *)realloc(verts, (RenderCubes::curmaxverts *= 2)*sizeof(vertex));
     RenderCubes::curmaxverts -= 10;
-    if(!verts) MezzanineLib::GameInit::Fatal("no vertex memory!");
+    if(!verts) GameInit::Fatal("no vertex memory!");
     setarraypointers();
 };
 
@@ -38,7 +38,7 @@ void reallocv()
 void showmip() { RenderCubes::showmip(); };
 void mipstats(int a, int b, int c) { if(RenderCubes::showm) conoutf("1x1/2x2/4x4: %d / %d / %d", a, b, c); };
 
-COMMAND(showmip, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(showmip, Support::FunctionSignatures::ARG_NONE);
 
 sqr sbright, sdark;
 VAR(lighterror,1,8,100);
@@ -272,7 +272,7 @@ int renderwater(float hf)
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_SRC_COLOR);
     int sx, sy;
-    glBindTexture(GL_TEXTURE_2D, Render::RenderGl::LookupTexture(MezzanineLib::TextureNumbers::DEFAULT_LIQUID, &sx, &sy));  
+    glBindTexture(GL_TEXTURE_2D, Render::RenderGl::LookupTexture(TextureNumbers::DEFAULT_LIQUID, &sx, &sy));  
 
     RenderCubes::wx1 &= ~(watersubdiv-1);
     RenderCubes::wy1 &= ~(watersubdiv-1);
@@ -281,8 +281,8 @@ int renderwater(float hf)
     float yf = RenderCubes::TEXTURESCALE/sy;
     float xs = watersubdiv*xf;
     float ys = watersubdiv*yf;
-    float t1 = MezzanineLib::GameInit::LastMillis/300.0f;
-    float t2 = MezzanineLib::GameInit::LastMillis/4000.0f;
+    float t1 = GameInit::LastMillis/300.0f;
+    float t2 = GameInit::LastMillis/4000.0f;
     
     sqr dl;
     dl.r = dl.g = dl.b = 255;

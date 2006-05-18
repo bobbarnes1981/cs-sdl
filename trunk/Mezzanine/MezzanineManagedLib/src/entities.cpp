@@ -20,11 +20,11 @@ void renderent(entity &e, char *mdlname, float z, float yaw, int frame = 0, int 
 
 void renderentities()
 {
-	if(MezzanineLib::GameInit::LastMillis>Entities::triggertime+1000) Entities::triggertime = 0;
+	if(GameInit::LastMillis>Entities::triggertime+1000) Entities::triggertime = 0;
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==MezzanineLib::StaticEntity::MAPMODEL)
+        if(e.type==StaticEntity::MAPMODEL)
         {
             mapmodelinfo &mmi = getmminfo(e.attr2);
             if(!&mmi) continue;
@@ -33,11 +33,11 @@ void renderentities()
         else
         {
             if(OUTBORD(e.x, e.y)) continue;
-            if(e.type!=MezzanineLib::StaticEntity::CARROT)
+            if(e.type!=StaticEntity::CARROT)
             {
-				if(!e.spawned && e.type!=MezzanineLib::StaticEntity::TELEPORT) continue;
-				if(e.type<MezzanineLib::StaticEntity::I_SHELLS || e.type>MezzanineLib::StaticEntity::TELEPORT) continue;
-				renderent(e, entmdlnames[e.type-MezzanineLib::StaticEntity::I_SHELLS], (float)(1+sin(MezzanineLib::GameInit::LastMillis/100.0+e.x+e.y)/20), MezzanineLib::GameInit::LastMillis/10.0f);
+				if(!e.spawned && e.type!=StaticEntity::TELEPORT) continue;
+				if(e.type<StaticEntity::I_SHELLS || e.type>StaticEntity::TELEPORT) continue;
+				renderent(e, entmdlnames[e.type-StaticEntity::I_SHELLS], (float)(1+sin(GameInit::LastMillis/100.0+e.x+e.y)/20), GameInit::LastMillis/10.0f);
             }
 			else switch(e.attr2)
             {			
@@ -48,7 +48,7 @@ void renderentities()
                 case 2: 
                 case 0:
 					if(!e.spawned) continue;
-					renderent(e, "carrot", (float)(1+sin(MezzanineLib::GameInit::LastMillis/100.0+e.x+e.y)/20), MezzanineLib::GameInit::LastMillis/(e.attr2 ? 1.0f : 10.0f));
+					renderent(e, "carrot", (float)(1+sin(GameInit::LastMillis/100.0+e.x+e.y)/20), GameInit::LastMillis/(e.attr2 ? 1.0f : 10.0f));
 					break;
 					
                 case 4: renderent(e, "switch2", 3,      (float)e.attr3*90, (!e.spawned && !Entities::triggertime) ? 1  : 0, (e.spawned || !Entities::triggertime) ? 1 : 2,  Entities::triggertime, 1050.0f);  break;
@@ -60,15 +60,15 @@ void renderentities()
 
 struct itemstat { int add, max, sound; } itemstats[] =
 {
-     10,    50, MezzanineLib::Sounds::S_ITEMAMMO,
-     20,   100, MezzanineLib::Sounds::S_ITEMAMMO,
-      5,    25, MezzanineLib::Sounds::S_ITEMAMMO,
-      5,    25, MezzanineLib::Sounds::S_ITEMAMMO,
-     25,   100, MezzanineLib::Sounds::S_ITEMHEALTH,
-     50,   200, MezzanineLib::Sounds::S_ITEMHEALTH,
-    100,   100, MezzanineLib::Sounds::S_ITEMARMOUR,
-    150,   150, MezzanineLib::Sounds::S_ITEMARMOUR,
-  20000, 30000, MezzanineLib::Sounds::S_ITEMPUP,
+     10,    50, Sounds::S_ITEMAMMO,
+     20,   100, Sounds::S_ITEMAMMO,
+      5,    25, Sounds::S_ITEMAMMO,
+      5,    25, Sounds::S_ITEMAMMO,
+     25,   100, Sounds::S_ITEMHEALTH,
+     50,   200, Sounds::S_ITEMHEALTH,
+    100,   100, Sounds::S_ITEMARMOUR,
+    150,   150, Sounds::S_ITEMARMOUR,
+  20000, 30000, Sounds::S_ITEMPUP,
 };
 
 void baseammo(int gun) { player1->ammo[gun] = itemstats[gun-1].add*2; };
@@ -78,7 +78,7 @@ void baseammo(int gun) { player1->ammo[gun] = itemstats[gun-1].add*2; };
 
 void radditem(int i, int &v)
 {
-    itemstat &is = itemstats[ents[i].type-MezzanineLib::StaticEntity::I_SHELLS];
+    itemstat &is = itemstats[ents[i].type-StaticEntity::I_SHELLS];
     ents[i].spawned = false;
     v += is.add;
     if(v>is.max) v = is.max;
@@ -89,24 +89,24 @@ void realpickup(int n, dynent *d)
 {
     switch(ents[n].type)
     {
-        case MezzanineLib::StaticEntity::I_SHELLS:  radditem(n, d->ammo[1]); break;
-        case MezzanineLib::StaticEntity::I_BULLETS: radditem(n, d->ammo[2]); break;
-        case MezzanineLib::StaticEntity::I_ROCKETS: radditem(n, d->ammo[3]); break;
-        case MezzanineLib::StaticEntity::I_ROUNDS:  radditem(n, d->ammo[4]); break;
-        case MezzanineLib::StaticEntity::I_HEALTH:  radditem(n, d->health);  break;
-        case MezzanineLib::StaticEntity::I_BOOST:   radditem(n, d->health);  break;
+        case StaticEntity::I_SHELLS:  radditem(n, d->ammo[1]); break;
+        case StaticEntity::I_BULLETS: radditem(n, d->ammo[2]); break;
+        case StaticEntity::I_ROCKETS: radditem(n, d->ammo[3]); break;
+        case StaticEntity::I_ROUNDS:  radditem(n, d->ammo[4]); break;
+        case StaticEntity::I_HEALTH:  radditem(n, d->health);  break;
+        case StaticEntity::I_BOOST:   radditem(n, d->health);  break;
 
-        case MezzanineLib::StaticEntity::I_GREENARMOUR:
+        case StaticEntity::I_GREENARMOUR:
             radditem(n, d->armour);
-            d->armourtype = MezzanineLib::ArmorTypes::A_GREEN;
+            d->armourtype = ArmorTypes::A_GREEN;
             break;
 
-        case MezzanineLib::StaticEntity::I_YELLOWARMOUR:
+        case StaticEntity::I_YELLOWARMOUR:
             radditem(n, d->armour);
-            d->armourtype = MezzanineLib::ArmorTypes::A_YELLOW;
+            d->armourtype = ArmorTypes::A_YELLOW;
             break;
 
-        case MezzanineLib::StaticEntity::I_QUAD:
+        case StaticEntity::I_QUAD:
             radditem(n, d->quadmillis);
             conoutf("you got the quad!");
             break;
@@ -117,9 +117,9 @@ void realpickup(int n, dynent *d)
 
 void additem(int i, int &v, int spawnsec)
 {
-    if(v<itemstats[ents[i].type-MezzanineLib::StaticEntity::I_SHELLS].max)                              // don't pick up if not needed
+    if(v<itemstats[ents[i].type-StaticEntity::I_SHELLS].max)                              // don't pick up if not needed
     {
-        addmsg(1, 3, MezzanineLib::NetworkMessages::SV_ITEMPICKUP, i, m_classicsp ? 100000 : spawnsec);    // first ask the server for an ack
+        addmsg(1, 3, NetworkMessages::SV_ITEMPICKUP, i, m_classicsp ? 100000 : spawnsec);    // first ask the server for an ack
         ents[i].spawned = false;                                            // even if someone else gets it first
     };
 };
@@ -129,7 +129,7 @@ void teleport(int n, dynent *d)     // also used by monsters
     int e = -1, tag = ents[n].attr1, beenhere = -1;
     for(;;)
     {
-        e = findentity(MezzanineLib::StaticEntity::TELEDEST, e+1);
+        e = findentity(StaticEntity::TELEDEST, e+1);
         if(e==beenhere || e<0) { conoutf("no teleport destination for tag %d", tag); return; };
         if(beenhere<0) beenhere = e;
         if(ents[e].attr2==tag)
@@ -141,7 +141,7 @@ void teleport(int n, dynent *d)     // also used by monsters
             d->pitch = 0;
             d->vel.x = d->vel.y = d->vel.z = 0;
             entinmap(d);
-            playsoundc(MezzanineLib::Sounds::S_TELEPORT);
+            playsoundc(Sounds::S_TELEPORT);
             break;
         };
     };
@@ -155,51 +155,51 @@ void pickup(int n, dynent *d)
     int ammo = np*2;
     switch(ents[n].type)
     {
-        case MezzanineLib::StaticEntity::I_SHELLS:  additem(n, d->ammo[1], ammo); break;
-        case MezzanineLib::StaticEntity::I_BULLETS: additem(n, d->ammo[2], ammo); break;
-        case MezzanineLib::StaticEntity::I_ROCKETS: additem(n, d->ammo[3], ammo); break;
-        case MezzanineLib::StaticEntity::I_ROUNDS:  additem(n, d->ammo[4], ammo); break;
-        case MezzanineLib::StaticEntity::I_HEALTH:  additem(n, d->health,  np*5); break;
-        case MezzanineLib::StaticEntity::I_BOOST:   additem(n, d->health,  60);   break;
+        case StaticEntity::I_SHELLS:  additem(n, d->ammo[1], ammo); break;
+        case StaticEntity::I_BULLETS: additem(n, d->ammo[2], ammo); break;
+        case StaticEntity::I_ROCKETS: additem(n, d->ammo[3], ammo); break;
+        case StaticEntity::I_ROUNDS:  additem(n, d->ammo[4], ammo); break;
+        case StaticEntity::I_HEALTH:  additem(n, d->health,  np*5); break;
+        case StaticEntity::I_BOOST:   additem(n, d->health,  60);   break;
 
-        case MezzanineLib::StaticEntity::I_GREENARMOUR:
+        case StaticEntity::I_GREENARMOUR:
             // (100h/100g only absorbs 166 damage)
-            if(d->armourtype==MezzanineLib::ArmorTypes::A_YELLOW && d->armour>66) break;
+            if(d->armourtype==ArmorTypes::A_YELLOW && d->armour>66) break;
             additem(n, d->armour, 20);
             break;
 
-        case MezzanineLib::StaticEntity::I_YELLOWARMOUR:
+        case StaticEntity::I_YELLOWARMOUR:
             additem(n, d->armour, 20);
             break;
 
-        case MezzanineLib::StaticEntity::I_QUAD:
+        case StaticEntity::I_QUAD:
             additem(n, d->quadmillis, 60);
             break;
             
-        case MezzanineLib::StaticEntity::CARROT:
+        case StaticEntity::CARROT:
             ents[n].spawned = false;
-            Entities::triggertime = MezzanineLib::GameInit::LastMillis;
+            Entities::triggertime = GameInit::LastMillis;
             trigger(ents[n].attr1, ents[n].attr2, false);  // needs to go over server for multiplayer
             break;
 
-        case MezzanineLib::StaticEntity::TELEPORT:
+        case StaticEntity::TELEPORT:
         {
             static int lastteleport = 0;
-            if(MezzanineLib::GameInit::LastMillis-lastteleport<500) break;
-            lastteleport = MezzanineLib::GameInit::LastMillis;
+            if(GameInit::LastMillis-lastteleport<500) break;
+            lastteleport = GameInit::LastMillis;
             teleport(n, d);
             break;
         };
         
-        case MezzanineLib::StaticEntity::JUMPPAD:
+        case StaticEntity::JUMPPAD:
         {
             static int lastjumppad = 0;
-            if(MezzanineLib::GameInit::LastMillis-lastjumppad<300) break;
-            lastjumppad = MezzanineLib::GameInit::LastMillis;
+            if(GameInit::LastMillis-lastjumppad<300) break;
+            lastjumppad = GameInit::LastMillis;
             vec v = { (int)(char)ents[n].attr3/10.0f, (int)(char)ents[n].attr2/10.0f, ents[n].attr1/10.0f };
             player1->vel.z = 0;
 			vadd(player1->vel, v);
-            playsoundc(MezzanineLib::Sounds::S_JUMPPAD);
+            playsoundc(Sounds::S_JUMPPAD);
             break;
         };
     };
@@ -207,16 +207,16 @@ void pickup(int n, dynent *d)
 
 void checkitems()
 {
-    if(MezzanineLib::GameInit::EditMode) return;
+    if(GameInit::EditMode) return;
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==MezzanineLib::StaticEntity::NOTUSED) continue;
-        if(!ents[i].spawned && e.type!=MezzanineLib::StaticEntity::TELEPORT && e.type!=MezzanineLib::StaticEntity::JUMPPAD) continue;
+        if(e.type==StaticEntity::NOTUSED) continue;
+        if(!ents[i].spawned && e.type!=StaticEntity::TELEPORT && e.type!=StaticEntity::JUMPPAD) continue;
         if(OUTBORD(e.x, e.y)) continue;
         vec v = { e.x, e.y, S(e.x, e.y)->floor+player1->eyeheight };
         vdist(dist, t, player1->o, v);
-        if(dist<(e.type==MezzanineLib::StaticEntity::TELEPORT ? 4 : 2.5)) pickup(i, player1);
+        if(dist<(e.type==StaticEntity::TELEPORT ? 4 : 2.5)) pickup(i, player1);
     };
 };
 
@@ -225,14 +225,14 @@ void checkquad(int time)
     if(player1->quadmillis && (player1->quadmillis -= time)<0)
     {
         player1->quadmillis = 0;
-        playsoundc(MezzanineLib::Sounds::S_PUPOUT);
+        playsoundc(Sounds::S_PUPOUT);
         conoutf("quad damage is over");
     };
 };
 
 void putitems(uchar *&p)            // puts items in network stream and also spawns them locally
 {
-    loopv(ents) if((ents[i].type>=MezzanineLib::StaticEntity::I_SHELLS && ents[i].type<=MezzanineLib::StaticEntity::I_QUAD) || ents[i].type==MezzanineLib::StaticEntity::CARROT)
+    loopv(ents) if((ents[i].type>=StaticEntity::I_SHELLS && ents[i].type<=StaticEntity::I_QUAD) || ents[i].type==StaticEntity::CARROT)
     {
         putint(p, i);
         ents[i].spawned = true;

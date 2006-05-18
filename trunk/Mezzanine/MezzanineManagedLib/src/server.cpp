@@ -83,7 +83,7 @@ void sendservmsg(char *msg)
     ENetPacket *packet = enet_packet_create(NULL, _MAXDEFSTR+10, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, MezzanineLib::NetworkMessages::SV_SERVMSG);
+    putint(p, NetworkMessages::SV_SERVMSG);
     sendstring(msg, p);
     *(ushort *)start = ENET_HOST_TO_NET_16(p-start);
     enet_packet_resize(packet, p-start);
@@ -96,7 +96,7 @@ void disconnect_client(int n, char *reason)
     printf("disconnecting client (%s) [%s]\n", clients[n].hostname, reason);
     enet_peer_disconnect(clients[n].peer);
 	clients[n].type = ServerType::ST_EMPTY;
-    send2(true, -1, MezzanineLib::NetworkMessages::SV_CDIS, n);
+    send2(true, -1, NetworkMessages::SV_CDIS, n);
 };
 
 void resetitems() { sents.setsize(0); Server::notgotitems = true; };
@@ -108,7 +108,7 @@ void pickup(uint i, int sec, int sender)         // server side item pickup, ack
     {
         sents[i].spawned = false;
         sents[i].spawnsecs = sec;
-        send2(true, sender, MezzanineLib::NetworkMessages::SV_ITEMACC, i);
+        send2(true, sender, NetworkMessages::SV_ITEMACC, i);
     };
 };
 
@@ -149,23 +149,23 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
         
     uchar *end = packet->data+packet->dataLength;
     uchar *p = packet->data+2;
-    char text[MezzanineLib::GameInit::MAXTRANS];
+    char text[GameInit::MAXTRANS];
     int cn = -1, type;
 
     while(p<end) switch(type = getint(p))
     {
-        case MezzanineLib::NetworkMessages::SV_TEXT:
+        case NetworkMessages::SV_TEXT:
             sgetstr();
             break;
 
-        case MezzanineLib::NetworkMessages::SV_INITC2S:
+        case NetworkMessages::SV_INITC2S:
             sgetstr();
             strcpy_s(clients[cn].name, text);
             sgetstr();
             getint(p);
             break;
 
-        case MezzanineLib::NetworkMessages::SV_MAPCHANGE:
+        case NetworkMessages::SV_MAPCHANGE:
         {
             sgetstr();
             int reqmode = getint(p);
@@ -182,7 +182,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             break;
         };
         
-        case MezzanineLib::NetworkMessages::SV_ITEMLIST:
+        case NetworkMessages::SV_ITEMLIST:
         {
             int n;
             while((n = getint(p))!=-1) if(Server::notgotitems)
@@ -195,18 +195,18 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             break;
         };
 
-        case MezzanineLib::NetworkMessages::SV_ITEMPICKUP:
+        case NetworkMessages::SV_ITEMPICKUP:
         {
             int n = getint(p);
             pickup(n, getint(p), sender);
             break;
         };
 
-        case MezzanineLib::NetworkMessages::SV_PING:
-            send2(false, cn, MezzanineLib::NetworkMessages::SV_PONG, getint(p));
+        case NetworkMessages::SV_PING:
+            send2(false, cn, NetworkMessages::SV_PONG, getint(p));
             break;
 
-        case MezzanineLib::NetworkMessages::SV_POS:
+        case NetworkMessages::SV_POS:
         {
             cn = getint(p);
             if(cn<0 || cn>=clients.length() || clients[cn].type==ServerType::ST_EMPTY)
@@ -220,7 +220,7 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             break;
         };
 
-        case MezzanineLib::NetworkMessages::SV_SENDMAP:
+        case NetworkMessages::SV_SENDMAP:
         {
             sgetstr();
             int mapsize = getint(p);
@@ -228,11 +228,11 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
             return;
         }
 
-        case MezzanineLib::NetworkMessages::SV_RECVMAP:
+        case NetworkMessages::SV_RECVMAP:
 			send(sender, recvmap(sender));
             return;
             
-        case MezzanineLib::NetworkMessages::SV_EXT:   // allows for new features that require no server updates 
+        case NetworkMessages::SV_EXT:   // allows for new features that require no server updates 
         {
             for(int n = getint(p); n; n--) getint(p);
             break;
@@ -252,21 +252,21 @@ void process(ENetPacket * packet, int sender)   // sender may be -1
 
 void send_welcome(int n)
 {
-    ENetPacket * packet = enet_packet_create (NULL, MezzanineLib::GameInit::MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket * packet = enet_packet_create (NULL, GameInit::MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, MezzanineLib::NetworkMessages::SV_INITS2C);
+    putint(p, NetworkMessages::SV_INITS2C);
     putint(p, n);
-    putint(p, MezzanineLib::GameInit::PROTOCOL_VERSION);
+    putint(p, GameInit::PROTOCOL_VERSION);
     putint(p, smapname[0]);
     sendstring(serverpassword, p);
     putint(p, clients.length()>Server::maxclients);
     if(smapname[0])
     {
-        putint(p, MezzanineLib::NetworkMessages::SV_MAPCHANGE);
+        putint(p, NetworkMessages::SV_MAPCHANGE);
         sendstring(smapname, p);
         putint(p, Server::mode);
-        putint(p, MezzanineLib::NetworkMessages::SV_ITEMLIST);
+        putint(p, NetworkMessages::SV_ITEMLIST);
         loopv(sents) if(sents[i].spawned) putint(p, i);
         putint(p, -1);
     };
@@ -303,7 +303,7 @@ void checkintermission()
         Server::interm = Server::lastsec+10;
         Server::mapend = Server::lastsec+1000;
     };
-    send2(true, -1, MezzanineLib::NetworkMessages::SV_TIMEUP, Server::minremain--);
+    send2(true, -1, NetworkMessages::SV_TIMEUP, Server::minremain--);
 };
 
 void startintermission() { Server::minremain = 0; checkintermission(); };
@@ -330,7 +330,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
         {
             sents[i].spawnsecs = 0;
             sents[i].spawned = true;
-            send2(true, -1, MezzanineLib::NetworkMessages::SV_ITEMSPAWN, i);
+            send2(true, -1, NetworkMessages::SV_ITEMSPAWN, i);
         };
     };
     
@@ -342,7 +342,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
         Server::interm = 0;
         loopv(clients) if(clients[i].type!=ServerType::ST_EMPTY)
         {
-            send2(true, i, MezzanineLib::NetworkMessages::SV_MAPRELOAD, 0);    // ask a client to trigger map reload
+            send2(true, i, NetworkMessages::SV_MAPRELOAD, 0);    // ask a client to trigger map reload
             Server::mapreload = true;
             break;
         };
@@ -392,7 +392,7 @@ void serverslice(int seconds, unsigned int timeout)   // main server update, cal
                 if((int)event.peer->data<0) break;
                 printf("disconnected client (%s)\n", clients[(int)event.peer->data].hostname);
                 clients[(int)event.peer->data].type = ServerType::ST_EMPTY;
-                send2(true, -1, MezzanineLib::NetworkMessages::SV_CDIS, (int)event.peer->data);
+                send2(true, -1, NetworkMessages::SV_CDIS, (int)event.peer->data);
                 event.peer->data = (void *)-1;
                 break;
         };
@@ -430,11 +430,11 @@ void initserver(bool dedicated, int uprate, char *sdesc, char *ip, char *master,
     
     if(Server::isdedicated = dedicated)
     {
-        ENetAddress address = { ENET_HOST_ANY, MezzanineLib::GameInit::CUBE_SERVER_PORT };
+        ENetAddress address = { ENET_HOST_ANY, GameInit::CUBE_SERVER_PORT };
         if(*ip && enet_address_set_host(&address, ip)<0) printf("WARNING: server ip not resolved");
-        serverhost = enet_host_create(&address, MezzanineLib::GameInit::MAXCLIENTS, 0, uprate);
-		if(!serverhost) MezzanineLib::GameInit::Fatal("could not create server host\n");
-        loopi(MezzanineLib::GameInit::MAXCLIENTS) serverhost->peers[i].data = (void *)-1;
+        serverhost = enet_host_create(&address, GameInit::MAXCLIENTS, 0, uprate);
+		if(!serverhost) GameInit::Fatal("could not create server host\n");
+        loopi(GameInit::MAXCLIENTS) serverhost->peers[i].data = (void *)-1;
     };
 
     resetserverifempty();

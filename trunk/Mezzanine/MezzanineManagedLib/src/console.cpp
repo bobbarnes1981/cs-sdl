@@ -23,7 +23,7 @@ void conline(const char *sf, bool highlight)        // add a line to the console
 {
     cline cl;
     cl.cref = conlines.length()>100 ? conlines.pop().cref : newstringbuf("");   // constrain the buffer size
-    cl.outtime = MezzanineLib::GameInit::LastMillis;                        // for how long to keep line on screen
+    cl.outtime = GameInit::LastMillis;                        // for how long to keep line on screen
     conlines.insert(0,cl);
     if(highlight)                                   // show line in a different colour, for chat etc.
     {
@@ -57,14 +57,14 @@ void renderconsole()                                // render buffer taking into
 {
     int nd = 0;
     char *refs[Console::ndraw];
-    loopv(conlines) if(Console::conskip ? i>=Console::conskip-1 || i>=conlines.length()-Console::ndraw : MezzanineLib::GameInit::LastMillis-conlines[i].outtime<20000)
+    loopv(conlines) if(Console::conskip ? i>=Console::conskip-1 || i>=conlines.length()-Console::ndraw : GameInit::LastMillis-conlines[i].outtime<20000)
     {
         refs[nd++] = conlines[i].cref;
         if(nd==Console::ndraw) break;
     };
     loopj(nd)
     {
-        draw_text(refs[j], MezzanineLib::GameInit::FontH/3, (MezzanineLib::GameInit::FontH/4*5)*(nd-j-1)+MezzanineLib::GameInit::FontH/3, 2);
+        draw_text(refs[j], GameInit::FontH/3, (GameInit::FontH/4*5)*(nd-j-1)+GameInit::FontH/3, 2);
     };
 };
 
@@ -97,7 +97,7 @@ COMMANDN(bind, bindkey, FunctionSignatures::ARG_2STR);
 void saycommand(char *init)                         // turns input to the command line on or off
 {
 	SdlDotNet::Keyboard::UnicodeEnabled = (Console::saycommandon = (init!=NULL));
-    if(!MezzanineLib::GameInit::EditMode) SdlDotNet::Keyboard::KeyRepeat = Console::saycommandon;
+    if(!GameInit::EditMode) SdlDotNet::Keyboard::KeyRepeat = Console::saycommandon;
     if(!init) init = "";
     strcpy_s(commandbuf, init);
 };
