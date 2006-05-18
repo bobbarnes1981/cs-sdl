@@ -29,7 +29,7 @@ void newparticle(vec &o, vec &d, int fade, int type)
         p->d = d;
         p->fade = fade;
         p->type = type;
-        p->millis = MezzanineLib::GameInit::LastMillis;
+        p->millis = GameInit::LastMillis;
         p->next = parlist;
         parlist = p;
     };
@@ -44,7 +44,7 @@ void setorient(vec &r, vec &u) { right = r; up = u; };
 
 void render_particles(int time)
 {
-	if(MezzanineLib::GameInit::DemoPlayback && demotracking)
+	if(GameInit::DemoPlayback && demotracking)
 	{
 		vec nom = { 0, 0, 0 };
 		newparticle(player1->o, nom, 100000000, 8);
@@ -95,7 +95,7 @@ void render_particles(int time)
         }
         else
         {
-			if(pt->gr) p->o.z -= ((MezzanineLib::GameInit::LastMillis-p->millis)/3.0f)*MezzanineLib::GameInit::CurrentTime/(pt->gr*10000);
+			if(pt->gr) p->o.z -= ((GameInit::LastMillis-p->millis)/3.0f)*GameInit::CurrentTime/(pt->gr*10000);
             vec a = p->d;
             vmul(a,time);
             vdiv(a,20000.0f);

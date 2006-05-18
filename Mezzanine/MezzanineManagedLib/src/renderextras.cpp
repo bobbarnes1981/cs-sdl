@@ -56,7 +56,7 @@ void renderspheres(int time)
         float size = p->size/p->max;
         glColor4f(1.0f, 1.0f, 1.0f, 1.0f-size);
         glTranslatef(p->o.x, p->o.z, p->o.y);
-        glRotatef(MezzanineLib::GameInit::LastMillis/5.0f, 1, 1, 1);
+        glRotatef(GameInit::LastMillis/5.0f, 1, 1, 1);
         glScalef(p->size, p->size, p->size);
         glCallList(1);
         glScalef(0.8f, 0.8f, 0.8f);
@@ -95,11 +95,11 @@ char *entnames[] =
 void renderents()       // show sparkly thingies for map entities in edit mode
 {
     closeent[0] = 0;
-    if(!MezzanineLib::GameInit::EditMode) return;
+    if(!GameInit::EditMode) return;
     loopv(ents)
     {
         entity &e = ents[i];
-        if(e.type==MezzanineLib::StaticEntity::NOTUSED) continue;
+        if(e.type==StaticEntity::NOTUSED) continue;
         vec v = { e.x, e.y, e.z };
         particle_splash(2, 2, 40, v);
     };
@@ -113,21 +113,10 @@ void renderents()       // show sparkly thingies for map entities in edit mode
 
 void loadsky(char *basename)
 {
-    static string lastsky = "";
-    if(strcmp(lastsky, basename)==0) return;
-    char *side[] = { "ft", "bk", "lf", "rt", "dn", "up" };
-    int texnum = 14;
-    loopi(6)
-    {
-        sprintf_sd(name)("packages/%s_%s.jpg", basename, side[i]);
-        int xs, ys;
-		//if(!RenderGl::InstallTexture(texnum+i, path(name), &xs, &ys, true)) conoutf("could not load sky textures");
-		if(!RenderGl::InstallTexture(texnum+i, path(name), &xs, &ys, true)) conoutf("could not load sky textures");
-    };
-    strcpy_s(lastsky, basename);
+	RenderExtras::LoadSky(basename);
 };
 
-COMMAND(loadsky, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
+COMMAND(loadsky, Support::FunctionSignatures::ARG_1STR);
 
 float cursordepth = 0.9f;
 GLint viewport[4];
@@ -182,7 +171,7 @@ VARP(crosshairfx, 0, 1, 1);
 void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwater)
 {
     readmatrices();
-    if(MezzanineLib::GameInit::EditMode)
+    if(GameInit::EditMode)
     {
         if(cursordepth==1.0f) worldpos = player1->o;
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -193,7 +182,7 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
     glDisable(GL_DEPTH_TEST);
     invertperspective();
     glPushMatrix();  
-    glOrtho(0, MezzanineLib::GameInit::VIRTW, MezzanineLib::GameInit::VIRTH, 0, -1, 1);
+    glOrtho(0, GameInit::VIRTW, GameInit::VIRTH, 0, -1, 1);
     glEnable(GL_BLEND);
 
     glDepthMask(GL_FALSE);
@@ -205,11 +194,11 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
         if(RenderExtras::DBlend) glColor3d(0.0f, 0.9f, 0.9f);
         else glColor3d(0.9f, 0.5f, 0.0f);
         glVertex2i(0, 0);
-        glVertex2i(MezzanineLib::GameInit::VIRTW, 0);
-        glVertex2i(MezzanineLib::GameInit::VIRTW, MezzanineLib::GameInit::VIRTH);
-        glVertex2i(0, MezzanineLib::GameInit::VIRTH);
+        glVertex2i(GameInit::VIRTW, 0);
+        glVertex2i(GameInit::VIRTW, GameInit::VIRTH);
+        glVertex2i(0, GameInit::VIRTH);
         glEnd();
-		RenderExtras::DBlend -= MezzanineLib::GameInit::CurrentTime/3;
+		RenderExtras::DBlend -= GameInit::CurrentTime/3;
         if(RenderExtras::DBlend<0) RenderExtras::DBlend = 0;
     };
 
@@ -235,26 +224,26 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
             else if(player1->health<=50) glColor3ub(255,128,0);
         };
         float chsize = (float)crosshairsize;
-        glTexCoord2d(0.0, 0.0); glVertex2f(MezzanineLib::GameInit::VIRTW/2 - chsize, MezzanineLib::GameInit::VIRTH/2 - chsize);
-        glTexCoord2d(1.0, 0.0); glVertex2f(MezzanineLib::GameInit::VIRTW/2 + chsize, MezzanineLib::GameInit::VIRTH/2 - chsize);
-        glTexCoord2d(1.0, 1.0); glVertex2f(MezzanineLib::GameInit::VIRTW/2 + chsize, MezzanineLib::GameInit::VIRTH/2 + chsize);
-        glTexCoord2d(0.0, 1.0); glVertex2f(MezzanineLib::GameInit::VIRTW/2 - chsize, MezzanineLib::GameInit::VIRTH/2 + chsize);
+        glTexCoord2d(0.0, 0.0); glVertex2f(GameInit::VIRTW/2 - chsize, GameInit::VIRTH/2 - chsize);
+        glTexCoord2d(1.0, 0.0); glVertex2f(GameInit::VIRTW/2 + chsize, GameInit::VIRTH/2 - chsize);
+        glTexCoord2d(1.0, 1.0); glVertex2f(GameInit::VIRTW/2 + chsize, GameInit::VIRTH/2 + chsize);
+        glTexCoord2d(0.0, 1.0); glVertex2f(GameInit::VIRTW/2 - chsize, GameInit::VIRTH/2 + chsize);
         glEnd();
     };
 
     glPopMatrix();
 
     glPushMatrix();    
-    glOrtho(0, MezzanineLib::GameInit::VIRTW*4/3, MezzanineLib::GameInit::VIRTH*4/3, 0, -1, 1);
+    glOrtho(0, GameInit::VIRTW*4/3, GameInit::VIRTH*4/3, 0, -1, 1);
     renderconsole();
 
     if(!hidestats)
     {
         glPopMatrix();
         glPushMatrix();
-        glOrtho(0, MezzanineLib::GameInit::VIRTW*3/2, MezzanineLib::GameInit::VIRTH*3/2, 0, -1, 1);
+        glOrtho(0, GameInit::VIRTW*3/2, GameInit::VIRTH*3/2, 0, -1, 1);
         draw_textf("fps %d", 3200, 2390, 2, curfps);
-		//MezzanineLib::RenderText::DrawTextF("fps %d", 3200, 2390, 2, curfps.ToString());
+		//RenderText::DrawTextF("fps %d", 3200, 2390, 2, curfps.ToString());
         draw_textf("wqd %d", 3200, 2460, 2, nquads); 
         draw_textf("wvt %d", 3200, 2530, 2, curvert);
         draw_textf("evt %d", 3200, 2600, 2, RenderGl::XtraVerts);
@@ -262,16 +251,16 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
     
     glPopMatrix();
 
-    if(player1->state==MezzanineLib::CSStatus::CS_ALIVE)
+    if(player1->state==CSStatus::CS_ALIVE)
     {
         glPushMatrix();
-        glOrtho(0, MezzanineLib::GameInit::VIRTW/2, MezzanineLib::GameInit::VIRTH/2, 0, -1, 1);
+        glOrtho(0, GameInit::VIRTW/2, GameInit::VIRTH/2, 0, -1, 1);
         draw_textf("%d",  90, 827, 2, player1->health);
         if(player1->armour) draw_textf("%d", 390, 827, 2, player1->armour);
         draw_textf("%d", 690, 827, 2, player1->ammo[player1->gunselect]);
         glPopMatrix();
         glPushMatrix();
-        glOrtho(0, MezzanineLib::GameInit::VIRTW, MezzanineLib::GameInit::VIRTH, 0, -1, 1);
+        glOrtho(0, GameInit::VIRTW, GameInit::VIRTH, 0, -1, 1);
         glDisable(GL_BLEND);
 		RenderExtras::DrawIcon(128, 128, 20, 1650);
         if(player1->armour) RenderExtras::DrawIcon((float)(player1->armourtype*64), 0, 620, 1650); 

@@ -8,14 +8,14 @@ using namespace MezzanineLib::World;
 
 void render_wall(sqr *o, sqr *s, int x1, int y1, int x2, int y2, int mip, sqr *d1, sqr *d2, bool topleft)
 {
-    if(SOLID(o) || o->type==MezzanineLib::BlockTypes::SEMISOLID)
+    if(SOLID(o) || o->type==BlockTypes::SEMISOLID)
     {
         float c1 = s->floor;
         float c2 = s->floor;
-        if(s->type==MezzanineLib::BlockTypes::FHF) { c1 -= d1->vdelta/4.0f; c2 -= d2->vdelta/4.0f; };
+        if(s->type==BlockTypes::FHF) { c1 -= d1->vdelta/4.0f; c2 -= d2->vdelta/4.0f; };
         float f1 = s->ceil;
         float f2 = s->ceil;
-        if(s->type==MezzanineLib::BlockTypes::CHF) { f1 += d1->vdelta/4.0f; f2 += d2->vdelta/4.0f; };
+        if(s->type==BlockTypes::CHF) { f1 += d1->vdelta/4.0f; f2 += d2->vdelta/4.0f; };
         //if(f1-c1<=0 && f2-c2<=0) return;
         render_square(o->wtex, c1, c2, f1, f2, x1<<mip, y1<<mip, x2<<mip, y2<<mip, 1<<mip, d1, d2, topleft);
         return;
@@ -25,12 +25,12 @@ void render_wall(sqr *o, sqr *s, int x1, int y1, int x2, int y2, int mip, sqr *d
         float f2 = s->floor;
         float c1 = o->floor;
         float c2 = o->floor;
-        if(o->type==MezzanineLib::BlockTypes::FHF && s->type!=MezzanineLib::BlockTypes::FHF)
+        if(o->type==BlockTypes::FHF && s->type!=BlockTypes::FHF)
         {
             c1 -= d1->vdelta/4.0f;
             c2 -= d2->vdelta/4.0f;
         }
-        if(s->type==MezzanineLib::BlockTypes::FHF && o->type!=MezzanineLib::BlockTypes::FHF)
+        if(s->type==BlockTypes::FHF && o->type!=BlockTypes::FHF)
         {
             f1 -= d1->vdelta/4.0f;
             f2 -= d2->vdelta/4.0f;
@@ -44,12 +44,12 @@ void render_wall(sqr *o, sqr *s, int x1, int y1, int x2, int y2, int mip, sqr *d
         float f2 = o->ceil;
         float c1 = s->ceil;
         float c2 = s->ceil;
-        if(o->type==MezzanineLib::BlockTypes::CHF && s->type!=MezzanineLib::BlockTypes::CHF)
+        if(o->type==BlockTypes::CHF && s->type!=BlockTypes::CHF)
         {
             f1 += d1->vdelta/4.0f;
             f2 += d2->vdelta/4.0f;
         }
-        else if(s->type==MezzanineLib::BlockTypes::CHF && o->type!=MezzanineLib::BlockTypes::CHF)
+        else if(s->type==BlockTypes::CHF && o->type!=BlockTypes::CHF)
         {
             c1 += d1->vdelta/4.0f;
             c2 += d2->vdelta/4.0f;
@@ -60,7 +60,7 @@ void render_wall(sqr *o, sqr *s, int x1, int y1, int x2, int y2, int mip, sqr *d
 };
 
 int stats[11];
-//int stats[MezzanineLib::GameInit::LargestFactor];
+//int stats[GameInit::LargestFactor];
 
 // detect those cases where a higher mip solid has a visible wall next to lower mip cubes
 // (used for wall rendering below)
@@ -69,21 +69,21 @@ bool issemi(int mip, int x, int y, int x1, int y1, int x2, int y2)
 {
     if(!(mip--)) return true;
     sqr *w = wmip[mip];
-    int msize = MezzanineLib::GameInit::SSize>>mip;
+    int msize = GameInit::SSize>>mip;
     x *= 2;
     y *= 2;
     switch(SWS(w, x+x1, y+y1, msize)->type)
     {
-        case MezzanineLib::BlockTypes::SEMISOLID: if(issemi(mip, x+x1, y+y1, x1, y1, x2, y2)) return true;
-        case MezzanineLib::BlockTypes::CORNER:
-        case MezzanineLib::BlockTypes::SOLID: break;
+        case BlockTypes::SEMISOLID: if(issemi(mip, x+x1, y+y1, x1, y1, x2, y2)) return true;
+        case BlockTypes::CORNER:
+        case BlockTypes::SOLID: break;
         default: return true;
     };
     switch(SWS(w, x+x2, y+y2, msize)->type)
     {
-        case MezzanineLib::BlockTypes::SEMISOLID: if(issemi(mip, x+x2, y+y2, x1, y1, x2, y2)) return true;
-        case MezzanineLib::BlockTypes::CORNER:
-        case MezzanineLib::BlockTypes::SOLID: break;
+        case BlockTypes::SEMISOLID: if(issemi(mip, x+x2, y+y2, x1, y1, x2, y2)) return true;
+        case BlockTypes::CORNER:
+        case BlockTypes::SOLID: break;
         default: return true;
     };
     return false;
@@ -96,7 +96,7 @@ bool issemi(int mip, int x, int y, int x1, int y1, int x2, int y2)
 void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs, int ys)
 {
     sqr *w = wmip[mip];
-    int sz = MezzanineLib::GameInit::SSize>>mip;
+    int sz = GameInit::SSize>>mip;
     int vxx = ((int)vx+(1<<mip)/2)>>mip;
     int vyy = ((int)vy+(1<<mip)/2)>>mip;
     int lx = vxx-WorldRender::lodleft;   // these mark the rect inside the current rest that we want to render using a lower mip level
@@ -144,23 +144,23 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
         };
         stats[mip]++;
         LOOPD
-        if((s->type==MezzanineLib::BlockTypes::SPACE || s->type==MezzanineLib::BlockTypes::FHF) && s->ceil>=vh && WorldRender::render_ceil)
+        if((s->type==BlockTypes::SPACE || s->type==BlockTypes::FHF) && s->ceil>=vh && WorldRender::render_ceil)
             render_flat(s->ctex, xx<<mip, yy<<mip, 1<<mip, s->ceil, s, t, u, v, true);
-        if(s->type==MezzanineLib::BlockTypes::CHF) //if(s->ceil>=vh)
+        if(s->type==BlockTypes::CHF) //if(s->ceil>=vh)
             render_flatdelta(s->ctex, xx<<mip, yy<<mip, 1<<mip, dc(s), dc(t), dc(u), dc(v), s, t, u, v, true);
     }};
 
     LOOPH continue;     // floors
         LOOPD
-        if((s->type==MezzanineLib::BlockTypes::SPACE || s->type==MezzanineLib::BlockTypes::CHF) && s->floor<=vh && WorldRender::render_floor)
+        if((s->type==BlockTypes::SPACE || s->type==BlockTypes::CHF) && s->floor<=vh && WorldRender::render_floor)
         {
             render_flat(s->ftex, xx<<mip, yy<<mip, 1<<mip, s->floor, s, t, u, v, false);
-			if(s->floor<hdr.waterlevel && !SOLID(s)) MezzanineLib::Render::RenderCubes::AddWaterQuad(xx<<mip, yy<<mip, 1<<mip);
+			if(s->floor<hdr.waterlevel && !SOLID(s)) Render::RenderCubes::AddWaterQuad(xx<<mip, yy<<mip, 1<<mip);
         };
-        if(s->type==MezzanineLib::BlockTypes::FHF)
+        if(s->type==BlockTypes::FHF)
         {
             render_flatdelta(s->ftex, xx<<mip, yy<<mip, 1<<mip, df(s), df(t), df(u), df(v), s, t, u, v, false);
-			if(s->floor-s->vdelta/4.0f<hdr.waterlevel && !SOLID(s)) MezzanineLib::Render::RenderCubes::AddWaterQuad(xx<<mip, yy<<mip, 1<<mip);
+			if(s->floor-s->vdelta/4.0f<hdr.waterlevel && !SOLID(s)) Render::RenderCubes::AddWaterQuad(xx<<mip, yy<<mip, 1<<mip);
         };
     }};
 
@@ -174,7 +174,7 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
         sqr *z = SWS(s,-1,0,sz);
         bool normalwall = true;
 
-        if(s->type==MezzanineLib::BlockTypes::CORNER)
+        if(s->type==BlockTypes::CORNER)
         {
             // cull also
             bool topleft = true;
@@ -212,17 +212,17 @@ void render_seg_new(float vx, float vy, float vh, int mip, int x, int y, int xs,
         {
             bool inner = xx!=sz-1 && yy!=sz-1;
 
-            if(xx>=vxx && xx!=0 && yy!=sz-1 && !SOLID(z) && (!SOLID(s) || z->type!=MezzanineLib::BlockTypes::CORNER)
-                && (z->type!=MezzanineLib::BlockTypes::SEMISOLID || issemi(mip, xx-1, yy, 1, 0, 1, 1)))
+            if(xx>=vxx && xx!=0 && yy!=sz-1 && !SOLID(z) && (!SOLID(s) || z->type!=BlockTypes::CORNER)
+                && (z->type!=BlockTypes::SEMISOLID || issemi(mip, xx-1, yy, 1, 0, 1, 1)))
                 render_wall(s, z, xx,   yy,   xx,   yy+1, mip, s, v, true);
-            if(xx<=vxx && inner && !SOLID(t) && (!SOLID(s) || t->type!=MezzanineLib::BlockTypes::CORNER)
-                && (t->type!=MezzanineLib::BlockTypes::SEMISOLID || issemi(mip, xx+1, yy, 0, 0, 0, 1)))
+            if(xx<=vxx && inner && !SOLID(t) && (!SOLID(s) || t->type!=BlockTypes::CORNER)
+                && (t->type!=BlockTypes::SEMISOLID || issemi(mip, xx+1, yy, 0, 0, 0, 1)))
                 render_wall(s, t, xx+1, yy,   xx+1, yy+1, mip, t, u, false);
-            if(yy>=vyy && yy!=0 && xx!=sz-1 && !SOLID(w) && (!SOLID(s) || w->type!=MezzanineLib::BlockTypes::CORNER)
-                && (w->type!=MezzanineLib::BlockTypes::SEMISOLID || issemi(mip, xx, yy-1, 0, 1, 1, 1)))
+            if(yy>=vyy && yy!=0 && xx!=sz-1 && !SOLID(w) && (!SOLID(s) || w->type!=BlockTypes::CORNER)
+                && (w->type!=BlockTypes::SEMISOLID || issemi(mip, xx, yy-1, 0, 1, 1, 1)))
                 render_wall(s, w, xx,   yy,   xx+1, yy,   mip, s, t, false);
-            if(yy<=vyy && inner && !SOLID(v) && (!SOLID(s) || v->type!=MezzanineLib::BlockTypes::CORNER)
-                && (v->type!=MezzanineLib::BlockTypes::SEMISOLID || issemi(mip, xx, yy+1, 0, 0, 1, 0)))
+            if(yy<=vyy && inner && !SOLID(v) && (!SOLID(s) || v->type!=BlockTypes::CORNER)
+                && (v->type!=BlockTypes::SEMISOLID || issemi(mip, xx, yy+1, 0, 0, 1, 0)))
                 render_wall(s, v, xx,   yy+1, xx+1, yy+1, mip, v, u, true);
         };
     }};
@@ -242,7 +242,7 @@ void distlod(int &low, int &high, int angle, float widef)
 
 void render_world(float vx, float vy, float vh, int yaw, int pitch, float fov, int w, int h)
 {
-    loopi(MezzanineLib::GameInit::LargestFactor) stats[i] = 0;
+    loopi(GameInit::LargestFactor) stats[i] = 0;
     WorldRender::min_lod = WorldRender::MIN_LOD+abs(pitch)/12;
     yaw = 360-yaw;
     float widef = fov/75.0f;
@@ -278,7 +278,7 @@ void render_world(float vx, float vy, float vh, int yaw, int pitch, float fov, i
     WorldRender::render_floor = pitch<hyfov;
     WorldRender::render_ceil  = -pitch<hyfov;
 
-    render_seg_new(vx, vy, vh, WorldRender::MAX_MIP, 0, 0, MezzanineLib::GameInit::SSize>>WorldRender::MAX_MIP, MezzanineLib::GameInit::SSize>>WorldRender::MAX_MIP);
+    render_seg_new(vx, vy, vh, WorldRender::MAX_MIP, 0, 0, GameInit::SSize>>WorldRender::MAX_MIP, GameInit::SSize>>WorldRender::MAX_MIP);
     mipstats(stats[0], stats[1], stats[2]);
 };
 

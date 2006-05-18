@@ -10,7 +10,7 @@ dvector monsters;
 VARF(skill, 1, 3, 10, conoutf("skill is now %d", skill));
 
 dvector &getmonsters() { return monsters; };
-void restoremonsterstate() { loopv(monsters) if(monsters[i]->state==MezzanineLib::CSStatus::CS_DEAD) Monster::numkilled++; };        // for savegames
+void restoremonsterstate() { loopv(monsters) if(monsters[i]->state==CSStatus::CS_DEAD) Monster::numkilled++; };        // for savegames
 
 struct monstertype      // see docs for how these values modify behaviour
 {
@@ -21,14 +21,14 @@ struct monstertype      // see docs for how these values modify behaviour
 
 monstertypes[Monster::NUMMONSTERTYPES] =
 {
-    { MezzanineLib::Gun::GUN_FIREBALL,  15, 100, 3, 0,   100, 800, 1, 10, 10, MezzanineLib::Sounds::S_PAINO, MezzanineLib::Sounds::S_DIE1,   "an ogre",     "monster/ogro"    },
-    { MezzanineLib::Gun::GUN_CG,        18,  70, 2, 70,   10, 400, 2,  8,  9, MezzanineLib::Sounds::S_PAINR, MezzanineLib::Sounds::S_DEATHR, "a rhino",     "monster/rhino"   },
-    { MezzanineLib::Gun::GUN_SG,        14, 120, 1, 100, 300, 400, 4, 14, 14, MezzanineLib::Sounds::S_PAINE, MezzanineLib::Sounds::S_DEATHE, "ratamahatta", "monster/rat"     },
-    { MezzanineLib::Gun::GUN_RIFLE,     15, 200, 1, 80,  300, 300, 4, 18, 18, MezzanineLib::Sounds::S_PAINS, MezzanineLib::Sounds::S_DEATHS, "a slith",     "monster/slith"   },
-    { MezzanineLib::Gun::GUN_RL,        13, 500, 1, 0,   100, 200, 6, 24, 24, MezzanineLib::Sounds::S_PAINB, MezzanineLib::Sounds::S_DEATHB, "bauul",       "monster/bauul"   },
-    { MezzanineLib::Gun::GUN_BITE,      22,  50, 3, 0,   100, 400, 1, 12, 15, MezzanineLib::Sounds::S_PAINP, MezzanineLib::Sounds::S_PIGGR2, "a hellpig",   "monster/hellpig" },
-    { MezzanineLib::Gun::GUN_ICEBALL,   12, 250, 1, 0,    10, 400, 6, 18, 18, MezzanineLib::Sounds::S_PAINH, MezzanineLib::Sounds::S_DEATHH, "a knight",    "monster/knight"  },
-    { MezzanineLib::Gun::GUN_SLIMEBALL, 15, 100, 1, 0,   200, 400, 2, 13, 10, MezzanineLib::Sounds::S_PAIND, MezzanineLib::Sounds::S_DEATHD, "a goblin",    "monster/goblin"  },
+    { Gun::GUN_FIREBALL,  15, 100, 3, 0,   100, 800, 1, 10, 10, Sounds::S_PAINO, Sounds::S_DIE1,   "an ogre",     "monster/ogro"    },
+    { Gun::GUN_CG,        18,  70, 2, 70,   10, 400, 2,  8,  9, Sounds::S_PAINR, Sounds::S_DEATHR, "a rhino",     "monster/rhino"   },
+    { Gun::GUN_SG,        14, 120, 1, 100, 300, 400, 4, 14, 14, Sounds::S_PAINE, Sounds::S_DEATHE, "ratamahatta", "monster/rat"     },
+    { Gun::GUN_RIFLE,     15, 200, 1, 80,  300, 300, 4, 18, 18, Sounds::S_PAINS, Sounds::S_DEATHS, "a slith",     "monster/slith"   },
+    { Gun::GUN_RL,        13, 500, 1, 0,   100, 200, 6, 24, 24, Sounds::S_PAINB, Sounds::S_DEATHB, "bauul",       "monster/bauul"   },
+    { Gun::GUN_BITE,      22,  50, 3, 0,   100, 400, 1, 12, 15, Sounds::S_PAINP, Sounds::S_PIGGR2, "a hellpig",   "monster/hellpig" },
+    { Gun::GUN_ICEBALL,   12, 250, 1, 0,    10, 400, 6, 18, 18, Sounds::S_PAINH, Sounds::S_DEATHH, "a knight",    "monster/knight"  },
+    { Gun::GUN_SLIMEBALL, 15, 100, 1, 0,   200, 400, 2, 13, 10, Sounds::S_PAIND, Sounds::S_DEATHD, "a goblin",    "monster/goblin"  },
 };
 
 dynent *basicmonster(int type, int yaw, int state, int trigger, int move)
@@ -46,8 +46,8 @@ dynent *basicmonster(int type, int yaw, int state, int trigger, int move)
     m->eyeheight *= t->bscale/10.0f;
     m->aboveeye *= t->bscale/10.0f;
     m->monsterstate = state;
-    if(state!=MezzanineLib::MonsterStates::M_SLEEP) spawnplayer(m);
-    m->trigger = MezzanineLib::GameInit::LastMillis+trigger;
+    if(state!=MonsterStates::M_SLEEP) spawnplayer(m);
+    m->trigger = GameInit::LastMillis+trigger;
     m->targetyaw = m->yaw = (float)yaw;
     m->move = move;
     m->enemy = player1;
@@ -55,10 +55,10 @@ dynent *basicmonster(int type, int yaw, int state, int trigger, int move)
     m->maxspeed = (float)t->speed;
     m->health = t->health;
     m->armour = 0;
-    loopi(MezzanineLib::Gun::NUMGUNS) m->ammo[i] = 10000;
+    loopi(Gun::NUMGUNS) m->ammo[i] = 10000;
     m->pitch = 0;
     m->roll = 0;
-    m->state = MezzanineLib::CSStatus::CS_ALIVE;
+    m->state = CSStatus::CS_ALIVE;
     m->anger = 0;
     strcpy_s(m->name, t->name);
     monsters.add(m);
@@ -69,7 +69,7 @@ void spawnmonster()     // spawn a random monster according to freq distribution
 {
     int n = rnd(Monster::TOTMFREQ), type;
     for(int i = 0; ; i++) if((n -= monstertypes[i].freq)<0) { type = i; break; };
-	basicmonster(type, rnd(360), MezzanineLib::MonsterStates::M_SEARCH, 1000, 1);
+	basicmonster(type, rnd(360), MonsterStates::M_SEARCH, 1000, 1);
 };
 
 void monsterclear()     // called after map start of when toggling edit mode to reset/spawn all monsters to initial state
@@ -81,15 +81,15 @@ void monsterclear()     // called after map start of when toggling edit mode to 
     Monster::spawnremain = 0;
     if(m_dmsp)
     {
-        Monster::nextmonster = Monster::mtimestart = MezzanineLib::GameInit::LastMillis+10000;
+        Monster::nextmonster = Monster::mtimestart = GameInit::LastMillis+10000;
         Monster::monstertotal = Monster::spawnremain = gamemode<0 ? skill*10 : 0;
     }
     else if(m_classicsp)
     {
-        Monster::mtimestart = MezzanineLib::GameInit::LastMillis;
-        loopv(ents) if(ents[i].type==MezzanineLib::StaticEntity::MONSTER)
+        Monster::mtimestart = GameInit::LastMillis;
+        loopv(ents) if(ents[i].type==StaticEntity::MONSTER)
         {
-            dynent *m = basicmonster(ents[i].attr2, ents[i].attr1, MezzanineLib::MonsterStates::M_SLEEP, 100, 0);  
+            dynent *m = basicmonster(ents[i].attr2, ents[i].attr1, MonsterStates::M_SLEEP, 100, 0);  
             m->o.x = ents[i].x;
             m->o.y = ents[i].y;
             m->o.z = ents[i].z;
@@ -114,9 +114,9 @@ bool los(float lx, float ly, float lz, float bx, float by, float bz, vec &v) // 
         sqr *s = S(fast_f2nat(x), fast_f2nat(y));
         if(SOLID(s)) break;
         float floor = s->floor;
-        if(s->type==MezzanineLib::BlockTypes::FHF) floor -= s->vdelta/4.0f;
+        if(s->type==BlockTypes::FHF) floor -= s->vdelta/4.0f;
         float ceil = s->ceil;
-        if(s->type==MezzanineLib::BlockTypes::CHF) ceil += s->vdelta/4.0f;
+        if(s->type==BlockTypes::CHF) ceil += s->vdelta/4.0f;
         float rz = lz-((lz-bz)*(i/(float)steps));
         if(rz<floor || rz>ceil) break;
         v.x = x;
@@ -146,7 +146,7 @@ void transition(dynent *m, int state, int moving, int n, int r) // n = at skill 
     m->monsterstate = state;
     m->move = moving;
     n = n*130/100;
-    m->trigger = MezzanineLib::GameInit::LastMillis+n-skill*(n/16)+rnd(r+1);
+    m->trigger = GameInit::LastMillis+n-skill*(n/16)+rnd(r+1);
 };
 
 void normalise(dynent *m, float angle)
@@ -157,16 +157,16 @@ void normalise(dynent *m, float angle)
 
 void monsteraction(dynent *m)           // main AI thinking routine, called every frame for every monster
 {
-    if(m->enemy->state==MezzanineLib::CSStatus::CS_DEAD) { m->enemy = player1; m->anger = 0; };
+    if(m->enemy->state==CSStatus::CS_DEAD) { m->enemy = player1; m->anger = 0; };
     normalise(m, m->targetyaw);
     if(m->targetyaw>m->yaw)             // slowly turn monster towards his target
     {
-        m->yaw += MezzanineLib::GameInit::CurrentTime*0.5f;
+        m->yaw += GameInit::CurrentTime*0.5f;
         if(m->targetyaw<m->yaw) m->yaw = m->targetyaw;
     }
     else
     {
-        m->yaw -= MezzanineLib::GameInit::CurrentTime*0.5f;
+        m->yaw -= GameInit::CurrentTime*0.5f;
         if(m->targetyaw>m->yaw) m->yaw = m->targetyaw;
     };
 
@@ -180,10 +180,10 @@ void monsteraction(dynent *m)           // main AI thinking routine, called ever
         {
             m->jumpnext = true;
         }
-        else if(m->trigger<MezzanineLib::GameInit::LastMillis && (m->monsterstate!=MezzanineLib::MonsterStates::M_HOME || !rnd(5)))  // search for a way around (common)
+        else if(m->trigger<GameInit::LastMillis && (m->monsterstate!=MonsterStates::M_HOME || !rnd(5)))  // search for a way around (common)
         {
             m->targetyaw += 180+rnd(180);                                       // patented "random walk" AI pathfinding (tm) ;)
-            transition(m, MezzanineLib::MonsterStates::M_SEARCH, 1, 400, 1000);
+            transition(m, MonsterStates::M_SEARCH, 1, 400, 1000);
         };
     };
     
@@ -191,16 +191,16 @@ void monsteraction(dynent *m)           // main AI thinking routine, called ever
     
     switch(m->monsterstate)
     {
-        case MezzanineLib::MonsterStates::M_PAIN:
-        case MezzanineLib::MonsterStates::M_ATTACKING:
-        case MezzanineLib::MonsterStates::M_SEARCH:
-            if(m->trigger<MezzanineLib::GameInit::LastMillis) transition(m, MezzanineLib::MonsterStates::M_HOME, 1, 100, 200);
+        case MonsterStates::M_PAIN:
+        case MonsterStates::M_ATTACKING:
+        case MonsterStates::M_SEARCH:
+            if(m->trigger<GameInit::LastMillis) transition(m, MonsterStates::M_HOME, 1, 100, 200);
             break;
             
-        case MezzanineLib::MonsterStates::M_SLEEP:                       // state classic sp monster start in, wait for visual contact
+        case MonsterStates::M_SLEEP:                       // state classic sp monster start in, wait for visual contact
         {
             vec target;
-            if(MezzanineLib::GameInit::EditMode || !enemylos(m, target)) return;   // skip running physics
+            if(GameInit::EditMode || !enemylos(m, target)) return;   // skip running physics
             normalise(m, enemyyaw);
             float angle = (float)fabs(enemyyaw-m->yaw);
             if(disttoenemy<8                   // the better the angle to the player, the further the monster can see/hear
@@ -209,41 +209,41 @@ void monsteraction(dynent *m)           // main AI thinking routine, called ever
             ||(disttoenemy<64 && angle<45)
             || angle<10)
             {
-                transition(m, MezzanineLib::MonsterStates::M_HOME, 1, 500, 200);
-                playsound(MezzanineLib::Sounds::S_GRUNT1+rnd(2), &m->o);
+                transition(m, MonsterStates::M_HOME, 1, 500, 200);
+                playsound(Sounds::S_GRUNT1+rnd(2), &m->o);
             };
             break;
         };
         
-        case MezzanineLib::MonsterStates::M_AIMING:                      // this state is the delay between wanting to shoot and actually firing
-            if(m->trigger<MezzanineLib::GameInit::LastMillis)
+        case MonsterStates::M_AIMING:                      // this state is the delay between wanting to shoot and actually firing
+            if(m->trigger<GameInit::LastMillis)
             {
                 m->lastaction = 0;
                 m->attacking = true;
                 shoot(m, m->attacktarget);
-                transition(m, MezzanineLib::MonsterStates::M_ATTACKING, 0, 600, 0);
+                transition(m, MonsterStates::M_ATTACKING, 0, 600, 0);
             };
             break;
 
-        case MezzanineLib::MonsterStates::M_HOME:                        // monster has visual contact, heads straight for player and may want to shoot at any time
+        case MonsterStates::M_HOME:                        // monster has visual contact, heads straight for player and may want to shoot at any time
             m->targetyaw = enemyyaw;
-            if(m->trigger<MezzanineLib::GameInit::LastMillis)
+            if(m->trigger<GameInit::LastMillis)
             {
                 vec target;
                 if(!enemylos(m, target))    // no visual contact anymore, let monster get as close as possible then search for player
                 {
-                    transition(m, MezzanineLib::MonsterStates::M_HOME, 1, 800, 500);
+                    transition(m, MonsterStates::M_HOME, 1, 800, 500);
                 }
                 else  // the closer the monster is the more likely he wants to shoot
                 {
-                    if(!rnd((int)disttoenemy/3+1) && m->enemy->state==MezzanineLib::CSStatus::CS_ALIVE)         // get ready to fire
+                    if(!rnd((int)disttoenemy/3+1) && m->enemy->state==CSStatus::CS_ALIVE)         // get ready to fire
                     { 
                         m->attacktarget = target;
-                        transition(m, MezzanineLib::MonsterStates::M_AIMING, 0, monstertypes[m->mtype].lag, 10);
+                        transition(m, MonsterStates::M_AIMING, 0, monstertypes[m->mtype].lag, 10);
                     }
                     else                                                                // track player some more
                     {
-                        transition(m, MezzanineLib::MonsterStates::M_HOME, 1, monstertypes[m->mtype].rate, 0);
+                        transition(m, MonsterStates::M_HOME, 1, monstertypes[m->mtype].rate, 0);
                     };
                 };
             };
@@ -269,12 +269,12 @@ void monsterpain(dynent *m, int damage, dynent *d)
         m->anger = 0;
         m->enemy = d;
     };
-    transition(m, MezzanineLib::MonsterStates::M_PAIN, 0, monstertypes[m->mtype].pain,200);      // in this state monster won't attack
+    transition(m, MonsterStates::M_PAIN, 0, monstertypes[m->mtype].pain,200);      // in this state monster won't attack
     if((m->health -= damage)<=0)
     {
-        m->state = MezzanineLib::CSStatus::CS_DEAD;
-        m->lastaction = MezzanineLib::GameInit::LastMillis;
-        MezzanineLib::Game::Monster::numkilled++;
+        m->state = CSStatus::CS_DEAD;
+        m->lastaction = GameInit::LastMillis;
+        Game::Monster::numkilled++;
         player1->frags = Monster::numkilled;
         playsound(monstertypes[m->mtype].diesound, &m->o);
         int remain = Monster::monstertotal-Monster::numkilled;
@@ -289,17 +289,17 @@ void monsterpain(dynent *m, int damage, dynent *d)
 void endsp(bool allkilled)
 {
     conoutf(allkilled ? "you have cleared the map!" : "you reached the exit!");
-    conoutf("score: %d kills in %d seconds", Monster::numkilled, (MezzanineLib::GameInit::LastMillis-Monster::mtimestart)/1000);
+    conoutf("score: %d kills in %d seconds", Monster::numkilled, (GameInit::LastMillis-Monster::mtimestart)/1000);
     Monster::monstertotal = 0;
     startintermission();
 };
 
 void monsterthink()
 {
-    if(m_dmsp && Monster::spawnremain && MezzanineLib::GameInit::LastMillis>Monster::nextmonster)
+    if(m_dmsp && Monster::spawnremain && GameInit::LastMillis>Monster::nextmonster)
     {
         if(Monster::spawnremain--==Monster::monstertotal) conoutf("The invasion has begun!");
-        Monster::nextmonster = MezzanineLib::GameInit::LastMillis+1000;
+        Monster::nextmonster = GameInit::LastMillis+1000;
         spawnmonster();
     };
     
@@ -308,12 +308,12 @@ void monsterthink()
     loopv(ents)             // equivalent of player entity touch, but only teleports are used
     {
         entity &e = ents[i];
-        if(e.type!=MezzanineLib::StaticEntity::TELEPORT) continue;
+        if(e.type!=StaticEntity::TELEPORT) continue;
         if(OUTBORD(e.x, e.y)) continue;
         vec v = { e.x, e.y, S(e.x, e.y)->floor };
-        loopv(monsters) if(monsters[i]->state==MezzanineLib::CSStatus::CS_DEAD)
+        loopv(monsters) if(monsters[i]->state==CSStatus::CS_DEAD)
         {
-			if(MezzanineLib::GameInit::LastMillis-monsters[i]->lastaction<2000)
+			if(GameInit::LastMillis-monsters[i]->lastaction<2000)
 			{
 				monsters[i]->move = 0;
 				moveplayer(monsters[i], 1, false);
@@ -328,7 +328,7 @@ void monsterthink()
         };
     };
     
-    loopv(monsters) if(monsters[i]->state==MezzanineLib::CSStatus::CS_ALIVE) monsteraction(monsters[i]);
+    loopv(monsters) if(monsters[i]->state==CSStatus::CS_ALIVE) monsteraction(monsters[i]);
 };
 
 void monsterrender()

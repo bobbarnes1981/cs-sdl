@@ -65,17 +65,17 @@ bool rendermenu()
     };
     int tw = text_width(title);
     if(tw>w) w = tw;
-    int step = MezzanineLib::GameInit::FontH/4*5;
+    int step = GameInit::FontH/4*5;
     int h = (mdisp+2)*step;
-	int y = (MezzanineLib::GameInit::VIRTH-h)/2;
-    int x = (MezzanineLib::GameInit::VIRTW-w)/2;
-	MezzanineLib::Render::RenderExtras::BlendBox(x-MezzanineLib::GameInit::FontH/2*3, y-MezzanineLib::GameInit::FontH, x+w+MezzanineLib::GameInit::FontH/2*3, y+h+MezzanineLib::GameInit::FontH, true);
+	int y = (GameInit::VIRTH-h)/2;
+    int x = (GameInit::VIRTW-w)/2;
+	Render::RenderExtras::BlendBox(x-GameInit::FontH/2*3, y-GameInit::FontH, x+w+GameInit::FontH/2*3, y+h+GameInit::FontH, true);
     draw_text(title, x, y,2);
-	y += MezzanineLib::GameInit::FontH*2;
+	y += GameInit::FontH*2;
     if(Menus::vmenu)
     {
         int bh = y+m.menusel*step;
-        MezzanineLib::Render::RenderExtras::BlendBox(x-MezzanineLib::GameInit::FontH, bh-10, x+w+MezzanineLib::GameInit::FontH, bh+MezzanineLib::GameInit::FontH+10, false);
+        Render::RenderExtras::BlendBox(x-GameInit::FontH, bh-10, x+w+GameInit::FontH, bh+GameInit::FontH+10, false);
     };
     loopj(mdisp)
     {

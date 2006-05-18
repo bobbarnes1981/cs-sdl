@@ -149,7 +149,7 @@ void md2::render(vec &light, int frame, int range, float x, float y, float z, fl
 			displaylistverts = RenderGl::XtraVerts;
 		};
 		
-		int time = MezzanineLib::GameInit::LastMillis-basetime;
+		int time = GameInit::LastMillis-basetime;
 		int fr1 = (int)(time/speed);
 		float frac1 = (time-fr1*speed)/speed;
 		float frac2 = 1-frac1;
@@ -200,7 +200,7 @@ void delayedload(md2 *m)
     if(!m->loaded)
     {
         sprintf_sd(name1)("packages/models/%s/tris.md2", m->loadname);
-		if(!m->load(path(name1))) MezzanineLib::GameInit::Fatal("loadmodel: ", name1);
+		if(!m->load(path(name1))) GameInit::Fatal("loadmodel: ", name1);
         sprintf_sd(name2)("packages/models/%s/skin.jpg", m->loadname);
         int xs, ys;
 		RenderGl::InstallTexture(RenderMD2::FIRSTMDL+m->mdlnum, path(name2), &xs, &ys);
@@ -234,8 +234,8 @@ void mapmodelreset() { mapmodels.setsize(0); };
 
 mapmodelinfo &getmminfo(int i) { return i<mapmodels.length() ? mapmodels[i]->mmi : *(mapmodelinfo *)0; };
 
-COMMAND(mapmodel, MezzanineLib::Support::FunctionSignatures::ARG_5STR);
-COMMAND(mapmodelreset, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(mapmodel, Support::FunctionSignatures::ARG_5STR);
+COMMAND(mapmodelreset, Support::FunctionSignatures::ARG_NONE);
 
 void rendermodel(char *mdl, int frame, int range, int tex, float rad, float x, float y, float z, float yaw, float pitch, bool teammate, float scale, float speed, int snap, int basetime)
 {

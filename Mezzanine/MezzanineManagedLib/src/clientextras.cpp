@@ -19,12 +19,12 @@ void renderclient(dynent *d, bool team, char *mdlname, bool hellpig, float scale
     float speed = 100.0f;
     float mz = d->o.z-d->eyeheight+1.55f*scale;
     int basetime = -((int)d&0xFFF);
-    if(d->state==MezzanineLib::CSStatus::CS_DEAD)
+    if(d->state==CSStatus::CS_DEAD)
     {
         int r;
         if(hellpig) { n = 2; r = range[3]; } else { n = (int)d%3; r = range[n]; };
         basetime = d->lastaction;
-        int t = MezzanineLib::GameInit::LastMillis-d->lastaction;
+        int t = GameInit::LastMillis-d->lastaction;
         if(t<0 || t>20000) return;
         if(t>(r-1)*100) { n += 4; if(t>(r+10)*100) { t -= (r+10)*100; mz -= t*t/10000000000.0f*t; }; };
         if(mz<-1000) return;
@@ -32,10 +32,10 @@ void renderclient(dynent *d, bool team, char *mdlname, bool hellpig, float scale
         //mz = d->o.z-d->eyeheight+0.2f;
         //scale = 1.2f;
     }
-    else if(d->state==MezzanineLib::CSStatus::CS_EDITING)                   { n = 16; }
-    else if(d->state==MezzanineLib::CSStatus::CS_LAGGED)                    { n = 17; }
-    else if(d->monsterstate==MezzanineLib::MonsterStates::M_ATTACKING)           { n = 8;  }
-    else if(d->monsterstate==MezzanineLib::MonsterStates::M_PAIN)                { n = 10; } 
+    else if(d->state==CSStatus::CS_EDITING)                   { n = 16; }
+    else if(d->state==CSStatus::CS_LAGGED)                    { n = 17; }
+    else if(d->monsterstate==MonsterStates::M_ATTACKING)           { n = 8;  }
+    else if(d->monsterstate==MonsterStates::M_PAIN)                { n = 10; } 
     else if((!d->move && !d->strafe) || !d->moving) { n = 12; } 
     else if(!d->onfloor && d->timeinair>100)        { n = 18; }
     else                                            { n = 14; speed = 1200/d->maxspeed*scale; if(hellpig) speed = 300/d->maxspeed;  }; 
@@ -46,7 +46,7 @@ void renderclient(dynent *d, bool team, char *mdlname, bool hellpig, float scale
 void renderclients()
 {
     dynent *d;
-    loopv(players) if((d = players[i]) && (!MezzanineLib::GameInit::DemoPlayback || i!=ClientGame::DemoClientNum)) renderclient(d, isteam(player1->team, d->team), "monster/ogro", false, 1.0f);
+    loopv(players) if((d = players[i]) && (!GameInit::DemoPlayback || i!=ClientGame::DemoClientNum)) renderclient(d, isteam(player1->team, d->team), "monster/ogro", false, 1.0f);
 };
 
 // creation of scoreboard pseudo-menu
@@ -64,7 +64,7 @@ void renderscore(dynent *d)
 {
     sprintf_sd(lag)("%d", d->plag);
     sprintf_sd(name) ("(%s)", d->name); 
-    sprintf_s(scorelines.add().s)("%d\t%s\t%d\t%s\t%s", d->frags, d->state==MezzanineLib::CSStatus::CS_LAGGED ? "LAG" : lag, d->ping, d->team, d->state==MezzanineLib::CSStatus::CS_DEAD ? name : d->name);
+    sprintf_s(scorelines.add().s)("%d\t%s\t%d\t%s\t%s", d->frags, d->state==CSStatus::CS_LAGGED ? "LAG" : lag, d->ping, d->team, d->state==CSStatus::CS_DEAD ? name : d->name);
     menumanual(0, scorelines.length()-1, scorelines.last().s); 
 };
 
@@ -85,14 +85,14 @@ void renderscores()
 {
     if(!ClientExtras::scoreson) return;
     scorelines.setsize(0);
-    if(!MezzanineLib::GameInit::DemoPlayback) renderscore(player1);
+    if(!GameInit::DemoPlayback) renderscore(player1);
     loopv(players) if(players[i]) renderscore(players[i]);
     sortmenu(0, scorelines.length());
     if(m_teammode)
     {
         ClientExtras::teamsused = 0;
         loopv(players) addteamscore(players[i]);
-        if(!MezzanineLib::GameInit::DemoPlayback) addteamscore(player1);
+        if(!GameInit::DemoPlayback) addteamscore(player1);
         teamscores[0] = 0;
         loopj(ClientExtras::teamsused)
         {
@@ -114,10 +114,10 @@ void sendmap(char *mapname)
     int mapsize;
     uchar *mapdata = readmap(mapname, &mapsize); 
     if(!mapdata) return;
-    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS + mapsize, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(NULL, GameInit::MAXTRANS + mapsize, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, MezzanineLib::NetworkMessages::SV_SENDMAP);
+    putint(p, NetworkMessages::SV_SENDMAP);
     sendstring(mapname, p);
     putint(p, mapsize);
     if(65535 - (p - start) < mapsize)
@@ -140,16 +140,16 @@ void sendmap(char *mapname)
 
 void getmap()
 {
-    ENetPacket *packet = enet_packet_create(NULL, MezzanineLib::GameInit::MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
+    ENetPacket *packet = enet_packet_create(NULL, GameInit::MAXTRANS, ENET_PACKET_FLAG_RELIABLE);
     uchar *start = packet->data;
     uchar *p = start+2;
-    putint(p, MezzanineLib::NetworkMessages::SV_RECVMAP);
+    putint(p, NetworkMessages::SV_RECVMAP);
     *(ushort *)start = ENET_HOST_TO_NET_16(p-start);
     enet_packet_resize(packet, p-start);
     sendpackettoserv(packet);
     conoutf("requesting map from server...");
 }
 
-COMMAND(sendmap, MezzanineLib::Support::FunctionSignatures::ARG_1STR);
-COMMAND(getmap, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
+COMMAND(sendmap, Support::FunctionSignatures::ARG_1STR);
+COMMAND(getmap, Support::FunctionSignatures::ARG_NONE);
 

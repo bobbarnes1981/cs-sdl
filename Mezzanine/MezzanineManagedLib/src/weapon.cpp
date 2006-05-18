@@ -11,15 +11,15 @@ vec sg[Game::Weapon::SGRAYS];
 
 guninfo guns[9] =
 {
-    { MezzanineLib::Sounds::S_PUNCH1,    250,  50, 0,   0,  1, "fist"           },
-    { MezzanineLib::Sounds::S_SG,       1400,  10, 0,   0, 20, "shotgun"        },  // *Weapon::SGRAYS
-    { MezzanineLib::Sounds::S_CG,        100,  30, 0,   0,  7, "chaingun"       },
-    { MezzanineLib::Sounds::S_RLFIRE,    800, 120, 80,  0, 10, "rocketlauncher" },
-    { MezzanineLib::Sounds::S_RIFLE,    1500, 100, 0,   0, 30, "rifle"          },
-    { MezzanineLib::Sounds::S_FLAUNCH,   200,  20, 50,  4,  1, "fireball"       },
-    { MezzanineLib::Sounds::S_ICEBALL,   200,  40, 30,  6,  1, "iceball"        },
-    { MezzanineLib::Sounds::S_SLIMEBALL, 200,  30, 160, 7,  1, "slimeball"      },
-    { MezzanineLib::Sounds::S_PIGR1,     250,  50, 0,   0,  1, "bite"           },
+    { Sounds::S_PUNCH1,    250,  50, 0,   0,  1, "fist"           },
+    { Sounds::S_SG,       1400,  10, 0,   0, 20, "shotgun"        },  // *Weapon::SGRAYS
+    { Sounds::S_CG,        100,  30, 0,   0,  7, "chaingun"       },
+    { Sounds::S_RLFIRE,    800, 120, 80,  0, 10, "rocketlauncher" },
+    { Sounds::S_RIFLE,    1500, 100, 0,   0, 30, "rifle"          },
+    { Sounds::S_FLAUNCH,   200,  20, 50,  4,  1, "fireball"       },
+    { Sounds::S_ICEBALL,   200,  40, 30,  6,  1, "iceball"        },
+    { Sounds::S_SLIMEBALL, 200,  30, 160, 7,  1, "slimeball"      },
+    { Sounds::S_PIGR1,     250,  50, 0,   0,  1, "bite"           },
 };
 
 int reloadtime(int gun) { return guns[gun].attackdelay; };
@@ -29,7 +29,7 @@ void weapon(char *a1, char *a2, char *a3)
 	Game::Weapon::WeaponSelect(a1, a2, a3);
 };
 
-COMMAND(weapon, MezzanineLib::Support::FunctionSignatures::ARG_3STR);
+COMMAND(weapon, Support::FunctionSignatures::ARG_3STR);
 
 void createrays(vec &from, vec &to)             // create random spread of rays for the shotgun
 {
@@ -75,7 +75,7 @@ bool intersect(dynent *d, vec &from, vec &to)   // if lineseg hits entity boundi
 
 char *playerincrosshair()
 {
-	if(MezzanineLib::GameInit::DemoPlayback) return NULL;
+	if(GameInit::DemoPlayback) return NULL;
     loopv(players)
     {
         dynent *o = players[i];
@@ -111,14 +111,14 @@ void hit(int target, int damage, dynent *d, dynent *at)
 {
     if(d==player1) selfdamage(damage, at==player1 ? -1 : -2, at);
     else if(d->monsterstate) monsterpain(d, damage, at);
-    else { addmsg(1, 4, MezzanineLib::NetworkMessages::SV_DAMAGE, target, damage, d->lifesequence); playsound(MezzanineLib::Sounds::S_PAIN1+rnd(5), &d->o); };
+    else { addmsg(1, 4, NetworkMessages::SV_DAMAGE, target, damage, d->lifesequence); playsound(Sounds::S_PAIN1+rnd(5), &d->o); };
     particle_splash(3, damage, 1000, d->o);
 	demodamage(damage, d->o);
 };
 
 void radialeffect(dynent *o, vec &v, int cn, int qdam, dynent *at)
 {
-    if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return;
+    if(o->state!=CSStatus::CS_ALIVE) return;
     vdist(dist, temp, v, o->o);
     dist -= 2; // account for eye distance imprecision
     if(dist<Game::Weapon::RL_DAMRAD) 
@@ -135,14 +135,14 @@ void splash(projectile *p, vec &v, vec &vold, int notthisplayer, int notthismons
 {
     particle_splash(0, 50, 300, v);
     p->inuse = false;
-    if(p->gun!=MezzanineLib::Gun::GUN_RL)
+    if(p->gun!=Gun::GUN_RL)
     {
-        playsound(MezzanineLib::Sounds::S_FEXPLODE, &v);
+        playsound(Sounds::S_FEXPLODE, &v);
         // no push?
     }
     else
     {
-        playsound(MezzanineLib::Sounds::S_RLHIT, &v);
+        playsound(Sounds::S_RLHIT, &v);
         newsphere(v, Game::Weapon::RL_RADIUS, 0);
         dodynlight(vold, v, 0, 0, p->owner);
         if(!p->local) return;
@@ -161,7 +161,7 @@ void splash(projectile *p, vec &v, vec &vold, int notthisplayer, int notthismons
 
 inline void projdamage(dynent *o, projectile *p, vec &v, int i, int im, int qdam)
 {
-    if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return;
+    if(o->state!=CSStatus::CS_ALIVE) return;
     if(intersect(o, p->o, v))
     {
         splash(p, v, p->o, i, im, qdam);
@@ -199,7 +199,7 @@ void moveprojectiles(float time)
             if(time==dtime) splash(p, v, p->o, -1, -1, qdam);
             else
             {
-                if(p->gun==MezzanineLib::Gun::GUN_RL) { dodynlight(p->o, v, 0, 255, p->owner); particle_splash(5, 2, 200, v); }
+                if(p->gun==Gun::GUN_RL) { dodynlight(p->o, v, 0, 255, p->owner); particle_splash(5, 2, 200, v); }
                 else { particle_splash(1, 1, 200, v); particle_splash(guns[p->gun].part, 1, 1, v); };
             };       
         };
@@ -213,30 +213,30 @@ void shootv(int gun, vec &from, vec &to, dynent *d, bool local)     // create vi
     int pspeed = 25;
     switch(gun)
     {
-        case MezzanineLib::Gun::GUN_FIST:
+        case Gun::GUN_FIST:
             break;
 
-        case MezzanineLib::Gun::GUN_SG:
+        case Gun::GUN_SG:
         {
             loopi(Game::Weapon::SGRAYS) particle_splash(0, 5, 200, sg[i]);
             break;
         };
 
-        case MezzanineLib::Gun::GUN_CG:
+        case Gun::GUN_CG:
             particle_splash(0, 100, 250, to);
             //particle_trail(1, 10, from, to);
             break;
 
-        case MezzanineLib::Gun::GUN_RL:
-        case MezzanineLib::Gun::GUN_FIREBALL:
-        case MezzanineLib::Gun::GUN_ICEBALL:
-        case MezzanineLib::Gun::GUN_SLIMEBALL:
+        case Gun::GUN_RL:
+        case Gun::GUN_FIREBALL:
+        case Gun::GUN_ICEBALL:
+        case Gun::GUN_SLIMEBALL:
             pspeed = guns[gun].projspeed;
             if(d->monsterstate) pspeed /= 2;
             newprojectile(from, to, (float)pspeed, local, d, gun);
             break;
 
-        case MezzanineLib::Gun::GUN_RIFLE: 
+        case Gun::GUN_RIFLE: 
             particle_splash(0, 50, 200, to);
             particle_trail(1, 500, from, to);
             break;
@@ -253,11 +253,11 @@ void hitpush(int target, int damage, dynent *d, dynent *at, vec &from, vec &to)
 
 void raydamage(dynent *o, vec &from, vec &to, dynent *d, int i)
 {
-    if(o->state!=MezzanineLib::CSStatus::CS_ALIVE) return;
+    if(o->state!=CSStatus::CS_ALIVE) return;
     int qdam = guns[d->gunselect].damage;
     if(d->quadmillis) qdam *= 4;
     if(d->monsterstate) qdam /= Game::Weapon::MONSTERDAMAGEFACTOR;
-    if(d->gunselect==MezzanineLib::Gun::GUN_SG)
+    if(d->gunselect==Gun::GUN_SG)
     {
         int damage = 0;
         loop(r, Game::Weapon::SGRAYS) if(intersect(o, from, sg[r])) damage += qdam;
@@ -268,13 +268,13 @@ void raydamage(dynent *o, vec &from, vec &to, dynent *d, int i)
 
 void shoot(dynent *d, vec &targ)
 {
-    int attacktime = MezzanineLib::GameInit::LastMillis-d->lastaction;
+    int attacktime = GameInit::LastMillis-d->lastaction;
     if(attacktime<d->gunwait) return;
     d->gunwait = 0;
     if(!d->attacking) return;
-    d->lastaction = MezzanineLib::GameInit::LastMillis;
+    d->lastaction = GameInit::LastMillis;
     d->lastattackgun = d->gunselect;
-    if(!d->ammo[d->gunselect]) { playsoundc(MezzanineLib::Sounds::S_NOAMMO); d->gunwait = 250; d->lastattackgun = -1; return; };
+    if(!d->ammo[d->gunselect]) { playsoundc(Sounds::S_NOAMMO); d->gunwait = 250; d->lastattackgun = -1; return; };
     if(d->gunselect) d->ammo[d->gunselect]--;
     vec from = d->o;
     vec to = targ;
@@ -288,17 +288,17 @@ void shoot(dynent *d, vec &targ)
     if(d->pitch<80.0f) d->pitch += guns[d->gunselect].kickamount*0.05f;
     
 
-    if(d->gunselect==MezzanineLib::Gun::GUN_FIST || d->gunselect==MezzanineLib::Gun::GUN_BITE) 
+    if(d->gunselect==Gun::GUN_FIST || d->gunselect==Gun::GUN_BITE) 
     {
         vmul(unitv, 3); // punch range
         to = from;
         vadd(to, unitv);
     };   
-    if(d->gunselect==MezzanineLib::Gun::GUN_SG) createrays(from, to);
+    if(d->gunselect==Gun::GUN_SG) createrays(from, to);
 
-    if(d->quadmillis && attacktime>200) playsoundc(MezzanineLib::Sounds::S_ITEMPUP);
+    if(d->quadmillis && attacktime>200) playsoundc(Sounds::S_ITEMPUP);
     shootv(d->gunselect, from, to, d, true);
-    if(!d->monsterstate) addmsg(1, 8, MezzanineLib::NetworkMessages::SV_SHOT, d->gunselect, (int)(from.x*MezzanineLib::GameInit::DMF), (int)(from.y*MezzanineLib::GameInit::DMF), (int)(from.z*MezzanineLib::GameInit::DMF), (int)(to.x*MezzanineLib::GameInit::DMF), (int)(to.y*MezzanineLib::GameInit::DMF), (int)(to.z*MezzanineLib::GameInit::DMF));
+    if(!d->monsterstate) addmsg(1, 8, NetworkMessages::SV_SHOT, d->gunselect, (int)(from.x*GameInit::DMF), (int)(from.y*GameInit::DMF), (int)(from.z*GameInit::DMF), (int)(to.x*GameInit::DMF), (int)(to.y*GameInit::DMF), (int)(to.z*GameInit::DMF));
     d->gunwait = guns[d->gunselect].attackdelay;
 
     if(guns[d->gunselect].projspeed) return;
