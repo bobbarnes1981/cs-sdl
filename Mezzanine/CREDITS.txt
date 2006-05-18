@@ -1,5 +1,5 @@
-The following are the authors and contributors of Tess:
+The following are the authors and contributors of Mezzanine:
 
  * All C# code David Y. Hudson (jendave@yahoo.com)
- * TessManagedLib is based on the Cube Engine (http://cubeengine.com) by Wouter van Oortmerssen
+ * MezzanineManagedLib is based on the Cube Engine (http://cubeengine.com) by Wouter van Oortmerssen
  

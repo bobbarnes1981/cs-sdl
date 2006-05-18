@@ -405,17 +405,12 @@ namespace MezzanineLib.Render
 			Bindings.resetcubes();
             
 			RenderCubes.curvert = 0;
-			//Bindings.setstrips();
 			strips.Clear();
-  
 			Bindings.render_world(GameInit.Player1.o.x, GameInit.Player1.o.y, GameInit.Player1.o.z, 
 				(int)GameInit.Player1.yaw, (int)GameInit.Player1.pitch, (float)fov, w, h);
-			Bindings.finishstrips();
-
+			RenderCubes.FinishStrips();
 			SetupWorld();
-
 			RenderStripsSky();
-			//Bindings.renderstripssky();
 
 			Gl.glLoadIdentity();
 			Gl.glRotated(GameInit.Player1.pitch, -1.0, 0.0, 0.0);

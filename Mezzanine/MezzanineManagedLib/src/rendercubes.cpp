@@ -40,9 +40,6 @@ void mipstats(int a, int b, int c) { if(RenderCubes::showm) conoutf("1x1/2x2/4x4
 
 COMMAND(showmip, MezzanineLib::Support::FunctionSignatures::ARG_NONE);
 
-#define stripend() { if(RenderCubes::floorstrip || RenderCubes::deltastrip) { Render::RenderGl::AddStrip(RenderCubes::ogltex, RenderCubes::firstindex, RenderCubes::curvert-RenderCubes::firstindex); RenderCubes::floorstrip = RenderCubes::deltastrip = false; }; };
-void finishstrips() { stripend(); };
-
 sqr sbright, sdark;
 VAR(lighterror,1,8,100);
 
@@ -64,7 +61,8 @@ void render_flat(int wtex, int x, int y, int size, int h, sqr *l1, sqr *l2, sqr 
 
     if(first)       // start strip here
     {
-        stripend();
+        RenderCubes::FinishStrips();
+			//stripend();
         RenderCubes::firstindex = RenderCubes::curvert;
         RenderCubes::ogltex = gltex;
         RenderCubes::oh = h;
@@ -143,7 +141,8 @@ void render_flatdelta(int wtex, int x, int y, int size, float h1, float h2, floa
 
     if(first) 
     {
-        stripend();
+		RenderCubes::FinishStrips();
+        //stripend();
         RenderCubes::firstindex = RenderCubes::curvert;
         RenderCubes::ogltex = gltex;
         RenderCubes::ox = x;
@@ -183,7 +182,7 @@ void render_flatdelta(int wtex, int x, int y, int size, float h1, float h2, floa
 
 void render_2tris(sqr *h, sqr *s, int x1, int y1, int x2, int y2, int x3, int y3, sqr *l1, sqr *l2, sqr *l3)   // floor/ceil tris on a corner cube
 {
-    stripend();
+    RenderCubes::FinishStrips();
     vertcheck();
 
     int sx, sy;
@@ -224,7 +223,7 @@ void render_tris(int x, int y, int size, bool topleft,
 
 void render_square(int wtex, float floor1, float floor2, float ceil1, float ceil2, int x1, int y1, int x2, int y2, int size, sqr *l1, sqr *l2, bool flip)   // wall quads
 {
-    stripend();
+    RenderCubes::FinishStrips();
     vertcheck();
     if(RenderCubes::showm) { l1 = &sbright; l2 = &sdark; };
 

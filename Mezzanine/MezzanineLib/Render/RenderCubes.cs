@@ -68,6 +68,16 @@ namespace MezzanineLib.Render
 		public static int wy1;
 		public static int wx2;
 		public static int wy2;
+		public static void FinishStrips() 
+		{ 
+			if(floorstrip || deltastrip) 
+			{ 
+				RenderGl.AddStrip(ogltex, firstindex, curvert-firstindex);
+				floorstrip = false;
+				deltastrip = false; 
+			}
+		}
+
 
 		public static float dx(float x) 
 		{ 
