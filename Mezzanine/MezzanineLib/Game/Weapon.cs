@@ -62,7 +62,6 @@ namespace MezzanineLib.Game
 			this.kickamount = kickamount;
 			this.name = name;
 		}
-
 	}
 
 	/// <summary>
@@ -76,6 +75,31 @@ namespace MezzanineLib.Game
 		public const int MAXPROJ = 100;
 		public const float RL_RADIUS = 5;
 		public const float RL_DAMRAD = 7;   // hack
+		public static GunInfo[] guns = new GunInfo[(int)Gun.NUMGUNS];
+		
+
+		static Weapon()
+		{
+			guns[0] = new GunInfo( (short)Sounds.S_PUNCH1,    250,  50, 0,   0,  1, "fist"           );
+			guns[1] = new GunInfo( (short)Sounds.S_SG,       1400,  10, 0,   0, 20, "shotgun"        );  // *Weapon.SGRAYS
+			guns[2] = new GunInfo( (short)Sounds.S_CG,        100,  30, 0,   0,  7, "chaingun"       );
+			guns[3] = new GunInfo( (short)Sounds.S_RLFIRE,    800, 120, 80,  0, 10, "rocketlauncher" );
+			guns[4] = new GunInfo( (short)Sounds.S_RIFLE,    1500, 100, 0,   0, 30, "rifle"          );
+			guns[5] = new GunInfo( (short)Sounds.S_FLAUNCH,   200,  20, 50,  4,  1, "fireball"       );
+			guns[6] = new GunInfo( (short)Sounds.S_ICEBALL,   200,  40, 30,  6,  1, "iceball"        );
+			guns[7] = new GunInfo( (short)Sounds.S_SLIMEBALL, 200,  30, 160, 7,  1, "slimeball"      );
+			guns[8] = new GunInfo( (short)Sounds.S_PIGR1,     250,  50, 0,   0,  1, "bite"           );
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gun"></param>
+		/// <returns></returns>
+		public static int ReloadTime(int gun) 
+		{ 
+			return (int)guns[gun].attackdelay; 
+		}
 
 		/// <summary>
 		/// 

@@ -212,7 +212,6 @@ extern DECLSPEC void CDECL createrays(vec &from, vec &to);
 extern DECLSPEC void CDECL moveprojectiles(float time);
 extern DECLSPEC void CDECL projreset();
 extern DECLSPEC char CDECL *playerincrosshair();
-extern DECLSPEC int CDECL reloadtime(int gun);
 
 // monster
 extern DECLSPEC void CDECL monsterclear();

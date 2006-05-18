@@ -5,24 +5,7 @@
 using namespace MezzanineLib;
 using namespace MezzanineLib::Game;
 
-struct guninfo { short sound, attackdelay, damage, projspeed, part, kickamount; char *name; };
-
 vec sg[Game::Weapon::SGRAYS];
-
-guninfo guns[9] =
-{
-    { Sounds::S_PUNCH1,    250,  50, 0,   0,  1, "fist"           },
-    { Sounds::S_SG,       1400,  10, 0,   0, 20, "shotgun"        },  // *Weapon::SGRAYS
-    { Sounds::S_CG,        100,  30, 0,   0,  7, "chaingun"       },
-    { Sounds::S_RLFIRE,    800, 120, 80,  0, 10, "rocketlauncher" },
-    { Sounds::S_RIFLE,    1500, 100, 0,   0, 30, "rifle"          },
-    { Sounds::S_FLAUNCH,   200,  20, 50,  4,  1, "fireball"       },
-    { Sounds::S_ICEBALL,   200,  40, 30,  6,  1, "iceball"        },
-    { Sounds::S_SLIMEBALL, 200,  30, 160, 7,  1, "slimeball"      },
-    { Sounds::S_PIGR1,     250,  50, 0,   0,  1, "bite"           },
-};
-
-int reloadtime(int gun) { return guns[gun].attackdelay; };
 
 void weapon(char *a1, char *a2, char *a3)
 {
@@ -175,7 +158,7 @@ void moveprojectiles(float time)
     {
         projectile *p = &projs[i];
         if(!p->inuse) continue;
-        int qdam = guns[p->gun].damage*(p->owner->quadmillis ? 4 : 1);
+        int qdam = Game::Weapon::guns[p->gun].damage*(p->owner->quadmillis ? 4 : 1);
         if(p->owner->monsterstate) qdam /= Game::Weapon::MONSTERDAMAGEFACTOR;
         vdist(dist, v, p->o, p->to);
         float dtime = dist*1000/p->speed;
@@ -200,7 +183,7 @@ void moveprojectiles(float time)
             else
             {
                 if(p->gun==Gun::GUN_RL) { dodynlight(p->o, v, 0, 255, p->owner); particle_splash(5, 2, 200, v); }
-                else { particle_splash(1, 1, 200, v); particle_splash(guns[p->gun].part, 1, 1, v); };
+                else { particle_splash(1, 1, 200, v); particle_splash(Game::Weapon::guns[p->gun].part, 1, 1, v); };
             };       
         };
         p->o = v;
@@ -209,7 +192,7 @@ void moveprojectiles(float time)
 
 void shootv(int gun, vec &from, vec &to, dynent *d, bool local)     // create visual effect from a shot
 {
-    playsound(guns[gun].sound, d==player1 ? NULL : &d->o);
+    playsound(Game::Weapon::guns[gun].sound, d==player1 ? NULL : &d->o);
     int pspeed = 25;
     switch(gun)
     {
@@ -231,7 +214,7 @@ void shootv(int gun, vec &from, vec &to, dynent *d, bool local)     // create vi
         case Gun::GUN_FIREBALL:
         case Gun::GUN_ICEBALL:
         case Gun::GUN_SLIMEBALL:
-            pspeed = guns[gun].projspeed;
+            pspeed = Game::Weapon::guns[gun].projspeed;
             if(d->monsterstate) pspeed /= 2;
             newprojectile(from, to, (float)pspeed, local, d, gun);
             break;
@@ -254,7 +237,7 @@ void hitpush(int target, int damage, dynent *d, dynent *at, vec &from, vec &to)
 void raydamage(dynent *o, vec &from, vec &to, dynent *d, int i)
 {
     if(o->state!=CSStatus::CS_ALIVE) return;
-    int qdam = guns[d->gunselect].damage;
+    int qdam = Game::Weapon::guns[d->gunselect].damage;
     if(d->quadmillis) qdam *= 4;
     if(d->monsterstate) qdam /= Game::Weapon::MONSTERDAMAGEFACTOR;
     if(d->gunselect==Gun::GUN_SG)
@@ -283,9 +266,9 @@ void shoot(dynent *d, vec &targ)
     vdist(dist, unitv, from, to);
     vdiv(unitv, dist);
     vec kickback = unitv;
-    vmul(kickback, guns[d->gunselect].kickamount*-0.01f);
+    vmul(kickback, Game::Weapon::guns[d->gunselect].kickamount*-0.01f);
     vadd(d->vel, kickback);
-    if(d->pitch<80.0f) d->pitch += guns[d->gunselect].kickamount*0.05f;
+    if(d->pitch<80.0f) d->pitch += Game::Weapon::guns[d->gunselect].kickamount*0.05f;
     
 
     if(d->gunselect==Gun::GUN_FIST || d->gunselect==Gun::GUN_BITE) 
@@ -299,9 +282,9 @@ void shoot(dynent *d, vec &targ)
     if(d->quadmillis && attacktime>200) playsoundc(Sounds::S_ITEMPUP);
     shootv(d->gunselect, from, to, d, true);
     if(!d->monsterstate) addmsg(1, 8, NetworkMessages::SV_SHOT, d->gunselect, (int)(from.x*GameInit::DMF), (int)(from.y*GameInit::DMF), (int)(from.z*GameInit::DMF), (int)(to.x*GameInit::DMF), (int)(to.y*GameInit::DMF), (int)(to.z*GameInit::DMF));
-    d->gunwait = guns[d->gunselect].attackdelay;
+    d->gunwait = Game::Weapon::guns[d->gunselect].attackdelay;
 
-    if(guns[d->gunselect].projspeed) return;
+    if(Game::Weapon::guns[d->gunselect].projspeed) return;
     
     loopv(players)
     {
@@ -315,5 +298,3 @@ void shoot(dynent *d, vec &targ)
 
     if(d->monsterstate) raydamage(player1, from, to, d, -1);
 };
-
-
