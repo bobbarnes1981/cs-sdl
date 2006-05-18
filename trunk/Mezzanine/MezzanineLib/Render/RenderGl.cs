@@ -205,7 +205,7 @@ namespace MezzanineLib.Render
 			Glu.gluPerspective(fovy, aspect, 0.3f, farplane);
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
     
-			int rtime = Bindings.reloadtime(GameInit.Player1.gunselect);
+			int rtime = Game.Weapon.ReloadTime(GameInit.Player1.gunselect);
 			if(GameInit.Player1.lastaction!=0 && GameInit.Player1.lastattackgun==GameInit.Player1.gunselect && (GameInit.LastMillis-GameInit.Player1.lastaction)<rtime)
 			{
 				DrawHudModel(7, 18, rtime/18.0f, GameInit.Player1.lastaction);
