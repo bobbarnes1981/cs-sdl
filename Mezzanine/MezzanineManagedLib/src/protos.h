@@ -175,7 +175,6 @@ extern DECLSPEC void CDECL moveplayer(dynent *pl, int moveres, bool local);
 extern DECLSPEC bool CDECL collide(dynent *d, bool spawn, float drop, float rise);
 extern DECLSPEC void CDECL entinmap(dynent *d);
 extern DECLSPEC void CDECL setentphysics(int mml, int mmr);
-extern DECLSPEC void CDECL physicsframe();
 
 // sound
 extern DECLSPEC void CDECL playsound(int n, vec *loc = 0);

@@ -221,7 +221,7 @@ void load_world(char *mname)        // still supports all map formats that have 
     endianswap(&hdr.version, sizeof(int), 4);
     if(strncmp(hdr.head, "CUBE", 4)!=0) GameInit::Fatal("while reading map: header malformatted");
     if(hdr.version>GameInit::MapVersion) GameInit::Fatal("this map requires a newer version of cube");
-    if(GameInit::SFactor<GameInit::SmallestFactor || GameInit::SFactor>GameInit::LargestFactor) GameInit::Fatal("illegal map size");
+    if(GameInit::SFactor<GameInit::SmallestFactor || GameInit::SFactor>GameInit::LARGEST_FACTOR) GameInit::Fatal("illegal map size");
     if(hdr.version>=4)
     {
         gzread(f, &hdr.waterlevel, sizeof(int)*16);

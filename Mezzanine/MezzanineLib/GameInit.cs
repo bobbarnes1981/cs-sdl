@@ -359,14 +359,7 @@ namespace MezzanineLib
 		/// <summary>
 		/// 10 is already insane
 		/// </summary>
-		public static int LargestFactor
-		{
-			get
-			{
-				return LARGEST_FACTOR;
-			}
-		}
-		static int LARGEST_FACTOR = 11;
+		public const int LARGEST_FACTOR = 11;
 
 		/// <summary>
 		/// 

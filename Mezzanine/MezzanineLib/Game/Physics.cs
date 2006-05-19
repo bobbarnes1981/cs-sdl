@@ -53,5 +53,20 @@ namespace MezzanineLib.Game
 		public static int physicsfraction = 0;
 		public static int physicsrepeat = 0;
 		public const int MINFRAMETIME = 20; // physics always simulated at 50fps or better
+
+		public static void PhysicsFrame()          // optimally schedule physics frames inside the graphics frames
+		{
+			if(GameInit.CurrentTime>=Physics.MINFRAMETIME)
+			{
+				int faketime = GameInit.CurrentTime+Physics.physicsfraction;
+				Physics.physicsrepeat = faketime/Physics.MINFRAMETIME;
+				Physics.physicsfraction = faketime-Physics.physicsrepeat*Physics.MINFRAMETIME;
+			}
+			else
+			{
+				Physics.physicsrepeat = 1;
+			}
+		}
 	}
+
 }
