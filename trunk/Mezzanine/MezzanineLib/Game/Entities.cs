@@ -46,5 +46,21 @@ namespace MezzanineLib.Game
 	public sealed class Entities
 	{
 		public static int triggertime = 0;
-	}
+
+		public static string[] EntityModelNames = new string[10];
+		 
+		static Entities()
+		{
+			EntityModelNames[0] = "shells";
+			EntityModelNames[1] = "bullets";
+			EntityModelNames[2] = "rockets";
+			EntityModelNames[3] = "rrounds";
+			EntityModelNames[4] = "health";
+			EntityModelNames[5] = "boost";
+			EntityModelNames[6] = "g_armour";
+			EntityModelNames[7] = "y_armour";
+			EntityModelNames[8] = "quad";
+			EntityModelNames[9] = "teleporter";
+		}
+		}
 }

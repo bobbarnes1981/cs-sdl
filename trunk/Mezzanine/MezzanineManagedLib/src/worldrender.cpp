@@ -59,8 +59,8 @@ void render_wall(sqr *o, sqr *s, int x1, int y1, int x2, int y2, int mip, sqr *d
     };
 };
 
-int stats[11];
-//int stats[GameInit::LargestFactor];
+//int stats[11];
+int stats[GameInit::LARGEST_FACTOR];
 
 // detect those cases where a higher mip solid has a visible wall next to lower mip cubes
 // (used for wall rendering below)
@@ -242,7 +242,7 @@ void distlod(int &low, int &high, int angle, float widef)
 
 void render_world(float vx, float vy, float vh, int yaw, int pitch, float fov, int w, int h)
 {
-    loopi(GameInit::LargestFactor) stats[i] = 0;
+    loopi(GameInit::LARGEST_FACTOR) stats[i] = 0;
     WorldRender::min_lod = WorldRender::MIN_LOD+abs(pitch)/12;
     yaw = 360-yaw;
     float widef = fov/75.0f;

@@ -165,20 +165,6 @@ bool collide(dynent *d, bool spawn, float drop, float rise)
 
 VARP(maxroll, 0, 3, 20);
 
-void physicsframe()          // optimally schedule physics frames inside the graphics frames
-{
-    if(GameInit::CurrentTime>=Physics::MINFRAMETIME)
-    {
-        int faketime = GameInit::CurrentTime+Physics::physicsfraction;
-        Physics::physicsrepeat = faketime/Physics::MINFRAMETIME;
-        Physics::physicsfraction = faketime-Physics::physicsrepeat*Physics::MINFRAMETIME;
-    }
-    else
-    {
-        Physics::physicsrepeat = 1;
-    };
-};
-
 // main physics routine, moves a player/monster for a curtime step
 // moveres indicated the physics precision (which is lower for monsters and multiplayer prediction)
 // local is false for multiplayer prediction

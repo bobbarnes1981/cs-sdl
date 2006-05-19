@@ -293,7 +293,7 @@ void setupworld(int factor)
     GameInit::CubicSize = GameInit::SSize*GameInit::SSize;
     GameInit::MipSize = GameInit::CubicSize*134/100;
     sqr *w = world = (sqr *)alloc(GameInit::MipSize*sizeof(sqr));
-    loopi(GameInit::LargestFactor*2) { wmip[i] = w; w += GameInit::CubicSize>>(i*2); };
+    loopi(GameInit::LARGEST_FACTOR*2) { wmip[i] = w; w += GameInit::CubicSize>>(i*2); };
 };
 
 void empty_world(int factor, bool force)    // main empty world creation routine, if passed factor -1 will enlarge old world by 1
@@ -305,7 +305,7 @@ void empty_world(int factor, bool force)    // main empty world creation routine
     bool copy = false;
     if(oldworld && factor<0) { factor = GameInit::SFactor+1; copy = true; };
     if(factor<GameInit::SmallestFactor) factor = GameInit::SmallestFactor;
-    if(factor>GameInit::LargestFactor) factor = GameInit::LargestFactor;
+    if(factor>GameInit::LARGEST_FACTOR) factor = GameInit::LARGEST_FACTOR;
     setupworld(factor);
     
     loop(x,GameInit::SSize) loop(y,GameInit::SSize)
