@@ -246,7 +246,6 @@ template <class T> struct hashtable
     };
 };
 
-
 #define enumerate(ht,t,e,b) loopi(ht->size) for(ht->enumc = ht->table[i]; ht->enumc; ht->enumc = ht->enumc->next) { t e = &ht->enumc->data; b; }
 
 pool *gp(); 

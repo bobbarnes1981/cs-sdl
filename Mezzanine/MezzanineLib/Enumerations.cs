@@ -94,8 +94,8 @@ namespace MezzanineLib
 		GUN_ICEBALL, 
 		GUN_SLIMEBALL, 
 		GUN_BITE, 
-		NUMGUNS };
-
+		NUMGUNS 
+	}
 
 	public enum CSStatus
 	{ 
@@ -179,21 +179,6 @@ namespace MezzanineLib
 		M_SLEEP, 
 		M_AIMING 
 	}  // monster states
-
-
-	public enum Weapon
-	{ 
-		GUN_FIST = 0, 
-		GUN_SG, 
-		GUN_CG, 
-		GUN_RL, 
-		GUN_RIFLE, 
-		GUN_FIREBALL, 
-		GUN_ICEBALL, 
-		GUN_SLIMEBALL, 
-		GUN_BITE, 
-		NUMGUNS 
-	}
 
 //	/// <summary>
 //	/// function signatures for script functions, see command.cpp
