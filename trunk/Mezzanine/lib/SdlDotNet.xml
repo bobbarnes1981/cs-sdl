@@ -2869,6 +2869,16 @@
             Requires the GL_ARB_MULTISAMPLE extension.
             </summary>
         </member>
+        <member name="F:SdlDotNet.OpenGLAttr.AcceleratedVisual">
+            <summary>
+            Guarantees hardware acceleration
+            </summary>
+        </member>
+        <member name="F:SdlDotNet.OpenGLAttr.SwapControl">
+            <summary>
+            Waits for vsync in OpenGL applications.
+            </summary>
+        </member>
         <member name="T:SdlDotNet.AudioFormat">
             <summary>
             Specifies an audio format to mix audio in
@@ -9018,6 +9028,13 @@
             <param name="destinationRectangle">Destination of stretch</param>
             <returns>new Surface</returns>
         </member>
+        <member name="M:SdlDotNet.Surface.Resize(System.Drawing.Size)">
+            <summary>
+            Resize Surface
+            </summary>
+            <param name="destinationSize">Size of new Surface</param>
+            <returns>new Surface</returns>
+        </member>
         <member name="M:SdlDotNet.Surface.Stretch(System.Drawing.Size)">
             <summary>
             Stretch Surface
@@ -9995,6 +10012,13 @@
             <remarks>It puts a frame around the window</remarks>
             <returns>a surface to draw to</returns>
         </member>
+        <member name="M:SdlDotNet.Video.SetVideoModeWindow">
+            <summary>
+            Sets the windowed video mode using current screen bpp, width and height
+            </summary>
+            <remarks>It puts a frame around the window</remarks>
+            <returns>a surface to draw to</returns>
+        </member>
         <member name="M:SdlDotNet.Video.SetVideoModeWindow(System.Int32,System.Int32,System.Int32)">
             <summary>
             Sets the windowed video mode using a given bpp
@@ -10551,6 +10575,16 @@
         <member name="P:SdlDotNet.VideoInfo.VideoMemory">
             <summary>
             Total video memory
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.VideoInfo.ScreenHeight">
+            <summary>
+            Current screen height
+            </summary>
+        </member>
+        <member name="P:SdlDotNet.VideoInfo.ScreenWidth">
+            <summary>
+            Current screen width
             </summary>
         </member>
         <member name="T:SdlDotNet.VideoResizeEventArgs">
