@@ -337,5 +337,27 @@ namespace SdlDotNet
 				return VideoInfo.VideoInfoStruct.video_mem;
 			}
 		}
+
+		/// <summary>
+		/// Current screen height
+		/// </summary>
+		public static int ScreenHeight
+		{
+			get
+			{
+				return VideoInfo.VideoInfoStruct.current_h;
+			}
+		}
+
+		/// <summary>
+		/// Current screen width
+		/// </summary>
+		public static int ScreenWidth
+		{
+			get
+			{
+				return VideoInfo.VideoInfoStruct.current_w;
+			}
+		}
 	}
 }

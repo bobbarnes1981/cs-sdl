@@ -214,6 +214,16 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
+		/// Sets the windowed video mode using current screen bpp, width and height
+		/// </summary>
+		/// <remarks>It puts a frame around the window</remarks>
+		/// <returns>a surface to draw to</returns>
+		public static Surface SetVideoModeWindow() 
+		{
+			return Video.SetVideoModeWindow(0, 0, false);
+		}
+
+		/// <summary>
 		/// Sets the windowed video mode using a given bpp
 		/// </summary>
 		/// <param name="width">The width of the window</param>
