@@ -209,7 +209,15 @@ namespace SdlDotNet
 		/// Number of samples per pixel when multisampling is enabled. 
 		/// Requires the GL_ARB_MULTISAMPLE extension.
 		/// </summary>
-		MultiSampleSamples = Sdl.SDL_GL_MULTISAMPLESAMPLES
+		MultiSampleSamples = Sdl.SDL_GL_MULTISAMPLESAMPLES,
+		/// <summary>
+		/// Guarantees hardware acceleration
+		/// </summary>
+		AcceleratedVisual = Sdl.SDL_GL_ACCELERATED_VISUAL,
+		/// <summary>
+		/// Waits for vsync in OpenGL applications.
+		/// </summary>
+		SwapControl = Sdl.SDL_GL_SWAP_CONTROL
 	}
 	#endregion OpenGLAttribute
 

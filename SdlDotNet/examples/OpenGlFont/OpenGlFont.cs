@@ -283,10 +283,10 @@ namespace SdlDotNet.Examples.OpenGlFont
 			surfaceGl.Surface = font.Render(phrase1 + i++, Color.White);
 			surfaceGl.Draw(new Point(0, 0));
 			//Gl.glPopMatrix();
-			//surfaceGl.Surface = font.Render(phrase2 + i++, Color.White);
-			//surfaceGl.Draw(new Point(100,100));
-			//surfaceGl.Surface = font.Render(phrase3 + i++, Color.White);
-			//surfaceGl.Draw(new Point(200, 200));
+			surfaceGl.Surface = font.Render(phrase2 + i++, Color.White);
+			surfaceGl.Draw(new Point(100,100));
+			surfaceGl.Surface = font.Render(phrase3 + i++, Color.White);
+			surfaceGl.Draw(new Point(200, 200));
 			
 			Video.GLSwapBuffers();
 		}
