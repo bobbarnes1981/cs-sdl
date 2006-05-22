@@ -138,21 +138,6 @@
             Full audio volume
             </summary>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_LIL_ENDIAN">
-            <summary>
-            Little Endian
-            </summary>
-            <remarks>
-            e.g. i386 machines</remarks>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_BIG_ENDIAN">
-            <summary>
-            Big Endian
-            </summary>
-            <remarks>
-            e.g. Macs
-            </remarks>
-        </member>
         <member name="F:Tao.Sdl.Sdl.SDL_MAX_TRACKS">
             <summary>
             The maximum number of CD-ROM tracks on a disk
@@ -173,222 +158,40 @@
             Frames per second.
             </summary>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_NOEVENT">
+        <member name="F:Tao.Sdl.Sdl.SDL_LIL_ENDIAN">
             <summary>
-            Unused (do not remove)
+            Little Endian
             </summary>
+            <remarks>
+            e.g. i386 machines</remarks>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_ACTIVEEVENT">
+        <member name="F:Tao.Sdl.Sdl.SDL_BIG_ENDIAN">
             <summary>
-            Application loses/gains visibility
+            Big Endian
             </summary>
+            <remarks>
+            e.g. Macs
+            </remarks>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_KEYDOWN">
+        <member name="F:Tao.Sdl.Sdl.SDL_PRESSED">
             <summary>
-            Keys pressed
+            Button in pressed state.
             </summary>
+            <remarks>
+            SDL_events.h defines SDL_PRESSED and <see cref="F:Tao.Sdl.Sdl.SDL_RELEASED"/>
+             in a nameless enum. Defining SDL_PRESSED as a const works 
+             better for Tao.SDL purposes</remarks>
+             <seealso cref="F:Tao.Sdl.Sdl.SDL_RELEASED"/>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_KEYUP">
+        <member name="F:Tao.Sdl.Sdl.SDL_RELEASED">
             <summary>
-            Keys released
+            Button in released state.
             </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEMOTION">
-            <summary>
-            Mouse moved
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEBUTTONDOWN">
-            <summary>
-            Mouse button pressed
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEBUTTONUP">
-            <summary>
-            Mouse button released
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYAXISMOTION">
-            <summary>
-            Joystick axis motion
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYBALLMOTION">
-            <summary>
-            Joystick trackball motion
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYHATMOTION">
-            <summary>
-            Joystick hat position change
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYBUTTONDOWN">
-            <summary>
-            Joystick button pressed
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYBUTTONUP">
-            <summary>
-            Joystick button released
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_QUIT">
-            <summary>
-            User-requested quit
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_SYSWMEVENT">
-            <summary>
-            System specific event
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVEDA">
-            <summary>
-            Reserved for future use..
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVEDB">
-            <summary>
-            Reserved for future use..
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VIDEORESIZE">
-            <summary>
-            User resized video mode
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VIDEOEXPOSE">
-            <summary>
-            Screen needs to be redrawn
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED2">
-            <summary>
-            Reserved for future use..
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED3">
-            <summary>
-            Reserved for future use..
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED4">
-            <summary>
-            Reserved for future use..
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED5">
-            <summary>
-            Reserved for future use..
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED6">
-            <summary>
-            Reserved for future use..
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED7">
-            <summary>
-            Reserved for future use..
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_USEREVENT">
-            <summary>
-            Events SDL_USEREVENT through SDL_MAXEVENTS-1 are 
-            for your use.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_NUMEVENTS">
-            <summary>
-            This last event is only for bounding internal arrays
-            It is the number of bits in the event mask datatype -- Uint32
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_ACTIVEEVENTMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_KEYDOWNMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_KEYUPMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEMOTIONMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEBUTTONDOWNMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEBUTTONUPMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEEVENTMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYAXISMOTIONMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYBALLMOTIONMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYHATMOTIONMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYBUTTONDOWNMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYBUTTONUPMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_JOYEVENTMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VIDEORESIZEMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_VIDEOEXPOSEMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_QUITMASK">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_SYSWMEVENTMASK">
-            <summary>
-            
-            </summary>
+            <remarks>
+            SDL_events.h defines <see cref="F:Tao.Sdl.Sdl.SDL_PRESSED"/> and SDL_RELEASED
+             in a nameless enum. Defining SDL_RELEASED as a const works 
+             better for Tao.SDL purposes</remarks>
+             <seealso cref="F:Tao.Sdl.Sdl.SDL_PRESSED"/>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_ALLEVENTS">
             <summary>
@@ -547,6 +350,32 @@
             
             </summary>
         </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_MUTEX_TIMEDOUT">
+            <summary>
+            Synchronization functions which can time out return this value
+            if they time out.
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_MUTEX_MAXWAIT">
+            <summary>
+            This is the timeout value which corresponds to never time out
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.RW_SEEK_SET">
+            <summary>
+            Seek from the beginning of data
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.RW_SEEK_CUR">
+            <summary>
+            Seek relative to current read point
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.RW_SEEK_END">
+            <summary>
+            Seek relative to the end of data
+            </summary>
+        </member>
         <member name="F:Tao.Sdl.Sdl.SDL_TIMESLICE">
             <summary>
                 The OS scheduler timeslice, in milliseconds.
@@ -560,25 +389,20 @@
                 Experimentally determined.
             </remarks>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_PRESSED">
+        <member name="F:Tao.Sdl.Sdl.SDL_MAJOR_VERSION">
             <summary>
-            Button in pressed state.
+            Major Version
             </summary>
-            <remarks>
-            SDL_types.h defines SDL_PRESSED and <see cref="F:Tao.Sdl.Sdl.SDL_RELEASED"/>
-             in a nameless enum. Defining SDL_PRESSED as a const works 
-             better for Tao.SDL purposes</remarks>
-             <seealso cref="F:Tao.Sdl.Sdl.SDL_RELEASED"/>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_RELEASED">
+        <member name="F:Tao.Sdl.Sdl.SDL_MINOR_VERSION">
             <summary>
-            Button in released state.
+            Minor Version
             </summary>
-            <remarks>
-            SDL_types.h defines <see cref="F:Tao.Sdl.Sdl.SDL_PRESSED"/> and SDL_RELEASED
-             in a nameless enum. Defining SDL_RELEASED as a const works 
-             better for Tao.SDL purposes</remarks>
-             <seealso cref="F:Tao.Sdl.Sdl.SDL_PRESSED"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_PATCHLEVEL">
+            <summary>
+            Patch Version
+            </summary>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_ALPHA_OPAQUE">
             <summary>
@@ -812,6 +636,228 @@
             CDstatus enum.
             The possible states which a CD-ROM drive can be in.
             </remarks>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_NOEVENT">
+            <summary>
+            Unused (do not remove)
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_ACTIVEEVENT">
+            <summary>
+            Application loses/gains visibility
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_KEYDOWN">
+            <summary>
+            Keys pressed
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_KEYUP">
+            <summary>
+            Keys released
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEMOTION">
+            <summary>
+            Mouse moved
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEBUTTONDOWN">
+            <summary>
+            Mouse button pressed
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEBUTTONUP">
+            <summary>
+            Mouse button released
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYAXISMOTION">
+            <summary>
+            Joystick axis motion
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYBALLMOTION">
+            <summary>
+            Joystick trackball motion
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYHATMOTION">
+            <summary>
+            Joystick hat position change
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYBUTTONDOWN">
+            <summary>
+            Joystick button pressed
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYBUTTONUP">
+            <summary>
+            Joystick button released
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_QUIT">
+            <summary>
+            User-requested quit
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_SYSWMEVENT">
+            <summary>
+            System specific event
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVEDA">
+            <summary>
+            Reserved for future use..
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVEDB">
+            <summary>
+            Reserved for future use..
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_VIDEORESIZE">
+            <summary>
+            User resized video mode
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_VIDEOEXPOSE">
+            <summary>
+            Screen needs to be redrawn
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED2">
+            <summary>
+            Reserved for future use..
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED3">
+            <summary>
+            Reserved for future use..
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED4">
+            <summary>
+            Reserved for future use..
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED5">
+            <summary>
+            Reserved for future use..
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED6">
+            <summary>
+            Reserved for future use..
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_EVENT_RESERVED7">
+            <summary>
+            Reserved for future use..
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_USEREVENT">
+            <summary>
+            Events SDL_USEREVENT through SDL_MAXEVENTS-1 are 
+            for your use.
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_NUMEVENTS">
+            <summary>
+            This last event is only for bounding internal arrays
+            It is the number of bits in the event mask datatype -- Uint32
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_ACTIVEEVENTMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_KEYDOWNMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_KEYUPMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_KEYEVENTMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEMOTIONMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEBUTTONDOWNMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEBUTTONUPMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_MOUSEEVENTMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYAXISMOTIONMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYBALLMOTIONMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYHATMOTIONMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYBUTTONDOWNMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYBUTTONUPMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_JOYEVENTMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_VIDEORESIZEMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_VIDEOEXPOSEMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_QUITMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_SYSWMEVENTMASK">
+            <summary>
+            
+            </summary>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_ADDEVENT">
             <summary>
@@ -2122,17 +2168,17 @@
             Enumeration of valid key mods (possibly OR'd together) 
             </remarks>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_SYSWM_X11">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:Tao.Sdl.Sdl.SDL_FALSE">
             <summary>
             
             </summary>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_TRUE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_SYSWM_X11">
             <summary>
             
             </summary>
@@ -2350,6 +2396,34 @@
             <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_GL_MULTISAMPLESAMPLES">
+            <summary>
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_ACCELERATED_VISUAL">
+            <summary>
+            Public enumeration for setting the OpenGL window Attributes
+            </summary>
+            <remarks>
+            While you can set most OpenGL attributes normally, 
+            the attributes list above must be known before SDL 
+            sets the video mode. These attributes a set and read 
+            with <see cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/> and 
+            <see cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>.
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_SetAttribute(System.Int32,System.Int32)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_GL_GetAttribute(System.Int32,System.Int32@)"/>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_GL_SWAP_CONTROL">
             <summary>
             Public enumeration for setting the OpenGL window Attributes
             </summary>
@@ -3588,7 +3662,7 @@
             </summary>
             <remarks>
             <p>Binds to C-function call in SDL_cpuinfo.h:
-                <code>extern DECLSPEC SDL_bool SDLCALL SDL_HasRDTSC()</code>
+                <code>extern DECLSPEC SDL_bool SDLCALL SDL_HasRDTSC(void)</code>
                 </p>
             </remarks>
             <returns>Returns SDL_TRUE if the CPU has the RDTSC instruction.</returns>
@@ -3599,7 +3673,7 @@
             </summary>
             <remarks>
             <p>Binds to C-function call in SDL_cpuinfo.h:
-                <code>extern DECLSPEC SDL_bool SDLCALL SDL_HasMMX()</code>
+                <code>extern DECLSPEC SDL_bool SDLCALL SDL_HasMMX(void)</code>
                 </p>
             </remarks>
             <returns>Returns SDL_TRUE if the CPU has MMX features.</returns>
@@ -3610,7 +3684,7 @@
             </summary>
             <remarks>
             <p>Binds to C-function call in SDL_cpuinfo.h:
-                <code>extern DECLSPEC SDL_bool SDLCALL SDL_HasMMXExt()</code>
+                <code>extern DECLSPEC SDL_bool SDLCALL SDL_HasMMXExt(void)</code>
                 </p>
             </remarks>
             <returns>Returns SDL_TRUE if the CPU has MMX Ext. features.</returns>
@@ -3621,7 +3695,7 @@
             </summary>
             <remarks>
             <p>Binds to C-function call in SDL_cpuinfo.h:
-                <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_Has3DNow()</code>
+                <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_Has3DNow(void)</code>
                 </p>
             </remarks>
             <returns>Returns SDL_TRUE if the CPU has 3DNow features.</returns>
@@ -3632,7 +3706,7 @@
             </summary>
             <remarks>
             <p>Binds to C-function call in SDL_cpuinfo.h:
-                <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_HasSSE()</code>
+                <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_HasSSE(void)</code>
                 </p>
             </remarks>
             <returns>Returns SDL_TRUE if the CPU has SSE features.</returns>
@@ -3643,7 +3717,7 @@
             </summary>
             <remarks>
             <p>Binds to C-function call in SDL_cpuinfo.h:
-                <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_HasSSE2()</code>
+                <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_HasSSE2void()</code>
                 </p>
             </remarks>
             <returns>Returns SDL_TRUE if the CPU has SSE2 features.</returns>
@@ -3654,7 +3728,7 @@
             </summary>
             <remarks>
             <p>Binds to C-function call in SDL_cpuinfo.h:
-                <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_HasAltiVec()</code>
+                <code>extern DECLSPEC SDL_bool SDLCALL SDL_SDL_HasAltiVec(void)</code>
                 </p>
             </remarks>
             <returns>Returns SDL_TRUE if the CPU has AltiVec features.</returns>
@@ -3931,43 +4005,6 @@
             Returns 0 on success or -1 if the event couldn't be pushed.
             </returns>
             <seealso cref="T:Tao.Sdl.Sdl.SDL_Event"/>
-        </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_putenv(System.String)">
-            <summary>
-                Puts a variable of the form "name=value" into the environment.
-            </summary>
-            <param name="variable">
-                The "name=value" pair to write to the environment.
-            </param>
-            <returns>
-                Returns -1 on an error or 0 on success.
-            </returns>
-            <remarks>
-                Not all environments have a working putenv(). SDL_putenv() is not available on Windows.
-                <p>
-                Binds to C-function call in SDL_getenv.h:
-                <code>extern DECLSPEC int SDLCALL SDL_putenv(const char *variable)</code>
-                </p>
-            </remarks>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_getenv(System.String)"/>
-        </member>
-        <member name="M:Tao.Sdl.Sdl.SDL_getenv(System.String)">
-            <summary>
-                Retrieves a variable from the environment.
-            </summary>
-            <param name="name">
-                The name of the environmental variable to retrieve.
-            </param>
-            <returns>
-                The value of the specified environmental variable.
-            </returns>
-            <remarks>
-                Not all environments have a working getenv(). SDL_getenv() is not available on Windows.
-                <p>Binds to C-function call in SDL_getenv.h:
-                <code>extern DECLSPEC char * SDLCALL SDL_getenv(const char *name)</code>
-                </p>
-            </remarks>
-            <seealso cref="M:Tao.Sdl.Sdl.SDL_putenv(System.String)"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_NumJoysticks">
             <summary>
@@ -4392,6 +4429,26 @@
              <param name="delay"></param>
              <returns>Returns 0 on success and -1 on failure.</returns>
         </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_GetKeyRepeat(System.Int32@,System.Int32@)">
+             <summary>
+             Get keyboard repeat rate. 
+             </summary>
+             <remarks>
+             Gets the keyboard repeat rate. 
+             delay specifies how long the key must be pressed before it 
+             begins repeating, it then repeats at the speed specified by 
+             interval. Both delay and interval are expressed in milliseconds.
+             <p>Setting delay to 0 disables key repeating completely. Good 
+             default values are SDL_DEFAULT_REPEAT_DELAY and 
+             SDL_DEFAULT_REPEAT_INTERVAL.</p>
+            <p>Binds to C-function in SDL_keyboard.h
+            <code>int SDL_GetKeyRepeat(int delay, int interval);
+            </code></p>
+             </remarks>
+             <param name="rate"></param>
+             <param name="delay"></param>
+             <returns>Returns 0 on success and -1 on failure.</returns>
+        </member>
         <member name="M:Tao.Sdl.Sdl.SDL_GetKeyStateInternal(System.Int32@)">
             <summary>
             Get a snapshot of the current keyboard state. 
@@ -4478,6 +4535,49 @@
             <returns>
             Returns the SDL-defined name of the SDLKey key.
             </returns>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_LoadObject(System.String)">
+            <summary>
+            This function dynamically loads a shared object and returns a pointer
+            to the object handle (or NULL if there was an error).
+            </summary>
+            <remarks>
+             <p>Binds to C-function in SDL_loadso.h
+             <code>extern DECLSPEC void * SDLCALL SDL_LoadObject(const char *sofile)
+             </code></p>
+            </remarks>
+            <param name="sofile">System dependent name of the object file.</param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_LoadFunction(System.IntPtr,System.String)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_UnloadObject(System.IntPtr)"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_LoadFunction(System.IntPtr,System.String)">
+            <summary>
+            Given an object handle, this function looks up the address of the
+            named function in the shared object and returns it.  This address
+            is no longer valid after calling SDL_UnloadObject().
+            </summary>
+            <remarks>
+             <p>Binds to C-function in SDL_loadso.h
+             <code>extern DECLSPEC void * SDLCALL SDL_LoadFunction(void *handle, const char *name)
+             </code></p>
+            </remarks>
+            <param name="handle">Object handle</param>
+            <param name="name">Name of function in the shared object.</param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_LoadObject(System.String)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_UnloadObject(System.IntPtr)"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_UnloadObject(System.IntPtr)">
+            <summary>
+            Unload a shared object from memory
+            </summary>
+            <remarks>
+             <p>Binds to C-function in SDL_loadso.h
+             <code>extern DECLSPEC void * SDLCALL SDL_UnloadObject(void *handle)
+             </code></p>
+            </remarks>
+            <param name="handle">Object handle</param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_LoadFunction(System.IntPtr,System.String)"/>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_LoadObject(System.String)"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_GetMouseState(System.Int32@,System.Int32@)">
             <summary>
@@ -5034,6 +5134,22 @@
                 </p>
             </remarks>
         </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_NAME(System.String)">
+            <summary>
+                Returns SDL name
+            </summary>
+            <param name="x">input name</param>
+            <returns>Returns SDL name</returns>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_QuitRequested">
+            <summary>
+                Checks if SDL_Quit event has been requested
+            </summary>
+            <returns>
+            Returns 1 if a SDL_Quit Event has been requested. 
+            Returns 0 if no SDL_Quit event has been requeted.
+            </returns>
+        </member>
         <member name="M:Tao.Sdl.Sdl.SDL_RWFromFile(System.String,System.String)">
             <summary>
             Create SDL_RWops structures from file.
@@ -5129,6 +5245,205 @@
             }
             </code></example>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_ReadLE16(System.IntPtr)">
+            <summary>
+            Read an item of the specified endianness and return in native format.
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC Uint16 SDLCALL SDL_ReadLE16(SDL_RWops *src)
+            </code></p>
+            </remarks>
+            <param name="src"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_ReadBE16(System.IntPtr)">
+            <summary>
+            Read an item of the specified endianness and return in native format.
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC Uint16 SDLCALL SDL_ReadBE16(SDL_RWops *src)
+            </code></p>
+            </remarks>
+            <param name="src"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_ReadLE32(System.IntPtr)">
+            <summary>
+            Read an item of the specified endianness and return in native format.
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC Uint32 SDLCALL SDL_ReadLE32(SDL_RWops *src)
+            </code></p>
+            </remarks>
+            <param name="src"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_ReadBE32(System.IntPtr)">
+            <summary>
+            Read an item of the specified endianness and return in native format.
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC Uint32 SDLCALL SDL_ReadBE32(SDL_RWops *src)
+            </code></p>
+            </remarks>
+            <param name="src"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_ReadLE64(System.IntPtr)">
+            <summary>
+            Read an item of the specified endianness and return in native format.
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC Uint64 SDLCALL SDL_ReadLE64(SDL_RWops *src)
+            </code></p>
+            </remarks>
+            <param name="src"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_ReadBE64(System.IntPtr)">
+            <summary>
+            Read an item of the specified endianness and return in native format.
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC Uint64 SDLCALL SDL_ReadBE64(SDL_RWops *src)
+            </code></p>
+            </remarks>
+            <param name="src"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_WriteLE16(System.IntPtr,System.Int16)">
+            <summary>
+            Write an item of native format to the specified endianness
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC int SDLCALL SDL_WriteLE16(SDL_RWops *dst, Uint16 value)
+            </code></p>
+            </remarks>
+            <param name="dst"></param>
+            <param name="val"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_WriteBE16(System.IntPtr,System.Int16)">
+            <summary>
+            Write an item of native format to the specified endianness
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC int SDLCALL SDL_WriteBE16(SDL_RWops *dst, Uint16 value)
+            </code></p>
+            </remarks>
+            <param name="dst"></param>
+            <param name="val"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_WriteLE32(System.IntPtr,System.Int32)">
+            <summary>
+            Write an item of native format to the specified endianness
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC int SDLCALL SDL_WriteLE32(SDL_RWops *dst, Uint32 value)
+            </code></p>
+            </remarks>
+            <param name="dst"></param>
+            <param name="val"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_WriteBE32(System.IntPtr,System.Int32)">
+            <summary>
+            Write an item of native format to the specified endianness
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC int SDLCALL SDL_WriteBE32(SDL_RWops *dst, Uint32 value)
+            </code></p>
+            </remarks>
+            <param name="dst"></param>
+            <param name="val"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_WriteLE64(System.IntPtr,System.Int64)">
+            <summary>
+            Write an item of native format to the specified endianness
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC int SDLCALL SDL_WriteLE64(SDL_RWops *dst, Uint64 value)
+            </code></p>
+            </remarks>
+            <param name="dst"></param>
+            <param name="val"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_WriteBE64(System.IntPtr,System.Int64)">
+            <summary>
+            Write an item of native format to the specified endianness
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_rwops.h
+            <code>
+            extern DECLSPEC int SDLCALL SDL_WriteBE64(SDL_RWops *dst, Uint64 value)
+            </code></p>
+            </remarks>
+            <param name="dst"></param>
+            <param name="val"></param>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_AllocRW"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_putenv(System.String)">
+            <summary>
+                Puts a variable of the form "name=value" into the environment.
+            </summary>
+            <param name="variable">
+                The "name=value" pair to write to the environment.
+            </param>
+            <returns>
+                Returns -1 on an error or 0 on success.
+            </returns>
+            <remarks>
+                Not all environments have a working putenv(). SDL_putenv() is not available on Windows.
+                <p>
+                Binds to C-function call in SDL_getenv.h:
+                <code>extern DECLSPEC int SDLCALL SDL_putenv(const char *variable)</code>
+                </p>
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_getenv(System.String)"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_getenv(System.String)">
+            <summary>
+                Retrieves a variable from the environment.
+            </summary>
+            <param name="name">
+                The name of the environmental variable to retrieve.
+            </param>
+            <returns>
+                The value of the specified environmental variable.
+            </returns>
+            <remarks>
+                Not all environments have a working getenv(). SDL_getenv() is not available on Windows.
+                <p>Binds to C-function call in SDL_getenv.h:
+                <code>extern DECLSPEC char * SDLCALL SDL_getenv(const char *name)</code>
+                </p>
+            </remarks>
+            <seealso cref="M:Tao.Sdl.Sdl.SDL_putenv(System.String)"/>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_GetWMInfo(Tao.Sdl.Sdl.SDL_SysWMinfo_Unix@)">
             <summary>
@@ -5461,6 +5776,27 @@
                 </p>
             </remarks>
             <seealso cref="M:Tao.Sdl.Sdl.SDL_AddTimer(System.Int32,Tao.Sdl.Sdl.SDL_NewTimerCallback)"/>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.SDL_VERSION">
+            <summary>
+            This method can be used to fill a version structure with the compile-time
+            version of the SDL library.
+            </summary>
+            <returns>
+                This function returns a <see cref="T:Tao.Sdl.Sdl.SDL_version"/> struct containing the
+                compiled version number
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_version.h:
+                <code>#define SDL_VERSION(X)
+            {
+            (X)-&gt;major = SDL_MAJOR_VERSION;
+            (X)-&gt;minor = SDL_MINOR_VERSION;
+            (X)-&gt;patch = SDL_PATCHLEVEL;
+            }</code>
+                </p>
+            </remarks>
         </member>
         <member name="M:Tao.Sdl.Sdl.SDL_Linked_Version">
             <summary>
@@ -8522,131 +8858,6 @@
             Undefined window manager event
             </summary>
         </member>
-        <member name="T:Tao.Sdl.Sdl.SDL_Joystick">
-            <summary>
-             TODO. This needs work.
-            </summary>
-            <remarks>
-            <p>
-            		<code>
-            		struct _SDL_Joystick 
-            		{
-            			Uint8 index;		/* Device index */
-            			const char *name;	/* Joystick name - system dependent */
-            			int naxes;		/* Number of axis controls on the joystick */
-            			Sint16 *axes;		/* Current axis states */
-            			int nhats;		/* Number of hats on the joystick */
-            			Uint8 *hats;		/* Current hat states */
-            			int nballs;		/* Number of trackballs on the joystick */
-            			struct balldelta 
-            			{
-            				int dx;
-            				int dy;
-            			} *balls;		/* Current ball motion deltas */
-            			int nbuttons;		/* Number of buttons on the joystick */
-            			Uint8 *buttons;		/* Current button states */
-            			struct joystick_hwdata *hwdata;	/* Driver dependent information */
-            				int ref_count;		/* Reference count for multiple opens */
-            			}
-            			</code>
-            			</p>
-            			</remarks>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.index">
-            <summary>
-            Device index
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.name">
-            <summary>
-            Joystick name - system dependent
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.naxes">
-            <summary>
-            Number of axis controls on the joystick
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.axes">
-            <summary>
-            Current axis states
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.nhats">
-            <summary>
-            Number of hats on the joystick
-            </summary>
-            <remarks>
-            IntPtr to short
-            </remarks>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.hats">
-            <summary>
-            Current hat states
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.nballs">
-            <summary>
-            Number of trackballs on the joystick
-            </summary>
-            <remarks>
-            IntPtr to byte
-            </remarks>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.balls">
-            <summary>
-            Current ball motion deltas
-            </summary>
-            <remarks>
-            IntPtr to balldelta
-            </remarks>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.nbuttons">
-            <summary>
-            Number of buttons on the joystick
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.buttons">
-            <summary>
-            Current button states
-            </summary>
-            <remarks>
-            IntPtr to byte
-            </remarks>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Joystick.hwdata">
-            <summary>
-            Reference count for multiple opens
-            </summary>
-            <remarks>
-            IntPtr to joystick_hwdata
-            </remarks>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.balldelta">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.balldelta.dx">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.balldelta.dy">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Tao.Sdl.Sdl.joystick_hwdata">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.joystick_hwdata.ref_count">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Tao.Sdl.Sdl.SDL_keysym">
             <summary>
             The SDL_keysym structure describes a key press or a key release.
@@ -8726,19 +8937,6 @@
             }</code></p>
             </remarks>
         </member>
-        <member name="T:Tao.Sdl.Sdl.WMcursor">
-            <summary>
-            Implementation dependent.
-            TODO. Fix this.
-            </summary>
-            <remarks>
-            <p>Struct in SDL_mouse.h
-            <code>
-            struct WMcursor WMcursor
-            </code>
-            </p>
-            </remarks>
-        </member>
         <member name="T:Tao.Sdl.Sdl.SDL_Cursor">
             <summary>
             Structure to hold cursor
@@ -8797,7 +8995,7 @@
             IntPtr to byte[2]
             </remarks>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Cursor.WMcursor">
+        <member name="F:Tao.Sdl.Sdl.SDL_Cursor.wm_cursor">
             <summary>
             Window-manager cursor
             </summary>
@@ -9604,6 +9802,16 @@
             Pixel format of the video device. Pointer to SDL_PixelFormat.
             </summary>
         </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.current_w">
+            <summary>
+             The current video mode width
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_VideoInfo.current_h">
+            <summary>
+             The current video mode height
+            </summary>
+        </member>
         <member name="P:Tao.Sdl.Sdl.SDL_VideoInfo.hw_available">
             <summary>
             Is it possible to create hardware surfaces?
@@ -9869,10 +10077,62 @@
                 for Windows and Linux.
             </remarks>
         </member>
+        <member name="F:Tao.Sdl.SdlImage.SDL_IMAGE_MAJOR_VERSION">
+            <summary>
+            Major Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlImage.SDL_IMAGE_MINOR_VERSION">
+            <summary>
+            Minor Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlImage.SDL_IMAGE_PATCHLEVEL">
+            <summary>
+            Patch Version
+            </summary>
+        </member>
         <member name="M:Tao.Sdl.SdlImage.#ctor">
             <summary>
             Prevents instantiation.
             </summary>
+        </member>
+        <member name="M:Tao.Sdl.SdlImage.SDL_IMAGE_VERSION">
+            <summary>
+            This method can be used to fill a version structure with the compile-time
+            version of the SDL_image library.
+            </summary>
+            <returns>
+                This function returns a <see cref="T:Tao.Sdl.Sdl.SDL_version"/> struct containing the
+                compiled version number
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_image.h:
+                <code>#define SDL_IMAGE_VERSION(X)
+            {
+            (X)-&gt;major = SDL_IMAGE_MAJOR_VERSION;
+            (X)-&gt;minor = SDL_IMAGE_MINOR_VERSION;
+            (X)-&gt;patch = SDL_IMAGE_PATCHLEVEL;
+            }</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.SdlImage.IMG_Linked_Version">
+            <summary>
+                Using this you can compare the runtime version to the 
+            version that you compiled with.
+            </summary>
+            <returns>
+                This function gets the version of the dynamically 
+            linked SDL_image library in an <see cref="T:Tao.Sdl.Sdl.SDL_version"/> struct.
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_image.h:
+                <code>const SDL_version * IMG_Linked_Version(void)</code>
+                </p>
+            </remarks>
         </member>
         <member name="M:Tao.Sdl.SdlImage.IMG_LoadTyped_RW(System.IntPtr,System.Int32,System.String)">
             <summary>
@@ -10116,6 +10376,37 @@
             	printf("sample.xpm is a XPM file.\n");
             	else
             	printf("sample.xpm is not a XPM file, or XPM support is not available.\n");
+            </code></example>
+            <seealso cref="M:Tao.Sdl.SdlImage.IMG_LoadTyped_RW(System.IntPtr,System.Int32,System.String)"/>
+        </member>
+        <member name="M:Tao.Sdl.SdlImage.IMG_isXV(System.IntPtr)">
+            <summary>
+            Test for valid, supported XV file.
+            </summary>
+            <remarks>
+            If the XV format is supported, 
+            then the image data is tested to see if it is readable as a XV,
+             otherwise it returns false (Zero). 
+             <p>Binds to C-function in SDL_image.h
+            <code>
+            int IMG_isXV(SDL_RWops *src)
+            </code>
+            </p>
+            </remarks>
+            <param name="src"></param>
+            <returns>
+            1 if the image is a XV and the XV format support is
+             compiled into SDL_image. 0 is returned otherwise. 
+            </returns>
+            <example>
+            <code>
+            // Test sample.xv to see if it is a XV
+            	SDL_RWops *rwop;
+            	rwop=SDL_RWFromFile("sample.xv", "rb");
+            	if(IMG_isXV(rwop))
+            	printf("sample.xpm is a XV file.\n");
+            	else
+            	printf("sample.xpm is not a XV file, or XV support is not available.\n");
             </code></example>
             <seealso cref="M:Tao.Sdl.SdlImage.IMG_LoadTyped_RW(System.IntPtr,System.Int32,System.String)"/>
         </member>
@@ -10490,6 +10781,44 @@
             </example>
             <seealso cref="M:Tao.Sdl.SdlImage.IMG_LoadTyped_RW(System.IntPtr,System.Int32,System.String)"/>
             <seealso cref="M:Tao.Sdl.SdlImage.IMG_isXCF(System.IntPtr)"/>
+        </member>
+        <member name="M:Tao.Sdl.SdlImage.IMG_LoadXV_RW(System.IntPtr)">
+            <summary>
+            Load a .XV image.
+            </summary>
+            <param name="src">
+            The XV image is loaded from this
+            </param>
+            <returns>
+            a pointer to the image as a new SDL_Surface. 
+            NULL is returned on errors, like if XV is not supported, 
+            or a read error. 
+            </returns>
+            <remarks>
+            Load src as a XV image for use as a surface, 
+            if XV support is compiled into the SDL_image library. 
+            <p>Binds to C-function in SDL_image.h
+            <code>
+            SDL_Surface *IMG_LoadXV_RW(SDL_RWops *src)
+            </code>
+            </p>
+            </remarks>
+            <example>
+            <code>
+            // load sample.xv into image
+            	SDL_Surface *image;
+            	SDL_RWops *rwop;
+            	rwop=SDL_RWFromFile("sample.xv", "rb");
+            	image=IMG_LoadXV_RW(rwop);
+            	if(!image) 
+            {
+            	printf("IMG_LoadXV_RW: %s\n", IMG_GetError());
+            	// handle error
+            }
+            </code>
+            </example>
+            <seealso cref="M:Tao.Sdl.SdlImage.IMG_LoadTyped_RW(System.IntPtr,System.Int32,System.String)"/>
+            <seealso cref="M:Tao.Sdl.SdlImage.IMG_isXV(System.IntPtr)"/>
         </member>
         <member name="M:Tao.Sdl.SdlImage.IMG_LoadPCX_RW(System.IntPtr)">
             <summary>
@@ -10924,6 +11253,21 @@
                 for Windows and Linux.
             </remarks>
         </member>
+        <member name="F:Tao.Sdl.SdlMixer.MIX_MAJOR_VERSION">
+            <summary>
+            Major Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MIX_MINOR_VERSION">
+            <summary>
+            Minor Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlMixer.MIX_PATCHLEVEL">
+            <summary>
+            Patch Version
+            </summary>
+        </member>
         <member name="F:Tao.Sdl.SdlMixer.MIX_CHANNELS">
             <summary>
             The default mixer has this many simultaneous mixing 
@@ -11018,6 +11362,27 @@
             <summary>
                 Prevents instantiation.
             </summary>
+        </member>
+        <member name="M:Tao.Sdl.SdlMixer.MIX_VERSION">
+            <summary>
+            This method can be used to fill a version structure with the compile-time
+            version of the SDL_mixer library.
+            </summary>
+            <returns>
+                This function returns a <see cref="T:Tao.Sdl.Sdl.SDL_version"/> struct containing the
+                compiled version number
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_mixer.h:
+                <code>#define SDL_MIX_VERSION(X)
+            {
+            (X)-&gt;major = SDL_MIX_MAJOR_VERSION;
+            (X)-&gt;minor = SDL_MIX_MINOR_VERSION;
+            (X)-&gt;patch = SDL_MIX_PATCHLEVEL;
+            }</code>
+                </p>
+            </remarks>
         </member>
         <member name="M:Tao.Sdl.SdlMixer.Mix_Linked_Version">
             <summary>
@@ -11353,6 +11718,16 @@
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_PlayMusic(System.IntPtr,System.Int32)"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_FadeInMusic(System.IntPtr,System.Int32,System.Int32)"/>
             <seealso cref="M:Tao.Sdl.SdlMixer.Mix_FadeInMusicPos(System.IntPtr,System.Int32,System.Int32,System.Double)"/> 
+        </member>
+        <member name="M:Tao.Sdl.SdlMixer.Mix_LoadMUS_RW(System.IntPtr)">
+            <summary>
+            Load a music file from an SDL_RWop object (Ogg and MikMod specific currently)
+            </summary>
+            <remarks>
+            <p>Binds to C-function in SDL_mixer.h
+            <code>Mix_Music *Mix_LoadMUS_RW(SDL_RWops *rw)
+            </code></p>
+            </remarks>
         </member>
         <member name="M:Tao.Sdl.SdlMixer.Mix_QuickLoad_WAV(System.IntPtr)">
             <summary>
@@ -13511,8 +13886,8 @@
             <remarks>
             This is the same as SDL_GetError, which returns the last error set 
             as a string which you may use to tell the user what happened when 
-            an error status has been returned from an SDL_ttf function call.
-            <p>Binds to C-function in SDL_ttf.h
+            an error status has been returned from an SDL_mixer function call.
+            <p>Binds to C-function in SDL_mixer.h
             <code>
             char *Mix_GetError() 
             </code>
@@ -13545,7 +13920,7 @@
              and the volume to use when mixing the sample. 
              <p>Struct in SDL_mixer.h
              <code>
-             typedef struct {
+             typedef struct Mix_Chunk {
             	int allocated;
             	Uint8 *abuf;
             	Uint32 alen;
@@ -13665,6 +14040,7 @@
         </member>
         <member name="T:Tao.Sdl.SdlTtf">
             <summary>
+            This library supports Sdl_ttf 2.0.8.
             This library is a wrapper around the excellent FreeType 1.2 library,
              available at: http://www.freetype.org
             <p>
@@ -13710,6 +14086,21 @@
                 for Windows and Linux.
             </remarks>
         </member>
+        <member name="F:Tao.Sdl.SdlTtf.TTF_MAJOR_VERSION">
+            <summary>
+            Major Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlTtf.TTF_MINOR_VERSION">
+            <summary>
+            Minor Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlTtf.TTF_PATCHLEVEL">
+            <summary>
+            Patch Version
+            </summary>
+        </member>
         <member name="F:Tao.Sdl.SdlTtf.TTF_STYLE_NORMAL">
             <summary>
             Used to indicate regular, normal, plain rendering style.
@@ -13754,6 +14145,27 @@
             <summary>
                 Prevents instantiation.
             </summary>
+        </member>
+        <member name="M:Tao.Sdl.SdlTtf.TTF_VERSION">
+            <summary>
+            This method can be used to fill a version structure with the compile-time
+            version of the SDL_ttf library.
+            </summary>
+            <returns>
+                This function returns a <see cref="T:Tao.Sdl.Sdl.SDL_version"/> struct containing the
+                compiled version number
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_ttf.h:
+                <code>#define SDL_TTF_VERSION(X)
+            {
+            (X)-&gt;major = SDL_TTF_MAJOR_VERSION;
+            (X)-&gt;minor = SDL_TTF_MINOR_VERSION;
+            (X)-&gt;patch = SDL_TTF_PATCHLEVEL;
+            }</code>
+                </p>
+            </remarks>
         </member>
         <member name="M:Tao.Sdl.SdlTtf.TTF_Linked_Version">
             <summary>
@@ -15179,6 +15591,21 @@
                 for Windows and Linux.
             </remarks>
         </member>
+        <member name="F:Tao.Sdl.SdlNet.SDL_NET_MAJOR_VERSION">
+            <summary>
+            Major Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlNet.SDL_NET_MINOR_VERSION">
+            <summary>
+            Minor Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlNet.SDL_NET_PATCHLEVEL">
+            <summary>
+            Patch Version
+            </summary>
+        </member>
         <member name="F:Tao.Sdl.SdlNet.INADDR_ANY">
             <summary>
             Used for listening on all network interfaces.
@@ -15210,6 +15637,43 @@
             <summary>
                 Prevents instantiation.
             </summary>
+        </member>
+        <member name="M:Tao.Sdl.SdlNet.SDL_NET_VERSION">
+            <summary>
+            This method can be used to fill a version structure with the compile-time
+            version of the SDL_net library.
+            </summary>
+            <returns>
+                This function returns a <see cref="T:Tao.Sdl.Sdl.SDL_version"/> struct containing the
+                compiled version number
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_net.h:
+                <code>#define SDL_NET_VERSION(X)
+            {
+            (X)-&gt;major = SDL_NET_MAJOR_VERSION;
+            (X)-&gt;minor = SDL_NET_MINOR_VERSION;
+            (X)-&gt;patch = SDL_NET_PATCHLEVEL;
+            }</code>
+                </p>
+            </remarks>
+        </member>
+        <member name="M:Tao.Sdl.SdlNet.SDLNet_Linked_Version">
+            <summary>
+                Using this you can compare the runtime version to the 
+            version that you compiled with.
+            </summary>
+            <returns>
+                This function gets the version of the dynamically 
+            linked SDL_net library in an <see cref="T:Tao.Sdl.Sdl.SDL_version"/> struct.
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in SDL_net.h:
+                <code>const SDL_version * SDLNet_Linked_Version(void)</code>
+                </p>
+            </remarks>
         </member>
         <member name="M:Tao.Sdl.SdlNet.SDLNet_Init">
             <summary>
@@ -15637,7 +16101,7 @@
             This routine is not used for server sockets.
             <p>Binds to C-function call in SDL_net.h:
                 <code>
-                extern DECLSPEC int SDLCALL SDLNet_TCP_Send(TCPsocket sock, void *data, int len)
+                extern DECLSPEC int SDLCALL SDLNet_TCP_Send(TCPsocket sock, const void *data, int len)
                 </code>
             </p>
             </remarks>
@@ -17128,6 +17592,21 @@
             for Windows and Linux.
             </remarks>
         </member>
+        <member name="F:Tao.Sdl.SdlGfx.SDL_GFXPRIMITIVES_MAJOR">
+            <summary>
+            Major Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlGfx.SDL_GFXPRIMITIVES_MINOR">
+            <summary>
+            Minor Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.SdlGfx.SDL_GFXPRIMITIVES_MICRO">
+            <summary>
+            Micro Version
+            </summary>
+        </member>
         <member name="F:Tao.Sdl.SdlGfx.SMOOTHING_OFF">
             <summary>
             
@@ -18230,6 +18709,22 @@
             <param name="length">Size of array</param>
             <returns>Returns 0 for success and -1 for Error.</returns>
         </member>
+        <member name="M:Tao.Sdl.SdlGfx.SDL_imageFilterAddUint(System.Byte[],System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            SDL_imageFilterAddUint: D = saturation255(S + (uint)C)
+            </summary>
+            <remarks>
+            Binds to C-function call in SDL_imageFilter.h.
+            <code>
+            int SDL_imageFilterAddUint(unsigned char *Src1, unsigned char *Dest, int length, unsigned int C)
+            </code>
+            </remarks>
+            <param name="Src1">Array of bytes</param>
+            <param name="Dest">Array of bytes returned after operation.</param>
+            <param name="C">int to add</param>
+            <param name="length">Size of array</param>
+            <returns>Returns 0 for success and -1 for Error.</returns>
+        </member>
         <member name="M:Tao.Sdl.SdlGfx.SDL_imageFilterAddByteToHalf(System.Byte[],System.Byte[],System.Int32,System.Byte)">
             <summary>
             SDL_imageFilterAddByteToHalf: D = saturation255(S/2 + C)
@@ -18262,6 +18757,22 @@
             <param name="length">Size of array</param>
             <returns>Returns 0 for success and -1 for Error.</returns>
         </member>
+        <member name="M:Tao.Sdl.SdlGfx.SDL_imageFilterSubUint(System.Byte[],System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            SDL_imageFilterSubUint: D = saturation0(S - (uint)C)
+            </summary>
+            <remarks>
+            Binds to C-function call in SDL_imageFilter.h.
+            <code>
+            int SDL_imageFilterSubUint(unsigned char *Src1, unsigned char *Dest, int length, unsigned int C)
+            </code>
+            </remarks>
+            <param name="Src1">Array of bytes</param>
+            <param name="Dest">Array of bytes returned after operation.</param>
+            <param name="C">int to add</param>
+            <param name="length">Size of array</param>
+            <returns>Returns 0 for success and -1 for Error.</returns>
+        </member>
         <member name="M:Tao.Sdl.SdlGfx.SDL_imageFilterShiftRight(System.Byte[],System.Byte[],System.Int32,System.Byte)">
             <summary>
             SDL_imageFilterShiftRight: D = saturation0(S >> N)
@@ -18270,6 +18781,22 @@
             Binds to C-function call in SDL_imageFilter.h.
             <code>
             int SDL_imageFilterShiftRight(unsigned char *Src1, unsigned char *Dest, int length, unsigned char C)
+            </code>
+            </remarks>
+            <param name="Src1">Array of bytes</param>
+            <param name="Dest">Array of bytes returned after operation.</param>
+            <param name="N">Shift</param>
+            <param name="length">Size of array</param>
+            <returns>Returns 0 for success and -1 for Error.</returns>
+        </member>
+        <member name="M:Tao.Sdl.SdlGfx.SDL_imageFilterShiftRightUint(System.Byte[],System.Byte[],System.Int32,System.Byte)">
+            <summary>
+            SDL_imageFilterShiftRightUint: D = saturation0((uint)S >> N)
+            </summary>
+            <remarks>
+            Binds to C-function call in SDL_imageFilter.h.
+            <code>
+            int SDL_imageFilterShiftRightUint(unsigned char *Src1, unsigned char *Dest, int length, unsigned char C)
             </code>
             </remarks>
             <param name="Src1">Array of bytes</param>
@@ -18335,6 +18862,22 @@
             Binds to C-function call in SDL_imageFilter.h.
             <code>
             int SDL_imageFilterShiftLeft(unsigned char *Src1, unsigned char *Dest, int length, unsigned char N)
+            </code>
+            </remarks>
+            <param name="Src1">Array of bytes</param>
+            <param name="Dest">Array of bytes returned after operation.</param>
+            <param name="N">Shift</param>
+            <param name="length">Size of array</param>
+            <returns>Returns 0 for success and -1 for Error.</returns>
+        </member>
+        <member name="M:Tao.Sdl.SdlGfx.SDL_imageFilterShiftLeftUint(System.Byte[],System.Byte[],System.Int32,System.Byte)">
+            <summary>
+            SDL_imageFilterShiftLeftUint: D = ((uint)S &lt;&lt; N)
+            </summary>
+            <remarks>
+            Binds to C-function call in SDL_imageFilter.h.
+            <code>
+            int SDL_imageFilterShiftLeftUint(unsigned char *Src1, unsigned char *Dest, int length, unsigned char N)
             </code>
             </remarks>
             <param name="Src1">Array of bytes</param>
@@ -18689,6 +19232,21 @@
             Filter info flag
             </summary>
         </member>
+        <member name="F:Tao.Sdl.Smpeg.SMPEG_MAJOR_VERSION">
+            <summary>
+            Major Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Smpeg.SMPEG_MINOR_VERSION">
+            <summary>
+            Minor Version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Smpeg.SMPEG_PATCHLEVEL">
+            <summary>
+            Patch Version
+            </summary>
+        </member>
         <member name="F:Tao.Sdl.Smpeg.SMPEG_ERROR">
             <summary>
             MPEG status code. 
@@ -18760,6 +19318,27 @@
             <returns>IntPtr to <see cref="T:Tao.Sdl.Smpeg.SMPEG_Filter"/></returns>
             <seealso cref="M:Tao.Sdl.Smpeg.SMPEGfilter_null"/>
             <seealso cref="M:Tao.Sdl.Smpeg.SMPEGfilter_bilinear"/>
+        </member>
+        <member name="M:Tao.Sdl.Smpeg.SMPEG_VERSION">
+            <summary>
+            This method can be used to fill a version structure with the compile-time
+            version of the SMPEG library.
+            </summary>
+            <returns>
+                This function returns a <see cref="T:Tao.Sdl.Smpeg.SMPEG_version"/> struct containing the
+                compiled version number
+            </returns>
+            <remarks>
+                <p>
+                Binds to C-function call in smpeg.h:
+                <code>#define SMPEG_VERSION(X)
+            {
+            (X)-&gt;major = SMPEG_MAJOR_VERSION;
+            (X)-&gt;minor = SMPEG_MINOR_VERSION;
+            (X)-&gt;patch = SMPEG_PATCHLEVEL;
+            }</code>
+                </p>
+            </remarks>
         </member>
         <member name="M:Tao.Sdl.Smpeg.SMPEG_new(System.String,Tao.Sdl.Smpeg.SMPEG_Info@,System.Int32)">
             <summary>
@@ -19289,6 +19868,32 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Tao.Sdl.Smpeg.SMPEG_version">
+            <summary>
+            Structure to hold version number of the SMPEG library
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Smpeg.SMPEG_version.major">
+            <summary>
+            Major version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Smpeg.SMPEG_version.minor">
+            <summary>
+            Minor version
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Smpeg.SMPEG_version.patch">
+            <summary>
+            Patch version
+            </summary>
+        </member>
+        <member name="M:Tao.Sdl.Smpeg.SMPEG_version.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Tao.Sdl.Smpeg.SMPEG_Info">
             <summary>
