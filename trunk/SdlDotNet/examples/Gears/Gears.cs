@@ -15,7 +15,7 @@ using System.Drawing;
 using System.IO;
 
 using SdlDotNet;
-//using SdlDotNet.OpenGl;
+using SdlDotNet.OpenGl;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.Gears
@@ -320,23 +320,23 @@ namespace SdlDotNet.Examples.Gears
 		}
 
 		Surface screen;
-		Font font;
-		//SurfaceGl surface;
-		string dataDirectory = @"Data/";
+		//Font font;
+		//SurfaceGl surfaceGl = new SurfaceGl();
+		//string dataDirectory = @"Data/";
 		// Path to Data directory
-		string filePath = @"../../";
-		string fontName = "FreeSans.ttf";
+		//string filePath = @"../../";
+		//string fontName = "FreeSans.ttf";
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public void Run()
 		{
-			if (File.Exists(dataDirectory + "FreeSans.ttf"))
-			{
-				filePath = "";
-			}
-			font = new Font(filePath + dataDirectory + fontName, 20);
+//			if (File.Exists(dataDirectory + "FreeSans.ttf"))
+//			{
+//				filePath = "";
+//			}
+			//font = new Font(filePath + dataDirectory + fontName, 20);
 			//surface = new SurfaceGl(font.Render(" ", Color.White));
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - Gears";
@@ -377,6 +377,9 @@ namespace SdlDotNet.Examples.Gears
 			}
 		}
 
+		//string phrase1 = "Hello world! ";
+		//int i;
+
 		private void Tick(object sender, TickEventArgs e)
 		{
 			Idle();
@@ -386,6 +389,8 @@ namespace SdlDotNet.Examples.Gears
 				Reshape();
 			}
 			Draw();
+			//surfaceGl.Surface = font.Render(phrase1 + i++, Color.White);
+			//surfaceGl.Draw(new Point(0, 0));
 		}
 
 		private void Quit(object sender, QuitEventArgs e)
