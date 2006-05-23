@@ -15,7 +15,7 @@ using System.Drawing;
 using System.IO;
 
 using SdlDotNet;
-using SdlDotNet.OpenGl;
+//using SdlDotNet.OpenGl;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.Gears
