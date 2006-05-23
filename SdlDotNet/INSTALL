@@ -93,3 +93,5 @@ SDL.NET Support for OSX is minimal. SDL.NET will build but needs work to run all
 # The Rectangles examples will run. Also the Gears, BounceSprites and BombRun examples run, but they will not react to any keyboard or mouse events.
 # The CDPlayer example requires that X11 is running.
 
+If you plan to compile SdlDotNet, you will have to run one of the scripts in the /scripts directory. There are scripts to create project files for Monodevelop.
+
