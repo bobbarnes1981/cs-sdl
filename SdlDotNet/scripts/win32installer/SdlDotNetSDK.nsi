@@ -37,6 +37,8 @@ CRCCheck on
 ;Variables
 
 Var STARTMENU_FOLDER
+Var file_handle
+Var filename
 ;--------------------------------
 ;Installer Pages
 
@@ -78,7 +80,7 @@ Var STARTMENU_FOLDER
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "..\..\bin\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_TYPE}-setup.exe"
-InstallDir "$PROGRAMFILES\SdlDotNet\sdk"
+InstallDir "$PROGRAMFILES\SdlDotNet"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
@@ -111,25 +113,25 @@ FunctionEnd
 Section "Source" SecSrc
   SetOverwrite ifnewer
   
-  SetOutPath "$INSTDIR\tools"
+  SetOutPath "$INSTDIR\sdk\tools"
   File /r ${PRODUCT_PATH}\tools\*.*
 
-  SetOutPath "$INSTDIR\tests"
+  SetOutPath "$INSTDIR\sdk\tests"
   File /r /x obj /x CVS ${PRODUCT_PATH}\tests\*.*
 
-  SetOutPath "$INSTDIR\src"
+  SetOutPath "$INSTDIR\sdk\src"
   File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\src\*.*
   
-  SetOutPath "$INSTDIR\extras"
+  SetOutPath "$INSTDIR\sdk\extras"
   File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\extras\*.*
   
-  SetOutPath "$INSTDIR\examples"
+  SetOutPath "$INSTDIR\sdk\examples"
   File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\examples\*.*
 
-  SetOutPath "$INSTDIR\scripts"
+  SetOutPath "$INSTDIR\sdk\scripts"
   File /r /x CVS ${PRODUCT_PATH}\scripts\*.*
 
-  SetOutPath "$INSTDIR"
+  SetOutPath "$INSTDIR\sdk"
   File ${PRODUCT_PATH}\*.*
 
   ;Store installation folder
@@ -137,20 +139,26 @@ Section "Source" SecSrc
   
 SectionEnd
 
-Section "Libraries" SecRuntime
+Section "Runtime" SecRuntime
   SetOverwrite ifnewer
-  SetOutPath "$INSTDIR\bin"
-  File /r /x CVS ${PRODUCT_PATH}\bin\*.*
+  SetOutPath "$INSTDIR\runtime\bin"
+  File /r /x CVS /x *Particles* /x *OpenGl* ${PRODUCT_PATH}\bin\assemblies\*.*
 
-  SetOutPath "$INSTDIR\lib"
-  File /r /x CVS ${PRODUCT_PATH}\lib\*.*
+  SetOutPath "$INSTDIR\runtime\lib"
+  File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
   
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
   
-  ;Read a value from an InstallOptions INI file
   SetOutPath "$SYSDIR"
   File /r /x CVS ${PRODUCT_PATH}\lib\win32deps\*.*
+  
+  Push "SdlDotNet"
+  Push $INSTDIR\runtime\bin
+  Call AddManagedDLL
+  Push "Tao.Sdl"
+  Push $INSTDIR\runtime\bin
+  Call AddManagedDLL
   
 SectionEnd
 
@@ -159,23 +167,24 @@ Section "Examples" SecExamples
 
   CreateDirectory "$SMPROGRAMS\SdlDotNet"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Examples"
-  SetOutPath "$INSTDIR\bin\examples"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\AudioExample.lnk" "$INSTDIR\bin\examples\AudioExample.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BombRun.lnk" "$INSTDIR\bin\examples\BombRun.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BounceSprites.lnk" "$INSTDIR\bin\examples\BounceSprites.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\bin\examples\CDPlayer.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Gears.lnk" "$INSTDIR\bin\examples\Gears.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\bin\examples\MoviePlayer.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\NeHe.lnk" "$INSTDIR\bin\examples\NeHe.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleExample.lnk" "$INSTDIR\bin\examples\ParticlesExample.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\OpenGlFont.lnk" "$INSTDIR\bin\examples\OpenGl.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\PhysFsTest.lnk" "$INSTDIR\bin\examples\PhysFsTest.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Rectangles.lnk" "$INSTDIR\bin\examples\Rectangles.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\RedBook.lnk" "$INSTDIR\bin\examples\RedBook.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SimpleGame.lnk" "$INSTDIR\bin\examples\SimpleGame.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SnowDemo.lnk" "$INSTDIR\bin\examples\SnowDemo.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SpriteGuiDemos.lnk" "$INSTDIR\bin\examples\SpriteGuiDemos.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Triad.lnk" "$INSTDIR\bin\examples\Triad.exe"
+  SetOutPath "$INSTDIR\sdk\bin\examples"
+  File /r /x CVS ${PRODUCT_PATH}\bin\examples\*.*
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\AudioExample.lnk" "$INSTDIR\sdk\bin\examples\AudioExample.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BombRun.lnk" "$INSTDIR\sdk\bin\examples\BombRun.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BounceSprites.lnk" "$INSTDIR\sdk\bin\examples\BounceSprites.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\sdk\bin\examples\CDPlayer.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Gears.lnk" "$INSTDIR\sdk\bin\examples\Gears.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\sdk\bin\examples\MoviePlayer.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\NeHe.lnk" "$INSTDIR\sdk\bin\examples\NeHe.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleExample.lnk" "$INSTDIR\sdk\bin\examples\ParticlesExample.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\OpenGlFont.lnk" "$INSTDIR\sdk\bin\examples\OpenGlFont.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\PhysFsTest.lnk" "$INSTDIR\sdk\bin\examples\PhysFsTest.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Rectangles.lnk" "$INSTDIR\sdk\bin\examples\Rectangles.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\RedBook.lnk" "$INSTDIR\sdk\bin\examples\RedBook.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SimpleGame.lnk" "$INSTDIR\sdk\bin\examples\SimpleGame.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SnowDemo.lnk" "$INSTDIR\sdk\bin\examples\SnowDemo.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SpriteGuiDemos.lnk" "$INSTDIR\sdk\bin\examples\SpriteGuiDemos.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Triad.lnk" "$INSTDIR\sdk\bin\examples\Triad.exe"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Particles.chm"
@@ -210,7 +219,7 @@ LangString TEXT_IO_SUBTITLE ${LANG_ENGLISH} "SdlDotNet Installation Options."
 LangString DESC_SecExamples ${LANG_ENGLISH} "Installs examples using various features of SdlDotNet."
 LangString DESC_SecSrc ${LANG_ENGLISH} "Installs the source code."
 LangString DESC_SecDocs ${LANG_ENGLISH} "Installs documentation"
-LangString DESC_SecRuntime ${LANG_ENGLISH} "Installs the libaries into the SdlDotNet directory. It does not install them into the GAC."
+LangString DESC_SecRuntime ${LANG_ENGLISH} "Installs the runtime libaries."
 
 ;Assign language strings to sections
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -237,6 +246,19 @@ Section -Post
 SectionEnd
 
 Section Uninstall
+  DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
+  DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+
+  Push "SdlDotNet"
+  Push $INSTDIR\runtime\bin\assemblies
+  Call un.DeleteManagedDLLKey
+  
+  Push "Tao.Sdl"
+  Push $INSTDIR\runtime\bin\assemblies
+  Call un.DeleteManagedDLLKey
+
+  RMDir /r "$INSTDIR"
+
   Delete "$SMPROGRAMS\SdlDotNet\*.*"
 
   ; set OutPath to somewhere else because the current working directory cannot be deleted!
@@ -323,3 +345,49 @@ Function IsSupportedWindowsVersion
    Exch $R0
 
 FunctionEnd
+
+Function GACInstall
+  FindFirst $file_handle $filename $INSTDIR\runtime\bin\*.dll
+  loop:
+	StrCmp $filename "" done
+	nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /i "$INSTDIR\runtime\bin\$filename" /f'
+	FindNext $file_handle $filename
+  	Goto loop
+  done:
+
+FunctionEnd
+
+Function un.GACUnInstall
+  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "Tao.Sdl"'
+  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet"'
+
+FunctionEnd
+
+Function un.DeleteManagedDLLKey
+  Exch $R0
+  Exch
+  Exch $R1
+ 
+ Call un.GACUnInstall
+  DeleteRegKey HKLM "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
+  DeleteRegKey HKCU "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
+  DeleteRegKey HKLM "SOFTWARE\Microsoft\VisualStudio\7.1\AssemblyFolders\$R1"
+ 
+  Pop $R1
+  Pop $R0
+FunctionEnd
+
+Function AddManagedDLL
+  Exch $R0
+  Exch
+  Exch $R1
+ 
+  call GACInstall
+  WriteRegStr HKLM "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" "" "$R0"
+  WriteRegStr HKCU "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" "" "$R0"
+  WriteRegStr HKLM "SOFTWARE\Microsoft\VisualStudio\7.1\AssemblyFolders\$R1" "" "$R0"
+ 
+  Pop $R1
+  Pop $R0
+FunctionEnd
+
