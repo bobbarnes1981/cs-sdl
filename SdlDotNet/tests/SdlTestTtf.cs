@@ -14,6 +14,7 @@ namespace SdlDotNet.Tests
 	public class SdlTestTtf
 	{
 		//int init;
+		Font font;
 		int flags;
 		int bpp;
 		int width;
@@ -34,8 +35,7 @@ namespace SdlDotNet.Tests
 		public void Init()
 		{
 			this.Quit();
-			SdlTtf.TTF_Init();
-			Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
+			font = new Font(@"../../FreeSans.ttf", 12);
 			flags = (Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT);
 			bpp = 16;
 			width = 640;
@@ -616,6 +616,24 @@ namespace SdlDotNet.Tests
 			Sdl.SDL_UpdateRect(surfacePtr, 0,0,400,400);
 			Thread.Sleep(sleepTime);
 			this.Quit();
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		[Test]
+		public void Bold()
+		{
+			Assert.IsFalse(font.Bold);
+			Console.WriteLine("1:" + font.Bold);
+			font.Bold = false;
+			Console.WriteLine("2:" + font.Bold);
+			Assert.IsFalse(font.Bold);
+			font.Bold = true;
+			Console.WriteLine("3:" + font.Bold);
+			Assert.IsTrue(font.Bold);
+			font.Bold = false;
+			Console.WriteLine("4:" + font.Bold);
+			Assert.IsFalse(font.Bold);
 		}
 	}
 	#endregion SDL_ttf.h
