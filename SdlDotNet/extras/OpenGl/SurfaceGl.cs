@@ -55,7 +55,7 @@ namespace SdlDotNet.OpenGl
 		/// <summary>
 		/// 
 		/// </summary>
-		public int TextureID
+		public int TextureId
 		{
 			get
 			{
@@ -95,8 +95,12 @@ namespace SdlDotNet.OpenGl
 		/// <summary>
 		/// 
 		/// </summary>
-		public Surface ResizeSurface(Surface surface)
+		public static Surface ResizeSurface(Surface surface)
 		{
+			if (surface == null)
+			{
+				throw new ArgumentNullException("surface");
+			}
 			return surface.Resize(new Size(NextPowerOfTwo(surface.Width), NextPowerOfTwo(surface.Height)));
 		}
 
@@ -125,9 +129,9 @@ namespace SdlDotNet.OpenGl
 			}
 			set
 			{
-				this.surface = this.ResizeSurface(value);
+				this.surface = ResizeSurface(value);
 				this.textureImage = this.surface.Bitmap;
-				this.textureID = this.TextureID;
+				this.textureID = this.TextureId;
 			}
 		}
 

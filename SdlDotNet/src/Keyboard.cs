@@ -57,7 +57,7 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// 
+		/// Determines if Key Repeating is turned on.
 		/// </summary>
 		public static bool KeyRepeat
 		{
@@ -70,6 +70,20 @@ namespace SdlDotNet
 				else
 				{
 					Sdl.SDL_EnableKeyRepeat(0, Sdl.SDL_DEFAULT_REPEAT_INTERVAL);
+				}
+			}
+			get
+			{
+				int delay;
+				int rate;
+				Sdl.SDL_GetKeyRepeat(out rate, out delay);
+				if (delay != 0)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
 				}
 			}
 		}
