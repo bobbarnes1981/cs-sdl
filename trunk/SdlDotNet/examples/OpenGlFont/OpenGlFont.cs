@@ -30,7 +30,7 @@ namespace SdlDotNet.Examples.OpenGlFont
 	/// <summary>
 	/// 
 	/// </summary>
-	public class OpenGlFont
+	public class OpenGlFont : IDisposable
 	{
 		int width = 640;
 		int height = 480;
@@ -41,7 +41,6 @@ namespace SdlDotNet.Examples.OpenGlFont
 		string phrase1 = "Hello world! ";
 		string phrase2 = "This is a Truetype font ";
 		string phrase3 = "On an OpenGl Surface ";
-		Surface screen;
 		Font font;
 		// Angle For The Triangle ( NEW )
 		float rtri;
@@ -73,7 +72,7 @@ namespace SdlDotNet.Examples.OpenGlFont
 			}
 			Video.WindowIcon();
 			Video.WindowCaption = "SDL.NET - OpenGlFont Example";
-			screen = Video.SetVideoModeWindowOpenGL(this.width, this.height);
+			Video.SetVideoModeWindowOpenGL(this.width, this.height);
 			Events.Quit += new QuitEventHandler(this.Quit);
 			Events.Tick += new TickEventHandler(this.Tick);
 			font = new Font(filePath + dataDirectory + fontName, 18);
@@ -295,5 +294,55 @@ namespace SdlDotNet.Examples.OpenGlFont
 		{
 			Events.QuitApplication();
 		}
+
+		#region IDisposable Members
+
+		private bool disposed;
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Dispose()
+		{
+			this.Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		public void Close() 
+		{
+			Dispose();
+		}
+
+		/// <summary>
+		/// Destroy object
+		/// </summary>
+		~OpenGlFont() 
+		{
+			Dispose(false);
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					if (this.font != null)
+					{
+						this.font.Dispose();
+						this.font = null;
+					}
+				}
+				this.disposed = true;
+			}
+		}
+
+		#endregion
 	}
 }
