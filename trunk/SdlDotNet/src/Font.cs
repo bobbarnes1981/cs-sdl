@@ -192,7 +192,10 @@ namespace SdlDotNet
 				else
 				{
 					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
-					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style ^ (int) Styles.Bold); 
+					if ((int)(style & Styles.Bold) != (int) SdlFlag.FalseValue)
+					{
+						SdlTtf.TTF_SetFontStyle(this.Handle, (int) style ^ (int) Styles.Bold); 
+					}
 					GC.KeepAlive(this);
 				}
 			}
@@ -227,7 +230,10 @@ namespace SdlDotNet
 				else
 				{
 					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
-					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style ^ (int) Styles.Italic); 
+					if ((int)(style & Styles.Italic) != (int) SdlFlag.FalseValue)
+					{
+						SdlTtf.TTF_SetFontStyle(this.Handle, (int) style ^ (int) Styles.Italic); 
+					}
 					GC.KeepAlive(this);
 				}
 			}
@@ -262,7 +268,10 @@ namespace SdlDotNet
 				else
 				{
 					Styles style = (Styles)SdlTtf.TTF_GetFontStyle(this.Handle);
-					SdlTtf.TTF_SetFontStyle(this.Handle, (int) style ^ (int) Styles.Underline); 
+					if ((int)(style & Styles.Underline) != (int) SdlFlag.FalseValue)
+					{
+						SdlTtf.TTF_SetFontStyle(this.Handle, (int) style ^ (int) Styles.Underline); 
+					}
 					GC.KeepAlive(this);
 				}
 			}
