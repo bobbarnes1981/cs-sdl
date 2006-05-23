@@ -307,6 +307,7 @@ namespace SdlDotNet.Tests
 //			Assert.AreEqual(resultSetPalette, 0); 
 //			Sdl.SDL_FreeSurface(surfacePtr);
 //		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -314,15 +315,13 @@ namespace SdlDotNet.Tests
 		public void ListModes()
 		{
 			Sdl.SDL_Quit();
-			Sdl.SDL_Init(Sdl.SDL_INIT_VIDEO);
-			IntPtr format = IntPtr.Zero;
-			Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, Sdl.SDL_FULLSCREEN|Sdl.SDL_HWSURFACE);
-			Console.WriteLine("ListModes: " + rects.Length);
-			for (int i=0; i<rects.Length; i++)
+			Size[] sizes = Video.ListModes();
+			Console.WriteLine("ListModes: " + sizes.Length);
+			for (int i=0; i<sizes.Length; i++)
 			{
-				Console.WriteLine("Mode(" + i + "): " + rects[ i ].ToString());
+				Console.WriteLine("Mode(" + i + "): " + sizes[ i ].ToString());
 			}
-			Assert.IsTrue(rects.Length > 5);
+			Assert.IsTrue(sizes.Length > 5);
 		}
 //		/// <summary>
 //		/// 

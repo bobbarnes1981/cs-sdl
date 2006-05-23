@@ -158,17 +158,12 @@ namespace SdlDotNet
 		/// <summary>
 		/// Returns array of modes supported
 		/// </summary>
-		/// <param name="fullscreen">Fullscreen mode</param>
 		/// <returns>Array of Size structs</returns>
-		public static Size[] ListModes(bool fullscreen)
+		public static Size[] ListModes()
 		{
-			int flags = (int)VideoModes.None;
-			if (fullscreen)
-			{
-				flags = (int)VideoModes.Fullscreen;
-			}
+			VideoModes flags = VideoModes.Fullscreen;
 			IntPtr format = IntPtr.Zero;
-			Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, flags);
+			Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, (int)flags);
 			Size[] size = new Size[rects.Length];
 			for (int i=0; i<rects.Length; i++)
 			{
