@@ -1,12 +1,31 @@
 SDL.NET is a set of object-oriented CLS-compliant .NET bindings for the SDL multimedia library that provides high-level access to audio, keyboard, mouse, joystick, TrueType fonts, various image formats, sound mixing, MPEG-1 movies, 2D video framebuffer and 3D hardware via OpenGL.
 
-This release fixes numerous bugs in the library including a SurfaceControl bug where the Surface would be offset by a few pixels. The Windows installer has been separated into an SDK and a Runtime installer. There were numerous improvements to the Sound and Music classes. The demos work better under Linux. The build process has been updated to the latest version of Prebuild so creating project files for Sharpdevelop and Monodevelop is easier.
+This release uses the latest SDL library release (1.2.10). The Video class can now use the current desktop resolution to create VideoModes. The VideoInfo class can now query the current resolution. New OpenGL integration with a demo was added. The Keyboard class can retrieve Unicode characters. Many bug fixes.
 
 Documentation and downloads are available at http://cs-sdl.sourceforge.net.
 
 A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changelog
 
 SDL.NET is licensed under the LGPL.
+
+===4.0.4===
+David Hudson 24 May 2006
+* Updated to SDL 1.2.10, SDL_image 1.2.5, SDL_mixer 1.2.7, SDL_ttf 2.0.8, smpeg 0.4.5.
+* Updated to latest version of Tao.Sdl.
+* Fixed problem with Font.Bold, Font.Italic and Font.Underline properties not being correctly set. (Thanks PaulA)
+* Added a new library: SdlDotNet.OpenGl for drawing 2D surfaces to and OpenGl screen.
+* Added the OpenGlFont example which shows text being drawn over a spinning cube.
+* Updated to latest versions of prebuild, NSIS, NUnit.
+* Added new Video.SetVideoMode overloads that default to current desktop resolution.
+* Added ability to retrieve the Unicode character pressed on the keyboard.
+* Added Get to KeyRepeat property.
+* Added Surface.Resize.
+* Video.GrabInput is now a property.
+* Fixed bug with Video.Icon that was causing the NeHe and Redbook examples to fail.
+* VideoInfo now holds the current resolution's height and width.
+* SDK installer now includes the runtimes as well.
+* Fixed bug Video.ListModes (thanks dogwatch)
+* Added some more Nunit tests
 
 ===4.0.3===
 David Hudson (3 Mar 2006.)
