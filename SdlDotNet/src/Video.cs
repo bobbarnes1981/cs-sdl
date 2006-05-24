@@ -154,7 +154,6 @@ namespace SdlDotNet
 				(int)flags);
 		}
 
-
 		/// <summary>
 		/// Returns array of modes supported
 		/// </summary>
