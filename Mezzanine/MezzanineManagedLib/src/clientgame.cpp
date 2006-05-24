@@ -3,6 +3,7 @@
 #include "cube.h"
 #using <mscorlib.dll>
 using namespace MezzanineLib;
+using namespace MezzanineLib::Game;
 using namespace MezzanineLib::ClientServer;
 
 
@@ -74,11 +75,11 @@ void spawnstate(dynent *d)              // reset player state not persistent acr
             if(m_tarena)
             {
                 int gun1 = rnd(4)+1;
-                baseammo(d->gunselect = gun1);
+				Entities::BaseAmmo(d->gunselect = gun1);
                 for(;;)
                 {
                     int gun2 = rnd(4)+1;
-                    if(gun1!=gun2) { baseammo(gun2); break; };
+                    if(gun1!=gun2) { Entities::BaseAmmo(gun2); break; };
                 };
             }
             else if(m_arena)    // insta arena
@@ -87,7 +88,7 @@ void spawnstate(dynent *d)              // reset player state not persistent acr
             }
             else // efficiency
             {
-                loopi(4) baseammo(i+1);
+                loopi(4) Entities::BaseAmmo(i+1);
                 d->gunselect = Gun::GUN_CG;
             };
             d->ammo[Gun::GUN_CG] /= 2;
