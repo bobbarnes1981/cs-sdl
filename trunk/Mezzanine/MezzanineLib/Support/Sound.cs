@@ -101,10 +101,10 @@ namespace MezzanineLib.Support
 			SdlDotNet.Music.Stop();
 			if(soundVolume!= 0 && musicVolume!=0)
 			{
-				string soundName = @"packages/" + filename;
-				music = new Music(soundName);
-				music.Play(true);
-				SdlDotNet.Music.Volume = musicVolume;
+//				string soundName = @"packages/" + filename;
+//				music = new Music(soundName);
+//				music.Play(true);
+//				SdlDotNet.Music.Volume = musicVolume;
 			}
 		}
 

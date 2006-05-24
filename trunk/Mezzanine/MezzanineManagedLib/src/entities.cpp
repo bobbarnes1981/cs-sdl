@@ -58,27 +58,12 @@ void renderentities()
     };
 };
 
-struct itemstat { int add, max, sound; } itemstats[] =
-{
-     10,    50, Sounds::S_ITEMAMMO,
-     20,   100, Sounds::S_ITEMAMMO,
-      5,    25, Sounds::S_ITEMAMMO,
-      5,    25, Sounds::S_ITEMAMMO,
-     25,   100, Sounds::S_ITEMHEALTH,
-     50,   200, Sounds::S_ITEMHEALTH,
-    100,   100, Sounds::S_ITEMARMOUR,
-    150,   150, Sounds::S_ITEMARMOUR,
-  20000, 30000, Sounds::S_ITEMPUP,
-};
-
-void baseammo(int gun) { player1->ammo[gun] = itemstats[gun-1].add*2; };
-
 // these two functions are called when the server acknowledges that you really
 // picked up the item (in multiplayer someone may grab it before you).
 
 void radditem(int i, int &v)
 {
-    itemstat &is = itemstats[ents[i].type-StaticEntity::I_SHELLS];
+	ItemStat &is = Entities::itemstats[ents[i].type-StaticEntity::I_SHELLS];
     ents[i].spawned = false;
     v += is.add;
     if(v>is.max) v = is.max;
@@ -117,7 +102,7 @@ void realpickup(int n, dynent *d)
 
 void additem(int i, int &v, int spawnsec)
 {
-    if(v<itemstats[ents[i].type-StaticEntity::I_SHELLS].max)                              // don't pick up if not needed
+	if(v<Entities::itemstats[ents[i].type-StaticEntity::I_SHELLS].max)                              // don't pick up if not needed
     {
         addmsg(1, 3, NetworkMessages::SV_ITEMPICKUP, i, m_classicsp ? 100000 : spawnsec);    // first ask the server for an ack
         ents[i].spawned = false;                                            // even if someone else gets it first

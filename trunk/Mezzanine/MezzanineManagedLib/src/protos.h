@@ -231,7 +231,7 @@ extern DECLSPEC void CDECL renderentities();
 extern DECLSPEC void CDECL resetspawns();
 extern DECLSPEC void CDECL setspawn(uint i, bool on);
 extern DECLSPEC void CDECL teleport(int n, dynent *d);
-extern DECLSPEC void CDECL baseammo(int gun);
+//extern DECLSPEC void CDECL baseammo(int gun);
 
 #ifdef __cplusplus
 }

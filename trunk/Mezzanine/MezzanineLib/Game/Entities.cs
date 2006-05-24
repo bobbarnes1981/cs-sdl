@@ -43,11 +43,58 @@ namespace MezzanineLib.Game
 	/// <summary>
 	/// 
 	/// </summary>
+	public struct ItemStat 
+	{ 
+		/// <summary>
+		/// 
+		/// </summary>
+		public int add;
+		/// <summary>
+		/// 
+		/// </summary>
+		public int max;
+		/// <summary>
+		/// 
+		/// </summary>
+		public int sound; 
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="add"></param>
+		/// <param name="max"></param>
+		/// <param name="sound"></param>
+		public ItemStat(int add, int max, int sound)
+		{
+			this.add = add;
+			this.max = max;
+			this.sound = sound;
+		}
+	} 
+	/// <summary>
+	/// 
+	/// </summary>
 	public sealed class Entities
 	{
 		public static int triggertime = 0;
 
 		public static string[] EntityModelNames = new string[10];
+
+		public static ItemStat[] itemstats = new ItemStat[9];
+
+		
+//		itemstats[] =
+//	{
+//		10,    50, Sounds::S_ITEMAMMO,
+//		20,   100, Sounds::S_ITEMAMMO,
+//		5,    25, Sounds::S_ITEMAMMO,
+//		5,    25, Sounds::S_ITEMAMMO,
+//		25,   100, Sounds::S_ITEMHEALTH,
+//		50,   200, Sounds::S_ITEMHEALTH,
+//		100,   100, Sounds::S_ITEMARMOUR,
+//		150,   150, Sounds::S_ITEMARMOUR,
+//		20000, 30000, Sounds::S_ITEMPUP,
+//	};
 		 
 		static Entities()
 		{
@@ -61,6 +108,24 @@ namespace MezzanineLib.Game
 			EntityModelNames[7] = "y_armour";
 			EntityModelNames[8] = "quad";
 			EntityModelNames[9] = "teleporter";
+			itemstats[0] = new ItemStat(10,50, (int)Sounds.S_ITEMAMMO);
+			itemstats[1] = new ItemStat(20,100, (int)Sounds.S_ITEMAMMO);
+			itemstats[2] = new ItemStat(5,25, (int)Sounds.S_ITEMAMMO);
+			itemstats[3] = new ItemStat(5,25, (int)Sounds.S_ITEMAMMO);
+			itemstats[4] = new ItemStat(25,100, (int)Sounds.S_ITEMHEALTH);
+			itemstats[5] = new ItemStat(50,200, (int)Sounds.S_ITEMHEALTH);
+			itemstats[6] = new ItemStat(100,100, (int)Sounds.S_ITEMARMOUR);
+			itemstats[7] = new ItemStat(150,150, (int)Sounds.S_ITEMARMOUR);
+			itemstats[8] = new ItemStat(20000,30000, (int)Sounds.S_ITEMPUP);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="gun"></param>
+		public static void BaseAmmo(int gun) 
+		{ 
+			GameInit.Player1.ammo[gun] = itemstats[gun-1].add*2; 
 		}
 		}
 }
