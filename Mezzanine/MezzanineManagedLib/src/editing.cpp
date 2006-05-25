@@ -145,8 +145,13 @@ void cursorupdate()                                     // called every frame fr
 		if(s->tag) Render::RenderExtras::LineStyle(GRIDW, 0xFF, 0x40, 0x40);
 		else if(s->type==BlockTypes::FHF || s->type==BlockTypes::CHF) Render::RenderExtras::LineStyle(GRIDW, 0x80, 0xFF, 0x80);
         else Render::RenderExtras::LineStyle(GRIDW, 0x80, 0x80, 0x80);
-        block b = { ix, iy, 1, 1 };
-        box(b, h1, h2, h3, h4);
+		block b= { ix, iy, 1, 1 };
+		/*b.x = ix;
+		b.y = iy;
+		b.xs = 1;
+		b.ys = 1;*/
+        //Render::RenderExtras::Box(b, h1, h2, h3, h4);
+		box(b, h1, h2, h3, h4);
 		Render::RenderExtras::LineStyle(GRID8, 0x40, 0x40, 0xFF);
         if(!(ix&GRIDM))   Render::RenderExtras::Line(ix,   iy,   h1, ix,   iy+1, h4);
         if(!(ix+1&GRIDM)) Render::RenderExtras::Line(ix+1, iy,   h2, ix+1, iy+1, h3);
@@ -159,7 +164,13 @@ void cursorupdate()                                     // called every frame fr
         float ih = sheight(s, s, z);
 		Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0xFF, 0xFF);
         block b = { Editing::cx, Editing::cy, 1, 1 };
-        box(b, ih, sheight(s, SWS(s,1,0,GameInit::SSize), z), sheight(s, SWS(s,1,1,GameInit::SSize), z), sheight(s, SWS(s,0,1,GameInit::SSize), z));
+		/*Block b;
+		b.x = Editing::cx;
+		b.y = Editing::cy;
+		b.xs = 1;
+		b.ys = 1;*/
+		//Render::RenderExtras::Box(b, ih, sheight(s, SWS(s,1,0,GameInit::SSize), z), sheight(s, SWS(s,1,1,GameInit::SSize), z), sheight(s, SWS(s,0,1,GameInit::SSize), z));
+		box(b, ih, sheight(s, SWS(s,1,0,GameInit::SSize), z), sheight(s, SWS(s,1,1,GameInit::SSize), z), sheight(s, SWS(s,0,1,GameInit::SSize), z));
 		Render::RenderExtras::LineStyle(GRIDS, 0xFF, 0x00, 0x00);
         Render::RenderExtras::Dot(Editing::cx, Editing::cy, ih);
         Editing::ch = (int)ih;

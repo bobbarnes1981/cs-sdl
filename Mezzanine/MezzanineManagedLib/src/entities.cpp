@@ -205,16 +205,6 @@ void checkitems()
     };
 };
 
-void checkquad(int time)
-{
-    if(player1->quadmillis && (player1->quadmillis -= time)<0)
-    {
-        player1->quadmillis = 0;
-        playsoundc(Sounds::S_PUPOUT);
-        conoutf("quad damage is over");
-    };
-};
-
 void putitems(uchar *&p)            // puts items in network stream and also spawns them locally
 {
     loopv(ents) if((ents[i].type>=StaticEntity::I_SHELLS && ents[i].type<=StaticEntity::I_QUAD) || ents[i].type==StaticEntity::CARROT)
