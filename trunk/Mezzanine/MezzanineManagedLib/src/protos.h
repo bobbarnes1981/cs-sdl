@@ -224,14 +224,12 @@ extern DECLSPEC void CDECL endsp(bool allkilled);
 // entities
 extern DECLSPEC void CDECL renderents();
 extern DECLSPEC void CDECL putitems(uchar *&p);
-extern DECLSPEC void CDECL checkquad(int time);
 extern DECLSPEC void CDECL checkitems();
 extern DECLSPEC void CDECL realpickup(int n, dynent *d);
 extern DECLSPEC void CDECL renderentities();
 extern DECLSPEC void CDECL resetspawns();
 extern DECLSPEC void CDECL setspawn(uint i, bool on);
 extern DECLSPEC void CDECL teleport(int n, dynent *d);
-//extern DECLSPEC void CDECL baseammo(int gun);
 
 #ifdef __cplusplus
 }

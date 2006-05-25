@@ -250,5 +250,24 @@ namespace MezzanineLib.Render
 			}
 			lastsky = baseName;
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="b"></param>
+		/// <param name="z1"></param>
+		/// <param name="z2"></param>
+		/// <param name="z3"></param>
+		/// <param name="z4"></param>
+		public static void Box(ref Block b, float z1, float z2, float z3, float z4)
+		{
+			Gl.glBegin(Gl.GL_POLYGON);
+			Gl.glVertex3f((float)b.x,      z1, (float)b.y);
+			Gl.glVertex3f((float)b.x+b.xs, z2, (float)b.y);
+			Gl.glVertex3f((float)b.x+b.xs, z3, (float)b.y+b.ys);
+			Gl.glVertex3f((float)b.x,      z4, (float)b.y+b.ys);
+			Gl.glEnd();
+			RenderGl.XtraVerts += 4;
+		}
 	}
 }

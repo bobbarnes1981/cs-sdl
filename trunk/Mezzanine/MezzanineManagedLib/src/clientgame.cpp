@@ -222,7 +222,7 @@ void updateworld(int millis)        // main game update loop
         GameInit::CurrentTime = millis - GameInit::LastMillis;
         if(ClientGame::sleepwait && GameInit::LastMillis>ClientGame::sleepwait) { ClientGame::sleepwait = 0; execute(sleepcmd); };
 		Game::Physics::PhysicsFrame();
-        checkquad(GameInit::CurrentTime);
+		Entities::CheckQuad(GameInit::CurrentTime);
 		if(m_arena) arenarespawn();
         moveprojectiles((float)GameInit::CurrentTime);
         demoplaybackstep();
