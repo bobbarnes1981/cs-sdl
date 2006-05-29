@@ -407,6 +407,17 @@ namespace SdlDotNet.Tests
 //			Assert.AreEqual(a, 255);
 //			Sdl.SDL_FreeSurface(surfacePtr);
 //		}
+		/// <summary>
+		/// 
+		/// </summary>
+		[Test]
+		public void WindowHandle()
+		{
+			Video.Close();
+			VideoSetup();
+			IntPtr ptr = Video.WindowHandle;
+			Console.WriteLine(ptr);
+		}
 
 		/// <summary>
 		/// 
