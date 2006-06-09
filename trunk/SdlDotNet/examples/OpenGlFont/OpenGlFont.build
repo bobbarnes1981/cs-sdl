@@ -19,6 +19,7 @@
 		<include name="${native.sdl}.dll"/>
 		<include name="Tao.OpenGl.dll"/>
 		<include name="Tao.OpenGl.Glu.dll"/>
+		<include name="${Tao.OpenGl.Ext}.dll"/>
 	    </fileset>
 	</copy>
 	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${project::get-base-directory()}/${build.dir}/${project::get-name()}.exe" win32icon="App.ico" keyfile="../../src/SdlDotNet.snk">
@@ -34,6 +35,7 @@
 		<include name="${native.sdl}.dll"/>
 		<include name="Tao.OpenGl.dll"/>
 		<include name="Tao.OpenGl.Glu.dll"/>
+		<include name="${Tao.OpenGl.Ext}.dll"/>
 		<include name="${framework::get-assembly-directory(framework::get-target-framework())}/System.Drawing.dll"/>
 	    </references>
 	</csc>
