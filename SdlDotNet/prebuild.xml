@@ -361,7 +361,6 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="nunit.framework" localCopy="true" path="..\\..\\lib"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>

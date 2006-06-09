@@ -39,11 +39,9 @@ using System.IO;
 [assembly: AssemblyCompany("The SDL.NET Project")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
-[assembly: AssemblyVersion("4.0.4.0")]
+[assembly: AssemblyVersion("1.0.0.*")]
 [assembly: AssemblyCulture("")]		
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
-[assembly: AssemblyFileVersion("4.0.4.0")]
-[assembly: AssemblyInformationalVersion("4.0.4.0")]
 
 //
 // Version information for an assembly consists of the following four values:
@@ -90,4 +88,4 @@ using System.IO;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile(@"../../../../src/SdlDotNet.snk")]
+//[assembly: AssemblyKeyFile(@"../../../../src/SdlDotNet.snk")]
