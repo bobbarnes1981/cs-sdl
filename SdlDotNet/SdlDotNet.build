@@ -37,6 +37,7 @@
     <property name="Particles" value="Particles" />
     <property name="OpenGl" value="OpenGl" />
     <property name="Tao.OpenGl" value="Tao.OpenGl" />
+    <property name="Tao.OpenGl.Ext" value="Tao.OpenGl.ExtensionLoader" />
 
     <!-- default configuration -->
     <property name="project.config" value="Debug" /> <!-- Debug|Release -->

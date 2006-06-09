@@ -13,6 +13,7 @@
 	    <fileset basedir="${project.main.dir}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
 		<include name="${Tao.OpenGl}.dll"/>
+		<include name="${Tao.OpenGl.Ext}.dll"/>
 	    </fileset>
 	</copy>
 	<csc target="library" warnaserror="true" unsafe="false" debug="${build.debug}" output="${project::get-base-directory()}/${build.dir}/${project::get-name()}.dll" doc="${project::get-base-directory()}/${build.dir}/${project::get-name()}.xml" keyfile="../../src/SdlDotNet.snk">
@@ -23,6 +24,7 @@
 		<include name="${project.name}.dll"/>
 		<include name="${native.sdl}.dll"/>
 		<include name="${Tao.OpenGl}.dll"/>
+		<include name="${Tao.OpenGl.Ext}.dll"/>
 		<include name="${framework::get-assembly-directory(framework::get-target-framework())}/System.Drawing.dll"/>
 	    </references>
 	</csc>
