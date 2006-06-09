@@ -42,8 +42,8 @@ using System.IO;
 [assembly: AssemblyVersion("4.0.4.0")]
 [assembly: AssemblyCulture("")]		
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
-[assembly: AssemblyFileVersion("4.0.4.0")]
-[assembly: AssemblyInformationalVersion("4.0.4.0")]
+[assembly: AssemblyFileVersion("4.0.5.0")]
+[assembly: AssemblyInformationalVersion("4.0.5.0")]
 
 //
 // Version information for an assembly consists of the following four values:
@@ -90,4 +90,4 @@ using System.IO;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile(@"../../SdlDotNet.snk")]
+//[assembly: AssemblyKeyFile(@"../../SdlDotNet.snk")]

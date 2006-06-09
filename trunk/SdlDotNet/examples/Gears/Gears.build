@@ -21,7 +21,7 @@
 		<include name="Tao.OpenGl.ExtensionLoader.dll"/>
 	    </fileset>
 	</copy>
-	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${project::get-base-directory()}/${build.dir}/${project::get-name()}.exe" win32icon="App.ico">
+	<csc target="winexe" warnaserror="true" unsafe="false" debug="${build.debug}" output="${project::get-base-directory()}/${build.dir}/${project::get-name()}.exe" win32icon="App.ico" keyfile="../../src/SdlDotNet.snk">
 	    <sources failonempty="true">
 		<include name="*.cs" />
 	    </sources>

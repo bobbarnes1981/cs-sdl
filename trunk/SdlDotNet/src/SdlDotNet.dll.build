@@ -10,7 +10,7 @@
 	    </fileset>
 	</copy>
 	<!-- build SDL.NET -->
-	<csc target="library" warnaserror="true" unsafe="true" debug="${build.debug}" output="${project::get-base-directory()}/${build.dir}/${project::get-name()}.dll" doc="${project::get-base-directory()}/${build.dir}/${project::get-name()}.xml">
+	<csc target="library" warnaserror="true" unsafe="true" debug="${build.debug}" output="${project::get-base-directory()}/${build.dir}/${project::get-name()}.dll" doc="${project::get-base-directory()}/${build.dir}/${project::get-name()}.xml" keyfile="SdlDotNet.snk">
 	    <sources failonempty="true">
 		<include name="**.cs" />
 	    </sources>
