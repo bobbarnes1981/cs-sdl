@@ -70,7 +70,7 @@
     </target>
 
     <!-- build tasks -->
-    <target name="init" description="Initializes build properties">
+    <target name="init" depends="net-1.1" description="Initializes build properties">
 	<call target="${project.config}" />
 	<sysinfo />
 	<echo message = "Platform ${sys.os.platform}"/>

@@ -86,4 +86,4 @@ using System.Resources;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.Execution)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
-//[assembly: AssemblyKeyFile(@"../../../../src/SdlDotNet.snk")]
+[assembly: AssemblyKeyFile(@"../../../../src/SdlDotNet.snk")]
