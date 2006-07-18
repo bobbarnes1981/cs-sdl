@@ -627,10 +627,10 @@
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
 	    <Reference name="Tao.OpenGl" localCopy="true" path="..\\..\\lib"/>
 	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="..\\..\\lib"/>
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>

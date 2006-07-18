@@ -2,7 +2,7 @@
 
 !define PRODUCT_NAME "SDL.NET SDK"
 !define PRODUCT_TYPE "sdk"
-!define PRODUCT_VERSION "4.0.4"
+!define PRODUCT_VERSION "4.0.5"
 !define PRODUCT_PUBLISHER "SDL.NET"
 !define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"

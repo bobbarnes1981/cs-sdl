@@ -39,7 +39,7 @@ using System.IO;
 [assembly: AssemblyCompany("The SDL.NET Project")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
-[assembly: AssemblyVersion("4.0.4.0")]
+[assembly: AssemblyVersion("4.0.5.0")]
 [assembly: AssemblyCulture("")]		
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
 [assembly: AssemblyFileVersion("4.0.5.0")]
