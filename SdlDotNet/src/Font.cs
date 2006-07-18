@@ -121,7 +121,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Destroys the surface object and frees its memory
 		/// </summary>
-		/// <param name="disposing">If true, it will dispose all obejects</param>
+		/// <param name="disposing">If true, it will dispose all objects</param>
 		protected override void Dispose(bool disposing)
 		{
 			try
