@@ -50,6 +50,7 @@ namespace SdlDotNet.Examples.BombRun
 		{
 			jumpstart = location.Y;
 			base.Surface.TransparentColor = Color.White;
+			base.Surface.Transparent = true;
 			base.Size = base.Surface.Size;
 		}
 
