@@ -65,6 +65,7 @@ namespace SdlDotNet.Examples.BombRun
 
 			temporary = screen.CreateCompatibleSurface(32, 32);
 			temporary.TransparentColor = Color.FromArgb(0, 255, 0, 255);
+			temporary.Transparent = true;
 
 			player = new Player(new Surface(filepath + data_directory + "Head.bmp"), new Point(screen.Width / 2 - 16,
 				screen.Height - 32));

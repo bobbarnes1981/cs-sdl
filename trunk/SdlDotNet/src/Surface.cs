@@ -35,7 +35,8 @@ namespace SdlDotNet
 	/// </summary>
 	public class Surface : BaseSdlResource, ICloneable
 	{
-		private byte alphaValue;
+		private byte alpha;
+		private bool alphaBlending;
 		private bool disposed;
 		private Color transparentColor;
 		private bool isVideoMode;
@@ -236,11 +237,12 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("surface");
 			}
-			this.Handle = SdlGfx.zoomSurface(surface.Handle, 1, 1, SdlGfx.SMOOTHING_OFF);
+			this.Handle = SdlGfx.zoomSurface(surface.Handle, 1, 1, SdlGfx.SMOOTHING_OFF);	
 			if (this.Handle == IntPtr.Zero)
 			{
 				throw SdlException.Generate();
 			}
+			CloneFields(surface, this);
 		}
 
 		#endregion Constructors and Destructors
@@ -1031,8 +1033,7 @@ namespace SdlDotNet
 				this.PixelFormat.Gmask, 
 				this.PixelFormat.Bmask, 
 				this.PixelFormat.Amask));
-			surface.transparentColor = this.transparentColor;
-			surface.alphaValue = this.alphaValue;
+			CloneFields(this, surface);
 			return surface;
 		}
 
@@ -1469,34 +1470,58 @@ namespace SdlDotNet
 			set	
 			{
 				transparentColor = value;
-				if (this.disposed)
+				if (this.transparent == true)
 				{
-					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-				}
-				int flag = Sdl.SDL_SRCCOLORKEY | Sdl.SDL_RLEACCELOK;
-				int result = Sdl.SDL_SetColorKey(this.Handle, (int)flag, this.GetColorValue(value));
-				GC.KeepAlive(this);
-				if (result != (int) SdlFlag.Success)
-				{
-					throw SdlException.Generate();
+					this.Transparent = true;
 				}
 			}
 		}
 
+		bool transparentInitialized;
+		bool transparent;
 		/// <summary>
 		/// Clears the transparent color for the surface
 		/// </summary>
-		public void ClearTransparentColor() 
+		public bool Transparent 
 		{
-			if (this.disposed)
+			get
 			{
-				throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+				return this.transparent;
 			}
-			int result = Sdl.SDL_SetColorKey(this.Handle, 0, 0);
-			GC.KeepAlive(this);
-			if (result != (int) SdlFlag.Success)
+			set
 			{
-				throw SdlException.Generate();
+				this.transparent = value;
+				if (value)
+				{
+					if (this.disposed)
+					{
+						throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+					}
+					int flag = Sdl.SDL_SRCCOLORKEY | Sdl.SDL_RLEACCELOK;
+					int result = Sdl.SDL_SetColorKey(this.Handle, (int)flag, this.GetColorValue(this.transparentColor));
+					this.transparentInitialized = true;
+					GC.KeepAlive(this);
+					if (result != (int) SdlFlag.Success)
+					{
+						throw SdlException.Generate();
+					}
+				}
+				else
+				{
+					if (this.disposed)
+					{
+						throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+					}
+					if (this.transparentInitialized)
+					{
+						int result = Sdl.SDL_SetColorKey(this.Handle, 0, 0);
+						GC.KeepAlive(this);
+						if (result != (int) SdlFlag.Success)
+						{
+							throw SdlException.Generate();
+						}
+					}
+				}
 			}
 		}
 
@@ -1761,8 +1786,6 @@ namespace SdlDotNet
 			}
 		}
 
-		private bool alphaBlending;
-
 		/// <summary>
 		/// AlphaBlending on Surface
 		/// </summary>
@@ -1775,20 +1798,34 @@ namespace SdlDotNet
 			set
 			{
 				alphaBlending = value;
-				this.Alpha = this.alphaValue;
+				if (value)
+				{
+					this.Alpha = this.alpha;
+				}
+				else
+				{
+					Alphas alphaFlags = Alphas.RleEncoded;
+					int result = 
+						Sdl.SDL_SetAlpha(this.Handle, (int)(alphaFlags), this.alpha);
+					GC.KeepAlive(this);
+					if (result != (int) SdlFlag.Success) 
+					{
+						throw SdlException.Generate();
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// Get/set the Alpha value of the image. 
 		/// 0 indicates that the image fully transparent. 
-		/// 255 indicates that the image is not tranparent.
+		/// 255 indicates that the image is not transparent.
 		/// </summary>
 		public byte Alpha
 		{
 			get
 			{
-				return this.alphaValue;
+				return this.alpha;
 			}
 			set
 			{
@@ -1797,13 +1834,14 @@ namespace SdlDotNet
 				{
 					throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
 				}
+				//TODO check this.
 				if (alphaBlending)
 				{
 					alphaFlags = alphaFlags | Alphas.SourceAlphaBlending;
 				}
 				int result = 
 					Sdl.SDL_SetAlpha(this.Handle, (int)(alphaFlags), value);
-				this.alphaValue = value;
+				this.alpha = value;
 				GC.KeepAlive(this);
 				if (result != (int) SdlFlag.Success) 
 				{
@@ -1883,9 +1921,7 @@ namespace SdlDotNet
 				degreesOfRotation, 
 				1, 
 				antiAliasParameter));
-			surface.transparentColor = this.transparentColor;
-			surface.alphaValue = this.alphaValue;
-			surface.AlphaBlending = this.AlphaBlending;
+			CloneFields(this, surface);
 			return surface; 
 		}
 
@@ -1925,9 +1961,7 @@ namespace SdlDotNet
 				degreesOfRotation, 
 				zoom, 
 				antiAliasParameter));
-			surface.transparentColor = this.transparentColor;
-			surface.alphaValue = this.alphaValue;
-			surface.AlphaBlending = this.AlphaBlending;
+			CloneFields(this, surface);
 			return surface; 
 		}
 
@@ -1993,9 +2027,7 @@ namespace SdlDotNet
 			try
 			{
 				Surface surface = new Surface(SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter));
-				surface.transparentColor = this.transparentColor;
-				surface.alphaValue = this.alphaValue;
-				surface.AlphaBlending = this.AlphaBlending;
+				CloneFields(this, surface);
 				return surface;
 			}
 			catch
@@ -2161,15 +2193,29 @@ namespace SdlDotNet
 		public Surface Stretch(Rectangle sourceRectangle, Rectangle destinationRectangle)
 		{
 			Surface surface = new Surface(sourceRectangle);
+			//Surface surface = (Surface)this.Clone();
 			Color colorTemp = this.TransparentColor;
-			this.ClearTransparentColor();
+			this.Transparent = false;
 			surface.Blit(this, new Point(0,0), sourceRectangle);
-			this.TransparentColor = colorTemp;
+			this.transparentColor = colorTemp;
 			double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
 			double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
 			surface.Scale(stretchWidth, stretchHeight);
-			surface.TransparentColor = this.TransparentColor;
-			surface.alphaValue = this.alphaValue;
+			CloneFields(this, surface);
+			return surface;
+		}
+
+		/// <summary>
+		/// Stretch Surface
+		/// </summary>
+		/// <param name="destinationSize">Destination of stretch</param>
+		/// <returns>new Surface</returns>
+		public Surface Stretch(Size destinationSize)
+		{
+			Surface surface = (Surface)this.Clone();
+			double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
+			double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
+			surface.Scale(stretchWidth, stretchHeight);
 			return surface;
 		}
 
@@ -2182,31 +2228,10 @@ namespace SdlDotNet
 		{
 			Surface surface = new Surface(destinationSize);
 			Color colorTemp = this.TransparentColor;
-			this.ClearTransparentColor();
+			this.Transparent = false;
 			surface.Blit(this);
 			this.TransparentColor = colorTemp;
-			surface.TransparentColor = this.TransparentColor;
-			surface.alphaValue = this.alphaValue;
-			return surface;
-		}
-
-		/// <summary>
-		/// Stretch Surface
-		/// </summary>
-		/// <param name="destinationSize">Destination of stretch</param>
-		/// <returns>new Surface</returns>
-		public Surface Stretch(Size destinationSize)
-		{
-			Surface surface = new Surface(this.Size);
-			Color colorTemp = this.TransparentColor;
-			this.ClearTransparentColor();
-			surface.Blit(this, new Point(0,0));
-			this.TransparentColor = colorTemp;
-			double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
-			double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
-			surface.Scale(stretchWidth, stretchHeight);
-			surface.TransparentColor = this.TransparentColor;
-			surface.alphaValue = this.alphaValue;
+			CloneFields(this, surface);
 			return surface;
 		}
 
@@ -2506,6 +2531,15 @@ namespace SdlDotNet
 			return final; 
 		}
 
+		static void CloneFields(Surface source, Surface destination)
+		{
+			destination.transparentColor = source.transparentColor;
+			destination.transparentInitialized = source.transparentInitialized;
+			destination.transparent = source.transparent;
+			destination.alpha = source.alpha;
+			destination.alphaBlending = source.alphaBlending;
+		}
+
 		#region ICloneable Members
 		/// <summary>
 		/// Creates a shallow copy of the Surface.
@@ -2528,13 +2562,14 @@ namespace SdlDotNet
 			if (doDeepCopy)
 			{
 				Surface surf = new Surface(SdlGfx.zoomSurface(this.Handle, 1, 1, SdlGfx.SMOOTHING_OFF));
-				surf.transparentColor = this.transparentColor;
-				surf.alphaValue = this.alphaValue;
+				CloneFields(this, surf);
 				return (surf);
 			}
 			else
 			{
-				return (this.MemberwiseClone());
+				Surface surf = new Surface(SdlGfx.zoomSurface(this.Handle, 1, 1, SdlGfx.SMOOTHING_OFF));
+				CloneFields(this, surf);
+				return (surf);
 			}
 		}
 		#endregion

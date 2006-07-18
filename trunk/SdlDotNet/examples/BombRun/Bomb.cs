@@ -39,6 +39,7 @@ namespace SdlDotNet.Examples.BombRun
 		public Bomb(Surface bombSurface) : base(bombSurface)
 		{
 			base.Surface.TransparentColor = Color.White;
+			base.Surface.Transparent = true;
 			base.Size = this.Surface.Size;
 			Reset();
 		}

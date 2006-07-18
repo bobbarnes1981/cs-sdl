@@ -95,10 +95,15 @@ namespace SdlDotNet.Examples.SnowDemo
 			Video.WindowCaption = "SDL.NET - Snow Demo";
 			screen = Video.SetVideoModeWindow(640, 480, 16);
 			background = new Surface(filepath + data_directory + "snowbackground.png");
+			background.Transparent = true;
 			background.TransparentColor = Color.Magenta;
+			
 			tree = new Surface(filepath + data_directory + "Tree.bmp");
 			tree.TransparentColor = Color.Magenta;
+			tree.Transparent = true;
 			treeStretch = tree.Stretch(new Size(100,100));
+			treeStretch.TransparentColor = Color.Magenta;
+			treeStretch.Transparent = true;
 			Initialize(250);
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.KeyboardDown);
