@@ -2551,6 +2551,7 @@ namespace SdlDotNet
 			destination.transparent = source.transparent;
 			destination.alpha = source.alpha;
 			destination.alphaBlending = source.alphaBlending;
+			destination.isVideoMode = source.isVideoMode;;
 		}
 
 		#region ICloneable Members
