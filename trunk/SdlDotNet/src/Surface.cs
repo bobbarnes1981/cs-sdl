@@ -186,6 +186,19 @@ namespace SdlDotNet
 			}
 		}
 
+		/// <summary>
+		/// Create surface of a given width and height. The Surface will not have an Alpha channel.
+		/// </summary>
+		/// <param name="width">Width of surface</param>
+		/// <param name="height">Height of surface</param>
+		/// <param name="bitsPerPixel">Bits per pixel</param>
+		/// <param name="blueMask">Blue Mask</param>
+		/// <param name="greenMask">Green Mask</param>
+		/// <param name="redMask">Red Mask</param>
+		public Surface(int width, int height, int bitsPerPixel, int redMask, int greenMask, int blueMask) : this(width, height, bitsPerPixel, VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, 0)
+		{
+		}
+
 
 		/// <summary>
 		/// Create a Surface from a byte array in memory.

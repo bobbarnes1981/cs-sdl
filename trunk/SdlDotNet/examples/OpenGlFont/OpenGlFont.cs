@@ -47,7 +47,6 @@ namespace SdlDotNet.Examples.OpenGlFont
 		// Angle For The Quad ( NEW ) 
 		float rquad;
 
-
 		#region Run Loop
 		/// <summary>
 		/// Starts lesson
