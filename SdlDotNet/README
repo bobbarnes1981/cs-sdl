@@ -33,25 +33,27 @@ Development Environment:
 		.NET SDK 1.1 SP1.
 		.NET SDK 2.0 SP1.
 		Mono 1.1.13.6
+		Mono 1.1.16.1
 		
 	IDEs:
 		Visual Studio 2003
 		Visual Studio 2005
 		SharpDevelop
+		SharpDevelop2
 		MonoDevelop
 		VIM
 		
 	Tools:
-		NAnt 0.85 2006-04-30 nightly build
+		NAnt 0.85 RC4
 		Nunit 2.2.8
-		dnpb 1.3.1
-		NSIS 2.17
+		Prebuild 1.3.1
+		NSIS 2.18
 		
 		Notes: NAnt is used to create release builds.
 
 	Dependencies (make sure these are in your path):
 		C libraries
-		SDL 1.2.10
+		SDL 1.2.11
 		SDL_image 1.2.5
 		SDL_mixer 1.2.6
 		SDL_ttf 2.0.8
