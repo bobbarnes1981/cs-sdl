@@ -1096,7 +1096,7 @@
             URL related to this archive.
             </summary>
         </member>
-        <member name="T:Tao.PhysFs.Fs.PHYSFS_file">
+        <member name="T:Tao.PhysFs.Fs.PHYSFS_File">
             <summary>
             A PhysicsFS file handle.
             </summary>
@@ -1115,7 +1115,7 @@
             <seealso cref="M:Tao.PhysFs.Fs.PHYSFS_setBuffer(System.IntPtr,System.UInt64)"/>
             <seealso cref="M:Tao.PhysFs.Fs.PHYSFS_flush(System.IntPtr)"/>
         </member>
-        <member name="F:Tao.PhysFs.Fs.PHYSFS_file.opaque">
+        <member name="F:Tao.PhysFs.Fs.PHYSFS_File.opaque">
             <summary>
             That's all you get. Don't touch. 
             </summary>
