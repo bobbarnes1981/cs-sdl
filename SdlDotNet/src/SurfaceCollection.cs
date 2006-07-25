@@ -203,7 +203,7 @@ namespace SdlDotNet
 			for(int tileX = 0; tileX * tileSize.Width < fullImage.Width; tileX++)
 			{
 				Surface tile = fullImage.CreateCompatibleSurface(tileSize.Width, tileSize.Height);
-				//tile.Fill(fullImage.TransparentColor);
+				//tile.Fill(fullImage.);
 				tile.Blit(
 					fullImage, 
 					new Point(0,0), 
@@ -438,6 +438,25 @@ namespace SdlDotNet
 				foreach(Surface surface in this.List)
 				{
 					surface.TransparentColor = value;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the transparency of the first surface.
+		/// Sets the transparency of every surface in the collection.
+		/// </summary>
+		public bool Transparent
+		{
+			get
+			{
+				return this[0].Transparent;
+			}
+			set
+			{
+				foreach(Surface surface in this.List)
+				{
+					surface.Transparent = value;
 				}
 			}
 		}
