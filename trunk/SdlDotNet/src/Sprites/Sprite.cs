@@ -881,6 +881,21 @@ namespace SdlDotNet.Sprites
 				surf.TransparentColor = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets and sets the transparency associated with the sprite's surface.
+		/// </summary>
+		public virtual bool Transparent
+		{
+			get
+			{
+				return surf.Transparent;
+			}
+			set
+			{
+				surf.Transparent = value;
+			}
+		}
 		#endregion
 
 		#region IDisposable Members

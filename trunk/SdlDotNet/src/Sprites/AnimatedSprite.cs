@@ -239,35 +239,35 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		/// <summary>
-		/// Gets the sprite's current surface's width.
-		/// </summary>
-		public override int Width
-		{
-			get
-			{
-				return Surface.Width;
-			}
-			set
-			{
-				base.Width = value;
-			}
-		}
-
-		/// <summary>
-		/// Gets the sprite's current surface's height.
-		/// </summary>
-		public override int Height
-		{
-			get
-			{
-				return Surface.Height;
-			}
-			set
-			{
-				base.Height = value;
-			}
-		}
+//		/// <summary>
+//		/// Gets the sprite's current surface's width.
+//		/// </summary>
+//		public override int Width
+//		{
+//			get
+//			{
+//				return Surface.Width;
+//			}
+//			set
+//			{
+//				base.Width = value;
+//			}
+//		}
+//
+//		/// <summary>
+//		/// Gets the sprite's current surface's height.
+//		/// </summary>
+//		public override int Height
+//		{
+//			get
+//			{
+//				return Surface.Height;
+//			}
+//			set
+//			{
+//				base.Height = value;
+//			}
+//		}
 
 		/// <summary>
 		/// Gets and alpha of the sprite's current animation.  Sets the alpha of every animation made for the sprite.
@@ -304,6 +304,25 @@ namespace SdlDotNet.Sprites
 				}
 			}
 		}
+
+		/// <summary>
+		/// Gets and transparency of the sprite's current animation.  Sets the transparency of every animation made for the sprite.
+		/// </summary>
+		public override bool Transparent
+		{
+			get
+			{
+				return m_Animations[m_CurrentAnimation].Transparent;
+			}
+			set
+			{
+				foreach(Animation anim in m_Animations.Values)
+				{
+					anim.Transparent = value;
+				}
+			}
+		}
+
 
 		#endregion
 
