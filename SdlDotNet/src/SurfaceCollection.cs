@@ -405,25 +405,6 @@ namespace SdlDotNet
 		}
 
 		/// <summary>
-		/// Sets the alpha property of every surface in the collection.
-		/// Gets the alpha of the first surface.
-		/// </summary>
-		public byte Alpha
-		{
-			get
-			{
-				return this[0].Alpha;
-			}
-			set
-			{
-				foreach(Surface surface in this.List)
-				{
-					surface.Alpha = value;
-				}
-			}
-		}
-
-		/// <summary>
 		/// Gets the transparent color of the first surface.
 		/// Sets the transparent color of every surface in the collection.
 		/// </summary>
@@ -457,6 +438,44 @@ namespace SdlDotNet
 				foreach(Surface surface in this.List)
 				{
 					surface.Transparent = value;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the alpha of the first surface.
+		/// Sets the alpha of every surface in the collection.
+		/// </summary>
+		public byte Alpha
+		{
+			get
+			{
+				return this[0].Alpha;
+			}
+			set
+			{
+				foreach(Surface surface in this.List)
+				{
+					surface.Alpha = value;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets the transparency of the first surface.
+		/// Sets the transparency of every surface in the collection.
+		/// </summary>
+		public bool AlphaBlending
+		{
+			get
+			{
+				return this[0].AlphaBlending;
+			}
+			set
+			{
+				foreach(Surface surface in this.List)
+				{
+					surface.AlphaBlending = value;
 				}
 			}
 		}

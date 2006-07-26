@@ -137,10 +137,6 @@ namespace SdlDotNet.Sprites
 			{
 				return m_Animations;
 			}
-//			set
-//			{
-//				m_Animations = value;
-//			}
 		}
 
 		/// <summary>
@@ -179,6 +175,7 @@ namespace SdlDotNet.Sprites
                 // Set the animation settings.
 				m_CurrentAnimation = value;
 				m_Timer.Interval = m_Animations[m_CurrentAnimation].Delay;
+				this.Size = this.m_Animations[m_CurrentAnimation].Size;
 			}
 		}
 
@@ -283,6 +280,24 @@ namespace SdlDotNet.Sprites
 				foreach(Animation anim in m_Animations.Values)
 				{
 					anim.Alpha = value;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Gets and sets the alpha blending of the sprite's current animation.  Sets the transparency of every animation made for the sprite.
+		/// </summary>
+		public override bool AlphaBlending
+		{
+			get
+			{
+				return m_Animations[m_CurrentAnimation].AlphaBlending;
+			}
+			set
+			{
+				foreach(Animation anim in m_Animations.Values)
+				{
+					anim.AlphaBlending = value;
 				}
 			}
 		}
