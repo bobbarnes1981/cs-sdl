@@ -868,6 +868,21 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
+		/// Gets and sets the alpha blending associated with the sprite's surface.
+		/// </summary>
+		public virtual bool AlphaBlending
+		{
+			get
+			{
+				return surf.AlphaBlending;
+			}
+			set
+			{
+				surf.AlphaBlending = value;
+			}
+		}
+
+		/// <summary>
 		/// Gets and sets the transparent color associated with the sprite's surface.
 		/// </summary>
 		public virtual Color TransparentColor
