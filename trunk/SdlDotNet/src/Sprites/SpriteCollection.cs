@@ -29,7 +29,7 @@ namespace SdlDotNet.Sprites
 	/// The SpriteCollection is used to group sprites into an easily managed whole. 
 	/// </summary>
 	/// <remarks>The sprite manager has no size.</remarks>
-	public class SpriteCollection : CollectionBase, ICollection
+	public class SpriteCollection : CollectionBase, ICollection, IComparer
 	{
 		#region Constructors
 		/// <summary>
@@ -954,5 +954,29 @@ namespace SdlDotNet.Sprites
 		{
 			return List.IndexOf(sprite);
 		} 
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="Comparer"></param>
+		public void Sort(IComparer Comparer) 
+		{
+			base.InnerList.Sort(Comparer);
+		}
+		#region IComparer Members
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <returns></returns>
+		public int Compare(object x, object y)
+		{
+			return ((Sprite)x).Z.CompareTo(((Sprite)y).Z);
+
+		}
+
+		#endregion
 	}
 }
