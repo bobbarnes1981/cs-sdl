@@ -197,15 +197,10 @@ namespace SdlDotNet.Sprites
 			// Render it (Solid or Blended)
 			try
 			{
-				if (backgroundColor.IsEmpty)
-				{
-					base.Surface = font.Render(textItem, antiAlias, color);
-				}
-				else
-				{
-					base.Surface = font.Render(textItem, color, backgroundColor);
-				}
+				base.Surface = font.Render(textItem, color, backgroundColor, antiAlias, textWidth, maxLines);
 				base.Size = new Size(base.Surface.Width, base.Surface.Height);
+				base.Transparent = this.transparent;
+				base.TransparentColor = this.transparentColor;
 			}
 			catch (SpriteException e)
 			{
@@ -217,8 +212,94 @@ namespace SdlDotNet.Sprites
 
 		#region Font Rendering
 
+		bool transparent;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override bool Transparent
+		{
+			get
+			{
+				return this.transparent;
+			}
+			set
+			{
+				this.transparent = value;
+				this.RenderInternal();
+			}
+		}
+
+		Color transparentColor;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override Color TransparentColor
+		{
+			get
+			{
+				return this.transparentColor;
+			}
+			set
+			{
+				this.transparentColor = value;
+				this.RenderInternal();
+			}
+		}
+
 		private SdlDotNet.Font font;
 		private bool antiAlias = true;
+		int textWidth;
+		int maxLines;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int TextWidth
+		{
+			get
+			{
+				return this.textWidth;
+			}
+			set
+			{
+				this.textWidth = value;
+				this.RenderInternal();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int MaxLines
+		{
+			get
+			{
+				return this.maxLines;
+			}
+			set
+			{
+				this.maxLines = value;
+				this.RenderInternal();
+			}
+		}
+
+		/// <summary>
+		/// Antialias the text
+		/// </summary>
+		public bool AntiAlias
+		{
+			get
+			{
+				return this.antiAlias;
+			}
+			set
+			{
+				this.antiAlias = value;
+				this.RenderInternal();
+			}
+		}
 
 		private string textItem;
 

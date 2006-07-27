@@ -95,7 +95,8 @@ namespace SdlDotNet.Examples.AudioExample
 			// Begin the SDL ticker
 			Events.Fps = 50;
 
-			textDisplay.Text = "Press Arrow Keys, Space and Click Mouse.";
+			textDisplay.Text = "Press Arrow Keys, Space and Click \nMouse.";
+			textDisplay.TextWidth = 200;
 		} 
 
 		/// <summary>
