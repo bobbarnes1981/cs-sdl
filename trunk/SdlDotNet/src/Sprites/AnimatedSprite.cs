@@ -285,7 +285,7 @@ namespace SdlDotNet.Sprites
 		}
 
 		/// <summary>
-		/// Gets and sets the alpha blending of the sprite's current animation.  Sets the transparency of every animation made for the sprite.
+		/// Gets and sets the alpha blending of the sprite's current animation.  Sets the alpha blending of every animation made for the sprite.
 		/// </summary>
 		public override bool AlphaBlending
 		{

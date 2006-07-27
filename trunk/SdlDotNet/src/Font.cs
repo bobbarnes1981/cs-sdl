@@ -151,6 +151,11 @@ namespace SdlDotNet
 				{
 					SdlTtf.TTF_CloseFont(this.Handle);
 				}
+				this.Handle = IntPtr.Zero;
+			}
+			catch (System.NullReferenceException e)
+			{
+				e.ToString();
 			}
 			finally
 			{
@@ -402,13 +407,13 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="textItem"></param>
 		/// <param name="backgroundColor"></param>
-		/// <param name="foregroundColor"></param>
+		/// <param name="textColor"></param>
 		/// <returns></returns>
 		private Surface RenderTextShaded(
-			string textItem, Color foregroundColor, Color backgroundColor) 
+			string textItem, Color textColor, Color backgroundColor) 
 		{
-			Sdl.SDL_Color foregroundColorSdl = 
-				SdlColor.ConvertColor(foregroundColor);
+			Sdl.SDL_Color textColorSdl = 
+				SdlColor.ConvertColor(textColor);
 			Sdl.SDL_Color backgroundColorSdl = 
 				SdlColor.ConvertColor(backgroundColor);
 			if (textItem == null || textItem.Length == 0)
@@ -416,19 +421,19 @@ namespace SdlDotNet
 				textItem = " ";
 			}
 			return new Surface(SdlTtf.TTF_RenderUNICODE_Shaded(
-				this.Handle, textItem, foregroundColorSdl, backgroundColorSdl));
+				this.Handle, textItem, textColorSdl, backgroundColorSdl));
 		}
 
 		/// <summary>
 		/// Blended Text
 		/// </summary>
-		/// <param name="color"></param>
+		/// <param name="textColor"></param>
 		/// <param name="textItem"></param>
 		/// <returns></returns>
 		private Surface RenderTextBlended(
-			string textItem, Color color) 
+			string textItem, Color textColor) 
 		{
-			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
+			Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(textColor);
 			if (textItem == null || textItem.Length == 0)
 			{
 				textItem = " ";
@@ -443,41 +448,257 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="textItem">String to display</param>
 		/// <param name="antiAlias">If true, text will be anti-aliased</param>
-		/// <param name="foregroundColor">Color of text</param>
+		/// <param name="textColor">Color of text</param>
 		/// <returns>Surface with text</returns>
-		public Surface Render(string textItem, bool antiAlias, Color foregroundColor)
+		public Surface Render(string textItem, Color textColor, bool antiAlias)
 		{
-			if (antiAlias)
-			{
-				return Render(textItem, foregroundColor);
-			}
-			else
-			{
-				return RenderTextSolid(textItem, foregroundColor);
-			}
+			return this.Render(textItem, textColor, Color.Empty, antiAlias, 0, 0);
+//			if (antiAlias)
+//			{
+//				return Render(textItem, textColor);
+//			}
+//			else
+//			{
+//				return RenderTextSolid(textItem, textColor);
+//			}
 		}
 
 		/// <summary>
 		/// Render text to a surface with a background color
 		/// </summary>
 		/// <param name="textItem">String to display</param>
-		/// <param name="foregroundColor">Color of text</param>
+		/// <param name="textColor">Color of text</param>
 		/// <param name="backgroundColor">Color of background</param>
 		/// <returns>Surface with text</returns>
-		public Surface Render(string textItem, Color foregroundColor, Color backgroundColor)
+		public Surface Render(string textItem, Color textColor, Color backgroundColor)
 		{
-			return RenderTextShaded(textItem, foregroundColor, backgroundColor);
+			return this.Render(textItem, textColor, backgroundColor, true, 0, 0);
+			//return RenderTextShaded(textItem, textColor, backgroundColor);
 		}
 
 		/// <summary>
 		/// Render Text to a surface
 		/// </summary>
 		/// <param name="textItem">Text string</param>
-		/// <param name="foregroundColor">Color of text</param>
+		/// <param name="textColor">Color of text</param>
 		/// <returns>Surface with text</returns>
-		public Surface Render(string textItem, Color foregroundColor)
+		public Surface Render(string textItem, Color textColor)
 		{
-			return RenderTextBlended(textItem, foregroundColor);
+			return this.Render(textItem, textColor, Color.Empty, true, 0, 0);
+			//return RenderTextBlended(textItem, textColor);
+		}
+
+		/// <summary>
+		/// Render text to a surface with a background color
+		/// </summary>
+		/// <param name="textItem">String to display</param>
+		/// <param name="textColor">Color of text</param>
+		/// <param name="backgroundColor">Color of background</param>
+		/// <param name="antiAlias"></param>
+		/// <returns>Surface with text</returns>
+		public Surface Render(string textItem, Color textColor, Color backgroundColor, bool antiAlias)
+		{
+			return this.Render(textItem, textColor, backgroundColor, antiAlias, 0, 0);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="textItem"></param>
+		/// <param name="textcolor"></param>
+		/// <param name="antiAlias"></param>
+		/// <param name="textWidth"></param>
+		/// <param name="maxLines"></param>
+		/// <returns></returns>
+		public Surface Render(string textItem, Color textcolor, bool antiAlias, int textWidth, int maxLines) 
+		{
+			return Render(textItem, textcolor, Color.Empty, antiAlias, textWidth, maxLines);
+		}
+
+		// c# doesn't allow the optional paramter - everything has to be passed 
+		// textWidth default = 0   - no wrapping (otherwise it is the number of pixels to count as the textWidth) 
+		// maxLines default = 0   - render all lines (otherwise it is the maximum number of lines to render) 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="textItem"></param>
+		/// <param name="textColor"></param>
+		/// <param name="backgroundColor"></param>
+		/// <param name="antiAlias"></param>
+		/// <param name="textWidth"></param>
+		/// <param name="maxLines"></param>
+		/// <returns></returns>
+		public Surface Render(string textItem, Color textColor, Color backgroundColor, bool antiAlias, int textWidth, int maxLines) 
+		{ 
+			int x = 0; 
+			int y = 0; 
+			int tempWidth = 0; 
+			int stringlength; 
+			int stringpos; 
+			int countback; 
+			int newX; 
+			string templine; 
+			int countLines; 
+			string[] splitline; 
+			//bool indented; 
+
+			splitline = textItem.Replace("\r", string.Empty).Split('\n'); 
+			for (int k = 0; k <= splitline.GetUpperBound(0); k++) 
+			{ 
+				splitline[k] = splitline[k].Trim(); 
+			}
+
+			if (textWidth == 0 && splitline.Length == 1)
+			{
+				if (backgroundColor.IsEmpty)
+				{
+					if (antiAlias)
+					{
+						return this.RenderTextBlended(textItem, textColor);
+					}
+					else
+					{
+						return this.RenderTextSolid(textItem, textColor);
+					}
+					//return this.Render(textItem, textColor, antiAlias);
+				}
+				else
+				{
+					return this.RenderTextShaded(textItem, textColor, backgroundColor);
+					//return this.Render(textItem, textColor, backgroundColor);
+				}
+			}
+			else
+			{
+       
+				Surface surfFinal; 
+				Surface blitSurf; 
+
+				// it is faster to set aside a large amount of temporary surface 
+				// than recreate a new one every time the surface is to expand. 
+       
+				// if no textWidth is given, then set the textWidth to ludicrusly high 
+				// in all cases, set the height to an impossible high number. 
+       
+				// a possible improvement would be to pass in the the temporary 
+				// textWidth & height for performance 
+				Surface surfTemp; 
+				if (textWidth > 0) 
+				{ 
+					surfTemp = new Surface(textWidth, 10000); 
+				} 
+				else 
+				{ 
+					surfTemp = new Surface(10000, 10000); 
+				} 
+
+				// the height of fonts are always the same from what I can tell 
+				// no matter which letter is used. It's the widths that cause trouble 
+				int fontHeight = this.SizeText(" ").Height; 
+       
+				countLines = 1; 
+				for (int k = 0; k <= splitline.GetUpperBound(0); k++) 
+				{ 
+					// no word wrap, only newline wrap 
+					if (textWidth == 0) 
+					{ 
+						if (maxLines == 0 || countLines <= maxLines) 
+						{ 
+							if (splitline[k] != "") 
+							{ 
+								blitSurf = this.Render(splitline[k], textColor, backgroundColor, antiAlias); 
+							} 
+							else 
+							{ 
+								blitSurf = new Surface(1, 1); 
+							} 
+							if (blitSurf.Width > tempWidth) 
+							{ 
+								tempWidth = blitSurf.Width; 
+							}
+							surfTemp.Blit(blitSurf, new Point(x, y)); 
+							blitSurf.Dispose(); 
+							blitSurf = null;   // doing this reuses the surface memory :) 
+							y = y + fontHeight; 
+							countLines = countLines + 1; 
+						} 
+						textWidth = tempWidth;
+					} 
+						// word wrapping & new line wrapping 
+					else 
+					{ 
+						stringpos = 0; 
+						//indented = true; 
+						if (splitline[k] == "") 
+						{ 
+							y = y + fontHeight; 
+						} 
+						while (stringpos < splitline[k].Length) 
+						{ 
+							if (maxLines == 0 || countLines <= maxLines) 
+							{ 
+								stringlength = 1; 
+								templine = splitline[k].Substring(stringpos, stringlength); 
+
+								// this is the secret: keep checking the width of the string to blit, adding 
+								// one letter at a time, until the width has been hit 
+								while (this.SizeText(templine).Width <= textWidth & (stringpos + stringlength < splitline[k].Length)) 
+								{ 
+									stringlength = stringlength + 1; 
+									templine = splitline[k].Substring(stringpos, stringlength); 
+								} 
+								countback = 0; 
+								// now count backwards, until a space is found 
+								while (!(templine.EndsWith(" ")) & (stringpos + stringlength < splitline[k].Length)) 
+								{ 
+									countback = countback + 1; 
+									if (countback >= splitline[k].Length) 
+									{ 
+										countback = 0; 
+										templine = splitline[k].Substring(stringpos, stringlength); 
+										break; 
+									} 
+									try 
+									{ 
+										templine = templine.Substring(0, stringlength - countback); 
+									} 
+									catch 
+									{ 
+										templine = ""; 
+									} 
+								} 
+
+								// move the current string position forward 
+								stringpos = stringpos + stringlength - countback; 
+								//if (indented) 
+								//{ 
+								//	newX = x + indent; 
+								//} 
+								//else 
+								//{ 
+									newX = x; 
+								//} 
+								// render the wrapped line 
+								blitSurf = this.Render(templine, textColor, backgroundColor, antiAlias); 
+								surfTemp.Blit(blitSurf, new Point(newX, y)); 
+								blitSurf.Dispose(); 
+								blitSurf = null; 
+								y = y + fontHeight; 
+								countLines = countLines + 1; 
+							} 
+							else 
+							{ 
+								stringpos = stringpos + 1; 
+							} 
+							//indented = false; 
+						} 
+					} 
+				} 
+				surfFinal = surfTemp.CreateSurfaceFromClipRectangle(new Rectangle(0, 0, textWidth, y)); 
+				surfTemp.Dispose(); 
+				surfTemp = null; 
+			return surfFinal; 
+		}
 		}
 	}
 }
