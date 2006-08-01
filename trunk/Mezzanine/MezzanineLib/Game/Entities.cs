@@ -37,7 +37,6 @@ using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
 using System.Runtime.InteropServices;
-using MezzanineLib.ClientServer;
 
 namespace MezzanineLib.Game
 {
@@ -84,18 +83,18 @@ namespace MezzanineLib.Game
 		public static ItemStat[] itemstats = new ItemStat[9];
 
 		
-		//		itemstats[] =
-		//	{
-		//		10,    50, Sounds::S_ITEMAMMO,
-		//		20,   100, Sounds::S_ITEMAMMO,
-		//		5,    25, Sounds::S_ITEMAMMO,
-		//		5,    25, Sounds::S_ITEMAMMO,
-		//		25,   100, Sounds::S_ITEMHEALTH,
-		//		50,   200, Sounds::S_ITEMHEALTH,
-		//		100,   100, Sounds::S_ITEMARMOUR,
-		//		150,   150, Sounds::S_ITEMARMOUR,
-		//		20000, 30000, Sounds::S_ITEMPUP,
-		//	};
+//		itemstats[] =
+//	{
+//		10,    50, Sounds::S_ITEMAMMO,
+//		20,   100, Sounds::S_ITEMAMMO,
+//		5,    25, Sounds::S_ITEMAMMO,
+//		5,    25, Sounds::S_ITEMAMMO,
+//		25,   100, Sounds::S_ITEMHEALTH,
+//		50,   200, Sounds::S_ITEMHEALTH,
+//		100,   100, Sounds::S_ITEMARMOUR,
+//		150,   150, Sounds::S_ITEMARMOUR,
+//		20000, 30000, Sounds::S_ITEMPUP,
+//	};
 		 
 		static Entities()
 		{
@@ -128,23 +127,5 @@ namespace MezzanineLib.Game
 		{ 
 			GameInit.Player1.ammo[gun] = itemstats[gun-1].add*2; 
 		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="time"></param>
-		public static void CheckQuad(int time)
-		{
-			if (GameInit.Player1Ptr != IntPtr.Zero)
-			{
-				DynamicEntity tempent = GameInit.Player1;
-				if(GameInit.Player1.quadmillis !=0 && (tempent.quadmillis -= time)<0)
-				{
-					tempent.quadmillis = 0;
-					GameInit.Player1 = tempent;
-					Bindings.playsoundc((int)Sounds.S_PUPOUT);
-					Console.WriteLine("quad damage is over");
-				}
-			}
 		}
-	}
 }
