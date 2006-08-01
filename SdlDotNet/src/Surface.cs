@@ -199,7 +199,24 @@ namespace SdlDotNet
 		{
 		}
 
-
+        /// <summary>
+        /// Create a Surface from a MemoryStream.
+        /// </summary>
+        /// <param name="stream"></param>
+        public Surface(MemoryStream stream)
+        {
+            if (stream == null)
+            {
+                throw new ArgumentNullException("stream");
+            }
+            byte[] array = stream.ToArray();
+            this.Handle =
+                SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
+            if (this.Handle == IntPtr.Zero)
+            {
+                throw SdlException.Generate();
+            }
+        }
 		/// <summary>
 		/// Create a Surface from a byte array in memory.
 		/// </summary>
