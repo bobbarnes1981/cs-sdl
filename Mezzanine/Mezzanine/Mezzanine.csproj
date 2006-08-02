@@ -80,11 +80,6 @@
                     HintPath = "..\..\..\..\..\..\WINNT\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
                 <Reference
-                    Name = "Tao.Sdl"
-                    AssemblyName = "Tao.Sdl"
-                    HintPath = "..\lib\Tao.Sdl.dll"
-                />
-                <Reference
                     Name = "Tao.OpenGl.Glu"
                     AssemblyName = "Tao.OpenGl.Glu"
                     HintPath = "..\lib\Tao.OpenGl.Glu.dll"
@@ -113,6 +108,11 @@
                     Name = "MezzanineManagedLib"
                     Project = "{7923259E-4B01-4566-9B36-EA5173A0C60C}"
                     Package = "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
+                />
+                <Reference
+                    Name = "Tao.Sdl"
+                    AssemblyName = "Tao.Sdl"
+                    HintPath = "..\lib\Tao.Sdl.dll"
                 />
             </References>
         </Build>
