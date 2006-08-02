@@ -1,1 +1,1 @@
-nant -buildfile:package.xml
+NAnt.exe -buildfile:package.xml
