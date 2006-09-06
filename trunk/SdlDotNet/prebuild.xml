@@ -720,5 +720,37 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
+	<Project name="Isotope" path="examples\\Isotope" language="C#" type="WinExe" assemblyName="Isotope" rootNamespace="SdlDotNet.Examples.Isotope" icon="App.ico">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin\Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin\Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Reference name="Tao.Sdl" localCopy="true" path="..\\..\\lib"/>
+	    <Files>
+		<File buildAction="EmbeddedResource">App.ico</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
     </Solution>
 </Prebuild>

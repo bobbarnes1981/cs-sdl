@@ -17,4 +17,5 @@ SUBDIRS = \
 	SimpleGame \
 	SnowDemo \
 	SpriteGuiDemos \
+	Isotope \
 	Triad
