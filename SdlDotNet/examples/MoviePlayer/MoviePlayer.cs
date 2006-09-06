@@ -47,12 +47,20 @@ namespace SdlDotNet.Examples.MoviePlayer
 		/// </summary>
 		public void Run() 
 		{
-			string data_directory = @"Data/";
-			string filepath = @"../../";
-			if (File.Exists(data_directory + "test.mpg"))
+			string filePath = Path.Combine("..", "..");
+			string fileDirectory = "Data";
+			string fileName = "test.mpg";
+			if (File.Exists(fileName))
 			{
-				filepath = "";
+				filePath = "";
+				fileDirectory = "";
 			}
+			else if (File.Exists(Path.Combine(fileDirectory, fileName)))
+			{
+				filePath = "";
+			}
+
+			string file = Path.Combine(Path.Combine(filePath, fileDirectory), fileName);
 
 			int width = 352;
 			int height = 240;
@@ -66,7 +74,7 @@ namespace SdlDotNet.Examples.MoviePlayer
 			Video.WindowCaption = "SDL.NET - Movie Player";
 			screen = Video.SetVideoModeWindow(width, height); 
 			Mixer.Close();
-			movie = new Movie(filepath + data_directory + "test.mpg");
+			movie = new Movie(file);
 			Console.WriteLine("Time: " + movie.Length);
 			Console.WriteLine("Width: " + movie.Size.Width);
 			Console.WriteLine("Height: " + movie.Size.Height);

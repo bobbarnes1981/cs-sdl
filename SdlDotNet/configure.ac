@@ -184,22 +184,6 @@ case "$host" in
 esac
 AM_CONDITIONAL(WINBUILD, test x$winbuild = xyes)
 
-
-dnl Check for OpenGL and friends
-
-AX_CHECK_GL
-AC_SUBST([GL_CFLAGS])
-AC_SUBST([GL_LIBS])
-
-
-AX_CHECK_GLU
-AC_SUBST([GLU_CFLAGS])
-AC_SUBST([GLU_LIBS])
-
-AX_CHECK_GLUT
-AC_SUBST([GLUT_CFLAGS])
-AC_SUBST([GLUT_LIBS])
-
 dnl Check for SDL
 
 AC_PATH_PROG([SDL_CONFIG], [sdl-config])
@@ -243,6 +227,7 @@ examples/SimpleGame/Makefile
 examples/SnowDemo/Makefile
 examples/SpriteGuiDemos/Makefile
 examples/Triad/Makefile
+examples/Isotope/Makefile
 extras/Makefile
 extras/OpenGl/Makefile
 extras/Particles/Makefile
