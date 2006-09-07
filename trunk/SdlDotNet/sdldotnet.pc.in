@@ -1,8 +1,0 @@
-prefix=@prefix@
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-
-Name: SdlDotNet
-Description: Mono Bindings for SDL
-Version: @VERSION@
-Libs:  -r:${libdir}/mono/tao/SdlDotNet.dll
