@@ -3,7 +3,7 @@
     <Solution name="SdlDotNet">
 	<Configuration name="Debug">
 	    <Options>
-		<CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		<CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		<OptimizeCode>false</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>bin/Debug</OutputPath>
@@ -14,7 +14,7 @@
 	</Configuration>
 	<Configuration name="Release">
 	    <Options>
-		<CompilerDefines>TRACE</CompilerDefines>
+		<CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		<OptimizeCode>true</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>bin/Release</OutputPath>
@@ -30,7 +30,7 @@
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -43,7 +43,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -69,7 +69,7 @@
 	<Project name="SdlDotNet.Particles" path="extras/Particles" language="C#" type="Library" assemblyName="SdlDotNet.Particles" rootNamespace="SdlDotNet.Particles">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -82,7 +82,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -103,7 +103,7 @@
 	<Project name="SdlDotNet.OpenGl" path="extras/OpenGl" language="C#" type="Library" assemblyName="SdlDotNet.OpenGl" rootNamespace="SdlDotNet.OpenGl">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -116,7 +116,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -139,22 +139,24 @@
 	<Project name="Rectangles" path="examples/Rectangles" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Rectangles.Rectangles" assemblyName="Rectangles" rootNamespace="SdlDotNet.Examples.Rectangles" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -170,22 +172,24 @@
 	<Project name="Gears" path="examples/Gears" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Gears.Gears" assemblyName="Gears" rootNamespace="SdlDotNet.Examples.Gears" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -202,22 +206,24 @@
 	<Project name="CDPlayer" path="examples/CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples.CDPlayer" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -237,22 +243,24 @@
 	<Project name="MoviePlayer" path="examples/MoviePlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.MoviePlayer.MoviePlayer" assemblyName="MoviePlayer" rootNamespace="SdlDotNet.Examples.MoviePlayer" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -268,22 +276,24 @@
 	<Project name="SimpleGame" path="examples/SimpleGame" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SimpleGame.GameMain" assemblyName="SimpleGame" rootNamespace="SdlDotNet.Examples.SimpleGame" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -299,22 +309,24 @@
 	<Project name="BombRun" path="examples/BombRun" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BombRun.BombRun" assemblyName="BombRun" rootNamespace="SdlDotNet.Examples.BombRun" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -330,22 +342,24 @@
 	<Project name="SnowDemo" path="examples/SnowDemo" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SnowDemo.SnowDemo" assemblyName="SnowDemo" rootNamespace="SdlDotNet.Examples.SnowDemo" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -361,22 +375,24 @@
 	<Project name="BounceSprites" path="examples/BounceSprites" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BounceSprites.BounceSprites" assemblyName="BounceSprites" rootNamespace="SdlDotNet.Examples.BounceSprites" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -392,22 +408,24 @@
 	<Project name="Triad" path="examples/Triad" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Triad.MainObject" assemblyName="Triad" rootNamespace="SdlDotNet.Examples.Triad" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -423,22 +441,24 @@
 	<Project name="GuiExample" path="examples/GuiExample" language="C#" type="Library" assemblyName="GuiExample" rootNamespace="SdlDotNet.Examples.GuiExample">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -453,22 +473,24 @@
 	<Project name="SpriteGuiDemos" path="examples/SpriteGuiDemos" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SpriteGuiDemos.SdlDemo" assemblyName="SpriteGuiDemos" rootNamespace="SdlDotNet.Examples.SpriteGuiDemos" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -485,22 +507,24 @@
 	<Project name="Tests" path="tests" language="C#" type="Library" assemblyName="SdlDotNet.Tests" rootNamespace="SdlDotNet.Tests">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -518,22 +542,24 @@
 	<Project name="AudioExample" path="examples/AudioExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.AudioExample.AudioExample" assemblyName="AudioExample" rootNamespace="SdlDotNet.Examples.AudioExample" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -549,22 +575,24 @@
 	<Project name="ParticlesExample" path="examples/ParticlesExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.ParticlesExample.ParticlesExample" assemblyName="ParticlesExample" rootNamespace="SdlDotNet.Examples.ParticlesExample" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -581,22 +609,24 @@
 	<Project name="OpenGlFont" path="examples/OpenGlFont" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.OpenGlFont.OpenGlFont" assemblyName="OpenGlFont" rootNamespace="SdlDotNet.Examples.OpenGlFont" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -615,22 +645,24 @@
 	<Project name="NeHe" path="examples/NeHe" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.NeHe.NeHe" assemblyName="NeHe" rootNamespace="SdlDotNet.Examples.NeHe" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -653,22 +685,24 @@
 	<Project name="RedBook" path="examples/RedBook" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.RedBook.RedBook" assemblyName="RedBook" rootNamespace="SdlDotNet.Examples.RedBook" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -691,22 +725,24 @@
 	<Project name="PhysFsTest" path="examples/PhysFsTest" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.PhysFsTest.PhysFsTest" assemblyName="PhysFsTest" rootNamespace="SdlDotNet.Examples.PhysFsTest" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -723,22 +759,24 @@
 	<Project name="Isotope" path="examples/Isotope" language="C#" type="WinExe" assemblyName="Isotope" rootNamespace="SdlDotNet.Examples.Isotope" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
