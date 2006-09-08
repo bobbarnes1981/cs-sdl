@@ -450,7 +450,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="SpriteGuiDemos" path="examples/SpriteGuiDemos" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SpriteGuiDemos.SdlDemo" assemblyName="SpriteGuiDemo" rootNamespace="SdlDotNet.Examples.SpriteGuiDemos" icon="App.ico">
+	<Project name="SpriteGuiDemos" path="examples/SpriteGuiDemos" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SpriteGuiDemos.SdlDemo" assemblyName="SpriteGuiDemos" rootNamespace="SdlDotNet.Examples.SpriteGuiDemos" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
