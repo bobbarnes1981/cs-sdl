@@ -237,6 +237,7 @@
 		<File subType="Form">CDPlayer.cs</File>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="CDPlayer.cs"/>		    
+		    <Exclude name="CDPlayer2.cs"/>		    
 		</Match>
 	    </Files>
 	</Project>
