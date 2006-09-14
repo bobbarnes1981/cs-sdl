@@ -24,8 +24,7 @@
 	    </Options>
 	</Configuration>
 	<Files>
-	    <File buildAction="Content">SdlDotNet.build</File>
-	    <File buildAction="Content">prebuild.xml</File>
+	    <File buildAction="Content">prebuild2.xml</File>
 	</Files>
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
 	    <Configuration name="Debug">
