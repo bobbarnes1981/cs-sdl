@@ -58,9 +58,9 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="Tao.Sdl" localCopy="true" path="../lib/net-2.0"/>
 	    <Files>
-		<Match path="." pattern="SurfaceControl.cs" subType="Component" recurse="true"/>
+		<Match pattern="SurfaceControl.cs" subType="Component" recurse="true" resourceName="Windows.SurfaceControl"/>
 		<Match path="Windows" pattern="*.bmp" buildAction="EmbeddedResource" recurse="true"/>
-		<Match path="." pattern="*.cs" recurse="true">
+		<Match pattern="*.cs" recurse="true">
 		    <Exclude name="SurfaceControl.cs"/>
 		</Match>
 	    </Files>
@@ -233,7 +233,7 @@
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
-		<File subType="Form">CDPlayer2.cs</File>
+		<File subType="Form" resourceName="CDPlayer">CDPlayer2.cs</File>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="CDPlayer.cs"/>		    
 		    <Exclude name="CDPlayer2.cs"/>		    
