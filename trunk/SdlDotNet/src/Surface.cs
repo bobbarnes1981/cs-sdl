@@ -429,11 +429,12 @@ namespace SdlDotNet
         public Surface ReplaceColor(Color original, Color replacement)
         {
             int colVal = this.GetColorValue(replacement);
+            int origValue = original.ToArgb();
             for (int x = 0; x < this.Width; x++)
             {
                 for (int y = 0; y < this.Height; y++)
                 {
-                    if (this.GetPixel(x, y) == original)
+                    if (this.GetPixel(x, y).ToArgb() == origValue)
                     {
                         this.DrawPixel(x, y, colVal);
                     }
