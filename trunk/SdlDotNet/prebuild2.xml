@@ -65,7 +65,7 @@
 		</Match>
 	    </Files>
 	</Project>
-	<Project name="SdlDotNet.Particles" path="extras/Particles" language="C#" type="Library" assemblyName="SdlDotNet.Particles" rootNamespace="SdlDotNet.Particles">
+	<Project name="SdlDotNet.Particles" path="examples/Particles" language="C#" type="Library" assemblyName="SdlDotNet.Particles" rootNamespace="SdlDotNet.Particles">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -99,7 +99,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="SdlDotNet.OpenGl" path="extras/OpenGl" language="C#" type="Library" assemblyName="SdlDotNet.OpenGl" rootNamespace="SdlDotNet.OpenGl">
+	<Project name="SdlDotNet.OpenGl" path="examples/OpenGl" language="C#" type="Library" assemblyName="SdlDotNet.OpenGl" rootNamespace="SdlDotNet.OpenGl">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>

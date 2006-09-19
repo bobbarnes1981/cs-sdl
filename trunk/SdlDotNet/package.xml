@@ -12,7 +12,6 @@
     <property name="project.version" value="4.0.5" />
     <property name="src.dir" value="src" />
     <property name="examples.dir" value="examples" />
-    <property name="extras.dir" value="extras" />
     <property name="tests.dir" value="tests" />
     <property name="dist.dir" value="dist" />
     <property name="source.dir" value="source" />
@@ -62,26 +61,13 @@
 	</copy>
 
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}" flatten="true">
-	    <fileset basedir=".">
+	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
 		<include name="**/*.chm"/>
 	    </fileset>
 	</copy>
 
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}/${(project::get-name())}">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
-		<include name="*" />
-		<exclude name="*.chm"/>
-	    </fileset>
-	</copy>
-
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}/${project::get-name()}.Particles">
-	    <fileset basedir="${extras.dir}/Particles/${bin.dir}/${project.config}/doc">
-		<include name="*" />
-		<exclude name="*.chm"/>
-	    </fileset>
-	</copy>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}/${project::get-name()}.OpenGl">
-	    <fileset basedir="${extras.dir}/OpenGl/${bin.dir}/${project.config}/doc">
 		<include name="*" />
 		<exclude name="*.chm"/>
 	    </fileset>
@@ -96,11 +82,6 @@
 		<include name="${native.sdl}.dll"/>
 	    </fileset>
 	</copy>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies" flatten="true">
-	    <fileset basedir="${extras.dir}">
-		<include name="**.dll"/>
-	    </fileset>
-	</copy>
 	<if test="${platform::is-win32()}">
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/win32deps">
 		<fileset basedir="${project::get-base-directory()}/${lib.dir}/win32deps">
@@ -110,8 +91,9 @@
 	</if>
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
 	    <fileset>
-		<include name="examples/**/*.exe" />
-		<include name="examples/**/*.dll" />
+		<include name="${examples.dir}/**/*.exe" />
+		<include name="${examples.dir}/**/*.dll" />
+		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}/Data" flatten="true">
