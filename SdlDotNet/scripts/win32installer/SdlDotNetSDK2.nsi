@@ -2,7 +2,7 @@
 
 !define PRODUCT_NAME "SDL.NET SDK"
 !define PRODUCT_TYPE "sdk"
-!define PRODUCT_VERSION "4.0.5"
+!define PRODUCT_VERSION "5.0.0"
 !define PRODUCT_PUBLISHER "SDL.NET"
 !define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
@@ -89,9 +89,9 @@ ShowUnInstDetails show
 ; http://msdn.microsoft.com/netframework/default.aspx?pull=/library/en-us/dnnetdep/html/redistdeploy1_1.asp
 ; Section "Detecting that the .NET Framework 1.1 is installed"
 Function .onInit
-	ReadRegDWORD $R0 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\v1.1.4322" Install
+	ReadRegDWORD $R0 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727" Install
 	StrCmp $R0 "" 0 CheckPreviousVersion
-	MessageBox MB_OK "Microsoft .NET Framework 1.1 was not found on this system.$\r$\n$\r$\nUnable to continue this installation."
+	MessageBox MB_OK "Microsoft .NET Framework 2.0 was not found on this system.$\r$\n$\r$\nUnable to continue this installation."
 	Abort
 
   CheckPreviousVersion:
@@ -121,9 +121,6 @@ Section "Source" SecSrc
 
   SetOutPath "$INSTDIR\sdk\src"
   File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\src\*.*
-  
-  SetOutPath "$INSTDIR\sdk\extras"
-  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\extras\*.*
   
   SetOutPath "$INSTDIR\sdk\examples"
   File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\examples\*.*
@@ -174,6 +171,7 @@ Section "Examples" SecExamples
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BounceSprites.lnk" "$INSTDIR\sdk\bin\examples\BounceSprites.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\sdk\bin\examples\CDPlayer.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Gears.lnk" "$INSTDIR\sdk\bin\examples\Gears.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Isotope.lnk" "$INSTDIR\sdk\bin\examples\Isotope.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\sdk\bin\examples\MoviePlayer.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\NeHe.lnk" "$INSTDIR\sdk\bin\examples\NeHe.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleExample.lnk" "$INSTDIR\sdk\bin\examples\ParticlesExample.exe"

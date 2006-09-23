@@ -122,9 +122,6 @@ Section "Source" SecSrc
   SetOutPath "$INSTDIR\sdk\src"
   File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\src\*.*
   
-  SetOutPath "$INSTDIR\sdk\extras"
-  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\extras\*.*
-  
   SetOutPath "$INSTDIR\sdk\examples"
   File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\examples\*.*
 
@@ -174,6 +171,7 @@ Section "Examples" SecExamples
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BounceSprites.lnk" "$INSTDIR\sdk\bin\examples\BounceSprites.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\sdk\bin\examples\CDPlayer.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Gears.lnk" "$INSTDIR\sdk\bin\examples\Gears.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Isotope.lnk" "$INSTDIR\sdk\bin\examples\Isotope.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\sdk\bin\examples\MoviePlayer.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\NeHe.lnk" "$INSTDIR\sdk\bin\examples\NeHe.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleExample.lnk" "$INSTDIR\sdk\bin\examples\ParticlesExample.exe"
