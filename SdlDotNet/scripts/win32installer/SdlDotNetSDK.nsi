@@ -11,7 +11,7 @@
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNetSDK"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNetSDK"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
-!define PRODUCT_PATH "../../bin/${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
+!define PRODUCT_PATH "../../dist/${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
 
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP_NOSTRETCH
@@ -79,7 +79,7 @@ Var filename
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "..\..\bin\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_TYPE}-setup.exe"
+OutFile "..\..\dist\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_TYPE}-setup.exe"
 InstallDir "$PROGRAMFILES\SdlDotNet"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
@@ -114,22 +114,22 @@ Section "Source" SecSrc
   SetOverwrite ifnewer
   
   SetOutPath "$INSTDIR\sdk\tools"
-  File /r ${PRODUCT_PATH}\tools\*.*
+  File /r ${PRODUCT_PATH}\source\tools\*.*
 
   SetOutPath "$INSTDIR\sdk\tests"
-  File /r /x obj /x CVS ${PRODUCT_PATH}\tests\*.*
+  File /r /x obj /x CVS ${PRODUCT_PATH}\source\tests\*.*
 
   SetOutPath "$INSTDIR\sdk\src"
-  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\src\*.*
+  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\source\src\*.*
   
   SetOutPath "$INSTDIR\sdk\examples"
-  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\examples\*.*
+  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\source\examples\*.*
 
   SetOutPath "$INSTDIR\sdk\scripts"
-  File /r /x CVS ${PRODUCT_PATH}\scripts\*.*
+  File /r /x CVS ${PRODUCT_PATH}\source\scripts\*.*
 
   SetOutPath "$INSTDIR\sdk"
-  File ${PRODUCT_PATH}\*.*
+  File ${PRODUCT_PATH}\source\*.*
 
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
@@ -148,7 +148,7 @@ Section "Runtime" SecRuntime
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
   
   SetOutPath "$SYSDIR"
-  File /r /x CVS ${PRODUCT_PATH}\lib\win32deps\*.*
+  File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
   
   Push "SdlDotNet"
   Push $INSTDIR\runtime\bin

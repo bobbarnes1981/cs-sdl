@@ -9,7 +9,7 @@
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNetRuntime"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNetRuntime"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
-!define PRODUCT_PATH "../../bin/${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
+!define PRODUCT_PATH "../../dist/${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
 
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP_NOSTRETCH
@@ -70,7 +70,7 @@ Var filename
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "..\..\bin\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_TYPE}-setup.exe"
+OutFile "..\..\dist\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_TYPE}-setup.exe"
 InstallDir "$PROGRAMFILES\SdlDotNet"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
@@ -113,7 +113,7 @@ Section "Runtime" SecRuntime
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
   
   SetOutPath "$SYSDIR"
-  File /r /x CVS ${PRODUCT_PATH}\lib\win32deps\*.*
+  File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
   
   Push "SdlDotNet"
   Push $INSTDIR\runtime\bin
