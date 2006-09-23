@@ -54,7 +54,7 @@
 	    <Reference name="System" />
 	    <Reference name="System.Windows.Forms" />
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="Tao.Sdl" localCopy="true" path="../lib"/>
+	    <Reference name="Tao.Sdl" localCopy="true" path="../lib/net-1.1"/>
 	    <Files>
 		<Match path="." pattern="SurfaceControl.cs" subType="Component" recurse="true" resourceName="Windows.SurfaceControl"/>
 		<Match path="Windows" pattern="*.bmp" buildAction="EmbeddedResource" recurse="true"/>
@@ -122,8 +122,8 @@
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
-	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib"/>
-	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib"/>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-1.1"/>
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -186,7 +186,7 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib"/>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -502,9 +502,9 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="../lib"/>
+	    <Reference name="Tao.Sdl" localCopy="true" path="../lib/net-1.1"/>
 	    <Reference name="GuiExample" localCopy="true"/>
-	    <Reference name="nunit.framework" localCopy="true" path="../lib"/>
+	    <Reference name="nunit.framework" localCopy="true" path="../lib/net-1.1"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
@@ -599,8 +599,8 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
-	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib"/>
-	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib"/>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-1.1"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -633,9 +633,9 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib"/>
-	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib"/>
-	    <Reference name="Tao.Platform.Windows" localCopy="true" path="../../lib"/>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-1.1"/>
+	    <Reference name="Tao.Platform.Windows" localCopy="true" path="../../lib/net-1.1"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<File subType="Form">NeHe.cs</File>
@@ -671,9 +671,9 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib"/>
-	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib"/>
-	    <Reference name="Tao.FreeGlut" localCopy="true" path="../../lib"/>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-1.1"/>
+	    <Reference name="Tao.FreeGlut" localCopy="true" path="../../lib/net-1.1"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<File subType="Form">RedBook.cs</File>
@@ -708,7 +708,7 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.PhysFs" localCopy="true" path="../../lib"/>
+	    <Reference name="Tao.PhysFs" localCopy="true" path="../../lib/net-1.1"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -740,7 +740,7 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib"/>
+	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-1.1"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
