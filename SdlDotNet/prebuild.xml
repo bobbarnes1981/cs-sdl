@@ -3,7 +3,11 @@
     <Solution name="SdlDotNet">
 	<Configuration name="Debug">
 	    <Options>
+		<?if build = "NET_1_1" ?>
 		<CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		<?else ?>
+		<CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		<?endif ?>
 		<OptimizeCode>false</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>bin/Debug</OutputPath>
@@ -14,7 +18,11 @@
 	</Configuration>
 	<Configuration name="Release">
 	    <Options>
+		<?if build = "NET_1_1" ?>
 		<CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		<?else ?>
+		<CompilerDefines>TRACE</CompilerDefines>
+		<?endif ?>
 		<OptimizeCode>true</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>bin/Release</OutputPath>
@@ -29,7 +37,11 @@
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -41,7 +53,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -54,11 +70,15 @@
 	    <Reference name="System" />
 	    <Reference name="System.Windows.Forms" />
 	    <Reference name="System.Drawing" /> 
+	    <?if build = "NET_1_1" ?>
 	    <Reference name="Tao.Sdl" localCopy="true" path="../lib/net-1.1"/>
+	    <?else ?>
+	    <Reference name="Tao.Sdl" localCopy="true" path="../lib/net-2.0"/>
+	    <?endif ?>
 	    <Files>
-		<Match path="." pattern="SurfaceControl.cs" subType="Component" recurse="true" resourceName="Windows.SurfaceControl"/>
+		<Match pattern="SurfaceControl.cs" subType="Component" recurse="true" resourceName="Windows.SurfaceControl"/>
 		<Match path="Windows" pattern="*.bmp" buildAction="EmbeddedResource" recurse="true"/>
-		<Match path="." pattern="*.cs" recurse="true">
+		<Match pattern="*.cs" recurse="true">
 		    <Exclude name="SurfaceControl.cs"/>
 		</Match>
 	    </Files>
@@ -66,7 +86,11 @@
 	<Project name="SdlDotNet.Particles" path="examples/Particles" language="C#" type="Library" assemblyName="SdlDotNet.Particles" rootNamespace="SdlDotNet.Particles">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -78,7 +102,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -98,7 +126,11 @@
 	<Project name="SdlDotNet.OpenGl" path="examples/OpenGl" language="C#" type="Library" assemblyName="SdlDotNet.OpenGl" rootNamespace="SdlDotNet.OpenGl">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -110,7 +142,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -122,8 +158,13 @@
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
+	    <?if build = "NET_1_1" ?>
 	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
 	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-1.1"/>
+	    <?else ?>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-2.0"/>
+	    <?endif ?>
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -132,7 +173,11 @@
 	<Project name="Rectangles" path="examples/Rectangles" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Rectangles.Rectangles" assemblyName="Rectangles" rootNamespace="SdlDotNet.Examples.Rectangles" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -143,7 +188,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -163,7 +212,11 @@
 	<Project name="Gears" path="examples/Gears" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Gears.Gears" assemblyName="Gears" rootNamespace="SdlDotNet.Examples.Gears" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -174,7 +227,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -186,7 +243,11 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <?if build = "NET_1_1" ?>
 	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
+	    <?else ?>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
+	    <?endif ?>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -195,7 +256,11 @@
 	<Project name="CDPlayer" path="examples/CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples.CDPlayer" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -206,7 +271,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -221,7 +290,11 @@
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
+		<?if build = "NET_1_1" ?>
 		<File subType="Form" resourceName="CDPlayer">CDPlayer.cs</File>
+		<?else ?>
+		<File subType="Form" resourceName="CDPlayer">CDPlayer2.cs</File>
+		<?endif ?>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="CDPlayer.cs"/>		    
 		    <Exclude name="CDPlayer2.cs"/>		    
@@ -231,7 +304,11 @@
 	<Project name="MoviePlayer" path="examples/MoviePlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.MoviePlayer.MoviePlayer" assemblyName="MoviePlayer" rootNamespace="SdlDotNet.Examples.MoviePlayer" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -242,7 +319,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -262,7 +343,11 @@
 	<Project name="SimpleGame" path="examples/SimpleGame" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SimpleGame.GameMain" assemblyName="SimpleGame" rootNamespace="SdlDotNet.Examples.SimpleGame" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -273,7 +358,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -293,7 +382,11 @@
 	<Project name="BombRun" path="examples/BombRun" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BombRun.BombRun" assemblyName="BombRun" rootNamespace="SdlDotNet.Examples.BombRun" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -304,7 +397,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -324,7 +421,11 @@
 	<Project name="SnowDemo" path="examples/SnowDemo" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SnowDemo.SnowDemo" assemblyName="SnowDemo" rootNamespace="SdlDotNet.Examples.SnowDemo" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -335,7 +436,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -355,7 +460,11 @@
 	<Project name="BounceSprites" path="examples/BounceSprites" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BounceSprites.BounceSprites" assemblyName="BounceSprites" rootNamespace="SdlDotNet.Examples.BounceSprites" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -366,7 +475,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -386,7 +499,11 @@
 	<Project name="Triad" path="examples/Triad" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Triad.MainObject" assemblyName="Triad" rootNamespace="SdlDotNet.Examples.Triad" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -397,7 +514,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -417,7 +538,11 @@
 	<Project name="GuiExample" path="examples/GuiExample" language="C#" type="Library" assemblyName="GuiExample" rootNamespace="SdlDotNet.Examples.GuiExample">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -428,7 +553,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -447,7 +576,11 @@
 	<Project name="SpriteGuiDemos" path="examples/SpriteGuiDemos" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SpriteGuiDemos.SdlDemo" assemblyName="SpriteGuiDemos" rootNamespace="SdlDotNet.Examples.SpriteGuiDemos" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -458,7 +591,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -479,7 +616,11 @@
 	<Project name="Tests" path="tests" language="C#" type="Library" assemblyName="SdlDotNet.Tests" rootNamespace="SdlDotNet.Tests">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -490,7 +631,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -502,7 +647,11 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <?if build = "NET_1_1" ?>
 	    <Reference name="Tao.Sdl" localCopy="true" path="../lib/net-1.1"/>
+	    <?else ?>
+	    <Reference name="Tao.Sdl" localCopy="true" path="../lib/net-2.0"/>
+	    <?endif ?>
 	    <Reference name="GuiExample" localCopy="true"/>
 	    <Reference name="nunit.framework" localCopy="true" path="../lib/net-1.1"/>
 	    <Files>
@@ -512,7 +661,11 @@
 	<Project name="AudioExample" path="examples/AudioExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.AudioExample.AudioExample" assemblyName="AudioExample" rootNamespace="SdlDotNet.Examples.AudioExample" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -523,7 +676,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -543,7 +700,11 @@
 	<Project name="ParticlesExample" path="examples/ParticlesExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.ParticlesExample.ParticlesExample" assemblyName="ParticlesExample" rootNamespace="SdlDotNet.Examples.ParticlesExample" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -554,7 +715,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -575,7 +740,11 @@
 	<Project name="OpenGlFont" path="examples/OpenGlFont" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.OpenGlFont.OpenGlFont" assemblyName="OpenGlFont" rootNamespace="SdlDotNet.Examples.OpenGlFont" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -586,7 +755,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -599,8 +772,13 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
+	    <?if build = "NET_1_1" ?>
 	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
 	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-1.1"/>
+	    <?else ?>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-2.0"/>
+	    <?endif ?>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -609,7 +787,11 @@
 	<Project name="NeHe" path="examples/NeHe" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.NeHe.NeHe" assemblyName="NeHe" rootNamespace="SdlDotNet.Examples.NeHe" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -620,7 +802,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -633,9 +819,15 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <?if build = "NET_1_1" ?>
 	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
 	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-1.1"/>
 	    <Reference name="Tao.Platform.Windows" localCopy="true" path="../../lib/net-1.1"/>
+	    <?else ?>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="Tao.Platform.Windows" localCopy="true" path="../../lib/net-2.0"/>
+	    <?endif ?>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<File subType="Form">NeHe.cs</File>
@@ -647,7 +839,11 @@
 	<Project name="RedBook" path="examples/RedBook" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.RedBook.RedBook" assemblyName="RedBook" rootNamespace="SdlDotNet.Examples.RedBook" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -658,7 +854,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -671,8 +871,13 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <?if build = "NET_1_1" ?>
 	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-1.1"/>
 	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-1.1"/>
+	    <?else ?>
+	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="Tao.OpenGl.Glu" localCopy="true" path="../../lib/net-2.0"/>
+	    <?endif ?>
 	    <Reference name="Tao.FreeGlut" localCopy="true" path="../../lib/net-1.1"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
@@ -685,7 +890,11 @@
 	<Project name="PhysFsTest" path="examples/PhysFsTest" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.PhysFsTest.PhysFsTest" assemblyName="PhysFsTest" rootNamespace="SdlDotNet.Examples.PhysFsTest" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -696,7 +905,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -717,7 +930,11 @@
 	<Project name="Isotope" path="examples/Isotope" language="C#" type="WinExe" assemblyName="Isotope" rootNamespace="SdlDotNet.Examples.Isotope" icon="App.ico">
 	    <Configuration name="Debug">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -728,7 +945,11 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
+		    <?if build = "NET_1_1" ?>
 		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
+		    <?else ?>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -740,7 +961,11 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <?if build = "NET_1_1" ?>
 	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-1.1"/>
+	    <?else ?>
+	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-2.0"/>
+	    <?endif ?>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>

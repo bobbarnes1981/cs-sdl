@@ -1,3 +1,3 @@
 @rem Generates Makefiles 
 @rem for autotools
-..\tools\Prebuild\Prebuild.exe /target autotools /file ..\prebuild2.xml /pause
+..\tools\Prebuild\Prebuild.exe /target autotools /build NET_2_0 /file ..\prebuild.xml /pause

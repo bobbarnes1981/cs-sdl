@@ -1,2 +1,2 @@
 @ECHO OFF
-..\tools\Prebuild\Prebuild.exe /target sharpdev2 /file ..\prebuild2.xml /pause
+..\tools\Prebuild\Prebuild.exe /target sharpdev2 /build NET_2_0 /file ..\prebuild.xml /pause
