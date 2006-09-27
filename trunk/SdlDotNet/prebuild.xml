@@ -47,6 +47,7 @@
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>SdlDotNet.xml</XmlDocFile>
+		    <KeyFile>SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -62,6 +63,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <XmlDocFile>SdlDotNet.xml</XmlDocFile>
+		    <KeyFile>SdlDotNet.snk</KeyFile>
 		    <DebugInformation>false</DebugInformation>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
@@ -96,6 +98,7 @@
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>SdlDotNet.Particles.xml</XmlDocFile>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -112,6 +115,7 @@
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>SdlDotNet.Particles.xml</XmlDocFile>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -136,6 +140,7 @@
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
 		    <XmlDocFile>SdlDotNet.OpenGl.xml</XmlDocFile>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -152,6 +157,7 @@
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
 		    <XmlDocFile>SdlDotNet.OpenGl.xml</XmlDocFile>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -182,6 +188,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -197,6 +204,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -221,6 +229,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -236,6 +245,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -265,6 +275,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -280,6 +291,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -313,6 +325,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -328,6 +341,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -352,6 +366,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -367,6 +382,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -391,6 +407,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -406,6 +423,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -430,6 +448,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -445,6 +464,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -469,6 +489,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -484,6 +505,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -508,6 +530,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -523,6 +546,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -547,6 +571,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -562,6 +587,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -585,6 +611,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -600,6 +627,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -625,6 +653,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -640,6 +669,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -670,6 +700,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -685,6 +716,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -709,6 +741,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -724,6 +757,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -749,6 +783,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -764,6 +799,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -796,6 +832,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -811,6 +848,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -848,6 +886,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -863,6 +902,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -899,6 +939,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -914,6 +955,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -939,6 +981,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
@@ -954,6 +997,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
