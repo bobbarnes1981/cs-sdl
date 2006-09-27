@@ -78,7 +78,7 @@ ShowUnInstDetails show
 
 ; .NET Framework check
 ; http://msdn.microsoft.com/netframework/default.aspx?pull=/library/en-us/dnnetdep/html/redistdeploy1_1.asp
-; Section "Detecting that the .NET Framework 1.1 is installed"
+; Section "Detecting that the .NET Framework 2.0 is installed"
 Function .onInit
 	ReadRegDWORD $R0 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727" Install
 	StrCmp $R0 "" 0 CheckPreviousVersion
@@ -105,6 +105,9 @@ Section "Runtime" SecRuntime
   SetOverwrite ifnewer
   SetOutPath "$INSTDIR\runtime\bin"
   File /r /x CVS /x *Particles* /x *OpenGl* ${PRODUCT_PATH}\bin\assemblies\*.*
+
+  SetOutPath "$INSTDIR\runtime\tools"
+  File /r ${PRODUCT_PATH}\source\tools\Prebuild\Prebuild2.exe
 
   SetOutPath "$INSTDIR\runtime\lib"
   File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
@@ -269,18 +272,13 @@ Function IsSupportedWindowsVersion
 FunctionEnd
 
 Function GACInstall
-  FindFirst $file_handle $filename $INSTDIR\runtime\bin\*.dll
-  loop:
-	StrCmp $filename "" done
-	nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /i "$INSTDIR\runtime\bin\$filename" /f'
-	FindNext $file_handle $filename
-  	Goto loop
-  done:
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /install $INSTDIR/runtime/bin/Tao.Sdl.dll'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /install $INSTDIR/runtime/bin/SdlDotNet.dll'
 
 FunctionEnd
 
 Function un.GACUnInstall
-  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "Tao.Sdl"'
-  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet"'
+  nsExec::Exec '"$INSTDIR\runtime\tools\Prebuild2.exe" /remove $INSTDIR\runtime\bin\Tao.Sdl'
+  nsExec::Exec '"$INSTDIR\runtime\tools\Prebuild2.exe" /remove $INSTDIR\runtime\bin\SdlDotNet'
 
 FunctionEnd

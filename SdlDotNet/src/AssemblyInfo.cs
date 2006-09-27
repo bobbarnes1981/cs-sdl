@@ -45,6 +45,7 @@ using System.IO;
 [assembly: AssemblyVersion("4.0.5.0")]
 [assembly: AssemblyFileVersion("4.0.5.0")]
 [assembly: AssemblyInformationalVersion("4.0.5.0")]
+[assembly: AssemblyKeyFile(@"../../SdlDotNet.snk")]
 #else
 [assembly: AssemblyVersion("5.0.0.0")]
 [assembly: AssemblyFileVersion("5.0.0.0")]
@@ -97,6 +98,3 @@ using System.IO;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyDelaySign(false)]
-#if NET_1_1
-[assembly: AssemblyKeyFile(@"../../SdlDotNet.snk")]
-#endif

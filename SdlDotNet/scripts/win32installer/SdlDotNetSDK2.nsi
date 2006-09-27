@@ -348,7 +348,7 @@ Function GACInstall
   FindFirst $file_handle $filename $INSTDIR\runtime\bin\*.dll
   loop:
 	StrCmp $filename "" done
-	nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /i "$INSTDIR\runtime\bin\$filename" /f'
+	nsExec::Exec '"$INSTDIR\sdk\tools\Prebuild\Prebuild2.exe" /install "$INSTDIR\runtime\bin\$filename" /f'
 	FindNext $file_handle $filename
   	Goto loop
   done:
@@ -356,8 +356,8 @@ Function GACInstall
 FunctionEnd
 
 Function un.GACUnInstall
-  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "Tao.Sdl"'
-  nsExec::Exec '"$WINDIR\Microsoft.NET\Framework\v1.1.4322\gacutil.exe" /u "SdlDotNet"'
+  nsExec::Exec '"$INSTDIR\sdk\tools\Prebuild\Prebuild2.exe" /remove "Tao.Sdl"'
+  nsExec::Exec '"$INSTDIR\sdk\tools\Prebuild\Prebuild2.exe" /remove "SdlDotNet"'
 
 FunctionEnd
 
