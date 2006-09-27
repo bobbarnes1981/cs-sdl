@@ -37,8 +37,6 @@ CRCCheck on
 ;Variables
 
 Var STARTMENU_FOLDER
-Var file_handle
-Var filename
 ;--------------------------------
 ;Installer Pages
 
@@ -345,19 +343,14 @@ Function IsSupportedWindowsVersion
 FunctionEnd
 
 Function GACInstall
-  FindFirst $file_handle $filename $INSTDIR\runtime\bin\*.dll
-  loop:
-	StrCmp $filename "" done
-	nsExec::Exec '"$INSTDIR\sdk\tools\Prebuild\Prebuild2.exe" /install "$INSTDIR\runtime\bin\$filename" /f'
-	FindNext $file_handle $filename
-  	Goto loop
-  done:
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /install "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /install "$INSTDIR/runtime/bin/SdlDotNet.dll"'
 
 FunctionEnd
 
 Function un.GACUnInstall
-  nsExec::Exec '"$INSTDIR\sdk\tools\Prebuild\Prebuild2.exe" /remove "Tao.Sdl"'
-  nsExec::Exec '"$INSTDIR\sdk\tools\Prebuild\Prebuild2.exe" /remove "SdlDotNet"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /remove "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /remove "$INSTDIR/runtime/bin/SdlDotNet.dll"'
 
 FunctionEnd
 
