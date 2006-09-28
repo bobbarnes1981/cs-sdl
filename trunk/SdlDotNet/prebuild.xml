@@ -973,7 +973,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="Isotope" path="examples/Isotope" language="C#" type="WinExe" assemblyName="Isotope" rootNamespace="SdlDotNet.Examples.Isotope" icon="App.ico" designerFolder="Properties">
+	<Project name="Isotope" path="examples/Isotope" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Isotope.MainClass" assemblyName="Isotope" rootNamespace="SdlDotNet.Examples.Isotope" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <?if build = "NET_1_1" ?>
@@ -1020,7 +1020,7 @@
 	    </Files>
 	</Project>
 	<?if build = "NET_2_0" ?>
-	<Project name="StreamingAudio" path="examples/StreamingAudio" language="C#" type="Exe" assemblyName="StreamingAudio" rootNamespace="SdlDotNet.Examples.StreamingAudio" icon="App.ico" designerFolder="Properties">
+	<Project name="StreamingAudio" path="examples/StreamingAudio" language="C#" type="Exe" startupObject="SdlDotNet.Examples.StreamingAudio.StreamingAudio" assemblyName="StreamingAudio" rootNamespace="SdlDotNet.Examples.StreamingAudio" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
