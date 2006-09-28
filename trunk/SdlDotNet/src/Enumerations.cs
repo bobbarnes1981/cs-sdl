@@ -117,6 +117,25 @@ namespace SdlDotNet
 		SourceAlphaBlending  = Sdl.SDL_SRCALPHA
 	}
 
+    /// <summary>
+    /// Audio playing status
+    /// </summary>
+    public enum AudioStatus
+    {
+        /// <summary>
+        /// Audio is not playing
+        /// </summary>
+        Stopped,
+        /// <summary>
+        /// Audio is paused
+        /// </summary>
+        Playing,
+        /// <summary>
+        /// Audio is currently playing
+        /// </summary>
+        Paused
+    }
+
 	/// <summary>
 	/// Status of Movie
 	/// </summary>
