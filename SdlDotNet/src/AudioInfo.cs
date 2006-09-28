@@ -43,7 +43,10 @@ namespace SdlDotNet
         /// </summary>
         public int Frequency
         {
-            get { return this.data.freq; }
+            get 
+            { 
+                return this.data.freq; 
+            }
         }
 
         /// <summary>
@@ -51,7 +54,10 @@ namespace SdlDotNet
         /// </summary>
         public AudioFormat Format
         {
-            get { return (AudioFormat)this.data.format; }
+            get 
+            { 
+                return (AudioFormat)this.data.format; 
+            }
         }
 
         /// <summary>
@@ -59,7 +65,10 @@ namespace SdlDotNet
         /// </summary>
         public byte Channels
         {
-            get { return this.data.channels; }
+            get 
+            { 
+                return this.data.channels; 
+            }
         }
 
         /// <summary>
@@ -67,7 +76,10 @@ namespace SdlDotNet
         /// </summary>
         public short Samples
         {
-            get { return this.data.samples; }
+            get 
+            { 
+                return this.data.samples; 
+            }
         }
 
         /// <summary>
@@ -75,7 +87,10 @@ namespace SdlDotNet
         /// </summary>
         public int BufferSize
         {
-            get { return this.data.size; }
+            get 
+            { 
+                return this.data.size; 
+            }
         }
 
         /// <summary>
@@ -83,7 +98,10 @@ namespace SdlDotNet
         /// </summary>
         public int Silence
         {
-            get { return this.data.silence; }
+            get 
+            { 
+                return this.data.silence; 
+            }
         }
 
         /// <summary>
@@ -91,7 +109,10 @@ namespace SdlDotNet
         /// </summary>
         public int Offset
         {
-            get { return this.offset; }
+            get 
+            { 
+                return this.offset; 
+            }
         }
 
         /// <summary>
@@ -99,7 +120,10 @@ namespace SdlDotNet
         /// </summary>
         public byte Bits
         {
-            get { return this.bits; }
+            get 
+            { 
+                return this.bits; 
+            }
         }
     }
 }
