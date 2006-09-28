@@ -81,7 +81,11 @@
 		<Match pattern="SurfaceControl.cs" subType="Component" recurse="true" resourceName="Windows.SurfaceControl"/>
 		<Match path="Windows" pattern="*.bmp" buildAction="EmbeddedResource" recurse="true"/>
 		<Match pattern="*.cs" recurse="true">
-		    <Exclude name="SurfaceControl.cs"/>
+			<Exclude name="SurfaceControl.cs"/>
+			<?if build = "NET_1_1" ?>
+				<Exclude name="Audio.cs"/>
+				<Exclude name="AudioStream.cs"/>
+	    		<?endif ?>
 		</Match>
 	    </Files>
 	</Project>
@@ -1015,14 +1019,11 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
+	<?if build = "NET_2_0" ?>
 	<Project name="StreamingAudio" path="examples/StreamingAudio" language="C#" type="Exe" assemblyName="StreamingAudio" rootNamespace="SdlDotNet.Examples.StreamingAudio" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
-		    <?if build = "NET_1_1" ?>
-		    <CompilerDefines>DEBUG;TRACE;NET_1_1</CompilerDefines>
-		    <?else ?>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <?endif ?>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -1034,11 +1035,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <?if build = "NET_1_1" ?>
-		    <CompilerDefines>TRACE;NET_1_1</CompilerDefines>
-		    <?else ?>
 		    <CompilerDefines>TRACE</CompilerDefines>
-		    <?endif ?>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -1051,15 +1048,12 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <?if build = "NET_1_1" ?>
-	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-1.1"/>
-	    <?else ?>
 	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-2.0"/>
-	    <?endif ?>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
+	<?endif ?>
     </Solution>
 </Prebuild>
