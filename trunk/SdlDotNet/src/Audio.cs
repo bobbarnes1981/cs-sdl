@@ -52,7 +52,7 @@ namespace SdlDotNet
         /// </exception>
         public static void OpenAudio(int frequency, AudioFormat format, SoundChannel channels, short samples, Sdl.AudioSpecCallbackDelegate callback, object data)
         {
-            if (s_audioOpen)
+            if (audioOpen)
             {
                 throw new AudioException("OpenAudio already called and initialized.  Call CloseAudio first before calling OpenAudio again.");
             }
@@ -64,7 +64,7 @@ namespace SdlDotNet
                     throw new AudioException("Unable to initialize audio subsystem.  SDL Error: " + Sdl.SDL_GetError());
                 }
                 
-                s_audioWasNotAlreadyInitialized = true;
+                audioWasNotAlreadyInitialized = true;
             }
 
             Sdl.SDL_AudioSpec spec;
@@ -104,7 +104,7 @@ namespace SdlDotNet
                     offset = 2 << (bits - 2);
                 }
                 
-                s_audioInfo = new AudioInfo(spec, bits, offset);
+                audioInfo = new AudioInfo(spec, bits, offset);
 
             }
             finally
@@ -112,8 +112,8 @@ namespace SdlDotNet
                 Marshal.FreeHGlobal(pSpec);
             }
 
-            s_audioCallbackDelegate = callback;
-            s_audioOpen = true;
+            audioCallbackDelegate = callback;
+            audioOpen = true;
         }
 
         /// <summary>
@@ -139,13 +139,15 @@ namespace SdlDotNet
         /// </exception>
         public static AudioStream OpenAudioStream(int frequency, AudioFormat format, SoundChannel channels, short samples)
         {
-            if (s_audioOpen)
+            if (audioOpen)
             {
                 throw new AudioException("OpenAudio already called and initialized.  Call CloseAudio first before calling OpenAudio again.");
             }
 
             if (format != AudioFormat.Unsigned16Little)
+            {
                 throw new ArgumentException("Only AudioFormat.Unsigned16Little currently supported.", "format");
+            }
 
             if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != Sdl.SDL_INIT_AUDIO)
             {
@@ -154,7 +156,7 @@ namespace SdlDotNet
                     throw new AudioException("Unable to initialize audio subsystem.  SDL Error: " + Sdl.SDL_GetError());
                 }
 
-                s_audioWasNotAlreadyInitialized = true;
+                audioWasNotAlreadyInitialized = true;
             }
 
             Sdl.SDL_AudioSpec spec;
@@ -164,16 +166,16 @@ namespace SdlDotNet
             spec.silence = 0;
 
             // create new stream
-            AudioStream stream = new AudioStream(frequency, samples);
+            AudioStream audioStream = new AudioStream(frequency, samples);
 
             // get delegate
-            Sdl.AudioSpecCallbackDelegate callback = new Sdl.AudioSpecCallbackDelegate(stream.Unsigned16LittleStream);
+            Sdl.AudioSpecCallbackDelegate callback = new Sdl.AudioSpecCallbackDelegate(audioStream.Unsigned16LittleStream);
 
             spec.freq = frequency;
             spec.format = (short)format;
             spec.channels = (byte)channels;
             spec.callback = Marshal.GetFunctionPointerForDelegate(callback);
-            spec.samples = stream.Samples;
+            spec.samples = audioStream.Samples;
             spec.userdata = null;
 
             IntPtr pSpec = Marshal.AllocHGlobal(Marshal.SizeOf(spec));
@@ -199,7 +201,7 @@ namespace SdlDotNet
                     offset = 2 << (bits - 2);
                 }
 
-                s_audioInfo = new AudioInfo(spec, bits, offset);
+                audioInfo = new AudioInfo(spec, bits, offset);
 
             }
             finally
@@ -207,13 +209,13 @@ namespace SdlDotNet
                 Marshal.FreeHGlobal(pSpec);
             }
 
-            stream.Samples = s_audioInfo.Samples;
+            audioStream.Samples = audioInfo.Samples;
 
-            s_stream = stream;
-            s_audioCallbackDelegate = callback;
-            s_audioOpen = true;
+            stream = audioStream;
+            audioCallbackDelegate = callback;
+            audioOpen = true;
 
-            return s_stream;
+            return stream;
         }
 
         /// <summary>
@@ -225,18 +227,18 @@ namespace SdlDotNet
 
             Sdl.SDL_CloseAudio();
  
-            s_audioCallbackDelegate = null;
-            s_audioOpen = false;
-            s_audioInfo = null;
-            s_audioLocked = false;
+            audioCallbackDelegate = null;
+            audioOpen = false;
+            audioInfo = null;
+            audioLocked = false;
             
-            if (s_stream != null)
+            if (stream != null)
             {
-                s_stream.Close();
-                s_stream = null;
+                stream.Close();
+                stream = null;
             }
 
-            if (s_audioWasNotAlreadyInitialized)
+            if (audioWasNotAlreadyInitialized)
             {
                 Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
             }
@@ -250,16 +252,20 @@ namespace SdlDotNet
         {
             get
             {
-                return s_audioLocked;
+                return audioLocked;
             }
 
             set
             {
-                s_audioLocked = value;
+                audioLocked = value;
                 if (value)
+                {
                     Sdl.SDL_LockAudio();
+                }
                 else
+                {
                     Sdl.SDL_UnlockAudio();
+                }
             }
         }
 
@@ -301,7 +307,10 @@ namespace SdlDotNet
         /// </summary>
         public static AudioInfo AudioInfo
         {
-            get { return s_audioInfo; }
+            get 
+            { 
+                return audioInfo; 
+            }
         }
 
         /// <summary>
@@ -309,7 +318,10 @@ namespace SdlDotNet
         /// </summary>
         public static bool Open
         {
-            get { return s_audioOpen; }
+            get 
+            { 
+                return audioOpen; 
+            }
         }
 
         #endregion Public methods
@@ -318,8 +330,10 @@ namespace SdlDotNet
 
         static void CheckOpenStatus(string function)
         {
-            if (!s_audioOpen)
+            if (!audioOpen)
+            {
                 throw new AudioException(String.Format("OpenAudio must be called before calling {0}.", function));
+            }
         }
 
         #endregion Private methods
@@ -327,19 +341,17 @@ namespace SdlDotNet
 
         #region Private fields
 
-        static bool s_audioWasNotAlreadyInitialized = false;
-        static bool s_audioOpen = false;
+        static bool audioWasNotAlreadyInitialized = false;
+        static bool audioOpen = false;
 
-        static Sdl.AudioSpecCallbackDelegate s_audioCallbackDelegate;
+        static Sdl.AudioSpecCallbackDelegate audioCallbackDelegate;
 
-        static AudioInfo s_audioInfo;
+        static AudioInfo audioInfo;
 
-        static bool s_audioLocked = false;
+        static bool audioLocked = false;
 
-        static AudioStream s_stream;
+        static AudioStream stream;
 
         #endregion Private fields
-
     }
-
 }
