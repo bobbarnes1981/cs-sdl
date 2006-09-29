@@ -40,7 +40,7 @@ namespace SdlDotNet.Examples.StreamingAudio
 
             AudioFormat fmt = AudioFormat.Signed16Little;
 
-            Audio.OpenAudio(playback_freq, fmt, SoundChannel.Mono, samples, new Tao.Sdl.Sdl.AudioSpecCallbackDelegate(Unsigned16LittleCallback), me);
+            Audio.OpenAudio(playback_freq, fmt, SoundChannel.Mono, samples, new AudioCallbackDelegate(Unsigned16LittleCallback), me);
 
             offset = Audio.AudioInfo.Offset;
             volume = 0.9 * 32768;
