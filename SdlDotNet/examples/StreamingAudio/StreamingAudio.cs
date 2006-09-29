@@ -64,7 +64,7 @@ namespace SdlDotNet.Examples.StreamingAudio
             Audio.CloseAudio();
         }
 
-        static byte[] buffer8;
+        static byte[] buffer8 = { };
         static short[] buffer16;
 
         const double pi2 = Math.PI * 2;
