@@ -21,8 +21,15 @@ using System;
 using System.Runtime.InteropServices;
 using Tao.Sdl;
 
+ 
 namespace SdlDotNet
 {
+    /// <summary>
+    /// Used in the SDL_AudioSpec struct
+    /// </summary>
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void AudioCallbackDelegate(IntPtr userdata, IntPtr stream, int len);
+
     /// <summary>
     /// Represents an interface into the SDL Audio API, providing methods to open and close audio, and a callback facility to stream audio
     /// </summary>
@@ -50,7 +57,7 @@ namespace SdlDotNet
         ///     </item>
         /// </list>
         /// </exception>
-        public static void OpenAudio(int frequency, AudioFormat format, SoundChannel channels, short samples, Sdl.AudioSpecCallbackDelegate callback, object data)
+        public static void OpenAudio(int frequency, AudioFormat format, SoundChannel channels, short samples, AudioCallbackDelegate callback, object data)
         {
             if (audioOpen)
             {
@@ -169,7 +176,7 @@ namespace SdlDotNet
             AudioStream audioStream = new AudioStream(frequency, samples);
 
             // get delegate
-            Sdl.AudioSpecCallbackDelegate callback = new Sdl.AudioSpecCallbackDelegate(audioStream.Unsigned16LittleStream);
+            AudioCallbackDelegate callback = new AudioCallbackDelegate(audioStream.Unsigned16LittleStream);
 
             spec.freq = frequency;
             spec.format = (short)format;
@@ -344,7 +351,7 @@ namespace SdlDotNet
         static bool audioWasNotAlreadyInitialized = false;
         static bool audioOpen = false;
 
-        static Sdl.AudioSpecCallbackDelegate audioCallbackDelegate;
+        static AudioCallbackDelegate audioCallbackDelegate;
 
         static AudioInfo audioInfo;
 
