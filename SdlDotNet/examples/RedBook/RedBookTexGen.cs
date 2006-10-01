@@ -84,7 +84,7 @@ namespace SdlDotNet.Examples.RedBook
 
 		#region Private Fields
 		private static byte[] stripeImage = new byte[STRIPEWIDTH * 4];
-		private static int texture;
+		private static int[] texture = new int[1];
 
 		// planes for texture coordinate generation
 		private static float[] xequalzero = {1.0f, 0.0f, 0.0f, 0.0f};
@@ -160,8 +160,8 @@ namespace SdlDotNet.Examples.RedBook
 			MakeStripeImage();
 			Gl.glPixelStorei(Gl.GL_UNPACK_ALIGNMENT, 1);
 
-			Gl.glGenTextures(1, out texture);
-			Gl.glBindTexture(Gl.GL_TEXTURE_1D, texture);
+			Gl.glGenTextures(1, texture);
+			Gl.glBindTexture(Gl.GL_TEXTURE_1D, texture[0]);
 			Gl.glTexParameteri(Gl.GL_TEXTURE_1D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_REPEAT);
 			Gl.glTexParameteri(Gl.GL_TEXTURE_1D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
 			Gl.glTexParameteri(Gl.GL_TEXTURE_1D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
@@ -207,7 +207,7 @@ namespace SdlDotNet.Examples.RedBook
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glPushMatrix();
 			Gl.glRotatef(45.0f, 0.0f, 0.0f, 1.0f);
-			Gl.glBindTexture(Gl.GL_TEXTURE_1D, texture);
+			Gl.glBindTexture(Gl.GL_TEXTURE_1D, texture[0]);
 			Glut.glutSolidTeapot(2.0);
 			Gl.glPopMatrix();
 			Gl.glFlush();

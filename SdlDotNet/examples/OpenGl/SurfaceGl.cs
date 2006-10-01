@@ -59,9 +59,9 @@ namespace SdlDotNet.OpenGl
 		{
 			get
 			{
-				int texture;
-				Gl.glGenTextures(1, out texture);
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture);
+				int[] texture = new int[1];
+				Gl.glGenTextures(1, texture);
+				Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
 				// Rectangle For Locking The Bitmap In Memory
 				Rectangle rectangle = 
 					new Rectangle(0, 0, textureImage.Width, textureImage.Height);
@@ -77,7 +77,7 @@ namespace SdlDotNet.OpenGl
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
 				
 				//}
-				return texture;
+				return texture[0];
 			}
 		}
 

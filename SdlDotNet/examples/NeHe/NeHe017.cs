@@ -124,7 +124,7 @@ namespace SdlDotNet.Examples.NeHe
 				cy = (float)(loop / 16) / 16.0f;
 
 				// Start Building A List
-				Gl.glNewList((uint)(this.FontBase+loop), Gl.GL_COMPILE);
+				Gl.glNewList((int)(this.FontBase+loop), Gl.GL_COMPILE);
 				// Use A Quad For Each Character
 				Gl.glBegin(Gl.GL_QUADS);
 				// Texture Coord (Bottom Left)
