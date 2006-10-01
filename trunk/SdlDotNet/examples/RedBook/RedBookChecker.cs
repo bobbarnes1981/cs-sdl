@@ -65,7 +65,7 @@ namespace SdlDotNet.Examples.RedBook
 		private const int CHECKIMAGEWIDTH = 64;
 		private const int CHECKIMAGEHEIGHT = 64;
 		private static byte[ , , ] checkImage = new byte[CHECKIMAGEHEIGHT, CHECKIMAGEWIDTH, 4];
-		private static int texName;
+		private static int[] texName = new int[1];
 
 		/// <summary>
 		/// Lesson title
@@ -165,8 +165,8 @@ namespace SdlDotNet.Examples.RedBook
 			MakeCheckImage();
 			Gl.glPixelStorei(Gl.GL_UNPACK_ALIGNMENT, 1);
 
-			Gl.glGenTextures(1, out texName);
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texName);
+			Gl.glGenTextures(1, texName);
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texName[0]);
 
 			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_REPEAT);
 			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_REPEAT);
@@ -212,7 +212,7 @@ namespace SdlDotNet.Examples.RedBook
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL);
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texName);
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texName[0]);
 
 			Gl.glBegin(Gl.GL_QUADS);
 			Gl.glTexCoord2f(0.0f, 0.0f); Gl.glVertex3f(-2.0f, -1.0f, 0.0f);

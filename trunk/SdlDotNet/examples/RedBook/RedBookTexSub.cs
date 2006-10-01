@@ -84,7 +84,7 @@ namespace SdlDotNet.Examples.RedBook
 		#region Private Fields
 		private static byte[ , , ] checkImage = new byte[CHECKHEIGHT, CHECKWIDTH, 4];
 		private static byte[ , , ] subImage = new byte[SUBHEIGHT, SUBWIDTH, 4];
-		private static int texture;
+		private static int[] texture = new int[1];
 		#endregion Private Fields
 
 		#region Constructors
@@ -152,8 +152,8 @@ namespace SdlDotNet.Examples.RedBook
 			MakeCheckImages();
 			Gl.glPixelStorei(Gl.GL_UNPACK_ALIGNMENT, 1);
 
-			Gl.glGenTextures(1, out texture);
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture);
+			Gl.glGenTextures(1, texture);
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
 
 			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_REPEAT);
 			Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_REPEAT);
@@ -215,7 +215,7 @@ namespace SdlDotNet.Examples.RedBook
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
 			Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL);
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture);
+			Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
 			Gl.glBegin(Gl.GL_QUADS);
 			Gl.glTexCoord2f(0.0f, 0.0f);
 			Gl.glVertex3f(-2.0f, -1.0f, 0.0f);
@@ -264,11 +264,11 @@ namespace SdlDotNet.Examples.RedBook
 					Events.QuitApplication();
 					break;
 				case Key.S:
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture);
+					Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
 					Gl.glTexSubImage2D(Gl.GL_TEXTURE_2D, 0, 12, 44, SUBWIDTH, SUBHEIGHT, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, subImage);
 					break;
 				case Key.R:
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture);
+					Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
 					Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGBA, CHECKWIDTH, CHECKHEIGHT, 0, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, checkImage);
 					break;
 				default:

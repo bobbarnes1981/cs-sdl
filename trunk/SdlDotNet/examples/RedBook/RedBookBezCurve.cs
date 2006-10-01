@@ -168,8 +168,11 @@ namespace SdlDotNet.Examples.RedBook
 		{
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 			Gl.glShadeModel(Gl.GL_FLAT);
-			//Gl.glMap1f(Gl.GL_MAP1_VERTEX_3, 0.0f, 1.0f, 3, 4, controlPoints);
+#if NET_1_1
 			Gl.glMap1f(Gl.GL_MAP1_VERTEX_3, 0.0f, 1.0f, 3, 4, ref controlPoints[0,0]);
+#else
+			Gl.glMap1f(Gl.GL_MAP1_VERTEX_3, 0.0f, 1.0f, 3, 4, controlPoints);
+#endif
 			Gl.glEnable(Gl.GL_MAP1_VERTEX_3);
 		}
 

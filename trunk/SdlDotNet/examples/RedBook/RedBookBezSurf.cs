@@ -188,7 +188,11 @@ namespace SdlDotNet.Examples.RedBook
 		private static void Init()
 		{
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+#if NET_1_1
 			Gl.glMap2f(Gl.GL_MAP2_VERTEX_3, 0.0f, 1.0f, 3, 4, 0.0f, 1.0f, 12, 4, ref controlPoints[0,0,0]);
+#else
+			Gl.glMap2f(Gl.GL_MAP2_VERTEX_3, 0.0f, 1.0f, 3, 4, 0.0f, 1.0f, 12, 4, controlPoints);
+#endif
 			Gl.glEnable(Gl.GL_MAP2_VERTEX_3);
 			Gl.glMapGrid2f(20, 0.0f, 1.0f, 20, 0.0f, 1.0f);
 			Gl.glEnable(Gl.GL_DEPTH_TEST);
