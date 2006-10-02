@@ -168,7 +168,7 @@ namespace SdlDotNet.Examples.Isotope
 
 			//draw_info_panel(this.surface,this.player,this.skin_group);
 			surface.Update();
-
+            
 			// Main game loop controlled with quit
 			int quit=0;
 			int start_time,end_time,frame_time;
@@ -260,8 +260,14 @@ namespace SdlDotNet.Examples.Isotope
 			if (Keyboard.IsKeyPressed(this.keys.usingk) == true)
 				player.EventUsingOb();
 			int kquit = 0;
-			if (Keyboard.IsKeyPressed(Key.Q) == true)
-				kquit=1;
+            if (Keyboard.IsKeyPressed(Key.Q) == true)
+            {
+                kquit = 1;
+            }
+            if (Keyboard.IsKeyPressed(Key.Escape) == true)
+            {
+                kquit = 1;
+            }
 
 
 			//Check other keys and window close/QUIT based on the event queue system
@@ -382,6 +388,6 @@ namespace SdlDotNet.Examples.Isotope
 			}
 			//Update the display with the panel changes
 			surface.Update(rect);
-		}	
+		}
 	}
 }
