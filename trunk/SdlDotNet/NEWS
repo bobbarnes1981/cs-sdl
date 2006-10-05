@@ -1,12 +1,36 @@
 SDL.NET is a set of object-oriented CLS-compliant .NET bindings for the SDL multimedia library that provides high-level access to audio, keyboard, mouse, joystick, TrueType fonts, various image formats, sound mixing, MPEG-1 movies, 2D video framebuffer and 3D hardware via OpenGL.
 
-This release uses the latest SDL library release (1.2.10). The Video class can now use the current desktop resolution to create VideoModes. The VideoInfo class can now query the current resolution. New OpenGL integration with a demo was added. The Keyboard class can retrieve Unicode characters. Many bug fixes.
+This release now includes a .NET 2.0 version of the assembly. The v5.0.0 is for .NET 2.0 while v4.0.5 is for .NET 1.1. This release uses the latest SDL library release (1.2.11). Ogg files work again. There are fixes to TransparentColor and AlphaBlending. An isometric engine demo was added. A streaming audio example was added to 5.0.0 package. The Font and TextSprite classes can display multiline text. Many bug fixes.
 
 Documentation and downloads are available at http://cs-sdl.sourceforge.net.
 
 A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changelog
 
 SDL.NET is licensed under the LGPL.
+
+===4.0.5 beta 1 / 5.0.0 beta 1===
+David Hudson 06 Oct 2006
+* v.4.0.5 is the .NET 1.1 build.
+* v.5.0.0 is the .NET 2.0 build. 2.0 versions of Tao libraries are now included.
+* Add build files and conditional compilation flags to support both .NET 1.1 and 2.0.
+* Updated to SDL 1.2.11
+* Updated SDL_mixer library so Ogg files now work.
+* Updated to the Tao 1.3.0 release for .NET 1.1 build
+* Updated .NET 2.0 build to latest Tao SVN code.
+* The Font and TextSprite class now can display multiline text courtesy of Paul Aspinall. 
+* The AnimationSprite Rectangle Size now defaults to the size of the first animation. 
+* The TransparentColor API has changed but several bugs have been fixed. 
+* Added bool Surface.Transparent property to solve some issues. This has to be called after setting the Surface.TransparentColor.
+* Bugs in the Surface.AlphaBlending have been fixed. 
+* Sprites and SpriteCollections are now Sortable.
+* The NAnt build now uses the Prebuild utility.
+* Increased default FPS to 60
+* Added dll.config files for Debian
+* Added Autotools build using the Prebuild utility
+* Added Isotope isometric engine demo by Simon Gillespie
+* Added Isotope tutorial by Simon Gillespie to Wiki
+* Added StreamingAudio example and functionality by Stuart Carnie.
+* The CDPlayer, NeHe and Redbook run on both .NET 1.1 and .NET 2.0.
 
 ===4.0.4===
 David Hudson 24 May 2006
