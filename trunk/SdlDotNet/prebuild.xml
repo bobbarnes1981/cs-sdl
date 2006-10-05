@@ -869,9 +869,14 @@
 	    <?endif ?>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
-		<File subType="Form">NeHe.cs</File>
+		<?if build = "NET_1_1" ?>
+		<File subType="Form" resourceName="NeHe">NeHe.cs</File>
+		<?else ?>
+		<File subType="Form" resourceName="NeHe">NeHe2.cs</File>
+		<?endif ?>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="NeHe.cs"/>
+		    <Exclude name="NeHe2.cs"/>
 		</Match>
 	    </Files>
 	</Project>
@@ -921,9 +926,14 @@
 	    <Reference name="Tao.FreeGlut" localCopy="true" path="../../lib/net-1.1"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
-		<File subType="Form">RedBook.cs</File>
+		<?if build = "NET_1_1" ?>
+		<File subType="Form" resourceName="RedBook">RedBook.cs</File>
+		<?else ?>
+		<File subType="Form" resourceName="RedBook">RedBook2.cs</File>
+		<?endif ?>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="RedBook.cs" />
+		    <Exclude name="RedBook2.cs" />
 		</Match>
 	    </Files>
 	</Project>
