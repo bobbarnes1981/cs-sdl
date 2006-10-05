@@ -101,7 +101,7 @@ namespace SdlDotNet.Examples.CDPlayer
 			master.EnableKeyboardEvent();
 			master.EnableTickEvent();
 
-			SdlDotNet.Events.Fps = 10;
+			SdlDotNet.Events.Fps = 30;
 			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(this.Tick);
 			SdlDotNet.Events.Quit += new QuitEventHandler(this.Quit);
 
