@@ -53,6 +53,11 @@
 		<exclude name="**/configure.ac" />
 		<exclude name="**/*.in" />
 		<exclude name="**/*.pc" />
+		<exclude name="**/*.stackdump" />
+		<exclude name="**/*.lnk" />
+		<exclude name="**/config.status" />
+		<exclude name="**/config.log" />
+		<exclude name="**/aclocal.m4" />
 		<exclude name="**/doc/**" />
 		<exclude name="**/dist/**" />
 		<exclude name="**/autom4te.cache/**" />
@@ -61,8 +66,6 @@
 		<exclude name="**.swp" />
 		<exclude name="**.bak" />
 		<exclude name="**.project" />
-		<exclude name="ChangeLog" />
-		<exclude name="cvs2cl.pl" />
 	    </fileset>
 	</copy>
 
