@@ -84,6 +84,8 @@
 			<Exclude name="SurfaceControl.cs"/>
 			<?if build = "NET_1_1" ?>
 				<Exclude name="Audio.cs"/>
+				<Exclude name="AudioException.cs"/>
+				<Exclude name="AudioInfo.cs"/>
 				<Exclude name="AudioStream.cs"/>
 	    		<?endif ?>
 		</Match>
