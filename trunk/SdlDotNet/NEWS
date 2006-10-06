@@ -12,6 +12,7 @@ SDL.NET is licensed under the LGPL.
 David Hudson 06 Oct 2006
 * v.4.0.5 is the .NET 1.1 build.
 * v.5.0.0 is the .NET 2.0 build. 2.0 versions of Tao libraries are now included.
+* Future versions of SDL.NET will focus on .NET 2.0. While maintenance releases of 4.0.x will occur, new development will take place on the 5.0.x code stream.
 * Add build files and conditional compilation flags to support both .NET 1.1 and 2.0.
 * Updated to SDL 1.2.11
 * Updated SDL_mixer library so Ogg files now work.
@@ -29,7 +30,7 @@ David Hudson 06 Oct 2006
 * Added Autotools build using the Prebuild utility
 * Added Isotope isometric engine demo by Simon Gillespie
 * Added Isotope tutorial by Simon Gillespie to Wiki
-* Added StreamingAudio example and functionality by Stuart Carnie.
+* Added StreamingAudio example and functionality by Stuart Carnie (only for v5.0.0).
 * The CDPlayer, NeHe and Redbook run on both .NET 1.1 and .NET 2.0.
 
 ===4.0.4===
