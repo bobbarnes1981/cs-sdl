@@ -20,7 +20,7 @@ David Hudson 06 Oct 2006
 * Added Autotools build using the Prebuild utility
 * Added Isotope isometric engine demo by Simon Gillespie
 * Added Isotope tutorial by Simon Gillespie to Wiki
-* Added StreamingAudio example and functionality by Stuart Carnie.
+* Added StreamingAudio example and functionality by Stuart Carnie (only for v5.0.0).
 * The CDPlayer, NeHe and Redbook run on both .NET 1.1 and .NET 2.0.
 
 ===4.0.4===
