@@ -35,6 +35,7 @@ namespace SdlDotNet.OpenGl
 		int textureID;
 		BitmapData bitmapData;
 		bool mode2D;
+        int[] texture = new int[1];
 
 		/// <summary>
 		/// 
@@ -43,6 +44,7 @@ namespace SdlDotNet.OpenGl
 		public SurfaceGl(Surface surface)
 		{
 			this.Surface = surface;
+            Gl.glGenTextures(1, texture);
 		}
 
 		/// <summary>
@@ -59,8 +61,8 @@ namespace SdlDotNet.OpenGl
 		{
 			get
 			{
-				int[] texture = new int[1];
-				Gl.glGenTextures(1, texture);
+                //int[] texture = new int[1];
+                //Gl.glGenTextures(1, texture);
 				Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
 				// Rectangle For Locking The Bitmap In Memory
 				Rectangle rectangle = 
@@ -75,8 +77,11 @@ namespace SdlDotNet.OpenGl
 				Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGBA, textureImage.Width, textureImage.Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
 				Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-				
-				//}
+                
+                textureImage.UnlockBits(bitmapData);
+                bitmapData.Scan0 = IntPtr.Zero;
+                bitmapData = null;
+                
 				return texture[0];
 			}
 		}
@@ -129,7 +134,12 @@ namespace SdlDotNet.OpenGl
 			}
 			set
 			{
+                if (this.surface != null)
+                {
+                    this.surface.Dispose();
+                }
 				this.surface = ResizeSurface(value);
+                //this.surface = value;
 				this.textureImage = this.surface.Bitmap;
 				this.textureID = this.TextureId;
 			}
@@ -217,7 +227,7 @@ namespace SdlDotNet.OpenGl
 					// If Texture Exists
 					//textureImage.UnlockBits(bitmapData); 
 					// Unlock The Pixel Data From Memory
-					//textureImage.Dispose();   
+					textureImage.Dispose();   
 					// Dispose The Bitmap
 				}
 			}

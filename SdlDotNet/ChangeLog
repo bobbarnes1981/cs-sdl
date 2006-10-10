@@ -1,3 +1,7 @@
+===4.0.5 / 5.0.0===
+David Hudson xx Oct 2006
+* Fixed massive memory leak in the SdlDotNet.OpenGl library. The openGlFont example works better now.
+
 ===4.0.5 beta 1 / 5.0.0 beta 1===
 David Hudson 06 Oct 2006
 * v.4.0.5 is the .NET 1.1 build.
