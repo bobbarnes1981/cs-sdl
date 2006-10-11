@@ -1,6 +1,6 @@
 #region LICENSE
 /* 
- * (c) 200 Simon Gillespie
+ * (c) 2005 Simon Gillespie
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

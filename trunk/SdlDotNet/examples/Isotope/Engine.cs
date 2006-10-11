@@ -1,6 +1,6 @@
 #region LICENSE
 /* 
- * (c) 200 Simon Gillespie
+ * (c) 2005 Simon Gillespie
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -205,8 +205,10 @@ namespace SdlDotNet.Examples.Isotope
 				end_time=Timer.TicksElapsed;
 				frame_time=end_time-start_time;
 				//Console.WriteLine(frame_time);
-				if (frame_time<this.time_limit)
-					Timer.DelayTicks(this.time_limit-frame_time);
+                if (frame_time < this.time_limit)
+                {
+                    Timer.DelayTicks(this.time_limit - frame_time);
+                }
 				//gametime.update_time();
 				//Console.WriteLine("End of Loop");
 	         
@@ -235,30 +237,48 @@ namespace SdlDotNet.Examples.Isotope
 			int[] N={0,2,0};
 			int[] S={0,-2,0};
 			Events.Poll();
-			if (Keyboard.IsKeyPressed(this.keys.up)==true || Keyboard.IsKeyPressed(this.keys.down)== true ||
-				Keyboard.IsKeyPressed(this.keys.left)==true || Keyboard.IsKeyPressed(keys.right) ==true)
-			{
-				if (Keyboard.IsKeyPressed(this.keys.up) == true)
-					player.Move(W);
-				if (Keyboard.IsKeyPressed(this.keys.down) == true)
-					player.Move(E);
-				if (Keyboard.IsKeyPressed(this.keys.left) == true)
-					player.Move(N);
-				if (Keyboard.IsKeyPressed(this.keys.right) == true)
-					player.Move(S);
-			}
-				//if no direction key is pressed then stop the player
-			else
-				player.Stop();
+            if (Keyboard.IsKeyPressed(this.keys.up) == true || Keyboard.IsKeyPressed(this.keys.down) == true ||
+                Keyboard.IsKeyPressed(this.keys.left) == true || Keyboard.IsKeyPressed(keys.right) == true)
+            {
+                if (Keyboard.IsKeyPressed(this.keys.up) == true)
+                {
+                    player.Move(W);
+                }
+                if (Keyboard.IsKeyPressed(this.keys.down) == true)
+                {
+                    player.Move(E);
+                }
+                if (Keyboard.IsKeyPressed(this.keys.left) == true)
+                {
+                    player.Move(N);
+                }
+                if (Keyboard.IsKeyPressed(this.keys.right) == true)
+                {
+                    player.Move(S);
+                }
+            }
+            //if no direction key is pressed then stop the player
+            else
+            {
+                player.Stop();
+            }
 			//Check for the Jump key
-			if (Keyboard.IsKeyPressed(this.keys.jump) == true)
-				player.Jump();
-			if (Keyboard.IsKeyPressed(this.keys.pick_up) == true)
-				player.EventPickUp();
-			if (Keyboard.IsKeyPressed(this.keys.drop) == true)
-				player.EventDrop();
-			if (Keyboard.IsKeyPressed(this.keys.usingk) == true)
-				player.EventUsingOb();
+            if (Keyboard.IsKeyPressed(this.keys.jump) == true)
+            {
+                player.Jump();
+            }
+            if (Keyboard.IsKeyPressed(this.keys.pick_up) == true)
+            {
+                player.EventPickUp();
+            }
+            if (Keyboard.IsKeyPressed(this.keys.drop) == true)
+            {
+                player.EventDrop();
+            }
+            if (Keyboard.IsKeyPressed(this.keys.usingk) == true)
+            {
+                player.EventUsingOb();
+            }
 			int kquit = 0;
             if (Keyboard.IsKeyPressed(Key.Q) == true)
             {
@@ -354,8 +374,10 @@ namespace SdlDotNet.Examples.Isotope
 			int[] draw_order;
 			//draw inventory
 			Object3d[] inventory_array=new Object3d[player.inventory.Count];
-			for(int i=0;i<player.inventory.Count;i++)
-				inventory_array[i]=(Object3d)player.inventory[i];
+            for (int i = 0; i < player.inventory.Count; i++)
+            {
+                inventory_array[i] = (Object3d)player.inventory[i];
+            }
 			if (player.inventory.Count>0)
 			{
 				Sprite[] sprite_group=Sprites.UpdateImages(skin_group,inventory_array);

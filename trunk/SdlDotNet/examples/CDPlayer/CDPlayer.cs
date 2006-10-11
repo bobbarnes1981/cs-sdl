@@ -274,6 +274,9 @@ namespace SdlDotNet.Examples.CDPlayer
 			// 
 			// surfaceControl
 			// 
+			this.surfaceControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+				| System.Windows.Forms.AnchorStyles.Left) 
+				| System.Windows.Forms.AnchorStyles.Right)));
 			this.surfaceControl.Location = new System.Drawing.Point(16, 136);
 			this.surfaceControl.Name = "surfaceControl";
 			this.surfaceControl.Size = new System.Drawing.Size(336, 224);
@@ -335,7 +338,6 @@ namespace SdlDotNet.Examples.CDPlayer
 
 		private static System.Random rand = new Random();
 		private SdlDotNet.Surface surf;
-		//RectangleCollection rects = new RectangleCollection();
 
 		private void Tick(object sender, SdlDotNet.TickEventArgs e)
 		{
@@ -346,7 +348,6 @@ namespace SdlDotNet.Examples.CDPlayer
 				this.surfaceControl.Blit(surf);
 			}
 		}
-
 
 		private void Quit(object sender, QuitEventArgs e)
 		{

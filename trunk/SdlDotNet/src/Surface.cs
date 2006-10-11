@@ -377,19 +377,48 @@ namespace SdlDotNet
 					int result =
 						Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(arr, arr.Length), 1);
 #else
-
-                    Marshal.Copy(arr, 0, i, arr.Length);
-                    int result =
-                        Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(i, arr.Length), 1);
-                    Marshal.Copy(i, arr, 0, arr.Length);
+                    try
+                    {
+                        Marshal.Copy(arr, 0, i, arr.Length);
+                        int result =
+                            Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(i, arr.Length), 1);
+                        Marshal.Copy(i, arr, 0, arr.Length);
+                    }
+                    catch (AccessViolationException e)
+                    {
+                        e.ToString();
+                    }
 					#endif
 
-                    if (result != (int)SdlFlag.Success)
+                    //if (result != (int)SdlFlag.Success)
+                    //{
+                    //    throw SdlException.Generate();
+                    //}
+                    Bitmap bitmap;
+                    try
                     {
-                        throw SdlException.Generate();
+                        if (arr != null)
+                        {
+                            bitmap = (Bitmap)Bitmap.FromStream(new MemoryStream(arr, 0, arr.Length));
+                            return bitmap;
+                        }
+                        else
+                        {
+                            return new Bitmap(1, 1);
+                        }
                     }
-
-                    return (Bitmap)Bitmap.FromStream(new MemoryStream(arr, 0, arr.Length));
+                    catch (OutOfMemoryException e)
+                    {
+                        e.ToString();
+                        bitmap = new Bitmap(1, 1);
+                        return bitmap;
+                    }
+                    catch (ArgumentException e)
+                    {
+                        e.ToString();
+                        bitmap = new Bitmap(1, 1);
+                        return bitmap;
+                    }
                 }
                 finally
                 {

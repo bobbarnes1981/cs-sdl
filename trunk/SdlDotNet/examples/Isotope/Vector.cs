@@ -1,6 +1,6 @@
 #region LICENSE
 /* 
- * (c) 200 Simon Gillespie
+ * (c) 2005 Simon Gillespie
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -111,12 +111,18 @@ namespace SdlDotNet.Examples.Isotope
 			int[] vout=new int[3];
 			for(int i=0;i<=2;i++)
 			{
-				if (v1[i]-v2[i]<0)
-					vout[i]=1;
-				else if (v1[i]-v2[i]>0)
-					vout[i]=-1;
-				else
-					vout[i]=0;
+                if (v1[i] - v2[i] < 0)
+                {
+                    vout[i] = 1;
+                }
+                else if (v1[i] - v2[i] > 0)
+                {
+                    vout[i] = -1;
+                }
+                else
+                {
+                    vout[i] = 0;
+                }
 			}
 			return(vout);
 		}
@@ -131,9 +137,14 @@ namespace SdlDotNet.Examples.Isotope
 				int element=vector[i];
 				if (element== -1 || element ==1)
 				{
-					if (element ==-1)
-						element=1;
-					else element=0;
+                    if (element == -1)
+                    {
+                        element = 1;
+                    }
+                    else
+                    {
+                        element = 0;
+                    }
 					face=element+(i*2);
 				}
 			}
@@ -149,8 +160,10 @@ namespace SdlDotNet.Examples.Isotope
 		{
 			// sqr of the magnitude of the vector
 			int sqr_mag=0;
-			foreach(int i in v)
-				sqr_mag=sqr_mag+i*i;
+            foreach (int i in v)
+            {
+                sqr_mag = sqr_mag + i * i;
+            }
 			return(sqr_mag);
 		}
 

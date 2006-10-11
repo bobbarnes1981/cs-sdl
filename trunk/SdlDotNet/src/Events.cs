@@ -994,9 +994,9 @@ namespace SdlDotNet
 				{
 					targetFps = 1;
 				}
-				else if (value > 200)
+				else if (value > 800)
 				{
-					targetFps = 200;
+					targetFps = 800;
 				}
 				else
 				{

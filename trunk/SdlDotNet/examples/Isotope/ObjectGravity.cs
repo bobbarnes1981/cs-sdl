@@ -1,6 +1,6 @@
 #region LICENSE
 /* 
- * (c) 200 Simon Gillespie
+ * (c) 2005 Simon Gillespie
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -70,11 +70,15 @@ namespace SdlDotNet.Examples.Isotope
 			//System.Console.WriteLine("object_gravity:tick entry");
 			base.Tick();
 			// Gravity control: Turn on gravity if nothing is touching us below.
-			if (touching == false)
-				gravity=true;
-			if (gravity == true)
-				//System.Console.WriteLine("Gravity on!");
-				vel[2]=vel[2]-1;
+            if (touching == false)
+            {
+                gravity = true;
+            }
+            if (gravity == true)
+            {
+                //System.Console.WriteLine("Gravity on!");
+                vel[2] = vel[2] - 1;
+            }
 			// Clear the touching information for the next tick.
 			touching=false;
 			touched_objects.Clear();

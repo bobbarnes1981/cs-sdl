@@ -1,6 +1,6 @@
 #region LICENSE
 /* 
- * (c) 200 Simon Gillespie
+ * (c) 2005 Simon Gillespie
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,10 +57,14 @@ namespace SdlDotNet.Examples.Isotope
 			for(int i=0;i<=2;i++)
 			{
 				//check if intersecting
-				if (object1.position[i]+object1.size[i] <= object2.position[i])
-					return(imp);
-				if (object1.position[i] >= object2.position[i]+object2.size[i])
-					return(imp);
+                if (object1.position[i] + object1.size[i] <= object2.position[i])
+                {
+                    return (imp);
+                }
+                if (object1.position[i] >= object2.position[i] + object2.size[i])
+                {
+                    return (imp);
+                }
 			}
 			//if intersecting calculate the first face impacted
 			imp.impact=true;
@@ -130,7 +134,10 @@ namespace SdlDotNet.Examples.Isotope
 						}
 					}
 				}
-				if (noimpact == true) break; 
+                if (noimpact == true)
+                {
+                    break;
+                }
 			}
 		}
 
@@ -156,17 +163,25 @@ namespace SdlDotNet.Examples.Isotope
 				return;
 			if (object1.fixedob == false && object2.fixedob == true)
 			{
-				if (imp.impact_face_object1%2 == 0)
-					object1.position[coord]=object2.position[coord]-object1.size[coord]-1;
-				else
-					object1.position[coord]=object2.position[coord]+object2.size[coord];
+                if (imp.impact_face_object1 % 2 == 0)
+                {
+                    object1.position[coord] = object2.position[coord] - object1.size[coord] - 1;
+                }
+                else
+                {
+                    object1.position[coord] = object2.position[coord] + object2.size[coord];
+                }
 			}
 			if (object1.fixedob == true && object2.fixedob == false)
 			{
-				if (imp.impact_face_object2%2 == 0)
-					object2.position[coord]=object1.position[coord]-object2.size[coord]-1;
-				else
-					object2.position[coord]=object1.position[coord]+object1.size[coord];
+                if (imp.impact_face_object2 % 2 == 0)
+                {
+                    object2.position[coord] = object1.position[coord] - object2.size[coord] - 1;
+                }
+                else
+                {
+                    object2.position[coord] = object1.position[coord] + object1.size[coord];
+                }
 			}
 			if (object1.fixedob == false && object2.fixedob == false)
 			{

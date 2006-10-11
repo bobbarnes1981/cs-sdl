@@ -47,6 +47,10 @@ namespace SdlDotNet.Windows
 		/// </summary>
 		public SurfaceControl()
 		{
+#if NET_1_1
+#else
+            PictureBox.CheckForIllegalCrossThreadCalls = false;
+#endif
 		}
 
 		/// <summary>
@@ -59,7 +63,7 @@ namespace SdlDotNet.Windows
 			{
 				throw new ArgumentNullException("surface");
 			}
-			this.Image = surface.Bitmap;
+            this.Image = surface.Bitmap;
 		}
 		
 		/// <summary>
@@ -237,5 +241,30 @@ namespace SdlDotNet.Windows
 			}
 		}
 		#endregion Disposing
+#if NET_1_1
+#else
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SurfaceControl));
+            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // SurfaceControl
+            // 
+            this.AccessibleDescription = "SdlDotNet SurfaceControl";
+            this.AccessibleName = "SurfaceControl";
+            this.AccessibleRole = System.Windows.Forms.AccessibleRole.Graphic;
+            this.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
+
+            this.InitialImage = ((System.Drawing.Image)(resources.GetObject("$this.InitialImage")));
+
+            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+		#endif
 	}
 }
