@@ -126,43 +126,43 @@ namespace SdlDotNet.Examples.CDPlayer
 			}
 		}
 
-		private bool disposed;
+        //private bool disposed;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-						if(components != null)
-						{
-							this.components.Dispose();
-							this.components = null;
-						}
-						if (this.surf != null)
-						{
-							this.surf.Dispose();
-							this.surf = null;
-						}
-						if (this.surfaceControl != null)
-						{
-							this.surfaceControl.Dispose();
-							this.surfaceControl = null;
-						}
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
+        ///// <summary>
+        ///// Clean up any resources being used.
+        ///// </summary>
+        //protected override void Dispose( bool disposing )
+        //{
+        //    try
+        //    {
+        //        if (!this.disposed)
+        //        {
+        //            if (disposing)
+        //            {
+        //                if(components != null)
+        //                {
+        //                    this.components.Dispose();
+        //                    this.components = null;
+        //                }
+        //                if (this.surf != null)
+        //                {
+        //                    this.surf.Dispose();
+        //                    this.surf = null;
+        //                }
+        //                if (this.surfaceControl != null)
+        //                {
+        //                    this.surfaceControl.Dispose();
+        //                    this.surfaceControl = null;
+        //                }
+        //            }
+        //            this.disposed = true;
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        base.Dispose(disposing);
+        //    }
+        //}
 
 		private SpriteCollection master = new SpriteCollection();
 
@@ -273,6 +273,9 @@ namespace SdlDotNet.Examples.CDPlayer
             // 
             // surfaceControl
             // 
+            this.surfaceControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.surfaceControl.Location = new System.Drawing.Point(16, 136);
             this.surfaceControl.Name = "surfaceControl";
             this.surfaceControl.Size = new System.Drawing.Size(336, 224);
@@ -517,7 +520,7 @@ namespace SdlDotNet.Examples.CDPlayer
 		private void CDPlayer_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			// Force the surface to be disposed.
-			surf.Dispose();
+			//surf.Dispose();
 		}
 	}
 }

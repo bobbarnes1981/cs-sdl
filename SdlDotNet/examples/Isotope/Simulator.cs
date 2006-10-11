@@ -1,6 +1,6 @@
 #region LICENSE
 /* 
- * (c) 200 Simon Gillespie
+ * (c) 2005 Simon Gillespie
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,7 +47,10 @@ namespace SdlDotNet.Examples.Isotope
 			// make a copy of the object pointers in case the objects remove themselves from the master list
 			Object3d[] update_group=new Object3d[scene.ObjectGroup.Count];
 			scene.ObjectGroup.CopyTo(update_group,0);
-			foreach (Object3d obj in update_group) obj.Tick();
+            foreach (Object3d obj in update_group)
+            {
+                obj.Tick();
+            }
 			// Note: the objects must not modify the object lists or positions in their event functions called by the
 			// Collision and Touch processors.
 			// Detect collisons

@@ -1,6 +1,6 @@
 #region LICENSE
 /* 
- * (c) 200 Simon Gillespie
+ * (c) 2005 Simon Gillespie
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -114,37 +114,49 @@ namespace SdlDotNet.Examples.Isotope
 			if (old_rect.Length > 0 && old_rect.Length == sprite_rect.Length)
 			{
 				//Console.WriteLine("Case1");
-				update_rect=new ArrayList(sprite_rect.Length);		 		    		      	      
-				for(int rect=0;rect < sprite_rect.Length;rect++)
-					update_rect.Add(Rectangle.Union(sprite_rect[rect],old_rect[rect]));
+				update_rect=new ArrayList(sprite_rect.Length);
+                for (int rect = 0; rect < sprite_rect.Length; rect++)
+                {
+                    update_rect.Add(Rectangle.Union(sprite_rect[rect], old_rect[rect]));
+                }
 			}
 				//Case of the old rectangle list is bigger than the sprite rectangle list        
 			else if (old_rect.Length > 0 && old_rect.Length > sprite_rect.Length)
 			{
 				//Console.WriteLine("Case2");
 				update_rect=new ArrayList(sprite_rect.Length);
-				for(int rect=0;rect < sprite_rect.Length;rect++)
-					update_rect.Add(Rectangle.Union(sprite_rect[rect],old_rect[rect]));
-				for (int rect=sprite_rect.Length-1;rect < old_rect.Length;rect++)
-					update_rect.Add(old_rect[rect]);
+                for (int rect = 0; rect < sprite_rect.Length; rect++)
+                {
+                    update_rect.Add(Rectangle.Union(sprite_rect[rect], old_rect[rect]));
+                }
+                for (int rect = sprite_rect.Length - 1; rect < old_rect.Length; rect++)
+                {
+                    update_rect.Add(old_rect[rect]);
+                }
 			}
 				//Case of the old rectangle list is smaller than the sprite rectangle list 
 			else if (old_rect.Length>0 && old_rect.Length < sprite_rect.Length)
 			{
 				//Console.WriteLine("Case3");
 				update_rect=new ArrayList(old_rect.Length);
-				for(int rect=0;rect < old_rect.Length;rect++)
-					update_rect.Add(Rectangle.Union(sprite_rect[rect],old_rect[rect]));
-				for (int rect=old_rect.Length-1;rect < sprite_rect.Length;rect++)
-					update_rect.Add(sprite_rect[rect]);
+                for (int rect = 0; rect < old_rect.Length; rect++)
+                {
+                    update_rect.Add(Rectangle.Union(sprite_rect[rect], old_rect[rect]));
+                }
+                for (int rect = old_rect.Length - 1; rect < sprite_rect.Length; rect++)
+                {
+                    update_rect.Add(sprite_rect[rect]);
+                }
 			}
 			else 
 			{
 				//Console.WriteLine("Case4");
 				//KLUDGY STUFF!! Copy Array into Array List
 				update_rect=new ArrayList(sprite_rect.Length);
-				for(int rect=0;rect<sprite_rect.Length;rect++)
-					update_rect.Add(sprite_rect[rect]);
+                for (int rect = 0; rect < sprite_rect.Length; rect++)
+                {
+                    update_rect.Add(sprite_rect[rect]);
+                }
 			}
 			update_rect_array=new Rectangle[update_rect.Count];
 			update_rect.CopyTo(update_rect_array);

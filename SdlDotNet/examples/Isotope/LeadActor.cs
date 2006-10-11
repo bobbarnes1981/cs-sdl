@@ -133,7 +133,10 @@ namespace SdlDotNet.Examples.Isotope
 			/*/ drop object action /*/
 			// Check if we are carrying something to drop
 			// Routine does not take into account facing rotation of an object
-			if (inventory.Count == 0) return;
+            if (inventory.Count == 0)
+            {
+                return;
+            }
 			// Get the candidate object to be dropped
 			ObjectPortable drop_object=(ObjectPortable)inventory[usingob];
 			// Test if there is space for the object to be dropped
@@ -141,10 +144,16 @@ namespace SdlDotNet.Examples.Isotope
 			int[] test_pos= Physics.DropPosition(this,drop_object,Facing,4);
 			Object3d test_object=new Object3d(test_pos,drop_object.size,0,false);
 			// Check if the test object collides with any other object in the scene
-			if (Physics.TestCollisionGroup(test_object,scene.ObjectGroup) == true) return;
+            if (Physics.TestCollisionGroup(test_object, scene.ObjectGroup) == true)
+            {
+                return;
+            }
 			// Put the object into the current scene by adding it to the scenes object list
 			// Check if the object wants to be dropped
-			if (drop_object.RequestDrop() == false) return;
+            if (drop_object.RequestDrop() == false)
+            {
+                return;
+            }
 			// Drop the object
 			Vector.CopyVector(test_object.position,drop_object.position);
 			inventory.Remove(drop_object);
