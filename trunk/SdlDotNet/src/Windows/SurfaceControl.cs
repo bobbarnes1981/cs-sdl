@@ -65,6 +65,18 @@ namespace SdlDotNet.Windows
 			}
             this.Image = surface.Bitmap;
 		}
+
+        /// <summary>
+        /// Copies surface onto this surface at a set position.
+        /// </summary>
+        /// <param name="sourceSurface"></param>
+        /// <param name="destinationPosition"></param>
+        public void Blit(Surface sourceSurface, System.Drawing.Point destinationPosition)
+        {
+            Surface destinationSurface = new Surface((Bitmap)this.Image);
+            destinationSurface.Blit(sourceSurface, destinationPosition);
+            this.Image = destinationSurface.Bitmap;
+        }
 		
 		/// <summary>
 		/// Raises the OnResize event
