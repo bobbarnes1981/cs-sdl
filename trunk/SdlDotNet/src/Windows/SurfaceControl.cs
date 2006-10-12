@@ -63,7 +63,15 @@ namespace SdlDotNet.Windows
 			{
 				throw new ArgumentNullException("surface");
 			}
-            this.Image = surface.Bitmap;
+            try
+            {
+                this.Image = surface.Bitmap;
+            }
+            catch (InvalidOperationException e)
+            {
+                e.ToString();
+            }
+
 		}
 
         /// <summary>
