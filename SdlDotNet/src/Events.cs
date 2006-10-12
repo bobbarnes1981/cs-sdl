@@ -948,6 +948,7 @@ namespace SdlDotNet
 		/// </summary>
 		public static void QuitApplication()
 		{
+            System.GC.Collect();
 			quitFlag = true;
 			Events.Close();
 		}
