@@ -55,6 +55,7 @@ namespace SdlDotNet.Examples.CDPlayer
 		private System.Windows.Forms.MenuItem menuItem1;
 		private System.Windows.Forms.MenuItem menuItem2;
         string filepath = @"../../";
+        private Panel panel1;
         private System.ComponentModel.IContainer components;
 
 		/// <summary>
@@ -188,7 +189,9 @@ namespace SdlDotNet.Examples.CDPlayer
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.surfaceControl)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -276,7 +279,7 @@ namespace SdlDotNet.Examples.CDPlayer
             this.surfaceControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.surfaceControl.Location = new System.Drawing.Point(16, 136);
+            this.surfaceControl.Location = new System.Drawing.Point(4, 0);
             this.surfaceControl.Name = "surfaceControl";
             this.surfaceControl.Size = new System.Drawing.Size(336, 224);
             this.surfaceControl.TabIndex = 0;
@@ -300,11 +303,23 @@ namespace SdlDotNet.Examples.CDPlayer
             this.menuItem2.Text = "Exit";
             this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.AutoScrollMinSize = new System.Drawing.Size(250, 175);
+            this.panel1.Controls.Add(this.surfaceControl);
+            this.panel1.Location = new System.Drawing.Point(4, 134);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(348, 226);
+            this.panel1.TabIndex = 9;
+            // 
             // CDPlayer
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(362, 367);
-            this.Controls.Add(this.surfaceControl);
             this.Controls.Add(this.buttonPrevious);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.labelStatus);
@@ -314,6 +329,7 @@ namespace SdlDotNet.Examples.CDPlayer
             this.Controls.Add(this.buttonPlay);
             this.Controls.Add(this.comboBoxDrive);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Menu = this.mainMenu1;
             this.Name = "CDPlayer";
@@ -321,6 +337,7 @@ namespace SdlDotNet.Examples.CDPlayer
             this.Closing += new System.ComponentModel.CancelEventHandler(this.CDPlayer_Closing);
             this.Load += new System.EventHandler(this.CDPlayer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.surfaceControl)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
