@@ -403,7 +403,7 @@ namespace SdlDotNet
 			Sdl.SDL_Event evt = userEventArgs.EventStruct;
 			if (Sdl.SDL_PushEvent(out evt) != (int) SdlFlag.Success)
 			{
-				throw SdlException.Generate();
+				//throw SdlException.Generate();
 			}
 		}
 
@@ -423,7 +423,7 @@ namespace SdlDotNet
 			Sdl.SDL_Event evt = sdlEvent.EventStruct;
 			if (Sdl.SDL_PushEvent(out evt) != (int) SdlFlag.Success)
 			{
-				throw SdlException.Generate();
+				//throw SdlException.Generate();
 			}
 		}
 
