@@ -1,6 +1,6 @@
 SDL.NET is a set of object-oriented CLS-compliant .NET bindings for the SDL multimedia library that provides high-level access to audio, keyboard, mouse, joystick, TrueType fonts, various image formats, sound mixing, MPEG-1 movies, 2D video framebuffer and 3D hardware via OpenGL.
 
-This release now includes a .NET 2.0 version of the assembly. The v5.0.0 is for .NET 2.0 while v4.0.5 is for .NET 1.1. This release uses the latest SDL library release (1.2.11). Ogg files work again. There are fixes to TransparentColor and AlphaBlending. An isometric engine demo was added. A streaming audio example was added to 5.0.0 package. The Font and TextSprite classes can display multiline text. Many bug fixes.
+This release now includes a .NET 2.0 version of the assembly. The v5.0.0 is for .NET 2.0 while v4.0.5 is for .NET 1.1. This release uses the latest SDL library release (1.2.11). Ogg files work again. There are many fixes to the SurfaceControl, TransparentColor and AlphaBlending. An isometric engine demo was added. A streaming audio example was added to 5.0.0 package. The Font and TextSprite classes can display multiline text. 
 
 Documentation and downloads are available at http://cs-sdl.sourceforge.net.
 
@@ -9,8 +9,10 @@ A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changel
 SDL.NET is licensed under the LGPL.
 
 ===4.0.5 / 5.0.0===
-David Hudson 06 Oct 2006
-* Fixed massive memory leak in the SdlDotNet.OpenGl library. The openGlFont example works better now.
+David Hudson xx Oct 2006
+* Fixed massive memory leak in the SdlDotNet.OpenGl library. The OpenGlFont example works better now.
+* Fixed several bugs in SurfaceControl and Events that caused crashes in the SurfaceControl. (Thanks to YayItsAndrew for the test case and bug reports)
+* Fixed bugs in CDPlayer. Added some scrollbars to the CDPlayer (5.0.0) to show how the SurfaceControl can work with a Panel.
 
 ===4.0.5 beta 1 / 5.0.0 beta 1===
 David Hudson 06 Oct 2006
