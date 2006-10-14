@@ -20,8 +20,7 @@ Zip file contains:
 	/bin - Assemblies
 	/doc - HTML, CHM and tutorial docs.
 	/lib - library dependencies. Please put these libs in your path.
-	/examples - demo apps for the library
-	/extras - Extra libraries based on SDL.NET
+	/examples - demo apps and libraries for the library
 	/src - source
 	/scripts - build scripts
 	/tools - utils
@@ -32,8 +31,8 @@ Development Environment:
 	Runtimes/Compilers:
 		.NET SDK 1.1 SP1.
 		.NET SDK 2.0 SP1.
-		Mono 1.1.13.6
-		Mono 1.1.16.1
+		Mono 1.1.13.8
+		Mono 1.1.17.2
 		
 	IDEs:
 		Visual Studio 2003
