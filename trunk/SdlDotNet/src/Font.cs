@@ -658,14 +658,7 @@ namespace SdlDotNet
 										templine = splitline[k].Substring(stringpos, stringlength); 
 										break; 
 									} 
-									try 
-									{ 
-										templine = templine.Substring(0, stringlength - countback); 
-									} 
-									catch 
-									{ 
-										templine = ""; 
-									} 
+									templine = stringlength - countback > 0 ? templine.Substring(0, stringlength - countback) : "";
 								} 
 
 								// move the current string position forward 
