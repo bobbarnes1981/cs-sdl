@@ -9,10 +9,12 @@ A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changel
 SDL.NET is licensed under the LGPL.
 
 ===4.0.5 / 5.0.0===
-David Hudson xx Oct 2006
+David Hudson 17 Oct 2006
 * Fixed massive memory leak in the SdlDotNet.OpenGl library. The OpenGlFont example works better now.
 * Fixed several bugs in SurfaceControl and Events that caused crashes in the SurfaceControl. (Thanks to YayItsAndrew for the test case and bug reports)
 * Fixed bugs in CDPlayer. Added some scrollbars to the CDPlayer (5.0.0) to show how the SurfaceControl can work with a Panel.
+* Font class speed improvements (thanks SealedSun).
+* Moved to NAnt 0.85.
 
 ===4.0.5 beta 1 / 5.0.0 beta 1===
 David Hudson 06 Oct 2006

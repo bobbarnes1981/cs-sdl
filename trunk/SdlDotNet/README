@@ -43,10 +43,10 @@ Development Environment:
 		VIM
 		
 	Tools:
-		NAnt 0.85 RC4
+		NAnt 0.85 
 		Nunit 2.2.8
-		Prebuild 1.3.1
-		NSIS 2.19
+		Prebuild 1.3.2
+		NSIS 2.20
 		
 		Notes: NAnt is used to create release builds.
 
