@@ -47,10 +47,7 @@ namespace SdlDotNet.Windows
 		/// </summary>
 		public SurfaceControl()
 		{
-#if NET_1_1
-#else
             PictureBox.CheckForIllegalCrossThreadCalls = false;
-#endif
 		}
 
 		/// <summary>
@@ -261,8 +258,7 @@ namespace SdlDotNet.Windows
 			}
 		}
 		#endregion Disposing
-#if NET_1_1
-#else
+
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SurfaceControl));
@@ -285,6 +281,5 @@ namespace SdlDotNet.Windows
             this.ResumeLayout(false);
 
         }
-		#endif
 	}
 }

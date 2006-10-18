@@ -62,10 +62,7 @@ namespace SdlDotNet.Examples.RedBook
 			//
 			Glut.glutInit();
 			InitializeComponent();
-#if NET_1_1
-#else
             ListBox.CheckForIllegalCrossThreadCalls = false;
-#endif
 		}
 
 		private bool disposed;
