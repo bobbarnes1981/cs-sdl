@@ -232,10 +232,9 @@
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
-		<File subType="Form" resourceName="CDPlayer">CDPlayer2.cs</File>
+		<File subType="Form" resourceName="CDPlayer">CDPlayer.cs</File>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="CDPlayer.cs"/>		    
-		    <Exclude name="CDPlayer2.cs"/>		    
 		</Match>
 	    </Files>
 	</Project>
@@ -533,7 +532,7 @@
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="../lib/net-2.0"/>
 	    <Reference name="GuiExample" localCopy="true"/>
-	    <Reference name="nunit.framework" localCopy="true" path="../lib/net-1.1"/>
+	    <Reference name="nunit.framework" localCopy="true" path="../lib/net-2.0"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
@@ -673,10 +672,9 @@
 	    <Reference name="Tao.Platform.Windows" localCopy="true" path="../../lib/net-2.0"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
-		<File subType="Form" resourceName="NeHe">NeHe2.cs</File>
+		<File subType="Form" resourceName="NeHe">NeHe.cs</File>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="NeHe.cs"/>
-		    <Exclude name="NeHe2.cs"/>
 		</Match>
 	    </Files>
 	</Project>
@@ -710,13 +708,12 @@
 	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
-	    <Reference name="Tao.FreeGlut" localCopy="true" path="../../lib/net-1.1"/>
+	    <Reference name="Tao.FreeGlut" localCopy="true" path="../../lib/net-2.0"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
-		<File subType="Form" resourceName="RedBook">RedBook2.cs</File>
+		<File subType="Form" resourceName="RedBook">RedBook.cs</File>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="RedBook.cs" />
-		    <Exclude name="RedBook2.cs" />
 		</Match>
 	    </Files>
 	</Project>
@@ -748,7 +745,7 @@
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.PhysFs" localCopy="true" path="../../lib/net-1.1"/>
+	    <Reference name="Tao.PhysFs" localCopy="true" path="../../lib/net-2.0"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match path="." pattern="*.cs" recurse="true"/>
