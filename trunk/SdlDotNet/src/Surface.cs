@@ -366,17 +366,11 @@ namespace SdlDotNet
 			get
 			{
 				byte[] arr = new byte[(this.Width * this.Height * this.BytesPerPixel) + this.BmpHeader];
-#if NET_1_1
-#else
                 IntPtr i = Marshal.AllocHGlobal(arr.Length);
-#endif
 
                 try
                 {
-#if NET_1_1
-					int result =
-						Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(arr, arr.Length), 1);
-#else
+
                     try
                     {
                         Marshal.Copy(arr, 0, i, arr.Length);
@@ -388,7 +382,7 @@ namespace SdlDotNet
                     {
                         e.ToString();
                     }
-					#endif
+					
 
                     //if (result != (int)SdlFlag.Success)
                     //{
@@ -422,10 +416,7 @@ namespace SdlDotNet
                 }
                 finally
                 {
-#if NET_1_1
-#else
                     Marshal.FreeHGlobal(i);
-#endif
                 }
 			}
 		}

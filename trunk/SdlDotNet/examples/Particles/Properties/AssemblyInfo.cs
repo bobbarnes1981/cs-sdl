@@ -86,6 +86,3 @@ using System.Resources;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.Execution)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
-#if NET_1_1
-[assembly: AssemblyKeyFile(@"../../../../src/SdlDotNet.snk")]
-#endif

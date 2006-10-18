@@ -57,10 +57,7 @@ namespace SdlDotNet.Examples.NeHe
             // Required for Windows Form Designer support
             //
             InitializeComponent();
-#if NET_1_1
-#else
             ListBox.CheckForIllegalCrossThreadCalls = false;
-#endif
 
         }
 

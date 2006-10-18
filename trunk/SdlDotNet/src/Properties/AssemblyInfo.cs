@@ -41,17 +41,9 @@ using System.IO;
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
-#if NET_1_1
-[assembly: AssemblyVersion("4.0.5.0")]
-[assembly: AssemblyFileVersion("4.0.5.0")]
-[assembly: AssemblyInformationalVersion("4.0.5.0")]
-[assembly: AssemblyKeyFile(@"../../SdlDotNet.snk")]
-#else
 [assembly: AssemblyVersion("5.0.0.0")]
 [assembly: AssemblyFileVersion("5.0.0.0")]
 [assembly: AssemblyInformationalVersion("5.0.0.0")]
-#endif
-
 
 //
 // Version information for an assembly consists of the following four values:
