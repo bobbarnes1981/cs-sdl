@@ -30,7 +30,7 @@ namespace SdlDotNet
 	/// Class for coordinates in three dimensions.
 	/// </summary>
 	[Serializable]
-	public class Vector3 : ISerializable, ICloneable, IComparable
+	public class Vector : ISerializable, ICloneable, IComparable
 	{
 
 		#region Constructors
@@ -38,7 +38,7 @@ namespace SdlDotNet
 		/// <summary>
 		/// Creates point at 0, 0, 0
 		/// </summary>
-		public Vector3() : this(0, 0, 0) 
+		public Vector() : this(0, 0, 0) 
 		{ 
 		}
 
@@ -49,7 +49,7 @@ namespace SdlDotNet
 		/// <param name="directionDeg">
 		/// The direction of the vector, in degrees.
 		/// </param>
-		public Vector3(int directionDeg)
+		public Vector(int directionDeg)
 		{
 			Length = 1;
 			DirectionDeg = directionDeg;
@@ -62,7 +62,7 @@ namespace SdlDotNet
 		/// <param name="directionRadians">
 		/// The direction of the vector, in radians.
 		/// </param>
-		public Vector3(float directionRadians)
+		public Vector(float directionRadians)
 		{
 			Length = 1;
 			Direction = directionRadians;
@@ -74,7 +74,7 @@ namespace SdlDotNet
 		/// <param name="positionX">Coordinate on X-axis</param>
 		/// <param name="positionY">Coordinate on Y-axis</param>
 		/// <param name="positionZ">Coordinate on Z-axis</param>
-		public Vector3(int positionX, int positionY, int positionZ)
+		public Vector(int positionX, int positionY, int positionZ)
 		{
 			m_x = (float)positionX;
 			m_y = (float)positionY;
@@ -87,7 +87,7 @@ namespace SdlDotNet
 		/// <param name="positionX">Coordinate on X-axis</param>
 		/// <param name="positionY">Coordinate on Y-axis</param>
 		/// <param name="positionZ">Coordinate on Z-axis</param>
-		public Vector3(float positionX, float positionY, float positionZ)
+		public Vector(float positionX, float positionY, float positionZ)
 		{
 			m_x = positionX;
 			m_y = positionY;
@@ -100,11 +100,42 @@ namespace SdlDotNet
 		/// <param name="positionX">Coordinate on X-axis</param>
 		/// <param name="positionY">Coordinate on Y-axis</param>
 		/// <param name="positionZ">Coordinate on Z-axis</param>
-		public Vector3(double positionX, double positionY, double positionZ)
+		public Vector(double positionX, double positionY, double positionZ)
 		{
 			m_x = (float)positionX;
 			m_y = (float)positionY;
 			m_z = (float)positionZ;
+		}
+
+		/// <summary>
+		/// Creates a vector based on a Point object.
+		/// </summary>
+		/// <param name="point">
+		/// The point representing the XY values.
+		/// </param>
+		public Vector(Point point) : this(point.X, point.Y) 
+		{
+		}
+
+		/// <summary>
+		/// Creates a vector based on a PointF object.
+		/// </summary>
+		/// <param name="point">
+		/// The point representing the XY values.
+		/// </param>
+		public Vector(PointF point) : this(point.X, point.Y) 
+		{
+		}
+
+		/// <summary>
+		/// Creates a vector based on the difference between the two given points.
+		/// </summary>
+		/// <param name="p1">The first point.</param>
+		/// <param name="p2">The second offset point.</param>
+		public Vector(PointF p1, PointF p2)
+		{
+			m_x = p2.X - p1.X;
+			m_y = p2.Y - p1.Y;
 		}
 
 		/// <summary>
@@ -116,18 +147,29 @@ namespace SdlDotNet
 		/// <param name="x2">The X coordinate of the second point.</param>
 		/// <param name="y2">The Y coordinate of the second point.</param>
 		/// <param name="z2">The Z coordinate of the second point.</param>
-		public Vector3(float x1, float y1, float z1, float x2, float y2, float z2)
+		public Vector(float x1, float y1, float z1, float x2, float y2, float z2)
 		{
 			m_x = x2 - x1;
 			m_y = y2 - y1;
-            m_z = z2 - z1;
+			m_z = z2 - z1;
+		}
+
+		/// <summary>
+		/// Creates a vector based on the difference between the two given points.
+		/// </summary>
+		/// <param name="p1">The first point.</param>
+		/// <param name="p2">The second offset point.</param>
+		public Vector(Point p1, Point p2)
+		{
+			m_x = p2.X - p1.X;
+			m_y = p2.Y - p1.Y;
 		}
 
 		/// <summary>
 		/// Copy constructor
 		/// </summary>
 		/// <param name="vector">The vector to copy.</param>
-		public Vector3(Vector3 vector)
+		public Vector(Vector vector)
 		{
 			if (vector != null)
 			{
@@ -149,9 +191,9 @@ namespace SdlDotNet
 		/// <param name="directionRadians">The direction of the vector in radians.</param>
 		/// <param name="length">The length of the vector.</param>
 		/// <returns>The newly created vector.</returns>
-		public static Vector3 FromDirection(float directionRadians, float length)
+		public static Vector FromDirection(float directionRadians, float length)
 		{
-			Vector3 vec = new Vector3(directionRadians);
+			Vector vec = new Vector(directionRadians);
 			vec.Length = length;
 			return vec;
 		}
@@ -162,9 +204,9 @@ namespace SdlDotNet
 		/// <param name="directionDeg">The direction of the vector in degrees.</param>
 		/// <param name="length">The length of the vector.</param>
 		/// <returns>The newly created vector.</returns>
-		public static Vector3 FromDirection(int directionDeg, float length)
+		public static Vector FromDirection(int directionDeg, float length)
 		{
-			Vector3 vec = new Vector3(directionDeg);
+			Vector vec = new Vector(directionDeg);
 			vec.Length = length;
 			return vec;
 		}
@@ -174,9 +216,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="directionDeg">The direction of the vector in degrees.</param>
 		/// <returns>The newly created vector.</returns>
-		public static Vector3 FromDirection(int directionDeg)
+		public static Vector FromDirection(int directionDeg)
 		{
-			Vector3 vec = new Vector3(directionDeg);
+			Vector vec = new Vector(directionDeg);
 			vec.Length = 1;
 			return vec;
 		}
@@ -186,9 +228,9 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="directionRadians">The direction of the vector in radians.</param>
 		/// <returns>The newly created vector.</returns>
-		public static Vector3 FromDirection(float directionRadians)
+		public static Vector FromDirection(float directionRadians)
 		{
-			Vector3 vec = new Vector3(directionRadians);
+			Vector vec = new Vector(directionRadians);
 			vec.Length = 1;
 			return vec;
 		}
@@ -217,7 +259,7 @@ namespace SdlDotNet
 		/// <returns>If true, objects are equal</returns>
 		public override bool Equals(object obj)
 		{
-			return (obj is Vector3) ? (this == (Vector3)obj) : false;
+			return (obj is Vector) ? (this == (Vector)obj) : false;
 		}
 
 		/// <summary>
@@ -226,7 +268,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static bool operator== (Vector3 c1, Vector3 c2)
+		public static bool operator== (Vector c1, Vector c2)
 		{
 			if(object.ReferenceEquals(c1,c2))
 				return true;
@@ -241,7 +283,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static bool operator!= (Vector3 c1, Vector3 c2)
+		public static bool operator!= (Vector c1, Vector c2)
 		{
 			return !(c1 == c2);
 		}
@@ -252,7 +294,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static bool operator >= (Vector3 c1, Vector3 c2)
+		public static bool operator >= (Vector c1, Vector c2)
 		{
 			if (c1 == null)
 			{
@@ -270,7 +312,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static bool operator > (Vector3 c1, Vector3 c2)
+		public static bool operator > (Vector c1, Vector c2)
 		{
 			if (c1 == null)
 			{
@@ -288,7 +330,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static bool operator < (Vector3 c1, Vector3 c2)
+		public static bool operator < (Vector c1, Vector c2)
 		{
 			if (c1 == null)
 			{
@@ -306,7 +348,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static bool operator <= (Vector3 c1, Vector3 c2)
+		public static bool operator <= (Vector c1, Vector c2)
 		{
 			if (c1 == null)
 			{
@@ -325,7 +367,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static Vector3 operator + (Vector3 c1, Vector3 c2)
+		public static Vector operator + (Vector c1, Vector c2)
 		{
 			if (c1 == null)
 			{
@@ -335,7 +377,7 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("c2");
 			}
-			return new Vector3(c1.m_x + c2.m_x, c1.m_y + c2.m_y, c1.m_z + c2.m_z);
+			return new Vector(c1.m_x + c2.m_x, c1.m_y + c2.m_y, c1.m_z + c2.m_z);
 		}
 
 		/// <summary>
@@ -344,7 +386,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static Vector3 operator - (Vector3 c1, Vector3 c2)
+		public static Vector operator - (Vector c1, Vector c2)
 		{
 			if (c1 == null)
 			{
@@ -354,7 +396,7 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("c2");
 			}
-			return new Vector3(c1.m_x - c2.m_x, c1.m_y - c2.m_y, c1.m_z - c2.m_z);
+			return new Vector(c1.m_x - c2.m_x, c1.m_y - c2.m_y, c1.m_z - c2.m_z);
 		}
 
 		/// <summary>
@@ -363,7 +405,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static Vector3 operator * (Vector3 c1, Vector3 c2)
+		public static Vector operator * (Vector c1, Vector c2)
 		{
 			if (c1 == null)
 			{
@@ -373,7 +415,7 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("c2");
 			}
-			return new Vector3(c1.m_x * c2.m_x, c1.m_y * c2.m_y, c1.m_z * c2.m_z);
+			return new Vector(c1.m_x * c2.m_x, c1.m_y * c2.m_y, c1.m_z * c2.m_z);
 		}
 
 		/// <summary>
@@ -382,7 +424,7 @@ namespace SdlDotNet
 		/// <param name="c1"></param>
 		/// <param name="c2"></param>
 		/// <returns></returns>
-		public static Vector3 operator / (Vector3 c1, Vector3 c2)
+		public static Vector operator / (Vector c1, Vector c2)
 		{
 			if (c1 == null)
 			{
@@ -392,7 +434,7 @@ namespace SdlDotNet
 			{
 				throw new ArgumentNullException("c2");
 			}
-			return new Vector3(c1.m_x / c2.m_x, c1.m_y / c2.m_y, c1.m_z / c2.m_z);
+			return new Vector(c1.m_x / c2.m_x, c1.m_y / c2.m_y, c1.m_z / c2.m_z);
 		}
 
 		/// <summary>
@@ -401,9 +443,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 operator +(Vector3 vector, float scalar)
+		public static Vector operator +(Vector vector, float scalar)
 		{
-			return new Vector3(vector.m_x + scalar, vector.m_y + scalar, vector.m_z + scalar);
+			return new Vector(vector.m_x + scalar, vector.m_y + scalar, vector.m_z + scalar);
 		}
 
 		/// <summary>
@@ -412,9 +454,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 Add(Vector3 vector, float scalar)
+		public static Vector Add(Vector vector, float scalar)
 		{
-			return new Vector3(vector.m_x + scalar, vector.m_y + scalar, vector.m_z + scalar);
+			return new Vector(vector.m_x + scalar, vector.m_y + scalar, vector.m_z + scalar);
 		}
 		/// <summary>
 		/// Minus operator
@@ -422,9 +464,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 operator -(Vector3 vector, float scalar)
+		public static Vector operator -(Vector vector, float scalar)
 		{
-			return new Vector3(vector.m_x - scalar, vector.m_y - scalar,vector.m_z - scalar);
+			return new Vector(vector.m_x - scalar, vector.m_y - scalar,vector.m_z - scalar);
 		}
 
 		/// <summary>
@@ -433,9 +475,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 Subtract(Vector3 vector, float scalar)
+		public static Vector Subtract(Vector vector, float scalar)
 		{
-			return new Vector3(vector.m_x - scalar, vector.m_y - scalar, vector.m_z - scalar);
+			return new Vector(vector.m_x - scalar, vector.m_y - scalar, vector.m_z - scalar);
 		}
 		/// <summary>
 		/// Multiplication operator
@@ -443,9 +485,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 operator *(Vector3 vector, float scalar)
+		public static Vector operator *(Vector vector, float scalar)
 		{
-			return new Vector3(vector.m_x * scalar, vector.m_y * scalar, vector.m_z * scalar);
+			return new Vector(vector.m_x * scalar, vector.m_y * scalar, vector.m_z * scalar);
 		}
 
 		/// <summary>
@@ -454,9 +496,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 Multiply(Vector3 vector, float scalar)
+		public static Vector Multiply(Vector vector, float scalar)
 		{
-			return new Vector3(vector.m_x * scalar, vector.m_y * scalar, vector.m_z * scalar);
+			return new Vector(vector.m_x * scalar, vector.m_y * scalar, vector.m_z * scalar);
 		}
 
 		/// <summary>
@@ -465,9 +507,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 operator /(Vector3 vector, float scalar)
+		public static Vector operator /(Vector vector, float scalar)
 		{
-			return new Vector3(vector.m_x / scalar, vector.m_y / scalar, vector.m_z / scalar);
+			return new Vector(vector.m_x / scalar, vector.m_y / scalar, vector.m_z / scalar);
 		}
 
 		/// <summary>
@@ -476,9 +518,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 Divide(Vector3 vector, float scalar)
+		public static Vector Divide(Vector vector, float scalar)
 		{
-			return new Vector3(vector.m_x / scalar, vector.m_y / scalar, vector.m_z / scalar);
+			return new Vector(vector.m_x / scalar, vector.m_y / scalar, vector.m_z / scalar);
 		}
 		/// <summary>
 		/// Addition operator
@@ -486,9 +528,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 operator +(float scalar, Vector3 vector)
+		public static Vector operator +(float scalar, Vector vector)
 		{
-			return new Vector3(scalar + vector.m_x, scalar + vector.m_y, scalar + vector.m_z);
+			return new Vector(scalar + vector.m_x, scalar + vector.m_y, scalar + vector.m_z);
 		}
 		/// <summary>
 		/// Minus operator
@@ -496,9 +538,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 operator -(float scalar, Vector3 vector)
+		public static Vector operator -(float scalar, Vector vector)
 		{
-			return new Vector3(scalar - vector.m_x, scalar - vector.m_y, scalar - vector.m_z);
+			return new Vector(scalar - vector.m_x, scalar - vector.m_y, scalar - vector.m_z);
 		}
 		/// <summary>
 		/// Muliplication operator
@@ -506,9 +548,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 operator *(float scalar, Vector3 vector)
+		public static Vector operator *(float scalar, Vector vector)
 		{
-			return new Vector3(scalar * vector.m_x, scalar * vector.m_y, scalar * vector.m_z);
+			return new Vector(scalar * vector.m_x, scalar * vector.m_y, scalar * vector.m_z);
 		}
 		/// <summary>
 		/// Division operator
@@ -516,9 +558,9 @@ namespace SdlDotNet
 		/// <param name="vector"></param>
 		/// <param name="scalar"></param>
 		/// <returns></returns>
-		public static Vector3 operator /(float scalar, Vector3 vector)
+		public static Vector operator /(float scalar, Vector vector)
 		{
-			return new Vector3(scalar / vector.m_x, scalar / vector.m_y, scalar / vector.m_z);
+			return new Vector(scalar / vector.m_x, scalar / vector.m_y, scalar / vector.m_z);
 		}
 
 		/// <summary>
@@ -655,6 +697,21 @@ namespace SdlDotNet
 			}
 		}
 
+		/// <summary>
+		/// Gets and sets the vectors x and y points using integers.
+		/// </summary>
+		public Point Point
+		{
+			get
+			{
+				return new Point((int)m_x, (int)m_y);
+			}
+			set
+			{
+				m_x = value.X;
+				m_y = value.Y;
+			}
+		}
 
 		/// <summary>
 		/// Offsets the vector by the given x, y and z coordinates.
@@ -677,7 +734,7 @@ namespace SdlDotNet
 		/// </summary>	
 		/// <param name="other">The other vector to use when getting the dot product.</param>
 		/// <returns>The dot product of the two vectors.</returns>
-		public float DotProduct(Vector3 other) 
+		public float DotProduct(Vector other) 
 		{
 			return (m_x * other.m_x) + (m_y * other.m_y) + (m_z * other.m_z);
 		}
@@ -687,13 +744,13 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="vector">The other vector to compare this one to.</param>
 		/// <returns>A new vector representing the midpoint between the two vectors.</returns>
-		public Vector3 Midpoint(Vector3 vector)
+		public Vector Midpoint(Vector vector)
 		{
 			if (vector == null)
 			{
 				throw new ArgumentNullException("vector");
 			}
-			return new Vector3(( m_x + vector.X ) * 0.5, ( m_y + vector.Y ) * 0.5, ( m_z + vector.Z ) * 0.5 );
+			return new Vector(( m_x + vector.X ) * 0.5, ( m_y + vector.Y ) * 0.5, ( m_z + vector.Z ) * 0.5 );
 		}
 
 		/// <summary>
@@ -716,9 +773,9 @@ namespace SdlDotNet
 		/// <returns>
 		/// A new vector representing the normalized vector.
 		/// </returns>
-		public Vector3 Normalized()
+		public Vector Normalized()
 		{
-			Vector3 ret = new Vector3(this);
+			Vector ret = new Vector(this);
 			ret.Normalize();
 			return ret;
 		}
@@ -747,7 +804,7 @@ namespace SdlDotNet
 		/// Make sure the length of the vector is 1 or it will 
 		/// have an effect on the resulting vector.
 		/// </remarks>
-		public Vector3 Reflection(Vector3 normal)
+		public Vector Reflection(Vector normal)
 		{
 			return this - ( 2 * this.DotProduct(normal) * normal );
 		}
@@ -801,7 +858,7 @@ namespace SdlDotNet
 		/// <returns>A new instance with the same values.</returns>
 		public Object Clone()
 		{
-			return new Vector3(this);
+			return new Vector(this);
 		}
 
 		#endregion ICloneable Members
@@ -811,7 +868,7 @@ namespace SdlDotNet
 		/// </summary>
 		/// <param name="info"></param>
 		/// <param name="context"></param>
-		protected Vector3(SerializationInfo info, StreamingContext context)
+		protected Vector(SerializationInfo info, StreamingContext context)
 		{
 			if (info == null)
 			{
@@ -857,7 +914,7 @@ namespace SdlDotNet
 		/// </returns>
 		public int CompareTo(object obj)
 		{
-			Vector3 temp = (Vector3)obj;
+			Vector temp = (Vector)obj;
 			return Length.CompareTo(temp.Length);
 		}
 
