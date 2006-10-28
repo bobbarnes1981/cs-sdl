@@ -125,7 +125,7 @@ namespace SdlDotNet.Particles.Particle
 			}
 		}
 
-		private Vector m_Velocity = new Vector(0,0);
+		private Vector m_Velocity = new Vector(0, 0, 0);
 		/// <summary>
 		/// The speed and direction the particle is going.
 		/// </summary>

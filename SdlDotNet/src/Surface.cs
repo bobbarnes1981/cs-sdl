@@ -22,6 +22,7 @@ using System.IO;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Collections.Generic;
 
 using Tao.Sdl;
 using SdlDotNet.Sprites;
@@ -1342,7 +1343,7 @@ namespace SdlDotNet
 		/// <returns>Collection of Rectangles acutally blit to since 
 		/// ere have may been some clipping.
 		/// </returns>
-		public RectangleCollection Blit(SpriteCollection spriteCollection)
+		public List<Rectangle> Blit(SpriteCollection spriteCollection)
 		{
 			if (spriteCollection == null)
 			{
@@ -1434,6 +1435,19 @@ namespace SdlDotNet
 		{
 			this.Blit(background, rectangle, rectangle);
 		}
+
+        /// <summary>
+        /// Erase Rectangles from surface
+        /// </summary>
+        /// <param name="rectangles">Rectangle to erase</param>
+        /// <param name="background">background to use to erase rectangle.</param>
+        public void Erase(List<Rectangle> rectangles, Surface background)
+        {
+            foreach (Rectangle rectangle in rectangles)
+            {
+                this.Blit(background, rectangle, rectangle);
+            }
+        }
 
 		/// <summary>
 		/// Locks a surface to allow direct pixel manipulation
@@ -2395,7 +2409,7 @@ namespace SdlDotNet
 		/// Update an array of rectangles
 		/// </summary>
 		/// <param name="rectangles">Collection of rectangles to update</param>
-		public void Update(RectangleCollection rectangles)
+		public void Update(List<Rectangle> rectangles)
 		{
 			if (rectangles == null)
 			{

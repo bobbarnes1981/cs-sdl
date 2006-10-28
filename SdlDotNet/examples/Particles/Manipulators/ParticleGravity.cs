@@ -35,7 +35,7 @@ namespace SdlDotNet.Particles.Manipulators
 	/// </example>
 	public class ParticleGravity : IParticleManipulator
 	{
-		private Vector m_Velocity = new Vector(0f,0.2f);
+		private Vector m_Velocity = new Vector(0f,0.2f, 0);
 		/// <summary>
 		/// Creates a new ParticleSystem with a common gravity.
 		/// </summary>
@@ -50,7 +50,7 @@ namespace SdlDotNet.Particles.Manipulators
 		/// </summary>
 		/// <param name="gravity">The vertical gravity of the system.</param>
 		/// <param name="wind">The horizontal gravity of the system.  This is commonly refered to as wind.</param>
-		public ParticleGravity(float gravity, float wind) : this(new Vector(wind, gravity))
+		public ParticleGravity(float gravity, float wind) : this(new Vector(wind, gravity, 0))
 		{
 		}
 
@@ -58,7 +58,7 @@ namespace SdlDotNet.Particles.Manipulators
 		/// Creates a new ParticleSystem with a vertical gravity.
 		/// </summary>
 		/// <param name="gravity">The vertical gravity of the system.</param>
-		public ParticleGravity(float gravity) : this(new Vector(0,gravity))
+		public ParticleGravity(float gravity) : this(new Vector(0, gravity, 0))
 		{
 		}
 

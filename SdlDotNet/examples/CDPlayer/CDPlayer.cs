@@ -355,7 +355,7 @@ namespace SdlDotNet.Examples.CDPlayer
 
 		private static System.Random rand = new Random();
 		private SdlDotNet.Surface surf;
-		//RectangleCollection rects = new RectangleCollection();
+		//List<Rectangle> rects = new List<Rectangle>();
 
 		private void Tick(object sender, SdlDotNet.TickEventArgs e)
 		{
