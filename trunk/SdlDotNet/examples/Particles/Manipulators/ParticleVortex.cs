@@ -186,7 +186,7 @@ namespace SdlDotNet.Particles.Manipulators
 			}
 			foreach(BaseParticle p in particles)
 			{
-				Vector v = new Vector(p.X,p.Y,m_X,m_Y);
+				Vector v = new Vector(p.X, p.Y, 0, m_X, m_Y, 0);
 				if(m_Radius == -1f)
 				{
 					v.Length = m_Strength;

@@ -21,6 +21,7 @@ using System;
 using System.IO;
 using System.Drawing;
 using System.Collections;
+using System.Collections.Generic;
 
 using SdlDotNet;
 using SdlDotNet.Sprites;
@@ -57,7 +58,7 @@ namespace SdlDotNet.Examples.BounceSprites
 			}
 		}
 
-		RectangleCollection rects = new RectangleCollection();
+		List<Rectangle> rects = new List<Rectangle>();
 
 		//A ticker is running to update the sprites constantly.
 		//This method will fill the screen with black to clear it of the sprites.

@@ -83,7 +83,7 @@ namespace SdlDotNet.Examples.ParticlesExample
 			emit.MinSize = new SizeF(1,1);
 			
 			// Make the first particle (a pixel)
-			ParticlePixel first = new ParticlePixel(Color.White, 100,200,new Vector(0,0),-1);
+			ParticlePixel first = new ParticlePixel(Color.White, 100,200,new Vector(0, 0, 0),-1);
 			particles.Add(first); // Add it to the system
 
 			if (File.Exists(data_directory + "marble1.png"))
@@ -96,7 +96,7 @@ namespace SdlDotNet.Examples.ParticlesExample
 				new Animation(new SurfaceCollection(filepath + data_directory + "marble1.png", new Size(50,50)),1);
 			AnimatedSprite marble = new AnimatedSprite(anim);
 			marble.Animate = true;
-			ParticleSprite second = new ParticleSprite(marble, 200, 200, new Vector(-7,-9), 500);
+			ParticleSprite second = new ParticleSprite(marble, 200, 200, new Vector(-7,-9, 0), 500);
 			second.Life = -1;
 			particles.Add(second); // Add it to the system
 

@@ -17,11 +17,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+
+using SdlDotNet;
 
 namespace SdlDotNet.Sprites
 {
@@ -61,18 +63,18 @@ namespace SdlDotNet.Sprites
 		#endregion
 
 		#region Display
-		private RectangleCollection lostRects = new RectangleCollection();
+		private List<Rectangle> lostRects = new List<Rectangle>();
 		/// <summary>
 		/// Draws all surfaces within the collection on the given destination.
 		/// </summary>
 		/// <param name="destination">The destination surface.</param>
-		public virtual RectangleCollection Draw(Surface destination)
+		public virtual List<Rectangle> Draw(Surface destination)
 		{
 			if (destination == null)
 			{
 				throw new ArgumentNullException("destination");
 			}
-			RectangleCollection rects = new RectangleCollection();
+			List<Rectangle> rects = new List<Rectangle>();
 			for (int i = 0; i < this.Count; i++)
 			{
 				if (this[i].Visible)
@@ -183,7 +185,7 @@ namespace SdlDotNet.Sprites
 		/// These Rectangles are kept temprorily until their 
 		/// positions can be properly erased.
 		/// </remarks>
-		protected RectangleCollection LostRects
+		protected List<Rectangle> LostRects
 		{
 			get
 			{

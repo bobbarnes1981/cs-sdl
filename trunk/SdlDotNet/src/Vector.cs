@@ -113,7 +113,7 @@ namespace SdlDotNet
 		/// <param name="point">
 		/// The point representing the XY values.
 		/// </param>
-		public Vector(Point point) : this(point.X, point.Y) 
+		public Vector(Point point) : this(point.X, point.Y, 0) 
 		{
 		}
 
@@ -123,7 +123,7 @@ namespace SdlDotNet
 		/// <param name="point">
 		/// The point representing the XY values.
 		/// </param>
-		public Vector(PointF point) : this(point.X, point.Y) 
+		public Vector(PointF point) : this(0, 0, 0, point.X, point.Y, 0) 
 		{
 		}
 
