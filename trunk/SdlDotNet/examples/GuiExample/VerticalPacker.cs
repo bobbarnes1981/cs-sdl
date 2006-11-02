@@ -75,7 +75,7 @@ namespace SdlDotNet.Examples.GuiExample
 			// Draw all of our left components
 			int y = 0;
 
-			foreach (Sprite s in HeadSprites)
+			foreach (Sprite s in HeadSprites.Keys)
 			{
 				// Ignore hidden
 				if (!s.Visible)
@@ -94,7 +94,7 @@ namespace SdlDotNet.Examples.GuiExample
 			// Draw our right components
 			y = this.Y + Size.Height - MarginPadding.Bottom;
 
-			foreach (Sprite s in TailSprites)
+			foreach (Sprite s in TailSprites.Keys)
 			{
 				// Ignore hidden
 				if (!s.Visible)

@@ -148,7 +148,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 		public override Surface RenderSurface()
 		{	
 			base.Surface.Fill(Color.Black);
-			foreach (Sprite s in Sprites)
+			foreach (Sprite s in Sprites.Keys)
 			{
 				Rectangle offsetRect = s.Rectangle;
 				offsetRect.Offset(AdjustBoundedViewport());
@@ -165,11 +165,11 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 		{
 			return new Point(
 				this.Surface.Size.Width / 2 - 
-				this.CenterSprite[0].Size.Width / 2 - 
-				this.CenterSprite[0].X,
+				this.CenterSprite.Size.Width / 2 - 
+				this.CenterSprite.GetEnumerator().Current.Key.X,
 				this.Surface.Size.Height / 2 - 
-				this.CenterSprite[0].Size.Height / 2 - 
-				this.CenterSprite[0].Y);
+				this.CenterSprite.Size.Height / 2 - 
+				this.CenterSprite.GetEnumerator().Current.Key.Y);
 		}
 
 		/// <summary>
@@ -200,8 +200,8 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 			}
 			
 			// Find out the "half" point for the sprite in the view
-			int mx = this.CenterSprite[0].X + this.CenterSprite[0].Size.Width / 2;
-			int my = this.CenterSprite[0].Y + this.CenterSprite[0].Size.Height / 2;
+			int mx = this.CenterSprite.GetEnumerator().Current.Key.X + this.CenterSprite.Size.Width / 2;
+            int my = this.CenterSprite.GetEnumerator().Current.Key.Y + this.CenterSprite.Size.Height / 2;
 			
 			// Figure out the coordinates
 			int x1 = mx - this.Surface.Size.Width / 2;

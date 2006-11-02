@@ -92,7 +92,7 @@ namespace SdlDotNet.Examples.CDPlayer
 				bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
 
 				//Add the sprite to the SpriteCollection
-				master.Add(bounceSprite);
+				master.Add(bounceSprite, bounceSprite.Rectangle);
 			}
 
 			//The collection will respond to mouse button clicks, mouse movement and the ticker.

@@ -394,7 +394,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 					if (disposing)
 					{
 						this.screen.Dispose();
-						foreach (Sprite s in SdlDemo.manager)
+						foreach (Sprite s in SdlDemo.manager.Keys)
 						{
 							IDisposable disposableObj = s as IDisposable;
 							if (disposableObj != null)
@@ -402,7 +402,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 								disposableObj.Dispose( );
 							}
 						}
-						foreach (Sprite s in SdlDemo.master)
+						foreach (Sprite s in SdlDemo.master.Keys)
 						{
 							IDisposable disposableObj = s as IDisposable;
 							if (disposableObj != null)

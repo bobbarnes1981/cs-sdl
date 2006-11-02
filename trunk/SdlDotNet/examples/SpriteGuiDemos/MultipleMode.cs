@@ -140,7 +140,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 		public override Surface RenderSurface()
 		{	
 			this.Surface.Fill(Color.Black);
-			foreach (Sprite s in all)
+			foreach (Sprite s in all.Keys)
 			{
 				Rectangle offsetRect = s.Rectangle;
 				offsetRect.Offset(AdjustBoundedViewport(sprite1, surf1));
@@ -305,7 +305,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 					if (disposing)
 					{
 						this.Surface.Dispose();
-						foreach (Sprite s in this.Sprites)
+						foreach (Sprite s in this.Sprites.Keys)
 						{
 							IDisposable disposableObj = s as IDisposable;
 							if (disposableObj != null)

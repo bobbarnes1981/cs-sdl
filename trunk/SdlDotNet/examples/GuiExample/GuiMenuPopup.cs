@@ -84,14 +84,14 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			int height = 0;
 			int width = 0;
-			for (int i = 0; i < this.Sprites.Count; i++)
-			{
-				this.Sprites[i].X = this.menuTitle.X;
-				this.Sprites[i].Y = this.menuTitle.Y + this.Sprites[i].Height * i;
-				height += this.Sprites[i].Height;
-				if (this.Sprites[i].Width > width)
+			foreach (Sprite s in Sprites.Keys)
+            {
+				s.X = this.menuTitle.X;
+				s.Y = this.menuTitle.Y + s.Height;
+				height += s.Height;
+				if (s.Width > width)
 				{
-					width = this.Sprites[i].Width;
+					width = s.Width;
 				}
 			}
 			this.Surface = new Surface(width,height);

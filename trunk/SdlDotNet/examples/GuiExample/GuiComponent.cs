@@ -189,9 +189,9 @@ namespace SdlDotNet.Examples.GuiExample
 			{
 				throw new ArgumentNullException("args");
 			}
-			for (int i = 0; i < this.Sprites.Count; i++)
-			{
-				this.Sprites[i].Update(args);
+			foreach (Sprite s in Sprites.Keys)
+            {
+				s.Update(args);
 			}
 		}
 		#endregion

@@ -31,7 +31,7 @@ namespace SdlDotNet.Sprites
 	/// The SpriteCollection is used to group sprites into an easily managed whole. 
 	/// </summary>
 	/// <remarks>The sprite manager has no size.</remarks>
-	public class SpriteCollection : CollectionBase, ICollection, IComparer
+	public class SpriteCollection : Dictionary<Sprite, Rectangle>
 	{
 		#region Constructors
 		/// <summary>
@@ -47,7 +47,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="sprite">Sprite to add to collection</param>
 		public SpriteCollection(Sprite sprite) : base()
 		{
-			this.AddInternal(sprite);
+			//this.AddInternal(sprite);
 		}
 
 		/// <summary>
@@ -56,7 +56,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="spriteCollection">Add Spritecollection to this SpriteCollection</param>
 		public SpriteCollection(SpriteCollection spriteCollection) : base()
 		{
-			this.AddInternal(spriteCollection);
+			//this.AddInternal(spriteCollection);
 		}
 
 
@@ -75,17 +75,17 @@ namespace SdlDotNet.Sprites
 				throw new ArgumentNullException("destination");
 			}
 			List<Rectangle> rects = new List<Rectangle>();
-			for (int i = 0; i < this.Count; i++)
-			{
-				if (this[i].Visible)
+			foreach (Sprite s in this.Keys)
+			{	
+				if (s.Visible)
 				{
-					rects.Add(destination.Blit(this[i].Render(), this[i].Rectangle));
-					if (this[i].Dirty)
+					rects.Add(destination.Blit(s.Render(), s.Rectangle));
+					if (s.Dirty)
 					{
-						rects.Add(this[i].RectangleDirty);
+						rects.Add(s.RectangleDirty);
 					}
 				}
-				this[i].RectangleDirty = Rectangle.Intersect(this[i].Rectangle, destination.Rectangle);
+				s.RectangleDirty = Rectangle.Intersect(s.Rectangle, destination.Rectangle);
 			}
 			return rects;
 		}
@@ -110,11 +110,11 @@ namespace SdlDotNet.Sprites
 			}
 			surface.Update(this.lostRects);
 
-			for (int i = 0; i < this.Count; i++)
-			{
-				if (this[i].Visible)
+            foreach (Sprite s in this.Keys)
+            {
+				if (s.Visible)
 				{
-					surface.Blit(background, this[i].Rectangle, this[i].Rectangle);
+					surface.Blit(background, s.Rectangle, s.Rectangle);
 				}
 			}
 			this.lostRects.Clear();
@@ -122,61 +122,61 @@ namespace SdlDotNet.Sprites
 
 		#endregion
 
-		#region Sprites
-		/// <summary>
-		/// Adds sprite to group
-		/// </summary>
-		/// <param name="sprite">Sprite to add</param>
-		public virtual int Add(Sprite sprite)
-		{
-			if (sprite == null)
-			{
-				throw new ArgumentNullException("sprite");
-			}
-			sprite.AddInternal(this);
-			return (List.Add(sprite));
-		}
+        #region Sprites
+        /// <summary>
+        /// Adds sprite to group
+        /// </summary>
+        /// <param name="sprite">Sprite to add</param>
+        public virtual void Add(Sprite sprite)
+        {
+            if (sprite == null)
+            {
+                throw new ArgumentNullException("sprite");
+            }
+            //sprite.AddInternal(this);
+            Add(sprite, sprite.Rectangle);
+        }
 
-		/// <summary>
-		/// Adds sprite to group
-		/// </summary>
-		/// <param name="sprite">Sprite to add</param>
-		public int AddInternal(Sprite sprite)
-		{
-			return (List.Add(sprite));
-		}
+        /// <summary>
+        /// Adds sprite to group
+        /// </summary>
+        /// <param name="sprite">Sprite to add</param>
+        public void AddInternal(Sprite sprite)
+        {
+            Add(sprite, sprite.Rectangle);
+        }
 
-		/// <summary>
-		/// Adds sprites from another group to this group
-		/// </summary>
-		/// <param name="spriteCollection">SpriteCollection to add Sprites from</param>
-		public virtual int Add(SpriteCollection spriteCollection)
-		{
-			if (spriteCollection == null)
-			{
-				throw new ArgumentNullException("spriteCollection");
-			}
-			for (int i = 0; i < spriteCollection.Count; i++)
-			{
-				spriteCollection[i].AddInternal(this);
-				this.List.Add(spriteCollection[i]);
-			}
-			return this.Count;
-		}
+        /// <summary>
+        /// Adds sprites from another group to this group
+        /// </summary>
+        /// <param name="spriteCollection">SpriteCollection to add Sprites from</param>
+        public virtual int Add(SpriteCollection spriteCollection)
+        {
+            if (spriteCollection == null)
+            {
+                throw new ArgumentNullException("spriteCollection");
+            }
+            foreach (Sprite s in spriteCollection.Keys)
+            {
+                //s.AddInternal(this);
+                Add(s);
+            }
+            return this.Count;
+        }
 
-		private int AddInternal(SpriteCollection spriteCollection)
-		{
-			if (spriteCollection == null)
-			{
-				throw new ArgumentNullException("spriteCollection");
-			}
-			for (int i = 0; i < spriteCollection.Count; i++)
-			{
-				spriteCollection[i].AddInternal(this);
-				List.Add(spriteCollection[i]);
-			}
-			return this.Count;
-		}
+        private int AddInternal(SpriteCollection spriteCollection)
+        {
+            if (spriteCollection == null)
+            {
+                throw new ArgumentNullException("spriteCollection");
+            }
+            foreach (Sprite s in spriteCollection.Keys)
+            {
+                //spriteCollection[i].AddInternal(this);
+                Add(s);
+            }
+            return this.Count;
+        }
 
 		/// <summary>
 		/// Rectangles of Sprites that have been removed
@@ -193,65 +193,65 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		/// <summary>
-		/// Removes sprite from group
-		/// </summary>
-		/// <param name="sprite">Sprite to remove</param>
-		public virtual void Remove(Sprite sprite)
-		{
-			if (sprite == null)
-			{
-				throw new ArgumentNullException("sprite");
-			}
-			this.lostRects.Add(sprite.RectangleDirty);
-			sprite.RemoveInternal(this);
-			List.Remove(sprite);
-		}
+        ///// <summary>
+        ///// Removes sprite from group
+        ///// </summary>
+        ///// <param name="sprite">Sprite to remove</param>
+        //public override void Remove(Sprite sprite)
+        //{
+        //    if (sprite == null)
+        //    {
+        //        throw new ArgumentNullException("sprite");
+        //    }
+        //    this.lostRects.Add(sprite.RectangleDirty);
+        //    sprite.RemoveInternal(this);
+        //    List.Remove(sprite);
+        //}
 
-		/// <summary>
-		/// Removes sprite from group
-		/// </summary>
-		/// <param name="sprite">Sprite to remove</param>
-		public void RemoveInternal(Sprite sprite)
-		{
-			if (sprite == null)
-			{
-				throw new ArgumentNullException("sprite");
-			}
-			this.lostRects.Add(sprite.RectangleDirty);
-			List.Remove(sprite);
-		}
+        ///// <summary>
+        ///// Removes sprite from group
+        ///// </summary>
+        ///// <param name="sprite">Sprite to remove</param>
+        //public void RemoveInternal(Sprite sprite)
+        //{
+        //    if (sprite == null)
+        //    {
+        //        throw new ArgumentNullException("sprite");
+        //    }
+        //    this.lostRects.Add(sprite.RectangleDirty);
+        //    List.Remove(sprite);
+        //}
 
-		/// <summary>
-		/// Removes sprite from this group if they are contained in the given group
-		/// </summary>
-		/// <param name="spriteCollection">
-		/// Remove SpriteCollection from this SpriteCollection.
-		/// </param>
-		public virtual void Remove(SpriteCollection spriteCollection)
-		{
-			if (spriteCollection == null)
-			{
-				throw new ArgumentNullException("spriteCollection");
-			}
-			for (int i = 0; i < spriteCollection.Count; i++)
-			{
-				if (this.Contains(spriteCollection[i]))
-				{
-					this.Remove(spriteCollection[i]);
-				}
-			}
-		}
+        /// <summary>
+        /// Removes sprite from this group if they are contained in the given group
+        /// </summary>
+        /// <param name="spriteCollection">
+        /// Remove SpriteCollection from this SpriteCollection.
+        /// </param>
+        public virtual void Remove(SpriteCollection spriteCollection)
+        {
+            if (spriteCollection == null)
+            {
+                throw new ArgumentNullException("spriteCollection");
+            }
+            foreach (Sprite s in spriteCollection.Keys)
+            {
+                if (this.ContainsKey(s))
+                {
+                    this.Remove(s);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Checks if sprite is in the container
-		/// </summary>
-		/// <param name="sprite">Sprite to query for</param>
-		/// <returns>True is the sprite is in the container.</returns>
-		public bool Contains(Sprite sprite)
-		{
-			return (List.Contains(sprite));
-		}
+        ///// <summary>
+        ///// Checks if sprite is in the container
+        ///// </summary>
+        ///// <param name="sprite">Sprite to query for</param>
+        ///// <returns>True is the sprite is in the container.</returns>
+        //public bool Contains(Sprite sprite)
+        //{
+        //    return (List.Contains(sprite));
+        //}
 
 		#endregion
 
@@ -265,14 +265,9 @@ namespace SdlDotNet.Sprites
 		{
 			get
 			{
-				if (this.Count > 0)
-				{
-					return this[0].Size;
-				}
-				else
-				{
+                //this.Keys.GetEnumerator().;
 					return new Size(0, 0);
-				}
+				//}
 			}
 		}
 		#endregion
@@ -628,10 +623,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, ActiveEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 
 		/// <summary>
@@ -643,10 +638,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, JoystickAxisEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 		
 		/// <summary>
@@ -658,10 +653,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, JoystickBallEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 		
 		/// <summary>
@@ -673,10 +668,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, JoystickButtonEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 		
 		/// <summary>
@@ -688,10 +683,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, JoystickHatEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 		
 		/// <summary>
@@ -701,9 +696,9 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, KeyboardEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
+			foreach (Sprite s in this.Keys)
 			{
-				this[i].Update(e);
+				s.Update(e);
 			}
 		}
 
@@ -715,10 +710,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, MouseButtonEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 
 		/// <summary>
@@ -730,10 +725,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, MouseMotionEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 		
 		/// <summary>
@@ -743,10 +738,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, QuitEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 
 		/// <summary>
@@ -756,10 +751,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, UserEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 
 		/// <summary>
@@ -769,10 +764,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, VideoExposeEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 
 		/// <summary>
@@ -782,10 +777,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, VideoResizeEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 
 		/// <summary>
@@ -795,10 +790,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, ChannelFinishedEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 
 		/// <summary>
@@ -808,10 +803,10 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, MusicFinishedEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 
 		/// <summary>
@@ -823,39 +818,39 @@ namespace SdlDotNet.Sprites
 		/// <param name="e">Event arguments</param>
 		private void Update(object sender, TickEventArgs e)
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Update(e);
-			}
+            foreach (Sprite s in this.Keys)
+            {
+                s.Update(e);
+            }
 		}
 
 		#endregion
 
-		#region Properties
-		/// <summary>
-		/// Gets and sets a sprite in the collection based on the index.
-		/// </summary>
-		public Sprite this[int index]
-		{
-			get
-			{
-				return ((Sprite)List[index]);
-			}
-			set
-			{
-				List[index] = value;
-			}
-		}
-		#endregion
+        //#region Properties
+        ///// <summary>
+        ///// Gets and sets a sprite in the collection based on the index.
+        ///// </summary>
+        //public Sprite this[int index]
+        //{
+        //    get
+        //    {
+        //        return ((Sprite)List[index]);
+        //    }
+        //    set
+        //    {
+        //        List[index] = value;
+        //    }
+        //}
+        //#endregion
 
 		/// <summary>
 		/// Removes sprites from all SpriteCollections
 		/// </summary>
 		public virtual void Kill()
 		{
-			for (int i = 0; i < this.Count; i++)
-			{
-				this[i].Kill();
+            foreach (Sprite s in this.Keys)
+            {
+				s.Kill();
 			}
 		}
 
@@ -870,11 +865,11 @@ namespace SdlDotNet.Sprites
 		public virtual SpriteCollection IntersectsWith(Sprite sprite)
 		{
 			SpriteCollection intersection = new SpriteCollection();
-			for (int i = 0; i < this.Count; i++)
-			{
-				if (this[i].IntersectsWith(sprite))
+            foreach (Sprite s in this.Keys)
+            {
+				if (s.IntersectsWith(sprite))
 				{
-					intersection.Add(this[i]);
+					intersection.Add(s, s.Rectangle);
 				}
 			}
 			return intersection;
@@ -899,33 +894,35 @@ namespace SdlDotNet.Sprites
 				throw new ArgumentNullException("spriteCollection");
 			}
 			Hashtable intersection = new Hashtable();
-			for (int i = 0; i < this.Count; i++)
+			foreach (Sprite s in this.Keys)
 			{
-				for (int j = 0; j < spriteCollection.Count; j++)
-					if (this[i].IntersectsWith(spriteCollection[j]))
-					{
-						if (intersection.Contains(this[i]))
-						{
-							((SpriteCollection)intersection[this[i]]).Add(spriteCollection[j]);
-						}
-						else
-						{
-							intersection.Add(this[i], spriteCollection[j]);
-						}
-					}
+                foreach (Sprite t in spriteCollection.Keys)
+                {
+                    if (s.IntersectsWith(t))
+                    {
+                        if (intersection.Contains(s))
+                        {
+                            //((SpriteCollection)intersection[s]).Add(t);
+                        }
+                        else
+                        {
+                            intersection.Add(s, t);
+                        }
+                    }
+                }
 			}
 			return intersection;
 		}
 
-		/// <summary>
-		/// Provide the explicit interface member for ICollection.
-		/// </summary>
-		/// <param name="array">Array to copy collection to</param>
-		/// <param name="index">Index at which to insert the collection items</param>
-		void ICollection.CopyTo(Array array, int index)
-		{
-			this.List.CopyTo(array, index);
-		}
+        ///// <summary>
+        ///// Provide the explicit interface member for ICollection.
+        ///// </summary>
+        ///// <param name="array">Array to copy collection to</param>
+        ///// <param name="index">Index at which to insert the collection items</param>
+        //void ICollection.CopyTo(Array array, int index)
+        //{
+        //    this.List.CopyTo(array, index);
+        //}
 
 		/// <summary>
 		/// Provide the explicit interface member for ICollection.
@@ -937,34 +934,34 @@ namespace SdlDotNet.Sprites
 			((ICollection)this).CopyTo(array, index);
 		}
 
-		/// <summary>
-		/// Insert a Sprite into the collection
-		/// </summary>
-		/// <param name="index">Index at which to insert the sprite</param>
-		/// <param name="sprite">Sprite to insert</param>
-		public virtual void Insert(int index, Sprite sprite)
-		{
-			List.Insert(index, sprite);
-		} 
+        ///// <summary>
+        ///// Insert a Sprite into the collection
+        ///// </summary>
+        ///// <param name="index">Index at which to insert the sprite</param>
+        ///// <param name="sprite">Sprite to insert</param>
+        //public virtual void Insert(int index, Sprite sprite)
+        //{
+        //    List.Insert(index, sprite);
+        //} 
 
-		/// <summary>
-		/// Gets the index of the given sprite in the collection.
-		/// </summary>
-		/// <param name="sprite">The sprite to search for.</param>
-		/// <returns>The index of the given sprite.</returns>
-		public virtual int IndexOf(Sprite sprite)
-		{
-			return List.IndexOf(sprite);
-		} 
+        ///// <summary>
+        ///// Gets the index of the given sprite in the collection.
+        ///// </summary>
+        ///// <param name="sprite">The sprite to search for.</param>
+        ///// <returns>The index of the given sprite.</returns>
+        //public virtual int IndexOf(Sprite sprite)
+        //{
+        //    return List.IndexOf(sprite);
+        //} 
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="Comparer"></param>
-		public void Sort(IComparer Comparer) 
-		{
-			base.InnerList.Sort(Comparer);
-		}
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="Comparer"></param>
+        //public void Sort(IComparer Comparer) 
+        //{
+        //    base.InnerList.Sort(Comparer);
+        //}
 		#region IComparer Members
 
 		/// <summary>

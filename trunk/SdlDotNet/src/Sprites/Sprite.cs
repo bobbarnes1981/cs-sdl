@@ -143,7 +143,7 @@ namespace SdlDotNet.Sprites
 		public Sprite(Surface surface, Point position, int positionZ, SpriteCollection group): 
 			this(surface, position, positionZ)
 		{
-			this.AddInternal(group);
+			//this.AddInternal(group);
 		}
 
 		/// <summary>
@@ -157,7 +157,7 @@ namespace SdlDotNet.Sprites
 		public Sprite(Surface surface, Point position , SpriteCollection group):
 			this(surface, position)
 		{
-			this.AddInternal(group);
+			//this.AddInternal(group);
 		}
 
 		#region Display
@@ -709,13 +709,13 @@ namespace SdlDotNet.Sprites
 			{
 				throw new ArgumentNullException("spriteCollection");
 			}
-			foreach(Sprite sprite in spriteCollection)
-			{
-				if(this.IntersectsWith(sprite))
-				{
-					return true;
-				}
-			}
+            foreach (Sprite sprite in spriteCollection.Keys)
+            {
+                if (this.IntersectsWith(sprite))
+                {
+                    return true;
+                }
+            }
 			return false;
 		}
 		#endregion IntersectsWith
@@ -756,51 +756,51 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		/// <summary>
-		/// Add Sprite to collection
-		/// </summary>
-		/// <param name="group">collection to add to</param>
-		public virtual void Add(SpriteCollection group)
-		{
-			if (group == null)
-			{
-				throw new ArgumentNullException("group");
-			}
-			this.groups.Add(group);
-			group.AddInternal(this);
-		}
+        ///// <summary>
+        ///// Add Sprite to collection
+        ///// </summary>
+        ///// <param name="group">collection to add to</param>
+        //public virtual void Add(SpriteCollection group)
+        //{
+        //    if (group == null)
+        //    {
+        //        throw new ArgumentNullException("group");
+        //    }
+        //    this.groups.Add(group);
+        //    group.AddInternal(this);
+        //}
 
-		/// <summary>
-		/// Add Sprite to collection. Use in special situations
-		/// </summary>
-		/// <param name="group">Collection to add to</param>
-		public void AddInternal(SpriteCollection group)
-		{
-			this.groups.Add(group);
-		}
+        ///// <summary>
+        ///// Add Sprite to collection. Use in special situations
+        ///// </summary>
+        ///// <param name="group">Collection to add to</param>
+        //public void AddInternal(SpriteCollection group)
+        //{
+        //    this.groups.Add(group);
+        //}
 
-		/// <summary>
-		/// remove Sprite from Collection
-		/// </summary>
-		/// <param name="group">collection to remove sprite from</param>
-		public virtual void Remove(SpriteCollection group)
-		{
-			if (group == null)
-			{
-				throw new ArgumentNullException("group");
-			}
-			this.groups.Remove(group);
-			group.RemoveInternal(this);
-		}
+        ///// <summary>
+        ///// remove Sprite from Collection
+        ///// </summary>
+        ///// <param name="group">collection to remove sprite from</param>
+        //public virtual void Remove(SpriteCollection group)
+        //{
+        //    if (group == null)
+        //    {
+        //        throw new ArgumentNullException("group");
+        //    }
+        //    this.groups.Remove(group);
+        //    group.RemoveInternal(this);
+        //}
 
-		/// <summary>
-		/// remove Sprite from collection. Use in special situations
-		/// </summary>
-		/// <param name="group">collection to remove sprite from</param>
-		public void RemoveInternal(SpriteCollection group)
-		{
-			this.groups.Remove(group);
-		}
+        ///// <summary>
+        ///// remove Sprite from collection. Use in special situations
+        ///// </summary>
+        ///// <param name="group">collection to remove sprite from</param>
+        //public void RemoveInternal(SpriteCollection group)
+        //{
+        //    this.groups.Remove(group);
+        //}
 
 		private bool allowDrag;
 		/// <summary>

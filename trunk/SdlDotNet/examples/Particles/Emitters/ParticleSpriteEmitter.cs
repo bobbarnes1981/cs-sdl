@@ -88,7 +88,7 @@ namespace SdlDotNet.Particles.Emitters
 				return null;
 			}
 			return new ParticleSprite(
-					m_Sprites[Random.Next(0,m_Sprites.Count-1)]
+					m_Sprites.GetEnumerator().Current.Key
 				);
 		}
 	}

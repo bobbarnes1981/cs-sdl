@@ -101,16 +101,18 @@ namespace SdlDotNet.Examples.BounceSprites
 			for (int i = 0; i < this.maxBalls; i++)
 			{
 				//Create a new Sprite at a random location on the screen
-				BounceSprite bounceSprite = 
-					new BounceSprite(marbleSurfaces,
+				master.Add(new BounceSprite(marbleSurfaces,
 					new Point(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
-					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom)));
+					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom))),new Rectangle());
 
 				// Randomize rotation direction
-				bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
+				//bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
 
 				//Add the sprite to the SpriteCollection
-				master.Add(bounceSprite);
+                //if (!master.ContainsKey(bounceSprite))
+                //{
+				//master.Add(bounceSprite, bounceSprite.Rectangle);
+               // }
 			}
 
 			//The collection will respond to mouse button clicks, mouse movement and the ticker.

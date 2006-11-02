@@ -95,7 +95,7 @@ namespace SdlDotNet.Examples.GuiExample
 		{
 			index = 0;
 
-			foreach (Sprite s in Sprites)
+			foreach (Sprite s in Sprites.Keys)
 			{
 				if (s.IntersectsWith(point))
 				{
@@ -119,8 +119,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="sprite"></param>
 		protected void AddHead(Sprite sprite)
 		{
-			head.Add(sprite);
-			this.Sprites.Add(sprite);
+			head.Add(sprite, sprite.Rectangle);
+			this.Sprites.Add(sprite,sprite.Rectangle);
 		}
 
 		/// <summary>
@@ -129,8 +129,8 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="sprite"></param>
 		protected void AddTail(Sprite sprite)
 		{
-			tail.Add(sprite);
-			this.Sprites.Add(sprite);
+			tail.Add(sprite, sprite.Rectangle);
+			this.Sprites.Add(sprite, sprite.Rectangle);
 		}
 
 		/// <summary>
@@ -190,11 +190,11 @@ namespace SdlDotNet.Examples.GuiExample
 				{
 					if (disposing)
 					{
-						foreach (Sprite s in this.head)
+						foreach (Sprite s in this.head.Keys)
 						{
 							s.Dispose();
 						}
-						foreach (Sprite s in this.tail)
+						foreach (Sprite s in this.tail.Keys)
 						{
 							s.Dispose();
 						}
