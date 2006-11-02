@@ -162,7 +162,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 		public virtual Surface RenderSurface()
 		{	
 			surf.Fill(Color.Black);
-			foreach (Sprite s in Sprites)
+			foreach (Sprite s in Sprites.Keys)
 			{
 				surf.Blit(s.Render(), s.Rectangle);
 			}
@@ -198,7 +198,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 						this.surf.Dispose();
 						this.surf = null;
 					}
-					foreach (Sprite s in this.sprites)
+					foreach (Sprite s in this.sprites.Keys)
 					{
 						if (s != null)
 						{

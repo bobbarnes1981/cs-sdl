@@ -69,19 +69,24 @@ namespace SdlDotNet.Examples.BombRun
 
 			player = new Player(new Surface(filepath + data_directory + "Head.bmp"), new Point(screen.Width / 2 - 16,
 				screen.Height - 32));
-			players.Add(player);
+			players.Add(player,player.Rectangle);
 			players.EnableKeyboardEvent();
 			bullets.EnableTickEvent();
 			master.EnableTickEvent();
 
 			for(int i = 0; i < 25; i++)
 			{
-				bombs.Add(new Bomb(new Surface(filepath + data_directory + "Bomb.bmp")));
+				bombs.Add(new Bomb(new Surface(filepath + data_directory + "Bomb.bmp")), new Rectangle());
 			}
-
-			master.Add(bombs);
-			master.Add(players);
-
+            foreach (Sprite bomb in bombs.Keys)
+            {
+                master.Add(bomb, bomb.Rectangle);
+            }
+            foreach (Sprite playerSprite in players.Keys)
+            {
+                master.Add(playerSprite, player.Rectangle);
+            }
+			
 			Mouse.ShowCursor = false;
 			Events.KeyboardDown +=
 				new KeyboardEventHandler(this.Keyboard);
@@ -102,7 +107,8 @@ namespace SdlDotNet.Examples.BombRun
 		private void PlayerWeaponFired(object sender, FireEventArgs e)
 		{
 			Bullet bullet = new Bullet(e.Location, 0, 250);
-			bullets.Add(bullet);
+			bullets.Add(bullet, bullet.Rectangle);
+
 		}
 
 		private void Keyboard(object sender, KeyboardEventArgs e)
@@ -126,13 +132,13 @@ namespace SdlDotNet.Examples.BombRun
 			//Console.WriteLine(args.SecondsElapsed);
 			screen.Blit(background);
 
-			for(int i = 0; i < master.Count; i++)
-			{
-				src = new Rectangle(new Point(0, 0), master[i].Size);
-				dest = new Rectangle(master[i].Position, master[i].Size);
+			foreach (Sprite s in master.Keys)
+            {
+				src = new Rectangle(new Point(0, 0), s.Size);
+				dest = new Rectangle(s.Position, s.Size);
 
 				temporary.Blit(alternateBackground, src, dest);
-				temporary.Blit(master[i].Surface, src);
+				temporary.Blit(s.Surface, src);
 				screen.Blit(temporary, dest);
 			}
 

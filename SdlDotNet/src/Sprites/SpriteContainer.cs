@@ -103,7 +103,7 @@ base(surface, rectangle, positionZ)
 				{
 					if (disposing)
 					{
-						foreach (Sprite s in this.sprites)
+						foreach (Sprite s in this.sprites.Keys)
 						{
 							s.Dispose();							
 						}

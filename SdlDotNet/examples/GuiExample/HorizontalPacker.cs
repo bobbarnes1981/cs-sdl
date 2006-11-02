@@ -75,7 +75,7 @@ namespace SdlDotNet.Examples.GuiExample
 			int x = 0;
 
 			int width = 0;
-			foreach (Sprite s in HeadSprites)
+			foreach (Sprite s in HeadSprites.Keys)
 			{
 				// Ignore hidden
 				if (!s.Visible)
@@ -94,9 +94,9 @@ namespace SdlDotNet.Examples.GuiExample
 				}
 			}
 
-			this.Surface = new Surface( width * 3, this.HeadSprites[0].Height);
+			this.Surface = new Surface( width * 3, this.HeadSprites.Size.Height);
 
-			foreach (Sprite s in TailSprites)
+			foreach (Sprite s in TailSprites.Keys)
 			{
 				// Ignore hidden
 				if (!s.Visible)

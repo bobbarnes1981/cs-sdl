@@ -67,7 +67,7 @@ namespace SdlDotNet.Examples.GuiExample
 				throw new ArgumentNullException("sprite");
 			}
 			sprite.Position = new Point(this.Size.Width, this.Position.Y);
-			base.Sprites.Add(sprite);
+			base.Sprites.Add(sprite, sprite.Rectangle);
 		}
 		#endregion
 
@@ -78,7 +78,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <param name="args"></param>
 		public override void Update(TickEventArgs args)
 		{
-			Sprite s;
+			//Sprite s;
 			// Figure out the rates. 
 			// The min and max start on opposite sides
 			// of the ticker.
@@ -87,20 +87,16 @@ namespace SdlDotNet.Examples.GuiExample
 			if (this.Sprites.Count != 0)
 			{
 				// Go through all the displayed sprites
-				for (int i = 0; i < this.Sprites.Count; i++)
+				foreach (Sprite s in Sprites.Keys)
 				{
-					s = this.Sprites[i];
+					
 					// Tick the sprite and wrap it in a translator
 					s.Update(args);
 	  
 					// Move the sprite along
-					if (i > 1 && this.Sprites[i-1] != null && s.IntersectsWith(this.Sprites[i-1].Rectangle))
-					{
-					}
-					else
-					{
+					
 						s.X += 10;
-					}
+					
 					s.Y = 0;
 				}
 			}

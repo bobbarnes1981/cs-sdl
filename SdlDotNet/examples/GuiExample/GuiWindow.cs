@@ -48,7 +48,7 @@ namespace SdlDotNet.Examples.GuiExample
 				throw new ArgumentNullException("manager");
 			}
 			titleBar.Surface.Fill(manager.FrameColor);
-			base.Sprites.Add(titleSprite);
+			base.Sprites.Add(titleSprite, titleSprite.Rectangle);
 			this.title = string.Empty;
 		}
 
@@ -69,7 +69,7 @@ namespace SdlDotNet.Examples.GuiExample
 			}
 			titleBar.Surface.Fill(manager.FrameColor);
 			
-			base.Sprites.Add(titleSprite);
+			base.Sprites.Add(titleSprite, titleSprite.Rectangle);
 			this.title = string.Empty;
 		}
 
@@ -108,7 +108,7 @@ namespace SdlDotNet.Examples.GuiExample
 				// Set the bounds
 				titleSize = GuiManager.GetTextSize(base.GuiManager.TitleFont, title);
 				titleSprite.X = (base.Rectangle.Width - titleSize.Width)/2;
-				base.Sprites.Insert(0, titleBar);
+				base.Sprites.Add(titleBar, new Rectangle());
 				titleSprite.Text = value;
 			}
 		}
