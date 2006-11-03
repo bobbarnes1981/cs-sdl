@@ -24,6 +24,8 @@ using System.Drawing;
 using System.Globalization;
 
 using SdlDotNet;
+using SdlDotNet.Input;
+using SdlDotNet.Audio;
 
 namespace SdlDotNet.Sprites
 {

@@ -21,7 +21,7 @@ using System;
 using System.Collections;
 using System.IO;
 
-namespace SdlDotNet
+namespace SdlDotNet.Audio
 {
     /// <summary>
     /// Encapulates a Dictionary of Sound objects in a Sound Dictionary.

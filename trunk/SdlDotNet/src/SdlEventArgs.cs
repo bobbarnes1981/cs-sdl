@@ -18,7 +18,9 @@
  */
 
 using System;
+
 using Tao.Sdl;
+using SdlDotNet.Input;
 
 namespace SdlDotNet 
 {

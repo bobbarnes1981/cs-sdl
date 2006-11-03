@@ -21,7 +21,7 @@ using System;
 
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Audio
 {
 	/// <summary>
 	/// Events args for when a channel finishes playing a sound.

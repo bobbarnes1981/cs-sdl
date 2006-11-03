@@ -27,7 +27,9 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+
 using SdlDotNet;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Windows 
 {

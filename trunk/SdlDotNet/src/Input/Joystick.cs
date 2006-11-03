@@ -22,7 +22,7 @@ using System.Globalization;
 
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Input
 {
 	/// <summary>
 	/// Struct for trackball motion

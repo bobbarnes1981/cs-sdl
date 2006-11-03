@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 using Tao.Sdl;
 
  
-namespace SdlDotNet
+namespace SdlDotNet.Audio
 {
     /// <summary>
     /// Used in the SDL_AudioSpec struct

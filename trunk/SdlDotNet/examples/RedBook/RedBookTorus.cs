@@ -29,6 +29,7 @@ using System;
 using System.Reflection;
 
 using SdlDotNet;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.RedBook

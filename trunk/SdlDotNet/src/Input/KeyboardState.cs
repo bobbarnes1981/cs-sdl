@@ -19,9 +19,9 @@
 
 using System; 
 
-using Tao.Sdl; 
+using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Input
 { 
 	/// <summary> 
 	/// The KeyboardState class interface describes the key state of every button on the keyboard. 

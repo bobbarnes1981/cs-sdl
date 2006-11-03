@@ -717,40 +717,6 @@
 		</Match>
 	    </Files>
 	</Project>
-	<Project name="PhysFsTest" path="examples/PhysFsTest" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.PhysFsTest.PhysFsTest" assemblyName="PhysFsTest" rootNamespace="SdlDotNet.Examples.PhysFsTest" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.PhysFs" localCopy="true" path="../../lib/net-2.0"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
 	<Project name="Isotope" path="examples/Isotope" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Isotope.MainClass" assemblyName="Isotope" rootNamespace="SdlDotNet.Examples.Isotope" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>

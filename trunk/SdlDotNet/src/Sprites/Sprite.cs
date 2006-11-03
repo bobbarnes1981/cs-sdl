@@ -23,6 +23,8 @@ using System.Collections;
 using System.Globalization;
 
 using SdlDotNet;
+using SdlDotNet.Audio;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Sprites
 {

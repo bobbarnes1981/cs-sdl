@@ -20,7 +20,7 @@
 using System;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Audio
 {
 	/// <summary>
 	/// Event arguments for MusicFinished Event.

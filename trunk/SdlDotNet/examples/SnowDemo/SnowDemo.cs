@@ -22,6 +22,7 @@ using System.IO;
 using System.Drawing;
 
 using SdlDotNet;
+using SdlDotNet.Input;
 using SdlDotNet.Sprites;
 
 namespace SdlDotNet.Examples.SnowDemo

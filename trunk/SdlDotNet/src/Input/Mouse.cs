@@ -22,7 +22,7 @@ using System.Drawing;
 
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Input
 {
 	/// <summary>
 	/// Mouse.

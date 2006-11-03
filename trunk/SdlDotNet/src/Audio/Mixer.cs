@@ -24,7 +24,7 @@ using System.IO;
 using SdlDotNet;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Audio
 {
     /// <summary>
     /// Provides methods to access the sound system.

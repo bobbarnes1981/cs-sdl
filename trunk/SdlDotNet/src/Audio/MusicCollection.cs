@@ -21,7 +21,7 @@ using System;
 using System.Collections;
 using System.IO;
 
-namespace SdlDotNet
+namespace SdlDotNet.Audio
 {
 	/// <summary>
 	/// Encapsulates the collection of Music objects.
