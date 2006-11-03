@@ -20,10 +20,12 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+
 using SdlDotNet;
+using SdlDotNet.Core;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Graphics
 {
 	/// <summary>
 	/// Font Class.

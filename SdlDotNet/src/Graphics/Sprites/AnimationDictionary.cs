@@ -20,7 +20,7 @@
 using System;
 using System.Collections;
 
-namespace SdlDotNet.Sprites
+namespace SdlDotNet.Graphics.Sprites
 {
 	/// <summary>
 	/// Summary description for Animation.

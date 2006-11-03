@@ -18,9 +18,11 @@
  */
 
 using System;
-using Tao.Sdl;
 
-namespace SdlDotNet 
+using Tao.Sdl;
+using SdlDotNet.Core;
+
+namespace SdlDotNet.Graphics 
 {
 	/// <summary>
 	/// Represents a movie mpg file.

@@ -25,9 +25,10 @@ using System.Globalization;
 using System.Collections.Generic;
 
 using Tao.Sdl;
-using SdlDotNet.Sprites;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Graphics 
 {
 	/// <summary>
 	/// Represents an Sdl drawing surface.

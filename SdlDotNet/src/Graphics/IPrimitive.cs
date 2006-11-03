@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 using SdlDotNet;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Graphics
 {
 	/// <summary>
 	/// Interface for primitive shapes

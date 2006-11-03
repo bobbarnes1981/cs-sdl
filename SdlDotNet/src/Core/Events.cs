@@ -26,7 +26,7 @@ using Tao.Sdl;
 using SdlDotNet.Input;
 using SdlDotNet.Audio;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Core 
 {
 	/// <summary>
 	/// Indicates that the application has gained or lost input focus

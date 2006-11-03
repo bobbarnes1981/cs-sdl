@@ -22,7 +22,7 @@ using System.Threading;
 
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Core
 {
 	/// <summary>
 	/// Event arguments for a Framerate tick.

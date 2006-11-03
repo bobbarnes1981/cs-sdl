@@ -18,9 +18,11 @@
  */
 
 using System;
+
+using SdlDotNet.Core;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Graphics
 {
 	/// <summary>
 	/// Event args for resizing the application window.

@@ -20,7 +20,7 @@
 using System;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Graphics
 {
 	/// <summary>
 	/// The Tranformation class holds variables for rotating and zooming a Surface

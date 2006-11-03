@@ -18,9 +18,11 @@
  */
 
 using System;
+
+using SdlDotNet.Core;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Graphics
 {
 	/// <summary>
 	/// event args for the Video Expose event.

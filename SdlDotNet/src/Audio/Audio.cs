@@ -19,9 +19,9 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using Tao.Sdl;
 
- 
 namespace SdlDotNet.Audio
 {
     /// <summary>

@@ -26,7 +26,7 @@ using System.Resources;
 
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Graphics
 {
 	/// <summary>
 	/// Information for current video mode..

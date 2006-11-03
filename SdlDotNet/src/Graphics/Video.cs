@@ -24,7 +24,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Graphics 
 {
 	/// <summary>
 	/// Provides methods to set the video mode, create video surfaces, 

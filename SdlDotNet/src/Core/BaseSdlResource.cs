@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Core 
 {
 	/// <summary>
 	/// Base class for SdlResources

@@ -17,12 +17,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet;
 using System;
 using System.Drawing;
 using System.Globalization;
 
-namespace SdlDotNet.Sprites
+using SdlDotNet;
+using SdlDotNet.Graphics;
+
+namespace SdlDotNet.Graphics.Sprites
 {
 	/// <summary>
 	/// Implements a basic font that is given a font and a string and
@@ -35,7 +37,7 @@ namespace SdlDotNet.Sprites
 		/// Creates a new TextSprite given the font.
 		/// </summary>
 		/// <param name="font">The font to use when rendering.</param>
-		public TextSprite(SdlDotNet.Font font) : this(" ", font)
+		public TextSprite(SdlDotNet.Graphics.Font font) : this(" ", font)
 		{
 		}
 
@@ -46,7 +48,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="font">The font to use when rendering.</param>
 		public TextSprite(
 			string textItem, 
-			SdlDotNet.Font font) : base(font.Render(textItem, Color.White))
+			SdlDotNet.Graphics.Font font) : base(font.Render(textItem, Color.White))
 		{
 			this.textItem = textItem;
 			this.font = font;
@@ -61,7 +63,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="color">color of Text</param>
 		public TextSprite(
 			string textItem, 
-			SdlDotNet.Font font, 
+			SdlDotNet.Graphics.Font font, 
 			Color color) : base(font.Render(textItem, color))
 		{
 			this.textItem = textItem;
@@ -79,8 +81,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="antiAlias">A flag determining if it's to 
 		/// use anti-aliasing when rendering. Defaults to true.</param>
 		public TextSprite(
-			string textItem, 
-			SdlDotNet.Font font, 
+			string textItem,
+            SdlDotNet.Graphics.Font font, 
 			Color color, bool antiAlias) : base(font.Render(textItem, color))
 		{
 			this.textItem = textItem;
@@ -98,7 +100,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="backgroundColor">Background color</param>
 		public TextSprite(
 			string textItem, 
-			SdlDotNet.Font font, 
+			SdlDotNet.Graphics.Font font, 
 			Color textColor,
 			Color backgroundColor)
 			: this(textItem, font, textColor)
@@ -115,7 +117,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="position"></param>
 		public TextSprite(
 			string textItem, 
-			SdlDotNet.Font font, 
+			SdlDotNet.Graphics.Font font, 
 			Point position) : this(textItem, font)
 		{
 			base.Position = position;
@@ -132,7 +134,7 @@ namespace SdlDotNet.Sprites
 		/// <param name="position">Position of sprite</param>
 		public TextSprite(
 			string textItem, 
-			SdlDotNet.Font font,
+			SdlDotNet.Graphics.Font font,
 			bool antiAlias,
 			Point position) : this(textItem, font)
 		{
@@ -149,8 +151,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="color">Color of Text</param>
 		/// <param name="position">Position of Sprite</param>
 		public TextSprite(
-			string textItem, 
-			SdlDotNet.Font font, 
+			string textItem,
+            SdlDotNet.Graphics.Font font, 
 			Color color,
 			Point position)
 			: this(textItem, font, position)
@@ -168,8 +170,8 @@ namespace SdlDotNet.Sprites
 		/// <param name="antiAlias">A flag determining if it's to use anti-aliasing when rendering. Defaults to true.</param>
 		/// <param name="position">Position of Sprite</param>
 		public TextSprite(
-			string textItem, 
-			SdlDotNet.Font font, 
+			string textItem,
+            SdlDotNet.Graphics.Font font, 
 			Color color,
 			bool antiAlias,
 			Point position)
@@ -248,7 +250,7 @@ namespace SdlDotNet.Sprites
 			}
 		}
 
-		private SdlDotNet.Font font;
+        private SdlDotNet.Graphics.Font font;
 		private bool antiAlias = true;
 		int textWidth;
 		int maxLines;
@@ -342,7 +344,7 @@ namespace SdlDotNet.Sprites
 		/// <summary>
 		/// Gets and sets the font to be used with the text.
 		/// </summary>
-		public SdlDotNet.Font Font
+        public SdlDotNet.Graphics.Font Font
 		{
 			get 
 			{ 

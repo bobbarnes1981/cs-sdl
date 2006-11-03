@@ -19,9 +19,10 @@
 
 using System;
 
+using SdlDotNet.Core;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Input
 {
 	/// <summary>
 	/// Summary description for JoystickButtonEventArgs.

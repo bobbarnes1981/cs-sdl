@@ -19,7 +19,7 @@
 
 using System;
 
-namespace SdlDotNet.Sprites
+namespace SdlDotNet.Graphics.Sprites
 {
 	/// <summary>
 	/// Animation.

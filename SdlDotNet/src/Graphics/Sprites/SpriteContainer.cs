@@ -23,7 +23,7 @@ using System.Collections;
 using System.Drawing;
 using System.Globalization;
 
-namespace SdlDotNet.Sprites
+namespace SdlDotNet.Graphics.Sprites
 {
 	/// <summary>
 	/// The SpriteCollection is a special case of sprite. It is used to

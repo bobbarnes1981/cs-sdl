@@ -20,7 +20,9 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace SdlDotNet 
+using SdlDotNet.Core;
+
+namespace SdlDotNet.Graphics 
 {
 	/// <summary>
 	/// Represents an error resulting from a movie not playing correctly

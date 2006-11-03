@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Graphics
 {
 	/// <summary>
 	/// Contains basic color conversions and operations

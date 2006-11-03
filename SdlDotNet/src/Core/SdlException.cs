@@ -22,7 +22,7 @@ using System.Runtime.Serialization;
 
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Core 
 {
 	/// <summary>
 	/// Represents a run-time error from the Sdl library.
