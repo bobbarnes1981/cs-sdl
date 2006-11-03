@@ -31,6 +31,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 
 using SdlDotNet;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.NeHe

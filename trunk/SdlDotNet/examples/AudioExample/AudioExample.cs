@@ -23,8 +23,11 @@ using System.Reflection;
 using System.IO;
 using System.Drawing;
 using System.Globalization;
+
 using SdlDotNet;
 using SdlDotNet.Sprites;
+using SdlDotNet.Audio;
+using SdlDotNet.Input;
 
 // SDL.NET Audio Example
 // Simple example to demonstrate audio in SDL.NET.

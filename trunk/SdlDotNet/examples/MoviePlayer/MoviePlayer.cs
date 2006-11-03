@@ -21,7 +21,10 @@ using System;
 using System.Threading;
 using System.IO;
 using System.Runtime.InteropServices;
+
 using SdlDotNet;
+using SdlDotNet.Input;
+using SdlDotNet.Audio;
 
 namespace SdlDotNet.Examples.MoviePlayer
 {
