@@ -23,7 +23,7 @@ using System.Drawing;
 using System.Globalization;
 
 
-namespace SdlDotNet
+namespace SdlDotNet.Graphics
 {
 	/// <summary>
 	/// Circle Primitive

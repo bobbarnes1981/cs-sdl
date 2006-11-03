@@ -20,9 +20,10 @@
 using System;
 using System.Drawing;
 
+using SdlDotNet.Core;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Input
 {
 	/// <summary>
 	/// Event arguments for MouseMotion Events.

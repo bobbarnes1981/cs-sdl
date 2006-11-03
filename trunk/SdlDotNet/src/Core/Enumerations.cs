@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Core 
 {
 	/// <summary>
 	/// Enum for values that are returned by the SDL C library functions.
@@ -116,25 +116,6 @@ namespace SdlDotNet
 		/// </summary>
 		SourceAlphaBlending  = Sdl.SDL_SRCALPHA
 	}
-
-    /// <summary>
-    /// Audio playing status
-    /// </summary>
-    public enum AudioStatus
-    {
-        /// <summary>
-        /// Audio is not playing
-        /// </summary>
-        Stopped,
-        /// <summary>
-        /// Audio is paused
-        /// </summary>
-        Playing,
-        /// <summary>
-        /// Audio is currently playing
-        /// </summary>
-        Paused
-    }
 
 	/// <summary>
 	/// Status of Movie
@@ -239,66 +220,6 @@ namespace SdlDotNet
 		SwapControl = Sdl.SDL_GL_SWAP_CONTROL
 	}
 	#endregion OpenGLAttribute
-
-	/// <summary>
-	/// Specifies an audio format to mix audio in
-	/// </summary>
-	/// <remarks></remarks>
-	public enum AudioFormat
-	{
-		/// <summary>
-		/// None. required by FXCop
-		/// </summary>
-		None = 0,
-		/// <summary>
-		/// Unsigned 8-bit
-		/// </summary>
-		Unsigned8 = Sdl.AUDIO_U8,
-		/// <summary>
-		/// Signed 8-bit
-		/// </summary>
-		Signed8 = Sdl.AUDIO_S8,
-		/// <summary>
-		/// Unsigned 16-bit, little-endian
-		/// </summary>
-		Unsigned16Little = Sdl.AUDIO_U16LSB,
-		/// <summary>
-		/// Signed 16-bit, little-endian
-		/// </summary>
-		Signed16Little = Sdl.AUDIO_S16LSB,
-		/// <summary>
-		/// Unsigned 16-bit, big-endian
-		/// </summary>
-		Unsigned16Big = Sdl.AUDIO_U16MSB,
-		/// <summary>
-		/// Signed 16-bit, big-endian
-		/// </summary>
-		Signed16Big = Sdl.AUDIO_S16MSB,
-		/// <summary>
-		/// Default, equal to Signed16Little
-		/// </summary>
-		Default = Sdl.AUDIO_S16LSB
-	}
-
-	/// <summary>
-	/// Indicates the current fading status of a sound
-	/// </summary>
-	/// <remarks></remarks>
-	public enum FadingStatus
-	{
-		/// <summary>
-		/// Sound is not fading
-		/// </summary>
-		NoFading = SdlMixer.MIX_NO_FADING,
-		/// <summary>
-		/// Sound is fading out
-		/// </summary>
-		FadingOut = SdlMixer.MIX_FADING_OUT,
-		/// <summary>
-		/// Sound is fading in
-		/// </summary>
-		FadingIn = SdlMixer.MIX_FADING_IN
-	}
 
 	/// <summary>
 	/// Text Style
@@ -1376,43 +1297,6 @@ namespace SdlDotNet
 		MetaKeys = (Sdl.KMOD_LMETA|Sdl.KMOD_RMETA)
 	}
 	#endregion ModifierKeys
-
-	/// <summary>
-	/// Type of sound channel
-	/// </summary>
-	/// <remarks></remarks>
-	public enum SoundChannel
-	{
-		/// <summary>
-		/// None
-		/// </summary>
-		None = 0,
-		/// <summary>
-		/// Mono
-		/// </summary>
-		Mono = 1,
-		/// <summary>
-		/// Stereo
-		/// </summary>
-		Stereo = 2
-	}
-
-	
-	/// <summary>
-	/// CD Track Type
-	/// </summary>
-	/// <remarks></remarks>
-	public enum CDTrackType
-	{
-		/// <summary>
-		/// Audio
-		/// </summary>
-		Audio = Sdl.SDL_AUDIO_TRACK,
-		/// <summary>
-		/// Data
-		/// </summary>
-		Data = Sdl.SDL_DATA_TRACK
-	}
 
 	/// <summary>
 	/// JoystickAxes

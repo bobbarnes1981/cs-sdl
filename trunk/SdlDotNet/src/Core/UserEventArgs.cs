@@ -21,7 +21,7 @@ using System;
 
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Core
 {
 	/// <summary>
 	/// Event args for user-defined events.

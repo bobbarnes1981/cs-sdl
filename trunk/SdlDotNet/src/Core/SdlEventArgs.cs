@@ -22,7 +22,7 @@ using System;
 using Tao.Sdl;
 using SdlDotNet.Input;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Core 
 {
 	/// <summary>
 	/// Base class for SdlEventArgs.

@@ -27,7 +27,7 @@ using SdlDotNet;
 using SdlDotNet.Input;
 using SdlDotNet.Audio;
 
-namespace SdlDotNet.Sprites
+namespace SdlDotNet.Graphics.Sprites
 {
 	/// <summary>
 	/// The SpriteCollection is used to group sprites into an easily managed whole. 

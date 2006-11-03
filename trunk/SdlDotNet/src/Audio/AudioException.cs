@@ -20,6 +20,8 @@
 using System;
 using System.Runtime.Serialization;
 
+using SdlDotNet.Core;
+
 namespace SdlDotNet.Audio
 {
 	/// <summary>

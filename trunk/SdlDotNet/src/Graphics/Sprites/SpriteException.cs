@@ -20,7 +20,9 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace SdlDotNet.Sprites
+using SdlDotNet.Core;
+
+namespace SdlDotNet.Graphics.Sprites
 {
 	/// <summary>
 	/// Exception for Sprite

@@ -20,6 +20,7 @@
 using System;
 using System.Globalization;
 
+using SdlDotNet.Core;
 using Tao.Sdl;
 
 namespace SdlDotNet.Input

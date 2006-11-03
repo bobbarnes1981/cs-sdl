@@ -25,7 +25,7 @@ using System.Resources;
 
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Audio 
 {
 	/// <summary>
 	/// Contains methods for playing audio CDs.

@@ -20,7 +20,7 @@
 using System;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Core
 {
 	/// <summary>
 	/// Arguments for the QuitEvent.

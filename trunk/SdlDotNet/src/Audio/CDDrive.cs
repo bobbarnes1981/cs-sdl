@@ -23,9 +23,10 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Resources;
 
+using SdlDotNet.Core;
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Audio 
 {
 	/// <summary>
 	/// Represents a CDROM drive on the system

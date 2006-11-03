@@ -26,7 +26,7 @@ using SdlDotNet;
 using SdlDotNet.Audio;
 using SdlDotNet.Input;
 
-namespace SdlDotNet.Sprites
+namespace SdlDotNet.Graphics.Sprites
 {
 	/// <summary>
 	/// Sprite class contains both a Surface and a Rectangle so that 

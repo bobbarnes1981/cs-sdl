@@ -25,7 +25,7 @@ using System.IO;
 using SdlDotNet;
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Graphics 
 {
 	/// <summary>
 	/// Encapsulates the collection of Surface objects.

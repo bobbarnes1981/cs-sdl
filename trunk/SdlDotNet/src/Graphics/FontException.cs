@@ -21,8 +21,9 @@ using System;
 using System.Runtime.Serialization;
 
 using SdlDotNet;
+using SdlDotNet.Core;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Graphics 
 {
 	/// <summary>
 	/// Sdl Font Exception Class
