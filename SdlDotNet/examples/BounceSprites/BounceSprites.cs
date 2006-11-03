@@ -25,6 +25,7 @@ using System.Collections.Generic;
 
 using SdlDotNet;
 using SdlDotNet.Sprites;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.BounceSprites
 {

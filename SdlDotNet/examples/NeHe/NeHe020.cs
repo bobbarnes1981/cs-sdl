@@ -30,6 +30,7 @@ using System.IO;
 using System.Drawing;
 
 using SdlDotNet;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.NeHe

@@ -34,6 +34,7 @@ using System.Reflection;
 using System.Globalization;
 
 using SdlDotNet;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.NeHe

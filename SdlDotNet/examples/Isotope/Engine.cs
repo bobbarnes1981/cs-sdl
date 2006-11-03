@@ -22,7 +22,9 @@ using System;
 using System.IO;
 using System.Drawing;
 using System.Collections;
+
 using SdlDotNet.Sprites;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.Isotope
 {

@@ -21,6 +21,7 @@ using System.Drawing;
 
 using SdlDotNet;
 using SdlDotNet.Sprites;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.BombRun
 {
