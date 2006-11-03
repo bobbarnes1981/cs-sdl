@@ -21,7 +21,7 @@ using System;
 
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Input
 {
 	/// <summary>
 	/// Provides methods for querying the number and make-up of the joysticks on a system.

@@ -20,7 +20,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Audio
 {
 	/// <summary>
 	/// Represents a run-time error from the Sdl library.

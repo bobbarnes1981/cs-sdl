@@ -21,7 +21,7 @@ using System;
 
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Input
 {
 	/// <summary>
 	/// Event arguments for Keyboard Events.

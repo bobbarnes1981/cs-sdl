@@ -22,7 +22,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Tao.Sdl;
 
-namespace SdlDotNet
+namespace SdlDotNet.Input
 {
 	/// <summary>
 	/// Keyboard class

@@ -17,6 +17,7 @@
 
 using System;
 using SdlDotNet;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.SimpleGame
 {

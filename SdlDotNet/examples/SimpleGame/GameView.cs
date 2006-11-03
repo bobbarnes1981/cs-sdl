@@ -20,6 +20,8 @@ using System.IO;
 using System.Drawing;
 using System.Collections;
 using SdlDotNet;
+using SdlDotNet.Input;
+using SdlDotNet.Audio;
 
 namespace SdlDotNet.Examples.SimpleGame
 {

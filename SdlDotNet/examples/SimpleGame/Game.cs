@@ -22,6 +22,7 @@ using System.Reflection;
 using System.Diagnostics;
 
 using SdlDotNet;
+using SdlDotNet.Audio;
 
 namespace SdlDotNet.Examples.SimpleGame
 {

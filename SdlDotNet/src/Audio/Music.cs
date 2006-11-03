@@ -21,7 +21,7 @@
 using System;
 using Tao.Sdl;
 
-namespace SdlDotNet 
+namespace SdlDotNet.Audio
 {
 	/// <summary>
 	/// Represents a music sample.  Music is generally longer than a sound effect sample,

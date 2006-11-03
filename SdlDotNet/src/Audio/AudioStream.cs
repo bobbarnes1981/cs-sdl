@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace SdlDotNet
+namespace SdlDotNet.Audio
 {
     /// <summary>
     /// An active audio stream for queueing audio data to be played asynchronously.

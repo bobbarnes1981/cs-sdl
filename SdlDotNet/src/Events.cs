@@ -23,6 +23,8 @@ using System.Collections;
 using System.Runtime.InteropServices;
 
 using Tao.Sdl;
+using SdlDotNet.Input;
+using SdlDotNet.Audio;
 
 namespace SdlDotNet 
 {
