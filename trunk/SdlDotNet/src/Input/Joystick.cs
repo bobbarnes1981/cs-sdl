@@ -25,6 +25,78 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Input
 {
+
+    /// <summary>
+    /// JoystickAxes
+    /// </summary>
+    /// <remarks></remarks>
+    public enum JoystickAxis
+    {
+        /// <summary>
+        /// Horizontal Axis
+        /// </summary>
+        Horizontal = 0,
+        /// <summary>
+        /// Vertical Axis
+        /// </summary>
+        Vertical = 1,
+        /// <summary>
+        /// For some controllers
+        /// </summary>
+        Axis3 = 2,
+        /// <summary>
+        /// For some controllers
+        /// </summary>
+        Axis4 = 3
+    }
+
+
+
+    /// <summary>
+    /// JoystickHatStates
+    /// </summary>
+    /// <remarks></remarks>
+    [FlagsAttribute]
+    public enum JoystickHatStates
+    {
+        /// <summary>
+        /// Centered state. FXCop was complaining that this should be called "None".
+        /// </summary>
+        None = Sdl.SDL_HAT_CENTERED,
+        /// <summary>
+        /// Up
+        /// </summary>
+        Up = Sdl.SDL_HAT_UP,
+        /// <summary>
+        /// Right
+        /// </summary>
+        Right = Sdl.SDL_HAT_RIGHT,
+        /// <summary>
+        /// Down
+        /// </summary>
+        Down = Sdl.SDL_HAT_DOWN,
+        /// <summary>
+        /// Left
+        /// </summary>
+        Left = Sdl.SDL_HAT_LEFT,
+        /// <summary>
+        /// Right and Up
+        /// </summary>
+        RightUp = Sdl.SDL_HAT_RIGHTUP,
+        /// <summary>
+        /// Right and Down
+        /// </summary>
+        RightDown = Sdl.SDL_HAT_RIGHTDOWN,
+        /// <summary>
+        /// Left and Up
+        /// </summary>
+        LeftUp = Sdl.SDL_HAT_LEFTUP,
+        /// <summary>
+        /// Left and Down
+        /// </summary>
+        LeftDown = Sdl.SDL_HAT_LEFTDOWN
+    }
+
 	/// <summary>
 	/// Struct for trackball motion
 	/// </summary>

@@ -21,8 +21,9 @@ using System.IO;
 using System.Drawing;
 using System.Collections;
 
-using SdlDotNet;
-using SdlDotNet.Sprites;
+using SdlDotNet.Graphics;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.BombRun

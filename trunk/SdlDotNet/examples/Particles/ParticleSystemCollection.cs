@@ -20,6 +20,8 @@
 using System;
 using System.Collections;
 
+using SdlDotNet.Graphics;
+
 namespace SdlDotNet.Particles
 {
 	/// <summary>

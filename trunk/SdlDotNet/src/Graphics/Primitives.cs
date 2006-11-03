@@ -22,6 +22,7 @@ using System.Collections;
 using System.Drawing;
 using System.Globalization;
 
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Graphics
 {

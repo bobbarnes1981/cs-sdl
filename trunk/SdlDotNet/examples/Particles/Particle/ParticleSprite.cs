@@ -20,7 +20,9 @@
 using System;
 using System.Drawing;
 
-using SdlDotNet.Sprites;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
+using SdlDotNet.Core;
 
 
 namespace SdlDotNet.Particles.Particle

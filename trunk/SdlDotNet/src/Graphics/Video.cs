@@ -22,10 +22,224 @@ using System.Drawing;
 using System.Reflection;
 using System.IO;
 using System.Runtime.InteropServices;
+
 using Tao.Sdl;
+using SdlDotNet.Input;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Graphics 
 {
+    /// <summary>
+    /// Alpha flags for Video
+    /// </summary>
+    /// <remarks></remarks>
+    [FlagsAttribute]
+    public enum Alphas
+    {
+        /// <summary>
+        /// Equivalent to SDL_RLEACCEL
+        /// </summary>
+        RleEncoded = Sdl.SDL_RLEACCEL,
+
+        /// <summary>
+        /// Equivalent to SDL_SRCALPHA
+        /// </summary>
+        SourceAlphaBlending = Sdl.SDL_SRCALPHA
+    }
+
+    /// <summary>
+    /// Status of Movie
+    /// </summary>
+    /// <remarks></remarks>
+    public enum MovieStatus
+    {
+        /// <summary>
+        /// Movie is playing
+        /// </summary>
+        Playing = Smpeg.SMPEG_PLAYING,
+        /// <summary>
+        /// Movie is stopped
+        /// </summary>
+        Stopped = Smpeg.SMPEG_STOPPED,
+        /// <summary>
+        /// Error in movie playback
+        /// </summary>
+        Error = Smpeg.SMPEG_ERROR
+    }
+
+    #region OpenGLAttribute
+    /// <summary>
+    /// Public enumeration for setting the OpenGL window Attributes
+    /// </summary>
+    /// <remarks>
+    /// While you can set most OpenGL attributes normally, 
+    /// the attributes list above must be known before SDL 
+    /// sets the video mode.
+    /// </remarks>
+    public enum OpenGLAttr
+    {
+        /// <summary>
+        /// Size of the framebuffer red component, in bits
+        /// </summary>
+        RedSize = Sdl.SDL_GL_RED_SIZE,
+        /// <summary>
+        /// Size of the framebuffer green component, in bits
+        /// </summary>
+        GreenSize = Sdl.SDL_GL_GREEN_SIZE,
+        /// <summary>
+        /// Size of the framebuffer blue component, in bits
+        /// </summary>
+        BlueSize = Sdl.SDL_GL_BLUE_SIZE,
+        /// <summary>
+        /// Size of the framebuffer alpha component, in bits
+        /// </summary>
+        AlphaSize = Sdl.SDL_GL_ALPHA_SIZE,
+        /// <summary>
+        /// Size of the framebuffer, in bits
+        /// </summary>
+        BufferSize = Sdl.SDL_GL_BUFFER_SIZE,
+        /// <summary>
+        /// 0 or 1, enable or disable double buffering
+        /// </summary>
+        DoubleBuffer = Sdl.SDL_GL_DOUBLEBUFFER,
+        /// <summary>
+        /// Size of the depth buffer, in bits
+        /// </summary>
+        DepthSize = Sdl.SDL_GL_DEPTH_SIZE,
+        /// <summary>
+        /// Size of the stencil buffer, in bits.
+        /// </summary>
+        StencilSize = Sdl.SDL_GL_STENCIL_SIZE,
+        /// <summary>
+        /// Size of the accumulation buffer red component, in bits.
+        /// </summary>
+        AccumulationRedSize = Sdl.SDL_GL_ACCUM_RED_SIZE,
+        /// <summary>
+        /// Size of the accumulation buffer green component, in bits.
+        /// </summary>
+        AccumulationGreenSize = Sdl.SDL_GL_ACCUM_GREEN_SIZE,
+        /// <summary>
+        /// Size of the accumulation buffer blue component, in bits.
+        /// </summary>
+        AccumulationBlueSize = Sdl.SDL_GL_ACCUM_BLUE_SIZE,
+        /// <summary>
+        /// Size of the accumulation buffer alpha component, in bits.
+        /// </summary>
+        AccumulationAlphaSize = Sdl.SDL_GL_ACCUM_ALPHA_SIZE,
+        /// <summary>
+        /// Enable or disable stereo (left and right) buffers (0 or 1).
+        /// </summary>
+        StereoRendering = Sdl.SDL_GL_STEREO,
+        /// <summary>
+        /// Number of multisample buffers (0 or 1). 
+        /// Requires the GL_ARB_MULTISAMPLE extension.
+        /// </summary>
+        MultiSampleBuffers = Sdl.SDL_GL_MULTISAMPLEBUFFERS,
+        /// <summary>
+        /// Number of samples per pixel when multisampling is enabled. 
+        /// Requires the GL_ARB_MULTISAMPLE extension.
+        /// </summary>
+        MultiSampleSamples = Sdl.SDL_GL_MULTISAMPLESAMPLES,
+        /// <summary>
+        /// Guarantees hardware acceleration
+        /// </summary>
+        AcceleratedVisual = Sdl.SDL_GL_ACCELERATED_VISUAL,
+        /// <summary>
+        /// Waits for vsync in OpenGL applications.
+        /// </summary>
+        SwapControl = Sdl.SDL_GL_SWAP_CONTROL
+    }
+    #endregion OpenGLAttribute
+
+    /// <summary>
+    /// Text Style
+    /// </summary>
+    /// <remarks></remarks>
+    [FlagsAttribute]
+    public enum Styles
+    {
+        /// <summary>
+        /// Normal.
+        /// </summary>
+        /// <remarks>
+        /// FXCop wants this to be called 'None' instead of 'Normal'
+        /// </remarks>
+        None = SdlTtf.TTF_STYLE_NORMAL,
+        /// <summary>
+        /// Bold
+        /// </summary>
+        Bold = SdlTtf.TTF_STYLE_BOLD,
+        /// <summary>
+        /// Italic
+        /// </summary>
+        Italic = SdlTtf.TTF_STYLE_ITALIC,
+        /// <summary>
+        /// Underline
+        /// </summary>
+        Underline = SdlTtf.TTF_STYLE_UNDERLINE
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [FlagsAttribute]
+    public enum VideoModes
+    {
+        /// <summary>
+        /// Create the video surface in system memory
+        /// </summary>
+        None = Sdl.SDL_SWSURFACE,
+        /// <summary>
+        /// Create the video surface in video memory
+        /// </summary>
+        HardwareSurface = Sdl.SDL_HWSURFACE,
+        /// <summary>
+        /// Enables the use of asynchronous updates of the display surface. 
+        /// This will usually slow down blitting on single CPU machines, 
+        /// but may provide a speed increase on SMP systems.
+        /// </summary>
+        AsynchronousBlit = Sdl.SDL_ASYNCBLIT,
+
+        //Anyformat = Sdl.SDL_ANYFORMAT,
+        /// <summary>
+        /// Give SDL.NET exclusive palette access. 
+        /// </summary>
+        HardwarePalette = Sdl.SDL_HWPALETTE,
+        /// <summary>
+        /// Enable hardware double buffering; only valid with <see cref="HardwareSurface"/>. 
+        /// Calling Surface.Flip() will flip the buffers and update the screen. 
+        /// All drawing will take place on the surface that is not displayed 
+        /// at the moment. If double buffering could not be enabled then 
+        /// <see cref="Surface.Flip"/> will just perform a 
+        /// <see cref="Surface.Update()"/> on the entire screen.
+        /// </summary>
+        DoubleBuffering = Sdl.SDL_DOUBLEBUF,
+        /// <summary>
+        /// SDL.NET will attempt to use a fullscreen mode. 
+        /// If a hardware resolution change is not possible 
+        /// (for whatever reason), the next higher resolution 
+        /// will be used and the display window centered on a black background.
+        /// </summary>
+        Fullscreen = Sdl.SDL_FULLSCREEN,
+        /// <summary>
+        /// Create an OpenGL rendering context. 
+        /// You should have previously set OpenGL video 
+        /// attributes with SDL_GL_SetAttribute.
+        /// </summary>
+        OpenGL = Sdl.SDL_OPENGL,
+        /// <summary>
+        /// Create a resizable window. When the window is resized by 
+        /// the user a <see cref="Events.VideoResize"/> event is generated and 
+        /// Video.SetVideoMode can be called again with the new size.
+        /// </summary>
+        Resizable = Sdl.SDL_RESIZABLE,
+        /// <summary>
+        /// If possible, NoFrame causes SDL to create a window with 
+        /// no title bar or frame decoration. 
+        /// Fullscreen modes automatically have this flag set.
+        /// </summary>
+        NoFrame = Sdl.SDL_NOFRAME
+    }
 	/// <summary>
 	/// Provides methods to set the video mode, create video surfaces, 
 	/// hide and show the mouse cursor,

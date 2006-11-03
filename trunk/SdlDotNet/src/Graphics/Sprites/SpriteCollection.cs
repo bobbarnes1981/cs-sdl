@@ -24,6 +24,7 @@ using System.Drawing;
 using System.Globalization;
 
 using SdlDotNet;
+using SdlDotNet.Core;
 using SdlDotNet.Input;
 using SdlDotNet.Audio;
 

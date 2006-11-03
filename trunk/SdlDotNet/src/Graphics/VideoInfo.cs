@@ -25,6 +25,7 @@ using System.Reflection;
 using System.Resources;
 
 using Tao.Sdl;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Graphics
 {

@@ -19,7 +19,7 @@
 
 using System;
 
-using SdlDotNet;
+using SdlDotNet.Graphics;
 using SdlDotNet.Particles.Particle;
 using SdlDotNet.Particles.Manipulators;
 using SdlDotNet.Particles.Emitters;
