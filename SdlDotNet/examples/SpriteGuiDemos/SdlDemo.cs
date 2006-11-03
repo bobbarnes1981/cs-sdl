@@ -17,16 +17,18 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Sprites;
-using SdlDotNet.Examples.GuiExample;
-using SdlDotNet;
-
 using System;
 using System.IO;
 using System.Collections;
 using System.Drawing;
 using System.Threading;
 using System.Globalization;
+
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
+using SdlDotNet.Examples.GuiExample;
+using SdlDotNet.Input;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Examples.SpriteGuiDemos
 {
@@ -108,9 +110,9 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 			}
 			// Set up the gui manager
 			gui = new GuiManager(master,
-				new SdlDotNet.Font(filepath + data_directory + "comic.ttf", 12),
+				new SdlDotNet.Graphics.Font(filepath + data_directory + "comic.ttf", 12),
 				Size);
-			gui.TitleFont = new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 12);
+			gui.TitleFont = new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 12);
 
 			// Set up the ticker
 			statusTicker = new GuiTicker(gui, new Vector(0, Video.Screen.Height - 20, 0),100);

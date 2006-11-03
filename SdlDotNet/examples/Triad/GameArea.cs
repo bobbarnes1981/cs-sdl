@@ -19,7 +19,10 @@
 
 
 using System;
-using SdlDotNet;
+
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.Triad
 {

@@ -18,7 +18,8 @@
  */
 
 using NUnit.Framework;
-using SdlDotNet.Sprites;
+using SdlDotNet.Graphics.Sprites;
+using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Tests
 {

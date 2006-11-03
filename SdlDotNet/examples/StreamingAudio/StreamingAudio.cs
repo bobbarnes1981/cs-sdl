@@ -20,7 +20,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-using SdlDotNet;
+using SdlDotNet.Audio;
 
 namespace SdlDotNet.Examples.StreamingAudio
 {
@@ -40,15 +40,15 @@ namespace SdlDotNet.Examples.StreamingAudio
 
             AudioFormat fmt = AudioFormat.Signed16Little;
 
-            Audio.OpenAudio(playback_freq, fmt, SoundChannel.Mono, samples, new AudioCallbackDelegate(Unsigned16LittleCallback), me);
+            AudioBasic.OpenAudio(playback_freq, fmt, SoundChannel.Mono, samples, new AudioCallbackDelegate(Unsigned16LittleCallback), me);
 
-            offset = Audio.AudioInfo.Offset;
+            offset = AudioBasic.AudioInfo.Offset;
             volume = 0.9 * 32768;
 
 
             buffer16 = new short[samples];
 
-            Console.WriteLine("Status: {0}", Audio.AudioStatus.ToString());
+            Console.WriteLine("Status: {0}", AudioBasic.AudioStatus.ToString());
 
             osc.Rate = 20;
             osc.Amplitude = 1;
@@ -56,12 +56,12 @@ namespace SdlDotNet.Examples.StreamingAudio
             osc2.Rate = 3;
             osc2.Amplitude = 10;
 
-            Audio.Paused = false;
+            AudioBasic.Paused = false;
 
             Console.WriteLine("Press any key to quit.");
             Console.ReadKey();
 
-            Audio.CloseAudio();
+            AudioBasic.CloseAudio();
         }
 
         static byte[] buffer8 = { };

@@ -20,9 +20,12 @@
 using System;
 using System.IO;
 using System.Drawing;
-
-using SdlDotNet;
 using System.Collections;
+
+using SdlDotNet.Audio;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Examples.Triad
 {

@@ -19,9 +19,11 @@ using System;
 using System.IO;
 using System.Drawing;
 using System.Collections;
-using SdlDotNet;
+
+using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 using SdlDotNet.Audio;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Examples.SimpleGame
 {

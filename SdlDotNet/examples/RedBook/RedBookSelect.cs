@@ -28,7 +28,8 @@ SOFTWARE.
 using System;
 using System.Reflection;
 
-using SdlDotNet;
+using SdlDotNet.Core;using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 

@@ -22,8 +22,10 @@
 using System;
 using System.IO;
 using System.Collections;
-using SdlDotNet;
 using System.Drawing;
+
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.Isotope
 {

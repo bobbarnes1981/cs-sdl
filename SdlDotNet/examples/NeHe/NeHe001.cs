@@ -28,8 +28,9 @@ SOFTWARE.
 using System;
 using System.Reflection;
 
-using SdlDotNet;
+using SdlDotNet.Core;
 using SdlDotNet.Input;
+using SdlDotNet.Graphics;
 using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.NeHe

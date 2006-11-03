@@ -23,8 +23,10 @@ using System.IO;
 using System.Drawing;
 using System.Collections;
 
-using SdlDotNet.Sprites;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Examples.Isotope
 {
@@ -109,7 +111,7 @@ namespace SdlDotNet.Examples.Isotope
 		public View display;
 		public Skin[] skin_group;
 		public Surface surface;
-		public SdlDotNet.Font font;
+		public SdlDotNet.Graphics.Font font;
        
 		/// <summary>
 		/// 
@@ -119,7 +121,7 @@ namespace SdlDotNet.Examples.Isotope
 		/// <param name="surface"></param>
 		/// <param name="keys"></param>
 		/// <param name="titlefile"></param>
-		public Engine(LeadActor player, Skin[] skin_group,Surface surface,Keys keys,string titlefile/*,SdlDotNet.Font font*/)
+		public Engine(LeadActor player, Skin[] skin_group, Surface surface,Keys keys,string titlefile/*,SdlDotNet.Font font*/)
 		{
 			/* Initialise the Isotope Engine */
 
@@ -153,7 +155,7 @@ namespace SdlDotNet.Examples.Isotope
 
 			//Load the default font: Do we need some tester here to ensure we find a font?
 			//if (font==None)
-			this.font = new SdlDotNet.Font(Path.Combine(MainClass.FilePath, "FreeSans.ttf"), 10);
+			this.font = new SdlDotNet.Graphics.Font(Path.Combine(MainClass.FilePath, "FreeSans.ttf"), 10);
 			//this.font = font;
 		}
 	   

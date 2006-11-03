@@ -20,8 +20,10 @@
 using System;
 using System.Drawing;
 
-using SdlDotNet;
-using SdlDotNet.Sprites;
+using SdlDotNet.Core;
+using SdlDotNet.Input;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.BounceSprites
 {

@@ -1,10 +1,12 @@
 using System;
 using System.Threading;
-using NUnit.Framework;
-using Tao.Sdl;
-using SdlDotNet;
 using System.Drawing;
 using System.Runtime.InteropServices;
+
+using NUnit.Framework;
+using Tao.Sdl;
+using SdlDotNet.Graphics;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Tests
 {

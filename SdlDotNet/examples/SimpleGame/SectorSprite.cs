@@ -19,8 +19,8 @@ using System;
 using System.Collections;
 using System.Drawing;
 
-using SdlDotNet;
-using SdlDotNet.Sprites;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.SimpleGame
 {

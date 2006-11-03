@@ -20,8 +20,8 @@ using System;
 using System.Drawing;
 using System.Globalization;
 
-using SdlDotNet;
-using SdlDotNet.Sprites;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.SnowDemo
 {
@@ -52,7 +52,7 @@ namespace SdlDotNet.Examples.SnowDemo
 		/// <param name="positionY"></param>
 		/// <param name="phrase"></param>
 		/// <param name="startTime"></param>
-		public TextItem(string phrase, Font font, int positionY, float startTime) : 
+		public TextItem(string phrase, SdlDotNet.Graphics.Font font, int positionY, float startTime) : 
 			base(phrase, font, false, new Point(25, positionY))
 		{
 			base.Surface.Alpha = 0;

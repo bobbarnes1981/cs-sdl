@@ -16,13 +16,14 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-using SdlDotNet.Sprites;
-using SdlDotNet.Examples.GuiExample;
-using NUnit.Framework;
-using SdlDotNet;
 using System.Drawing;
 using System;
+
+using SdlDotNet.Graphics.Sprites;
+using SdlDotNet.Examples.GuiExample;
+using NUnit.Framework;
+using SdlDotNet.Core;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Tests
 {
@@ -43,7 +44,7 @@ namespace SdlDotNet.Tests
 			// Create the gui used through the tst
 			sm = new SpriteCollection();
 			gui = new GuiManager(sm,
-				new SdlDotNet.Font("../../FreeSans.ttf", 12),
+				new SdlDotNet.Graphics.Font("../../FreeSans.ttf", 12),
 				new Size(800, 600));
 		}
 

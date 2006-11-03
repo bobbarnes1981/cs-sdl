@@ -20,7 +20,8 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using SdlDotNet;
+
+using SdlDotNet.Graphics;
 using Tao.OpenGl;
 
 namespace SdlDotNet.OpenGl

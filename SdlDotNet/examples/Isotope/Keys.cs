@@ -73,8 +73,9 @@ using System;
 using System.IO;
 using System.Collections;
 using System.Drawing;
-using SdlDotNet;
-using SdlDotNet.Sprites;
+
+using SdlDotNet.Graphics.Sprites;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.Isotope 
 {

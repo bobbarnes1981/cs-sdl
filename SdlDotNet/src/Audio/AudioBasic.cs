@@ -33,7 +33,7 @@ namespace SdlDotNet.Audio
     /// <summary>
     /// Represents an interface into the SDL Audio API, providing methods to open and close audio, and a callback facility to stream audio
     /// </summary>
-    public static class Audio
+    public static class AudioBasic
     {
         #region Public methods
         /// <summary>

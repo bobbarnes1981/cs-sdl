@@ -17,10 +17,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Sprites;
-using SdlDotNet;
 using System;
 using System.Drawing;
+
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.GuiExample
 {
@@ -41,7 +43,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// used for any requests for fonts. Specific fonts may assigned,
 		/// the base system will always fall back to the baseFont.
 		/// </summary>
-		public GuiManager(SpriteCollection spriteManager, SdlDotNet.Font baseFont,
+		public GuiManager(SpriteCollection spriteManager, SdlDotNet.Graphics.Font baseFont,
 			Size size)
 		{
 			this.spriteManager = spriteManager;
@@ -53,18 +55,18 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// Contains the fall-back font for the system
 		/// </summary>
-		private SdlDotNet.Font baseFont;
+		private SdlDotNet.Graphics.Font baseFont;
 
 		// Contains the font for any window titles
-		private SdlDotNet.Font titleFont;
+		private SdlDotNet.Graphics.Font titleFont;
 
 		// Contains the font for menus
-		private SdlDotNet.Font menuFont;
+		private SdlDotNet.Graphics.Font menuFont;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public SdlDotNet.Font BaseFont
+		public SdlDotNet.Graphics.Font BaseFont
 		{
 			get 
 			{ 
@@ -84,7 +86,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public SdlDotNet.Font MenuFont
+		public SdlDotNet.Graphics.Font MenuFont
 		{
 			get
 			{
@@ -106,7 +108,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// <summary>
 		/// 
 		/// </summary>
-		public SdlDotNet.Font TitleFont
+		public SdlDotNet.Graphics.Font TitleFont
 		{
 			get
 			{
@@ -129,7 +131,7 @@ namespace SdlDotNet.Examples.GuiExample
 		/// Renders a given text with the given font and returns the size
 		/// of the surface rendered.
 		/// </summary>
-		public static Size GetTextSize(SdlDotNet.Font font, string textItem)
+		public static Size GetTextSize(SdlDotNet.Graphics.Font font, string textItem)
 		{
 			if (font == null)
 			{

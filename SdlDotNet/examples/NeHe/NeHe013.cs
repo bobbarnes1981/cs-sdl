@@ -29,6 +29,8 @@ using System;
 using System.Drawing;
 using System.Globalization;
 
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
 using Tao.OpenGl;
 using Tao.Platform.Windows;
 

@@ -20,8 +20,9 @@
 using System;
 using System.Drawing;
 
-using SdlDotNet;
-using SdlDotNet.Sprites;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.CDPlayer
@@ -165,12 +166,12 @@ namespace SdlDotNet.Examples.CDPlayer
 			{
 				throw new ArgumentNullException("args");
 			}
-			if (args.Key == SdlDotNet.Key.S && args.Down == true)
+			if (args.Key == SdlDotNet.Input.Key.S && args.Down == true)
 			{
 				this.BeingDragged = true;
 				this.Animate = false;
 			}
-			else if (args.Key == SdlDotNet.Key.S && args.Down == false)
+			else if (args.Key == SdlDotNet.Input.Key.S && args.Down == false)
 			{
 				this.BeingDragged = false;
 				this.Animate = true;

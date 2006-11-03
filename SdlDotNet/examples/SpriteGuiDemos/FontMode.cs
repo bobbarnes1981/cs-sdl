@@ -17,12 +17,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
-using SdlDotNet.Sprites;
-using SdlDotNet;
 using System;
 using System.IO;
 using System.Drawing;
+
+using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.SpriteGuiDemos
 {
@@ -46,14 +45,14 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 			}
 			Console.WriteLine("Hello from FontMode");
 			// Create our fonts
-			SdlDotNet.Font f1 = 
-				new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 24);
-			SdlDotNet.Font f2 = 
-				new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 48);
-			SdlDotNet.Font f3 = 
-				new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 72);
-			SdlDotNet.Font f4 = 
-				new SdlDotNet.Font(filepath + data_directory + "comicbd.ttf", 15);
+			SdlDotNet.Graphics.Font f1 = 
+				new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 24);
+			SdlDotNet.Graphics.Font f2 = 
+				new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 48);
+			SdlDotNet.Graphics.Font f3 = 
+				new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 72);
+			SdlDotNet.Graphics.Font f4 = 
+				new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 15);
 
 			// Create our text sprites
 			Color c2 = Color.FromArgb(255, 0, 123);

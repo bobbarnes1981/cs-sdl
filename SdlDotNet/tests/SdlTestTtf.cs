@@ -14,7 +14,7 @@ namespace SdlDotNet.Tests
 	public class SdlTestTtf
 	{
 		//int init;
-		Font font;
+		SdlDotNet.Graphics.Font font;
 		int flags;
 		int bpp;
 		int width;
@@ -35,7 +35,7 @@ namespace SdlDotNet.Tests
 		public void Init()
 		{
 			this.Quit();
-			font = new Font(@"../../FreeSans.ttf", 12);
+			font = new SdlDotNet.Graphics.Font(@"../../FreeSans.ttf", 12);
 			flags = (Sdl.SDL_HWSURFACE|Sdl.SDL_DOUBLEBUF|Sdl.SDL_ANYFORMAT);
 			bpp = 16;
 			width = 640;
