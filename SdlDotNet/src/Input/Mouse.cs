@@ -21,9 +21,58 @@ using System;
 using System.Drawing;
 
 using Tao.Sdl;
+using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Input
 {
+    /// <summary>
+    /// ButtonKeyState
+    /// </summary>
+    /// <remarks>/remarks> byte</remarks>
+    public enum ButtonKeyState
+    {
+        /// <summary>
+        /// Button has been released.
+        /// </summary>
+        NotPressed = Sdl.SDL_RELEASED,
+        /// <summary>
+        /// Button has been pressed down.
+        /// </summary>
+        Pressed = Sdl.SDL_PRESSED
+    }
+
+    /// <summary>
+    /// MouseButton
+    /// </summary>
+    /// <remarks>Byte</remarks>
+    public enum MouseButton
+    {
+        /// <summary>
+        /// None
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Primary button. Typically the left button
+        /// </summary>
+        PrimaryButton = Sdl.SDL_BUTTON_LEFT,
+        /// <summary>
+        /// Secondary button. typically the right button
+        /// </summary>
+        SecondaryButton = Sdl.SDL_BUTTON_RIGHT,
+        /// <summary>
+        /// Middle button
+        /// </summary>
+        MiddleButton = Sdl.SDL_BUTTON_MIDDLE,
+        /// <summary>
+        /// Wheel up
+        /// </summary>
+        WheelUp = Sdl.SDL_BUTTON_WHEELUP,
+        /// <summary>
+        /// Wheel down
+        /// </summary>
+        WheelDown = Sdl.SDL_BUTTON_WHEELDOWN
+    }
+
 	/// <summary>
 	/// Mouse.
 	/// </summary>

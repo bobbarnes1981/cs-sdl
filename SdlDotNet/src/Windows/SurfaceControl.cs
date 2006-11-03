@@ -28,7 +28,8 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-using SdlDotNet;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 
 namespace SdlDotNet.Windows 
@@ -94,7 +95,7 @@ namespace SdlDotNet.Windows
 			base.OnResize (e);
             if (!this.DesignMode)
             {
-                SdlDotNet.Events.Add(new VideoResizeEventArgs(this.Width, this.Height));
+                SdlDotNet.Core.Events.Add(new VideoResizeEventArgs(this.Width, this.Height));
             }
 		}
 
@@ -113,7 +114,7 @@ namespace SdlDotNet.Windows
 			base.OnSizeChanged (e);
             if (!this.DesignMode)
             {
-                SdlDotNet.Events.Add(new VideoResizeEventArgs(this.Width, this.Height));
+                SdlDotNet.Core.Events.Add(new VideoResizeEventArgs(this.Width, this.Height));
             }
 		}
 		
@@ -126,7 +127,7 @@ namespace SdlDotNet.Windows
 			base.OnMouseDown (e);
             if (!this.DesignMode)
             {
-                SdlDotNet.Events.Add(new MouseButtonEventArgs(SurfaceControl.ConvertMouseButtons(e), true, (short)e.X, (short)e.Y));
+                SdlDotNet.Core.Events.Add(new MouseButtonEventArgs(SurfaceControl.ConvertMouseButtons(e), true, (short)e.X, (short)e.Y));
             }
 		}
 
@@ -139,7 +140,7 @@ namespace SdlDotNet.Windows
 			base.OnMouseUp (e);
             if (!this.DesignMode)
             {
-                SdlDotNet.Events.Add(new MouseButtonEventArgs(SurfaceControl.ConvertMouseButtons(e), false, (short)e.X, (short)e.Y));
+                SdlDotNet.Core.Events.Add(new MouseButtonEventArgs(SurfaceControl.ConvertMouseButtons(e), false, (short)e.X, (short)e.Y));
             }
 		}
 		
@@ -158,7 +159,7 @@ namespace SdlDotNet.Windows
             {
                 if (e.Button != MouseButtons.None)
                 {
-                    SdlDotNet.Events.Add(new MouseMotionEventArgs(true, SurfaceControl.ConvertMouseButtons(e), (short)e.X, (short)e.Y, (short)(e.X - lastX), (short)(e.Y - lastY)));
+                    SdlDotNet.Core.Events.Add(new MouseMotionEventArgs(true, SurfaceControl.ConvertMouseButtons(e), (short)e.X, (short)e.Y, (short)(e.X - lastX), (short)(e.Y - lastY)));
                 }
                 lastX = e.X;
                 lastY = e.Y;
@@ -214,7 +215,7 @@ namespace SdlDotNet.Windows
 			base.OnKeyDown (e);
             if (!this.DesignMode)
             {
-                SdlDotNet.Events.Add(new KeyboardEventArgs((SdlDotNet.Key)Enum.Parse(typeof(SdlDotNet.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, true));
+                SdlDotNet.Core.Events.Add(new KeyboardEventArgs((SdlDotNet.Input.Key)Enum.Parse(typeof(SdlDotNet.Input.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, true));
             }
 		}
 
@@ -231,7 +232,7 @@ namespace SdlDotNet.Windows
 			base.OnKeyUp (e);
             if (!this.DesignMode)
             {
-                SdlDotNet.Events.Add(new KeyboardEventArgs((SdlDotNet.Key)Enum.Parse(typeof(SdlDotNet.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, false));
+                SdlDotNet.Core.Events.Add(new KeyboardEventArgs((SdlDotNet.Input.Key)Enum.Parse(typeof(SdlDotNet.Input.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, false));
             }
 		}
 

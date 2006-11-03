@@ -20,6 +20,7 @@
 using System;
 
 using Tao.Sdl;
+using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 
 namespace SdlDotNet.Core 

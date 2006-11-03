@@ -18,7 +18,8 @@
  */
 
 using System;
-using SdlDotNet.Sprites;
+
+using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Particles.Particle;
 
 namespace SdlDotNet.Particles.Emitters

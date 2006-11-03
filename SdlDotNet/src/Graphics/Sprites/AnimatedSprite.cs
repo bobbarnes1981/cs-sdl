@@ -17,11 +17,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Graphics.Sprites;
-using SdlDotNet;
 using System;
 using System.Drawing;
 using System.Collections;
+
+using SdlDotNet.Graphics.Sprites;
+using SdlDotNet;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Graphics.Sprites
 {

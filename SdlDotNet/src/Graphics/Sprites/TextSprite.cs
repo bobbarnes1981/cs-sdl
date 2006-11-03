@@ -22,6 +22,7 @@ using System.Drawing;
 using System.Globalization;
 
 using SdlDotNet;
+using SdlDotNet.Core;
 using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Graphics.Sprites

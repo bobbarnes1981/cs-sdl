@@ -23,6 +23,7 @@ using System.Collections;
 using System.Globalization;
 
 using SdlDotNet;
+using SdlDotNet.Core;
 using SdlDotNet.Audio;
 using SdlDotNet.Input;
 

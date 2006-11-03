@@ -25,9 +25,220 @@ using System.Runtime.InteropServices;
 using Tao.Sdl;
 using SdlDotNet.Input;
 using SdlDotNet.Audio;
+using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Core 
 {
+    /// <summary>
+    /// Enum for values that are returned by the SDL C library functions.
+    /// This reduces the amount of "magic numbers" in the code.
+    /// </summary>
+    /// <remarks></remarks>
+    public enum SdlFlag
+    {
+        /// <summary>
+        /// Error
+        /// </summary>
+        Error = -1,
+        /// <summary>
+        /// Surccess
+        /// </summary>
+        Success = 0,
+        /// <summary>
+        /// Plays in infinite loop.
+        /// </summary>
+        InfiniteLoop = -1,
+        /// <summary>
+        /// Error
+        /// </summary>
+        Error2 = 1,
+        /// <summary>
+        /// Success
+        /// </summary>
+        Success2 = 1,
+        /// <summary>
+        /// None
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// First available channel
+        /// </summary>
+        FirstFreeChannel = -1,
+        /// <summary>
+        /// True
+        /// </summary>
+        TrueValue = 1,
+        /// <summary>
+        /// False
+        /// </summary>
+        FalseValue = 0,
+    }
+
+    /// <summary>
+    /// EventMask
+    /// </summary>
+    /// <remarks>Only used internally to remove events from the event queue</remarks>
+    public enum EventMask
+    {
+        /// <summary>
+        /// No event mask
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Active Event mask
+        /// </summary>
+        ActiveEvent = Sdl.SDL_ACTIVEEVENTMASK,
+        /// <summary>
+        /// Key down mask
+        /// </summary>
+        KeyDown = Sdl.SDL_KEYDOWNMASK,
+        /// <summary>
+        /// Key up mask
+        /// </summary>
+        KeyUp = Sdl.SDL_KEYUPMASK,
+        /// <summary>
+        /// Mouse motion mask
+        /// </summary>
+        MouseMotion = Sdl.SDL_MOUSEMOTIONMASK,
+        /// <summary>
+        /// Mouse button down mask
+        /// </summary>
+        MouseButtonDown = Sdl.SDL_MOUSEBUTTONDOWNMASK,
+        /// <summary>
+        /// mouse button up mask
+        /// </summary>
+        MouseButtonUp = Sdl.SDL_MOUSEBUTTONUPMASK,
+        /// <summary>
+        /// mouse event mask
+        /// </summary>
+        MouseEvent = Sdl.SDL_MOUSEEVENTMASK,
+        /// <summary>
+        /// joystick axis motion mask
+        /// </summary>
+        JoystickAxisMotion = Sdl.SDL_JOYAXISMOTIONMASK,
+        /// <summary>
+        /// joystick ball motion mask
+        /// </summary>
+        JoystickBallMotion = Sdl.SDL_JOYBALLMOTIONMASK,
+        /// <summary>
+        /// joystick hat motion mask
+        /// </summary>
+        JoystickHatMotion = Sdl.SDL_JOYHATMOTIONMASK,
+        /// <summary>
+        /// joystick button down mask
+        /// </summary>
+        JoystickButtonDown = Sdl.SDL_JOYBUTTONDOWNMASK,
+        /// <summary>
+        /// joystick button up mask
+        /// </summary>
+        JoystickButtonUp = Sdl.SDL_JOYBUTTONUPMASK,
+        /// <summary>
+        /// joystick event mask
+        /// </summary>
+        JoystickEvent = Sdl.SDL_JOYEVENTMASK,
+        /// <summary>
+        /// Video resize event mask
+        /// </summary>
+        VideoResize = Sdl.SDL_VIDEORESIZEMASK,
+        /// <summary>
+        /// Video expose event mask
+        /// </summary>
+        VideoExpose = Sdl.SDL_VIDEOEXPOSEMASK,
+        /// <summary>
+        /// Quit event mask
+        /// </summary>
+        Quit = Sdl.SDL_QUITMASK,
+        /// <summary>
+        /// Window Manager event mask
+        /// </summary>
+        WindowManagerEvent = Sdl.SDL_SYSWMEVENTMASK,
+        /// <summary>
+        /// Mask for all events
+        /// </summary>
+        AllEvents = Sdl.SDL_ALLEVENTS,
+        /// <summary>
+        /// Mask for User Events
+        /// </summary>
+        UserEvent = 1 << Sdl.SDL_USEREVENT
+    }
+
+    /// <summary>
+    /// Event Types
+    /// </summary>
+    /// <remarks></remarks>
+    [FlagsAttribute]
+    public enum EventTypes
+    {
+        /// <summary>
+        /// No event
+        /// </summary>
+        None = Sdl.SDL_NOEVENT,
+        /// <summary>
+        /// Active event
+        /// </summary>
+        ActiveEvent = Sdl.SDL_ACTIVEEVENT,
+        /// <summary>
+        /// Key down event
+        /// </summary>
+        KeyDown = Sdl.SDL_KEYDOWN,
+        /// <summary>
+        /// Key up event
+        /// </summary>
+        KeyUp = Sdl.SDL_KEYUP,
+        /// <summary>
+        /// Mouse Motion event
+        /// </summary>
+        MouseMotion = Sdl.SDL_MOUSEMOTION,
+        /// <summary>
+        /// Mouse button down event
+        /// </summary>
+        MouseButtonDown = Sdl.SDL_MOUSEBUTTONDOWN,
+        /// <summary>
+        /// Mouse button up event
+        /// </summary>
+        MouseButtonUp = Sdl.SDL_MOUSEBUTTONUP,
+        /// <summary>
+        /// Joystick Axis motion event
+        /// </summary>
+        JoystickAxisMotion = Sdl.SDL_JOYAXISMOTION,
+        /// <summary>
+        /// Joystick ball motion event
+        /// </summary>
+        JoystickBallMotion = Sdl.SDL_JOYBALLMOTION,
+        /// <summary>
+        /// Joystick hat motion event
+        /// </summary>
+        JoystickHatMotion = Sdl.SDL_JOYHATMOTION,
+        /// <summary>
+        /// Joystick button down event
+        /// </summary>
+        JoystickButtonDown = Sdl.SDL_JOYBUTTONDOWN,
+        /// <summary>
+        /// joystick button up event
+        /// </summary>
+        JoystickButtonUp = Sdl.SDL_JOYBUTTONUP,
+        /// <summary>
+        /// Video resize event
+        /// </summary>
+        VideoResize = Sdl.SDL_VIDEORESIZE,
+        /// <summary>
+        /// Video expose event
+        /// </summary>
+        VideoExpose = Sdl.SDL_VIDEOEXPOSE,
+        /// <summary>
+        /// Quit event
+        /// </summary>
+        Quit = Sdl.SDL_QUIT,
+        /// <summary>
+        /// Window manager event
+        /// </summary>
+        WindowManagerEvent = Sdl.SDL_SYSWMEVENT,
+        /// <summary>
+        /// user-defined event
+        /// </summary>
+        UserEvent = Sdl.SDL_USEREVENT
+    }
+
 	/// <summary>
 	/// Indicates that the application has gained or lost input focus
 	/// </summary>

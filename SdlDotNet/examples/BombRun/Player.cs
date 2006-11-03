@@ -19,8 +19,9 @@
 using System;
 using System.Drawing;
 
-using SdlDotNet;
-using SdlDotNet.Sprites;
+using SdlDotNet.Graphics;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.BombRun

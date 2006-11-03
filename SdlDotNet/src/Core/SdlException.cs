@@ -21,6 +21,7 @@ using System;
 using System.Runtime.Serialization;
 
 using Tao.Sdl;
+using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Core 
 {

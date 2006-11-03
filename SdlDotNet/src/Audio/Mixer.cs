@@ -22,6 +22,7 @@ using System.Threading;
 using System.IO;
 
 using SdlDotNet;
+using SdlDotNet.Core;
 using Tao.Sdl;
 
 namespace SdlDotNet.Audio
@@ -140,6 +141,89 @@ namespace SdlDotNet.Audio
         /// Audio is currently playing
         /// </summary>
         Paused
+    }
+
+    #region CDstatus
+    /// <summary>
+    /// The possible states which a CD-ROM drive can be in.
+    /// </summary>
+    /// <remarks></remarks>
+    public enum CDStatus
+    {
+        /// <summary>
+        /// The CD tray is empty.
+        /// </summary>
+        TrayEmpty = Sdl.CD_TRAYEMPTY,
+        /// <summary>
+        /// The CD has stopped playing.
+        /// </summary>
+        Stopped = Sdl.CD_STOPPED,
+        /// <summary>
+        /// The CD is playing.
+        /// </summary>
+        Playing = Sdl.CD_PLAYING,
+        /// <summary>
+        /// The CD has been paused.
+        /// </summary>
+        Paused = Sdl.CD_PAUSED,
+        /// <summary>
+        /// An error occured while getting the status.
+        /// </summary>
+        Error = Sdl.CD_ERROR
+    }
+    #endregion CDstatus
+
+
+    /// <summary>
+    /// SoundAction
+    /// </summary>
+    /// <remarks></remarks>
+    public enum SoundAction
+    {
+        /// <summary>
+        /// Stop sound
+        /// </summary>
+        Stop,
+        /// <summary>
+        /// Fadeout sound
+        /// </summary>
+        Fadeout
+    }
+
+    /// <summary>
+    /// MusicType
+    /// </summary>
+    /// <remarks></remarks>
+    public enum MusicType
+    {
+        /// <summary>
+        /// None
+        /// </summary>
+        None = SdlMixer.MUS_NONE,
+        /// <summary>
+        /// Starts external player
+        /// </summary>
+        ExternalCommand = SdlMixer.MUS_CMD,
+        /// <summary>
+        /// .WAV file
+        /// </summary>
+        Wave = SdlMixer.MUS_WAV,
+        /// <summary>
+        /// Mod music file
+        /// </summary>
+        Mod = SdlMixer.MUS_MOD,
+        /// <summary>
+        /// MIDI file
+        /// </summary>
+        Midi = SdlMixer.MUS_MID,
+        /// <summary>
+        /// Ogg file
+        /// </summary>
+        Ogg = SdlMixer.MUS_OGG,
+        /// <summary>
+        /// mp3 file
+        /// </summary>
+        Mp3 = SdlMixer.MUS_MP3
     }
 
     /// <summary>

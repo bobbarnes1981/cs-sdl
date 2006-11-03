@@ -19,13 +19,16 @@
 
 using System;
 using System.IO;
-using SdlDotNet;
+using System.Drawing;
+
 using SdlDotNet.Particles;
 using SdlDotNet.Particles.Emitters;
 using SdlDotNet.Particles.Manipulators;
 using SdlDotNet.Particles.Particle;
-using SdlDotNet.Sprites;
-using System.Drawing;
+using SdlDotNet.Graphics.Sprites;
+using SdlDotNet.Core;
+using SdlDotNet.Input;
+using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Examples.ParticlesExample
 {
@@ -105,7 +108,7 @@ namespace SdlDotNet.Examples.ParticlesExample
 			particles.Manipulators.Add(grav); // Gravity of 0.5f
 			particles.Manipulators.Add(new ParticleFriction(0.1f)); // Slow down particles
 			particles.Manipulators.Add(vort); // A particle vortex fixed on the mouse
-			particles.Manipulators.Add(new ParticleBoundary(SdlDotNet.Video.Screen.Size)); // fix particles on screen.
+			particles.Manipulators.Add(new ParticleBoundary(SdlDotNet.Graphics.Video.Screen.Size)); // fix particles on screen.
 
 
 			Events.Run();

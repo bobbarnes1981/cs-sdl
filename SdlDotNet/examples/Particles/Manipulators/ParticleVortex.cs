@@ -20,6 +20,7 @@
 using System;
 using System.Drawing;
 
+using SdlDotNet.Core;
 using SdlDotNet.Particles.Particle;
 
 namespace SdlDotNet.Particles.Manipulators

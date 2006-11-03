@@ -20,7 +20,8 @@
 using System;
 using System.Drawing;
 
-using SdlDotNet;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Particles.Particle
 {

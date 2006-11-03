@@ -21,6 +21,8 @@
 using System;
 using System.Collections;
 
+using SdlDotNet.Graphics;
+
 using SdlDotNet.Particles.Emitters;
 
 namespace SdlDotNet.Particles.Particle

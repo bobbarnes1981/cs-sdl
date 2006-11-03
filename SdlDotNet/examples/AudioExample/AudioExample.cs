@@ -24,8 +24,9 @@ using System.IO;
 using System.Drawing;
 using System.Globalization;
 
-using SdlDotNet;
-using SdlDotNet.Sprites;
+using SdlDotNet.Graphics;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Audio;
 using SdlDotNet.Input;
 
@@ -46,7 +47,7 @@ namespace SdlDotNet.Examples.AudioExample
 		private Surface screen; 
 		string data_directory = @"Data/";
 		string filepath = @"../../";
-		private Sprites.TextSprite textDisplay;
+		private TextSprite textDisplay;
 
 		// Create the music and sound variables.
 		private MusicDictionary music = new MusicDictionary();
@@ -80,7 +81,7 @@ namespace SdlDotNet.Examples.AudioExample
 			music["fard-two"] = new Music(filepath + data_directory + "fard-two.ogg");
 			boing = new Sound(filepath + data_directory + "boing.wav");
 
-			textDisplay = new TextSprite(" ", new Font(filepath + data_directory + "FreeSans.ttf", 20), Color.Red);
+			textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(filepath + data_directory + "FreeSans.ttf", 20), Color.Red);
 
 			// Start up SDL
 			Video.WindowIcon();

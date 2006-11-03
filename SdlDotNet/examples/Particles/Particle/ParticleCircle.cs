@@ -1,5 +1,7 @@
 using System;
 
+using SdlDotNet.Graphics;
+
 namespace SdlDotNet.Particles.Particle
 {
 	/// <summary>
