@@ -21,7 +21,9 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using SdlDotNet;
+
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
 using SdlDotNet.OpenGl;
 using Tao.OpenGl;
 
@@ -41,7 +43,7 @@ namespace SdlDotNet.Examples.OpenGlFont
 		string phrase1 = "Hello world! ";
 		string phrase2 = "This is a Truetype font ";
 		string phrase3 = "On an OpenGl Surface ";
-		Font font;
+		SdlDotNet.Graphics.Font font;
 		// Angle For The Triangle ( NEW )
 		float rtri;
 		// Angle For The Quad ( NEW ) 
@@ -74,7 +76,7 @@ namespace SdlDotNet.Examples.OpenGlFont
 			Video.SetVideoModeWindowOpenGL(this.width, this.height);
 			Events.Quit += new QuitEventHandler(this.Quit);
 			Events.Tick += new TickEventHandler(this.Tick);
-			font = new Font(filePath + dataDirectory + fontName, 18);
+            font = new SdlDotNet.Graphics.Font(filePath + dataDirectory + fontName, 18);
 			Video.GLDoubleBufferEnabled = true;
 		}
 

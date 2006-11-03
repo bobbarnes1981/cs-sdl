@@ -33,7 +33,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Reflection;
 
-using SdlDotNet;
+using SdlDotNet.Core;
 using SdlDotNet.Input;
 using Tao.OpenGl;
 

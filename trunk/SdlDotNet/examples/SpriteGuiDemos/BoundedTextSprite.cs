@@ -18,10 +18,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet;
-using SdlDotNet.Sprites;
 using System.Drawing;
 using System.Globalization;
+
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.SpriteGuiDemos
 {
@@ -43,7 +45,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 		/// <param name="coordinates"></param>
 		public BoundedTextSprite(
 			string textItem, 
-			SdlDotNet.Font font,
+			SdlDotNet.Graphics.Font font,
 			Size size,
 			double horizontal, 
 			double vertical,
@@ -62,7 +64,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 		/// <param name="size"></param>
 		public BoundedTextSprite(
 			string textItem, 
-			SdlDotNet.Font font,
+			SdlDotNet.Graphics.Font font,
 			Size size)
 			: base(textItem, font)
 		{
@@ -78,7 +80,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 		/// <param name="coordinates"></param>
 		public BoundedTextSprite(
 			string textItem, 
-			SdlDotNet.Font font,
+			SdlDotNet.Graphics.Font font,
 			Size size,
 			Point coordinates)	
 			: base(textItem, font, coordinates)
@@ -96,7 +98,7 @@ namespace SdlDotNet.Examples.SpriteGuiDemos
 		/// <param name="vertical"></param>
 		public BoundedTextSprite(
 			string textItem, 
-			SdlDotNet.Font font,
+			SdlDotNet.Graphics.Font font,
 			Size size,
 			double horizontal, 
 			double vertical)

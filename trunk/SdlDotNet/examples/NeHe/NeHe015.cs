@@ -30,6 +30,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
 using Tao.OpenGl;
 using Tao.Platform.Windows;
 

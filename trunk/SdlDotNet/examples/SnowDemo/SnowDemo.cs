@@ -21,9 +21,10 @@ using System;
 using System.IO;
 using System.Drawing;
 
-using SdlDotNet;
+using SdlDotNet.Core;
 using SdlDotNet.Input;
-using SdlDotNet.Sprites;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.SnowDemo
 {
@@ -62,7 +63,7 @@ namespace SdlDotNet.Examples.SnowDemo
 			{
 				snowflakes.Add(new Snowflake(), new Rectangle());
 			}
-			Font font = new Font(filepath + data_directory + fontName, 24);
+			SdlDotNet.Graphics.Font font = new SdlDotNet.Graphics.Font(filepath + data_directory + fontName, 24);
 
 			textItems.Add(new TextItem(textArray[0], font, 25, 0), new Rectangle());
 			for (int i = 1; i < textArray.Length; i++)

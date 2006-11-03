@@ -255,7 +255,7 @@ namespace SdlDotNet.Examples.NeHe
 
         private void startButton_Click(object sender, System.EventArgs e)
         {
-            SdlDotNet.Events.QuitApplication();
+            SdlDotNet.Core.Events.QuitApplication();
 
             if (thread != null)
             {
@@ -288,7 +288,7 @@ namespace SdlDotNet.Examples.NeHe
         private void NeHe_Closed(object sender, System.EventArgs e)
         {
             // Quit SDL if it's not quit already
-            SdlDotNet.Events.QuitApplication();
+            SdlDotNet.Core.Events.QuitApplication();
         }
 
         private void menuItem2_Click(object sender, System.EventArgs e)

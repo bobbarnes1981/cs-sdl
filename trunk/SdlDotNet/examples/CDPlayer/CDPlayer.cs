@@ -26,8 +26,10 @@ using System.Reflection;
 using System.Resources;
 using System.Threading;
 
-using SdlDotNet;
-using SdlDotNet.Sprites;
+using SdlDotNet.Audio;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Windows;
 
 namespace SdlDotNet.Examples.CDPlayer
@@ -102,9 +104,9 @@ namespace SdlDotNet.Examples.CDPlayer
 			master.EnableKeyboardEvent();
 			master.EnableTickEvent();
 
-			SdlDotNet.Events.Fps = 30;
-			SdlDotNet.Events.Tick += new SdlDotNet.TickEventHandler(this.Tick);
-			SdlDotNet.Events.Quit += new QuitEventHandler(this.Quit);
+			SdlDotNet.Core.Events.Fps = 30;
+            SdlDotNet.Core.Events.Tick += new TickEventHandler(this.Tick);
+            SdlDotNet.Core.Events.Quit += new QuitEventHandler(this.Quit);
 
 			try 
 			{
@@ -350,14 +352,13 @@ namespace SdlDotNet.Examples.CDPlayer
 		static void Main() 
 		{
 			Application.Run(new CDPlayer());
-			SdlDotNet.Events.QuitApplication();
+            SdlDotNet.Core.Events.QuitApplication();
 		}
 
 		private static System.Random rand = new Random();
-		private SdlDotNet.Surface surf;
-		//List<Rectangle> rects = new List<Rectangle>();
-
-		private void Tick(object sender, SdlDotNet.TickEventArgs e)
+		private Surface surf;
+		
+		private void Tick(object sender, TickEventArgs e)
 		{
 			if(surf != null)
 			{
@@ -370,7 +371,7 @@ namespace SdlDotNet.Examples.CDPlayer
 
 		private void Quit(object sender, QuitEventArgs e)
 		{
-			SdlDotNet.Events.QuitApplication();
+            SdlDotNet.Core.Events.QuitApplication();
 		}
 
 		private void comboBoxDrive_SelectedIndexChanged(object sender, System.EventArgs e) 
@@ -392,7 +393,7 @@ namespace SdlDotNet.Examples.CDPlayer
 				{
 					_drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
 				}
-				TimeSpan timeSpan = Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
+                TimeSpan timeSpan = SdlDotNet.Core.Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
 				this.labelStatus.Text = "Track: " + _drive.CurrentTrack + "     Length: " + timeSpan.Minutes + ":" + timeSpan.Seconds;
 			} 
 			catch (SdlException ex) 
@@ -489,7 +490,7 @@ namespace SdlDotNet.Examples.CDPlayer
 
 		private void CDPlayer_Load(object sender, System.EventArgs e)
 		{
-			Thread thread = new Thread(new ThreadStart(SdlDotNet.Events.Run));
+            Thread thread = new Thread(new ThreadStart(SdlDotNet.Core.Events.Run));
 			thread.IsBackground = true;
 			thread.Name = "SDL";
 			thread.Priority = ThreadPriority.Normal;
@@ -511,7 +512,7 @@ namespace SdlDotNet.Examples.CDPlayer
 
 		private void menuItem2_Click(object sender, System.EventArgs e)
 		{
-			SdlDotNet.Events.QuitApplication();
+            SdlDotNet.Core.Events.QuitApplication();
 			this.Close();		
 		}
 

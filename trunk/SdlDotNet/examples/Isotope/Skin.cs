@@ -23,9 +23,10 @@
 
 /* Defines the animated images to draw for an object type and object state. */
 
-using SdlDotNet;
 using System.Collections;
 using System.Drawing;
+
+using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Examples.Isotope
 {

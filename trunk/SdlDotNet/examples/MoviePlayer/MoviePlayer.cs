@@ -22,9 +22,10 @@ using System.Threading;
 using System.IO;
 using System.Runtime.InteropServices;
 
-using SdlDotNet;
+using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 using SdlDotNet.Audio;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Examples.MoviePlayer
 {

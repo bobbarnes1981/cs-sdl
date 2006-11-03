@@ -1,8 +1,13 @@
 using System;
 using System.Threading;
+using System.Runtime.InteropServices;
+
 using NUnit.Framework;
 using Tao.Sdl;
-using System.Runtime.InteropServices;
+using SdlDotNet.Graphics;
+using SdlDotNet.Audio;
+using SdlDotNet.Core;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Tests
 {
@@ -53,11 +58,11 @@ namespace SdlDotNet.Tests
 		[Test]
 		public void InitTimer()
 		{
-			Timer.Close();
+			SdlDotNet.Core.Timer.Close();
 			//Assert.IsFalse(Timer.IsInitialized);
-			Timer.Initialize();
+            SdlDotNet.Core.Timer.Initialize();
 			//Assert.IsTrue(Timer.IsInitialized);
-			Timer.Close();
+            SdlDotNet.Core.Timer.Close();
 		}
 
 		/// <summary>

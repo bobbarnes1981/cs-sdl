@@ -20,6 +20,8 @@
 using NUnit.Framework;
 using System.Drawing;
 
+using SdlDotNet.Core;
+
 namespace SdlDotNet.Tests
 {
 	/// <summary>

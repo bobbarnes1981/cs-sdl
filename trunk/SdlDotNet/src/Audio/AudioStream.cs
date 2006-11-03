@@ -45,11 +45,11 @@ namespace SdlDotNet.Audio
         /// <param name="data">Buffer formatted as <see cref="AudioFormat.Unsigned16Little"/> of audio data to be played</param>
         public void Write(short[] data)
         {
-            Audio.Locked = true;
+            AudioBasic.Locked = true;
             short[] copy = (short[])data.Clone();
             samplesInQueue += copy.Length;
             queue.Enqueue(copy);
-            Audio.Locked = false;
+            AudioBasic.Locked = false;
         }
         /// <summary>
         /// Size of the SDL audio sample buffer

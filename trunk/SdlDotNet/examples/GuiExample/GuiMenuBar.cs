@@ -17,12 +17,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-using SdlDotNet.Sprites;
-using SdlDotNet;
 using System;
 using System.Collections;
 using System.Drawing;
 using System.Globalization;
+
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.GuiExample
 {

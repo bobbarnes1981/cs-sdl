@@ -18,7 +18,8 @@
 
 using System;
 using System.Drawing;
-using SdlDotNet;
+
+using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Examples.Triad
 {

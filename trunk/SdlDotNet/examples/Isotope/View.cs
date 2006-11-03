@@ -21,6 +21,8 @@
 using System;
 using System.Drawing;
 
+using SdlDotNet.Graphics;
+
 namespace SdlDotNet.Examples.Isotope
 {
 	/// <summary>

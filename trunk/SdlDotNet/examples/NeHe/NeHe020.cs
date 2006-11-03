@@ -29,7 +29,7 @@ using System;
 using System.IO;
 using System.Drawing;
 
-using SdlDotNet;
+using SdlDotNet.Core;
 using SdlDotNet.Input;
 using Tao.OpenGl;
 

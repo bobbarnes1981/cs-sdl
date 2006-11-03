@@ -14,7 +14,8 @@ using System;
 using System.Drawing;
 using System.IO;
 
-using SdlDotNet;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 using Tao.OpenGl;
 

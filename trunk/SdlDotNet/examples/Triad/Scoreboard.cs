@@ -21,7 +21,9 @@
 using System;
 using System.IO;
 using System.Drawing;
-using SdlDotNet;
+
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 
 namespace SdlDotNet.Examples.Triad
 {
@@ -30,7 +32,7 @@ namespace SdlDotNet.Examples.Triad
 	/// </summary>
 	public class Scoreboard : GameArea, IDisposable
 	{
-		SdlDotNet.Font font;
+		SdlDotNet.Graphics.Font font;
 		/// <summary>
 		/// 
 		/// </summary>
@@ -44,7 +46,7 @@ namespace SdlDotNet.Examples.Triad
 			{
 				filepath = "";
 			}
-			font = new SdlDotNet.Font(filepath + data_directory + FontName,18);
+			font = new SdlDotNet.Graphics.Font(filepath + data_directory + FontName,18);
 		}
 
 		/// <summary>
