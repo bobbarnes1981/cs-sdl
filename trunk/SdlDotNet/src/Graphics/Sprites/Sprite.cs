@@ -362,22 +362,6 @@ namespace SdlDotNet.Graphics.Sprites
 			}
 		}
 
-		private Rectangle rectDirty;
-		/// <summary>
-		/// Rectangles that have changed and need to be updated
-		/// </summary>
-		public Rectangle RectangleDirty
-		{
-			get 
-			{ 
-				return this.rectDirty;
-			}
-			set
-			{
-				this.rectDirty = value;
-			}
-		}
-
 		/// <summary>
 		/// Gets and sets the sprites current x,y location.
 		/// </summary>
@@ -545,17 +529,6 @@ namespace SdlDotNet.Graphics.Sprites
 			set
 			{
 				this.rect.Width = value;
-			}
-		}
-
-		/// <summary>
-		/// Sprite has changed and need to be redisplayed
-		/// </summary>
-		public bool Dirty
-		{
-			get
-			{
-				return (!this.rect.Equals(this.rectDirty));
 			}
 		}
 
