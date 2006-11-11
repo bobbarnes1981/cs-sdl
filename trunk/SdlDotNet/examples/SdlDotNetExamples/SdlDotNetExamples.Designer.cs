@@ -28,6 +28,16 @@ namespace SdlDotNetExamples
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SdlDotNetExamples));
+            this.SuspendLayout();
+            // 
+            // SdlDotNetExamples
+            // 
+            this.ClientSize = new System.Drawing.Size(292, 271);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "SdlDotNetExamples";
+            this.ResumeLayout(false);
+
             this.lstExamples = new System.Windows.Forms.ListBox();
             this.btnRun = new System.Windows.Forms.Button();
             this.SuspendLayout();
