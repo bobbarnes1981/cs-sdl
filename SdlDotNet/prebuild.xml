@@ -134,243 +134,45 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="Rectangles" path="examples/Rectangles" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Rectangles.Rectangles" assemblyName="Rectangles" rootNamespace="SdlDotNet.Examples.Rectangles" icon="App.ico" designerFolder="Properties">
+	<Project name="SdlDotNetExamples" path="examples/SdlDotNetExamples" language="C#" type="WinExe" startupObject="SdlDotNetExamples.Program" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;WIN32</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;WIN32</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
 		</Options>
 	    </Configuration>
 	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
+	    <Reference name="System.Windows.Forms" /> 
+	    <Reference name="System.Data" /> 
+	    <Reference name="System.Drawing" />
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="Gears" path="examples/Gears" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Gears.Gears" assemblyName="Gears" rootNamespace="SdlDotNet.Examples.Gears" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
+	    <Reference name="SdlDotNet.Particles" localCopy="true"/>
+	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-2.0" />
 	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="CDPlayer" path="examples/CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples.CDPlayer" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="System.Windows.Forms" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<File subType="Form" resourceName="CDPlayer">CDPlayer.cs</File>
+		<File subType="Form" resourceName="SdlDotNetExamples">SdlDotNetExamples.cs</File>
 		<Match path="." pattern="*.cs" recurse="true">
-		    <Exclude name="CDPlayer.cs"/>		    
+		    <Exclude name="SdlDotNetExamples.cs"/>
 		</Match>
 	    </Files>
 	</Project>
-	<Project name="MoviePlayer" path="examples/MoviePlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.MoviePlayer.MoviePlayer" assemblyName="MoviePlayer" rootNamespace="SdlDotNet.Examples.MoviePlayer" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
 	<Project name="SimpleGame" path="examples/SimpleGame" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SimpleGame.GameMain" assemblyName="SimpleGame" rootNamespace="SdlDotNet.Examples.SimpleGame" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="BombRun" path="examples/BombRun" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BombRun.BombRun" assemblyName="BombRun" rootNamespace="SdlDotNet.Examples.BombRun" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="SnowDemo" path="examples/SnowDemo" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.SnowDemo.SnowDemo" assemblyName="SnowDemo" rootNamespace="SdlDotNet.Examples.SnowDemo" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="BounceSprites" path="examples/BounceSprites" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.BounceSprites.BounceSprites" assemblyName="BounceSprites" rootNamespace="SdlDotNet.Examples.BounceSprites" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -537,108 +339,6 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="AudioExample" path="examples/AudioExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.AudioExample.AudioExample" assemblyName="AudioExample" rootNamespace="SdlDotNet.Examples.AudioExample" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="ParticlesExample" path="examples/ParticlesExample" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.ParticlesExample.ParticlesExample" assemblyName="ParticlesExample" rootNamespace="SdlDotNet.Examples.ParticlesExample" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="SdlDotNet.Particles" localCopy="true"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="OpenGlFont" path="examples/OpenGlFont" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.OpenGlFont.OpenGlFont" assemblyName="OpenGlFont" rootNamespace="SdlDotNet.Examples.OpenGlFont" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
-	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
 	<Project name="NeHe" path="examples/NeHe" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.NeHe.NeHe" assemblyName="NeHe" rootNamespace="SdlDotNet.Examples.NeHe" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
@@ -718,40 +418,6 @@
 	    </Files>
 	</Project>
 	<Project name="Isotope" path="examples/Isotope" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Isotope.MainClass" assemblyName="Isotope" rootNamespace="SdlDotNet.Examples.Isotope" icon="App.ico" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-2.0"/>
-	    <Files>
-		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
-	<Project name="StreamingAudio" path="examples/StreamingAudio" language="C#" type="Exe" startupObject="SdlDotNet.Examples.StreamingAudio.StreamingAudio" assemblyName="StreamingAudio" rootNamespace="SdlDotNet.Examples.StreamingAudio" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
