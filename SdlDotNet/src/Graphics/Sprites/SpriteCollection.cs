@@ -195,7 +195,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// Rectangles of Sprites that have been removed
         /// </summary>
         /// <remarks>
-        /// These Rectangles are kept temprorily until their 
+        /// These Rectangles are kept temporarily until their 
         /// positions can be properly erased.
         /// </remarks>
         protected List<Rectangle> LostRects
