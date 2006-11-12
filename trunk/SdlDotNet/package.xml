@@ -18,7 +18,7 @@
     <property name="source.dir" value="source" />
     <property name="bin.dir" value="bin" />
     <property name="obj.dir" value="obj" />
-    <property name="lib.dir" value="lib" />
+    <property name="lib.dir" value="lib/net-2.0" />
     <property name="doc.dir" value="doc" />
     <property name="native.sdl" value="Tao.Sdl"/>
     <property name="Particles" value="Particles" />
@@ -85,11 +85,13 @@
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
+		<include name="*.xml"/>
 	    </fileset>
 	</copy>
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${project::get-base-directory()}/${lib.dir}">
 		<include name="${native.sdl}.dll"/>
+		<include name="${native.sdl}.xml"/>
 	    </fileset>
 	</copy>
 	<if test="${platform::is-win32()}">
