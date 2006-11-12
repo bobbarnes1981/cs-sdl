@@ -30,17 +30,10 @@ namespace SdlDotNet.Core
 	/// Class for coordinates in three dimensions.
 	/// </summary>
 	[Serializable]
-	public class Vector : ISerializable, ICloneable, IComparable
+	public struct Vector : ICloneable, IComparable
 	{
 
 		#region Constructors
-
-		/// <summary>
-		/// Creates point at 0, 0, 0
-		/// </summary>
-		public Vector() : this(0, 0, 0) 
-		{ 
-		}
 
 		/// <summary>
 		/// Creates a vector with a specific direction in 
@@ -51,8 +44,12 @@ namespace SdlDotNet.Core
 		/// </param>
 		public Vector(int directionDeg)
 		{
+            this.m_x = 0.00001F;
+            this.m_y = 0.00001F;
+            this.m_z = 0.00001F;
 			Length = 1;
 			DirectionDeg = directionDeg;
+            
 		}
 
 		/// <summary>
@@ -64,6 +61,9 @@ namespace SdlDotNet.Core
 		/// </param>
 		public Vector(float directionRadians)
 		{
+            this.m_x = 0.00001F;
+            this.m_y = 0.00001F;
+            this.m_z = 0.00001F;
 			Length = 1;
 			Direction = directionRadians;
 		}
@@ -136,6 +136,7 @@ namespace SdlDotNet.Core
 		{
 			m_x = p2.X - p1.X;
 			m_y = p2.Y - p1.Y;
+            this.m_z = 0.00001F;
 		}
 
 		/// <summary>
@@ -163,6 +164,7 @@ namespace SdlDotNet.Core
 		{
 			m_x = p2.X - p1.X;
 			m_y = p2.Y - p1.Y;
+            this.m_z = 0.00001F;
 		}
 
 		/// <summary>
@@ -177,10 +179,10 @@ namespace SdlDotNet.Core
 				m_y = vector.m_y;
                 m_z = vector.m_z;
 			}
-			else
-			{
-				m_x = m_y = m_z = 0;
-			}
+            //else
+            //{
+            //    m_x = m_y = m_z = 0;
+            //}
 		}
 
 		#region Static Constructors
@@ -296,14 +298,14 @@ namespace SdlDotNet.Core
 		/// <returns></returns>
 		public static bool operator >= (Vector c1, Vector c2)
 		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
+            //if (c1 == null)
+            //{
+            //    throw new ArgumentNullException("c1");
+            //}
+            //if (c2 == null)
+            //{
+            //    throw new ArgumentNullException("c2");
+            //}
 			return (c1.X >= c2.X) && (c1.Y >= c2.Y) && (c1.Z >= c2.Z);
 		}
 		/// <summary>
@@ -314,14 +316,14 @@ namespace SdlDotNet.Core
 		/// <returns></returns>
 		public static bool operator > (Vector c1, Vector c2)
 		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
+            //if (c1 == null)
+            //{
+            //    throw new ArgumentNullException("c1");
+            //}
+            //if (c2 == null)
+            //{
+            //    throw new ArgumentNullException("c2");
+            //}
 			return (c1.X > c2.X) && (c1.Y > c2.Y) && (c1.Z > c2.Z);
 		}
 		/// <summary>
@@ -332,14 +334,14 @@ namespace SdlDotNet.Core
 		/// <returns></returns>
 		public static bool operator < (Vector c1, Vector c2)
 		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
+            //if (c1 == null)
+            //{
+            //    throw new ArgumentNullException("c1");
+            //}
+            //if (c2 == null)
+            //{
+            //    throw new ArgumentNullException("c2");
+            //}
 			return (c1.X < c2.X) && (c1.Y < c2.Y) && (c1.Z < c2.Z);
 		}
 		/// <summary>
@@ -350,14 +352,14 @@ namespace SdlDotNet.Core
 		/// <returns></returns>
 		public static bool operator <= (Vector c1, Vector c2)
 		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
+            //if (c1 == null)
+            //{
+            //    throw new ArgumentNullException("c1");
+            //}
+            //if (c2 == null)
+            //{
+            //    throw new ArgumentNullException("c2");
+            //}
 			return (c1.X <= c2.X) && (c1.Y <= c2.Y) && (c1.Z <= c2.Z);
 		}
 
@@ -369,14 +371,14 @@ namespace SdlDotNet.Core
 		/// <returns></returns>
 		public static Vector operator + (Vector c1, Vector c2)
 		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
+            //if (c1 == null)
+            //{
+            //    throw new ArgumentNullException("c1");
+            //}
+            //if (c2 == null)
+            //{
+            //    throw new ArgumentNullException("c2");
+            //}
 			return new Vector(c1.m_x + c2.m_x, c1.m_y + c2.m_y, c1.m_z + c2.m_z);
 		}
 
@@ -388,14 +390,14 @@ namespace SdlDotNet.Core
 		/// <returns></returns>
 		public static Vector operator - (Vector c1, Vector c2)
 		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
+            //if (c1 == null)
+            //{
+            //    throw new ArgumentNullException("c1");
+            //}
+            //if (c2 == null)
+            //{
+            //    throw new ArgumentNullException("c2");
+            //}
 			return new Vector(c1.m_x - c2.m_x, c1.m_y - c2.m_y, c1.m_z - c2.m_z);
 		}
 
@@ -407,14 +409,14 @@ namespace SdlDotNet.Core
 		/// <returns></returns>
 		public static Vector operator * (Vector c1, Vector c2)
 		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
+            //if (c1 == null)
+            //{
+            //    throw new ArgumentNullException("c1");
+            //}
+            //if (c2 == null)
+            //{
+            //    throw new ArgumentNullException("c2");
+            //}
 			return new Vector(c1.m_x * c2.m_x, c1.m_y * c2.m_y, c1.m_z * c2.m_z);
 		}
 
@@ -426,14 +428,14 @@ namespace SdlDotNet.Core
 		/// <returns></returns>
 		public static Vector operator / (Vector c1, Vector c2)
 		{
-			if (c1 == null)
-			{
-				throw new ArgumentNullException("c1");
-			}
-			if (c2 == null)
-			{
-				throw new ArgumentNullException("c2");
-			}
+            //if (c1 == null)
+            //{
+            //    throw new ArgumentNullException("c1");
+            //}
+            //if (c2 == null)
+            //{
+            //    throw new ArgumentNullException("c2");
+            //}
 			return new Vector(c1.m_x / c2.m_x, c1.m_y / c2.m_y, c1.m_z / c2.m_z);
 		}
 
@@ -578,16 +580,16 @@ namespace SdlDotNet.Core
 		/// <summary>
 		/// The x coordinate
 		/// </summary>
-		private float m_x = 0.00001F;
+		private float m_x;
 		/// <summary>
 		/// The y coordinate
 		/// </summary>
-		private float m_y = 0.00001F;
+		private float m_y;
 
    		/// <summary>
 		/// The z coordinate
 		/// </summary>
-		private float m_z = 0.00001F;
+		private float m_z;
 
 
 		/// <summary>
@@ -746,10 +748,10 @@ namespace SdlDotNet.Core
 		/// <returns>A new vector representing the midpoint between the two vectors.</returns>
 		public Vector Midpoint(Vector vector)
 		{
-			if (vector == null)
-			{
-				throw new ArgumentNullException("vector");
-			}
+            //if (vector == null)
+            //{
+            //    throw new ArgumentNullException("vector");
+            //}
 			return new Vector(( m_x + vector.X ) * 0.5, ( m_y + vector.Y ) * 0.5, ( m_z + vector.Z ) * 0.5 );
 		}
 
@@ -862,45 +864,45 @@ namespace SdlDotNet.Core
 		}
 
 		#endregion ICloneable Members
-		#region ISerializable Members
-		/// <summary>
-		/// Deserialization constructor.
-		/// </summary>
-		/// <param name="info"></param>
-		/// <param name="context"></param>
-		protected Vector(SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-			{
-				throw new ArgumentNullException("info");
-			}
-			//Get the values from info and assign them to the appropriate properties
-			m_x = (float)info.GetValue("x", typeof(float));
-			m_y = (float)info.GetValue("y", typeof(float));
-            m_z = (float)info.GetValue("z", typeof(float));
-        }
+        //#region ISerializable Members
+        ///// <summary>
+        ///// Deserialization constructor.
+        ///// </summary>
+        ///// <param name="info"></param>
+        ///// <param name="context"></param>
+        //protected Vector(SerializationInfo info, StreamingContext context)
+        //{
+        //    if (info == null)
+        //    {
+        //        throw new ArgumentNullException("info");
+        //    }
+        //    //Get the values from info and assign them to the appropriate properties
+        //    m_x = (float)info.GetValue("x", typeof(float));
+        //    m_y = (float)info.GetValue("y", typeof(float));
+        //    m_z = (float)info.GetValue("z", typeof(float));
+        //}
 
-		/// <summary>
-		/// Serialization function
-		/// </summary>
-		/// <param name="info"></param>
-		/// <param name="context"></param> 
-		[SecurityPermissionAttribute(
-			 SecurityAction.Demand, SerializationFormatter=true)]
-		public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-			{
-				throw new ArgumentNullException("info");
-			}
-			//You can use any custom name for your name-value pair. But make sure you
-			// read the values with the same name. For ex:- If you write EmpId as "EmployeeId"
-			// then you should read the same with "EmployeeId"
-			info.AddValue("x", m_x);
-			info.AddValue("y", m_y);
-            info.AddValue("z", m_z);
-        }
-		#endregion ISerializable Members
+        ///// <summary>
+        ///// Serialization function
+        ///// </summary>
+        ///// <param name="info"></param>
+        ///// <param name="context"></param> 
+        //[SecurityPermissionAttribute(
+        //     SecurityAction.Demand, SerializationFormatter=true)]
+        //public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        //{
+        //    if (info == null)
+        //    {
+        //        throw new ArgumentNullException("info");
+        //    }
+        //    //You can use any custom name for your name-value pair. But make sure you
+        //    // read the values with the same name. For ex:- If you write EmpId as "EmployeeId"
+        //    // then you should read the same with "EmployeeId"
+        //    info.AddValue("x", m_x);
+        //    info.AddValue("y", m_y);
+        //    info.AddValue("z", m_z);
+        //}
+        //#endregion ISerializable Members
 		#region IComparable Members
 
 		/// <summary>
