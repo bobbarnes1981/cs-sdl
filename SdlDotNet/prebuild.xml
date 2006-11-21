@@ -134,6 +134,82 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
+	<Project name="SdlDotNet.Gtk" path="examples/Gtk" language="C#" type="Library" assemblyName="SdlDotNet.Gtk" rootNamespace="SdlDotNet.Gtk" designerFolder="Properties">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>SdlDotNet.Gtk.xml</XmlDocFile>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
+		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>SdlDotNet.Gtk.xml</XmlDocFile>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
+		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="atk-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="gdk-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="gtk-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="glib-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Files>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
+	<Project name="GtkWindowsExample" path="examples/GtkWindowExample" language="C#" type="WinExe" startupObject="SdlDotNetExamples.GtkWindowExample.GtkWindowExample" assemblyName="GtkWindowsExample" rootNamespace="SdlDotNetExamples.GtkWindowExample" icon="App.ico" designerFolder="Properties">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
+		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
+		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="atk-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="gdk-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="gtk-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="glib-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Reference name="SdlDotNet.Gtk" localCopy="true"/>
+	    <Files>
+		<File buildAction="EmbeddedResource">App.ico</File>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
 	<Project name="SdlDotNetExamples" path="examples/SdlDotNetExamples" language="C#" type="WinExe" startupObject="SdlDotNetExamples.Program" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
