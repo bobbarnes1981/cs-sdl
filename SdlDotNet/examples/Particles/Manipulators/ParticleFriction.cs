@@ -19,6 +19,7 @@
 
 using System;
 
+using SdlDotNet.Core;
 using SdlDotNet.Particles.Particle;
 
 namespace SdlDotNet.Particles.Manipulators
@@ -80,7 +81,10 @@ namespace SdlDotNet.Particles.Manipulators
 			}
 			foreach(BaseParticle p in particles)
 			{
-				p.Velocity.Length -= m_Friction;
+                Vector vel = p.Velocity;
+                vel.Length -= m_Friction;
+                p.Velocity = vel;
+				//p.Velocity.Length -= m_Friction;
 			}
 		}
 

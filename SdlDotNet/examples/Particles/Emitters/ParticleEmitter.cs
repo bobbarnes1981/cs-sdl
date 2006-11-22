@@ -338,7 +338,10 @@ namespace SdlDotNet.Particles.Emitters
 			particle.Life = Random.Next(m_LifeMin, m_LifeMax);
 			particle.LifeFull = Random.Next(m_LifeFullMin, m_LifeFullMax);
 			particle.Velocity = new Vector(GetRange(m_DirectionMin, m_DirectionMax));
-			particle.Velocity.Length = GetRange(m_SpeedMin, m_SpeedMax);
+            Vector vel = particle.Velocity;
+            vel.Length = GetRange(m_SpeedMin, m_SpeedMax);
+            particle.Velocity = vel;
+			//particle.Velocity.Length = GetRange(m_SpeedMin, m_SpeedMax);
 			particle.X = GetRange(this.X, this.X + m_Width);
 			particle.Y = GetRange(this.Y, this.Y + m_Height);
 			return particle;
