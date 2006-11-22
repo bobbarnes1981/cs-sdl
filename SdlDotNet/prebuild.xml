@@ -165,6 +165,7 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="atk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="gdk-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="pango-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="gtk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="glib-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="SdlDotNet" localCopy="true"/>
@@ -202,6 +203,7 @@
 	    <Reference name="atk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="gdk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="gtk-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="pango-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="glib-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="SdlDotNet.Gtk" localCopy="true"/>
