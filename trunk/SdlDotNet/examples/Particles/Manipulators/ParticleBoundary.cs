@@ -20,8 +20,8 @@
 using System;
 using System.Drawing;
 
+using SdlDotNet.Core;
 using SdlDotNet.Particles.Particle;
-//using SdlDotNet
 
 namespace SdlDotNet.Particles.Manipulators
 {
@@ -266,22 +266,30 @@ namespace SdlDotNet.Particles.Manipulators
 				if(p.Left < this.Left)
 				{
 					p.X = this.Left;
-					p.Velocity.X*=-1;
+                    Vector vel = p.Velocity;
+                    vel.X *= -1;
+					p.Velocity = vel;
 				}
 				else if(p.Right > this.Right)
 				{
 					p.X = this.Right - p.Width;
-					p.Velocity.X*=-1;
+                    Vector vel = p.Velocity;
+                    vel.X *= -1;
+                    p.Velocity = vel;
 				}
 				else if(p.Top < this.Top)
 				{
 					p.Y = this.Top;
-					p.Velocity.Y*=-1;
+                    Vector vel = p.Velocity;
+                    vel.Y *= -1;
+                    p.Velocity = vel;
 				}
 				else if(p.Bottom > this.Bottom)
 				{
 					p.Y = this.Bottom - p.Height;
-					p.Velocity.Y*=-1;
+                    Vector vel = p.Velocity;
+                    vel.Y *= -1;
+                    p.Velocity = vel;
 				}
 			}
 		}
