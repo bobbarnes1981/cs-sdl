@@ -402,12 +402,12 @@ namespace SdlDotNet.Core
 		public static event UserEventHandler UserEvent;
 		/// <summary>
 		/// Fires when a sound channel finishes playing.
-		/// Will only occur if you call Channel.EnableChannelCallbacks().
+        /// Will only occur if you call SdlDotNet.Audio.Music.Channel.EnableChannelCallbacks().
 		/// </summary>
 		public static event ChannelFinishedEventHandler ChannelFinished;
 		/// <summary>
 		/// Fires when a music sample finishes playing.
-		/// Will only occur if you call Mixer.EnableMusicCallbacks().
+		/// Will only occur if you call SdlDotNet.Audio.Music.EnableMusicCallbacks().
 		/// </summary>
 		public static event MusicFinishedEventHandler MusicFinished;
 		/// <summary>
