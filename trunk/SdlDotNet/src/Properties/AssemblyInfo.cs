@@ -41,9 +41,9 @@ using System.IO;
 [assembly: AssemblyTrademark("http://cs-sdl.sourceforge.net")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
-[assembly: AssemblyVersion("5.1.0.0")]
-[assembly: AssemblyFileVersion("5.1.0.0")]
-[assembly: AssemblyInformationalVersion("5.1.0.0")]
+[assembly: AssemblyVersion("6.0.0.0")]
+[assembly: AssemblyFileVersion("6.0.0.0")]
+[assembly: AssemblyInformationalVersion("6.0.0.0")]
 
 //
 // Version information for an assembly consists of the following four values:

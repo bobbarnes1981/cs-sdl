@@ -948,7 +948,7 @@ namespace SdlDotNet.Graphics
 			}
 			this.x = new short[points.Count];
 			this.y = new short[points.Count];
-			this.n = 0;
+			this.n = points.Count;
 			this.list = new ArrayList();
 			this.xTotal = 0;
 			this.yTotal = 0;
