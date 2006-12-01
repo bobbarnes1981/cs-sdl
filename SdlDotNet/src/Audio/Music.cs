@@ -264,6 +264,17 @@ namespace SdlDotNet.Audio
 			}
 		}
 
+        /// <summary>
+        /// Gets the format of the music data type that is currently playing.
+        /// </summary>
+        public static MusicType MusicTypePlaying
+        {
+            get
+            {
+                return (MusicType)SdlMixer.Mix_GetMusicType(IntPtr.Zero);
+            }
+        }
+
 		/// <summary>
 		/// Sets the music position to a format-defined value.
 		/// For Ogg Vorbis and mp3, this is the number of seconds 
@@ -274,14 +285,22 @@ namespace SdlDotNet.Audio
 		/// </param>
 		public static void Position(double musicPosition) 
 		{
-			if (m_CurrentMusic.MusicType == MusicType.Mp3)
-			{
-				Rewind();
-			}
-			if (SdlMixer.Mix_SetMusicPosition(musicPosition) != 0)
-			{
-				throw SdlException.Generate();
-			}
+            if (Music.IsPlaying)
+            {
+                //if (Music.MusicTypePlaying == MusicType.Mp3 && musicPosition != 0.0)
+                //{
+                //    //Rewind();
+                //    //SdlMixer.Mix_SetMusicPosition(0.0);
+                //}
+                if (SdlMixer.Mix_SetMusicPosition(musicPosition) != 0)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+            else
+            {
+                throw new MusicNotPlayingException();
+            }
 		}
 		/// <summary>
 		/// Stops playing music
