@@ -44,17 +44,5 @@ namespace SdlDotNetExamples
         {
             SelectExample();
         }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // SdlDotNetExamples
-            // 
-            this.ClientSize = new System.Drawing.Size(313, 363);
-            this.Name = "SdlDotNetExamples";
-            this.ResumeLayout(false);
-
-        }
     }
 }
