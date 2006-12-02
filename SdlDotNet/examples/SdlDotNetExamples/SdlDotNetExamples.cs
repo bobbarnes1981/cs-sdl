@@ -24,7 +24,7 @@ namespace SdlDotNetExamples
                 MemberInfo[] runMethods = type.GetMember("Run");
                 foreach (MemberInfo run in runMethods)
                 {
-                    lstExamples.Items.Add(type.Name);
+                    lstExamples.Items.Add(type.FullName);
                 }
             }
         }
@@ -36,13 +36,25 @@ namespace SdlDotNetExamples
 
         private void SelectExample()
         {
-            Type example = Assembly.GetExecutingAssembly().GetType("SdlDotNetExamples." + lstExamples.SelectedItem.ToString(), true, true);
+            Type example = Assembly.GetExecutingAssembly().GetType(lstExamples.SelectedItem.ToString(), true, true);
             example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null);
         }
 
         private void lstExamples_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectExample();
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // SdlDotNetExamples
+            // 
+            this.ClientSize = new System.Drawing.Size(313, 363);
+            this.Name = "SdlDotNetExamples";
+            this.ResumeLayout(false);
+
         }
     }
 }
