@@ -33,7 +33,7 @@ namespace SdlDotNetExamples
             // 
             // SdlDotNetExamples
             // 
-            this.ClientSize = new System.Drawing.Size(292, 271);
+            this.ClientSize = new System.Drawing.Size(313, 363);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SdlDotNetExamples";
             this.ResumeLayout(false);

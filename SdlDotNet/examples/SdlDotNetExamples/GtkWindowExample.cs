@@ -32,7 +32,7 @@ namespace SdlDotNetExamples.GtkWindowExample
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Run()
+        public static void Run()
         {
             Application.Init();
             GtkWindow GtkWindow = new GtkWindow();	// create window
