@@ -29,50 +29,48 @@ namespace SdlDotNetExamples
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SdlDotNetExamples));
-            this.SuspendLayout();
-            // 
-            // SdlDotNetExamples
-            // 
-            this.ClientSize = new System.Drawing.Size(313, 363);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "SdlDotNetExamples";
-            this.ResumeLayout(false);
-
             this.lstExamples = new System.Windows.Forms.ListBox();
             this.btnRun = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstExamples
             // 
+            this.lstExamples.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lstExamples.FormattingEnabled = true;
             this.lstExamples.Location = new System.Drawing.Point(13, 13);
             this.lstExamples.Name = "lstExamples";
-            this.lstExamples.Size = new System.Drawing.Size(258, 173);
+            this.lstExamples.Size = new System.Drawing.Size(380, 264);
             this.lstExamples.Sorted = true;
             this.lstExamples.TabIndex = 0;
             this.lstExamples.DoubleClick += new System.EventHandler(this.lstExamples_SelectedIndexChanged);
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(94, 192);
+            this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRun.Location = new System.Drawing.Point(183, 287);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(95, 23);
+            this.btnRun.Size = new System.Drawing.Size(40, 23);
             this.btnRun.TabIndex = 1;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
-            // SdlDotNetExamplesExamples
+            // SdlDotNetExamples
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 224);
+            this.ClientSize = new System.Drawing.Size(405, 322);
             this.Controls.Add(this.btnRun);
             this.Controls.Add(this.lstExamples);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "SdlDotNetExamples";
-            this.Text = "SdlDotNetExamples";
+            this.Text = "SdlDotNet Examples Browser";
             this.Load += new System.EventHandler(this.frmExamples_Load);
             this.ResumeLayout(false);
 
