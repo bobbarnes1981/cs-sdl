@@ -94,7 +94,7 @@ namespace SdlDotNetExamples.SimpleGame
 		/// <summary>
 		/// 
 		/// </summary>
-		public void Run()
+		public void Go()
 		{
 			Events.Run();
 		}

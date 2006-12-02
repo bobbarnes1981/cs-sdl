@@ -51,7 +51,7 @@ namespace SdlDotNetExamples.Isotope
 		/// </summary>
 		/// <param name="args"></param>
         [STAThread]
-		public static void Run(string[] args)
+		public static void Run()
 		{
 
 			filePath = Path.Combine("..", "..");

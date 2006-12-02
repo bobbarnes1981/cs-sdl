@@ -363,7 +363,7 @@
 		</Match>
 	    </Files>
 	</Project>
-	<Project name="Isotope" path="examples/Isotope" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.Isotope.MainClass" assemblyName="Isotope" rootNamespace="SdlDotNet.Examples.Isotope" icon="App.ico" designerFolder="Properties">
+	<Project name="CDPlayer" path="examples/CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples.CDPlayer" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -390,11 +390,14 @@
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
+	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-2.0"/>
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
-		<Match path="." pattern="*.cs" recurse="true"/>
+		<File subType="Form" resourceName="CDPlayer">CDPlayer.cs</File>
+		<Match path="." pattern="*.cs" recurse="true">
+		    <Exclude name="CDPlayer.cs"/>		    
+		</Match>
 	    </Files>
 	</Project>
     </Solution>
