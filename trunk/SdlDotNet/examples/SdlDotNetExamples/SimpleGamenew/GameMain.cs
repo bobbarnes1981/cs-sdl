@@ -32,7 +32,7 @@ namespace SdlDotNetExamples.SimpleGame
 		{}
 
 		[STAThread]
-		static void Run() 
+		public static void Run() 
 		{
 			if (CheckInstance() == null)
 			{
@@ -41,7 +41,7 @@ namespace SdlDotNetExamples.SimpleGame
 					new InputController(eventManager);
 				Game game = new Game(eventManager);
 				game.Start();
-				inputController.Run();
+				inputController.Go();
 			}
 		}
 		
