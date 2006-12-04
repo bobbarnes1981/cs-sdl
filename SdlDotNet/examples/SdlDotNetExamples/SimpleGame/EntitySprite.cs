@@ -24,49 +24,50 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// Derived class
-	/// </summary>
-	public class EntitySprite : Sprite
-	{
-		/// <summary>
-		/// constructor
-		/// </summary>
-		public EntitySprite(Surface screen) : base()
-		{
-			if (screen == null)
-			{
-				throw new ArgumentNullException("screen");
-			}
-			base.Surface = screen.CreateCompatibleSurface(70, 70);
-			base.Surface.Fill(Color.FromArgb(0, 255, 128));
-			base.Surface.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
-			base.Rectangle = new Rectangle(0,0,70,70);
-		}
-		#region IDisposable
-		private bool disposed;
+    /// <summary>
+    /// Derived class
+    /// </summary>
+    public class EntitySprite : Sprite
+    {
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public EntitySprite(Surface screen)
+            : base()
+        {
+            if (screen == null)
+            {
+                throw new ArgumentNullException("screen");
+            }
+            base.Surface = screen.CreateCompatibleSurface(70, 70);
+            base.Surface.Fill(Color.FromArgb(0, 255, 128));
+            base.Surface.DrawFilledCircle(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0));
+            base.Rectangle = new Rectangle(0, 0, 70, 70);
+        }
+        #region IDisposable
+        private bool disposed;
 
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-		#endregion IDisposable
-	}
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+        #endregion IDisposable
+    }
 }

@@ -128,25 +128,25 @@ namespace SdlDotNetExamples
 
         public double Rate
         {
-            get 
-            { 
-                return rate; 
+            get
+            {
+                return rate;
             }
-            set 
-            { 
-                rate = value; 
+            set
+            {
+                rate = value;
             }
         }
 
         public double Amplitude
         {
-            get 
-            { 
-                return amplitude; 
+            get
+            {
+                return amplitude;
             }
-            set 
-            { 
-                amplitude = value; 
+            set
+            {
+                amplitude = value;
             }
         }
 

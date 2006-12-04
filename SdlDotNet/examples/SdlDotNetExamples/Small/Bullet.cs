@@ -25,71 +25,72 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples
 {
-	/// <summary>
-	/// Bullet fired by Player
-	/// </summary>
-	public class Bullet : Sprite
-	{
-		int speedX;
-		int speedY;
+    /// <summary>
+    /// Bullet fired by Player
+    /// </summary>
+    public class Bullet : Sprite
+    {
+        int speedX;
+        int speedY;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="location"></param>
-		/// <param name="speedX"></param>
-		/// <param name="speedY"></param>
-		public Bullet(Point location, int speedX, int speedY) : base(Video.Screen.CreateCompatibleSurface(8, 16), location)
-		{
-			this.speedX = speedX;
-			this.speedY = speedY;
-			base.Surface.Fill(new Rectangle(new Point(0,0), new Size(8, 16)), Color.DarkBlue);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="speedX"></param>
+        /// <param name="speedY"></param>
+        public Bullet(Point location, int speedX, int speedY)
+            : base(Video.Screen.CreateCompatibleSurface(8, 16), location)
+        {
+            this.speedX = speedX;
+            this.speedY = speedY;
+            base.Surface.Fill(new Rectangle(new Point(0, 0), new Size(8, 16)), Color.DarkBlue);
+        }
 
-		/// <summary>
-		/// If the bullet goes off the screen, 
-		/// it is removed from the collection.
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(TickEventArgs args)
-		{
-			if (args == null)
-			{
-				throw new ArgumentNullException("args");
-			}
-			this.X -= (int)(args.SecondsElapsed * this.speedX);
-			this.Y -= (int)(args.SecondsElapsed * this.speedY);
+        /// <summary>
+        /// If the bullet goes off the screen, 
+        /// it is removed from the collection.
+        /// </summary>
+        /// <param name="args"></param>
+        public override void Update(TickEventArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+            this.X -= (int)(args.SecondsElapsed * this.speedX);
+            this.Y -= (int)(args.SecondsElapsed * this.speedY);
 
-			if (this.X + this.Surface.Size.Width < 0 ||
-				this.X > Video.Screen.Width ||
-				this.Y + this.Surface.Size.Height < 0 ||
-				this.Y > Video.Screen.Height)
-			{
-				this.Kill();
-			}
-		}
-		private bool disposed;
+            if (this.X + this.Surface.Size.Width < 0 ||
+                this.X > Video.Screen.Width ||
+                this.Y + this.Surface.Size.Height < 0 ||
+                this.Y > Video.Screen.Height)
+            {
+                this.Kill();
+            }
+        }
+        private bool disposed;
 
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

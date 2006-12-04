@@ -26,104 +26,104 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples.SpriteGuiDemos
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class BoundedSprite : AnimatedDemoSprite
-	{
-		private Rectangle bounds = new Rectangle();
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BoundedSprite : AnimatedDemoSprite
+    {
+        private Rectangle bounds = new Rectangle();
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surfaces"></param>
-		/// <param name="bounds"></param>
-		/// <param name="coordinates"></param>
-		public BoundedSprite(SurfaceCollection surfaces, Rectangle bounds, Point coordinates)
-			: base(surfaces, coordinates)
-		{
-			if (surfaces == null)
-			{
-				throw new ArgumentNullException("surfaces");
-			}
-			this.bounds = bounds;
-			int tempHeight;
-			int tempWidth;
-			tempWidth = this.bounds.Size.Width - (int) surfaces.Size.Width;
-			tempHeight = this.bounds.Size.Height - (int) surfaces.Size.Height;
-			this.bounds.Size = new Size(tempWidth, tempHeight);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surfaces"></param>
+        /// <param name="bounds"></param>
+        /// <param name="coordinates"></param>
+        public BoundedSprite(SurfaceCollection surfaces, Rectangle bounds, Point coordinates)
+            : base(surfaces, coordinates)
+        {
+            if (surfaces == null)
+            {
+                throw new ArgumentNullException("surfaces");
+            }
+            this.bounds = bounds;
+            int tempHeight;
+            int tempWidth;
+            tempWidth = this.bounds.Size.Width - (int)surfaces.Size.Width;
+            tempHeight = this.bounds.Size.Height - (int)surfaces.Size.Height;
+            this.bounds.Size = new Size(tempWidth, tempHeight);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Rectangle SpriteBounds
-		{
-			get 
-			{ 
-				return bounds; 
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Rectangle SpriteBounds
+        {
+            get
+            {
+                return bounds;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(TickEventArgs args)
-		{
-			if (args == null)
-			{
-				throw new ArgumentNullException("args");
-			}
-			// Animate
-			base.Update(args);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public override void Update(TickEventArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+            // Animate
+            base.Update(args);
 
-			// Bounce off the left
-			if (this.X < bounds.Left)
-			{
-				this.X = bounds.Left;
-			}
+            // Bounce off the left
+            if (this.X < bounds.Left)
+            {
+                this.X = bounds.Left;
+            }
 
-			// Bounce off the top
-			if (this.Y < bounds.Top)
-			{
-				this.Y = bounds.Top;
-			}
+            // Bounce off the top
+            if (this.Y < bounds.Top)
+            {
+                this.Y = bounds.Top;
+            }
 
-			// Bounce off the bottom
-			if (this.Y > bounds.Bottom)
-			{
-				this.Y = bounds.Bottom;
-			}
-			// Bounce off the right
-			if (this.X > bounds.Right)
-			{
-				this.X = bounds.Right;
-			}
-		}
+            // Bounce off the bottom
+            if (this.Y > bounds.Bottom)
+            {
+                this.Y = bounds.Bottom;
+            }
+            // Bounce off the right
+            if (this.X > bounds.Right)
+            {
+                this.X = bounds.Right;
+            }
+        }
 
-		private bool disposed;
+        private bool disposed;
 
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * $RCSfile: SdlDemo.cs,v $
+ * $RCSfile: SpriteGuiDemosMain.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -32,395 +32,395 @@ using SdlDotNet.Core;
 
 namespace SdlDotNetExamples.SpriteGuiDemos
 {
-	/// <summary>
-	/// The SdlDemo is a general testbed and display of various features
-	/// in the MFGames.Sdl library. It includes animated sprites and
-	/// movement. To run, it currently assumes that the current
-	/// directory has a "test/" directory underneath it containing
-	/// various images.
-	/// </summary>
-	public class SdlDemo : IDisposable
-	{
-		/// <summary>
-		/// 
-		/// </summary>
+    /// <summary>
+    /// The SpriteGuiDemosMain is a general testbed and display of various features
+    /// in the MFGames.Sdl library. It includes animated sprites and
+    /// movement. To run, it currently assumes that the current
+    /// directory has a "test/" directory underneath it containing
+    /// various images.
+    /// </summary>
+    public class SpriteGuiDemosMain : IDisposable
+    {
+        /// <summary>
+        /// 
+        /// </summary>
         [STAThread]
-		public static void Run()
-		{
-			// Create the demo application
-			SdlDemo demo = new SdlDemo();
-			demo.Start();
-		}
+        public static void Run()
+        {
+            // Create the demo application
+            SpriteGuiDemosMain demo = new SpriteGuiDemosMain();
+            demo.Start();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Start()
-		{
-			// Start up the SDL
-			Video.WindowCaption = "SDL.NET - Sprite and Gui Demo";
-//			Video.Mouse.ShowCursor = false;
-      
-			Events.KeyboardDown +=
-				new KeyboardEventHandler(this.KeyboardDown);
-			Events.Tick += new TickEventHandler(this.Tick);
-			Events.Quit += new QuitEventHandler(this.Quit);
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Start()
+        {
+            // Start up the SDL
+            Video.WindowCaption = "SDL.NET - Sprite and Gui Demo";
+            //			Video.Mouse.ShowCursor = false;
 
-			// Create the screen
-			int width = 800;
-			int height = 600;
+            Events.KeyboardDown +=
+                new KeyboardEventHandler(this.KeyboardDown);
+            Events.Tick += new TickEventHandler(this.Tick);
+            Events.Quit += new QuitEventHandler(this.Quit);
 
-			Video.WindowIcon();
-			screen = Video.SetVideoModeWindow(width, height);
+            // Create the screen
+            int width = 800;
+            int height = 600;
 
-			// Set up the master sprite container
-			SetupGui();
+            Video.WindowIcon();
+            screen = Video.SetVideoModeWindow(width, height);
 
-			// Load demos
-			LoadDemos();
+            // Set up the master sprite container
+            SetupGui();
 
-			// Loop until the system indicates it should stop
-			Console.WriteLine("Welcome to the SDL.NET Demo!");
+            // Load demos
+            LoadDemos();
 
-			// Start up the ticker (and animation)
-			Events.Fps = 100;
-			Events.Run();
+            // Loop until the system indicates it should stop
+            Console.WriteLine("Welcome to the SDL.NET Demo!");
 
-			// Stop the ticker and the current demo
-			SwitchDemo(-1);
-		}
+            // Start up the ticker (and animation)
+            Events.Fps = 100;
+            Events.Run();
 
-		#region GUI
-		private GuiMenuTitle demoMenu;
-		private GuiMenuTitle gm;
+            // Stop the ticker and the current demo
+            SwitchDemo(-1);
+        }
 
-		private int [] fpsSpeeds = 
-			new int [] {1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
-		string data_directory = @"Data/";
-		string filepath = @"../../";
-		private void SetupGui()
-		{
-			// Set up the demo sprite containers
-			master.EnableMouseButtonEvent();
-			master.EnableMouseMotionEvent();
-			master.EnableTickEvent();
+        #region GUI
+        private GuiMenuTitle demoMenu;
+        private GuiMenuTitle gm;
 
-			if (File.Exists(data_directory + "comic.ttf"))
-			{
-				filepath = "";
-			}
-			// Set up the gui manager
-			gui = new GuiManager(master,
-				new SdlDotNet.Graphics.Font(filepath + data_directory + "comic.ttf", 12),
-				Size);
-			gui.TitleFont = new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 12);
+        private int[] fpsSpeeds =
+            new int[] { 1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
+        string data_directory = @"Data/";
+        string filepath = @"../../";
+        private void SetupGui()
+        {
+            // Set up the demo sprite containers
+            master.EnableMouseButtonEvent();
+            master.EnableMouseMotionEvent();
+            master.EnableTickEvent();
 
-			// Set up the ticker
-			statusTicker = new GuiTicker(gui, new Vector(0, Video.Screen.Height - 20, 0),100);
-			master.Add(statusTicker);
-			Report("SDL.NET Demo started");
+            if (File.Exists(data_directory + "comic.ttf"))
+            {
+                filepath = "";
+            }
+            // Set up the gui manager
+            gui = new GuiManager(master,
+                new SdlDotNet.Graphics.Font(filepath + data_directory + "comic.ttf", 12),
+                Size);
+            gui.TitleFont = new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 12);
 
-			statusWindow = new StatusWindow(gui);
-			// Set up the status window
-			master.Add(statusWindow);			
+            // Set up the ticker
+            statusTicker = new GuiTicker(gui, new Vector(0, Video.Screen.Height - 20, 0), 100);
+            master.Add(statusTicker);
+            Report("SDL.NET Demo started");
 
-			// Create the menu
-			CreateMenu(gui);
-		}
+            statusWindow = new StatusWindow(gui);
+            // Set up the status window
+            master.Add(statusWindow);
 
-		private void CreateMenu(GuiManager gui)
-		{
-			// Create the menu
-			gmb = new GuiMenuBar(gui, new Point(0, 1), 20);
-			gmb.Sprites.EnableTickEvent();
-			gmb.Sprites.EnableMouseButtonEvent();
-			master.Add(gmb);
+            // Create the menu
+            CreateMenu(gui);
+        }
 
-			// Create the demo menu
-			demoMenu = new GuiMenuTitle(gui, gmb, "Demo");
-			master.Add(demoMenu.Popup);
-			gmb.AddLeft(demoMenu);
+        private void CreateMenu(GuiManager gui)
+        {
+            // Create the menu
+            gmb = new GuiMenuBar(gui, new Point(0, 1), 20);
+            gmb.Sprites.EnableTickEvent();
+            gmb.Sprites.EnableMouseButtonEvent();
+            master.Add(gmb);
 
-			// Create the FPS menu
-			gm = new GuiMenuTitle(gui, gmb, "FPS");
-			master.Add(gm.Popup);
-			gmb.AddLeft(gm);
+            // Create the demo menu
+            demoMenu = new GuiMenuTitle(gui, gmb, "Demo");
+            master.Add(demoMenu.Popup);
+            gmb.AddLeft(demoMenu);
 
-			GuiMenuItem fmi;
-      
-			for (int i = 0; i < fpsSpeeds.Length; i++)
-			{
-				int spd = fpsSpeeds[i];
+            // Create the FPS menu
+            gm = new GuiMenuTitle(gui, gmb, "FPS");
+            master.Add(gm.Popup);
+            gmb.AddLeft(gm);
 
-				fmi = new GuiMenuItem(gui, spd.ToString(CultureInfo.CurrentCulture) + " FPS");
-				fmi.ItemSelectedEvent += new MenuItemEventHandler(MenuFps);
-				gm.Add(fmi);
-			}
-		}
+            GuiMenuItem fmi;
 
-		private void CreateMenuQuit(GuiManager gui)
-		{
-			GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
-			gmi.AddRight(new TextSprite("Q", gui.BaseFont));
-			gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuQuit);
-			demoMenu.Add(gmi);
-		}
-		#endregion
+            for (int i = 0; i < fpsSpeeds.Length; i++)
+            {
+                int spd = fpsSpeeds[i];
 
-		#region Demos
-		private ArrayList demos = new ArrayList();
+                fmi = new GuiMenuItem(gui, spd.ToString(CultureInfo.CurrentCulture) + " FPS");
+                fmi.ItemSelectedEvent += new MenuItemEventHandler(MenuFps);
+                gm.Add(fmi);
+            }
+        }
 
-		private static DemoMode currentDemo;
+        private void CreateMenuQuit(GuiManager gui)
+        {
+            GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
+            gmi.AddRight(new TextSprite("Q", gui.BaseFont));
+            gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuQuit);
+            demoMenu.Add(gmi);
+        }
+        #endregion
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static DemoMode CurrentDemo
-		{
-			get 
-			{ 
-				return currentDemo; 
-			}
-		}
+        #region Demos
+        private ArrayList demos = new ArrayList();
 
-		private void LoadDemo(DemoMode mode)
-		{
-			// Add to the array list
-			demos.Add(mode);
+        private static DemoMode currentDemo;
 
-			// Figure out the counter
-			int cnt = demos.Count;
+        /// <summary>
+        /// 
+        /// </summary>
+        public static DemoMode CurrentDemo
+        {
+            get
+            {
+                return currentDemo;
+            }
+        }
 
-			// Add the graphical menu
-			GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
-			gmi.AddRight(new TextSprite(String.Format(CultureInfo.CurrentCulture, "{0}", cnt),
-				gui.BaseFont));
-			gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuDemo);
-			demoMenu.Add(gmi);
-		}
+        private void LoadDemo(DemoMode mode)
+        {
+            // Add to the array list
+            demos.Add(mode);
 
-		private void LoadDemos()
-		{
-			// Add the sprite manager to the master
-			master.Add(manager);
+            // Figure out the counter
+            int cnt = demos.Count;
 
-			// Load the actual demos
-			LoadDemo(new FontMode());
-			LoadDemo(new BounceMode());
-			LoadDemo(new DragMode());
-			LoadDemo(new ViewportMode());
-			LoadDemo(new MultipleMode());
-			LoadDemo(new GuiMode());
+            // Add the graphical menu
+            GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
+            gmi.AddRight(new TextSprite(String.Format(CultureInfo.CurrentCulture, "{0}", cnt),
+                gui.BaseFont));
+            gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuDemo);
+            demoMenu.Add(gmi);
+        }
 
-			// Finish up the gui
-			CreateMenuQuit(gui);
-		}
+        private void LoadDemos()
+        {
+            // Add the sprite manager to the master
+            master.Add(manager);
 
-		private static void StopDemo()
-		{
-			// Stop the demo, if any
-			if (currentDemo != null)
-			{
-				currentDemo.Stop(manager);
-				currentDemo = null;
-			}
-		}
+            // Load the actual demos
+            LoadDemo(new FontMode());
+            LoadDemo(new BounceMode());
+            LoadDemo(new DragMode());
+            LoadDemo(new ViewportMode());
+            LoadDemo(new MultipleMode());
+            LoadDemo(new GuiMode());
 
-		private void SwitchDemo(int demo)
-		{
-			// Stop the demo, if any
-			StopDemo();
+            // Finish up the gui
+            CreateMenuQuit(gui);
+        }
 
-			// Ignore if the demo request is too high
-			if (demo < 0 || demo + 1 > demos.Count)
-			{
-				return;
-			}
+        private static void StopDemo()
+        {
+            // Stop the demo, if any
+            if (currentDemo != null)
+            {
+                currentDemo.Stop(manager);
+                currentDemo = null;
+            }
+        }
 
-			// Start it
-			currentDemo = (DemoMode) demos[demo];
-			currentDemo.Start(manager);
-			Console.WriteLine("Switched to " + currentDemo + " mode");
-			Report("Switched to " + currentDemo + " mode");
-		}
-		#endregion
+        private void SwitchDemo(int demo)
+        {
+            // Stop the demo, if any
+            StopDemo();
 
-		private static GuiManager gui;
-		/// <summary>
-		/// 
-		/// </summary>
-		public static GuiManager GuiManager 
-		{ 
-			get 
-			{ 
-				return gui; 
-			} 
-		}
+            // Ignore if the demo request is too high
+            if (demo < 0 || demo + 1 > demos.Count)
+            {
+                return;
+            }
 
-		#region Events
-		private void KeyboardDown(object sender, KeyboardEventArgs e) 
-		{
-			switch (e.Key)
-			{
-				case Key.Escape:
-				case Key.Q:
-					Events.QuitApplication();
-					break;
-				case Key.C:
-					StopDemo();
-					break;
-				case Key.One: 
-					SwitchDemo(0); 
-					break;
-				case Key.Two: 
-					SwitchDemo(1); 
-					break;
-				case Key.Three: 
-					SwitchDemo(2); 
-					break;
-				case Key.Four: 
-					SwitchDemo(3); 
-					break;
-				case Key.Five: 
-					SwitchDemo(4); 
-					break;
-				case Key.Six: 
-					SwitchDemo(5); 
-					break;
-				case Key.Seven: 
-					SwitchDemo(6); 
-					break;
-				case Key.Eight: 
-					SwitchDemo(7); 
-					break;
-				case Key.M:
-					Video.IconifyWindow();
-					break;
-			}
-		}
+            // Start it
+            currentDemo = (DemoMode)demos[demo];
+            currentDemo.Start(manager);
+            Console.WriteLine("Switched to " + currentDemo + " mode");
+            Report("Switched to " + currentDemo + " mode");
+        }
+        #endregion
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="args"></param>
-		private void Tick(object sender, TickEventArgs args)
-		{	
-			screen.Fill(Color.Black);
-			if (currentDemo != null)
-			{
-				screen.Blit(currentDemo.RenderSurface());
-			}
-			screen.Blit(master);
-			//screen.Blit(cursor, position);
-			screen.Update();
-		}
+        private static GuiManager gui;
+        /// <summary>
+        /// 
+        /// </summary>
+        public static GuiManager GuiManager
+        {
+            get
+            {
+                return gui;
+            }
+        }
 
-		private void Quit(object sender, QuitEventArgs e)
-		{
-			Events.QuitApplication();
-		}
+        #region Events
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                case Key.Q:
+                    Events.QuitApplication();
+                    break;
+                case Key.C:
+                    StopDemo();
+                    break;
+                case Key.One:
+                    SwitchDemo(0);
+                    break;
+                case Key.Two:
+                    SwitchDemo(1);
+                    break;
+                case Key.Three:
+                    SwitchDemo(2);
+                    break;
+                case Key.Four:
+                    SwitchDemo(3);
+                    break;
+                case Key.Five:
+                    SwitchDemo(4);
+                    break;
+                case Key.Six:
+                    SwitchDemo(5);
+                    break;
+                case Key.Seven:
+                    SwitchDemo(6);
+                    break;
+                case Key.Eight:
+                    SwitchDemo(7);
+                    break;
+                case Key.M:
+                    Video.IconifyWindow();
+                    break;
+            }
+        }
 
-		private void MenuDemo(object sender, MenuItemEventArgs e)
-		{
-			SwitchDemo(e.Index);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void Tick(object sender, TickEventArgs args)
+        {
+            screen.Fill(Color.Black);
+            if (currentDemo != null)
+            {
+                screen.Blit(currentDemo.RenderSurface());
+            }
+            screen.Blit(master);
+            //screen.Blit(cursor, position);
+            screen.Update();
+        }
 
-		private void MenuFps(object sender, MenuItemEventArgs e)
-		{
-			Events.Fps = fpsSpeeds[e.Index];
-		}
+        private void Quit(object sender, QuitEventArgs e)
+        {
+            Events.QuitApplication();
+        }
 
-		private void MenuQuit(object sender, MenuItemEventArgs e)
-		{
-			Events.QuitApplication();
-		}
+        private void MenuDemo(object sender, MenuItemEventArgs e)
+        {
+            SwitchDemo(e.Index);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="msg"></param>
-		public void Report(string msg)
-		{
-			if (statusTicker != null)
-			{
-				TextSprite textSprite = new TextSprite(msg, GuiManager.BaseFont);
-				statusTicker.Add(textSprite);
-			}
-		}
-		#endregion
+        private void MenuFps(object sender, MenuItemEventArgs e)
+        {
+            Events.Fps = fpsSpeeds[e.Index];
+        }
 
-		#region Properties
-		private static SpriteCollection master = new SpriteCollection();
-		private static SpriteCollection manager = new SpriteCollection();
-//		MouseMotionEventHandler MouseMotionHandler;
-		private Surface screen;
-		private GuiWindow statusWindow;
-		private GuiTicker statusTicker;
-		private static GuiMenuBar gmb;
-//		Surface cursor;
-//		Point position = new Point(100,100);
+        private void MenuQuit(object sender, MenuItemEventArgs e)
+        {
+            Events.QuitApplication();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static Size Size
-		{
-			get 
-			{ 
-				return new Size(800, 600); 
-			}
-		}
-		#endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msg"></param>
+        public void Report(string msg)
+        {
+            if (statusTicker != null)
+            {
+                TextSprite textSprite = new TextSprite(msg, GuiManager.BaseFont);
+                statusTicker.Add(textSprite);
+            }
+        }
+        #endregion
 
-		#region IDisposable Members
+        #region Properties
+        private static SpriteCollection master = new SpriteCollection();
+        private static SpriteCollection manager = new SpriteCollection();
+        //		MouseMotionEventHandler MouseMotionHandler;
+        private Surface screen;
+        private GuiWindow statusWindow;
+        private GuiTicker statusTicker;
+        private static GuiMenuBar gmb;
+        //		Surface cursor;
+        //		Point position = new Point(100,100);
 
-		private bool disposed;
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Size Size
+        {
+            get
+            {
+                return new Size(800, 600);
+            }
+        }
+        #endregion
 
-		
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		/// <remarks>Destroys managed and unmanaged objects</remarks>
-		public void Dispose() 
-		{
-			Dispose(true);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-					if (disposing)
-					{
-						this.screen.Dispose();
-						foreach (Sprite s in SdlDemo.manager.Keys)
-						{
-							IDisposable disposableObj = s as IDisposable;
-							if (disposableObj != null)
-							{
-								disposableObj.Dispose( );
-							}
-						}
-						foreach (Sprite s in SdlDemo.master.Keys)
-						{
-							IDisposable disposableObj = s as IDisposable;
-							if (disposableObj != null)
-							{
-								disposableObj.Dispose( );
-							}
-						}
-						statusTicker.Dispose();
-						demoMenu.Dispose();
-						gm.Dispose();
-						statusWindow.Dispose();
-					}
-					this.disposed = true;
-			}
-		}
-		#endregion
-	}
+        #region IDisposable Members
+
+        private bool disposed;
+
+
+        /// <summary>
+        /// Closes and destroys this object
+        /// </summary>
+        /// <remarks>Destroys managed and unmanaged objects</remarks>
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    this.screen.Dispose();
+                    foreach (Sprite s in SpriteGuiDemosMain.manager.Keys)
+                    {
+                        IDisposable disposableObj = s as IDisposable;
+                        if (disposableObj != null)
+                        {
+                            disposableObj.Dispose();
+                        }
+                    }
+                    foreach (Sprite s in SpriteGuiDemosMain.master.Keys)
+                    {
+                        IDisposable disposableObj = s as IDisposable;
+                        if (disposableObj != null)
+                        {
+                            disposableObj.Dispose();
+                        }
+                    }
+                    statusTicker.Dispose();
+                    demoMenu.Dispose();
+                    gm.Dispose();
+                    statusWindow.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+        #endregion
+    }
 }

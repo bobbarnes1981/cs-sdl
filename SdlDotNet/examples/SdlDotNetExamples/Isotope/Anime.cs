@@ -30,25 +30,26 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Isotope
 {
-	//Predefined extensions to the base class
+    //Predefined extensions to the base class
 
-	//Simple animated skin that cycles through each images image every tick
-	public class Anime : Skin
-	{
-		/* anime: Simple animated skin that cycles through each images image every tick */
-		public Anime(ArrayList images,string name) : base(images,name)
-		{
-		}
+    //Simple animated skin that cycles through each images image every tick
+    public class Anime : Skin
+    {
+        /* anime: Simple animated skin that cycles through each images image every tick */
+        public Anime(ArrayList images, string name)
+            : base(images, name)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
-		public override Surface GetImage(Object3d obj)
-		{
-			/*Redefined image query to allow cycled animation */
-			return((Surface)images[ObjectTime.GetTime()%images.Count]);
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override Surface GetImage(Object3d obj)
+        {
+            /*Redefined image query to allow cycled animation */
+            return ((Surface)images[ObjectTime.GetTime() % images.Count]);
+        }
+    }
 }

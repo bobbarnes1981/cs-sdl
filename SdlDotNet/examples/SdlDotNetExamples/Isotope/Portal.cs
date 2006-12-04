@@ -22,41 +22,41 @@ using System;
 
 namespace SdlDotNetExamples.Isotope
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Portal : Object3d
-	{
-		Scene dest_scene;
-		int[] dest_pos={0,0,0};
-		/* An object which can signal to lead actors for a scene change if they touch the portal */
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="pos"></param>
-		/// <param name="size"></param>
-		/// <param name="objtype"></param>
-		/// <param name="dest_scene"></param>
-		/// <param name="dest_pos"></param>
-		public Portal(int[] pos,int[] size,int objtype, Scene dest_scene,int[] dest_pos)
-			: base(pos,size,objtype,true)
-		{
-			this.dest_scene=dest_scene;
-			Vector.CopyVector(dest_pos,this.dest_pos);
-		}
-	   
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="impact"></param>
-		/// <param name="other_obj"></param>
-		/// <param name="impact_face"></param>
-		public override void EventTouch(bool impact,Object3d other_obj,int impact_face)
-		{
-			if (other_obj is LeadActor)
-			{
-				((LeadActor)other_obj).EventChangeScene(dest_scene,dest_pos);
-			}
-		}
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Portal : Object3d
+    {
+        Scene dest_scene;
+        int[] dest_pos ={ 0, 0, 0 };
+        /* An object which can signal to lead actors for a scene change if they touch the portal */
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="size"></param>
+        /// <param name="objtype"></param>
+        /// <param name="dest_scene"></param>
+        /// <param name="dest_pos"></param>
+        public Portal(int[] pos, int[] size, int objtype, Scene dest_scene, int[] dest_pos)
+            : base(pos, size, objtype, true)
+        {
+            this.dest_scene = dest_scene;
+            Vector.CopyVector(dest_pos, this.dest_pos);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="impact"></param>
+        /// <param name="other_obj"></param>
+        /// <param name="impact_face"></param>
+        public override void EventTouch(bool impact, Object3d other_obj, int impact_face)
+        {
+            if (other_obj is LeadActor)
+            {
+                ((LeadActor)other_obj).EventChangeScene(dest_scene, dest_pos);
+            }
+        }
+    }
 }

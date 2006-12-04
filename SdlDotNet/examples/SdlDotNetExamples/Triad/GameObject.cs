@@ -25,338 +25,338 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Triad
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public abstract class  GameObject
-	{
-		private GameObject parent;
-		/// <summary>
-		/// 
-		/// </summary>
-		public GameObject Parent
-		{
-			get
-			{
-				return parent;
-			}
-			set
-			{
-				parent = value;				
-			}
-		}
-	
-		private int  x;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int  X
-		{
-			get
-			{
-				return x;
-			}
-			set
-			{
-				x = value;				
-			}
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public abstract class GameObject
+    {
+        private GameObject parent;
+        /// <summary>
+        /// 
+        /// </summary>
+        public GameObject Parent
+        {
+            get
+            {
+                return parent;
+            }
+            set
+            {
+                parent = value;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int ScreenX
-		{
-			get
-			{
-				int x = this.x;
-				if(this.parent != null)
-				{
-					x += this.parent.ScreenX;
-				}
-				return x;
-			}
-		}
-	
-		/// <summary>
-		/// 
-		/// </summary>
-		public int ScreenY
-		{
-			get
-			{
-				int y = this.y;
-				if(this.parent != null)
-				{
-					y += this.parent.ScreenY;
-				}
-				return y;
-			}
-		}
-	
-		private int  y;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int  Y
-		{
-			get
-			{
-				return y;
-			}
-			set
-			{
-				y = value;				
-			}
-		}
+        private int x;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int X
+        {
+            get
+            {
+                return x;
+            }
+            set
+            {
+                x = value;
+            }
+        }
 
-		private int  width;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int  Width
-		{
-			get
-			{
-				return width;
-			}
-			set
-			{
-				if(width <= 0)
-				{
-					throw new GameException("Width is set to zero or negative value.");
-				}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int ScreenX
+        {
+            get
+            {
+                int x = this.x;
+                if (this.parent != null)
+                {
+                    x += this.parent.ScreenX;
+                }
+                return x;
+            }
+        }
 
-				width = value;				
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int ScreenY
+        {
+            get
+            {
+                int y = this.y;
+                if (this.parent != null)
+                {
+                    y += this.parent.ScreenY;
+                }
+                return y;
+            }
+        }
 
-		private int  height;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int  Height
-		{
-			get
-			{
-				return height;
-			}
-			set
-			{
-				if(value <= 0)
-				{
-					throw new GameException("Height is set to zero or negative value.");
-				}
+        private int y;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Y
+        {
+            get
+            {
+                return y;
+            }
+            set
+            {
+                y = value;
+            }
+        }
 
-				height = value;				
-			}
-		}
-	
-		/// <summary>
-		/// 
-		/// </summary>
-		public int  X2
-		{
-			get
-			{
-				return x + width;
-			}
-		}
-	
-		/// <summary>
-		/// 
-		/// </summary>
-		public int  Y2
-		{
-			get
-			{
-				return y + height;
-			}
-		}
+        private int width;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Width
+        {
+            get
+            {
+                return width;
+            }
+            set
+            {
+                if (width <= 0)
+                {
+                    throw new GameException("Width is set to zero or negative value.");
+                }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int ScreenX2
-		{
-			get
-			{
-				int offSetX = 0;
-				if(this.parent != null)
-				{
-					offSetX = this.parent.ScreenX;
-				}
-				return this.X2 + offSetX;
-			}
-		}
-	
-		/// <summary>
-		/// 
-		/// </summary>
-		public int ScreenY2
-		{
-			get
-			{
-				int offSetY = 0;
-				if (this.parent != null)
-				{
-					offSetY = this.parent.ScreenY;
-				}
-				return y + height + offSetY;
-			}
-		}
-		
-		int previousWidth;
-		int previousHeight;
-		Size currentSize;
-		/// <summary>
-		/// 
-		/// </summary>
-		public Size Size
-		{
-			get
-			{
-				if((previousWidth != width )||(previousHeight != height))
-				{
-					currentSize = new Size(width, height);					
-				}
+                width = value;
+            }
+        }
 
-				previousWidth = width;
-				previousHeight = height;
+        private int height;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Height
+        {
+            get
+            {
+                return height;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new GameException("Height is set to zero or negative value.");
+                }
 
-				return currentSize;
-			}
-			set
-			{
-				this.width = value.Width;
-				this.height = value.Height;
-			}
-		}
+                height = value;
+            }
+        }
 
-		System.Drawing.Rectangle currentRectangle;
-		Point previousLocation;
-		/// <summary>
-		/// 
-		/// </summary>
-		public Rectangle Rectangle
-		{
-			get
-			{
-				if(previousLocation != Location)
-				{
-					currentRectangle = new System.Drawing.Rectangle(Location,this.Size);					
-				}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int X2
+        {
+            get
+            {
+                return x + width;
+            }
+        }
 
-				previousLocation = Location;
-				return currentRectangle;
-			}
-		}	
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Y2
+        {
+            get
+            {
+                return y + height;
+            }
+        }
 
-		Point previousScreenLocation;
-		System.Drawing.Rectangle currentScreenRectangle;
-		/// <summary>
-		/// 
-		/// </summary>
-		public Rectangle ScreenRectangle
-		{
-			get
-			{
-				if(previousScreenLocation != ScreenLocation)
-				{
-					currentScreenRectangle = new System.Drawing.Rectangle(ScreenLocation,this.Size);
-				}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int ScreenX2
+        {
+            get
+            {
+                int offSetX = 0;
+                if (this.parent != null)
+                {
+                    offSetX = this.parent.ScreenX;
+                }
+                return this.X2 + offSetX;
+            }
+        }
 
-				previousScreenLocation = ScreenLocation;
-				return currentScreenRectangle;
-			}
-		}	
+        /// <summary>
+        /// 
+        /// </summary>
+        public int ScreenY2
+        {
+            get
+            {
+                int offSetY = 0;
+                if (this.parent != null)
+                {
+                    offSetY = this.parent.ScreenY;
+                }
+                return y + height + offSetY;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Point Location
-		{
-			get
-			{
-				return new Point(x, y);
-			}
-			set
-			{	
-				this.x = value.X;
-				this.y = value.Y;
-			}
-		}
+        int previousWidth;
+        int previousHeight;
+        Size currentSize;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Size Size
+        {
+            get
+            {
+                if ((previousWidth != width) || (previousHeight != height))
+                {
+                    currentSize = new Size(width, height);
+                }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Point ScreenLocation
-		{
-			get
-			{
-				return new Point(this.ScreenX, this.ScreenY);
-			}
-		}
+                previousWidth = width;
+                previousHeight = height;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static Point BottomRightCorner
-		{
-			get
-			{
-				return new Point(0,0);
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		public abstract void Update();
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		protected abstract void DrawGameObject(Surface surface);
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		public void Draw(Surface surface)
-		{
-			if(surface == null)
-			{
-				throw new GameException("Input surface is NullReferenceException");
-			}
+                return currentSize;
+            }
+            set
+            {
+                this.width = value.Width;
+                this.height = value.Height;
+            }
+        }
 
-			DrawGameObject(surface);
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="point"></param>
-		/// <returns></returns>
-		public bool Contains(Point point)
-		{
-			bool inSideX = (ScreenX <= point.X)&&(point.X<=ScreenX2);
-			bool inSideY = (ScreenY <= point.Y)&&(point.Y<=ScreenY2);
-			return inSideX&&inSideY;
-		}
+        System.Drawing.Rectangle currentRectangle;
+        Point previousLocation;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Rectangle Rectangle
+        {
+            get
+            {
+                if (previousLocation != Location)
+                {
+                    currentRectangle = new System.Drawing.Rectangle(Location, this.Size);
+                }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <returns></returns>
-		public bool Hits(GameObject obj)
-		{		
-			if(obj == null)
-			{
-				return false;
-			}
+                previousLocation = Location;
+                return currentRectangle;
+            }
+        }
 
-			return Contains(obj.Location) || Contains(GameObject.BottomRightCorner) ;
-		}
-	}
+        Point previousScreenLocation;
+        System.Drawing.Rectangle currentScreenRectangle;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Rectangle ScreenRectangle
+        {
+            get
+            {
+                if (previousScreenLocation != ScreenLocation)
+                {
+                    currentScreenRectangle = new System.Drawing.Rectangle(ScreenLocation, this.Size);
+                }
+
+                previousScreenLocation = ScreenLocation;
+                return currentScreenRectangle;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Point Location
+        {
+            get
+            {
+                return new Point(x, y);
+            }
+            set
+            {
+                this.x = value.X;
+                this.y = value.Y;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Point ScreenLocation
+        {
+            get
+            {
+                return new Point(this.ScreenX, this.ScreenY);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Point BottomRightCorner
+        {
+            get
+            {
+                return new Point(0, 0);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public abstract void Update();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        protected abstract void DrawGameObject(Surface surface);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        public void Draw(Surface surface)
+        {
+            if (surface == null)
+            {
+                throw new GameException("Input surface is NullReferenceException");
+            }
+
+            DrawGameObject(surface);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public bool Contains(Point point)
+        {
+            bool inSideX = (ScreenX <= point.X) && (point.X <= ScreenX2);
+            bool inSideY = (ScreenY <= point.Y) && (point.Y <= ScreenY2);
+            return inSideX && inSideY;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public bool Hits(GameObject obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            return Contains(obj.Location) || Contains(GameObject.BottomRightCorner);
+        }
+    }
 }

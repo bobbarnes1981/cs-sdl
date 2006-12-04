@@ -21,19 +21,19 @@ using SdlDotNet;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// Derived class
-	/// </summary>
-	public class Player
-	{
-		ArrayList entityList;
-		/// <summary>
-		/// constructor
-		/// </summary>
-		public Player(EventManager eventManager)
-		{
-			this.entityList = new ArrayList();
-			this.entityList.Add(new Entity(eventManager));
-		}
-	}
+    /// <summary>
+    /// Derived class
+    /// </summary>
+    public class Player
+    {
+        ArrayList entityList;
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public Player(EventManager eventManager)
+        {
+            this.entityList = new ArrayList();
+            this.entityList.Add(new Entity(eventManager));
+        }
+    }
 }

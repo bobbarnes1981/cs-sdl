@@ -27,85 +27,85 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples
 {
-	/// <summary>
-	/// A simple SDL.NET Example that draws a bunch of rectangles on the screen. 
-	/// Pressing Q or Escape will exit.
-	/// </summary>
-	public class Rectangles 
-	{
-		// The screen elements
-		private Surface screen;
-		private int width = 640;
-		private int height = 480;
+    /// <summary>
+    /// A simple SDL.NET Example that draws a bunch of rectangles on the screen. 
+    /// Pressing Q or Escape will exit.
+    /// </summary>
+    public class Rectangles
+    {
+        // The screen elements
+        private Surface screen;
+        private int width = 640;
+        private int height = 480;
 
-		// A random number generator to be used for placing the rectangles
-		private Random rand = new Random();
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		public Rectangles() 
-		{
-		}
+        // A random number generator to be used for placing the rectangles
+        private Random rand = new Random();
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Go() 
-		{
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
-			Events.Tick += new TickEventHandler(this.Tick);
-			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
-			Events.Quit += new QuitEventHandler(this.Quit);
-			
-			Events.Fps = 50;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Rectangles()
+        {
+        }
 
-			Video.WindowIcon();
-			Video.WindowCaption = "SDL.NET - Rectangles Example";
-			screen = Video.SetVideoModeWindow(width, height, true);
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Go()
+        {
+            Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
+            Events.Tick += new TickEventHandler(this.Tick);
+            Events.VideoResize += new VideoResizeEventHandler(this.Resize);
+            Events.Quit += new QuitEventHandler(this.Quit);
 
-			Events.Run();
-		}
+            Events.Fps = 50;
 
-		private void Resize (object sender, VideoResizeEventArgs e)
-		{
-			screen = Video.SetVideoModeWindow(e.Width, e.Height, true);
-			this.width = e.Width;
-			this.height = e.Height;
-		}
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - Rectangles Example";
+            screen = Video.SetVideoModeWindow(width, height, true);
 
-		private void KeyboardDown(object sender, KeyboardEventArgs e)
-		{
-			// Check if the key pressed was a Q or Escape
-			if (e.Key == Key.Escape || e.Key == Key.Q)
-			{
-				Events.QuitApplication();
-			}
-		}
+            Events.Run();
+        }
 
-		private void Quit(object sender, QuitEventArgs e)
-		{
-			Events.QuitApplication();
-		}
+        private void Resize(object sender, VideoResizeEventArgs e)
+        {
+            screen = Video.SetVideoModeWindow(e.Width, e.Height, true);
+            this.width = e.Width;
+            this.height = e.Height;
+        }
 
-		private void Tick(object sender, TickEventArgs e)
-		{
-			// Draw a new random rectangle
-			screen.Fill(
-				new Rectangle(
-				rand.Next(-300, width), rand.Next(-300, height),
-				rand.Next(20, 300), rand.Next(20, 300)),
-				Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            // Check if the key pressed was a Q or Escape
+            if (e.Key == Key.Escape || e.Key == Key.Q)
+            {
+                Events.QuitApplication();
+            }
+        }
 
-			// Flip the back buffer onto the screen.
-			screen.Update();
-		}
+        private void Quit(object sender, QuitEventArgs e)
+        {
+            Events.QuitApplication();
+        }
 
-		[STAThread]
-		public static void Run() 
-		{
-			Rectangles rectangles = new Rectangles();
-			rectangles.Go();
-		}
-	}
+        private void Tick(object sender, TickEventArgs e)
+        {
+            // Draw a new random rectangle
+            screen.Fill(
+                new Rectangle(
+                rand.Next(-300, width), rand.Next(-300, height),
+                rand.Next(20, 300), rand.Next(20, 300)),
+                Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
+
+            // Flip the back buffer onto the screen.
+            screen.Update();
+        }
+
+        [STAThread]
+        public static void Run()
+        {
+            Rectangles rectangles = new Rectangles();
+            rectangles.Go();
+        }
+    }
 }

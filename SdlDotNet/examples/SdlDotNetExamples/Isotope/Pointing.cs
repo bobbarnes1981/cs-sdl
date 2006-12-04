@@ -30,35 +30,36 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Isotope
 {
-	//Animated skin who has a different image for each direction faced and part of their movement cycle
-	internal class Pointing : Skin
-	{
-		/* pointing: Animated skin who has a different image for each direction they face
-			and for each frame of animation
+    //Animated skin who has a different image for each direction faced and part of their movement cycle
+    internal class Pointing : Skin
+    {
+        /* pointing: Animated skin who has a different image for each direction they face
+            and for each frame of animation
 
-			This skin requires a list of 12 images which are divided into 4 directions of facing
-			on the x,y plane and 3 cycles in each direction. Each image direction group comprises
-			of 3 images which are animated in the sequence [0,1,0,2], to complete a full movement.
+            This skin requires a list of 12 images which are divided into 4 directions of facing
+            on the x,y plane and 3 cycles in each direction. Each image direction group comprises
+            of 3 images which are animated in the sequence [0,1,0,2], to complete a full movement.
 
-			For facing [1,0,0]: images [0,1,2]
-				facing [-1,0,0]: images [3,4,5]
-				facing [0,1,0]: images [6,7,8]
-				facing [0,-1,0]: images [9,10,11]
-		*/
-		public Pointing(ArrayList images,string name):base(images,name)
-		{
-		}
-	   
-		public override Surface GetImage(Object3d obj)
-		{
-			/*Redefined get_image to allow multidirectional animation */
-			int[] sequence={0,1,0,2};
-			int[] E={1,0,0};
-			int[] W={-1,0,0};
-			int[] N={0,1,0};
-			int[] S={0,-1,0};
-			int actorfacing=Vector.VectorToFace(((Actor)obj).Facing);
-			int actorcycle=((Actor)obj).Cycle;
+            For facing [1,0,0]: images [0,1,2]
+                facing [-1,0,0]: images [3,4,5]
+                facing [0,1,0]: images [6,7,8]
+                facing [0,-1,0]: images [9,10,11]
+        */
+        public Pointing(ArrayList images, string name)
+            : base(images, name)
+        {
+        }
+
+        public override Surface GetImage(Object3d obj)
+        {
+            /*Redefined get_image to allow multidirectional animation */
+            int[] sequence ={ 0, 1, 0, 2 };
+            int[] E ={ 1, 0, 0 };
+            int[] W ={ -1, 0, 0 };
+            int[] N ={ 0, 1, 0 };
+            int[] S ={ 0, -1, 0 };
+            int actorfacing = Vector.VectorToFace(((Actor)obj).Facing);
+            int actorcycle = ((Actor)obj).Cycle;
             if (actorfacing == 0)
             {
                 return ((Surface)images[0 + sequence[actorcycle]]);
@@ -75,21 +76,21 @@ namespace SdlDotNetExamples.Isotope
             {
                 return ((Surface)images[9 + sequence[actorcycle]]);
             }
-			//default, this should never happen but just in case
-			return((Surface)images[0]); 
-		}
-	}
+            //default, this should never happen but just in case
+            return ((Surface)images[0]);
+        }
+    }
 
-	//Possibly unused?: Fix Later if we need to
-	//extends the skin so that the object can be examined and display a picture
-	//class examinable:skin){
-	/*A skin subclass to allow a more detailed picture of an object when its being examined
+    //Possibly unused?: Fix Later if we need to
+    //extends the skin so that the object can be examined and display a picture
+    //class examinable:skin){
+    /*A skin subclass to allow a more detailed picture of an object when its being examined
 
-		  examine_image: detailed image of the object: image class
-	   */
-	//   def __init__(self,images,name,examine_image){
-	//      skin.__init__(self,images,name);
-	//      self.examine_image=examine_image;
-	//   }
-	//}
+          examine_image: detailed image of the object: image class
+       */
+    //   def __init__(self,images,name,examine_image){
+    //      skin.__init__(self,images,name);
+    //      self.examine_image=examine_image;
+    //   }
+    //}
 }

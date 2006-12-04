@@ -25,71 +25,71 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples.SpriteGuiDemos
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class FontMode : DemoMode
-	{
-		private BoundedTextSprite moving;
-		string data_directory = @"Data/";
-		string filepath = @"../../";
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FontMode : DemoMode
+    {
+        private BoundedTextSprite moving;
+        string data_directory = @"Data/";
+        string filepath = @"../../";
 
-		/// <summary>
-		/// Constructs the internal sprites needed for our demo.
-		/// </summary>
-		public FontMode()
-		{
-			if (File.Exists(data_directory + "comic.ttf"))
-			{
-				filepath = "";
-			}
-			Console.WriteLine("Hello from FontMode");
-			// Create our fonts
-			SdlDotNet.Graphics.Font f1 = 
-				new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 24);
-			SdlDotNet.Graphics.Font f2 = 
-				new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 48);
-			SdlDotNet.Graphics.Font f3 = 
-				new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 72);
-			SdlDotNet.Graphics.Font f4 = 
-				new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 15);
+        /// <summary>
+        /// Constructs the internal sprites needed for our demo.
+        /// </summary>
+        public FontMode()
+        {
+            if (File.Exists(data_directory + "comic.ttf"))
+            {
+                filepath = "";
+            }
+            Console.WriteLine("Hello from FontMode");
+            // Create our fonts
+            SdlDotNet.Graphics.Font f1 =
+                new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 24);
+            SdlDotNet.Graphics.Font f2 =
+                new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 48);
+            SdlDotNet.Graphics.Font f3 =
+                new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 72);
+            SdlDotNet.Graphics.Font f4 =
+                new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 15);
 
-			// Create our text sprites
-			Color c2 = Color.FromArgb(255, 0, 123);
-			Sprites.Add(new TextSprite("Testing...", f1, new Point(5, 5)));
-			Sprites.Add(new TextSprite("...one", f2, c2, new Point(5, 35)));
-			Sprites.Add(new TextSprite("...two", f3, c2, new Point(5, 90)));
+            // Create our text sprites
+            Color c2 = Color.FromArgb(255, 0, 123);
+            Sprites.Add(new TextSprite("Testing...", f1, new Point(5, 5)));
+            Sprites.Add(new TextSprite("...one", f2, c2, new Point(5, 35)));
+            Sprites.Add(new TextSprite("...two", f3, c2, new Point(5, 90)));
 
-			Sprites.Add(new TextSprite("A quick brown fox", f2, new Point(5, 200)));
-			Sprites.Add(new TextSprite("jumps over the lazy", f2, new Point(5, 280)));
-			Sprites.Add(new TextSprite("dog. 1234567890", f2, new Point(5, 360)));
+            Sprites.Add(new TextSprite("A quick brown fox", f2, new Point(5, 200)));
+            Sprites.Add(new TextSprite("jumps over the lazy", f2, new Point(5, 280)));
+            Sprites.Add(new TextSprite("dog. 1234567890", f2, new Point(5, 360)));
 
-			int w = SdlDemo.Size.Width - 10;
-			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
-				0.1,  0.5, new Point(5, 450)));
-			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
-				0.25, 0.0, new Point(50, 465)));
-			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
-				0.5,  1.0, new Point(100, 480)));
-			Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
-				1.0,  0.5, new Point(150, 495)));
+            int w = SpriteGuiDemosMain.Size.Width - 10;
+            Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+                0.1, 0.5, new Point(5, 450)));
+            Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+                0.25, 0.0, new Point(50, 465)));
+            Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+                0.5, 1.0, new Point(100, 480)));
+            Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+                1.0, 0.5, new Point(150, 495)));
 
-			// Add the moving one
-			moving = new BoundedTextSprite("two", f4, new Size(w, 30),
-				0.0, 0.5, new Point(10, 510));
-			Sprites.Add(moving);
-			Sprites.EnableTickEvent();
-		}
+            // Add the moving one
+            moving = new BoundedTextSprite("two", f4, new Size(w, 30),
+                0.0, 0.5, new Point(10, 510));
+            Sprites.Add(moving);
+            Sprites.EnableTickEvent();
+        }
 
-		#region Operators
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString() 
-		{ 
-			return "Font"; 
-		}
-		#endregion
-	}
+        #region Operators
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return "Font";
+        }
+        #endregion
+    }
 }

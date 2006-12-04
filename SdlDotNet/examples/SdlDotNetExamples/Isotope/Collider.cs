@@ -25,24 +25,24 @@
 using System;
 using System.Collections;
 
-namespace SdlDotNetExamples.Isotope 
+namespace SdlDotNetExamples.Isotope
 {
-	/// <summary>
-	/// A collider to store the impact, often refered to as imp in the code so perhaps
-	/// impact would be a better word. Also used for touch routines as well.
-	/// </summary>
-	public class Collider
-	{
-		/* stores the impact of a collision
+    /// <summary>
+    /// A collider to store the impact, often refered to as imp in the code so perhaps
+    /// impact would be a better word. Also used for touch routines as well.
+    /// </summary>
+    public class Collider
+    {
+        /* stores the impact of a collision
 
-			impact: indicates an impact: Boolean
-			impact_face_object1: hit face number of the first object: integer 0-5
-			impact_face_object2: hit face number of the second object: integer 0-5
-			impact_time: the integer time of the collision (now really a distance) see collision detect routine: integer
-		*/
-		public bool impact=false;
-		public int impact_face_object1=0;
-		public int impact_face_object2=0;
-		public int impact_time=0;
-	}
+            impact: indicates an impact: Boolean
+            impact_face_object1: hit face number of the first object: integer 0-5
+            impact_face_object2: hit face number of the second object: integer 0-5
+            impact_time: the integer time of the collision (now really a distance) see collision detect routine: integer
+        */
+        public bool impact = false;
+        public int impact_face_object1 = 0;
+        public int impact_face_object2 = 0;
+        public int impact_time = 0;
+    }
 }

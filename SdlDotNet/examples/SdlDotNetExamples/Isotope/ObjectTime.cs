@@ -27,31 +27,31 @@ using System.Collections;
 
 namespace SdlDotNetExamples.Isotope
 {
-	//Define the gametime global variable
-	public class ObjectTime 
-	{
-		public static int time;
-		/// <summary>
-		/// 
-		/// </summary>
-		public ObjectTime()
-		{
-			time=0;
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public static int GetTime()
-		{
-			return(time);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public static void UpdateTime()
-		{
-			time = time + 1;
-		}
-	}
+    //Define the gametime global variable
+    public class ObjectTime
+    {
+        public static int time;
+        /// <summary>
+        /// 
+        /// </summary>
+        public ObjectTime()
+        {
+            time = 0;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static int GetTime()
+        {
+            return (time);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void UpdateTime()
+        {
+            time = time + 1;
+        }
+    }
 }

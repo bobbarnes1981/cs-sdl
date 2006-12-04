@@ -26,104 +26,104 @@ using SdlDotNet.Audio;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public enum GameStatus
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		Preparing,
-		/// <summary>
-		/// 
-		/// </summary>
-		Started,
-		/// <summary>
-		/// 
-		/// </summary>
-		Running,
-		/// <summary>
-		/// 
-		/// </summary>
-		Paused,
-		/// <summary>
-		/// 
-		/// </summary>
-		Stopped
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum GameStatus
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        Preparing,
+        /// <summary>
+        /// 
+        /// </summary>
+        Started,
+        /// <summary>
+        /// 
+        /// </summary>
+        Running,
+        /// <summary>
+        /// 
+        /// </summary>
+        Paused,
+        /// <summary>
+        /// 
+        /// </summary>
+        Stopped
+    }
 
-	/// <summary>
-	/// Summary description for Game.
-	/// </summary>
-	public class Game
-	{
-		GameStatus gameStatus;
-		EventManager eventManager;
-		ArrayList players;
-		Map map;
-		string data_directory = @"Data/";
-		string filepath = @"../../";
+    /// <summary>
+    /// Summary description for Game.
+    /// </summary>
+    public class Game
+    {
+        GameStatus gameStatus;
+        EventManager eventManager;
+        ArrayList players;
+        Map map;
+        string data_directory = @"Data/";
+        string filepath = @"../../";
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="eventManager"></param>
-		public Game(EventManager eventManager)
-		{
-			this.gameStatus = GameStatus.Preparing;
-			this.eventManager = eventManager;
-			this.players = new ArrayList();
-			this.players.Add(new Player(eventManager));
-			this.map = new Map(eventManager);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventManager"></param>
+        public Game(EventManager eventManager)
+        {
+            this.gameStatus = GameStatus.Preparing;
+            this.eventManager = eventManager;
+            this.players = new ArrayList();
+            this.players.Add(new Player(eventManager));
+            this.map = new Map(eventManager);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Start() 
-		{
-			if (File.Exists(data_directory + "fard-two.ogg"))
-			{
-				filepath = "";
-			}
-			GameView gameView = new GameView(eventManager);
-			gameView.CreateView();
-			map.Build();
-			Music music = new Music(filepath + data_directory + "fard-two.ogg");
-			Music.Volume = 127;
-			try
-			{
-				music.Play(-1);
-			}
-			catch (DivideByZeroException)
-			{
-				// Linux audio problem
-			}
-			this.gameStatus = GameStatus.Started;
-			eventManager.Publish(new GameStatusEventArgs(this, GameStatus.Started));
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Start()
+        {
+            if (File.Exists(data_directory + "fard-two.ogg"))
+            {
+                filepath = "";
+            }
+            GameView gameView = new GameView(eventManager);
+            gameView.CreateView();
+            map.Build();
+            Music music = new Music(filepath + data_directory + "fard-two.ogg");
+            Music.Volume = 127;
+            try
+            {
+                music.Play(-1);
+            }
+            catch (DivideByZeroException)
+            {
+                // Linux audio problem
+            }
+            this.gameStatus = GameStatus.Started;
+            eventManager.Publish(new GameStatusEventArgs(this, GameStatus.Started));
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public GameStatus GameStatus
-		{
-			get
-			{
-				return this.gameStatus;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public GameStatus GameStatus
+        {
+            get
+            {
+                return this.gameStatus;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Map Map
-		{
-			get 
-			{
-				return this.map;
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Map Map
+        {
+            get
+            {
+                return this.map;
+            }
+        }
+    }
 }

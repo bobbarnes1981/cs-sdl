@@ -24,91 +24,91 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Triad
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class BouncingSquare : GameObject
-	{
-		static Random rnd;
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BouncingSquare : GameObject
+    {
+        static Random rnd;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public BouncingSquare()
-		{
-			if(rnd == null)
-			{
-				rnd = new Random(System.DateTime.Now.Second);
-			}
+        /// <summary>
+        /// 
+        /// </summary>
+        public BouncingSquare()
+        {
+            if (rnd == null)
+            {
+                rnd = new Random(System.DateTime.Now.Second);
+            }
 
-			this.dx = xinc;
-			this.dy = yinc;
-			this.X = rnd.Next(800);
-			this.Y = rnd.Next(600);
-			this.Size = new Size(3,3);
-			
-			this.xinc = rnd.Next(5)+1;
-			this.yinc = rnd.Next(5)+1;
-		}
+            this.dx = xinc;
+            this.dy = yinc;
+            this.X = rnd.Next(800);
+            this.Y = rnd.Next(600);
+            this.Size = new Size(3, 3);
 
-		int xinc = 5;
-		int yinc = 5;
-		int dx = 5;
-		int dy = 5;
-		/// <summary>
-		/// 
-		/// </summary>
-		public override void Update()
-		{
-			this.xinc = rnd.Next(5)+1;
-			this.yinc = rnd.Next(5)+1;
-			
-			if(this.Parent == null)
-			{
-				throw new GameException("Parent object is null.");
-			}
+            this.xinc = rnd.Next(5) + 1;
+            this.yinc = rnd.Next(5) + 1;
+        }
 
-			if(this.Parent.Width ==0)
-			{
-				throw new GameException("Parent width is zero.");
-			}
+        int xinc = 5;
+        int yinc = 5;
+        int dx = 5;
+        int dy = 5;
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void Update()
+        {
+            this.xinc = rnd.Next(5) + 1;
+            this.yinc = rnd.Next(5) + 1;
 
-			if(this.Parent.Height ==0)
-			{
-				throw new GameException("Parent height is zero.");
-			}
-	
-			if(X <=0)
-			{
-				dx = xinc;
-			}
+            if (this.Parent == null)
+            {
+                throw new GameException("Parent object is null.");
+            }
 
-			if(Y <=0)
-			{
-				dy = yinc;
-			}
+            if (this.Parent.Width == 0)
+            {
+                throw new GameException("Parent width is zero.");
+            }
 
-			if(X > Parent.Width - this.Width)
-			{
-				dx = -xinc;
-			}
+            if (this.Parent.Height == 0)
+            {
+                throw new GameException("Parent height is zero.");
+            }
 
-			if(Y > Parent.Height - this.Height)
-			{
-				dy = -yinc;
-			}	
+            if (X <= 0)
+            {
+                dx = xinc;
+            }
 
-			this.X += dx;
-			this.Y += dy;
-		}
+            if (Y <= 0)
+            {
+                dy = yinc;
+            }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		protected override void DrawGameObject(Surface surface)
-		{			
-			surface.Fill(this.Rectangle,Color.Red);
-		}
-	}
+            if (X > Parent.Width - this.Width)
+            {
+                dx = -xinc;
+            }
+
+            if (Y > Parent.Height - this.Height)
+            {
+                dy = -yinc;
+            }
+
+            this.X += dx;
+            this.Y += dy;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        protected override void DrawGameObject(Surface surface)
+        {
+            surface.Fill(this.Rectangle, Color.Red);
+        }
+    }
 }

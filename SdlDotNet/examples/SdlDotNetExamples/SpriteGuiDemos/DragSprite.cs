@@ -28,112 +28,112 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.SpriteGuiDemos
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class DragSprite : BoundedSprite
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="frames"></param>
-		/// <param name="key"></param>
-		/// <param name="coordinates"></param>
-		/// <param name="bounds"></param>
-		public DragSprite(Hashtable frames, string key, Point coordinates,
-			Rectangle bounds)
-			: base((SurfaceCollection)frames[key], bounds, coordinates)
-		{
-			this.Size = ((SurfaceCollection)frames[key]).Size;
-			this.AllowDrag = true;
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DragSprite : BoundedSprite
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="frames"></param>
+        /// <param name="key"></param>
+        /// <param name="coordinates"></param>
+        /// <param name="bounds"></param>
+        public DragSprite(Hashtable frames, string key, Point coordinates,
+            Rectangle bounds)
+            : base((SurfaceCollection)frames[key], bounds, coordinates)
+        {
+            this.Size = ((SurfaceCollection)frames[key]).Size;
+            this.AllowDrag = true;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			return String.Format(CultureInfo.CurrentCulture, "(drag {0} {1})", this.BeingDragged, base.ToString());
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return String.Format(CultureInfo.CurrentCulture, "(drag {0} {1})", this.BeingDragged, base.ToString());
+        }
 
-		#region Events
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(MouseButtonEventArgs args)
-		{
-			if (args == null)
-			{
-				throw new ArgumentNullException("args");
-			}
-			if (this.IntersectsWith(new Point(args.X, args.Y)))
-			{
-				// If we are being held down, pick up the marble
-				// Change the Z-order
-				if (args.ButtonPressed)
-				{
-					this.Z += 100;
-					this.BeingDragged = true;
-					this.CurrentAnimation = "marble2";
-				}
-				else
-				{
-					this.Z -= 100;
-					this.BeingDragged = false;
-					this.CurrentAnimation = "marble1";
-				}
-			}
-		}
+        #region Events
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public override void Update(MouseButtonEventArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+            if (this.IntersectsWith(new Point(args.X, args.Y)))
+            {
+                // If we are being held down, pick up the marble
+                // Change the Z-order
+                if (args.ButtonPressed)
+                {
+                    this.Z += 100;
+                    this.BeingDragged = true;
+                    this.CurrentAnimation = "marble2";
+                }
+                else
+                {
+                    this.Z -= 100;
+                    this.BeingDragged = false;
+                    this.CurrentAnimation = "marble1";
+                }
+            }
+        }
 
-		/// <summary>
-		/// If the sprite is picked up, this moved the sprite to follow
-		/// the mouse.
-		/// </summary>
-		public override void Update(MouseMotionEventArgs args)
-		{
-			if (args == null)
-			{
-				throw new ArgumentNullException("args");
-			}
-			if (!AllowDrag)
-			{
-				return;
-			}
+        /// <summary>
+        /// If the sprite is picked up, this moved the sprite to follow
+        /// the mouse.
+        /// </summary>
+        public override void Update(MouseMotionEventArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+            if (!AllowDrag)
+            {
+                return;
+            }
 
-			// Move the window as appropriate
-			if (this.BeingDragged)
-			{
-				this.X += args.RelativeX;
-				this.Y += args.RelativeY;
-			}
-		}
-		#endregion
+            // Move the window as appropriate
+            if (this.BeingDragged)
+            {
+                this.X += args.RelativeX;
+                this.Y += args.RelativeY;
+            }
+        }
+        #endregion
 
-		private bool disposed;
+        private bool disposed;
 
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected override void Dispose(bool disposing)
-		{
-			
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
+        {
+
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

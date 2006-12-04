@@ -77,43 +77,43 @@ using System.Drawing;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 
-namespace SdlDotNetExamples.Isotope 
+namespace SdlDotNetExamples.Isotope
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Keys
-	{
-		/*keys class
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Keys
+    {
+        /*keys class
 
-		   left,right,up,down,jump,pick_up,drop,examine,using: key codes for the player keys: key
-		*/
-		public Key left,right,up,down,jump,pick_up,drop,examine,usingk;
-	   
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="left"></param>
-		/// <param name="right"></param>
-		/// <param name="up"></param>
-		/// <param name="down"></param>
-		/// <param name="jump"></param>
-		/// <param name="pick_up"></param>
-		/// <param name="drop"></param>
-		/// <param name="examine"></param>
-		/// <param name="usingk"></param>
-		public Keys(Key left,Key right,Key up,Key down,
-			Key jump,Key pick_up,Key drop,Key examine,Key usingk)
-		{
-			this.left=left;
-			this.right=right;
-			this.up=up;
-			this.down=down;
-			this.jump=jump;
-			this.pick_up=pick_up;
-			this.drop=drop;
-			this.examine=examine;
-			this.usingk=usingk;
-		}
-	}	
+           left,right,up,down,jump,pick_up,drop,examine,using: key codes for the player keys: key
+        */
+        public Key left, right, up, down, jump, pick_up, drop, examine, usingk;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="up"></param>
+        /// <param name="down"></param>
+        /// <param name="jump"></param>
+        /// <param name="pick_up"></param>
+        /// <param name="drop"></param>
+        /// <param name="examine"></param>
+        /// <param name="usingk"></param>
+        public Keys(Key left, Key right, Key up, Key down,
+            Key jump, Key pick_up, Key drop, Key examine, Key usingk)
+        {
+            this.left = left;
+            this.right = right;
+            this.up = up;
+            this.down = down;
+            this.jump = jump;
+            this.pick_up = pick_up;
+            this.drop = drop;
+            this.examine = examine;
+            this.usingk = usingk;
+        }
+    }
 }

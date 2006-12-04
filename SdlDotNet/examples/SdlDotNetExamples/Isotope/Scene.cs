@@ -22,55 +22,55 @@ using System.Collections;
 
 namespace SdlDotNetExamples.Isotope
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Scene
-	{
-		/* A collection of objects and a scenetype to hint at a background image */
-		public int sceneType;
-		ArrayList objectGroup;
-		/// <summary>
-		/// 
-		/// </summary>
-		public ArrayList ObjectGroup
-		{
-			get
-			{
-				return objectGroup;
-			}
-			set
-			{
-				objectGroup = value;
-			}
-		}
-	   
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sceneType"></param>
-		/// <param name="objectGroup"></param>
-		public Scene(int sceneType, ArrayList objectGroup)
-		{
-			this.sceneType = sceneType;
-			this.objectGroup = objectGroup;
-		}  
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="object1"></param>
-		public void AppendObject(Object3d object1)
-		{
-			objectGroup.Add(object1);
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Scene
+    {
+        /* A collection of objects and a scenetype to hint at a background image */
+        public int sceneType;
+        ArrayList objectGroup;
+        /// <summary>
+        /// 
+        /// </summary>
+        public ArrayList ObjectGroup
+        {
+            get
+            {
+                return objectGroup;
+            }
+            set
+            {
+                objectGroup = value;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="object1"></param>
-		public void RemoveObject(Object3d object1)
-		{
-			objectGroup.Remove(object1);
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sceneType"></param>
+        /// <param name="objectGroup"></param>
+        public Scene(int sceneType, ArrayList objectGroup)
+        {
+            this.sceneType = sceneType;
+            this.objectGroup = objectGroup;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="object1"></param>
+        public void AppendObject(Object3d object1)
+        {
+            objectGroup.Add(object1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="object1"></param>
+        public void RemoveObject(Object3d object1)
+        {
+            objectGroup.Remove(object1);
+        }
+    }
 }

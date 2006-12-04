@@ -26,70 +26,70 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples.SpriteGuiDemos
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class AnimatedDemoSprite : AnimatedSprite
-	{
-		static Random rand = new Random();
+    /// <summary>
+    /// 
+    /// </summary>
+    public class AnimatedDemoSprite : AnimatedSprite
+    {
+        static Random rand = new Random();
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surfaces"></param>
-		/// <param name="position"></param>
-		public AnimatedDemoSprite(SurfaceCollection surfaces, Point position)
-			: base(surfaces, position)
-		{
-			if (surfaces == null)
-			{
-				throw new ArgumentNullException("surfaces");
-			}
-			base.Frame = rand.Next(surfaces.Count);
-			if (rand.Next(2) % 2 == 0)
-			{
-				this.AnimateForward = true;
-			}
-			else
-			{
-				this.AnimateForward = false;
-			}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surfaces"></param>
+        /// <param name="position"></param>
+        public AnimatedDemoSprite(SurfaceCollection surfaces, Point position)
+            : base(surfaces, position)
+        {
+            if (surfaces == null)
+            {
+                throw new ArgumentNullException("surfaces");
+            }
+            base.Frame = rand.Next(surfaces.Count);
+            if (rand.Next(2) % 2 == 0)
+            {
+                this.AnimateForward = true;
+            }
+            else
+            {
+                this.AnimateForward = false;
+            }
 
-			this.Animate = true;
-		}
+            this.Animate = true;
+        }
 
-		#region Operators
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			return String.Format(CultureInfo.CurrentCulture, "(animated {0})", base.ToString());
-		}
-		#endregion
+        #region Operators
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return String.Format(CultureInfo.CurrentCulture, "(animated {0})", base.ToString());
+        }
+        #endregion
 
-		private bool disposed;
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+        private bool disposed;
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

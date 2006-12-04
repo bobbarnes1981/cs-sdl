@@ -28,92 +28,92 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples.SpriteGuiDemos
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class BounceSprite : BoundedSprite
-	{
-		static Random rand = new Random();
-		private int dx;
-		private int dy;
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BounceSprite : BoundedSprite
+    {
+        static Random rand = new Random();
+        private int dx;
+        private int dy;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surfaces"></param>
-		/// <param name="rect"></param>
-		/// <param name="coordinates"></param>
-		public BounceSprite(SurfaceCollection surfaces, Rectangle rect, Point coordinates)
-			: base(surfaces, rect, coordinates)
-		{
-			this.dx = rand.Next(-10, 11);
-			this.dy = rand.Next(-10, 11);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surfaces"></param>
+        /// <param name="rect"></param>
+        /// <param name="coordinates"></param>
+        public BounceSprite(SurfaceCollection surfaces, Rectangle rect, Point coordinates)
+            : base(surfaces, rect, coordinates)
+        {
+            this.dx = rand.Next(-10, 11);
+            this.dy = rand.Next(-10, 11);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(TickEventArgs args)
-		{
-			if (args == null)
-			{
-				throw new ArgumentNullException("args");
-			}
-			this.X += (int) (args.SecondsElapsed * 10 * dx);
-			this.Y += (int) (args.SecondsElapsed * 10 * dy);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public override void Update(TickEventArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+            this.X += (int)(args.SecondsElapsed * 10 * dx);
+            this.Y += (int)(args.SecondsElapsed * 10 * dy);
 
-			// Adjust our entropy
-			dx += rand.Next(-5, 6);
-			dy += rand.Next(-5, 6);
+            // Adjust our entropy
+            dx += rand.Next(-5, 6);
+            dy += rand.Next(-5, 6);
 
-			// Call the base which also normalizes the bounds
-			base.Update(args);
+            // Call the base which also normalizes the bounds
+            base.Update(args);
 
-			// Normalize the directions
-			if (this.X == SpriteBounds.Left)
-			{
-				dx = rand.Next(1, 10);
-			}
+            // Normalize the directions
+            if (this.X == SpriteBounds.Left)
+            {
+                dx = rand.Next(1, 10);
+            }
 
-			if (this.X == SpriteBounds.Right)
-			{
-				dx = ((-1) * rand.Next(1, 10));
-			}
+            if (this.X == SpriteBounds.Right)
+            {
+                dx = ((-1) * rand.Next(1, 10));
+            }
 
-			if (this.Y == SpriteBounds.Top)
-			{
-				dy = rand.Next(1, 10);
-			}
+            if (this.Y == SpriteBounds.Top)
+            {
+                dy = rand.Next(1, 10);
+            }
 
-			if (this.Y == SpriteBounds.Bottom)
-			{
-				dy = ((-1) * rand.Next(1, 10));
-			}
-		}
+            if (this.Y == SpriteBounds.Bottom)
+            {
+                dy = ((-1) * rand.Next(1, 10));
+            }
+        }
 
-		private bool disposed;
+        private bool disposed;
 
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

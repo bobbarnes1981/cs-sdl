@@ -20,38 +20,38 @@ using System.Drawing;
 
 namespace SdlDotNetExamples
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public delegate void FireEventHandler(object sender, FireEventArgs e);
-	/// <summary>
-	/// 
-	/// </summary>
-	public delegate void DisposeRequestEventHandler(object sender, EventArgs e);
-	/// <summary>
-	/// 
-	/// </summary>
-	public class FireEventArgs : EventArgs
-	{
-		Point location;
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="location"></param>
-		public FireEventArgs(Point location)
-		{
-			this.location = location;
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public delegate void FireEventHandler(object sender, FireEventArgs e);
+    /// <summary>
+    /// 
+    /// </summary>
+    public delegate void DisposeRequestEventHandler(object sender, EventArgs e);
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FireEventArgs : EventArgs
+    {
+        Point location;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="location"></param>
+        public FireEventArgs(Point location)
+        {
+            this.location = location;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Point Location
-		{
-			get
-			{
-				return location;
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Point Location
+        {
+            get
+            {
+                return location;
+            }
+        }
+    }
 }

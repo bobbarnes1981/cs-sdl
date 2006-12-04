@@ -28,174 +28,174 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class SnowDemo : IDisposable
-	{
-		static string[] textArray = {
+    /// <summary>
+    /// 
+    /// </summary>
+    public class SnowDemo : IDisposable
+    {
+        static string[] textArray = {
 										"when the cold of winter comes",
 										"starless night", "will cover day",
 										"in the veiling of the sun", 
 										"we will walk",
 										"in bitter rain"
 									};
-		SpriteCollection snowflakes = new SpriteCollection();
-		SpriteCollection textItems = new SpriteCollection();
-		Surface screen;
-		Surface background;
-		Surface tree;
-		Surface treeStretch;
-		string data_directory = @"Data/";
-		string filepath = @"../../";
-		string fontName = "FreeSans.ttf";
+        SpriteCollection snowflakes = new SpriteCollection();
+        SpriteCollection textItems = new SpriteCollection();
+        Surface screen;
+        Surface background;
+        Surface tree;
+        Surface treeStretch;
+        string data_directory = @"Data/";
+        string filepath = @"../../";
+        string fontName = "FreeSans.ttf";
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public SnowDemo()
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public SnowDemo()
+        {
+        }
 
-		void Initialize(int numberOfSnowflakes)
-		{
-			for(int i = 0; i < numberOfSnowflakes; i++)
-			{
-				snowflakes.Add(new Snowflake(), new Rectangle());
-			}
-			SdlDotNet.Graphics.Font font = new SdlDotNet.Graphics.Font(filepath + data_directory + fontName, 24);
+        void Initialize(int numberOfSnowflakes)
+        {
+            for (int i = 0; i < numberOfSnowflakes; i++)
+            {
+                snowflakes.Add(new Snowflake(), new Rectangle());
+            }
+            SdlDotNet.Graphics.Font font = new SdlDotNet.Graphics.Font(filepath + data_directory + fontName, 24);
 
-			textItems.Add(new TextItem(textArray[0], font, 25, 0), new Rectangle());
-			for (int i = 1; i < textArray.Length; i++)
-			{
-				textItems.Add(
-					new TextItem(textArray[i], 
-					font, i*50, 
-					i * 2), new Rectangle());
-			}
-			snowflakes.EnableTickEvent();
-			textItems.EnableTickEvent();
-		}
+            textItems.Add(new TextItem(textArray[0], font, 25, 0), new Rectangle());
+            for (int i = 1; i < textArray.Length; i++)
+            {
+                textItems.Add(
+                    new TextItem(textArray[i],
+                    font, i * 50,
+                    i * 2), new Rectangle());
+            }
+            snowflakes.EnableTickEvent();
+            textItems.EnableTickEvent();
+        }
 
-		[STAThread]
-		public static void Run()
-		{
-			SnowDemo snowDemo = new SnowDemo();
-			snowDemo.Go();
-		}
+        [STAThread]
+        public static void Run()
+        {
+            SnowDemo snowDemo = new SnowDemo();
+            snowDemo.Go();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Go()
-		{
-			if (File.Exists(data_directory + "snowbackground.png"))
-			{
-				filepath = "";
-			}
-			Video.WindowIcon();
-			Video.WindowCaption = "SDL.NET - Snow Demo";
-			screen = Video.SetVideoModeWindow(640, 480, 16);
-			background = new Surface(filepath + data_directory + "snowbackground.png");
-			background.Transparent = true;
-			background.TransparentColor = Color.Magenta;
-			
-			tree = new Surface(filepath + data_directory + "Tree.bmp");
-			tree.TransparentColor = Color.Magenta;
-			tree.Transparent = true;
-			treeStretch = tree.Stretch(new Size(100,100));
-			treeStretch.TransparentColor = Color.Magenta;
-			treeStretch.Transparent = true;
-			Initialize(250);
-			Events.KeyboardDown +=
-				new KeyboardEventHandler(this.KeyboardDown);
-			Events.KeyboardDown +=
-				new KeyboardEventHandler(this.KeyboardDown);
-			Events.Tick += new TickEventHandler(this.Tick);
-			Events.Quit += new QuitEventHandler(this.Quit);
-			Events.Run();
-		}
-		
-		private void Tick(object sender, TickEventArgs args)
-		{	
-			screen.Fill(Color.FromArgb(64, 175, 239));
-			screen.Blit(snowflakes);
-			screen.Blit(background, new Point(0, 280));
-			screen.Blit(textItems);
-			screen.Blit(tree, new Point(100, 300));
-			screen.Blit(tree, new Point(130, 295));
-			screen.Blit(tree, new Point(155, 302));
-			screen.Blit(tree, new Point(230, 302));
-			screen.Blit(treeStretch, new Point(180, 290));
-			screen.Update();
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Go()
+        {
+            if (File.Exists(data_directory + "snowbackground.png"))
+            {
+                filepath = "";
+            }
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - Snow Demo";
+            screen = Video.SetVideoModeWindow(640, 480, 16);
+            background = new Surface(filepath + data_directory + "snowbackground.png");
+            background.Transparent = true;
+            background.TransparentColor = Color.Magenta;
 
-		private void KeyboardDown(object sender, KeyboardEventArgs e)
-		{
-			if (e.Key == Key.Escape ||
-				e.Key == Key.Q)
-			{
-				Events.QuitApplication();
-			}
-		}
+            tree = new Surface(filepath + data_directory + "Tree.bmp");
+            tree.TransparentColor = Color.Magenta;
+            tree.Transparent = true;
+            treeStretch = tree.Stretch(new Size(100, 100));
+            treeStretch.TransparentColor = Color.Magenta;
+            treeStretch.Transparent = true;
+            Initialize(250);
+            Events.KeyboardDown +=
+                new KeyboardEventHandler(this.KeyboardDown);
+            Events.KeyboardDown +=
+                new KeyboardEventHandler(this.KeyboardDown);
+            Events.Tick += new TickEventHandler(this.Tick);
+            Events.Quit += new QuitEventHandler(this.Quit);
+            Events.Run();
+        }
 
-		private void Quit(object sender, QuitEventArgs e)
-		{
-			Events.QuitApplication();
-		}
+        private void Tick(object sender, TickEventArgs args)
+        {
+            screen.Fill(Color.FromArgb(64, 175, 239));
+            screen.Blit(snowflakes);
+            screen.Blit(background, new Point(0, 280));
+            screen.Blit(textItems);
+            screen.Blit(tree, new Point(100, 300));
+            screen.Blit(tree, new Point(130, 295));
+            screen.Blit(tree, new Point(155, 302));
+            screen.Blit(tree, new Point(230, 302));
+            screen.Blit(treeStretch, new Point(180, 290));
+            screen.Update();
+        }
 
-		#region IDisposable Members
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            if (e.Key == Key.Escape ||
+                e.Key == Key.Q)
+            {
+                Events.QuitApplication();
+            }
+        }
 
-		private bool disposed;
+        private void Quit(object sender, QuitEventArgs e)
+        {
+            Events.QuitApplication();
+        }
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Dispose()
-		{
-			this.Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        #region IDisposable Members
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Close() 
-		{
-			Dispose();
-		}
+        private bool disposed;
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		~SnowDemo() 
-		{
-			Dispose(false);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					if (this.tree != null)
-					{
-						this.tree.Dispose();
-						this.tree = null;
-					}
-					if (this.background != null)
-					{
-						this.background.Dispose();
-						this.background = null;
-					}
-				}
-				this.disposed = true;
-			}
-		}
-		#endregion
-	}
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~SnowDemo()
+        {
+            Dispose(false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.tree != null)
+                    {
+                        this.tree.Dispose();
+                        this.tree = null;
+                    }
+                    if (this.background != null)
+                    {
+                        this.background.Dispose();
+                        this.background = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+        #endregion
+    }
 }

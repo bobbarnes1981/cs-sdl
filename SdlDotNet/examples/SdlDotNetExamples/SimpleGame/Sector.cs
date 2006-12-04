@@ -21,55 +21,55 @@ using SdlDotNet;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// Summary description for Sector.
-	/// </summary>
-	public class Sector
-	{
-		Sector[] neighbors;
-		//EventManager eventManager;
+    /// <summary>
+    /// Summary description for Sector.
+    /// </summary>
+    public class Sector
+    {
+        Sector[] neighbors;
+        //EventManager eventManager;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Sector()
-		{
-			this.neighbors = new Sector[4];
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Sector()
+        {
+            this.neighbors = new Sector[4];
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool MovePossible(Direction direction) 
-		{
-			if (this.neighbors[(int)direction] != null)
-			{
-				return true;
-			}
-			else 
-			{
-				return false;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool MovePossible(Direction direction)
+        {
+            if (this.neighbors[(int)direction] != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="direction"></param>
-		/// <returns></returns>
-		public Sector GetNeighbors(Direction direction)
-		{
-			return this.neighbors[(int)direction];
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <returns></returns>
+        public Sector GetNeighbors(Direction direction)
+        {
+            return this.neighbors[(int)direction];
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="direction"></param>
-		/// <param name="sector"></param>
-		public void SetNeighbors(Direction direction, Sector sector)
-		{
-			this.neighbors[(int)direction]  = sector;
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="sector"></param>
+        public void SetNeighbors(Direction direction, Sector sector)
+        {
+            this.neighbors[(int)direction] = sector;
+        }
+    }
 }
