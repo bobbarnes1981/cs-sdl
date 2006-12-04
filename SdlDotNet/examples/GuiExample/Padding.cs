@@ -19,101 +19,101 @@
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Padding
-	{
-		private int [] padding = new int [] { 0, 0, 0, 0 };
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Padding
+    {
+        private int[] padding = new int[] { 0, 0, 0, 0 };
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Padding()
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Padding()
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="eachItem"></param>
-		public Padding(int eachItem)
-		{
-			padding = new int [] { eachItem, eachItem, eachItem, eachItem };
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eachItem"></param>
+        public Padding(int eachItem)
+        {
+            padding = new int[] { eachItem, eachItem, eachItem, eachItem };
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sides"></param>
-		/// <param name="height"></param>
-		public Padding(int sides, int height)
-		{
-			padding = new int [] { sides, height, sides, height };
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sides"></param>
+        /// <param name="height"></param>
+        public Padding(int sides, int height)
+        {
+            padding = new int[] { sides, height, sides, height };
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="left"></param>
-		/// <param name="top"></param>
-		/// <param name="right"></param>
-		/// <param name="bottom"></param>
-		public Padding(int left, int top, int right, int bottom)
-		{
-			padding = new int [] { left, top, right, bottom };
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="top"></param>
+        /// <param name="right"></param>
+        /// <param name="bottom"></param>
+        public Padding(int left, int top, int right, int bottom)
+        {
+            padding = new int[] { left, top, right, bottom };
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Horizontal
-		{
-			get { return Left + Right; }
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Horizontal
+        {
+            get { return Left + Right; }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Vertical
-		{
-			get { return Top + Bottom; }
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Vertical
+        {
+            get { return Top + Bottom; }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Left
-		{
-			get { return padding[0]; }
-			set { padding[0] = value; }
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Left
+        {
+            get { return padding[0]; }
+            set { padding[0] = value; }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Right
-		{
-			get { return padding[2]; }
-			set { padding[2] = value; }
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Right
+        {
+            get { return padding[2]; }
+            set { padding[2] = value; }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Top
-		{
-			get { return padding[1]; }
-			set { padding[1] = value; }
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Top
+        {
+            get { return padding[1]; }
+            set { padding[1] = value; }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Bottom
-		{
-			get { return padding[3]; }
-			set { padding[3] = value; }
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Bottom
+        {
+            get { return padding[3]; }
+            set { padding[3] = value; }
+        }
+    }
 }

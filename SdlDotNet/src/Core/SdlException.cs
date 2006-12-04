@@ -23,78 +23,81 @@ using System.Runtime.Serialization;
 using Tao.Sdl;
 using SdlDotNet.Graphics;
 
-namespace SdlDotNet.Core 
+namespace SdlDotNet.Core
 {
-	/// <summary>
-	/// Represents a run-time error from the Sdl library.
-	/// </summary>
-	[Serializable()]
-	public class SdlException : Exception 
-	{
-		/// <summary>
-		/// Returns basic exception
-		/// </summary>
-		public SdlException() 
-		{
-			SdlException.Generate();
-		}
-		/// <summary>
-		/// Initializes an SdlException instance
-		/// </summary>
-		/// <param name="message">
-		/// The string representing the error message
-		/// </param>
-		public SdlException(string message): base(message)
-		{
-		}
+    /// <summary>
+    /// Represents a run-time error from the Sdl library.
+    /// </summary>
+    [Serializable()]
+    public class SdlException : Exception
+    {
+        /// <summary>
+        /// Returns basic exception
+        /// </summary>
+        public SdlException()
+        {
+            SdlException.Generate();
+        }
+        /// <summary>
+        /// Initializes an SdlException instance
+        /// </summary>
+        /// <param name="message">
+        /// The string representing the error message
+        /// </param>
+        public SdlException(string message)
+            : base(message)
+        {
+        }
 
-		/// <summary>
-		/// Returns exception
-		/// </summary>
-		/// <param name="message">Exception message</param>
-		/// <param name="exception">Exception type</param>
-		public SdlException(string message, Exception exception) : base(message, exception)
-		{
-		}
+        /// <summary>
+        /// Returns exception
+        /// </summary>
+        /// <param name="message">Exception message</param>
+        /// <param name="exception">Exception type</param>
+        public SdlException(string message, Exception exception)
+            : base(message, exception)
+        {
+        }
 
-		/// <summary>
-		/// Returns SerializationInfo
-		/// </summary>
-		/// <param name="info"></param>
-		/// <param name="context"></param>
-		protected SdlException(SerializationInfo info, StreamingContext context) : base( info, context )
-		{
-		}
+        /// <summary>
+        /// Returns SerializationInfo
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected SdlException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
 
-		/// <summary>
-		/// Generates an SdlException based on the last Sdl Error code.
-		/// </summary>
-		/// <returns>
-		/// A new SdlException object
-		/// </returns>
-		public static SdlException Generate() 
-		{
-			string msg = Sdl.SDL_GetError();
+        /// <summary>
+        /// Generates an SdlException based on the last Sdl Error code.
+        /// </summary>
+        /// <returns>
+        /// A new SdlException object
+        /// </returns>
+        public static SdlException Generate()
+        {
+            string msg = Sdl.SDL_GetError();
 
-			if (msg.IndexOf("Surface was lost") == -1)
-			{
-				return new SdlException(msg);
-			}
-			else
-			{
-				return new SurfaceLostException(msg);
-			}
-		}
+            if (msg.IndexOf("Surface was lost") == -1)
+            {
+                return new SdlException(msg);
+            }
+            else
+            {
+                return new SurfaceLostException(msg);
+            }
+        }
 
-		/// <summary>
-		/// Returns SDL error.
-		/// </summary>
-		public static string GetError
-		{
-			get
-			{
-				return Sdl.SDL_GetError();
-			}
-		}
-	}
+        /// <summary>
+        /// Returns SDL error.
+        /// </summary>
+        public static string GetError
+        {
+            get
+            {
+                return Sdl.SDL_GetError();
+            }
+        }
+    }
 }

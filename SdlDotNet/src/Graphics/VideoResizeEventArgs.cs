@@ -24,50 +24,51 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Graphics
 {
-	/// <summary>
-	/// Event args for resizing the application window.
-	/// </summary>
-	public class VideoResizeEventArgs : SdlEventArgs 
-	{
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="width">The new window width</param>
-		/// <param name="height">The new window height</param>
-		public VideoResizeEventArgs(int width, int height)
-		{
-			Sdl.SDL_Event evt = new Sdl.SDL_Event();
-			evt.resize.w = width;
-			evt.resize.h = height;
-			evt.type = (byte)EventTypes.VideoResize;
-			this.EventStruct = evt;
-		}
+    /// <summary>
+    /// Event args for resizing the application window.
+    /// </summary>
+    public class VideoResizeEventArgs : SdlEventArgs
+    {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="width">The new window width</param>
+        /// <param name="height">The new window height</param>
+        public VideoResizeEventArgs(int width, int height)
+        {
+            Sdl.SDL_Event evt = new Sdl.SDL_Event();
+            evt.resize.w = width;
+            evt.resize.h = height;
+            evt.type = (byte)EventTypes.VideoResize;
+            this.EventStruct = evt;
+        }
 
-		internal VideoResizeEventArgs(Sdl.SDL_Event evt) : base(evt)
-		{
-		}
-		
-		/// <summary>
-		/// Width of window
-		/// </summary>
-		public int Width
-		{
-			get
-			{	
-				return this.EventStruct.resize.w;
-			}
-		}
+        internal VideoResizeEventArgs(Sdl.SDL_Event evt)
+            : base(evt)
+        {
+        }
 
-		/// <summary>
-		/// Height of window
-		/// </summary>
-		public int Height
-		{
-			get
-			{
-				return this.EventStruct.resize.h;
-			}
-		}
+        /// <summary>
+        /// Width of window
+        /// </summary>
+        public int Width
+        {
+            get
+            {
+                return this.EventStruct.resize.w;
+            }
+        }
 
-	}
+        /// <summary>
+        /// Height of window
+        /// </summary>
+        public int Height
+        {
+            get
+            {
+                return this.EventStruct.resize.h;
+            }
+        }
+
+    }
 }

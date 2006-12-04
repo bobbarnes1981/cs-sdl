@@ -23,68 +23,69 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Core
 {
-	/// <summary>
-	/// Event args for user-defined events.
-	/// </summary>
-	public class UserEventArgs : SdlEventArgs 
-	{
-		/// <summary>
-		/// Default constructor
-		/// </summary>
-		public UserEventArgs()
-		{
-			Sdl.SDL_Event evt = new Sdl.SDL_Event();
-			evt.type = (byte)EventTypes.UserEvent;
-			evt.user.type =  (byte)EventTypes.UserEvent;
-			this.EventStruct = evt;
-		}
-		/// <summary>
-		/// Constructor for using a given user event
-		/// </summary>
-		/// <param name="userEvent">The user event object</param>
-		public UserEventArgs(object userEvent)
-		{
-			Sdl.SDL_Event evt = new Sdl.SDL_Event();
-			this.userEvent = userEvent;
-			evt.type = (byte)EventTypes.UserEvent;
-			evt.user.type =  (byte)EventTypes.UserEvent;
-			this.EventStruct = evt;
-		}
+    /// <summary>
+    /// Event args for user-defined events.
+    /// </summary>
+    public class UserEventArgs : SdlEventArgs
+    {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public UserEventArgs()
+        {
+            Sdl.SDL_Event evt = new Sdl.SDL_Event();
+            evt.type = (byte)EventTypes.UserEvent;
+            evt.user.type = (byte)EventTypes.UserEvent;
+            this.EventStruct = evt;
+        }
+        /// <summary>
+        /// Constructor for using a given user event
+        /// </summary>
+        /// <param name="userEvent">The user event object</param>
+        public UserEventArgs(object userEvent)
+        {
+            Sdl.SDL_Event evt = new Sdl.SDL_Event();
+            this.userEvent = userEvent;
+            evt.type = (byte)EventTypes.UserEvent;
+            evt.user.type = (byte)EventTypes.UserEvent;
+            this.EventStruct = evt;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		internal UserEventArgs(Sdl.SDL_Event evt) : base(evt)
-		{
-		}
-		
-		object userEvent;
-		/// <summary>
-		/// 
-		/// </summary>
-		public object UserEvent
-		{
-			get
-			{
-				return this.userEvent;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        internal UserEventArgs(Sdl.SDL_Event evt)
+            : base(evt)
+        {
+        }
 
-		/// <summary>
-		/// User code that uniquely defines this user event.
-		/// </summary>
-		public int UserCode
-		{
-			get
-			{
-				return this.EventStruct.user.code;
-			}
-			set
-			{
-				Sdl.SDL_Event evt = this.EventStruct;
-				evt.user.code = value;
-				this.EventStruct = evt;
-			}
-		}
-	}
+        object userEvent;
+        /// <summary>
+        /// 
+        /// </summary>
+        public object UserEvent
+        {
+            get
+            {
+                return this.userEvent;
+            }
+        }
+
+        /// <summary>
+        /// User code that uniquely defines this user event.
+        /// </summary>
+        public int UserCode
+        {
+            get
+            {
+                return this.EventStruct.user.code;
+            }
+            set
+            {
+                Sdl.SDL_Event evt = this.EventStruct;
+                evt.user.code = value;
+                this.EventStruct = evt;
+            }
+        }
+    }
 }

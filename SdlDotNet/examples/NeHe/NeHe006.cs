@@ -36,302 +36,302 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.NeHe
 {
-	/// <summary>
-	/// Lesson 06: Texture Mapping
-	/// </summary>
-	public class NeHe006 : NeHe001
-	{
-		#region Fields
+    /// <summary>
+    /// Lesson 06: Texture Mapping
+    /// </summary>
+    public class NeHe006 : NeHe001
+    {
+        #region Fields
 
-		/// <summary>
-		/// Lesson Title
-		/// </summary>
-		public new static string Title
-		{
-			get
-			{
-				return "Lesson 06: Texture Mapping";
-			}
-		}
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public new static string Title
+        {
+            get
+            {
+                return "Lesson 06: Texture Mapping";
+            }
+        }
 
-		// X Rotation ( NEW )
-		float rotationX; 
-		// Y Rotation ( NEW )
-		float rotationY;
-		// Z Rotation ( NEW )
-		float rotationZ;
-		// Storage For One Texture ( NEW )
-		int[] texture;
-		// Directory to find the data files
-		string dataDirectory = @"Data/";
-		// Path to Data directory
-		string filePath = @"../../";
-		// Name of texture
-		string[] textureName;
+        // X Rotation ( NEW )
+        float rotationX;
+        // Y Rotation ( NEW )
+        float rotationY;
+        // Z Rotation ( NEW )
+        float rotationZ;
+        // Storage For One Texture ( NEW )
+        int[] texture;
+        // Directory to find the data files
+        string dataDirectory = @"Data/";
+        // Path to Data directory
+        string filePath = @"../../";
+        // Name of texture
+        string[] textureName;
 
-		/// <summary>
-		/// Rotation on the X axis
-		/// </summary>
-		protected float RotationX
-		{
-			get
-			{
-				return this.rotationX;
-			}
-			set
-			{
-				this.rotationX = value;
-			}
-		}
+        /// <summary>
+        /// Rotation on the X axis
+        /// </summary>
+        protected float RotationX
+        {
+            get
+            {
+                return this.rotationX;
+            }
+            set
+            {
+                this.rotationX = value;
+            }
+        }
 
-		/// <summary>
-		/// rotation on the Y axis
-		/// </summary>
-		protected float RotationY
-		{
-			get
-			{
-				return this.rotationY;
-			}
-			set
-			{
-				this.rotationY = value;
-			}
-		}
+        /// <summary>
+        /// rotation on the Y axis
+        /// </summary>
+        protected float RotationY
+        {
+            get
+            {
+                return this.rotationY;
+            }
+            set
+            {
+                this.rotationY = value;
+            }
+        }
 
-		/// <summary>
-		/// rotation on the Z axis
-		/// </summary>
-		protected float RotationZ
-		{
-			get
-			{
-				return this.rotationZ;
-			}
-			set
-			{
-				this.rotationZ = value;
-			}
-		}
+        /// <summary>
+        /// rotation on the Z axis
+        /// </summary>
+        protected float RotationZ
+        {
+            get
+            {
+                return this.rotationZ;
+            }
+            set
+            {
+                this.rotationZ = value;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		protected string[] TextureName
-		{
-			get
-			{
-				return textureName;
-			}
-			set
-			{
-				textureName = value;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        protected string[] TextureName
+        {
+            get
+            {
+                return textureName;
+            }
+            set
+            {
+                textureName = value;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		protected int [] Texture
-		{
-			get
-			{
-				return texture;
-			}
-			set
-			{
-				texture = value;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        protected int[] Texture
+        {
+            get
+            {
+                return texture;
+            }
+            set
+            {
+                texture = value;
+            }
+        }
 
-		/// <summary>
-		/// Directory to find the data files
-		/// </summary>
-		protected string DataDirectory
-		{
-			get
-			{
-				return dataDirectory;
-			}
-			set
-			{
-				dataDirectory = value;
-			}
-		}
+        /// <summary>
+        /// Directory to find the data files
+        /// </summary>
+        protected string DataDirectory
+        {
+            get
+            {
+                return dataDirectory;
+            }
+            set
+            {
+                dataDirectory = value;
+            }
+        }
 
-		/// <summary>
-		/// Path to Data directory
-		/// </summary>
-		protected string FilePath
-		{
-			get
-			{
-				return filePath;
-			}
-			set
-			{
-				filePath = value;
-			}
-		}
+        /// <summary>
+        /// Path to Data directory
+        /// </summary>
+        protected string FilePath
+        {
+            get
+            {
+                return filePath;
+            }
+            set
+            {
+                filePath = value;
+            }
+        }
 
-		#endregion Fields
-		
-		#region Constructor
+        #endregion Fields
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public NeHe006()
-		{
-			textureName = new string[1];
-			textureName[0] = "NeHe006.bmp";
-			texture = new int[1];
-		}
+        #region Constructor
 
-		#endregion Constructor
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public NeHe006()
+        {
+            textureName = new string[1];
+            textureName[0] = "NeHe006.bmp";
+            texture = new int[1];
+        }
 
-		#region Lesson Setup
+        #endregion Constructor
 
-		/// <summary>
-		/// Initializes the OpenGL system
-		/// </summary>
-		protected override void InitGL()
-		{
-			// Loads bitmaps and converts to textures
-			this.LoadGLTextures();
-			// Enable Texture Mapping ( NEW )
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
-			// Enable Smooth Shading
-			Gl.glShadeModel(Gl.GL_SMOOTH);
-			// Black Background
-			Gl.glClearColor(0.0F, 0.0F, 0.0F, 0.5F);
-			// Depth Buffer Setup
-			Gl.glClearDepth(1.0F);
-			// Enables Depth Testing
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
-			// The Type Of Depth Testing To Do
-			Gl.glDepthFunc(Gl.GL_LEQUAL);
-			// Really Nice Perspective Calculations
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
-		}
+        #region Lesson Setup
 
-		#endregion Lesson Setup
+        /// <summary>
+        /// Initializes the OpenGL system
+        /// </summary>
+        protected override void InitGL()
+        {
+            // Loads bitmaps and converts to textures
+            this.LoadGLTextures();
+            // Enable Texture Mapping ( NEW )
+            Gl.glEnable(Gl.GL_TEXTURE_2D);
+            // Enable Smooth Shading
+            Gl.glShadeModel(Gl.GL_SMOOTH);
+            // Black Background
+            Gl.glClearColor(0.0F, 0.0F, 0.0F, 0.5F);
+            // Depth Buffer Setup
+            Gl.glClearDepth(1.0F);
+            // Enables Depth Testing
+            Gl.glEnable(Gl.GL_DEPTH_TEST);
+            // The Type Of Depth Testing To Do
+            Gl.glDepthFunc(Gl.GL_LEQUAL);
+            // Really Nice Perspective Calculations
+            Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+        }
 
-		#region void DrawGLScene()
+        #endregion Lesson Setup
 
-		/// <summary>
-		/// Renders the scene
-		/// </summary>
-		protected override void DrawGLScene()
-		{
-			// Clear The Screen And The Depth Buffer
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			// Reset The View
-			Gl.glLoadIdentity();   
-			Gl.glTranslatef(0, 0, -5);
+        #region void DrawGLScene()
 
-			Gl.glRotatef(this.rotationX, 1, 0, 0);
-			Gl.glRotatef(this.rotationY, 0, 1, 0);
-			Gl.glRotatef(this.rotationZ, 0, 0, 1);
+        /// <summary>
+        /// Renders the scene
+        /// </summary>
+        protected override void DrawGLScene()
+        {
+            // Clear The Screen And The Depth Buffer
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+            // Reset The View
+            Gl.glLoadIdentity();
+            Gl.glTranslatef(0, 0, -5);
 
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glRotatef(this.rotationX, 1, 0, 0);
+            Gl.glRotatef(this.rotationY, 0, 1, 0);
+            Gl.glRotatef(this.rotationZ, 0, 0, 1);
 
-			Gl.glBegin(Gl.GL_QUADS);
-			// Front Face
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, 1);
-			// Back Face
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, -1);
-			// Top Face
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, 1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
-			// Bottom Face
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, -1, -1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
-			// Right face
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, -1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, 1);
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
-			// Left Face
-			Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, -1);
-			Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
-			Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, 1);
-			Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
-			Gl.glEnd();
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
 
-			this.rotationX += 0.3f;
-			this.rotationY += 0.2f;
-			this.rotationZ += 0.4f;
-		}
+            Gl.glBegin(Gl.GL_QUADS);
+            // Front Face
+            Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, 1);
+            Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, 1);
+            Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, 1);
+            Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, 1);
+            // Back Face
+            Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, -1);
+            Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, -1);
+            Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, -1);
+            Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, -1);
+            // Top Face
+            Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
+            Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, 1, 1);
+            Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, 1, 1);
+            Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
+            // Bottom Face
+            Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, -1, -1);
+            Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, -1, -1);
+            Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
+            Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
+            // Right face
+            Gl.glTexCoord2f(1, 0); Gl.glVertex3f(1, -1, -1);
+            Gl.glTexCoord2f(1, 1); Gl.glVertex3f(1, 1, -1);
+            Gl.glTexCoord2f(0, 1); Gl.glVertex3f(1, 1, 1);
+            Gl.glTexCoord2f(0, 0); Gl.glVertex3f(1, -1, 1);
+            // Left Face
+            Gl.glTexCoord2f(0, 0); Gl.glVertex3f(-1, -1, -1);
+            Gl.glTexCoord2f(1, 0); Gl.glVertex3f(-1, -1, 1);
+            Gl.glTexCoord2f(1, 1); Gl.glVertex3f(-1, 1, 1);
+            Gl.glTexCoord2f(0, 1); Gl.glVertex3f(-1, 1, -1);
+            Gl.glEnd();
 
-		#endregion void DrawGLScene()
+            this.rotationX += 0.3f;
+            this.rotationY += 0.2f;
+            this.rotationZ += 0.4f;
+        }
 
-		#region void LoadGLTextures()
+        #endregion void DrawGLScene()
 
-		/// <summary>
-		/// Load bitmaps and convert to textures.
-		/// </summary>
-		protected virtual void LoadGLTextures() 
-		{
-			if (File.Exists(this.DataDirectory + this.TextureName[0]))
-			{
-				this.FilePath = "";
-			} 
-			// Status Indicator
-			Bitmap[] textureImage = new Bitmap[this.TextureName.Length];   
-			// Create Storage Space For The Texture
+        #region void LoadGLTextures()
 
-			for(int i=0; i<this.TextureName.Length; i++)
-			{
-				textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName[i]); 
-			}
-			
-			// Load The Bitmap
-			// Check For Errors, If Bitmap's Not Found, Quit
-			if(textureImage[0] != null) 
-			{
-				// Create The Texture
-				Gl.glGenTextures(this.Texture.Length, this.Texture); 
+        /// <summary>
+        /// Load bitmaps and convert to textures.
+        /// </summary>
+        protected virtual void LoadGLTextures()
+        {
+            if (File.Exists(this.DataDirectory + this.TextureName[0]))
+            {
+                this.FilePath = "";
+            }
+            // Status Indicator
+            Bitmap[] textureImage = new Bitmap[this.TextureName.Length];
+            // Create Storage Space For The Texture
 
-				for(int i = 0; i < textureImage.Length; i++) 
-				{
-					textureImage[i].RotateFlip(RotateFlipType.RotateNoneFlipY); 
-					// Flip The Bitmap Along The Y-Axis
-					// Rectangle For Locking The Bitmap In Memory
-					Rectangle rectangle = 
-						new Rectangle(0, 0, textureImage[i].Width, textureImage[i].Height);
-					// Get The Bitmap's Pixel Data From The Locked Bitmap
-					BitmapData bitmapData = 
-						textureImage[i].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            for (int i = 0; i < this.TextureName.Length; i++)
+            {
+                textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName[i]);
+            }
 
-					// Typical Texture Generation Using Data From The Bitmap
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i]);
-					Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
-					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-					Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
+            // Load The Bitmap
+            // Check For Errors, If Bitmap's Not Found, Quit
+            if (textureImage[0] != null)
+            {
+                // Create The Texture
+                Gl.glGenTextures(this.Texture.Length, this.Texture);
 
-					if(textureImage[i] != null) 
-					{
-						// If Texture Exists
-						textureImage[i].UnlockBits(bitmapData); 
-						// Unlock The Pixel Data From Memory
-						textureImage[i].Dispose();   
-						// Dispose The Bitmap
-					}
-				}
-			}
-		}
+                for (int i = 0; i < textureImage.Length; i++)
+                {
+                    textureImage[i].RotateFlip(RotateFlipType.RotateNoneFlipY);
+                    // Flip The Bitmap Along The Y-Axis
+                    // Rectangle For Locking The Bitmap In Memory
+                    Rectangle rectangle =
+                        new Rectangle(0, 0, textureImage[i].Width, textureImage[i].Height);
+                    // Get The Bitmap's Pixel Data From The Locked Bitmap
+                    BitmapData bitmapData =
+                        textureImage[i].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
-		#endregion void LoadGLTextures()
-	}
+                    // Typical Texture Generation Using Data From The Bitmap
+                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i]);
+                    Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
+                    Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
+                    Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
+
+                    if (textureImage[i] != null)
+                    {
+                        // If Texture Exists
+                        textureImage[i].UnlockBits(bitmapData);
+                        // Unlock The Pixel Data From Memory
+                        textureImage[i].Dispose();
+                        // Dispose The Bitmap
+                    }
+                }
+            }
+        }
+
+        #endregion void LoadGLTextures()
+    }
 }

@@ -26,147 +26,147 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// Handles a simple window element, which displays its contents in
-	/// a frame.
-	/// </summary>
-	public class GuiWindow : GuiComponent
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="rectangle"></param>
-		/// <param name="coordinateZ"></param>
-		public GuiWindow(GuiManager manager, Rectangle rectangle, int coordinateZ)
-			: base(manager, rectangle, coordinateZ)
-		{
-			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
-				new Point(0, 0));
-			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Point(0,0));
-			if (manager == null)
-			{
-				throw new ArgumentNullException("manager");
-			}
-			titleBar.Surface.Fill(manager.FrameColor);
-			base.Sprites.Add(titleSprite, titleSprite.Rectangle);
-			this.title = string.Empty;
-		}
+    /// <summary>
+    /// Handles a simple window element, which displays its contents in
+    /// a frame.
+    /// </summary>
+    public class GuiWindow : GuiComponent
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="rectangle"></param>
+        /// <param name="coordinateZ"></param>
+        public GuiWindow(GuiManager manager, Rectangle rectangle, int coordinateZ)
+            : base(manager, rectangle, coordinateZ)
+        {
+            titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
+                new Point(0, 0));
+            titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Point(0, 0));
+            if (manager == null)
+            {
+                throw new ArgumentNullException("manager");
+            }
+            titleBar.Surface.Fill(manager.FrameColor);
+            base.Sprites.Add(titleSprite, titleSprite.Rectangle);
+            this.title = string.Empty;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="rectangle"></param>
-		public GuiWindow(GuiManager manager, Rectangle rectangle)
-			: this(manager, rectangle, 0)
-		{
-			titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
-				new Point(0, 0));
-			titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Point(0,0));
-			if (manager == null)
-			{
-				throw new ArgumentNullException("manager");
-			}
-			titleBar.Surface.Fill(manager.FrameColor);
-			
-			base.Sprites.Add(titleSprite, titleSprite.Rectangle);
-			this.title = string.Empty;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="rectangle"></param>
+        public GuiWindow(GuiManager manager, Rectangle rectangle)
+            : this(manager, rectangle, 0)
+        {
+            titleSprite = new TextSprite(" ", base.GuiManager.TitleFont,
+                new Point(0, 0));
+            titleBar = new Sprite(new Surface(rectangle.Width, titleSprite.Height), new Point(0, 0));
+            if (manager == null)
+            {
+                throw new ArgumentNullException("manager");
+            }
+            titleBar.Surface.Fill(manager.FrameColor);
 
-		#region Operators
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			return String.Format(CultureInfo.CurrentCulture, "(window \"{0}\" {1})",
-				Title, base.ToString());
-		}
-		#endregion
+            base.Sprites.Add(titleSprite, titleSprite.Rectangle);
+            this.title = string.Empty;
+        }
 
-		#region Properties
-		private string title;
-		private Size titleSize = new Size();
-		private TextSprite titleSprite;
-		private Sprite titleBar;
+        #region Operators
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return String.Format(CultureInfo.CurrentCulture, "(window \"{0}\" {1})",
+                Title, base.ToString());
+        }
+        #endregion
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public string Title
-		{
-			get 
-			{ 
-				return title; 
-			}
-			set
-			{
-				// Set the title size
-				title = value;
+        #region Properties
+        private string title;
+        private Size titleSize = new Size();
+        private TextSprite titleSprite;
+        private Sprite titleBar;
 
-				// Set the bounds
-				titleSize = GuiManager.GetTextSize(base.GuiManager.TitleFont, title);
-				titleSprite.X = (base.Rectangle.Width - titleSize.Width)/2;
-				base.Sprites.Add(titleBar, new Rectangle());
-				titleSprite.Text = value;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                // Set the title size
+                title = value;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Color TitleColor
-		{
-			get
-			{
-				return titleSprite.Color;
-			}
-			set
-			{
-				titleSprite.Color = value;
-			}
-		}
+                // Set the bounds
+                titleSize = GuiManager.GetTextSize(base.GuiManager.TitleFont, title);
+                titleSprite.X = (base.Rectangle.Width - titleSize.Width) / 2;
+                base.Sprites.Add(titleBar, new Rectangle());
+                titleSprite.Text = value;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Color TitleBackgroundColor
-		{
-			get
-			{
-				return titleSprite.BackgroundColor;
-			}
-			set
-			{
-				titleSprite.BackgroundColor = value;
-			}
-		}
-		#endregion
-		private bool disposed;
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-						this.titleSprite.Dispose();
-						this.titleBar.Dispose();
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color TitleColor
+        {
+            get
+            {
+                return titleSprite.Color;
+            }
+            set
+            {
+                titleSprite.Color = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Color TitleBackgroundColor
+        {
+            get
+            {
+                return titleSprite.BackgroundColor;
+            }
+            set
+            {
+                titleSprite.BackgroundColor = value;
+            }
+        }
+        #endregion
+        private bool disposed;
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                        this.titleSprite.Dispose();
+                        this.titleBar.Dispose();
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

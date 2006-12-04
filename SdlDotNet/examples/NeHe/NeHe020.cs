@@ -35,228 +35,228 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.NeHe
 {
-	/// <summary>
-	/// Lesson 20: Masking
-	/// </summary>
-	public class NeHe020 : NeHe019
-	{
-		#region Fields
+    /// <summary>
+    /// Lesson 20: Masking
+    /// </summary>
+    public class NeHe020 : NeHe019
+    {
+        #region Fields
 
-		/// <summary>
-		/// Lesson Title
-		/// </summary>
-		public new static string Title
-		{
-			get
-			{
-				return "Lesson 20: Masking";
-			}
-		}
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public new static string Title
+        {
+            get
+            {
+                return "Lesson 20: Masking";
+            }
+        }
 
-		// Which Scene To Draw
-		bool scene;				
-		bool masking = true;
-		// Rolling Texture
-		float roll;				
+        // Which Scene To Draw
+        bool scene;
+        bool masking = true;
+        // Rolling Texture
+        float roll;
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructor
+        #region Constructor
 
-		/// <summary>
-		/// Basic constructor
-		/// </summary>
-		public NeHe020()
-		{
-			this.Texture = new int[5];
-			this.TextureName = new string[5];
-			this.TextureName[0] = "NeHe020.Logo.bmp";
-			this.TextureName[1] = "NeHe020.Mask1.bmp";
-			this.TextureName[2] = "NeHe020.Image1.bmp";
-			this.TextureName[3] = "NeHe020.Mask2.bmp";
-			this.TextureName[4] = "NeHe020.Image2.bmp";
-		}
-		
-		#endregion Constructor
+        /// <summary>
+        /// Basic constructor
+        /// </summary>
+        public NeHe020()
+        {
+            this.Texture = new int[5];
+            this.TextureName = new string[5];
+            this.TextureName[0] = "NeHe020.Logo.bmp";
+            this.TextureName[1] = "NeHe020.Mask1.bmp";
+            this.TextureName[2] = "NeHe020.Image1.bmp";
+            this.TextureName[3] = "NeHe020.Mask2.bmp";
+            this.TextureName[4] = "NeHe020.Image2.bmp";
+        }
 
-		#region Lesson Setup
+        #endregion Constructor
 
-		/// <summary>
-		/// Initialize OpenGL
-		/// </summary>
-		protected override void InitGL()
-		{
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-			Keyboard.EnableKeyRepeat(0,0);
-			LoadGLTextures();
+        #region Lesson Setup
 
-			// Enable Texture Mapping
-			Gl.glEnable(Gl.GL_TEXTURE_2D);
-			// Enable Smooth Shading
-			Gl.glShadeModel(Gl.GL_SMOOTH);
-			// Black Background
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-			// Depth Buffer Setup
-			Gl.glClearDepth(1.0f);		
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
-		}
+        /// <summary>
+        /// Initialize OpenGL
+        /// </summary>
+        protected override void InitGL()
+        {
+            Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+            Keyboard.EnableKeyRepeat(0, 0);
+            LoadGLTextures();
 
-		
-		#endregion Lesson Setup
+            // Enable Texture Mapping
+            Gl.glEnable(Gl.GL_TEXTURE_2D);
+            // Enable Smooth Shading
+            Gl.glShadeModel(Gl.GL_SMOOTH);
+            // Black Background
+            Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            // Depth Buffer Setup
+            Gl.glClearDepth(1.0f);
+            Gl.glEnable(Gl.GL_DEPTH_TEST);
+        }
 
-		#region Render
 
-		/// <summary>
-		/// Renders the scene
-		/// </summary>
-		protected override void DrawGLScene()
-		{
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			Gl.glLoadIdentity();
-			
-			// Move Into The Screen 5 Units
-			Gl.glTranslatef(0.0f, 0.0f, -2.0f);
+        #endregion Lesson Setup
 
-			// Select Our Logo Texture
-			Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);			
-			// Start Drawing A Textured Quad
-			Gl.glBegin(Gl.GL_QUADS);
-			// Bottom Left
-			Gl.glTexCoord2f(0.0f, -this.roll+0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
-			// Bottom Right
-			Gl.glTexCoord2f(3.0f, -this.roll+0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
-			// Top Right
-			Gl.glTexCoord2f(3.0f, -this.roll+3.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
-			// Top Left
-			Gl.glTexCoord2f(0.0f, -this.roll+3.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
-			// Done Drawing The Quad
-			Gl.glEnd();		
+        #region Render
 
-			// Enable Blending
-			Gl.glEnable(Gl.GL_BLEND);
-			// Disable Depth Testing
-			Gl.glDisable(Gl.GL_DEPTH_TEST);	
+        /// <summary>
+        /// Renders the scene
+        /// </summary>
+        protected override void DrawGLScene()
+        {
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+            Gl.glLoadIdentity();
 
-			// Is Masking Enabled?
-			if (this.masking)	
-			{
-				// Blend Screen Color With Zero (Black)
-				Gl.glBlendFunc(Gl.GL_DST_COLOR, Gl.GL_ZERO);
-			}
-			
-			// Are We Drawing The Second Scene?
-			if (this.scene)		
-			{
-				// Translate Into The Screen One Unit
-				Gl.glTranslatef(0.0f, 0.0f, -1.0f);					
-				// Rotate On The Z Axis 360 Degrees.
-				Gl.glRotatef(this.roll*360, 0.0f, 0.0f, 1.0f);				
-				// Is Masking On?
-				if (this.masking)
-				{
-					// Select The Second Mask Texture
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[3]);	
-					// Start Drawing A Textured Quad
-					Gl.glBegin(Gl.GL_QUADS);	
-					// Bottom Left
-					Gl.glTexCoord2f(0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
-					// Bottom Right
-					Gl.glTexCoord2f(1.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
-					// Top Right
-					Gl.glTexCoord2f(1.0f, 1.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
-					// Top Left
-					Gl.glTexCoord2f(0.0f, 1.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
-					// Done Drawing The Quad
-					Gl.glEnd();
-				}
+            // Move Into The Screen 5 Units
+            Gl.glTranslatef(0.0f, 0.0f, -2.0f);
 
-				// Copy Image 2 Color To The Screen
-				Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);					
-				// Select The Second Image Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[4]);		
-				// Start Drawing A Textured Quad
-				Gl.glBegin(Gl.GL_QUADS);		
-				// Bottom Left
-				Gl.glTexCoord2f(0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
-				// Bottom Right
-				Gl.glTexCoord2f(1.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
-				// Top Right
-				Gl.glTexCoord2f(1.0f, 1.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
-				// Top Left
-				Gl.glTexCoord2f(0.0f, 1.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
-				// Done Drawing The Quad
-				Gl.glEnd();	
-			}
-			else			
-			{
-				// Is Masking On?
-				if (this.masking)
-				{
-					// Select The First Mask Texture
-					Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);	
-					// Start Drawing A Textured Quad
-					Gl.glBegin(Gl.GL_QUADS);	
-					// Bottom Left
-					Gl.glTexCoord2f(this.roll+0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
-					// Bottom Right
-					Gl.glTexCoord2f(this.roll+4.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
-					// Top Right
-					Gl.glTexCoord2f(this.roll+4.0f, 4.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
-					// Top Left
-					Gl.glTexCoord2f(this.roll+0.0f, 4.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
-					// Done Drawing The Quad
-					Gl.glEnd();
-				}
+            // Select Our Logo Texture
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            // Start Drawing A Textured Quad
+            Gl.glBegin(Gl.GL_QUADS);
+            // Bottom Left
+            Gl.glTexCoord2f(0.0f, -this.roll + 0.0f); Gl.glVertex3f(-1.1f, -1.1f, 0.0f);
+            // Bottom Right
+            Gl.glTexCoord2f(3.0f, -this.roll + 0.0f); Gl.glVertex3f(1.1f, -1.1f, 0.0f);
+            // Top Right
+            Gl.glTexCoord2f(3.0f, -this.roll + 3.0f); Gl.glVertex3f(1.1f, 1.1f, 0.0f);
+            // Top Left
+            Gl.glTexCoord2f(0.0f, -this.roll + 3.0f); Gl.glVertex3f(-1.1f, 1.1f, 0.0f);
+            // Done Drawing The Quad
+            Gl.glEnd();
 
-				// Copy Image 1 Color To The Screen
-				Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);					
-				// Select The First Image Texture
-				Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]);		
-				// Start Drawing A Textured Quad
-				Gl.glBegin(Gl.GL_QUADS);		
-				// Bottom Left
-				Gl.glTexCoord2f(roll+0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f,  0.0f);	
-				// Bottom Right
-				Gl.glTexCoord2f(roll+4.0f, 0.0f); Gl.glVertex3f( 1.1f, -1.1f,  0.0f);	
-				// Top Right
-				Gl.glTexCoord2f(roll+4.0f, 4.0f); Gl.glVertex3f( 1.1f,  1.1f,  0.0f);	
-				// Top Left
-				Gl.glTexCoord2f(roll+0.0f, 4.0f); Gl.glVertex3f(-1.1f,  1.1f,  0.0f);	
-				// Done Drawing The Quad
-				Gl.glEnd();	
-			}
+            // Enable Blending
+            Gl.glEnable(Gl.GL_BLEND);
+            // Disable Depth Testing
+            Gl.glDisable(Gl.GL_DEPTH_TEST);
 
-			// Enable Depth Testing
-			Gl.glEnable(Gl.GL_DEPTH_TEST);	
-			// Disable Blending
-			Gl.glDisable(Gl.GL_BLEND);		
+            // Is Masking Enabled?
+            if (this.masking)
+            {
+                // Blend Screen Color With Zero (Black)
+                Gl.glBlendFunc(Gl.GL_DST_COLOR, Gl.GL_ZERO);
+            }
 
-			// Increase Our Texture Roll Variable
-			this.roll += 0.002f;	
-			// Is Roll Greater Than One
-			if (this.roll > 1.0f)
-			{
-				this.roll -= 1.0f;
-			}
-		}
-				
-		#endregion Render
+            // Are We Drawing The Second Scene?
+            if (this.scene)
+            {
+                // Translate Into The Screen One Unit
+                Gl.glTranslatef(0.0f, 0.0f, -1.0f);
+                // Rotate On The Z Axis 360 Degrees.
+                Gl.glRotatef(this.roll * 360, 0.0f, 0.0f, 1.0f);
+                // Is Masking On?
+                if (this.masking)
+                {
+                    // Select The Second Mask Texture
+                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[3]);
+                    // Start Drawing A Textured Quad
+                    Gl.glBegin(Gl.GL_QUADS);
+                    // Bottom Left
+                    Gl.glTexCoord2f(0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f, 0.0f);
+                    // Bottom Right
+                    Gl.glTexCoord2f(1.0f, 0.0f); Gl.glVertex3f(1.1f, -1.1f, 0.0f);
+                    // Top Right
+                    Gl.glTexCoord2f(1.0f, 1.0f); Gl.glVertex3f(1.1f, 1.1f, 0.0f);
+                    // Top Left
+                    Gl.glTexCoord2f(0.0f, 1.0f); Gl.glVertex3f(-1.1f, 1.1f, 0.0f);
+                    // Done Drawing The Quad
+                    Gl.glEnd();
+                }
 
-		#region Event Handlers
+                // Copy Image 2 Color To The Screen
+                Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);
+                // Select The Second Image Texture
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[4]);
+                // Start Drawing A Textured Quad
+                Gl.glBegin(Gl.GL_QUADS);
+                // Bottom Left
+                Gl.glTexCoord2f(0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f, 0.0f);
+                // Bottom Right
+                Gl.glTexCoord2f(1.0f, 0.0f); Gl.glVertex3f(1.1f, -1.1f, 0.0f);
+                // Top Right
+                Gl.glTexCoord2f(1.0f, 1.0f); Gl.glVertex3f(1.1f, 1.1f, 0.0f);
+                // Top Left
+                Gl.glTexCoord2f(0.0f, 1.0f); Gl.glVertex3f(-1.1f, 1.1f, 0.0f);
+                // Done Drawing The Quad
+                Gl.glEnd();
+            }
+            else
+            {
+                // Is Masking On?
+                if (this.masking)
+                {
+                    // Select The First Mask Texture
+                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);
+                    // Start Drawing A Textured Quad
+                    Gl.glBegin(Gl.GL_QUADS);
+                    // Bottom Left
+                    Gl.glTexCoord2f(this.roll + 0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f, 0.0f);
+                    // Bottom Right
+                    Gl.glTexCoord2f(this.roll + 4.0f, 0.0f); Gl.glVertex3f(1.1f, -1.1f, 0.0f);
+                    // Top Right
+                    Gl.glTexCoord2f(this.roll + 4.0f, 4.0f); Gl.glVertex3f(1.1f, 1.1f, 0.0f);
+                    // Top Left
+                    Gl.glTexCoord2f(this.roll + 0.0f, 4.0f); Gl.glVertex3f(-1.1f, 1.1f, 0.0f);
+                    // Done Drawing The Quad
+                    Gl.glEnd();
+                }
 
-		private void KeyDown(object sender, KeyboardEventArgs e)
-		{
-			switch(e.Key)
-			{
-				case Key.Space:
-					this.scene = !this.scene;
-					break;
-				case Key.M:
-					this.masking = !this.masking;
-					break;
-			}
-		}
+                // Copy Image 1 Color To The Screen
+                Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);
+                // Select The First Image Texture
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]);
+                // Start Drawing A Textured Quad
+                Gl.glBegin(Gl.GL_QUADS);
+                // Bottom Left
+                Gl.glTexCoord2f(roll + 0.0f, 0.0f); Gl.glVertex3f(-1.1f, -1.1f, 0.0f);
+                // Bottom Right
+                Gl.glTexCoord2f(roll + 4.0f, 0.0f); Gl.glVertex3f(1.1f, -1.1f, 0.0f);
+                // Top Right
+                Gl.glTexCoord2f(roll + 4.0f, 4.0f); Gl.glVertex3f(1.1f, 1.1f, 0.0f);
+                // Top Left
+                Gl.glTexCoord2f(roll + 0.0f, 4.0f); Gl.glVertex3f(-1.1f, 1.1f, 0.0f);
+                // Done Drawing The Quad
+                Gl.glEnd();
+            }
 
-		#endregion Event Handlers
-	}
+            // Enable Depth Testing
+            Gl.glEnable(Gl.GL_DEPTH_TEST);
+            // Disable Blending
+            Gl.glDisable(Gl.GL_BLEND);
+
+            // Increase Our Texture Roll Variable
+            this.roll += 0.002f;
+            // Is Roll Greater Than One
+            if (this.roll > 1.0f)
+            {
+                this.roll -= 1.0f;
+            }
+        }
+
+        #endregion Render
+
+        #region Event Handlers
+
+        private void KeyDown(object sender, KeyboardEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Space:
+                    this.scene = !this.scene;
+                    break;
+                case Key.M:
+                    this.masking = !this.masking;
+                    break;
+            }
+        }
+
+        #endregion Event Handlers
+    }
 }

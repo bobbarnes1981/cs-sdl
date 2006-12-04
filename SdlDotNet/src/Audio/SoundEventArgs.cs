@@ -24,53 +24,53 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Audio
 {
-	/// <summary>
-	/// SoundEvent Arguments.
-	/// </summary>
-	public class SoundEventArgs : UserEventArgs 
-	{
-		/// <summary>
-		/// SoundEventsArgs describe the action to take on a Sound
-		/// </summary>
-		/// <param name="action">Stop or Fade out</param>
-		/// <param name="fadeoutTime">time to faseout</param>
-		public SoundEventArgs(SoundAction action, int fadeoutTime)
-		{
-			this.action = action;
-			this.fadeoutTime = fadeoutTime;
-		}
+    /// <summary>
+    /// SoundEvent Arguments.
+    /// </summary>
+    public class SoundEventArgs : UserEventArgs
+    {
+        /// <summary>
+        /// SoundEventsArgs describe the action to take on a Sound
+        /// </summary>
+        /// <param name="action">Stop or Fade out</param>
+        /// <param name="fadeoutTime">time to faseout</param>
+        public SoundEventArgs(SoundAction action, int fadeoutTime)
+        {
+            this.action = action;
+            this.fadeoutTime = fadeoutTime;
+        }
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="action"></param>
-		public SoundEventArgs(SoundAction action)
-		{
-			this.action = action;
-		}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="action"></param>
+        public SoundEventArgs(SoundAction action)
+        {
+            this.action = action;
+        }
 
-		private int fadeoutTime;
-		private SoundAction action;
-		/// <summary>
-		/// Get/Set Fadeout Time
-		/// </summary>
-		public int FadeoutTime
-		{
-			get
-			{
-				return this.fadeoutTime;
-			}
-		}
+        private int fadeoutTime;
+        private SoundAction action;
+        /// <summary>
+        /// Get/Set Fadeout Time
+        /// </summary>
+        public int FadeoutTime
+        {
+            get
+            {
+                return this.fadeoutTime;
+            }
+        }
 
-		/// <summary>
-		/// Get/Set Action to take on Sound
-		/// </summary>
-		public SoundAction Action
-		{
-			get
-			{
-				return this.action;
-			}
-		}
-	}
+        /// <summary>
+        /// Get/Set Action to take on Sound
+        /// </summary>
+        public SoundAction Action
+        {
+            get
+            {
+                return this.action;
+            }
+        }
+    }
 }

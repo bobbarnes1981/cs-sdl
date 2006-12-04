@@ -24,70 +24,70 @@ using SdlDotNet.Particles.Particle;
 
 namespace SdlDotNet.Particles.Manipulators
 {
-	/// <summary>
-	/// A particle manipulator that slows down particles by a given amount of speed.
-	/// </summary>
-	/// <example>
-	/// The following example creates a particle friction manipulator that slows particles down by 0.5f every update.
-	/// <code>
-	/// ParticleFriction friction = new ParticleFriction(0.5f);
-	/// particleSystem.Add(friction);
-	/// </code>
-	/// </example>
-	public class ParticleFriction : IParticleManipulator
-	{
-		/// <summary>
-		/// Create a ParticleFriction object with the default amount of friction.
-		/// </summary>
-		public ParticleFriction()
-		{
-		}
-		/// <summary>
-		/// Create a ParticleFriction object.
-		/// </summary>
-		/// <param name="friction">The amount of friction to apply to the particles.</param>
-		public ParticleFriction(float friction)
-		{
-			m_Friction = friction;
-		}
+    /// <summary>
+    /// A particle manipulator that slows down particles by a given amount of speed.
+    /// </summary>
+    /// <example>
+    /// The following example creates a particle friction manipulator that slows particles down by 0.5f every update.
+    /// <code>
+    /// ParticleFriction friction = new ParticleFriction(0.5f);
+    /// particleSystem.Add(friction);
+    /// </code>
+    /// </example>
+    public class ParticleFriction : IParticleManipulator
+    {
+        /// <summary>
+        /// Create a ParticleFriction object with the default amount of friction.
+        /// </summary>
+        public ParticleFriction()
+        {
+        }
+        /// <summary>
+        /// Create a ParticleFriction object.
+        /// </summary>
+        /// <param name="friction">The amount of friction to apply to the particles.</param>
+        public ParticleFriction(float friction)
+        {
+            m_Friction = friction;
+        }
 
-		private float m_Friction = 0.1f;
-		/// <summary>
-		/// Gets and sets the amount of friction applied to the particles.
-		/// </summary>
-		public float Friction
-		{
-			get
-			{
-				return m_Friction;
-			}
-			set
-			{
-				m_Friction = value;
-			}
-		}
+        private float m_Friction = 0.1f;
+        /// <summary>
+        /// Gets and sets the amount of friction applied to the particles.
+        /// </summary>
+        public float Friction
+        {
+            get
+            {
+                return m_Friction;
+            }
+            set
+            {
+                m_Friction = value;
+            }
+        }
 
-		#region IParticleManipulator Members
+        #region IParticleManipulator Members
 
-		/// <summary>
-		/// Applies the friction to the given set of particles.
-		/// </summary>
-		/// <param name="particles">The particles to apply the friction to.</param>
-		public void Manipulate(ParticleCollection particles)
-		{
-			if (particles == null)
-			{
-				throw new ArgumentNullException("particles");
-			}
-			foreach(BaseParticle p in particles)
-			{
+        /// <summary>
+        /// Applies the friction to the given set of particles.
+        /// </summary>
+        /// <param name="particles">The particles to apply the friction to.</param>
+        public void Manipulate(ParticleCollection particles)
+        {
+            if (particles == null)
+            {
+                throw new ArgumentNullException("particles");
+            }
+            foreach (BaseParticle p in particles)
+            {
                 Vector vel = p.Velocity;
                 vel.Length -= m_Friction;
                 p.Velocity = vel;
-				//p.Velocity.Length -= m_Friction;
-			}
-		}
+                //p.Velocity.Length -= m_Friction;
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -23,49 +23,52 @@ using System.Runtime.Serialization;
 using SdlDotNet;
 using SdlDotNet.Core;
 
-namespace SdlDotNet.Graphics 
+namespace SdlDotNet.Graphics
 {
-	/// <summary>
-	/// Sdl Font Exception Class
-	/// </summary>
-	[Serializable()]
-	public class FontException : SdlException 
-	{
-		/// <summary>
-		/// Font Exception
-		/// </summary>
-		public FontException() 
-		{
-			FontException.Generate();
-		}
-		/// <summary>
-		/// Initializes an TtfException instance
-		/// </summary>
-		/// <param name="message">
-		/// The string representing the error message
-		/// </param>
-		public FontException(string message): base(message)
-		{
-		}
+    /// <summary>
+    /// Sdl Font Exception Class
+    /// </summary>
+    [Serializable()]
+    public class FontException : SdlException
+    {
+        /// <summary>
+        /// Font Exception
+        /// </summary>
+        public FontException()
+        {
+            FontException.Generate();
+        }
+        /// <summary>
+        /// Initializes an TtfException instance
+        /// </summary>
+        /// <param name="message">
+        /// The string representing the error message
+        /// </param>
+        public FontException(string message)
+            : base(message)
+        {
+        }
 
-		/// <summary>
-		/// Font Exception
-		/// </summary>
-		/// <param name="message">
-		/// The string representing the error message
-		/// </param>
-		/// <param name="exception"></param>
-		public FontException(string message, Exception exception) : base(message, exception)
-		{
-		}
+        /// <summary>
+        /// Font Exception
+        /// </summary>
+        /// <param name="message">
+        /// The string representing the error message
+        /// </param>
+        /// <param name="exception"></param>
+        public FontException(string message, Exception exception)
+            : base(message, exception)
+        {
+        }
 
-		/// <summary>
-		/// Font Exception
-		/// </summary>
-		/// <param name="info"></param>
-		/// <param name="context"></param>
-		protected FontException(SerializationInfo info, StreamingContext context) : base( info, context )
-		{
-		}
-	}
+        /// <summary>
+        /// Font Exception
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected FontException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
 }

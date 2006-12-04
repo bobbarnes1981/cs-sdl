@@ -25,187 +25,187 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// This class handles one or more sprites packed into a line. The
-	/// sprites may be added to the beginning or the end of the line, as
-	/// the program desires.
-	/// </summary>
-	public class Packer : GuiComponent
-	{
-		#region Constructors
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		public Packer(GuiManager manager)
-			: base(manager)
-		{
-		}
+    /// <summary>
+    /// This class handles one or more sprites packed into a line. The
+    /// sprites may be added to the beginning or the end of the line, as
+    /// the program desires.
+    /// </summary>
+    public class Packer : GuiComponent
+    {
+        #region Constructors
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        public Packer(GuiManager manager)
+            : base(manager)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="point"></param>
-		public Packer(GuiManager manager, Point point)
-			: base(manager, point)
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="point"></param>
+        public Packer(GuiManager manager, Point point)
+            : base(manager, point)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="point"></param>
-		/// <param name="height"></param>
-		public Packer(GuiManager manager, Point point, int height)
-			: base(manager, point, height)
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="point"></param>
+        /// <param name="height"></param>
+        public Packer(GuiManager manager, Point point, int height)
+            : base(manager, point, height)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="rectangle"></param>
-		public Packer(GuiManager manager, Rectangle rectangle)
-			: base(manager, rectangle)
-		{
-		}
-//
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="manager"></param>
-//		/// <param name="p"></param>
-//		public Packer(GuiManager manager, Point p)
-//			: base(manager, p)
-//		{
-//		}
-		#endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="rectangle"></param>
+        public Packer(GuiManager manager, Rectangle rectangle)
+            : base(manager, rectangle)
+        {
+        }
+        //
+        //		/// <summary>
+        //		/// 
+        //		/// </summary>
+        //		/// <param name="manager"></param>
+        //		/// <param name="p"></param>
+        //		public Packer(GuiManager manager, Point p)
+        //			: base(manager, p)
+        //		{
+        //		}
+        #endregion
 
-		#region Sprites
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="point"></param>
-		/// <param name="index"></param>
-		/// <returns></returns>
-		protected Sprite SelectSprite(Point point, ref int index)
-		{
-			index = 0;
+        #region Sprites
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        protected Sprite SelectSprite(Point point, ref int index)
+        {
+            index = 0;
 
-			foreach (Sprite s in Sprites.Keys)
-			{
-				if (s.IntersectsWith(point))
-				{
-					return s;
-				}
+            foreach (Sprite s in Sprites.Keys)
+            {
+                if (s.IntersectsWith(point))
+                {
+                    return s;
+                }
 
-				index++;
-			}
+                index++;
+            }
 
-			return null;
-		}
-		#endregion
+            return null;
+        }
+        #endregion
 
-		#region Properties
-		private SpriteCollection head = new SpriteCollection();
-		private SpriteCollection tail = new SpriteCollection();
+        #region Properties
+        private SpriteCollection head = new SpriteCollection();
+        private SpriteCollection tail = new SpriteCollection();
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sprite"></param>
-		protected void AddHead(Sprite sprite)
-		{
-			head.Add(sprite, sprite.Rectangle);
-			this.Sprites.Add(sprite,sprite.Rectangle);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sprite"></param>
+        protected void AddHead(Sprite sprite)
+        {
+            head.Add(sprite, sprite.Rectangle);
+            this.Sprites.Add(sprite, sprite.Rectangle);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sprite"></param>
-		protected void AddTail(Sprite sprite)
-		{
-			tail.Add(sprite, sprite.Rectangle);
-			this.Sprites.Add(sprite, sprite.Rectangle);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sprite"></param>
+        protected void AddTail(Sprite sprite)
+        {
+            tail.Add(sprite, sprite.Rectangle);
+            this.Sprites.Add(sprite, sprite.Rectangle);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public SpriteCollection HeadSprites
-		{
-			get 
-			{ 
-				return head; 
-			}
-		}
-    
-		/// <summary>
-		/// 
-		/// </summary>
-		public SpriteCollection TailSprites
-		{
-			get 
-			{ 
-				return tail; 
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public SpriteCollection HeadSprites
+        {
+            get
+            {
+                return head;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual Padding MarginPadding
-		{
-			get 
-			{ 
-				return new Padding(0); 
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public SpriteCollection TailSprites
+        {
+            get
+            {
+                return tail;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual Padding InnerPadding
-		{
-			get 
-			{ 
-				return new Padding(0); 
-			}
-		}
-		#endregion
-		private bool disposed;
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-						foreach (Sprite s in this.head.Keys)
-						{
-							s.Dispose();
-						}
-						foreach (Sprite s in this.tail.Keys)
-						{
-							s.Dispose();
-						}
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual Padding MarginPadding
+        {
+            get
+            {
+                return new Padding(0);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual Padding InnerPadding
+        {
+            get
+            {
+                return new Padding(0);
+            }
+        }
+        #endregion
+        private bool disposed;
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                        foreach (Sprite s in this.head.Keys)
+                        {
+                            s.Dispose();
+                        }
+                        foreach (Sprite s in this.tail.Keys)
+                        {
+                            s.Dispose();
+                        }
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

@@ -1096,176 +1096,176 @@ namespace SdlDotNet.Input
         /// </summary>
         Application = Sdl.SDL_APPACTIVE
     }
-	/// <summary>
-	/// Keyboard class
-	/// </summary>
-	public sealed class Keyboard
-	{
-		Keyboard()
-		{}
+    /// <summary>
+    /// Keyboard class
+    /// </summary>
+    public sealed class Keyboard
+    {
+        Keyboard()
+        { }
 
-		static Keyboard()
-		{
-			Video.Initialize();
-		}
+        static Keyboard()
+        {
+            Video.Initialize();
+        }
 
-		/// <summary>
-		/// Enable keyboard autorepeat
-		/// </summary>
-		/// <param name="delay">
-		/// Delay in system ticks before repeat starts. 
-		/// Set to 0 to disable key repeat.
-		/// </param>
-		/// <param name="rate">
-		/// Rate in system ticks at which key repeats.
-		/// </param>
-		/// <remarks>This method will initialize the Video subsystem as well.</remarks>
-		public static void EnableKeyRepeat(int delay, int rate) 
-		{
-			if (Sdl.SDL_EnableKeyRepeat(delay, rate) == (int) SdlFlag.Error)
-			{
-				throw SdlException.Generate();
-			}
-		}
+        /// <summary>
+        /// Enable keyboard autorepeat
+        /// </summary>
+        /// <param name="delay">
+        /// Delay in system ticks before repeat starts. 
+        /// Set to 0 to disable key repeat.
+        /// </param>
+        /// <param name="rate">
+        /// Rate in system ticks at which key repeats.
+        /// </param>
+        /// <remarks>This method will initialize the Video subsystem as well.</remarks>
+        public static void EnableKeyRepeat(int delay, int rate)
+        {
+            if (Sdl.SDL_EnableKeyRepeat(delay, rate) == (int)SdlFlag.Error)
+            {
+                throw SdlException.Generate();
+            }
+        }
 
-		/// <summary>
-		/// Determines if Key Repeating is turned on.
-		/// </summary>
-		public static bool KeyRepeat
-		{
-			set
-			{
-				if (value)
-				{
-					EnableKeyRepeat(Sdl.SDL_DEFAULT_REPEAT_DELAY, Sdl.SDL_DEFAULT_REPEAT_INTERVAL);
-				}
-				else
-				{
-					Sdl.SDL_EnableKeyRepeat(0, Sdl.SDL_DEFAULT_REPEAT_INTERVAL);
-				}
-			}
-			get
-			{
-				int delay;
-				int rate;
-				Sdl.SDL_GetKeyRepeat(out rate, out delay);
-				if (delay != 0)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-		}
+        /// <summary>
+        /// Determines if Key Repeating is turned on.
+        /// </summary>
+        public static bool KeyRepeat
+        {
+            set
+            {
+                if (value)
+                {
+                    EnableKeyRepeat(Sdl.SDL_DEFAULT_REPEAT_DELAY, Sdl.SDL_DEFAULT_REPEAT_INTERVAL);
+                }
+                else
+                {
+                    Sdl.SDL_EnableKeyRepeat(0, Sdl.SDL_DEFAULT_REPEAT_INTERVAL);
+                }
+            }
+            get
+            {
+                int delay;
+                int rate;
+                Sdl.SDL_GetKeyRepeat(out rate, out delay);
+                if (delay != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Returns true if the application has keyboard focus.
-		/// </summary>
-		public static bool HasFocus
-		{
-			get
-			{
-				return (Sdl.SDL_GetAppState() & Sdl.SDL_APPINPUTFOCUS) !=0;
-			}
-		}
+        /// <summary>
+        /// Returns true if the application has keyboard focus.
+        /// </summary>
+        public static bool HasFocus
+        {
+            get
+            {
+                return (Sdl.SDL_GetAppState() & Sdl.SDL_APPINPUTFOCUS) != 0;
+            }
+        }
 
-		/// <summary>
-		/// Returns the actual keyboard character that was pressed.
-		/// </summary>
-		/// <param name="key">Key to translate into the actual keyboard character.</param>
-		/// <returns>Actual keyvboard character that was pressed.</returns>
-		public static string KeyboardCharacter(Key key)
-		{
-			return Sdl.SDL_GetKeyName((int)key);
-		}
+        /// <summary>
+        /// Returns the actual keyboard character that was pressed.
+        /// </summary>
+        /// <param name="key">Key to translate into the actual keyboard character.</param>
+        /// <returns>Actual keyvboard character that was pressed.</returns>
+        public static string KeyboardCharacter(Key key)
+        {
+            return Sdl.SDL_GetKeyName((int)key);
+        }
 
-		/// <summary>
-		/// Returns which modifier keys are pressed
-		/// </summary>
-		public static ModifierKeys ModifierKeyState
-		{
-			get
-			{
-				return (ModifierKeys) Sdl.SDL_GetModState();
-			}
-			set
-			{
-				Sdl.SDL_SetModState((int)value);
-			}
-		}
+        /// <summary>
+        /// Returns which modifier keys are pressed
+        /// </summary>
+        public static ModifierKeys ModifierKeyState
+        {
+            get
+            {
+                return (ModifierKeys)Sdl.SDL_GetModState();
+            }
+            set
+            {
+                Sdl.SDL_SetModState((int)value);
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="input"></param>
-		/// <returns></returns>
-		public static string UnicodeCharacter(short input)
-		{
-			Encoding unicode;
-			unicode = Encoding.Unicode;
-			string hexString = Convert.ToString(input, 16);
-			string finalString = "";
-			if (hexString.Length >= 2)
-			{
-				finalString =  Regex.Unescape(@"\x" + hexString);
-			}
-			
-			byte[] codes;
-			char[] chars = new char[0];
-			codes = unicode.GetBytes(finalString);
-			chars = unicode.GetChars(codes);
-			if (chars.Length > 0 )
-			{
-				return chars[0].ToString();
-			}
-			else
-			{
-				return "";
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string UnicodeCharacter(short input)
+        {
+            Encoding unicode;
+            unicode = Encoding.Unicode;
+            string hexString = Convert.ToString(input, 16);
+            string finalString = "";
+            if (hexString.Length >= 2)
+            {
+                finalString = Regex.Unescape(@"\x" + hexString);
+            }
 
-		/// <summary>
-		/// Checks key state
-		/// </summary>
-		/// <param name="key">Key to check</param>
-		/// <returns>True if key is pressed</returns>
-		public static bool IsKeyPressed(Key key)
-		{
-			int numberOfKeys;
-			byte[] keys;
-			keys = Sdl.SDL_GetKeyState(out numberOfKeys);
-			if (keys[(int)key] == 1)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+            byte[] codes;
+            char[] chars = new char[0];
+            codes = unicode.GetBytes(finalString);
+            chars = unicode.GetChars(codes);
+            if (chars.Length > 0)
+            {
+                return chars[0].ToString();
+            }
+            else
+            {
+                return "";
+            }
+        }
 
-		/// <summary>
-		/// Checks if Unicode is enabled
-		/// </summary>
-		public static bool UnicodeEnabled
-		{
-			get
-			{
-				return (Sdl.SDL_EnableUNICODE(-1) == 1);
-			}
-			set
-			{
-				if (value == true)
-				{
-					Sdl.SDL_EnableUNICODE(1);
-				}
-				else
-				{
-					Sdl.SDL_EnableUNICODE(0);
-				}
-			}
-		}
-	}
+        /// <summary>
+        /// Checks key state
+        /// </summary>
+        /// <param name="key">Key to check</param>
+        /// <returns>True if key is pressed</returns>
+        public static bool IsKeyPressed(Key key)
+        {
+            int numberOfKeys;
+            byte[] keys;
+            keys = Sdl.SDL_GetKeyState(out numberOfKeys);
+            if (keys[(int)key] == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Checks if Unicode is enabled
+        /// </summary>
+        public static bool UnicodeEnabled
+        {
+            get
+            {
+                return (Sdl.SDL_EnableUNICODE(-1) == 1);
+            }
+            set
+            {
+                if (value == true)
+                {
+                    Sdl.SDL_EnableUNICODE(1);
+                }
+                else
+                {
+                    Sdl.SDL_EnableUNICODE(0);
+                }
+            }
+        }
+    }
 }

@@ -24,73 +24,74 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Input
 {
-	/// <summary>
-	/// Summary description for JoystickButtonEventArgs.
-	/// </summary>
-	public class JoystickButtonEventArgs : SdlEventArgs 
-	{
-		/// <summary>
-		/// joystick button args
-		/// </summary>
-		/// <param name="device">The joystick index</param>
-		/// <param name="button">The button index</param>
-		/// <param name="buttonPressed">
-		/// True if the button was pressed, 
-		/// False if it was released
-		/// </param>
-		public JoystickButtonEventArgs(byte device, byte button, bool buttonPressed)
-		{
-			Sdl.SDL_Event evt = new Sdl.SDL_Event();
-			evt.jbutton.which = device;
-			evt.jbutton.button = button;
-			if (buttonPressed)
-			{
-				evt.jbutton.state = (byte)ButtonKeyState.Pressed;
-				evt.type = (byte)EventTypes.JoystickButtonDown;
-			}
-			else
-			{
-				evt.jbutton.state = (byte)ButtonKeyState.NotPressed;
-				evt.type = (byte)EventTypes.JoystickButtonUp;
-			}
-			this.EventStruct = evt;
-		}
+    /// <summary>
+    /// Summary description for JoystickButtonEventArgs.
+    /// </summary>
+    public class JoystickButtonEventArgs : SdlEventArgs
+    {
+        /// <summary>
+        /// joystick button args
+        /// </summary>
+        /// <param name="device">The joystick index</param>
+        /// <param name="button">The button index</param>
+        /// <param name="buttonPressed">
+        /// True if the button was pressed, 
+        /// False if it was released
+        /// </param>
+        public JoystickButtonEventArgs(byte device, byte button, bool buttonPressed)
+        {
+            Sdl.SDL_Event evt = new Sdl.SDL_Event();
+            evt.jbutton.which = device;
+            evt.jbutton.button = button;
+            if (buttonPressed)
+            {
+                evt.jbutton.state = (byte)ButtonKeyState.Pressed;
+                evt.type = (byte)EventTypes.JoystickButtonDown;
+            }
+            else
+            {
+                evt.jbutton.state = (byte)ButtonKeyState.NotPressed;
+                evt.type = (byte)EventTypes.JoystickButtonUp;
+            }
+            this.EventStruct = evt;
+        }
 
-		internal JoystickButtonEventArgs(Sdl.SDL_Event evt) : base(evt)
-		{
-		}
+        internal JoystickButtonEventArgs(Sdl.SDL_Event evt)
+            : base(evt)
+        {
+        }
 
-		/// <summary>
-		/// joystick device
-		/// </summary>
-		public int Device
-		{
-			get
-			{
-				return this.EventStruct.jbutton.which;
-			}
-		}
+        /// <summary>
+        /// joystick device
+        /// </summary>
+        public int Device
+        {
+            get
+            {
+                return this.EventStruct.jbutton.which;
+            }
+        }
 
-		/// <summary>
-		/// Button
-		/// </summary>
-		public int Button
-		{
-			get
-			{
-				return this.EventStruct.jbutton.button;
-			}
-		}
+        /// <summary>
+        /// Button
+        /// </summary>
+        public int Button
+        {
+            get
+            {
+                return this.EventStruct.jbutton.button;
+            }
+        }
 
-		/// <summary>
-		/// Is button pressed
-		/// </summary>
-		public bool ButtonPressed
-		{
-			get
-			{
-				return (this.EventStruct.jbutton.state == (byte)ButtonKeyState.Pressed);
-			}
-		}
-	}
+        /// <summary>
+        /// Is button pressed
+        /// </summary>
+        public bool ButtonPressed
+        {
+            get
+            {
+                return (this.EventStruct.jbutton.state == (byte)ButtonKeyState.Pressed);
+            }
+        }
+    }
 }

@@ -34,100 +34,100 @@ using SdlDotNet.Windows;
 
 namespace SdlDotNet.Examples.CDPlayer
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class CDPlayer : System.Windows.Forms.Form 
-	{
-		private CDDrive _drive;
-		private int _track;
+    /// <summary>
+    /// 
+    /// </summary>
+    public class CDPlayer : System.Windows.Forms.Form
+    {
+        private CDDrive _drive;
+        private int _track;
 
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.ComboBox comboBoxDrive;
-		private System.Windows.Forms.Button buttonPlay;
-		private System.Windows.Forms.Button buttonPause;
-		private System.Windows.Forms.Button buttonStop;
-		private System.Windows.Forms.Button buttonEject;
-		private System.Windows.Forms.Label labelStatus;
-		private System.Windows.Forms.Button buttonPrevious;
-		private SdlDotNet.Windows.SurfaceControl surfaceControl;
-		private System.Windows.Forms.Button buttonNext;
-		string data_directory = @"Data/";
-		private System.Windows.Forms.MainMenu mainMenu1;
-		private System.Windows.Forms.MenuItem menuItem1;
-		private System.Windows.Forms.MenuItem menuItem2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxDrive;
+        private System.Windows.Forms.Button buttonPlay;
+        private System.Windows.Forms.Button buttonPause;
+        private System.Windows.Forms.Button buttonStop;
+        private System.Windows.Forms.Button buttonEject;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Button buttonPrevious;
+        private SdlDotNet.Windows.SurfaceControl surfaceControl;
+        private System.Windows.Forms.Button buttonNext;
+        string data_directory = @"Data/";
+        private System.Windows.Forms.MainMenu mainMenu1;
+        private System.Windows.Forms.MenuItem menuItem1;
+        private System.Windows.Forms.MenuItem menuItem2;
         string filepath = @"../../";
         private Panel panel1;
         private System.ComponentModel.IContainer components;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public CDPlayer() 
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
-			this.KeyPreview = true;
-			surf = 
-				new Surface(
-				this.surfaceControl.Width,
-				this.surfaceControl.Height);
-			if (File.Exists(data_directory + "marble1.png"))
-			{
-				filepath = "";
-			}
-			SurfaceCollection marbleSurfaces = 
-				new SurfaceCollection(new Surface(filepath + data_directory + "marble1.png"), new Size(50, 50)); 
+        /// <summary>
+        /// 
+        /// </summary>
+        public CDPlayer()
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
+            this.KeyPreview = true;
+            surf =
+                new Surface(
+                this.surfaceControl.Width,
+                this.surfaceControl.Height);
+            if (File.Exists(data_directory + "marble1.png"))
+            {
+                filepath = "";
+            }
+            SurfaceCollection marbleSurfaces =
+                new SurfaceCollection(new Surface(filepath + data_directory + "marble1.png"), new Size(50, 50));
 
-			for (int i = 0; i < 1; i++)
-			{
-				//Create a new Sprite at a random location on the screen
-				BounceSprite bounceSprite = 
-					new BounceSprite(marbleSurfaces,
-					new Point(rand.Next(0, 350),
-					rand.Next(0, 200)));
-				bounceSprite.Bounds = new Rectangle(new Point(0,0), this.surfaceControl.Size);
+            for (int i = 0; i < 1; i++)
+            {
+                //Create a new Sprite at a random location on the screen
+                BounceSprite bounceSprite =
+                    new BounceSprite(marbleSurfaces,
+                    new Point(rand.Next(0, 350),
+                    rand.Next(0, 200)));
+                bounceSprite.Bounds = new Rectangle(new Point(0, 0), this.surfaceControl.Size);
 
-				// Randomize rotation direction
-				bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
+                // Randomize rotation direction
+                bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
 
-				//Add the sprite to the SpriteCollection
-				master.Add(bounceSprite, bounceSprite.Rectangle);
-			}
+                //Add the sprite to the SpriteCollection
+                master.Add(bounceSprite, bounceSprite.Rectangle);
+            }
 
-			//The collection will respond to mouse button clicks, mouse movement and the ticker.
-			master.EnableMouseButtonEvent();
-			master.EnableMouseMotionEvent();
-			master.EnableVideoResizeEvent();
-			master.EnableKeyboardEvent();
-			master.EnableTickEvent();
+            //The collection will respond to mouse button clicks, mouse movement and the ticker.
+            master.EnableMouseButtonEvent();
+            master.EnableMouseMotionEvent();
+            master.EnableVideoResizeEvent();
+            master.EnableKeyboardEvent();
+            master.EnableTickEvent();
 
-			SdlDotNet.Core.Events.Fps = 30;
+            SdlDotNet.Core.Events.Fps = 30;
             SdlDotNet.Core.Events.Tick += new TickEventHandler(this.Tick);
             SdlDotNet.Core.Events.Quit += new QuitEventHandler(this.Quit);
 
-			try 
-			{
-				int num = CDRom.NumberOfDrives;
-				_drive = CDRom.OpenDrive(0);
-				for (int i = 0; i < num; i++)
-				{
-					comboBoxDrive.Items.Add(CDRom.DriveName(i));
-				}
+            try
+            {
+                int num = CDRom.NumberOfDrives;
+                _drive = CDRom.OpenDrive(0);
+                for (int i = 0; i < num; i++)
+                {
+                    comboBoxDrive.Items.Add(CDRom.DriveName(i));
+                }
 
-				if (comboBoxDrive.Items.Count > 0) 
-				{
-					comboBoxDrive.SelectedIndex = 0;
-					//	timer.Start();
-				}
-			} 
-			catch (SdlException ex) 
-			{
-				Console.WriteLine(ex);
-			}
-		}
+                if (comboBoxDrive.Items.Count > 0)
+                {
+                    comboBoxDrive.SelectedIndex = 0;
+                    //	timer.Start();
+                }
+            }
+            catch (SdlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
         //private bool disposed;
 
@@ -167,15 +167,15 @@ namespace SdlDotNet.Examples.CDPlayer
         //    }
         //}
 
-		private SpriteCollection master = new SpriteCollection();
+        private SpriteCollection master = new SpriteCollection();
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDPlayer));
             this.label1 = new System.Windows.Forms.Label();
@@ -342,203 +342,203 @@ namespace SdlDotNet.Examples.CDPlayer
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		/// <summary>
-		/// Entry point for App.
-		/// </summary>
-		[STAThread]
-		static void Main() 
-		{
-			Application.Run(new CDPlayer());
+        /// <summary>
+        /// Entry point for App.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.Run(new CDPlayer());
             SdlDotNet.Core.Events.QuitApplication();
-		}
+        }
 
-		private static System.Random rand = new Random();
-		private Surface surf;
-		
-		private void Tick(object sender, TickEventArgs e)
-		{
-			if(surf != null)
-			{
-				surf.Fill(Color.Black);
-				surf.Blit(master);
-				this.surfaceControl.Blit(surf);
-			}
-		}
+        private static System.Random rand = new Random();
+        private Surface surf;
+
+        private void Tick(object sender, TickEventArgs e)
+        {
+            if (surf != null)
+            {
+                surf.Fill(Color.Black);
+                surf.Blit(master);
+                this.surfaceControl.Blit(surf);
+            }
+        }
 
 
-		private void Quit(object sender, QuitEventArgs e)
-		{
+        private void Quit(object sender, QuitEventArgs e)
+        {
             SdlDotNet.Core.Events.QuitApplication();
-		}
+        }
 
-		private void comboBoxDrive_SelectedIndexChanged(object sender, System.EventArgs e) 
-		{
-			try 
-			{
-			} 
-			catch (SdlException ex) 
-			{
-				Console.WriteLine(ex);
-			}
-		}
+        private void comboBoxDrive_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            try
+            {
+            }
+            catch (SdlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
-		private void buttonPlay_Click(object sender, System.EventArgs e) 
-		{
-			try 
-			{
-				if (_drive != null)
-				{
-					_drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
-				}
+        private void buttonPlay_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (_drive != null)
+                {
+                    _drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
+                }
                 TimeSpan timeSpan = SdlDotNet.Core.Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
-				this.labelStatus.Text = "Track: " + _drive.CurrentTrack + "     Length: " + timeSpan.Minutes + ":" + timeSpan.Seconds;
-			} 
-			catch (SdlException ex) 
-			{
-				Console.WriteLine(ex);
-			}
-		}
+                this.labelStatus.Text = "Track: " + _drive.CurrentTrack + "     Length: " + timeSpan.Minutes + ":" + timeSpan.Seconds;
+            }
+            catch (SdlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
-		private void buttonPause_Click(object sender, System.EventArgs e) 
-		{
-			try 
-			{
-				if (_drive != null)
-				{
-					_drive.Pause();
-				}
-			} 
-			catch (SdlException ex) 
-			{
-				Console.WriteLine(ex);
-			}
-		}
+        private void buttonPause_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (_drive != null)
+                {
+                    _drive.Pause();
+                }
+            }
+            catch (SdlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
-		private void buttonStop_Click(object sender, System.EventArgs e) 
-		{
-			try 
-			{
-				if (_drive != null) 
-				{
-					_drive.Stop();
-					_track = 0;
-				}
-				this.labelStatus.Text = "Track: " + _drive.CurrentTrack;
-			} 
-			catch (SdlException ex) 
-			{
-				Console.WriteLine(ex);
-			}
-		}
+        private void buttonStop_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (_drive != null)
+                {
+                    _drive.Stop();
+                    _track = 0;
+                }
+                this.labelStatus.Text = "Track: " + _drive.CurrentTrack;
+            }
+            catch (SdlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
-		private void buttonEject_Click(object sender, System.EventArgs e) 
-		{
-			try 
-			{
-				if (_drive != null) 
-				{
-					_drive.Eject();
-					_track = 0;
-				}
-			} 
-			catch (SdlException ex) 
-			{
-				Console.WriteLine(ex);
-			}
-		}
+        private void buttonEject_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (_drive != null)
+                {
+                    _drive.Eject();
+                    _track = 0;
+                }
+            }
+            catch (SdlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
-		private void buttonPrev_Click(object sender, System.EventArgs e) 
-		{
-			try 
-			{
-				if (_drive != null) 
-				{
-					if (_track != 0)
-					{
-						_track--;
-					}
-					buttonPlay_Click(null, null);
-				}
-			} 
-			catch (SdlException ex) 
-			{
-				Console.WriteLine(ex);
-			}
-		}
+        private void buttonPrev_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (_drive != null)
+                {
+                    if (_track != 0)
+                    {
+                        _track--;
+                    }
+                    buttonPlay_Click(null, null);
+                }
+            }
+            catch (SdlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
-		private void buttonNext_Click(object sender, System.EventArgs e) 
-		{
-			try 
-			{
-				if (_drive != null) 
-				{
-					if (_track != _drive.NumberOfTracks - 1)
-					{
-						_track++;
-					}
-					buttonPlay_Click(null, null);
-				}
-			} 
-			catch (SdlException ex) 
-			{
-				Console.WriteLine(ex);
-			}
-		}
+        private void buttonNext_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (_drive != null)
+                {
+                    if (_track != _drive.NumberOfTracks - 1)
+                    {
+                        _track++;
+                    }
+                    buttonPlay_Click(null, null);
+                }
+            }
+            catch (SdlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
 
-		private void CDPlayer_Load(object sender, System.EventArgs e)
-		{
+        private void CDPlayer_Load(object sender, System.EventArgs e)
+        {
             Thread thread = new Thread(new ThreadStart(SdlDotNet.Core.Events.Run));
-			thread.IsBackground = true;
-			thread.Name = "SDL";
-			thread.Priority = ThreadPriority.Normal;
-			thread.Start();
-		}
+            thread.IsBackground = true;
+            thread.Name = "SDL";
+            thread.Priority = ThreadPriority.Normal;
+            thread.Start();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnResize(EventArgs e)
-		{
-			base.OnResize (e);
-			surf = 
-				new Surface(
-				this.surfaceControl.Width,
-				this.surfaceControl.Height);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            surf =
+                new Surface(
+                this.surfaceControl.Width,
+                this.surfaceControl.Height);
+        }
 
-		private void menuItem2_Click(object sender, System.EventArgs e)
-		{
+        private void menuItem2_Click(object sender, System.EventArgs e)
+        {
             SdlDotNet.Core.Events.QuitApplication();
-			this.Close();		
-		}
+            this.Close();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnKeyDown(KeyEventArgs e)
-		{
-			this.surfaceControl.KeyPressed(e);
-			base.OnKeyDown (e);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnKeyUp(KeyEventArgs e)
-		{
-			this.surfaceControl.KeyReleased(e);
-			base.OnKeyUp (e);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            this.surfaceControl.KeyPressed(e);
+            base.OnKeyDown(e);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            this.surfaceControl.KeyReleased(e);
+            base.OnKeyUp(e);
+        }
 
-		private void CDPlayer_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			// Force the surface to be disposed.
-			//surf.Dispose();
-		}
-	}
+        private void CDPlayer_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Force the surface to be disposed.
+            //surf.Dispose();
+        }
+    }
 }

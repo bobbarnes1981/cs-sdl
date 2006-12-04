@@ -24,30 +24,30 @@ using SdlDotNet;
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class MenuItemEventArgs : EventArgs
-	{
-		int index;
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="index"></param>
-		public MenuItemEventArgs(int index)
-		{
-			this.index= index;
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class MenuItemEventArgs : EventArgs
+    {
+        int index;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        public MenuItemEventArgs(int index)
+        {
+            this.index = index;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Index
-		{
-			get
-			{
-				return index;
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Index
+        {
+            get
+            {
+                return index;
+            }
+        }
+    }
 }

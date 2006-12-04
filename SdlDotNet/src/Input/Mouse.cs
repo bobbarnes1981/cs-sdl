@@ -73,96 +73,96 @@ namespace SdlDotNet.Input
         WheelDown = Sdl.SDL_BUTTON_WHEELDOWN
     }
 
-	/// <summary>
-	/// Mouse.
-	/// </summary>
-	public sealed class Mouse
-	{
-		Mouse()
-		{
-		}
+    /// <summary>
+    /// Mouse.
+    /// </summary>
+    public sealed class Mouse
+    {
+        Mouse()
+        {
+        }
 
-		static Mouse()
-		{
-			Video.Initialize();
-		}
+        static Mouse()
+        {
+            Video.Initialize();
+        }
 
-		/// <summary> 
-		/// Gets and sets whether or not the mouse cursor is visible. 
-		/// </summary> 
-		public static bool ShowCursor 
-		{ 
-			get 
-			{ 
-				return (Sdl.SDL_ShowCursor(Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
-			} 
-			set 
-			{ 
-				Sdl.SDL_ShowCursor(value ? Sdl.SDL_ENABLE : Sdl.SDL_DISABLE);
-			} 
-		} 
+        /// <summary> 
+        /// Gets and sets whether or not the mouse cursor is visible. 
+        /// </summary> 
+        public static bool ShowCursor
+        {
+            get
+            {
+                return (Sdl.SDL_ShowCursor(Sdl.SDL_QUERY) == Sdl.SDL_ENABLE);
+            }
+            set
+            {
+                Sdl.SDL_ShowCursor(value ? Sdl.SDL_ENABLE : Sdl.SDL_DISABLE);
+            }
+        }
 
-		/// <summary> 
-		/// Gets and sets the current mouse position. 
-		/// </summary> 
-		public static Point MousePosition 
-		{ 
-			get 
-			{ 
-				int x; 
-				int y; 
-				Sdl.SDL_GetMouseState(out x, out y); 
-				return new Point(x, y); 
-			} 
-			set 
-			{ 
-				Sdl.SDL_WarpMouse((short)value.X, (short)value.Y); 
-			} 
-		} 
+        /// <summary> 
+        /// Gets and sets the current mouse position. 
+        /// </summary> 
+        public static Point MousePosition
+        {
+            get
+            {
+                int x;
+                int y;
+                Sdl.SDL_GetMouseState(out x, out y);
+                return new Point(x, y);
+            }
+            set
+            {
+                Sdl.SDL_WarpMouse((short)value.X, (short)value.Y);
+            }
+        }
 
-		/// <summary> 
-		/// Gets and sets the relative mouse position. 
-		/// </summary> 
-		public static Point MousePositionChange 
-		{ 
-			get 
-			{ 
-				int x; 
-				int y; 
-				Sdl.SDL_GetRelativeMouseState(out x, out y); 
-				return new Point(x, y); 
-			} 
-			set  // Change the relative mouse position 
-			{ 
-				Point mousePos = MousePosition; 
-				Sdl.SDL_WarpMouse((short)(mousePos.X + value.X), 
-					(short)(mousePos.Y + value.Y)); 
-			} 
-		} 
+        /// <summary> 
+        /// Gets and sets the relative mouse position. 
+        /// </summary> 
+        public static Point MousePositionChange
+        {
+            get
+            {
+                int x;
+                int y;
+                Sdl.SDL_GetRelativeMouseState(out x, out y);
+                return new Point(x, y);
+            }
+            set  // Change the relative mouse position 
+            {
+                Point mousePos = MousePosition;
+                Sdl.SDL_WarpMouse((short)(mousePos.X + value.X),
+                    (short)(mousePos.Y + value.Y));
+            }
+        }
 
-		/// <summary>
-		/// Returns true if app has mouse focus
-		/// </summary>
-		public static bool HasMouseFocus
-		{
-			get
-			{
-				return (Sdl.SDL_GetAppState() & Sdl.SDL_APPMOUSEFOCUS) !=0;
-			}
-		}
+        /// <summary>
+        /// Returns true if app has mouse focus
+        /// </summary>
+        public static bool HasMouseFocus
+        {
+            get
+            {
+                return (Sdl.SDL_GetAppState() & Sdl.SDL_APPMOUSEFOCUS) != 0;
+            }
+        }
 
-		/// <summary>
-		/// Gets the pressed or released state of a mouse button
-		/// </summary>
-		/// <param name="button">The mouse button to check</param>
-		/// <returns>
-		/// If the button is pressed, returns True, otherwise returns False
-		/// </returns>
-		public static bool IsButtonPressed(MouseButton button) 
-		{
-			int dummyX;
-			int dummyY;
-			return (Sdl.SDL_GetMouseState(out dummyX, out dummyY) & Sdl.SDL_BUTTON((byte)button)) != 0;
-		}
-	}
+        /// <summary>
+        /// Gets the pressed or released state of a mouse button
+        /// </summary>
+        /// <param name="button">The mouse button to check</param>
+        /// <returns>
+        /// If the button is pressed, returns True, otherwise returns False
+        /// </returns>
+        public static bool IsButtonPressed(MouseButton button)
+        {
+            int dummyX;
+            int dummyY;
+            return (Sdl.SDL_GetMouseState(out dummyX, out dummyY) & Sdl.SDL_BUTTON((byte)button)) != 0;
+        }
+    }
 }

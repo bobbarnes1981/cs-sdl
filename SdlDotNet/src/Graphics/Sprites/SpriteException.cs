@@ -24,43 +24,45 @@ using SdlDotNet.Core;
 
 namespace SdlDotNet.Graphics.Sprites
 {
-	/// <summary>
-	/// Exception for Sprite
-	/// </summary>
-	[Serializable()]
-	public class SpriteException : SdlException
-	{
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public SpriteException()
-		{
-		}
-		/// <summary>
-		/// Generate exception with given message
-		/// </summary>
-		/// <param name="message">Exception message</param>
-		public SpriteException(string message)
-			: base(message)
-		{
-		}
+    /// <summary>
+    /// Exception for Sprite
+    /// </summary>
+    [Serializable()]
+    public class SpriteException : SdlException
+    {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public SpriteException()
+        {
+        }
+        /// <summary>
+        /// Generate exception with given message
+        /// </summary>
+        /// <param name="message">Exception message</param>
+        public SpriteException(string message)
+            : base(message)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="exception"></param>
-		/// <param name="message"></param>
-		public SpriteException(string message, Exception exception) : base(message, exception)
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="message"></param>
+        public SpriteException(string message, Exception exception)
+            : base(message, exception)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="info"></param>
-		/// <param name="context"></param>
-		protected SpriteException(SerializationInfo info, StreamingContext context) : base( info, context)
-		{
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected SpriteException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
 }

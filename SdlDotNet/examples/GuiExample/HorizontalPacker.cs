@@ -26,115 +26,115 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// Class to manager internal sprites, such as window
-	/// components. This uses a sprite manager at its core, but does
-	/// have some additional functionality.
-	/// </summary>
-	public class HorizontalPacker : Packer
-	{
-		#region Constructors
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		public HorizontalPacker(GuiManager manager)
-			: base(manager)
-		{
-		}
+    /// <summary>
+    /// Class to manager internal sprites, such as window
+    /// components. This uses a sprite manager at its core, but does
+    /// have some additional functionality.
+    /// </summary>
+    public class HorizontalPacker : Packer
+    {
+        #region Constructors
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        public HorizontalPacker(GuiManager manager)
+            : base(manager)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="point"></param>
-		/// <param name="height"></param>
-		public HorizontalPacker(GuiManager manager, Point point, int height)
-			: base(manager, point, height)
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="point"></param>
+        /// <param name="height"></param>
+        public HorizontalPacker(GuiManager manager, Point point, int height)
+            : base(manager, point, height)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="rectangle"></param>
-		public HorizontalPacker(GuiManager manager, Rectangle rectangle)
-			: base(manager, rectangle)
-		{
-		}
-		#endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="rectangle"></param>
+        public HorizontalPacker(GuiManager manager, Rectangle rectangle)
+            : base(manager, rectangle)
+        {
+        }
+        #endregion
 
-		#region Drawing
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Surface Render()
-		{
-			this.Surface.Fill(this.GuiManager.BackgroundColor);
-			// Draw all of our left components
-			int x = 0;
+        #region Drawing
+        /// <summary>
+        /// 
+        /// </summary>
+        public override Surface Render()
+        {
+            this.Surface.Fill(this.GuiManager.BackgroundColor);
+            // Draw all of our left components
+            int x = 0;
 
-			int width = 0;
-			foreach (Sprite s in HeadSprites.Keys)
-			{
-				// Ignore hidden
-				if (!s.Visible)
-				{
-					continue;
-				}
-	
-				// Translate it and blit
-				s.X = x;
+            int width = 0;
+            foreach (Sprite s in HeadSprites.Keys)
+            {
+                // Ignore hidden
+                if (!s.Visible)
+                {
+                    continue;
+                }
 
-				// Update the coordinates for the next one
-				x += s.Size.Width + InnerPadding.Horizontal;
-				if (s.Size.Width > width)
-				{
-					width = s.Size.Width;
-				}
-			}
+                // Translate it and blit
+                s.X = x;
 
-			this.Surface = new Surface( width * 3, this.HeadSprites.Size.Height);
+                // Update the coordinates for the next one
+                x += s.Size.Width + InnerPadding.Horizontal;
+                if (s.Size.Width > width)
+                {
+                    width = s.Size.Width;
+                }
+            }
 
-			foreach (Sprite s in TailSprites.Keys)
-			{
-				// Ignore hidden
-				if (!s.Visible)
-				{
-					continue;
-				}
-	
-				// Translate it and blit
-				//s.X = this.X + this.Size.Width - MarginPadding.Right /*- s.Size.Width*/ - InnerPadding.Horizontal;
-				s.X = this.X + this.Surface.Width - s.Width;
-			}
-			this.Sprites.Draw(this.Surface);
-			return this.Surface;
-		}
-		#endregion
+            this.Surface = new Surface(width * 3, this.HeadSprites.Size.Height);
 
-		private bool disposed;
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+            foreach (Sprite s in TailSprites.Keys)
+            {
+                // Ignore hidden
+                if (!s.Visible)
+                {
+                    continue;
+                }
+
+                // Translate it and blit
+                //s.X = this.X + this.Size.Width - MarginPadding.Right /*- s.Size.Width*/ - InnerPadding.Horizontal;
+                s.X = this.X + this.Surface.Width - s.Width;
+            }
+            this.Sprites.Draw(this.Surface);
+            return this.Surface;
+        }
+        #endregion
+
+        private bool disposed;
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

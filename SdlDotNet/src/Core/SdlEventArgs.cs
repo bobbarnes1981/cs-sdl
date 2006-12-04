@@ -23,92 +23,92 @@ using Tao.Sdl;
 using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 
-namespace SdlDotNet.Core 
+namespace SdlDotNet.Core
 {
-	/// <summary>
-	/// Base class for SdlEventArgs.
-	/// </summary>
-	public class SdlEventArgs : EventArgs
-	{
-		/// <summary>
-		/// Corrresponding SDL_Event
-		/// </summary>
-		Sdl.SDL_Event eventStruct;
+    /// <summary>
+    /// Base class for SdlEventArgs.
+    /// </summary>
+    public class SdlEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Corrresponding SDL_Event
+        /// </summary>
+        Sdl.SDL_Event eventStruct;
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public SdlEventArgs()
-		{
-		}
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public SdlEventArgs()
+        {
+        }
 
-		/// <summary>
-		/// Holds SDL_Event
-		/// </summary>
-		/// <param name="evt">Event Struct</param>
-		protected SdlEventArgs(Sdl.SDL_Event evt)
-		{
-			this.eventStruct = evt;
-		}
+        /// <summary>
+        /// Holds SDL_Event
+        /// </summary>
+        /// <param name="evt">Event Struct</param>
+        protected SdlEventArgs(Sdl.SDL_Event evt)
+        {
+            this.eventStruct = evt;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		protected internal Sdl.SDL_Event EventStruct
-		{
-			get
-			{
-				return this.eventStruct;
-			}
-			set
-			{
-				this.eventStruct = value;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        protected internal Sdl.SDL_Event EventStruct
+        {
+            get
+            {
+                return this.eventStruct;
+            }
+            set
+            {
+                this.eventStruct = value;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="ev"></param>
-		/// <returns></returns>
-		protected internal static SdlEventArgs CreateEventArgs( Sdl.SDL_Event ev )
-		{
-			switch ((EventTypes)ev.type) 
-			{
-				case EventTypes.KeyDown:
-					return new KeyboardEventArgs(ev);
-				case EventTypes.KeyUp:
-					return new KeyboardEventArgs(ev);
-				case EventTypes.ActiveEvent:
-					return new ActiveEventArgs(ev);
-				case EventTypes.Quit:
-					return new QuitEventArgs(ev);
-				case EventTypes.MouseButtonUp:
-					return new MouseButtonEventArgs(ev);
-				case EventTypes.MouseButtonDown:
-					return new MouseButtonEventArgs(ev);
-				case EventTypes.MouseMotion:
-					return new MouseMotionEventArgs(ev);
-				case EventTypes.VideoExpose:
-					return new VideoExposeEventArgs(ev);
-				case EventTypes.VideoResize:
-					return new VideoResizeEventArgs(ev);
-				case EventTypes.UserEvent:
-					return new UserEventArgs(ev);
-				default:
-					return new SdlEventArgs(ev);
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ev"></param>
+        /// <returns></returns>
+        protected internal static SdlEventArgs CreateEventArgs(Sdl.SDL_Event ev)
+        {
+            switch ((EventTypes)ev.type)
+            {
+                case EventTypes.KeyDown:
+                    return new KeyboardEventArgs(ev);
+                case EventTypes.KeyUp:
+                    return new KeyboardEventArgs(ev);
+                case EventTypes.ActiveEvent:
+                    return new ActiveEventArgs(ev);
+                case EventTypes.Quit:
+                    return new QuitEventArgs(ev);
+                case EventTypes.MouseButtonUp:
+                    return new MouseButtonEventArgs(ev);
+                case EventTypes.MouseButtonDown:
+                    return new MouseButtonEventArgs(ev);
+                case EventTypes.MouseMotion:
+                    return new MouseMotionEventArgs(ev);
+                case EventTypes.VideoExpose:
+                    return new VideoExposeEventArgs(ev);
+                case EventTypes.VideoResize:
+                    return new VideoResizeEventArgs(ev);
+                case EventTypes.UserEvent:
+                    return new UserEventArgs(ev);
+                default:
+                    return new SdlEventArgs(ev);
+            }
+        }
 
-		/// <summary>
-		/// Returns Event type
-		/// </summary>
-		public EventTypes Type
-		{
-			get
-			{
-				return (EventTypes) this.EventStruct.type;
-			}
-		}
-	}
+        /// <summary>
+        /// Returns Event type
+        /// </summary>
+        public EventTypes Type
+        {
+            get
+            {
+                return (EventTypes)this.EventStruct.type;
+            }
+        }
+    }
 }
