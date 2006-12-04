@@ -31,7 +31,7 @@ namespace SdlDotNetExamples
             }
             foreach (string s in demoList.Keys)
             {
-            lstExamples.Items.Add(s.ToString());
+                lstExamples.Items.Add(s.ToString());
             }
         }
 
