@@ -23,141 +23,141 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Graphics
 {
-	/// <summary>
-	/// Contains basic color conversions and operations
-	/// </summary>
-	public sealed class SdlColor
-	{
-		SdlColor()
-		{}
+    /// <summary>
+    /// Contains basic color conversions and operations
+    /// </summary>
+    public sealed class SdlColor
+    {
+        SdlColor()
+        { }
 
-		/// <summary>
-		/// Converts .NET Color struct to SDL_Color
-		/// </summary>
-		/// <param name="color"></param>
-		/// <returns></returns>
-		internal static Sdl.SDL_Color ConvertColor(Color color)
-		{
-			return new Sdl.SDL_Color(color.R, color.G, color.B, color.A);
-		}
+        /// <summary>
+        /// Converts .NET Color struct to SDL_Color
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        internal static Sdl.SDL_Color ConvertColor(Color color)
+        {
+            return new Sdl.SDL_Color(color.R, color.G, color.B, color.A);
+        }
 
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="color"></param>
-//		/// <returns></returns>
-//		internal static Color ConvertColor(Sdl.SDL_Color color)
-//		{
-//			return Color.FromArgb(0, color.r, color.g, color.b);
-//		}
+        //		/// <summary>
+        //		/// 
+        //		/// </summary>
+        //		/// <param name="color"></param>
+        //		/// <returns></returns>
+        //		internal static Color ConvertColor(Sdl.SDL_Color color)
+        //		{
+        //			return Color.FromArgb(0, color.r, color.g, color.b);
+        //		}
 
-		/// <summary>
-		/// Adds the values of one color to another color.
-		/// </summary>
-		/// <param name="color1">The first color.</param>
-		/// <param name="color2">The second color.</param>
-		/// <returns>The resultant color.</returns>
-		public static Color Add(Color color1, Color color2)
-		{
-			byte r;
-			byte g;
-			byte b;
-			byte a;
+        /// <summary>
+        /// Adds the values of one color to another color.
+        /// </summary>
+        /// <param name="color1">The first color.</param>
+        /// <param name="color2">The second color.</param>
+        /// <returns>The resultant color.</returns>
+        public static Color Add(Color color1, Color color2)
+        {
+            byte r;
+            byte g;
+            byte b;
+            byte a;
 
-			if (color1.R + color2.R > byte.MaxValue)
-			{
-				r = byte.MaxValue;
-			}
-			else
-			{
-				r = (byte)(color1.R + color2.R);
-			}
-			if (color1.G + color2.G > byte.MaxValue)
-			{
-				g = byte.MaxValue;
-			}
-			else
-			{
-				g = (byte)(color1.G + color2.G);
-			}
-			if (color1.B + color2.B > byte.MaxValue)
-			{
-				b = byte.MaxValue;
-			}
-			else
-			{
-				b = (byte)(color1.B + color2.B);
-			}
-			if (color1.A + color2.A > byte.MaxValue)
-			{
-				a = byte.MaxValue;
-			}
-			else
-			{
-				a = (byte)(color1.A + color2.A);
-			}
-			return Color.FromArgb(a, r, g, b);
-		}
+            if (color1.R + color2.R > byte.MaxValue)
+            {
+                r = byte.MaxValue;
+            }
+            else
+            {
+                r = (byte)(color1.R + color2.R);
+            }
+            if (color1.G + color2.G > byte.MaxValue)
+            {
+                g = byte.MaxValue;
+            }
+            else
+            {
+                g = (byte)(color1.G + color2.G);
+            }
+            if (color1.B + color2.B > byte.MaxValue)
+            {
+                b = byte.MaxValue;
+            }
+            else
+            {
+                b = (byte)(color1.B + color2.B);
+            }
+            if (color1.A + color2.A > byte.MaxValue)
+            {
+                a = byte.MaxValue;
+            }
+            else
+            {
+                a = (byte)(color1.A + color2.A);
+            }
+            return Color.FromArgb(a, r, g, b);
+        }
 
-		/// <summary>
-		/// Subtracts the values of one color from another color.
-		/// </summary>
-		/// <param name="color1">
-		/// The first color.
-		/// </param>
-		/// <param name="color2">
-		/// The second color, the color to subtract.
-		/// </param>
-		/// <returns>The resultant color.</returns>
-		public static Color Subtract(Color color1, Color color2)
-		{
-			byte r;
-			byte g;
-			byte b;
-			byte a;
+        /// <summary>
+        /// Subtracts the values of one color from another color.
+        /// </summary>
+        /// <param name="color1">
+        /// The first color.
+        /// </param>
+        /// <param name="color2">
+        /// The second color, the color to subtract.
+        /// </param>
+        /// <returns>The resultant color.</returns>
+        public static Color Subtract(Color color1, Color color2)
+        {
+            byte r;
+            byte g;
+            byte b;
+            byte a;
 
-			if (color1.R - color2.R < byte.MinValue)
-			{
-				r = byte.MinValue;
-			}
-			else
-			{
-				r = (byte)(color1.R - color2.R);
-			}
-			if (color1.G - color2.G < byte.MinValue)
-			{
-				g = byte.MinValue;
-			}
-			else
-			{
-				g = (byte)(color1.G - color2.G);
-			}
-			if (color1.B - color2.B < byte.MinValue)
-			{
-				b = byte.MinValue;
-			}
-			else
-			{
-				b = (byte)(color1.B - color2.B);
-			}
-			if (color1.A - color2.A < byte.MinValue)
-			{
-				a = byte.MinValue;
-			}
-			else
-			{
-				a = (byte)(color1.A - color2.A);
-			}
-			return Color.FromArgb(a, r, g, b);
-		}
+            if (color1.R - color2.R < byte.MinValue)
+            {
+                r = byte.MinValue;
+            }
+            else
+            {
+                r = (byte)(color1.R - color2.R);
+            }
+            if (color1.G - color2.G < byte.MinValue)
+            {
+                g = byte.MinValue;
+            }
+            else
+            {
+                g = (byte)(color1.G - color2.G);
+            }
+            if (color1.B - color2.B < byte.MinValue)
+            {
+                b = byte.MinValue;
+            }
+            else
+            {
+                b = (byte)(color1.B - color2.B);
+            }
+            if (color1.A - color2.A < byte.MinValue)
+            {
+                a = byte.MinValue;
+            }
+            else
+            {
+                a = (byte)(color1.A - color2.A);
+            }
+            return Color.FromArgb(a, r, g, b);
+        }
 
-		/// <summary>
-		/// Inverts the color, giving it a negative effect.
-		/// </summary>
-		/// <param name="color">The color to invert.</param>
-		/// <returns>The inverted color.</returns>
-		public static Color Invert(Color color)
-		{
+        /// <summary>
+        /// Inverts the color, giving it a negative effect.
+        /// </summary>
+        /// <param name="color">The color to invert.</param>
+        /// <returns>The inverted color.</returns>
+        public static Color Invert(Color color)
+        {
             // The following line of code works as well.
             //return SdlColor.Subtract(Color.White, color);
             byte r;
@@ -200,58 +200,58 @@ namespace SdlDotNet.Graphics
             return Color.FromArgb(a, r, g, b);
         }
 
-		/// <summary>
-		/// Multiplies the values of one color with another color.
-		/// </summary>
-		/// <param name="color1">
-		/// The first color.
-		/// </param>
-		/// <param name="color2">
-		/// The second color.
-		/// </param>
-		/// <returns>
-		/// The resultant color of the first and the second color multiplied.
-		/// </returns>
-		public static Color Multiply(Color color1, Color color2)
-		{
-			byte r;
-			byte g;
-			byte b;
-			byte a;
+        /// <summary>
+        /// Multiplies the values of one color with another color.
+        /// </summary>
+        /// <param name="color1">
+        /// The first color.
+        /// </param>
+        /// <param name="color2">
+        /// The second color.
+        /// </param>
+        /// <returns>
+        /// The resultant color of the first and the second color multiplied.
+        /// </returns>
+        public static Color Multiply(Color color1, Color color2)
+        {
+            byte r;
+            byte g;
+            byte b;
+            byte a;
 
-			if (color1.R * color2.R > byte.MaxValue)
-			{
-				r = byte.MaxValue;
-			}
-			else
-			{
-				r = (byte)(color1.R * color2.R);
-			}
-			if (color1.G * color2.G > byte.MaxValue)
-			{
-				g = byte.MaxValue;
-			}
-			else
-			{
-				g = (byte)(color1.G * color2.G);
-			}
-			if (color1.B * color2.B > byte.MaxValue)
-			{
-				b = byte.MaxValue;
-			}
-			else
-			{
-				b = (byte)(color1.B * color2.B);
-			}
-			if (color1.A * color2.A > byte.MaxValue)
-			{
-				a = byte.MaxValue;
-			}
-			else
-			{
-				a = (byte)(color1.A * color2.A);
-			}
-			return Color.FromArgb(a, r, g, b);
-		}
-	}
+            if (color1.R * color2.R > byte.MaxValue)
+            {
+                r = byte.MaxValue;
+            }
+            else
+            {
+                r = (byte)(color1.R * color2.R);
+            }
+            if (color1.G * color2.G > byte.MaxValue)
+            {
+                g = byte.MaxValue;
+            }
+            else
+            {
+                g = (byte)(color1.G * color2.G);
+            }
+            if (color1.B * color2.B > byte.MaxValue)
+            {
+                b = byte.MaxValue;
+            }
+            else
+            {
+                b = (byte)(color1.B * color2.B);
+            }
+            if (color1.A * color2.A > byte.MaxValue)
+            {
+                a = byte.MaxValue;
+            }
+            else
+            {
+                a = (byte)(color1.A * color2.A);
+            }
+            return Color.FromArgb(a, r, g, b);
+        }
+    }
 }

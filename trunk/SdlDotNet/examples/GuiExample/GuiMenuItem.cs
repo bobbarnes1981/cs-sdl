@@ -26,203 +26,203 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class GuiMenuItem : HorizontalPacker
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		public GuiMenuItem(GuiManager manager)
-			: base(manager)
-		{
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class GuiMenuItem : HorizontalPacker
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        public GuiMenuItem(GuiManager manager)
+            : base(manager)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="text"></param>
-		public GuiMenuItem(GuiManager manager, string text)
-			: base(manager)
-		{
-			if (manager == null)
-			{
-				throw new ArgumentNullException("manager");
-			}
-			TextSprite ts = new TextSprite(text, manager.BaseFont);
-			base.Surface = ts.Surface;
-			AddLeft(ts);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="text"></param>
+        public GuiMenuItem(GuiManager manager, string text)
+            : base(manager)
+        {
+            if (manager == null)
+            {
+                throw new ArgumentNullException("manager");
+            }
+            TextSprite ts = new TextSprite(text, manager.BaseFont);
+            base.Surface = ts.Surface;
+            AddLeft(ts);
+        }
 
-		#region Sprites
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sprite"></param>
-		public void AddLeft(Sprite sprite)
-		{
-			AddHead(sprite);
-		}
+        #region Sprites
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sprite"></param>
+        public void AddLeft(Sprite sprite)
+        {
+            AddHead(sprite);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sprite"></param>
-		public void AddRight(Sprite sprite)
-		{
-			AddTail(sprite);
-		}
-		#endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sprite"></param>
+        public void AddRight(Sprite sprite)
+        {
+            AddTail(sprite);
+        }
+        #endregion
 
-		#region Drawing
-				/// <summary>
-		/// 
-		/// </summary>
-		public override Surface Render()
-		{
-			//this.Surface.Fill(this.GuiManager.BackgroundColor);
-			// Draw all of our left components
-			int x = 0;
+        #region Drawing
+        /// <summary>
+        /// 
+        /// </summary>
+        public override Surface Render()
+        {
+            //this.Surface.Fill(this.GuiManager.BackgroundColor);
+            // Draw all of our left components
+            int x = 0;
 
-			int width = 0;
-			foreach (Sprite s in HeadSprites.Keys)
-			{
-				// Ignore hidden
-				if (!s.Visible)
-				{
-					continue;
-				}
-	
-				// Translate it and blit
-				s.X = x;
+            int width = 0;
+            foreach (Sprite s in HeadSprites.Keys)
+            {
+                // Ignore hidden
+                if (!s.Visible)
+                {
+                    continue;
+                }
 
-				// Update the coordinates for the next one
-				x += s.Size.Width + InnerPadding.Horizontal;
-//				if (s.Size.Width > width)
-//				{
-//					width = s.Size.Width;
-//				}
-				width = 100;
-			}
+                // Translate it and blit
+                s.X = x;
 
-			this.Surface = new Surface( width, this.HeadSprites.Size.Height);
+                // Update the coordinates for the next one
+                x += s.Size.Width + InnerPadding.Horizontal;
+                //				if (s.Size.Width > width)
+                //				{
+                //					width = s.Size.Width;
+                //				}
+                width = 100;
+            }
 
-			foreach (Sprite s in TailSprites.Keys)
-			{
-				// Ignore hidden
-				if (!s.Visible)
-				{
-					continue;
-				}
-	
-				// Translate it and blit
-				//s.X = this.X + this.Size.Width - MarginPadding.Right /*- s.Size.Width*/ - InnerPadding.Horizontal;
-				s.X = this.X + this.Surface.Width - s.Width;
-			}
-			this.Sprites.Draw(this.Surface);
-			return this.Surface;
-		}
-		#endregion
+            this.Surface = new Surface(width, this.HeadSprites.Size.Height);
 
-		#region Events
-		/// <summary>
-		/// 
-		/// </summary>
-		public event MenuItemEventHandler ItemSelectedEvent;
+            foreach (Sprite s in TailSprites.Keys)
+            {
+                // Ignore hidden
+                if (!s.Visible)
+                {
+                    continue;
+                }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="index"></param>
-		public virtual void OnMenuSelected(int index)
-		{
-			if (ItemSelectedEvent != null)
-			{
-				ItemSelectedEvent(this, new MenuItemEventArgs(index));
-			}
-		}
-		#endregion
+                // Translate it and blit
+                //s.X = this.X + this.Size.Width - MarginPadding.Right /*- s.Size.Width*/ - InnerPadding.Horizontal;
+                s.X = this.X + this.Surface.Width - s.Width;
+            }
+            this.Sprites.Draw(this.Surface);
+            return this.Surface;
+        }
+        #endregion
 
-		#region Operators
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			return String.Format(CultureInfo.CurrentCulture, "(menu-item {0})", base.ToString());
-		}
-		#endregion
+        #region Events
+        /// <summary>
+        /// 
+        /// </summary>
+        public event MenuItemEventHandler ItemSelectedEvent;
 
-		#region Properties
-		private bool isSelected;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        public virtual void OnMenuSelected(int index)
+        {
+            if (ItemSelectedEvent != null)
+            {
+                ItemSelectedEvent(this, new MenuItemEventArgs(index));
+            }
+        }
+        #endregion
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool IsSelected
-		{
-			get 
-			{ 
-				return isSelected; 
-			}
-			set 
-			{ 
-				isSelected = value; 
-			}
-		}
+        #region Operators
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return String.Format(CultureInfo.CurrentCulture, "(menu-item {0})", base.ToString());
+        }
+        #endregion
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Padding InnerPadding
-		{
-			get 
-			{ 
-				return GuiManager.MenuItemInnerPadding; 
-			}
-		}
+        #region Properties
+        private bool isSelected;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Padding MarginPadding
-		{
-			get 
-			{ 
-				return GuiManager.MenuItemPadding; 
-			}
-		}
-		#endregion
-		private bool disposed;
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsSelected
+        {
+            get
+            {
+                return isSelected;
+            }
+            set
+            {
+                isSelected = value;
+            }
+        }
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public delegate void MenuItemEventHandler(object sender, MenuItemEventArgs e);
+        /// <summary>
+        /// 
+        /// </summary>
+        public override Padding InnerPadding
+        {
+            get
+            {
+                return GuiManager.MenuItemInnerPadding;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override Padding MarginPadding
+        {
+            get
+            {
+                return GuiManager.MenuItemPadding;
+            }
+        }
+        #endregion
+        private bool disposed;
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public delegate void MenuItemEventHandler(object sender, MenuItemEventArgs e);
 }

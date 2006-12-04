@@ -25,106 +25,109 @@ using System.Globalization;
 
 namespace SdlDotNet.Graphics.Sprites
 {
-	/// <summary>
-	/// The SpriteCollection is a special case of sprite. It is used to
-	/// group other sprites into an easily managed whole. The sprite
-	/// manager has no size.
-	/// </summary>
-	/// <remarks>
-	/// This class is useful for GUIs when you want to group sprites into one larger sprite.
-	/// </remarks>
-	public class SpriteContainer : Sprite
-	{
-//		/// <summary>
-//		/// 
-//		/// </summary>
-//		/// <param name="coordinates"></param>
-//		/// <param name="surface"></param>
-//		public SpriteContainer(Surface surface, Vector coordinates) : 
-//			base(surface, coordinates)
-//		{
-//		}
+    /// <summary>
+    /// The SpriteCollection is a special case of sprite. It is used to
+    /// group other sprites into an easily managed whole. The sprite
+    /// manager has no size.
+    /// </summary>
+    /// <remarks>
+    /// This class is useful for GUIs when you want to group sprites into one larger sprite.
+    /// </remarks>
+    public class SpriteContainer : Sprite
+    {
+        //		/// <summary>
+        //		/// 
+        //		/// </summary>
+        //		/// <param name="coordinates"></param>
+        //		/// <param name="surface"></param>
+        //		public SpriteContainer(Surface surface, Vector coordinates) : 
+        //			base(surface, coordinates)
+        //		{
+        //		}
 
-		/// <summary>
-		/// Creates SpriteContainer from a Surface
-		/// </summary>
-		/// <param name="surface">Main sprite Surface</param>
-		public SpriteContainer(Surface surface) : 
-			base(surface)
-		{
-		}
+        /// <summary>
+        /// Creates SpriteContainer from a Surface
+        /// </summary>
+        /// <param name="surface">Main sprite Surface</param>
+        public SpriteContainer(Surface surface)
+            :
+            base(surface)
+        {
+        }
 
-		/// <summary>
-		/// Creates SpriteContainer from a Surface
-		/// </summary>
-		/// <param name="surface">Main sprite surface</param>
-		/// <param name="rectangle">Rectangle for spirte</param>
-		public SpriteContainer(Surface surface, Rectangle rectangle) : 
-			base(surface, rectangle)
-		{
-		}
+        /// <summary>
+        /// Creates SpriteContainer from a Surface
+        /// </summary>
+        /// <param name="surface">Main sprite surface</param>
+        /// <param name="rectangle">Rectangle for spirte</param>
+        public SpriteContainer(Surface surface, Rectangle rectangle)
+            :
+            base(surface, rectangle)
+        {
+        }
 
-		/// <summary>
-		/// Creates SpriteContainer from a Surface
-		/// </summary>
-		/// <param name="surface">Main sprite surface</param>
-		/// <param name="rectangle">Rectangle for spirte</param>
-		/// <param name="positionZ">Z coordinate of sprite</param>
-		public SpriteContainer(Surface surface, Rectangle rectangle, int positionZ) : 
+        /// <summary>
+        /// Creates SpriteContainer from a Surface
+        /// </summary>
+        /// <param name="surface">Main sprite surface</param>
+        /// <param name="rectangle">Rectangle for spirte</param>
+        /// <param name="positionZ">Z coordinate of sprite</param>
+        public SpriteContainer(Surface surface, Rectangle rectangle, int positionZ)
+            :
 base(surface, rectangle, positionZ)
-		{
-		}
+        {
+        }
 
-		private SpriteCollection sprites = new SpriteCollection();
-		/// <summary>
-		/// Collection of sprites that make up the SpriteContainer
-		/// </summary>
-		/// <remarks>
-		/// These sprites will be blit onto the main Surface of the SpriteContainer.
-		/// </remarks>
-		public SpriteCollection Sprites
-		{
-			get
-			{
-				return sprites;
-			}
-		}
+        private SpriteCollection sprites = new SpriteCollection();
+        /// <summary>
+        /// Collection of sprites that make up the SpriteContainer
+        /// </summary>
+        /// <remarks>
+        /// These sprites will be blit onto the main Surface of the SpriteContainer.
+        /// </remarks>
+        public SpriteCollection Sprites
+        {
+            get
+            {
+                return sprites;
+            }
+        }
 
-		private bool disposed;
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		/// <param name="disposing">If true, dispose unmanaged resources.</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-						foreach (Sprite s in this.sprites.Keys)
-						{
-							s.Dispose();							
-						}
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
+        private bool disposed;
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        /// <param name="disposing">If true, dispose unmanaged resources.</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                        foreach (Sprite s in this.sprites.Keys)
+                        {
+                            s.Dispose();
+                        }
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
 
-		/// <summary>
-		/// Displays all spirtes stored in the Collection as one Sprite
-		/// </summary>
-		/// <returns>Surface that has all sprites blit onto it.</returns>
-		public override Surface Render()
-		{
-			this.sprites.Draw(this.Surface);
-			return this.Surface;
-		}
-	}
+        /// <summary>
+        /// Displays all spirtes stored in the Collection as one Sprite
+        /// </summary>
+        /// <returns>Surface that has all sprites blit onto it.</returns>
+        public override Surface Render()
+        {
+            this.sprites.Draw(this.Surface);
+            return this.Surface;
+        }
+    }
 }

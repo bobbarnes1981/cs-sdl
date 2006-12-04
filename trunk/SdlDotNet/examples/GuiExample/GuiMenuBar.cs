@@ -27,120 +27,120 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// A fairly complicated class that creates a menu bar that
-	/// stretches across the top of a region. This bar handles menus in
-	/// addition to normal sprites, allowing for a fairly complicated
-	/// menubar system. The region itself determines where a menu may appear.
-	/// </summary>
-	public class GuiMenuBar : HorizontalPacker
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="gui"></param>
-		/// <param name="point"></param>
-		/// <param name="height"></param>
-		public GuiMenuBar(GuiManager gui, Point point, int height)
-			: base(gui, new Rectangle(point.X, point.Y, Video.Screen.Width, height))
-		{
-			this.Z = 10000;
-		}
+    /// <summary>
+    /// A fairly complicated class that creates a menu bar that
+    /// stretches across the top of a region. This bar handles menus in
+    /// addition to normal sprites, allowing for a fairly complicated
+    /// menubar system. The region itself determines where a menu may appear.
+    /// </summary>
+    public class GuiMenuBar : HorizontalPacker
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gui"></param>
+        /// <param name="point"></param>
+        /// <param name="height"></param>
+        public GuiMenuBar(GuiManager gui, Point point, int height)
+            : base(gui, new Rectangle(point.X, point.Y, Video.Screen.Width, height))
+        {
+            this.Z = 10000;
+        }
 
-		#region Sprites
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="spriteContainer"></param>
-		public void AddLeft(SpriteContainer spriteContainer)
-		{
-			if (spriteContainer == null)
-			{
-				throw new ArgumentNullException("spriteContainer");
-			}
-			AddHead(spriteContainer);
-			spriteContainer.Position = new Point(0, 0);
+        #region Sprites
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spriteContainer"></param>
+        public void AddLeft(SpriteContainer spriteContainer)
+        {
+            if (spriteContainer == null)
+            {
+                throw new ArgumentNullException("spriteContainer");
+            }
+            AddHead(spriteContainer);
+            spriteContainer.Position = new Point(0, 0);
 
-			if (spriteContainer.GetType().Name == "GuiMenuTitle")
-			{
-				((GuiMenuTitle) spriteContainer).MenuBar = this;
-			}
-		}
+            if (spriteContainer.GetType().Name == "GuiMenuTitle")
+            {
+                ((GuiMenuTitle)spriteContainer).MenuBar = this;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="spriteContainer"></param>
-		public void AddRight(SpriteContainer spriteContainer)
-		{
-			if (spriteContainer == null)
-			{
-				throw new ArgumentNullException("spriteContainer");
-			}
-			AddTail(spriteContainer);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spriteContainer"></param>
+        public void AddRight(SpriteContainer spriteContainer)
+        {
+            if (spriteContainer == null)
+            {
+                throw new ArgumentNullException("spriteContainer");
+            }
+            AddTail(spriteContainer);
 
-			if (spriteContainer.GetType().Name == "GuiMenuTitle")
-			{
-				((GuiMenuTitle) spriteContainer).MenuBar = this;
-			}
-		}
-		#endregion
+            if (spriteContainer.GetType().Name == "GuiMenuTitle")
+            {
+                ((GuiMenuTitle)spriteContainer).MenuBar = this;
+            }
+        }
+        #endregion
 
-		#region Geometry
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Padding InnerPadding
-		{
-			get 
-			{ 
-				return GuiManager.MenuTitlePadding; 
-			}
-		}
+        #region Geometry
+        /// <summary>
+        /// 
+        /// </summary>
+        public override Padding InnerPadding
+        {
+            get
+            {
+                return GuiManager.MenuTitlePadding;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override Padding MarginPadding
-		{
-			get 
-			{ 
-				return GuiManager.MenuBarPadding; 
-			}
-		}
-		#endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        public override Padding MarginPadding
+        {
+            get
+            {
+                return GuiManager.MenuBarPadding;
+            }
+        }
+        #endregion
 
-		#region Operators
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			return String.Format(CultureInfo.CurrentCulture, "(menu-bar {0})", base.ToString());
-		}
-		#endregion
-		private bool disposed;
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+        #region Operators
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return String.Format(CultureInfo.CurrentCulture, "(menu-bar {0})", base.ToString());
+        }
+        #endregion
+        private bool disposed;
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

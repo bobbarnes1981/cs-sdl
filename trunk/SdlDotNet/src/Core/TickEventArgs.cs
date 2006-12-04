@@ -24,86 +24,86 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Core
 {
-	/// <summary>
-	/// Event arguments for a Framerate tick.
-	/// </summary>
-	public class  TickEventArgs : UserEventArgs 
-	{
-		private int lastTick;
-		private int tick;
-		private int fps;
+    /// <summary>
+    /// Event arguments for a Framerate tick.
+    /// </summary>
+    public class TickEventArgs : UserEventArgs
+    {
+        private int lastTick;
+        private int tick;
+        private int fps;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="tick">
-		/// The current tick.
-		/// </param>
-		/// <param name="lastTick">
-		/// The tick count that it was at last frame.
-		/// </param>
-		/// <param name="fps">Frames per second</param>
-		public TickEventArgs(int tick, int lastTick, int fps)
-		{
-			this.tick = tick;
-			this.lastTick = lastTick;
-			this.fps = fps;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tick">
+        /// The current tick.
+        /// </param>
+        /// <param name="lastTick">
+        /// The tick count that it was at last frame.
+        /// </param>
+        /// <param name="fps">Frames per second</param>
+        public TickEventArgs(int tick, int lastTick, int fps)
+        {
+            this.tick = tick;
+            this.lastTick = lastTick;
+            this.fps = fps;
+        }
 
-		/// <summary>
-		/// Gets when the last frame tick occurred.
-		/// </summary>
-		public int LastTick
-		{
-			get
-			{
-				return this.lastTick;
-			}
-		}
-		
-		/// <summary>
-		/// Gets the FPS as of the event call. Events.FPS is an alternative.
-		/// </summary>
-		public int Fps
-		{
-			get
-			{
-				return this.fps;
-			}
-		}
+        /// <summary>
+        /// Gets when the last frame tick occurred.
+        /// </summary>
+        public int LastTick
+        {
+            get
+            {
+                return this.lastTick;
+            }
+        }
 
-		/// <summary>
-		/// Gets the current SDL tick time.
-		/// </summary>
-		public int Tick
-		{
-			get
-			{
-				return this.tick;
-			}
-		}
-		
-		/// <summary>
-		/// Gets the difference in time between the 
-		/// current tick and the last tick.
-		/// </summary>
-		public int TicksElapsed
-		{
-			get
-			{
-				return this.tick - this.lastTick;
-			}
-		}
+        /// <summary>
+        /// Gets the FPS as of the event call. Events.FPS is an alternative.
+        /// </summary>
+        public int Fps
+        {
+            get
+            {
+                return this.fps;
+            }
+        }
 
-		/// <summary>
-		/// Seconds elapsed between the last tick and the current tick
-		/// </summary>
-		public float SecondsElapsed
-		{
-			get
-			{
-				return (this.TicksElapsed / 1000.0f);
-			}
-		}
-	}
+        /// <summary>
+        /// Gets the current SDL tick time.
+        /// </summary>
+        public int Tick
+        {
+            get
+            {
+                return this.tick;
+            }
+        }
+
+        /// <summary>
+        /// Gets the difference in time between the 
+        /// current tick and the last tick.
+        /// </summary>
+        public int TicksElapsed
+        {
+            get
+            {
+                return this.tick - this.lastTick;
+            }
+        }
+
+        /// <summary>
+        /// Seconds elapsed between the last tick and the current tick
+        /// </summary>
+        public float SecondsElapsed
+        {
+            get
+            {
+                return (this.TicksElapsed / 1000.0f);
+            }
+        }
+    }
 }

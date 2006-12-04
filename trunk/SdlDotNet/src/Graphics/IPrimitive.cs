@@ -25,18 +25,18 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Graphics
 {
-	/// <summary>
-	/// Interface for primitive shapes
-	/// </summary>
-	public interface IPrimitive
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		Point Center
-		{
-			get;
-			set;
-		}
-	}
+    /// <summary>
+    /// Interface for primitive shapes
+    /// </summary>
+    public interface IPrimitive
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        Point Center
+        {
+            get;
+            set;
+        }
+    }
 }

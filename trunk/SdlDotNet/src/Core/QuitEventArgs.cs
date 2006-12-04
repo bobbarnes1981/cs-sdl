@@ -22,23 +22,24 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Core
 {
-	/// <summary>
-	/// Arguments for the QuitEvent.
-	/// </summary>
-	public class QuitEventArgs : SdlEventArgs 
-	{
-		/// <summary>
-		/// Quit Event
-		/// </summary>
-		public QuitEventArgs()
-		{	
-			Sdl.SDL_Event evt = new Sdl.SDL_Event();
-			evt.type = (byte)EventTypes.Quit;
-			this.EventStruct = evt;
-		}
+    /// <summary>
+    /// Arguments for the QuitEvent.
+    /// </summary>
+    public class QuitEventArgs : SdlEventArgs
+    {
+        /// <summary>
+        /// Quit Event
+        /// </summary>
+        public QuitEventArgs()
+        {
+            Sdl.SDL_Event evt = new Sdl.SDL_Event();
+            evt.type = (byte)EventTypes.Quit;
+            this.EventStruct = evt;
+        }
 
-		internal QuitEventArgs(Sdl.SDL_Event evt) : base(evt)
-		{
-		}
-	}
+        internal QuitEventArgs(Sdl.SDL_Event evt)
+            : base(evt)
+        {
+        }
+    }
 }

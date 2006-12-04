@@ -24,23 +24,24 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Graphics
 {
-	/// <summary>
-	/// event args for the Video Expose event.
-	/// </summary>
-	public class VideoExposeEventArgs : SdlEventArgs 
-	{
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public VideoExposeEventArgs()
-		{
-			Sdl.SDL_Event evt = new Sdl.SDL_Event();
-			evt.type = (byte)EventTypes.VideoExpose;
-			this.EventStruct = evt;
-		}
+    /// <summary>
+    /// event args for the Video Expose event.
+    /// </summary>
+    public class VideoExposeEventArgs : SdlEventArgs
+    {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public VideoExposeEventArgs()
+        {
+            Sdl.SDL_Event evt = new Sdl.SDL_Event();
+            evt.type = (byte)EventTypes.VideoExpose;
+            this.EventStruct = evt;
+        }
 
-		internal VideoExposeEventArgs(Sdl.SDL_Event evt) : base(evt)
-		{
-		}
-	}
+        internal VideoExposeEventArgs(Sdl.SDL_Event evt)
+            : base(evt)
+        {
+        }
+    }
 }

@@ -22,48 +22,51 @@ using System.Runtime.Serialization;
 
 using SdlDotNet.Core;
 
-namespace SdlDotNet.Graphics 
+namespace SdlDotNet.Graphics
 {
-	/// <summary>
-	/// Represents an error resulting from a surface being lost, 
-	/// usually as a result of the user changing the input focus 
-	/// away from a full-screen application.
-	/// </summary>
-	[Serializable()]
-	public class SurfaceLostException : SdlException 
-	{
-		/// <summary>
-		/// Basic exception.
-		/// </summary>
-		public SurfaceLostException() 
-		{
-			SurfaceLostException.Generate();
-		}
+    /// <summary>
+    /// Represents an error resulting from a surface being lost, 
+    /// usually as a result of the user changing the input focus 
+    /// away from a full-screen application.
+    /// </summary>
+    [Serializable()]
+    public class SurfaceLostException : SdlException
+    {
+        /// <summary>
+        /// Basic exception.
+        /// </summary>
+        public SurfaceLostException()
+        {
+            SurfaceLostException.Generate();
+        }
 
-		/// <summary>
-		/// Exception with specified string
-		/// </summary>
-		/// <param name="message">Exception message</param>
-		public SurfaceLostException(string message): base(message)
-		{
-		}
+        /// <summary>
+        /// Exception with specified string
+        /// </summary>
+        /// <param name="message">Exception message</param>
+        public SurfaceLostException(string message)
+            : base(message)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="exception"></param>
-		public SurfaceLostException(string message, Exception exception) : base(message, exception)
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="exception"></param>
+        public SurfaceLostException(string message, Exception exception)
+            : base(message, exception)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="info"></param>
-		/// <param name="context"></param>
-		protected SurfaceLostException(SerializationInfo info, StreamingContext context) : base( info, context )
-		{
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected SurfaceLostException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
 }

@@ -31,86 +31,86 @@ using Tao.OpenGl;
 
 namespace SdlDotNet.Examples.NeHe
 {
-	/// <summary>
-	/// Lesson 02: Your First Polygon
-	/// </summary>
-	public class NeHe002 : NeHe001
-	{
-		#region Fields
+    /// <summary>
+    /// Lesson 02: Your First Polygon
+    /// </summary>
+    public class NeHe002 : NeHe001
+    {
+        #region Fields
 
-		/// <summary>
-		/// Lesson Title
-		/// </summary>
-		public new static string Title
-		{
-			get
-			{
-				return "Lesson 02: Your First Polygon";
-			}
-		}
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public new static string Title
+        {
+            get
+            {
+                return "Lesson 02: Your First Polygon";
+            }
+        }
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Lesson Setup
+        #region Lesson Setup
 
-		/// <summary>
-		/// Initializes the OpenGL system
-		/// </summary>
-		protected override void InitGL()
-		{
-			// Enable Smooth Shading
-			Gl.glShadeModel(Gl.GL_SMOOTH);
-			// Black Background
-			Gl.glClearColor(0.0F, 0.0F, 0.0F, 0.5F);
-			// Depth Buffer Setup
-			Gl.glClearDepth(1.0F);
-			// Enables Depth Testing
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
-			// The Type Of Depth Testing To Do
-			Gl.glDepthFunc(Gl.GL_LEQUAL);
-			// Really Nice Perspective Calculations
-			Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
-		}
+        /// <summary>
+        /// Initializes the OpenGL system
+        /// </summary>
+        protected override void InitGL()
+        {
+            // Enable Smooth Shading
+            Gl.glShadeModel(Gl.GL_SMOOTH);
+            // Black Background
+            Gl.glClearColor(0.0F, 0.0F, 0.0F, 0.5F);
+            // Depth Buffer Setup
+            Gl.glClearDepth(1.0F);
+            // Enables Depth Testing
+            Gl.glEnable(Gl.GL_DEPTH_TEST);
+            // The Type Of Depth Testing To Do
+            Gl.glDepthFunc(Gl.GL_LEQUAL);
+            // Really Nice Perspective Calculations
+            Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+        }
 
-		#endregion Lesson Setup
+        #endregion Lesson Setup
 
-		#region void DrawGLScene
-		/// <summary>
-		/// Renders the scene
-		/// </summary>
-		protected override void DrawGLScene()
-		{
-			// Clear Screen And Depth Buffer
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-			// Reset The Current Modelview Matrix
-			Gl.glLoadIdentity(); 
-			// Move Left 1.5 Units And Into The Screen 6.0
-			Gl.glTranslatef(-1.5f, 0, -6);
-			// Drawing Using Triangles
-			Gl.glBegin(Gl.GL_TRIANGLES); 
-			// Top
-			Gl.glVertex3f(0, 1, 0);  
-			// Bottom Left
-			Gl.glVertex3f(-1, -1, 0);
-			// Bottom Right
-			Gl.glVertex3f(1, -1, 0); 
-			// Finished Drawing The Triangle
-			Gl.glEnd();  
-			// Move Right 3 Units
-			Gl.glTranslatef(3, 0, 0);
-			// Draw A Quad
-			Gl.glBegin(Gl.GL_QUADS); 
-			// Top Left
-			Gl.glVertex3f(-1, 1, 0); 
-			// Top Right
-			Gl.glVertex3f(1, 1, 0);  
-			// Bottom Right
-			Gl.glVertex3f(1, -1, 0); 
-			// Bottom Left
-			Gl.glVertex3f(-1, -1, 0);
-			// Done Drawing The Quad
-			Gl.glEnd();   
-		}
-		#endregion void DrawGLScene
-	}
+        #region void DrawGLScene
+        /// <summary>
+        /// Renders the scene
+        /// </summary>
+        protected override void DrawGLScene()
+        {
+            // Clear Screen And Depth Buffer
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
+            // Reset The Current Modelview Matrix
+            Gl.glLoadIdentity();
+            // Move Left 1.5 Units And Into The Screen 6.0
+            Gl.glTranslatef(-1.5f, 0, -6);
+            // Drawing Using Triangles
+            Gl.glBegin(Gl.GL_TRIANGLES);
+            // Top
+            Gl.glVertex3f(0, 1, 0);
+            // Bottom Left
+            Gl.glVertex3f(-1, -1, 0);
+            // Bottom Right
+            Gl.glVertex3f(1, -1, 0);
+            // Finished Drawing The Triangle
+            Gl.glEnd();
+            // Move Right 3 Units
+            Gl.glTranslatef(3, 0, 0);
+            // Draw A Quad
+            Gl.glBegin(Gl.GL_QUADS);
+            // Top Left
+            Gl.glVertex3f(-1, 1, 0);
+            // Top Right
+            Gl.glVertex3f(1, 1, 0);
+            // Bottom Right
+            Gl.glVertex3f(1, -1, 0);
+            // Bottom Left
+            Gl.glVertex3f(-1, -1, 0);
+            // Done Drawing The Quad
+            Gl.glEnd();
+        }
+        #endregion void DrawGLScene
+    }
 }

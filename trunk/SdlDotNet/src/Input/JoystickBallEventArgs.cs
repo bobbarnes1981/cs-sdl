@@ -24,75 +24,76 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Input
 {
-	/// <summary>
-	/// Summary description for JoystickBallEventArgs.
-	/// </summary>
-	public class JoystickBallEventArgs : SdlEventArgs 
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		///<param name="device">The joystick index</param>
-		/// <param name="ball">The trackball index</param>
-		/// <param name="relativeX">The relative X position</param>
-		/// <param name="relativeY">The relative Y position</param>
-		public JoystickBallEventArgs(byte device, byte ball, short relativeX, short relativeY)
-		{
-			Sdl.SDL_Event evt = new Sdl.SDL_Event();
-			evt.jball.which = device;
-			evt.jball.ball = ball;
-			evt.jball.xrel = relativeX;
-			evt.jball.yrel = relativeY;
-			evt.type = (byte)EventTypes.JoystickBallMotion;
-			this.EventStruct = evt;
-		}
+    /// <summary>
+    /// Summary description for JoystickBallEventArgs.
+    /// </summary>
+    public class JoystickBallEventArgs : SdlEventArgs
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        ///<param name="device">The joystick index</param>
+        /// <param name="ball">The trackball index</param>
+        /// <param name="relativeX">The relative X position</param>
+        /// <param name="relativeY">The relative Y position</param>
+        public JoystickBallEventArgs(byte device, byte ball, short relativeX, short relativeY)
+        {
+            Sdl.SDL_Event evt = new Sdl.SDL_Event();
+            evt.jball.which = device;
+            evt.jball.ball = ball;
+            evt.jball.xrel = relativeX;
+            evt.jball.yrel = relativeY;
+            evt.type = (byte)EventTypes.JoystickBallMotion;
+            this.EventStruct = evt;
+        }
 
-		internal JoystickBallEventArgs(Sdl.SDL_Event evt) : base(evt)
-		{
-		}
+        internal JoystickBallEventArgs(Sdl.SDL_Event evt)
+            : base(evt)
+        {
+        }
 
-		/// <summary>
-		/// Device
-		/// </summary>
-		public int Device
-		{
-			get
-			{
-				return this.EventStruct.jball.which;
-			}
-		}
+        /// <summary>
+        /// Device
+        /// </summary>
+        public int Device
+        {
+            get
+            {
+                return this.EventStruct.jball.which;
+            }
+        }
 
-		/// <summary>
-		/// Ball
-		/// </summary>
-		public int Ball
-		{
-			get
-			{
-				return this.EventStruct.jball.ball;
-			}
-		}
+        /// <summary>
+        /// Ball
+        /// </summary>
+        public int Ball
+        {
+            get
+            {
+                return this.EventStruct.jball.ball;
+            }
+        }
 
-		/// <summary>
-		/// change in distance on X-axis
-		/// </summary>
-		public int RelativeX
-		{
-			get
-			{
-				return this.EventStruct.jball.xrel;
-			}
-		}
+        /// <summary>
+        /// change in distance on X-axis
+        /// </summary>
+        public int RelativeX
+        {
+            get
+            {
+                return this.EventStruct.jball.xrel;
+            }
+        }
 
-		/// <summary>
-		/// Change in distance on Y axis
-		/// </summary>
-		public int RelativeY
-		{
-			get
-			{
-				return this.EventStruct.jball.yrel;
-			}
-		}
-	}
+        /// <summary>
+        /// Change in distance on Y axis
+        /// </summary>
+        public int RelativeY
+        {
+            get
+            {
+                return this.EventStruct.jball.yrel;
+            }
+        }
+    }
 }

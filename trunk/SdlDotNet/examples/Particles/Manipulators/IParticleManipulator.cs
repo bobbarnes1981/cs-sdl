@@ -23,38 +23,38 @@ using SdlDotNet.Particles.Particle;
 
 namespace SdlDotNet.Particles.Manipulators
 {
-	/// <summary>
-	/// An interface describing a force that manipulates a group of particles.
-	/// </summary>
-	/// <example>
-	/// The following makes a particle manipulator that keeps pixels from going off the left side of the screen.
-	/// <code>
-	/// public class ParticleBounceLeft : IParticleManipulator
-	/// {
-	///		public ParticleBounceLeft()
-	///		{
-	///		}
-	///		public void Manipulate(ParticleCollection particles)
-	///			foreach(BaseParticle p in particles)
-	///			{
-	///				if(p.X &lt; 0)
-	///				{
-	///					p.X = this.X;
-	///					p.Velocity.X *= -1;
-	///				}
-	///			}
-	///		}
-	/// }
-	/// </code>
-	/// </example>
-	/// <remarks>The Manipulate method should only change the velocity of the particles.</remarks>
-	public interface IParticleManipulator
-	{
-		/// <summary>
-		/// Manipulates the given group of particles by the manipulators force.
-		/// </summary>
-		/// <param name="particles">The collection of particles to manipulate.</param>
-		/// <remarks>This should only affect the particles' velocity.</remarks>
-		void Manipulate(ParticleCollection particles);
-	}
+    /// <summary>
+    /// An interface describing a force that manipulates a group of particles.
+    /// </summary>
+    /// <example>
+    /// The following makes a particle manipulator that keeps pixels from going off the left side of the screen.
+    /// <code>
+    /// public class ParticleBounceLeft : IParticleManipulator
+    /// {
+    ///		public ParticleBounceLeft()
+    ///		{
+    ///		}
+    ///		public void Manipulate(ParticleCollection particles)
+    ///			foreach(BaseParticle p in particles)
+    ///			{
+    ///				if(p.X &lt; 0)
+    ///				{
+    ///					p.X = this.X;
+    ///					p.Velocity.X *= -1;
+    ///				}
+    ///			}
+    ///		}
+    /// }
+    /// </code>
+    /// </example>
+    /// <remarks>The Manipulate method should only change the velocity of the particles.</remarks>
+    public interface IParticleManipulator
+    {
+        /// <summary>
+        /// Manipulates the given group of particles by the manipulators force.
+        /// </summary>
+        /// <param name="particles">The collection of particles to manipulate.</param>
+        /// <remarks>This should only affect the particles' velocity.</remarks>
+        void Manipulate(ParticleCollection particles);
+    }
 }

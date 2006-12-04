@@ -22,46 +22,49 @@ using System.Runtime.Serialization;
 
 using SdlDotNet.Core;
 
-namespace SdlDotNet.Graphics 
+namespace SdlDotNet.Graphics
 {
-	/// <summary>
-	/// Represents an error resulting from a movie not playing correctly
-	/// </summary>
-	[Serializable()]
-	public class MovieStatusException : SdlException 
-	{
-		/// <summary>
-		/// Represents an error resulting from a movie not playing correctly
-		/// </summary>
-		public MovieStatusException() 
-		{
-			MovieStatusException.Generate();
-		}
+    /// <summary>
+    /// Represents an error resulting from a movie not playing correctly
+    /// </summary>
+    [Serializable()]
+    public class MovieStatusException : SdlException
+    {
+        /// <summary>
+        /// Represents an error resulting from a movie not playing correctly
+        /// </summary>
+        public MovieStatusException()
+        {
+            MovieStatusException.Generate();
+        }
 
-		/// <summary>
-		/// Represents an error resulting from a movie not playing correctly
-		/// </summary>
-		/// <param name="message">Execption string</param>
-		public MovieStatusException(string message): base(message)
-		{
-		}
+        /// <summary>
+        /// Represents an error resulting from a movie not playing correctly
+        /// </summary>
+        /// <param name="message">Execption string</param>
+        public MovieStatusException(string message)
+            : base(message)
+        {
+        }
 
-		/// <summary>
-		/// Represents an error resulting from a movie not playing correctly
-		/// </summary>
-		/// <param name="message">Exception string</param>
-		/// <param name="exception"></param>
-		public MovieStatusException(string message, Exception exception) : base(message, exception)
-		{
-		}
+        /// <summary>
+        /// Represents an error resulting from a movie not playing correctly
+        /// </summary>
+        /// <param name="message">Exception string</param>
+        /// <param name="exception"></param>
+        public MovieStatusException(string message, Exception exception)
+            : base(message, exception)
+        {
+        }
 
-		/// <summary>
-		/// Represents an error resulting from a movie not playing correctly
-		/// </summary>
-		/// <param name="info"></param>
-		/// <param name="context"></param>
-		protected MovieStatusException(SerializationInfo info, StreamingContext context) : base( info, context )
-		{
-		}
-	}
+        /// <summary>
+        /// Represents an error resulting from a movie not playing correctly
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected MovieStatusException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
 }

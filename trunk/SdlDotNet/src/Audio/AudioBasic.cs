@@ -70,7 +70,7 @@ namespace SdlDotNet.Audio
                 {
                     throw new AudioException("Unable to initialize audio subsystem.  SDL Error: " + Sdl.SDL_GetError());
                 }
-                
+
                 audioWasNotAlreadyInitialized = true;
             }
 
@@ -110,7 +110,7 @@ namespace SdlDotNet.Audio
                 {
                     offset = 2 << (bits - 2);
                 }
-                
+
                 audioInfo = new AudioInfo(spec, bits, offset);
 
             }
@@ -233,12 +233,12 @@ namespace SdlDotNet.Audio
             CheckOpenStatus("CloseAudio");
 
             Sdl.SDL_CloseAudio();
- 
+
             audioCallbackDelegate = null;
             audioOpen = false;
             audioInfo = null;
             audioLocked = false;
-            
+
             if (stream != null)
             {
                 stream.Close();
@@ -249,7 +249,7 @@ namespace SdlDotNet.Audio
             {
                 Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
             }
-       }
+        }
 
         /// <summary>
         /// Gets or sets the locked status of the audio subsystem.  Necessary when data is 
@@ -314,9 +314,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public static AudioInfo AudioInfo
         {
-            get 
-            { 
-                return audioInfo; 
+            get
+            {
+                return audioInfo;
             }
         }
 
@@ -325,9 +325,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public static bool Open
         {
-            get 
-            { 
-                return audioOpen; 
+            get
+            {
+                return audioOpen;
             }
         }
 

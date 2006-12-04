@@ -24,62 +24,63 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Input
 {
-	/// <summary>
-	/// Summary description for JoystickHatEventArgs.
-	/// </summary>
-	public class JoystickHatEventArgs : SdlEventArgs 
-	{
-		/// <summary>
-		/// Joystick Hat event args
-		/// </summary>
-		/// <param name="device">The joystick index</param>
-		/// <param name="hatIndex">The hat index</param>
-		/// <param name="hatValue">The new hat position</param>
-		public JoystickHatEventArgs(byte device, byte hatIndex, byte hatValue)
-		{
-			Sdl.SDL_Event evt = new Sdl.SDL_Event();
-			evt.jhat.which = device;
-			evt.jhat.hat = hatIndex;
-			evt.jhat.val = hatValue;
-			evt.type = (byte)EventTypes.JoystickHatMotion;
-			this.EventStruct = evt;
-		}
+    /// <summary>
+    /// Summary description for JoystickHatEventArgs.
+    /// </summary>
+    public class JoystickHatEventArgs : SdlEventArgs
+    {
+        /// <summary>
+        /// Joystick Hat event args
+        /// </summary>
+        /// <param name="device">The joystick index</param>
+        /// <param name="hatIndex">The hat index</param>
+        /// <param name="hatValue">The new hat position</param>
+        public JoystickHatEventArgs(byte device, byte hatIndex, byte hatValue)
+        {
+            Sdl.SDL_Event evt = new Sdl.SDL_Event();
+            evt.jhat.which = device;
+            evt.jhat.hat = hatIndex;
+            evt.jhat.val = hatValue;
+            evt.type = (byte)EventTypes.JoystickHatMotion;
+            this.EventStruct = evt;
+        }
 
-		internal JoystickHatEventArgs(Sdl.SDL_Event evt) : base(evt)
-		{
-		}
+        internal JoystickHatEventArgs(Sdl.SDL_Event evt)
+            : base(evt)
+        {
+        }
 
-		/// <summary>
-		/// joystick
-		/// </summary>
-		public int Device
-		{
-			get
-			{
-				return this.EventStruct.jhat.which;
-			}
-		}
+        /// <summary>
+        /// joystick
+        /// </summary>
+        public int Device
+        {
+            get
+            {
+                return this.EventStruct.jhat.which;
+            }
+        }
 
-		/// <summary>
-		/// Hat Index
-		/// </summary>
-		public int HatIndex
-		{
-			get
-			{
-				return this.EventStruct.jhat.hat;
-			}
-		}
+        /// <summary>
+        /// Hat Index
+        /// </summary>
+        public int HatIndex
+        {
+            get
+            {
+                return this.EventStruct.jhat.hat;
+            }
+        }
 
-		/// <summary>
-		/// Hat value
-		/// </summary>
-		public int HatValue
-		{
-			get
-			{ 
-				return this.EventStruct.jhat.val;
-			}
-		}
-	}
+        /// <summary>
+        /// Hat value
+        /// </summary>
+        public int HatValue
+        {
+            get
+            {
+                return this.EventStruct.jhat.val;
+            }
+        }
+    }
 }

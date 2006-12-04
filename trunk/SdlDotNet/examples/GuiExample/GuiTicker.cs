@@ -27,152 +27,152 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// A rather simple component, the ticker scrolls text left or right
-	/// across the screen according to the given rate. It may have an
-	/// option to hide itself if there is nothing in the ticker,
-	/// otherwise it stays on the screen.
-	/// </summary>
-	public class GuiTicker : GuiComponent
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="gui"></param>
-		/// <param name="point"></param>
-		/// <param name="height"></param>
-		public GuiTicker(GuiManager gui, Point point, int height)
-			: base(gui, new Rectangle(point.X, point.Y, Video.Screen.Width, height))
-		{			
-		}
+    /// <summary>
+    /// A rather simple component, the ticker scrolls text left or right
+    /// across the screen according to the given rate. It may have an
+    /// option to hide itself if there is nothing in the ticker,
+    /// otherwise it stays on the screen.
+    /// </summary>
+    public class GuiTicker : GuiComponent
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gui"></param>
+        /// <param name="point"></param>
+        /// <param name="height"></param>
+        public GuiTicker(GuiManager gui, Point point, int height)
+            : base(gui, new Rectangle(point.X, point.Y, Video.Screen.Width, height))
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="gui"></param>
-		/// <param name="coordinates"></param>
-		/// <param name="height"></param>
-		public GuiTicker(GuiManager gui, Vector coordinates, int height)
-			: base(gui, new Rectangle((int)coordinates.X , (int)coordinates.Y, Video.Screen.Width, height), 100)
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gui"></param>
+        /// <param name="coordinates"></param>
+        /// <param name="height"></param>
+        public GuiTicker(GuiManager gui, Vector coordinates, int height)
+            : base(gui, new Rectangle((int)coordinates.X, (int)coordinates.Y, Video.Screen.Width, height), 100)
+        {
+        }
 
-		#region Sprites
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sprite"></param>
-		public void Add(Sprite sprite)
-		{
-			if (sprite == null)
-			{
-				throw new ArgumentNullException("sprite");
-			}
-			sprite.Position = new Point(this.Size.Width, this.Position.Y);
-			base.Sprites.Add(sprite, sprite.Rectangle);
-		}
-		#endregion
+        #region Sprites
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sprite"></param>
+        public void Add(Sprite sprite)
+        {
+            if (sprite == null)
+            {
+                throw new ArgumentNullException("sprite");
+            }
+            sprite.Position = new Point(this.Size.Width, this.Position.Y);
+            base.Sprites.Add(sprite, sprite.Rectangle);
+        }
+        #endregion
 
-		#region Events
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(TickEventArgs args)
-		{
-			//Sprite s;
-			// Figure out the rates. 
-			// The min and max start on opposite sides
-			// of the ticker.
-			//int offset = args.RatePerSecond(Delta);
+        #region Events
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public override void Update(TickEventArgs args)
+        {
+            //Sprite s;
+            // Figure out the rates. 
+            // The min and max start on opposite sides
+            // of the ticker.
+            //int offset = args.RatePerSecond(Delta);
 
-			if (this.Sprites.Count != 0)
-			{
-				// Go through all the displayed sprites
-				foreach (Sprite s in Sprites.Keys)
-				{
-					
-					// Tick the sprite and wrap it in a translator
-					s.Update(args);
-	  
-					// Move the sprite along
-					
-						s.X += 10;
-					
-					s.Y = 0;
-				}
-			}
-		}
-		#endregion
+            if (this.Sprites.Count != 0)
+            {
+                // Go through all the displayed sprites
+                foreach (Sprite s in Sprites.Keys)
+                {
 
-		#region Properties
-		private int delta = -10;
-		//private int minSpace = 10;
-		private bool isAutoHide;
+                    // Tick the sprite and wrap it in a translator
+                    s.Update(args);
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool IsAutoHide
-		{
-			get 
-			{ 
-				return isAutoHide; 
-			}
-			set 
-			{ 
-				isAutoHide = value; 
-			}
-		}
+                    // Move the sprite along
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool IsHidden
-		{
-			get 
-			{ 
-				return (isAutoHide && this.Sprites.Count == 0); 
-			}
-		}
+                    s.X += 10;
 
-		/// <summary>
-		/// Delta is the number of pixels that the ticker should move per
-		/// second. This should be independant of actual frame rate.
-		/// </summary>
-		public int Delta
-		{
-			get 
-			{ 
-				return delta; 
-			}
-			set 
-			{ 
-				delta = value; 
-			}
-		}
-		#endregion
-		private bool disposed;
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+                    s.Y = 0;
+                }
+            }
+        }
+        #endregion
+
+        #region Properties
+        private int delta = -10;
+        //private int minSpace = 10;
+        private bool isAutoHide;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsAutoHide
+        {
+            get
+            {
+                return isAutoHide;
+            }
+            set
+            {
+                isAutoHide = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsHidden
+        {
+            get
+            {
+                return (isAutoHide && this.Sprites.Count == 0);
+            }
+        }
+
+        /// <summary>
+        /// Delta is the number of pixels that the ticker should move per
+        /// second. This should be independant of actual frame rate.
+        /// </summary>
+        public int Delta
+        {
+            get
+            {
+                return delta;
+            }
+            set
+            {
+                delta = value;
+            }
+        }
+        #endregion
+        private bool disposed;
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

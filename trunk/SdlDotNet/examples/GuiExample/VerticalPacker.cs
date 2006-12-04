@@ -26,113 +26,113 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// Class to manager internal sprites, such as window
-	/// components. This uses a sprite manager at its core, but does
-	/// have some additional functionality.
-	/// </summary>
-	public class VerticalPacker : Packer
-	{
-		#region Constructors
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		public VerticalPacker(GuiManager manager)
-			: base(manager)
-		{
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="point"></param>
-		public VerticalPacker(GuiManager manager, Point point)
-			: base(manager, point)
-		{
-		}
+    /// <summary>
+    /// Class to manager internal sprites, such as window
+    /// components. This uses a sprite manager at its core, but does
+    /// have some additional functionality.
+    /// </summary>
+    public class VerticalPacker : Packer
+    {
+        #region Constructors
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        public VerticalPacker(GuiManager manager)
+            : base(manager)
+        {
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="point"></param>
+        public VerticalPacker(GuiManager manager, Point point)
+            : base(manager, point)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="manager"></param>
-		/// <param name="positionZ"></param>
-		public VerticalPacker(GuiManager manager, int positionZ)
-			: base(manager, new Point(0,0))
-		{
-			base.Z = positionZ;
-		}
-		#endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="positionZ"></param>
+        public VerticalPacker(GuiManager manager, int positionZ)
+            : base(manager, new Point(0, 0))
+        {
+            base.Z = positionZ;
+        }
+        #endregion
 
-		#region Drawing
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override Surface Render()
-		{
-			this.Surface = base.Render();
-			//this.Surface.Fill(this.GuiManager.BackgroundColor);
-			// Draw all of our left components
-			int y = 0;
+        #region Drawing
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override Surface Render()
+        {
+            this.Surface = base.Render();
+            //this.Surface.Fill(this.GuiManager.BackgroundColor);
+            // Draw all of our left components
+            int y = 0;
 
-			foreach (Sprite s in HeadSprites.Keys)
-			{
-				// Ignore hidden
-				if (!s.Visible)
-				{
-					continue;
-				}
-	
-				// Translate it and blit
-				s.Y = y;
+            foreach (Sprite s in HeadSprites.Keys)
+            {
+                // Ignore hidden
+                if (!s.Visible)
+                {
+                    continue;
+                }
 
-				// Update the coordinates for the next one
-				y += s.Size.Height + InnerPadding.Vertical;
-				//s.X = x;
-			}
+                // Translate it and blit
+                s.Y = y;
 
-			// Draw our right components
-			y = this.Y + Size.Height - MarginPadding.Bottom;
+                // Update the coordinates for the next one
+                y += s.Size.Height + InnerPadding.Vertical;
+                //s.X = x;
+            }
 
-			foreach (Sprite s in TailSprites.Keys)
-			{
-				// Ignore hidden
-				if (!s.Visible)
-				{
-					continue;
-				}
-	
-				// Translate it and blit
-				y -= s.Size.Height + InnerPadding.Vertical;
-				s.Y = y;
-			}
-			this.Sprites.Draw(this.Surface);
-			return this.Surface;
-		}
-		#endregion
+            // Draw our right components
+            y = this.Y + Size.Height - MarginPadding.Bottom;
 
-		private bool disposed;
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-	}
+            foreach (Sprite s in TailSprites.Keys)
+            {
+                // Ignore hidden
+                if (!s.Visible)
+                {
+                    continue;
+                }
+
+                // Translate it and blit
+                y -= s.Size.Height + InnerPadding.Vertical;
+                s.Y = y;
+            }
+            this.Sprites.Draw(this.Surface);
+            return this.Surface;
+        }
+        #endregion
+
+        private bool disposed;
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+    }
 }

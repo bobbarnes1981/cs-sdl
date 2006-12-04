@@ -19,14 +19,14 @@
 
 namespace SdlDotNet.Examples.GuiExample
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public interface IMenuPopupController
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		bool IsSelected { get; set; }
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IMenuPopupController
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        bool IsSelected { get; set; }
+    }
 }

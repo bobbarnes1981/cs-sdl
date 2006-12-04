@@ -96,6 +96,7 @@ namespace SdlDotNet.Examples.NeHe
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NeHe));
             this.lstExamples = new System.Windows.Forms.ListBox();
             this.startButton = new System.Windows.Forms.Button();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
@@ -105,6 +106,8 @@ namespace SdlDotNet.Examples.NeHe
             // 
             // lstExamples
             // 
+            this.lstExamples.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lstExamples.Location = new System.Drawing.Point(8, 8);
             this.lstExamples.Name = "lstExamples";
             this.lstExamples.Size = new System.Drawing.Size(360, 342);
@@ -114,7 +117,7 @@ namespace SdlDotNet.Examples.NeHe
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(144, 360);
+            this.startButton.Location = new System.Drawing.Point(144, 369);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(75, 23);
             this.startButton.TabIndex = 1;
@@ -142,10 +145,11 @@ namespace SdlDotNet.Examples.NeHe
             // NeHe
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(378, 405);
+            this.ClientSize = new System.Drawing.Size(380, 406);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.lstExamples);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Menu = this.mainMenu1;
             this.Name = "NeHe";
