@@ -27,63 +27,63 @@ using SdlDotNet.Graphics;
 namespace SdlDotNetExamples.Triad
 {
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public sealed class Utilities
-	{
-		private Utilities()
-		{}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		/// <param name="rectangle"></param>
-		/// <param name="color"></param>
-		public static void DrawRect(Surface surface, Rectangle rectangle, Color color)
-		{
-			Utilities.DrawRect(surface,rectangle.Location,rectangle.Size,color);
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed class Utilities
+    {
+        private Utilities()
+        { }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="rectangle"></param>
+        /// <param name="color"></param>
+        public static void DrawRect(Surface surface, Rectangle rectangle, Color color)
+        {
+            Utilities.DrawRect(surface, rectangle.Location, rectangle.Size, color);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		/// <param name="location"></param>
-		/// <param name="size"></param>
-		/// <param name="color"></param>
-		public static void DrawRect(Surface surface, Point location, Size size, Color color)
-		{
-			if (surface == null)
-			{
-				throw new ArgumentNullException("surface");
-			}
-			int x;
-			int y;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="location"></param>
+        /// <param name="size"></param>
+        /// <param name="color"></param>
+        public static void DrawRect(Surface surface, Point location, Size size, Color color)
+        {
+            if (surface == null)
+            {
+                throw new ArgumentNullException("surface");
+            }
+            int x;
+            int y;
 
-			//Draw top line...
-			for(x=location.X; x<location.X + size.Width; x++)
-			{
-				surface.DrawPixel(x,location.Y,color);
-			}
+            //Draw top line...
+            for (x = location.X; x < location.X + size.Width; x++)
+            {
+                surface.DrawPixel(x, location.Y, color);
+            }
 
-			//Draw bottom line...
-			for(x=location.X; x<location.X + size.Width; x++)
-			{
-				surface.DrawPixel(x,location.Y + size.Height,color);
-			}
+            //Draw bottom line...
+            for (x = location.X; x < location.X + size.Width; x++)
+            {
+                surface.DrawPixel(x, location.Y + size.Height, color);
+            }
 
-			//Draw left line...
-			for(y=location.Y; y<location.Y+size.Height;y++)
-			{
-				surface.DrawPixel(location.X,y,color);
-			}
+            //Draw left line...
+            for (y = location.Y; y < location.Y + size.Height; y++)
+            {
+                surface.DrawPixel(location.X, y, color);
+            }
 
-			//Draw right line... 
-			for(y=location.Y; y<location.Y+size.Height;y++)
-			{
-				surface.DrawPixel(location.X+size.Width,y,color);
-			}
-		}
-	}
+            //Draw right line... 
+            for (y = location.Y; y < location.Y + size.Height; y++)
+            {
+                surface.DrawPixel(location.X + size.Width, y, color);
+            }
+        }
+    }
 }

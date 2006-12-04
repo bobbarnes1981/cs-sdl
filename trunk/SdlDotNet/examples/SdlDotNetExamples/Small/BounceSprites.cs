@@ -30,166 +30,166 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples
 {
-	/// <summary>
-	/// Demo of Bouncing Balls using Sprites. 
-	/// The Bouncesprites will respond to Tick Events by spinning. 
-	/// You can click on each sprite and move them around the 
-	/// screen as well (MouseButton and MouseMotion events).
-	/// </summary>
-	public class BounceSprites : IDisposable
-	{
-		#region Fields
-		private Surface screen; //video screen
-		private SpriteCollection master = new SpriteCollection(); //holds all sprites
-		private int width = 640; //screen width
-		private int height = 480; //screen height
-		private int maxBalls = 10; //number of balls to display
-		private Random rand = new Random(); //randomizer
-		string data_directory = @"Data/";
-		string filepath = @"../../";
-		private Surface background;
-		#endregion Fields
+    /// <summary>
+    /// Demo of Bouncing Balls using Sprites. 
+    /// The Bouncesprites will respond to Tick Events by spinning. 
+    /// You can click on each sprite and move them around the 
+    /// screen as well (MouseButton and MouseMotion events).
+    /// </summary>
+    public class BounceSprites : IDisposable
+    {
+        #region Fields
+        private Surface screen; //video screen
+        private SpriteCollection master = new SpriteCollection(); //holds all sprites
+        private int width = 640; //screen width
+        private int height = 480; //screen height
+        private int maxBalls = 10; //number of balls to display
+        private Random rand = new Random(); //randomizer
+        string data_directory = @"Data/";
+        string filepath = @"../../";
+        private Surface background;
+        #endregion Fields
 
-		#region EventHandler Methods
-		//Handles keyboard events. The 'Escape' and 'Q'keys will cause the app to exit
-		private void KeyboardDown(object sender, KeyboardEventArgs e) 
-		{
-			if (e.Key == Key.Escape || e.Key == Key.Q)
-			{
-				Events.QuitApplication();
-			}
-		}
+        #region EventHandler Methods
+        //Handles keyboard events. The 'Escape' and 'Q'keys will cause the app to exit
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            if (e.Key == Key.Escape || e.Key == Key.Q)
+            {
+                Events.QuitApplication();
+            }
+        }
 
-		List<Rectangle> rects = new List<Rectangle>();
+        List<Rectangle> rects = new List<Rectangle>();
 
-		//A ticker is running to update the sprites constantly.
-		//This method will fill the screen with black to clear it of the sprites.
-		//Then it will Blit all of the sprites to the screen.
-		//Then it will refresh the screen and display it.
-		private void Tick(object sender, TickEventArgs args)
-		{	
-			rects = screen.Blit(master);
-			screen.Update(rects);	
-			screen.Erase(master, background);
-		}
+        //A ticker is running to update the sprites constantly.
+        //This method will fill the screen with black to clear it of the sprites.
+        //Then it will Blit all of the sprites to the screen.
+        //Then it will refresh the screen and display it.
+        private void Tick(object sender, TickEventArgs args)
+        {
+            rects = screen.Blit(master);
+            screen.Update(rects);
+            screen.Erase(master, background);
+        }
 
-		private void Quit(object sender, QuitEventArgs e)
-		{
-			Events.QuitApplication();
-		}
-		#endregion EventHandler Methods
+        private void Quit(object sender, QuitEventArgs e)
+        {
+            Events.QuitApplication();
+        }
+        #endregion EventHandler Methods
 
-		#region Methods
-		//Main program loop
-		private void Go() 
-		{
-			//Set up screen
-			if (File.Exists(data_directory + "background.png"))
-			{
-				filepath = "";
-			}
-			background = new Surface(filepath + data_directory + "background.png");
-			Video.WindowIcon();
-			Video.WindowCaption = "SDL.NET - Bounce Sprites";
-			screen = Video.SetVideoModeWindow(width, height);
-			screen.Blit(background);
-			screen.Update();
+        #region Methods
+        //Main program loop
+        private void Go()
+        {
+            //Set up screen
+            if (File.Exists(data_directory + "background.png"))
+            {
+                filepath = "";
+            }
+            background = new Surface(filepath + data_directory + "background.png");
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - Bounce Sprites";
+            screen = Video.SetVideoModeWindow(width, height);
+            screen.Blit(background);
+            screen.Update();
 
-			//This loads the various images (provided by Moonfire) 
-			// into a SurfaceCollection for animation
-			SurfaceCollection marbleSurfaces = 
-				new SurfaceCollection(new Surface(filepath + data_directory + "marble1.png"), new Size(50, 50)); 
+            //This loads the various images (provided by Moonfire) 
+            // into a SurfaceCollection for animation
+            SurfaceCollection marbleSurfaces =
+                new SurfaceCollection(new Surface(filepath + data_directory + "marble1.png"), new Size(50, 50));
 
-			for (int i = 0; i < this.maxBalls; i++)
-			{
-				//Create a new Sprite at a random location on the screen
-				master.Add(new BounceSprite(marbleSurfaces,
-					new Point(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
-					rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom))),new Rectangle());
+            for (int i = 0; i < this.maxBalls; i++)
+            {
+                //Create a new Sprite at a random location on the screen
+                master.Add(new BounceSprite(marbleSurfaces,
+                    new Point(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
+                    rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom))), new Rectangle());
 
-				// Randomize rotation direction
-				//bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
+                // Randomize rotation direction
+                //bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
 
-				//Add the sprite to the SpriteCollection
+                //Add the sprite to the SpriteCollection
                 //if (!master.ContainsKey(bounceSprite))
                 //{
-				//master.Add(bounceSprite, bounceSprite.Rectangle);
-               // }
-			}
+                //master.Add(bounceSprite, bounceSprite.Rectangle);
+                // }
+            }
 
-			//The collection will respond to mouse button clicks, mouse movement and the ticker.
-			master.EnableMouseButtonEvent();
-			master.EnableMouseMotionEvent();
-			master.EnableTickEvent();
-      
-			//These bind the events to the above methods.
-			Events.KeyboardDown +=
-				new KeyboardEventHandler(this.KeyboardDown);
-			Events.Tick += new TickEventHandler(this.Tick);
-			Events.Quit += new QuitEventHandler(this.Quit);
+            //The collection will respond to mouse button clicks, mouse movement and the ticker.
+            master.EnableMouseButtonEvent();
+            master.EnableMouseMotionEvent();
+            master.EnableTickEvent();
 
-			//Start the event ticker
-			Events.Run();
-		}
+            //These bind the events to the above methods.
+            Events.KeyboardDown +=
+                new KeyboardEventHandler(this.KeyboardDown);
+            Events.Tick += new TickEventHandler(this.Tick);
+            Events.Quit += new QuitEventHandler(this.Quit);
 
-		/// <summary>
-		/// Entry point for App.
-		/// </summary>
-		public static void Run() 
-		{
-			BounceSprites bounce = new BounceSprites();
-			bounce.Go();
-		}
-		#endregion Methods
+            //Start the event ticker
+            Events.Run();
+        }
 
-		#region IDisposable Members
+        /// <summary>
+        /// Entry point for App.
+        /// </summary>
+        public static void Run()
+        {
+            BounceSprites bounce = new BounceSprites();
+            bounce.Go();
+        }
+        #endregion Methods
 
-		private bool disposed;
+        #region IDisposable Members
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Dispose()
-		{
-			this.Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        private bool disposed;
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Close() 
-		{
-			Dispose();
-		}
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		~BounceSprites() 
-		{
-			Dispose(false);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					if (this.background != null)
-					{
-						this.background.Dispose();
-						this.background = null;
-					}
-				}
-				this.disposed = true;
-			}
-		}
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
 
-		#endregion
-	}
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~BounceSprites()
+        {
+            Dispose(false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.background != null)
+                    {
+                        this.background.Dispose();
+                        this.background = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+
+        #endregion
+    }
 }

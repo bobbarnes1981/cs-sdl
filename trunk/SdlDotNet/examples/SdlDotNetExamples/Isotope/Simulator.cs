@@ -26,41 +26,41 @@ using System.Drawing;
 
 namespace SdlDotNetExamples.Isotope
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Simulator
-	{
-		// simulates a 3 dimensional scene
-	 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="scene"></param>
-		public void Update(Scene scene)
-		{
-			/*Updates the physics simulation of the objects
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Simulator
+    {
+        // simulates a 3 dimensional scene
 
-			   scene: scene to update: scene class
-			*/
-			// Object tick: let each object run its tick() action.
-			// make a copy of the object pointers in case the objects remove themselves from the master list
-			Object3d[] update_group=new Object3d[scene.ObjectGroup.Count];
-			scene.ObjectGroup.CopyTo(update_group,0);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="scene"></param>
+        public void Update(Scene scene)
+        {
+            /*Updates the physics simulation of the objects
+
+               scene: scene to update: scene class
+            */
+            // Object tick: let each object run its tick() action.
+            // make a copy of the object pointers in case the objects remove themselves from the master list
+            Object3d[] update_group = new Object3d[scene.ObjectGroup.Count];
+            scene.ObjectGroup.CopyTo(update_group, 0);
             foreach (Object3d obj in update_group)
             {
                 obj.Tick();
             }
-			// Note: the objects must not modify the object lists or positions in their event functions called by the
-			// Collision and Touch processors.
-			// Detect collisons
-			update_group=new Object3d[scene.ObjectGroup.Count];
-			scene.ObjectGroup.CopyTo(update_group,0);
-			//Console.WriteLine("Simulator Update.Collision_Processor");
-			Physics.CollisionProcessor(update_group);
-			// Detect touches
-			//Console.WriteLine("Simulator Update.Physics.touch_processor");
-			Physics.TouchProcessor(update_group);
-		}
-	}
+            // Note: the objects must not modify the object lists or positions in their event functions called by the
+            // Collision and Touch processors.
+            // Detect collisons
+            update_group = new Object3d[scene.ObjectGroup.Count];
+            scene.ObjectGroup.CopyTo(update_group, 0);
+            //Console.WriteLine("Simulator Update.Collision_Processor");
+            Physics.CollisionProcessor(update_group);
+            // Detect touches
+            //Console.WriteLine("Simulator Update.Physics.touch_processor");
+            Physics.TouchProcessor(update_group);
+        }
+    }
 }

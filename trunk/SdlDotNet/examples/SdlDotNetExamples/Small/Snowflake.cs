@@ -25,92 +25,93 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples
 {
-	/// <summary>
-	/// Snowflake Sprite Class
-	/// </summary>
-	/// <remarks>
-	/// A snowflakes is simply a 5x5 pixel white Surface. 
-	/// It will start out at a random speed and sideways movement.
-	/// </remarks>
-	public class Snowflake : Sprite
-	{
-		static Random random = new Random();
+    /// <summary>
+    /// Snowflake Sprite Class
+    /// </summary>
+    /// <remarks>
+    /// A snowflakes is simply a 5x5 pixel white Surface. 
+    /// It will start out at a random speed and sideways movement.
+    /// </remarks>
+    public class Snowflake : Sprite
+    {
+        static Random random = new Random();
 
-		float speed;
-		float wind;
-		float delta = 0.05f;
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		public Snowflake() : base(new Surface(4, 4))
-		{
-			Initialize();
-			Reset();
-			base.Y = -1 * random.Next(5000 - base.Surface.Height);
-		}
+        float speed;
+        float wind;
+        float delta = 0.05f;
 
-		void Initialize()
-		{
-			base.Surface.Fill(Color.White);
-			base.Surface.TransparentColor = Color.FromArgb(255, 0, 255);
-			base.Rectangle = new Rectangle(this.Surface.Width, this.Surface.Height, 0, 0);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Snowflake()
+            : base(new Surface(4, 4))
+        {
+            Initialize();
+            Reset();
+            base.Y = -1 * random.Next(5000 - base.Surface.Height);
+        }
 
-		void Reset()
-		{
-			wind = random.Next(3) / 10.0f;
+        void Initialize()
+        {
+            base.Surface.Fill(Color.White);
+            base.Surface.TransparentColor = Color.FromArgb(255, 0, 255);
+            base.Rectangle = new Rectangle(this.Surface.Width, this.Surface.Height, 0, 0);
+        }
 
-			base.X = (int)random.Next(-1 * (int)(wind * 640), 640 - base.Surface.Width);
-			base.Y = 0 - base.Width;
+        void Reset()
+        {
+            wind = random.Next(3) / 10.0f;
 
-			speed = random.Next(50, 150);
+            base.X = (int)random.Next(-1 * (int)(wind * 640), 640 - base.Surface.Width);
+            base.Y = 0 - base.Width;
 
-			base.Surface.Alpha = 
-				(byte)((150 - 50) / (speed - 50) * - 255);
-			base.Surface.AlphaBlending = true;
-		}
+            speed = random.Next(50, 150);
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void Update(TickEventArgs args)
-		{
-			float change = delta * speed;
+            base.Surface.Alpha =
+                (byte)((150 - 50) / (speed - 50) * -255);
+            base.Surface.AlphaBlending = true;
+        }
 
-			this.Y += (int)change;
-			this.X += (int)Math.Ceiling(change * wind);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public override void Update(TickEventArgs args)
+        {
+            float change = delta * speed;
 
-			if (this.Y > 480)
-			{
-				Reset();
-			}
-		}
-		#region IDisposable
-		private bool disposed;
+            this.Y += (int)change;
+            this.X += (int)Math.Ceiling(change * wind);
 
-		/// <summary>
-		/// Destroys the surface object and frees its memory
-		/// </summary>
-		/// <param name="disposing">If ture, dispose unmanaged resources</param>
-		protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (!this.disposed)
-				{
-					if (disposing)
-					{
-					}
-					this.disposed = true;
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-		#endregion IDisposable
-	}
+            if (this.Y > 480)
+            {
+                Reset();
+            }
+        }
+        #region IDisposable
+        private bool disposed;
+
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If ture, dispose unmanaged resources</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+        #endregion IDisposable
+    }
 }

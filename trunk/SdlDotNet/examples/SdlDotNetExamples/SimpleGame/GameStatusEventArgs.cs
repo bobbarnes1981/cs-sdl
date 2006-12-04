@@ -19,42 +19,42 @@ using System;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// Summary description for Class1.
-	/// </summary>
-	public class GameStatusEventArgs : EventArgs
-	{
-		GameStatus gameStatus;
-		Game game;
-		/// <summary>
-		/// 
-		/// </summary>
-		public GameStatusEventArgs(Game game, GameStatus gameStatus)
-		{
-			this.gameStatus = gameStatus;
-			this.game = game;
-		}
+    /// <summary>
+    /// Summary description for Class1.
+    /// </summary>
+    public class GameStatusEventArgs : EventArgs
+    {
+        GameStatus gameStatus;
+        Game game;
+        /// <summary>
+        /// 
+        /// </summary>
+        public GameStatusEventArgs(Game game, GameStatus gameStatus)
+        {
+            this.gameStatus = gameStatus;
+            this.game = game;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public GameStatus GameStatus
-		{
-			get
-			{
-				return this.gameStatus;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public GameStatus GameStatus
+        {
+            get
+            {
+                return this.gameStatus;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Game Game
-		{
-			get
-			{
-				return this.game;
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Game Game
+        {
+            get
+            {
+                return this.game;
+            }
+        }
+    }
 }

@@ -20,64 +20,65 @@ using System;
 
 namespace SdlDotNetExamples.Triad
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public enum BlockType
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		Red,
-		/// <summary>
-		/// 
-		/// </summary>
-		Purple,
-		/// <summary>
-		/// 
-		/// </summary>
-		White, 
-		/// <summary>
-		/// 
-		/// </summary>
-		Yellow,
-		/// <summary>
-		/// 
-		/// </summary>
-		Blue}
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum BlockType
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        Red,
+        /// <summary>
+        /// 
+        /// </summary>
+        Purple,
+        /// <summary>
+        /// 
+        /// </summary>
+        White,
+        /// <summary>
+        /// 
+        /// </summary>
+        Yellow,
+        /// <summary>
+        /// 
+        /// </summary>
+        Blue
+    }
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public enum BlockGridState
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		MoveTriad, 
-		/// <summary>
-		/// 
-		/// </summary>
-		MarkBlocksToDestroy, 
-		/// <summary>
-		/// 
-		/// </summary>
-		ShowBlocksDestroyed, 
-		/// <summary>
-		/// 
-		/// </summary>
-		ReduceGrid, 
-		/// <summary>
-		/// 
-		/// </summary>
-		CreateTriad, 
-		/// <summary>
-		/// 
-		/// </summary>
-		PauseGame, 
-		/// <summary>
-		/// 
-		/// </summary>
-		GameOver
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum BlockGridState
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        MoveTriad,
+        /// <summary>
+        /// 
+        /// </summary>
+        MarkBlocksToDestroy,
+        /// <summary>
+        /// 
+        /// </summary>
+        ShowBlocksDestroyed,
+        /// <summary>
+        /// 
+        /// </summary>
+        ReduceGrid,
+        /// <summary>
+        /// 
+        /// </summary>
+        CreateTriad,
+        /// <summary>
+        /// 
+        /// </summary>
+        PauseGame,
+        /// <summary>
+        /// 
+        /// </summary>
+        GameOver
+    }
 }

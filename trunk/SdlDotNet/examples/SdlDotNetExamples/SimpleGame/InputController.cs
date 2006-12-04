@@ -22,81 +22,81 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public enum Direction
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		Up,
-		/// <summary>
-		/// 
-		/// </summary>
-		Down,
-		/// <summary>
-		/// 
-		/// </summary>
-		Left,
-		/// <summary>
-		/// 
-		/// </summary>
-		Right
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum Direction
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        Up,
+        /// <summary>
+        /// 
+        /// </summary>
+        Down,
+        /// <summary>
+        /// 
+        /// </summary>
+        Left,
+        /// <summary>
+        /// 
+        /// </summary>
+        Right
+    }
 
-	/// <summary>
-	/// Derived class
-	/// </summary>
-	public class InputController
-	{
-		//bool quitFlag;
+    /// <summary>
+    /// Derived class
+    /// </summary>
+    public class InputController
+    {
+        //bool quitFlag;
 
-		EventManager eventManager;
-		/// <summary>
-		/// constructor
-		/// </summary>
-		public InputController(EventManager eventManager)
-		{
-			this.eventManager = eventManager;
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown); 
-		}
+        EventManager eventManager;
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public InputController(EventManager eventManager)
+        {
+            this.eventManager = eventManager;
+            Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void KeyboardDown(object sender, KeyboardEventArgs e) 
-		{
-			if (e.Key == Key.Escape || e.Key == Key.Q)
-			{
-				Events.QuitApplication();
-			}
-			else if (e.Key == Key.UpArrow)
-			{
-				eventManager.Publish(new EntityMoveRequestEventArgs(Direction.Up));
-			}
-			else if (e.Key == Key.DownArrow)
-			{
-				eventManager.Publish(new EntityMoveRequestEventArgs(Direction.Down));
-			}
-			else if (e.Key == Key.LeftArrow)
-			{
-				eventManager.Publish(new EntityMoveRequestEventArgs(Direction.Left));
-			}
-			else if (e.Key == Key.RightArrow)
-			{
-				eventManager.Publish(new EntityMoveRequestEventArgs(Direction.Right));
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            if (e.Key == Key.Escape || e.Key == Key.Q)
+            {
+                Events.QuitApplication();
+            }
+            else if (e.Key == Key.UpArrow)
+            {
+                eventManager.Publish(new EntityMoveRequestEventArgs(Direction.Up));
+            }
+            else if (e.Key == Key.DownArrow)
+            {
+                eventManager.Publish(new EntityMoveRequestEventArgs(Direction.Down));
+            }
+            else if (e.Key == Key.LeftArrow)
+            {
+                eventManager.Publish(new EntityMoveRequestEventArgs(Direction.Left));
+            }
+            else if (e.Key == Key.RightArrow)
+            {
+                eventManager.Publish(new EntityMoveRequestEventArgs(Direction.Right));
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Go()
-		{
-			Events.Run();
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Go()
+        {
+            Events.Run();
+        }
+    }
 }

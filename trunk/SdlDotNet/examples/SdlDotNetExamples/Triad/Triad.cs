@@ -23,255 +23,255 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Triad
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Triad : GameObject, IDisposable
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="blockGridObject"></param>
-		public Triad(BlockGrid blockGridObject)
-		{
-			if (blockGridObject == null)
-			{
-				throw new ArgumentNullException("blockGridObject");
-			}
-			this.topBlock = new Block();
-			this.middleBlock = new Block();
-			this.bottomBlock = new Block();
-			this.blockGrid = blockGridObject;
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Triad : GameObject, IDisposable
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="blockGridObject"></param>
+        public Triad(BlockGrid blockGridObject)
+        {
+            if (blockGridObject == null)
+            {
+                throw new ArgumentNullException("blockGridObject");
+            }
+            this.topBlock = new Block();
+            this.middleBlock = new Block();
+            this.bottomBlock = new Block();
+            this.blockGrid = blockGridObject;
 
-			int startColumn = blockGrid.GridSize.Width/2;
-			this.X = startColumn*Block.BlockWidth;
-			this.Y = 0;
-		}
+            int startColumn = blockGrid.GridSize.Width / 2;
+            this.X = startColumn * Block.BlockWidth;
+            this.Y = 0;
+        }
 
-		void placeBlocks()
-		{
-			this.topBlock.X = this.X;
-			this.topBlock.Y = this.Y;
-			this.middleBlock.X = this.X;
-			this.middleBlock.Y = this.Y+Block.BlockWidth;
-			this.bottomBlock.X	 = this.X;
-			this.bottomBlock.Y = this.Y+(Block.BlockWidth*2);
-		}
-		
-		Block topBlock;
-		Block middleBlock;
-		Block bottomBlock;
-		BlockGrid blockGrid;
-		/// <summary>
-		/// 
-		/// </summary>
-		public Block TopBlock
-		{
-			get
-			{
-				return topBlock;   
-			}
-		}
+        void placeBlocks()
+        {
+            this.topBlock.X = this.X;
+            this.topBlock.Y = this.Y;
+            this.middleBlock.X = this.X;
+            this.middleBlock.Y = this.Y + Block.BlockWidth;
+            this.bottomBlock.X = this.X;
+            this.bottomBlock.Y = this.Y + (Block.BlockWidth * 2);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Block MiddleBlock
-		{
-			get
-			{
-				return middleBlock;   
-			}
-		}
+        Block topBlock;
+        Block middleBlock;
+        Block bottomBlock;
+        BlockGrid blockGrid;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Block TopBlock
+        {
+            get
+            {
+                return topBlock;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Block BottomBlock
-		{
-			get
-			{
-				return bottomBlock;   
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Block MiddleBlock
+        {
+            get
+            {
+                return middleBlock;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		protected override void DrawGameObject(Surface surface)
-		{
-			this.topBlock.Parent = this.Parent;
-			this.middleBlock.Parent = this.Parent;
-			this.bottomBlock.Parent = this.Parent;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Block BottomBlock
+        {
+            get
+            {
+                return bottomBlock;
+            }
+        }
 
-			topBlock.Draw(surface);
-			middleBlock.Draw(surface);
-			bottomBlock.Draw(surface);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        protected override void DrawGameObject(Surface surface)
+        {
+            this.topBlock.Parent = this.Parent;
+            this.middleBlock.Parent = this.Parent;
+            this.bottomBlock.Parent = this.Parent;
 
-		static int halfOfBlock;
-		bool canMoveLeftRightBy(int deltaX)
-		{
-			if(halfOfBlock==0)
-			{
-				halfOfBlock = (Block.BlockWidth/2);
-			}
+            topBlock.Draw(surface);
+            middleBlock.Draw(surface);
+            bottomBlock.Draw(surface);
+        }
 
-			//Calc three points to represent the position of the tree blocks of the Triad...
-			Point newPoint  = new Point(this.ScreenLocation.X + deltaX + halfOfBlock,this.ScreenLocation.Y+ halfOfBlock);
-			Point newPoint2  = new Point(this.ScreenLocation.X + deltaX + halfOfBlock,this.ScreenLocation.Y+Block.BlockWidth+ halfOfBlock);
-			Point newPoint3  = new Point(this.ScreenLocation.X + deltaX + halfOfBlock,this.ScreenLocation.Y+Block.BlockWidth+Block.BlockWidth+ halfOfBlock);
-			
-			bool isInsideBlockGrid = blockGrid.Contains(newPoint);
+        static int halfOfBlock;
+        bool canMoveLeftRightBy(int deltaX)
+        {
+            if (halfOfBlock == 0)
+            {
+                halfOfBlock = (Block.BlockWidth / 2);
+            }
 
-			bool isInsideBlockGridChildren = false;
-			foreach(GameObject obj in blockGrid.GameObjectList)
-			{
-				if(obj.Contains(newPoint) || obj.Contains(newPoint2) ||obj.Contains(newPoint3) )
-				{
-					isInsideBlockGridChildren = true;
-					break;
-				}
-			}
+            //Calc three points to represent the position of the tree blocks of the Triad...
+            Point newPoint = new Point(this.ScreenLocation.X + deltaX + halfOfBlock, this.ScreenLocation.Y + halfOfBlock);
+            Point newPoint2 = new Point(this.ScreenLocation.X + deltaX + halfOfBlock, this.ScreenLocation.Y + Block.BlockWidth + halfOfBlock);
+            Point newPoint3 = new Point(this.ScreenLocation.X + deltaX + halfOfBlock, this.ScreenLocation.Y + Block.BlockWidth + Block.BlockWidth + halfOfBlock);
 
-			return isInsideBlockGrid && !isInsideBlockGridChildren;
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		public void MoveLeft()
-		{
-			int deltaX = -Block.BlockWidth;
-			if(canMoveLeftRightBy(deltaX))
-			{
-				this.X -= Block.BlockWidth;
-			}
-		}
+            bool isInsideBlockGrid = blockGrid.Contains(newPoint);
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void MoveRight()
-		{
-			int deltaX = Block.BlockWidth;
-			if(canMoveLeftRightBy(deltaX))
-			{
-				this.X += Block.BlockWidth;
-			}
+            bool isInsideBlockGridChildren = false;
+            foreach (GameObject obj in blockGrid.GameObjectList)
+            {
+                if (obj.Contains(newPoint) || obj.Contains(newPoint2) || obj.Contains(newPoint3))
+                {
+                    isInsideBlockGridChildren = true;
+                    break;
+                }
+            }
 
-		}
+            return isInsideBlockGrid && !isInsideBlockGridChildren;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public bool CanMoveDown()
-		{
-			return canMoveDown(Block.BlockWidth);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public void MoveLeft()
+        {
+            int deltaX = -Block.BlockWidth;
+            if (canMoveLeftRightBy(deltaX))
+            {
+                this.X -= Block.BlockWidth;
+            }
+        }
 
-		bool canMoveDown(int deltaY)
-		{
-			if(halfOfBlock==0)
-			{
-				halfOfBlock = (Block.BlockWidth/2);
-			}
+        /// <summary>
+        /// 
+        /// </summary>
+        public void MoveRight()
+        {
+            int deltaX = Block.BlockWidth;
+            if (canMoveLeftRightBy(deltaX))
+            {
+                this.X += Block.BlockWidth;
+            }
 
-			Point newPoint  = new Point(this.ScreenLocation.X  + halfOfBlock,this.ScreenLocation.Y+Block.BlockWidth+Block.BlockWidth+ halfOfBlock + deltaY);
-			
-			bool isInsideBlockGrid = blockGrid.Contains(newPoint);
+        }
 
-			bool isInsideBlockGridChildren = false;
-			foreach(GameObject obj in blockGrid.GameObjectList)
-			{
-				if(obj.Contains(newPoint))
-				{
-					isInsideBlockGridChildren = true;
-					break;
-				}
-			}
-			return isInsideBlockGrid && !isInsideBlockGridChildren;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool CanMoveDown()
+        {
+            return canMoveDown(Block.BlockWidth);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void MoveDown()
-		{
-			if(canMoveDown(Block.BlockWidth))
-			{
-				this.Y += Block.BlockWidth;
-			}
-		}
+        bool canMoveDown(int deltaY)
+        {
+            if (halfOfBlock == 0)
+            {
+                halfOfBlock = (Block.BlockWidth / 2);
+            }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Permute()
-		{
-			Block tempBlock = this.bottomBlock;
-			this.bottomBlock = this.middleBlock;
-			this.middleBlock = this.topBlock;
-			this.topBlock = tempBlock;
-		}
+            Point newPoint = new Point(this.ScreenLocation.X + halfOfBlock, this.ScreenLocation.Y + Block.BlockWidth + Block.BlockWidth + halfOfBlock + deltaY);
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override void Update()
-		{
-			placeBlocks();
-		}
+            bool isInsideBlockGrid = blockGrid.Contains(newPoint);
 
-		#region IDisposable Members
+            bool isInsideBlockGridChildren = false;
+            foreach (GameObject obj in blockGrid.GameObjectList)
+            {
+                if (obj.Contains(newPoint))
+                {
+                    isInsideBlockGridChildren = true;
+                    break;
+                }
+            }
+            return isInsideBlockGrid && !isInsideBlockGridChildren;
+        }
 
-		private bool disposed;
+        /// <summary>
+        /// 
+        /// </summary>
+        public void MoveDown()
+        {
+            if (canMoveDown(Block.BlockWidth))
+            {
+                this.Y += Block.BlockWidth;
+            }
+        }
 
-		/// <summary>
-		/// Destroy sprite
-		/// </summary>
-		/// <param name="disposing">If true, remove all unamanged resources</param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					this.blockGrid.Dispose();
-					this.bottomBlock.Dispose();
-					this.middleBlock.Dispose();;
-					this.Parent = null;
-					this.topBlock.Dispose();
-					GC.SuppressFinalize(this);
-				}
-				this.disposed = true;
-			}
-		}
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Dispose()
-		{
-			this.Dispose(true);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Permute()
+        {
+            Block tempBlock = this.bottomBlock;
+            this.bottomBlock = this.middleBlock;
+            this.middleBlock = this.topBlock;
+            this.topBlock = tempBlock;
+        }
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Close() 
-		{
-			Dispose();
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void Update()
+        {
+            placeBlocks();
+        }
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		~Triad() 
-		{
-			Dispose(false);
-		}
-		#endregion
-	}
+        #region IDisposable Members
+
+        private bool disposed;
+
+        /// <summary>
+        /// Destroy sprite
+        /// </summary>
+        /// <param name="disposing">If true, remove all unamanged resources</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    this.blockGrid.Dispose();
+                    this.bottomBlock.Dispose();
+                    this.middleBlock.Dispose(); ;
+                    this.Parent = null;
+                    this.topBlock.Dispose();
+                    GC.SuppressFinalize(this);
+                }
+                this.disposed = true;
+            }
+        }
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~Triad()
+        {
+            Dispose(false);
+        }
+        #endregion
+    }
 }

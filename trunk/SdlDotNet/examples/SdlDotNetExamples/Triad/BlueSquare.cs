@@ -23,35 +23,35 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Triad
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class BlueSquare : GameObject
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		public BlueSquare()
-		{
-			this.Size = new Size(30,30);
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BlueSquare : GameObject
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public BlueSquare()
+        {
+            this.Size = new Size(30, 30);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override void Update()
-		{
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void Update()
+        {
 
-		}
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		protected override void DrawGameObject(Surface surface)
-		{			
-			Rectangle t1 = this.Rectangle;
-			surface.Fill(t1,Color.Blue);			
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        protected override void DrawGameObject(Surface surface)
+        {
+            Rectangle t1 = this.Rectangle;
+            surface.Fill(t1, Color.Blue);
+        }
+    }
 }

@@ -27,55 +27,56 @@ using System.Collections;
 
 namespace SdlDotNetExamples.Isotope
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class ObjectPortable : ObjectGravity
-	{
-		/* object_portable is a class for objects that can be picked up.
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ObjectPortable : ObjectGravity
+    {
+        /* object_portable is a class for objects that can be picked up.
 
-		   pickedup: A flag indicating if the object is being carried: boolean
-		   carrier: The object that is carrying this object: Object3d or subclass:
-		   Note changed to type int for C# conversion
-		*/
-		public bool pickedup=false;
-		public int carrier=0;
-	   
-		//public object_portable(pos,size,objtype,fixedob=false):base(pos,size,objtype,fixedob){	      
-		//}
-		public ObjectPortable(int[] pos,int[] size,int objtype,bool fixedob):base(pos,size,objtype,fixedob)
-		{	      
-		}
-	 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public bool RequestPickUp()
-		{
-			/* A handler to manage a pickup event
+           pickedup: A flag indicating if the object is being carried: boolean
+           carrier: The object that is carrying this object: Object3d or subclass:
+           Note changed to type int for C# conversion
+        */
+        public bool pickedup = false;
+        public int carrier = 0;
 
-			   lead_actor: The object that wants to pick up this object (unused)
-			*/
-			//carrier=lead_actor;
-			pickedup=true;
-			return(true);
-		}
+        //public object_portable(pos,size,objtype,fixedob=false):base(pos,size,objtype,fixedob){	      
+        //}
+        public ObjectPortable(int[] pos, int[] size, int objtype, bool fixedob)
+            : base(pos, size, objtype, fixedob)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public bool RequestDrop()
-		{
-			/* A handler to manage a drop event
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool RequestPickUp()
+        {
+            /* A handler to manage a pickup event
 
-			   scene: The scene to put this object into: scene class (unused)
-			*/
-			pickedup=false;
-			carrier=0;
-			return(true);
-		}
-	}
-	// End of object with gravity
+               lead_actor: The object that wants to pick up this object (unused)
+            */
+            //carrier=lead_actor;
+            pickedup = true;
+            return (true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool RequestDrop()
+        {
+            /* A handler to manage a drop event
+
+               scene: The scene to put this object into: scene class (unused)
+            */
+            pickedup = false;
+            carrier = 0;
+            return (true);
+        }
+    }
+    // End of object with gravity
 }

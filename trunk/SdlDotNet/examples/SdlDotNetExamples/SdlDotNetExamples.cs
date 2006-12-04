@@ -16,6 +16,8 @@ namespace SdlDotNetExamples
             InitializeComponent();
         }
 
+        Dictionary<string, string> demoList = new Dictionary<string, string>();
+
         private void frmExamples_Load(object sender, EventArgs e)
         {
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
@@ -24,8 +26,12 @@ namespace SdlDotNetExamples
                 MemberInfo[] runMethods = type.GetMember("Run");
                 foreach (MemberInfo run in runMethods)
                 {
-                    lstExamples.Items.Add(type.FullName);
+                    demoList[type.Name] = type.FullName;
                 }
+            }
+            foreach (string s in demoList.Keys)
+            {
+            lstExamples.Items.Add(s.ToString());
             }
         }
 
@@ -36,7 +42,7 @@ namespace SdlDotNetExamples
 
         private void SelectExample()
         {
-            Type example = Assembly.GetExecutingAssembly().GetType(lstExamples.SelectedItem.ToString(), true, true);
+            Type example = Assembly.GetExecutingAssembly().GetType(demoList[lstExamples.SelectedItem.ToString()], true, true);
             example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null);
         }
 

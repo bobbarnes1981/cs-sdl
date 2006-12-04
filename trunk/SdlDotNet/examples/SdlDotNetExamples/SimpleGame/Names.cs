@@ -19,97 +19,97 @@ using System;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// Summary description for Class1.
-	/// </summary>
-	public sealed class Names
-	{
-		static string windowCaption = "SDL.NET - Simple Game";
-		static string logFile = "SimpleGame.log";
-		static string logFile2 = "SimpleGame2.log";
-		static string logFile3 = "SimpleGame3.log";
-		static string startingSimpleGame = "Starting SimpleGame.";
-		static string quittingSimpleGame = "Quitting SimpleGame.";
-		static int startingSector = 0;
+    /// <summary>
+    /// Summary description for Class1.
+    /// </summary>
+    public sealed class Names
+    {
+        static string windowCaption = "SDL.NET - Simple Game";
+        static string logFile = "SimpleGame.log";
+        static string logFile2 = "SimpleGame2.log";
+        static string logFile3 = "SimpleGame3.log";
+        static string startingSimpleGame = "Starting SimpleGame.";
+        static string quittingSimpleGame = "Quitting SimpleGame.";
+        static int startingSector = 0;
 
-		Names()
-		{
-		}
+        Names()
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string WindowCaption
-		{
-			get
-			{
-				return windowCaption;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string WindowCaption
+        {
+            get
+            {
+                return windowCaption;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string LogFile
-		{
-			get
-			{
-				return logFile;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string LogFile
+        {
+            get
+            {
+                return logFile;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string StartingSimpleGame
-		{
-			get
-			{
-				return startingSimpleGame;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string StartingSimpleGame
+        {
+            get
+            {
+                return startingSimpleGame;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string QuittingSimpleGame
-		{
-			get
-			{
-				return quittingSimpleGame;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string QuittingSimpleGame
+        {
+            get
+            {
+                return quittingSimpleGame;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static int StartingSector
-		{
-			get
-			{
-				return startingSector;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public static int StartingSector
+        {
+            get
+            {
+                return startingSector;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string LogFile2
-		{
-			get
-			{
-				return logFile2;
-			}
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string LogFile3
-		{
-			get
-			{
-				return logFile3;
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string LogFile2
+        {
+            get
+            {
+                return logFile2;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string LogFile3
+        {
+            get
+            {
+                return logFile3;
+            }
+        }
+    }
 }

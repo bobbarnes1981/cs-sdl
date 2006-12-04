@@ -26,56 +26,56 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples.SpriteGuiDemos
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class DragMode : DemoMode
-	{
-		/// <summary>
-		/// Constructs the internal sprites needed for our demo.
-		/// </summary>
-		public DragMode()
-		{
-			// Create the fragment marbles
-			int rows = 5;
-			int cols = 5;
-			int sx = (800 - cols * 50) / 2;
-			int sy = (600 - rows * 50) / 2;
-			SurfaceCollection m1 = LoadMarble("marble1");
-			SurfaceCollection m2 = LoadMarble("marble2");
-			Animation anim1 = new Animation(m1);
-						
-			Animation anim2 = new Animation(m2);
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DragMode : DemoMode
+    {
+        /// <summary>
+        /// Constructs the internal sprites needed for our demo.
+        /// </summary>
+        public DragMode()
+        {
+            // Create the fragment marbles
+            int rows = 5;
+            int cols = 5;
+            int sx = (800 - cols * 50) / 2;
+            int sy = (600 - rows * 50) / 2;
+            SurfaceCollection m1 = LoadMarble("marble1");
+            SurfaceCollection m2 = LoadMarble("marble2");
+            Animation anim1 = new Animation(m1);
 
-			Hashtable frames = new Hashtable();
-			frames.Add("marble1", m1);
-			frames.Add("marble2", m2);
+            Animation anim2 = new Animation(m2);
 
-			DragSprite dragSprite;
-			for (int i = 0; i < cols; i++)
-			{
-				Thread.Sleep(10);
-				for (int j = 0; j < rows; j++)
-				{
-					dragSprite = new DragSprite(frames, "marble1",
-						new Point(sx + i * 50, sy + j * 50),
-						new Rectangle(new Point(0, 0), SdlDemo.Size));
-					dragSprite.Animations.Add("marble1", anim1);
-					dragSprite.Animations.Add("marble2", anim2);
+            Hashtable frames = new Hashtable();
+            frames.Add("marble1", m1);
+            frames.Add("marble2", m2);
 
-					Thread.Sleep(10);
-					Sprites.Add(dragSprite);
-				}
-			}
-			Sprites.EnableMouseButtonEvent();
-			Sprites.EnableMouseMotionEvent();
-			Sprites.EnableTickEvent();
-		}
+            DragSprite dragSprite;
+            for (int i = 0; i < cols; i++)
+            {
+                Thread.Sleep(10);
+                for (int j = 0; j < rows; j++)
+                {
+                    dragSprite = new DragSprite(frames, "marble1",
+                        new Point(sx + i * 50, sy + j * 50),
+                        new Rectangle(new Point(0, 0), SpriteGuiDemosMain.Size));
+                    dragSprite.Animations.Add("marble1", anim1);
+                    dragSprite.Animations.Add("marble2", anim2);
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString() { return "Drag"; }
-	}
+                    Thread.Sleep(10);
+                    Sprites.Add(dragSprite);
+                }
+            }
+            Sprites.EnableMouseButtonEvent();
+            Sprites.EnableMouseMotionEvent();
+            Sprites.EnableTickEvent();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() { return "Drag"; }
+    }
 }

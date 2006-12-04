@@ -31,31 +31,31 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Isotope
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class SkinsLib 
-	{
-		// utility routines
-	
-		public static ArrayList LoadImages(string[] image_names)
-		{
-			/*Loads a list of images.
+    /// <summary>
+    /// 
+    /// </summary>
+    public class SkinsLib
+    {
+        // utility routines
 
-			   image_names: The filenames of the images to load: list of string
-			*/
-			ArrayList images=new ArrayList();
-			//Load images using a colorkey transparency of whitest white
-			//int[] colorkey={255,255,255};
-			foreach (string file_name in image_names)
-			{
-				Surface image=new Surface(file_name);
-				image=image.Convert();
-				image.TransparentColor=Color.FromArgb(255,255,255);
-				image.Transparent = true;
-				images.Add(image);
-			}
-			return(images);
-		}
-	}
+        public static ArrayList LoadImages(string[] image_names)
+        {
+            /*Loads a list of images.
+
+               image_names: The filenames of the images to load: list of string
+            */
+            ArrayList images = new ArrayList();
+            //Load images using a colorkey transparency of whitest white
+            //int[] colorkey={255,255,255};
+            foreach (string file_name in image_names)
+            {
+                Surface image = new Surface(file_name);
+                image = image.Convert();
+                image.TransparentColor = Color.FromArgb(255, 255, 255);
+                image.Transparent = true;
+                images.Add(image);
+            }
+            return (images);
+        }
+    }
 }

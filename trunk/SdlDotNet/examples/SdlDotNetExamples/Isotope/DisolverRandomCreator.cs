@@ -20,35 +20,36 @@
 
 namespace SdlDotNetExamples.Isotope
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class DisolverRandomCreator : Object3d
-	{
-		int new_object_time=0;
-		Scene scene;
-		System.Random randint = new System.Random();
-		// Creator class which makes disolver objects
-		public DisolverRandomCreator(int[] pos,int[] size,int objtype, Scene scene,bool fixedob):
-			base(pos,size,objtype,fixedob)
-		{
-			new_object_time=0;
-			this.scene=scene;
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DisolverRandomCreator : Object3d
+    {
+        int new_object_time = 0;
+        Scene scene;
+        System.Random randint = new System.Random();
+        // Creator class which makes disolver objects
+        public DisolverRandomCreator(int[] pos, int[] size, int objtype, Scene scene, bool fixedob)
+            :
+            base(pos, size, objtype, fixedob)
+        {
+            new_object_time = 0;
+            this.scene = scene;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override void Tick()
-		{
-			base.Tick();
-			if (new_object_time == 1)
-			{
-				position=new int[]{randint.Next(10,170),randint.Next(10,170),100};
-				this.scene.ObjectGroup.Add(new Disolver(position,new int[]{16,10,18},2,scene));
-				new_object_time=0;
-			}
-			new_object_time=new_object_time+1;
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void Tick()
+        {
+            base.Tick();
+            if (new_object_time == 1)
+            {
+                position = new int[] { randint.Next(10, 170), randint.Next(10, 170), 100 };
+                this.scene.ObjectGroup.Add(new Disolver(position, new int[] { 16, 10, 18 }, 2, scene));
+                new_object_time = 0;
+            }
+            new_object_time = new_object_time + 1;
+        }
+    }
 }

@@ -29,153 +29,153 @@ using SdlDotNet.Core;
 
 namespace SdlDotNetExamples
 {
-	#region Class Documentation
-	/// <summary>
-	/// Simple Tao.Sdl Example
-	/// </summary>
-	/// <remarks>
-	/// Just plays a short movie.
-	/// To quit, you can close the window, 
-	/// press the Escape key or press the 'q' key
-	/// <p>Written by David Hudson (jendave@yahoo.com)</p>
-	/// </remarks>
-	#endregion Class Documentation
-	public class MoviePlayer : IDisposable
-	{		
-		Movie movie;
-		Surface screen;
+    #region Class Documentation
+    /// <summary>
+    /// Simple Tao.Sdl Example
+    /// </summary>
+    /// <remarks>
+    /// Just plays a short movie.
+    /// To quit, you can close the window, 
+    /// press the Escape key or press the 'q' key
+    /// <p>Written by David Hudson (jendave@yahoo.com)</p>
+    /// </remarks>
+    #endregion Class Documentation
+    public class MoviePlayer : IDisposable
+    {
+        Movie movie;
+        Surface screen;
 
-		#region Go()
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Go() 
-		{
-			string filePath = Path.Combine("..", "..");
-			string fileDirectory = "Data";
-			string fileName = "test.mpg";
-			if (File.Exists(fileName))
-			{
-				filePath = "";
-				fileDirectory = "";
-			}
-			else if (File.Exists(Path.Combine(fileDirectory, fileName)))
-			{
-				filePath = "";
-			}
+        #region Go()
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Go()
+        {
+            string filePath = Path.Combine("..", "..");
+            string fileDirectory = "Data";
+            string fileName = "test.mpg";
+            if (File.Exists(fileName))
+            {
+                filePath = "";
+                fileDirectory = "";
+            }
+            else if (File.Exists(Path.Combine(fileDirectory, fileName)))
+            {
+                filePath = "";
+            }
 
-			string file = Path.Combine(Path.Combine(filePath, fileDirectory), fileName);
+            string file = Path.Combine(Path.Combine(filePath, fileDirectory), fileName);
 
-			int width = 352;
-			int height = 240;
+            int width = 352;
+            int height = 240;
 
-			Events.KeyboardDown += 
-				new KeyboardEventHandler(this.KeyboardDown); 
-			Events.Tick += new TickEventHandler(this.Tick);
-			Events.Quit += new QuitEventHandler(this.Quit);
+            Events.KeyboardDown +=
+                new KeyboardEventHandler(this.KeyboardDown);
+            Events.Tick += new TickEventHandler(this.Tick);
+            Events.Quit += new QuitEventHandler(this.Quit);
 
-			Video.WindowIcon();
-			Video.WindowCaption = "SDL.NET - Movie Player";
-			screen = Video.SetVideoModeWindow(width, height); 
-			Mixer.Close();
-			movie = new Movie(file);
-			Console.WriteLine("Time: " + movie.Length);
-			Console.WriteLine("Width: " + movie.Size.Width);
-			Console.WriteLine("Height: " + movie.Size.Height);
-			Console.WriteLine("HasAudio: " + movie.HasAudio);
-			Console.WriteLine("HasVideo: " + movie.HasVideo);
-			movie.Display(screen);
-			movie.Play();
-			Events.Run();
-		} 
-		#endregion Go()
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - Movie Player";
+            screen = Video.SetVideoModeWindow(width, height);
+            Mixer.Close();
+            movie = new Movie(file);
+            Console.WriteLine("Time: " + movie.Length);
+            Console.WriteLine("Width: " + movie.Size.Width);
+            Console.WriteLine("Height: " + movie.Size.Height);
+            Console.WriteLine("HasAudio: " + movie.HasAudio);
+            Console.WriteLine("HasVideo: " + movie.HasVideo);
+            movie.Display(screen);
+            movie.Play();
+            Events.Run();
+        }
+        #endregion Go()
 
-		#region Run()
-		[STAThread]
-		public static void Run() 
-		{
-			MoviePlayer player = new MoviePlayer();
-			player.Go();
-		}
-		#endregion Run()
+        #region Run()
+        [STAThread]
+        public static void Run()
+        {
+            MoviePlayer player = new MoviePlayer();
+            player.Go();
+        }
+        #endregion Run()
 
-		private void KeyboardDown(object sender, KeyboardEventArgs e)
-		{
-			// Check if the key pressed was a Q or Escape
-			if (e.Key == Key.Escape || e.Key == Key.Q)
-			{
-				movie.Stop();
-				movie.Close();
-				Events.QuitApplication();
-			}
-		}
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            // Check if the key pressed was a Q or Escape
+            if (e.Key == Key.Escape || e.Key == Key.Q)
+            {
+                movie.Stop();
+                movie.Close();
+                Events.QuitApplication();
+            }
+        }
 
-		private void Quit(object sender, QuitEventArgs e)
-		{
-			Events.QuitApplication();
-		}
+        private void Quit(object sender, QuitEventArgs e)
+        {
+            Events.QuitApplication();
+        }
 
-		private void Tick(object sender, TickEventArgs e)
-		{
-			if (movie.IsPlaying)
-			{
-				return;
-			}
-			else
-			{
-				movie.Stop();
-				movie.Close();
-				Events.QuitApplication();
-			}
-		}
-		#region IDisposable Members
+        private void Tick(object sender, TickEventArgs e)
+        {
+            if (movie.IsPlaying)
+            {
+                return;
+            }
+            else
+            {
+                movie.Stop();
+                movie.Close();
+                Events.QuitApplication();
+            }
+        }
+        #region IDisposable Members
 
-		private bool disposed;
+        private bool disposed;
 
-		/// <summary>
-		/// Closes and destroys this object
-		/// </summary>
-		/// <remarks>Destroys managed and unmanaged objects</remarks>
-		public void Dispose() 
-		{
-			Dispose(true);
-		}
+        /// <summary>
+        /// Closes and destroys this object
+        /// </summary>
+        /// <remarks>Destroys managed and unmanaged objects</remarks>
+        public void Dispose()
+        {
+            Dispose(true);
+        }
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Close() 
-		{
-			Dispose();
-		}
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		~MoviePlayer() 
-		{
-			Dispose(false);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					if (this.movie != null)
-					{
-						this.movie.Dispose();
-						this.movie = null;
-					}
-				}
-				this.disposed = true;
-			}
-		}
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~MoviePlayer()
+        {
+            Dispose(false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.movie != null)
+                    {
+                        this.movie.Dispose();
+                        this.movie = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

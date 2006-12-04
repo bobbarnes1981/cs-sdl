@@ -28,13 +28,13 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class BombRun
-	{
-		static Surface screen;
-		static float bombSpeed = 100;
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BombRun
+    {
+        static Surface screen;
+        static float bombSpeed = 100;
         static Surface background;
         static Surface alternateBackground;
         static Surface temporary;
@@ -47,40 +47,40 @@ namespace SdlDotNetExamples
         static string data_directory = @"Data/";
         static string filepath = @"../../";
 
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
         [STAThread]
-		public static void Run()
-		{
-			if (File.Exists(data_directory + "Background1.png"))
-			{
-				filepath = "";
-			}
-			Video.WindowIcon();
-			Video.WindowCaption =
-				"SDL.NET - Bomb Run";
-			screen = Video.SetVideoModeWindow(640, 480);
-			tempSurface = new Surface(filepath + data_directory + "Background1.png");
-			background = tempSurface.Convert();
-			tempSurface = new Surface(filepath + data_directory + "Background2.png");
-			alternateBackground = tempSurface.Convert();
+        public static void Run()
+        {
+            if (File.Exists(data_directory + "Background1.png"))
+            {
+                filepath = "";
+            }
+            Video.WindowIcon();
+            Video.WindowCaption =
+                "SDL.NET - Bomb Run";
+            screen = Video.SetVideoModeWindow(640, 480);
+            tempSurface = new Surface(filepath + data_directory + "Background1.png");
+            background = tempSurface.Convert();
+            tempSurface = new Surface(filepath + data_directory + "Background2.png");
+            alternateBackground = tempSurface.Convert();
 
-			temporary = screen.CreateCompatibleSurface(32, 32);
-			temporary.TransparentColor = Color.FromArgb(0, 255, 0, 255);
-			temporary.Transparent = true;
+            temporary = screen.CreateCompatibleSurface(32, 32);
+            temporary.TransparentColor = Color.FromArgb(0, 255, 0, 255);
+            temporary.Transparent = true;
 
-			player = new Player(new Surface(filepath + data_directory + "Head.bmp"), new Point(screen.Width / 2 - 16,
-				screen.Height - 32));
-			players.Add(player,player.Rectangle);
-			players.EnableKeyboardEvent();
-			bullets.EnableTickEvent();
-			master.EnableTickEvent();
+            player = new Player(new Surface(filepath + data_directory + "Head.bmp"), new Point(screen.Width / 2 - 16,
+                screen.Height - 32));
+            players.Add(player, player.Rectangle);
+            players.EnableKeyboardEvent();
+            bullets.EnableTickEvent();
+            master.EnableTickEvent();
 
-			for(int i = 0; i < 25; i++)
-			{
-				bombs.Add(new Bomb(new Surface(filepath + data_directory + "Bomb.bmp")), new Rectangle());
-			}
+            for (int i = 0; i < 25; i++)
+            {
+                bombs.Add(new Bomb(new Surface(filepath + data_directory + "Bomb.bmp")), new Rectangle());
+            }
             foreach (Sprite bomb in bombs.Keys)
             {
                 master.Add(bomb, bomb.Rectangle);
@@ -89,72 +89,72 @@ namespace SdlDotNetExamples
             {
                 master.Add(playerSprite, player.Rectangle);
             }
-			
-			Mouse.ShowCursor = false;
-			Events.KeyboardDown +=
-				new KeyboardEventHandler(Keyboard);
-			Events.Quit += new QuitEventHandler(Quit);
-			player.WeaponFired += new FireEventHandler(PlayerWeaponFired);
 
-			Events.Tick += new TickEventHandler(OnTick);
-			Events.Run();
-		}
+            Mouse.ShowCursor = false;
+            Events.KeyboardDown +=
+                new KeyboardEventHandler(Keyboard);
+            Events.Quit += new QuitEventHandler(Quit);
+            player.WeaponFired += new FireEventHandler(PlayerWeaponFired);
+
+            Events.Tick += new TickEventHandler(OnTick);
+            Events.Run();
+        }
 
         private static void PlayerWeaponFired(object sender, FireEventArgs e)
-		{
-			Bullet bullet = new Bullet(e.Location, 0, 250);
-			bullets.Add(bullet, bullet.Rectangle);
+        {
+            Bullet bullet = new Bullet(e.Location, 0, 250);
+            bullets.Add(bullet, bullet.Rectangle);
 
-		}
+        }
 
         private static void Keyboard(object sender, KeyboardEventArgs e)
-		{
-			if(e.Key == Key.Escape || e.Key == Key.Q)
-			{
-				Events.QuitApplication();
-			}
-		}
+        {
+            if (e.Key == Key.Escape || e.Key == Key.Q)
+            {
+                Events.QuitApplication();
+            }
+        }
 
         private static void Quit(object sender, QuitEventArgs e)
-		{
-			Events.QuitApplication();
-		}
+        {
+            Events.QuitApplication();
+        }
 
         static Rectangle src;
         static Rectangle dest;
 
         private static void OnTick(object sender, TickEventArgs args)
-		{
-			//Console.WriteLine(args.SecondsElapsed);
-			screen.Blit(background);
+        {
+            //Console.WriteLine(args.SecondsElapsed);
+            screen.Blit(background);
 
-			foreach (Sprite s in master.Keys)
+            foreach (Sprite s in master.Keys)
             {
-				src = new Rectangle(new Point(0, 0), s.Size);
-				dest = new Rectangle(s.Position, s.Size);
+                src = new Rectangle(new Point(0, 0), s.Size);
+                dest = new Rectangle(s.Position, s.Size);
 
-				temporary.Blit(alternateBackground, src, dest);
-				temporary.Blit(s.Surface, src);
-				screen.Blit(temporary, dest);
-			}
+                temporary.Blit(alternateBackground, src, dest);
+                temporary.Blit(s.Surface, src);
+                screen.Blit(temporary, dest);
+            }
 
-			screen.Blit(bullets);
-			screen.Flip();
-		}
+            screen.Blit(bullets);
+            screen.Flip();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static float BombSpeed
-		{
-			get
-			{ 
-				return bombSpeed; 
-			}
-			set
-			{
-				bombSpeed = value; 
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public static float BombSpeed
+        {
+            get
+            {
+                return bombSpeed;
+            }
+            set
+            {
+                bombSpeed = value;
+            }
+        }
+    }
 }

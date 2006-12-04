@@ -21,16 +21,16 @@ using System;
 
 namespace SdlDotNetExamples.Triad
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class NullBlock : Block
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		public NullBlock()
-		{
-		}
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class NullBlock : Block
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public NullBlock()
+        {
+        }
+    }
 }

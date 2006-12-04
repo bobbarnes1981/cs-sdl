@@ -19,30 +19,30 @@ using System;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// Summary description for Class1.
-	/// </summary>
-	public class EntityMoveEventArgs : EventArgs
-	{
-		Entity entity;
+    /// <summary>
+    /// Summary description for Class1.
+    /// </summary>
+    public class EntityMoveEventArgs : EventArgs
+    {
+        Entity entity;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public EntityMoveEventArgs(Entity entity)
-		{
-			this.entity = entity;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityMoveEventArgs(Entity entity)
+        {
+            this.entity = entity;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Entity Entity
-		{
-			get
-			{
-				return this.entity;
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Entity Entity
+        {
+            get
+            {
+                return this.entity;
+            }
+        }
+    }
 }

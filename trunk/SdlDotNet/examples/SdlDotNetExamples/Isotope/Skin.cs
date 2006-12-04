@@ -30,32 +30,32 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Isotope
 {
-	// skin: translates an objects state into an image
+    // skin: translates an objects state into an image
 
-	public class Skin
-	{
-		/*The base skin class used to represent an object type on the screen.
+    public class Skin
+    {
+        /*The base skin class used to represent an object type on the screen.
 
-		   images: The images used to display an object type: list of image
-		   name: name of the object type: string
-		   get_image(obj) : returns the image to display based on the state of the object */
-		public ArrayList images;
-		public string name;
+           images: The images used to display an object type: list of image
+           name: name of the object type: string
+           get_image(obj) : returns the image to display based on the state of the object */
+        public ArrayList images;
+        public string name;
 
-		public Skin(ArrayList images,string name)
-		{
-			this.images=images;
-			this.name=name;
-		}
-	   
-		//default behaviour returns image 0 from the images
-		public virtual Surface GetImage(Object3d obj)
-		{
-			/*Returns the image to display based on the state of an object 
+        public Skin(ArrayList images, string name)
+        {
+            this.images = images;
+            this.name = name;
+        }
 
-			   obj: The individual object: Object3d class or subclass
-			*/
-			return((Surface)images[0]);
-		}
-	}
+        //default behaviour returns image 0 from the images
+        public virtual Surface GetImage(Object3d obj)
+        {
+            /*Returns the image to display based on the state of an object 
+
+               obj: The individual object: Object3d class or subclass
+            */
+            return ((Surface)images[0]);
+        }
+    }
 }

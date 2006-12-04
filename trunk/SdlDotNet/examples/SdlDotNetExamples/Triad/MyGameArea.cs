@@ -25,76 +25,77 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.Triad
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class MyGameArea : GameArea
-	{
-		BlueSquare bs;
-		/// <summary>
-		/// 
-		/// </summary>
-		public MyGameArea() :base()
-		{
-			for(int i=0;  i<200; i++)
-			{				
-				AddObject(new BouncingSquare());
-			}
-			Size = new Size(800,600);
+    /// <summary>
+    /// 
+    /// </summary>
+    public class MyGameArea : GameArea
+    {
+        BlueSquare bs;
+        /// <summary>
+        /// 
+        /// </summary>
+        public MyGameArea()
+            : base()
+        {
+            for (int i = 0; i < 200; i++)
+            {
+                AddObject(new BouncingSquare());
+            }
+            Size = new Size(800, 600);
 
-			bs = new BlueSquare();
-			AddObject(bs);
-		}
+            bs = new BlueSquare();
+            AddObject(bs);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		protected override void DrawGameObject(Surface surface)
-		{
-			this.DrawGameObjects(surface);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        protected override void DrawGameObject(Surface surface)
+        {
+            this.DrawGameObjects(surface);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void HandleSdlKeyUpEvent(KeyboardEventArgs args)
-		{
-            
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public override void HandleSdlKeyUpEvent(KeyboardEventArgs args)
+        {
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
-		{
-			if (args == null)
-			{
-				throw new ArgumentNullException("args");
-			}
-			switch(args.Key)
-			{
-				case Key.Keypad2 :
-					bs.Y += 10;
-					break;
+        }
 
-				case Key.Keypad8 :
-					bs.Y -= 10;
-					break;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+            switch (args.Key)
+            {
+                case Key.Keypad2:
+                    bs.Y += 10;
+                    break;
 
-				case Key.Keypad4 :
-					bs.X -= 10;
-					break;
+                case Key.Keypad8:
+                    bs.Y -= 10;
+                    break;
 
-				case Key.Keypad6 :
-					bs.X += 10;
-					break;
+                case Key.Keypad4:
+                    bs.X -= 10;
+                    break;
 
-				default:
-					break;
-			}			
-		}
-	}
+                case Key.Keypad6:
+                    bs.X += 10;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
 }

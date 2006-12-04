@@ -26,37 +26,37 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples.SpriteGuiDemos
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class BounceMode : DemoMode
-	{
-		static Random rand = new Random();
-		/// <summary>
-		/// Constructs the internal sprites needed for our demo.
-		/// </summary>
-		public BounceMode()
-		{
-			// Create the fragment marbles
-			Rectangle rect = new Rectangle(new Point(0, 0), SdlDemo.Size);
-			for (int i = 0; i < 50; i++)
-			{
-				Thread.Sleep(10);
-				SurfaceCollection d = LoadRandomMarble();
-				BounceSprite bounceSprite = 
-					new BounceSprite(d,
-					new Rectangle(new Point(0,0), SdlDemo.Size), 
-					new Point(rand.Next(rect.Left, rect.Right),
-					rand.Next(rect.Top, rect.Bottom)));
-				Sprites.Add(bounceSprite);
-			}
-			Sprites.EnableTickEvent();
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BounceMode : DemoMode
+    {
+        static Random rand = new Random();
+        /// <summary>
+        /// Constructs the internal sprites needed for our demo.
+        /// </summary>
+        public BounceMode()
+        {
+            // Create the fragment marbles
+            Rectangle rect = new Rectangle(new Point(0, 0), SpriteGuiDemosMain.Size);
+            for (int i = 0; i < 50; i++)
+            {
+                Thread.Sleep(10);
+                SurfaceCollection d = LoadRandomMarble();
+                BounceSprite bounceSprite =
+                    new BounceSprite(d,
+                    new Rectangle(new Point(0, 0), SpriteGuiDemosMain.Size),
+                    new Point(rand.Next(rect.Left, rect.Right),
+                    rand.Next(rect.Top, rect.Bottom)));
+                Sprites.Add(bounceSprite);
+            }
+            Sprites.EnableTickEvent();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString() { return "Bounce"; }
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() { return "Bounce"; }
+    }
 }

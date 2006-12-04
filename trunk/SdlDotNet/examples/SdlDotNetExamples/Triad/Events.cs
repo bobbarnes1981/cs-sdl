@@ -23,49 +23,49 @@ using System;
 namespace SdlDotNetExamples.Triad
 {
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public delegate void BlocksDestroyedEventHandler(object sender, BlocksDestroyedEventArgs e);
-	/// <summary>
-	/// 
-	/// </summary>
-	public class BlocksDestroyedEventArgs : EventArgs
-	{
-		private int reductionCount;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int ReductionCount
-		{
-			get
-			{
-				return reductionCount;
-			}
-		}
-	
-		private int blocksCount;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int BlocksCount
-		{
-			get
-			{
-				return blocksCount;
-			}
-		}
-				
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="reductionCount"></param>
-		/// <param name="blockCount"></param>
-		public BlocksDestroyedEventArgs(int reductionCount, int blockCount)
-		{
-			this.blocksCount = blockCount;
-			this.reductionCount = reductionCount;
+    /// <summary>
+    /// 
+    /// </summary>
+    public delegate void BlocksDestroyedEventHandler(object sender, BlocksDestroyedEventArgs e);
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BlocksDestroyedEventArgs : EventArgs
+    {
+        private int reductionCount;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int ReductionCount
+        {
+            get
+            {
+                return reductionCount;
+            }
+        }
 
-		}	
-	}
+        private int blocksCount;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int BlocksCount
+        {
+            get
+            {
+                return blocksCount;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reductionCount"></param>
+        /// <param name="blockCount"></param>
+        public BlocksDestroyedEventArgs(int reductionCount, int blockCount)
+        {
+            this.blocksCount = blockCount;
+            this.reductionCount = reductionCount;
+
+        }
+    }
 }

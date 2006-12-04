@@ -27,156 +27,156 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.Triad
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class Scoreboard : GameArea, IDisposable
-	{
-		SdlDotNet.Graphics.Font font;
-		/// <summary>
-		/// 
-		/// </summary>
-		public Scoreboard()
-		{
-			string FontName = "FreeSans.ttf";
-			string data_directory = @"Data/";
-			string filepath = @"../../";
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Scoreboard : GameArea, IDisposable
+    {
+        SdlDotNet.Graphics.Font font;
+        /// <summary>
+        /// 
+        /// </summary>
+        public Scoreboard()
+        {
+            string FontName = "FreeSans.ttf";
+            string data_directory = @"Data/";
+            string filepath = @"../../";
 
-			if (File.Exists(data_directory + FontName))
-			{
-				filepath = "";
-			}
-			font = new SdlDotNet.Graphics.Font(filepath + data_directory + FontName,18);
-		}
+            if (File.Exists(data_directory + FontName))
+            {
+                filepath = "";
+            }
+            font = new SdlDotNet.Graphics.Font(filepath + data_directory + FontName, 18);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		protected override void DrawGameObject(Surface surface)
-		{
-			int currentY = 0;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        protected override void DrawGameObject(Surface surface)
+        {
+            int currentY = 0;
 
-			Surface fontSurface = font.Render("Score: " + this._Score, Color.FromArgb(255,255,255));
-			surface.Blit(fontSurface, new System.Drawing.Point(this.ScreenX, this.ScreenY + currentY));
+            Surface fontSurface = font.Render("Score: " + this._Score, Color.FromArgb(255, 255, 255));
+            surface.Blit(fontSurface, new System.Drawing.Point(this.ScreenX, this.ScreenY + currentY));
 
-			currentY+=20;
-			fontSurface = font.Render("Blocks Destroyed: " + this._BlocksDestroyed, Color.FromArgb(255,255,255));
-			surface.Blit(fontSurface, new System.Drawing.Point(this.ScreenX, this.ScreenY + currentY));
+            currentY += 20;
+            fontSurface = font.Render("Blocks Destroyed: " + this._BlocksDestroyed, Color.FromArgb(255, 255, 255));
+            surface.Blit(fontSurface, new System.Drawing.Point(this.ScreenX, this.ScreenY + currentY));
 
-			currentY+=20;
+            currentY += 20;
 
-			fontSurface = font.Render("Level: " + this._Level, Color.FromArgb(255,255,255));
-			surface.Blit(fontSurface, new System.Drawing.Point(this.ScreenX, this.ScreenY + currentY));
-		}
+            fontSurface = font.Render("Level: " + this._Level, Color.FromArgb(255, 255, 255));
+            surface.Blit(fontSurface, new System.Drawing.Point(this.ScreenX, this.ScreenY + currentY));
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public override void HandleSdlKeyDownEvent(KeyboardEventArgs args)
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public override void HandleSdlKeyUpEvent(KeyboardEventArgs args)
-		{
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public override void HandleSdlKeyUpEvent(KeyboardEventArgs args)
+        {
+        }
 
-		private int _Score;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Score
-		{
-			get
-			{
-				return _Score;
-			}
-			set
-			{
-				_Score = value;				
-			}
-		}
-	
-		private int _Level;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int Level
-		{
-			get
-			{
-				return _Level;
-			}
-			set
-			{
-				_Level = value;				
-			}
-		}
+        private int _Score;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Score
+        {
+            get
+            {
+                return _Score;
+            }
+            set
+            {
+                _Score = value;
+            }
+        }
 
-		private int _BlocksDestroyed;
-		/// <summary>
-		/// 
-		/// </summary>
-		public int BlocksDestroyed
-		{
-			get
-			{
-				return _BlocksDestroyed;
-			}
-			set
-			{
-				_BlocksDestroyed = value;				
-			}
-		}
-		#region IDisposable Members
+        private int _Level;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Level
+        {
+            get
+            {
+                return _Level;
+            }
+            set
+            {
+                _Level = value;
+            }
+        }
 
-		private bool disposed;
+        private int _BlocksDestroyed;
+        /// <summary>
+        /// 
+        /// </summary>
+        public int BlocksDestroyed
+        {
+            get
+            {
+                return _BlocksDestroyed;
+            }
+            set
+            {
+                _BlocksDestroyed = value;
+            }
+        }
+        #region IDisposable Members
 
-		/// <summary>
-		/// Destroy sprite
-		/// </summary>
-		/// <param name="disposing">If true, remove all unamanged resources</param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					font.Dispose();
-					GC.SuppressFinalize(this);
-				}
-				this.disposed = true;
-			}
-		}
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Dispose()
-		{
-			this.Dispose(true);
-		}
+        private bool disposed;
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Close() 
-		{
-			Dispose();
-		}
+        /// <summary>
+        /// Destroy sprite
+        /// </summary>
+        /// <param name="disposing">If true, remove all unamanged resources</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    font.Dispose();
+                    GC.SuppressFinalize(this);
+                }
+                this.disposed = true;
+            }
+        }
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		~Scoreboard() 
-		{
-			Dispose(false);
-		}
-		#endregion
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
 
-	}
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~Scoreboard()
+        {
+            Dispose(false);
+        }
+        #endregion
+
+    }
 }

@@ -26,78 +26,78 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.Triad
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public abstract class GameArea : GameObject
-	{
-		GameObjectCollection objectList = new GameObjectCollection();
-		/// <summary>
-		/// 
-		/// </summary>
-		public GameObjectCollection GameObjectList
-		{
-			get
-			{
-				return objectList;
-			}
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    public abstract class GameArea : GameObject
+    {
+        GameObjectCollection objectList = new GameObjectCollection();
+        /// <summary>
+        /// 
+        /// </summary>
+        public GameObjectCollection GameObjectList
+        {
+            get
+            {
+                return objectList;
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="obj"></param>
-		public void AddObject(GameObject obj)
-		{
-			if (obj == null)
-			{
-				throw new ArgumentNullException("obj");
-			}
-			objectList.Add(obj);
-			obj.Parent = this;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        public void AddObject(GameObject obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("obj");
+            }
+            objectList.Add(obj);
+            obj.Parent = this;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="obj"></param>
-		public void RemoveObject(GameObject obj)
-		{
-			objectList.Remove(obj);			
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        public void RemoveObject(GameObject obj)
+        {
+            objectList.Remove(obj);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public override void Update()
-		{
-			foreach(GameObject obj in objectList)
-			{
-				obj.Update();			
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void Update()
+        {
+            foreach (GameObject obj in objectList)
+            {
+                obj.Update();
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="surface"></param>
-		protected void DrawGameObjects(Surface surface)
-		{
-			foreach(GameObject obj in objectList)
-			{
-				obj.Draw(surface);
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        protected void DrawGameObjects(Surface surface)
+        {
+            foreach (GameObject obj in objectList)
+            {
+                obj.Draw(surface);
+            }
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public abstract void HandleSdlKeyDownEvent(KeyboardEventArgs args);
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="args"></param>
-		public abstract void HandleSdlKeyUpEvent(KeyboardEventArgs args);
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public abstract void HandleSdlKeyDownEvent(KeyboardEventArgs args);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public abstract void HandleSdlKeyUpEvent(KeyboardEventArgs args);
+    }
 }

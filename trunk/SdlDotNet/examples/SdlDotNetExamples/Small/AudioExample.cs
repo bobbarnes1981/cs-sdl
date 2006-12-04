@@ -35,229 +35,229 @@ using SdlDotNet.Input;
 // Click plays the sound, space changes the music, arrows change volume.
 
 namespace SdlDotNetExamples
-{ 
-	/// <summary>
-	/// A simple SDL.NET example which demonstrates audio in SDL.NET.
-	/// Click plays sound, space changes music and the arrow keys change volume.
-	/// </summary>
-	public class AudioExample : IDisposable
-	{ 
-		private const int width = 400; 
-		private const int height = 100;
-		private Surface screen; 
-		string data_directory = @"Data/";
-		string filepath = @"../../";
-		private TextSprite textDisplay;
+{
+    /// <summary>
+    /// A simple SDL.NET example which demonstrates audio in SDL.NET.
+    /// Click plays sound, space changes music and the arrow keys change volume.
+    /// </summary>
+    public class AudioExample : IDisposable
+    {
+        private const int width = 400;
+        private const int height = 100;
+        private Surface screen;
+        string data_directory = @"Data/";
+        string filepath = @"../../";
+        private TextSprite textDisplay;
 
-		// Create the music and sound variables.
-		private MusicDictionary music = new MusicDictionary();
-		private Sound boing; // There is also a SoundDictionary class.
+        // Create the music and sound variables.
+        private MusicDictionary music = new MusicDictionary();
+        private Sound boing; // There is also a SoundDictionary class.
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public AudioExample() 
-		{ 
-			// Setup events
-			Events.Tick += 
-				new TickEventHandler(Events_TickEvent);
-			Events.KeyboardDown += 
-				new KeyboardEventHandler(Events_KeyboardDown); 
-			Events.KeyboardUp += 
-				new KeyboardEventHandler(Events_KeyboardUp); 
-			Events.MouseButtonDown += 
-				new MouseButtonEventHandler(Events_MouseButtonDown);
-			Events.Quit += new QuitEventHandler(this.Quit);
-			Events.MusicFinished += 
-				new MusicFinishedEventHandler(Events_MusicFinished);
+        /// <summary>
+        /// 
+        /// </summary>
+        public AudioExample()
+        {
+            // Setup events
+            Events.Tick +=
+                new TickEventHandler(Events_TickEvent);
+            Events.KeyboardDown +=
+                new KeyboardEventHandler(Events_KeyboardDown);
+            Events.KeyboardUp +=
+                new KeyboardEventHandler(Events_KeyboardUp);
+            Events.MouseButtonDown +=
+                new MouseButtonEventHandler(Events_MouseButtonDown);
+            Events.Quit += new QuitEventHandler(this.Quit);
+            Events.MusicFinished +=
+                new MusicFinishedEventHandler(Events_MusicFinished);
 
-			if (File.Exists(data_directory + "boing.wav"))
-			{
-				filepath = "";
-			}
+            if (File.Exists(data_directory + "boing.wav"))
+            {
+                filepath = "";
+            }
 
-			// Load the music and sounds.
-			music["mason2"] = new Music(filepath + data_directory + "mason2.mid");
-			music["fard-two"] = new Music(filepath + data_directory + "fard-two.ogg");
-			boing = new Sound(filepath + data_directory + "boing.wav");
+            // Load the music and sounds.
+            music["mason2"] = new Music(filepath + data_directory + "mason2.mid");
+            music["fard-two"] = new Music(filepath + data_directory + "fard-two.ogg");
+            boing = new Sound(filepath + data_directory + "boing.wav");
 
-			textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(filepath + data_directory + "FreeSans.ttf", 20), Color.Red);
+            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(filepath + data_directory + "FreeSans.ttf", 20), Color.Red);
 
-			// Start up SDL
-			Video.WindowIcon();
-			Video.WindowCaption = "SDL.NET - AudioExample";
-			screen = Video.SetVideoModeWindow(width, height); 
+            // Start up SDL
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - AudioExample";
+            screen = Video.SetVideoModeWindow(width, height);
 
-			// Play the music and setup the queues.
-			music["mason2"].Play();
+            // Play the music and setup the queues.
+            music["mason2"].Play();
 
-			// Set up the music queue and start it
-			music["mason2"].QueuedMusic = music["fard-two"];
-			music["fard-two"].QueuedMusic = music["mason2"];
-			Music.EnableMusicFinishedCallback();
-          
-			// Begin the SDL ticker
-			Events.Fps = 50;
+            // Set up the music queue and start it
+            music["mason2"].QueuedMusic = music["fard-two"];
+            music["fard-two"].QueuedMusic = music["mason2"];
+            Music.EnableMusicFinishedCallback();
 
-			textDisplay.Text = "Press Arrow Keys, Space and Click \nMouse.";
-			textDisplay.TextWidth = 200;
-		} 
+            // Begin the SDL ticker
+            Events.Fps = 50;
 
-		private void Events_TickEvent(object sender, TickEventArgs e) 
-		{ 
-			screen.Fill(Color.Black);
-			screen.Blit(textDisplay);
-			screen.Flip();
-		} 
+            textDisplay.Text = "Press Arrow Keys, Space and Click \nMouse.";
+            textDisplay.TextWidth = 200;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static void Run() 
-		{ 
-			AudioExample t = new AudioExample(); 
-			Keyboard.UnicodeEnabled = true;
-            Events.Run(); 
-		}
+        private void Events_TickEvent(object sender, TickEventArgs e)
+        {
+            screen.Fill(Color.Black);
+            screen.Blit(textDisplay);
+            screen.Flip();
+        }
 
-		private void Events_KeyboardUp(object sender, KeyboardEventArgs e) 
-		{ 
-			Console.WriteLine("Keyboard Up: " + e.KeyboardCharacter);
-			Console.WriteLine("Unicode Up: " + e.UnicodeCharacter);
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void Run()
+        {
+            AudioExample t = new AudioExample();
+            Keyboard.UnicodeEnabled = true;
+            Events.Run();
+        }
 
-		private void Events_KeyboardDown(object sender, KeyboardEventArgs e) 
-		{ 
-			Console.WriteLine("Keyboard Down: " + e.KeyboardCharacter);
-			Console.WriteLine("Unicode Down: " + e.UnicodeCharacter);
-			
-			switch(e.Key)
-			{ 
-				case Key.Space: 
-					try
-					{
-						// Switch the music 
-						Music.Fadeout(1500);
-						textDisplay.Text = "Music is fading";
- 
-						// The next music sample plays because queuing is enabled.
-					}
-					catch (SdlException exception)
-					{
-						exception.ToString();
-						textDisplay.Text = "Music is already fading";
-					}
-					break; 
+        private void Events_KeyboardUp(object sender, KeyboardEventArgs e)
+        {
+            Console.WriteLine("Keyboard Up: " + e.KeyboardCharacter);
+            Console.WriteLine("Unicode Up: " + e.UnicodeCharacter);
+        }
 
-				case Key.UpArrow: 
-					// Increase the music volume.
-					Music.Volume += 10; 
-					textDisplay.Text = "Music Volume: " + Music.Volume;
-					break; 
-				case Key.DownArrow: 
-					// Decrease the music volume.
-					Music.Volume -= 10;
-					textDisplay.Text = "Music Volume: " + Music.Volume;
-					break;
-				case Key.RightArrow:
-					// Play the sound on the right
-					boing.Play().SetPanning(50, 205);
-					textDisplay.Text = "Sound played on Right.";
-					break;
-				case Key.LeftArrow:
-					// Play the sound on the left
-					boing.Play().SetPanning(205, 50);
-					textDisplay.Text = "Sound played on Left.";
-					break;
-				case Key.Escape:
-					// Quit the example
-					Events.QuitApplication(); 
-					break; 
-			} 
-		} 
+        private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            Console.WriteLine("Keyboard Down: " + e.KeyboardCharacter);
+            Console.WriteLine("Unicode Down: " + e.UnicodeCharacter);
 
-		private void Events_MouseButtonDown(object sender, MouseButtonEventArgs e) 
-		{ 
-			switch(e.Button) 
-			{ 
-				case MouseButton.PrimaryButton: 
-					// Play on left side
-					boing.Play().SetPanning(205, 50); 
-					textDisplay.Text = "Sound played on Left.";
-					break; 
-				case MouseButton.SecondaryButton: 
-					// Play on right side 
-					boing.Play().SetPanning(50, 205);
-					textDisplay.Text = "Sound played on Right.";
-					break;
-			} 
-		}
+            switch (e.Key)
+            {
+                case Key.Space:
+                    try
+                    {
+                        // Switch the music 
+                        Music.Fadeout(1500);
+                        textDisplay.Text = "Music is fading";
 
-		private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
-		{
-			// Switch the music....
-			textDisplay.Text = "Music switched...";
-			Console.WriteLine("Music Finished");
-		}
+                        // The next music sample plays because queuing is enabled.
+                    }
+                    catch (SdlException exception)
+                    {
+                        exception.ToString();
+                        textDisplay.Text = "Music is already fading";
+                    }
+                    break;
 
-		private void Quit(object sender, QuitEventArgs e)
-		{
-			Events.QuitApplication();
-		}
+                case Key.UpArrow:
+                    // Increase the music volume.
+                    Music.Volume += 10;
+                    textDisplay.Text = "Music Volume: " + Music.Volume;
+                    break;
+                case Key.DownArrow:
+                    // Decrease the music volume.
+                    Music.Volume -= 10;
+                    textDisplay.Text = "Music Volume: " + Music.Volume;
+                    break;
+                case Key.RightArrow:
+                    // Play the sound on the right
+                    boing.Play().SetPanning(50, 205);
+                    textDisplay.Text = "Sound played on Right.";
+                    break;
+                case Key.LeftArrow:
+                    // Play the sound on the left
+                    boing.Play().SetPanning(205, 50);
+                    textDisplay.Text = "Sound played on Left.";
+                    break;
+                case Key.Escape:
+                    // Quit the example
+                    Events.QuitApplication();
+                    break;
+            }
+        }
 
-		#region IDisposable Members
+        private void Events_MouseButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButton.PrimaryButton:
+                    // Play on left side
+                    boing.Play().SetPanning(205, 50);
+                    textDisplay.Text = "Sound played on Left.";
+                    break;
+                case MouseButton.SecondaryButton:
+                    // Play on right side 
+                    boing.Play().SetPanning(50, 205);
+                    textDisplay.Text = "Sound played on Right.";
+                    break;
+            }
+        }
 
-		private bool disposed;
+        private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
+        {
+            // Switch the music....
+            textDisplay.Text = "Music switched...";
+            Console.WriteLine("Music Finished");
+        }
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Dispose()
-		{
-			this.Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        private void Quit(object sender, QuitEventArgs e)
+        {
+            Events.QuitApplication();
+        }
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		public void Close() 
-		{
-			Dispose();
-		}
+        #region IDisposable Members
 
-		/// <summary>
-		/// Destroy object
-		/// </summary>
-		~AudioExample() 
-		{
-			Dispose(false);
-		}
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="disposing"></param>
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!this.disposed)
-			{
-				if (disposing)
-				{
-					if (this.textDisplay != null)
-					{
-						this.textDisplay.Dispose();
-						this.textDisplay = null;
-					}
-					if (this.boing != null)
-					{
-						this.boing.Dispose();
-						this.boing = null;
-					}
-				}
-				this.disposed = true;
-			}
-		}
+        private bool disposed;
 
-		#endregion
-	} 
-} 
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~AudioExample()
+        {
+            Dispose(false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.textDisplay != null)
+                    {
+                        this.textDisplay.Dispose();
+                        this.textDisplay = null;
+                    }
+                    if (this.boing != null)
+                    {
+                        this.boing.Dispose();
+                        this.boing = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+
+        #endregion
+    }
+}

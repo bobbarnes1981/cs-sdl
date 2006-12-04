@@ -19,29 +19,29 @@ using System;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// Summary description for Class1.
-	/// </summary>
-	public class MapBuiltEventArgs : EventArgs
-	{
-		Map map;
-		/// <summary>
-		/// 
-		/// </summary>
-		public MapBuiltEventArgs(Map map)
-		{
-			this.map = map;
-		}
+    /// <summary>
+    /// Summary description for Class1.
+    /// </summary>
+    public class MapBuiltEventArgs : EventArgs
+    {
+        Map map;
+        /// <summary>
+        /// 
+        /// </summary>
+        public MapBuiltEventArgs(Map map)
+        {
+            this.map = map;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Map Map
-		{
-			get
-			{
-				return this.map;
-			}
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public Map Map
+        {
+            get
+            {
+                return this.map;
+            }
+        }
+    }
 }

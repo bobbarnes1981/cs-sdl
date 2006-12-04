@@ -21,96 +21,96 @@
 // vector mathematics functions
 namespace SdlDotNetExamples.Isotope
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	class Vector 
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="v1"></param>
-		/// <param name="v2"></param>
-		/// <returns></returns>
-		public static int[] AddVector(int[] v1,int[] v2)
-		{
-			int[] vout=new int[3];
-			for(int i=0;i<=2;i++)
-			{
-				vout[i]=v1[i]+v2[i];
-			}
-			return vout;
-		}
+    /// <summary>
+    /// 
+    /// </summary>
+    class Vector
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <returns></returns>
+        public static int[] AddVector(int[] v1, int[] v2)
+        {
+            int[] vout = new int[3];
+            for (int i = 0; i <= 2; i++)
+            {
+                vout[i] = v1[i] + v2[i];
+            }
+            return vout;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="v1"></param>
-		/// <param name="v2"></param>
-		/// <returns></returns>
-		public static int[] SubtractVector(int[] v1, int[] v2)
-		{
-			int[] vout=new int[3];
-			for(int i=0;i<=2;i++)
-			{
-				vout[i]=v1[i]-v2[i];
-			}
-			return vout;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <returns></returns>
+        public static int[] SubtractVector(int[] v1, int[] v2)
+        {
+            int[] vout = new int[3];
+            for (int i = 0; i <= 2; i++)
+            {
+                vout[i] = v1[i] - v2[i];
+            }
+            return vout;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="v1"></param>
-		/// <param name="v2"></param>
-		/// <returns></returns>
-		public static int[] MultiplyVector(int[] v1, int[] v2)
-		{
-			int[] vout=new int[3];
-			for(int i=0;i<=2;i++)
-			{
-				vout[i]=v1[i]*v2[i];
-			}
-			return vout;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <returns></returns>
+        public static int[] MultiplyVector(int[] v1, int[] v2)
+        {
+            int[] vout = new int[3];
+            for (int i = 0; i <= 2; i++)
+            {
+                vout[i] = v1[i] * v2[i];
+            }
+            return vout;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="v1"></param>
-		/// <param name="v2"></param>
-		/// <returns></returns>
-		public static int[] DivideVector(int[] v1, int[] v2)
-		{
-			// Divides the elements of vector v1 by the elements of vector v2.
-			int[] vout=new int[3];
-			for(int i=0;i<=2;i++)
-			{
-				vout[i]=v1[i]/v2[i];
-			}
-			return vout;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <returns></returns>
+        public static int[] DivideVector(int[] v1, int[] v2)
+        {
+            // Divides the elements of vector v1 by the elements of vector v2.
+            int[] vout = new int[3];
+            for (int i = 0; i <= 2; i++)
+            {
+                vout[i] = v1[i] / v2[i];
+            }
+            return vout;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="v1"></param>
-		/// <param name="v2"></param>
-		public static void CopyVector(int[] v1, int[] v2)
-		{
-			for(int i=0;i<=2;i++)
-			{
-				v2[i]=v1[i];
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        public static void CopyVector(int[] v1, int[] v2)
+        {
+            for (int i = 0; i <= 2; i++)
+            {
+                v2[i] = v1[i];
+            }
+        }
 
-		// Direction defines a facing vector (uses 1 for positive and -1 for negative or zero for same) of v1 to v2
-		public static int[] Direction(int[] v1, int[] v2)
-		{
-			// defines a facing vector (uses 1 for positive and -1 for negative or zero for same) of v1 to v2 """
-			int[] vout=new int[3];
-			for(int i=0;i<=2;i++)
-			{
+        // Direction defines a facing vector (uses 1 for positive and -1 for negative or zero for same) of v1 to v2
+        public static int[] Direction(int[] v1, int[] v2)
+        {
+            // defines a facing vector (uses 1 for positive and -1 for negative or zero for same) of v1 to v2 """
+            int[] vout = new int[3];
+            for (int i = 0; i <= 2; i++)
+            {
                 if (v1[i] - v2[i] < 0)
                 {
                     vout[i] = 1;
@@ -123,20 +123,20 @@ namespace SdlDotNetExamples.Isotope
                 {
                     vout[i] = 0;
                 }
-			}
-			return(vout);
-		}
+            }
+            return (vout);
+        }
 
-		// converts vector to a facing direction
-		// assumes that the vector has only one non zero value
-		public static int VectorToFace(int[] vector)
-		{
-			int face=0;
-			for(int i=0;i<=2;i++)
-			{
-				int element=vector[i];
-				if (element== -1 || element ==1)
-				{
+        // converts vector to a facing direction
+        // assumes that the vector has only one non zero value
+        public static int VectorToFace(int[] vector)
+        {
+            int face = 0;
+            for (int i = 0; i <= 2; i++)
+            {
+                int element = vector[i];
+                if (element == -1 || element == 1)
+                {
                     if (element == -1)
                     {
                         element = 1;
@@ -145,28 +145,28 @@ namespace SdlDotNetExamples.Isotope
                     {
                         element = 0;
                     }
-					face=element+(i*2);
-				}
-			}
-			return face;
-		}
+                    face = element + (i * 2);
+                }
+            }
+            return face;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="v"></param>
-		/// <returns></returns>
-		public static int SqrMagnitude(int[] v)
-		{
-			// sqr of the magnitude of the vector
-			int sqr_mag=0;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public static int SqrMagnitude(int[] v)
+        {
+            // sqr of the magnitude of the vector
+            int sqr_mag = 0;
             foreach (int i in v)
             {
                 sqr_mag = sqr_mag + i * i;
             }
-			return(sqr_mag);
-		}
+            return (sqr_mag);
+        }
 
-	}
+    }
 
 }

@@ -21,166 +21,166 @@ using System.Globalization;
 
 namespace SdlDotNetExamples.SimpleGame
 {
-	/// <summary>
-	/// Summary description for LogFile.
-	/// </summary>
-	public sealed class LogFile
-	{
-		static FileStream fs = new FileStream("log.txt",  FileMode.Append);
+    /// <summary>
+    /// Summary description for LogFile.
+    /// </summary>
+    public sealed class LogFile
+    {
+        static FileStream fs = new FileStream("log.txt", FileMode.Append);
 
-		static LogFile()
-		{
-			Initialize();
-		}
+        static LogFile()
+        {
+            Initialize();
+        }
 
-		LogFile()
-		{
-		}
+        LogFile()
+        {
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static void Initialize()
-		{
-			RotateLogs();
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void Initialize()
+        {
+            RotateLogs();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="format"></param>
-		public static void WriteLine(string format)
-		{
-			
-			StreamWriter streamWriter = new StreamWriter(fs);
-			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format);
-			streamWriter.Flush(); 
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        public static void WriteLine(string format)
+        {
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="arg0"></param>
-		public static void WriteLine(string format, Object arg0)
-		{
-			
-			StreamWriter streamWriter = new StreamWriter(fs);
-			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0);
-			streamWriter.Flush(); 
-		}
+            StreamWriter streamWriter = new StreamWriter(fs);
+            streamWriter.BaseStream.Seek(0, SeekOrigin.End);
+            streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format);
+            streamWriter.Flush();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="arg0"></param>
-		/// <param name="arg1"></param>
-		public static void WriteLine(string format, Object arg0, Object arg1)
-		{
-			
-			StreamWriter streamWriter = new StreamWriter(fs);
-			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1);
-			streamWriter.Flush(); 
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="arg0"></param>
+        public static void WriteLine(string format, Object arg0)
+        {
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="arg0"></param>
-		/// <param name="arg1"></param>
-		/// <param name="arg2"></param>
-		public static void WriteLine(string format, Object arg0, Object arg1, Object arg2)
-		{
-			
-			StreamWriter streamWriter = new StreamWriter(fs);
-			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1, arg2);
-			streamWriter.Flush(); 
-		}
+            StreamWriter streamWriter = new StreamWriter(fs);
+            streamWriter.BaseStream.Seek(0, SeekOrigin.End);
+            streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0);
+            streamWriter.Flush();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="format"></param>
-		public static void Write(string format)
-		{
-			
-			StreamWriter streamWriter = new StreamWriter(fs);
-			// Write to the file using StreamWriter class 
-			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format);
-			streamWriter.Flush(); 
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="arg0"></param>
+        /// <param name="arg1"></param>
+        public static void WriteLine(string format, Object arg0, Object arg1)
+        {
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="arg0"></param>
-		public static void Write(string format, Object arg0)
-		{
-			
-			StreamWriter streamWriter = new StreamWriter(fs);
-			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0);
-			streamWriter.Flush(); 
-		}
+            StreamWriter streamWriter = new StreamWriter(fs);
+            streamWriter.BaseStream.Seek(0, SeekOrigin.End);
+            streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1);
+            streamWriter.Flush();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="arg0"></param>
-		/// <param name="arg1"></param>
-		public static void Write(string format, Object arg0, Object arg1)
-		{
-			
-			StreamWriter streamWriter = new StreamWriter(fs);
-			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1);
-			streamWriter.Flush(); 
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="arg0"></param>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        public static void WriteLine(string format, Object arg0, Object arg1, Object arg2)
+        {
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="format"></param>
-		/// <param name="arg0"></param>
-		/// <param name="arg1"></param>
-		/// <param name="arg2"></param>
-		public static void Write(string format, Object arg0, Object arg1, Object arg2)
-		{
-			
-			StreamWriter streamWriter = new StreamWriter(fs);
-			streamWriter.BaseStream.Seek(0, SeekOrigin.End); 
-			streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1, arg2);
-			streamWriter.Flush(); 
-		}
+            StreamWriter streamWriter = new StreamWriter(fs);
+            streamWriter.BaseStream.Seek(0, SeekOrigin.End);
+            streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1, arg2);
+            streamWriter.Flush();
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public static void RotateLogs()
-		{
-			LogFile.fs = null;
-			if (File.Exists(Names.LogFile3))
-			{
-				File.Delete(Names.LogFile3);
-			}
-			if (File.Exists(Names.LogFile2) & !File.Exists(Names.LogFile3))
-			{
-				File.Move(Names.LogFile2, Names.LogFile3);
-			}
-			if (File.Exists(Names.LogFile) & !File.Exists(Names.LogFile2))
-			{
-				File.Move(Names.LogFile, Names.LogFile2);
-			}
-			LogFile.fs = new FileStream(Names.LogFile, FileMode.OpenOrCreate, FileAccess.Write); 
-		}
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        public static void Write(string format)
+        {
+
+            StreamWriter streamWriter = new StreamWriter(fs);
+            // Write to the file using StreamWriter class 
+            streamWriter.BaseStream.Seek(0, SeekOrigin.End);
+            streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format);
+            streamWriter.Flush();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="arg0"></param>
+        public static void Write(string format, Object arg0)
+        {
+
+            StreamWriter streamWriter = new StreamWriter(fs);
+            streamWriter.BaseStream.Seek(0, SeekOrigin.End);
+            streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0);
+            streamWriter.Flush();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="arg0"></param>
+        /// <param name="arg1"></param>
+        public static void Write(string format, Object arg0, Object arg1)
+        {
+
+            StreamWriter streamWriter = new StreamWriter(fs);
+            streamWriter.BaseStream.Seek(0, SeekOrigin.End);
+            streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1);
+            streamWriter.Flush();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="arg0"></param>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        public static void Write(string format, Object arg0, Object arg1, Object arg2)
+        {
+
+            StreamWriter streamWriter = new StreamWriter(fs);
+            streamWriter.BaseStream.Seek(0, SeekOrigin.End);
+            streamWriter.Write(DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + format, arg0, arg1, arg2);
+            streamWriter.Flush();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void RotateLogs()
+        {
+            LogFile.fs = null;
+            if (File.Exists(Names.LogFile3))
+            {
+                File.Delete(Names.LogFile3);
+            }
+            if (File.Exists(Names.LogFile2) & !File.Exists(Names.LogFile3))
+            {
+                File.Move(Names.LogFile2, Names.LogFile3);
+            }
+            if (File.Exists(Names.LogFile) & !File.Exists(Names.LogFile2))
+            {
+                File.Move(Names.LogFile, Names.LogFile2);
+            }
+            LogFile.fs = new FileStream(Names.LogFile, FileMode.OpenOrCreate, FileAccess.Write);
+        }
+    }
 }
