@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
  *
@@ -15,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -26,7 +28,7 @@ using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Core;
 using SdlDotNet.Input;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNetExamples
 {
     public class HeroExample
     {
@@ -58,8 +60,8 @@ namespace SdlDotNet.Examples
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Hero Example";
             Video.SetVideoModeWindow(400, 300);
-            string filePath = Path.Combine("..", "..");
 
+            string filePath = Path.Combine("..", "..");
             string fileDirectory = "Data";
             string fileName = "hero.png";
             if (File.Exists(fileName))
