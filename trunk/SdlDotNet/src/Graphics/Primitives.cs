@@ -1,6 +1,6 @@
+#region LICENSE
 /*
- * $RCSfile$
- * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,12 +16,14 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.Collections;
 using System.Drawing;
 using System.Globalization;
 
+using Tao.Sdl;
 using SdlDotNet.Core;
 
 namespace SdlDotNet.Graphics
@@ -120,6 +122,69 @@ namespace SdlDotNet.Graphics
                 this.r = value;
             }
         }
+
+        /// <summary>
+        /// Draw filled primitive onto surface
+        /// </summary>
+        /// <param name="surface">Surface to draw to</param>
+        /// <param name="color">Color to fill primitive</param>
+        /// <param name="antiAlias">antialias primitive</param>
+        /// <param name="fill">fill primitive with color</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
+        {
+            if (fill)
+            {
+                int result = SdlGfx.filledCircleRGBA(surface.Handle, this.PositionX, this.PositionY, this.Radius, color.R, color.G, color.B,
+                    color.A);
+                GC.KeepAlive(this);
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+            else
+            {
+                int result = 0;
+                if (antiAlias)
+                {
+                    result = SdlGfx.aacircleRGBA(surface.Handle, this.PositionX, this.PositionY, this.Radius, color.R, color.G, color.B,
+                        color.A);
+                    GC.KeepAlive(this);
+                }
+                else
+                {
+                    result = SdlGfx.circleRGBA(surface.Handle, this.PositionX, this.PositionY, this.Radius, color.R, color.G, color.B,
+                        color.A);
+                    GC.KeepAlive(this);
+                }
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        /// <param name="antiAlias">Antialias primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias)
+        {
+            this.Draw(surface, color, antiAlias, false);
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color)
+        {
+            Draw(surface, color, true, false);
+        }
+
         /// <summary>
         /// String representation of circle
         /// </summary>
@@ -308,6 +373,75 @@ namespace SdlDotNet.Graphics
                 this.radiusY = value;
             }
         }
+
+        /// <summary>
+        /// Draw filled primitive onto surface
+        /// </summary>
+        /// <param name="surface">Surface to draw to</param>
+        /// <param name="color">Color to fill primitive</param>
+        /// <param name="antiAlias">antialias primitive</param>
+        /// <param name="fill">fill primitive with color</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
+        {
+            if (fill)
+            {
+                int result = SdlGfx.filledEllipseRGBA(surface.Handle, this.PositionX, this.PositionY, this.RadiusX, this.RadiusY, color.R, color.G, color.B,
+                color.A);
+                GC.KeepAlive(this);
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+            else
+            {
+                int result = 0;
+                if (antiAlias)
+                {
+                    result = SdlGfx.aaellipseRGBA(
+                    surface.Handle, this.PositionX, this.PositionY,
+                    this.RadiusX, this.RadiusY,
+                    color.R, color.G, color.B,
+                    color.A);
+                    GC.KeepAlive(this);
+                }
+                else
+                {
+                    result = SdlGfx.ellipseRGBA(
+                    surface.Handle, this.PositionX, this.PositionY,
+                    this.RadiusX, this.RadiusY,
+                    color.R, color.G, color.B,
+                    color.A);
+                    GC.KeepAlive(this);
+                }
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        /// <param name="antiAlias">Antialias primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias)
+        {
+            this.Draw(surface, color, antiAlias, false);
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color)
+        {
+            Draw(surface, color, true, false);
+        }
+
         /// <summary>
         /// String representation of ellipse
         /// </summary>
@@ -522,6 +656,66 @@ namespace SdlDotNet.Graphics
         public void Horizontal()
         {
             YPosition2 = YPosition1;
+        }
+
+
+        /// <summary>
+        /// Draw filled primitive onto surface
+        /// </summary>
+        /// <param name="surface">Surface to draw to</param>
+        /// <param name="color">Color to fill primitive</param>
+        /// <param name="antiAlias">antialias primitive</param>
+        /// <param name="fill">fill primitive with color</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
+        {
+            if (antiAlias)
+            {
+                int result = SdlGfx.aalineRGBA(
+                   surface.Handle, this.XPosition1, this.YPosition1,
+                   this.XPosition2, this.YPosition2,
+                   color.R, color.G, color.B,
+                   color.A);
+                GC.KeepAlive(this);
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+            else
+            {
+                int result = SdlGfx.lineRGBA(
+                    surface.Handle, this.XPosition1, this.YPosition1,
+                    this.XPosition2, this.YPosition2,
+                    color.R, color.G, color.B,
+                    color.A);
+                GC.KeepAlive(this);
+
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        /// <param name="antiAlias">Antialias primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias)
+        {
+            this.Draw(surface, color, antiAlias, false);
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color)
+        {
+            Draw(surface, color, true, false);
         }
 
         /// <summary>
@@ -799,6 +993,81 @@ namespace SdlDotNet.Graphics
                 this.y3 = value;
             }
         }
+
+        /// <summary>
+        /// Draw filled primitive onto surface
+        /// </summary>
+        /// <param name="surface">Surface to draw to</param>
+        /// <param name="color">Color to fill primitive</param>
+        /// <param name="antiAlias">antialias primitive</param>
+        /// <param name="fill">fill primitive with color</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
+        {
+            if (fill)
+            {
+               int result = SdlGfx.filledTrigonRGBA(
+               surface.Handle, this.XPosition1, this.YPosition1,
+               this.XPosition2, this.YPosition2,
+               this.XPosition3, this.YPosition3,
+               color.R, color.G, color.B,
+               color.A);
+                GC.KeepAlive(this);
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+            else
+            {
+                int result = 0;
+                if (antiAlias)
+                {
+                   result = SdlGfx.aatrigonRGBA(
+                   surface.Handle, this.XPosition1, this.YPosition1,
+                   this.XPosition2, this.YPosition2,
+                   this.XPosition3, this.YPosition3,
+                   color.R, color.G, color.B,
+                   color.A);
+                    GC.KeepAlive(this);
+                }
+                else
+                {
+                    result = SdlGfx.trigonRGBA(
+                    surface.Handle, this.XPosition1, this.YPosition1,
+                    this.XPosition2, this.YPosition2,
+                    this.XPosition3, this.YPosition3,
+                    color.R, color.G, color.B,
+                    color.A);
+                    GC.KeepAlive(this);
+                }
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        /// <param name="antiAlias">Antialias primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias)
+        {
+            this.Draw(surface, color, antiAlias, false);
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color)
+        {
+            Draw(surface, color, true, false);
+        }
+
         /// <summary>
         /// String representation of triangle
         /// </summary>
@@ -1033,6 +1302,69 @@ namespace SdlDotNet.Graphics
                 return list;
             }
         }
+
+        /// <summary>
+        /// Draw filled primitive onto surface
+        /// </summary>
+        /// <param name="surface">Surface to draw to</param>
+        /// <param name="color">Color to fill primitive</param>
+        /// <param name="antiAlias">antialias primitive</param>
+        /// <param name="fill">fill primitive with color</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
+        {
+            if (fill)
+            {
+                int result = SdlGfx.filledPolygonRGBA(surface.Handle, this.PositionsX(), this.PositionsY(), this.NumberOfSides, color.R, color.G, color.G,
+                color.A);
+                GC.KeepAlive(this);
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+            else
+            {
+                int result = 0;
+                if (antiAlias)
+                {
+                    result = SdlGfx.aapolygonRGBA(surface.Handle, this.PositionsX(), this.PositionsY(), this.NumberOfSides, color.R, color.G, color.B,
+                    color.A);
+                    GC.KeepAlive(this);
+                }
+                else
+                {
+                    result = SdlGfx.polygonRGBA(surface.Handle, this.PositionsX(), this.PositionsY(), this.NumberOfSides, color.R, color.G, color.B,
+                    color.A);
+                    GC.KeepAlive(this);
+                }
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        /// <param name="antiAlias">Antialias primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias)
+        {
+            this.Draw(surface, color, antiAlias, false);
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color)
+        {
+            Draw(surface, color, true, false);
+        }
+
         /// <summary>
         /// String representation of polygon
         /// </summary>
@@ -1266,6 +1598,63 @@ namespace SdlDotNet.Graphics
             {
                 this.endingAngle = value;
             }
+        }
+
+        /// <summary>
+        /// Draw filled primitive onto surface
+        /// </summary>
+        /// <param name="surface">Surface to draw to</param>
+        /// <param name="color">Color to fill primitive</param>
+        /// <param name="antiAlias">antialias primitive</param>
+        /// <param name="fill">fill primitive with color</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
+        {
+            if (fill)
+            {
+                int result = SdlGfx.filledPieRGBA(surface.Handle, this.PositionX, this.PositionY, this.Radius, this.StartingAngle, this.EndingAngle, color.R, color.G, color.B,
+                color.A);
+                GC.KeepAlive(this);
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+            else
+            {
+                int result = SdlGfx.pieRGBA(
+                surface.Handle, this.PositionX, this.PositionY,
+                this.Radius,
+                this.StartingAngle, this.EndingAngle,
+                color.R, color.G, color.B,
+                color.A);
+                GC.KeepAlive(this);
+
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        /// <param name="antiAlias">Antialias primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias)
+        {
+            this.Draw(surface, color, antiAlias, false);
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color)
+        {
+            Draw(surface, color, true, false);
         }
 
         /// <summary>
@@ -1524,6 +1913,50 @@ namespace SdlDotNet.Graphics
                 }
             }
         }
+
+        /// <summary>
+        /// Draw filled primitive onto surface
+        /// </summary>
+        /// <param name="surface">Surface to draw to</param>
+        /// <param name="color">Color to fill primitive</param>
+        /// <param name="antiAlias">antialias primitive</param>
+        /// <param name="fill">fill primitive with color</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
+        {
+            int result = SdlGfx.bezierRGBA(
+                surface.Handle, this.PositionsX(), this.PositionsY(),
+                this.NumberOfPoints, this.Steps,
+                color.R, color.G, color.B,
+                color.A);
+            GC.KeepAlive(this);
+
+            if (result != (int)SdlFlag.Success)
+            {
+                throw SdlException.Generate();
+            }
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        /// <param name="antiAlias">Antialias primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias)
+        {
+            this.Draw(surface, color, antiAlias, false);
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color)
+        {
+            Draw(surface, color, true, false);
+        }
+
 
         /// <summary>
         /// String representation of bezier curve
@@ -1819,6 +2252,65 @@ namespace SdlDotNet.Graphics
                 this.Width = (short)value.Width;
                 this.Height = (short)value.Height;
             }
+        }
+
+        /// <summary>
+        /// Draw filled primitive onto surface
+        /// </summary>
+        /// <param name="surface">Surface to draw to</param>
+        /// <param name="color">Color to fill primitive</param>
+        /// <param name="antiAlias">antialias primitive</param>
+        /// <param name="fill">fill primitive with color</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
+        {
+            if (fill)
+            {
+                int result = SdlGfx.boxRGBA(
+                surface.Handle, this.XPosition1, this.YPosition1,
+                this.XPosition2, this.YPosition2,
+                color.R, color.G, color.B,
+                color.A);
+                GC.KeepAlive(this);
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+            else
+            {
+                int result = SdlGfx.rectangleRGBA(
+                surface.Handle, this.XPosition1, this.YPosition1,
+                this.XPosition2, this.YPosition2,
+                color.R, color.G, color.B,
+                color.A);
+                GC.KeepAlive(this);
+
+                if (result != (int)SdlFlag.Success)
+                {
+                    throw SdlException.Generate();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        /// <param name="antiAlias">Antialias primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias)
+        {
+            this.Draw(surface, color, antiAlias, false);
+        }
+
+        /// <summary>
+        /// Draw primitive onto surface
+        /// </summary>
+        /// <param name="surface">surface to draw to</param>
+        /// <param name="color">Color of primitive</param>
+        public void Draw(Surface surface, System.Drawing.Color color)
+        {
+            Draw(surface, color, true, false);
         }
 
         /// <summary>

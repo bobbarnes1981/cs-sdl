@@ -185,38 +185,38 @@ namespace SdlDotNet.Particles.Particle
 
                 if (m_Filled)
                 {
-                    destination.DrawFilledBox(
-                        new System.Drawing.Rectangle(
-                        (int)this.X, (int)this.Y,
-                        (int)m_Width, (int)m_Height),
-                        Color.FromArgb((int)alpha, this.Color));
+                    destination.DrawPrimitive(
+                        new Box(
+                        (short)this.X, (short)this.Y,
+                        (short)this.Right, (short)this.Bottom),
+                        Color.FromArgb((int)alpha, this.Color), false, true);
                 }
                 else
                 {
-                    destination.DrawBox(
-                        new System.Drawing.Rectangle(
-                        (int)this.X, (int)this.Y,
-                        (int)m_Width, (int)m_Height),
-                        Color.FromArgb((int)alpha, this.Color));
+                    destination.DrawPrimitive(
+                        new Box(
+                        (short)this.X, (short)this.Y,
+                        (short)this.Right, (short)this.Bottom),
+                        Color.FromArgb((int)alpha, this.Color), false, true);
                 }
             }
             else
             {
                 if (m_Filled)
                 {
-                    destination.DrawFilledBox(
-                        new System.Drawing.Rectangle(
-                        (int)this.X, (int)this.Y,
-                        (int)m_Width, (int)m_Height),
-                        this.Color);
+                    destination.DrawPrimitive(
+                        new Box(
+                        (short)this.X, (short)this.Y,
+                        (short)this.Right, (short)this.Bottom),
+                        this.Color, false, true);
                 }
                 else
                 {
-                    destination.DrawBox(
-                        new System.Drawing.Rectangle(
-                        (int)this.X, (int)this.Y,
-                        (int)m_Width, (int)m_Height),
-                        this.Color);
+                    destination.DrawPrimitive(
+                        new Box(
+                        (short)this.X, (short)this.Y,
+                        (short)this.Right, (short)this.Bottom),
+                        this.Color, false, true);
                 }
             }
         }

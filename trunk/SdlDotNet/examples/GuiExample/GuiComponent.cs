@@ -118,8 +118,7 @@ namespace SdlDotNet.Examples.GuiExample
         public override Surface Render()
         {
             this.Surface.Fill(manager.BackgroundColor);
-            this.Surface.DrawBox(
-                new Rectangle(0, 0, this.Rectangle.Width, this.Rectangle.Height),
+            this.Surface.DrawPrimitive(new Box(0, 0, (short)this.Rectangle.Width, (short)this.Rectangle.Height),
                 manager.FrameColor);
             return base.Render();
         }
