@@ -205,7 +205,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="SdlDotNetExamples" path="examples/SdlDotNetExamples" language="C#" type="WinExe" startupObject="SdlDotNetExamples.Program" designerFolder="Properties">
+	<Project name="SdlDotNetExamples" path="examples/SdlDotNetExamples" language="C#" type="WinExe" startupObject="SdlDotNetExamples.Program" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE;WIN32</CompilerDefines>
