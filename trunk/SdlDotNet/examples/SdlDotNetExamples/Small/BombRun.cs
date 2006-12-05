@@ -60,7 +60,7 @@ namespace SdlDotNetExamples
             Video.WindowIcon();
             Video.WindowCaption =
                 "SDL.NET - Bomb Run";
-            screen = Video.SetVideoModeWindow(640, 480);
+            screen = Video.SetVideoMode(640, 480);
             tempSurface = new Surface(filepath + data_directory + "Background1.png");
             background = tempSurface.Convert();
             tempSurface = new Surface(filepath + data_directory + "Background2.png");
@@ -140,6 +140,7 @@ namespace SdlDotNetExamples
 
             screen.Blit(bullets);
             screen.Flip();
+            //screen.Update();
         }
 
         /// <summary>

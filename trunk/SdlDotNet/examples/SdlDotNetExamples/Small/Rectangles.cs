@@ -62,14 +62,14 @@ namespace SdlDotNetExamples
 
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Rectangles Example";
-            screen = Video.SetVideoModeWindow(width, height, true);
+            screen = Video.SetVideoMode(width, height, true);
 
             Events.Run();
         }
 
         private void Resize(object sender, VideoResizeEventArgs e)
         {
-            screen = Video.SetVideoModeWindow(e.Width, e.Height, true);
+            screen = Video.SetVideoMode(e.Width, e.Height, true);
             this.width = e.Width;
             this.height = e.Height;
         }

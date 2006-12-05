@@ -127,7 +127,7 @@ namespace SdlDotNet.Examples.NeHe
             // Sets Window icon and title
             this.WindowAttributes();
             // Creates SDL.NET Surface to hold an OpenGL scene
-            screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+            screen = Video.SetVideoMode(width, height, true, true);
         }
 
         /// <summary>
@@ -218,12 +218,12 @@ namespace SdlDotNet.Examples.NeHe
                     // Toggle fullscreen
                     if ((screen.FullScreen))
                     {
-                        screen = Video.SetVideoModeWindowOpenGL(width, height, true);
+                        screen = Video.SetVideoMode(width, height, true, true, true);
                         this.WindowAttributes();
                     }
                     else
                     {
-                        screen = Video.SetVideoModeOpenGL(width, height, bpp);
+                        screen = Video.SetVideoMode(width, height, true, true);
                     }
                     Reshape();
                     break;
@@ -243,7 +243,7 @@ namespace SdlDotNet.Examples.NeHe
 
         //		private void Resize (object sender, VideoResizeEventArgs e)
         //		{
-        //			screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+        //			screen = Video.SetVideoMode(e.Width, e.Height, true);
         //			if (screen.Width != e.Width || screen.Height != e.Height)
         //			{
         //				//this.InitGL();

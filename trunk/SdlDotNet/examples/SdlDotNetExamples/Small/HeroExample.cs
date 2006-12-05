@@ -59,7 +59,7 @@ namespace SdlDotNetExamples
             // Start up the window
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Hero Example";
-            Video.SetVideoModeWindow(400, 300);
+            Video.SetVideoMode(400, 300);
 
             string filePath = Path.Combine("..", "..");
             string fileDirectory = "Data";

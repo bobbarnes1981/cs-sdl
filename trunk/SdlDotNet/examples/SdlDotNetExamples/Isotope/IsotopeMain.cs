@@ -75,7 +75,7 @@ namespace SdlDotNetExamples.Isotope
 
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Isotope";
-            Surface surface = Video.SetVideoModeWindow(400, 360);
+            Surface surface = Video.SetVideoMode(400, 360);
 
             // Setup the two scenes of a bedroom and a lounge with Ian Curtis as the lead actor  
 

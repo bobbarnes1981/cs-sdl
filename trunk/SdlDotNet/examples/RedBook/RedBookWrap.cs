@@ -159,7 +159,7 @@ namespace SdlDotNet.Examples.RedBook
 			this.WindowAttributes();
 
 			// Creates SDL.NET Surface to hold an OpenGL scene
-			Video.SetVideoModeWindowOpenGL(width, height, true);
+			Video.SetVideoMode(width, height, true, true);
 		}
 
 		/// <summary>

@@ -39,7 +39,7 @@ namespace SdlDotNet.Examples
         {
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Simple Example";
-            screen = Video.SetVideoModeWindow(width, height);
+            screen = Video.SetVideoMode(width, height);
 
             Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
             Events.Quit += new QuitEventHandler(this.Quit);

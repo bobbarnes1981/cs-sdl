@@ -73,7 +73,7 @@ namespace SdlDotNetExamples
             }
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - OpenGlFont Example";
-            Video.SetVideoModeWindowOpenGL(this.width, this.height);
+            Video.SetVideoMode(this.width, this.height, true, true);
             Events.Quit += new QuitEventHandler(this.Quit);
             Events.Tick += new TickEventHandler(this.Tick);
             font = new SdlDotNet.Graphics.Font(filePath + dataDirectory + fontName, 18);

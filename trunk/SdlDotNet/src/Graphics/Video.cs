@@ -247,6 +247,7 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public sealed class Video
     {
+        const int USE_CURRENT_BPP = 0;
         static Video()
         {
             Initialize();
@@ -385,266 +386,274 @@ namespace SdlDotNet.Graphics
             }
             return size;
         }
+
         /// <summary>
-        /// Sets the video mode of a fullscreen application
+        /// Sets the video mode of the application. 
+        /// This overload is simply for initializing the video subsystem.
+        /// It is useful when integrating with System.Windows.Forms
         /// </summary>
-        /// <param name="width">width</param>
-        /// <param name="height">height</param>
+        /// <remarks>
+        /// The surface will not have a height nor width.
+        /// The surface will use the current bit depth.
+        /// The surface will not be resizable.
+        /// The surface will be an SDL surface for 2D drawing.
+        /// The surface will be in windowed mode.
+        /// The surface will have a frame unless it is fullscreen. 
+        /// The surface will be a "software" surface. 
+        /// Hardware surfaces are problematic and should only be used under certain circumstances.
+        /// </remarks>
+        /// <returns>a surface to draw to</returns>
+        public static Surface SetVideoMode()
+        {
+            return Video.SetVideoMode(0, 0, USE_CURRENT_BPP, false, false, false, false, true);
+        }
+
+        /// <summary>
+        /// Sets the video mode of the application
+        /// </summary>
+        /// <remarks>
+        /// The surface will use the current bit depth.
+        /// The surface will not be resizable.
+        /// The surface will be an SDL surface for 2D drawing.
+        /// The surface will be in windowed mode.
+        /// The surface will have a frame unless it is fullscreen. 
+        /// The surface will be a "software" surface. 
+        /// Hardware surfaces are problematic and should only be used under certain circumstances.
+        /// </remarks>
+        /// <param name="width">screen width</param>
+        /// <param name="height">screen height</param>
         /// <returns>a surface to draw to</returns>
         public static Surface SetVideoMode(int width, int height)
         {
-            return SetVideoMode(width, height, 0,
-                (VideoModes.Fullscreen));
+            return SetVideoMode(width, height, USE_CURRENT_BPP, false, false, false, false, true);
         }
+
         /// <summary>
-        /// Sets the video mode of a fullscreen application
+        /// Sets the video mode of the application
         /// </summary>
+        /// <remarks>
+        /// The surface will not be resizable.
+        /// The surface will be an SDL surface for 2D drawing.
+        /// The surface will be in windowed mode.
+        /// The surface will have a frame unless it is fullscreen. 
+        /// The surface will be a "software" surface. 
+        /// Hardware surfaces are problematic and should only be used under certain circumstances.
+        /// </remarks>
         /// <param name="width">screen width</param>
         /// <param name="height">screen height</param>
-        /// <param name="bitsPerPixel">bits per pixel</param>
+        /// <param name="bitsPerPixel"></param>
         /// <returns>a surface to draw to</returns>
         public static Surface SetVideoMode(int width, int height, int bitsPerPixel)
         {
-            return SetVideoMode(width, height, bitsPerPixel,
-                (VideoModes.Fullscreen));
+            return SetVideoMode(width, height, bitsPerPixel, false, false, false, false, true);
         }
 
         /// <summary>
-        /// Sets the windowed video mode using current screen bpp
+        /// Sets the video mode of the application
         /// </summary>
-        /// <param name="width">The width of the window</param>
-        /// <param name="height">The height of the window</param>
-        /// <remarks>It puts a frame around the window</remarks>
+        /// <remarks>
+        /// The surface will be an SDL surface for 2D drawing.
+        /// The surface will be in windowed mode.
+        /// The surface will have a frame unless it is fullscreen. 
+        /// The surface will be a "software" surface. 
+        /// Hardware surfaces are problematic and should only be used under certain circumstances.
+        /// </remarks>
+        /// <param name="width"></param>
+        /// <param name="height">height</param>
+        /// <param name="resizable">window will be resizable</param>
         /// <returns>a surface to draw to</returns>
-        public static Surface SetVideoModeWindow(int width, int height)
+        public static Surface SetVideoMode(int width, int height, bool resizable)
         {
-            return Video.SetVideoModeWindow(width, height, false);
+            return SetVideoMode(width, height, USE_CURRENT_BPP, resizable, false, false, false, true);
         }
 
         /// <summary>
-        /// Sets the windowed video mode using current screen bpp, width and height
+        /// Sets the video mode of the application
         /// </summary>
-        /// <remarks>It puts a frame around the window</remarks>
-        /// <returns>a surface to draw to</returns>
-        public static Surface SetVideoModeWindow()
-        {
-            return Video.SetVideoModeWindow(0, 0, false);
-        }
-
-        /// <summary>
-        /// Sets the windowed video mode using a given bpp
-        /// </summary>
-        /// <param name="width">The width of the window</param>
-        /// <param name="height">The height of the window</param>
+        /// <remarks>
+        /// The surface will be an SDL surface for 2D drawing.
+        /// The surface will be in windowed mode.
+        /// The surface will have a frame unless it is fullscreen. 
+        /// The surface will be a "software" surface. 
+        /// Hardware surfaces are problematic and should only be used under certain circumstances.
+        /// </remarks>
+        /// <param name="width"></param>
+        /// <param name="height">height</param>
         /// <param name="bitsPerPixel">bits per pixel</param>
-        /// <remarks>It puts a frame around the window</remarks>
+        /// <param name="resizable">window will be resizable</param>
         /// <returns>a surface to draw to</returns>
-        public static Surface SetVideoModeWindow(int width, int height, int bitsPerPixel)
+        public static Surface SetVideoMode(int width, int height, int bitsPerPixel, bool resizable)
         {
-            return Video.SetVideoModeWindow(width, height, bitsPerPixel, false);
+            return SetVideoMode(width, height, bitsPerPixel, resizable, false, false, false, true);
         }
 
         /// <summary>
-        /// Sets the windowed video mode using current screen bpp
+        /// Sets the video mode of the application
         /// </summary>
-        /// <param name="width">The width of the window</param>
-        /// <param name="height">The height of the window</param>
-        /// <param name="resizable">
-        /// If true, the window will be resizable
-        /// </param>
+        /// <remarks>
+        /// The surface will be in windowed mode.
+        /// The surface will have a frame unless it is fullscreen. 
+        /// The surface will be a "software" surface. 
+        /// Hardware surfaces are problematic and should only be used under certain circumstances.
+        /// </remarks>
+        /// <param name="width">screen width</param>
+        /// <param name="height">screen height</param>
+        /// <param name="resizable">window will be resizable</param>
+        /// <param name="openGL">OpenGL surface</param>
         /// <returns>a surface to draw to</returns>
-        public static Surface SetVideoModeWindow(int width, int height, bool resizable)
+        public static Surface SetVideoMode(int width, int height, bool resizable, bool openGL)
         {
-            VideoModes flags = VideoModes.None;
-            if (resizable)
-            {
-                flags |= VideoModes.Resizable;
-            }
-            return SetVideoMode(width, height, 0, flags);
+            return SetVideoMode(width, height, USE_CURRENT_BPP, resizable, openGL, false, false, true);
         }
 
         /// <summary>
-        /// Sets the windowed video mode using current screen bpp
+        /// Sets the video mode of the application
         /// </summary>
-        /// <param name="width">The width of the window</param>
-        /// <param name="height">The height of the window</param>
-        /// <param name="resizable">
-        /// If true, the window will be resizable
-        /// </param>
+        /// <remarks>
+        /// The surface will be in windowed mode.
+        /// The surface will have a frame unless it is fullscreen. 
+        /// The surface will be a "software" surface. 
+        /// Hardware surfaces are problematic and should only be used under certain circumstances.
+        /// </remarks>
+        /// <param name="width">screen width</param>
+        /// <param name="height">screen height</param>
+        /// <param name="bitsPerPixel">bits per pixel</param>
+        /// <param name="resizable">window will be resizable</param>
+        /// <param name="openGL">OpenGL surface</param>
+        /// <returns>a surface to draw to</returns>
+        public static Surface SetVideoMode(int width, int height, int bitsPerPixel, bool resizable, bool openGL)
+        {
+            return SetVideoMode(width, height, bitsPerPixel, resizable, openGL, false, false, true);
+        }
+
+        /// <summary>
+        /// Sets the video mode of the application
+        /// </summary>
+        /// <remarks>
+        /// The surface will have a frame unless it is fullscreen. 
+        /// The surface will be a "software" surface. 
+        /// Hardware surfaces are problematic and should only be used under certain circumstances.
+        /// </remarks>
+        /// <param name="width">screen width</param>
+        /// <param name="height">screen height</param>
+        /// <param name="resizable">window will be resizable</param>
+        /// <param name="openGL">OpenGL surface</param>
+        /// <param name="fullScreen">fullscreen</param>
+        /// <returns>a surface to draw to</returns>
+        public static Surface SetVideoMode(int width, int height, bool resizable, bool openGL, bool fullScreen)
+        {
+            return SetVideoMode(width, height, USE_CURRENT_BPP, resizable, openGL, fullScreen, false, true);
+        }
+
+        /// <summary>
+        /// Sets the video mode of the application
+        /// </summary>
+        /// <remarks>
+        /// The surface will have a frame unless it is fullscreen. 
+        /// The surface will be a "software" surface. 
+        /// Hardware surfaces are problematic and should only be used under certain circumstances.
+        /// </remarks>
+        /// <param name="width">screen width</param>
+        /// <param name="height">screen height</param>
+        /// <param name="bitsPerPixel">bits per pixel</param>
+        /// <param name="resizable">window will be resizable</param>
+        /// <param name="openGL">OpenGL surface</param>
+        /// <param name="fullScreen">fullscreen</param>
+        /// <returns>a surface to draw to</returns>
+        public static Surface SetVideoMode(int width, int height, int bitsPerPixel, bool resizable, bool openGL, bool fullScreen)
+        {
+            return SetVideoMode(width, height, bitsPerPixel, resizable, openGL, fullScreen, false, true);
+        }
+
+        /// <summary>
+        /// Sets the video mode of the application
+        /// </summary>
+        /// <remarks>The surface will have a frame unless it is fullscreen.</remarks>
+        /// <param name="width">screen width</param>
+        /// <param name="height">screen height</param>
+        /// <param name="resizable">window will be resizable</param>
+        /// <param name="openGL">OpenGL surface</param>
+        /// <param name="fullScreen">fullscreen</param>
+        /// <param name="hardwareSurface"></param>
+        /// <returns>a surface to draw to</returns>
+        public static Surface SetVideoMode(int width, int height, bool resizable, bool openGL, bool fullScreen, bool hardwareSurface)
+        {
+            return SetVideoMode(width, height, USE_CURRENT_BPP, resizable, openGL, fullScreen, hardwareSurface, true);
+        }
+
+        /// <summary>
+        /// Sets the video mode of the application
+        /// </summary>
+        /// <remarks>The surface will have a frame unless it is fullscreen.</remarks>
+        /// <param name="width">screen width</param>
+        /// <param name="height">screen height</param>
+        /// <param name="bitsPerPixel">bits per pixel</param>
+        /// <param name="resizable">window will be resizable</param>
+        /// <param name="openGL">OpenGL surface</param>
+        /// <param name="fullScreen">fullscreen</param>
+        /// <param name="hardwareSurface"></param>
+        /// <returns>a surface to draw to</returns>
+        public static Surface SetVideoMode(int width, int height, int bitsPerPixel, bool resizable, bool openGL, bool fullScreen, bool hardwareSurface)
+        {
+            return SetVideoMode(width, height, bitsPerPixel, resizable, openGL, fullScreen, hardwareSurface, true);
+        }
+
+        /// <summary>
+        /// Sets the video mode of the application
+        /// </summary>
+        /// <param name="width">screen width</param>
+        /// <param name="height">screen height</param>
+        /// <param name="resizable">window will be resizable</param>
+        /// <param name="openGL">OpenGL surface</param>
+        /// <param name="fullscreen">fullscreen</param>
+        /// <param name="hardwareSurface"></param>
         /// <param name="frame">
-        /// if true, the window will have a frame around it
+        /// If true, the window will have a frame around it. If fullscreen is true, then the frame will not appear
         /// </param>
         /// <returns>a surface to draw to</returns>
-        public static Surface SetVideoModeWindow(int width, int height, bool resizable, bool frame)
+        public static Surface SetVideoMode(int width, int height, bool resizable, bool openGL, bool fullscreen, bool hardwareSurface, bool frame)
         {
-            VideoModes flags = VideoModes.None;
-            if (resizable)
-            {
-                flags |= VideoModes.Resizable;
-            }
-            if (!frame)
-            {
-                flags |= VideoModes.NoFrame;
-            }
-            return SetVideoMode(width, height, 0, flags);
+            return SetVideoMode(width, height, USE_CURRENT_BPP, resizable, openGL, fullscreen, hardwareSurface, true);
         }
 
         /// <summary>
-        /// Sets the windowed video mode
-        /// </summary>
-        /// <param name="width">The width of the window</param>
-        /// <param name="height">The height of the window</param>
-        /// <param name="resizable">
-        /// If true, the window will be resizable
-        /// </param>
-        /// <param name="bitsPerPixel">bits per pixel</param>
-        /// <returns>a surface to draw to</returns>
-        public static Surface SetVideoModeWindow(
-            int width,
-            int height,
-            int bitsPerPixel,
-            bool resizable)
-        {
-            VideoModes flags = VideoModes.None;
-            if (resizable)
-            {
-                flags |= VideoModes.Resizable;
-            }
-            return SetVideoMode(width, height, bitsPerPixel, flags);
-        }
-
-        /// <summary>
-        /// Sets the windowed video mode
-        /// </summary>
-        /// <param name="width">The width of the window</param>
-        /// <param name="height">The height of the window</param>
-        /// <param name="resizable">
-        /// If true, the window will be resizable
-        /// </param>
-        /// <param name="frame">
-        /// if true, the window will have a frame around it
-        /// </param>
-        /// <param name="bitsPerPixel">bits per pixel</param>
-        /// <returns>a surface to draw to</returns>
-        public static Surface SetVideoModeWindow(
-            int width,
-            int height,
-            int bitsPerPixel,
-            bool resizable,
-            bool frame)
-        {
-            VideoModes flags = VideoModes.None;
-            if (resizable)
-            {
-                flags |= VideoModes.Resizable;
-            }
-            if (!frame)
-            {
-                flags |= VideoModes.NoFrame;
-            }
-            return SetVideoMode(width, height, bitsPerPixel, flags);
-        }
-
-        /// <summary>
-        /// Sets a full-screen video mode suitable for drawing with OpenGL
-        /// </summary>
-        /// <param name="width">the horizontal resolution</param>
-        /// <param name="height">the vertical resolution</param>
-        /// <param name="bitsPerPixel">bits per pixel</param>
-        /// <returns>A Surface representing the screen</returns>
-        public static Surface SetVideoModeOpenGL(int width, int height, int bitsPerPixel)
-        {
-            return SetVideoMode(width, height, bitsPerPixel,
-                (VideoModes.OpenGL | VideoModes.Fullscreen));
-        }
-
-        /// <summary>
-        /// Sets a full-screen video mode suitable for drawing with OpenGL
-        /// </summary>
-        /// <param name="width">the horizontal resolution</param>
-        /// <param name="height">the vertical resolution</param>
-        /// <returns>A Surface representing the screen</returns>
-        public static Surface SetVideoModeOpenGL(int width, int height)
-        {
-            return SetVideoMode(width, height, 0,
-                (VideoModes.OpenGL | VideoModes.Fullscreen));
-        }
-        /// <summary>
-        /// Sets a windowed video mode suitable for drawing with OpenGL
-        /// </summary>
-        /// <param name="width">The width of the window</param>
-        /// <param name="height">The height of the window</param>
-        /// <param name="resizable">
-        /// If true, the window will be resizable
-        /// </param>
-        /// <returns>A Surface representing the window</returns>
-        public static Surface SetVideoModeWindowOpenGL(
-            int width,
-            int height,
-            bool resizable)
-        {
-            VideoModes flags = VideoModes.OpenGL;
-            if (resizable)
-            {
-                flags |= VideoModes.Resizable;
-            }
-            return SetVideoMode(width, height, 0, flags);
-        }
-        /// <summary>
-        /// Sets a windowed video mode suitable for drawing with OpenGL
-        /// </summary>
-        /// <param name="width">The width of the window</param>
-        /// <param name="height">The height of the window</param>
-        /// <param name="resizable">
-        /// If true, the window will be resizable
-        /// </param>
-        /// <param name="frame">
-        /// If true, the window will have a frame around it
-        /// </param>
-        /// <returns>A Surface representing the window</returns>
-        public static Surface SetVideoModeWindowOpenGL(
-            int width,
-            int height,
-            bool resizable,
-            bool frame)
-        {
-            VideoModes flags = (VideoModes.OpenGL);
-            if (resizable)
-            {
-                flags |= VideoModes.Resizable;
-            }
-            if (!frame)
-            {
-                flags |= VideoModes.NoFrame;
-            }
-            return SetVideoMode(width, height, 0, flags);
-        }
-
-        /// <summary>
-        /// Sets a windowed video mode suitable for drawing with OpenGL
-        /// </summary>
-        /// <param name="width">The width of the window</param>
-        /// <param name="height">The height of the window</param>
-        /// <returns>A Surface representing the window</returns>
-        public static Surface SetVideoModeWindowOpenGL(
-            int width,
-            int height)
-        {
-            return SetVideoModeWindowOpenGL(width, height, false);
-
-        }
-        /// <summary>
-        /// Sets the video mode of a fullscreen application
+        /// Sets the video mode of the application
         /// </summary>
         /// <param name="width">screen width</param>
         /// <param name="height">screen height</param>
         /// <param name="bitsPerPixel">bits per pixel</param>
-        /// <param name="flags">
-        /// specific flags, see SDL documentation for details
+        /// <param name="resizable">window will be resizable</param>
+        /// <param name="openGL">OpenGL surface</param>
+        /// <param name="fullscreen">fullscreen</param>
+        /// <param name="hardwareSurface"></param>
+        /// <param name="frame">
+        /// If true, the window will have a frame around it. If fullscreen is true, then the frame will not appear
         /// </param>
-        /// <returns>A Surface representing the screen</returns>
-        public static Surface SetVideoMode(int width, int height, int bitsPerPixel, VideoModes flags)
+        /// <returns>a surface to draw to</returns>
+        public static Surface SetVideoMode(int width, int height, int bitsPerPixel, bool resizable, bool openGL, bool fullscreen, bool hardwareSurface, bool frame)
         {
+            VideoModes flags = VideoModes.None;
+            if (hardwareSurface)
+            {
+                flags |= VideoModes.HardwareSurface;
+                flags |= VideoModes.DoubleBuffering;
+            }
+            if (fullscreen)
+            {
+                flags |= VideoModes.Fullscreen;
+            }
+            if (openGL)
+            {
+                flags |= VideoModes.OpenGL;
+            }
+            if (resizable)
+            {
+                flags |= VideoModes.Resizable;
+            }
+            if (!frame)
+            {
+                flags |= VideoModes.NoFrame;
+            }
             return new Surface(Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, (int)flags), true);
         }
 

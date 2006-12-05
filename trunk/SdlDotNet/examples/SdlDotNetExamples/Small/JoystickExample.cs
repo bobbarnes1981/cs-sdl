@@ -80,7 +80,7 @@ namespace SdlDotNetExamples
             {
                 Video.WindowIcon();
                 Video.WindowCaption = "SdlDotNet - Joystick Example";
-                screen = Video.SetVideoModeWindow(width, height, true);
+                screen = Video.SetVideoMode(width, height, true);
                 Mouse.ShowCursor = false; // hide the cursor
 
                 Surface surf =

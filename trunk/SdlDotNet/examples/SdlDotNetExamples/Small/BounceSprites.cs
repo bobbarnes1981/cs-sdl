@@ -91,7 +91,7 @@ namespace SdlDotNetExamples
             background = new Surface(filepath + data_directory + "background.png");
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Bounce Sprites";
-            screen = Video.SetVideoModeWindow(width, height);
+            screen = Video.SetVideoMode(width, height);
             screen.Blit(background);
             screen.Update();
 
