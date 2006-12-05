@@ -46,7 +46,7 @@ namespace SdlDotNet.Tests
 		private void VideoSetup(int bpp)
 		{
 			Video.Close();
-			Video.SetVideoModeWindow(this.width, this.height, bpp); 
+			Video.SetVideoMode(this.width, this.height, bpp); 
 		}
 
 		/// <summary>

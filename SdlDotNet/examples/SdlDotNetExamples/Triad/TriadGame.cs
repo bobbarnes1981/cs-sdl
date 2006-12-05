@@ -73,7 +73,7 @@ namespace SdlDotNetExamples.Triad
             try
             {
                 screen =
-                    Video.SetVideoModeWindow(width, height);
+                    Video.SetVideoMode(width, height);
                 surf =
                     screen.CreateCompatibleSurface(width, height);
                 surf.Fill(

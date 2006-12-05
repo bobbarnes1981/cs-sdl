@@ -341,7 +341,7 @@ namespace SdlDotNetExamples
             //surface = new SurfaceGl(font.Render(" ", Color.White));
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Gears";
-            screen = Video.SetVideoModeWindowOpenGL(500, 500, true);
+            screen = Video.SetVideoMode(500, 500, true, true);
             Events.Tick += new TickEventHandler(this.Tick);
             Events.Quit += new QuitEventHandler(this.Quit);
             Events.VideoResize += new VideoResizeEventHandler(this.Resize);
@@ -364,7 +364,7 @@ namespace SdlDotNetExamples
 
         private void Resize(object sender, VideoResizeEventArgs e)
         {
-            screen = Video.SetVideoModeWindowOpenGL(e.Width, e.Height, true);
+            screen = Video.SetVideoMode(e.Width, e.Height, true);
         }
 
         private void KeyboardDown(

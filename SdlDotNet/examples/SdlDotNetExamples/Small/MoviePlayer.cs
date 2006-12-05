@@ -76,7 +76,7 @@ namespace SdlDotNetExamples
 
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Movie Player";
-            screen = Video.SetVideoModeWindow(width, height);
+            screen = Video.SetVideoMode(width, height);
             Mixer.Close();
             movie = new Movie(file);
             Console.WriteLine("Time: " + movie.Length);

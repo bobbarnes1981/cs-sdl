@@ -39,8 +39,8 @@ namespace SdlDotNetExamples
             string filePath = Path.Combine("..", "..");
             string fileDirectory = "Data";
             string ballFileName = "ball.png";
-            string paddle1FileName = "paddle1.png";
-            string paddle2FileName = "paddle2.png";
+            //string paddle1FileName = "paddle1.png";
+            //string paddle2FileName = "paddle2.png";
 
             if (File.Exists(ballFileName))
             {
@@ -57,7 +57,7 @@ namespace SdlDotNetExamples
             ball = new Sprite(new Surface(Path.Combine(Path.Combine(filePath, fileDirectory), ballFileName)));
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Pong Example";
-            Video.SetVideoModeWindow(300, 200);
+            Video.SetVideoMode(300, 200);
             Events.Tick += new TickEventHandler(Events_Tick);
 
             ball.Surface.TransparentColor = System.Drawing.Color.Magenta;

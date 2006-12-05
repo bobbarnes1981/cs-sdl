@@ -95,7 +95,7 @@ namespace SdlDotNetExamples
             }
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Snow Demo";
-            screen = Video.SetVideoModeWindow(640, 480, 16);
+            screen = Video.SetVideoMode(640, 480, 16);
             background = new Surface(filepath + data_directory + "snowbackground.png");
             background.Transparent = true;
             background.TransparentColor = Color.Magenta;
