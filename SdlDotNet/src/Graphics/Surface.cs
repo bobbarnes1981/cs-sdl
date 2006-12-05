@@ -1,6 +1,6 @@
+#region LICENSE
 /*
- * $RCSfile: Surface.cs,v $
- * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -529,460 +530,36 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Draw filled circle onto surface
+        /// 
         /// </summary>
-        /// <param name="circle">Circle</param>
-        /// <param name="color">Color to fill circle</param>
-        public void DrawFilledCircle(Circle circle, System.Drawing.Color color)
+        /// <param name="primitive"></param>
+        /// <param name="color"></param>
+        public void DrawPrimitive(IPrimitive primitive, Color color)
         {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = SdlGfx.filledCircleRGBA(this.Handle, circle.PositionX, circle.PositionY, circle.Radius, color.R, color.G, color.B,
-                color.A);
-            GC.KeepAlive(this);
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
+            primitive.Draw(this, color);
         }
 
         /// <summary>
-        /// Draw circle onto surface
+        /// 
         /// </summary>
-        /// <param name="circle">Circle to create</param>
-        /// <param name="color">Color of circle</param>
-        /// <param name="antiAlias">Antialias circle</param>
-        public void DrawCircle(Circle circle, System.Drawing.Color color, bool antiAlias)
+        /// <param name="primitive"></param>
+        /// <param name="color"></param>
+        /// <param name="antiAlias"></param>
+        public void DrawPrimitive(IPrimitive primitive, Color color, bool antiAlias)
         {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-            if (antiAlias)
-            {
-                result = SdlGfx.aacircleRGBA(this.Handle, circle.PositionX, circle.PositionY, circle.Radius, color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            else
-            {
-                result = SdlGfx.circleRGBA(this.Handle, circle.PositionX, circle.PositionY, circle.Radius, color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
+            primitive.Draw(this, color, antiAlias);
         }
 
         /// <summary>
-        /// Draw circle onto surface
+        /// 
         /// </summary>
-        /// <param name="circle">Circle to create</param>
-        /// <param name="color">Color of circle</param>
-        public void DrawCircle(Circle circle, System.Drawing.Color color)
+        /// <param name="primitive"></param>
+        /// <param name="color"></param>
+        /// <param name="antiAlias"></param>
+        /// <param name="fill"></param>
+        public void DrawPrimitive(IPrimitive primitive, Color color, bool antiAlias, bool fill)
         {
-            DrawCircle(circle, color, true);
-        }
-
-        /// <summary>
-        /// Draw ellipse onto surface
-        /// </summary>
-        /// <param name="ellipse">Ellipse to create</param>
-        /// <param name="color">Color of ellipse</param>
-        /// <param name="antiAlias">antialias ellipse</param>
-        public void DrawEllipse(Ellipse ellipse, System.Drawing.Color color, bool antiAlias)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-
-            if (antiAlias)
-            {
-                result = SdlGfx.aaellipseRGBA(
-                    this.Handle, ellipse.PositionX, ellipse.PositionY,
-                    ellipse.RadiusX, ellipse.RadiusY,
-                    color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            else
-            {
-                result = SdlGfx.ellipseRGBA(
-                    this.Handle, ellipse.PositionX, ellipse.PositionY,
-                    ellipse.RadiusX, ellipse.RadiusY,
-                    color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw ellipse onto surface
-        /// </summary>
-        /// <param name="ellipse">Ellipse to create</param>
-        /// <param name="color">Color of ellipse</param>
-        public void DrawEllipse(Ellipse ellipse, System.Drawing.Color color)
-        {
-            DrawEllipse(ellipse, color, true);
-        }
-
-        /// <summary>
-        /// Draw filled ellipse
-        /// </summary>
-        /// <param name="ellipse">Ellipse to create</param>
-        /// <param name="color">Color of ellipse</param>
-        public void DrawFilledEllipse(Ellipse ellipse, System.Drawing.Color color)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = SdlGfx.filledEllipseRGBA(this.Handle, ellipse.PositionX, ellipse.PositionY, ellipse.RadiusX, ellipse.RadiusY, color.R, color.G, color.B,
-                color.A);
-            GC.KeepAlive(this);
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw line onto surface
-        /// </summary>
-        /// <param name="line">Line to draw</param>
-        /// <param name="color">Color of line</param>
-        /// <param name="antiAlias">Anitalias line</param>
-        public void DrawLine(Line line, System.Drawing.Color color, bool antiAlias)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-
-            if (antiAlias)
-            {
-                result = SdlGfx.aalineRGBA(
-                    this.Handle, line.XPosition1, line.YPosition1,
-                    line.XPosition2, line.YPosition2,
-                    color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            else
-            {
-                result = SdlGfx.lineRGBA(
-                    this.Handle, line.XPosition1, line.YPosition1,
-                    line.XPosition2, line.YPosition2,
-                    color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw line onto surface
-        /// </summary>
-        /// <param name="line">Line to draw</param>
-        /// <param name="color">Color of line</param>
-        public void DrawLine(Line line, System.Drawing.Color color)
-        {
-            DrawLine(line, color, true);
-        }
-
-        /// <summary>
-        /// Draw triangle onto surface
-        /// </summary>
-        /// <param name="triangle">Triangle to draw</param>
-        /// <param name="color">Color of triangle</param>
-        /// <param name="antiAlias">antitalias</param>
-        public void DrawTriangle(Triangle triangle, System.Drawing.Color color, bool antiAlias)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-
-            if (antiAlias)
-            {
-                result = SdlGfx.aatrigonRGBA(
-                    this.Handle, triangle.XPosition1, triangle.YPosition1,
-                    triangle.XPosition2, triangle.YPosition2,
-                    triangle.XPosition3, triangle.YPosition3,
-                    color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            else
-            {
-                result = SdlGfx.trigonRGBA(
-                    this.Handle, triangle.XPosition1, triangle.YPosition1,
-                    triangle.XPosition2, triangle.YPosition2,
-                    triangle.XPosition3, triangle.YPosition3,
-                    color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Triangle to draw onto surface
-        /// </summary>
-        /// <param name="triangle">Triangle to draw</param>
-        /// <param name="color">Color of triangle</param>
-        public void DrawTriangle(Triangle triangle, System.Drawing.Color color)
-        {
-            DrawTriangle(triangle, color, true);
-        }
-
-        /// <summary>
-        /// Filled Triangle to draw onto surface
-        /// </summary>
-        /// <param name="triangle">Triangle to draw</param>
-        /// <param name="color">Color of triangle</param>
-        public void DrawFilledTriangle(Triangle triangle, System.Drawing.Color color)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-            result = SdlGfx.filledTrigonRGBA(
-                this.Handle, triangle.XPosition1, triangle.YPosition1,
-                triangle.XPosition2, triangle.YPosition2,
-                triangle.XPosition3, triangle.YPosition3,
-                color.R, color.G, color.B,
-                color.A);
-            GC.KeepAlive(this);
-
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw polygon to surface
-        /// </summary>
-        /// <param name="polygon">Polygon to draw</param>
-        /// <param name="color">Color of polygon</param>
-        public void DrawFilledPolygon(Polygon polygon, System.Drawing.Color color)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = SdlGfx.filledPolygonRGBA(this.Handle, polygon.PositionsX(), polygon.PositionsY(), polygon.NumberOfSides, color.R, color.G, color.G,
-                color.A);
-            GC.KeepAlive(this);
-            if (result != 0)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw polygon to surface
-        /// </summary>
-        /// <param name="polygon">Polygon to draw</param>
-        /// <param name="color">Color of polygon</param>
-        /// <param name="antiAlias">Antialias</param>
-        public void DrawPolygon(Polygon polygon, System.Drawing.Color color, bool antiAlias)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-            if (antiAlias)
-            {
-                result = SdlGfx.aapolygonRGBA(this.Handle, polygon.PositionsX(), polygon.PositionsY(), polygon.NumberOfSides, color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            else
-            {
-                result = SdlGfx.polygonRGBA(this.Handle, polygon.PositionsX(), polygon.PositionsY(), polygon.NumberOfSides, color.R, color.G, color.B,
-                    color.A);
-                GC.KeepAlive(this);
-            }
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw polygon to surface
-        /// </summary>
-        /// <param name="polygon">Polygon to draw</param>
-        /// <param name="color">Color of polygon</param>
-        public void DrawPolygon(Polygon polygon, System.Drawing.Color color)
-        {
-            DrawPolygon(polygon, color, true);
-        }
-
-        /// <summary>
-        /// Draw pie-shaped primitive to surface
-        /// </summary>
-        /// <param name="pie">Pie to draw</param>
-        /// <param name="color">Color of pie</param>
-        public void DrawPie(Pie pie, System.Drawing.Color color)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-
-            result = SdlGfx.pieRGBA(
-                this.Handle, pie.PositionX, pie.PositionY,
-                pie.Radius,
-                pie.StartingAngle, pie.EndingAngle,
-                color.R, color.G, color.B,
-                color.A);
-            GC.KeepAlive(this);
-
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw filled pie-shaped primitive to surface
-        /// </summary>
-        /// <param name="pie">Pie to draw</param>
-        /// <param name="color">Color of pie</param>
-        public void DrawFilledPie(Pie pie, System.Drawing.Color color)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = SdlGfx.filledPieRGBA(this.Handle, pie.PositionX, pie.PositionY, pie.Radius, pie.StartingAngle, pie.EndingAngle, color.R, color.G, color.B,
-                color.A);
-            GC.KeepAlive(this);
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw bezier curve to surface
-        /// </summary>
-        /// <param name="bezier">Bezier curve to draw</param>
-        /// <param name="color">Color of curve</param>
-        public void DrawBezier(Bezier bezier, System.Drawing.Color color)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-            result = SdlGfx.bezierRGBA(
-                this.Handle, bezier.PositionsX(), bezier.PositionsY(),
-                bezier.NumberOfPoints, bezier.Steps,
-                color.R, color.G, color.B,
-                color.A);
-            GC.KeepAlive(this);
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw box to surface
-        /// </summary>
-        /// <param name="rectangle">Rectangular coordinates</param>
-        /// <param name="color">color of box</param>
-        public void DrawBox(Rectangle rectangle, System.Drawing.Color color)
-        {
-            this.DrawBox(new Box((short)rectangle.X, (short)rectangle.Y, (short)rectangle.Right, (short)rectangle.Bottom), color);
-        }
-
-        /// <summary>
-        /// Draw box to surface
-        /// </summary>
-        /// <param name="box">Box to draw</param>
-        /// <param name="color">color of box</param>
-        public void DrawBox(Box box, System.Drawing.Color color)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-
-            result = SdlGfx.rectangleRGBA(
-                this.Handle, box.XPosition1, box.YPosition1,
-                box.XPosition2, box.YPosition2,
-                color.R, color.G, color.B,
-                color.A);
-            GC.KeepAlive(this);
-
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        /// <summary>
-        /// Draw filled box to surface
-        /// </summary>
-        /// <param name="rectangle">Rectangular coordinates</param>
-        /// <param name="color">color of box</param>
-        public void DrawFilledBox(Rectangle rectangle, System.Drawing.Color color)
-        {
-            this.DrawFilledBox(new Box((short)rectangle.X, (short)rectangle.Y, (short)rectangle.Right, (short)rectangle.Bottom), color);
-        }
-
-        /// <summary>
-        /// Draw filled box to surface
-        /// </summary>
-        /// <param name="box">box to draw</param>
-        /// <param name="color">color of box</param>
-        public void DrawFilledBox(Box box, System.Drawing.Color color)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = 0;
-
-            result = SdlGfx.boxRGBA(
-                this.Handle, box.XPosition1, box.YPosition1,
-                box.XPosition2, box.YPosition2,
-                color.R, color.G, color.B,
-                color.A);
-            GC.KeepAlive(this);
-
-            if (result != (int)SdlFlag.Success)
-            {
-                throw SdlException.Generate();
-            }
+            primitive.Draw(this, color, antiAlias, fill);
         }
 
         /// <summary>
@@ -1474,6 +1051,7 @@ namespace SdlDotNet.Graphics
                 }
             }
         }
+
         /// <summary>
         /// Gets a pointer to the raw pixel data of the surface
         /// </summary>
@@ -1690,7 +1268,6 @@ namespace SdlDotNet.Graphics
                     break;
             }
         }
-
 
         /// <summary>
         /// Draws a pixel to this surface - uses 1,2 or 4 BytesPerPixel modes.
@@ -2131,7 +1708,6 @@ namespace SdlDotNet.Graphics
                 throw;
             }
         }
-
 
         /// <summary>
         /// Create rescaled surface
@@ -2600,6 +2176,7 @@ namespace SdlDotNet.Graphics
                 return this.SurfaceStruct.flags;
             }
         }
+
         /// <summary>
         /// Surface is fullscreen
         /// </summary>

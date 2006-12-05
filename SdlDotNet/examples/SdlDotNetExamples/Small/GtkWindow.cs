@@ -22,6 +22,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+
 using Gtk;
 using SdlDotNet.GtkSharp;
 using SdlDotNet.Graphics;
@@ -53,7 +54,7 @@ namespace SdlDotNetExamples.GtkWindowExample
 
 
             SdlScreen = new Surface(new System.Drawing.Size(250, 100));
-            SdlScreen.DrawBox(new SdlDotNet.Graphics.Box(10, 10, 240, 90), System.Drawing.Color.Blue);
+            SdlScreen.DrawPrimitive(new SdlDotNet.Graphics.Box(10, 10, 240, 90), System.Drawing.Color.Blue);
 
             // RENDERING THRU Gtk.Image
             myImg = new Gtk.Image(ImageToPixbuf(SdlScreen.Bitmap));
@@ -62,7 +63,7 @@ namespace SdlDotNetExamples.GtkWindowExample
 
             // Rendering using GTK Widget !! :)
             SdlSurface mySurface = new SdlSurface();
-            SdlScreen.DrawFilledCircle(new Circle(125, 50, 25), System.Drawing.Color.Red);		// ADD RED Circle 
+            SdlScreen.DrawPrimitive(new Circle(125, 50, 25), System.Drawing.Color.Red, false, true);		// ADD RED Circle 
             mySurface.Surface = SdlScreen;
             verBox.Add(mySurface);
 
