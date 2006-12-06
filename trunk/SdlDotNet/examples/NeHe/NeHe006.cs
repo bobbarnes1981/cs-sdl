@@ -34,7 +34,7 @@ using System.Reflection;
 using SdlDotNet.Core;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 06: Texture Mapping

@@ -33,7 +33,7 @@ using SdlDotNet.Input;
 using SdlDotNet.Graphics;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 01: Setting Up An OpenGL Window

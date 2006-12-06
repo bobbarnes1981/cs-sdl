@@ -32,7 +32,7 @@ using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Windows;
 
-namespace SdlDotNet.Examples.CDPlayer
+namespace SdlDotNetExamples.CDPlayer
 {
     /// <summary>
     /// 

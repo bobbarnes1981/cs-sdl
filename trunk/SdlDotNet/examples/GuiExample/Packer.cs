@@ -23,7 +23,7 @@ using System.Drawing;
 
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNet.Examples.GuiExample
+namespace SdlDotNetExamples.GuiExample
 {
     /// <summary>
     /// This class handles one or more sprites packed into a line. The

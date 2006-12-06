@@ -26,7 +26,7 @@ using SdlDotNet.Input;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNet.Examples.GuiExample
+namespace SdlDotNetExamples.GuiExample
 {
     /// <summary>
     /// 

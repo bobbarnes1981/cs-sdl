@@ -22,7 +22,7 @@ using System.Collections;
 using System.Diagnostics;
 using SdlDotNet;
 
-namespace SdlDotNet.Examples.GuiExample
+namespace SdlDotNetExamples.GuiExample
 {
     /// <summary>
     /// 

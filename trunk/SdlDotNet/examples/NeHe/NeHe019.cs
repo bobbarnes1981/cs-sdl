@@ -34,7 +34,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Input;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 19: Particle Engine Using Triangle Strips

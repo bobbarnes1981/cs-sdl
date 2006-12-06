@@ -25,7 +25,7 @@ using System.Globalization;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNet.Examples.GuiExample
+namespace SdlDotNetExamples.GuiExample
 {
     /// <summary>
     /// A fairly complicated class that creates a menu bar that

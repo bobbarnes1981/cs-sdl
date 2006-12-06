@@ -173,7 +173,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="GuiExample" path="examples/GuiExample" language="C#" type="Library" assemblyName="GuiExample" rootNamespace="SdlDotNet.Examples.GuiExample" designerFolder="Properties">
+	<Project name="GuiExample" path="examples/GuiExample" language="C#" type="Library" assemblyName="GuiExample" rootNamespace="SdlDotNetExamples.GuiExample" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -285,7 +285,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="NeHe" path="examples/NeHe" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.NeHe.NeHe" assemblyName="NeHe" rootNamespace="SdlDotNet.Examples.NeHe" icon="App.ico" designerFolder="Properties">
+	<Project name="NeHe" path="examples/NeHe" language="C#" type="WinExe" startupObject="SdlDotNetExamples.NeHe.NeHe" assemblyName="NeHe" rootNamespace="SdlDotNetExamples.NeHe" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -324,7 +324,7 @@
 		</Match>
 	    </Files>
 	</Project>
-	<Project name="RedBook" path="examples/RedBook" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.RedBook.RedBook" assemblyName="RedBook" rootNamespace="SdlDotNet.Examples.RedBook" icon="App.ico" designerFolder="Properties">
+	<Project name="RedBook" path="examples/RedBook" language="C#" type="WinExe" startupObject="SdlDotNetExamples.RedBook.RedBook" assemblyName="RedBook" rootNamespace="SdlDotNetExamples.RedBook" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -363,7 +363,7 @@
 		</Match>
 	    </Files>
 	</Project>
-	<Project name="CDPlayer" path="examples/CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNet.Examples.CDPlayer.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNet.Examples.CDPlayer" icon="App.ico" designerFolder="Properties">
+	<Project name="CDPlayer" path="examples/CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNetExamples.CDPlayer.CDPlayer" assemblyName="CDPlayer" rootNamespace="SdlDotNetExamples.CDPlayer" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>

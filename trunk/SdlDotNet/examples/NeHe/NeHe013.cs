@@ -34,7 +34,7 @@ using SdlDotNet.Graphics;
 using Tao.OpenGl;
 using Tao.Platform.Windows;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 13: Bitmap Fonts

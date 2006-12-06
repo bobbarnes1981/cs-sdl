@@ -24,7 +24,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNet.Examples.GuiExample
+namespace SdlDotNetExamples.GuiExample
 {
     /// <summary>
     /// This class manages and controls the various GUI elements inside

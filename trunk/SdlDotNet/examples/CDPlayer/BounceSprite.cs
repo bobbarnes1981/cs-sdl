@@ -25,7 +25,7 @@ using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 
-namespace SdlDotNet.Examples.CDPlayer
+namespace SdlDotNetExamples.CDPlayer
 {
     /// <summary>
     /// 

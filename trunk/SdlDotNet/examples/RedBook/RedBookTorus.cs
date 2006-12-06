@@ -32,7 +32,7 @@ using SdlDotNet.Core;using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.RedBook
+namespace SdlDotNetExamples.RedBook
 {
 	/// <summary>
 	///     This program demonstrates the creation of a display list.

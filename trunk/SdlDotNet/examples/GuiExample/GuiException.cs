@@ -22,7 +22,7 @@ using System.Runtime.Serialization;
 
 using SdlDotNet.Core;
 
-namespace SdlDotNet.Examples.GuiExample
+namespace SdlDotNetExamples.GuiExample
 {
     /// <summary>
     /// 

@@ -32,7 +32,7 @@ using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples.RedBook
+namespace SdlDotNetExamples.RedBook
 {
 	/// <summary>
 	///     This program draws 5 red teapots, each at a different z distance from the eye,

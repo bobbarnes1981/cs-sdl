@@ -26,7 +26,7 @@ using System.Globalization;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
-using SdlDotNet.Examples.GuiExample;
+using SdlDotNetExamples.GuiExample;
 using SdlDotNet.Input;
 using SdlDotNet.Core;
 
