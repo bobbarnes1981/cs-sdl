@@ -43,7 +43,13 @@ namespace SdlDotNetExamples.Isotope
 
         public int[] ViewSize ={ 400, 300 };
         //remember the surface
-        public Surface Surface;
+        Surface surface;
+
+        public Surface Surface
+        {
+            get { return surface; }
+            set { surface = value; }
+        }
         //offset from the top left corner of the window for the isotope display
         public int[] DisplayOffset ={ 200, 150 };
         public Rectangle[] OldRect ={ };
@@ -54,7 +60,7 @@ namespace SdlDotNetExamples.Isotope
             //Dimensions of the window for the isotope display
             //view_size=(int[])surface.Size;
             //remember the surface
-            this.Surface = surface;
+            this.surface = surface;
             //offset from the top left corner of the window for the isotope display
             this.DisplayOffset = display_offset;
             RedrawDisplay(scene, skin_group);
@@ -100,7 +106,7 @@ namespace SdlDotNetExamples.Isotope
             //Display the background
             Console.WriteLine(scene);
             Surface.Blit((Surface)skin_group[scene.sceneType].images[0], ((Surface)skin_group[scene.sceneType].images[0]).Rectangle);
-            Surface.Flip();
+            Surface.Update();
             DisplayUpdate(scene, skin_group);
         }
     }

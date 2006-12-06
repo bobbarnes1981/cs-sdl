@@ -117,7 +117,7 @@ namespace SdlDotNetExamples
                                 rand.Next(255),
                                 rand.Next(255)));
                             times++;
-                            screen.Flip();
+                            screen.Update();
                             screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
                             Thread.Sleep(SLEEPTIME);
                         }
@@ -153,7 +153,7 @@ namespace SdlDotNetExamples
                                 rand.Next(255),
                                 rand.Next(255)), false, true);
                             times++;
-                            screen.Flip();
+                            screen.Update();
                             screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
                             Thread.Sleep(SLEEPTIME);
                         }
@@ -180,7 +180,7 @@ namespace SdlDotNetExamples
                                 rand.Next(255),
                                 rand.Next(255)));
                             times++;
-                            screen.Flip();
+                            screen.Update();
                             screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
                             Thread.Sleep(SLEEPTIME);
                         }
@@ -222,7 +222,7 @@ namespace SdlDotNetExamples
                                 rand.Next(255),
                                 rand.Next(255)), false, true);
                             times++;
-                            screen.Flip();
+                            screen.Update();
                             screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
                             Thread.Sleep(SLEEPTIME);
                         }
@@ -280,7 +280,7 @@ namespace SdlDotNetExamples
                                 rand.Next(255),
                                 rand.Next(255)), false, true);
                             times++;
-                            screen.Flip();
+                            screen.Update();
                             screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
                             Thread.Sleep(SLEEPTIME);
                         }
@@ -352,7 +352,7 @@ namespace SdlDotNetExamples
                                 rand.Next(255),
                                 rand.Next(255)));
                             times++;
-                            screen.Flip();
+                            screen.Update();
                             screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
                             Thread.Sleep(SLEEPTIME);
                         }
@@ -390,7 +390,7 @@ namespace SdlDotNetExamples
                                 rand.Next(255),
                                 rand.Next(255)), false, true);
                             times++;
-                            screen.Flip();
+                            screen.Update();
                             screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
                             Thread.Sleep(SLEEPTIME);
                         }
@@ -427,7 +427,7 @@ namespace SdlDotNetExamples
                             Console.WriteLine("GetPixel: " + screen.GetPixel(xpixel, ypixel).ToString());
                             Console.WriteLine("GetPixel: " + screen.GetColorValue(screen.GetPixel(xpixel, ypixel)).ToString(CultureInfo.CurrentCulture));
                             times++;
-                            screen.Flip();
+                            screen.Update();
                             screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
                         }
                     }

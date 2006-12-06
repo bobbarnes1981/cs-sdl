@@ -107,7 +107,7 @@ namespace SdlDotNetExamples
         {
             screen.Fill(Color.Black);
             screen.Blit(textDisplay);
-            screen.Flip();
+            screen.Update();
         }
 
         /// <summary>

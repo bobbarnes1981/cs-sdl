@@ -139,7 +139,7 @@ namespace SdlDotNetExamples
             }
 
             screen.Blit(bullets);
-            screen.Flip();
+            screen.Update();
             //screen.Update();
         }
 

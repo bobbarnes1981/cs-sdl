@@ -199,7 +199,7 @@ namespace SdlDotNetExamples.Triad
             //Blit the grid and the board to the screen surface...
             screen.Blit(surf, board.Rectangle);
             screen.Blit(surf, grid.Rectangle);
-            screen.Flip();
+            screen.Update();
         }
     }
 }

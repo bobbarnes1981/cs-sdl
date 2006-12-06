@@ -157,7 +157,7 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 Video.Screen.Blit(j.Surface, j.Rectangle);
             }
-            Video.Screen.Flip();
+            Video.Screen.Update();
         }
 
         /// <summary>
