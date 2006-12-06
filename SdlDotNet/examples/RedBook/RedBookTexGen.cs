@@ -32,7 +32,7 @@ using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples.RedBook
+namespace SdlDotNetExamples.RedBook
 {
 	/// <summary>
 	///     This program draws a texture mapped teapot with automatically generated texture

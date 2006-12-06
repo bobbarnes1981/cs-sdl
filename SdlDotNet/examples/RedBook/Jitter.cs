@@ -64,7 +64,7 @@ SOFTWARE.
  */
 #endregion Original Credits / License
 
-namespace SdlDotNet.Examples.RedBook
+namespace SdlDotNetExamples.RedBook
 {
 	#region Public Structs
 	/// <summary>

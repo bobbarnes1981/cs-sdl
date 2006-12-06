@@ -31,7 +31,7 @@ using System.Reflection;
 using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.RedBook
+namespace SdlDotNetExamples.RedBook
 {
 	/// <summary>
 	///     This is a simple double buffered program.  Pressing the primary mouse button rotates

@@ -35,7 +35,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Input;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 08: Blending

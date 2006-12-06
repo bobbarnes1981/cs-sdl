@@ -31,7 +31,7 @@ using System.Reflection;
 using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.RedBook
+namespace SdlDotNetExamples.RedBook
 {
 	/// <summary>
 	///     This program draws several overlapping filled polygons to demonstrate the effect

@@ -29,7 +29,7 @@ using System;
 
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 02: Your First Polygon

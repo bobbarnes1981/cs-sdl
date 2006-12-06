@@ -31,7 +31,7 @@ using System.Reflection;
 using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.RedBook
+namespace SdlDotNetExamples.RedBook
 {
 	/// <summary>
 	///     Use of multiple names and picking are demonstrated.  A 3x3 grid of squares is

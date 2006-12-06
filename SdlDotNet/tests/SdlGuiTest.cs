@@ -20,7 +20,7 @@ using System.Drawing;
 using System;
 
 using SdlDotNet.Graphics.Sprites;
-using SdlDotNet.Examples.GuiExample;
+using SdlDotNetExamples.GuiExample;
 using NUnit.Framework;
 using SdlDotNet.Core;
 using SdlDotNet.Input;

@@ -34,7 +34,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Tao.FreeGlut;
 
-namespace SdlDotNet.Examples.RedBook
+namespace SdlDotNetExamples.RedBook
 {
 	/// <summary>
 	/// Summary description for RedBook.

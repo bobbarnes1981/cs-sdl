@@ -38,7 +38,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Input;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 25: Morphing and Loading Objects from a File

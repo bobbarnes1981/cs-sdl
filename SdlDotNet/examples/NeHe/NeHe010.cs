@@ -37,7 +37,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Input;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 10: Loading and Moving through a 3D World

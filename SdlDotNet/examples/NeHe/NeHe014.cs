@@ -33,7 +33,7 @@ using SdlDotNet.Core;
 using Tao.OpenGl;
 using Tao.Platform.Windows;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 14: Outline Fonts

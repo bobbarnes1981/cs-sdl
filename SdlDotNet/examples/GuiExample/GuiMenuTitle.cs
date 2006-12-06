@@ -24,7 +24,7 @@ using System.Globalization;
 using SdlDotNet.Input;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNet.Examples.GuiExample
+namespace SdlDotNetExamples.GuiExample
 {
     /// <summary>
     /// Despite its name, the menubar title is actually the part in the

@@ -32,7 +32,7 @@ using System.Drawing;
 using SdlDotNet.Core;
 using Tao.OpenGl;
 
-namespace SdlDotNet.Examples.NeHe
+namespace SdlDotNetExamples.NeHe
 {
     /// <summary>
     /// Lesson 11: Flag Effect (Waving Texture)

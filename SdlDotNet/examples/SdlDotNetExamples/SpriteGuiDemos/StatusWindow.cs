@@ -24,7 +24,7 @@ using System.Globalization;
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
-using SdlDotNet.Examples.GuiExample;
+using SdlDotNetExamples.GuiExample;
 
 namespace SdlDotNetExamples.SpriteGuiDemos
 {
