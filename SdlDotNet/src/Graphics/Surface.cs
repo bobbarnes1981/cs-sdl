@@ -38,22 +38,27 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public class Surface : BaseSdlResource, ICloneable
     {
+        #region Private Fields
         private byte alpha;
         private bool alphaBlending;
         private bool disposed;
         private Color transparentColor;
         private bool isVideoMode;
+        bool transparentInitialized;
+        bool transparent;
 
         // Bmp files have a header of 54 bytes. 
         // This is used to turn the Surface into a byte array to 
         // load into a Bitmap object
         private readonly int BmpHeader = 54;
+        #endregion Private Fields
 
         #region Constructors and Destructors
         static Surface()
         {
             Video.Initialize();
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -225,6 +230,7 @@ namespace SdlDotNet.Graphics
                 throw SdlException.Generate();
             }
         }
+
         /// <summary>
         /// Create a Surface from a byte array in memory.
         /// </summary>
@@ -285,6 +291,69 @@ namespace SdlDotNet.Graphics
 
         #endregion Constructors and Destructors
 
+        #region Private Methods
+
+        private static Sdl.SDL_Rect ConvertRecttoSDLRect(
+            System.Drawing.Rectangle rect)
+        {
+            return new Sdl.SDL_Rect(
+                (short)rect.X,
+                (short)rect.Y,
+                (short)rect.Width,
+                (short)rect.Height);
+        }
+
+        static void CloneFields(Surface source, Surface destination)
+        {
+            destination.transparentColor = source.transparentColor;
+            destination.transparentInitialized = source.transparentInitialized;
+            destination.transparent = source.transparent;
+            destination.alpha = source.alpha;
+            destination.alphaBlending = source.alphaBlending;
+            destination.isVideoMode = source.isVideoMode; ;
+        }
+
+        #endregion Private Methods
+
+        #region Internal Methods
+
+        internal static Surface FromScreenPtr(IntPtr surfacePtr)
+        {
+            return new Surface(surfacePtr);
+        }
+
+        internal Sdl.SDL_Surface SurfaceStruct
+        {
+            get
+            {
+                if (this.disposed)
+                {
+                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                }
+                GC.KeepAlive(this);
+                return (Sdl.SDL_Surface)Marshal.PtrToStructure(this.Handle,
+                    typeof(Sdl.SDL_Surface));
+            }
+        }
+
+        internal Sdl.SDL_PixelFormat PixelFormat
+        {
+            get
+            {
+                if (this.disposed)
+                {
+                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                }
+                GC.KeepAlive(this);
+                return (Sdl.SDL_PixelFormat)Marshal.PtrToStructure(this.SurfaceStruct.format,
+                    typeof(Sdl.SDL_PixelFormat));
+            }
+        }
+
+        #endregion Internal Methods
+
+        #region Protected Methods
+
         /// <summary>
         /// Destroys the surface object and frees its memory
         /// </summary>
@@ -333,38 +402,9 @@ namespace SdlDotNet.Graphics
             }
         }
 
-        internal static Surface FromScreenPtr(IntPtr surfacePtr)
-        {
-            return new Surface(surfacePtr);
-        }
+        #endregion Protected Methods
 
-        internal Sdl.SDL_Surface SurfaceStruct
-        {
-            get
-            {
-                if (this.disposed)
-                {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-                }
-                GC.KeepAlive(this);
-                return (Sdl.SDL_Surface)Marshal.PtrToStructure(this.Handle,
-                    typeof(Sdl.SDL_Surface));
-            }
-        }
-
-        internal Sdl.SDL_PixelFormat PixelFormat
-        {
-            get
-            {
-                if (this.disposed)
-                {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-                }
-                GC.KeepAlive(this);
-                return (Sdl.SDL_PixelFormat)Marshal.PtrToStructure(this.SurfaceStruct.format,
-                    typeof(Sdl.SDL_PixelFormat));
-            }
-        }
+        #region Public Methods
 
         /// <summary>
         /// Creates a Bitmap representing the Surface.
@@ -427,34 +467,6 @@ namespace SdlDotNet.Graphics
                     Marshal.FreeHGlobal(i);
                 }
             }
-        }
-
-        /// <summary>
-        /// If the surface is double-buffered, 
-        /// this method will flip the back buffer onto the screen
-        /// </summary>
-        public void Flip()
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
-            }
-            int result = Sdl.SDL_Flip(this.Handle);
-            GC.KeepAlive(this);
-            if (result != 0)
-            {
-                throw SdlException.Generate();
-            }
-        }
-
-        private static Sdl.SDL_Rect ConvertRecttoSDLRect(
-            System.Drawing.Rectangle rect)
-        {
-            return new Sdl.SDL_Rect(
-                (short)rect.X,
-                (short)rect.Y,
-                (short)rect.Width,
-                (short)rect.Height);
         }
 
         /// <summary>
@@ -661,6 +673,7 @@ namespace SdlDotNet.Graphics
         {
             return this.CreateCompatibleSurface(width, height, false);
         }
+
         /// <summary>
         /// Create a surface with the same pixel format as this one
         /// </summary>
@@ -1151,8 +1164,6 @@ namespace SdlDotNet.Graphics
             }
         }
 
-        bool transparentInitialized;
-        bool transparent;
         /// <summary>
         /// Clears the transparent color for the surface
         /// </summary>
@@ -1950,7 +1961,8 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Updates entire surface
+        /// Updates entire surface. If the surface is double-buffered, 
+        /// this method will flip the back buffer onto the screen
         /// </summary>
         public void Update()
         {
@@ -1958,13 +1970,7 @@ namespace SdlDotNet.Graphics
             {
                 throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
             }
-            Sdl.SDL_UpdateRect(
-                this.Handle,
-                0,
-                0,
-                this.Size.Width,
-                this.Size.Height
-                );
+            Sdl.SDL_Flip(this.Handle);
             GC.KeepAlive(this);
         }
 
@@ -2204,17 +2210,10 @@ namespace SdlDotNet.Graphics
             return final;
         }
 
-        static void CloneFields(Surface source, Surface destination)
-        {
-            destination.transparentColor = source.transparentColor;
-            destination.transparentInitialized = source.transparentInitialized;
-            destination.transparent = source.transparent;
-            destination.alpha = source.alpha;
-            destination.alphaBlending = source.alphaBlending;
-            destination.isVideoMode = source.isVideoMode; ;
-        }
+        #endregion Public Methods
 
         #region ICloneable Members
+
         /// <summary>
         /// Creates a shallow copy of the Surface.
         /// </summary>
@@ -2246,6 +2245,7 @@ namespace SdlDotNet.Graphics
                 return (surf);
             }
         }
+
         #endregion
     }
 }

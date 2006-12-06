@@ -62,7 +62,7 @@ namespace SdlDotNet.Examples
         public void FrameTick(object sender, TickEventArgs e)
         {
             screen.Fill(Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
-            screen.Flip();
+            screen.Update();
         }
 
         public void Go()

@@ -102,7 +102,7 @@ namespace SdlDotNetExamples
         {
             screen.Fill(Color.Black);
             screen.Blit(cursor, new Rectangle(position, screen.Size));
-            screen.Flip();
+            screen.Update();
         }
 
         private void KeyboardDown(object sender, KeyboardEventArgs e)
