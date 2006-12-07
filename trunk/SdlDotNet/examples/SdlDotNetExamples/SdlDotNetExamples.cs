@@ -34,13 +34,13 @@ namespace SdlDotNetExamples
                     {
                         treeView1.Nodes.Add(type.Namespace, type.Namespace.Substring(type.Namespace.IndexOf('.') + 1));
                     }
-                    
+
                     object result = type.InvokeMember("Title",
                             BindingFlags.GetProperty, null, type, null);
                     treeView1.Nodes[type.Namespace].Nodes.Add(type.FullName, (string)result);
-                   }
+                }
             }
-            
+
             treeView1.Sort();
         }
 
@@ -51,11 +51,18 @@ namespace SdlDotNetExamples
 
         private void SelectExample()
         {
-            Type example = Assembly.GetExecutingAssembly().GetType(treeView1.SelectedNode.Name, true, true);
-            example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null);
+            try
+            {
+                Type example = Assembly.GetExecutingAssembly().GetType(treeView1.SelectedNode.Name, true, true);
+                example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null);
+            }
+            catch (TypeLoadException e)
+            {
+                e.ToString();
+            }
         }
 
-        private void lstExamples_SelectedIndexChanged(object sender, EventArgs e)
+        void treeView1_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             SelectExample();
         }
