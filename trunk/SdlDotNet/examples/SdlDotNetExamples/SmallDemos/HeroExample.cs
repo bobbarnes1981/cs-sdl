@@ -1,0 +1,204 @@
+#region LICENSE
+/*
+ * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+#endregion LICENSE
+
+using System;
+using System.IO;
+using System.Drawing;
+
+using SdlDotNet;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
+using SdlDotNet.Core;
+using SdlDotNet.Input;
+
+namespace SdlDotNetExamples.SmallDemos
+{
+    public class HeroExample
+    {
+        // Our hero sprite to walk around.
+        private AnimatedSprite hero = new AnimatedSprite();
+
+        [STAThread]
+        public static void Run()
+        {
+            // Start the application
+            HeroExample app = new HeroExample();
+            app.Go();
+        }
+
+        public void Go()
+        {
+            // Setup the SDL.NET events
+            Events.Fps = 50;
+            Events.Tick += new TickEventHandler(Events_Tick);
+            Events.Quit += new QuitEventHandler(Events_Quit);
+            Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
+            Events.KeyboardUp += new KeyboardEventHandler(Events_KeyboardUp);
+            Events.Run();
+        }
+
+        public HeroExample()
+        {
+            // Start up the window
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - Hero Example";
+            Video.SetVideoMode(400, 300);
+
+            string filePath = Path.Combine("..", "..");
+            string fileDirectory = "Data";
+            string fileName = "hero.png";
+            if (File.Exists(fileName))
+            {
+                filePath = "";
+                fileDirectory = "";
+            }
+            else if (File.Exists(Path.Combine(fileDirectory, fileName)))
+            {
+                filePath = "";
+            }
+
+            string file = Path.Combine(Path.Combine(filePath, fileDirectory), fileName);
+
+            // Load the image
+            Surface image = new Surface(file);
+
+            // Create the animation frames
+            SurfaceCollection walkUp =
+                new SurfaceCollection(image, new Size(24, 32), 0);
+            SurfaceCollection walkRight =
+                new SurfaceCollection(image, new Size(24, 32), 1);
+            SurfaceCollection walkDown =
+                new SurfaceCollection(image, new Size(24, 32), 2);
+            SurfaceCollection walkLeft =
+                new SurfaceCollection(image, new Size(24, 32), 3);
+
+            // Add the animations to the hero
+            hero.Animations.Add("WalkUp", new Animation(walkUp, 35));
+            hero.Animations.Add("WalkRight", new Animation(walkRight, 35));
+            hero.Animations.Add("WalkDown", new Animation(walkDown, 35));
+            hero.Animations.Add("WalkLeft", new Animation(walkLeft, 35));
+
+            // Change the transparent color of the sprite
+            hero.TransparentColor = Color.Magenta;
+            hero.Transparent = true;
+
+            // Setup the startup animation and make him not walk
+            hero.CurrentAnimation = "WalkDown";
+            hero.Animate = false;
+            // Put him in the center of the screen
+            hero.Center = new Point(
+                Video.Screen.Width / 2,
+                Video.Screen.Height / 2);
+        }
+
+        private void Events_Tick(object sender, TickEventArgs e)
+        {
+            // Clear the screen, draw the hero and output to the window
+            Video.Screen.Fill(Color.DarkGreen);
+            hero.Render(Video.Screen);
+            Video.Screen.Update();
+
+            // If the hero is animated, he is walking, so move him around!
+            if (hero.Animate)
+            {
+                switch (hero.CurrentAnimation)
+                {
+                    case "WalkLeft":
+                        // 2 is the speed of the hero when walking.
+                        hero.X -= 2;
+                        break;
+                    case "WalkUp":
+                        hero.Y -= 2;
+                        break;
+                    case "WalkDown":
+                        hero.Y += 2;
+                        break;
+                    case "WalkRight":
+                        hero.X += 2;
+                        break;
+                }
+            }
+        }
+
+        private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            // Check which key was pressed and change the animation accordingly
+            switch (e.Key)
+            {
+                case Key.LeftArrow:
+                    hero.CurrentAnimation = "WalkLeft";
+                    hero.Animate = true;
+                    break;
+                case Key.RightArrow:
+                    hero.CurrentAnimation = "WalkRight";
+                    hero.Animate = true;
+                    break;
+                case Key.DownArrow:
+                    hero.CurrentAnimation = "WalkDown";
+                    hero.Animate = true;
+                    break;
+                case Key.UpArrow:
+                    hero.CurrentAnimation = "WalkUp";
+                    hero.Animate = true;
+                    break;
+                case Key.Escape:
+                    Events.QuitApplication();
+                    break;
+            }
+        }
+
+        private void Events_KeyboardUp(object sender, KeyboardEventArgs e)
+        {
+            // Check which key was brought up and stop the hero if needed
+            if (e.Key == Key.LeftArrow && hero.CurrentAnimation == "WalkLeft")
+            {
+                hero.Animate = false;
+            }
+            else if (e.Key == Key.UpArrow && hero.CurrentAnimation == "WalkUp")
+            {
+                hero.Animate = false;
+            }
+            else if (e.Key == Key.DownArrow && hero.CurrentAnimation == "WalkDown")
+            {
+                hero.Animate = false;
+            }
+            else if (e.Key == Key.RightArrow && hero.CurrentAnimation == "WalkRight")
+            {
+                hero.Animate = false;
+            }
+        }
+        private void Events_Quit(object sender, QuitEventArgs e)
+        {
+            Events.QuitApplication();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "HeroExample: Simple animation";
+            }
+        }
+    }
+}
+
