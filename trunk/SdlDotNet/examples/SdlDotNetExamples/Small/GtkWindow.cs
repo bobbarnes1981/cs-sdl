@@ -62,7 +62,7 @@ namespace SdlDotNetExamples.SmallDemos
             verBox.Add(myImg);
 
             // Rendering using GTK Widget !! :)
-            SdlSurface mySurface = new SdlSurface();
+            SurfaceGtk mySurface = new SurfaceGtk();
             SdlScreen.DrawPrimitive(new Circle(125, 50, 25), System.Drawing.Color.Red, false, true);		// ADD RED Circle 
             mySurface.Surface = SdlScreen;
             verBox.Add(mySurface);
