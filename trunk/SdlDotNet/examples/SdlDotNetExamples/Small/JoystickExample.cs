@@ -29,7 +29,7 @@ using SdlDotNet.Input;
 using SdlDotNet.Audio;
 using SdlDotNet.Core;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     public class JoystickExample
     {
@@ -144,6 +144,17 @@ namespace SdlDotNetExamples
         {
             JoystickExample joystickExample = new JoystickExample();
             joystickExample.Go();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "JoystickExample: Move the cursor with a joystick";
+            }
         }
     }
 }

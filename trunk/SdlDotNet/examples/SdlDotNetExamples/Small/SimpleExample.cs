@@ -22,7 +22,7 @@ using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 using SdlDotNet.Core;
 
-namespace SdlDotNet.Examples
+namespace SdlDotNetExamples.SmallDemos
 {
     public class SimpleExample
     {
@@ -43,7 +43,7 @@ namespace SdlDotNet.Examples
 
             Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
             Events.Quit += new QuitEventHandler(this.Quit);
-            Events.Tick += new TickEventHandler(this.FrameTick);
+            Events.Tick += new TickEventHandler(this.Tick);
         }
 
         private void KeyDown(object sender, KeyboardEventArgs e)
@@ -59,7 +59,7 @@ namespace SdlDotNet.Examples
             Events.QuitApplication();
         }
 
-        public void FrameTick(object sender, TickEventArgs e)
+        public void Tick(object sender, TickEventArgs e)
         {
             screen.Fill(Color.FromArgb(rand.Next(255), rand.Next(255), rand.Next(255)));
             screen.Update();
@@ -75,6 +75,17 @@ namespace SdlDotNet.Examples
         {
             SimpleExample t = new SimpleExample();
             t.Go();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "SimpleExample: Displays random colors to the screen";
+            }
         }
     }
 }

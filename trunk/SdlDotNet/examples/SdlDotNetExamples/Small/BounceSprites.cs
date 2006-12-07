@@ -1,6 +1,6 @@
+#region LICENSE
 /*
- * $RCSfile: BounceSprites.cs,v $
- * Copyright (C) 2005 David Hudson (jendave@yahoo.com) 
+ * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -28,7 +29,7 @@ using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// Demo of Bouncing Balls using Sprites. 
@@ -130,6 +131,17 @@ namespace SdlDotNetExamples
         {
             BounceSprites bounce = new BounceSprites();
             bounce.Go();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "BounceSprites: Bouncing balls";
+            }
         }
         #endregion Methods
 

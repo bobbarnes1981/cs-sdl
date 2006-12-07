@@ -26,7 +26,7 @@ using SdlDotNet.Input;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// 
@@ -142,6 +142,17 @@ namespace SdlDotNetExamples
         private void Quit(object sender, QuitEventArgs e)
         {
             Events.QuitApplication();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "SnowDemo: Alpha Blending";
+            }
         }
 
         #region IDisposable Members

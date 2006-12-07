@@ -72,5 +72,16 @@ namespace SdlDotNetExamples.SimpleGame
             //No other instance was found, return null.  
             return null;
         }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "SimpleGame: Demonstrates simple game logic";
+            }
+        }
     }
 }

@@ -27,7 +27,7 @@ using SdlDotNet.Input;
 using SdlDotNet.Audio;
 using SdlDotNet.Core;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     #region Class Documentation
     /// <summary>
@@ -128,6 +128,18 @@ namespace SdlDotNetExamples
                 Events.QuitApplication();
             }
         }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "MoviePlayer: MPEG-1 movie player demo";
+            }
+        }
+
         #region IDisposable Members
 
         private bool disposed;

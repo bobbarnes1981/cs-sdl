@@ -187,5 +187,16 @@ namespace SdlDotNetExamples.Isotope
             // Start the isotope engine
             joy_engine.Start();
         }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "Isotope: Isometric engine demo";
+            }
+        }
     }
 }

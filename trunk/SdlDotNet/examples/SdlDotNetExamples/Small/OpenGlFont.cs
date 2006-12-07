@@ -27,7 +27,7 @@ using SdlDotNet.Graphics;
 using SdlDotNet.OpenGl;
 using Tao.OpenGl;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// 
@@ -294,6 +294,17 @@ namespace SdlDotNetExamples
         private void Quit(object sender, QuitEventArgs e)
         {
             Events.QuitApplication();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "OpenGLFont: 2D Surfaces on an OpenGL surface";
+            }
         }
 
         #region IDisposable Members

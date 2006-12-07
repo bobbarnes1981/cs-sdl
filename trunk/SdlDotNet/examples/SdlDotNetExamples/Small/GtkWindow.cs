@@ -27,7 +27,7 @@ using Gtk;
 using SdlDotNet.GtkSharp;
 using SdlDotNet.Graphics;
 
-namespace SdlDotNetExamples.GtkWindowExample
+namespace SdlDotNetExamples.SmallDemos
 {
     public class GtkWindow
     {

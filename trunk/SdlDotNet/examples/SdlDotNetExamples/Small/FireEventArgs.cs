@@ -18,7 +18,7 @@
 using System;
 using System.Drawing;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// 

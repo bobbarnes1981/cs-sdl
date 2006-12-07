@@ -28,7 +28,7 @@ using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Core;
 using SdlDotNet.Input;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     public class HeroExample
     {
@@ -187,6 +187,17 @@ namespace SdlDotNetExamples
         private void Events_Quit(object sender, QuitEventArgs e)
         {
             Events.QuitApplication();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "HeroExample: Simple animation";
+            }
         }
     }
 }

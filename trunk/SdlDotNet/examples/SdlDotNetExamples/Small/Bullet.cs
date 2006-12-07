@@ -23,7 +23,7 @@ using SdlDotNet.Graphics;
 using SdlDotNet.Core;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// Bullet fired by Player

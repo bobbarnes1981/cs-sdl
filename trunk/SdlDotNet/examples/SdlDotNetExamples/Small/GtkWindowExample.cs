@@ -24,7 +24,7 @@ using System;
 using Gtk;
 using SdlDotNet.GtkSharp;
 
-namespace SdlDotNetExamples.GtkWindowExample
+namespace SdlDotNetExamples.SmallDemos
 {
     static class GtkWindowExample
     {
@@ -38,6 +38,17 @@ namespace SdlDotNetExamples.GtkWindowExample
             GtkWindow GtkWindow = new GtkWindow();	// create window
             // show window
             Application.Run();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "GtkExample: GTK Widgets";
+            }
         }
     }
 }
