@@ -55,12 +55,10 @@ namespace SdlDotNetExamples
             // 
             // btnRun
             // 
-            this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRun.Location = new System.Drawing.Point(183, 335);
+            this.btnRun.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnRun.Location = new System.Drawing.Point(171, 482);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(40, 34);
+            this.btnRun.Size = new System.Drawing.Size(59, 24);
             this.btnRun.TabIndex = 1;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
@@ -68,22 +66,25 @@ namespace SdlDotNetExamples
             // 
             // treeView1
             // 
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.Location = new System.Drawing.Point(13, 13);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(380, 316);
+            this.treeView1.Size = new System.Drawing.Size(380, 454);
             this.treeView1.TabIndex = 2;
+            this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(treeView1_MouseDoubleClick);
             // 
             // SdlDotNetExamples
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 381);
+            this.ClientSize = new System.Drawing.Size(405, 519);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.btnRun);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "SdlDotNetExamples";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "SdlDotNet Examples Browser";
             this.Load += new System.EventHandler(this.frmExamples_Load);
             this.ResumeLayout(false);
