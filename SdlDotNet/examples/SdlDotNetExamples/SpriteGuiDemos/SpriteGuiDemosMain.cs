@@ -373,6 +373,17 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         }
         #endregion
 
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "SpriteGuiDemos: Several demos showing sprites and a basic Gui";
+            }
+        }
+
         #region IDisposable Members
 
         private bool disposed;

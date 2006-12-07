@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 
 using SdlDotNet.Audio;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     public class StreamingAudio
     {
@@ -114,6 +114,16 @@ namespace SdlDotNetExamples
             Marshal.Copy(buffer16, 0, stream, len);
             len = 0;
         }
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "StreamingAudio: Uses the Audio callback feature to stream audio";
+            }
+        }
     }
 
     public class Oscillator
@@ -157,5 +167,7 @@ namespace SdlDotNetExamples
                 return Math.Sin(sample * rate) * amplitude;
             }
         }
+
+       
     }
 }

@@ -26,7 +26,7 @@ using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Core;
 using SdlDotNet.Input;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     public class Pong
     {
@@ -99,6 +99,17 @@ namespace SdlDotNetExamples
         {
             Pong pong = new Pong();
             pong.Go();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "PongExample: Simple game of Pong";
+            }
         }
     }
 }

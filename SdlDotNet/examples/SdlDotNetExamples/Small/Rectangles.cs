@@ -1,7 +1,6 @@
+#region LICENSE
 /*
- * $RCSfile: Rectangles.cs,v $
- * Copyright (C) 2004 David Hudson (jendave@yahoo.com)
- * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
+ * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.Drawing;
@@ -25,7 +25,7 @@ using SdlDotNet.Graphics;
 using SdlDotNet.Core;
 using SdlDotNet.Input;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// A simple SDL.NET Example that draws a bunch of rectangles on the screen. 
@@ -106,6 +106,17 @@ namespace SdlDotNetExamples
         {
             Rectangles rectangles = new Rectangles();
             rectangles.Go();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "Rectangles: Displays random rectangles to screen";
+            }
         }
     }
 }

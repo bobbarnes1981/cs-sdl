@@ -34,7 +34,7 @@ using SdlDotNet.Input;
 // Simple example to demonstrate audio in SDL.NET.
 // Click plays the sound, space changes the music, arrows change volume.
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// A simple SDL.NET example which demonstrates audio in SDL.NET.
@@ -203,6 +203,17 @@ namespace SdlDotNetExamples
         private void Quit(object sender, QuitEventArgs e)
         {
             Events.QuitApplication();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "AudioExample: Plays music and sounds";
+            }
         }
 
         #region IDisposable Members

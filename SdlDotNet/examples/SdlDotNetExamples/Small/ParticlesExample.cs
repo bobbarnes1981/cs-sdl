@@ -30,7 +30,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Input;
 using SdlDotNet.Graphics;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// An example program using particles.
@@ -190,6 +190,17 @@ namespace SdlDotNetExamples
             explosion.LifeFullMax = 5;
             explosion.SpeedMin = 8;
             explosion.SpeedMax = 20;
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "ParticlesExample: Uses the Particle Engine";
+            }
         }
 
         #region IDisposable Members

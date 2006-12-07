@@ -26,7 +26,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// 
@@ -46,6 +46,17 @@ namespace SdlDotNetExamples
         static SpriteCollection master = new SpriteCollection();
         static string data_directory = @"Data/";
         static string filepath = @"../../";
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "BombRun: Sprite animation";
+            }
+        }
 
         /// <summary>
         /// 

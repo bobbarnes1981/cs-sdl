@@ -31,7 +31,7 @@ using SdlDotNet.Core;
 // Simple SDL.NET Example
 // Just draws a bunch of primitives to the screen, to quit hit 'Q' or Esc.
 
-namespace SdlDotNetExamples
+namespace SdlDotNetExamples.SmallDemos
 {
     /// <summary>
     /// 
@@ -467,6 +467,17 @@ namespace SdlDotNetExamples
         {
             PrimitivesExample primitivesExample = new PrimitivesExample();
             primitivesExample.Go();
+        }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "PrimitiveExample: Displays primitives";
+            }
         }
     }
 }

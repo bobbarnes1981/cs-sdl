@@ -31,7 +31,7 @@ namespace SdlDotNet.GtkSharp
     /// 
     /// </summary>
     [CLSCompliant(false)]
-    public class SdlSurface : DrawingArea
+    public class SurfaceGtk : DrawingArea
     {
         private Surface surface = new Surface(new Size(0, 0));	// empty surface
 
@@ -55,7 +55,7 @@ namespace SdlDotNet.GtkSharp
         /// <summary>
         /// Basic constructor
         /// </summary>
-        public SdlSurface()
+        public SurfaceGtk()
         {
         }
 

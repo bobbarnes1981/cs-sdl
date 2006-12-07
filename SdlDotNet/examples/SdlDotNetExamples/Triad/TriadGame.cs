@@ -201,5 +201,16 @@ namespace SdlDotNetExamples.Triad
             screen.Blit(surf, grid.Rectangle);
             screen.Update();
         }
+
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "Triad: Tetris-like game";
+            }
+        }
     }
 }

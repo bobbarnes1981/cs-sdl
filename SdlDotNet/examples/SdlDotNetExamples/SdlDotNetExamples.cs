@@ -23,10 +23,16 @@ namespace SdlDotNetExamples
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (Type type in types)
             {
+                
+
                 MemberInfo[] runMethods = type.GetMember("Run");
                 foreach (MemberInfo run in runMethods)
                 {
-                    demoList[type.Name] = type.FullName;
+                    object result = type.InvokeMember("Title",
+                            BindingFlags.GetProperty, null, type, null);
+
+                    //demoList[type.Name] = type.FullName;
+                    demoList[(string)result] = type.FullName;
                 }
             }
             foreach (string s in demoList.Keys)
