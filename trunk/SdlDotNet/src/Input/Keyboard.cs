@@ -1099,11 +1099,8 @@ namespace SdlDotNet.Input
     /// <summary>
     /// Keyboard class
     /// </summary>
-    public sealed class Keyboard
+    public static class Keyboard
     {
-        Keyboard()
-        { }
-
         static Keyboard()
         {
             Video.Initialize();

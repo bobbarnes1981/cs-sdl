@@ -33,14 +33,8 @@ namespace SdlDotNet.Graphics
     /// <summary>
     /// Information for current video mode..
     /// </summary>
-    public sealed class VideoInfo
+    public static class VideoInfo
     {
-        //		static ResourceManager stringManager;
-
-        VideoInfo()
-        {
-        }
-
         static VideoInfo()
         {
             Video.Initialize();

@@ -144,7 +144,7 @@ namespace SdlDotNetExamples.RedBook
 	///     </para>
 	/// </remarks>
 	#endregion Class Documentation
-    public sealed class Jitter 
+    public static class Jitter 
 	{
         // --- Fields ---
         #region Public Constants

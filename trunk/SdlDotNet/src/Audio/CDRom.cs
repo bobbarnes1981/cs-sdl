@@ -36,12 +36,8 @@ namespace SdlDotNet.Audio
 	/// <remarks>
 	/// Contains methods for playing audio CDs.
 	/// </remarks>
-	public sealed class CDRom
+	public static class CDRom
 	{
-//		static ResourceManager stringManager;
-		CDRom()
-		{}
-
 		static CDRom()
 		{
 			Initialize();

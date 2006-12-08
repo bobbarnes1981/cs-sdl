@@ -22,7 +22,7 @@ namespace SdlDotNetExamples.SimpleGame
     /// <summary>
     /// Summary description for Class1.
     /// </summary>
-    public sealed class Names
+    public static class Names
     {
         static string windowCaption = "SDL.NET - Simple Game";
         static string logFile = "SimpleGame.log";
@@ -31,10 +31,6 @@ namespace SdlDotNetExamples.SimpleGame
         static string startingSimpleGame = "Starting SimpleGame.";
         static string quittingSimpleGame = "Quitting SimpleGame.";
         static int startingSector = 0;
-
-        Names()
-        {
-        }
 
         /// <summary>
         /// 

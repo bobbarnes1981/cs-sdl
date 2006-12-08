@@ -184,7 +184,7 @@ namespace SdlDotNet.Graphics
     /// 
     /// </summary>
     [FlagsAttribute]
-    public enum VideoModes
+    internal enum VideoModes
     {
         /// <summary>
         /// Create the video surface in system memory
@@ -245,16 +245,13 @@ namespace SdlDotNet.Graphics
     /// hide and show the mouse cursor,
     /// and interact with OpenGL
     /// </summary>
-    public sealed class Video
+    public static class Video
     {
-        const int USE_CURRENT_BPP = 0;
+        static readonly int USE_CURRENT_BPP = 0;
+
         static Video()
         {
             Initialize();
-        }
-
-        Video()
-        {
         }
 
         /// <summary>

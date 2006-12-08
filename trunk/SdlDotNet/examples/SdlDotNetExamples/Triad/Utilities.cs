@@ -30,10 +30,8 @@ namespace SdlDotNetExamples.Triad
     /// <summary>
     /// 
     /// </summary>
-    public sealed class Utilities
+    public static class Utilities
     {
-        private Utilities()
-        { }
         /// <summary>
         /// 
         /// </summary>

@@ -24,17 +24,13 @@ namespace SdlDotNetExamples.SimpleGame
     /// <summary>
     /// Summary description for LogFile.
     /// </summary>
-    public sealed class LogFile
+    public static class LogFile
     {
         static FileStream fs = new FileStream("log.txt", FileMode.Append);
 
         static LogFile()
         {
             Initialize();
-        }
-
-        LogFile()
-        {
         }
 
         /// <summary>
