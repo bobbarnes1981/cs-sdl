@@ -1,6 +1,6 @@
+#region LICENSE
 /*
- * $RCSfile$
- * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 
@@ -24,41 +25,54 @@ using SdlDotNet.Core;
 
 namespace SdlDotNet.Audio
 {
-	/// <summary>
-	/// Events args for when a channel finishes playing a sound.
-	/// </summary>
-	/// <remarks>
-	/// This will create event args to trigger an 
-	/// event after a sound has finished playing.
-	/// </remarks>
-	public class ChannelFinishedEventArgs : UserEventArgs 
-	{
-		/// <summary>
-		/// Constructor 
-		/// </summary>
-		/// <remarks>Can be passed into the event queue.</remarks>
-		/// <param name="channel">The channel which has finished</param>
-		public ChannelFinishedEventArgs(int channel) : base()
-		{
-			this.channel = channel;
-		}
-		
-		int channel;
+    /// <summary>
+    /// Events args for when a channel finishes playing a sound.
+    /// </summary>
+    /// <remarks>
+    /// This will create event args to trigger an 
+    /// event after a sound has finished playing.
+    /// </remarks>
+    public class ChannelFinishedEventArgs : UserEventArgs
+    {
+        #region Constructors and Destructors
 
-		/// <summary>
-		/// Return channel number
-		/// </summary>
-		/// <remarks></remarks>
-		public int Channel
-		{
-			get
-			{
-				return this.channel;
-			}
-			set
-			{
-				this.channel = value;
-			}
-		}
-	}
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        /// <remarks>Can be passed into the event queue.</remarks>
+        /// <param name="channel">The channel which has finished</param>
+        public ChannelFinishedEventArgs(int channel)
+            : base()
+        {
+            this.channel = channel;
+        }
+
+        #endregion
+
+        #region Private fields
+
+        int channel;
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Return channel number
+        /// </summary>
+        /// <remarks></remarks>
+        public int Channel
+        {
+            get
+            {
+                return this.channel;
+            }
+            set
+            {
+                this.channel = value;
+            }
+        }
+
+        #endregion
+    }
 }
