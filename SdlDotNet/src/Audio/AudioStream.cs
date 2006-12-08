@@ -1,5 +1,5 @@
+#region LICENSE
 /*
- * $RCSfile$
  * Copyright (C) 2006 Stuart Carnie (stuart.carnie@gmail.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,17 @@ namespace SdlDotNet.Audio
     /// </summary>
     public class AudioStream
     {
+        #region Private fields
+
+        short samples;
+        Queue<short[]> queue;
+        int sampleFrequency;
+        int samplesInQueue;
+
+        #endregion Private fields
+
+        #region Constructors and Destructors
+
         internal AudioStream(int sampleFrequency, short samples) 
         {
             this.samples = samples;
@@ -35,9 +47,29 @@ namespace SdlDotNet.Audio
             this.sampleFrequency = sampleFrequency;
         }
 
-        internal void Close() 
-        { 
+        #endregion Constructors and Destructors
+
+        #region Internal methods
+
+        internal void Unsigned16LittleStream(IntPtr userData, IntPtr stream, int len)
+        {
+            len /= 2;
+
+            if (queue.Count > 0)
+            {
+                short[] buf = queue.Dequeue();
+                samplesInQueue -= buf.Length;
+                Marshal.Copy(buf, 0, stream, len);
+            }
         }
+
+        internal void Close()
+        {
+        }
+
+        #endregion
+
+        #region Public methods
 
         /// <summary>
         /// Asynchronously queues audio data in <paramref name="data"/>.
@@ -51,6 +83,7 @@ namespace SdlDotNet.Audio
             queue.Enqueue(copy);
             AudioBasic.Locked = false;
         }
+
         /// <summary>
         /// Size of the SDL audio sample buffer
         /// </summary>
@@ -99,30 +132,6 @@ namespace SdlDotNet.Audio
             }
         }
 
-        #region Audio Stream methods
-
-        internal void Unsigned16LittleStream(IntPtr userData, IntPtr stream, int len)
-        {
-            len /= 2;
-
-            if (queue.Count > 0)
-            {
-                short[] buf = queue.Dequeue();
-                samplesInQueue -= buf.Length;
-                Marshal.Copy(buf, 0, stream, len);
-            }
-        }
-
-        #endregion
-
-        #region private fields
-        
-        short samples;
-
-        Queue<short[]> queue;
-        int sampleFrequency;
-        int samplesInQueue;
-
-        #endregion
+        #endregion Public methods
     }
 }
