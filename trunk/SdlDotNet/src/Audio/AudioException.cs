@@ -1,6 +1,6 @@
+#region LICENSE
 /*
- * $RCSfile$
- * Copyright (C) 2005 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.Runtime.Serialization;
@@ -28,16 +29,19 @@ namespace SdlDotNet.Audio
 	/// Represents a run-time error from the Sdl library.
 	/// </summary>
 	[Serializable()]
-	public class AudioException : SdlException 
-	{
-		/// <summary>
+	public class AudioException : SdlException
+    {
+        #region Constructors and Destructors
+
+        /// <summary>
 		/// Returns basic exception
 		/// </summary>
 		public AudioException() 
 		{
 			AudioException.Generate();
-		}
-		/// <summary>
+        }
+
+        /// <summary>
 		/// Initializes an AudioException instance
 		/// </summary>
 		/// <param name="message">
@@ -63,6 +67,8 @@ namespace SdlDotNet.Audio
 		/// <param name="context"></param>
 		protected AudioException(SerializationInfo info, StreamingContext context) : base( info, context )
 		{
-		}
-	}
+        }
+
+        #endregion Constructors and Destructors
+    }
 }

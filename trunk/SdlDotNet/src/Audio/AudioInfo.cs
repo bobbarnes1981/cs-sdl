@@ -1,5 +1,5 @@
+#region LICENSE
 /*
- * $RCSfile$
  * Copyright (C) 2006 Stuart Carnie (stuart.carnie@gmail.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using Tao.Sdl;
@@ -27,9 +28,13 @@ namespace SdlDotNet.Audio
     /// </summary>
     public class AudioInfo
     {
+        #region Private fields
         Sdl.SDL_AudioSpec data;
         byte bits;
         int offset;
+        #endregion Private fields
+
+        #region Constructor and Destructors
 
         internal AudioInfo(Sdl.SDL_AudioSpec data, byte bits, int offset)
         {
@@ -38,14 +43,18 @@ namespace SdlDotNet.Audio
             this.offset = offset;
         }
 
+        #endregion Constructor and Destructors
+
+        #region Public Methods
+
         /// <summary>
         /// 
         /// </summary>
         public int Frequency
         {
-            get 
-            { 
-                return this.data.freq; 
+            get
+            {
+                return this.data.freq;
             }
         }
 
@@ -54,9 +63,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public AudioFormat Format
         {
-            get 
-            { 
-                return (AudioFormat)this.data.format; 
+            get
+            {
+                return (AudioFormat)this.data.format;
             }
         }
 
@@ -65,9 +74,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public byte Channels
         {
-            get 
-            { 
-                return this.data.channels; 
+            get
+            {
+                return this.data.channels;
             }
         }
 
@@ -76,9 +85,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public short Samples
         {
-            get 
-            { 
-                return this.data.samples; 
+            get
+            {
+                return this.data.samples;
             }
         }
 
@@ -87,9 +96,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public int BufferSize
         {
-            get 
-            { 
-                return this.data.size; 
+            get
+            {
+                return this.data.size;
             }
         }
 
@@ -98,9 +107,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public int Silence
         {
-            get 
-            { 
-                return this.data.silence; 
+            get
+            {
+                return this.data.silence;
             }
         }
 
@@ -109,9 +118,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public int Offset
         {
-            get 
-            { 
-                return this.offset; 
+            get
+            {
+                return this.offset;
             }
         }
 
@@ -120,10 +129,12 @@ namespace SdlDotNet.Audio
         /// </summary>
         public byte Bits
         {
-            get 
-            { 
-                return this.bits; 
+            get
+            {
+                return this.bits;
             }
         }
+
+        #endregion Public Methods
     }
 }

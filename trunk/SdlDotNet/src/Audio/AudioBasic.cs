@@ -1,5 +1,5 @@
+#region LICENSE
 /*
- * $RCSfile$
  * Copyright (C) 2006 Stuart Carnie (stuart.carnie@gmail.com)
  *
  * This library is free software; you can redistribute it and/or
@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.Runtime.InteropServices;
@@ -24,17 +25,46 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Audio
 {
+    #region Public Delegates
     /// <summary>
     /// Used in the SDL_AudioSpec struct
     /// </summary>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void AudioCallbackDelegate(IntPtr userdata, IntPtr stream, int len);
+    #endregion Public Delegates
 
     /// <summary>
     /// Represents an interface into the SDL Audio API, providing methods to open and close audio, and a callback facility to stream audio
     /// </summary>
     public static class AudioBasic
     {
+        #region Private fields
+
+        static bool audioWasNotAlreadyInitialized = false;
+        static bool audioOpen = false;
+
+        static AudioCallbackDelegate audioCallbackDelegate;
+
+        static AudioInfo audioInfo;
+
+        static bool audioLocked = false;
+
+        static AudioStream stream;
+
+        #endregion Private fields
+
+        #region Private methods
+
+        static void CheckOpenStatus(string function)
+        {
+            if (!audioOpen)
+            {
+                throw new AudioException(String.Format("OpenAudio must be called before calling {0}.", function));
+            }
+        }
+
+        #endregion Private methods
+
         #region Public methods
         /// <summary>
         /// Opens the audio device with the desired parameters.  
@@ -332,33 +362,5 @@ namespace SdlDotNet.Audio
         }
 
         #endregion Public methods
-
-        #region Private methods
-
-        static void CheckOpenStatus(string function)
-        {
-            if (!audioOpen)
-            {
-                throw new AudioException(String.Format("OpenAudio must be called before calling {0}.", function));
-            }
-        }
-
-        #endregion Private methods
-
-
-        #region Private fields
-
-        static bool audioWasNotAlreadyInitialized = false;
-        static bool audioOpen = false;
-
-        static AudioCallbackDelegate audioCallbackDelegate;
-
-        static AudioInfo audioInfo;
-
-        static bool audioLocked = false;
-
-        static AudioStream stream;
-
-        #endregion Private fields
     }
 }
