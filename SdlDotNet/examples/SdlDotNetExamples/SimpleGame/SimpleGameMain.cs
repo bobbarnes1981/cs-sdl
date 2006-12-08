@@ -26,11 +26,8 @@ namespace SdlDotNetExamples.SimpleGame
     /// <summary>
     /// Summary description for Game.
     /// </summary>
-    public sealed class SimpleGameMain
+    public static class SimpleGameMain
     {
-        SimpleGameMain()
-        { }
-
         [STAThread]
         public static void Run()
         {

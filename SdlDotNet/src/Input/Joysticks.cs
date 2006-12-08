@@ -29,11 +29,8 @@ namespace SdlDotNet.Input
     /// You can obtain an instance of this class by accessing the Joysticks property of the main Sdl object.
     /// Note that actual joystick input is handled by the Events class
     /// </summary>
-    public sealed class Joysticks
+    public static class Joysticks
     {
-        Joysticks()
-        { }
-
         static Joysticks()
         {
             Initialize();

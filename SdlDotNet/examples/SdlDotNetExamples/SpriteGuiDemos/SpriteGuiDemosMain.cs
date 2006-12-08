@@ -49,18 +49,14 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         {
             // Create the demo application
             SpriteGuiDemosMain demo = new SpriteGuiDemosMain();
-            demo.Start();
+            demo.Go();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void Start()
+        public void Go()
         {
-            // Start up the SDL
-            Video.WindowCaption = "SDL.NET - Sprite and Gui Demo";
-            //			Video.Mouse.ShowCursor = false;
-
             Events.KeyboardDown +=
                 new KeyboardEventHandler(this.KeyboardDown);
             Events.Tick += new TickEventHandler(this.Tick);
@@ -71,6 +67,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
             int height = 600;
 
             Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - Sprite and Gui Demo";
             screen = Video.SetVideoMode(width, height);
 
             // Set up the master sprite container

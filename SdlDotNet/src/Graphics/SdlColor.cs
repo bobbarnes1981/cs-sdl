@@ -1,6 +1,6 @@
+#region LICENSE
 /*
- * $RCSfile$
- * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System.Runtime.InteropServices;
 using System.Drawing;
@@ -26,11 +27,8 @@ namespace SdlDotNet.Graphics
     /// <summary>
     /// Contains basic color conversions and operations
     /// </summary>
-    public sealed class SdlColor
+    public static class SdlColor
     {
-        SdlColor()
-        { }
-
         /// <summary>
         /// Converts .NET Color struct to SDL_Color
         /// </summary>

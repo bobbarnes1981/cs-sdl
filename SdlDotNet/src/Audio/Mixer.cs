@@ -237,7 +237,7 @@ namespace SdlDotNet.Audio
     /// If you do not do this, any movie will play very slowly. 
     /// Smpeg uses a custom mixer for audio playback. 
     /// </remarks>
-    public sealed class Mixer
+    public static class Mixer
     {
 	//static private SdlMixer.ChannelFinishedDelegate ChannelFinishedDelegate;
 	private const int DEFAULT_CHUNK_SIZE = 1024;
@@ -246,9 +246,6 @@ namespace SdlDotNet.Audio
 	//private Music music = Music.Instance;
 
 	static private byte distance;
-
-	Mixer()
-	{}
 
 	static Mixer()
 	{
