@@ -1,6 +1,6 @@
 #region LICENSE
 /*
- * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004-2006 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,14 +28,18 @@ namespace SdlDotNet.Audio
 	/// <summary>
 	/// Event arguments for MusicFinished Event.
 	/// </summary>
-	public class MusicFinishedEventArgs : UserEventArgs 
-	{
-		/// <summary>
+	public class MusicFinishedEventArgs : UserEventArgs
+    {
+        #region Constructors
+
+        /// <summary>
 		/// When music finishes, the MusicFinished event 
 		/// will fire and send these args.
 		/// </summary>
 		public MusicFinishedEventArgs() : base()
 		{
-		}
-	}
+        }
+
+        #endregion Constructors
+    }
 }
