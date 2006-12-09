@@ -91,7 +91,7 @@ namespace SdlDotNetExamples.SimpleGame
             gameView.CreateView();
             map.Build();
             Music music = new Music(filepath + data_directory + "fard-two.ogg");
-            Music.Volume = 127;
+            MusicPlayer.Volume = 127;
             try
             {
                 music.Play(-1);
