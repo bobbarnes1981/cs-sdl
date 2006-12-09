@@ -29,6 +29,8 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public static class SdlColor
     {
+        #region Internal Methods
+
         /// <summary>
         /// Converts .NET Color struct to SDL_Color
         /// </summary>
@@ -38,6 +40,10 @@ namespace SdlDotNet.Graphics
         {
             return new Sdl.SDL_Color(color.R, color.G, color.B, color.A);
         }
+
+        #endregion
+
+        #region Public Methods
 
         //		/// <summary>
         //		/// 
@@ -251,5 +257,7 @@ namespace SdlDotNet.Graphics
             }
             return Color.FromArgb(a, r, g, b);
         }
+
+        #endregion
     }
 }

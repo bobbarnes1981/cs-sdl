@@ -31,6 +31,8 @@ namespace SdlDotNet.Graphics
     [Serializable()]
     public class MovieStatusException : SdlException
     {
+        #region Constructors
+
         /// <summary>
         /// Represents an error resulting from a movie not playing correctly
         /// </summary>
@@ -67,5 +69,7 @@ namespace SdlDotNet.Graphics
             : base(info, context)
         {
         }
+
+        #endregion
     }
 }

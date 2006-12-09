@@ -36,8 +36,14 @@ namespace SdlDotNet.Graphics
     /// </remarks>
     public class Movie : BaseSdlResource
     {
+        #region Private fields
+
         private Smpeg.SMPEG_Info movieInfo;
         private bool disposed;
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Create movie object from file
@@ -58,6 +64,10 @@ namespace SdlDotNet.Graphics
         {
             Video.Initialize();
         }
+
+        #endregion
+
+        #region Protected Methods
 
         /// <summary>
         /// Destroys the surface object and frees its memory
@@ -98,6 +108,10 @@ namespace SdlDotNet.Graphics
                 this.Handle = IntPtr.Zero;
             }
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Enable video during playback
@@ -515,5 +529,7 @@ namespace SdlDotNet.Graphics
             }
             Smpeg.SMPEG_renderFinal(this.Handle, surface.Handle, 0, 0);
         }
+
+        #endregion
     }
 }

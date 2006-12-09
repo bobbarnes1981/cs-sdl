@@ -25,6 +25,7 @@ using System.Globalization;
 
 using SdlDotNet;
 using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Primitives;
 using SdlDotNet.Input;
 using SdlDotNet.Core;
 
