@@ -21,6 +21,7 @@ using System.Drawing;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
+using SdlDotNet.Graphics.Primitives;
 
 namespace SdlDotNetExamples.SimpleGame
 {

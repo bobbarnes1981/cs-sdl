@@ -54,7 +54,7 @@ namespace SdlDotNetExamples.SmallDemos
 
 
             SdlScreen = new Surface(new System.Drawing.Size(250, 100));
-            SdlScreen.DrawPrimitive(new SdlDotNet.Graphics.Box(10, 10, 240, 90), System.Drawing.Color.Blue);
+            SdlScreen.DrawPrimitive(new SdlDotNet.Graphics.Primitives.Box(10, 10, 240, 90), System.Drawing.Color.Blue);
 
             // RENDERING THRU Gtk.Image
             myImg = new Gtk.Image(ImageToPixbuf(SdlScreen.Bitmap));
@@ -63,7 +63,7 @@ namespace SdlDotNetExamples.SmallDemos
 
             // Rendering using GTK Widget !! :)
             SurfaceGtk mySurface = new SurfaceGtk();
-            SdlScreen.DrawPrimitive(new Circle(125, 50, 25), System.Drawing.Color.Red, false, true);		// ADD RED Circle 
+            SdlScreen.DrawPrimitive(new SdlDotNet.Graphics.Primitives.Circle(125, 50, 25), System.Drawing.Color.Red, false, true);		// ADD RED Circle 
             mySurface.Surface = SdlScreen;
             verBox.Add(mySurface);
 
