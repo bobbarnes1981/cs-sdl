@@ -30,9 +30,15 @@ namespace SdlDotNet.Input
     /// </summary>
     public class JoystickAxisEventArgs : SdlEventArgs
     {
-        private const float JOYSTICK_ADJUSTMENT = 32768;
-        private const float JOYSTICK_SCALE = 65535;
-        private const short JOYSTICK_THRESHHOLD = 3277;
+        #region Private fields
+
+        private static readonly float JOYSTICK_ADJUSTMENT = 32768;
+        private static readonly float JOYSTICK_SCALE = 65535;
+        private static readonly short JOYSTICK_THRESHHOLD = 3277;
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Create Event args
@@ -55,6 +61,10 @@ namespace SdlDotNet.Input
             : base(evt)
         {
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Return device
@@ -121,5 +131,7 @@ namespace SdlDotNet.Input
                 return JOYSTICK_THRESHHOLD;
             }
         }
+
+        #endregion
     }
 }

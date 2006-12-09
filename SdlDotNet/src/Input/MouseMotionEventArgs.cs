@@ -31,6 +31,8 @@ namespace SdlDotNet.Input
     /// </summary>
     public class MouseMotionEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         /// <summary>
         /// MouseMotion
         /// </summary>
@@ -67,6 +69,10 @@ namespace SdlDotNet.Input
             : base(evt)
         {
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// True if button pressed
@@ -156,6 +162,7 @@ namespace SdlDotNet.Input
                 return this.EventStruct.motion.yrel;
             }
         }
+
         /// <summary>
         /// Returns Point(X, Y) of mouse
         /// </summary>
@@ -166,5 +173,7 @@ namespace SdlDotNet.Input
                 return new Point(this.EventStruct.motion.x, this.EventStruct.motion.y);
             }
         }
+
+        #endregion
     }
 }

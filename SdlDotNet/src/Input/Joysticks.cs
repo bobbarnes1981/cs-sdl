@@ -32,10 +32,16 @@ namespace SdlDotNet.Input
     /// </summary>
     public static class Joysticks
     {
+        #region Constructors
+
         static Joysticks()
         {
             Initialize();
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Starts joystick subsystem
@@ -51,28 +57,6 @@ namespace SdlDotNet.Input
                 }
             }
         }
-
-        //		/// <summary>
-        //		/// Queries if the Joystick subsystem has been intialized.
-        //		/// </summary>
-        //		/// <remarks>
-        //		/// </remarks>
-        //		/// <returns>True if Joystick subsystem has been initialized, false if it has not.</returns>
-        //		public static bool IsInitialized
-        //		{
-        //			get
-        //			{
-        //				if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_JOYSTICK) & Sdl.SDL_INIT_JOYSTICK) 
-        //					!= (int) SdlFlag.FalseValue)
-        //				{
-        //					return true;
-        //				}
-        //				else 
-        //				{
-        //					return false;
-        //				}
-        //			}
-        //		}
 
         /// <summary>
         /// Returns true if the joystick has been initialized
@@ -142,5 +126,7 @@ namespace SdlDotNet.Input
             }
             return new Joystick(joystick);
         }
+
+        #endregion
     }
 }

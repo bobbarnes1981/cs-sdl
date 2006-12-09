@@ -34,6 +34,8 @@ namespace SdlDotNet.Input
     /// </remarks>
     public class ActiveEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         internal ActiveEventArgs(Sdl.SDL_Event evt)
             : base(evt)
         {
@@ -68,6 +70,10 @@ namespace SdlDotNet.Input
             this.EventStruct = evt;
         }
 
+        #endregion
+
+        #region Public Methods
+
         /// <summary>
         /// Returns true is the app has gained focus
         /// </summary>
@@ -88,6 +94,7 @@ namespace SdlDotNet.Input
                 }
             }
         }
+
         /// <summary>
         /// Returns the type of input that gave the app focus
         /// </summary>
@@ -101,5 +108,7 @@ namespace SdlDotNet.Input
                 return (Focus)this.EventStruct.active.state;
             }
         }
+
+        #endregion
     }
 }

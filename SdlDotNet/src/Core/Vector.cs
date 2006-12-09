@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile$
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
@@ -17,6 +18,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.Drawing;
@@ -32,7 +34,6 @@ namespace SdlDotNet.Core
     [Serializable]
     public struct Vector : ICloneable, IComparable
     {
-
         #region Constructors
 
         /// <summary>
@@ -309,6 +310,7 @@ namespace SdlDotNet.Core
             //}
             return (c1.X >= c2.X) && (c1.Y >= c2.Y) && (c1.Z >= c2.Z);
         }
+
         /// <summary>
         /// Greater than operator
         /// </summary>
@@ -327,6 +329,7 @@ namespace SdlDotNet.Core
             //}
             return (c1.X > c2.X) && (c1.Y > c2.Y) && (c1.Z > c2.Z);
         }
+
         /// <summary>
         /// Less than operator
         /// </summary>
@@ -345,6 +348,7 @@ namespace SdlDotNet.Core
             //}
             return (c1.X < c2.X) && (c1.Y < c2.Y) && (c1.Z < c2.Z);
         }
+
         /// <summary>
         /// Less than or equals operator
         /// </summary>
@@ -461,6 +465,7 @@ namespace SdlDotNet.Core
         {
             return new Vector(vector.m_x + scalar, vector.m_y + scalar, vector.m_z + scalar);
         }
+
         /// <summary>
         /// Minus operator
         /// </summary>
@@ -482,6 +487,7 @@ namespace SdlDotNet.Core
         {
             return new Vector(vector.m_x - scalar, vector.m_y - scalar, vector.m_z - scalar);
         }
+
         /// <summary>
         /// Multiplication operator
         /// </summary>
@@ -525,6 +531,7 @@ namespace SdlDotNet.Core
         {
             return new Vector(vector.m_x / scalar, vector.m_y / scalar, vector.m_z / scalar);
         }
+
         /// <summary>
         /// Addition operator
         /// </summary>
@@ -535,6 +542,7 @@ namespace SdlDotNet.Core
         {
             return new Vector(scalar + vector.m_x, scalar + vector.m_y, scalar + vector.m_z);
         }
+
         /// <summary>
         /// Minus operator
         /// </summary>
@@ -545,6 +553,7 @@ namespace SdlDotNet.Core
         {
             return new Vector(scalar - vector.m_x, scalar - vector.m_y, scalar - vector.m_z);
         }
+
         /// <summary>
         /// Muliplication operator
         /// </summary>
@@ -555,6 +564,7 @@ namespace SdlDotNet.Core
         {
             return new Vector(scalar * vector.m_x, scalar * vector.m_y, scalar * vector.m_z);
         }
+
         /// <summary>
         /// Division operator
         /// </summary>
@@ -574,6 +584,7 @@ namespace SdlDotNet.Core
         {
             return (int)m_x ^ (int)m_y ^ (int)m_z;
         }
+
         #endregion
 
         #region Properties
@@ -582,6 +593,7 @@ namespace SdlDotNet.Core
         /// The x coordinate
         /// </summary>
         private float m_x;
+
         /// <summary>
         /// The y coordinate
         /// </summary>
@@ -638,7 +650,6 @@ namespace SdlDotNet.Core
             }
         }
 
-
         /// <summary>
         /// Gets and sets the length of the vector. Direction part needs to be updatet
         /// </summary>
@@ -688,7 +699,6 @@ namespace SdlDotNet.Core
             }
         }
 
-
         /// <summary>
         /// Returns true if all coordinates are equal to zero.
         /// </summary>
@@ -728,6 +738,7 @@ namespace SdlDotNet.Core
             this.m_y += offsetY;
             this.m_z += offsetZ;
         }
+
         #endregion
 
         #region Math
@@ -853,6 +864,7 @@ namespace SdlDotNet.Core
         #endregion Math
 
         #region Interface Members
+
         #region ICloneable Members
 
         /// <summary>
@@ -865,6 +877,7 @@ namespace SdlDotNet.Core
         }
 
         #endregion ICloneable Members
+
         //#region ISerializable Members
         ///// <summary>
         ///// Deserialization constructor.
@@ -904,6 +917,7 @@ namespace SdlDotNet.Core
         //    info.AddValue("z", m_z);
         //}
         //#endregion ISerializable Members
+
         #region IComparable Members
 
         /// <summary>
@@ -922,6 +936,7 @@ namespace SdlDotNet.Core
         }
 
         #endregion IComparable Members
+
         #endregion Interface Members
     }
 }

@@ -26,6 +26,8 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Input
 {
+    #region ButtonKeyState
+
     /// <summary>
     /// ButtonKeyState
     /// </summary>
@@ -41,6 +43,10 @@ namespace SdlDotNet.Input
         /// </summary>
         Pressed = Sdl.SDL_PRESSED
     }
+
+    #endregion
+
+    #region MouseButton
 
     /// <summary>
     /// MouseButton
@@ -74,15 +80,23 @@ namespace SdlDotNet.Input
         WheelDown = Sdl.SDL_BUTTON_WHEELDOWN
     }
 
+    #endregion
+
     /// <summary>
     /// Mouse.
     /// </summary>
     public static class Mouse
     {
+        #region Constructors
+
         static Mouse()
         {
             Video.Initialize();
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary> 
         /// Gets and sets whether or not the mouse cursor is visible. 
@@ -161,5 +175,7 @@ namespace SdlDotNet.Input
             int dummyY;
             return (Sdl.SDL_GetMouseState(out dummyX, out dummyY) & Sdl.SDL_BUTTON((byte)button)) != 0;
         }
+
+        #endregion
     }
 }

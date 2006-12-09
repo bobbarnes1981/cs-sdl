@@ -30,6 +30,8 @@ namespace SdlDotNet.Input
     /// </summary>
     public class KeyboardEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         /// <summary>
         /// Keyboard event args
         /// </summary>
@@ -77,6 +79,10 @@ namespace SdlDotNet.Input
             : base(evt)
         {
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// The device index of the keyboard
@@ -165,5 +171,7 @@ namespace SdlDotNet.Input
                 return (ModifierKeys)this.EventStruct.key.keysym.mod;
             }
         }
+
+        #endregion
     }
 }

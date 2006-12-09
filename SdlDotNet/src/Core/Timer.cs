@@ -28,10 +28,16 @@ namespace SdlDotNet.Core
     /// </summary>
     public static class Timer
     {
+        #region Constructors
+
         static Timer()
         {
             Initialize();
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Closes and destroys this object
@@ -178,5 +184,7 @@ namespace SdlDotNet.Core
         {
             return new TimeSpan(seconds * TimeSpan.TicksPerSecond);
         }
+
+        #endregion
     }
 }

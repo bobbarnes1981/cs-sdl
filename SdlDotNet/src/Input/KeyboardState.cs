@@ -1,3 +1,4 @@
+#region LICENSE
 /* 
  * $RCSfile$ 
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net) 
@@ -16,6 +17,7 @@
  * License along with this library; if not, write to the Free Software 
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  */
+#endregion LICENSE
 
 using System;
 
@@ -47,25 +49,16 @@ namespace SdlDotNet.Input
     /// </example> 
     public class KeyboardState
     {
+        #region Private fields
+
         /// <summary> 
         /// The state information of all the keys in the current state. 
         /// </summary> 
         private byte[] m_Keys;
 
-        /// <summary> 
-        /// Gets the current state of the given key (true means the key is pushed, false if not). 
-        /// </summary> 
-        public bool this[Key key]
-        {
-            get
-            {
-                return m_Keys[(int)key] == 1;
-            }
-            set
-            {
-                m_Keys[(int)key] = value ? (byte)1 : (byte)0;
-            }
-        }
+        #endregion
+
+        #region Constructors
 
         /// <summary> 
         /// Creates a new KeyboardState object with the current state of the keyboard. 
@@ -88,6 +81,25 @@ namespace SdlDotNet.Input
             }
         }
 
+        #endregion
+
+        #region Public Methods
+
+        /// <summary> 
+        /// Gets the current state of the given key (true means the key is pushed, false if not). 
+        /// </summary> 
+        public bool this[Key key]
+        {
+            get
+            {
+                return m_Keys[(int)key] == 1;
+            }
+            set
+            {
+                m_Keys[(int)key] = value ? (byte)1 : (byte)0;
+            }
+        }
+
         /// <summary>
         /// Updates the keyboard state within this object.
         /// </summary>
@@ -106,5 +118,7 @@ namespace SdlDotNet.Input
         {
             return m_Keys[(int)key] == 1;
         }
+
+        #endregion
     }
 }

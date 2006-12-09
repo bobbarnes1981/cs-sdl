@@ -29,6 +29,8 @@ namespace SdlDotNet.Core
     /// </summary>
     public class UserEventArgs : SdlEventArgs
     {
+        #region Constructor
+
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -39,6 +41,7 @@ namespace SdlDotNet.Core
             evt.user.type = (byte)EventTypes.UserEvent;
             this.EventStruct = evt;
         }
+
         /// <summary>
         /// Constructor for using a given user event
         /// </summary>
@@ -60,7 +63,16 @@ namespace SdlDotNet.Core
         {
         }
 
+        #endregion
+
+        #region Private fields
+
         object userEvent;
+
+        #endregion
+
+        #region Public Methods
+
         /// <summary>
         /// 
         /// </summary>
@@ -88,5 +100,7 @@ namespace SdlDotNet.Core
                 this.EventStruct = evt;
             }
         }
+
+        #endregion
     }
 }
