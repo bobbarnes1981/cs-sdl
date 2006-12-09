@@ -49,10 +49,8 @@ namespace SdlDotNet.Audio
 	///	Music.EnableMusicFinishedCallback(); // Enable processing queues.
 	/// </code>
 	/// </example>
-	public sealed class Music : BaseSdlResource
+	public class Music : BaseSdlResource
 	{
-		private static SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
-
 		private string m_FileName = "";
 
 		/// <summary>
@@ -69,23 +67,6 @@ namespace SdlDotNet.Audio
 		static Music()
 		{
 			Mixer.Initialize();
-		}
-
-		private static Music m_CurrentMusic;
-
-		/// <summary>
-		/// Gets and sets the currently loaded music sample.
-		/// </summary>
-		public static Music CurrentMusic
-		{
-			get
-			{
-				return m_CurrentMusic;
-			}
-			set
-			{
-				m_CurrentMusic = value;
-			}
 		}
 
 		private Music m_QueuedMusic;
@@ -170,9 +151,11 @@ namespace SdlDotNet.Audio
 		/// </param>
 		public void Play(int numberOfTimes) 
 		{
-			m_CurrentMusic = this;
-			if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
-				throw SdlException.Generate();
+			MusicPlayer.CurrentMusic = this;
+            if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
+            {
+                throw SdlException.Generate();
+            }
 		}
 
 		/// <summary>
@@ -187,9 +170,11 @@ namespace SdlDotNet.Audio
 		/// </param>
 		public void FadeIn(int numberOfTimes, int milliseconds) 
 		{
-			m_CurrentMusic = this;
-			if (SdlMixer.Mix_FadeInMusic(this.Handle, numberOfTimes, milliseconds) != 0)
-				throw SdlException.Generate();
+			MusicPlayer.CurrentMusic = this;
+            if (SdlMixer.Mix_FadeInMusic(this.Handle, numberOfTimes, milliseconds) != 0)
+            {
+                throw SdlException.Generate();
+            }
 		}
 		/// <summary>
 		/// Plays the music sample, starting from a specific 
@@ -209,48 +194,12 @@ namespace SdlDotNet.Audio
 		///  </param>
 		public void FadeInPosition(int numberOfTimes, int milliseconds, double position) 
 		{
-			m_CurrentMusic = this;
+            MusicPlayer.CurrentMusic = this;
 			if (SdlMixer.Mix_FadeInMusicPos(this.Handle, 
 				numberOfTimes, milliseconds, position) != 0)
 			{
 				throw SdlException.Generate();
 			}
-		}
-		/// <summary>
-		/// Sets the music volume between 0 and 128.
-		/// </summary>
-		public static int Volume
-		{
-			get
-			{
-				return SdlMixer.Mix_VolumeMusic(-1);
-			}
-			set
-			{
-				SdlMixer.Mix_VolumeMusic(value);
-			}
-		}
-
-		/// <summary>
-		/// Pauses the music playing
-		/// </summary>
-		public static void Pause()
-		{
-			SdlMixer.Mix_PauseMusic();
-		}
-		/// <summary>
-		/// Resumes paused music
-		/// </summary>
-		public static void Resume()
-		{
-			SdlMixer.Mix_ResumeMusic();
-		}
-		/// <summary>
-		/// Resets the music position to the beginning of the sample
-		/// </summary>
-		public static void Rewind() 
-		{
-			SdlMixer.Mix_RewindMusic();
 		}
 
 		/// <summary>
@@ -264,107 +213,6 @@ namespace SdlDotNet.Audio
 			}
 		}
 
-        /// <summary>
-        /// Gets the format of the music data type that is currently playing.
-        /// </summary>
-        public static MusicType MusicTypePlaying
-        {
-            get
-            {
-                return (MusicType)SdlMixer.Mix_GetMusicType(IntPtr.Zero);
-            }
-        }
-
-		/// <summary>
-		/// Sets the music position to a format-defined value.
-		/// For Ogg Vorbis and mp3, this is the number of seconds 
-		/// from the beginning of the song
-		/// </summary>
-		/// <param name="musicPosition">
-		/// Number of seconds from beginning of song
-		/// </param>
-		public static void Position(double musicPosition) 
-		{
-            if (Music.IsPlaying)
-            {
-                //if (Music.MusicTypePlaying == MusicType.Mp3 && musicPosition != 0.0)
-                //{
-                //    //Rewind();
-                //    //SdlMixer.Mix_SetMusicPosition(0.0);
-                //}
-                if (SdlMixer.Mix_SetMusicPosition(musicPosition) != 0)
-                {
-                    throw SdlException.Generate();
-                }
-            }
-            else
-            {
-                throw new MusicNotPlayingException();
-            }
-		}
-		/// <summary>
-		/// Stops playing music
-		/// </summary>
-		public static void Stop() 
-		{
-			SdlMixer.Mix_HaltMusic();
-		}
-		/// <summary>
-		/// Fades out music
-		/// </summary>
-		/// <param name="milliseconds">
-		/// The number of milliseconds to fade out for
-		/// </param>
-		public static void Fadeout(int milliseconds) 
-		{
-			if (SdlMixer.Mix_FadeOutMusic(milliseconds) != 1)
-			{
-				throw SdlException.Generate();
-			}
-		}
-		/// <summary>
-		/// Gets a flag indicating whether or not music is playing
-		/// </summary>
-		public static bool IsPlaying
-		{
-			get
-			{
-				return (SdlMixer.Mix_PlayingMusic() != 0);
-			}
-		}
-		/// <summary>
-		/// Gets a flag indicating whether or not music is paused
-		/// </summary>
-		public static bool IsPaused 
-		{
-			get
-			{
-				return (SdlMixer.Mix_PausedMusic() != 0);
-			}
-		}
-		/// <summary>
-		/// Gets a flag indicating whether or not music is fading
-		/// </summary>
-		public static bool IsFading
-		{
-			get
-			{
-				return (SdlMixer.Mix_FadingMusic() != 0);
-			}
-		}
-
-		/// <summary>
-		/// For performance reasons, you must call this method
-		/// to enable the Events.ChannelFinished and 
-		/// Events.MusicFinished events
-		/// </summary>
-		public static void EnableMusicFinishedCallback() 
-		{
-			MusicFinishedDelegate = new SdlMixer.MusicFinishedDelegate(MusicFinished);
-			SdlMixer.Mix_HookMusicFinished(MusicFinishedDelegate);
-			Events.MusicFinished += new MusicFinishedEventHandler(Events_MusicFinished);
-		}
-
 		/// <summary>
 		/// Returns a System.String that represents the current Music object.
 		/// </summary>
@@ -374,32 +222,6 @@ namespace SdlDotNet.Audio
 		public override string ToString()
 		{
 			return m_FileName;
-		}
-
-
-		/// <summary>
-		/// Called upon when the music sample finishes.
-		/// </summary>
-		private static void MusicFinished() 
-		{
-			Events.NotifyMusicFinished();
-		}
-
-		/// <summary>
-		/// Private method to process the next queued music file.
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private static void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
-		{
-			if(Music.IsPlaying == false)
-			{
-				if(m_CurrentMusic.m_QueuedMusic != null)
-				{
-					m_CurrentMusic = m_CurrentMusic.m_QueuedMusic;
-					m_CurrentMusic.Play();
-				}
-			}
 		}
 	}
 }

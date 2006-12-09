@@ -224,7 +224,7 @@ namespace SdlDotNet.Audio
 		/// <summary>
 		/// Makes each music item in the collection queue the next item in the collection.
 		/// </summary>
-		/// <remarks>You must call <see cref="Music.EnableMusicFinishedCallback"/>() to enable queueing.</remarks>
+		/// <remarks>You must call <see cref="MusicPlayer.EnableMusicFinishedCallback"/>() to enable queueing.</remarks>
 		public void CreateQueueList()
 		{
 			for(int i = 0; i < List.Count; i++)

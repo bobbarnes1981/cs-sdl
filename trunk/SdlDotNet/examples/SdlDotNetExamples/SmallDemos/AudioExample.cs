@@ -94,7 +94,7 @@ namespace SdlDotNetExamples.SmallDemos
             // Set up the music queue and start it
             music["mason2"].QueuedMusic = music["fard-two"];
             music["fard-two"].QueuedMusic = music["mason2"];
-            Music.EnableMusicFinishedCallback();
+            MusicPlayer.EnableMusicFinishedCallback();
 
             // Begin the SDL ticker
             Events.Fps = 50;
@@ -138,7 +138,7 @@ namespace SdlDotNetExamples.SmallDemos
                     try
                     {
                         // Switch the music 
-                        Music.Fadeout(1500);
+                        MusicPlayer.Fadeout(1500);
                         textDisplay.Text = "Music is fading";
 
                         // The next music sample plays because queuing is enabled.
@@ -152,13 +152,13 @@ namespace SdlDotNetExamples.SmallDemos
 
                 case Key.UpArrow:
                     // Increase the music volume.
-                    Music.Volume += 10;
-                    textDisplay.Text = "Music Volume: " + Music.Volume;
+                    MusicPlayer.Volume += 10;
+                    textDisplay.Text = "Music Volume: " + MusicPlayer.Volume;
                     break;
                 case Key.DownArrow:
                     // Decrease the music volume.
-                    Music.Volume -= 10;
-                    textDisplay.Text = "Music Volume: " + Music.Volume;
+                    MusicPlayer.Volume -= 10;
+                    textDisplay.Text = "Music Volume: " + MusicPlayer.Volume;
                     break;
                 case Key.RightArrow:
                     // Play the sound on the right
