@@ -51,14 +51,53 @@ namespace SdlDotNet.Audio
     /// </example>
     public static class MusicPlayer
     {
+        #region Private fields
+
+        private static Music m_CurrentMusic;
         private static SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
+        private static Music m_QueuedMusic;
+
+        #endregion Private fields
+
+        #region Constructors
 
         static MusicPlayer()
         {
             Mixer.Initialize();
         }
 
-        private static Music m_CurrentMusic;
+        #endregion Constructors
+
+        #region Private Methods
+
+        /// <summary>
+        /// Called upon when the music sample finishes.
+        /// </summary>
+        private static void MusicFinished()
+        {
+            Events.NotifyMusicFinished();
+        }
+
+        /// <summary>
+        /// Private method to process the next queued music file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
+        {
+            if (MusicPlayer.IsPlaying == false)
+            {
+                if (CurrentMusic.QueuedMusic != null)
+                {
+                    m_CurrentMusic = CurrentMusic.QueuedMusic;
+                    m_CurrentMusic.Play();
+                }
+            }
+        }
+
+        #endregion Private Methods
+
+        #region Public Methods
 
         /// <summary>
         /// Gets and sets the currently loaded music sample.
@@ -75,7 +114,6 @@ namespace SdlDotNet.Audio
             }
         }
 
-        private static Music m_QueuedMusic;
         /// <summary>
         /// Gets and sets the next queued music sample after this one completes.
         /// </summary>
@@ -159,6 +197,7 @@ namespace SdlDotNet.Audio
                 throw SdlException.Generate();
             }
         }
+
         /// <summary>
         /// Plays the music sample, starting from a specific 
         /// position and fades it in
@@ -184,6 +223,7 @@ namespace SdlDotNet.Audio
                 throw SdlException.Generate();
             }
         }
+
         /// <summary>
         /// Sets the music volume between 0 and 128.
         /// </summary>
@@ -206,6 +246,7 @@ namespace SdlDotNet.Audio
         {
             SdlMixer.Mix_PauseMusic();
         }
+
         /// <summary>
         /// Resumes paused music
         /// </summary>
@@ -213,6 +254,7 @@ namespace SdlDotNet.Audio
         {
             SdlMixer.Mix_ResumeMusic();
         }
+
         /// <summary>
         /// Resets the music position to the beginning of the sample
         /// </summary>
@@ -270,6 +312,7 @@ namespace SdlDotNet.Audio
                 throw new MusicNotPlayingException();
             }
         }
+
         /// <summary>
         /// Stops playing music
         /// </summary>
@@ -277,6 +320,7 @@ namespace SdlDotNet.Audio
         {
             SdlMixer.Mix_HaltMusic();
         }
+
         /// <summary>
         /// Fades out music
         /// </summary>
@@ -290,6 +334,7 @@ namespace SdlDotNet.Audio
                 throw SdlException.Generate();
             }
         }
+
         /// <summary>
         /// Gets a flag indicating whether or not music is playing
         /// </summary>
@@ -300,6 +345,7 @@ namespace SdlDotNet.Audio
                 return (SdlMixer.Mix_PlayingMusic() != 0);
             }
         }
+
         /// <summary>
         /// Gets a flag indicating whether or not music is paused
         /// </summary>
@@ -310,6 +356,7 @@ namespace SdlDotNet.Audio
                 return (SdlMixer.Mix_PausedMusic() != 0);
             }
         }
+
         /// <summary>
         /// Gets a flag indicating whether or not music is fading
         /// </summary>
@@ -333,29 +380,6 @@ namespace SdlDotNet.Audio
             Events.MusicFinished += new MusicFinishedEventHandler(Events_MusicFinished);
         }
 
-        /// <summary>
-        /// Called upon when the music sample finishes.
-        /// </summary>
-        private static void MusicFinished()
-        {
-            Events.NotifyMusicFinished();
-        }
-
-        /// <summary>
-        /// Private method to process the next queued music file.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private static void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
-        {
-            if (MusicPlayer.IsPlaying == false)
-            {
-                if (CurrentMusic.QueuedMusic != null)
-                {
-                    m_CurrentMusic = CurrentMusic.QueuedMusic;
-                    m_CurrentMusic.Play();
-                }
-            }
-        }
+        #endregion Public Methods
     }
 }

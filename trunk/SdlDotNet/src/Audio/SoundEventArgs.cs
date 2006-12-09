@@ -30,6 +30,15 @@ namespace SdlDotNet.Audio
     /// </summary>
     public class SoundEventArgs : UserEventArgs
     {
+        #region Private fields
+
+        private int fadeoutTime;
+        private SoundAction action;
+
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// SoundEventsArgs describe the action to take on a Sound
         /// </summary>
@@ -50,8 +59,10 @@ namespace SdlDotNet.Audio
             this.action = action;
         }
 
-        private int fadeoutTime;
-        private SoundAction action;
+        #endregion
+
+        #region Public Methods
+
         /// <summary>
         /// Get/Set Fadeout Time
         /// </summary>
@@ -73,5 +84,7 @@ namespace SdlDotNet.Audio
                 return this.action;
             }
         }
+
+        #endregion
     }
 }

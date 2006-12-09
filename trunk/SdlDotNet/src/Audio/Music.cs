@@ -1,6 +1,6 @@
+#region LICENSE
 /*
- * $RCSfile: Music.cs,v $
- * Copyright (C) 2004, 2005 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004-2006 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
  *
  * This library is free software; you can redistribute it and/or
@@ -17,6 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 
@@ -25,203 +26,216 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Audio
 {
-	/// <summary>
-	/// Represents a music sample.  Music is generally longer than a sound effect sample,
-	/// however it can also be compressed e.g. by Ogg Vorbis
-	/// </summary>
-	/// <example>
-	/// <code>
-	/// Music techno = new Music("techno.mp3");
-	/// Music jazz = new Music("jazz.mid");
-	/// 
-	/// techno.Play();
-	/// 
-	/// if(Music.CurrentMusic == techno)
-	///		jazz.Play();
-	///		
-	///	Music.FadeOut(1000);
-	///	Music.Volume = 50;
-	///	
-	///	techno.FadeIn(1, 500);
-	///	techno.QueuedMusic = jazz;  // Play jazz after techno finishes playing
-	///	jazz.QueuedMusic = techno;  // Play techno after jazz finishes playing
-	///	
-	///	Music.EnableMusicFinishedCallback(); // Enable processing queues.
-	/// </code>
-	/// </example>
-	public class Music : BaseSdlResource
-	{
-		private string m_FileName = "";
+    /// <summary>
+    /// Represents a music sample.  Music is generally longer than a sound effect sample,
+    /// however it can also be compressed e.g. by Ogg Vorbis
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// Music techno = new Music("techno.mp3");
+    /// Music jazz = new Music("jazz.mid");
+    /// 
+    /// techno.Play();
+    /// 
+    /// if(Music.CurrentMusic == techno)
+    ///		jazz.Play();
+    ///		
+    ///	Music.FadeOut(1000);
+    ///	Music.Volume = 50;
+    ///	
+    ///	techno.FadeIn(1, 500);
+    ///	techno.QueuedMusic = jazz;  // Play jazz after techno finishes playing
+    ///	jazz.QueuedMusic = techno;  // Play techno after jazz finishes playing
+    ///	
+    ///	Music.EnableMusicFinishedCallback(); // Enable processing queues.
+    /// </code>
+    /// </example>
+    public class Music : BaseSdlResource
+    {
+        #region Private fields
 
-		/// <summary>
-		/// Gets the filename of the music sample.
-		/// </summary>
-		public string FileName
-		{
-			get
-			{
-				return m_FileName;
-			}
-		}
+        private string m_FileName = "";
+        private Music m_QueuedMusic;
 
-		static Music()
-		{
-			Mixer.Initialize();
-		}
+        #endregion
 
-		private Music m_QueuedMusic;
-		/// <summary>
-		/// Gets and sets the next queued music sample after this one completes.
-		/// </summary>
-		/// <remarks>
-		/// You must call Music.EnableMusicFinishedCallback before this can work.
-		/// </remarks>
-		public Music QueuedMusic
-		{
-			get
-			{
-				return m_QueuedMusic;
-			}
-			set
-			{
-				m_QueuedMusic = value;
-			}
-		}
+        #region Constructor
 
-		/// <summary>
-		/// Loads a music sample from a file.
-		/// </summary>
-		/// <param name="fileName">The file path to load from.</param>
-		public Music(string fileName)
-		{
-			this.Handle = Mixer.LoadMusic(fileName);
-			m_FileName = fileName;
-		}
+        static Music()
+        {
+            Mixer.Initialize();
+        }
 
-		/// <summary>
-		/// Closes Music handle
-		/// </summary>
-		protected override void CloseHandle() 
-		{
-			try
-			{
-				if (this.Handle != IntPtr.Zero)
-				{
-					SdlMixer.Mix_FreeMusic(this.Handle);
-				}
-			}
-			catch (NullReferenceException)
-			{
-			}
-			finally
-			{
-				this.Handle = IntPtr.Zero;
-			}
-		}
+        #endregion
 
-		/// <summary>
-		/// Plays the music sample
-		/// </summary>
-		public void Play() 
-		{
-			Play(1);
-		}
+        #region Public methods
 
-		/// <summary>
-		/// Plays the music sample
-		/// </summary>
-		public void Play(bool continuous) 
-		{
-			if (continuous == true)
-			{
-				Play(-1);
-			}
-			else
-			{
-				Play(1);
-			}
-		}
+        /// <summary>
+        /// Gets the filename of the music sample.
+        /// </summary>
+        public string FileName
+        {
+            get
+            {
+                return m_FileName;
+            }
+        }
 
-		/// <summary>
-		/// Plays the music sample
-		/// </summary>
-		/// <param name="numberOfTimes">
-		/// The number of times to play. 
-		/// Specify 1 to play a single time, -1 to loop forever.
-		/// </param>
-		public void Play(int numberOfTimes) 
-		{
-			MusicPlayer.CurrentMusic = this;
+        /// <summary>
+        /// Gets and sets the next queued music sample after this one completes.
+        /// </summary>
+        /// <remarks>
+        /// You must call Music.EnableMusicFinishedCallback before this can work.
+        /// </remarks>
+        public Music QueuedMusic
+        {
+            get
+            {
+                return m_QueuedMusic;
+            }
+            set
+            {
+                m_QueuedMusic = value;
+            }
+        }
+
+        /// <summary>
+        /// Loads a music sample from a file.
+        /// </summary>
+        /// <param name="fileName">The file path to load from.</param>
+        public Music(string fileName)
+        {
+            this.Handle = Mixer.LoadMusic(fileName);
+            m_FileName = fileName;
+        }
+
+        /// <summary>
+        /// Closes Music handle
+        /// </summary>
+        protected override void CloseHandle()
+        {
+            try
+            {
+                if (this.Handle != IntPtr.Zero)
+                {
+                    SdlMixer.Mix_FreeMusic(this.Handle);
+                }
+            }
+            catch (NullReferenceException)
+            {
+            }
+            finally
+            {
+                this.Handle = IntPtr.Zero;
+            }
+        }
+
+        /// <summary>
+        /// Plays the music sample
+        /// </summary>
+        public void Play()
+        {
+            Play(1);
+        }
+
+        /// <summary>
+        /// Plays the music sample
+        /// </summary>
+        public void Play(bool continuous)
+        {
+            if (continuous == true)
+            {
+                Play(-1);
+            }
+            else
+            {
+                Play(1);
+            }
+        }
+
+        /// <summary>
+        /// Plays the music sample
+        /// </summary>
+        /// <param name="numberOfTimes">
+        /// The number of times to play. 
+        /// Specify 1 to play a single time, -1 to loop forever.
+        /// </param>
+        public void Play(int numberOfTimes)
+        {
+            MusicPlayer.CurrentMusic = this;
             if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
             {
                 throw SdlException.Generate();
             }
-		}
+        }
 
-		/// <summary>
-		/// Plays the music sample and fades it in
-		/// </summary>
-		/// <param name="numberOfTimes">
-		/// The number of times to play. 
-		/// Specify 1 to play a single time, -1 to loop forever.
-		/// </param>
-		/// <param name="milliseconds">
-		/// The number of milliseconds to fade in for
-		/// </param>
-		public void FadeIn(int numberOfTimes, int milliseconds) 
-		{
-			MusicPlayer.CurrentMusic = this;
+        /// <summary>
+        /// Plays the music sample and fades it in
+        /// </summary>
+        /// <param name="numberOfTimes">
+        /// The number of times to play. 
+        /// Specify 1 to play a single time, -1 to loop forever.
+        /// </param>
+        /// <param name="milliseconds">
+        /// The number of milliseconds to fade in for
+        /// </param>
+        public void FadeIn(int numberOfTimes, int milliseconds)
+        {
+            MusicPlayer.CurrentMusic = this;
             if (SdlMixer.Mix_FadeInMusic(this.Handle, numberOfTimes, milliseconds) != 0)
             {
                 throw SdlException.Generate();
             }
-		}
-		/// <summary>
-		/// Plays the music sample, starting from a specific 
-		/// position and fades it in
-		/// </summary>
-		/// <param name="numberOfTimes">
-		/// The number of times to play.
-		///  Specify 1 to play a single time, -1 to loop forever.
-		///  </param>
-		/// <param name="milliseconds">
-		/// The number of milliseconds to fade in for
-		/// </param>
-		/// <param name="position">
-		/// A format-defined position value. 
-		/// For Ogg Vorbis, this is the number of seconds from the
-		///  beginning of the song
-		///  </param>
-		public void FadeInPosition(int numberOfTimes, int milliseconds, double position) 
-		{
+        }
+
+        /// <summary>
+        /// Plays the music sample, starting from a specific 
+        /// position and fades it in
+        /// </summary>
+        /// <param name="numberOfTimes">
+        /// The number of times to play.
+        ///  Specify 1 to play a single time, -1 to loop forever.
+        ///  </param>
+        /// <param name="milliseconds">
+        /// The number of milliseconds to fade in for
+        /// </param>
+        /// <param name="position">
+        /// A format-defined position value. 
+        /// For Ogg Vorbis, this is the number of seconds from the
+        ///  beginning of the song
+        ///  </param>
+        public void FadeInPosition(int numberOfTimes, int milliseconds, double position)
+        {
             MusicPlayer.CurrentMusic = this;
-			if (SdlMixer.Mix_FadeInMusicPos(this.Handle, 
-				numberOfTimes, milliseconds, position) != 0)
-			{
-				throw SdlException.Generate();
-			}
-		}
+            if (SdlMixer.Mix_FadeInMusicPos(this.Handle,
+                numberOfTimes, milliseconds, position) != 0)
+            {
+                throw SdlException.Generate();
+            }
+        }
 
-		/// <summary>
-		/// Gets the format of the music data type.
-		/// </summary>
-		public MusicType MusicType
-		{
-			get
-			{
-				return (MusicType) SdlMixer.Mix_GetMusicType(this.Handle);
-			}
-		}
+        /// <summary>
+        /// Gets the format of the music data type.
+        /// </summary>
+        public MusicType MusicType
+        {
+            get
+            {
+                return (MusicType)SdlMixer.Mix_GetMusicType(this.Handle);
+            }
+        }
 
-		/// <summary>
-		/// Returns a System.String that represents the current Music object.
-		/// </summary>
-		/// <returns>
-		/// A System.String that represents the Music object (the filename).
-		/// </returns>
-		public override string ToString()
-		{
-			return m_FileName;
-		}
-	}
+        /// <summary>
+        /// Returns a System.String that represents the current Music object.
+        /// </summary>
+        /// <returns>
+        /// A System.String that represents the Music object (the filename).
+        /// </returns>
+        public override string ToString()
+        {
+            return m_FileName;
+        }
+
+        #endregion
+    }
 }
