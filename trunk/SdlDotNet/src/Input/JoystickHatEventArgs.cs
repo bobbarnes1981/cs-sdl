@@ -30,6 +30,8 @@ namespace SdlDotNet.Input
     /// </summary>
     public class JoystickHatEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         /// <summary>
         /// Joystick Hat event args
         /// </summary>
@@ -50,6 +52,10 @@ namespace SdlDotNet.Input
             : base(evt)
         {
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// joystick
@@ -83,5 +89,7 @@ namespace SdlDotNet.Input
                 return this.EventStruct.jhat.val;
             }
         }
+
+        #endregion
     }
 }

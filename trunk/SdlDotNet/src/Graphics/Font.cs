@@ -36,9 +36,14 @@ namespace SdlDotNet.Graphics
     /// </remarks>
     public class Font : BaseSdlResource
     {
+        #region Private fields
+
         private bool disposed;
 
+        #endregion
+
         #region Constructors
+
         /// <summary>
         /// Font Constructor
         /// </summary>
@@ -76,7 +81,10 @@ namespace SdlDotNet.Graphics
                 throw FontException.Generate();
             }
         }
+
         #endregion Constructors
+
+        #region Private methods
 
         /// <summary>
         /// Queries if the Font subsystem has been intialized.
@@ -99,6 +107,7 @@ namespace SdlDotNet.Graphics
                 }
             }
         }
+
         /// <summary>
         /// Initialize Font subsystem.
         /// </summary>
@@ -109,6 +118,63 @@ namespace SdlDotNet.Graphics
                 FontException.Generate();
             }
         }
+
+        /// <summary>
+        /// Render Text to Solid
+        /// </summary>
+        /// <param name="textItem">String to display</param>
+        /// <param name="color">Color of text</param>
+        /// <returns>Surface containing the text</returns>
+        private Surface RenderTextSolid(string textItem, Color color)
+        {
+            Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
+            return new Surface(SdlTtf.TTF_RenderUNICODE_Solid(this.Handle, textItem, colorSdl));
+        }
+
+        /// <summary>
+        /// Shade text
+        /// </summary>
+        /// <param name="textItem"></param>
+        /// <param name="backgroundColor"></param>
+        /// <param name="textColor"></param>
+        /// <returns></returns>
+        private Surface RenderTextShaded(
+            string textItem, Color textColor, Color backgroundColor)
+        {
+            Sdl.SDL_Color textColorSdl =
+                SdlColor.ConvertColor(textColor);
+            Sdl.SDL_Color backgroundColorSdl =
+                SdlColor.ConvertColor(backgroundColor);
+            if (textItem == null || textItem.Length == 0)
+            {
+                textItem = " ";
+            }
+            return new Surface(SdlTtf.TTF_RenderUNICODE_Shaded(
+                this.Handle, textItem, textColorSdl, backgroundColorSdl));
+        }
+
+        /// <summary>
+        /// Blended Text
+        /// </summary>
+        /// <param name="textColor"></param>
+        /// <param name="textItem"></param>
+        /// <returns></returns>
+        private Surface RenderTextBlended(
+            string textItem, Color textColor)
+        {
+            Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(textColor);
+            if (textItem == null || textItem.Length == 0)
+            {
+                textItem = " ";
+            }
+            return new Surface(SdlTtf.TTF_RenderUNICODE_Blended(
+                this.Handle, textItem, colorSdl));
+        }
+
+        #endregion
+
+        #region Public Methods
+
         /// <summary>
         /// Get System Font Names
         /// </summary>
@@ -118,51 +184,6 @@ namespace SdlDotNet.Graphics
             get
             {
                 return new System.Drawing.Text.InstalledFontCollection();
-            }
-        }
-
-        /// <summary>
-        /// Destroys the surface object and frees its memory
-        /// </summary>
-        /// <param name="disposing">If true, it will dispose all objects</param>
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                if (!this.disposed)
-                {
-                    if (disposing)
-                    {
-                    }
-                    this.disposed = true;
-                }
-            }
-            finally
-            {
-                base.Dispose(disposing);
-            }
-        }
-
-        /// <summary>
-        /// Closes Surface handle
-        /// </summary>
-        protected override void CloseHandle()
-        {
-            try
-            {
-                if (this.Handle != IntPtr.Zero)
-                {
-                    SdlTtf.TTF_CloseFont(this.Handle);
-                }
-                this.Handle = IntPtr.Zero;
-            }
-            catch (System.NullReferenceException e)
-            {
-                e.ToString();
-            }
-            finally
-            {
-                this.Handle = IntPtr.Zero;
             }
         }
 
@@ -392,59 +413,6 @@ namespace SdlDotNet.Graphics
             GC.KeepAlive(this);
             return new Size(width, height);
         }
-
-        /// <summary>
-        /// Render Text to Solid
-        /// </summary>
-        /// <param name="textItem">String to display</param>
-        /// <param name="color">Color of text</param>
-        /// <returns>Surface containing the text</returns>
-        private Surface RenderTextSolid(string textItem, Color color)
-        {
-            Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(color);
-            return new Surface(SdlTtf.TTF_RenderUNICODE_Solid(this.Handle, textItem, colorSdl));
-        }
-
-        /// <summary>
-        /// Shade text
-        /// </summary>
-        /// <param name="textItem"></param>
-        /// <param name="backgroundColor"></param>
-        /// <param name="textColor"></param>
-        /// <returns></returns>
-        private Surface RenderTextShaded(
-            string textItem, Color textColor, Color backgroundColor)
-        {
-            Sdl.SDL_Color textColorSdl =
-                SdlColor.ConvertColor(textColor);
-            Sdl.SDL_Color backgroundColorSdl =
-                SdlColor.ConvertColor(backgroundColor);
-            if (textItem == null || textItem.Length == 0)
-            {
-                textItem = " ";
-            }
-            return new Surface(SdlTtf.TTF_RenderUNICODE_Shaded(
-                this.Handle, textItem, textColorSdl, backgroundColorSdl));
-        }
-
-        /// <summary>
-        /// Blended Text
-        /// </summary>
-        /// <param name="textColor"></param>
-        /// <param name="textItem"></param>
-        /// <returns></returns>
-        private Surface RenderTextBlended(
-            string textItem, Color textColor)
-        {
-            Sdl.SDL_Color colorSdl = SdlColor.ConvertColor(textColor);
-            if (textItem == null || textItem.Length == 0)
-            {
-                textItem = " ";
-            }
-            return new Surface(SdlTtf.TTF_RenderUNICODE_Blended(
-                this.Handle, textItem, colorSdl));
-        }
-
 
         /// <summary>
         /// Render text to a surface.
@@ -696,5 +664,56 @@ namespace SdlDotNet.Graphics
                 return surfFinal;
             }
         }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Destroys the surface object and frees its memory
+        /// </summary>
+        /// <param name="disposing">If true, it will dispose all objects</param>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (!this.disposed)
+                {
+                    if (disposing)
+                    {
+                    }
+                    this.disposed = true;
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+
+        /// <summary>
+        /// Closes Surface handle
+        /// </summary>
+        protected override void CloseHandle()
+        {
+            try
+            {
+                if (this.Handle != IntPtr.Zero)
+                {
+                    SdlTtf.TTF_CloseFont(this.Handle);
+                }
+                this.Handle = IntPtr.Zero;
+            }
+            catch (System.NullReferenceException e)
+            {
+                e.ToString();
+            }
+            finally
+            {
+                this.Handle = IntPtr.Zero;
+            }
+        }
+
+        #endregion
     }
 }

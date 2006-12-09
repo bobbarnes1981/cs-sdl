@@ -30,6 +30,8 @@ namespace SdlDotNet.Input
     /// </summary>
     public class JoystickButtonEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         /// <summary>
         /// joystick button args
         /// </summary>
@@ -61,6 +63,10 @@ namespace SdlDotNet.Input
             : base(evt)
         {
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// joystick device
@@ -94,5 +100,7 @@ namespace SdlDotNet.Input
                 return (this.EventStruct.jbutton.state == (byte)ButtonKeyState.Pressed);
             }
         }
+
+        #endregion
     }
 }

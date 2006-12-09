@@ -28,7 +28,8 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Input
 {
-    #region Keys
+    #region Key
+
     /// <summary>
     /// What we really want is a mapping of every raw key on the keyboard.
     /// To support international keyboards, we use the range 0xA1 - 0xFF
@@ -994,9 +995,11 @@ namespace SdlDotNet.Input
         /// </summary>
         Last = Sdl.SDLK_LAST
     }
-    #endregion Keys
+
+    #endregion Key
 
     #region ModifierKeys
+
     /// <summary>
     /// Enumeration of valid key mods (possibly OR'd together) 
     /// </summary>
@@ -1064,18 +1067,19 @@ namespace SdlDotNet.Input
         /// Both SHIFT keys.
         /// </summary>
         ShiftKeys = (Sdl.KMOD_LSHIFT | Sdl.KMOD_RSHIFT),
-
         /// <summary>
         /// Both ALT keys.
         /// </summary>
         AltKeys = (Sdl.KMOD_LALT | Sdl.KMOD_RALT),
-
         /// <summary>
         /// Both META keys.
         /// </summary>
         MetaKeys = (Sdl.KMOD_LMETA | Sdl.KMOD_RMETA)
     }
+
     #endregion ModifierKeys
+
+    #region Focus
 
     /// <summary>
     /// Type of Focus 
@@ -1097,15 +1101,24 @@ namespace SdlDotNet.Input
         /// </summary>
         Application = Sdl.SDL_APPACTIVE
     }
+
+    #endregion
+
     /// <summary>
     /// Keyboard class
     /// </summary>
     public static class Keyboard
     {
+        #region Constructor
+
         static Keyboard()
         {
             Video.Initialize();
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Enable keyboard autorepeat
@@ -1265,5 +1278,7 @@ namespace SdlDotNet.Input
                 }
             }
         }
+
+        #endregion
     }
 }

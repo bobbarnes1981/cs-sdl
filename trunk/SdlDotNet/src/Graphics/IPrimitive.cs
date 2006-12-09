@@ -31,6 +31,8 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public interface IPrimitive
     {
+        #region Properties
+
         /// <summary>
         /// 
         /// </summary>
@@ -39,12 +41,18 @@ namespace SdlDotNet.Graphics
             get;
             set;
         }
+
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="color"></param>
         void Draw(Surface surface, System.Drawing.Color color);
+
         /// <summary>
         /// 
         /// </summary>
@@ -52,6 +60,7 @@ namespace SdlDotNet.Graphics
         /// <param name="color"></param>
         /// <param name="antiAlias"></param>
         void Draw(Surface surface, System.Drawing.Color color, bool antiAlias);
+
         /// <summary>
         /// 
         /// </summary>
@@ -60,5 +69,7 @@ namespace SdlDotNet.Graphics
         /// <param name="antiAlias"></param>
         /// <param name="fill"></param>
         void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill);
+
+        #endregion
     }
 }

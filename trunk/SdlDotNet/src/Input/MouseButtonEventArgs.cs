@@ -31,6 +31,8 @@ namespace SdlDotNet.Input
     /// </summary>
     public class MouseButtonEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         /// <summary>
         /// 
         /// </summary>
@@ -63,6 +65,10 @@ namespace SdlDotNet.Input
             : base(evt)
         {
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Which mouse button created the event
@@ -118,5 +124,7 @@ namespace SdlDotNet.Input
                 return new Point(this.EventStruct.button.x, this.EventStruct.button.y);
             }
         }
+
+        #endregion
     }
 }

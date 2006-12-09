@@ -28,6 +28,8 @@ namespace SdlDotNet.Core
     /// </summary>
     public class QuitEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         /// <summary>
         /// Quit Event
         /// </summary>
@@ -42,5 +44,7 @@ namespace SdlDotNet.Core
             : base(evt)
         {
         }
+
+        #endregion
     }
 }

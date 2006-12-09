@@ -32,6 +32,8 @@ namespace SdlDotNet.Core
     [Serializable()]
     public class SdlException : Exception
     {
+        #region Constructors
+
         /// <summary>
         /// Returns basic exception
         /// </summary>
@@ -70,6 +72,10 @@ namespace SdlDotNet.Core
         {
         }
 
+        #endregion
+
+        #region Public Methods
+
         /// <summary>
         /// Generates an SdlException based on the last Sdl Error code.
         /// </summary>
@@ -100,5 +106,7 @@ namespace SdlDotNet.Core
                 return Sdl.SDL_GetError();
             }
         }
+
+        #endregion
     }
 }

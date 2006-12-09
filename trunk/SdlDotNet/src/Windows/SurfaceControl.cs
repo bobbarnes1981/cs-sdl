@@ -45,6 +45,8 @@ namespace SdlDotNet.Windows
     [ToolboxBitmap(typeof(Bitmap), "SurfaceControl.bmp")]
     public class SurfaceControl : System.Windows.Forms.PictureBox
     {
+        #region Constructors
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -52,6 +54,17 @@ namespace SdlDotNet.Windows
         {
             PictureBox.CheckForIllegalCrossThreadCalls = false;
         }
+
+        #endregion
+
+        #region Private fields
+
+        int lastX;
+        int lastY;
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Copies surface to this surface
@@ -87,6 +100,28 @@ namespace SdlDotNet.Windows
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        public void KeyPressed(KeyEventArgs e)
+        {
+            this.OnKeyDown(e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        public void KeyReleased(KeyEventArgs e)
+        {
+            this.OnKeyUp(e);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
         /// Raises the OnResize event
         /// </summary>
         /// <param name="e">Contains the event data</param>
@@ -104,6 +139,7 @@ namespace SdlDotNet.Windows
         //			e.Graphics.DrawImage(this.Image,new Point(0,0));
         //			//base.OnPaint (e);
         //		}
+
 
         /// <summary>
         /// Raises the SizeChanged event
@@ -144,9 +180,6 @@ namespace SdlDotNet.Windows
             }
         }
 
-        int lastX;
-        int lastY;
-
         /// <summary>
         /// Raises the MouseMove event
         /// </summary>
@@ -164,43 +197,6 @@ namespace SdlDotNet.Windows
                 lastX = e.X;
                 lastY = e.Y;
             }
-        }
-
-        private static MouseButton ConvertMouseButtons(MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                return MouseButton.PrimaryButton;
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                return MouseButton.SecondaryButton;
-            }
-            else if (e.Button == MouseButtons.Middle)
-            {
-                return MouseButton.MiddleButton;
-            }
-            else
-            {
-                return MouseButton.None;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        public void KeyPressed(KeyEventArgs e)
-        {
-            this.OnKeyDown(e);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="e"></param>
-        public void KeyReleased(KeyEventArgs e)
-        {
-            this.OnKeyUp(e);
         }
 
         /// <summary>
@@ -235,6 +231,32 @@ namespace SdlDotNet.Windows
                 SdlDotNet.Core.Events.Add(new KeyboardEventArgs((SdlDotNet.Input.Key)Enum.Parse(typeof(SdlDotNet.Input.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, false));
             }
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private static MouseButton ConvertMouseButtons(MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                return MouseButton.PrimaryButton;
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                return MouseButton.SecondaryButton;
+            }
+            else if (e.Button == MouseButtons.Middle)
+            {
+                return MouseButton.MiddleButton;
+            }
+            else
+            {
+                return MouseButton.None;
+            }
+        }
+
+        #endregion
 
         #region Disposing
         private bool disposed;
@@ -277,9 +299,7 @@ namespace SdlDotNet.Windows
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
-
             this.InitialImage = ((System.Drawing.Image)(resources.GetObject("$this.InitialImage")));
-
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 

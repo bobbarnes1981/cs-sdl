@@ -31,10 +31,16 @@ namespace SdlDotNet.Core
     /// </summary>
     public class SdlEventArgs : EventArgs
     {
+        #region Private fields
+
         /// <summary>
         /// Corrresponding SDL_Event
         /// </summary>
         Sdl.SDL_Event eventStruct;
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Constructor
@@ -51,6 +57,10 @@ namespace SdlDotNet.Core
         {
             this.eventStruct = evt;
         }
+
+        #endregion
+
+        #region Protected Methods
 
         /// <summary>
         /// 
@@ -101,6 +111,10 @@ namespace SdlDotNet.Core
             }
         }
 
+        #endregion
+
+        #region Public Methods
+
         /// <summary>
         /// Returns Event type
         /// </summary>
@@ -111,5 +125,7 @@ namespace SdlDotNet.Core
                 return (EventTypes)this.EventStruct.type;
             }
         }
+
+        #endregion
     }
 }

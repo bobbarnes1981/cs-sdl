@@ -38,6 +38,8 @@ namespace SdlDotNet.Core
         private IntPtr handle;
         #endregion Private Fields
 
+        #region Constructors and Destructors
+
         /// <summary>
         /// Creates class using a handle.
         /// </summary>
@@ -75,6 +77,10 @@ namespace SdlDotNet.Core
             Dispose(false);
         }
 
+        #endregion
+
+        #region Protected Methods
+
         /// <summary>
         /// 
         /// </summary>
@@ -89,18 +95,6 @@ namespace SdlDotNet.Core
                 this.handle = value;
                 GC.KeepAlive(this);
             }
-        }
-
-        /// <summary>
-        /// Closes and destroys this object
-        /// </summary>
-        /// <remarks>
-        /// Destroys managed and unmanaged objects
-        /// </remarks>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -133,6 +127,22 @@ namespace SdlDotNet.Core
         /// </remarks>
         protected abstract void CloseHandle();
 
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Closes and destroys this object
+        /// </summary>
+        /// <remarks>
+        /// Destroys managed and unmanaged objects
+        /// </remarks>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         /// <summary>
         /// Closes and destroys this object
         /// </summary>
@@ -143,5 +153,7 @@ namespace SdlDotNet.Core
         {
             Dispose();
         }
+
+        #endregion
     }
 }

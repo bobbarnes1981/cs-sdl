@@ -26,6 +26,7 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Input
 {
+    #region JoystickAxis
 
     /// <summary>
     /// JoystickAxes
@@ -51,7 +52,9 @@ namespace SdlDotNet.Input
         Axis4 = 3
     }
 
+    #endregion
 
+    #region JoystickHatStates
 
     /// <summary>
     /// JoystickHatStates
@@ -98,123 +101,23 @@ namespace SdlDotNet.Input
         LeftDown = Sdl.SDL_HAT_LEFTDOWN
     }
 
-    /// <summary>
-    /// Struct for trackball motion
-    /// </summary>
-    public struct BallMotion
-    {
-        int x;
-        int y;
+    #endregion
 
-        /// <summary>
-        /// Ball motion
-        /// </summary>
-        /// <param name="positionX"></param>
-        /// <param name="positionY"></param>
-        public BallMotion(int positionX, int positionY)
-        {
-            this.x = positionX;
-            this.y = positionY;
-        }
-
-        /// <summary>
-        /// motion in X-axis
-        /// </summary>
-        public int MotionX
-        {
-            get
-            {
-                return this.x;
-            }
-            set
-            {
-                this.x = value;
-            }
-        }
-
-        /// <summary>
-        /// Motion in Y-axis
-        /// </summary>
-        public int MotionY
-        {
-            get
-            {
-                return this.y;
-            }
-            set
-            {
-                this.y = value;
-            }
-        }
-
-        /// <summary>
-        /// String output
-        /// </summary>
-        /// <returns>String repesentation.</returns>
-        public override string ToString()
-        {
-            return String.Format(CultureInfo.CurrentCulture, "({0},{1})", x, y);
-        }
-        /// <summary>
-        /// Equals
-        /// </summary>
-        /// <param name="obj">Object for comparison</param>
-        /// <returns>If objects are equal, this returns true.</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                throw new ArgumentNullException("obj");
-            }
-            if (obj.GetType() != typeof(BallMotion))
-                return false;
-
-            BallMotion c = (BallMotion)obj;
-            return ((this.x == c.x) && (this.y == c.y));
-        }
-
-        /// <summary>
-        /// Equals operator
-        /// </summary>
-        /// <param name="c1">object to compare</param>
-        /// <param name="c2">object to compare</param>
-        /// <returns>If objects are equal, this returns true.</returns>
-        public static bool operator ==(BallMotion c1, BallMotion c2)
-        {
-            return ((c1.x == c2.x) && (c1.y == c2.y));
-        }
-
-        /// <summary>
-        /// Not equals operator
-        /// </summary>
-        /// <param name="c1">object to compare</param>
-        /// <param name="c2">object to compare</param>
-        /// <returns>If objects are not equal, this returns true.</returns>
-        public static bool operator !=(BallMotion c1, BallMotion c2)
-        {
-            return !(c1 == c2);
-        }
-
-        /// <summary>
-        /// GetHashCode openrator
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            return x ^ y;
-
-        }
-    }
     /// <summary>
     /// Represents a joystick on the system
     /// </summary>
     public class Joystick : BaseSdlResource
     {
+        #region Private fields
+
         private int index;
         private bool disposed;
-        private const float JOYSTICK_ADJUSTMENT = 32768;
-        private const float JOYSTICK_SCALE = 65535;
-        //private const short JOYSTICK_THRESHHOLD = 3277;
+        private static readonly float JOYSTICK_ADJUSTMENT = 32768;
+        private static readonly float JOYSTICK_SCALE = 65535;
+
+        #endregion
+
+        #region Contructors
 
         static Joystick()
         {
@@ -245,6 +148,10 @@ namespace SdlDotNet.Input
             this.Handle = handle;
             this.index = Sdl.SDL_JoystickIndex(handle);
         }
+
+        #endregion
+
+        #region Protected methods
 
         /// <summary>
         /// Destroys the surface object and frees its memory
@@ -286,24 +193,10 @@ namespace SdlDotNet.Input
             }
         }
 
+        #endregion
 
-        //		/// <summary>
-        //		/// Returns true if the joystick has been initialized
-        //		/// </summary>
-        //		public bool IsInitialized
-        //		{
-        //			get
-        //			{
-        //				if (Sdl.SDL_JoystickOpened(this.index) == (int) SdlFlag.TrueValue)
-        //				{
-        //					return true;
-        //				}
-        //				else
-        //				{
-        //					return false;
-        //				}
-        //			}
-        //		}
+        #region Public Methods
+
         /// <summary>
         /// Gets the 0-based numeric index of this joystick
         /// </summary>
@@ -431,5 +324,7 @@ namespace SdlDotNet.Input
         {
             return (JoystickHatStates)Sdl.SDL_JoystickGetHat(this.Handle, (int)hat);
         }
+
+        #endregion
     }
 }

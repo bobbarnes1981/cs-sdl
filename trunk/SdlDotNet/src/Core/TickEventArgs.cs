@@ -1,5 +1,5 @@
+#region LICENSE
 /*
- * $RCSfile$
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
  *
  * This library is free software; you can redistribute it and/or
@@ -16,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.Threading;
@@ -29,9 +30,15 @@ namespace SdlDotNet.Core
     /// </summary>
     public class TickEventArgs : UserEventArgs
     {
+        #region Private fields
+
         private int lastTick;
         private int tick;
         private int fps;
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// 
@@ -49,6 +56,10 @@ namespace SdlDotNet.Core
             this.lastTick = lastTick;
             this.fps = fps;
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Gets when the last frame tick occurred.
@@ -105,5 +116,7 @@ namespace SdlDotNet.Core
                 return (this.TicksElapsed / 1000.0f);
             }
         }
+
+        #endregion
     }
 }

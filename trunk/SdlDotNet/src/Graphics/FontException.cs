@@ -32,6 +32,8 @@ namespace SdlDotNet.Graphics
     [Serializable()]
     public class FontException : SdlException
     {
+        #region Constructors
+
         /// <summary>
         /// Font Exception
         /// </summary>
@@ -39,6 +41,7 @@ namespace SdlDotNet.Graphics
         {
             FontException.Generate();
         }
+
         /// <summary>
         /// Initializes an TtfException instance
         /// </summary>
@@ -71,5 +74,7 @@ namespace SdlDotNet.Graphics
             : base(info, context)
         {
         }
+
+        #endregion
     }
 }

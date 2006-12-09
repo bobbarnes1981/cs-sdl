@@ -30,6 +30,8 @@ namespace SdlDotNet.Input
     /// </summary>
     public class JoystickBallEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         /// <summary>
         /// 
         /// </summary>
@@ -52,6 +54,10 @@ namespace SdlDotNet.Input
             : base(evt)
         {
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Device
@@ -96,5 +102,7 @@ namespace SdlDotNet.Input
                 return this.EventStruct.jball.yrel;
             }
         }
+
+        #endregion
     }
 }
