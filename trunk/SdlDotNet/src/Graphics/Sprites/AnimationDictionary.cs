@@ -20,13 +20,14 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace SdlDotNet.Graphics.Sprites
 {
     /// <summary>
     /// Summary description for Animation.
     /// </summary>
-    public class AnimationDictionary : DictionaryBase
+    public class AnimationDictionary : Dictionary<string, Animation>
     {
         #region Constructors
         /// <summary>
@@ -77,43 +78,6 @@ namespace SdlDotNet.Graphics.Sprites
         #endregion Constructors
 
         #region Properties
-        /// <summary>
-        /// Gets and sets an animation object within the 
-        /// Dictionary using the animation's key.
-        /// </summary>
-        public Animation this[string key]
-        {
-            get
-            {
-                return ((Animation)Dictionary[key]);
-            }
-            set
-            {
-                Dictionary[key] = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets all the Keys in the Dictionary.
-        /// </summary>
-        public ICollection Keys
-        {
-            get
-            {
-                return Dictionary.Keys;
-            }
-        }
-
-        /// <summary>
-        /// Gets all the Values in the Dictionary.
-        /// </summary>
-        public ICollection Values
-        {
-            get
-            {
-                return Dictionary.Values;
-            }
-        }
 
         /// <summary>
         /// Gets the average delay of all animations in the Dictionary, 
@@ -124,7 +88,7 @@ namespace SdlDotNet.Graphics.Sprites
             get
             {
                 double average = 0;
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                IDictionaryEnumerator dict = this.GetEnumerator();
                 while (dict.MoveNext())
                 {
                     average += ((Animation)dict.Value).Delay;
@@ -133,7 +97,7 @@ namespace SdlDotNet.Graphics.Sprites
             }
             set
             {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                IDictionaryEnumerator dict = this.GetEnumerator();
                 while (dict.MoveNext())
                 {
                     ((Animation)dict.Value).Delay = value;
@@ -150,7 +114,7 @@ namespace SdlDotNet.Graphics.Sprites
             get
             {
                 int average = 0;
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                IDictionaryEnumerator dict = this.GetEnumerator();
                 while (dict.MoveNext())
                 {
                     average += ((Animation)dict.Value).FrameIncrement;
@@ -159,7 +123,7 @@ namespace SdlDotNet.Graphics.Sprites
             }
             set
             {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                IDictionaryEnumerator dict = this.GetEnumerator();
                 while (dict.MoveNext())
                 {
                     ((Animation)dict.Value).FrameIncrement = value;
@@ -177,7 +141,7 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                IDictionaryEnumerator dict = this.GetEnumerator();
                 while (dict.MoveNext())
                 {
                     if (!((Animation)dict.Value).AnimateForward)
@@ -189,7 +153,7 @@ namespace SdlDotNet.Graphics.Sprites
             }
             set
             {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                IDictionaryEnumerator dict = this.GetEnumerator();
                 while (dict.MoveNext())
                 {
                     ((Animation)dict.Value).AnimateForward = value;
@@ -204,7 +168,7 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                IDictionaryEnumerator dict = this.GetEnumerator();
                 while (dict.MoveNext())
                 {
                     return ((Animation)dict.Value).Loop;
@@ -213,7 +177,7 @@ namespace SdlDotNet.Graphics.Sprites
             }
             set
             {
-                IDictionaryEnumerator dict = Dictionary.GetEnumerator();
+                IDictionaryEnumerator dict = this.GetEnumerator();
                 while (dict.MoveNext())
                 {
                     ((Animation)dict.Value).Loop = value;
@@ -223,17 +187,6 @@ namespace SdlDotNet.Graphics.Sprites
         #endregion Properties
 
         #region Functions
-        /// <summary>
-        /// Adds an animation to the Dictionary.
-        /// </summary>
-        /// <param name="key">The name of the animation.</param>
-        /// <param name="animation">The animation object.</param>
-        /// <returns>The final number of elements within the Dictionary.</returns>
-        public int Add(string key, Animation animation)
-        {
-            Dictionary.Add(key, animation);
-            return Dictionary.Count;
-        }
 
         /// <summary>
         /// Adds a surface Dictionary to the Dictionary as an animation.
@@ -243,8 +196,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// <returns>The final number of elements within the Dictionary.</returns>
         public int Add(string key, SurfaceCollection surfaces)
         {
-            Dictionary.Add(key, new Animation(surfaces));
-            return Dictionary.Count;
+            this.Add(key, new Animation(surfaces));
+            return this.Count;
         }
 
         /// <summary>
@@ -269,27 +222,9 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 this.Add((string)dict.Key, (Animation)dict.Value);
             }
-            return Dictionary.Count;
+            return this.Count;
         }
 
-        /// <summary>
-        /// Returns true if the Dictionary contains the given key.
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public bool Contains(string key)
-        {
-            return Dictionary.Contains(key);
-        }
-
-        /// <summary>
-        /// Removes an element from the Dictionary.
-        /// </summary>
-        /// <param name="key">The element's key to remove.</param>
-        public void Remove(string key)
-        {
-            Dictionary.Remove(key);
-        }
         #endregion Functions
 
         #region IDictionary Members

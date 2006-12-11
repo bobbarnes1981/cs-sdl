@@ -27,7 +27,6 @@ namespace SdlDotNet.Graphics.Sprites
     /// </summary>
     public class Animation : SurfaceCollection
     {
-
         #region Constructors
         /// <summary>
         /// Creates a new empty Animation.
@@ -56,8 +55,9 @@ namespace SdlDotNet.Graphics.Sprites
         /// The surface representing the animation.
         /// </param>
         public Animation(Surface firstFrame)
-            : base(firstFrame)
+            : base()
         {
+            this.Add(firstFrame);
         }
 
         /// <summary>

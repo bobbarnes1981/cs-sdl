@@ -25,6 +25,30 @@ using SdlDotNet.Core;
 
 namespace SdlDotNet.Graphics
 {
+    #region MovieStatus
+
+    /// <summary>
+    /// Status of Movie
+    /// </summary>
+    /// <remarks></remarks>
+    internal enum MovieStatus
+    {
+        /// <summary>
+        /// Movie is playing
+        /// </summary>
+        Playing = Smpeg.SMPEG_PLAYING,
+        /// <summary>
+        /// Movie is stopped
+        /// </summary>
+        Stopped = Smpeg.SMPEG_STOPPED,
+        /// <summary>
+        /// Error in movie playback
+        /// </summary>
+        Error = Smpeg.SMPEG_ERROR
+    }
+
+    #endregion
+
     /// <summary>
     /// Represents a movie mpg file.
     /// </summary>

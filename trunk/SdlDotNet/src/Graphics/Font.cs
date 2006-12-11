@@ -28,6 +28,38 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Graphics
 {
+    #region Styles
+
+    /// <summary>
+    /// Text Style
+    /// </summary>
+    /// <remarks></remarks>
+    [FlagsAttribute]
+    public enum Styles
+    {
+        /// <summary>
+        /// Normal.
+        /// </summary>
+        /// <remarks>
+        /// FXCop wants this to be called 'None' instead of 'Normal'
+        /// </remarks>
+        None = SdlTtf.TTF_STYLE_NORMAL,
+        /// <summary>
+        /// Bold
+        /// </summary>
+        Bold = SdlTtf.TTF_STYLE_BOLD,
+        /// <summary>
+        /// Italic
+        /// </summary>
+        Italic = SdlTtf.TTF_STYLE_ITALIC,
+        /// <summary>
+        /// Underline
+        /// </summary>
+        Underline = SdlTtf.TTF_STYLE_UNDERLINE
+    }
+
+    #endregion
+
     /// <summary>
     /// Font Class.
     /// </summary>

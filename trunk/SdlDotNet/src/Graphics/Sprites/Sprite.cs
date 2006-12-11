@@ -36,6 +36,8 @@ namespace SdlDotNet.Graphics.Sprites
     /// </summary>
     public class Sprite : IDisposable, IComparable
     {
+        #region Constructors
+
         /// <summary>
         /// Basic constructor. 
         /// </summary>
@@ -169,6 +171,8 @@ namespace SdlDotNet.Graphics.Sprites
         {
             //this.AddInternal(group);
         }
+
+        #endregion
 
         #region Display
         private Surface surf;
@@ -717,6 +721,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         ArrayList groups = new ArrayList();
+
         /// <summary>
         /// collections that the Sprite is a member of.
         /// </summary>
@@ -786,6 +791,7 @@ namespace SdlDotNet.Graphics.Sprites
         //}
 
         private bool allowDrag;
+
         /// <summary>
         /// Allows sprite to be dragged via the mouse
         /// </summary>

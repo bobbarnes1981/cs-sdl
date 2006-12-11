@@ -30,6 +30,8 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public class VideoExposeEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -44,5 +46,7 @@ namespace SdlDotNet.Graphics
             : base(evt)
         {
         }
+
+        #endregion
     }
 }

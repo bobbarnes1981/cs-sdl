@@ -857,6 +857,8 @@ namespace SdlDotNet.Graphics.Sprites
         //}
         //#endregion
 
+        #region Public methods
+
         /// <summary>
         /// Removes sprites from all SpriteCollections
         /// </summary>
@@ -947,6 +949,8 @@ namespace SdlDotNet.Graphics.Sprites
         {
             ((ICollection)this).CopyTo(array, index);
         }
+
+        #endregion
 
         ///// <summary>
         ///// Insert a Sprite into the collection

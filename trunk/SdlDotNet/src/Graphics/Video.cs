@@ -30,45 +30,7 @@ using SdlDotNet.Core;
 
 namespace SdlDotNet.Graphics
 {
-    /// <summary>
-    /// Alpha flags for Video
-    /// </summary>
-    /// <remarks></remarks>
-    [FlagsAttribute]
-    public enum Alphas
-    {
-        /// <summary>
-        /// Equivalent to SDL_RLEACCEL
-        /// </summary>
-        RleEncoded = Sdl.SDL_RLEACCEL,
-
-        /// <summary>
-        /// Equivalent to SDL_SRCALPHA
-        /// </summary>
-        SourceAlphaBlending = Sdl.SDL_SRCALPHA
-    }
-
-    /// <summary>
-    /// Status of Movie
-    /// </summary>
-    /// <remarks></remarks>
-    public enum MovieStatus
-    {
-        /// <summary>
-        /// Movie is playing
-        /// </summary>
-        Playing = Smpeg.SMPEG_PLAYING,
-        /// <summary>
-        /// Movie is stopped
-        /// </summary>
-        Stopped = Smpeg.SMPEG_STOPPED,
-        /// <summary>
-        /// Error in movie playback
-        /// </summary>
-        Error = Smpeg.SMPEG_ERROR
-    }
-
-    #region OpenGLAttribute
+    #region OpenGLAttr
     /// <summary>
     /// Public enumeration for setting the OpenGL window Attributes
     /// </summary>
@@ -150,35 +112,9 @@ namespace SdlDotNet.Graphics
         /// </summary>
         SwapControl = Sdl.SDL_GL_SWAP_CONTROL
     }
-    #endregion OpenGLAttribute
+    #endregion OpenGLAttr
 
-    /// <summary>
-    /// Text Style
-    /// </summary>
-    /// <remarks></remarks>
-    [FlagsAttribute]
-    public enum Styles
-    {
-        /// <summary>
-        /// Normal.
-        /// </summary>
-        /// <remarks>
-        /// FXCop wants this to be called 'None' instead of 'Normal'
-        /// </remarks>
-        None = SdlTtf.TTF_STYLE_NORMAL,
-        /// <summary>
-        /// Bold
-        /// </summary>
-        Bold = SdlTtf.TTF_STYLE_BOLD,
-        /// <summary>
-        /// Italic
-        /// </summary>
-        Italic = SdlTtf.TTF_STYLE_ITALIC,
-        /// <summary>
-        /// Underline
-        /// </summary>
-        Underline = SdlTtf.TTF_STYLE_UNDERLINE
-    }
+    #region VideoModes
 
     /// <summary>
     /// 
@@ -240,6 +176,9 @@ namespace SdlDotNet.Graphics
         /// </summary>
         NoFrame = Sdl.SDL_NOFRAME
     }
+
+    #endregion
+
     /// <summary>
     /// Provides methods to set the video mode, create video surfaces, 
     /// hide and show the mouse cursor,
@@ -247,12 +186,22 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public static class Video
     {
+        #region Private fields
+
         static readonly int USE_CURRENT_BPP = 0;
+
+        #endregion
+
+        #region Constructors
 
         static Video()
         {
             Initialize();
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Closes and destroys this object
@@ -345,6 +294,7 @@ namespace SdlDotNet.Graphics
                 return (Sdl.SDL_GetAppState() & (int)Focus.Application) != 0;
             }
         }
+
         /// <summary>
         /// Returns the highest bitsperpixel supported 
         /// for the given width and height
@@ -654,7 +604,6 @@ namespace SdlDotNet.Graphics
             return new Surface(Sdl.SDL_SetVideoMode(width, height, bitsPerPixel, (int)flags), true);
         }
 
-
         /// <summary>
         /// Gets the surface for the window or screen, 
         /// must be preceded by a call to SetVideoMode
@@ -730,6 +679,7 @@ namespace SdlDotNet.Graphics
         {
             Sdl.SDL_GL_SwapBuffers();
         }
+
         /// <summary>
         /// Sets an OpenGL attribute
         /// </summary>
@@ -742,6 +692,7 @@ namespace SdlDotNet.Graphics
                 throw SdlException.Generate();
             }
         }
+
         /// <summary>
         /// Gets the value of an OpenGL attribute
         /// </summary>
@@ -1063,7 +1014,6 @@ namespace SdlDotNet.Graphics
             }
         }
 
-
         /// <summary>
         /// gets or sets the text for the current window
         /// </summary>
@@ -1167,6 +1117,7 @@ namespace SdlDotNet.Graphics
         {
             return (Sdl.SDL_WM_IconifyWindow() != (int)SdlFlag.Success);
         }
+
         /// <summary>
         /// Forces keyboard focus and prevents the mouse from leaving the window
         /// </summary>
@@ -1366,5 +1317,7 @@ namespace SdlDotNet.Graphics
                 }
             }
         }
+
+        #endregion
     }
 }

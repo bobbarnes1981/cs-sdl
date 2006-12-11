@@ -28,11 +28,17 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public class Transformation
     {
+        #region Private fields
+
         double scaleX = 1.0;
         double scaleY = 1.0;
         double zoom = 1.0;
         bool antiAlias = true;
         int degreesOfRotation;
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// Basic constructor
@@ -100,6 +106,10 @@ namespace SdlDotNet.Graphics
             : this(1.0, 1.0, 1.0, true, degreesOfRotation)
         {
         }
+
+        #endregion
+
+        #region Public methods
 
         /// <summary>
         /// Stretch surface in X-axis by this amount
@@ -175,5 +185,7 @@ namespace SdlDotNet.Graphics
                 antiAlias = value;
             }
         }
+
+        #endregion
     }
 }
