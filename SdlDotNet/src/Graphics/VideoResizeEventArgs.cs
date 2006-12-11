@@ -30,6 +30,8 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public class VideoResizeEventArgs : SdlEventArgs
     {
+        #region Constructors
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -48,6 +50,10 @@ namespace SdlDotNet.Graphics
             : base(evt)
         {
         }
+
+        #endregion
+
+        #region Public methods
 
         /// <summary>
         /// Width of window
@@ -71,5 +77,6 @@ namespace SdlDotNet.Graphics
             }
         }
 
+        #endregion
     }
 }

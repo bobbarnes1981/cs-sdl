@@ -52,7 +52,8 @@ namespace SdlDotNet.Particles.Emitters
         public ParticleSurfaceEmitter(ParticleSystem system, Surface surface)
             : base(system)
         {
-            m_Surfaces = new SurfaceCollection(surface);
+            m_Surfaces = new SurfaceCollection();
+            m_Surfaces.Add(surface);
         }
         /// <summary>
         /// Creates a new particle emitter that emits surface objects.
@@ -70,7 +71,8 @@ namespace SdlDotNet.Particles.Emitters
         /// <param name="surface">The surface to emit.</param>
         public ParticleSurfaceEmitter(Surface surface)
         {
-            m_Surfaces = new SurfaceCollection(surface);
+            m_Surfaces = new SurfaceCollection();
+            m_Surfaces.Add(surface);
         }
         /// <summary>
         /// Creates a new particle emitter that emits surface objects.

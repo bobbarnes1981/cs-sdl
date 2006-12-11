@@ -33,7 +33,6 @@ namespace SdlDotNet.Graphics.Sprites
     /// </summary>
     public class AnimatedSprite : Sprite
     {
-
         #region Constructors
         /// <summary>
         /// Constructor
@@ -165,6 +164,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         private string m_CurrentAnimation = "Default";
+
         /// <summary>
         /// Gets and sets the current animation.
         /// </summary>
@@ -177,7 +177,7 @@ namespace SdlDotNet.Graphics.Sprites
             set
             {
                 // Check to see if it exists.
-                if (!m_Animations.Contains(value))
+                if (!m_Animations.ContainsKey(value))
                 {
                     throw new SdlException("The given animation (" + value + ") does not exist in this AnimatedSprite Animation.");
                 }
@@ -353,6 +353,7 @@ namespace SdlDotNet.Graphics.Sprites
 
         #region Private Methods
         private System.Timers.Timer m_Timer = new System.Timers.Timer(500);
+
         private void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             Animation current = m_Animations[m_CurrentAnimation];
@@ -407,6 +408,5 @@ namespace SdlDotNet.Graphics.Sprites
             }
         }
         #endregion IDisposable Members
-
     }
 }

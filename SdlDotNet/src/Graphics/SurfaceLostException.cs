@@ -33,6 +33,8 @@ namespace SdlDotNet.Graphics
     [Serializable()]
     public class SurfaceLostException : SdlException
     {
+        #region Constructors
+
         /// <summary>
         /// Basic exception.
         /// </summary>
@@ -69,5 +71,7 @@ namespace SdlDotNet.Graphics
             : base(info, context)
         {
         }
+
+        #endregion
     }
 }

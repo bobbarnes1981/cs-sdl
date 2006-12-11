@@ -35,12 +35,18 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public static class VideoInfo
     {
+        #region Constructors
+
         static VideoInfo()
         {
             Video.Initialize();
             //			stringManager = 
             //				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
         }
+
+        #endregion
+
+        #region Private fields
 
         private static Sdl.SDL_VideoInfo VideoInfoStruct
         {
@@ -69,6 +75,10 @@ namespace SdlDotNet.Graphics
                     typeof(Sdl.SDL_PixelFormat));
             }
         }
+
+        #endregion
+
+        #region Public Methods
 
         /// <summary>
         /// Bits Per Pixel. Typically 8, 16 or 32.
@@ -355,5 +365,7 @@ namespace SdlDotNet.Graphics
                 return VideoInfo.VideoInfoStruct.current_w;
             }
         }
+
+        #endregion
     }
 }

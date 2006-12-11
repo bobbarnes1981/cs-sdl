@@ -31,6 +31,28 @@ using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Graphics
 {
+    #region Alphas
+
+    /// <summary>
+    /// Alpha flags for Video
+    /// </summary>
+    /// <remarks></remarks>
+    [FlagsAttribute]
+    internal enum Alphas
+    {
+        /// <summary>
+        /// Equivalent to SDL_RLEACCEL
+        /// </summary>
+        RleEncoded = Sdl.SDL_RLEACCEL,
+
+        /// <summary>
+        /// Equivalent to SDL_SRCALPHA
+        /// </summary>
+        SourceAlphaBlending = Sdl.SDL_SRCALPHA
+    }
+
+    #endregion
+
     /// <summary>
     /// Represents an Sdl drawing surface.
     /// You can create instances of this class with the methods in the Video 

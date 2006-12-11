@@ -36,8 +36,8 @@ namespace SdlDotNet.Tests
 		public void TestImageLoad()
 		{
 			// Load the image
-			SurfaceCollection id = new SurfaceCollection("../../../examples/SpriteGuiDemos/Data/marble1.png");
-      
+			SurfaceCollection id = new SurfaceCollection();
+            id.Add(new Surface("../../../examples/SpriteGuiDemos/Data/marble1.png"));
 			// Make sure the height and width match
 			Assert.AreEqual(384, id.Size.Width);
 			Assert.AreEqual(384, id.Size.Height);

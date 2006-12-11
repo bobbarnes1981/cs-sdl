@@ -20,6 +20,7 @@
 
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 using System.Collections;
 using System.IO;
 
@@ -31,8 +32,10 @@ namespace SdlDotNet.Graphics
     /// <summary>
     /// Encapsulates the collection of Surface objects.
     /// </summary>
-    public class SurfaceCollection : CollectionBase, ICollection
+    public class SurfaceCollection : List<Surface>
     {
+        #region Constructors
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -48,31 +51,6 @@ namespace SdlDotNet.Graphics
         public SurfaceCollection(SurfaceCollection surfaces)
         {
             this.Add(surfaces);
-        }
-
-        /// <summary>
-        /// Create collection with image as the first surface
-        /// </summary>
-        /// <param name="fileName">
-        /// filename of surface to put into collection
-        /// </param>
-        public SurfaceCollection(string fileName)
-        {
-            this.List.Add(new Surface(fileName));
-        }
-
-        void ICollection.CopyTo(Array array, int index)
-        {
-            this.List.CopyTo(array, index);
-        }
-
-        /// <summary>
-        /// Create a collection with one surface element.
-        /// </summary>
-        /// <param name="surface">The surface to add to the new collection.</param>
-        public SurfaceCollection(Surface surface)
-        {
-            Add(surface);
         }
 
         /// <summary>
@@ -107,7 +85,7 @@ namespace SdlDotNet.Graphics
                 }
 
                 // Load it
-                this.List.Add(new Surface(fn));
+                this.Add(new Surface(fn));
                 i++;
             }
         }
@@ -180,7 +158,7 @@ namespace SdlDotNet.Graphics
                         new Point(0, 0),
                         new Rectangle(tileX * tileSize.Width,
                         tileY * tileSize.Height, tileSize.Width, tileSize.Height));
-                    this.List.Add(tile);
+                    this.Add(tile);
                 }
             }
         }
@@ -214,52 +192,13 @@ namespace SdlDotNet.Graphics
                     new Rectangle(tileX * tileSize.Width,
                     rowNumber * tileSize.Height, tileSize.Width, tileSize.Height));
                 //tile.TransparentColor = fullImage.TransparentColor;
-                this.List.Add(tile);
+                this.Add(tile);
             }
         }
 
-        /// <summary>
-        /// Indexer for the Items in the Collection
-        /// </summary>
-        public virtual Surface this[int index]
-        {
-            get
-            {
-                if (this.Count == 0)
-                {
-                    return ((Surface)List[index]);
-                }
-                else
-                {
-                    return ((Surface)List[index % this.Count]);
-                }
-            }
-            set
-            {
-                if (this.Count == 0)
-                {
-                    List[index] = value;
-                }
-                else
-                {
-                    List[index % this.Count] = value;
-                }
-            }
-        }
+        #endregion Constructors
 
-        /// <summary>
-        /// Adds the specified Surface to the end of the SurfaceCollection.
-        /// </summary>
-        /// <param name="surface">
-        /// The Surface to be added to the end of the SurfaceCollection.
-        /// </param>
-        /// <returns>
-        /// The index at which the Surface has been added.
-        /// </returns>
-        public int Add(Surface surface)
-        {
-            return (List.Add(surface));
-        }
+        #region Public Methods
 
         /// <summary>
         /// Adds the specified Surface to the end of the SurfaceCollection.
@@ -278,103 +217,9 @@ namespace SdlDotNet.Graphics
             }
             for (int i = 0; i < surfaceCollection.Count; i++)
             {
-                this.List.Add(surfaceCollection[i]);
+                this.Add(surfaceCollection[i]);
             }
             return this.Count;
-        }
-
-        /// <summary>
-        /// Load a Surface with the specified filename and add 
-        /// it to the end of the SurfaceCollection.
-        /// </summary>
-        /// <param name="fileName">
-        /// The filename of the Surface 
-        /// to be added to the end of the SurfaceCollection.
-        /// </param>
-        /// <returns>
-        /// The index at which the Surface has been added.
-        /// </returns>
-        public int Add(string fileName)
-        {
-            return (this.Add(new Surface(fileName)));
-        }
-
-
-        /// <summary>
-        /// Create a Surface from a byte array and add it to the end 
-        /// of the SurfaceCollection.
-        /// </summary>
-        /// <param name="array">
-        /// The array of byte to create the Image 
-        /// from.
-        /// </param>
-        /// <returns>
-        /// The index at which the Surface has been added.
-        /// </returns>
-        public int Add(byte[] array)
-        {
-            return (List.Add(new Surface(array)));
-        }
-
-        /// <summary>
-        /// Create a Surface from a System.Drawing.Bitmap and add it 
-        /// to the end of the SurfaceCollection.
-        /// </summary>
-        /// <param name="bitmap">
-        /// The System.Drawing.Bitmap to create the 
-        /// Image from.
-        /// </param>
-        /// <returns>
-        /// The index at which the Surface has been added.
-        /// </returns>
-        public int Add(Bitmap bitmap)
-        {
-            return (List.Add(new Surface(bitmap)));
-        }
-
-        /// <summary>
-        /// Adds the specified Surface to the SurfaceCollection.
-        /// </summary>
-        /// <param name="index">Index at which to insert to new surface</param>
-        /// <param name="surface">Surface to insert</param>
-        public void Insert(int index, Surface surface)
-        {
-            List.Insert(index, surface);
-        }
-
-        /// <summary>
-        /// Removes a specified Surface from the collection.
-        /// </summary>
-        /// <param name="surface">
-        /// The Surface to remove from the SurfaceCollection.
-        /// </param>
-        public void Remove(Surface surface)
-        {
-            List.Remove(surface);
-        }
-
-        /// <summary>
-        /// Returns the index of a specified Surface in the collection.
-        /// </summary>
-        /// <param name="surface">The surface object</param>
-        /// <returns>The index of specified surface in the collection</returns>
-        public int IndexOf(Surface surface)
-        {
-            return (List.IndexOf(surface));
-        }
-
-        /// <summary>
-        /// Indicates whether a specified Surface is contained in the collection.
-        /// </summary>
-        /// <param name="surface">
-        /// The Surface to find in the collection.
-        /// </param>
-        /// <returns>
-        /// true if the Surface is found in the collection; otherwise, false.
-        /// </returns>
-        public bool Contains(Surface surface)
-        {
-            return (List.Contains(surface));
         }
 
         /// <summary>
@@ -389,23 +234,13 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Copy surface collection to array
-        /// </summary>
-        /// <param name="array">Array to copy collection to</param>
-        /// <param name="index">Start at this index</param>
-        public virtual void CopyTo(Surface[] array, int index)
-        {
-            ((ICollection)this).CopyTo(array, index);
-        }
-
-        /// <summary>
         /// Copy array
         /// </summary>
         /// <param name="array">Array to copy collection to</param>
         /// <param name="index">Start index</param>
         public virtual void CopyTo(Array array, int index)
         {
-            this.List.CopyTo(array, index);
+            this.CopyTo(array, index);
         }
 
         /// <summary>
@@ -420,7 +255,7 @@ namespace SdlDotNet.Graphics
             }
             set
             {
-                foreach (Surface surface in this.List)
+                foreach (Surface surface in this)
                 {
                     surface.TransparentColor = value;
                 }
@@ -439,7 +274,7 @@ namespace SdlDotNet.Graphics
             }
             set
             {
-                foreach (Surface surface in this.List)
+                foreach (Surface surface in this)
                 {
                     surface.Transparent = value;
                 }
@@ -458,7 +293,7 @@ namespace SdlDotNet.Graphics
             }
             set
             {
-                foreach (Surface surface in this.List)
+                foreach (Surface surface in this)
                 {
                     surface.Alpha = value;
                 }
@@ -477,11 +312,13 @@ namespace SdlDotNet.Graphics
             }
             set
             {
-                foreach (Surface surface in this.List)
+                foreach (Surface surface in this)
                 {
                     surface.AlphaBlending = value;
                 }
             }
         }
+
+        #endregion
     }
 }
