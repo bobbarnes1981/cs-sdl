@@ -32,7 +32,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
     public class ViewportMode : DemoMode
     {
         private Sprite sprite;
-        SpriteCollection spriteSingle = new SpriteCollection();
+        SpriteDictionary spriteSingle = new SpriteDictionary();
         private Size size;
         static Random rand = new Random();
 
@@ -41,7 +41,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// <summary>
         /// 
         /// </summary>
-        public SpriteCollection CenterSprite
+        public SpriteDictionary CenterSprite
         {
             get
             {
@@ -122,7 +122,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// <summary>
         /// Adds the internal sprite manager to the outer one.
         /// </summary>
-        public override void Start(SpriteCollection manager)
+        public override void Start(SpriteDictionary manager)
         {
             base.Start(manager);
         }
@@ -130,7 +130,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// <summary>
         /// Removes the internal manager from the controlling manager.
         /// </summary>
-        public override void Stop(SpriteCollection manager)
+        public override void Stop(SpriteDictionary manager)
         {
             base.Stop(manager);
         }

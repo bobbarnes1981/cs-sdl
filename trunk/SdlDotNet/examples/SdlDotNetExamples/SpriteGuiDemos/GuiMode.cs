@@ -99,7 +99,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// </summary>
         /// <param name="gui"></param>
         /// <param name="sprites"></param>
-        public void CreateMenus(GuiManager gui, SpriteCollection sprites)
+        public void CreateMenus(GuiManager gui, SpriteDictionary sprites)
         {
             if (sprites == null)
             {
@@ -150,7 +150,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// <summary>
         /// Adds the internal sprite manager to the outer one.
         /// </summary>
-        public override void Start(SpriteCollection manager)
+        public override void Start(SpriteDictionary manager)
         {
             if (manager == null)
             {
@@ -166,7 +166,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// <summary>
         /// Removes the internal manager from the controlling manager.
         /// </summary>
-        public override void Stop(SpriteCollection manager)
+        public override void Stop(SpriteDictionary manager)
         {
             if (manager == null)
             {

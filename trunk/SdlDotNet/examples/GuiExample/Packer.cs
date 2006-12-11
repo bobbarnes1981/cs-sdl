@@ -110,8 +110,8 @@ namespace SdlDotNetExamples.GuiExample
         #endregion
 
         #region Properties
-        private SpriteCollection head = new SpriteCollection();
-        private SpriteCollection tail = new SpriteCollection();
+        private SpriteDictionary head = new SpriteDictionary();
+        private SpriteDictionary tail = new SpriteDictionary();
 
         /// <summary>
         /// 
@@ -136,7 +136,7 @@ namespace SdlDotNetExamples.GuiExample
         /// <summary>
         /// 
         /// </summary>
-        public SpriteCollection HeadSprites
+        public SpriteDictionary HeadSprites
         {
             get
             {
@@ -147,7 +147,7 @@ namespace SdlDotNetExamples.GuiExample
         /// <summary>
         /// 
         /// </summary>
-        public SpriteCollection TailSprites
+        public SpriteDictionary TailSprites
         {
             get
             {

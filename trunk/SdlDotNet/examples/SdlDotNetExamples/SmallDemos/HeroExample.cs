@@ -110,31 +110,42 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Events_Tick(object sender, TickEventArgs e)
         {
-            // Clear the screen, draw the hero and output to the window
-            Video.Screen.Fill(Color.DarkGreen);
-            hero.Render(Video.Screen);
-            Video.Screen.Update();
-
-            // If the hero is animated, he is walking, so move him around!
-            if (hero.Animate)
-            {
-                switch (hero.CurrentAnimation)
+           
+                // Clear the screen, draw the hero and output to the window
+                Video.Screen.Fill(Color.DarkGreen);
+                try
                 {
-                    case "WalkLeft":
-                        // 2 is the speed of the hero when walking.
-                        hero.X -= 2;
-                        break;
-                    case "WalkUp":
-                        hero.Y -= 2;
-                        break;
-                    case "WalkDown":
-                        hero.Y += 2;
-                        break;
-                    case "WalkRight":
-                        hero.X += 2;
-                        break;
-                }
+                hero.Render(Video.Screen);
             }
+            catch (System.ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.StackTrace.ToString());
+            }
+                Video.Screen.Update();
+            
+
+                // If the hero is animated, he is walking, so move him around!
+                if (hero.Animate)
+                {
+                    switch (hero.CurrentAnimation)
+                    {
+                        case "WalkLeft":
+                            // 2 is the speed of the hero when walking.
+                            hero.X -= 2;
+                            break;
+                        case "WalkUp":
+                            hero.Y -= 2;
+                            break;
+                        case "WalkDown":
+                            hero.Y += 2;
+                            break;
+                        case "WalkRight":
+                            hero.X += 2;
+                            break;
+                    }
+                }
+            
+
         }
 
         private void Events_KeyboardDown(object sender, KeyboardEventArgs e)

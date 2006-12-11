@@ -215,9 +215,9 @@ namespace SdlDotNet.Graphics
             {
                 throw new ArgumentNullException("surfaceCollection");
             }
-            for (int i = 0; i < surfaceCollection.Count; i++)
+            foreach (Surface s in surfaceCollection)
             {
-                this.Add(surfaceCollection[i]);
+                this.Add(s);
             }
             return this.Count;
         }

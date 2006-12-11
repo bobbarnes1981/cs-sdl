@@ -38,7 +38,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
 
         private Size size;
 
-        private SpriteCollection all = new SpriteCollection();
+        private SpriteDictionary all = new SpriteDictionary();
 
         Rectangle rect;
 
@@ -269,7 +269,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// <summary>
         /// Adds the internal sprite manager to the outer one.
         /// </summary>
-        public override void Start(SpriteCollection manager)
+        public override void Start(SpriteDictionary manager)
         {
             base.Start(manager);
         }
@@ -277,7 +277,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// <summary>
         /// Removes the internal manager from the controlling manager.
         /// </summary>
-        public override void Stop(SpriteCollection manager)
+        public override void Stop(SpriteDictionary manager)
         {
             base.Stop(manager);
         }

@@ -43,7 +43,7 @@ namespace SdlDotNetExamples.GuiExample
         /// used for any requests for fonts. Specific fonts may assigned,
         /// the base system will always fall back to the baseFont.
         /// </summary>
-        public GuiManager(SpriteCollection spriteManager, SdlDotNet.Graphics.Font baseFont,
+        public GuiManager(SpriteDictionary spriteManager, SdlDotNet.Graphics.Font baseFont,
             Size size)
         {
             this.spriteManager = spriteManager;
@@ -493,7 +493,7 @@ namespace SdlDotNetExamples.GuiExample
         #endregion
 
         #region Properties
-        private SpriteCollection spriteManager;
+        private SpriteDictionary spriteManager;
         private Size size = Size.Empty;
 
         private Color titleColor = Color.FromArgb(250, 250, 250);
@@ -547,7 +547,7 @@ namespace SdlDotNetExamples.GuiExample
         /// <summary>
         /// 
         /// </summary>
-        public SpriteCollection SpriteManager
+        public SpriteDictionary SpriteManager
         {
             get
             {

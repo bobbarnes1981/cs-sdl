@@ -43,7 +43,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// <summary>
         /// 
         /// </summary>
-        private SpriteCollection sprites = new SpriteCollection();
+        private SpriteDictionary sprites = new SpriteDictionary();
         static Random rand = new Random();
         static string data_directory = @"Data/";
         static string filepath = @"../../";
@@ -117,7 +117,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// Indicates to the demo page that it should start displaying its
         /// data in the given sprite manager.
         /// </summary>
-        public virtual void Start(SpriteCollection manager)
+        public virtual void Start(SpriteDictionary manager)
         {
             if (manager == null)
             {
@@ -130,7 +130,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// Indicates to the demo page that it should stop displaying its
         /// data in the given sprite manager.
         /// </summary>
-        public virtual void Stop(SpriteCollection manager)
+        public virtual void Stop(SpriteDictionary manager)
         {
             if (manager == null)
             {
@@ -172,7 +172,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         /// <summary>
         /// 
         /// </summary>
-        public SpriteCollection Sprites
+        public SpriteDictionary Sprites
         {
             get
             {

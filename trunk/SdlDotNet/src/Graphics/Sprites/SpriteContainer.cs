@@ -27,7 +27,7 @@ using System.Globalization;
 namespace SdlDotNet.Graphics.Sprites
 {
     /// <summary>
-    /// The SpriteCollection is a special case of sprite. It is used to
+    /// The SpriteDictionary is a special case of sprite. It is used to
     /// group other sprites into an easily managed whole. The sprite
     /// manager has no size.
     /// </summary>
@@ -79,14 +79,14 @@ base(surface, rectangle, positionZ)
         {
         }
 
-        private SpriteCollection sprites = new SpriteCollection();
+        private SpriteDictionary sprites = new SpriteDictionary();
         /// <summary>
         /// Collection of sprites that make up the SpriteContainer
         /// </summary>
         /// <remarks>
         /// These sprites will be blit onto the main Surface of the SpriteContainer.
         /// </remarks>
-        public SpriteCollection Sprites
+        public SpriteDictionary Sprites
         {
             get
             {

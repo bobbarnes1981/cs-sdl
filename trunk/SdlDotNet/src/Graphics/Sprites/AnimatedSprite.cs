@@ -212,7 +212,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </returns>
         public override Surface Render()
         {
-            return this.m_Animations[m_CurrentAnimation][m_Frame];
+            return this.m_Animations[m_CurrentAnimation][m_Frame % this.Animations[m_CurrentAnimation].Count];
         }
 
         private int m_Frame;

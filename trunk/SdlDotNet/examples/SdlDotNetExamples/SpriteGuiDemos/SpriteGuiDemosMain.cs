@@ -348,8 +348,8 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         #endregion
 
         #region Properties
-        private static SpriteCollection master = new SpriteCollection();
-        private static SpriteCollection manager = new SpriteCollection();
+        private static SpriteDictionary master = new SpriteDictionary();
+        private static SpriteDictionary manager = new SpriteDictionary();
         //		MouseMotionEventHandler MouseMotionHandler;
         private Surface screen;
         private GuiWindow statusWindow;
