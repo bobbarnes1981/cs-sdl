@@ -955,19 +955,19 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Blit entire SpriteCollection to Surface
+        /// Blit entire SpriteDictionary to Surface
         /// </summary>
-        /// <param name="spriteCollection">SpriteCollection to Blit</param>
+        /// <param name="SpriteDictionary">SpriteDictionary to Blit</param>
         /// <returns>Collection of Rectangles acutally blit to since 
         /// ere have may been some clipping.
         /// </returns>
-        public List<Rectangle> Blit(SpriteCollection spriteCollection)
+        public List<Rectangle> Blit(SpriteDictionary SpriteDictionary)
         {
-            if (spriteCollection == null)
+            if (SpriteDictionary == null)
             {
-                throw new ArgumentNullException("spriteCollection");
+                throw new ArgumentNullException("SpriteDictionary");
             }
-            return spriteCollection.Draw(this);
+            return SpriteDictionary.Draw(this);
         }
 
         /// <summary>
@@ -1028,20 +1028,20 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Erases SpriteCollection from surface
+        /// Erases SpriteDictionary from surface
         /// </summary>
-        /// <param name="spriteCollection">SpriteCollection to erase</param>
+        /// <param name="SpriteDictionary">SpriteDictionary to erase</param>
         /// <param name="background">
-        /// Background Surface to cover up SpriteCollection
+        /// Background Surface to cover up SpriteDictionary
         /// </param>
-        public void Erase(SpriteCollection spriteCollection,
+        public void Erase(SpriteDictionary SpriteDictionary,
             Surface background)
         {
-            if (spriteCollection == null)
+            if (SpriteDictionary == null)
             {
-                throw new ArgumentNullException("spriteCollection");
+                throw new ArgumentNullException("SpriteDictionary");
             }
-            spriteCollection.Erase(this, background);
+            SpriteDictionary.Erase(this, background);
         }
 
         /// <summary>

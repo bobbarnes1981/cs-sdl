@@ -57,14 +57,14 @@ namespace SdlDotNet.Graphics.Sprites
             this.Add(key, animation);
         }
 
-        /// <summary>
-        /// Creates an AnimationDictionary with a "Default" animation of surfaces.
-        /// </summary>
-        /// <param name="surfaces"></param>
-        public AnimationDictionary(SurfaceCollection surfaces)
-        {
-            this.Add("Default", surfaces);
-        }
+        ///// <summary>
+        ///// Creates an AnimationDictionary with a "Default" animation of surfaces.
+        ///// </summary>
+        ///// <param name="surfaces"></param>
+        //public AnimationDictionary(SurfaceCollection surfaces)
+        //{
+        //    this.Add("Default", surfaces);
+        //}
 
 
         /// <summary>
@@ -188,17 +188,17 @@ namespace SdlDotNet.Graphics.Sprites
 
         #region Functions
 
-        /// <summary>
-        /// Adds a surface Dictionary to the Dictionary as an animation.
-        /// </summary>
-        /// <param name="key">The name of the animation.</param>
-        /// <param name="surfaces">The SurfaceDictionary that represents the animation.</param>
-        /// <returns>The final number of elements within the Dictionary.</returns>
-        public int Add(string key, SurfaceCollection surfaces)
-        {
-            this.Add(key, new Animation(surfaces));
-            return this.Count;
-        }
+        ///// <summary>
+        ///// Adds a surface Dictionary to the Dictionary as an animation.
+        ///// </summary>
+        ///// <param name="key">The name of the animation.</param>
+        ///// <param name="surfaces">The SurfaceDictionary that represents the animation.</param>
+        ///// <returns>The final number of elements within the Dictionary.</returns>
+        //public int Add(string key, SurfaceCollection surfaces)
+        //{
+        //    this.Add(key, new Animation(surfaces));
+        //    return this.Count;
+        //}
 
         /// <summary>
         /// Adds a Dictionary of music to the current music Dictionary.

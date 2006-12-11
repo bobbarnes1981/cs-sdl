@@ -40,8 +40,8 @@ namespace SdlDotNetExamples.SmallDemos
 										"we will walk",
 										"in bitter rain"
 									};
-        SpriteCollection snowflakes = new SpriteCollection();
-        SpriteCollection textItems = new SpriteCollection();
+        SpriteDictionary snowflakes = new SpriteDictionary();
+        SpriteDictionary textItems = new SpriteDictionary();
         Surface screen;
         Surface background;
         Surface tree;

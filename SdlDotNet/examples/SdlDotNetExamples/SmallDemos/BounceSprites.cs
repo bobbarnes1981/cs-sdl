@@ -41,7 +41,7 @@ namespace SdlDotNetExamples.SmallDemos
     {
         #region Fields
         private Surface screen; //video screen
-        private SpriteCollection master = new SpriteCollection(); //holds all sprites
+        private SpriteDictionary master = new SpriteDictionary(); //holds all sprites
         private int width = 640; //screen width
         private int height = 480; //screen height
         private int maxBalls = 10; //number of balls to display

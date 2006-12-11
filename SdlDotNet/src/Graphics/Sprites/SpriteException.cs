@@ -32,6 +32,8 @@ namespace SdlDotNet.Graphics.Sprites
     [Serializable()]
     public class SpriteException : SdlException
     {
+        #region Constructors
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -66,5 +68,7 @@ namespace SdlDotNet.Graphics.Sprites
             : base(info, context)
         {
         }
+
+        #endregion
     }
 }

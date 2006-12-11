@@ -32,38 +32,38 @@ using SdlDotNet.Audio;
 namespace SdlDotNet.Graphics.Sprites
 {
     /// <summary>
-    /// The SpriteCollection is used to group sprites into an easily managed whole. 
+    /// The SpriteDictionary is used to group sprites into an easily managed whole. 
     /// </summary>
     /// <remarks>The sprite manager has no size.</remarks>
-    public class SpriteCollection : Dictionary<Sprite, Rectangle>
+    public class SpriteDictionary : Dictionary<Sprite, Rectangle>
     {
         #region Constructors
         /// <summary>
-        /// Creates a new SpriteCollection without any elements in it.
+        /// Creates a new SpriteDictionary without any elements in it.
         /// </summary>
-        public SpriteCollection()
+        public SpriteDictionary()
             : base()
         {
         }
 
         /// <summary>
-        /// Creates a new SpriteCollection with one sprite element in it.
+        /// Creates a new SpriteDictionary with one sprite element in it.
         /// </summary>
         /// <param name="sprite">Sprite to add to collection</param>
-        public SpriteCollection(Sprite sprite)
+        public SpriteDictionary(Sprite sprite)
             : base()
         {
             //this.AddInternal(sprite);
         }
 
         /// <summary>
-        /// Creates a new SpriteCollection based off a different sprite collection.
+        /// Creates a new SpriteDictionary based off a different sprite collection.
         /// </summary>
-        /// <param name="spriteCollection">Add Spritecollection to this SpriteCollection</param>
-        public SpriteCollection(SpriteCollection spriteCollection)
+        /// <param name="SpriteDictionary">Add SpriteDictionary to this SpriteDictionary</param>
+        public SpriteDictionary(SpriteDictionary SpriteDictionary)
             : base()
         {
-            //this.AddInternal(spriteCollection);
+            //this.AddInternal(SpriteDictionary);
         }
 
 
@@ -108,12 +108,12 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Erases SpriteCollection from surface
+        /// Erases SpriteDictionary from surface
         /// </summary>
         /// <param name="surface">
-        /// Surface to remove the SpriteCollection from</param>
+        /// Surface to remove the SpriteDictionary from</param>
         /// <param name="background">B
-        /// ackground to use to paint over Sprites in SpriteCollection
+        /// ackground to use to paint over Sprites in SpriteDictionary
         /// </param>
         public void Erase(Surface surface, Surface background)
         {
@@ -163,14 +163,14 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Adds sprites from another group to this group
         /// </summary>
-        /// <param name="spriteCollection">SpriteCollection to add Sprites from</param>
-        public virtual int Add(SpriteCollection spriteCollection)
+        /// <param name="SpriteDictionary">SpriteDictionary to add Sprites from</param>
+        public virtual int Add(SpriteDictionary SpriteDictionary)
         {
-            if (spriteCollection == null)
+            if (SpriteDictionary == null)
             {
-                throw new ArgumentNullException("spriteCollection");
+                throw new ArgumentNullException("SpriteDictionary");
             }
-            foreach (Sprite s in spriteCollection.Keys)
+            foreach (Sprite s in SpriteDictionary.Keys)
             {
                 //s.AddInternal(this);
                 Add(s);
@@ -178,15 +178,15 @@ namespace SdlDotNet.Graphics.Sprites
             return this.Count;
         }
 
-        private int AddInternal(SpriteCollection spriteCollection)
+        private int AddInternal(SpriteDictionary SpriteDictionary)
         {
-            if (spriteCollection == null)
+            if (SpriteDictionary == null)
             {
-                throw new ArgumentNullException("spriteCollection");
+                throw new ArgumentNullException("SpriteDictionary");
             }
-            foreach (Sprite s in spriteCollection.Keys)
+            foreach (Sprite s in SpriteDictionary.Keys)
             {
-                //spriteCollection[i].AddInternal(this);
+                //SpriteDictionary[i].AddInternal(this);
                 Add(s);
             }
             return this.Count;
@@ -239,16 +239,16 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Removes sprite from this group if they are contained in the given group
         /// </summary>
-        /// <param name="spriteCollection">
-        /// Remove SpriteCollection from this SpriteCollection.
+        /// <param name="SpriteDictionary">
+        /// Remove SpriteDictionary from this SpriteDictionary.
         /// </param>
-        public virtual void Remove(SpriteCollection spriteCollection)
+        public virtual void Remove(SpriteDictionary SpriteDictionary)
         {
-            if (spriteCollection == null)
+            if (SpriteDictionary == null)
             {
-                throw new ArgumentNullException("spriteCollection");
+                throw new ArgumentNullException("SpriteDictionary");
             }
-            foreach (Sprite s in spriteCollection.Keys)
+            foreach (Sprite s in SpriteDictionary.Keys)
             {
                 if (this.ContainsKey(s))
                 {
@@ -289,7 +289,7 @@ namespace SdlDotNet.Graphics.Sprites
         #region Events
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableActiveEvent()
         {
@@ -297,7 +297,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableJoystickAxisEvent()
         {
@@ -305,7 +305,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableJoystickBallEvent()
         {
@@ -313,7 +313,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableJoystickButtonEvent()
         {
@@ -322,7 +322,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableJoystickButtonDownEvent()
         {
@@ -330,7 +330,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableJoystickButtonUpEvent()
         {
@@ -338,7 +338,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableJoystickHatEvent()
         {
@@ -346,7 +346,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableKeyboardEvent()
         {
@@ -355,14 +355,14 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableKeyboardDownEvent()
         {
             Events.KeyboardDown += new KeyboardEventHandler(Update);
         }
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableKeyboardUpEvent()
         {
@@ -370,7 +370,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableMouseButtonEvent()
         {
@@ -379,7 +379,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableMouseButtonDownEvent()
         {
@@ -387,7 +387,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableMouseButtonUpEvent()
         {
@@ -395,7 +395,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableMouseMotionEvent()
         {
@@ -403,7 +403,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableUserEvent()
         {
@@ -411,7 +411,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableQuitEvent()
         {
@@ -419,7 +419,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableVideoExposeEvent()
         {
@@ -427,7 +427,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableVideoResizeEvent()
         {
@@ -435,7 +435,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableChannelFinishedEvent()
         {
@@ -443,7 +443,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableMusicFinishedEvent()
         {
@@ -451,7 +451,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Enables Event for SpriteCollection
+        /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableTickEvent()
         {
@@ -459,7 +459,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableActiveEvent()
         {
@@ -467,7 +467,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableJoystickAxisEvent()
         {
@@ -475,7 +475,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableJoystickBallEvent()
         {
@@ -483,7 +483,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableJoystickButtonEvent()
         {
@@ -492,7 +492,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableJoystickButtonDownEvent()
         {
@@ -500,7 +500,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableJoystickButtonUpEvent()
         {
@@ -508,7 +508,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableJoystickHatEvent()
         {
@@ -516,7 +516,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableKeyboardEvent()
         {
@@ -525,7 +525,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableKeyboardDownEvent()
         {
@@ -533,7 +533,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableKeyboardUpEvent()
         {
@@ -541,7 +541,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableMouseButtonEvent()
         {
@@ -550,7 +550,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableMouseButtonDownEvent()
         {
@@ -558,7 +558,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableMouseButtonUpEvent()
         {
@@ -566,7 +566,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableMouseMotionEvent()
         {
@@ -574,7 +574,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableUserEvent()
         {
@@ -582,7 +582,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableQuitEvent()
         {
@@ -590,7 +590,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableVideoExposeEvent()
         {
@@ -598,7 +598,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableVideoResizeEvent()
         {
@@ -606,7 +606,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableChannelFinishedEvent()
         {
@@ -614,7 +614,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableMusicFinishedEvent()
         {
@@ -622,7 +622,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Disables Event for SpriteCollection
+        /// Disables Event for SpriteDictionary
         /// </summary>
         public void DisableTickEvent()
         {
@@ -860,7 +860,7 @@ namespace SdlDotNet.Graphics.Sprites
         #region Public methods
 
         /// <summary>
-        /// Removes sprites from all SpriteCollections
+        /// Removes sprites from all SpriteDictionarys
         /// </summary>
         public virtual void Kill()
         {
@@ -875,12 +875,12 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         /// <param name="sprite">Sprite to intersect with</param>
         /// <returns>
-        /// SpriteCollection of sprite in this SpriteCollection that 
+        /// SpriteDictionary of sprite in this SpriteDictionary that 
         /// intersect with the given Sprite
         /// </returns>
-        public virtual SpriteCollection IntersectsWith(Sprite sprite)
+        public virtual SpriteDictionary IntersectsWith(Sprite sprite)
         {
-            SpriteCollection intersection = new SpriteCollection();
+            SpriteDictionary intersection = new SpriteDictionary();
             foreach (Sprite s in this.Keys)
             {
                 if (s.IntersectsWith(sprite))
@@ -892,33 +892,33 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Detects if any sprites in a given SpriteCollection 
-        /// intersect with any sprites in this SpriteCollection.
+        /// Detects if any sprites in a given SpriteDictionary 
+        /// intersect with any sprites in this SpriteDictionary.
         /// </summary>
-        /// <param name="spriteCollection">
-        /// SpriteCollection to check intersections
+        /// <param name="SpriteDictionary">
+        /// SpriteDictionary to check intersections
         /// </param>
         /// <returns>
-        /// Hashtable with sprites in this SpriteCollection as 
-        /// keys and SpriteCollections containing sprites they 
-        /// intersect with from the given SpriteCollection
+        /// Hashtable with sprites in this SpriteDictionary as 
+        /// keys and SpriteDictionarys containing sprites they 
+        /// intersect with from the given SpriteDictionary
         /// </returns>
-        public virtual Hashtable IntersectsWith(SpriteCollection spriteCollection)
+        public virtual Hashtable IntersectsWith(SpriteDictionary SpriteDictionary)
         {
-            if (spriteCollection == null)
+            if (SpriteDictionary == null)
             {
-                throw new ArgumentNullException("spriteCollection");
+                throw new ArgumentNullException("SpriteDictionary");
             }
             Hashtable intersection = new Hashtable();
             foreach (Sprite s in this.Keys)
             {
-                foreach (Sprite t in spriteCollection.Keys)
+                foreach (Sprite t in SpriteDictionary.Keys)
                 {
                     if (s.IntersectsWith(t))
                     {
                         if (intersection.Contains(s))
                         {
-                            //((SpriteCollection)intersection[s]).Add(t);
+                            //((SpriteDictionary)intersection[s]).Add(t);
                         }
                         else
                         {

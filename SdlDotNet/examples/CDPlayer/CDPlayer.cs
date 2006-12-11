@@ -93,7 +93,7 @@ namespace SdlDotNetExamples.CDPlayer
                 // Randomize rotation direction
                 bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
 
-                //Add the sprite to the SpriteCollection
+                //Add the sprite to the SpriteDictionary
                 master.Add(bounceSprite, bounceSprite.Rectangle);
             }
 
@@ -167,7 +167,7 @@ namespace SdlDotNetExamples.CDPlayer
         //    }
         //}
 
-        private SpriteCollection master = new SpriteCollection();
+        private SpriteDictionary master = new SpriteDictionary();
 
         #region Windows Form Designer generated code
         /// <summary>

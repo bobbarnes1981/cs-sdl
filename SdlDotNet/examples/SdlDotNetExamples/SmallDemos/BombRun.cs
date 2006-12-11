@@ -40,10 +40,10 @@ namespace SdlDotNetExamples.SmallDemos
         static Surface temporary;
         static Player player;
         static Surface tempSurface;
-        static SpriteCollection bombs = new SpriteCollection();
-        static SpriteCollection players = new SpriteCollection();
-        static SpriteCollection bullets = new SpriteCollection();
-        static SpriteCollection master = new SpriteCollection();
+        static SpriteDictionary bombs = new SpriteDictionary();
+        static SpriteDictionary players = new SpriteDictionary();
+        static SpriteDictionary bullets = new SpriteDictionary();
+        static SpriteDictionary master = new SpriteDictionary();
         static string data_directory = @"Data/";
         static string filepath = @"../../";
 
