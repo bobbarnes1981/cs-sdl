@@ -21,8 +21,6 @@
     <property name="lib.dir" value="lib/net-2.0" />
     <property name="doc.dir" value="doc" />
     <property name="native.sdl" value="Tao.Sdl"/>
-    <property name="Particles" value="Particles" />
-    <property name="OpenGl" value="OpenGl" />
 
     <target name="package" description="Package">
 	<nant buildfile="SdlDotNet.build" target="net-2.0 package" />
