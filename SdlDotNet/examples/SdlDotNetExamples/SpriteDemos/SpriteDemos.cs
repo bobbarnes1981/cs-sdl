@@ -263,7 +263,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         {
             get
             {
-                return "SpriteGuiDemos: Several demos showing sprites and a basic Gui";
+                return "SpriteDemos: Several demos showing sprites.";
             }
         }
 
