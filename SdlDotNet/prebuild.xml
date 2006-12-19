@@ -173,38 +173,6 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="GuiExample" path="examples/GuiExample" language="C#" type="Library" assemblyName="GuiExample" rootNamespace="SdlDotNetExamples.GuiExample" designerFolder="Properties">
-	    <Configuration name="Debug">
-		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
-		    <OptimizeCode>false</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Debug</OutputPath>
-		    <DebugInformation>true</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>4</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Configuration name="Release">
-		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
-		    <OptimizeCode>true</OptimizeCode>
-		    <AllowUnsafe>false</AllowUnsafe>
-		    <OutputPath>bin/Release</OutputPath>
-		    <DebugInformation>false</DebugInformation>
-		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
-		    <WarningLevel>1</WarningLevel>
-		    <SuppressWarnings>1595</SuppressWarnings>
-		</Options>
-	    </Configuration>
-	    <Reference name="System" /> 
-	    <Reference name="System.Drawing" /> 
-	    <Reference name="SdlDotNet" localCopy="true"/>
-	    <Files>
-		<Match path="." pattern="*.cs" recurse="true"/>
-	    </Files>
-	</Project>
 	<Project name="SdlDotNetExamples" path="examples/SdlDotNetExamples" language="C#" type="WinExe" startupObject="SdlDotNetExamples.Program" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
@@ -238,7 +206,6 @@
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
 	    <Reference name="SdlDotNet.Gtk" localCopy="true"/>
-	    <Reference name="GuiExample" localCopy="true"/>
 	    <Reference name="SdlDotNet.Particles" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-2.0" />
 	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
@@ -281,7 +248,6 @@
 	    <Reference name="System.Drawing" /> 
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="../lib/net-2.0"/>
-	    <Reference name="GuiExample" localCopy="true"/>
 	    <Reference name="nunit.framework" localCopy="true" path="../lib/net-2.0"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
