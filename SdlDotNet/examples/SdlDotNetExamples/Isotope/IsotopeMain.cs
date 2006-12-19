@@ -53,7 +53,6 @@ namespace SdlDotNetExamples.Isotope
         [STAThread]
         public static void Run()
         {
-
             filePath = Path.Combine("..", "..");
             string fileDirectory = "Data";
             string fileName = "amp.png";

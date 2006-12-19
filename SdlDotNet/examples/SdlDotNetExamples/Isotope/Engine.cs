@@ -138,14 +138,9 @@ namespace SdlDotNetExamples.Isotope
 
             //Graphical display elements
             //load the titlebar graphic as a sprite for drawing later. Users can reload their own image.
-            //if (titlefile==null)
-            //   titlefile=os.path.join(os.path.dirname(__file__),"titlebar.png");
-
             this.title_sprite = new Sprite();
             this.title_sprite.Surface = new Surface(titlefile);
-            //this.title_sprite.rect=this.title_sprite.image.get_rect();
 
-            //Rectangle rect=Surface.Rectangle;
             int[] offset ={ 200, 170 };
             this.display = new View(surface, this.player.scene, skin_group, offset);
             //Isometric display elements
@@ -156,8 +151,15 @@ namespace SdlDotNetExamples.Isotope
             //Load the default font: Do we need some tester here to ensure we find a font?
             //if (font==None)
             this.font = new SdlDotNet.Graphics.Font(Path.Combine(IsotopeMain.FilePath, "FreeSans.ttf"), 10);
-            //this.font = font;
+            Events.Quit += new QuitEventHandler(Events_Quit);
         }
+
+        void Events_Quit(object sender, QuitEventArgs e)
+        {
+            quit = 1;
+        }
+
+        int quit = 0;
 
         /// <summary>
         /// 
@@ -174,7 +176,7 @@ namespace SdlDotNetExamples.Isotope
             surface.Update();
 
             // Main game loop controlled with quit
-            int quit = 0;
+            
             int start_time, end_time, frame_time;
 
             while (quit == 0)
@@ -189,11 +191,8 @@ namespace SdlDotNetExamples.Isotope
                 // tick routines. Modifying these values in event receiver routines will mean that often a necessary collision
                 // detection has not occurred
                 // Update the movement of the objects in the players scene
-                //Console.WriteLine("Simulator update");
                 this.simulator.Update(this.player.scene);
-                //Console.WriteLine("Display Draw");
-                //Console.WriteLine(this.skin_group);
-                //Console.WriteLine(this.player.new_scene);
+               
                 // Update the isometric display
                 if (this.player.new_scene == this.player.scene)
                 {
@@ -292,79 +291,9 @@ namespace SdlDotNetExamples.Isotope
             {
                 kquit = 1;
             }
-
-
-            //Check other keys and window close/QUIT based on the event queue system
-            /*for (event in pygame.event.get()){
-               //Check for a quit program action caused by the window close and Control-C keypress
-               if (event.type is pygame.QUIT)
-                   kquit=1;
-               //Check for a quit game action
-               else if (event.type is pygame.KEYDOWN and event.key == pygame.K_ESCAPE)
-                   kquit=2;
-               //Check for the examine key
-               else if (event.type is pygame.KEYDOWN and event.key == this.keys.examine) {
-                   //If the player is carrying an object then show its examine images
-                   if (player.inventory.Length > 0 and isinstance(skin_group[player.inventory[player.usingk].objtype]
-                     ,examinable))
-                      this.examine(objectGroup,skin_group,player,surface);
-               }
-               //Check for pick up key
-               else if (event.type is pygame.KEYDOWN and event.key == this.keys.pick_up)
-                   player.event_pick_up();
-               //Check for the drop key
-               else if (event.type is pygame.KEYDOWN and event.key == this.keys.drop)
-                   player.event_drop();
-               //Check for the using key
-               else if (event.type is pygame.KEYDOWN and event.key == this.keys.usingk)
-                   player.event_using();
-            }*/
             return kquit;
         }
 
-        /*public examine(this,objectGroup,skin_group,player,surface){*/
-        /* Displays the examine images for the object that the player is using.
-
-              objectGroup: The group of objects in the players scene: list of Object3d class or subclass
-              player: The lead actor being used for the player: lead_actor class
-              skin_group: The group of skins to be used in the engines isometric view: skin class
-              surface: The area of the surface to draw into from the pygame window: surface class
-
-              Note: examine freezes the game and returns control when the player presses
-              the examine key again
-          */
-        /* //get the object number that we are using
-          using=player.using;
-          image=0;
-          quit=False;
-          //Display the examine images in sequence every keypress. If the player presses the examine key then exit
-          while (not quit){
-             //Display the image
-             examine_image = skin_group[player.inventory[using].objtype].examine_image[image];
-             examine_sprite=pygame.sprite.Sprite();
-             examine_sprite.image=examine_image;
-             examine_sprite.rect=examine_sprite.image.get_rect();
-             examine_sprite.rect.top=surface.get_rect().height/2-examine_sprite.rect.height/2;
-             examine_sprite.rect.left=surface.get_rect().width/2-examine_sprite.rect.width/2;
-             surface.blit(examine_sprite.image,examine_sprite.rect);
-             pygame.display.flip();
-             //check for a keypress
-             done=False;     
-             while (not done){
-                for (event in pygame.event.get()){
-                   if (event.type == pygame.KEYDOWN ){
-                      if (event.key == this.keys.examine)
-                         quit = True;
-                      done = True;
-             image=(image+1)%len(skin_group[player.inventory[using].objtype].examine_image);
-          //Clean up the surface and return to the main game
-          //Display the background
-          this.display.redraw_display(player.scene,skin_group);
-          //Display the Information panel
-          this.draw_info_panel(surface,player,skin_group);
-          pygame.display.flip();
-       }
-       */
         public void DrawInfoPanel(Surface surface, LeadActor player, Skin[] skin_group)
         {
             /* Draws the information panel on the surface.
@@ -398,7 +327,7 @@ namespace SdlDotNetExamples.Isotope
                     draw_order[q] = i;
                     q++;
                 }
-                //Range(player.usingob,player.inventory.Count)+Range(player.usingob);
+                
                 foreach (int i in draw_order)
                 {
                     sprite_group[i].X = p;
