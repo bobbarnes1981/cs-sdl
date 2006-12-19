@@ -19,6 +19,7 @@
 
 using System.Drawing;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 using SdlDotNet.Graphics;
@@ -32,7 +33,7 @@ namespace SdlDotNetExamples.SpriteDemos
     public class ViewportMode : DemoMode
     {
         private Sprite sprite;
-        SpriteDictionary spriteSingle = new SpriteDictionary();
+        List<Sprite> spriteSingle = new List<Sprite>();
         private Size size;
         static Random rand = new Random();
 
@@ -41,7 +42,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// 
         /// </summary>
-        public SpriteDictionary CenterSprite
+        public List<Sprite> CenterSprite
         {
             get
             {
@@ -115,7 +116,7 @@ namespace SdlDotNetExamples.SpriteDemos
                     (int)td.Size.Height)));
                 Sprites.Add(bounceSprite);
             }
-            Sprites.EnableTickEvent();
+
         }
         //private Surface newSurf = new Surface();
 
@@ -124,6 +125,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public override void Start(SpriteDictionary manager)
         {
+            Sprites.EnableTickEvent();
             base.Start(manager);
         }
 
@@ -132,6 +134,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public override void Stop(SpriteDictionary manager)
         {
+            Sprites.DisableTickEvent();
             base.Stop(manager);
         }
 
@@ -164,12 +167,12 @@ namespace SdlDotNetExamples.SpriteDemos
         public Point AdjustViewport()
         {
             return new Point(
-                this.Surface.Size.Width / 2 -
-                this.CenterSprite.Size.Width / 2 -
-                this.CenterSprite.GetEnumerator().Current.Key.X,
-                this.Surface.Size.Height / 2 -
-                this.CenterSprite.Size.Height / 2 -
-                this.CenterSprite.GetEnumerator().Current.Key.Y);
+             this.Surface.Size.Width / 2 -
+             this.CenterSprite[0].Size.Width / 2 -
+             this.CenterSprite[0].X,
+             this.Surface.Size.Height / 2 -
+             this.CenterSprite[0].Size.Height / 2 -
+             this.CenterSprite[0].Y);
         }
 
         /// <summary>
@@ -200,8 +203,8 @@ namespace SdlDotNetExamples.SpriteDemos
             }
 
             // Find out the "half" point for the sprite in the view
-            int mx = this.CenterSprite.GetEnumerator().Current.Key.X + this.CenterSprite.Size.Width / 2;
-            int my = this.CenterSprite.GetEnumerator().Current.Key.Y + this.CenterSprite.Size.Height / 2;
+            int mx = this.CenterSprite[0].X + this.CenterSprite[0].Size.Width / 2;
+            int my = this.CenterSprite[0].Y + this.CenterSprite[0].Size.Height / 2;
 
             // Figure out the coordinates
             int x1 = mx - this.Surface.Size.Width / 2;

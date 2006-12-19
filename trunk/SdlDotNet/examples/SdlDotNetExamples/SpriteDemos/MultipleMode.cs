@@ -123,7 +123,6 @@ namespace SdlDotNetExamples.SpriteDemos
                 (int)td5.Size.Height)));
             all.Add(sprite4);
 
-            all.EnableTickEvent();
             surf1 = this.Surface.CreateCompatibleSurface(380, 250);
             surf2 = this.Surface.CreateCompatibleSurface(380, 250);
             surf3 = this.Surface.CreateCompatibleSurface(380, 250);
@@ -271,6 +270,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public override void Start(SpriteDictionary manager)
         {
+            all.EnableTickEvent();
             base.Start(manager);
         }
 
@@ -279,6 +279,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public override void Stop(SpriteDictionary manager)
         {
+            all.DisableTickEvent();
             base.Stop(manager);
         }
 

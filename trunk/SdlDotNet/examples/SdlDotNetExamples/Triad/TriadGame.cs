@@ -92,7 +92,7 @@ namespace SdlDotNetExamples.Triad
             }
             catch
             {
-                throw;
+                //throw;
             }
         }
 
@@ -155,12 +155,23 @@ namespace SdlDotNetExamples.Triad
             {
                 if (disposing)
                 {
-                    grid.Dispose();
-                    board.Dispose();
+                    if (grid != null)
+                    {
+                        grid.Dispose();
+                    }
+                    if (board != null)
+                    {
+                        board.Dispose();
+                    }
+                    if (surf != null)
+                    {
+                        surf.Dispose();
+                    }                    
                     if (levelUpSound != null)
                     {
                         levelUpSound.Dispose();
                     }
+                    screen.Dispose();
                     GC.SuppressFinalize(this);
                 }
                 this.disposed = true;

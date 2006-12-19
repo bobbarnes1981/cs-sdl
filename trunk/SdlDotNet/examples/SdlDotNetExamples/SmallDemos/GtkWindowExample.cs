@@ -34,6 +34,7 @@ namespace SdlDotNetExamples.SmallDemos
         [STAThread]
         public static void Run()
         {
+            Application.Quit();
             Application.Init();
             GtkWindow GtkWindow = new GtkWindow();	// create window
             // show window
