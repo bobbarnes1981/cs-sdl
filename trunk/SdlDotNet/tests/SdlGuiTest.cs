@@ -20,7 +20,7 @@ using System.Drawing;
 using System;
 
 using SdlDotNet.Graphics.Sprites;
-using SdlDotNetExamples.GuiExample;
+//using SdlDotNetExamples.GuiExample;
 using NUnit.Framework;
 using SdlDotNet.Core;
 using SdlDotNet.Input;
@@ -32,36 +32,36 @@ namespace SdlDotNet.Tests
 	/// </summary>
 	[TestFixture] public class SdlGuiTest
 	{
-		private SpriteDictionary sm;
-		private GuiManager gui;
+		//private SpriteDictionary sm;
+		//private GuiManager gui;
 
-		/// <summary>
-		/// 
-		/// </summary>
-		[SetUp] 
-		public void Setup()
-		{
-			// Create the gui used through the tst
-			sm = new SpriteDictionary();
-			gui = new GuiManager(sm,
-				new SdlDotNet.Graphics.Font("../../FreeSans.ttf", 12),
-				new Size(800, 600));
-		}
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    [SetUp] 
+    //    public void Setup()
+    //    {
+    //        // Create the gui used through the tst
+    //        sm = new SpriteDictionary();
+    //        gui = new GuiManager(sm,
+    //            new SdlDotNet.Graphics.Font("../../FreeSans.ttf", 12),
+    //            new Size(800, 600));
+    //    }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		[Test] 
-		public void TestWindowBounds()
-		{
-			GuiWindow win = new GuiWindow(gui, new Rectangle(10, 11, 100, 101));
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    [Test] 
+    //    public void TestWindowBounds()
+    //    {
+    //        GuiWindow win = new GuiWindow(gui, new Rectangle(10, 11, 100, 101));
 
-	//		Assert.Equals(10 - gui.GetPadding(win).Left, win.Coordinates.X);
-	//		Assert.Equals(11 - gui.GetPadding(win).Top, win.Coordinates.Y);
-			Assert.AreEqual(100 + gui.GetPadding(win).Horizontal,
-				win.Size.Width);
-			Assert.AreEqual(101 + gui.GetPadding(win).Vertical,
-				win.Size.Height);
-		}
+    ////		Assert.Equals(10 - gui.GetPadding(win).Left, win.Coordinates.X);
+    ////		Assert.Equals(11 - gui.GetPadding(win).Top, win.Coordinates.Y);
+    //        Assert.AreEqual(100 + gui.GetPadding(win).Horizontal,
+    //            win.Size.Width);
+    //        Assert.AreEqual(101 + gui.GetPadding(win).Vertical,
+    //            win.Size.Height);
+    //    }
 	}
 }
