@@ -25,7 +25,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNetExamples.SpriteGuiDemos
+namespace SdlDotNetExamples.SpriteDemos
 {
 	/// <summary>
 	/// Implements a text sprite that has a bounded box to define its
