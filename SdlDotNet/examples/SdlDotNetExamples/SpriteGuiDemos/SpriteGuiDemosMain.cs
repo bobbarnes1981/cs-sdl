@@ -26,7 +26,7 @@ using System.Globalization;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
-using SdlDotNetExamples.GuiExample;
+//using SdlDotNetExamples.GuiExample;
 using SdlDotNet.Input;
 using SdlDotNet.Core;
 
@@ -88,8 +88,8 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         }
 
         #region GUI
-        private GuiMenuTitle demoMenu;
-        private GuiMenuTitle gm;
+        //private GuiMenuTitle demoMenu;
+        //private GuiMenuTitle gm;
 
         private int[] fpsSpeeds =
             new int[] { 1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
@@ -107,61 +107,61 @@ namespace SdlDotNetExamples.SpriteGuiDemos
                 filepath = "";
             }
             // Set up the gui manager
-            gui = new GuiManager(master,
-                new SdlDotNet.Graphics.Font(filepath + data_directory + "comic.ttf", 12),
-                Size);
-            gui.TitleFont = new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 12);
+            //gui = new GuiManager(master,
+            //    new SdlDotNet.Graphics.Font(filepath + data_directory + "comic.ttf", 12),
+            //    Size);
+            //gui.TitleFont = new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 12);
 
-            // Set up the ticker
-            statusTicker = new GuiTicker(gui, new Vector(0, Video.Screen.Height - 20, 0), 100);
-            master.Add(statusTicker);
-            Report("SDL.NET Demo started");
+            //// Set up the ticker
+            //statusTicker = new GuiTicker(gui, new Vector(0, Video.Screen.Height - 20, 0), 100);
+            //master.Add(statusTicker);
+            //Report("SDL.NET Demo started");
 
-            statusWindow = new StatusWindow(gui);
-            // Set up the status window
-            master.Add(statusWindow);
+            //statusWindow = new StatusWindow(gui);
+            //// Set up the status window
+            //master.Add(statusWindow);
 
-            // Create the menu
-            CreateMenu(gui);
+            //// Create the menu
+            //CreateMenu(gui);
         }
 
-        private void CreateMenu(GuiManager gui)
-        {
-            // Create the menu
-            gmb = new GuiMenuBar(gui, new Point(0, 1), 20);
-            gmb.Sprites.EnableTickEvent();
-            gmb.Sprites.EnableMouseButtonEvent();
-            master.Add(gmb);
+        //private void CreateMenu(GuiManager gui)
+        //{
+        //    // Create the menu
+        //    gmb = new GuiMenuBar(gui, new Point(0, 1), 20);
+        //    gmb.Sprites.EnableTickEvent();
+        //    gmb.Sprites.EnableMouseButtonEvent();
+        //    master.Add(gmb);
 
-            // Create the demo menu
-            demoMenu = new GuiMenuTitle(gui, gmb, "Demo");
-            master.Add(demoMenu.Popup);
-            gmb.AddLeft(demoMenu);
+        //    // Create the demo menu
+        //    demoMenu = new GuiMenuTitle(gui, gmb, "Demo");
+        //    master.Add(demoMenu.Popup);
+        //    gmb.AddLeft(demoMenu);
 
-            // Create the FPS menu
-            gm = new GuiMenuTitle(gui, gmb, "FPS");
-            master.Add(gm.Popup);
-            gmb.AddLeft(gm);
+        //    // Create the FPS menu
+        //    gm = new GuiMenuTitle(gui, gmb, "FPS");
+        //    master.Add(gm.Popup);
+        //    gmb.AddLeft(gm);
 
-            GuiMenuItem fmi;
+        //    GuiMenuItem fmi;
 
-            for (int i = 0; i < fpsSpeeds.Length; i++)
-            {
-                int spd = fpsSpeeds[i];
+        //    for (int i = 0; i < fpsSpeeds.Length; i++)
+        //    {
+        //        int spd = fpsSpeeds[i];
 
-                fmi = new GuiMenuItem(gui, spd.ToString(CultureInfo.CurrentCulture) + " FPS");
-                fmi.ItemSelectedEvent += new MenuItemEventHandler(MenuFps);
-                gm.Add(fmi);
-            }
-        }
+        //        fmi = new GuiMenuItem(gui, spd.ToString(CultureInfo.CurrentCulture) + " FPS");
+        //        fmi.ItemSelectedEvent += new MenuItemEventHandler(MenuFps);
+        //        gm.Add(fmi);
+        //    }
+        //}
 
-        private void CreateMenuQuit(GuiManager gui)
-        {
-            GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
-            gmi.AddRight(new TextSprite("Q", gui.BaseFont));
-            gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuQuit);
-            demoMenu.Add(gmi);
-        }
+        //private void CreateMenuQuit(GuiManager gui)
+        //{
+        //    GuiMenuItem gmi = new GuiMenuItem(gui, "Quit");
+        //    gmi.AddRight(new TextSprite("Q", gui.BaseFont));
+        //    gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuQuit);
+        //    demoMenu.Add(gmi);
+        //}
         #endregion
 
         #region Demos
@@ -188,12 +188,12 @@ namespace SdlDotNetExamples.SpriteGuiDemos
             // Figure out the counter
             int cnt = demos.Count;
 
-            // Add the graphical menu
-            GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
-            gmi.AddRight(new TextSprite(String.Format(CultureInfo.CurrentCulture, "{0}", cnt),
-                gui.BaseFont));
-            gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuDemo);
-            demoMenu.Add(gmi);
+            //// Add the graphical menu
+            //GuiMenuItem gmi = new GuiMenuItem(gui, mode.ToString());
+            //gmi.AddRight(new TextSprite(String.Format(CultureInfo.CurrentCulture, "{0}", cnt),
+            //    gui.BaseFont));
+            //gmi.ItemSelectedEvent += new MenuItemEventHandler(MenuDemo);
+            //demoMenu.Add(gmi);
         }
 
         private void LoadDemos()
@@ -207,10 +207,10 @@ namespace SdlDotNetExamples.SpriteGuiDemos
             LoadDemo(new DragMode());
             LoadDemo(new ViewportMode());
             LoadDemo(new MultipleMode());
-            LoadDemo(new GuiMode());
+            //LoadDemo(new GuiMode());
 
             // Finish up the gui
-            CreateMenuQuit(gui);
+           // CreateMenuQuit(gui);
         }
 
         private static void StopDemo()
@@ -238,21 +238,21 @@ namespace SdlDotNetExamples.SpriteGuiDemos
             currentDemo = (DemoMode)demos[demo];
             currentDemo.Start(manager);
             Console.WriteLine("Switched to " + currentDemo + " mode");
-            Report("Switched to " + currentDemo + " mode");
+            //Report("Switched to " + currentDemo + " mode");
         }
         #endregion
 
-        private static GuiManager gui;
-        /// <summary>
-        /// 
-        /// </summary>
-        public static GuiManager GuiManager
-        {
-            get
-            {
-                return gui;
-            }
-        }
+        //private static GuiManager gui;
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public static GuiManager GuiManager
+        //{
+        //    get
+        //    {
+        //        return gui;
+        //    }
+        //}
 
         #region Events
         private void KeyboardDown(object sender, KeyboardEventArgs e)
@@ -318,33 +318,33 @@ namespace SdlDotNetExamples.SpriteGuiDemos
             Events.QuitApplication();
         }
 
-        private void MenuDemo(object sender, MenuItemEventArgs e)
-        {
-            SwitchDemo(e.Index);
-        }
+        //private void MenuDemo(object sender, MenuItemEventArgs e)
+        //{
+        //    SwitchDemo(e.Index);
+        //}
 
-        private void MenuFps(object sender, MenuItemEventArgs e)
-        {
-            Events.Fps = fpsSpeeds[e.Index];
-        }
+        //private void MenuFps(object sender, MenuItemEventArgs e)
+        //{
+        //    Events.Fps = fpsSpeeds[e.Index];
+        //}
 
-        private void MenuQuit(object sender, MenuItemEventArgs e)
-        {
-            Events.QuitApplication();
-        }
+        //private void MenuQuit(object sender, MenuItemEventArgs e)
+        //{
+        //    Events.QuitApplication();
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="msg"></param>
-        public void Report(string msg)
-        {
-            if (statusTicker != null)
-            {
-                TextSprite textSprite = new TextSprite(msg, GuiManager.BaseFont);
-                statusTicker.Add(textSprite);
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="msg"></param>
+        //public void Report(string msg)
+        //{
+        //    if (statusTicker != null)
+        //    {
+        //        TextSprite textSprite = new TextSprite(msg, GuiManager.BaseFont);
+        //        statusTicker.Add(textSprite);
+        //    }
+        //}
         #endregion
 
         #region Properties
@@ -352,9 +352,9 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         private static SpriteDictionary manager = new SpriteDictionary();
         //		MouseMotionEventHandler MouseMotionHandler;
         private Surface screen;
-        private GuiWindow statusWindow;
-        private GuiTicker statusTicker;
-        private static GuiMenuBar gmb;
+ //       private GuiWindow statusWindow;
+ //       private GuiTicker statusTicker;
+ //       private static GuiMenuBar gmb;
         //		Surface cursor;
         //		Point position = new Point(100,100);
 
@@ -421,10 +421,10 @@ namespace SdlDotNetExamples.SpriteGuiDemos
                             disposableObj.Dispose();
                         }
                     }
-                    statusTicker.Dispose();
-                    demoMenu.Dispose();
-                    gm.Dispose();
-                    statusWindow.Dispose();
+                    //statusTicker.Dispose();
+                    //demoMenu.Dispose();
+                    //gm.Dispose();
+                    //statusWindow.Dispose();
                 }
                 this.disposed = true;
             }
