@@ -24,7 +24,7 @@ using System.Threading;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNetExamples.SpriteGuiDemos
+namespace SdlDotNetExamples.SpriteDemos
 {
     /// <summary>
     /// 
@@ -38,14 +38,14 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         public BounceMode()
         {
             // Create the fragment marbles
-            Rectangle rect = new Rectangle(new Point(0, 0), SpriteGuiDemosMain.Size);
+            Rectangle rect = new Rectangle(new Point(0, 0), SpriteDemos.Size);
             for (int i = 0; i < 50; i++)
             {
                 Thread.Sleep(10);
                 SurfaceCollection d = LoadRandomMarble();
                 BounceSprite bounceSprite =
                     new BounceSprite(d,
-                    new Rectangle(new Point(0, 0), SpriteGuiDemosMain.Size),
+                    new Rectangle(new Point(0, 0), SpriteDemos.Size),
                     new Point(rand.Next(rect.Left, rect.Right),
                     rand.Next(rect.Top, rect.Bottom)));
                 Sprites.Add(bounceSprite);

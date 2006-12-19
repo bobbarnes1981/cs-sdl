@@ -25,7 +25,7 @@ using System.IO;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNetExamples.SpriteGuiDemos
+namespace SdlDotNetExamples.SpriteDemos
 {
     /// <summary>
     /// An abstract page to encapsulates the common functionality of all

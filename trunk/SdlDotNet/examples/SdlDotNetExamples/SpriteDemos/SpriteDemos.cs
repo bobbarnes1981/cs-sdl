@@ -29,7 +29,7 @@ using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 using SdlDotNet.Core;
 
-namespace SdlDotNetExamples.SpriteGuiDemos
+namespace SdlDotNetExamples.SpriteDemos
 {
     /// <summary>
     /// The SpriteGuiDemosMain is a general testbed and display of various features
@@ -38,7 +38,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
     /// directory has a "test/" directory underneath it containing
     /// various images.
     /// </summary>
-    public class SpriteGuiDemosMain : IDisposable
+    public class SpriteDemos : IDisposable
     {
         /// <summary>
         /// 
@@ -47,7 +47,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
         public static void Run()
         {
             // Create the demo application
-            SpriteGuiDemosMain demo = new SpriteGuiDemosMain();
+            SpriteDemos demo = new SpriteDemos();
             demo.Go();
         }
 
@@ -66,7 +66,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
             int height = 600;
 
             Video.WindowIcon();
-            Video.WindowCaption = "SDL.NET - Sprite and Gui Demo";
+            Video.WindowCaption = "SDL.NET - Sprite Demos";
             screen = Video.SetVideoMode(width, height);
 
             // Set up the master sprite container
@@ -291,7 +291,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
                 if (disposing)
                 {
                     this.screen.Dispose();
-                    foreach (Sprite s in SpriteGuiDemosMain.manager.Keys)
+                    foreach (Sprite s in SpriteDemos.manager.Keys)
                     {
                         IDisposable disposableObj = s as IDisposable;
                         if (disposableObj != null)
@@ -299,7 +299,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
                             disposableObj.Dispose();
                         }
                     }
-                    foreach (Sprite s in SpriteGuiDemosMain.master.Keys)
+                    foreach (Sprite s in SpriteDemos.master.Keys)
                     {
                         IDisposable disposableObj = s as IDisposable;
                         if (disposableObj != null)

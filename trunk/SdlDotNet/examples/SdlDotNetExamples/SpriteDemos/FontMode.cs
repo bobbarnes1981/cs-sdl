@@ -23,7 +23,7 @@ using System.Drawing;
 
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNetExamples.SpriteGuiDemos
+namespace SdlDotNetExamples.SpriteDemos
 {
     /// <summary>
     /// 
@@ -64,7 +64,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
             Sprites.Add(new TextSprite("jumps over the lazy", f2, new Point(5, 280)));
             Sprites.Add(new TextSprite("dog. 1234567890", f2, new Point(5, 360)));
 
-            int w = SpriteGuiDemosMain.Size.Width - 10;
+            int w = SpriteDemos.Size.Width - 10;
             Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
                 0.1, 0.5, new Point(5, 450)));
             Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),

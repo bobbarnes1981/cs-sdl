@@ -24,7 +24,7 @@ using System.Threading;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNetExamples.SpriteGuiDemos
+namespace SdlDotNetExamples.SpriteDemos
 {
     /// <summary>
     /// 
@@ -59,7 +59,7 @@ namespace SdlDotNetExamples.SpriteGuiDemos
                 {
                     dragSprite = new DragSprite(frames, "marble1",
                         new Point(sx + i * 50, sy + j * 50),
-                        new Rectangle(new Point(0, 0), SpriteGuiDemosMain.Size));
+                        new Rectangle(new Point(0, 0), SpriteDemos.Size));
                     dragSprite.Animations.Add("marble1", anim1);
                     dragSprite.Animations.Add("marble2", anim2);
 
