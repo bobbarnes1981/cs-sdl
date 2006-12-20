@@ -50,7 +50,7 @@ namespace SdlDotNet.Graphics
         /// <param name="surfaces">The surface collection to copy.</param>
         public SurfaceCollection(SurfaceCollection surfaces)
         {
-            this.Add(surfaces);
+            this.AddRange(surfaces);
         }
 
         /// <summary>
@@ -199,28 +199,6 @@ namespace SdlDotNet.Graphics
         #endregion Constructors
 
         #region Public Methods
-
-        /// <summary>
-        /// Adds the specified Surface to the end of the SurfaceCollection.
-        /// </summary>
-        /// <param name="surfaceCollection">
-        /// The Surface to be added to the end of the SurfaceCollection.
-        /// </param>
-        /// <returns>
-        /// The index at which the Surface has been added.
-        /// </returns>
-        public int Add(SurfaceCollection surfaceCollection)
-        {
-            if (surfaceCollection == null)
-            {
-                throw new ArgumentNullException("surfaceCollection");
-            }
-            foreach (Surface s in surfaceCollection)
-            {
-                this.Add(s);
-            }
-            return this.Count;
-        }
 
         /// <summary>
         /// Size of first surface

@@ -114,7 +114,6 @@ namespace SdlDotNet.Core
                 {
                 }
                 CloseHandle();
-                //handle = IntPtr.Zero;
             }
             this.disposed = true;
         }
