@@ -82,8 +82,6 @@ namespace SdlDotNetExamples.SpriteDemos
             SwitchDemo(0);
             Events.Fps = 100;
             Events.Run();
-
-            
         }
 
         #region GUI

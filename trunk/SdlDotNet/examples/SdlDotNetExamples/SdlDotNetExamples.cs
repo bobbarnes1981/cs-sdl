@@ -16,6 +16,7 @@ namespace SdlDotNetExamples
         public SdlDotNetExamples()
         {
             Glut.glutInit();
+            SdlDotNet.Graphics.Video.Initialize();
             InitializeComponent();
         }
 
@@ -46,25 +47,38 @@ namespace SdlDotNetExamples
 
         private void btnRun_Click(object sender, EventArgs e)
         {
-            SelectExample();
+            RunExample();
         }
 
-        private void SelectExample()
+        private void RunExample()
         {
+            SdlDotNet.Core.Events.QuitApplication();
             try
             {
                 Type example = Assembly.GetExecutingAssembly().GetType(treeView1.SelectedNode.Name, true, true);
                 example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null);
+                Application.Restart();
             }
             catch (TypeLoadException e)
             {
                 e.ToString();
             }
+            catch (System.Reflection.TargetInvocationException)
+            {
+                // User changed demo - do nothing
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+            }
+            catch (System.MissingMethodException)
+            {
+                // missing method - do nothing
+            }
         }
 
         void treeView1_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            SelectExample();
+            RunExample();
         }
     }
 }
