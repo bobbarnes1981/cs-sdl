@@ -69,15 +69,15 @@ namespace SdlDotNetExamples.Triad
             board.X = 600;
             board.Y = 0;
             board.Size = new Size(200, 400);
+            screen =
+                    Video.SetVideoMode(width, height);
+            surf =
+                screen.CreateCompatibleSurface(width, height);
+            surf.Fill(
+                new Rectangle(new Point(0, 0), surf.Size), Color.Black);
 
             try
             {
-                screen =
-                    Video.SetVideoMode(width, height);
-                surf =
-                    screen.CreateCompatibleSurface(width, height);
-                surf.Fill(
-                    new Rectangle(new Point(0, 0), surf.Size), Color.Black);
                 grid = new BlockGrid(new Point(20, 20), new Size(11, 13));
                 grid.BlocksDestroyed +=
                     new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
@@ -88,12 +88,13 @@ namespace SdlDotNetExamples.Triad
                 }
 
                 levelUpSound = Mixer.Sound(filepath + data_directory + "levelup.wav");
-                Events.Run();
+                
             }
             catch
             {
                 //throw;
             }
+            Events.Run();
         }
 
         private void KeyboardDown(object sender, KeyboardEventArgs e)
