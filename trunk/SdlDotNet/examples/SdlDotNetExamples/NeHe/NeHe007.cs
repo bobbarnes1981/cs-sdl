@@ -228,7 +228,7 @@ namespace SdlDotNetExamples.NeHe
             // Enable Texture Mapping ( NEW )
             Gl.glEnable(Gl.GL_TEXTURE_2D);
             this.LoadGLFilteredTextures();
-            Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
             Keyboard.EnableKeyRepeat(150, 50);
             // Setup The Ambient Light
             Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, lightAmbient);

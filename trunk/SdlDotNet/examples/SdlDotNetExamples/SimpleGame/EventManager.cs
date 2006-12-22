@@ -36,47 +36,27 @@ namespace SdlDotNetExamples.SimpleGame
         /// <summary>
         /// 
         /// </summary>
-        public delegate void MapBuiltEventHandler(object sender, MapBuiltEventArgs e);
-        /// <summary>
-        /// 
-        /// </summary>
-        public event MapBuiltEventHandler OnMapBuiltEvent;
+        public event EventHandler<MapBuiltEventArgs> OnMapBuiltEvent;
 
         /// <summary>
         /// 
         /// </summary>
-        public delegate void EntityMoveEventHandler(object sender, EntityMoveEventArgs e);
-        /// <summary>
-        /// 
-        /// </summary>
-        public event EntityMoveEventHandler OnEntityMoveEvent;
+        public event EventHandler<EntityMoveEventArgs> OnEntityMoveEvent;
 
         /// <summary>
         /// 
         /// </summary>
-        public delegate void EntityMoveRequestEventHandler(object sender, EntityMoveRequestEventArgs e);
-        /// <summary>
-        /// 
-        /// </summary>
-        public event EntityMoveRequestEventHandler OnEntityMoveRequestEvent;
+        public event EventHandler<EntityMoveRequestEventArgs> OnEntityMoveRequestEvent;
 
         /// <summary>
         /// 
         /// </summary>
-        public delegate void EntityPlaceEventHandler(object sender, EntityPlaceEventArgs e);
-        /// <summary>
-        /// 
-        /// </summary>
-        public event EntityPlaceEventHandler OnEntityPlaceEvent;
+        public event EventHandler<EntityPlaceEventArgs> OnEntityPlaceEvent;
 
         /// <summary>
         /// 
         /// </summary>
-        public delegate void GameStatusEventHandler(object sender, GameStatusEventArgs e);
-        /// <summary>
-        /// 
-        /// </summary>
-        public event GameStatusEventHandler OnGameStatusEvent;
+        public event EventHandler<GameStatusEventArgs> OnGameStatusEvent;
 
         /// <summary>
         /// 

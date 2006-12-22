@@ -71,9 +71,10 @@ namespace SdlDotNetExamples.SmallDemos
             btn = new Button("Close");
             btn.Clicked += new EventHandler(btn_click);
             verBox.Add(btn);
-
+        }
+        public void ShowWindow()
+        {
             win.ShowAll();	// show window
-
         }
         static void Window_Delete(object obj, DeleteEventArgs args)
         {

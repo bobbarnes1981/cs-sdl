@@ -139,7 +139,7 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         protected override void InitGL()
         {
-            Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
             Keyboard.EnableKeyRepeat(75, 25);
             this.LoadGLFilteredTextures();
             // Enable Texture Mapping

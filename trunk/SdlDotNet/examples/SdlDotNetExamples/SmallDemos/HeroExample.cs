@@ -47,10 +47,10 @@ namespace SdlDotNetExamples.SmallDemos
         {
             // Setup the SDL.NET events
             Events.Fps = 50;
-            Events.Tick += new TickEventHandler(Events_Tick);
-            Events.Quit += new QuitEventHandler(Events_Quit);
-            Events.KeyboardDown += new KeyboardEventHandler(Events_KeyboardDown);
-            Events.KeyboardUp += new KeyboardEventHandler(Events_KeyboardUp);
+            Events.Tick += new EventHandler<TickEventArgs>(Events_Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(Events_Quit);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(Events_KeyboardDown);
+            Events.KeyboardUp += new EventHandler<KeyboardEventArgs>(Events_KeyboardUp);
             Events.Run();
         }
 
@@ -90,10 +90,10 @@ namespace SdlDotNetExamples.SmallDemos
                 new SurfaceCollection(image, new Size(24, 32), 3);
 
             // Add the animations to the hero
-            hero.Animations.Add("WalkUp", new Animation(walkUp, 35));
-            hero.Animations.Add("WalkRight", new Animation(walkRight, 35));
-            hero.Animations.Add("WalkDown", new Animation(walkDown, 35));
-            hero.Animations.Add("WalkLeft", new Animation(walkLeft, 35));
+            hero.Animations.Add("WalkUp", new AnimationCollection(walkUp, 35));
+            hero.Animations.Add("WalkRight", new AnimationCollection(walkRight, 35));
+            hero.Animations.Add("WalkDown", new AnimationCollection(walkDown, 35));
+            hero.Animations.Add("WalkLeft", new AnimationCollection(walkLeft, 35));
 
             // Change the transparent color of the sprite
             hero.TransparentColor = Color.Magenta;

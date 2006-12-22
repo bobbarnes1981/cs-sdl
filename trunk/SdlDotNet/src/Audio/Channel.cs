@@ -237,7 +237,7 @@ namespace SdlDotNet.Audio
                     this.lastSound.NumberOfChannels--;
                 }
                 this.sound = value;
-                this.sound.SoundEvent += new SoundEventHandler(ProcessSoundEvent);
+                this.sound.SoundEvent += new EventHandler<SoundEventArgs>(ProcessSoundEvent);
                 this.sound.NumberOfChannels++;
             }
         }
@@ -477,7 +477,7 @@ namespace SdlDotNet.Audio
         {
             channelFinishedDelegate = new SdlMixer.ChannelFinishedDelegate(ChannelFinished);
             SdlMixer.Mix_ChannelFinished(channelFinishedDelegate);
-            Events.ChannelFinished += new ChannelFinishedEventHandler(Events_ChannelFinished);
+            Events.ChannelFinished += new EventHandler<ChannelFinishedEventArgs>(Events_ChannelFinished);
         }
 
         #endregion Public Methods

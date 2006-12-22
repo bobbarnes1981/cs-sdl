@@ -91,8 +91,8 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         protected override void InitGL()
         {
-            Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-            Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
+            Events.MouseButtonDown += new EventHandler<MouseButtonEventArgs>(this.MouseButtonDown);
             Keyboard.EnableKeyRepeat(150, 50);
 
             // Enable Smooth Shading

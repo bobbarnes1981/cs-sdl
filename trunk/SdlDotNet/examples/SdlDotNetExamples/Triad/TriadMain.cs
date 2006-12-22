@@ -59,11 +59,11 @@ namespace SdlDotNetExamples.Triad
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Triad";
             Events.KeyboardDown +=
-                new KeyboardEventHandler(this.KeyboardDown);
+                new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
             Events.KeyboardUp +=
-                new KeyboardEventHandler(this.KeyboardUp);
-            Events.Tick += new TickEventHandler(this.Tick);
-            Events.Quit += new QuitEventHandler(this.Quit);
+                new EventHandler<KeyboardEventArgs>(this.KeyboardUp);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
 
             board = new Scoreboard();
             board.X = 600;
@@ -79,7 +79,7 @@ namespace SdlDotNetExamples.Triad
 
             grid = new BlockGrid(new Point(20, 20), new Size(11, 13));
             grid.BlocksDestroyed +=
-                new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
+                new EventHandler<BlocksDestroyedEventArgs>(grid_BlocksDestroyed);
 
             if (File.Exists(data_directory + "levelup.wav"))
             {

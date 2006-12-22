@@ -55,12 +55,12 @@ namespace SdlDotNetExamples.SmallDemos
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - ParticlesExample";
             Video.SetVideoMode(400, 300);
-            Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
-            Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
-            Events.MouseMotion += new MouseMotionEventHandler(this.MouseMotion);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
+            Events.MouseButtonDown += new EventHandler<MouseButtonEventArgs>(this.MouseButtonDown);
+            Events.MouseMotion += new EventHandler<MouseMotionEventArgs>(this.MouseMotion);
             Events.Fps = 30;
-            Events.Tick += new TickEventHandler(this.Tick);
-            Events.Quit += new QuitEventHandler(this.Quit);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace SdlDotNetExamples.SmallDemos
             }
 
             // Make the second particle (an animated sprite)
-            Animation anim =
-                new Animation(new SurfaceCollection(filepath + data_directory + "marble1.png", new Size(50, 50)), 1);
+            AnimationCollection anim =
+                new AnimationCollection(new SurfaceCollection(filepath + data_directory + "marble1.png", new Size(50, 50)), 1);
             AnimatedSprite marble = new AnimatedSprite(anim);
             marble.Animate = true;
             ParticleSprite second = new ParticleSprite(marble, 200, 200, new Vector(-7, -9, 0), 500);

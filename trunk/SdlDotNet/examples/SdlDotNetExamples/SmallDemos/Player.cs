@@ -170,7 +170,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// <summary>
         /// 
         /// </summary>
-        public event FireEventHandler WeaponFired;
+        public event EventHandler<FireEventArgs> WeaponFired;
 
         private bool disposed;
 

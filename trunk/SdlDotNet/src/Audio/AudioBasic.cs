@@ -30,7 +30,7 @@ namespace SdlDotNet.Audio
     /// Used in the SDL_AudioSpec struct
     /// </summary>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void AudioCallback(IntPtr userdata, IntPtr stream, int len);
+    public delegate void AudioCallback(IntPtr userData, IntPtr stream, int len);
     #endregion Public Delegates
 
     /// <summary>

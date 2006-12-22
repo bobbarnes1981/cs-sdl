@@ -24,7 +24,7 @@ using SdlDotNet.Audio;
 
 namespace SdlDotNetExamples.SmallDemos
 {
-    public class StreamingAudio
+    public static class StreamingAudio
     {
         const int playback_freq = 44100;
         const int samples = 2048;
@@ -135,6 +135,7 @@ namespace SdlDotNetExamples.SmallDemos
 
         public Oscillator(int sampleRate)
         {
+            this.rate = (double)sampleRate;
         }
 
         public double Rate

@@ -60,22 +60,25 @@ namespace SdlDotNetExamples.SmallDemos
         {
             // Setup events
             Events.Tick +=
-                new TickEventHandler(Events_TickEvent);
+                new EventHandler<TickEventArgs>(Events_TickEvent);
             Events.KeyboardDown +=
-                new KeyboardEventHandler(Events_KeyboardDown);
+                new EventHandler<KeyboardEventArgs>(Events_KeyboardDown);
             Events.KeyboardUp +=
-                new KeyboardEventHandler(Events_KeyboardUp);
+                new EventHandler<KeyboardEventArgs>(Events_KeyboardUp);
             Events.MouseButtonDown +=
-                new MouseButtonEventHandler(Events_MouseButtonDown);
-            Events.Quit += new QuitEventHandler(this.Quit);
+                new EventHandler<MouseButtonEventArgs>(Events_MouseButtonDown);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
             Events.MusicFinished +=
-                new MusicFinishedEventHandler(Events_MusicFinished);
+                new EventHandler<MusicFinishedEventArgs>(Events_MusicFinished);
 
             if (File.Exists(data_directory + "boing.wav"))
             {
                 filepath = "";
             }
-
+            Keyboard.UnicodeEnabled = true;
+        }
+        public void Go()
+        {
             // Load the music and sounds.
             music["mason2"] = new Music(filepath + data_directory + "mason2.mid");
             music["fard-two"] = new Music(filepath + data_directory + "fard-two.ogg");
@@ -101,6 +104,7 @@ namespace SdlDotNetExamples.SmallDemos
 
             textDisplay.Text = "Press Arrow Keys, Space and Click \nMouse.";
             textDisplay.TextWidth = 200;
+            Events.Run();
         }
 
         private void Events_TickEvent(object sender, TickEventArgs e)
@@ -117,8 +121,8 @@ namespace SdlDotNetExamples.SmallDemos
         public static void Run()
         {
             AudioExample t = new AudioExample();
-            Keyboard.UnicodeEnabled = true;
-            Events.Run();
+            t.Go();
+            
         }
 
         private void Events_KeyboardUp(object sender, KeyboardEventArgs e)

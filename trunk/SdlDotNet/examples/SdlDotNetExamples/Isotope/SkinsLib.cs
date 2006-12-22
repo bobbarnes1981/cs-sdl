@@ -35,7 +35,7 @@ namespace SdlDotNetExamples.Isotope
     /// <summary>
     /// 
     /// </summary>
-    public class SkinsLib
+    public static class SkinsLib
     {
         // utility routines
 

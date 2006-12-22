@@ -83,9 +83,9 @@ namespace SdlDotNetExamples.Isotope
         }
 
         //public object_gravity(int[] pos,int[] size,int objtype,bool fixedob=false):
-        public ObjectGravity(int[] pos, int[] size, int objtype, bool fixedob)
+        public ObjectGravity(int[] pos, int[] size, int objectType, bool fixedObject)
             :
-            base(pos, size, objtype, fixedob)
+            base(pos, size, objectType, fixedObject)
         {
         }
 

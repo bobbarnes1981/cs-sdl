@@ -24,12 +24,12 @@ namespace SdlDotNetExamples
 
         private void frmExamples_Load(object sender, EventArgs e)
         {
-            List<string> namespaces = new List<string>();
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (Type type in types)
             {
                 MemberInfo[] runMethods = type.GetMember("Run");
-                foreach (MemberInfo run in runMethods)
+
+                if (runMethods.Length > 0)
                 {
                     if (!treeView1.Nodes.ContainsKey(type.Namespace))
                     {

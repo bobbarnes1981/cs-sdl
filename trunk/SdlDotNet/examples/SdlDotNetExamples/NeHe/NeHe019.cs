@@ -364,7 +364,7 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         protected override void InitGL()
         {
-            Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
             Keyboard.EnableKeyRepeat(50, 10);
             LoadGLTextures();
 

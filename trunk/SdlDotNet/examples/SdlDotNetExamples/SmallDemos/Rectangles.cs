@@ -53,10 +53,10 @@ namespace SdlDotNetExamples.SmallDemos
         /// </summary>
         public void Go()
         {
-            Events.KeyboardDown += new KeyboardEventHandler(this.KeyboardDown);
-            Events.Tick += new TickEventHandler(this.Tick);
-            Events.VideoResize += new VideoResizeEventHandler(this.Resize);
-            Events.Quit += new QuitEventHandler(this.Quit);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.VideoResize += new EventHandler<VideoResizeEventArgs>(this.Resize);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
 
             Events.Fps = 50;
 

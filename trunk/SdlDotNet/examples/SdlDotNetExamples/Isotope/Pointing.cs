@@ -54,10 +54,10 @@ namespace SdlDotNetExamples.Isotope
         {
             /*Redefined get_image to allow multidirectional animation */
             int[] sequence ={ 0, 1, 0, 2 };
-            int[] E ={ 1, 0, 0 };
-            int[] W ={ -1, 0, 0 };
-            int[] N ={ 0, 1, 0 };
-            int[] S ={ 0, -1, 0 };
+            //int[] E ={ 1, 0, 0 };
+            //int[] W ={ -1, 0, 0 };
+            //int[] N ={ 0, 1, 0 };
+            //int[] S ={ 0, -1, 0 };
             int actorfacing = Vector.VectorToFace(((Actor)obj).Facing);
             int actorcycle = ((Actor)obj).Cycle;
             if (actorfacing == 0)

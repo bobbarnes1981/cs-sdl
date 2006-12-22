@@ -58,9 +58,9 @@ namespace SdlDotNetExamples.RedBook
 		#region Fields
 
 		//Width of screen
-		static int width = 500;
+		int width = 500;
 		//Height of screen
-		static int height = 500;
+		int height = 500;
 
 		private static byte[ , , ] mipmapImage32 = new byte[32, 32, 4];
 		private static byte[ , , ] mipmapImage16 = new byte[16, 16, 4];
@@ -102,13 +102,13 @@ namespace SdlDotNetExamples.RedBook
 		private void Initialize()
 		{
 			// Sets keyboard events
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
 			// Sets the ticker to update OpenGL Context
-			Events.Tick += new TickEventHandler(this.Tick); 
-			Events.Quit += new QuitEventHandler(this.Quit);
+			Events.Tick += new EventHandler<TickEventArgs>(this.Tick); 
+			Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
 			//			// Sets the resize window event
-			//			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
+			//			Events.VideoResize += new EventHandler<VideoResizeEventArgs> (this.Resize);
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Sets Window icon and title
@@ -131,9 +131,9 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Resizes window
 		/// </summary>
-		private static void Reshape()
+		private void Reshape()
 		{
-			Reshape(width, height);
+			Reshape(this.width, this.height);
 		}
 
 		/// <summary>
@@ -180,7 +180,6 @@ namespace SdlDotNetExamples.RedBook
 
 			Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL);
 			Gl.glEnable(Gl.GL_TEXTURE_2D);
-			Reshape();
 		}
 
 		#endregion Lesson Setup
@@ -322,9 +321,9 @@ namespace SdlDotNetExamples.RedBook
 		/// </summary>
 		public static void Run()
 		{
-            RedBookMipMap t = new RedBookMipMap(); 
-            Reshape();
-			Init();
+            RedBookMipMap t = new RedBookMipMap();
+            t.Reshape();
+            Init();
 			Events.Run();
 		}
 

@@ -342,11 +342,11 @@ namespace SdlDotNetExamples.SmallDemos
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Gears";
             screen = Video.SetVideoMode(500, 500, true, true);
-            Events.Tick += new TickEventHandler(this.Tick);
-            Events.Quit += new QuitEventHandler(this.Quit);
-            Events.VideoResize += new VideoResizeEventHandler(this.Resize);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
+            Events.VideoResize += new EventHandler<VideoResizeEventArgs>(this.Resize);
             Events.KeyboardDown +=
-                new KeyboardEventHandler(this.KeyboardDown);
+                new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
 
             Events.Fps = 200;
 

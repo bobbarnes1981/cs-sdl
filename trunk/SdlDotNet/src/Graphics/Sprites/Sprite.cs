@@ -158,7 +158,11 @@ namespace SdlDotNet.Graphics.Sprites
             :
             this(surface, position, positionZ)
         {
-            //this.AddInternal(group);
+            if (group == null)
+            {
+                throw new ArgumentNullException("group");
+            }
+            group.Add(this);
         }
 
         /// <summary>
@@ -173,7 +177,11 @@ namespace SdlDotNet.Graphics.Sprites
             :
             this(surface, position)
         {
-            //this.AddInternal(group);
+            if (group == null)
+            {
+                throw new ArgumentNullException("group");
+            }
+            group.Add(this);
         }
 
         #endregion

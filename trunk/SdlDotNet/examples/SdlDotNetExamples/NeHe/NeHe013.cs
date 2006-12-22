@@ -131,7 +131,7 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe013()
         {
-            Events.Quit += new QuitEventHandler(this.Quit);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
         }
 
         #endregion Constructor

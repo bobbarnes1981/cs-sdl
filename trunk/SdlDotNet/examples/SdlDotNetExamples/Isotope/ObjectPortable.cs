@@ -55,8 +55,8 @@ namespace SdlDotNetExamples.Isotope
 
         //public object_portable(pos,size,objtype,fixedob=false):base(pos,size,objtype,fixedob){	      
         //}
-        public ObjectPortable(int[] pos, int[] size, int objtype, bool fixedob)
-            : base(pos, size, objtype, fixedob)
+        public ObjectPortable(int[] pos, int[] size, int objectType, bool fixedObject)
+            : base(pos, size, objectType, fixedObject)
         {
         }
 

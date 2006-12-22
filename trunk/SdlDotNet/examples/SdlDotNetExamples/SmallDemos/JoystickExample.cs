@@ -67,13 +67,13 @@ namespace SdlDotNetExamples.SmallDemos
 
             string file = Path.Combine(Path.Combine(filePath, fileDirectory), fileName);
 
-            Events.Tick += new TickEventHandler(Tick);
+            Events.Tick += new EventHandler<TickEventArgs>(Tick);
             Events.KeyboardDown +=
-                new KeyboardEventHandler(this.KeyboardDown);
-            Events.Quit += new QuitEventHandler(this.Quit);
+                new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
             Events.JoystickAxisMotion +=
-                             new JoystickAxisEventHandler(this.JoystickAxisChanged);
-            Events.JoystickButtonDown += new JoystickButtonEventHandler(this.JoystickButtonDown);
+                             new EventHandler<JoystickAxisEventArgs>(this.JoystickAxisChanged);
+            Events.JoystickButtonDown += new EventHandler<JoystickButtonEventArgs>(this.JoystickButtonDown);
             joystick = Joysticks.OpenJoystick(0);
 
             try

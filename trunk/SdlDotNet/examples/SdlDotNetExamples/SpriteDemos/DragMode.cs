@@ -43,9 +43,9 @@ namespace SdlDotNetExamples.SpriteDemos
             int sy = (600 - rows * 50) / 2;
             SurfaceCollection m1 = LoadMarble("marble1");
             SurfaceCollection m2 = LoadMarble("marble2");
-            Animation anim1 = new Animation(m1);
+            AnimationCollection anim1 = new AnimationCollection(m1);
 
-            Animation anim2 = new Animation(m2);
+            AnimationCollection anim2 = new AnimationCollection(m2);
 
             Hashtable frames = new Hashtable();
             frames.Add("marble1", m1);

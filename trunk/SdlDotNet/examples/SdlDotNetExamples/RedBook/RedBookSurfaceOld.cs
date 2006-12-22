@@ -96,16 +96,16 @@ namespace SdlDotNetExamples.RedBook
 		private void Initialize()
 		{
 			// Sets keyboard events
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
 			Keyboard.EnableKeyRepeat(150,50);
-			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButton);
-			Events.MouseButtonUp += new MouseButtonEventHandler(this.MouseButton);
-			Events.MouseMotion += new MouseMotionEventHandler(this.MouseMotion);
+			Events.MouseButtonDown += new EventHandler<MouseButtonEventArgs>(this.MouseButton);
+			Events.MouseButtonUp += new EventHandler<MouseButtonEventArgs>(this.MouseButton);
+			Events.MouseMotion += new EventHandler<MouseMotionEventArgs>(this.MouseMotion);
 			// Sets the ticker to update OpenGL Context
-			Events.Tick += new TickEventHandler(this.Tick); 
-			Events.Quit += new QuitEventHandler(this.Quit);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick); 
+			Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
 			//			// Sets the resize window event
-			//			Events.VideoResize += new VideoResizeEventHandler (this.Resize);
+			//			Events.VideoResize += new EventHandler<VideoResizeEventArgs> (this.Resize);
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Sets Window icon and title

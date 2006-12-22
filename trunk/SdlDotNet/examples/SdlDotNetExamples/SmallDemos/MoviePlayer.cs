@@ -71,9 +71,9 @@ namespace SdlDotNetExamples.SmallDemos
             int height = 240;
 
             Events.KeyboardDown +=
-                new KeyboardEventHandler(this.KeyboardDown);
-            Events.Tick += new TickEventHandler(this.Tick);
-            Events.Quit += new QuitEventHandler(this.Quit);
+                new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
 
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Movie Player";

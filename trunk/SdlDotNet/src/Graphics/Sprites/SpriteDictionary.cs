@@ -67,7 +67,7 @@ namespace SdlDotNet.Graphics.Sprites
         public SpriteDictionary(Sprite sprite)
             : base()
         {
-            //this.AddInternal(sprite);
+            this.Add(sprite);
         }
 
         /// <summary>
@@ -77,7 +77,10 @@ namespace SdlDotNet.Graphics.Sprites
         public SpriteDictionary(SpriteDictionary spriteDictionary)
             : base()
         {
-            //this.AddInternal(SpriteDictionary);
+            foreach (Sprite s in spriteDictionary.Keys)
+            {
+                this.Add(s, spriteDictionary[s]);
+            }
         }
 
 
@@ -311,7 +314,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableActiveEvent()
         {
-            Events.AppActive += new ActiveEventHandler(Update);
+            Events.AppActive += new EventHandler<ActiveEventArgs>(Update);
         }
 
         /// <summary>
@@ -319,7 +322,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableJoystickAxisEvent()
         {
-            Events.JoystickAxisMotion += new JoystickAxisEventHandler(Update);
+            Events.JoystickAxisMotion += new EventHandler<JoystickAxisEventArgs>(Update);
         }
 
         /// <summary>
@@ -327,7 +330,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableJoystickBallEvent()
         {
-            Events.JoystickBallMotion += new JoystickBallEventHandler(Update);
+            Events.JoystickBallMotion += new EventHandler<JoystickBallEventArgs>(Update);
         }
 
         /// <summary>
@@ -335,8 +338,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableJoystickButtonEvent()
         {
-            Events.JoystickButtonDown += new JoystickButtonEventHandler(Update);
-            Events.JoystickButtonUp += new JoystickButtonEventHandler(Update);
+            Events.JoystickButtonDown += new EventHandler<JoystickButtonEventArgs>(Update);
+            Events.JoystickButtonUp += new EventHandler<JoystickButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -344,7 +347,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableJoystickButtonDownEvent()
         {
-            Events.JoystickButtonDown += new JoystickButtonEventHandler(Update);
+            Events.JoystickButtonDown += new EventHandler<JoystickButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -352,7 +355,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableJoystickButtonUpEvent()
         {
-            Events.JoystickButtonUp += new JoystickButtonEventHandler(Update);
+            Events.JoystickButtonUp += new EventHandler<JoystickButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -360,7 +363,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableJoystickHatEvent()
         {
-            Events.JoystickHatMotion += new JoystickHatEventHandler(Update);
+            Events.JoystickHatMotion += new EventHandler<JoystickHatEventArgs>(Update);
         }
 
         /// <summary>
@@ -368,8 +371,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableKeyboardEvent()
         {
-            Events.KeyboardUp += new KeyboardEventHandler(Update);
-            Events.KeyboardDown += new KeyboardEventHandler(Update);
+            Events.KeyboardUp += new EventHandler<KeyboardEventArgs>(Update);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(Update);
         }
 
         /// <summary>
@@ -377,14 +380,14 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableKeyboardDownEvent()
         {
-            Events.KeyboardDown += new KeyboardEventHandler(Update);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(Update);
         }
         /// <summary>
         /// Enables Event for SpriteDictionary
         /// </summary>
         public void EnableKeyboardUpEvent()
         {
-            Events.KeyboardUp += new KeyboardEventHandler(Update);
+            Events.KeyboardUp += new EventHandler<KeyboardEventArgs>(Update);
         }
 
         /// <summary>
@@ -392,8 +395,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableMouseButtonEvent()
         {
-            Events.MouseButtonDown += new MouseButtonEventHandler(Update);
-            Events.MouseButtonUp += new MouseButtonEventHandler(Update);
+            Events.MouseButtonDown += new EventHandler<MouseButtonEventArgs>(Update);
+            Events.MouseButtonUp += new EventHandler<MouseButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -401,7 +404,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableMouseButtonDownEvent()
         {
-            Events.MouseButtonDown += new MouseButtonEventHandler(Update);
+            Events.MouseButtonDown += new EventHandler<MouseButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -409,7 +412,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableMouseButtonUpEvent()
         {
-            Events.MouseButtonUp += new MouseButtonEventHandler(Update);
+            Events.MouseButtonUp += new EventHandler<MouseButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -417,7 +420,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableMouseMotionEvent()
         {
-            Events.MouseMotion += new MouseMotionEventHandler(Update);
+            Events.MouseMotion += new EventHandler<MouseMotionEventArgs>(Update);
         }
 
         /// <summary>
@@ -425,7 +428,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableUserEvent()
         {
-            Events.UserEvent += new UserEventHandler(Update);
+            Events.UserEvent += new EventHandler<UserEventArgs>(Update);
         }
 
         /// <summary>
@@ -433,7 +436,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableQuitEvent()
         {
-            Events.Quit += new QuitEventHandler(Update);
+            Events.Quit += new EventHandler<QuitEventArgs>(Update);
         }
 
         /// <summary>
@@ -441,7 +444,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableVideoExposeEvent()
         {
-            Events.VideoExpose += new VideoExposeEventHandler(Update);
+            Events.VideoExpose += new EventHandler<VideoExposeEventArgs>(Update);
         }
 
         /// <summary>
@@ -449,7 +452,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableVideoResizeEvent()
         {
-            Events.VideoResize += new VideoResizeEventHandler(Update);
+            Events.VideoResize += new EventHandler<VideoResizeEventArgs>(Update);
         }
 
         /// <summary>
@@ -457,7 +460,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableChannelFinishedEvent()
         {
-            Events.ChannelFinished += new ChannelFinishedEventHandler(Update);
+            Events.ChannelFinished += new EventHandler<ChannelFinishedEventArgs>(Update);
         }
 
         /// <summary>
@@ -465,7 +468,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableMusicFinishedEvent()
         {
-            Events.MusicFinished += new MusicFinishedEventHandler(Update);
+            Events.MusicFinished += new EventHandler<MusicFinishedEventArgs>(Update);
         }
 
         /// <summary>
@@ -473,7 +476,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void EnableTickEvent()
         {
-            Events.Tick += new TickEventHandler(Update);
+            Events.Tick += new EventHandler<TickEventArgs>(Update);
         }
 
         /// <summary>
@@ -481,7 +484,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableActiveEvent()
         {
-            Events.AppActive -= new ActiveEventHandler(Update);
+            Events.AppActive -= new EventHandler<ActiveEventArgs>(Update);
         }
 
         /// <summary>
@@ -489,7 +492,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableJoystickAxisEvent()
         {
-            Events.JoystickAxisMotion -= new JoystickAxisEventHandler(Update);
+            Events.JoystickAxisMotion -= new EventHandler<JoystickAxisEventArgs>(Update);
         }
 
         /// <summary>
@@ -497,7 +500,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableJoystickBallEvent()
         {
-            Events.JoystickBallMotion -= new JoystickBallEventHandler(Update);
+            Events.JoystickBallMotion -= new EventHandler<JoystickBallEventArgs>(Update);
         }
 
         /// <summary>
@@ -505,8 +508,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableJoystickButtonEvent()
         {
-            Events.JoystickButtonDown -= new JoystickButtonEventHandler(Update);
-            Events.JoystickButtonUp -= new JoystickButtonEventHandler(Update);
+            Events.JoystickButtonDown -= new EventHandler<JoystickButtonEventArgs>(Update);
+            Events.JoystickButtonUp -= new EventHandler<JoystickButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -514,7 +517,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableJoystickButtonDownEvent()
         {
-            Events.JoystickButtonDown -= new JoystickButtonEventHandler(Update);
+            Events.JoystickButtonDown -= new EventHandler<JoystickButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -522,7 +525,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableJoystickButtonUpEvent()
         {
-            Events.JoystickButtonUp -= new JoystickButtonEventHandler(Update);
+            Events.JoystickButtonUp -= new EventHandler<JoystickButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -530,7 +533,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableJoystickHatEvent()
         {
-            Events.JoystickHatMotion -= new JoystickHatEventHandler(Update);
+            Events.JoystickHatMotion -= new EventHandler<JoystickHatEventArgs>(Update);
         }
 
         /// <summary>
@@ -538,8 +541,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableKeyboardEvent()
         {
-            Events.KeyboardUp -= new KeyboardEventHandler(Update);
-            Events.KeyboardDown -= new KeyboardEventHandler(Update);
+            Events.KeyboardUp -= new EventHandler<KeyboardEventArgs>(Update);
+            Events.KeyboardDown -= new EventHandler<KeyboardEventArgs>(Update);
         }
 
         /// <summary>
@@ -547,7 +550,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableKeyboardDownEvent()
         {
-            Events.KeyboardDown -= new KeyboardEventHandler(Update);
+            Events.KeyboardDown -= new EventHandler<KeyboardEventArgs>(Update);
         }
 
         /// <summary>
@@ -555,7 +558,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableKeyboardUpEvent()
         {
-            Events.KeyboardUp -= new KeyboardEventHandler(Update);
+            Events.KeyboardUp -= new EventHandler<KeyboardEventArgs>(Update);
         }
 
         /// <summary>
@@ -563,8 +566,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableMouseButtonEvent()
         {
-            Events.MouseButtonDown -= new MouseButtonEventHandler(Update);
-            Events.MouseButtonUp -= new MouseButtonEventHandler(Update);
+            Events.MouseButtonDown -= new EventHandler<MouseButtonEventArgs>(Update);
+            Events.MouseButtonUp -= new EventHandler<MouseButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -572,7 +575,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableMouseButtonDownEvent()
         {
-            Events.MouseButtonDown -= new MouseButtonEventHandler(Update);
+            Events.MouseButtonDown -= new EventHandler<MouseButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -580,7 +583,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableMouseButtonUpEvent()
         {
-            Events.MouseButtonUp -= new MouseButtonEventHandler(Update);
+            Events.MouseButtonUp -= new EventHandler<MouseButtonEventArgs>(Update);
         }
 
         /// <summary>
@@ -588,7 +591,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableMouseMotionEvent()
         {
-            Events.MouseMotion -= new MouseMotionEventHandler(Update);
+            Events.MouseMotion -= new EventHandler<MouseMotionEventArgs>(Update);
         }
 
         /// <summary>
@@ -596,7 +599,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableUserEvent()
         {
-            Events.UserEvent -= new UserEventHandler(Update);
+            Events.UserEvent -= new EventHandler<UserEventArgs>(Update);
         }
 
         /// <summary>
@@ -604,7 +607,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableQuitEvent()
         {
-            Events.Quit -= new QuitEventHandler(Update);
+            Events.Quit -= new EventHandler<QuitEventArgs>(Update);
         }
 
         /// <summary>
@@ -612,7 +615,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableVideoExposeEvent()
         {
-            Events.VideoExpose -= new VideoExposeEventHandler(Update);
+            Events.VideoExpose -= new EventHandler<VideoExposeEventArgs>(Update);
         }
 
         /// <summary>
@@ -620,7 +623,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableVideoResizeEvent()
         {
-            Events.VideoResize -= new VideoResizeEventHandler(Update);
+            Events.VideoResize -= new EventHandler<VideoResizeEventArgs>(Update);
         }
 
         /// <summary>
@@ -628,7 +631,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableChannelFinishedEvent()
         {
-            Events.ChannelFinished -= new ChannelFinishedEventHandler(Update);
+            Events.ChannelFinished -= new EventHandler<ChannelFinishedEventArgs>(Update);
         }
 
         /// <summary>
@@ -636,7 +639,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableMusicFinishedEvent()
         {
-            Events.MusicFinished -= new MusicFinishedEventHandler(Update);
+            Events.MusicFinished -= new EventHandler<MusicFinishedEventArgs>(Update);
         }
 
         /// <summary>
@@ -644,7 +647,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public void DisableTickEvent()
         {
-            Events.Tick -= new TickEventHandler(Update);
+            Events.Tick -= new EventHandler<TickEventArgs>(Update);
         }
 
 

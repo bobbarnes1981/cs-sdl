@@ -31,7 +31,7 @@ namespace SdlDotNetExamples.SmallDemos
     /// <summary>
     /// 
     /// </summary>
-    public class BombRun
+    public static class BombRun
     {
         static Surface screen;
         static float bombSpeed = 100;
@@ -103,11 +103,11 @@ namespace SdlDotNetExamples.SmallDemos
 
             Mouse.ShowCursor = false;
             Events.KeyboardDown +=
-                new KeyboardEventHandler(Keyboard);
-            Events.Quit += new QuitEventHandler(Quit);
-            player.WeaponFired += new FireEventHandler(PlayerWeaponFired);
+                new EventHandler<KeyboardEventArgs>(Keyboard);
+            Events.Quit += new EventHandler<QuitEventArgs>(Quit);
+            player.WeaponFired += new EventHandler<FireEventArgs>(PlayerWeaponFired);
 
-            Events.Tick += new TickEventHandler(OnTick);
+            Events.Tick += new EventHandler<TickEventArgs>(OnTick);
             Events.Run();
         }
 

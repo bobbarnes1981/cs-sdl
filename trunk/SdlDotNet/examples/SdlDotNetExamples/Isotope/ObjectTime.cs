@@ -28,15 +28,10 @@ using System.Collections;
 namespace SdlDotNetExamples.Isotope
 {
     //Define the gametime global variable
-    public class ObjectTime
+    public static class ObjectTime
     {
         static int time;
-        /// <summary>
-        /// 
-        /// </summary>
-        public ObjectTime()
-        {
-        }
+        
         /// <summary>
         /// 
         /// </summary>
