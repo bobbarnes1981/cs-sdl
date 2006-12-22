@@ -23,15 +23,15 @@ namespace SdlDotNetExamples.Isotope
     /// <summary>
     /// 
     /// </summary>
-    public class DisolverRandomCreator : Object3d
+    public class DissolverRandomCreator : Object3d
     {
         int newObjectTime;
         Scene scene;
         System.Random randint = new System.Random();
         // Creator class which makes disolver objects
-        public DisolverRandomCreator(int[] pos, int[] size, int objtype, Scene scene, bool fixedob)
+        public DissolverRandomCreator(int[] position, int[] size, int objectType, Scene scene, bool fixedObject)
             :
-            base(pos, size, objtype, fixedob)
+            base(position, size, objectType, fixedObject)
         {
             this.scene = scene;
         }
@@ -45,7 +45,7 @@ namespace SdlDotNetExamples.Isotope
             if (newObjectTime == 1)
             {
                 Position = new int[] { randint.Next(10, 170), randint.Next(10, 170), 100 };
-                this.scene.ObjectGroup.Add(new Disolver(Position, new int[] { 16, 10, 18 }, 2, scene));
+                this.scene.ObjectGroup.Add(new Dissolver(Position, new int[] { 16, 10, 18 }, 2, scene));
                 newObjectTime = 0;
             }
             newObjectTime = newObjectTime + 1;

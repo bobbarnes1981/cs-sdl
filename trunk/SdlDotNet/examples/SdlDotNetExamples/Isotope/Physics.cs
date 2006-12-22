@@ -38,7 +38,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="object1"></param>
         /// <param name="object2"></param>
         /// <returns></returns>
-        public static Collider CollisionDetect(Object3d object1, Object3d object2)
+        public static CollisionImpact CollisionDetect(Object3d object1, Object3d object2)
         {
             if (object1 == null)
             {
@@ -57,7 +57,7 @@ namespace SdlDotNetExamples.Isotope
                 Notes: Simple collision detection, does not handle if objects pass completely
                 through each other if they have high velocity and the objects are small
             */
-            Collider imp = new Collider();
+            CollisionImpact imp = new CollisionImpact();
             int impact_time_face1, impact_time_face2;
             int impact_face_object1 = 0, impact_face_object2 = 0;
             int impact_time_coord = 0;
@@ -120,7 +120,7 @@ namespace SdlDotNetExamples.Isotope
 
                 obj_group: A list of objects within the scene: list of class or subclass of Object3d
             */
-            Collider imp = new Collider();
+            CollisionImpact imp = new CollisionImpact();
             //runs the collision routines until no impacts occur
             while (true)
             {
@@ -159,7 +159,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="object1"></param>
         /// <param name="object2"></param>
         /// <param name="imp"></param>
-        public static void CollisionResponse(Object3d object1, Object3d object2, Collider imp)
+        public static void CollisionResponse(Object3d object1, Object3d object2, CollisionImpact imp)
         {
             if (object1 == null)
             {
@@ -242,7 +242,7 @@ namespace SdlDotNetExamples.Isotope
 
                obj_group: A list of objects within the scene: list of class or subclass of Object3d
             */
-            Collider imp = new Collider();
+            CollisionImpact imp = new CollisionImpact();
             for (int object1 = 0; object1 < objectGroup.Length; object1++)
             {
                 for (int object2 = object1 + 1; object2 < objectGroup.Length; object2++)
@@ -265,7 +265,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="object1"></param>
         /// <param name="object2"></param>
         /// <returns></returns>
-        public static Collider Touch(Object3d object1, Object3d object2)
+        public static CollisionImpact Touch(Object3d object1, Object3d object2)
         {
             if (object1 == null)
             {
@@ -282,7 +282,7 @@ namespace SdlDotNetExamples.Isotope
                 imp: a collider with the impact time and faces touched on both objects: class collide
             */
             //produce an imaginary collision object based on projecting object 1 in the direction of object 2
-            Collider imp = new Collider();
+            CollisionImpact imp = new CollisionImpact();
             int[] zero ={ 0, 0, 0 };
             Isotope.Object3d sense_object1 = new Isotope.Object3d(zero, zero, 0, true);
             //Take the 2 centres of the objects
@@ -317,7 +317,7 @@ namespace SdlDotNetExamples.Isotope
                 object_group: A list of objects : list of class or subclass of Object3d
                 Return true/false: true for a collision : boolean
             */
-            Collider imp = new Collider();
+            CollisionImpact imp = new CollisionImpact();
             for (int obj = 0; obj < objectGroup.Count; obj++)
             {
                 //call the collision detector to get the first object collided with

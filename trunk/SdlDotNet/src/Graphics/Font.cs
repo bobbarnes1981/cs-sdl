@@ -512,14 +512,14 @@ namespace SdlDotNet.Graphics
         /// 
         /// </summary>
         /// <param name="textItem"></param>
-        /// <param name="textcolor"></param>
+        /// <param name="textColor"></param>
         /// <param name="antiAlias"></param>
         /// <param name="textWidth"></param>
         /// <param name="maxLines"></param>
         /// <returns></returns>
-        public Surface Render(string textItem, Color textcolor, bool antiAlias, int textWidth, int maxLines)
+        public Surface Render(string textItem, Color textColor, bool antiAlias, int textWidth, int maxLines)
         {
-            return Render(textItem, textcolor, Color.Empty, antiAlias, textWidth, maxLines);
+            return Render(textItem, textColor, Color.Empty, antiAlias, textWidth, maxLines);
         }
 
         // c# doesn't allow the optional paramter - everything has to be passed 

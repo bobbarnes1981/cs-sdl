@@ -35,8 +35,8 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="size"></param>
         /// <param name="objtype"></param>
         /// <param name="fixedob"></param>
-        public Monster(int[] pos, int[] size, int objtype, bool fixedob)
-            : base(pos, size, objtype, fixedob)
+        public Monster(int[] position, int[] size, int objectType, bool fixedObject)
+            : base(position, size, objectType, fixedObject)
         {
             int[] twos ={ 2, 0, 0 };
             Velocity.CopyTo(twos, 0);

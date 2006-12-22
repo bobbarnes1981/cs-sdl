@@ -144,12 +144,12 @@ namespace SdlDotNetExamples.Isotope
             get { return examine; }
             set { examine = value; }
         }
-        private Key usingk;
+        private Key usingKey;
 
-        public Key Usingk
+        public Key UsingKey
         {
-            get { return usingk; }
-            set { usingk = value; }
+            get { return usingKey; }
+            set { usingKey = value; }
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="examine"></param>
         /// <param name="usingk"></param>
         public Keys(Key left, Key right, Key up, Key down,
-            Key jump, Key pickup, Key drop, Key examine, Key usingk)
+            Key jump, Key pickup, Key drop, Key examine, Key usingKey)
         {
             this.left = left;
             this.right = right;
@@ -175,7 +175,7 @@ namespace SdlDotNetExamples.Isotope
             this.pickup = pickup;
             this.drop = drop;
             this.examine = examine;
-            this.usingk = usingk;
+            this.usingKey = usingKey;
         }
     }
 }
