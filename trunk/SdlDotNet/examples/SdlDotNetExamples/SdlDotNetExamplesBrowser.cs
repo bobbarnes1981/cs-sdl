@@ -11,9 +11,9 @@ using Tao.FreeGlut;
 
 namespace SdlDotNetExamples
 {
-    public partial class SdlDotNetExamples : Form
+    public partial class SdlDotNetExamplesBrowser : Form
     {
-        public SdlDotNetExamples()
+        public SdlDotNetExamplesBrowser()
         {
             Glut.glutInit();
             SdlDotNet.Graphics.Video.Initialize();

@@ -36,7 +36,7 @@ namespace SdlDotNetExamples.Triad
     public class BlockGrid : GameArea, IDisposable
     {
         Size sizeOfGrid;
-        Triad triad;
+        TriadGame triad;
         static List<Block> blockList = new List<Block>();
         int delayFactor = 400;
         private float speedFactor = 1.0f;
@@ -117,7 +117,7 @@ namespace SdlDotNetExamples.Triad
             this.Location = location;
             sizeOfGrid = gridSize;
 
-            triad = new Triad(this);
+            triad = new TriadGame(this);
             AddObject(triad);
             lastTriadMove = Timer.TicksElapsed;
             lastTriadLeftRight = Timer.TicksElapsed;
@@ -172,7 +172,7 @@ namespace SdlDotNetExamples.Triad
             }
         }
 
-        void markBlocks(Triad triad)
+        void markBlocks(TriadGame triad)
         {
             int row = triad.Y / Block.BlockWidth;
             int col = triad.X / Block.BlockWidth;
@@ -271,7 +271,7 @@ namespace SdlDotNetExamples.Triad
                 switch (currentState)
                 {
                     case BlockGridState.CreateTriad:
-                        triad = new Triad(this);
+                        triad = new TriadGame(this);
                         if (triadHitsAnyBlock())
                         {
                             gameOverSound.Play(); ;

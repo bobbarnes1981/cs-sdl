@@ -59,7 +59,7 @@ namespace SdlDotNetExamples.SpriteDemos
                 {
                     dragSprite = new DragSprite(frames, "marble1",
                         new Point(sx + i * 50, sy + j * 50),
-                        new Rectangle(new Point(0, 0), SpriteDemos.Size));
+                        new Rectangle(new Point(0, 0), SpriteDemosMain.Size));
                     dragSprite.Animations.Add("marble1", anim1);
                     dragSprite.Animations.Add("marble2", anim2);
 
