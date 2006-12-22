@@ -371,7 +371,7 @@ namespace SdlDotNet.Core
 
         private static Hashtable userEvents = new Hashtable();
         private static int userEventId;
-        private static readonly int QUERY_EVENTS_MAX = 254;
+        private const int QUERY_EVENTS_MAX = 254;
         static readonly Events instance = new Events();
 
         #endregion
@@ -703,6 +703,10 @@ namespace SdlDotNet.Core
         /// <returns></returns>
         public static void Add(SdlEventArgs[] sdlEvents)
         {
+            if (sdlEvents == null)
+            {
+                throw new ArgumentNullException("sdlEvents");
+            }
             //Sdl.SDL_Event[] events = new Sdl.SDL_Event[sdlEvents.Length];
             for (int i = 0; i < sdlEvents.Length; i++)
             {

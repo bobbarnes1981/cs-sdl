@@ -19,7 +19,8 @@
 
 
 using System;
-using System.Collections;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 using SdlDotNet.Graphics;
 
@@ -30,7 +31,7 @@ namespace SdlDotNet.Particles.Particle
     /// <summary>
     /// A collection of particles.
     /// </summary>
-    public class ParticleCollection : CollectionBase, ICollection
+    public class ParticleCollection : Collection<BaseParticle>
     {
         /// <summary>
         /// Creates a new ParticleCollection.
@@ -54,7 +55,10 @@ namespace SdlDotNet.Particles.Particle
         /// <param name="collection">The collection to add.</param>
         public ParticleCollection(ParticleCollection collection)
         {
-            Add(collection);
+            foreach (BaseParticle b in collection)
+            {
+                Add(b);
+            }
         }
 
         /// <summary>
@@ -64,15 +68,6 @@ namespace SdlDotNet.Particles.Particle
         public ParticleCollection(ParticleSystem system)
         {
             Add(system);
-        }
-
-        /// <summary>
-        /// Adds a particle to the collection.
-        /// </summary>
-        /// <param name="particle">The particle to add.</param>
-        public void Add(BaseParticle particle)
-        {
-            List.Add(particle);
         }
 
         /// <summary>
@@ -88,33 +83,17 @@ namespace SdlDotNet.Particles.Particle
         /// Adds a particle emitter to the collection.
         /// </summary>
         /// <param name="emitter">The emitter to add to the collection.</param>
-        /// <param name="changeEmitterTarget">Flag to chage the emitter's target particle collection.  Defaults to true.</param>
+        /// <param name="changeEmitterTarget">Flag to change the emitter's target particle collection.  Defaults to true.</param>
         public void Add(ParticleEmitter emitter, bool changeEmitterTarget)
         {
             if (emitter == null)
             {
                 throw new ArgumentNullException("emitter");
             }
-            List.Add(emitter);
+            this.Add(emitter);
             if (changeEmitterTarget)
             {
                 emitter.Target = this;
-            }
-        }
-
-        /// <summary>
-        /// Adds a collection of particles to the collection.
-        /// </summary>
-        /// <param name="collection">The collection of particles to add.</param>
-        public void Add(ParticleCollection collection)
-        {
-            if (collection == null)
-            {
-                throw new ArgumentNullException("collection");
-            }
-            foreach (BaseParticle particle in collection)
-            {
-                List.Add(particle);
             }
         }
 
@@ -128,7 +107,10 @@ namespace SdlDotNet.Particles.Particle
             {
                 throw new ArgumentNullException("system");
             }
-            Add(system.Particles);
+            foreach (BaseParticle b in system.Particles)
+            {
+                Add(b);
+            }
         }
 
         /// <summary>
@@ -138,13 +120,13 @@ namespace SdlDotNet.Particles.Particle
         public virtual bool Update()
         {
             BaseParticle particle;
-            int count = List.Count;
+            int count = this.Count;
             for (int i = 0; i < count; i++)
             {
-                particle = (BaseParticle)List[i];
+                particle = (BaseParticle)this[i];
                 if (!particle.Update())
                 {
-                    List.RemoveAt(i--);
+                    this.RemoveAt(i--);
                     count--;
                 }
             }
@@ -157,84 +139,10 @@ namespace SdlDotNet.Particles.Particle
         /// <param name="destination">The surface to render the particles onto.</param>
         public void Render(Surface destination)
         {
-            foreach (BaseParticle particle in List)
+            foreach (BaseParticle particle in this)
             {
                 particle.Render(destination);
             }
-        }
-
-        /// <summary>
-        /// Indexer.
-        /// </summary>
-        public BaseParticle this[int index]
-        {
-            get
-            {
-                return (BaseParticle)List[index];
-            }
-            set
-            {
-                List[index] = value;
-            }
-        }
-
-        /// <summary>
-        /// Provide the explicit interface member for ICollection.
-        /// </summary>
-        /// <param name="array">Array to copy collection to</param>
-        /// <param name="index">Index at which to insert the collection items</param>
-        void ICollection.CopyTo(Array array, int index)
-        {
-            this.List.CopyTo(array, index);
-        }
-
-        /// <summary>
-        /// Provide the explicit interface member for ICollection.
-        /// </summary>
-        /// <param name="array">Array to copy collection to</param>
-        /// <param name="index">Index at which to insert the collection items</param>
-        public virtual void CopyTo(BaseParticle[] array, int index)
-        {
-            ((ICollection)this).CopyTo(array, index);
-        }
-
-        /// <summary>
-        /// Removes particle from collection
-        /// </summary>
-        /// <param name="particle">Particle to remove</param>
-        public virtual void Remove(BaseParticle particle)
-        {
-            List.Remove(particle);
-        }
-
-        /// <summary>
-        /// Insert a Particle into the collection
-        /// </summary>
-        /// <param name="index">Index at which to insert the particle</param>
-        /// <param name="particle">Particle to insert</param>
-        public virtual void Insert(int index, BaseParticle particle)
-        {
-            List.Insert(index, particle);
-        }
-
-        /// <summary>
-        /// Gets the index of the given Particle in the collection.
-        /// </summary>
-        /// <param name="particle">The particle to search for.</param>
-        /// <returns>The index of the given Particle.</returns>
-        public virtual int IndexOf(BaseParticle particle)
-        {
-            return List.IndexOf(particle);
-        }
-
-        /// <summary>
-        /// Checks if particle is in the container
-        /// </summary>
-        /// <param name="particle">Particle to query for</param>
-        /// <returns>True is the Particle is in the container.</returns>
-        public bool Contains(BaseParticle particle)
-        {
-            return (List.Contains(particle));
         }
     }
 }

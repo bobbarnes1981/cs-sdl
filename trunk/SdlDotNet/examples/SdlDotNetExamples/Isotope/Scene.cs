@@ -28,7 +28,13 @@ namespace SdlDotNetExamples.Isotope
     public class Scene
     {
         /* A collection of objects and a scenetype to hint at a background image */
-        public int sceneType;
+        private int sceneType;
+
+        public int SceneType
+        {
+            get { return sceneType; }
+            set { sceneType = value; }
+        }
         ArrayList objectGroup;
         /// <summary>
         /// 
@@ -39,10 +45,10 @@ namespace SdlDotNetExamples.Isotope
             {
                 return objectGroup;
             }
-            set
-            {
-                objectGroup = value;
-            }
+            //set
+            //{
+            //    objectGroup = value;
+            //}
         }
 
         /// <summary>

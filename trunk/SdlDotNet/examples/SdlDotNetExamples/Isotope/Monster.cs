@@ -39,7 +39,7 @@ namespace SdlDotNetExamples.Isotope
             : base(pos, size, objtype, fixedob)
         {
             int[] twos ={ 2, 0, 0 };
-            vel.CopyTo(twos, 0);
+            Velocity.CopyTo(twos, 0);
         }
 
         /// <summary>
@@ -47,28 +47,28 @@ namespace SdlDotNetExamples.Isotope
         /// </summary>
         /// <param name="other_obj"></param>
         /// <param name="impact_face"></param>
-        public new void EventCollision(Object3d other_obj, int impact_face)
+        public new void EventCollision(Object3d otherObject, int impactFace)
         {
             /*/ Turn around 180 degrees and continue walking /*/
             //call actors standard collision code
-            base.EventCollision(other_obj, impact_face);
+            base.EventCollision(otherObject, impactFace);
             int[] ones ={ 1, 0, 0 };
             int[] negones ={ -1, 0, 0 };
             // simple toggle movement
-            if (coltime == ObjectTime.GetTime())
+            if (CollisionTime == ObjectTime.Time)
             {
-                if (Facing == ones && impact_face == 0)
+                if (Facing == ones && impactFace == 0)
                 {
-                    vel[0] = -2;
+                    Velocity[0] = -2;
                     Facing = negones;
                 }
-                else if (Facing == negones && impact_face == 1)
+                else if (Facing == negones && impactFace == 1)
                 {
-                    vel[0] = 2;
+                    Velocity[0] = 2;
                     Facing = ones;
                 }
                 //WARNING MISSING TIME FUNCTION MUST BE FIXED
-                coltime = ObjectTime.GetTime();
+                CollisionTime = ObjectTime.Time;
             }
         }
     }

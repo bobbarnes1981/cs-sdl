@@ -38,8 +38,20 @@ namespace SdlDotNetExamples.Isotope
            carrier: The object that is carrying this object: Object3d or subclass:
            Note changed to type int for C# conversion
         */
-        public bool pickedup = false;
-        public int carrier = 0;
+        private bool pickedUp;
+
+        public bool PickedUp
+        {
+            get { return pickedUp; }
+            set { pickedUp = value; }
+        }
+        private int carrier;
+
+        public int Carrier
+        {
+            get { return carrier; }
+            set { carrier = value; }
+        }
 
         //public object_portable(pos,size,objtype,fixedob=false):base(pos,size,objtype,fixedob){	      
         //}
@@ -52,14 +64,14 @@ namespace SdlDotNetExamples.Isotope
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool RequestPickUp()
+        public bool RequestPickup()
         {
             /* A handler to manage a pickup event
 
                lead_actor: The object that wants to pick up this object (unused)
             */
             //carrier=lead_actor;
-            pickedup = true;
+            pickedUp = true;
             return (true);
         }
 
@@ -73,7 +85,7 @@ namespace SdlDotNetExamples.Isotope
 
                scene: The scene to put this object into: scene class (unused)
             */
-            pickedup = false;
+            pickedUp = false;
             carrier = 0;
             return (true);
         }

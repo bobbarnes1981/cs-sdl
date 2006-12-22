@@ -27,6 +27,7 @@ namespace SdlDotNet.Graphics.Sprites
     /// <summary>
     /// Summary description for Animation.
     /// </summary>
+    [Serializable]
     public class AnimationDictionary : Dictionary<string, Animation>
     {
         #region Constructors

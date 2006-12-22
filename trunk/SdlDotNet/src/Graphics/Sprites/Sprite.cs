@@ -58,6 +58,10 @@ namespace SdlDotNet.Graphics.Sprites
             :
             this(surface)
         {
+            if (surface == null)
+            {
+                throw new ArgumentNullException("surface");
+            }
             this.rect = new Rectangle(position.X, position.Y, surface.Width, surface.Height);
         }
 
@@ -688,15 +692,15 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Check to see if Sprite intersects with any sprite in a SpriteDictionary
         /// </summary>
-        /// <param name="SpriteDictionary">Collection to chekc the intersection with</param>
+        /// <param name="spriteDictionary">Collection to chekc the intersection with</param>
         /// <returns>True if sprite intersects with any sprite in collection</returns>
-        public virtual bool IntersectsWith(SpriteDictionary SpriteDictionary)
+        public virtual bool IntersectsWith(SpriteDictionary spriteDictionary)
         {
-            if (SpriteDictionary == null)
+            if (spriteDictionary == null)
             {
                 throw new ArgumentNullException("SpriteDictionary");
             }
-            foreach (Sprite sprite in SpriteDictionary.Keys)
+            foreach (Sprite sprite in spriteDictionary.Keys)
             {
                 if (this.IntersectsWith(sprite))
                 {

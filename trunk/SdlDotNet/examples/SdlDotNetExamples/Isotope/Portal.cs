@@ -51,11 +51,15 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="impact"></param>
         /// <param name="other_obj"></param>
         /// <param name="impact_face"></param>
-        public override void EventTouch(bool impact, Object3d other_obj, int impact_face)
+        public override void EventTouch(bool impact, Object3d otherObject, int impactFace)
         {
-            if (other_obj is LeadActor)
+            if (otherObject == null)
             {
-                ((LeadActor)other_obj).EventChangeScene(dest_scene, dest_pos);
+                throw new ArgumentNullException("otherObject");
+            }
+            if (otherObject is LeadActor)
+            {
+                ((LeadActor)otherObject).EventChangeScene(dest_scene, dest_pos);
             }
         }
     }

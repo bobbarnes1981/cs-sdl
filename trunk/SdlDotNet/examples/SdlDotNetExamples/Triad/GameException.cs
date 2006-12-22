@@ -39,7 +39,7 @@ namespace SdlDotNetExamples.Triad
         {
             if (message == null)
             {
-                throw new ApplicationException("Please provide a message.");
+                throw new SdlException("Please provide a message.");
             }
         }
 

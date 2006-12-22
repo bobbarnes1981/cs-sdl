@@ -44,16 +44,63 @@ namespace SdlDotNetExamples.Isotope
             when writing any code which does this as objects disappear when other actors may think
             they are still available.
         */
-        public Scene new_scene;
-        public int[] new_pos ={ 0, 0, 0 };
-        public Scene scene;
+        private Scene newScene;
+
+        public Scene NewScene
+        {
+            get { return newScene; }
+            set { newScene = value; }
+        }
+        private int[] newPosition ={ 0, 0, 0 };
+
+        public int[] NewPosition
+        {
+            get { return newPosition; }
+            set { newPosition = value; }
+        }
+        private Scene scene;
+
+        public Scene Scene
+        {
+            get { return scene; }
+            set { scene = value; }
+        }
         //Flags for pick up and drop messages from external control: perhaps this means we really need a player object
-        public bool pick_up_command = false;
-        public bool drop_command = false;
-        public ArrayList inventory = new ArrayList();
-        public int max_inventory = 4;
+        private bool pickupCommand;
+
+        public bool PickupCommand
+        {
+            get { return pickupCommand; }
+            set { pickupCommand = value; }
+        }
+        private bool dropCommand;
+
+        public bool DropCommand
+        {
+            get { return dropCommand; }
+            set { dropCommand = value; }
+        }
+        private ArrayList inventory = new ArrayList();
+
+        public ArrayList Inventory
+        {
+            get { return inventory; }
+        }
+        private int maxInventory = 4;
+
+        public int MaxInventory
+        {
+            get { return maxInventory; }
+            set { maxInventory = value; }
+        }
         //object being used
-        public int usingob = 0;
+        private int usingObject;
+
+        public int UsingObject
+        {
+            get { return usingObject; }
+            set { usingObject = value; }
+        }
 
         /// <summary>
         /// 
@@ -66,8 +113,8 @@ namespace SdlDotNetExamples.Isotope
         public LeadActor(int[] pos, int[] size, int objtype, Scene scene, bool fixedob)
             : base(pos, size, objtype, fixedob)
         {
-            new_scene = scene;
-            new_pos = pos;
+            newScene = scene;
+            newPosition = pos;
             this.scene = scene;
             //Flags for pick up and drop messages from external control: perhaps this means we really need a player object
         }
@@ -79,22 +126,22 @@ namespace SdlDotNetExamples.Isotope
         {
             //System.Console.WriteLine("Lead Actor Tick entry");
             /*/Redefined tick function to allow movement between scenes /*/
-            if (scene != new_scene)
+            if (scene != newScene)
             {
-                Vector.CopyVector(new_pos, position);
-                new_scene.ObjectGroup.Add(this);
+                Vector.CopyVector(newPosition, Position);
+                newScene.ObjectGroup.Add(this);
                 scene.ObjectGroup.Remove(this);
-                scene = new_scene;
+                scene = newScene;
             }
-            if (pick_up_command == true)
+            if (pickupCommand == true)
             {
-                PickUp();
-                pick_up_command = false;
+                Pickup();
+                pickupCommand = false;
             }
-            if (drop_command == true)
+            if (dropCommand == true)
             {
                 Drop();
-                drop_command = false;
+                dropCommand = false;
             }
             base.Tick();
         }
@@ -102,21 +149,21 @@ namespace SdlDotNetExamples.Isotope
         /// <summary>
         /// 
         /// </summary>
-        public void PickUp()
+        public void Pickup()
         {
             /* pick_up object action */
             int face = Vector.VectorToFace(Facing);
-            for (int i = 0; i < touched_objects.Count; i++)
+            for (int i = 0; i < TouchedObjects.Count; i++)
             {
 
                 // Pick up the first object we are touching
-                if (face == (int)touched_faces[i] && touched_objects[i] is ObjectPortable
-                    && inventory.Count < max_inventory)
+                if (face == (int)TouchedFaces[i] && TouchedObjects[i] is ObjectPortable
+                    && inventory.Count < maxInventory)
                 {
                     System.Console.WriteLine("Pick up");
-                    ObjectPortable pick_up_object = (ObjectPortable)touched_objects[i];
+                    ObjectPortable pick_up_object = (ObjectPortable)TouchedObjects[i];
                     //print touched_objects[i],scene.object_group
-                    if (pick_up_object.RequestPickUp() == true)
+                    if (pick_up_object.RequestPickup() == true)
                     {
                         inventory.Add(pick_up_object);
                         scene.ObjectGroup.Remove(pick_up_object);
@@ -139,11 +186,11 @@ namespace SdlDotNetExamples.Isotope
                 return;
             }
             // Get the candidate object to be dropped
-            ObjectPortable drop_object = (ObjectPortable)inventory[usingob];
+            ObjectPortable drop_object = (ObjectPortable)inventory[usingObject];
             // Test if there is space for the object to be dropped
             // Create a test object to put in the drop position
             int[] test_pos = Physics.DropPosition(this, drop_object, Facing, 4);
-            Object3d test_object = new Object3d(test_pos, drop_object.size, 0, false);
+            Object3d test_object = new Object3d(test_pos, drop_object.Size, 0, false);
             // Check if the test object collides with any other object in the scene
             if (Physics.TestCollisionGroup(test_object, scene.ObjectGroup) == true)
             {
@@ -156,12 +203,12 @@ namespace SdlDotNetExamples.Isotope
                 return;
             }
             // Drop the object
-            Vector.CopyVector(test_object.position, drop_object.position);
+            Vector.CopyVector(test_object.Position, drop_object.Position);
             inventory.Remove(drop_object);
             scene.ObjectGroup.Add(drop_object);
-            if (usingob != 0)
+            if (usingObject != 0)
             {
-                usingob = usingob - 1;
+                usingObject = usingObject - 1;
             }
         }
 
@@ -177,18 +224,18 @@ namespace SdlDotNetExamples.Isotope
                 scene: the new scene to change the lead actor to: scene class
                 pos: the new position vector in the new scene: list of 3 integers [x,y,z]
             */
-            new_scene = scene;
-            Vector.CopyVector(pos, new_pos);
+            newScene = scene;
+            Vector.CopyVector(pos, newPosition);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool EventPickUp()
+        public bool EventPickup()
         {
             /*Pick up event handler*/
-            pick_up_command = true;
+            pickupCommand = true;
             return (true);
         }
 
@@ -199,7 +246,7 @@ namespace SdlDotNetExamples.Isotope
         public bool EventDrop()
         {
             /*Drop event handler*/
-            drop_command = true;
+            dropCommand = true;
             return (true);
         }
 
@@ -212,7 +259,7 @@ namespace SdlDotNetExamples.Isotope
             // Event handler for request to use the next object in the inventory
             if (inventory.Count > 0)
             {
-                usingob = (usingob + 1) % inventory.Count;
+                usingObject = (usingObject + 1) % inventory.Count;
             }
             return (true);
         }

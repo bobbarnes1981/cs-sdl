@@ -75,7 +75,7 @@ namespace SdlDotNetExamples.RedBook
 		
 		
 
-		private static int spin = 0;
+		private static int spin;
 
 		/// <summary>
 		/// Lesson title

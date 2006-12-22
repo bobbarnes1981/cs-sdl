@@ -45,6 +45,10 @@ namespace SdlDotNetExamples.Isotope
             */
             // Object tick: let each object run its tick() action.
             // make a copy of the object pointers in case the objects remove themselves from the master list
+            if (scene == null)
+            {
+                throw new ArgumentNullException("scene");
+            }
             Object3d[] update_group = new Object3d[scene.ObjectGroup.Count];
             scene.ObjectGroup.CopyTo(update_group, 0);
             foreach (Object3d obj in update_group)

@@ -49,6 +49,14 @@ namespace SdlDotNetExamples.Isotope
                 Note: A side effect for speed: isometric transform scales x and y values to 1.118 times their
                 actual value and the z scale coordinate stays as 1: therefore all sprites need to be drawn with this ratio. */
             //transformation coordinates that are returned
+            if (offset == null)
+            {
+                throw new ArgumentNullException("offset");
+            }
+            if (coord == null)
+            {
+                throw new ArgumentNullException("coord");
+            }
             int[] trans_coord ={ 0, 0 };
             //calculate x coordinate
             trans_coord[0] = (coord[0] - coord[1]) + offset[0];
@@ -73,17 +81,25 @@ namespace SdlDotNetExamples.Isotope
 
                 Relies on the same scale system as transform_iso. This is usingant for matching
                 sprite dimensions to object coordinates. */
+            if (objectGroup == null)
+            {
+                throw new ArgumentNullException("objectGroup");
+            }
+            if (spriteGroup == null)
+            {
+                throw new ArgumentNullException("spriteGroup");
+            }
             for (int obj = 0; obj < objectGroup.Length; obj++)
             {
                 //finds the isometric coordinate based on the objects position vector and a display offset
-                int[] pos = Transform(objectGroup[obj].position, offset);
+                int[] pos = Transform(objectGroup[obj].Position, offset);
                 //Console.WriteLine(pos[0]);
                 //Console.WriteLine(pos[1]);
                 //Console.WriteLine(objectGroup[obj].size[1]);
                 //Console.WriteLine(objectGroup[obj].size[2]);
                 //put the new isometric coordinates of the current object into the sprite array
-                spriteGroup[obj].X += pos[0] - objectGroup[obj].size[1];
-                spriteGroup[obj].Y += pos[1] - objectGroup[obj].size[2];
+                spriteGroup[obj].X += pos[0] - objectGroup[obj].Size[1];
+                spriteGroup[obj].Y += pos[1] - objectGroup[obj].Size[2];
                 //sprite_group[obj].Rectangle.Offset(pos[0]-objectGroup[obj].size[1],pos[1]-objectGroup[obj].size[2]);
                 //Console.WriteLine(sprite_group[obj].Rectangle.Top);
                 //Console.WriteLine(sprite_group[obj].Rectangle.Left);
@@ -109,6 +125,10 @@ namespace SdlDotNetExamples.Isotope
 
             //define the array to return with the object number in an isometric order
             //int[] ordered;
+            if (objectGroup == null)
+            {
+                throw new ArgumentNullException("objectGroup");
+            }
             int[] ordered = new int[objectGroup.Length];
             for (int i = 0; i < objectGroup.Length; i++)
             {
@@ -128,7 +148,7 @@ namespace SdlDotNetExamples.Isotope
             //precalculate the front position of each objects coordinates
             for (int obj = 0; obj < objectGroup.Length; obj++)
             {
-                front[obj] = Vector.AddVector(objectGroup[obj].position, Vector.AddVector(objectGroup[obj].size, negones));
+                front[obj] = Vector.AddVector(objectGroup[obj].Position, Vector.AddVector(objectGroup[obj].Size, negones));
             }
 
             int swap;
@@ -139,7 +159,7 @@ namespace SdlDotNetExamples.Isotope
                 {
                     for (int k = 0; k <= 2; k++)
                     {
-                        if (objectGroup[ordered[j]].position[k] > front[ordered[j + 1]][k])
+                        if (objectGroup[ordered[j]].Position[k] > front[ordered[j + 1]][k])
                         {
                             swap = ordered[j + 1];
                             ordered[j + 1] = ordered[j];
@@ -204,6 +224,18 @@ namespace SdlDotNetExamples.Isotope
                 old_rect: A list of pygame rectangles where the old sprites were drawn for updating: list of rect
                 Returns old_rect: see above
             */
+            if (skinGroup == null)
+            {
+                throw new ArgumentNullException("skinGroup");
+            }
+            if (objectGroup == null)
+            {
+                throw new ArgumentNullException("objectGroup");
+            }
+            if (surface == null)
+            {
+                throw new ArgumentNullException("surface");
+            }
 
             // Find out what objects are visable
             int visable_limit = skinGroup.Length;
@@ -211,7 +243,7 @@ namespace SdlDotNetExamples.Isotope
             ArrayList visable_object_list = new ArrayList();
             foreach (Object3d obj in objectGroup)
             {
-                if (obj.objtype < visable_limit)
+                if (obj.ObjectType < visable_limit)
                 {
                     visable_object_list.Add(obj);
                 }

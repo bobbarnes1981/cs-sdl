@@ -249,7 +249,11 @@ namespace SdlDotNetExamples.NeHe
         /// <param name="characterSet"></param>
         public void GlPrint(int positionX, int positionY, string displayText, int characterSet)
         {
-            if (displayText == null || displayText.Length == 0)
+            if (displayText == null)
+            {
+                displayText = " ";
+            }
+            if (displayText.Length == 0)
             {
                 displayText = " ";
             }

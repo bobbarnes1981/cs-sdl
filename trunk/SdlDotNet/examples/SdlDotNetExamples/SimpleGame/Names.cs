@@ -30,7 +30,7 @@ namespace SdlDotNetExamples.SimpleGame
         static string logFile3 = "SimpleGame3.log";
         static string startingSimpleGame = "Starting SimpleGame.";
         static string quittingSimpleGame = "Quitting SimpleGame.";
-        static int startingSector = 0;
+        static int startingSector;
 
         /// <summary>
         /// 

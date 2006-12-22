@@ -188,7 +188,7 @@ namespace SdlDotNet.Graphics
     {
         #region Private fields
 
-        static readonly int USE_CURRENT_BPP = 0;
+        const int USE_CURRENT_BPP = 0;
 
         #endregion
 
@@ -560,7 +560,7 @@ namespace SdlDotNet.Graphics
         /// <returns>a surface to draw to</returns>
         public static Surface SetVideoMode(int width, int height, bool resizable, bool openGL, bool fullscreen, bool hardwareSurface, bool frame)
         {
-            return SetVideoMode(width, height, USE_CURRENT_BPP, resizable, openGL, fullscreen, hardwareSurface, true);
+            return SetVideoMode(width, height, USE_CURRENT_BPP, resizable, openGL, fullscreen, hardwareSurface, frame);
         }
 
         /// <summary>
@@ -1038,7 +1038,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="icon">the surface containing the image</param>
         /// <remarks>This should be called before Video.SetVideoMode</remarks>
-        public static void WindowIcon(Surface icon)
+        public static void WindowIcon(BaseSdlResource icon)
         {
             if (icon == null)
             {

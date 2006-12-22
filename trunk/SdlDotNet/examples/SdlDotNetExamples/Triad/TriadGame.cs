@@ -76,24 +76,17 @@ namespace SdlDotNetExamples.Triad
             surf.Fill(
                 new Rectangle(new Point(0, 0), surf.Size), Color.Black);
 
-            try
-            {
-                grid = new BlockGrid(new Point(20, 20), new Size(11, 13));
-                grid.BlocksDestroyed +=
-                    new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
 
-                if (File.Exists(data_directory + "levelup.wav"))
-                {
-                    filepath = "";
-                }
+            grid = new BlockGrid(new Point(20, 20), new Size(11, 13));
+            grid.BlocksDestroyed +=
+                new BlocksDestroyedEventHandler(grid_BlocksDestroyed);
 
-                levelUpSound = Mixer.Sound(filepath + data_directory + "levelup.wav");
-                
-            }
-            catch
+            if (File.Exists(data_directory + "levelup.wav"))
             {
-                //throw;
+                filepath = "";
             }
+
+            levelUpSound = Mixer.Sound(filepath + data_directory + "levelup.wav");
             Events.Run();
         }
 
@@ -167,7 +160,7 @@ namespace SdlDotNetExamples.Triad
                     if (surf != null)
                     {
                         surf.Dispose();
-                    }                    
+                    }
                     if (levelUpSound != null)
                     {
                         levelUpSound.Dispose();

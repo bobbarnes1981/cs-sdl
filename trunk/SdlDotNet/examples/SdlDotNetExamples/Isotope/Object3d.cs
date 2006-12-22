@@ -23,6 +23,7 @@
     tick routines. Modifying these values in event receiver routines will mean that often a necessary collision
     detection has not occurred and that the drawn display will have errors */
 
+using System;
 using System.Collections;
 
 namespace SdlDotNetExamples.Isotope
@@ -43,12 +44,48 @@ namespace SdlDotNetExamples.Isotope
            vel: velocity vector : list of 3 integers [vx,vy,vz]
            old_pos: The previous position vector of the object (unused ??): list of 3 integers [x,y,z]
         */
-        public int[] position ={ 0, 0, 0 };
-        public int[] old_pos ={ 0, 0, 0 };
-        public int[] vel ={ 0, 0, 0 };
-        public int[] size ={ 0, 0, 0 };
-        public bool fixedob;
-        public int objtype;
+        private int[] position ={ 0, 0, 0 };
+
+        public int[] Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+        private int[] oldPosition ={ 0, 0, 0 };
+
+        public int[] OldPosition
+        {
+            get { return oldPosition; }
+            set { oldPosition = value; }
+        }
+        private int[] vel ={ 0, 0, 0 };
+
+        public int[] Velocity
+        {
+            get { return vel; }
+            set { vel = value; }
+        }
+        private int[] size ={ 0, 0, 0 };
+
+        public int[] Size
+        {
+            get { return size; }
+            set { size = value; }
+        }
+        private bool fixedObject;
+
+        public bool FixedObject
+        {
+            get { return fixedObject; }
+            set { fixedObject = value; }
+        }
+        private int objectType;
+
+        public int ObjectType
+        {
+            get { return objectType; }
+            set { objectType = value; }
+        }
 
         //public Object3d(int[] pos,int[] size,int objtype=0,bool fixedob=true){
         /// <summary>
@@ -58,13 +95,21 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="size"></param>
         /// <param name="objtype"></param>
         /// <param name="fixedob"></param>
-        public Object3d(int[] pos, int[] size, int objtype, bool fixedob)
+        public Object3d(int[] position, int[] size, int objectType, bool fixedObject)
         {
-            pos.CopyTo(this.position, 0);
-            pos.CopyTo(old_pos, 0);
+            if (position == null)
+            {
+                throw new ArgumentNullException("position");
+            }
+            if (size == null)
+            {
+                throw new ArgumentNullException("size");
+            }
+            position.CopyTo(this.position, 0);
+            position.CopyTo(oldPosition, 0);
             size.CopyTo(this.size, 0);
-            this.fixedob = fixedob;
-            this.objtype = objtype;
+            this.fixedObject = fixedObject;
+            this.objectType = objectType;
         }
 
         /// <summary>
@@ -74,7 +119,7 @@ namespace SdlDotNetExamples.Isotope
         {
             /*Tick event handler. A general function which allows the object to perform actions */
             //movement, basic velocity driver
-            position.CopyTo(old_pos, 0);
+            position.CopyTo(oldPosition, 0);
             position = Vector.AddVector(position, vel);
             position.CopyTo(this.position, 0);
         }
@@ -84,7 +129,7 @@ namespace SdlDotNetExamples.Isotope
         /// </summary>
         /// <param name="other_obj"></param>
         /// <param name="impact_face"></param>
-        public virtual void EventCollision(Object3d other_obj, int impact_face)
+        public virtual void EventCollision(Object3d otherObject, int impactFace)
         {
             /*Collision event handler. A function to record a collision with other objects
 
@@ -99,7 +144,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="impact"></param>
         /// <param name="other_obj"></param>
         /// <param name="impact_face"></param>
-        public virtual void EventTouch(bool impact, Object3d other_obj, int impact_face)
+        public virtual void EventTouch(bool impact, Object3d otherObject, int impactFace)
         {
             /*Touch event handler. A function to record a collision with other objects
 	 

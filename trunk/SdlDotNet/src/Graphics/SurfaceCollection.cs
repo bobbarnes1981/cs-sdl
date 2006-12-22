@@ -21,7 +21,7 @@
 using System;
 using System.Drawing;
 using System.Collections.Generic;
-using System.Collections;
+using System.Collections.ObjectModel;
 using System.IO;
 
 using SdlDotNet;
@@ -32,7 +32,7 @@ namespace SdlDotNet.Graphics
     /// <summary>
     /// Encapsulates the collection of Surface objects.
     /// </summary>
-    public class SurfaceCollection : List<Surface>
+    public class SurfaceCollection : Collection<Surface>
     {
         #region Constructors
 
@@ -50,7 +50,10 @@ namespace SdlDotNet.Graphics
         /// <param name="surfaces">The surface collection to copy.</param>
         public SurfaceCollection(SurfaceCollection surfaces)
         {
-            this.AddRange(surfaces);
+            foreach (Surface s in surfaces)
+            {
+                this.Add(s);
+            }
         }
 
         /// <summary>
@@ -209,16 +212,6 @@ namespace SdlDotNet.Graphics
             {
                 return new Size(this[0].Width, this[0].Height);
             }
-        }
-
-        /// <summary>
-        /// Copy array
-        /// </summary>
-        /// <param name="array">Array to copy collection to</param>
-        /// <param name="index">Start index</param>
-        public virtual void CopyTo(Array array, int index)
-        {
-            this.CopyTo(array, index);
         }
 
         /// <summary>

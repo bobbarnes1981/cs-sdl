@@ -172,7 +172,11 @@ namespace SdlDotNet.Particles
             }
             if (changeEmitterTarget)
             {
-                emitter.Target = m_Particles;
+                emitter.Target.Clear();
+                foreach (BaseParticle b in m_Particles)
+                {
+                    emitter.Target.Add(b);
+                }
             }
             m_Particles.Add(emitter);
         }

@@ -30,7 +30,7 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.SmallDemos
 {
-    public class HeroExample
+    public class HeroExample : IDisposable
     {
         // Our hero sprite to walk around.
         private AnimatedSprite hero = new AnimatedSprite();
@@ -110,41 +110,41 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Events_Tick(object sender, TickEventArgs e)
         {
-           
-                // Clear the screen, draw the hero and output to the window
-                Video.Screen.Fill(Color.DarkGreen);
-                try
-                {
+
+            // Clear the screen, draw the hero and output to the window
+            Video.Screen.Fill(Color.DarkGreen);
+            try
+            {
                 hero.Render(Video.Screen);
             }
             catch (System.ArgumentOutOfRangeException ex)
             {
                 Console.WriteLine(ex.StackTrace.ToString());
             }
-                Video.Screen.Update();
-            
+            Video.Screen.Update();
 
-                // If the hero is animated, he is walking, so move him around!
-                if (hero.Animate)
+
+            // If the hero is animated, he is walking, so move him around!
+            if (hero.Animate)
+            {
+                switch (hero.CurrentAnimation)
                 {
-                    switch (hero.CurrentAnimation)
-                    {
-                        case "WalkLeft":
-                            // 2 is the speed of the hero when walking.
-                            hero.X -= 2;
-                            break;
-                        case "WalkUp":
-                            hero.Y -= 2;
-                            break;
-                        case "WalkDown":
-                            hero.Y += 2;
-                            break;
-                        case "WalkRight":
-                            hero.X += 2;
-                            break;
-                    }
+                    case "WalkLeft":
+                        // 2 is the speed of the hero when walking.
+                        hero.X -= 2;
+                        break;
+                    case "WalkUp":
+                        hero.Y -= 2;
+                        break;
+                    case "WalkDown":
+                        hero.Y += 2;
+                        break;
+                    case "WalkRight":
+                        hero.X += 2;
+                        break;
                 }
-            
+            }
+
 
         }
 
@@ -210,6 +210,56 @@ namespace SdlDotNetExamples.SmallDemos
                 return "HeroExample: Simple animation";
             }
         }
+
+        #region IDisposable Members
+
+        private bool disposed;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.hero != null)
+                    {
+                        this.hero.Dispose();
+                        this.hero = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ~HeroExample()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 }
 

@@ -19,6 +19,7 @@
 
 using System.Drawing;
 using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -33,7 +34,7 @@ namespace SdlDotNetExamples.SpriteDemos
     public class ViewportMode : DemoMode
     {
         private Sprite sprite;
-        List<Sprite> spriteSingle = new List<Sprite>();
+        Collection<Sprite> spriteSingle = new Collection<Sprite>();
         private Size size;
         static Random rand = new Random();
 
@@ -42,7 +43,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// 
         /// </summary>
-        public List<Sprite> CenterSprite
+        public Collection<Sprite> CenterSprite
         {
             get
             {

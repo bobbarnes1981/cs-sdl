@@ -19,10 +19,12 @@
 #endregion LICENSE
 
 using System;
-using System.Collections;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Serialization;
 using System.Globalization;
+using System.Security.Permissions;
 
 using SdlDotNet;
 using SdlDotNet.Core;
@@ -35,7 +37,8 @@ namespace SdlDotNet.Graphics.Sprites
     /// The SpriteDictionary is used to group sprites into an easily managed whole. 
     /// </summary>
     /// <remarks>The sprite manager has no size.</remarks>
-    public class SpriteDictionary : Dictionary<Sprite, Rectangle>
+    [Serializable]
+    public class SpriteDictionary : Dictionary<Sprite, Rectangle>, ISerializable
     {
         #region Constructors
         /// <summary>
@@ -43,6 +46,17 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public SpriteDictionary()
             : base()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected SpriteDictionary(
+           SerializationInfo info, 
+           StreamingContext context)
         {
         }
 
@@ -59,8 +73,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Creates a new SpriteDictionary based off a different sprite collection.
         /// </summary>
-        /// <param name="SpriteDictionary">Add SpriteDictionary to this SpriteDictionary</param>
-        public SpriteDictionary(SpriteDictionary SpriteDictionary)
+        /// <param name="spriteDictionary">Add SpriteDictionary to this SpriteDictionary</param>
+        public SpriteDictionary(SpriteDictionary spriteDictionary)
             : base()
         {
             //this.AddInternal(SpriteDictionary);
@@ -70,14 +84,14 @@ namespace SdlDotNet.Graphics.Sprites
         #endregion
 
         #region Display
-        private List<Rectangle> lostRects = new List<Rectangle>();
-        List<Rectangle> rects = new List<Rectangle>();
+        private Collection<Rectangle> lostRects = new Collection<Rectangle>();
+        Collection<Rectangle> rects = new Collection<Rectangle>();
         Dictionary<Sprite, Rectangle> tempDict = new Dictionary<Sprite, Rectangle>();
         /// <summary>
         /// Draws all surfaces within the collection on the given destination.
         /// </summary>
         /// <param name="destination">The destination surface.</param>
-        public virtual List<Rectangle> Draw(Surface destination)
+        public virtual Collection<Rectangle> Draw(Surface destination)
         {
             if (destination == null)
             {
@@ -115,7 +129,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="background">B
         /// ackground to use to paint over Sprites in SpriteDictionary
         /// </param>
-        public void Erase(Surface surface, Surface background)
+        public void Erase(Surface surface, BaseSdlResource background)
         {
             if (surface == null)
             {
@@ -157,20 +171,24 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="sprite">Sprite to add</param>
         public void AddInternal(Sprite sprite)
         {
+            if (sprite == null)
+            {
+                throw new ArgumentNullException("sprite");
+            }
             Add(sprite, sprite.Rectangle);
         }
 
         /// <summary>
         /// Adds sprites from another group to this group
         /// </summary>
-        /// <param name="SpriteDictionary">SpriteDictionary to add Sprites from</param>
-        public virtual int Add(SpriteDictionary SpriteDictionary)
+        /// <param name="spriteDictionary">SpriteDictionary to add Sprites from</param>
+        public virtual int Add(SpriteDictionary spriteDictionary)
         {
-            if (SpriteDictionary == null)
+            if (spriteDictionary == null)
             {
                 throw new ArgumentNullException("SpriteDictionary");
             }
-            foreach (Sprite s in SpriteDictionary.Keys)
+            foreach (Sprite s in spriteDictionary.Keys)
             {
                 //s.AddInternal(this);
                 Add(s);
@@ -178,19 +196,19 @@ namespace SdlDotNet.Graphics.Sprites
             return this.Count;
         }
 
-        private int AddInternal(SpriteDictionary SpriteDictionary)
-        {
-            if (SpriteDictionary == null)
-            {
-                throw new ArgumentNullException("SpriteDictionary");
-            }
-            foreach (Sprite s in SpriteDictionary.Keys)
-            {
-                //SpriteDictionary[i].AddInternal(this);
-                Add(s);
-            }
-            return this.Count;
-        }
+        //private int AddInternal(SpriteDictionary SpriteDictionary)
+        //{
+        //    if (SpriteDictionary == null)
+        //    {
+        //        throw new ArgumentNullException("SpriteDictionary");
+        //    }
+        //    foreach (Sprite s in SpriteDictionary.Keys)
+        //    {
+        //        //SpriteDictionary[i].AddInternal(this);
+        //        Add(s);
+        //    }
+        //    return this.Count;
+        //}
 
         /// <summary>
         /// Rectangles of Sprites that have been removed
@@ -199,7 +217,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// These Rectangles are kept temporarily until their 
         /// positions can be properly erased.
         /// </remarks>
-        protected List<Rectangle> LostRects
+        protected Collection<Rectangle> LostRects
         {
             get
             {
@@ -239,16 +257,16 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Removes sprite from this group if they are contained in the given group
         /// </summary>
-        /// <param name="SpriteDictionary">
+        /// <param name="spriteDictionary">
         /// Remove SpriteDictionary from this SpriteDictionary.
         /// </param>
-        public virtual void Remove(SpriteDictionary SpriteDictionary)
+        public virtual void Remove(SpriteDictionary spriteDictionary)
         {
-            if (SpriteDictionary == null)
+            if (spriteDictionary == null)
             {
                 throw new ArgumentNullException("SpriteDictionary");
             }
-            foreach (Sprite s in SpriteDictionary.Keys)
+            foreach (Sprite s in spriteDictionary.Keys)
             {
                 if (this.ContainsKey(s))
                 {
@@ -895,7 +913,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// Detects if any sprites in a given SpriteDictionary 
         /// intersect with any sprites in this SpriteDictionary.
         /// </summary>
-        /// <param name="SpriteDictionary">
+        /// <param name="spriteDictionary">
         /// SpriteDictionary to check intersections
         /// </param>
         /// <returns>
@@ -903,20 +921,20 @@ namespace SdlDotNet.Graphics.Sprites
         /// keys and SpriteDictionarys containing sprites they 
         /// intersect with from the given SpriteDictionary
         /// </returns>
-        public virtual Hashtable IntersectsWith(SpriteDictionary SpriteDictionary)
+        public virtual Dictionary<Sprite, Sprite> IntersectsWith(SpriteDictionary spriteDictionary)
         {
-            if (SpriteDictionary == null)
+            if (spriteDictionary == null)
             {
                 throw new ArgumentNullException("SpriteDictionary");
             }
-            Hashtable intersection = new Hashtable();
+            Dictionary<Sprite, Sprite> intersection = new Dictionary<Sprite, Sprite>();
             foreach (Sprite s in this.Keys)
             {
-                foreach (Sprite t in SpriteDictionary.Keys)
+                foreach (Sprite t in spriteDictionary.Keys)
                 {
                     if (s.IntersectsWith(t))
                     {
-                        if (intersection.Contains(s))
+                        if (intersection.ContainsKey(s))
                         {
                             //((SpriteDictionary)intersection[s]).Add(t);
                         }
@@ -939,16 +957,6 @@ namespace SdlDotNet.Graphics.Sprites
         //{
         //    this.List.CopyTo(array, index);
         //}
-
-        /// <summary>
-        /// Provide the explicit interface member for ICollection.
-        /// </summary>
-        /// <param name="array">Array to copy collection to</param>
-        /// <param name="index">Index at which to insert the collection items</param>
-        public virtual void CopyTo(Sprite[] array, int index)
-        {
-            ((ICollection)this).CopyTo(array, index);
-        }
 
         #endregion
 
@@ -990,8 +998,32 @@ namespace SdlDotNet.Graphics.Sprites
         /// <returns></returns>
         public int Compare(object x, object y)
         {
+            if (x == null)
+            {
+                throw new ArgumentNullException("x");
+            }
+            if (y == null)
+            {
+                throw new ArgumentNullException("y");
+            }
             return ((Sprite)x).Z.CompareTo(((Sprite)y).Z);
 
+        }
+
+        #endregion
+
+        #region ISerializable Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        [SecurityPermissionAttribute(SecurityAction.Demand,
+          SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new Exception("The method or operation is not implemented.");
         }
 
         #endregion

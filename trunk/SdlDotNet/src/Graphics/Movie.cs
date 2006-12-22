@@ -174,16 +174,16 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Display video surface
         /// </summary>
-        /// <param name="surface">Surface to display movie object on</param>
-        public void Display(Surface surface)
+        /// <param name="resource">Surface to display movie object on</param>
+        public void Display(BaseSdlResource resource)
         {
-            if (surface == null)
+            if (resource == null)
             {
-                throw new ArgumentNullException("surface");
+                throw new ArgumentNullException("resource");
             }
             Smpeg.SMPEG_setdisplay(
                 this.Handle,
-                surface.Handle,
+                resource.Handle,
                 IntPtr.Zero, null);
         }
 
@@ -545,7 +545,7 @@ namespace SdlDotNet.Graphics
         /// Renders final frame of movie and puts it on a surface
         /// </summary>
         /// <param name="surface">surface to display frame to</param>
-        public void RenderFinalFrame(Surface surface)
+        public void RenderFinalFrame(BaseSdlResource surface)
         {
             if (surface == null)
             {

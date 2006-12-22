@@ -28,13 +28,13 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.SmallDemos
 {
-    public class Pong
+    public class PongExample : IDisposable
     {
         Sprite ball;
         int ballSpeedX = 1;
         int ballSpeedY = 1;
 
-        public Pong()
+        public PongExample()
         {
             string filePath = Path.Combine("..", "..");
             string fileDirectory = "Data";
@@ -97,7 +97,7 @@ namespace SdlDotNetExamples.SmallDemos
         [STAThread]
         public static void Run()
         {
-            Pong pong = new Pong();
+            PongExample pong = new PongExample();
             pong.Go();
         }
 
@@ -111,5 +111,55 @@ namespace SdlDotNetExamples.SmallDemos
                 return "PongExample: Simple game of Pong";
             }
         }
+
+        #region IDisposable Members
+
+        private bool disposed;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.ball != null)
+                    {
+                        this.ball.Dispose();
+                        this.ball = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ~PongExample()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 }

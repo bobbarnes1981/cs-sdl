@@ -25,14 +25,12 @@ namespace SdlDotNetExamples.Isotope
     /// </summary>
     public class Disolver : ObjectGravity
     {
-        int new_object_time = 0;
+        int newObjectTime;
         Scene scene;
         // a class for objects which delete themselves after a set period of ticks
         public Disolver(int[] pos, int[] size, int objtype, Scene scene)
             : base(pos, size, objtype, false)
         {
-            //die=false;
-            new_object_time = 0;
             this.scene = scene;
         }
         /// <summary>
@@ -41,11 +39,11 @@ namespace SdlDotNetExamples.Isotope
         public override void Tick()
         {
             base.Tick();
-            if (new_object_time == 20)
+            if (newObjectTime == 20)
             {
                 scene.ObjectGroup.Remove(this);
             }
-            new_object_time = new_object_time + 1;
+            newObjectTime = newObjectTime + 1;
         }
     }
 }

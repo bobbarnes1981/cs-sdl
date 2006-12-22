@@ -35,7 +35,6 @@ namespace SdlDotNet.OpenGl
         Bitmap textureImage;
         int textureID;
         BitmapData bitmapData;
-        bool mode2D;
         int[] texture = new int[1];
 
         /// <summary>
@@ -146,15 +145,15 @@ namespace SdlDotNet.OpenGl
             }
         }
 
-        private bool Mode2D
+        private void SetMode2D(bool mode2D)
         {
-            get
-            {
-                return this.mode2D;
-            }
-            set
-            {
-                if (value)
+            //get
+            //{
+            //    return this.mode2D;
+            //}
+            //set
+            //{
+                if (mode2D)
                 {
                     Surface screen = Video.Screen;
 
@@ -180,7 +179,7 @@ namespace SdlDotNet.OpenGl
                     Gl.glLoadIdentity();
 
                     Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL);
-                    this.mode2D = value;
+                    //this.mode2D = value;
                 }
                 else
                 {
@@ -192,9 +191,9 @@ namespace SdlDotNet.OpenGl
                     Gl.glMatrixMode(Gl.GL_PROJECTION);
                     Gl.glPopMatrix();
                     Gl.glPopAttrib();
-                    this.mode2D = value;
+                    //this.mode2D = value;
                 }
-            }
+            //}
         }
 
         /// <summary>
@@ -204,7 +203,7 @@ namespace SdlDotNet.OpenGl
         {
             if (textureImage != null)
             {
-                Mode2D = true;
+                SetMode2D(true);
 
                 Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureID);
                 Gl.glBegin(Gl.GL_QUADS);
@@ -221,7 +220,7 @@ namespace SdlDotNet.OpenGl
                 /* Bad things happen if we delete the texture before it finishes */
                 //Gl.glFinish();
 
-                Mode2D = false;
+                SetMode2D(false);
 
                 if (textureImage != null)
                 {

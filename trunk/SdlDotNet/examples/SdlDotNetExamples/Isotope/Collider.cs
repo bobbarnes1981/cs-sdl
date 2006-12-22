@@ -40,9 +40,33 @@ namespace SdlDotNetExamples.Isotope
             impact_face_object2: hit face number of the second object: integer 0-5
             impact_time: the integer time of the collision (now really a distance) see collision detect routine: integer
         */
-        public bool impact = false;
-        public int impact_face_object1 = 0;
-        public int impact_face_object2 = 0;
-        public int impact_time = 0;
+        private bool impact;
+
+        public bool Impact
+        {
+            get { return impact; }
+            set { impact = value; }
+        }
+        private int impactFaceObject1;
+
+        public int ImpactFaceObject1
+        {
+            get { return impactFaceObject1; }
+            set { impactFaceObject1 = value; }
+        }
+        private int impactFaceObject2;
+
+        public int ImpactFaceObject2
+        {
+            get { return impactFaceObject2; }
+            set { impactFaceObject2 = value; }
+        }
+        private int impactTime;
+
+        public int ImpactTime
+        {
+            get { return impactTime; }
+            set { impactTime = value; }
+        }
     }
 }
