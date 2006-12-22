@@ -28,8 +28,8 @@ namespace SdlDotNetExamples.Isotope
         int newObjectTime;
         Scene scene;
         // a class for objects which delete themselves after a set period of ticks
-        public Dissolver(int[] pos, int[] size, int objtype, Scene scene)
-            : base(pos, size, objtype, false)
+        public Dissolver(int[] position, int[] size, int objectType, Scene scene)
+            : base(position, size, objectType, false)
         {
             this.scene = scene;
         }

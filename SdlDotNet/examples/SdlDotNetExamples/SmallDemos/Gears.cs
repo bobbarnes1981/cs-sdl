@@ -191,7 +191,7 @@ namespace SdlDotNetExamples.SmallDemos
 
         double viewRotX = 20.0f;
         double viewRotY = 30.0f;
-        double viewRotZ;
+        //double viewRotZ;
         int gear1;
         int gear2;
         int gear3;
@@ -207,7 +207,7 @@ namespace SdlDotNetExamples.SmallDemos
             Gl.glPushMatrix();
             Gl.glRotated(viewRotX, 1.0, 0.0, 0.0);
             Gl.glRotated(viewRotY, 0.0, 1.0, 0.0);
-            Gl.glRotated(viewRotZ, 0.0, 0.0, 1.0);
+            Gl.glRotated(0.0, 0.0, 0.0, 1.0);
 
             Gl.glPushMatrix();
             Gl.glTranslated(-3.0, -2.0, 0.0);
