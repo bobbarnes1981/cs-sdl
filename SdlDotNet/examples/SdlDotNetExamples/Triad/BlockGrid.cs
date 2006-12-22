@@ -20,7 +20,8 @@
 using System;
 using System.IO;
 using System.Drawing;
-using System.Collections;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 using SdlDotNet.Audio;
 using SdlDotNet.Graphics;
@@ -36,7 +37,7 @@ namespace SdlDotNetExamples.Triad
     {
         Size sizeOfGrid;
         Triad triad;
-        static BlockCollection blockList = new BlockCollection();
+        static List<Block> blockList = new List<Block>();
         int delayFactor = 400;
         private float speedFactor = 1.0f;
         string data_directory = @"Data/";
@@ -386,8 +387,7 @@ namespace SdlDotNetExamples.Triad
             }
         }
 
-
-        BlockCollection blocksToDestroy = new BlockCollection();
+        Collection<Block> blocksToDestroy = new Collection<Block>();
         void removeDestroyedBlocks()
         {
             blocksToDestroy.Clear();

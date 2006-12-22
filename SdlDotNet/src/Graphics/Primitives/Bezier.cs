@@ -50,6 +50,14 @@ namespace SdlDotNet.Graphics.Primitives
         /// <param name="steps">number of steps in curve</param>
         public Bezier(short[] positionsX, short[] positionsY, int steps)
         {
+            if (positionsX == null)
+            {
+                throw new ArgumentNullException("positionsX");
+            }
+            if (positionsY == null)
+            {
+                throw new ArgumentNullException("positionsY");
+            }
             this.x = positionsX;
             this.y = positionsY;
             this.n = 0;
@@ -130,6 +138,10 @@ namespace SdlDotNet.Graphics.Primitives
             }
             else
             {
+                if (arrayX == null)
+                {
+                    throw new ArgumentNullException("arrayX");
+                }
                 this.x = arrayX;
                 this.n = arrayX.Length;
             }
@@ -148,6 +160,10 @@ namespace SdlDotNet.Graphics.Primitives
         /// <param name="arrayY">array of positions</param>
         public void PositionsY(short[] arrayY)
         {
+            if (arrayY == null)
+            {
+                throw new ArgumentNullException("arrayY");
+            }
             if (this.x.Length != arrayY.Length)
             {
                 throw SdlException.Generate();
@@ -201,6 +217,10 @@ namespace SdlDotNet.Graphics.Primitives
         /// <param name="fill">fill primitive with color</param>
         public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
         {
+            if (surface == null)
+            {
+                throw new ArgumentNullException("surface");
+            }
             int result = SdlGfx.bezierRGBA(
                 surface.Handle, this.PositionsX(), this.PositionsY(),
                 this.NumberOfPoints, this.Steps,

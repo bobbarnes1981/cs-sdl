@@ -40,7 +40,8 @@ namespace SdlDotNet.Audio
 	/// tunes["jazz.mid"].Play();
 	/// </code>
 	/// </example>
-	public class MusicDictionary : Dictionary<string, Music>
+    [Serializable]
+    public class MusicDictionary : Dictionary<string, Music>
     {
         #region Constructor
 

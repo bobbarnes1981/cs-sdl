@@ -41,7 +41,13 @@ namespace SdlDotNetExamples.Isotope
            old_rect: The areas of the view that are tagged to be updated: list of rect class
         */
 
-        public int[] ViewSize ={ 400, 300 };
+        private int[] viewSize ={ 400, 300 };
+
+        public int[] ViewSize
+        {
+            get { return viewSize; }
+            set { viewSize = value; }
+        }
         //remember the surface
         Surface surface;
 
@@ -51,19 +57,31 @@ namespace SdlDotNetExamples.Isotope
             set { surface = value; }
         }
         //offset from the top left corner of the window for the isotope display
-        public int[] DisplayOffset ={ 200, 150 };
-        public Rectangle[] OldRect ={ };
+        private int[] displayOffset ={ 200, 150 };
+
+        public int[] DisplayOffset
+        {
+            get { return displayOffset; }
+            set { displayOffset = value; }
+        }
+        private Rectangle[] oldRect ={ };
+
+        public Rectangle[] OldRect
+        {
+            get { return oldRect; }
+            set { oldRect = value; }
+        }
 
         // Initialize
-        public View(Surface surface, Scene scene, Skin[] skin_group, int[] display_offset)
+        public View(Surface surface, Scene scene, Skin[] skinGroup, int[] displayOffset)
         {
             //Dimensions of the window for the isotope display
             //view_size=(int[])surface.Size;
             //remember the surface
             this.surface = surface;
             //offset from the top left corner of the window for the isotope display
-            this.DisplayOffset = display_offset;
-            RedrawDisplay(scene, skin_group);
+            this.displayOffset = displayOffset;
+            RedrawDisplay(scene, skinGroup);
         }
 
         /// <summary>
@@ -71,15 +89,23 @@ namespace SdlDotNetExamples.Isotope
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="skin_group"></param>
-        public void DisplayUpdate(Scene scene, Skin[] skin_group)
+        public void DisplayUpdate(Scene scene, Skin[] skinGroup)
         {
+            if (scene == null)
+            {
+                throw new ArgumentNullException("scene");
+            }
+            if (skinGroup == null)
+            {
+                throw new ArgumentNullException("skinGroup");
+            }
             // Updates the isometric display using update rectangles
             // Clear the old sprite positions with the background
-            Surface background = (Surface)skin_group[scene.sceneType].images[0];
+            Surface background = (Surface)skinGroup[scene.SceneType].Images[0];
             //Surface subsurface;
-            if (OldRect.Length > 0)
+            if (oldRect.Length > 0)
             {
-                foreach (Rectangle clear_rect in OldRect)
+                foreach (Rectangle clear_rect in oldRect)
                 {
                     //subsurface=background.CreateSurfaceFromClipRectangle(clear_rect);
                     Surface.Blit(background, clear_rect, clear_rect);
@@ -91,8 +117,8 @@ namespace SdlDotNetExamples.Isotope
             //for(int obj=0;obj<=scene.objectGroup.Count;obj++)
             //   objectGroup[obj]=scene.objectGroup[obj];
             scene.ObjectGroup.CopyTo(objectGroup, 0);
-            OldRect = Isometric.ViewUpdate(Surface, objectGroup, skin_group,
-                DisplayOffset, OldRect);
+            oldRect = Isometric.ViewUpdate(Surface, objectGroup, skinGroup,
+                displayOffset, oldRect);
         }
 
         /// <summary>
@@ -100,14 +126,22 @@ namespace SdlDotNetExamples.Isotope
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="skin_group"></param>
-        public void RedrawDisplay(Scene scene, Skin[] skin_group)
+        public void RedrawDisplay(Scene scene, Skin[] skinGroup)
         {
+            if (scene == null)
+            {
+                throw new ArgumentNullException("scene");
+            }
+            if (skinGroup == null)
+            {
+                throw new ArgumentNullException("skinGroup");
+            }
             // Redraws the entire display, including background
             //Display the background
             Console.WriteLine(scene);
-            Surface.Blit((Surface)skin_group[scene.sceneType].images[0], ((Surface)skin_group[scene.sceneType].images[0]).Rectangle);
+            Surface.Blit((Surface)skinGroup[scene.SceneType].Images[0], ((Surface)skinGroup[scene.SceneType].Images[0]).Rectangle);
             Surface.Update();
-            DisplayUpdate(scene, skin_group);
+            DisplayUpdate(scene, skinGroup);
         }
     }
 }

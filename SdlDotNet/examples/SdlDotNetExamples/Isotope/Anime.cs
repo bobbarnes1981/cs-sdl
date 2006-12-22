@@ -49,7 +49,7 @@ namespace SdlDotNetExamples.Isotope
         public override Surface GetImage(Object3d obj)
         {
             /*Redefined image query to allow cycled animation */
-            return ((Surface)images[ObjectTime.GetTime() % images.Count]);
+            return ((Surface)Images[ObjectTime.Time % Images.Count]);
         }
     }
 }

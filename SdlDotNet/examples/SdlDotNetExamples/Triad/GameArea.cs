@@ -19,6 +19,8 @@
 
 
 using System;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
@@ -31,11 +33,11 @@ namespace SdlDotNetExamples.Triad
     /// </summary>
     public abstract class GameArea : GameObject
     {
-        GameObjectCollection objectList = new GameObjectCollection();
+        Collection<GameObject> objectList = new Collection<GameObject>();
         /// <summary>
         /// 
         /// </summary>
-        public GameObjectCollection GameObjectList
+        public Collection<GameObject> GameObjectList
         {
             get
             {

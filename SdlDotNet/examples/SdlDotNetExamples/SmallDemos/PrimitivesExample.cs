@@ -49,7 +49,7 @@ namespace SdlDotNetExamples.SmallDemos
         Box box;
         const int MAXCOUNT = 3;
         const int SLEEPTIME = 200;
-        int times = 0;
+        int times;
         static Random rand = new Random();
         int width = 640;
         int height = 480;
@@ -73,21 +73,15 @@ namespace SdlDotNetExamples.SmallDemos
             Events.Tick += new TickEventHandler(this.Tick);
             Events.Quit += new QuitEventHandler(this.Quit);
 
-            try
-            {
-                Video.WindowIcon();
-                Video.WindowCaption = "SdlDotNet - Primitives Example";
-                Mouse.ShowCursor = false;
-                screen = Video.SetVideoMode(width, height, true);
-                surf =
-                    screen.CreateCompatibleSurface(width, height, true);
-                //fill the surface with black
-                surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
-                Events.Run();
-            }
-            catch
-            {
-            }
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - Primitives Example";
+            Mouse.ShowCursor = false;
+            screen = Video.SetVideoMode(width, height, true);
+            surf =
+                screen.CreateCompatibleSurface(width, height, true);
+            //fill the surface with black
+            surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
+            Events.Run();
         }
 
         private void KeyboardDown(

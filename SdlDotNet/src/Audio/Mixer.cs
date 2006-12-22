@@ -270,8 +270,8 @@ namespace SdlDotNet.Audio
     {
         #region Private fields
 
-        static readonly int DEFAULT_CHUNK_SIZE = 1024;
-        static readonly int DEFAULT_NUMBER_OF_CHANNELS = 8;
+        const int DEFAULT_CHUNK_SIZE = 1024;
+        const int DEFAULT_NUMBER_OF_CHANNELS = 8;
         static private byte distance;
 
         #endregion

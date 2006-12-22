@@ -102,6 +102,10 @@ namespace SdlDotNet.Graphics
         /// <param name="pointSize">Size of font</param>
         public Font(byte[] array, int pointSize)
         {
+            if (array == null)
+            {
+                throw new ArgumentNullException("array");
+            }
             if (!Font.IsFontSystemInitialized)
             {
                 Font.InitializeFontSystem();
@@ -533,6 +537,10 @@ namespace SdlDotNet.Graphics
         /// <returns></returns>
         public Surface Render(string textItem, Color textColor, Color backgroundColor, bool antiAlias, int textWidth, int maxLines)
         {
+            if (textItem == null)
+            {
+                throw new ArgumentNullException("textItem");
+            }
             int x = 0;
             int y = 0;
             int tempWidth = 0;
@@ -607,7 +615,7 @@ namespace SdlDotNet.Graphics
                     {
                         if (maxLines == 0 || countLines <= maxLines)
                         {
-                            if (splitline[k] != "")
+                            if (!String.IsNullOrEmpty(splitline[k]))
                             {
                                 blitSurf = this.Render(splitline[k], textColor, backgroundColor, antiAlias);
                             }
@@ -632,7 +640,7 @@ namespace SdlDotNet.Graphics
                     {
                         stringpos = 0;
                         //indented = true; 
-                        if (splitline[k] == "")
+                        if (String.IsNullOrEmpty(splitline[k]))
                         {
                             y = y + fontHeight;
                         }

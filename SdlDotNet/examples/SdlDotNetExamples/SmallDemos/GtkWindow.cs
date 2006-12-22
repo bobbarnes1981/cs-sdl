@@ -29,12 +29,12 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.SmallDemos
 {
-    public class GtkWindow
+    public class GtkWindow : IDisposable
     {
         // widgets
         Gtk.Window win;
         Gtk.Button btn;
-        SdlDotNet.Graphics.Surface SdlScreen;
+        SdlDotNet.Graphics.Surface sdlScreen;
         Gtk.VBox verBox;
         Gtk.Image myImg;
 
@@ -53,18 +53,18 @@ namespace SdlDotNetExamples.SmallDemos
             win.Add(verBox);
 
 
-            SdlScreen = new Surface(new System.Drawing.Size(250, 100));
-            SdlScreen.DrawPrimitive(new SdlDotNet.Graphics.Primitives.Box(10, 10, 240, 90), System.Drawing.Color.Blue);
+            sdlScreen = new Surface(new System.Drawing.Size(250, 100));
+            sdlScreen.DrawPrimitive(new SdlDotNet.Graphics.Primitives.Box(10, 10, 240, 90), System.Drawing.Color.Blue);
 
             // RENDERING THRU Gtk.Image
-            myImg = new Gtk.Image(ImageToPixbuf(SdlScreen.Bitmap));
+            myImg = new Gtk.Image(ImageToPixbuf(sdlScreen.Bitmap));
             myImg.DoubleBuffered = true;
             verBox.Add(myImg);
 
             // Rendering using GTK Widget !! :)
             SurfaceGtk mySurface = new SurfaceGtk();
-            SdlScreen.DrawPrimitive(new SdlDotNet.Graphics.Primitives.Circle(125, 50, 25), System.Drawing.Color.Red, false, true);		// ADD RED Circle 
-            mySurface.Surface = SdlScreen;
+            sdlScreen.DrawPrimitive(new SdlDotNet.Graphics.Primitives.Circle(125, 50, 25), System.Drawing.Color.Red, false, true);		// ADD RED Circle 
+            mySurface.Surface = sdlScreen;
             verBox.Add(mySurface);
 
             // button
@@ -103,6 +103,74 @@ namespace SdlDotNetExamples.SmallDemos
                 return null;
             }
         }
+        #region IDisposable Members
 
+        private bool disposed;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.sdlScreen != null)
+                    {
+                        this.sdlScreen.Dispose();
+                        this.sdlScreen = null;
+                    }
+                    if (this.win != null)
+                    {
+                        this.win.Dispose();
+                        this.win = null;
+                    }
+                    if (this.verBox != null)
+                    {
+                        this.verBox.Dispose();
+                        this.verBox = null;
+                    }
+                    if (this.btn != null)
+                    {
+                        this.btn.Dispose();
+                        this.btn = null;
+                    }
+                    if (this.myImg != null)
+                    {
+                        this.myImg.Dispose();
+                        this.myImg = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ~GtkWindow()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 }

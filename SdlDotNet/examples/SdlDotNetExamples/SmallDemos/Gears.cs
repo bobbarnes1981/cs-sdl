@@ -191,14 +191,14 @@ namespace SdlDotNetExamples.SmallDemos
 
         double viewRotX = 20.0f;
         double viewRotY = 30.0f;
-        double viewRotZ = 0.0f;
+        double viewRotZ;
         int gear1;
         int gear2;
         int gear3;
-        double angle = 0.0f;
+        double angle;
 
-        int timeMarker = 0;
-        int frames = 0;
+        int timeMarker;
+        int frames;
 
         void Draw()
         {
@@ -257,8 +257,8 @@ namespace SdlDotNetExamples.SmallDemos
 
         int newWidth;
         int newHeight;
-        double seconds = 0;
-        double fps = 0;
+        double seconds;
+        double fps;
 
         /* new window size or exposure */
         void Reshape()

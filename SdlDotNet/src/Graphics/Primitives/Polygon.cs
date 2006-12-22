@@ -47,6 +47,14 @@ namespace SdlDotNet.Graphics.Primitives
         /// <param name="positionsY">array of y positions of points</param>
         public Polygon(short[] positionsX, short[] positionsY)
         {
+            if (positionsX == null)
+            {
+                throw new ArgumentNullException("positionsX");
+            }
+            if (positionsY == null)
+            {
+                throw new ArgumentNullException("positionsY");
+            }
             this.x = positionsX;
             this.y = positionsY;
             this.n = 0;
@@ -100,6 +108,10 @@ namespace SdlDotNet.Graphics.Primitives
         /// <param name="arrayX">x positions</param>
         public void PositionsX(short[] arrayX)
         {
+            if (arrayX == null)
+            {
+                throw new ArgumentNullException("arrayX");
+            }
             if (arrayX.Length != this.y.Length)
             {
                 throw SdlException.Generate();
@@ -124,6 +136,10 @@ namespace SdlDotNet.Graphics.Primitives
         /// <param name="arrayY">array of Y positions</param>
         public void PositionsY(short[] arrayY)
         {
+            if (arrayY == null)
+            {
+                throw new ArgumentNullException("arrayY");
+            }
             if (this.x.Length != arrayY.Length)
             {
                 throw SdlException.Generate();
@@ -171,6 +187,10 @@ namespace SdlDotNet.Graphics.Primitives
         /// <param name="fill">fill primitive with color</param>
         public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
         {
+            if (surface == null)
+            {
+                throw new ArgumentNullException("surface");
+            }
             if (fill)
             {
                 int result = SdlGfx.filledPolygonRGBA(surface.Handle, this.PositionsX(), this.PositionsY(), this.NumberOfSides, color.R, color.G, color.G,

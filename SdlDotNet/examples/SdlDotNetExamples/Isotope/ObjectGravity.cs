@@ -45,14 +45,42 @@ namespace SdlDotNetExamples.Isotope
            touched_objects: list of objects being touched: list of Object3d class or subclass
         */
 
-        public bool gravity = false;
+        private bool gravity;
+
+        public bool Gravity
+        {
+            get { return gravity; }
+            set { gravity = value; }
+        }
         // Flag to show if this object is touching on its bottom z face
-        public bool touching = false;
+        private bool touching;
+
+        public bool Touching
+        {
+            get { return touching; }
+            set { touching = value; }
+        }
         // List for the other objects being touched and by what face
-        public ArrayList touched_objects = new ArrayList();
-        public ArrayList touched_faces = new ArrayList();
+        private ArrayList touchedObjects = new ArrayList();
+
+        public ArrayList TouchedObjects
+        {
+            get { return touchedObjects; }
+        }
+        private ArrayList touchedFaces = new ArrayList();
+
+        public ArrayList TouchedFaces
+        {
+            get { return touchedFaces; }
+        }
         // Time of the collision? Doesnt seem to be used
-        public int coltime = 0;
+        private int collisionTime;
+
+        public int CollisionTime
+        {
+            get { return collisionTime; }
+            set { collisionTime = value; }
+        }
 
         //public object_gravity(int[] pos,int[] size,int objtype,bool fixedob=false):
         public ObjectGravity(int[] pos, int[] size, int objtype, bool fixedob)
@@ -78,12 +106,12 @@ namespace SdlDotNetExamples.Isotope
             if (gravity == true)
             {
                 //System.Console.WriteLine("Gravity on!");
-                vel[2] = vel[2] - 1;
+                Velocity[2] = Velocity[2] - 1;
             }
             // Clear the touching information for the next tick.
             touching = false;
-            touched_objects.Clear();
-            touched_faces.Clear();
+            touchedObjects.Clear();
+            touchedFaces.Clear();
         }
 
         /// <summary>
@@ -91,14 +119,14 @@ namespace SdlDotNetExamples.Isotope
         /// </summary>
         /// <param name="other_obj"></param>
         /// <param name="impact_face"></param>
-        public override void EventCollision(Object3d other_obj, int impact_face)
+        public override void EventCollision(Object3d otherObject, int impactFace)
         {
             /* Redefined collision event handler for gravity and touching.*/
             // When colliding with something on the z axis while gravity is on
             //System.Console.WriteLine("Object_gravity: event collision entry");
-            if (impact_face == 5 && gravity == true)
+            if (impactFace == 5 && gravity == true)
             {
-                vel[2] = 0;
+                Velocity[2] = 0;
                 gravity = false;
             }
             //***WARNING TAKEN OUT UNTIL DEBUG WE NEED A GLOBAL TIME VAR!!!
@@ -111,16 +139,16 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="impact"></param>
         /// <param name="other_obj"></param>
         /// <param name="impact_face"></param>
-        public override void EventTouch(bool impact, Object3d other_obj, int impact_face)
+        public override void EventTouch(bool impact, Object3d otherObject, int impactFace)
         {
             /* Redefined touch event handler for gravity and touching.*/
             // Add the impact information to the touching lists of objects and faces
             if (impact == true)
             {
-                touched_objects.Add(other_obj);
-                touched_faces.Add(impact_face);
+                touchedObjects.Add(otherObject);
+                touchedFaces.Add(impactFace);
             }
-            if (impact == true && impact_face == 5)
+            if (impact == true && impactFace == 5)
             {
                 //this.vel[2]=0
                 touching = true;
@@ -142,9 +170,9 @@ namespace SdlDotNetExamples.Isotope
             /* Sets the objects velocity in all directions to zero. */
             if (gravity == false)
             {
-                vel[0] = 0;
-                vel[1] = 0;
-                vel[2] = 0;
+                Velocity[0] = 0;
+                Velocity[1] = 0;
+                Velocity[2] = 0;
             }
         }
     }

@@ -74,9 +74,9 @@ namespace SdlDotNetExamples.RedBook
 
 		#region Private Fields
 		private static int list;
-		private static int spinX = 0;
-		private static int spinY = 0;
-		private static float distance = 0.0f;
+		private static int spinX;
+		private static int spinY;
+		private static float distance;
 		private static float polyFactor = 1.0f;
 		private static float polyUnits = 1.0f;
 		#endregion Private Fields

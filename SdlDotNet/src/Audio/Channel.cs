@@ -284,7 +284,7 @@ namespace SdlDotNet.Audio
         /// </param>
         /// <returns>The channel used to play the sound</returns>
         /// <remarks></remarks>
-        public int FadeIn(Sound sound, int ms, int loops)
+        public int FadeIn(BaseSdlResource sound, int ms, int loops)
         {
             if (sound == null)
             {
@@ -310,7 +310,7 @@ namespace SdlDotNet.Audio
         /// <param name="ticks">The time limit in milliseconds</param>
         /// <returns>The channel used to play the sound</returns>
         /// <remarks></remarks>
-        public int FadeIn(Sound sound, int ms, int loops, int ticks)
+        public int FadeIn(BaseSdlResource sound, int ms, int loops, int ticks)
         {
             if (sound == null)
             {

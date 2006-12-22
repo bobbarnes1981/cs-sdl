@@ -71,10 +71,10 @@ namespace SdlDotNetExamples.RedBook
 
 		#region Private Fields
 		private static float[ , , ] controlPoints = new float[4, 4, 3];
-		private static bool showPoints = false;
+		private static bool showPoints;
 		private static Glu.GLUnurbs nurb;
-		private static bool down = false;
-		private static int lastX = 0;
+		private static bool down;
+		private static int lastX;
 		#endregion Private Fields
 
 		#region Constructors

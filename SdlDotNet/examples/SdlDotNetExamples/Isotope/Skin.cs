@@ -39,8 +39,19 @@ namespace SdlDotNetExamples.Isotope
            images: The images used to display an object type: list of image
            name: name of the object type: string
            get_image(obj) : returns the image to display based on the state of the object */
-        public ArrayList images;
-        public string name;
+        private ArrayList images;
+
+        public ArrayList Images
+        {
+            get { return images; }
+        }
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
         public Skin(ArrayList images, string name)
         {

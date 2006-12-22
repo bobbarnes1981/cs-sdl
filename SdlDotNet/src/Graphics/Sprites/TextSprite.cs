@@ -53,11 +53,8 @@ namespace SdlDotNet.Graphics.Sprites
         public TextSprite(
             string textItem,
             SdlDotNet.Graphics.Font font)
-            : base(font.Render(textItem, Color.White))
+            : this(textItem, font, Color.White)
         {
-            this.textItem = textItem;
-            this.font = font;
-            this.RenderInternal();
         }
 
         /// <summary>
@@ -70,12 +67,8 @@ namespace SdlDotNet.Graphics.Sprites
             string textItem,
             SdlDotNet.Graphics.Font font,
             Color color)
-            : base(font.Render(textItem, color))
+            : this(textItem, font, color, true)
         {
-            this.textItem = textItem;
-            this.font = font;
-            this.color = color;
-            this.RenderInternal();
         }
 
         /// <summary>
@@ -90,8 +83,13 @@ namespace SdlDotNet.Graphics.Sprites
             string textItem,
             SdlDotNet.Graphics.Font font,
             Color color, bool antiAlias)
-            : base(font.Render(textItem, color))
+            : base()
         {
+            if (font == null)
+            {
+                throw new ArgumentNullException("font");
+            }
+            base.Surface = font.Render(textItem, color);
             this.textItem = textItem;
             this.font = font;
             this.color = color;
@@ -113,7 +111,6 @@ namespace SdlDotNet.Graphics.Sprites
             : this(textItem, font, textColor)
         {
             this.backgroundColor = backgroundColor;
-            this.RenderInternal();
         }
 
         /// <summary>
@@ -129,7 +126,6 @@ namespace SdlDotNet.Graphics.Sprites
             : this(textItem, font)
         {
             base.Position = position;
-            this.RenderInternal();
         }
 
         /// <summary>
@@ -149,7 +145,6 @@ namespace SdlDotNet.Graphics.Sprites
         {
             base.Position = position;
             this.antiAlias = antiAlias;
-            this.RenderInternal();
         }
 
         /// <summary>
@@ -167,7 +162,6 @@ namespace SdlDotNet.Graphics.Sprites
             : this(textItem, font, position)
         {
             this.color = color;
-            this.RenderInternal();
         }
 
         /// <summary>
@@ -188,7 +182,6 @@ namespace SdlDotNet.Graphics.Sprites
         {
             this.color = color;
             this.antiAlias = antiAlias;
-            this.RenderInternal();
         }
         #endregion Constructors
 

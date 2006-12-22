@@ -36,7 +36,7 @@ namespace SdlDotNetExamples.Isotope
     /// </remarks>
     public class Actor : ObjectGravity
     {
-        int cycle = 0;
+        int cycle;
 
         /// <summary>
         /// 
@@ -76,8 +76,8 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="size"></param>
         /// <param name="objtype"></param>
         /// <param name="fixedob"></param>
-        public Actor(int[] position, int[] size, int objectType, bool fixedob)
-            : base(position, size, objectType, fixedob)
+        public Actor(int[] position, int[] size, int objectType, bool fixedObject)
+            : base(position, size, objectType, fixedObject)
         {
         }
 
@@ -87,7 +87,7 @@ namespace SdlDotNetExamples.Isotope
         public override void Tick()
         {
             // Walking animation: Cycle through each of the 4 movement frames
-            if (position[0] != old_pos[0] || position[1] != old_pos[1])
+            if (Position[0] != OldPosition[0] || Position[1] != OldPosition[1])
             {
                 cycle = cycle + 1;
                 if (cycle == 4)
@@ -110,12 +110,12 @@ namespace SdlDotNetExamples.Isotope
         public void Move(int[] offset)
         {
             /*/ offset: the value for the velocity: list of 3 integers [vx,vy,vz] /*/
-            if (gravity == false)
+            if (Gravity == false)
             {
-                vel = offset;
+                Velocity = offset;
                 int[] zero ={ 0, 0, 0 };
                 facing = Vector.Direction(zero, offset);
-                coltime = ObjectTime.GetTime();
+                CollisionTime = ObjectTime.Time;
             }
         }
 
@@ -124,14 +124,14 @@ namespace SdlDotNetExamples.Isotope
         /// </summary>
         public void Jump()
         {
-            if (gravity == false)
+            if (Gravity == false)
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    vel[i] = facing[i] * 2;
+                    Velocity[i] = facing[i] * 2;
                 }
-                vel[2] = vel[2] + 8;
-                gravity = true;
+                Velocity[2] = Velocity[2] + 8;
+                Gravity = true;
             }
         }
     }

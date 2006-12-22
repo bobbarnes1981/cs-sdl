@@ -215,6 +215,10 @@ namespace SdlDotNet.Graphics.Primitives
         /// <param name="fill">fill primitive with color</param>
         public void Draw(Surface surface, System.Drawing.Color color, bool antiAlias, bool fill)
         {
+            if (surface == null)
+            {
+                throw new ArgumentNullException("surface");
+            }
             if (fill)
             {
                 int result = SdlGfx.boxRGBA(

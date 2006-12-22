@@ -88,7 +88,69 @@ namespace SdlDotNetExamples.Isotope
 
            left,right,up,down,jump,pick_up,drop,examine,using: key codes for the player keys: key
         */
-        public Key left, right, up, down, jump, pick_up, drop, examine, usingk;
+        private Key left;
+
+        public Key Left
+        {
+            get { return left; }
+            set { left = value; }
+        }
+        private Key right;
+
+        public Key Right
+        {
+            get { return right; }
+            set { right = value; }
+        }
+        private Key up;
+
+        public Key Up
+        {
+            get { return up; }
+            set { up = value; }
+        }
+        private Key down;
+
+        public Key Down
+        {
+            get { return down; }
+            set { down = value; }
+        }
+        private Key jump;
+
+        public Key Jump
+        {
+            get { return jump; }
+            set { jump = value; }
+        }
+        private Key pickup;
+
+        public Key Pickup
+        {
+            get { return pickup; }
+            set { pickup = value; }
+        }
+        private Key drop;
+
+        public Key Drop
+        {
+            get { return drop; }
+            set { drop = value; }
+        }
+        private Key examine;
+
+        public Key Examine
+        {
+            get { return examine; }
+            set { examine = value; }
+        }
+        private Key usingk;
+
+        public Key Usingk
+        {
+            get { return usingk; }
+            set { usingk = value; }
+        }
 
         /// <summary>
         /// 
@@ -103,14 +165,14 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="examine"></param>
         /// <param name="usingk"></param>
         public Keys(Key left, Key right, Key up, Key down,
-            Key jump, Key pick_up, Key drop, Key examine, Key usingk)
+            Key jump, Key pickup, Key drop, Key examine, Key usingk)
         {
             this.left = left;
             this.right = right;
             this.up = up;
             this.down = down;
             this.jump = jump;
-            this.pick_up = pick_up;
+            this.pickup = pickup;
             this.drop = drop;
             this.examine = examine;
             this.usingk = usingk;

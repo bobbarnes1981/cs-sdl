@@ -41,7 +41,7 @@ namespace SdlDotNetExamples.SmallDemos
 
             AudioFormat fmt = AudioFormat.Signed16Little;
 
-            AudioBasic.OpenAudio(playback_freq, fmt, SoundChannel.Mono, samples, new AudioCallbackDelegate(Unsigned16LittleCallback), me);
+            AudioBasic.OpenAudio(playback_freq, fmt, SoundChannel.Mono, samples, new AudioCallback(Unsigned16LittleCallback), me);
 
             offset = AudioBasic.AudioInfo.Offset;
             volume = 0.9 * 32768;
@@ -73,29 +73,29 @@ namespace SdlDotNetExamples.SmallDemos
         const double pi2 = Math.PI * 2;
         const double divider = (double)playback_freq / pi2;
 
-        static double time = 0.0;
+        static double time;
         static double step = 1.0 / playback_freq * pi2;
         static double freq = 224.0;         //Hz
         static double freq2 = 224.0;        //Hz
         static double volume = 0.9;
-        static int offset = 0;
+        static int offset;
         static Oscillator osc = new Oscillator(playback_freq);
         static Oscillator osc2 = new Oscillator(playback_freq);
 
-        static void Unsigned8Callback(IntPtr userData, IntPtr stream, int len)
-        {
-            int buf_pos = 0;
+        //static void Unsigned8Callback(IntPtr userData, IntPtr stream, int len)
+        //{
+        //    int buf_pos = 0;
 
-            while (buf_pos < len)
-            {
-                buffer8[buf_pos++] = (byte)((Math.Sin(time / pi2 * freq) * 128) * volume);
+        //    while (buf_pos < len)
+        //    {
+        //        buffer8[buf_pos++] = (byte)((Math.Sin(time / pi2 * freq) * 128) * volume);
 
-                time += step;
-            }
+        //        time += step;
+        //    }
 
-            Marshal.Copy(buffer8, 0, stream, len);
-            len = 0;
-        }
+        //    Marshal.Copy(buffer8, 0, stream, len);
+        //    len = 0;
+        //}
 
         static void Unsigned16LittleCallback(IntPtr userData, IntPtr stream, int len)
         {

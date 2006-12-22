@@ -23,10 +23,11 @@
 
 /* Defines the animated images to draw for an object type and object state. */
 
-using SdlDotNet;
+using System;
 using System.Collections;
 using System.Drawing;
 
+using SdlDotNet;
 using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Isotope
@@ -38,8 +39,12 @@ namespace SdlDotNetExamples.Isotope
     {
         // utility routines
 
-        public static ArrayList LoadImages(string[] image_names)
+        public static ArrayList LoadImages(string[] imageNames)
         {
+            if (imageNames == null)
+            {
+                throw new ArgumentNullException("imageNames");
+            }
             /*Loads a list of images.
 
                image_names: The filenames of the images to load: list of string
@@ -47,7 +52,7 @@ namespace SdlDotNetExamples.Isotope
             ArrayList images = new ArrayList();
             //Load images using a colorkey transparency of whitest white
             //int[] colorkey={255,255,255};
-            foreach (string file_name in image_names)
+            foreach (string file_name in imageNames)
             {
                 Surface image = new Surface(file_name);
                 image = image.Convert();

@@ -46,6 +46,10 @@ namespace SdlDotNet.GtkSharp
             }
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
                 this.surface.Dispose();
                 this.surface = value;
                 this.SetSizeRequest(surface.Width, surface.Height);
@@ -62,10 +66,10 @@ namespace SdlDotNet.GtkSharp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="evnt"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        protected override bool OnExposeEvent(Gdk.EventExpose args)
+        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
         {
             this.GdkWindow.DrawPixbuf(null, ImageToPixbuf(surface.Bitmap), 0, 0, 0, 0, surface.Width, surface.Height,
                         Gdk.RgbDither.Normal, 0, 0);

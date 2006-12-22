@@ -36,7 +36,7 @@ namespace SdlDotNetExamples.Isotope
     //      self.num_sprites=dimension
     //      self.sprites=range(dimension)
 
-    class Sprites
+    static class Sprites
     {
         /// <summary>
         /// 
@@ -57,7 +57,7 @@ namespace SdlDotNetExamples.Isotope
             foreach (Object3d obj in object_group)
             {
                 Sprite sprite = new Sprite();
-                sprite.Surface = skin_group[obj.objtype].GetImage(obj);
+                sprite.Surface = skin_group[obj.ObjectType].GetImage(obj);
                 sprite.Rectangle = sprite.Surface.Rectangle;
                 sprite.Surface.TransparentColor = System.Drawing.Color.White;
                 sprite.Surface.Transparent = true;

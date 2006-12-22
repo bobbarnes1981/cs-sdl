@@ -30,7 +30,7 @@ namespace SdlDotNet.Audio
     /// Used in the SDL_AudioSpec struct
     /// </summary>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void AudioCallbackDelegate(IntPtr userdata, IntPtr stream, int len);
+    public delegate void AudioCallback(IntPtr userdata, IntPtr stream, int len);
     #endregion Public Delegates
 
     /// <summary>
@@ -40,14 +40,14 @@ namespace SdlDotNet.Audio
     {
         #region Private fields
 
-        static bool audioWasNotAlreadyInitialized = false;
-        static bool audioOpen = false;
+        static bool audioWasNotAlreadyInitialized;
+        static bool audioOpen;
 
-        static AudioCallbackDelegate audioCallbackDelegate;
+        static AudioCallback audioCallback;
 
         static AudioInfo audioInfo;
 
-        static bool audioLocked = false;
+        static bool audioLocked;
 
         static AudioStream stream;
 
@@ -87,7 +87,7 @@ namespace SdlDotNet.Audio
         ///     </item>
         /// </list>
         /// </exception>
-        public static void OpenAudio(int frequency, AudioFormat format, SoundChannel channels, short samples, AudioCallbackDelegate callback, object data)
+        public static void OpenAudio(int frequency, AudioFormat format, SoundChannel channels, short samples, AudioCallback callback, object data)
         {
             if (audioOpen)
             {
@@ -149,7 +149,7 @@ namespace SdlDotNet.Audio
                 Marshal.FreeHGlobal(pSpec);
             }
 
-            audioCallbackDelegate = callback;
+            audioCallback = callback;
             audioOpen = true;
         }
 
@@ -206,7 +206,7 @@ namespace SdlDotNet.Audio
             AudioStream audioStream = new AudioStream(frequency, samples);
 
             // get delegate
-            AudioCallbackDelegate callback = new AudioCallbackDelegate(audioStream.Unsigned16LittleStream);
+            AudioCallback callback = new AudioCallback(audioStream.Unsigned16LittleStream);
 
             spec.freq = frequency;
             spec.format = (short)format;
@@ -249,7 +249,7 @@ namespace SdlDotNet.Audio
             audioStream.Samples = audioInfo.Samples;
 
             stream = audioStream;
-            audioCallbackDelegate = callback;
+            audioCallback = callback;
             audioOpen = true;
 
             return stream;
@@ -264,7 +264,7 @@ namespace SdlDotNet.Audio
 
             Sdl.SDL_CloseAudio();
 
-            audioCallbackDelegate = null;
+            audioCallback = null;
             audioOpen = false;
             audioInfo = null;
             audioLocked = false;

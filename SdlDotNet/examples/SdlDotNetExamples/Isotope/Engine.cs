@@ -82,7 +82,7 @@ namespace SdlDotNetExamples.Isotope
         vector:           Function Library for 3d vector mathematics.
     */
     /// </summary>
-    public class Engine
+    public class Engine : IDisposable
     {
         /* Isometric game engine class
             Provides the basic elements required for an Isometric game:
@@ -103,15 +103,69 @@ namespace SdlDotNetExamples.Isotope
            simulator: The isotope element used by the engine to simulate the players scene: simulator class
         */
 
-        public int time_limit;
-        public Keys keys;
-        public Simulator simulator;
-        public LeadActor player;
-        public Sprite title_sprite;
-        public View display;
-        public Skin[] skin_group;
-        public Surface surface;
-        public SdlDotNet.Graphics.Font font;
+        private int timeLimit;
+
+        public int TimeLimit
+        {
+            get { return timeLimit; }
+            set { timeLimit = value; }
+        }
+        private Keys keys;
+
+        public Keys Keys
+        {
+            get { return keys; }
+            set { keys = value; }
+        }
+        private Simulator simulator;
+
+        public Simulator Simulator
+        {
+            get { return simulator; }
+            set { simulator = value; }
+        }
+        private LeadActor player;
+
+        public LeadActor Player
+        {
+            get { return player; }
+            set { player = value; }
+        }
+        private Sprite titleSprite;
+
+        public Sprite TitleSprite
+        {
+            get { return titleSprite; }
+            set { titleSprite = value; }
+        }
+        private View display;
+
+        public View Display
+        {
+            get { return display; }
+            set { display = value; }
+        }
+        private Skin[] skinGroup;
+
+        public Skin[] SkinGroup
+        {
+            get { return skinGroup; }
+            set { skinGroup = value; }
+        }
+        private Surface surface;
+
+        public Surface Surface
+        {
+            get { return surface; }
+            set { surface = value; }
+        }
+        private SdlDotNet.Graphics.Font font;
+
+        public SdlDotNet.Graphics.Font Font
+        {
+            get { return font; }
+            set { font = value; }
+        }
 
         /// <summary>
         /// 
@@ -124,10 +178,13 @@ namespace SdlDotNetExamples.Isotope
         public Engine(LeadActor player, Skin[] skin_group, Surface surface, Keys keys, string titlefile/*,SdlDotNet.Font font*/)
         {
             /* Initialise the Isotope Engine */
-
+            if (player == null)
+            {
+                throw new ArgumentNullException("player");
+            }
             //Game Control
             //the lower limit of msec per frame
-            this.time_limit = 100;
+            this.timeLimit = 100;
             //define the keys using default values, users can redefine the keys by changing the key codes
             this.keys = keys;
 
@@ -138,13 +195,13 @@ namespace SdlDotNetExamples.Isotope
 
             //Graphical display elements
             //load the titlebar graphic as a sprite for drawing later. Users can reload their own image.
-            this.title_sprite = new Sprite();
-            this.title_sprite.Surface = new Surface(titlefile);
+            this.titleSprite = new Sprite();
+            this.titleSprite.Surface = new Surface(titlefile);
 
             int[] offset ={ 200, 170 };
-            this.display = new View(surface, this.player.scene, skin_group, offset);
+            this.display = new View(surface, this.player.Scene, skin_group, offset);
             //Isometric display elements
-            this.skin_group = skin_group;
+            this.skinGroup = skin_group;
             //remember the surface
             this.surface = surface;
 
@@ -159,7 +216,7 @@ namespace SdlDotNetExamples.Isotope
             quit = 1;
         }
 
-        int quit = 0;
+        int quit;
 
         /// <summary>
         /// 
@@ -176,7 +233,7 @@ namespace SdlDotNetExamples.Isotope
             surface.Update();
 
             // Main game loop controlled with quit
-            
+
             int start_time, end_time, frame_time;
 
             while (quit == 0)
@@ -186,31 +243,31 @@ namespace SdlDotNetExamples.Isotope
 
                 // Check the players control events
                 //Console.WriteLine("PlayerControl");
-                quit = this.PlayerControl(this.player.scene.ObjectGroup, this.skin_group, this.surface, this.player);
+                quit = this.PlayerControl(this.player.Scene.ObjectGroup, this.skinGroup, this.surface, this.player);
                 // Note: It is very usingant that objects modify their positions or the object lists in their
                 // tick routines. Modifying these values in event receiver routines will mean that often a necessary collision
                 // detection has not occurred
                 // Update the movement of the objects in the players scene
-                this.simulator.Update(this.player.scene);
-               
+                this.simulator.Update(this.player.Scene);
+
                 // Update the isometric display
-                if (this.player.new_scene == this.player.scene)
+                if (this.player.NewScene == this.player.Scene)
                 {
-                    this.display.DisplayUpdate(this.player.scene, this.skin_group);
+                    this.display.DisplayUpdate(this.player.Scene, this.skinGroup);
                 }
                 else
                 {
-                    this.display.RedrawDisplay(this.player.new_scene, this.skin_group);
+                    this.display.RedrawDisplay(this.player.NewScene, this.skinGroup);
                 }
                 // Update the information panel
-                this.DrawInfoPanel(this.surface, this.player, this.skin_group);
+                this.DrawInfoPanel(this.surface, this.player, this.skinGroup);
                 // Time limiting each frame and updating the game time clock
                 end_time = Timer.TicksElapsed;
                 frame_time = end_time - start_time;
                 //Console.WriteLine(frame_time);
-                if (frame_time < this.time_limit)
+                if (frame_time < this.timeLimit)
                 {
-                    Timer.DelayTicks(this.time_limit - frame_time);
+                    Timer.DelayTicks(this.timeLimit - frame_time);
                 }
                 //gametime.update_time();
                 //Console.WriteLine("End of Loop");
@@ -221,7 +278,7 @@ namespace SdlDotNetExamples.Isotope
         //end of game_loop function
 
 
-        public int PlayerControl(ArrayList objectGroup, Skin[] skin_group, Surface surface, LeadActor player)
+        public int PlayerControl(ArrayList objectGroup, Skin[] skinGroup, Surface surface, LeadActor player)
         {
             /* Checks for key presses and quit events from the player
 
@@ -231,7 +288,10 @@ namespace SdlDotNetExamples.Isotope
                 surface: The area of the surface to draw into from the pygame window: surface class
 
                 kquit: returns 1 if quit event occurs: integer */
-
+            if (player == null)
+            {
+                throw new ArgumentNullException("player");
+            }
             //Check movement keys based on direct access to the keyboard state
             //keys=pygame.key.get_pressed();
             //Checks for the direction keys: up down left right
@@ -240,22 +300,22 @@ namespace SdlDotNetExamples.Isotope
             int[] N ={ 0, 2, 0 };
             int[] S ={ 0, -2, 0 };
             Events.Poll();
-            if (Keyboard.IsKeyPressed(this.keys.up) == true || Keyboard.IsKeyPressed(this.keys.down) == true ||
-                Keyboard.IsKeyPressed(this.keys.left) == true || Keyboard.IsKeyPressed(keys.right) == true)
+            if (Keyboard.IsKeyPressed(this.keys.Up) == true || Keyboard.IsKeyPressed(this.keys.Down) == true ||
+                Keyboard.IsKeyPressed(this.keys.Left) == true || Keyboard.IsKeyPressed(keys.Right) == true)
             {
-                if (Keyboard.IsKeyPressed(this.keys.up) == true)
+                if (Keyboard.IsKeyPressed(this.keys.Up) == true)
                 {
                     player.Move(W);
                 }
-                if (Keyboard.IsKeyPressed(this.keys.down) == true)
+                if (Keyboard.IsKeyPressed(this.keys.Down) == true)
                 {
                     player.Move(E);
                 }
-                if (Keyboard.IsKeyPressed(this.keys.left) == true)
+                if (Keyboard.IsKeyPressed(this.keys.Left) == true)
                 {
                     player.Move(N);
                 }
-                if (Keyboard.IsKeyPressed(this.keys.right) == true)
+                if (Keyboard.IsKeyPressed(this.keys.Right) == true)
                 {
                     player.Move(S);
                 }
@@ -266,19 +326,19 @@ namespace SdlDotNetExamples.Isotope
                 player.Stop();
             }
             //Check for the Jump key
-            if (Keyboard.IsKeyPressed(this.keys.jump) == true)
+            if (Keyboard.IsKeyPressed(this.keys.Jump) == true)
             {
                 player.Jump();
             }
-            if (Keyboard.IsKeyPressed(this.keys.pick_up) == true)
+            if (Keyboard.IsKeyPressed(this.keys.Pickup) == true)
             {
-                player.EventPickUp();
+                player.EventPickup();
             }
-            if (Keyboard.IsKeyPressed(this.keys.drop) == true)
+            if (Keyboard.IsKeyPressed(this.keys.Drop) == true)
             {
                 player.EventDrop();
             }
-            if (Keyboard.IsKeyPressed(this.keys.usingk) == true)
+            if (Keyboard.IsKeyPressed(this.keys.Usingk) == true)
             {
                 player.EventUsingOb();
             }
@@ -294,7 +354,7 @@ namespace SdlDotNetExamples.Isotope
             return kquit;
         }
 
-        public void DrawInfoPanel(Surface surface, LeadActor player, Skin[] skin_group)
+        public void DrawInfoPanel(Surface surface, LeadActor player, Skin[] skinGroup)
         {
             /* Draws the information panel on the surface.
 
@@ -302,40 +362,48 @@ namespace SdlDotNetExamples.Isotope
                 player: The lead actor being used for the player: lead_actor class
                 skin_group: The group of skins to be used in the engines isometric view: skin class
             */
+            if (surface == null)
+            {
+                throw new ArgumentNullException("surface");
+            }
+            if (player == null)
+            {
+                throw new ArgumentNullException("player");
+            }
             //draw titlebar
-            Rectangle rect = surface.Blit(this.title_sprite.Surface, this.title_sprite.Rectangle);
+            Rectangle rect = surface.Blit(this.titleSprite.Surface, this.titleSprite.Rectangle);
             int[] draw_order;
             //draw inventory
-            Object3d[] inventory_array = new Object3d[player.inventory.Count];
-            for (int i = 0; i < player.inventory.Count; i++)
+            Object3d[] inventory_array = new Object3d[player.Inventory.Count];
+            for (int i = 0; i < player.Inventory.Count; i++)
             {
-                inventory_array[i] = (Object3d)player.inventory[i];
+                inventory_array[i] = (Object3d)player.Inventory[i];
             }
-            if (player.inventory.Count > 0)
+            if (player.Inventory.Count > 0)
             {
-                Sprite[] sprite_group = Sprites.UpdateImages(skin_group, inventory_array);
+                Sprite[] sprite_group = Sprites.UpdateImages(skinGroup, inventory_array);
                 int p = 155;
-                draw_order = new int[player.inventory.Count];
+                draw_order = new int[player.Inventory.Count];
                 int q = 0;
-                for (int i = player.usingob; i < player.inventory.Count; i++)
+                for (int i = player.UsingObject; i < player.Inventory.Count; i++)
                 {
                     draw_order[q] = i;
                     q++;
                 }
-                for (int i = 0; i < player.usingob; i++)
+                for (int i = 0; i < player.UsingObject; i++)
                 {
                     draw_order[q] = i;
                     q++;
                 }
-                
+
                 foreach (int i in draw_order)
                 {
                     sprite_group[i].X = p;
                     sprite_group[i].Y = 38 - sprite_group[i].Height;
                     surface.Blit(sprite_group[i].Surface, sprite_group[i].Rectangle);
-                    Surface text = this.font.Render(skin_group[inventory_array[i].objtype].name, Color.FromArgb(255, 255, 255));
+                    Surface text = this.font.Render(skinGroup[inventory_array[i].ObjectType].Name, Color.FromArgb(255, 255, 255));
                     Point textpos = new Point(0, 0);
-                    textpos.X = p - skin_group[inventory_array[i].objtype].name.Length * 3 + sprite_group[i].Width / 2;
+                    textpos.X = p - skinGroup[inventory_array[i].ObjectType].Name.Length * 3 + sprite_group[i].Width / 2;
                     textpos.Y = 35;
                     surface.Blit(text, textpos);
                     p = p + sprite_group[i].Width + 20;
@@ -344,5 +412,60 @@ namespace SdlDotNetExamples.Isotope
             //Update the display with the panel changes
             surface.Update(rect);
         }
+
+        #region IDisposable Members
+
+        private bool disposed;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.titleSprite != null)
+                    {
+                        this.titleSprite.Dispose();
+                        this.titleSprite = null;
+                    }
+                    if (this.font != null)
+                    {
+                        this.font.Dispose();
+                        this.font = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ~Engine()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 }

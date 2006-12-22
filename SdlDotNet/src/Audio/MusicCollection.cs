@@ -20,7 +20,7 @@
 #endregion LICENSE
 
 using System;
-using System.Collections;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.IO;
 
@@ -29,7 +29,7 @@ namespace SdlDotNet.Audio
     /// <summary>
     /// Encapsulates the collection of Music objects.
     /// </summary>
-    public class MusicCollection : List<Music>
+    public class MusicCollection : Collection<Music>
     {
         #region Constructor
 

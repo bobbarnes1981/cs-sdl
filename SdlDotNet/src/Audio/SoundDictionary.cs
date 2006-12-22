@@ -44,6 +44,7 @@ namespace SdlDotNet.Audio
     /// </code>
     /// </example>
     /// <seealso cref="Sound"/>
+    [Serializable]
     public class SoundDictionary : Dictionary<string, Sound>
     {
         #region Constructors

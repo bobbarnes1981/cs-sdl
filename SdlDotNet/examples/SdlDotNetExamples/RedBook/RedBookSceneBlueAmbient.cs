@@ -71,8 +71,8 @@ namespace SdlDotNetExamples.RedBook
 		}
 
 		#region Private Fields
-		private int shoulder = 0;
-		private int elbow = 0;
+		private int shoulder;
+		private int elbow;
 		#endregion Private Fields
 
 		#region Constructors

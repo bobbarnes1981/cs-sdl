@@ -74,8 +74,8 @@ namespace SdlDotNetExamples.RedBook
 		}
 
 		#region Private Fields
-		private static int year = 0;
-		private static int day = 0;
+		private static int year;
+		private static int day;
 		#endregion Private Fields
 
 		#region Constructors

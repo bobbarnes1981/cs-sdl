@@ -67,7 +67,7 @@ namespace SdlDotNetExamples.RedBook
         private const int RAMPSIZE = 16;
         private const int RAMP1START = 32;
         private const int RAMP2START = 48;
-        private static float rotAngle = 0.0f;
+        private static float rotAngle;
 
         /// <summary>
         /// Lesson title

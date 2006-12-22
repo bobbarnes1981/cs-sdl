@@ -31,7 +31,7 @@ using SdlDotNet.Core;
 
 namespace SdlDotNetExamples.SmallDemos
 {
-    public class JoystickExample
+    public class JoystickExample : IDisposable
     {
         Point position = new Point(100, 100);
         int width = 640;
@@ -156,5 +156,65 @@ namespace SdlDotNetExamples.SmallDemos
                 return "JoystickExample: Move the cursor with a joystick";
             }
         }
+
+        #region IDisposable Members
+
+        private bool disposed;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.screen != null)
+                    {
+                        this.screen.Dispose();
+                        this.screen = null;
+                    }
+                    if (this.cursor != null)
+                    {
+                        this.cursor.Dispose();
+                        this.cursor = null;
+                    }
+                    if (this.joystick != null)
+                    {
+                        this.joystick.Dispose();
+                        this.joystick = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ~JoystickExample()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 }

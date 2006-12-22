@@ -112,8 +112,8 @@ namespace SdlDotNet.Input
 
         private int index;
         private bool disposed;
-        private static readonly float JOYSTICK_ADJUSTMENT = 32768;
-        private static readonly float JOYSTICK_SCALE = 65535;
+        private const float JOYSTICK_ADJUSTMENT = 32768;
+        private const float JOYSTICK_SCALE = 65535;
 
         #endregion
 

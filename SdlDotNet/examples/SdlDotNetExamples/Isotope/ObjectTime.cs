@@ -30,21 +30,23 @@ namespace SdlDotNetExamples.Isotope
     //Define the gametime global variable
     public class ObjectTime
     {
-        public static int time;
+        static int time;
         /// <summary>
         /// 
         /// </summary>
         public ObjectTime()
         {
-            time = 0;
         }
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public static int GetTime()
+        public static int Time
         {
-            return (time);
+            get
+            {
+                return (time);
+            }
         }
         /// <summary>
         /// 

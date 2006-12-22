@@ -24,6 +24,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using Tao.Sdl;
 using SdlDotNet.Core;
@@ -261,6 +262,10 @@ namespace SdlDotNet.Graphics
         /// </param>
         public Surface(byte[] array)
         {
+            if (array == null)
+            {
+                throw new ArgumentNullException("array");
+            }
             this.Handle =
                 SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
             if (this.Handle == IntPtr.Zero)
@@ -570,7 +575,7 @@ namespace SdlDotNet.Graphics
         /// <param name="color"></param>
         public void DrawPrimitive(IPrimitive primitive, Color color)
         {
-            primitive.Draw(this, color);
+            DrawPrimitive(primitive, color, true);
         }
 
         /// <summary>
@@ -581,7 +586,7 @@ namespace SdlDotNet.Graphics
         /// <param name="antiAlias"></param>
         public void DrawPrimitive(IPrimitive primitive, Color color, bool antiAlias)
         {
-            primitive.Draw(this, color, antiAlias);
+            DrawPrimitive(primitive, color, antiAlias, false);
         }
 
         /// <summary>
@@ -593,6 +598,10 @@ namespace SdlDotNet.Graphics
         /// <param name="fill"></param>
         public void DrawPrimitive(IPrimitive primitive, Color color, bool antiAlias, bool fill)
         {
+            if (primitive == null)
+            {
+                throw new ArgumentNullException("primitive");
+            }
             primitive.Draw(this, color, antiAlias, fill);
         }
 
@@ -957,17 +966,17 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Blit entire SpriteDictionary to Surface
         /// </summary>
-        /// <param name="SpriteDictionary">SpriteDictionary to Blit</param>
+        /// <param name="spriteDictionary">SpriteDictionary to Blit</param>
         /// <returns>Collection of Rectangles acutally blit to since 
         /// ere have may been some clipping.
         /// </returns>
-        public List<Rectangle> Blit(SpriteDictionary SpriteDictionary)
+        public Collection<Rectangle> Blit(SpriteDictionary spriteDictionary)
         {
-            if (SpriteDictionary == null)
+            if (spriteDictionary == null)
             {
                 throw new ArgumentNullException("SpriteDictionary");
             }
-            return SpriteDictionary.Draw(this);
+            return spriteDictionary.Draw(this);
         }
 
         /// <summary>
@@ -981,7 +990,7 @@ namespace SdlDotNet.Graphics
         /// <returns>Actual blitted rectangle since there may have been clipping
         /// </returns>
         public Rectangle Blit(
-            Surface sourceSurface,
+            BaseSdlResource sourceSurface,
             System.Drawing.Rectangle destinationRectangle,
             System.Drawing.Rectangle sourceRectangle)
         {
@@ -1016,7 +1025,7 @@ namespace SdlDotNet.Graphics
         /// </param>
         /// <returns>Destination Rectangle after any necessary clipping</returns>
         public Rectangle Blit(
-            Surface sourceSurface,
+            BaseSdlResource sourceSurface,
             System.Drawing.Point destinationPosition,
             System.Drawing.Rectangle sourceRectangle)
         {
@@ -1030,18 +1039,18 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Erases SpriteDictionary from surface
         /// </summary>
-        /// <param name="SpriteDictionary">SpriteDictionary to erase</param>
+        /// <param name="spriteDictionary">SpriteDictionary to erase</param>
         /// <param name="background">
         /// Background Surface to cover up SpriteDictionary
         /// </param>
-        public void Erase(SpriteDictionary SpriteDictionary,
+        public void Erase(SpriteDictionary spriteDictionary,
             Surface background)
         {
-            if (SpriteDictionary == null)
+            if (spriteDictionary == null)
             {
-                throw new ArgumentNullException("SpriteDictionary");
+                throw new ArgumentNullException("spriteDictionary");
             }
-            SpriteDictionary.Erase(this, background);
+            spriteDictionary.Erase(this, background);
         }
 
         /// <summary>
@@ -1049,7 +1058,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="rectangle">Rectangle to erase</param>
         /// <param name="background">background to use to erase rectangle.</param>
-        public void Erase(Rectangle rectangle, Surface background)
+        public void Erase(Rectangle rectangle, BaseSdlResource background)
         {
             this.Blit(background, rectangle, rectangle);
         }
@@ -1059,7 +1068,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="rectangles">Rectangle to erase</param>
         /// <param name="background">background to use to erase rectangle.</param>
-        public void Erase(List<Rectangle> rectangles, Surface background)
+        public void Erase(Collection<Rectangle> rectangles, BaseSdlResource background)
         {
             foreach (Rectangle rectangle in rectangles)
             {
@@ -2002,6 +2011,10 @@ namespace SdlDotNet.Graphics
         /// <param name="rectangles">Array of Rectangles to update</param>
         public void Update(System.Drawing.Rectangle[] rectangles)
         {
+            if (rectangles == null)
+            {
+                throw new ArgumentNullException("rectangles");
+            }
             if (this.disposed)
             {
                 throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
@@ -2019,7 +2032,7 @@ namespace SdlDotNet.Graphics
         /// Update an array of rectangles
         /// </summary>
         /// <param name="rectangles">Collection of rectangles to update</param>
-        public void Update(List<Rectangle> rectangles)
+        public void Update(Collection<Rectangle> rectangles)
         {
             if (rectangles == null)
             {

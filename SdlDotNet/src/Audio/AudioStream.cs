@@ -19,6 +19,7 @@
 #endregion LICENSE
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -27,8 +28,9 @@ namespace SdlDotNet.Audio
     /// <summary>
     /// An active audio stream for queueing audio data to be played asynchronously.
     /// </summary>
-    public class AudioStream
+    public class AudioStream : MemoryStream
     {
+
         #region Private fields
 
         short samples;
@@ -61,10 +63,6 @@ namespace SdlDotNet.Audio
                 samplesInQueue -= buf.Length;
                 Marshal.Copy(buf, 0, stream, len);
             }
-        }
-
-        internal void Close()
-        {
         }
 
         #endregion

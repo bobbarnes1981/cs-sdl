@@ -138,6 +138,10 @@ namespace SdlDotNet.Audio
         /// <param name="music"></param>
         public static void Load(Music music)
         {
+            if (music == null)
+            {
+                throw new ArgumentNullException("music");
+            }
             music.Handle = Mixer.LoadMusic(music.FileName);
             CurrentMusic = music;
         }

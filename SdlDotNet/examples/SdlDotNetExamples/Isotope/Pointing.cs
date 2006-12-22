@@ -62,22 +62,22 @@ namespace SdlDotNetExamples.Isotope
             int actorcycle = ((Actor)obj).Cycle;
             if (actorfacing == 0)
             {
-                return ((Surface)images[0 + sequence[actorcycle]]);
+                return ((Surface)Images[0 + sequence[actorcycle]]);
             }
             if (actorfacing == 1)
             {
-                return ((Surface)images[3 + sequence[actorcycle]]);
+                return ((Surface)Images[3 + sequence[actorcycle]]);
             }
             if (actorfacing == 2)
             {
-                return ((Surface)images[6 + sequence[actorcycle]]);
+                return ((Surface)Images[6 + sequence[actorcycle]]);
             }
             if (actorfacing == 3)
             {
-                return ((Surface)images[9 + sequence[actorcycle]]);
+                return ((Surface)Images[9 + sequence[actorcycle]]);
             }
             //default, this should never happen but just in case
-            return ((Surface)images[0]);
+            return ((Surface)Images[0]);
         }
     }
 

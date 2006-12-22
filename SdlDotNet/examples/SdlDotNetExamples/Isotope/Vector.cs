@@ -24,7 +24,7 @@ namespace SdlDotNetExamples.Isotope
     /// <summary>
     /// 
     /// </summary>
-    class Vector
+    static class Vector
     {
         /// <summary>
         /// 
@@ -151,21 +151,21 @@ namespace SdlDotNetExamples.Isotope
             return face;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="v"></param>
-        /// <returns></returns>
-        public static int SqrMagnitude(int[] v)
-        {
-            // sqr of the magnitude of the vector
-            int sqr_mag = 0;
-            foreach (int i in v)
-            {
-                sqr_mag = sqr_mag + i * i;
-            }
-            return (sqr_mag);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="v"></param>
+        ///// <returns></returns>
+        //public static int SqrMagnitude(int[] v)
+        //{
+        //    // sqr of the magnitude of the vector
+        //    int sqr_mag = 0;
+        //    foreach (int i in v)
+        //    {
+        //        sqr_mag = sqr_mag + i * i;
+        //    }
+        //    return (sqr_mag);
+        //}
 
     }
 

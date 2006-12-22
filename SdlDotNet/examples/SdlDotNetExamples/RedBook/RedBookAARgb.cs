@@ -64,7 +64,7 @@ namespace SdlDotNetExamples.RedBook
 		
 		
 		
-		private static float rotAngle = 0.0f;
+		private static float rotAngle;
 
 		/// <summary>
 		/// Lesson title

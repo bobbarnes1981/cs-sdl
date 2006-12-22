@@ -63,7 +63,7 @@ namespace SdlDotNetExamples.RedBook
 		
 		
 
-		private static float spin = 0.0f;
+		private static float spin;
 		static bool spinning;
 
 		/// <summary>
