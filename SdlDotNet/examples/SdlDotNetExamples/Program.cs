@@ -14,7 +14,7 @@ namespace SdlDotNetExamples
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SdlDotNetExamples());
+            Application.Run(new SdlDotNetExamplesBrowser());
         }
     }
 }

@@ -38,7 +38,7 @@ namespace SdlDotNetExamples.SpriteDemos
     /// directory has a "test/" directory underneath it containing
     /// various images.
     /// </summary>
-    public class SpriteDemos : IDisposable
+    public class SpriteDemosMain : IDisposable
     {
         /// <summary>
         /// 
@@ -47,7 +47,7 @@ namespace SdlDotNetExamples.SpriteDemos
         public static void Run()
         {
             // Create the demo application
-            SpriteDemos demo = new SpriteDemos();
+            SpriteDemosMain demo = new SpriteDemosMain();
             demo.Go();
         }
 
@@ -289,7 +289,7 @@ namespace SdlDotNetExamples.SpriteDemos
                 if (disposing)
                 {
                     this.screen.Dispose();
-                    foreach (Sprite s in SpriteDemos.manager.Keys)
+                    foreach (Sprite s in SpriteDemosMain.manager.Keys)
                     {
                         IDisposable disposableObj = s as IDisposable;
                         if (disposableObj != null)
@@ -297,7 +297,7 @@ namespace SdlDotNetExamples.SpriteDemos
                             disposableObj.Dispose();
                         }
                     }
-                    foreach (Sprite s in SpriteDemos.master.Keys)
+                    foreach (Sprite s in SpriteDemosMain.master.Keys)
                     {
                         IDisposable disposableObj = s as IDisposable;
                         if (disposableObj != null)

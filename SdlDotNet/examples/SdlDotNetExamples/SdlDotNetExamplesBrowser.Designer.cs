@@ -20,7 +20,7 @@
 
 namespace SdlDotNetExamples
 {
-    partial class SdlDotNetExamples
+    partial class SdlDotNetExamplesBrowser
     {
         /// <summary>
         /// Required designer variable.
@@ -48,7 +48,7 @@ namespace SdlDotNetExamples
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SdlDotNetExamples));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SdlDotNetExamplesBrowser));
             this.btnRun = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.SuspendLayout();

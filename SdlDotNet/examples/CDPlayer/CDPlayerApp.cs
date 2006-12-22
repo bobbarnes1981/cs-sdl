@@ -37,7 +37,7 @@ namespace SdlDotNetExamples.CDPlayer
     /// <summary>
     /// 
     /// </summary>
-    public class CDPlayer : System.Windows.Forms.Form
+    public class CDPlayerApp : System.Windows.Forms.Form
     {
         private CDDrive _drive;
         private int _track;
@@ -63,7 +63,7 @@ namespace SdlDotNetExamples.CDPlayer
         /// <summary>
         /// 
         /// </summary>
-        public CDPlayer()
+        public CDPlayerApp()
         {
             //
             // Required for Windows Form Designer support
@@ -177,7 +177,7 @@ namespace SdlDotNetExamples.CDPlayer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDPlayer));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDPlayerApp));
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxDrive = new System.Windows.Forms.ComboBox();
             this.buttonPlay = new System.Windows.Forms.Button();
@@ -351,7 +351,7 @@ namespace SdlDotNetExamples.CDPlayer
         [STAThread]
         static void Main()
         {
-            Application.Run(new CDPlayer());
+            Application.Run(new CDPlayerApp());
             SdlDotNet.Core.Events.QuitApplication();
         }
 

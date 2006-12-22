@@ -38,14 +38,14 @@ namespace SdlDotNetExamples.SpriteDemos
         public BounceMode()
         {
             // Create the fragment marbles
-            Rectangle rect = new Rectangle(new Point(0, 0), SpriteDemos.Size);
+            Rectangle rect = new Rectangle(new Point(0, 0), SpriteDemosMain.Size);
             for (int i = 0; i < 50; i++)
             {
                 Thread.Sleep(10);
                 SurfaceCollection d = LoadRandomMarble();
                 BounceSprite bounceSprite =
                     new BounceSprite(d,
-                    new Rectangle(new Point(0, 0), SpriteDemos.Size),
+                    new Rectangle(new Point(0, 0), SpriteDemosMain.Size),
                     new Point(rand.Next(rect.Left, rect.Right),
                     rand.Next(rect.Top, rect.Bottom)));
                 Sprites.Add(bounceSprite);
