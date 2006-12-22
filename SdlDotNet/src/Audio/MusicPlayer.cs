@@ -381,7 +381,7 @@ namespace SdlDotNet.Audio
         {
             MusicFinishedDelegate = new SdlMixer.MusicFinishedDelegate(MusicFinished);
             SdlMixer.Mix_HookMusicFinished(MusicFinishedDelegate);
-            Events.MusicFinished += new MusicFinishedEventHandler(Events_MusicFinished);
+            Events.MusicFinished += new EventHandler<MusicFinishedEventArgs>(Events_MusicFinished);
         }
 
         #endregion Public Methods

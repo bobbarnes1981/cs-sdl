@@ -137,7 +137,7 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         protected override void InitGL()
         {
-            Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
             Keyboard.EnableKeyRepeat(150, 50);
 
             // Set The Blending Function For Translucency

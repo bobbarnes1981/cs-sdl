@@ -175,7 +175,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="surface"></param>
         /// <param name="keys"></param>
         /// <param name="titlefile"></param>
-        public Engine(LeadActor player, Skin[] skin_group, Surface surface, Keys keys, string titlefile/*,SdlDotNet.Font font*/)
+        public Engine(LeadActor player, Skin[] skinGroup, Surface surface, Keys keys, string titleFile)
         {
             /* Initialise the Isotope Engine */
             if (player == null)
@@ -196,19 +196,19 @@ namespace SdlDotNetExamples.Isotope
             //Graphical display elements
             //load the titlebar graphic as a sprite for drawing later. Users can reload their own image.
             this.titleSprite = new Sprite();
-            this.titleSprite.Surface = new Surface(titlefile);
+            this.titleSprite.Surface = new Surface(titleFile);
 
             int[] offset ={ 200, 170 };
-            this.display = new View(surface, this.player.Scene, skin_group, offset);
+            this.display = new View(surface, this.player.Scene, skinGroup, offset);
             //Isometric display elements
-            this.skinGroup = skin_group;
+            this.skinGroup = skinGroup;
             //remember the surface
             this.surface = surface;
 
             //Load the default font: Do we need some tester here to ensure we find a font?
             //if (font==None)
             this.font = new SdlDotNet.Graphics.Font(Path.Combine(IsotopeMain.FilePath, "FreeSans.ttf"), 10);
-            Events.Quit += new QuitEventHandler(Events_Quit);
+            Events.Quit += new EventHandler<QuitEventArgs>(Events_Quit);
         }
 
         void Events_Quit(object sender, QuitEventArgs e)
@@ -243,7 +243,7 @@ namespace SdlDotNetExamples.Isotope
 
                 // Check the players control events
                 //Console.WriteLine("PlayerControl");
-                quit = this.PlayerControl(this.player.Scene.ObjectGroup, this.skinGroup, this.surface, this.player);
+                quit = this.PlayerControl(this.player);
                 // Note: It is very usingant that objects modify their positions or the object lists in their
                 // tick routines. Modifying these values in event receiver routines will mean that often a necessary collision
                 // detection has not occurred
@@ -278,7 +278,8 @@ namespace SdlDotNetExamples.Isotope
         //end of game_loop function
 
 
-        public int PlayerControl(ArrayList objectGroup, Skin[] skinGroup, Surface surface, LeadActor player)
+        //public int PlayerControl(ArrayList objectGroup, Skin[] skinGroup, Surface surface, LeadActor player)
+        public int PlayerControl(LeadActor player)
         {
             /* Checks for key presses and quit events from the player
 
@@ -340,7 +341,7 @@ namespace SdlDotNetExamples.Isotope
             }
             if (Keyboard.IsKeyPressed(this.keys.Usingk) == true)
             {
-                player.EventUsingOb();
+                player.EventUsingObject();
             }
             int kquit = 0;
             if (Keyboard.IsKeyPressed(Key.Q) == true)

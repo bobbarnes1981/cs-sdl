@@ -105,8 +105,8 @@ namespace SdlDotNetExamples.CDPlayer
             master.EnableTickEvent();
 
             SdlDotNet.Core.Events.Fps = 30;
-            SdlDotNet.Core.Events.Tick += new TickEventHandler(this.Tick);
-            SdlDotNet.Core.Events.Quit += new QuitEventHandler(this.Quit);
+            SdlDotNet.Core.Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            SdlDotNet.Core.Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
 
             try
             {

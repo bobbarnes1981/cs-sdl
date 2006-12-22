@@ -22,11 +22,6 @@ using System;
 
 namespace SdlDotNetExamples.Triad
 {
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public delegate void BlocksDestroyedEventHandler(object sender, BlocksDestroyedEventArgs e);
     /// <summary>
     /// 
     /// </summary>

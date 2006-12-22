@@ -23,45 +23,45 @@ using System;
 namespace SdlDotNet.Graphics.Sprites
 {
     /// <summary>
-    /// Animation.
+    /// AnimationCollection.
     /// </summary>
-    public class Animation : SurfaceCollection
+    public class AnimationCollection : SurfaceCollection
     {
         #region Constructors
         /// <summary>
-        /// Creates a new empty Animation.
+        /// Creates a new empty AnimationCollection.
         /// </summary>
-        public Animation()
+        public AnimationCollection()
             : base()
         {
         }
 
         /// <summary>
-        /// Creates a new Animation with a SurfaceCollection representing 
+        /// Creates a new AnimationCollection with a SurfaceCollection representing 
         /// the animation.
         /// </summary>
         /// <param name="frames">
         /// The collection of surfaces in the animation.
         /// </param>
-        public Animation(SurfaceCollection frames)
+        public AnimationCollection(SurfaceCollection frames)
             : base(frames)
         {
         }
 
         /// <summary>
-        /// Creates an Animation with one surface to start off the animation.
+        /// Creates an AnimationCollection with one surface to start off the animation.
         /// </summary>
         /// <param name="firstFrame">
         /// The surface representing the animation.
         /// </param>
-        public Animation(Surface firstFrame)
+        public AnimationCollection(Surface firstFrame)
             : base()
         {
             this.Add(firstFrame);
         }
 
         /// <summary>
-        /// Creates a new Animation with a SurfaceCollection representing the 
+        /// Creates a new AnimationCollection with a SurfaceCollection representing the 
         /// animation.
         /// </summary>
         /// <param name="frames">
@@ -74,7 +74,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// Whether or not the animation is 
         /// to loop when reached the end. Defaults to true.
         /// </param>
-        public Animation(SurfaceCollection frames, double delay, bool loop)
+        public AnimationCollection(SurfaceCollection frames, double delay, bool loop)
             : base(frames)
         {
             this.m_Delay = delay;
@@ -82,7 +82,7 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Creates a new Animation with a SurfaceCollection 
+        /// Creates a new AnimationCollection with a SurfaceCollection 
         /// representing the animation.
         /// </summary>
         /// <param name="frames">
@@ -93,7 +93,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// The amount of delay to be 
         /// had between each frame. Defaults to 30.
         /// </param>
-        public Animation(SurfaceCollection frames, double delay)
+        public AnimationCollection(SurfaceCollection frames, double delay)
             : base(frames)
         {
             this.m_Delay = delay;

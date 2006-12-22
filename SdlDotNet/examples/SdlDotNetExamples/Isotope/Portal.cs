@@ -38,11 +38,11 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="objtype"></param>
         /// <param name="dest_scene"></param>
         /// <param name="dest_pos"></param>
-        public Portal(int[] pos, int[] size, int objtype, Scene dest_scene, int[] dest_pos)
-            : base(pos, size, objtype, true)
+        public Portal(int[] position, int[] size, int objectType, Scene destinationScene, int[] destinationPosition)
+            : base(position, size, objectType, true)
         {
-            this.dest_scene = dest_scene;
-            Vector.CopyVector(dest_pos, this.dest_pos);
+            this.dest_scene = destinationScene;
+            Vector.CopyVector(destinationPosition, this.dest_pos);
         }
 
         /// <summary>

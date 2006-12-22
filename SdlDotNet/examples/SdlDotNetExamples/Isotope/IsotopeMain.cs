@@ -32,7 +32,7 @@ namespace SdlDotNetExamples.Isotope
     /// <summary>
     /// 
     /// </summary>
-    public class IsotopeMain
+    public static class IsotopeMain
     {
         static string filePath;
         /// <summary>
@@ -67,8 +67,6 @@ namespace SdlDotNetExamples.Isotope
             }
 
             filePath = Path.Combine(filePath, fileDirectory);
-
-            string file = Path.Combine(filePath, fileName);
 
             // Setup the pygame display, the window caption and its icon
 

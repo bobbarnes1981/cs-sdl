@@ -252,114 +252,6 @@ namespace SdlDotNet.Core
 
     #endregion
 
-    #region Delegates
-
-    /// <summary>
-    /// Indicates that the application has gained or lost input focus
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    public delegate void ActiveEventHandler(object sender, ActiveEventArgs e);
-
-    /// <summary>
-    /// Indicates that a joystick has moved on an axis
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e">Event parameters</param>
-    /// 
-    public delegate void JoystickAxisEventHandler(object sender, JoystickAxisEventArgs e);
-
-    /// <summary>
-    /// Indicates a joystick trackball has changed position
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e">Event parameters</param>
-    public delegate void JoystickBallEventHandler(object sender, JoystickBallEventArgs e);
-
-    /// <summary>
-    /// Indicates that a joystick button has been pressed or released
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e">Event parameters</param>
-    public delegate void JoystickButtonEventHandler(object sender, JoystickButtonEventArgs e);
-
-    /// <summary>
-    /// Indicates a joystick hat has changed position
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e">Event parameters</param>
-    public delegate void JoystickHatEventHandler(object sender, JoystickHatEventArgs e);
-
-    /// <summary>
-    /// Indicates that the keyboard state has changed
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e">Event parameters</param>
-    public delegate void KeyboardEventHandler(object sender, KeyboardEventArgs e);
-
-    /// <summary>
-    /// Indicates that a mouse button has been pressed or released
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e">Event parameters</param>
-    public delegate void MouseButtonEventHandler(object sender, MouseButtonEventArgs e);
-
-    /// <summary>
-    /// Indicates that the mouse has moved
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e">Event parameters</param> 
-    public delegate void MouseMotionEventHandler(object sender, MouseMotionEventArgs e);
-
-    /// <summary>
-    /// Indicates that the user has closed the main window
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    public delegate void QuitEventHandler(object sender, QuitEventArgs e);
-
-    /// <summary>
-    /// Indicates a user event has fired
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e"></param>
-    public delegate void UserEventHandler(object sender, UserEventArgs e);
-
-    /// <summary>
-    /// Indicates that a portion of the window has been exposed
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e"></param>
-    public delegate void VideoExposeEventHandler(object sender, VideoExposeEventArgs e);
-
-    /// <summary>
-    /// Indicates the user has resized the window
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e"></param>
-    public delegate void VideoResizeEventHandler(object sender, VideoResizeEventArgs e);
-
-    /// <summary>
-    /// Indicates that a sound channel has stopped playing
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e"></param>
-    public delegate void ChannelFinishedEventHandler(object sender, ChannelFinishedEventArgs e);
-
-    /// <summary>
-    /// Indicates that a music sample has stopped playing
-    /// </summary>
-    /// <param name="sender">Object sending the event</param>
-    /// <param name="e"></param>
-    public delegate void MusicFinishedEventHandler(object sender, MusicFinishedEventArgs e);
-
-    /// <summary>
-    /// Handles the ticks as they are processed by the system.
-    /// </summary>
-    public delegate void TickEventHandler(object sender, TickEventArgs e);
-
-    #endregion
-
     /// <summary>
     /// Contains events which can be attached to to read user input and other miscellaneous occurances.
     /// You can obtain an instance of this class by accessing the Events property of the main Sdl object.
@@ -381,94 +273,94 @@ namespace SdlDotNet.Core
         /// <summary>
         /// Fires when the application has become active or inactive
         /// </summary>
-        public static event ActiveEventHandler AppActive;
+        public static event EventHandler<ActiveEventArgs> AppActive;
 
         /// <summary>
         /// Fires when a key is pressed
         /// </summary>
-        public static event KeyboardEventHandler KeyboardDown;
+        public static event EventHandler<KeyboardEventArgs> KeyboardDown;
 
         /// <summary>
         /// Fires when a key is released
         /// </summary>
-        public static event KeyboardEventHandler KeyboardUp;
+        public static event EventHandler<KeyboardEventArgs> KeyboardUp;
 
         /// <summary>
         /// Fires when the mouse moves
         /// </summary>
-        public static event MouseMotionEventHandler MouseMotion;
+        public static event EventHandler<MouseMotionEventArgs> MouseMotion;
 
         /// <summary>
         /// Fires when a mouse button is pressed
         /// </summary>
-        public static event MouseButtonEventHandler MouseButtonDown;
+        public static event EventHandler<MouseButtonEventArgs> MouseButtonDown;
 
         /// <summary>
         /// Fires when a mouse button is released
         /// </summary>
-        public static event MouseButtonEventHandler MouseButtonUp;
+        public static event EventHandler<MouseButtonEventArgs> MouseButtonUp;
 
         /// <summary>
         /// Fires when a joystick axis changes
         /// </summary>
-        public static event JoystickAxisEventHandler JoystickAxisMotion;
+        public static event EventHandler<JoystickAxisEventArgs> JoystickAxisMotion;
 
         /// <summary>
         /// Fires when a joystick button is pressed
         /// </summary>
-        public static event JoystickButtonEventHandler JoystickButtonDown;
+        public static event EventHandler<JoystickButtonEventArgs> JoystickButtonDown;
 
         /// <summary>
         /// Fires when a joystick button is released
         /// </summary>
-        public static event JoystickButtonEventHandler JoystickButtonUp;
+        public static event EventHandler<JoystickButtonEventArgs> JoystickButtonUp;
 
         /// <summary>
         /// Fires when a joystick hat changes
         /// </summary>
-        public static event JoystickHatEventHandler JoystickHatMotion;
+        public static event EventHandler<JoystickHatEventArgs> JoystickHatMotion;
 
         /// <summary>
         /// Fires when a joystick trackball changes
         /// </summary>
-        public static event JoystickBallEventHandler JoystickBallMotion;
+        public static event EventHandler<JoystickBallEventArgs> JoystickBallMotion;
 
         /// <summary>
         /// Fires when the user resizes the window
         /// </summary>
-        public static event VideoResizeEventHandler VideoResize;
+        public static event EventHandler<VideoResizeEventArgs> VideoResize;
 
         /// <summary>
         /// Fires when a portion of the window is uncovered
         /// </summary>
-        public static event VideoExposeEventHandler VideoExpose;
+        public static event EventHandler<VideoExposeEventArgs> VideoExpose;
 
         /// <summary>
         /// Fires when a user closes the window
         /// </summary>
-        public static event QuitEventHandler Quit;
+        public static event EventHandler<QuitEventArgs> Quit;
 
         /// <summary>
         /// Fires when a user event is consumed
         /// </summary>
-        public static event UserEventHandler UserEvent;
+        public static event EventHandler<UserEventArgs> UserEvent;
 
         /// <summary>
         /// Fires when a sound channel finishes playing.
         /// Will only occur if you call SdlDotNet.Audio.Music.Channel.EnableChannelCallbacks().
         /// </summary>
-        public static event ChannelFinishedEventHandler ChannelFinished;
+        public static event EventHandler<ChannelFinishedEventArgs> ChannelFinished;
 
         /// <summary>
         /// Fires when a music sample finishes playing.
         /// Will only occur if you call SdlDotNet.Audio.Music.EnableMusicCallbacks().
         /// </summary>
-        public static event MusicFinishedEventHandler MusicFinished;
+        public static event EventHandler<MusicFinishedEventArgs> MusicFinished;
 
         /// <summary>
         /// Fires every frame.
         /// </summary>
-        public static event TickEventHandler Tick;
+        public static event EventHandler<TickEventArgs> Tick;
 
         #endregion
 

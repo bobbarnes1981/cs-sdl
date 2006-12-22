@@ -30,7 +30,7 @@ namespace SdlDotNetExamples.Isotope
     /// <summary>
     /// 
     /// </summary>
-    public class Isometric
+    public static class Isometric
     {
         /// <summary>
         /// 
@@ -38,7 +38,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="coord"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        public static int[] Transform(int[] coord, int[] offset)
+        public static int[] Transform(int[] coordinate, int[] offset)
         {
             /* Transform 3d coordinates into 2d positions based on the size of the screen and an a y offset
 
@@ -53,15 +53,15 @@ namespace SdlDotNetExamples.Isotope
             {
                 throw new ArgumentNullException("offset");
             }
-            if (coord == null)
+            if (coordinate == null)
             {
-                throw new ArgumentNullException("coord");
+                throw new ArgumentNullException("coordinate");
             }
             int[] trans_coord ={ 0, 0 };
             //calculate x coordinate
-            trans_coord[0] = (coord[0] - coord[1]) + offset[0];
+            trans_coord[0] = (coordinate[0] - coordinate[1]) + offset[0];
             //calculates y coordinate
-            trans_coord[1] = ((coord[0] + coord[1]) >> 1) - coord[2] + offset[1];
+            trans_coord[1] = ((coordinate[0] + coordinate[1]) >> 1) - coordinate[2] + offset[1];
             return trans_coord;
         }
 

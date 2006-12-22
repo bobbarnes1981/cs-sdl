@@ -45,11 +45,11 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Create AnimatedSprite from Animation
+        /// Create AnimatedSprite from AnimationCollection
         /// </summary>
         /// <param name="name">Name of animation</param>
         /// <param name="animation">animation</param>
-        public AnimatedSprite(string name, Animation animation)
+        public AnimatedSprite(string name, AnimationCollection animation)
             : this()
         {
             m_Animations.Add(name, animation);
@@ -62,15 +62,15 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="name">The name of the animation</param>
         /// <param name="surfaces">The surface collection containing the frames of the animation.</param>
         public AnimatedSprite(string name, SurfaceCollection surfaces)
-            : this(name, new Animation(surfaces))
+            : this(name, new AnimationCollection(surfaces))
         {
         }
 
         /// <summary>
-        /// Create AnimatedSprite from Animation
+        /// Create AnimatedSprite from AnimationCollection
         /// </summary>
         /// <param name="animation">animation</param>
-        public AnimatedSprite(Animation animation)
+        public AnimatedSprite(AnimationCollection animation)
             : this()
         {
             m_Animations.Add("Default", animation);
@@ -88,7 +88,7 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 throw new ArgumentNullException("surfaces");
             }
-            m_Animations.Add("Default", new Animation(surfaces));
+            m_Animations.Add("Default", new AnimationCollection(surfaces));
             base.Surface = surfaces[0];
             base.Rectangle = surfaces[0].Rectangle;
             base.Position = coordinates;
@@ -107,7 +107,7 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 throw new ArgumentNullException("surfaces");
             }
-            m_Animations.Add("Default", new Animation(surfaces));
+            m_Animations.Add("Default", new AnimationCollection(surfaces));
             base.Surface = surfaces[0];
             base.Rectangle = surfaces[0].Rectangle;
             base.Position = coordinates;
@@ -125,7 +125,7 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 throw new ArgumentNullException("surfaces");
             }
-            m_Animations.Add("Default", new Animation(surfaces));
+            m_Animations.Add("Default", new AnimationCollection(surfaces));
             base.Surface = surfaces[0];
             base.Rectangle = surfaces[0].Rectangle;
             base.Position = new Point(0, 0);
@@ -179,7 +179,7 @@ namespace SdlDotNet.Graphics.Sprites
                 // Check to see if it exists.
                 if (!m_Animations.ContainsKey(value))
                 {
-                    throw new SdlException("The given animation (" + value + ") does not exist in this AnimatedSprite Animation.");
+                    throw new SdlException("The given animation (" + value + ") does not exist in this AnimatedSprite AnimationCollection.");
                 }
 
                 // Set the animation settings.
@@ -287,7 +287,7 @@ namespace SdlDotNet.Graphics.Sprites
             }
             set
             {
-                foreach (Animation anim in m_Animations.Values)
+                foreach (AnimationCollection anim in m_Animations.Values)
                 {
                     anim.Alpha = value;
                 }
@@ -305,7 +305,7 @@ namespace SdlDotNet.Graphics.Sprites
             }
             set
             {
-                foreach (Animation anim in m_Animations.Values)
+                foreach (AnimationCollection anim in m_Animations.Values)
                 {
                     anim.AlphaBlending = value;
                 }
@@ -323,7 +323,7 @@ namespace SdlDotNet.Graphics.Sprites
             }
             set
             {
-                foreach (Animation anim in m_Animations.Values)
+                foreach (AnimationCollection anim in m_Animations.Values)
                 {
                     anim.TransparentColor = value;
                 }
@@ -341,7 +341,7 @@ namespace SdlDotNet.Graphics.Sprites
             }
             set
             {
-                foreach (Animation anim in m_Animations.Values)
+                foreach (AnimationCollection anim in m_Animations.Values)
                 {
                     anim.Transparent = value;
                 }
@@ -356,7 +356,7 @@ namespace SdlDotNet.Graphics.Sprites
 
         private void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Animation current = m_Animations[m_CurrentAnimation];
+            AnimationCollection current = m_Animations[m_CurrentAnimation];
             m_Timer.Interval = current.Delay;
 
             if (m_Frame >= current.Count && current.AnimateForward) // Going forwards and past last frame

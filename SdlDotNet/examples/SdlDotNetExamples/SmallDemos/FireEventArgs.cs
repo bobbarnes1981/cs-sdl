@@ -23,14 +23,6 @@ namespace SdlDotNetExamples.SmallDemos
     /// <summary>
     /// 
     /// </summary>
-    public delegate void FireEventHandler(object sender, FireEventArgs e);
-    /// <summary>
-    /// 
-    /// </summary>
-    public delegate void DisposeRequestEventHandler(object sender, EventArgs e);
-    /// <summary>
-    /// 
-    /// </summary>
     public class FireEventArgs : EventArgs
     {
         Point location;

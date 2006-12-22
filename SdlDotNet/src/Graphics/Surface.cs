@@ -222,16 +222,14 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Create surface of a given width and height. The Surface will not have an Alpha channel.
+        /// Create surface of a given width and height.
         /// </summary>
         /// <param name="width">Width of surface</param>
         /// <param name="height">Height of surface</param>
         /// <param name="bitsPerPixel">Bits per pixel</param>
-        /// <param name="blueMask">Blue Mask</param>
-        /// <param name="greenMask">Green Mask</param>
-        /// <param name="redMask">Red Mask</param>
-        public Surface(int width, int height, int bitsPerPixel, int redMask, int greenMask, int blueMask)
-            : this(width, height, bitsPerPixel, VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, 0)
+        /// <param name="alphaChannel">alphaChannel</param>
+        public Surface(int width, int height, int bitsPerPixel, bool alphaChannel)
+            : this(width, height, bitsPerPixel, VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, alphaChannel ? VideoInfo.AlphaMask : 0)
         {
         }
 
@@ -449,8 +447,7 @@ namespace SdlDotNet.Graphics
                     try
                     {
                         Marshal.Copy(arr, 0, i, arr.Length);
-                        int result =
-                            Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(i, arr.Length), 1);
+                        Sdl.SDL_SaveBMP_RW(this.Handle, Sdl.SDL_RWFromMem(i, arr.Length), 1);
                         Marshal.Copy(i, arr, 0, arr.Length);
                     }
                     catch (AccessViolationException e)

@@ -36,9 +36,9 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 throw new ArgumentNullException("eventManager");
             }
-            eventManager.OnGameStatusEvent += new EventManager.GameStatusEventHandler(Subscribe);
+            eventManager.OnGameStatusEvent += new EventHandler<GameStatusEventArgs>(Subscribe);
             eventManager.OnEntityMoveRequestEvent +=
-                new EventManager.EntityMoveRequestEventHandler(Subscribe);
+                new EventHandler<EntityMoveRequestEventArgs>(Subscribe);
             this.eventManager = eventManager;
         }
 

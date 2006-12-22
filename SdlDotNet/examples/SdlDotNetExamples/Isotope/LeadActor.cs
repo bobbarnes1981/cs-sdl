@@ -110,8 +110,8 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="objtype"></param>
         /// <param name="scene"></param>
         /// <param name="fixedob"></param>
-        public LeadActor(int[] pos, int[] size, int objtype, Scene scene, bool fixedob)
-            : base(pos, size, objtype, fixedob)
+        public LeadActor(int[] pos, int[] size, int objectType, Scene scene, bool fixedObject)
+            : base(pos, size, objectType, fixedObject)
         {
             newScene = scene;
             newPosition = pos;
@@ -254,7 +254,7 @@ namespace SdlDotNetExamples.Isotope
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool EventUsingOb()
+        public bool EventUsingObject()
         {
             // Event handler for request to use the next object in the inventory
             if (inventory.Count > 0)

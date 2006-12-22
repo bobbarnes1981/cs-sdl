@@ -76,7 +76,7 @@ namespace SdlDotNetExamples.Triad
         /// <summary>
         /// 
         /// </summary>
-        public event BlocksDestroyedEventHandler BlocksDestroyed;
+        public event EventHandler<BlocksDestroyedEventArgs> BlocksDestroyed;
         /// <summary>
         /// 
         /// </summary>

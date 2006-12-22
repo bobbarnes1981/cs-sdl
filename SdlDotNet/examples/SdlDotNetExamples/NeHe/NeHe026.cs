@@ -102,7 +102,7 @@ namespace SdlDotNetExamples.NeHe
         /// </returns>
         protected override void InitGL()
         {
-            Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
             Keyboard.EnableKeyRepeat(150, 50);
 
             // All Setup For OpenGL Goes Here

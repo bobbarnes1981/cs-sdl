@@ -53,11 +53,11 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 throw new ArgumentNullException("eventManager");
             }
-            eventManager.OnMapBuiltEvent += new EventManager.MapBuiltEventHandler(Subscribe);
-            eventManager.OnEntityPlaceEvent += new EventManager.EntityPlaceEventHandler(Subscribe);
-            eventManager.OnEntityMoveEvent += new EventManager.EntityMoveEventHandler(Subscribe);
-            Events.Tick += new TickEventHandler(this.Tick);
-            Events.Quit += new QuitEventHandler(this.Quit);
+            eventManager.OnMapBuiltEvent += new EventHandler<MapBuiltEventArgs>(Subscribe);
+            eventManager.OnEntityPlaceEvent += new EventHandler<EntityPlaceEventArgs>(Subscribe);
+            eventManager.OnEntityMoveEvent += new EventHandler<EntityMoveEventArgs>(Subscribe);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
             this.width = 424;
             this.height = 440;
             this.backSprites = new ArrayList();

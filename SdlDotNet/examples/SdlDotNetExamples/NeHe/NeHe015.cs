@@ -71,7 +71,7 @@ namespace SdlDotNetExamples.NeHe
             this.Texture = new int[1];
             this.TextureName = new string[1];
             this.TextureName[0] = "NeHe015.bmp";
-            Events.Quit += new QuitEventHandler(this.Quit);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
         }
 
         #endregion Constructor

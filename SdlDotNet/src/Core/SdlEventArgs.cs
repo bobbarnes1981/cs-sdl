@@ -52,10 +52,10 @@ namespace SdlDotNet.Core
         /// <summary>
         /// Holds SDL_Event
         /// </summary>
-        /// <param name="evt">Event Struct</param>
-        protected SdlEventArgs(Sdl.SDL_Event evt)
+        /// <param name="eventStruct">Event Struct</param>
+        protected SdlEventArgs(Sdl.SDL_Event eventStruct)
         {
-            this.eventStruct = evt;
+            this.eventStruct = eventStruct;
         }
 
         #endregion

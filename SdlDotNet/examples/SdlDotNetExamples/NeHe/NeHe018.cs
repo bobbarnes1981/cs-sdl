@@ -91,7 +91,7 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe018()
         {
-            Events.Quit += new QuitEventHandler(this.Quit);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
             this.Texture = new int[3];
             this.TextureName = new string[1];
             this.TextureName[0] = "NeHe018.bmp";
@@ -119,7 +119,7 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         protected override void InitGL()
         {
-            Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
             Keyboard.EnableKeyRepeat(60, 60);
             LoadGLTextures();
 

@@ -57,9 +57,9 @@ namespace SdlDotNetExamples.SpriteDemos
         public void Go()
         {
             Events.KeyboardDown +=
-                new KeyboardEventHandler(this.KeyboardDown);
-            Events.Tick += new TickEventHandler(this.Tick);
-            Events.Quit += new QuitEventHandler(this.Quit);
+                new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
 
             // Create the screen
             int width = 800;
@@ -125,9 +125,6 @@ namespace SdlDotNetExamples.SpriteDemos
         {
             // Add to the array list
             demos.Add(mode);
-
-            // Figure out the counter
-            int cnt = demos.Count;
         }
 
         private void LoadDemos()

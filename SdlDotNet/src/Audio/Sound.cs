@@ -26,15 +26,6 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Audio
 {
-    #region Delegates
-
-    /// <summary>
-    /// Triggered for a sound event.
-    /// </summary>
-    public delegate void SoundEventHandler(object sender, SoundEventArgs e);
-
-    #endregion Delegates
-
     /// <summary>
     /// Represents a sound sample.
     /// </summary>
@@ -69,7 +60,7 @@ namespace SdlDotNet.Audio
         /// <summary>
         /// Triggered when there was an event passed to the sound sample (ex. the sound stopped)
         /// </summary>
-        public event SoundEventHandler SoundEvent;
+        public event EventHandler<SoundEventArgs> SoundEvent;
 
         #endregion
 

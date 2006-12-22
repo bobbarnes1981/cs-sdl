@@ -30,7 +30,7 @@ namespace SdlDotNetExamples.Isotope
     /// <summary>
     /// 
     /// </summary>
-    public class Physics
+    public static class Physics
     {
         /// <summary>
         /// 

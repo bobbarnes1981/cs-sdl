@@ -146,11 +146,11 @@ namespace SdlDotNetExamples.RedBook
 		private void Initialize()
 		{
 			// Sets keyboard events
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
+			Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
 
 			// Sets the ticker to update OpenGL Context
-			Events.Tick += new TickEventHandler(this.Tick); 
-			Events.Quit += new QuitEventHandler(this.Quit);
+			Events.Tick += new EventHandler<TickEventArgs>(this.Tick); 
+			Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
 
 			// Set the Frames per second.
 			Events.Fps = 60;

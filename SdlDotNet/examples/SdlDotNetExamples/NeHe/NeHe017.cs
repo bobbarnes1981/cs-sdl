@@ -62,7 +62,7 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe017()
         {
-            Events.Quit += new QuitEventHandler(this.Quit);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
             this.Texture = new int[2];
             this.TextureName = new string[2];
             // Texture array
