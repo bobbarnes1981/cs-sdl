@@ -50,8 +50,6 @@ namespace SdlDotNetExamples.SimpleGame
     /// </summary>
     public class InputController
     {
-        //bool quitFlag;
-
         EventManager eventManager;
         /// <summary>
         /// constructor
@@ -94,7 +92,7 @@ namespace SdlDotNetExamples.SimpleGame
         /// <summary>
         /// 
         /// </summary>
-        public void Go()
+        public static void Go()
         {
             Events.Run();
         }

@@ -85,6 +85,10 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 return startingSector;
             }
+            set
+            {
+                startingSector = value;
+            }
         }
 
         /// <summary>

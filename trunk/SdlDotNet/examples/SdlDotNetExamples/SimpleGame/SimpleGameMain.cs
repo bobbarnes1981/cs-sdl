@@ -38,7 +38,7 @@ namespace SdlDotNetExamples.SimpleGame
                     new InputController(eventManager);
                 Game game = new Game(eventManager);
                 game.Start();
-                inputController.Go();
+                InputController.Go();
             }
         }
 
