@@ -339,7 +339,7 @@ namespace SdlDotNetExamples.Isotope
             {
                 player.EventDrop();
             }
-            if (Keyboard.IsKeyPressed(this.keys.Usingk) == true)
+            if (Keyboard.IsKeyPressed(this.keys.UsingKey) == true)
             {
                 player.EventUsingObject();
             }

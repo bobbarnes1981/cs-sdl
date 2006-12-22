@@ -23,12 +23,12 @@ namespace SdlDotNetExamples.Isotope
     /// <summary>
     /// 
     /// </summary>
-    public class Disolver : ObjectGravity
+    public class Dissolver : ObjectGravity
     {
         int newObjectTime;
         Scene scene;
         // a class for objects which delete themselves after a set period of ticks
-        public Disolver(int[] pos, int[] size, int objtype, Scene scene)
+        public Dissolver(int[] pos, int[] size, int objtype, Scene scene)
             : base(pos, size, objtype, false)
         {
             this.scene = scene;

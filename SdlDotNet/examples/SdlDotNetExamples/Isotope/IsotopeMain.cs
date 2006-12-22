@@ -97,7 +97,7 @@ namespace SdlDotNetExamples.Isotope
             Portal door = new Portal(new int[] { 180, 105, 0 }, new int[] { 10, 30, 56 }, 5, lounge, new int[] { 10, 115, 0 });
             bedroom.AppendObject(door);
 
-            DisolverRandomCreator ampfactory = new DisolverRandomCreator(new int[] { 180, 105, 60 }, new int[] { 10, 10, 10 }, 4000, bedroom, true);
+            DissolverRandomCreator ampfactory = new DissolverRandomCreator(new int[] { 180, 105, 60 }, new int[] { 10, 10, 10 }, 4000, bedroom, true);
             bedroom.AppendObject(ampfactory);
 
             // walls and floor

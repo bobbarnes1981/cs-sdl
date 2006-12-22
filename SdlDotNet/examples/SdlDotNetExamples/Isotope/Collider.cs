@@ -31,7 +31,7 @@ namespace SdlDotNetExamples.Isotope
     /// A collider to store the impact, often refered to as imp in the code so perhaps
     /// impact would be a better word. Also used for touch routines as well.
     /// </summary>
-    public class Collider
+    public class CollisionImpact
     {
         /* stores the impact of a collision
 
