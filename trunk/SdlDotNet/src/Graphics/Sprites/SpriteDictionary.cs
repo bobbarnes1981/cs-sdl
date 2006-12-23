@@ -963,58 +963,6 @@ namespace SdlDotNet.Graphics.Sprites
 
         #endregion
 
-        ///// <summary>
-        ///// Insert a Sprite into the collection
-        ///// </summary>
-        ///// <param name="index">Index at which to insert the sprite</param>
-        ///// <param name="sprite">Sprite to insert</param>
-        //public virtual void Insert(int index, Sprite sprite)
-        //{
-        //    List.Insert(index, sprite);
-        //} 
-
-        ///// <summary>
-        ///// Gets the index of the given sprite in the collection.
-        ///// </summary>
-        ///// <param name="sprite">The sprite to search for.</param>
-        ///// <returns>The index of the given sprite.</returns>
-        //public virtual int IndexOf(Sprite sprite)
-        //{
-        //    return List.IndexOf(sprite);
-        //} 
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="Comparer"></param>
-        //public void Sort(IComparer Comparer) 
-        //{
-        //    base.InnerList.Sort(Comparer);
-        //}
-        #region IComparer Members
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public int Compare(object x, object y)
-        {
-            if (x == null)
-            {
-                throw new ArgumentNullException("x");
-            }
-            if (y == null)
-            {
-                throw new ArgumentNullException("y");
-            }
-            return ((Sprite)x).Z.CompareTo(((Sprite)y).Z);
-
-        }
-
-        #endregion
-
         #region ISerializable Members
 
         /// <summary>

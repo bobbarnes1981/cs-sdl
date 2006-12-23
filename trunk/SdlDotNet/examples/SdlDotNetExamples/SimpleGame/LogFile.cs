@@ -28,18 +28,18 @@ namespace SdlDotNetExamples.SimpleGame
     {
         static FileStream fs = new FileStream("log.txt", FileMode.Append);
 
-        static LogFile()
-        {
-            Initialize();
-        }
+        //static LogFile()
+        //{
+        //    Initialize();
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static void Initialize()
-        {
-            RotateLogs();
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public static void Initialize()
+        //{
+        //    RotateLogs();
+        //}
 
         /// <summary>
         /// 
@@ -158,25 +158,25 @@ namespace SdlDotNetExamples.SimpleGame
             streamWriter.Flush();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static void RotateLogs()
-        {
-            LogFile.fs = null;
-            if (File.Exists(Names.LogFile3))
-            {
-                File.Delete(Names.LogFile3);
-            }
-            if (File.Exists(Names.LogFile2) & !File.Exists(Names.LogFile3))
-            {
-                File.Move(Names.LogFile2, Names.LogFile3);
-            }
-            if (File.Exists(Names.LogFile) & !File.Exists(Names.LogFile2))
-            {
-                File.Move(Names.LogFile, Names.LogFile2);
-            }
-            LogFile.fs = new FileStream(Names.LogFile, FileMode.OpenOrCreate, FileAccess.Write);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public static void RotateLogs()
+        //{
+        //    LogFile.fs = null;
+        //    if (File.Exists(Names.LogFile3))
+        //    {
+        //        File.Delete(Names.LogFile3);
+        //    }
+        //    if (File.Exists(Names.LogFile2) & !File.Exists(Names.LogFile3))
+        //    {
+        //        File.Move(Names.LogFile2, Names.LogFile3);
+        //    }
+        //    if (File.Exists(Names.LogFile) & !File.Exists(Names.LogFile2))
+        //    {
+        //        File.Move(Names.LogFile, Names.LogFile2);
+        //    }
+        //    LogFile.fs = new FileStream(Names.LogFile, FileMode.OpenOrCreate, FileAccess.Write);
+        //}
     }
 }
