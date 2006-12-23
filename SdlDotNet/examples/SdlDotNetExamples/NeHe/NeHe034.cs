@@ -126,7 +126,7 @@ namespace SdlDotNetExamples.NeHe
         /// <param name="heightMap">
         /// Where data is put when read.
         /// </param>
-        private void LoadRawFile(string name, int size, ref byte[] heightMap)
+        private static void LoadRawFile(string name, int size, ref byte[] heightMap)
         {
             if (name == null || name.Length == 0)
             {
@@ -326,7 +326,7 @@ namespace SdlDotNetExamples.NeHe
         /// <param name="y">
         /// Y coordinate value.
         /// </param>
-        private void SetVertexColor(byte[] heightMap, int x, int y)
+        private static void SetVertexColor(byte[] heightMap, int x, int y)
         {
             float fColor = -0.15f + (GetHeight(heightMap, x, y) / 256.0f);
             // Assign This Blue Shade To The Current Vertex

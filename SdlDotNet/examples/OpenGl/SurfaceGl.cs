@@ -145,7 +145,7 @@ namespace SdlDotNet.OpenGl
             }
         }
 
-        private void SetMode2D(bool mode2D)
+        private static void SetMode2D(bool mode2D)
         {
             //get
             //{

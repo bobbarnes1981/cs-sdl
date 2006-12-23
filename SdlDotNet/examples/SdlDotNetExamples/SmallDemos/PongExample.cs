@@ -58,7 +58,6 @@ namespace SdlDotNetExamples.SmallDemos
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Pong Example";
             Video.SetVideoMode(300, 200);
-            Events.Tick += new EventHandler<TickEventArgs>(Events_Tick);
 
             ball.Surface.TransparentColor = System.Drawing.Color.Magenta;
         }
@@ -91,6 +90,7 @@ namespace SdlDotNetExamples.SmallDemos
 
         public void Go()
         {
+            Events.Tick += new EventHandler<TickEventArgs>(Events_Tick);
             Events.Run();
         }
 

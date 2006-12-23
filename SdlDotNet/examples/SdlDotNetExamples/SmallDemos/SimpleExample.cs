@@ -40,10 +40,6 @@ namespace SdlDotNetExamples.SmallDemos
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Simple Example";
             screen = Video.SetVideoMode(width, height);
-
-            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
-            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
-            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
         }
 
         private void KeyDown(object sender, KeyboardEventArgs e)
@@ -67,6 +63,9 @@ namespace SdlDotNetExamples.SmallDemos
 
         public void Go()
         {
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
             Events.Run();
         }
 

@@ -234,7 +234,7 @@ namespace SdlDotNetExamples.NeHe
         /// <summary>
         /// Draw cube
         /// </summary>
-        public void GlDrawCube()
+        public static void GlDrawCube()
         {
             Gl.glBegin(Gl.GL_QUADS);
             // Front Face

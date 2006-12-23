@@ -328,7 +328,7 @@ namespace SdlDotNetExamples.NeHe
         /// <param name="number">
         /// The number of points to allocate.
         /// </param>
-        private void AllocateThing(ref Thing thing, int number)
+        private static void AllocateThing(ref Thing thing, int number)
         {
             thing.Points = new Vertex[number];
         }

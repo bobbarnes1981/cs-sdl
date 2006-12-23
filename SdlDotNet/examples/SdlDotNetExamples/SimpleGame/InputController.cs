@@ -57,7 +57,6 @@ namespace SdlDotNetExamples.SimpleGame
         public InputController(EventManager eventManager)
         {
             this.eventManager = eventManager;
-            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
         }
 
         /// <summary>
@@ -92,8 +91,9 @@ namespace SdlDotNetExamples.SimpleGame
         /// <summary>
         /// 
         /// </summary>
-        public static void Go()
+        public void Go()
         {
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
             Events.Run();
         }
     }

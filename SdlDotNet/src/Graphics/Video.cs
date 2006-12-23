@@ -156,7 +156,7 @@ namespace SdlDotNet.Graphics
         /// (for whatever reason), the next higher resolution 
         /// will be used and the display window centered on a black background.
         /// </summary>
-        Fullscreen = Sdl.SDL_FULLSCREEN,
+        FullScreen = Sdl.SDL_FULLSCREEN,
         /// <summary>
         /// Create an OpenGL rendering context. 
         /// You should have previously set OpenGL video 
@@ -253,7 +253,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="width">Width of mode</param>
         /// <param name="height">Height of mode</param>
-        /// <param name="fullscreen">Fullscreen or not</param>
+        /// <param name="fullScreen">Fullscreen or not</param>
         /// <param name="bitsPerPixel">
         /// Bits per pixel. Typically 8, 16, 24 or 32
         /// </param>
@@ -261,12 +261,12 @@ namespace SdlDotNet.Graphics
         /// <returns>
         /// True is mode is supported, false if it is not.
         /// </returns>
-        public static bool IsVideoModeOk(int width, int height, bool fullscreen, int bitsPerPixel)
+        public static bool IsVideoModeOk(int width, int height, bool fullScreen, int bitsPerPixel)
         {
             VideoModes flags = VideoModes.None;
-            if (fullscreen)
+            if (fullScreen)
             {
-                flags = VideoModes.Fullscreen;
+                flags = VideoModes.FullScreen;
             }
             int result = Sdl.SDL_VideoModeOK(
                 width,
@@ -301,13 +301,13 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="width">Width of mode</param>
         /// <param name="height">Height of mode</param>
-        /// <param name="fullscreen">Fullscreen mode</param>
-        public static int BestBitsPerPixel(int width, int height, bool fullscreen)
+        /// <param name="fullScreen">Fullscreen mode</param>
+        public static int BestBitsPerPixel(int width, int height, bool fullScreen)
         {
             VideoModes flags = VideoModes.None;
-            if (fullscreen)
+            if (fullScreen)
             {
-                flags = VideoModes.Fullscreen;
+                flags = VideoModes.FullScreen;
             }
             return Sdl.SDL_VideoModeOK(
                 width,
@@ -322,7 +322,7 @@ namespace SdlDotNet.Graphics
         /// <returns>Array of Size structs</returns>
         public static Size[] ListModes()
         {
-            VideoModes flags = VideoModes.Fullscreen;
+            VideoModes flags = VideoModes.FullScreen;
             IntPtr format = IntPtr.Zero;
             Sdl.SDL_Rect[] rects = Sdl.SDL_ListModes(format, (int)flags);
             Size[] size = new Size[rects.Length];
@@ -552,15 +552,15 @@ namespace SdlDotNet.Graphics
         /// <param name="height">screen height</param>
         /// <param name="resizable">window will be resizable</param>
         /// <param name="openGL">OpenGL surface</param>
-        /// <param name="fullscreen">fullscreen</param>
+        /// <param name="fullScreen">fullscreen</param>
         /// <param name="hardwareSurface"></param>
         /// <param name="frame">
         /// If true, the window will have a frame around it. If fullscreen is true, then the frame will not appear
         /// </param>
         /// <returns>a surface to draw to</returns>
-        public static Surface SetVideoMode(int width, int height, bool resizable, bool openGL, bool fullscreen, bool hardwareSurface, bool frame)
+        public static Surface SetVideoMode(int width, int height, bool resizable, bool openGL, bool fullScreen, bool hardwareSurface, bool frame)
         {
-            return SetVideoMode(width, height, USE_CURRENT_BPP, resizable, openGL, fullscreen, hardwareSurface, frame);
+            return SetVideoMode(width, height, USE_CURRENT_BPP, resizable, openGL, fullScreen, hardwareSurface, frame);
         }
 
         /// <summary>
@@ -571,13 +571,13 @@ namespace SdlDotNet.Graphics
         /// <param name="bitsPerPixel">bits per pixel</param>
         /// <param name="resizable">window will be resizable</param>
         /// <param name="openGL">OpenGL surface</param>
-        /// <param name="fullscreen">fullscreen</param>
+        /// <param name="fullScreen">fullscreen</param>
         /// <param name="hardwareSurface"></param>
         /// <param name="frame">
         /// If true, the window will have a frame around it. If fullscreen is true, then the frame will not appear
         /// </param>
         /// <returns>a surface to draw to</returns>
-        public static Surface SetVideoMode(int width, int height, int bitsPerPixel, bool resizable, bool openGL, bool fullscreen, bool hardwareSurface, bool frame)
+        public static Surface SetVideoMode(int width, int height, int bitsPerPixel, bool resizable, bool openGL, bool fullScreen, bool hardwareSurface, bool frame)
         {
             VideoModes flags = VideoModes.None;
             if (hardwareSurface)
@@ -585,9 +585,9 @@ namespace SdlDotNet.Graphics
                 flags |= VideoModes.HardwareSurface;
                 flags |= VideoModes.DoubleBuffering;
             }
-            if (fullscreen)
+            if (fullScreen)
             {
-                flags |= VideoModes.Fullscreen;
+                flags |= VideoModes.FullScreen;
             }
             if (openGL)
             {

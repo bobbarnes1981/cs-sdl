@@ -90,7 +90,7 @@ namespace SdlDotNetExamples.SpriteDemos
             new int[] { 1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
         //string data_directory = @"Data/";
         //string filepath = @"../../";
-        private void SetupGui()
+        private static void SetupGui()
         {
             // Set up the demo sprite containers
             master.EnableMouseButtonEvent();

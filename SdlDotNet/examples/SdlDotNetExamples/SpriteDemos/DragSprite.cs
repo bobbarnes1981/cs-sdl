@@ -40,11 +40,15 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <param name="key"></param>
         /// <param name="coordinates"></param>
         /// <param name="bounds"></param>
-        public DragSprite(Hashtable frames, string key, Point coordinates,
+        public DragSprite(SurfaceCollection frames, Point coordinates,
             Rectangle bounds)
-            : base((SurfaceCollection)frames[key], bounds, coordinates)
+            : base(frames, bounds, coordinates)
         {
-            this.Size = ((SurfaceCollection)frames[key]).Size;
+            if (frames == null)
+            {
+                throw new ArgumentNullException("frames");
+            }
+            this.Size = frames[0].Size;
             this.AllowDrag = true;
         }
 

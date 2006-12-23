@@ -29,7 +29,7 @@ namespace SdlDotNetExamples.Isotope
     /// <summary>
     /// 
     /// </summary>
-    public class Simulator
+    public static class Simulator
     {
         // simulates a 3 dimensional scene
 
@@ -37,7 +37,7 @@ namespace SdlDotNetExamples.Isotope
         /// 
         /// </summary>
         /// <param name="scene"></param>
-        public void Update(Scene scene)
+        public static void Update(Scene scene)
         {
             /*Updates the physics simulation of the objects
 

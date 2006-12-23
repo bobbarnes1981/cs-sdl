@@ -47,9 +47,9 @@ namespace SdlDotNetExamples.SpriteDemos
 
             AnimationCollection anim2 = new AnimationCollection(m2);
 
-            Hashtable frames = new Hashtable();
-            frames.Add("marble1", m1);
-            frames.Add("marble2", m2);
+            AnimationDictionary frames = new AnimationDictionary();
+            frames.Add("marble1", anim1);
+            frames.Add("marble2", anim2);
 
             DragSprite dragSprite;
             for (int i = 0; i < cols; i++)
@@ -57,7 +57,7 @@ namespace SdlDotNetExamples.SpriteDemos
                 Thread.Sleep(10);
                 for (int j = 0; j < rows; j++)
                 {
-                    dragSprite = new DragSprite(frames, "marble1",
+                    dragSprite = new DragSprite(frames["marble1"],
                         new Point(sx + i * 50, sy + j * 50),
                         new Rectangle(new Point(0, 0), SpriteDemosMain.Size));
                     dragSprite.Animations.Add("marble1", anim1);

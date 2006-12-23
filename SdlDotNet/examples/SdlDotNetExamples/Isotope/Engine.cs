@@ -117,13 +117,13 @@ namespace SdlDotNetExamples.Isotope
             get { return keys; }
             set { keys = value; }
         }
-        private Simulator simulator;
+        //private Simulator simulator;
 
-        public Simulator Simulator
-        {
-            get { return simulator; }
-            set { simulator = value; }
-        }
+        //public Simulator Simulator
+        //{
+        //    get { return simulator; }
+        //    set { simulator = value; }
+        //}
         private LeadActor player;
 
         public LeadActor Player
@@ -189,7 +189,7 @@ namespace SdlDotNetExamples.Isotope
             this.keys = keys;
 
             //Physical simulation elements
-            this.simulator = new Simulator();
+            //this.simulator = new Simulator();
             //Pick the players actor object and remember it
             this.player = player;
 
@@ -248,7 +248,7 @@ namespace SdlDotNetExamples.Isotope
                 // tick routines. Modifying these values in event receiver routines will mean that often a necessary collision
                 // detection has not occurred
                 // Update the movement of the objects in the players scene
-                this.simulator.Update(this.player.Scene);
+                Simulator.Update(this.player.Scene);
 
                 // Update the isometric display
                 if (this.player.NewScene == this.player.Scene)

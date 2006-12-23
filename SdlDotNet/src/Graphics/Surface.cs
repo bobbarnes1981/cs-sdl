@@ -2222,7 +2222,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return ((this.SurfaceStruct.flags & (int)VideoModes.Fullscreen) == (int)VideoModes.Fullscreen);
+                return ((this.SurfaceStruct.flags & (int)VideoModes.FullScreen) == (int)VideoModes.FullScreen);
             }
         }
 
