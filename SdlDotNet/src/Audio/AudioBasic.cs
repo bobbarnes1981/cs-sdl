@@ -19,9 +19,11 @@
 #endregion LICENSE
 
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 using Tao.Sdl;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Audio
 {
@@ -178,7 +180,8 @@ namespace SdlDotNet.Audio
         {
             if (audioOpen)
             {
-                throw new AudioException("OpenAudio already called and initialized.  Call CloseAudio first before calling OpenAudio again.");
+                throw new AudioException(Events.StringManager.GetString(
+                        "OpenAudioInit", CultureInfo.CurrentUICulture));
             }
 
             if (format != AudioFormat.Unsigned16Little)

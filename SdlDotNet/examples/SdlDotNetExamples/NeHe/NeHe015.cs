@@ -29,6 +29,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Globalization;
 
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
@@ -243,7 +244,8 @@ namespace SdlDotNetExamples.NeHe
             // Center On X, Y, Z Axis
             Gl.glTranslatef(-0.35f, -0.35f, 0.1f);
             // Draw A Skull And Crossbones Symbol
-            GlPrint("N");
+            GlPrint(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "N", CultureInfo.CurrentUICulture));
             // Increase The Rotation Variable
             this.Rotation += 0.1f;
         }

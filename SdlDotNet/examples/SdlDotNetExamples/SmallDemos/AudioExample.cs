@@ -102,7 +102,8 @@ namespace SdlDotNetExamples.SmallDemos
             // Begin the SDL ticker
             Events.Fps = 50;
 
-            textDisplay.Text = "Press Arrow Keys, Space and Click \nMouse.";
+            textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "AudioExampleDirection", CultureInfo.CurrentUICulture);
             textDisplay.TextWidth = 200;
             Events.Run();
         }
@@ -143,36 +144,42 @@ namespace SdlDotNetExamples.SmallDemos
                     {
                         // Switch the music 
                         MusicPlayer.Fadeout(1500);
-                        textDisplay.Text = "Music is fading";
+                        textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "MusicIsFading", CultureInfo.CurrentUICulture);
 
                         // The next music sample plays because queuing is enabled.
                     }
                     catch (SdlException exception)
                     {
                         exception.ToString();
-                        textDisplay.Text = "Music is already fading";
+                        textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "MusicIsFading", CultureInfo.CurrentUICulture);
                     }
                     break;
 
                 case Key.UpArrow:
                     // Increase the music volume.
                     MusicPlayer.Volume += 10;
-                    textDisplay.Text = "Music Volume: " + MusicPlayer.Volume;
+                    textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "MusicVolume", CultureInfo.CurrentUICulture) + ": " + MusicPlayer.Volume;
                     break;
                 case Key.DownArrow:
                     // Decrease the music volume.
                     MusicPlayer.Volume -= 10;
-                    textDisplay.Text = "Music Volume: " + MusicPlayer.Volume;
+                    textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "MusicVolume", CultureInfo.CurrentUICulture) + ": " + MusicPlayer.Volume;
                     break;
                 case Key.RightArrow:
                     // Play the sound on the right
                     boing.Play().SetPanning(50, 205);
-                    textDisplay.Text = "Sound played on Right.";
+                    textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "SoundRight", CultureInfo.CurrentUICulture);
                     break;
                 case Key.LeftArrow:
                     // Play the sound on the left
                     boing.Play().SetPanning(205, 50);
-                    textDisplay.Text = "Sound played on Left.";
+                    textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "SoundLeft", CultureInfo.CurrentUICulture);
                     break;
                 case Key.Escape:
                     // Quit the example
@@ -188,12 +195,14 @@ namespace SdlDotNetExamples.SmallDemos
                 case MouseButton.PrimaryButton:
                     // Play on left side
                     boing.Play().SetPanning(205, 50);
-                    textDisplay.Text = "Sound played on Left.";
+                    textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "SoundLeft", CultureInfo.CurrentUICulture);
                     break;
                 case MouseButton.SecondaryButton:
                     // Play on right side 
                     boing.Play().SetPanning(50, 205);
-                    textDisplay.Text = "Sound played on Right.";
+                    textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "SoundRight", CultureInfo.CurrentUICulture);
                     break;
             }
         }
@@ -201,7 +210,8 @@ namespace SdlDotNetExamples.SmallDemos
         private void Events_MusicFinished(object sender, MusicFinishedEventArgs e)
         {
             // Switch the music....
-            textDisplay.Text = "Music switched...";
+            textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "MusicSwitched", CultureInfo.CurrentUICulture);
             Console.WriteLine("Music Finished");
         }
 

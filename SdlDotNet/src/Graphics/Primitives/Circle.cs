@@ -197,6 +197,7 @@ namespace SdlDotNet.Graphics.Primitives
         {
             return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2})", x, y, r);
         }
+
         /// <summary>
         /// Equals operator
         /// </summary>
@@ -244,7 +245,6 @@ namespace SdlDotNet.Graphics.Primitives
         public override int GetHashCode()
         {
             return x ^ y ^ r;
-
         }
     }
 }

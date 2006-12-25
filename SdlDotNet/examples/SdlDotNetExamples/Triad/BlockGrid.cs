@@ -20,6 +20,7 @@
 using System;
 using System.IO;
 using System.Drawing;
+using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
@@ -56,7 +57,8 @@ namespace SdlDotNetExamples.Triad
             {
                 if (value == 0.0)
                 {
-                    throw new SdlException("You can not set the speed factor to zero.");
+                    throw new SdlException(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "CannotBeZero", CultureInfo.CurrentUICulture));
                 }
 
                 this.delayFactor = (int)(this.delayFactor / value);
@@ -320,9 +322,9 @@ namespace SdlDotNetExamples.Triad
                         break;
                     case BlockGridState.GameOver:
                         break;
-
                     default:
-                        throw new SdlException("BlockGridState is not handled: " + currentState);
+                        throw new SdlException(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "NotHandled", CultureInfo.CurrentUICulture) + " " + currentState);
                 }
             }
             catch (SdlException)

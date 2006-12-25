@@ -18,6 +18,8 @@
  */
 #endregion LICENSE
 
+using System.Globalization;
+
 namespace SdlDotNetExamples
 {
     partial class SdlDotNetExamplesBrowser
@@ -60,7 +62,8 @@ namespace SdlDotNetExamples
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(59, 24);
             this.btnRun.TabIndex = 1;
-            this.btnRun.Text = "Run";
+            this.btnRun.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "Run", CultureInfo.CurrentUICulture);
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
@@ -85,7 +88,8 @@ namespace SdlDotNetExamples
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SdlDotNetExamples";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "SdlDotNet Examples Browser";
+            this.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "SdlDotNetExamplesBrowser", CultureInfo.CurrentUICulture);
             this.Load += new System.EventHandler(this.frmExamples_Load);
             this.ResumeLayout(false);
 

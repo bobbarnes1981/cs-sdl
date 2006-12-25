@@ -303,8 +303,10 @@ namespace SdlDotNetExamples.NeHe
             catch (Exception e)
             {
                 // Handle Any Exceptions While Loading Object Data, Exit App
-                string errorMsg = "An Error Occurred While Loading And Parsing Object Data:\n\t" + filename + "\n" + "\n\nStack Trace:\n\t" + e.StackTrace + "\n";
-                MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                string errorMsg = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "LoadError", CultureInfo.CurrentUICulture) + "\n\t" + filename + "\n" + "\n\n\n\t" + e.StackTrace + "\n";
+                MessageBox.Show(errorMsg, SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "Error", CultureInfo.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 throw;
             }
             finally

@@ -179,7 +179,7 @@ namespace SdlDotNet.Graphics.Sprites
                 // Check to see if it exists.
                 if (!m_Animations.ContainsKey(value))
                 {
-                    throw new SdlException("The given animation (" + value + ") does not exist in this AnimatedSprite AnimationCollection.");
+                    throw new AnimationException();
                 }
 
                 // Set the animation settings.

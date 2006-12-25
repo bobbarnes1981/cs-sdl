@@ -19,6 +19,7 @@
 //*****************************************************************************
 
 using System;
+using System.Globalization;
 using System.Drawing;
 
 using SdlDotNet.Graphics;
@@ -124,7 +125,8 @@ namespace SdlDotNetExamples.Triad
             {
                 if (width <= 0)
                 {
-                    throw new GameException("Width is set to zero or negative value.");
+                    throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "WidthSetZero", CultureInfo.CurrentUICulture));
                 }
 
                 width = value;
@@ -145,7 +147,8 @@ namespace SdlDotNetExamples.Triad
             {
                 if (value <= 0)
                 {
-                    throw new GameException("Height is set to zero or negative value.");
+                    throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "HeightSetZero", CultureInfo.CurrentUICulture));
                 }
 
                 height = value;
@@ -326,7 +329,7 @@ namespace SdlDotNetExamples.Triad
         {
             if (surface == null)
             {
-                throw new GameException("Input surface is NullReferenceException");
+                throw new ArgumentNullException("surface");
             }
 
             DrawGameObject(surface);

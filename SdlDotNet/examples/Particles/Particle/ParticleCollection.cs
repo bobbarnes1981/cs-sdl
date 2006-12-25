@@ -93,7 +93,13 @@ namespace SdlDotNet.Particles.Particle
             this.Add(emitter);
             if (changeEmitterTarget)
             {
+            //    emitter.Target.Clear();
+            //    foreach (BaseParticle b in this)
+            //    {
+            //        emitter.Target.Add(b);
+            //    }
                 emitter.Target = this;
+
             }
         }
 

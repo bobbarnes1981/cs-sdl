@@ -353,7 +353,7 @@ namespace SdlDotNet.Graphics
             {
                 if (this.disposed)
                 {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                    throw (new ObjectDisposedException(this.ToString()));
                 }
                 GC.KeepAlive(this);
                 return (Sdl.SDL_Surface)Marshal.PtrToStructure(this.Handle,
@@ -367,7 +367,7 @@ namespace SdlDotNet.Graphics
             {
                 if (this.disposed)
                 {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                    throw (new ObjectDisposedException(this.ToString()));
                 }
                 GC.KeepAlive(this);
                 return (Sdl.SDL_PixelFormat)Marshal.PtrToStructure(this.SurfaceStruct.format,
@@ -542,7 +542,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
 
             Sdl.SDL_Rect sdlrect = ConvertRecttoSDLRect(rectangle);
@@ -611,7 +611,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             if (this.SurfaceStruct.format != IntPtr.Zero)
             {
@@ -625,7 +625,7 @@ namespace SdlDotNet.Graphics
             }
             else
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
         }
 
@@ -641,7 +641,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
 
             byte r, g, b, a;
@@ -717,7 +717,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
 
             int flag = 0;
@@ -756,7 +756,7 @@ namespace SdlDotNet.Graphics
             }
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int flags = 0;
 
@@ -792,7 +792,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             return new Surface(Sdl.SDL_DisplayFormat(this.Handle));
         }
@@ -997,7 +997,7 @@ namespace SdlDotNet.Graphics
             }
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             Sdl.SDL_Rect s = Surface.ConvertRecttoSDLRect(sourceRectangle);
             Sdl.SDL_Rect d = Surface.ConvertRecttoSDLRect(destinationRectangle);
@@ -1080,7 +1080,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             if (MustLock)
             {
@@ -1102,7 +1102,7 @@ namespace SdlDotNet.Graphics
             {
                 if (this.disposed)
                 {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                    throw (new ObjectDisposedException(this.ToString()));
                 }
                 GC.KeepAlive(this);
                 return this.SurfaceStruct.pixels;
@@ -1118,7 +1118,7 @@ namespace SdlDotNet.Graphics
             {
                 if (this.disposed)
                 {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                    throw (new ObjectDisposedException(this.ToString()));
                 }
                 int result = Sdl.SDL_UnlockSurface(this.Handle);
                 GC.KeepAlive(this);
@@ -1139,7 +1139,7 @@ namespace SdlDotNet.Graphics
             {
                 if (this.disposed)
                 {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                    throw (new ObjectDisposedException(this.ToString()));
                 }
 
                 int result = Sdl.SDL_MUSTLOCK(this.Handle);
@@ -1163,7 +1163,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int result = Sdl.SDL_SaveBMP(this.Handle, file);
             GC.KeepAlive(this);
@@ -1208,7 +1208,7 @@ namespace SdlDotNet.Graphics
                 {
                     if (this.disposed)
                     {
-                        throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                        throw (new ObjectDisposedException(this.ToString()));
                     }
                     int flag = Sdl.SDL_SRCCOLORKEY | Sdl.SDL_RLEACCELOK;
                     int result = Sdl.SDL_SetColorKey(this.Handle, (int)flag, this.GetColorValue(this.transparentColor));
@@ -1223,7 +1223,7 @@ namespace SdlDotNet.Graphics
                 {
                     if (this.disposed)
                     {
-                        throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                        throw (new ObjectDisposedException(this.ToString()));
                     }
                     if (this.transparentInitialized)
                     {
@@ -1247,7 +1247,7 @@ namespace SdlDotNet.Graphics
             {
                 if (this.disposed)
                 {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                    throw (new ObjectDisposedException(this.ToString()));
                 }
                 Sdl.SDL_Rect sdlrect =
                     Surface.ConvertRecttoSDLRect(new System.Drawing.Rectangle());
@@ -1283,7 +1283,7 @@ namespace SdlDotNet.Graphics
 
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int pixelColorValueInt;
 
@@ -1331,7 +1331,7 @@ namespace SdlDotNet.Graphics
 
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int pixelColorValueInt;
 
@@ -1393,7 +1393,7 @@ namespace SdlDotNet.Graphics
             {
                 if (this.disposed)
                 {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                    throw (new ObjectDisposedException(this.ToString()));
                 }
                 int result = SdlGfx.pixelRGBA(
                     this.Handle, (short)positionX, (short)positionY,
@@ -1474,7 +1474,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
 
             int bytesPerPixel = this.PixelFormat.BytesPerPixel;
@@ -1489,12 +1489,13 @@ namespace SdlDotNet.Graphics
                 }
                 else
                 {
-                    throw new OverflowException("positionX is too large");
+                    throw new OverflowException();
                 }
             }
             else
             {
-                throw new SdlException("Unknown amount of bytes per pixel.");
+                throw new SdlException(Events.StringManager.GetString(
+                        "UnknownBytesPerPixel", CultureInfo.CurrentUICulture));
             }
         }
 
@@ -1544,7 +1545,7 @@ namespace SdlDotNet.Graphics
                 Alphas alphaFlags = Alphas.RleEncoded;
                 if (this.disposed)
                 {
-                    throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                    throw (new ObjectDisposedException(this.ToString()));
                 }
                 //TODO check this.
                 if (alphaBlending)
@@ -1582,7 +1583,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
             if (antiAlias == true)
@@ -1619,7 +1620,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
             if (antiAlias == true)
@@ -1660,7 +1661,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
             if (antiAlias == true)
@@ -1699,7 +1700,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
             if (antiAlias == true)
@@ -1729,7 +1730,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
             if (antiAlias == true)
@@ -1789,7 +1790,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             this.Scale(zoomX, zoomY, false);
         }
@@ -1804,7 +1805,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
             if (antiAlias == true)
@@ -1832,7 +1833,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             this.Scale(zoom, zoom);
         }
@@ -1846,7 +1847,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             this.Scale(zoom, zoom, antiAlias);
         }
@@ -1876,7 +1877,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             this.Scale(2, 2);
         }
@@ -1890,7 +1891,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             this.Scale(2, 2, antiAlias);
         }
@@ -1977,7 +1978,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             Sdl.SDL_UpdateRect(
                 this.Handle,
@@ -1996,7 +1997,7 @@ namespace SdlDotNet.Graphics
         {
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             Sdl.SDL_Flip(this.Handle);
             GC.KeepAlive(this);
@@ -2014,7 +2015,7 @@ namespace SdlDotNet.Graphics
             }
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangles.Length];
             for (int i = 0; i < rectangles.Length; i++)
@@ -2037,7 +2038,7 @@ namespace SdlDotNet.Graphics
             }
             if (this.disposed)
             {
-                throw (new ObjectDisposedException(this.ToString(), "Object has been disposed"));
+                throw (new ObjectDisposedException(this.ToString()));
             }
             Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangles.Count];
             for (int i = 0; i < rectangles.Count; i++)
