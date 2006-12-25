@@ -22,6 +22,7 @@ using System;
 using System.Drawing;
 using System.Reflection;
 using System.IO;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 using Tao.Sdl;
@@ -921,7 +922,8 @@ namespace SdlDotNet.Graphics
                 }
                 else
                 {
-                    throw new SdlException("Video.GLGetAttribute returned an improper result for DoubleBuffer");
+                    throw new SdlException(Events.StringManager.GetString(
+                        "GLGetAttributeImproperResult", CultureInfo.CurrentUICulture));
                 }
             }
             set
@@ -958,7 +960,8 @@ namespace SdlDotNet.Graphics
                 }
                 else
                 {
-                    throw new SdlException("Video.GLGetAttribute returned an improper result for StereoRendering");
+                    throw new SdlException(Events.StringManager.GetString(
+                        "GLGetAttributeImproperResult", CultureInfo.CurrentUICulture));
                 }
             }
             set

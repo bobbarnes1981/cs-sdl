@@ -146,8 +146,10 @@ namespace SdlDotNetExamples.NeHe
             if (!File.Exists(name) && !File.Exists(fileName1) &&
                 !File.Exists(fileName2))
             {
-                MessageBox.Show("Can't Find The Height Map!",
-                    "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "CantFindTheHeightMap", CultureInfo.CurrentUICulture),
+                    SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "Error", CultureInfo.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
 
             // Does The File Exist Here?

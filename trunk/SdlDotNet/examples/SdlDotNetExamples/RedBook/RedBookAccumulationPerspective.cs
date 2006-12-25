@@ -38,7 +38,8 @@ namespace SdlDotNetExamples.RedBook
 {
 	/// <summary>
 	///     Use the accumulation buffer to do full-scene antialiasing on a scene with
-	///     orthographic parallel projection.
+	///     perspective projection, using the special routines accFrustum() and
+	///     accPerspective().
 	/// </summary>
 	/// <remarks>
 	///     <para>
@@ -54,7 +55,7 @@ namespace SdlDotNetExamples.RedBook
 	///			http://cs-sdl.sourceforge.net
 	///     </para>
 	/// </remarks>
-	public class RedBookAccAnti
+	public class RedBookAccumulationPerspective
 	{
 		#region Fields
 
@@ -75,7 +76,7 @@ namespace SdlDotNetExamples.RedBook
 		{
 			get
 			{
-				return "AccAnti - Accumulation Buffer";
+				return "AccPersp - Accumulation Buffer Perspective";
 			}
 		}
 
@@ -86,7 +87,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Basic constructor
 		/// </summary>
-		public RedBookAccAnti()
+		public RedBookAccumulationPerspective()
 		{
 			Initialize();
 		}
@@ -184,6 +185,83 @@ namespace SdlDotNetExamples.RedBook
 
 		#endregion Lesson Setup
 
+		#region AccFrustum(double left, double right, double bottom, double top, double near, double far, double pixdx, double pixdy, double eyedx, double eyedy, double focus)
+		/// <summary>
+		///     <para>
+		///         The first 6 arguments are identical to the glFrustum() call.
+		///     </para>
+		///     <para>
+		///         pixdx and pixdy are anti-alias jitter in pixels.  Set both equal to 0.0 for
+		///         no anti-alias jitter.  eyedx and eyedy are depth-of field jitter in pixels.
+		///         Set both equal to 0.0 for no depth of field effects.
+		///     </para>
+		///     <para>
+		///         focus is distance from eye to plane in focus.  focus must be greater than,
+		///         but not equal to 0.0.
+		///     </para>
+		///     <para>
+		///         Note that accFrustum() calls glTranslatef().  You will probably want to
+		///         insure that your ModelView matrix has been initialized to identity before
+		///         calling AccFrustum().
+		///     </para>
+		/// </summary>
+		private static void AccFrustum(double left, double right, double bottom, double top, double near, double far, double pixdx, double pixdy, double eyedx, double eyedy, double focus) 
+		{
+			double xwsize, ywsize; 
+			double dx, dy;
+			int[] viewport = new int[4];
+
+			Gl.glGetIntegerv(Gl.GL_VIEWPORT, viewport);
+
+			xwsize = right - left;
+			ywsize = top - bottom;
+
+			dx = -(pixdx * xwsize / (double) viewport[2] + eyedx * near / focus);
+			dy = -(pixdy * ywsize / (double) viewport[3] + eyedy * near / focus);
+
+			Gl.glMatrixMode(Gl.GL_PROJECTION);
+			Gl.glLoadIdentity();
+			Gl.glFrustum(left + dx, right + dx, bottom + dy, top + dy, near, far);
+			Gl.glMatrixMode(Gl.GL_MODELVIEW);
+			Gl.glLoadIdentity();
+			Gl.glTranslatef((float) -eyedx, (float) -eyedy, 0.0f);
+		}
+		#endregion AccFrustum(double left, double right, double bottom, double top, double near, double far, double pixdx, double pixdy, double eyedx, double eyedy, double focus)
+
+		#region AccPerspective(double fovy, double aspect, double near, double far, double pixdx, double pixdy, double eyedx, double eyedy, double focus)
+		/// <summary>
+		///     <para>
+		///         The first 4 arguments are identical to the gluPerspective() call.
+		///     </para>
+		///     <para>
+		///         pixdx and pixdy are anti-alias jitter in pixels.  Set both equal to 0.0 for
+		///         no anti-alias jitter.  eyedx and eyedy are depth-of field jitter in pixels.
+		///         Set both equal to 0.0 for no depth of field effects.
+		///     </para>
+		///     <para>
+		///         focus is distance from eye to plane in focus.  focus must be greater than,
+		///         but not equal to 0.0.
+		///     </para>
+		///     <para>
+		///         Note that AccPerspective() calls AccFrustum().
+		///     </para>
+		/// </summary>
+		private static void AccPerspective(double fovy, double aspect, double near, double far, double pixdx, double pixdy, double eyedx, double eyedy, double focus) 
+		{
+			double fov2, left, right, bottom, top;
+
+			fov2 = ((fovy * System.Math.PI) / 180.0) / 2.0;
+
+			top = near / (Math.Cos(fov2) / Math.Sin(fov2));
+			bottom = -top;
+
+			right = top * aspect;
+			left = -right;
+
+			AccFrustum(left, right, bottom, top, near, far, pixdx, pixdy, eyedx, eyedy, focus);
+		}
+		#endregion AccPerspective(double fovy, double aspect, double near, double far, double pixdx, double pixdy, double eyedx, double eyedy, double focus)
+
 		#region DisplayObjects()
 		private static void DisplayObjects() 
 		{
@@ -193,6 +271,7 @@ namespace SdlDotNetExamples.RedBook
 			float[] octaDiffuse = {0.7f, 0.4f, 0.4f, 1.0f};
 
 			Gl.glPushMatrix();
+			Gl.glTranslatef(0.0f, 0.0f, -5.0f);
 			Gl.glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
 
 			Gl.glPushMatrix();
@@ -240,12 +319,8 @@ namespace SdlDotNetExamples.RedBook
 			for(int jitter = 0; jitter < ACSIZE; jitter++) 
 			{
 				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-				Gl.glPushMatrix();
-				// Note that 4.5 is the distance in world space between left and right and bottom
-				// and top.  This formula converts fractional pixel movement to world coordinates.
-				Gl.glTranslatef((Jitter.GetJ8()[jitter].X * 4.5f) / viewport[2], (Jitter.GetJ8()[jitter].Y * 4.5f) / viewport[3], 0.0f);
+				AccPerspective(50.0, (double) viewport[2] / (double) viewport[3], 1.0, 15.0, Jitter.GetJ8()[jitter].X, Jitter.GetJ8()[jitter].Y, 0.0, 0.0, 1.0);
 				DisplayObjects();
-				Gl.glPopMatrix();
 				Gl.glAccum(Gl.GL_ACCUM, 1.0f / ACSIZE);
 			}
 			Gl.glAccum(Gl.GL_RETURN, 1.0f);
@@ -295,7 +370,7 @@ namespace SdlDotNetExamples.RedBook
 		/// </summary>
 		public static void Run()
 		{
-			RedBookAccAnti t = new RedBookAccAnti(); 
+            RedBookAccumulationPerspective t = new RedBookAccumulationPerspective();
             t.Reshape();
 			Init();
 			Events.Run();

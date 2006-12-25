@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Resources;
 using System.Threading;
+using System.Globalization;
 
 using SdlDotNet.Audio;
 using SdlDotNet.Core;
@@ -59,6 +60,7 @@ namespace SdlDotNetExamples.CDPlayer
         string filepath = @"../../";
         private Panel panel1;
         private System.ComponentModel.IContainer components;
+        static ResourceManager stringManager;
 
         /// <summary>
         /// 
@@ -167,6 +169,15 @@ namespace SdlDotNetExamples.CDPlayer
         //    }
         //}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static ResourceManager StringManager
+        {
+            get { return SdlDotNetExamples.CDPlayer.CDPlayerApp.stringManager; }
+            set { SdlDotNetExamples.CDPlayer.CDPlayerApp.stringManager = value; }
+        }
+
         private SpriteDictionary master = new SpriteDictionary();
 
         #region Windows Form Designer generated code
@@ -202,7 +213,8 @@ namespace SdlDotNetExamples.CDPlayer
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Select Drive:";
+            this.label1.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "SelectDrive", CultureInfo.CurrentUICulture);
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBoxDrive
@@ -216,7 +228,7 @@ namespace SdlDotNetExamples.CDPlayer
             // 
             // buttonPlay
             // 
-            this.buttonPlay.Location = new System.Drawing.Point(16, 88);
+            this.buttonPlay.Location = new System.Drawing.Point(8, 88);
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.Size = new System.Drawing.Size(48, 40);
             this.buttonPlay.TabIndex = 2;
@@ -225,7 +237,7 @@ namespace SdlDotNetExamples.CDPlayer
             // 
             // buttonPause
             // 
-            this.buttonPause.Location = new System.Drawing.Point(72, 88);
+            this.buttonPause.Location = new System.Drawing.Point(62, 88);
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(48, 40);
             this.buttonPause.TabIndex = 3;
@@ -234,7 +246,7 @@ namespace SdlDotNetExamples.CDPlayer
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(128, 88);
+            this.buttonStop.Location = new System.Drawing.Point(116, 88);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(48, 40);
             this.buttonStop.TabIndex = 4;
@@ -243,7 +255,7 @@ namespace SdlDotNetExamples.CDPlayer
             // 
             // buttonEject
             // 
-            this.buttonEject.Location = new System.Drawing.Point(184, 88);
+            this.buttonEject.Location = new System.Drawing.Point(170, 88);
             this.buttonEject.Name = "buttonEject";
             this.buttonEject.Size = new System.Drawing.Size(48, 40);
             this.buttonEject.TabIndex = 5;
@@ -260,20 +272,20 @@ namespace SdlDotNetExamples.CDPlayer
             // 
             // buttonNext
             // 
-            this.buttonNext.Location = new System.Drawing.Point(296, 88);
+            this.buttonNext.Location = new System.Drawing.Point(286, 88);
             this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(48, 40);
+            this.buttonNext.Size = new System.Drawing.Size(58, 40);
             this.buttonNext.TabIndex = 7;
             this.buttonNext.Text = "Next";
             this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // buttonPrevious
             // 
-            this.buttonPrevious.Location = new System.Drawing.Point(240, 88);
+            this.buttonPrevious.Location = new System.Drawing.Point(224, 88);
             this.buttonPrevious.Name = "buttonPrevious";
-            this.buttonPrevious.Size = new System.Drawing.Size(48, 40);
+            this.buttonPrevious.Size = new System.Drawing.Size(56, 40);
             this.buttonPrevious.TabIndex = 8;
-            this.buttonPrevious.Text = "Prev";
+            this.buttonPrevious.Text = "Previous";
             this.buttonPrevious.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
             // surfaceControl
@@ -318,7 +330,7 @@ namespace SdlDotNetExamples.CDPlayer
             this.panel1.Size = new System.Drawing.Size(348, 226);
             this.panel1.TabIndex = 9;
             // 
-            // CDPlayer
+            // CDPlayerApp
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(362, 367);
@@ -334,7 +346,7 @@ namespace SdlDotNetExamples.CDPlayer
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Menu = this.mainMenu1;
-            this.Name = "CDPlayer";
+            this.Name = "CDPlayerApp";
             this.Text = "SDL.NET - CD Player";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.CDPlayer_Closing);
             this.Load += new System.EventHandler(this.CDPlayer_Load);
@@ -394,7 +406,9 @@ namespace SdlDotNetExamples.CDPlayer
                     _drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
                 }
                 TimeSpan timeSpan = SdlDotNet.Core.Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
-                this.labelStatus.Text = "Track: " + _drive.CurrentTrack + "     Length: " + timeSpan.Minutes + ":" + timeSpan.Seconds;
+                this.labelStatus.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Track", CultureInfo.CurrentUICulture) + ": " + _drive.CurrentTrack + "     " + SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Length", CultureInfo.CurrentUICulture) + ": " + timeSpan.Minutes + ":" + timeSpan.Seconds;
             }
             catch (SdlException ex)
             {

@@ -356,7 +356,8 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 if (value == null)
                 {
-                    throw new SdlException("Cannot assign a null Font");
+                    throw new SdlException(Events.StringManager.GetString(
+                        "NullFont", CultureInfo.CurrentUICulture));
                 }
                 font = value;
                 this.RenderInternal();

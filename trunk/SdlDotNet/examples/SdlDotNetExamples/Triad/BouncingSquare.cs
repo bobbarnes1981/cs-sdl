@@ -19,6 +19,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 
 using SdlDotNet.Graphics;
 
@@ -65,17 +66,20 @@ namespace SdlDotNetExamples.Triad
 
             if (this.Parent == null)
             {
-                throw new GameException("Parent object is null.");
+                throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "ObjectIsNull", CultureInfo.CurrentUICulture));
             }
 
             if (this.Parent.Width == 0)
             {
-                throw new GameException("Parent width is zero.");
+                throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "WidthSetZero", CultureInfo.CurrentUICulture));
             }
 
             if (this.Parent.Height == 0)
             {
-                throw new GameException("Parent height is zero.");
+                throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "HeightSetZero", CultureInfo.CurrentUICulture));
             }
 
             if (X <= 0)

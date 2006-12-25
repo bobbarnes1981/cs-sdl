@@ -32,18 +32,16 @@ using SdlDotNet.Core;
 using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 using Tao.OpenGl;
-using Tao.FreeGlut;
 
 namespace SdlDotNetExamples.RedBook
 {
 	/// <summary>
-	///     Use the accumulation buffer to do full-scene antialiasing on a scene with
-	///     orthographic parallel projection.
+	///     This program uses evaluators to draw a Bezier curve.
 	/// </summary>
 	/// <remarks>
 	///     <para>
 	///         Original Author:    Silicon Graphics, Inc.
-	///         http://www.opengl.org/developers/code/examples/redbook/accanti.c
+	///         http://www.opengl.org/developers/code/examples/redbook/bezcurve.c
 	///     </para>
 	///     <para>
 	///         C# Implementation:  Randy Ridge
@@ -54,19 +52,21 @@ namespace SdlDotNetExamples.RedBook
 	///			http://cs-sdl.sourceforge.net
 	///     </para>
 	/// </remarks>
-	public class RedBookAccAnti
+	public class RedBookBezierCurve
 	{
 		#region Fields
 
 		//Width of screen
-		int width = 250;
+		int width = 500;
 		//Height of screen
-		int height = 250;
-		
-		
-		
-		
-		private const int ACSIZE = 8;
+		int height = 500;
+
+		private static float[/*4*/, /*3*/] controlPoints = {
+			{-4.0f, -4.0f, 0.0f},
+			{-2.0f,  4.0f, 0.0f},
+			{ 2.0f, -4.0f, 0.0f},
+			{ 4.0f,  4.0f, 0.0f}
+														   };
 
 		/// <summary>
 		/// Lesson title
@@ -75,7 +75,7 @@ namespace SdlDotNetExamples.RedBook
 		{
 			get
 			{
-				return "AccAnti - Accumulation Buffer";
+				return "BezierCurve - Bezier curve";
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Basic constructor
 		/// </summary>
-		public RedBookAccAnti()
+		public RedBookBezierCurve()
 		{
 			Initialize();
 		}
@@ -105,8 +105,8 @@ namespace SdlDotNetExamples.RedBook
 			// Sets the ticker to update OpenGL Context
 			Events.Tick += new EventHandler<TickEventArgs>(this.Tick); 
 			Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
-//			// Sets the resize window event
-//			Events.VideoResize += new EventHandler<VideoResizeEventArgs> (this.Resize);
+			//			// Sets the resize window event
+			//			Events.VideoResize += new EventHandler<VideoResizeEventArgs> (this.Resize);
 			// Set the Frames per second.
 			Events.Fps = 60;
 			// Sets Window icon and title
@@ -146,85 +146,32 @@ namespace SdlDotNetExamples.RedBook
 			Gl.glLoadIdentity();
 			if(w <= h) 
 			{
-				Gl.glOrtho(-2.25, 2.25, -2.25 * h / (float)w, 2.25 * h / (float)w, -10.0, 10.0);
+				Gl.glOrtho(-5.0, 5.0, -5.0 * h / w, 5.0 * h / w, -5.0, 5.0);
 			}
 			else 
 			{
-				Gl.glOrtho(-2.25 * w / (float)h, 2.25 * w / (float)h, -2.25, 2.25, -10.0, 10.0);
+				Gl.glOrtho(-5.0 * w / h, 5.0 * w / h, -5.0, 5.0, -5.0, 5.0);
 			}
 			Gl.glMatrixMode(Gl.GL_MODELVIEW);
 			Gl.glLoadIdentity();
 		}
 
 		/// <summary>
-		/// Initializes the OpenGL system
+		///     <para>
+		///         Initialize antialiasing for RGBA mode, including alpha blending, hint, and
+		///         line width.  Print out implementation specific info on line width granularity
+		///         and width.
+		///     </para>
 		/// </summary>
 		private static void Init()
 		{
-			
-			float[] materialAmbient = {1.0f, 1.0f, 1.0f, 1.0f};
-			float[] materialSpecular = {1.0f, 1.0f, 1.0f, 1.0f};
-			float[] lightPosition = {0.0f, 0.0f, 10.0f, 1.0f};
-			float[] lightModelAmbient = {0.2f, 0.2f, 0.2f, 1.0f};
-            
-			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_AMBIENT, materialAmbient);
-			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_SPECULAR, materialSpecular);
-			Gl.glMaterialf(Gl.GL_FRONT, Gl.GL_SHININESS, 50.0f);
-			Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, lightPosition);
-			Gl.glLightModelfv(Gl.GL_LIGHT_MODEL_AMBIENT, lightModelAmbient);
-
-			Gl.glEnable(Gl.GL_LIGHTING);
-			Gl.glEnable(Gl.GL_LIGHT0);
-			Gl.glEnable(Gl.GL_DEPTH_TEST);
-			Gl.glShadeModel(Gl.GL_FLAT);
-
 			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-			Gl.glClearAccum(0.0f, 0.0f, 0.0f, 0.0f);
+			Gl.glShadeModel(Gl.GL_FLAT);
+			Gl.glMap1f(Gl.GL_MAP1_VERTEX_3, 0.0f, 1.0f, 3, 4, controlPoints);
+			Gl.glEnable(Gl.GL_MAP1_VERTEX_3);
 		}
 
 		#endregion Lesson Setup
-
-		#region DisplayObjects()
-		private static void DisplayObjects() 
-		{
-			float[] torusDiffuse = {0.7f, 0.7f, 0.0f, 1.0f};
-			float[] cubeDiffuse = {0.0f, 0.7f, 0.7f, 1.0f};
-			float[] sphereDiffuse = {0.7f, 0.0f, 0.7f, 1.0f};
-			float[] octaDiffuse = {0.7f, 0.4f, 0.4f, 1.0f};
-
-			Gl.glPushMatrix();
-			Gl.glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
-
-			Gl.glPushMatrix();
-			Gl.glTranslatef(-0.80f, 0.35f, 0.0f);
-			Gl.glRotatef(100.0f, 1.0f, 0.0f, 0.0f);
-			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_DIFFUSE, torusDiffuse);
-			Glut.glutSolidTorus(0.275f, 0.85f, 16, 16);
-			Gl.glPopMatrix();
-
-			Gl.glPushMatrix();
-			Gl.glTranslatef(-0.75f, -0.50f, 0.0f);
-			Gl.glRotatef(45.0f, 0.0f, 0.0f, 1.0f);
-			Gl.glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
-			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_DIFFUSE, cubeDiffuse);
-			Glut.glutSolidCube(1.5f);
-			Gl.glPopMatrix();
-
-			Gl.glPushMatrix();
-			Gl.glTranslatef(0.75f, 0.60f, 0.0f);
-			Gl.glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
-			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_DIFFUSE, sphereDiffuse);
-			Glut.glutSolidSphere(1.0f, 16, 16);
-			Gl.glPopMatrix();
-
-			Gl.glPushMatrix();
-			Gl.glTranslatef(0.70f, -0.90f, 0.25f);
-			Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_DIFFUSE, octaDiffuse);
-			Glut.glutSolidOctahedron();
-			Gl.glPopMatrix();
-			Gl.glPopMatrix();
-		}
-		#endregion DisplayObjects()
 
 		#region void Display
 		/// <summary>
@@ -232,23 +179,25 @@ namespace SdlDotNetExamples.RedBook
 		/// </summary>
 		private static void Display()
 		{
-			int[] viewport = new int[4];
+			int i;
 
-			Gl.glGetIntegerv(Gl.GL_VIEWPORT, viewport);
-
-			Gl.glClear(Gl.GL_ACCUM_BUFFER_BIT);
-			for(int jitter = 0; jitter < ACSIZE; jitter++) 
+			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
+			Gl.glColor3f(1.0f, 1.0f, 1.0f);
+			Gl.glBegin(Gl.GL_LINE_STRIP);
+			for(i = 0; i <= 30; i++) 
 			{
-				Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-				Gl.glPushMatrix();
-				// Note that 4.5 is the distance in world space between left and right and bottom
-				// and top.  This formula converts fractional pixel movement to world coordinates.
-				Gl.glTranslatef((Jitter.GetJ8()[jitter].X * 4.5f) / viewport[2], (Jitter.GetJ8()[jitter].Y * 4.5f) / viewport[3], 0.0f);
-				DisplayObjects();
-				Gl.glPopMatrix();
-				Gl.glAccum(Gl.GL_ACCUM, 1.0f / ACSIZE);
+				Gl.glEvalCoord1f((float) i / 30.0f);
 			}
-			Gl.glAccum(Gl.GL_RETURN, 1.0f);
+			Gl.glEnd();
+			// The following code displays the control points as dots.
+			Gl.glPointSize(5.0f);
+			Gl.glColor3f(1.0f, 1.0f, 0.0f);
+			Gl.glBegin(Gl.GL_POINTS);
+			for (i = 0; i < 4; i++) 
+			{
+				Gl.glVertex3f(controlPoints[i, 0], controlPoints[i, 1], controlPoints[i, 2]);
+			}
+			Gl.glEnd();
 			Gl.glFlush();
 		}
 		#endregion void Display
@@ -277,15 +226,15 @@ namespace SdlDotNetExamples.RedBook
 			Events.QuitApplication();
 		}
 
-//		private void Resize (object sender, VideoResizeEventArgs e)
-//		{
-//			Video.SetVideoMode(e.Width, e.Height, true);
-//			if (screen.Width != e.Width || screen.Height != e.Height)
-//			{
-//				//this.Init();
-//				this.RedBook t = new RedBook(); t.Reshape();
-//			}
-//		}
+		//		private void Resize (object sender, VideoResizeEventArgs e)
+		//		{
+		//			Video.SetVideoMode(e.Width, e.Height, true);
+		//			if (screen.Width != e.Width || screen.Height != e.Height)
+		//			{
+		//				//this.Init();
+		//				this.RedBook t = new RedBook(); t.Reshape();
+		//			}
+		//		}
 
 		#endregion Event Handlers
 
@@ -295,8 +244,7 @@ namespace SdlDotNetExamples.RedBook
 		/// </summary>
 		public static void Run()
 		{
-			RedBookAccAnti t = new RedBookAccAnti(); 
-            t.Reshape();
+            RedBookBezierCurve t = new RedBookBezierCurve(); t.Reshape();
 			Init();
 			Events.Run();
 		}

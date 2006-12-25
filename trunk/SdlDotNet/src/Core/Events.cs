@@ -22,6 +22,7 @@ using System;
 using System.Threading;
 using System.Collections;
 using System.Runtime.InteropServices;
+using System.Resources;
 
 using Tao.Sdl;
 using SdlDotNet.Input;
@@ -265,6 +266,7 @@ namespace SdlDotNet.Core
         private static int userEventId;
         private const int QUERY_EVENTS_MAX = 254;
         static readonly Events instance = new Events();
+        static ResourceManager stringManager;
 
         #endregion
 
@@ -378,6 +380,15 @@ namespace SdlDotNet.Core
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static ResourceManager StringManager
+        {
+            get { return stringManager; }
+            set { stringManager = value; }
+        }
 
         /// <summary>
         /// Closes all SDL subsystems

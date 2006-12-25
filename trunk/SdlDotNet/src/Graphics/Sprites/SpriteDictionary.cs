@@ -974,7 +974,8 @@ namespace SdlDotNet.Graphics.Sprites
           SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException("The method or operation is not implemented.");
+            throw new NotImplementedException(Events.StringManager.GetString(
+                        "NotImplemented", CultureInfo.CurrentUICulture));
         }
 
         #endregion

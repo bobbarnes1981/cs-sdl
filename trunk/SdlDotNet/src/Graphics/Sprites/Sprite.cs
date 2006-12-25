@@ -976,7 +976,7 @@ namespace SdlDotNet.Graphics.Sprites
         {
             if (!(obj is Sprite))
             {
-                throw new InvalidCastException("Not a valid Sprite object.");
+                throw new InvalidCastException();
             }
             Sprite sprite = (Sprite)obj;
             return this.Z.CompareTo(sprite.Z);

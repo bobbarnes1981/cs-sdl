@@ -21,7 +21,7 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-//using System.Globalization;
+using System.Globalization;
 using System.Reflection;
 using System.Resources;
 
@@ -55,10 +55,9 @@ namespace SdlDotNet.Graphics
                 IntPtr videoInfoPointer = Sdl.SDL_GetVideoInfo();
                 if (videoInfoPointer == IntPtr.Zero)
                 {
-                    //					throw new SdlException(stringManager.GetString("Video query failed: " 
-                    //						+ Sdl.SDL_GetError(), CultureInfo.CurrentUICulture));
-                    throw new SdlException("Video query failed: "
-                        + Sdl.SDL_GetError());
+                    throw new SdlException(Events.StringManager.GetString(
+                        "VideoQueryFailed", CultureInfo.CurrentUICulture)
+                         + Sdl.SDL_GetError());
                 }
                 return (Sdl.SDL_VideoInfo)
                     Marshal.PtrToStructure(videoInfoPointer,

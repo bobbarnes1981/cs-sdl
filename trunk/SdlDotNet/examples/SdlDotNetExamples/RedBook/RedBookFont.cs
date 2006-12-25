@@ -27,8 +27,11 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Globalization;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNetExamples.RedBook
@@ -38,7 +41,7 @@ namespace SdlDotNetExamples.RedBook
 	///     routines.  Also demonstrates use of display lists.
 	/// </summary>
 	/// <remarks>
-	///     <para>
+	///     <para>C:\data\SdlDotNet\examples\SdlDotNetExamples\RedBook\RedBookFogIndexOld.cs
 	///         Original Author:    Silicon Graphics, Inc.
 	///     </para>
 	///     <para>
@@ -58,9 +61,6 @@ namespace SdlDotNetExamples.RedBook
 		int width = 300;
 		//Height of screen
 		int height = 100;
-		
-		
-		
 		
 		private static int fontOffset;
 
@@ -113,7 +113,7 @@ namespace SdlDotNetExamples.RedBook
 		/// </summary>
 		public RedBookFont()
 		{
-			Initialize();
+            Initialize();
 		}
 
 		#endregion Constructors
@@ -197,9 +197,13 @@ namespace SdlDotNetExamples.RedBook
 			Gl.glColor3fv(white);
 
 			Gl.glRasterPos2i(20, 60);
-			PrintString("THE QUICK BROWN FOX JUMPS");
+            PrintString(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "TheQuickBrownFoxJumps", CultureInfo.CurrentUICulture));
+			//PrintString("THE QUICK BROWN FOX JUMPS");
 			Gl.glRasterPos2i(20, 40);
-			PrintString("OVER A LAZY DOG");
+			//PrintString("OVER A LAZY DOG");
+            PrintString(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "OverALazyDog", CultureInfo.CurrentUICulture));
 			Gl.glFlush();
 		}
 		#endregion void Display
