@@ -20,7 +20,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-//using System.Globalization;
+using System.Globalization;
 using System.Reflection;
 using System.Resources;
 
@@ -105,8 +105,7 @@ namespace SdlDotNet.Audio
         {
             if (!CDRom.IsValidDriveNumber(this.index))
             {
-                //				throw new SdlException(stringManager.GetString("Device " + this.index + "out of range. Drive name not available.", CultureInfo.CurrentUICulture));
-                throw new SdlException("Device " + this.index + "out of range. Drive name not available.");
+                throw new SdlException(Events.StringManager.GetString("IndexOutOfRange", CultureInfo.CurrentUICulture));
             }
             return Sdl.SDL_CDName(this.index);
         }

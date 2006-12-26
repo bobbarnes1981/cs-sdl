@@ -57,11 +57,11 @@ namespace SdlDotNet.Audio
 
         #region Private methods
 
-        static void CheckOpenStatus(string function)
+        static void CheckOpenStatus()
         {
             if (!audioOpen)
             {
-                throw new AudioException(String.Format("OpenAudio must be called before calling {0}.", function));
+                throw new AudioException(Events.StringManager.GetString("OpenAudioNotInit", CultureInfo.CurrentUICulture));
             }
         }
 
@@ -93,14 +93,14 @@ namespace SdlDotNet.Audio
         {
             if (audioOpen)
             {
-                throw new AudioException("OpenAudio already called and initialized.  Call CloseAudio first before calling OpenAudio again.");
+                throw new AudioException(Events.StringManager.GetString("OpenAudioInit", CultureInfo.CurrentUICulture));
             }
 
             if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != Sdl.SDL_INIT_AUDIO)
             {
                 if (Sdl.SDL_InitSubSystem(Sdl.SDL_INIT_AUDIO) == -1)
                 {
-                    throw new AudioException("Unable to initialize audio subsystem.  SDL Error: " + Sdl.SDL_GetError());
+                    throw new AudioException(Sdl.SDL_GetError());
                 }
 
                 audioWasNotAlreadyInitialized = true;
@@ -127,7 +127,7 @@ namespace SdlDotNet.Audio
 
                 if (Sdl.SDL_OpenAudio(pSpec, IntPtr.Zero) < 0)
                 {
-                    throw new AudioException("Unable to open audio device.  SDL Error: " + Sdl.SDL_GetError());
+                    throw new AudioException(Sdl.SDL_GetError());
                 }
 
                 spec = (Sdl.SDL_AudioSpec)Marshal.PtrToStructure(pSpec, typeof(Sdl.SDL_AudioSpec));
@@ -186,14 +186,15 @@ namespace SdlDotNet.Audio
 
             if (format != AudioFormat.Unsigned16Little)
             {
-                throw new ArgumentException("Only AudioFormat.Unsigned16Little currently supported.", "format");
+                throw new ArgumentException(Events.StringManager.GetString(
+                        "AudioFormatSupported", CultureInfo.CurrentUICulture));
             }
 
             if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != Sdl.SDL_INIT_AUDIO)
             {
                 if (Sdl.SDL_InitSubSystem(Sdl.SDL_INIT_AUDIO) == -1)
                 {
-                    throw new AudioException("Unable to initialize audio subsystem.  SDL Error: " + Sdl.SDL_GetError());
+                    throw new AudioException(Sdl.SDL_GetError());
                 }
 
                 audioWasNotAlreadyInitialized = true;
@@ -225,7 +226,7 @@ namespace SdlDotNet.Audio
 
                 if (Sdl.SDL_OpenAudio(pSpec, IntPtr.Zero) < 0)
                 {
-                    throw new AudioException("Unable to open audio device.  SDL Error: " + Sdl.SDL_GetError());
+                    throw new AudioException(Sdl.SDL_GetError());
                 }
 
                 spec = (Sdl.SDL_AudioSpec)Marshal.PtrToStructure(pSpec, typeof(Sdl.SDL_AudioSpec));
@@ -263,7 +264,7 @@ namespace SdlDotNet.Audio
         /// </summary>
         public static void CloseAudio()
         {
-            CheckOpenStatus("CloseAudio");
+            CheckOpenStatus();
 
             Sdl.SDL_CloseAudio();
 
@@ -316,7 +317,7 @@ namespace SdlDotNet.Audio
         {
             get
             {
-                CheckOpenStatus("AudioStatus");
+                CheckOpenStatus();
 
                 return (AudioStatus)Sdl.SDL_GetAudioStatus();
             }
@@ -329,14 +330,14 @@ namespace SdlDotNet.Audio
         {
             get
             {
-                CheckOpenStatus("Paused");
+                CheckOpenStatus();
 
                 return AudioStatus != AudioStatus.Playing;
             }
 
             set
             {
-                CheckOpenStatus("Paused");
+                CheckOpenStatus();
 
                 Sdl.SDL_PauseAudio(value ? 1 : 0);
             }
