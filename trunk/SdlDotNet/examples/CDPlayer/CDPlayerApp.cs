@@ -232,7 +232,8 @@ namespace SdlDotNetExamples.CDPlayer
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.Size = new System.Drawing.Size(48, 40);
             this.buttonPlay.TabIndex = 2;
-            this.buttonPlay.Text = "Play";
+            this.buttonPlay.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Play", CultureInfo.CurrentUICulture);
             this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
             // 
             // buttonPause
@@ -241,7 +242,8 @@ namespace SdlDotNetExamples.CDPlayer
             this.buttonPause.Name = "buttonPause";
             this.buttonPause.Size = new System.Drawing.Size(48, 40);
             this.buttonPause.TabIndex = 3;
-            this.buttonPause.Text = "Pause";
+            this.buttonPause.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Pause", CultureInfo.CurrentUICulture);
             this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
             // 
             // buttonStop
@@ -250,7 +252,8 @@ namespace SdlDotNetExamples.CDPlayer
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(48, 40);
             this.buttonStop.TabIndex = 4;
-            this.buttonStop.Text = "Stop";
+            this.buttonStop.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Stop", CultureInfo.CurrentUICulture);
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // buttonEject
@@ -259,7 +262,8 @@ namespace SdlDotNetExamples.CDPlayer
             this.buttonEject.Name = "buttonEject";
             this.buttonEject.Size = new System.Drawing.Size(48, 40);
             this.buttonEject.TabIndex = 5;
-            this.buttonEject.Text = "Eject";
+            this.buttonEject.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Eject", CultureInfo.CurrentUICulture);
             this.buttonEject.Click += new System.EventHandler(this.buttonEject_Click);
             // 
             // labelStatus
@@ -268,7 +272,8 @@ namespace SdlDotNetExamples.CDPlayer
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(328, 40);
             this.labelStatus.TabIndex = 6;
-            this.labelStatus.Text = "Track:";
+            this.labelStatus.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Track", CultureInfo.CurrentUICulture);
             // 
             // buttonNext
             // 
@@ -276,7 +281,8 @@ namespace SdlDotNetExamples.CDPlayer
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(58, 40);
             this.buttonNext.TabIndex = 7;
-            this.buttonNext.Text = "Next";
+            this.buttonNext.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Next", CultureInfo.CurrentUICulture);
             this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // buttonPrevious
@@ -285,7 +291,8 @@ namespace SdlDotNetExamples.CDPlayer
             this.buttonPrevious.Name = "buttonPrevious";
             this.buttonPrevious.Size = new System.Drawing.Size(56, 40);
             this.buttonPrevious.TabIndex = 8;
-            this.buttonPrevious.Text = "Previous";
+            this.buttonPrevious.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Previous", CultureInfo.CurrentUICulture);
             this.buttonPrevious.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
             // surfaceControl
@@ -309,12 +316,14 @@ namespace SdlDotNetExamples.CDPlayer
             this.menuItem1.Index = 0;
             this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem2});
-            this.menuItem1.Text = "File";
+            this.menuItem1.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "File", CultureInfo.CurrentUICulture);
             // 
             // menuItem2
             // 
             this.menuItem2.Index = 0;
-            this.menuItem2.Text = "Exit";
+            this.menuItem2.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Exit", CultureInfo.CurrentUICulture);
             this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 
             // panel1
@@ -347,7 +356,8 @@ namespace SdlDotNetExamples.CDPlayer
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Menu = this.mainMenu1;
             this.Name = "CDPlayerApp";
-            this.Text = "SDL.NET - CD Player";
+            this.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Title", CultureInfo.CurrentUICulture);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.CDPlayer_Closing);
             this.Load += new System.EventHandler(this.CDPlayer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.surfaceControl)).EndInit();
@@ -440,7 +450,8 @@ namespace SdlDotNetExamples.CDPlayer
                     _drive.Stop();
                     _track = 0;
                 }
-                this.labelStatus.Text = "Track: " + _drive.CurrentTrack;
+                this.labelStatus.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Track", CultureInfo.CurrentUICulture) + ": " + _drive.CurrentTrack;
             }
             catch (SdlException ex)
             {

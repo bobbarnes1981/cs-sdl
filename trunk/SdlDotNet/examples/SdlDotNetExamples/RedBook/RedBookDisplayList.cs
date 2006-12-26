@@ -50,7 +50,7 @@ namespace SdlDotNetExamples.RedBook
 	///			http://cs-sdl.sourceforge.net
 	///     </para>
 	/// </remarks>
-	public class RedBookList
+	public class RedBookDisplayList
 	{
 		#region Fields
 
@@ -59,8 +59,6 @@ namespace SdlDotNetExamples.RedBook
 		//Height of screen
 		int height = 50;
 		
-		
-
         private static int listName;
 
 		/// <summary>
@@ -70,7 +68,7 @@ namespace SdlDotNetExamples.RedBook
 		{
 			get
 			{
-				return "List - Display List TODO";
+				return "DisplayList - Display List TODO";
 			}
 		}
 
@@ -81,7 +79,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Basic constructor
 		/// </summary>
-		public RedBookList()
+		public RedBookDisplayList()
 		{
 			Initialize();
 		}
@@ -244,7 +242,7 @@ namespace SdlDotNetExamples.RedBook
 		/// </summary>
 		public static void Run()
 		{
-			RedBookList t = new RedBookList(); t.Reshape();
+			RedBookDisplayList t = new RedBookDisplayList(); t.Reshape();
 			Init();
 			Events.Run();
 		}

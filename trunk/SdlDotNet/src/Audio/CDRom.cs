@@ -20,7 +20,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-//using System.Globalization;
+using System.Globalization;
 using System.Reflection;
 using System.Resources;
 
@@ -173,8 +173,7 @@ namespace SdlDotNet.Audio
         {
             if (!IsValidDriveNumber(index))
             {
-                //				throw new SdlException(stringManager.GetString("Device index out of range", CultureInfo.CurrentUICulture));
-                throw new SdlException("Device index out of range");
+                throw new SdlException(Events.StringManager.GetString("IndexOutOfRange", CultureInfo.CurrentUICulture));
             }
             return Sdl.SDL_CDName(index);
         }

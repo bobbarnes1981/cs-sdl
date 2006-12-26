@@ -69,7 +69,7 @@ namespace SdlDotNetExamples
                     }
 
                     object result = type.InvokeMember("Title",
-                            BindingFlags.GetProperty, null, type, null);
+                            BindingFlags.GetProperty, null, type, null, CultureInfo.CurrentCulture);
                     treeView1.Nodes[type.Namespace].Nodes.Add(type.FullName, (string)result);
                 }
             }
@@ -88,7 +88,7 @@ namespace SdlDotNetExamples
             try
             {
                 Type example = Assembly.GetExecutingAssembly().GetType(treeView1.SelectedNode.Name, true, true);
-                example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null);
+                example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
                 Application.Restart();
             }
             catch (TypeLoadException e)

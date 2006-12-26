@@ -134,7 +134,7 @@ namespace SdlDotNet.Core
             }
             else
             {
-                throw new OverflowException("delayTime is too large");
+                throw new OverflowException();
             }
         }
 

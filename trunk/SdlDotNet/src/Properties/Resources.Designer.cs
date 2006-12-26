@@ -61,11 +61,29 @@ namespace SdlDotNet.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only AudioFormat.Unsigned16Little currently supported..
+        /// </summary>
+        internal static string AudioFormatSupported {
+            get {
+                return ResourceManager.GetString("AudioFormatSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Video.GLGetAttribute returned an improper result.
         /// </summary>
         internal static string GLGetAttributeImproperResult {
             get {
                 return ResourceManager.GetString("GLGetAttributeImproperResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Index out of range.
+        /// </summary>
+        internal static string IndexOutOfRange {
+            get {
+                return ResourceManager.GetString("IndexOutOfRange", resourceCulture);
             }
         }
         
@@ -93,6 +111,15 @@ namespace SdlDotNet.Properties {
         internal static string OpenAudioInit {
             get {
                 return ResourceManager.GetString("OpenAudioInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Call OpenAudio before using function..
+        /// </summary>
+        internal static string OpenAudioNotInit {
+            get {
+                return ResourceManager.GetString("OpenAudioNotInit", resourceCulture);
             }
         }
         

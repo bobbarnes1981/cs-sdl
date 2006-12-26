@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AudioFormatSupported" xml:space="preserve">
+    <value>Only AudioFormat.Unsigned16Little currently supported.</value>
+  </data>
   <data name="GLGetAttributeImproperResult" xml:space="preserve">
     <value>Video.GLGetAttribute returned an improper result</value>
+  </data>
+  <data name="IndexOutOfRange" xml:space="preserve">
+    <value>Index out of range</value>
   </data>
   <data name="NotImplemented" xml:space="preserve">
     <value>The method or operation is not implemented.</value>
@@ -128,6 +134,9 @@
   </data>
   <data name="OpenAudioInit" xml:space="preserve">
     <value>OpenAudio already called and initialized.  Call CloseAudio first before calling OpenAudio again.</value>
+  </data>
+  <data name="OpenAudioNotInit" xml:space="preserve">
+    <value>Call OpenAudio before using function.</value>
   </data>
   <data name="UnknownBytesPerPixel" xml:space="preserve">
     <value>Unknown Bytes Per Pixel</value>
