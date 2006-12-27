@@ -57,9 +57,10 @@ namespace SdlDotNetExamples.Isotope
             {
                 throw new ArgumentNullException("otherObject");
             }
-            if (otherObject is LeadActor)
+            LeadActor aOtherObject = otherObject as LeadActor;
+            if (aOtherObject != null)
             {
-                ((LeadActor)otherObject).EventChangeScene(dest_scene, dest_pos);
+                (aOtherObject).EventChangeScene(dest_scene, dest_pos);
             }
         }
     }

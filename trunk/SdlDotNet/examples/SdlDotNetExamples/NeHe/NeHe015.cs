@@ -69,9 +69,9 @@ namespace SdlDotNetExamples.NeHe
         public NeHe015()
         {
             // One Texture Map
-            this.Texture = new int[1];
-            this.TextureName = new string[1];
-            this.TextureName[0] = "NeHe015.bmp";
+            this.SetTexture(new int[1]);
+            this.SetTextureName(new string[1]);
+            this.GetTextureName()[0] = "NeHe015.bmp";
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
         }
 
@@ -108,7 +108,7 @@ namespace SdlDotNetExamples.NeHe
             // Enable Texture Mapping ( NEW )
             Gl.glEnable(Gl.GL_TEXTURE_2D);
             // Select The Texture
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
         }
 
         /// <summary>
@@ -178,20 +178,20 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         protected override void LoadGLTextures()
         {
-            if (File.Exists(this.DataDirectory + this.TextureName))
+            if (File.Exists(this.DataDirectory + this.GetTextureName()))
             {
                 this.FilePath = "";
             }
             // Status Indicator
-            Bitmap[] textureImage = new Bitmap[this.TextureName.Length];
+            Bitmap[] textureImage = new Bitmap[this.GetTextureName().Length];
             // Create Storage Space For The Texture
 
-            textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName[0]);
+            textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.GetTextureName()[0]);
             // Load The Bitmap
             // Check For Errors, If Bitmap's Not Found, Quit
             if (textureImage[0] != null)
             {
-                Gl.glGenTextures(this.Texture.Length, this.Texture);
+                Gl.glGenTextures(this.GetTexture().Length, this.GetTexture());
 
                 textureImage[0].RotateFlip(RotateFlipType.RotateNoneFlipY);
                 // Flip The Bitmap Along The Y-Axis
@@ -201,7 +201,7 @@ namespace SdlDotNetExamples.NeHe
                 BitmapData bitmapData = textureImage[0].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
                 // Create Linear Filtered Texture
-                Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
                 Glu.gluBuild2DMipmaps(Gl.GL_TEXTURE_2D, Gl.GL_RGB8, textureImage[0].Width, textureImage[0].Height, Gl.GL_RGB, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
                 Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
                 Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR_MIPMAP_NEAREST);

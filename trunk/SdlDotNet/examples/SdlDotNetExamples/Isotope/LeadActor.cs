@@ -53,11 +53,6 @@ namespace SdlDotNetExamples.Isotope
         }
         private int[] newPosition ={ 0, 0, 0 };
 
-        public int[] NewPosition
-        {
-            get { return newPosition; }
-            set { newPosition = value; }
-        }
         private Scene scene;
 
         public Scene Scene
@@ -128,7 +123,7 @@ namespace SdlDotNetExamples.Isotope
             /*/Redefined tick function to allow movement between scenes /*/
             if (scene != newScene)
             {
-                Vector.CopyVector(newPosition, Position);
+                Vector.CopyVector(newPosition, GetPosition());
                 newScene.ObjectGroup.Add(this);
                 scene.ObjectGroup.Remove(this);
                 scene = newScene;
@@ -152,7 +147,7 @@ namespace SdlDotNetExamples.Isotope
         public void Pickup()
         {
             /* pick_up object action */
-            int face = Vector.VectorToFace(Facing);
+            int face = Vector.VectorToFace(GetFacing());
             for (int i = 0; i < TouchedObjects.Count; i++)
             {
 
@@ -189,8 +184,8 @@ namespace SdlDotNetExamples.Isotope
             ObjectPortable drop_object = (ObjectPortable)inventory[usingObject];
             // Test if there is space for the object to be dropped
             // Create a test object to put in the drop position
-            int[] test_pos = Physics.DropPosition(this, drop_object, Facing, 4);
-            Object3d test_object = new Object3d(test_pos, drop_object.Size, 0, false);
+            int[] test_pos = Physics.DropPosition(this, drop_object, GetFacing(), 4);
+            Object3d test_object = new Object3d(test_pos, drop_object.GetSize(), 0, false);
             // Check if the test object collides with any other object in the scene
             if (Physics.TestCollisionGroup(test_object, scene.ObjectGroup) == true)
             {
@@ -203,7 +198,7 @@ namespace SdlDotNetExamples.Isotope
                 return;
             }
             // Drop the object
-            Vector.CopyVector(test_object.Position, drop_object.Position);
+            Vector.CopyVector(test_object.GetPosition(), drop_object.GetPosition());
             inventory.Remove(drop_object);
             scene.ObjectGroup.Add(drop_object);
             if (usingObject != 0)

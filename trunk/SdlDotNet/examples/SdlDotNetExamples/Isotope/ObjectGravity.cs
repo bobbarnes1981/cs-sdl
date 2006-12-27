@@ -106,7 +106,7 @@ namespace SdlDotNetExamples.Isotope
             if (gravity == true)
             {
                 //System.Console.WriteLine("Gravity on!");
-                Velocity[2] = Velocity[2] - 1;
+                GetVelocity()[2] = GetVelocity()[2] - 1;
             }
             // Clear the touching information for the next tick.
             touching = false;
@@ -126,7 +126,7 @@ namespace SdlDotNetExamples.Isotope
             //System.Console.WriteLine("Object_gravity: event collision entry");
             if (impactFace == 5 && gravity == true)
             {
-                Velocity[2] = 0;
+                GetVelocity()[2] = 0;
                 gravity = false;
             }
             //***WARNING TAKEN OUT UNTIL DEBUG WE NEED A GLOBAL TIME VAR!!!
@@ -170,9 +170,9 @@ namespace SdlDotNetExamples.Isotope
             /* Sets the objects velocity in all directions to zero. */
             if (gravity == false)
             {
-                Velocity[0] = 0;
-                Velocity[1] = 0;
-                Velocity[2] = 0;
+                GetVelocity()[0] = 0;
+                GetVelocity()[1] = 0;
+                GetVelocity()[2] = 0;
             }
         }
     }

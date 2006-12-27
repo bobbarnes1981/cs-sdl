@@ -147,11 +147,6 @@ namespace SdlDotNetExamples.Isotope
         }
         private Skin[] skinGroup;
 
-        public Skin[] SkinGroup
-        {
-            get { return skinGroup; }
-            set { skinGroup = value; }
-        }
         private Surface surface;
 
         public Surface Surface

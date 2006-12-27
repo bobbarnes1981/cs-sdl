@@ -68,13 +68,13 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe020()
         {
-            this.Texture = new int[5];
-            this.TextureName = new string[5];
-            this.TextureName[0] = "NeHe020.Logo.bmp";
-            this.TextureName[1] = "NeHe020.Mask1.bmp";
-            this.TextureName[2] = "NeHe020.Image1.bmp";
-            this.TextureName[3] = "NeHe020.Mask2.bmp";
-            this.TextureName[4] = "NeHe020.Image2.bmp";
+            this.SetTexture(new int[5]);
+            this.SetTextureName(new string[5]);
+            this.GetTextureName()[0] = "NeHe020.Logo.bmp";
+            this.GetTextureName()[1] = "NeHe020.Mask1.bmp";
+            this.GetTextureName()[2] = "NeHe020.Image1.bmp";
+            this.GetTextureName()[3] = "NeHe020.Mask2.bmp";
+            this.GetTextureName()[4] = "NeHe020.Image2.bmp";
         }
 
         #endregion Constructor
@@ -118,7 +118,7 @@ namespace SdlDotNetExamples.NeHe
             Gl.glTranslatef(0.0f, 0.0f, -2.0f);
 
             // Select Our Logo Texture
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
             // Start Drawing A Textured Quad
             Gl.glBegin(Gl.GL_QUADS);
             // Bottom Left
@@ -155,7 +155,7 @@ namespace SdlDotNetExamples.NeHe
                 if (this.masking)
                 {
                     // Select The Second Mask Texture
-                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[3]);
+                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[3]);
                     // Start Drawing A Textured Quad
                     Gl.glBegin(Gl.GL_QUADS);
                     // Bottom Left
@@ -173,7 +173,7 @@ namespace SdlDotNetExamples.NeHe
                 // Copy Image 2 Color To The Screen
                 Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);
                 // Select The Second Image Texture
-                Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[4]);
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[4]);
                 // Start Drawing A Textured Quad
                 Gl.glBegin(Gl.GL_QUADS);
                 // Bottom Left
@@ -193,7 +193,7 @@ namespace SdlDotNetExamples.NeHe
                 if (this.masking)
                 {
                     // Select The First Mask Texture
-                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);
+                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[1]);
                     // Start Drawing A Textured Quad
                     Gl.glBegin(Gl.GL_QUADS);
                     // Bottom Left
@@ -211,7 +211,7 @@ namespace SdlDotNetExamples.NeHe
                 // Copy Image 1 Color To The Screen
                 Gl.glBlendFunc(Gl.GL_ONE, Gl.GL_ONE);
                 // Select The First Image Texture
-                Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]);
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[2]);
                 // Start Drawing A Textured Quad
                 Gl.glBegin(Gl.GL_QUADS);
                 // Bottom Left

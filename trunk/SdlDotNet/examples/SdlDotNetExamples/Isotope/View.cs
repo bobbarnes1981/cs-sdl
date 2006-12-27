@@ -43,11 +43,6 @@ namespace SdlDotNetExamples.Isotope
 
         private int[] viewSize ={ 400, 300 };
 
-        public int[] ViewSize
-        {
-            get { return viewSize; }
-            set { viewSize = value; }
-        }
         //remember the surface
         Surface surface;
 
@@ -57,26 +52,15 @@ namespace SdlDotNetExamples.Isotope
             set { surface = value; }
         }
         //offset from the top left corner of the window for the isotope display
-        private int[] displayOffset ={ 200, 150 };
+        private int[] displayOffset = { 200, 150 };
 
-        public int[] DisplayOffset
-        {
-            get { return displayOffset; }
-            set { displayOffset = value; }
-        }
         private Rectangle[] oldRect ={ };
-
-        public Rectangle[] OldRect
-        {
-            get { return oldRect; }
-            set { oldRect = value; }
-        }
 
         // Initialize
         public View(Surface surface, Scene scene, Skin[] skinGroup, int[] displayOffset)
         {
             //Dimensions of the window for the isotope display
-            //view_size=(int[])surface.Size;
+            //view_size=(int[])surface.GetSize();
             //remember the surface
             this.surface = surface;
             //offset from the top left corner of the window for the isotope display

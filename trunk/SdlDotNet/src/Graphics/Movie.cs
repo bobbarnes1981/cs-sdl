@@ -64,6 +64,7 @@ namespace SdlDotNet.Graphics
 
         private Smpeg.SMPEG_Info movieInfo;
         private bool disposed;
+        static bool isInitialized = Video.Initialize();
 
         #endregion
 
@@ -82,11 +83,6 @@ namespace SdlDotNet.Graphics
             {
                 throw MovieStatusException.Generate();
             }
-        }
-
-        static Movie()
-        {
-            Video.Initialize();
         }
 
         #endregion
@@ -136,6 +132,14 @@ namespace SdlDotNet.Graphics
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Movie.isInitialized; }
+        }
 
         /// <summary>
         /// Enable video during playback

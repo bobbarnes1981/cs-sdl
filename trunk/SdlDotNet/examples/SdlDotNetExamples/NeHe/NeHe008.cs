@@ -82,9 +82,9 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe008()
         {
-            this.TextureName = new string[1];
-            this.TextureName[0] = "NeHe008.bmp";
-            this.Texture = new int[3];
+            this.SetTextureName(new string[1]);
+            this.GetTextureName()[0] = "NeHe008.bmp";
+            this.SetTexture(new int[3]);
         }
 
         #endregion Constructor
@@ -113,11 +113,11 @@ namespace SdlDotNetExamples.NeHe
             Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
             Keyboard.EnableKeyRepeat(150, 50);
             // Setup The Ambient Light
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, this.LightAmbient);
+            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, this.GetLightAmbient());
             // Setup The Diffuse Light
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, this.LightDiffuse);
+            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, this.GetLightDiffuse());
             // Position The Light
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, this.LightPosition);
+            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, this.GetLightPosition());
             // Enable Light One
             Gl.glEnable(Gl.GL_LIGHT1);
             // Full Brightness.  50% Alpha

@@ -21,6 +21,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace SdlDotNet.Graphics.Sprites
 {
@@ -76,6 +77,18 @@ namespace SdlDotNet.Graphics.Sprites
         {
             this.Add(animationDictionary);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected AnimationDictionary(
+           SerializationInfo info, 
+           StreamingContext context)
+        {
+        }
+
         #endregion Constructors
 
         #region Properties

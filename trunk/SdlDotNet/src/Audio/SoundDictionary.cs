@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace SdlDotNet.Audio
 {
@@ -109,6 +110,17 @@ namespace SdlDotNet.Audio
             {
                 this.Add((string)enumer.Key, (Sound)enumer.Value);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected SoundDictionary(
+           SerializationInfo info, 
+           StreamingContext context)
+        {
         }
 
         #endregion

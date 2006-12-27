@@ -274,10 +274,6 @@ namespace SdlDotNet.Particles.Emitters
             {
                 return m_Target;
             }
-            set
-            {
-                m_Target = value;
-            }
         }
 
         /// <summary>

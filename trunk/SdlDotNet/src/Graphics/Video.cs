@@ -190,19 +190,19 @@ namespace SdlDotNet.Graphics
         #region Private fields
 
         const int USE_CURRENT_BPP = 0;
-
-        #endregion
-
-        #region Constructors
-
-        static Video()
-        {
-            Initialize();
-        }
+        static bool isInitialized = Initialize();
 
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Video.isInitialized; }
+        }
 
         /// <summary>
         /// Closes and destroys this object
@@ -215,7 +215,7 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Initializes Video subsystem.
         /// </summary>
-        public static void Initialize()
+        public static bool Initialize()
         {
             if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO))
                 == (int)SdlFlag.FalseValue)
@@ -224,6 +224,11 @@ namespace SdlDotNet.Graphics
                 {
                     throw SdlException.Generate();
                 }
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
