@@ -350,9 +350,9 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe019()
         {
-            this.TextureName = new string[1];
-            this.TextureName[0] = "NeHe019.bmp";
-            this.Texture = new int[3];
+            this.SetTextureName(new string[1]);
+            this.GetTextureName()[0] = "NeHe019.bmp";
+            this.SetTexture(new int[3]);
         }
 
         #endregion Constructor
@@ -387,7 +387,7 @@ namespace SdlDotNetExamples.NeHe
             // Really Nice Point Smoothing
             Gl.glHint(Gl.GL_POINT_SMOOTH_HINT, Gl.GL_NICEST);
             // Select Our Texture
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
 
             // Initials All The Textures
             for (int loop = 0; loop < particle.Length; loop++)

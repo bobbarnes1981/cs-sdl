@@ -34,7 +34,7 @@ namespace SdlDotNet.Graphics.Sprites
     /// Sprite class contains both a Surface and a Rectangle so that 
     /// an object can be easily displayed and manipulated.
     /// </summary>
-    public class Sprite : IDisposable, IComparable
+    public class Sprite : IDisposable
     {
         #region Constructors
 
@@ -961,25 +961,6 @@ namespace SdlDotNet.Graphics.Sprites
         ~Sprite()
         {
             Dispose(false);
-        }
-
-        #endregion
-
-        #region IComparable Members
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public int CompareTo(object obj)
-        {
-            if (!(obj is Sprite))
-            {
-                throw new InvalidCastException();
-            }
-            Sprite sprite = (Sprite)obj;
-            return this.Z.CompareTo(sprite.Z);
         }
 
         #endregion

@@ -70,23 +70,23 @@ namespace SdlDotNetExamples.NeHe
         {
             this.ballHeight = 2;
             this.DepthZ = -7;
-            this.Texture = new int[3];
-            this.TextureName = new string[3];
-            this.TextureName[0] = "NeHe026.EnvWall.bmp";
-            this.TextureName[1] = "NeHe026.Ball.bmp";
-            this.TextureName[2] = "NeHe026.EnvRoll.bmp";
-            this.LightAmbient[0] = 0.7f;
-            this.LightAmbient[1] = 0.7f;
-            this.LightAmbient[2] = 0.7f;
-            this.LightAmbient[3] = 1.0f;
-            this.LightDiffuse[0] = 1.0f;
-            this.LightDiffuse[1] = 1.0f;
-            this.LightDiffuse[2] = 1.0f;
-            this.LightDiffuse[3] = 1.0f;
-            this.LightPosition[0] = 4.0f;
-            this.LightPosition[1] = 4.0f;
-            this.LightPosition[2] = 6.0f;
-            this.LightPosition[3] = 1.0f;
+            this.SetTexture(new int[3]);
+            this.SetTextureName(new string[3]);
+            this.GetTextureName()[0] = "NeHe026.EnvWall.bmp";
+            this.GetTextureName()[1] = "NeHe026.Ball.bmp";
+            this.GetTextureName()[2] = "NeHe026.EnvRoll.bmp";
+            this.GetLightAmbient()[0] = 0.7f;
+            this.GetLightAmbient()[1] = 0.7f;
+            this.GetLightAmbient()[2] = 0.7f;
+            this.GetLightAmbient()[3] = 1.0f;
+            this.GetLightDiffuse()[0] = 1.0f;
+            this.GetLightDiffuse()[1] = 1.0f;
+            this.GetLightDiffuse()[2] = 1.0f;
+            this.GetLightDiffuse()[3] = 1.0f;
+            this.GetLightPosition()[0] = 4.0f;
+            this.GetLightPosition()[1] = 4.0f;
+            this.GetLightPosition()[2] = 6.0f;
+            this.GetLightPosition()[3] = 1.0f;
         }
 
         #endregion Constructor
@@ -124,11 +124,11 @@ namespace SdlDotNetExamples.NeHe
             // Enable 2D Texture Mapping
             Gl.glEnable(Gl.GL_TEXTURE_2D);
             // Set The Ambient Lighting For Light0
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_AMBIENT, this.LightAmbient);
+            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_AMBIENT, this.GetLightAmbient());
             // Set The Diffuse Lighting For Light0
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, this.LightDiffuse);
+            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, this.GetLightDiffuse());
             // Set The Position For Light0
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, this.LightPosition);
+            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, this.GetLightPosition());
             // Enable Light 0
             Gl.glEnable(Gl.GL_LIGHT0);
             // Enable Lighting
@@ -202,7 +202,7 @@ namespace SdlDotNetExamples.NeHe
             // Mirror Y Axis
             Gl.glScalef(1, -1, 1);
             // Set Up Light0
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, this.LightPosition);
+            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, this.GetLightPosition());
             // Position The Object
             Gl.glTranslatef(0, this.Height, 0);
             // Rotate Local Coordinate System On X Axis
@@ -218,7 +218,7 @@ namespace SdlDotNetExamples.NeHe
             // We Don't Need The Stencil Buffer Any More (Disable)
             Gl.glDisable(Gl.GL_STENCIL_TEST);
             // Set Up Light0 Position
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, this.LightPosition);
+            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, this.GetLightPosition());
             // Enable Blending (Otherwise The Reflected Object Wont Show)
             Gl.glEnable(Gl.GL_BLEND);
             // Since We Use Blending, We Disable Lighting
@@ -257,7 +257,7 @@ namespace SdlDotNetExamples.NeHe
         private void DrawFloor()
         {
             // Select Texture 1 (0)
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
             // Begin Drawing A Quad
             Gl.glBegin(Gl.GL_QUADS);
             // Normal Pointing Up
@@ -292,11 +292,11 @@ namespace SdlDotNetExamples.NeHe
             // Set Color To White
             Gl.glColor3f(1, 1, 1);
             // Select Texture 2 (1)
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[1]);
             // Draw First Sphere
             Glu.gluSphere(this.Quadratic, 0.35f, 32, 16);
             // Select Texture 3 (2)
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[2]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[2]);
             // Set Color To White With 40% Alpha
             Gl.glColor4f(1, 1, 1, 0.4f);
             // Enable Blending

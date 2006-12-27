@@ -35,18 +35,8 @@ namespace SdlDotNet.Graphics
     /// </summary>
     public static class VideoInfo
     {
-        #region Constructors
-
-        static VideoInfo()
-        {
-            Video.Initialize();
-            //			stringManager = 
-            //				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
-        }
-
-        #endregion
-
         #region Private fields
+        static bool isInitialized = Video.Initialize();
 
         private static Sdl.SDL_VideoInfo VideoInfoStruct
         {
@@ -78,6 +68,14 @@ namespace SdlDotNet.Graphics
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return VideoInfo.isInitialized; }
+        }
 
         /// <summary>
         /// Bits Per Pixel. Typically 8, 16 or 32.

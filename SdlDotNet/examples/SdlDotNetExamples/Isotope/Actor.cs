@@ -57,17 +57,20 @@ namespace SdlDotNetExamples.Isotope
         /// <summary>
         /// 
         /// </summary>
-        public int[] Facing
+        public int[] GetFacing()
         {
-            get
-            {
-                return facing;
-            }
-            set
-            {
-                facing = value;
-            }
+            return facing;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="facing"></param>
+        public void SetFacing(int[] facing)
+        {
+            this.facing = facing;
+        }
+
 
         /// <summary>
         /// 
@@ -87,7 +90,7 @@ namespace SdlDotNetExamples.Isotope
         public override void Tick()
         {
             // Walking animation: Cycle through each of the 4 movement frames
-            if (Position[0] != OldPosition[0] || Position[1] != OldPosition[1])
+            if (GetPosition()[0] != GetOldPosition()[0] || GetPosition()[1] != GetOldPosition()[1])
             {
                 cycle = cycle + 1;
                 if (cycle == 4)
@@ -112,7 +115,7 @@ namespace SdlDotNetExamples.Isotope
             /*/ offset: the value for the velocity: list of 3 integers [vx,vy,vz] /*/
             if (Gravity == false)
             {
-                Velocity = offset;
+                SetVelocity(offset);
                 int[] zero ={ 0, 0, 0 };
                 facing = Vector.Direction(zero, offset);
                 CollisionTime = ObjectTime.Time;
@@ -128,9 +131,9 @@ namespace SdlDotNetExamples.Isotope
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Velocity[i] = facing[i] * 2;
+                    GetVelocity()[i] = facing[i] * 2;
                 }
-                Velocity[2] = Velocity[2] + 8;
+                GetVelocity()[2] = GetVelocity()[2] + 8;
                 Gravity = true;
             }
         }

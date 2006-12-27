@@ -73,47 +73,56 @@ namespace SdlDotNetExamples.NeHe
         /// <summary>
         /// Ambient light array
         /// </summary>
-        protected float[] LightAmbient
+        protected float[] GetLightAmbient()
         {
-            get
-            {
-                return lightAmbient;
-            }
-            set
-            {
-                lightAmbient = value;
-            }
+            return lightAmbient;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected void SetLightAmbient(float[] lightAmbient)
+        {
+            this.lightAmbient = lightAmbient;
+        }
+
 
         /// <summary>
         /// Diffure light array
         /// </summary>
-        protected float[] LightDiffuse
+        protected float[] GetLightDiffuse()
         {
-            get
-            {
-                return lightDiffuse;
-            }
-            set
-            {
-                lightDiffuse = value;
-            }
+            return lightDiffuse;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lightDiffuse"></param>
+        protected void SetLightDiffuse(float[] lightDiffuse)
+        {
+            this.lightDiffuse = lightDiffuse;
+        }
+
 
         /// <summary>
         /// Light position array
         /// </summary>
-        protected float[] LightPosition
+        protected float[] GetLightPosition()
         {
-            get
-            {
-                return lightPosition;
-            }
-            set
-            {
-                lightPosition = value;
-            }
+            return lightPosition;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lightPosition"></param>
+        protected void SetLightPosition(float[] lightPosition)
+        {
+            this.lightPosition = lightPosition;
+        }
+
 
         /// <summary>
         /// Is the light shining
@@ -199,9 +208,9 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe007()
         {
-            this.TextureName = new string[1];
-            this.TextureName[0] = "NeHe007.bmp";
-            this.Texture = new int[3];
+            this.SetTextureName(new string[1]);
+            this.GetTextureName()[0] = "NeHe007.bmp";
+            this.SetTexture(new int[3]);
         }
 
         #endregion Constructor
@@ -249,24 +258,24 @@ namespace SdlDotNetExamples.NeHe
         /// </returns>
         protected virtual void LoadGLFilteredTextures()
         {
-            if (File.Exists(this.DataDirectory + this.TextureName[0]))
+            if (File.Exists(this.DataDirectory + this.GetTextureName()[0]))
             {
                 this.FilePath = "";
             }
             // Status Indicator
-            Bitmap[] textureImage = new Bitmap[this.TextureName.Length];
+            Bitmap[] textureImage = new Bitmap[this.GetTextureName().Length];
             // Create Storage Space For The Texture
 
-            for (int i = 0; i < this.TextureName.Length; i++)
+            for (int i = 0; i < this.GetTextureName().Length; i++)
             {
-                textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName[i]);
+                textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.GetTextureName()[i]);
             }
             // Load The Bitmap
             // Check For Errors, If Bitmap's Not Found, Quit
             if (textureImage[0] != null)
             {
                 // Create The Texture
-                Gl.glGenTextures(this.Texture.Length, this.Texture);
+                Gl.glGenTextures(this.GetTexture().Length, this.GetTexture());
 
                 for (int i = 0; i < textureImage.Length; i++)
                 {
@@ -278,19 +287,19 @@ namespace SdlDotNetExamples.NeHe
                     BitmapData bitmapData = textureImage[i].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
                     // Create Nearest Filtered Texture
-                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i]);
+                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[i]);
                     Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
                     Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST);
                     Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 
                     // Create Linear Filtered Texture
-                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i + 1]);
+                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[i + 1]);
                     Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
                     Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
                     Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
 
                     // Create MipMapped Texture
-                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i + 2]);
+                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[i + 2]);
                     Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
                     Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR_MIPMAP_NEAREST);
                     Glu.gluBuild2DMipmaps(Gl.GL_TEXTURE_2D, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
@@ -326,7 +335,7 @@ namespace SdlDotNetExamples.NeHe
             Gl.glRotatef(this.RotationX, 1, 0, 0);
             Gl.glRotatef(this.RotationY, 0, 1, 0);
 
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[filter]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[filter]);
 
             Gl.glBegin(Gl.GL_QUADS);
             // Front Face

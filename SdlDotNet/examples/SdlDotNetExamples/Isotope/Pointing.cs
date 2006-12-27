@@ -58,25 +58,31 @@ namespace SdlDotNetExamples.Isotope
             //int[] W ={ -1, 0, 0 };
             //int[] N ={ 0, 1, 0 };
             //int[] S ={ 0, -1, 0 };
-            int actorfacing = Vector.VectorToFace(((Actor)obj).Facing);
-            int actorcycle = ((Actor)obj).Cycle;
-            if (actorfacing == 0)
+
+            // The 'as' statement performs a duplicate cast operation.
+            Actor aObj = obj as Actor;
+            if (aObj != null)
             {
-                return ((Surface)Images[0 + sequence[actorcycle]]);
+                int actorfacing = Vector.VectorToFace(aObj.GetFacing());
+                int actorcycle = aObj.Cycle;
+                if (actorfacing == 0)
+                {
+                    return ((Surface)Images[0 + sequence[actorcycle]]);
+                }
+                if (actorfacing == 1)
+                {
+                    return ((Surface)Images[3 + sequence[actorcycle]]);
+                }
+                if (actorfacing == 2)
+                {
+                    return ((Surface)Images[6 + sequence[actorcycle]]);
+                }
+                if (actorfacing == 3)
+                {
+                    return ((Surface)Images[9 + sequence[actorcycle]]);
+                }
+                //default, this should never happen but just in case
             }
-            if (actorfacing == 1)
-            {
-                return ((Surface)Images[3 + sequence[actorcycle]]);
-            }
-            if (actorfacing == 2)
-            {
-                return ((Surface)Images[6 + sequence[actorcycle]]);
-            }
-            if (actorfacing == 3)
-            {
-                return ((Surface)Images[9 + sequence[actorcycle]]);
-            }
-            //default, this should never happen but just in case
             return ((Surface)Images[0]);
         }
     }

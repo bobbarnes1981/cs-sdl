@@ -117,31 +117,43 @@ namespace SdlDotNetExamples.NeHe
         /// <summary>
         /// 
         /// </summary>
-        protected string[] TextureName
+        protected string[] GetTextureName()
         {
-            get
-            {
-                return textureName;
-            }
-            set
-            {
-                textureName = value;
-            }
+            return textureName;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        protected int[] Texture
+        /// <param name="textureName"></param>
+        protected void SetTextureName(string[] textureName)
         {
-            get
-            {
-                return texture;
-            }
-            set
-            {
-                texture = value;
-            }
+            this.textureName = textureName;
+        }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //protected int[] Texture
+        //{
+        //    get
+        //    {
+        //        return texture;
+        //    }
+        //    set
+        //    {
+        //        texture = value;
+        //    }
+        //}
+
+        protected int[] GetTexture()
+        {
+            return texture;
+        }
+
+        protected void SetTexture(int[] texture)
+        {
+            this.texture = texture;
         }
 
         /// <summary>
@@ -234,7 +246,7 @@ namespace SdlDotNetExamples.NeHe
             Gl.glRotatef(this.rotationY, 0, 1, 0);
             Gl.glRotatef(this.rotationZ, 0, 0, 1);
 
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
 
             Gl.glBegin(Gl.GL_QUADS);
             // Front Face
@@ -283,17 +295,17 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         protected virtual void LoadGLTextures()
         {
-            if (File.Exists(this.DataDirectory + this.TextureName[0]))
+            if (File.Exists(this.DataDirectory + this.GetTextureName()[0]))
             {
                 this.FilePath = "";
             }
             // Status Indicator
-            Bitmap[] textureImage = new Bitmap[this.TextureName.Length];
+            Bitmap[] textureImage = new Bitmap[this.GetTextureName().Length];
             // Create Storage Space For The Texture
 
-            for (int i = 0; i < this.TextureName.Length; i++)
+            for (int i = 0; i < this.GetTextureName().Length; i++)
             {
-                textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.TextureName[i]);
+                textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.GetTextureName()[i]);
             }
 
             // Load The Bitmap
@@ -301,7 +313,7 @@ namespace SdlDotNetExamples.NeHe
             if (textureImage[0] != null)
             {
                 // Create The Texture
-                Gl.glGenTextures(this.Texture.Length, this.Texture);
+                Gl.glGenTextures(this.GetTexture().Length, this.GetTexture());
 
                 for (int i = 0; i < textureImage.Length; i++)
                 {
@@ -315,7 +327,7 @@ namespace SdlDotNetExamples.NeHe
                         textureImage[i].LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
                     // Typical Texture Generation Using Data From The Bitmap
-                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[i]);
+                    Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[i]);
                     Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGB8, textureImage[i].Width, textureImage[i].Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
                     Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
                     Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);

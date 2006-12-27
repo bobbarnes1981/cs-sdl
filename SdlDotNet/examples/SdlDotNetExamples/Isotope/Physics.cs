@@ -65,11 +65,11 @@ namespace SdlDotNetExamples.Isotope
             for (int i = 0; i <= 2; i++)
             {
                 //check if intersecting
-                if (object1.Position[i] + object1.Size[i] <= object2.Position[i])
+                if (object1.GetPosition()[i] + object1.GetSize()[i] <= object2.GetPosition()[i])
                 {
                     return (imp);
                 }
-                if (object1.Position[i] >= object2.Position[i] + object2.Size[i])
+                if (object1.GetPosition()[i] >= object2.GetPosition()[i] + object2.GetSize()[i])
                 {
                     return (imp);
                 }
@@ -81,8 +81,8 @@ namespace SdlDotNetExamples.Isotope
 
             for (int i = 0; i <= 2; i++)
             {
-                impact_time_face1 = object1.Position[i] + object1.Size[i] - object2.Position[i];
-                impact_time_face2 = object2.Position[i] + object2.Size[i] - object1.Position[i];
+                impact_time_face1 = object1.GetPosition()[i] + object1.GetSize()[i] - object2.GetPosition()[i];
+                impact_time_face2 = object2.GetPosition()[i] + object2.GetSize()[i] - object1.GetPosition()[i];
                 if (impact_time_face1 < impact_time_face2)
                 {
                     impact_face_object1 = i << 1;
@@ -190,37 +190,37 @@ namespace SdlDotNetExamples.Isotope
             {
                 if (imp.ImpactFaceObject1 % 2 == 0)
                 {
-                    object1.Position[coord] = object2.Position[coord] - object1.Size[coord] - 1;
+                    object1.GetPosition()[coord] = object2.GetPosition()[coord] - object1.GetSize()[coord] - 1;
                 }
                 else
                 {
-                    object1.Position[coord] = object2.Position[coord] + object2.Size[coord];
+                    object1.GetPosition()[coord] = object2.GetPosition()[coord] + object2.GetSize()[coord];
                 }
             }
             if (object1.FixedObject == true && object2.FixedObject == false)
             {
                 if (imp.ImpactFaceObject2 % 2 == 0)
                 {
-                    object2.Position[coord] = object1.Position[coord] - object2.Size[coord] - 1;
+                    object2.GetPosition()[coord] = object1.GetPosition()[coord] - object2.GetSize()[coord] - 1;
                 }
                 else
                 {
-                    object2.Position[coord] = object1.Position[coord] + object1.Size[coord];
+                    object2.GetPosition()[coord] = object1.GetPosition()[coord] + object1.GetSize()[coord];
                 }
             }
             if (object1.FixedObject == false && object2.FixedObject == false)
             {
                 if (imp.ImpactFaceObject1 % 2 == 0)
                 {
-                    delta = (object1.Position[coord] + object1.Size[coord] - object2.Position[coord]);
-                    object1.Position[coord] = (int)object1.Position[coord] - (int)((float)delta / 2.0);
-                    object2.Position[coord] = (int)object2.Position[coord] + (int)((float)delta / 2.0) + 1;
+                    delta = (object1.GetPosition()[coord] + object1.GetSize()[coord] - object2.GetPosition()[coord]);
+                    object1.GetPosition()[coord] = (int)object1.GetPosition()[coord] - (int)((float)delta / 2.0);
+                    object2.GetPosition()[coord] = (int)object2.GetPosition()[coord] + (int)((float)delta / 2.0) + 1;
                 }
                 else
                 {
-                    delta = (object2.Position[coord] + object2.Size[coord] - object1.Position[coord]);
-                    object2.Position[coord] = (int)object2.Position[coord] - (int)((float)delta / 2.0);
-                    object1.Position[coord] = (int)object1.Position[coord] + (int)((float)delta / 2.0) + 1;
+                    delta = (object2.GetPosition()[coord] + object2.GetSize()[coord] - object1.GetPosition()[coord]);
+                    object2.GetPosition()[coord] = (int)object2.GetPosition()[coord] - (int)((float)delta / 2.0);
+                    object1.GetPosition()[coord] = (int)object1.GetPosition()[coord] + (int)((float)delta / 2.0) + 1;
                 }
             }
         }
@@ -287,13 +287,13 @@ namespace SdlDotNetExamples.Isotope
             Isotope.Object3d sense_object1 = new Isotope.Object3d(zero, zero, 0, true);
             //Take the 2 centres of the objects
             int[] twos ={ 2, 2, 2 };
-            int[] centre_object1 = Vector.AddVector(object1.Position, Vector.DivideVector(object1.Size, twos));
-            int[] centre_object2 = Vector.AddVector(object2.Position, Vector.DivideVector(object2.Size, twos));
+            int[] centre_object1 = Vector.AddVector(object1.GetPosition(), Vector.DivideVector(object1.GetSize(), twos));
+            int[] centre_object2 = Vector.AddVector(object2.GetPosition(), Vector.DivideVector(object2.GetSize(), twos));
             //Find the projected vector between them
             int[] project_vector = Vector.MultiplyVector(Vector.Direction(centre_object1, centre_object2), twos);
             //Add the projected vector to the first objects position
-            sense_object1.Position = Vector.AddVector(object1.Position, project_vector);
-            Vector.CopyVector(object1.Size, sense_object1.Size);
+            sense_object1.SetPosition(Vector.AddVector(object1.GetPosition(), project_vector));
+            Vector.CopyVector(object1.GetSize(), sense_object1.GetSize());
             //collision detect the sense object with the object 2
             imp = CollisionDetect(sense_object1, object2);
             return (imp);
@@ -360,10 +360,10 @@ namespace SdlDotNetExamples.Isotope
                 throw new ArgumentNullException("dropObject");
             }
             int[] twos ={ 2, 2, 2 };
-            int[] drop_half_size = Vector.DivideVector(dropObject.Size, twos);
+            int[] drop_half_size = Vector.DivideVector(dropObject.GetSize(), twos);
             //The centre of the source object
-            int[] source_half_size = Vector.DivideVector(sourceObject.Size, twos);
-            int[] source_centre = Vector.AddVector(sourceObject.Position, source_half_size);
+            int[] source_half_size = Vector.DivideVector(sourceObject.GetSize(), twos);
+            int[] source_centre = Vector.AddVector(sourceObject.GetPosition(), source_half_size);
             //offset from the centre of the source object to the centre of the drop object   
             int[] displ_vect = Vector.AddVector(Vector.MultiplyVector(facing, drop_half_size), Vector.MultiplyVector(facing, source_half_size));
             //add a small offset to distance it from the source object

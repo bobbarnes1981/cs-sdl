@@ -39,7 +39,7 @@ namespace SdlDotNetExamples.Isotope
             : base(position, size, objectType, fixedObject)
         {
             int[] twos ={ 2, 0, 0 };
-            Velocity.CopyTo(twos, 0);
+            GetVelocity().CopyTo(twos, 0);
         }
 
         /// <summary>
@@ -57,15 +57,15 @@ namespace SdlDotNetExamples.Isotope
             // simple toggle movement
             if (CollisionTime == ObjectTime.Time)
             {
-                if (Facing == ones && impactFace == 0)
+                if (GetFacing() == ones && impactFace == 0)
                 {
-                    Velocity[0] = -2;
-                    Facing = negones;
+                    GetVelocity()[0] = -2;
+                    SetFacing(negones);
                 }
-                else if (Facing == negones && impactFace == 1)
+                else if (GetFacing() == negones && impactFace == 1)
                 {
-                    Velocity[0] = 2;
-                    Facing = ones;
+                    GetVelocity()[0] = 2;
+                    SetFacing(ones);
                 }
                 //WARNING MISSING TIME FUNCTION MUST BE FIXED
                 CollisionTime = ObjectTime.Time;

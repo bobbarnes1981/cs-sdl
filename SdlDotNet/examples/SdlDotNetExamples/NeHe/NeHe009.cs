@@ -173,9 +173,9 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe009()
         {
-            this.TextureName = new string[1];
-            this.TextureName[0] = "NeHe009.bmp";
-            this.Texture = new int[1];
+            this.SetTextureName(new string[1]);
+            this.GetTextureName()[0] = "NeHe009.bmp";
+            this.SetTexture(new int[1]);
         }
 
         #endregion Constructor
@@ -225,7 +225,7 @@ namespace SdlDotNetExamples.NeHe
             // Clear The Screen And The Depth Buffer
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
             // Select Our Texture
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
 
             // Loop Through All The Stars		
             for (loop = 0; loop < num; loop++)

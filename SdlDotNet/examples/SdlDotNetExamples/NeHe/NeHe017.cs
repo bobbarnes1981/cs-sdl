@@ -63,11 +63,11 @@ namespace SdlDotNetExamples.NeHe
         public NeHe017()
         {
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
-            this.Texture = new int[2];
-            this.TextureName = new string[2];
+            this.SetTexture(new int[2]);
+            this.SetTextureName(new string[2]);
             // Texture array
-            this.TextureName[0] = "NeHe017.Font.bmp";
-            this.TextureName[1] = "NeHe017.Bumps.bmp";
+            this.GetTextureName()[0] = "NeHe017.Font.bmp";
+            this.GetTextureName()[1] = "NeHe017.Bumps.bmp";
         }
 
         #endregion Constructor
@@ -114,7 +114,7 @@ namespace SdlDotNetExamples.NeHe
             // Creating 256 Display Lists
             this.FontBase = Gl.glGenLists(256);
             // Select Our Font Texture
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
             // Loop Through All 256 Lists
             for (int loop = 0; loop < 256; loop++)
             {
@@ -164,7 +164,7 @@ namespace SdlDotNetExamples.NeHe
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
             Gl.glLoadIdentity();
             // Select Our Second Texture
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[1]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[1]);
             // Move Into The Screen 5 Units
             Gl.glTranslatef(0.0f, 0.0f, -5.0f);
             // Rotate On The Z Axis 45 Degrees (Clockwise)
@@ -263,7 +263,7 @@ namespace SdlDotNetExamples.NeHe
                 characterSet = 1;
             }
             // Select Our Font Texture
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, GetTexture()[0]);
             // Disables Depth Testing
             Gl.glDisable(Gl.GL_DEPTH_TEST);
             // Select The Projection Matrix

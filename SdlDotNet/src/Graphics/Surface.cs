@@ -69,6 +69,7 @@ namespace SdlDotNet.Graphics
         private bool isVideoMode;
         bool transparentInitialized;
         bool transparent;
+        static bool isInitialized = Video.Initialize();
 
         // Bmp files have a header of 54 bytes. 
         // This is used to turn the Surface into a byte array to 
@@ -77,10 +78,6 @@ namespace SdlDotNet.Graphics
         #endregion Private Fields
 
         #region Constructors and Destructors
-        static Surface()
-        {
-            Video.Initialize();
-        }
 
         /// <summary>
         /// 
@@ -430,6 +427,13 @@ namespace SdlDotNet.Graphics
         #endregion Protected Methods
 
         #region Public Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Surface.isInitialized; }
+        }
 
         /// <summary>
         /// Creates a Bitmap representing the Surface.

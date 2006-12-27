@@ -44,8 +44,8 @@ namespace SdlDotNetExamples.Isotope
             base.Tick();
             if (newObjectTime == 1)
             {
-                Position = new int[] { randint.Next(10, 170), randint.Next(10, 170), 100 };
-                this.scene.ObjectGroup.Add(new Dissolver(Position, new int[] { 16, 10, 18 }, 2, scene));
+                SetPosition(new int[] { randint.Next(10, 170), randint.Next(10, 170), 100 });
+                this.scene.ObjectGroup.Add(new Dissolver(GetPosition(), new int[] { 16, 10, 18 }, 2, scene));
                 newObjectTime = 0;
             }
             newObjectTime = newObjectTime + 1;

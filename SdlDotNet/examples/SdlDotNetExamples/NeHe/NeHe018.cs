@@ -92,22 +92,22 @@ namespace SdlDotNetExamples.NeHe
         public NeHe018()
         {
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
-            this.Texture = new int[3];
-            this.TextureName = new string[1];
-            this.TextureName[0] = "NeHe018.bmp";
+            this.SetTexture(new int[3]);
+            this.SetTextureName(new string[1]);
+            this.GetTextureName()[0] = "NeHe018.bmp";
             this.DepthZ = -5.0f;
-            this.LightAmbient[0] = 0.5f;
-            this.LightAmbient[1] = 0.5f;
-            this.LightAmbient[2] = 0.5f;
-            this.LightAmbient[3] = 1.0f;
-            this.LightDiffuse[0] = 1.0f;
-            this.LightDiffuse[1] = 1.0f;
-            this.LightDiffuse[2] = 1.0f;
-            this.LightDiffuse[3] = 1.0f;
-            this.LightPosition[0] = 0.0f;
-            this.LightPosition[1] = 0.0f;
-            this.LightPosition[2] = 2.0f;
-            this.LightPosition[3] = 1.0f;
+            this.GetLightAmbient()[0] = 0.5f;
+            this.GetLightAmbient()[1] = 0.5f;
+            this.GetLightAmbient()[2] = 0.5f;
+            this.GetLightAmbient()[3] = 1.0f;
+            this.GetLightDiffuse()[0] = 1.0f;
+            this.GetLightDiffuse()[1] = 1.0f;
+            this.GetLightDiffuse()[2] = 1.0f;
+            this.GetLightDiffuse()[3] = 1.0f;
+            this.GetLightPosition()[0] = 0.0f;
+            this.GetLightPosition()[1] = 0.0f;
+            this.GetLightPosition()[2] = 2.0f;
+            this.GetLightPosition()[3] = 1.0f;
         }
 
         #endregion Constructor
@@ -138,11 +138,11 @@ namespace SdlDotNetExamples.NeHe
             // Really Nice Perspective Calculations
             Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
             // Setup The Ambient Light
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, this.LightAmbient);
+            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, this.GetLightAmbient());
             // Setup The Diffuse Light
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, this.LightDiffuse);
+            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, this.GetLightDiffuse());
             // Position The Light
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, this.LightPosition);
+            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, this.GetLightPosition());
             // Enable Light One
             Gl.glEnable(Gl.GL_LIGHT1);
 
@@ -176,7 +176,7 @@ namespace SdlDotNetExamples.NeHe
             Gl.glRotatef(this.RotationX, 1.0f, 0.0f, 0.0f);
             Gl.glRotatef(this.RotationY, 0.0f, 1.0f, 0.0f);
 
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[this.Filter]);
 
             switch (this.obj)
             {

@@ -92,14 +92,14 @@ namespace SdlDotNetExamples.Isotope
             for (int obj = 0; obj < objectGroup.Length; obj++)
             {
                 //finds the isometric coordinate based on the objects position vector and a display offset
-                int[] pos = Transform(objectGroup[obj].Position, offset);
+                int[] pos = Transform(objectGroup[obj].GetPosition(), offset);
                 //Console.WriteLine(pos[0]);
                 //Console.WriteLine(pos[1]);
                 //Console.WriteLine(objectGroup[obj].size[1]);
                 //Console.WriteLine(objectGroup[obj].size[2]);
                 //put the new isometric coordinates of the current object into the sprite array
-                spriteGroup[obj].X += pos[0] - objectGroup[obj].Size[1];
-                spriteGroup[obj].Y += pos[1] - objectGroup[obj].Size[2];
+                spriteGroup[obj].X += pos[0] - objectGroup[obj].GetSize()[1];
+                spriteGroup[obj].Y += pos[1] - objectGroup[obj].GetSize()[2];
                 //sprite_group[obj].Rectangle.Offset(pos[0]-objectGroup[obj].size[1],pos[1]-objectGroup[obj].size[2]);
                 //Console.WriteLine(sprite_group[obj].Rectangle.Top);
                 //Console.WriteLine(sprite_group[obj].Rectangle.Left);
@@ -148,7 +148,7 @@ namespace SdlDotNetExamples.Isotope
             //precalculate the front position of each objects coordinates
             for (int obj = 0; obj < objectGroup.Length; obj++)
             {
-                front[obj] = Vector.AddVector(objectGroup[obj].Position, Vector.AddVector(objectGroup[obj].Size, negones));
+                front[obj] = Vector.AddVector(objectGroup[obj].GetPosition(), Vector.AddVector(objectGroup[obj].GetSize(), negones));
             }
 
             int swap;
@@ -159,7 +159,7 @@ namespace SdlDotNetExamples.Isotope
                 {
                     for (int k = 0; k <= 2; k++)
                     {
-                        if (objectGroup[ordered[j]].Position[k] > front[ordered[j + 1]][k])
+                        if (objectGroup[ordered[j]].GetPosition()[k] > front[ordered[j + 1]][k])
                         {
                             swap = ordered[j + 1];
                             ordered[j + 1] = ordered[j];

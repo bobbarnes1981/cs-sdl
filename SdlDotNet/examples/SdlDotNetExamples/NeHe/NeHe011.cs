@@ -66,9 +66,9 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe011()
         {
-            this.Texture = new int[1];
-            this.TextureName = new string[1];
-            this.TextureName[0] = "NeHe011.bmp";
+            this.SetTexture(new int[1]);
+            this.SetTextureName(new string[1]);
+            this.GetTextureName()[0] = "NeHe011.bmp";
         }
 
         #endregion Constructor
@@ -135,7 +135,7 @@ namespace SdlDotNetExamples.NeHe
             Gl.glRotatef(this.RotationY, 0.0f, 1.0f, 0.0f);
             Gl.glRotatef(this.RotationZ, 0.0f, 0.0f, 1.0f);
 
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
 
             Gl.glBegin(Gl.GL_QUADS);
             for (int i = 0; i < 44; i++)

@@ -124,9 +124,9 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe010()
         {
-            this.TextureName = new string[1];
-            this.TextureName[0] = "NeHe010.bmp";
-            this.Texture = new int[3];
+            this.SetTextureName(new string[1]);
+            this.GetTextureName()[0] = "NeHe010.bmp";
+            this.SetTexture(new int[3]);
             this.DepthZ = 0;
         }
 
@@ -342,7 +342,7 @@ namespace SdlDotNetExamples.NeHe
             Gl.glRotatef(lookupdown, 1, 0, 0);
             Gl.glRotatef(sceneroty, 0, 1, 0);
             Gl.glTranslatef(xtrans, ytrans, ztrans);
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[this.Filter]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[this.Filter]);
             numtriangles = sector.numtriangles;
             // Process Each Triangle
             for (int loop_m = 0; loop_m < numtriangles; loop_m++)

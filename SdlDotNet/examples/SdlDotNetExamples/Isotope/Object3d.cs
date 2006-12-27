@@ -46,32 +46,84 @@ namespace SdlDotNetExamples.Isotope
         */
         private int[] position ={ 0, 0, 0 };
 
-        public int[] Position
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int[] GetPosition()
         {
-            get { return position; }
-            set { position = value; }
+            return position;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        public void SetPosition(int[] position)
+        {
+            this.position = position;
+        }
+
         private int[] oldPosition ={ 0, 0, 0 };
 
-        public int[] OldPosition
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int[] GetOldPosition()
         {
-            get { return oldPosition; }
-            set { oldPosition = value; }
+            return oldPosition;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oldPosition"></param>
+        public void SetOldPosition(int[] oldPosition)
+        {
+            this.oldPosition = oldPosition;
+        }
+
         private int[] vel ={ 0, 0, 0 };
 
-        public int[] Velocity
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int[] GetVelocity()
         {
-            get { return vel; }
-            set { vel = value; }
+            return vel;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="velocity"></param>
+        public void SetVelocity(int[] velocity)
+        {
+            this.vel = velocity;
+        }
+
         private int[] size ={ 0, 0, 0 };
 
-        public int[] Size
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int[] GetSize()
         {
-            get { return size; }
-            set { size = value; }
+            return size;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="size"></param>
+        public void SetSize(int[] size)
+        {
+            this.size = size;
+        }
+
         private bool fixedObject;
 
         public bool FixedObject

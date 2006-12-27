@@ -80,9 +80,9 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         public NeHe012()
         {
-            this.Texture = new int[1];
-            this.TextureName = new string[1];
-            this.TextureName[0] = "NeHe012.bmp";
+            this.SetTexture(new int[1]);
+            this.SetTextureName(new string[1]);
+            this.GetTextureName()[0] = "NeHe012.bmp";
         }
 
         #endregion Constructor
@@ -188,7 +188,7 @@ namespace SdlDotNetExamples.NeHe
         protected override void DrawGLScene()
         {
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.Texture[0]);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.GetTexture()[0]);
             for (int yloop = 1; yloop < 6; yloop++)
             {
                 for (int xloop = 0; xloop < yloop; xloop++)
