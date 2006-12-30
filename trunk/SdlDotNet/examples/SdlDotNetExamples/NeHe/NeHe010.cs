@@ -32,6 +32,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Reflection;
 using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Input;
@@ -42,6 +43,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 10: Loading and Moving through a 3D World
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe010 : NeHe008
     {
         #region Fields

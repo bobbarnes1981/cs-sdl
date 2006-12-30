@@ -28,6 +28,7 @@ SOFTWARE.
 using System;
 using System.Drawing;
 using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
@@ -39,6 +40,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 13: Bitmap Fonts
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe013 : NeHe006, IDisposable
     {
         #region Fields
@@ -213,6 +215,7 @@ namespace SdlDotNetExamples.NeHe
         /// Print font to screen
         /// </summary>
         /// <param name="text"></param>
+        [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
         protected virtual void GlPrint(string text)
         {
             // If There's No Text

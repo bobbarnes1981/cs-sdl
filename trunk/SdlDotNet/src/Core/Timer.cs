@@ -28,16 +28,21 @@ namespace SdlDotNet.Core
     /// </summary>
     public static class Timer
     {
-        #region Constructors
+        #region Private fields
 
-        static Timer()
-        {
-            Initialize();
-        }
+        static bool isInitialized = Initialize();
 
-        #endregion
+        #endregion 
 
         #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Timer.isInitialized; }
+        }
 
         /// <summary>
         /// Closes and destroys this object
@@ -53,7 +58,7 @@ namespace SdlDotNet.Core
         /// <summary>
         /// Initialize timer.
         /// </summary>
-        public static void Initialize()
+        public static bool Initialize()
         {
             if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER))
                 == (int)SdlFlag.FalseValue)
@@ -62,6 +67,11 @@ namespace SdlDotNet.Core
                 {
                     throw SdlException.Generate();
                 }
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 

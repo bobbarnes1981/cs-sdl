@@ -27,8 +27,11 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNetExamples.RedBook
@@ -62,12 +65,10 @@ namespace SdlDotNetExamples.RedBook
 		//Height of screen
 		int height = 250;
 		
-		
-		
-		
 		private const int CHECKIMAGEWIDTH = 64;
 		private const int CHECKIMAGEHEIGHT = 64;
-		private static byte[ , , ] checkImage = new byte[CHECKIMAGEHEIGHT, CHECKIMAGEWIDTH, 3];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] checkImage = new byte[CHECKIMAGEHEIGHT, CHECKIMAGEWIDTH, 3];
 
 		/// <summary>
 		/// Lesson title

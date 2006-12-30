@@ -27,6 +27,7 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
 using Tao.OpenGl;
@@ -52,6 +53,7 @@ namespace SdlDotNetExamples.RedBook
 	///			http://cs-sdl.sourceforge.net
 	///     </para>
 	/// </remarks>
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
 	public class RedBookAARgb
 	{
 		#region Fields

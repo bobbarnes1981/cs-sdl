@@ -24,6 +24,7 @@ using SdlDotNet.Graphics;
 using Gtk;
 using System.IO;
 using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SdlDotNet.GtkSharp
 {
@@ -31,6 +32,7 @@ namespace SdlDotNet.GtkSharp
     /// 
     /// </summary>
     [CLSCompliant(false)]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
     public class SurfaceGtk : DrawingArea
     {
         private Surface surface = new Surface(new Size(0, 0));	// empty surface

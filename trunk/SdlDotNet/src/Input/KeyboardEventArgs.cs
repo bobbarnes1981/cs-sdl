@@ -19,6 +19,7 @@
 #endregion LICENSE
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using Tao.Sdl;
@@ -109,6 +110,7 @@ namespace SdlDotNet.Input
         /// <summary>
         /// The scancode of the key
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public byte Scancode
         {
             get

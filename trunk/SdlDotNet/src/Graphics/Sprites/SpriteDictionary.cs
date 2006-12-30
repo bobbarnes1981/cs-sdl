@@ -55,8 +55,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="info"></param>
         /// <param name="context"></param>
         protected SpriteDictionary(
-           SerializationInfo info, 
-           StreamingContext context)
+           SerializationInfo info,
+           StreamingContext context) : base(info, context)
         {
         }
 
@@ -82,7 +82,6 @@ namespace SdlDotNet.Graphics.Sprites
                 this.Add(s, spriteDictionary[s]);
             }
         }
-
 
         #endregion
 
@@ -158,7 +157,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// Adds sprite to group
         /// </summary>
         /// <param name="sprite">Sprite to add</param>
-        public virtual void Add(Sprite sprite)
+        public void Add(Sprite sprite)
         {
             if (sprite == null)
             {
@@ -185,7 +184,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// Adds sprites from another group to this group
         /// </summary>
         /// <param name="spriteDictionary">SpriteDictionary to add Sprites from</param>
-        public virtual int Add(SpriteDictionary spriteDictionary)
+        public int Add(SpriteDictionary spriteDictionary)
         {
             if (spriteDictionary == null)
             {
@@ -974,8 +973,7 @@ namespace SdlDotNet.Graphics.Sprites
           SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException(Events.StringManager.GetString(
-                        "NotImplemented", CultureInfo.CurrentUICulture));
+            base.GetObjectData(info, context);
         }
 
         #endregion

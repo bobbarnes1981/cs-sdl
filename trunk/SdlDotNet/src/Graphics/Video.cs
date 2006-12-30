@@ -24,6 +24,7 @@ using System.Reflection;
 using System.IO;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Diagnostics.CodeAnalysis;
 
 using Tao.Sdl;
 using SdlDotNet.Input;
@@ -98,11 +99,13 @@ namespace SdlDotNet.Graphics
         /// Number of multisample buffers (0 or 1). 
         /// Requires the GL_ARB_MULTISAMPLE extension.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         MultiSampleBuffers = Sdl.SDL_GL_MULTISAMPLEBUFFERS,
         /// <summary>
         /// Number of samples per pixel when multisampling is enabled. 
         /// Requires the GL_ARB_MULTISAMPLE extension.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         MultiSampleSamples = Sdl.SDL_GL_MULTISAMPLESAMPLES,
         /// <summary>
         /// Guarantees hardware acceleration
@@ -649,6 +652,7 @@ namespace SdlDotNet.Graphics
         /// A flag indicating whether or not to attempt to place this surface
         ///  into video memory</param>
         /// <returns>A new surface</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static Surface CreateRgbSurface(
             int width,
             int height,
@@ -671,6 +675,7 @@ namespace SdlDotNet.Graphics
         /// <param name="width">The width of the surface</param>
         /// <param name="height">The height of the surface</param>
         /// <returns>A new surface</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static Surface CreateRgbSurface(int width, int height)
         {
             return Video.CreateRgbSurface(width, height, VideoInfo.BitsPerPixel, VideoInfo.RedMask, VideoInfo.GreenMask, VideoInfo.BlueMask, VideoInfo.AlphaMask, false);
@@ -986,6 +991,7 @@ namespace SdlDotNet.Graphics
         /// Gets or sets the GL multi sample buffers.
         /// </summary>
         /// <value>The GL multi sample buffers.</value>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static int GLMultiSampleBuffers
         {
             get
@@ -1010,6 +1016,7 @@ namespace SdlDotNet.Graphics
         /// Gets or sets the GL multi sample samples.
         /// </summary>
         /// <value>The GL multi sample samples.</value>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static int GLMultiSampleSamples
         {
             get
@@ -1121,6 +1128,7 @@ namespace SdlDotNet.Graphics
         /// Iconifies (minimizes) the current window
         /// </summary>
         /// <returns>True if the action succeeded, otherwise False</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static bool IconifyWindow()
         {
             return (Sdl.SDL_WM_IconifyWindow() != (int)SdlFlag.Success);

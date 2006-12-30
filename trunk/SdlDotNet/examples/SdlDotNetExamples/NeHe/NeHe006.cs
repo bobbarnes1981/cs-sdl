@@ -30,6 +30,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using Tao.OpenGl;
@@ -39,6 +40,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 06: Texture Mapping
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe006 : NeHe001
     {
         #region Fields

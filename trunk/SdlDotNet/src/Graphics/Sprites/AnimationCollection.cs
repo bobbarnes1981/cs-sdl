@@ -37,30 +37,6 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Creates a new AnimationCollection with a SurfaceCollection representing 
-        /// the animation.
-        /// </summary>
-        /// <param name="frames">
-        /// The collection of surfaces in the animation.
-        /// </param>
-        public AnimationCollection(SurfaceCollection frames)
-            : base(frames)
-        {
-        }
-
-        /// <summary>
-        /// Creates an AnimationCollection with one surface to start off the animation.
-        /// </summary>
-        /// <param name="firstFrame">
-        /// The surface representing the animation.
-        /// </param>
-        public AnimationCollection(Surface firstFrame)
-            : base()
-        {
-            this.Add(firstFrame);
-        }
-
-        /// <summary>
         /// Creates a new AnimationCollection with a SurfaceCollection representing the 
         /// animation.
         /// </summary>
@@ -74,11 +50,11 @@ namespace SdlDotNet.Graphics.Sprites
         /// Whether or not the animation is 
         /// to loop when reached the end. Defaults to true.
         /// </param>
-        public AnimationCollection(SurfaceCollection frames, double delay, bool loop)
-            : base(frames)
+        public virtual void Add(SurfaceCollection frames, double delay, bool loop)
         {
             this.m_Delay = delay;
             this.m_Loop = loop;
+            base.Add(frames);
         }
 
         /// <summary>
@@ -93,10 +69,10 @@ namespace SdlDotNet.Graphics.Sprites
         /// The amount of delay to be 
         /// had between each frame. Defaults to 30.
         /// </param>
-        public AnimationCollection(SurfaceCollection frames, double delay)
-            : base(frames)
+        public virtual void Add(SurfaceCollection frames, double delay)
         {
             this.m_Delay = delay;
+            base.Add(frames);
         }
         #endregion Constructors
 

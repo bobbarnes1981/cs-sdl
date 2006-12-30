@@ -22,6 +22,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 using Gtk;
 using SdlDotNet.GtkSharp;
@@ -29,6 +30,7 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.SmallDemos
 {
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
     public class GtkWindow : IDisposable
     {
         // widgets

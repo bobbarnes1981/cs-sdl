@@ -19,6 +19,7 @@
 
 using System;
 using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Particles.Particle;
@@ -118,6 +119,7 @@ namespace SdlDotNet.Particles.Manipulators
         /// <summary>
         /// Gets and sets the Y coordinate of the vortex.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public float Y
         {
             get
@@ -132,6 +134,7 @@ namespace SdlDotNet.Particles.Manipulators
         /// <summary>
         /// Gets and sets the X coordinate of the vortex.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public float X
         {
             get

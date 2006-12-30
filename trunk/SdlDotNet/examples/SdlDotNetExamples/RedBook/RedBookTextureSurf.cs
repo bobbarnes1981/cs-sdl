@@ -27,8 +27,11 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNetExamples.RedBook
@@ -57,8 +60,6 @@ namespace SdlDotNetExamples.RedBook
 		int width = 500;
 		//Height of screen
 		int height = 500;
-		
-		
 
 		/// <summary>
 		/// Lesson title
@@ -79,7 +80,8 @@ namespace SdlDotNetExamples.RedBook
 		#region Private Fields
 		private static byte[] image = new byte[IMAGEWIDTH * IMAGEHEIGHT * 3];
 
-		private static float[ , , ] controlPoints = {
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static float[, ,] controlPoints = {
 			{
 				{-1.5f, -1.5f, 4.0f},
 				{-0.5f, -1.5f, 2.0f},
@@ -106,7 +108,8 @@ namespace SdlDotNetExamples.RedBook
 			}
 													};
 
-		private static float[ , , ] texturePoints = {
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static float[, ,] texturePoints = {
 			{
 				{0.0f, 0.0f},
 				{0.0f, 1.0f}

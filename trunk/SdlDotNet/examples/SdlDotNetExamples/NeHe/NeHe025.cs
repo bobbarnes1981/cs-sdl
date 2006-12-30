@@ -33,6 +33,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Input;
@@ -43,6 +44,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 25: Morphing and Loading Objects from a File
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe025 : NeHe020
     {
         #region Fields

@@ -29,6 +29,7 @@ using System;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using Tao.OpenGl;
@@ -38,6 +39,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 17: 2D Texture Font
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe017 : NeHe013
     {
         #region Fields
@@ -247,6 +249,7 @@ namespace SdlDotNetExamples.NeHe
         /// <param name="positionX">X position to display the text</param>
         /// <param name="positionY">Y position to display the text</param>
         /// <param name="characterSet"></param>
+        [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
         public void GlPrint(int positionX, int positionY, string displayText, int characterSet)
         {
             if (displayText == null)

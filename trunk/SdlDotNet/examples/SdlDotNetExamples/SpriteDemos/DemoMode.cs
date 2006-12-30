@@ -58,7 +58,8 @@ namespace SdlDotNetExamples.SpriteDemos
             {
                 filepath = "";
             }
-            SurfaceCollection id = new SurfaceCollection(filepath + data_directory + "floor", ".png");
+            SurfaceCollection id = new SurfaceCollection();
+            id.Add(filepath + data_directory + "floor", ".png");
             return id;
         }
 
@@ -82,7 +83,8 @@ namespace SdlDotNetExamples.SpriteDemos
             }
 
             // Load the marble and cache it before returning
-            icd = new SurfaceCollection(filepath + data_directory + name + ".png", new Size(50, 50));
+            icd = new SurfaceCollection();
+            icd.Add(filepath + data_directory + name + ".png", new Size(50, 50));
             marbles["icd:" + name] = icd;
             return icd;
         }
@@ -106,8 +108,8 @@ namespace SdlDotNetExamples.SpriteDemos
                 filepath = "";
             }
             // Load the marble
-            SurfaceCollection td =
-                new SurfaceCollection(new Surface(filepath + data_directory + name + ".png"), new Size(50, 50));
+            SurfaceCollection td = new SurfaceCollection();
+            td.Add(new Surface(filepath + data_directory + name + ".png"), new Size(50, 50));
             return td;
         }
         #endregion

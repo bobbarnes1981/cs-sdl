@@ -32,21 +32,26 @@ namespace SdlDotNet.Input
     /// </summary>
     public static class Joysticks
     {
-        #region Constructors
+        #region Private fields
 
-        static Joysticks()
-        {
-            Initialize();
-        }
+        static bool isInitialized = Initialize();
 
         #endregion
 
         #region Public Methods
 
         /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Joysticks.isInitialized; }
+        }
+
+        /// <summary>
         /// Starts joystick subsystem
         /// </summary>
-        public static void Initialize()
+        public static bool Initialize()
         {
             if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_JOYSTICK))
                 == (int)SdlFlag.FalseValue)
@@ -55,6 +60,11 @@ namespace SdlDotNet.Input
                 {
                     throw SdlException.Generate();
                 }
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 

@@ -39,16 +39,21 @@ namespace SdlDotNet.Audio
     /// </remarks>
     public static class CDRom
     {
-        #region Constructors and Destructors
+        #region Private fields
 
-        static CDRom()
-        {
-            Initialize();
-        }
+        static bool isInitialized = Initialize();
 
-        #endregion Constructors and Destructors
+        #endregion 
 
         #region Public methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return CDRom.isInitialized; }
+        }
 
         /// <summary>
         /// Closes and destroys this object
@@ -66,7 +71,7 @@ namespace SdlDotNet.Audio
         /// This normally automatically started when 
         /// the CDRom class is initialized.
         /// </remarks>
-        public static void Initialize()
+        public static bool Initialize()
         {
             if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM))
                 == (int)SdlFlag.FalseValue)
@@ -75,6 +80,11 @@ namespace SdlDotNet.Audio
                 {
                     throw SdlException.Generate();
                 }
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 

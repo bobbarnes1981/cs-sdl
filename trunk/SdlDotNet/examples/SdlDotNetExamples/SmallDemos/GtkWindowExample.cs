@@ -21,11 +21,14 @@
 
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+
 using Gtk;
 using SdlDotNet.GtkSharp;
 
 namespace SdlDotNetExamples.SmallDemos
 {
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
     public static class GtkWindowExample
     {
         /// <summary>

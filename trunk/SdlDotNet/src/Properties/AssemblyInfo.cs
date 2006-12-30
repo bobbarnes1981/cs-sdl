@@ -26,6 +26,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.Resources;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -91,3 +92,4 @@ using System.IO;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyDelaySign(false)]
+[module: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "SdlDotNet.Windows")]

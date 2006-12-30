@@ -118,8 +118,8 @@ namespace SdlDotNet.Audio
         /// <param name="info"></param>
         /// <param name="context"></param>
         protected SoundDictionary(
-           SerializationInfo info, 
-           StreamingContext context)
+           SerializationInfo info,
+           StreamingContext context) : base(info, context)
         {
         }
 

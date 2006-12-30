@@ -28,6 +28,7 @@ SOFTWARE.
 using System;
 using System.IO;
 using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Input;
@@ -38,6 +39,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 16: Cool Looking Fog
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe016 : NeHe010
     {
         #region Fields

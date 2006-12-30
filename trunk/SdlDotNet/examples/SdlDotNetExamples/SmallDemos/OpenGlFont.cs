@@ -22,6 +22,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
@@ -33,6 +34,7 @@ namespace SdlDotNetExamples.SmallDemos
     /// <summary>
     /// 
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class OpenGlFont : IDisposable
     {
         int width = 640;

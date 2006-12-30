@@ -20,6 +20,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Graphics;
 using Tao.OpenGl;
@@ -29,6 +30,7 @@ namespace SdlDotNet.OpenGl
     /// <summary>
     /// Summary description for SurfaceGl.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class SurfaceGl
     {
         Surface surface;

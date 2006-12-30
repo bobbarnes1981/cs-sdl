@@ -41,7 +41,7 @@ namespace SdlDotNet.Graphics.Sprites
             : base()
         {
             m_Timer.Elapsed += new System.Timers.ElapsedEventHandler(m_Timer_Elapsed);
-            m_Timer.Interval = 20;
+            //m_Timer.Interval = 1000;
         }
 
         /// <summary>
@@ -62,8 +62,12 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="name">The name of the animation</param>
         /// <param name="surfaces">The surface collection containing the frames of the animation.</param>
         public AnimatedSprite(string name, SurfaceCollection surfaces)
-            : this(name, new AnimationCollection(surfaces))
+            : this()
         {
+            this.CurrentAnimation = name;
+            AnimationCollection animation = new AnimationCollection();
+            animation.Add(surfaces);
+            m_Animations.Add(name, animation);
         }
 
         /// <summary>
@@ -88,7 +92,9 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 throw new ArgumentNullException("surfaces");
             }
-            m_Animations.Add("Default", new AnimationCollection(surfaces));
+            AnimationCollection anim = new AnimationCollection();
+            anim.Add(surfaces);
+            m_Animations.Add("Default", anim);
             base.Surface = surfaces[0];
             base.Rectangle = surfaces[0].Rectangle;
             base.Position = coordinates;
@@ -107,7 +113,9 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 throw new ArgumentNullException("surfaces");
             }
-            m_Animations.Add("Default", new AnimationCollection(surfaces));
+            AnimationCollection anim = new AnimationCollection();
+            anim.Add(surfaces);
+            m_Animations.Add("Default", anim);
             base.Surface = surfaces[0];
             base.Rectangle = surfaces[0].Rectangle;
             base.Position = coordinates;
@@ -125,7 +133,9 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 throw new ArgumentNullException("surfaces");
             }
-            m_Animations.Add("Default", new AnimationCollection(surfaces));
+            AnimationCollection anim = new AnimationCollection();
+            anim.Add(surfaces);
+            m_Animations.Add("Default", anim);
             base.Surface = surfaces[0];
             base.Rectangle = surfaces[0].Rectangle;
             base.Position = new Point(0, 0);
@@ -352,7 +362,7 @@ namespace SdlDotNet.Graphics.Sprites
         #endregion
 
         #region Private Methods
-        private System.Timers.Timer m_Timer = new System.Timers.Timer(500);
+        private System.Timers.Timer m_Timer = new System.Timers.Timer();
 
         private void m_Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {

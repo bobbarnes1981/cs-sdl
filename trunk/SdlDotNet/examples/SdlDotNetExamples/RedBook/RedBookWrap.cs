@@ -66,8 +66,10 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 using Tao.OpenGl;
 
@@ -111,7 +113,8 @@ namespace SdlDotNetExamples.RedBook
 		static bool textureWrapS = true;
 		static bool textureWrapT = true;
 		// Texture feilds
-		private static byte[ , , ] checkImage = new byte[CHECKHEIGHT, CHECKWIDTH, 4];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] checkImage = new byte[CHECKHEIGHT, CHECKWIDTH, 4];
 		private static int[] texture = new int[1];
 
 		/// <summary>

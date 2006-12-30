@@ -104,8 +104,8 @@ namespace SdlDotNetExamples.SmallDemos
 
             while (buf_pos < len)
             {
-                double oscPoint = osc[time];
-                double osc2Point = osc2[time];
+                double oscPoint = osc.ValueY(time);
+                double osc2Point = osc2.ValueY(time);
                 double sound = ((Math.Sin(time * freq + oscPoint) * volume) + offset) + ((Math.Sin(time * freq2 + osc2Point) * volume) + offset);
                 sound /= 2.0;
                 buffer16[buf_pos++] = (short)sound;
@@ -162,14 +162,11 @@ namespace SdlDotNetExamples.SmallDemos
             }
         }
 
-        public double this[double sample]
+        public double ValueY(double sample)
         {
-            get
-            {
-                return Math.Sin(sample * rate) * amplitude;
-            }
+            return Math.Sin(sample * rate) * amplitude;
         }
 
-       
+
     }
 }

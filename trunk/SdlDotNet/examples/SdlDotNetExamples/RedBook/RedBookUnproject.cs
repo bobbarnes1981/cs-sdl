@@ -27,6 +27,7 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
@@ -54,6 +55,7 @@ namespace SdlDotNetExamples.RedBook
     ///			http://cs-sdl.sourceforge.net
     ///     </para>
     /// </remarks>
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
     public class RedBookUnproject
     {
         //Width of screen

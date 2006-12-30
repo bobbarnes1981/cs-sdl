@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Diagnostics.CodeAnalysis;
 
 using Tao.Sdl;
 using SdlDotNet.Core;
@@ -230,106 +231,132 @@ namespace SdlDotNet.Input
         /// <summary>
         /// a
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         A = Sdl.SDLK_a,
         /// <summary>
         /// b
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         B = Sdl.SDLK_b,
         /// <summary>
         /// c
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         C = Sdl.SDLK_c,
         /// <summary>
         /// d
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         D = Sdl.SDLK_d,
         /// <summary>
         /// e
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         E = Sdl.SDLK_e,
         /// <summary>
         /// f
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         F = Sdl.SDLK_f,
         /// <summary>
         /// g
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         G = Sdl.SDLK_g,
         /// <summary>
         /// h
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         H = Sdl.SDLK_h,
         /// <summary>
         /// i
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         I = Sdl.SDLK_i,
         /// <summary>
         /// j
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         J = Sdl.SDLK_j,
         /// <summary>
         /// k
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         K = Sdl.SDLK_k,
         /// <summary>
         /// l
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         L = Sdl.SDLK_l,
         /// <summary>
         /// m
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         M = Sdl.SDLK_m,
         /// <summary>
         /// n
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         N = Sdl.SDLK_n,
         /// <summary>
         /// o
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         O = Sdl.SDLK_o,
         /// <summary>
         /// p
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         P = Sdl.SDLK_p,
         /// <summary>
         /// q
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         Q = Sdl.SDLK_q,
         /// <summary>
         /// r
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         R = Sdl.SDLK_r,
         /// <summary>
         /// s
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         S = Sdl.SDLK_s,
         /// <summary>
         /// t
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         T = Sdl.SDLK_t,
         /// <summary>
         /// u
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         U = Sdl.SDLK_u,
         /// <summary>
         /// v
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         V = Sdl.SDLK_v,
         /// <summary>
         /// w
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         W = Sdl.SDLK_w,
         /// <summary>
         /// x
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         X = Sdl.SDLK_x,
         /// <summary>
         /// y
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         Y = Sdl.SDLK_y,
         /// <summary>
         /// z
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         Z = Sdl.SDLK_z,
         /// <summary>
         /// delete. '^?'
@@ -897,6 +924,7 @@ namespace SdlDotNet.Input
         /// <summary>
         /// numlock
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         NumLock = Sdl.SDLK_NUMLOCK,
         /// <summary>
         /// capslock
@@ -1046,6 +1074,7 @@ namespace SdlDotNet.Input
         /// <summary>
         /// Numlock is down
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         NumLock = Sdl.KMOD_NUM,
         /// <summary>
         /// Capslock is down
@@ -1109,16 +1138,21 @@ namespace SdlDotNet.Input
     /// </summary>
     public static class Keyboard
     {
-        #region Constructor
+        #region Private fields
 
-        static Keyboard()
-        {
-            Video.Initialize();
-        }
+        static bool isInitialized = Video.Initialize();
 
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Keyboard.isInitialized; }
+        }
 
         /// <summary>
         /// Enable keyboard autorepeat

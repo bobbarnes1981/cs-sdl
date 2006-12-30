@@ -27,8 +27,11 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNetExamples.RedBook
@@ -59,8 +62,6 @@ namespace SdlDotNetExamples.RedBook
 		//Height of screen
 		int height = 200;
 		
-		
-
 		/// <summary>
 		/// Lesson title
 		/// </summary>
@@ -77,7 +78,10 @@ namespace SdlDotNetExamples.RedBook
 		#endregion Private Constants
 
 		#region Private Fields
-		private static int[ , ] board = new int[3, 3];
+
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static int[,] board = new int[3, 3];
+
 		#endregion Private Fields
 
 		#region Constructors

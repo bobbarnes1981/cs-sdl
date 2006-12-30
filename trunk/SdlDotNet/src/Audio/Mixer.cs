@@ -21,6 +21,7 @@
 using System;
 using System.Threading;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet;
 using SdlDotNet.Core;
@@ -126,6 +127,7 @@ namespace SdlDotNet.Audio
     /// CD Track Type
     /// </summary>
     /// <remarks></remarks>
+    [SuppressMessage("Microsoft.Design", "CA1027:MarkEnumsWithFlags", Justification="Not flags")]
     public enum CDTrackType
     {
         /// <summary>
@@ -246,6 +248,7 @@ namespace SdlDotNet.Audio
         /// <summary>
         /// Ogg file
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         Ogg = SdlMixer.MUS_OGG,
         /// <summary>
         /// mp3 file
@@ -273,15 +276,7 @@ namespace SdlDotNet.Audio
         const int DEFAULT_CHUNK_SIZE = 1024;
         const int DEFAULT_NUMBER_OF_CHANNELS = 8;
         static private byte distance;
-
-        #endregion
-
-        #region Constructors
-
-        static Mixer()
-        {
-            Initialize();
-        }
+        static bool isInitialized = Initialize();
 
         #endregion
 
@@ -307,6 +302,14 @@ namespace SdlDotNet.Audio
         #region Public methods
 
         /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Mixer.isInitialized; }
+        }
+
+        /// <summary>
         /// Closes and destroys this object
         /// </summary>
         public static void Close()
@@ -317,7 +320,7 @@ namespace SdlDotNet.Audio
         /// <summary>
         /// Start Mixer subsystem
         /// </summary>
-        public static void Initialize()
+        public static bool Initialize()
         {
             if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO))
                 == (int)SdlFlag.FalseValue)
@@ -326,8 +329,13 @@ namespace SdlDotNet.Audio
                 {
                     throw SdlException.Generate();
                 }
+                Mixer.PrivateOpen();
+                return false;
             }
-            Mixer.PrivateOpen();
+            else
+            {
+                return true;
+            }
         }
 
         //		/// <summary>

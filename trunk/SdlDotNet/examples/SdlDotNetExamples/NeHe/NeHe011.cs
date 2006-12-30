@@ -28,6 +28,7 @@ SOFTWARE.
 using System;
 using System.IO;
 using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using Tao.OpenGl;
@@ -37,6 +38,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 11: Flag Effect (Waving Texture)
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe011 : NeHe006
     {
         #region Fields

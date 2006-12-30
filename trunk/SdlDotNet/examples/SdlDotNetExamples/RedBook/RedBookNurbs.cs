@@ -27,8 +27,11 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNetExamples.RedBook
@@ -50,7 +53,8 @@ namespace SdlDotNetExamples.RedBook
 	///			http://cs-sdl.sourceforge.net
 	///     </para>
 	/// </remarks>
-	public class RedBookNurbs
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
+    public class RedBookNurbs
 	{
 		//Width of screen
 		int width = 500;
@@ -75,7 +79,8 @@ namespace SdlDotNetExamples.RedBook
 											4.0f,  5.0f,  6.0f, 7.0f, 8.0f, 9.0f, 9.0f, 9.0f
 										};
 		private  float[] tknots = {1.0f, 1.0f, 1.0f, 2.0f, 2.0f, 2.0f};
-		private  float[/*S_NUMPOINTS*/, /*T_NUMPOINTS*/, /*4*/] controlPoints = {
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private float[/*S_NUMPOINTS*/, /*T_NUMPOINTS*/, /*4*/] controlPoints = {
 			{
 				{4.0f, 2.0f, 2.0f, 1.0f},
 				{4.0f, 1.6f, 2.5f, 1.0f},

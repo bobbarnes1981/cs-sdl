@@ -20,6 +20,7 @@
 
 using System;
 using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using Tao.Sdl;
@@ -95,6 +96,7 @@ namespace SdlDotNet.Input
         /// <summary>
         /// X position of mouse at time of event
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public short X
         {
             get
@@ -106,6 +108,7 @@ namespace SdlDotNet.Input
         /// <summary>
         /// Y position of mouse at time of event 
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public short Y
         {
             get

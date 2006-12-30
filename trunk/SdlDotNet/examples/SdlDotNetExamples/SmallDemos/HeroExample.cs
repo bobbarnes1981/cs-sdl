@@ -80,20 +80,28 @@ namespace SdlDotNetExamples.SmallDemos
             Surface image = new Surface(file);
 
             // Create the animation frames
-            SurfaceCollection walkUp =
-                new SurfaceCollection(image, new Size(24, 32), 0);
-            SurfaceCollection walkRight =
-                new SurfaceCollection(image, new Size(24, 32), 1);
-            SurfaceCollection walkDown =
-                new SurfaceCollection(image, new Size(24, 32), 2);
-            SurfaceCollection walkLeft =
-                new SurfaceCollection(image, new Size(24, 32), 3);
+            SurfaceCollection walkUp = new SurfaceCollection();
+            walkUp.Add(image, new Size(24, 32), 0);
+            SurfaceCollection walkRight = new SurfaceCollection();
+            walkRight.Add(image, new Size(24, 32), 1);
+            SurfaceCollection walkDown = new SurfaceCollection();
+            walkDown.Add(image, new Size(24, 32), 2);
+            SurfaceCollection walkLeft = new SurfaceCollection();
+            walkLeft.Add(image, new Size(24, 32), 3);
 
             // Add the animations to the hero
-            hero.Animations.Add("WalkUp", new AnimationCollection(walkUp, 35));
-            hero.Animations.Add("WalkRight", new AnimationCollection(walkRight, 35));
-            hero.Animations.Add("WalkDown", new AnimationCollection(walkDown, 35));
-            hero.Animations.Add("WalkLeft", new AnimationCollection(walkLeft, 35));
+            AnimationCollection animWalkUp = new AnimationCollection();
+            animWalkUp.Add(walkUp, 35);
+            hero.Animations.Add("WalkUp", animWalkUp);
+            AnimationCollection animWalkRight = new AnimationCollection();
+            animWalkRight.Add(walkRight, 35);
+            hero.Animations.Add("WalkRight", animWalkRight);
+            AnimationCollection animWalkDown = new AnimationCollection();
+            animWalkDown.Add(walkDown, 35);
+            hero.Animations.Add("WalkDown", animWalkDown);
+            AnimationCollection animWalkLeft = new AnimationCollection();
+            animWalkLeft.Add(walkLeft, 35);
+            hero.Animations.Add("WalkLeft", animWalkLeft);
 
             // Change the transparent color of the sprite
             hero.TransparentColor = Color.Magenta;

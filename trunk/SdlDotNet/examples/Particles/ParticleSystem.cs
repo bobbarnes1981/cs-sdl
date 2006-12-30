@@ -18,6 +18,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Particles.Particle;
@@ -38,6 +39,7 @@ namespace SdlDotNet.Particles
     /// </code>
     /// </example>
     /// <remarks>Every tick you should call the Update method.  Every time you paint, you should call the Render function.</remarks>
+    [SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Justification = "Not flags")]
     public class ParticleSystem
     {
         private ParticleManipulatorCollection m_Manipulators;
@@ -82,7 +84,8 @@ namespace SdlDotNet.Particles
         public ParticleSystem(ParticleCollection particles)
         {
             m_Manipulators = new ParticleManipulatorCollection();
-            m_Particles = new ParticleCollection(particles);
+            m_Particles = new ParticleCollection();
+            m_Particles.Add(particles);
         }
 
         /// <summary>
@@ -96,7 +99,8 @@ namespace SdlDotNet.Particles
                 throw new ArgumentNullException("system");
             }
             m_Manipulators = new ParticleManipulatorCollection(system.Manipulators);
-            m_Particles = new ParticleCollection(system);
+            m_Particles = new ParticleCollection();
+            m_Particles.Add(system);
         }
 
         /// <summary>
@@ -107,7 +111,8 @@ namespace SdlDotNet.Particles
         public ParticleSystem(ParticleManipulatorCollection manipulators, ParticleCollection particles)
         {
             m_Manipulators = manipulators;
-            m_Particles = new ParticleCollection(particles);
+            m_Particles = new ParticleCollection();
+            m_Particles.Add(particles);
         }
 
         /// <summary>

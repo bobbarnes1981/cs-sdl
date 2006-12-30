@@ -21,6 +21,7 @@
 using System;
 using System.Globalization;
 using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Graphics;
 
@@ -51,6 +52,7 @@ namespace SdlDotNetExamples.Triad
         /// <summary>
         /// 
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public int X
         {
             get
@@ -99,6 +101,7 @@ namespace SdlDotNetExamples.Triad
         /// <summary>
         /// 
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public int Y
         {
             get

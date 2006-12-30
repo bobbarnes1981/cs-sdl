@@ -40,35 +40,35 @@ namespace SdlDotNet.Particles.Particle
         {
         }
 
-        /// <summary>
-        /// Creates a new ParticleCollection with one particle element.
-        /// </summary>
-        /// <param name="particle">The particle to start off the collection.</param>
-        public ParticleCollection(BaseParticle particle)
-        {
-            Add(particle);
-        }
+        ///// <summary>
+        ///// Creates a new ParticleCollection with one particle element.
+        ///// </summary>
+        ///// <param name="particle">The particle to start off the collection.</param>
+        //public ParticleCollection(BaseParticle particle)
+        //{
+        //    this.Add(particle);
+        //}
 
-        /// <summary>
-        /// Creates a new ParticleCollection from an already existing collection of particles.
-        /// </summary>
-        /// <param name="collection">The collection to add.</param>
-        public ParticleCollection(ParticleCollection collection)
-        {
-            foreach (BaseParticle b in collection)
-            {
-                Add(b);
-            }
-        }
+        ///// <summary>
+        ///// Creates a new ParticleCollection from an already existing collection of particles.
+        ///// </summary>
+        ///// <param name="collection">The collection to add.</param>
+        //public ParticleCollection(ParticleCollection collection)
+        //{
+        //    foreach (BaseParticle b in collection)
+        //    {
+        //        Add(b);
+        //    }
+        //}
 
-        /// <summary>
-        /// Creates a particle collection from the particles in the provided system.
-        /// </summary>
-        /// <param name="system">The system containing all the particles to add.</param>
-        public ParticleCollection(ParticleSystem system)
-        {
-            Add(system);
-        }
+        ///// <summary>
+        ///// Creates a particle collection from the particles in the provided system.
+        ///// </summary>
+        ///// <param name="system">The system containing all the particles to add.</param>
+        //public ParticleCollection(ParticleSystem system)
+        //{
+        //    Add(system);
+        //}
 
         /// <summary>
         /// Adds a particle emitter to the collection.
@@ -113,6 +113,22 @@ namespace SdlDotNet.Particles.Particle
                 throw new ArgumentNullException("system");
             }
             foreach (BaseParticle b in system.Particles)
+            {
+                Add(b);
+            }
+        }
+
+        /// <summary>
+        /// Adds a collection of particles from a particle collection.
+        /// </summary>
+        /// <param name="collection">The collection containing all the particles.</param>
+        public void Add(ParticleCollection collection)
+        {
+            if (collection == null)
+            {
+                throw new ArgumentNullException("collection");
+            }
+            foreach (BaseParticle b in collection)
             {
                 Add(b);
             }

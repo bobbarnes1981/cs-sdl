@@ -22,6 +22,7 @@ using System;
 using System.Drawing;
 using System.Collections;
 using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet;
 using SdlDotNet.Core;
@@ -423,6 +424,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Gets and sets the sprite's x location.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public int X
         {
             get
@@ -438,6 +440,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Gets and sets the sprite's y location.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public int Y
         {
             get
@@ -453,6 +456,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Gets and sets the sprite's z coordinate.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public int Z
         {
             get

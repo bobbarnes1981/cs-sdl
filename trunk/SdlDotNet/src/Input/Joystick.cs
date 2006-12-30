@@ -114,15 +114,11 @@ namespace SdlDotNet.Input
         private bool disposed;
         private const float JOYSTICK_ADJUSTMENT = 32768;
         private const float JOYSTICK_SCALE = 65535;
+        static bool isInitialized = Joysticks.Initialize();
 
         #endregion
 
         #region Contructors
-
-        static Joystick()
-        {
-            Joysticks.Initialize();
-        }
 
         /// <summary>
         /// open joystick at index number
@@ -196,6 +192,14 @@ namespace SdlDotNet.Input
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Joystick.isInitialized; }
+        }
 
         /// <summary>
         /// Gets the 0-based numeric index of this joystick

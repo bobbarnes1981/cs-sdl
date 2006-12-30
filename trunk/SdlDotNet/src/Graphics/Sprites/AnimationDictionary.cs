@@ -84,8 +84,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="info"></param>
         /// <param name="context"></param>
         protected AnimationDictionary(
-           SerializationInfo info, 
-           StreamingContext context)
+           SerializationInfo info,
+           StreamingContext context) : base(info, context)
         {
         }
 

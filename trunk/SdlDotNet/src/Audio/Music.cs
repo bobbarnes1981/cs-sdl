@@ -54,21 +54,21 @@ namespace SdlDotNet.Audio
     {
         #region Private fields
 
-        private string m_FileName = "";
-        private Music m_QueuedMusic;
-
-        #endregion
-
-        #region Constructor
-
-        static Music()
-        {
-            Mixer.Initialize();
-        }
+        string m_FileName = "";
+        Music m_QueuedMusic;
+        static bool isInitialized = Mixer.Initialize();
 
         #endregion
 
         #region Public methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Music.isInitialized; }
+        }
 
         /// <summary>
         /// Gets the filename of the music sample.

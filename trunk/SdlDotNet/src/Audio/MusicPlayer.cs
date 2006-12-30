@@ -53,20 +53,12 @@ namespace SdlDotNet.Audio
     {
         #region Private fields
 
-        private static Music m_CurrentMusic;
-        private static SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
-        private static Music m_QueuedMusic;
+        static Music m_CurrentMusic;
+        static SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
+        static Music m_QueuedMusic;
+        static bool isInitialized = Mixer.Initialize();
 
         #endregion Private fields
-
-        #region Constructors
-
-        static MusicPlayer()
-        {
-            Mixer.Initialize();
-        }
-
-        #endregion Constructors
 
         #region Private Methods
 
@@ -98,6 +90,14 @@ namespace SdlDotNet.Audio
         #endregion Private Methods
 
         #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return MusicPlayer.isInitialized; }
+        }
 
         /// <summary>
         /// Gets and sets the currently loaded music sample.
