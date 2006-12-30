@@ -87,16 +87,22 @@ namespace SdlDotNet.Input
     /// </summary>
     public static class Mouse
     {
-        #region Constructors
+        #region Private Fields
 
-        static Mouse()
-        {
-            Video.Initialize();
-        }
+        static bool isInitialized = Video.Initialize();
 
         #endregion
 
         #region Public Methods
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Mouse.isInitialized; }
+        }
 
         /// <summary> 
         /// Gets and sets whether or not the mouse cursor is visible. 

@@ -32,6 +32,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Input;
@@ -42,6 +43,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 26: Clipping &amp; Reflections Using The Stencil Buffer
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe026 : NeHe025
     {
         #region Fields

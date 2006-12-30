@@ -26,6 +26,7 @@ SOFTWARE.
 #endregion License
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 using Tao.OpenGl;
 using SdlDotNet.Core;
@@ -35,6 +36,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 02: Your First Polygon
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe002 : NeHe001
     {
         #region Fields

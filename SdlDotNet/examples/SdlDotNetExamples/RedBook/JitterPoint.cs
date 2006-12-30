@@ -65,6 +65,7 @@ SOFTWARE.
 #endregion Original Credits / License
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SdlDotNetExamples.RedBook
 {
@@ -77,7 +78,8 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// 
 		/// </summary>
-		public float X
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
+        public float X
 		{
 			get
 			{
@@ -92,7 +94,8 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// 
 		/// </summary>
-		public float Y
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
+        public float Y
 		{
 			get
 			{

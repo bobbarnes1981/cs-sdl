@@ -45,23 +45,11 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Constructor to make a new surface collection based off of an existing one.
-        /// </summary>
-        /// <param name="surfaces">The surface collection to copy.</param>
-        public SurfaceCollection(SurfaceCollection surfaces)
-        {
-            foreach (Surface s in surfaces)
-            {
-                this.Add(s);
-            }
-        }
-
-        /// <summary>
         /// Load in multiple files as surfaces
         /// </summary>
         /// <param name="baseName">Base name of files</param>
         /// <param name="extension">file extension of images</param>
-        public SurfaceCollection(string baseName, string extension)
+        public virtual void Add(string baseName, string extension)
         {
             // Save the fields
             //this.filename = baseName + "-*" + extension;
@@ -102,10 +90,9 @@ namespace SdlDotNet.Graphics
         /// <param name="tileSize">
         /// The size of each tile.
         /// </param>
-        public SurfaceCollection(string fileName, Size tileSize)
-            :
-            this(new Surface(fileName), tileSize)
+        public virtual void Add(string fileName, Size tileSize)
         {
+            this.Add(new Surface(fileName), tileSize);
         }
 
         /// <summary>
@@ -120,10 +107,9 @@ namespace SdlDotNet.Graphics
         /// <param name="rowNumber">
         /// The row number of which to load the surface collection.
         /// </param>
-        public SurfaceCollection(string fileName, Size tileSize, int rowNumber)
-            :
-            this(new Surface(fileName), tileSize, rowNumber)
+        public virtual void Add(string fileName, Size tileSize, int rowNumber)
         {
+            this.Add(new Surface(fileName), tileSize, rowNumber);
         }
 
         /// <summary> 
@@ -135,7 +121,7 @@ namespace SdlDotNet.Graphics
         /// <param name="tileSize">
         /// The size of each tile.
         /// </param> 
-        public SurfaceCollection(
+        public virtual void Add(
             Surface fullImage,
             Size tileSize)
         {
@@ -178,7 +164,7 @@ namespace SdlDotNet.Graphics
         /// <param name="rowNumber">
         /// The row to be loaded.
         /// </param>
-        public SurfaceCollection(Surface fullImage, Size tileSize, int rowNumber)
+        public virtual void Add(Surface fullImage, Size tileSize, int rowNumber)
         {
             if (fullImage == null)
             {
@@ -287,6 +273,18 @@ namespace SdlDotNet.Graphics
                 {
                     surface.AlphaBlending = value;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Constructor to make a new surface collection based off of an existing one.
+        /// </summary>
+        /// <param name="surfaces">The surface collection to copy.</param>
+        public virtual void Add(SurfaceCollection surfaces)
+        {
+            foreach (Surface s in surfaces)
+            {
+                base.Add(s);
             }
         }
 

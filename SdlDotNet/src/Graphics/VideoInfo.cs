@@ -24,6 +24,7 @@ using System.Runtime.InteropServices;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using System.Diagnostics.CodeAnalysis;
 
 using Tao.Sdl;
 using SdlDotNet.Core;
@@ -256,6 +257,7 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Checks if hardware blits are available
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static bool HasHardwareBlits
         {
             get
@@ -267,6 +269,7 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Checks if hardware colorkey blits are accelerated
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static bool HasHardwareColorKeyBlits
         {
             get
@@ -278,6 +281,7 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Checks if hardware alpha blits are accelerated
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static bool HasHardwareAlphaBlits
         {
             get
@@ -289,6 +293,7 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Checks if software to hardware blits are accelerated
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static bool HasSoftwareBlits
         {
             get
@@ -300,6 +305,7 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Checks if software to hardware colorkey blits are accelerated
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static bool HasSoftwareColorKeyBlits
         {
             get
@@ -311,6 +317,7 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Software to hardware alpha blits are accelerated
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public static bool HasSoftwareAlphaBlits
         {
             get

@@ -27,8 +27,11 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNetExamples.RedBook
@@ -59,8 +62,6 @@ namespace SdlDotNetExamples.RedBook
 		int width = 500;
 		//Height of screen
 		int height = 500;
-		
-		
 
 		/// <summary>
 		/// Lesson title
@@ -74,7 +75,8 @@ namespace SdlDotNetExamples.RedBook
 		}
 
 		#region Private Fields
-		private static float[ , , ] controlPoints = new float[4, 4, 3];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static float[, ,] controlPoints = new float[4, 4, 3];
 		private static bool showPoints;
 		private static Glu.GLUnurbs nurb;
 		#endregion Private Fields

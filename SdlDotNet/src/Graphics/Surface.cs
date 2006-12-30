@@ -25,6 +25,7 @@ using System.Runtime.InteropServices;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 
 using Tao.Sdl;
 using SdlDotNet.Core;
@@ -854,6 +855,7 @@ namespace SdlDotNet.Graphics
         /// <param name="destinationPosition">
         /// The rectangle coordinates on this surface to copy to
         /// </param>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public Rectangle Blit(Surface sourceSurface, System.Drawing.Point destinationPosition)
         {
             if (sourceSurface == null)
@@ -875,6 +877,7 @@ namespace SdlDotNet.Graphics
         /// <param name="destinationRectangle">
         /// The rectangle coordinates on this surface to copy to
         /// </param>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public Rectangle Blit(Surface sourceSurface, System.Drawing.Rectangle destinationRectangle)
         {
             if (sourceSurface == null)
@@ -892,6 +895,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="sourceSurface">The source surface to blit onto the current one.</param>
         /// <returns>A rectangle describing the location of the updated surface.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public Rectangle Blit(Surface sourceSurface)
         {
             return this.Blit(
@@ -904,6 +908,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="sprite">The sprite to blit.</param>
         /// <returns>A rectangle describing the location of the updated surface.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public Rectangle Blit(Sprite sprite)
         {
             if (sprite == null)
@@ -926,6 +931,7 @@ namespace SdlDotNet.Graphics
         /// <param name="sprite">The sprite to blit.</param>
         /// <param name="destinationPosition">The location where to blit the surface.</param>
         /// <returns>A rectangle describing the location of the updated surface.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public Rectangle Blit(Sprite sprite, Point destinationPosition)
         {
             if (sprite == null)
@@ -948,6 +954,7 @@ namespace SdlDotNet.Graphics
         /// <param name="sprite">The sprite to blit.</param>
         /// <param name="destinationRectangle">The location of the sprite on the destination.</param>
         /// <returns>A rectangle describing the location of the updated surface.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public Rectangle Blit(Sprite sprite, Rectangle destinationRectangle)
         {
             if (sprite == null)
@@ -971,6 +978,7 @@ namespace SdlDotNet.Graphics
         /// <returns>Collection of Rectangles acutally blit to since 
         /// ere have may been some clipping.
         /// </returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public Collection<Rectangle> Blit(SpriteDictionary spriteDictionary)
         {
             if (spriteDictionary == null)
@@ -990,6 +998,7 @@ namespace SdlDotNet.Graphics
         /// <param name="sourceRectangle">Source rectangel on source Surface</param>
         /// <returns>Actual blitted rectangle since there may have been clipping
         /// </returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public Rectangle Blit(
             BaseSdlResource sourceSurface,
             System.Drawing.Rectangle destinationRectangle,
@@ -1025,6 +1034,7 @@ namespace SdlDotNet.Graphics
         /// The coordinates on this surface to copy to
         /// </param>
         /// <returns>Destination Rectangle after any necessary clipping</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public Rectangle Blit(
             BaseSdlResource sourceSurface,
             System.Drawing.Point destinationPosition,

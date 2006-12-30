@@ -27,6 +27,7 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
@@ -62,7 +63,8 @@ namespace SdlDotNetExamples.RedBook
 		//Height of screen
 		int height = 500;
 
-		private static float[/*4*/ , /*4*/ , /*3*/] controlPoints = {
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static float[/*4*/ , /*4*/ , /*3*/] controlPoints = {
 			{
 				{-1.5f, -1.5f,  4.0f},
 				{-0.5f, -1.5f,  2.0f},

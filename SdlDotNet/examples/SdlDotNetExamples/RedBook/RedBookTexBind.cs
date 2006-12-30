@@ -27,8 +27,11 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNetExamples.RedBook
@@ -58,8 +61,6 @@ namespace SdlDotNetExamples.RedBook
 		//Height of screen
 		int height = 250;
 		
-		
-
 		/// <summary>
 		/// Lesson title
 		/// </summary>
@@ -77,8 +78,10 @@ namespace SdlDotNetExamples.RedBook
 		#endregion Private Constants
 
 		#region Private Fields
-		private static byte[ , , ] checkImage = new byte[CHECKHEIGHT, CHECKWIDTH, 4];
-		private static byte[ , , ] otherImage = new byte[CHECKHEIGHT, CHECKWIDTH, 4];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] checkImage = new byte[CHECKHEIGHT, CHECKWIDTH, 4];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] otherImage = new byte[CHECKHEIGHT, CHECKWIDTH, 4];
 		private static int[] textures = new int[2];
 		#endregion Private Fields
 

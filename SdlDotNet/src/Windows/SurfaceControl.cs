@@ -27,6 +27,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
@@ -70,6 +71,7 @@ namespace SdlDotNet.Windows
         /// Copies surface to this surface
         /// </summary>
         /// <param name="surface">surface to copy onto control</param>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public void Blit(Surface surface)
         {
             if (surface == null)
@@ -92,6 +94,7 @@ namespace SdlDotNet.Windows
         /// </summary>
         /// <param name="sourceSurface"></param>
         /// <param name="destinationPosition"></param>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public void Blit(Surface sourceSurface, System.Drawing.Point destinationPosition)
         {
             Surface destinationSurface = new Surface((Bitmap)this.Image);

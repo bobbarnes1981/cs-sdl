@@ -27,8 +27,11 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 
 namespace SdlDotNetExamples.RedBook
@@ -67,8 +70,10 @@ namespace SdlDotNetExamples.RedBook
 		private const int FACES = 6;
 		private static bool polySmooth = true;
 
-		private static float[/*8*/, /*3*/] v = new float [8, 3];
-		private static float[/*8*/, /*4*/] c = {
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static float[/*8*/, /*3*/] v = new float[8, 3];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static float[/*8*/, /*4*/] c = {
 			{0.0f, 0.0f, 0.0f, 1.0f},
 			{1.0f, 0.0f, 0.0f, 1.0f},
 			{0.0f, 1.0f, 0.0f, 1.0f},
@@ -80,7 +85,8 @@ namespace SdlDotNetExamples.RedBook
 											   };
 
 		// indices of front, top, left, bottom, right, back faces
-		private static byte[/*6*/, /*4*/] indices = {
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[/*6*/, /*4*/] indices = {
 			{4, 5, 6, 7},
 			{2, 3, 7, 6},
 			{0, 4, 7, 3},

@@ -30,6 +30,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
@@ -41,6 +42,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 15: Texture Mapped Outline Fonts
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe015 : NeHe014
     {
         #region Fields

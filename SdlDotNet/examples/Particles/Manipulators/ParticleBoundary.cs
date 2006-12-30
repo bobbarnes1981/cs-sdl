@@ -19,6 +19,7 @@
 
 using System;
 using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Particles.Particle;
@@ -116,6 +117,7 @@ namespace SdlDotNet.Particles.Manipulators
         /// Gets and set the x-coordinate 
         /// of the upper-left corner of the rectangle.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public float X
         {
             get
@@ -132,6 +134,7 @@ namespace SdlDotNet.Particles.Manipulators
         /// Gets and sets the y-coordinate of 
         /// the upper-left corner of the rectangle.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public float Y
         {
             get

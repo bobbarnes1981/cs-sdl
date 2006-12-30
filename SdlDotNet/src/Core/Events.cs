@@ -267,8 +267,17 @@ namespace SdlDotNet.Core
         private const int QUERY_EVENTS_MAX = 254;
         static readonly Events instance = new Events();
         static ResourceManager stringManager;
+        static bool isInitialized = Video.Initialize();
 
         #endregion
+
+        #region Constructors
+
+        Events()
+        {
+        }
+
+        #endregion Constructors
 
         #region Public Events
 
@@ -366,20 +375,15 @@ namespace SdlDotNet.Core
 
         #endregion
 
-        #region Constructors
-
-        static Events()
-        {
-            // This is very strange. 
-            // The Event queue will not work unless 
-            // the Video has been initialized.
-            // This fix was for using PushEvent.
-            Video.Initialize();
-        }
-
-        #endregion
-
         #region Public Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return Events.isInitialized; }
+        }
 
         /// <summary>
         /// 

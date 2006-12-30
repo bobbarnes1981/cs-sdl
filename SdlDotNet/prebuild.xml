@@ -134,7 +134,7 @@
 		<Match path="." pattern="*.cs" recurse="true"/>
 	    </Files>
 	</Project>
-	<Project name="SdlDotNet.Gtk" path="examples/Gtk" language="C#" type="Library" assemblyName="SdlDotNet.Gtk" rootNamespace="SdlDotNet.Gtk" designerFolder="Properties">
+	<Project name="SdlDotNet.GtkSharp" path="examples/GtkSharp" language="C#" type="Library" assemblyName="SdlDotNet.GtkSharp" rootNamespace="SdlDotNet.GtkSharp" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
@@ -142,7 +142,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
 		    <DebugInformation>true</DebugInformation>
-		    <XmlDocFile>SdlDotNet.Gtk.xml</XmlDocFile>
+		    <XmlDocFile>SdlDotNet.GtkSharp.xml</XmlDocFile>
 		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>4</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>
@@ -155,7 +155,7 @@
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
 		    <DebugInformation>false</DebugInformation>
-		    <XmlDocFile>SdlDotNet.Gtk.xml</XmlDocFile>
+		    <XmlDocFile>SdlDotNet.GtkSharp.xml</XmlDocFile>
 		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
 		    <WarningLevel>1</WarningLevel>
 		    <SuppressWarnings>1595</SuppressWarnings>

@@ -27,8 +27,11 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
-using SdlDotNet.Core;using SdlDotNet.Graphics;using SdlDotNet.Input;
+using SdlDotNet.Core;
+using SdlDotNet.Graphics;
+using SdlDotNet.Input;
 using Tao.OpenGl;
 using Tao.FreeGlut;
 
@@ -62,12 +65,18 @@ namespace SdlDotNetExamples.RedBook
 		//Height of screen
 		int height = 500;
 
-		private static byte[ , , ] mipmapImage32 = new byte[32, 32, 4];
-		private static byte[ , , ] mipmapImage16 = new byte[16, 16, 4];
-		private static byte[ , , ] mipmapImage8 = new byte[8, 8, 4];
-		private static byte[ , , ] mipmapImage4 = new byte[4, 4, 4];
-		private static byte[ , , ] mipmapImage2 = new byte[2, 2, 4];
-		private static byte[ , , ] mipmapImage1 = new byte[1, 1, 4];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] mipmapImage32 = new byte[32, 32, 4];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] mipmapImage16 = new byte[16, 16, 4];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] mipmapImage8 = new byte[8, 8, 4];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] mipmapImage4 = new byte[4, 4, 4];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] mipmapImage2 = new byte[2, 2, 4];
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
+        private static byte[, ,] mipmapImage1 = new byte[1, 1, 4];
 		private static int[] texture = new int[1];
 
 		/// <summary>

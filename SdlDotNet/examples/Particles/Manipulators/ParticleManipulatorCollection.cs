@@ -35,21 +35,21 @@ namespace SdlDotNet.Particles.Manipulators
         public ParticleManipulatorCollection()
         {
         }
-        /// <summary>
-        /// Create a particle manipulator collection with one element in it.
-        /// </summary>
-        /// <param name="manipulator">The first manipulator in the collection.</param>
-        public ParticleManipulatorCollection(IParticleManipulator manipulator)
-        {
-            Add(manipulator);
-        }
+        ///// <summary>
+        ///// Create a particle manipulator collection with one element in it.
+        ///// </summary>
+        ///// <param name="manipulator">The first manipulator in the collection.</param>
+        //public ParticleManipulatorCollection(IParticleManipulator manipulator)
+        //{
+        //    this.Add(manipulator);
+        //}
         /// <summary>
         /// Create a particle manipulator based off an already existing collection.
         /// </summary>
         /// <param name="manipulators">The manipulators to add to the collection.</param>
         public ParticleManipulatorCollection(ParticleManipulatorCollection manipulators)
         {
-            Add(manipulators);
+            this.Add(manipulators);
         }
 
         /// <summary>

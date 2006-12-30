@@ -19,6 +19,7 @@
 
 using System;
 using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
@@ -99,6 +100,7 @@ namespace SdlDotNet.Particles.Particle
         /// <summary>
         /// The X coordinate of the particle.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public float X
         {
             get
@@ -114,6 +116,7 @@ namespace SdlDotNet.Particles.Particle
         /// <summary>
         /// The Y coordinate of the particle.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public float Y
         {
             get

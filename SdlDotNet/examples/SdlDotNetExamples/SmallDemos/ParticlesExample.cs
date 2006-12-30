@@ -95,8 +95,10 @@ namespace SdlDotNetExamples.SmallDemos
             }
 
             // Make the second particle (an animated sprite)
-            AnimationCollection anim =
-                new AnimationCollection(new SurfaceCollection(filepath + data_directory + "marble1.png", new Size(50, 50)), 1);
+            AnimationCollection anim = new AnimationCollection();
+            SurfaceCollection surfaces = new SurfaceCollection();
+            surfaces.Add(filepath + data_directory + "marble1.png", new Size(50, 50));
+            anim.Add(surfaces, 1);
             AnimatedSprite marble = new AnimatedSprite(anim);
             marble.Animate = true;
             ParticleSprite second = new ParticleSprite(marble, 200, 200, new Vector(-7, -9, 0), 500);

@@ -27,6 +27,7 @@ SOFTWARE.
 
 using System;
 using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Input;
@@ -38,6 +39,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 01: Setting Up An OpenGL Window
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe001
     {
         #region Fields

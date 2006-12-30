@@ -25,6 +25,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.Resources;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -88,4 +89,5 @@ using System.IO;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.SkipVerification)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, Flags = SecurityPermissionFlag.UnmanagedCode)]
 [assembly: AssemblyDelaySign(false)]
-
+[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Justification = "Few type is fine")]
+[module: SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Scope = "namespace", Target = "SdlDotNet.OpenGl")]

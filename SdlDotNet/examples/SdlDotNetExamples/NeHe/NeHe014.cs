@@ -28,6 +28,7 @@ SOFTWARE.
 using System;
 using System.Globalization;
 using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using Tao.OpenGl;
@@ -38,6 +39,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 14: Outline Fonts
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe014 : NeHe013
     {
         #region Fields

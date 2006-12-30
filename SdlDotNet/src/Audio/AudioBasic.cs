@@ -45,7 +45,7 @@ namespace SdlDotNet.Audio
         static bool audioWasNotAlreadyInitialized;
         static bool audioOpen;
 
-        static AudioCallback audioCallback;
+        //static AudioCallback audioCallback;
 
         static AudioInfo audioInfo;
 
@@ -151,7 +151,7 @@ namespace SdlDotNet.Audio
                 Marshal.FreeHGlobal(pSpec);
             }
 
-            audioCallback = callback;
+            //audioCallback = callback;
             audioOpen = true;
         }
 
@@ -253,7 +253,7 @@ namespace SdlDotNet.Audio
             audioStream.Samples = audioInfo.Samples;
 
             stream = audioStream;
-            audioCallback = callback;
+           // audioCallback = callback;
             audioOpen = true;
 
             return stream;
@@ -268,7 +268,7 @@ namespace SdlDotNet.Audio
 
             Sdl.SDL_CloseAudio();
 
-            audioCallback = null;
+            //audioCallback = null;
             audioOpen = false;
             audioInfo = null;
             audioLocked = false;

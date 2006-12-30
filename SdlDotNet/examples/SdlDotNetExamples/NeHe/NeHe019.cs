@@ -29,6 +29,7 @@ using System;
 using System.IO;
 using System.Drawing;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
 using SdlDotNet.Input;
@@ -39,6 +40,7 @@ namespace SdlDotNetExamples.NeHe
     /// <summary>
     /// Lesson 19: Particle Engine Using Triangle Strips
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class NeHe019 : NeHe018
     {
         #region Fields

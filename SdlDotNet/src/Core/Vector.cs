@@ -25,6 +25,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SdlDotNet.Core
 {
@@ -608,6 +609,7 @@ namespace SdlDotNet.Core
         /// <summary>
         /// Contains the x coordinate of the vector.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public float X
         {
             get
@@ -623,6 +625,7 @@ namespace SdlDotNet.Core
         /// <summary>
         /// Contains the y coordinate of the vector.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public float Y
         {
             get
@@ -638,6 +641,7 @@ namespace SdlDotNet.Core
         /// <summary>
         /// Contains the y coordinate of the vector.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
         public float Z
         {
             get

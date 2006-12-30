@@ -23,6 +23,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Audio;
 using SdlDotNet.Graphics;
@@ -69,6 +70,7 @@ namespace SdlDotNetExamples.Triad
         int reductionCount;
         int lastTriadMove;
         int timeNow;
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
         Block[,] grid;
         BlockGridState currentState;
         bool rapidDropTriad;
