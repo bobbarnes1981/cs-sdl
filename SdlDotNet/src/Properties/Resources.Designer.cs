@@ -124,6 +124,15 @@ namespace SdlDotNet.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Drive.
+        /// </summary>
+        internal static string SelectDrive {
+            get {
+                return ResourceManager.GetString("SelectDrive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown Bytes Per Pixel.
         /// </summary>
         internal static string UnknownBytesPerPixel {

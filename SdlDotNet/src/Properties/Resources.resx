@@ -138,6 +138,9 @@
   <data name="OpenAudioNotInit" xml:space="preserve">
     <value>Call OpenAudio before using function.</value>
   </data>
+  <data name="SelectDrive" xml:space="preserve">
+    <value>Select Drive</value>
+  </data>
   <data name="UnknownBytesPerPixel" xml:space="preserve">
     <value>Unknown Bytes Per Pixel</value>
   </data>
