@@ -70,6 +70,8 @@ namespace SdlDotNetExamples.CDPlayer
             //
             // Required for Windows Form Designer support
             //
+            stringManager =
+                new ResourceManager("SdlDotNetExamples.CDPlayer.Properties.Resources", Assembly.GetExecutingAssembly());
             InitializeComponent();
             this.KeyPreview = true;
             surf =
