@@ -270,6 +270,11 @@ namespace SdlDotNetExamples.SimpleGame
                         this.entitySprite.Dispose();
                         this.entitySprite = null;
                     }
+                    if (this.sound != null)
+                    {
+                        this.sound.Dispose();
+                        this.sound = null;
+                    }
                 }
                 this.disposed = true;
             }
