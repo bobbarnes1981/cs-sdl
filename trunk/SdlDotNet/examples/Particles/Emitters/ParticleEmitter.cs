@@ -264,9 +264,19 @@ namespace SdlDotNet.Particles.Emitters
             }
         }
 
+        /// <summary>
+        /// Sets the particle collection where this emitter is to send its particles.
+        /// </summary>
+        /// <remarks>FXCop does not setting the collection directly in the property</remarks>
+        /// <param name="particleCollection"></param>
+        public void SetParticleTarget(ParticleCollection particleCollection)
+        {
+            m_Target = particleCollection;
+        }
+
 
         /// <summary>
-        /// Gets and sets where the particle collection where this emitter is to send its particles.
+        /// Gets the particle collection where this emitter is to send its particles.
         /// </summary>
         public ParticleCollection Target
         {

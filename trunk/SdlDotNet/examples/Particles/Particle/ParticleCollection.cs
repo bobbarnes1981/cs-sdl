@@ -40,36 +40,6 @@ namespace SdlDotNet.Particles.Particle
         {
         }
 
-        ///// <summary>
-        ///// Creates a new ParticleCollection with one particle element.
-        ///// </summary>
-        ///// <param name="particle">The particle to start off the collection.</param>
-        //public ParticleCollection(BaseParticle particle)
-        //{
-        //    this.Add(particle);
-        //}
-
-        ///// <summary>
-        ///// Creates a new ParticleCollection from an already existing collection of particles.
-        ///// </summary>
-        ///// <param name="collection">The collection to add.</param>
-        //public ParticleCollection(ParticleCollection collection)
-        //{
-        //    foreach (BaseParticle b in collection)
-        //    {
-        //        Add(b);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Creates a particle collection from the particles in the provided system.
-        ///// </summary>
-        ///// <param name="system">The system containing all the particles to add.</param>
-        //public ParticleCollection(ParticleSystem system)
-        //{
-        //    Add(system);
-        //}
-
         /// <summary>
         /// Adds a particle emitter to the collection.
         /// </summary>
@@ -90,15 +60,10 @@ namespace SdlDotNet.Particles.Particle
             {
                 throw new ArgumentNullException("emitter");
             }
-            this.Add(emitter);
+            base.Add(emitter);
             if (changeEmitterTarget)
             {
-                emitter.Target.Clear();
-                foreach (BaseParticle b in this)
-                {
-                    emitter.Target.Add(b);
-                }
-                //emitter.Target = this;
+                emitter.SetTarget(this);
             }
         }
 
