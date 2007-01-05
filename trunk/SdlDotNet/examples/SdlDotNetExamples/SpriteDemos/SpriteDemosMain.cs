@@ -196,15 +196,6 @@ namespace SdlDotNetExamples.SpriteDemos
                 case Key.Five:
                     SwitchDemo(4);
                     break;
-                case Key.Six:
-                    SwitchDemo(5);
-                    break;
-                case Key.Seven:
-                    SwitchDemo(6);
-                    break;
-                case Key.Eight:
-                    SwitchDemo(7);
-                    break;
                 case Key.M:
                     Video.IconifyWindow();
                     break;

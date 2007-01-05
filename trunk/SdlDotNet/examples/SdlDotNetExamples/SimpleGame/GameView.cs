@@ -68,7 +68,7 @@ namespace SdlDotNetExamples.SimpleGame
             }
             try
             {
-                this.sound = Mixer.Sound(filepath + data_directory + "boing.wav");
+                this.sound = new Sound(filepath + data_directory + "boing.wav");
             }
             catch (SdlException)
             {

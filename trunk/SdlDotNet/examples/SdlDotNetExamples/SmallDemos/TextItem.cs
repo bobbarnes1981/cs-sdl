@@ -53,8 +53,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// <param name="phrase"></param>
         /// <param name="startTime"></param>
         public TextItem(string phrase, SdlDotNet.Graphics.Font font, int positionY, float startTime)
-            :
-            base(phrase, font, false, new Point(25, positionY))
+            : base(phrase, font, false, new Point(25, positionY))
         {
             base.Surface.Alpha = 0;
             base.Surface.AlphaBlending = true;

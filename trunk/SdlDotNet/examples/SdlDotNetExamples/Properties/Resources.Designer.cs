@@ -61,7 +61,7 @@ namespace SdlDotNetExamples.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Press Arrow Keys, Space and Click \nMouse..
+        ///   Looks up a localized string similar to Press Arrow Keys, Space and Click Mouse..
         /// </summary>
         internal static string AudioExampleDirections {
             get {

@@ -24,6 +24,7 @@ using System.IO;
 using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet;
+using SdlDotNet.Graphics;
 using SdlDotNet.Core;
 using Tao.Sdl;
 
@@ -322,6 +323,7 @@ namespace SdlDotNet.Audio
         /// </summary>
         public static bool Initialize()
         {
+            Video.Initialize(); //If this is not here, the Mixer will not be properly initialized.
             if ((Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO))
                 == (int)SdlFlag.FalseValue)
             {

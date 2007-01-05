@@ -62,7 +62,7 @@ namespace SdlDotNet.Audio
         /// <param name="extension">
         /// The extension of the files (.mp3)
         /// </param>
-        public MusicDictionary(string baseName, string extension)
+        public virtual void Add(string baseName, string extension)
         {
             int i = 0;
             while (true)
@@ -95,7 +95,7 @@ namespace SdlDotNet.Audio
         /// <param name="musicDictionary">
         /// The existing music collection to add.
         /// </param>
-        public MusicDictionary(MusicDictionary musicDictionary)
+        public virtual void Add(MusicDictionary musicDictionary)
         {
             if (musicDictionary == null)
             {

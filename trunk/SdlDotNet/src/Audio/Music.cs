@@ -163,10 +163,11 @@ namespace SdlDotNet.Audio
         public void Play(int numberOfTimes)
         {
             MusicPlayer.CurrentMusic = this;
-            if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
-            {
-                throw SdlException.Generate();
-            }
+            MusicPlayer.Play(numberOfTimes);
+            //if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
+            //{
+            //    throw SdlException.Generate();
+            //}
         }
 
         /// <summary>
