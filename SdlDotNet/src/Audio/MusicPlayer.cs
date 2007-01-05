@@ -21,6 +21,7 @@
 using System;
 
 using SdlDotNet.Core;
+using SdlDotNet.Graphics;
 using Tao.Sdl;
 
 namespace SdlDotNet.Audio
@@ -56,7 +57,6 @@ namespace SdlDotNet.Audio
         static Music m_CurrentMusic;
         static SdlMixer.MusicFinishedDelegate MusicFinishedDelegate;
         static Music m_QueuedMusic;
-        static bool isInitialized = Mixer.Initialize();
 
         #endregion Private fields
 
@@ -90,14 +90,6 @@ namespace SdlDotNet.Audio
         #endregion Private Methods
 
         #region Public Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public static bool IsInitialized
-        {
-            get { return MusicPlayer.isInitialized; }
-        }
 
         /// <summary>
         /// Gets and sets the currently loaded music sample.

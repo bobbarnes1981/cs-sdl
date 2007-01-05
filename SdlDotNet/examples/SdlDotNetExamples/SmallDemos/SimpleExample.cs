@@ -66,6 +66,7 @@ namespace SdlDotNetExamples.SmallDemos
             Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
             Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Fps = 5;
             Events.Run();
         }
 

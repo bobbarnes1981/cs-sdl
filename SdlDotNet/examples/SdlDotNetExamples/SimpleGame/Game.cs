@@ -23,6 +23,7 @@ using System.Diagnostics;
 
 using SdlDotNet;
 using SdlDotNet.Audio;
+using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.SimpleGame
 {
@@ -83,15 +84,17 @@ namespace SdlDotNetExamples.SimpleGame
         /// </summary>
         public void Start()
         {
+            GameView gameView = new GameView(eventManager);
+            gameView.CreateView();
+            map.Build();
+
             if (File.Exists(data_directory + "fard-two.ogg"))
             {
                 filepath = "";
             }
-            GameView gameView = new GameView(eventManager);
-            gameView.CreateView();
-            map.Build();
+
             Music music = new Music(filepath + data_directory + "fard-two.ogg");
-            MusicPlayer.Volume = 127;
+
             try
             {
                 music.Play(-1);
@@ -100,6 +103,7 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 // Linux audio problem
             }
+           
             this.gameStatus = GameStatus.Started;
             eventManager.Publish(new GameStatusEventArgs(this, GameStatus.Started));
         }

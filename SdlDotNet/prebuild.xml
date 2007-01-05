@@ -3,7 +3,7 @@
     <Solution name="SdlDotNet">
 	<Configuration name="Debug">
 	    <Options>
-		<CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		<CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
 		<OptimizeCode>false</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>bin/Debug</OutputPath>
@@ -14,7 +14,7 @@
 	</Configuration>
 	<Configuration name="Release">
 	    <Options>
-		<CompilerDefines>TRACE</CompilerDefines>
+		<CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
 		<OptimizeCode>true</OptimizeCode>
 		<AllowUnsafe>false</AllowUnsafe>
 		<OutputPath>bin/Release</OutputPath>
@@ -29,7 +29,7 @@
 	<Project name="SdlDotNet" path="src" language="C#" type="Library" assemblyName="SdlDotNet" rootNamespace="SdlDotNet" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -42,7 +42,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -68,7 +68,7 @@
 	<Project name="SdlDotNet.Particles" path="examples/Particles" language="C#" type="Library" assemblyName="SdlDotNet.Particles" rootNamespace="SdlDotNet.Particles" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -81,7 +81,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -102,7 +102,7 @@
 	<Project name="SdlDotNet.OpenGl" path="examples/OpenGl" language="C#" type="Library" assemblyName="SdlDotNet.OpenGl" rootNamespace="SdlDotNet.OpenGl" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -115,7 +115,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -137,7 +137,7 @@
 	<Project name="SdlDotNet.GtkSharp" path="examples/GtkSharp" language="C#" type="Library" assemblyName="SdlDotNet.GtkSharp" rootNamespace="SdlDotNet.GtkSharp" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -150,7 +150,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -176,7 +176,7 @@
 	<Project name="SdlDotNetExamples" path="examples/SdlDotNetExamples" language="C#" type="WinExe" startupObject="SdlDotNetExamples.Program" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE;WIN32</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
@@ -186,7 +186,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE;WIN32</CompilerDefines>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
@@ -222,7 +222,7 @@
 	<Project name="Tests" path="tests" language="C#" type="Library" assemblyName="SdlDotNet.Tests" rootNamespace="SdlDotNet.Tests" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -234,7 +234,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>
@@ -256,7 +256,7 @@
 	<Project name="CDPlayer" path="examples/CDPlayer" language="C#" type="WinExe" startupObject="SdlDotNetExamples.CDPlayer.CDPlayerApp" assemblyName="CDPlayer" rootNamespace="SdlDotNetExamples.CDPlayer" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
-		    <CompilerDefines>DEBUG;TRACE</CompilerDefines>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>false</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Debug</OutputPath>
@@ -268,7 +268,7 @@
 	    </Configuration>
 	    <Configuration name="Release">
 		<Options>
-		    <CompilerDefines>TRACE</CompilerDefines>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
 		    <OptimizeCode>true</OptimizeCode>
 		    <AllowUnsafe>false</AllowUnsafe>
 		    <OutputPath>bin/Release</OutputPath>

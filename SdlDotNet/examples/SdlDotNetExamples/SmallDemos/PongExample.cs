@@ -62,6 +62,20 @@ namespace SdlDotNetExamples.SmallDemos
             ball.Surface.TransparentColor = System.Drawing.Color.Magenta;
         }
 
+        private void Events_Quit(object sender, QuitEventArgs e)
+        {
+            Events.QuitApplication();
+        }
+
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            // Check if the key pressed was a Q or Escape
+            if (e.Key == Key.Escape || e.Key == Key.Q)
+            {
+                Events.QuitApplication();
+            }
+        }
+
         private void Events_Tick(object sender, TickEventArgs e)
         {
             // Update location of the ball
@@ -90,7 +104,9 @@ namespace SdlDotNetExamples.SmallDemos
 
         public void Go()
         {
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
             Events.Tick += new EventHandler<TickEventArgs>(Events_Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(Events_Quit);
             Events.Run();
         }
 

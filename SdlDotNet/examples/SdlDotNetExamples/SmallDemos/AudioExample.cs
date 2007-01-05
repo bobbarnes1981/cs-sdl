@@ -93,6 +93,7 @@ namespace SdlDotNetExamples.SmallDemos
 
             // Play the music and setup the queues.
             music["mason2"].Play();
+            //music["fard-two"].Play();
 
             // Set up the music queue and start it
             music["mason2"].QueuedMusic = music["fard-two"];
@@ -103,7 +104,7 @@ namespace SdlDotNetExamples.SmallDemos
             Events.Fps = 50;
 
             textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
-                        "AudioExampleDirection", CultureInfo.CurrentUICulture);
+                        "AudioExampleDirections", CultureInfo.CurrentUICulture);
             textDisplay.TextWidth = 200;
             Events.Run();
         }

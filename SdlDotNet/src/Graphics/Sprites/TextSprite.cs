@@ -83,18 +83,8 @@ namespace SdlDotNet.Graphics.Sprites
             string textItem,
             SdlDotNet.Graphics.Font font,
             Color color, bool antiAlias)
-            : base()
+            : this(textItem, font, color, antiAlias, new Point(0, 0))
         {
-            if (font == null)
-            {
-                throw new ArgumentNullException("font");
-            }
-            base.Surface = font.Render(textItem, color);
-            this.textItem = textItem;
-            this.font = font;
-            this.color = color;
-            this.antiAlias = antiAlias;
-            this.RenderInternal();
         }
         /// <summary>
         /// Creates a new TextSprite given the text, font, color and background color.
@@ -123,9 +113,8 @@ namespace SdlDotNet.Graphics.Sprites
             string textItem,
             SdlDotNet.Graphics.Font font,
             Point position)
-            : this(textItem, font)
+            : this(textItem, font, true, position)
         {
-            base.Position = position;
         }
 
         /// <summary>
@@ -141,10 +130,8 @@ namespace SdlDotNet.Graphics.Sprites
             SdlDotNet.Graphics.Font font,
             bool antiAlias,
             Point position)
-            : this(textItem, font)
+            : this(textItem, font, Color.White, antiAlias, position)
         {
-            base.Position = position;
-            this.antiAlias = antiAlias;
         }
 
         /// <summary>
@@ -159,9 +146,8 @@ namespace SdlDotNet.Graphics.Sprites
             SdlDotNet.Graphics.Font font,
             Color color,
             Point position)
-            : this(textItem, font, position)
+            : this(textItem, font, color, true, position)
         {
-            this.color = color;
         }
 
         /// <summary>
@@ -178,10 +164,19 @@ namespace SdlDotNet.Graphics.Sprites
             Color color,
             bool antiAlias,
             Point position)
-            : this(textItem, font, position)
+            : base()
         {
+            if (font == null)
+            {
+                throw new ArgumentNullException("font");
+            }
+            base.Surface = font.Render(textItem, color);
+            this.textItem = textItem;
+            this.font = font;
             this.color = color;
             this.antiAlias = antiAlias;
+            base.Position = position;
+            this.RenderInternal();
         }
         #endregion Constructors
 

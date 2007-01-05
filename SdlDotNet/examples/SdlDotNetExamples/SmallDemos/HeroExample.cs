@@ -33,7 +33,7 @@ namespace SdlDotNetExamples.SmallDemos
     public class HeroExample : IDisposable
     {
         // Our hero sprite to walk around.
-        private AnimatedSprite hero = new AnimatedSprite();
+        private AnimatedSprite hero = new AnimatedSprite(); 
 
         [STAThread]
         public static void Run()

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AudioExampleDirections" xml:space="preserve">
-    <value>Press Arrow Keys, Space and Click \nMouse.</value>
+    <value>Press Arrow Keys, Space and Click Mouse.</value>
   </data>
   <data name="CannotBeZero" xml:space="preserve">
     <value>Cannot set value to zero</value>
