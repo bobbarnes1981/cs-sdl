@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile: AudioExample.cs,v $
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
@@ -16,6 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.Resources;
@@ -45,7 +47,7 @@ namespace SdlDotNetExamples.SmallDemos
         private const int width = 400;
         private const int height = 100;
         private Surface screen;
-        string data_directory = @"Data/";
+        string dataDirectory = @"Data/";
         string filepath = @"../../";
         private TextSprite textDisplay;
 
@@ -71,20 +73,21 @@ namespace SdlDotNetExamples.SmallDemos
             Events.MusicFinished +=
                 new EventHandler<MusicFinishedEventArgs>(Events_MusicFinished);
 
-            if (File.Exists(data_directory + "boing.wav"))
+            if (File.Exists(dataDirectory + "boing.wav"))
             {
                 filepath = "";
             }
             Keyboard.UnicodeEnabled = true;
         }
+
         public void Go()
         {
             // Load the music and sounds.
-            music["mason2"] = new Music(filepath + data_directory + "mason2.mid");
-            music["fard-two"] = new Music(filepath + data_directory + "fard-two.ogg");
-            boing = new Sound(filepath + data_directory + "boing.wav");
+            music["mason2"] = new Music(filepath + dataDirectory + "mason2.mid");
+            music["fard-two"] = new Music(filepath + dataDirectory + "fard-two.ogg");
+            boing = new Sound(filepath + dataDirectory + "boing.wav");
 
-            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(filepath + data_directory + "FreeSans.ttf", 20), Color.Red);
+            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(filepath + dataDirectory + "FreeSans.ttf", 20), Color.Red);
 
             // Start up SDL
             Video.WindowIcon();
@@ -124,7 +127,6 @@ namespace SdlDotNetExamples.SmallDemos
         {
             AudioExample t = new AudioExample();
             t.Go();
-            
         }
 
         private void Events_KeyboardUp(object sender, KeyboardEventArgs e)
@@ -182,6 +184,7 @@ namespace SdlDotNetExamples.SmallDemos
                     textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
                         "SoundLeft", CultureInfo.CurrentUICulture);
                     break;
+                case Key.Q:
                 case Key.Escape:
                     // Quit the example
                     Events.QuitApplication();

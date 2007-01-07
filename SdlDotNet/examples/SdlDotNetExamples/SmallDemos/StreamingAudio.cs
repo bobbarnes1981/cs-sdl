@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile$
  * Copyright (C) 2006 Stuart Carnie (stuart.carnie@gmail.com)
@@ -16,40 +17,65 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Globalization;
 
 using SdlDotNet.Audio;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
+using SdlDotNet.Input;
+using SdlDotNet.Core;
 
 namespace SdlDotNetExamples.SmallDemos
 {
-    public static class StreamingAudio
+    public class StreamingAudio : IDisposable
     {
-        const int playback_freq = 44100;
+        const int playbackFreq = 44100;
         const int samples = 2048;
+        private const int width = 400;
+        private const int height = 100;
+        private Surface screen;
+        private TextSprite textDisplay;
+        string dataDirectory = @"Data/";
+        string filepath = @"../../";
+
+        public StreamingAudio()
+        {
+            // Setup events
+            Events.Tick +=
+                new EventHandler<TickEventArgs>(Events_TickEvent);
+            Events.KeyboardDown +=
+                new EventHandler<KeyboardEventArgs>(Events_KeyboardDown);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
+        }
 
         [STAThread]
         public static void Run()
         {
-            TestOpenAudio();
+            StreamingAudio t = new StreamingAudio();
+            t.Go();
         }
 
-        private static void TestOpenAudio()
+        private void Go()
         {
             string me = "Hello World";
+            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(filepath + dataDirectory + "FreeSans.ttf", 20), Color.Red);
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - StreamingAudio";
+            screen = Video.SetVideoMode(width, height);
 
             AudioFormat fmt = AudioFormat.Signed16Little;
 
-            AudioBasic.OpenAudio(playback_freq, fmt, SoundChannel.Mono, samples, new AudioCallback(Unsigned16LittleCallback), me);
+            AudioBasic.OpenAudio(playbackFreq, fmt, SoundChannel.Mono, samples, new AudioCallback(Unsigned16LittleCallback), me);
 
             offset = AudioBasic.AudioInfo.Offset;
             volume = 0.9 * 32768;
 
-
             buffer16 = new short[samples];
-
-            //Console.WriteLine("Status: {0}", AudioBasic.AudioStatus.ToString());
 
             osc.Rate = 20;
             osc.Amplitude = 1;
@@ -59,28 +85,26 @@ namespace SdlDotNetExamples.SmallDemos
 
             AudioBasic.Paused = false;
 
-            //Console.WriteLine("Press any key to quit.");
-            //Console.ReadKey();
-            while (SdlDotNet.Core.Timer.SecondsElapsed < 10)
-            { }
-
-            AudioBasic.CloseAudio();
+            textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "StreamingAudioDirections", CultureInfo.CurrentUICulture);
+            textDisplay.TextWidth = 350;
+            Events.Run();
         }
 
         static byte[] buffer8 = { };
         static short[] buffer16;
 
         const double pi2 = Math.PI * 2;
-        const double divider = (double)playback_freq / pi2;
+        const double divider = (double)playbackFreq / pi2;
 
         static double time;
-        static double step = 1.0 / playback_freq * pi2;
+        static double step = 1.0 / playbackFreq * pi2;
         static double freq = 224.0;         //Hz
         static double freq2 = 224.0;        //Hz
         static double volume = 0.9;
         static int offset;
-        static Oscillator osc = new Oscillator(playback_freq);
-        static Oscillator osc2 = new Oscillator(playback_freq);
+        static Oscillator osc = new Oscillator(playbackFreq);
+        static Oscillator osc2 = new Oscillator(playbackFreq);
 
         //static void Unsigned8Callback(IntPtr userData, IntPtr stream, int len)
         //{
@@ -100,15 +124,15 @@ namespace SdlDotNetExamples.SmallDemos
         static void Unsigned16LittleCallback(IntPtr userData, IntPtr stream, int len)
         {
             len /= 2;
-            int buf_pos = 0;
+            int bufPos = 0;
 
-            while (buf_pos < len)
+            while (bufPos < len)
             {
                 double oscPoint = osc.ValueY(time);
                 double osc2Point = osc2.ValueY(time);
                 double sound = ((Math.Sin(time * freq + oscPoint) * volume) + offset) + ((Math.Sin(time * freq2 + osc2Point) * volume) + offset);
                 sound /= 2.0;
-                buffer16[buf_pos++] = (short)sound;
+                buffer16[bufPos++] = (short)sound;
                 time += step;
             }
 
@@ -125,6 +149,84 @@ namespace SdlDotNetExamples.SmallDemos
                 return "StreamingAudio: Uses the Audio callback feature to stream audio";
             }
         }
+
+        private void Quit(object sender, QuitEventArgs e)
+        {
+            AudioBasic.CloseAudio();
+            Events.QuitApplication();
+        }
+
+        private void Events_TickEvent(object sender, TickEventArgs e)
+        {
+            screen.Fill(Color.Black);
+            screen.Blit(textDisplay);
+            screen.Update();
+        }
+
+        private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            Console.WriteLine("Keyboard Down: " + e.KeyboardCharacter);
+            Console.WriteLine("Unicode Down: " + e.UnicodeCharacter);
+
+            switch (e.Key)
+            {
+                case Key.Q:
+                case Key.Escape:
+                    // Quit the example
+                    AudioBasic.CloseAudio();
+                    Events.QuitApplication();
+                    break;
+            }
+        }
+                #region IDisposable Members
+
+        private bool disposed;
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~StreamingAudio()
+        {
+            Dispose(false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.textDisplay != null)
+                    {
+                        this.textDisplay.Dispose();
+                        this.textDisplay = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+
+        #endregion
     }
 
     public class Oscillator
@@ -166,7 +268,5 @@ namespace SdlDotNetExamples.SmallDemos
         {
             return Math.Sin(sample * rate) * amplitude;
         }
-
-
     }
 }

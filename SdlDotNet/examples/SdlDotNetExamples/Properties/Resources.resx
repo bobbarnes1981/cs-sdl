@@ -171,6 +171,9 @@
   <data name="SoundRight" xml:space="preserve">
     <value>Sound played on Right.</value>
   </data>
+  <data name="StreamingAudioDirections" xml:space="preserve">
+    <value>Press 'Q' or 'Esc' to quit</value>
+  </data>
   <data name="TheQuickBrownFoxJumps" xml:space="preserve">
     <value>THE QUICK BROWN FOX JUMPS</value>
   </data>
