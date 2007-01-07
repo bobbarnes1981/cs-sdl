@@ -24,6 +24,7 @@ using System.Runtime.InteropServices;
 
 using Tao.Sdl;
 using SdlDotNet.Core;
+using SdlDotNet.Graphics;
 
 namespace SdlDotNet.Audio
 {
@@ -91,6 +92,7 @@ namespace SdlDotNet.Audio
         /// </exception>
         public static void OpenAudio(int frequency, AudioFormat format, SoundChannel channels, short samples, AudioCallback callback, object data)
         {
+            Video.Initialize();
             if (audioOpen)
             {
                 throw new AudioException(Events.StringManager.GetString("OpenAudioInit", CultureInfo.CurrentUICulture));

@@ -223,6 +223,15 @@ namespace SdlDotNetExamples.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press &apos;Q&apos; or &apos;Esc&apos; to quit.
+        /// </summary>
+        internal static string StreamingAudioDirections {
+            get {
+                return ResourceManager.GetString("StreamingAudioDirections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to THE QUICK BROWN FOX JUMPS.
         /// </summary>
         internal static string TheQuickBrownFoxJumps {

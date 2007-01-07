@@ -63,7 +63,7 @@ namespace SdlDotNet.Particles.Particle
             base.Add(emitter);
             if (changeEmitterTarget)
             {
-                emitter.SetTarget(this);
+                emitter.SetParticleTarget(this);
             }
         }
 
