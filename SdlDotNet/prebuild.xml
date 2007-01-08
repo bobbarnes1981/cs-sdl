@@ -60,8 +60,10 @@
 	    <Files>
 		<Match pattern="SurfaceControl.cs" subType="Component" recurse="true" resourceName="Windows.SurfaceControl"/>
 		<Match path="Windows" pattern="*.bmp" buildAction="EmbeddedResource" recurse="true"/>
+		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
 		<Match pattern="*.cs" recurse="true">
-			<Exclude name="SurfaceControl.cs"/>
+		    <Exclude name="SurfaceControl.cs"/>
+		    <Exclude name="Properties/Resources.Designer.cs"/>
 		</Match>
 	    </Files>
 	</Project>
@@ -205,7 +207,7 @@
 	    <Reference name="glib-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
-	    <Reference name="SdlDotNet.Gtk" localCopy="true"/>
+	    <Reference name="SdlDotNet.GtkSharp" localCopy="true"/>
 	    <Reference name="SdlDotNet.Particles" localCopy="true"/>
 	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-2.0" />
 	    <Reference name="Tao.OpenGl" localCopy="true" path="../../lib/net-2.0"/>
@@ -214,8 +216,10 @@
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<File subType="Form" resourceName="SdlDotNetExamplesBrowser">SdlDotNetExamplesBrowser.cs</File>
+		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="SdlDotNetExamplesBrowser.cs"/>
+		    <Exclude name="Properties/Resources.Designer.cs"/>
 		</Match>
 	    </Files>
 	</Project>
@@ -285,8 +289,10 @@
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<File subType="Form" resourceName="CDPlayerApp">CDPlayerApp.cs</File>
+		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="CDPlayerApp.cs"/>		    
+		    <Exclude name="Properties/Resources.Designer.cs"/>
 		</Match>
 	    </Files>
 	</Project>
