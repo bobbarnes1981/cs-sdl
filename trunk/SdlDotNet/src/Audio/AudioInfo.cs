@@ -29,9 +29,11 @@ namespace SdlDotNet.Audio
     public class AudioInfo
     {
         #region Private fields
+
         Sdl.SDL_AudioSpec data;
         byte bits;
         int offset;
+
         #endregion Private fields
 
         #region Constructor and Destructors
