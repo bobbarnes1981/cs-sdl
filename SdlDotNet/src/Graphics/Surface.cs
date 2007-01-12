@@ -460,11 +460,6 @@ namespace SdlDotNet.Graphics
                         e.ToString();
                     }
 
-
-                    //if (result != (int)SdlFlag.Success)
-                    //{
-                    //    throw SdlException.Generate();
-                    //}
                     Bitmap bitmap;
                     try
                     {
@@ -485,6 +480,12 @@ namespace SdlDotNet.Graphics
                         return bitmap;
                     }
                     catch (ArgumentException e)
+                    {
+                        e.ToString();
+                        bitmap = new Bitmap(1, 1);
+                        return bitmap;
+                    }
+                    catch (ExternalException e)
                     {
                         e.ToString();
                         bitmap = new Bitmap(1, 1);
