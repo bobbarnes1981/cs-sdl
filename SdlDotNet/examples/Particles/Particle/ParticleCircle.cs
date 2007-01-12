@@ -135,13 +135,13 @@ namespace SdlDotNet.Particles.Particle
                 else
                     alpha = ((float)this.Life / this.LifeFull) * 255F;
 
-                destination.DrawPrimitive(
+                destination.Draw(
                     new Circle((short)this.X, (short)this.Y, m_Radius),
                     System.Drawing.Color.FromArgb((int)alpha, this.Color), false, true);
             }
             else
             {
-                destination.DrawPrimitive(
+                destination.Draw(
                     new Circle((short)this.X, (short)this.Y, m_Radius),
                     this.Color, false, true);
             }

@@ -113,7 +113,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, width),
                     (short)rand.Next(0, height),
                     (short)rand.Next(20, 100));
-                surf.DrawPrimitive(circle,
+                surf.Draw(circle,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -123,7 +123,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, width),
                     (short)rand.Next(0, height),
                     (short)rand.Next(20, 100));
-                surf.DrawPrimitive(circle,
+                surf.Draw(circle,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -145,7 +145,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, height),
                     (short)rand.Next(20, 100),
                     (short)rand.Next(20, 100));
-                surf.DrawPrimitive(ellipse,
+                surf.Draw(ellipse,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -156,7 +156,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, height),
                     (short)rand.Next(20, 100),
                     (short)rand.Next(20, 100));
-                surf.DrawPrimitive(ellipse,
+                surf.Draw(ellipse,
                     Color.FromArgb(rand.Next(255),
                     rand.Next(255),
                     rand.Next(255),
@@ -178,7 +178,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, height),
                     (short)rand.Next(0, width),
                     (short)rand.Next(0, height));
-                surf.DrawPrimitive(line,
+                surf.Draw(line,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -203,7 +203,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, height / 2),
                     (short)rand.Next(0, width / 2),
                     (short)rand.Next(0, height / 2));
-                surf.DrawPrimitive(triangle,
+                surf.Draw(triangle,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -216,7 +216,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, height / 2),
                     (short)rand.Next(0, width / 2),
                     (short)rand.Next(0, height / 2));
-                surf.DrawPrimitive(triangle,
+                surf.Draw(triangle,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -250,7 +250,7 @@ namespace SdlDotNetExamples.SmallDemos
 											(short)rand.Next(0, height)
 										};
                 polygon = new Polygon(x, y);
-                surf.DrawPrimitive(polygon,
+                surf.Draw(polygon,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -271,7 +271,7 @@ namespace SdlDotNetExamples.SmallDemos
 											(short)rand.Next(0, height)
 										};
                 polygon = new Polygon(a, b);
-                surf.DrawPrimitive(polygon,
+                surf.Draw(polygon,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -295,7 +295,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, 360),
                     (short)rand.Next(0, 360));
 
-                surf.DrawPrimitive(pie,
+                surf.Draw(pie,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -307,7 +307,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, 360),
                     (short)rand.Next(0, 360));
 
-                surf.DrawPrimitive(pie,
+                surf.Draw(pie,
                     Color.FromArgb(rand.Next(255),
                     rand.Next(255),
                     rand.Next(255),
@@ -340,7 +340,7 @@ namespace SdlDotNetExamples.SmallDemos
 											(short)rand.Next(0, height)};
 
                 bezier = new Bezier(c, d, 0);
-                surf.DrawPrimitive(bezier,
+                surf.Draw(bezier,
                     Color.FromArgb(rand.Next(255),
                     rand.Next(255),
                     rand.Next(255),
@@ -363,7 +363,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, height),
                     (short)rand.Next(0, width),
                     (short)rand.Next(0, height));
-                surf.DrawPrimitive(box,
+                surf.Draw(box,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -374,7 +374,7 @@ namespace SdlDotNetExamples.SmallDemos
                     (short)rand.Next(0, height),
                     (short)rand.Next(0, width),
                     (short)rand.Next(0, height));
-                surf.DrawPrimitive(box,
+                surf.Draw(box,
                     Color.FromArgb(
                     rand.Next(255),
                     rand.Next(255),
@@ -407,7 +407,7 @@ namespace SdlDotNetExamples.SmallDemos
                 //colorValue = screen.MapColor(Color.FromArgb(254, 0, 0));
                 //screen.DrawPixel(x, y, Color.Red);
                 //Console.WriteLine("colorValue: " + colorValue.ToString(CultureInfo.CurrentCulture));
-                surf.DrawPixel(xpixel, ypixel, Color.FromArgb(rpixel, gpixel, bpixel));
+                surf.Draw(new Point(xpixel, ypixel), Color.FromArgb(rpixel, gpixel, bpixel));
                 //screen.DrawPixel(x, y, Color.Red);
                 //Console.WriteLine("GetPixel: " + screen.GetPixel(xpixel, ypixel).ToString());
                 //Console.WriteLine("GetPixel: " + screen.GetColorValue(screen.GetPixel(xpixel, ypixel)).ToString(CultureInfo.CurrentCulture));

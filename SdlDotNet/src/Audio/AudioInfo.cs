@@ -50,8 +50,12 @@ namespace SdlDotNet.Audio
         #region Public Methods
 
         /// <summary>
-        /// 
+        /// Audio frequency in samples per second
         /// </summary>
+        /// <remarks>
+        /// The number of samples sent to the sound device every second.  
+        /// Common values are 11025, 22050 and 44100. The higher the better.
+        /// </remarks>
         public int Frequency
         {
             get
@@ -61,8 +65,11 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// 
+        /// Audio data format.
         /// </summary>
+        /// <remarks>
+        /// Specifies the size and type of each sample element.
+        /// </remarks>
         public AudioFormat Format
         {
             get
@@ -72,8 +79,12 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// 
+        /// Number of channels: 1 mono, 2 stereo.
         /// </summary>
+        /// <remarks>
+        /// The number of seperate sound channels. 
+        /// 1 is mono (single channel), 2 is stereo (dual channel).
+        /// </remarks>
         public byte Channels
         {
             get
@@ -83,8 +94,15 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// 
+        /// Audio buffer size in samples.
         /// </summary>
+        /// <remarks>
+        /// When used with <see cref="AudioBasic.OpenAudio"/> this refers 
+        /// to the size of the 
+        /// audio buffer in samples. A sample a chunk of audio data
+        ///  of the size specified in format mulitplied by the number
+        ///   of channels.
+        /// </remarks>
         public short Samples
         {
             get
@@ -94,7 +112,7 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// 
+        /// Audio buffer size in bytes (calculated)
         /// </summary>
         public int BufferSize
         {
@@ -105,7 +123,7 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// 
+        /// Audio buffer silence value (calculated).
         /// </summary>
         public int Silence
         {

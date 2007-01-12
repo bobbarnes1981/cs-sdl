@@ -17,8 +17,6 @@
 //	Contact me at mrosario@scrypt.net	
 //*****************************************************************************
 
-
-
 using System;
 using System.Drawing;
 
@@ -26,7 +24,6 @@ using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.Triad
 {
-
     /// <summary>
     /// 
     /// </summary>
@@ -62,25 +59,25 @@ namespace SdlDotNetExamples.Triad
             //Draw top line...
             for (x = location.X; x < location.X + size.Width; x++)
             {
-                surface.DrawPixel(x, location.Y, color);
+                surface.Draw(new Point(x, location.Y), color);
             }
 
             //Draw bottom line...
             for (x = location.X; x < location.X + size.Width; x++)
             {
-                surface.DrawPixel(x, location.Y + size.Height, color);
+                surface.Draw(new Point(x, location.Y + size.Height), color);
             }
 
             //Draw left line...
             for (y = location.Y; y < location.Y + size.Height; y++)
             {
-                surface.DrawPixel(location.X, y, color);
+                surface.Draw(new Point(location.X, y), color);
             }
 
             //Draw right line... 
             for (y = location.Y; y < location.Y + size.Height; y++)
             {
-                surface.DrawPixel(location.X + size.Width, y, color);
+                surface.Draw(new Point(location.X + size.Width, y), color);
             }
         }
     }

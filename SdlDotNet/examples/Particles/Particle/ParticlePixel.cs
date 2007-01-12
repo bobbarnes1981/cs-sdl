@@ -172,11 +172,11 @@ namespace SdlDotNet.Particles.Particle
                 else
                     alpha = ((float)this.Life / this.LifeFull) * 255F;
 
-                destination.DrawPixel((int)this.X, (int)this.Y, m_Color, (int)alpha);
+                destination.Draw(new Point((int)this.X, (int)this.Y), m_Color, (int)alpha);
             }
             else
             {
-                destination.DrawPixel((int)this.X, (int)this.Y, m_Color, true);
+                destination.Draw(new Point((int)this.X, (int)this.Y), m_Color, true);
             }
         }
 
