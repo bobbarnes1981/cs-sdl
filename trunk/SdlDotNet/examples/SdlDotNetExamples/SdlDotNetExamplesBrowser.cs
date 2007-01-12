@@ -95,16 +95,17 @@ namespace SdlDotNetExamples
             {
                 e.ToString();
             }
-            catch (System.Reflection.TargetInvocationException)
+            catch (System.Reflection.TargetInvocationException e)
             {
-                // User changed demo - do nothing
+                e.ToString();
             }
-            catch (System.ArgumentOutOfRangeException)
+            catch (System.ArgumentOutOfRangeException e )
             {
+                e.ToString();
             }
-            catch (System.MissingMethodException)
+            catch (System.MissingMethodException e)
             {
-                // missing method - do nothing
+                e.ToString();
             }
         }
 

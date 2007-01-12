@@ -45,13 +45,8 @@ namespace SdlDotNet.Audio
 
         static bool audioWasNotAlreadyInitialized;
         static bool audioOpen;
-
-        //static AudioCallback audioCallback;
-
         static AudioInfo audioInfo;
-
         static bool audioLocked;
-
         static AudioStream stream;
 
         #endregion Private fields
