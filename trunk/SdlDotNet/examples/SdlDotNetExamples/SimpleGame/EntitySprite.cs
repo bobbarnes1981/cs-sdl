@@ -42,7 +42,7 @@ namespace SdlDotNetExamples.SimpleGame
             }
             base.Surface = screen.CreateCompatibleSurface(70, 70);
             base.Surface.Fill(Color.FromArgb(0, 255, 128));
-            base.Surface.DrawPrimitive(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0), false, true);
+            base.Surface.Draw(new Circle(32, 32, 32), Color.FromArgb(255, 0, 0), false, true);
             base.Rectangle = new Rectangle(0, 0, 70, 70);
         }
         #region IDisposable

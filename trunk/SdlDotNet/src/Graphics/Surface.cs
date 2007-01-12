@@ -509,7 +509,7 @@ namespace SdlDotNet.Graphics
             {
                 for (int y = 0; y < this.Height; y++)
                 {
-                    this.DrawPixel(x, y, SdlColor.Invert(this.GetPixel(x, y)));
+                    this.Draw(new Point(x, y), SdlColor.Invert(this.GetPixel(new Point(x, y))));
                 }
             }
             return this;
@@ -529,9 +529,9 @@ namespace SdlDotNet.Graphics
             {
                 for (int y = 0; y < this.Height; y++)
                 {
-                    if (this.GetPixel(x, y).ToArgb() == origValue)
+                    if (this.GetPixel(new Point(x, y)).ToArgb() == origValue)
                     {
-                        this.DrawPixel(x, y, colVal);
+                        this.Draw(new Point(x, y), colVal);
                     }
                 }
             }
@@ -576,9 +576,9 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="primitive"></param>
         /// <param name="color"></param>
-        public void DrawPrimitive(IPrimitive primitive, Color color)
+        public void Draw(IPrimitive primitive, Color color)
         {
-            DrawPrimitive(primitive, color, true);
+            Draw(primitive, color, true);
         }
 
         /// <summary>
@@ -587,9 +587,9 @@ namespace SdlDotNet.Graphics
         /// <param name="primitive"></param>
         /// <param name="color"></param>
         /// <param name="antiAlias"></param>
-        public void DrawPrimitive(IPrimitive primitive, Color color, bool antiAlias)
+        public void Draw(IPrimitive primitive, Color color, bool antiAlias)
         {
-            DrawPrimitive(primitive, color, antiAlias, false);
+            Draw(primitive, color, antiAlias, false);
         }
 
         /// <summary>
@@ -599,7 +599,7 @@ namespace SdlDotNet.Graphics
         /// <param name="color"></param>
         /// <param name="antiAlias"></param>
         /// <param name="fill"></param>
-        public void DrawPrimitive(IPrimitive primitive, Color color, bool antiAlias, bool fill)
+        public void Draw(IPrimitive primitive, Color color, bool antiAlias, bool fill)
         {
             if (primitive == null)
             {
@@ -1282,16 +1282,15 @@ namespace SdlDotNet.Graphics
         /// Draws a pixel to this surface using the color value to speed things up - uses 1,2 or 4 BytesPerPixel modes.
         /// Call Lock() before calling this method.
         /// </summary>
-        /// <param name="positionX">The x coordinate of where to plot the pixel</param>
-        /// <param name="positionY">The y coordinate of where to plot the pixel</param>
+        /// <param name="point">The coordinate of where to plot the pixel</param>
         /// <param name="color">The color value of the pixel</param>
-        public void DrawPixel(int positionX, int positionY, int color)
+        public void Draw(Point point, int color)
         {
-            if (positionX >= Width || positionX < 0)
+            if (point.X >= Width || point.X < 0)
             {
                 return;
             }
-            if (positionY >= Height || positionY < 0)
+            if (point.Y >= Height || point.Y < 0)
             {
                 return;
             }
@@ -1306,19 +1305,19 @@ namespace SdlDotNet.Graphics
             {
                 case 1: // 8-bpp
                     byte pixelColorValueByte = (byte)color;
-                    Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY * this.SurfaceStruct.pitch + positionX), pixelColorValueByte);
+                    Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + point.X), pixelColorValueByte);
                     break;
                 case 2: // 15-bpp or 16-bpp
                     short pixelColorValueShort = (short)color;
-                    Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY * this.SurfaceStruct.pitch + 2 * positionX), pixelColorValueShort);
+                    Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + 2 * point.X), pixelColorValueShort);
                     break;
                 case 3: // 24-bpp mode
                     pixelColorValueInt = color;
-                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY * this.SurfaceStruct.pitch + 3 * positionX)), pixelColorValueInt);
+                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (point.Y * this.SurfaceStruct.pitch + 3 * point.X)), pixelColorValueInt);
                     break;
                 case 4: // 32-bpp mode
                     pixelColorValueInt = color;
-                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY * this.SurfaceStruct.pitch + 4 * positionX)), pixelColorValueInt);
+                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (point.Y * this.SurfaceStruct.pitch + 4 * point.X)), pixelColorValueInt);
                     break;
             }
         }
@@ -1330,16 +1329,15 @@ namespace SdlDotNet.Graphics
         /// <remarks>
         /// copied from http://cone3d.gamedev.net/cgi-bin/index.pl?page=tutorials/gfxsdl/tut1
         /// </remarks>
-        /// <param name="positionX">The x coordinate of where to plot the pixel</param>
-        /// <param name="positionY">The y coordinate of where to plot the pixel</param>
+        /// <param name="point">The coordinate of where to plot the pixel</param>
         /// <param name="color">The color of the pixel</param>
-        public void DrawPixel(int positionX, int positionY, System.Drawing.Color color)
+        public void Draw(Point point, System.Drawing.Color color)
         {
-            if (positionX >= Width || positionX < 0)
+            if (point.X >= Width || point.X < 0)
             {
                 return;
             }
-            if (positionY >= Height || positionY < 0)
+            if (point.Y >= Height || point.Y < 0)
             {
                 return;
             }
@@ -1354,19 +1352,19 @@ namespace SdlDotNet.Graphics
             {
                 case 1: // 8-bpp
                     byte pixelColorValueByte = (byte)this.GetColorValue(color);
-                    Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY * this.SurfaceStruct.pitch + positionX), pixelColorValueByte);
+                    Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + point.X), pixelColorValueByte);
                     break;
                 case 2: // 15-bpp or 16-bpp
                     short pixelColorValueShort = (short)this.GetColorValue(color);
-                    Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY * this.SurfaceStruct.pitch + 2 * positionX), pixelColorValueShort);
+                    Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + 2 * point.X), pixelColorValueShort);
                     break;
                 case 3: // 24-bpp mode
                     pixelColorValueInt = this.GetColorValue(color);
-                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY * this.SurfaceStruct.pitch + 3 * positionX)), pixelColorValueInt);
+                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (point.Y * this.SurfaceStruct.pitch + 3 * point.X)), pixelColorValueInt);
                     break;
                 case 4: // 32-bpp mode
                     pixelColorValueInt = this.GetColorValue(color);
-                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (positionY * this.SurfaceStruct.pitch + 4 * positionX)), pixelColorValueInt);
+                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (point.Y * this.SurfaceStruct.pitch + 4 * point.X)), pixelColorValueInt);
                     break;
             }
         }
@@ -1374,11 +1372,10 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Draws a pixel on the surface using the provided alpha quantity.
         /// </summary>
-        /// <param name="positionX">The x coordinate of where to plot the pixel</param>
-        /// <param name="positionY">The y coordinate of where to plot the pixel</param>
+        /// <param name="point">The coordinate of where to plot the pixel</param>
         /// <param name="color">The color of the pixel.  The alpha of this color is overwriten by the alpha value.</param>
         /// <param name="alpha">The alpha transparency to use for the color.</param>
-        public void DrawPixel(int positionX, int positionY, Color color, int alpha)
+        public void Draw(Point point, Color color, int alpha)
         {
             if (alpha <= 0)
             {
@@ -1386,23 +1383,22 @@ namespace SdlDotNet.Graphics
             }
             if (alpha >= 255)
             {
-                DrawPixel(positionX, positionY, color);
+                Draw(point, color);
             }
             else
             {
-                DrawPixel(positionX, positionY, Color.FromArgb(alpha, color), true);
+                Draw(point, Color.FromArgb(alpha, color), true);
             }
         }
 
         /// <summary>
         /// Draws a pixel on the surface with the option of alpha transparency.
         /// </summary>
-        /// <param name="positionX">The x coordinate of where to plot the pixel</param>
-        /// <param name="positionY">The y coordinate of where to plot the pixel</param>
+        /// <param name="point">The coordinate of where to plot the pixel</param>
         /// <param name="color">The color of the pixel. The alpha value of this color is used if the alpha flag is true.</param>
         /// <param name="alpha">A flag saying to use or not use alpha transparency (defaults to false).</param>
         /// <remarks>If alpha transparency is to be used, the color's alpha value is used.  This uses SDL_gfx's pixelRGBA method.</remarks>
-        public void DrawPixel(int positionX, int positionY, Color color, bool alpha)
+        public void Draw(Point point, Color color, bool alpha)
         {
             if (alpha)
             {
@@ -1411,7 +1407,7 @@ namespace SdlDotNet.Graphics
                     throw (new ObjectDisposedException(this.ToString()));
                 }
                 int result = SdlGfx.pixelRGBA(
-                    this.Handle, (short)positionX, (short)positionY,
+                    this.Handle, (short)point.X, (short)point.Y,
                     color.R, color.G, color.B, color.A);
                 GC.KeepAlive(this);
                 if (result != (int)SdlFlag.Success)
@@ -1421,7 +1417,7 @@ namespace SdlDotNet.Graphics
             }
             else
             {
-                DrawPixel(positionX, positionY, color);
+                Draw(point, color);
             }
         }
 
@@ -1482,10 +1478,9 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Attempting to code GetPixel. The getter equivalent of DrawPixel.
         /// </summary>
-        /// <param name="positionX">The x coordinate of the surface</param>
-        /// <param name="positionY">The y coordinate of the surface</param>
+        /// <param name="point">The coordinate of the surface</param>
         /// <returns>ColorValue of pixel</returns>
-        public Color GetPixel(int positionX, int positionY)
+        public Color GetPixel(Point point)
         {
             if (this.disposed)
             {
@@ -1497,10 +1492,10 @@ namespace SdlDotNet.Graphics
             if (bytesPerPixel > 0)
             {
                 int positionXMax = Int32.MaxValue / bytesPerPixel;
-                int positionXTemp = positionX * bytesPerPixel;
-                if (positionX <= positionXMax)
+                int positionXTemp = point.X * bytesPerPixel;
+                if (point.X <= positionXMax)
                 {
-                    return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + positionY * this.SurfaceStruct.pitch + positionXTemp)));
+                    return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + positionXTemp)));
                 }
                 else
                 {

@@ -186,7 +186,7 @@ namespace SdlDotNet.Particles.Particle
 
                 if (m_Filled)
                 {
-                    destination.DrawPrimitive(
+                    destination.Draw(
                         new Box(
                         (short)this.X, (short)this.Y,
                         (short)this.Right, (short)this.Bottom),
@@ -194,7 +194,7 @@ namespace SdlDotNet.Particles.Particle
                 }
                 else
                 {
-                    destination.DrawPrimitive(
+                    destination.Draw(
                         new Box(
                         (short)this.X, (short)this.Y,
                         (short)this.Right, (short)this.Bottom),
@@ -205,7 +205,7 @@ namespace SdlDotNet.Particles.Particle
             {
                 if (m_Filled)
                 {
-                    destination.DrawPrimitive(
+                    destination.Draw(
                         new Box(
                         (short)this.X, (short)this.Y,
                         (short)this.Right, (short)this.Bottom),
@@ -213,7 +213,7 @@ namespace SdlDotNet.Particles.Particle
                 }
                 else
                 {
-                    destination.DrawPrimitive(
+                    destination.Draw(
                         new Box(
                         (short)this.X, (short)this.Y,
                         (short)this.Right, (short)this.Bottom),
