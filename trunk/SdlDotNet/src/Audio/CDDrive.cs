@@ -30,7 +30,7 @@ using Tao.Sdl;
 namespace SdlDotNet.Audio
 {
     /// <summary>
-    /// Represents a CDROM drive on the system
+    /// Represents an individual CD drive on the system
     /// </summary>
     /// <remarks></remarks>
     public class CDDrive : BaseSdlResource
@@ -39,23 +39,20 @@ namespace SdlDotNet.Audio
 
         private bool disposed;
         private int index;
-        //		ResourceManager stringManager;
-
+        
         #endregion Private fields
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Represents a CDROM drive on the system
+        /// Represents a CD drive on the system
         /// </summary>
         /// <param name="handle">Handle to CDDrive</param>
         /// <param name="index">Index number of drive</param>
         /// <remarks>used internally</remarks>
         internal CDDrive(IntPtr handle, int index)
         {
-            //			stringManager = 
-            //				new ResourceManager("en-US", Assembly.GetExecutingAssembly());
-            if ((handle == IntPtr.Zero) || !CDRom.IsValidDriveNumber(index))
+           if ((handle == IntPtr.Zero) || !CDRom.IsValidDriveNumber(index))
             {
                 throw SdlException.Generate();
             }
@@ -175,7 +172,7 @@ namespace SdlDotNet.Audio
         /// <remarks>
         /// Returns true if the drive is in use.
         /// </remarks>
-        public bool IsBusy
+        public bool IsPlaying
         {
             get
             {
@@ -370,7 +367,7 @@ namespace SdlDotNet.Audio
         /// <param name="numberOfTracks">
         /// The number of tracks to play
         /// </param>
-        public void PlayTracks(int startTrack, int numberOfTracks)
+        public void Play(int startTrack, int numberOfTracks)
         {
             int result = Sdl.SDL_CDPlayTracks(
                 this.Handle, startTrack, 0, numberOfTracks, 0);
@@ -400,7 +397,7 @@ namespace SdlDotNet.Audio
         /// track to stop playing after
         /// </param>
         /// <remarks></remarks>
-        public void PlayTracks(
+        public void Play(
             int startTrack, int startFrame,
             int numberOfTracks, int numberOfFrames)
         {
@@ -419,7 +416,7 @@ namespace SdlDotNet.Audio
         /// </summary>
         /// <remarks></remarks>
         /// <param name="startTrack">Track to start from</param>
-        public void PlayTracks(int startTrack)
+        public void Play(int startTrack)
         {
             int result = Sdl.SDL_CDPlayTracks(
                 this.Handle, startTrack, 0, 0, 0);

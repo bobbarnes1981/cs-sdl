@@ -23,6 +23,7 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using System.IO;
 
 using SdlDotNet.Audio;
 using SdlDotNet.Graphics;
@@ -42,6 +43,21 @@ namespace SdlDotNetExamples.SmallDemos
         private TextSprite textDisplay;
         string dataDirectory = @"Data/";
         string filepath = @"../../";
+        AudioStream stream;
+
+        static short[] buffer16;
+
+        const double pi2 = Math.PI * 2;
+        const double divider = (double)playbackFreq / pi2;
+
+        static double time;
+        static double step = 1.0 / playbackFreq * pi2;
+        static double freq = 224.0;         //Hz
+        static double freq2 = 224.0;        //Hz
+        static double volume = 0.9;
+        static int offset;
+        static Oscillator osc = new Oscillator(playbackFreq);
+        static Oscillator osc2 = new Oscillator(playbackFreq);
 
         public StreamingAudio()
         {
@@ -62,16 +78,13 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Go()
         {
-            string me = "Hello World";
-            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(filepath + dataDirectory + "FreeSans.ttf", 20), Color.Red);
+            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(Path.Combine(filepath, Path.Combine(dataDirectory, "FreeSans.ttf")), 20), Color.Red);
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - StreamingAudio";
             screen = Video.SetVideoMode(width, height);
 
-            AudioFormat fmt = AudioFormat.Signed16Little;
-
-            AudioBasic.OpenAudio(playbackFreq, fmt, SoundChannel.Mono, samples, new AudioCallback(Unsigned16LittleCallback), me);
-
+            AudioFormat audioFormat = AudioFormat.Unsigned16Little;
+            stream = AudioBasic.OpenAudioStream(playbackFreq, audioFormat, SoundChannel.Mono, samples);
             offset = AudioBasic.AudioInfo.Offset;
             volume = 0.9 * 32768;
 
@@ -91,54 +104,6 @@ namespace SdlDotNetExamples.SmallDemos
             Events.Run();
         }
 
-        static byte[] buffer8 = { };
-        static short[] buffer16;
-
-        const double pi2 = Math.PI * 2;
-        const double divider = (double)playbackFreq / pi2;
-
-        static double time;
-        static double step = 1.0 / playbackFreq * pi2;
-        static double freq = 224.0;         //Hz
-        static double freq2 = 224.0;        //Hz
-        static double volume = 0.9;
-        static int offset;
-        static Oscillator osc = new Oscillator(playbackFreq);
-        static Oscillator osc2 = new Oscillator(playbackFreq);
-
-        //static void Unsigned8Callback(IntPtr userData, IntPtr stream, int len)
-        //{
-        //    int buf_pos = 0;
-
-        //    while (buf_pos < len)
-        //    {
-        //        buffer8[buf_pos++] = (byte)((Math.Sin(time / pi2 * freq) * 128) * volume);
-
-        //        time += step;
-        //    }
-
-        //    Marshal.Copy(buffer8, 0, stream, len);
-        //    len = 0;
-        //}
-
-        static void Unsigned16LittleCallback(IntPtr userData, IntPtr stream, int len)
-        {
-            len /= 2;
-            int bufPos = 0;
-
-            while (bufPos < len)
-            {
-                double oscPoint = osc.ValueY(time);
-                double osc2Point = osc2.ValueY(time);
-                double sound = ((Math.Sin(time * freq + oscPoint) * volume) + offset) + ((Math.Sin(time * freq2 + osc2Point) * volume) + offset);
-                sound /= 2.0;
-                buffer16[bufPos++] = (short)sound;
-                time += step;
-            }
-
-            Marshal.Copy(buffer16, 0, stream, len);
-            len = 0;
-        }
         /// <summary>
         /// Lesson Title
         /// </summary>
@@ -152,12 +117,23 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Quit(object sender, QuitEventArgs e)
         {
-            AudioBasic.CloseAudio();
+            AudioBasic.Close();
             Events.QuitApplication();
         }
 
         private void Events_TickEvent(object sender, TickEventArgs e)
         {
+            int bufPos = 0;
+            while (bufPos < 2048)
+            {
+                double oscPoint = osc.ValueY(time);
+                double osc2Point = osc2.ValueY(time);
+                double sound = ((Math.Sin(time * freq + oscPoint) * volume) + offset) + ((Math.Sin(time * freq2 + osc2Point) * volume) + offset);
+                sound /= 2.0;
+                buffer16[bufPos++] = (short)sound;
+                time += step;
+            }
+            stream.Write(buffer16);
             screen.Fill(Color.Black);
             screen.Blit(textDisplay);
             screen.Update();
@@ -165,20 +141,17 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
         {
-            Console.WriteLine("Keyboard Down: " + e.KeyboardCharacter);
-            Console.WriteLine("Unicode Down: " + e.UnicodeCharacter);
-
             switch (e.Key)
             {
                 case Key.Q:
                 case Key.Escape:
                     // Quit the example
-                    AudioBasic.CloseAudio();
+                    AudioBasic.Close();
                     Events.QuitApplication();
                     break;
             }
         }
-                #region IDisposable Members
+        #region IDisposable Members
 
         private bool disposed;
 

@@ -25,48 +25,51 @@ using SdlDotNet.Core;
 
 namespace SdlDotNet.Audio
 {
-	/// <summary>
-	/// Represents a run-time error from the Sdl library.
-	/// </summary>
-	[Serializable()]
-	public class AudioException : SdlException
+    /// <summary>
+    /// Represents a run-time error from the Sdl library.
+    /// </summary>
+    [Serializable()]
+    public class AudioException : SdlException
     {
         #region Constructors and Destructors
 
         /// <summary>
-		/// Returns basic exception
-		/// </summary>
-		public AudioException() 
-		{
-			AudioException.Generate();
+        /// Returns basic exception
+        /// </summary>
+        public AudioException()
+        {
+            AudioException.Generate();
         }
 
         /// <summary>
-		/// Initializes an AudioException instance
-		/// </summary>
-		/// <param name="message">
-		/// The string representing the error message
-		/// </param>
-		public AudioException(string message): base(message)
-		{
-		}
+        /// Initializes an AudioException instance
+        /// </summary>
+        /// <param name="message">
+        /// The string representing the error message
+        /// </param>
+        public AudioException(string message)
+            : base(message)
+        {
+        }
 
-		/// <summary>
-		/// Returns exception
-		/// </summary>
-		/// <param name="message">Exception message</param>
-		/// <param name="exception">Exception type</param>
-		public AudioException(string message, Exception exception) : base(message, exception)
-		{
-		}
+        /// <summary>
+        /// Returns exception
+        /// </summary>
+        /// <param name="message">Exception message</param>
+        /// <param name="exception">Exception type</param>
+        public AudioException(string message, Exception exception)
+            : base(message, exception)
+        {
+        }
 
-		/// <summary>
-		/// Returns SerializationInfo
-		/// </summary>
-		/// <param name="info"></param>
-		/// <param name="context"></param>
-		protected AudioException(SerializationInfo info, StreamingContext context) : base( info, context )
-		{
+        /// <summary>
+        /// Returns SerializationInfo
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected AudioException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
         }
 
         #endregion Constructors and Destructors
