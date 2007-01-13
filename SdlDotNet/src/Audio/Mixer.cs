@@ -283,7 +283,7 @@ namespace SdlDotNet.Audio
 
         #region Private Methods
 
-        private static void PrivateOpen()
+        internal static void OpenInternal()
         {
             SdlMixer.Mix_OpenAudio(SdlMixer.MIX_DEFAULT_FREQUENCY,
                 unchecked((short)AudioFormat.Default),
@@ -331,8 +331,8 @@ namespace SdlDotNet.Audio
                 {
                     throw SdlException.Generate();
                 }
-                Mixer.PrivateOpen();
-                return false;
+                Mixer.OpenInternal();
+                return true;
             }
             else
             {
@@ -370,7 +370,7 @@ namespace SdlDotNet.Audio
         public static void Open()
         {
             Close();
-            PrivateOpen();
+            OpenInternal();
         }
 
         /// <summary>

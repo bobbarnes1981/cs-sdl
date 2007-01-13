@@ -26,8 +26,7 @@ using SdlDotNet.Core;
 namespace SdlDotNet.Audio
 {
     /// <summary>
-    /// Represents a sound sample.
-    /// Create with Mixer.LoadWav().
+    /// Represents a channel that can play a sound sample.
     /// </summary>
     /// <remarks></remarks>
     public class Channel : IDisposable

@@ -30,7 +30,6 @@ namespace SdlDotNet.Audio
     /// </summary>
     public class AudioStream : MemoryStream
     {
-
         #region Private fields
 
         short samples;
@@ -42,7 +41,7 @@ namespace SdlDotNet.Audio
 
         #region Constructors and Destructors
 
-        internal AudioStream(int sampleFrequency, short samples) 
+        internal AudioStream(int sampleFrequency, short samples)
         {
             this.samples = samples;
             this.queue = new Queue<short[]>(5);
@@ -87,13 +86,13 @@ namespace SdlDotNet.Audio
         /// </summary>
         public short Samples
         {
-            get 
-            { 
-                return samples; 
+            get
+            {
+                return samples;
             }
-            internal set 
-            { 
-                samples = value; 
+            internal set
+            {
+                samples = value;
             }
         }
 
@@ -113,9 +112,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public int RemainingMilliseconds
         {
-            get 
-            { 
-                return (int)((double)RemainingSamples / sampleFrequency * 1000); 
+            get
+            {
+                return (int)((double)RemainingSamples / sampleFrequency * 1000);
             }
         }
 
@@ -124,9 +123,9 @@ namespace SdlDotNet.Audio
         /// </summary>
         public int RemainingQueues
         {
-            get 
-            { 
-                return queue.Count; 
+            get
+            {
+                return queue.Count;
             }
         }
 

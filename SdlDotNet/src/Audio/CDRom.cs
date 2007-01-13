@@ -30,12 +30,10 @@ using SdlDotNet.Core;
 namespace SdlDotNet.Audio
 {
     /// <summary>
-    /// Contains methods for playing audio CDs.
-    /// Obtain an instance of this class by accessing 
-    /// the CDAudio property of the main Sdl object
+    /// Contains methods querying the CD drives on the system.
     /// </summary>
     /// <remarks>
-    /// Contains methods for playing audio CDs.
+    /// This class is initialized when the CDDrive object is first called.
     /// </remarks>
     public static class CDRom
     {
@@ -48,7 +46,7 @@ namespace SdlDotNet.Audio
         #region Public methods
 
         /// <summary>
-        /// 
+        /// Returns true if the CDRom system has been initialized
         /// </summary>
         public static bool IsInitialized
         {
@@ -69,7 +67,7 @@ namespace SdlDotNet.Audio
         /// </summary>
         /// <remarks>
         /// This normally automatically started when 
-        /// the CDRom class is initialized.
+        /// the CDRom or the CDDrive classes are initialized. 
         /// </remarks>
         public static bool Initialize()
         {
@@ -131,7 +129,7 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// Checks if the drive number uis valid
+        /// Checks if the drive number is valid
         /// </summary>
         /// <param name="index">drive number</param>
         /// <returns>

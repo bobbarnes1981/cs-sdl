@@ -415,7 +415,7 @@ namespace SdlDotNetExamples.CDPlayer
             {
                 if (_drive != null)
                 {
-                    _drive.PlayTracks(_track, _drive.NumberOfTracks - _track);
+                    _drive.Play(_track, _drive.NumberOfTracks - _track);
                 }
                 TimeSpan timeSpan = SdlDotNet.Core.Timer.SecondsToTime(_drive.TrackLength(_drive.CurrentTrack));
                 this.labelStatus.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
