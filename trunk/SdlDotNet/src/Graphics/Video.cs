@@ -1092,6 +1092,32 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
+        /// Sets the icon for the current window to an icon in the given assembly's embedded resources.
+        /// </summary>
+        /// <param name="assembly">The assembly where the icon resource is held.</param>
+        /// <param name="iconName">The name of the icon (e.g. &quot;App.ico&quot;).</param>
+        public static void WindowIcon(Assembly assembly, string iconName)
+        {
+            foreach (string s in assembly.GetManifestResourceNames())
+            {
+                if (s.EndsWith(iconName))
+                {
+                    Video.WindowIcon(new Icon(assembly.GetManifestResourceStream(s)));
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the icon for the current window to &quot;App.ico&quot; in the given assembly's embedded resources.
+        /// </summary>
+        /// <param name="assembly">The assembly where &quot;App.ico&quot; is held.</param>
+        public static void WindowIcon(Assembly assembly)
+        {
+            Video.WindowIcon(assembly, "App.ico");
+        }
+
+        /// <summary>
         /// Sets the icon for the current window. 
         /// This method assumes there is an embedded 
         /// resource named &quot;App.ico&quot;.
@@ -1099,20 +1125,7 @@ namespace SdlDotNet.Graphics
         /// <remarks>This should be called before Video.SetVideoMode</remarks>
         public static void WindowIcon()
         {
-            Assembly callingAssembly = Assembly.GetCallingAssembly();
-            string iconName = "";
-            foreach (string s in Assembly.GetCallingAssembly().GetManifestResourceNames())
-            {
-                if (s.EndsWith("App.ico"))
-                {
-                    iconName = s;
-                    break;
-                }
-            }
-            if (iconName.Length > 0)
-            {
-                Video.WindowIcon(new Icon(callingAssembly.GetManifestResourceStream(iconName)));
-            }
+            Video.WindowIcon(Assembly.GetCallingAssembly(), "App.ico");
         }
 
         /// <summary>
