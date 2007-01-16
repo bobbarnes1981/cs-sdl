@@ -49,7 +49,15 @@ namespace SdlDotNet.Input
         /// <summary>
         /// For some controllers
         /// </summary>
-        Axis4 = 3
+        Axis4 = 3,
+        /// <summary>
+        /// For some controllers
+        /// </summary>
+        Axis5 = 4,
+        /// <summary>
+        /// For some controllers
+        /// </summary>
+        Axis6 = 5
     }
 
     #endregion
