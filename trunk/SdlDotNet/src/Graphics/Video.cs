@@ -684,7 +684,7 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Swaps the OpenGL screen, only if the double-buffered 
         /// attribute was set.
-        /// Call this instead of Surface.Flip() for OpenGL windows.
+        /// Call this instead of Surface.Update() for OpenGL windows.
         /// </summary>
         public static void GLSwapBuffers()
         {

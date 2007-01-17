@@ -128,7 +128,7 @@ namespace SdlDotNet.Audio
     /// CD Track Type
     /// </summary>
     /// <remarks></remarks>
-    [SuppressMessage("Microsoft.Design", "CA1027:MarkEnumsWithFlags", Justification="Not flags")]
+    [SuppressMessage("Microsoft.Design", "CA1027:MarkEnumsWithFlags", Justification = "Not flags")]
     public enum CDTrackType
     {
         /// <summary>
@@ -278,6 +278,7 @@ namespace SdlDotNet.Audio
         const int DEFAULT_NUMBER_OF_CHANNELS = 8;
         static private byte distance;
         static bool isInitialized = Initialize();
+        static bool isOpen = false;
 
         #endregion
 
@@ -285,17 +286,25 @@ namespace SdlDotNet.Audio
 
         internal static void OpenInternal()
         {
-            SdlMixer.Mix_OpenAudio(SdlMixer.MIX_DEFAULT_FREQUENCY,
-                unchecked((short)AudioFormat.Default),
-                (int)SoundChannel.Stereo,
-                DEFAULT_CHUNK_SIZE);
-            ChannelsAllocated = DEFAULT_NUMBER_OF_CHANNELS;
+            if (!isOpen)
+            {
+                SdlMixer.Mix_OpenAudio(SdlMixer.MIX_DEFAULT_FREQUENCY,
+                    unchecked((short)AudioFormat.Default),
+                    (int)SoundChannel.Stereo,
+                    DEFAULT_CHUNK_SIZE);
+                ChannelsAllocated = DEFAULT_NUMBER_OF_CHANNELS;
+                isOpen = true;
+            }
         }
 
         private static void PrivateOpen(
             int frequency, AudioFormat format, int channels, int chunksize)
         {
-            SdlMixer.Mix_OpenAudio(frequency, (short)format, channels, chunksize);
+            if (!isOpen)
+            {
+                SdlMixer.Mix_OpenAudio(frequency, (short)format, channels, chunksize);
+                isOpen = true;
+            }
         }
 
         #endregion
@@ -315,6 +324,7 @@ namespace SdlDotNet.Audio
         /// </summary>
         public static void Close()
         {
+            isOpen = false;
             Events.CloseMixer();
         }
 
@@ -331,7 +341,7 @@ namespace SdlDotNet.Audio
                 {
                     throw SdlException.Generate();
                 }
-                Mixer.OpenInternal();
+                //Mixer.OpenInternal();
                 return true;
             }
             else

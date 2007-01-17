@@ -72,7 +72,8 @@ namespace SdlDotNet.Audio
         /// <param name="file">The file to load into memory.</param>
         public Sound(string file)
         {
-            this.Handle = Mixer.LoadWav(file, out this.size);
+            Mixer.OpenInternal();
+            this.Handle = Mixer.LoadWav(file, out this.size); 
         }
 
         /// <summary>
@@ -81,6 +82,7 @@ namespace SdlDotNet.Audio
         /// <param name="data">The sound byte information.</param>
         public Sound(byte[] data)
         {
+            Mixer.OpenInternal();
             this.Handle = Mixer.LoadWav(data, out this.size);
         }
 
