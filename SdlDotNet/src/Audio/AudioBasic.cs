@@ -52,7 +52,7 @@ namespace SdlDotNet.Audio
         static AudioInfo audioInfo;
         static bool audioLocked;
         static AudioStream stream;
-        static bool isInitialized = Initialize();
+        static bool isInitialized = Mixer.Initialize();
 
         #endregion Private fields
 
@@ -80,7 +80,7 @@ namespace SdlDotNet.Audio
 
         /// <summary>
         /// Opens the audio device with the desired parameters.  
-        /// Audio must be closed before calling this function.  You can check the <see cref="Open"/> property for the current status.
+        /// Audio must be closed before calling this function.  You can check the <see cref="IsOpen"/> property for the current status.
         /// </summary>
         /// <param name="frequency">Audio frequency in samples per second</param>
         /// <param name="format">Audio data format. See <see cref="AudioFormat"/></param>
@@ -101,8 +101,6 @@ namespace SdlDotNet.Audio
         /// </exception>
         public static void OpenAudio(int frequency, AudioFormat format, SoundChannel channels, short samples, AudioCallback callback, object data)
         {
-            Initialize();
-
             Sdl.SDL_AudioSpec spec;
             // To keep compiler happy, we must 'initialize' these values
             spec.padding = 0;
@@ -148,36 +146,35 @@ namespace SdlDotNet.Audio
                 Marshal.FreeHGlobal(pSpec);
             }
 
-            //audioCallback = callback;
             audioOpen = true;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static bool Initialize()
-        {
-            Video.Initialize();
-            if (!audioOpen)
-            {
-                if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != Sdl.SDL_INIT_AUDIO)
-                {
-                    if (Sdl.SDL_InitSubSystem(Sdl.SDL_INIT_AUDIO) == -1)
-                    {
-                        throw new AudioException();
-                    }
-                    //audioWasNotAlreadyInitialized = true;
-                }
-            }
-            return true;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //public static bool Initialize()
+        //{
+        //    Video.Initialize();
+        //    if (!audioOpen)
+        //    {
+        //        if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != Sdl.SDL_INIT_AUDIO)
+        //        {
+        //            if (Sdl.SDL_InitSubSystem(Sdl.SDL_INIT_AUDIO) == -1)
+        //            {
+        //                throw new AudioException();
+        //            }
+        //            //audioWasNotAlreadyInitialized = true;
+        //        }
+        //    }
+        //    return true;
+        //}
 
         static AudioCallback callback;
 
         /// <summary>
         /// Opens the audio device with the desired parameters.
-        /// Audio must be closed before calling this function.  You can check the <see cref="Open"/> property for the current status.
+        /// Audio must be closed before calling this function.  You can check the <see cref="IsOpen"/> property for the current status.
         /// Currently only <see cref="AudioFormat.Unsigned16Little"/> is supported and an exception will be thrown if any other value is specified
         /// </summary>
         /// <param name="frequency">Audio frequency in samples per second</param>
@@ -210,15 +207,16 @@ namespace SdlDotNet.Audio
                         "AudioFormatSupported", CultureInfo.CurrentUICulture));
             }
 
-            if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != Sdl.SDL_INIT_AUDIO)
-            {
-                if (Sdl.SDL_InitSubSystem(Sdl.SDL_INIT_AUDIO) == -1)
-                {
-                    throw new AudioException();
-                }
 
-                //audioWasNotAlreadyInitialized = true;
-            }
+            //if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != Sdl.SDL_INIT_AUDIO)
+            //{
+            //    if (Sdl.SDL_InitSubSystem(Sdl.SDL_INIT_AUDIO) == -1)
+            //    {
+            //        throw new AudioException();
+            //    }
+
+            //    //audioWasNotAlreadyInitialized = true;
+            //}
 
             Sdl.SDL_AudioSpec spec;
             // To keep compiler happy, we must 'initialize' these values
@@ -372,7 +370,7 @@ namespace SdlDotNet.Audio
         /// <summary>
         /// Returns whether the audio subsystem is open or not.
         /// </summary>
-        public static bool Open
+        public static bool IsOpen
         {
             get
             {

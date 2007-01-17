@@ -105,6 +105,7 @@ namespace SdlDotNet.Audio
         /// <param name="fileName">The file path to load from.</param>
         public Music(string fileName)
         {
+            Mixer.OpenInternal();
             this.Handle = Mixer.LoadMusic(fileName);
             m_FileName = fileName;
         }
@@ -164,10 +165,6 @@ namespace SdlDotNet.Audio
         {
             MusicPlayer.CurrentMusic = this;
             MusicPlayer.Play(numberOfTimes);
-            //if (SdlMixer.Mix_PlayMusic(this.Handle, numberOfTimes) != 0)
-            //{
-            //    throw SdlException.Generate();
-            //}
         }
 
         /// <summary>

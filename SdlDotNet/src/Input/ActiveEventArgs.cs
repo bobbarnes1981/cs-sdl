@@ -75,7 +75,7 @@ namespace SdlDotNet.Input
         #region Public Methods
 
         /// <summary>
-        /// Returns true is the app has gained focus
+        /// Returns true if the app has gained focus
         /// </summary>
         /// <remarks>
         /// The keyboard, mouse or de-iconified app can give the app focus

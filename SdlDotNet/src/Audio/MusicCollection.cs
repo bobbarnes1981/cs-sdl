@@ -63,7 +63,7 @@ namespace SdlDotNet.Audio
         /// <remarks>Doesn't throw an exception when attempting to load from an invalid file format within the directory.</remarks>
         /// <param name="dir">The path to the directory to load.</param>
         /// <returns>The new MusicCollection that was created.</returns>
-        public static MusicCollection FromDirectory(string dir)
+        public static MusicCollection AddFromDirectory(string dir)
         {
             DirectoryInfo directory = new DirectoryInfo(dir);
             FileInfo[] files = directory.GetFiles();

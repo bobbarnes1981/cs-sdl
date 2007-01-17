@@ -81,7 +81,7 @@ namespace SdlDotNet.Audio
         /// <summary>
         /// Creates a channel with the given index
         /// </summary>
-        /// <param name="index">Index numberof channel</param>
+        /// <param name="index">Index number of channel</param>
         /// <remarks></remarks>
         public Channel(int index)
         {
@@ -105,7 +105,7 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// Plays a sound the specified number of times on a specific channel
+        /// Plays a sound once on a specific channel
         /// </summary>
         /// <param name="sound">The sound to play</param>
         /// <returns>The channel used to play the sound</returns>
@@ -184,17 +184,7 @@ namespace SdlDotNet.Audio
         /// <remarks></remarks>
         public int PlayTimed(Sound sound, int milliseconds)
         {
-            if (sound == null)
-            {
-                throw new ArgumentNullException("sound");
-            }
-            int ret = SdlMixer.Mix_PlayChannelTimed(this.index, sound.Handle, -1, milliseconds);
-            if (ret == (int)SdlFlag.Error)
-            {
-                throw SdlException.Generate();
-            }
-            this.Sound = sound;
-            return ret;
+            return Play(sound, -1, milliseconds);
         }
 
         /// <summary>
@@ -274,7 +264,7 @@ namespace SdlDotNet.Audio
         /// specific channel
         /// </summary>
         /// <param name="sound">The sound to play</param>
-        /// <param name="ms">
+        /// <param name="milliseconds">
         /// The number of milliseconds to fade in for
         /// </param>
         /// <param name="loops">
@@ -283,13 +273,13 @@ namespace SdlDotNet.Audio
         /// </param>
         /// <returns>The channel used to play the sound</returns>
         /// <remarks></remarks>
-        public int FadeIn(BaseSdlResource sound, int ms, int loops)
+        public int FadeIn(BaseSdlResource sound, int milliseconds, int loops)
         {
             if (sound == null)
             {
                 throw new ArgumentNullException("sound");
             }
-            int ret = SdlMixer.Mix_FadeInChannelTimed(this.index, sound.Handle, loops, ms, -1);
+            int ret = SdlMixer.Mix_FadeInChannelTimed(this.index, sound.Handle, loops, milliseconds, -1);
             if (ret == (int)SdlFlag.Error)
             {
                 throw SdlException.Generate();
@@ -302,20 +292,20 @@ namespace SdlDotNet.Audio
         /// a specific channel, stopping after the specified number of ms
         /// </summary>
         /// <param name="sound">The sound to play</param>
-        /// <param name="ms">The number of milliseconds to fade in for
+        /// <param name="milliseconds">The number of milliseconds to fade in for
         /// </param>
         /// <param name="loops">The number of loops.  
         /// Specify 1 to have the sound play twice</param>
         /// <param name="ticks">The time limit in milliseconds</param>
         /// <returns>The channel used to play the sound</returns>
         /// <remarks></remarks>
-        public int FadeIn(BaseSdlResource sound, int ms, int loops, int ticks)
+        public int FadeIn(BaseSdlResource sound, int milliseconds, int loops, int ticks)
         {
             if (sound == null)
             {
                 throw new ArgumentNullException("sound");
             }
-            int ret = SdlMixer.Mix_FadeInChannelTimed(this.index, sound.Handle, loops, ms, ticks);
+            int ret = SdlMixer.Mix_FadeInChannelTimed(this.index, sound.Handle, loops, milliseconds, ticks);
             if (ret == (int)SdlFlag.Error)
             {
                 throw SdlException.Generate();

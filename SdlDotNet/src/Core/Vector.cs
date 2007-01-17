@@ -30,7 +30,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace SdlDotNet.Core
 {
     /// <summary>
-    /// Class for coordinates in three dimensions.
+    /// Struct for coordinates in three dimensions.
     /// </summary>
     [Serializable]
     public struct Vector : ICloneable, IComparable
