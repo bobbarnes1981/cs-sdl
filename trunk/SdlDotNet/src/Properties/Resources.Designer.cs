@@ -133,6 +133,15 @@ namespace SdlDotNet.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only AudioFormat.Unsigned16Little is currently supported.
+        /// </summary>
+        internal static string SupportedAudioFormats {
+            get {
+                return ResourceManager.GetString("SupportedAudioFormats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown Bytes Per Pixel.
         /// </summary>
         internal static string UnknownBytesPerPixel {

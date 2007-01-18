@@ -328,13 +328,13 @@ namespace SdlDotNet.Audio
             }
         }
 
-        static void CheckOpenStatus()
-        {
-            if (!audioOpen)
-            {
-                throw new AudioException(Events.StringManager.GetString("OpenAudioNotInit", CultureInfo.CurrentUICulture));
-            }
-        }
+        //static void CheckOpenStatus()
+        //{
+        //    if (!audioOpen)
+        //    {
+        //        throw new AudioException(Events.StringManager.GetString("OpenAudioNotInit", CultureInfo.CurrentUICulture));
+        //    }
+        //}
 
         internal static void CheckOpenStatus(AudioStream stream)
         {
