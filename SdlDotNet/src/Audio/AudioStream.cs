@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 using Tao.Sdl;
+using SdlDotNet.Core;
 
 namespace SdlDotNet.Audio
 {
@@ -64,7 +65,7 @@ namespace SdlDotNet.Audio
         /// <summary>
         /// Returns the current playback state of the audio subsystem.  See <see cref="AudioStatus"/>.
         /// </summary>
-        public AudioStatus AudioStatus
+        public static AudioStatus AudioStatus
         {
             get
             {
@@ -83,7 +84,7 @@ namespace SdlDotNet.Audio
             {
                 Mixer.CheckOpenStatus(this);
 
-                return this.AudioStatus != AudioStatus.Playing;
+                return AudioStatus != AudioStatus.Playing;
             }
 
             set
@@ -134,14 +135,15 @@ namespace SdlDotNet.Audio
             }
             spec.samples = samples;
             spec.userdata = data;
-            if (((ushort)spec.format & 0x8000) == 0x8000)    // signed
-            {
-                this.offset = 0;
-            }
-            else
+            if (((ushort)spec.format & 0x8000) != 0x8000)    // signed
             {
                 this.offset = 2 << ((byte)spec.format - 2);
+                //this.offset = 0;
             }
+            //else
+            //{
+            //    this.offset = 2 << ((byte)spec.format - 2);
+            //}
         }
         AudioCallback callback;
 
@@ -157,7 +159,7 @@ namespace SdlDotNet.Audio
         {
             if (format != AudioFormat.Unsigned16Little)
             {
-                throw new AudioException("Only AudioFormat.Unsigned16Little is currently supported");
+                throw new AudioException(Events.StringManager.GetString("SupportedAudioFormats"));
             }
             callback = new AudioCallback(Unsigned16LittleStream);
             spec.callback = Marshal.GetFunctionPointerForDelegate(callback);

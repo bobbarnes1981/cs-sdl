@@ -141,6 +141,9 @@
   <data name="SelectDrive" xml:space="preserve">
     <value>Select Drive</value>
   </data>
+  <data name="SupportedAudioFormats" xml:space="preserve">
+    <value>Only AudioFormat.Unsigned16Little is currently supported</value>
+  </data>
   <data name="UnknownBytesPerPixel" xml:space="preserve">
     <value>Unknown Bytes Per Pixel</value>
   </data>
