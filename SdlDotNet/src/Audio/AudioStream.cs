@@ -134,8 +134,6 @@ namespace SdlDotNet.Audio
 
         #region Public methods
 
-
-
         /// <summary>
         /// Asynchronously queues audio data in <paramref name="data"/>.
         /// </summary>
