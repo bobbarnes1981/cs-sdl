@@ -1098,6 +1098,10 @@ namespace SdlDotNet.Graphics
         /// <param name="iconName">The name of the icon (e.g. &quot;App.ico&quot;).</param>
         public static void WindowIcon(Assembly assembly, string iconName)
         {
+            if (assembly == null)
+            {
+                throw new ArgumentNullException("assembly");
+            }
             foreach (string s in assembly.GetManifestResourceNames())
             {
                 if (s.EndsWith(iconName))

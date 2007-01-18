@@ -156,10 +156,10 @@ namespace SdlDotNet.Audio
             {
                 return samples;
             }
-            internal set
-            {
-                samples = value;
-            }
+            //internal set
+            //{
+            //    samples = value;
+            //}
         }
 
         /// <summary>

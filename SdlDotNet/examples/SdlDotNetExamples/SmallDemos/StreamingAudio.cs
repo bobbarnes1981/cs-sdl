@@ -248,6 +248,11 @@ namespace SdlDotNetExamples.SmallDemos
                         this.textDisplay.Dispose();
                         this.textDisplay = null;
                     }
+                    if (this.stream != null)
+                    {
+                        this.stream.Dispose();
+                        this.stream = null;
+                    }
                 }
                 this.disposed = true;
             }
