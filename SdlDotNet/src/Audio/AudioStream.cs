@@ -23,6 +23,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
+using Tao.Sdl;
+
 namespace SdlDotNet.Audio
 {
     /// <summary>
@@ -36,16 +38,80 @@ namespace SdlDotNet.Audio
         Queue<short[]> queue;
         int sampleFrequency;
         int samplesInQueue;
+        Sdl.SDL_AudioSpec spec;
 
+        internal Sdl.SDL_AudioSpec Spec
+        {
+            get { return spec; }
+            set { spec = value; }
+        }
+        int offset;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Offset
+        {
+            get { return offset; }
+            set { offset = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public short Bits
+        {
+            get { return spec.format; }
+        }
         #endregion Private fields
 
         #region Constructors and Destructors
 
-        internal AudioStream(int sampleFrequency, short samples)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sampleFrequency"></param>
+        /// <param name="format"></param>
+        /// <param name="channels"></param>
+        /// <param name="samples"></param>
+        /// <param name="callback"></param>
+        /// <param name="data"></param>
+        public AudioStream(int sampleFrequency, AudioFormat format, SoundChannel channels, short samples, AudioCallback callback, object data)
         {
             this.samples = samples;
             this.queue = new Queue<short[]>(5);
             this.sampleFrequency = sampleFrequency;
+
+            
+            // To keep compiler happy, we must 'initialize' these values
+            spec.padding = 0;
+            spec.size = 0;
+            spec.silence = 0;
+
+            spec.freq = sampleFrequency;
+            spec.format = (short)format;
+            spec.channels = (byte)channels;
+            if (callback != null)
+            {
+                spec.callback = Marshal.GetFunctionPointerForDelegate(callback);
+            }
+            spec.samples = samples;
+            spec.userdata = data;
+        }
+        AudioCallback callback;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sampleFrequency"></param>
+        /// <param name="format"></param>
+        /// <param name="channels"></param>
+        /// <param name="samples"></param>
+        public AudioStream(int sampleFrequency, AudioFormat format, SoundChannel channels, short samples)
+            : this(sampleFrequency, format, channels, samples, null, null)
+        {
+            callback = new AudioCallback(Unsigned16LittleStream);
+            spec.callback = Marshal.GetFunctionPointerForDelegate(callback);
         }
 
         #endregion Constructors and Destructors
@@ -68,17 +134,19 @@ namespace SdlDotNet.Audio
 
         #region Public methods
 
+
+
         /// <summary>
         /// Asynchronously queues audio data in <paramref name="data"/>.
         /// </summary>
         /// <param name="data">Buffer formatted as <see cref="AudioFormat.Unsigned16Little"/> of audio data to be played</param>
         public void Write(short[] data)
         {
-            AudioBasic.Locked = true;
+            Mixer.Locked = true;
             short[] copy = (short[])data.Clone();
             samplesInQueue += copy.Length;
             queue.Enqueue(copy);
-            AudioBasic.Locked = false;
+            Mixer.Locked = false;
         }
 
         /// <summary>
@@ -126,6 +194,90 @@ namespace SdlDotNet.Audio
             get
             {
                 return queue.Count;
+            }
+        }
+
+        /// <summary>
+        /// Audio frequency in samples per second
+        /// </summary>
+        /// <remarks>
+        /// The number of samples sent to the sound device every second.  
+        /// Common values are 11025, 22050 and 44100. The higher the better.
+        /// </remarks>
+        public int Frequency
+        {
+            get
+            {
+                return this.spec.freq;
+            }
+        }
+
+        /// <summary>
+        /// Audio data format.
+        /// </summary>
+        /// <remarks>
+        /// Specifies the size and type of each sample element.
+        /// </remarks>
+        public AudioFormat Format
+        {
+            get
+            {
+                return (AudioFormat)this.spec.format;
+            }
+        }
+
+        /// <summary>
+        /// Number of channels: 1 mono, 2 stereo.
+        /// </summary>
+        /// <remarks>
+        /// The number of seperate sound channels. 
+        /// 1 is mono (single channel), 2 is stereo (dual channel).
+        /// </remarks>
+        public byte Channels
+        {
+            get
+            {
+                return this.spec.channels;
+            }
+        }
+
+        /// <summary>
+        /// Audio buffer size in samples.
+        /// </summary>
+        /// <remarks>
+        /// When used with <see cref="Mixer.OpenAudio"/> this refers 
+        /// to the size of the 
+        /// audio buffer in samples. A sample a chunk of audio data
+        ///  of the size specified in format mulitplied by the number
+        ///   of channels.
+        /// </remarks>
+        public short BufferSamples
+        {
+            get
+            {
+                return this.spec.samples;
+            }
+        }
+
+        /// <summary>
+        /// Audio buffer size in bytes (calculated)
+        /// </summary>
+        public int BufferSize
+        {
+            get
+            {
+                return this.spec.size;
+            }
+        }
+
+        /// <summary>
+        /// Audio buffer silence value (calculated).
+        /// </summary>
+        public int Silence
+        {
+            get
+            {
+                return this.spec.silence;
             }
         }
 

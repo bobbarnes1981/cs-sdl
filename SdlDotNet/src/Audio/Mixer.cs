@@ -22,6 +22,8 @@ using System;
 using System.Threading;
 using System.IO;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
+using System.Globalization;
 
 using SdlDotNet;
 using SdlDotNet.Graphics;
@@ -259,6 +261,14 @@ namespace SdlDotNet.Audio
 
     #endregion
 
+    #region Public Delegates
+    /// <summary>
+    /// Used in the SDL_AudioSpec struct
+    /// </summary>
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void AudioCallback(IntPtr userData, IntPtr stream, int len);
+    #endregion Public Delegates
+
     /// <summary>
     /// Provides methods to access the sound system.
     /// You can obtain an instance of this class by accessing the 
@@ -280,6 +290,25 @@ namespace SdlDotNet.Audio
         static bool isInitialized = Initialize();
         static bool isOpen = false;
 
+        private enum PauseAction
+        {
+            UnPause,
+            Pause
+        }
+
+        static bool audioOpen;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool AudioOpen
+        {
+            get { return Mixer.audioOpen; }
+            set { Mixer.audioOpen = value; }
+        }
+
+        static bool audioLocked;
+
         #endregion
 
         #region Private Methods
@@ -294,6 +323,14 @@ namespace SdlDotNet.Audio
                     DEFAULT_CHUNK_SIZE);
                 ChannelsAllocated = DEFAULT_NUMBER_OF_CHANNELS;
                 isOpen = true;
+            }
+        }
+
+        static void CheckOpenStatus()
+        {
+            if (!audioOpen)
+            {
+                throw new AudioException(Events.StringManager.GetString("OpenAudioNotInit", CultureInfo.CurrentUICulture));
             }
         }
 
@@ -314,6 +351,40 @@ namespace SdlDotNet.Audio
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="stream"></param>
+        public static void OpenAudio(AudioStream stream)
+        {
+            IntPtr pSpec = Marshal.AllocHGlobal(Marshal.SizeOf(stream.Spec));
+            try
+            {
+                Marshal.StructureToPtr(stream.Spec, pSpec, false);
+
+                if (Sdl.SDL_OpenAudio(pSpec, IntPtr.Zero) < 0)
+                {
+                    throw new AudioException();
+                }
+
+                stream.Spec = (Sdl.SDL_AudioSpec)Marshal.PtrToStructure(pSpec, typeof(Sdl.SDL_AudioSpec));
+
+                if (((ushort)stream.Spec.format & 0x8000) == 0x8000)    // signed
+                {
+                    stream.Offset = 0;
+                }
+                else
+                {
+                    stream.Offset = 2 << ((byte)stream.Spec.format - 2);
+                }
+                Mixer.AudioOpen = true;
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(pSpec);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static bool IsInitialized
         {
             get { return Mixer.isInitialized; }
@@ -326,6 +397,92 @@ namespace SdlDotNet.Audio
         {
             isOpen = false;
             Events.CloseMixer();
+        }
+
+        /// <summary>
+        /// Call to close the audio subsystem
+        /// </summary>
+        public static void CloseAudio()
+        {
+            CheckOpenStatus();
+
+            Sdl.SDL_CloseAudio();
+
+            //audioCallback = null;
+            audioOpen = false;
+            //audioInfo = null;
+            audioLocked = false;
+
+            Events.CloseMixer();
+        }
+
+        /// <summary>
+        /// Gets or sets the locked status of the audio subsystem.  Necessary when data is 
+        /// shared between the <see cref="Sdl.AudioSpecCallbackDelegate">callback</see> and the main thread.
+        /// </summary>
+        public static bool Locked
+        {
+            get
+            {
+                return audioLocked;
+            }
+
+            set
+            {
+                audioLocked = value;
+                if (value)
+                {
+                    Sdl.SDL_LockAudio();
+                }
+                else
+                {
+                    Sdl.SDL_UnlockAudio();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns the current playback state of the audio subsystem.  See <see cref="AudioStatus"/>.
+        /// </summary>
+        public static AudioStatus AudioStatus
+        {
+            get
+            {
+                CheckOpenStatus();
+
+                return (AudioStatus)Sdl.SDL_GetAudioStatus();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the paused state of the audio subsystem.
+        /// </summary>
+        public static bool Paused
+        {
+            get
+            {
+                CheckOpenStatus();
+
+                return AudioStatus != AudioStatus.Playing;
+            }
+
+            set
+            {
+                CheckOpenStatus();
+
+                Sdl.SDL_PauseAudio(value ? (int)PauseAction.Pause : (int)PauseAction.UnPause);
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the audio subsystem is open or not.
+        /// </summary>
+        public static bool IsOpen
+        {
+            get
+            {
+                return audioOpen;
+            }
         }
 
         /// <summary>
