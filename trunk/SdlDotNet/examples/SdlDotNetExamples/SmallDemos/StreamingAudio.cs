@@ -87,8 +87,10 @@ namespace SdlDotNetExamples.SmallDemos
             //AudioFormat fmt = AudioFormat.Signed16Little;
             //AudioBasic.OpenAudio(playbackFreq, fmt, SoundChannel.Mono, samples, new AudioCallback(Unsigned16LittleCallback), me);
             AudioFormat audioFormat = AudioFormat.Unsigned16Little;
-            stream = AudioBasic.OpenAudioStream(playbackFreq, audioFormat, SoundChannel.Mono, samples);
-            offset = AudioBasic.AudioInfo.Offset;
+            stream = new AudioStream(playbackFreq, audioFormat, SoundChannel.Mono, samples);
+            Mixer.OpenAudio(stream);
+            //stream = AudioBasic.OpenAudioStream(playbackFreq, audioFormat, SoundChannel.Mono, samples);
+            offset = stream.Offset; // 2 << (16 - 2);
             volume = 0.9 * 32768;
 
             buffer16 = new short[samples];
@@ -98,8 +100,8 @@ namespace SdlDotNetExamples.SmallDemos
 
             osc2.Rate = 3;
             osc2.Amplitude = 10;
-
-            AudioBasic.Paused = false;
+            //AudioBasic.OpenAudio(stream);
+            Mixer.Paused = false;
 
             textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
                         "StreamingAudioDirections", CultureInfo.CurrentUICulture);
@@ -169,7 +171,7 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Quit(object sender, QuitEventArgs e)
         {
-            AudioBasic.Close();
+            Mixer.CloseAudio();
             Events.QuitApplication();
         }
 
@@ -198,7 +200,7 @@ namespace SdlDotNetExamples.SmallDemos
                 case Key.Q:
                 case Key.Escape:
                     // Quit the example
-                    AudioBasic.Close();
+                    Mixer.CloseAudio();
                     Events.QuitApplication();
                     break;
             }
