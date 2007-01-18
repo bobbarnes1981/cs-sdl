@@ -288,7 +288,7 @@ namespace SdlDotNet.Audio
         const int DEFAULT_NUMBER_OF_CHANNELS = 8;
         static private byte distance;
         static bool isInitialized = Initialize();
-        static bool isOpen = false;
+        static bool isOpen;
 
         private enum PauseAction
         {
@@ -354,6 +354,10 @@ namespace SdlDotNet.Audio
         /// <param name="stream"></param>
         public static void OpenAudio(AudioStream stream)
         {
+            if (stream == null)
+            {
+                throw new ArgumentNullException("stream");
+            }
             IntPtr pSpec = Marshal.AllocHGlobal(Marshal.SizeOf(stream.Spec));
             try
             {
