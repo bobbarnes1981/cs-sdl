@@ -289,13 +289,6 @@ namespace SdlDotNet.Audio
         static private byte distance;
         static bool isInitialized = Initialize();
         static bool isOpen;
-
-        private enum PauseAction
-        {
-            UnPause,
-            Pause
-        }
-
         static bool audioOpen;
 
         /// <summary>
@@ -308,6 +301,15 @@ namespace SdlDotNet.Audio
         }
 
         static bool audioLocked;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool AudioLocked
+        {
+            get { return Mixer.audioLocked; }
+            set { Mixer.audioLocked = value; }
+        }
 
         #endregion
 
@@ -331,6 +333,15 @@ namespace SdlDotNet.Audio
             if (!audioOpen)
             {
                 throw new AudioException(Events.StringManager.GetString("OpenAudioNotInit", CultureInfo.CurrentUICulture));
+            }
+        }
+
+        internal static void CheckOpenStatus(AudioStream stream)
+        {
+            if (!audioOpen)
+            {
+                Mixer.OpenAudio(stream);
+                audioOpen = true;
             }
         }
 
@@ -404,23 +415,6 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// Call to close the audio subsystem
-        /// </summary>
-        public static void CloseAudio()
-        {
-            CheckOpenStatus();
-
-            Sdl.SDL_CloseAudio();
-
-            //audioCallback = null;
-            audioOpen = false;
-            //audioInfo = null;
-            audioLocked = false;
-
-            Events.CloseMixer();
-        }
-
-        /// <summary>
         /// Gets or sets the locked status of the audio subsystem.  Necessary when data is 
         /// shared between the <see cref="Sdl.AudioSpecCallbackDelegate">callback</see> and the main thread.
         /// </summary>
@@ -445,38 +439,38 @@ namespace SdlDotNet.Audio
             }
         }
 
-        /// <summary>
-        /// Returns the current playback state of the audio subsystem.  See <see cref="AudioStatus"/>.
-        /// </summary>
-        public static AudioStatus AudioStatus
-        {
-            get
-            {
-                CheckOpenStatus();
+        ///// <summary>
+        ///// Returns the current playback state of the audio subsystem.  See <see cref="AudioStatus"/>.
+        ///// </summary>
+        //public static AudioStatus AudioStatus
+        //{
+        //    get
+        //    {
+        //        //CheckOpenStatus();
 
-                return (AudioStatus)Sdl.SDL_GetAudioStatus();
-            }
-        }
+        //        return (AudioStatus)Sdl.SDL_GetAudioStatus();
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets or sets the paused state of the audio subsystem.
-        /// </summary>
-        public static bool Paused
-        {
-            get
-            {
-                CheckOpenStatus();
+        ///// <summary>
+        ///// Gets or sets the paused state of the audio subsystem.
+        ///// </summary>
+        //public static bool Paused
+        //{
+        //    get
+        //    {
+        //        //CheckOpenStatus();
 
-                return AudioStatus != AudioStatus.Playing;
-            }
+        //        return AudioStatus != AudioStatus.Playing;
+        //    }
 
-            set
-            {
-                CheckOpenStatus();
+        //    set
+        //    {
+        //        //CheckOpenStatus();
 
-                Sdl.SDL_PauseAudio(value ? (int)PauseAction.Pause : (int)PauseAction.UnPause);
-            }
-        }
+        //        Sdl.SDL_PauseAudio(value ? (int)PauseAction.Pause : (int)PauseAction.UnPause);
+        //    }
+        //}
 
         /// <summary>
         /// Returns whether the audio subsystem is open or not.

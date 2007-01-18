@@ -485,6 +485,19 @@ namespace SdlDotNet.Core
         }
 
         /// <summary>
+        /// Call to close the audio subsystem
+        /// </summary>
+        public static void CloseAudio()
+        {
+            Sdl.SDL_CloseAudio();
+
+            Mixer.AudioOpen = false;
+            Mixer.AudioLocked = false;
+
+            Events.CloseMixer();
+        }
+
+        /// <summary>
         /// Checks the event queue, and processes 
         /// any events it finds by invoking the event properties
         /// </summary>

@@ -45,10 +45,21 @@ namespace SdlDotNetExamples.SmallDemos
         string filepath = @"../../";
         AudioStream stream;
 
+        enum StreamChoice
+        {
+            None,
+            InternalCallback,
+            CustomCallback,
+            CustomCallback8Bit
+        }
         static short[] buffer16;
-
+        static byte[] buffer8;
+        static StreamChoice streamChoice = StreamChoice.InternalCallback;
+        //static StreamChoice streamChoice = StreamChoice.CustomCallback;
+        //static StreamChoice streamChoice = StreamChoice.CustomCallback8Bit;
         const double pi2 = Math.PI * 2;
         const double divider = (double)playbackFreq / pi2;
+        AudioCallback callback;
 
         static double time;
         static double step = 1.0 / playbackFreq * pi2;
@@ -78,19 +89,34 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Go()
         {
-            //string me = "Hello World";
             textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(Path.Combine(filepath, Path.Combine(dataDirectory, "FreeSans.ttf")), 20), Color.Red);
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - StreamingAudio";
             screen = Video.SetVideoMode(width, height);
 
-            //AudioFormat fmt = AudioFormat.Signed16Little;
-            //AudioBasic.OpenAudio(playbackFreq, fmt, SoundChannel.Mono, samples, new AudioCallback(Unsigned16LittleCallback), me);
-            AudioFormat audioFormat = AudioFormat.Unsigned16Little;
-            stream = new AudioStream(playbackFreq, audioFormat, SoundChannel.Mono, samples);
-            Mixer.OpenAudio(stream);
-            //stream = AudioBasic.OpenAudioStream(playbackFreq, audioFormat, SoundChannel.Mono, samples);
-            offset = stream.Offset; // 2 << (16 - 2);
+            switch (streamChoice)
+            {
+                case StreamChoice.InternalCallback:
+                    stream = new AudioStream(playbackFreq, AudioFormat.Unsigned16Little, SoundChannel.Mono, samples);
+                    buffer16 = new short[samples];
+                    break;
+                case StreamChoice.CustomCallback:
+                    callback = new AudioCallback(Unsigned16LittleCallback);
+                    stream = new AudioStream(playbackFreq, AudioFormat.Unsigned16Little, SoundChannel.Mono, samples, callback, "Hello World");
+                    buffer16 = new short[samples];
+                    break;
+                case StreamChoice.CustomCallback8Bit:
+                    callback = new AudioCallback(Unsigned8Callback);
+                    stream = new AudioStream(playbackFreq, AudioFormat.Unsigned8, SoundChannel.Mono, samples, new AudioCallback(Unsigned8Callback), "Hello World");
+                    buffer8 = new byte[samples];
+                    break;
+                default:
+                    stream = new AudioStream(playbackFreq, AudioFormat.Unsigned16Little, SoundChannel.Mono, samples);
+                    buffer16 = new short[samples];
+                    break;
+            }
+
+            offset = stream.Offset;
             volume = 0.9 * 32768;
 
             buffer16 = new short[samples];
@@ -100,63 +126,47 @@ namespace SdlDotNetExamples.SmallDemos
 
             osc2.Rate = 3;
             osc2.Amplitude = 10;
-            //AudioBasic.OpenAudio(stream);
-            Mixer.Paused = false;
 
+            stream.Paused = false;
             textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
                         "StreamingAudioDirections", CultureInfo.CurrentUICulture);
             textDisplay.TextWidth = 350;
             Events.Run();
         }
 
-        //        static byte[] buffer8 = { };
-        //static short[] buffer16;
+        static void Unsigned8Callback(IntPtr userData, IntPtr stream, int len)
+        {
+            int buf_pos = 0;
 
-        //const double pi2 = Math.PI * 2;
-        //const double divider = (double)playbackFreq / pi2;
+            while (buf_pos < len)
+            {
+                buffer8[buf_pos++] = (byte)((Math.Sin((time / pi2) * freq / 16)) * volume);
 
-        //static double time;
-        //static double step = 1.0 / playbackFreq * pi2;
-        //static double freq = 224.0;         //Hz
-        //static double freq2 = 224.0;        //Hz
-        //static double volume = 0.9;
-        //static int offset;
-        //static Oscillator osc = new Oscillator(playbackFreq);
-        //static Oscillator osc2 = new Oscillator(playbackFreq);
+                time += step;
+            }
 
-        //static void Unsigned8Callback(IntPtr userData, IntPtr stream, int len)
-        //{
-        //    int buf_pos = 0;
+            Marshal.Copy(buffer8, 0, stream, len);
+            len = 0;
+        }
 
-        //    while (buf_pos < len)
-        //    {
-        //        buffer8[buf_pos++] = (byte)((Math.Sin(time / pi2 * freq) * 128) * volume);
+        static void Unsigned16LittleCallback(IntPtr userData, IntPtr stream, int len)
+        {
+            len /= 2;
+            int bufPos = 0;
 
-        //        time += step;
-        //    }
+            while (bufPos < len)
+            {
+                double oscPoint = osc.ValueY(time);
+                double osc2Point = osc2.ValueY(time);
+                double sound = ((Math.Sin(time * freq + oscPoint) * volume) + offset) + ((Math.Sin(time * freq2 + osc2Point) * volume) + offset);
+                sound /= 2.0;
+                buffer16[bufPos++] = (short)sound;
+                time += step;
+            }
 
-        //    Marshal.Copy(buffer8, 0, stream, len);
-        //    len = 0;
-        //}
-
-        //static void Unsigned16LittleCallback(IntPtr userData, IntPtr stream, int len)
-        //{
-        //    len /= 2;
-        //    int bufPos = 0;
-
-        //    while (bufPos < len)
-        //    {
-        //        double oscPoint = osc.ValueY(time);
-        //        double osc2Point = osc2.ValueY(time);
-        //        double sound = ((Math.Sin(time * freq + oscPoint) * volume) + offset) + ((Math.Sin(time * freq2 + osc2Point) * volume) + offset);
-        //        sound /= 2.0;
-        //        buffer16[bufPos++] = (short)sound;
-        //        time += step;
-        //    }
-
-        //    Marshal.Copy(buffer16, 0, stream, len);
-        //    len = 0;
-        //}
+            Marshal.Copy(buffer16, 0, stream, len);
+            len = 0;
+        }
 
         /// <summary>
         /// Lesson Title
@@ -171,23 +181,25 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Quit(object sender, QuitEventArgs e)
         {
-            Mixer.CloseAudio();
             Events.QuitApplication();
         }
 
         private void Events_TickEvent(object sender, TickEventArgs e)
         {
-            int bufPos = 0;
-            while (bufPos < 2048)
+            if (streamChoice == StreamChoice.InternalCallback)
             {
-                double oscPoint = osc.ValueY(time);
-                double osc2Point = osc2.ValueY(time);
-                double sound = ((Math.Sin(time * freq + oscPoint) * volume) + offset) + ((Math.Sin(time * freq2 + osc2Point) * volume) + offset);
-                sound /= 2.0;
-                buffer16[bufPos++] = (short)sound;
-                time += step;
+                int bufPos = 0;
+                while (bufPos < 2048)
+                {
+                    double oscPoint = osc.ValueY(time);
+                    double osc2Point = osc2.ValueY(time);
+                    double sound = ((Math.Sin(time * freq + oscPoint) * volume) + offset) + ((Math.Sin(time * freq2 + osc2Point) * volume) + offset);
+                    sound /= 2.0;
+                    buffer16[bufPos++] = (short)sound;
+                    time += step;
+                }
+                stream.Write(buffer16);
             }
-            stream.Write(buffer16);
             screen.Fill(Color.Black);
             screen.Blit(textDisplay);
             screen.Update();
@@ -200,7 +212,6 @@ namespace SdlDotNetExamples.SmallDemos
                 case Key.Q:
                 case Key.Escape:
                     // Quit the example
-                    Mixer.CloseAudio();
                     Events.QuitApplication();
                     break;
             }

@@ -27,6 +27,11 @@ using Tao.Sdl;
 
 namespace SdlDotNet.Audio
 {
+    enum PauseAction
+    {
+        UnPause,
+        Pause
+    }
     /// <summary>
     /// An active audio stream for queueing audio data to be played asynchronously.
     /// </summary>
@@ -57,6 +62,39 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
+        /// Returns the current playback state of the audio subsystem.  See <see cref="AudioStatus"/>.
+        /// </summary>
+        public AudioStatus AudioStatus
+        {
+            get
+            {
+                //CheckOpenStatus();
+
+                return (AudioStatus)Sdl.SDL_GetAudioStatus();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the paused state of the audio subsystem.
+        /// </summary>
+        public bool Paused
+        {
+            get
+            {
+                Mixer.CheckOpenStatus(this);
+
+                return this.AudioStatus != AudioStatus.Playing;
+            }
+
+            set
+            {
+                Mixer.CheckOpenStatus(this);
+
+                Sdl.SDL_PauseAudio(value ? (int)PauseAction.Pause : (int)PauseAction.UnPause);
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public short Bits
@@ -82,7 +120,6 @@ namespace SdlDotNet.Audio
             this.queue = new Queue<short[]>(5);
             this.sampleFrequency = sampleFrequency;
 
-            
             // To keep compiler happy, we must 'initialize' these values
             spec.padding = 0;
             spec.size = 0;
@@ -97,6 +134,14 @@ namespace SdlDotNet.Audio
             }
             spec.samples = samples;
             spec.userdata = data;
+            if (((ushort)spec.format & 0x8000) == 0x8000)    // signed
+            {
+                this.offset = 0;
+            }
+            else
+            {
+                this.offset = 2 << ((byte)spec.format - 2);
+            }
         }
         AudioCallback callback;
 
@@ -110,6 +155,10 @@ namespace SdlDotNet.Audio
         public AudioStream(int sampleFrequency, AudioFormat format, SoundChannel channels, short samples)
             : this(sampleFrequency, format, channels, samples, null, null)
         {
+            if (format != AudioFormat.Unsigned16Little)
+            {
+                throw new AudioException("Only AudioFormat.Unsigned16Little is currently supported");
+            }
             callback = new AudioCallback(Unsigned16LittleStream);
             spec.callback = Marshal.GetFunctionPointerForDelegate(callback);
         }
@@ -140,6 +189,7 @@ namespace SdlDotNet.Audio
         /// <param name="data">Buffer formatted as <see cref="AudioFormat.Unsigned16Little"/> of audio data to be played</param>
         public void Write(short[] data)
         {
+            Mixer.CheckOpenStatus(this);
             Mixer.Locked = true;
             short[] copy = (short[])data.Clone();
             samplesInQueue += copy.Length;
