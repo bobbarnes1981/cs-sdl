@@ -178,6 +178,7 @@ namespace SdlDotNetExamples.SmallDemos
                     hero.Animate = true;
                     break;
                 case Key.Escape:
+                case Key.Q:
                     Events.QuitApplication();
                     break;
             }

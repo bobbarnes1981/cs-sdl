@@ -37,7 +37,7 @@ namespace SdlDotNet.Particles.Particle
     /// {
     ///		public override void Render(Surface destination)
     ///		{
-    ///			destination.DrawBox(new Rectangle((int)this.X, (int)this.Y, 100,100), Color.Blue);
+    ///			destination.Draw(new Rectangle((int)this.X, (int)this.Y, 100,100), Color.Blue);
     ///		}
     /// }
     /// </code>

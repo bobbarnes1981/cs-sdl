@@ -45,7 +45,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <remarks>
         /// Use this with caution. 
         /// This is provided as a convenience. 
-        /// Please give the sprite a Surface and a Rectangle.</remarks>
+        /// Please give the sprite a Surface and a Vector.</remarks>
         public Sprite()
         {
         }
@@ -57,27 +57,16 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="surface">Surface of Sprite</param>
         public Sprite(Surface surface, Point position)
             :
-            this(surface)
+            this(surface, new Vector(position))
         {
-            if (surface == null)
-            {
-                throw new ArgumentNullException("surface");
-            }
-            this.rect = new Rectangle(position.X, position.Y, surface.Width, surface.Height);
         }
 
         /// <summary>
         /// Create new Sprite at (0, 0)
         /// </summary>
         /// <param name="surface">Surface of Sprite</param>
-        public Sprite(Surface surface)
+        public Sprite(Surface surface) : this(surface, new Vector(0, 0, 0))
         {
-            if (surface == null)
-            {
-                throw new ArgumentNullException("surface");
-            }
-            this.rect = new Rectangle(0, 0, surface.Width, surface.Height);
-            this.surf = surface;
         }
 
         /// <summary>
@@ -94,70 +83,28 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Create new Sprite
         /// </summary>
-        /// <param name="position">Position of Sprite</param>
-        /// <param name="positionZ">Z coordinate of Sprite</param>
+        /// <param name="vector">Vector of Sprite</param>
         /// <param name="surface">Surface of Sprite</param>
-        public Sprite(Surface surface, Point position, int positionZ)
-            :
-            this(surface, position)
+        public Sprite(Surface surface, Vector vector)
         {
-            this.coordinateZ = positionZ;
-        }
-
-        /// <summary>
-        /// Create new Sprite
-        /// </summary>
-        /// <param name="surface">
-        /// Surface of Sprite
-        /// </param>
-        /// <param name="rectangle">
-        /// Rectangle of sprite indicating position and size.
-        /// </param>
-        public Sprite(Surface surface, Rectangle rectangle)
-        {
+            if (surface == null)
+            {
+                throw new ArgumentNullException("surface");
+            }
             this.surf = surface;
-            this.rect = rectangle;
+            this.vector = vector;
         }
-
-        /// <summary>
-        /// Create new Sprite
-        /// </summary>
-        /// <param name="surface">Surface of Sprite</param>
-        /// <param name="rectangle">
-        /// Rectangle of sprite indicating position and size.
-        /// </param>
-        /// <param name="positionZ">Z coordinate of Sprite</param>
-        public Sprite(Surface surface, Rectangle rectangle, int positionZ)
-            :
-            this(surface, rectangle)
-        {
-            this.coordinateZ = positionZ;
-        }
-
-        //		/// <summary>
-        //		/// 
-        //		/// </summary>
-        //		/// <param name="coordinates"></param>
-        //		/// <param name="surface"></param>
-        //		/// <param name="group"></param>
-        //		public Sprite(Surface surface, Vector coordinates, SpriteDictionary group) : 
-        //			this(surface, coordinates)
-        //		{
-        //			this.AddInternal(group);
-        //		}
 
         /// <summary>
         /// Create new sprite
         /// </summary>
-        /// <param name="position">position of Sprite</param>
-        /// <param name="positionZ">Z coordinate of Sprite</param>
+        /// <param name="vector">Vector of Sprite</param>
         /// <param name="surface">Surface of Sprite</param>
         /// <param name="group">
         /// SpriteDictionary group to put Sprite into.
         /// </param>
-        public Sprite(Surface surface, Point position, int positionZ, SpriteDictionary group)
-            :
-            this(surface, position, positionZ)
+        public Sprite(Surface surface, Vector vector, SpriteDictionary group)
+            : this(surface, vector)
         {
             if (group == null)
             {
@@ -175,14 +122,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// SpriteDictionary group to put Sprite into.
         /// </param>
         public Sprite(Surface surface, Point position, SpriteDictionary group)
-            :
-            this(surface, position)
+            : this(surface, new Vector(position))
         {
-            if (group == null)
-            {
-                throw new ArgumentNullException("group");
-            }
-            group.Add(this);
         }
 
         #endregion
@@ -366,7 +307,19 @@ namespace SdlDotNet.Graphics.Sprites
 
         #region Geometry
 
-        private Rectangle rect;
+        private Vector vector;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Vector Vector
+        {
+            get { return vector; }
+            set { vector = value; }
+        }
+
+
+        //private Rectangle rect;
         /// <summary>
         /// Gets and sets the sprite's surface rectangle.
         /// </summary>
@@ -374,15 +327,15 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                if (rect.IsEmpty)
+                if (vector.IsEmpty)
                 {
-                    this.rect = this.Surface.Rectangle;
+                    this.vector = new Vector(0, 0, 0);
                 }
-                return this.rect;
+                return new Rectangle(new Point((int)vector.X, (int)vector.Y), surf == null ? new Size(0, 0) : this.surf.Size);
             }
             set
             {
-                this.rect = value;
+                this.vector = new Vector(value.X, value.Y, 0);
             }
         }
 
@@ -393,12 +346,12 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                return new Point(rect.X, rect.Y);
+                return new Point((int)vector.X, (int)vector.Y);
             }
             set
             {
-                rect.X = value.X;
-                rect.Y = value.Y;
+                vector.X = value.X;
+                vector.Y = value.Y;
             }
         }
 
@@ -419,7 +372,7 @@ namespace SdlDotNet.Graphics.Sprites
             }
         }
 
-        private int coordinateZ;
+        //private int coordinateZ;
 
         /// <summary>
         /// Gets and sets the sprite's x location.
@@ -429,11 +382,11 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                return this.rect.X;
+                return (int)this.vector.X;
             }
             set
             {
-                this.rect.X = value;
+                this.vector.X = value;
             }
         }
 
@@ -445,11 +398,11 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                return this.rect.Y;
+                return (int)this.vector.Y;
             }
             set
             {
-                this.rect.Y = value;
+                this.vector.Y = value;
             }
         }
 
@@ -461,11 +414,11 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                return this.coordinateZ;
+                return (int)this.vector.Z;
             }
             set
             {
-                this.coordinateZ = value;
+                this.vector.Z = value;
             }
         }
 
@@ -520,12 +473,12 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                return new Size(rect.Width, rect.Height);
+                return new Size(this.surf.Width, this.surf.Height);
             }
             set
             {
-                rect.Width = value.Width;
-                rect.Height = value.Height;
+                //this.surf.Width = value.Width;
+                //this.surf.Height = value.Height;
             }
         }
 
@@ -536,11 +489,11 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                return this.rect.Height;
+                return this.surf.Height;
             }
             set
             {
-                this.rect.Height = value;
+                //this.rect.Height = value;
             }
         }
 
@@ -551,11 +504,11 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                return this.rect.Width;
+                return this.surf.Width;
             }
             set
             {
-                this.rect.Width = value;
+                //this.rect.Width = value;
             }
         }
 
@@ -567,7 +520,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// <returns>True if Sprite intersects with the Point</returns>
         public virtual bool IntersectsWith(Point point)
         {
-            return this.rect.IntersectsWith(new Rectangle(point, new Size(0, 0)));
+            Rectangle rect = new Rectangle((int)vector.X, (int)vector.Y, this.surf.Width, this.surf.Height);
+            return rect.IntersectsWith(new Rectangle(point, new Size(0, 0)));
         }
 
         /// <summary>
@@ -578,7 +532,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// <returns>True if Sprite intersect with Rectangle</returns>
         public virtual bool IntersectsWith(Rectangle rectangle)
         {
-            return this.rect.IntersectsWith(rectangle);
+            Rectangle rect = new Rectangle((int)vector.X, (int)vector.Y, this.surf.Width, this.surf.Height);
+            return rect.IntersectsWith(rectangle);
         }
 
         /// <summary>
