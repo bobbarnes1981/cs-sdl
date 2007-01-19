@@ -76,7 +76,7 @@ namespace SdlDotNetExamples.SpriteDemos
             LoadDemos();
 
             // Loop until the system indicates it should stop
-            Console.WriteLine("Welcome to the SDL.NET Demo!");
+            //Console.WriteLine("Welcome to the SDL.NET Demo!");
 
             // Start up the ticker (and animation)
             SwitchDemo(0);
@@ -164,7 +164,7 @@ namespace SdlDotNetExamples.SpriteDemos
             // Start it
             currentDemo = (DemoMode)demos[demo];
             currentDemo.Start(manager);
-            Console.WriteLine("Switched to " + currentDemo + " mode");
+            //Console.WriteLine("Switched to " + currentDemo + " mode");
         }
         #endregion
 

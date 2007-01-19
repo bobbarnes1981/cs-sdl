@@ -30,6 +30,7 @@ using System.Globalization;
 using System.Resources;
 
 using Tao.FreeGlut;
+using SdlDotNet.Core;
 
 namespace SdlDotNetExamples
 {
@@ -98,6 +99,7 @@ namespace SdlDotNetExamples
             catch (System.Reflection.TargetInvocationException e)
             {
                 e.ToString();
+                Application.Restart();
             }
             catch (System.ArgumentOutOfRangeException e )
             {
