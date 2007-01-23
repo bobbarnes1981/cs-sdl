@@ -425,6 +425,7 @@ namespace SdlDotNet.Core
             Events.CloseTimer();
             Events.CloseVideo();
             Sdl.SDL_Quit();
+            Quit = null;
         }
 
         /// <summary>

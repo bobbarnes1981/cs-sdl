@@ -47,8 +47,9 @@ namespace SdlDotNetExamples.SmallDemos
         private const int width = 400;
         private const int height = 100;
         private Surface screen;
-        string dataDirectory = @"Data/";
-        string filepath = @"../../";
+        string fileDirectory = "Data";
+        string filePath = Path.Combine("..", "..");
+        string fileName = "boing.wav";
         private TextSprite textDisplay;
 
         // Create the music and sound variables.
@@ -73,21 +74,27 @@ namespace SdlDotNetExamples.SmallDemos
             Events.MusicFinished +=
                 new EventHandler<MusicFinishedEventArgs>(Events_MusicFinished);
 
-            if (File.Exists(dataDirectory + "boing.wav"))
+            if (File.Exists(fileName))
             {
-                filepath = "";
+                filePath = "";
+                fileDirectory = "";
             }
+            else if (File.Exists(Path.Combine(fileDirectory, fileName)))
+            {
+                filePath = "";
+            }
+
             Keyboard.UnicodeEnabled = true;
         }
 
         public void Go()
         {
             // Load the music and sounds.
-            music["mason2"] = new Music(filepath + dataDirectory + "mason2.mid");
-            music["fard-two"] = new Music(filepath + dataDirectory + "fard-two.ogg");
-            boing = new Sound(filepath + dataDirectory + "boing.wav");
+            music["mason2"] = new Music(Path.Combine(Path.Combine(filePath, fileDirectory), "mason2.mid"));
+            music["fard-two"] = new Music(Path.Combine(Path.Combine(filePath, fileDirectory), "fard-two.ogg"));
+            boing = new Sound(Path.Combine(Path.Combine(filePath, fileDirectory), "boing.wav"));
 
-            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(filepath + dataDirectory + "FreeSans.ttf", 20), Color.Red);
+            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(Path.Combine(Path.Combine(filePath, fileDirectory), "FreeSans.ttf"), 20), Color.Red);
 
             // Start up SDL
             Video.WindowIcon();

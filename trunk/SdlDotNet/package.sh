@@ -1,3 +1,1 @@
-./prebuild /target nant /build NET_2_0 /file prebuild.xml
-nant clean
-nant -buildfile:package.xml
+nant -buildfile:package.xml mono-2.0 package
