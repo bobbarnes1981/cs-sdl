@@ -22,8 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-using SdlDotNet.Core;
-
 namespace SdlDotNetExamples
 {
     static class Program
@@ -34,7 +32,6 @@ namespace SdlDotNetExamples
         [STAThread]
         static void Main()
         {
-            SdlDotNet.Core.Events.Close();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new SdlDotNetExamplesBrowser());

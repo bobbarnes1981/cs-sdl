@@ -2,7 +2,7 @@
 
 !define PRODUCT_NAME "SDL.NET Runtime"
 !define PRODUCT_TYPE "runtime"
-!define PRODUCT_VERSION "5.0.0"
+!define PRODUCT_VERSION "6.0.0"
 !define PRODUCT_PUBLISHER "SDL.NET"
 !define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
@@ -101,10 +101,10 @@ FunctionEnd
 Section "Runtime" SecRuntime
   SetOverwrite ifnewer
   SetOutPath "$INSTDIR\runtime\bin"
-  File /r /x CVS /x *Particles* /x *OpenGl* ${PRODUCT_PATH}\bin\assemblies\*.*
+  File /r /x CVS /x *Particles* /x *OpenGl* /x *Gtk* ${PRODUCT_PATH}\bin\assemblies\*.*
 
   SetOutPath "$INSTDIR\runtime\tools"
-  File /r ${PRODUCT_PATH}\source\tools\Prebuild\Prebuild2.exe
+  File /r ${PRODUCT_PATH}\source\tools\Prebuild\Prebuild.exe
 
   SetOutPath "$INSTDIR\runtime\lib"
   File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
@@ -269,13 +269,13 @@ Function IsSupportedWindowsVersion
 FunctionEnd
 
 Function GACInstall
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /install "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /install "$INSTDIR/runtime/bin/SdlDotNet.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /install "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /install "$INSTDIR/runtime/bin/SdlDotNet.dll"'
 
 FunctionEnd
 
 Function un.GACUnInstall
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /remove "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /remove "$INSTDIR/runtime/bin/SdlDotNet.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /remove "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /remove "$INSTDIR/runtime/bin/SdlDotNet.dll"'
 
 FunctionEnd

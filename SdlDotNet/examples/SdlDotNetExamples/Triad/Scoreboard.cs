@@ -38,15 +38,7 @@ namespace SdlDotNetExamples.Triad
         /// </summary>
         public Scoreboard()
         {
-            string FontName = "FreeSans.ttf";
-            string data_directory = @"Data/";
-            string filepath = @"../../";
-
-            if (File.Exists(data_directory + FontName))
-            {
-                filepath = "";
-            }
-            font = new SdlDotNet.Graphics.Font(filepath + data_directory + FontName, 18);
+            font = new SdlDotNet.Graphics.Font(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "FreeSans.ttf"), 18);
         }
 
         /// <summary>

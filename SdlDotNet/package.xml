@@ -18,11 +18,26 @@
     <property name="source.dir" value="source" />
     <property name="bin.dir" value="bin" />
     <property name="obj.dir" value="obj" />
-    <property name="lib.dir" value="lib/net-2.0" />
+    <property name="lib.dir" value="lib" />
     <property name="doc.dir" value="doc" />
     <property name="native.sdl" value="Tao.Sdl"/>
 
-    <target name="package" description="Package">
+    <target name="net-2.0" description="Sets framework to .NET 2.0">
+        <property name="nant.settings.currentframework" value="net-2.0" />
+    </target>
+
+    <target name="mono-2.0" description="Sets framework to mono 2.0">
+        <property name="nant.settings.currentframework" value="mono-2.0" />
+    </target>
+
+    <target name="clean" description="Clean project">
+	<delete dir="${bin.dir}" failonerror="false" />
+	<delete dir="${obj.dir}" failonerror="false" />
+	<delete dir="${dist.dir}" failonerror="false" />
+	<nant buildfile="SdlDotNet.build" target="clean" />
+    </target>
+
+    <target name="package" description="Package" depends="clean">
 	<if test="${platform::is-win32()}">
 	    <nant buildfile="SdlDotNet.build" target="net-2.0 package" />
 	</if>
@@ -43,18 +58,8 @@
 		<exclude name="**/${bin.dir}/**" />
 		<exclude name="**/*j.user" />
 		<exclude name="**.suo" />
-		<exclude name="**/*.build" />
-		<exclude name="**/*.mdp" />
-		<exclude name="**/*.mds" />
-		<exclude name="**/*.sln" />
-		<exclude name="**/*.cmbx" />
-		<exclude name="**/*.csproj" />
 		<exclude name="**/*.old" />
-		<exclude name="**/*.prjx" />
-		<exclude name="**/*.am" />
 		<exclude name="**/Makefile" />
-		<exclude name="**/configure" />
-		<exclude name="**/configure.ac" />
 		<exclude name="**/*.in" />
 		<exclude name="**/*.pc" />
 		<exclude name="**/*.stackdump" />
@@ -92,14 +97,15 @@
 	    </fileset>
 	</copy>
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
-	    <fileset basedir="${project::get-base-directory()}/${lib.dir}">
+	    <fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
 		<include name="${native.sdl}.dll"/>
+		<include name="${native.sdl}.config"/>
 		<include name="${native.sdl}.xml"/>
 	    </fileset>
 	</copy>
 	<if test="${platform::is-win32()}">
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/win32deps">
-		<fileset basedir="${project::get-base-directory()}/${lib.dir}/win32deps">
+		<fileset basedir="${lib.dir}/win32deps">
 		    <include name="**"/>
 		</fileset>
 	    </copy>
@@ -108,6 +114,8 @@
 	    <fileset>
 		<include name="${examples.dir}/**/*.exe" />
 		<include name="${examples.dir}/**/*.dll" />
+		<include name="${lib.dir}/net-2.0/*.dll" />
+		<include name="${lib.dir}/net-2.0/*.config" />
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>

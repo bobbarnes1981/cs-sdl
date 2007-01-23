@@ -46,8 +46,7 @@ namespace SdlDotNetExamples
 
         public SdlDotNetExamplesBrowser()
         {
-            Glut.glutInit();
-            SdlDotNet.Graphics.Video.Initialize();
+            //Glut.glutInit();
             stringManager =
                 new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
             InitializeComponent();
@@ -85,12 +84,12 @@ namespace SdlDotNetExamples
 
         private void RunExample()
         {
-            SdlDotNet.Core.Events.QuitApplication();
             try
             {
+                SdlDotNet.Core.Events.QuitApplication();
                 Type example = Assembly.GetExecutingAssembly().GetType(treeView1.SelectedNode.Name, true, true);
                 example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
-                Application.Restart();
+                Application.Exit();
             }
             catch (TypeLoadException e)
             {
@@ -99,15 +98,18 @@ namespace SdlDotNetExamples
             catch (System.Reflection.TargetInvocationException e)
             {
                 e.ToString();
-                Application.Restart();
             }
-            catch (System.ArgumentOutOfRangeException e )
+            catch (System.ArgumentOutOfRangeException e)
             {
                 e.ToString();
             }
             catch (System.MissingMethodException e)
             {
                 e.ToString();
+            }
+            finally
+            {
+                SdlDotNet.Core.Events.QuitApplication();
             }
         }
 

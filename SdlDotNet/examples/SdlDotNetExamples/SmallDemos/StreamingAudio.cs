@@ -41,8 +41,9 @@ namespace SdlDotNetExamples.SmallDemos
         private const int height = 100;
         private Surface screen;
         private TextSprite textDisplay;
-        string dataDirectory = @"Data/";
-        string filepath = @"../../";
+        string fileDirectory = "Data";
+        string fileName = "FreeSans.ttf";
+        string filePath = Path.Combine("..", "..");
         AudioStream stream;
 
         enum StreamChoice
@@ -89,7 +90,19 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Go()
         {
-            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(Path.Combine(filepath, Path.Combine(dataDirectory, "FreeSans.ttf")), 20), Color.Red);
+            if (File.Exists(fileName))
+            {
+                filePath = "";
+                fileDirectory = "";
+            }
+            else if (File.Exists(Path.Combine(fileDirectory, fileName)))
+            {
+                filePath = "";
+            }
+
+            string file = Path.Combine(Path.Combine(filePath, fileDirectory), fileName);
+
+            textDisplay = new TextSprite(" ", new SdlDotNet.Graphics.Font(file, 20), Color.Red);
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - StreamingAudio";
             screen = Video.SetVideoMode(width, height);

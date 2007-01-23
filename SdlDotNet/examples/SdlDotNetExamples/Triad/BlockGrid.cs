@@ -42,9 +42,7 @@ namespace SdlDotNetExamples.Triad
         static List<Block> blockList = new List<Block>();
         int delayFactor = 400;
         private float speedFactor = 1.0f;
-        string data_directory = @"Data/";
-        string filepath = @"../../";
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -113,7 +111,7 @@ namespace SdlDotNetExamples.Triad
         public BlockGrid(Point location, Size gridSize)
             : base()
         {
-            Mixer.SetAllChannelsVolume(50);
+            //Mixer.SetAllChannelsVolume(50);
 
             int blockGridWidth = gridSize.Width * Block.BlockWidth;
             int blockGridHeight = gridSize.Height * Block.BlockWidth;
@@ -128,11 +126,8 @@ namespace SdlDotNetExamples.Triad
 
             grid = new Block[gridSize.Width, gridSize.Height];
 
+           
             currentState = BlockGridState.MoveTriad;
-            if (File.Exists(data_directory + "move.wav"))
-            {
-                filepath = "";
-            }
 
             try
             {
@@ -152,27 +147,27 @@ namespace SdlDotNetExamples.Triad
         {
             if (moveSound == null)
             {
-                moveSound = Mixer.Sound(filepath + data_directory + "move.wav");
+                moveSound = Mixer.Sound(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "move.wav"));
             }
 
             if (permuteSound == null)
             {
-                permuteSound = Mixer.Sound(filepath + data_directory + "permute.wav");
+                permuteSound = Mixer.Sound(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "permute.wav"));
             }
 
             if (reductionSound == null)
             {
-                reductionSound = Mixer.Sound(filepath + data_directory + "reduction.wav");
+                reductionSound = Mixer.Sound(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "reduction.wav"));
             }
 
             if (hitBottomSound == null)
             {
-                hitBottomSound = Mixer.Sound(filepath + data_directory + "hitBottom.wav");
+                hitBottomSound = Mixer.Sound(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "hitBottom.wav"));
             }
 
             if (gameOverSound == null)
             {
-                gameOverSound = Mixer.Sound(filepath + data_directory + "gameOver.wav");
+                gameOverSound = Mixer.Sound(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "gameOver.wav"));
             }
         }
 
@@ -662,7 +657,7 @@ namespace SdlDotNetExamples.Triad
         {
             if (gameOverImage == null)
             {
-                gameOverImage = new Surface(new Bitmap(filepath + data_directory + "gameOver.bmp"));
+                gameOverImage = new Surface(new Bitmap(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "gameOver.bmp")));
             }
 
             int xPosition = this.ScreenX + (int)((this.Width - gameOverImage.Width) / 2);
@@ -674,7 +669,7 @@ namespace SdlDotNetExamples.Triad
         {
             if (gamePausedImage == null)
             {
-                gamePausedImage = new Surface(new Bitmap(filepath + data_directory + "gamePause.bmp"));
+                gamePausedImage = new Surface(new Bitmap(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "gamePause.bmp")));
             }
 
             int xPosition = this.ScreenX + (int)((this.Width - gamePausedImage.Width) / 2);

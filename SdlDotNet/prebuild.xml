@@ -63,7 +63,6 @@
 		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
 		<Match pattern="*.cs" recurse="true">
 		    <Exclude name="SurfaceControl.cs"/>
-		    <Exclude name="Properties/Resources.Designer.cs"/>
 		</Match>
 	    </Files>
 	</Project>

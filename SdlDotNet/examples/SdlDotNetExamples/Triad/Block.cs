@@ -29,9 +29,6 @@ namespace SdlDotNetExamples.Triad
     /// </summary>
     public class Block : GameObject, System.IDisposable
     {
-        static string data_directory = @"Data/";
-        static string filepath = @"../../";
-
         /// <summary>
         /// 
         /// </summary>
@@ -149,7 +146,7 @@ namespace SdlDotNetExamples.Triad
         {
             if (redBlock == null)
             {
-                Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "redBlock.bmp");
+                Bitmap bmp = new System.Drawing.Bitmap(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "redBlock.bmp"));
                 redBlock = new Surface(bmp);
             }
             return redBlock;
@@ -161,7 +158,7 @@ namespace SdlDotNetExamples.Triad
         {
             if (whiteBlock == null)
             {
-                Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "whiteBlock.bmp");
+                Bitmap bmp = new System.Drawing.Bitmap(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "whiteBlock.bmp"));
                 whiteBlock = new Surface(bmp);
             }
             return whiteBlock;
@@ -173,7 +170,7 @@ namespace SdlDotNetExamples.Triad
         {
             if (yellowBlock == null)
             {
-                Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "yellowBlock.bmp");
+                Bitmap bmp = new System.Drawing.Bitmap(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "yellowBlock.bmp"));
                 yellowBlock = new Surface(bmp);
             }
             return yellowBlock;
@@ -185,7 +182,7 @@ namespace SdlDotNetExamples.Triad
         {
             if (purpleBlock == null)
             {
-                Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "purpleBlock.bmp");
+                Bitmap bmp = new System.Drawing.Bitmap(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "purpleBlock.bmp"));
                 purpleBlock = new Surface(bmp);
             }
             return purpleBlock;
@@ -196,7 +193,7 @@ namespace SdlDotNetExamples.Triad
         {
             if (blueBlock == null)
             {
-                Bitmap bmp = new System.Drawing.Bitmap(filepath + data_directory + "blueBlock.bmp");
+                Bitmap bmp = new System.Drawing.Bitmap(Path.Combine(Path.Combine(TriadMain.FilePath, TriadMain.FileDirectory), "blueBlock.bmp"));
                 blueBlock = new Surface(bmp);
             }
             return blueBlock;
@@ -209,10 +206,6 @@ namespace SdlDotNetExamples.Triad
         protected override void DrawGameObject(Surface surface)
         {
             Surface image;
-            if (File.Exists(data_directory + "blueBlock.bmp"))
-            {
-                filepath = "";
-            }
 
             switch (blockType)
             {

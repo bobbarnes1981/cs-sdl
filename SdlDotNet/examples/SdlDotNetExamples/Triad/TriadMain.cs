@@ -43,8 +43,21 @@ namespace SdlDotNetExamples.Triad
         Scoreboard board;
         Surface screen;
         Surface surf;
-        string data_directory = @"Data/";
-        string filepath = @"../../";
+        static string fileDirectory = "Data";
+
+        public static string FileDirectory
+        {
+            get { return fileDirectory; }
+            set { fileDirectory = value; }
+        }
+        static string filePath = Path.Combine("..", "..");
+
+        public static string FilePath
+        {
+            get { return filePath; }
+            set { filePath = value; }
+        }
+        string fileName = "levelup.wav";
 
         Sound levelUpSound;
 
@@ -81,12 +94,17 @@ namespace SdlDotNetExamples.Triad
             grid.BlocksDestroyed +=
                 new EventHandler<BlocksDestroyedEventArgs>(grid_BlocksDestroyed);
 
-            if (File.Exists(data_directory + "levelup.wav"))
+            if (File.Exists(fileName))
             {
-                filepath = "";
+                filePath = "";
+                fileDirectory = "";
+            }
+            else if (File.Exists(Path.Combine(fileDirectory, fileName)))
+            {
+                filePath = "";
             }
 
-            levelUpSound = Mixer.Sound(filepath + data_directory + "levelup.wav");
+            levelUpSound = Mixer.Sound(Path.Combine(Path.Combine(filePath, fileDirectory), "levelup.wav"));
             Events.Run();
         }
 
