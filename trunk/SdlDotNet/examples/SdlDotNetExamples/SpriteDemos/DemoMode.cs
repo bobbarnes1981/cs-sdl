@@ -166,7 +166,7 @@ namespace SdlDotNetExamples.SpriteDemos
             surf.Fill(Color.Black);
             foreach (Sprite s in Sprites.Keys)
             {
-                surf.Blit(s.Render(), s.Rectangle);
+                surf.Blit(s.Surface, s.Rectangle);
             }
             return surf;
         }

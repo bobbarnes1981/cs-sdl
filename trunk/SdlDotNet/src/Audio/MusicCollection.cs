@@ -1,7 +1,7 @@
 #region LICENSE
 /*
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
- * Copyright (C) 2006 David Hudson
+ * Copyright (C) 2007 David Hudson
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
