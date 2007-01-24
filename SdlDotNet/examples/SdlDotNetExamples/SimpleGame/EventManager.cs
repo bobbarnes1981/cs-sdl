@@ -72,7 +72,7 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 if (OnGameStatusEvent != null)
                 {
-                    LogFile.WriteLine("EventManager has received GameStatus event");
+                    //LogFile.WriteLine("EventManager has received GameStatus event");
                     OnGameStatusEvent(this, (GameStatusEventArgs)obj);
                 }
             }
@@ -80,7 +80,7 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 if (OnEntityMoveRequestEvent != null)
                 {
-                    LogFile.WriteLine("EventManager has received EntityMoveRequest event");
+                    //LogFile.WriteLine("EventManager has received EntityMoveRequest event");
                     OnEntityMoveRequestEvent(this, (EntityMoveRequestEventArgs)obj);
                 }
             }
@@ -88,7 +88,7 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 if (OnMapBuiltEvent != null)
                 {
-                    LogFile.WriteLine("EventManager has received a MapBuilt event");
+                    //LogFile.WriteLine("EventManager has received a MapBuilt event");
                     OnMapBuiltEvent(this, (MapBuiltEventArgs)obj);
                 }
             }
@@ -96,7 +96,7 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 if (OnEntityMoveEvent != null)
                 {
-                    LogFile.WriteLine("EventManager has received an EntityMove event");
+                    //LogFile.WriteLine("EventManager has received an EntityMove event");
                     OnEntityMoveEvent(this, (EntityMoveEventArgs)obj);
                 }
             }
@@ -104,7 +104,7 @@ namespace SdlDotNetExamples.SimpleGame
             {
                 if (OnEntityPlaceEvent != null)
                 {
-                    LogFile.WriteLine("EventManager has received an EntityPlace event");
+                    //LogFile.WriteLine("EventManager has received an EntityPlace event");
                     OnEntityPlaceEvent(this, (EntityPlaceEventArgs)obj);
                 }
             }

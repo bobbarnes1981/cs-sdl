@@ -97,7 +97,7 @@ namespace SdlDotNetExamples.SimpleGame
                 if (i < 3)
                 {
                     mapRectangles[i] = new Rectangle(x, y, width, height);
-                    LogFile.WriteLine(mapRectangles[i].ToString());
+                    //LogFile.WriteLine(mapRectangles[i].ToString());
                     x += 138;
                 }
                 else if (i >= 3 && i < 6)
@@ -109,7 +109,7 @@ namespace SdlDotNetExamples.SimpleGame
                     y = 148;
 
                     mapRectangles[i] = new Rectangle(x, y, width, height);
-                    LogFile.WriteLine(mapRectangles[i].ToString());
+                    //LogFile.WriteLine(mapRectangles[i].ToString());
                     x += 138;
                 }
                 else if (i >= 6)
@@ -121,7 +121,7 @@ namespace SdlDotNetExamples.SimpleGame
                     y = 286;
 
                     mapRectangles[i] = new Rectangle(x, y, width, height);
-                    LogFile.WriteLine(mapRectangles[i].ToString());
+                    //LogFile.WriteLine(mapRectangles[i].ToString());
                     x += 138;
                 }
                 backSprites.Add(new SectorSprite(Video.Screen, sec, mapRectangles[i]));
@@ -201,7 +201,7 @@ namespace SdlDotNetExamples.SimpleGame
         /// <param name="e"></param>
         void Subscribe(object eventManager, MapBuiltEventArgs e)
         {
-            LogFile.WriteLine("GameView received a MapBuilt event");
+            //LogFile.WriteLine("GameView received a MapBuilt event");
             this.map = e.Map;
             ShowMap(this.map);
         }
@@ -213,7 +213,7 @@ namespace SdlDotNetExamples.SimpleGame
         /// <param name="e"></param>
         void Subscribe(object eventManager, EntityPlaceEventArgs e)
         {
-            LogFile.WriteLine("GameView received a EntityPlace event");
+            //LogFile.WriteLine("GameView received a EntityPlace event");
             ShowEntity(e.Entity);
         }
 
@@ -224,7 +224,7 @@ namespace SdlDotNetExamples.SimpleGame
         /// <param name="e"></param>
         void Subscribe(object eventManager, EntityMoveEventArgs e)
         {
-            LogFile.WriteLine("GameView received a EntityMove event");
+            //LogFile.WriteLine("GameView received a EntityMove event");
             MoveEntity(e.Entity);
         }
 
@@ -248,7 +248,7 @@ namespace SdlDotNetExamples.SimpleGame
 
         private void Tick(object sender, TickEventArgs e)
         {
-            LogFile.WriteLine("GameView received a Tick event");
+            //LogFile.WriteLine("GameView received a Tick event");
             UpdateView();
         }
         #region IDisposable Members

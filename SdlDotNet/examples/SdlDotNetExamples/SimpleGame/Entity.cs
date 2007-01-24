@@ -44,7 +44,7 @@ namespace SdlDotNetExamples.SimpleGame
 
         private void Subscribe(object eventManager, GameStatusEventArgs e)
         {
-            LogFile.WriteLine("Entity received a GameStatus event: " + e.GameStatus);
+            //LogFile.WriteLine("Entity received a GameStatus event: " + e.GameStatus);
             if (e.GameStatus == GameStatus.Started)
             {
                 Place(e.Game.Map.GetSectors()[Names.StartingSector]);
@@ -53,7 +53,7 @@ namespace SdlDotNetExamples.SimpleGame
 
         private void Subscribe(object eventManager, EntityMoveRequestEventArgs e)
         {
-            LogFile.WriteLine("Entity received a EntityMoveRequest event: " + e.Direction);
+            //LogFile.WriteLine("Entity received a EntityMoveRequest event: " + e.Direction);
             Move(e.Direction);
         }
 

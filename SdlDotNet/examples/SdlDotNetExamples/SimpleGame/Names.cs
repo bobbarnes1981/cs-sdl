@@ -25,9 +25,9 @@ namespace SdlDotNetExamples.SimpleGame
     public static class Names
     {
         static string windowCaption = "SDL.NET - Simple Game";
-        static string logFile = "SimpleGame.log";
-        static string logFile2 = "SimpleGame2.log";
-        static string logFile3 = "SimpleGame3.log";
+        //static string logFile = "SimpleGame.log";
+        //static string logFile2 = "SimpleGame2.log";
+        //static string logFile3 = "SimpleGame3.log";
         static string startingSimpleGame = "Starting SimpleGame.";
         static string quittingSimpleGame = "Quitting SimpleGame.";
         static int startingSector;
@@ -43,16 +43,16 @@ namespace SdlDotNetExamples.SimpleGame
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string LogFile
-        {
-            get
-            {
-                return logFile;
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public static string LogFile
+        //{
+        //    get
+        //    {
+        //        return logFile;
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -91,25 +91,25 @@ namespace SdlDotNetExamples.SimpleGame
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string LogFile2
-        {
-            get
-            {
-                return logFile2;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public static string LogFile3
-        {
-            get
-            {
-                return logFile3;
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public static string LogFile2
+        //{
+        //    get
+        //    {
+        //        return logFile2;
+        //    }
+        //}
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public static string LogFile3
+        //{
+        //    get
+        //    {
+        //        return logFile3;
+        //    }
+        //}
     }
 }
