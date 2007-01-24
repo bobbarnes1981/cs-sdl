@@ -11,14 +11,18 @@
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNetSDK"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNetSDK"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
-!define PRODUCT_PATH "../../dist/${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
+!define PRODUCT_DIR "..\..\dist"
+!define PRODUCT_PATH "${PRODUCT_DIR}\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
+!define PRODUCT_SOURCE "${PRODUCT_PATH}\source"
+!define PRODUCT_BIN "${PRODUCT_PATH}\bin"
+!define PRODUCT_DOC "${PRODUCT_PATH}\doc"
 
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP_NOSTRETCH
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP_NOSTRETCH
 
-BrandingText "© 2003-2006 David Hudson, http://cs-sdl.sourceforge.net/"
+BrandingText "© 2003-2007 David Hudson, http://cs-sdl.sourceforge.net/"
 SetCompressor lzma
 CRCCheck on
 
@@ -43,7 +47,7 @@ Var STARTMENU_FOLDER
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
 ; License page
-!insertmacro MUI_PAGE_LICENSE "..\..\COPYING"
+!insertmacro MUI_PAGE_LICENSE "${PRODUCT_SOURCE}\COPYING"
 ; Components Page
 !insertmacro MUI_PAGE_COMPONENTS
 ; Directory page
@@ -77,7 +81,7 @@ Var STARTMENU_FOLDER
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "..\..\dist\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_TYPE}-setup.exe"
+OutFile "${PRODUCT_DIR}\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_TYPE}-setup.exe"
 InstallDir "$PROGRAMFILES\SdlDotNet"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
@@ -85,7 +89,7 @@ ShowUnInstDetails show
 
 ; .NET Framework check
 ; http://msdn.microsoft.com/netframework/default.aspx?pull=/library/en-us/dnnetdep/html/redistdeploy1_1.asp
-; Section "Detecting that the .NET Framework 1.1 is installed"
+; Section "Detecting that the .NET Framework 2.0 is installed"
 Function .onInit
 	ReadRegDWORD $R0 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727" Install
 	StrCmp $R0 "" 0 CheckPreviousVersion
@@ -112,22 +116,22 @@ Section "Source" SecSrc
   SetOverwrite ifnewer
   
   SetOutPath "$INSTDIR\sdk\tools"
-  File /r ${PRODUCT_PATH}\source\tools\*.*
+  File /r ${PRODUCT_SOURCE}\tools\*.*
 
   SetOutPath "$INSTDIR\sdk\tests"
-  File /r /x obj /x CVS ${PRODUCT_PATH}\source\tests\*.*
+  File /r /x obj /x CVS ${PRODUCT_SOURCE}\tests\*.*
 
   SetOutPath "$INSTDIR\sdk\src"
-  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\source\src\*.*
+  File /r /x obj /x bin /x CVS ${PRODUCT_SOURCE}\src\*.*
   
   SetOutPath "$INSTDIR\sdk\examples"
-  File /r /x obj /x bin /x CVS ${PRODUCT_PATH}\source\examples\*.*
+  File /r /x obj /x bin /x CVS ${PRODUCT_SOURCE}\examples\*.*
 
   SetOutPath "$INSTDIR\sdk\scripts"
-  File /r /x CVS ${PRODUCT_PATH}\source\scripts\*.*
+  File /r /x CVS ${PRODUCT_SOURCE}\scripts\*.*
 
   SetOutPath "$INSTDIR\sdk"
-  File ${PRODUCT_PATH}\source\*.*
+  File ${PRODUCT_SOURCE}\source\*.*
 
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
@@ -137,16 +141,16 @@ SectionEnd
 Section "Runtime" SecRuntime
   SetOverwrite ifnewer
   SetOutPath "$INSTDIR\runtime\bin"
-  File /r /x CVS /x *Particles* /x *OpenGl* ${PRODUCT_PATH}\bin\assemblies\*.*
+  File /r /x CVS /x *Particles* /x *OpenGl* /x *Gtk* ${PRODUCT_BIN}\assemblies\*.*
 
   SetOutPath "$INSTDIR\runtime\lib"
-  File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
+  File /r /x CVS ${PRODUCT_BIN}\win32deps\*.*
   
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
   
   SetOutPath "$SYSDIR"
-  File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
+  File /r /x CVS ${PRODUCT_BIN}\win32deps\*.*
   
   Push "SdlDotNet"
   Push $INSTDIR\runtime\bin
@@ -163,31 +167,14 @@ Section "Examples" SecExamples
   CreateDirectory "$SMPROGRAMS\SdlDotNet"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Examples"
   SetOutPath "$INSTDIR\sdk\bin\examples"
-  File /r /x CVS ${PRODUCT_PATH}\bin\examples\*.*
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\AudioExample.lnk" "$INSTDIR\sdk\bin\examples\AudioExample.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BombRun.lnk" "$INSTDIR\sdk\bin\examples\BombRun.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\BounceSprites.lnk" "$INSTDIR\sdk\bin\examples\BounceSprites.exe"
+  File /r /x CVS ${PRODUCT_BIN}\examples\*.*
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SdlDotNetExamples.lnk" "$INSTDIR\sdk\bin\examples\SdlDotNetExamples.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\sdk\bin\examples\CDPlayer.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Gears.lnk" "$INSTDIR\sdk\bin\examples\Gears.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Isotope.lnk" "$INSTDIR\sdk\bin\examples\Isotope.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\MoviePlayer.lnk" "$INSTDIR\sdk\bin\examples\MoviePlayer.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\NeHe.lnk" "$INSTDIR\sdk\bin\examples\NeHe.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\ParticleExample.lnk" "$INSTDIR\sdk\bin\examples\ParticlesExample.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\OpenGlFont.lnk" "$INSTDIR\sdk\bin\examples\OpenGlFont.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\PhysFsTest.lnk" "$INSTDIR\sdk\bin\examples\PhysFsTest.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Rectangles.lnk" "$INSTDIR\sdk\bin\examples\Rectangles.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\RedBook.lnk" "$INSTDIR\sdk\bin\examples\RedBook.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SimpleGame.lnk" "$INSTDIR\sdk\bin\examples\SimpleGame.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SnowDemo.lnk" "$INSTDIR\sdk\bin\examples\SnowDemo.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SpriteGuiDemos.lnk" "$INSTDIR\sdk\bin\examples\SpriteGuiDemos.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\Triad.lnk" "$INSTDIR\sdk\bin\examples\Triad.exe"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Particles.chm"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.OpenGl Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.OpenGl.chm"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet\index.html"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet.Particles\index.html"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.OpenGl HTML Help.lnk" "$INSTDIR\doc\html\SdlDotNet.OpenGl\index.html"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.GtkSharp Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.GtkSharp.chm"
   
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples"
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}_Tutorials.url" "InternetShortcut" "URL" "${PRODUCT_TUTORIALS_WEB_SITE}"
@@ -343,14 +330,14 @@ Function IsSupportedWindowsVersion
 FunctionEnd
 
 Function GACInstall
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /install "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /install "$INSTDIR/runtime/bin/SdlDotNet.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /install "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /install "$INSTDIR/runtime/bin/SdlDotNet.dll"'
 
 FunctionEnd
 
 Function un.GACUnInstall
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /remove "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild2.exe" /remove "$INSTDIR/runtime/bin/SdlDotNet.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /remove "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
+  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /remove "$INSTDIR/runtime/bin/SdlDotNet.dll"'
 
 FunctionEnd
 
