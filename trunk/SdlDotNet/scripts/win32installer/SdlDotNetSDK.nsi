@@ -131,7 +131,7 @@ Section "Source" SecSrc
   File /r /x CVS ${PRODUCT_SOURCE}\scripts\*.*
 
   SetOutPath "$INSTDIR\sdk"
-  File ${PRODUCT_SOURCE}\source\*.*
+  File ${PRODUCT_SOURCE}\*.*
 
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
@@ -171,10 +171,10 @@ Section "Examples" SecExamples
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SdlDotNetExamples.lnk" "$INSTDIR\sdk\bin\examples\SdlDotNetExamples.exe"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\sdk\bin\examples\CDPlayer.exe"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.chm"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.Particles.chm"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.OpenGl Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.OpenGl.chm"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.GtkSharp Help.lnk" "$INSTDIR\doc\chm\SdlDotNet.GtkSharp.chm"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet Help.lnk" "$INSTDIR\doc\SdlDotNet.chm"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles Help.lnk" "$INSTDIR\sdk\bin\examples\SdlDotNet.Particles.chm"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.OpenGl Help.lnk" "$INSTDIR\sdk\bin\examples\SdlDotNet.OpenGl.chm"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.GtkSharp Help.lnk" "$INSTDIR\sdk\bin\examples\SdlDotNet.GtkSharp.chm"
   
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples"
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}_Tutorials.url" "InternetShortcut" "URL" "${PRODUCT_TUTORIALS_WEB_SITE}"
