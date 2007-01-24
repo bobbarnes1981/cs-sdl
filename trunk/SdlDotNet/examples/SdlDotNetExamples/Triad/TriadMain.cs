@@ -66,6 +66,16 @@ namespace SdlDotNetExamples.Triad
         /// </summary>
         public void Go()
         {
+            if (File.Exists(fileName))
+            {
+                filePath = "";
+                fileDirectory = "";
+            }
+            else if (File.Exists(Path.Combine(fileDirectory, fileName)))
+            {
+                filePath = "";
+            }
+
             int width = 800;
             int height = 600;
 
@@ -93,17 +103,6 @@ namespace SdlDotNetExamples.Triad
             grid = new BlockGrid(new Point(20, 20), new Size(11, 13));
             grid.BlocksDestroyed +=
                 new EventHandler<BlocksDestroyedEventArgs>(grid_BlocksDestroyed);
-
-            if (File.Exists(fileName))
-            {
-                filePath = "";
-                fileDirectory = "";
-            }
-            else if (File.Exists(Path.Combine(fileDirectory, fileName)))
-            {
-                filePath = "";
-            }
-
             levelUpSound = Mixer.Sound(Path.Combine(Path.Combine(filePath, fileDirectory), "levelup.wav"));
             Events.Run();
         }
