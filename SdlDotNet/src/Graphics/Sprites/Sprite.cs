@@ -1,6 +1,6 @@
 #region LICENSE
 /*
- * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2007 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -56,8 +56,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="position">Starting position</param>
         /// <param name="surface">Surface of Sprite</param>
         public Sprite(Surface surface, Point position)
-            :
-            this(surface, new Vector(position))
+            : this(surface, new Vector(position))
         {
         }
 
@@ -122,7 +121,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// SpriteDictionary group to put Sprite into.
         /// </param>
         public Sprite(Surface surface, Point position, SpriteDictionary group)
-            : this(surface, new Vector(position))
+            : this(surface, new Vector(position), group)
         {
         }
 
@@ -145,31 +144,31 @@ namespace SdlDotNet.Graphics.Sprites
             }
         }
 
-        /// <summary>
-        /// Returns a surface of the rendered sprite.
-        /// </summary>
-        public virtual Surface Render()
-        {
-            return this.surf;
-        }
+        ///// <summary>
+        ///// Returns a surface of the rendered sprite.
+        ///// </summary>
+        //public virtual Surface Render()
+        //{
+        //    return this.surf;
+        //}
 
-        /// <summary>
-        /// Renders the sprite onto the destination surface.
-        /// </summary>
-        /// <param name="destination">
-        /// The surface to be rendered onto.
-        /// </param>
-        /// <returns>
-        /// Actual rectangle blit to by method. Sometime clipping may occur.
-        /// </returns>
-        public virtual Rectangle Render(Surface destination)
-        {
-            if (destination == null)
-            {
-                throw new ArgumentNullException("destination");
-            }
-            return destination.Blit(this);
-        }
+        ///// <summary>
+        ///// Renders the sprite onto the destination surface.
+        ///// </summary>
+        ///// <param name="destination">
+        ///// The surface to be rendered onto.
+        ///// </param>
+        ///// <returns>
+        ///// Actual rectangle blit to by method. Sometimes clipping may occur.
+        ///// </returns>
+        //public virtual Rectangle Render(Surface destination)
+        //{
+        //    if (destination == null)
+        //    {
+        //        throw new ArgumentNullException("destination");
+        //    }
+        //    return destination.Blit(this);
+        //}
         #endregion
 
         #region Events

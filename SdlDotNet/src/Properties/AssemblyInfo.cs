@@ -1,6 +1,6 @@
 #region LICENSE
 /*
- * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2007 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,7 @@ using System.Diagnostics.CodeAnalysis;
 // associated with an assembly.
 //
 [assembly: AssemblyTitle("SdlDotNet")]
-[assembly: AssemblyCopyright("Copyright ©2003-2006 David Hudson.  All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright ©2003-2007 David Hudson.  All rights reserved.")]
 [assembly: AssemblyDescription(".NET Bindings for SDL")]
 [assembly: AssemblyDefaultAlias("SdlDotNet")]
 [assembly: AssemblyConfiguration("")]

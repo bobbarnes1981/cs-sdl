@@ -123,7 +123,8 @@ namespace SdlDotNetExamples.SmallDemos
             Video.Screen.Fill(Color.DarkGreen);
             try
             {
-                hero.Render(Video.Screen);
+                Video.Screen.Blit(hero);
+                //hero.Render(Video.Screen);
             }
             catch (System.ArgumentOutOfRangeException ex)
             {

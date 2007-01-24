@@ -1,6 +1,6 @@
 #region LICENSE
 /*
- * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2007 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -107,8 +107,8 @@ namespace SdlDotNet.Graphics.Sprites
                 if (s.Visible)
                 {
                     rects.Add(this[s]);
-                    tempDict.Add(s, destination.Blit(s.Render(), s.Rectangle));
-                    //rects.Add(newRect);
+                    //tempDict.Add(s, destination.Blit(s.Render(), s.Rectangle));
+                    tempDict.Add(s, destination.Blit(s.Surface, s.Rectangle));
                 }
             }
             foreach (Sprite s in tempDict.Keys)

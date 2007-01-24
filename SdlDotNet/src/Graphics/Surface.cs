@@ -1,6 +1,6 @@
 #region LICENSE
 /*
- * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2007 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -918,7 +918,8 @@ namespace SdlDotNet.Graphics
             }
             if (sprite.Visible)
             {
-                return this.Blit(sprite.Render(), sprite.Rectangle);
+                //return this.Blit(sprite.Render(), sprite.Rectangle);
+                return this.Blit(sprite.Surface, sprite.Rectangle);
             }
             else
             {
@@ -941,7 +942,8 @@ namespace SdlDotNet.Graphics
             }
             if (sprite.Visible)
             {
-                return this.Blit(sprite.Render(), destinationPosition);
+                //return this.Blit(sprite.Render(), destinationPosition);
+                return this.Blit(sprite.Surface, destinationPosition);
             }
             else
             {
@@ -964,7 +966,8 @@ namespace SdlDotNet.Graphics
             }
             if (sprite.Visible)
             {
-                return this.Blit(sprite.Render(), destinationRectangle);
+                //return this.Blit(sprite.Render(), destinationRectangle);
+                return this.Blit(sprite.Surface, destinationRectangle);
             }
             else
             {

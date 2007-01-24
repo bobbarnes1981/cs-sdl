@@ -96,7 +96,8 @@ namespace SdlDotNetExamples.SmallDemos
             Video.Screen.Fill(Color.Black);
 
             // Draw the ball
-            ball.Render(Video.Screen);
+            Video.Screen.Blit(ball);
+            //ball.Render(Video.Screen);
 
             // Update the screen
             Video.Screen.Update();

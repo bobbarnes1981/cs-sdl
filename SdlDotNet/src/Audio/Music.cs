@@ -1,6 +1,6 @@
 #region LICENSE
 /*
- * Copyright (C) 2004-2006 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004-2007 David Hudson (jendave@yahoo.com)
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
  *
  * This library is free software; you can redistribute it and/or

@@ -120,6 +120,14 @@
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>
+	<if test="${platform::is-unix()}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}">
+		<fileset>
+		    <include name="**/doc/**" />
+		    <exclude name="*.chm"/>
+		</fileset>
+	    </copy>
+	</if>
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}/Data" flatten="true">
 	    <fileset>
 		<include name="examples/**/Data/**" />

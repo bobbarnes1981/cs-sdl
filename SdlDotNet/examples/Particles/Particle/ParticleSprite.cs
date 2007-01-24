@@ -146,7 +146,8 @@ namespace SdlDotNet.Particles.Particle
         public override void Render(Surface destination)
         {
             m_Sprite.Position = new Point((int)this.X, (int)this.Y);
-            m_Sprite.Render(destination);
+            destination.Blit(m_Sprite);
+            //m_Sprite.Render(destination);
         }
 
         /// <summary>
