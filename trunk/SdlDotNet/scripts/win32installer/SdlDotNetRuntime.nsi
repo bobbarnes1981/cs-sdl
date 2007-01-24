@@ -9,14 +9,18 @@
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNetRuntime"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\SdlDotNetRuntime"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
-!define PRODUCT_PATH "../../dist/${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
+!define PRODUCT_DIR "..\..\dist"
+!define PRODUCT_PATH "${PRODUCT_DIR}\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
+!define PRODUCT_SOURCE "${PRODUCT_PATH}\source"
+!define PRODUCT_BIN "${PRODUCT_PATH}\bin"
+!define PRODUCT_DOC "${PRODUCT_PATH}\doc"
 
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP_NOSTRETCH
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP_NOSTRETCH
 
-BrandingText "© 2003-2006 David Hudson, http://cs-sdl.sourceforge.net/"
+BrandingText "© 2003-2007 David Hudson, http://cs-sdl.sourceforge.net/"
 SetCompressor lzma
 CRCCheck on
 
@@ -40,7 +44,7 @@ CRCCheck on
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
 ; License page
-!insertmacro MUI_PAGE_LICENSE "..\..\COPYING"
+!insertmacro MUI_PAGE_LICENSE "${PRODUCT_SOURCE}\COPYING"
 ; Components Page
 !insertmacro MUI_PAGE_COMPONENTS
 ; Instfiles page
@@ -67,7 +71,7 @@ CRCCheck on
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "..\..\dist\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_TYPE}-setup.exe"
+OutFile "${PRODUCT_DIR}\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}-${PRODUCT_TYPE}-setup.exe"
 InstallDir "$PROGRAMFILES\SdlDotNet"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
@@ -101,19 +105,19 @@ FunctionEnd
 Section "Runtime" SecRuntime
   SetOverwrite ifnewer
   SetOutPath "$INSTDIR\runtime\bin"
-  File /r /x CVS /x *Particles* /x *OpenGl* /x *Gtk* ${PRODUCT_PATH}\bin\assemblies\*.*
+  File /r /x CVS /x *Particles* /x *OpenGl* /x *Gtk* ${PRODUCT_BIN}\assemblies\*.*
 
   SetOutPath "$INSTDIR\runtime\tools"
-  File /r ${PRODUCT_PATH}\source\tools\Prebuild\Prebuild.exe
+  File /r ${PRODUCT_SOURCE}\tools\Prebuild\Prebuild.exe
 
   SetOutPath "$INSTDIR\runtime\lib"
-  File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
+  File /r /x CVS ${PRODUCT_BIN}\win32deps\*.*
   
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
   
   SetOutPath "$SYSDIR"
-  File /r /x CVS ${PRODUCT_PATH}\bin\win32deps\*.*
+  File /r /x CVS ${PRODUCT_BIN}\win32deps\*.*
   
   Push "SdlDotNet"
   Push $INSTDIR\runtime\bin
