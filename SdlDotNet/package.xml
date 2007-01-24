@@ -9,7 +9,7 @@
 
     <!-- global project settings -->
     <property name="project.config" value="Release" />
-    <property name="project.version" value="6.0.0" />
+    <property name="project.version" value="6.0.0b1" />
     <property name="src.dir" value="src" />
     <property name="examples.dir" value="examples" />
     <property name="extras.dir" value="extras" />
@@ -23,11 +23,11 @@
     <property name="native.sdl" value="Tao.Sdl"/>
 
     <target name="net-2.0" description="Sets framework to .NET 2.0">
-        <property name="nant.settings.currentframework" value="net-2.0" />
+	<property name="nant.settings.currentframework" value="net-2.0" />
     </target>
 
     <target name="mono-2.0" description="Sets framework to mono 2.0">
-        <property name="nant.settings.currentframework" value="mono-2.0" />
+	<property name="nant.settings.currentframework" value="mono-2.0" />
     </target>
 
     <target name="clean" description="Clean project">
@@ -53,7 +53,7 @@
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${source.dir}">
 	    <fileset>
 		<include name="**" />
-		
+
 		<exclude name="**/${obj.dir}/**" />
 		<exclude name="**/${bin.dir}/**" />
 		<exclude name="**/*j.user" />
@@ -83,13 +83,14 @@
 		<include name="**/*.chm"/>
 	    </fileset>
 	</copy>
-
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}/${(project::get-name())}">
-	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
-		<include name="*" />
-		<exclude name="*.chm"/>
-	    </fileset>
-	</copy>
+	<if test="${platform::is-unix()}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}/${(project::get-name())}">
+		<fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
+		    <include name="*" />
+		    <exclude name="*.chm"/>
+		</fileset>
+	    </copy>
+	</if>
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
