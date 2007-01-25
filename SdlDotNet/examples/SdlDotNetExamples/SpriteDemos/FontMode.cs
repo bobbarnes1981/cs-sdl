@@ -64,18 +64,18 @@ namespace SdlDotNetExamples.SpriteDemos
             Sprites.Add(new TextSprite("jumps over the lazy", f2, new Point(5, 280)));
             Sprites.Add(new TextSprite("dog. 1234567890", f2, new Point(5, 360)));
 
-            int w = SpriteDemosMain.Size.Width - 10;
-            Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+            //int w = SpriteDemosMain.Size.Width - 10;
+            Sprites.Add(new BoundedTextSprite("one", f4,
                 0.1, 0.5, new Point(5, 450)));
-            Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+            Sprites.Add(new BoundedTextSprite("one", f4,
                 0.25, 0.0, new Point(50, 465)));
-            Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+            Sprites.Add(new BoundedTextSprite("one", f4,
                 0.5, 1.0, new Point(100, 480)));
-            Sprites.Add(new BoundedTextSprite("one", f4, new Size(w, 30),
+            Sprites.Add(new BoundedTextSprite("one", f4,
                 1.0, 0.5, new Point(150, 495)));
 
             // Add the moving one
-            moving = new BoundedTextSprite("two", f4, new Size(w, 30),
+            moving = new BoundedTextSprite("two", f4,
                 0.0, 0.5, new Point(10, 510));
             Sprites.Add(moving);
             Sprites.EnableTickEvent();

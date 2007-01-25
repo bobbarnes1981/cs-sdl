@@ -94,6 +94,16 @@ namespace SdlDotNet.Graphics.Sprites
             this.vector = vector;
         }
 
+        internal Sprite(SurfaceCollection surfaces, Vector vector)
+        {
+            if (surfaces == null)
+            {
+                throw new ArgumentNullException("surfaces");
+            }
+            this.surf = surfaces[0];
+            this.vector = vector;
+        }
+
         /// <summary>
         /// Create new sprite
         /// </summary>
@@ -474,11 +484,11 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 return new Size(this.surf.Width, this.surf.Height);
             }
-            set
-            {
-                //this.surf.Width = value.Width;
-                //this.surf.Height = value.Height;
-            }
+            //set
+            //{
+            //    //this.surf.Width = value.Width;
+            //    //this.surf.Height = value.Height;
+            //}
         }
 
         /// <summary>

@@ -49,26 +49,46 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="name">Name of animation</param>
         /// <param name="animation">animation</param>
         public AnimatedSprite(string name, AnimationCollection animation)
-            : this()
+            : base(animation, new Vector(0, 0, 0))
         {
+            if (animation == null)
+            {
+                throw new ArgumentNullException("animation");
+            }
             m_Animations.Add(name, animation);
-            base.Surface = animation[0];
-            this.CurrentAnimation = name;
+            //base.Surface = animation[0];
+            this.m_CurrentAnimation = name;
+            m_Timer.Elapsed += new System.Timers.ElapsedEventHandler(m_Timer_Elapsed);
+            m_Timer.Interval = m_Animations[m_CurrentAnimation].Delay;
+            //this.CurrentAnimation = name;
         }
+        ///// <summary>
+        ///// Creates a new AnimatedSprite from a surface collection and a name
+        ///// </summary>
+        ///// <param name="name">The name of the animation</param>
+        ///// <param name="surfaces">The surface collection containing the frames of the animation.</param>
+        //public AnimatedSprite(string name, SurfaceCollection surfaces)
+        //    : this(surfaces, new Vector(0, 0, 0))
+        //{
+        //    this.CurrentAnimation = name;
+        //}
 
         /// <summary>
         /// Creates a new AnimatedSprite from a surface collection and a name
         /// </summary>
         /// <param name="name">The name of the animation</param>
         /// <param name="surfaces">The surface collection containing the frames of the animation.</param>
-        public AnimatedSprite(string name, SurfaceCollection surfaces)
-            : this()
+        /// <param name="vector">Vector of sprite</param>
+        public AnimatedSprite(string name, SurfaceCollection surfaces, Vector vector)
+            : base(surfaces, vector)
         {
-            this.CurrentAnimation = name;
+            this.m_CurrentAnimation = name;
+            m_Timer.Elapsed += new System.Timers.ElapsedEventHandler(m_Timer_Elapsed);
+            m_Timer.Interval = m_Animations[m_CurrentAnimation].Delay;
+            //this.CurrentAnimation = name;
             AnimationCollection animation = new AnimationCollection();
             animation.Add(surfaces);
             m_Animations.Add(name, animation);
-            base.Surface = surfaces[0];
         }
 
         /// <summary>
@@ -78,7 +98,6 @@ namespace SdlDotNet.Graphics.Sprites
         public AnimatedSprite(AnimationCollection animation)
             : this("Default", animation)
         {
-
         }
 
         /// <summary>
@@ -97,17 +116,16 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="surfaces">SurfaceCollection</param>
         /// <param name="vector">Starting coordinates</param>
         public AnimatedSprite(SurfaceCollection surfaces, Vector vector)
-            : this()
+            : base(surfaces, vector)
         {
             if (surfaces == null)
             {
                 throw new ArgumentNullException("surfaces");
             }
+            m_Timer.Elapsed += new System.Timers.ElapsedEventHandler(m_Timer_Elapsed);
             AnimationCollection anim = new AnimationCollection();
             anim.Add(surfaces);
             m_Animations.Add("Default", anim);
-            base.Surface = surfaces[0];
-            base.Vector = vector;
         }
 
         /// <summary>
@@ -115,8 +133,9 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         /// <param name="surfaces">SurfaceCollection</param>
         public AnimatedSprite(SurfaceCollection surfaces)
-            : this(surfaces, new Vector(0, 0, 0))
+            : base(surfaces, new Vector(0, 0, 0))
         {
+            m_Timer.Elapsed += new System.Timers.ElapsedEventHandler(m_Timer_Elapsed);
         }
         #endregion Constructors
 
@@ -173,7 +192,7 @@ namespace SdlDotNet.Graphics.Sprites
                 m_CurrentAnimation = value;
                 this.Surface = this.m_Animations[m_CurrentAnimation][0];
                 m_Timer.Interval = m_Animations[m_CurrentAnimation].Delay;
-                this.Size = this.m_Animations[m_CurrentAnimation].Size;
+                //this.Size = this.m_Animations[m_CurrentAnimation].Size;
             }
         }
 

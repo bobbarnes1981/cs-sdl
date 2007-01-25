@@ -197,7 +197,7 @@ namespace SdlDotNet.Graphics.Sprites
             try
             {
                 base.Surface = font.Render(textItem, color, backgroundColor, antiAlias, textWidth, maxLines);
-                base.Size = new Size(base.Surface.Width, base.Surface.Height);
+                //base.Size = new Size(base.Surface.Width, base.Surface.Height);
                 base.Transparent = this.transparent;
                 base.TransparentColor = this.transparentColor;
             }

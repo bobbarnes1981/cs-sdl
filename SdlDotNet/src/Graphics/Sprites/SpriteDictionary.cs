@@ -266,7 +266,7 @@ namespace SdlDotNet.Graphics.Sprites
         {
             if (spriteDictionary == null)
             {
-                throw new ArgumentNullException("SpriteDictionary");
+                throw new ArgumentNullException("spriteDictionary");
             }
             foreach (Sprite s in spriteDictionary.Keys)
             {

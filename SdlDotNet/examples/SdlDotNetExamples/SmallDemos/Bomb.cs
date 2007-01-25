@@ -42,7 +42,7 @@ namespace SdlDotNetExamples.SmallDemos
         {
             base.Surface.TransparentColor = Color.White;
             base.Surface.Transparent = true;
-            base.Size = this.Surface.Size;
+            //base.Size = this.Surface.Size;
             Reset();
         }
 
