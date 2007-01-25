@@ -37,6 +37,20 @@ namespace SdlDotNetExamples
     public partial class SdlDotNetExamplesBrowser : Form
     {
         static ResourceManager stringManager;
+        static bool isInitialized = Initialize();
+
+        public static bool IsInitialized
+        {
+            get { return SdlDotNetExamplesBrowser.isInitialized; }
+            set { SdlDotNetExamplesBrowser.isInitialized = value; }
+        }
+
+        static bool Initialize()
+        {
+            Tao.Sdl.Sdl.SDL_Quit();
+            Glut.glutInit();
+            return true;
+        }
 
         public static ResourceManager StringManager
         {
@@ -46,7 +60,6 @@ namespace SdlDotNetExamples
 
         public SdlDotNetExamplesBrowser()
         {
-            //Glut.glutInit();
             stringManager =
                 new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
             InitializeComponent();

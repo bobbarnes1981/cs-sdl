@@ -54,7 +54,7 @@ namespace SdlDotNetExamples.SmallDemos
             jumpstart = location.Y;
             base.Surface.TransparentColor = Color.White;
             base.Surface.Transparent = true;
-            base.Size = base.Surface.Size;
+            //base.Size = base.Surface.Size;
         }
 
         /// <summary>

@@ -48,7 +48,7 @@ namespace SdlDotNetExamples.SpriteDemos
             {
                 throw new ArgumentNullException("frames");
             }
-            this.Size = frames[0].Size;
+            //this.Size = frames[0].Size;
             this.AllowDrag = true;
         }
 

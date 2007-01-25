@@ -145,6 +145,10 @@ namespace SdlDotNet.Particles.Particle
         /// <param name="destination">The surface to render the sprite.</param>
         public override void Render(Surface destination)
         {
+            if (destination == null)
+            {
+                throw new ArgumentNullException("destination");
+            }
             m_Sprite.Position = new Point((int)this.X, (int)this.Y);
             destination.Blit(m_Sprite);
             //m_Sprite.Render(destination);

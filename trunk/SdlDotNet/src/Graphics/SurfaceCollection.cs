@@ -280,7 +280,7 @@ namespace SdlDotNet.Graphics
         /// Constructor to make a new surface collection based off of an existing one.
         /// </summary>
         /// <param name="surfaces">The surface collection to copy.</param>
-        public virtual void Add(SurfaceCollection surfaces)
+        public void Add(SurfaceCollection surfaces)
         {
             foreach (Surface s in surfaces)
             {
