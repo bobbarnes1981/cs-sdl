@@ -84,9 +84,9 @@
 	    </fileset>
 	</copy>
 	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}/${(project::get-name())}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}">
 		<fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
-		    <include name="*" />
+		    <include name="**" />
 		    <exclude name="*.chm"/>
 		</fileset>
 	    </copy>
@@ -120,14 +120,24 @@
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>
-	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}">
-		<fileset>
-		    <include name="**/doc/**" />
-		    <exclude name="*.chm"/>
-		</fileset>
-	    </copy>
-	</if>
+	<!-- <if test="${platform::is-unix()}"> -->
+	    <foreach item="Folder" property="foldername">
+		<echo message="${foldername}"/>
+		<in>
+		    <items>
+			<include name="${examples.dir}/*"/>
+		    </items>
+		</in>
+		<do>
+		    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}">
+			<fileset basedir="${foldername}/${bin.dir}/${project.config}/doc">
+			    <include name="**" />
+			    <exclude name="*.chm"/>
+			</fileset>
+		    </copy>
+		</do>
+	    </foreach>
+	    <!-- 	</if> -->
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}/Data" flatten="true">
 	    <fileset>
 		<include name="examples/**/Data/**" />
