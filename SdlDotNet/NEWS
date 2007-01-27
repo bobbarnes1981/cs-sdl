@@ -1,12 +1,50 @@
-SDL.NET is a set of object-oriented CLS-compliant .NET bindings for the SDL multimedia library that provides high-level access to audio, keyboard, mouse, joystick, TrueType fonts, various image formats, sound mixing, MPEG-1 movies, 2D video framebuffer and 3D hardware via OpenGL.
+SDL.NET is a set of object-oriented CLS-compliant .NET 2.0 bindings for the SDL multimedia library. It provides high-level access to audio, keyboard, mouse, joystick, TrueType fonts, various image formats, sound mixing, MPEG-1 movies, 2D video framebuffer and 3D hardware via OpenGL.
 
-This release now includes a .NET 2.0 version of the assembly. The v5.0.0 is for .NET 2.0 while v4.0.5 is for .NET 1.1. This release uses the latest SDL library release (1.2.11). Ogg files work again. There are many fixes to the SurfaceControl, TransparentColor and AlphaBlending. An isometric engine demo was added. A streaming audio example was added to 5.0.0 package. The Font and TextSprite classes can display multiline text. 
+This release fully leverages .NET 2.0 functionality. This release uses the latest SDL library release (1.2.11). The API has been completely revamped with reorganized namespaces, consolidated method names and generics. The Sprite and Audio systems have been revamped. A library that integrates SDL.NET and Gtk# has been added. Many examples have been added to the new examples browser application.
 
 Documentation and downloads are available at http://cs-sdl.sourceforge.net.
 
 A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changelog
 
 SDL.NET is licensed under the LGPL.
+
+===6.0.0beta1===
+David Hudson 26 Jan 2007
+* Full usage of .NET 2.0 - all Collections use generics now. 
+* Full FXCop compliance - this caused a lot of rewriting of constructors to prevent subclassing issues.
+* Updated to latest version of Tao (2.0RC1)
+* EventHandlers are now generics per FXCop.
+* SpriteCollection is now SpriteDictionary. The key is the clipped rectangle of the sprite's surface. This functionality is similar to pygame.
+* Primitives were given an interface and moved into their own namespace.
+* Surface class had many methods renamed - the numerous Primitives ones were consolidated and now use the IPrimitive interface.
+* Surface.DrawPixel is now Surface.Draw to make it consistent with the Surface Primitives methods.
+* The many Video.SetVideoMode/SetVideoModeWindow/SetVideoModeGl methods were consolidated into one method name with several overloads. This makes the code much more consistent and clean.
+* CDDrive.PlayTracks was renamed CDDrive.Play to make it consistent with other methods.
+* Sealed classes are now static classes (except SdlDotNet.Core.Events)
+* The static methods in the Music class was split into the MusicPlayer class
+* AudioStream class has been integrated into the rest of the audio system.
+* Sprites now consist of a Surface and a Vector instead of the Surface and Rectangle. Using a rectangle that was different from the Surface.Rectangle caused a lot of confusion, especially with AnimatedSprites. You can use the Vector to give the sprite a Z-axis. This allows the sprites to be blit in Z-order.
+* Removed ChannelCollection. Use a generic instead.
+* Removed RectanglesCollection. Using a List<Rectangle> instead.
+* Removed DirtyRectangles.
+* Added SdlDotNet.GtkSharp library (thanks to Drazen Soronda)
+* Video.WindowIcon(assembly, iconName) for more customizability when setting the window icon (thanks to Rob Loach)
+* Added more axes to JoystickAxis. (thanks to Rob Loach)
+* Reorganized namespaces. Instead of One namespace that contained eveything there are now:
+    SdlDotNet.Audio
+    SdlDotNet.Core    
+    SdlDotNet.Graphics
+    SdlDotNet.Graphics.Sprites
+    SdlDotNet.Graphics.Primitives
+    SdlDotNet.Input
+    SdlDotNet.Windows
+* Consolidated all examples (except CDPlayer) into one example browser application.
+* Added HeroExample, PongExample, PrimitivesExample, JoystickExample, GtkWindowExample, FontExample. 
+* Added a window and TextSprite to the StreamAudio example to make it easier to use.
+* Removed GuiExample and stripped out the GuiExample components from the SpriteDemo. This had fallen into disrepair in the 4.x era.
+* Removed Sprite.Render methods. The different overloads did completely different things. Use Surface.Blit(Sprite) instead.
+* Removed Surface.Flip(). use Surface.Update() instead. It actually calls Sdl.SDL_Flip() anyway, but I wanted to consolidate the terminology.
+* Many of the string literals now use Resources so they are semi-localized. Note that Monodevelop has a Resource handling bug, so SdlDotNet may not build properly in the IDE. NAnt on Linux works fine however.
 
 ===4.0.5 / 5.0.0===
 David Hudson 17 Oct 2006
