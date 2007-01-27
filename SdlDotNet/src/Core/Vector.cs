@@ -176,16 +176,9 @@ namespace SdlDotNet.Core
         /// <param name="vector">The vector to copy.</param>
         public Vector(Vector vector)
         {
-            if (vector != null)
-            {
-                m_x = vector.m_x;
-                m_y = vector.m_y;
-                m_z = vector.m_z;
-            }
-            //else
-            //{
-            //    m_x = m_y = m_z = 0;
-            //}
+            m_x = vector.m_x;
+            m_y = vector.m_y;
+            m_z = vector.m_z;
         }
 
         #region Static Constructors
