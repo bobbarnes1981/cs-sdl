@@ -1,5 +1,43 @@
+===6.0.0beta1===
+David Hudson 26 Jan 2007
+* Full usage of .NET 2.0 - all Collections use generics now. 
+* Full FXCop compliance - this caused a lot of rewriting of constructors to prevent subclassing issues.
+* Updated to latest version of Tao (2.0RC1)
+* EventHandlers are now generics per FXCop.
+* SpriteCollection is now SpriteDictionary. The key is the clipped rectangle of the sprite's surface. This functionality is similar to pygame.
+* Primitives were given an interface and moved into their own namespace.
+* Surface class had many methods renamed - the numerous Primitives ones were consolidated and now use the IPrimitive interface.
+* Surface.DrawPixel is now Surface.Draw to make it consistent with the Surface Primitives methods.
+* The many Video.SetVideoMode/SetVideoModeWindow/SetVideoModeGl methods were consolidated into one method name with several overloads. This makes the code much more consistent and clean.
+* CDDrive.PlayTracks was renamed CDDrive.Play to make it consistent with other methods.
+* Sealed classes are now static classes (except SdlDotNet.Core.Events)
+* The static methods in the Music class was split into the MusicPlayer class
+* AudioStream class has been integrated into the rest of the audio system.
+* Sprites now consist of a Surface and a Vector instead of the Surface and Rectangle. Using a rectangle that was different from the Surface.Rectangle caused a lot of confusion, especially with AnimatedSprites. You can use the Vector to give the sprite a Z-axis. This allows the sprites to be blit in Z-order.
+* Removed ChannelCollection. Use a generic instead.
+* Removed RectanglesCollection. Using a List<Rectangle> instead.
+* Removed DirtyRectangles.
+* Added SdlDotNet.GtkSharp library (thanks to Drazen Soronda)
+* Video.WindowIcon(assembly, iconName) for more customizability when setting the window icon (thanks to Rob Loach)
+* Added more axes to JoystickAxis. (thanks to Rob Loach)
+* Reorganized namespaces. Instead of One namespace that contained eveything there are now:
+    SdlDotNet.Audio
+    SdlDotNet.Core    
+    SdlDotNet.Graphics
+    SdlDotNet.Graphics.Sprites
+    SdlDotNet.Graphics.Primitives
+    SdlDotNet.Input
+    SdlDotNet.Windows
+* Consolidated all examples (except CDPlayer) into one example browser application.
+* Added HeroExample, PongExample, PrimitivesExample, JoystickExample, GtkWindowExample, FontExample. 
+* Added a window and TextSprite to the StreamAudio example to make it easier to use.
+* Removed GuiExample and stripped out the GuiExample components from the SpriteDemo. This had fallen into disrepair in the 4.x era.
+* Removed Sprite.Render methods. The different overloads did completely different things. Use Surface.Blit(Sprite) instead.
+* Removed Surface.Flip(). use Surface.Update() instead. It actually calls Sdl.SDL_Flip() anyway, but I wanted to consolidate the terminology.
+* Many of the string literals now use Resources so they are semi-localized. Note that Monodevelop has a Resource handling bug, so SdlDotNet may not build properly in the IDE. NAnt on Linux works fine however.
+
 ===4.0.5 / 5.0.0===
-David Hudson xx Oct 2006
+David Hudson 17 Oct 2006
 * Fixed massive memory leak in the SdlDotNet.OpenGl library. The OpenGlFont example works better now.
 * Fixed several bugs in SurfaceControl and Events that caused crashes in the SurfaceControl. (Thanks to YayItsAndrew for the test case and bug reports)
 * Fixed bugs in CDPlayer. Added some scrollbars to the CDPlayer (5.0.0) to show how the SurfaceControl can work with a Panel.

@@ -13,7 +13,7 @@ Double-click on the installer and follow the instructions.
 
 You can instead use the zip or gzip files
 
-Uncompress the sdldotnet-4.x.x.zip or sdldotnet-4.x.x.tar.gz file. 
+Uncompress the sdldotnet-6.x.x.zip or sdldotnet-6.x.x.tar.gz file. 
 Copy the files located in the /bin/assemblies directory (SdlDotNet.dll, SdlDotNet.Particles.dll and Tao.Sdl.dll) into the Global Assembly Cache (c:\winnt\assembly).
 
 For windows, copy the files from /lib/win32deps into a directory in your path. 
@@ -31,7 +31,6 @@ mono
 libgdiplus
 libsdl_mixer1.2
 libgdiplus
-libsdl-mixer1.2
 libsdl-image1.2
 libsdl-ttf2.0-0
 libsdl-gfx1.2
