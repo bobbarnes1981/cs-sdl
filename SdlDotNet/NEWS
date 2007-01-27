@@ -2,7 +2,10 @@ SDL.NET is a set of object-oriented CLS-compliant .NET 2.0 bindings for the SDL 
 
 This release fully leverages .NET 2.0 functionality. This release uses the latest SDL library release (1.2.11). The API has been completely revamped with reorganized namespaces, consolidated method names and generics. The Sprite and Audio systems have been revamped. A library that integrates SDL.NET and Gtk# has been added. Many examples have been added to the new examples browser application.
 
-Documentation and downloads are available at http://cs-sdl.sourceforge.net.
+Documentation is available at http://cs-sdl.sourceforge.net.
+
+Downloads are available at:
+http://sourceforge.net/project/showfiles.php?group_id=52340
 
 A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changelog
 
