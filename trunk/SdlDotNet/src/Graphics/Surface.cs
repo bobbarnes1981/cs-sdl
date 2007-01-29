@@ -1961,6 +1961,20 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
+        /// Resize surface to next power of two size. Useful for OpenGL.
+        /// </summary>
+        public Surface Resize()
+        {
+            return this.Resize(new Size(NextPowerOfTwo(this.Width), NextPowerOfTwo(this.Height)));
+        }
+
+        private static int NextPowerOfTwo(int x)
+        {
+            double logbase2 = (Math.Log(x) / Math.Log(2));
+            return (int)Math.Round(Math.Pow(2, Math.Ceiling(logbase2)));
+        }
+
+        /// <summary>
         /// Uses a Transformation object to perform rotation, zooming and scaling
         /// </summary>
         /// <param name="transformation">Transformation object</param>

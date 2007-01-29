@@ -99,23 +99,6 @@ namespace SdlDotNet.OpenGl
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static Surface ResizeSurface(Surface surface)
-        {
-            if (surface == null)
-            {
-                throw new ArgumentNullException("surface");
-            }
-            return surface.Resize(new Size(NextPowerOfTwo(surface.Width), NextPowerOfTwo(surface.Height)));
-        }
-
-        private static int NextPowerOfTwo(int x)
-        {
-            double logbase2 = (Math.Log(x) / Math.Log(2));
-            return (int)Math.Round(Math.Pow(2, Math.Ceiling(logbase2)));
-        }
 
         /// <summary>
         /// Load bitmaps and convert to textures.
@@ -140,8 +123,7 @@ namespace SdlDotNet.OpenGl
                 {
                     this.surface.Dispose();
                 }
-                this.surface = ResizeSurface(value);
-                //this.surface = value;
+                this.surface = value.Resize();
                 this.textureImage = this.surface.Bitmap;
                 this.textureID = this.TextureId;
             }
