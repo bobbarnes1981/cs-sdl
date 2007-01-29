@@ -38,12 +38,7 @@
     </target>
 
     <target name="package" description="Package" depends="clean">
-	<if test="${platform::is-win32()}">
-	    <nant buildfile="SdlDotNet.build" target="net-2.0 package" />
-	</if>
-	<if test="${platform::is-unix()}">
-	    <nant buildfile="SdlDotNet.build" target="mono-2.0 package" />
-	</if>
+	<nant buildfile="SdlDotNet.build" target="${nant.settings.currentframework} package" />
 	<call target="copyfiles" />
 	<call target="zip" />
     </target>
