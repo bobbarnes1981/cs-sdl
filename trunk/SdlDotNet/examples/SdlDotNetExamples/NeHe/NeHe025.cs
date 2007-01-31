@@ -305,9 +305,9 @@ namespace SdlDotNetExamples.NeHe
             catch (Exception e)
             {
                 // Handle Any Exceptions While Loading Object Data, Exit App
-                string errorMsg = SdlDotNetExamplesBrowser.StringManager.GetString(
+                string errorMsg = Program.StringManager.GetString(
                         "LoadError", CultureInfo.CurrentUICulture) + "\n\t" + filename + "\n" + "\n\n\n\t" + e.StackTrace + "\n";
-                MessageBox.Show(errorMsg, SdlDotNetExamplesBrowser.StringManager.GetString(
+                MessageBox.Show(errorMsg, Program.StringManager.GetString(
                         "Error", CultureInfo.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 throw;
             }

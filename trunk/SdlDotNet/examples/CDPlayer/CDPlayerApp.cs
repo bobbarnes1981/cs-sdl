@@ -54,9 +54,6 @@ namespace SdlDotNetExamples.CDPlayer
         private SdlDotNet.Windows.SurfaceControl surfaceControl;
         private System.Windows.Forms.Button buttonNext;
         string data_directory = @"Data/";
-        private System.Windows.Forms.MainMenu mainMenu1;
-        private System.Windows.Forms.MenuItem menuItem1;
-        private System.Windows.Forms.MenuItem menuItem2;
         string filepath = @"../../";
         private Panel panel1;
         private System.ComponentModel.IContainer components;
@@ -201,9 +198,7 @@ namespace SdlDotNetExamples.CDPlayer
             this.buttonNext = new System.Windows.Forms.Button();
             this.buttonPrevious = new System.Windows.Forms.Button();
             this.surfaceControl = new SdlDotNet.Windows.SurfaceControl();
-            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            //this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.surfaceControl)).BeginInit();
             this.panel1.SuspendLayout();
@@ -306,27 +301,7 @@ namespace SdlDotNetExamples.CDPlayer
             this.surfaceControl.Name = "surfaceControl";
             this.surfaceControl.Size = new System.Drawing.Size(336, 224);
             this.surfaceControl.TabIndex = 0;
-            this.surfaceControl.TabStop = false;
-            // 
-            // mainMenu1
-            // 
-            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1});
-            // 
-            // menuItem1
-            // 
-            this.menuItem1.Index = 0;
-            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem2});
-            this.menuItem1.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "File", CultureInfo.CurrentUICulture);
-            // 
-            // menuItem2
-            // 
-            this.menuItem2.Index = 0;
-            this.menuItem2.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "Exit", CultureInfo.CurrentUICulture);
-            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
+            this.surfaceControl.TabStop = false;         
             // 
             // panel1
             // 
@@ -356,7 +331,6 @@ namespace SdlDotNetExamples.CDPlayer
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Menu = this.mainMenu1;
             this.Name = "CDPlayerApp";
             this.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
                         "Title", CultureInfo.CurrentUICulture);

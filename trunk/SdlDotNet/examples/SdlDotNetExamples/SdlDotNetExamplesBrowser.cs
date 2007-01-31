@@ -36,7 +36,6 @@ namespace SdlDotNetExamples
 {
     public partial class SdlDotNetExamplesBrowser : Form
     {
-        static ResourceManager stringManager;
         static bool isInitialized = Initialize();
 
         public static bool IsInitialized
@@ -52,16 +51,8 @@ namespace SdlDotNetExamples
             return true;
         }
 
-        public static ResourceManager StringManager
-        {
-            get { return SdlDotNetExamplesBrowser.stringManager; }
-            set { SdlDotNetExamplesBrowser.stringManager = value; }
-        }
-
         public SdlDotNetExamplesBrowser()
         {
-            stringManager =
-                new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
             InitializeComponent();
         }
 
@@ -76,14 +67,17 @@ namespace SdlDotNetExamples
 
                 if (runMethods.Length > 0)
                 {
-                    if (!treeView1.Nodes.ContainsKey(type.Namespace))
-                    {
-                        treeView1.Nodes.Add(type.Namespace, type.Namespace.Substring(type.Namespace.IndexOf('.') + 1));
-                    }
+                   // foreach (TreeNode node in treeView1.Nodes)
+                   // {
+                        if (!treeView1.Nodes.ContainsKey(type.Namespace))
+                        {
+                            treeView1.Nodes.Add(type.Namespace, type.Namespace.Substring(type.Namespace.IndexOf('.') + 1));
+                        }
 
-                    object result = type.InvokeMember("Title",
-                            BindingFlags.GetProperty, null, type, null, CultureInfo.CurrentCulture);
-                    treeView1.Nodes[type.Namespace].Nodes.Add(type.FullName, (string)result);
+                        object result = type.InvokeMember("Title",
+                                BindingFlags.GetProperty, null, type, null, CultureInfo.CurrentCulture);
+                        treeView1.Nodes[type.Namespace].Nodes.Add(type.FullName, (string)result);
+                    //}
                 }
             }
 
@@ -126,7 +120,7 @@ namespace SdlDotNetExamples
             }
         }
 
-        void treeView1_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        void treeView1_DoubleClick(object sender, EventArgs e)
         {
             RunExample();
         }

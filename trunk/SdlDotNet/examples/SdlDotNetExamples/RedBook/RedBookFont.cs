@@ -200,12 +200,12 @@ namespace SdlDotNetExamples.RedBook
 			Gl.glColor3fv(white);
 
 			Gl.glRasterPos2i(20, 60);
-            PrintString(SdlDotNetExamplesBrowser.StringManager.GetString(
+            PrintString(Program.StringManager.GetString(
                         "TheQuickBrownFoxJumps", CultureInfo.CurrentUICulture));
 			//PrintString("THE QUICK BROWN FOX JUMPS");
 			Gl.glRasterPos2i(20, 40);
 			//PrintString("OVER A LAZY DOG");
-            PrintString(SdlDotNetExamplesBrowser.StringManager.GetString(
+            PrintString(Program.StringManager.GetString(
                         "OverALazyDog", CultureInfo.CurrentUICulture));
 			Gl.glFlush();
 		}

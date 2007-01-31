@@ -56,7 +56,7 @@ namespace SdlDotNetExamples.Triad
             {
                 if (value == 0.0)
                 {
-                    throw new SdlException(SdlDotNetExamplesBrowser.StringManager.GetString(
+                    throw new SdlException(Program.StringManager.GetString(
                         "CannotBeZero", CultureInfo.CurrentUICulture));
                 }
 
@@ -320,7 +320,7 @@ namespace SdlDotNetExamples.Triad
                     case BlockGridState.GameOver:
                         break;
                     default:
-                        throw new SdlException(SdlDotNetExamplesBrowser.StringManager.GetString(
+                        throw new SdlException(Program.StringManager.GetString(
                         "NotHandled", CultureInfo.CurrentUICulture) + " " + currentState);
                 }
             }
