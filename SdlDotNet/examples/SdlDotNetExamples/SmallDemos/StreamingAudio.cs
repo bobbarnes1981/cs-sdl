@@ -141,7 +141,7 @@ namespace SdlDotNetExamples.SmallDemos
             osc2.Amplitude = 10;
 
             stream.Paused = false;
-            textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+            textDisplay.Text = Program.StringManager.GetString(
                         "StreamingAudioDirections", CultureInfo.CurrentUICulture);
             textDisplay.TextWidth = 350;
             Events.Run();

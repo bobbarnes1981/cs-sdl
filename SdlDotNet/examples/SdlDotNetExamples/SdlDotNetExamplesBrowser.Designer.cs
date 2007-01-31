@@ -62,7 +62,7 @@ namespace SdlDotNetExamples
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(59, 24);
             this.btnRun.TabIndex = 1;
-            this.btnRun.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+            this.btnRun.Text = Program.StringManager.GetString(
                         "Run", CultureInfo.CurrentUICulture);
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
@@ -76,7 +76,7 @@ namespace SdlDotNetExamples
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(380, 454);
             this.treeView1.TabIndex = 2;
-            this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(treeView1_MouseDoubleClick);
+            this.treeView1.DoubleClick += new System.EventHandler(treeView1_DoubleClick);
             // 
             // SdlDotNetExamples
             // 
@@ -88,7 +88,7 @@ namespace SdlDotNetExamples
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SdlDotNetExamples";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
+            this.Text = Program.StringManager.GetString(
                         "SdlDotNetExamplesBrowser", CultureInfo.CurrentUICulture);
             this.Load += new System.EventHandler(this.frmExamples_Load);
             this.ResumeLayout(false);
