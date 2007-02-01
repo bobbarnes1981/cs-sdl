@@ -27,6 +27,7 @@ using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 using SdlDotNet.Core;
+using SdlDotNetExamples.LargeDemos;
 
 namespace SdlDotNetExamples.Isotope
 {

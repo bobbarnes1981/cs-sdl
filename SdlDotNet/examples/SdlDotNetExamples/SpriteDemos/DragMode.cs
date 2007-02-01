@@ -23,6 +23,7 @@ using System.Threading;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
+using SdlDotNetExamples.LargeDemos;
 
 namespace SdlDotNetExamples.SpriteDemos
 {

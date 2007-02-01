@@ -21,6 +21,7 @@ using System.IO;
 using System.Drawing;
 
 using SdlDotNet.Graphics;
+using SdlDotNetExamples.LargeDemos;
 
 namespace SdlDotNetExamples.Triad
 {

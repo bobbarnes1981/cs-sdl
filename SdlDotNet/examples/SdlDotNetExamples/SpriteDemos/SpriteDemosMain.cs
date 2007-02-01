@@ -28,8 +28,9 @@ using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
 using SdlDotNet.Core;
+using SdlDotNetExamples.SpriteDemos;
 
-namespace SdlDotNetExamples.SpriteDemos
+namespace SdlDotNetExamples.LargeDemos
 {
     /// <summary>
     /// The SpriteGuiDemosMain is a general testbed and display of various features

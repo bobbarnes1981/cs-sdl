@@ -66,19 +66,19 @@ namespace SdlDotNetExamples.Triad
 
             if (this.Parent == null)
             {
-                throw new GameException(Program.StringManager.GetString(
+                throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
                         "ObjectIsNull", CultureInfo.CurrentUICulture));
             }
 
             if (this.Parent.Width == 0)
             {
-                throw new GameException(Program.StringManager.GetString(
+                throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
                         "WidthSetZero", CultureInfo.CurrentUICulture));
             }
 
             if (this.Parent.Height == 0)
             {
-                throw new GameException(Program.StringManager.GetString(
+                throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
                         "HeightSetZero", CultureInfo.CurrentUICulture));
             }
 

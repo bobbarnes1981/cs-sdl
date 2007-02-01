@@ -19,6 +19,7 @@
 #endregion LICENSE
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,6 +37,14 @@ namespace SdlDotNetExamples
 {
     public partial class SdlDotNetExamplesBrowser : Form
     {
+        public static ResourceManager StringManager
+        {
+            get { return SdlDotNetExamplesBrowser.stringManager; }
+            set { SdlDotNetExamplesBrowser.stringManager = value; }
+        }
+
+        static ResourceManager stringManager;
+
         static bool isInitialized = Initialize();
 
         public static bool IsInitialized
@@ -53,12 +62,17 @@ namespace SdlDotNetExamples
 
         public SdlDotNetExamplesBrowser()
         {
+            stringManager =
+                new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
+            LoadDemos();
             InitializeComponent();
+            LoadComboBox();
+            LoadListBox();
         }
 
-        Dictionary<string, string> demoList = new Dictionary<string, string>();
+        Dictionary<string, Dictionary<string, string>> demoList = new Dictionary<string, Dictionary<string, string>>();
 
-        private void frmExamples_Load(object sender, EventArgs e)
+        private void LoadDemos()
         {
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (Type type in types)
@@ -67,21 +81,20 @@ namespace SdlDotNetExamples
 
                 if (runMethods.Length > 0)
                 {
-                   // foreach (TreeNode node in treeView1.Nodes)
-                   // {
-                        if (!treeView1.Nodes.ContainsKey(type.Namespace))
-                        {
-                            treeView1.Nodes.Add(type.Namespace, type.Namespace.Substring(type.Namespace.IndexOf('.') + 1));
-                        }
-
-                        object result = type.InvokeMember("Title",
-                                BindingFlags.GetProperty, null, type, null, CultureInfo.CurrentCulture);
-                        treeView1.Nodes[type.Namespace].Nodes.Add(type.FullName, (string)result);
-                    //}
+                    object result = type.InvokeMember("Title",
+                             BindingFlags.GetProperty, null, type, null, CultureInfo.CurrentCulture);
+                    if (!this.demoList.ContainsKey(type.Namespace.Substring(type.Namespace.IndexOf('.') + 1)))
+                    {
+                        Dictionary<string, string> list = new Dictionary<string, string>();
+                        list.Add((string)result, type.Name);
+                        this.demoList.Add(type.Namespace.Substring(type.Namespace.IndexOf('.') + 1), list);
+                    }
+                    else
+                    {
+                        this.demoList[type.Namespace.Substring(type.Namespace.IndexOf('.') + 1)].Add((string)result, type.Name);
+                    }
                 }
             }
-
-            treeView1.Sort();
         }
 
         private void btnRun_Click(object sender, EventArgs e)
@@ -94,7 +107,8 @@ namespace SdlDotNetExamples
             try
             {
                 SdlDotNet.Core.Events.QuitApplication();
-                Type example = Assembly.GetExecutingAssembly().GetType(treeView1.SelectedNode.Name, true, true);
+                string typeString = "SdlDotNetExamples." + this.comboBoxNamespaces.SelectedItem.ToString() + "." + this.demoList[this.comboBoxNamespaces.SelectedItem.ToString()][this.listBoxDemos.SelectedItem.ToString()].ToString();
+                Type example = Assembly.GetExecutingAssembly().GetType(typeString, true, true);
                 example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
                 Application.Exit();
             }
@@ -120,9 +134,35 @@ namespace SdlDotNetExamples
             }
         }
 
-        void treeView1_DoubleClick(object sender, EventArgs e)
+        void listBoxDemos_DoubleClick(object sender, EventArgs e)
         {
             RunExample();
+        }
+
+        private void comboBoxNamespaces_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadListBox();
+        }
+
+        private void LoadListBox()
+        {
+            this.listBoxDemos.Items.Clear();
+
+            foreach (string s in this.demoList[this.comboBoxNamespaces.SelectedItem.ToString()].Keys)
+            {
+                this.listBoxDemos.Items.Add(s);
+            }
+
+            this.listBoxDemos.SelectedIndex = 0;
+        }
+
+        private void LoadComboBox()
+        {
+            foreach (string s in this.demoList.Keys)
+            {
+                this.comboBoxNamespaces.Items.Add(s);
+            }
+            this.comboBoxNamespaces.SelectedIndex = 0;
         }
     }
 }

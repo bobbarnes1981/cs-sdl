@@ -24,8 +24,9 @@ using System.Reflection;
 using System.Diagnostics;
 
 using SdlDotNet;
+using SdlDotNetExamples.SimpleGame;
 
-namespace SdlDotNetExamples.SimpleGame
+namespace SdlDotNetExamples.LargeDemos
 {
     /// <summary>
     /// Summary description for Game.

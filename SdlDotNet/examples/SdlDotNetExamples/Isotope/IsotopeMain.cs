@@ -26,8 +26,9 @@ using System.Drawing;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Input;
+using SdlDotNetExamples.Isotope;
 
-namespace SdlDotNetExamples.Isotope
+namespace SdlDotNetExamples.LargeDemos
 {
     /// <summary>
     /// 

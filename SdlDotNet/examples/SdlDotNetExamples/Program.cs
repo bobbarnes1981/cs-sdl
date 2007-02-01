@@ -22,49 +22,20 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Globalization;
-using System.Resources;
-using System.Reflection;
 
 namespace SdlDotNetExamples
 {
     static class Program
     {
-        public static ResourceManager StringManager
-        {
-            get { return Program.stringManager; }
-            set { Program.stringManager = value; }
-        }
-
-        static ResourceManager stringManager;
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
-            stringManager =
-                new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
-            bool consoleMode = false;
-            foreach (string arg in args)
-            {
-                if (arg == "--console")
-                {
-                    consoleMode = true;
-                }
-            }
-
-            if (consoleMode)
-            {
-                SdlDotNetExamplesConsole t = new SdlDotNetExamplesConsole();
-                t.Go();
-            }
-            else
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new SdlDotNetExamplesBrowser());
-            }
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new SdlDotNetExamplesBrowser());
         }
     }
 }

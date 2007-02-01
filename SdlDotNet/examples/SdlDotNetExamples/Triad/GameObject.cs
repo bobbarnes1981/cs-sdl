@@ -128,7 +128,7 @@ namespace SdlDotNetExamples.Triad
             {
                 if (width <= 0)
                 {
-                    throw new GameException(Program.StringManager.GetString(
+                    throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
                         "WidthSetZero", CultureInfo.CurrentUICulture));
                 }
 
@@ -150,7 +150,7 @@ namespace SdlDotNetExamples.Triad
             {
                 if (value <= 0)
                 {
-                    throw new GameException(Program.StringManager.GetString(
+                    throw new GameException(SdlDotNetExamplesBrowser.StringManager.GetString(
                         "HeightSetZero", CultureInfo.CurrentUICulture));
                 }
 

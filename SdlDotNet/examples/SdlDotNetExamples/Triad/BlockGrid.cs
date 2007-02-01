@@ -29,6 +29,7 @@ using SdlDotNet.Audio;
 using SdlDotNet.Graphics;
 using SdlDotNet.Input;
 using SdlDotNet.Core;
+using SdlDotNetExamples.LargeDemos;
 
 namespace SdlDotNetExamples.Triad
 {
@@ -56,7 +57,7 @@ namespace SdlDotNetExamples.Triad
             {
                 if (value == 0.0)
                 {
-                    throw new SdlException(Program.StringManager.GetString(
+                    throw new SdlException(SdlDotNetExamplesBrowser.StringManager.GetString(
                         "CannotBeZero", CultureInfo.CurrentUICulture));
                 }
 
@@ -320,7 +321,7 @@ namespace SdlDotNetExamples.Triad
                     case BlockGridState.GameOver:
                         break;
                     default:
-                        throw new SdlException(Program.StringManager.GetString(
+                        throw new SdlException(SdlDotNetExamplesBrowser.StringManager.GetString(
                         "NotHandled", CultureInfo.CurrentUICulture) + " " + currentState);
                 }
             }
