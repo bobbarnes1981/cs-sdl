@@ -148,9 +148,9 @@ namespace SdlDotNetExamples.NeHe
             if (!File.Exists(name) && !File.Exists(fileName1) &&
                 !File.Exists(fileName2))
             {
-                MessageBox.Show(Program.StringManager.GetString(
+                MessageBox.Show(SdlDotNetExamplesBrowser.StringManager.GetString(
                         "CantFindTheHeightMap", CultureInfo.CurrentUICulture),
-                    Program.StringManager.GetString(
+                    SdlDotNetExamplesBrowser.StringManager.GetString(
                         "Error", CultureInfo.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
 

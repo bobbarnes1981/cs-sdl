@@ -24,6 +24,7 @@ using System.Drawing;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Input;
+using SdlDotNetExamples.LargeDemos;
 
 namespace SdlDotNetExamples.Triad
 {

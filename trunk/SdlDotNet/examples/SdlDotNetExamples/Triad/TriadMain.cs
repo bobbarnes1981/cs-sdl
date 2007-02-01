@@ -24,8 +24,9 @@ using SdlDotNet.Graphics;
 using SdlDotNet.Audio;
 using SdlDotNet.Core;
 using SdlDotNet.Input;
+using SdlDotNetExamples.Triad;
 
-namespace SdlDotNetExamples.Triad
+namespace SdlDotNetExamples.LargeDemos
 {
     /// <summary>
     /// 

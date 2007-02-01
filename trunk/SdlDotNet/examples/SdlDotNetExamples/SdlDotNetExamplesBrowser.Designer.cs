@@ -52,7 +52,9 @@ namespace SdlDotNetExamples
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SdlDotNetExamplesBrowser));
             this.btnRun = new System.Windows.Forms.Button();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.comboBoxNamespaces = new System.Windows.Forms.ComboBox();
+            this.listBoxDemos = new System.Windows.Forms.ListBox();
+            this.demoCategory = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnRun
@@ -62,43 +64,62 @@ namespace SdlDotNetExamples
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(59, 24);
             this.btnRun.TabIndex = 1;
-            this.btnRun.Text = Program.StringManager.GetString(
-                        "Run", CultureInfo.CurrentUICulture);
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
-            // treeView1
+            // comboBoxNamespaces
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.Location = new System.Drawing.Point(13, 13);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(380, 454);
-            this.treeView1.TabIndex = 2;
-            this.treeView1.DoubleClick += new System.EventHandler(treeView1_DoubleClick);
+            this.comboBoxNamespaces.FormattingEnabled = true;
+            this.comboBoxNamespaces.Location = new System.Drawing.Point(109, 8);
+            this.comboBoxNamespaces.Name = "comboBoxNamespaces";
+            this.comboBoxNamespaces.Size = new System.Drawing.Size(168, 21);
+            this.comboBoxNamespaces.Sorted = true;
+            this.comboBoxNamespaces.TabIndex = 3;
+            this.comboBoxNamespaces.SelectedIndexChanged += new System.EventHandler(this.comboBoxNamespaces_SelectedIndexChanged);
             // 
-            // SdlDotNetExamples
+            // listBoxDemos
+            // 
+            this.listBoxDemos.FormattingEnabled = true;
+            this.listBoxDemos.Location = new System.Drawing.Point(13, 39);
+            this.listBoxDemos.Name = "listBoxDemos";
+            this.listBoxDemos.Size = new System.Drawing.Size(380, 433);
+            this.listBoxDemos.Sorted = true;
+            this.listBoxDemos.TabIndex = 4;
+            this.listBoxDemos.DoubleClick += new System.EventHandler(this.listBoxDemos_DoubleClick);
+            // 
+            // demoCategory
+            // 
+            this.demoCategory.AutoSize = true;
+            this.demoCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.demoCategory.Location = new System.Drawing.Point(12, 11);
+            this.demoCategory.Name = "demoCategory";
+            this.demoCategory.Size = new System.Drawing.Size(93, 13);
+            this.demoCategory.TabIndex = 5;
+            this.demoCategory.Text = "Demo Category";
+            // 
+            // SdlDotNetExamplesBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(405, 519);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.demoCategory);
+            this.Controls.Add(this.listBoxDemos);
+            this.Controls.Add(this.comboBoxNamespaces);
             this.Controls.Add(this.btnRun);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "SdlDotNetExamples";
+            this.Name = "SdlDotNetExamplesBrowser";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = Program.StringManager.GetString(
-                        "SdlDotNetExamplesBrowser", CultureInfo.CurrentUICulture);
-            this.Load += new System.EventHandler(this.frmExamples_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button btnRun;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.ComboBox comboBoxNamespaces;
+        private System.Windows.Forms.ListBox listBoxDemos;
+        private System.Windows.Forms.Label demoCategory;
     }
 }
 
