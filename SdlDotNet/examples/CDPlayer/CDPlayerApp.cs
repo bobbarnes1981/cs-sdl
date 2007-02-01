@@ -56,7 +56,7 @@ namespace SdlDotNetExamples.CDPlayer
         string data_directory = @"Data/";
         string filepath = @"../../";
         private Panel panel1;
-        private System.ComponentModel.IContainer components;
+        //private System.ComponentModel.IContainer components;
         static ResourceManager stringManager;
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace SdlDotNetExamples.CDPlayer
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            //this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDPlayerApp));
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxDrive = new System.Windows.Forms.ComboBox();
