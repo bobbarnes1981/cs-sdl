@@ -81,17 +81,17 @@ namespace SdlDotNetExamples
 
                 if (runMethods.Length > 0)
                 {
-                    object result = type.InvokeMember("Title",
+                    string result = (string)type.InvokeMember("Title",
                              BindingFlags.GetProperty, null, type, null, CultureInfo.CurrentCulture);
                     if (!this.demoList.ContainsKey(type.Namespace.Substring(type.Namespace.IndexOf('.') + 1)))
                     {
                         Dictionary<string, string> list = new Dictionary<string, string>();
-                        list.Add((string)result, type.Name);
+                        list.Add(result, type.Name);
                         this.demoList.Add(type.Namespace.Substring(type.Namespace.IndexOf('.') + 1), list);
                     }
                     else
                     {
-                        this.demoList[type.Namespace.Substring(type.Namespace.IndexOf('.') + 1)].Add((string)result, type.Name);
+                        this.demoList[type.Namespace.Substring(type.Namespace.IndexOf('.') + 1)].Add(result, type.Name);
                     }
                 }
             }

@@ -88,6 +88,15 @@ namespace SdlDotNetExamples.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Demo Category.
+        /// </summary>
+        internal static string DemoCategory {
+            get {
+                return ResourceManager.GetString("DemoCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -237,6 +246,15 @@ namespace SdlDotNetExamples.Properties {
         internal static string TheQuickBrownFoxJumps {
             get {
                 return ResourceManager.GetString("TheQuickBrownFoxJumps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SDL.NET - Examples Browser.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         

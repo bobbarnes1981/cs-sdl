@@ -55,6 +55,8 @@ namespace SdlDotNetExamples
             this.comboBoxNamespaces = new System.Windows.Forms.ComboBox();
             this.listBoxDemos = new System.Windows.Forms.ListBox();
             this.demoCategory = new System.Windows.Forms.Label();
+            this.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "Title", CultureInfo.CurrentUICulture);
             this.SuspendLayout();
             // 
             // btnRun
@@ -63,6 +65,8 @@ namespace SdlDotNetExamples
             this.btnRun.Location = new System.Drawing.Point(171, 482);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(59, 24);
+            this.btnRun.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "Run", CultureInfo.CurrentUICulture);
             this.btnRun.TabIndex = 1;
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
@@ -95,7 +99,8 @@ namespace SdlDotNetExamples
             this.demoCategory.Name = "demoCategory";
             this.demoCategory.Size = new System.Drawing.Size(93, 13);
             this.demoCategory.TabIndex = 5;
-            this.demoCategory.Text = "Demo Category";
+            this.demoCategory.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "DemoCategory", CultureInfo.CurrentUICulture);
             // 
             // SdlDotNetExamplesBrowser
             // 

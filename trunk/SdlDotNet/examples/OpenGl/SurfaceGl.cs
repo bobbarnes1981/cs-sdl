@@ -119,6 +119,10 @@ namespace SdlDotNet.OpenGl
             }
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("value");
+                }
                 if (this.surface != null)
                 {
                     this.surface.Dispose();
