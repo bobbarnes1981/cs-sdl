@@ -39,7 +39,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <param name="surfaces"></param>
         /// <param name="bounds"></param>
         /// <param name="coordinates"></param>
-        public BoundedSprite(SurfaceCollection surfaces, Rectangle bounds, Point coordinates)
+        public BoundedSprite(SurfaceCollection surfaces, Rectangle bounds, Vector coordinates)
             : base(surfaces, coordinates)
         {
             if (surfaces == null)

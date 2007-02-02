@@ -22,6 +22,7 @@ using System.Drawing;
 using System.Globalization;
 
 using SdlDotNet.Graphics;
+using SdlDotNet.Core;
 using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples.SpriteDemos
@@ -37,9 +38,9 @@ namespace SdlDotNetExamples.SpriteDemos
         /// 
         /// </summary>
         /// <param name="surfaces"></param>
-        /// <param name="position"></param>
-        public AnimatedDemoSprite(SurfaceCollection surfaces, Point position)
-            : base(surfaces, position)
+        /// <param name="coordinates"></param>
+        public AnimatedDemoSprite(SurfaceCollection surfaces, Vector coordinates)
+            : base(surfaces, coordinates)
         {
             if (surfaces == null)
             {

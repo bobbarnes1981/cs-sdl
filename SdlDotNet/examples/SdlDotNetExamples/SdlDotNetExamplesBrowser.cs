@@ -66,6 +66,12 @@ namespace SdlDotNetExamples
                 new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
             LoadDemos();
             InitializeComponent();
+            this.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "Title", CultureInfo.CurrentUICulture);
+            this.demoCategory.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "DemoCategory", CultureInfo.CurrentUICulture);
+            this.btnRun.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
+                        "Run", CultureInfo.CurrentUICulture);
             LoadComboBox();
             LoadListBox();
         }

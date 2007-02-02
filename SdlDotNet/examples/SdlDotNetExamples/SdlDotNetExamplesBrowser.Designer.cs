@@ -55,8 +55,6 @@ namespace SdlDotNetExamples
             this.comboBoxNamespaces = new System.Windows.Forms.ComboBox();
             this.listBoxDemos = new System.Windows.Forms.ListBox();
             this.demoCategory = new System.Windows.Forms.Label();
-            this.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
-                        "Title", CultureInfo.CurrentUICulture);
             this.SuspendLayout();
             // 
             // btnRun
@@ -65,8 +63,6 @@ namespace SdlDotNetExamples
             this.btnRun.Location = new System.Drawing.Point(171, 482);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(59, 24);
-            this.btnRun.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
-                        "Run", CultureInfo.CurrentUICulture);
             this.btnRun.TabIndex = 1;
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
@@ -74,7 +70,7 @@ namespace SdlDotNetExamples
             // comboBoxNamespaces
             // 
             this.comboBoxNamespaces.FormattingEnabled = true;
-            this.comboBoxNamespaces.Location = new System.Drawing.Point(109, 8);
+            this.comboBoxNamespaces.Location = new System.Drawing.Point(140, 8);
             this.comboBoxNamespaces.Name = "comboBoxNamespaces";
             this.comboBoxNamespaces.Size = new System.Drawing.Size(168, 21);
             this.comboBoxNamespaces.Sorted = true;
@@ -97,10 +93,8 @@ namespace SdlDotNetExamples
             this.demoCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.demoCategory.Location = new System.Drawing.Point(12, 11);
             this.demoCategory.Name = "demoCategory";
-            this.demoCategory.Size = new System.Drawing.Size(93, 13);
+            this.demoCategory.Size = new System.Drawing.Size(0, 13);
             this.demoCategory.TabIndex = 5;
-            this.demoCategory.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
-                        "DemoCategory", CultureInfo.CurrentUICulture);
             // 
             // SdlDotNetExamplesBrowser
             // 

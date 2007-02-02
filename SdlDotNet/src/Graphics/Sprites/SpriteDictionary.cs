@@ -38,7 +38,7 @@ namespace SdlDotNet.Graphics.Sprites
     /// </summary>
     /// <remarks>The sprite manager has no size.</remarks>
     [Serializable]
-    public class SpriteDictionary : Dictionary<Sprite, Rectangle>, ISerializable
+    public class SpriteDictionary : SortedDictionary<Sprite, Rectangle>//, ISerializable
     {
         #region Constructors
         /// <summary>
@@ -49,16 +49,16 @@ namespace SdlDotNet.Graphics.Sprites
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        protected SpriteDictionary(
-           SerializationInfo info,
-           StreamingContext context) : base(info, context)
-        {
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="info"></param>
+        ///// <param name="context"></param>
+        //protected SpriteDictionary(
+        //   SerializationInfo info,
+        //   StreamingContext context) : base(info, context)
+        //{
+        //}
 
         /// <summary>
         /// Creates a new SpriteDictionary with one sprite element in it.
@@ -964,17 +964,17 @@ namespace SdlDotNet.Graphics.Sprites
 
         #region ISerializable Members
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermissionAttribute(SecurityAction.Demand,
-          SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="info"></param>
+        ///// <param name="context"></param>
+        //[SecurityPermissionAttribute(SecurityAction.Demand,
+        //  SerializationFormatter = true)]
+        //public void GetObjectData(SerializationInfo info, StreamingContext context)
+        //{
+        //    base.GetObjectData(info, context);
+        //}
 
         #endregion
     }

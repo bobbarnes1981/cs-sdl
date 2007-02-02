@@ -43,7 +43,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <param name="surfaces"></param>
         /// <param name="rect"></param>
         /// <param name="coordinates"></param>
-        public BounceSprite(SurfaceCollection surfaces, Rectangle rect, Point coordinates)
+        public BounceSprite(SurfaceCollection surfaces, Rectangle rect, Vector coordinates)
             : base(surfaces, rect, coordinates)
         {
             this.dx = rand.Next(-10, 11);

@@ -25,6 +25,7 @@ using System.Globalization;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Input;
+using SdlDotNet.Core;
 
 namespace SdlDotNetExamples.SpriteDemos
 {
@@ -40,7 +41,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <param name="key"></param>
         /// <param name="coordinates"></param>
         /// <param name="bounds"></param>
-        public DragSprite(SurfaceCollection frames, Point coordinates,
+        public DragSprite(SurfaceCollection frames, Vector coordinates,
             Rectangle bounds)
             : base(frames, bounds, coordinates)
         {

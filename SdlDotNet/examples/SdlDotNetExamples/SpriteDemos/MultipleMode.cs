@@ -22,6 +22,7 @@ using System;
 
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Graphics;
+using SdlDotNet.Core;
 
 namespace SdlDotNetExamples.SpriteDemos
 {
@@ -85,10 +86,10 @@ namespace SdlDotNetExamples.SpriteDemos
                 BounceSprite d =
                     new BounceSprite(td,
                     rect,
-                    new Point(rand.Next(rect.Left, rect.Right -
+                    new Vector(rand.Next(rect.Left, rect.Right -
                     (int)td.Size.Width),
                     rand.Next(rect.Top, rect.Bottom -
-                    (int)td.Size.Height)));
+                    (int)td.Size.Height), 1));
                 all.Add(d);
             }
 
@@ -96,31 +97,31 @@ namespace SdlDotNetExamples.SpriteDemos
             // same inner tick manager.
 
             // Set up container #1
-            sprite1 = new BounceSprite(td2, rect, new Point(rand.Next(rect.Left, rect.Right -
+            sprite1 = new BounceSprite(td2, rect, new Vector(rand.Next(rect.Left, rect.Right -
                 (int)td2.Size.Width),
                 rand.Next(rect.Top, rect.Bottom -
-                (int)td2.Size.Height)));
+                (int)td2.Size.Height),1));
             all.Add(sprite1);
 
             // Set up container #2
-            sprite2 = new BounceSprite(td3, rect, new Point(rand.Next(rect.Left, rect.Right -
+            sprite2 = new BounceSprite(td3, rect, new Vector(rand.Next(rect.Left, rect.Right -
                 (int)td3.Size.Width),
                 rand.Next(rect.Top, rect.Bottom -
-                (int)td3.Size.Height)));
+                (int)td3.Size.Height), 1));
             all.Add(sprite2);
 
             // Set up container #3
-            sprite3 = new BounceSprite(td4, rect, new Point(rand.Next(rect.Left, rect.Right -
+            sprite3 = new BounceSprite(td4, rect, new Vector(rand.Next(rect.Left, rect.Right -
                 (int)td4.Size.Width),
                 rand.Next(rect.Top, rect.Bottom -
-                (int)td4.Size.Height)));
+                (int)td4.Size.Height),1));
             all.Add(sprite3);
 
             // Set up container #4
-            sprite4 = new BounceSprite(td5, rect, new Point(rand.Next(rect.Left, rect.Right -
+            sprite4 = new BounceSprite(td5, rect, new Vector(rand.Next(rect.Left, rect.Right -
                 (int)td5.Size.Width),
                 rand.Next(rect.Top, rect.Bottom -
-                (int)td5.Size.Height)));
+                (int)td5.Size.Height), 1));
             all.Add(sprite4);
 
             surf1 = this.Surface.CreateCompatibleSurface(380, 250);
