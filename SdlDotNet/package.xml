@@ -109,6 +109,7 @@
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
 	    <fileset>
 		<include name="${examples.dir}/**/*.exe" />
+		<include name="${examples.dir}/**/*.sh" />
 		<include name="${examples.dir}/**/*.dll" />
 		<include name="${lib.dir}/net-2.0/*.dll" />
 		<include name="${lib.dir}/net-2.0/*.config" />
