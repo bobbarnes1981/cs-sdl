@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Threading;
 
 using SdlDotNet.Graphics;
+using SdlDotNet.Core;
 using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNetExamples.SpriteDemos
@@ -96,10 +97,10 @@ namespace SdlDotNetExamples.SpriteDemos
             }
 
             // Load the trigger sprite
-            sprite = new BounceSprite(td2, rect, new Point(rand.Next(rect.Left, rect.Right -
+            sprite = new BounceSprite(td2, rect, new Vector(rand.Next(rect.Left, rect.Right -
                 (int)td2.Size.Width),
                 rand.Next(rect.Top, rect.Bottom -
-                (int)td2.Size.Height)));
+                (int)td2.Size.Height), 1));
             Sprites.Add(sprite);
             CenterSprite.Add(sprite);
             //OnMenuBounded(0);
@@ -111,10 +112,10 @@ namespace SdlDotNetExamples.SpriteDemos
                 BounceSprite bounceSprite =
                     new BounceSprite(td,
                     rect,
-                    new Point(rand.Next(rect.Left, rect.Right -
+                    new Vector(rand.Next(rect.Left, rect.Right -
                     (int)td.Size.Width),
                     rand.Next(rect.Top, rect.Bottom -
-                    (int)td.Size.Height)));
+                    (int)td.Size.Height), 1));
                 Sprites.Add(bounceSprite);
             }
 

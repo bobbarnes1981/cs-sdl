@@ -22,6 +22,7 @@ using System;
 using System.Threading;
 
 using SdlDotNet.Graphics;
+using SdlDotNet.Core;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNetExamples.LargeDemos;
 
@@ -47,8 +48,8 @@ namespace SdlDotNetExamples.SpriteDemos
                 BounceSprite bounceSprite =
                     new BounceSprite(d,
                     new Rectangle(new Point(0, 0), SpriteDemosMain.Size),
-                    new Point(rand.Next(rect.Left, rect.Right),
-                    rand.Next(rect.Top, rect.Bottom)));
+                    new Vector(rand.Next(rect.Left, rect.Right),
+                    rand.Next(rect.Top, rect.Bottom), 1));
                 Sprites.Add(bounceSprite);
             }
             Sprites.EnableTickEvent();

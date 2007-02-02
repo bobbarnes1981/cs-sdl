@@ -33,9 +33,9 @@ namespace SdlDotNetExamples.SmallDemos
     public class BounceSprite : AnimatedSprite
     {
         #region Fields
-        //Move sprites 10 pixels per tick
-        private int dx = 10;
-        private int dy = 10;
+        //Move sprites 5 pixels per tick
+        private int dx = 5;
+        private int dy = 5;
 
         //Sprites will be bounded by the screen edges minus 
         //their size so they will not go off the screen

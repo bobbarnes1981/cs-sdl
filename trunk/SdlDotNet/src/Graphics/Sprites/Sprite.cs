@@ -35,7 +35,7 @@ namespace SdlDotNet.Graphics.Sprites
     /// Sprite class contains both a Surface and a Rectangle so that 
     /// an object can be easily displayed and manipulated.
     /// </summary>
-    public class Sprite : IDisposable
+    public class Sprite : IDisposable, IComparable
     {
         #region Constructors
 
@@ -64,7 +64,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// Create new Sprite at (0, 0)
         /// </summary>
         /// <param name="surface">Surface of Sprite</param>
-        public Sprite(Surface surface) : this(surface, new Vector(0, 0, 0))
+        public Sprite(Surface surface)
+            : this(surface, new Vector(0, 0, 0))
         {
         }
 
@@ -929,6 +930,49 @@ namespace SdlDotNet.Graphics.Sprites
         ~Sprite()
         {
             Dispose(false);
+        }
+
+        #endregion
+
+
+        #region IComparable Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public int CompareTo(object obj)
+        {
+            if (obj is Sprite)
+            {
+                Sprite temp = (Sprite)obj;
+                if (this.Z == temp.Z)
+                {
+                    if (this.GetHashCode() == temp.GetHashCode())
+                    {
+                        return 0;
+                    }
+                    else if (this.GetHashCode() > temp.GetHashCode())
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
+                else if (this.Z > temp.Z)
+                {
+                    return 1;
+                }
+                {
+                    return -1;
+                }
+            }
+
+            throw new ArgumentException("object is not a Sprite");
+
         }
 
         #endregion
