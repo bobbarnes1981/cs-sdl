@@ -23,6 +23,7 @@ using System.IO;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
@@ -250,6 +251,30 @@ namespace SdlDotNet.Graphics
             }
         }
 
+        ///// <summary>
+        ///// Create a Surface from a MemoryStream.
+        ///// </summary>
+        ///// <param name="stream"></param>
+        //public Surface(Stream stream)
+        //{
+        //    if (stream == null)
+        //    {
+        //        throw new ArgumentNullException("stream");
+        //    }
+        //    byte[] array;
+        //    for (int i; i < stream.Length; i++)
+        //    {
+        //        array = stream.Read()
+        //    }
+        //    //byte[] array = stream.ToArray();
+        //    this.Handle =
+        //        SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
+        //    if (this.Handle == IntPtr.Zero)
+        //    {
+        //        throw SdlException.Generate();
+        //    }
+        //}
+
         /// <summary>
         /// Create a Surface from a byte array in memory.
         /// </summary>
@@ -333,7 +358,7 @@ namespace SdlDotNet.Graphics
             destination.transparent = source.transparent;
             destination.alpha = source.alpha;
             destination.alphaBlending = source.alphaBlending;
-            destination.isVideoMode = source.isVideoMode; ;
+            destination.isVideoMode = source.isVideoMode;
         }
 
         #endregion Private Methods
@@ -1915,7 +1940,40 @@ namespace SdlDotNet.Graphics
         /// <param name="sourceRectangle">Source Rectangle</param>
         /// <param name="destinationRectangle">Destination of stretch</param>
         /// <returns>new Surface</returns>
-        public Surface Stretch(Rectangle sourceRectangle, Rectangle destinationRectangle)
+        public void Stretch(Rectangle sourceRectangle, Rectangle destinationRectangle)
+        {
+            Surface surface = new Surface(sourceRectangle);
+            //Surface surface = (Surface)this.Clone();
+            Color colorTemp = this.TransparentColor;
+            this.Transparent = false;
+            surface.Blit(this, new Point(0, 0), sourceRectangle);
+            this.transparentColor = colorTemp;
+            double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
+            double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
+            surface.Scale(stretchWidth, stretchHeight);
+            CloneFields(this, surface);
+            this.Handle = surface.Handle;
+        }
+
+        /// <summary>
+        /// Stretch Surface
+        /// </summary>
+        /// <param name="destinationSize">Destination of stretch</param>
+        /// <returns>new Surface</returns>
+        public void Stretch(Size destinationSize)
+        {
+            double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
+            double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
+            this.Scale(stretchWidth, stretchHeight);
+        }
+
+        /// <summary>
+        /// Stretch Surface
+        /// </summary>
+        /// <param name="sourceRectangle">Source Rectangle</param>
+        /// <param name="destinationRectangle">Destination of stretch</param>
+        /// <returns>new Surface</returns>
+        public Surface CreateStretchedSurface(Rectangle sourceRectangle, Rectangle destinationRectangle)
         {
             Surface surface = new Surface(sourceRectangle);
             //Surface surface = (Surface)this.Clone();
@@ -1935,7 +1993,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="destinationSize">Destination of stretch</param>
         /// <returns>new Surface</returns>
-        public Surface Stretch(Size destinationSize)
+        public Surface CreateStretchedSurface(Size destinationSize)
         {
             Surface surface = (Surface)this.Clone();
             double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
@@ -1945,27 +2003,119 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
+        /// Reads data from a stream until the end is reached. The
+        /// data is returned as a byte array. An IOException is
+        /// thrown if any of the underlying IO calls fail.
+        /// </summary>
+        /// <remarks>From http://www.yoda.arachsys.com/csharp
+        /// skeet@pobox.com</remarks>
+        /// <param name="stream">The stream to read data from</param>
+        /// <param name="initialLength">The initial buffer length</param>
+        private static byte[] ReadFully(Stream stream, long initialLength)
+        {
+            // If we've been passed an unhelpful initial length, just
+            // use 32K.
+            if (initialLength < 1)
+            {
+                initialLength = 32768;
+            }
+
+            byte[] buffer = new byte[initialLength];
+            int read = 0;
+
+            int chunk;
+            while ((chunk = stream.Read(buffer, read, buffer.Length - read)) > 0)
+            {
+                read += chunk;
+
+                // If we've reached the end of our buffer, check to see if there's
+                // any more information
+                if (read == buffer.Length)
+                {
+                    int nextByte = stream.ReadByte();
+
+                    // End of stream? If so, we're done
+                    if (nextByte == -1)
+                    {
+                        return buffer;
+                    }
+
+                    // Nope. Resize the buffer, put in the byte we've just
+                    // read, and continue
+                    byte[] newBuffer = new byte[buffer.Length * 2];
+                    Array.Copy(buffer, newBuffer, buffer.Length);
+                    newBuffer[read] = (byte)nextByte;
+                    buffer = newBuffer;
+                    read++;
+                }
+            }
+            // Buffer is now too big. Shrink it.
+            byte[] ret = new byte[read];
+            Array.Copy(buffer, ret, read);
+            return ret;
+        }
+
+        /// <summary>
         /// Resize Surface
         /// </summary>
         /// <param name="destinationSize">Size of new Surface</param>
         /// <returns>new Surface</returns>
-        public Surface Resize(Size destinationSize)
+        public void Resize(Size destinationSize)
         {
-            Surface surface = new Surface(destinationSize);
-            Color colorTemp = this.TransparentColor;
-            this.Transparent = false;
+            if ((this.Width != destinationSize.Width) || (this.Height != destinationSize.Height))
+            {
+                Surface surface = ResizeInternal(ref destinationSize);
+                this.Handle = surface.Handle;
+            }
+        }
+
+        private Surface ResizeInternal(ref Size destinationSize)
+        {
+            Assembly assembly = Assembly.GetCallingAssembly();
+            UnmanagedMemoryStream stream = (UnmanagedMemoryStream)assembly.GetManifestResourceStream("SdlDotNet.Graphics.Transparent.png");
+            byte[] buffer = ReadFully(stream, stream.Length);
+            Surface surface = new Surface(buffer);
+            this.Alpha = 255;
+            surface.Alpha = 255;
+            surface.Stretch(destinationSize);
             surface.Blit(this);
-            this.TransparentColor = colorTemp;
-            CloneFields(this, surface);
             return surface;
         }
 
         /// <summary>
         /// Resize surface to next power of two size. Useful for OpenGL.
         /// </summary>
-        public Surface Resize()
+        public void Resize()
         {
-            return this.Resize(new Size(NextPowerOfTwo(this.Width), NextPowerOfTwo(this.Height)));
+            this.Resize(new Size(NextPowerOfTwo(this.Width), NextPowerOfTwo(this.Height)));
+        }
+
+        /// <summary>
+        /// Resize surface to next power of two size. Useful for OpenGL.
+        /// </summary>
+        public Surface CreateResizedSurface()
+        {
+            return this.CreateResizedSurface(new Size(NextPowerOfTwo(this.Width), NextPowerOfTwo(this.Height)));
+        }
+
+        /// <summary>
+        /// Resize Surface
+        /// </summary>
+        /// <param name="destinationSize">Size of new Surface</param>
+        /// <returns>new Surface</returns>
+        public Surface CreateResizedSurface(Size destinationSize)
+        {
+            if ((this.Width != destinationSize.Width) || (this.Height != destinationSize.Height))
+            {
+                Surface surface = ResizeInternal(ref destinationSize);
+                CloneFields(this, surface);
+                return surface;
+            }
+            else
+            {
+                return this;
+            }
+            
         }
 
         private static int NextPowerOfTwo(int x)
