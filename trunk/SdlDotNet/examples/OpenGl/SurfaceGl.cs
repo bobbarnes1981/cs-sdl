@@ -127,7 +127,7 @@ namespace SdlDotNet.OpenGl
                 {
                     this.surface.Dispose();
                 }
-                this.surface = value.Resize();
+                this.surface = value.CreateResizedSurface();
                 this.textureImage = this.surface.Bitmap;
                 this.textureID = this.TextureId;
             }

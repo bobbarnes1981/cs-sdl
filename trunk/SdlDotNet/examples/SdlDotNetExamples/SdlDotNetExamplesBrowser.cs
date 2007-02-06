@@ -116,7 +116,7 @@ namespace SdlDotNetExamples
                 string typeString = "SdlDotNetExamples." + this.comboBoxNamespaces.SelectedItem.ToString() + "." + this.demoList[this.comboBoxNamespaces.SelectedItem.ToString()][this.listBoxDemos.SelectedItem.ToString()].ToString();
                 Type example = Assembly.GetExecutingAssembly().GetType(typeString, true, true);
                 example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
-                Application.Exit();
+                //Application.Exit();
             }
             catch (TypeLoadException e)
             {

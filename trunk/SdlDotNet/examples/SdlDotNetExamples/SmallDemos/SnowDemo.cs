@@ -103,7 +103,8 @@ namespace SdlDotNetExamples.SmallDemos
             tree = new Surface(filepath + data_directory + "Tree.bmp");
             tree.TransparentColor = Color.Magenta;
             tree.Transparent = true;
-            treeStretch = tree.Stretch(new Size(100, 100));
+            treeStretch = new Surface(tree);
+            treeStretch.Stretch(new Size(100, 100));
             treeStretch.TransparentColor = Color.Magenta;
             treeStretch.Transparent = true;
             Initialize(250);

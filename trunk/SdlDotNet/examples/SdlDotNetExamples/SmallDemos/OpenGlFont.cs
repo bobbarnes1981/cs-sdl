@@ -81,6 +81,7 @@ namespace SdlDotNetExamples.SmallDemos
             Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
             font = new SdlDotNet.Graphics.Font(filePath + dataDirectory + fontName, 18);
             Video.GLDoubleBufferEnabled = true;
+            
         }
 
         [STAThread]
@@ -122,10 +123,11 @@ namespace SdlDotNetExamples.SmallDemos
             Gl.glDepthFunc(Gl.GL_LEQUAL);
             // Really Nice Perspective Calculations
             Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+            surfaceGl = new SurfaceGl(font.Render(phrase1, Color.White));
         }
-
+        SurfaceGl surfaceGl;
         int i;
-        SurfaceGl surfaceGl = new SurfaceGl();
+        
 
         #region void DrawGLScene
 
