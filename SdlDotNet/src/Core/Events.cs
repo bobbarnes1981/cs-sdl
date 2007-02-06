@@ -267,7 +267,7 @@ namespace SdlDotNet.Core
         private const int QUERY_EVENTS_MAX = 254;
         static readonly Events instance = new Events();
         static ResourceManager stringManager;
-        static bool isInitialized = Video.Initialize();
+        //static bool isInitialized = Video.Initialize();
 
         #endregion
 
@@ -377,13 +377,13 @@ namespace SdlDotNet.Core
 
         #region Public Methods
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static bool IsInitialized
-        {
-            get { return Events.isInitialized; }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public static bool IsInitialized
+        //{
+        //    get { return Events.isInitialized; }
+        //}
 
         /// <summary>
         /// 
@@ -1143,7 +1143,7 @@ namespace SdlDotNet.Core
         private static int lastTick;
         private static float ticksPerFrame = (1000.0f / (float)targetFps);
         private static bool quitFlag;
-
+        
         /// <summary>
         /// Quits application by raising and quit event.
         /// </summary>
@@ -1151,7 +1151,6 @@ namespace SdlDotNet.Core
         {
             System.GC.Collect();
             quitFlag = true;
-            Events.Close();
         }
 
         /// <summary>
@@ -1164,6 +1163,7 @@ namespace SdlDotNet.Core
             quitFlag = false;
             Timer.Initialize();
             ThreadTicker();
+            Events.Close();
         }
 
         /// <summary>
@@ -1219,9 +1219,10 @@ namespace SdlDotNet.Core
             int currentTime;
             int currentTick;
             int targetTick;
-
+            
             while (!quitFlag)
             {
+                
                 // Poll all events
                 while (Events.Poll()) ;
                 currentTick = Timer.TicksElapsed;

@@ -748,6 +748,10 @@ namespace SdlDotNet.Graphics
             {
                 e.ToString();
             }
+            catch (AccessViolationException e)
+            {
+                e.ToString();
+            }
             finally
             {
                 this.Handle = IntPtr.Zero;
