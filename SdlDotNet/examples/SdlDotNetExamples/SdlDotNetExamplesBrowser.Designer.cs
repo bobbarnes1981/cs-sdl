@@ -79,6 +79,9 @@ namespace SdlDotNetExamples
             // 
             // listBoxDemos
             // 
+            this.listBoxDemos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxDemos.FormattingEnabled = true;
             this.listBoxDemos.Location = new System.Drawing.Point(13, 39);
             this.listBoxDemos.Name = "listBoxDemos";
