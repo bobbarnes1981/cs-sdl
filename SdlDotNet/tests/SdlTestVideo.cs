@@ -618,7 +618,7 @@ namespace SdlDotNet.Tests
 			Rectangle sourceRectangle = new Rectangle(0,0,100, 33);
 			Rectangle destinationRectangle = new Rectangle(0, 0, 200, 132);
 			Surface sourceSurf = new Surface(sourceRectangle);
-			Surface surface = sourceSurf.Stretch(sourceRectangle, destinationRectangle);
+			Surface surface = sourceSurf.CreateStretchedSurface(sourceRectangle, destinationRectangle);
 			Assert.AreEqual(destinationRectangle.Width, surface.Width);
 		}
 		/// <summary>
@@ -630,7 +630,7 @@ namespace SdlDotNet.Tests
 			Rectangle sourceRectangle = new Rectangle(0,0,100, 33);
 			Rectangle destinationRectangle = new Rectangle(0, 0, 200, 132);
 			Surface sourceSurf = new Surface(sourceRectangle);
-			Surface surface = sourceSurf.Stretch(sourceRectangle, destinationRectangle);
+			Surface surface = sourceSurf.CreateStretchedSurface(sourceRectangle, destinationRectangle);
 			Assert.AreEqual(destinationRectangle.Height, surface.Height);
 		}
 	}
