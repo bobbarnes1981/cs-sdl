@@ -348,7 +348,7 @@ namespace SdlDotNet.Tests
 		public void ReadXPMFromArray()
 		{
 			//string file = "test.xpm";
-			IntPtr surfacePtr = VideoSetup();
+			VideoSetup();
 			//IntPtr imagePtr = SdlImage.IMG_ReadXPMFromArray();
 			//Assert.IsFalse(imagePtr == IntPtr.Zero);
 		}

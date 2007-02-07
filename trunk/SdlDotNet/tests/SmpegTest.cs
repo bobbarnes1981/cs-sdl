@@ -41,7 +41,7 @@ namespace SdlDotNet.Tests
 		private void InitSdl()
 		{
 			Sdl.SDL_Quit();
-			int init = Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
+			Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
 			this.SmpegSetup();
 			
 		}

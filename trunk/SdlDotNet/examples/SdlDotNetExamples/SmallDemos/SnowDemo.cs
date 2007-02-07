@@ -199,6 +199,11 @@ namespace SdlDotNetExamples.SmallDemos
                         this.tree.Dispose();
                         this.tree = null;
                     }
+                    if (this.treeStretch != null)
+                    {
+                        this.treeStretch.Dispose();
+                        this.treeStretch = null;
+                    }
                     if (this.background != null)
                     {
                         this.background.Dispose();

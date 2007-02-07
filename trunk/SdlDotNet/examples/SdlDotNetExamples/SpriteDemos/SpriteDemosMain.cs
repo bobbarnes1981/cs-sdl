@@ -87,8 +87,8 @@ namespace SdlDotNetExamples.LargeDemos
 
         #region GUI
 
-        private int[] fpsSpeeds =
-            new int[] { 1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
+        //private int[] fpsSpeeds =
+        //    new int[] { 1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
         //string data_directory = @"Data/";
         //string filepath = @"../../";
         private static void SetupGui()
