@@ -111,6 +111,16 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
+        /// Loads a music sample from a byte array.
+        /// </summary>
+        /// <param name="fileName">The file path to load from.</param>
+        public Music(byte[] data)
+        {
+            Mixer.OpenInternal();
+            this.Handle = Mixer.LoadMusic(data);
+        }
+
+        /// <summary>
         /// Closes Music handle
         /// </summary>
         protected override void CloseHandle()
