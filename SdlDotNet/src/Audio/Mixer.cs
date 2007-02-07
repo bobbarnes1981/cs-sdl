@@ -643,6 +643,23 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
+        /// Loads a music sample from a byte array returning the pointer to the sample.
+        /// </summary>
+        /// <param name="data">The file path to load.</param>
+        /// <param name="size">Outputs the size of the sample in bytes.</param>
+        /// <returns>The IntPtr handle to the music sample in memory.</returns>
+        /// <exception cref="SdlException">Thrown if an error occurs when loading the sample.</exception>
+        internal static IntPtr LoadMusic(byte[] data)
+        {
+            IntPtr handle = SdlMixer.Mix_LoadMUS_RW(Sdl.SDL_RWFromMem(data, data.Length));
+            if (handle == IntPtr.Zero)
+            {
+                throw SdlException.Generate();
+            }
+            return handle;
+        }
+
+        /// <summary>
         /// Changes the number of channels allocated for mixing
         /// </summary>
         /// <returns>The number of channels allocated</returns>
