@@ -633,6 +633,35 @@ namespace SdlDotNet.Tests
 			Surface surface = sourceSurf.CreateStretchedSurface(sourceRectangle, destinationRectangle);
 			Assert.AreEqual(destinationRectangle.Height, surface.Height);
 		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Test]
+        public void SurfaceResize()
+        {
+            Rectangle rectangle = new Rectangle(0, 0, 32, 32);
+            
+            Surface surface= new Surface(rectangle);
+            surface.Resize();
+            Assert.AreEqual(rectangle.Height, surface.Height);
+            Assert.AreEqual(rectangle.Width, surface.Width);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Test]
+        public void SurfaceResize2()
+        {
+            Rectangle rectangle = new Rectangle(0, 0, 33, 33);
+
+            Surface surface = new Surface(rectangle);
+            surface.Resize();
+            Assert.AreEqual(64, surface.Height);
+            Assert.AreEqual(64, surface.Width);
+        }
+       
 	}
 	#endregion SDL_video.h
 }

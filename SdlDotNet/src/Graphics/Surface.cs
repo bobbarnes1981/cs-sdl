@@ -444,6 +444,9 @@ namespace SdlDotNet.Graphics
             catch (NullReferenceException)
             {
             }
+            catch (AccessViolationException)
+            {
+            }
             finally
             {
                 this.Handle = IntPtr.Zero;

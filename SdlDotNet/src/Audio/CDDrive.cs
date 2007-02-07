@@ -145,6 +145,12 @@ namespace SdlDotNet.Audio
                     Sdl.SDL_CDClose(this.Handle);
                 }
             }
+            catch (NullReferenceException)
+            {
+            }
+            catch (AccessViolationException)
+            {
+            }
             finally
             {
                 this.Handle = IntPtr.Zero;
