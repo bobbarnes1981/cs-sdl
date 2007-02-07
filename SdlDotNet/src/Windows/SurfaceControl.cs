@@ -54,6 +54,7 @@ namespace SdlDotNet.Windows
         public SurfaceControl()
         {
             PictureBox.CheckForIllegalCrossThreadCalls = false;
+            InitializeComponent();
         }
 
         #endregion
@@ -305,7 +306,6 @@ namespace SdlDotNet.Windows
             this.InitialImage = ((System.Drawing.Image)(resources.GetObject("$this.InitialImage")));
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
-
         }
     }
 }

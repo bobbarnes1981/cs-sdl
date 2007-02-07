@@ -113,7 +113,7 @@ namespace SdlDotNet.Audio
         /// <summary>
         /// Loads a music sample from a byte array.
         /// </summary>
-        /// <param name="fileName">The file path to load from.</param>
+        /// <param name="data">data buffer</param>
         public Music(byte[] data)
         {
             Mixer.OpenInternal();

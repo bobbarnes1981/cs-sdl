@@ -645,8 +645,7 @@ namespace SdlDotNet.Audio
         /// <summary>
         /// Loads a music sample from a byte array returning the pointer to the sample.
         /// </summary>
-        /// <param name="data">The file path to load.</param>
-        /// <param name="size">Outputs the size of the sample in bytes.</param>
+        /// <param name="data">data buffer to load.</param>
         /// <returns>The IntPtr handle to the music sample in memory.</returns>
         /// <exception cref="SdlException">Thrown if an error occurs when loading the sample.</exception>
         internal static IntPtr LoadMusic(byte[] data)

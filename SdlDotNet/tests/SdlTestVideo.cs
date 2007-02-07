@@ -153,9 +153,9 @@ namespace SdlDotNet.Tests
 			IntPtr videoInfoPtr = Sdl.SDL_GetVideoInfo();
 			Assert.IsNotNull(videoInfoPtr);
 
-			Sdl.SDL_VideoInfo videoInfo = (Sdl.SDL_VideoInfo)
-				Marshal.PtrToStructure(videoInfoPtr, 
-				typeof(Sdl.SDL_VideoInfo));
+            //Sdl.SDL_VideoInfo videoInfo = (Sdl.SDL_VideoInfo)
+            //    Marshal.PtrToStructure(videoInfoPtr, 
+            //    typeof(Sdl.SDL_VideoInfo));
 
 			Sdl.SDL_FreeSurface(videoInfoPtr);
 		}

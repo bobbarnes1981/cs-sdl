@@ -92,7 +92,7 @@ namespace SdlDotNet.Tests
 			int frequency;
 			short format;
 			int channels;
-			int results = SdlMixer.Mix_QuerySpec(out frequency, out format, out channels);
+			SdlMixer.Mix_QuerySpec(out frequency, out format, out channels);
 //			Console.WriteLine("freq: " + frequency.ToString());
 //			Console.WriteLine("format: " + format.ToString());
 //			Console.WriteLine("chan: " + channels.ToString());
@@ -549,7 +549,7 @@ namespace SdlDotNet.Tests
 		{
 			InitAudio();	
 			int result = SdlMixer.Mix_GroupChannels(0, 7, 1);
-			IntPtr chunkPtr = SdlMixer.Mix_LoadWAV("test.wav");
+			SdlMixer.Mix_LoadWAV("test.wav");
 			result = SdlMixer.Mix_Volume(1, SdlMixer.MIX_MAX_VOLUME);
 			Console.WriteLine("Volume: " + result.ToString());
 			Assert.IsTrue(result == SdlMixer.MIX_MAX_VOLUME);
@@ -577,7 +577,7 @@ namespace SdlDotNet.Tests
 		{
 			InitAudio();	
 			int result = SdlMixer.Mix_GroupChannels(0, 7, 1);
-			IntPtr chunkPtr = SdlMixer.Mix_LoadMUS("test.wav");
+			SdlMixer.Mix_LoadMUS("test.wav");
 			result = SdlMixer.Mix_VolumeMusic(SdlMixer.MIX_MAX_VOLUME);
 			Console.WriteLine("Volume: " + result.ToString());
 			Assert.IsTrue(result == SdlMixer.MIX_MAX_VOLUME);
@@ -617,7 +617,7 @@ namespace SdlDotNet.Tests
 		{
 			InitAudio();	
 			int result = SdlMixer.Mix_GroupChannels(0, 7, 1);
-			IntPtr chunkPtr = SdlMixer.Mix_LoadMUS("test.wav");
+			SdlMixer.Mix_LoadMUS("test.wav");
 			result = SdlMixer.Mix_HaltMusic();
 			Assert.IsTrue(result == 0);
 			QuitAudio();
@@ -644,7 +644,7 @@ namespace SdlDotNet.Tests
 		{
 			InitAudio();	
 			int result = SdlMixer.Mix_GroupChannels(0, 7, 1);
-			IntPtr chunkPtr = SdlMixer.Mix_LoadWAV("test.wav");
+			SdlMixer.Mix_LoadWAV("test.wav");
 			result = SdlMixer.Mix_FadeOutChannel(1, 100);
 			Thread.Sleep(500);
 			Console.WriteLine("PlayChannel: " + result.ToString());
@@ -740,9 +740,9 @@ namespace SdlDotNet.Tests
 		public void Pause()
 		{
 			InitAudio();	
-			int result;
+			
 			IntPtr chunkPtr = SdlMixer.Mix_LoadMUS("test.wav");
-			result = SdlMixer.Mix_PlayChannel(1, chunkPtr, -1);
+			SdlMixer.Mix_PlayChannel(1, chunkPtr, -1);
 			SdlMixer.Mix_Pause(-1);
 			QuitAudio();
 		}
@@ -753,9 +753,9 @@ namespace SdlDotNet.Tests
 		public void Resume()
 		{
 			InitAudio();	
-			int result;
+			
 			IntPtr chunkPtr = SdlMixer.Mix_LoadMUS("test.wav");
-			result = SdlMixer.Mix_PlayChannel(1, chunkPtr, -1);
+			SdlMixer.Mix_PlayChannel(1, chunkPtr, -1);
 			SdlMixer.Mix_Pause(-1);
 			SdlMixer.Mix_Resume(-1);
 			QuitAudio();
@@ -785,9 +785,9 @@ namespace SdlDotNet.Tests
 		public void PauseMusic()
 		{
 			InitAudio();	
-			int result;
+			
 			IntPtr chunkPtr = SdlMixer.Mix_LoadMUS("test.wav");
-			result = SdlMixer.Mix_PlayMusic( chunkPtr, -1);
+			SdlMixer.Mix_PlayMusic( chunkPtr, -1);
 			SdlMixer.Mix_PauseMusic();
 			QuitAudio();
 		}
@@ -798,9 +798,9 @@ namespace SdlDotNet.Tests
 		public void ResumeMusic()
 		{
 			InitAudio();	
-			int result;
+			
 			IntPtr chunkPtr = SdlMixer.Mix_LoadMUS("test.wav");
-			result = SdlMixer.Mix_PlayMusic( chunkPtr, -1);
+			SdlMixer.Mix_PlayMusic( chunkPtr, -1);
 			SdlMixer.Mix_PauseMusic();
 			SdlMixer.Mix_ResumeMusic();
 			QuitAudio();
@@ -812,9 +812,9 @@ namespace SdlDotNet.Tests
 		public void RewindMusic()
 		{
 			InitAudio();	
-			int result;
+			
 			IntPtr chunkPtr = SdlMixer.Mix_LoadMUS("test.ogg");
-			result = SdlMixer.Mix_PlayMusic( chunkPtr, -1);
+			SdlMixer.Mix_PlayMusic( chunkPtr, -1);
 			SdlMixer.Mix_RewindMusic();
 			QuitAudio();
 		}
@@ -825,11 +825,11 @@ namespace SdlDotNet.Tests
 		public void PausedMusic()
 		{
 			InitAudio();	
-			int result;
+			
 			IntPtr chunkPtr = SdlMixer.Mix_LoadMUS("test.wav");
-			result = SdlMixer.Mix_PlayMusic( chunkPtr, -1);
+			SdlMixer.Mix_PlayMusic( chunkPtr, -1);
 			SdlMixer.Mix_PauseMusic();
-			result = SdlMixer.Mix_PausedMusic();
+			SdlMixer.Mix_PausedMusic();
 			QuitAudio();
 		}
 		/// <summary>
@@ -841,7 +841,7 @@ namespace SdlDotNet.Tests
 		{
 			InitAudio();	
 			int result;
-			IntPtr chunkPtr = SdlMixer.Mix_LoadMUS("test.wav");
+			SdlMixer.Mix_LoadMUS("test.wav");
 			result = SdlMixer.Mix_SetMusicPosition(1000);
 			//Console.WriteLine("PlayMusic: " + result.ToString());
 			Assert.IsTrue(result != -1);
@@ -889,9 +889,8 @@ namespace SdlDotNet.Tests
 		public void SetPlayingCMD()
 		{
 			InitAudio();	
-			int result;
-			//result = SdlMixer.Mix_PlayMusic( chunkPtr, -1);
-			result = SdlMixer.Mix_SetMusicCMD("test");
+			
+			SdlMixer.Mix_SetMusicCMD("test");
 			QuitAudio();
 		}
 		/// <summary>
@@ -902,9 +901,7 @@ namespace SdlDotNet.Tests
 		public void GetChunk()
 		{
 			InitAudio();	
-			IntPtr resultPtr;
-			//result = SdlMixer.Mix_PlayMusic( chunkPtr, -1);
-			resultPtr= SdlMixer.Mix_GetChunk(1);
+			SdlMixer.Mix_GetChunk(1);
 			QuitAudio();
 		}
 		/// <summary>
@@ -915,8 +912,7 @@ namespace SdlDotNet.Tests
 		public void SetSynchroValue()
 		{
 			InitAudio();	
-			int result;
-			result = SdlMixer.Mix_SetSynchroValue(1);
+			SdlMixer.Mix_SetSynchroValue(1);
 			QuitAudio();
 		}
 		/// <summary>
@@ -927,8 +923,7 @@ namespace SdlDotNet.Tests
 		public void GetSynchroValue()
 		{
 			InitAudio();	
-			int result;
-			result = SdlMixer.Mix_GetSynchroValue();
+			SdlMixer.Mix_GetSynchroValue();
 			QuitAudio();
 		}
 		/// <summary>

@@ -292,9 +292,9 @@ namespace SdlDotNet.Tests
 			int maxx;
 			int maxy;
 			int advance;
-			int result;
+			
 
-			result = SdlTtf.TTF_GlyphMetrics(fontPtr, 1 , out minx, out maxx,out  miny, out maxy, out advance);
+			SdlTtf.TTF_GlyphMetrics(fontPtr, 1 , out minx, out maxx,out  miny, out maxy, out advance);
 			Assert.AreEqual(-1, minx);
 			Assert.AreEqual(4, maxx);
 			Assert.AreEqual(0, miny);
@@ -318,7 +318,7 @@ namespace SdlDotNet.Tests
 			IntPtr fontPtr = SdlTtf.TTF_OpenFont("../../FreeSans.ttf", 10);
 			int w; 
 			int h;
-			int result = SdlTtf.TTF_SizeText(fontPtr, "hello", out w, out h);
+			SdlTtf.TTF_SizeText(fontPtr, "hello", out w, out h);
 //			Console.WriteLine("w: " + w.ToString());
 //			Console.WriteLine("h: " + h.ToString());
 			Assert.AreEqual(w, 6);
@@ -336,7 +336,7 @@ namespace SdlDotNet.Tests
 			IntPtr fontPtr = SdlTtf.TTF_OpenFont("../../FreeSans.ttf", 10);
 			int w; 
 			int h;
-			int result = SdlTtf.TTF_SizeUTF8(fontPtr, "hello", out w, out h);
+			SdlTtf.TTF_SizeUTF8(fontPtr, "hello", out w, out h);
 						Console.WriteLine("w: " + w.ToString());
 						Console.WriteLine("h: " + h.ToString());
 			Assert.AreEqual(w, 6);
@@ -354,7 +354,7 @@ namespace SdlDotNet.Tests
 			IntPtr fontPtr = SdlTtf.TTF_OpenFont("../../FreeSans.ttf", 10);
 			int w; 
 			int h;
-			int result = SdlTtf.TTF_SizeUNICODE(fontPtr, "hello", out w, out h);
+			SdlTtf.TTF_SizeUNICODE(fontPtr, "hello", out w, out h);
 						Console.WriteLine("w: " + w.ToString());
 						Console.WriteLine("h: " + h.ToString());
 			Assert.AreEqual(w, 22);

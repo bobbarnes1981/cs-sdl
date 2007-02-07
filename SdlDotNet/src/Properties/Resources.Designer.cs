@@ -133,6 +133,15 @@ namespace SdlDotNet.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to object is not a Sprite.
+        /// </summary>
+        internal static string SpriteCompareException {
+            get {
+                return ResourceManager.GetString("SpriteCompareException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Only AudioFormat.Unsigned16Little is currently supported.
         /// </summary>
         internal static string SupportedAudioFormats {

@@ -944,36 +944,108 @@ namespace SdlDotNet.Graphics.Sprites
         /// <returns></returns>
         public int CompareTo(object obj)
         {
-            if (obj is Sprite)
+            Sprite temp = obj as Sprite;
+            if (this.Z == temp.Z)
             {
-                Sprite temp = (Sprite)obj;
-                if (this.Z == temp.Z)
+                if (this.GetHashCode() == temp.GetHashCode())
                 {
-                    if (this.GetHashCode() == temp.GetHashCode())
-                    {
-                        return 0;
-                    }
-                    else if (this.GetHashCode() > temp.GetHashCode())
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return -1;
-                    }
+                    return 0;
                 }
-                else if (this.Z > temp.Z)
+                else if (this.GetHashCode() > temp.GetHashCode())
                 {
                     return 1;
                 }
+                else
                 {
                     return -1;
                 }
             }
-
-            throw new ArgumentException("object is not a Sprite");
-
+            else if (this.Z > temp.Z)
+            {
+                return 1;
+            }
+            {
+                return -1;
+            }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(Object obj)
+        {
+            if (!(obj is Sprite))
+                return false;
+            return (this.CompareTo(obj) == 0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return this.Surface.Handle.GetHashCode();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static bool operator ==(Sprite s1, Sprite s2)
+        {
+            if (s1 == null)
+            {
+                throw new ArgumentNullException("s1");
+            }
+            return s1.Equals(s2);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static bool operator !=(Sprite s1, Sprite s2)
+        {
+            return !(s1 == s2);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static bool operator <(Sprite s1, Sprite s2)
+        {
+            if (s1 == null)
+            {
+                throw new ArgumentNullException("s1");
+            }
+            return (s1.CompareTo(s2) < 0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static bool operator >(Sprite s1, Sprite s2)
+        {
+            if (s1 == null)
+            {
+                throw new ArgumentNullException("s1");
+            }
+            return (s1.CompareTo(s2) > 0);
+        }
+
 
         #endregion
     }

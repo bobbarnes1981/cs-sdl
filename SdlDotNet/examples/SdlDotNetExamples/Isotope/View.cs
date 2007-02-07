@@ -41,7 +41,7 @@ namespace SdlDotNetExamples.Isotope
            old_rect: The areas of the view that are tagged to be updated: list of rect class
         */
 
-        private int[] viewSize ={ 400, 300 };
+        //private int[] viewSize ={ 400, 300 };
 
         //remember the surface
         Surface surface;

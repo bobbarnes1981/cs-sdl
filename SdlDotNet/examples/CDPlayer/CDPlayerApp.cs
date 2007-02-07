@@ -511,11 +511,11 @@ namespace SdlDotNetExamples.CDPlayer
                 this.surfaceControl.Height);
         }
 
-        private void menuItem2_Click(object sender, System.EventArgs e)
-        {
-            SdlDotNet.Core.Events.QuitApplication();
-            this.Close();
-        }
+        //private void menuItem2_Click(object sender, System.EventArgs e)
+        //{
+        //    SdlDotNet.Core.Events.QuitApplication();
+        //    this.Close();
+        //}
 
         /// <summary>
         /// 
