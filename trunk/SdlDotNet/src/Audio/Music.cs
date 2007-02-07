@@ -135,6 +135,9 @@ namespace SdlDotNet.Audio
             catch (NullReferenceException)
             {
             }
+            catch (AccessViolationException)
+            {
+            }
             finally
             {
                 this.Handle = IntPtr.Zero;

@@ -123,6 +123,12 @@ namespace SdlDotNet.Graphics
                     Smpeg.SMPEG_delete(this.Handle);
                 }
             }
+            catch (NullReferenceException)
+            {
+            }
+            catch (AccessViolationException)
+            {
+            }
             finally
             {
                 this.Handle = IntPtr.Zero;
