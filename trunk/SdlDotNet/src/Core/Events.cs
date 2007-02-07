@@ -433,10 +433,15 @@ namespace SdlDotNet.Core
         /// </summary>
         public static void CloseVideo()
         {
-            if (Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) != 0)
+            try
             {
-                Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
+                if (Sdl.SDL_WasInit(Sdl.SDL_INIT_VIDEO) != 0)
+                {
+                    Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_VIDEO);
+                }
             }
+            catch (AccessViolationException)
+            { }
         }
 
         /// <summary>
@@ -444,10 +449,15 @@ namespace SdlDotNet.Core
         /// </summary>
         public static void CloseTimer()
         {
-            if (Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER) != 0)
+            try
             {
-                Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_TIMER);
+                if (Sdl.SDL_WasInit(Sdl.SDL_INIT_TIMER) != 0)
+                {
+                    Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_TIMER);
+                }
             }
+            catch (AccessViolationException)
+            { }
         }
 
         /// <summary>
@@ -455,10 +465,15 @@ namespace SdlDotNet.Core
         /// </summary>
         public static void CloseJoysticks()
         {
-            if (Sdl.SDL_WasInit(Sdl.SDL_INIT_JOYSTICK) != 0)
+            try
             {
-                Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_JOYSTICK);
+                if (Sdl.SDL_WasInit(Sdl.SDL_INIT_JOYSTICK) != 0)
+                {
+                    Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_JOYSTICK);
+                }
             }
+            catch (AccessViolationException)
+            { }
         }
 
         /// <summary>
@@ -467,10 +482,15 @@ namespace SdlDotNet.Core
         /// <remarks></remarks>
         public static void CloseCDRom()
         {
-            if (Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) != 0)
+            try
             {
-                Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_CDROM);
+                if (Sdl.SDL_WasInit(Sdl.SDL_INIT_CDROM) != 0)
+                {
+                    Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_CDROM);
+                }
             }
+            catch (AccessViolationException)
+            { }
         }
 
         /// <summary>
@@ -478,11 +498,16 @@ namespace SdlDotNet.Core
         /// </summary>
         public static void CloseMixer()
         {
-            SdlMixer.Mix_CloseAudio();
-            if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != 0)
+            try
             {
-                Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
+                SdlMixer.Mix_CloseAudio();
+                if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != 0)
+                {
+                    Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
+                }
             }
+            catch (AccessViolationException)
+            { }
         }
 
         /// <summary>
@@ -507,20 +532,27 @@ namespace SdlDotNet.Core
         /// </returns>
         public static bool Poll()
         {
-            Sdl.SDL_Event ev;
-            int ret = Sdl.SDL_PollEvent(out ev);
-            if (ret == (int)SdlFlag.Error)
+            try
             {
-                throw SdlException.Generate();
+                Sdl.SDL_Event ev;
+                int ret = Sdl.SDL_PollEvent(out ev);
+                if (ret == (int)SdlFlag.Error)
+                {
+                    throw SdlException.Generate();
+                }
+                if (ret == (int)SdlFlag.None)
+                {
+                    return false;
+                }
+                else
+                {
+                    ProcessEvent(ev);
+                    return true;
+                }
             }
-            if (ret == (int)SdlFlag.None)
+            catch (AccessViolationException)
             {
                 return false;
-            }
-            else
-            {
-                ProcessEvent(ev);
-                return true;
             }
         }
 
@@ -1143,7 +1175,7 @@ namespace SdlDotNet.Core
         private static int lastTick;
         private static float ticksPerFrame = (1000.0f / (float)targetFps);
         private static bool quitFlag;
-        
+
         /// <summary>
         /// Quits application by raising and quit event.
         /// </summary>
@@ -1219,10 +1251,10 @@ namespace SdlDotNet.Core
             int currentTime;
             int currentTick;
             int targetTick;
-            
+
             while (!quitFlag)
             {
-                
+
                 // Poll all events
                 while (Events.Poll()) ;
                 currentTick = Timer.TicksElapsed;
