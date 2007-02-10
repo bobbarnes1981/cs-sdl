@@ -55,10 +55,9 @@ namespace SdlDotNet.Tests
 		[Test]
 		public void DriverName()
 		{
-			string buffer="";
-			string driverName = Sdl.SDL_VideoDriverName(buffer, 100);
-			//Console.WriteLine("Video: "+ driverName);
-			Assert.IsNotNull(driverName);
+            string driverName = Video.VideoDriver;
+			Console.WriteLine("Video: "+ driverName);
+            Assert.IsNotNull(driverName);
 		}
 
 //		/// <summary>

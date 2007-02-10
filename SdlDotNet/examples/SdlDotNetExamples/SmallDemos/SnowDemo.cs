@@ -40,8 +40,8 @@ namespace SdlDotNetExamples.SmallDemos
 										"we will walk",
 										"in bitter rain"
 									};
-        SpriteDictionary snowflakes = new SpriteDictionary();
-        SpriteDictionary textItems = new SpriteDictionary();
+        SpriteCollection snowflakes = new SpriteCollection();
+        SpriteCollection textItems = new SpriteCollection();
         Surface screen;
         Surface background;
         Surface tree;
@@ -61,17 +61,17 @@ namespace SdlDotNetExamples.SmallDemos
         {
             for (int i = 0; i < numberOfSnowflakes; i++)
             {
-                snowflakes.Add(new Snowflake(), new Rectangle());
+                snowflakes.Add(new Snowflake());
             }
             SdlDotNet.Graphics.Font font = new SdlDotNet.Graphics.Font(filepath + data_directory + fontName, 24);
 
-            textItems.Add(new TextItem(textArray[0], font, 25, 0), new Rectangle());
+            textItems.Add(new TextItem(textArray[0], font, 25, 0));
             for (int i = 1; i < textArray.Length; i++)
             {
                 textItems.Add(
                     new TextItem(textArray[i],
                     font, i * 50,
-                    i * 2), new Rectangle());
+                    i * 2));
             }
             snowflakes.EnableTickEvent();
             textItems.EnableTickEvent();

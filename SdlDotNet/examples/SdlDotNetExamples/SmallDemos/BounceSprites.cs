@@ -41,7 +41,7 @@ namespace SdlDotNetExamples.SmallDemos
     {
         #region Fields
         private Surface screen; //video screen
-        private SpriteDictionary master = new SpriteDictionary(); //holds all sprites
+        private SpriteCollection master = new SpriteCollection(); //holds all sprites
         private int width = 640; //screen width
         private int height = 480; //screen height
         private int maxBalls = 10; //number of balls to display
@@ -106,7 +106,7 @@ namespace SdlDotNetExamples.SmallDemos
                 //Create a new Sprite at a random location on the screen
                 master.Add(new BounceSprite(marbleSurfaces,
                     new Point(rand.Next(screen.Rectangle.Left, screen.Rectangle.Right),
-                    rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom))), new Rectangle());
+                    rand.Next(screen.Rectangle.Top, screen.Rectangle.Bottom))));
             }
 
             //The collection will respond to mouse button clicks, mouse movement and the ticker.
