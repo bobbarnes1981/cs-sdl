@@ -227,8 +227,8 @@ namespace SdlDotNetExamples.LargeDemos
         #endregion
 
         #region Properties
-        private static SpriteDictionary master = new SpriteDictionary();
-        private static SpriteDictionary manager = new SpriteDictionary();
+        private static SpriteCollection master = new SpriteCollection();
+        private static SpriteCollection manager = new SpriteCollection();
         private Surface screen;
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace SdlDotNetExamples.LargeDemos
                 if (disposing)
                 {
                     this.screen.Dispose();
-                    foreach (Sprite s in SpriteDemosMain.manager.Keys)
+                    foreach (Sprite s in SpriteDemosMain.manager)
                     {
                         IDisposable disposableObj = s as IDisposable;
                         if (disposableObj != null)
@@ -286,7 +286,7 @@ namespace SdlDotNetExamples.LargeDemos
                             disposableObj.Dispose();
                         }
                     }
-                    foreach (Sprite s in SpriteDemosMain.master.Keys)
+                    foreach (Sprite s in SpriteDemosMain.master)
                     {
                         IDisposable disposableObj = s as IDisposable;
                         if (disposableObj != null)

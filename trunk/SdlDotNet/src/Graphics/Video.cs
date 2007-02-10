@@ -1180,7 +1180,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                string buffer = "";
+                string buffer = string.Empty;
                 return Sdl.SDL_VideoDriverName(buffer, 100);
             }
         }

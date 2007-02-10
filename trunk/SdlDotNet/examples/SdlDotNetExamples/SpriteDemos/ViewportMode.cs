@@ -125,7 +125,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// Adds the internal sprite manager to the outer one.
         /// </summary>
-        public override void Start(SpriteDictionary manager)
+        public override void Start(SpriteCollection manager)
         {
             Sprites.EnableTickEvent();
             base.Start(manager);
@@ -134,7 +134,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// Removes the internal manager from the controlling manager.
         /// </summary>
-        public override void Stop(SpriteDictionary manager)
+        public override void Stop(SpriteCollection manager)
         {
             Sprites.DisableTickEvent();
             base.Stop(manager);
@@ -153,7 +153,7 @@ namespace SdlDotNetExamples.SpriteDemos
         public override Surface RenderSurface()
         {
             base.Surface.Fill(Color.Black);
-            foreach (Sprite s in Sprites.Keys)
+            foreach (Sprite s in Sprites)
             {
                 Rectangle offsetRect = s.Rectangle;
                 offsetRect.Offset(AdjustBoundedViewport());

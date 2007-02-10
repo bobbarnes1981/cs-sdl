@@ -39,7 +39,7 @@ namespace SdlDotNetExamples.SpriteDemos
 
         private Size size;
 
-        private SpriteDictionary all = new SpriteDictionary();
+        private SpriteCollection all = new SpriteCollection();
 
         Rectangle rect;
 
@@ -141,7 +141,7 @@ namespace SdlDotNetExamples.SpriteDemos
         public override Surface RenderSurface()
         {
             this.Surface.Fill(Color.Black);
-            foreach (Sprite s in all.Keys)
+            foreach (Sprite s in all)
             {
                 Rectangle offsetRect = s.Rectangle;
                 offsetRect.Offset(AdjustBoundedViewport(sprite1, surf1));
@@ -269,7 +269,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// Adds the internal sprite manager to the outer one.
         /// </summary>
-        public override void Start(SpriteDictionary manager)
+        public override void Start(SpriteCollection manager)
         {
             all.EnableTickEvent();
             base.Start(manager);
@@ -278,7 +278,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// Removes the internal manager from the controlling manager.
         /// </summary>
-        public override void Stop(SpriteDictionary manager)
+        public override void Stop(SpriteCollection manager)
         {
             all.DisableTickEvent();
             base.Stop(manager);
@@ -308,7 +308,7 @@ namespace SdlDotNetExamples.SpriteDemos
                     if (disposing)
                     {
                         this.Surface.Dispose();
-                        foreach (Sprite s in this.Sprites.Keys)
+                        foreach (Sprite s in this.Sprites)
                         {
                             IDisposable disposableObj = s as IDisposable;
                             if (disposableObj != null)
