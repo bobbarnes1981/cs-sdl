@@ -20,7 +20,7 @@
 
 using System;
 using System.Drawing;
-using System.Collections.Generic;
+using System.Collections;
 using System.Globalization;
 using System.Diagnostics.CodeAnalysis;
 
@@ -35,7 +35,7 @@ namespace SdlDotNet.Graphics.Sprites
     /// Sprite class contains both a Surface and a Rectangle so that 
     /// an object can be easily displayed and manipulated.
     /// </summary>
-    public class Sprite : IDisposable
+    public class Sprite : IDisposable, IComparable
     {
         #region Constructors
 
@@ -46,7 +46,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// Use this with caution. 
         /// This is provided as a convenience. 
         /// Please give the sprite a Surface and a Vector.</remarks>
-        public Sprite() : this(new Surface(0, 0), new Point(0, 0))
+        public Sprite()
         {
         }
 
@@ -111,9 +111,9 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="vector">Vector of Sprite</param>
         /// <param name="surface">Surface of Sprite</param>
         /// <param name="group">
-        /// SpriteCollection group to put Sprite into.
+        /// SpriteDictionary group to put Sprite into.
         /// </param>
-        public Sprite(Surface surface, Vector vector, SpriteCollection group)
+        public Sprite(Surface surface, Vector vector, SpriteDictionary group)
             : this(surface, vector)
         {
             if (group == null)
@@ -129,9 +129,9 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="position">position of Sprite</param>
         /// <param name="surface">Surface of Sprite</param>
         /// <param name="group">
-        /// SpriteCollection group to put Sprite into.
+        /// SpriteDictionary group to put Sprite into.
         /// </param>
-        public Sprite(Surface surface, Point position, SpriteCollection group)
+        public Sprite(Surface surface, Point position, SpriteDictionary group)
             : this(surface, new Vector(position), group)
         {
         }
@@ -346,22 +346,6 @@ namespace SdlDotNet.Graphics.Sprites
             set
             {
                 this.vector = new Vector(value.X, value.Y, 0);
-            }
-        }
-
-        Rectangle rectangleDirty;
-        /// <summary>
-        /// 
-        /// </summary>
-        public Rectangle RectangleDirty
-        {
-            get
-            {
-                return this.rectangleDirty;
-            }
-            set
-            {
-                this.rectangleDirty = value;
             }
         }
 
@@ -683,17 +667,17 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Check to see if Sprite intersects with any sprite in a SpriteCollection
+        /// Check to see if Sprite intersects with any sprite in a SpriteDictionary
         /// </summary>
-        /// <param name="spriteCollection">Collection to chekc the intersection with</param>
+        /// <param name="spriteDictionary">Collection to chekc the intersection with</param>
         /// <returns>True if sprite intersects with any sprite in collection</returns>
-        public virtual bool IntersectsWith(SpriteCollection spriteCollection)
+        public virtual bool IntersectsWith(SpriteDictionary spriteDictionary)
         {
-            if (spriteCollection == null)
+            if (spriteDictionary == null)
             {
-                throw new ArgumentNullException("SpriteCollection");
+                throw new ArgumentNullException("SpriteDictionary");
             }
-            foreach (Sprite sprite in spriteCollection)
+            foreach (Sprite sprite in spriteDictionary.Keys)
             {
                 if (this.IntersectsWith(sprite))
                 {
@@ -707,7 +691,7 @@ namespace SdlDotNet.Graphics.Sprites
 
         #region Properties
         /// <summary>
-        /// True if Sprite is a member of a SpriteCollection
+        /// True if Sprite is a member of a SpriteDictionary
         /// </summary>
         public virtual bool Alive
         {
@@ -717,12 +701,12 @@ namespace SdlDotNet.Graphics.Sprites
             }
         }
 
-        List<SpriteCollection> groups = new List<SpriteCollection>();
+        ArrayList groups = new ArrayList();
 
         /// <summary>
         /// collections that the Sprite is a member of.
         /// </summary>
-        public virtual List<SpriteCollection> Collections
+        public virtual ArrayList Collections
         {
             get
             {
@@ -737,7 +721,7 @@ namespace SdlDotNet.Graphics.Sprites
         {
             for (int i = 0; i < this.groups.Count; i++)
             {
-                ((SpriteCollection)groups[i]).Remove(this);
+                ((SpriteDictionary)groups[i]).Remove(this);
             }
         }
 
@@ -745,7 +729,7 @@ namespace SdlDotNet.Graphics.Sprites
         ///// Add Sprite to collection
         ///// </summary>
         ///// <param name="group">collection to add to</param>
-        //public virtual void Add(SpriteCollection group)
+        //public virtual void Add(SpriteDictionary group)
         //{
         //    if (group == null)
         //    {
@@ -759,7 +743,7 @@ namespace SdlDotNet.Graphics.Sprites
         ///// Add Sprite to collection. Use in special situations
         ///// </summary>
         ///// <param name="group">Collection to add to</param>
-        //public void AddInternal(SpriteCollection group)
+        //public void AddInternal(SpriteDictionary group)
         //{
         //    this.groups.Add(group);
         //}
@@ -768,7 +752,7 @@ namespace SdlDotNet.Graphics.Sprites
         ///// remove Sprite from Collection
         ///// </summary>
         ///// <param name="group">collection to remove sprite from</param>
-        //public virtual void Remove(SpriteCollection group)
+        //public virtual void Remove(SpriteDictionary group)
         //{
         //    if (group == null)
         //    {
@@ -782,7 +766,7 @@ namespace SdlDotNet.Graphics.Sprites
         ///// remove Sprite from collection. Use in special situations
         ///// </summary>
         ///// <param name="group">collection to remove sprite from</param>
-        //public void RemoveInternal(SpriteCollection group)
+        //public void RemoveInternal(SpriteDictionary group)
         //{
         //    this.groups.Remove(group);
         //}
@@ -947,6 +931,120 @@ namespace SdlDotNet.Graphics.Sprites
         {
             Dispose(false);
         }
+
+        #endregion
+
+        #region IComparable Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public int CompareTo(object obj)
+        {
+            Sprite temp = obj as Sprite;
+            if (this.Z == temp.Z)
+            {
+                if (this.GetHashCode() == temp.GetHashCode())
+                {
+                    return 0;
+                }
+                else if (this.GetHashCode() > temp.GetHashCode())
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else if (this.Z > temp.Z)
+            {
+                return 1;
+            }
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(Object obj)
+        {
+            if (!(obj is Sprite))
+                return false;
+            return (this.CompareTo(obj) == 0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static bool operator ==(Sprite s1, Sprite s2)
+        {
+            if ((object)s1 == null)
+            {
+                throw new ArgumentNullException("s1");
+            }
+            return s1.Equals(s2);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static bool operator !=(Sprite s1, Sprite s2)
+        {
+            return !(s1 == s2);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static bool operator <(Sprite s1, Sprite s2)
+        {
+            if (s1 == null)
+            {
+                throw new ArgumentNullException("s1");
+            }
+            return (s1.CompareTo(s2) < 0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s1"></param>
+        /// <param name="s2"></param>
+        /// <returns></returns>
+        public static bool operator >(Sprite s1, Sprite s2)
+        {
+            if (s1 == null)
+            {
+                throw new ArgumentNullException("s1");
+            }
+            return (s1.CompareTo(s2) > 0);
+        }
+
 
         #endregion
     }

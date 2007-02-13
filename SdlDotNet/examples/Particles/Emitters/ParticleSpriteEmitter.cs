@@ -29,11 +29,11 @@ namespace SdlDotNet.Particles.Emitters
     /// </summary>
     public class ParticleSpriteEmitter : ParticleEmitter
     {
-        private SpriteCollection m_Sprites;
+        private SpriteDictionary m_Sprites;
         /// <summary>
         /// Gets and sets the collection of sprites assosiated with this particle emitter.
         /// </summary>
-        public SpriteCollection Sprites
+        public SpriteDictionary Sprites
         {
             get
             {
@@ -44,7 +44,6 @@ namespace SdlDotNet.Particles.Emitters
             //				m_Sprites = value;
             //			}
         }
-
         /// <summary>
         /// Creates a new particle emitter that emits sprite objects.
         /// </summary>
@@ -53,36 +52,31 @@ namespace SdlDotNet.Particles.Emitters
         public ParticleSpriteEmitter(ParticleSystem system, Sprite sprite)
             : base(system)
         {
-            m_Sprites = new SpriteCollection();
-            m_Sprites.Add(sprite);
+            m_Sprites = new SpriteDictionary(sprite);
         }
-
         /// <summary>
         /// Creates a new particle emitter that emits sprite objects.
         /// </summary>
         /// <param name="system">The particle system to add this particle emitter.</param>
         /// <param name="sprites">The sprite collection to choose sprites from when emitting.</param>
-        public ParticleSpriteEmitter(ParticleSystem system, SpriteCollection sprites)
+        public ParticleSpriteEmitter(ParticleSystem system, SpriteDictionary sprites)
             : base(system)
         {
             m_Sprites = sprites;
         }
-
         /// <summary>
         /// Creates a new particle emitter that emits sprite objects.
         /// </summary>
         /// <param name="sprite">The sprite to emit.</param>
         public ParticleSpriteEmitter(Sprite sprite)
         {
-            m_Sprites = new SpriteCollection();
-            m_Sprites.Add(sprite);
+            m_Sprites = new SpriteDictionary(sprite);
         }
-
         /// <summary>
         /// Creates a new particle emitter that emits sprite objects.
         /// </summary>
         /// <param name="sprites">The sprite collection to choose sprites from when emitting.</param>
-        public ParticleSpriteEmitter(SpriteCollection sprites)
+        public ParticleSpriteEmitter(SpriteDictionary sprites)
         {
             m_Sprites = sprites;
         }
@@ -97,7 +91,7 @@ namespace SdlDotNet.Particles.Emitters
                 return null;
             }
             return new ParticleSprite(
-                    m_Sprites.GetEnumerator().Current
+                    m_Sprites.GetEnumerator().Current.Key
                 );
         }
     }

@@ -1004,20 +1004,20 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Blit entire SpriteCollection to Surface
+        /// Blit entire SpriteDictionary to Surface
         /// </summary>
-        /// <param name="spriteCollection">spriteCollection to Blit</param>
+        /// <param name="spriteDictionary">SpriteDictionary to Blit</param>
         /// <returns>Collection of Rectangles acutally blit to since 
         /// ere have may been some clipping.
         /// </returns>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
-        public Collection<Rectangle> Blit(SpriteCollection spriteCollection)
+        public Collection<Rectangle> Blit(SpriteDictionary spriteDictionary)
         {
-            if (spriteCollection == null)
+            if (spriteDictionary == null)
             {
-                throw new ArgumentNullException("spriteCollection");
+                throw new ArgumentNullException("SpriteDictionary");
             }
-            return spriteCollection.Draw(this);
+            return spriteDictionary.Draw(this);
         }
 
         /// <summary>
@@ -1080,20 +1080,20 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Erases SpriteCollection from surface
+        /// Erases SpriteDictionary from surface
         /// </summary>
-        /// <param name="spriteCollection">spriteCollection to erase</param>
+        /// <param name="spriteDictionary">SpriteDictionary to erase</param>
         /// <param name="background">
-        /// Background Surface to cover up spriteCollection
+        /// Background Surface to cover up SpriteDictionary
         /// </param>
-        public void Erase(SpriteCollection spriteCollection,
+        public void Erase(SpriteDictionary spriteDictionary,
             Surface background)
         {
-            if (spriteCollection == null)
+            if (spriteDictionary == null)
             {
-                throw new ArgumentNullException("spriteCollection");
+                throw new ArgumentNullException("spriteDictionary");
             }
-            spriteCollection.Erase(this, background);
+            spriteDictionary.Erase(this, background);
         }
 
         /// <summary>
