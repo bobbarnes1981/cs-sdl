@@ -43,7 +43,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// 
         /// </summary>
-        private SpriteCollection sprites = new SpriteCollection();
+        private SpriteDictionary sprites = new SpriteDictionary();
         static Random rand = new Random();
         static string data_directory = @"Data/";
         static string filepath = @"../../";
@@ -119,7 +119,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// Indicates to the demo page that it should start displaying its
         /// data in the given sprite manager.
         /// </summary>
-        public virtual void Start(SpriteCollection manager)
+        public virtual void Start(SpriteDictionary manager)
         {
             if (manager == null)
             {
@@ -132,7 +132,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// Indicates to the demo page that it should stop displaying its
         /// data in the given sprite manager.
         /// </summary>
-        public virtual void Stop(SpriteCollection manager)
+        public virtual void Stop(SpriteDictionary manager)
         {
             if (manager == null)
             {
@@ -164,7 +164,7 @@ namespace SdlDotNetExamples.SpriteDemos
         public virtual Surface RenderSurface()
         {
             surf.Fill(Color.Black);
-            foreach (Sprite s in Sprites)
+            foreach (Sprite s in Sprites.Keys)
             {
                 surf.Blit(s.Surface, s.Rectangle);
             }
@@ -174,7 +174,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// 
         /// </summary>
-        public SpriteCollection Sprites
+        public SpriteDictionary Sprites
         {
             get
             {
@@ -200,7 +200,7 @@ namespace SdlDotNetExamples.SpriteDemos
                         this.surf.Dispose();
                         this.surf = null;
                     }
-                    foreach (Sprite s in this.sprites)
+                    foreach (Sprite s in this.sprites.Keys)
                     {
                         if (s != null)
                         {

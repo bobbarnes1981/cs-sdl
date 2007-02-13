@@ -62,6 +62,7 @@ namespace SdlDotNetExamples
 
         public SdlDotNetExamplesBrowser()
         {
+            demoList = new Dictionary<string, Dictionary<string, string>>();
             stringManager =
                 new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
             LoadDemos();
@@ -76,7 +77,7 @@ namespace SdlDotNetExamples
             LoadListBox();
         }
 
-        Dictionary<string, Dictionary<string, string>> demoList = new Dictionary<string, Dictionary<string, string>>();
+        Dictionary<string, Dictionary<string, string>> demoList;
 
         private void LoadDemos()
         {
