@@ -136,7 +136,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public override void Stop(SpriteDictionary manager)
         {
-            Sprites.DisableTickEvent();
+            Sprites.DisableAllEvents();
             base.Stop(manager);
         }
 

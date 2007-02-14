@@ -328,8 +328,25 @@ namespace SdlDotNet.Graphics.Sprites
             set { vector = value; }
         }
 
+        private bool boundingBox;
 
-        //private Rectangle rect;
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool BoundingBox
+        {
+            get
+            {
+                return boundingBox;
+            }
+            set
+            {
+                boundingBox = value;
+            }
+        }
+
+        private Rectangle rectangle;
+
         /// <summary>
         /// Gets and sets the sprite's surface rectangle.
         /// </summary>
@@ -337,15 +354,33 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                if (vector.IsEmpty)
+                if (boundingBox)
                 {
-                    this.vector = new Vector(0, 0, 0);
+                    if (rectangle.IsEmpty)
+                    {
+                        this.rectangle = new Rectangle(new Point((int)vector.X, (int)vector.Y), surf == null ? new Size(0, 0) : this.surf.Size);
+                    }
+                    return rectangle;
                 }
-                return new Rectangle(new Point((int)vector.X, (int)vector.Y), surf == null ? new Size(0, 0) : this.surf.Size);
+                else
+                {
+                    if (vector.IsEmpty)
+                    {
+                        this.vector = new Vector(0, 0, 0);
+                    }
+                    return new Rectangle(new Point((int)vector.X, (int)vector.Y), surf == null ? new Size(0, 0) : this.surf.Size);
+                }
             }
             set
             {
-                this.vector = new Vector(value.X, value.Y, 0);
+                if (boundingBox)
+                {
+                    this.rectangle = value;
+                }
+                else
+                {
+                    this.vector = new Vector(value.X, value.Y, 0);
+                }
             }
         }
 

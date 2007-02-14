@@ -121,6 +121,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public virtual void Start(SpriteDictionary manager)
         {
+            manager.Clear();
             if (manager == null)
             {
                 throw new ArgumentNullException("manager");
@@ -139,6 +140,7 @@ namespace SdlDotNetExamples.SpriteDemos
                 throw new ArgumentNullException("manager");
             }
             manager.Remove(Sprites);
+            manager.Clear();
         }
         #endregion
 
