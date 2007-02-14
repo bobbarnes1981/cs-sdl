@@ -81,6 +81,24 @@ namespace SdlDotNetExamples.SpriteDemos
             Sprites.EnableTickEvent();
         }
 
+        /// <summary>
+        /// Adds the internal sprite manager to the outer one.
+        /// </summary>
+        public override void Start(SpriteDictionary manager)
+        {
+            Sprites.EnableTickEvent();
+            base.Start(manager);
+        }
+
+        /// <summary>
+        /// Removes the internal manager from the controlling manager.
+        /// </summary>
+        public override void Stop(SpriteDictionary manager)
+        {
+            Sprites.DisableAllEvents();
+            base.Stop(manager);
+        }
+
         #region Operators
         /// <summary>
         /// 

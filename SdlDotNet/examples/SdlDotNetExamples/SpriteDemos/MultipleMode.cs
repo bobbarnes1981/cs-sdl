@@ -280,7 +280,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public override void Stop(SpriteDictionary manager)
         {
-            all.DisableTickEvent();
+            all.DisableAllEvents();
             base.Stop(manager);
         }
 

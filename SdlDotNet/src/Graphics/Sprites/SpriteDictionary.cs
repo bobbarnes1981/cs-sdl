@@ -489,6 +489,16 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Disables Event for SpriteDictionary
         /// </summary>
+        public void DisableAllEvents()
+        {
+            Events.AppActive -= new EventHandler<ActiveEventArgs>(Update);
+            Events.JoystickAxisMotion -= new EventHandler<JoystickAxisEventArgs>(Update);
+        
+        }
+
+        /// <summary>
+        /// Disables Event for SpriteDictionary
+        /// </summary>
         public void DisableJoystickAxisEvent()
         {
             Events.JoystickAxisMotion -= new EventHandler<JoystickAxisEventArgs>(Update);
