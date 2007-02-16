@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Tao.Sdl;
 using SdlDotNet.Graphics;
 using SdlDotNet.Core;
+using SdlDotNet.Graphics.Sprites;
 
 namespace SdlDotNet.Tests
 {
@@ -433,6 +434,34 @@ namespace SdlDotNet.Tests
 			Assert.AreEqual(testColor.ToArgb(), color.ToArgb());
 			Events.Close();
 		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Test]
+        public void SpriteRectangle()
+        {
+            VideoSetup();
+            Sprite sprite = new Sprite(new Surface(75, 50));
+            Assert.AreEqual(75, sprite.Rectangle.Width);
+            Assert.AreEqual(50, sprite.Rectangle.Height);
+            Events.Close();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Test]
+        public void SpriteRectangle2()
+        {
+            VideoSetup();
+            Sprite sprite = new Sprite(new Surface(75, 50));
+            sprite.BoundingBox = true;
+            sprite.Rectangle = new Rectangle(0, 0, 20, 30);
+            Assert.AreEqual(20, sprite.Rectangle.Width);
+            Assert.AreEqual(30, sprite.Rectangle.Height);
+            Events.Close();
+        }
 		/// <summary>
 		/// 
 		/// </summary>
