@@ -143,6 +143,7 @@ namespace SdlDotNet.Audio
                 if (this.Handle != IntPtr.Zero)
                 {
                     Sdl.SDL_CDClose(this.Handle);
+                    this.Handle = IntPtr.Zero;
                 }
             }
             catch (NullReferenceException)

@@ -741,8 +741,8 @@ namespace SdlDotNet.Graphics
                 if (this.Handle != IntPtr.Zero)
                 {
                     SdlTtf.TTF_CloseFont(this.Handle);
-                }
-                this.Handle = IntPtr.Zero;
+                    this.Handle = IntPtr.Zero;
+                } 
             }
             catch (System.NullReferenceException e)
             {

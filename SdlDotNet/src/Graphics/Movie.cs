@@ -121,6 +121,7 @@ namespace SdlDotNet.Graphics
                 if (this.Handle != IntPtr.Zero)
                 {
                     Smpeg.SMPEG_delete(this.Handle);
+                    this.Handle = IntPtr.Zero;
                 }
             }
             catch (NullReferenceException)

@@ -189,6 +189,7 @@ namespace SdlDotNet.Input
                 if (this.Handle != IntPtr.Zero)
                 {
                     Sdl.SDL_JoystickClose(this.Handle);
+                    this.Handle = IntPtr.Zero;
                 }
             }
             catch (NullReferenceException)

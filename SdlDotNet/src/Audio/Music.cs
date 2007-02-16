@@ -130,6 +130,7 @@ namespace SdlDotNet.Audio
                 if (this.Handle != IntPtr.Zero)
                 {
                     SdlMixer.Mix_FreeMusic(this.Handle);
+                    this.Handle = IntPtr.Zero;
                 }
             }
             catch (NullReferenceException)
