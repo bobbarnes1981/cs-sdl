@@ -439,6 +439,7 @@ namespace SdlDotNet.Graphics
                 if (this.Handle != IntPtr.Zero && !this.isVideoMode)
                 {
                     Sdl.SDL_FreeSurface(this.Handle);
+                    this.Handle = IntPtr.Zero;
                 }
             }
             catch (NullReferenceException)
