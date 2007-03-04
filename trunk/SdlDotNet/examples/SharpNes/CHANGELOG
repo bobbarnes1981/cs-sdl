@@ -1,0 +1,21 @@
+SharpNES v0.3 (2/27/05)
+
+* Gtk# support added, now with menus!
+* Emulation play/pause support (space bar)
+* For platforms that support it, fullscreen ('f' key while playing)
+
+SharpNES v0.2 (1/3/05)
+
+* SaveRAM added
+* A handful of new mappers were added
+* Game specific fixes were included (for Zelda, Battle of Olympus, Legacy of the Wizard and others)
+* Sprite 0 hit fixes
+* Added optional debug mode (recompile with the FOURSCREEN option)
+* CPU optimized (50-75% faster)
+* Speed throttling added
+* Mappers standardized for a little better compatibility
+
+
+SharpNES v0.1 (12/17/04)
+
+* Initial Release
