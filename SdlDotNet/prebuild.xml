@@ -60,6 +60,7 @@
 	    <Files>
 		<Match pattern="SurfaceControl.cs" subType="Component" recurse="true" resourceName="Windows.SurfaceControl"/>
 		<Match path="Windows" pattern="*.bmp" buildAction="EmbeddedResource" recurse="true"/>
+		<Match path="Graphics" pattern="*.png" buildAction="EmbeddedResource" recurse="true"/>
 		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
 		<Match pattern="*.cs" recurse="true">
 		    <Exclude name="SurfaceControl.cs"/>
@@ -292,6 +293,40 @@
 		<Match path="." pattern="*.cs" recurse="true">
 		    <Exclude name="CDPlayerApp.cs"/>		    
 		    <Exclude name="Properties/Resources.Designer.cs"/>
+		</Match>
+	    </Files>
+	</Project>
+	<Project name="SharpNes" path="examples/SharpNes" language="C#" type="Exe" startupObject="SdlDotNetExamples.SharpNes.SharpNesMain" assemblyName="SharpNes" rootNamespace="SdlDotNetExamples.SharpNes" icon="App.ico" designerFolder="Properties">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
+		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>../../src/SdlDotNet.snk</KeyFile>
+		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="SdlDotNet" localCopy="true"/>
+	    <Files>
+		<File buildAction="EmbeddedResource">App.ico</File>
+		<Match path="." pattern="*.cs" recurse="true">
 		</Match>
 	    </Files>
 	</Project>

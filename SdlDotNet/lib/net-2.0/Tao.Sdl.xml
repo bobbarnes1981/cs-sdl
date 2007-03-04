@@ -807,6 +807,24 @@
             <param name="smooth"></param>
             <returns></returns>
         </member>
+        <member name="M:Tao.Sdl.SdlGfx.rotozoomSurfaceXY(System.IntPtr,System.Double,System.Double,System.Double,System.Int32)">
+            <summary>
+            Rotates and zoomes a 32bit or 8bit 'src' surface to newly created 'dst' surface. 
+            'angle' is the rotation in degrees. 
+            'zoomx' and 'zoomy' are scaling factors that  can also be negative. 
+            In this case the corresponding axis is flipped.  
+            If 'smooth'   is 1 then the destination 32bit surface is anti-aliased. 
+            If the surface is not 8bit  or 32bit RGBA/ABGR it will be converted into 
+            a 32bit RGBA format on the fly.   
+            Note: Flipping currently only works with antialiasing turned off.
+            </summary>
+            <param name="src"></param>
+            <param name="angle"></param>
+            <param name="zoomx"></param>
+            <param name="zoomy"></param>
+            <param name="smooth"></param>
+            <returns></returns>
+        </member>
         <member name="M:Tao.Sdl.SdlGfx.rotozoomSurfaceSize(System.Int32,System.Int32,System.Double,System.Double,System.Int32@,System.Int32@)">
             <summary>
             Returns the size of the target surface for a rotozoomSurface() call
