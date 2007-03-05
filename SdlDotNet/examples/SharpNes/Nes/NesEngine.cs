@@ -17,7 +17,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 using System;
 using System.IO;
 using System.Threading;
-using Tao.Sdl;
+using SdlDotNet.Core;
+using SdlDotNet.Input;
 using SdlDotNet.Graphics;
 
 namespace SdlDotNetExamples.SharpNes
@@ -142,7 +143,7 @@ namespace SdlDotNetExamples.SharpNes
 
         string saveFilename;
 
-        
+
         private uint numOfInstructions;
 
         [CLSCompliant(false)]
@@ -411,24 +412,24 @@ namespace SdlDotNetExamples.SharpNes
             }
         }
 
+        private void Quit(object sender, QuitEventArgs e)
+        {
+            QuitEngine();
+            //Events.QuitApplication();
+        }
+
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                TogglePause();
+            }
+        }
+
         public void CheckForEvents()
         {
-            Sdl.SDL_Event myEvent;
-
-            while (Sdl.SDL_PollEvent(out myEvent) == 1)
-            {
-                if (myEvent.type == Sdl.SDL_QUIT)
-                {
-                    QuitEngine();
-                }
-                else if (myEvent.type == Sdl.SDL_KEYDOWN)
-                {
-                    if (myEvent.key.keysym.sym == (int)Sdl.SDLK_SPACE)
-                    {
-                        TogglePause();
-                    }
-                }
-            }
+            while (Events.Poll())
+            {}
         }
 
         public override void InitializeEngine()
@@ -715,6 +716,8 @@ namespace SdlDotNetExamples.SharpNes
         }
         public override void RunCart()
         {
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
+            Events.KeyboardDown += new EventHandler<SdlDotNet.Input.KeyboardEventArgs>(this.KeyboardDown);
             my6502.PCRegister = ReadMemory16(0xFFFC);
             //myPPU.myVideo.StartVideo();
             try

@@ -33,11 +33,9 @@ namespace SdlDotNet.OpenGl
     [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class SurfaceGl
     {
-        Surface surface;
-        Bitmap textureImage;
+        //Surface surface;
+        Surface textureImage;
         int textureID;
-        BitmapData bitmapData;
-        int[] texture = new int[1];
 
         /// <summary>
         /// 
@@ -45,15 +43,31 @@ namespace SdlDotNet.OpenGl
         /// <param name="surface"></param>
         public SurfaceGl(Surface surface)
         {
-            this.Surface = surface;
-            Gl.glGenTextures(1, texture);
+            //this.surface = surface;
+            this.textureImage = this.LoadInternal(surface);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public SurfaceGl()
+        private Surface LoadInternal(Surface surface)
         {
+            try
+            {
+                surface.FlipVertical();
+                surface.Resize();
+                int[] texture = new int[1];
+                Gl.glGenTextures(1, texture);
+                this.textureID = texture[0];
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, textureID);
+                Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, surface.BytesPerPixel, surface.Width, surface.Height, 0, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, surface.Pixels);
+
+                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
+                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
+            }
+            catch (AccessViolationException e)
+            {
+                e.ToString();
+            }
+
+            return surface;
         }
 
         /// <summary>
@@ -63,35 +77,14 @@ namespace SdlDotNet.OpenGl
         {
             get
             {
-                //int[] texture = new int[1];
-                //Gl.glGenTextures(1, texture);
-                Gl.glBindTexture(Gl.GL_TEXTURE_2D, texture[0]);
-                // Rectangle For Locking The Bitmap In Memory
-                Rectangle rectangle =
-                    new Rectangle(0, 0, textureImage.Width, textureImage.Height);
-                this.textureImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-
-                // Get The Bitmap's Pixel Data From The Locked Bitmap
-                bitmapData =
-                    textureImage.LockBits(rectangle, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-
-                // Typical Texture Generation Using Data From The Bitmap
-                Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, Gl.GL_RGBA, textureImage.Width, textureImage.Height, 0, Gl.GL_BGR, Gl.GL_UNSIGNED_BYTE, bitmapData.Scan0);
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
-
-                textureImage.UnlockBits(bitmapData);
-                bitmapData.Scan0 = IntPtr.Zero;
-                bitmapData = null;
-
-                return texture[0];
+                return this.textureID;
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public Bitmap TextureImage
+        public Surface TextureImage
         {
             get
             {
@@ -111,37 +104,44 @@ namespace SdlDotNet.OpenGl
         /// <summary>
         /// 
         /// </summary>
-        public Surface Surface
+        public void Load(Surface surface)
         {
-            get
+            try
             {
-                return surface;
+                if (surface == null)
+                {
+                    throw new ArgumentNullException("surface");
+                }
+
+                int[] textures = { this.textureID };
+                Gl.glDeleteTextures(1, textures);
+                if (this.textureImage != null)
+                {
+                    this.textureImage.Dispose();
+                    this.textureImage = null;
+                }
+                this.textureImage = this.LoadInternal(surface);
             }
-            set
+            catch (AccessViolationException e)
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-                if (this.surface != null)
-                {
-                    this.surface.Dispose();
-                }
-                this.surface = value.CreateResizedSurface();
-                this.textureImage = this.surface.Bitmap;
-                this.textureID = this.TextureId;
+                e.ToString();
             }
         }
 
-        private static void SetMode2D(bool mode2D)
+        static bool mode2D;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool Mode2D
         {
-            //get
-            //{
-            //    return this.mode2D;
-            //}
-            //set
-            //{
-                if (mode2D)
+            get
+            {
+                return mode2D;
+            }
+            set
+            {
+                if (value)
                 {
                     Surface screen = Video.Screen;
 
@@ -167,21 +167,20 @@ namespace SdlDotNet.OpenGl
                     Gl.glLoadIdentity();
 
                     Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL);
-                    //this.mode2D = value;
+                    mode2D = value;
                 }
                 else
                 {
-                    //Gl.glDeleteTextures(1, ref this.textureID);
-                    //Gl.glDisable(Gl.GL_BLEND);	
-                    //Gl.glEnable(Gl.GL_DEPTH_TEST);
+                    Gl.glDisable(Gl.GL_BLEND);
+                    Gl.glEnable(Gl.GL_DEPTH_TEST);
                     Gl.glMatrixMode(Gl.GL_MODELVIEW);
                     Gl.glPopMatrix();
                     Gl.glMatrixMode(Gl.GL_PROJECTION);
                     Gl.glPopMatrix();
                     Gl.glPopAttrib();
-                    //this.mode2D = value;
+                    mode2D = value;
                 }
-            //}
+            }
         }
 
         /// <summary>
@@ -191,8 +190,6 @@ namespace SdlDotNet.OpenGl
         {
             if (textureImage != null)
             {
-                SetMode2D(true);
-
                 Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureID);
                 Gl.glBegin(Gl.GL_QUADS);
                 Gl.glTexCoord2f(0.0f, 1.0f);
@@ -204,20 +201,6 @@ namespace SdlDotNet.OpenGl
                 Gl.glTexCoord2f(0.0f, 0.0f);
                 Gl.glVertex2f(location.X, location.Y + textureImage.Height);
                 Gl.glEnd();
-
-                /* Bad things happen if we delete the texture before it finishes */
-                //Gl.glFinish();
-
-                SetMode2D(false);
-
-                if (textureImage != null)
-                {
-                    // If Texture Exists
-                    //textureImage.UnlockBits(bitmapData); 
-                    // Unlock The Pixel Data From Memory
-                    textureImage.Dispose();
-                    // Dispose The Bitmap
-                }
             }
         }
     }

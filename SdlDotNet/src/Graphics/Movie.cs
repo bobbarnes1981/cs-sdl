@@ -154,7 +154,10 @@ namespace SdlDotNet.Graphics
         /// <remarks>Enabled by default</remarks>
         public void EnableVideo()
         {
-            Smpeg.SMPEG_enablevideo(this.Handle, (int)SdlFlag.TrueValue);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_enablevideo(this.Handle, (int)SdlFlag.TrueValue);
+            }
         }
 
         /// <summary>
@@ -162,7 +165,10 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void DisableVideo()
         {
-            Smpeg.SMPEG_enablevideo(this.Handle, (int)SdlFlag.FalseValue);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_enablevideo(this.Handle, (int)SdlFlag.FalseValue);
+            }
         }
 
         /// <summary>
@@ -171,7 +177,10 @@ namespace SdlDotNet.Graphics
         /// <remarks>Enabled by default</remarks>
         public void EnableAudio()
         {
-            Smpeg.SMPEG_enableaudio(this.Handle, (int)SdlFlag.TrueValue);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_enableaudio(this.Handle, (int)SdlFlag.TrueValue);
+            }
         }
 
         /// <summary>
@@ -179,7 +188,10 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void DisableAudio()
         {
-            Smpeg.SMPEG_enableaudio(this.Handle, (int)SdlFlag.FalseValue);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_enableaudio(this.Handle, (int)SdlFlag.FalseValue);
+            }
         }
 
         /// <summary>
@@ -192,10 +204,13 @@ namespace SdlDotNet.Graphics
             {
                 throw new ArgumentNullException("resource");
             }
-            Smpeg.SMPEG_setdisplay(
-                this.Handle,
-                resource.Handle,
-                IntPtr.Zero, null);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_setdisplay(
+                    this.Handle,
+                    resource.Handle,
+                    IntPtr.Zero, null);
+            }
         }
 
         /// <summary>
@@ -204,7 +219,10 @@ namespace SdlDotNet.Graphics
         /// <param name="volume">volume to set movie to.</param>
         public void AdjustVolume(int volume)
         {
-            Smpeg.SMPEG_setvolume(this.Handle, volume);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_setvolume(this.Handle, volume);
+            }
         }
 
         /// <summary>
@@ -353,7 +371,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                if (Smpeg.SMPEG_status(this.Handle) == (int)MovieStatus.Playing)
+                if ((this.Handle != IntPtr.Zero) && (Smpeg.SMPEG_status(this.Handle) == (int)MovieStatus.Playing))
                 {
                     return true;
                 }
@@ -371,7 +389,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                if (Smpeg.SMPEG_status(this.Handle) == (int)MovieStatus.Stopped)
+                if ((this.Handle != IntPtr.Zero) && (Smpeg.SMPEG_status(this.Handle) == (int)MovieStatus.Stopped))
                 {
                     return true;
                 }
@@ -405,8 +423,11 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void Play()
         {
-            this.Loop(false);
-            Smpeg.SMPEG_play(this.Handle);
+            if (this.Handle != IntPtr.Zero)
+            {
+                this.Loop(false);
+                Smpeg.SMPEG_play(this.Handle);
+            }
         }
 
         /// <summary>
@@ -415,8 +436,11 @@ namespace SdlDotNet.Graphics
         /// <param name="repeat">Loop movie while playing</param>
         public void Play(bool repeat)
         {
-            this.Loop(repeat);
-            Smpeg.SMPEG_play(this.Handle);
+            if (this.Handle != IntPtr.Zero)
+            {
+                this.Loop(repeat);
+                Smpeg.SMPEG_play(this.Handle);
+            }
         }
 
         /// <summary>
@@ -424,7 +448,12 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void Stop()
         {
-            Smpeg.SMPEG_stop(this.Handle);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_stop(this.Handle);
+                // It seems to take some time to actually stop.
+                System.Threading.Thread.Sleep(5);
+            }
         }
 
         /// <summary>
@@ -432,7 +461,10 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void Pause()
         {
-            Smpeg.SMPEG_pause(this.Handle);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_pause(this.Handle);
+            }
         }
 
         /// <summary>
@@ -440,7 +472,10 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void Rewind()
         {
-            Smpeg.SMPEG_rewind(this.Handle);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_rewind(this.Handle);
+            }
         }
 
         /// <summary>
@@ -448,13 +483,16 @@ namespace SdlDotNet.Graphics
         /// </summary>
         private void Loop(bool repeat)
         {
-            if (repeat)
+            if (this.Handle != IntPtr.Zero)
             {
-                Smpeg.SMPEG_loop(this.Handle, (int)SdlFlag.TrueValue);
-            }
-            else
-            {
-                Smpeg.SMPEG_loop(this.Handle, (int)SdlFlag.FalseValue);
+                if (repeat)
+                {
+                    Smpeg.SMPEG_loop(this.Handle, (int)SdlFlag.TrueValue);
+                }
+                else
+                {
+                    Smpeg.SMPEG_loop(this.Handle, (int)SdlFlag.FalseValue);
+                }
             }
         }
 
@@ -465,7 +503,10 @@ namespace SdlDotNet.Graphics
         /// <param name="height">Scale movie height to this height in pixels</param>
         public void ScaleXY(int width, int height)
         {
-            Smpeg.SMPEG_scaleXY(this.Handle, width, height);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_scaleXY(this.Handle, width, height);
+            }
         }
 
         /// <summary>
@@ -474,7 +515,10 @@ namespace SdlDotNet.Graphics
         /// <param name="scalingFactor">scale both width and height by this factor</param>
         public void ScaleSize(int scalingFactor)
         {
-            Smpeg.SMPEG_scale(this.Handle, scalingFactor);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_scale(this.Handle, scalingFactor);
+            }
         }
 
         /// <summary>
@@ -482,7 +526,10 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void ScaleDouble()
         {
-            Smpeg.SMPEG_scale(this.Handle, 2);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_scale(this.Handle, 2);
+            }
         }
 
         /// <summary>
@@ -490,7 +537,10 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void ScaleNormal()
         {
-            Smpeg.SMPEG_scale(this.Handle, 1);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_scale(this.Handle, 1);
+            }
         }
 
         /// <summary>
@@ -500,7 +550,10 @@ namespace SdlDotNet.Graphics
         /// <param name="axisY">move the display area to this</param>
         public void Move(int axisX, int axisY)
         {
-            Smpeg.SMPEG_move(this.Handle, axisX, axisY);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_move(this.Handle, axisX, axisY);
+            }
         }
 
         /// <summary>
@@ -514,7 +567,10 @@ namespace SdlDotNet.Graphics
             int width, int height,
             int axisX, int axisY)
         {
-            Smpeg.SMPEG_setdisplayregion(this.Handle, axisX, axisY, width, height);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_setdisplayregion(this.Handle, axisX, axisY, width, height);
+            }
         }
 
         /// <summary>
@@ -523,7 +579,10 @@ namespace SdlDotNet.Graphics
         /// <param name="seconds">number of seconds to skip</param>
         public void Skip(float seconds)
         {
-            Smpeg.SMPEG_skip(this.Handle, seconds);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_skip(this.Handle, seconds);
+            }
         }
 
         /// <summary>
@@ -532,7 +591,10 @@ namespace SdlDotNet.Graphics
         /// <param name="bytes">number of bytes to move forward in movie</param>
         public void Seek(int bytes)
         {
-            Smpeg.SMPEG_seek(this.Handle, bytes);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_seek(this.Handle, bytes);
+            }
         }
 
         /// <summary>
@@ -541,7 +603,10 @@ namespace SdlDotNet.Graphics
         /// <param name="frameNumber">frame number</param>
         public void RenderFrame(int frameNumber)
         {
-            Smpeg.SMPEG_renderFrame(this.Handle, frameNumber);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_renderFrame(this.Handle, frameNumber);
+            }
         }
 
         /// <summary>
@@ -549,7 +614,10 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void RenderFirstFrame()
         {
-            Smpeg.SMPEG_renderFrame(this.Handle, 0);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_renderFrame(this.Handle, 0);
+            }
         }
 
         /// <summary>
@@ -562,7 +630,10 @@ namespace SdlDotNet.Graphics
             {
                 throw new ArgumentNullException("surface");
             }
-            Smpeg.SMPEG_renderFinal(this.Handle, surface.Handle, 0, 0);
+            if (this.Handle != IntPtr.Zero)
+            {
+                Smpeg.SMPEG_renderFinal(this.Handle, surface.Handle, 0, 0);
+            }
         }
 
         #endregion

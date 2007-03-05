@@ -73,22 +73,22 @@ namespace SdlDotNetExamples.SpriteDemos
             // Normalize the directions
             if (this.X == SpriteBounds.Left)
             {
-                dx = rand.Next(1, 10);
+                dx = rand.Next(1, 11);
             }
 
             if (this.X == SpriteBounds.Right)
             {
-                dx = ((-1) * rand.Next(1, 10));
+                dx = ((-1) * rand.Next(1, 11));
             }
 
             if (this.Y == SpriteBounds.Top)
             {
-                dy = rand.Next(1, 10);
+                dy = rand.Next(1, 11);
             }
 
             if (this.Y == SpriteBounds.Bottom)
             {
-                dy = ((-1) * rand.Next(1, 10));
+                dy = ((-1) * rand.Next(1, 11));
             }
         }
 
