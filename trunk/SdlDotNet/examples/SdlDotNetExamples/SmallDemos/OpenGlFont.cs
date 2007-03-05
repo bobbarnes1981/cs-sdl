@@ -25,6 +25,7 @@ using System.IO;
 using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Core;
+using SdlDotNet.Input;
 using SdlDotNet.Graphics;
 using SdlDotNet.OpenGl;
 using Tao.OpenGl;
@@ -77,11 +78,12 @@ namespace SdlDotNetExamples.SmallDemos
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - OpenGlFont Example";
             Video.SetVideoMode(this.width, this.height, true, true);
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
             Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
             font = new SdlDotNet.Graphics.Font(filePath + dataDirectory + fontName, 18);
             Video.GLDoubleBufferEnabled = true;
-            
+
         }
 
         [STAThread]
@@ -103,31 +105,26 @@ namespace SdlDotNetExamples.SmallDemos
             // Reset The Projection Matrix
             Gl.glLoadIdentity();
             Gl.glOrtho(-2.0, 2.0, -2.0, 2.0, -20.0, 20.0);
-            // Calculate The Aspect Ratio Of The Window
-            //Glu.gluPerspective(45.0F, (width / (float)height), 0.1F, 100.0F);
             // Select The Modelview Matrix
             Gl.glMatrixMode(Gl.GL_MODELVIEW);
             // Reset The Modelview Matrix
             Gl.glLoadIdentity();
-            //			// Enable Texture Mapping ( NEW )
-            //			Gl.glEnable(Gl.GL_TEXTURE_2D);
             // Enable Smooth Shading
             Gl.glShadeModel(Gl.GL_SMOOTH);
-            //			// Black Background
-            //			Gl.glClearColor(0.0F, 0.0F, 0.0F, 0.5F);
-            //			// Depth Buffer Setup
-            //			Gl.glClearDepth(1.0F);
             // Enables Depth Testing
             Gl.glEnable(Gl.GL_DEPTH_TEST);
-            //			// The Type Of Depth Testing To Do
+            // The Type Of Depth Testing To Do
             Gl.glDepthFunc(Gl.GL_LEQUAL);
             // Really Nice Perspective Calculations
             Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
-            surfaceGl = new SurfaceGl(font.Render(phrase1, Color.White));
+            surfaceGl1 = new SurfaceGl(font.Render(phrase1, Color.White, Color.Black));
+            surfaceGl2 = new SurfaceGl(font.Render(phrase2, Color.White, Color.Black));
+            surfaceGl3 = new SurfaceGl(font.Render(phrase3, Color.White, Color.Black));
         }
-        SurfaceGl surfaceGl;
+        SurfaceGl surfaceGl1;
+        SurfaceGl surfaceGl2;
+        SurfaceGl surfaceGl3;
         int i;
-        
 
         #region void DrawGLScene
 
@@ -136,70 +133,6 @@ namespace SdlDotNetExamples.SmallDemos
         /// </summary>
         protected void DrawGLScene()
         {
-            // Clear Screen And Depth Buffer
-            //Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
-            // Reset The Current Modelview Matrix
-            //Gl.glLoadIdentity();   
-            //			// Move Left 1.5 Units And Into The Screen 6.0
-            //			Gl.glTranslatef(-1.5f, 0, -6);   
-            //			// Rotate The Triangle On The Y axis ( NEW )
-            //			Gl.glRotatef(rtri, 0, 1, 0);
-            //			// Drawing Using Triangles
-            //			Gl.glBegin(Gl.GL_TRIANGLES);
-            //			// Red
-            //			Gl.glColor3f(1, 0, 0); 
-            //			// Top Of Triangle (Front)
-            //			Gl.glVertex3f(0, 1, 0);
-            //			// Green
-            //			Gl.glColor3f(0, 1, 0); 
-            //			// Left Of Triangle (Front)
-            //			Gl.glVertex3f(-1, -1, 1);
-            //			// Blue
-            //			Gl.glColor3f(0, 0, 1); 
-            //			// Right Of Triangle (Front)
-            //			Gl.glVertex3f(1, -1, 1);
-            //			// Red
-            //			Gl.glColor3f(1, 0, 0); 
-            //			// Top Of Triangle (Right)
-            //			Gl.glVertex3f(0, 1, 0);
-            //			// Blue
-            //			Gl.glColor3f(0, 0, 1); 
-            //			// Left Of Triangle (Right)
-            //			Gl.glVertex3f(1, -1, 1);
-            //			// Green
-            //			Gl.glColor3f(0, 1, 0); 
-            //			// Right Of Triangle (Right)
-            //			Gl.glVertex3f(1, -1, -1);
-            //			// Red
-            //			Gl.glColor3f(1, 0, 0); 
-            //			// Top Of Triangle (Back)
-            //			Gl.glVertex3f(0, 1, 0);
-            //			// Green
-            //			Gl.glColor3f(0, 1, 0); 
-            //			// Left Of Triangle (Back)
-            //			Gl.glVertex3f(1, -1, -1);
-            //			// Blue
-            //			Gl.glColor3f(0, 0, 1); 
-            //			// Right Of Triangle (Back)
-            //			Gl.glVertex3f(-1, -1, -1);   
-            //			// Red
-            //			Gl.glColor3f(1, 0, 0); 
-            //			// Top Of Triangle (Left)
-            //			Gl.glVertex3f(0, 1, 0);
-            //			// Blue
-            //			Gl.glColor3f(0, 0, 1); 
-            //			// Left Of Triangle (Left)
-            //			Gl.glVertex3f(-1, -1, -1);   
-            //			// Green
-            //			Gl.glColor3f(0, 1, 0); 
-            //			// Right Of Triangle (Left)
-            //			Gl.glVertex3f(-1, -1, 1);
-            //			// Finished Drawing The Triangle
-            //			Gl.glEnd();
-            // Reset The Current Modelview Matrix
-            //Gl.glLoadIdentity();   
-            // Move Right 1.5 Units And Into The Screen 7.0
-            //Gl.glTranslatef(1.5f, 0, -7);
             // Rotate The Quad On The X, Y, and Z Axis ( NEW )
             Gl.glRotatef(rquad, 1, 1, 1);
             // Set The Color To Blue One Time Only
@@ -267,9 +200,8 @@ namespace SdlDotNetExamples.SmallDemos
             Gl.glVertex3f(1, -1, 1);
             // Bottom Right Of The Quad (Right)
             Gl.glVertex3f(1, -1, -1);
-            // Done Drawing The Quad
             Gl.glEnd();
-            Gl.glMatrixMode(Gl.GL_MODELVIEW);
+            // Done Drawing The Quad
 
             // Increase The Rotation Variable For The Triangle ( NEW )
             rtri += 0.2f;
@@ -284,14 +216,17 @@ namespace SdlDotNetExamples.SmallDemos
             Gl.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
             Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
             DrawGLScene();
-            //Gl.glPushMatrix();
-            surfaceGl.Surface = font.Render(phrase1 + i++, Color.White);
-            surfaceGl.Draw(new Point(0, 0));
-            //Gl.glPopMatrix();
-            surfaceGl.Surface = font.Render(phrase2 + i++, Color.White);
-            surfaceGl.Draw(new Point(100, 100));
-            surfaceGl.Surface = font.Render(phrase3 + i++, Color.White);
-            surfaceGl.Draw(new Point(200, 200));
+            Gl.glBegin(Gl.GL_QUADS);
+            Gl.glColor3f(0, 0, 0);
+            Gl.glEnd();
+            SurfaceGl.Mode2D = true;
+            surfaceGl1.Load(font.Render(phrase1 + i++, Color.White, Color.Black));
+            surfaceGl1.Draw(new Point(0, 0));
+            surfaceGl2.Load(font.Render(phrase2 + i++, Color.White, Color.Black));
+            surfaceGl2.Draw(new Point(100, 100));
+            surfaceGl3.Load(font.Render(phrase3 + i++, Color.White, Color.Black));
+            surfaceGl3.Draw(new Point(200, 200));
+            SurfaceGl.Mode2D = false;
 
             Video.GLSwapBuffers();
         }
@@ -299,6 +234,15 @@ namespace SdlDotNetExamples.SmallDemos
         private void Quit(object sender, QuitEventArgs e)
         {
             Events.QuitApplication();
+        }
+
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
+        {
+            // Check if the key pressed was a Q or Escape
+            if (e.Key == Key.Escape || e.Key == Key.Q)
+            {
+                Events.QuitApplication();
+            }
         }
 
         /// <summary>

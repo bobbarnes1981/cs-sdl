@@ -460,14 +460,6 @@ namespace SdlDotNet.Graphics
         public Surface Render(string textItem, Color textColor, bool antiAlias)
         {
             return this.Render(textItem, textColor, Color.Empty, antiAlias, 0, 0);
-            //			if (antiAlias)
-            //			{
-            //				return Render(textItem, textColor);
-            //			}
-            //			else
-            //			{
-            //				return RenderTextSolid(textItem, textColor);
-            //			}
         }
 
         /// <summary>
@@ -480,7 +472,6 @@ namespace SdlDotNet.Graphics
         public Surface Render(string textItem, Color textColor, Color backgroundColor)
         {
             return this.Render(textItem, textColor, backgroundColor, true, 0, 0);
-            //return RenderTextShaded(textItem, textColor, backgroundColor);
         }
 
         /// <summary>
@@ -492,7 +483,6 @@ namespace SdlDotNet.Graphics
         public Surface Render(string textItem, Color textColor)
         {
             return this.Render(textItem, textColor, Color.Empty, true, 0, 0);
-            //return RenderTextBlended(textItem, textColor);
         }
 
         /// <summary>
@@ -551,7 +541,6 @@ namespace SdlDotNet.Graphics
             string templine;
             int countLines;
             string[] splitline;
-            //bool indented; 
 
             splitline = textItem.Replace("\r", string.Empty).Split('\n');
             for (int k = 0; k <= splitline.GetUpperBound(0); k++)
@@ -571,12 +560,10 @@ namespace SdlDotNet.Graphics
                     {
                         return this.RenderTextSolid(textItem, textColor);
                     }
-                    //return this.Render(textItem, textColor, antiAlias);
                 }
                 else
                 {
                     return this.RenderTextShaded(textItem, textColor, backgroundColor);
-                    //return this.Render(textItem, textColor, backgroundColor);
                 }
             }
             else
@@ -742,7 +729,7 @@ namespace SdlDotNet.Graphics
                 {
                     SdlTtf.TTF_CloseFont(this.Handle);
                     this.Handle = IntPtr.Zero;
-                } 
+                }
             }
             catch (System.NullReferenceException e)
             {

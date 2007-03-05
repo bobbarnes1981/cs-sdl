@@ -265,6 +265,7 @@ namespace SdlDotNetExamples.NeHe
             {
                 characterSet = 1;
             }
+
             // Select Our Font Texture
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, GetTexture()[0]);
             // Disables Depth Testing

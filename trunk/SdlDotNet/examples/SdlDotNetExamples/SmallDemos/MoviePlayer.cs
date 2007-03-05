@@ -113,6 +113,8 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Quit(object sender, QuitEventArgs e)
         {
+            movie.Stop();
+            movie.Close();
             Events.QuitApplication();
         }
 

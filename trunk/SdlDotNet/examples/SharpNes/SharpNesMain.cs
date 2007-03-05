@@ -77,7 +77,7 @@ namespace SdlDotNetExamples.SharpNes
                 myEngine.RunCart();
                 gameIsRunning = true;
             }
-            Events.Run();
+            //Events.Run();
         }
 
         //void PlayPauseActivated(object o, EventArgs e)

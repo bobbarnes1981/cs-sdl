@@ -113,10 +113,14 @@ namespace SdlDotNetExamples
         {
             try
             {
+                this.Enabled = false;
                 SdlDotNet.Core.Events.QuitApplication();
                 string typeString = "SdlDotNetExamples." + this.comboBoxNamespaces.SelectedItem.ToString() + "." + this.demoList[this.comboBoxNamespaces.SelectedItem.ToString()][this.listBoxDemos.SelectedItem.ToString()].ToString();
                 Type example = Assembly.GetExecutingAssembly().GetType(typeString, true, true);
                 example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
+                this.Enabled = true;
+                Application.Exit();
+                //this.BringToFront();
             }
             catch (TypeLoadException e)
             {

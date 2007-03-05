@@ -71,7 +71,24 @@ namespace SdlDotNet.Graphics
         private bool isVideoMode;
         bool transparentInitialized;
         bool transparent;
-        static bool isInitialized = Video.Initialize();
+        static bool isInitialized = Initialize();
+
+        static Surface resizeSurface;
+        static byte[] resizeBuffer;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static bool Initialize()
+        {
+            Video.Initialize();
+            Assembly assembly = Assembly.GetCallingAssembly();
+            Stream stream = assembly.GetManifestResourceStream("SdlDotNet.Graphics.Transparent.png");
+            resizeBuffer = ReadFully(stream, stream.Length);
+            resizeSurface = new Surface(resizeBuffer);
+
+            return true;
+        }
 
         // Bmp files have a header of 54 bytes. 
         // This is used to turn the Surface into a byte array to 
@@ -251,35 +268,11 @@ namespace SdlDotNet.Graphics
             }
         }
 
-        ///// <summary>
-        ///// Create a Surface from a MemoryStream.
-        ///// </summary>
-        ///// <param name="stream"></param>
-        //public Surface(Stream stream)
-        //{
-        //    if (stream == null)
-        //    {
-        //        throw new ArgumentNullException("stream");
-        //    }
-        //    byte[] array;
-        //    for (int i; i < stream.Length; i++)
-        //    {
-        //        array = stream.Read()
-        //    }
-        //    //byte[] array = stream.ToArray();
-        //    this.Handle =
-        //        SdlImage.IMG_Load_RW(Sdl.SDL_RWFromMem(array, array.Length), 1);
-        //    if (this.Handle == IntPtr.Zero)
-        //    {
-        //        throw SdlException.Generate();
-        //    }
-        //}
-
         /// <summary>
         /// Create a Surface from a byte array in memory.
         /// </summary>
         /// <param name="array">
-        /// A array of byte that should the image data
+        /// A array of bytes that contains the image data
         /// </param>
         public Surface(byte[] array)
         {
@@ -414,11 +407,6 @@ namespace SdlDotNet.Graphics
                 {
                     if (disposing)
                     {
-                        //						if (this.stream != null)
-                        //						{
-                        //							stream.Close();
-                        //							this.stream = null;
-                        //						}
                     }
                     this.disposed = true;
                 }
@@ -438,15 +426,20 @@ namespace SdlDotNet.Graphics
             {
                 if (this.Handle != IntPtr.Zero && !this.isVideoMode)
                 {
+                    //Console.WriteLine(this.Handle);
+                    //Console.WriteLine(this.Size);
                     Sdl.SDL_FreeSurface(this.Handle);
                     this.Handle = IntPtr.Zero;
                 }
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException e)
             {
+                e.ToString();
             }
-            catch (AccessViolationException)
+            catch (AccessViolationException e)
             {
+                Console.WriteLine(e.StackTrace);
+                e.ToString();
             }
             finally
             {
@@ -1458,7 +1451,6 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public void FlipVertical()
         {
-
             int first = 0;
             int second = this.Height - 1;
             int pitch = this.Pitch;
@@ -2068,20 +2060,14 @@ namespace SdlDotNet.Graphics
         {
             if ((this.Width != destinationSize.Width) || (this.Height != destinationSize.Height))
             {
-                Surface surface = ResizeInternal(ref destinationSize);
+                Surface surface = ResizeInternal(destinationSize);
                 this.Handle = surface.Handle;
             }
         }
 
-        private Surface ResizeInternal(ref Size destinationSize)
+        private Surface ResizeInternal(Size destinationSize)
         {
-            Assembly assembly = Assembly.GetCallingAssembly();
-            UnmanagedMemoryStream stream = (UnmanagedMemoryStream)assembly.GetManifestResourceStream("SdlDotNet.Graphics.Transparent.png");
-            byte[] buffer = ReadFully(stream, stream.Length);
-            Surface surface = new Surface(buffer);
-            this.Alpha = 255;
-            surface.Alpha = 255;
-            surface.Stretch(destinationSize);
+            Surface surface = resizeSurface.CreateStretchedSurface(destinationSize);
             surface.Blit(this);
             return surface;
         }
@@ -2111,7 +2097,7 @@ namespace SdlDotNet.Graphics
         {
             if ((this.Width != destinationSize.Width) || (this.Height != destinationSize.Height))
             {
-                Surface surface = ResizeInternal(ref destinationSize);
+                Surface surface = ResizeInternal(destinationSize);
                 CloneFields(this, surface);
                 return surface;
             }
@@ -2119,7 +2105,7 @@ namespace SdlDotNet.Graphics
             {
                 return this;
             }
-            
+
         }
 
         private static int NextPowerOfTwo(int x)
