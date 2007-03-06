@@ -580,6 +580,10 @@ namespace SdlDotNetExamples.SharpNes
         public void SpriteRamDmaBegin(byte data)
         {
             int i;
+            if (data > (ushort.MaxValue - 255)/ 256)
+            {
+                throw new ArgumentOutOfRangeException("data");
+            }
             for (i = 0; i < 0x100; i++)
             {
                 spriteRam[i] = myEngine.ReadMemory8((ushort)(((uint)data * 0x100) + i));
@@ -1033,7 +1037,7 @@ namespace SdlDotNetExamples.SharpNes
             if (currentScanline == 240)
             {
                 myVideo.BlitScreen();
-                myEngine.CheckForEvents();
+                NesEngine.CheckForEvents();
 
             }
 
