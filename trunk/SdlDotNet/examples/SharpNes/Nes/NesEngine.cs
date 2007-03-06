@@ -435,7 +435,7 @@ namespace SdlDotNetExamples.SharpNes
         public static void CheckForEvents()
         {
             while (Events.Poll())
-            {}
+            { }
         }
 
         public void InitializeEngine()
