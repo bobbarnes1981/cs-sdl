@@ -41,6 +41,22 @@ namespace SdlDotNet.Graphics.Primitives
         short yTotal;
         int textureOffsetX;
         int textureOffsetY;
+
+        /// <summary>
+        /// Texture Offset
+        /// </summary>
+        public Point TextureOffset
+        {
+            get 
+            { 
+                return new Point(textureOffsetX, textureOffsetY); 
+            }
+            set 
+            { 
+                textureOffsetX = value.X; 
+                textureOffsetY = value.Y; 
+            }
+        }
         Surface texturedSurface;
 
         /// <summary>
@@ -95,9 +111,8 @@ namespace SdlDotNet.Graphics.Primitives
         /// </summary>
         /// <param name="points">ArrayList of points</param>
         /// <param name="surface">Textured Surface</param>
-        /// <param name="textureOffsetX">Texture is offset on the X axis</param>
-        /// <param name="textureOffsetY">Texture is offset on the Y axis</param>
-        public TexturedPolygon(Surface surface, ArrayList points, int textureOffsetX, int textureOffsetY)
+        /// <param name="offset">Texture is offset on the X and Y axes</param>
+        public TexturedPolygon(Surface surface, ArrayList points, Point offset)
         {
             if (points == null)
             {
@@ -110,8 +125,8 @@ namespace SdlDotNet.Graphics.Primitives
             this.xTotal = 0;
             this.yTotal = 0;
             this.texturedSurface = surface;
-            this.textureOffsetX = textureOffsetX;
-            this.textureOffsetY = textureOffsetY;
+            this.textureOffsetX = offset.X;
+            this.textureOffsetY = offset.Y;
             for (int i = 0; i < points.Count; i++)
             {
                 x[i] = (short)((Point)points[i]).X;
