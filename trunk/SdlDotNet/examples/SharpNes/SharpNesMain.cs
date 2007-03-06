@@ -15,8 +15,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 // created on 2/4/2005 at 8:26 PM
 using System;
+using System.IO;
 using System.Threading;
+
 using SdlDotNet.Core;
+using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.SharpNes
 {
@@ -26,6 +29,28 @@ namespace SdlDotNetExamples.SharpNes
         private static bool gameIsRunning;
         private static NesEngine myEngine;
         //private static ThreadStart myThreadCreator;
+        static string fileDirectory = "Data";
+
+        public static string FileDirectory
+        {
+            get { return SharpNesMain.fileDirectory; }
+            set { SharpNesMain.fileDirectory = value; }
+        }
+        static string filePath = Path.Combine("..", "..");
+
+        public static string FilePath
+        {
+            get { return SharpNesMain.filePath; }
+            set { SharpNesMain.filePath = value; }
+        }
+        static string fileName = "SolarWars2001.nes";
+        static bool fullScreen;
+
+        public static bool FullScreen
+        {
+            get { return SharpNesMain.fullScreen; }
+            set { SharpNesMain.fullScreen = value; }
+        }
 
         /// <summary>
         /// The main entry point for the application.
@@ -33,19 +58,32 @@ namespace SdlDotNetExamples.SharpNes
         [STAThread]
         static void Main(string[] args)
         {
-            //If they gave us a rom name on the commandline, run it.
-            if (args.GetLength(0) == 0)
+            foreach (string arg in args)
             {
-                Run("MarioBro.nes");
+                if (arg == "-f")
+                {
+                    fullScreen = true;
+                    Mouse.ShowCursor = false;
+                }
+                else
+                {
+                    fileName = arg;
+                }
             }
-            else
-            {
-                Run(args[0]);
-            }
+            Run(fileName);
         }
 
         public static void Run(string defaultRom)
         {
+            if (File.Exists(defaultRom))
+            {
+                filePath = "";
+                fileDirectory = "";
+            }
+            else if (File.Exists(Path.Combine(fileDirectory, defaultRom)))
+            {
+                filePath = "";
+            }
             //our game-specific bool
             //FIXME: move this to a more sane place when I figure out where to put it
             gameIsRunning = false;
@@ -53,7 +91,7 @@ namespace SdlDotNetExamples.SharpNes
             //If they gave us a ROM to run on the commandline, go ahead and start it up 
             if (!String.IsNullOrEmpty(defaultRom))
             {
-                RunCart(defaultRom);
+                RunCart(Path.Combine(Path.Combine(filePath, fileDirectory), defaultRom));
             }
         }
 

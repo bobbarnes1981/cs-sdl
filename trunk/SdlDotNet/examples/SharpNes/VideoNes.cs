@@ -243,7 +243,7 @@ namespace SdlDotNetExamples.SharpNes
         {
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - NES Window";
-            Surface surfaceVideo = Video.SetVideoMode(width, height, bpp);
+            Surface surfaceVideo = Video.SetVideoMode(width, height, bpp, false, SharpNesMain.FullScreen);
             
 
             //DEBUG ONLY!!
