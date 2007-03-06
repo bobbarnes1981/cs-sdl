@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using NUnit.Framework;
 using Tao.Sdl;
+using SdlDotNet.Graphics;
 using System.Runtime.InteropServices;
 
 namespace SdlDotNet.Tests
@@ -622,6 +623,22 @@ namespace SdlDotNet.Tests
 			Assert.AreEqual(result,0);
 			this.Quit();
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+        [Test]
+        public void texturedPolygon()
+        {
+            this.InitSdl();
+            Surface texturedSurface = new Surface("hero.png");
+            //Random rand = new Random();
+            //Surface screen = new Surface(
+            //int result = SdlGfx.texturedPolygon(surfacePtr, vx, vy, vx.Length, texturedSurface. 7777777);
+            //result = Sdl.SDL_Flip(surfacePtr);
+            Thread.Sleep(sleepTime);
+            //Assert.AreEqual(result, 0);
+            this.Quit();
+        }
 		/// <summary>
 		/// 
 		/// </summary>

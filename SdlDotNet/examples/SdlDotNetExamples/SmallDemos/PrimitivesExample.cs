@@ -1,8 +1,3 @@
-
-
-
-
-
 #region LICENSE
 /*
  * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
@@ -27,6 +22,7 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.Globalization;
+using System.IO;
 
 using SdlDotNet;
 using SdlDotNet.Graphics;
@@ -49,6 +45,7 @@ namespace SdlDotNetExamples.SmallDemos
         Line line;
         Triangle triangle;
         Polygon polygon;
+        TexturedPolygon texturedPolygon;
         Pie pie;
         Bezier bezier;
         Box box;
@@ -60,12 +57,27 @@ namespace SdlDotNetExamples.SmallDemos
         int height = 480;
         Surface surf;
         Surface screen;
+        string filePath = Path.Combine("..", "..");
+        string fileDirectory = "Data";
+        string fileName = "gameOver.bmp";
+        string file;
 
         /// <summary>
         /// 
         /// </summary>
         public PrimitivesExample()
         {
+            if (File.Exists(fileName))
+            {
+                filePath = "";
+                fileDirectory = "";
+            }
+            else if (File.Exists(Path.Combine(fileDirectory, fileName)))
+            {
+                filePath = "";
+            }
+
+            file = Path.Combine(Path.Combine(filePath, fileDirectory), fileName);
         }
 
         /// <summary>
@@ -289,6 +301,67 @@ namespace SdlDotNetExamples.SmallDemos
 
             while (times < MAXCOUNT)
             {
+                short[] x = {
+											(short)rand.Next(0, width), 
+											(short)rand.Next(0, width),
+											(short)rand.Next(0, width),
+											(short)rand.Next(0, width),
+											(short)rand.Next(0, width)
+										};
+                short[] y = {
+											(short)rand.Next(0, height), 
+											(short)rand.Next(0, height), 
+											(short)rand.Next(0, height), 
+											(short)rand.Next(0, height), 
+											(short)rand.Next(0, height)
+										};
+                texturedPolygon = new TexturedPolygon(new Surface(file), x, y, 10, 10);
+                surf.Draw(texturedPolygon,
+                    Color.FromArgb(
+                    rand.Next(255),
+                    rand.Next(255),
+                    rand.Next(255),
+                    rand.Next(255)));
+                short[] a = {
+                                            (short)rand.Next(0, width), 
+                                            (short)rand.Next(0, width),
+                                            (short)rand.Next(0, width),
+                                            (short)rand.Next(0, width),
+                                            (short)rand.Next(0, width)
+                                        };
+                short[] b = {
+                                            (short)rand.Next(0, height), 
+                                            (short)rand.Next(0, height), 
+                                            (short)rand.Next(0, height), 
+                                            (short)rand.Next(0, height),
+                                            (short)rand.Next(0, height)
+                                            };
+                //short[] a = {
+                //                            0, 200, 200, 0
+                //                        };
+                //short[] b = {
+                //                            0, 0, 200, 200
+
+                //                        };
+                texturedPolygon = new TexturedPolygon(new Surface(file), a, b, 10, 20);
+                surf.Draw(texturedPolygon,
+                    Color.FromArgb(
+                    rand.Next(255),
+                    rand.Next(255),
+                    rand.Next(255),
+                    rand.Next(255)), false, true);
+                times++;
+                screen.Update();
+                screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
+                Thread.Sleep(SLEEPTIME);
+            }
+
+            Thread.Sleep(SLEEPTIME);
+            times = 0;
+            surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
+
+            while (times < MAXCOUNT)
+            {
                 pie = new Pie((short)rand.Next(0, width),
                     (short)rand.Next(0, height),
                     (short)rand.Next(20, 100),
@@ -311,7 +384,7 @@ namespace SdlDotNetExamples.SmallDemos
                     Color.FromArgb(rand.Next(255),
                     rand.Next(255),
                     rand.Next(255),
-                    rand.Next(255)),false, true);
+                    rand.Next(255)), false, true);
                 times++;
                 screen.Update();
                 screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
