@@ -296,7 +296,7 @@
 		</Match>
 	    </Files>
 	</Project>
-	<Project name="SharpNes" path="examples/SharpNes" language="C#" type="Exe" startupObject="SdlDotNetExamples.SharpNes.SharpNesMain" assemblyName="SharpNes" rootNamespace="SdlDotNetExamples.SharpNes" icon="App.ico" designerFolder="Properties">
+	<Project name="SharpNes" path="examples/SharpNes" language="C#" type="WinExe" startupObject="SdlDotNetExamples.SharpNes.SharpNesMain" assemblyName="SharpNes" rootNamespace="SdlDotNetExamples.SharpNes" icon="App.ico" designerFolder="Properties">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>

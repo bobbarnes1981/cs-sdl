@@ -415,11 +415,17 @@ namespace SdlDotNetExamples.SharpNes
         private void Quit(object sender, QuitEventArgs e)
         {
             QuitEngine();
-            //Events.QuitApplication();
         }
 
         private void KeyboardDown(object sender, KeyboardEventArgs e)
         {
+            if (e.Key == Key.Escape)
+            {
+                if (isPaused)
+                {
+                    QuitEngine();
+                }
+            }
             if (e.Key == Key.Space)
             {
                 TogglePause();
@@ -699,12 +705,18 @@ namespace SdlDotNetExamples.SharpNes
 
                 try
                 {
-                    using (FileStream reader = File.OpenRead(saveFilename))
+                    using (FileStream reader = File.OpenRead(Path.Combine(Path.Combine(SharpNesMain.FilePath, SharpNesMain.FileDirectory), saveFilename)))
                     {
                         reader.Read(saveRam, 0, 0x2000);
                     }
                 }
                 catch (NullReferenceException e)
+                {
+                    e.ToString();
+                    //Console.WriteLine("No SaveRAM found.");
+                    //Ignore it, we'll make our own.
+                }
+                catch (FileNotFoundException e)
                 {
                     e.ToString();
                     //Console.WriteLine("No SaveRAM found.");
@@ -732,7 +744,7 @@ namespace SdlDotNetExamples.SharpNes
                     //If we have save RAM, try to save it
                     try
                     {
-                        using (FileStream writer = File.OpenWrite(saveFilename))
+                        using (FileStream writer = File.OpenWrite(Path.Combine(Path.Combine(SharpNesMain.FilePath, SharpNesMain.FileDirectory), saveFilename)))
                         {
                             writer.Write(saveRam, 0, 0x2000);
                         }
@@ -742,6 +754,12 @@ namespace SdlDotNetExamples.SharpNes
                         e.ToString();
                         //Console.WriteLine("SaveRAM could not be saved.");
                     }
+                    catch (FileNotFoundException e)
+                    {
+                        e.ToString();
+                        //Console.WriteLine("No SaveRAM found.");
+                        //Ignore it, we'll make our own.
+                    }
                 }
             }
 
@@ -750,7 +768,7 @@ namespace SdlDotNetExamples.SharpNes
                 //If we have save RAM, try to save it
                 try
                 {
-                    using (FileStream writer = File.OpenWrite(saveFilename))
+                    using (FileStream writer = File.OpenWrite(Path.Combine(Path.Combine(SharpNesMain.FilePath, SharpNesMain.FileDirectory), saveFilename)))
                     {
                         writer.Write(saveRam, 0, 0x2000);
                     }
@@ -759,6 +777,12 @@ namespace SdlDotNetExamples.SharpNes
                 {
                     e.ToString();
                     //Console.WriteLine("SaveRAM could not be saved.");
+                }
+                catch (FileNotFoundException e)
+                {
+                    e.ToString();
+                    //Console.WriteLine("No SaveRAM found.");
+                    //Ignore it, we'll make our own.
                 }
             }
             hasQuit = true;
