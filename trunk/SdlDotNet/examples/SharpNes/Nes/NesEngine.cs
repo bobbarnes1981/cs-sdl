@@ -432,13 +432,13 @@ namespace SdlDotNetExamples.SharpNes
             }
         }
 
-        public void CheckForEvents()
+        public static void CheckForEvents()
         {
             while (Events.Poll())
             {}
         }
 
-        public override void InitializeEngine()
+        public void InitializeEngine()
         {
             myCartridge = new NesCartridge();
             my6502 = new ProcessorNes6502(this);

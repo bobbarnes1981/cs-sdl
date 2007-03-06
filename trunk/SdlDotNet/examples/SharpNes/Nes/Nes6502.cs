@@ -2057,7 +2057,7 @@ namespace SdlDotNetExamples.SharpNes
                 else
                 {
                     Thread.Sleep(100);
-                    myEngine.CheckForEvents();
+                    NesEngine.CheckForEvents();
                 }
                 //total_tick_count += (tick_count - before_tick_count);
 

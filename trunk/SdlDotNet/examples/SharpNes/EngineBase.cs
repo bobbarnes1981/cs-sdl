@@ -73,10 +73,10 @@ namespace SdlDotNetExamples.SharpNes
             return;
         }
 
-        public virtual void InitializeEngine()
-        {
-            return;
-        }
+        //public virtual void InitializeEngine()
+        //{
+        //    return;
+        //}
 
         // Our cart load function
         // FIXME: look up error handling in C# so failures can be handled correctly
