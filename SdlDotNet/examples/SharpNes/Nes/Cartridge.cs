@@ -19,12 +19,12 @@ using System;
 
 namespace SdlDotNetExamples.SharpNes
 {
-    public enum Mirroring 
-    { 
-        Horizontal, 
-        Vertical, 
-        FourScreen, 
-        OneScreen 
+    public enum Mirroring
+    {
+        Horizontal,
+        Vertical,
+        FourScreen,
+        OneScreen
     };
 
     public class NesCartridge

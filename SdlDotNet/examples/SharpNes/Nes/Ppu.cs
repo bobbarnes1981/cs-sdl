@@ -580,7 +580,7 @@ namespace SdlDotNetExamples.SharpNes
         public void SpriteRamDmaBegin(byte data)
         {
             int i;
-            if (data > (ushort.MaxValue - 255)/ 256)
+            if (data > (ushort.MaxValue - 255) / 256)
             {
                 throw new ArgumentOutOfRangeException("data");
             }

@@ -244,7 +244,7 @@ namespace SdlDotNetExamples.SharpNes
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - NES Window";
             Surface surfaceVideo = Video.SetVideoMode(width, height, bpp, false, SharpNesMain.FullScreen);
-            
+
 
             //DEBUG ONLY!!
 #if FOURSCREEN		
@@ -255,7 +255,7 @@ namespace SdlDotNetExamples.SharpNes
 			flags);
 #endif
             sdlBuffer = surfaceVideo.Pixels;
-            
+
             //END Initialize the SDL frontend
 
             dtbefore = DateTime.Now;
