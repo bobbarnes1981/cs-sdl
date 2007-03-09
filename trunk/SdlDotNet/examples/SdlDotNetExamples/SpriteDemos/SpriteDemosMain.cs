@@ -135,10 +135,10 @@ namespace SdlDotNetExamples.LargeDemos
 
             // Load the actual demos
             LoadDemo(new BounceMode());
-            //LoadDemo(new FontMode());
-            //LoadDemo(new DragMode());
-            //LoadDemo(new ViewportMode());
-            //LoadDemo(new MultipleMode());
+            LoadDemo(new FontMode());
+            LoadDemo(new DragMode());
+            LoadDemo(new ViewportMode());
+            LoadDemo(new MultipleMode());
         }
 
         private static void StopDemo()
