@@ -705,7 +705,7 @@ namespace SdlDotNetExamples.SharpNes
 
                 try
                 {
-                    using (FileStream reader = File.OpenRead(Path.Combine(Path.Combine(SharpNesMain.FilePath, SharpNesMain.FileDirectory), saveFilename)))
+                    using (FileStream reader = File.OpenRead(saveFilename))
                     {
                         reader.Read(saveRam, 0, 0x2000);
                     }
@@ -768,7 +768,7 @@ namespace SdlDotNetExamples.SharpNes
                 //If we have save RAM, try to save it
                 try
                 {
-                    using (FileStream writer = File.OpenWrite(Path.Combine(Path.Combine(SharpNesMain.FilePath, SharpNesMain.FileDirectory), saveFilename)))
+                    using (FileStream writer = File.OpenWrite(saveFilename))
                     {
                         writer.Write(saveRam, 0, 0x2000);
                     }
