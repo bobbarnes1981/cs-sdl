@@ -426,8 +426,6 @@ namespace SdlDotNet.Graphics
             {
                 if (this.Handle != IntPtr.Zero && !this.isVideoMode)
                 {
-                    //Console.WriteLine(this.Handle);
-                    //Console.WriteLine(this.Size);
                     Sdl.SDL_FreeSurface(this.Handle);
                     this.Handle = IntPtr.Zero;
                 }
@@ -2061,7 +2059,13 @@ namespace SdlDotNet.Graphics
             if ((this.Width != destinationSize.Width) || (this.Height != destinationSize.Height))
             {
                 Surface surface = ResizeInternal(destinationSize);
-                this.Handle = surface.Handle;
+
+                this.Handle = surface.CreateScaledSurface(1, 1).Handle;
+                if (surface != null)
+                {
+                    surface.Dispose();
+                    surface = null;
+                }
             }
         }
 
@@ -2095,17 +2099,16 @@ namespace SdlDotNet.Graphics
         /// <returns>new Surface</returns>
         public Surface CreateResizedSurface(Size destinationSize)
         {
-            if ((this.Width != destinationSize.Width) || (this.Height != destinationSize.Height))
-            {
-                Surface surface = ResizeInternal(destinationSize);
-                CloneFields(this, surface);
-                return surface;
-            }
-            else
-            {
-                return this;
-            }
-
+            //if ((this.Width != destinationSize.Width) || (this.Height != destinationSize.Height))
+            //{
+            Surface surface = ResizeInternal(destinationSize);
+            CloneFields(this, surface);
+            return surface;
+            //}
+            //else
+            //{
+            //    return this;
+            //}
         }
 
         private static int NextPowerOfTwo(int x)

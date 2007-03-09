@@ -43,7 +43,6 @@ namespace SdlDotNet.OpenGl
         /// <param name="surface"></param>
         public SurfaceGl(Surface surface)
         {
-            //this.surface = surface;
             this.textureImage = this.LoadInternal(surface);
         }
 
@@ -143,8 +142,6 @@ namespace SdlDotNet.OpenGl
             {
                 if (value)
                 {
-                    Surface screen = Video.Screen;
-
                     Gl.glPushAttrib(Gl.GL_ENABLE_BIT);
                     Gl.glDisable(Gl.GL_DEPTH_TEST);
                     Gl.glDisable(Gl.GL_CULL_FACE);
@@ -154,13 +151,13 @@ namespace SdlDotNet.OpenGl
                     Gl.glEnable(Gl.GL_BLEND);
                     Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
 
-                    Gl.glViewport(0, 0, screen.Width, screen.Height);
+                    Gl.glViewport(0, 0, Video.Screen.Width, Video.Screen.Height);
 
                     Gl.glMatrixMode(Gl.GL_PROJECTION);
                     Gl.glPushMatrix();
                     Gl.glLoadIdentity();
 
-                    Gl.glOrtho(0.0, (double)screen.Width, (double)screen.Height, 0.0, 0.0, 1.0);
+                    Gl.glOrtho(0.0, (double)Video.Screen.Width, (double)Video.Screen.Height, 0.0, 0.0, 1.0);
 
                     Gl.glMatrixMode(Gl.GL_MODELVIEW);
                     Gl.glPushMatrix();
@@ -188,8 +185,8 @@ namespace SdlDotNet.OpenGl
         /// </summary>
         public void Draw(Point location)
         {
-            if (textureImage != null)
-            {
+            //if (textureImage != null)
+            //{
                 Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureID);
                 Gl.glBegin(Gl.GL_QUADS);
                 Gl.glTexCoord2f(0.0f, 1.0f);
@@ -201,7 +198,7 @@ namespace SdlDotNet.OpenGl
                 Gl.glTexCoord2f(0.0f, 0.0f);
                 Gl.glVertex2f(location.X, location.Y + textureImage.Height);
                 Gl.glEnd();
-            }
+            //}
         }
     }
 }

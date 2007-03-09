@@ -112,8 +112,8 @@ namespace SdlDotNet.Core
             {
                 if (disposing)
                 {
+                    CloseHandle();
                 }
-                CloseHandle();
             }
             this.disposed = true;
         }

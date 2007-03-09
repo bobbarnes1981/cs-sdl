@@ -346,11 +346,11 @@ namespace SdlDotNet.Audio
         }
 
         private static void PrivateOpen(
-            int frequency, AudioFormat format, int channels, int chunksize)
+            int frequency, AudioFormat format, SoundChannel soundChannels, int chunksize)
         {
             if (!isOpen)
             {
-                SdlMixer.Mix_OpenAudio(frequency, (short)format, channels, chunksize);
+                SdlMixer.Mix_OpenAudio(frequency, (short)format, (int)soundChannels, chunksize);
                 isOpen = true;
             }
         }
@@ -365,6 +365,7 @@ namespace SdlDotNet.Audio
         /// <param name="stream"></param>
         public static void OpenAudio(AudioStream stream)
         {
+            Close();
             if (stream == null)
             {
                 throw new ArgumentNullException("stream");
@@ -496,7 +497,7 @@ namespace SdlDotNet.Audio
                 {
                     throw SdlException.Generate();
                 }
-                //Mixer.OpenInternal();
+                Mixer.OpenInternal();
                 return true;
             }
             else
@@ -544,15 +545,16 @@ namespace SdlDotNet.Audio
         /// </summary>
         /// <param name="frequency">The frequency to mix at</param>
         /// <param name="format">The audio format to use</param>
-        /// <param name="channels">
-        /// The number of channels to allocate.  
-        /// You will not be able to mix more than this number of samples.
+        /// <param name="soundChannels">
+        /// Number of sound channels in output.  
+        /// Set to SoundChannel.Stereo for stereo, SoundChannel.Mono for mono. 
+        /// This has nothing to do with mixing channels.
         /// </param>
         /// <param name="chunkSize">The chunk size for samples</param>
-        public static void Open(int frequency, AudioFormat format, int channels, int chunkSize)
+        public static void Open(int frequency, AudioFormat format, SoundChannel soundChannels, int chunkSize)
         {
             Close();
-            PrivateOpen(frequency, format, channels, chunkSize);
+            PrivateOpen(frequency, format, soundChannels, chunkSize);
         }
 
         /// <summary>
