@@ -33,7 +33,6 @@ namespace SdlDotNet.OpenGl
     [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class SurfaceGl
     {
-        //Surface surface;
         Surface textureImage;
         int textureID;
 
@@ -50,10 +49,9 @@ namespace SdlDotNet.OpenGl
         {
             try
             {
-                surface = surface.FlipVertical();
-                surface.SaveBmp("test.bmp");
+                surface = surface.CreateFlippedVerticalSurface();
                 surface = surface.CreateResizedSurface();
-                
+
                 int[] texture = new int[1];
                 Gl.glGenTextures(1, texture);
                 this.textureID = texture[0];
@@ -187,20 +185,17 @@ namespace SdlDotNet.OpenGl
         /// </summary>
         public void Draw(Point location)
         {
-            //if (textureImage != null)
-            //{
-                Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureID);
-                Gl.glBegin(Gl.GL_QUADS);
-                Gl.glTexCoord2f(0.0f, 1.0f);
-                Gl.glVertex2f(location.X, location.Y);
-                Gl.glTexCoord2f(1.0f, 1.0f);
-                Gl.glVertex2f(location.X + textureImage.Width, location.Y);
-                Gl.glTexCoord2f(1.0f, 0.0f);
-                Gl.glVertex2f(location.X + textureImage.Width, location.Y + textureImage.Height);
-                Gl.glTexCoord2f(0.0f, 0.0f);
-                Gl.glVertex2f(location.X, location.Y + textureImage.Height);
-                Gl.glEnd();
-            //}
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureID);
+            Gl.glBegin(Gl.GL_QUADS);
+            Gl.glTexCoord2f(0.0f, 1.0f);
+            Gl.glVertex2f(location.X, location.Y);
+            Gl.glTexCoord2f(1.0f, 1.0f);
+            Gl.glVertex2f(location.X + textureImage.Width, location.Y);
+            Gl.glTexCoord2f(1.0f, 0.0f);
+            Gl.glVertex2f(location.X + textureImage.Width, location.Y + textureImage.Height);
+            Gl.glTexCoord2f(0.0f, 0.0f);
+            Gl.glVertex2f(location.X, location.Y + textureImage.Height);
+            Gl.glEnd();
         }
     }
 }
