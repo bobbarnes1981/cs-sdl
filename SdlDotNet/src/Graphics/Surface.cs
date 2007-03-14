@@ -1448,7 +1448,7 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Flips the rows of a surface, for use in an OpenGL texture for example
         /// </summary>
-        public Surface FlipVertical()
+        public Surface CreateFlippedVerticalSurface()
         {
             //Surface surface = new Surface(SdlGfx.rotozoomSurfaceXY(
             //    this.Handle,
@@ -1493,10 +1493,10 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Flips the columns of a surface, for use in an OpenGL texture for example
         /// </summary>
-        public Surface FlipHorizontal()
+        public Surface CreateFlippedHorizontalSurface()
         {
             Surface surface = this.CreateRotatedSurface(270);
-            surface = surface.FlipVertical();
+            surface = surface.CreateFlippedVerticalSurface();
             surface = surface.CreateRotatedSurface(90);
             return surface;
         }

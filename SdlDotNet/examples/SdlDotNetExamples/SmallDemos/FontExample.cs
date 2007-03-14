@@ -103,10 +103,10 @@ namespace SdlDotNetExamples.SmallDemos
                 switch (rand.Next(4))
                 {
                     case 1:
-                        text = text.FlipVertical();
+                        text = text.CreateFlippedVerticalSurface();
                         break;
                     case 2:
-                        text = text.FlipHorizontal();
+                        text = text.CreateFlippedHorizontalSurface();
                         break;
                     case 3:
                         text = text.CreateRotatedSurface(rand.Next(360));
