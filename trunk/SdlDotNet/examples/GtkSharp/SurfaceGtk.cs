@@ -42,6 +42,9 @@ namespace SdlDotNet.GtkSharp
     	/// </summary>
         private int mouseX;
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected int MouseX
         {
             get { return mouseX; }
@@ -53,6 +56,9 @@ namespace SdlDotNet.GtkSharp
 		/// </summary>
         private int mouseY;
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected int MouseY
         {
             get { return mouseY; }
@@ -64,6 +70,9 @@ namespace SdlDotNet.GtkSharp
 		/// </summary>
         private int relativeX;
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected int RelativeX
         {
             get { return relativeX; }
@@ -75,6 +84,9 @@ namespace SdlDotNet.GtkSharp
 		/// </summary>
         private int relativeY;
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected int RelativeY
         {
             get { return relativeY; }
@@ -86,6 +98,9 @@ namespace SdlDotNet.GtkSharp
 		/// </summary>
         private MouseButton mouseButton;
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected MouseButton MouseButton
         {
             get { return mouseButton; }

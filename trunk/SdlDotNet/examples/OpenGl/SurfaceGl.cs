@@ -50,7 +50,8 @@ namespace SdlDotNet.OpenGl
         {
             try
             {
-                surface.FlipVertical();
+                surface = surface.FlipVertical();
+                surface.SaveBmp("test.bmp");
                 surface = surface.CreateResizedSurface();
                 
                 int[] texture = new int[1];
