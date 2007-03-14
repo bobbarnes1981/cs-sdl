@@ -153,7 +153,8 @@ namespace SdlDotNetExamples.SmallDemos
         /// <remarks>Destroys managed and unmanaged objects</remarks>
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>

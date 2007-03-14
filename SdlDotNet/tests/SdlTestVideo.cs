@@ -670,8 +670,8 @@ namespace SdlDotNet.Tests
         {
             Rectangle rectangle = new Rectangle(0, 0, 32, 32);
             
-            Surface surface= new Surface(rectangle);
-            surface.Resize();
+            Surface surface = new Surface(rectangle);
+            surface = surface.CreateResizedSurface();
             Assert.AreEqual(rectangle.Height, surface.Height);
             Assert.AreEqual(rectangle.Width, surface.Width);
         }
@@ -683,9 +683,8 @@ namespace SdlDotNet.Tests
         public void SurfaceResize2()
         {
             Rectangle rectangle = new Rectangle(0, 0, 33, 33);
-
             Surface surface = new Surface(rectangle);
-            surface.Resize();
+            surface = surface.CreateResizedSurface();
             Assert.AreEqual(64, surface.Height);
             Assert.AreEqual(64, surface.Width);
         }

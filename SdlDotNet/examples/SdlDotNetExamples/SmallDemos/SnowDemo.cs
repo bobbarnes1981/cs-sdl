@@ -104,7 +104,7 @@ namespace SdlDotNetExamples.SmallDemos
             tree.TransparentColor = Color.Magenta;
             tree.Transparent = true;
             treeStretch = new Surface(tree);
-            treeStretch.Stretch(new Size(100, 100));
+            treeStretch = treeStretch.CreateStretchedSurface(new Size(100, 100));
             treeStretch.TransparentColor = Color.Magenta;
             treeStretch.Transparent = true;
             Initialize(250);

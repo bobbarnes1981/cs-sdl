@@ -20,6 +20,7 @@
  */
 
 using System;
+using SdlDotNet.Input;
 using SdlDotNet.Graphics;
 using Gtk;
 using System.IO;
@@ -28,6 +29,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace SdlDotNet.GtkSharp
 {
+
     /// <summary>
     /// 
     /// </summary>
@@ -35,6 +37,61 @@ namespace SdlDotNet.GtkSharp
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
     public class SurfaceGtk : DrawingArea
     {
+    	/// <summary>
+    	/// Save absolute mouse position X-Position
+    	/// </summary>
+        private int mouseX;
+
+        protected int MouseX
+        {
+            get { return mouseX; }
+            set { mouseX = value; }
+        }
+		
+		/// <summary>
+		/// Save absolute mouse position Y-Position
+		/// </summary>
+        private int mouseY;
+
+        protected int MouseY
+        {
+            get { return mouseY; }
+            set { mouseY = value; }
+        }
+		
+		/// <summary>
+		/// Save relative mouse position X-Position
+		/// </summary>
+        private int relativeX;
+
+        protected int RelativeX
+        {
+            get { return relativeX; }
+            set { relativeX = value; }
+        }
+		
+		/// <summary>
+		/// Save relative mouse position Y-Position
+		/// </summary>
+        private int relativeY;
+
+        protected int RelativeY
+        {
+            get { return relativeY; }
+            set { relativeY = value; }
+        }  
+		
+		/// <summary>
+		/// Save mouse button status
+		/// </summary>
+        private MouseButton mouseButton;
+
+        protected MouseButton MouseButton
+        {
+            get { return mouseButton; }
+            set { mouseButton = value; }
+        }
+		
         private Surface surface = new Surface(new Size(0, 0));	// empty surface
 
         /// <summary>
@@ -63,6 +120,22 @@ namespace SdlDotNet.GtkSharp
         /// </summary>
         public SurfaceGtk()
         {
+        	// init mouse parameters
+            //mouseX = 0;
+            //mouseY = 0;
+            //relativeX = 0;
+            //relativeY = 0;
+        	mouseButton = MouseButton.None;        	
+        	
+        	// Enable Events 
+        	this.AddEvents((int)Gdk.EventMask.AllEventsMask);
+        	
+        	// Connect button events for mapping
+        	this.ButtonPressEvent   += new ButtonPressEventHandler(this.OnButtonPress);
+        	this.ButtonReleaseEvent += new ButtonReleaseEventHandler(this.OnButtonRelease);
+        	
+        	// Connect motion events for mapping
+        	this.MotionNotifyEvent += new MotionNotifyEventHandler(this.OnMouseMotion);
         }
 
         /// <summary>
@@ -77,6 +150,85 @@ namespace SdlDotNet.GtkSharp
                         Gdk.RgbDither.Normal, 0, 0);
             return true;
         }
+        
+        /// <summary>
+        /// Process mouse motion event. Save coordinates and map the event.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="args">Event arguments</param>
+        private void OnMouseMotion(object sender, Gtk.MotionNotifyEventArgs args)
+        {
+			bool                 pressed;
+			MouseMotionEventArgs eventArgs;
+			
+			// Save mouse position (relative and absolute)
+			relativeX   = (int)(args.Event.X - mouseX);
+			relativeY   = (int)(args.Event.Y - mouseY);
+			mouseX = (int)args.Event.X;
+			mouseY = (int)args.Event.Y;
+			
+			// Check mouse button
+			pressed = mouseButton != MouseButton.None;
+			
+			// Prepare mouse event
+			eventArgs = new MouseMotionEventArgs(pressed, mouseButton,(short)mouseX,(short)mouseY,(short)relativeX,(short)relativeY);
+			// queue mouse event
+			SdlDotNet.Core.Events.AddEvent(eventArgs);
+			// execute event queue
+			SdlDotNet.Core.Events.Poll();
+        	
+        }
+        
+        /// <summary>
+        /// Receives Gtk ButtonPress Signal an maps it into an SDL Event
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="args">Event arguments</param>
+        private void OnButtonPress(object sender,Gtk.ButtonPressEventArgs args)
+        {
+			MouseButtonEventArgs mouseEvent;
+			
+			// Map Mouse Button
+			switch (args.Event.Button)
+			{
+				case 1:
+					mouseButton = MouseButton.PrimaryButton;
+					break;
+				case 2:
+					mouseButton = MouseButton.MiddleButton;
+					break;
+				case 3:
+					mouseButton = MouseButton.SecondaryButton;
+					break;
+				default:
+					mouseButton = MouseButton.None;
+					break;
+			}
+			
+			// Create SDL Mouse Button Event
+			mouseEvent = new MouseButtonEventArgs(mouseButton,true,(short)mouseX,(short)mouseY);
+			// Queue Event
+			SdlDotNet.Core.Events.AddEvent(mouseEvent);
+			// Execute Event Queue
+			SdlDotNet.Core.Events.Poll();        	
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+		private void OnButtonRelease(object sender,Gtk.ButtonReleaseEventArgs args)
+		{
+			// Reset mouse button
+			mouseButton = MouseButton.None;
+			// Prepare release event
+			MouseButtonEventArgs mouseEvent = new MouseButtonEventArgs(mouseButton,false,(short)relativeX,(short)relativeY);
+			// Queue release event
+			SdlDotNet.Core.Events.AddEvent(mouseEvent);
+			// Execute event queue
+			SdlDotNet.Core.Events.Poll();
+		}
 
         /// <summary>
         /// Converts System.Drawing.Bitmap to GTK.PixBuf
@@ -100,6 +252,5 @@ namespace SdlDotNet.GtkSharp
                 return null;
             }
         }
-
     }
 }

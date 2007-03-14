@@ -366,7 +366,6 @@ namespace SdlDotNetExamples.CDPlayer
             }
         }
 
-
         private void Quit(object sender, QuitEventArgs e)
         {
             SdlDotNet.Core.Events.QuitApplication();
@@ -526,6 +525,7 @@ namespace SdlDotNetExamples.CDPlayer
             this.surfaceControl.KeyPressed(e);
             base.OnKeyDown(e);
         }
+
         /// <summary>
         /// 
         /// </summary>

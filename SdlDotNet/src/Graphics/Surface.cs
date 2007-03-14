@@ -477,6 +477,7 @@ namespace SdlDotNet.Graphics
                     }
                     catch (AccessViolationException e)
                     {
+                        Console.WriteLine(e.StackTrace);
                         e.ToString();
                     }
 
@@ -1710,46 +1711,46 @@ namespace SdlDotNet.Graphics
             return surface;
         }
 
-        /// <summary>
-        /// Rotate and Zoom surface
-        /// </summary>
-        /// <param name="degreesOfRotation">Degrees of rotation</param>
-        /// <param name="zoom">Scale of zoom</param>
-        /// <remarks>Smoothing is turned on.</remarks>
-        public void RotationZoom(int degreesOfRotation, double zoom)
-        {
-            this.RotationZoom(degreesOfRotation, zoom, false);
-        }
+        ///// <summary>
+        ///// Rotate and Zoom surface
+        ///// </summary>
+        ///// <param name="degreesOfRotation">Degrees of rotation</param>
+        ///// <param name="zoom">Scale of zoom</param>
+        ///// <remarks>Smoothing is turned on.</remarks>
+        //public void RotationZoom(int degreesOfRotation, double zoom)
+        //{
+        //    this.RotationZoom(degreesOfRotation, zoom, false);
+        //}
 
-        /// <summary>
-        /// Rotate and zoom surface
-        /// </summary>
-        /// <param name="degreesOfRotation">degrees of rotation</param>
-        /// <param name="zoom">scale of zoom</param>
-        /// <param name="antiAlias">If true, moothing is turned on.</param>
-        public void RotationZoom(int degreesOfRotation,
-            double zoom, bool antiAlias)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString()));
-            }
-            int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
-            if (antiAlias == true)
-            {
-                antiAliasParameter = SdlGfx.SMOOTHING_ON;
-            }
+        ///// <summary>
+        ///// Rotate and zoom surface
+        ///// </summary>
+        ///// <param name="degreesOfRotation">degrees of rotation</param>
+        ///// <param name="zoom">scale of zoom</param>
+        ///// <param name="antiAlias">If true, moothing is turned on.</param>
+        //public void RotationZoom(int degreesOfRotation,
+        //    double zoom, bool antiAlias)
+        //{
+        //    if (this.disposed)
+        //    {
+        //        throw (new ObjectDisposedException(this.ToString()));
+        //    }
+        //    int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
+        //    if (antiAlias == true)
+        //    {
+        //        antiAliasParameter = SdlGfx.SMOOTHING_ON;
+        //    }
 
-            IntPtr tempHandle =
-                SdlGfx.rotozoomSurface(
-                this.Handle,
-                degreesOfRotation,
-                zoom,
-                antiAliasParameter);
+        //    IntPtr tempHandle =
+        //        SdlGfx.rotozoomSurface(
+        //        this.Handle,
+        //        degreesOfRotation,
+        //        zoom,
+        //        antiAliasParameter);
 
-            this.CloseHandle();
-            this.Handle = tempHandle;
-        }
+        //    this.CloseHandle();
+        //    this.Handle = tempHandle;
+        //}
 
         /// <summary>
         /// Create rescaled surface
@@ -1813,76 +1814,76 @@ namespace SdlDotNet.Graphics
             return this.CreateScaledSurface(zoom, zoom, antiAlias);
         }
 
-        /// <summary>
-        /// Rescale surface
-        /// </summary>
-        /// <param name="zoomX">Scale on X-axis</param>
-        /// <param name="zoomY">Scale on Y-axis</param>
-        public void Scale(double zoomX, double zoomY)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString()));
-            }
-            this.Scale(zoomX, zoomY, false);
-        }
+        ///// <summary>
+        ///// Rescale surface
+        ///// </summary>
+        ///// <param name="zoomX">Scale on X-axis</param>
+        ///// <param name="zoomY">Scale on Y-axis</param>
+        //public void Scale(double zoomX, double zoomY)
+        //{
+        //    if (this.disposed)
+        //    {
+        //        throw (new ObjectDisposedException(this.ToString()));
+        //    }
+        //    this.Scale(zoomX, zoomY, false);
+        //}
 
-        /// <summary>
-        /// Rescale surface
-        /// </summary>
-        /// <param name="zoomX">Scale on X-axis</param>
-        /// <param name="zoomY">Scale on Y-axis</param>
-        /// <param name="antiAlias">If true, smoothing is turned on.</param>
-        public void Scale(double zoomX, double zoomY, bool antiAlias)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString()));
-            }
-            int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
-            if (antiAlias == true)
-            {
-                antiAliasParameter = SdlGfx.SMOOTHING_ON;
-            }
-            try
-            {
-                IntPtr tempHandle =
-                    SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter);
-                this.CloseHandle();
-                this.Handle = tempHandle;
-            }
-            catch
-            {
-                throw;
-            }
-        }
+        ///// <summary>
+        ///// Rescale surface
+        ///// </summary>
+        ///// <param name="zoomX">Scale on X-axis</param>
+        ///// <param name="zoomY">Scale on Y-axis</param>
+        ///// <param name="antiAlias">If true, smoothing is turned on.</param>
+        //public void Scale(double zoomX, double zoomY, bool antiAlias)
+        //{
+        //    if (this.disposed)
+        //    {
+        //        throw (new ObjectDisposedException(this.ToString()));
+        //    }
+        //    int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
+        //    if (antiAlias == true)
+        //    {
+        //        antiAliasParameter = SdlGfx.SMOOTHING_ON;
+        //    }
+        //    try
+        //    {
+        //        IntPtr tempHandle =
+        //            SdlGfx.zoomSurface(this.Handle, zoomX, zoomY, antiAliasParameter);
+        //        this.CloseHandle();
+        //        this.Handle = tempHandle;
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        /// <summary>
-        /// Scale surface on both axes
-        /// </summary>
-        /// <param name="zoom">Scale amount</param>
-        public void Scale(double zoom)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString()));
-            }
-            this.Scale(zoom, zoom);
-        }
+        ///// <summary>
+        ///// Scale surface on both axes
+        ///// </summary>
+        ///// <param name="zoom">Scale amount</param>
+        //public void Scale(double zoom)
+        //{
+        //    if (this.disposed)
+        //    {
+        //        throw (new ObjectDisposedException(this.ToString()));
+        //    }
+        //    this.Scale(zoom, zoom);
+        //}
 
-        /// <summary>
-        /// Scale surface on both axes
-        /// </summary>
-        /// <param name="zoom">Scale amount</param>
-        /// <param name="antiAlias">If true, smoothing is turned on</param>
-        public void Scale(double zoom, bool antiAlias)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString()));
-            }
-            this.Scale(zoom, zoom, antiAlias);
-        }
+        ///// <summary>
+        ///// Scale surface on both axes
+        ///// </summary>
+        ///// <param name="zoom">Scale amount</param>
+        ///// <param name="antiAlias">If true, smoothing is turned on</param>
+        //public void Scale(double zoom, bool antiAlias)
+        //{
+        //    if (this.disposed)
+        //    {
+        //        throw (new ObjectDisposedException(this.ToString()));
+        //    }
+        //    this.Scale(zoom, zoom, antiAlias);
+        //}
 
         /// <summary>
         /// Doubles the size of the surface
@@ -1902,64 +1903,64 @@ namespace SdlDotNet.Graphics
             return this.CreateScaledSurface(2, antiAlias);
         }
 
-        /// <summary>
-        /// Doubles the size of the surface
-        /// </summary>
-        public void ScaleDouble()
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString()));
-            }
-            this.Scale(2, 2);
-        }
+        ///// <summary>
+        ///// Doubles the size of the surface
+        ///// </summary>
+        //public void ScaleDouble()
+        //{
+        //    if (this.disposed)
+        //    {
+        //        throw (new ObjectDisposedException(this.ToString()));
+        //    }
+        //    this.Scale(2, 2);
+        //}
 
-        /// <summary>
-        /// Doubles the size of the surface
-        /// </summary>
-        /// <param name="antiAlias">If true</param>
-        /// <returns></returns>
-        public void ScaleDouble(bool antiAlias)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString()));
-            }
-            this.Scale(2, 2, antiAlias);
-        }
+        ///// <summary>
+        ///// Doubles the size of the surface
+        ///// </summary>
+        ///// <param name="antiAlias">If true</param>
+        ///// <returns></returns>
+        //public void ScaleDouble(bool antiAlias)
+        //{
+        //    if (this.disposed)
+        //    {
+        //        throw (new ObjectDisposedException(this.ToString()));
+        //    }
+        //    this.Scale(2, 2, antiAlias);
+        //}
 
-        /// <summary>
-        /// Stretch Surface
-        /// </summary>
-        /// <param name="sourceRectangle">Source Rectangle</param>
-        /// <param name="destinationRectangle">Destination of stretch</param>
-        /// <returns>new Surface</returns>
-        public void Stretch(Rectangle sourceRectangle, Rectangle destinationRectangle)
-        {
-            Surface surface = new Surface(sourceRectangle);
-            //Surface surface = (Surface)this.Clone();
-            Color colorTemp = this.TransparentColor;
-            this.Transparent = false;
-            surface.Blit(this, new Point(0, 0), sourceRectangle);
-            this.transparentColor = colorTemp;
-            double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
-            double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
-            surface.Scale(stretchWidth, stretchHeight);
-            CloneFields(this, surface);
-            this.Handle = surface.Handle;
-        }
+        ///// <summary>
+        ///// Stretch Surface
+        ///// </summary>
+        ///// <param name="sourceRectangle">Source Rectangle</param>
+        ///// <param name="destinationRectangle">Destination of stretch</param>
+        ///// <returns>new Surface</returns>
+        //public void Stretch(Rectangle sourceRectangle, Rectangle destinationRectangle)
+        //{
+        //    Surface surface = new Surface(sourceRectangle);
+        //    //Surface surface = (Surface)this.Clone();
+        //    Color colorTemp = this.TransparentColor;
+        //    this.Transparent = false;
+        //    surface.Blit(this, new Point(0, 0), sourceRectangle);
+        //    this.transparentColor = colorTemp;
+        //    double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
+        //    double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
+        //    surface.Scale(stretchWidth, stretchHeight);
+        //    CloneFields(this, surface);
+        //    this.Handle = surface.Handle;
+        //}
 
-        /// <summary>
-        /// Stretch Surface
-        /// </summary>
-        /// <param name="destinationSize">Destination of stretch</param>
-        /// <returns>new Surface</returns>
-        public void Stretch(Size destinationSize)
-        {
-            double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
-            double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
-            this.Scale(stretchWidth, stretchHeight);
-        }
+        ///// <summary>
+        ///// Stretch Surface
+        ///// </summary>
+        ///// <param name="destinationSize">Destination of stretch</param>
+        ///// <returns>new Surface</returns>
+        //public void Stretch(Size destinationSize)
+        //{
+        //    double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
+        //    double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
+        //    this.Scale(stretchWidth, stretchHeight);
+        //}
 
         /// <summary>
         /// Stretch Surface
@@ -1977,7 +1978,7 @@ namespace SdlDotNet.Graphics
             this.transparentColor = colorTemp;
             double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
             double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
-            surface.Scale(stretchWidth, stretchHeight);
+            surface = surface.CreateScaledSurface(stretchWidth, stretchHeight);
             CloneFields(this, surface);
             return surface;
         }
@@ -1992,7 +1993,7 @@ namespace SdlDotNet.Graphics
             Surface surface = (Surface)this.Clone();
             double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
             double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
-            surface.Scale(stretchWidth, stretchHeight);
+            surface = surface.CreateScaledSurface(stretchWidth, stretchHeight);
             return surface;
         }
 
@@ -2049,39 +2050,30 @@ namespace SdlDotNet.Graphics
             return ret;
         }
 
-        /// <summary>
-        /// Resize Surface
-        /// </summary>
-        /// <param name="destinationSize">Size of new Surface</param>
-        /// <returns>new Surface</returns>
-        public void Resize(Size destinationSize)
-        {
-            if ((this.Width != destinationSize.Width) || (this.Height != destinationSize.Height))
-            {
-                Surface surface = ResizeInternal(destinationSize);
+        ///// <summary>
+        ///// Resize Surface
+        ///// </summary>
+        ///// <param name="destinationSize">Size of new Surface</param>
+        ///// <returns>new Surface</returns>
+        //public void Resize(Size destinationSize)
+        //{
+        //    Surface surface = CreateResizedSurfaceInternal(destinationSize);     
+        //    this.Handle = CreateResizedSurfaceInternal(destinationSize).Handle;     
+        //}
 
-                this.Handle = surface.CreateScaledSurface(1, 1).Handle;
-                if (surface != null)
-                {
-                    surface.Dispose();
-                    surface = null;
-                }
-            }
-        }
+        ///// <summary>
+        ///// Resize surface to next power of two size. Useful for OpenGL.
+        ///// </summary>
+        //public void Resize()
+        //{
+        //    this.Resize(new Size(NextPowerOfTwo(this.Width), NextPowerOfTwo(this.Height)));
+        //}
 
-        private Surface ResizeInternal(Size destinationSize)
+        private Surface CreateResizedSurfaceInternal(Size destinationSize)
         {
             Surface surface = resizeSurface.CreateStretchedSurface(destinationSize);
             surface.Blit(this);
             return surface;
-        }
-
-        /// <summary>
-        /// Resize surface to next power of two size. Useful for OpenGL.
-        /// </summary>
-        public void Resize()
-        {
-            this.Resize(new Size(NextPowerOfTwo(this.Width), NextPowerOfTwo(this.Height)));
         }
 
         /// <summary>
@@ -2099,16 +2091,9 @@ namespace SdlDotNet.Graphics
         /// <returns>new Surface</returns>
         public Surface CreateResizedSurface(Size destinationSize)
         {
-            //if ((this.Width != destinationSize.Width) || (this.Height != destinationSize.Height))
-            //{
-            Surface surface = ResizeInternal(destinationSize);
+            Surface surface = CreateResizedSurfaceInternal(destinationSize);
             CloneFields(this, surface);
             return surface;
-            //}
-            //else
-            //{
-            //    return this;
-            //}
         }
 
         private static int NextPowerOfTwo(int x)
@@ -2121,23 +2106,25 @@ namespace SdlDotNet.Graphics
         /// Uses a Transformation object to perform rotation, zooming and scaling
         /// </summary>
         /// <param name="transformation">Transformation object</param>
-        public void Transform(Transformation transformation)
+        public Surface Transform(Transformation transformation)
         {
             if (transformation == null)
             {
                 throw new ArgumentNullException("transformation");
             }
+            Surface surface = new Surface(0, 0);
             if (Math.Round(transformation.Zoom, 1) != 1.0f && Math.Round(transformation.Zoom, 1) != 0.0f)
             {
-                this.RotationZoom(transformation.DegreesOfRotation, transformation.Zoom, transformation.AntiAlias);
+                surface = this.CreateRotatedZoomedSurface(transformation.DegreesOfRotation, transformation.Zoom, transformation.AntiAlias);
             }
             if (Math.Round(transformation.ScaleX, 1) != 1.0f &&
                 Math.Round(transformation.ScaleY, 1) != 1.0f &&
                 Math.Round(transformation.ScaleX, 1) != 0.0f &&
                 Math.Round(transformation.ScaleY, 1) != 0.0f)
             {
-                this.Scale(transformation.ScaleX, transformation.ScaleY, transformation.AntiAlias);
+                surface = this.CreateScaledSurface(transformation.ScaleX, transformation.ScaleY, transformation.AntiAlias);
             }
+            return surface;
         }
 
         /// <summary>
