@@ -1448,43 +1448,57 @@ namespace SdlDotNet.Graphics
         /// <summary>
         /// Flips the rows of a surface, for use in an OpenGL texture for example
         /// </summary>
-        public void FlipVertical()
+        public Surface FlipVertical()
         {
+            //Surface surface = new Surface(SdlGfx.rotozoomSurfaceXY(
+            //    this.Handle,
+            //    0,
+            //    1,
+            //    -1,
+            //    SdlGfx.SMOOTHING_OFF));
+            //CloneFields(this, surface);
+            //return surface;
+
             int first = 0;
             int second = this.Height - 1;
             int pitch = this.Pitch;
             byte[] tempByte = new byte[pitch];
             byte[] firstByte = new byte[pitch];
 
+            Surface surface = this.CreateScaledSurface(1);
+
             Lock();
             while (first < second)
             {
                 //Take first scanline
                 //Copy pointer data from scanline to tempByte array
-                Marshal.Copy(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + first * pitch), tempByte, 0, pitch);
+                Marshal.Copy(new IntPtr(surface.SurfaceStruct.pixels.ToInt32() + first * pitch), tempByte, 0, pitch);
                 //Take last scanline
                 //Copy pointer data from scanline to firstByte array
-                Marshal.Copy(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + second * pitch), firstByte, 0, pitch);
+                Marshal.Copy(new IntPtr(surface.SurfaceStruct.pixels.ToInt32() + second * pitch), firstByte, 0, pitch);
                 //Take tempByte array
                 //Copy pointer data from tempByte to last scanline
-                Marshal.Copy(tempByte, 0, new IntPtr(this.SurfaceStruct.pixels.ToInt32() + second * pitch), pitch);
+                Marshal.Copy(tempByte, 0, new IntPtr(surface.SurfaceStruct.pixels.ToInt32() + second * pitch), pitch);
                 //Take firstByte array
                 //Copy pointer data from firstByte array to first scanline
-                Marshal.Copy(firstByte, 0, new IntPtr(this.SurfaceStruct.pixels.ToInt32() + first * pitch), pitch);
+                Marshal.Copy(firstByte, 0, new IntPtr(surface.SurfaceStruct.pixels.ToInt32() + first * pitch), pitch);
                 first++;
                 second--;
             }
             Unlock();
+
+            return surface;
         }
 
         /// <summary>
         /// Flips the columns of a surface, for use in an OpenGL texture for example
         /// </summary>
-        public void FlipHorizontal()
+        public Surface FlipHorizontal()
         {
-            this.Rotate(270);
-            this.FlipVertical();
-            this.Rotate(90);
+            Surface surface = this.CreateRotatedSurface(270);
+            surface = surface.FlipVertical();
+            surface = surface.CreateRotatedSurface(90);
+            return surface;
         }
 
         /// <summary>
@@ -1596,42 +1610,42 @@ namespace SdlDotNet.Graphics
             }
         }
 
-        /// <summary>
-        /// Rotate surface.
-        /// </summary>
-        /// <remarks>Smoothing is turned on.</remarks>
-        /// <param name="degreesOfRotation">degrees of rotation</param>
-        public void Rotate(int degreesOfRotation)
-        {
-            this.Rotate(degreesOfRotation, false);
-        }
+        ///// <summary>
+        ///// Rotate surface.
+        ///// </summary>
+        ///// <remarks>Smoothing is turned on.</remarks>
+        ///// <param name="degreesOfRotation">degrees of rotation</param>
+        //public void Rotate(int degreesOfRotation)
+        //{
+        //    this.Rotate(degreesOfRotation, false);
+        //}
 
-        /// <summary>
-        /// Rotate surface
-        /// </summary>
-        /// <param name="degreesOfRotation">degrees of rotation</param>
-        /// <param name="antiAlias">If true, smoothing will be turned on.</param>
-        /// <returns></returns>
-        public void Rotate(int degreesOfRotation, bool antiAlias)
-        {
-            if (this.disposed)
-            {
-                throw (new ObjectDisposedException(this.ToString()));
-            }
-            int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
-            if (antiAlias == true)
-            {
-                antiAliasParameter = SdlGfx.SMOOTHING_ON;
-            }
+        ///// <summary>
+        ///// Rotate surface
+        ///// </summary>
+        ///// <param name="degreesOfRotation">degrees of rotation</param>
+        ///// <param name="antiAlias">If true, smoothing will be turned on.</param>
+        ///// <returns></returns>
+        //public void Rotate(int degreesOfRotation, bool antiAlias)
+        //{
+        //    if (this.disposed)
+        //    {
+        //        throw (new ObjectDisposedException(this.ToString()));
+        //    }
+        //    int antiAliasParameter = SdlGfx.SMOOTHING_OFF;
+        //    if (antiAlias == true)
+        //    {
+        //        antiAliasParameter = SdlGfx.SMOOTHING_ON;
+        //    }
 
-            IntPtr tempHandle = SdlGfx.rotozoomSurface(
-                this.Handle,
-                degreesOfRotation,
-                1,
-                antiAliasParameter);
-            this.CloseHandle();
-            this.Handle = tempHandle;
-        }
+        //    IntPtr tempHandle = SdlGfx.rotozoomSurface(
+        //        this.Handle,
+        //        degreesOfRotation,
+        //        1,
+        //        antiAliasParameter);
+        //    this.CloseHandle();
+        //    this.Handle = tempHandle;
+        //}
 
         /// <summary>
         /// Creates new Rotated Surface
