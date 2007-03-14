@@ -1,3 +1,4 @@
+#region LICENSE
 /*
 * 3-D gear wheels. This program is in the public domain.
 *
@@ -9,6 +10,7 @@
 * Revised to use SdlDotNet 3.x by David Hudson 2005-02-04
 *
 */
+#endregion LICENSE
 
 using System;
 using System.Drawing;

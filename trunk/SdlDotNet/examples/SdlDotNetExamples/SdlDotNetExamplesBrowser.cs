@@ -120,7 +120,6 @@ namespace SdlDotNetExamples
                 example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
                 this.Enabled = true;
                 Application.Exit();
-                //this.BringToFront();
             }
             catch (TypeLoadException e)
             {
@@ -145,6 +144,7 @@ namespace SdlDotNetExamples
             finally
             {
                 SdlDotNet.Core.Events.QuitApplication();
+                this.Enabled = true;
             }
         }
 

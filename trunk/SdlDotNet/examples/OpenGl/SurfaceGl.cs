@@ -51,7 +51,8 @@ namespace SdlDotNet.OpenGl
             try
             {
                 surface.FlipVertical();
-                surface.Resize();
+                surface = surface.CreateResizedSurface();
+                
                 int[] texture = new int[1];
                 Gl.glGenTextures(1, texture);
                 this.textureID = texture[0];

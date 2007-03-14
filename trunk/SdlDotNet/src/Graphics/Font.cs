@@ -737,6 +737,7 @@ namespace SdlDotNet.Graphics
             }
             catch (AccessViolationException e)
             {
+                Console.WriteLine(e.StackTrace);
                 e.ToString();
             }
             finally
