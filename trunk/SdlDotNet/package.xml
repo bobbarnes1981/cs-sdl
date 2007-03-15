@@ -43,6 +43,13 @@
 	<call target="zip" />
     </target>
 
+    <target name="package-debug" description="Package Debug Mode" depends="clean">
+	<property name="project.config" value="Debug" />
+	<nant buildfile="SdlDotNet.build" target="${nant.settings.currentframework} clean build-debug" />
+	<call target="copyfiles" />
+	<call target="zip" />
+    </target>
+
     <!-- copy project files -->
     <target name="copyfiles">
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${source.dir}">
@@ -89,6 +96,8 @@
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
+		<include name="*.pdb"/>
+		<include name="*.mdb"/>
 		<include name="*.xml"/>
 	    </fileset>
 	</copy>
@@ -117,6 +126,10 @@
 		<include name="${examples.dir}/**/*.exe" />
 		<include name="${examples.dir}/**/*.sh" />
 		<include name="${examples.dir}/**/*.dll" />
+		<include name="${examples.dir}/**/*.pdb" />
+		<include name="${examples.dir}/**/*.mdb" />
+		<include name="${src.dir}/**/*.pdb" />
+		<include name="${src.dir}/**/*.mdb" />
 		<include name="${lib.dir}/net-2.0/*.dll" />
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
