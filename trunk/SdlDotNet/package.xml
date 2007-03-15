@@ -95,10 +95,16 @@
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
 		<include name="${native.sdl}.dll"/>
-		<include name="${native.sdl}.config"/>
 		<include name="${native.sdl}.xml"/>
 	    </fileset>
 	</copy>
+	<if test="${platform::is-unix()}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
+		    <include name="${native.sdl}.config"/>
+		</fileset>
+	    </copy>
+	</if>
 	<if test="${platform::is-win32()}">
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/win32deps">
 		<fileset basedir="${lib.dir}/win32deps">
@@ -112,10 +118,16 @@
 		<include name="${examples.dir}/**/*.sh" />
 		<include name="${examples.dir}/**/*.dll" />
 		<include name="${lib.dir}/net-2.0/*.dll" />
-		<include name="${lib.dir}/net-2.0/*.config" />
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>
+	<if test="${platform::is-unix()}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+		<fileset>
+		    <include name="${lib.dir}/net-2.0/*.config" />
+		</fileset>
+	    </copy>
+	</if>
 	<if test="${platform::is-unix()}">
 	    <foreach item="Folder" property="foldername">
 		<echo message="${foldername}"/>

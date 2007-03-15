@@ -138,14 +138,14 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Events_KeyboardUp(object sender, KeyboardEventArgs e)
         {
-            Console.WriteLine("Keyboard Up: " + e.KeyboardCharacter);
-            Console.WriteLine("Unicode Up: " + e.UnicodeCharacter);
+            //Console.WriteLine("Keyboard Up: " + e.KeyboardCharacter);
+            //Console.WriteLine("Unicode Up: " + e.UnicodeCharacter);
         }
 
         private void Events_KeyboardDown(object sender, KeyboardEventArgs e)
         {
-            Console.WriteLine("Keyboard Down: " + e.KeyboardCharacter);
-            Console.WriteLine("Unicode Down: " + e.UnicodeCharacter);
+            //Console.WriteLine("Keyboard Down: " + e.KeyboardCharacter);
+            //Console.WriteLine("Unicode Down: " + e.UnicodeCharacter);
 
             switch (e.Key)
             {
@@ -223,7 +223,7 @@ namespace SdlDotNetExamples.SmallDemos
             // Switch the music....
             textDisplay.Text = SdlDotNetExamplesBrowser.StringManager.GetString(
                         "MusicSwitched", CultureInfo.CurrentUICulture);
-            Console.WriteLine("Music Finished");
+            //Console.WriteLine("Music Finished");
         }
 
         private void Quit(object sender, QuitEventArgs e)
