@@ -155,7 +155,7 @@ namespace SdlDotNetExamples.Isotope
                 if (face == (int)TouchedFaces[i] && TouchedObjects[i] is ObjectPortable
                     && inventory.Count < maxInventory)
                 {
-                    System.Console.WriteLine("Pick up");
+                    //System.Console.WriteLine("Pick up");
                     ObjectPortable pick_up_object = (ObjectPortable)TouchedObjects[i];
                     //print touched_objects[i],scene.object_group
                     if (pick_up_object.RequestPickup() == true)

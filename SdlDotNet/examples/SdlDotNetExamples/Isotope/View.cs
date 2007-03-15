@@ -122,7 +122,7 @@ namespace SdlDotNetExamples.Isotope
             }
             // Redraws the entire display, including background
             //Display the background
-            Console.WriteLine(scene);
+            //Console.WriteLine(scene);
             Surface.Blit((Surface)skinGroup[scene.SceneType].Images[0], ((Surface)skinGroup[scene.SceneType].Images[0]).Rectangle);
             Surface.Update();
             DisplayUpdate(scene, skinGroup);
