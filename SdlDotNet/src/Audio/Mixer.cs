@@ -575,7 +575,7 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// Loads a .wav file into memory
+        /// Loads a .wav, .ogg, .mp3, .mod or .mid file into memory
         /// </summary>
         /// <param name="file">sound file name</param>
         /// <returns>Sound object</returns>
@@ -585,12 +585,12 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// Loads a .wav file into memory
+        /// Loads a .wav, .ogg, .mp3, .mod or .mid  file into memory
         /// </summary>
         /// <param name="file">The filename to load</param>
         /// <param name="size">Output long variable for the size of the sound object.</param>
         /// <returns>A new Sound object</returns>
-        internal static IntPtr LoadWav(string file, out long size)
+        internal static IntPtr Load(string file, out long size)
         {
             IntPtr p = SdlMixer.Mix_LoadWAV_RW(Sdl.SDL_RWFromFile(file, "rb"), 1);
             if (p == IntPtr.Zero)
@@ -602,7 +602,7 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// Loads a .wav file from a byte array
+        /// Loads a .wav, .ogg, .mp3, .mod or .mid file from a byte array
         /// </summary>
         /// <param name="data">The data to load</param>
         /// <returns>A new Sound object</returns>
@@ -612,12 +612,12 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// Loads a .wav file from a byte array
+        /// Loads a .wav, .ogg, .mp3, .mod or .mid file from a byte array
         /// </summary>
         /// <param name="data">The data to load</param>
         /// <param name="size">Output variable for the size of the sound object.</param>
         /// <returns>A new Sound object</returns>
-        internal static IntPtr LoadWav(byte[] data, out long size)
+        internal static IntPtr Load(byte[] data, out long size)
         {
             IntPtr p = SdlMixer.Mix_LoadWAV_RW(Sdl.SDL_RWFromMem(data, data.Length), 1);
             if (p == IntPtr.Zero)
