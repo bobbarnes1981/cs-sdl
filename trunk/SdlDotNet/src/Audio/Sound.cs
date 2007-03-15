@@ -67,13 +67,13 @@ namespace SdlDotNet.Audio
         #region Constructors
 
         /// <summary>
-        /// Loads a .wav file into memory.
+        /// Loads a .wav, .ogg, .mp3, .mod or .mid file into memory.
         /// </summary>
         /// <param name="file">The file to load into memory.</param>
         public Sound(string file)
         {
             Mixer.OpenInternal();
-            this.Handle = Mixer.LoadWav(file, out this.size); 
+            this.Handle = Mixer.Load(file, out this.size); 
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace SdlDotNet.Audio
         public Sound(byte[] data)
         {
             Mixer.OpenInternal();
-            this.Handle = Mixer.LoadWav(data, out this.size);
+            this.Handle = Mixer.Load(data, out this.size);
         }
 
         #endregion
