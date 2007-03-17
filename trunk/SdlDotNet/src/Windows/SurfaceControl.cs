@@ -44,7 +44,7 @@ namespace SdlDotNet.Windows
     #endregion Class Documentation
     [DefaultProperty("Image")]
     [ToolboxBitmap(typeof(Bitmap), "SurfaceControl.bmp")]
-    public class SurfaceControl : System.Windows.Forms.PictureBox
+    public partial class SurfaceControl : System.Windows.Forms.PictureBox
     {
         #region Constructors
 
@@ -53,7 +53,6 @@ namespace SdlDotNet.Windows
         /// </summary>
         public SurfaceControl()
         {
-            PictureBox.CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
         }
 
@@ -131,19 +130,12 @@ namespace SdlDotNet.Windows
         /// <param name="e">Contains the event data</param>
         protected override void OnResize(EventArgs e)
         {
-            base.OnResize(e);
             if (!this.DesignMode)
             {
                 SdlDotNet.Core.Events.Add(new VideoResizeEventArgs(this.Width, this.Height));
             }
+            base.OnResize(e);
         }
-
-        //		protected override void OnPaint(PaintEventArgs e)
-        //		{
-        //			e.Graphics.DrawImage(this.Image,new Point(0,0));
-        //			//base.OnPaint (e);
-        //		}
-
 
         /// <summary>
         /// Raises the SizeChanged event
@@ -164,11 +156,11 @@ namespace SdlDotNet.Windows
         /// <param name="e">Contains the event data</param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            base.OnMouseDown(e);
             if (!this.DesignMode)
             {
                 SdlDotNet.Core.Events.Add(new MouseButtonEventArgs(SurfaceControl.ConvertMouseButtons(e), true, (short)e.X, (short)e.Y));
             }
+            base.OnMouseDown(e);
         }
 
         /// <summary>
@@ -177,11 +169,11 @@ namespace SdlDotNet.Windows
         /// <param name="e">Contains the event data</param>
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            base.OnMouseUp(e);
             if (!this.DesignMode)
             {
                 SdlDotNet.Core.Events.Add(new MouseButtonEventArgs(SurfaceControl.ConvertMouseButtons(e), false, (short)e.X, (short)e.Y));
             }
+            base.OnMouseUp(e);
         }
 
         /// <summary>
@@ -190,8 +182,6 @@ namespace SdlDotNet.Windows
         /// <param name="e">Contains the event data</param>
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            base.OnMouseMove(e);
-
             if (!this.DesignMode)
             {
                 if (e.Button != MouseButtons.None)
@@ -201,6 +191,7 @@ namespace SdlDotNet.Windows
                 lastX = e.X;
                 lastY = e.Y;
             }
+            base.OnMouseMove(e);
         }
 
         /// <summary>
@@ -261,51 +252,5 @@ namespace SdlDotNet.Windows
         }
 
         #endregion
-
-        #region Disposing
-        private bool disposed;
-
-        /// <summary>
-        /// Destroys the surface object and frees its memory
-        /// </summary>
-        /// <param name="disposing">If ture, dispose unmanaged resources</param>
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                if (!this.disposed)
-                {
-                    if (disposing)
-                    {
-                    }
-                    this.disposed = true;
-                }
-            }
-            finally
-            {
-                base.Dispose(disposing);
-            }
-        }
-        #endregion Disposing
-
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SurfaceControl));
-            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // SurfaceControl
-            // 
-            this.AccessibleDescription = "SdlDotNet SurfaceControl";
-            this.AccessibleName = "SurfaceControl";
-            this.AccessibleRole = System.Windows.Forms.AccessibleRole.Graphic;
-            this.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
-            this.InitialImage = ((System.Drawing.Image)(resources.GetObject("$this.InitialImage")));
-            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
-            this.ResumeLayout(false);
-        }
     }
 }
