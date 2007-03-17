@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile: CDPlayer.cs,v $
  * Copyright (C) 2003 Will Weisser (ogl@9mm.com)
@@ -17,6 +18,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -38,25 +40,13 @@ namespace SdlDotNetExamples.CDPlayer
     /// <summary>
     /// 
     /// </summary>
-    public class CDPlayerApp : System.Windows.Forms.Form
+    public partial class CDPlayerApp : System.Windows.Forms.Form
     {
         private CDDrive _drive;
         private int _track;
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBoxDrive;
-        private System.Windows.Forms.Button buttonPlay;
-        private System.Windows.Forms.Button buttonPause;
-        private System.Windows.Forms.Button buttonStop;
-        private System.Windows.Forms.Button buttonEject;
-        private System.Windows.Forms.Label labelStatus;
-        private System.Windows.Forms.Button buttonPrevious;
-        private SdlDotNet.Windows.SurfaceControl surfaceControl;
-        private System.Windows.Forms.Button buttonNext;
-        string data_directory = @"Data/";
-        string filepath = @"../../";
-        private Panel panel1;
-        //private System.ComponentModel.IContainer components;
+        string filePath = Path.Combine("..", "..");
+        string dataDirectory = "Data";
         static ResourceManager stringManager;
 
         /// <summary>
@@ -64,23 +54,38 @@ namespace SdlDotNetExamples.CDPlayer
         /// </summary>
         public CDPlayerApp()
         {
-            //
-            // Required for Windows Form Designer support
-            //
             stringManager =
                 new ResourceManager("SdlDotNetExamples.CDPlayer.Properties.Resources", Assembly.GetExecutingAssembly());
             InitializeComponent();
+            this.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Title", CultureInfo.CurrentUICulture);
+            this.label1.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                       "SelectDrive", CultureInfo.CurrentUICulture);
+            this.buttonPlay.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Play", CultureInfo.CurrentUICulture);
+            this.buttonPause.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Pause", CultureInfo.CurrentUICulture);
+            this.buttonStop.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Stop", CultureInfo.CurrentUICulture);
+            this.buttonEject.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Eject", CultureInfo.CurrentUICulture);
+            this.labelStatus.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Track", CultureInfo.CurrentUICulture);
+            this.buttonPrevious.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Previous", CultureInfo.CurrentUICulture);
+            this.buttonNext.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
+                        "Next", CultureInfo.CurrentUICulture);
             this.KeyPreview = true;
             surf =
                 new Surface(
                 this.surfaceControl.Width,
                 this.surfaceControl.Height);
-            if (File.Exists(data_directory + "marble1.png"))
+            if (File.Exists(Path.Combine(dataDirectory, "marble1.png")))
             {
-                filepath = "";
+                filePath = "";
             }
             SurfaceCollection marbleSurfaces = new SurfaceCollection();
-            marbleSurfaces.Add(new Surface(filepath + data_directory + "marble1.png"), new Size(50, 50));
+            marbleSurfaces.Add(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "marble1.png"))), new Size(50, 50));
 
             for (int i = 0; i < 1; i++)
             {
@@ -121,7 +126,6 @@ namespace SdlDotNetExamples.CDPlayer
                 if (comboBoxDrive.Items.Count > 0)
                 {
                     comboBoxDrive.SelectedIndex = 0;
-                    //	timer.Start();
                 }
             }
             catch (SdlException ex)
@@ -129,44 +133,6 @@ namespace SdlDotNetExamples.CDPlayer
                 Console.WriteLine(ex);
             }
         }
-
-        //private bool disposed;
-
-        ///// <summary>
-        ///// Clean up any resources being used.
-        ///// </summary>
-        //protected override void Dispose( bool disposing )
-        //{
-        //    try
-        //    {
-        //        if (!this.disposed)
-        //        {
-        //            if (disposing)
-        //            {
-        //                if(components != null)
-        //                {
-        //                    this.components.Dispose();
-        //                    this.components = null;
-        //                }
-        //                if (this.surf != null)
-        //                {
-        //                    this.surf.Dispose();
-        //                    this.surf = null;
-        //                }
-        //                if (this.surfaceControl != null)
-        //                {
-        //                    this.surfaceControl.Dispose();
-        //                    this.surfaceControl = null;
-        //                }
-        //            }
-        //            this.disposed = true;
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        base.Dispose(disposing);
-        //    }
-        //}
 
         /// <summary>
         /// 
@@ -178,170 +144,6 @@ namespace SdlDotNetExamples.CDPlayer
         }
 
         private SpriteDictionary master = new SpriteDictionary();
-
-        #region Windows Form Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            //this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CDPlayerApp));
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxDrive = new System.Windows.Forms.ComboBox();
-            this.buttonPlay = new System.Windows.Forms.Button();
-            this.buttonPause = new System.Windows.Forms.Button();
-            this.buttonStop = new System.Windows.Forms.Button();
-            this.buttonEject = new System.Windows.Forms.Button();
-            this.labelStatus = new System.Windows.Forms.Label();
-            this.buttonNext = new System.Windows.Forms.Button();
-            this.buttonPrevious = new System.Windows.Forms.Button();
-            this.surfaceControl = new SdlDotNet.Windows.SurfaceControl();
-            //this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.surfaceControl)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(16, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "SelectDrive", CultureInfo.CurrentUICulture);
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // comboBoxDrive
-            // 
-            this.comboBoxDrive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxDrive.Location = new System.Drawing.Point(96, 8);
-            this.comboBoxDrive.Name = "comboBoxDrive";
-            this.comboBoxDrive.Size = new System.Drawing.Size(112, 21);
-            this.comboBoxDrive.TabIndex = 1;
-            this.comboBoxDrive.SelectedIndexChanged += new System.EventHandler(this.comboBoxDrive_SelectedIndexChanged);
-            // 
-            // buttonPlay
-            // 
-            this.buttonPlay.Location = new System.Drawing.Point(8, 88);
-            this.buttonPlay.Name = "buttonPlay";
-            this.buttonPlay.Size = new System.Drawing.Size(48, 40);
-            this.buttonPlay.TabIndex = 2;
-            this.buttonPlay.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "Play", CultureInfo.CurrentUICulture);
-            this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
-            // 
-            // buttonPause
-            // 
-            this.buttonPause.Location = new System.Drawing.Point(62, 88);
-            this.buttonPause.Name = "buttonPause";
-            this.buttonPause.Size = new System.Drawing.Size(48, 40);
-            this.buttonPause.TabIndex = 3;
-            this.buttonPause.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "Pause", CultureInfo.CurrentUICulture);
-            this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
-            // 
-            // buttonStop
-            // 
-            this.buttonStop.Location = new System.Drawing.Point(116, 88);
-            this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(48, 40);
-            this.buttonStop.TabIndex = 4;
-            this.buttonStop.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "Stop", CultureInfo.CurrentUICulture);
-            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
-            // 
-            // buttonEject
-            // 
-            this.buttonEject.Location = new System.Drawing.Point(170, 88);
-            this.buttonEject.Name = "buttonEject";
-            this.buttonEject.Size = new System.Drawing.Size(48, 40);
-            this.buttonEject.TabIndex = 5;
-            this.buttonEject.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "Eject", CultureInfo.CurrentUICulture);
-            this.buttonEject.Click += new System.EventHandler(this.buttonEject_Click);
-            // 
-            // labelStatus
-            // 
-            this.labelStatus.Location = new System.Drawing.Point(16, 40);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(328, 40);
-            this.labelStatus.TabIndex = 6;
-            this.labelStatus.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "Track", CultureInfo.CurrentUICulture);
-            // 
-            // buttonNext
-            // 
-            this.buttonNext.Location = new System.Drawing.Point(286, 88);
-            this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(58, 40);
-            this.buttonNext.TabIndex = 7;
-            this.buttonNext.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "Next", CultureInfo.CurrentUICulture);
-            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
-            // 
-            // buttonPrevious
-            // 
-            this.buttonPrevious.Location = new System.Drawing.Point(224, 88);
-            this.buttonPrevious.Name = "buttonPrevious";
-            this.buttonPrevious.Size = new System.Drawing.Size(56, 40);
-            this.buttonPrevious.TabIndex = 8;
-            this.buttonPrevious.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "Previous", CultureInfo.CurrentUICulture);
-            this.buttonPrevious.Click += new System.EventHandler(this.buttonPrev_Click);
-            // 
-            // surfaceControl
-            // 
-            this.surfaceControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.surfaceControl.Location = new System.Drawing.Point(4, 0);
-            this.surfaceControl.Name = "surfaceControl";
-            this.surfaceControl.Size = new System.Drawing.Size(336, 224);
-            this.surfaceControl.TabIndex = 0;
-            this.surfaceControl.TabStop = false;         
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoScroll = true;
-            this.panel1.AutoScrollMinSize = new System.Drawing.Size(250, 175);
-            this.panel1.Controls.Add(this.surfaceControl);
-            this.panel1.Location = new System.Drawing.Point(4, 134);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(348, 226);
-            this.panel1.TabIndex = 9;
-            // 
-            // CDPlayerApp
-            // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(362, 367);
-            this.Controls.Add(this.buttonPrevious);
-            this.Controls.Add(this.buttonNext);
-            this.Controls.Add(this.labelStatus);
-            this.Controls.Add(this.buttonEject);
-            this.Controls.Add(this.buttonStop);
-            this.Controls.Add(this.buttonPause);
-            this.Controls.Add(this.buttonPlay);
-            this.Controls.Add(this.comboBoxDrive);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "CDPlayerApp";
-            this.Text = SdlDotNetExamples.CDPlayer.CDPlayerApp.StringManager.GetString(
-                        "Title", CultureInfo.CurrentUICulture);
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.CDPlayer_Closing);
-            this.Load += new System.EventHandler(this.CDPlayer_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.surfaceControl)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
-        }
-        #endregion
 
         /// <summary>
         /// Entry point for App.
@@ -510,12 +312,6 @@ namespace SdlDotNetExamples.CDPlayer
                 this.surfaceControl.Height);
         }
 
-        //private void menuItem2_Click(object sender, System.EventArgs e)
-        //{
-        //    SdlDotNet.Core.Events.QuitApplication();
-        //    this.Close();
-        //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -538,8 +334,6 @@ namespace SdlDotNetExamples.CDPlayer
 
         private void CDPlayer_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Force the surface to be disposed.
-            //surf.Dispose();
         }
     }
 }
