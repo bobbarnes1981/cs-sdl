@@ -107,7 +107,6 @@ namespace SdlDotNet.Graphics.Sprites
                 if (s.Visible)
                 {
                     rects.Add(this[s]);
-                    //tempDict.Add(s, destination.Blit(s.Render(), s.Rectangle));
                     tempDict.Add(s, destination.Blit(s.Surface, s.Rectangle));
                 }
             }

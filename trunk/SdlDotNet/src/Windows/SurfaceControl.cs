@@ -54,6 +54,7 @@ namespace SdlDotNet.Windows
         public SurfaceControl()
         {
             InitializeComponent();
+            BlitRequestHandler = Blit;
         }
 
         #endregion
@@ -80,14 +81,28 @@ namespace SdlDotNet.Windows
             }
             try
             {
-                this.Image = surface.Bitmap;
+                if (this.InvokeRequired)
+                {
+                    Object[] args = { surface };
+                    this.Invoke(BlitRequestHandler, args);
+                }
+                else
+                {
+                    this.Image = surface.Bitmap;
+                }
             }
             catch (InvalidOperationException e)
             {
                 e.ToString();
             }
-
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        public delegate void BlitEvent(Surface surface);
+        private BlitEvent BlitRequestHandler;
 
         /// <summary>
         /// Copies surface onto this surface at a set position.
@@ -143,11 +158,11 @@ namespace SdlDotNet.Windows
         /// <param name="e">Contains the event data</param>
         protected override void OnSizeChanged(EventArgs e)
         {
-            base.OnSizeChanged(e);
             if (!this.DesignMode)
             {
                 SdlDotNet.Core.Events.Add(new VideoResizeEventArgs(this.Width, this.Height));
             }
+            base.OnSizeChanged(e);
         }
 
         /// <summary>
@@ -203,11 +218,11 @@ namespace SdlDotNet.Windows
         /// that contains the event data.</param>
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            base.OnKeyDown(e);
             if (!this.DesignMode)
             {
                 SdlDotNet.Core.Events.Add(new KeyboardEventArgs((SdlDotNet.Input.Key)Enum.Parse(typeof(SdlDotNet.Input.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, true));
             }
+            base.OnKeyDown(e);
         }
 
         /// <summary>
@@ -220,11 +235,11 @@ namespace SdlDotNet.Windows
         /// that contains the event data.</param>
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            base.OnKeyUp(e);
             if (!this.DesignMode)
             {
                 SdlDotNet.Core.Events.Add(new KeyboardEventArgs((SdlDotNet.Input.Key)Enum.Parse(typeof(SdlDotNet.Input.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, false));
             }
+            base.OnKeyUp(e);
         }
 
         #endregion
