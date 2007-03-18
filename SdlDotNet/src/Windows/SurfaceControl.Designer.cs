@@ -83,8 +83,10 @@ namespace SdlDotNet.Windows
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.Image = ((System.Drawing.Image)(resources.GetObject("$this.Image")));
             this.InitialImage = ((System.Drawing.Image)(resources.GetObject("$this.InitialImage")));
+            this.Size = new System.Drawing.Size(1, 1);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -290,11 +290,13 @@ namespace SdlDotNetExamples.CDPlayer
             }
         }
 
+        //Thread thread;
+
         private void CDPlayer_Load(object sender, System.EventArgs e)
         {
             Thread thread = new Thread(new ThreadStart(SdlDotNet.Core.Events.Run));
             thread.IsBackground = true;
-            thread.Name = "SDL";
+            thread.Name = "SDL.NET";
             thread.Priority = ThreadPriority.Normal;
             thread.Start();
         }
@@ -305,11 +307,18 @@ namespace SdlDotNetExamples.CDPlayer
         /// <param name="e"></param>
         protected override void OnResize(EventArgs e)
         {
-            base.OnResize(e);
-            surf =
-                new Surface(
-                this.surfaceControl.Width,
-                this.surfaceControl.Height);
+            try
+            {
+                surf =
+                    new Surface(
+                    this.surfaceControl.Width,
+                    this.surfaceControl.Height);
+                base.OnResize(e);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
         }
 
         /// <summary>
