@@ -60,14 +60,17 @@ namespace SdlDotNetExamples.SharpNes
         {
             foreach (string arg in args)
             {
-                if (arg == "-f")
+                if (!String.IsNullOrEmpty(arg) && arg.Trim().Length != 0)
                 {
-                    fullScreen = true;
-                    Mouse.ShowCursor = false;
-                }
-                else
-                {
-                    fileName = arg;
+                    if (arg.Trim() == "-f")
+                    {
+                        fullScreen = true;
+                        Mouse.ShowCursor = false;
+                    }
+                    else
+                    {
+                        fileName = arg.Trim();
+                    }
                 }
             }
             Run(fileName);
@@ -75,23 +78,45 @@ namespace SdlDotNetExamples.SharpNes
 
         public static void Run(string defaultRom)
         {
-            if (File.Exists(defaultRom))
+            if (String.IsNullOrEmpty(defaultRom))
             {
-                filePath = "";
-                fileDirectory = "";
+                throw new ArgumentNullException("defaultRom");
             }
-            else if (File.Exists(Path.Combine(fileDirectory, defaultRom)))
+            try
             {
-                filePath = "";
+                if (File.Exists(defaultRom))
+                {
+                    filePath = "";
+                    fileDirectory = "";
+                }
+                else if (File.Exists(Path.Combine(fileDirectory, defaultRom)))
+                {
+                    filePath = "";
+                }
+                //our game-specific bool
+                //FIXME: move this to a more sane place when I figure out where to put it
+                gameIsRunning = false;
+                myEngine = new NesEngine();
+                //If they gave us a ROM to run on the commandline, go ahead and start it up 
+                if (!String.IsNullOrEmpty(defaultRom))
+                {
+                    try
+                    {
+                        RunCart(Path.Combine(Path.Combine(filePath, fileDirectory), defaultRom));
+                    }
+                    catch (ArgumentException e)
+                    {
+                        Console.WriteLine(e.StackTrace);
+                        Console.WriteLine("defaultRom: " + defaultRom);
+                        Console.WriteLine("fileDirectory: " + fileDirectory);
+                    }
+                }
             }
-            //our game-specific bool
-            //FIXME: move this to a more sane place when I figure out where to put it
-            gameIsRunning = false;
-            myEngine = new NesEngine();
-            //If they gave us a ROM to run on the commandline, go ahead and start it up 
-            if (!String.IsNullOrEmpty(defaultRom))
+            catch (ArgumentException e)
             {
-                RunCart(Path.Combine(Path.Combine(filePath, fileDirectory), defaultRom));
+                Console.WriteLine(e.StackTrace);
+                Console.WriteLine("defaultRom: " + defaultRom);
+                Console.WriteLine("fileDirectory: " + fileDirectory);
             }
         }
 

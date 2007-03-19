@@ -695,6 +695,10 @@ namespace SdlDotNetExamples.SharpNes
                 //Console.Error.WriteLine(e);
                 return false;
             }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
 
             if (myCartridge.SaveRamPresent)
             {
@@ -721,6 +725,10 @@ namespace SdlDotNetExamples.SharpNes
                     e.ToString();
                     //Console.WriteLine("No SaveRAM found.");
                     //Ignore it, we'll make our own.
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.StackTrace);
                 }
             }
 
@@ -760,6 +768,10 @@ namespace SdlDotNetExamples.SharpNes
                         //Console.WriteLine("No SaveRAM found.");
                         //Ignore it, we'll make our own.
                     }
+                    catch (ArgumentException e)
+                    {
+                        Console.WriteLine(e.StackTrace);
+                    }
                 }
             }
 
@@ -783,6 +795,10 @@ namespace SdlDotNetExamples.SharpNes
                     e.ToString();
                     //Console.WriteLine("No SaveRAM found.");
                     //Ignore it, we'll make our own.
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.StackTrace);
                 }
             }
             hasQuit = true;
