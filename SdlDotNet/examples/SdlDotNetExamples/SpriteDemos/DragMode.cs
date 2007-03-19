@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile: DragMode.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
@@ -16,6 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System.Collections;
 using System.Drawing;
@@ -41,8 +43,8 @@ namespace SdlDotNetExamples.SpriteDemos
             // Create the fragment marbles
             int rows = 5;
             int cols = 5;
-            int sx = (800 - cols * 50) / 2;
-            int sy = (600 - rows * 50) / 2;
+            int sx = (SpriteDemosMain.Size.Width - cols * 50) / 2;
+            int sy = (SpriteDemosMain.Size.Height - rows * 50) / 2;
             SurfaceCollection m1 = LoadMarble("marble1");
             SurfaceCollection m2 = LoadMarble("marble2");
             AnimationCollection anim1 = new AnimationCollection();
@@ -69,33 +71,35 @@ namespace SdlDotNetExamples.SpriteDemos
                     Sprites.Add(dragSprite);
                 }
             }
-            Sprites.EnableMouseButtonEvent();
-            Sprites.EnableMouseMotionEvent();
-            Sprites.EnableTickEvent();
         }
 
         /// <summary>
         /// Adds the internal sprite manager to the outer one.
         /// </summary>
-        public override void Start(SpriteDictionary manager)
+        public override void Start()
         {
             Sprites.EnableTickEvent();
-            base.Start(manager);
+            Sprites.EnableMouseButtonEvent();
+            Sprites.EnableMouseMotionEvent();
         }
 
         /// <summary>
         /// Removes the internal manager from the controlling manager.
         /// </summary>
-        public override void Stop(SpriteDictionary manager)
+        public override void Stop()
         {
-            Sprites.DisableAllEvents();
-            base.Stop(manager);
+            Sprites.DisableTickEvent();
+            Sprites.DisableMouseButtonEvent();
+            Sprites.DisableMouseMotionEvent();
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() { return "Drag"; }
+        public override string ToString() 
+        { 
+            return "Drag"; 
+        }
     }
 }

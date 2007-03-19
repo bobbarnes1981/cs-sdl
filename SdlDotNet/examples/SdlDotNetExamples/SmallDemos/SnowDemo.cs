@@ -1,3 +1,4 @@
+#region LICENSE
 /* This file is part of SnowDemo
  * SnowDemo.cs, (c) 2005 David Hudson
  * based on code by (c) 2003 Sijmen Mulder
@@ -16,6 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
+#endregion LICENSE
 
 using System;
 using System.IO;

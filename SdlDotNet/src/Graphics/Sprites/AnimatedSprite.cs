@@ -356,7 +356,6 @@ namespace SdlDotNet.Graphics.Sprites
             }
         }
 
-
         #endregion
 
         #region Private Methods
