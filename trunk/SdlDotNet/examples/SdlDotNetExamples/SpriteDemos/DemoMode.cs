@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile: DemoMode.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
@@ -16,6 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System.Collections;
 using System.Drawing;
@@ -45,8 +47,8 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         private SpriteDictionary sprites = new SpriteDictionary();
         static Random rand = new Random();
-        static string data_directory = @"Data/";
-        static string filepath = @"../../";
+        static string dataDirectory = "Data";
+        static string filePath = Path.Combine("..", "..");
 
         #region Drawables
         /// <summary>
@@ -54,12 +56,12 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         protected static SurfaceCollection LoadFloor()
         {
-            if (File.Exists(data_directory + "floor-00.png"))
+            if (File.Exists(Path.Combine(dataDirectory, "floor-00.png")))
             {
-                filepath = "";
+                filePath = "";
             }
             SurfaceCollection id = new SurfaceCollection();
-            id.Add(filepath + data_directory + "floor", ".png");
+            id.Add(Path.Combine(filePath, Path.Combine(dataDirectory, "floor")), ".png");
             return id;
         }
 
@@ -69,22 +71,14 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         protected static SurfaceCollection LoadMarble(string name)
         {
-            // We cache it to speed things up
-            SurfaceCollection icd =
-                (SurfaceCollection)marbles["icd:" + name];
-
-            if (icd != null)
+            if (File.Exists(Path.Combine(dataDirectory, Path.Combine(name, ".png"))))
             {
-                return icd;
-            }
-            if (File.Exists(data_directory + name + ".png"))
-            {
-                filepath = "";
+                filePath = "";
             }
 
             // Load the marble and cache it before returning
-            icd = new SurfaceCollection();
-            icd.Add(filepath + data_directory + name + ".png", new Size(50, 50));
+            SurfaceCollection icd = new SurfaceCollection();
+            icd.Add(Path.Combine(filePath, Path.Combine(dataDirectory, name + ".png")), new Size(50, 50));
             marbles["icd:" + name] = icd;
             return icd;
         }
@@ -103,13 +97,13 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         protected static SurfaceCollection LoadTiledMarble(string name)
         {
-            if (File.Exists(data_directory + name + ".png"))
+            if (File.Exists(Path.Combine(dataDirectory, Path.Combine(name, ".png"))))
             {
-                filepath = "";
+                filePath = "";
             }
             // Load the marble
             SurfaceCollection td = new SurfaceCollection();
-            td.Add(new Surface(filepath + data_directory + name + ".png"), new Size(50, 50));
+            td.Add(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, Path.Combine(name, ".png")))), new Size(50, 50));
             return td;
         }
         #endregion
@@ -119,29 +113,18 @@ namespace SdlDotNetExamples.SpriteDemos
         /// Indicates to the demo page that it should start displaying its
         /// data in the given sprite manager.
         /// </summary>
-        public virtual void Start(SpriteDictionary manager)
+        public virtual void Start()
         {
-            manager.Clear();
-            if (manager == null)
-            {
-                throw new ArgumentNullException("manager");
-            }
-            manager.Add(Sprites);
         }
 
         /// <summary>
         /// Indicates to the demo page that it should stop displaying its
         /// data in the given sprite manager.
         /// </summary>
-        public virtual void Stop(SpriteDictionary manager)
+        public virtual void Stop()
         {
-            if (manager == null)
-            {
-                throw new ArgumentNullException("manager");
-            }
-            manager.Remove(Sprites);
-            manager.Clear();
         }
+
         #endregion
 
         /// <summary>
@@ -183,6 +166,7 @@ namespace SdlDotNetExamples.SpriteDemos
                 return sprites;
             }
         }
+
         #region IDisposable Members
 
         private bool disposed;
@@ -206,8 +190,8 @@ namespace SdlDotNetExamples.SpriteDemos
                     {
                         if (s != null)
                         {
-                            s.Dispose();
                             this.sprites.Remove(s);
+                            s.Dispose();
                         }
                     }
                 }

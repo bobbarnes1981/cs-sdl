@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile: SpriteGuiDemosMain.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
@@ -16,6 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -33,14 +35,17 @@ using SdlDotNetExamples.SpriteDemos;
 namespace SdlDotNetExamples.LargeDemos
 {
     /// <summary>
-    /// The SpriteGuiDemosMain is a general testbed and display of various features
-    /// in the MFGames.Sdl library. It includes animated sprites and
+    /// The SpriteDemosMain is a general testbed and display of various features
+    /// in the SDL.NET library. It includes animated sprites and
     /// movement. To run, it currently assumes that the current
-    /// directory has a "test/" directory underneath it containing
+    /// directory has a "Data" directory underneath it containing
     /// various images.
     /// </summary>
     public class SpriteDemosMain : IDisposable
     {
+        static int width = 800;
+        static int height = 600;
+
         /// <summary>
         /// 
         /// </summary>
@@ -61,50 +66,18 @@ namespace SdlDotNetExamples.LargeDemos
                 new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
             Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
-
-            // Create the screen
-            int width = 800;
-            int height = 600;
-
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Sprite Demos";
             screen = Video.SetVideoMode(width, height);
 
-            // Set up the master sprite container
-            SetupGui();
-
             // Load demos
             LoadDemos();
-
-            // Loop until the system indicates it should stop
-            //Console.WriteLine("Welcome to the SDL.NET Demo!");
 
             // Start up the ticker (and animation)
             SwitchDemo(0);
             Events.Fps = 100;
             Events.Run();
         }
-
-        #region GUI
-
-        //private int[] fpsSpeeds =
-        //    new int[] { 1, 5, 10, 15, 20, 30, 40, 50, 60, 100 };
-        //string data_directory = @"Data/";
-        //string filepath = @"../../";
-        private static void SetupGui()
-        {
-            // Set up the demo sprite containers
-            master.EnableMouseButtonEvent();
-            master.EnableMouseMotionEvent();
-            master.EnableTickEvent();
-
-            //if (File.Exists(data_directory + "comic.ttf"))
-            //{
-            //    filepath = "";
-            //}
-        }
-
-        #endregion
 
         #region Demos
         private ArrayList demos = new ArrayList();
@@ -130,9 +103,6 @@ namespace SdlDotNetExamples.LargeDemos
 
         private void LoadDemos()
         {
-            // Add the sprite manager to the master
-            master.Add(manager);
-
             // Load the actual demos
             LoadDemo(new BounceMode());
             LoadDemo(new FontMode());
@@ -146,26 +116,25 @@ namespace SdlDotNetExamples.LargeDemos
             // Stop the demo, if any
             if (currentDemo != null)
             {
-                currentDemo.Stop(manager);
+                currentDemo.Stop();
                 currentDemo = null;
             }
         }
 
         private void SwitchDemo(int demo)
         {
-            // Stop the demo, if any
-            StopDemo();
-
             // Ignore if the demo request is too high
             if (demo < 0 || demo + 1 > demos.Count)
             {
                 return;
             }
 
+            // Stop the demo, if any
+            StopDemo();
+
             // Start it
             currentDemo = (DemoMode)demos[demo];
-            currentDemo.Start(manager);
-            //Console.WriteLine("Switched to " + currentDemo + " mode");
+            currentDemo.Start();
         }
         #endregion
 
@@ -215,7 +184,6 @@ namespace SdlDotNetExamples.LargeDemos
             {
                 screen.Blit(currentDemo.RenderSurface());
             }
-            screen.Blit(master);
             screen.Update();
         }
 
@@ -227,8 +195,7 @@ namespace SdlDotNetExamples.LargeDemos
         #endregion
 
         #region Properties
-        private static SpriteDictionary master = new SpriteDictionary();
-        private static SpriteDictionary manager = new SpriteDictionary();
+
         private Surface screen;
 
         /// <summary>
@@ -238,7 +205,7 @@ namespace SdlDotNetExamples.LargeDemos
         {
             get
             {
-                return new Size(800, 600);
+                return new Size(width, height);
             }
         }
         #endregion
@@ -278,22 +245,6 @@ namespace SdlDotNetExamples.LargeDemos
                 if (disposing)
                 {
                     this.screen.Dispose();
-                    foreach (Sprite s in SpriteDemosMain.manager.Keys)
-                    {
-                        IDisposable disposableObj = s as IDisposable;
-                        if (disposableObj != null)
-                        {
-                            disposableObj.Dispose();
-                        }
-                    }
-                    foreach (Sprite s in SpriteDemosMain.master.Keys)
-                    {
-                        IDisposable disposableObj = s as IDisposable;
-                        if (disposableObj != null)
-                        {
-                            disposableObj.Dispose();
-                        }
-                    }
                 }
                 this.disposed = true;
             }

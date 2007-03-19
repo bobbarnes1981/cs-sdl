@@ -485,15 +485,26 @@ namespace SdlDotNet.Graphics.Sprites
             Events.AppActive -= new EventHandler<ActiveEventArgs>(Update);
         }
 
-        /// <summary>
-        /// Disables Event for SpriteDictionary
-        /// </summary>
-        public void DisableAllEvents()
-        {
-            Events.AppActive -= new EventHandler<ActiveEventArgs>(Update);
-            Events.JoystickAxisMotion -= new EventHandler<JoystickAxisEventArgs>(Update);
+        ///// <summary>
+        ///// Disables Event for SpriteDictionary
+        ///// </summary>
+        //public void DisableAllEvents()
+        //{
+        //    Events.AppActive -= new EventHandler<ActiveEventArgs>(Update);
+        //    Events.JoystickAxisMotion -= new EventHandler<JoystickAxisEventArgs>(Update);
+
+        //    Events.JoystickBallMotion -= new EventHandler<JoystickBallEventArgs>(Update);
+        //    Events.JoystickButtonDown -= new EventHandler<JoystickButtonEventArgs>(Update);
+        //    Events.JoystickButtonUp -= new EventHandler<JoystickButtonEventArgs>(Update);
+        //    Events.JoystickHatMotion -= new EventHandler<JoystickHatEventArgs>(Update);
+        //    Events.KeyboardUp -= new EventHandler<KeyboardEventArgs>(Update);
+        //    Events.KeyboardDown -= new EventHandler<KeyboardEventArgs>(Update);
+        //    Events.MouseButtonDown -= new EventHandler<MouseButtonEventArgs>(Update);
+        //    Events.MouseButtonUp -= new EventHandler<MouseButtonEventArgs>(Update);
+        //    Events.MouseMotion -= new EventHandler<MouseMotionEventArgs>(Update);
+        //    Events.UserEvent -= new EventHandler<UserEventArgs>(Update);
         
-        }
+        //}
 
         /// <summary>
         /// Disables Event for SpriteDictionary

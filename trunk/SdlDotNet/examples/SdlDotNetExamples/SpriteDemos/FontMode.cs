@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile: FontMode.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
@@ -16,6 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -31,28 +33,27 @@ namespace SdlDotNetExamples.SpriteDemos
     public class FontMode : DemoMode
     {
         private BoundedTextSprite moving;
-        string data_directory = @"Data/";
-        string filepath = @"../../";
+        string dataDirectory = "Data";
+        string filePath = Path.Combine("..", "..");
 
         /// <summary>
         /// Constructs the internal sprites needed for our demo.
         /// </summary>
         public FontMode()
         {
-            if (File.Exists(data_directory + "comic.ttf"))
+            if (File.Exists(Path.Combine(dataDirectory, "comic.ttf")))
             {
-                filepath = "";
+                filePath = "";
             }
-            Console.WriteLine("Hello from FontMode");
             // Create our fonts
             SdlDotNet.Graphics.Font f1 =
-                new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 24);
+                new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, "comicbd.ttf")), 24);
             SdlDotNet.Graphics.Font f2 =
-                new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 48);
+                new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, "comicbd.ttf")), 48);
             SdlDotNet.Graphics.Font f3 =
-                new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 72);
+                new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, "comicbd.ttf")), 72);
             SdlDotNet.Graphics.Font f4 =
-                new SdlDotNet.Graphics.Font(filepath + data_directory + "comicbd.ttf", 15);
+                new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, "comicbd.ttf")), 15);
 
             // Create our text sprites
             Color c2 = Color.FromArgb(255, 0, 123);
@@ -64,7 +65,6 @@ namespace SdlDotNetExamples.SpriteDemos
             Sprites.Add(new TextSprite("jumps over the lazy", f2, new Point(5, 280)));
             Sprites.Add(new TextSprite("dog. 1234567890", f2, new Point(5, 360)));
 
-            //int w = SpriteDemosMain.Size.Width - 10;
             Sprites.Add(new BoundedTextSprite("one", f4,
                 0.1, 0.5, new Point(5, 450)));
             Sprites.Add(new BoundedTextSprite("one", f4,
@@ -78,25 +78,22 @@ namespace SdlDotNetExamples.SpriteDemos
             moving = new BoundedTextSprite("two", f4,
                 0.0, 0.5, new Point(10, 510));
             Sprites.Add(moving);
-            Sprites.EnableTickEvent();
         }
 
         /// <summary>
         /// Adds the internal sprite manager to the outer one.
         /// </summary>
-        public override void Start(SpriteDictionary manager)
+        public override void Start()
         {
             Sprites.EnableTickEvent();
-            base.Start(manager);
         }
 
         /// <summary>
         /// Removes the internal manager from the controlling manager.
         /// </summary>
-        public override void Stop(SpriteDictionary manager)
+        public override void Stop()
         {
-            Sprites.DisableAllEvents();
-            base.Stop(manager);
+            Sprites.DisableTickEvent();
         }
 
         #region Operators

@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile: BoundedSprite.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
@@ -16,6 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.Drawing;
@@ -29,9 +31,10 @@ namespace SdlDotNetExamples.SpriteDemos
     /// <summary>
     /// 
     /// </summary>
-    public class BoundedSprite : AnimatedDemoSprite
+    public class BoundedSprite : AnimatedSprite
     {
         private Rectangle bounds = new Rectangle();
+        static Random rand = new Random();
 
         /// <summary>
         /// 
@@ -52,6 +55,17 @@ namespace SdlDotNetExamples.SpriteDemos
             tempWidth = this.bounds.Size.Width - (int)surfaces.Size.Width;
             tempHeight = this.bounds.Size.Height - (int)surfaces.Size.Height;
             this.bounds.Size = new Size(tempWidth, tempHeight);
+            base.Frame = rand.Next(surfaces.Count);
+            if (rand.Next(2) % 2 == 0)
+            {
+                this.AnimateForward = true;
+            }
+            else
+            {
+                this.AnimateForward = false;
+            }
+
+            this.Animate = true;
         }
 
         /// <summary>

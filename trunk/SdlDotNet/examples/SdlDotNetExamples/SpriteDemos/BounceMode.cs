@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile: BounceMode.cs,v $
  * Copyright (C) 2004 D. R. E. Moonfire (d.moonfire@mfgames.com)
@@ -16,6 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System.Drawing;
 using System;
@@ -52,25 +54,22 @@ namespace SdlDotNetExamples.SpriteDemos
                     rand.Next(rect.Top, rect.Bottom), 1));
                 Sprites.Add(bounceSprite);
             }
-            Sprites.EnableTickEvent();
         }
 
         /// <summary>
         /// Adds the internal sprite manager to the outer one.
         /// </summary>
-        public override void Start(SpriteDictionary manager)
+        public override void Start()
         {
             Sprites.EnableTickEvent();
-            base.Start(manager);
         }
 
         /// <summary>
         /// Removes the internal manager from the controlling manager.
         /// </summary>
-        public override void Stop(SpriteDictionary manager)
+        public override void Stop()
         {
-            Sprites.DisableAllEvents();
-            base.Stop(manager);
+            Sprites.DisableTickEvent();
         }
 
         /// <summary>

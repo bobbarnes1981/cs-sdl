@@ -51,9 +51,6 @@ namespace SdlDotNet.Graphics
         /// <param name="extension">file extension of images</param>
         public virtual void Add(string baseName, string extension)
         {
-            // Save the fields
-            //this.filename = baseName + "-*" + extension;
-
             // Load the images into memory
             int i = 0;
 
