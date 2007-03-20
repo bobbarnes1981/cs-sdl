@@ -35,7 +35,6 @@ namespace SdlDotNetExamples.SpriteDemos
     /// </summary>
     public class BounceSprite : BoundedSprite
     {
-        static Random rand = new Random();
         private int dx;
         private int dy;
 
@@ -48,8 +47,8 @@ namespace SdlDotNetExamples.SpriteDemos
         public BounceSprite(SurfaceCollection surfaces, Rectangle rect, Vector coordinates)
             : base(surfaces, rect, coordinates)
         {
-            this.dx = rand.Next(-10, 11);
-            this.dy = rand.Next(-10, 11);
+            this.dx = SpriteRandomizer.Next(-10, 11);
+            this.dy = SpriteRandomizer.Next(-10, 11);
         }
 
         /// <summary>
@@ -66,8 +65,8 @@ namespace SdlDotNetExamples.SpriteDemos
             this.Y += (int)(args.SecondsElapsed * 10 * dy);
 
             // Adjust our entropy
-            dx += rand.Next(-5, 6);
-            dy += rand.Next(-5, 6);
+            dx += SpriteRandomizer.Next(-5, 6);
+            dy += SpriteRandomizer.Next(-5, 6);
 
             // Call the base which also normalizes the bounds
             base.Update(args);
@@ -75,22 +74,22 @@ namespace SdlDotNetExamples.SpriteDemos
             // Normalize the directions
             if (this.X == SpriteBounds.Left)
             {
-                dx = rand.Next(1, 11);
+                dx = SpriteRandomizer.Next(1, 11);
             }
 
             if (this.X == SpriteBounds.Right)
             {
-                dx = ((-1) * rand.Next(1, 11));
+                dx = ((-1) * SpriteRandomizer.Next(1, 11));
             }
 
             if (this.Y == SpriteBounds.Top)
             {
-                dy = rand.Next(1, 11);
+                dy = SpriteRandomizer.Next(1, 11);
             }
 
             if (this.Y == SpriteBounds.Bottom)
             {
-                dy = ((-1) * rand.Next(1, 11));
+                dy = ((-1) * SpriteRandomizer.Next(1, 11));
             }
         }
 

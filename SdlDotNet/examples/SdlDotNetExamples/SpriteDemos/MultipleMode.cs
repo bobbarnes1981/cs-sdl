@@ -37,12 +37,7 @@ namespace SdlDotNetExamples.SpriteDemos
         private Sprite sprite2;
         private Sprite sprite3;
         private Sprite sprite4;
-        static Random rand = new Random();
-
         private Size size;
-
-        private SpriteDictionary all = new SpriteDictionary();
-
         Rectangle rect;
 
         /// <summary>
@@ -50,7 +45,6 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public MultipleMode()
         {
-
             // Create the fragment marbles
             SurfaceCollection td = LoadMarble("marble1");
             SurfaceCollection td2 = LoadMarble("marble2");
@@ -67,7 +61,6 @@ namespace SdlDotNetExamples.SpriteDemos
             size = new Size(floorTiles[0].Size.Width * cols,
                 floorTiles[0].Size.Height * rows);
             rect = new Rectangle(new Point(0, 0), size);
-            Console.WriteLine("MultiViewPort Size: " + size);
 
             for (int i = 0; i < cols; i++)
             {
@@ -78,7 +71,7 @@ namespace SdlDotNetExamples.SpriteDemos
                         new AnimatedSprite(floorTiles,
                         new Point(i * floorTiles[0].Size.Width,
                         j * floorTiles[0].Size.Height));
-                    all.Add(dw);
+                    this.Sprites.Add(dw);
                 }
             }
 
@@ -88,43 +81,43 @@ namespace SdlDotNetExamples.SpriteDemos
                 BounceSprite d =
                     new BounceSprite(td,
                     rect,
-                    new Vector(rand.Next(rect.Left, rect.Right -
+                    new Vector(Randomizer.Next(rect.Left, rect.Right -
                     (int)td.Size.Width),
-                    rand.Next(rect.Top, rect.Bottom -
+                    Randomizer.Next(rect.Top, rect.Bottom -
                     (int)td.Size.Height), 1));
-                all.Add(d);
+                this.Sprites.Add(d);
             }
 
             // Only one container may be tickable when they all talk to the
             // same inner tick manager.
 
             // Set up container #1
-            sprite1 = new BounceSprite(td2, rect, new Vector(rand.Next(rect.Left, rect.Right -
+            sprite1 = new BounceSprite(td2, rect, new Vector(Randomizer.Next(rect.Left, rect.Right -
                 (int)td2.Size.Width),
-                rand.Next(rect.Top, rect.Bottom -
-                (int)td2.Size.Height),1));
-            all.Add(sprite1);
+                Randomizer.Next(rect.Top, rect.Bottom -
+                (int)td2.Size.Height), 1));
+            this.Sprites.Add(sprite1);
 
             // Set up container #2
-            sprite2 = new BounceSprite(td3, rect, new Vector(rand.Next(rect.Left, rect.Right -
+            sprite2 = new BounceSprite(td3, rect, new Vector(Randomizer.Next(rect.Left, rect.Right -
                 (int)td3.Size.Width),
-                rand.Next(rect.Top, rect.Bottom -
+                Randomizer.Next(rect.Top, rect.Bottom -
                 (int)td3.Size.Height), 1));
-            all.Add(sprite2);
+            this.Sprites.Add(sprite2);
 
             // Set up container #3
-            sprite3 = new BounceSprite(td4, rect, new Vector(rand.Next(rect.Left, rect.Right -
+            sprite3 = new BounceSprite(td4, rect, new Vector(Randomizer.Next(rect.Left, rect.Right -
                 (int)td4.Size.Width),
-                rand.Next(rect.Top, rect.Bottom -
-                (int)td4.Size.Height),1));
-            all.Add(sprite3);
+                Randomizer.Next(rect.Top, rect.Bottom -
+                (int)td4.Size.Height), 1));
+            this.Sprites.Add(sprite3);
 
             // Set up container #4
-            sprite4 = new BounceSprite(td5, rect, new Vector(rand.Next(rect.Left, rect.Right -
+            sprite4 = new BounceSprite(td5, rect, new Vector(Randomizer.Next(rect.Left, rect.Right -
                 (int)td5.Size.Width),
-                rand.Next(rect.Top, rect.Bottom -
+                Randomizer.Next(rect.Top, rect.Bottom -
                 (int)td5.Size.Height), 1));
-            all.Add(sprite4);
+            this.Sprites.Add(sprite4);
 
             surf1 = this.Surface.CreateCompatibleSurface(380, 250);
             surf2 = this.Surface.CreateCompatibleSurface(380, 250);
@@ -143,7 +136,7 @@ namespace SdlDotNetExamples.SpriteDemos
         public override Surface RenderSurface()
         {
             this.Surface.Fill(Color.Black);
-            foreach (Sprite s in all.Keys)
+            foreach (Sprite s in this.Sprites.Keys)
             {
                 Rectangle offsetRect = s.Rectangle;
                 offsetRect.Offset(AdjustBoundedViewport(sprite1, surf1));
@@ -273,7 +266,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public override void Start()
         {
-            all.EnableTickEvent();
+            this.Sprites.EnableTickEvent();
         }
 
         /// <summary>
@@ -281,7 +274,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public override void Stop()
         {
-            all.DisableTickEvent();
+            this.Sprites.DisableTickEvent();
         }
 
         /// <summary>
@@ -301,21 +294,12 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            try
             {
-                try
+                if (!this.disposed)
                 {
                     if (disposing)
                     {
-                        this.Surface.Dispose();
-                        foreach (Sprite s in this.Sprites.Keys)
-                        {
-                            IDisposable disposableObj = s as IDisposable;
-                            if (disposableObj != null)
-                            {
-                                disposableObj.Dispose();
-                            }
-                        }
                         this.surf1.Dispose();
                         this.surf2.Dispose();
                         this.surf3.Dispose();
@@ -327,13 +311,12 @@ namespace SdlDotNetExamples.SpriteDemos
                     }
                     this.disposed = true;
                 }
-                finally
-                {
-                    base.Dispose(disposing);
-                    this.disposed = true;
-                }
             }
-            base.Dispose(disposing);
+            finally
+            {
+                base.Dispose(disposing);
+            }
+
         }
     }
 }

@@ -315,7 +315,7 @@ namespace SdlDotNetExamples.CDPlayer
                     this.surfaceControl.Height);
                 base.OnResize(e);
             }
-            catch (Exception ex)
+            catch (AccessViolationException ex)
             {
                 Console.WriteLine(ex.StackTrace);
             }

@@ -39,8 +39,6 @@ namespace SdlDotNetExamples.SpriteDemos
         private Sprite sprite;
         Collection<Sprite> spriteSingle = new Collection<Sprite>();
         private Size size;
-        static Random rand = new Random();
-
         Rectangle rect;
 
         /// <summary>
@@ -98,9 +96,9 @@ namespace SdlDotNetExamples.SpriteDemos
             }
 
             // Load the trigger sprite
-            sprite = new BounceSprite(td2, rect, new Vector(rand.Next(rect.Left, rect.Right -
+            sprite = new BounceSprite(td2, rect, new Vector(Randomizer.Next(rect.Left, rect.Right -
                 (int)td2.Size.Width),
-                rand.Next(rect.Top, rect.Bottom -
+                Randomizer.Next(rect.Top, rect.Bottom -
                 (int)td2.Size.Height), 1));
             Sprites.Add(sprite);
             CenterSprite.Add(sprite);
@@ -112,13 +110,12 @@ namespace SdlDotNetExamples.SpriteDemos
                 BounceSprite bounceSprite =
                     new BounceSprite(td,
                     rect,
-                    new Vector(rand.Next(rect.Left, rect.Right -
+                    new Vector(Randomizer.Next(rect.Left, rect.Right -
                     (int)td.Size.Width),
-                    rand.Next(rect.Top, rect.Bottom -
+                    Randomizer.Next(rect.Top, rect.Bottom -
                     (int)td.Size.Height), 1));
                 Sprites.Add(bounceSprite);
             }
-
         }
         
         /// <summary>

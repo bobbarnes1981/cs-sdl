@@ -35,7 +35,6 @@ namespace SdlDotNetExamples.SpriteDemos
     /// </summary>
     public class BounceMode : DemoMode
     {
-        static Random rand = new Random();
         /// <summary>
         /// Constructs the internal sprites needed for our demo.
         /// </summary>
@@ -50,8 +49,8 @@ namespace SdlDotNetExamples.SpriteDemos
                 BounceSprite bounceSprite =
                     new BounceSprite(d,
                     new Rectangle(new Point(0, 0), SpriteDemosMain.Size),
-                    new Vector(rand.Next(rect.Left, rect.Right),
-                    rand.Next(rect.Top, rect.Bottom), 1));
+                    new Vector(Randomizer.Next(rect.Left, rect.Right),
+                    Randomizer.Next(rect.Top, rect.Bottom), 1));
                 Sprites.Add(bounceSprite);
             }
         }
@@ -76,6 +75,9 @@ namespace SdlDotNetExamples.SpriteDemos
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() { return "Bounce"; }
+        public override string ToString() 
+        { 
+            return "Bounce"; 
+        }
     }
 }

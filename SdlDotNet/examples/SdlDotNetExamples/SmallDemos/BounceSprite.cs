@@ -84,13 +84,9 @@ namespace SdlDotNetExamples.SmallDemos
             //Call the base method
             base.Update(args);
 
-            //set the surface to point to the new frame. This creates the animation
-            //this.Surface = this.Surfaces[Frame];
-
             //Change the sprite coordinates if the sprite is not being dragged
             if (!this.BeingDragged)
             {
-                //Console.WriteLine("Sprite: " + i++);
                 this.X += dx;
                 this.Y += dy;
 
