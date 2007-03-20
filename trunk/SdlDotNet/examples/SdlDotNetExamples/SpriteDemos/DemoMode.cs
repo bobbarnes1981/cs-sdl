@@ -47,6 +47,12 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         private SpriteDictionary sprites = new SpriteDictionary();
         static Random rand = new Random();
+
+        public static Random Randomizer
+        {
+            get { return DemoMode.rand; }
+            set { DemoMode.rand = value; }
+        }
         static string dataDirectory = "Data";
         static string filePath = Path.Combine("..", "..");
 
@@ -89,7 +95,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <returns></returns>
         protected static SurfaceCollection LoadRandomMarble()
         {
-            return LoadMarble("marble" + (rand.Next() % 6 + 1));
+            return LoadMarble("marble" + (Randomizer.Next() % 6 + 1));
         }
 
         /// <summary>

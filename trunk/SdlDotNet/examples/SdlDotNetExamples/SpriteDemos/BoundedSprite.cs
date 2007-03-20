@@ -36,6 +36,12 @@ namespace SdlDotNetExamples.SpriteDemos
         private Rectangle bounds = new Rectangle();
         static Random rand = new Random();
 
+        public static Random SpriteRandomizer
+        {
+            get { return BoundedSprite.rand; }
+            set { BoundedSprite.rand = value; }
+        }
+
         /// <summary>
         /// 
         /// </summary>
