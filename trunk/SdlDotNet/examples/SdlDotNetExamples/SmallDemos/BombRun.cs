@@ -1,3 +1,4 @@
+#region LICENSE
 /* This file is part of BombRun
  * (c) 2003 Sijmen Mulder
  *
@@ -15,6 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -44,8 +46,8 @@ namespace SdlDotNetExamples.SmallDemos
         static SpriteDictionary players = new SpriteDictionary();
         static SpriteDictionary bullets = new SpriteDictionary();
         static SpriteDictionary master = new SpriteDictionary();
-        static string data_directory = @"Data/";
-        static string filepath = @"../../";
+        static string dataDirectory = "Data";
+        static string filePath = Path.Combine("..", "..");
 
         /// <summary>
         /// Lesson Title
@@ -64,24 +66,24 @@ namespace SdlDotNetExamples.SmallDemos
         [STAThread]
         public static void Run()
         {
-            if (File.Exists(data_directory + "Background1.png"))
+            if (File.Exists(Path.Combine(dataDirectory, "Background1.png")))
             {
-                filepath = "";
+                filePath = "";
             }
             Video.WindowIcon();
             Video.WindowCaption =
                 "SDL.NET - Bomb Run";
             screen = Video.SetVideoMode(640, 480);
-            tempSurface = new Surface(filepath + data_directory + "Background1.png");
+            tempSurface = new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "Background1.png")));
             background = tempSurface.Convert();
-            tempSurface = new Surface(filepath + data_directory + "Background2.png");
+            tempSurface = new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "Background2.png")));
             alternateBackground = tempSurface.Convert();
 
             temporary = screen.CreateCompatibleSurface(32, 32);
             temporary.TransparentColor = Color.FromArgb(0, 255, 0, 255);
             temporary.Transparent = true;
 
-            player = new Player(new Surface(filepath + data_directory + "Head.bmp"), new Point(screen.Width / 2 - 16,
+            player = new Player(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "Head.bmp"))), new Point(screen.Width / 2 - 16,
                 screen.Height - 32));
             players.Add(player, player.Rectangle);
             players.EnableKeyboardEvent();
@@ -90,7 +92,7 @@ namespace SdlDotNetExamples.SmallDemos
 
             for (int i = 0; i < 25; i++)
             {
-                bombs.Add(new Bomb(new Surface(filepath + data_directory + "Bomb.bmp")), new Rectangle());
+                bombs.Add(new Bomb(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "Bomb.bmp")))), new Rectangle());
             }
             foreach (Sprite bomb in bombs.Keys)
             {

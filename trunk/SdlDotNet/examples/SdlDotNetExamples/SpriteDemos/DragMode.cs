@@ -62,11 +62,15 @@ namespace SdlDotNetExamples.SpriteDemos
                 for (int j = 0; j < rows; j++)
                 {
                     dragSprite = new DragSprite(frames["marble1"],
-                        new Vector(sx + i * 50, sy + j * 50, 1),
-                        new Rectangle(new Point(0, 0), SpriteDemosMain.Size));
+                        new Point(sx + i * 50, sy + j * 50)
+                        );
                     dragSprite.Animations.Add("marble1", anim1);
                     dragSprite.Animations.Add("marble2", anim2);
-
+                    dragSprite.Animate = true;
+                    if (Randomizer.Next(2) == 1)
+                    {
+                        dragSprite.AnimateForward = false;
+                    }
                     Thread.Sleep(10);
                     Sprites.Add(dragSprite);
                 }

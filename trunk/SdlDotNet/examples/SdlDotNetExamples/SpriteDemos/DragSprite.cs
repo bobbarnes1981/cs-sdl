@@ -34,7 +34,7 @@ namespace SdlDotNetExamples.SpriteDemos
     /// <summary>
     /// 
     /// </summary>
-    public class DragSprite : BoundedSprite
+    public class DragSprite : AnimatedSprite
     {
         /// <summary>
         /// 
@@ -43,9 +43,8 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <param name="key"></param>
         /// <param name="coordinates"></param>
         /// <param name="bounds"></param>
-        public DragSprite(SurfaceCollection frames, Vector coordinates,
-            Rectangle bounds)
-            : base(frames, bounds, coordinates)
+        public DragSprite(SurfaceCollection frames, Point coordinates)
+            : base(frames, coordinates)
         {
             if (frames == null)
             {
@@ -125,7 +124,6 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
-
             try
             {
                 if (!this.disposed)

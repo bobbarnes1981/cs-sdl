@@ -25,6 +25,7 @@ using System.Collections;
 using System.Drawing;
 using System.Threading;
 using System.Globalization;
+using System.Collections.Generic;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
@@ -62,25 +63,23 @@ namespace SdlDotNetExamples.LargeDemos
         /// </summary>
         public void Go()
         {
+            // Load demos
+            LoadDemos();
+            SwitchDemo(0);
+
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - Sprite Demos";
+            screen = Video.SetVideoMode(width, height);
+            Events.Fps = 100;
             Events.KeyboardDown +=
                 new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
             Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
-            Video.WindowIcon();
-            Video.WindowCaption = "SDL.NET - Sprite Demos";
-            screen = Video.SetVideoMode(width, height);
-
-            // Load demos
-            LoadDemos();
-
-            // Start up the ticker (and animation)
-            SwitchDemo(0);
-            Events.Fps = 100;
             Events.Run();
         }
 
         #region Demos
-        private ArrayList demos = new ArrayList();
+        private List<DemoMode> demos = new List<DemoMode>();
 
         private static DemoMode currentDemo;
 
@@ -104,9 +103,9 @@ namespace SdlDotNetExamples.LargeDemos
         private void LoadDemos()
         {
             // Load the actual demos
-            LoadDemo(new BounceMode());
+            //LoadDemo(new BounceMode());
             //LoadDemo(new FontMode());
-            //LoadDemo(new DragMode());
+            LoadDemo(new DragMode());
             //LoadDemo(new ViewportMode());
             //LoadDemo(new MultipleMode());
         }
@@ -133,7 +132,7 @@ namespace SdlDotNetExamples.LargeDemos
             StopDemo();
 
             // Start it
-            currentDemo = (DemoMode)demos[demo];
+            currentDemo = demos[demo];
             currentDemo.Start();
         }
         #endregion
