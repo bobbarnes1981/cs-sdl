@@ -149,7 +149,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         public override Surface RenderSurface()
         {
-            base.Surface.Fill(Color.Black);
+            this.Surface.Fill(Color.Black);
             foreach (Sprite s in Sprites.Keys)
             {
                 Rectangle offsetRect = s.Rectangle;

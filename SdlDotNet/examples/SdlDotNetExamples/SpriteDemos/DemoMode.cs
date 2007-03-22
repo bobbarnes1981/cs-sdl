@@ -33,10 +33,8 @@ namespace SdlDotNetExamples.SpriteDemos
     /// An abstract page to encapsulates the common functionality of all
     /// demo pages.
     /// </summary>
-    public abstract class DemoMode : IDisposable
+    public class DemoMode : IDisposable
     {
-        private static Hashtable marbles = new Hashtable();
-
         /// <summary>
         /// 
         /// </summary>
@@ -77,15 +75,13 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         protected static SurfaceCollection LoadMarble(string name)
         {
-            if (File.Exists(Path.Combine(dataDirectory, Path.Combine(name, ".png"))))
+            if (File.Exists(Path.Combine(dataDirectory, name + ".png")))
             {
                 filePath = "";
             }
 
-            // Load the marble and cache it before returning
             SurfaceCollection icd = new SurfaceCollection();
             icd.Add(Path.Combine(filePath, Path.Combine(dataDirectory, name + ".png")), new Size(50, 50));
-            marbles["icd:" + name] = icd;
             return icd;
         }
 
@@ -95,7 +91,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <returns></returns>
         protected static SurfaceCollection LoadRandomMarble()
         {
-            return LoadMarble("marble" + (Randomizer.Next() % 6 + 1));
+            return LoadMarble("marble" + (Randomizer.Next(6) + 1));
         }
 
         /// <summary>
@@ -103,13 +99,13 @@ namespace SdlDotNetExamples.SpriteDemos
         /// </summary>
         protected static SurfaceCollection LoadTiledMarble(string name)
         {
-            if (File.Exists(Path.Combine(dataDirectory, Path.Combine(name, ".png"))))
+            if (File.Exists(Path.Combine(dataDirectory, name + ".png")))
             {
                 filePath = "";
             }
             // Load the marble
             SurfaceCollection td = new SurfaceCollection();
-            td.Add(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, Path.Combine(name, ".png")))), new Size(50, 50));
+            td.Add(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, name + ".png"))), new Size(50, 50));
             return td;
         }
         #endregion

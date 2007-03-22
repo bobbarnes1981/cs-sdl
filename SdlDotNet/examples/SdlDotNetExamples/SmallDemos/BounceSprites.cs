@@ -46,8 +46,8 @@ namespace SdlDotNetExamples.SmallDemos
         private int height = 480; //screen height
         private int maxBalls = 10; //number of balls to display
         private Random rand = new Random(); //randomizer
-        string data_directory = @"Data/";
-        string filepath = @"../../";
+        string dataDirectory = "Data";
+        string filePath = Path.Combine("..", "..");
         private Surface background;
         #endregion Fields
 
@@ -85,11 +85,11 @@ namespace SdlDotNetExamples.SmallDemos
         private void Go()
         {
             //Set up screen
-            if (File.Exists(data_directory + "background.png"))
+            if (File.Exists(Path.Combine(dataDirectory, "background.png")))
             {
-                filepath = "";
+                filePath = "";
             }
-            background = new Surface(filepath + data_directory + "background.png");
+            background = new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "background.png")));
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Bounce Sprites";
             screen = Video.SetVideoMode(width, height);
@@ -99,7 +99,7 @@ namespace SdlDotNetExamples.SmallDemos
             //This loads the various images (provided by Moonfire) 
             // into a SurfaceCollection for animation
             SurfaceCollection marbleSurfaces = new SurfaceCollection();
-            marbleSurfaces.Add(new Surface(filepath + data_directory + "marble1.png"), new Size(50, 50));
+            marbleSurfaces.Add(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "marble1.png"))), new Size(50, 50));
 
             for (int i = 0; i < this.maxBalls; i++)
             {

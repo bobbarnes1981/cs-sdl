@@ -47,7 +47,6 @@
 	<property name="project.config" value="Debug" />
 	<nant buildfile="SdlDotNet.build" target="${nant.settings.currentframework} clean build-debug" />
 	<call target="copyfiles" />
-	<call target="zip" />
     </target>
 
     <!-- copy project files -->
