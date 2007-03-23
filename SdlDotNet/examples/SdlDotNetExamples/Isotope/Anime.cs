@@ -18,7 +18,6 @@
  */
 #endregion LICENSE
 
-
 //skins module: for defining complex images to draw for an object type and object state
 
 /* Defines the animated images to draw for an object type and object state. */

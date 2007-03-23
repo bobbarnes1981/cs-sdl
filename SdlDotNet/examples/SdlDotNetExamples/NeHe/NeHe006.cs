@@ -65,9 +65,9 @@ namespace SdlDotNetExamples.NeHe
         // Storage For One Texture ( NEW )
         int[] texture;
         // Directory to find the data files
-        string dataDirectory = @"Data/";
+        string dataDirectory = "Data";
         // Path to Data directory
-        string filePath = @"../../";
+        string filePath = Path.Combine("..", "..");
         // Name of texture
         string[] textureName;
 
@@ -297,7 +297,7 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         protected virtual void LoadGLTextures()
         {
-            if (File.Exists(this.DataDirectory + this.GetTextureName()[0]))
+            if (File.Exists(Path.Combine(this.DataDirectory, this.GetTextureName()[0])))
             {
                 this.FilePath = "";
             }
@@ -307,7 +307,7 @@ namespace SdlDotNetExamples.NeHe
 
             for (int i = 0; i < this.GetTextureName().Length; i++)
             {
-                textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.GetTextureName()[i]);
+                textureImage[i] = new Bitmap(Path.Combine(this.FilePath, Path.Combine(this.DataDirectory, this.GetTextureName()[i])));
             }
 
             // Load The Bitmap

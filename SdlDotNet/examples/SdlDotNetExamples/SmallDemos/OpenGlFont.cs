@@ -40,9 +40,9 @@ namespace SdlDotNetExamples.SmallDemos
     {
         int width = 640;
         int height = 480;
-        string dataDirectory = @"Data/";
+        string dataDirectory = "Data";
         // Path to Data directory
-        string filePath = @"../../";
+        string filePath = Path.Combine("..", "..");
         string fontName = "FreeSans.ttf";
         string phrase1 = "Hello world! ";
         string phrase2 = "This is a Truetype font ";
@@ -71,7 +71,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// </summary>
         public void Initialize()
         {
-            if (File.Exists(dataDirectory + "FreeSans.ttf"))
+            if (File.Exists(Path.Combine(dataDirectory, "FreeSans.ttf")))
             {
                 filePath = "";
             }
@@ -81,7 +81,7 @@ namespace SdlDotNetExamples.SmallDemos
             Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
             Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
-            font = new SdlDotNet.Graphics.Font(filePath + dataDirectory + fontName, 18);
+            font = new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, fontName)), 18);
             Video.GLDoubleBufferEnabled = true;
 
         }

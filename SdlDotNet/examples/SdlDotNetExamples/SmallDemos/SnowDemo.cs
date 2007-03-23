@@ -48,8 +48,8 @@ namespace SdlDotNetExamples.SmallDemos
         Surface background;
         Surface tree;
         Surface treeStretch;
-        string data_directory = @"Data/";
-        string filepath = @"../../";
+        string dataDirectory = "Data";
+        string filePath = Path.Combine("..", "..");
         string fontName = "FreeSans.ttf";
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace SdlDotNetExamples.SmallDemos
             {
                 snowflakes.Add(new Snowflake(), new Rectangle());
             }
-            SdlDotNet.Graphics.Font font = new SdlDotNet.Graphics.Font(filepath + data_directory + fontName, 24);
+            SdlDotNet.Graphics.Font font = new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, fontName)), 24);
 
             textItems.Add(new TextItem(textArray[0], font, 25, 0), new Rectangle());
             for (int i = 1; i < textArray.Length; i++)
@@ -91,18 +91,18 @@ namespace SdlDotNetExamples.SmallDemos
         /// </summary>
         public void Go()
         {
-            if (File.Exists(data_directory + "snowbackground.png"))
+            if (File.Exists(Path.Combine(dataDirectory, "snowbackground.png")))
             {
-                filepath = "";
+                filePath = "";
             }
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Snow Demo";
             screen = Video.SetVideoMode(640, 480, 16);
-            background = new Surface(filepath + data_directory + "snowbackground.png");
+            background = new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "snowbackground.png")));
             background.Transparent = true;
             background.TransparentColor = Color.Magenta;
 
-            tree = new Surface(filepath + data_directory + "Tree.bmp");
+            tree = new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "Tree.bmp")));
             tree.TransparentColor = Color.Magenta;
             tree.Transparent = true;
             treeStretch = new Surface(tree);

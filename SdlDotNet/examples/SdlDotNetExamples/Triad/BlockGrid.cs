@@ -1,4 +1,4 @@
-
+#region LICENSE
 //*****************************************************************************
 //	This program is free software; you can redistribute it and/or
 //	modify it under the terms of the GNU General Public License
@@ -16,6 +16,7 @@
 //	July 29th,2003
 //	Contact me at mrosario@scrypt.net	
 //*****************************************************************************
+#endregion LICENSE
 
 using System;
 using System.IO;

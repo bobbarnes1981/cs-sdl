@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * $RCSfile: ParticlesExample.cs,v $
  * Copyright (C) 2005 Rob Loach (http://www.robloach.net)
@@ -16,6 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -43,8 +45,8 @@ namespace SdlDotNetExamples.SmallDemos
         // Make a new emitter and a particle vortex for manipulating the particles.
         ParticleRectangleEmitter emit;
         ParticleVortex vort = new ParticleVortex(1f, 200f);
-        string data_directory = @"Data/";
-        string filepath = @"../../";
+        string dataDirectory = "Data";
+        string filePath = Path.Combine("..", "..");
 
         /// <summary>
         /// Constructor
@@ -89,15 +91,15 @@ namespace SdlDotNetExamples.SmallDemos
             ParticlePixel first = new ParticlePixel(Color.White, 100, 200, new Vector(0, 0, 0), -1);
             particles.Add(first); // Add it to the system
 
-            if (File.Exists(data_directory + "marble1.png"))
+            if (File.Exists(Path.Combine(dataDirectory, "marble1.png")))
             {
-                filepath = "";
+                filePath = "";
             }
 
             // Make the second particle (an animated sprite)
             AnimationCollection anim = new AnimationCollection();
             SurfaceCollection surfaces = new SurfaceCollection();
-            surfaces.Add(filepath + data_directory + "marble1.png", new Size(50, 50));
+            surfaces.Add(Path.Combine(filePath, Path.Combine(dataDirectory, "marble1.png")), new Size(50, 50));
             anim.Add(surfaces, 1);
             AnimatedSprite marble = new AnimatedSprite(anim);
             marble.Animate = true;

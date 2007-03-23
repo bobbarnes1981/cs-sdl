@@ -1,3 +1,4 @@
+#region LICENSE
 // Copyright 2005 David Hudson (jendave@yahoo.com)
 // This file is part of SimpleGame.
 //
@@ -14,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with SimpleGame; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -42,8 +44,8 @@ namespace SdlDotNetExamples.SimpleGame
         ArrayList backSprites;
         ArrayList frontSprites;
         Sound sound;
-        string data_directory = @"Data/";
-        string filepath = @"../../";
+        string dataDirectory = "Data";
+        string filePath = Path.Combine("..", "..");
         /// <summary>
         /// constructor
         /// </summary>
@@ -62,13 +64,13 @@ namespace SdlDotNetExamples.SimpleGame
             this.height = 440;
             this.backSprites = new ArrayList();
             this.frontSprites = new ArrayList();
-            if (File.Exists(data_directory + "boing.wav"))
+            if (File.Exists(Path.Combine(dataDirectory, "boing.wav")))
             {
-                filepath = "";
+                filePath = "";
             }
             try
             {
-                this.sound = new Sound(filepath + data_directory + "boing.wav");
+                this.sound = new Sound(Path.Combine(filePath, Path.Combine(dataDirectory, "boing.wav")));
             }
             catch (SdlException)
             {

@@ -325,9 +325,9 @@ namespace SdlDotNetExamples.SmallDemos
         Surface screen;
         //Font font;
         //SurfaceGl surfaceGl = new SurfaceGl();
-        //string dataDirectory = @"Data/";
+        //string dataDirectory = "Data";
         // Path to Data directory
-        //string filePath = @"../../";
+        //string filePath = Path.Combine"..", "/..";
         //string fontName = "FreeSans.ttf";
 
         /// <summary>
@@ -335,11 +335,11 @@ namespace SdlDotNetExamples.SmallDemos
         /// </summary>
         public void Go()
         {
-            //			if (File.Exists(dataDirectory + "FreeSans.ttf"))
+            //			if (File.Exists(Path.Combine(dataDirectory, "FreeSans.ttf")))
             //			{
             //				filePath = "";
             //			}
-            //font = new Font(filePath + dataDirectory + fontName, 20);
+            //font = new Font(Path.Combine(filePath, Path.Combine(dataDirectory, fontName, 20)));
             //surface = new SurfaceGl(font.Render(" ", Color.White));
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Gears";
