@@ -1,3 +1,4 @@
+#region LICENSE
 /*
  * Copyright (C) 2006 by Drazen Soronda, Croatia
  *
@@ -18,7 +19,7 @@
  * Exclusive rights to for use to SDL.NET & GTK# projects !!!
  * Others may contact me on SDL.NET forums under nickname Shoky
  */
-
+#endregion LICENSE
 
 using System;
 using System.Diagnostics.CodeAnalysis;

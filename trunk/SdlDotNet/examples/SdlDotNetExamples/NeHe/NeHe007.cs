@@ -260,7 +260,7 @@ namespace SdlDotNetExamples.NeHe
         /// </returns>
         protected virtual void LoadGLFilteredTextures()
         {
-            if (File.Exists(this.DataDirectory + this.GetTextureName()[0]))
+            if (File.Exists(Path.Combine(this.DataDirectory, this.GetTextureName()[0])))
             {
                 this.FilePath = "";
             }
@@ -270,7 +270,7 @@ namespace SdlDotNetExamples.NeHe
 
             for (int i = 0; i < this.GetTextureName().Length; i++)
             {
-                textureImage[i] = new Bitmap(this.FilePath + this.DataDirectory + this.GetTextureName()[i]);
+                textureImage[i] = new Bitmap(Path.Combine(this.FilePath, Path.Combine(this.DataDirectory, this.GetTextureName()[i])));
             }
             // Load The Bitmap
             // Check For Errors, If Bitmap's Not Found, Quit

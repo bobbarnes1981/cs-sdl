@@ -180,7 +180,7 @@ namespace SdlDotNetExamples.NeHe
         /// </summary>
         protected override void LoadGLTextures()
         {
-            if (File.Exists(this.DataDirectory + this.GetTextureName()))
+            if (File.Exists(Path.Combine(this.DataDirectory, this.GetTextureName()[0])))
             {
                 this.FilePath = "";
             }
@@ -188,7 +188,7 @@ namespace SdlDotNetExamples.NeHe
             Bitmap[] textureImage = new Bitmap[this.GetTextureName().Length];
             // Create Storage Space For The Texture
 
-            textureImage[0] = new Bitmap(this.FilePath + this.DataDirectory + this.GetTextureName()[0]);
+            textureImage[0] = new Bitmap(Path.Combine(this.FilePath, Path.Combine(this.DataDirectory, this.GetTextureName()[0])));
             // Load The Bitmap
             // Check For Errors, If Bitmap's Not Found, Quit
             if (textureImage[0] != null)

@@ -1,3 +1,4 @@
+#region LICENSE
 // Copyright 2005 David Hudson (jendave@yahoo.com)
 // This file is part of SimpleGame.
 //
@@ -14,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with SimpleGame; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#endregion LICENSE
 
 using System;
 using System.IO;
@@ -63,8 +65,8 @@ namespace SdlDotNetExamples.SimpleGame
         EventManager eventManager;
         ArrayList players;
         Map map;
-        string data_directory = @"Data/";
-        string filepath = @"../../";
+        string dataDirectory = "Data";
+        string filePath = Path.Combine("..", "..");
 
         /// <summary>
         /// 
@@ -88,12 +90,12 @@ namespace SdlDotNetExamples.SimpleGame
             gameView.CreateView();
             map.Build();
 
-            if (File.Exists(data_directory + "fard-two.ogg"))
+            if (File.Exists(Path.Combine(dataDirectory, "fard-two.ogg")))
             {
-                filepath = "";
+                filePath = "";
             }
 
-            Music music = new Music(filepath + data_directory + "fard-two.ogg");
+            Music music = new Music(Path.Combine(filePath, Path.Combine(dataDirectory, "fard-two.ogg")));
 
             try
             {
