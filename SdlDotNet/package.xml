@@ -51,33 +51,35 @@
 
     <!-- copy project files -->
     <target name="copyfiles">
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${source.dir}">
-	    <fileset>
-		<include name="**" />
+	<if test="${project.config=='Release'}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${source.dir}">
+		<fileset>
+		    <include name="**" />
 
-		<exclude name="**/${obj.dir}/**" />
-		<exclude name="**/${bin.dir}/**" />
-		<exclude name="**/*j.user" />
-		<exclude name="**.suo" />
-		<exclude name="**/*.old" />
-		<exclude name="**/Makefile" />
-		<exclude name="**/*.in" />
-		<exclude name="**/*.pc" />
-		<exclude name="**/*.stackdump" />
-		<exclude name="**/*.lnk" />
-		<exclude name="**/config.status" />
-		<exclude name="**/config.log" />
-		<exclude name="**/aclocal.m4" />
-		<exclude name="**/doc/**" />
-		<exclude name="**/dist/**" />
-		<exclude name="**/autom4te.cache/**" />
-		<exclude name="**/Debug/**" />
-		<exclude name="**/Release/**" />
-		<exclude name="**.swp" />
-		<exclude name="**.bak" />
-		<exclude name="**.project" />
-	    </fileset>
-	</copy>
+		    <exclude name="**/${obj.dir}/**" />
+		    <exclude name="**/${bin.dir}/**" />
+		    <exclude name="**/*j.user" />
+		    <exclude name="**.suo" />
+		    <exclude name="**/*.old" />
+		    <exclude name="**/Makefile" />
+		    <exclude name="**/*.in" />
+		    <exclude name="**/*.pc" />
+		    <exclude name="**/*.stackdump" />
+		    <exclude name="**/*.lnk" />
+		    <exclude name="**/config.status" />
+		    <exclude name="**/config.log" />
+		    <exclude name="**/aclocal.m4" />
+		    <exclude name="**/doc/**" />
+		    <exclude name="**/dist/**" />
+		    <exclude name="**/autom4te.cache/**" />
+		    <exclude name="**/Debug/**" />
+		    <exclude name="**/Release/**" />
+		    <exclude name="**.swp" />
+		    <exclude name="**.bak" />
+		    <exclude name="**.project" />
+		</fileset>
+	    </copy>
+	</if>
 
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}" flatten="true">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
