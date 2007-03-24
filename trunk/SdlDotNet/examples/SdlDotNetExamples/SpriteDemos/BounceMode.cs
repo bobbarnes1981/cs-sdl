@@ -42,7 +42,7 @@ namespace SdlDotNetExamples.SpriteDemos
         {
             // Create the fragment marbles
             Rectangle rect = new Rectangle(new Point(0, 0), SpriteDemosMain.Size);
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Thread.Sleep(10);
                 SurfaceCollection d = LoadRandomMarble();

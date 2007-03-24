@@ -41,8 +41,8 @@ namespace SdlDotNetExamples.SpriteDemos
         public DragMode()
         {
             // Create the fragment marbles
-            int rows = 5;
-            int cols = 5;
+            int rows = 3;
+            int cols = 3;
             int sx = (SpriteDemosMain.Size.Width - cols * 50) / 2;
             int sy = (SpriteDemosMain.Size.Height - rows * 50) / 2;
             SurfaceCollection m1 = LoadMarble("marble1");

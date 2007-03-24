@@ -650,7 +650,7 @@ namespace SdlDotNet.Tests
         public void texturedPolygon()
         {
             this.InitSdl();
-            Surface texturedSurface = new Surface("hero.png");
+            //Surface texturedSurface = new Surface("hero.png");
             //Random rand = new Random();
             //Surface screen = new Surface(
             //int result = SdlGfx.texturedPolygon(surfacePtr, vx, vy, vx.Length, texturedSurface. 7777777);

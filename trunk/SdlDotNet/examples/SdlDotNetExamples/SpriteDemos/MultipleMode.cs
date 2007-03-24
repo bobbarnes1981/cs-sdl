@@ -56,8 +56,8 @@ namespace SdlDotNetExamples.SpriteDemos
             SurfaceCollection floorTiles = LoadFloor();
 
             // Place the floors
-            int rows = 10;
-            int cols = 13;
+            int rows = 8;
+            int cols = 10;
             size = new Size(floorTiles[0].Size.Width * cols,
                 floorTiles[0].Size.Height * rows);
             rect = new Rectangle(new Point(0, 0), size);
@@ -76,7 +76,7 @@ namespace SdlDotNetExamples.SpriteDemos
             }
 
             // Load the bouncing sprites
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 10; i++)
             {
                 BounceSprite d =
                     new BounceSprite(td,
