@@ -63,10 +63,6 @@ namespace SdlDotNetExamples.LargeDemos
         /// </summary>
         public void Go()
         {
-            // Load demos
-            LoadDemos();
-            SwitchDemo(0);
-
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Sprite Demos";
             screen = Video.SetVideoMode(width, height);
@@ -75,65 +71,96 @@ namespace SdlDotNetExamples.LargeDemos
                 new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
             Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
             Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
+
+            //// Load demos
+            //LoadDemos();
+            SwitchDemo(0);
+
             Events.Run();
         }
 
         #region Demos
-        private List<DemoMode> demos = new List<DemoMode>();
+        //private List<DemoMode> demos = new List<DemoMode>();
 
-        private static DemoMode currentDemo;
+        private DemoMode currentDemo;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public static DemoMode CurrentDemo
-        {
-            get
-            {
-                return currentDemo;
-            }
-        }
+        
 
-        private void LoadDemo(DemoMode mode)
-        {
-            // Add to the array list
-            demos.Add(mode);
-        }
+        //private void LoadDemo(DemoMode mode)
+        //{
+        //    // Add to the array list
+        //    demos.Add(mode);
+        //}
 
-        private void LoadDemos()
-        {
+        //private void LoadDemos()
+        //{
             // Load the actual demos
             //LoadDemo(new BounceMode());
             //LoadDemo(new FontMode());
-            LoadDemo(new DragMode());
+            //LoadDemo(new DragMode());
             //LoadDemo(new ViewportMode());
             //LoadDemo(new MultipleMode());
-        }
+        //}
 
-        private static void StopDemo()
+        private void StopDemo()
         {
             // Stop the demo, if any
             if (currentDemo != null)
             {
                 currentDemo.Stop();
+                //currentDemo.Dispose();
                 currentDemo = null;
             }
+            //System.GC.Collect();
         }
+
+        int demo = 1;
 
         private void SwitchDemo(int demo)
         {
-            // Ignore if the demo request is too high
-            if (demo < 0 || demo + 1 > demos.Count)
+            //// Ignore if the demo request is too high
+            //if (demo < 0 || demo + 1 > demos.Count)
+            //{
+            //    return;
+            //}
+            if (demo != this.demo)
             {
-                return;
+                this.demo = demo;
+                // Stop the demo, if any
+                StopDemo();
+
+                switch (demo)
+                {
+                    case 0:
+                        currentDemo = new BounceMode();
+                        currentDemo.Start();
+                        break;
+                    case 1:
+                        currentDemo = new FontMode();
+                        currentDemo.Start();
+                        break;
+                    case 2:
+                        currentDemo = new DragMode();
+                        currentDemo.Start();
+                        break;
+                    case 3:
+                        currentDemo = new ViewportMode();
+                        currentDemo.Start();
+                        break;
+                    case 4:
+                        currentDemo = new MultipleMode();
+                        currentDemo.Start();
+                        break;
+                    default:
+                        currentDemo = new BounceMode();
+                        currentDemo.Start();
+                        break;
+                }
+
+                //// Start it
+                //currentDemo = demos[demo];
+                //currentDemo.Start();
             }
-
-            // Stop the demo, if any
-            StopDemo();
-
-            // Start it
-            currentDemo = demos[demo];
-            currentDemo.Start();
         }
         #endregion
 

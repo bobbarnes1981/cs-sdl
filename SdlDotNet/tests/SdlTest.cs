@@ -38,10 +38,10 @@ namespace SdlDotNet.Tests
     public class SdlTest
     {
         #region SDL.h
-        private void InitSdl()
-        {
-            Tao.Sdl.Sdl.SDL_Quit();
-        }
+        //private void InitSdl()
+        //{
+        //    Tao.Sdl.Sdl.SDL_Quit();
+        //}
         private void Quit()
         {
             Tao.Sdl.Sdl.SDL_Quit();

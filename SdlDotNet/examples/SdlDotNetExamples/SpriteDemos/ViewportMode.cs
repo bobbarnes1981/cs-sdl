@@ -76,8 +76,8 @@ namespace SdlDotNetExamples.SpriteDemos
             SurfaceCollection floorTiles = LoadFloor();
 
             // Place the floors
-            int rows = 15;
-            int cols = 25;
+            int rows = 8;
+            int cols = 15;
             size = new Size(floorTiles[0].Size.Width * cols,
                 floorTiles[0].Size.Height * rows);
             rect = new Rectangle(new Point(0, 0), size);
@@ -104,7 +104,7 @@ namespace SdlDotNetExamples.SpriteDemos
             CenterSprite.Add(sprite);
 
             // Load the bouncing sprites
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Thread.Sleep(10);
                 BounceSprite bounceSprite =
@@ -154,9 +154,9 @@ namespace SdlDotNetExamples.SpriteDemos
             {
                 Rectangle offsetRect = s.Rectangle;
                 offsetRect.Offset(AdjustBoundedViewport());
-                base.Surface.Blit(s, offsetRect);
+                this.Surface.Blit(s, offsetRect);
             }
-            return base.Surface;
+            return this.Surface;
         }
 
         /// <summary>

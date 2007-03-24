@@ -125,8 +125,8 @@ namespace SdlDotNetExamples.SmallDemos
         /// </summary>
         protected void initGraphView()
         {
-            GtkSprite node = new GtkSprite(Path.Combine(Path.Combine(filePath, fileDirectory), "circle.png"));
-            GtkSprite node2 = new GtkSprite(Path.Combine(Path.Combine(filePath, fileDirectory), "circle.png"));
+            GtkSprite node = new GtkSprite(Path.Combine(filePath, Path.Combine(fileDirectory, "circle.png")));
+            GtkSprite node2 = new GtkSprite(Path.Combine(filePath, Path.Combine(fileDirectory, "circle.png")));
 
             node2.X = 100;
             node2.Y = 100;
@@ -140,7 +140,7 @@ namespace SdlDotNetExamples.SmallDemos
             spriteDictionary.Add(node2);
 
             graphView = new SurfaceGtk();
-            graphView.Surface = new Surface(Path.Combine(Path.Combine(filePath, fileDirectory), "background.jpg"));
+            graphView.Surface = new Surface(Path.Combine(filePath, Path.Combine(fileDirectory, "background.jpg")));
             graphView.Surface.Blit(spriteDictionary);
             graphView.Surface.Update();
 
