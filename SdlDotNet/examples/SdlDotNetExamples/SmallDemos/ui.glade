@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.0.2 on Tue Mar 13 21:39:40 2007 by DYYH-->
+<!--Generated with glade3 3.0.2 on Mon Mar 26 10:23:34 2007 by DYYH@L0084120-->
 <glade-interface>
   <widget class="GtkWindow" id="GraphWindow">
     <property name="title" translatable="yes">SDL.NET GTK# Graph Example</property>
+    <signal name="key_press_event" handler="OnKeyPress"/>
     <signal name="delete_event" handler="OnDeleteWindow"/>
     <child>
       <widget class="GtkVBox" id="vbox1">
