@@ -1136,9 +1136,12 @@ namespace SdlDotNet.Graphics
         /// Gets the default SDL.NET icon
         /// </summary>
         /// <returns></returns>
-        public static Icon GetDefaultIcon()
+        public static Icon DefaultIcon
         {
-            return new Icon(Assembly.GetCallingAssembly().GetManifestResourceStream("App.ico"));
+            get
+            {
+                return new Icon(Assembly.GetCallingAssembly().GetManifestResourceStream("App.ico"));
+            }
         }
 
         /// <summary>

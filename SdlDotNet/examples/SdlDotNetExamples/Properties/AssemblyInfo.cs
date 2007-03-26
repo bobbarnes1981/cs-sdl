@@ -108,3 +108,4 @@ using System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", Scope = "member", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample.OnDeleteWindow(System.Object,Gtk.DeleteEventArgs):System.Void")]
 [module: SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", Scope = "member", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample.OnRedrawTick(System.Object,System.Timers.ElapsedEventArgs):System.Void")]
 [module: SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample.Go():System.Void")]
+[module: SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", Scope = "member", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample.OnKeyPress(System.Object,Gtk.KeyPressEventArgs):System.Void")]
