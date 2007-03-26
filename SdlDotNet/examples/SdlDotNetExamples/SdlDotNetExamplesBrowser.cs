@@ -123,12 +123,12 @@ namespace SdlDotNetExamples
             }
             catch (TypeLoadException e)
             {
-                MessageBox.Show("Note that some NeHe examples rely on Windows-specific libraries and will fail on other platforms.\n" + e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, 0);
+                MessageBox.Show("Note that some NeHe examples rely on Windows-specific libraries and will fail on other platforms.\n\n" + e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, 0);
                 Console.WriteLine(e.ToString());
             }
             catch (System.Reflection.TargetInvocationException e)
             {
-                MessageBox.Show("Note that some NeHe examples rely on Windows-specific libraries and will fail on other platforms.\n" + e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, 0);
+                MessageBox.Show("Note that some NeHe examples rely on Windows-specific libraries and will fail on other platforms.\n\n" + e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, 0);
                 Console.WriteLine(e.ToString());
             }
             catch (System.ArgumentOutOfRangeException e)
