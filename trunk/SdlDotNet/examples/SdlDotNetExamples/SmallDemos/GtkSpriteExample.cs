@@ -166,10 +166,13 @@ namespace SdlDotNetExamples.SmallDemos
         [CLSCompliant(false)]
         protected void OnKeyPress(object sender, Gtk.KeyPressEventArgs args)
         {
-            if (args.Event.Key == Gdk.Key.Escape || args.Event.Key == Gdk.Key.q)
+            if (args != null)
             {
-                GraphWindow.Destroy();
-                Application.Quit();
+                if (args.Event.Key == Gdk.Key.Escape || args.Event.Key == Gdk.Key.q)
+                {
+                    GraphWindow.Destroy();
+                    Application.Quit();
+                }
             }
         }
 
