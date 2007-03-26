@@ -159,6 +159,21 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         /// <summary>
+        /// Quit Handler für das Schließen des Hauptfensters
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        [CLSCompliant(false)]
+        protected void OnKeyPress(object sender, Gtk.KeyPressEventArgs args)
+        {
+            if (args.Event.Key == Gdk.Key.Escape || args.Event.Key == Gdk.Key.q)
+            {
+                GraphWindow.Destroy();
+                Application.Quit();
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         public void Go()

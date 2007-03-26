@@ -43,11 +43,13 @@ namespace SdlDotNetExamples.SmallDemos
         Gtk.Image myImg;
 
         public GtkWindow()
-        {	// constructor
+        {
+            // constructor
             // window
             win = new Gtk.Window("SDL.NET Gtk# Example");
             win.BorderWidth = 0;
             win.DeleteEvent += new DeleteEventHandler(Window_Delete);
+            win.KeyPressEvent += new KeyPressEventHandler(win_KeyPressEvent);
             //win.Decorated = false;
             win.DoubleBuffered = true;
 
@@ -76,6 +78,16 @@ namespace SdlDotNetExamples.SmallDemos
             btn.Clicked += new EventHandler(btn_click);
             verBox.Add(btn);
         }
+
+        void win_KeyPressEvent(object o, KeyPressEventArgs args)
+        {
+            if (args.Event.Key == Gdk.Key.Escape || args.Event.Key == Gdk.Key.q)
+            {
+                win.Destroy();
+                Application.Quit();
+            }
+        }
+
         public void ShowWindow()
         {
             win.ShowAll();	// show window
