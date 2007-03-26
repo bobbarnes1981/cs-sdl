@@ -123,28 +123,29 @@ namespace SdlDotNetExamples
             }
             catch (TypeLoadException e)
             {
-                e.ToString();
+                MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
             }
             catch (System.Reflection.TargetInvocationException e)
             {
-                e.ToString();
+                MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
             }
             catch (System.ArgumentOutOfRangeException e)
             {
-                e.ToString();
+                MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
             }
             catch (System.MissingMethodException e)
             {
-                e.ToString();
+                MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
             }
             catch (NullReferenceException e)
             {
-                e.ToString();
+                MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
             }
             finally
             {
                 SdlDotNet.Core.Events.QuitApplication();
                 this.Enabled = true;
+                Application.Exit();
             }
         }
 

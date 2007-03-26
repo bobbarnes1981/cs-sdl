@@ -299,62 +299,71 @@ namespace SdlDotNetExamples.SmallDemos
             times = 0;
             surf.Fill(new Rectangle(new Point(0, 0), surf.Size), Color.Black);
 
-            while (times < MAXCOUNT)
+            try
             {
-                short[] x = {
+                while (times < MAXCOUNT)
+                {
+                    short[] x = {
 											(short)rand.Next(0, width), 
 											(short)rand.Next(0, width),
 											(short)rand.Next(0, width),
 											(short)rand.Next(0, width),
 											(short)rand.Next(0, width)
 										};
-                short[] y = {
+                    short[] y = {
 											(short)rand.Next(0, height), 
 											(short)rand.Next(0, height), 
 											(short)rand.Next(0, height), 
 											(short)rand.Next(0, height), 
 											(short)rand.Next(0, height)
 										};
-                texturedPolygon = new TexturedPolygon(new Surface(file), x, y, 10, 10);
-                surf.Draw(texturedPolygon,
-                    Color.FromArgb(
-                    rand.Next(255),
-                    rand.Next(255),
-                    rand.Next(255),
-                    rand.Next(255)));
-                short[] a = {
+                    texturedPolygon = new TexturedPolygon(new Surface(file), x, y, 10, 10);
+                    surf.Draw(texturedPolygon,
+                        Color.FromArgb(
+                        rand.Next(255),
+                        rand.Next(255),
+                        rand.Next(255),
+                        rand.Next(255)));
+                    short[] a = {
                                             (short)rand.Next(0, width), 
                                             (short)rand.Next(0, width),
                                             (short)rand.Next(0, width),
                                             (short)rand.Next(0, width),
                                             (short)rand.Next(0, width)
                                         };
-                short[] b = {
+                    short[] b = {
                                             (short)rand.Next(0, height), 
                                             (short)rand.Next(0, height), 
                                             (short)rand.Next(0, height), 
                                             (short)rand.Next(0, height),
                                             (short)rand.Next(0, height)
                                             };
-                //short[] a = {
-                //                            0, 200, 200, 0
-                //                        };
-                //short[] b = {
-                //                            0, 0, 200, 200
+                    //short[] a = {
+                    //                            0, 200, 200, 0
+                    //                        };
+                    //short[] b = {
+                    //                            0, 0, 200, 200
 
-                //                        };
-                texturedPolygon = new TexturedPolygon(new Surface(file), a, b, 10, 20);
-                surf.Draw(texturedPolygon,
-                    Color.FromArgb(
-                    rand.Next(255),
-                    rand.Next(255),
-                    rand.Next(255),
-                    rand.Next(255)), false, true);
-                times++;
-                screen.Update();
-                screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
-                Thread.Sleep(SLEEPTIME);
+                    //                        };
+                    texturedPolygon = new TexturedPolygon(new Surface(file), a, b, 10, 20);
+                    surf.Draw(texturedPolygon,
+                        Color.FromArgb(
+                        rand.Next(255),
+                        rand.Next(255),
+                        rand.Next(255),
+                        rand.Next(255)), false, true);
+                    times++;
+                    screen.Update();
+                    screen.Blit(surf, new Rectangle(new Point(0, 0), screen.Size));
+                    Thread.Sleep(SLEEPTIME);
+                }
             }
+            catch (EntryPointNotFoundException ex)
+            {
+                Console.WriteLine("Using old version of SDL_gfx. Please upgrade to >=2.0.16");
+                Console.WriteLine(ex);
+            }
+
 
             Thread.Sleep(SLEEPTIME);
             times = 0;

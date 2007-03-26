@@ -271,6 +271,11 @@ namespace SdlDotNetExamples.LargeDemos
                 if (disposing)
                 {
                     this.screen.Dispose();
+                    if (currentDemo != null)
+                    {
+                        currentDemo.Dispose();
+                        currentDemo = null;
+                    }
                 }
                 this.disposed = true;
             }
