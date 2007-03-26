@@ -124,22 +124,27 @@ namespace SdlDotNetExamples
             catch (TypeLoadException e)
             {
                 MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
+                Console.WriteLine(e.ToString());
             }
             catch (System.Reflection.TargetInvocationException e)
             {
                 MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
+                Console.WriteLine(e.ToString());
             }
             catch (System.ArgumentOutOfRangeException e)
             {
                 MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
+                Console.WriteLine(e.ToString());
             }
             catch (System.MissingMethodException e)
             {
                 MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
+                Console.WriteLine(e.ToString());
             }
             catch (NullReferenceException e)
             {
                 MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK);
+                Console.WriteLine(e.ToString());
             }
             finally
             {
