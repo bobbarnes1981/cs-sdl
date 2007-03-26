@@ -131,10 +131,29 @@
 		<include name="${examples.dir}/**/*.mdb" />
 		<include name="${src.dir}/**/*.pdb" />
 		<include name="${src.dir}/**/*.mdb" />
-		<include name="${lib.dir}/net-2.0/*.dll" />
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>
+	<if test="${platform::is-win32()}">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+	    <fileset>
+		<include name="${lib.dir}/net-2.0/*.dll" />
+	    </fileset>
+	</copy>
+    </if>
+	<if test="${platform::is-unix()}">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+	    <fileset>
+		<include name="${lib.dir}/net-2.0/*.dll" />
+		<exclude name="${lib.dir}/net-2.0/atk-sharp.dll" />
+		<exclude name="${lib.dir}/net-2.0/gtk-sharp.dll" />
+		<exclude name="${lib.dir}/net-2.0/gdk-sharp.dll" />
+		<exclude name="${lib.dir}/net-2.0/glade-sharp.dll" />
+		<exclude name="${lib.dir}/net-2.0/glib-sharp.dll" />
+		<exclude name="${lib.dir}/net-2.0/pango-sharp.dll" />
+	    </fileset>
+	</copy>
+	</if>
 	<if test="${platform::is-unix()}">
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
 		<fileset>
