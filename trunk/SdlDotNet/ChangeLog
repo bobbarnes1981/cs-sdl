@@ -1,3 +1,24 @@
+===6.0.0beta2===
+David Hudson 27 Mar 2007
+* Major API Change: Removed Surface.Resize, Surface.Rotate, Surface.Scale, Surface.RotateZoom, Surface.Stretch, Surface.FlipVertical and Surface.FlipHorizontal. You must now use the respective "Create" methods: Surface.CreateResizedSurface, Surface.CreateScaledSurface, Surface.CreateFlippedVerticalSurface etc. I know this is a disruptive change, but it solves a huge AccessViolation memory bug that has been plaguing SDL.NET for a long time. 
+* SpriteDictionary is now a SortedDictionary.
+* Sprites implement IComparable using the Z-axis of the Vector. This allows sprites to be blit in proper order.
+* Fixed a threading problem with SurfaceControl.
+* Used partial classes with SurfaceControl and CDPlayer demo so they work better in the VS2005 designer.
+* Reworked Examples browser to run on Mono. Mono does not like TreeNodes.
+* Added shell scripts for Examples to run on Linux.
+* Added a Transparent.png resource so that Surface.CreateResizedSurface() works better (thanks to PaulA for the idea).
+* Added a constructor to the Music class to load from a byte array.
+* Updated to SDL_gfx 2.0.16.
+* Added TexturedPolygon primitive (SDL_gfx 2.0.16 only). This can be seen in the PrimitivesExample. This is skipped in the example if an older version of SDL_gfx is present.
+* Added SDL.NET port of the SharpNES Nintendo emulator to the examples. The second controller and the sound does not work, but it can run many games. Thanks to Jonathan Turner for the code.
+* Improved event handling in SurfaceGtk courtesy of Thomas Krieger
+* Added a Gtk Sprite Example courtesy of Thomas Krieger.
+* Added scripts to create a debug build.
+* TODO: Mono/Windows does not run some examples properly. The CDPlayer will stop working when resized or moved. The SpriteDemo runs out of memory. The MoviePlayer sometimes hangs when exiting. The GtkWindow runs but throws an error that the "assertion `main_loops != NULL' failed".
+* TODO: Mono/Linux does not run some examples properly. Midi does not seem to work for the AudioExample. The StreamingExample has some static. SDL windows do not receive mouse events even though the standalone examples (CDPlayer, SharpNes) do. Some NeHe examples use Windows-specific functionality and do not run in Linux. Some examples exit with double-free errors.
+* TODO: SDL.NET does not compile under Mono/OSX. resgen.exe fails when trying to process the .resx files.
+
 ===6.0.0beta1===
 David Hudson 26 Jan 2007
 * Full usage of .NET 2.0 - all Collections use generics now. 

@@ -2,7 +2,7 @@
 
 !define PRODUCT_NAME "SDL.NET Runtime"
 !define PRODUCT_TYPE "runtime"
-!define PRODUCT_VERSION "6.0.0b1"
+!define PRODUCT_VERSION "6.0.0b2"
 !define PRODUCT_PUBLISHER "SDL.NET"
 !define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
