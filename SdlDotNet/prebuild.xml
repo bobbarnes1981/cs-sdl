@@ -218,10 +218,8 @@
 	    <Files>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<File buildAction="EmbeddedResource">SmallDemos/ui.glade</File>
-		<File subType="Form" resourceName="SdlDotNetExamplesBrowser">SdlDotNetExamplesBrowser.cs</File>
 		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
 		<Match path="." pattern="*.cs" recurse="true">
-		    <Exclude name="SdlDotNetExamplesBrowser.cs"/>
 		    <Exclude name="Properties/Resources.Designer.cs"/>
 		</Match>
 	    </Files>
