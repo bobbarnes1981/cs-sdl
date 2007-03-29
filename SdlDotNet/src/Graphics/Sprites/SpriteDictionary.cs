@@ -503,7 +503,7 @@ namespace SdlDotNet.Graphics.Sprites
         //    Events.MouseButtonUp -= new EventHandler<MouseButtonEventArgs>(Update);
         //    Events.MouseMotion -= new EventHandler<MouseMotionEventArgs>(Update);
         //    Events.UserEvent -= new EventHandler<UserEventArgs>(Update);
-        
+
         //}
 
         /// <summary>

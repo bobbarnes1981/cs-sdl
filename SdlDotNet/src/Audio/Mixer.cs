@@ -360,9 +360,9 @@ namespace SdlDotNet.Audio
         #region Public methods
 
         /// <summary>
-        /// 
+        /// Open Audio device
         /// </summary>
-        /// <param name="stream"></param>
+        /// <param name="stream">stream to open</param>
         public static void OpenAudio(AudioStream stream)
         {
             Close();

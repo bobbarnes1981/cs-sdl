@@ -26,7 +26,7 @@ using SdlDotNet.Core;
 namespace SdlDotNet.Audio
 {
     /// <summary>
-    /// Represents a run-time error from the Sdl library.
+    /// Represents a Audio run-time error from the Sdl library.
     /// </summary>
     [Serializable()]
     public class AudioException : SdlException

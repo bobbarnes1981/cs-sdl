@@ -80,15 +80,9 @@ namespace SdlDotNetExamples
     /// </summary>
     public class SdlDotNetExamplesBrowser
     {
-        /// <summary>
-        /// Fires when the application has become active or inactive
-        /// </summary>
-        public event EventHandler<TextButtonSpriteEventArgs> TextButtonSpriteSelected;
-
         #region Fields
         SortedDictionary<string, SortedDictionary<string, string>> demoList;
         private Surface screen; //video screen
-        private SpriteDictionary master = new SpriteDictionary(); //holds all sprites
         private int width = 770; //screen width
         private int height = 580; //screen height
         string dataDirectory = "Data";
@@ -326,7 +320,7 @@ namespace SdlDotNetExamples
 
         void sprite_TextButtonSpriteSelected(object sender, TextButtonSpriteEventArgs e)
         {
-            Console.WriteLine(e.TextItem);
+            //Console.WriteLine(e.TextItem);
             if (this.comboBoxNamespaces.ContainsKey(e.Sprite))
             {
                 currentNamespace = e.TextItem;
