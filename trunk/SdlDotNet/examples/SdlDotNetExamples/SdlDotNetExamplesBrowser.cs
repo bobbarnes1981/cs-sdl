@@ -93,7 +93,6 @@ namespace SdlDotNetExamples
         static ResourceManager stringManager;
         string currentNamespace = "LargeDemos";
         SpriteDictionary comboBoxNamespaces;
-        int i = 0;
 
         #endregion Fields
 
@@ -236,7 +235,7 @@ namespace SdlDotNetExamples
             }
         }
 
-        private void RunExample(TextButtonSprite sprite, string textItem)
+        private void RunExample(string textItem)
         {
             try
             {
@@ -282,39 +281,40 @@ namespace SdlDotNetExamples
         {
             this.listBoxDemos.Clear();
 
-            int i = 23;
-            int j = 0;
+            int positionX = 23;
+            int positionY = 0;
             foreach (string s in this.demoList[comboBoxNamespace].Keys)
             {
                 TextButtonSprite sprite = new TextButtonSprite(s, new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, fontName)), 9));
                 sprite.TextButtonSpriteSelected += new EventHandler<TextButtonSpriteEventArgs>(sprite_TextButtonSpriteSelected);
 
-                if (j == 34)
+                if (positionY == 34)
                 {
-                    i = 23;
+                    positionX = 23;
                     sprite.X = 270;
                 }
-                if (j > 34)
+                if (positionY > 34)
                 {
                     sprite.X = 270;
                 }
-                sprite.Y = i;
+                sprite.Y = positionX;
                 this.listBoxDemos.Add(sprite);
-                i = i + 15;
-                j++;
+                positionX = positionX + 15;
+                positionY++;
             }
         }
 
         private void LoadComboBox()
         {
+            int positionX = 0;
             comboBoxNamespaces = new SpriteDictionary();
             foreach (string s in this.demoList.Keys)
             {
                 TextButtonSprite sprite = new TextButtonSprite(s, new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, fontName)), 11));
-                sprite.X = i;
+                sprite.X = positionX;
                 sprite.TextButtonSpriteSelected += new EventHandler<TextButtonSpriteEventArgs>(sprite_TextButtonSpriteSelected);
                 this.comboBoxNamespaces.Add(sprite);
-                i = i + 100;
+                positionX = positionX + 100;
             }
         }
 
@@ -328,7 +328,7 @@ namespace SdlDotNetExamples
             }
             else if (this.listBoxDemos.ContainsKey(e.Sprite))
             {
-                this.RunExample(e.Sprite, e.TextItem);
+                this.RunExample(e.TextItem);
             }
         }
 
