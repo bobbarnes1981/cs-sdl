@@ -245,6 +245,7 @@ namespace SdlDotNetExamples
                 DisableSpriteEvents();
                 DisableEvents();
                 SdlDotNet.Core.Events.QuitApplication();
+                SdlDotNet.Core.Events.CloseVideo();
                 example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
             }
             catch (TypeLoadException e)
