@@ -69,8 +69,6 @@ namespace SdlDotNet.Audio
         {
             get
             {
-                //CheckOpenStatus();
-
                 return (AudioStatus)Sdl.SDL_GetAudioStatus();
             }
         }
@@ -96,7 +94,7 @@ namespace SdlDotNet.Audio
         }
 
         /// <summary>
-        /// 
+        /// Returns the format of the stream
         /// </summary>
         public short Bits
         {
@@ -107,14 +105,14 @@ namespace SdlDotNet.Audio
         #region Constructors and Destructors
 
         /// <summary>
-        /// 
+        /// Creates an AudioStream
         /// </summary>
-        /// <param name="sampleFrequency"></param>
-        /// <param name="format"></param>
-        /// <param name="channels"></param>
-        /// <param name="samples"></param>
-        /// <param name="callback"></param>
-        /// <param name="data"></param>
+        /// <param name="sampleFrequency">Frequency</param>
+        /// <param name="format">format of stream data</param>
+        /// <param name="channels">Mono or Stereo</param>
+        /// <param name="samples">number of samples</param>
+        /// <param name="callback">Method callback to get more data</param>
+        /// <param name="data">data object</param>
         public AudioStream(int sampleFrequency, AudioFormat format, SoundChannel channels, short samples, AudioCallback callback, object data)
         {
             this.samples = samples;
@@ -148,12 +146,12 @@ namespace SdlDotNet.Audio
         AudioCallback callback;
 
         /// <summary>
-        /// 
+        /// Creates an AudioStream
         /// </summary>
-        /// <param name="sampleFrequency"></param>
-        /// <param name="format"></param>
-        /// <param name="channels"></param>
-        /// <param name="samples"></param>
+        /// <param name="sampleFrequency">Frequency</param>
+        /// <param name="format">format of stream data</param>
+        /// <param name="channels">Mono or Stereo</param>
+        /// <param name="samples">number of samples</param>
         public AudioStream(int sampleFrequency, AudioFormat format, SoundChannel channels, short samples)
             : this(sampleFrequency, format, channels, samples, null, null)
         {

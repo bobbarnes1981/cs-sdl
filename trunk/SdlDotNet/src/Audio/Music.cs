@@ -63,7 +63,7 @@ namespace SdlDotNet.Audio
         #region Public methods
 
         /// <summary>
-        /// 
+        /// Has the music system been initialized
         /// </summary>
         public static bool IsInitialized
         {
