@@ -1,6 +1,6 @@
 #region LICENSE
 /*
- * Copyright (C) 2004 - 2006 David Hudson (jendave@yahoo.com)
+ * Copyright (C) 2004 - 2007 David Hudson (jendave@yahoo.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,65 +19,204 @@
 #endregion LICENSE
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
-using System.Windows.Forms;
-using System.Reflection;
+using System.IO;
+using System.Drawing;
 using System.Globalization;
 using System.Resources;
+using System.Reflection;
+using System.Collections.ObjectModel;
 
-using Tao.FreeGlut;
+using SdlDotNet;
+using SdlDotNet.Graphics;
+using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Core;
+using SdlDotNet.Input;
+using SdlDotNet.Graphics.Primitives;
 
 namespace SdlDotNetExamples
 {
-    public partial class SdlDotNetExamplesBrowser : Form
+    /// <summary>
+    /// 
+    /// </summary>
+    public class TextButtonSpriteEventArgs : SdlEventArgs
     {
+        TextButtonSprite sprite;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public TextButtonSprite Sprite
+        {
+            get { return sprite; }
+            set { sprite = value; }
+        }
+        string textItem;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TextItem
+        {
+            get { return textItem; }
+            set { textItem = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sprite"></param>
+        /// <param name="textItem"></param>
+        public TextButtonSpriteEventArgs(TextButtonSprite sprite, string textItem)
+        {
+            this.sprite = sprite;
+            this.textItem = textItem;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class SdlDotNetExamplesBrowser
+    {
+        /// <summary>
+        /// Fires when the application has become active or inactive
+        /// </summary>
+        public event EventHandler<TextButtonSpriteEventArgs> TextButtonSpriteSelected;
+
+        #region Fields
+        SortedDictionary<string, SortedDictionary<string, string>> demoList;
+        private Surface screen; //video screen
+        private SpriteDictionary master = new SpriteDictionary(); //holds all sprites
+        private int width = 770; //screen width
+        private int height = 580; //screen height
+        string dataDirectory = "Data";
+        string filePath = Path.Combine("..", "..");
+        string fontName = "FreeSans.ttf";
+        Line line;
+        SpriteDictionary listBoxDemos = new SpriteDictionary();
+        static ResourceManager stringManager;
+        string currentNamespace = "LargeDemos";
+        SpriteDictionary comboBoxNamespaces;
+        int i = 0;
+
+        #endregion Fields
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static ResourceManager StringManager
         {
             get { return SdlDotNetExamplesBrowser.stringManager; }
             set { SdlDotNetExamplesBrowser.stringManager = value; }
         }
 
-        static ResourceManager stringManager;
-
-        static bool isInitialized = Initialize();
-
-        public static bool IsInitialized
+        #region EventHandler Methods
+        //Handles keyboard events. The 'Escape' and 'Q'keys will cause the app to exit
+        private void KeyboardDown(object sender, KeyboardEventArgs e)
         {
-            get { return SdlDotNetExamplesBrowser.isInitialized; }
-            set { SdlDotNetExamplesBrowser.isInitialized = value; }
+            if (e.Key == Key.Escape || e.Key == Key.Q)
+            {
+                Events.QuitApplication();
+            }
         }
 
-        static bool Initialize()
+        //A ticker is running to update the sprites constantly.
+        //This method will fill the screen with black to clear it of the sprites.
+        //Then it will Blit all of the sprites to the screen.
+        //Then it will refresh the screen and display it.
+        private void Tick(object sender, TickEventArgs args)
         {
-            Tao.Sdl.Sdl.SDL_Quit();
-            Glut.glutInit();
-            return true;
+            screen.Fill(Color.Black);
+            screen.Draw(line, Color.White);
+            screen.Blit(this.comboBoxNamespaces);
+            screen.Blit(this.listBoxDemos);
+            screen.Update();
         }
 
-        public SdlDotNetExamplesBrowser()
+        private void Quit(object sender, QuitEventArgs e)
         {
-            demoList = new Dictionary<string, Dictionary<string, string>>();
+            Events.QuitApplication();
+        }
+        #endregion EventHandler Methods
+
+        #region Methods
+        //Main program loop
+        private void Go()
+        {
+            //Set up screen
+            if (File.Exists(Path.Combine(dataDirectory, "FreeSans.ttf")))
+            {
+                filePath = "";
+            }
+            line = new Line(new Point(0, 20), new Point(width, 20));
+            Video.WindowIcon();
+            Video.WindowCaption = "SDL.NET - Demo Browser";
+            screen = Video.SetVideoMode(width, height);
+            demoList = new SortedDictionary<string, SortedDictionary<string, string>>();
             stringManager =
                 new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
+            Load();
+
+            EnableSpriteEvents();
+
+            //These bind the events to the above methods.
+            EnableEvents();
+            //Start the event ticker
+            Events.Run();
+        }
+
+        private void EnableEvents()
+        {
+            Events.KeyboardDown +=
+                new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
+        }
+
+        private void DisableEvents()
+        {
+            Events.KeyboardDown -=
+                new EventHandler<KeyboardEventArgs>(this.KeyboardDown);
+            Events.Tick -= new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit -= new EventHandler<QuitEventArgs>(this.Quit);
+        }
+
+        private void EnableSpriteEvents()
+        {
+            //The collection will respond to mouse button clicks, mouse movement and the ticker.
+            this.comboBoxNamespaces.EnableMouseButtonEvent();
+            this.comboBoxNamespaces.EnableMouseMotionEvent();
+            this.listBoxDemos.EnableMouseButtonEvent();
+            this.listBoxDemos.EnableMouseMotionEvent();
+        }
+
+        private void DisableSpriteEvents()
+        {
+            //The collection will respond to mouse button clicks, mouse movement and the ticker.
+            this.comboBoxNamespaces.DisableMouseButtonEvent();
+            this.comboBoxNamespaces.DisableMouseMotionEvent();
+            this.listBoxDemos.DisableMouseButtonEvent();
+            this.listBoxDemos.DisableMouseMotionEvent();
+        }
+
+        private void Load()
+        {
             LoadDemos();
-            InitializeComponent();
-            this.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
-                        "Title", CultureInfo.CurrentUICulture);
-            this.demoCategory.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
-                        "DemoCategory", CultureInfo.CurrentUICulture);
-            this.btnRun.Text = SdlDotNetExamples.SdlDotNetExamplesBrowser.StringManager.GetString(
-                        "Run", CultureInfo.CurrentUICulture);
             LoadComboBox();
             LoadListBox();
         }
 
-        Dictionary<string, Dictionary<string, string>> demoList;
+        /// <summary>
+        /// Entry point for App.
+        /// </summary>
+        [STAThread]
+        public static void Main()
+        {
+            SdlDotNetExamplesBrowser demos = new SdlDotNetExamplesBrowser();
+            demos.Go();
+        }
 
         private void LoadDemos()
         {
@@ -92,7 +231,7 @@ namespace SdlDotNetExamples
                              BindingFlags.GetProperty, null, type, null, CultureInfo.CurrentCulture);
                     if (!this.demoList.ContainsKey(type.Namespace.Substring(type.Namespace.IndexOf('.') + 1)))
                     {
-                        Dictionary<string, string> list = new Dictionary<string, string>();
+                        SortedDictionary<string, string> list = new SortedDictionary<string, string>();
                         list.Add(result, type.Name);
                         this.demoList.Add(type.Namespace.Substring(type.Namespace.IndexOf('.') + 1), list);
                     }
@@ -104,85 +243,148 @@ namespace SdlDotNetExamples
             }
         }
 
-        private void btnRun_Click(object sender, EventArgs e)
-        {
-            RunExample();
-        }
-
-        private void RunExample()
+        private void RunExample(TextButtonSprite sprite, string textItem)
         {
             try
             {
-                this.Enabled = false;
-                SdlDotNet.Core.Events.QuitApplication();
-                string typeString = "SdlDotNetExamples." + this.comboBoxNamespaces.SelectedItem.ToString() + "." + this.demoList[this.comboBoxNamespaces.SelectedItem.ToString()][this.listBoxDemos.SelectedItem.ToString()].ToString();
+                string typeString = "SdlDotNetExamples." + this.currentNamespace + "." + this.demoList[this.currentNamespace][textItem].ToString();
                 Type example = Assembly.GetExecutingAssembly().GetType(typeString, true, true);
+                DisableSpriteEvents();
+                DisableEvents();
+                SdlDotNet.Core.Events.QuitApplication();
                 example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
-                this.Enabled = true;
-                Application.Exit();
             }
             catch (TypeLoadException e)
             {
-                MessageBox.Show("Note that some NeHe examples rely on Windows-specific libraries and will fail on other platforms.\n\n" + e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, 0);
                 Console.WriteLine(e.ToString());
             }
             catch (System.Reflection.TargetInvocationException e)
             {
-                MessageBox.Show("Note that some NeHe examples rely on Windows-specific libraries and will fail on other platforms.\n\n" + e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, 0);
                 Console.WriteLine(e.ToString());
             }
             catch (System.ArgumentOutOfRangeException e)
             {
-                MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, 0);
                 Console.WriteLine(e.ToString());
             }
             catch (System.MissingMethodException e)
             {
-                MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, 0);
                 Console.WriteLine(e.ToString());
             }
             catch (NullReferenceException e)
             {
-                MessageBox.Show(e.ToString(), "SDL.NET Exception", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, 0);
                 Console.WriteLine(e.ToString());
             }
             finally
             {
                 SdlDotNet.Core.Events.QuitApplication();
-                this.Enabled = true;
-                Application.Exit();
             }
-        }
-
-        void listBoxDemos_DoubleClick(object sender, EventArgs e)
-        {
-            RunExample();
-        }
-
-        private void comboBoxNamespaces_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadListBox();
         }
 
         private void LoadListBox()
         {
-            this.listBoxDemos.Items.Clear();
+            LoadListBox("LargeDemos");
+        }
+        private void LoadListBox(string comboBoxNamespace)
+        {
+            this.listBoxDemos.Clear();
 
-            foreach (string s in this.demoList[this.comboBoxNamespaces.SelectedItem.ToString()].Keys)
+            int i = 25;
+            int j = 0;
+            foreach (string s in this.demoList[comboBoxNamespace].Keys)
             {
-                this.listBoxDemos.Items.Add(s);
-            }
+                TextButtonSprite sprite = new TextButtonSprite(s, new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, fontName)), 9));
+                sprite.TextButtonSpriteSelected += new EventHandler<TextButtonSpriteEventArgs>(sprite_TextButtonSpriteSelected);
 
-            this.listBoxDemos.SelectedIndex = 0;
+                if (j == 35)
+                {
+                    i = 25;
+                    sprite.X = 270;
+                }
+                if (j > 35)
+                {
+                    sprite.X = 270;
+                }
+                sprite.Y = i;
+                this.listBoxDemos.Add(sprite);
+                i = i + 15;
+                j++;
+            }
         }
 
         private void LoadComboBox()
         {
+            comboBoxNamespaces = new SpriteDictionary();
             foreach (string s in this.demoList.Keys)
             {
-                this.comboBoxNamespaces.Items.Add(s);
+                TextButtonSprite sprite = new TextButtonSprite(s, new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, fontName)), 11));
+                sprite.X = i;
+                sprite.TextButtonSpriteSelected += new EventHandler<TextButtonSpriteEventArgs>(sprite_TextButtonSpriteSelected);
+                this.comboBoxNamespaces.Add(sprite);
+                i = i + 100;
             }
-            this.comboBoxNamespaces.SelectedIndex = 0;
         }
+
+        void sprite_TextButtonSpriteSelected(object sender, TextButtonSpriteEventArgs e)
+        {
+            Console.WriteLine(e.TextItem);
+            if (this.comboBoxNamespaces.ContainsKey(e.Sprite))
+            {
+                currentNamespace = e.TextItem;
+                LoadListBox(e.TextItem);
+            }
+            else if (this.listBoxDemos.ContainsKey(e.Sprite))
+            {
+                this.RunExample(e.Sprite, e.TextItem);
+            }
+        }
+
+        #endregion Methods
+
+        #region IDisposable Members
+
+        private bool disposed;
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~SdlDotNetExamplesBrowser()
+        {
+            Dispose(false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+
+                }
+                this.disposed = true;
+            }
+        }
+
+        #endregion
     }
 }
+
