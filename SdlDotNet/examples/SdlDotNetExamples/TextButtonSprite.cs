@@ -83,7 +83,7 @@ namespace SdlDotNetExamples
                 }
                 else
                 {
-                    this.BackgroundColor = Color.Black;
+                    this.BackgroundColor = Color.Violet;
                     this.BeingDragged = false;
                 }
             }
@@ -103,9 +103,13 @@ namespace SdlDotNetExamples
             {
                 this.BackgroundColor = Color.Violet;
             }
-            else
+            else if (!this.BeingDragged)
             {
                 this.BackgroundColor = Color.Black;
+            }
+            else
+            {
+                this.BackgroundColor = Color.Red;
             }
         }
     }
