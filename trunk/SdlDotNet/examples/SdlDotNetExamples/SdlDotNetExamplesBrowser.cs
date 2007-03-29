@@ -83,8 +83,8 @@ namespace SdlDotNetExamples
         #region Fields
         SortedDictionary<string, SortedDictionary<string, string>> demoList;
         private Surface screen; //video screen
-        private int width = 770; //screen width
-        private int height = 580; //screen height
+        private int width = 740; //screen width
+        private int height = 550; //screen height
         string dataDirectory = "Data";
         string filePath = Path.Combine("..", "..");
         string fontName = "FreeSans.ttf";
@@ -148,13 +148,12 @@ namespace SdlDotNetExamples
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Demo Browser";
             screen = Video.SetVideoMode(width, height);
+            Tao.FreeGlut.Glut.glutInit();
             demoList = new SortedDictionary<string, SortedDictionary<string, string>>();
             stringManager =
                 new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
             Load();
-
             EnableSpriteEvents();
-
             //These bind the events to the above methods.
             EnableEvents();
             //Start the event ticker
@@ -282,19 +281,19 @@ namespace SdlDotNetExamples
         {
             this.listBoxDemos.Clear();
 
-            int i = 25;
+            int i = 23;
             int j = 0;
             foreach (string s in this.demoList[comboBoxNamespace].Keys)
             {
                 TextButtonSprite sprite = new TextButtonSprite(s, new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, fontName)), 9));
                 sprite.TextButtonSpriteSelected += new EventHandler<TextButtonSpriteEventArgs>(sprite_TextButtonSpriteSelected);
 
-                if (j == 35)
+                if (j == 34)
                 {
-                    i = 25;
+                    i = 23;
                     sprite.X = 270;
                 }
-                if (j > 35)
+                if (j > 34)
                 {
                     sprite.X = 270;
                 }
