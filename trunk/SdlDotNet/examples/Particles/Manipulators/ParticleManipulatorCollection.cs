@@ -36,6 +36,7 @@ namespace SdlDotNet.Particles.Manipulators
         public ParticleManipulatorCollection()
         {
         }
+
         ///// <summary>
         ///// Create a particle manipulator collection with one element in it.
         ///// </summary>
@@ -44,6 +45,7 @@ namespace SdlDotNet.Particles.Manipulators
         //{
         //    this.Add(manipulator);
         //}
+
         /// <summary>
         /// Create a particle manipulator based off an already existing collection.
         /// </summary>
