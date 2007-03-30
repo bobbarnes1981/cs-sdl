@@ -7,8 +7,6 @@
     -->
     <echo message="Using '${nant.settings.currentframework}' Framework"/>
     <echo message="Using '${platform::get-name()}' Platform"/>
-    <echo message="Is Unix '${platform::is-unix()}' "/>
-    <echo message="Is Win32 '${platform::is-win32()}' "/>
 
     <!-- global project settings -->
     <property name="project.config" value="Release" />
@@ -24,7 +22,7 @@
     <property name="lib.dir" value="lib" />
     <property name="doc.dir" value="doc" />
     <property name="native.sdl" value="Tao.Sdl"/>
-    <property name="is-osx" value="true"/>
+    <property name="is-osx" value="false"/>
 
     <target name="net-2.0" description="Sets framework to .NET 2.0">
 	<property name="nant.settings.currentframework" value="net-2.0" />
