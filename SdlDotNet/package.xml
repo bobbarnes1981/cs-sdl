@@ -6,6 +6,9 @@
     package: creates release zip file for .NET and Mono.
     -->
     <echo message="Using '${nant.settings.currentframework}' Framework"/>
+    <echo message="Using '${platform::get-name()}' Platform"/>
+    <echo message="Is Unix '${platform::is-unix()}' "/>
+    <echo message="Is Win32 '${platform::is-win32()}' "/>
 
     <!-- global project settings -->
     <property name="project.config" value="Release" />
@@ -21,13 +24,21 @@
     <property name="lib.dir" value="lib" />
     <property name="doc.dir" value="doc" />
     <property name="native.sdl" value="Tao.Sdl"/>
+    <property name="is-osx" value="true"/>
 
     <target name="net-2.0" description="Sets framework to .NET 2.0">
 	<property name="nant.settings.currentframework" value="net-2.0" />
     </target>
 
     <target name="mono-2.0" description="Sets framework to mono 2.0">
+	<call target="check-osx" />
 	<property name="nant.settings.currentframework" value="mono-2.0" />
+    </target>
+
+    <target name="check-osx" description="Checks if running on OSX">
+	<if test="${file::exists('/System/Library/Frameworks/Cocoa.framework/Cocoa')}">
+	    <property name="is-osx" value="true" />
+	</if>
     </target>
 
     <target name="clean" description="Clean project">
@@ -108,10 +119,17 @@
 		<include name="${native.sdl}.xml"/>
 	    </fileset>
 	</copy>
-	<if test="${platform::is-unix()}">
+	<if test="${platform::is-unix() and not is-osx}">
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
-		    <include name="${native.sdl}.config"/>
+		    <include name="${native.sdl}.dll.config"/>
+		</fileset>
+	    </copy>
+	</if>
+	<if test="${is-osx}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0/osx">
+		    <include name="${native.sdl}.dll.config"/>
 		</fileset>
 	    </copy>
 	</if>
@@ -133,32 +151,39 @@
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>
-	<if test="${platform::is-win32()}">
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
-	    <fileset>
-		<include name="${lib.dir}/net-2.0/*.dll" />
-		<include name="${examples.dir}/**/*.dll" />
-	    </fileset>
-	</copy>
-    </if>
-	<if test="${platform::is-unix()}">
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
-	    <fileset>
-		<include name="${lib.dir}/net-2.0/*.dll" />
-		<include name="${examples.dir}/**/*.dll" />
-		<exclude name="**/atk-sharp.dll" />
-		<exclude name="**/gtk-sharp.dll" />
-		<exclude name="**/gdk-sharp.dll" />
-		<exclude name="**/glade-sharp.dll" />
-		<exclude name="**/glib-sharp.dll" />
-		<exclude name="**/pango-sharp.dll" />
-	    </fileset>
-	</copy>
+	<if test="${platform::is-win32() or is-osx}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+		<fileset>
+		    <include name="${lib.dir}/net-2.0/*.dll" />
+		    <include name="${examples.dir}/**/*.dll" />
+		</fileset>
+	    </copy>
 	</if>
-	<if test="${platform::is-unix()}">
+	<if test="${platform::is-unix() and not is-osx}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+		<fileset>
+		    <include name="${lib.dir}/net-2.0/*.dll" />
+		    <include name="${examples.dir}/**/*.dll" />
+		    <exclude name="**/atk-sharp.dll" />
+		    <exclude name="**/gtk-sharp.dll" />
+		    <exclude name="**/gdk-sharp.dll" />
+		    <exclude name="**/glade-sharp.dll" />
+		    <exclude name="**/glib-sharp.dll" />
+		    <exclude name="**/pango-sharp.dll" />
+		</fileset>
+	    </copy>
+	</if>
+	<if test="${platform::is-unix() and not is-osx}">
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
 		<fileset>
 		    <include name="${lib.dir}/net-2.0/*.config" />
+		</fileset>
+	    </copy>
+	</if>
+	<if test="${is-osx}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+		<fileset>
+		    <include name="${lib.dir}/net-2.0/osx/*.config" />
 		</fileset>
 	    </copy>
 	</if>
