@@ -37,6 +37,9 @@ namespace SdlDotNet.OpenGl
     {
         Surface textureImage;
         int textureID;
+        int initialWidth;
+        int initialHeight;
+
 
         /// <summary>
         /// 
@@ -47,10 +50,30 @@ namespace SdlDotNet.OpenGl
             this.textureImage = this.LoadInternal(surface);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public int InitialWidth
+        {
+            get { return initialWidth; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int InitialHeight
+        {
+            get { return initialHeight; }
+        } 
+
+
         private Surface LoadInternal(Surface surface)
         {
             try
             {
+                this.initialWidth = surface.Width;
+                this.initialHeight = surface.Height; 
+
                 surface = surface.CreateFlippedVerticalSurface();
                 surface = surface.CreateResizedSurface();
 
