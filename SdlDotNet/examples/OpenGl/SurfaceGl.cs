@@ -39,15 +39,36 @@ namespace SdlDotNet.OpenGl
         int textureID;
         int initialWidth;
         int initialHeight;
-
+        bool flipSurface;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="surface"></param>
         public SurfaceGl(Surface surface)
+            : this(surface, true)
+        { }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="flipSurface"></param>
+        public SurfaceGl(Surface surface, bool flipSurface)
         {
+            this.flipSurface = flipSurface;
             this.textureImage = this.LoadInternal(surface);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool FlipSurface
+        {
+            get
+            {
+                return flipSurface;
+            }
         }
 
         /// <summary>
@@ -64,7 +85,7 @@ namespace SdlDotNet.OpenGl
         public int InitialHeight
         {
             get { return initialHeight; }
-        } 
+        }
 
 
         private Surface LoadInternal(Surface surface)
@@ -72,9 +93,13 @@ namespace SdlDotNet.OpenGl
             try
             {
                 this.initialWidth = surface.Width;
-                this.initialHeight = surface.Height; 
+                this.initialHeight = surface.Height;
 
-                surface = surface.CreateFlippedVerticalSurface();
+                if (flipSurface)
+                {
+                    surface = surface.CreateFlippedVerticalSurface();
+                }
+
                 surface = surface.CreateResizedSurface();
 
                 int[] texture = new int[1];
