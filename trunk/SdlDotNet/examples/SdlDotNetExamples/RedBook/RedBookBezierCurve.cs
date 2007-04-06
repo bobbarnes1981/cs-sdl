@@ -36,221 +36,221 @@ using Tao.OpenGl;
 
 namespace SdlDotNetExamples.RedBook
 {
-	/// <summary>
-	///     This program uses evaluators to draw a Bezier curve.
-	/// </summary>
-	/// <remarks>
-	///     <para>
-	///         Original Author:    Silicon Graphics, Inc.
-	///         http://www.opengl.org/developers/code/examples/redbook/bezcurve.c
-	///     </para>
-	///     <para>
-	///         C# Implementation:  Randy Ridge
-	///         http://www.taoframework.com
-	///     </para>
-	///     <para>
-	///			SDL.NET implementation: David Hudson
-	///			http://cs-sdl.sourceforge.net
-	///     </para>
-	/// </remarks>
-	public class RedBookBezierCurve
-	{
-		#region Fields
+    /// <summary>
+    ///     This program uses evaluators to draw a Bezier curve.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         Original Author:    Silicon Graphics, Inc.
+    ///         http://www.opengl.org/developers/code/examples/redbook/bezcurve.c
+    ///     </para>
+    ///     <para>
+    ///         C# Implementation:  Randy Ridge
+    ///         http://www.taoframework.com
+    ///     </para>
+    ///     <para>
+    ///			SDL.NET implementation: David Hudson
+    ///			http://cs-sdl.sourceforge.net
+    ///     </para>
+    /// </remarks>
+    public class RedBookBezierCurve
+    {
+        #region Fields
 
-		//Width of screen
-		int width = 500;
-		//Height of screen
-		int height = 500;
+        //Width of screen
+        int width = 500;
+        //Height of screen
+        int height = 500;
 
         [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Justification = "Jagged Arrays are not CLS-compliant")]
-		private static float[/*4*/, /*3*/] controlPoints = {
-			{-4.0f, -4.0f, 0.0f},
-			{-2.0f,  4.0f, 0.0f},
-			{ 2.0f, -4.0f, 0.0f},
-			{ 4.0f,  4.0f, 0.0f}
-														   };
+        private static float[/* 4*3 */] controlPoints = {
+            -4.0f, -4.0f, 0.0f,
+            -2.0f,  4.0f, 0.0f,
+             2.0f, -4.0f, 0.0f,
+             4.0f,  4.0f, 0.0f
+         };
 
-		/// <summary>
-		/// Lesson title
-		/// </summary>
-		public static string Title
-		{
-			get
-			{
-				return "BezierCurve - Bezier curve";
-			}
-		}
+        /// <summary>
+        /// Lesson title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "BezierCurve - Bezier curve";
+            }
+        }
 
-		#endregion Fields
+        #endregion Fields
 
-		#region Constructors
+        #region Constructors
 
-		/// <summary>
-		/// Basic constructor
-		/// </summary>
-		public RedBookBezierCurve()
-		{
-			Initialize();
-		}
+        /// <summary>
+        /// Basic constructor
+        /// </summary>
+        public RedBookBezierCurve()
+        {
+            Initialize();
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Lesson Setup
-		/// <summary>
-		/// Initializes methods common to all RedBook lessons
-		/// </summary>
-		private void Initialize()
-		{
-			// Sets keyboard events
-			Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
-			Keyboard.EnableKeyRepeat(150,50);
-			// Sets the ticker to update OpenGL Context
-			Events.Tick += new EventHandler<TickEventArgs>(this.Tick); 
-			Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
-			//			// Sets the resize window event
-			//			Events.VideoResize += new EventHandler<VideoResizeEventArgs> (this.Resize);
-			// Set the Frames per second.
-			Events.Fps = 60;
-			// Sets Window icon and title
-			this.WindowAttributes();
-			// Creates SDL.NET Surface to hold an OpenGL scene
-			Video.SetVideoMode(width, height, true, true);
-		}
+        #region Lesson Setup
+        /// <summary>
+        /// Initializes methods common to all RedBook lessons
+        /// </summary>
+        private void Initialize()
+        {
+            // Sets keyboard events
+            Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
+            Keyboard.EnableKeyRepeat(150, 50);
+            // Sets the ticker to update OpenGL Context
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
+            //			// Sets the resize window event
+            //			Events.VideoResize += new EventHandler<VideoResizeEventArgs> (this.Resize);
+            // Set the Frames per second.
+            Events.Fps = 60;
+            // Sets Window icon and title
+            this.WindowAttributes();
+            // Creates SDL.NET Surface to hold an OpenGL scene
+            Video.SetVideoMode(width, height, true, true);
+        }
 
-		/// <summary>
-		/// Sets Window icon and caption
-		/// </summary>
-		private void WindowAttributes()
-		{
-			Video.WindowIcon();
-			Video.WindowCaption = 
-				"SDL.NET - RedBook " + 
-				this.GetType().ToString().Substring(26);
-		}
+        /// <summary>
+        /// Sets Window icon and caption
+        /// </summary>
+        private void WindowAttributes()
+        {
+            Video.WindowIcon();
+            Video.WindowCaption =
+                "SDL.NET - RedBook " +
+                this.GetType().ToString().Substring(26);
+        }
 
-		/// <summary>
-		/// Resizes window
-		/// </summary>
-		private void Reshape()
-		{
-			Reshape(this.width, this.height);
-		}
+        /// <summary>
+        /// Resizes window
+        /// </summary>
+        private void Reshape()
+        {
+            Reshape(this.width, this.height);
+        }
 
-		/// <summary>
-		/// Resizes window
-		/// </summary>
-		/// <param name="h"></param>
-		/// <param name="w"></param>
-		private static void Reshape(int w, int h)
-		{
-			Gl.glViewport(0, 0, w, h);
-			Gl.glMatrixMode(Gl.GL_PROJECTION);
-			Gl.glLoadIdentity();
-			if(w <= h) 
-			{
-				Gl.glOrtho(-5.0, 5.0, -5.0 * h / w, 5.0 * h / w, -5.0, 5.0);
-			}
-			else 
-			{
-				Gl.glOrtho(-5.0 * w / h, 5.0 * w / h, -5.0, 5.0, -5.0, 5.0);
-			}
-			Gl.glMatrixMode(Gl.GL_MODELVIEW);
-			Gl.glLoadIdentity();
-		}
+        /// <summary>
+        /// Resizes window
+        /// </summary>
+        /// <param name="h"></param>
+        /// <param name="w"></param>
+        private static void Reshape(int w, int h)
+        {
+            Gl.glViewport(0, 0, w, h);
+            Gl.glMatrixMode(Gl.GL_PROJECTION);
+            Gl.glLoadIdentity();
+            if (w <= h)
+            {
+                Gl.glOrtho(-5.0, 5.0, -5.0 * h / w, 5.0 * h / w, -5.0, 5.0);
+            }
+            else
+            {
+                Gl.glOrtho(-5.0 * w / h, 5.0 * w / h, -5.0, 5.0, -5.0, 5.0);
+            }
+            Gl.glMatrixMode(Gl.GL_MODELVIEW);
+            Gl.glLoadIdentity();
+        }
 
-		/// <summary>
-		///     <para>
-		///         Initialize antialiasing for RGBA mode, including alpha blending, hint, and
-		///         line width.  Print out implementation specific info on line width granularity
-		///         and width.
-		///     </para>
-		/// </summary>
-		private static void Init()
-		{
-			Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-			Gl.glShadeModel(Gl.GL_FLAT);
-			Gl.glMap1f(Gl.GL_MAP1_VERTEX_3, 0.0f, 1.0f, 3, 4, controlPoints);
-			Gl.glEnable(Gl.GL_MAP1_VERTEX_3);
-		}
+        /// <summary>
+        ///     <para>
+        ///         Initialize antialiasing for RGBA mode, including alpha blending, hint, and
+        ///         line width.  Print out implementation specific info on line width granularity
+        ///         and width.
+        ///     </para>
+        /// </summary>
+        private static void Init()
+        {
+            Gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            Gl.glShadeModel(Gl.GL_FLAT);
+            Gl.glMap1f(Gl.GL_MAP1_VERTEX_3, 0.0f, 1.0f, 3, 4, controlPoints);
+            Gl.glEnable(Gl.GL_MAP1_VERTEX_3);
+        }
 
-		#endregion Lesson Setup
+        #endregion Lesson Setup
 
-		#region void Display
-		/// <summary>
-		/// Renders the scene
-		/// </summary>
-		private static void Display()
-		{
-			int i;
+        #region void Display
+        /// <summary>
+        /// Renders the scene
+        /// </summary>
+        private static void Display()
+        {
+            int i;
 
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
-			Gl.glColor3f(1.0f, 1.0f, 1.0f);
-			Gl.glBegin(Gl.GL_LINE_STRIP);
-			for(i = 0; i <= 30; i++) 
-			{
-				Gl.glEvalCoord1f((float) i / 30.0f);
-			}
-			Gl.glEnd();
-			// The following code displays the control points as dots.
-			Gl.glPointSize(5.0f);
-			Gl.glColor3f(1.0f, 1.0f, 0.0f);
-			Gl.glBegin(Gl.GL_POINTS);
-			for (i = 0; i < 4; i++) 
-			{
-				Gl.glVertex3f(controlPoints[i, 0], controlPoints[i, 1], controlPoints[i, 2]);
-			}
-			Gl.glEnd();
-			Gl.glFlush();
-		}
-		#endregion void Display
+            Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
+            Gl.glColor3f(1.0f, 1.0f, 1.0f);
+            Gl.glBegin(Gl.GL_LINE_STRIP);
+            for (i = 0; i <= 30; i++)
+            {
+                Gl.glEvalCoord1f((float)i / 30.0f);
+            }
+            Gl.glEnd();
+            // The following code displays the control points as dots.
+            Gl.glPointSize(5.0f);
+            Gl.glColor3f(1.0f, 1.0f, 0.0f);
+            Gl.glBegin(Gl.GL_POINTS);
+            for (i = 0; i < 4; i++)
+            {
+                Gl.glVertex3f(controlPoints[i], controlPoints[i + 1], controlPoints[i + 2]);
+            }
+            Gl.glEnd();
+            Gl.glFlush();
+        }
+        #endregion void Display
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void KeyDown(object sender, KeyboardEventArgs e)
-		{
-			switch (e.Key) 
-			{
-				case Key.Escape:
-					// Will stop the app loop
-					Events.QuitApplication();
-					break;
-			}
-		}
+        private void KeyDown(object sender, KeyboardEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    // Will stop the app loop
+                    Events.QuitApplication();
+                    break;
+            }
+        }
 
-		private void Tick(object sender, TickEventArgs e)
-		{
-			Display();
-			Video.GLSwapBuffers();
-		}
+        private void Tick(object sender, TickEventArgs e)
+        {
+            Display();
+            Video.GLSwapBuffers();
+        }
 
-		private void Quit(object sender, QuitEventArgs e)
-		{
-			Events.QuitApplication();
-		}
+        private void Quit(object sender, QuitEventArgs e)
+        {
+            Events.QuitApplication();
+        }
 
-		//		private void Resize (object sender, VideoResizeEventArgs e)
-		//		{
-		//			Video.SetVideoMode(e.Width, e.Height, true);
-		//			if (screen.Width != e.Width || screen.Height != e.Height)
-		//			{
-		//				//this.Init();
-		//				this.RedBook t = new RedBook(); t.Reshape();
-		//			}
-		//		}
+        //		private void Resize (object sender, VideoResizeEventArgs e)
+        //		{
+        //			Video.SetVideoMode(e.Width, e.Height, true);
+        //			if (screen.Width != e.Width || screen.Height != e.Height)
+        //			{
+        //				//this.Init();
+        //				this.RedBook t = new RedBook(); t.Reshape();
+        //			}
+        //		}
 
-		#endregion Event Handlers
+        #endregion Event Handlers
 
-		#region Run Loop
-		/// <summary>
-		/// Starts demo
-		/// </summary>
-		public static void Run()
-		{
+        #region Run Loop
+        /// <summary>
+        /// Starts demo
+        /// </summary>
+        public static void Run()
+        {
             RedBookBezierCurve t = new RedBookBezierCurve(); t.Reshape();
-			Init();
-			Events.Run();
-		}
+            Init();
+            Events.Run();
+        }
 
-		#endregion Run Loop
-	}
+        #endregion Run Loop
+    }
 }
