@@ -84,21 +84,28 @@ namespace SdlDotNetExamples.SmallDemos
 
             // Bounce the ball
             if (ball.Right > Video.Screen.Width)
+            {
                 ballSpeedX *= -1;
+            }
             if (ball.Left < 0)
+            {
                 ballSpeedX *= -1;
+            }
             if (ball.Top < 0)
+            {
                 ballSpeedY *= -1;
+            }
             if (ball.Bottom > Video.Screen.Height)
+            {
                 ballSpeedY *= -1;
+            }
 
             // Clear the screen
             Video.Screen.Fill(Color.Black);
 
             // Draw the ball
             Video.Screen.Blit(ball);
-            //ball.Render(Video.Screen);
-
+            
             // Update the screen
             Video.Screen.Update();
         }
