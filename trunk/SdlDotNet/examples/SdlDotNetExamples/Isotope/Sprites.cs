@@ -44,7 +44,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="skin_group"></param>
         /// <param name="object_group"></param>
         /// <returns></returns>
-        public static Sprite[] UpdateImages(Skin[] skin_group, Object3d[] object_group)
+        public static Sprite[] UpdateImages(Skin[] skinGroup, Object3d[] objectGroup)
         {
             /* updates all the images for every object
 
@@ -52,12 +52,12 @@ namespace SdlDotNetExamples.Isotope
                 skin_group: a list of skins which will be used to find the correct image for the objects sprite: list of skins
                 Returns sprite_group : sprite_group: a list of sprites which hold the new images: list of sprites 
             */
-            Sprite[] sprite_group = new Sprite[object_group.Length];
+            Sprite[] sprite_group = new Sprite[objectGroup.Length];
             int i = 0;
-            foreach (Object3d obj in object_group)
+            foreach (Object3d obj in objectGroup)
             {
                 Sprite sprite = new Sprite();
-                sprite.Surface = skin_group[obj.ObjectType].GetImage(obj);
+                sprite.Surface = skinGroup[obj.ObjectType].GetImage(obj);
                 sprite.Rectangle = sprite.Surface.Rectangle;
                 sprite.Surface.TransparentColor = System.Drawing.Color.White;
                 sprite.Surface.Transparent = true;
@@ -74,7 +74,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="iso_draw_order"></param>
         /// <param name="surface"></param>
         /// <returns></returns>
-        public static Rectangle[] OrderedDraw(Sprite[] sprite_group, int[] iso_draw_order, Surface surface)
+        public static Rectangle[] OrderedDraw(Sprite[] spriteGroup, int[] isoDrawOrder, Surface surface)
         {
             /*/ Draws the sprites to the surface and returns a rect list for surface update
 
@@ -83,12 +83,12 @@ namespace SdlDotNetExamples.Isotope
                 surface: The pygame display area to be drawn into: surface
                 Returns rect: a list of drawn rectangles for updating : list of rect
             /*/
-            Rectangle[] rect = new Rectangle[sprite_group.Length];
-            for (int sp = 0; sp < sprite_group.Length; sp++)
+            Rectangle[] rect = new Rectangle[spriteGroup.Length];
+            for (int sp = 0; sp < spriteGroup.Length; sp++)
             {
                 //Console.WriteLine(sprite_group[iso_draw_order[sp]].Rectangle.Top);
                 //Console.WriteLine(sprite_group[iso_draw_order[sp]].Rectangle.Left);
-                rect[sp] = surface.Blit(sprite_group[iso_draw_order[sp]], sprite_group[iso_draw_order[sp]].Rectangle);
+                rect[sp] = surface.Blit(spriteGroup[isoDrawOrder[sp]], spriteGroup[isoDrawOrder[sp]].Rectangle);
             }
             return (rect);
         }
@@ -99,7 +99,7 @@ namespace SdlDotNetExamples.Isotope
         /// <param name="sprite_rect"></param>
         /// <param name="old_rect"></param>
         /// <returns></returns>
-        public static Rectangle[] CombineRectangles(Rectangle[] sprite_rect, Rectangle[] old_rect)
+        public static Rectangle[] CombineRectangles(Rectangle[] spriteRect, Rectangle[] oldRect)
         {
             /* Combine the old sprite rectangles with the new sprite rectangles and update those rectangles
 
@@ -112,51 +112,51 @@ namespace SdlDotNetExamples.Isotope
             ArrayList update_rect;
             Rectangle[] update_rect_array;
             //Case of the rectangle lists being the same length
-            if (old_rect.Length > 0 && old_rect.Length == sprite_rect.Length)
+            if (oldRect.Length > 0 && oldRect.Length == spriteRect.Length)
             {
                 //Console.WriteLine("Case1");
-                update_rect = new ArrayList(sprite_rect.Length);
-                for (int rect = 0; rect < sprite_rect.Length; rect++)
+                update_rect = new ArrayList(spriteRect.Length);
+                for (int rect = 0; rect < spriteRect.Length; rect++)
                 {
-                    update_rect.Add(Rectangle.Union(sprite_rect[rect], old_rect[rect]));
+                    update_rect.Add(Rectangle.Union(spriteRect[rect], oldRect[rect]));
                 }
             }
             //Case of the old rectangle list is bigger than the sprite rectangle list        
-            else if (old_rect.Length > 0 && old_rect.Length > sprite_rect.Length)
+            else if (oldRect.Length > 0 && oldRect.Length > spriteRect.Length)
             {
                 //Console.WriteLine("Case2");
-                update_rect = new ArrayList(sprite_rect.Length);
-                for (int rect = 0; rect < sprite_rect.Length; rect++)
+                update_rect = new ArrayList(spriteRect.Length);
+                for (int rect = 0; rect < spriteRect.Length; rect++)
                 {
-                    update_rect.Add(Rectangle.Union(sprite_rect[rect], old_rect[rect]));
+                    update_rect.Add(Rectangle.Union(spriteRect[rect], oldRect[rect]));
                 }
-                for (int rect = sprite_rect.Length - 1; rect < old_rect.Length; rect++)
+                for (int rect = spriteRect.Length - 1; rect < oldRect.Length; rect++)
                 {
-                    update_rect.Add(old_rect[rect]);
+                    update_rect.Add(oldRect[rect]);
                 }
             }
             //Case of the old rectangle list is smaller than the sprite rectangle list 
-            else if (old_rect.Length > 0 && old_rect.Length < sprite_rect.Length)
+            else if (oldRect.Length > 0 && oldRect.Length < spriteRect.Length)
             {
                 //Console.WriteLine("Case3");
-                update_rect = new ArrayList(old_rect.Length);
-                for (int rect = 0; rect < old_rect.Length; rect++)
+                update_rect = new ArrayList(oldRect.Length);
+                for (int rect = 0; rect < oldRect.Length; rect++)
                 {
-                    update_rect.Add(Rectangle.Union(sprite_rect[rect], old_rect[rect]));
+                    update_rect.Add(Rectangle.Union(spriteRect[rect], oldRect[rect]));
                 }
-                for (int rect = old_rect.Length - 1; rect < sprite_rect.Length; rect++)
+                for (int rect = oldRect.Length - 1; rect < spriteRect.Length; rect++)
                 {
-                    update_rect.Add(sprite_rect[rect]);
+                    update_rect.Add(spriteRect[rect]);
                 }
             }
             else
             {
                 //Console.WriteLine("Case4");
                 //KLUDGY STUFF!! Copy Array into Array List
-                update_rect = new ArrayList(sprite_rect.Length);
-                for (int rect = 0; rect < sprite_rect.Length; rect++)
+                update_rect = new ArrayList(spriteRect.Length);
+                for (int rect = 0; rect < spriteRect.Length; rect++)
                 {
-                    update_rect.Add(sprite_rect[rect]);
+                    update_rect.Add(spriteRect[rect]);
                 }
             }
             update_rect_array = new Rectangle[update_rect.Count];
