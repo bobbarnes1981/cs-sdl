@@ -302,6 +302,21 @@ namespace SdlDotNetExamples.SmallDemos
                         this.font.Dispose();
                         this.font = null;
                     }
+                    if (this.surfaceGl1 != null)
+                    {
+                        this.surfaceGl1.Dispose();
+                        this.surfaceGl1 = null;
+                    }
+                    if (this.surfaceGl2 != null)
+                    {
+                        this.surfaceGl2.Dispose();
+                        this.surfaceGl2 = null;
+                    }
+                    if (this.surfaceGl3 != null)
+                    {
+                        this.surfaceGl3.Dispose();
+                        this.surfaceGl3 = null;
+                    }
                 }
                 this.disposed = true;
             }
