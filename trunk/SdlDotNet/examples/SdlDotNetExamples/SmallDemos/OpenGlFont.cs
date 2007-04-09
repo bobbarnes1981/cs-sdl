@@ -220,11 +220,14 @@ namespace SdlDotNetExamples.SmallDemos
             Gl.glColor3f(0, 0, 0);
             Gl.glEnd();
             SurfaceGl.Mode2D = true;
-            surfaceGl1.Load(font.Render(phrase1 + i++, Color.White, Color.Black));
+            surfaceGl1.Surface = font.Render(phrase1 + i++, Color.White, Color.Black);
+            //surfaceGl1.Load(font.Render(phrase1 + i++, Color.White, Color.Black));
             surfaceGl1.Draw(new Point(0, 0));
-            surfaceGl2.Load(font.Render(phrase2 + i++, Color.White, Color.Black));
+            surfaceGl2.Surface = font.Render(phrase2 + i++, Color.White, Color.Black);
+            //surfaceGl2.Load(font.Render(phrase2 + i++, Color.White, Color.Black));
             surfaceGl2.Draw(new Point(100, 100));
-            surfaceGl3.Load(font.Render(phrase3 + i++, Color.White, Color.Black));
+            surfaceGl3.Surface = font.Render(phrase3 + i++, Color.White, Color.Black);
+            //surfaceGl3.Load(font.Render(phrase3 + i++, Color.White, Color.Black));
             surfaceGl3.Draw(new Point(200, 200));
             SurfaceGl.Mode2D = false;
 
