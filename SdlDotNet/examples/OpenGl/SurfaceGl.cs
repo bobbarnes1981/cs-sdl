@@ -36,8 +36,9 @@ namespace SdlDotNet.OpenGl
     [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class SurfaceGl : IDisposable 
     {
-        #region static
+        #region Static
         static bool mode2D;
+
         /// <summary>
         /// 
         /// </summary>
@@ -90,7 +91,7 @@ namespace SdlDotNet.OpenGl
         }
         #endregion
 
-        #region fields 
+        #region Fields 
         Surface surface;
         bool isFlipped;
         int textureID;
@@ -100,7 +101,7 @@ namespace SdlDotNet.OpenGl
         float heightRatio; 
         #endregion
 
-        #region constructor
+        #region Constructor
         /// <summary>
         /// Creates a new Instance of SurfaceGl.
         /// </summary>
@@ -108,6 +109,7 @@ namespace SdlDotNet.OpenGl
         public SurfaceGl(Surface surface)
             : this(surface, true)
         { }
+
         /// <summary>
         /// Creates a new Instance of SurfaceGl.
         /// </summary>
@@ -126,7 +128,7 @@ namespace SdlDotNet.OpenGl
         } 
         #endregion
 
-        #region properties
+        #region Properties
         /// <summary>
         /// Gets and Sets the surface the Texture is made from.
         /// </summary>
@@ -143,6 +145,7 @@ namespace SdlDotNet.OpenGl
                 }
             }
         }
+
         /// <summary>
         /// Gets the Width of the texture.
         /// </summary>
@@ -150,6 +153,7 @@ namespace SdlDotNet.OpenGl
         {
             get { Check(); return textureWidth; }
         }
+
         /// <summary>
         /// Gets the Height of the texture.
         /// </summary>
@@ -157,6 +161,7 @@ namespace SdlDotNet.OpenGl
         {
             get { Check(); return textureHeight; }
         }
+
         /// <summary>
         /// The Percent of the OpenGl Texture the original Surface is utilizing along it's Width.
         /// </summary>
@@ -164,6 +169,7 @@ namespace SdlDotNet.OpenGl
         {
             get { Check(); return widthRatio; }
         }
+
         /// <summary>
         /// The Percent of the OpenGl Texture the original Surface  is utilizing along it's Height.
         /// </summary>
@@ -171,6 +177,7 @@ namespace SdlDotNet.OpenGl
         {
             get { Check(); return heightRatio; }
         }
+
         /// <summary>
         /// Gets the OpenGl Texture Name.
         /// </summary>
@@ -178,6 +185,7 @@ namespace SdlDotNet.OpenGl
         {
             get { Check(); return textureID; }
         }
+
         /// <summary>
         /// Gets and Sets if the texture is Flipped.
         /// </summary>
@@ -192,9 +200,10 @@ namespace SdlDotNet.OpenGl
                 }
             }
         } 
+
         #endregion
 
-        #region methods
+        #region Methods
         private void Check()
         {
             if (textureID <= 0)
@@ -202,6 +211,7 @@ namespace SdlDotNet.OpenGl
                 Refresh();
             }
         }
+
         private Surface TransformSurface(bool flipSurface)
         {
             byte alpha = surface.Alpha;
@@ -244,6 +254,7 @@ namespace SdlDotNet.OpenGl
             this.widthRatio = -1;
             this.heightRatio = -1;
         }
+
         /// <summary>
         /// Reloads the OpenGl Texture from the Surface.
         /// </summary>
@@ -251,6 +262,7 @@ namespace SdlDotNet.OpenGl
         {
             Refresh(surface, isFlipped);
         }
+
         /// <summary>
         /// Reloads the OpenGl Texture from the Surface.
         /// </summary>
@@ -290,6 +302,7 @@ namespace SdlDotNet.OpenGl
         {
             this.Surface = surface;
         }
+
         /// <summary>
         /// Draws the Texture.
         /// </summary>
@@ -297,6 +310,7 @@ namespace SdlDotNet.OpenGl
         {
             this.Draw(new Point(0, 0));
         }
+
         /// <summary>
         /// Draws the Texture.
         /// </summary>
@@ -329,6 +343,7 @@ namespace SdlDotNet.OpenGl
                 Delete();
             }
         }
+
         /// <summary>
         /// Disposes the Object by freeing all OpenGl memory allocated to it.
         /// </summary>
