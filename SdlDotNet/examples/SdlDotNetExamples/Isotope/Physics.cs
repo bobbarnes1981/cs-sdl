@@ -58,9 +58,11 @@ namespace SdlDotNetExamples.Isotope
                 through each other if they have high velocity and the objects are small
             */
             CollisionImpact imp = new CollisionImpact();
-            int impact_time_face1, impact_time_face2;
-            int impact_face_object1 = 0, impact_face_object2 = 0;
-            int impact_time_coord = 0;
+            int impactTimeFace1;
+            int impactTimeFace2;
+            int impactFaceObject1 = 0;
+            int impactFaceObject2 = 0;
+            int impactTimeCoord = 0;
 
             for (int i = 0; i <= 2; i++)
             {
@@ -81,25 +83,25 @@ namespace SdlDotNetExamples.Isotope
 
             for (int i = 0; i <= 2; i++)
             {
-                impact_time_face1 = object1.GetPosition()[i] + object1.GetSize()[i] - object2.GetPosition()[i];
-                impact_time_face2 = object2.GetPosition()[i] + object2.GetSize()[i] - object1.GetPosition()[i];
-                if (impact_time_face1 < impact_time_face2)
+                impactTimeFace1 = object1.GetPosition()[i] + object1.GetSize()[i] - object2.GetPosition()[i];
+                impactTimeFace2 = object2.GetPosition()[i] + object2.GetSize()[i] - object1.GetPosition()[i];
+                if (impactTimeFace1 < impactTimeFace2)
                 {
-                    impact_face_object1 = i << 1;
-                    impact_face_object2 = (i << 1) + 1;
-                    impact_time_coord = impact_time_face1;
+                    impactFaceObject1 = i << 1;
+                    impactFaceObject2 = (i << 1) + 1;
+                    impactTimeCoord = impactTimeFace1;
                 }
-                else if (impact_time_face1 >= impact_time_face2)
+                else if (impactTimeFace1 >= impactTimeFace2)
                 {
-                    impact_face_object1 = (i << 1) + 1;
-                    impact_face_object2 = i << 1;
-                    impact_time_coord = impact_time_face2;
+                    impactFaceObject1 = (i << 1) + 1;
+                    impactFaceObject2 = i << 1;
+                    impactTimeCoord = impactTimeFace2;
                 }
-                if (impact_time_coord < imp.ImpactTime)
+                if (impactTimeCoord < imp.ImpactTime)
                 {
-                    imp.ImpactTime = impact_time_coord;
-                    imp.ImpactFaceObject1 = impact_face_object1;
-                    imp.ImpactFaceObject2 = impact_face_object2;
+                    imp.ImpactTime = impactTimeCoord;
+                    imp.ImpactFaceObject1 = impactFaceObject1;
+                    imp.ImpactFaceObject2 = impactFaceObject2;
                 }
             }
             return (imp);
@@ -173,7 +175,7 @@ namespace SdlDotNetExamples.Isotope
             {
                 throw new ArgumentNullException("imp");
             }
-            
+
             /* Moves back the objects until they are adjacent on their colliding sides
 
                 object1: The first object to be moved: class or subclass of Object3d
@@ -237,7 +239,7 @@ namespace SdlDotNetExamples.Isotope
             {
                 throw new ArgumentNullException("objectGroup");
             }
-           
+
             /*Discover if any of the objects in the group are touching and call their touch response routines
 
                obj_group: A list of objects within the scene: list of class or subclass of Object3d
@@ -374,6 +376,5 @@ namespace SdlDotNetExamples.Isotope
             int[] test_pos = Vector.AddVector(corner_vect, source_centre);
             return (test_pos);
         }
-
     }
 }
