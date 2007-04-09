@@ -27,8 +27,8 @@ namespace SdlDotNetExamples.Isotope
     /// </summary>
     public class Portal : Object3d
     {
-        Scene dest_scene;
-        int[] dest_pos ={ 0, 0, 0 };
+        Scene destScene;
+        int[] destPos ={ 0, 0, 0 };
         /* An object which can signal to lead actors for a scene change if they touch the portal */
         /// <summary>
         /// 
@@ -41,8 +41,8 @@ namespace SdlDotNetExamples.Isotope
         public Portal(int[] position, int[] size, int objectType, Scene destinationScene, int[] destinationPosition)
             : base(position, size, objectType, true)
         {
-            this.dest_scene = destinationScene;
-            Vector.CopyVector(destinationPosition, this.dest_pos);
+            this.destScene = destinationScene;
+            Vector.CopyVector(destinationPosition, this.destPos);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace SdlDotNetExamples.Isotope
             LeadActor aOtherObject = otherObject as LeadActor;
             if (aOtherObject != null)
             {
-                (aOtherObject).EventChangeScene(dest_scene, dest_pos);
+                (aOtherObject).EventChangeScene(destScene, destPos);
             }
         }
     }
