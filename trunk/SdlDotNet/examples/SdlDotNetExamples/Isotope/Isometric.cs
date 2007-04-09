@@ -57,12 +57,12 @@ namespace SdlDotNetExamples.Isotope
             {
                 throw new ArgumentNullException("coordinate");
             }
-            int[] trans_coord ={ 0, 0 };
+            int[] transCoord ={ 0, 0 };
             //calculate x coordinate
-            trans_coord[0] = (coordinate[0] - coordinate[1]) + offset[0];
+            transCoord[0] = (coordinate[0] - coordinate[1]) + offset[0];
             //calculates y coordinate
-            trans_coord[1] = ((coordinate[0] + coordinate[1]) >> 1) - coordinate[2] + offset[1];
-            return trans_coord;
+            transCoord[1] = ((coordinate[0] + coordinate[1]) >> 1) - coordinate[2] + offset[1];
+            return transCoord;
         }
 
         /// <summary>

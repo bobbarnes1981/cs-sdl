@@ -77,12 +77,12 @@ namespace SdlDotNetExamples.LargeDemos
 
             // Setup the two scenes of a bedroom and a lounge with Ian Curtis as the lead actor  
 
-            ArrayList joy_world = new ArrayList();
+            ArrayList joyWorld = new ArrayList();
 
             Scene bedroom = new Scene(0, new ArrayList());
             Scene lounge = new Scene(1, new ArrayList());
-            joy_world.Add(bedroom);
-            joy_world.Add(lounge);
+            joyWorld.Add(bedroom);
+            joyWorld.Add(lounge);
 
             // Scene 0
 
@@ -92,14 +92,14 @@ namespace SdlDotNetExamples.LargeDemos
             Object3d bed = new Object3d(new int[] { 10, 100, 0 }, new int[] { 70, 52, 28 }, 6, false);
             bedroom.AppendObject(bed);
 
-            LeadActor ian_curtis = new LeadActor(new int[] { 90, 90, 0 }, new int[] { 14, 14, 50 }, 4, bedroom, false);
-            bedroom.AppendObject(ian_curtis);
+            LeadActor ianCurtis = new LeadActor(new int[] { 90, 90, 0 }, new int[] { 14, 14, 50 }, 4, bedroom, false);
+            bedroom.AppendObject(ianCurtis);
 
             Portal door = new Portal(new int[] { 180, 105, 0 }, new int[] { 10, 30, 56 }, 5, lounge, new int[] { 10, 115, 0 });
             bedroom.AppendObject(door);
 
-            DissolverRandomCreator ampfactory = new DissolverRandomCreator(new int[] { 180, 105, 60 }, new int[] { 10, 10, 10 }, 4000, bedroom, true);
-            bedroom.AppendObject(ampfactory);
+            DissolverRandomCreator ampFactory = new DissolverRandomCreator(new int[] { 180, 105, 60 }, new int[] { 10, 10, 10 }, 4000, bedroom, true);
+            bedroom.AppendObject(ampFactory);
 
             // walls and floor
             Object3d ground = new Object3d(new int[] { -1000, -1000, -100 }, new int[] { 2000, 2000, 100 }, 4000, true);
@@ -145,45 +145,45 @@ namespace SdlDotNetExamples.LargeDemos
 
             // Images for the Backgrounds and the objects
 
-            Skin[] skin_group = new Skin[8];
+            Skin[] skinGroup = new Skin[8];
 
-            ArrayList bedroom_image = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "bedroom.png") });
-            skin_group[0] = (new Skin(bedroom_image, "Bedroom"));
+            ArrayList bedroomImage = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "bedroom.png") });
+            skinGroup[0] = (new Skin(bedroomImage, "Bedroom"));
 
-            ArrayList lounge_image = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "lounge.png") });
-            skin_group[1] = (new Skin(lounge_image, "Lounge"));
+            ArrayList loungeImage = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "lounge.png") });
+            skinGroup[1] = (new Skin(loungeImage, "Lounge"));
 
-            ArrayList amp_image = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "amp.png") });
-            skin_group[2] = (new Skin(amp_image, "Amp"));
+            ArrayList ampImage = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "amp.png") });
+            skinGroup[2] = (new Skin(ampImage, "Amp"));
 
-            ArrayList guitar_image = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "guitar.png") });
-            skin_group[3] = (new Skin(guitar_image, "Guitar"));
+            ArrayList guitarImage = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "guitar.png") });
+            skinGroup[3] = (new Skin(guitarImage, "Guitar"));
 
-            ArrayList ian_curtis_images = SkinsLib.LoadImages(new string[] {Path.Combine(filePath, "ian_curtis0.png"),Path.Combine(filePath, "ian_curtis5.png"),Path.Combine(filePath, "ian_curtis3.png"),Path.Combine(filePath, "ian_curtisF4.png"),
+            ArrayList ianCurtisImages = SkinsLib.LoadImages(new string[] {Path.Combine(filePath, "ian_curtis0.png"),Path.Combine(filePath, "ian_curtis5.png"),Path.Combine(filePath, "ian_curtis3.png"),Path.Combine(filePath, "ian_curtisF4.png"),
 																			  Path.Combine(filePath, "ian_curtisF6.png"),Path.Combine(filePath, "ian_curtisF7.png"),Path.Combine(filePath, "ian_curtisF0.png"),Path.Combine(filePath, "ian_curtisF5.png"),Path.Combine(filePath, "ian_curtisF3.png"),Path.Combine(filePath, "ian_curtis4.png"),Path.Combine(filePath, "ian_curtis6.png"),Path.Combine(filePath, "ian_curtis7.png")});
-            skin_group[4] = (Skin)new Pointing(ian_curtis_images, "Ian Curtis");
+            skinGroup[4] = (Skin)new Pointing(ianCurtisImages, "Ian Curtis");
 
             // Mirror the images to complete the animation
             //for(int i=3;i<9;i++)
             //   ((Surface)ian_curtis_images[i]).FlipHorizontal();
 
-            ArrayList door_image = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "door.png") });
-            skin_group[5] = (new Skin(door_image, "Door"));
+            ArrayList doorImage = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "door.png") });
+            skinGroup[5] = (new Skin(doorImage, "Door"));
 
-            ArrayList bed_image = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "bed.png") });
-            skin_group[6] = (new Skin(bed_image, "Bed"));
+            ArrayList bedImage = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "bed.png") });
+            skinGroup[6] = (new Skin(bedImage, "Bed"));
 
-            ArrayList sofa_image = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "sofa.png") });
-            skin_group[7] = (new Skin(sofa_image, "Sofa"));
+            ArrayList sofaImage = SkinsLib.LoadImages(new string[] { Path.Combine(filePath, "sofa.png") });
+            skinGroup[7] = (new Skin(sofaImage, "Sofa"));
 
-            Keys joykeys = new Keys(Key.O, Key.P, Key.A, Key.Z,
+            Keys joyKeys = new Keys(Key.O, Key.P, Key.A, Key.Z,
                 Key.M, Key.G, Key.H, Key.B, Key.U);
 
             // Create an isotope engine using the skin_group and the scene_group
-            Engine joy_engine = new Engine(ian_curtis, skin_group, surface, joykeys, Path.Combine(filePath, "titlebar.png"));
+            Engine joyEngine = new Engine(ianCurtis, skinGroup, surface, joyKeys, Path.Combine(filePath, "titlebar.png"));
 
             // Start the isotope engine
-            joy_engine.Start();
+            joyEngine.Start();
         }
 
         /// <summary>
