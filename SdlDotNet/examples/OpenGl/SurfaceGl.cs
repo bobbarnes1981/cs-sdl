@@ -34,7 +34,7 @@ namespace SdlDotNet.OpenGl
     /// Loads a Surface into a OpenGl Texture.   
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
-    public class SurfaceGl : IDisposable 
+    public class SurfaceGl : IDisposable
     {
         #region Static
         static bool mode2D;
@@ -91,14 +91,14 @@ namespace SdlDotNet.OpenGl
         }
         #endregion
 
-        #region Fields 
+        #region Fields
         Surface surface;
         bool isFlipped;
-        int textureID;
+        int textureId;
         int textureWidth;
         int textureHeight;
         float widthRatio;
-        float heightRatio; 
+        float heightRatio;
         #endregion
 
         #region Constructor
@@ -120,12 +120,12 @@ namespace SdlDotNet.OpenGl
             if (surface == null) { throw new ArgumentNullException("surface"); }
             this.surface = surface;
             this.isFlipped = flipSurface;
-            this.textureID = -1;
+            this.textureId = -1;
             this.textureWidth = -1;
             this.textureHeight = -1;
             this.widthRatio = -1;
             this.heightRatio = -1;
-        } 
+        }
         #endregion
 
         #region Properties
@@ -181,9 +181,9 @@ namespace SdlDotNet.OpenGl
         /// <summary>
         /// Gets the OpenGl Texture Name.
         /// </summary>
-        public int TextureID
+        public int TextureId
         {
-            get { Check(); return textureID; }
+            get { Check(); return textureId; }
         }
 
         /// <summary>
@@ -199,14 +199,14 @@ namespace SdlDotNet.OpenGl
                     Refresh(surface, value);
                 }
             }
-        } 
+        }
 
         #endregion
 
         #region Methods
         private void Check()
         {
-            if (textureID <= 0)
+            if (textureId <= 0)
             {
                 Refresh();
             }
@@ -243,12 +243,12 @@ namespace SdlDotNet.OpenGl
         /// </summary>
         public void Delete()
         {
-            if (Gl.glIsTexture(this.textureID) != 0)
+            if (Gl.glIsTexture(this.textureId) != 0)
             {
-                int[] texId = new int[] { textureID };
+                int[] texId = new int[] { textureId };
                 Gl.glDeleteTextures(1, texId);
             }
-            this.textureID = -1;
+            this.textureId = -1;
             this.textureWidth = -1;
             this.textureHeight = -1;
             this.widthRatio = -1;
@@ -277,7 +277,7 @@ namespace SdlDotNet.OpenGl
             {
                 int[] textures = new int[1];
                 Gl.glGenTextures(1, textures);
-                this.textureID = textures[0];
+                this.textureId = textures[0];
 
                 this.textureWidth = textureSurface.Width;
                 this.textureHeight = textureSurface.Height;
@@ -285,7 +285,7 @@ namespace SdlDotNet.OpenGl
                 this.widthRatio = (float)surface.Width / textureWidth;
                 this.heightRatio = (float)surface.Height / textureHeight;
 
-                Gl.glBindTexture(Gl.GL_TEXTURE_2D, textureID);
+                Gl.glBindTexture(Gl.GL_TEXTURE_2D, textureId);
                 Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, textureSurface.BytesPerPixel, textureWidth, textureHeight, 0, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, textureSurface.Pixels);
                 Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
                 Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
@@ -318,7 +318,7 @@ namespace SdlDotNet.OpenGl
         public void Draw(Point location)
         {
             Check();
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureID);
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureId);
             Gl.glBegin(Gl.GL_QUADS);
             //Gl.glColor4f(1, 1, 1, 1);
             Gl.glTexCoord2f(0, heightRatio);
