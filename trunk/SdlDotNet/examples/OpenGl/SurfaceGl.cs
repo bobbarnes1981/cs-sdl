@@ -101,7 +101,7 @@ namespace SdlDotNet.OpenGl
         float heightRatio;
         #endregion
 
-        #region Constructor
+        #region Constructors
         /// <summary>
         /// Creates a new Instance of SurfaceGl.
         /// </summary>
@@ -163,7 +163,7 @@ namespace SdlDotNet.OpenGl
         }
 
         /// <summary>
-        /// The Percent of the OpenGl Texture the original Surface is utilizing along it's Width.
+        /// Gets the Percent of the OpenGl Texture the original Surface is utilizing along it's Width.
         /// </summary>
         public float WidthRatio
         {
@@ -171,7 +171,7 @@ namespace SdlDotNet.OpenGl
         }
 
         /// <summary>
-        /// The Percent of the OpenGl Texture the original Surface  is utilizing along it's Height.
+        /// Gets the Percent of the OpenGl Texture the original Surface  is utilizing along it's Height.
         /// </summary>
         public float HeightRatio
         {
