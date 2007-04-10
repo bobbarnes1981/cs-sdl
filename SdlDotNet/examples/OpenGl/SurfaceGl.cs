@@ -89,6 +89,7 @@ namespace SdlDotNet.OpenGl
                 }
             }
         }
+
         #endregion
 
         #region Fields
@@ -99,6 +100,7 @@ namespace SdlDotNet.OpenGl
         int textureHeight;
         float widthRatio;
         float heightRatio;
+
         #endregion
 
         #region Constructors
@@ -126,6 +128,7 @@ namespace SdlDotNet.OpenGl
             this.widthRatio = -1;
             this.heightRatio = -1;
         }
+
         #endregion
 
         #region Properties
@@ -293,22 +296,11 @@ namespace SdlDotNet.OpenGl
         }
 
         /// <summary>
-        /// Should Be removed as soon as possible.
-        /// Need to change the OpenGl Font Example to stop its reliance on this method.
-        /// </summary>
-        /// <param name="surface"> ;) </param>
-        [Obsolete("The Load method is Obsolete. Use the Surface property.")]
-        public void Load(Surface surface)
-        {
-            this.Surface = surface;
-        }
-
-        /// <summary>
         /// Draws the Texture.
         /// </summary>
         public void Draw()
         {
-            this.Draw(new Point(0, 0));
+            this.Draw(0,0);
         }
 
         /// <summary>
@@ -317,17 +309,27 @@ namespace SdlDotNet.OpenGl
         /// <param name="location">The offset for the Texture.</param>
         public void Draw(Point location)
         {
+            Draw(location.X, location.Y);
+        }
+       
+        /// <summary>
+        /// Draws the Texture.
+        /// </summary>
+        /// <param name="locationX">The x offset for the Texture.</param>
+        /// <param name="locationY">The y offset for the Texture.</param>
+        public void Draw(float locationX, float locationY)
+        {
             Check();
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureId);
             Gl.glBegin(Gl.GL_QUADS);
             Gl.glTexCoord2f(0, heightRatio);
-            Gl.glVertex2f(location.X, location.Y);
+            Gl.glVertex2f(locationX, locationY);
             Gl.glTexCoord2f(widthRatio, heightRatio);
-            Gl.glVertex2f(location.X + surface.Width, location.Y);
+            Gl.glVertex2f(locationX + surface.Width, locationY);
             Gl.glTexCoord2f(widthRatio, 0);
-            Gl.glVertex2f(location.X + surface.Width, location.Y + surface.Height);
+            Gl.glVertex2f(locationX + surface.Width, locationY + surface.Height);
             Gl.glTexCoord2f(0, 0);
-            Gl.glVertex2f(location.X, location.Y + surface.Height);
+            Gl.glVertex2f(locationX, locationY + surface.Height);
             Gl.glEnd();
         }
 
@@ -350,6 +352,7 @@ namespace SdlDotNet.OpenGl
         {
             Dispose(true);
         }
+
         #endregion
     }
 }
