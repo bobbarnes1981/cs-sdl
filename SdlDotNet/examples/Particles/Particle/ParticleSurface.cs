@@ -86,7 +86,7 @@ namespace SdlDotNet.Particles.Particle
             m_ClipRectangle = new Rectangle(0, 0, m_Surface.Width, m_Surface.Height);
         }
         /// <summary>
-        /// 
+        /// Creates a particle surface.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="positionX"></param>
@@ -105,7 +105,7 @@ namespace SdlDotNet.Particles.Particle
             m_ClipRectangle = new Rectangle(0, 0, m_Surface.Width, m_Surface.Height);
         }
         /// <summary>
-        /// 
+        /// Creates a particle surface.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="positionX"></param>
@@ -122,7 +122,7 @@ namespace SdlDotNet.Particles.Particle
             m_ClipRectangle = new Rectangle(0, 0, m_Surface.Width, m_Surface.Height);
         }
         /// <summary>
-        /// 
+        /// Creates a particle surface.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="positionX"></param>
@@ -141,7 +141,7 @@ namespace SdlDotNet.Particles.Particle
             m_ClipRectangle = new Rectangle(0, 0, m_Surface.Width, m_Surface.Height);
         }
         /// <summary>
-        /// 
+        /// Creates a particle surface.
         /// </summary>
         /// <param name="surface"></param>
         public ParticleSurface(Surface surface)
@@ -155,7 +155,7 @@ namespace SdlDotNet.Particles.Particle
         }
 
         /// <summary>
-        /// 
+        /// Creates a particle surface.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="clip"></param>
@@ -178,7 +178,7 @@ namespace SdlDotNet.Particles.Particle
             this.LifeFull = life;
         }
         /// <summary>
-        /// 
+        /// Creates a particle surface.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="clip"></param>
@@ -198,7 +198,7 @@ namespace SdlDotNet.Particles.Particle
             this.Velocity = velocity;
         }
         /// <summary>
-        /// 
+        /// Creates a particle surface.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="clip"></param>
@@ -216,7 +216,7 @@ namespace SdlDotNet.Particles.Particle
             this.Y = positionY;
         }
         /// <summary>
-        /// 
+        /// Creates a particle surface.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="clip"></param>
@@ -237,7 +237,7 @@ namespace SdlDotNet.Particles.Particle
             this.LifeFull = life;
         }
         /// <summary>
-        /// 
+        /// Creates a particle surface.
         /// </summary>
         /// <param name="surface"></param>
         /// <param name="clip"></param>
@@ -290,8 +290,5 @@ namespace SdlDotNet.Particles.Particle
             {
             }
         }
-
-
-
     }
 }

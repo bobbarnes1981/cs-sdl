@@ -335,8 +335,8 @@ namespace SdlDotNet.Particles.Emitters
         /// A private method that will change the attributes of the passed in particle to fit the emitter's description.
         /// </summary>
         /// <param name="particle">The particle to change.</param>
-        /// <returns>The particle with the changed properties.</returns>
         /// <remarks>Use this method when overriding the CreateParticle method.</remarks>
+        /// <returns>The particle with the changed properties.</returns>
         private BaseParticle SetParticleBaseAttributes(BaseParticle particle)
         {
             if (particle == null)
@@ -369,7 +369,5 @@ namespace SdlDotNet.Particles.Emitters
         public override void Render(Surface destination)
         {
         }
-
-
     }
 }

@@ -147,7 +147,7 @@ namespace SdlDotNet.Particles.Emitters
         /// A protected method to return a new particle pixel with the randomized color attributes.
         /// </summary>
         /// <returns>A new particle pixel with the new color values.</returns>
-        protected override SdlDotNet.Particles.Particle.BaseParticle CreateParticle()
+        protected override BaseParticle CreateParticle()
         {
             ParticleCircle p = new ParticleCircle();
             p.Color = Color.FromArgb(

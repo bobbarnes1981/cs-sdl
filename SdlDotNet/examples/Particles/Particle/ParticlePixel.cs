@@ -79,7 +79,7 @@ namespace SdlDotNet.Particles.Particle
         }
 
         /// <summary>
-        /// 
+        /// Creates a new ParticlePixel.
         /// </summary>
         /// <param name="color"></param>
         /// <param name="positionX"></param>
@@ -96,7 +96,7 @@ namespace SdlDotNet.Particles.Particle
             LifeFull = life;
         }
         /// <summary>
-        /// 
+        /// Creates a new ParticlePixel.
         /// </summary>
         /// <param name="color"></param>
         /// <param name="positionX"></param>
@@ -110,7 +110,7 @@ namespace SdlDotNet.Particles.Particle
             m_Color = color;
         }
         /// <summary>
-        /// 
+        /// Creates a new ParticlePixel.
         /// </summary>
         /// <param name="color"></param>
         /// <param name="velocity"></param>
@@ -120,7 +120,7 @@ namespace SdlDotNet.Particles.Particle
             m_Color = color;
         }
         /// <summary>
-        /// 
+        /// Creates a new ParticlePixel.
         /// </summary>
         /// <param name="positionX"></param>
         /// <param name="positionY"></param>
@@ -130,7 +130,7 @@ namespace SdlDotNet.Particles.Particle
             this.Y = positionY;
         }
         /// <summary>
-        /// 
+        /// Creates a new ParticlePixel.
         /// </summary>
         /// <param name="color"></param>
         public ParticlePixel(Color color)
@@ -208,7 +208,5 @@ namespace SdlDotNet.Particles.Particle
             {
             }
         }
-
-
     }
 }
