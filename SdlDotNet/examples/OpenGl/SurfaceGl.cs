@@ -320,15 +320,14 @@ namespace SdlDotNet.OpenGl
             Check();
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureId);
             Gl.glBegin(Gl.GL_QUADS);
-            //Gl.glColor4f(1, 1, 1, 1);
             Gl.glTexCoord2f(0, heightRatio);
             Gl.glVertex2f(location.X, location.Y);
             Gl.glTexCoord2f(widthRatio, heightRatio);
-            Gl.glVertex2f(location.X + textureWidth, location.Y);
+            Gl.glVertex2f(location.X + surface.Width, location.Y);
             Gl.glTexCoord2f(widthRatio, 0);
-            Gl.glVertex2f(location.X + textureWidth, location.Y + textureHeight);
+            Gl.glVertex2f(location.X + surface.Width, location.Y + surface.Height);
             Gl.glTexCoord2f(0, 0);
-            Gl.glVertex2f(location.X, location.Y + textureHeight);
+            Gl.glVertex2f(location.X, location.Y + surface.Height);
             Gl.glEnd();
         }
 
