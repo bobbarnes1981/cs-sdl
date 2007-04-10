@@ -120,7 +120,6 @@ namespace SdlDotNet.Particles.Manipulators
             }
         }
 
-
         #region IParticleManipulator Members
 
         /// <summary>

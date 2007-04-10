@@ -252,7 +252,6 @@ namespace SdlDotNet.Particles.Manipulators
             }
         }
 
-
         #region IParticleManipulator Members
 
         /// <summary>
@@ -300,7 +299,6 @@ namespace SdlDotNet.Particles.Manipulators
         }
 
         #endregion
-
 
     }
 }

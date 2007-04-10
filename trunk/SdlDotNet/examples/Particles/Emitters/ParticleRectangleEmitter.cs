@@ -174,6 +174,5 @@ namespace SdlDotNet.Particles.Emitters
 			p.Height = GetRange(m_MinSize.Height, m_MaxSize.Height);
 			return p;
 		}
-
 	}
 }
