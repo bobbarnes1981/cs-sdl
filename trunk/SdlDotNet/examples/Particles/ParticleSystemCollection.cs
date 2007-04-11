@@ -19,7 +19,7 @@
 #endregion LICENSE
 
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using SdlDotNet.Graphics;
 
@@ -28,7 +28,7 @@ namespace SdlDotNet.Particles
     /// <summary>
     /// A collection of independant particle systems.
     /// </summary>
-    public class ParticleSystemCollection : List<ParticleSystem>
+    public class ParticleSystemCollection : Collection<ParticleSystem>
     {
         /// <summary>
         /// Creates an empty collection of particle systems.
