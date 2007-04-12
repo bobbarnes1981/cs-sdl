@@ -106,8 +106,6 @@
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
-		<include name="*.pdb"/>
-		<include name="*.mdb"/>
 		<include name="*.xml"/>
 	    </fileset>
 	</copy>
@@ -142,10 +140,6 @@
 	    <fileset>
 		<include name="${examples.dir}/**/*.exe" />
 		<include name="${examples.dir}/**/*.sh" />
-		<include name="${examples.dir}/**/*.pdb" />
-		<include name="${examples.dir}/**/*.mdb" />
-		<include name="${src.dir}/**/*.pdb" />
-		<include name="${src.dir}/**/*.mdb" />
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>
