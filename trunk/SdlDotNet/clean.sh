@@ -1,1 +1,2 @@
+#!/bin/sh
 nant clean
