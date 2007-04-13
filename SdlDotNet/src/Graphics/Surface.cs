@@ -1458,34 +1458,37 @@ namespace SdlDotNet.Graphics
             //    SdlGfx.SMOOTHING_OFF));
             //CloneFields(this, surface);
             //return surface;
-
+            Surface surface = this.CreateScaledSurface(1);
             int first = 0;
-            int second = this.Height - 1;
-            int pitch = this.Pitch;
+            int second = surface.Height - 1;
+            int pitch = surface.Pitch;
             byte[] tempByte = new byte[pitch];
             byte[] firstByte = new byte[pitch];
 
-            Surface surface = this.CreateScaledSurface(1);
 
-            Lock();
+            surface.Lock();
+            Int32 pixels = surface.SurfaceStruct.pixels.ToInt32();
             while (first < second)
             {
+                IntPtr firstPtr = new IntPtr(pixels + first * pitch);
+                IntPtr secondPtr = new IntPtr(pixels + second * pitch);
+
                 //Take first scanline
                 //Copy pointer data from scanline to tempByte array
-                Marshal.Copy(new IntPtr(surface.SurfaceStruct.pixels.ToInt32() + first * pitch), tempByte, 0, pitch);
+                Marshal.Copy(firstPtr, tempByte, 0, pitch);
                 //Take last scanline
                 //Copy pointer data from scanline to firstByte array
-                Marshal.Copy(new IntPtr(surface.SurfaceStruct.pixels.ToInt32() + second * pitch), firstByte, 0, pitch);
+                Marshal.Copy(secondPtr, firstByte, 0, pitch);
                 //Take tempByte array
                 //Copy pointer data from tempByte to last scanline
-                Marshal.Copy(tempByte, 0, new IntPtr(surface.SurfaceStruct.pixels.ToInt32() + second * pitch), pitch);
+                Marshal.Copy(tempByte, 0, secondPtr, pitch);
                 //Take firstByte array
                 //Copy pointer data from firstByte array to first scanline
-                Marshal.Copy(firstByte, 0, new IntPtr(surface.SurfaceStruct.pixels.ToInt32() + first * pitch), pitch);
+                Marshal.Copy(firstByte, 0, firstPtr, pitch);
                 first++;
                 second--;
             }
-            Unlock();
+            surface.Unlock();
 
             return surface;
         }
