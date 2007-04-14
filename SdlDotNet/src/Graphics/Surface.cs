@@ -1556,10 +1556,10 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Gets a 2D array of color values of the pixels in rectagle's area.
+        /// Gets a 2D array of color values of the pixels in rectangle's area.
         /// </summary>
         /// <param name="rectangle">The rectangle of the pixels to get.</param>
-        /// <returns>A 2D array of Colors describing the pixels in the rectagle.</returns>
+        /// <returns>A 2D array of Colors describing the pixels in the rectangle.</returns>
         public Color[,] GetPixels(Rectangle rectangle)
         {
             if (this.disposed)
