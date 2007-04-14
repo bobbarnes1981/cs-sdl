@@ -1516,7 +1516,7 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Attempting to code GetPixel. The getter equivalent of DrawPixel.
+        /// Gets the color value of the pixel at the point.
         /// </summary>
         /// <param name="point">The coordinate of the surface</param>
         /// <returns>ColorValue of pixel</returns>
@@ -1526,26 +1526,121 @@ namespace SdlDotNet.Graphics
             {
                 throw (new ObjectDisposedException(this.ToString()));
             }
-
-            int bytesPerPixel = this.PixelFormat.BytesPerPixel;
-
-            if (bytesPerPixel > 0)
+            Sdl.SDL_Surface surfaceStruct = this.SurfaceStruct;
+            if (point.X < 0 || point.X >= surfaceStruct.w)
             {
-                int positionXMax = Int32.MaxValue / bytesPerPixel;
-                int positionXTemp = point.X * bytesPerPixel;
-                if (point.X <= positionXMax)
+                throw new ArgumentOutOfRangeException("point", "point.X must be less then the Width and greater or equal to zero");
+            }
+            if (point.Y < 0 || point.Y >= surfaceStruct.h)
+            {
+                throw new ArgumentOutOfRangeException("point", "point.Y must be less then the Height and greater or equal to zero");
+            }
+            int bytesPerPixel = this.PixelFormat.BytesPerPixel;
+            IntPtr ptr = new IntPtr(surfaceStruct.pixels.ToInt32() + point.Y * surfaceStruct.pitch + point.X * bytesPerPixel);
+            int value;
+            switch (bytesPerPixel)
+            {
+                case 1:
+                    value = Marshal.ReadByte(ptr);
+                    break;
+                case 2:
+                    value = Marshal.ReadInt16(ptr);
+                    break;
+                case 4:
+                    value = Marshal.ReadInt32(ptr);
+                    break;
+                default:
+                    throw new SdlException(Events.StringManager.GetString("UnknownBytesPerPixel", CultureInfo.CurrentUICulture));
+            }
+            return this.GetColor(value);
+        }
+
+        /// <summary>
+        /// Gets a 2D array of color values of the pixels in rectagle's area.
+        /// </summary>
+        /// <param name="rectangle">The rectangle of the pixels to get.</param>
+        /// <returns>A 2D array of Colors describing the pixels in the rectagle.</returns>
+        public Color[,] GetPixels(Rectangle rectangle)
+        {
+            if (this.disposed)
+            {
+                throw (new ObjectDisposedException(this.ToString()));
+            }
+            if (rectangle.Width < 0)
+            {
+                throw new ArgumentOutOfRangeException("rectangle");
+            }
+            if (rectangle.Height < 0)
+            {
+                throw new ArgumentOutOfRangeException("rectangle");
+            }
+            Sdl.SDL_Surface surfaceStruct = this.SurfaceStruct;
+            if (rectangle.X < 0 || rectangle.Right > surfaceStruct.w)
+            {
+                throw new ArgumentOutOfRangeException("rectangle");
+            }
+            if (rectangle.Y < 0 || rectangle.Top > surfaceStruct.h)
+            {
+                throw new ArgumentOutOfRangeException("rectangle");
+            }
+            Lock();
+            try
+            {
+                int bytesPerPixel = this.PixelFormat.BytesPerPixel;
+                //the base address for the pixels.
+                int pixels = surfaceStruct.pixels.ToInt32() + rectangle.X * bytesPerPixel;
+                int pitch = surfaceStruct.pitch;
+                Color[,] result = new Color[rectangle.Width, rectangle.Height];
+                //These 3 ‘if’ blocks are a perfect candidate for generics unfortunately C# 
+                //does not have the required constrains for this case. So I’m reduced to copying code.
+                if (bytesPerPixel == 4)
                 {
-                    return this.GetColor(Marshal.ReadInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + positionXTemp)));
+                    //the buffer for a row of pixels.
+                    Int32[] buffer = new Int32[rectangle.Width];
+                    for (int y = 0; y < rectangle.Height; ++y)
+                    {
+                        //gets only the pixels in the row that are required.
+                        Marshal.Copy(new IntPtr(pixels + (y + rectangle.Y) * pitch), buffer, 0, buffer.Length);
+                        for (int x = 0; x < rectangle.Width; ++x)
+                        {
+                            //converts the pixel to a color value.
+                            result[x, y] = this.GetColor(buffer[x]);
+                        }
+                    }
+                }
+                else if (bytesPerPixel == 2)
+                {
+                    Int16[] buffer = new Int16[rectangle.Width];
+                    for (int y = 0; y < rectangle.Height; ++y)
+                    {
+                        Marshal.Copy(new IntPtr(pixels + (y + rectangle.Y) * pitch), buffer, 0, buffer.Length);
+                        for (int x = 0; x < rectangle.Width; ++x)
+                        {
+                            result[x, y] = this.GetColor(buffer[x]);
+                        }
+                    }
+                }
+                else if (bytesPerPixel == 1)
+                {
+                    Byte[] buffer = new Byte[rectangle.Width];
+                    for (int y = 0; y < rectangle.Height; ++y)
+                    {
+                        Marshal.Copy(new IntPtr(pixels + (y + rectangle.Y) * pitch), buffer, 0, buffer.Length);
+                        for (int x = 0; x < rectangle.Width; ++x)
+                        {
+                            result[x, y] = this.GetColor(buffer[x]);
+                        }
+                    }
                 }
                 else
                 {
-                    throw new OverflowException();
+                    throw new SdlException(Events.StringManager.GetString("UnknownBytesPerPixel", CultureInfo.CurrentUICulture));
                 }
+                return result;
             }
-            else
+            finally
             {
-                throw new SdlException(Events.StringManager.GetString(
-                        "UnknownBytesPerPixel", CultureInfo.CurrentUICulture));
+                Unlock();
             }
         }
 
