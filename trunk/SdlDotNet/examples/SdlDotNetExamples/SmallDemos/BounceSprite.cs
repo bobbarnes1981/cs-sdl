@@ -35,9 +35,11 @@ namespace SdlDotNetExamples.SmallDemos
     public class BounceSprite : AnimatedSprite
     {
         #region Fields
+        Random rand = new Random();
         //Move sprites 5 pixels per tick
         private int dx = 5;
         private int dy = 5;
+        private int dz;
 
         //Sprites will be bounded by the screen edges minus 
         //their size so they will not go off the screen
@@ -89,31 +91,56 @@ namespace SdlDotNetExamples.SmallDemos
             {
                 this.X += dx;
                 this.Y += dy;
+                
+                //this.Z += dz;
 
                 // Bounce off the left
                 if (this.X < bounds.Left)
                 {
                     this.X = bounds.Left;
+                    this.Z = rand.Next(0, 41);
                 }
 
                 // Bounce off the top
                 if (this.Y < bounds.Top)
                 {
                     this.Y = bounds.Top;
+                    this.Z = rand.Next(0, 41);
                 }
 
                 // Bounce off the bottom
                 if (this.Y > bounds.Bottom)
                 {
                     this.Y = bounds.Bottom;
+                    this.Z = rand.Next(0, 41);
                 }
                 // Bounce off the right
                 if (this.X > bounds.Right)
                 {
                     this.X = bounds.Right;
+                    this.Z = rand.Next(0, 41);
+                }
+                // Bounce off the left
+                if (this.Z < 0)
+                {
+                    this.Z = 0;
+                }
+                // Bounce off the bottom
+                if (this.Z > 40)
+                {
+                    this.Z = 40;
+                }
+                if (this.Z == 0)
+                {
+                    dz = (Math.Abs(this.dz));
                 }
 
-                // Revrse the directions when the sprite hits an edge
+                if (this.Z == 40)
+                {
+                    dz = -1 * (Math.Abs(this.dz));
+                }
+
+                // Reverse the directions when the sprite hits an edge
                 if (this.X == bounds.Left)
                 {
                     dx = (Math.Abs(this.dx));
@@ -133,6 +160,7 @@ namespace SdlDotNetExamples.SmallDemos
                 {
                     dy = -1 * (Math.Abs(this.dy));
                 }
+                //Console.WriteLine("Z: " + this.Z);
             }
         }
         /// <summary>

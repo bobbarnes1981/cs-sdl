@@ -43,7 +43,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// 
         /// </summary>
-        private SpriteDictionary sprites = new SpriteDictionary();
+        private SpriteCollection sprites = new SpriteCollection();
         static Random rand = new Random();
 
         public static Random Randomizer
@@ -151,7 +151,7 @@ namespace SdlDotNetExamples.SpriteDemos
         public virtual Surface RenderSurface()
         {
             surf.Fill(Color.Black);
-            foreach (Sprite s in Sprites.Keys)
+            foreach (Sprite s in Sprites)
             {
                 surf.Blit(s.Surface, s.Rectangle);
             }
@@ -161,7 +161,7 @@ namespace SdlDotNetExamples.SpriteDemos
         /// <summary>
         /// 
         /// </summary>
-        public SpriteDictionary Sprites
+        public SpriteCollection Sprites
         {
             get
             {
@@ -188,7 +188,7 @@ namespace SdlDotNetExamples.SpriteDemos
                         this.surf.Dispose();
                         this.surf = null;
                     }
-                    foreach (Sprite s in this.sprites.Keys)
+                    foreach (Sprite s in this.sprites)
                     {
                         if (s != null)
                         {

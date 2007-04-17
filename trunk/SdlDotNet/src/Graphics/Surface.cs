@@ -1004,7 +1004,7 @@ namespace SdlDotNet.Graphics
         /// ere have may been some clipping.
         /// </returns>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
-        public Collection<Rectangle> Blit(SpriteDictionary spriteDictionary)
+        public List<Rectangle> Blit(SpriteCollection spriteDictionary)
         {
             if (spriteDictionary == null)
             {
@@ -1079,7 +1079,7 @@ namespace SdlDotNet.Graphics
         /// <param name="background">
         /// Background Surface to cover up SpriteDictionary
         /// </param>
-        public void Erase(SpriteDictionary spriteDictionary,
+        public void Erase(SpriteCollection spriteDictionary,
             Surface background)
         {
             if (spriteDictionary == null)
@@ -1094,7 +1094,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="rectangle">Rectangle to erase</param>
         /// <param name="background">background to use to erase rectangle.</param>
-        public void Erase(Rectangle rectangle, BaseSdlResource background)
+        public void Erase(Rectangle rectangle, Surface background)
         {
             this.Blit(background, rectangle, rectangle);
         }
@@ -2299,7 +2299,7 @@ namespace SdlDotNet.Graphics
         /// Update an array of rectangles
         /// </summary>
         /// <param name="rectangles">Collection of rectangles to update</param>
-        public void Update(Collection<Rectangle> rectangles)
+        public void Update(List<Rectangle> rectangles)
         {
             if (rectangles == null)
             {

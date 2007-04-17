@@ -113,7 +113,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="group">
         /// SpriteDictionary group to put Sprite into.
         /// </param>
-        public Sprite(Surface surface, Vector vector, SpriteDictionary group)
+        public Sprite(Surface surface, Vector vector, SpriteCollection group)
             : this(surface, vector)
         {
             if (group == null)
@@ -131,7 +131,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="group">
         /// SpriteDictionary group to put Sprite into.
         /// </param>
-        public Sprite(Surface surface, Point position, SpriteDictionary group)
+        public Sprite(Surface surface, Point position, SpriteCollection group)
             : this(surface, new Vector(position), group)
         {
         }
@@ -382,6 +382,17 @@ namespace SdlDotNet.Graphics.Sprites
                     this.vector = new Vector(value.X, value.Y, 0);
                 }
             }
+        }
+
+        Rectangle lastBlitRectangle;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Rectangle LastBlitRectangle
+        {
+            get { return lastBlitRectangle; }
+            set { lastBlitRectangle = value; }
         }
 
         /// <summary>
@@ -706,13 +717,13 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         /// <param name="spriteDictionary">Collection to chekc the intersection with</param>
         /// <returns>True if sprite intersects with any sprite in collection</returns>
-        public virtual bool IntersectsWith(SpriteDictionary spriteDictionary)
+        public virtual bool IntersectsWith(SpriteCollection spriteDictionary)
         {
             if (spriteDictionary == null)
             {
                 throw new ArgumentNullException("SpriteDictionary");
             }
-            foreach (Sprite sprite in spriteDictionary.Keys)
+            foreach (Sprite sprite in spriteDictionary)
             {
                 if (this.IntersectsWith(sprite))
                 {
@@ -756,7 +767,7 @@ namespace SdlDotNet.Graphics.Sprites
         {
             for (int i = 0; i < this.groups.Count; i++)
             {
-                ((SpriteDictionary)groups[i]).Remove(this);
+                ((SpriteCollection)groups[i]).Remove(this);
             }
         }
 

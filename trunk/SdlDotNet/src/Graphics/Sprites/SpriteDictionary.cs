@@ -25,6 +25,8 @@ using System.Drawing;
 using System.Runtime.Serialization;
 using System.Globalization;
 using System.Security.Permissions;
+using System.ComponentModel;
+using System.Reflection;
 
 using SdlDotNet;
 using SdlDotNet.Core;
@@ -38,13 +40,13 @@ namespace SdlDotNet.Graphics.Sprites
     /// </summary>
     /// <remarks>The sprite manager has no size.</remarks>
     [Serializable]
-    public class SpriteDictionary : SortedDictionary<Sprite, Rectangle>//, ISerializable
+    public class SpriteCollection : BindingList<Sprite>//, ISerializable
     {
         #region Constructors
         /// <summary>
         /// Creates a new SpriteDictionary without any elements in it.
         /// </summary>
-        public SpriteDictionary()
+        public SpriteCollection()
             : base()
         {
         }
@@ -64,7 +66,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// Creates a new SpriteDictionary with one sprite element in it.
         /// </summary>
         /// <param name="sprite">Sprite to add to collection</param>
-        public SpriteDictionary(Sprite sprite)
+        public SpriteCollection(Sprite sprite)
             : base()
         {
             this.Add(sprite);
@@ -74,48 +76,41 @@ namespace SdlDotNet.Graphics.Sprites
         /// Creates a new SpriteDictionary based off a different sprite collection.
         /// </summary>
         /// <param name="spriteDictionary">Add SpriteDictionary to this SpriteDictionary</param>
-        public SpriteDictionary(SpriteDictionary spriteDictionary)
+        public SpriteCollection(SpriteCollection spriteDictionary)
             : base()
         {
-            foreach (Sprite s in spriteDictionary.Keys)
+            foreach (Sprite s in spriteDictionary)
             {
-                this.Add(s, spriteDictionary[s]);
+                this.Add(s);
             }
         }
 
         #endregion
 
         #region Display
-        private Collection<Rectangle> lostRects = new Collection<Rectangle>();
-        Collection<Rectangle> rects = new Collection<Rectangle>();
-        Dictionary<Sprite, Rectangle> tempDict = new Dictionary<Sprite, Rectangle>();
+        List<Rectangle> lostRects = new List<Rectangle>();
+        List<Rectangle> rects = new List<Rectangle>();
+
         /// <summary>
         /// Draws all surfaces within the collection on the given destination.
         /// </summary>
         /// <param name="destination">The destination surface.</param>
-        public virtual Collection<Rectangle> Draw(Surface destination)
+        public virtual List<Rectangle> Draw(Surface destination)
         {
             if (destination == null)
             {
                 throw new ArgumentNullException("destination");
             }
             rects.Clear();
-            tempDict.Clear();
+            this.SortByZAxis();
 
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 if (s.Visible)
                 {
-                    rects.Add(this[s]);
-                    tempDict.Add(s, destination.Blit(s.Surface, s.Rectangle));
-                }
-            }
-            foreach (Sprite s in tempDict.Keys)
-            {
-                if (s.Visible)
-                {
-                    this[s] = tempDict[s];
-                    rects.Add(tempDict[s]);
+                    rects.Add(s.LastBlitRectangle);
+                    s.LastBlitRectangle = destination.Blit(s.Surface, s.Rectangle);
+                    rects.Add(s.LastBlitRectangle);
                 }
             }
 
@@ -130,41 +125,67 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="background">B
         /// ackground to use to paint over Sprites in SpriteDictionary
         /// </param>
-        public void Erase(Surface surface, BaseSdlResource background)
+        public void Erase(Surface surface, Surface background)
         {
             if (surface == null)
             {
                 throw new ArgumentNullException("surface");
             }
-            for (int i = 0; i < this.lostRects.Count; i++)
+            if (this.lostRects.Count > 0)
             {
-                surface.Blit(background, this.lostRects[i], this.lostRects[i]);
-            }
-            surface.Update(this.lostRects);
+                foreach (Rectangle r in this.lostRects)
+                {
+                    surface.Blit(background, r, r);
+                }
 
-            foreach (Sprite s in this.Keys)
-            {
-                surface.Blit(background, s.Rectangle, s.Rectangle);
+                surface.Update(this.lostRects);
+                this.lostRects.Clear();
             }
-            this.lostRects.Clear();
+
+            foreach (Rectangle s in this.rects)
+            {
+                surface.Blit(background, s, s);
+            }
         }
 
         #endregion
 
         #region Sprites
         /// <summary>
-        /// Adds sprite to group
+        /// 
         /// </summary>
-        /// <param name="sprite">Sprite to add</param>
-        public void Add(Sprite sprite)
+        /// <param name="direction"></param>
+        public void SortByZAxis(ListSortDirection direction)
         {
-            if (sprite == null)
-            {
-                throw new ArgumentNullException("sprite");
-            }
-            //sprite.AddInternal(this);
-            Add(sprite, sprite.Rectangle);
+            List<Sprite> sprites = this.Items as List<Sprite>;
+            sprites.Sort(delegate(Sprite sprite1, Sprite sprite2)
+           {
+               return Comparer<int>.Default.Compare(sprite1.Z, sprite2.Z) * (direction == ListSortDirection.Descending ? -1 : 1);
+           });
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SortByZAxis()
+        {
+            SortByZAxis(ListSortDirection.Ascending);
+        }
+
+
+        ///// <summary>
+        ///// Adds sprite to group
+        ///// </summary>
+        ///// <param name="sprite">Sprite to add</param>
+        //public void Add(Sprite sprite)
+        //{
+        //    if (sprite == null)
+        //    {
+        //        throw new ArgumentNullException("sprite");
+        //    }
+        //    //sprite.AddInternal(this);
+        //    Add(sprite);
+        //}
 
         /// <summary>
         /// Adds sprite to group
@@ -176,20 +197,20 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 throw new ArgumentNullException("sprite");
             }
-            Add(sprite, sprite.Rectangle);
+            Add(sprite);
         }
 
         /// <summary>
         /// Adds sprites from another group to this group
         /// </summary>
         /// <param name="spriteDictionary">SpriteDictionary to add Sprites from</param>
-        public int Add(SpriteDictionary spriteDictionary)
+        public int Add(SpriteCollection spriteDictionary)
         {
             if (spriteDictionary == null)
             {
                 throw new ArgumentNullException("SpriteDictionary");
             }
-            foreach (Sprite s in spriteDictionary.Keys)
+            foreach (Sprite s in spriteDictionary)
             {
                 //s.AddInternal(this);
                 Add(s);
@@ -218,7 +239,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// These Rectangles are kept temporarily until their 
         /// positions can be properly erased.
         /// </remarks>
-        protected Collection<Rectangle> LostRects
+        protected List<Rectangle> LostRects
         {
             get
             {
@@ -261,15 +282,15 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="spriteDictionary">
         /// Remove SpriteDictionary from this SpriteDictionary.
         /// </param>
-        public virtual void Remove(SpriteDictionary spriteDictionary)
+        public virtual void Remove(SpriteCollection spriteDictionary)
         {
             if (spriteDictionary == null)
             {
                 throw new ArgumentNullException("spriteDictionary");
             }
-            foreach (Sprite s in spriteDictionary.Keys)
+            foreach (Sprite s in spriteDictionary)
             {
-                if (this.ContainsKey(s))
+                if (this.Contains(s))
                 {
                     this.Remove(s);
                 }
@@ -677,7 +698,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, ActiveEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -692,7 +713,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, JoystickAxisEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -707,7 +728,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, JoystickBallEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -722,7 +743,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, JoystickButtonEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -737,7 +758,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, JoystickHatEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -750,7 +771,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, KeyboardEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -764,7 +785,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, MouseButtonEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -779,7 +800,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, MouseMotionEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -792,7 +813,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, QuitEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -805,7 +826,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, UserEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -818,7 +839,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, VideoExposeEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -831,7 +852,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, VideoResizeEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -844,7 +865,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, ChannelFinishedEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -857,7 +878,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, MusicFinishedEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -872,7 +893,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="e">Event arguments</param>
         private void Update(object sender, TickEventArgs e)
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Update(e);
             }
@@ -904,7 +925,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public virtual void Kill()
         {
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
                 s.Kill();
             }
@@ -918,14 +939,14 @@ namespace SdlDotNet.Graphics.Sprites
         /// SpriteDictionary of sprite in this SpriteDictionary that 
         /// intersect with the given Sprite
         /// </returns>
-        public virtual SpriteDictionary IntersectsWith(Sprite sprite)
+        public virtual SpriteCollection IntersectsWith(Sprite sprite)
         {
-            SpriteDictionary intersection = new SpriteDictionary();
-            foreach (Sprite s in this.Keys)
+            SpriteCollection intersection = new SpriteCollection();
+            foreach (Sprite s in this)
             {
                 if (s.IntersectsWith(sprite))
                 {
-                    intersection.Add(s, s.Rectangle);
+                    intersection.Add(s);
                 }
             }
             return intersection;
@@ -943,16 +964,16 @@ namespace SdlDotNet.Graphics.Sprites
         /// keys and SpriteDictionarys containing sprites they 
         /// intersect with from the given SpriteDictionary
         /// </returns>
-        public virtual Dictionary<Sprite, Sprite> IntersectsWith(SpriteDictionary spriteDictionary)
+        public virtual Dictionary<Sprite, Sprite> IntersectsWith(SpriteCollection spriteDictionary)
         {
             if (spriteDictionary == null)
             {
                 throw new ArgumentNullException("SpriteDictionary");
             }
             Dictionary<Sprite, Sprite> intersection = new Dictionary<Sprite, Sprite>();
-            foreach (Sprite s in this.Keys)
+            foreach (Sprite s in this)
             {
-                foreach (Sprite t in spriteDictionary.Keys)
+                foreach (Sprite t in spriteDictionary)
                 {
                     if (s.IntersectsWith(t))
                     {

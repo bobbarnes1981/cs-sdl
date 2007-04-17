@@ -99,8 +99,8 @@ namespace SdlDotNetExamples.CDPlayer
                 // Randomize rotation direction
                 bounceSprite.AnimateForward = rand.Next(2) == 1 ? true : false;
 
-                //Add the sprite to the SpriteDictionary
-                master.Add(bounceSprite, bounceSprite.Rectangle);
+                //Add the sprite to the SpriteCollection
+                master.Add(bounceSprite);
             }
 
             //The collection will respond to mouse button clicks, mouse movement and the ticker.
@@ -143,7 +143,7 @@ namespace SdlDotNetExamples.CDPlayer
             set { SdlDotNetExamples.CDPlayer.CDPlayerApp.stringManager = value; }
         }
 
-        private SpriteDictionary master = new SpriteDictionary();
+        private SpriteCollection master = new SpriteCollection();
 
         /// <summary>
         /// Entry point for App.

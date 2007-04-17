@@ -30,11 +30,11 @@ namespace SdlDotNet.Particles.Emitters
     /// </summary>
     public class ParticleSpriteEmitter : ParticleEmitter
     {
-        private SpriteDictionary m_Sprites;
+        private SpriteCollection m_Sprites;
         /// <summary>
         /// Gets and sets the collection of sprites assosiated with this particle emitter.
         /// </summary>
-        public SpriteDictionary Sprites
+        public SpriteCollection Sprites
         {
             get
             {
@@ -53,14 +53,14 @@ namespace SdlDotNet.Particles.Emitters
         public ParticleSpriteEmitter(ParticleSystem system, Sprite sprite)
             : base(system)
         {
-            m_Sprites = new SpriteDictionary(sprite);
+            m_Sprites = new SpriteCollection(sprite);
         }
         /// <summary>
         /// Creates a new particle emitter that emits sprite objects.
         /// </summary>
         /// <param name="system">The particle system to add this particle emitter.</param>
         /// <param name="sprites">The sprite collection to choose sprites from when emitting.</param>
-        public ParticleSpriteEmitter(ParticleSystem system, SpriteDictionary sprites)
+        public ParticleSpriteEmitter(ParticleSystem system, SpriteCollection sprites)
             : base(system)
         {
             m_Sprites = sprites;
@@ -71,13 +71,13 @@ namespace SdlDotNet.Particles.Emitters
         /// <param name="sprite">The sprite to emit.</param>
         public ParticleSpriteEmitter(Sprite sprite)
         {
-            m_Sprites = new SpriteDictionary(sprite);
+            m_Sprites = new SpriteCollection(sprite);
         }
         /// <summary>
         /// Creates a new particle emitter that emits sprite objects.
         /// </summary>
         /// <param name="sprites">The sprite collection to choose sprites from when emitting.</param>
-        public ParticleSpriteEmitter(SpriteDictionary sprites)
+        public ParticleSpriteEmitter(SpriteCollection sprites)
         {
             m_Sprites = sprites;
         }
@@ -92,7 +92,7 @@ namespace SdlDotNet.Particles.Emitters
                 return null;
             }
             return new ParticleSprite(
-                    m_Sprites.GetEnumerator().Current.Key
+                    m_Sprites.GetEnumerator().Current
                 );
         }
     }
