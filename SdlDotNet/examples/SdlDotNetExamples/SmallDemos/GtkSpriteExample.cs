@@ -65,7 +65,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// <summary>
         /// Collection of Sprites
         /// </summary>
-        protected SpriteDictionary spriteDictionary;
+        protected SpriteCollection spriteDictionary;
 
         /// <summary>
         /// Timer
@@ -112,7 +112,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// <param name="args"></param>
         protected void OnRedrawTick(object sender, System.Timers.ElapsedEventArgs args)
         {
-            Collection<Rectangle> rects = new Collection<Rectangle>();
+            List<Rectangle> rects = new List<Rectangle>();
 
             graphView.Surface.Fill(new Rectangle(0, 0, 800, 600), System.Drawing.Color.AliceBlue);
             rects = graphView.Surface.Blit(spriteDictionary);
@@ -131,7 +131,7 @@ namespace SdlDotNetExamples.SmallDemos
             node2.X = 100;
             node2.Y = 100;
 
-            spriteDictionary = new SpriteDictionary();
+            spriteDictionary = new SpriteCollection();
 
             spriteDictionary.EnableMouseButtonEvent();
             spriteDictionary.EnableMouseMotionEvent();

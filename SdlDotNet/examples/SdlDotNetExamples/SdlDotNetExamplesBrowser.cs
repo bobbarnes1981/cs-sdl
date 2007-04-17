@@ -89,10 +89,10 @@ namespace SdlDotNetExamples
         string filePath = Path.Combine("..", "..");
         string fontName = "FreeSans.ttf";
         Line line;
-        SpriteDictionary listBoxDemos = new SpriteDictionary();
+        SpriteCollection listBoxDemos = new SpriteCollection();
         static ResourceManager stringManager;
         string currentNamespace = "LargeDemos";
-        SpriteDictionary comboBoxNamespaces;
+        SpriteCollection comboBoxNamespaces;
 
         #endregion Fields
 
@@ -307,7 +307,7 @@ namespace SdlDotNetExamples
         private void LoadComboBox()
         {
             int positionX = 0;
-            comboBoxNamespaces = new SpriteDictionary();
+            comboBoxNamespaces = new SpriteCollection();
             foreach (string s in this.demoList.Keys)
             {
                 TextButtonSprite sprite = new TextButtonSprite(s, new SdlDotNet.Graphics.Font(Path.Combine(filePath, Path.Combine(dataDirectory, fontName)), 11));
@@ -321,12 +321,12 @@ namespace SdlDotNetExamples
         void sprite_TextButtonSpriteSelected(object sender, TextButtonSpriteEventArgs e)
         {
             //Console.WriteLine(e.TextItem);
-            if (this.comboBoxNamespaces.ContainsKey(e.Sprite))
+            if (this.comboBoxNamespaces.Contains(e.Sprite))
             {
                 currentNamespace = e.TextItem;
                 LoadListBox(e.TextItem);
             }
-            else if (this.listBoxDemos.ContainsKey(e.Sprite))
+            else if (this.listBoxDemos.Contains(e.Sprite))
             {
                 this.RunExample(e.TextItem);
             }

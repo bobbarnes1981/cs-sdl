@@ -42,10 +42,10 @@ namespace SdlDotNetExamples.SmallDemos
         static Surface temporary;
         static Player player;
         static Surface tempSurface;
-        static SpriteDictionary bombs = new SpriteDictionary();
-        static SpriteDictionary players = new SpriteDictionary();
-        static SpriteDictionary bullets = new SpriteDictionary();
-        static SpriteDictionary master = new SpriteDictionary();
+        static SpriteCollection bombs = new SpriteCollection();
+        static SpriteCollection players = new SpriteCollection();
+        static SpriteCollection bullets = new SpriteCollection();
+        static SpriteCollection master = new SpriteCollection();
         static string dataDirectory = "Data";
         static string filePath = Path.Combine("..", "..");
 
@@ -85,22 +85,22 @@ namespace SdlDotNetExamples.SmallDemos
 
             player = new Player(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "Head.bmp"))), new Point(screen.Width / 2 - 16,
                 screen.Height - 32));
-            players.Add(player, player.Rectangle);
+            players.Add(player);
             players.EnableKeyboardEvent();
             bullets.EnableTickEvent();
             master.EnableTickEvent();
 
             for (int i = 0; i < 25; i++)
             {
-                bombs.Add(new Bomb(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "Bomb.bmp")))), new Rectangle());
+                bombs.Add(new Bomb(new Surface(Path.Combine(filePath, Path.Combine(dataDirectory, "Bomb.bmp")))));
             }
-            foreach (Sprite bomb in bombs.Keys)
+            foreach (Sprite bomb in bombs)
             {
-                master.Add(bomb, bomb.Rectangle);
+                master.Add(bomb);
             }
-            foreach (Sprite playerSprite in players.Keys)
+            foreach (Sprite playerSprite in players)
             {
-                master.Add(playerSprite, player.Rectangle);
+                master.Add(playerSprite);
             }
 
             Mouse.ShowCursor = false;
@@ -116,7 +116,7 @@ namespace SdlDotNetExamples.SmallDemos
         private static void PlayerWeaponFired(object sender, FireEventArgs e)
         {
             Bullet bullet = new Bullet(e.Location, 0, 250);
-            bullets.Add(bullet, bullet.Rectangle);
+            bullets.Add(bullet);
 
         }
 
@@ -141,7 +141,7 @@ namespace SdlDotNetExamples.SmallDemos
             //Console.WriteLine(args.SecondsElapsed);
             screen.Blit(background);
 
-            foreach (Sprite s in master.Keys)
+            foreach (Sprite s in master)
             {
                 src = new Rectangle(new Point(0, 0), s.Size);
                 dest = new Rectangle(s.Position, s.Size);
