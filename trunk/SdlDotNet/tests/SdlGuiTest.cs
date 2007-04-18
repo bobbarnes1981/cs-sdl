@@ -35,7 +35,7 @@ namespace SdlDotNet.Tests
 	/// </summary>
 	[TestFixture] public class SdlGuiTest
 	{
-		//private SpriteDictionary sm;
+		//private SpriteCollection sm;
 		//private GuiManager gui;
 
     //    /// <summary>
@@ -45,7 +45,7 @@ namespace SdlDotNet.Tests
     //    public void Setup()
     //    {
     //        // Create the gui used through the tst
-    //        sm = new SpriteDictionary();
+    //        sm = new SpriteCollection();
     //        gui = new GuiManager(sm,
     //            new SdlDotNet.Graphics.Font("../../FreeSans.ttf", 12),
     //            new Size(800, 600));

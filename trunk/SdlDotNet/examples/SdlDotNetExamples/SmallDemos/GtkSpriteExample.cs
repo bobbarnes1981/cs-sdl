@@ -65,7 +65,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// <summary>
         /// Collection of Sprites
         /// </summary>
-        protected SpriteCollection spriteDictionary;
+        protected SpriteCollection spriteCollection;
 
         /// <summary>
         /// Timer
@@ -112,10 +112,10 @@ namespace SdlDotNetExamples.SmallDemos
         /// <param name="args"></param>
         protected void OnRedrawTick(object sender, System.Timers.ElapsedEventArgs args)
         {
-            List<Rectangle> rects = new List<Rectangle>();
+            Collection<Rectangle> rects = new Collection<Rectangle>();
 
             graphView.Surface.Fill(new Rectangle(0, 0, 800, 600), System.Drawing.Color.AliceBlue);
-            rects = graphView.Surface.Blit(spriteDictionary);
+            rects = graphView.Surface.Blit(spriteCollection);
             graphView.Surface.Update(rects);
             graphView.QueueDraw();
         }
@@ -131,17 +131,17 @@ namespace SdlDotNetExamples.SmallDemos
             node2.X = 100;
             node2.Y = 100;
 
-            spriteDictionary = new SpriteCollection();
+            spriteCollection = new SpriteCollection();
 
-            spriteDictionary.EnableMouseButtonEvent();
-            spriteDictionary.EnableMouseMotionEvent();
+            spriteCollection.EnableMouseButtonEvent();
+            spriteCollection.EnableMouseMotionEvent();
 
-            spriteDictionary.Add(node);
-            spriteDictionary.Add(node2);
+            spriteCollection.Add(node);
+            spriteCollection.Add(node2);
 
             graphView = new SurfaceGtk();
             graphView.Surface = new Surface(Path.Combine(filePath, Path.Combine(fileDirectory, "background.jpg")));
-            graphView.Surface.Blit(spriteDictionary);
+            graphView.Surface.Blit(spriteCollection);
             graphView.Surface.Update();
 
             vbox1.PackEnd(graphView);

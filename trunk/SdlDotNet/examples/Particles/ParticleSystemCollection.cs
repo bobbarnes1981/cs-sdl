@@ -37,14 +37,14 @@ namespace SdlDotNet.Particles
         {
         }
 
-        /// <summary>
-        /// Creates a collection of particle systems.
-        /// </summary>
-        /// <param name="system">The system to start off the collection.</param>
-        public ParticleSystemCollection(ParticleSystem system)
-        {
-            Add(system);
-        }
+        ///// <summary>
+        ///// Creates a collection of particle systems.
+        ///// </summary>
+        ///// <param name="system">The system to start off the collection.</param>
+        //public ParticleSystemCollection(ParticleSystem system)
+        //{
+        //    Add(system);
+        //}
 
         /// <summary>
         /// Updates all particle systems within the collection.

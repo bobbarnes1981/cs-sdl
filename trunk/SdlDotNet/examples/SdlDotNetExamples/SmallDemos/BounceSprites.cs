@@ -62,7 +62,7 @@ namespace SdlDotNetExamples.SmallDemos
             }
         }
 
-        List<Rectangle> rects = new List<Rectangle>();
+        Collection<Rectangle> rects = new Collection<Rectangle>();
 
         //A ticker is running to update the sprites constantly.
         //This method will fill the screen with black to clear it of the sprites.

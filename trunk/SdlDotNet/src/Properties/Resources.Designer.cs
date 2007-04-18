@@ -79,6 +79,15 @@ namespace SdlDotNet.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to point.Y must be less then the Height and greater or equal to zero.
+        /// </summary>
+        internal static string HeightOutOfRange {
+            get {
+                return ResourceManager.GetString("HeightOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Index out of range.
         /// </summary>
         internal static string IndexOutOfRange {
@@ -165,6 +174,15 @@ namespace SdlDotNet.Properties {
         internal static string VideoQueryFailed {
             get {
                 return ResourceManager.GetString("VideoQueryFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to point.X must be less then the Width and greater or equal to zero.
+        /// </summary>
+        internal static string WidthOutOfRange {
+            get {
+                return ResourceManager.GetString("WidthOutOfRange", resourceCulture);
             }
         }
     }

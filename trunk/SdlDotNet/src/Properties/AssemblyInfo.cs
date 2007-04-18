@@ -94,3 +94,8 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: AssemblyDelaySign(false)]
 [module: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "SdlDotNet.Windows")]
 [module: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Scope = "type", Target = "SdlDotNet.Windows.SurfaceControl+BlitEvent", MessageId = "Blit")]
+[module: SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Scope = "member", Target = "SdlDotNet.Graphics.Sprites.SpriteCollection.Erase(SdlDotNet.Graphics.Surface,SdlDotNet.Graphics.Surface):System.Void")]
+[module: SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Scope = "member", Target = "SdlDotNet.Graphics.Surface.Erase(System.Drawing.Rectangle,SdlDotNet.Graphics.Surface):System.Void")]
+[module: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Scope = "member", Target = "SdlDotNet.Graphics.Sprites.Sprite.LastBlitRectangle", MessageId = "Blit")]
+[module: SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Scope = "member", Target = "SdlDotNet.Graphics.Surface.GetColors(System.Drawing.Rectangle):System.Drawing.Color[,]", MessageId = "Body")]
+[module: SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Scope = "member", Target = "SdlDotNet.Graphics.Surface.GetColors(System.Drawing.Rectangle):System.Drawing.Color[,]", MessageId = "Return")]
