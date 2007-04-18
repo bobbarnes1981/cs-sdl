@@ -1310,39 +1310,37 @@ namespace SdlDotNet.Graphics
         /// <param name="color">The color value of the pixel</param>
         public void Draw(Point point, int color)
         {
-            if (point.X >= Width || point.X < 0)
-            {
-                return;
-            }
-            if (point.Y >= Height || point.Y < 0)
-            {
-                return;
-            }
-
             if (this.disposed)
             {
                 throw (new ObjectDisposedException(this.ToString()));
             }
-            int pixelColorValueInt;
-
-            switch (this.PixelFormat.BytesPerPixel)
+            Sdl.SDL_Surface surfaceStruct = this.SurfaceStruct;
+            if (point.X < 0 || point.X >= surfaceStruct.w)
+            {
+                return;
+            }
+            if (point.Y < 0 || point.Y >= surfaceStruct.h)
+            {
+                return;
+            }
+            int bytesPerPixel = this.PixelFormat.BytesPerPixel;
+            IntPtr ptr = new IntPtr(surfaceStruct.pixels.ToInt32() + point.Y * surfaceStruct.pitch + point.X * bytesPerPixel);
+            switch (bytesPerPixel)
             {
                 case 1: // 8-bpp
-                    byte pixelColorValueByte = (byte)color;
-                    Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + point.X), pixelColorValueByte);
+                    Marshal.WriteByte(ptr, (Byte)color);
                     break;
                 case 2: // 15-bpp or 16-bpp
-                    short pixelColorValueShort = (short)color;
-                    Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + 2 * point.X), pixelColorValueShort);
+                    Marshal.WriteInt16(ptr, (Int16)color);
                     break;
                 case 3: // 24-bpp mode
-                    pixelColorValueInt = color;
-                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (point.Y * this.SurfaceStruct.pitch + 3 * point.X)), pixelColorValueInt);
+                    MarshalHelper.WriteInt24(ptr, color);
                     break;
                 case 4: // 32-bpp mode
-                    pixelColorValueInt = color;
-                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (point.Y * this.SurfaceStruct.pitch + 4 * point.X)), pixelColorValueInt);
+                    Marshal.WriteInt32(ptr, color);
                     break;
+                default:
+                    throw new SdlException(Events.StringManager.GetString("UnknownBytesPerPixel", CultureInfo.CurrentUICulture));
             }
         }
 
@@ -1357,40 +1355,11 @@ namespace SdlDotNet.Graphics
         /// <param name="color">The color of the pixel</param>
         public void Draw(Point point, System.Drawing.Color color)
         {
-            if (point.X >= Width || point.X < 0)
-            {
-                return;
-            }
-            if (point.Y >= Height || point.Y < 0)
-            {
-                return;
-            }
-
             if (this.disposed)
             {
                 throw (new ObjectDisposedException(this.ToString()));
             }
-            int pixelColorValueInt;
-
-            switch (this.PixelFormat.BytesPerPixel)
-            {
-                case 1: // 8-bpp
-                    byte pixelColorValueByte = (byte)this.GetColorValue(color);
-                    Marshal.WriteByte(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + point.X), pixelColorValueByte);
-                    break;
-                case 2: // 15-bpp or 16-bpp
-                    short pixelColorValueShort = (short)this.GetColorValue(color);
-                    Marshal.WriteInt16(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + point.Y * this.SurfaceStruct.pitch + 2 * point.X), pixelColorValueShort);
-                    break;
-                case 3: // 24-bpp mode
-                    pixelColorValueInt = this.GetColorValue(color);
-                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (point.Y * this.SurfaceStruct.pitch + 3 * point.X)), pixelColorValueInt);
-                    break;
-                case 4: // 32-bpp mode
-                    pixelColorValueInt = this.GetColorValue(color);
-                    Marshal.WriteInt32(new IntPtr(this.SurfaceStruct.pixels.ToInt32() + (point.Y * this.SurfaceStruct.pitch + 4 * point.X)), pixelColorValueInt);
-                    break;
-            }
+            Draw(point, GetColorValue(color));
         }
 
         /// <summary>
@@ -1546,6 +1515,9 @@ namespace SdlDotNet.Graphics
                 case 2:
                     value = Marshal.ReadInt16(ptr);
                     break;
+                case 3:
+                    value = MarshalHelper.ReadInt24(ptr);
+                    break;
                 case 4:
                     value = Marshal.ReadInt32(ptr);
                     break;
@@ -1554,6 +1526,9 @@ namespace SdlDotNet.Graphics
             }
             return this.GetColor(value);
         }
+
+
+
 
         /// <summary>
         /// Gets a 2D array of color values of the pixels in rectangle's area.
@@ -1596,12 +1571,27 @@ namespace SdlDotNet.Graphics
                 if (bytesPerPixel == 4)
                 {
                     //the buffer for a row of pixels.
-                    Int32[] buffer = new Int32[rectangle.Width];
-                    for (int y = 0; y < rectangle.Height; ++y)
+                    Int32[] buffer = new Int32[result.GetLength(0)];
+                    for (int y = 0; y < result.GetLength(1); ++y)
                     {
                         //gets only the pixels in the row that are required.
                         Marshal.Copy(new IntPtr(pixels + (y + rectangle.Y) * pitch), buffer, 0, buffer.Length);
-                        for (int x = 0; x < rectangle.Width; ++x)
+                        for (int x = 0; x < buffer.Length; ++x)
+                        {
+                            //converts the pixel to a color value.
+                            result[x, y] = this.GetColor(buffer[x]);
+                        }
+                    }
+                }
+                else if (bytesPerPixel == 3)
+                {
+                    //the buffer for a row of pixels.
+                    Int32[] buffer = new Int32[result.GetLength(0)];
+                    for (int y = 0; y < result.GetLength(1); ++y)
+                    {
+                        //gets only the pixels in the row that are required.
+                        MarshalHelper.CopyInt24(new IntPtr(pixels + (y + rectangle.Y) * pitch), buffer, 0, buffer.Length);
+                        for (int x = 0; x < buffer.Length; ++x)
                         {
                             //converts the pixel to a color value.
                             result[x, y] = this.GetColor(buffer[x]);
@@ -1610,24 +1600,30 @@ namespace SdlDotNet.Graphics
                 }
                 else if (bytesPerPixel == 2)
                 {
-                    Int16[] buffer = new Int16[rectangle.Width];
-                    for (int y = 0; y < rectangle.Height; ++y)
+                    //the buffer for a row of pixels.
+                    Int16[] buffer = new Int16[result.GetLength(0)];
+                    for (int y = 0; y < result.GetLength(1); ++y)
                     {
+                        //gets only the pixels in the row that are required.
                         Marshal.Copy(new IntPtr(pixels + (y + rectangle.Y) * pitch), buffer, 0, buffer.Length);
-                        for (int x = 0; x < rectangle.Width; ++x)
+                        for (int x = 0; x < buffer.Length; ++x)
                         {
+                            //converts the pixel to a color value.
                             result[x, y] = this.GetColor(buffer[x]);
                         }
                     }
                 }
                 else if (bytesPerPixel == 1)
                 {
-                    Byte[] buffer = new Byte[rectangle.Width];
-                    for (int y = 0; y < rectangle.Height; ++y)
+                    //the buffer for a row of pixels.
+                    Byte[] buffer = new Byte[result.GetLength(0)];
+                    for (int y = 0; y < result.GetLength(1); ++y)
                     {
+                        //gets only the pixels in the row that are required.
                         Marshal.Copy(new IntPtr(pixels + (y + rectangle.Y) * pitch), buffer, 0, buffer.Length);
-                        for (int x = 0; x < rectangle.Width; ++x)
+                        for (int x = 0; x < buffer.Length; ++x)
                         {
+                            //converts the pixel to a color value.
                             result[x, y] = this.GetColor(buffer[x]);
                         }
                     }
@@ -1643,7 +1639,111 @@ namespace SdlDotNet.Graphics
                 Unlock();
             }
         }
-
+        
+        /// <summary>
+        /// Sets a block of pixels.
+        /// </summary>
+        /// <param name="point">The top left corner of where the block should go.</param>
+        /// <param name="colors">The 2D color array representing the pixels.</param>
+        public void SetPixels(Point point,Color[,] colors)
+        {
+            if (this.disposed)
+            {
+                throw (new ObjectDisposedException(this.ToString()));
+            }
+            Sdl.SDL_Surface surfaceStruct = this.SurfaceStruct;
+            if (point.X < 0 || point.X + colors.GetLength(0) > surfaceStruct.w)
+            {
+                throw new ArgumentOutOfRangeException("point");
+            }
+            if (point.Y < 0 || point.Y + colors.GetLength(1)  > surfaceStruct.h)
+            {
+                throw new ArgumentOutOfRangeException("point");
+            }
+            Lock();
+            try
+            {
+                int bytesPerPixel = this.PixelFormat.BytesPerPixel;
+                //the base address for the pixels.
+                int pixels = surfaceStruct.pixels.ToInt32() + point.X * bytesPerPixel;
+                int pitch = surfaceStruct.pitch;
+                //These 3 ‘if’ blocks are a perfect candidate for generics unfortunately C# 
+                //does not have the required constrains for this case. So I’m reduced to copying code.
+                if (bytesPerPixel == 4)
+                {
+                    //the buffer for a row of pixels.
+                    Int32[] buffer = new Int32[colors.GetLength(0)];
+                    for (int y = 0; y < colors.GetLength(1); ++y)
+                    {
+                        //gets only the pixels in the row that are required.
+                        for (int x = 0; x < buffer.Length; ++x)
+                        {
+                            //converts the pixel to a color value.
+                            buffer[x] = GetColorValue(colors[x, y]);
+                        }
+                        //then copies them to the image.
+                        Marshal.Copy(buffer, 0, new IntPtr(pixels + (y + point.Y) * pitch), buffer.Length);
+                    }
+                }
+                else if (bytesPerPixel == 3)
+                {
+                    //the buffer for a row of pixels.
+                    Int32[] buffer = new Int32[colors.GetLength(0)];
+                    for (int y = 0; y < colors.GetLength(1); ++y)
+                    {
+                        //gets only the pixels in the row that are required.
+                        for (int x = 0; x < buffer.Length; ++x)
+                        {
+                            //converts the pixel to a color value.
+                            buffer[x] = GetColorValue(colors[x, y]);
+                        }
+                        //then copies them to the image.
+                        MarshalHelper.CopyInt24(buffer, 0, new IntPtr(pixels + (y + point.Y) * pitch), buffer.Length);
+                    }
+                }
+                else if (bytesPerPixel == 2)
+                {
+                    //the buffer for a row of pixels.
+                    Int16[] buffer = new Int16[colors.GetLength(0)];
+                    for (int y = 0; y < colors.GetLength(1); ++y)
+                    {
+                        //gets only the pixels in the row that are required.
+                        for (int x = 0; x < buffer.Length; ++x)
+                        {
+                            //converts the pixel to a color value.
+                            buffer[x] = (Int16)GetColorValue(colors[x, y]);
+                        }
+                        //then copies them to the image.
+                        Marshal.Copy(buffer, 0, new IntPtr(pixels + (y + point.Y) * pitch), buffer.Length);
+                    }
+                }
+                else if (bytesPerPixel == 1)
+                {
+                    //the buffer for a row of pixels.
+                    Byte[] buffer = new Byte[colors.GetLength(0)];
+                    for (int y = 0; y < colors.GetLength(1); ++y)
+                    {
+                        //gets only the pixels in the row that are required.
+                        for (int x = 0; x < buffer.Length; ++x)
+                        {
+                            //converts the pixel to a color value.
+                            buffer[x] = (Byte)GetColorValue(colors[x, y]);
+                        }
+                        //then copies them to the image.
+                        Marshal.Copy(buffer, 0, new IntPtr(pixels + (y + point.Y) * pitch), buffer.Length);
+                    }
+                }
+                else
+                {
+                    throw new SdlException(Events.StringManager.GetString("UnknownBytesPerPixel", CultureInfo.CurrentUICulture));
+                }
+            }
+            finally
+            {
+                Unlock();
+            }
+        }
+        
         /// <summary>
         /// AlphaBlending on Surface
         /// </summary>
@@ -2549,5 +2649,62 @@ namespace SdlDotNet.Graphics
         }
 
         #endregion
+    }
+
+    /// <summary>
+    /// A class to help with the manipulation of 24 bit ints.
+    /// TODO: test to see if BigEndian will brake it.
+    /// </summary>
+    static class MarshalHelper
+    {
+        private const int sizeofInt24 = 3;
+        private static readonly int offset = ((BitConverter.IsLittleEndian) ? (0) : (1));
+        public static Int32 ReadInt24(IntPtr ptr)
+        {
+            //creates a buffer to put the data read for the pointer
+            Byte[] buffer = new Byte[sizeofInt24];
+            //then reads it from the pointer.
+            Marshal.Copy(ptr, buffer, 0, sizeofInt24);
+
+            //creates the actaul return value
+            Int32[] result = new Int32[1] { 0 };
+            //then copies the data in the buffer into it.
+            Buffer.BlockCopy(buffer, 0, result, offset, sizeofInt24);
+            return result[0];
+        }
+        public static void WriteInt24(IntPtr ptr, Int32 value)
+        {
+            Int32[] valueArray = new Int32[1] { value };
+            Byte[] buffer = new Byte[sizeofInt24];
+            Buffer.BlockCopy(valueArray, offset, buffer, 0, sizeofInt24);
+            Marshal.Copy(buffer, 0, ptr, sizeofInt24);
+        }
+        public static void CopyInt24(Int32[] array, int startIndex, IntPtr destination, int length)
+        {
+            if (array == null) { throw new ArgumentNullException("array"); }
+            if (startIndex < 0 || length + startIndex > array.Length) { throw new ArgumentOutOfRangeException("startIndex"); }
+            Byte[] buffer = new byte[length * sizeofInt24];
+            for (int index = startIndex * sizeof(Int32), index2 = 0;
+                index2 < buffer.Length;
+                index2 += sizeofInt24, index += sizeof(Int32))
+            {
+                Buffer.BlockCopy(array, index + offset, buffer, index2, sizeofInt24);
+            }
+            Marshal.Copy(buffer, 0, destination, buffer.Length);
+        }
+        public static void CopyInt24(IntPtr source, Int32[] array, int startIndex, int length)
+        {
+            if (array == null) { throw new ArgumentNullException("array"); }
+            if (startIndex < 0 || length + startIndex > array.Length) { throw new ArgumentOutOfRangeException("startIndex"); }
+            Byte[] buffer = new byte[length * sizeofInt24];
+            Marshal.Copy(source, buffer, 0, buffer.Length);
+            Array.Clear(array, startIndex, length);
+            for (int index = startIndex * sizeof(Int32), index2 = 0;
+                index2 < buffer.Length;
+                index2 += sizeofInt24, index += sizeof(Int32))
+            {
+                Buffer.BlockCopy(buffer, index2, array, index + offset, sizeofInt24);
+            }
+        }
     }
 }
