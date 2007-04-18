@@ -98,7 +98,7 @@ using System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Scope = "member", Target = "SdlDotNetExamples.SpriteDemos.MultipleMode.AdjustViewport(SdlDotNet.Graphics.Sprites.Sprite,SdlDotNet.Graphics.Surface):System.Drawing.Point", MessageId = "Viewport")]
 [module: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Scope = "type", Target = "SdlDotNetExamples.SmallDemos.GtkSprite", MessageId = "Gtk")]
 [module: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Scope = "type", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample", MessageId = "Gtk")]
-[module: SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields", Scope = "member", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample.spriteDictionary")]
+[module: SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields", Scope = "member", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample.spriteCollection")]
 [module: SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields", Scope = "member", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample.GraphWindow")]
 [module: SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields", Scope = "member", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample.vbox1")]
 [module: SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields", Scope = "member", Target = "SdlDotNetExamples.SmallDemos.GtkSpriteExample.graphView")]

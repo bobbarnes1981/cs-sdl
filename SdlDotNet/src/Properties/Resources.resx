@@ -123,6 +123,9 @@
   <data name="GLGetAttributeImproperResult" xml:space="preserve">
     <value>Video.GLGetAttribute returned an improper result</value>
   </data>
+  <data name="HeightOutOfRange" xml:space="preserve">
+    <value>point.Y must be less then the Height and greater or equal to zero</value>
+  </data>
   <data name="IndexOutOfRange" xml:space="preserve">
     <value>Index out of range</value>
   </data>
@@ -152,5 +155,8 @@
   </data>
   <data name="VideoQueryFailed" xml:space="preserve">
     <value>Video query failed: </value>
+  </data>
+  <data name="WidthOutOfRange" xml:space="preserve">
+    <value>point.X must be less then the Width and greater or equal to zero</value>
   </data>
 </root>

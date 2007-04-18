@@ -53,7 +53,8 @@ namespace SdlDotNet.Particles.Emitters
         public ParticleSpriteEmitter(ParticleSystem system, Sprite sprite)
             : base(system)
         {
-            m_Sprites = new SpriteCollection(sprite);
+            m_Sprites = new SpriteCollection();
+            m_Sprites.Add(sprite);
         }
         /// <summary>
         /// Creates a new particle emitter that emits sprite objects.
@@ -71,7 +72,8 @@ namespace SdlDotNet.Particles.Emitters
         /// <param name="sprite">The sprite to emit.</param>
         public ParticleSpriteEmitter(Sprite sprite)
         {
-            m_Sprites = new SpriteCollection(sprite);
+            m_Sprites = new SpriteCollection();
+            m_Sprites.Add(sprite);
         }
         /// <summary>
         /// Creates a new particle emitter that emits sprite objects.

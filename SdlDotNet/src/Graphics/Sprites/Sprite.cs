@@ -111,7 +111,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="vector">Vector of Sprite</param>
         /// <param name="surface">Surface of Sprite</param>
         /// <param name="group">
-        /// SpriteDictionary group to put Sprite into.
+        /// SpriteCollection group to put Sprite into.
         /// </param>
         public Sprite(Surface surface, Vector vector, SpriteCollection group)
             : this(surface, vector)
@@ -129,7 +129,7 @@ namespace SdlDotNet.Graphics.Sprites
         /// <param name="position">position of Sprite</param>
         /// <param name="surface">Surface of Sprite</param>
         /// <param name="group">
-        /// SpriteDictionary group to put Sprite into.
+        /// SpriteCollection group to put Sprite into.
         /// </param>
         public Sprite(Surface surface, Point position, SpriteCollection group)
             : this(surface, new Vector(position), group)
@@ -713,17 +713,17 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
         /// <summary>
-        /// Check to see if Sprite intersects with any sprite in a SpriteDictionary
+        /// Check to see if Sprite intersects with any sprite in a SpriteCollection
         /// </summary>
-        /// <param name="spriteDictionary">Collection to chekc the intersection with</param>
+        /// <param name="spriteCollection">Collection to chekc the intersection with</param>
         /// <returns>True if sprite intersects with any sprite in collection</returns>
-        public virtual bool IntersectsWith(SpriteCollection spriteDictionary)
+        public virtual bool IntersectsWith(SpriteCollection spriteCollection)
         {
-            if (spriteDictionary == null)
+            if (spriteCollection == null)
             {
-                throw new ArgumentNullException("SpriteDictionary");
+                throw new ArgumentNullException("SpriteCollection");
             }
-            foreach (Sprite sprite in spriteDictionary)
+            foreach (Sprite sprite in spriteCollection)
             {
                 if (this.IntersectsWith(sprite))
                 {
@@ -737,7 +737,7 @@ namespace SdlDotNet.Graphics.Sprites
 
         #region Properties
         /// <summary>
-        /// True if Sprite is a member of a SpriteDictionary
+        /// True if Sprite is a member of a SpriteCollection
         /// </summary>
         public virtual bool Alive
         {
@@ -775,7 +775,7 @@ namespace SdlDotNet.Graphics.Sprites
         ///// Add Sprite to collection
         ///// </summary>
         ///// <param name="group">collection to add to</param>
-        //public virtual void Add(SpriteDictionary group)
+        //public virtual void Add(SpriteCollection group)
         //{
         //    if (group == null)
         //    {
@@ -789,7 +789,7 @@ namespace SdlDotNet.Graphics.Sprites
         ///// Add Sprite to collection. Use in special situations
         ///// </summary>
         ///// <param name="group">Collection to add to</param>
-        //public void AddInternal(SpriteDictionary group)
+        //public void AddInternal(SpriteCollection group)
         //{
         //    this.groups.Add(group);
         //}
@@ -798,7 +798,7 @@ namespace SdlDotNet.Graphics.Sprites
         ///// remove Sprite from Collection
         ///// </summary>
         ///// <param name="group">collection to remove sprite from</param>
-        //public virtual void Remove(SpriteDictionary group)
+        //public virtual void Remove(SpriteCollection group)
         //{
         //    if (group == null)
         //    {
@@ -812,7 +812,7 @@ namespace SdlDotNet.Graphics.Sprites
         ///// remove Sprite from collection. Use in special situations
         ///// </summary>
         ///// <param name="group">collection to remove sprite from</param>
-        //public void RemoveInternal(SpriteDictionary group)
+        //public void RemoveInternal(SpriteCollection group)
         //{
         //    this.groups.Remove(group);
         //}

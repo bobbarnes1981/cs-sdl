@@ -997,20 +997,20 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Blit entire SpriteDictionary to Surface
+        /// Blit entire SpriteCollection to Surface
         /// </summary>
-        /// <param name="spriteDictionary">SpriteDictionary to Blit</param>
+        /// <param name="spriteCollection">SpriteCollection to Blit</param>
         /// <returns>Collection of Rectangles acutally blit to since 
         /// ere have may been some clipping.
         /// </returns>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Correct Spelling")]
-        public List<Rectangle> Blit(SpriteCollection spriteDictionary)
+        public Collection<Rectangle> Blit(SpriteCollection spriteCollection)
         {
-            if (spriteDictionary == null)
+            if (spriteCollection == null)
             {
-                throw new ArgumentNullException("SpriteDictionary");
+                throw new ArgumentNullException("SpriteCollection");
             }
-            return spriteDictionary.Draw(this);
+            return spriteCollection.Draw(this);
         }
 
         /// <summary>
@@ -1073,20 +1073,20 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Erases SpriteDictionary from surface
+        /// Erases SpriteCollection from surface
         /// </summary>
-        /// <param name="spriteDictionary">SpriteDictionary to erase</param>
+        /// <param name="spriteCollection">SpriteCollection to erase</param>
         /// <param name="background">
-        /// Background Surface to cover up SpriteDictionary
+        /// Background Surface to cover up SpriteCollection
         /// </param>
-        public void Erase(SpriteCollection spriteDictionary,
+        public void Erase(SpriteCollection spriteCollection,
             Surface background)
         {
-            if (spriteDictionary == null)
+            if (spriteCollection == null)
             {
-                throw new ArgumentNullException("spriteDictionary");
+                throw new ArgumentNullException("spriteCollection");
             }
-            spriteDictionary.Erase(this, background);
+            spriteCollection.Erase(this, background);
         }
 
         /// <summary>
@@ -1498,11 +1498,11 @@ namespace SdlDotNet.Graphics
             Sdl.SDL_Surface surfaceStruct = this.SurfaceStruct;
             if (point.X < 0 || point.X >= surfaceStruct.w)
             {
-                throw new ArgumentOutOfRangeException("point", "point.X must be less then the Width and greater or equal to zero");
+                throw new ArgumentOutOfRangeException("point", Events.StringManager.GetString("WidthOutOfRange", CultureInfo.CurrentUICulture));
             }
             if (point.Y < 0 || point.Y >= surfaceStruct.h)
             {
-                throw new ArgumentOutOfRangeException("point", "point.Y must be less then the Height and greater or equal to zero");
+                throw new ArgumentOutOfRangeException("point", Events.StringManager.GetString("HeightOutOfRange", CultureInfo.CurrentUICulture));
             }
             int bytesPerPixel = this.PixelFormat.BytesPerPixel;
             IntPtr ptr = new IntPtr(surfaceStruct.pixels.ToInt32() + point.Y * surfaceStruct.pitch + point.X * bytesPerPixel);
@@ -1535,7 +1535,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="rectangle">The rectangle of the pixels to get.</param>
         /// <returns>A 2D array of Colors describing the pixels in the rectangle.</returns>
-        public Color[,] GetPixels(Rectangle rectangle)
+        public Color[,] GetColors(Rectangle rectangle)
         {
             if (this.disposed)
             {
@@ -2399,7 +2399,7 @@ namespace SdlDotNet.Graphics
         /// Update an array of rectangles
         /// </summary>
         /// <param name="rectangles">Collection of rectangles to update</param>
-        public void Update(List<Rectangle> rectangles)
+        public void Update(Collection<Rectangle> rectangles)
         {
             if (rectangles == null)
             {
