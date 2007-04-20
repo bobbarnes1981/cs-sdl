@@ -53,6 +53,16 @@ namespace SdlDotNet.Graphics.Sprites
             Sprite.KillSprite += new EventHandler<KillSpriteEventArgs>(SpriteCollection_KillSprite);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnAddingNew(AddingNewEventArgs e)
+        {
+            this.isSorted = false;
+            base.OnAddingNew(e);
+        }
+
         Collection<Sprite> lostSprites = new Collection<Sprite>();
 
         void SpriteCollection_KillSprite(object sender, KillSpriteEventArgs e)
@@ -114,8 +124,8 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         /// <param name="surface">
         /// Surface to remove the SpriteCollection from</param>
-        /// <param name="background">B
-        /// ackground to use to paint over Sprites in SpriteCollection
+        /// <param name="background">
+        /// Background to use to paint over Sprites in SpriteCollection
         /// </param>
         public void Erase(Surface surface, Surface background)
         {
