@@ -134,7 +134,7 @@ namespace SdlDotNetExamples.CDPlayer
                     }
                     else
                     {
-                        this.Kill();
+                        this.Dispose();
                     }
                 }
                 else

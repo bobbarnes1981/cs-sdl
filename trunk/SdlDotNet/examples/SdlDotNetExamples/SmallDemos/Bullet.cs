@@ -68,7 +68,7 @@ namespace SdlDotNetExamples.SmallDemos
                 this.Y + this.Surface.Size.Height < 0 ||
                 this.Y > Video.Screen.Height)
             {
-                this.Kill();
+                this.Dispose();
             }
         }
         private bool disposed;

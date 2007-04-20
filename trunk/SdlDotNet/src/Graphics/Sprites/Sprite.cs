@@ -35,7 +35,7 @@ namespace SdlDotNet.Graphics.Sprites
     /// Sprite class contains both a Surface and a Rectangle so that 
     /// an object can be easily displayed and manipulated.
     /// </summary>
-    public class Sprite : IDisposable, IComparable
+    public class Sprite : IDisposable
     {
         #region Constructors
 
@@ -49,6 +49,16 @@ namespace SdlDotNet.Graphics.Sprites
         public Sprite()
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static event EventHandler<ChangedZAxisEventArgs> ChangedZAxis;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static event EventHandler<KillSpriteEventArgs> KillSprite;
 
         /// <summary>
         /// Create a new Sprite
@@ -154,32 +164,6 @@ namespace SdlDotNet.Graphics.Sprites
                 surf = value;
             }
         }
-
-        ///// <summary>
-        ///// Returns a surface of the rendered sprite.
-        ///// </summary>
-        //public virtual Surface Render()
-        //{
-        //    return this.surf;
-        //}
-
-        ///// <summary>
-        ///// Renders the sprite onto the destination surface.
-        ///// </summary>
-        ///// <param name="destination">
-        ///// The surface to be rendered onto.
-        ///// </param>
-        ///// <returns>
-        ///// Actual rectangle blit to by method. Sometimes clipping may occur.
-        ///// </returns>
-        //public virtual Rectangle Render(Surface destination)
-        //{
-        //    if (destination == null)
-        //    {
-        //        throw new ArgumentNullException("destination");
-        //    }
-        //    return destination.Blit(this);
-        //}
         #endregion
 
         #region Events
@@ -475,6 +459,10 @@ namespace SdlDotNet.Graphics.Sprites
             set
             {
                 this.vector.Z = value;
+                if (ChangedZAxis != null)
+                {
+                    ChangedZAxis(this, new ChangedZAxisEventArgs(this));
+                }
             }
         }
 
@@ -736,86 +724,6 @@ namespace SdlDotNet.Graphics.Sprites
         #endregion
 
         #region Properties
-        /// <summary>
-        /// True if Sprite is a member of a SpriteCollection
-        /// </summary>
-        public virtual bool Alive
-        {
-            get
-            {
-                return (groups.Count > 0);
-            }
-        }
-
-        ArrayList groups = new ArrayList();
-
-        /// <summary>
-        /// collections that the Sprite is a member of.
-        /// </summary>
-        public virtual ArrayList Collections
-        {
-            get
-            {
-                return groups;
-            }
-        }
-
-        /// <summary>
-        /// remove sprite from all collections
-        /// </summary>
-        public virtual void Kill()
-        {
-            for (int i = 0; i < this.groups.Count; i++)
-            {
-                ((SpriteCollection)groups[i]).Remove(this);
-            }
-        }
-
-        ///// <summary>
-        ///// Add Sprite to collection
-        ///// </summary>
-        ///// <param name="group">collection to add to</param>
-        //public virtual void Add(SpriteCollection group)
-        //{
-        //    if (group == null)
-        //    {
-        //        throw new ArgumentNullException("group");
-        //    }
-        //    this.groups.Add(group);
-        //    group.AddInternal(this);
-        //}
-
-        ///// <summary>
-        ///// Add Sprite to collection. Use in special situations
-        ///// </summary>
-        ///// <param name="group">Collection to add to</param>
-        //public void AddInternal(SpriteCollection group)
-        //{
-        //    this.groups.Add(group);
-        //}
-
-        ///// <summary>
-        ///// remove Sprite from Collection
-        ///// </summary>
-        ///// <param name="group">collection to remove sprite from</param>
-        //public virtual void Remove(SpriteCollection group)
-        //{
-        //    if (group == null)
-        //    {
-        //        throw new ArgumentNullException("group");
-        //    }
-        //    this.groups.Remove(group);
-        //    group.RemoveInternal(this);
-        //}
-
-        ///// <summary>
-        ///// remove Sprite from collection. Use in special situations
-        ///// </summary>
-        ///// <param name="group">collection to remove sprite from</param>
-        //public void RemoveInternal(SpriteCollection group)
-        //{
-        //    this.groups.Remove(group);
-        //}
 
         private bool allowDrag;
 
@@ -948,9 +856,19 @@ namespace SdlDotNet.Graphics.Sprites
                         this.surf.Dispose();
                         this.surf = null;
                     }
-                    this.Kill();
                 }
                 this.disposed = true;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Kill()
+        {
+            if (KillSprite != null)
+            {
+                KillSprite(this, new KillSpriteEventArgs(this));
             }
         }
         /// <summary>
@@ -977,120 +895,6 @@ namespace SdlDotNet.Graphics.Sprites
         {
             Dispose(false);
         }
-
-        #endregion
-
-        #region IComparable Members
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public int CompareTo(object obj)
-        {
-            Sprite temp = obj as Sprite;
-            if (this.Z == temp.Z)
-            {
-                if (this.GetHashCode() == temp.GetHashCode())
-                {
-                    return 0;
-                }
-                else if (this.GetHashCode() > temp.GetHashCode())
-                {
-                    return 1;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            else if (this.Z > temp.Z)
-            {
-                return 1;
-            }
-            {
-                return -1;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is Sprite))
-                return false;
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="s1"></param>
-        /// <param name="s2"></param>
-        /// <returns></returns>
-        public static bool operator ==(Sprite s1, Sprite s2)
-        {
-            if ((object)s1 == null)
-            {
-                throw new ArgumentNullException("s1");
-            }
-            return s1.Equals(s2);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="s1"></param>
-        /// <param name="s2"></param>
-        /// <returns></returns>
-        public static bool operator !=(Sprite s1, Sprite s2)
-        {
-            return !(s1 == s2);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="s1"></param>
-        /// <param name="s2"></param>
-        /// <returns></returns>
-        public static bool operator <(Sprite s1, Sprite s2)
-        {
-            if (s1 == null)
-            {
-                throw new ArgumentNullException("s1");
-            }
-            return (s1.CompareTo(s2) < 0);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="s1"></param>
-        /// <param name="s2"></param>
-        /// <returns></returns>
-        public static bool operator >(Sprite s1, Sprite s2)
-        {
-            if (s1 == null)
-            {
-                throw new ArgumentNullException("s1");
-            }
-            return (s1.CompareTo(s2) > 0);
-        }
-
 
         #endregion
     }

@@ -40,7 +40,7 @@ namespace SdlDotNet.Graphics.Sprites
     /// </summary>
     /// <remarks>The sprite manager has no size.</remarks>
     [Serializable]
-    public class SpriteCollection : BindingList<Sprite>//, ISerializable
+    public class SpriteCollection : BindingList<Sprite>
     {
         #region Constructors
         /// <summary>
@@ -49,41 +49,30 @@ namespace SdlDotNet.Graphics.Sprites
         public SpriteCollection()
             : base()
         {
+            Sprite.ChangedZAxis += new EventHandler<ChangedZAxisEventArgs>(SpriteCollection_ChangedZAxis);
+            Sprite.KillSprite += new EventHandler<KillSpriteEventArgs>(SpriteCollection_KillSprite);
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="info"></param>
-        ///// <param name="context"></param>
-        //protected SpriteCollection(
-        //   SerializationInfo info,
-        //   StreamingContext context) : base(info, context)
-        //{
-        //}
+        Collection<Sprite> lostSprites = new Collection<Sprite>();
 
-        ///// <summary>
-        ///// Creates a new SpriteCollection with one sprite element in it.
-        ///// </summary>
-        ///// <param name="sprite">Sprite to add to collection</param>
-        //public SpriteCollection(Sprite sprite)
-        //    : base()
-        //{
-        //    this.Add(sprite);
-        //}
+        void SpriteCollection_KillSprite(object sender, KillSpriteEventArgs e)
+        {
+            if (this.Contains(e.Sprite))
+            {
+                this.lostRects.Add(e.Rectangle);
+                this.lostSprites.Add(e.Sprite);
+            }
+        }
 
-        ///// <summary>
-        ///// Creates a new SpriteCollection based off a different sprite collection.
-        ///// </summary>
-        ///// <param name="spriteCollection">Add SpriteCollection to this SpriteCollection</param>
-        //public SpriteCollection(SpriteCollection spriteCollection)
-        //    : base()
-        //{
-        //    foreach (Sprite s in spriteCollection)
-        //    {
-        //        this.Add(s);
-        //    }
-        //}
+        void SpriteCollection_ChangedZAxis(object sender, ChangedZAxisEventArgs e)
+        {
+            if (this.Contains(e.Sprite))
+            {
+                this.SortByZAxis(e.ListSortDirection);
+            }
+        }
+
+
 
         #endregion
 
@@ -113,6 +102,7 @@ namespace SdlDotNet.Graphics.Sprites
                     rects.Add(s.LastBlitRectangle);
                 }
             }
+            this.Remove(this.lostSprites);
             return rects;
         }
 
@@ -172,33 +162,6 @@ namespace SdlDotNet.Graphics.Sprites
         }
 
 
-        ///// <summary>
-        ///// Adds sprite to group
-        ///// </summary>
-        ///// <param name="sprite">Sprite to add</param>
-        //public void Add(Sprite sprite)
-        //{
-        //    if (sprite == null)
-        //    {
-        //        throw new ArgumentNullException("sprite");
-        //    }
-        //    //sprite.AddInternal(this);
-        //    Add(sprite);
-        //}
-
-        /// <summary>
-        /// Adds sprite to group
-        /// </summary>
-        /// <param name="sprite">Sprite to add</param>
-        public void AddInternal(Sprite sprite)
-        {
-            if (sprite == null)
-            {
-                throw new ArgumentNullException("sprite");
-            }
-            Add(sprite);
-        }
-
         /// <summary>
         /// Adds sprites from another group to this group
         /// </summary>
@@ -211,25 +174,11 @@ namespace SdlDotNet.Graphics.Sprites
             }
             foreach (Sprite s in spriteCollection)
             {
-                //s.AddInternal(this);
-                Add(s);
+                base.Add(s);
             }
+            this.SortByZAxis();
             return this.Count;
         }
-
-        //private int AddInternal(SpriteCollection SpriteCollection)
-        //{
-        //    if (SpriteCollection == null)
-        //    {
-        //        throw new ArgumentNullException("SpriteCollection");
-        //    }
-        //    foreach (Sprite s in SpriteCollection.Keys)
-        //    {
-        //        //SpriteCollection[i].AddInternal(this);
-        //        Add(s);
-        //    }
-        //    return this.Count;
-        //}
 
         /// <summary>
         /// Rectangles of Sprites that have been removed
@@ -245,35 +194,6 @@ namespace SdlDotNet.Graphics.Sprites
                 return this.lostRects;
             }
         }
-
-        ///// <summary>
-        ///// Removes sprite from group
-        ///// </summary>
-        ///// <param name="sprite">Sprite to remove</param>
-        //public override void Remove(Sprite sprite)
-        //{
-        //    if (sprite == null)
-        //    {
-        //        throw new ArgumentNullException("sprite");
-        //    }
-        //    this.lostRects.Add(sprite.RectangleDirty);
-        //    sprite.RemoveInternal(this);
-        //    List.Remove(sprite);
-        //}
-
-        ///// <summary>
-        ///// Removes sprite from group
-        ///// </summary>
-        ///// <param name="sprite">Sprite to remove</param>
-        //public void RemoveInternal(Sprite sprite)
-        //{
-        //    if (sprite == null)
-        //    {
-        //        throw new ArgumentNullException("sprite");
-        //    }
-        //    this.lostRects.Add(sprite.RectangleDirty);
-        //    List.Remove(sprite);
-        //}
 
         /// <summary>
         /// Removes sprite from this group if they are contained in the given group
@@ -291,20 +211,31 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 if (this.Contains(s))
                 {
-                    this.Remove(s);
+                    this.lostRects.Add(s.LastBlitRectangle);
+                    base.Remove(s);
                 }
             }
         }
 
-        ///// <summary>
-        ///// Checks if sprite is in the container
-        ///// </summary>
-        ///// <param name="sprite">Sprite to query for</param>
-        ///// <returns>True is the sprite is in the container.</returns>
-        //public bool Contains(Sprite sprite)
-        //{
-        //    return (List.Contains(sprite));
-        //}
+        /// <summary>
+        /// Removes sprite from this group if they are contained in the given collection
+        /// </summary>
+        /// <param name="spriteCollection">Remove all sprite in the Collection from this SpriteCollection.</param>
+        public virtual void Remove(Collection<Sprite> spriteCollection)
+        {
+            if (spriteCollection == null)
+            {
+                throw new ArgumentNullException("spriteCollection");
+            }
+            foreach (Sprite s in spriteCollection)
+            {
+                if (this.Contains(s))
+                {
+                    this.lostRects.Add(s.LastBlitRectangle);
+                    base.Remove(s);
+                }
+            }
+        }
 
         #endregion
 
@@ -318,9 +249,7 @@ namespace SdlDotNet.Graphics.Sprites
         {
             get
             {
-                //this.Keys.GetEnumerator().;
                 return new Size(0, 0);
-                //}
             }
         }
         #endregion
@@ -900,23 +829,6 @@ namespace SdlDotNet.Graphics.Sprites
 
         #endregion
 
-        //#region Properties
-        ///// <summary>
-        ///// Gets and sets a sprite in the collection based on the index.
-        ///// </summary>
-        //public Sprite this[int index]
-        //{
-        //    get
-        //    {
-        //        return ((Sprite)List[index]);
-        //    }
-        //    set
-        //    {
-        //        List[index] = value;
-        //    }
-        //}
-        //#endregion
-
         #region Public methods
 
         /// <summary>
@@ -926,6 +838,7 @@ namespace SdlDotNet.Graphics.Sprites
         {
             foreach (Sprite s in this)
             {
+                this.lostRects.Add(s.LastBlitRectangle);
                 s.Kill();
             }
         }
@@ -989,32 +902,6 @@ namespace SdlDotNet.Graphics.Sprites
             }
             return intersection;
         }
-
-        ///// <summary>
-        ///// Provide the explicit interface member for ICollection.
-        ///// </summary>
-        ///// <param name="array">Array to copy collection to</param>
-        ///// <param name="index">Index at which to insert the collection items</param>
-        //void ICollection.CopyTo(Array array, int index)
-        //{
-        //    this.List.CopyTo(array, index);
-        //}
-
-        #endregion
-
-        #region ISerializable Members
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="info"></param>
-        ///// <param name="context"></param>
-        //[SecurityPermissionAttribute(SecurityAction.Demand,
-        //  SerializationFormatter = true)]
-        //public void GetObjectData(SerializationInfo info, StreamingContext context)
-        //{
-        //    base.GetObjectData(info, context);
-        //}
 
         #endregion
     }
