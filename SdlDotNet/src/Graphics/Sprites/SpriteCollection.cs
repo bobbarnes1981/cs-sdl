@@ -68,17 +68,16 @@ namespace SdlDotNet.Graphics.Sprites
         {
             if (this.Contains(e.Sprite))
             {
-                this.SortByZAxis(e.ListSortDirection);
+                this.isSorted = false;
             }
         }
-
-
 
         #endregion
 
         #region Display
         Collection<Rectangle> lostRects = new Collection<Rectangle>();
         Collection<Rectangle> rects = new Collection<Rectangle>();
+        bool isSorted;
 
         /// <summary>
         /// Draws all surfaces within the collection on the given destination.
@@ -91,7 +90,11 @@ namespace SdlDotNet.Graphics.Sprites
                 throw new ArgumentNullException("destination");
             }
             rects.Clear();
-            this.SortByZAxis();
+            if (!isSorted)
+            {
+                this.SortByZAxis();
+                this.isSorted = true;
+            }
 
             foreach (Sprite s in this)
             {
@@ -176,7 +179,6 @@ namespace SdlDotNet.Graphics.Sprites
             {
                 base.Add(s);
             }
-            this.SortByZAxis();
             return this.Count;
         }
 
@@ -220,7 +222,9 @@ namespace SdlDotNet.Graphics.Sprites
         /// <summary>
         /// Removes sprite from this group if they are contained in the given collection
         /// </summary>
-        /// <param name="spriteCollection">Remove all sprite in the Collection from this SpriteCollection.</param>
+        /// <param name="spriteCollection">
+        /// Remove all sprite in the Collection from this SpriteCollection.
+        /// </param>
         public virtual void Remove(Collection<Sprite> spriteCollection)
         {
             if (spriteCollection == null)
