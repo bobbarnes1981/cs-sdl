@@ -1,15 +1,27 @@
+=== Release Summary ===
 SDL.NET is a set of object-oriented CLS-compliant .NET 2.0 bindings for the SDL multimedia library. It provides high-level access to audio, keyboard, mouse, joystick, TrueType fonts, various image formats, sound mixing, MPEG-1 movies, 2D video framebuffer and 3D hardware via OpenGL.
 
-This release fully leverages .NET 2.0 functionality. This release uses the latest SDL library release (1.2.11). The API has been completely revamped with reorganized namespaces, consolidated method names and generics. The Sprite and Audio systems have been revamped. A library that integrates SDL.NET and Gtk# has been added. Many examples have been added to the new examples browser application.
+This release fully leverages .NET 2.0 functionality. This release uses the latest SDL library release (1.2.11). The API has been completely revamped with reorganized namespaces, consolidated method names and generics. The Sprite and Audio systems have been revamped. A library that integrates SDL.NET and Gtk# has been added. The OpenGl integration library has been rewritten. Many examples have been added to the new examples browser application.
 
-Documentation is available at http://cs-sdl.sourceforge.net.
-
-Downloads are available at:
-http://sourceforge.net/project/showfiles.php?group_id=52340
+Documentation and downloads are available at http://cs-sdl.sourceforge.net.
 
 A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changelog
 
 SDL.NET is licensed under the LGPL.
+
+===6.0.0beta3===
+David Hudson 20 Apr 2007
+* Bioslayer has joined the project.
+* Dropped the Winforms-based Example browser. It caused too many problems with Mono (mouse event handling on Mono/Linux and Mono/Windows, compilation and event problems on Mono/OSX).
+* Added a SDL.NET-based GUI Example browser. It is clunky, but it works on all platforms.
+* At long last, an OSX version. The CDPlayer does not work, but the Examples Browser and SharpNes work. They build full OSX bundles so you can double-click on the apps to start them.
+* Released .dmg file for OSX version.
+* SdlDotNet.OpenGl was re-implemented thanks to Bioslayer.
+* Many bugs fixes by Bioslayer.
+* All tutorials on the wiki updated to 6.0 code
+* Changed SpriteDictionary to SpriteCollection. Sorting on the Z axis now works.
+* Added a small demo to show sorting order for sprites.
+* Fixed Sprite.Kill to remove sprite from all collections.
 
 ===6.0.0beta2===
 David Hudson 27 Mar 2007

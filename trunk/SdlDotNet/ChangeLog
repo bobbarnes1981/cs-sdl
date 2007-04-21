@@ -1,3 +1,17 @@
+===6.0.0beta3===
+David Hudson 20 Apr 2007
+* Bioslayer has joined the project.
+* Dropped the Winforms-based Example browser. It caused too many problems with Mono (mouse event handling on Mono/Linux and Mono/Windows, compilation and event problems on Mono/OSX).
+* Added a SDL.NET-based GUI Example browser. It is clunky, but it works on all platforms.
+* At long last, an OSX version. The CDPlayer does not work, but the Examples Browser and SharpNes work. They build full OSX bundles so you can double-click on the apps to start them.
+* Released .dmg file for OSX version.
+* SdlDotNet.OpenGl was re-implemented thanks to Bioslayer.
+* Many bugs fixes by Bioslayer.
+* All tutorials on the wiki updated to 6.0 code
+* Changed SpriteDictionary to SpriteCollection. Sorting on the Z axis now works.
+* Added a small demo to show sorting order for sprites.
+* Fixed Sprite.Kill to remove sprite from all collections.
+
 ===6.0.0beta2===
 David Hudson 27 Mar 2007
 * Major API Change: Removed Surface.Resize, Surface.Rotate, Surface.Scale, Surface.RotateZoom, Surface.Stretch, Surface.FlipVertical and Surface.FlipHorizontal. You must now use the respective "Create" methods: Surface.CreateResizedSurface, Surface.CreateScaledSurface, Surface.CreateFlippedVerticalSurface etc. I know this is a disruptive change, but it solves a huge AccessViolation memory bug that has been plaguing SDL.NET for a long time. 
