@@ -22,6 +22,7 @@ David Hudson 20 Apr 2007
 * Changed SpriteDictionary to SpriteCollection. Sorting on the Z axis now works.
 * Added a small demo to show sorting order for sprites.
 * Fixed Sprite.Kill to remove sprite from all collections.
+* Updated Prebuild that fixes VS2005 target.
 
 ===6.0.0beta2===
 David Hudson 27 Mar 2007
