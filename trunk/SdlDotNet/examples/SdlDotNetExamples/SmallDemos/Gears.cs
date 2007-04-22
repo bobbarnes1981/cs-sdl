@@ -366,7 +366,7 @@ namespace SdlDotNetExamples.SmallDemos
 
         private void Resize(object sender, VideoResizeEventArgs e)
         {
-            screen = Video.SetVideoMode(e.Width, e.Height, true);
+            screen = Video.SetVideoMode(e.Width, e.Height, true,true);
         }
 
         private void KeyboardDown(
