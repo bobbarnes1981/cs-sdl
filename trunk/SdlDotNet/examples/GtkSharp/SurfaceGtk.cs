@@ -31,7 +31,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace SdlDotNet.GtkSharp
 {
-
     /// <summary>
     /// 
     /// </summary>
