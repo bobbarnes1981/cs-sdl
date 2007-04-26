@@ -166,11 +166,19 @@
 	    </Configuration>
 	    <Reference name="System" /> 
 	    <Reference name="System.Drawing" /> 
+	    <?if OS = "UNIX" ?>
+	    <Reference name="atk-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <Reference name="gdk-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <Reference name="pango-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <Reference name="gtk-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <Reference name="glib-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <?else ?>
 	    <Reference name="atk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="gdk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="pango-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="gtk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="glib-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <?endif ?>
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Files>
 		<Match path="." pattern="*.cs" recurse="true"/>
@@ -201,12 +209,21 @@
 	    <Reference name="System.Windows.Forms" /> 
 	    <Reference name="System.Data" /> 
 	    <Reference name="System.Drawing" />
+	    <?if OS = "UNIX" ?>
+	    <Reference name="atk-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <Reference name="gdk-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <Reference name="pango-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <Reference name="gtk-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <Reference name="glib-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <Reference name="glade-sharp" localCopy="true" path="/usr/lib/mono/gtk-sharp-2.0"/>
+	    <?else ?>
 	    <Reference name="atk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="gdk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="pango-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="gtk-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="glib-sharp" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="glade-sharp" localCopy="true" path="../../lib/net-2.0"/>
+	    <?endif ?>
 	    <Reference name="SdlDotNet" localCopy="true"/>
 	    <Reference name="SdlDotNet.OpenGl" localCopy="true"/>
 	    <Reference name="SdlDotNet.GtkSharp" localCopy="true"/>
