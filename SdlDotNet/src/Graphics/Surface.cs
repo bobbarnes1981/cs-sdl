@@ -1467,10 +1467,13 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public Surface CreateFlippedHorizontalSurface()
         {
-            Surface surface = this.CreateRotatedSurface(270);
-            surface = surface.CreateFlippedVerticalSurface();
-            surface = surface.CreateRotatedSurface(90);
-            return surface;
+            using (Surface surface1 = this.CreateRotatedSurface(270))
+            {
+                using (Surface surface2 = surface1.CreateFlippedVerticalSurface())
+                {
+                    return surface2.CreateRotatedSurface(90);
+                }
+            }
         }
 
         /// <summary>
@@ -2182,17 +2185,19 @@ namespace SdlDotNet.Graphics
         /// <returns>new Surface</returns>
         public Surface CreateStretchedSurface(Rectangle sourceRectangle, Rectangle destinationRectangle)
         {
-            Surface surface = new Surface(sourceRectangle);
-            //Surface surface = (Surface)this.Clone();
-            Color colorTemp = this.TransparentColor;
-            this.Transparent = false;
-            surface.Blit(this, new Point(0, 0), sourceRectangle);
-            this.transparentColor = colorTemp;
-            double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
-            double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
-            surface = surface.CreateScaledSurface(stretchWidth, stretchHeight);
-            CloneFields(this, surface);
-            return surface;
+            using (Surface surface1 = new Surface(sourceRectangle))
+            {
+                //Surface surface = (Surface)this.Clone();
+                Color colorTemp = this.TransparentColor;
+                this.Transparent = false;
+                surface1.Blit(this, new Point(0, 0), sourceRectangle);
+                this.transparentColor = colorTemp;
+                double stretchWidth = ((double)destinationRectangle.Width / (double)sourceRectangle.Width);
+                double stretchHeight = ((double)destinationRectangle.Height / (double)sourceRectangle.Height);
+                Surface surface2 = surface1.CreateScaledSurface(stretchWidth, stretchHeight);
+                CloneFields(this, surface2);
+                return surface2;
+            }
         }
 
         /// <summary>
@@ -2202,11 +2207,12 @@ namespace SdlDotNet.Graphics
         /// <returns>new Surface</returns>
         public Surface CreateStretchedSurface(Size destinationSize)
         {
-            Surface surface = (Surface)this.Clone();
-            double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
-            double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
-            surface = surface.CreateScaledSurface(stretchWidth, stretchHeight);
-            return surface;
+            using (Surface surface1 = (Surface)this.Clone())
+            {
+                double stretchWidth = ((double)destinationSize.Width / (double)this.Width);
+                double stretchHeight = ((double)destinationSize.Height / (double)this.Height);
+                return surface1.CreateScaledSurface(stretchWidth, stretchHeight);
+            }
         }
 
         /// <summary>
@@ -2315,27 +2321,30 @@ namespace SdlDotNet.Graphics
         }
 
         /// <summary>
-        /// Uses a Transformation object to perform rotation, zooming and scaling
+        /// Uses a Transformation object to perform rotation, zooming/scaling
         /// </summary>
         /// <param name="transformation">Transformation object</param>
-        public Surface Transform(Transformation transformation)
+        public Surface CreateTransformedSurface(Transformation transformation)
         {
+            //this method and has duplicate logic with CreateRotatedZoomedSurface.
+            if (this.disposed)
+            {
+                throw (new ObjectDisposedException(this.ToString()));
+            }
             if (transformation == null)
             {
                 throw new ArgumentNullException("transformation");
             }
-            Surface surface = new Surface(0, 0);
-            if (Math.Round(transformation.Zoom, 1) != 1.0f && Math.Round(transformation.Zoom, 1) != 0.0f)
-            {
-                surface = this.CreateRotatedZoomedSurface(transformation.DegreesOfRotation, transformation.Zoom, transformation.AntiAlias);
-            }
-            if (Math.Round(transformation.ScaleX, 1) != 1.0f &&
-                Math.Round(transformation.ScaleY, 1) != 1.0f &&
-                Math.Round(transformation.ScaleX, 1) != 0.0f &&
-                Math.Round(transformation.ScaleY, 1) != 0.0f)
-            {
-                surface = this.CreateScaledSurface(transformation.ScaleX, transformation.ScaleY, transformation.AntiAlias);
-            }
+            int antiAliasParameter = (transformation.AntiAlias) ? (SdlGfx.SMOOTHING_ON) : (SdlGfx.SMOOTHING_OFF);
+            Surface surface = 
+                new Surface(
+                    SdlGfx.rotozoomSurfaceXY(
+                        this.Handle, 
+                        transformation.DegreesOfRotation, 
+                        transformation.ScaleX, 
+                        transformation.ScaleY, 
+                        antiAliasParameter));
+            CloneFields(this, surface);
             return surface;
         }
 
