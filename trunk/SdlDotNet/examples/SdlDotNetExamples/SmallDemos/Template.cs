@@ -1,3 +1,6 @@
+//Public Domain
+//Original version written by Paul Aspinall.
+
 using System;
 using System.Drawing;
 
@@ -7,18 +10,30 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.SmallDemos
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Template
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static void Run()
         {
             Template game = new Template();
             game.Go();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Template()
-        {  
+        {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Go()
         {
             Video.SetVideoMode(800, 600);
