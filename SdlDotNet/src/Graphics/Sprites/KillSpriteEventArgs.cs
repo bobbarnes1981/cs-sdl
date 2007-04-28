@@ -61,9 +61,13 @@ namespace SdlDotNet.Graphics.Sprites
         /// </summary>
         public KillSpriteEventArgs(Sprite sprite)
         {
+            if (sprite == null)
+            {
+                throw new ArgumentNullException("sprite");
+            }
             this.sprite = sprite;
             this.rectangle = sprite.LastBlitRectangle;
-        }    
+        }
 
         #endregion
     }

@@ -35,7 +35,7 @@ using SdlDotNet.Input;
 
 namespace SdlDotNetExamples.SmallDemos
 {
-    public class SpriteCollectionSort
+    public class SpriteCollectionSort : IDisposable
     {
         Surface screen;
         SpriteCollection manager;
@@ -53,7 +53,7 @@ namespace SdlDotNetExamples.SmallDemos
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Sprite Sorting Example";
             screen = Video.SetVideoMode(200, 200, false, false, false);
-            
+
             s = new Sprite(new Surface(100, 100), new Point(10, 10));
             s2 = new Sprite(new Surface(100, 100), new Point(10, 10));
 
@@ -106,6 +106,61 @@ namespace SdlDotNetExamples.SmallDemos
                 return "SpriteCollectionSort: Sorting Sprite on the Z Axis";
             }
         }
+
+        #region IDisposable Members
+
+        private bool disposed;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.s != null)
+                    {
+                        this.s.Dispose();
+                        this.s = null;
+                    }
+                    if (this.s2 != null)
+                    {
+                        this.s2.Dispose();
+                        this.s2 = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ~SpriteCollectionSort()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 }
 

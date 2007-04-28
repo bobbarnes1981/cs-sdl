@@ -1642,14 +1642,18 @@ namespace SdlDotNet.Graphics
                 Unlock();
             }
         }
-        
+
         /// <summary>
         /// Sets a block of pixels.
         /// </summary>
         /// <param name="point">The top left corner of where the block should go.</param>
         /// <param name="colors">The 2D color array representing the pixels.</param>
-        public void SetPixels(Point point,Color[,] colors)
+        public void SetPixels(Point point, Color[,] colors)
         {
+            if (colors == null)
+            {
+                throw new ArgumentNullException("colors");
+            }
             if (this.disposed)
             {
                 throw (new ObjectDisposedException(this.ToString()));
@@ -1659,7 +1663,7 @@ namespace SdlDotNet.Graphics
             {
                 throw new ArgumentOutOfRangeException("point");
             }
-            if (point.Y < 0 || point.Y + colors.GetLength(1)  > surfaceStruct.h)
+            if (point.Y < 0 || point.Y + colors.GetLength(1) > surfaceStruct.h)
             {
                 throw new ArgumentOutOfRangeException("point");
             }
@@ -1746,7 +1750,7 @@ namespace SdlDotNet.Graphics
                 Unlock();
             }
         }
-        
+
         /// <summary>
         /// AlphaBlending on Surface
         /// </summary>
@@ -2336,13 +2340,13 @@ namespace SdlDotNet.Graphics
                 throw new ArgumentNullException("transformation");
             }
             int antiAliasParameter = (transformation.AntiAlias) ? (SdlGfx.SMOOTHING_ON) : (SdlGfx.SMOOTHING_OFF);
-            Surface surface = 
+            Surface surface =
                 new Surface(
                     SdlGfx.rotozoomSurfaceXY(
-                        this.Handle, 
-                        transformation.DegreesOfRotation, 
-                        transformation.ScaleX, 
-                        transformation.ScaleY, 
+                        this.Handle,
+                        transformation.DegreesOfRotation,
+                        transformation.ScaleX,
+                        transformation.ScaleY,
                         antiAliasParameter));
             CloneFields(this, surface);
             return surface;
@@ -2668,6 +2672,7 @@ namespace SdlDotNet.Graphics
     {
         private const int sizeofInt24 = 3;
         private static readonly int offset = ((BitConverter.IsLittleEndian) ? (0) : (1));
+
         public static Int32 ReadInt24(IntPtr ptr)
         {
             //creates a buffer to put the data read for the pointer
