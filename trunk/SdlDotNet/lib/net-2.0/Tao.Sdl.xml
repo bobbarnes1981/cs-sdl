@@ -2473,6 +2473,28 @@
             </remarks>
             <see cref="M:Tao.Sdl.Sdl.SDL_WM_GrabInput(System.Int32)"/>
         </member>
+        <member name="M:Tao.Sdl.Sdl.objc_getClass(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.sel_registerName(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tao.Sdl.Sdl.objc_msgSend(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="self"></param>
+            <param name="cmd"></param>
+            <returns></returns>
+        </member>
         <member name="F:Tao.Sdl.Sdl.AUDIO_U16">
             <summary>
             Unsigned 16-bit little-endian samples
