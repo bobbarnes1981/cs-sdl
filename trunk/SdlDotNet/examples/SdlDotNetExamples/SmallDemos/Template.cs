@@ -16,13 +16,13 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         public Template()
-        {
-            Video.SetVideoMode(800, 600);
-            AddHandlers();
+        {  
         }
 
         public void Go()
         {
+            Video.SetVideoMode(800, 600);
+            this.AddHandlers();
             Events.Run();
         }
 
