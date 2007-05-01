@@ -51,7 +51,7 @@ namespace SdlDotNetExamples.LargeDemos
         /// 
         /// </summary>
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             // Create the demo application
             SpriteDemosMain demo = new SpriteDemosMain();

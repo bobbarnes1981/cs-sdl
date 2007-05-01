@@ -438,7 +438,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookTessWind t = new RedBookTessWind(); t.Reshape();
 			Init();

@@ -239,7 +239,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
             RedBookSceneFlat t = new RedBookSceneFlat(); t.Reshape();
 			Init();

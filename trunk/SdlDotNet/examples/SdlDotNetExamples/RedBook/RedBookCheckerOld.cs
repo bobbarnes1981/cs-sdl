@@ -265,7 +265,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookCheckerOld t = new RedBookCheckerOld(); t.Reshape();
 			Init();

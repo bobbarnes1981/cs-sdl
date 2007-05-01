@@ -28,7 +28,7 @@ namespace SdlDotNetExamples.SmallDemos
     public class HelloWorld
     {
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             HelloWorld app = new HelloWorld();
             app.Go();

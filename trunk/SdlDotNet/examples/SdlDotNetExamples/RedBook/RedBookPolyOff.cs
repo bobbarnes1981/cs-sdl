@@ -299,7 +299,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookPolyOff t = new RedBookPolyOff(); t.Reshape();
 			Init();

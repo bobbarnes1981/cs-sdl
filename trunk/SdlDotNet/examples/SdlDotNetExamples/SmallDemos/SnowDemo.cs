@@ -80,7 +80,7 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             SnowDemo snowDemo = new SnowDemo();
             snowDemo.Go();

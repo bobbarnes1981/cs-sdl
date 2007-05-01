@@ -190,7 +190,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// </summary>
         /// <param name="args"></param>
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             Gtk.Application.Init();
             GtkSpriteExample gtkSpriteExample = new GtkSpriteExample();

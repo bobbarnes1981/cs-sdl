@@ -231,7 +231,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookAnti t = new RedBookAnti(); t.Reshape();
 			Init();

@@ -278,7 +278,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
             RedBookAlpha3D t = new RedBookAlpha3D(); t.Reshape();
 			Init();

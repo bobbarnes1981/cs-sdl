@@ -36,7 +36,7 @@ namespace SdlDotNetExamples.SmallDemos
         private AnimatedSprite hero = new AnimatedSprite(); 
 
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             // Start the application
             HeroExample app = new HeroExample();

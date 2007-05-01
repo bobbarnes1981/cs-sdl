@@ -218,7 +218,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
             RedBookSmooth t = new RedBookSmooth(); t.Reshape();
 			Init();

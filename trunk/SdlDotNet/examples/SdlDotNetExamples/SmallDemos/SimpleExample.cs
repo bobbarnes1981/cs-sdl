@@ -73,7 +73,7 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             SimpleExample t = new SimpleExample();
             t.Go();

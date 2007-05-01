@@ -266,7 +266,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookTorus t = new RedBookTorus(); t.Reshape();
 			Init();
