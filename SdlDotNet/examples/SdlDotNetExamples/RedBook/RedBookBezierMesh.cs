@@ -270,7 +270,7 @@ namespace SdlDotNetExamples.RedBook
         /// <summary>
         /// Starts demo
         /// </summary>
-        public static void Run()
+        public static void Main()
         {
             RedBookBezierMesh t = new RedBookBezierMesh(); t.Reshape();
             Init();

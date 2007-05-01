@@ -244,7 +244,7 @@ namespace SdlDotNetExamples.RedBook
         /// <summary>
         /// Starts demo
         /// </summary>
-        public static void Run()
+        public static void Main()
         {
             RedBookBezierCurve t = new RedBookBezierCurve(); t.Reshape();
             Init();

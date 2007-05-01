@@ -500,7 +500,7 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             PrimitivesExample primitivesExample = new PrimitivesExample();
             primitivesExample.Go();

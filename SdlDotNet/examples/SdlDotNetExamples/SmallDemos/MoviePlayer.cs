@@ -93,7 +93,7 @@ namespace SdlDotNetExamples.SmallDemos
 
         #region Run()
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             MoviePlayer player = new MoviePlayer();
             player.Go();

@@ -52,7 +52,7 @@ namespace SdlDotNetExamples.LargeDemos
         /// </summary>
         /// <param name="args"></param>
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             filePath = Path.Combine("..", "..");
             string fileDirectory = "Data";

@@ -328,7 +328,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
             RedBookMipMap t = new RedBookMipMap();
             t.Reshape();

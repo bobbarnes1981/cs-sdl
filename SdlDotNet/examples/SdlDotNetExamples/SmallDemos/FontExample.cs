@@ -52,7 +52,7 @@ namespace SdlDotNetExamples.SmallDemos
         int[] styleArray = { 0, 1, 2, 4 };
 
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             FontExample t = new FontExample();
             t.Go();

@@ -233,7 +233,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookRobot t = new RedBookRobot(); t.Reshape();
 			Init();

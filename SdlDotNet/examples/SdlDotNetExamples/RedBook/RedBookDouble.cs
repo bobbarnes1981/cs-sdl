@@ -250,7 +250,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookDouble t = new RedBookDouble(); t.Reshape();
 			Init();

@@ -325,7 +325,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
             RedBookSurfaceOld t = new RedBookSurfaceOld(); 
             t.Reshape();

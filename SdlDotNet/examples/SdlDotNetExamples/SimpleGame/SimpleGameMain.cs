@@ -33,8 +33,11 @@ namespace SdlDotNetExamples.LargeDemos
     /// </summary>
     public static class SimpleGameMain
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             if (CheckInstance() == null)
             {

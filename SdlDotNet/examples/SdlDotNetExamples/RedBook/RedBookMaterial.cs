@@ -400,7 +400,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookMaterial t = new RedBookMaterial(); t.Reshape();
 			Init();

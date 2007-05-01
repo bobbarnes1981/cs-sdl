@@ -36,7 +36,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             Application.Quit();
             Application.Init();

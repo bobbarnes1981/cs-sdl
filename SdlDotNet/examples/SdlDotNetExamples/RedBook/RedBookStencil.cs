@@ -296,7 +296,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
             RedBookStencil t = new RedBookStencil(); t.Reshape();
 			Init();

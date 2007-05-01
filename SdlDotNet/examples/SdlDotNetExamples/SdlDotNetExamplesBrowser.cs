@@ -215,9 +215,9 @@ namespace SdlDotNetExamples
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (Type type in types)
             {
-                MemberInfo[] runMethods = type.GetMember("Run");
+                MemberInfo[] runMethods = type.GetMember("Main");
 
-                if (runMethods.Length > 0)
+                if (runMethods.Length > 0 && type != typeof(SdlDotNetExamplesBrowser))
                 {
                     string result = (string)type.InvokeMember("Title",
                              BindingFlags.GetProperty, null, type, null, CultureInfo.CurrentCulture);
@@ -245,7 +245,7 @@ namespace SdlDotNetExamples
                 DisableEvents();
                 SdlDotNet.Core.Events.QuitApplication();
                 SdlDotNet.Core.Events.CloseVideo();
-                example.InvokeMember("Run", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
+                example.InvokeMember("Main", BindingFlags.InvokeMethod, null, null, null, CultureInfo.CurrentCulture);
             }
             catch (TypeLoadException e)
             {

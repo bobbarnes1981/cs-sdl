@@ -271,7 +271,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
             RedBookColorMat t = new RedBookColorMat(); t.Reshape();
 			Init();

@@ -229,7 +229,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookClip t = new RedBookClip(); t.Reshape();
 			Init();

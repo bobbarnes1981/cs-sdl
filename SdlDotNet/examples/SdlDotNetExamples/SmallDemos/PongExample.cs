@@ -119,7 +119,7 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         [STAThread]
-        public static void Run()
+        public static void Main()
         {
             PongExample pong = new PongExample();
             pong.Go();

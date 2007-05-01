@@ -292,7 +292,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Run()
+		public static void Main()
 		{
 			RedBookFont t = new RedBookFont(); t.Reshape();
 			Init();
