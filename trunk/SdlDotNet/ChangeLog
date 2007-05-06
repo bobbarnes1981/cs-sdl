@@ -1,3 +1,8 @@
+===6.0.0===
+David Hudson 05 May 2007
+* All examples use a Main() method instead of a Run() method for startup. This eases the re-use of the examples, especially the SimpleExample and Template.
+* Updated to use Tao 2.0.0 final release.
+
 ===6.0.0beta3===
 David Hudson 20 Apr 2007
 * Bioslayer has joined the project.
