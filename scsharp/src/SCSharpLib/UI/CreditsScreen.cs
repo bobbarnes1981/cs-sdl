@@ -59,7 +59,7 @@ namespace SCSharp.UI
         /// </summary>
         protected override void LoadMarkup()
         {
-            AddMarkup(Assembly.GetExecutingAssembly().GetManifestResourceStream("credits.txt"));
+            AddMarkup(Assembly.GetExecutingAssembly().GetManifestResourceStream("SCSharp.UI.Credits.txt"));
 
             /* broodwar credits */
             if (Game.Instance.IsBroodWar)
