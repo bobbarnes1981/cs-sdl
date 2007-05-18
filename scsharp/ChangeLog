@@ -1,0 +1,505 @@
+2006-05-29  Chris Toshok  <toshok@hungry.com>
+
+	* Makefile.am (release): fix this target so that it works again.
+
+	* NEWS: include news for the first time.
+
+	* configure.ac: bump to 0.0000008.
+
+	* HACKING: fix up the .smk entry, with various options for
+	projects, and remove the managed stormlib project since Foole's is
+	working.
+
+	* RELEASE_README: s/starcraft/scsharp
+
+	* src/scsharp.exe.config-example: add the new options.
+
+	* src/scsharp.exe.config: can't put -- in the middle of comments.
+
+2006-05-29  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/Makefile.am (MCSFLAGS): define USE_STORM_DLL if
+	ENABLE_STORMLIB == true.
+
+	* src/scsharp.exe.config: add some comments about the debugging
+	options, and add a new one to enable the unmanaged mpq library.
+
+	* Tests/dump-iscript.cs (DumpIScript.ctor): we assume the mpq
+	passed in is the stardat.mpq.
+
+	* SCSharp/SCSharp.UI/Painter.cs (.ctor): add back in a constructor
+	taking a Surface so the font-foo test continues to work.
+
+	* SCSharp/SCSharp.Mpq/Mpq.cs: USE_STORM_DLL no longer switches
+	between managed/unmanaged implementations, but compiles in the
+	optional unmanaged version as well.
+
+	* Makefile.am (SUBDIRS): only build in StormLib if ENABLE_STORMLIB
+	== true.
+
+	* configure.ac: add AC_ARG_ENABLE for --enable-stormlib.  If it's
+	left out, only the managed version is built.
+
+2006-05-29  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/Game.cs (CreateWindow): switch to new Painter
+	ctor.
+	(KeyboardDown): add handling for Ctrl-F to switch between
+	fullscreen and windowed mode.
+
+	* SCSharp/SCSharp.UI/UIDialog.cs: s/Game/Painter for the screen
+	nres constants.
+
+	* SCSharp/SCSharp.UI/Sprite.cs: same.
+	
+	* SCSharp/SCSharp.UI/Cinematic.cs: same.
+	
+	* SCSharp/SCSharp.UI/GameScreen: same.
+
+	* SCSharp/SCSharp.UI/UIScreen.cs (FirstPaint): revert to this
+	the non-disgusting hack version.
+
+	* SCSharp/SCSharp.UI/Painter.cs: move the SCREEN_RES_X/Y constants
+	here, from Game.cs.
+	(Fullscreen): new property, allow switching between fullscreen and
+	not.
+
+2006-05-26  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.Mpq/Chk.cs (ReadFromStream): change the loop so
+	that it'll work with both StormLib and the managed .mpq stuff.
+
+2006-05-24  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/GuiUtil.cs (RenderGlyph): add a hack to
+	antialias the fonts.  of course this is yet another hack on top of
+	the already hackish nature of font rendering.
+
+2006-05-24  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/GameScreen.cs: track the Unit currently under
+	the cursor, and when we click on it, spew a little info about it.
+
+2006-05-24  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/Game.cs (DisplayTitle): use the FirstPainted
+	event to determine when the title screen is shown, rather than the
+	Ready event (which is emitted when it finishes loading.)
+	(TitleScreenReady): pass in both stardatMpq and broodatMpq to the
+	GlobalResources ctor so it can load both sets of resources.
+
+	* SCSharp/SCSharp.UI/Builtins.cs: add mapdata.dat and mapdata.tbl.
+
+	* SCSharp/SCSharp.UI/GlobalResources.cs: rework things in this
+	class to handle loading both the broodwar and starcraft assets.
+	Use Game.PlayingBroodwar to implicitly switch between the
+	different versions when using just the resource name, but allow
+	explicit access to each version when necessary.
+
+	* SCSharp/SCSharp.Mpq/Mpq.cs (GetTypeFromResourcePath): handle
+	mapdata.dat.
+
+	* SCSharp/SCSharp.Mpq/MapDataDat.cs: new class, just a set of
+	indices into mapdata.tbl.
+
+	* SCSharp/SCSharp.UI/GameModeDialog.cs (LoadResources): explicitly
+	use broodat's gluAll.tbl to get the dialog title.  This keeps us
+	from crashing if we select "Original", then exit back to the main
+	menu and open this dialog again.
+
+	* SCSharp/SCSharp.UI/Painter.cs (Tick): rename "Animate" to this.
+	(DrawText):  remove unused, empty function.
+
+	* SCSharp/SCSharp.UI/RaceSelectionScreen.cs
+	(BroodwarCampaigns_MapDataStart): stop hardcoding the strings
+	here.  instead, hardcode the indices into the mapdata.dat file.
+	(StarcraftCampaigns_MapDataStart): same.
+	(LoadResources): in the campaign element activate delegates, just
+	call SelectCampaign.
+	(SelectCampaign): factor out a lot of shared code here.  Use the
+	campaign indices to determine the correct prefix.  Also, switch to
+	the establishing shot for the given scenario.  It'll take care of
+	starting up the ready room.
+
+	* SCSharp/SCSharp.UI/ReadyRoomScreen.cs (LoadResources): in the
+	start_element activate delegate, stop the briefing before
+	switching to the game screen.
+	(StopBriefing): remove our Events.Tick handler.
+	(FirstPaint): remove the AddToPainter/RemoveFromPainter
+	runner.Tick hack, and just hook up to Events.Tick.
+	(BriefingRunner.Tick): change this to a Tick event handler from a
+	painter.  Keep track of total elapsed, and change sleepUntil to an
+	int from a DateTime.
+	(EstablishingShot): new markup screen, used for showing the
+	establishing shot/text before the ready room is displayed.
+
+	* SCSharp/SCSharp.UI/MarkupScreen.cs (Paint): add handling for
+	PageLocation.LowerLeft.
+	(AddMarkup): add handling for </SCREENLOWERLEFT>.
+	(AddToPainter): remove the FirstPainted stuff from here.  we'll
+	just use UIScreen's.
+	(RemoveFromPainter): same.
+	(FirstPaint): change FirstPainted to this, overriding UIScreen's.
+
+	* SCSharp/SCSharp.UI/UIScreen.cs (FirstPaint): emit our
+	FirstPainted event and remove the painter delegate.
+	(AddToPainter): add the FirstPaint delegate.
+	(RemoveFromPainter): remove the FirstPaint delegate.
+
+	* SCSharp/SCSharp.UI/MainMenu.cs (LoadResources): in the
+	intro_element delegate, remove the ifdefs.  Just switch to the
+	cinematic.  If it fails to play we'll return to the main menu.
+
+	* SCSharp/SCSharp.UI/SmackerPlayer.cs: catch the
+	DllNotFoundException if we couldn't load ffmpegglue.dll, and just
+	finish immediately in that case whenever someone plays a movie.
+
+2006-05-15  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/ReadyRoomScreen.cs (FirstPaint): remove
+	unused function.
+	(UnhighlightPortrait): only set the background if the portrait is
+	still visible.
+	(ShowPortrait): set the portrait's background to the unhighlighted
+	frame.
+	(HidePortrait): clear the portrait's background.
+
+	* SCSharp/SCSharp.UI/Game.cs: better handle the differentiation
+	between "what mpqs do i have installed?" and "which version
+	(original/expansion) am i playing?"  GlobalResources still doesn't
+	load both sets, however.
+
+2006-05-14  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/ReadyRoomScreen.cs: why do i insist on
+	writing threaded code?  there's no need for it here.  Also, make
+	things work a lot better.  highlight the current speaker, set the
+	background/font/effects/cursor stuff correctly.
+
+	* SCSharp/SCSharp.UI/RaceSelectionScreen.cs: use the tutorials for
+	protoss/terran.  zerg doesn't work for some reason.  there are no
+	triggers.
+
+	* SCSharp/SCSharp.UI/UIElement.cs: kind of a hack, but allow a
+	"background .pcx" to be supplied.  it's used to highlight the
+	current speaker in the mission briefings.
+
+2006-05-14  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/GameScreen.cs (.ctor): add a constructor
+	that's useful from the readyroom.
+	(PlaceInitialUnits): deal with a null template, which happens with
+	campaigns.
+
+	* SCSharp/SCSharp.UI/RaceSelectionScreen.cs: make this work for
+	both broodwar and original race selection screens.  Hardcode the
+	first scenarios for each campaign here as well - eventually
+	they'll come from mapdata.dat/tbl.
+
+	* SCSharp/SCSharp.UI/Game.cs (.ctor): don't add anything to the
+	mpq container - let the PlayingBroodWar setter do that.
+	(set_PlayingBroodWar): clean this up a bit.
+	(set_Race): add setter.
+	
+	* SCSharp/SCSharp.UI/ReadyRoomScreen.cs: subclass ReadyRoomScreen
+	for each race, since at least the zerg screen has different
+	element indices.  Write an initial pass of the briefing runner,
+	which displays text and plays .wav files.  There are definite
+	threading + Sdl audio issues here.
+
+	* SCSharp/SCSharp.UI/Builtins.cs: replace the race specific ready
+	room strings with a formatable string.
+
+	* SCSharp/SCSharp.Mpq/IScriptBin.cs (GetScriptEntryOffset): don't
+	throw an exception here, just return 0. the caller can handle
+	that.
+
+	* SCSharp/SCSharp.Mpq/Chk.cs: add mission briefing support (add
+	trigger, condition, action classes).
+
+	* SCSharp/SCSharp.Mpq/Mpq.cs (Add): return if mpq == null.
+	(Remove): same.
+	(Clear): new function, call mpqs.Clear.
+	(GetStreamForResource): spew something if we're going to return
+	null.
+
+2006-05-13  Chris Toshok  <toshok@hungry.com>
+
+	* src/scsharp.cs (Main): switch from just 1 CD directory setting
+	to 2.
+
+	* src/scsharp.exe.config: add the new CD directory settings.
+
+	* SCSharp/SCSharp.UI/RaceSelectionScreen.cs (.ctor): load the
+	correct resource depending on if we're BW or SC.
+
+	* SCSharp/SCSharp.UI/Game.cs (.ctor): change the way we look for
+	and load mpq's.  Keep track of both BW and SC install.exe's.
+	(PlayingBroodWar): this property is initialized to true if
+	broodat.mpq is found, and causes either the bw or sc cd to become
+	available for resource lookups.
+
+	* SCSharp/SCSharp.UI/MainMenu.cs (ShowGameDialog): add some code
+	to display a dialog if the user is missing the correct CD
+	install.exe.
+
+	* SCSharp/SCSharp.UI/LoginScreen.cs (ResourceLoader): we don't
+	cache the race selection screen anymore, as it changes depending
+	on whether you pick BW/SC.
+
+	* SCSharp/SCSharp.UI/PlayCustomScreen.cs (ResourceLoader): no more
+	cached race selection screen.
+
+	* SCSharp/SCSharp.UI/LoadSavedScreen.cs: same.
+
+	* SCSharp/SCSharp.UI/Builtins.cs: add the original campaign ui.
+
+	* SCSharp/SCSharp.UI/ButtonElement.cs (MouseEnter): only play the
+	sound if the button is sensitive -- maybe we shouldn't even get
+	called if we're insensitive?
+
+	* SCSharp/SCSharp.UI/MarkupScreen.cs (ResourceLoader): call
+	LoadMarkup, and add it as an abstract method.
+
+	* SCSharp/SCSharp.UI/CreditsScreen.cs (LoadMarkup): rename
+	ResourceLoader to this.
+
+	* SCSharp/SCSharp.UI/UIElement.cs (.ctor): cache x1/y1 here so the
+	setters so we don't keep modifying the BinElement's coordinates
+	each time we display a dialog, shifting it further and further
+	down and to the right.
+	(X1): use the cached value.
+	(Y1): same.
+
+2006-05-13  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.dll.sources: add the MpqReader sources.
+
+	* SCSharp/Makefile.am (MCSFLAGS): add -d:USE_STORM_DLL
+
+	* SCSharp/SCSharp.Mpq/Mpq.cs: add a series of USE_STORM_DLL ifdefs
+	to choose between libStorm.so and Foole's managed MpqReader.
+
+	* SCSharp/SCSharp.Mpq/MpqStructs.cs,
+	SCSharp/SCSharp.Mpq/MpqArchive.cs,
+	SCSharp/SCSharp.Mpq/MpqStream.cs,
+	SCSharp/SCSharp.Mpq/PKLibDecompress.cs: add 0.02 of Foole's
+	managed Mpq reading code.  It doesn't work quite yet, but this way
+	we can test it with scsharp.
+	
+2006-05-10  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.Mpq/Mpq.cs (GetResource): don't cache .smk files
+	(the cinematics at least are enormous).
+	(GetTypeFromResourcePath): make .smk files use a Stream instead of
+	our Smk class.
+
+	* SCSharp/SCSharp.UI/SmackerPlayer.cs: use FFmpeg to display .smk
+	files.  This works on my machine, but lacks audio and the glue
+	code is in general pretty ugly.  Going to take a look at using
+	gstreamer tonight.  With this in mind, I'm not adding
+	SmackerPlayer.cs+Cinematic.cs to the build, and I'm not going to
+	check in the ffmpegglue code.
+
+	* SCSharp/SCSharp.UI/Cinematic.cs: new file, basically takes over
+	the screen and runs a SmackerPlayer.
+
+	* SCSharp/SCSharp.UI/ButtonElement.cs (MouseEnter): rename
+	MouseOver to this.
+
+	* SCSharp/SCSharp.UI/GuiUtil.cs (CreateSurface): make this public.
+
+	* SCSharp/SCSharp.UI/RaceSelectionScreen.cs (ResourceLoader): add
+	delegates for MouseEnter/MouseLeave to display the incomplete
+	messages.  we always show them at the moment, instead of getting
+	that information from the .spc file.
+
+	* SCSharp/SCSharp.UI/MainMenu.cs (ShowGameModeDialog): factor this
+	code out from both the single/multiplayer delegates.
+	(ResourceLoader): add ifdef'ed code for the intro cinematic, and
+	use ShowGameModeDialog for single/multiplayer.
+
+	* SCSharp/SCSharp.UI/UIElement.cs: switch from MouseOver to
+	MouseEnter+MouseLeave.
+
+	* SCSharp/SCSharp.UI/UIScreen.cs: switch from MouseOver to
+	MouseEnter+MouseLeave so we can implement things like the strings
+	on the race selection screen where they tell you previous
+	campaigns haven't been completed yet.
+	(KeyboardDown): guard against Elements being null.
+
+2006-05-08  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/GuiUtil.cs (CreateSurface): refactor the
+	duplicated code from
+	CreateSurfaceFromRGBAData/CreateSurfaceFromRGBData here.
+	(CreateSurfaceFromRGBAData): call CreateSurface
+	(CreateSurfaceFromRGBData): call CreateSurface
+
+2006-05-01  Chris Toshok  <toshok@hungry.com>
+
+	* Tests/Makefile.am (font_foo_exe_REFS): more build fixes.
+
+	* configure.ac: add a check for mono >= 1.1.14
+
+2006-05-01  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.Mpq/Mpq.cs: Make GetStreamForResource public so
+	it can be used to extract files from mpq archives.
+
+2006-04-30  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/Unit.cs (CreateSprite): implement.
+
+	* SCSharp/SCSharp.UI/GameScreen.cs (PlaceInitialUnits): use Unit
+	everywhere.
+
+	* SCSharp/SCSharp.UI/Sprite.cs (.ctor): add a little more info to
+	the spew.
+
+	* SCSharp/SCSharp.UI/GlobalResources.cs (ResourceLoader): remove
+	spew.
+	(LoadSingleThreaded): load without spawning off a worker thread.
+	useful in tools and tests.
+
+2006-04-10  Chris Toshok  <toshok@hungry.com>
+
+	* Makefile (VERSION): bump to 0.0000002.
+
+2006-04-10  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/OkCancelDialog.cs: use 254,0 for
+	translucent,transparent.
+
+	* SCSharp/SCSharp.UI/OkDialog.cs: same.
+
+	* SCSharp/SCSharp.UI/EntryDialog.cs: same.
+
+2006-04-10  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/GameModeDialog.cs (.ctor): set
+	background_path to null, as we'll load it in ResourceLoader.
+	(ResourceLoader): manually load the background, using its specific
+	translucent/transparent indices.
+	
+	* SCSharp/SCSharp.UI/GuiUtil.cs (SurfaceFromStream): always
+	use our managed Pcx loader.
+	(SurfaceFromStream): for the Stream,bool overload, pass in 252,0
+	for translucent,transparent, respectively.
+	(SurfaceFromStream): for the Stream overload, pass -1,-1.
+	
+	* SCSharp/SCSharp.UI/UIScreen.cs (ResourceLoader): pass -1,-1
+	to the Pcx.ReadFromStream calls.
+
+	* SCSharp/SCSharp.UI/CreditsScreen.cs (ResourceLoader): pass
+	-1,-1 to the Pcx.ReadFromStream calls.
+
+	* SCSharp/SCSharp.UI/Pcx.cs (ReadFromStream): allow the
+	passing in of translucent/transparent indices.
+
+	* SCSharp/SCSharp.Mpq/Bin.cs (ElementFlags): include the
+	unknown flages as Unknown/Unused.
+
+2006-04-10  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/ReadyRoomScreen.cs: first pass.
+
+	* SCSharp/SCSharp.UI/Builtins.cs: add ready room builtins.
+
+2006-04-10  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/ListBoxElement.cs: track cursor when
+	list becomes empty/non-empty.  Set it initially to -1.
+
+	* SCSharp/SCSharp.UI/LoginScreen.cs (OkElement delegate): if
+	we don't have a selected id, return immediately.  This should only
+	happen if the list is empty.
+
+	* SCSharp/SCSharp.UI/ConnectionScreen.cs: add Ok dialog when
+	people select Battle.net.
+
+	* SCSharp/SCSharp.UI/credits.txt: thank the
+	mono/sdl/sdldotnet projects.
+
+2006-04-10  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/ConnectionScreen.cs: populate the
+	ListBox element with our choices, and handle the cursor moving
+	properly.  Ifdef this for the time being to only display
+	Battle.net.
+
+	* SCSharp/SCSharp.UI/GameModeDialog.cs: insert the title
+	string in the dialog, and change Canceled/Activated to
+	Cancel/Activate.
+
+	* SCSharp/SCSharp.UI/UIDialog.cs: keep track of the parent
+	UIScreen that popped us up.
+	(ShowDialog): overload this so we can remove ourselves from the
+	painter before showing the new dialog.  In a better world we'd
+	just show the new popup at a higher layer.
+	(DismissDialog): overload to add ourselves back to the painter.
+
+	* SCSharp/SCSharp.UI/GuiUtil.cs: add another ComposeText
+	overload.
+
+	* SCSharp/SCSharp.UI/MainMenu.cs: pop up Ok dialogs with
+	messages about missing functionality (no cinematics and no
+	campaign editor.)
+
+	* SCSharp/SCSharp.UI/LoginScreen.cs (ResourceLoader): for the
+	ok button pop up a dialog saying what we should do in this case.
+	Also add functionality for the new button (pops up an entry
+	dialog) and delete button (pops up an ok/cancel dialog).
+	(KeyboardDown): forward on UpArrow/DownArrow to the list box
+	element.
+	(NameAlreadyExists): pop up an OkDialog.
+
+	* SCSharp/SCSharp.UI/UIPainter.cs: clean up warnings, and
+	make it compile with -define:SHOW_ELEMENT_BORDERS.
+
+	* SCSharp/SCSharp.UI/CreditsScreen.cs: clean up some
+	warnings.
+
+	* SCSharp/SCSharp.UI/Builtins.cs: add some more strings for
+	the login screen dialogs.
+
+	* SCSharp/SCSharp.UI/UIElement.cs (Mpq): add getter.
+	(Text): use ClearSurface.
+	(Sensitive): same.
+	(Palette): new getter/setter.
+	(Font): new getter/setter.
+	(ClearSurface): new protected method.
+	(CreateSurface): provider base class implementation that handles
+	the types we don't provider subclasses for.
+
+	* SCSharp/SCSharp.UI/UIScreen.cs (HandleKeyboardUp): return
+	immediately for keypresses corresponding to modifier keys.
+	(HandleKeyboardDown): same.
+	(ActivateElement): if the element isn't sensitive, don't activate
+	it.
+	(ResourceLoader): create different UIElement subclasses depending
+	on the BinElement's type.
+
+	* SCSharp/SCSharp.UI/TextBoxElement.cs: new UIElement,
+	allowing text editing.  No flashing cursor displayed yet.
+
+	* SCSharp/SCSharp.UI/OkCancelDialog.cs: a question dialog,
+	containing a message and Ok/Cancel buttons.
+
+	* SCSharp/SCSharp.UI/OkDialog.cs: a simple message dialog,
+	containing a message and Ok button.
+
+	* SCSharp/SCSharp.UI/EntryDialog.cs: new Dialog containing a
+	title, text entry, and Ok/Cancel buttons.
+
+	* SCSharp/SCSharp.UI/ImageElement.cs: new UIElement
+	displaying an image.
+
+	* SCSharp/SCSharp.UI/ListBoxElement.cs: new UIElement,
+	displaying a list. doesn't do scrolling yet.
+
+2006-04-09  Chris Toshok  <toshok@hungry.com>
+
+	* SCSharp/SCSharp.UI/GameModeDialog.cs (ResourceLoader): add
+	title text.
+

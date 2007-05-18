@@ -1,0 +1,421 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1A51DB16-582A-4231-98DB-E4622F79D208}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon></ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>SCSharpLib</AssemblyName>
+    <AssemblyOriginatorKeyFile>scsharp.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SCSharp</RootNamespace>
+    <StartupObject></StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE;CODE_ANALYSIS</DefineConstants>
+    <DocumentationFile>SCSharpLib.xml</DocumentationFile>
+    <DebugSymbols>True</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <RemoveIntegerChecks>False</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1595</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <DocumentationFile>SCSharpLib.xml</DocumentationFile>
+    <DebugSymbols>False</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <RemoveIntegerChecks>False</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>1595</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+        <Name>System</Name>
+      <HintPath>\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+        <Name>System.Configuration</Name>
+      <HintPath>\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+        <Name>System.Drawing</Name>
+      <HintPath>\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+        <Name>Tao.Sdl</Name>
+      <HintPath>../../lib/net-2.0\Tao.Sdl.dll</HintPath>
+    </Reference>
+    <Reference Include="SdlDotNet">
+        <Name>SdlDotNet</Name>
+      <HintPath>../../lib/net-2.0\SdlDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+        <Name>ICSharpCode.SharpZipLib</Name>
+      <HintPath>../../lib/net-2.0\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.ico">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MpqLib\Bin.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\BinElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\BitStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Chk.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\FlingyDat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Fnt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Glyph.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Got.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Grp.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\ImagesDat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\IMpqResource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\LinkedNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MapDataDat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Mpq.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqArchive.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqArchiveContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqBlock.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqContainer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqDirectory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqHash.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqHeader.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqHuffman.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\MpqWavCompression.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\ParallaxLayer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\ParallaxObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\PKLibDecompress.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\ScriptBin.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\SfxDataDat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Smk.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Spk.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\SpritesDat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Tbl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\Trigger.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\TriggerAction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\TriggerCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\TriggerData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\UnitInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MpqLib\UnitsDat.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\BriefingRunner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Builtins.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ButtonElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Cinematic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ComboBoxElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ConnectionScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\CreditsScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\CursorAnimator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\DialogBoxElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\EndMissionDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\EntryDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\EstablishingShot.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ExitConfirmationDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\FFmpeg.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Game.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\GameMenuDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\GameModeDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\GameScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\GlobalResources.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\GuiUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\HelpDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ImageElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\KeystrokeDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\LabelElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ListBoxElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\LoadSavedScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\LoginScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\MainMenu.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\MapRenderer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\MarkupScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\NetworkDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ObjectivesDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\OkCancelDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\OkDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\OptionsDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Painter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Pcx.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\PlayCustomScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ProtossReadyRoomScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\QuitMissionDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Race.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\RaceSelectionScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ReadyRoomScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Resources.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\RestartConfirmationDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\SmackerPlayer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\SoundDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\SpeedDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Sprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\SpriteManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\SwooshPainter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\TerranReadyRoomScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\TextBoxElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\TitleScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\UIDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\UIElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\UIPainter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\UIScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Unit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Utilities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\VideoDialog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\ZergReadyRoomScreen.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
