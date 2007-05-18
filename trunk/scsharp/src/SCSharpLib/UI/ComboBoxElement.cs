@@ -226,10 +226,11 @@ namespace SCSharp.UI
 
             if (cursor != -1)
             {
-                Surface item_surface = GuiUtil.ComposeText(items[cursor], Font, Palette, 4);
+                Surface itemSurface = GuiUtil.ComposeText(items[cursor], Font, Palette, 4);
 
-                item_surface.TransparentColor = Color.Black;
-                surf.Blit(item_surface, new Point(0, 0));
+                itemSurface.TransparentColor = Color.Black;
+                itemSurface.Transparent = true;
+                surf.Blit(itemSurface, new Point(0, 0));
             }
 
             return surf;
@@ -242,13 +243,14 @@ namespace SCSharp.UI
             int y = 0;
             for (int i = 0; i < items.Count; i++)
             {
-                Surface item_surface = GuiUtil.ComposeText(items[i], Font, Palette,
+                Surface itemSurface = GuiUtil.ComposeText(items[i], Font, Palette,
                                         i == selectedItem ? 4 : 24);
 
-                item_surface.TransparentColor = Color.Black;
+                itemSurface.TransparentColor = Color.Black;
+                itemSurface.Transparent = true;
 
-                dropdownSurface.Blit(item_surface, new Point(0, y));
-                y += item_surface.Height;
+                dropdownSurface.Blit(itemSurface, new Point(0, y));
+                y += itemSurface.Height;
             }
         }
 

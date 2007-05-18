@@ -318,6 +318,7 @@ namespace SCSharp.UI
             }
 
             surf.TransparentColor = Color.Black; /* XXX */
+            surf.Transparent = true;
 
             return surf;
         }

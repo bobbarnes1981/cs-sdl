@@ -239,6 +239,7 @@ namespace SCSharp.UI
 
             Surface surf = new Surface(text_width, text_height);
             surf.TransparentColor = Color.Black;
+            surf.Transparent = true;
 
             /* the draw it */
             x = y = 0;
