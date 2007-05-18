@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\data\scsharp\tests\SCSharpTests.nunit" total="1" failures="1" not-run="0" date="2007-05-18" time="10:52:32">
+  <environment nunit-version="2.4.0.2" clr-version="2.0.50727.42" os-version="Microsoft Windows NT 5.1.2600 Service Pack 2" platform="Win32NT" cwd="C:\data\scsharp\tests" machine-name="L0084120" user="DYYH" user-domain="CGUSER" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite name="C:\data\scsharp\tests\SCSharpTests.nunit" success="False" time="0.047" asserts="0">
+    <results>
+      <test-suite name="C:\data\scsharp\tests\bin\Debug\SCSharpTests.dll" success="False" time="0.047" asserts="0">
+        <results>
+          <test-suite name="SCSharp" success="False" time="0.047" asserts="0">
+            <results>
+              <test-suite name="Tests" success="False" time="0.047" asserts="0">
+                <results>
+                  <test-suite name="DumpGrp" success="False" time="0.031" asserts="0">
+                    <results>
+                      <test-case name="SCSharp.Tests.DumpGrp.DumpGrpTest" executed="True" success="False" time="0.016" asserts="0">
+                        <failure>
+                          <message><![CDATA[System.UnauthorizedAccessException : Access to the path 'C:\data\SCSharpData' is denied.]]></message>
+                          <stack-trace><![CDATA[   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at SCSharp.Tests.DumpGrp.ProcessGrp(String filename, String palettename) in C:\data\scsharp\tests\DumpGrp.cs:line 62
+   at SCSharp.Tests.DumpGrp.DumpGrpTest() in C:\data\scsharp\tests\DumpGrp.cs:line 54
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

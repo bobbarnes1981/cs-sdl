@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Prebuild xmlns="http://dnpb.sourceforge.net/schemas/prebuild-1.7.xsd" version="1.7">
+    <Solution name="SCSharp">
+	<Configuration name="Debug">
+	    <Options>
+		<CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
+		<OptimizeCode>false</OptimizeCode>
+		<AllowUnsafe>false</AllowUnsafe>
+		<OutputPath>bin/Debug</OutputPath>
+		<DebugInformation>true</DebugInformation>
+		<WarningLevel>4</WarningLevel>
+		<SuppressWarnings>1595</SuppressWarnings>
+	    </Options>
+	</Configuration>
+	<Configuration name="Release">
+	    <Options>
+		<CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
+		<OptimizeCode>true</OptimizeCode>
+		<AllowUnsafe>false</AllowUnsafe>
+		<OutputPath>bin/Release</OutputPath>
+		<DebugInformation>false</DebugInformation>
+		<WarningLevel>1</WarningLevel>
+		<SuppressWarnings>1595</SuppressWarnings>
+	    </Options>
+	</Configuration>
+	<Files>
+	    <File buildAction="Content">prebuild.xml</File>
+	</Files>
+	<Project name="SCSharp" path="src/SCSharp" language="C#" type="WinExe" assemblyName="scsharp" rootNamespace="SCSharp" designerFolder="Properties" icon="App.ico">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile></XmlDocFile>
+		    <KeyFile>scsharp.snk</KeyFile>
+		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Release</OutputPath>
+		    <XmlDocFile></XmlDocFile>
+		    <KeyFile>scsharp.snk</KeyFile>
+		    <DebugInformation>false</DebugInformation>
+		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" />
+	    <Reference name="System.Configuration" />
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="SCSharpLib" /> 
+	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="SdlDotNet" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="ICSharpCode.SharpZipLib" localCopy="true" path="../../lib/net-2.0"/>
+	    <Files>
+		<File buildAction="EmbeddedResource">App.ico</File>
+		<File buildAction="Content" copyToOutput="PreserveNewest">App.config</File>
+		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
+		<Match pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
+	<Project name="SCSharpLib" path="src/SCSharpLib" language="C#" type="Library" assemblyName="SCSharpLib" rootNamespace="SCSharp" designerFolder="Properties">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <XmlDocFile>SCSharpLib.xml</XmlDocFile>
+		    <KeyFile>scsharp.snk</KeyFile>
+		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <XmlDocFile>SCSharpLib.xml</XmlDocFile>
+		    <KeyFile>scsharp.snk</KeyFile>
+		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Configuration" />
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="Tao.Sdl" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="SdlDotNet" localCopy="true" path="../../lib/net-2.0"/>
+	    <Reference name="ICSharpCode.SharpZipLib" localCopy="true" path="../../lib/net-2.0"/>
+	    <Files>
+		<File buildAction="EmbeddedResource">App.ico</File>
+		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
+		<Project name="Tests" path="tests" language="C#" type="Library" assemblyName="SCSharpTests" rootNamespace="SCSharpTests" designerFolder="Properties">
+	    <Configuration name="Debug">
+		<Options>
+		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
+		    <OptimizeCode>false</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Debug</OutputPath>
+		    <DebugInformation>true</DebugInformation>
+		    <KeyFile>scsharp.snk</KeyFile>
+		    <WarningLevel>4</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Configuration name="Release">
+		<Options>
+		    <CompilerDefines>TRACE;CODE_ANALYSIS</CompilerDefines>
+		    <OptimizeCode>true</OptimizeCode>
+		    <AllowUnsafe>false</AllowUnsafe>
+		    <OutputPath>bin/Release</OutputPath>
+		    <DebugInformation>false</DebugInformation>
+		    <KeyFile>scsharp.snk</KeyFile>
+		    <WarningLevel>1</WarningLevel>
+		    <SuppressWarnings>1595</SuppressWarnings>
+		</Options>
+	    </Configuration>
+	    <Reference name="System" /> 
+	    <Reference name="System.Drawing" /> 
+	    <Reference name="SCSharpLib" /> 
+	    <Reference name="SdlDotNet" localCopy="true" path="../lib/net-2.0"/>
+	    <Reference name="nunit.framework" localCopy="true" path="../lib/net-2.0"/>
+	    <Files>
+		<Match path="." pattern="*.cs" recurse="true"/>
+	    </Files>
+	</Project>
+    </Solution>
+</Prebuild>
