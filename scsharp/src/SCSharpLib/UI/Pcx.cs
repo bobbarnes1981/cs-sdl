@@ -50,7 +50,7 @@ namespace SCSharp.UI
         ushort ymin;
         ushort ymax;
 
-        bool with_alpha;
+        bool withAlpha;
 
         /// <summary>
         /// 
@@ -60,11 +60,13 @@ namespace SCSharp.UI
         /// <param name="transparentIndex"></param>
         public void ReadFromStream(Stream stream, int translucentIndex, int transparentIndex)
         {
-            with_alpha = translucentIndex != -1 || transparentIndex != -1;
+            withAlpha = translucentIndex != -1 || transparentIndex != -1;
 
             byte magic = Utilities.ReadByte(stream);
             if (magic != 0x0A)
+            {
                 throw new Exception("stream is not a valid .pcx file");
+            }
 
             /*version =*/
             Utilities.ReadByte(stream);
@@ -138,14 +140,20 @@ namespace SCSharp.UI
                     data[idx + 3] = palette[value * 3 + 0];
                     data[idx + 2] = palette[value * 3 + 1];
                     data[idx + 1] = palette[value * 3 + 2];
-                    if (with_alpha)
+                    if (withAlpha)
                     {
                         if (value == translucentIndex)
+                        {
                             data[idx + 0] = 0xd0;
+                        }
                         else if (value == transparentIndex)
+                        {
                             data[idx + 0] = 0x00;
+                        }
                         else
+                        {
                             data[idx + 0] = 0xff;
+                        }
                     }
 
                     idx += 4;
@@ -221,7 +229,7 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public ushort Depth
         {
-            get { return (ushort)(with_alpha ? 32 : 24); }
+            get { return (ushort)(withAlpha ? 32 : 24); }
         }
 
         /// <summary>
@@ -230,7 +238,7 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public ushort Stride
         {
-            get { return (ushort)(width * (3 + (with_alpha ? 1 : 0))); }
+            get { return (ushort)(width * (3 + (withAlpha ? 1 : 0))); }
         }
     }
 }

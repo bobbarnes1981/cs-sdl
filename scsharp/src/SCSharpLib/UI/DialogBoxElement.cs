@@ -107,6 +107,7 @@ namespace SCSharp.UI
                 surf.Fill(new Rectangle(new Point(0, 0), new Size(Width, Height)),
                        Color.FromArgb(0, 0, 0, 0));
                 surf.TransparentColor = Color.Black; /* XXX */
+                surf.Transparent = true;
 
                 Pcx pal = new Pcx();
                 pal.ReadFromStream((Stream)Mpq.GetResource("unit\\cmdbtns\\ticon.pcx"),

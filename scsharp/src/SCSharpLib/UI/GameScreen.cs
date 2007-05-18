@@ -139,20 +139,20 @@ namespace SCSharp.UI
             ScrollCursors = new CursorAnimator[8];
         }
 
-        Surface[] starfield_layers;
+        Surface[] starfieldLayers;
 
         void PaintStarfield(Surface surf, DateTime dt)
         {
             float scroll_factor = 1.0f;
-            float[] factors = new float[starfield_layers.Length];
+            float[] factors = new float[starfieldLayers.Length];
 
-            for (int i = 0; i < starfield_layers.Length; i++)
+            for (int i = 0; i < starfieldLayers.Length; i++)
             {
                 factors[i] = scroll_factor;
                 scroll_factor *= 0.75f;
             }
 
-            for (int i = starfield_layers.Length - 1; i >= 0; i--)
+            for (int i = starfieldLayers.Length - 1; i >= 0; i--)
             {
                 int scroll_x = (int)(topleft_x * factors[i]);
                 int scroll_y = (int)(topleft_y * factors[i]);
@@ -166,7 +166,7 @@ namespace SCSharp.UI
                     scroll_y %= Painter.ScreenResY;
                 }
 
-                surf.Blit(starfield_layers[i],
+                surf.Blit(starfieldLayers[i],
                        new Rectangle(new Point(0, 0),
                               new Size(Painter.ScreenResX - scroll_x,
                                     Painter.ScreenResY - scroll_y)),
@@ -176,7 +176,7 @@ namespace SCSharp.UI
 
                 if (scroll_x != 0)
                 {
-                    surf.Blit(starfield_layers[i],
+                    surf.Blit(starfieldLayers[i],
                            new Rectangle(new Point(Painter.ScreenResX - scroll_x, 0),
                                   new Size(scroll_x, Painter.ScreenResY - scroll_y)),
                            new Rectangle(new Point(0, scroll_y),
@@ -185,7 +185,7 @@ namespace SCSharp.UI
 
                 if (scroll_y != 0)
                 {
-                    surf.Blit(starfield_layers[i],
+                    surf.Blit(starfieldLayers[i],
                            new Rectangle(new Point(0, Painter.ScreenResY - scroll_y),
                                   new Size(Painter.ScreenResX - scroll_x, scroll_y)),
                            new Rectangle(new Point(scroll_x, 0),
@@ -194,7 +194,7 @@ namespace SCSharp.UI
 
                 if (scroll_x != 0 || scroll_y != 0)
                 {
-                    surf.Blit(starfield_layers[i],
+                    surf.Blit(starfieldLayers[i],
                            new Rectangle(new Point(Painter.ScreenResX - scroll_x, Painter.ScreenResY - scroll_y),
                                   new Size(scroll_x, scroll_y)),
                            new Rectangle(new Point(0, 0),
@@ -296,18 +296,19 @@ namespace SCSharp.UI
             {
                 Spk starfield = (Spk)this.Mpq.GetResource("parallax\\star.spk");
 
-                starfield_layers = new Surface[starfield.Layers.Length];
-                for (int i = 0; i < starfield_layers.Length; i++)
+                starfieldLayers = new Surface[starfield.Layers.Length];
+                for (int i = 0; i < starfieldLayers.Length; i++)
                 {
-                    starfield_layers[i] = new Surface(Painter.ScreenResX, Painter.ScreenResY);
+                    starfieldLayers[i] = new Surface(Painter.ScreenResX, Painter.ScreenResY);
 
-                    starfield_layers[i].TransparentColor = Color.Black;
+                    starfieldLayers[i].TransparentColor = Color.Black;
+                    starfieldLayers[i].Transparent = true;
 
                     for (int o = 0; o < starfield.Layers[i].Objects.Length; o++)
                     {
                         ParallaxObject obj = starfield.Layers[i].Objects[o];
 
-                        starfield_layers[i].Fill(new Rectangle(new Point(obj.X, obj.Y), new Size(2, 2)),
+                        starfieldLayers[i].Fill(new Rectangle(new Point(obj.X, obj.Y), new Size(2, 2)),
                                       Color.White);
                     }
                 }

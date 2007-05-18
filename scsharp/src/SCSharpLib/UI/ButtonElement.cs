@@ -64,12 +64,13 @@ namespace SCSharp.UI
             Surface surf = new Surface(Width, Height);
 
             surf.TransparentColor = Color.Black; /* XXX */
+            surf.Transparent = true;
 
-            Surface text_surf = GuiUtil.ComposeText(Text, Font, Palette, -1, -1,
+            Surface textSurf = GuiUtil.ComposeText(Text, Font, Palette, -1, -1,
                                  Sensitive ? 4 : 24);
 
-            surf.Blit(text_surf, new Point((surf.Width - text_surf.Width) / 2,
-                             (surf.Height - text_surf.Height) / 2));
+            surf.Blit(textSurf, new Point((surf.Width - textSurf.Width) / 2,
+                             (surf.Height - textSurf.Height) / 2));
 
             return surf;
         }
