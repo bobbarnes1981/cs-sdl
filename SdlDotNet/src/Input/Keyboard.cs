@@ -1246,30 +1246,12 @@ namespace SdlDotNet.Input
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Obsolete("Instead, consider just casting your System.Int16 to System.Char, or using System.Char.ConvertFromUtf32()", false)]
         public static string UnicodeCharacter(short input)
         {
-            Encoding unicode;
-            unicode = Encoding.Unicode;
-            string hexString = Convert.ToString(input, 16);
-            string finalString = "";
-            if (hexString.Length >= 2)
-            {
-                finalString = Regex.Unescape(@"\x" + hexString);
-            }
+            return new string((char)input, 1);
+        } 
 
-            byte[] codes;
-            char[] chars = new char[0];
-            codes = unicode.GetBytes(finalString);
-            chars = unicode.GetChars(codes);
-            if (chars.Length > 0)
-            {
-                return chars[0].ToString();
-            }
-            else
-            {
-                return "";
-            }
-        }
 
         /// <summary>
         /// Checks key state

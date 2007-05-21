@@ -155,11 +155,11 @@ namespace SdlDotNet.Input
         /// <summary>
         /// Unicode Character
         /// </summary>
-        public string UnicodeCharacter
+        public char UnicodeCharacter
         {
             get
             {
-                return Keyboard.UnicodeCharacter(this.EventStruct.key.keysym.unicode);
+                return (char)this.EventStruct.key.keysym.unicode;
             }
         }
 

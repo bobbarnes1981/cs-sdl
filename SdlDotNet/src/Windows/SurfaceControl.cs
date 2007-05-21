@@ -199,10 +199,10 @@ namespace SdlDotNet.Windows
         {
             if (!this.DesignMode)
             {
-                if (e.Button != MouseButtons.None)
-                {
-                    SdlDotNet.Core.Events.Add(new MouseMotionEventArgs(true, SurfaceControl.ConvertMouseButtons(e), (short)e.X, (short)e.Y, (short)(e.X - lastX), (short)(e.Y - lastY)));
-                }
+                //if (e.Button != MouseButtons.None)
+                //{
+                SdlDotNet.Core.Events.Add(new MouseMotionEventArgs(true, SurfaceControl.ConvertMouseButtons(e), (short)e.X, (short)e.Y, (short)(e.X - lastX), (short)(e.Y - lastY)));
+                //}
                 lastX = e.X;
                 lastY = e.Y;
             }
