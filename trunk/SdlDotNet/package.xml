@@ -10,7 +10,7 @@
 
     <!-- global project settings -->
     <property name="project.config" value="Release" />
-    <property name="project.version" value="6.0.0" />
+    <property name="project.version" value="6.0.1" />
     <property name="src.dir" value="src" />
     <property name="examples.dir" value="examples" />
     <property name="extras.dir" value="extras" />
