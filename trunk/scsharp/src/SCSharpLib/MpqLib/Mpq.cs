@@ -62,8 +62,12 @@ namespace SCSharp.MpqLib
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        protected Type GetTypeFromResourcePath(string path)
+        protected static Type GetTypeFromResourcePath(string path)
         {
+            if (path == null)
+            {
+                throw new ArgumentException("path");
+            }
             string ext = Path.GetExtension(path);
             if (ext.ToLower() == ".tbl")
             {

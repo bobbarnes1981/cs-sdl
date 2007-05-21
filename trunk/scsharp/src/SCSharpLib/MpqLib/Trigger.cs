@@ -50,6 +50,10 @@ namespace SCSharp.MpqLib
         /// <param name="offset"></param>
         public void Parse(byte[] data, ref int offset)
         {
+            if (data == null)
+            {
+                throw new ArgumentException("data");
+            }
             int i;
             for (i = 0; i < conditions.Length; i++)
             {

@@ -52,16 +52,16 @@ namespace SCSharp.MpqLib
             mStream = sourceStream;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Stream BaseStream
-        {
-            get
-            {
-                return mStream;
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public Stream BaseStream
+        //{
+        //    get
+        //    {
+        //        return mStream;
+        //    }
+        //}
 
         /// <summary>
         /// 

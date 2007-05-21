@@ -76,7 +76,7 @@ namespace SCSharp.UI
         /// <param name="hotX"></param>
         /// <param name="hotY"></param>
         [CLSCompliant(false)]
-        public void SetHotSpot(uint hotX, uint hotY)
+        public void SetHotspot(uint hotX, uint hotY)
         {
             this.hotX = hotX;
             this.hotY = hotY;

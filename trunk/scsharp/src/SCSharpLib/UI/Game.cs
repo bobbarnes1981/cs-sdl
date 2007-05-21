@@ -227,7 +227,7 @@ namespace SCSharp.UI
             this.rootDir = starcraftDir;
         }
 
-        Mpq GetMpq(string path)
+        static Mpq GetMpq(string path)
         {
             if (Directory.Exists(path))
             {
@@ -317,7 +317,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public void Quit()
+        public static void Quit()
         {
             Events.QuitApplication();
         }
@@ -342,7 +342,7 @@ namespace SCSharp.UI
 
         void UserEvent(object sender, UserEventArgs args)
         {
-            ReadyDelegate d = (ReadyDelegate)args.UserEvent;
+            ReadyEventHandler d = (ReadyEventHandler)args.UserEvent;
             d();
         }
 

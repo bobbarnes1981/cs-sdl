@@ -62,15 +62,15 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="fileName"></param>
         /// <param name="smkStream"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public SmackerPlayer(string filename,
+        public SmackerPlayer(string fileName,
         Stream smkStream,
         int width, int height)
         {
-            this.filename = filename;
+            this.filename = fileName;
             this.width = width;
             this.height = height;
 
@@ -204,7 +204,7 @@ namespace SCSharp.UI
             }
             finally
             {
-                Events.PushUserEvent(new UserEventArgs(new ReadyDelegate(EmitFinished)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(EmitFinished)));
             }
 
         }
@@ -212,7 +212,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event PlayerEvent Finished;
+        public event PlayerEventHandler Finished;
 
         void EmitFinished()
         {
@@ -226,5 +226,5 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public delegate void PlayerEvent();
+    public delegate void PlayerEventHandler();
 }

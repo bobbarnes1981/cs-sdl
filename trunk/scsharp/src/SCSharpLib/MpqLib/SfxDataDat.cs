@@ -60,6 +60,10 @@ namespace SCSharp.MpqLib
         /// <param name="stream"></param>
         public void ReadFromStream(Stream stream)
         {
+            if (stream == null)
+            {
+                throw new ArgumentException("stream");
+            }
             buf = new byte[NUM_RECORDS * NUM_FIELDS * 4];
             stream.Read(buf, 0, buf.Length);
         }

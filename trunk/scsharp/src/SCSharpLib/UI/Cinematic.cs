@@ -96,7 +96,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event PlayerEvent Finished;
+        public event PlayerEventHandler Finished;
 
         void PlayerFinished()
         {

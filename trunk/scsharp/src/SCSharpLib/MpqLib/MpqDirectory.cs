@@ -54,7 +54,7 @@ namespace SCSharp.MpqLib
             RecurseDirectoryTree(mpqDirPath);
         }
 
-        string ConvertBackSlashes(string path)
+        static string ConvertBackSlashes(string path)
         {
             while (path.IndexOf('\\') != -1)
                 path = path.Replace('\\', Path.DirectorySeparatorChar);

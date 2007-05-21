@@ -130,11 +130,11 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEvent Cancel;
+        public event DialogEventHandler Cancel;
 
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEvent Ok;
+        public event DialogEventHandler Ok;
     }
 }

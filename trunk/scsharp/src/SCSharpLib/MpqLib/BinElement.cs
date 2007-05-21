@@ -376,6 +376,10 @@ namespace SCSharp.MpqLib
         [CLSCompliant(false)]
         public BinElement(byte[] buf, int position, uint streamLength)
         {
+            if (buf == null)
+            {
+                throw new ArgumentException("buf");
+            }
             x1 = Utilities.ReadWord(buf, position + 4);
             y1 = Utilities.ReadWord(buf, position + 6);
             x2 = Utilities.ReadWord(buf, position + 8);

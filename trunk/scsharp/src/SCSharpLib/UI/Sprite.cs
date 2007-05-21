@@ -713,7 +713,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        LiftOff,
+        Liftoff,
         /// <summary>
         ///
         /// </summary>

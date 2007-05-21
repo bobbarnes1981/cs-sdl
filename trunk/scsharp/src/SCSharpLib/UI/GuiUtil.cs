@@ -49,7 +49,7 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public delegate void ReadyDelegate();
+    public delegate void ReadyEventHandler();
 
     /// <summary>
     ///
@@ -133,7 +133,7 @@ namespace SCSharp.UI
                 }
             }
 
-            return CreateSurfaceFromRGBAData(buf, (ushort)g.Width, (ushort)g.Height, 32, g.Width * 4);
+            return CreateSurfaceFromRgbaData(buf, (ushort)g.Width, (ushort)g.Height, 32, g.Width * 4);
         }
 
         /// <summary>
@@ -369,7 +369,7 @@ namespace SCSharp.UI
         /// <param name="stride"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        public static Surface CreateSurfaceFromRGBAData(byte[] data, ushort width, ushort height, int depth, int stride)
+        public static Surface CreateSurfaceFromRgbaData(byte[] data, ushort width, ushort height, int depth, int stride)
         {
             return CreateSurface(data, width, height, depth, stride,
                 /* XXX this needs addressing in Tao.Sdl - these arguments should be uints */
@@ -389,7 +389,7 @@ namespace SCSharp.UI
         /// <param name="stride"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        public static Surface CreateSurfaceFromRGBData(byte[] data, ushort width, ushort height, int depth, int stride)
+        public static Surface CreateSurfaceFromRgbData(byte[] data, ushort width, ushort height, int depth, int stride)
         {
             return CreateSurface(data, width, height, depth, stride,
             (int)0x00ff0000,
@@ -455,7 +455,7 @@ namespace SCSharp.UI
         {
             byte[] buf = GetBitmapData(grid, width, height, palette, withAlpha);
 
-            return CreateSurfaceFromRGBAData(buf, width, height, withAlpha ? 32 : 24, width * (3 + (withAlpha ? 1 : 0)));
+            return CreateSurfaceFromRgbaData(buf, width, height, withAlpha ? 32 : 24, width * (3 + (withAlpha ? 1 : 0)));
         }
 
         /// <summary>
@@ -473,7 +473,7 @@ namespace SCSharp.UI
         {
             byte[] buf = GetBitmapData(grid, width, height, palette, translucentIndex, transparentIndex);
 
-            return CreateSurfaceFromRGBAData(buf, width, height, 32, width * 4);
+            return CreateSurfaceFromRgbaData(buf, width, height, 32, width * 4);
         }
 
         /// <summary>
@@ -506,7 +506,7 @@ namespace SCSharp.UI
         {
             Pcx pcx = new Pcx();
             pcx.ReadFromStream(stream, translucentIndex, transparentIndex);
-            return CreateSurfaceFromRGBAData(pcx.RgbaData, pcx.Width, pcx.Height, pcx.Depth, pcx.Stride);
+            return CreateSurfaceFromRgbaData(pcx.RgbaData, pcx.Width, pcx.Height, pcx.Depth, pcx.Stride);
         }
 
         /// <summary>

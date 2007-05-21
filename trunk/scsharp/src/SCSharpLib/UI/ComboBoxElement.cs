@@ -257,12 +257,12 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event ComboBoxSelectionChanged SelectionChanged;
+        public event ComboBoxSelectionChangedEventHandler SelectionChanged;
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="selectedIndex"></param>
-    public delegate void ComboBoxSelectionChanged(int selectedIndex);
+    public delegate void ComboBoxSelectionChangedEventHandler(int selectedIndex);
 }

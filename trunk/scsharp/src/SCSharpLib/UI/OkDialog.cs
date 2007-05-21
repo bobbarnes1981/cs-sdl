@@ -83,6 +83,6 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEvent Ok;
+        public event DialogEventHandler Ok;
     }
 }

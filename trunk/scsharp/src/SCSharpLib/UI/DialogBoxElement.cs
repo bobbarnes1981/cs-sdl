@@ -68,7 +68,7 @@ namespace SCSharp.UI
         const int TILE_B = 7;
         const int TILE_BL = 6;
 
-        void TileRow(Surface surf, Grp grp, byte[] pal, int l, int c, int r, int y)
+        static void TileRow(Surface surf, Grp grp, byte[] pal, int l, int c, int r, int y)
         {
             Surface lsurf = GuiUtil.CreateSurfaceFromBitmap(grp.GetFrame(l),
                                      grp.Width, grp.Height,

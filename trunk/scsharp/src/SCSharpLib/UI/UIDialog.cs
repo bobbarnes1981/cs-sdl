@@ -226,5 +226,5 @@ namespace SCSharp.UI
     ///
     /// </summary>
     //public delegate void DialogEvent(object sender, EventArgs args);
-    public delegate void DialogEvent();
+    public delegate void DialogEventHandler();
 }

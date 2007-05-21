@@ -60,7 +60,7 @@ namespace SCSharp.UI
             base.ResourceLoader();
             Cursor = null; /* clear out the cursor */
 
-            Elements[1].Text = "Copyright © 2006 Chris Toshok. All rights reserved.";
+            Elements[1].Text = "Copyright © 2006-2007 Chris Toshok, David Hudson. All rights reserved.";
             Elements[2].Text = "Game assets Copyright © 1998 Blizzard Entertainment. All rights reserved.";
             Elements[3].Text = "";
 

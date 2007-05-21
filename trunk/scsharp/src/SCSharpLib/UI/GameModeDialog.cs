@@ -99,16 +99,16 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEvent Cancel;
+        public event DialogEventHandler Cancel;
         /// <summary>
         /// 
         /// </summary>
-        public event GameModeActivateDelegate Activate;
+        public event GameModeActivateEventHandler Activate;
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="expansion"></param>
-    public delegate void GameModeActivateDelegate(bool expansion);
+    public delegate void GameModeActivateEventHandler(bool expansion);
 }

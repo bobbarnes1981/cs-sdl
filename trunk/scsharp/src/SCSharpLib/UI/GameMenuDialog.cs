@@ -136,6 +136,6 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEvent ReturnToGame;
+        public event DialogEventHandler ReturnToGame;
     }
 }

@@ -58,11 +58,11 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="filename"></param>
-        public MpqArchive(string filename)
+        /// <param name="fileName"></param>
+        public MpqArchive(string fileName)
         {
             //mFilename = filename;
-            mStream = File.Open(filename, FileMode.Open, FileAccess.Read);
+            mStream = File.Open(fileName, FileMode.Open, FileAccess.Read);
             Init();
         }
 
@@ -144,19 +144,19 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="fileName"></param>
         /// <returns></returns>
-        public MpqStream OpenFile(string filename)
+        public MpqStream OpenFile(string fileName)
         {
             MpqHash hash;
             MpqBlock block;
 
-            hash = GetHashEntry(filename);
+            hash = GetHashEntry(fileName);
             uint blockindex = hash.BlockIndex;
 
             if (blockindex == uint.MaxValue)
             {
-                throw new FileNotFoundException("File not found: " + filename);
+                throw new FileNotFoundException("File not found: " + fileName);
             }
 
             block = mBlocks[blockindex];
@@ -167,11 +167,11 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="fileName"></param>
         /// <returns></returns>
-        public bool FileExists(string filename)
+        public bool FileExists(string fileName)
         {
-            MpqHash hash = GetHashEntry(filename);
+            MpqHash hash = GetHashEntry(fileName);
             return (hash.BlockIndex != uint.MaxValue);
         }
 
