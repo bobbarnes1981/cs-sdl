@@ -91,10 +91,10 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEvent Exit;
+        public event DialogEventHandler Exit;
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEvent Cancel;
+        public event DialogEventHandler Cancel;
     }
 }

@@ -179,6 +179,10 @@ namespace SCSharp.MpqLib
         /// <returns></returns>
         public static byte[] Decompress(Stream data)
         {
+            if (data == null)
+            {
+                throw new ArgumentException("data");
+            }
             int comptype = data.ReadByte();
 
             if (comptype == 0)
@@ -223,7 +227,7 @@ namespace SCSharp.MpqLib
                 int bit = input.ReadBits(1);
                 if (bit == -1)
                 {
-                    throw new Exception("Unexpected end of file");
+                    throw new EndOfStreamException("Unexpected end of file");
                 }
 
                 node = bit == 0 ? node.Child0 : node.Child1;

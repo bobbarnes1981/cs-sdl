@@ -151,7 +151,7 @@ namespace SCSharp.UI
             Elements[EXIT_ELEMENT_INDEX].Activate +=
             delegate()
             {
-                Game.Instance.Quit();
+                Game.Quit();
             };
         }
     }

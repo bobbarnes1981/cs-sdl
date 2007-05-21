@@ -55,6 +55,10 @@ namespace SCSharp.MpqLib
         /// <param name="stream"></param>
         public void ReadFromStream(Stream stream)
         {
+            if (stream == null)
+            {
+                throw new ArgumentException("stream");
+            }
             buf = new byte[stream.Length];
             stream.Read(buf, 0, buf.Length);
         }
@@ -73,7 +77,7 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        public int NumIndices
+        public int NumIndexes
         {
             get { return buf.Length / 4; }
         }

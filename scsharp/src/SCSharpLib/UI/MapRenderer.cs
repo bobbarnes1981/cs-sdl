@@ -53,7 +53,7 @@ namespace SCSharp.UI
 
             byte[] bitmap = RenderToBitmap(mpq, chk, out pixel_width, out pixel_height);
 
-            return GuiUtil.CreateSurfaceFromRGBAData(bitmap, pixel_width, pixel_height, 32, pixel_width * 4);
+            return GuiUtil.CreateSurfaceFromRgbaData(bitmap, pixel_width, pixel_height, 32, pixel_width * 4);
         }
 
         /// <summary>

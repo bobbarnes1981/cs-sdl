@@ -332,7 +332,7 @@ namespace SCSharp.UI
             {
                 ScrollCursors[i] = new CursorAnimator((Grp)this.Mpq.GetResource(cursornames[i]),
                                        Effectpal.Palette);
-                ScrollCursors[i].SetHotSpot(60, 60);
+                ScrollCursors[i].SetHotspot(60, 60);
             }
 
             // load the mag cursors
@@ -346,7 +346,7 @@ namespace SCSharp.UI
             {
                 MagCursors[i] = new CursorAnimator((Grp)this.Mpq.GetResource(magcursornames[i]),
                                     Effectpal.Palette);
-                MagCursors[i].SetHotSpot(60, 60);
+                MagCursors[i].SetHotspot(60, 60);
             }
 
             // load the targeting cursors
@@ -360,7 +360,7 @@ namespace SCSharp.UI
             {
                 TargetCursors[i] = new CursorAnimator((Grp)this.Mpq.GetResource(targetcursornames[i]),
                                        Effectpal.Palette);
-                TargetCursors[i].SetHotSpot(60, 60);
+                TargetCursors[i].SetHotspot(60, 60);
             }
 
             PlaceInitialUnits();

@@ -91,7 +91,7 @@ namespace SCSharp.UI
         ListBoxElement file_listbox;
         ComboBoxElement gametype_combo;
 
-        void InitializeRaceCombo(ComboBoxElement combo)
+        static void InitializeRaceCombo(ComboBoxElement combo)
         {
             combo.AddItem("Zerg"); /* XXX these should all come from some string constant table someplace */
             combo.AddItem("Terran");
@@ -99,7 +99,7 @@ namespace SCSharp.UI
             combo.AddItem("Random", true);
         }
 
-        void InitializePlayerCombo(ComboBoxElement combo)
+        static void InitializePlayerCombo(ComboBoxElement combo)
         {
             combo.AddItem(GlobalResources.Instance.GluAllTbl.Strings[130]); /* Closed */
             combo.AddItem(GlobalResources.Instance.GluAllTbl.Strings[128], true); /* Computer */

@@ -294,12 +294,12 @@ namespace SCSharp.UI
             try
             {
                 Console.WriteLine("swooshing in");
-                Events.PushUserEvent(new UserEventArgs(new ReadyDelegate(RaiseDoneSwooshing)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(RaiseDoneSwooshing)));
             }
             catch (SdlException e)
             {
                 Console.WriteLine("failed pushing UIScreen.RiseDoneSwooshing: {0}", e);
-                Events.PushUserEvent(new UserEventArgs(new ReadyDelegate(Events.QuitApplication)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Events.QuitApplication)));
             }
         }
 
@@ -311,12 +311,12 @@ namespace SCSharp.UI
             try
             {
                 Console.WriteLine("swooshing out");
-                Events.PushUserEvent(new UserEventArgs(new ReadyDelegate(RaiseDoneSwooshing)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(RaiseDoneSwooshing)));
             }
             catch (SdlException e)
             {
                 Console.WriteLine("failed pushing UIScreen.RiseDoneSwooshing: {0}", e);
-                Events.PushUserEvent(new UserEventArgs(new ReadyDelegate(Events.QuitApplication)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Events.QuitApplication)));
             }
         }
 
@@ -690,17 +690,17 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event ReadyDelegate FirstPainted;
+        public event ReadyEventHandler FirstPainted;
 
         /// <summary>
         ///
         /// </summary>
-        public event ReadyDelegate DoneSwooshing;
+        public event ReadyEventHandler DoneSwooshing;
 
         /// <summary>
         ///
         /// </summary>
-        public event ReadyDelegate Ready;
+        public event ReadyEventHandler Ready;
 
         bool loaded;
 
@@ -790,7 +790,7 @@ namespace SCSharp.UI
                     if (arrowgrp != null)
                     {
                         cursor = new CursorAnimator(arrowgrp, effectpal.Palette);
-                        cursor.SetHotSpot(64, 64);
+                        cursor.SetHotspot(64, 64);
                     }
                 }
             }
@@ -868,7 +868,7 @@ namespace SCSharp.UI
         void LoadResources()
         {
             ResourceLoader();
-            Events.PushUserEvent(new UserEventArgs(new ReadyDelegate(FinishedLoading)));
+            Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(FinishedLoading)));
         }
 
         /// <summary>
@@ -878,14 +878,14 @@ namespace SCSharp.UI
         {
             if (loaded)
             {
-                Events.PushUserEvent(new UserEventArgs(new ReadyDelegate(RaiseReadyEvent)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(RaiseReadyEvent)));
             }
             else
             {
 #if MULTI_THREADED
 ThreadPool.QueueUserWorkItem (delegate (object state) { LoadResources (); })
 #else
-                Events.PushUserEvent(new UserEventArgs(new ReadyDelegate(LoadResources)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(LoadResources)));
 #endif
             }
         }

@@ -50,12 +50,12 @@ namespace SCSharp.MpqLib
             BlockIndex = br.ReadUInt32();
         }
 
-        public bool IsValid
-        {
-            get
-            {
-                return Name1 != uint.MaxValue && Name2 != uint.MaxValue;
-            }
-        }
+        //public bool IsValid
+        //{
+        //    get
+        //    {
+        //        return Name1 != uint.MaxValue && Name2 != uint.MaxValue;
+        //    }
+        //}
     }
 }

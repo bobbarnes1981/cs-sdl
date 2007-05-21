@@ -92,6 +92,6 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEvent Previous;
+        public event DialogEventHandler Previous;
     }
 }

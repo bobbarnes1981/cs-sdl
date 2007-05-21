@@ -82,6 +82,10 @@ namespace SCSharp.MpqLib
         /// <param name="stream"></param>
         public void ReadFromStream(Stream stream)
         {
+            if (stream == null)
+            {
+                throw new ArgumentException("stream");
+            }
             int size = 0;
             for (int i = 0; i < NUM_FIELDS; i++)
             {

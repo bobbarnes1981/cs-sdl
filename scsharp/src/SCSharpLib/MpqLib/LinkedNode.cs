@@ -130,6 +130,10 @@ namespace SCSharp.MpqLib
         /// <returns></returns>
         public LinkedNode Insert(LinkedNode other)
         {
+            if (other == null)
+            {
+                throw new ArgumentException("other");
+            }
             // 'Next' should have a lower weight
             // we should return the lower weight
             if (other.weight <= weight)

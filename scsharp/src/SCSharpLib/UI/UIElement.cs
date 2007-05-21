@@ -270,7 +270,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event ElementEvent Activate;
+        public event ElementEventHandler Activate;
 
         /// <summary>
         ///
@@ -286,7 +286,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event ElementEvent MouseEnterEvent;
+        public event ElementEventHandler MouseEnterEvent;
 
         /// <summary>
         ///
@@ -300,7 +300,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event ElementEvent MouseLeaveEvent;
+        public event ElementEventHandler MouseLeaveEvent;
 
         /// <summary>
         ///
@@ -436,5 +436,5 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public delegate void ElementEvent();
+    public delegate void ElementEventHandler();
 }

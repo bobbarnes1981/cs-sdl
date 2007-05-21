@@ -326,12 +326,12 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event ListBoxSelectionChanged SelectionChanged;
+        public event ListBoxSelectionChangedEventHandler SelectionChanged;
     }
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="selectedIndex"></param>
-    public delegate void ListBoxSelectionChanged(int selectedIndex);
+    public delegate void ListBoxSelectionChangedEventHandler(int selectedIndex);
 }
