@@ -85,7 +85,8 @@ namespace SCSharp.UI
             if (state == State.PAUSED)
             {
                 state = State.PLAYING;
-                decoderThread.Resume();
+                // TODO This is obselete
+                //decoderThread.Resume();
             }
             else if (state == State.STOPPED)
             {
@@ -125,7 +126,8 @@ namespace SCSharp.UI
             }
 
             state = State.PAUSED;
-            decoderThread.Suspend();
+            //TODO this is obselete
+            //decoderThread.Suspend();
         }
 
         /// <summary>
