@@ -52,7 +52,7 @@ namespace SCSharp.MpqLib
         {
             if (data == null)
             {
-                throw new ArgumentException("data");
+                throw new ArgumentNullException("data");
             }
             int i;
             for (i = 0; i < conditions.Length; i++)

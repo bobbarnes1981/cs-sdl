@@ -398,6 +398,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void KeyboardDown(KeyboardEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (args.Key == Key.DownArrow
                 || args.Key == Key.UpArrow)
             {

@@ -70,18 +70,22 @@ namespace SCSharp.UI
                 String.Format("glue\\Ready{0}", Utilities.RaceChar[(int)Game.Instance.Race]),
                 String.Format(Builtins.GluRdyBin, Utilities.RaceCharLower[(int)Game.Instance.Race]))
         {
+            if (mpq == null)
+            {
+                throw new ArgumentNullException("mpq");
+            }
             BackgroundPath = String.Format("glue\\PalR{0}\\Backgnd.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
             FontpalPath = String.Format("glue\\PalR{0}\\tFont.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
             EffectpalPath = String.Format("glue\\PalR{0}\\tEffect.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
             ArrowgrpPath = String.Format("glue\\PalR{0}\\arrow.grp", Utilities.RaceCharLower[(int)Game.Instance.Race]);
 
-            this.start_element_index = startElementIndex;
-            this.cancel_element_index = cancelElementIndex;
-            this.skiptutorial_element_index = skipTutorialElementIndex;
-            this.replay_element_index = replayElementIndex;
-            this.transmission_element_index = transmissionElementIndex;
-            this.objectives_element_index = objectivesElementIndex;
-            this.first_portrait_element_index = firstPortraitElementIndex;
+            this.startElementIndex = startElementIndex;
+            this.cancelElementIndex = cancelElementIndex;
+            this.skipTutorialElementIndex = skipTutorialElementIndex;
+            this.replayElementIndex = replayElementIndex;
+            this.transmissionElementIndex = transmissionElementIndex;
+            this.objectivesElementIndex = objectivesElementIndex;
+            this.firstPortraitElementIndex = firstPortraitElementIndex;
 
             this.scenario = (Chk)mpq.GetResource(scenarioPrefix + "\\staredit\\scenario.chk");
             this.scenario_prefix = scenarioPrefix;
@@ -90,13 +94,13 @@ namespace SCSharp.UI
         BriefingRunner runner;
         Chk scenario;
         string scenario_prefix;
-        int start_element_index;
-        int cancel_element_index;
-        int skiptutorial_element_index;
-        int replay_element_index;
-        int transmission_element_index;
-        int objectives_element_index;
-        int first_portrait_element_index;
+        int startElementIndex;
+        int cancelElementIndex;
+        int skipTutorialElementIndex;
+        int replayElementIndex;
+        int transmissionElementIndex;
+        int objectivesElementIndex;
+        int firstPortraitElementIndex;
 
         /// <summary>
         /// 
@@ -112,25 +116,25 @@ namespace SCSharp.UI
 
             if (scenario_prefix.EndsWith("tutorial"))
             {
-                Elements[skiptutorial_element_index].Visible = true;
+                Elements[skipTutorialElementIndex].Visible = true;
                 /* XXX Activate */
             }
 
-            Elements[cancel_element_index].Activate +=
+            Elements[cancelElementIndex].Activate +=
                 delegate()
                 {
                     StopBriefing();
-                    Game.Instance.SwitchToScreen(UIScreenType.Login);
+                    Game.Instance.SwitchToScreen(UIScreenType.LogOn);
                 };
 
-            Elements[replay_element_index].Activate +=
+            Elements[replayElementIndex].Activate +=
                 delegate()
                 {
                     StopBriefing();
                     PlayBriefing();
                 };
 
-            Elements[start_element_index].Activate +=
+            Elements[startElementIndex].Activate +=
                 delegate()
                 {
                     StopBriefing();
@@ -145,16 +149,16 @@ namespace SCSharp.UI
             Events.Tick -= runner.Tick;
             runner.Stop();
 
-            Elements[transmission_element_index].Visible = false;
-            Elements[transmission_element_index].Text = "";
+            Elements[transmissionElementIndex].Visible = false;
+            Elements[transmissionElementIndex].Text = "";
 
-            Elements[objectives_element_index].Visible = false;
-            Elements[objectives_element_index].Text = "";
+            Elements[objectivesElementIndex].Visible = false;
+            Elements[objectivesElementIndex].Text = "";
 
             for (int i = 0; i < 4; i++)
             {
-                Elements[first_portrait_element_index + i].Background = null;
-                Elements[first_portrait_element_index + i].Visible = false;
+                Elements[firstPortraitElementIndex + i].Background = null;
+                Elements[firstPortraitElementIndex + i].Visible = false;
             }
         }
 
@@ -181,8 +185,8 @@ namespace SCSharp.UI
         /// <param name="str"></param>
         public void SetObjectives(string str)
         {
-            Elements[objectives_element_index].Visible = true;
-            Elements[objectives_element_index].Text = str;
+            Elements[objectivesElementIndex].Visible = true;
+            Elements[objectivesElementIndex].Text = str;
         }
 
         /// <summary>
@@ -191,8 +195,8 @@ namespace SCSharp.UI
         /// <param name="str"></param>
         public void SetTransmissionText(string str)
         {
-            Elements[transmission_element_index].Visible = true;
-            Elements[transmission_element_index].Text = str;
+            Elements[transmissionElementIndex].Visible = true;
+            Elements[transmissionElementIndex].Text = str;
         }
 
         int highlightedPortrait = -1;
@@ -206,7 +210,7 @@ namespace SCSharp.UI
             if (highlightedPortrait != -1)
                 UnhighlightPortrait(highlightedPortrait);
 
-            Elements[first_portrait_element_index + slot].Background = String.Format("glue\\Ready{0}\\{0}FrameH{1}.pcx",
+            Elements[firstPortraitElementIndex + slot].Background = String.Format("glue\\Ready{0}\\{0}FrameH{1}.pcx",
                                                   Utilities.RaceChar[(int)Game.Instance.Race],
                                                   slot + 1);
             highlightedPortrait = slot;
@@ -218,8 +222,8 @@ namespace SCSharp.UI
         /// <param name="slot"></param>
         public void UnhighlightPortrait(int slot)
         {
-            if (Elements[first_portrait_element_index + slot].Visible)
-                Elements[first_portrait_element_index + slot].Background = String.Format("glue\\Ready{0}\\{0}Frame{1}.pcx",
+            if (Elements[firstPortraitElementIndex + slot].Visible)
+                Elements[firstPortraitElementIndex + slot].Background = String.Format("glue\\Ready{0}\\{0}Frame{1}.pcx",
                                                       Utilities.RaceChar[(int)Game.Instance.Race],
                                                       slot + 1);
         }
@@ -230,8 +234,8 @@ namespace SCSharp.UI
         /// <param name="slot"></param>
         public void ShowPortrait(int slot)
         {
-            Elements[first_portrait_element_index + slot].Visible = true;
-            Elements[first_portrait_element_index + slot].Background = String.Format("glue\\Ready{0}\\{0}Frame{1}.pcx",
+            Elements[firstPortraitElementIndex + slot].Visible = true;
+            Elements[firstPortraitElementIndex + slot].Background = String.Format("glue\\Ready{0}\\{0}Frame{1}.pcx",
                                                   Utilities.RaceChar[(int)Game.Instance.Race],
                                                   slot + 1);
         }
@@ -242,8 +246,8 @@ namespace SCSharp.UI
         /// <param name="slot"></param>
         public void HidePortrait(int slot)
         {
-            Elements[first_portrait_element_index + slot].Visible = false;
-            Elements[first_portrait_element_index + slot].Background = null;
+            Elements[firstPortraitElementIndex + slot].Visible = false;
+            Elements[firstPortraitElementIndex + slot].Background = null;
         }
 
         /// <summary>

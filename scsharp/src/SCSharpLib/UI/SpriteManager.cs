@@ -32,6 +32,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using SCSharp;
 using SCSharp.MpqLib;
@@ -46,7 +47,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public static List<Sprite> sprites = new List<Sprite>();
+        public static Collection<Sprite> sprites = new Collection<Sprite>();
         static Painter painter;
 
         static Mpq our_mpq;

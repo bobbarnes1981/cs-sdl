@@ -93,7 +93,7 @@ namespace SCSharp.MpqLib
         {
             if (stream == null)
             {
-                throw new ArgumentException("stream");
+                throw new ArgumentNullException("stream");
             }
             contents = new byte[stream.Length];
             stream.Read(contents, 0, (int)stream.Length);

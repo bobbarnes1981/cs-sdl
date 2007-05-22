@@ -65,7 +65,7 @@ namespace SCSharp.UI
             this.unitId = unitId;
             units = GlobalResources.Instance.UnitsDat;
 
-            hitpoints = units.GetHitpoints(unitId);
+            hitpoints = units.GetHitPoints(unitId);
             shields = units.GetShields(unitId);
         }
 
@@ -74,10 +74,18 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="info"></param>
         public Unit(UnitInfo info)
-            : this(info.UnitId)
         {
-            x = info.X;
-            y = info.Y;
+            if (info == null)
+            {
+                throw new ArgumentNullException("info");
+            }
+            this.unitId = info.UnitId;
+            units = GlobalResources.Instance.UnitsDat;
+
+            hitpoints = units.GetHitPoints(info.UnitId);
+            shields = units.GetShields(info.UnitId);
+            x = info.PositionX;
+            y = info.PositionY;
         }
 
         /// <summary>

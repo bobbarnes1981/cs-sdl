@@ -39,7 +39,7 @@ namespace SCSharp.UI
     /// <summary>
     /// 
     /// </summary>
-    public class Resources
+    public class SCResources
     {
         private ScriptBin scriptBin;
 

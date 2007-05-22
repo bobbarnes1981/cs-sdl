@@ -60,6 +60,10 @@ namespace SCSharp.UI
         /// <param name="transparentIndex"></param>
         public void ReadFromStream(Stream stream, int translucentIndex, int transparentIndex)
         {
+            if (stream == null)
+            {
+                throw new ArgumentNullException("stream");
+            }
             withAlpha = translucentIndex != -1 || transparentIndex != -1;
 
             byte magic = Utilities.ReadByte(stream);

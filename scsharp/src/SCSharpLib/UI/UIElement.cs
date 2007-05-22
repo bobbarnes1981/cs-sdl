@@ -50,9 +50,9 @@ namespace SCSharp.UI
         byte[] palette;
         bool sensitive;
         bool visible;
-        Fnt fnt;
+        SCFont fnt;
         string background;
-        Surface background_surface;
+        Surface backgroundSurface;
 
         /// <summary>
         ///
@@ -62,13 +62,17 @@ namespace SCSharp.UI
         /// <param name="palette"></param>
         public UIElement(UIScreen screen, BinElement el, byte[] palette)
         {
+            if (el == null)
+            {
+                throw new ArgumentNullException("el");
+            }
             this.screen = screen;
             this.el = el;
             this.x1 = el.X1;
             this.y1 = el.Y1;
             this.palette = palette;
             this.sensitive = true;
-            this.visible = (el.Flags & ElementFlags.Visible) != 0;
+            this.visible = (el.Flags & SCElement.Visible) != 0;
         }
 
         /// <summary>
@@ -96,7 +100,7 @@ namespace SCSharp.UI
             set
             {
                 background = value;
-                background_surface = null;
+                backgroundSurface = null;
             }
         }
 
@@ -164,10 +168,10 @@ namespace SCSharp.UI
                     surface = CreateSurface();
                 }
 
-                if (background != null && background != ""
-                && background_surface == null)
+                if (background != null && background.Length != 0
+                && backgroundSurface == null)
                 {
-                    background_surface = CreateBackgroundSurface();
+                    backgroundSurface = CreateBackgroundSurface();
                 }
 
                 return surface;
@@ -177,7 +181,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public Fnt Font
+        public SCFont Font
         {
             get
             {
@@ -185,19 +189,19 @@ namespace SCSharp.UI
                 {
                     int idx = 2;
 
-                    if ((Flags & ElementFlags.FontSmallest) != 0)
+                    if ((Flags & SCElement.FontSmallest) != 0)
                     {
                         idx = 0;
                     }
-                    else if ((Flags & ElementFlags.FontSmaller) != 0)
+                    else if ((Flags & SCElement.FontSmaller) != 0)
                     {
                         idx = 3;
                     }
-                    else if ((Flags & ElementFlags.FontLarger) != 0)
+                    else if ((Flags & SCElement.FontLarger) != 0)
                     {
                         idx = 3;
                     }
-                    else if ((Flags & ElementFlags.FontLargest) != 0)
+                    else if ((Flags & SCElement.FontLargest) != 0)
                     {
                         idx = 4;
                     }
@@ -221,7 +225,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public ElementFlags Flags { get { return el.Flags; } }
+        public SCElement Flags { get { return el.Flags; } }
 
         /// <summary>
         ///
@@ -350,6 +354,10 @@ namespace SCSharp.UI
         /// <param name="now"></param>
         public void Paint(Surface surf, DateTime now)
         {
+            if (surf == null)
+            {
+                throw new ArgumentNullException("surf");
+            }
             if (!visible)
             {
                 return;
@@ -360,9 +368,9 @@ namespace SCSharp.UI
                 return;
             }
 
-            if (background_surface != null)
+            if (backgroundSurface != null)
             {
-                surf.Blit(background_surface, new Point(X1, Y1));
+                surf.Blit(backgroundSurface, new Point(X1, Y1));
             }
             surf.Blit(surface, new Point(X1, Y1));
         }

@@ -45,7 +45,7 @@ namespace SCSharp.UI
     public class TextBoxElement : UIElement
     {
         StringBuilder value;
-        int cursor = 0;
+        int cursor;
 
         /// <summary>
         ///
@@ -65,6 +65,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public void KeyboardDown(KeyboardEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             bool changed = false;
 
             /* navigation keys */

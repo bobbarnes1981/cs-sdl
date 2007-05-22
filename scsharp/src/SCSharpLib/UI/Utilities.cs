@@ -37,7 +37,7 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public class Utilities
+    public static class Utilities
     {
         /// <summary>
         /// read in a LE word
@@ -47,6 +47,10 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public static ushort ReadWord(Stream fs)
         {
+            if (fs == null)
+            {
+                throw new ArgumentNullException("fs");
+            }
             return ((ushort)(fs.ReadByte() | (fs.ReadByte() << 8)));
         }
 
@@ -59,6 +63,10 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public static ushort ReadWord(byte[] buf, int position)
         {
+            if (buf == null)
+            {
+                throw new ArgumentNullException("buf");
+            }
             return ((ushort)((int)buf[position] | (int)buf[position + 1] << 8));
         }
 
@@ -70,6 +78,10 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public static uint ReadDWord(Stream fs)
         {
+            if (fs == null)
+            {
+                throw new ArgumentNullException("fs");
+            }
             return (uint)(fs.ReadByte() | (fs.ReadByte() << 8) | (fs.ReadByte() << 16) | (fs.ReadByte() << 24));
         }
 
@@ -82,6 +94,10 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public static uint ReadDWord(byte[] buf, int position)
         {
+            if (buf == null)
+            {
+                throw new ArgumentNullException("buf");
+            }
             return ((uint)((uint)buf[position] | (uint)buf[position + 1] << 8 | (uint)buf[position + 2] << 16 | (uint)buf[position + 3] << 24));
         }
 
@@ -92,6 +108,10 @@ namespace SCSharp.UI
         /// <returns></returns>
         public static byte ReadByte(Stream fs)
         {
+            if (fs == null)
+            {
+                throw new ArgumentNullException("fs");
+            }
             return (byte)fs.ReadByte();
         }
 
@@ -103,6 +123,10 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public static void WriteWord(Stream fs, ushort word)
         {
+            if (fs == null)
+            {
+                throw new ArgumentNullException("fs");
+            }
             fs.WriteByte((byte)(word & 0xff));
             fs.WriteByte((byte)((word >> 8) & 0xff));
         }
@@ -115,6 +139,10 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public static void WriteDWord(Stream fs, uint dword)
         {
+            if (fs == null)
+            {
+                throw new ArgumentNullException("fs");
+            }
             fs.WriteByte((byte)(dword & 0xff));
             fs.WriteByte((byte)((dword >> 8) & 0xff));
             fs.WriteByte((byte)((dword >> 16) & 0xff));
@@ -126,8 +154,12 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="r"></param>
         /// <returns></returns>
-        public static string ReadUntilNull(StreamReader r)
+        public static string ReadUntilNull(TextReader r)
         {
+            if (r == null)
+            {
+                throw new ArgumentNullException("r");
+            }
             StringBuilder sb = new StringBuilder();
 
             char c;
@@ -135,7 +167,9 @@ namespace SCSharp.UI
             {
                 c = (char)r.Read();
                 if (c != 0)
+                {
                     sb.Append(c);
+                }
             } while (c != 0);
 
             return sb.ToString();
@@ -149,7 +183,11 @@ namespace SCSharp.UI
         /// <returns></returns>
         public static string ReadUntilNull(byte[] buf, int position)
         {
-            StringBuilder sb = new StringBuilder();
+            if (buf == null)
+            {
+                throw new ArgumentNullException("buf");
+            }
+            //StringBuilder sb = new StringBuilder();
 
             int i = position;
 

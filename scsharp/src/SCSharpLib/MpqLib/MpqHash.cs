@@ -40,7 +40,7 @@ namespace SCSharp.MpqLib
         public uint Locale;
         public uint BlockIndex;
 
-        public static readonly uint Size = 16;
+        public const uint Size = 16;
 
         public MpqHash(BinaryReader br)
         {

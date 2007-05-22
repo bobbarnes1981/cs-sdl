@@ -30,6 +30,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 
 using SdlDotNet.Graphics;
@@ -237,6 +238,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public override void AddToPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             base.AddToPainter(painter);
 
             painter.Add(Layer.Hud, PaintHud);
@@ -258,6 +263,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public override void RemoveFromPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             base.RemoveFromPainter(painter);
             painter.Remove(Layer.Hud, PaintHud);
             painter.Remove(Layer.Hud, PaintMinimap);
@@ -308,7 +317,7 @@ namespace SCSharp.UI
                     {
                         ParallaxObject obj = starfield.Layers[i].Objects[o];
 
-                        starfieldLayers[i].Fill(new Rectangle(new Point(obj.X, obj.Y), new Size(2, 2)),
+                        starfieldLayers[i].Fill(new Rectangle(new Point(obj.PositionX, obj.PositionY), new Size(2, 2)),
                                       Color.White);
                     }
                 }
@@ -384,14 +393,14 @@ namespace SCSharp.UI
                 Unit u = units[i];
                 Sprite s = u.Sprite;
 
-                int sx, sy;
+                //int sx, sy;
 
-                s.GetTopLeftPosition(out sx, out sy);
+                //s.TopLeftPosition(out sx, out sy);
 
                 CursorAnimator c = Game.Instance.Cursor;
 
-                if (c.X + topleft_x > sx && c.X + topleft_x <= sx + 100 /* XXX */
-                    && c.Y + topleft_y > sy && c.Y + topleft_y <= sy + 100 /* XXX */)
+                if (c.X + topleft_x > s.TopLeftPosition.X && c.X + topleft_x <= s.TopLeftPosition.X + 100 /* XXX */
+                    && c.Y + topleft_y > s.TopLeftPosition.Y && c.Y + topleft_y <= s.TopLeftPosition.Y + 100 /* XXX */)
                 {
                     Game.Instance.Cursor = MagCursors[MAG_CURSOR_G];
                     unitUnderCursor = u;
@@ -442,6 +451,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void MouseButtonDown(MouseButtonEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (args.X > MINIMAP_X && args.X < MINIMAP_X + MINIMAP_WIDTH &&
                 args.Y > MINIMAP_Y && args.Y < MINIMAP_Y + MINIMAP_HEIGHT)
             {
@@ -464,6 +477,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void MouseButtonUp(MouseButtonEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (buttonDownInMinimap)
             {
                 buttonDownInMinimap = false;
@@ -476,6 +493,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void PointerMotion(MouseMotionEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (buttonDownInMinimap)
             {
                 RecenterFromMinimap(args.X, args.Y);
@@ -564,6 +585,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void KeyboardUp(KeyboardEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (args.Key == Key.RightArrow
                 || args.Key == Key.LeftArrow)
             {
@@ -582,6 +607,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void KeyboardDown(KeyboardEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             switch (args.Key)
             {
                 case Key.F10:
@@ -611,7 +640,7 @@ namespace SCSharp.UI
 
         void PlaceInitialUnits()
         {
-            List<UnitInfo> unit_infos = scenario.Units;
+            Collection<UnitInfo> unit_infos = scenario.Units;
 
             List<Unit> startLocations = new List<Unit>();
 

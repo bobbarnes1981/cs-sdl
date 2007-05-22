@@ -42,7 +42,7 @@ namespace SCSharp.UI
     /// <summary>
     /// 
     /// </summary>
-    public class ComboBoxElement : UIElement
+    public class ComboBoxElement : UIElement, IDisposable
     {
         List<string> items;
         int cursor = -1;
@@ -165,6 +165,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void PointerMotion(MouseMotionEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             /* if the dropdown is visible, see if we're inside it */
             if (!dropdownVisible)
             {
@@ -258,6 +262,18 @@ namespace SCSharp.UI
         /// 
         /// </summary>
         public event ComboBoxSelectionChangedEventHandler SelectionChanged;
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #endregion
     }
 
     /// <summary>

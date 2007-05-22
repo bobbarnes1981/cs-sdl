@@ -95,7 +95,7 @@ namespace SCSharp.MpqLib
                     mSeed1 = MpqArchive.DetectFileSeed(mBlockPositions, blockpossize);
                     if (mSeed1 == 0)
                     {
-                        throw new Exception("Unable to determine encyption seed");
+                        throw new Exception("Unable to determine encryption seed");
                     }
                 }
                 MpqArchive.DecryptBlock(mBlockPositions, mSeed1);
@@ -103,20 +103,20 @@ namespace SCSharp.MpqLib
             }
         }
 
-        private byte[] LoadBlock(int BlockIndex, int ExpectedLength)
+        private byte[] LoadBlock(int blockIndex, int expectedLength)
         {
             uint offset;
             int toread;
 
             if (mBlock.IsCompressed)
             {
-                offset = mBlockPositions[BlockIndex];
-                toread = (int)(mBlockPositions[BlockIndex + 1] - offset);
+                offset = mBlockPositions[blockIndex];
+                toread = (int)(mBlockPositions[blockIndex + 1] - offset);
             }
             else
             {
-                offset = (uint)(BlockIndex * mBlockSize);
-                toread = ExpectedLength;
+                offset = (uint)(blockIndex * mBlockSize);
+                toread = expectedLength;
             }
             offset += mBlock.FilePos;
 
@@ -133,18 +133,18 @@ namespace SCSharp.MpqLib
                 {
                     throw new Exception("Unable to determine encryption key");
                 }
-                MpqArchive.DecryptBlock(data, (uint)(mSeed1 + BlockIndex));
+                MpqArchive.DecryptBlock(data, (uint)(mSeed1 + blockIndex));
             }
 
-            if (mBlock.IsCompressed && data.Length != ExpectedLength)
+            if (mBlock.IsCompressed && data.Length != expectedLength)
             {
                 if ((mBlock.Flags & MpqFileFlags.CompressedMulti) != 0)
                 {
-                    data = DecompressMulti(data, ExpectedLength);
+                    data = DecompressMulti(data, expectedLength);
                 }
                 else
                 {
-                    data = PKDecompress(new MemoryStream(data), ExpectedLength);
+                    data = PKDecompress(new MemoryStream(data), expectedLength);
                 }
             }
 
@@ -202,26 +202,26 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="Offset"></param>
-        /// <param name="Origin"></param>
+        /// <param name="offset"></param>
+        /// <param name="origin"></param>
         /// <returns></returns>
-        public override long Seek(long Offset, SeekOrigin Origin)
+        public override long Seek(long offset, SeekOrigin origin)
         {
             long target;
 
-            switch (Origin)
+            switch (origin)
             {
                 case SeekOrigin.Begin:
-                    target = Offset;
+                    target = offset;
                     break;
                 case SeekOrigin.Current:
-                    target = Position + Offset;
+                    target = Position + offset;
                     break;
                 case SeekOrigin.End:
-                    target = Length + Offset;
+                    target = Length + offset;
                     break;
                 default:
-                    throw new ArgumentException("Origin", "Invalid SeekOrigin");
+                    throw new ArgumentNullException("Origin", "Invalid SeekOrigin");
             }
 
             if (target < 0)
@@ -241,8 +241,8 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="Value"></param>
-        public override void SetLength(long Value)
+        /// <param name="value"></param>
+        public override void SetLength(long value)
         {
             throw new NotSupportedException("SetLength is not supported");
         }
@@ -250,35 +250,35 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="Buffer"></param>
-        /// <param name="Offset"></param>
-        /// <param name="Count"></param>
+        /// <param name="buffer"></param>
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
         /// <returns></returns>
-        public override int Read(byte[] Buffer, int Offset, int Count)
+        public override int Read(byte[] buffer, int offset, int count)
         {
-            int toread = Count;
+            int toread = count;
             int readtotal = 0;
 
             while (toread > 0)
             {
-                int read = ReadInternal(Buffer, Offset, toread);
+                int read = ReadInternal(buffer, offset, toread);
                 if (read == 0) break;
                 readtotal += read;
-                Offset += read;
+                offset += read;
                 toread -= read;
             }
             return readtotal;
         }
 
-        private int ReadInternal(byte[] Buffer, int Offset, int Count)
+        private int ReadInternal(byte[] buffer, int offset, int count)
         {
             BufferData();
 
             int localposition = (int)(mPosition % mBlockSize);
-            int bytestocopy = Math.Min(mCurrentData.Length - localposition, Count);
+            int bytestocopy = Math.Min(mCurrentData.Length - localposition, count);
             if (bytestocopy <= 0) return 0;
 
-            Array.Copy(mCurrentData, localposition, Buffer, Offset, bytestocopy);
+            Array.Copy(mCurrentData, localposition, buffer, offset, bytestocopy);
 
             mPosition += bytestocopy;
             return bytestocopy;
@@ -313,10 +313,10 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="Buffer"></param>
-        /// <param name="Offset"></param>
-        /// <param name="Count"></param>
-        public override void Write(byte[] Buffer, int Offset, int Count)
+        /// <param name="buffer"></param>
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
+        public override void Write(byte[] buffer, int offset, int count)
         {
             throw new NotSupportedException("Writing is not supported");
         }
@@ -330,16 +330,16 @@ namespace SCSharp.MpqLib
 		 *  80 = IMA ADPCM Stereo
 		 *  40 = IMA ADPCM Mono
 		 */
-        private static byte[] DecompressMulti(byte[] Input, int OutputLength)
+        private static byte[] DecompressMulti(byte[] input, int outputLength)
         {
-            Stream sinput = new MemoryStream(Input);
+            Stream sinput = new MemoryStream(input);
 
             byte comptype = (byte)sinput.ReadByte();
 
             // BZip2
             if ((comptype & 0x10) != 0)
             {
-                byte[] result = BZip2Decompress(sinput, OutputLength);
+                byte[] result = BZip2Decompress(sinput);
                 comptype &= 0xEF;
                 if (comptype == 0)
                 {
@@ -351,7 +351,7 @@ namespace SCSharp.MpqLib
             // PKLib
             if ((comptype & 8) != 0)
             {
-                byte[] result = PKDecompress(sinput, OutputLength);
+                byte[] result = PKDecompress(sinput, outputLength);
                 comptype &= 0xF7;
                 if (comptype == 0)
                 {
@@ -363,7 +363,7 @@ namespace SCSharp.MpqLib
             // ZLib
             if ((comptype & 2) != 0)
             {
-                byte[] result = ZlibDecompress(sinput, OutputLength);
+                byte[] result = ZlibDecompress(sinput, outputLength);
                 comptype &= 0xFD;
                 if (comptype == 0)
                 {
@@ -407,28 +407,30 @@ namespace SCSharp.MpqLib
             throw new Exception(String.Format("Unhandled compression flags: 0x{0:X}", comptype));
         }
 
-        private static byte[] BZip2Decompress(Stream Data, int ExpectedLength)
+        //private static byte[] BZip2Decompress(Stream data, int expectedLength)
+        
+        private static byte[] BZip2Decompress(Stream data)
         {
             MemoryStream output = new MemoryStream();
-            BZip2.Decompress(Data, output);
+            BZip2.Decompress(data, output);
             return output.ToArray();
         }
 
-        private static byte[] PKDecompress(Stream Data, int ExpectedLength)
+        private static byte[] PKDecompress(Stream data, int expectedLength)
         {
-            PKLibDecompress pk = new PKLibDecompress(Data);
-            return pk.Explode(ExpectedLength);
+            PKLibDecompress pk = new PKLibDecompress(data);
+            return pk.Explode(expectedLength);
         }
 
-        private static byte[] ZlibDecompress(Stream Data, int ExpectedLength)
+        private static byte[] ZlibDecompress(Stream data, int expectedLength)
         {
             // This assumes that Zlib won't be used in combination with another compression type
-            byte[] Output = new byte[ExpectedLength];
-            Stream s = new InflaterInputStream(Data);
+            byte[] Output = new byte[expectedLength];
+            Stream s = new InflaterInputStream(data);
             int Offset = 0;
             while (true)
             {
-                int size = s.Read(Output, Offset, ExpectedLength);
+                int size = s.Read(Output, Offset, expectedLength);
                 if (size == 0)
                 {
                     break;

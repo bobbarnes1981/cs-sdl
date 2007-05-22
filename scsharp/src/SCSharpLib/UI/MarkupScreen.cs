@@ -46,7 +46,7 @@ namespace SCSharp.UI
     /// </summary>
     public abstract class MarkupScreen : UIScreen
     {
-        Fnt fnt;
+        SCFont fnt;
         byte[] pal;
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace SCSharp.UI
             List<string> lines;
             List<Surface> lineSurfaces;
             Surface newBackground;
-            Fnt fnt;
+            SCFont fnt;
             byte[] pal;
 
             /// <summary>
@@ -84,7 +84,7 @@ namespace SCSharp.UI
             /// <param name="loc"></param>
             /// <param name="font"></param>
             /// <param name="palette"></param>
-            public MarkupPage(PageLocation loc, Fnt font, byte[] palette)
+            public MarkupPage(PageLocation loc, SCFont font, byte[] palette)
             {
                 location = loc;
                 lines = new List<string>();
@@ -118,10 +118,14 @@ namespace SCSharp.UI
                 lineSurfaces = new List<Surface>();
                 foreach (string l in lines)
                 {
-                    if (l.Trim() == "")
+                    if (l.Trim().Length != 0)
+                    {
                         lineSurfaces.Add(null);
+                    }
                     else
+                    {
                         lineSurfaces.Add(GuiUtil.ComposeText(l, fnt, pal));
+                    }
                 }
             }
 
@@ -156,7 +160,9 @@ namespace SCSharp.UI
                         foreach (Surface s in lineSurfaces)
                         {
                             if (s != null)
+                            {
                                 surf.Blit(s, new Point((surf.Width - s.Width) / 2, y));
+                            }
                             y += fnt.LineSize;
                         }
                         break;
@@ -165,7 +171,9 @@ namespace SCSharp.UI
                         foreach (Surface s in lineSurfaces)
                         {
                             if (s != null)
+                            {
                                 surf.Blit(s, new Point((surf.Width - s.Width) / 2, y));
+                            }
                             y += fnt.LineSize;
                         }
                         break;
@@ -174,7 +182,9 @@ namespace SCSharp.UI
                         foreach (Surface s in lineSurfaces)
                         {
                             if (s != null)
+                            {
                                 surf.Blit(s, new Point(60, y));
+                            }
                             y += fnt.LineSize;
                         }
                         break;
@@ -183,7 +193,9 @@ namespace SCSharp.UI
                         foreach (Surface s in lineSurfaces)
                         {
                             if (s != null)
+                            {
                                 surf.Blit(s, new Point(60, y));
+                            }
                             y += fnt.LineSize;
                         }
                         break;
@@ -192,7 +204,9 @@ namespace SCSharp.UI
                         foreach (Surface s in lineSurfaces)
                         {
                             if (s != null)
+                            {
                                 surf.Blit(s, new Point(surf.Width - s.Width - 60, y));
+                            }
                             y += fnt.LineSize;
                         }
                         break;
@@ -201,7 +215,9 @@ namespace SCSharp.UI
                         foreach (Surface s in lineSurfaces)
                         {
                             if (s != null)
+                            {
                                 surf.Blit(s, new Point((surf.Width - s.Width) / 2, y));
+                            }
                             y += fnt.LineSize;
                         }
                         break;
@@ -313,6 +329,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public override void AddToPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             base.AddToPainter(painter);
             painter.Add(Layer.Background, PaintBackground);
             painter.Add(Layer.UI, PaintMarkup);
@@ -324,6 +344,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public override void RemoveFromPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             base.RemoveFromPainter(painter);
             painter.Remove(Layer.Background, PaintBackground);
             painter.Remove(Layer.UI, PaintMarkup);
@@ -345,7 +369,9 @@ namespace SCSharp.UI
         void PaintBackground(Surface surf, DateTime now)
         {
             if (currentBackground != null)
+            {
                 surf.Blit(currentBackground);
+            }
         }
 
         void PaintMarkup(Surface surf, DateTime now)
@@ -358,7 +384,9 @@ namespace SCSharp.UI
             totalElapsed += e.TicksElapsed;
 
             if (totalElapsed < millisDelay)
+            {
                 return;
+            }
 
             totalElapsed = 0;
             AdvanceToNextPage();
@@ -397,9 +425,13 @@ namespace SCSharp.UI
             while (pageEnumerator.MoveNext())
             {
                 if (pageEnumerator.Current.Background != null)
+                {
                     currentBackground = pageEnumerator.Current.Background;
+                }
                 if (pageEnumerator.Current.HasText)
+                {
                     return;
+                }
             }
 
             Console.WriteLine("finished!");

@@ -63,6 +63,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public override void AddToPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             /* XXX this should be abstracted into Game with the other mouse settings */
             Mouse.ShowCursor = false;
 
@@ -75,6 +79,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public override void RemoveFromPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             painter.Remove(Layer.Background, VideoPainter);
         }
 
@@ -113,6 +121,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void KeyboardDown(KeyboardEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (args.Key == Key.Escape
                 || args.Key == Key.Return
                 || args.Key == Key.Space)

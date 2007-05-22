@@ -30,6 +30,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using SCSharp.UI;
 
@@ -134,24 +135,24 @@ namespace SCSharp.MpqLib
         {
             this.stream = stream;
 
-            long stream_length = stream.Length;
-            byte[] section_name_buf = new byte[4];
-            string section_name;
+            //long stream_length = stream.Length;
+            byte[] sectionNameBuf = new byte[4];
+            string sectionName;
 
             sections = new Dictionary<string, SectionData>();
 
             while (true)
             {
-                stream.Read(section_name_buf, 0, 4);
+                stream.Read(sectionNameBuf, 0, 4);
 
                 SectionData sec_data = new SectionData();
 
                 sec_data.DataLength = Utilities.ReadDWord(stream);
                 sec_data.DataPosition = stream.Position;
 
-                section_name = Encoding.ASCII.GetString(section_name_buf, 0, 4);
+                sectionName = Encoding.ASCII.GetString(sectionNameBuf, 0, 4);
 
-                sections.Add(section_name, sec_data);
+                sections.Add(sectionName, sec_data);
 
                 if (stream.Position + sec_data.DataLength >= stream.Length)
                 {
@@ -211,20 +212,20 @@ namespace SCSharp.MpqLib
                 stream.Read(sec.Buffer, 0, (int)sec.DataLength);
             }
 
-            byte[] section_data = sec.Buffer;
+            byte[] sectionData = sec.Buffer;
 
             if (sectionName == "TYPE")
             {
-                scenarioType = Utilities.ReadWord(section_data, 0);
+                scenarioType = Utilities.ReadWord(sectionData, 0);
             }
             else if (sectionName == "ERA ")
             {
-                tileSet = (Tileset)Utilities.ReadWord(section_data, 0);
+                tileSet = (Tileset)Utilities.ReadWord(sectionData, 0);
             }
             else if (sectionName == "DIM ")
             {
-                width = Utilities.ReadWord(section_data, 0);
-                height = Utilities.ReadWord(section_data, 2);
+                width = Utilities.ReadWord(sectionData, 0);
+                height = Utilities.ReadWord(sectionData, 2);
             }
             else if (sectionName == "MTXM")
             {
@@ -234,7 +235,7 @@ namespace SCSharp.MpqLib
                 {
                     for (x = 0; x < width; x++)
                     {
-                        mapTiles[x, y] = Utilities.ReadWord(section_data, (y * width + x) * 2);
+                        mapTiles[x, y] = Utilities.ReadWord(sectionData, (y * width + x) * 2);
                     }
                 }
             }
@@ -248,14 +249,14 @@ namespace SCSharp.MpqLib
                 {
                     for (x = 0; x < width; x++)
                     {
-                        mapMask[x, y] = section_data[i++];
+                        mapMask[x, y] = sectionData[i++];
                     }
                 }
             }
             else if (sectionName == "SPRP")
             {
-                int nameStringIndex = Utilities.ReadWord(section_data, 0);
-                int descriptionStringIndex = Utilities.ReadWord(section_data, 2);
+                int nameStringIndex = Utilities.ReadWord(sectionData, 0);
+                int descriptionStringIndex = Utilities.ReadWord(sectionData, 2);
 
                 Console.WriteLine("mapName = {0}", nameStringIndex);
                 Console.WriteLine("mapDescription = {0}", descriptionStringIndex);
@@ -264,7 +265,7 @@ namespace SCSharp.MpqLib
             }
             else if (sectionName == "STR ")
             {
-                ReadStrings(section_data);
+                ReadStrings(sectionData);
             }
             else if (sectionName == "OWNR")
             {
@@ -278,11 +279,11 @@ namespace SCSharp.MpqLib
                        06 - Human
                        07 - Neutral
                     */
-                    if (section_data[i] == 0x05)
+                    if (sectionData[i] == 0x05)
                     {
                         numComputerSlots++;
                     }
-                    else if (section_data[i] == 0x06)
+                    else if (sectionData[i] == 0x06)
                     {
                         numHumanSlots++;
                     }
@@ -303,7 +304,7 @@ namespace SCSharp.MpqLib
                 numPlayers = 0;
                 for (int i = 0; i < 12; i++)
                 {
-                    if (section_data[i] == 0x05) /* user select */
+                    if (sectionData[i] == 0x05) /* user select */
                     {
                         numPlayers++;
                     }
@@ -311,21 +312,21 @@ namespace SCSharp.MpqLib
             }
             else if (sectionName == "UNIT")
             {
-                ReadUnits(section_data);
+                ReadUnits(sectionData);
             }
             else if (sectionName == "MBRF")
             {
                 briefingData = new TriggerData();
-                briefingData.Parse(section_data, true);
+                briefingData.Parse(sectionData);
             }
             //else
             //Console.WriteLine ("Unhandled Chk section type {0}, length {1}", section_name, section_data.Length);
         }
 
-        List<UnitInfo> units;
+        Collection<UnitInfo> units;
         void ReadUnits(byte[] data)
         {
-            units = new List<UnitInfo>();
+            units = new Collection<UnitInfo>();
 
             MemoryStream stream = new MemoryStream(data);
             Console.WriteLine("unit section data = {0} bytes long", data.Length);
@@ -361,8 +362,8 @@ namespace SCSharp.MpqLib
 
                 UnitInfo info = new UnitInfo();
                 info.UnitId = type;
-                info.X = x;
-                info.Y = y;
+                info.PositionX = x;
+                info.PositionY = y;
                 info.Player = player;
 
                 units.Add(info);
@@ -566,7 +567,7 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        public List<UnitInfo> Units
+        public Collection<UnitInfo> Units
         {
             get
             {

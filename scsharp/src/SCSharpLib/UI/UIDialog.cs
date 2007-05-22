@@ -42,7 +42,7 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public abstract class UIDialog : UIScreen
+    public abstract class UIDialog : UIScreen, IDisposable 
     {
         //protected UIScreen parent;
         bool dimScreen;
@@ -75,6 +75,11 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public override void AddToPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
+
             this.Painter = painter;
 
             if (Background != null)
@@ -99,6 +104,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public override void RemoveFromPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             if (Background != null)
             {
                 painter.Remove(Layer.DialogBackground, BackgroundPainter);
@@ -189,6 +198,10 @@ namespace SCSharp.UI
         /// <param name="dialog"></param>
         public override void ShowDialog(UIDialog dialog)
         {
+            if (dialog == null)
+            {
+                throw new ArgumentNullException("dialog");
+            }
             Console.WriteLine("showing {0}", dialog);
 
             if (this.Dialog != null)
@@ -220,6 +233,18 @@ namespace SCSharp.UI
             Dialog = null;
             AddToPainter(rememberedPainter);
         }
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #endregion
     }
 
     /// <summary>

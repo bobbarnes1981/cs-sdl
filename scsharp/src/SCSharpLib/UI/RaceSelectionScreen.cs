@@ -159,7 +159,7 @@ namespace SCSharp.UI
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
                 delegate()
                 {
-                    Game.Instance.SwitchToScreen(UIScreenType.Login);
+                    Game.Instance.SwitchToScreen(UIScreenType.LogOn);
                 };
 
             Elements[LOADSAVED_ELEMENT_INDEX].Activate +=

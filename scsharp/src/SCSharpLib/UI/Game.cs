@@ -54,7 +54,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        Login,
+        LogOn,
         /// <summary>
         ///
         /// </summary>
@@ -495,6 +495,10 @@ namespace SCSharp.UI
         /// <param name="screen"></param>
         public void SwitchToScreen(UIScreen screen)
         {
+            if (screen == null)
+            {
+                throw new ArgumentNullException("screen");
+            }
             screen.Ready += SwitchReady;
             screenToSwitchTo = screen;
             screenToSwitchTo.Load();
@@ -515,8 +519,8 @@ namespace SCSharp.UI
                     case UIScreenType.MainMenu:
                         screens[index] = new MainMenu(installedMpq);
                         break;
-                    case UIScreenType.Login:
-                        screens[index] = new LoginScreen(playingMpq);
+                    case UIScreenType.LogOn:
+                        screens[index] = new LogOnScreen(playingMpq);
                         break;
                     case UIScreenType.Connection:
                         screens[index] = new ConnectionScreen(playingMpq);

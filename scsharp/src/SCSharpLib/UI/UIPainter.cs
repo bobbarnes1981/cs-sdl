@@ -30,6 +30,7 @@ using System;
 using System.Diagnostics;
 using System.Configuration;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 
 using SdlDotNet.Graphics;
@@ -59,13 +60,13 @@ namespace SCSharp.UI
             }
         }
 
-        List<UIElement> elements;
+        Collection<UIElement> elements;
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="elements"></param>
-        public UIPainter(List<UIElement> elements)
+        public UIPainter(Collection<UIElement> elements)
         {
             this.elements = elements;
         }
@@ -86,7 +87,7 @@ namespace SCSharp.UI
                 if (showBorders)
                 {
                     surf.Draw(new Box(new Point(e.X1, e.Y1), new Size(e.Width - 1, e.Height - 1)), e.Visible ? Color.Green : Color.Yellow);
-                    if (e.Text == "")
+                    if (e.Text.Length != 0)
                     {
                         e.Text = i.ToString();
                     }

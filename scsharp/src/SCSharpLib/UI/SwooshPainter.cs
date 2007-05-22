@@ -36,7 +36,7 @@ namespace SCSharp.UI
     /// <summary>
     /// 
     /// </summary>
-    public delegate void DoneSwooshingDelegate();
+    public delegate void DoneSwooshingCallback();
 
 #if false
 	public class SwooshPainter
