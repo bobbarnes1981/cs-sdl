@@ -192,6 +192,19 @@ namespace SdlDotNet.Windows
         }
 
         /// <summary>
+        /// Raises the MouseWheel Event
+        /// </summary>
+        /// <param name="e">Contains the event data</param>
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            if (!this.DesignMode)
+            {
+                SdlDotNet.Core.Events.Add(new MouseButtonEventArgs(SurfaceControl.ConvertMouseButtons(e), false, (short)e.X, (short)e.Y));
+            }
+            base.OnMouseWheel(e);
+        }
+
+        /// <summary>
         /// Raises the MouseMove event
         /// </summary>
         /// <param name="e">Contains the event data</param>
@@ -259,6 +272,14 @@ namespace SdlDotNet.Windows
             else if (e.Button == MouseButtons.Middle)
             {
                 return MouseButton.MiddleButton;
+            }
+            else if (e.Button == MouseButtons.XButton1)
+            {
+                return MouseButton.WheelDown;
+            }
+            else if (e.Button == MouseButtons.XButton2)
+            {
+                return MouseButton.WheelUp;
             }
             else
             {
