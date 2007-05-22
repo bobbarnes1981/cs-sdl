@@ -49,11 +49,12 @@ namespace SCSharp.UI
         /// <returns></returns>
         public static Surface RenderToSurface(Mpq mpq, Chk chk)
         {
-            ushort pixel_width, pixel_height;
+            ushort pixelWidth;
+            ushort pixelHeight;
 
-            byte[] bitmap = RenderToBitmap(mpq, chk, out pixel_width, out pixel_height);
+            byte[] bitmap = RenderToBitmap(mpq, chk, out pixelWidth, out pixelHeight);
 
-            return GuiUtil.CreateSurfaceFromRgbaData(bitmap, pixel_width, pixel_height, 32, pixel_width * 4);
+            return GuiUtil.CreateSurfaceFromRgbaData(bitmap, pixelWidth, pixelHeight, 32, pixelWidth * 4);
         }
 
         /// <summary>
@@ -67,6 +68,14 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public static byte[] RenderToBitmap(Mpq mpq, Chk chk, out ushort pixelWidth, out ushort pixelHeight)
         {
+            if (chk == null)
+            {
+                throw new ArgumentNullException("chk");
+            }
+            if (mpq == null)
+            {
+                throw new ArgumentNullException("mpq");
+            }
             ushort[,] mapTiles = chk.MapTiles;
 
             byte[] image = new byte[chk.Width * 32 * chk.Height * 32 * 4];

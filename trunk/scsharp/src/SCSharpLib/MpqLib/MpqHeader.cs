@@ -45,8 +45,8 @@ namespace SCSharp.MpqLib
         public uint HashTableSize;
         public uint BlockTableSize;
 
-        public static readonly uint MpqId = 0x1a51504d;
-        public static readonly uint Size = 32;
+        public const uint MpqId = 0x1a51504d;
+        public const uint Size = 32;
 
         public MpqHeader(BinaryReader br)
         {

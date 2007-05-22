@@ -84,7 +84,7 @@ namespace SCSharp.MpqLib
         {
             if (stream == null)
             {
-                throw new ArgumentException("stream");
+                throw new ArgumentNullException("stream");
             }
             int size = 0;
             for (int i = 0; i < NUM_FIELDS; i++)

@@ -53,7 +53,7 @@ namespace SCSharp.MpqLib
         public uint FileSize;
         public MpqFileFlags Flags;
 
-        public static readonly uint Size = 16;
+        public const uint Size = 16;
 
         public MpqBlock(BinaryReader br, uint HeaderOffset)
         {

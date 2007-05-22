@@ -89,6 +89,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void MouseButtonUp(MouseButtonEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (PointInside(args.X, args.Y))
             {
                 OnActivate();
@@ -100,7 +104,7 @@ namespace SCSharp.UI
         /// </summary>
         public override void MouseEnter()
         {
-            if (Sensitive && (Flags & ElementFlags.RespondToMouse) == ElementFlags.RespondToMouse)
+            if (Sensitive && (Flags & SCElement.RespondToMouse) == SCElement.RespondToMouse)
             {
                 /* highlight the text */
                 GuiUtil.PlaySound(Mpq, Builtins.MouseoverWav);

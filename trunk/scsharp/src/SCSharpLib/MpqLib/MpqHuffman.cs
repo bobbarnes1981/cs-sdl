@@ -38,12 +38,8 @@ namespace SCSharp.MpqLib
     /// <summary>
     /// A decompressor for MPQ's huffman compression
     /// </summary>
-    public class MpqHuffman
+    public static class MpqHuffman
     {
-        private MpqHuffman()
-        {
-        }
-
         private static readonly byte[][] sPrime =
 		{
 			// Compression type 0
@@ -181,7 +177,7 @@ namespace SCSharp.MpqLib
         {
             if (data == null)
             {
-                throw new ArgumentException("data");
+                throw new ArgumentNullException("data");
             }
             int comptype = data.ReadByte();
 
@@ -255,12 +251,12 @@ namespace SCSharp.MpqLib
         private static LinkedNode BuildTree(LinkedNode tail)
         {
             LinkedNode current = tail;
-            LinkedNode head = null;
+            //LinkedNode head = null;
 
             while (current != null)
             {
                 LinkedNode child0 = current;
-                LinkedNode child1 = current.Prev;
+                LinkedNode child1 = current.Previous;
                 if (child1 == null)
                 {
                     break;
@@ -272,8 +268,8 @@ namespace SCSharp.MpqLib
                 child1.Parent = parent;
 
                 current.Insert(parent);
-                head = current;
-                current = current.Prev.Prev;
+                //head = current;
+                current = current.Previous.Previous;
             }
             return current;
         }
@@ -281,7 +277,7 @@ namespace SCSharp.MpqLib
         private static LinkedNode InsertNode(LinkedNode tail, int decomp)
         {
             LinkedNode parent = tail;
-            LinkedNode result = tail.Prev; // This will be the new tail after the tree is updated
+            LinkedNode result = tail.Previous; // This will be the new tail after the tree is updated
 
             LinkedNode temp = new LinkedNode(parent.DecompressedValue, parent.Weight);
             temp.Parent = parent;
@@ -292,8 +288,8 @@ namespace SCSharp.MpqLib
             parent.Child0 = newnode;
 
             tail.Next = temp;
-            temp.Prev = tail;
-            newnode.Prev = temp;
+            temp.Previous = tail;
+            newnode.Previous = temp;
             temp.Next = newnode;
 
             AdjustTree(newnode);
@@ -318,7 +314,7 @@ namespace SCSharp.MpqLib
                 insertpoint = current;
                 while (true)
                 {
-                    prev = insertpoint.Prev;
+                    prev = insertpoint.Previous;
                     if (prev == null) break;
                     if (prev.Weight >= current.Weight) break;
                     insertpoint = prev;
@@ -334,30 +330,30 @@ namespace SCSharp.MpqLib
                 // The following code basicly swaps insertpoint with current
 
                 // remove insert point
-                if (insertpoint.Prev != null)
+                if (insertpoint.Previous != null)
                 {
-                    insertpoint.Prev.Next = insertpoint.Next;
+                    insertpoint.Previous.Next = insertpoint.Next;
                 }
-                insertpoint.Next.Prev = insertpoint.Prev;
+                insertpoint.Next.Previous = insertpoint.Previous;
 
                 // Insert insertpoint after current
                 insertpoint.Next = current.Next;
-                insertpoint.Prev = current;
+                insertpoint.Previous = current;
                 if (current.Next != null)
                 {
-                    current.Next.Prev = insertpoint;
+                    current.Next.Previous = insertpoint;
                 }
                 current.Next = insertpoint;
 
                 // remove current
-                current.Prev.Next = current.Next;
-                current.Next.Prev = current.Prev;
+                current.Previous.Next = current.Next;
+                current.Next.Previous = current.Previous;
 
                 // insert current after prev
                 LinkedNode temp = prev.Next;
                 current.Next = temp;
-                current.Prev = prev;
-                temp.Prev = current;
+                current.Previous = prev;
+                temp.Previous = current;
                 prev.Next = current;
 
                 // Set up parent/child links

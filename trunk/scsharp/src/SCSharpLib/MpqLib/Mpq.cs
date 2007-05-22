@@ -66,32 +66,33 @@ namespace SCSharp.MpqLib
         {
             if (path == null)
             {
-                throw new ArgumentException("path");
+                throw new ArgumentNullException("path");
             }
-            string ext = Path.GetExtension(path);
-            if (ext.ToLower() == ".tbl")
+            string pathLower = path.ToLower();
+            string ext = Path.GetExtension(path).ToLower();
+            if (ext == ".tbl")
             {
                 return typeof(Tbl);
             }
-            else if (ext.ToLower() == ".fnt")
+            else if (ext == ".fnt")
             {
-                return typeof(Fnt);
+                return typeof(SCFont);
             }
-            else if (ext.ToLower() == ".got")
+            else if (ext == ".got")
             {
                 return typeof(Got);
             }
-            else if (ext.ToLower() == ".grp")
+            else if (ext == ".grp")
             {
                 return typeof(Grp);
             }
-            else if (ext.ToLower() == ".bin")
+            else if (ext == ".bin")
             {
-                if (path.ToLower().EndsWith("aiscript.bin")) /* must come before iscript.bin */
+                if (pathLower.EndsWith("aiscript.bin")) /* must come before iscript.bin */
                 {
                     return null;
                 }
-                else if (path.ToLower().EndsWith("iscript.bin"))
+                else if (pathLower.EndsWith("iscript.bin"))
                 {
                     return typeof(ScriptBin);
                 }
@@ -100,38 +101,38 @@ namespace SCSharp.MpqLib
                     return typeof(Bin);
                 }
             }
-            else if (ext.ToLower() == ".chk")
+            else if (ext == ".chk")
             {
                 return typeof(Chk);
             }
-            else if (ext.ToLower() == ".dat")
+            else if (ext == ".dat")
             {
-                if (path.ToLower().EndsWith("flingy.dat"))
+                if (pathLower.EndsWith("flingy.dat"))
                 {
                     return typeof(FlingyDat);
                 }
-                else if (path.ToLower().EndsWith("images.dat"))
+                else if (pathLower.EndsWith("images.dat"))
                 {
                     return typeof(ImagesDat);
                 }
-                else if (path.ToLower().EndsWith("sfxdata.dat"))
+                else if (pathLower.EndsWith("sfxdata.dat"))
                 {
                     return typeof(SfxDataDat);
                 }
-                else if (path.ToLower().EndsWith("sprites.dat"))
+                else if (pathLower.EndsWith("sprites.dat"))
                 {
                     return typeof(SpritesDat);
                 }
-                else if (path.ToLower().EndsWith("units.dat"))
+                else if (pathLower.EndsWith("units.dat"))
                 {
                     return typeof(UnitsDat);
                 }
-                else if (path.ToLower().EndsWith("mapdata.dat"))
+                else if (pathLower.EndsWith("mapdata.dat"))
                 {
                     return typeof(MapDataDat);
                 }
             }
-            else if (ext.ToLower() == ".spk")
+            else if (ext == ".spk")
             {
                 return typeof(Spk);
             }

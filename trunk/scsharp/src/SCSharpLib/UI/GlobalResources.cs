@@ -44,8 +44,8 @@ namespace SCSharp.UI
         Mpq stardatMpq;
         Mpq broodatMpq;
 
-        Resources starcraftResources;
-        Resources broodwarResources;
+        SCResources starcraftResources;
+        SCResources broodwarResources;
 
         static GlobalResources instance;
 
@@ -72,8 +72,8 @@ namespace SCSharp.UI
             this.stardatMpq = stardatMpq;
             this.broodatMpq = broodatMpq;
 
-            starcraftResources = new Resources();
-            broodwarResources = new Resources();
+            starcraftResources = new SCResources();
+            broodwarResources = new SCResources();
 
             instance = this;
         }
@@ -97,7 +97,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        Resources Resources
+        SCResources Resources
         {
             get { return Game.Instance.PlayingBroodWar ? broodwarResources : starcraftResources; }
         }
@@ -201,7 +201,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public Resources StarDat
+        public SCResources StarDat
         {
             get { return starcraftResources; }
         }
@@ -209,7 +209,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public Resources BrooDat
+        public SCResources BrooDat
         {
             get { return broodwarResources; }
         }

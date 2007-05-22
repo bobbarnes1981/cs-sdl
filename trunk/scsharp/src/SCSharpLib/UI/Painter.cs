@@ -109,14 +109,14 @@ namespace SCSharp.UI
     /// </summary>
     /// <param name="surf"></param>
     /// <param name="now"></param>
-    public delegate void PainterDelegate(Surface surf, DateTime now);
+    public delegate void PainterCallback(Surface surf, DateTime now);
 
     /// <summary>
     /// 
     /// </summary>
     public class Painter
     {
-        List<PainterDelegate>[] layers;
+        List<PainterCallback>[] layers;
         int millis;
         int total_elapsed;
 
@@ -129,8 +129,8 @@ namespace SCSharp.UI
 
         bool fullscreen;
 
-        List<PainterDelegate> pendingRemoves;
-        List<PainterDelegate> pendingAdds;
+        List<PainterCallback> pendingRemoves;
+        List<PainterCallback> pendingAdds;
         bool pendingClear;
 
         /// <summary>
@@ -156,14 +156,14 @@ namespace SCSharp.UI
             Fullscreen = fullscreen;
 
             /* init our list of painter delegates */
-            layers = new List<PainterDelegate>[(int)Layer.Count];
+            layers = new List<PainterCallback>[(int)Layer.Count];
             for (Layer i = Layer.Background; i < Layer.Count; i++)
             {
-                layers[(int)i] = new List<PainterDelegate>();
+                layers[(int)i] = new List<PainterCallback>();
             }
 
-            pendingRemoves = new List<PainterDelegate>();
-            pendingAdds = new List<PainterDelegate>();
+            pendingRemoves = new List<PainterCallback>();
+            pendingAdds = new List<PainterCallback>();
 
             /* and set ourselves up to invalidate at a regular interval*/
             Events.Tick += new EventHandler<TickEventArgs>(Tick);
@@ -184,14 +184,14 @@ namespace SCSharp.UI
             backbuffer.Fill(new Rectangle(new Point(0, 0), backbuffer.Size), Color.Black);
 
             /* init our list of painter delegates */
-            layers = new List<PainterDelegate>[(int)Layer.Count];
+            layers = new List<PainterCallback>[(int)Layer.Count];
             for (Layer i = Layer.Background; i < Layer.Count; i++)
             {
-                layers[(int)i] = new List<PainterDelegate>();
+                layers[(int)i] = new List<PainterCallback>();
             }
 
-            pendingRemoves = new List<PainterDelegate>();
-            pendingAdds = new List<PainterDelegate>();
+            pendingRemoves = new List<PainterCallback>();
+            pendingAdds = new List<PainterCallback>();
 
             /* and set ourselves up to invalidate at a regular interval*/
             Events.Tick += new EventHandler<TickEventArgs>(Tick);
@@ -222,7 +222,7 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="layer"></param>
         /// <param name="painter"></param>
-        public void Add(Layer layer, PainterDelegate painter)
+        public void Add(Layer layer, PainterCallback painter)
         {
             if (layer == paintingLayer)
             {
@@ -239,7 +239,7 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="layer"></param>
         /// <param name="painter"></param>
-        public void Remove(Layer layer, PainterDelegate painter)
+        public void Remove(Layer layer, PainterCallback painter)
         {
             if (layer == paintingLayer)
             {
@@ -313,9 +313,9 @@ namespace SCSharp.UI
             paintingSurface.Update();
         }
 
-        void DrawLayer(List<PainterDelegate> painters)
+        void DrawLayer(List<PainterCallback> painters)
         {
-            foreach (PainterDelegate p in painters)
+            foreach (PainterCallback p in painters)
             {
                 p(backbuffer, now);
             }

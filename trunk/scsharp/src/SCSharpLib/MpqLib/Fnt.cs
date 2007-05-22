@@ -38,14 +38,14 @@ namespace SCSharp.MpqLib
     /// <summary>
     /// 
     /// </summary>
-    public class Fnt : IMpqResource
+    public class SCFont : IMpqResource
     {
         Stream stream;
 
         /// <summary>
         /// 
         /// </summary>
-        public Fnt()
+        public SCFont()
         {
         }
 
@@ -93,14 +93,14 @@ namespace SCSharp.MpqLib
             }
         }
 
-        Glyph GetGlyph(int c)
+        Glyph GetGlyph(int glyphID)
         {
-            if (glyphs.ContainsKey(c))
+            if (glyphs.ContainsKey(glyphID))
             {
-                return glyphs[c];
+                return glyphs[glyphID];
             }
 
-            stream.Position = offsets[(uint)c];
+            stream.Position = offsets[(uint)glyphID];
 
             byte letterWidth = Utilities.ReadByte(stream);
             byte letterHeight = Utilities.ReadByte(stream);
@@ -146,14 +146,14 @@ namespace SCSharp.MpqLib
                 }
             }
         done:
-            glyphs.Add(c,
+            glyphs.Add(glyphID,
                     new Glyph(letterWidth,
                            letterHeight,
                            letterXOffset,
                            letterYOffset,
                            bitmap));
 
-            return glyphs[c];
+            return glyphs[glyphID];
         }
 
         /// <summary>
@@ -228,10 +228,10 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="c"></param>
-        public void DumpGlyph(int c)
+        /// <param name="glyphID"></param>
+        public void DumpGlyph(int glyphID)
         {
-            Glyph g = GetGlyph(c);
+            Glyph g = GetGlyph(glyphID);
             byte[,] bitmap = g.Bitmap;
             for (int y = g.Height - 1; y >= 0; y--)
             {

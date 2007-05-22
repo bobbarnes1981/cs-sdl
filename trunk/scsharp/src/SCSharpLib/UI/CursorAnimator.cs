@@ -63,6 +63,11 @@ namespace SCSharp.UI
         /// <param name="palette"></param>
         public CursorAnimator(Grp grp, byte[] palette)
         {
+            if (grp == null)
+            {
+                throw new ArgumentNullException("grp");
+            }
+
             this.grp = grp;
             this.x = 100;
             this.y = 100;
@@ -137,6 +142,11 @@ namespace SCSharp.UI
         /// <param name="now"></param>
         public void Paint(Surface surf, DateTime now)
         {
+            if (surf == null)
+            {
+                throw new ArgumentNullException("surf");
+            }
+
             deltaToChange -= now - last;
             if (deltaToChange < TimeSpan.Zero)
             {
@@ -145,8 +155,8 @@ namespace SCSharp.UI
             }
             last = now;
 
-            int draw_x = (int)(x - hotX);
-            int draw_y = (int)(y - hotY);
+            int drawX = (int)(x - hotX);
+            int drawY = (int)(y - hotY);
 
             if (currentFrame == grp.FrameCount)
             {
@@ -161,7 +171,7 @@ namespace SCSharp.UI
                                                true);
             }
 
-            surf.Blit(surfaces[currentFrame], new Point(draw_x, draw_y));
+            surf.Blit(surfaces[currentFrame], new Point(drawX, drawY));
         }
     }
 }

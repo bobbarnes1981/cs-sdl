@@ -62,7 +62,7 @@ namespace SCSharp.UI
         {
             Surface surface;
 
-            if ((Flags & ElementFlags.Translucent) == ElementFlags.Translucent)
+            if ((Flags & SCElement.Translucent) == SCElement.Translucent)
             {
                 surface = GuiUtil.SurfaceFromStream((Stream)Mpq.GetResource(Text),
                 254, 0);

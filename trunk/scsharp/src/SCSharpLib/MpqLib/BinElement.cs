@@ -39,7 +39,7 @@ namespace SCSharp.MpqLib
     /// 
     /// </summary>
     [Flags]
-    public enum ElementFlags
+    public enum SCElement
     {
         /// <summary>
         /// 
@@ -72,7 +72,7 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        NoSoundOnMouseOvr = 0x00000080,
+        NoSoundOnMouseOver = 0x00000080,
         /// <summary>
         /// 
         /// </summary>
@@ -128,7 +128,7 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        CenterTextHoriz = 0x00200000,
+        CenterTextHorizontally = 0x00200000,
         /// <summary>
         /// 
         /// </summary>
@@ -136,7 +136,7 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        CenterTextVert = 0x00800000,
+        CenterTextVertically = 0x00800000,
         /// <summary>
         /// 
         /// </summary>
@@ -335,12 +335,12 @@ namespace SCSharp.MpqLib
             set { textOffset = value; }
         }
 
-        private ElementFlags flags;
+        private SCElement flags;
 
         /// <summary>
         /// 
         /// </summary>
-        public ElementFlags Flags
+        public SCElement Flags
         {
             get { return flags; }
             set { flags = value; }
@@ -370,38 +370,38 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="buf"></param>
+        /// <param name="buffer"></param>
         /// <param name="position"></param>
         /// <param name="streamLength"></param>
         [CLSCompliant(false)]
-        public BinElement(byte[] buf, int position, uint streamLength)
+        public BinElement(byte[] buffer, int position, uint streamLength)
         {
-            if (buf == null)
+            if (buffer == null)
             {
-                throw new ArgumentException("buf");
+                throw new ArgumentNullException("buf");
             }
-            x1 = Utilities.ReadWord(buf, position + 4);
-            y1 = Utilities.ReadWord(buf, position + 6);
-            x2 = Utilities.ReadWord(buf, position + 8);
-            y2 = Utilities.ReadWord(buf, position + 10);
-            width = Utilities.ReadWord(buf, position + 12);
-            height = Utilities.ReadWord(buf, position + 14);
-            textOffset = Utilities.ReadDWord(buf, position + 20);
+            x1 = Utilities.ReadWord(buffer, position + 4);
+            y1 = Utilities.ReadWord(buffer, position + 6);
+            x2 = Utilities.ReadWord(buffer, position + 8);
+            y2 = Utilities.ReadWord(buffer, position + 10);
+            width = Utilities.ReadWord(buffer, position + 12);
+            height = Utilities.ReadWord(buffer, position + 14);
+            textOffset = Utilities.ReadDWord(buffer, position + 20);
 
-            flags = (ElementFlags)Utilities.ReadDWord(buf, position + 24);
-            type = (ElementType)buf[position + 34];
+            flags = (SCElement)Utilities.ReadDWord(buffer, position + 24);
+            type = (ElementType)buffer[position + 34];
 
             if (textOffset < streamLength)
             {
                 uint textLength = 0;
-                while (buf[textOffset + textLength] != 0)
+                while (buffer[textOffset + textLength] != 0)
                 {
                     textLength++;
                 }
 
-                text = Encoding.ASCII.GetString(buf, (int)textOffset, (int)textLength);
+                text = Encoding.ASCII.GetString(buffer, (int)textOffset, (int)textLength);
 
-                if ((flags & ElementFlags.HasHotkey) == ElementFlags.HasHotkey)
+                if ((flags & SCElement.HasHotkey) == SCElement.HasHotkey)
                 {
                     hotkey = Encoding.ASCII.GetBytes(new char[] { text[0] })[0];
                     text = text.Substring(1);
@@ -419,7 +419,7 @@ namespace SCSharp.MpqLib
         public void DumpFlags()
         {
             Console.Write("Flags: ");
-            foreach (ElementFlags f in Enum.GetValues(typeof(ElementFlags)))
+            foreach (SCElement f in Enum.GetValues(typeof(SCElement)))
             {
                 if ((flags & f) == f)
                 {

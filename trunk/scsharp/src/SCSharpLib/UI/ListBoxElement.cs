@@ -62,7 +62,7 @@ namespace SCSharp.UI
             items = new List<string>();
 
             numVisible = Height / Font.LineSize;
-            firstVisible = 0;
+            //firstVisible = 0;
         }
 
         /// <summary>

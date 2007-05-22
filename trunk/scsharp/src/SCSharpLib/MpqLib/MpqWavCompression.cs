@@ -37,11 +37,8 @@ namespace SCSharp.MpqLib
     /// <summary>
     /// An IMA ADPCM decompress for Mpq files
     /// </summary>
-    public class MpqWavCompression
+    public static class MpqWavCompression
     {
-        private MpqWavCompression()
-        { }
-
         private static readonly int[] sLookup =
 		{
 			0x0007, 0x0008, 0x0009, 0x000A, 0x000B, 0x000C, 0x000D, 0x000E,
@@ -74,6 +71,10 @@ namespace SCSharp.MpqLib
         /// <returns></returns>
         public static byte[] Decompress(Stream data, int channelCount)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException("data");
+            }
             int[] Array1 = new int[] { 0x2c, 0x2c };
             int[] Array2 = new int[channelCount];
 

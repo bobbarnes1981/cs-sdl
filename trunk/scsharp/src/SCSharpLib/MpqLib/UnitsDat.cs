@@ -90,7 +90,7 @@ namespace SCSharp.MpqLib
         {
             if (stream == null)
             {
-                throw new ArgumentException("stream");
+                throw new ArgumentNullException("stream");
             }
             buf = new byte[(int)stream.Length];
 
@@ -178,7 +178,7 @@ namespace SCSharp.MpqLib
         /// <param name="unitId"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        public uint GetHitpoints(int unitId)
+        public uint GetHitPoints(int unitId)
         {
             return Utilities.ReadWord(buf, hitpoint_offset + unitId * 2);
         }

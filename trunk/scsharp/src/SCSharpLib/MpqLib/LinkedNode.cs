@@ -86,7 +86,7 @@ namespace SCSharp.MpqLib
         /// 
         /// </summary>
         public LinkedNode Child1
-        { get { return child0.prev; } }
+        { get { return child0.previous; } }
 
         private LinkedNode next;
 
@@ -99,25 +99,25 @@ namespace SCSharp.MpqLib
             set { next = value; }
         }
 
-        private LinkedNode prev;
+        private LinkedNode previous;
 
         /// <summary>
         /// 
         /// </summary>
-        public LinkedNode Prev
+        public LinkedNode Previous
         {
-            get { return prev; }
-            set { prev = value; }
+            get { return previous; }
+            set { previous = value; }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="decompVal"></param>
+        /// <param name="decompressedValue"></param>
         /// <param name="weight"></param>
-        public LinkedNode(int decompVal, int weight)
+        public LinkedNode(int decompressedValue, int weight)
         {
-            decompressedValue = decompVal;
+            this.decompressedValue = decompressedValue;
             this.weight = weight;
         }
 
@@ -132,7 +132,7 @@ namespace SCSharp.MpqLib
         {
             if (other == null)
             {
-                throw new ArgumentException("other");
+                throw new ArgumentNullException("other");
             }
             // 'Next' should have a lower weight
             // we should return the lower weight
@@ -141,25 +141,25 @@ namespace SCSharp.MpqLib
                 // insert before
                 if (next != null)
                 {
-                    next.prev = other;
+                    next.previous = other;
                     other.next = next;
                 }
                 next = other;
-                other.prev = this;
+                other.previous = this;
                 return other;
             }
             else
             {
-                if (prev == null)
+                if (previous == null)
                 {
                     // Insert after
-                    other.prev = null;
-                    prev = other;
+                    other.previous = null;
+                    previous = other;
                     other.next = this;
                 }
                 else
                 {
-                    prev.Insert(other);
+                    previous.Insert(other);
                 }
             }
             return this;

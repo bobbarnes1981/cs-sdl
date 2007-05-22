@@ -60,10 +60,10 @@ namespace SCSharp.UI
 #if INCLUDE_ALL_NETWORK_OPTIONS
 		const int num_choices = 4;
 #else
-        const int num_choices = 1;
+        const int numChoices = 1;
 #endif
-        const int title_startidx = 95;
-        const int description_startidx = 99;
+        const int titleStartIdx = 95;
+        const int descriptionStartIdx = 99;
 
         string[] titles;
         string[] descriptions;
@@ -82,8 +82,8 @@ namespace SCSharp.UI
                 Console.WriteLine("{0}: {1} '{2}'", i, Elements[i].Type, Elements[i].Text);
             }
 
-            titles = new string[num_choices];
-            descriptions = new string[num_choices];
+            titles = new string[numChoices];
+            descriptions = new string[numChoices];
 
 #if INCLUDE_ALL_NETWORK_OPTIONS			
 			for (int i = 0; i < num_choices; i ++) {
@@ -91,8 +91,8 @@ namespace SCSharp.UI
 				descriptions[i] = GlobalResources.Instance.GluAllTbl[ description_startidx + i ];
 			}
 #else
-            titles[0] = GlobalResources.Instance.GluAllTbl[title_startidx + 3];
-            descriptions[0] = GlobalResources.Instance.GluAllTbl[description_startidx + 3];
+            titles[0] = GlobalResources.Instance.GluAllTbl[titleStartIdx + 3];
+            descriptions[0] = GlobalResources.Instance.GluAllTbl[descriptionStartIdx + 3];
 #endif
             listbox = (ListBoxElement)Elements[LISTBOX_ELEMENT_INDEX];
 
@@ -132,6 +132,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void KeyboardDown(KeyboardEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (args.Key == Key.DownArrow
                 || args.Key == Key.UpArrow)
             {

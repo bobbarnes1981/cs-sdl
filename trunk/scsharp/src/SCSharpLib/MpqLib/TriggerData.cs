@@ -30,8 +30,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
-
-
+using System.Collections.ObjectModel;
 
 namespace SCSharp.MpqLib
 {
@@ -45,34 +44,33 @@ namespace SCSharp.MpqLib
         /// </summary>
         public TriggerData()
         {
-            triggers = new List<Trigger>();
+            triggers = new Collection<Trigger>();
         }
+
+        //public void Parse(byte[] data, bool briefing)
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="data"></param>
-        /// <param name="briefing"></param>
-        public void Parse(byte[] data, bool briefing)
+        public void Parse(byte[] data)
         {
             int offset = 0;
 
             while (offset < data.Length)
             {
                 Trigger t = new Trigger();
-
                 t.Parse(data, ref offset);
-
                 triggers.Add(t);
             }
         }
 
-        List<Trigger> triggers;
+        Collection<Trigger> triggers;
 
         /// <summary>
         /// 
         /// </summary>
-        public List<Trigger> Triggers
+        public Collection<Trigger> Triggers
         {
             get { return triggers; }
         }

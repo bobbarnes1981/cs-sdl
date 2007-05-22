@@ -63,6 +63,10 @@ namespace SCSharp.UI
         public BriefingRunner(ReadyRoomScreen screen, Chk scenario,
                        string scenarioPrefix)
         {
+            if (scenario == null)
+            {
+                throw new ArgumentNullException("scenario");
+            }
             this.screen = screen;
             this.scenario = scenario;
             this.prefix = scenarioPrefix;

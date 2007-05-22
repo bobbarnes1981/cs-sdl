@@ -40,13 +40,13 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public class LoginScreen : UIScreen
+    public class LogOnScreen : UIScreen, IDisposable
     {
         /// <summary>
         ///
         /// </summary>
         /// <param name="mpq"></param>
-        public LoginScreen(Mpq mpq)
+        public LogOnScreen(Mpq mpq)
             : base(mpq, "glue\\PalNl", Builtins.GluLoginBin)
         {
         }
@@ -161,6 +161,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public override void KeyboardDown(KeyboardEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (args.Key == Key.DownArrow
             || args.Key == Key.UpArrow)
             {
@@ -178,5 +182,17 @@ namespace SCSharp.UI
             GlobalResources.Instance.GluAllTbl.Strings[24]);
             d.ShowDialog(okd);
         }
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #endregion
     }
 }

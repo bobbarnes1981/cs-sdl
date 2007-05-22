@@ -65,7 +65,7 @@ static string str3 = "1234567890!@#$%^&*()`~-_=+[]{}\\|;:'\",.<>/?";
             mpq.Add(new MpqArchive("C:\\data\\SCSharpData\\SC\\install.exe"));
             mpq.Add(new MpqArchive("C:\\data\\SCSharpData\\StarDat.mpq"));
 
-            Fnt fnt = (Fnt)mpq.GetResource("files\\font\\font16.fnt");
+            SCFont fnt = (SCFont)mpq.GetResource("files\\font\\font16.fnt");
             Console.WriteLine("loading font palette");
             Stream palStream = (Stream)mpq.GetResource("glue\\Palmm\\tFont.pcx");
             Pcx pcx1 = new Pcx();

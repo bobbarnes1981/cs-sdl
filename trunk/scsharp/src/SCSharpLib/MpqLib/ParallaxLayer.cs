@@ -45,10 +45,10 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="num_objects"></param>
-        public ParallaxLayer(int num_objects)
+        /// <param name="numberOfObjects"></param>
+        public ParallaxLayer(int numberOfObjects)
         {
-            objects = new ParallaxObject[num_objects];
+            objects = new ParallaxObject[numberOfObjects];
         }
 
         /// <summary>

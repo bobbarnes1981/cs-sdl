@@ -68,7 +68,7 @@ namespace SCSharp.UI
         ushort scriptEntryOffset;
 
         int currentFrame = -1;
-        int facing = 0;
+        int facing;
 
         bool trace;
 
@@ -76,10 +76,10 @@ namespace SCSharp.UI
 
         Mpq mpq;
 
-        int x;
-        int y;
+        //int x;
+        //int y;
 
-        Sprite parent_sprite;
+        Sprite parentSprite;
 
         static Sprite()
         {
@@ -106,6 +106,10 @@ namespace SCSharp.UI
         /// <param name="y"></param>
         public Sprite(Mpq mpq, int spriteEntry, byte[] palette, int x, int y)
         {
+            if (mpq == null)
+            {
+                throw new ArgumentNullException("mpq");
+            }
             this.mpq = mpq;
             this.palette = palette;
 
@@ -131,7 +135,8 @@ namespace SCSharp.UI
                 Console.WriteLine("invalid script_entry_offset");
             }
 
-            SetPosition(x, y);
+            Position = new Point(x, y);
+            //SetPosition(x, y);
         }
 
         /// <summary>
@@ -143,14 +148,18 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public Sprite(Sprite parentSprite, ushort imagesEntry, byte[] palette)
         {
-            this.parent_sprite = parentSprite;
+            if (parentSprite == null)
+            {
+                throw new ArgumentNullException("parentSprite");
+            }
+            this.parentSprite = parentSprite;
             this.mpq = parentSprite.mpq;
             this.palette = palette;
             this.imagesEntry = imagesEntry;
 
-            ushort grp_index = GlobalResources.Instance.ImagesDat.GetGrpIndex(imagesEntry);
+            ushort grpIndex = GlobalResources.Instance.ImagesDat.GetGrpIndex(imagesEntry);
 
-            grpPath = GlobalResources.Instance.ImagesTbl[grp_index - 1];
+            grpPath = GlobalResources.Instance.ImagesTbl[grpIndex - 1];
 
             grp = (Grp)mpq.GetResource("unit\\" + grpPath);
 
@@ -164,9 +173,11 @@ namespace SCSharp.UI
                 Console.WriteLine("invalid script_entry_offset");
             }
 
-            int x, y;
-            parentSprite.GetPosition(out x, out y);
-            SetPosition(x, y);
+            //int x, y;
+
+            //parentSprite.GetPosition(out x, out y);
+            this.Position = parentSprite.Position;
+            //SetPosition(x, y);
         }
 
         /* IScript opcodes */
@@ -279,42 +290,69 @@ namespace SCSharp.UI
             get { return currentFrame; }
         }
 
+        Point position = new Point();
+
         /// <summary>
-        ///
+        /// 
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void SetPosition(int x, int y)
+        public Point Position
         {
-            this.x = x;
-            this.y = y;
+            get { return position; }
+            set { position = value; }
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="xo"></param>
-        /// <param name="yo"></param>
-        public void GetPosition(out int xo, out int yo)
-        {
-            xo = this.x;
-            yo = this.y;
-        }
+        ///// <summary>
+        /////
+        ///// </summary>
+        ///// <param name="x"></param>
+        ///// <param name="y"></param>
+        //public void SetPosition(int x, int y)
+        //{
+        //    this.x = x;
+        //    this.y = y;
+        //}
+
+        ///// <summary>
+        /////
+        ///// </summary>
+        ///// <param name="xo"></param>
+        ///// <param name="yo"></param>
+        //public void GetPosition(out int xo, out int yo)
+        //{
+        //    xo = this.x;
+        //    yo = this.y;
+        //}
+
+        ///// <summary>
+        /////
+        ///// </summary>
+        ///// <param name="xo"></param>
+        ///// <param name="yo"></param>
+        //public void GetTopLeftPosition(out int xo, out int yo)
+        //{
+        //    xo = this.x;
+        //    yo = this.y;
+
+        //    if (spriteSurface != null)
+        //    {
+        //        xo -= spriteSurface.Width / 2;
+        //        yo -= spriteSurface.Height / 2;
+        //    }
+        //}
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
-        /// <param name="xo"></param>
-        /// <param name="yo"></param>
-        public void GetTopLeftPosition(out int xo, out int yo)
+        public Point TopLeftPosition
         {
-            xo = this.x;
-            yo = this.y;
-
-            if (spriteSurface != null)
+            get
             {
-                xo -= spriteSurface.Width / 2;
-                yo -= spriteSurface.Height / 2;
+                Point point = new Point(position.X, position.Y);
+                if (spriteSurface != null)
+                {
+                    point =  new Point(point.X - (spriteSurface.Width / 2), point.Y - (spriteSurface.Height / 2));
+                }
+                return point;
             }
         }
 
@@ -366,16 +404,16 @@ namespace SCSharp.UI
         {
             if (spriteSurface != null)
             {
-                if (x > SpriteManager.X - spriteSurface.Width && x <= SpriteManager.X + Painter.ScreenResX
-                && y > SpriteManager.Y - spriteSurface.Height && y <= SpriteManager.Y + Painter.ScreenResY)
+                if (this.position.X > SpriteManager.X - spriteSurface.Width && this.position.X <= SpriteManager.X + Painter.ScreenResX
+                && this.position.Y > SpriteManager.Y - spriteSurface.Height && this.position.Y <= SpriteManager.Y + Painter.ScreenResY)
                 {
-                    surf.Blit(spriteSurface, new Point(x - SpriteManager.X - spriteSurface.Width / 2,
-                    y - SpriteManager.Y - spriteSurface.Height / 2));
+                    surf.Blit(spriteSurface, new Point(this.position.X - SpriteManager.X - spriteSurface.Width / 2,
+                    this.position.Y - SpriteManager.Y - spriteSurface.Height / 2));
 
                     if (showSpriteBorders)
                     {
-                        surf.Draw(new Box(new Point(x - SpriteManager.X - spriteSurface.Width / 2,
-                        y - SpriteManager.Y - spriteSurface.Height / 2),
+                        surf.Draw(new Box(new Point(this.position.X - SpriteManager.X - spriteSurface.Width / 2,
+                        this.position.Y - SpriteManager.Y - spriteSurface.Height / 2),
                         new Size(spriteSurface.Width - 1,
                         spriteSurface.Height - 1)),
                         Color.Green);
@@ -390,6 +428,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public void AddToPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             //this.painter = painter;
             painter.Add(Layer.Unit, PaintSprite);
         }
@@ -400,6 +442,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public void RemoveFromPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             painter.Add(Layer.Unit, PaintSprite);
             //this.painter = null;
         }
@@ -492,8 +538,8 @@ namespace SCSharp.UI
                     warg1 = ReadWord(ref pc);
                     warg2 = ReadWord(ref pc);
                     TraceLine("PlaceActiveUnderlay: {0} {1}", warg1, warg2);
-                    Sprite dependent_sprite = SpriteManager.CreateSprite(this, warg1, palette);
-                    dependent_sprite.RunScript(AnimationType.Init);
+                    Sprite dependentSprite = SpriteManager.CreateSprite(this, warg1, palette);
+                    dependentSprite.RunScript(AnimationType.Init);
                     break;
                 case MoveForward:
                     barg1 = ReadByte(ref pc);
@@ -566,7 +612,7 @@ namespace SCSharp.UI
                     barg1 = ReadByte(ref pc);
                     barg2 = ReadByte(ref pc);
                     TraceLine("PlaceIndependentUnderlay: {0} ({1},{2})", warg1, barg1, barg2);
-                    Sprite s = SpriteManager.CreateSprite(warg1, palette, x, y);
+                    Sprite s = SpriteManager.CreateSprite(warg1, palette, this.position.X, this.position.Y);
                     s.RunScript(AnimationType.Init);
                     break;
                 case EndAnimation:
@@ -600,8 +646,8 @@ namespace SCSharp.UI
                     TraceLine("Unknown 0x42 iscript opcode, arg {0}", warg1);
                     break;
                 case FollowFrameChange:
-                    if (parent_sprite != null)
-                        DoPlayFrame(surf, parent_sprite.CurrentFrame);
+                    if (parentSprite != null)
+                        DoPlayFrame(surf, parentSprite.CurrentFrame);
                     break;
                 case SwitchUnderlay:
                 case PlaceOverlay:

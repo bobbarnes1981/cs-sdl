@@ -136,6 +136,10 @@ namespace SCSharp.UI
         /// <param name="dest"></param>
         public void BlitSurface(Surface dest)
         {
+            if (dest == null)
+            {
+                throw new ArgumentNullException("dest");
+            }
             lock (sync)
             {
                 if (surface != null)
@@ -149,17 +153,17 @@ namespace SCSharp.UI
 
         Surface ScaleSurface(Surface surf)
         {
-            double horiz_zoom = (double)width / surf.Width;
-            double vert_zoom = (double)height / surf.Height;
+            double horizZoom = (double)width / surf.Width;
+            double vertZoom = (double)height / surf.Height;
             double zoom;
 
-            if (horiz_zoom < vert_zoom)
+            if (horizZoom < vertZoom)
             {
-                zoom = horiz_zoom;
+                zoom = horizZoom;
             }
             else
             {
-                zoom = vert_zoom;
+                zoom = vertZoom;
             }
 
             if (zoom != 1.0)

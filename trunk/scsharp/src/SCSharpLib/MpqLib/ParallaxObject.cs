@@ -38,36 +38,47 @@ namespace SCSharp.MpqLib
     /// </summary>
     public class ParallaxObject
     {
-        private readonly int x;
+        private readonly int positionX;
 
         /// <summary>
         /// 
         /// </summary>
-        public int X
+        public int PositionX
         {
-            get { return x; }
+            get { return positionX; }
         }
 
-        private readonly int y;
+        private readonly int positionY;
 
         /// <summary>
         /// 
         /// </summary>
-        public int Y
+        public int PositionY
         {
-            get { return y; }
+            get { return positionY; }
         }
 
+        private readonly int offset;
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        public int Offset
+        {
+            get { return offset; }
+        } 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="positionX"></param>
+        /// <param name="positionY"></param>
         /// <param name="offset"></param>
-        public ParallaxObject(int x, int y, int offset)
+        public ParallaxObject(int positionX, int positionY, int offset)
         {
-            this.x = x;
-            this.y = y;
+            this.positionX = positionX;
+            this.positionY = positionY;
+            this.offset = offset;
         }
     }
 }

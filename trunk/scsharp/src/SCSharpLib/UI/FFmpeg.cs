@@ -41,41 +41,41 @@ namespace SCSharp.UI
     /// </summary>
     public class FFmpeg
     {
-        static bool initSucceeded;
+        //static bool initSucceeded;
 
         static FFmpeg()
         {
             try
             {
-                ffmpeg_init();
-                initSucceeded = true;
+                //ffmpeg_init();
+                //initSucceeded = true;
             }
             catch (DllNotFoundException)
             {
-                initSucceeded = false;
+                //initSucceeded = false;
             }
         }
 
-        GCHandle handle;
-        string filename;
-        byte[] buf;
-        int width;
-        int height;
+        //GCHandle handle;
+        //string filename;
+        //byte[] buf;
+        //int width;
+        //int height;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="fileName"></param>
         /// <param name="buf"></param>
-        public FFmpeg(string filename, byte[] buf)
+        public FFmpeg(string fileName, byte[] buf)
         {
-            if (!initSucceeded)
-            {
-                throw new Exception("initialization of ffmpegglue library failed");
-            }
+            //if (!initSucceeded)
+            //{
+            //    throw new DllNotFoundException("Initialization of ffmpegglue library failed");
+            //}
 
-            this.filename = filename;
-            this.buf = buf;
+            //this.filename = fileName;
+            //this.buf = buf;
         }
 
         /// <summary>
@@ -83,8 +83,8 @@ namespace SCSharp.UI
         /// </summary>
         public void Start()
         {
-            handle = start_decoder(filename, buf, buf.Length);
-            get_dimensions(handle, out width, out height);
+            //handle = start_decoder(filename, buf, buf.Length);
+            //get_dimensions(handle, out width, out height);
         }
 
         /// <summary>
@@ -92,11 +92,11 @@ namespace SCSharp.UI
         /// </summary>
         public void Stop()
         {
-            if (handle.Target != null)
-            {
-                stop_decoder(handle);
-                handle.Target = null;
-            }
+            //if (handle.Target != null)
+            //{
+            //    //stop_decoder(handle);
+            //    handle.Target = null;
+            //}
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace SCSharp.UI
         /// <returns></returns>
         public bool GetNextFrame(byte[] buf)
         {
-            return get_next_frame(handle, buf);
+            return true; //get_next_frame(handle, buf);
         }
 
         /// <summary>
@@ -114,7 +114,10 @@ namespace SCSharp.UI
         /// </summary>
         public int Width
         {
-            get { return width; }
+            get 
+            {
+                return 0;// return width; 
+            }
         }
 
         /// <summary>
@@ -122,48 +125,51 @@ namespace SCSharp.UI
         /// </summary>
         public int Height
         {
-            get { return height; }
+            get 
+            {
+                return 0;// return height; 
+            }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [DllImport("ffmpegglue.dll")]
-        extern static void ffmpeg_init();
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //[DllImport("ffmpegglue.dll")]
+        //extern static void ffmpeg_init();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="buf"></param>
-        /// <param name="buf_size"></param>
-        /// <returns></returns>
-        [DllImport("ffmpegglue.dll")]
-        public extern static GCHandle start_decoder(string filename, byte[] buf, int buf_size);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="filename"></param>
+        ///// <param name="buf"></param>
+        ///// <param name="buf_size"></param>
+        ///// <returns></returns>
+        //[DllImport("ffmpegglue.dll")]
+        //public extern static GCHandle start_decoder(string filename, byte[] buf, int buf_size);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="handle"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        [DllImport("ffmpegglue.dll")]
-        public extern static void get_dimensions(GCHandle handle, out int width, out int height);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="handle"></param>
+        ///// <param name="width"></param>
+        ///// <param name="height"></param>
+        //[DllImport("ffmpegglue.dll")]
+        //public extern static void get_dimensions(GCHandle handle, out int width, out int height);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="handle"></param>
-        /// <param name="buf"></param>
-        /// <returns></returns>
-        [DllImport("ffmpegglue.dll")]
-        public extern static bool get_next_frame(GCHandle handle, byte[] buf);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="handle"></param>
+        ///// <param name="buf"></param>
+        ///// <returns></returns>
+        //[DllImport("ffmpegglue.dll")]
+        //public extern static bool get_next_frame(GCHandle handle, byte[] buf);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="handle"></param>
-        [DllImport("ffmpegglue.dll")]
-        public extern static void stop_decoder(GCHandle handle);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="handle"></param>
+        //[DllImport("ffmpegglue.dll")]
+        //public extern static void stop_decoder(GCHandle handle);
     }
 }

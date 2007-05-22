@@ -97,12 +97,12 @@ namespace SCSharp.UI
             {
                 if (Game.Instance.IsBroodWar)
                 {
-                    ShowGameModeDialog(UIScreenType.Login);
+                    ShowGameModeDialog(UIScreenType.LogOn);
                 }
                 else
                 {
                     GuiUtil.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
-                    Game.Instance.SwitchToScreen(UIScreenType.Login);
+                    Game.Instance.SwitchToScreen(UIScreenType.LogOn);
                 }
             };
 

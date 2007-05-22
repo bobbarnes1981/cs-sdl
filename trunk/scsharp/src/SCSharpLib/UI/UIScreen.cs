@@ -31,6 +31,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Input;
@@ -230,11 +231,11 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        private List<UIElement> elements;
+        private Collection<UIElement> elements;
         /// <summary>
         ///
         /// </summary>
-        protected List<UIElement> Elements
+        protected Collection<UIElement> Elements
         {
             get { return elements; }
         }
@@ -273,7 +274,7 @@ namespace SCSharp.UI
                 arrowgrpPath = prefix + "\\arrow.grp";
             }
 
-            backgroundTransparent = 0;
+            //backgroundTransparent = 0;
             backgroundTranslucent = 254;
         }
 
@@ -326,6 +327,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public virtual void AddToPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             this.painter = painter;
 
             painter.Add(Layer.Background, FirstPaint);
@@ -352,6 +357,10 @@ namespace SCSharp.UI
         /// <param name="painter"></param>
         public virtual void RemoveFromPainter(Painter painter)
         {
+            if (painter == null)
+            {
+                throw new ArgumentNullException("painter");
+            }
             painter.Remove(Layer.Background, FirstPaint);
 
             if (background != null)
@@ -441,6 +450,10 @@ namespace SCSharp.UI
         /// <param name="element"></param>
         public virtual void MouseEnterElement(UIElement element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException("element");
+            }
             element.MouseEnter();
         }
 
@@ -450,6 +463,10 @@ namespace SCSharp.UI
         /// <param name="element"></param>
         public virtual void MouseLeaveElement(UIElement element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException("element");
+            }
             element.MouseLeave();
         }
 
@@ -459,6 +476,10 @@ namespace SCSharp.UI
         /// <param name="element"></param>
         public virtual void ActivateElement(UIElement element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException("element");
+            }
             if (!element.Visible || !element.Sensitive)
             {
                 return;
@@ -474,6 +495,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public virtual void MouseButtonDown(MouseButtonEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (args.Button != MouseButton.PrimaryButton &&
             args.Button != MouseButton.WheelUp &&
             args.Button != MouseButton.WheelDown)
@@ -523,6 +548,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public virtual void MouseButtonUp(MouseButtonEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             if (args.Button != MouseButton.PrimaryButton &&
             args.Button != MouseButton.WheelUp &&
             args.Button != MouseButton.WheelDown)
@@ -617,6 +646,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public void HandleKeyboardUp(KeyboardEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             /* just return if the modifier keys are released */
             if (args.Key >= Key.NumLock && args.Key <= Key.Compose)
             {
@@ -646,10 +679,10 @@ namespace SCSharp.UI
                     if ((args.Key == e.Hotkey)
                     ||
                     (args.Key == Key.Return
-                    && (e.Flags & ElementFlags.DefaultButton) == ElementFlags.DefaultButton)
+                    && (e.Flags & SCElement.DefaultButton) == SCElement.DefaultButton)
                     ||
                     (args.Key == Key.Escape
-                    && (e.Flags & ElementFlags.CancelButton) == ElementFlags.CancelButton))
+                    && (e.Flags & SCElement.CancelButton) == SCElement.CancelButton))
                     {
                         ActivateElement(e);
                         return;
@@ -664,6 +697,10 @@ namespace SCSharp.UI
         /// <param name="args"></param>
         public void HandleKeyboardDown(KeyboardEventArgs args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
             /* just return if the modifier keys are pressed */
             if (args.Key >= Key.NumLock && args.Key <= Key.Compose)
             {
@@ -748,6 +785,10 @@ namespace SCSharp.UI
         /// <param name="dt"></param>
         protected void BackgroundPainter(Surface surf, DateTime dt)
         {
+            if (surf == null)
+            {
+                throw new ArgumentNullException("surf");
+            }
             surf.Blit(background,
             new Point((surf.Width - background.Width) / 2,
             (surf.Height - background.Height) / 2));
@@ -814,7 +855,7 @@ namespace SCSharp.UI
                 }
 
                 /* convert all the BinElements to UIElements for our subclasses to use */
-                elements = new List<UIElement>();
+                elements = new Collection<UIElement>();
                 foreach (BinElement el in bin.Elements)
                 {
                     // Console.WriteLine ("{0}: {1}", el.text, el.flags);

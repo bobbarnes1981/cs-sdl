@@ -50,25 +50,25 @@ namespace SCSharp.MpqLib
             get { return unitId; }
             set { unitId = value; }
         }
-        private int x;
+        private int positionX;
 
         /// <summary>
         /// 
         /// </summary>
-        public int X
+        public int PositionX
         {
-            get { return x; }
-            set { x = value; }
+            get { return positionX; }
+            set { positionX = value; }
         }
-        private int y;
+        private int positionY;
 
         /// <summary>
         /// 
         /// </summary>
-        public int Y
+        public int PositionY
         {
-            get { return y; }
-            set { y = value; }
+            get { return positionY; }
+            set { positionY = value; }
         }
         private int player;
 

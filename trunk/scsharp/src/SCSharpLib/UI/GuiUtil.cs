@@ -57,7 +57,7 @@ namespace SCSharp.UI
     public static class GuiUtil
     {
 
-        static Fnt[] fonts;
+        static SCFont[] fonts;
 
         static string[] BroodwarFonts = {
 "files\\font\\font8.fnt",
@@ -72,34 +72,43 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="mpq"></param>
         /// <returns></returns>
-        public static Fnt[] GetFonts(Mpq mpq)
+        public static SCFont[] GetFonts(Mpq mpq)
         {
             if (fonts == null)
             {
                 string[] fontList;
                 fontList = BroodwarFonts;
 
-                fonts = new Fnt[fontList.Length];
+                fonts = new SCFont[fontList.Length];
 
                 for (int i = 0; i < fonts.Length; i++)
                 {
-                    fonts[i] = (Fnt)mpq.GetResource(fontList[i]);
+                    fonts[i] = (SCFont)mpq.GetResource(fontList[i]);
                     Console.WriteLine("fonts[{0}] = {1}", i, fonts[i] == null ? "null" : "not null");
                 }
             }
             return fonts;
         }
 
+                //public static Surface RenderGlyph(Fnt font, Glyph g, byte[] palette, int offset)
+
         /// <summary>
         ///
         /// </summary>
-        /// <param name="font"></param>
         /// <param name="g"></param>
         /// <param name="palette"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        public static Surface RenderGlyph(Fnt font, Glyph g, byte[] palette, int offset)
+        public static Surface RenderGlyph(Glyph g, byte[] palette, int offset)
         {
+            if (g == null)
+            {
+                throw new ArgumentNullException("g");
+            }
+            if (palette == null)
+            {
+                throw new ArgumentNullException("palette");
+            }
             byte[] buf = new byte[g.Width * g.Height * 4];
             int i = 0;
 
@@ -143,7 +152,7 @@ namespace SCSharp.UI
         /// <param name="font"></param>
         /// <param name="palette"></param>
         /// <returns></returns>
-        public static Surface ComposeText(string text, Fnt font, byte[] palette)
+        public static Surface ComposeText(string text, SCFont font, byte[] palette)
         {
             return ComposeText(text, font, palette, -1, -1, 4);
         }
@@ -156,7 +165,7 @@ namespace SCSharp.UI
         /// <param name="palette"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        public static Surface ComposeText(string text, Fnt font, byte[] palette, int offset)
+        public static Surface ComposeText(string text, SCFont font, byte[] palette, int offset)
         {
             return ComposeText(text, font, palette, -1, -1, offset);
         }
@@ -171,11 +180,17 @@ namespace SCSharp.UI
         /// <param name="height"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        public static Surface ComposeText(string text, Fnt font, byte[] palette, int width, int height,
+        public static Surface ComposeText(string text, SCFont font, byte[] palette, int width, int height,
         int offset)
         {
+            if (text == null)
+            {
+                throw new ArgumentNullException("text");
+            }
             if (font == null)
-                Console.WriteLine("aiiiieeee");
+            {
+                throw new ArgumentNullException("font");
+            }
 
             int i;
             /* create a run of text, for now ignoring any control codes in the string */
@@ -192,52 +207,54 @@ namespace SCSharp.UI
             string rs = run.ToString();
             byte[] r = Encoding.ASCII.GetBytes(rs);
 
-            int x, y;
-            int text_height, text_width;
+            int x;
+            int y;
+            int textHeight;
+            int textWidth;
 
             /* measure the text first, optionally wrapping at width */
-            text_width = text_height = 0;
+            textWidth = textHeight = 0;
             x = y = 0;
 
             for (i = 0; i < r.Length; i++)
             {
-                int glyph_width = 0;
+                int glyphWidth = 0;
 
                 if (r[i] != 0x0a) /* newline */
                 {
                     if (r[i] == 0x20) /* space */
                     {
-                        glyph_width = font.SpaceSize;
+                        glyphWidth = font.SpaceSize;
                     }
                     else
                     {
                         Glyph g = font[r[i] - 1];
 
-                        glyph_width = g.Width + g.XOffset;
+                        glyphWidth = g.Width + g.XOffset;
                     }
                 }
 
                 if (r[i] == 0x0a ||
-                (width != -1 && x + glyph_width > width))
+                (width != -1 && x + glyphWidth > width))
                 {
-                    if (x > text_width)
+                    if (x > textWidth)
                     {
-                        text_width = x;
+                        textWidth = x;
                     }
                     x = 0;
-                    text_height += font.LineSize;
+                    textHeight += font.LineSize;
                 }
 
-                x += glyph_width;
+                x += glyphWidth;
             }
 
-            if (x > text_width)
+            if (x > textWidth)
             {
-                text_width = x;
+                textWidth = x;
             }
-            text_height += font.LineSize;
+            textHeight += font.LineSize;
 
-            Surface surf = new Surface(text_width, text_height);
+            Surface surf = new Surface(textWidth, textHeight);
             surf.TransparentColor = Color.Black;
             surf.Transparent = true;
 
@@ -245,33 +262,33 @@ namespace SCSharp.UI
             x = y = 0;
             for (i = 0; i < r.Length; i++)
             {
-                int glyph_width = 0;
+                int glyphWidth = 0;
                 Glyph g = null;
 
                 if (r[i] != 0x0a) /* newline */
                 {
                     if (r[i] == 0x20) /* space */
                     {
-                        glyph_width = font.SpaceSize;
+                        glyphWidth = font.SpaceSize;
                     }
                     else
                     {
                         g = font[r[i] - 1];
-                        glyph_width = g.Width + g.XOffset;
+                        glyphWidth = g.Width + g.XOffset;
 
-                        Surface gs = RenderGlyph(font, g, palette, offset);
+                        Surface gs = RenderGlyph(g, palette, offset);
                         surf.Blit(gs, new Point(x, y + g.YOffset));
                     }
                 }
 
                 if (r[i] == 0x0a ||
-                x + glyph_width > text_width)
+                x + glyphWidth > textWidth)
                 {
                     x = 0;
                     y += font.LineSize;
                 }
 
-                x += glyph_width;
+                x += glyphWidth;
             }
 
             return surf;
@@ -289,9 +306,14 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public static byte[] GetBitmapData(byte[,] grid, ushort width, ushort height, byte[] palette, bool withAlpha)
         {
+            if (palette == null)
+            {
+                throw new ArgumentNullException("palette");
+            }
             byte[] buf = new byte[width * height * (3 + (withAlpha ? 1 : 0))];
             int i = 0;
-            int x, y;
+            int x;
+            int y;
 
             for (y = height - 1; y >= 0; y--)
             {
@@ -338,6 +360,10 @@ namespace SCSharp.UI
         public static Surface CreateSurface(byte[] data, ushort width, ushort height, int depth, int stride,
         int rmask, int gmask, int bmask, int amask)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException("data");
+            }
 
             /* beware, kind of a gross hack below */
             Surface surf;
@@ -411,6 +437,10 @@ namespace SCSharp.UI
         [CLSCompliant(false)]
         public static byte[] GetBitmapData(byte[,] grid, ushort width, ushort height, byte[] palette, int translucentIndex, int transparentIndex)
         {
+            if (palette == null)
+            {
+                throw new ArgumentNullException("palette");
+            }
             byte[] buf = new byte[width * height * 4];
             int i = 0;
             int x, y;
@@ -483,6 +513,10 @@ namespace SCSharp.UI
         /// <returns></returns>
         public static byte[] ReadStream(Stream stream)
         {
+            if (stream == null)
+            {
+                throw new ArgumentNullException("stream");
+            }
             if (stream is MemoryStream)
             {
                 return ((MemoryStream)stream).ToArray();
@@ -537,6 +571,10 @@ namespace SCSharp.UI
         /// <param name="resourcePath"></param>
         public static void PlaySound(Mpq mpq, string resourcePath)
         {
+            if (mpq == null)
+            {
+                throw new ArgumentNullException("mpq");
+            }
             Stream stream = (Stream)mpq.GetResource(resourcePath);
             if (stream == null)
             {
@@ -554,6 +592,10 @@ namespace SCSharp.UI
         /// <param name="numLoops"></param>
         public static void PlayMusic(Mpq mpq, string resourcePath, int numLoops)
         {
+            if (mpq == null)
+            {
+                throw new ArgumentNullException("mpq");
+            }
             Stream stream = (Stream)mpq.GetResource(resourcePath);
             if (stream == null)
             {
