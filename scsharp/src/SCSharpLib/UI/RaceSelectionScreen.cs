@@ -100,7 +100,7 @@ namespace SCSharp.UI
                 Console.WriteLine("{0}: {1} '{2}'", i, Elements[i].Type, Elements[i].Text);
 
             Elements[THIRD_CAMPAIGN_ELEMENT_INDEX].MouseEnterEvent +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     Console.WriteLine("over third campaign element");
                     if (true /* XXX this should come from the player's file */)
@@ -110,7 +110,7 @@ namespace SCSharp.UI
                 };
 
             Elements[THIRD_CAMPAIGN_ELEMENT_INDEX].MouseLeaveEvent +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (true /* XXX this should come from the player's file */)
                     {
@@ -119,7 +119,7 @@ namespace SCSharp.UI
                 };
 
             Elements[SECOND_CAMPAIGN_ELEMENT_INDEX].MouseEnterEvent +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     Console.WriteLine("over second campaign element");
                     if (true /* XXX this should come from the player's file */)
@@ -129,7 +129,7 @@ namespace SCSharp.UI
                 };
 
             Elements[SECOND_CAMPAIGN_ELEMENT_INDEX].MouseLeaveEvent +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (true /* XXX this should come from the player's file */)
                     {
@@ -138,38 +138,38 @@ namespace SCSharp.UI
                 };
 
             Elements[FIRST_CAMPAIGN_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     SelectCampaign(0);
                 };
 
             Elements[SECOND_CAMPAIGN_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     SelectCampaign(1);
                 };
 
             Elements[THIRD_CAMPAIGN_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     SelectCampaign(2);
                 };
 
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     Game.Instance.SwitchToScreen(UIScreenType.LogOn);
                 };
 
             Elements[LOADSAVED_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     Game.Instance.SwitchToScreen(new LoadSavedScreen(this.Mpq));
                 };
 
             Elements[PLAYCUSTOM_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     Game.Instance.SwitchToScreen(new PlayCustomScreen(this.Mpq));
                 };

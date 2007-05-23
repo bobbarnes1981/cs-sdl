@@ -62,7 +62,7 @@ namespace SCSharp.UI
         void ShowGameModeDialog(UIScreenType nextScreen)
         {
             GameModeDialog d = new GameModeDialog(this, this.Mpq);
-            d.Cancel += delegate(object sender, EventArgs args)
+            d.Cancel += delegate(object sender, SCEventArgs args)
             {
                 DismissDialog();
             };
@@ -93,7 +93,7 @@ namespace SCSharp.UI
             Elements[VERSION_ELEMENT_INDEX].Text = "v0.0000004";
 
             Elements[SINGLEPLAYER_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args)
+            delegate(object sender, SCEventArgs args)
             {
                 if (Game.Instance.IsBroodWar)
                 {
@@ -107,7 +107,7 @@ namespace SCSharp.UI
             };
 
             Elements[MULTIPLAYER_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args)
+            delegate(object sender, SCEventArgs args)
             {
                 if (Game.Instance.IsBroodWar)
                 {
@@ -121,7 +121,7 @@ namespace SCSharp.UI
             };
 
             Elements[CAMPAIGNEDITOR_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args)
+            delegate(object sender, SCEventArgs args)
             {
                 OkDialog d = new OkDialog(this, this.Mpq,
                 "The campaign editor functionality is not available in SCSharp");
@@ -129,14 +129,14 @@ namespace SCSharp.UI
             };
 
             Elements[INTRO_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args)
+            delegate(object sender, SCEventArgs args)
             {
                 Cinematic introScreen = new Cinematic(this.Mpq,
                 Game.Instance.IsBroodWar
                 ? "smk\\starXIntr.smk"
                 : "smk\\starintr.smk");
                 introScreen.Finished +=
-                    delegate(object sender2, EventArgs e2)
+                    delegate(object sender2, SCEventArgs e2)
                     {
                         Game.Instance.SwitchToScreen(this);
                     };
@@ -144,15 +144,15 @@ namespace SCSharp.UI
             };
 
             Elements[CREDITS_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args)
+            delegate(object sender, SCEventArgs args)
             {
                 Game.Instance.SwitchToScreen(new CreditsScreen(this.Mpq));
             };
 
             Elements[EXIT_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args)
+            delegate(object sender, SCEventArgs args)
             {
-                Game.Quit(this, new EventArgs());
+                Game.Quit(this, new SCEventArgs());
             };
         }
     }

@@ -70,20 +70,20 @@ namespace SCSharp.UI
             }
 
             Elements[EXIT_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (Exit != null)
                     {
-                        Exit(this, new EventArgs());
+                        Exit(this, new SCEventArgs());
                     }
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (Cancel != null)
                     {
-                        Cancel(this, new EventArgs());
+                        Cancel(this, new SCEventArgs());
                     }
                 };
         }
@@ -91,10 +91,10 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Exit;
+        public event EventHandler<SCEventArgs> Exit;
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Cancel;
+        public event EventHandler<SCEventArgs> Cancel;
     }
 }

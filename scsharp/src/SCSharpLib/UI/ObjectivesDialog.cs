@@ -67,11 +67,11 @@ namespace SCSharp.UI
                 Console.WriteLine("{0}: {1} '{2}'", i, Elements[i].Type, Elements[i].Text);
 
             Elements[PREVIOUS_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (Previous != null)
                     {
-                        Previous(this, new EventArgs());
+                        Previous(this, new SCEventArgs());
                     }
                 };
         }
@@ -79,6 +79,6 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Previous;
+        public event EventHandler<SCEventArgs> Previous;
     }
 }

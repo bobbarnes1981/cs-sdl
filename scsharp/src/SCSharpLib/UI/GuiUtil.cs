@@ -46,10 +46,10 @@ using Tao.Sdl;
 
 namespace SCSharp.UI
 {
-    /// <summary>
-    ///
-    /// </summary>
-    public delegate void ReadyEventHandler(object sender, EventArgs e);
+    ///// <summary>
+    /////
+    ///// </summary>
+    //public delegate void ReadyEventHandler(object sender, EventArgs e);
 
     /// <summary>
     ///

@@ -90,7 +90,7 @@ namespace SCSharp.UI
             }
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args) 
+            delegate(object sender, SCEventArgs args) 
             {
                 if (listbox.SelectedIndex == -1)
                 {
@@ -101,21 +101,21 @@ namespace SCSharp.UI
             };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args) 
+            delegate(object sender, SCEventArgs args) 
             {
                 Game.Instance.SwitchToScreen(UIScreenType.MainMenu);
             };
 
             Elements[NEW_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args) 
+            delegate(object sender, SCEventArgs args) 
             {
                 EntryDialog d = new EntryDialog(this, this.Mpq,
                 GlobalResources.GluAllTbl.Strings[22]);
-                d.Cancel += delegate(object sender2, EventArgs args2) 
+                d.Cancel += delegate(object sender2, SCEventArgs args2) 
                 {
                     DismissDialog();
                 };
-                d.Ok += delegate(object sender2, EventArgs args2) 
+                d.Ok += delegate(object sender2, SCEventArgs args2) 
                 {
                     if (listbox.Contains(d.Value))
                     {
@@ -131,15 +131,15 @@ namespace SCSharp.UI
             };
 
             Elements[DELETE_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args) 
+            delegate(object sender, SCEventArgs args) 
             {
                 OkCancelDialog okd = new OkCancelDialog(this, this.Mpq,
                 GlobalResources.GluAllTbl.Strings[23]);
-                okd.Cancel += delegate(object sender2, EventArgs args2) 
+                okd.Cancel += delegate(object sender2, SCEventArgs args2) 
                 {
                     DismissDialog();
                 };
-                okd.Ok += delegate(object sender2, EventArgs args2) 
+                okd.Ok += delegate(object sender2, SCEventArgs args2) 
                 {
                     DismissDialog();
                     /* actually delete the file */

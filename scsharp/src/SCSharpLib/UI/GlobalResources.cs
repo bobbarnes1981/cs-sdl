@@ -266,12 +266,12 @@ namespace SCSharp.UI
                 }
 
                 // notify we're ready to roll
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(FinishedLoading)));
+                Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(FinishedLoading)));
             }
             catch (SdlException e)
             {
                 Console.WriteLine("Global Resource loader failed: {0}", e);
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Game.Quit)));
+                Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(Game.Quit)));
             }
         }
 
@@ -279,13 +279,13 @@ namespace SCSharp.UI
         {
             if (Ready != null)
             {
-                Ready(new EventArgs(), new EventArgs());
+                Ready(new SCEventArgs(), new SCEventArgs());
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public static event ReadyEventHandler Ready;
+        public static event EventHandler<SCEventArgs> Ready;
     }
 }

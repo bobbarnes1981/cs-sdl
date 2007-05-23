@@ -210,7 +210,7 @@ namespace SCSharp.UI
             }
             finally
             {
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(EmitFinished)));
+                Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(EmitFinished)));
             }
 
         }
@@ -218,19 +218,19 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event PlayerEventHandler Finished;
+        public event EventHandler<SCEventArgs> Finished;
 
         void EmitFinished(object sender, EventArgs e)
         {
             if (Finished != null)
             {
-                Finished(this, new EventArgs());
+                Finished(this, new SCEventArgs());
             }
         }
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    public delegate void PlayerEventHandler(object sender, EventArgs e);
+    ///// <summary>
+    /////
+    ///// </summary>
+    //public delegate void PlayerEventHandler(object sender, EventArgs e);
 }

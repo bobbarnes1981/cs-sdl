@@ -70,22 +70,22 @@ namespace SCSharp.UI
             }
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (Ok != null)
                     {
                         //Ok();
-                        Ok(this, new EventArgs());
+                        Ok(this, new SCEventArgs());
                     }
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (Cancel != null)
                     {
                         //Cancel();
-                        Cancel(this, new EventArgs());
+                        Cancel(this, new SCEventArgs());
                     }
                 };
         }
@@ -93,11 +93,11 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Ok;
+        public event EventHandler<SCEventArgs> Ok;
 
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Cancel;
+        public event EventHandler<SCEventArgs> Cancel;
     }
 }

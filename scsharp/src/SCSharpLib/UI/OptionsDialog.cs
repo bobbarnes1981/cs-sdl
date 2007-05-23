@@ -68,15 +68,15 @@ namespace SCSharp.UI
             base.ResourceLoader();
 
             Elements[SOUND_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     SoundDialog d = new SoundDialog(this, this.Mpq);
-                    //d.Ok += delegate() { DismissDialog(this, new EventArgs()); };
-                    d.Ok += delegate(object sender2, EventArgs args2)
+                    //d.Ok += delegate() { DismissDialog(this, new SCEventArgs()); };
+                    d.Ok += delegate(object sender2, SCEventArgs args2)
                     {
                         DismissDialog();
                     };
-                    d.Cancel += delegate(object sender2, EventArgs args2)
+                    d.Cancel += delegate(object sender2, SCEventArgs args2)
                     {
                         DismissDialog();
                     };
@@ -84,14 +84,14 @@ namespace SCSharp.UI
                 };
 
             Elements[SPEED_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     SpeedDialog d = new SpeedDialog(this, this.Mpq);
-                    d.Ok += delegate(object sender2, EventArgs args2) 
+                    d.Ok += delegate(object sender2, SCEventArgs args2) 
                     { 
                         DismissDialog(); 
                     };
-                    d.Cancel += delegate(object sender2, EventArgs args2)  
+                    d.Cancel += delegate(object sender2, SCEventArgs args2)  
                     { 
                         DismissDialog(); 
                     };
@@ -99,14 +99,14 @@ namespace SCSharp.UI
                 };
 
             Elements[VIDEO_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     VideoDialog d = new VideoDialog(this, this.Mpq);
-                    d.Ok += delegate(object sender2, EventArgs args2)  
+                    d.Ok += delegate(object sender2, SCEventArgs args2)  
                     { 
                         DismissDialog(); 
                     };
-                    d.Cancel += delegate(object sender2, EventArgs args2)  
+                    d.Cancel += delegate(object sender2, SCEventArgs args2)  
                     { 
                         DismissDialog(); 
                     };
@@ -114,14 +114,14 @@ namespace SCSharp.UI
                 };
 
             Elements[NETWORK_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     NetworkDialog d = new NetworkDialog(this, this.Mpq);
-                    d.Ok += delegate(object sender2, EventArgs args2) 
+                    d.Ok += delegate(object sender2, SCEventArgs args2) 
                     { 
                         DismissDialog(); 
                     };
-                    d.Cancel += delegate(object sender2, EventArgs args2)  
+                    d.Cancel += delegate(object sender2, SCEventArgs args2)  
                     { 
                         DismissDialog(); 
                     };
@@ -129,11 +129,11 @@ namespace SCSharp.UI
                 };
 
             Elements[PREVIOUS_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (Previous != null)
                     {
-                        Previous(this, new EventArgs());
+                        Previous(this, new SCEventArgs());
                     }
                 };
 
@@ -144,6 +144,6 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Previous;
+        public event EventHandler<SCEventArgs> Previous;
     }
 }

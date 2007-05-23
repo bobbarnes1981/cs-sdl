@@ -295,12 +295,12 @@ namespace SCSharp.UI
             try
             {
                 Console.WriteLine("swooshing in");
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(RaiseDoneSwooshing)));
+                Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(RaiseDoneSwooshing)));
             }
             catch (SdlException e)
             {
                 Console.WriteLine("failed pushing UIScreen.RiseDoneSwooshing: {0}", e);
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Game.Quit)));
+                Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(Game.Quit)));
             }
         }
 
@@ -312,12 +312,12 @@ namespace SCSharp.UI
             try
             {
                 Console.WriteLine("swooshing out");
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(RaiseDoneSwooshing)));
+                Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(RaiseDoneSwooshing)));
             }
             catch (SdlException e)
             {
                 Console.WriteLine("failed pushing UIScreen.RiseDoneSwooshing: {0}", e);
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Game.Quit)));
+                Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(Game.Quit)));
             }
         }
 
@@ -727,17 +727,17 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event ReadyEventHandler FirstPainted;
+        public event EventHandler<SCEventArgs> FirstPainted;
 
         /// <summary>
         ///
         /// </summary>
-        public event ReadyEventHandler DoneSwooshing;
+        public event EventHandler<SCEventArgs> DoneSwooshing;
 
         /// <summary>
         ///
         /// </summary>
-        public event ReadyEventHandler Ready;
+        public event EventHandler<SCEventArgs> Ready;
 
         bool loaded;
 
@@ -750,7 +750,7 @@ namespace SCSharp.UI
         {
             if (FirstPainted != null)
             {
-                FirstPainted(this, new EventArgs());
+                FirstPainted(this, new SCEventArgs());
             }
 
             painter.Remove(Layer.Background, FirstPaint);
@@ -763,7 +763,7 @@ namespace SCSharp.UI
         {
             if (Ready != null)
             {
-                Ready(this, new EventArgs());
+                Ready(this, new SCEventArgs());
             }
         }
 
@@ -774,7 +774,7 @@ namespace SCSharp.UI
         {
             if (DoneSwooshing != null)
             {
-                DoneSwooshing(this, new EventArgs());
+                DoneSwooshing(this, new SCEventArgs());
             }
         }
 
@@ -909,7 +909,7 @@ namespace SCSharp.UI
         void LoadResources(object sender, EventArgs e)
         {
             ResourceLoader();
-            Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(FinishedLoading)));
+            Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(FinishedLoading)));
         }
 
         /// <summary>
@@ -919,14 +919,14 @@ namespace SCSharp.UI
         {
             if (loaded)
             {
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(RaiseReadyEvent)));
+                Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(RaiseReadyEvent)));
             }
             else
             {
 #if MULTI_THREADED
 ThreadPool.QueueUserWorkItem (delegate (object state) { LoadResources (); })
 #else
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(LoadResources)));
+                Events.PushUserEvent(new UserEventArgs(new EventHandler<SCEventArgs>(LoadResources)));
 #endif
             }
         }
@@ -934,7 +934,7 @@ ThreadPool.QueueUserWorkItem (delegate (object state) { LoadResources (); })
         void FinishedLoading(object sender, EventArgs e)
         {
             loaded = true;
-            RaiseReadyEvent(this, new EventArgs());
+            RaiseReadyEvent(this, new SCEventArgs());
         }
 
         /// <summary>
@@ -952,7 +952,7 @@ ThreadPool.QueueUserWorkItem (delegate (object state) { LoadResources (); })
             this.dialog = dialog;
 
             dialog.Load();
-            dialog.Ready += delegate(object sender, EventArgs e)
+            dialog.Ready += delegate(object sender, SCEventArgs e)
             {
                 dialog.AddToPainter(painter);
             };

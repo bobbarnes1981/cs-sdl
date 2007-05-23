@@ -71,19 +71,19 @@ namespace SCSharp.UI
             }
 
             Elements[PREVIOUS_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (Previous != null)
                     {
-                        Previous(this, new EventArgs());
+                        Previous(this, new SCEventArgs());
                     }
                 };
 
             Elements[KEYSTROKE_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     KeystrokeDialog d = new KeystrokeDialog(this, this.Mpq);
-                    d.Ok += delegate(object sender2, EventArgs args2) 
+                    d.Ok += delegate(object sender2, SCEventArgs args2) 
                     { 
                         DismissDialog(); 
                     };
@@ -94,6 +94,6 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Previous;
+        public event EventHandler<SCEventArgs> Previous;
     }
 }

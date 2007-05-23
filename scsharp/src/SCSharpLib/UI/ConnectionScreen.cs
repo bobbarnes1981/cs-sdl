@@ -107,14 +107,14 @@ namespace SCSharp.UI
             listbox.SelectionChanged += HandleSelectionChanged;
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args)
+                delegate(object sender, SCEventArgs args)
                 {
                     ShowDialog(new OkDialog(this, this.Mpq,
                                   "insert battle.net code here"));
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args)
+                delegate(object sender, SCEventArgs args)
                 {
                     Game.Instance.SwitchToScreen(UIScreenType.MainMenu);
                 };

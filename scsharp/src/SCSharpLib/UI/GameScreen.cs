@@ -616,7 +616,7 @@ namespace SCSharp.UI
                 case Key.F10:
                     GameMenuDialog d = new GameMenuDialog(this, this.Mpq);
 
-                    d.ReturnToGame += delegate(object sender2, EventArgs args2)  
+                    d.ReturnToGame += delegate(object sender2, SCEventArgs args2)  
                     { 
                         DismissDialog(); 
                     };

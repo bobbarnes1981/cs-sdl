@@ -211,7 +211,7 @@ namespace SCSharp.UI
             this.Dialog = dialog;
 
             dialog.Load();
-            dialog.Ready += delegate(object sender, EventArgs e)
+            dialog.Ready += delegate(object sender, SCEventArgs e)
             {
                 dialog.AddToPainter(this.Painter);
                 rememberedPainter = this.Painter;
@@ -250,6 +250,6 @@ namespace SCSharp.UI
     ///// <summary>
     /////
     ///// </summary>
-    ////public delegate void DialogEvent(object sender, EventArgs args);
-    public delegate void DialogEventHandler(object sender, EventArgs e);
+    ////public delegate void DialogEvent(object sender, SCEventArgs args);
+    //public delegate void DialogEventHandler(object sender, EventArgs e);
 }
