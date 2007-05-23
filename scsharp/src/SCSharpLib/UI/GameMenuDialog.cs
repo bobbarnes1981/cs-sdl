@@ -77,27 +77,30 @@ namespace SCSharp.UI
             }
 
             Elements[RETURNTOGAME_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     if (ReturnToGame != null)
                     {
-                        ReturnToGame();
+                        ReturnToGame(this, new EventArgs());
                     }
                 };
 
             Elements[MISSIONOBJECTIVES_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     ObjectivesDialog d = new ObjectivesDialog(this, this.Mpq);
-                    d.Previous += delegate() { DismissDialog(); };
+                    d.Previous += delegate(object sender2, EventArgs args2) 
+                    { 
+                        DismissDialog(); 
+                    };
                     ShowDialog(d);
                 };
 
             Elements[ENDMISSION_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     EndMissionDialog d = new EndMissionDialog(this, this.Mpq);
-                    d.Previous += delegate() 
+                    d.Previous += delegate(object sender2, EventArgs args2) 
                     { 
                         DismissDialog(); 
                     };
@@ -111,10 +114,10 @@ namespace SCSharp.UI
                 };
 
             Elements[OPTIONS_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     OptionsDialog d = new OptionsDialog(this, this.Mpq);
-                    d.Previous += delegate() 
+                    d.Previous += delegate(object sender2, EventArgs args2)  
                     { 
                         DismissDialog(); 
                     };
@@ -122,10 +125,10 @@ namespace SCSharp.UI
                 };
 
             Elements[HELP_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     HelpDialog d = new HelpDialog(this, this.Mpq);
-                    d.Previous += delegate() 
+                    d.Previous += delegate(object sender2, EventArgs args2) 
                     { 
                         DismissDialog(); 
                     };

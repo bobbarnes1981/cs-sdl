@@ -34,6 +34,8 @@ using System.IO;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using ICSharpCode.SharpZipLib.BZip2;
 
+using SCSharp.UI;
+
 namespace SCSharp.MpqLib
 {
     /// <summary>
@@ -95,7 +97,7 @@ namespace SCSharp.MpqLib
                     mSeed1 = MpqArchive.DetectFileSeed(mBlockPositions, blockpossize);
                     if (mSeed1 == 0)
                     {
-                        throw new Exception("Unable to determine encryption seed");
+                        throw new SCException("Unable to determine encryption seed");
                     }
                 }
                 MpqArchive.DecryptBlock(mBlockPositions, mSeed1);
@@ -131,7 +133,7 @@ namespace SCSharp.MpqLib
             {
                 if (mSeed1 == 0)
                 {
-                    throw new Exception("Unable to determine encryption key");
+                    throw new SCException("Unable to determine encryption key");
                 }
                 MpqArchive.DecryptBlock(data, (uint)(mSeed1 + blockIndex));
             }
@@ -404,7 +406,7 @@ namespace SCSharp.MpqLib
                 }
                 sinput = new MemoryStream(result);
             }
-            throw new Exception(String.Format("Unhandled compression flags: 0x{0:X}", comptype));
+            throw new SCException(String.Format("Unhandled compression flags: 0x{0:X}", comptype));
         }
 
         //private static byte[] BZip2Decompress(Stream data, int expectedLength)

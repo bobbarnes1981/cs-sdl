@@ -54,7 +54,7 @@ namespace SCSharp.Tests
             //}
             else
             {
-                throw new Exception(); // XX
+                throw new SCException(); // XX
             }
         }
 

@@ -1,9 +1,9 @@
 #region LICENSE
 //
 // Authors:
-//	Chris Toshok (toshok@hungry.com)
+//	David Hudson (jendave@yahoo.com)
 //
-// (C) 2006 The Hungry Programmers (http://www.hungry.com/)
+// (C) 2007 David Hudson
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -27,58 +27,49 @@
 #endregion LICENSE
 
 using System;
-using System.IO;
-using System.Text;
-using System.Threading;
-
-using SdlDotNet;
-using SCSharp;
-using SCSharp.MpqLib;
-using System.Drawing;
 
 namespace SCSharp.UI
 {
     /// <summary>
     /// 
     /// </summary>
-    public class ObjectivesDialog : UIDialog
+    public class BoxSelectionChangedEventArgs : EventArgs
     {
+        #region Private fields
+
+        /// <summary>
+        /// Corrresponding SDL_Event
+        /// </summary>
+        int selectedIndex;
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="mpq"></param>
-        public ObjectivesDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.ObjctDlgBin)
+        public int SelectedIndex
         {
-            BackgroundPath = null;
+            get { return selectedIndex; }
+            set { selectedIndex = value; }
         }
 
-        const int PREVIOUS_ELEMENT_INDEX = 1;
+        #endregion
+
+        #region Constructors
 
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
-        protected override void ResourceLoader()
+        public BoxSelectionChangedEventArgs()
         {
-            base.ResourceLoader();
-
-            for (int i = 0; i < Elements.Count; i++)
-                Console.WriteLine("{0}: {1} '{2}'", i, Elements[i].Type, Elements[i].Text);
-
-            Elements[PREVIOUS_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
-                {
-                    if (Previous != null)
-                    {
-                        Previous(this, new EventArgs());
-                    }
-                };
         }
 
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
-        public event DialogEventHandler Previous;
+        public BoxSelectionChangedEventArgs(int selectedIndex)
+        {
+            this.selectedIndex = selectedIndex;
+        }
+
+        #endregion
     }
 }

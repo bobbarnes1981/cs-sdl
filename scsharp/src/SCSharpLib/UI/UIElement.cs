@@ -210,7 +210,7 @@ namespace SCSharp.UI
 
                     if (fnt == null)
                     {
-                        throw new Exception(String.Format("null font at index {0}.. bad things are afoot", idx));
+                        throw new SCException(String.Format("null font at index {0}.. bad things are afoot", idx));
                     }
                 }
                 return fnt;
@@ -283,7 +283,7 @@ namespace SCSharp.UI
         {
             if (Activate != null)
             {
-                Activate();
+                Activate(this, new EventArgs());
             }
         }
 
@@ -298,7 +298,9 @@ namespace SCSharp.UI
         public void OnMouseEnter()
         {
             if (MouseEnterEvent != null)
-                MouseEnterEvent();
+            {
+                MouseEnterEvent(this, new EventArgs());
+            }
         }
 
         /// <summary>
@@ -312,7 +314,9 @@ namespace SCSharp.UI
         public void OnMouseLeave()
         {
             if (MouseLeaveEvent != null)
-                MouseLeaveEvent();
+            {
+                MouseLeaveEvent(this, new EventArgs());
+            }
         }
 
         /// <summary>
@@ -444,5 +448,5 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public delegate void ElementEventHandler();
+    public delegate void ElementEventHandler(object sender, EventArgs e);
 }

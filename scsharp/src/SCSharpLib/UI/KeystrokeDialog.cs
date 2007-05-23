@@ -70,11 +70,11 @@ namespace SCSharp.UI
             }
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args) 
             {
                 if (Ok != null)
                 {
-                    Ok();
+                    Ok(this, new EventArgs());
                 }
             };
 

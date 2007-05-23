@@ -68,15 +68,15 @@ namespace SCSharp.UI
             base.ResourceLoader();
 
             Elements[SOUND_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     SoundDialog d = new SoundDialog(this, this.Mpq);
                     //d.Ok += delegate() { DismissDialog(this, new EventArgs()); };
-                    d.Ok += delegate()
+                    d.Ok += delegate(object sender2, EventArgs args2)
                     {
                         DismissDialog();
                     };
-                    d.Cancel += delegate()
+                    d.Cancel += delegate(object sender2, EventArgs args2)
                     {
                         DismissDialog();
                     };
@@ -84,37 +84,57 @@ namespace SCSharp.UI
                 };
 
             Elements[SPEED_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     SpeedDialog d = new SpeedDialog(this, this.Mpq);
-                    d.Ok += delegate() { DismissDialog(); };
-                    d.Cancel += delegate() { DismissDialog(); };
+                    d.Ok += delegate(object sender2, EventArgs args2) 
+                    { 
+                        DismissDialog(); 
+                    };
+                    d.Cancel += delegate(object sender2, EventArgs args2)  
+                    { 
+                        DismissDialog(); 
+                    };
                     ShowDialog(d);
                 };
 
             Elements[VIDEO_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     VideoDialog d = new VideoDialog(this, this.Mpq);
-                    d.Ok += delegate() { DismissDialog(); };
-                    d.Cancel += delegate() { DismissDialog(); };
+                    d.Ok += delegate(object sender2, EventArgs args2)  
+                    { 
+                        DismissDialog(); 
+                    };
+                    d.Cancel += delegate(object sender2, EventArgs args2)  
+                    { 
+                        DismissDialog(); 
+                    };
                     ShowDialog(d);
                 };
 
             Elements[NETWORK_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     NetworkDialog d = new NetworkDialog(this, this.Mpq);
-                    d.Ok += delegate() { DismissDialog(); };
-                    d.Cancel += delegate() { DismissDialog(); };
+                    d.Ok += delegate(object sender2, EventArgs args2) 
+                    { 
+                        DismissDialog(); 
+                    };
+                    d.Cancel += delegate(object sender2, EventArgs args2)  
+                    { 
+                        DismissDialog(); 
+                    };
                     ShowDialog(d);
                 };
 
             Elements[PREVIOUS_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     if (Previous != null)
-                        Previous();
+                    {
+                        Previous(this, new EventArgs());
+                    }
                 };
 
             for (int i = 0; i < Elements.Count; i++)

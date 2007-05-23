@@ -300,7 +300,7 @@ namespace SCSharp.UI
             catch (SdlException e)
             {
                 Console.WriteLine("failed pushing UIScreen.RiseDoneSwooshing: {0}", e);
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Events.QuitApplication)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Game.Quit)));
             }
         }
 
@@ -317,7 +317,7 @@ namespace SCSharp.UI
             catch (SdlException e)
             {
                 Console.WriteLine("failed pushing UIScreen.RiseDoneSwooshing: {0}", e);
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Events.QuitApplication)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Game.Quit)));
             }
         }
 
@@ -750,7 +750,7 @@ namespace SCSharp.UI
         {
             if (FirstPainted != null)
             {
-                FirstPainted();
+                FirstPainted(this, new EventArgs());
             }
 
             painter.Remove(Layer.Background, FirstPaint);
@@ -759,22 +759,22 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        protected void RaiseReadyEvent()
+        protected void RaiseReadyEvent(object sender, EventArgs e)
         {
             if (Ready != null)
             {
-                Ready();
+                Ready(this, new EventArgs());
             }
         }
 
         /// <summary>
         ///
         /// </summary>
-        protected void RaiseDoneSwooshing()
+        protected void RaiseDoneSwooshing(object sender, EventArgs e)
         {
             if (DoneSwooshing != null)
             {
-                DoneSwooshing();
+                DoneSwooshing(this, new EventArgs());
             }
         }
 
@@ -850,7 +850,7 @@ namespace SCSharp.UI
 
                 if (bin == null)
                 {
-                    throw new Exception(String.Format("specified file '{0}' does not exist",
+                    throw new SCException(String.Format("specified file '{0}' does not exist",
                     binFile));
                 }
 
@@ -906,7 +906,7 @@ namespace SCSharp.UI
             }
         }
 
-        void LoadResources()
+        void LoadResources(object sender, EventArgs e)
         {
             ResourceLoader();
             Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(FinishedLoading)));
@@ -931,10 +931,10 @@ ThreadPool.QueueUserWorkItem (delegate (object state) { LoadResources (); })
             }
         }
 
-        void FinishedLoading()
+        void FinishedLoading(object sender, EventArgs e)
         {
             loaded = true;
-            RaiseReadyEvent();
+            RaiseReadyEvent(this, new EventArgs());
         }
 
         /// <summary>
@@ -947,12 +947,12 @@ ThreadPool.QueueUserWorkItem (delegate (object state) { LoadResources (); })
 
             if (this.dialog != null)
             {
-                throw new Exception("only one active dialog is allowed");
+                throw new SCException("only one active dialog is allowed");
             }
             this.dialog = dialog;
 
             dialog.Load();
-            dialog.Ready += delegate()
+            dialog.Ready += delegate(object sender, EventArgs e)
             {
                 dialog.AddToPainter(painter);
             };

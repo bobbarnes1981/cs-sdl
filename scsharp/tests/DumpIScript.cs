@@ -180,9 +180,10 @@ namespace SCSharp.Tests
         /// <param name="mpq"></param>
         public DumpIScript(Mpq mpq)
         {
-            new GlobalResources(mpq, null).LoadSingleThreaded();
+            GlobalResources.LoadMpq(mpq, null);
+            GlobalResources.LoadSingleThreaded();
 
-            bin = GlobalResources.Instance.IScriptBin;
+            bin = GlobalResources.IScriptBin;
             buf = bin.Contents;
 
             blocks = new List<Block>();
@@ -223,13 +224,13 @@ namespace SCSharp.Tests
 
         string GetGrpNameFromImageId(ushort arg)
         {
-            ushort grp_index = GlobalResources.Instance.ImagesDat.GetGrpIndex(arg);
-            return grp_index == 0 ? "NONE" : GlobalResources.Instance.ImagesTbl[grp_index - 1];
+            ushort grp_index = GlobalResources.ImagesDat.GetGrpIndex(arg);
+            return grp_index == 0 ? "NONE" : GlobalResources.ImagesTbl[grp_index - 1];
         }
 
         string GetGrpNameFromSpriteId(ushort arg)
         {
-            ushort image_entry = GlobalResources.Instance.SpritesDat.GetImagesDatEntry(arg);
+            ushort image_entry = GlobalResources.SpritesDat.GetImagesDatEntry(arg);
             return GetGrpNameFromImageId(image_entry);
         }
 
@@ -325,7 +326,7 @@ namespace SCSharp.Tests
                     case IScriptOpcode.PlaySound:
                         warg1 = ReadWord(ref pc);
                         Console.Write("{0} ({1})", warg1 - 1,
-                        GlobalResources.Instance.SfxDataTbl[GlobalResources.Instance.SfxDataDat.GetFileIndex((uint)(warg1 - 1))]);
+                        GlobalResources.SfxDataTbl[GlobalResources.SfxDataDat.GetFileIndex((uint)(warg1 - 1))]);
                         break;
                     case IScriptOpcode.PlayRandomSound:
                         barg1 = ReadByte(ref pc);
@@ -343,7 +344,7 @@ namespace SCSharp.Tests
                         Console.WriteLine(" [");
                         for (int i = warg1; i < warg2; i++)
                         {
-                            Console.Write(" {0}", GlobalResources.Instance.SfxDataTbl[GlobalResources.Instance.SfxDataDat.GetFileIndex((uint)(i - 1))]);
+                            Console.Write(" {0}", GlobalResources.SfxDataTbl[GlobalResources.SfxDataDat.GetFileIndex((uint)(i - 1))]);
                         }
                         Console.Write(" ]");
                         break;
@@ -369,7 +370,7 @@ namespace SCSharp.Tests
                         {
                             warg1 = ReadWord(ref pc);
                             Console.Write(" {0}",
-                            GlobalResources.Instance.SfxDataTbl[GlobalResources.Instance.SfxDataDat.GetFileIndex((uint)(warg1 - 1))]);
+                            GlobalResources.SfxDataTbl[GlobalResources.SfxDataDat.GetFileIndex((uint)(warg1 - 1))]);
                         }
                         Console.Write(" ]");
                         break;
@@ -443,9 +444,9 @@ namespace SCSharp.Tests
                         break;
                 }
             }
-            catch (Exception e)
+            catch (SCException e)
             {
-                Console.Write("Exception: " + e.StackTrace);
+                Console.Write("SCException: " + e.StackTrace);
             }
             finally
             {
@@ -497,7 +498,7 @@ namespace SCSharp.Tests
             /* make sure the offset points to "SCEP" */
             if (Utilities.ReadDWord(buf, entry_offset) != 0x45504353)
             {
-                throw new Exception("invalid script_entry_offset");
+                throw new SCException("invalid script_entry_offset");
             }
 
             Console.WriteLine(";");

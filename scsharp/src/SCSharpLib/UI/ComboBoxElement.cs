@@ -211,7 +211,7 @@ namespace SCSharp.UI
                 cursor = selectedItem;
                 if (SelectionChanged != null)
                 {
-                    SelectionChanged(cursor);
+                    SelectionChanged(this, new BoxSelectionChangedEventArgs(cursor));
                 }
                 ClearSurface();
             }
@@ -261,7 +261,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event ComboBoxSelectionChangedEventHandler SelectionChanged;
+        public event EventHandler<BoxSelectionChangedEventArgs> SelectionChanged;
 
         #region IDisposable Members
 
@@ -270,15 +270,16 @@ namespace SCSharp.UI
         /// </summary>
         public void Dispose()
         {
-            throw new Exception("The method or operation is not implemented.");
+            throw new SCException("The method or operation is not implemented.");
         }
 
         #endregion
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="selectedIndex"></param>
-    public delegate void ComboBoxSelectionChangedEventHandler(int selectedIndex);
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    ///// <param name="e"></param>
+    ///// <param name="sender"></param>
+    //public delegate void ComboBoxSelectionChangedEventHandler(object sender, BoxSelectionChangedEventArgs e);
 }

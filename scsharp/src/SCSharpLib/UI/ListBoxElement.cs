@@ -106,7 +106,7 @@ namespace SCSharp.UI
                 ClearSurface();
                 if (SelectionChanged != null)
                 {
-                    SelectionChanged(cursor);
+                    SelectionChanged(this, new BoxSelectionChangedEventArgs(cursor));
                 }
             }
         }
@@ -208,7 +208,7 @@ namespace SCSharp.UI
                 cursor = selectionIndex;
                 if (SelectionChanged != null)
                 {
-                    SelectionChanged(cursor);
+                    SelectionChanged(this, new BoxSelectionChangedEventArgs(cursor));
                 }
             }
 
@@ -326,12 +326,13 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event ListBoxSelectionChangedEventHandler SelectionChanged;
+        public event EventHandler<BoxSelectionChangedEventArgs> SelectionChanged;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="selectedIndex"></param>
-    public delegate void ListBoxSelectionChangedEventHandler(int selectedIndex);
+    ///// <summary>
+    /////
+    ///// </summary>
+    ///// <param name="e"></param>
+    ///// <param name="sender"></param>
+    //public delegate void ListBoxSelectionChangedEventHandler(object sender, BoxSelectionChangedEventArgs e);
 }

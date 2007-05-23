@@ -39,49 +39,67 @@ namespace SCSharp.UI
     /// <summary>
     /// 
     /// </summary>
-    public class GlobalResources
+    public static class GlobalResources
     {
-        Mpq stardatMpq;
-        Mpq broodatMpq;
-
-        SCResources starcraftResources;
-        SCResources broodwarResources;
-
-        static GlobalResources instance;
+        static Mpq starDataMpq;
 
         /// <summary>
         /// 
         /// </summary>
-        public static GlobalResources Instance
+        public static Mpq StarDataMpq
         {
-            get { return instance; }
+            get { return GlobalResources.starDataMpq; }
+            set { GlobalResources.starDataMpq = value; }
+        }
+        static Mpq broodDataMpq;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Mpq BroodDataMpq
+        {
+            get { return GlobalResources.broodDataMpq; }
+            set { GlobalResources.broodDataMpq = value; }
         }
 
+        static SCResources starcraftResources;
+        static SCResources broodwarResources;
+
+        //static GlobalResources instance;
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public static GlobalResources Instance
+        //{
+        //    get { return instance; }
+        //}
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="stardatMpq"></param>
-        /// <param name="broodatMpq"></param>
-        public GlobalResources(Mpq stardatMpq, Mpq broodatMpq)
+        /// <param name="starDataMpq"></param>
+        /// <param name="broodDataMpq"></param>
+        public static void LoadMpq(Mpq starDataMpq, Mpq broodDataMpq)
         {
-            if (instance != null)
-            {
-                throw new Exception("There can only be one GlobalResources");
-            }
+            //if (instance != null)
+            //{
+            //    throw new SCException("There can only be one GlobalResources");
+            //}
 
-            this.stardatMpq = stardatMpq;
-            this.broodatMpq = broodatMpq;
+            GlobalResources.starDataMpq = starDataMpq;
+            GlobalResources.broodDataMpq = broodDataMpq;
 
             starcraftResources = new SCResources();
             broodwarResources = new SCResources();
 
-            instance = this;
+            //instance = this;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void Load()
+        public static void Load()
         {
             ThreadPool.QueueUserWorkItem(ResourceLoader);
         }
@@ -89,7 +107,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public void LoadSingleThreaded()
+        public static void LoadSingleThreaded()
         {
             ResourceLoader(null);
         }
@@ -97,7 +115,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        SCResources Resources
+        static SCResources Resources
         {
             get { return Game.Instance.PlayingBroodWar ? broodwarResources : starcraftResources; }
         }
@@ -105,7 +123,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public Tbl ImagesTbl
+        public static Tbl ImagesTbl
         {
             get { return Resources.ImagesTbl; }
         }
@@ -113,7 +131,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public Tbl SfxDataTbl
+        public static Tbl SfxDataTbl
         {
             get { return Resources.SfxDataTbl; }
         }
@@ -121,7 +139,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public Tbl SpritesTbl
+        public static Tbl SpritesTbl
         {
             get { return Resources.SpritesTbl; }
         }
@@ -129,7 +147,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public Tbl GluAllTbl
+        public static Tbl GluAllTbl
         {
             get { return Resources.GluAllTbl; }
         }
@@ -137,7 +155,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public ImagesDat ImagesDat
+        public static ImagesDat ImagesDat
         {
             get { return Resources.ImagesDat; }
         }
@@ -145,7 +163,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public SpritesDat SpritesDat
+        public static SpritesDat SpritesDat
         {
             get { return Resources.SpritesDat; }
         }
@@ -153,7 +171,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public SfxDataDat SfxDataDat
+        public static SfxDataDat SfxDataDat
         {
             get { return Resources.SfxDataDat; }
         }
@@ -161,7 +179,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public ScriptBin IScriptBin
+        public static ScriptBin IScriptBin
         {
             get { return Resources.ScriptBin; }
         }
@@ -169,7 +187,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public UnitsDat UnitsDat
+        public static UnitsDat UnitsDat
         {
             get { return Resources.UnitsDat; }
         }
@@ -177,7 +195,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public FlingyDat FlingyDat
+        public static FlingyDat FlingyDat
         {
             get { return Resources.FlingyDat; }
         }
@@ -185,7 +203,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public MapDataDat MapDataDat
+        public static MapDataDat MapDataDat
         {
             get { return Resources.MapDataDat; }
         }
@@ -193,7 +211,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public Tbl MapDataTbl
+        public static Tbl MapDataTbl
         {
             get { return Resources.MapDataTbl; }
         }
@@ -201,7 +219,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public SCResources StarDat
+        public static SCResources StarDat
         {
             get { return starcraftResources; }
         }
@@ -209,42 +227,42 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public SCResources BrooDat
+        public static SCResources BrooDat
         {
             get { return broodwarResources; }
         }
 
-        void ResourceLoader(object state)
+        static void ResourceLoader(object state)
         {
             try
             {
-                starcraftResources.ImagesTbl = (Tbl)stardatMpq.GetResource(Builtins.ImagesTbl);
-                starcraftResources.SfxDataTbl = (Tbl)stardatMpq.GetResource(Builtins.SfxDataTbl);
-                starcraftResources.SpritesTbl = (Tbl)stardatMpq.GetResource(Builtins.SpritesTbl);
-                starcraftResources.GluAllTbl = (Tbl)stardatMpq.GetResource(Builtins.GluAllTbl);
-                starcraftResources.MapDataTbl = (Tbl)stardatMpq.GetResource(Builtins.MapDataTbl);
-                starcraftResources.ImagesDat = (ImagesDat)stardatMpq.GetResource(Builtins.ImagesDat);
-                starcraftResources.SfxDataDat = (SfxDataDat)stardatMpq.GetResource(Builtins.SfxDataDat);
-                starcraftResources.SpritesDat = (SpritesDat)stardatMpq.GetResource(Builtins.SpritesDat);
-                starcraftResources.ScriptBin = (ScriptBin)stardatMpq.GetResource(Builtins.IScriptBin);
-                starcraftResources.UnitsDat = (UnitsDat)stardatMpq.GetResource(Builtins.UnitsDat);
-                starcraftResources.FlingyDat = (FlingyDat)stardatMpq.GetResource(Builtins.FlingyDat);
-                starcraftResources.MapDataDat = (MapDataDat)stardatMpq.GetResource(Builtins.MapDataDat);
+                starcraftResources.ImagesTbl = (Tbl)starDataMpq.GetResource(Builtins.ImagesTbl);
+                starcraftResources.SfxDataTbl = (Tbl)starDataMpq.GetResource(Builtins.SfxDataTbl);
+                starcraftResources.SpritesTbl = (Tbl)starDataMpq.GetResource(Builtins.SpritesTbl);
+                starcraftResources.GluAllTbl = (Tbl)starDataMpq.GetResource(Builtins.GluAllTbl);
+                starcraftResources.MapDataTbl = (Tbl)starDataMpq.GetResource(Builtins.MapDataTbl);
+                starcraftResources.ImagesDat = (ImagesDat)starDataMpq.GetResource(Builtins.ImagesDat);
+                starcraftResources.SfxDataDat = (SfxDataDat)starDataMpq.GetResource(Builtins.SfxDataDat);
+                starcraftResources.SpritesDat = (SpritesDat)starDataMpq.GetResource(Builtins.SpritesDat);
+                starcraftResources.ScriptBin = (ScriptBin)starDataMpq.GetResource(Builtins.IScriptBin);
+                starcraftResources.UnitsDat = (UnitsDat)starDataMpq.GetResource(Builtins.UnitsDat);
+                starcraftResources.FlingyDat = (FlingyDat)starDataMpq.GetResource(Builtins.FlingyDat);
+                starcraftResources.MapDataDat = (MapDataDat)starDataMpq.GetResource(Builtins.MapDataDat);
 
-                if (broodatMpq != null)
+                if (broodDataMpq != null)
                 {
-                    broodwarResources.ImagesTbl = (Tbl)broodatMpq.GetResource(Builtins.ImagesTbl);
-                    broodwarResources.SfxDataTbl = (Tbl)broodatMpq.GetResource(Builtins.SfxDataTbl);
-                    broodwarResources.SpritesTbl = (Tbl)broodatMpq.GetResource(Builtins.SpritesTbl);
-                    broodwarResources.GluAllTbl = (Tbl)broodatMpq.GetResource(Builtins.GluAllTbl);
-                    broodwarResources.MapDataTbl = (Tbl)broodatMpq.GetResource(Builtins.MapDataTbl);
-                    broodwarResources.ImagesDat = (ImagesDat)broodatMpq.GetResource(Builtins.ImagesDat);
-                    broodwarResources.SfxDataDat = (SfxDataDat)broodatMpq.GetResource(Builtins.SfxDataDat);
-                    broodwarResources.SpritesDat = (SpritesDat)broodatMpq.GetResource(Builtins.SpritesDat);
-                    broodwarResources.ScriptBin = (ScriptBin)broodatMpq.GetResource(Builtins.IScriptBin);
-                    broodwarResources.UnitsDat = (UnitsDat)broodatMpq.GetResource(Builtins.UnitsDat);
-                    broodwarResources.FlingyDat = (FlingyDat)broodatMpq.GetResource(Builtins.FlingyDat);
-                    broodwarResources.MapDataDat = (MapDataDat)broodatMpq.GetResource(Builtins.MapDataDat);
+                    broodwarResources.ImagesTbl = (Tbl)broodDataMpq.GetResource(Builtins.ImagesTbl);
+                    broodwarResources.SfxDataTbl = (Tbl)broodDataMpq.GetResource(Builtins.SfxDataTbl);
+                    broodwarResources.SpritesTbl = (Tbl)broodDataMpq.GetResource(Builtins.SpritesTbl);
+                    broodwarResources.GluAllTbl = (Tbl)broodDataMpq.GetResource(Builtins.GluAllTbl);
+                    broodwarResources.MapDataTbl = (Tbl)broodDataMpq.GetResource(Builtins.MapDataTbl);
+                    broodwarResources.ImagesDat = (ImagesDat)broodDataMpq.GetResource(Builtins.ImagesDat);
+                    broodwarResources.SfxDataDat = (SfxDataDat)broodDataMpq.GetResource(Builtins.SfxDataDat);
+                    broodwarResources.SpritesDat = (SpritesDat)broodDataMpq.GetResource(Builtins.SpritesDat);
+                    broodwarResources.ScriptBin = (ScriptBin)broodDataMpq.GetResource(Builtins.IScriptBin);
+                    broodwarResources.UnitsDat = (UnitsDat)broodDataMpq.GetResource(Builtins.UnitsDat);
+                    broodwarResources.FlingyDat = (FlingyDat)broodDataMpq.GetResource(Builtins.FlingyDat);
+                    broodwarResources.MapDataDat = (MapDataDat)broodDataMpq.GetResource(Builtins.MapDataDat);
                 }
 
                 // notify we're ready to roll
@@ -253,21 +271,21 @@ namespace SCSharp.UI
             catch (SdlException e)
             {
                 Console.WriteLine("Global Resource loader failed: {0}", e);
-                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Events.QuitApplication)));
+                Events.PushUserEvent(new UserEventArgs(new ReadyEventHandler(Game.Quit)));
             }
         }
 
-        void FinishedLoading()
+        static void FinishedLoading(object sender, EventArgs e)
         {
             if (Ready != null)
             {
-                Ready();
+                Ready(new EventArgs(), new EventArgs());
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public event ReadyEventHandler Ready;
+        public static event ReadyEventHandler Ready;
     }
 }

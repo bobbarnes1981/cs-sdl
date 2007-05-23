@@ -71,12 +71,16 @@ namespace SCSharp.UI
             Elements[MESSAGE_ELEMENT_INDEX].Text = message;
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
                     if (Ok == null)
+                    {
                         Parent.DismissDialog();
+                    }
                     else
-                        Ok();
+                    {
+                        Ok(this, new EventArgs());
+                    }
                 };
         }
 

@@ -65,13 +65,17 @@ namespace SCSharp.UI
             base.ResourceLoader();
 
             for (int i = 0; i < Elements.Count; i++)
+            {
                 Console.WriteLine("{0}: {1} '{2}'", i, Elements[i].Type, Elements[i].Text);
+            }
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     if (Cancel != null)
-                        Cancel();
+                    {
+                        Cancel(this, new EventArgs());
+                    }
                 };
         }
 

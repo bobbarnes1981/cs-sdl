@@ -220,11 +220,11 @@ namespace SCSharp.UI
         /// </summary>
         public event PlayerEventHandler Finished;
 
-        void EmitFinished()
+        void EmitFinished(object sender, EventArgs e)
         {
             if (Finished != null)
             {
-                Finished();
+                Finished(this, new EventArgs());
             }
         }
     }
@@ -232,5 +232,5 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public delegate void PlayerEventHandler();
+    public delegate void PlayerEventHandler(object sender, EventArgs e);
 }

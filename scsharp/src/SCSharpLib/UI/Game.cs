@@ -130,9 +130,9 @@ namespace SCSharp.UI
                             broodatMpq = GetMpq(path);
                             Console.WriteLine("found BrooDat.mpq");
                         }
-                        catch (Exception e)
+                        catch (SCException e)
                         {
-                            throw new Exception(String.Format("Could not read mpq archive {0}",
+                            throw new SCException(String.Format("Could not read mpq archive {0}",
                             path), e);
                         }
                     }
@@ -143,9 +143,9 @@ namespace SCSharp.UI
                             stardatMpq = GetMpq(path);
                             Console.WriteLine("found StarDat.mpq");
                         }
-                        catch (Exception e)
+                        catch (SCException e)
                         {
-                            throw new Exception(String.Format("could not read mpq archive {0}",
+                            throw new SCException(String.Format("could not read mpq archive {0}",
                             path), e);
                         }
                     }
@@ -154,7 +154,7 @@ namespace SCSharp.UI
 
             if (stardatMpq == null)
             {
-                throw new Exception("unable to locate stardat.mpq, please check your StarcraftDirectory configuration setting");
+                throw new SCException("unable to locate stardat.mpq, please check your StarcraftDirectory configuration setting");
             }
 
             if (scCDDir != null)
@@ -168,9 +168,9 @@ namespace SCSharp.UI
                             scInstallExe = GetMpq(path);
                             Console.WriteLine("found SC install.exe");
                         }
-                        catch (Exception e)
+                        catch (SCException e)
                         {
-                            throw new Exception(String.Format("could not read mpq archive {0}",
+                            throw new SCException(String.Format("could not read mpq archive {0}",
                             path),
                             e);
                         }
@@ -189,9 +189,9 @@ namespace SCSharp.UI
                             bwInstallExe = GetMpq(path);
                             Console.WriteLine("found BW install.exe");
                         }
-                        catch (Exception e)
+                        catch (SCException e)
                         {
-                            throw new Exception(String.Format("could not read mpq archive {0}",
+                            throw new SCException(String.Format("could not read mpq archive {0}",
                             path),
                             e);
                         }
@@ -201,7 +201,7 @@ namespace SCSharp.UI
 
             if (bwInstallExe == null)
             {
-                throw new Exception("unable to locate broodwar cd's install.exe, please check your BroodwarCDDirectory configuration setting");
+                throw new SCException("unable to locate broodwar cd's install.exe, please check your BroodwarCDDirectory configuration setting");
             }
 
             if (broodatMpq != null)
@@ -265,7 +265,7 @@ namespace SCSharp.UI
                 {
                     if (bwInstallExe == null)
                     {
-                        throw new Exception("you need the Broodwar CD to play Broodwar games. Please check the BroodwarCDDirectory configuration setting.");
+                        throw new SCException("you need the Broodwar CD to play Broodwar games. Please check the BroodwarCDDirectory configuration setting.");
                     }
                     playingMpq.Add(bwInstallExe);
                     playingMpq.Add(broodatMpq);
@@ -275,7 +275,7 @@ namespace SCSharp.UI
                 {
                     if (scInstallExe == null)
                     {
-                        throw new Exception("you need the Starcraft CD to play original games. Please check the StarcraftCDDirectory configuration setting.");
+                        throw new SCException("you need the Starcraft CD to play original games. Please check the StarcraftCDDirectory configuration setting.");
                     }
                     playingMpq.Add(scInstallExe);
                     playingMpq.Add(stardatMpq);
@@ -295,11 +295,11 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        /// <param name="fullscreen"></param>
-        public void Startup(bool fullscreen)
+        /// <param name="fullScreen"></param>
+        public void Startup(bool fullScreen)
         {
             /* create our window and hook up to the events we care about */
-            CreateWindow(fullscreen);
+            CreateWindow(fullScreen);
 
             Events.UserEvent += UserEvent;
             Events.MouseMotion += PointerMotion;
@@ -317,7 +317,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public static void Quit()
+        public static void Quit(object sender, EventArgs e)
         {
             Events.QuitApplication();
         }
@@ -332,18 +332,18 @@ namespace SCSharp.UI
             SwitchToScreen(screen);
         }
 
-        void CreateWindow(bool fullscreen)
+        void CreateWindow(bool fullScreen)
         {
             Video.WindowIcon();
             Video.WindowCaption = "SCSharp";
 
-            painter = new Painter(fullscreen, GAME_ANIMATION_TICK);
+            painter = new Painter(fullScreen, GAME_ANIMATION_TICK);
         }
 
         void UserEvent(object sender, UserEventArgs args)
         {
             ReadyEventHandler d = (ReadyEventHandler)args.UserEvent;
-            d();
+            d(this, new EventArgs());
         }
 
         void PointerMotion(object sender, MouseMotionEventArgs args)
@@ -409,11 +409,11 @@ namespace SCSharp.UI
             {
                 if (args.Key == Key.Q)
                 {
-                    Quit();
+                    Quit(this, new EventArgs());
                 }
                 else if (args.Key == Key.F)
                 {
-                    painter.Fullscreen = !painter.Fullscreen;
+                    painter.FullScreen = !painter.FullScreen;
                 }
             }
 #endif
@@ -526,7 +526,7 @@ namespace SCSharp.UI
                         screens[index] = new ConnectionScreen(playingMpq);
                         break;
                     default:
-                        throw new Exception();
+                        throw new SCException();
                 }
             }
 
@@ -549,24 +549,24 @@ namespace SCSharp.UI
             get { return installedMpq; }
         }
 
-        void SwitchReady()
+        void SwitchReady(object sender, EventArgs e)
         {
             screenToSwitchTo.Ready -= SwitchReady;
             SetGameScreen(screenToSwitchTo);
             screenToSwitchTo = null;
         }
 
-        void GlobalResourcesLoaded()
+        void GlobalResourcesLoaded(object sender, EventArgs e)
         {
             SwitchToScreen(UIScreenType.MainMenu);
         }
 
-        void TitleScreenReady()
+        void TitleScreenReady(object sender, EventArgs e)
         {
             Console.WriteLine("Loading global resources");
-            new GlobalResources(stardatMpq, broodatMpq);
-            GlobalResources.Instance.Ready += GlobalResourcesLoaded;
-            GlobalResources.Instance.Load();
+            GlobalResources.LoadMpq(stardatMpq, broodatMpq);
+            GlobalResources.Ready += GlobalResourcesLoaded;
+            GlobalResources.Load();
         }
     }
 }

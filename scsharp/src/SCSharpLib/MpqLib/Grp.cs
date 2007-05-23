@@ -103,7 +103,7 @@ namespace SCSharp.MpqLib
 
             if (frame > frameCount || frame < 0)
             {
-                throw new Exception();
+                throw new SCException();
             }
 
             if (frameCache.ContainsKey(frame))

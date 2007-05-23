@@ -69,7 +69,7 @@ namespace SCSharp.UI
             byte magic = Utilities.ReadByte(stream);
             if (magic != 0x0A)
             {
-                throw new Exception("stream is not a valid .pcx file");
+                throw new SCException("stream is not a valid .pcx file");
             }
 
             /*version =*/
@@ -99,7 +99,7 @@ namespace SCSharp.UI
             stream.Position += 54;
 
             if (bpp != 8 || numplanes != 1)
-                throw new Exception("unsupported .pcx image type");
+                throw new SCException("unsupported .pcx image type");
 
             width = (ushort)(xmax - xmin + 1);
             height = (ushort)(ymax - ymin + 1);

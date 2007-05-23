@@ -106,12 +106,12 @@ namespace SCSharp.UI
         /// </summary>
         public event PlayerEventHandler Finished;
 
-        void PlayerFinished()
+        void PlayerFinished(object sender, EventArgs e)
         {
             player = null;
             if (Finished != null)
             {
-                Finished();
+                Finished(this, new EventArgs());
             }
         }
 
@@ -130,7 +130,7 @@ namespace SCSharp.UI
                 || args.Key == Key.Space)
             {
                 player.Stop();
-                PlayerFinished();
+                PlayerFinished(this, new EventArgs());
             }
         }
     }

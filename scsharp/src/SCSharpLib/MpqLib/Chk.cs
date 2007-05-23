@@ -202,7 +202,7 @@ namespace SCSharp.MpqLib
             SectionData sec = sections[sectionName];
             if (sec == null)
             {
-                throw new Exception(String.Format("map file is missing section {0}, cannot load", sectionName));
+                throw new SCException(String.Format("map file is missing section {0}, cannot load", sectionName));
             }
 
             if (sec.Buffer == null)

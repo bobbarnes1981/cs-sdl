@@ -72,35 +72,44 @@ namespace SCSharp.UI
             }
 
             Elements[QUITMISSION_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     QuitMissionDialog d = new QuitMissionDialog(this, this.Mpq);
-                    d.Cancel += delegate() { DismissDialog(); };
+                    d.Cancel += delegate(object sender2, EventArgs args2)  
+                    { 
+                        DismissDialog(); 
+                    };
                     ShowDialog(d);
                 };
 
             Elements[EXITPROGRAM_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     ExitConfirmationDialog d = new ExitConfirmationDialog(this, this.Mpq);
-                    d.Cancel += delegate() { DismissDialog(); };
+                    d.Cancel += delegate(object sender2, EventArgs args2) 
+                    { 
+                        DismissDialog(); 
+                    };
                     ShowDialog(d);
                 };
 
             Elements[RESTARTMISSION_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     RestartConfirmationDialog d = new RestartConfirmationDialog(this, this.Mpq);
-                    d.Cancel += delegate() { DismissDialog(); };
+                    d.Cancel += delegate(object sender2, EventArgs args2) 
+                    { 
+                        DismissDialog(); 
+                    };
                     ShowDialog(d);
                 };
 
             Elements[PREVIOUS_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     if (Previous != null)
                     {
-                        Previous();
+                        Previous(this, new EventArgs());
                     }
                 };
         }
