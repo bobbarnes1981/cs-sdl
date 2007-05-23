@@ -274,7 +274,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event ElementEventHandler Activate;
+        public event EventHandler<SCEventArgs> Activate;
 
         /// <summary>
         ///
@@ -283,14 +283,14 @@ namespace SCSharp.UI
         {
             if (Activate != null)
             {
-                Activate(this, new EventArgs());
+                Activate(this, new SCEventArgs());
             }
         }
 
         /// <summary>
         ///
         /// </summary>
-        public event ElementEventHandler MouseEnterEvent;
+        public event EventHandler<SCEventArgs> MouseEnterEvent;
 
         /// <summary>
         ///
@@ -299,14 +299,14 @@ namespace SCSharp.UI
         {
             if (MouseEnterEvent != null)
             {
-                MouseEnterEvent(this, new EventArgs());
+                MouseEnterEvent(this, new SCEventArgs());
             }
         }
 
         /// <summary>
         ///
         /// </summary>
-        public event ElementEventHandler MouseLeaveEvent;
+        public event EventHandler<SCEventArgs> MouseLeaveEvent;
 
         /// <summary>
         ///
@@ -315,7 +315,7 @@ namespace SCSharp.UI
         {
             if (MouseLeaveEvent != null)
             {
-                MouseLeaveEvent(this, new EventArgs());
+                MouseLeaveEvent(this, new SCEventArgs());
             }
         }
 
@@ -445,8 +445,8 @@ namespace SCSharp.UI
         }
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    public delegate void ElementEventHandler(object sender, EventArgs e);
+    ///// <summary>
+    /////
+    ///// </summary>
+    //public delegate void ElementEventHandler(object sender, EventArgs e);
 }

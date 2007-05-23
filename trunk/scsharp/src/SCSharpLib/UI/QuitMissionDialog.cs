@@ -71,18 +71,18 @@ namespace SCSharp.UI
             }
 
             Elements[QUIT_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args)
+                delegate(object sender, SCEventArgs args)
                 {
                     //QuitConfirmationDialog d = new QuitConfirmationDialog(this, mpq);
                     //ShowDialog(d);
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args)
+                delegate(object sender, SCEventArgs args)
                 {
                     if (Cancel != null)
                     {
-                        Cancel(this, new EventArgs());
+                        Cancel(this, new SCEventArgs());
                     }
                 };
         }
@@ -90,6 +90,6 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Cancel;
+        public event EventHandler<SCEventArgs> Cancel;
     }
 }

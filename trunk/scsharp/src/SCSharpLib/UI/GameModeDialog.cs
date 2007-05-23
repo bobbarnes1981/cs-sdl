@@ -75,7 +75,7 @@ namespace SCSharp.UI
             Elements[TITLE_ELEMENT_INDEX].Text = GlobalResources.BrooDat.GluAllTbl.Strings[172];
 
             Elements[ORIGINAL_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args)
+                delegate(object sender, SCEventArgs args)
                 {
                     if (Activate != null)
                     {
@@ -84,7 +84,7 @@ namespace SCSharp.UI
                 };
 
             Elements[EXPANSION_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args)
+                delegate(object sender, SCEventArgs args)
                 {
                     if (Activate != null)
                     {
@@ -93,11 +93,11 @@ namespace SCSharp.UI
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args)
+                delegate(object sender, SCEventArgs args)
                 {
                     if (Cancel != null)
                     {
-                        Cancel(this, new EventArgs());
+                        Cancel(this, new SCEventArgs());
                     }
                 };
         }
@@ -105,7 +105,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Cancel;
+        public event EventHandler<SCEventArgs> Cancel;
         /// <summary>
         /// 
         /// </summary>

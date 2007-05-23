@@ -33,7 +33,7 @@ namespace SCSharp.UI
     /// <summary>
     /// 
     /// </summary>
-    public class GameModeActivateEventArgs : EventArgs
+    public class GameModeActivateEventArgs : SCEventArgs
     {
         #region Private fields
 
@@ -58,7 +58,7 @@ namespace SCSharp.UI
         /// <summary>
         /// Constructor
         /// </summary>
-        public GameModeActivateEventArgs()
+        public GameModeActivateEventArgs() : base()
         {
         }
 

@@ -72,10 +72,10 @@ namespace SCSharp.UI
             }
 
             Elements[QUITMISSION_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     QuitMissionDialog d = new QuitMissionDialog(this, this.Mpq);
-                    d.Cancel += delegate(object sender2, EventArgs args2)  
+                    d.Cancel += delegate(object sender2, SCEventArgs args2)  
                     { 
                         DismissDialog(); 
                     };
@@ -83,10 +83,10 @@ namespace SCSharp.UI
                 };
 
             Elements[EXITPROGRAM_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     ExitConfirmationDialog d = new ExitConfirmationDialog(this, this.Mpq);
-                    d.Cancel += delegate(object sender2, EventArgs args2) 
+                    d.Cancel += delegate(object sender2, SCEventArgs args2) 
                     { 
                         DismissDialog(); 
                     };
@@ -94,10 +94,10 @@ namespace SCSharp.UI
                 };
 
             Elements[RESTARTMISSION_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     RestartConfirmationDialog d = new RestartConfirmationDialog(this, this.Mpq);
-                    d.Cancel += delegate(object sender2, EventArgs args2) 
+                    d.Cancel += delegate(object sender2, SCEventArgs args2) 
                     { 
                         DismissDialog(); 
                     };
@@ -105,11 +105,11 @@ namespace SCSharp.UI
                 };
 
             Elements[PREVIOUS_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
+                delegate(object sender, SCEventArgs args) 
                 {
                     if (Previous != null)
                     {
-                        Previous(this, new EventArgs());
+                        Previous(this, new SCEventArgs());
                     }
                 };
         }
@@ -117,6 +117,6 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event DialogEventHandler Previous;
+        public event EventHandler<SCEventArgs> Previous;
     }
 }

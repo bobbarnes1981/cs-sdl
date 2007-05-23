@@ -70,11 +70,11 @@ namespace SCSharp.UI
             }
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-            delegate(object sender, EventArgs args) 
+            delegate(object sender, SCEventArgs args) 
             {
                 if (Ok != null)
                 {
-                    Ok(this, new EventArgs());
+                    Ok(this, new SCEventArgs());
                 }
             };
 
@@ -90,6 +90,6 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public event DialogEventHandler Ok;
+        public event EventHandler<SCEventArgs> Ok;
     }
 }

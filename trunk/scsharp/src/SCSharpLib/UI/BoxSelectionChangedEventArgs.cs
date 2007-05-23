@@ -33,7 +33,7 @@ namespace SCSharp.UI
     /// <summary>
     /// 
     /// </summary>
-    public class BoxSelectionChangedEventArgs : EventArgs
+    public class BoxSelectionChangedEventArgs : SCEventArgs
     {
         #region Private fields
 
@@ -58,7 +58,7 @@ namespace SCSharp.UI
         /// <summary>
         /// Constructor
         /// </summary>
-        public BoxSelectionChangedEventArgs()
+        public BoxSelectionChangedEventArgs() : base()
         {
         }
 

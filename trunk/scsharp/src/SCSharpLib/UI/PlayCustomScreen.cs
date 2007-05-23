@@ -237,7 +237,7 @@ namespace SCSharp.UI
             gametypeCombo.SelectionChanged += GameTypeSelectionChanged;
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args)
+                delegate(object sender, SCEventArgs args)
                 {
                     if (selectedScenario == null)
                     {
@@ -270,7 +270,7 @@ namespace SCSharp.UI
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args)
+                delegate(object sender, SCEventArgs args)
                 {
                     Game.Instance.SwitchToScreen(new RaceSelectionScreen(this.Mpq));
                 };

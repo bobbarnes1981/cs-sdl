@@ -342,8 +342,8 @@ namespace SCSharp.UI
 
         void UserEvent(object sender, UserEventArgs args)
         {
-            ReadyEventHandler d = (ReadyEventHandler)args.UserEvent;
-            d(this, new EventArgs());
+            EventHandler<SCEventArgs> d = (EventHandler<SCEventArgs>)args.UserEvent;
+            d(this, new SCEventArgs());
         }
 
         void PointerMotion(object sender, MouseMotionEventArgs args)
@@ -409,7 +409,7 @@ namespace SCSharp.UI
             {
                 if (args.Key == Key.Q)
                 {
-                    Quit(this, new EventArgs());
+                    Quit(this, new SCEventArgs());
                 }
                 else if (args.Key == Key.F)
                 {
