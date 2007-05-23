@@ -91,8 +91,8 @@ namespace SCSharp.UI
 				descriptions[i] = GlobalResources.Instance.GluAllTbl[ description_startidx + i ];
 			}
 #else
-            titles[0] = GlobalResources.Instance.GluAllTbl[titleStartIdx + 3];
-            descriptions[0] = GlobalResources.Instance.GluAllTbl[descriptionStartIdx + 3];
+            titles[0] = GlobalResources.GluAllTbl[titleStartIdx + 3];
+            descriptions[0] = GlobalResources.GluAllTbl[descriptionStartIdx + 3];
 #endif
             listbox = (ListBoxElement)Elements[LISTBOX_ELEMENT_INDEX];
 
@@ -102,28 +102,28 @@ namespace SCSharp.UI
             }
 
             listbox.SelectedIndex = 0;
-            HandleSelectionChanged(0);
+            HandleSelectionChanged(this, new BoxSelectionChangedEventArgs(0));
 
             listbox.SelectionChanged += HandleSelectionChanged;
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
                     ShowDialog(new OkDialog(this, this.Mpq,
                                   "insert battle.net code here"));
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
                     Game.Instance.SwitchToScreen(UIScreenType.MainMenu);
                 };
         }
 
-        void HandleSelectionChanged(int selectedIndex)
+        void HandleSelectionChanged(object sender, BoxSelectionChangedEventArgs e)
         {
-            Elements[TITLE_ELEMENT_INDEX].Text = titles[selectedIndex];
-            Elements[DESCRIPTION_ELEMENT_INDEX].Text = descriptions[selectedIndex];
+            Elements[TITLE_ELEMENT_INDEX].Text = titles[e.SelectedIndex];
+            Elements[DESCRIPTION_ELEMENT_INDEX].Text = descriptions[e.SelectedIndex];
         }
 
         /// <summary>

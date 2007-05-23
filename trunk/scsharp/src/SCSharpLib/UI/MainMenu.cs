@@ -62,16 +62,16 @@ namespace SCSharp.UI
         void ShowGameModeDialog(UIScreenType nextScreen)
         {
             GameModeDialog d = new GameModeDialog(this, this.Mpq);
-            d.Cancel += delegate()
+            d.Cancel += delegate(object sender, EventArgs args)
             {
                 DismissDialog();
             };
-            d.Activate += delegate(bool expansion)
+            d.Activate += delegate(object sender, GameModeActivateEventArgs args)
             {
                 DismissDialog();
                 try
                 {
-                    Game.Instance.PlayingBroodWar = expansion;
+                    Game.Instance.PlayingBroodWar = args.Expansion;
                     GuiUtil.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
                     Game.Instance.SwitchToScreen(nextScreen);
                 }
@@ -93,7 +93,7 @@ namespace SCSharp.UI
             Elements[VERSION_ELEMENT_INDEX].Text = "v0.0000004";
 
             Elements[SINGLEPLAYER_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args)
             {
                 if (Game.Instance.IsBroodWar)
                 {
@@ -107,7 +107,7 @@ namespace SCSharp.UI
             };
 
             Elements[MULTIPLAYER_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args)
             {
                 if (Game.Instance.IsBroodWar)
                 {
@@ -121,7 +121,7 @@ namespace SCSharp.UI
             };
 
             Elements[CAMPAIGNEDITOR_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args)
             {
                 OkDialog d = new OkDialog(this, this.Mpq,
                 "The campaign editor functionality is not available in SCSharp");
@@ -129,29 +129,30 @@ namespace SCSharp.UI
             };
 
             Elements[INTRO_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args)
             {
                 Cinematic introScreen = new Cinematic(this.Mpq,
                 Game.Instance.IsBroodWar
                 ? "smk\\starXIntr.smk"
                 : "smk\\starintr.smk");
-                introScreen.Finished += delegate()
-                {
-                    Game.Instance.SwitchToScreen(this);
-                };
+                introScreen.Finished +=
+                    delegate(object sender2, EventArgs e2)
+                    {
+                        Game.Instance.SwitchToScreen(this);
+                    };
                 Game.Instance.SwitchToScreen(introScreen);
             };
 
             Elements[CREDITS_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args)
             {
                 Game.Instance.SwitchToScreen(new CreditsScreen(this.Mpq));
             };
 
             Elements[EXIT_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args)
             {
-                Game.Quit();
+                Game.Quit(this, new EventArgs());
             };
         }
     }

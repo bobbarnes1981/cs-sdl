@@ -72,27 +72,33 @@ namespace SCSharp.UI
                 Console.WriteLine("{0}: {1}", i, Elements[i].Text);
             }
 
-            Elements[TITLE_ELEMENT_INDEX].Text = GlobalResources.Instance.BrooDat.GluAllTbl.Strings[172];
+            Elements[TITLE_ELEMENT_INDEX].Text = GlobalResources.BrooDat.GluAllTbl.Strings[172];
 
             Elements[ORIGINAL_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
                     if (Activate != null)
-                        Activate(false);
+                    {
+                        Activate(this, new GameModeActivateEventArgs(false));
+                    }
                 };
 
             Elements[EXPANSION_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
                     if (Activate != null)
-                        Activate(true);
+                    {
+                        Activate(this, new GameModeActivateEventArgs(true));
+                    }
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
                     if (Cancel != null)
-                        Cancel();
+                    {
+                        Cancel(this, new EventArgs());
+                    }
                 };
         }
 
@@ -103,12 +109,13 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public event GameModeActivateEventHandler Activate;
+        public event EventHandler<GameModeActivateEventArgs> Activate;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="expansion"></param>
-    public delegate void GameModeActivateEventHandler(bool expansion);
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    ///// <param name="e"></param>
+    ///// <param name="sender"></param>
+    //public delegate void GameModeActivateEventHandler(object sender, GameModeActivateEventArgs e);
 }

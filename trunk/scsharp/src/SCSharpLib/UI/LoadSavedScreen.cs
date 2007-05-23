@@ -69,7 +69,7 @@ namespace SCSharp.UI
             }
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args) 
             {
                 Game.Instance.SwitchToScreen(new RaceSelectionScreen(this.Mpq));
             };

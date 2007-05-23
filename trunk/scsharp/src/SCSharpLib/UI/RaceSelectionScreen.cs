@@ -100,7 +100,7 @@ namespace SCSharp.UI
                 Console.WriteLine("{0}: {1} '{2}'", i, Elements[i].Type, Elements[i].Text);
 
             Elements[THIRD_CAMPAIGN_ELEMENT_INDEX].MouseEnterEvent +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     Console.WriteLine("over third campaign element");
                     if (true /* XXX this should come from the player's file */)
@@ -110,7 +110,7 @@ namespace SCSharp.UI
                 };
 
             Elements[THIRD_CAMPAIGN_ELEMENT_INDEX].MouseLeaveEvent +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     if (true /* XXX this should come from the player's file */)
                     {
@@ -119,7 +119,7 @@ namespace SCSharp.UI
                 };
 
             Elements[SECOND_CAMPAIGN_ELEMENT_INDEX].MouseEnterEvent +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     Console.WriteLine("over second campaign element");
                     if (true /* XXX this should come from the player's file */)
@@ -129,7 +129,7 @@ namespace SCSharp.UI
                 };
 
             Elements[SECOND_CAMPAIGN_ELEMENT_INDEX].MouseLeaveEvent +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     if (true /* XXX this should come from the player's file */)
                     {
@@ -138,38 +138,38 @@ namespace SCSharp.UI
                 };
 
             Elements[FIRST_CAMPAIGN_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     SelectCampaign(0);
                 };
 
             Elements[SECOND_CAMPAIGN_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     SelectCampaign(1);
                 };
 
             Elements[THIRD_CAMPAIGN_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     SelectCampaign(2);
                 };
 
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     Game.Instance.SwitchToScreen(UIScreenType.LogOn);
                 };
 
             Elements[LOADSAVED_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     Game.Instance.SwitchToScreen(new LoadSavedScreen(this.Mpq));
                 };
 
             Elements[PLAYCUSTOM_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     Game.Instance.SwitchToScreen(new PlayCustomScreen(this.Mpq));
                 };
@@ -183,9 +183,9 @@ namespace SCSharp.UI
 
             Game.Instance.Race = (Game.Instance.PlayingBroodWar ? BroodWarRaces : StarcraftRaces)[campaign];
 
-            mapdata_index = GlobalResources.Instance.MapDataDat.GetFileIndex((uint)(Game.Instance.PlayingBroodWar ? BroodwarCampaigns_MapDataStart : StarcraftCampaigns_MapDataStart)[campaign]);
+            mapdata_index = GlobalResources.MapDataDat.GetFileIndex((uint)(Game.Instance.PlayingBroodWar ? BroodwarCampaigns_MapDataStart : StarcraftCampaigns_MapDataStart)[campaign]);
 
-            prefix = GlobalResources.Instance.MapDataTbl[(int)mapdata_index];
+            prefix = GlobalResources.MapDataTbl[(int)mapdata_index];
             markup = String.Format("rez\\Est{0}{1}{2}.txt",
                         Utilities.RaceChar[(int)Game.Instance.Race],
                         prefix.EndsWith("tutorial") ? "0t" : prefix.Substring(prefix.Length - 2),

@@ -90,7 +90,7 @@ namespace SCSharp.UI
             }
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args) 
             {
                 if (listbox.SelectedIndex == -1)
                 {
@@ -101,21 +101,21 @@ namespace SCSharp.UI
             };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args) 
             {
                 Game.Instance.SwitchToScreen(UIScreenType.MainMenu);
             };
 
             Elements[NEW_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args) 
             {
                 EntryDialog d = new EntryDialog(this, this.Mpq,
-                GlobalResources.Instance.GluAllTbl.Strings[22]);
-                d.Cancel += delegate()
+                GlobalResources.GluAllTbl.Strings[22]);
+                d.Cancel += delegate(object sender2, EventArgs args2) 
                 {
                     DismissDialog();
                 };
-                d.Ok += delegate()
+                d.Ok += delegate(object sender2, EventArgs args2) 
                 {
                     if (listbox.Contains(d.Value))
                     {
@@ -131,15 +131,15 @@ namespace SCSharp.UI
             };
 
             Elements[DELETE_ELEMENT_INDEX].Activate +=
-            delegate()
+            delegate(object sender, EventArgs args) 
             {
                 OkCancelDialog okd = new OkCancelDialog(this, this.Mpq,
-                GlobalResources.Instance.GluAllTbl.Strings[23]);
-                okd.Cancel += delegate()
+                GlobalResources.GluAllTbl.Strings[23]);
+                okd.Cancel += delegate(object sender2, EventArgs args2) 
                 {
                     DismissDialog();
                 };
-                okd.Ok += delegate()
+                okd.Ok += delegate(object sender2, EventArgs args2) 
                 {
                     DismissDialog();
                     /* actually delete the file */
@@ -179,7 +179,7 @@ namespace SCSharp.UI
         void NameAlreadyExists(EntryDialog d)
         {
             OkDialog okd = new OkDialog(d, this.Mpq,
-            GlobalResources.Instance.GluAllTbl.Strings[24]);
+            GlobalResources.GluAllTbl.Strings[24]);
             d.ShowDialog(okd);
         }
 
@@ -190,7 +190,7 @@ namespace SCSharp.UI
         /// </summary>
         public void Dispose()
         {
-            throw new Exception("The method or operation is not implemented.");
+            throw new SCException("The method or operation is not implemented.");
         }
 
         #endregion

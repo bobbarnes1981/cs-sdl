@@ -63,7 +63,7 @@ namespace SCSharp.UI
         public Unit(int unitId)
         {
             this.unitId = unitId;
-            units = GlobalResources.Instance.UnitsDat;
+            units = GlobalResources.UnitsDat;
 
             hitpoints = units.GetHitPoints(unitId);
             shields = units.GetShields(unitId);
@@ -80,7 +80,7 @@ namespace SCSharp.UI
                 throw new ArgumentNullException("info");
             }
             this.unitId = info.UnitId;
-            units = GlobalResources.Instance.UnitsDat;
+            units = GlobalResources.UnitsDat;
 
             hitpoints = units.GetHitPoints(info.UnitId);
             shields = units.GetShields(info.UnitId);
@@ -98,7 +98,7 @@ namespace SCSharp.UI
         {
             if (sprite != null)
             {
-                throw new Exception();
+                throw new SCException();
             }
 
             sprite = SpriteManager.CreateSprite(mpq, SpriteId, palette, x, y);
@@ -147,7 +147,7 @@ namespace SCSharp.UI
         /// </summary>
         public int SpriteId
         {
-            get { return GlobalResources.Instance.FlingyDat.GetSpriteId(FlingyId); }
+            get { return GlobalResources.FlingyDat.GetSpriteId(FlingyId); }
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace SCSharp.UI
         /// </summary>
         public int SelectionCircle
         {
-            get { return GlobalResources.Instance.SpritesDat.GetSelectionCircle(SpriteId); }
+            get { return GlobalResources.SpritesDat.GetSelectionCircle(SpriteId); }
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace SCSharp.UI
         /// </summary>
         public int SelectionCircleOffset
         {
-            get { return GlobalResources.Instance.SpritesDat.GetSelectionCircleOffset(SpriteId); }
+            get { return GlobalResources.SpritesDat.GetSelectionCircleOffset(SpriteId); }
         }
     }
 }

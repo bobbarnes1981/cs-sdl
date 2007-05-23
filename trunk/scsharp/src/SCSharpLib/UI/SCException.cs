@@ -1,9 +1,9 @@
 #region LICENSE
 //
 // Authors:
-//	Chris Toshok (toshok@hungry.com)
+//	David Hudson (jendave@yahoo.com)
 //
-// (C) 2006 The Hungry Programmers (http://www.hungry.com/)
+// (C) 2007 David Hudson
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -27,58 +27,55 @@
 #endregion LICENSE
 
 using System;
-using System.IO;
-using System.Text;
-using System.Threading;
-
-using SdlDotNet;
-using SCSharp;
-using SCSharp.MpqLib;
-using System.Drawing;
+using System.Runtime.Serialization;
 
 namespace SCSharp.UI
 {
     /// <summary>
-    /// 
+    /// Represents a run-time error from the SCSharp library.
     /// </summary>
-    public class ObjectivesDialog : UIDialog
+    [Serializable()]
+    public class SCException : Exception
     {
+        #region Constructors
+
         /// <summary>
-        /// 
+        /// Returns basic exception
         /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="mpq"></param>
-        public ObjectivesDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.ObjctDlgBin)
+        public SCException() : base()
         {
-            BackgroundPath = null;
         }
-
-        const int PREVIOUS_ELEMENT_INDEX = 1;
-
         /// <summary>
-        /// 
+        /// Initializes an SdlException instance
         /// </summary>
-        protected override void ResourceLoader()
+        /// <param name="message">
+        /// The string representing the error message
+        /// </param>
+        public SCException(string message)
+            : base(message)
         {
-            base.ResourceLoader();
-
-            for (int i = 0; i < Elements.Count; i++)
-                Console.WriteLine("{0}: {1} '{2}'", i, Elements[i].Type, Elements[i].Text);
-
-            Elements[PREVIOUS_ELEMENT_INDEX].Activate +=
-                delegate(object sender, EventArgs args) 
-                {
-                    if (Previous != null)
-                    {
-                        Previous(this, new EventArgs());
-                    }
-                };
         }
 
         /// <summary>
-        /// 
+        /// Returns exception
         /// </summary>
-        public event DialogEventHandler Previous;
+        /// <param name="message">Exception message</param>
+        /// <param name="exception">Exception type</param>
+        public SCException(string message, Exception exception)
+            : base(message, exception)
+        {
+        }
+
+        /// <summary>
+        /// Returns SerializationInfo
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
+        protected SCException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+
+        #endregion
     }
 }

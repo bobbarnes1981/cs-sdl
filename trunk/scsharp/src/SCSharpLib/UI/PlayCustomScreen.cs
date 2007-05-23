@@ -88,8 +88,8 @@ namespace SCSharp.UI
         Chk selectedChk;
         Got selectedGot;
 
-        ListBoxElement file_listbox;
-        ComboBoxElement gametype_combo;
+        ListBoxElement fileListbox;
+        ComboBoxElement gametypeCombo;
 
         static void InitializeRaceCombo(ComboBoxElement combo)
         {
@@ -101,8 +101,8 @@ namespace SCSharp.UI
 
         static void InitializePlayerCombo(ComboBoxElement combo)
         {
-            combo.AddItem(GlobalResources.Instance.GluAllTbl.Strings[130]); /* Closed */
-            combo.AddItem(GlobalResources.Instance.GluAllTbl.Strings[128], true); /* Computer */
+            combo.AddItem(GlobalResources.GluAllTbl.Strings[130]); /* Closed */
+            combo.AddItem(GlobalResources.GluAllTbl.Strings[128], true); /* Computer */
         }
 
         string[] files;
@@ -111,7 +111,7 @@ namespace SCSharp.UI
 
         void PopulateFileList()
         {
-            file_listbox.Clear();
+            fileListbox.Clear();
 
             string[] dir = Directory.GetDirectories(curdir);
             List<string> dirs = new List<string>();
@@ -127,10 +127,14 @@ namespace SCSharp.UI
                 {
                     if (!Game.Instance.IsBroodWar
                         && dl == "broodwar")
+                    {
                         continue;
+                    }
 
                     if (dl == "replays")
+                    {
                         continue;
+                    }
                 }
 
                 dirs.Add(d);
@@ -144,18 +148,20 @@ namespace SCSharp.UI
 
             for (int i = 0; i < directories.Length; i++)
             {
-                file_listbox.AddItem(String.Format("[{0}]", Path.GetFileName(directories[i])));
+                fileListbox.AddItem(String.Format("[{0}]", Path.GetFileName(directories[i])));
             }
 
             for (int i = 0; i < files.Length; i++)
             {
                 string lower = files[i].ToLower();
                 if (lower.EndsWith(".scm") || lower.EndsWith(".scx"))
-                    file_listbox.AddItem(Path.GetFileName(files[i]));
+                {
+                    fileListbox.AddItem(Path.GetFileName(files[i]));
+                }
             }
 
-            file_listbox.SelectedIndex = directories.Length;
-            FileListSelectionChanged(directories.Length);
+            fileListbox.SelectedIndex = directories.Length;
+            FileListSelectionChanged(this, new BoxSelectionChangedEventArgs(directories.Length));
         }
 
         void PopulateGameTypes()
@@ -187,11 +193,11 @@ namespace SCSharp.UI
                we only show the templates that allow computer players, have 0 teams */
             foreach (Got got in templates)
             {
-                gametype_combo.AddItem(got.UIGameTypeName);
+                gametypeCombo.AddItem(got.UIGameTypeName);
             }
-            gametype_combo.SelectedIndex = 0;
+            gametypeCombo.SelectedIndex = 0;
 
-            GameTypeSelectionChanged(gametype_combo.SelectedIndex);
+            GameTypeSelectionChanged(this, new BoxSelectionChangedEventArgs(gametypeCombo.SelectedIndex));
         }
 
         /// <summary>
@@ -202,7 +208,9 @@ namespace SCSharp.UI
             base.ResourceLoader();
 
             for (int i = 0; i < Elements.Count; i++)
+            {
                 Console.WriteLine("{0}: {1} '{2}'", i, Elements[i].Type, Elements[i].Text);
+            }
 
             /* these don't ever show up in the UI, that i know of... */
             Elements[GAMESUBTYPE_LABEL_ELEMENT_INDEX].Visible = false;
@@ -215,8 +223,8 @@ namespace SCSharp.UI
                 InitializeRaceCombo((ComboBoxElement)Elements[PLAYER1_COMBOBOX_RACE + i]);
             }
 
-            file_listbox = (ListBoxElement)Elements[FILELISTBOX_ELEMENT_INDEX];
-            gametype_combo = (ComboBoxElement)Elements[GAMETYPECOMBO_ELEMENT_INDEX];
+            fileListbox = (ListBoxElement)Elements[FILELISTBOX_ELEMENT_INDEX];
+            gametypeCombo = (ComboBoxElement)Elements[GAMETYPECOMBO_ELEMENT_INDEX];
 
             /* initially populate the map list by scanning the maps/ directory in the starcraftdir */
             mapdir = Path.Combine(Game.Instance.RootDirectory, "maps");
@@ -225,23 +233,30 @@ namespace SCSharp.UI
             PopulateGameTypes();
             PopulateFileList();
 
-            file_listbox.SelectionChanged += FileListSelectionChanged;
-            gametype_combo.SelectionChanged += GameTypeSelectionChanged;
+            fileListbox.SelectionChanged += FileListSelectionChanged;
+            gametypeCombo.SelectionChanged += GameTypeSelectionChanged;
 
             Elements[OK_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
                     if (selectedScenario == null)
                     {
                         // the selected entry is a directory, switch to it
                         if (curdir != mapdir)
-                            if (file_listbox.SelectedIndex == 0)
+                        {
+                            if (fileListbox.SelectedIndex == 0)
+                            {
                                 curdir = Directory.GetParent(curdir).FullName;
+                            }
                             else
-                                curdir = directories[file_listbox.SelectedIndex - 1];
-
+                            {
+                                curdir = directories[fileListbox.SelectedIndex - 1];
+                            }
+                        }
                         else
-                            curdir = directories[file_listbox.SelectedIndex];
+                        {
+                            curdir = directories[fileListbox.SelectedIndex];
+                        }
 
                         PopulateFileList();
                     }
@@ -255,7 +270,7 @@ namespace SCSharp.UI
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
                     Game.Instance.SwitchToScreen(new RaceSelectionScreen(this.Mpq));
                 };
@@ -273,7 +288,7 @@ namespace SCSharp.UI
             {
                 string slotString;
 
-                slotString = GlobalResources.Instance.GluAllTbl.Strings[HUMANSLOT_FORMAT_INDEX];
+                slotString = GlobalResources.GluAllTbl.Strings[HUMANSLOT_FORMAT_INDEX];
                 slotString = slotString.Replace("%c", " "); /* should probably be a tab.. */
                 slotString = slotString.Replace("%s",
                                  (selectedChk == null
@@ -284,7 +299,7 @@ namespace SCSharp.UI
                 Elements[MAPPLAYERS1_ELEMENT_INDEX].Text = slotString;
                 Elements[MAPPLAYERS1_ELEMENT_INDEX].Visible = true;
 
-                slotString = GlobalResources.Instance.GluAllTbl.Strings[COMPUTERSLOT_FORMAT_INDEX];
+                slotString = GlobalResources.GluAllTbl.Strings[COMPUTERSLOT_FORMAT_INDEX];
                 slotString = slotString.Replace("%c", " "); /* should probably be a tab.. */
                 slotString = slotString.Replace("%s",
                                  (selectedChk == null
@@ -297,7 +312,7 @@ namespace SCSharp.UI
             }
             else
             {
-                string numPlayersString = GlobalResources.Instance.GluAllTbl.Strings[NUMPLAYERS_FORMAT_INDEX];
+                string numPlayersString = GlobalResources.GluAllTbl.Strings[NUMPLAYERS_FORMAT_INDEX];
 
                 numPlayersString = numPlayersString.Replace("%c", " "); /* should probably be a tab.. */
                 numPlayersString = numPlayersString.Replace("%s",
@@ -339,20 +354,20 @@ namespace SCSharp.UI
             }
         }
 
-        void GameTypeSelectionChanged(int selectedIndex)
+        void GameTypeSelectionChanged(object sender, BoxSelectionChangedEventArgs e)//int selectedIndex)
         {
             /* the display of the number of players
              * changes depending upon the template */
-            selectedGot = templates[selectedIndex];
+            selectedGot = templates[e.SelectedIndex];
 
             UpdatePlayersDisplay();
         }
 
-        void FileListSelectionChanged(int selectedIndex)
+        void FileListSelectionChanged(object sender, BoxSelectionChangedEventArgs e)
         {
-            string map_path = Path.Combine(curdir, file_listbox.SelectedItem);
+            string map_path = Path.Combine(curdir, fileListbox.SelectedItem);
 
-            if (selectedIndex < directories.Length)
+            if (e.SelectedIndex < directories.Length)
             {
                 selectedScenario = null;
                 selectedChk = null;
@@ -367,9 +382,9 @@ namespace SCSharp.UI
             Elements[MAPTITLE_ELEMENT_INDEX].Text = selectedChk == null ? "" : selectedChk.Name;
             Elements[MAPDESCRIPTION_ELEMENT_INDEX].Text = selectedChk == null ? "" : selectedChk.Description;
 
-            string mapSizeString = GlobalResources.Instance.GluAllTbl.Strings[MAPSIZE_FORMAT_INDEX];
+            string mapSizeString = GlobalResources.GluAllTbl.Strings[MAPSIZE_FORMAT_INDEX];
             //			string mapDimString = GlobalResources.Instance.GluAllTbl.Strings[MAPDIM_FORMAT_INDEX];
-            string tileSetString = GlobalResources.Instance.GluAllTbl.Strings[TILESET_FORMAT_INDEX];
+            string tileSetString = GlobalResources.GluAllTbl.Strings[TILESET_FORMAT_INDEX];
 
             mapSizeString = mapSizeString.Replace("%c", " "); /* should probably be a tab.. */
             mapSizeString = mapSizeString.Replace("%s",
@@ -405,7 +420,7 @@ namespace SCSharp.UI
             if (args.Key == Key.DownArrow
                 || args.Key == Key.UpArrow)
             {
-                file_listbox.KeyboardDown(args);
+                fileListbox.KeyboardDown(args);
             }
             else
             {

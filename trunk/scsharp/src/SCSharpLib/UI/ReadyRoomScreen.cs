@@ -121,21 +121,21 @@ namespace SCSharp.UI
             }
 
             Elements[cancelElementIndex].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     StopBriefing();
                     Game.Instance.SwitchToScreen(UIScreenType.LogOn);
                 };
 
             Elements[replayElementIndex].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     StopBriefing();
                     PlayBriefing();
                 };
 
             Elements[startElementIndex].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args) 
                 {
                     StopBriefing();
                     Game.Instance.SwitchToScreen(new GameScreen(this.Mpq, scenario_prefix, scenario));

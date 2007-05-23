@@ -206,12 +206,12 @@ namespace SCSharp.UI
 
             if (this.Dialog != null)
             {
-                throw new Exception("only one active dialog is allowed");
+                throw new SCException("only one active dialog is allowed");
             }
             this.Dialog = dialog;
 
             dialog.Load();
-            dialog.Ready += delegate()
+            dialog.Ready += delegate(object sender, EventArgs e)
             {
                 dialog.AddToPainter(this.Painter);
                 rememberedPainter = this.Painter;
@@ -241,15 +241,15 @@ namespace SCSharp.UI
         /// </summary>
         public void Dispose()
         {
-            throw new Exception("The method or operation is not implemented.");
+            throw new SCException("The method or operation is not implemented.");
         }
 
         #endregion
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    //public delegate void DialogEvent(object sender, EventArgs args);
-    public delegate void DialogEventHandler();
+    ///// <summary>
+    /////
+    ///// </summary>
+    ////public delegate void DialogEvent(object sender, EventArgs args);
+    public delegate void DialogEventHandler(object sender, EventArgs e);
 }

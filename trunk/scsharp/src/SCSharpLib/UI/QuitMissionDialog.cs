@@ -66,20 +66,24 @@ namespace SCSharp.UI
             base.ResourceLoader();
 
             for (int i = 0; i < Elements.Count; i++)
+            {
                 Console.WriteLine("{0}: {1} '{2}'", i, Elements[i].Type, Elements[i].Text);
+            }
 
             Elements[QUIT_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
-                    //QuitConfirmationDialog d = new QuitConfirmationDialog (this, mpq);
-                    //					ShowDialog (d);
+                    //QuitConfirmationDialog d = new QuitConfirmationDialog(this, mpq);
+                    //ShowDialog(d);
                 };
 
             Elements[CANCEL_ELEMENT_INDEX].Activate +=
-                delegate()
+                delegate(object sender, EventArgs args)
                 {
                     if (Cancel != null)
-                        Cancel();
+                    {
+                        Cancel(this, new EventArgs());
+                    }
                 };
         }
 

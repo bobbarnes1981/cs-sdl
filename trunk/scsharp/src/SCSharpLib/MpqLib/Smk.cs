@@ -119,7 +119,7 @@ namespace SCSharp.MpqLib
 			signature = Utilities.ReadDWord (stream);
 			if (signature != 0x324b4d53 /* SMK2 */
 			    && signature != 0x344b4d53 /* SMK4 */)
-				throw new Exception ("invalid file");
+				throw new SCException ("invalid file");
 			width = Utilities.ReadDWord (stream);
 			height = Utilities.ReadDWord (stream);
 			frames = Utilities.ReadDWord (stream);
@@ -842,7 +842,7 @@ namespace SCSharp.MpqLib
 			if (current_bit == 0) {
 				current_bit = 8;
 				if (current_byte_index + 1 > buf.Length)
-					throw new Exception (String.Format ("about to read off end of {0} byte buffer", buf.Length));
+					throw new SCException (String.Format ("about to read off end of {0} byte buffer", buf.Length));
 				current_byte_index++;
 				current_byte = buf[current_byte_index];
 			}
@@ -892,7 +892,7 @@ namespace SCSharp.MpqLib
 			AssertAtByteBoundary();
 
 			if (current_byte_index + length > buf.Length)
-				throw new Exception ();
+				throw new SCException ();
 
 			Array.Copy (buf, current_byte_index, dest, index, length);
 
@@ -906,7 +906,7 @@ namespace SCSharp.MpqLib
 		public void AssertAtByteBoundary ()
 		{
 			if (current_bit != 8)
-				throw new Exception ("this operation only works on byte boundaries");
+				throw new SCException ("this operation only works on byte boundaries");
 		}
 
 		int saved_start;
@@ -951,7 +951,7 @@ namespace SCSharp.MpqLib
 			{
 				currentNode = bs.ReadBit() == 0 ? currentNode.branch_0 : currentNode.branch_1;
 				if (currentNode == null)
-					throw new Exception ("can't advance to child nodes from a leaf node");
+					throw new SCException ("can't advance to child nodes from a leaf node");
 			}
 
 			public void Reset ()
@@ -961,7 +961,7 @@ namespace SCSharp.MpqLib
 
 			public uint Value { 
 				get {
-					if (!IsLeaf) throw new Exception ("this node is not a leaf");
+					if (!IsLeaf) throw new SCException ("this node is not a leaf");
 					return tree.ReturnNodeValue (currentNode);
 				}
 			}
@@ -1090,7 +1090,7 @@ namespace SCSharp.MpqLib
 		{
 			if (node.value == -1) {
 				/* it's a marker */
-				throw new Exception ();
+				throw new SCException ();
 			}
 			else
 				return (uint)node.value;

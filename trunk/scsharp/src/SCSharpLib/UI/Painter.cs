@@ -127,7 +127,7 @@ namespace SCSharp.UI
 
         Layer paintingLayer;
 
-        bool fullscreen;
+        bool fullScreen;
 
         List<PainterCallback> pendingRemoves;
         List<PainterCallback> pendingAdds;
@@ -152,8 +152,8 @@ namespace SCSharp.UI
         {
             this.millis = millis;
 
-            this.fullscreen = fullscreen;
-            Fullscreen = fullscreen;
+            this.fullScreen = fullscreen;
+            FullScreen = fullscreen;
 
             /* init our list of painter delegates */
             layers = new List<PainterCallback>[(int)Layer.Count];
@@ -200,16 +200,16 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public bool Fullscreen
+        public bool FullScreen
         {
-            get { return fullscreen; }
+            get { return fullScreen; }
             set
             {
-                if (fullscreen != value || paintingSurface == null)
+                if (fullScreen != value || paintingSurface == null)
                 {
-                    fullscreen = value;
+                    fullScreen = value;
                     Video.WindowIcon();
-                    paintingSurface = Video.SetVideoMode(ScreenResX, ScreenResY, false, false, fullscreen);
+                    paintingSurface = Video.SetVideoMode(ScreenResX, ScreenResY, false, false, fullScreen);
 
                     backbuffer = paintingSurface.CreateCompatibleSurface(paintingSurface.Size);
                     backbuffer.Fill(new Rectangle(new Point(0, 0), backbuffer.Size), Color.Black);

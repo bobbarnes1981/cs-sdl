@@ -49,7 +49,7 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public delegate void ReadyEventHandler();
+    public delegate void ReadyEventHandler(object sender, EventArgs e);
 
     /// <summary>
     ///

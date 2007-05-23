@@ -32,6 +32,8 @@
 using System;
 using System.IO;
 
+using SCSharp.UI;
+
 namespace SCSharp.MpqLib
 {
     enum CompressionType
@@ -106,14 +108,14 @@ namespace SCSharp.MpqLib
             mCType = (CompressionType)input.ReadByte();
             if (mCType != CompressionType.Binary && mCType != CompressionType.Ascii)
             {
-                throw new Exception("Invalid compression type: " + mCType);
+                throw new SCException("Invalid compression type: " + mCType);
             }
 
             mDSizeBits = input.ReadByte();
             // This is 6 in test cases
             if (4 > mDSizeBits || mDSizeBits > 6)
             {
-                throw new Exception("Invalid dictionary size: " + mDSizeBits);
+                throw new SCException("Invalid dictionary size: " + mDSizeBits);
             }
         }
 

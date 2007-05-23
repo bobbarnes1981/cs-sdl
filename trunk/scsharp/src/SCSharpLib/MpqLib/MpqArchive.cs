@@ -33,6 +33,8 @@ using System;
 using System.Collections;
 using System.IO;
 
+using SCSharp.UI;
+
 namespace SCSharp.MpqLib
 {
     /// <summary>
@@ -80,7 +82,7 @@ namespace SCSharp.MpqLib
         {
             if (LocateMpqHeader() == false)
             {
-                throw new Exception("Unable to find MPQ header");
+                throw new SCException("Unable to find MPQ header");
             }
 
             BinaryReader br = new BinaryReader(mStream);
@@ -324,7 +326,7 @@ namespace SCSharp.MpqLib
         /// <returns></returns>
         public override Stream GetStreamForResource(string path)
         {
-            throw new Exception("The method or operation is not implemented.");
+            throw new SCException("The method or operation is not implemented.");
         }
     }
 }
