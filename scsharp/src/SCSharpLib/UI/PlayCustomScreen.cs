@@ -48,7 +48,7 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="mpq"></param>
         public PlayCustomScreen(Mpq mpq)
-            : base(mpq, "glue\\PalNl", BuiltIns.GluCustmBin)
+            : base(mpq, "glue\\PalNl", BuiltIns.GluCustomBin)
         {
         }
 

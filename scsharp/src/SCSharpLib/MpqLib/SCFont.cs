@@ -228,10 +228,10 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="glyphID"></param>
-        public void DumpGlyph(int glyphID)
+        /// <param name="glyphId"></param>
+        public void DumpGlyph(int glyphId)
         {
-            Glyph g = GetGlyph(glyphID);
+            Glyph g = GetGlyph(glyphId);
             byte[,] bitmap = g.Bitmap;
             for (int y = g.Height - 1; y >= 0; y--)
             {

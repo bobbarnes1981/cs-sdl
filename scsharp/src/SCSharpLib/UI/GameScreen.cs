@@ -668,7 +668,7 @@ namespace SCSharp.UI
                 units.Add(unit);
             }
 
-            if (template != null && (template.InitialUnits != InitialUnits.UseMapSettings))
+            if (template != null && (template.InitialUnits != InitialUnitsSetting.UseMapSettings))
             {
                 foreach (Unit sl in startLocations)
                 {
