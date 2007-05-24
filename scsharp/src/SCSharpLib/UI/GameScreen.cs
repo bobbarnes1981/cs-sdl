@@ -112,9 +112,9 @@ namespace SCSharp.UI
                    Got template)
             : base(mpq)
         {
-            this.EffectpalPath = "game\\tblink.pcx";
-            this.ArrowgrpPath = "cursor\\arrow.grp";
-            this.FontpalPath = "game\\tfontgam.pcx";
+            this.EffectPalettePath = "game\\tblink.pcx";
+            this.ArrowGrpPath = "cursor\\arrow.grp";
+            this.FontPalettePath = "game\\tfontgam.pcx";
             //this.scenario_mpq = scenario_mpq;
             this.scenario = scenario;
             this.template = template;
@@ -132,9 +132,9 @@ namespace SCSharp.UI
                    Chk scenario)
             : base(mpq)
         {
-            this.EffectpalPath = "game\\tblink.pcx";
-            this.ArrowgrpPath = "cursor\\arrow.grp";
-            this.FontpalPath = "game\\tfontgam.pcx";
+            this.EffectPalettePath = "game\\tblink.pcx";
+            this.ArrowGrpPath = "cursor\\arrow.grp";
+            this.FontPalettePath = "game\\tfontgam.pcx";
             //this.scenario_mpq = scenario_mpq;
             this.scenario = scenario;
             ScrollCursors = new CursorAnimator[8];
@@ -247,7 +247,7 @@ namespace SCSharp.UI
             painter.Add(Layer.Hud, PaintHud);
             painter.Add(Layer.Hud, PaintMinimap);
 
-            if (scenario.Tileset == Tileset.Platform)
+            if (scenario.TileSet == TileSet.Platform)
             {
                 painter.Add(Layer.Background, PaintStarfield);
             }
@@ -271,7 +271,7 @@ namespace SCSharp.UI
             painter.Remove(Layer.Hud, PaintHud);
             painter.Remove(Layer.Hud, PaintMinimap);
 
-            if (scenario.Tileset == Tileset.Platform)
+            if (scenario.TileSet == TileSet.Platform)
             {
                 painter.Remove(Layer.Background, PaintStarfield);
             }
@@ -297,11 +297,11 @@ namespace SCSharp.UI
             pcx.ReadFromStream((Stream)this.Mpq.GetResource("tileset\\badlands\\dark.pcx"), 0, 0);
             tileset_palette = pcx.Palette;
 
-            hud = GuiUtil.SurfaceFromStream((Stream)this.Mpq.GetResource(String.Format(Builtins.GameConsolePcx,
+            hud = GuiUtility.SurfaceFromStream((Stream)this.Mpq.GetResource(String.Format(Builtins.GameConsolePcx,
                                                  Utilities.RaceCharLower[(int)Game.Instance.Race])),
                              254, 0);
 
-            if (scenario.Tileset == Tileset.Platform)
+            if (scenario.TileSet == TileSet.Platform)
             {
                 Spk starfield = (Spk)this.Mpq.GetResource("parallax\\star.spk");
 
@@ -340,7 +340,7 @@ namespace SCSharp.UI
             for (int i = 0; i < cursornames.Length; i++)
             {
                 ScrollCursors[i] = new CursorAnimator((Grp)this.Mpq.GetResource(cursornames[i]),
-                                       Effectpal.Palette);
+                                       EffectPalette.Palette);
                 ScrollCursors[i].SetHotspot(60, 60);
             }
 
@@ -354,7 +354,7 @@ namespace SCSharp.UI
             for (int i = 0; i < magcursornames.Length; i++)
             {
                 MagCursors[i] = new CursorAnimator((Grp)this.Mpq.GetResource(magcursornames[i]),
-                                    Effectpal.Palette);
+                                    EffectPalette.Palette);
                 MagCursors[i].SetHotspot(60, 60);
             }
 
@@ -368,7 +368,7 @@ namespace SCSharp.UI
             for (int i = 0; i < targetcursornames.Length; i++)
             {
                 TargetCursors[i] = new CursorAnimator((Grp)this.Mpq.GetResource(targetcursornames[i]),
-                                       Effectpal.Palette);
+                                       EffectPalette.Palette);
                 TargetCursors[i].SetHotspot(60, 60);
             }
 
@@ -399,8 +399,8 @@ namespace SCSharp.UI
 
                 CursorAnimator c = Game.Instance.Cursor;
 
-                if (c.X + topleft_x > s.TopLeftPosition.X && c.X + topleft_x <= s.TopLeftPosition.X + 100 /* XXX */
-                    && c.Y + topleft_y > s.TopLeftPosition.Y && c.Y + topleft_y <= s.TopLeftPosition.Y + 100 /* XXX */)
+                if (c.PositionX + topleft_x > s.TopLeftPosition.X && c.PositionX + topleft_x <= s.TopLeftPosition.X + 100 /* XXX */
+                    && c.PositionY + topleft_y > s.TopLeftPosition.Y && c.PositionY + topleft_y <= s.TopLeftPosition.Y + 100 /* XXX */)
                 {
                     Game.Instance.Cursor = MagCursors[MAG_CURSOR_G];
                     unitUnderCursor = u;
@@ -677,8 +677,8 @@ namespace SCSharp.UI
                        protoss nexus = 154 */
 
                     Unit unit = new Unit(154);
-                    unit.X = sl.X;
-                    unit.Y = sl.Y;
+                    unit.PositionX = sl.PositionX;
+                    unit.PositionY = sl.PositionY;
 
                     unit.CreateSprite(this.Mpq, tileset_palette);
                     units.Add(unit);
@@ -686,7 +686,7 @@ namespace SCSharp.UI
             }
 
             /* for now assume the player is at startLocations[0], and center the view there */
-            Recenter(startLocations[0].X, startLocations[0].Y);
+            Recenter(startLocations[0].PositionX, startLocations[0].PositionY);
         }
     }
 }

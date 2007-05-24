@@ -66,8 +66,8 @@ namespace SCSharp.UI
         /// 
         /// </summary>
         /// <param name="fileName"></param>
-        /// <param name="buf"></param>
-        public FFmpeg(string fileName, byte[] buf)
+        /// <param name="buffer"></param>
+        public FFmpeg(string fileName, byte[] buffer)
         {
             //if (!initSucceeded)
             //{
@@ -102,9 +102,9 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="buf"></param>
+        /// <param name="buffer"></param>
         /// <returns></returns>
-        public bool GetNextFrame(byte[] buf)
+        public bool GetNextFrame(byte[] buffer)
         {
             return true; //get_next_frame(handle, buf);
         }

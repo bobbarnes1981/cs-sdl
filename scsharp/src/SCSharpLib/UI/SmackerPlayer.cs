@@ -74,7 +74,7 @@ namespace SCSharp.UI
             this.width = width;
             this.height = height;
 
-            this.buf = GuiUtil.ReadStream(smkStream);
+            this.buf = GuiUtility.ReadStream(smkStream);
         }
 
         /// <summary>
@@ -133,20 +133,20 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        /// <param name="dest"></param>
-        public void BlitSurface(Surface dest)
+        /// <param name="destination"></param>
+        public void BlitSurface(Surface destination)
         {
-            if (dest == null)
+            if (destination == null)
             {
-                throw new ArgumentNullException("dest");
+                throw new ArgumentNullException("destination");
             }
             lock (sync)
             {
                 if (surface != null)
                 {
-                    dest.Blit(surface,
-                    new Point((dest.Width - surface.Width) / 2,
-                    (dest.Height - surface.Height) / 2));
+                    destination.Blit(surface,
+                    new Point((destination.Width - surface.Width) / 2,
+                    (destination.Height - surface.Height) / 2));
                 }
             }
         }
@@ -194,7 +194,7 @@ namespace SCSharp.UI
                         {
                             surface.Dispose();
                         }
-                        surface = ScaleSurface(GuiUtil.CreateSurface(frameBuf,
+                        surface = ScaleSurface(GuiUtility.CreateSurface(frameBuf,
                         (ushort)decoder.Width,
                         (ushort)decoder.Height,
                         24, decoder.Width * 3,

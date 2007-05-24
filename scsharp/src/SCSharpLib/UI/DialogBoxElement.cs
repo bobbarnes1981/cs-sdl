@@ -70,18 +70,18 @@ namespace SCSharp.UI
 
         static void TileRow(Surface surf, Grp grp, byte[] pal, int l, int c, int r, int y)
         {
-            Surface lsurf = GuiUtil.CreateSurfaceFromBitmap(grp.GetFrame(l),
+            Surface lsurf = GuiUtility.CreateSurfaceFromBitmap(grp.GetFrame(l),
                                      grp.Width, grp.Height,
                                      pal,
                                      41, 0);
 
-            Surface csurf = GuiUtil.CreateSurfaceFromBitmap(grp.GetFrame(c),
+            Surface csurf = GuiUtility.CreateSurfaceFromBitmap(grp.GetFrame(c),
                                      grp.Width, grp.Height,
                                      pal,
                                      41, 0);
 
 
-            Surface rsurf = GuiUtil.CreateSurfaceFromBitmap(grp.GetFrame(r),
+            Surface rsurf = GuiUtility.CreateSurfaceFromBitmap(grp.GetFrame(r),
                                      grp.Width, grp.Height,
                                      pal,
                                      41, 0);

@@ -98,7 +98,7 @@ namespace SCSharp.UI
             /// <param name="background"></param>
             public MarkupPage(Stream background)
             {
-                newBackground = GuiUtil.SurfaceFromStream(background, 254, 0);
+                newBackground = GuiUtility.SurfaceFromStream(background, 254, 0);
             }
 
             /// <summary>
@@ -124,7 +124,7 @@ namespace SCSharp.UI
                     }
                     else
                     {
-                        lineSurfaces.Add(GuiUtil.ComposeText(l, fnt, pal));
+                        lineSurfaces.Add(GuiUtility.ComposeText(l, fnt, pal));
                     }
                 }
             }
@@ -230,13 +230,13 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="s"></param>
-        protected void AddMarkup(Stream s)
+        /// <param name="stream"></param>
+        protected void AddMarkup(Stream stream)
         {
             string l;
             MarkupPage currentPage = null;
 
-            StreamReader sr = new StreamReader(s);
+            StreamReader sr = new StreamReader(stream);
 
             while ((l = sr.ReadLine()) != null)
             {
@@ -305,7 +305,7 @@ namespace SCSharp.UI
             pal = pcx.RgbData;
 
             Console.WriteLine("loading font");
-            fnt = GuiUtil.GetFonts(this.Mpq)[3];
+            fnt = GuiUtility.GetFonts(this.Mpq)[3];
 
             Console.WriteLine("loading markup");
             LoadMarkup();

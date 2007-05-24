@@ -39,7 +39,7 @@ namespace SCSharp.MpqLib
     /// <summary>
     /// 
     /// </summary>
-    public enum Tileset
+    public enum TileSet
     {
         /// <summary>
         /// 
@@ -220,7 +220,7 @@ namespace SCSharp.MpqLib
             }
             else if (sectionName == "ERA ")
             {
-                tileSet = (Tileset)Utilities.ReadWord(sectionData, 0);
+                tileSet = (TileSet)Utilities.ReadWord(sectionData, 0);
             }
             else if (sectionName == "DIM ")
             {
@@ -269,7 +269,7 @@ namespace SCSharp.MpqLib
             }
             else if (sectionName == "OWNR")
             {
-                numPlayers = 0;
+                numberOfPlayers = 0;
                 for (int i = 0; i < 12; i++)
                 {
                     /* 
@@ -281,11 +281,11 @@ namespace SCSharp.MpqLib
                     */
                     if (sectionData[i] == 0x05)
                     {
-                        numComputerSlots++;
+                        numberOfComputerSlots++;
                     }
                     else if (sectionData[i] == 0x06)
                     {
-                        numHumanSlots++;
+                        numberOfHumanSlots++;
                     }
                 }
             }
@@ -301,12 +301,12 @@ namespace SCSharp.MpqLib
                   07 - Inactive
                   10 - Human
                 */
-                numPlayers = 0;
+                numberOfPlayers = 0;
                 for (int i = 0; i < 12; i++)
                 {
                     if (sectionData[i] == 0x05) /* user select */
                     {
-                        numPlayers++;
+                        numberOfPlayers++;
                     }
                 }
             }
@@ -404,15 +404,15 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="idx"></param>
+        /// <param name="index"></param>
         /// <returns></returns>
-        public string GetMapString(int idx)
+        public string GetMapString(int index)
         {
-            if (idx == 0)
+            if (index == 0)
             {
                 return "";
             }
-            return strings[idx - 1];
+            return strings[index - 1];
         }
 
         string mapName;
@@ -443,11 +443,11 @@ namespace SCSharp.MpqLib
             get { return scenarioType; }
         }
 
-        Tileset tileSet;
+        TileSet tileSet;
         /// <summary>
         /// 
         /// </summary>
-        public Tileset Tileset
+        public TileSet TileSet
         {
             get { return tileSet; }
         }
@@ -521,31 +521,31 @@ namespace SCSharp.MpqLib
             }
         }
 
-        int numComputerSlots;
+        int numberOfComputerSlots;
         /// <summary>
         /// 
         /// </summary>
-        public int NumComputerSlots
+        public int NumberOfComputerSlots
         {
-            get { return numComputerSlots; }
+            get { return numberOfComputerSlots; }
         }
 
-        int numHumanSlots;
+        int numberOfHumanSlots;
         /// <summary>
         /// 
         /// </summary>
-        public int NumHumanSlots
+        public int NumberOfHumanSlots
         {
-            get { return numHumanSlots; }
+            get { return numberOfHumanSlots; }
         }
 
-        int numPlayers;
+        int numberOfPlayers;
         /// <summary>
         /// 
         /// </summary>
-        public int NumPlayers
+        public int NumberOfPlayers
         {
-            get { return numPlayers; }
+            get { return numberOfPlayers; }
         }
 
         TriggerData briefingData;

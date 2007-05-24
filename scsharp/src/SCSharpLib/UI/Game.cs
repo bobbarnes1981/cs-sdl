@@ -107,10 +107,10 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        /// <param name="starcraftDir"></param>
+        /// <param name="scProgramDir"></param>
         /// <param name="scCDDir"></param>
         /// <param name="bwCDDir"></param>
-        public Game(string starcraftDir, string scCDDir, string bwCDDir)
+        public Game(string scProgramDir, string scCDDir, string bwCDDir)
         {
             instance = this;
 
@@ -119,9 +119,9 @@ namespace SCSharp.UI
             installedMpq = new MpqContainer();
             playingMpq = new MpqContainer();
 
-            if (starcraftDir != null)
+            if (scProgramDir != null)
             {
-                foreach (string path in Directory.GetFileSystemEntries(starcraftDir))
+                foreach (string path in Directory.GetFileSystemEntries(scProgramDir))
                 {
                     if (Path.GetFileName(path).ToLower() == "broodat.mpq")
                     {
@@ -224,7 +224,7 @@ namespace SCSharp.UI
             PlayingBroodWar = (broodatMpq != null);
             isBroodWar = (broodatMpq != null);
 
-            this.rootDir = starcraftDir;
+            this.rootDir = scProgramDir;
         }
 
         static Mpq GetMpq(string path)

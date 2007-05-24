@@ -49,12 +49,13 @@ namespace SCSharp.UI
         /// <returns></returns>
         public static Surface RenderToSurface(Mpq mpq, Chk chk)
         {
-            ushort pixelWidth;
-            ushort pixelHeight;
+            ushort pixelWidth = 0;
+            ushort pixelHeight = 0;
 
-            byte[] bitmap = RenderToBitmap(mpq, chk, out pixelWidth, out pixelHeight);
+            //byte[] bitmap = RenderToBitmap(mpq, chk, out pixelWidth, out pixelHeight);
+            BitmapImage bitmap = RenderToBitmap(mpq, chk, pixelWidth, pixelHeight);
 
-            return GuiUtil.CreateSurfaceFromRgbaData(bitmap, pixelWidth, pixelHeight, 32, pixelWidth * 4);
+            return GuiUtility.CreateSurfaceFromRgbaData(bitmap.Image, bitmap.PixelWidth, bitmap.PixelHeight, 32, bitmap.PixelWidth * 4);
         }
 
         /// <summary>
@@ -66,8 +67,10 @@ namespace SCSharp.UI
         /// <param name="pixelHeight"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        public static byte[] RenderToBitmap(Mpq mpq, Chk chk, out ushort pixelWidth, out ushort pixelHeight)
+        public static BitmapImage RenderToBitmap(Mpq mpq, Chk chk, ushort pixelWidth, ushort pixelHeight)
         {
+            BitmapImage bitmapImage = new BitmapImage();
+            //public static byte[] RenderToBitmap(Mpq mpq, Chk chk, out ushort pixelWidth, out ushort pixelHeight)
             if (chk == null)
             {
                 throw new ArgumentNullException("chk");
@@ -78,15 +81,15 @@ namespace SCSharp.UI
             }
             ushort[,] mapTiles = chk.MapTiles;
 
-            byte[] image = new byte[chk.Width * 32 * chk.Height * 32 * 4];
+            bitmapImage.Image = new byte[chk.Width * 32 * chk.Height * 32 * 4];
 
-            pixelWidth = (ushort)(chk.Width * 32);
-            pixelHeight = (ushort)(chk.Height * 32);
+            bitmapImage.PixelWidth = (ushort)(chk.Width * 32);
+            bitmapImage.PixelHeight = (ushort)(chk.Height * 32);
 
-            Stream cv5_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.cv5", Utilities.TilesetNames[(int)chk.Tileset]));
-            Stream vx4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vx4", Utilities.TilesetNames[(int)chk.Tileset]));
-            Stream vr4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vr4", Utilities.TilesetNames[(int)chk.Tileset]));
-            Stream wpe_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.wpe", Utilities.TilesetNames[(int)chk.Tileset]));
+            Stream cv5_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.cv5", Utilities.TileSetNames[(int)chk.TileSet]));
+            Stream vx4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vx4", Utilities.TileSetNames[(int)chk.TileSet]));
+            Stream vr4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vr4", Utilities.TileSetNames[(int)chk.TileSet]));
+            Stream wpe_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.wpe", Utilities.TileSetNames[(int)chk.TileSet]));
 
             byte[] cv5 = new byte[cv5_fs.Length];
             cv5_fs.Read(cv5, 0, (int)cv5_fs.Length);
@@ -134,10 +137,10 @@ namespace SCSharp.UI
 
                                         byte palette_entry = vr4[minitile_id * 64 + pixel_y * 8 + pixel_x];
 
-                                        image[0 + 4 * (x + y)] = (byte)(255 - wpe[palette_entry * 4 + 3]);
-                                        image[1 + 4 * (x + y)] = wpe[palette_entry * 4 + 2];
-                                        image[2 + 4 * (x + y)] = wpe[palette_entry * 4 + 1];
-                                        image[3 + 4 * (x + y)] = wpe[palette_entry * 4 + 0];
+                                        bitmapImage.Image[0 + 4 * (x + y)] = (byte)(255 - wpe[palette_entry * 4 + 3]);
+                                        bitmapImage.Image[1 + 4 * (x + y)] = wpe[palette_entry * 4 + 2];
+                                        bitmapImage.Image[2 + 4 * (x + y)] = wpe[palette_entry * 4 + 1];
+                                        bitmapImage.Image[3 + 4 * (x + y)] = wpe[palette_entry * 4 + 0];
                                     }
                             }
                             else
@@ -151,10 +154,10 @@ namespace SCSharp.UI
 
                                         byte palette_entry = vr4[minitile_id * 64 + pixel_y * 8 + pixel_x];
 
-                                        image[0 + 4 * (x + y)] = (byte)(255 - wpe[palette_entry * 4 + 3]);
-                                        image[1 + 4 * (x + y)] = wpe[palette_entry * 4 + 2];
-                                        image[2 + 4 * (x + y)] = wpe[palette_entry * 4 + 1];
-                                        image[3 + 4 * (x + y)] = wpe[palette_entry * 4 + 0];
+                                        bitmapImage.Image[0 + 4 * (x + y)] = (byte)(255 - wpe[palette_entry * 4 + 3]);
+                                        bitmapImage.Image[1 + 4 * (x + y)] = wpe[palette_entry * 4 + 2];
+                                        bitmapImage.Image[2 + 4 * (x + y)] = wpe[palette_entry * 4 + 1];
+                                        bitmapImage.Image[3 + 4 * (x + y)] = wpe[palette_entry * 4 + 0];
                                     }
                                 }
                             }
@@ -163,7 +166,7 @@ namespace SCSharp.UI
                 }
             }
 
-            return image;
+            return bitmapImage;
         }
     }
 }

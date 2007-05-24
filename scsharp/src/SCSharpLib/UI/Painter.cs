@@ -146,14 +146,14 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="fullscreen"></param>
+        /// <param name="fullScreen"></param>
         /// <param name="millis"></param>
-        public Painter(bool fullscreen, int millis)
+        public Painter(bool fullScreen, int millis)
         {
             this.millis = millis;
 
-            this.fullScreen = fullscreen;
-            FullScreen = fullscreen;
+            this.fullScreen = fullScreen;
+            FullScreen = fullScreen;
 
             /* init our list of painter delegates */
             layers = new List<PainterCallback>[(int)Layer.Count];

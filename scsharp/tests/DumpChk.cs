@@ -106,10 +106,10 @@ namespace SCSharp.Tests
 "twilight"
 };
 
-            Stream cv5_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.cv5", tileset_names[(int)chk.Tileset]));
-            Stream vx4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vx4", tileset_names[(int)chk.Tileset]));
-            Stream vr4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vr4", tileset_names[(int)chk.Tileset]));
-            Stream wpe_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.wpe", tileset_names[(int)chk.Tileset]));
+            Stream cv5_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.cv5", tileset_names[(int)chk.TileSet]));
+            Stream vx4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vx4", tileset_names[(int)chk.TileSet]));
+            Stream vr4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vr4", tileset_names[(int)chk.TileSet]));
+            Stream wpe_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.wpe", tileset_names[(int)chk.TileSet]));
 
             byte[] cv5 = new byte[cv5_fs.Length];
             cv5_fs.Read(cv5, 0, (int)cv5_fs.Length);

@@ -48,8 +48,8 @@ namespace SCSharp.UI
 
         Surface[] surfaces;
 
-        uint x;
-        uint y;
+        uint positionX;
+        uint positionY;
 
         uint hotX;
         uint hotY;
@@ -69,8 +69,8 @@ namespace SCSharp.UI
             }
 
             this.grp = grp;
-            this.x = 100;
-            this.y = 100;
+            this.positionX = 100;
+            this.positionY = 100;
             this.palette = palette;
             surfaces = new Surface[grp.FrameCount];
         }
@@ -90,31 +90,31 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="positionX"></param>
+        /// <param name="positionY"></param>
         [CLSCompliant(false)]
-        public void SetPosition(uint x, uint y)
+        public void SetPosition(uint positionX, uint positionY)
         {
-            this.x = x;
-            this.y = y;
+            this.positionX = positionX;
+            this.positionY = positionY;
         }
 
         /// <summary>
         /// 
         /// </summary>
         [CLSCompliant(false)]
-        public uint X
+        public uint PositionX
         {
-            get { return x; }
+            get { return positionX; }
         }
 
         /// <summary>
         /// 
         /// </summary>
         [CLSCompliant(false)]
-        public uint Y
+        public uint PositionY
         {
-            get { return y; }
+            get { return positionY; }
         }
 
         /// <summary>
@@ -155,8 +155,8 @@ namespace SCSharp.UI
             }
             last = now;
 
-            int drawX = (int)(x - hotX);
-            int drawY = (int)(y - hotY);
+            int drawX = (int)(positionX - hotX);
+            int drawY = (int)(positionY - hotY);
 
             if (currentFrame == grp.FrameCount)
             {
@@ -165,7 +165,7 @@ namespace SCSharp.UI
 
             if (surfaces[currentFrame] == null)
             {
-                surfaces[currentFrame] = GuiUtil.CreateSurfaceFromBitmap(grp.GetFrame(currentFrame),
+                surfaces[currentFrame] = GuiUtility.CreateSurfaceFromBitmap(grp.GetFrame(currentFrame),
                                                grp.Width, grp.Height,
                                                palette,
                                                true);

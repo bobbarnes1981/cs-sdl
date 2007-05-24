@@ -77,7 +77,7 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        public int NumIndexes
+        public int NumberOfIndexes
         {
             get { return buf.Length / 4; }
         }

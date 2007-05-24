@@ -111,7 +111,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public int X
+        public int PositionX
         {
             get { return x; }
             set { x = value; }
@@ -120,7 +120,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public int Y
+        public int PositionY
         {
             get { return y; }
             set { y = value; }

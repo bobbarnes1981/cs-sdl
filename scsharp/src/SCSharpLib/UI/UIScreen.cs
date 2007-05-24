@@ -167,65 +167,65 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        private string fontpalPath;
+        private string fontPalettePath;
         /// <summary>
         ///
         /// </summary>
-        protected string FontpalPath
+        protected string FontPalettePath
         {
-            get { return fontpalPath; }
-            set { fontpalPath = value; }
+            get { return fontPalettePath; }
+            set { fontPalettePath = value; }
         }
 
         /// <summary>
         ///
         /// </summary>
-        private string effectpalPath;
+        private string effectPalettePath;
         /// <summary>
         ///
         /// </summary>
-        protected string EffectpalPath
+        protected string EffectPalettePath
         {
-            get { return effectpalPath; }
-            set { effectpalPath = value; }
+            get { return effectPalettePath; }
+            set { effectPalettePath = value; }
         }
 
         /// <summary>
         ///
         /// </summary>
-        private string arrowgrpPath;
+        private string arrowGrpPath;
         /// <summary>
         ///
         /// </summary>
-        protected string ArrowgrpPath
+        protected string ArrowGrpPath
         {
-            get { return arrowgrpPath; }
-            set { arrowgrpPath = value; }
+            get { return arrowGrpPath; }
+            set { arrowGrpPath = value; }
         }
 
         /// <summary>
         ///
         /// </summary>
-        private Pcx fontpal;
+        private Pcx fontPalette;
         /// <summary>
         ///
         /// </summary>
-        protected Pcx Fontpal
+        protected Pcx FontPalette
         {
-            get { return fontpal; }
-            set { fontpal = value; }
+            get { return fontPalette; }
+            set { fontPalette = value; }
         }
         /// <summary>
         ///
         /// </summary>
-        private Pcx effectpal;
+        private Pcx effectPalette;
         /// <summary>
         ///
         /// </summary>
-        protected Pcx Effectpal
+        protected Pcx EffectPalette
         {
-            get { return effectpal; }
-            set { effectpal = value; }
+            get { return effectPalette; }
+            set { effectPalette = value; }
         }
 
         /// <summary>
@@ -269,9 +269,9 @@ namespace SCSharp.UI
             if (prefix != null)
             {
                 backgroundPath = prefix + "\\Backgnd.pcx";
-                fontpalPath = prefix + "\\tFont.pcx";
-                effectpalPath = prefix + "\\tEffect.pcx";
-                arrowgrpPath = prefix + "\\arrow.grp";
+                fontPalettePath = prefix + "\\tFont.pcx";
+                effectPalettePath = prefix + "\\tEffect.pcx";
+                arrowGrpPath = prefix + "\\arrow.grp";
             }
 
             //backgroundTransparent = 0;
@@ -802,35 +802,35 @@ namespace SCSharp.UI
         {
             Stream s;
 
-            fontpal = null;
-            effectpal = null;
+            fontPalette = null;
+            effectPalette = null;
 
-            if (fontpalPath != null)
+            if (fontPalettePath != null)
             {
                 Console.WriteLine("loading font palette");
-                s = (Stream)mpq.GetResource(fontpalPath);
+                s = (Stream)mpq.GetResource(fontPalettePath);
                 if (s != null)
                 {
-                    fontpal = new Pcx();
-                    fontpal.ReadFromStream(s, -1, -1);
+                    fontPalette = new Pcx();
+                    fontPalette.ReadFromStream(s, -1, -1);
                 }
             }
-            if (effectpalPath != null)
+            if (effectPalettePath != null)
             {
                 Console.WriteLine("loading cursor palette");
-                s = (Stream)mpq.GetResource(effectpalPath);
+                s = (Stream)mpq.GetResource(effectPalettePath);
                 if (s != null)
                 {
-                    effectpal = new Pcx();
-                    effectpal.ReadFromStream(s, -1, -1);
+                    effectPalette = new Pcx();
+                    effectPalette.ReadFromStream(s, -1, -1);
                 }
-                if (effectpal != null && arrowgrpPath != null)
+                if (effectPalette != null && arrowGrpPath != null)
                 {
                     Console.WriteLine("loading arrow cursor");
-                    Grp arrowgrp = (Grp)mpq.GetResource(arrowgrpPath);
+                    Grp arrowgrp = (Grp)mpq.GetResource(arrowGrpPath);
                     if (arrowgrp != null)
                     {
-                        cursor = new CursorAnimator(arrowgrp, effectpal.Palette);
+                        cursor = new CursorAnimator(arrowgrp, effectPalette.Palette);
                         cursor.SetHotspot(64, 64);
                     }
                 }
@@ -839,7 +839,7 @@ namespace SCSharp.UI
             if (backgroundPath != null)
             {
                 Console.WriteLine("loading background");
-                background = GuiUtil.SurfaceFromStream((Stream)mpq.GetResource(backgroundPath),
+                background = GuiUtility.SurfaceFromStream((Stream)mpq.GetResource(backgroundPath),
                 backgroundTranslucent, backgroundTransparent);
             }
 
@@ -864,38 +864,38 @@ namespace SCSharp.UI
                     switch (el.Type)
                     {
                         case ElementType.DialogBox:
-                            ui_el = new DialogBoxElement(this, el, fontpal.RgbData);
+                            ui_el = new DialogBoxElement(this, el, fontPalette.RgbData);
                             break;
                         case ElementType.Image:
-                            ui_el = new ImageElement(this, el, fontpal.RgbData);
+                            ui_el = new ImageElement(this, el, fontPalette.RgbData);
                             break;
                         case ElementType.TextBox:
-                            ui_el = new TextBoxElement(this, el, fontpal.RgbData);
+                            ui_el = new TextBoxElement(this, el, fontPalette.RgbData);
                             break;
                         case ElementType.ListBox:
-                            ui_el = new ListBoxElement(this, el, fontpal.RgbData);
+                            ui_el = new ListBoxElement(this, el, fontPalette.RgbData);
                             break;
                         case ElementType.ComboBox:
-                            ui_el = new ComboBoxElement(this, el, fontpal.RgbData);
+                            ui_el = new ComboBoxElement(this, el, fontPalette.RgbData);
                             break;
                         case ElementType.LabelLeftAlign:
                         case ElementType.LabelCenterAlign:
                         case ElementType.LabelRightAlign:
-                            ui_el = new LabelElement(this, el, fontpal.RgbData);
+                            ui_el = new LabelElement(this, el, fontPalette.RgbData);
                             break;
                         case ElementType.Button:
                         case ElementType.DefaultButton:
                         case ElementType.ButtonWithoutBorder:
-                            ui_el = new ButtonElement(this, el, fontpal.RgbData);
+                            ui_el = new ButtonElement(this, el, fontPalette.RgbData);
                             break;
                         case ElementType.Slider:
                         case ElementType.OptionButton:
                         case ElementType.CheckBox:
-                            ui_el = new UIElement(this, el, fontpal.RgbData);
+                            ui_el = new UIElement(this, el, fontPalette.RgbData);
                             break;
                         default:
                             Console.WriteLine("unhandled case {0}", el.Type);
-                            ui_el = new UIElement(this, el, fontpal.RgbData);
+                            ui_el = new UIElement(this, el, fontPalette.RgbData);
                             break;
                     }
 

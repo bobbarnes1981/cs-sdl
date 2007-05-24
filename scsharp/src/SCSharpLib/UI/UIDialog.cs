@@ -236,13 +236,52 @@ namespace SCSharp.UI
 
         #region IDisposable Members
 
+        bool disposed;
         /// <summary>
-        /// 
+        /// Destroy sprite
+        /// </summary>
+        /// <param name="disposing">If true, remove all unamanged resources</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.dimScreenSurface != null)
+                    {
+                        this.dimScreenSurface.Dispose();
+                        this.dimScreenSurface = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+
+                /// <summary>
+        /// Destroy object
         /// </summary>
         public void Dispose()
         {
-            throw new SCException("The method or operation is not implemented.");
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~UIDialog()
+        {
+            Dispose(false);
+        }
+
 
         #endregion
     }
