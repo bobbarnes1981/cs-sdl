@@ -227,7 +227,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public static SCResources BrooDat
+        public static SCResources BroodDat
         {
             get { return broodwarResources; }
         }

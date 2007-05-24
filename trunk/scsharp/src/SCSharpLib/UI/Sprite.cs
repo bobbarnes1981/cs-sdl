@@ -102,9 +102,9 @@ namespace SCSharp.UI
         /// <param name="mpq"></param>
         /// <param name="spriteEntry"></param>
         /// <param name="palette"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public Sprite(Mpq mpq, int spriteEntry, byte[] palette, int x, int y)
+        /// <param name="positionX"></param>
+        /// <param name="positionY"></param>
+        public Sprite(Mpq mpq, int spriteEntry, byte[] palette, int positionX, int positionY)
         {
             if (mpq == null)
             {
@@ -123,7 +123,7 @@ namespace SCSharp.UI
 
             grp = (Grp)mpq.GetResource("unit\\" + grpPath);
 
-            Console.WriteLine("new sprite: unit\\{0} @ {1}x{2} (image {3})", grpPath, x, y, imagesEntry);
+            Console.WriteLine("new sprite: unit\\{0} @ {1}x{2} (image {3})", grpPath, positionX, positionY, imagesEntry);
 
             this.buf = GlobalResources.IScriptBin.Contents;
             iscriptEntry = GlobalResources.ImagesDat.GetIScriptIndex(imagesEntry);
@@ -135,7 +135,7 @@ namespace SCSharp.UI
                 Console.WriteLine("invalid script_entry_offset");
             }
 
-            Position = new Point(x, y);
+            Position = new Point(positionX, positionY);
             //SetPosition(x, y);
         }
 
@@ -404,16 +404,16 @@ namespace SCSharp.UI
         {
             if (spriteSurface != null)
             {
-                if (this.position.X > SpriteManager.X - spriteSurface.Width && this.position.X <= SpriteManager.X + Painter.ScreenResX
-                && this.position.Y > SpriteManager.Y - spriteSurface.Height && this.position.Y <= SpriteManager.Y + Painter.ScreenResY)
+                if (this.position.X > SpriteManager.PositionX - spriteSurface.Width && this.position.X <= SpriteManager.PositionX + Painter.ScreenResX
+                && this.position.Y > SpriteManager.PositionY - spriteSurface.Height && this.position.Y <= SpriteManager.PositionY + Painter.ScreenResY)
                 {
-                    surf.Blit(spriteSurface, new Point(this.position.X - SpriteManager.X - spriteSurface.Width / 2,
-                    this.position.Y - SpriteManager.Y - spriteSurface.Height / 2));
+                    surf.Blit(spriteSurface, new Point(this.position.X - SpriteManager.PositionX - spriteSurface.Width / 2,
+                    this.position.Y - SpriteManager.PositionY - spriteSurface.Height / 2));
 
                     if (showSpriteBorders)
                     {
-                        surf.Draw(new Box(new Point(this.position.X - SpriteManager.X - spriteSurface.Width / 2,
-                        this.position.Y - SpriteManager.Y - spriteSurface.Height / 2),
+                        surf.Draw(new Box(new Point(this.position.X - SpriteManager.PositionX - spriteSurface.Width / 2,
+                        this.position.Y - SpriteManager.PositionY - spriteSurface.Height / 2),
                         new Size(spriteSurface.Width - 1,
                         spriteSurface.Height - 1)),
                         Color.Green);
@@ -462,7 +462,7 @@ namespace SCSharp.UI
                 }
 
                 // XXX
-                spriteSurface = GuiUtil.CreateSurfaceFromBitmap(grp.GetFrame(frame_num),
+                spriteSurface = GuiUtility.CreateSurfaceFromBitmap(grp.GetFrame(frame_num),
                 grp.Width, grp.Height,
                 palette,
                 true);
@@ -699,11 +699,11 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        GndAttkInit,
+        GroundAttackInit,
         /// <summary>
         ///
         /// </summary>
-        AirAttkInit,
+        AirAttackInit,
         /// <summary>
         ///
         /// </summary>
@@ -711,11 +711,11 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        GndAttkRpt,
+        GroundAttackRpt,
         /// <summary>
         ///
         /// </summary>
-        AirAttkRpt,
+        AirAttackRpt,
         /// <summary>
         ///
         /// </summary>
@@ -723,11 +723,11 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        GndAttkToIdle,
+        GroundAttackToIdle,
         /// <summary>
         ///
         /// </summary>
-        AirAttkToIdle,
+        AirAttackToIdle,
         /// <summary>
         ///
         /// </summary>
@@ -747,7 +747,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        ConstrctHarvst,
+        ConstructHarvest,
         /// <summary>
         ///
         /// </summary>

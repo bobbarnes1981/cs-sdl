@@ -54,7 +54,7 @@ namespace SCSharp.UI
     /// <summary>
     ///
     /// </summary>
-    public static class GuiUtil
+    public static class GuiUtility
     {
 
         static SCFont[] fonts;
@@ -95,13 +95,13 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        /// <param name="g"></param>
+        /// <param name="glyph"></param>
         /// <param name="palette"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
-        public static Surface RenderGlyph(Glyph g, byte[] palette, int offset)
+        public static Surface RenderGlyph(Glyph glyph, byte[] palette, int offset)
         {
-            if (g == null)
+            if (glyph == null)
             {
                 throw new ArgumentNullException("g");
             }
@@ -109,18 +109,18 @@ namespace SCSharp.UI
             {
                 throw new ArgumentNullException("palette");
             }
-            byte[] buf = new byte[g.Width * g.Height * 4];
+            byte[] buf = new byte[glyph.Width * glyph.Height * 4];
             int i = 0;
 
-            for (int y = g.Height - 1; y >= 0; y--)
+            for (int y = glyph.Height - 1; y >= 0; y--)
             {
-                for (int x = g.Width - 1; x >= 0; x--)
+                for (int x = glyph.Width - 1; x >= 0; x--)
                 {
-                    if (g.Bitmap[y, x] == 0)
+                    if (glyph.Bitmap[y, x] == 0)
                     {
                         buf[i + 0] = 0;
                     }
-                    else if (g.Bitmap[y, x] == 1)
+                    else if (glyph.Bitmap[y, x] == 1)
                     {
                         buf[i + 0] = 255;
                     }
@@ -129,9 +129,9 @@ namespace SCSharp.UI
                         buf[i + 0] = 128;
                     }
 
-                    buf[i + 1] = palette[(g.Bitmap[y, x] + offset) * 3 + 2];
-                    buf[i + 2] = palette[(g.Bitmap[y, x] + offset) * 3 + 1];
-                    buf[i + 3] = palette[(g.Bitmap[y, x] + offset) * 3];
+                    buf[i + 1] = palette[(glyph.Bitmap[y, x] + offset) * 3 + 2];
+                    buf[i + 2] = palette[(glyph.Bitmap[y, x] + offset) * 3 + 1];
+                    buf[i + 3] = palette[(glyph.Bitmap[y, x] + offset) * 3];
 
                     if (buf[i + 1] == 252 && buf[i + 2] == 0 && buf[i + 3] == 252)
                     {
@@ -142,7 +142,7 @@ namespace SCSharp.UI
                 }
             }
 
-            return CreateSurfaceFromRgbaData(buf, (ushort)g.Width, (ushort)g.Height, 32, g.Width * 4);
+            return CreateSurfaceFromRgbaData(buf, (ushort)glyph.Width, (ushort)glyph.Height, 32, glyph.Width * 4);
         }
 
         /// <summary>
@@ -550,7 +550,7 @@ namespace SCSharp.UI
         /// <returns></returns>
         public static Surface SurfaceFromStream(Stream stream)
         {
-            return GuiUtil.SurfaceFromStream(stream, -1, -1);
+            return GuiUtility.SurfaceFromStream(stream, -1, -1);
         }
 
         /// <summary>
@@ -560,7 +560,7 @@ namespace SCSharp.UI
         /// <returns></returns>
         public static Sound SoundFromStream(Stream stream)
         {
-            byte[] buf = GuiUtil.ReadStream(stream);
+            byte[] buf = GuiUtility.ReadStream(stream);
             return Mixer.Sound(buf);
         }
 
@@ -580,7 +580,7 @@ namespace SCSharp.UI
             {
                 return;
             }
-            Sound s = GuiUtil.SoundFromStream(stream);
+            Sound s = GuiUtility.SoundFromStream(stream);
             s.Play();
         }
 
@@ -589,8 +589,8 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="mpq"></param>
         /// <param name="resourcePath"></param>
-        /// <param name="numLoops"></param>
-        public static void PlayMusic(Mpq mpq, string resourcePath, int numLoops)
+        /// <param name="numberOfLoops"></param>
+        public static void PlayMusic(Mpq mpq, string resourcePath, int numberOfLoops)
         {
             if (mpq == null)
             {
@@ -601,7 +601,7 @@ namespace SCSharp.UI
             {
                 return;
             }
-            Sound s = GuiUtil.SoundFromStream(stream);
+            Sound s = GuiUtility.SoundFromStream(stream);
             s.Play(true);
         }
     }

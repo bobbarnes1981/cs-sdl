@@ -156,7 +156,7 @@ namespace SCSharp.UI
         /// <returns></returns>
         protected override Surface CreateSurface()
         {
-            return GuiUtil.ComposeText(Text, Font, Palette, Width, Height,
+            return GuiUtility.ComposeText(Text, Font, Palette, Width, Height,
             Sensitive ? 4 : 24);
         }
     }

@@ -78,7 +78,7 @@ Surface textSurf1 = GuiUtil.ComposeText (str1, fnt, pcx1.Palette);
 Surface textSurf2 = GuiUtil.ComposeText (str2, fnt, pcx1.Palette);
 Surface textSurf3 = GuiUtil.ComposeText (str3, fnt, pcx1.Palette);
 #endif
-            Surface textSurf4 = GuiUtil.ComposeText(str4, fnt, pcx1.Palette);
+            Surface textSurf4 = GuiUtility.ComposeText(str4, fnt, pcx1.Palette);
 
             painter.Add(Layer.UI,
             delegate(Surface surf, DateTime now)

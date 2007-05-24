@@ -72,7 +72,7 @@ namespace SCSharp.UI
                 try
                 {
                     Game.Instance.PlayingBroodWar = args.Expansion;
-                    GuiUtil.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
+                    GuiUtility.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
                     Game.Instance.SwitchToScreen(nextScreen);
                 }
                 catch (Exception e)
@@ -101,7 +101,7 @@ namespace SCSharp.UI
                 }
                 else
                 {
-                    GuiUtil.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
+                    GuiUtility.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
                     Game.Instance.SwitchToScreen(UIScreenType.LogOn);
                 }
             };
@@ -115,7 +115,7 @@ namespace SCSharp.UI
                 }
                 else
                 {
-                    GuiUtil.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
+                    GuiUtility.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
                     Game.Instance.SwitchToScreen(UIScreenType.Connection);
                 }
             };

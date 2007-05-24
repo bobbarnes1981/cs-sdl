@@ -308,7 +308,7 @@ namespace SCSharp.UI
                 {
                     break;
                 }
-                Surface item_surface = GuiUtil.ComposeText(items[i], Font, Palette,
+                Surface item_surface = GuiUtility.ComposeText(items[i], Font, Palette,
                 (!selectable ||
                 (!selecting && cursor == i) ||
                 (selecting && selectionIndex == i)) ? 4 : 24);

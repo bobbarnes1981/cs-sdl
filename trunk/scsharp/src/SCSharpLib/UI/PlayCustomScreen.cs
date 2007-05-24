@@ -294,7 +294,7 @@ namespace SCSharp.UI
                                  (selectedChk == null
                                   ? ""
                                   : String.Format("{0}",
-                                           selectedChk.NumHumanSlots)));
+                                           selectedChk.NumberOfHumanSlots)));
 
                 Elements[MAPPLAYERS1_ELEMENT_INDEX].Text = slotString;
                 Elements[MAPPLAYERS1_ELEMENT_INDEX].Visible = true;
@@ -305,7 +305,7 @@ namespace SCSharp.UI
                                  (selectedChk == null
                                   ? ""
                                   : String.Format("{0}",
-                                           selectedChk.NumComputerSlots)));
+                                           selectedChk.NumberOfComputerSlots)));
 
                 Elements[MAPPLAYERS2_ELEMENT_INDEX].Text = slotString;
                 Elements[MAPPLAYERS2_ELEMENT_INDEX].Visible = true;
@@ -319,7 +319,7 @@ namespace SCSharp.UI
                                          (selectedChk == null
                                           ? ""
                                           : String.Format("{0}",
-                                                   selectedChk.NumPlayers)));
+                                                   selectedChk.NumberOfPlayers)));
 
                 Elements[MAPPLAYERS1_ELEMENT_INDEX].Text = numPlayersString;
                 Elements[MAPPLAYERS1_ELEMENT_INDEX].Visible = true;
@@ -333,11 +333,11 @@ namespace SCSharp.UI
                 {
                     if (selectedGot.UseMapSettings)
                     {
-                        if (i >= selectedChk.NumComputerSlots + 1) break;
+                        if (i >= selectedChk.NumberOfComputerSlots + 1) break;
                     }
                     else
                     {
-                        if (i >= selectedChk.NumPlayers) break;
+                        if (i >= selectedChk.NumberOfPlayers) break;
                     }
 
                     if (i > 0)
@@ -399,7 +399,7 @@ namespace SCSharp.UI
                                    (selectedChk == null
                                 ? ""
                                 : String.Format("{0}",
-                                         selectedChk.Tileset)));
+                                         selectedChk.TileSet)));
 
             Elements[MAPSIZE_ELEMENT_INDEX].Text = mapSizeString;
             Elements[MAPTILESET_ELEMENT_INDEX].Text = tileSetString;

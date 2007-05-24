@@ -129,7 +129,7 @@ namespace SCSharp.UI
                         sleepUntil = (int)action.Delay;
                         return;
                     case 2:
-                        GuiUtil.PlaySound(screen.Mpq, prefix + "\\" + scenario.GetMapString((int)action.WavIndex));
+                        GuiUtility.PlaySound(screen.Mpq, prefix + "\\" + scenario.GetMapString((int)action.WavIndex));
                         sleepUntil = (int)action.Delay;
                         return;
                     case 3:
@@ -151,7 +151,7 @@ namespace SCSharp.UI
                         Console.WriteLine("Transmission(Text, Slot, Time, Modifier, Wave, WavTime)");
                         screen.SetTransmissionText(scenario.GetMapString((int)action.TextIndex));
                         screen.HighlightPortrait((int)action.Group1);
-                        GuiUtil.PlaySound(screen.Mpq, prefix + "\\" + scenario.GetMapString((int)action.WavIndex));
+                        GuiUtility.PlaySound(screen.Mpq, prefix + "\\" + scenario.GetMapString((int)action.WavIndex));
                         sleepUntil = (int)action.Delay;
                         return;
                     default:

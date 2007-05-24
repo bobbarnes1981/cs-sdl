@@ -206,7 +206,7 @@ namespace SCSharp.UI
                         idx = 4;
                     }
 
-                    fnt = GuiUtil.GetFonts(Mpq)[idx];
+                    fnt = GuiUtility.GetFonts(Mpq)[idx];
 
                     if (fnt == null)
                     {
@@ -329,7 +329,7 @@ namespace SCSharp.UI
 
         Surface CreateBackgroundSurface()
         {
-            return GuiUtil.SurfaceFromStream((Stream)Mpq.GetResource(background),
+            return GuiUtility.SurfaceFromStream((Stream)Mpq.GetResource(background),
             254, 0);
         }
 
@@ -344,7 +344,7 @@ namespace SCSharp.UI
                 case ElementType.DefaultButton:
                 case ElementType.Button:
                 case ElementType.ButtonWithoutBorder:
-                    return GuiUtil.ComposeText(Text, Font, palette, Width, Height,
+                    return GuiUtility.ComposeText(Text, Font, palette, Width, Height,
                     sensitive ? 4 : 24);
                 default:
                     return null;
@@ -382,13 +382,13 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="positionX"></param>
+        /// <param name="positionY"></param>
         /// <returns></returns>
-        public virtual bool PointInside(int x, int y)
+        public virtual bool PointInside(int positionX, int positionY)
         {
-            if (x >= X1 && x < X1 + Width &&
-            y >= Y1 && y < Y1 + Height)
+            if (positionX >= X1 && positionX < X1 + Width &&
+            positionY >= Y1 && positionY < Y1 + Height)
             {
                 return true;
             }

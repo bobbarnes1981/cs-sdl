@@ -72,7 +72,7 @@ namespace SCSharp.UI
                 Console.WriteLine("{0}: {1}", i, Elements[i].Text);
             }
 
-            Elements[TITLE_ELEMENT_INDEX].Text = GlobalResources.BrooDat.GluAllTbl.Strings[172];
+            Elements[TITLE_ELEMENT_INDEX].Text = GlobalResources.BroodDat.GluAllTbl.Strings[172];
 
             Elements[ORIGINAL_ELEMENT_INDEX].Activate +=
                 delegate(object sender, SCEventArgs args)

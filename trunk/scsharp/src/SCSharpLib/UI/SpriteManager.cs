@@ -50,17 +50,35 @@ namespace SCSharp.UI
         public static Collection<Sprite> sprites = new Collection<Sprite>();
         static Painter painter;
 
-        static Mpq our_mpq;
+        static Mpq ourMpq;
 
         /// <summary>
         /// 
         /// </summary>
-        public static int X;
+        static int positionX;
 
         /// <summary>
         /// 
         /// </summary>
-        public static int Y;
+        public static int PositionX
+        {
+            get { return SpriteManager.positionX; }
+            set { SpriteManager.positionX = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static int positionY;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static int PositionY
+        {
+            get { return SpriteManager.positionY; }
+            set { SpriteManager.positionY = value; }
+        }
 
         /// <summary>
         /// 
@@ -68,13 +86,13 @@ namespace SCSharp.UI
         /// <param name="mpq"></param>
         /// <param name="spriteNumber"></param>
         /// <param name="palette"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="positionX"></param>
+        /// <param name="positionY"></param>
         /// <returns></returns>
-        public static Sprite CreateSprite(Mpq mpq, int spriteNumber, byte[] palette, int x, int y)
+        public static Sprite CreateSprite(Mpq mpq, int spriteNumber, byte[] palette, int positionX, int positionY)
         {
-            our_mpq = mpq;
-            return CreateSprite(spriteNumber, palette, x, y);
+            ourMpq = mpq;
+            return CreateSprite(spriteNumber, palette, positionX, positionY);
         }
 
         /// <summary>
@@ -103,12 +121,12 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="spriteNumber"></param>
         /// <param name="palette"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="positionY"></param>
+        /// <param name="positionX"></param>
         /// <returns></returns>
-        public static Sprite CreateSprite(int spriteNumber, byte[] palette, int x, int y)
+        public static Sprite CreateSprite(int spriteNumber, byte[] palette, int positionX, int positionY)
         {
-            Sprite sprite = new Sprite(our_mpq, spriteNumber, palette, x, y);
+            Sprite sprite = new Sprite(ourMpq, spriteNumber, palette, positionX, positionY);
             sprites.Add(sprite);
             if (painter != null)
             {
@@ -146,12 +164,12 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="p"></param>
-        public static void AddToPainter(Painter p)
+        /// <param name="painterToAdd"></param>
+        public static void AddToPainter(Painter painterToAdd)
         {
-            p.Add(Layer.Background, SpriteManagerPainterTick);
+            painterToAdd.Add(Layer.Background, SpriteManagerPainterTick);
 
-            painter = p;
+            painter = painterToAdd;
             foreach (Sprite s in sprites)
             {
                 s.AddToPainter(painter);
@@ -161,14 +179,14 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="p"></param>
-        public static void RemoveFromPainter(Painter p)
+        /// <param name="painterToRemove"></param>
+        public static void RemoveFromPainter(Painter painterToRemove)
         {
-            p.Remove(Layer.Background, SpriteManagerPainterTick);
+            painterToRemove.Remove(Layer.Background, SpriteManagerPainterTick);
 
             foreach (Sprite s in sprites)
             {
-                s.RemoveFromPainter(p);
+                s.RemoveFromPainter(painterToRemove);
             }
             painter = null;
         }
@@ -176,12 +194,12 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public static void SetUpperLeft(int x, int y)
+        /// <param name="positionX"></param>
+        /// <param name="positionY"></param>
+        public static void SetUpperLeft(int positionX, int positionY)
         {
-            X = x;
-            Y = y;
+            PositionX = positionX;
+            PositionY = positionY;
         }
     }
 }

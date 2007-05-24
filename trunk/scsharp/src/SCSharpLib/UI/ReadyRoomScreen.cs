@@ -1,7 +1,7 @@
 #region LICENSE
 //
 // Authors:
-//	Chris Toshok (toshok@hungry.com)
+// Chris Toshok (toshok@hungry.com)
 //
 // (C) 2006 The Hungry Programmers (http://www.hungry.com/)
 //
@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,12 +41,12 @@ using SCSharp.MpqLib;
 namespace SCSharp.UI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class ReadyRoomScreen : UIScreen
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="mpq"></param>
         /// <param name="scenarioPrefix"></param>
@@ -58,26 +58,26 @@ namespace SCSharp.UI
         /// <param name="objectivesElementIndex"></param>
         /// <param name="firstPortraitElementIndex"></param>
         public ReadyRoomScreen(Mpq mpq,
-                    string scenarioPrefix,
-                    int startElementIndex,
-                    int cancelElementIndex,
-                    int skipTutorialElementIndex,
-                    int replayElementIndex,
-                    int transmissionElementIndex,
-                    int objectivesElementIndex,
-                    int firstPortraitElementIndex)
+        string scenarioPrefix,
+        int startElementIndex,
+        int cancelElementIndex,
+        int skipTutorialElementIndex,
+        int replayElementIndex,
+        int transmissionElementIndex,
+        int objectivesElementIndex,
+        int firstPortraitElementIndex)
             : base(mpq,
-                String.Format("glue\\Ready{0}", Utilities.RaceChar[(int)Game.Instance.Race]),
-                String.Format(Builtins.GluRdyBin, Utilities.RaceCharLower[(int)Game.Instance.Race]))
+        String.Format("glue\\Ready{0}", Utilities.RaceChar[(int)Game.Instance.Race]),
+        String.Format(Builtins.GluRdyBin, Utilities.RaceCharLower[(int)Game.Instance.Race]))
         {
             if (mpq == null)
             {
                 throw new ArgumentNullException("mpq");
             }
             BackgroundPath = String.Format("glue\\PalR{0}\\Backgnd.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
-            FontpalPath = String.Format("glue\\PalR{0}\\tFont.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
-            EffectpalPath = String.Format("glue\\PalR{0}\\tEffect.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
-            ArrowgrpPath = String.Format("glue\\PalR{0}\\arrow.grp", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            FontPalettePath = String.Format("glue\\PalR{0}\\tFont.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            EffectPalettePath = String.Format("glue\\PalR{0}\\tEffect.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            ArrowGrpPath = String.Format("glue\\PalR{0}\\arrow.grp", Utilities.RaceCharLower[(int)Game.Instance.Race]);
 
             this.startElementIndex = startElementIndex;
             this.cancelElementIndex = cancelElementIndex;
@@ -103,7 +103,7 @@ namespace SCSharp.UI
         int firstPortraitElementIndex;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected override void ResourceLoader()
         {
@@ -121,25 +121,25 @@ namespace SCSharp.UI
             }
 
             Elements[cancelElementIndex].Activate +=
-                delegate(object sender, SCEventArgs args) 
-                {
-                    StopBriefing();
-                    Game.Instance.SwitchToScreen(UIScreenType.LogOn);
-                };
+            delegate(object sender, SCEventArgs args)
+            {
+                StopBriefing();
+                Game.Instance.SwitchToScreen(UIScreenType.LogOn);
+            };
 
             Elements[replayElementIndex].Activate +=
-                delegate(object sender, SCEventArgs args) 
-                {
-                    StopBriefing();
-                    PlayBriefing();
-                };
+            delegate(object sender, SCEventArgs args)
+            {
+                StopBriefing();
+                PlayBriefing();
+            };
 
             Elements[startElementIndex].Activate +=
-                delegate(object sender, SCEventArgs args) 
-                {
-                    StopBriefing();
-                    Game.Instance.SwitchToScreen(new GameScreen(this.Mpq, scenario_prefix, scenario));
-                };
+            delegate(object sender, SCEventArgs args)
+            {
+                StopBriefing();
+                Game.Instance.SwitchToScreen(new GameScreen(this.Mpq, scenario_prefix, scenario));
+            };
 
             runner = new BriefingRunner(this, scenario, scenario_prefix);
         }
@@ -168,7 +168,7 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="surf"></param>
         /// <param name="now"></param>
@@ -180,68 +180,72 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        /// <param name="str"></param>
-        public void SetObjectives(string str)
+        /// <param name="objectivesText"></param>
+        public void SetObjectives(string objectivesText)
         {
             Elements[objectivesElementIndex].Visible = true;
-            Elements[objectivesElementIndex].Text = str;
+            Elements[objectivesElementIndex].Text = objectivesText;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        /// <param name="str"></param>
-        public void SetTransmissionText(string str)
+        /// <param name="transmissionText"></param>
+        public void SetTransmissionText(string transmissionText)
         {
             Elements[transmissionElementIndex].Visible = true;
-            Elements[transmissionElementIndex].Text = str;
+            Elements[transmissionElementIndex].Text = transmissionText;
         }
 
         int highlightedPortrait = -1;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="slot"></param>
         public void HighlightPortrait(int slot)
         {
             if (highlightedPortrait != -1)
-                UnhighlightPortrait(highlightedPortrait);
+            {
+                EndHighlightPortrait(highlightedPortrait);
+            }
 
             Elements[firstPortraitElementIndex + slot].Background = String.Format("glue\\Ready{0}\\{0}FrameH{1}.pcx",
-                                                  Utilities.RaceChar[(int)Game.Instance.Race],
-                                                  slot + 1);
+            Utilities.RaceChar[(int)Game.Instance.Race],
+            slot + 1);
             highlightedPortrait = slot;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="slot"></param>
-        public void UnhighlightPortrait(int slot)
+        public void EndHighlightPortrait(int slot)
         {
             if (Elements[firstPortraitElementIndex + slot].Visible)
+            {
                 Elements[firstPortraitElementIndex + slot].Background = String.Format("glue\\Ready{0}\\{0}Frame{1}.pcx",
-                                                      Utilities.RaceChar[(int)Game.Instance.Race],
-                                                      slot + 1);
+                Utilities.RaceChar[(int)Game.Instance.Race],
+                slot + 1);
+            }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="slot"></param>
         public void ShowPortrait(int slot)
         {
             Elements[firstPortraitElementIndex + slot].Visible = true;
             Elements[firstPortraitElementIndex + slot].Background = String.Format("glue\\Ready{0}\\{0}Frame{1}.pcx",
-                                                  Utilities.RaceChar[(int)Game.Instance.Race],
-                                                  slot + 1);
+            Utilities.RaceChar[(int)Game.Instance.Race],
+            slot + 1);
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="slot"></param>
         public void HidePortrait(int slot)
@@ -251,13 +255,13 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="mpq"></param>
         /// <param name="scenarioPrefix"></param>
         /// <returns></returns>
         public static ReadyRoomScreen Create(Mpq mpq,
-                              string scenarioPrefix)
+        string scenarioPrefix)
         {
             switch (Game.Instance.Race)
             {

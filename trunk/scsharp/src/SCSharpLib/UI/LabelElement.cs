@@ -62,7 +62,7 @@ namespace SCSharp.UI
             /* this is wrong */
             Surface surf = new Surface(Width, Height);
 
-            Surface textSurf = GuiUtil.ComposeText(Text, Font, Palette, Width, Height,
+            Surface textSurf = GuiUtility.ComposeText(Text, Font, Palette, Width, Height,
             Sensitive ? 4 : 24); ;
 
             int x = 0;

@@ -42,130 +42,130 @@ namespace SCSharp.UI
         /// <summary>
         /// read in a LE word
         /// </summary>
-        /// <param name="fs"></param>
+        /// <param name="stream"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        public static ushort ReadWord(Stream fs)
+        public static ushort ReadWord(Stream stream)
         {
-            if (fs == null)
+            if (stream == null)
             {
-                throw new ArgumentNullException("fs");
+                throw new ArgumentNullException("stream");
             }
-            return ((ushort)(fs.ReadByte() | (fs.ReadByte() << 8)));
+            return ((ushort)(stream.ReadByte() | (stream.ReadByte() << 8)));
         }
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="buf"></param>
+        /// <param name="buffer"></param>
         /// <param name="position"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        public static ushort ReadWord(byte[] buf, int position)
+        public static ushort ReadWord(byte[] buffer, int position)
         {
-            if (buf == null)
+            if (buffer == null)
             {
-                throw new ArgumentNullException("buf");
+                throw new ArgumentNullException("buffer");
             }
-            return ((ushort)((int)buf[position] | (int)buf[position + 1] << 8));
+            return ((ushort)((int)buffer[position] | (int)buffer[position + 1] << 8));
         }
 
         /// <summary>
         /// read in a LE doubleword
         /// </summary>
-        /// <param name="fs"></param>
+        /// <param name="stream"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        public static uint ReadDWord(Stream fs)
+        public static uint ReadDWord(Stream stream)
         {
-            if (fs == null)
+            if (stream == null)
             {
-                throw new ArgumentNullException("fs");
+                throw new ArgumentNullException("stream");
             }
-            return (uint)(fs.ReadByte() | (fs.ReadByte() << 8) | (fs.ReadByte() << 16) | (fs.ReadByte() << 24));
+            return (uint)(stream.ReadByte() | (stream.ReadByte() << 8) | (stream.ReadByte() << 16) | (stream.ReadByte() << 24));
         }
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="buf"></param>
+        /// <param name="buffer"></param>
         /// <param name="position"></param>
         /// <returns></returns>
         [CLSCompliant(false)]
-        public static uint ReadDWord(byte[] buf, int position)
+        public static uint ReadDWord(byte[] buffer, int position)
         {
-            if (buf == null)
+            if (buffer == null)
             {
-                throw new ArgumentNullException("buf");
+                throw new ArgumentNullException("buffer");
             }
-            return ((uint)((uint)buf[position] | (uint)buf[position + 1] << 8 | (uint)buf[position + 2] << 16 | (uint)buf[position + 3] << 24));
+            return ((uint)((uint)buffer[position] | (uint)buffer[position + 1] << 8 | (uint)buffer[position + 2] << 16 | (uint)buffer[position + 3] << 24));
         }
 
         /// <summary>
         /// read in a byte
         /// </summary>
-        /// <param name="fs"></param>
+        /// <param name="stream"></param>
         /// <returns></returns>
-        public static byte ReadByte(Stream fs)
+        public static byte ReadByte(Stream stream)
         {
-            if (fs == null)
+            if (stream == null)
             {
-                throw new ArgumentNullException("fs");
+                throw new ArgumentNullException("stream");
             }
-            return (byte)fs.ReadByte();
+            return (byte)stream.ReadByte();
         }
 
         /// <summary>
         /// write a LE word
         /// </summary>
-        /// <param name="fs"></param>
+        /// <param name="stream"></param>
         /// <param name="word"></param>
         [CLSCompliant(false)]
-        public static void WriteWord(Stream fs, ushort word)
+        public static void WriteWord(Stream stream, ushort word)
         {
-            if (fs == null)
+            if (stream == null)
             {
-                throw new ArgumentNullException("fs");
+                throw new ArgumentNullException("stream");
             }
-            fs.WriteByte((byte)(word & 0xff));
-            fs.WriteByte((byte)((word >> 8) & 0xff));
+            stream.WriteByte((byte)(word & 0xff));
+            stream.WriteByte((byte)((word >> 8) & 0xff));
         }
 
         /// <summary>
         /// write a LE doubleword
         /// </summary>
-        /// <param name="fs"></param>
-        /// <param name="dword"></param>
+        /// <param name="stream"></param>
+        /// <param name="word"></param>
         [CLSCompliant(false)]
-        public static void WriteDWord(Stream fs, uint dword)
+        public static void WriteDWord(Stream stream, uint word)
         {
-            if (fs == null)
+            if (stream == null)
             {
-                throw new ArgumentNullException("fs");
+                throw new ArgumentNullException("stream");
             }
-            fs.WriteByte((byte)(dword & 0xff));
-            fs.WriteByte((byte)((dword >> 8) & 0xff));
-            fs.WriteByte((byte)((dword >> 16) & 0xff));
-            fs.WriteByte((byte)((dword >> 24) & 0xff));
+            stream.WriteByte((byte)(word & 0xff));
+            stream.WriteByte((byte)((word >> 8) & 0xff));
+            stream.WriteByte((byte)((word >> 16) & 0xff));
+            stream.WriteByte((byte)((word >> 24) & 0xff));
         }
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="r"></param>
+        /// <param name="textReader"></param>
         /// <returns></returns>
-        public static string ReadUntilNull(TextReader r)
+        public static string ReadUntilNull(TextReader textReader)
         {
-            if (r == null)
+            if (textReader == null)
             {
-                throw new ArgumentNullException("r");
+                throw new ArgumentNullException("textReader");
             }
             StringBuilder sb = new StringBuilder();
 
             char c;
             do
             {
-                c = (char)r.Read();
+                c = (char)textReader.Read();
                 if (c != 0)
                 {
                     sb.Append(c);
@@ -178,26 +178,26 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        /// <param name="buf"></param>
+        /// <param name="buffer"></param>
         /// <param name="position"></param>
         /// <returns></returns>
-        public static string ReadUntilNull(byte[] buf, int position)
+        public static string ReadUntilNull(byte[] buffer, int position)
         {
-            if (buf == null)
+            if (buffer == null)
             {
-                throw new ArgumentNullException("buf");
+                throw new ArgumentNullException("buffer");
             }
             //StringBuilder sb = new StringBuilder();
 
             int i = position;
 
-            while (buf[i] != 0)
+            while (buffer[i] != 0)
             {
                 i++;
             }
 
             byte[] bs = new byte[i - position];
-            Array.Copy(buf, position, bs, 0, i - position);
+            Array.Copy(buffer, position, bs, 0, i - position);
 
             return Encoding.UTF8.GetString(bs);
         }
@@ -214,7 +214,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public static string[] TilesetNames = {
+        public static string[] TileSetNames = {
 "badlands",
 "platform",
 "install",

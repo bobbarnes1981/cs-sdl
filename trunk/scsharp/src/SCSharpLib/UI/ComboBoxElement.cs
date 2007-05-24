@@ -46,8 +46,8 @@ namespace SCSharp.UI
     {
         List<string> items;
         int cursor = -1;
-        Surface dropdownSurface;
-        bool dropdownVisible;
+        Surface dropDownSurface;
+        bool dropDownVisible;
         int selectedItem;
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace SCSharp.UI
                 throw new ArgumentNullException("args");
             }
             /* if the dropdown is visible, see if we're inside it */
-            if (!dropdownVisible)
+            if (!dropDownVisible)
             {
                 return;
             }
@@ -178,7 +178,7 @@ namespace SCSharp.UI
 			      starcraft doesn't include this check..  should we?
 			      args.X >= X1 && args.X < X1 + dropdownSurface.Width &&
 			    */
-            if (args.Y >= Y1 + Height && args.Y < Y1 + Height + dropdownSurface.Height)
+            if (args.Y >= Y1 + Height && args.Y < Y1 + Height + dropDownSurface.Height)
             {
                 int new_selected_item = (args.Y - (Y1 + Height)) / Font.LineSize;
 
@@ -192,12 +192,12 @@ namespace SCSharp.UI
 
         void PaintDropdown(Surface surf, DateTime dt)
         {
-            surf.Blit(dropdownSurface, new Point(X1, Y1 + Height));
+            surf.Blit(dropDownSurface, new Point(X1, Y1 + Height));
         }
 
         void ShowDropdown()
         {
-            dropdownVisible = true;
+            dropDownVisible = true;
             selectedItem = cursor;
             CreateDropdownSurface();
             ParentScreen.Painter.Add(Layer.Popup, PaintDropdown);
@@ -205,7 +205,7 @@ namespace SCSharp.UI
 
         void HideDropdown()
         {
-            dropdownVisible = false;
+            dropDownVisible = false;
             if (cursor != selectedItem)
             {
                 cursor = selectedItem;
@@ -230,7 +230,7 @@ namespace SCSharp.UI
 
             if (cursor != -1)
             {
-                Surface itemSurface = GuiUtil.ComposeText(items[cursor], Font, Palette, 4);
+                Surface itemSurface = GuiUtility.ComposeText(items[cursor], Font, Palette, 4);
 
                 itemSurface.TransparentColor = Color.Black;
                 itemSurface.Transparent = true;
@@ -242,18 +242,18 @@ namespace SCSharp.UI
 
         void CreateDropdownSurface()
         {
-            dropdownSurface = new Surface(Width, items.Count * Font.LineSize);
+            dropDownSurface = new Surface(Width, items.Count * Font.LineSize);
 
             int y = 0;
             for (int i = 0; i < items.Count; i++)
             {
-                Surface itemSurface = GuiUtil.ComposeText(items[i], Font, Palette,
+                Surface itemSurface = GuiUtility.ComposeText(items[i], Font, Palette,
                                         i == selectedItem ? 4 : 24);
 
                 itemSurface.TransparentColor = Color.Black;
                 itemSurface.Transparent = true;
 
-                dropdownSurface.Blit(itemSurface, new Point(0, y));
+                dropDownSurface.Blit(itemSurface, new Point(0, y));
                 y += itemSurface.Height;
             }
         }
@@ -265,21 +265,53 @@ namespace SCSharp.UI
 
         #region IDisposable Members
 
+        bool disposed;
         /// <summary>
-        /// 
+        /// Destroy sprite
+        /// </summary>
+        /// <param name="disposing">If true, remove all unamanged resources</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    if (this.dropDownSurface != null)
+                    {
+                        this.dropDownSurface.Dispose();
+                        this.dropDownSurface = null;
+                    }
+                }
+                this.disposed = true;
+            }
+        }
+
+        /// <summary>
+        /// Destroy object
         /// </summary>
         public void Dispose()
         {
-            throw new SCException("The method or operation is not implemented.");
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        public void Close()
+        {
+            Dispose();
+        }
+
+        /// <summary>
+        /// Destroy object
+        /// </summary>
+        ~ComboBoxElement()
+        {
+            Dispose(false);
+        }
+
 
         #endregion
     }
-
-    ///// <summary>
-    ///// 
-    ///// </summary>
-    ///// <param name="e"></param>
-    ///// <param name="sender"></param>
-    //public delegate void ComboBoxSelectionChangedEventHandler(object sender, BoxSelectionChangedEventArgs e);
 }

@@ -66,7 +66,7 @@ namespace SCSharp.UI
             surf.TransparentColor = Color.Black; /* XXX */
             surf.Transparent = true;
 
-            Surface textSurf = GuiUtil.ComposeText(Text, Font, Palette, -1, -1,
+            Surface textSurf = GuiUtility.ComposeText(Text, Font, Palette, -1, -1,
                                  Sensitive ? 4 : 24);
 
             surf.Blit(textSurf, new Point((surf.Width - textSurf.Width) / 2,
@@ -107,7 +107,7 @@ namespace SCSharp.UI
             if (Sensitive && (Flags & SCElement.RespondToMouse) == SCElement.RespondToMouse)
             {
                 /* highlight the text */
-                GuiUtil.PlaySound(Mpq, Builtins.MouseoverWav);
+                GuiUtility.PlaySound(Mpq, Builtins.MouseoverWav);
             }
             base.MouseEnter();
         }
