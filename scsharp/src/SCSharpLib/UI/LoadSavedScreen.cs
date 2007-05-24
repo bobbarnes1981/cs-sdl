@@ -47,7 +47,7 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="mpq"></param>
         public LoadSavedScreen(Mpq mpq)
-            : base(mpq, "glue\\PalNl", Builtins.GluLoadBin)
+            : base(mpq, "glue\\PalNl", BuiltIns.GluLoadBin)
         {
         }
 

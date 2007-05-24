@@ -48,7 +48,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public GameModeDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.GluGameModeBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.GluGameModeBin)
         {
             BackgroundPath = "glue\\Palmm\\retail_ex.pcx";
             BackgroundTranslucent = 42;

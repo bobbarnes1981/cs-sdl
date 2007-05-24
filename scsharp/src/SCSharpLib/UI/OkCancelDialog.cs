@@ -52,7 +52,7 @@ namespace SCSharp.UI
         /// <param name="mpq"></param>
         /// <param name="message"></param>
         public OkCancelDialog(UIScreen parent, Mpq mpq, string message)
-            : base(parent, mpq, "glue\\PalNl", Builtins.GluPOkCancelBin)
+            : base(parent, mpq, "glue\\PalNl", BuiltIns.GluPOkCancelBin)
         {
             BackgroundPath = "glue\\PalNl\\pDPopup.pcx";
             this.message = message;

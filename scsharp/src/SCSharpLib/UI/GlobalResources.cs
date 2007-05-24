@@ -236,33 +236,33 @@ namespace SCSharp.UI
         {
             try
             {
-                starcraftResources.ImagesTbl = (Tbl)starDataMpq.GetResource(Builtins.ImagesTbl);
-                starcraftResources.SfxDataTbl = (Tbl)starDataMpq.GetResource(Builtins.SfxDataTbl);
-                starcraftResources.SpritesTbl = (Tbl)starDataMpq.GetResource(Builtins.SpritesTbl);
-                starcraftResources.GluAllTbl = (Tbl)starDataMpq.GetResource(Builtins.GluAllTbl);
-                starcraftResources.MapDataTbl = (Tbl)starDataMpq.GetResource(Builtins.MapDataTbl);
-                starcraftResources.ImagesDat = (ImagesDat)starDataMpq.GetResource(Builtins.ImagesDat);
-                starcraftResources.SfxDataDat = (SfxDataDat)starDataMpq.GetResource(Builtins.SfxDataDat);
-                starcraftResources.SpritesDat = (SpritesDat)starDataMpq.GetResource(Builtins.SpritesDat);
-                starcraftResources.ScriptBin = (ScriptBin)starDataMpq.GetResource(Builtins.IScriptBin);
-                starcraftResources.UnitsDat = (UnitsDat)starDataMpq.GetResource(Builtins.UnitsDat);
-                starcraftResources.FlingyDat = (FlingyDat)starDataMpq.GetResource(Builtins.FlingyDat);
-                starcraftResources.MapDataDat = (MapDataDat)starDataMpq.GetResource(Builtins.MapDataDat);
+                starcraftResources.ImagesTbl = (Tbl)starDataMpq.GetResource(BuiltIns.ImagesTbl);
+                starcraftResources.SfxDataTbl = (Tbl)starDataMpq.GetResource(BuiltIns.SfxDataTbl);
+                starcraftResources.SpritesTbl = (Tbl)starDataMpq.GetResource(BuiltIns.SpritesTbl);
+                starcraftResources.GluAllTbl = (Tbl)starDataMpq.GetResource(BuiltIns.GluAllTbl);
+                starcraftResources.MapDataTbl = (Tbl)starDataMpq.GetResource(BuiltIns.MapDataTbl);
+                starcraftResources.ImagesDat = (ImagesDat)starDataMpq.GetResource(BuiltIns.ImagesDat);
+                starcraftResources.SfxDataDat = (SfxDataDat)starDataMpq.GetResource(BuiltIns.SfxDataDat);
+                starcraftResources.SpritesDat = (SpritesDat)starDataMpq.GetResource(BuiltIns.SpritesDat);
+                starcraftResources.ScriptBin = (ScriptBin)starDataMpq.GetResource(BuiltIns.IScriptBin);
+                starcraftResources.UnitsDat = (UnitsDat)starDataMpq.GetResource(BuiltIns.UnitsDat);
+                starcraftResources.FlingyDat = (FlingyDat)starDataMpq.GetResource(BuiltIns.FlingyDat);
+                starcraftResources.MapDataDat = (MapDataDat)starDataMpq.GetResource(BuiltIns.MapDataDat);
 
                 if (broodDataMpq != null)
                 {
-                    broodwarResources.ImagesTbl = (Tbl)broodDataMpq.GetResource(Builtins.ImagesTbl);
-                    broodwarResources.SfxDataTbl = (Tbl)broodDataMpq.GetResource(Builtins.SfxDataTbl);
-                    broodwarResources.SpritesTbl = (Tbl)broodDataMpq.GetResource(Builtins.SpritesTbl);
-                    broodwarResources.GluAllTbl = (Tbl)broodDataMpq.GetResource(Builtins.GluAllTbl);
-                    broodwarResources.MapDataTbl = (Tbl)broodDataMpq.GetResource(Builtins.MapDataTbl);
-                    broodwarResources.ImagesDat = (ImagesDat)broodDataMpq.GetResource(Builtins.ImagesDat);
-                    broodwarResources.SfxDataDat = (SfxDataDat)broodDataMpq.GetResource(Builtins.SfxDataDat);
-                    broodwarResources.SpritesDat = (SpritesDat)broodDataMpq.GetResource(Builtins.SpritesDat);
-                    broodwarResources.ScriptBin = (ScriptBin)broodDataMpq.GetResource(Builtins.IScriptBin);
-                    broodwarResources.UnitsDat = (UnitsDat)broodDataMpq.GetResource(Builtins.UnitsDat);
-                    broodwarResources.FlingyDat = (FlingyDat)broodDataMpq.GetResource(Builtins.FlingyDat);
-                    broodwarResources.MapDataDat = (MapDataDat)broodDataMpq.GetResource(Builtins.MapDataDat);
+                    broodwarResources.ImagesTbl = (Tbl)broodDataMpq.GetResource(BuiltIns.ImagesTbl);
+                    broodwarResources.SfxDataTbl = (Tbl)broodDataMpq.GetResource(BuiltIns.SfxDataTbl);
+                    broodwarResources.SpritesTbl = (Tbl)broodDataMpq.GetResource(BuiltIns.SpritesTbl);
+                    broodwarResources.GluAllTbl = (Tbl)broodDataMpq.GetResource(BuiltIns.GluAllTbl);
+                    broodwarResources.MapDataTbl = (Tbl)broodDataMpq.GetResource(BuiltIns.MapDataTbl);
+                    broodwarResources.ImagesDat = (ImagesDat)broodDataMpq.GetResource(BuiltIns.ImagesDat);
+                    broodwarResources.SfxDataDat = (SfxDataDat)broodDataMpq.GetResource(BuiltIns.SfxDataDat);
+                    broodwarResources.SpritesDat = (SpritesDat)broodDataMpq.GetResource(BuiltIns.SpritesDat);
+                    broodwarResources.ScriptBin = (ScriptBin)broodDataMpq.GetResource(BuiltIns.IScriptBin);
+                    broodwarResources.UnitsDat = (UnitsDat)broodDataMpq.GetResource(BuiltIns.UnitsDat);
+                    broodwarResources.FlingyDat = (FlingyDat)broodDataMpq.GetResource(BuiltIns.FlingyDat);
+                    broodwarResources.MapDataDat = (MapDataDat)broodDataMpq.GetResource(BuiltIns.MapDataDat);
                 }
 
                 // notify we're ready to roll

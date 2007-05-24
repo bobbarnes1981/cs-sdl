@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public OptionsDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.OptionsBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.OptionsBin)
         {
             BackgroundPath = null;
         }

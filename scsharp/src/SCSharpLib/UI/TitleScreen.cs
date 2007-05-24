@@ -47,9 +47,9 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="mpq"></param>
         public TitleScreen(Mpq mpq)
-            : base(mpq, "glue\\Palmm", Builtins.TitleDlgBin)
+            : base(mpq, "glue\\Palmm", BuiltIns.TitleDlgBin)
         {
-            BackgroundPath = Builtins.TitlePcx;
+            BackgroundPath = BuiltIns.TitlePcx;
         }
 
         /// <summary>

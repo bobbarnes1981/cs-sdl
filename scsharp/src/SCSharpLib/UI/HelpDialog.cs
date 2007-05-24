@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public HelpDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.HelpMenuBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.HelpMenuBin)
         {
             BackgroundPath = null;
         }

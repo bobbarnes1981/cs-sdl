@@ -297,7 +297,7 @@ namespace SCSharp.UI
             pcx.ReadFromStream((Stream)this.Mpq.GetResource("tileset\\badlands\\dark.pcx"), 0, 0);
             tileset_palette = pcx.Palette;
 
-            hud = GuiUtility.SurfaceFromStream((Stream)this.Mpq.GetResource(String.Format(Builtins.GameConsolePcx,
+            hud = GuiUtility.SurfaceFromStream((Stream)this.Mpq.GetResource(String.Format(BuiltIns.GameConsolePcx,
                                                  Utilities.RaceCharLower[(int)Game.Instance.Race])),
                              254, 0);
 

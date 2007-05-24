@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public RestartConfirmationDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.RestartBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.RestartBin)
         {
             BackgroundPath = null;
         }

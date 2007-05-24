@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public SoundDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.SndDlgBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.SndDlgBin)
         {
             BackgroundPath = null;
         }

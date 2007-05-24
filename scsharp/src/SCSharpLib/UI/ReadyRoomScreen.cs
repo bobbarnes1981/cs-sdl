@@ -68,7 +68,7 @@ namespace SCSharp.UI
         int firstPortraitElementIndex)
             : base(mpq,
         String.Format("glue\\Ready{0}", Utilities.RaceChar[(int)Game.Instance.Race]),
-        String.Format(Builtins.GluRdyBin, Utilities.RaceCharLower[(int)Game.Instance.Race]))
+        String.Format(BuiltIns.GluRdyBin, Utilities.RaceCharLower[(int)Game.Instance.Race]))
         {
             if (mpq == null)
             {

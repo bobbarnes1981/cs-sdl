@@ -52,7 +52,7 @@ namespace SCSharp.UI
         /// <param name="mpq"></param>
         /// <param name="message"></param>
         public OkDialog(UIScreen parent, Mpq mpq, string message)
-            : base(parent, mpq, "glue\\PalNl", Builtins.GluPOkBin)
+            : base(parent, mpq, "glue\\PalNl", BuiltIns.GluPOkBin)
         {
             BackgroundPath = "glue\\PalNl\\pOPopup.pcx";
             this.message = message;

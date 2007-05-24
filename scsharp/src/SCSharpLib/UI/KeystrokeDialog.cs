@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public KeystrokeDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.HelpBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.HelpBin)
         {
             BackgroundPath = null;
         }
@@ -79,7 +79,7 @@ namespace SCSharp.UI
             };
 
             ListBoxElement list = (ListBoxElement)Elements[HELPLIST_ELEMENT_INDEX];
-            Tbl helpText = (Tbl)this.Mpq.GetResource(Builtins.HelpTxtTbl);
+            Tbl helpText = (Tbl)this.Mpq.GetResource(BuiltIns.HelpTxtTbl);
 
             for (int i = 0; i < helpText.Strings.Length; i++)
             {
