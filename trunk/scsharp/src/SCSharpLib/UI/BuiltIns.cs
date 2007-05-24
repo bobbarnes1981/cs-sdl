@@ -37,7 +37,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string TitleDlgBin = "rez\\titledlg.bin";
+        public const string TitleDialogBin = "rez\\titledlg.bin";
 #if RELEASE
 		public const string TitlePcx = "glue\\title\\title.pcx";
 #else
@@ -68,22 +68,22 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string GluCmpgnBin = "rez\\glucmpgn.bin"; // original
+        public const string GluCampaignBin = "rez\\glucmpgn.bin"; // original
         /// <summary>
         /// 
         /// </summary>
-        public const string GluExpcmpgnBin = "rez\\gluexpcmpgn.bin"; // broodwar
+        public const string GluExpCampaignBin = "rez\\gluexpcmpgn.bin"; // broodwar
 
         /* Play custom screen */
         /// <summary>
         /// 
         /// </summary>
-        public const string GluCustmBin = "rez\\gluCustm.bin";
+        public const string GluCustomBin = "rez\\gluCustm.bin";
 
         /// <summary>
         /// 
         /// </summary>
-        public const string GluCreatBin = "rez\\gluCreat.bin";
+        public const string GluCreateBin = "rez\\gluCreat.bin";
 
         /* load saved screen */
         /// <summary>
@@ -113,13 +113,13 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string GluRdyBin = "rez\\glurdy{0}.bin";
+        public const string GluReadyBin = "rez\\glurdy{0}.bin";
 
         /* Connection screen */
         /// <summary>
         /// 
         /// </summary>
-        public const string GluConnBin = "rez\\gluConn.bin";
+        public const string GluConnectionBin = "rez\\gluConn.bin";
 
         /* Score screen */
         /// <summary>
@@ -189,11 +189,11 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string PortdataDat = "arr\\portdata.dat";
+        public const string PortDataDat = "arr\\portdata.dat";
         /// <summary>
         /// 
         /// </summary>
-        public const string PortdataTbl = "arr\\portdata.tbl";
+        public const string PortDataTbl = "arr\\portdata.tbl";
         /// <summary>
         /// 
         /// </summary>
@@ -247,29 +247,29 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string MouseoverWav = "sound\\glue\\mouseover.wav";
+        public const string MouseOverWav = "sound\\glue\\mouseover.wav";
         /// <summary>
         /// 
         /// </summary>
-        public const string Mousedown2Wav = "sound\\glue\\mousedown2.wav";
+        public const string MouseDown2Wav = "sound\\glue\\mousedown2.wav";
         /// <summary>
         /// 
         /// </summary>
-        public const string SwishinWav = "sound\\glue\\swishin.wav";
+        public const string SwishInWav = "sound\\glue\\swishin.wav";
         /// <summary>
         /// 
         /// </summary>
-        public const string SwishoutWav = "sound\\glue\\swishout.wav";
+        public const string SwishOutWav = "sound\\glue\\swishout.wav";
 
         /* credits */
         /// <summary>
         /// 
         /// </summary>
-        public const string RezCrdtexpTxt = "rez\\crdt_exp.txt";
+        public const string RezCreditExpTxt = "rez\\crdt_exp.txt";
         /// <summary>
         /// 
         /// </summary>
-        public const string RezCrdtlistTxt = "rez\\crdt_lst.txt";
+        public const string RezCreditListTxt = "rez\\crdt_lst.txt";
 
         /* music */
         /// <summary>
@@ -289,11 +289,11 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string SndDlgBin = "rez\\snd_dlg.bin";
+        public const string SoundDialogBin = "rez\\snd_dlg.bin";
         /// <summary>
         /// 
         /// </summary>
-        public const string SpdDlgBin = "rez\\spd_dlg.bin";
+        public const string SpeedDialogBin = "rez\\spd_dlg.bin";
         /// <summary>
         /// 
         /// </summary>
@@ -301,15 +301,15 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string NetDlgBin = "rez\\netdlg.bin";
+        public const string NetDialogBin = "rez\\netdlg.bin";
         /// <summary>
         /// 
         /// </summary>
-        public const string ObjctDlgBin = "rez\\objctdlg.bin";
+        public const string ObjectDialogBin = "rez\\objctdlg.bin";
         /// <summary>
         /// 
         /// </summary>
-        public const string AbrtMenuBin = "rez\\abrtmenu.bin";
+        public const string AbortMenuBin = "rez\\abrtmenu.bin";
         /// <summary>
         /// 
         /// </summary>
@@ -321,7 +321,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string Quit2MnuBin = "rez\\quit2mnu.bin";
+        public const string Quit2MenuBin = "rez\\quit2mnu.bin";
         /// <summary>
         /// 
         /// </summary>
@@ -339,6 +339,6 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string MinimapBin = "rez\\minimap.bin";
+        public const string MiniMapBin = "rez\\minimap.bin";
     }
 }

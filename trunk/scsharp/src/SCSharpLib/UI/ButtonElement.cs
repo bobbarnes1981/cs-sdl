@@ -107,7 +107,7 @@ namespace SCSharp.UI
             if (Sensitive && (Flags & SCElement.RespondToMouse) == SCElement.RespondToMouse)
             {
                 /* highlight the text */
-                GuiUtility.PlaySound(Mpq, BuiltIns.MouseoverWav);
+                GuiUtility.PlaySound(Mpq, BuiltIns.MouseOverWav);
             }
             base.MouseEnter();
         }

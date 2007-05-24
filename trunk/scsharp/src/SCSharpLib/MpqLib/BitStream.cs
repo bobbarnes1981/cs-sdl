@@ -72,7 +72,7 @@ namespace SCSharp.MpqLib
         {
             if (bitCount > 16)
             {
-                throw new ArgumentOutOfRangeException("BitCount", "Maximum BitCount is 16");
+                throw new ArgumentOutOfRangeException("bitCount", "Maximum BitCount is 16");
             }
             if (EnsureBits(bitCount) == false)
             {

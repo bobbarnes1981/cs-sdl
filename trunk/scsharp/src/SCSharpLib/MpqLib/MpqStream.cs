@@ -223,16 +223,16 @@ namespace SCSharp.MpqLib
                     target = Length + offset;
                     break;
                 default:
-                    throw new ArgumentNullException("Origin", "Invalid SeekOrigin");
+                    throw new ArgumentNullException("origin", "Invalid SeekOrigin");
             }
 
             if (target < 0)
             {
-                throw new ArgumentOutOfRangeException("Attmpted to Seek before the beginning of the stream");
+                throw new ArgumentOutOfRangeException("offset", "Attmpted to Seek before the beginning of the stream");
             }
             if (target >= Length)
             {
-                throw new ArgumentOutOfRangeException("Attmpted to Seek beyond the end of the stream");
+                throw new ArgumentOutOfRangeException("offset", "Attmpted to Seek beyond the end of the stream");
             }
 
             mPosition = target;

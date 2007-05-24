@@ -50,7 +50,7 @@ namespace SCSharp.UI
         /// <param name="mpq"></param>
         public RaceSelectionScreen(Mpq mpq)
             : base(mpq, "glue\\PalNl",
-                Game.Instance.PlayingBroodWar ? BuiltIns.GluExpcmpgnBin : BuiltIns.GluCmpgnBin)
+                Game.Instance.PlayingBroodWar ? BuiltIns.GluExpCampaignBin : BuiltIns.GluCampaignBin)
         {
             BackgroundPath = null;
         }

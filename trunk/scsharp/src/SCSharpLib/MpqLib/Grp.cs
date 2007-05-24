@@ -210,7 +210,7 @@ namespace SCSharp.MpqLib
             }
             catch (IndexOutOfRangeException e)
             {
-                Console.WriteLine("EXCEPTION on line {0}, x = {2}, i = {3}, line length = {2} (line data length = {4}):", line, x, lineLength, i, line_data.Length);
+                Console.WriteLine("EXCEPTION on line {0}, x = {1}, i = {2}, line length = {3} (line data length = {4}):", line, x, lineLength, i, line_data.Length);
                 Console.WriteLine(e.StackTrace);
             }
         }

@@ -64,11 +64,11 @@ namespace SCSharp.UI
             /* broodwar credits */
             if (Game.Instance.IsBroodWar)
             {
-                AddMarkup((Stream)this.Mpq.GetResource(BuiltIns.RezCrdtexpTxt));
+                AddMarkup((Stream)this.Mpq.GetResource(BuiltIns.RezCreditExpTxt));
             }
 
             /* starcraft credits */
-            AddMarkup((Stream)this.Mpq.GetResource(BuiltIns.RezCrdtlistTxt));
+            AddMarkup((Stream)this.Mpq.GetResource(BuiltIns.RezCreditListTxt));
         }
 
         /// <summary>

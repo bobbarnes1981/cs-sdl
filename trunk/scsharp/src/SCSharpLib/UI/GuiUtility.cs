@@ -103,7 +103,7 @@ namespace SCSharp.UI
         {
             if (glyph == null)
             {
-                throw new ArgumentNullException("g");
+                throw new ArgumentNullException("glyph");
             }
             if (palette == null)
             {

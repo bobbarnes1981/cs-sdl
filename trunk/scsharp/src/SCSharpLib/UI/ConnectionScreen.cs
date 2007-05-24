@@ -47,7 +47,7 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="mpq"></param>
         public ConnectionScreen(Mpq mpq)
-            : base(mpq, "glue\\PalNl", BuiltIns.GluConnBin)
+            : base(mpq, "glue\\PalNl", BuiltIns.GluConnectionBin)
         {
         }
 

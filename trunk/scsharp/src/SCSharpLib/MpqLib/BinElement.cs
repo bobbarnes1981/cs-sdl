@@ -378,7 +378,7 @@ namespace SCSharp.MpqLib
         {
             if (buffer == null)
             {
-                throw new ArgumentNullException("buf");
+                throw new ArgumentNullException("buffer");
             }
             x1 = Utilities.ReadWord(buffer, position + 4);
             y1 = Utilities.ReadWord(buffer, position + 6);

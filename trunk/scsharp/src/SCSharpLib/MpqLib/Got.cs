@@ -55,7 +55,7 @@ namespace SCSharp.MpqLib
     ///0x54 (unsigned short) - Game type's variable (actual setting rather than just the label as in 0x45)
     ///0x58 (unsigned long) - Starting mineral ammount
     /// </summary>
-    public enum InitialUnits
+    public enum InitialUnitsSetting
     {
         /// <summary>
         /// 
@@ -150,9 +150,9 @@ namespace SCSharp.MpqLib
         /// <summary>
         /// 
         /// </summary>
-        public InitialUnits InitialUnits
+        public InitialUnitsSetting InitialUnits
         {
-            get { return (InitialUnits)contents[0x4d]; }
+            get { return (InitialUnitsSetting)contents[0x4d]; }
         }
     }
 }
