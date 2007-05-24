@@ -31,7 +31,7 @@ namespace SCSharp.UI
     /// <summary>
     /// 
     /// </summary>
-    public static class Builtins
+    public static class BuiltIns
     {
         /* title screen */
         /// <summary>
@@ -213,11 +213,11 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string TechdataDat = "arr\\techdata.dat";
+        public const string TechDataDat = "arr\\techdata.dat";
         /// <summary>
         /// 
         /// </summary>
-        public const string TechdataTbl = "arr\\techdata.tbl";
+        public const string TechDataTbl = "arr\\techdata.tbl";
         /// <summary>
         /// 
         /// </summary>

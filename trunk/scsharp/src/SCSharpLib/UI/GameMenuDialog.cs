@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public GameMenuDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.GameMenuBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.GameMenuBin)
         {
             BackgroundPath = null;
         }

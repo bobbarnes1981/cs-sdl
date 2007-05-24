@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public NetworkDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.NetDlgBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.NetDlgBin)
         {
             BackgroundPath = null;
         }

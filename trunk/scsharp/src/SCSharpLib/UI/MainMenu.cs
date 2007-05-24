@@ -47,7 +47,7 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="mpq"></param>
         public MainMenu(Mpq mpq)
-            : base(mpq, "glue\\Palmm", Builtins.GluMainBin)
+            : base(mpq, "glue\\Palmm", BuiltIns.GluMainBin)
         {
         }
 
@@ -72,7 +72,7 @@ namespace SCSharp.UI
                 try
                 {
                     Game.Instance.PlayingBroodWar = args.Expansion;
-                    GuiUtility.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
+                    GuiUtility.PlaySound(this.Mpq, BuiltIns.Mousedown2Wav);
                     Game.Instance.SwitchToScreen(nextScreen);
                 }
                 catch (Exception e)
@@ -101,7 +101,7 @@ namespace SCSharp.UI
                 }
                 else
                 {
-                    GuiUtility.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
+                    GuiUtility.PlaySound(this.Mpq, BuiltIns.Mousedown2Wav);
                     Game.Instance.SwitchToScreen(UIScreenType.LogOn);
                 }
             };
@@ -115,7 +115,7 @@ namespace SCSharp.UI
                 }
                 else
                 {
-                    GuiUtility.PlaySound(this.Mpq, Builtins.Mousedown2Wav);
+                    GuiUtility.PlaySound(this.Mpq, BuiltIns.Mousedown2Wav);
                     Game.Instance.SwitchToScreen(UIScreenType.Connection);
                 }
             };

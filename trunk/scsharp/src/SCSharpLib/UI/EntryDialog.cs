@@ -52,7 +52,7 @@ namespace SCSharp.UI
         /// <param name="mpq"></param>
         /// <param name="title"></param>
         public EntryDialog(UIScreen parent, Mpq mpq, string title)
-            : base(parent, mpq, "glue\\PalNl", Builtins.GluPEditBin)
+            : base(parent, mpq, "glue\\PalNl", BuiltIns.GluPEditBin)
         {
             BackgroundPath = "glue\\PalNl\\pEPopup.pcx";
             this.title = title;

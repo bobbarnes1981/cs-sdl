@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public SpeedDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.SpdDlgBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.SpdDlgBin)
         {
             BackgroundPath = null;
         }

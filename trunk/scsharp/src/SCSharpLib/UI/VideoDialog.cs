@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public VideoDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", Builtins.VideoBin)
+            : base(parent, mpq, "glue\\Palmm", BuiltIns.VideoBin)
         {
             BackgroundPath = null;
         }
