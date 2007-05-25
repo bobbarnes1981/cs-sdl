@@ -32,6 +32,7 @@ using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Input;
@@ -850,7 +851,7 @@ namespace SCSharp.UI
 
                 if (bin == null)
                 {
-                    throw new SCException(String.Format("specified file '{0}' does not exist",
+                    throw new SCException(String.Format(CultureInfo.CurrentCulture, "specified file '{0}' does not exist",
                     binFile));
                 }
 

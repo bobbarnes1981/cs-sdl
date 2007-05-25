@@ -31,6 +31,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 using SCSharp.UI;
 
@@ -202,7 +203,7 @@ namespace SCSharp.MpqLib
             SectionData sec = sections[sectionName];
             if (sec == null)
             {
-                throw new SCException(String.Format("map file is missing section {0}, cannot load", sectionName));
+                throw new SCException(String.Format(CultureInfo.CurrentCulture, "map file is missing section {0}, cannot load", sectionName));
             }
 
             if (sec.Buffer == null)

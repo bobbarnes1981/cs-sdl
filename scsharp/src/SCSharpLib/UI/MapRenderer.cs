@@ -28,6 +28,7 @@
 
 using System;
 using System.IO;
+using System.Globalization;
 
 using SdlDotNet.Graphics;
 using SCSharp;
@@ -86,10 +87,10 @@ namespace SCSharp.UI
             bitmapImage.PixelWidth = (ushort)(chk.Width * 32);
             bitmapImage.PixelHeight = (ushort)(chk.Height * 32);
 
-            Stream cv5_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.cv5", Utilities.TileSetNames[(int)chk.TileSet]));
-            Stream vx4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vx4", Utilities.TileSetNames[(int)chk.TileSet]));
-            Stream vr4_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.vr4", Utilities.TileSetNames[(int)chk.TileSet]));
-            Stream wpe_fs = (Stream)mpq.GetResource(String.Format("tileset\\{0}.wpe", Utilities.TileSetNames[(int)chk.TileSet]));
+            Stream cv5_fs = (Stream)mpq.GetResource(String.Format(CultureInfo.CurrentCulture, "tileset\\{0}.cv5", Utilities.TileSetNames[(int)chk.TileSet]));
+            Stream vx4_fs = (Stream)mpq.GetResource(String.Format(CultureInfo.CurrentCulture, "tileset\\{0}.vx4", Utilities.TileSetNames[(int)chk.TileSet]));
+            Stream vr4_fs = (Stream)mpq.GetResource(String.Format(CultureInfo.CurrentCulture, "tileset\\{0}.vr4", Utilities.TileSetNames[(int)chk.TileSet]));
+            Stream wpe_fs = (Stream)mpq.GetResource(String.Format(CultureInfo.CurrentCulture, "tileset\\{0}.wpe", Utilities.TileSetNames[(int)chk.TileSet]));
 
             byte[] cv5 = new byte[cv5_fs.Length];
             cv5_fs.Read(cv5, 0, (int)cv5_fs.Length);
