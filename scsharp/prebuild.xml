@@ -60,12 +60,15 @@
 	    <Reference name="SdlDotNet" localCopy="true" path="../../lib/net-2.0"/>
 	    <Reference name="ICSharpCode.SharpZipLib" localCopy="true" path="../../lib/net-2.0"/>
 	    <Files>
+	        <File buildAction="EmbeddedResource">UI/Credits.txt</File>
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
-		<Match path="." pattern="*.cs" recurse="true"/>
+		<Match path="." pattern="*.cs" recurse="true">
+		    <Exclude name="Properties/Resources.Designer.cs"/>
+		</Match>
 	    </Files>
 	</Project>
-	<Project name="SCSharp" path="src/SCSharp" language="C#" type="WinExe" assemblyName="scsharp" rootNamespace="SCSharp" designerFolder="Properties" icon="App.ico">
+	<Project name="SCSharp" path="src/SCSharp" language="C#" type="WinExe" assemblyName="scsharp" rootNamespace="SCSharp" designerFolder="Properties" icon="App.ico" configFile="App.config">
 	    <Configuration name="Debug">
 		<Options>
 		    <CompilerDefines>DEBUG;TRACE;CODE_ANALYSIS</CompilerDefines>
@@ -103,7 +106,9 @@
 		<File buildAction="EmbeddedResource">App.ico</File>
 		<File buildAction="Content" copyToOutput="PreserveNewest">App.config</File>
 		<Match buildAction="EmbeddedResource" subType="Designer" pattern="Resources.resx" recurse="true"/>
-		<Match pattern="*.cs" recurse="true"/>
+		<Match path="." pattern="*.cs" recurse="true">
+		    <Exclude name="Properties/Resources.Designer.cs"/>
+		</Match>
 	    </Files>
 	</Project>
 	<Project name="Tests" path="tests" language="C#" type="Library" assemblyName="SCSharpTests" rootNamespace="SCSharpTests" designerFolder="Properties">
