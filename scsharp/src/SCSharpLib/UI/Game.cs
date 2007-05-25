@@ -123,7 +123,7 @@ namespace SCSharp.UI
             {
                 foreach (string path in Directory.GetFileSystemEntries(scProgramDir))
                 {
-                    if (Path.GetFileName(path).ToLower() == "broodat.mpq")
+                    if (String.Compare(Path.GetFileName(path), "broodat.mpq", true) == 0)
                     {
                         try
                         {
@@ -136,7 +136,7 @@ namespace SCSharp.UI
                             path), e);
                         }
                     }
-                    else if (Path.GetFileName(path).ToLower() == "stardat.mpq")
+                    else if (String.Compare(Path.GetFileName(path), "stardat.mpq", true) == 0)
                     {
                         try
                         {
@@ -161,7 +161,7 @@ namespace SCSharp.UI
             {
                 foreach (string path in Directory.GetFileSystemEntries(scCDDir))
                 {
-                    if (Path.GetFileName(path).ToLower() == "install.exe")
+                    if (String.Compare(Path.GetFileName(path), "install.exe", true) == 0)
                     {
                         try
                         {
@@ -182,7 +182,7 @@ namespace SCSharp.UI
             {
                 foreach (string path in Directory.GetFileSystemEntries(bwCDDir))
                 {
-                    if (Path.GetFileName(path).ToLower() == "install.exe")
+                    if (String.Compare(Path.GetFileName(path), "install.exe", true) == 0)
                     {
                         try
                         {
@@ -307,6 +307,7 @@ namespace SCSharp.UI
             Events.MouseButtonUp += MouseButtonUp;
             Events.KeyboardUp += KeyboardUp;
             Events.KeyboardDown += KeyboardDown;
+            //Events.Quit += Quit;
 
             DisplayTitle();
 

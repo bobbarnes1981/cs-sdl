@@ -517,9 +517,10 @@ namespace SCSharp.UI
             {
                 throw new ArgumentNullException("stream");
             }
-            if (stream is MemoryStream)
+            MemoryStream newStream = stream as MemoryStream;
+            if (newStream != null)
             {
-                return ((MemoryStream)stream).ToArray();
+                return newStream.ToArray();
             }
             else
             {
