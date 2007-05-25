@@ -69,24 +69,25 @@ namespace SCSharp.MpqLib
                 throw new ArgumentNullException("path");
             }
             string pathLower = path.ToLower();
-            string ext = Path.GetExtension(path).ToLower();
-            if (ext == ".tbl")
+            //string ext = Path.GetExtension(path).ToLower();
+            string ext = Path.GetExtension(path);
+            if (String.Compare(ext, ".tbl", true) == 0)
             {
                 return typeof(Tbl);
             }
-            else if (ext == ".fnt")
+            else if (String.Compare(ext, ".fnt", true) == 0)
             {
                 return typeof(SCFont);
             }
-            else if (ext == ".got")
+            else if (String.Compare(ext, ".got", true) == 0)
             {
                 return typeof(Got);
             }
-            else if (ext == ".grp")
+            else if (String.Compare(ext, ".grp", true) == 0)
             {
                 return typeof(Grp);
             }
-            else if (ext == ".bin")
+            else if (String.Compare(ext, ".bin", true) == 0)
             {
                 if (pathLower.EndsWith("aiscript.bin")) /* must come before iscript.bin */
                 {
@@ -101,11 +102,11 @@ namespace SCSharp.MpqLib
                     return typeof(Bin);
                 }
             }
-            else if (ext == ".chk")
+            else if (String.Compare(ext, ".chk", true) == 0)
             {
                 return typeof(Chk);
             }
-            else if (ext == ".dat")
+            else if (String.Compare(ext, ".dat", true) == 0)
             {
                 if (pathLower.EndsWith("flingy.dat"))
                 {
@@ -132,7 +133,7 @@ namespace SCSharp.MpqLib
                     return typeof(MapDataDat);
                 }
             }
-            else if (ext == ".spk")
+            else if (String.Compare(ext, ".spk", true) == 0)
             {
                 return typeof(Spk);
             }
