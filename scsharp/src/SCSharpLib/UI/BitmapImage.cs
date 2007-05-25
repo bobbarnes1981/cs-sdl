@@ -28,6 +28,7 @@
 
 using System;
 using System.IO;
+using System.Globalization;
 
 using SdlDotNet.Graphics;
 using SCSharp;
@@ -72,6 +73,64 @@ namespace SCSharp.UI
         {
             get { return pixelHeight; }
             set { pixelHeight = value; }
+        }
+
+        /// <summary>
+        /// String representation of circle
+        /// </summary>
+        /// <returns>string representation of circle</returns>
+        public override string ToString()
+        {
+            return String.Format(CultureInfo.CurrentCulture, "({0},{1}, {2})", this.image, this.pixelHeight, this.PixelWidth);
+        }
+
+        /// <summary>
+        /// Equals operator
+        /// </summary>
+        /// <param name="obj">Circle to compare</param>
+        /// <returns>true if circles are equal</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                throw new ArgumentNullException("obj");
+            }
+            if (obj.GetType() != typeof(BitmapImage))
+                return false;
+
+            BitmapImage c = (BitmapImage)obj;
+            return ((this.image == c.image) && (this.pixelHeight == c.pixelHeight) && (this.pixelWidth == c.pixelWidth));
+        }
+
+        /// <summary>
+        /// Equals operator
+        /// </summary>
+        /// <param name="c1">Circle to compare</param>
+        /// <param name="c2">Circle to compare</param>
+        /// <returns>True if circles are equal</returns>
+        public static bool operator ==(BitmapImage c1, BitmapImage c2)
+        {
+            return ((c1.image == c2.image) && (c1.pixelHeight == c2.pixelHeight) && (c1.pixelWidth == c2.pixelWidth));
+        }
+
+        /// <summary>
+        /// Not equals operator
+        /// </summary>
+        /// <param name="c1">Circle to compare</param>
+        /// <param name="c2">Circle to compare</param>
+        /// <returns>True if circles are not equal</returns>
+        public static bool operator !=(BitmapImage c1, BitmapImage c2)
+        {
+            return !(c1 == c2);
+        }
+
+        /// <summary>
+        /// Hash Code
+        /// </summary>
+        /// <returns>Hash code</returns>
+        public override int GetHashCode()
+        {
+            return image.GetHashCode() ^ pixelWidth ^ pixelHeight;
         }
     }
 }

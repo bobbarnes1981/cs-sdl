@@ -43,24 +43,25 @@ namespace SCSharp.UI
     {
         //static bool initSucceeded;
 
-        static FFmpeg()
-        {
-            try
-            {
-                //ffmpeg_init();
-                //initSucceeded = true;
-            }
-            catch (DllNotFoundException)
-            {
-                //initSucceeded = false;
-            }
-        }
+        //static FFmpeg()
+        //{
+        //    try
+        //    {
+        //        //ffmpeg_init();
+        //        //initSucceeded = true;
+        //        //initSucceeded = false;
+        //    }
+        //    catch (DllNotFoundException)
+        //    {
+        //        //initSucceeded = false;
+        //    }
+        //}
 
-        //GCHandle handle;
+        GCHandle handle;
         //string filename;
-        //byte[] buf;
-        //int width;
-        //int height;
+        //byte[] buffer;
+        //int width = 0;
+        //int height = 0;
 
         /// <summary>
         /// 
@@ -75,7 +76,7 @@ namespace SCSharp.UI
             //}
 
             //this.filename = fileName;
-            //this.buf = buf;
+            //this.buffer = buffer;
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace SCSharp.UI
         /// </summary>
         public void Start()
         {
-            //handle = start_decoder(filename, buf, buf.Length);
+            //handle = start_decoder(filename, buffer, buffer.Length);
             //get_dimensions(handle, out width, out height);
         }
 
@@ -92,11 +93,11 @@ namespace SCSharp.UI
         /// </summary>
         public void Stop()
         {
-            //if (handle.Target != null)
-            //{
-            //    //stop_decoder(handle);
-            //    handle.Target = null;
-            //}
+            if (handle.Target != null)
+            {
+                //stop_decoder(handle);
+                handle.Target = null;
+            }
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace SCSharp.UI
         /// <returns></returns>
         public bool GetNextFrame(byte[] buffer)
         {
-            return true; //get_next_frame(handle, buf);
+            return true;// get_next_frame(handle, buffer);
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace SCSharp.UI
         {
             get 
             {
-                return 0;// return width; 
+                return 0; //width; 
             }
         }
 
@@ -127,7 +128,7 @@ namespace SCSharp.UI
         {
             get 
             {
-                return 0;// return height; 
+                return 0;// height; 
             }
         }
 

@@ -31,6 +31,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace SCSharp.MpqLib
 {
@@ -68,26 +69,26 @@ namespace SCSharp.MpqLib
             {
                 throw new ArgumentNullException("path");
             }
-            string pathLower = path.ToLower();
+            string pathLower = path.ToLower(CultureInfo.CurrentCulture);
             //string ext = Path.GetExtension(path).ToLower();
             string ext = Path.GetExtension(path);
-            if (String.Compare(ext, ".tbl", true) == 0)
+            if (String.Compare(ext, ".tbl", true, CultureInfo.CurrentCulture) == 0)
             {
                 return typeof(Tbl);
             }
-            else if (String.Compare(ext, ".fnt", true) == 0)
+            else if (String.Compare(ext, ".fnt", true, CultureInfo.CurrentCulture) == 0)
             {
                 return typeof(SCFont);
             }
-            else if (String.Compare(ext, ".got", true) == 0)
+            else if (String.Compare(ext, ".got", true, CultureInfo.CurrentCulture) == 0)
             {
                 return typeof(Got);
             }
-            else if (String.Compare(ext, ".grp", true) == 0)
+            else if (String.Compare(ext, ".grp", true, CultureInfo.CurrentCulture) == 0)
             {
                 return typeof(Grp);
             }
-            else if (String.Compare(ext, ".bin", true) == 0)
+            else if (String.Compare(ext, ".bin", true, CultureInfo.CurrentCulture) == 0)
             {
                 if (pathLower.EndsWith("aiscript.bin")) /* must come before iscript.bin */
                 {
@@ -102,11 +103,11 @@ namespace SCSharp.MpqLib
                     return typeof(Bin);
                 }
             }
-            else if (String.Compare(ext, ".chk", true) == 0)
+            else if (String.Compare(ext, ".chk", true, CultureInfo.CurrentCulture) == 0)
             {
                 return typeof(Chk);
             }
-            else if (String.Compare(ext, ".dat", true) == 0)
+            else if (String.Compare(ext, ".dat", true, CultureInfo.CurrentCulture) == 0)
             {
                 if (pathLower.EndsWith("flingy.dat"))
                 {
@@ -133,7 +134,7 @@ namespace SCSharp.MpqLib
                     return typeof(MapDataDat);
                 }
             }
-            else if (String.Compare(ext, ".spk", true) == 0)
+            else if (String.Compare(ext, ".spk", true, CultureInfo.CurrentCulture) == 0)
             {
                 return typeof(Spk);
             }
@@ -175,7 +176,7 @@ namespace SCSharp.MpqLib
             res.ReadFromStream(stream);
 
             /* don't cache .smk files */
-            if (!path.ToLower().EndsWith(".smk"))
+            if (!path.ToLower(CultureInfo.CurrentCulture).EndsWith(".smk"))
             {
                 cachedResources[path] = res;
             }

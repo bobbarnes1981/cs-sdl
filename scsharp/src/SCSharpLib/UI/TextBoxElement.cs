@@ -30,6 +30,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Globalization;
 
 using SdlDotNet.Input;
 using SdlDotNet.Graphics;
@@ -116,7 +117,7 @@ namespace SCSharp.UI
                     char cc;
                     if ((args.Mod & (ModifierKeys.RightShift | ModifierKeys.LeftShift)) != 0)
                     {
-                        cc = Char.ToUpper(c);
+                        cc = Char.ToUpper(c, CultureInfo.CurrentCulture);
                     }
                     else
                     {

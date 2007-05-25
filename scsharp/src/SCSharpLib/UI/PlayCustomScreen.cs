@@ -31,6 +31,7 @@ using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 
 using SdlDotNet.Input;
 using SCSharp;
@@ -121,7 +122,7 @@ namespace SCSharp.UI
             }
             foreach (string d in dir)
             {
-                string dl = Path.GetFileName(d).ToLower();
+                string dl = Path.GetFileName(d).ToLower(CultureInfo.CurrentCulture);
 
                 if (curdir == mapdir)
                 {
@@ -153,7 +154,7 @@ namespace SCSharp.UI
 
             for (int i = 0; i < files.Length; i++)
             {
-                string lower = files[i].ToLower();
+                string lower = files[i].ToLower(CultureInfo.CurrentCulture);
                 if (lower.EndsWith(".scm") || lower.EndsWith(".scx"))
                 {
                     fileListbox.AddItem(Path.GetFileName(files[i]));

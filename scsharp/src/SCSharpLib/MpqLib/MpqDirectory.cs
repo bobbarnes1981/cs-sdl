@@ -31,6 +31,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace SCSharp.MpqLib
 {
@@ -57,7 +58,9 @@ namespace SCSharp.MpqLib
         static string ConvertBackSlashes(string path)
         {
             while (path.IndexOf('\\') != -1)
+            {
                 path = path.Replace('\\', Path.DirectorySeparatorChar);
+            }
 
             return path;
         }
@@ -69,15 +72,15 @@ namespace SCSharp.MpqLib
         /// <returns></returns>
         public override Stream GetStreamForResource(string path)
         {
-            string rebased_path = ConvertBackSlashes(Path.Combine(mpqDirPath, path));
+            string rebasedPath = ConvertBackSlashes(Path.Combine(mpqDirPath, path));
 
-            if (fileHash.ContainsKey(rebased_path.ToLower()))
+            if (fileHash.ContainsKey(rebasedPath.ToLower(CultureInfo.CurrentCulture)))
             {
-                string real_path = fileHash[rebased_path.ToLower()];
-                if (real_path != null)
+                string realPath = fileHash[rebasedPath.ToLower(CultureInfo.CurrentCulture)];
+                if (realPath != null)
                 {
-                    Console.WriteLine("using {0}", real_path);
-                    return File.OpenRead(real_path);
+                    Console.WriteLine("using {0}", realPath);
+                    return File.OpenRead(realPath);
                 }
             }
             return null;
@@ -89,7 +92,7 @@ namespace SCSharp.MpqLib
             foreach (string f in files)
             {
                 string platform_path = ConvertBackSlashes(f);
-                fileHash.Add(f.ToLower(), platform_path);
+                fileHash.Add(f.ToLower(CultureInfo.CurrentCulture), platform_path);
             }
 
             string[] directories = Directory.GetDirectories(path);
