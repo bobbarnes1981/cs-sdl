@@ -30,8 +30,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
-
-
+using System.Globalization;
 
 namespace SCSharp.MpqLib
 {
@@ -130,7 +129,7 @@ namespace SCSharp.MpqLib
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("Trigger{{ Condition={0} }}", Condition);
+            return String.Format(CultureInfo.CurrentCulture, "Trigger{{ Condition={0} }}", Condition);
         }
     }
 }

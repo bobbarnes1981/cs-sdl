@@ -1,7 +1,7 @@
 #region LICENSE
 //
 // Authors:
-//	Chris Toshok (toshok@hungry.com)
+// Chris Toshok (toshok@hungry.com)
 //
 // (C) 2006 The Hungry Programmers (http://www.hungry.com/)
 //
@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,6 +32,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Globalization;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Primitives;
@@ -43,7 +44,7 @@ using SCSharp.MpqLib;
 namespace SCSharp.UI
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class GameScreen : UIScreen
     {
@@ -93,23 +94,23 @@ namespace SCSharp.UI
         CursorAnimator[] MagCursors;
 
         //byte[] unit_palette;
-        byte[] tileset_palette;
+        byte[] tilesetPalette;
 
-        //		Player[] players;
+        // Player[] players;
 
         List<Unit> units;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="mpq"></param>
         /// <param name="scenario_mpq"></param>
         /// <param name="scenario"></param>
         /// <param name="template"></param>
         public GameScreen(Mpq mpq,
-                   Mpq scenario_mpq,
-                   Chk scenario,
-                   Got template)
+        Mpq scenario_mpq,
+        Chk scenario,
+        Got template)
             : base(mpq)
         {
             this.EffectPalettePath = "game\\tblink.pcx";
@@ -122,14 +123,14 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="mpq"></param>
         /// <param name="prefix"></param>
         /// <param name="scenario"></param>
         public GameScreen(Mpq mpq,
-                   string prefix,
-                   Chk scenario)
+        string prefix,
+        Chk scenario)
             : base(mpq)
         {
             this.EffectPalettePath = "game\\tblink.pcx";
@@ -168,38 +169,38 @@ namespace SCSharp.UI
                 }
 
                 surf.Blit(starfieldLayers[i],
-                       new Rectangle(new Point(0, 0),
-                              new Size(Painter.ScreenResX - scroll_x,
-                                    Painter.ScreenResY - scroll_y)),
-                       new Rectangle(new Point(scroll_x, scroll_y),
-                              new Size(Painter.ScreenResX - scroll_x,
-                                    Painter.ScreenResY - scroll_y)));
+                new Rectangle(new Point(0, 0),
+                new Size(Painter.ScreenResX - scroll_x,
+                Painter.ScreenResY - scroll_y)),
+                new Rectangle(new Point(scroll_x, scroll_y),
+                new Size(Painter.ScreenResX - scroll_x,
+                Painter.ScreenResY - scroll_y)));
 
                 if (scroll_x != 0)
                 {
                     surf.Blit(starfieldLayers[i],
-                           new Rectangle(new Point(Painter.ScreenResX - scroll_x, 0),
-                                  new Size(scroll_x, Painter.ScreenResY - scroll_y)),
-                           new Rectangle(new Point(0, scroll_y),
-                                  new Size(scroll_x, Painter.ScreenResY - scroll_y)));
+                    new Rectangle(new Point(Painter.ScreenResX - scroll_x, 0),
+                    new Size(scroll_x, Painter.ScreenResY - scroll_y)),
+                    new Rectangle(new Point(0, scroll_y),
+                    new Size(scroll_x, Painter.ScreenResY - scroll_y)));
                 }
 
                 if (scroll_y != 0)
                 {
                     surf.Blit(starfieldLayers[i],
-                           new Rectangle(new Point(0, Painter.ScreenResY - scroll_y),
-                                  new Size(Painter.ScreenResX - scroll_x, scroll_y)),
-                           new Rectangle(new Point(scroll_x, 0),
-                                  new Size(Painter.ScreenResX - scroll_x, scroll_y)));
+                    new Rectangle(new Point(0, Painter.ScreenResY - scroll_y),
+                    new Size(Painter.ScreenResX - scroll_x, scroll_y)),
+                    new Rectangle(new Point(scroll_x, 0),
+                    new Size(Painter.ScreenResX - scroll_x, scroll_y)));
                 }
 
                 if (scroll_x != 0 || scroll_y != 0)
                 {
                     surf.Blit(starfieldLayers[i],
-                           new Rectangle(new Point(Painter.ScreenResX - scroll_x, Painter.ScreenResY - scroll_y),
-                                  new Size(scroll_x, scroll_y)),
-                           new Rectangle(new Point(0, 0),
-                                  new Size(scroll_x, scroll_y)));
+                    new Rectangle(new Point(Painter.ScreenResX - scroll_x, Painter.ScreenResY - scroll_y),
+                    new Size(scroll_x, scroll_y)),
+                    new Rectangle(new Point(0, 0),
+                    new Size(scroll_x, scroll_y)));
                 }
             }
         }
@@ -209,12 +210,12 @@ namespace SCSharp.UI
         void PaintMap(Surface surf, DateTime dt)
         {
             surf.Blit(map_surf,
-                   new Rectangle(new Point(0, 0),
-                          new Size(Painter.ScreenResX - topleft_x,
-                                Painter.ScreenResY - topleft_y)),
-                   new Rectangle(new Point(topleft_x, topleft_y),
-                          new Size(Painter.ScreenResX,
-                                Painter.ScreenResY)));
+            new Rectangle(new Point(0, 0),
+            new Size(Painter.ScreenResX - topleft_x,
+            Painter.ScreenResY - topleft_y)),
+            new Rectangle(new Point(topleft_x, topleft_y),
+            new Size(Painter.ScreenResX,
+            Painter.ScreenResY)));
         }
 
         void PaintHud(Surface surf, DateTime dt)
@@ -225,15 +226,15 @@ namespace SCSharp.UI
         void PaintMinimap(Surface surf, DateTime dt)
         {
             Rectangle rect = new Rectangle(new Point((int)((float)topleft_x / (float)map_surf.Width * MINIMAP_WIDTH + MINIMAP_X),
-                                   (int)((float)topleft_y / (float)map_surf.Height * MINIMAP_HEIGHT + MINIMAP_Y)),
-                            new Size((int)((float)Painter.ScreenResX / (float)map_surf.Width * MINIMAP_WIDTH),
-                                  (int)((float)Painter.ScreenResY / (float)map_surf.Height * MINIMAP_HEIGHT)));
+            (int)((float)topleft_y / (float)map_surf.Height * MINIMAP_HEIGHT + MINIMAP_Y)),
+            new Size((int)((float)Painter.ScreenResX / (float)map_surf.Width * MINIMAP_WIDTH),
+            (int)((float)Painter.ScreenResY / (float)map_surf.Height * MINIMAP_HEIGHT)));
 
             surf.Draw(new Box(rect.Location, rect.Size), Color.Green);
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="painter"></param>
         public override void AddToPainter(Painter painter)
@@ -258,7 +259,7 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="painter"></param>
         public override void RemoveFromPainter(Painter painter)
@@ -283,7 +284,7 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected override void ResourceLoader()
         {
@@ -295,11 +296,11 @@ namespace SCSharp.UI
 
             pcx = new Pcx();
             pcx.ReadFromStream((Stream)this.Mpq.GetResource("tileset\\badlands\\dark.pcx"), 0, 0);
-            tileset_palette = pcx.Palette;
+            tilesetPalette = pcx.Palette;
 
-            hud = GuiUtility.SurfaceFromStream((Stream)this.Mpq.GetResource(String.Format(BuiltIns.GameConsolePcx,
-                                                 Utilities.RaceCharLower[(int)Game.Instance.Race])),
-                             254, 0);
+            hud = GuiUtility.SurfaceFromStream((Stream)this.Mpq.GetResource(String.Format(CultureInfo.CurrentCulture, BuiltIns.GameConsolePcx,
+            Utilities.RaceCharLower[(int)Game.Instance.Race])),
+            254, 0);
 
             if (scenario.TileSet == TileSet.Platform)
             {
@@ -318,7 +319,7 @@ namespace SCSharp.UI
                         ParallaxObject obj = starfield.Layers[i].Objects[o];
 
                         starfieldLayers[i].Fill(new Rectangle(new Point(obj.PositionX, obj.PositionY), new Size(2, 2)),
-                                      Color.White);
+                        Color.White);
                     }
                 }
             }
@@ -327,48 +328,48 @@ namespace SCSharp.UI
 
             // load the cursors we'll show when scrolling with the mouse
             string[] cursornames = new string[] {
-				"cursor\\ScrollUL.grp",
-				"cursor\\ScrollU.grp",
-				"cursor\\ScrollUR.grp",
-				"cursor\\ScrollR.grp",
-				"cursor\\ScrollDR.grp",
-				"cursor\\ScrollD.grp",
-				"cursor\\ScrollDL.grp",
-				"cursor\\ScrollL.grp",
-			};
+"cursor\\ScrollUL.grp",
+"cursor\\ScrollU.grp",
+"cursor\\ScrollUR.grp",
+"cursor\\ScrollR.grp",
+"cursor\\ScrollDR.grp",
+"cursor\\ScrollD.grp",
+"cursor\\ScrollDL.grp",
+"cursor\\ScrollL.grp",
+};
             ScrollCursors = new CursorAnimator[cursornames.Length];
             for (int i = 0; i < cursornames.Length; i++)
             {
                 ScrollCursors[i] = new CursorAnimator((Grp)this.Mpq.GetResource(cursornames[i]),
-                                       EffectPalette.Palette);
+                EffectPalette.Palette);
                 ScrollCursors[i].SetHotspot(60, 60);
             }
 
             // load the mag cursors
             string[] magcursornames = new string[] {
-				"cursor\\MagG.grp",
-				"cursor\\MagY.grp",
-				"cursor\\MagR.grp"
-			};
+"cursor\\MagG.grp",
+"cursor\\MagY.grp",
+"cursor\\MagR.grp"
+};
             MagCursors = new CursorAnimator[magcursornames.Length];
             for (int i = 0; i < magcursornames.Length; i++)
             {
                 MagCursors[i] = new CursorAnimator((Grp)this.Mpq.GetResource(magcursornames[i]),
-                                    EffectPalette.Palette);
+                EffectPalette.Palette);
                 MagCursors[i].SetHotspot(60, 60);
             }
 
             // load the targeting cursors
             string[] targetcursornames = new string[] {
-				"cursor\\TargG.grp",
-				"cursor\\TargY.grp",
-				"cursor\\TargR.grp"
-			};
+"cursor\\TargG.grp",
+"cursor\\TargY.grp",
+"cursor\\TargR.grp"
+};
             TargetCursors = new CursorAnimator[targetcursornames.Length];
             for (int i = 0; i < targetcursornames.Length; i++)
             {
                 TargetCursors[i] = new CursorAnimator((Grp)this.Mpq.GetResource(targetcursornames[i]),
-                                       EffectPalette.Palette);
+                EffectPalette.Palette);
                 TargetCursors[i].SetHotspot(60, 60);
             }
 
@@ -386,7 +387,7 @@ namespace SCSharp.UI
 
         void UpdateCursor()
         {
-            /* are we over a unit?  if so, display the mag cursor */
+            /* are we over a unit? if so, display the mag cursor */
             unitUnderCursor = null;
             for (int i = 0; i < units.Count; i++)
             {
@@ -400,7 +401,7 @@ namespace SCSharp.UI
                 CursorAnimator c = Game.Instance.Cursor;
 
                 if (c.PositionX + topleft_x > s.TopLeftPosition.X && c.PositionX + topleft_x <= s.TopLeftPosition.X + 100 /* XXX */
-                    && c.PositionY + topleft_y > s.TopLeftPosition.Y && c.PositionY + topleft_y <= s.TopLeftPosition.Y + 100 /* XXX */)
+                && c.PositionY + topleft_y > s.TopLeftPosition.Y && c.PositionY + topleft_y <= s.TopLeftPosition.Y + 100 /* XXX */)
                 {
                     Game.Instance.Cursor = MagCursors[MAG_CURSOR_G];
                     unitUnderCursor = u;
@@ -410,7 +411,7 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="surf"></param>
         /// <param name="dt"></param>
@@ -446,7 +447,7 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="args"></param>
         public override void MouseButtonDown(MouseButtonEventArgs args)
@@ -456,7 +457,7 @@ namespace SCSharp.UI
                 throw new ArgumentNullException("args");
             }
             if (args.X > MINIMAP_X && args.X < MINIMAP_X + MINIMAP_WIDTH &&
-                args.Y > MINIMAP_Y && args.Y < MINIMAP_Y + MINIMAP_HEIGHT)
+            args.Y > MINIMAP_Y && args.Y < MINIMAP_Y + MINIMAP_HEIGHT)
             {
                 RecenterFromMinimap(args.X, args.Y);
                 buttonDownInMinimap = true;
@@ -472,7 +473,7 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="args"></param>
         public override void MouseButtonUp(MouseButtonEventArgs args)
@@ -488,7 +489,7 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="args"></param>
         public override void PointerMotion(MouseMotionEventArgs args)
@@ -580,7 +581,7 @@ namespace SCSharp.UI
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="args"></param>
         public override void KeyboardUp(KeyboardEventArgs args)
@@ -590,19 +591,19 @@ namespace SCSharp.UI
                 throw new ArgumentNullException("args");
             }
             if (args.Key == Key.RightArrow
-                || args.Key == Key.LeftArrow)
+            || args.Key == Key.LeftArrow)
             {
                 horiz_delta = 0;
             }
             else if (args.Key == Key.UpArrow
-                 || args.Key == Key.DownArrow)
+            || args.Key == Key.DownArrow)
             {
                 vert_delta = 0;
             }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="args"></param>
         public override void KeyboardDown(KeyboardEventArgs args)
@@ -616,9 +617,9 @@ namespace SCSharp.UI
                 case Key.F10:
                     GameMenuDialog d = new GameMenuDialog(this, this.Mpq);
 
-                    d.ReturnToGame += delegate(object sender2, SCEventArgs args2)  
-                    { 
-                        DismissDialog(); 
+                    d.ReturnToGame += delegate(object sender2, SCEventArgs args2)
+                    {
+                        DismissDialog();
                     };
                     ShowDialog(d);
                     break;
@@ -664,7 +665,7 @@ namespace SCSharp.UI
 
                 //players[unitinfo.player].AddUnit (unit);
 
-                unit.CreateSprite(this.Mpq, tileset_palette);
+                unit.CreateSprite(this.Mpq, tilesetPalette);
                 units.Add(unit);
             }
 
@@ -673,14 +674,14 @@ namespace SCSharp.UI
                 foreach (Unit sl in startLocations)
                 {
                     /* terran command center = 106,
-                       zerg hatchery = 131,
-                       protoss nexus = 154 */
+                    zerg hatchery = 131,
+                    protoss nexus = 154 */
 
                     Unit unit = new Unit(154);
                     unit.PositionX = sl.PositionX;
                     unit.PositionY = sl.PositionY;
 
-                    unit.CreateSprite(this.Mpq, tileset_palette);
+                    unit.CreateSprite(this.Mpq, tilesetPalette);
                     units.Add(unit);
                 }
             }

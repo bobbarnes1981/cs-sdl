@@ -149,7 +149,7 @@ namespace SCSharp.UI
 
             for (int i = 0; i < directories.Length; i++)
             {
-                fileListbox.AddItem(String.Format("[{0}]", Path.GetFileName(directories[i])));
+                fileListbox.AddItem(String.Format(CultureInfo.CurrentCulture, "[{0}]", Path.GetFileName(directories[i])));
             }
 
             for (int i = 0; i < files.Length; i++)
@@ -294,7 +294,7 @@ namespace SCSharp.UI
                 slotString = slotString.Replace("%s",
                                  (selectedChk == null
                                   ? ""
-                                  : String.Format("{0}",
+                                  : String.Format(CultureInfo.CurrentCulture, "{0}",
                                            selectedChk.NumberOfHumanSlots)));
 
                 Elements[MAPPLAYERS1_ELEMENT_INDEX].Text = slotString;
@@ -305,7 +305,7 @@ namespace SCSharp.UI
                 slotString = slotString.Replace("%s",
                                  (selectedChk == null
                                   ? ""
-                                  : String.Format("{0}",
+                                  : String.Format(CultureInfo.CurrentCulture, "{0}",
                                            selectedChk.NumberOfComputerSlots)));
 
                 Elements[MAPPLAYERS2_ELEMENT_INDEX].Text = slotString;
@@ -319,7 +319,7 @@ namespace SCSharp.UI
                 numPlayersString = numPlayersString.Replace("%s",
                                          (selectedChk == null
                                           ? ""
-                                          : String.Format("{0}",
+                                          : String.Format(CultureInfo.CurrentCulture, "{0}",
                                                    selectedChk.NumberOfPlayers)));
 
                 Elements[MAPPLAYERS1_ELEMENT_INDEX].Text = numPlayersString;
@@ -366,7 +366,7 @@ namespace SCSharp.UI
 
         void FileListSelectionChanged(object sender, BoxSelectionChangedEventArgs e)
         {
-            string map_path = Path.Combine(curdir, fileListbox.SelectedItem);
+            string mapPath = Path.Combine(curdir, fileListbox.SelectedItem);
 
             if (e.SelectedIndex < directories.Length)
             {
@@ -375,7 +375,7 @@ namespace SCSharp.UI
             }
             else
             {
-                selectedScenario = new MpqArchiveContainer(map_path);
+                selectedScenario = new MpqArchiveContainer(mapPath);
 
                 selectedChk = (Chk)selectedScenario.GetResource("staredit\\scenario.chk");
             }
@@ -391,7 +391,7 @@ namespace SCSharp.UI
             mapSizeString = mapSizeString.Replace("%s",
                                    (selectedChk == null
                                 ? ""
-                                : String.Format("{0}x{1}",
+                                : String.Format(CultureInfo.CurrentCulture, "{0}x{1}",
                                          selectedChk.Width,
                                          selectedChk.Height)));
 
@@ -399,7 +399,7 @@ namespace SCSharp.UI
             tileSetString = tileSetString.Replace("%s",
                                    (selectedChk == null
                                 ? ""
-                                : String.Format("{0}",
+                                : String.Format(CultureInfo.CurrentCulture, "{0}",
                                          selectedChk.TileSet)));
 
             Elements[MAPSIZE_ELEMENT_INDEX].Text = mapSizeString;

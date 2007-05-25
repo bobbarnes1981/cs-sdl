@@ -30,6 +30,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Globalization;
 
 using SCSharp.UI;
 
@@ -436,7 +437,7 @@ namespace SCSharp.MpqLib
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("{0} ({1})", type, text);
+            return String.Format(CultureInfo.CurrentCulture, "{0} ({1})", type, text);
         }
 
         /// <summary>

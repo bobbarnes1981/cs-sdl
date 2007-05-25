@@ -28,12 +28,12 @@
 
 using System;
 using System.IO;
+using System.Drawing;
 using System.Threading;
+using System.Globalization;
 
 using SdlDotNet;
 using SCSharp;
-using System.Drawing;
-
 
 using SCSharp.MpqLib;
 
@@ -186,7 +186,7 @@ namespace SCSharp.UI
             mapdata_index = GlobalResources.MapDataDat.GetFileIndex((uint)(Game.Instance.PlayingBroodWar ? BroodwarCampaigns_MapDataStart : StarcraftCampaigns_MapDataStart)[campaign]);
 
             prefix = GlobalResources.MapDataTbl[(int)mapdata_index];
-            markup = String.Format("rez\\Est{0}{1}{2}.txt",
+            markup = String.Format(CultureInfo.CurrentCulture, "rez\\Est{0}{1}{2}.txt",
                         Utilities.RaceChar[(int)Game.Instance.Race],
                         prefix.EndsWith("tutorial") ? "0t" : prefix.Substring(prefix.Length - 2),
                         Game.Instance.PlayingBroodWar ? "x" : "");

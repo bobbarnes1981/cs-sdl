@@ -31,6 +31,8 @@
 
 using System;
 using System.IO;
+using System.Globalization;
+
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using ICSharpCode.SharpZipLib.BZip2;
 
@@ -406,7 +408,7 @@ namespace SCSharp.MpqLib
                 }
                 sinput = new MemoryStream(result);
             }
-            throw new SCException(String.Format("Unhandled compression flags: 0x{0:X}", comptype));
+            throw new SCException(String.Format(CultureInfo.CurrentCulture, "Unhandled compression flags: 0x{0:X}", comptype));
         }
 
         //private static byte[] BZip2Decompress(Stream data, int expectedLength)

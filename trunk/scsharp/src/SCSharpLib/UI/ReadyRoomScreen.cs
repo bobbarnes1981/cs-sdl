@@ -30,6 +30,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Drawing;
+using System.Globalization;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Input;
@@ -67,17 +68,17 @@ namespace SCSharp.UI
         int objectivesElementIndex,
         int firstPortraitElementIndex)
             : base(mpq,
-        String.Format("glue\\Ready{0}", Utilities.RaceChar[(int)Game.Instance.Race]),
-        String.Format(BuiltIns.GluReadyBin, Utilities.RaceCharLower[(int)Game.Instance.Race]))
+        String.Format(CultureInfo.CurrentCulture, "glue\\Ready{0}", Utilities.RaceChar[(int)Game.Instance.Race]),
+        String.Format(CultureInfo.CurrentCulture, BuiltIns.GluReadyBin, Utilities.RaceCharLower[(int)Game.Instance.Race]))
         {
             if (mpq == null)
             {
                 throw new ArgumentNullException("mpq");
             }
-            BackgroundPath = String.Format("glue\\PalR{0}\\Backgnd.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
-            FontPalettePath = String.Format("glue\\PalR{0}\\tFont.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
-            EffectPalettePath = String.Format("glue\\PalR{0}\\tEffect.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
-            ArrowGrpPath = String.Format("glue\\PalR{0}\\arrow.grp", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            BackgroundPath = String.Format(CultureInfo.CurrentCulture, "glue\\PalR{0}\\Backgnd.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            FontPalettePath = String.Format(CultureInfo.CurrentCulture, "glue\\PalR{0}\\tFont.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            EffectPalettePath = String.Format(CultureInfo.CurrentCulture, "glue\\PalR{0}\\tEffect.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            ArrowGrpPath = String.Format(CultureInfo.CurrentCulture, "glue\\PalR{0}\\arrow.grp", Utilities.RaceCharLower[(int)Game.Instance.Race]);
 
             this.startElementIndex = startElementIndex;
             this.cancelElementIndex = cancelElementIndex;
@@ -212,7 +213,7 @@ namespace SCSharp.UI
                 EndHighlightPortrait(highlightedPortrait);
             }
 
-            Elements[firstPortraitElementIndex + slot].Background = String.Format("glue\\Ready{0}\\{0}FrameH{1}.pcx",
+            Elements[firstPortraitElementIndex + slot].Background = String.Format(CultureInfo.CurrentCulture, "glue\\Ready{0}\\{0}FrameH{1}.pcx",
             Utilities.RaceChar[(int)Game.Instance.Race],
             slot + 1);
             highlightedPortrait = slot;
@@ -226,7 +227,7 @@ namespace SCSharp.UI
         {
             if (Elements[firstPortraitElementIndex + slot].Visible)
             {
-                Elements[firstPortraitElementIndex + slot].Background = String.Format("glue\\Ready{0}\\{0}Frame{1}.pcx",
+                Elements[firstPortraitElementIndex + slot].Background = String.Format(CultureInfo.CurrentCulture, "glue\\Ready{0}\\{0}Frame{1}.pcx",
                 Utilities.RaceChar[(int)Game.Instance.Race],
                 slot + 1);
             }
@@ -239,7 +240,7 @@ namespace SCSharp.UI
         public void ShowPortrait(int slot)
         {
             Elements[firstPortraitElementIndex + slot].Visible = true;
-            Elements[firstPortraitElementIndex + slot].Background = String.Format("glue\\Ready{0}\\{0}Frame{1}.pcx",
+            Elements[firstPortraitElementIndex + slot].Background = String.Format(CultureInfo.CurrentCulture, "glue\\Ready{0}\\{0}Frame{1}.pcx",
             Utilities.RaceChar[(int)Game.Instance.Race],
             slot + 1);
         }

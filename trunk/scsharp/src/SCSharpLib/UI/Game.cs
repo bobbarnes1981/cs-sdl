@@ -133,7 +133,7 @@ namespace SCSharp.UI
                         }
                         catch (SCException e)
                         {
-                            throw new SCException(String.Format("Could not read mpq archive {0}",
+                            throw new SCException(String.Format(CultureInfo.CurrentCulture, "Could not read mpq archive {0}",
                             path), e);
                         }
                     }
@@ -146,7 +146,7 @@ namespace SCSharp.UI
                         }
                         catch (SCException e)
                         {
-                            throw new SCException(String.Format("could not read mpq archive {0}",
+                            throw new SCException(String.Format(CultureInfo.CurrentCulture, "could not read mpq archive {0}",
                             path), e);
                         }
                     }
@@ -171,7 +171,7 @@ namespace SCSharp.UI
                         }
                         catch (SCException e)
                         {
-                            throw new SCException(String.Format("could not read mpq archive {0}",
+                            throw new SCException(String.Format(CultureInfo.CurrentCulture, "could not read mpq archive {0}",
                             path),
                             e);
                         }
@@ -192,7 +192,7 @@ namespace SCSharp.UI
                         }
                         catch (SCException e)
                         {
-                            throw new SCException(String.Format("could not read mpq archive {0}",
+                            throw new SCException(String.Format(CultureInfo.CurrentCulture, "could not read mpq archive {0}",
                             path),
                             e);
                         }

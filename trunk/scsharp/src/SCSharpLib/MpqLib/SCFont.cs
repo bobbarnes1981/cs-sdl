@@ -1,7 +1,7 @@
 #region LICENSE
 //
 // Authors:
-//	Chris Toshok (toshok@hungry.com)
+// Chris Toshok (toshok@hungry.com)
 //
 // (C) 2006 The Hungry Programmers (http://www.hungry.com/)
 //
@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,27 +30,28 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using System.Globalization;
 
 using SCSharp.UI;
 
 namespace SCSharp.MpqLib
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class SCFont : IMpqResource
     {
         Stream stream;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public SCFont()
         {
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="stream"></param>
         public void ReadFromStream(Stream stream)
@@ -147,17 +148,17 @@ namespace SCSharp.MpqLib
             }
         done:
             glyphs.Add(glyphID,
-                    new Glyph(letterWidth,
-                           letterHeight,
-                           letterXOffset,
-                           letterYOffset,
-                           bitmap));
+            new Glyph(letterWidth,
+            letterHeight,
+            letterXOffset,
+            letterYOffset,
+            bitmap));
 
             return glyphs[glyphID];
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
@@ -168,7 +169,7 @@ namespace SCSharp.MpqLib
                 if (index < lowIndex || index > highIndex)
                 {
                     throw new ArgumentOutOfRangeException("index",
-                                   String.Format("value of {0} out of range of {1}-{2}", index, lowIndex, highIndex));
+                    String.Format(CultureInfo.CurrentCulture, "value of {0} out of range of {1}-{2}", index, lowIndex, highIndex));
                 }
 
                 return GetGlyph(index);
@@ -176,7 +177,7 @@ namespace SCSharp.MpqLib
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public int SpaceSize
         {
@@ -184,7 +185,7 @@ namespace SCSharp.MpqLib
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public int LineSize
         {
@@ -192,7 +193,7 @@ namespace SCSharp.MpqLib
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public int MaxWidth
         {
@@ -200,7 +201,7 @@ namespace SCSharp.MpqLib
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public int MaxHeight
         {
@@ -214,7 +215,7 @@ namespace SCSharp.MpqLib
         byte maxHeight;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void DumpGlyphs()
         {
@@ -226,7 +227,7 @@ namespace SCSharp.MpqLib
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="glyphId"></param>
         public void DumpGlyph(int glyphId)

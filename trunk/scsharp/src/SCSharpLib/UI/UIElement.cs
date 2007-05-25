@@ -31,6 +31,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Globalization;
 
 using SdlDotNet.Graphics;
 using SdlDotNet.Input;
@@ -210,7 +211,7 @@ namespace SCSharp.UI
 
                     if (fnt == null)
                     {
-                        throw new SCException(String.Format("null font at index {0}.. bad things are afoot", idx));
+                        throw new SCException(String.Format(CultureInfo.CurrentCulture, "null font at index {0}.. bad things are afoot", idx));
                     }
                 }
                 return fnt;
