@@ -1,0 +1,153 @@
+<?xml version="1.0" ?>
+<project name="scsharp" default="package">
+    <!--
+    Targets:
+    buildrelease: builds release versions of libraries and examples.
+    package: creates release zip file for .NET and Mono.
+    -->
+    <echo message="Using '${nant.settings.currentframework}' Framework"/>
+    <echo message="Using '${platform::get-name()}' Platform"/>
+
+    <!-- global project settings -->
+    <property name="project.config" value="Release" />
+    <property name="project.version" value="0.0.9" />
+    <property name="src.dir" value="src" />
+    <property name="tests.dir" value="tests" />
+    <property name="dist.dir" value="dist" />
+    <property name="source.dir" value="source" />
+    <property name="bin.dir" value="bin" />
+    <property name="obj.dir" value="obj" />
+    <property name="lib.dir" value="lib" />
+    <property name="doc.dir" value="doc" />
+    <property name="native.sdl" value="Tao.Sdl"/>
+    <property name="dmg.dir" value="SCSharp" />
+    <property name="is-osx" value="false"/>
+
+    <target name="net-2.0" description="Sets framework to .NET 2.0">
+	<property name="nant.settings.currentframework" value="net-2.0" />
+    </target>
+
+    <target name="mono-2.0" description="Sets framework to mono 2.0">
+	<call target="check-osx" />
+	<property name="nant.settings.currentframework" value="mono-2.0" />
+    </target>
+
+    <target name="check-osx" description="Checks if running on OSX">
+	<if test="${file::exists('/System/Library/Frameworks/Cocoa.framework/Cocoa')}">
+	    <property name="is-osx" value="true" />
+	</if>
+    </target>
+
+    <target name="clean" description="Clean project">
+	<delete dir="${bin.dir}" failonerror="false" />
+	<delete dir="${obj.dir}" failonerror="false" />
+	<delete dir="${dist.dir}" failonerror="false" />
+	<nant buildfile="SCSharp.build" target="clean" />
+    </target>
+
+    <target name="package" description="Package" depends="clean">
+	<nant buildfile="SCSharp.build" target="${nant.settings.currentframework} package" />
+	<call target="copyfiles" />
+	<call target="zip" />
+    </target>
+
+    <target name="package-debug" description="Package Debug Mode" depends="clean">
+	<property name="project.config" value="Debug" />
+	<nant buildfile="SCSharp.build" target="${nant.settings.currentframework} clean build-debug" />
+	<call target="copyfiles" />
+    </target>
+
+    <!-- copy project files -->
+    <target name="copyfiles">
+	<if test="${is-osx}">
+	    <property name="dist.dir" value="${dist.dir}/${dmg.dir}" />
+	</if>
+	<if test="${project.config=='Release'}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${source.dir}">
+		<fileset>
+		    <include name="**" />
+
+		    <exclude name="**/${obj.dir}/**" />
+		    <exclude name="**/${bin.dir}/**" />
+		    <exclude name="**/*j.user" />
+		    <exclude name="**.suo" />
+		    <exclude name="**/*.old" />
+		    <exclude name="**/Makefile" />
+		    <exclude name="**/*.in" />
+		    <exclude name="**/*.pc" />
+		    <exclude name="**/*.stackdump" />
+		    <exclude name="**/*.lnk" />
+		    <exclude name="**/config.status" />
+		    <exclude name="**/config.log" />
+		    <exclude name="**/aclocal.m4" />
+		    <exclude name="**/doc/**" />
+		    <exclude name="**/dist/**" />
+		    <exclude name="**/autom4te.cache/**" />
+		    <exclude name="**/Debug/**" />
+		    <exclude name="**/Release/**" />
+		    <exclude name="**.swp" />
+		    <exclude name="**.bak" />
+		    <exclude name="**.project" />
+		</fileset>
+	    </copy>
+	</if>
+
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies" flatten="true">
+	    <fileset basedir="${project::get-base-directory()}/${src.dir}/SCSharp/${bin.dir}/${project.config}">
+		<include name="**/*.exe" />
+		<include name="**/*.config" />
+		<include name="**/*.sh" />
+		<include name="**/*.chm" />
+		<include name="**/*.dll"/>
+		<include name="**/*.xml"/>
+	    </fileset>
+	</copy>
+	<if test="${platform::is-unix() and not is-osx}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
+		    <include name="${native.sdl}.dll.config"/>
+		</fileset>
+	    </copy>
+	</if>
+	<if test="${is-osx}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0/osx">
+		    <include name="${native.sdl}.dll.config"/>
+		</fileset>
+	    </copy>
+	</if>
+	<if test="${platform::is-win32()}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/win32deps">
+		<fileset basedir="${lib.dir}/win32deps">
+		    <include name="**"/>
+		</fileset>
+	    </copy>
+	</if>
+	<if test="${is-osx}">
+	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}"/>
+	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.OpenGl.dll -r:${examples.path}/SdlDotNet.GtkSharp.dll -r:${examples.path}/SdlDotNet.Particles.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/Tao.OpenGl.dll -r:${examples.path}/Tao.OpenGl.dll.config -r:${examples.path}/Tao.FreeGlut.dll -r:${examples.path}/Tao.FreeGlut.dll.config -r:${examples.path}/Tao.Platform.Windows.dll -r:${examples.path}/atk-sharp.dll -r:${examples.path}/gtk-sharp.dll -r:${examples.path}/pango-sharp.dll -r:${examples.path}/glib-sharp.dll -r:${examples.path}/glade-sharp.dll -r:${examples.path}/gdk-sharp.dll -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:SdlDotNetExamples -a:${examples.path}/SdlDotNetExamples.exe" />
+	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config  -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:SharpNes -a:${examples.path}/SharpNes.exe" />
+	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config  -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:CDPlayer -a:${examples.path}/CDPlayer.exe" />
+	</if>
+    </target>
+
+    <!-- create zip file -->
+    <target name="zip" description="zip/gzip files">
+	<property name="project.zip-path" value="${project::get-base-directory()}/${dist.dir}/${string::to-lower(project::get-name())}-${project.version}"/>
+	<if test="${platform::is-unix() and not is-osx}">
+	    <tar destfile="${project.zip-path}.tar.gz" compression="GZip">
+		<fileset basedir="${dist.dir}">
+		    <include name="${project.zip-path}/**" />
+		</fileset>
+	    </tar>
+	</if>
+	<if test="${platform::is-win32()}">
+	    <zip zipfile="${project.zip-path}.zip">
+		<fileset basedir="${dist.dir}">
+		    <include name="${project.zip-path}/**" />
+		</fileset>
+	    </zip>
+	</if>
+	<echo message="Created '${project::get-name()}' packages at ${project.zip-path}" />
+    </target>
+</project>
