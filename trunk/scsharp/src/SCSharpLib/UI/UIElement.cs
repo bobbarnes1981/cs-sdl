@@ -72,7 +72,7 @@ namespace SCSharp.UI
             this.y1 = el.Y1;
             this.palette = palette;
             this.sensitive = true;
-            this.visible = (el.Flags & SCElement.Visible) != 0;
+            this.visible = (el.Flags & SCElements.Visible) != 0;
         }
 
         /// <summary>
@@ -189,19 +189,19 @@ namespace SCSharp.UI
                 {
                     int idx = 2;
 
-                    if ((Flags & SCElement.FontSmallest) != 0)
+                    if ((Flags & SCElements.FontSmallest) != 0)
                     {
                         idx = 0;
                     }
-                    else if ((Flags & SCElement.FontSmaller) != 0)
+                    else if ((Flags & SCElements.FontSmaller) != 0)
                     {
                         idx = 3;
                     }
-                    else if ((Flags & SCElement.FontLarger) != 0)
+                    else if ((Flags & SCElements.FontLarger) != 0)
                     {
                         idx = 3;
                     }
-                    else if ((Flags & SCElement.FontLargest) != 0)
+                    else if ((Flags & SCElements.FontLargest) != 0)
                     {
                         idx = 4;
                     }
@@ -225,7 +225,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public SCElement Flags { get { return el.Flags; } }
+        public SCElements Flags { get { return el.Flags; } }
 
         /// <summary>
         ///

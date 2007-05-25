@@ -32,6 +32,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Globalization;
 
 using SCSharp.UI;
 
@@ -50,12 +51,12 @@ namespace SCSharp.MpqLib
         private MpqHash[] mHashes;
         private MpqBlock[] mBlocks;
 
-        private static uint[] sStormBuffer;
+        private static uint[] sStormBuffer = BuildStormBuffer();
 
-        static MpqArchive()
-        {
-            sStormBuffer = BuildStormBuffer();
-        }
+        //static MpqArchive()
+        //{
+        //    sStormBuffer = BuildStormBuffer();
+        //}
 
         /// <summary>
         /// 
@@ -211,7 +212,7 @@ namespace SCSharp.MpqLib
 
             foreach (char c in input)
             {
-                int val = (int)char.ToUpper(c);
+                int val = (int)char.ToUpper(c, CultureInfo.CurrentCulture);
                 seed1 = sStormBuffer[offset + val] ^ (seed1 + seed2);
                 seed2 = (uint)val + seed1 + seed2 + (seed2 << 5) + 3;
             }

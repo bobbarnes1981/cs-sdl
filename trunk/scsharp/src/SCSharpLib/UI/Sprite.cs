@@ -54,7 +54,7 @@ namespace SCSharp.UI
     public class Sprite
     {
         static Random rng = new Random(Environment.TickCount);
-
+        //static bool showSpriteBorders = ShowSpriteBorders();
         ushort imagesEntry;
 
         string grpPath;
@@ -94,6 +94,7 @@ namespace SCSharp.UI
             {
                 showSpriteBorders = Boolean.Parse(sb);
             }
+            //return true;
         }
 
         /// <summary>

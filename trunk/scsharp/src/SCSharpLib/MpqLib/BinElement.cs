@@ -39,7 +39,7 @@ namespace SCSharp.MpqLib
     /// 
     /// </summary>
     [Flags]
-    public enum SCElement
+    public enum SCElements
     {
         /// <summary>
         /// 
@@ -335,12 +335,12 @@ namespace SCSharp.MpqLib
             set { textOffset = value; }
         }
 
-        private SCElement flags;
+        private SCElements flags;
 
         /// <summary>
         /// 
         /// </summary>
-        public SCElement Flags
+        public SCElements Flags
         {
             get { return flags; }
             set { flags = value; }
@@ -388,7 +388,7 @@ namespace SCSharp.MpqLib
             height = Utilities.ReadWord(buffer, position + 14);
             textOffset = Utilities.ReadDWord(buffer, position + 20);
 
-            flags = (SCElement)Utilities.ReadDWord(buffer, position + 24);
+            flags = (SCElements)Utilities.ReadDWord(buffer, position + 24);
             type = (ElementType)buffer[position + 34];
 
             if (textOffset < streamLength)
@@ -401,7 +401,7 @@ namespace SCSharp.MpqLib
 
                 text = Encoding.ASCII.GetString(buffer, (int)textOffset, (int)textLength);
 
-                if ((flags & SCElement.HasHotkey) == SCElement.HasHotkey)
+                if ((flags & SCElements.HasHotkey) == SCElements.HasHotkey)
                 {
                     hotkey = Encoding.ASCII.GetBytes(new char[] { text[0] })[0];
                     text = text.Substring(1);
@@ -419,7 +419,7 @@ namespace SCSharp.MpqLib
         public void DumpFlags()
         {
             Console.Write("Flags: ");
-            foreach (SCElement f in Enum.GetValues(typeof(SCElement)))
+            foreach (SCElements f in Enum.GetValues(typeof(SCElements)))
             {
                 if ((flags & f) == f)
                 {

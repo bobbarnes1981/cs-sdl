@@ -47,7 +47,7 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="mpq"></param>
         public LogOnScreen(Mpq mpq)
-            : base(mpq, "glue\\PalNl", BuiltIns.GluLoginBin)
+            : base(mpq, "glue\\PalNl", BuiltIns.GluLogOnBin)
         {
         }
 

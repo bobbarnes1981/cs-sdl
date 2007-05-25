@@ -29,6 +29,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using System.Globalization;
 
 using SdlDotNet.Input;
 using SdlDotNet.Core;
@@ -123,7 +124,7 @@ namespace SCSharp.UI
             {
                 foreach (string path in Directory.GetFileSystemEntries(scProgramDir))
                 {
-                    if (String.Compare(Path.GetFileName(path), "broodat.mpq", true) == 0)
+                    if (String.Compare(Path.GetFileName(path), "broodat.mpq", true, CultureInfo.CurrentCulture) == 0)
                     {
                         try
                         {
@@ -136,7 +137,7 @@ namespace SCSharp.UI
                             path), e);
                         }
                     }
-                    else if (String.Compare(Path.GetFileName(path), "stardat.mpq", true) == 0)
+                    else if (String.Compare(Path.GetFileName(path), "stardat.mpq", true, CultureInfo.CurrentCulture) == 0)
                     {
                         try
                         {
@@ -154,14 +155,14 @@ namespace SCSharp.UI
 
             if (stardatMpq == null)
             {
-                throw new SCException("unable to locate stardat.mpq, please check your StarcraftDirectory configuration setting");
+                throw new SCException("unable to locate stardat.mpq, please check your SCDirectory configuration setting");
             }
 
             if (scCDDir != null)
             {
                 foreach (string path in Directory.GetFileSystemEntries(scCDDir))
                 {
-                    if (String.Compare(Path.GetFileName(path), "install.exe", true) == 0)
+                    if (String.Compare(Path.GetFileName(path), "install.exe", true, CultureInfo.CurrentCulture) == 0)
                     {
                         try
                         {
@@ -182,7 +183,7 @@ namespace SCSharp.UI
             {
                 foreach (string path in Directory.GetFileSystemEntries(bwCDDir))
                 {
-                    if (String.Compare(Path.GetFileName(path), "install.exe", true) == 0)
+                    if (String.Compare(Path.GetFileName(path), "install.exe", true, CultureInfo.CurrentCulture) == 0)
                     {
                         try
                         {
@@ -318,7 +319,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        public static void Quit(object sender, EventArgs e)
+        internal static void Quit(object sender, EventArgs e)
         {
             Events.QuitApplication();
         }

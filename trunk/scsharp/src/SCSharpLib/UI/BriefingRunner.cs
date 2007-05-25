@@ -94,7 +94,7 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void Tick(object sender, TickEventArgs e)
+        internal void Tick(object sender, TickEventArgs e)
         {
             TriggerAction[] actions = triggerData.Triggers[0].Actions;
 

@@ -47,7 +47,15 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public static Collection<Sprite> sprites = new Collection<Sprite>();
+        private static Collection<Sprite> sprites = new Collection<Sprite>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static Collection<Sprite> Sprites
+        {
+            get { return SpriteManager.sprites; }
+        }
         static Painter painter;
 
         static Mpq ourMpq;

@@ -679,10 +679,10 @@ namespace SCSharp.UI
                     if ((args.Key == e.Hotkey)
                     ||
                     (args.Key == Key.Return
-                    && (e.Flags & SCElement.DefaultButton) == SCElement.DefaultButton)
+                    && (e.Flags & SCElements.DefaultButton) == SCElements.DefaultButton)
                     ||
                     (args.Key == Key.Escape
-                    && (e.Flags & SCElement.CancelButton) == SCElement.CancelButton))
+                    && (e.Flags & SCElements.CancelButton) == SCElements.CancelButton))
                     {
                         ActivateElement(e);
                         return;
@@ -759,7 +759,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        protected void RaiseReadyEvent(object sender, EventArgs e)
+        internal void RaiseReadyEvent(object sender, EventArgs e)
         {
             if (Ready != null)
             {
@@ -770,7 +770,7 @@ namespace SCSharp.UI
         /// <summary>
         ///
         /// </summary>
-        protected void RaiseDoneSwooshing(object sender, EventArgs e)
+        internal void RaiseDoneSwooshing(object sender, EventArgs e)
         {
             if (DoneSwooshing != null)
             {
@@ -856,50 +856,50 @@ namespace SCSharp.UI
 
                 /* convert all the BinElements to UIElements for our subclasses to use */
                 elements = new Collection<UIElement>();
-                foreach (BinElement el in bin.Elements)
+                foreach (BinElement element in bin.Elements)
                 {
                     // Console.WriteLine ("{0}: {1}", el.text, el.flags);
 
-                    UIElement ui_el = null;
-                    switch (el.Type)
+                    UIElement uiElement = null;
+                    switch (element.Type)
                     {
                         case ElementType.DialogBox:
-                            ui_el = new DialogBoxElement(this, el, fontPalette.RgbData);
+                            uiElement = new DialogBoxElement(this, element, fontPalette.RgbData);
                             break;
                         case ElementType.Image:
-                            ui_el = new ImageElement(this, el, fontPalette.RgbData);
+                            uiElement = new ImageElement(this, element, fontPalette.RgbData);
                             break;
                         case ElementType.TextBox:
-                            ui_el = new TextBoxElement(this, el, fontPalette.RgbData);
+                            uiElement = new TextBoxElement(this, element, fontPalette.RgbData);
                             break;
                         case ElementType.ListBox:
-                            ui_el = new ListBoxElement(this, el, fontPalette.RgbData);
+                            uiElement = new ListBoxElement(this, element, fontPalette.RgbData);
                             break;
                         case ElementType.ComboBox:
-                            ui_el = new ComboBoxElement(this, el, fontPalette.RgbData);
+                            uiElement = new ComboBoxElement(this, element, fontPalette.RgbData);
                             break;
                         case ElementType.LabelLeftAlign:
                         case ElementType.LabelCenterAlign:
                         case ElementType.LabelRightAlign:
-                            ui_el = new LabelElement(this, el, fontPalette.RgbData);
+                            uiElement = new LabelElement(this, element, fontPalette.RgbData);
                             break;
                         case ElementType.Button:
                         case ElementType.DefaultButton:
                         case ElementType.ButtonWithoutBorder:
-                            ui_el = new ButtonElement(this, el, fontPalette.RgbData);
+                            uiElement = new ButtonElement(this, element, fontPalette.RgbData);
                             break;
                         case ElementType.Slider:
                         case ElementType.OptionButton:
                         case ElementType.CheckBox:
-                            ui_el = new UIElement(this, el, fontPalette.RgbData);
+                            uiElement = new UIElement(this, element, fontPalette.RgbData);
                             break;
                         default:
-                            Console.WriteLine("unhandled case {0}", el.Type);
-                            ui_el = new UIElement(this, el, fontPalette.RgbData);
+                            Console.WriteLine("unhandled case {0}", element.Type);
+                            uiElement = new UIElement(this, element, fontPalette.RgbData);
                             break;
                     }
 
-                    elements.Add(ui_el);
+                    elements.Add(uiElement);
                 }
 
                 uiPainter = new UIPainter(elements);

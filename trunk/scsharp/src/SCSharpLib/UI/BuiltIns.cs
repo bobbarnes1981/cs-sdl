@@ -95,7 +95,7 @@ namespace SCSharp.UI
         /// <summary>
         /// 
         /// </summary>
-        public const string GluLoginBin = "rez\\gluLogin.bin";
+        public const string GluLogOnBin = "rez\\gluLogin.bin";
         /// <summary>
         /// 
         /// </summary>
