@@ -129,7 +129,7 @@
 	    </copy>
 	</if>
 	<if test="${is-osx}">
-	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}"/>
+	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies"/>
 	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/ICSharpCode.SharpZipLib.dll -i:sdldotnet.icns  -n:SCSharp -a:${examples.path}/SCSharp.exe" />
 	</if>
     </target>
