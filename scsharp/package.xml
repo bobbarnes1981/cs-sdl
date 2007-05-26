@@ -102,6 +102,11 @@
 		<include name="**/*.xml"/>
 	    </fileset>
 	</copy>
+		<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies" flatten="true">
+	    <fileset basedir="${project::get-base-directory()}/${src.dir}/SCSharp">
+		<include name="**/*.sh" />
+	    </fileset>
+	</copy>
 	<if test="${platform::is-unix() and not is-osx}">
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
 		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
@@ -125,9 +130,7 @@
 	</if>
 	<if test="${is-osx}">
 	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}"/>
-	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.OpenGl.dll -r:${examples.path}/SdlDotNet.GtkSharp.dll -r:${examples.path}/SdlDotNet.Particles.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/Tao.OpenGl.dll -r:${examples.path}/Tao.OpenGl.dll.config -r:${examples.path}/Tao.FreeGlut.dll -r:${examples.path}/Tao.FreeGlut.dll.config -r:${examples.path}/Tao.Platform.Windows.dll -r:${examples.path}/atk-sharp.dll -r:${examples.path}/gtk-sharp.dll -r:${examples.path}/pango-sharp.dll -r:${examples.path}/glib-sharp.dll -r:${examples.path}/glade-sharp.dll -r:${examples.path}/gdk-sharp.dll -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:SdlDotNetExamples -a:${examples.path}/SdlDotNetExamples.exe" />
-	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config  -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:SharpNes -a:${examples.path}/SharpNes.exe" />
-	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config  -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:CDPlayer -a:${examples.path}/CDPlayer.exe" />
+	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/ICSharpCode.SharpZipLib.dll -i:sdldotnet.icns  -n:SCSharp -a:${examples.path}/SCSharp.exe" />
 	</if>
     </target>
 
