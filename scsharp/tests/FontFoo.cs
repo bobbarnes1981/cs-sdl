@@ -67,7 +67,7 @@ static string str3 = "1234567890!@#$%^&*()`~-_=+[]{}\\|;:'\",.<>/?";
 
             SCFont fnt = (SCFont)mpq.GetResource("files\\font\\font16.fnt");
             Console.WriteLine("loading font palette");
-            Stream palStream = (Stream)mpq.GetResource("glue\\Palmm\\tFont.pcx");
+            Stream palStream = (Stream)mpq.GetResource("glue\\palmm\\tfont.pcx");
             Pcx pcx1 = new Pcx();
             pcx1.ReadFromStream(palStream, -1, -1);
 

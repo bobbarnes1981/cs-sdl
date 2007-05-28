@@ -65,6 +65,7 @@ namespace SCSharp.MpqLib
                 }
                 catch (FileNotFoundException)
                 {
+                    Console.WriteLine("File not found: " + path);
                     return null;
                 }
             }

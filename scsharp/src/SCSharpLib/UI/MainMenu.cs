@@ -47,7 +47,7 @@ namespace SCSharp.UI
         /// </summary>
         /// <param name="mpq"></param>
         public MainMenu(Mpq mpq)
-            : base(mpq, "glue\\Palmm", BuiltIns.GluMainBin)
+            : base(mpq, "glue\\palmm", BuiltIns.GluMainBin)
         {
         }
 
@@ -75,7 +75,7 @@ namespace SCSharp.UI
                     GuiUtility.PlaySound(this.Mpq, BuiltIns.MouseDown2Wav);
                     Game.Instance.SwitchToScreen(nextScreen);
                 }
-                catch (Exception e)
+                catch (SCException e)
                 {
                     ShowDialog(new OkDialog(this, this.Mpq, e.Message));
                 }
