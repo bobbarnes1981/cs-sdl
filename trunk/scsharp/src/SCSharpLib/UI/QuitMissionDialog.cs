@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public QuitMissionDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", BuiltIns.Quit2MenuBin)
+            : base(parent, mpq, "glue\\palmm", BuiltIns.Quit2MenuBin)
         {
             BackgroundPath = null;
         }

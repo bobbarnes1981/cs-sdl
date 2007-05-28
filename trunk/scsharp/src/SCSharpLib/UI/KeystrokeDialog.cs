@@ -49,7 +49,7 @@ namespace SCSharp.UI
         /// <param name="parent"></param>
         /// <param name="mpq"></param>
         public KeystrokeDialog(UIScreen parent, Mpq mpq)
-            : base(parent, mpq, "glue\\Palmm", BuiltIns.HelpBin)
+            : base(parent, mpq, "glue\\palmm", BuiltIns.HelpBin)
         {
             BackgroundPath = null;
         }

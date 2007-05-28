@@ -118,7 +118,7 @@ namespace SCSharp.UI
                 lineSurfaces = new List<Surface>();
                 foreach (string l in lines)
                 {
-                    if (l.Trim().Length != 0)
+                    if (l.Trim().Length == 0)
                     {
                         lineSurfaces.Add(null);
                     }
@@ -233,48 +233,48 @@ namespace SCSharp.UI
         /// <param name="stream"></param>
         protected void AddMarkup(Stream stream)
         {
-            string l;
+            string line;
             MarkupPage currentPage = null;
 
             StreamReader sr = new StreamReader(stream);
 
-            while ((l = sr.ReadLine()) != null)
+            while ((line = sr.ReadLine()) != null)
             {
-                if (l.StartsWith("</"))
+                if (line.StartsWith("</"))
                 {
-                    if (l.StartsWith("</PAGE>"))
+                    if (line.StartsWith("</PAGE>"))
                     {
                         currentPage.Layout();
                         pages.Add(currentPage);
                         currentPage = null;
                     }
-                    else if (l.StartsWith("</SCREENCENTER>"))
+                    else if (line.StartsWith("</SCREENCENTER>"))
                     {
                         currentPage = new MarkupPage(PageLocation.Center, fnt, pal);
                     }
-                    else if (l.StartsWith("</SCREENLEFT>"))
+                    else if (line.StartsWith("</SCREENLEFT>"))
                     {
                         currentPage = new MarkupPage(PageLocation.Left, fnt, pal);
                     }
-                    else if (l.StartsWith("</SCREENLOWERLEFT>"))
+                    else if (line.StartsWith("</SCREENLOWERLEFT>"))
                     {
                         currentPage = new MarkupPage(PageLocation.LowerLeft, fnt, pal);
                     }
-                    else if (l.StartsWith("</SCREENRIGHT>"))
+                    else if (line.StartsWith("</SCREENRIGHT>"))
                     {
                         currentPage = new MarkupPage(PageLocation.Right, fnt, pal);
                     }
-                    else if (l.StartsWith("</SCREENTOP>"))
+                    else if (line.StartsWith("</SCREENTOP>"))
                     {
                         currentPage = new MarkupPage(PageLocation.Top, fnt, pal);
                     }
-                    else if (l.StartsWith("</SCREENBOTTOM>"))
+                    else if (line.StartsWith("</SCREENBOTTOM>"))
                     {
                         currentPage = new MarkupPage(PageLocation.Bottom, fnt, pal);
                     }
-                    else if (l.StartsWith("</BACKGROUND "))
+                    else if (line.StartsWith("</BACKGROUND "))
                     {
-                        string bg = l.Substring("</BACKGROUND ".Length);
+                        string bg = line.Substring("</BACKGROUND ".Length);
                         bg = bg.Substring(0, bg.Length - 1);
                         pages.Add(new MarkupPage((Stream)this.Mpq.GetResource(bg)));
                     }
@@ -288,7 +288,9 @@ namespace SCSharp.UI
 
                 }
                 else if (currentPage != null)
-                    currentPage.AddLine(l);
+                {
+                    currentPage.AddLine(line);
+                }
             }
         }
 
@@ -298,7 +300,7 @@ namespace SCSharp.UI
         protected override void ResourceLoader()
         {
             Console.WriteLine("loading font palette");
-            Stream palStream = (Stream)this.Mpq.GetResource("glue\\Palmm\\tFont.pcx");
+            Stream palStream = (Stream)this.Mpq.GetResource("glue\\palmm\\tfont.pcx");
             Pcx pcx = new Pcx();
             pcx.ReadFromStream(palStream, -1, -1);
 

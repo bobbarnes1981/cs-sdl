@@ -278,14 +278,14 @@ namespace SCSharp.MpqLib
         {
             BufferData();
 
-            int localposition = (int)(mPosition % mBlockSize);
-            int bytestocopy = Math.Min(mCurrentData.Length - localposition, count);
-            if (bytestocopy <= 0) return 0;
+            int localPosition = (int)(mPosition % mBlockSize);
+            int bytesToCopy = Math.Min(mCurrentData.Length - localPosition, count);
+            if (bytesToCopy <= 0) return 0;
 
-            Array.Copy(mCurrentData, localposition, buffer, offset, bytestocopy);
+            Array.Copy(mCurrentData, localPosition, buffer, offset, bytesToCopy);
 
-            mPosition += bytestocopy;
-            return bytestocopy;
+            mPosition += bytesToCopy;
+            return bytesToCopy;
         }
 
         /// <summary>
