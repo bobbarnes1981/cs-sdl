@@ -118,14 +118,14 @@ bool menukey(int code, bool isdown)
     int menusel = menus[Menus::vmenu].menusel;
     if(isdown)
     {
-		if(code==(int)SdlDotNet::Key::Escape)
+		if(code==(int)SdlDotNet::Input::Key::Escape)
         {
             menuset(-1);
             if(!menustack.empty()) menuset(menustack.pop());
             return true;
         }
-		else if(code==(int)SdlDotNet::Key::UpArrow || code==-4) menusel--;
-		else if(code==(int)SdlDotNet::Key::DownArrow || code==-5) menusel++;
+		else if(code==(int)SdlDotNet::Input::Key::UpArrow || code==-4) menusel--;
+		else if(code==(int)SdlDotNet::Input::Key::DownArrow || code==-5) menusel++;
         int n = menus[Menus::vmenu].items.length();
         if(menusel<0) menusel = n-1;
         else if(menusel>=n) menusel = 0;
@@ -133,7 +133,7 @@ bool menukey(int code, bool isdown)
     }
     else
     {
-		if(code==(int)SdlDotNet::Key::Return || code==-2)
+		if(code==(int)SdlDotNet::Input::Key::Return || code==-2)
         {
             char *action = menus[Menus::vmenu].items[menusel].action;
             if(Menus::vmenu==1) connects(getservername(menusel));

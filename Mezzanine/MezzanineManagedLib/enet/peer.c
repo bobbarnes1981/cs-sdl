@@ -219,7 +219,7 @@ enet_peer_receive (ENetPeer * peer, enet_uint8 channelID)
            if (incomingCommand -> fragments != NULL)
              enet_free (incomingCommand -> fragments);
 
-           enet_list_remove (& incomingCommand -> incomingCommandList);
+           //enet_list_remove (& incomingCommand -> incomingCommandList);
 
            enet_free (incomingCommand);
 
@@ -240,7 +240,7 @@ enet_peer_receive (ENetPeer * peer, enet_uint8 channelID)
    if (incomingCommand == NULL)
      return NULL;
 
-   enet_list_remove (& incomingCommand -> incomingCommandList);
+   //enet_list_remove (& incomingCommand -> incomingCommandList);
 
    packet = incomingCommand -> packet;
 
@@ -261,7 +261,7 @@ enet_peer_reset_outgoing_commands (ENetList * queue)
 
     while (enet_list_empty (queue) == 0)
     {
-       outgoingCommand = (ENetOutgoingCommand *) enet_list_remove (enet_list_begin (queue));
+       //outgoingCommand = (ENetOutgoingCommand *) enet_list_remove (enet_list_begin (queue));
 
        if (outgoingCommand -> packet != NULL)
        {
@@ -282,7 +282,7 @@ enet_peer_reset_incoming_commands (ENetList * queue)
 
     while (enet_list_empty (queue) == 0)
     {
-       incomingCommand = (ENetIncomingCommand *) enet_list_remove (enet_list_begin (queue));
+       //incomingCommand = (ENetIncomingCommand *) enet_list_remove (enet_list_begin (queue));
 
        if (incomingCommand -> packet != NULL)
        {
@@ -304,8 +304,8 @@ enet_peer_reset_queues (ENetPeer * peer)
 {
     ENetChannel * channel;
 
-    while (enet_list_empty (& peer -> acknowledgements) == 0)
-      enet_free (enet_list_remove (enet_list_begin (& peer -> acknowledgements)));
+    /*while (enet_list_empty (& peer -> acknowledgements) == 0)
+      enet_free (enet_list_remove (enet_list_begin (& peer -> acknowledgements)));*/
 
     enet_peer_reset_outgoing_commands (& peer -> sentReliableCommands);
     enet_peer_reset_outgoing_commands (& peer -> sentUnreliableCommands);
@@ -488,7 +488,7 @@ enet_peer_queue_acknowledgement (ENetPeer * peer, const ENetProtocol * command, 
     acknowledgement -> sentTime = sentTime;
     acknowledgement -> command = * command;
     
-    enet_list_insert (enet_list_end (& peer -> acknowledgements), acknowledgement);
+    //enet_list_insert (enet_list_end (& peer -> acknowledgements), acknowledgement);
     
     return acknowledgement;
 }
@@ -546,10 +546,10 @@ enet_peer_queue_outgoing_command (ENetPeer * peer, const ENetProtocol * command,
     if (packet != NULL)
       ++ packet -> referenceCount;
 
-    if (command -> header.flags & ENET_PROTOCOL_FLAG_ACKNOWLEDGE)
-      enet_list_insert (enet_list_end (& peer -> outgoingReliableCommands), outgoingCommand);
-    else
-      enet_list_insert (enet_list_end (& peer -> outgoingUnreliableCommands), outgoingCommand);
+    //if (command -> header.flags & ENET_PROTOCOL_FLAG_ACKNOWLEDGE)
+      //enet_list_insert (enet_list_end (& peer -> outgoingReliableCommands), outgoingCommand);
+    //else
+      //enet_list_insert (enet_list_end (& peer -> outgoingUnreliableCommands), outgoingCommand);
 
     return outgoingCommand;
 }
@@ -634,7 +634,7 @@ enet_peer_queue_incoming_command (ENetPeer * peer, const ENetProtocol * command,
     if (packet != NULL)
       ++ packet -> referenceCount;
 
-    enet_list_insert (enet_list_next (currentCommand), incomingCommand);
+    //enet_list_insert (enet_list_next (currentCommand), incomingCommand);
 
     return incomingCommand;
 

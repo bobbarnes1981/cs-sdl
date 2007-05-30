@@ -37,7 +37,7 @@ using System.Collections;
 using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
-using SdlDotNet;
+using SdlDotNet.Audio;
 using System.Runtime.InteropServices;
 
 namespace MezzanineLib.Support
@@ -65,7 +65,7 @@ namespace MezzanineLib.Support
 		public static bool noSound = false;
 		static int soundVolume = 255;
 		static int musicVolume = 128;
-		static SdlDotNet.Music music;
+		static SdlDotNet.Audio.Music music;
 		static SoundLocation[] soundLocations = new SoundLocation[MAXCHAN];
 		public static ArrayList samples = new ArrayList();
 		public static ArrayList snames = new ArrayList();
@@ -98,7 +98,7 @@ namespace MezzanineLib.Support
 			{
 				return;
 			}
-			SdlDotNet.Music.Stop();
+			SdlDotNet.Audio.MusicPlayer.Stop();
 			if(soundVolume!= 0 && musicVolume!=0)
 			{
 //				string soundName = @"packages/" + filename;
@@ -126,7 +126,7 @@ namespace MezzanineLib.Support
 
 		public static void CleanSound()
 		{
-			SdlDotNet.Music.Stop();
+			SdlDotNet.Audio.MusicPlayer.Stop();
 			Mixer.Close();
 		}
 
@@ -205,11 +205,11 @@ namespace MezzanineLib.Support
 		
 			if(samples[n]==null)
 			{
-				samples[n] = new SdlDotNet.Sound(GameInit.NormalizePath("packages/sounds/" + snames[n] + ".wav"));
+				samples[n] = new SdlDotNet.Audio.Sound(GameInit.NormalizePath("packages/sounds/" + snames[n] + ".wav"));
 				// if(!samples[n]) { conoutf("failed to load sample: %s", buf); return; };
 			}
 		
-			SdlDotNet.Channel channel = ((SdlDotNet.Sound)samples[n]).Play();
+			Channel channel = ((SdlDotNet.Audio.Sound)samples[n]).Play();
 			if(channel.Index<0) 
 			{
 				return;

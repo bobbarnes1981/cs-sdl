@@ -75,7 +75,7 @@ enet_protocol_remove_sent_unreliable_commands (ENetPeer * peer)
     {
         outgoingCommand = (ENetOutgoingCommand *) enet_list_front (& peer -> sentUnreliableCommands);
         
-        enet_list_remove (& outgoingCommand -> outgoingCommandList);
+        //enet_list_remove (& outgoingCommand -> outgoingCommandList);
 
         if (outgoingCommand -> packet != NULL)
         {
@@ -110,9 +110,9 @@ enet_protocol_remove_sent_reliable_command (ENetPeer * peer, enet_uint32 reliabl
     if (currentCommand == enet_list_end (& peer -> sentReliableCommands))
       return ENET_PROTOCOL_COMMAND_NONE;
 
-    commandNumber = outgoingCommand -> command.header.command;
+//    commandNumber = outgoingCommand -> command.header.command;
 
-    enet_list_remove (& outgoingCommand -> outgoingCommandList);
+    //enet_list_remove (& outgoingCommand -> outgoingCommandList);
 
     if (outgoingCommand -> packet != NULL)
     {
@@ -691,10 +691,10 @@ enet_protocol_handle_incoming_commands (ENetHost * host, ENetEvent * event)
 
           break;
 
-       case ENET_PROTOCOL_COMMAND_CONNECT:
+       /*case ENET_PROTOCOL_COMMAND_CONNECT:
           peer = enet_protocol_handle_connect (host, header, command);
 
-          break;
+          break;*/
 
        case ENET_PROTOCOL_COMMAND_VERIFY_CONNECT:
           enet_protocol_handle_verify_connect (host, event, peer, command);
@@ -847,7 +847,7 @@ enet_protocol_send_acknowledgements (ENetHost * host, ENetPeer * peer)
        if (acknowledgement -> command.header.command == ENET_PROTOCOL_COMMAND_DISCONNECT)
          peer -> state = ENET_PEER_STATE_ZOMBIE;
 
-       enet_list_remove (& acknowledgement -> acknowledgementList);
+       //enet_list_remove (& acknowledgement -> acknowledgementList);
        enet_free (acknowledgement);
 
        ++ command;
@@ -894,7 +894,7 @@ enet_protocol_send_unreliable_outgoing_commands (ENetHost * host, ENetPeer * pee
              if (outgoingCommand -> packet -> referenceCount == 0)
                enet_packet_destroy (outgoingCommand -> packet);
          
-             enet_list_remove (& outgoingCommand -> outgoingCommandList);
+             //enet_list_remove (& outgoingCommand -> outgoingCommandList);
              enet_free (outgoingCommand);
            
              continue;
@@ -908,7 +908,7 @@ enet_protocol_send_unreliable_outgoing_commands (ENetHost * host, ENetPeer * pee
 
        * command = outgoingCommand -> command;
        
-       enet_list_remove (& outgoingCommand -> outgoingCommandList);
+       //enet_list_remove (& outgoingCommand -> outgoingCommandList);
 
        if (outgoingCommand -> packet != NULL)
        {
@@ -921,7 +921,7 @@ enet_protocol_send_unreliable_outgoing_commands (ENetHost * host, ENetPeer * pee
 
           host -> packetSize += buffer -> dataLength;
 
-          enet_list_insert (enet_list_end (& peer -> sentUnreliableCommands), outgoingCommand);
+          //enet_list_insert (enet_list_end (& peer -> sentUnreliableCommands), outgoingCommand);
        }
        else
          enet_free (outgoingCommand);
@@ -977,8 +977,8 @@ enet_protocol_check_timeouts (ENetHost * host, ENetPeer * peer, ENetEvent * even
 
        outgoingCommand -> roundTripTimeout *= 2;
 
-       enet_list_insert (enet_list_begin (& peer -> outgoingReliableCommands),
-                         enet_list_remove (& outgoingCommand -> outgoingCommandList));
+       /*enet_list_insert (enet_list_begin (& peer -> outgoingReliableCommands),
+                         enet_list_remove (& outgoingCommand -> outgoingCommandList));*/
 
        if (currentCommand == enet_list_begin (& peer -> sentReliableCommands) &&
            enet_list_empty (& peer -> sentReliableCommands) == 0)
@@ -1031,8 +1031,8 @@ enet_protocol_send_reliable_outgoing_commands (ENetHost * host, ENetPeer * peer)
        if (enet_list_empty (& peer -> sentReliableCommands))
          peer -> nextTimeout = timeCurrent + outgoingCommand -> roundTripTimeout;
 
-       enet_list_insert (enet_list_end (& peer -> sentReliableCommands),
-                         enet_list_remove (& outgoingCommand -> outgoingCommandList));
+       /*enet_list_insert (enet_list_end (& peer -> sentReliableCommands),
+                         enet_list_remove (& outgoingCommand -> outgoingCommandList));*/
 
        outgoingCommand -> sentTime = timeCurrent;
 
@@ -1184,7 +1184,7 @@ enet_host_flush (ENetHost * host)
 {
     timeCurrent = enet_time_get ();
 
-    enet_protocol_send_outgoing_commands (host, NULL, 0);
+    //enet_protocol_send_outgoing_commands (host, NULL, 0);
 }
 
 /** Waits for events on the host specified and shuttles packets between
@@ -1231,7 +1231,7 @@ enet_host_service (ENetHost * host, ENetEvent * event, enet_uint32 timeout)
        if (ENET_TIME_DIFFERENCE (timeCurrent, host -> bandwidthThrottleEpoch) >= ENET_HOST_BANDWIDTH_THROTTLE_INTERVAL)
          enet_host_bandwidth_throttle (host);
 
-       switch (enet_protocol_send_outgoing_commands (host, event, 1))
+      /* switch (enet_protocol_send_outgoing_commands (host, event, 1))
        {
        case 1:
           return 1;
@@ -1243,7 +1243,7 @@ enet_host_service (ENetHost * host, ENetEvent * event, enet_uint32 timeout)
 
        default:
           break;
-       }
+       }*/
 
        switch (enet_protocol_receive_incoming_commands (host, event))
        {
@@ -1259,7 +1259,7 @@ enet_host_service (ENetHost * host, ENetEvent * event, enet_uint32 timeout)
           break;
        }
 
-       switch (enet_protocol_send_outgoing_commands (host, event, 1))
+       /*switch (enet_protocol_send_outgoing_commands (host, event, 1))
        {
        case 1:
           return 1;
@@ -1271,7 +1271,7 @@ enet_host_service (ENetHost * host, ENetEvent * event, enet_uint32 timeout)
 
        default:
           break;
-       }
+       }*/
 
        switch (enet_protocol_dispatch_incoming_commands (host, event))
        {

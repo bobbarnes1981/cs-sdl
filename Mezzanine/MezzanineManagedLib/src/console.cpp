@@ -43,13 +43,13 @@ void conoutf(const char *s, ...)
     sprintf_sdv(sf, s);
     s = sf;
     int n = 0;
-    while(strlen(s)>Console::WORDWRAP)                       // cut strings to fit on screen
-    {
-        string t;
-        strn0cpy(t, s, Console::WORDWRAP+1);
-        conline(t, n++!=0);
-        s += Console::WORDWRAP;
-    };
+    //while(strlen(s)>Console::WORDWRAP)                       // cut strings to fit on screen
+    //{
+    //    string t;
+    //    strn0cpy(t, s, Console::WORDWRAP+1);
+    //    conline(t, n++!=0);
+    //    s += Console::WORDWRAP;
+    //};
     conline(s, n!=0);
 };
 
@@ -96,8 +96,8 @@ COMMANDN(bind, bindkey, FunctionSignatures::ARG_2STR);
 
 void saycommand(char *init)                         // turns input to the command line on or off
 {
-	SdlDotNet::Keyboard::UnicodeEnabled = (Console::saycommandon = (init!=NULL));
-    if(!GameInit::EditMode) SdlDotNet::Keyboard::KeyRepeat = Console::saycommandon;
+	SdlDotNet::Input::Keyboard::UnicodeEnabled = (Console::saycommandon = (init!=NULL));
+    if(!GameInit::EditMode) SdlDotNet::Input::Keyboard::KeyRepeat = Console::saycommandon;
     if(!init) init = "";
     strcpy_s(commandbuf, init);
 };
@@ -140,32 +140,32 @@ void keypress(int code, bool isdown, int cooked)
         {
             switch(code)
             {
-			case (int)SdlDotNet::Key::Return:
+			case (int)SdlDotNet::Input::Key::Return:
                     break;
 
-				case (int)SdlDotNet::Key::Backspace:
-				case (int)SdlDotNet::Key::LeftArrow:
+				case (int)SdlDotNet::Input::Key::Backspace:
+				case (int)SdlDotNet::Input::Key::LeftArrow:
                 {
                     for(int i = 0; commandbuf[i]; i++) if(!commandbuf[i+1]) commandbuf[i] = 0;
                     Command::ResetComplete();
                     break;
                 };
                     
-				case (int)SdlDotNet::Key::UpArrow:
+				case (int)SdlDotNet::Input::Key::UpArrow:
                     if(Console::histpos) strcpy_s(commandbuf, vhistory[--Console::histpos]);
                     break;
                 
-				case (int)SdlDotNet::Key::DownArrow:
+				case (int)SdlDotNet::Input::Key::DownArrow:
                     if(Console::histpos<vhistory.length()) strcpy_s(commandbuf, vhistory[Console::histpos++]);
                     break;
                     
-				case (int)SdlDotNet::Key::Tab:
+				case (int)SdlDotNet::Input::Key::Tab:
                     complete(commandbuf);
                     break;
 
-				case (int)SdlDotNet::Key::V:
+				case (int)SdlDotNet::Input::Key::V:
                     //if(SDL_GetModState()&(KMOD_LCTRL|KMOD_RCTRL)) { pasteconsole(); return; };
-					if(SdlDotNet::Keyboard::ModifierKeyState & (SdlDotNet::Key::LeftControl|SdlDotNet::Key::RightControl)) 
+					if(SdlDotNet::Input::Keyboard::ModifierKeyState & (SdlDotNet::Input::Key::LeftControl|SdlDotNet::Input::Key::RightControl)) 
 					{ 
 						pasteconsole(); 
 						return; 
@@ -178,7 +178,7 @@ void keypress(int code, bool isdown, int cooked)
         }
         else
         {
-			if(code==(int)SdlDotNet::Key::Return)
+			if(code==(int)SdlDotNet::Input::Key::Return)
             {
                 if(commandbuf[0])
                 {
@@ -192,7 +192,7 @@ void keypress(int code, bool isdown, int cooked)
                 };
                 saycommand(NULL);
             }
-            else if(code==(int)SdlDotNet::Key::Escape)
+            else if(code==(int)SdlDotNet::Input::Key::Escape)
             {
                 saycommand(NULL);
             };
