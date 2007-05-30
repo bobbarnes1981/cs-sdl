@@ -36,7 +36,10 @@ using System;
 using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
-using SdlDotNet;
+using SdlDotNet.Core;
+using SdlDotNet.Input;
+using SdlDotNet.Graphics;
+using SdlDotNet.Audio;
 using System.Runtime.InteropServices;
 using MezzanineLib;
 
@@ -155,7 +158,7 @@ namespace Mezzanine
 			{
 				Video.GrabInput = true;
 			}
-			Video.SetVideoModeWindowOpenGL(GameInit.ScreenWidth, GameInit.ScreenHeight);
+			Video.SetVideoMode(GameInit.ScreenWidth, GameInit.ScreenHeight, false, true);
 			
 			MezzanineLib.GameInit.Log("video: misc");
 			Keyboard.KeyRepeat = false;
@@ -212,13 +215,13 @@ namespace Mezzanine
 			MezzanineLib.Bindings.changemap("metl3");		
 			MezzanineLib.GameInit.Log("mainloop");
 			
-			Events.KeyboardDown += new KeyboardEventHandler(this.KeyDown);
-			Events.KeyboardUp += new KeyboardEventHandler(this.KeyUp);
-			Events.Tick += new TickEventHandler(this.Tick);
-			Events.Quit += new QuitEventHandler(this.Quit);
-			Events.MouseMotion += new MouseMotionEventHandler(this.MouseMotion);
-			Events.MouseButtonUp += new MouseButtonEventHandler(this.MouseButtonUp);
-			Events.MouseButtonDown += new MouseButtonEventHandler(this.MouseButtonDown);
+			Events.KeyboardDown += new EventHandler<KeyboardEventArgs>(this.KeyDown);
+            Events.KeyboardUp += new EventHandler<KeyboardEventArgs>(this.KeyUp);
+            Events.Tick += new EventHandler<TickEventArgs>(this.Tick);
+            Events.Quit += new EventHandler<QuitEventArgs>(this.Quit);
+			Events.MouseMotion += new EventHandler<MouseMotionEventArgs>(this.MouseMotion);
+            Events.MouseButtonUp += new EventHandler<MouseButtonEventArgs>(this.MouseButtonUp);
+            Events.MouseButtonDown += new EventHandler<MouseButtonEventArgs>(this.MouseButtonDown);
 			Events.Run();
 		}
 		private void Tick(object sender, TickEventArgs e)

@@ -66,11 +66,11 @@ enet_host_create (const ENetAddress * address, size_t peerCount, enet_uint32 inc
        currentPeer -> incomingPeerID = currentPeer - host -> peers;
        currentPeer -> data = NULL;
 
-       enet_list_clear (& currentPeer -> acknowledgements);
-       enet_list_clear (& currentPeer -> sentReliableCommands);
-       enet_list_clear (& currentPeer -> sentUnreliableCommands);
-       enet_list_clear (& currentPeer -> outgoingReliableCommands);
-       enet_list_clear (& currentPeer -> outgoingUnreliableCommands);
+       //enet_list_clear (& currentPeer -> acknowledgements);
+       //enet_list_clear (& currentPeer -> sentReliableCommands);
+       //enet_list_clear (& currentPeer -> sentUnreliableCommands);
+       //enet_list_clear (& currentPeer -> outgoingReliableCommands);
+       //enet_list_clear (& currentPeer -> outgoingUnreliableCommands);
 
        enet_peer_reset (currentPeer);
     }
@@ -159,8 +159,8 @@ enet_host_connect (ENetHost * host, const ENetAddress * address, size_t channelC
         channel -> incomingReliableSequenceNumber = 0;
         channel -> incomingUnreliableSequenceNumber = 0;
 
-        enet_list_clear (& channel -> incomingReliableCommands);
-        enet_list_clear (& channel -> incomingUnreliableCommands);
+        //enet_list_clear (& channel -> incomingReliableCommands);
+        //enet_list_clear (& channel -> incomingUnreliableCommands);
     }
         
     command.header.command = ENET_PROTOCOL_COMMAND_CONNECT;

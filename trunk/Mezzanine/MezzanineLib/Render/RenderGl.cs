@@ -37,7 +37,7 @@ using System.Collections;
 using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
-using SdlDotNet;
+using SdlDotNet.Graphics;
 using System.Runtime.InteropServices;
 
 namespace MezzanineLib.Render
@@ -45,7 +45,7 @@ namespace MezzanineLib.Render
 	public sealed class RenderGl
 	{
 		static Glu.GLUquadric qsphere;
-		static int glmaxtexsize = 256;
+        static int[] glmaxtexsize = { 256 };
 		static bool hasOverBright = false;
 		static string[] hudGunNames = 
 { 
@@ -327,12 +327,12 @@ namespace MezzanineLib.Render
 			Gl.glCullFace(Gl.GL_FRONT);
 			Gl.glEnable(Gl.GL_CULL_FACE);
 
-			IntPtr exts = Gl.glGetString(Gl.GL_EXTENSIONS);
+			string exts = Gl.glGetString(Gl.GL_EXTENSIONS);
     
 			//if(strstr(exts, "GL_EXT_texture_env_combine")) hasoverbright = true;
 			//else conoutf("WARNING: cannot use overbright lighting, using old lighting model!");
         
-			Gl.glGetIntegerv(Gl.GL_MAX_TEXTURE_SIZE, out glmaxtexsize);
+			Gl.glGetIntegerv(Gl.GL_MAX_TEXTURE_SIZE, glmaxtexsize);
         
 			PurgeTextures();
 
@@ -540,7 +540,7 @@ namespace MezzanineLib.Render
 			Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_MODULATE); 
 			xs = s.Width;
 			ys = s.Height;
-			while(xs>glmaxtexsize || ys>glmaxtexsize) 
+			while(xs>glmaxtexsize[0] || ys>glmaxtexsize[0]) 
 			{ 
 				xs /= 2; 
 				ys /= 2; 

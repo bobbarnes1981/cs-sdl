@@ -34,7 +34,9 @@ using System;
 using System.IO;
 using Tao.Sdl;
 using Tao.OpenGl;
-using SdlDotNet;
+using SdlDotNet.Input;
+using SdlDotNet.Graphics;
+using SdlDotNet.Core;
 using System.Runtime.InteropServices;
 using MezzanineLib.ClientServer;
 using MezzanineLib.Render;
@@ -525,7 +527,7 @@ namespace MezzanineLib
 			//Note that the openGL surface is flip upside down and the bits are reversed. These lines correct that.
 			Surface temp = new Surface(ScreenWidth, ScreenHeight, 24, 0x0000FF, 0x00FF00, 0xFF0000, 0);
 			Gl.glReadPixels(0, 0, ScreenWidth, ScreenHeight, Gl.GL_RGB, Gl.GL_UNSIGNED_BYTE, temp.Pixels);
-			temp.FlipVertical();
+			temp = temp.CreateFlippedVerticalSurface();
 			temp.SaveBmp("screenshots/screenshot_"+Timer.TicksElapsed.ToString()+".bmp");					
 			temp.Dispose();
 		}

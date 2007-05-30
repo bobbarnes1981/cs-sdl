@@ -20,12 +20,12 @@ typedef struct _ENetList
    ENetListNode sentinel;
 } ENetList;
 
-extern void enet_list_clear (ENetList *);
+void enet_list_clear (ENetList *);
 
-extern ENetListIterator enet_list_insert (ENetListIterator, void *);
-extern void * enet_list_remove (ENetListIterator);
+ENetListIterator enet_list_insert (ENetListIterator, void *);
+void * enet_list_remove (ENetListIterator);
 
-extern size_t enet_list_size (ENetList *);
+size_t enet_list_size (ENetList *);
 
 #define enet_list_begin(list) ((list) -> sentinel.next)
 #define enet_list_end(list) (& (list) -> sentinel)

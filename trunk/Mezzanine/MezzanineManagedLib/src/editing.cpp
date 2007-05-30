@@ -39,7 +39,7 @@ void toggleedit()
         if(m_classicsp) monsterclear();                 // all monsters back at their spawns for editing
         projreset();
     };
-	SdlDotNet::Keyboard::KeyRepeat = GameInit::EditMode;
+	SdlDotNet::Input::Keyboard::KeyRepeat = GameInit::EditMode;
     Editing::selset = false;
     editing = GameInit::EditMode;
 };
