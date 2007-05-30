@@ -75,10 +75,10 @@ namespace SCSharp.UI
             {
                 throw new ArgumentNullException("mpq");
             }
-            BackgroundPath = String.Format(CultureInfo.CurrentCulture, "glue\\PalR{0}\\Backgnd.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
-            FontPalettePath = String.Format(CultureInfo.CurrentCulture, "glue\\PalR{0}\\tFont.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
-            EffectPalettePath = String.Format(CultureInfo.CurrentCulture, "glue\\PalR{0}\\tEffect.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
-            ArrowGrpPath = String.Format(CultureInfo.CurrentCulture, "glue\\PalR{0}\\arrow.grp", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            BackgroundPath = String.Format(CultureInfo.CurrentCulture, "glue\\palr{0}\\backgnd.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            FontPalettePath = String.Format(CultureInfo.CurrentCulture, "glue\\palr{0}\\tfont.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            EffectPalettePath = String.Format(CultureInfo.CurrentCulture, "glue\\palr{0}\\teffect.pcx", Utilities.RaceCharLower[(int)Game.Instance.Race]);
+            ArrowGrpPath = String.Format(CultureInfo.CurrentCulture, "glue\\palr{0}\\arrow.grp", Utilities.RaceCharLower[(int)Game.Instance.Race]);
 
             this.startElementIndex = startElementIndex;
             this.cancelElementIndex = cancelElementIndex;

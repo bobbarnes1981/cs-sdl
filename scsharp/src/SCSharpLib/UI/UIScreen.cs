@@ -269,9 +269,9 @@ namespace SCSharp.UI
 
             if (prefix != null)
             {
-                backgroundPath = prefix + "\\Backgnd.pcx";
-                fontPalettePath = prefix + "\\tFont.pcx";
-                effectPalettePath = prefix + "\\tEffect.pcx";
+                backgroundPath = prefix + "\\backgnd.pcx";
+                fontPalettePath = prefix + "\\tfont.pcx";
+                effectPalettePath = prefix + "\\teffect.pcx";
                 arrowGrpPath = prefix + "\\arrow.grp";
             }
 
