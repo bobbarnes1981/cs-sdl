@@ -92,7 +92,7 @@
 	    </copy>
 	</if>
 
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies" flatten="true">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}" flatten="true">
 	    <fileset basedir="${project::get-base-directory()}/${src.dir}/SCSharp/${bin.dir}/${project.config}">
 		<include name="**/*.exe" />
 		<include name="**/*.config" />
@@ -102,34 +102,34 @@
 		<include name="**/*.xml"/>
 	    </fileset>
 	</copy>
-		<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies" flatten="true">
+		<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}" flatten="true">
 	    <fileset basedir="${project::get-base-directory()}/${src.dir}/SCSharp">
 		<include name="**/*.sh" />
 	    </fileset>
 	</copy>
 	<if test="${platform::is-unix() and not is-osx}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}">
 		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
 		    <include name="${native.sdl}.dll.config"/>
 		</fileset>
 	    </copy>
 	</if>
 	<if test="${is-osx}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}">
 		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0/osx">
 		    <include name="${native.sdl}.dll.config"/>
 		</fileset>
 	    </copy>
 	</if>
 	<if test="${platform::is-win32()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/win32deps">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/win32deps">
 		<fileset basedir="${lib.dir}/win32deps">
 		    <include name="**"/>
 		</fileset>
 	    </copy>
 	</if>
 	<if test="${is-osx}">
-	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies"/>
+	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}"/>
 	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/ICSharpCode.SharpZipLib.dll -i:sdldotnet.icns  -n:SCSharp -a:${examples.path}/SCSharp.exe" />
 	</if>
     </target>
