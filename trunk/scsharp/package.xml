@@ -96,18 +96,18 @@
 	    <fileset basedir="${project::get-base-directory()}/${src.dir}/SCSharp/${bin.dir}/${project.config}">
 		<include name="**/*.exe" />
 		<include name="**/*.config" />
-		<include name="**/*.sh" />
 		<include name="**/*.chm" />
 		<include name="**/*.dll"/>
 		<include name="**/*.xml"/>
-	    </fileset>
-	</copy>
-		<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}" flatten="true">
-	    <fileset basedir="${project::get-base-directory()}/${src.dir}/SCSharp">
-		<include name="**/*.sh" />
+		<exclude name="**/${native.sdl}.dll.config"/>
 	    </fileset>
 	</copy>
 	<if test="${platform::is-unix() and not is-osx}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}" flatten="true">
+		<fileset basedir="${project::get-base-directory()}/${src.dir}/SCSharp">
+		    <include name="**/*.sh" />
+		</fileset>
+	    </copy>
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}">
 		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
 		    <include name="${native.sdl}.dll.config"/>
