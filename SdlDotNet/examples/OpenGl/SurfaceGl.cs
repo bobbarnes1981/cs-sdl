@@ -58,12 +58,16 @@ namespace SdlDotNet.OpenGl
     public enum MinifyingOption : int
     {
         /// <summary>
+        /// 
+        /// </summary>
+        None = 0,
+        /// <summary>
         /// Returns the value	of the texture element
 		///	that is nearest (in Manhattan distance)
 		///	to the center of the pixel being
 		///	textured.
         /// </summary>
-        GL_NEAREST = Gl.GL_NEAREST,
+        Nearest = Gl.GL_NEAREST,
         /// <summary>
         /// Returns the weighted average of the four
 		/// texture elements that are closest	to the
@@ -73,7 +77,7 @@ namespace SdlDotNet.OpenGl
 		/// GL_TEXTURE_WRAP_S and GL_TEXTURE_WRAP_T,
         /// and on the exact mapping.
         /// </summary>
-        GL_LINEAR = Gl.GL_LINEAR,
+        Linear = Gl.GL_LINEAR,
         /// <summary>
         /// Chooses the mipmap that most closely
 		/// matches the size of the pixel being
@@ -82,7 +86,7 @@ namespace SdlDotNet.OpenGl
 		/// to the center of the pixel) to produce a
         /// texture value.
         /// </summary>
-        GL_NEAREST_MIPMAP_NEAREST = Gl.GL_NEAREST_MIPMAP_NEAREST,
+        NearestMipMapNearest = Gl.GL_NEAREST_MIPMAP_NEAREST,
         /// <summary>
         /// Chooses the mipmap that most closely
 		/// matches the size of the pixel being
@@ -92,7 +96,7 @@ namespace SdlDotNet.OpenGl
 		/// to the center of the pixel) to produce a
         /// texture value.
         /// </summary>
-        GL_LINEAR_MIPMAP_NEAREST = Gl.GL_LINEAR_MIPMAP_NEAREST,
+        LinearMipMapNearest = Gl.GL_LINEAR_MIPMAP_NEAREST,
         /// <summary>
         /// Chooses the two mipmaps that most
 		/// closely match the	size of	the pixel
@@ -103,7 +107,7 @@ namespace SdlDotNet.OpenGl
 		/// final texture value is a weighted
         /// average of those two values.
         /// </summary>
-        GL_NEAREST_MIPMAP_LINEAR = Gl.GL_NEAREST_MIPMAP_LINEAR,
+        NearestMipMapLinear = Gl.GL_NEAREST_MIPMAP_LINEAR,
         /// <summary>
         /// Chooses the two mipmaps that most
 		/// closely match the size of the pixel
@@ -115,7 +119,7 @@ namespace SdlDotNet.OpenGl
 		/// final texture value is a weighted
         /// average of those two values.
         /// </summary>
-        GL_LINEAR_MIPMAP_LINEAR = Gl.GL_LINEAR_MIPMAP_LINEAR
+        LinearMipMapLinear = Gl.GL_LINEAR_MIPMAP_LINEAR
     }
     /// <summary>
     /// The texture magnification function is used when
@@ -132,12 +136,16 @@ namespace SdlDotNet.OpenGl
     public enum MagnificationOption : int
     {
         /// <summary>
+        /// 
+        /// </summary>
+        None = 0,
+        /// <summary>
         /// Returns the value	of the texture element
         ///	that is nearest (in Manhattan distance)
         ///	to the center of the pixel being
         ///	textured.
         /// </summary>
-        GL_NEAREST = Gl.GL_NEAREST,
+        Nearest = Gl.GL_NEAREST,
         /// <summary>
         /// Returns the weighted average of the four
         /// texture elements that are closest	to the
@@ -147,7 +155,7 @@ namespace SdlDotNet.OpenGl
         /// GL_TEXTURE_WRAP_S and GL_TEXTURE_WRAP_T,
         /// and on the exact mapping.
         /// </summary>
-        GL_LINEAR = Gl.GL_LINEAR
+        Linear = Gl.GL_LINEAR
     }
     /// <summary>
     /// The wrap parameter for a texture coordinate
@@ -155,17 +163,21 @@ namespace SdlDotNet.OpenGl
     public enum WrapOption : int
     {
         /// <summary>
+        /// 
+        /// </summary>
+        None = 0,
+        /// <summary>
         /// Causes texture coordinates to be clamped to the range [0,1] and
 		/// is useful for preventing wrapping artifacts	when
         /// mapping a single image onto	an object.
         /// </summary>
-        GL_CLAMP = Gl.GL_CLAMP,
+        Clamp = Gl.GL_CLAMP,
         /// <summary>
         /// Causes texture coordinates to loop around so to remain in the 
         /// range [0,1] where 1.5 would be .5. this is useful for repeating
         /// a texture for a tiled floor.
         /// </summary>
-        GL_REPEAT = Gl.GL_REPEAT
+        Repeat = Gl.GL_REPEAT
     }
 
     /// <summary>
@@ -230,7 +242,7 @@ namespace SdlDotNet.OpenGl
 
         private static bool IsMipMap(MinifyingOption option)
         {
-            return option != MinifyingOption.GL_LINEAR && option != MinifyingOption.GL_NEAREST;
+            return option != MinifyingOption.Linear && option != MinifyingOption.Nearest;
         }
         
         #endregion
@@ -246,8 +258,8 @@ namespace SdlDotNet.OpenGl
 
         bool needRefresh;
         bool needSetOptions;
-        MinifyingOption minFilter;
-        MagnificationOption magFilter;
+        MinifyingOption minifyingFilter;
+        MagnificationOption magnificationFilter;
         WrapOption wrapS;
         WrapOption wrapT;
         #endregion
@@ -276,10 +288,10 @@ namespace SdlDotNet.OpenGl
             this.textureHeight = -1;
             this.widthRatio = -1;
             this.heightRatio = -1;
-            this.minFilter = MinifyingOption.GL_LINEAR;
-            this.magFilter = MagnificationOption.GL_LINEAR;
-            this.wrapS = WrapOption.GL_REPEAT;
-            this.wrapT = WrapOption.GL_REPEAT;
+            this.minifyingFilter = MinifyingOption.Linear;
+            this.magnificationFilter = MagnificationOption.Linear;
+            this.wrapS = WrapOption.Repeat;
+            this.wrapT = WrapOption.Repeat;
         }
 
         #endregion
@@ -386,12 +398,12 @@ namespace SdlDotNet.OpenGl
         /// </summary>
         public MinifyingOption MinFilter
         {
-            get { return minFilter; }
+            get { return minifyingFilter; }
             set
             {
-                if (minFilter != value)
+                if (minifyingFilter != value)
                 {
-                    if (IsMipMap(minFilter) ^ IsMipMap(value))
+                    if (IsMipMap(minifyingFilter) ^ IsMipMap(value))
                     {
                         needRefresh = true;
                     }
@@ -399,7 +411,7 @@ namespace SdlDotNet.OpenGl
                     {
                         needSetOptions = true;
                     }
-                    minFilter = value;
+                    minifyingFilter = value;
                 }
             }
         }
@@ -417,14 +429,14 @@ namespace SdlDotNet.OpenGl
 		/// smooth. The	initial	value of GL_TEXTURE_MAG_FILTER
         /// is GL_LINEAR.
         /// </summary>
-        public MagnificationOption MagFilter
+        public MagnificationOption MagnificationFilter
         {
-            get { return magFilter; }
+            get { return magnificationFilter; }
             set
             {
-                if (magFilter != value)
+                if (magnificationFilter != value)
                 {
-                    magFilter = value;
+                    magnificationFilter = value;
                     needSetOptions = true;
                 }
             }
@@ -503,8 +515,8 @@ namespace SdlDotNet.OpenGl
         private void BindOptions()
         {
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, textureId);
-            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, (int)minFilter);
-            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, (int)magFilter);
+            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, (int)minifyingFilter);
+            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, (int)magnificationFilter);
             Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, (int)wrapS);
             Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, (int)wrapT);
             needSetOptions = false;
@@ -558,7 +570,7 @@ namespace SdlDotNet.OpenGl
         /// </summary>
         public void Refresh()
         {
-            Refresh(this.surface, this.isFlipped, this.minFilter, this.magFilter, this.wrapS, this.wrapT);
+            Refresh(this.surface, this.isFlipped, this.minifyingFilter, this.magnificationFilter, this.wrapS, this.wrapT);
         }
 
         /// <summary>
@@ -568,7 +580,7 @@ namespace SdlDotNet.OpenGl
         /// <param name="isFlipped">States if the surface should be flipped when moved into the OpenGl Texture.</param>
         public void Refresh(Surface surface, bool isFlipped)
         {
-            Refresh(surface, isFlipped, this.minFilter, this.magFilter, this.wrapS, this.wrapT);
+            Refresh(surface, isFlipped, this.minifyingFilter, this.magnificationFilter, this.wrapS, this.wrapT);
         }
         
         /// <summary>
@@ -576,11 +588,11 @@ namespace SdlDotNet.OpenGl
         /// </summary>
         /// <param name="surface">The surface to load from.</param>
         /// <param name="isFlipped">States if the surface should be flipped when moved into the OpenGl Texture.</param>
-        /// <param name="minFilter">"The openGl filter used for minifying"</param>
-        /// <param name="magFilter">"The openGl filter used for magnification"</param>
+        /// <param name="minifyingFilter">"The openGl filter used for minifying"</param>
+        /// <param name="magnificationFilter">"The openGl filter used for magnification"</param>
         /// <param name="wrapS">The wrap parameter for texture coordinate S</param>
         /// <param name="wrapT">The wrap parameter for texture coordinate T</param>
-        public void Refresh(Surface surface, bool isFlipped, MinifyingOption minFilter, MagnificationOption magFilter, WrapOption wrapS, WrapOption wrapT)
+        public void Refresh(Surface surface, bool isFlipped, MinifyingOption minifyingFilter, MagnificationOption magnificationFilter, WrapOption wrapS, WrapOption wrapT)
         {
             if (surface == null) { throw new ArgumentNullException("surface"); }
             this.surface = surface;
@@ -594,23 +606,23 @@ namespace SdlDotNet.OpenGl
                 this.textureWidth = textureSurface.Width;
                 this.textureHeight = textureSurface.Height;
                 this.isFlipped = isFlipped;
-                this.minFilter = minFilter;
-                this.magFilter = magFilter;
+                this.minifyingFilter = minifyingFilter;
+                this.magnificationFilter = magnificationFilter;
                 this.wrapS = wrapS;
                 this.wrapT = wrapT;
                 this.widthRatio = (float)surface.Width / textureWidth;
                 this.heightRatio = (float)surface.Height / textureHeight;
 
                 Gl.glBindTexture(Gl.GL_TEXTURE_2D, textureId);
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, (int)minFilter);
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, (int)magFilter);
+                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, (int)minifyingFilter);
+                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, (int)magnificationFilter);
 
                 Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, (int)wrapS);
                 Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, (int)wrapT);
 
 
 
-                if (minFilter == MinifyingOption.GL_LINEAR || minFilter == MinifyingOption.GL_NEAREST)
+                if (minifyingFilter == MinifyingOption.Linear || minifyingFilter == MinifyingOption.Nearest)
                 {
                     Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, textureSurface.BytesPerPixel, textureWidth, textureHeight, 0, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, textureSurface.Pixels);
                 }
