@@ -133,16 +133,16 @@ extern DECLSPEC void CDECL draw_textf(char *fstr, int left, int top, int gl_num,
 extern DECLSPEC int CDECL text_width(char *str);
 
 // editing
-extern DECLSPEC void CDECL cursorupdate();
-extern DECLSPEC void CDECL toggleedit();
-extern DECLSPEC void CDECL editdrag(bool isdown);
-extern DECLSPEC void CDECL setvdeltaxy(int delta, block &sel);
-extern DECLSPEC void CDECL editequalisexy(bool isfloor, block &sel);
-extern DECLSPEC void CDECL edittypexy(int type, block &sel);
-extern DECLSPEC void CDECL edittexxy(int type, int t, block &sel);
-extern DECLSPEC void CDECL editheightxy(bool isfloor, int amount, block &sel);
-extern DECLSPEC bool CDECL noteditmode();
-extern DECLSPEC void CDECL pruneundos(int maxremain = 0);
+//extern DECLSPEC void CDECL cursorupdate();
+//extern DECLSPEC void CDECL toggleedit();
+//extern DECLSPEC void CDECL editdrag(bool isdown);
+//extern DECLSPEC void CDECL setvdeltaxy(int delta, block &sel);
+//extern DECLSPEC void CDECL editequalisexy(bool isfloor, block &sel);
+//extern DECLSPEC void CDECL edittypexy(int type, block &sel);
+//extern DECLSPEC void CDECL edittexxy(int type, int t, block &sel);
+//extern DECLSPEC void CDECL editheightxy(bool isfloor, int amount, block &sel);
+//extern DECLSPEC bool CDECL noteditmode();
+//extern DECLSPEC void CDECL pruneundos(int maxremain = 0);
 
 // renderextras
 extern DECLSPEC void CDECL box(block &b, float z1, float z2, float z3, float z4);

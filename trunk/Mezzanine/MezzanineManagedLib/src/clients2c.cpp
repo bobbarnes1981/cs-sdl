@@ -281,11 +281,11 @@ void localservertoclient(uchar *buf, int len)   // processes any updates from th
             block b = { x, y, xs, ys };
             switch(type)
             {
-                case NetworkMessages::SV_EDITH: editheightxy(v!=0, getint(p), b); break;
-                case NetworkMessages::SV_EDITT: edittexxy(v, getint(p), b); break;
-                case NetworkMessages::SV_EDITS: edittypexy(v, b); break;
-                case NetworkMessages::SV_EDITD: setvdeltaxy(v, b); break;
-                case NetworkMessages::SV_EDITE: editequalisexy(v!=0, b); break;
+                //case NetworkMessages::SV_EDITH: editheightxy(v!=0, getint(p), b); break;
+                //case NetworkMessages::SV_EDITT: edittexxy(v, getint(p), b); break;
+                //case NetworkMessages::SV_EDITS: edittypexy(v, b); break;
+                //case NetworkMessages::SV_EDITD: setvdeltaxy(v, b); break;
+                //case NetworkMessages::SV_EDITE: editequalisexy(v!=0, b); break;
             };
             break;
         };

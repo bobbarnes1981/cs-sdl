@@ -165,8 +165,9 @@ void remipmore(block &b, int level)
 
 int closestent()        // used for delent and edit mode ent display
 {
-    if(noteditmode()) return -1;
-    int best;
+	return -1;
+    //if(noteditmode()) return -1;
+    /*int best;
     float bdist = 99999;
     loopv(ents)
     {
@@ -180,7 +181,7 @@ int closestent()        // used for delent and edit mode ent display
             bdist = dist;
         };
     };
-    return bdist==99999 ? -1 : best; 
+    return bdist==99999 ? -1 : best; */
 };
 
 void entproperty(int prop, int amount)
@@ -238,13 +239,14 @@ entity *newentity(int x, int y, int z, char *what, int v1, int v2, int v3, int v
 void clearents(char *name)
 {  
 	int type = MezzanineLib::World::World::FindType(name);
-    if(noteditmode() || multiplayer()) return;
-    loopv(ents)
+	return;
+    //if(noteditmode() || multiplayer()) return;
+    /*loopv(ents)
     {
         entity &e = ents[i];
         if(e.type==type) e.type = StaticEntity::NOTUSED;
     };
-    if(type==StaticEntity::LIGHT) calclight();
+    if(type==StaticEntity::LIGHT) calclight();*/
 };
 
 COMMAND(clearents, Support::FunctionSignatures::ARG_1STR);
@@ -298,9 +300,10 @@ void setupworld(int factor)
 
 void empty_world(int factor, bool force)    // main empty world creation routine, if passed factor -1 will enlarge old world by 1
 {
-    if(!force && noteditmode()) return; 
+    //if(!force && noteditmode()) return; 
+	if(!force) return; 
     cleardlights();
-    pruneundos();
+    //pruneundos();
     sqr *oldworld = world;
     bool copy = false;
     if(oldworld && factor<0) { factor = GameInit::SFactor+1; copy = true; };
@@ -347,7 +350,7 @@ void empty_world(int factor, bool force)    // main empty world creation routine
         loopk(3) loopi(256) hdr.texlists[k][i] = i;
         ents.setsize(0);
         block b = { 8, 8, GameInit::SSize-16, GameInit::SSize-16 }; 
-        edittypexy(BlockTypes::SPACE, b);
+        //edittypexy(BlockTypes::SPACE, b);
     };
     
     calclight();
@@ -355,8 +358,8 @@ void empty_world(int factor, bool force)    // main empty world creation routine
     if(oldworld)
     {
         free(oldworld);
-        toggleedit();
-        execute("fullbright 1");
+        //toggleedit();
+        //execute("fullbright 1");
     };
 };
 
