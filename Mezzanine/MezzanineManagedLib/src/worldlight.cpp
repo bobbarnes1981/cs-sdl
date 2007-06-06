@@ -155,7 +155,7 @@ void calclight()
     
     block b = { 1, 1, GameInit::SSize-2, GameInit::SSize-2 };
     postlightarea(b);
-    setvar("fullbright", 0);
+    //setvar("fullbright", 0);
 };
 
 VARP(dynlight, 0, 16, 32);

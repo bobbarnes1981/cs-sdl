@@ -306,7 +306,7 @@ dir(right,    strafe, -1, k_right, k_left);
 void attack(bool on)
 {
     if(ClientGame::intermission) return;
-    if(GameInit::EditMode) editdrag(on);
+    //if(GameInit::EditMode) editdrag(on);
     else if(player1->attacking = on) respawn();
 };
 
@@ -434,7 +434,7 @@ void startmap(char *name)   // called just after a map load
     loopv(players) if(players[i]) players[i]->frags = 0;
     resetspawns();
     strcpy_s(getclientmap(), name);
-    if(GameInit::EditMode) toggleedit();
+    //if(GameInit::EditMode) toggleedit();
     setvar("gamespeed", 100);
 	//setvar("fog", 180);
 	//setvar("fogcolour", 0x8099B3);

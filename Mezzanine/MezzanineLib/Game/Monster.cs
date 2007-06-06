@@ -40,17 +40,27 @@ using System.Runtime.InteropServices;
 
 namespace MezzanineLib.Game
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public sealed class Monster
-	{
-		public static int nextmonster;
-		public static int spawnremain;
-		public static int numkilled;
-		public static int monstertotal;
-		public static int mtimestart;
-		public const int TOTMFREQ = 13;
-		public const int NUMMONSTERTYPES = 8;
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed class Monster
+    {
+        public static int nextmonster;
+        public static int spawnremain;
+        public static int numkilled;
+        public static int monstertotal;
+        public static int mtimestart;
+        public const int TOTMFREQ = 13;
+        public const int NUMMONSTERTYPES = 8;
+
+        //public static void endsp(bool allkilled)
+        //{
+        //    conoutf(allkilled ? "you have cleared the map!" : "you reached the exit!");
+        //    conoutf("score: %d kills in %d seconds", Monster.numkilled, (GameInit.LastMillis - Monster.mtimestart) / 1000);
+        //    Monster.monstertotal = 0;
+        //    startintermission();
+        //}
+    }
+
+
 }
