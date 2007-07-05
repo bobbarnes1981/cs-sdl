@@ -1224,13 +1224,13 @@ namespace SdlDotNet.Core
             }
             set
             {
-                if (value < 1)
+                if (value == 0)
                 {
                     targetFps = 1;
                 }
-                else if (value > 800)
+                else if (value > 100000 || value == -1)
                 {
-                    targetFps = 800;
+                    targetFps = 100000;
                 }
                 else
                 {
