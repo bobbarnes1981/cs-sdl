@@ -231,9 +231,16 @@ namespace SdlDotNet.Windows
         /// that contains the event data.</param>
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (!this.DesignMode)
+            try
             {
-                SdlDotNet.Core.Events.Add(new KeyboardEventArgs((SdlDotNet.Input.Key)Enum.Parse(typeof(SdlDotNet.Input.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, true));
+                if (!this.DesignMode)
+                {
+                    SdlDotNet.Core.Events.Add(new KeyboardEventArgs((SdlDotNet.Input.Key)Enum.Parse(typeof(SdlDotNet.Input.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, true));
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                ex.ToString();
             }
             base.OnKeyDown(e);
         }
@@ -248,9 +255,16 @@ namespace SdlDotNet.Windows
         /// that contains the event data.</param>
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            if (!this.DesignMode)
+            try
             {
-                SdlDotNet.Core.Events.Add(new KeyboardEventArgs((SdlDotNet.Input.Key)Enum.Parse(typeof(SdlDotNet.Input.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, false));
+                if (!this.DesignMode)
+                {
+                    SdlDotNet.Core.Events.Add(new KeyboardEventArgs((SdlDotNet.Input.Key)Enum.Parse(typeof(SdlDotNet.Input.Key), e.KeyCode.ToString()), (ModifierKeys)e.Modifiers, false));
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                ex.ToString();
             }
             base.OnKeyUp(e);
         }

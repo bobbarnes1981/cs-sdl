@@ -95,11 +95,14 @@
         </member>
         <member name="M:Tao.OpenGl.Gl.GetDelegateForMethod(System.String,System.Type)">
             <summary>
-            
+            Creates a callable delegate for the specified OpenGL function (core or extension), if it exists.
             </summary>
-            <param name="methodName"></param>
-            <param name="signature"></param>
-            <returns></returns>
+            <param name="methodName">The OpenGL function name (e.g. glVertex3f)</param>
+            <param name="signature">The signature of the delegate to return.</param>
+            <returns>
+            A delegate with the specified signature which can be used to call the specified OpenGL
+            function, or null if the function does not exist.
+            </returns>
         </member>
         <member name="M:Tao.OpenGl.Gl.IsExtensionSupported(System.String)">
             <summary>
@@ -135,8 +138,8 @@
             </para>
             <para>
             Calling this function before the automatic initialisation has taken place will result
-            in the Gl class being initialised twice. This is harmless, but given the automatic
-            initialisation should be preferred.
+            in the Gl class being initialised twice. This is harmless, but, given the choice, 
+            the automatic initialisation should be preferred.
             </para>
             </remarks>
         </member>
