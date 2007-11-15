@@ -47,6 +47,8 @@
 	<nant buildfile="SdlDotNet.build" target="clean" />
     </target>
 
+    <target name="all" depends="package"/>
+
     <target name="package" description="Package" depends="clean">
 	<nant buildfile="SdlDotNet.build" target="${nant.settings.currentframework} package" />
 	<call target="copyfiles" />
