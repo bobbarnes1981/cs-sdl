@@ -344,5 +344,10 @@ namespace SdlDotNetExamples.CDPlayer
         private void CDPlayer_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
         }
+
+        private void surfaceControl11_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

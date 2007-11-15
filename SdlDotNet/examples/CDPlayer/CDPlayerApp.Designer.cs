@@ -137,6 +137,18 @@ namespace SdlDotNetExamples.CDPlayer
             this.buttonPrevious.TabIndex = 8;
             this.buttonPrevious.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
+            // surfaceControl
+            // 
+            this.surfaceControl.AccessibleDescription = "SdlDotNet SurfaceControl";
+            this.surfaceControl.AccessibleName = "SurfaceControl";
+            this.surfaceControl.AccessibleRole = System.Windows.Forms.AccessibleRole.Graphic;
+            this.surfaceControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.surfaceControl.Location = new System.Drawing.Point(0, 0);
+            this.surfaceControl.Name = "surfaceControl";
+            this.surfaceControl.Size = new System.Drawing.Size(348, 226);
+            this.surfaceControl.TabIndex = 0;
+            this.surfaceControl.TabStop = false;
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -149,20 +161,6 @@ namespace SdlDotNetExamples.CDPlayer
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(348, 226);
             this.panel1.TabIndex = 9;
-            // 
-            // surfaceControl
-            // 
-            this.surfaceControl.AccessibleDescription = "SdlDotNet SurfaceControl";
-            this.surfaceControl.AccessibleName = "SurfaceControl";
-            this.surfaceControl.AccessibleRole = System.Windows.Forms.AccessibleRole.Graphic;
-            this.surfaceControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.surfaceControl.Image = ((System.Drawing.Image)(resources.GetObject("surfaceControl.Image")));
-            this.surfaceControl.InitialImage = ((System.Drawing.Image)(resources.GetObject("surfaceControl.InitialImage")));
-            this.surfaceControl.Location = new System.Drawing.Point(0, 0);
-            this.surfaceControl.Name = "surfaceControl";
-            this.surfaceControl.Size = new System.Drawing.Size(348, 226);
-            this.surfaceControl.TabIndex = 0;
-            this.surfaceControl.TabStop = false;
             // 
             // CDPlayerApp
             // 

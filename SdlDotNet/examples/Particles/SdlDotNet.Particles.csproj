@@ -1,0 +1,154 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6CF5FE4F-7952-41AB-9FD4-3B8CC141BB0E}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon></ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>SdlDotNet.Particles</AssemblyName>
+    <AssemblyOriginatorKeyFile>../../src/SdlDotNet.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SdlDotNet.Particles</RootNamespace>
+    <StartupObject></StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE;CODE_ANALYSIS</DefineConstants>
+    <DocumentationFile>SdlDotNet.Particles.xml</DocumentationFile>
+    <DebugSymbols>True</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <RemoveIntegerChecks>False</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1595</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <DocumentationFile>SdlDotNet.Particles.xml</DocumentationFile>
+    <DebugSymbols>False</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <RemoveIntegerChecks>False</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>1595</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+        <Name>System</Name>
+      <HintPath>\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+        <Name>System.Drawing</Name>
+      <HintPath>\System.Drawing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SdlDotNet.csproj">
+      <Name>SdlDotNet</Name>
+      <Project>{7B28E1B7-FADB-4D0A-BA54-77E2BE941418}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ParticleSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ParticleSystemCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emitters\ParticleCircleEmitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emitters\ParticleEmitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emitters\ParticlePixelEmitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emitters\ParticleRectangleEmitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emitters\ParticleSpriteEmitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Emitters\ParticleSurfaceEmitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Manipulators\IParticleManipulator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Manipulators\ParticleBoundary.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Manipulators\ParticleFriction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Manipulators\ParticleGravity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Manipulators\ParticleManipulatorCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Manipulators\ParticleVortex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particle\BaseParticle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particle\ParticleCircle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particle\ParticleCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particle\ParticlePixel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particle\ParticleRectangle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particle\ParticleSprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particle\ParticleSurface.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
