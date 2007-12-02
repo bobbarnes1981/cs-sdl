@@ -656,6 +656,16 @@ namespace SdlDotNet.OpenGl
         /// <summary>
         /// Draws the Texture.
         /// </summary>
+        /// <param name="locationX">The x offset for the Texture.</param>
+        /// <param name="locationY">The y offset for the Texture.</param>
+        public void Draw(float locationX, float locationY)
+        {
+            Draw(locationX, locationY, surface.Width, surface.Height);
+        }
+
+        /// <summary>
+        /// Draws the Texture.
+        /// </summary>
         /// <param name="rectangle">the rectagle where the texture will be drawn.</param>
         public void Draw(Rectangle rectangle)
         {
