@@ -183,6 +183,42 @@ namespace SdlDotNet.Graphics
 
     #endregion
 
+    #region OverlayFormats
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [FlagsAttribute]
+    public enum OverlayFormats
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Planar mode
+        /// </summary>
+        YV12 = Sdl.SDL_YV12_OVERLAY,
+        /// <summary>
+        /// Planar mode
+        /// </summary>
+        IYUV = Sdl.SDL_IYUV_OVERLAY,
+        /// <summary>
+        /// Packed mode
+        /// </summary>
+        YUY2 = Sdl.SDL_YUY2_OVERLAY,
+        /// <summary>
+        /// Packed mode
+        /// </summary>
+        UYVY = Sdl.SDL_UYVY_OVERLAY,
+        /// <summary>
+        /// Packed mode
+        /// </summary>
+        YVYU = Sdl.SDL_YVYU_OVERLAY
+    }
+
+    #endregion
+
     /// <summary>
     /// Provides methods to set the video mode, create video surfaces, 
     /// hide and show the mouse cursor,
