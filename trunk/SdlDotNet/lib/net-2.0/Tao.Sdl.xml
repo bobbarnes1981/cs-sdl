@@ -6,7 +6,7 @@
     <members>
         <member name="T:Tao.Sdl.Sdl">
             <summary>
-                Simple DirectMedia Layer binding for .NET, implementing SDL 1.2.11.
+                Simple DirectMedia Layer binding for .NET, implementing SDL 1.2.13.
             </summary>
             <remarks>
             This library is designed to make it easy to write games that run 
@@ -335,6 +335,16 @@
             Button 5:	Mouse wheel down (may also be a real button)
             </summary>
         </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_BUTTON_X1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_BUTTON_X2">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Tao.Sdl.Sdl.SDL_BUTTON_LMASK">
             <summary>
             
@@ -346,6 +356,16 @@
             </summary>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_BUTTON_RMASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_BUTTON_X1MASK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Sdl.Sdl.SDL_BUTTON_X2MASK">
             <summary>
             
             </summary>
@@ -9943,7 +9963,7 @@
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_Overlay.hwfuncs">
             <summary>
-            
+            Hardware-specific surface info
             </summary>
         </member>
         <member name="F:Tao.Sdl.Sdl.SDL_Overlay.hwdata">
@@ -9951,14 +9971,14 @@
             
             </summary>
         </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Overlay.hw_overlay">
-            <summary>
-            This will be set to 1 if the overlay is hardware accelerated.
-            </summary>
-        </member>
-        <member name="F:Tao.Sdl.Sdl.SDL_Overlay.UnusedBits">
+        <member name="F:Tao.Sdl.Sdl.SDL_Overlay.field1">
             <summary>
             
+            </summary>
+        </member>
+        <member name="P:Tao.Sdl.Sdl.SDL_Overlay.hw_overlay">
+            <summary>
+            This will be set to 1 if the overlay is hardware accelerated.
             </summary>
         </member>
         <member name="T:Tao.Sdl.Sdl.AudioSpecCallbackDelegate">
