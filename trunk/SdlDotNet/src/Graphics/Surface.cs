@@ -376,7 +376,7 @@ namespace SdlDotNet.Graphics
                     typeof(Sdl.SDL_Surface));
             }
         }
-
+        //TODO: Cache this so getpixel/setpixel is faster
         internal Sdl.SDL_PixelFormat PixelFormat
         {
             get
