@@ -44,7 +44,6 @@
             <seealso cref="M:Tao.OpenGl.Gl.IsExtensionSupported(System.String)"/>
             <seealso cref="M:Tao.OpenGl.Gl.GetDelegate(System.String,System.Type)"/>
             <seealso cref="M:Tao.OpenGl.Gl.ReloadFunctions"/>
-            <seealso cref="!:Gl.ReloadFunction"/>
             </para>
             </remarks>
         </member>

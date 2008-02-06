@@ -241,7 +241,7 @@
                     Indicates whether a device can swap individual layer planes with pixel
                     formats that include double-buffered overlay or underlay planes.
                     Otherwise all layer planes are swapped together as a group.  When this
-                    flag is set, <see cref="M:Tao.Platform.Windows.Wgl.wglSwapLayerBuffers(System.IntPtr,System.UInt32)"/> is supported.
+                    flag is set, <see cref="M:Tao.Platform.Windows.Wgl.wglSwapLayerBuffers(System.IntPtr,System.Int32)"/> is supported.
                 </para>
             </summary>
         </member>
@@ -960,7 +960,7 @@
             </summary>
             <remarks>The values of <b>GLYPHMETRICSFLOAT</b> are specified as notional units.</remarks>
             <seealso cref="T:Tao.Platform.Windows.Gdi.POINTFLOAT"/>
-            <seealso cref="!:Wgl.wglUseFontOutlines"/>
+            <seealso cref="M:Tao.Platform.Windows.Wgl.wglUseFontOutlinesA(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Single,System.Single,System.Int32,Tao.Platform.Windows.Gdi.GLYPHMETRICSFLOAT[])"/>
         </member>
         <member name="F:Tao.Platform.Windows.Gdi.GLYPHMETRICSFLOAT.gmfBlackBoxX">
             <summary>
@@ -1322,6 +1322,131 @@
         <member name="F:Tao.Platform.Windows.Gdi.POINTFLOAT.Y">
             <summary>
             Specifies the vertical (y) coordinate of a point.
+            </summary>
+        </member>
+        <member name="T:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.nSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.nVersion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.dwFlags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.iPixelType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cColorBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cRedBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cRedShift">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cGreenBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cGreenShift">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cBlueBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cBlueShift">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cAlphaBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cAlphaShift">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cAccumBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cAccumRedBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cAccumGreenBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cAccumBlueBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cAccumAlphaBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cDepthBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cStencilBits">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.cAuxBuffers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.iLayerPlane">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.bReserved">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Tao.Platform.Windows.Gdi.LAYERPLANEDESCRIPTOR.crTransparent">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Tao.Platform.Windows.IlasmAttribute">
@@ -3999,7 +4124,7 @@
             <summary>
             Tries to reload the given OpenGL function (core or extension).
             </summary>
-            <param name="name">The name of the OpenGL function (i.e. glShaderSource)</param>
+            <param name="function">The name of the OpenGL function (i.e. glShaderSource)</param>
             <returns>True if the function was found and reloaded, false otherwise.</returns>
             <remarks>
             <para>
