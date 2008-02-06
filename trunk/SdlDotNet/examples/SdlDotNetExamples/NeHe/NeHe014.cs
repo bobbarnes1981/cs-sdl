@@ -135,7 +135,7 @@ namespace SdlDotNetExamples.NeHe
             // Selects The Font We Created
             Gdi.SelectObject(this.Hdc, font);
             // Select The Current DC	
-            Wgl.wglUseFontOutlines(
+            Wgl.wglUseFontOutlinesA(
                 this.Hdc,
                 // Starting Character
                 0,

@@ -178,7 +178,7 @@ namespace SdlDotNetExamples.NeHe
 
             IntPtr oldfont = Gdi.SelectObject(hDC, font.ToHfont());
             // Selects The Font We Want
-            Wgl.wglUseFontBitmaps(hDC, 32, 96, fontBase);
+            Wgl.wglUseFontBitmapsA(hDC, 32, 96, fontBase);
             // Builds 96 Characters Starting At Character 32
             Gdi.SelectObject(hDC, oldfont);
             // Selects The Font We Want
