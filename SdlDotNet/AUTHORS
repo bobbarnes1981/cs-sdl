@@ -1,7 +1,7 @@
 The following are the authors and contributors of SDL.NET:
 
-* SDL.NET by David "[[User:Jendave|Jendave]]" Hudson (jendave@yahoo.com)
-* Lots of Code and examples - [[User:Rob Loach|Rob Loach]] (http://www.robloach.net)
+* SDL.NET by David "Jendave" Hudson (jendave@yahoo.com)
+* Lots of Code and examples - Rob Loach (http://www.robloach.net)
 * Multiline ttf display in Font class - Paul Aspinall (paul.aspinall@gmail.com)
 * SdlDotNet.OpenGl reimplementation and many bugfixes - Jonathan Porter AKA BioSlayer (jono.porter@gmail.com) 
 * Lots of bug reports - dogwatch

@@ -1,6 +1,0 @@
-#Thu Nov 15 13:51:51 PST 2007
-eclipse.preferences.version=1
-org.emonic.base.build.file=package.xml
-org.emonic.base.build.mechanism=nant
-org.emonic.base.project.copyright=(c) all rights reserved
-org.emonic.base.project.defaultNamespace=SdlDotNet
