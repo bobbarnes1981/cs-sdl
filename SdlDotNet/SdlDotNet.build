@@ -47,8 +47,6 @@
         <delete dir="${bin.dir}" failonerror="false" />
         <delete dir="${obj.dir}" failonerror="false" />
         <nant buildfile="../SdlDotNet/src/SdlDotNet.dll.build" target="clean" />
-        <nant buildfile="../SdlDotNet/examples/Particles/SdlDotNet.Particles.dll.build" target="clean" />
-        <nant buildfile="../SdlDotNet/examples/GtkSharp/SdlDotNet.GtkSharp.dll.build" target="clean" />
         <nant buildfile="../SdlDotNet/examples/CDPlayer/CDPlayer.exe.build" target="clean" />
         <nant buildfile="../SdlDotNet/tests/Tests.dll.build" target="clean" />
         <nant buildfile="../SdlDotNet/examples/OpenGl/SdlDotNet.OpenGl.dll.build" target="clean" />
@@ -58,9 +56,7 @@
 
     <target name="build" depends="init" description="">
         <nant buildfile="../SdlDotNet/src/SdlDotNet.dll.build" target="build" />
-        <nant buildfile="../SdlDotNet/examples/Particles/SdlDotNet.Particles.dll.build" target="build" />
         <nant buildfile="../SdlDotNet/examples/OpenGl/SdlDotNet.OpenGl.dll.build" target="build" />
-        <nant buildfile="../SdlDotNet/examples/GtkSharp/SdlDotNet.GtkSharp.dll.build" target="build" />
         <nant buildfile="../SdlDotNet/examples/SdlDotNetExamples/SdlDotNetExamples.exe.build" target="build" />
         <nant buildfile="../SdlDotNet/tests/Tests.dll.build" target="build" />
         <nant buildfile="../SdlDotNet/examples/CDPlayer/CDPlayer.exe.build" target="build" />
@@ -76,8 +72,6 @@
     <target name="doc" depends="build-release">
         <echo message="Generating all documentation from all builds" />
         <nant buildfile="../SdlDotNet/src/SdlDotNet.dll.build" target="doc" />
-        <nant buildfile="../SdlDotNet/examples/Particles/SdlDotNet.Particles.dll.build" target="doc" />
-        <nant buildfile="../SdlDotNet/examples/GtkSharp/SdlDotNet.GtkSharp.dll.build" target="doc" />
         <nant buildfile="../SdlDotNet/examples/CDPlayer/CDPlayer.exe.build" target="doc" />
         <nant buildfile="../SdlDotNet/tests/Tests.dll.build" target="doc" />
         <nant buildfile="../SdlDotNet/examples/OpenGl/SdlDotNet.OpenGl.dll.build" target="doc" />

@@ -6,18 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdlDotNet", "src\SdlDotNet.
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdlDotNet.Particles", "examples\Particles\SdlDotNet.Particles.csproj", "{6CF5FE4F-7952-41AB-9FD4-3B8CC141BB0E}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdlDotNet.GtkSharp", "examples\GtkSharp\SdlDotNet.GtkSharp.csproj", "{48A130BE-E071-41E7-8DC7-CA9579438E02}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDPlayer", "examples\CDPlayer\CDPlayer.csproj", "{9A356993-75C1-43DD-9D2F-E0444573F368}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
@@ -67,14 +55,6 @@ Global
 		{7B28E1B7-FADB-4D0A-BA54-77E2BE941418}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B28E1B7-FADB-4D0A-BA54-77E2BE941418}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B28E1B7-FADB-4D0A-BA54-77E2BE941418}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CF5FE4F-7952-41AB-9FD4-3B8CC141BB0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CF5FE4F-7952-41AB-9FD4-3B8CC141BB0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CF5FE4F-7952-41AB-9FD4-3B8CC141BB0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CF5FE4F-7952-41AB-9FD4-3B8CC141BB0E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{48A130BE-E071-41E7-8DC7-CA9579438E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48A130BE-E071-41E7-8DC7-CA9579438E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48A130BE-E071-41E7-8DC7-CA9579438E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48A130BE-E071-41E7-8DC7-CA9579438E02}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A356993-75C1-43DD-9D2F-E0444573F368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A356993-75C1-43DD-9D2F-E0444573F368}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A356993-75C1-43DD-9D2F-E0444573F368}.Release|Any CPU.ActiveCfg = Release|Any CPU

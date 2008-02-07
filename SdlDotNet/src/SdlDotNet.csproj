@@ -97,6 +97,23 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Graphics\Overlay.cs" />
+    <Compile Include="Particles\Emitters\ParticleCircleEmitter.cs" />
+    <Compile Include="Particles\Emitters\ParticlePixelEmitter.cs" />
+    <Compile Include="Particles\Emitters\ParticleRectangleEmitter.cs" />
+    <Compile Include="Particles\Emitters\ParticleSpriteEmitter.cs" />
+    <Compile Include="Particles\Emitters\ParticleSurfaceEmitter.cs" />
+    <Compile Include="Particles\Manipulators\IParticleManipulator.cs" />
+    <Compile Include="Particles\Manipulators\ParticleBoundary.cs" />
+    <Compile Include="Particles\Manipulators\ParticleFriction.cs" />
+    <Compile Include="Particles\Manipulators\ParticleGravity.cs" />
+    <Compile Include="Particles\Manipulators\ParticleManipulatorCollection.cs" />
+    <Compile Include="Particles\Manipulators\ParticleVortex.cs" />
+    <Compile Include="Particles\Particle\ParticleCircle.cs" />
+    <Compile Include="Particles\Particle\ParticleCollection.cs" />
+    <Compile Include="Particles\Particle\ParticlePixel.cs" />
+    <Compile Include="Particles\Particle\ParticleRectangle.cs" />
+    <Compile Include="Particles\Particle\ParticleSprite.cs" />
+    <Compile Include="Particles\Particle\ParticleSurface.cs" />
     <Compile Include="Windows\SurfaceControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -332,6 +349,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Input\MouseMotionEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particles\ParticleSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particles\ParticleSystemCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particles\Emitters\ParticleEmitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Particles\Particle\BaseParticle.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
