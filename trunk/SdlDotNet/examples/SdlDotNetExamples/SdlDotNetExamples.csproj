@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>8.0.50727</ProductVersion>
@@ -30,7 +30,8 @@
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>DEBUG;TRACE;CODE_ANALYSIS</DefineConstants>
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <DebugSymbols>True</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <Optimize>False</Optimize>
@@ -48,7 +49,8 @@
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <DebugSymbols>False</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <Optimize>True</Optimize>
@@ -61,60 +63,52 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
-        <Name>System</Name>
+      <Name>System</Name>
       <HintPath>\System.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms">
-        <Name>System.Windows.Forms</Name>
+      <Name>System.Windows.Forms</Name>
       <HintPath>\System.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="System.Data">
-        <Name>System.Data</Name>
+      <Name>System.Data</Name>
       <HintPath>\System.Data.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing">
-        <Name>System.Drawing</Name>
+      <Name>System.Drawing</Name>
       <HintPath>\System.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="atk-sharp">
-        <Name>atk-sharp</Name>
+      <Name>atk-sharp</Name>
       <HintPath>../../lib/net-2.0\atk-sharp.dll</HintPath>
     </Reference>
     <Reference Include="gdk-sharp">
-        <Name>gdk-sharp</Name>
+      <Name>gdk-sharp</Name>
       <HintPath>../../lib/net-2.0\gdk-sharp.dll</HintPath>
     </Reference>
     <Reference Include="pango-sharp">
-        <Name>pango-sharp</Name>
+      <Name>pango-sharp</Name>
       <HintPath>../../lib/net-2.0\pango-sharp.dll</HintPath>
     </Reference>
     <Reference Include="gtk-sharp">
-        <Name>gtk-sharp</Name>
+      <Name>gtk-sharp</Name>
       <HintPath>../../lib/net-2.0\gtk-sharp.dll</HintPath>
     </Reference>
     <Reference Include="glib-sharp">
-        <Name>glib-sharp</Name>
+      <Name>glib-sharp</Name>
       <HintPath>../../lib/net-2.0\glib-sharp.dll</HintPath>
     </Reference>
     <Reference Include="glade-sharp">
-        <Name>glade-sharp</Name>
+      <Name>glade-sharp</Name>
       <HintPath>../../lib/net-2.0\glade-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Tao.Sdl">
-        <Name>Tao.Sdl</Name>
+      <Name>Tao.Sdl</Name>
       <HintPath>../../lib/net-2.0\Tao.Sdl.dll</HintPath>
     </Reference>
     <Reference Include="Tao.OpenGl">
-        <Name>Tao.OpenGl</Name>
+      <Name>Tao.OpenGl</Name>
       <HintPath>../../lib/net-2.0\Tao.OpenGl.dll</HintPath>
-    </Reference>
-    <Reference Include="Tao.FreeGlut">
-        <Name>Tao.FreeGlut</Name>
-      <HintPath>../../lib/net-2.0\Tao.FreeGlut.dll</HintPath>
-    </Reference>
-    <Reference Include="Tao.Platform.Windows">
-        <Name>Tao.Platform.Windows</Name>
-      <HintPath>../../lib/net-2.0\Tao.Platform.Windows.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -271,19 +265,7 @@
     <Compile Include="NeHe\NeHe012.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NeHe\NeHe013.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="NeHe\NeHe014.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="NeHe\NeHe015.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="NeHe\NeHe016.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="NeHe\NeHe017.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NeHe\NeHe018.cs">
@@ -325,19 +307,7 @@
     <Compile Include="RedBook\RedBookAARgb.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RedBook\RedBookAccAnti.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookAccumulationPerspective.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RedBook\RedBookAlpha.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookAlpha3D.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookAnti.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RedBook\RedBookBezierCurve.cs">
@@ -355,21 +325,6 @@
     <Compile Include="RedBook\RedBookCheckerOld.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RedBook\RedBookClip.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookColorMat.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookCube.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookDepthCue.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookDepthOfField.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RedBook\RedBookDisplayList.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -382,18 +337,6 @@
     <Compile Include="RedBook\RedBookFeedback.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RedBook\RedBookFog.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookFogIndex.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookFogIndexOld.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookFogOld.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RedBook\RedBookFont.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -403,22 +346,13 @@
     <Compile Include="RedBook\RedBookImage.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RedBook\RedBookLight.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RedBook\RedBookLines.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookMaterial.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RedBook\RedBookMipMap.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RedBook\RedBookModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookMoveLight.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RedBook\RedBookNurbs.cs">
@@ -433,40 +367,16 @@
     <Compile Include="RedBook\RedBookPlane.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RedBook\RedBookPlanet.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RedBook\RedBookPolygonStippling.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RedBook\RedBookPolyOff.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RedBook\RedBookQuadric.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookRobot.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookScene.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookSceneBlueAmbient.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookSceneColorLight.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookSceneFlat.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RedBook\RedBookSelect.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RedBook\RedBookSmooth.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookStencil.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RedBook\RedBookStroke.cs">
@@ -478,12 +388,6 @@
     <Compile Include="RedBook\RedBookSurfaceOld.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RedBook\RedBookTeaAmbient.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookTeapots.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RedBook\RedBookTess.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -491,9 +395,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RedBook\RedBookTexBind.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RedBook\RedBookTexGen.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RedBook\RedBookTexSub.cs">
