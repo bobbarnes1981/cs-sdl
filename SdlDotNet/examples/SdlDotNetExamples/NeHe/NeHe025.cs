@@ -309,7 +309,7 @@ namespace SdlDotNetExamples.NeHe
                         "LoadError", CultureInfo.CurrentUICulture) + "\n\t" + filename + "\n" + "\n\n\n\t" + e.StackTrace + "\n";
                 //MessageBox.Show(errorMsg, SdlDotNetExamplesBrowser.StringManager.GetString(
                 //        "Error", CultureInfo.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-                throw;
+                throw new SdlException(errorMsg);
             }
             finally
             {

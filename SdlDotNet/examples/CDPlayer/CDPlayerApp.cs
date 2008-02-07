@@ -345,9 +345,9 @@ namespace SdlDotNetExamples.CDPlayer
         {
         }
 
-        private void surfaceControl11_Load(object sender, EventArgs e)
-        {
+        //private void surfaceControl11_Load(object sender, EventArgs e)
+        //{
 
-        }
+        //}
     }
 }
