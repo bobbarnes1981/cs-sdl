@@ -76,14 +76,6 @@
       <HintPath>\System.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="Tao.OpenGl, Version=2.1.0.7, Culture=neutral, PublicKeyToken=1ca010269a4501ef, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\net-2.0\Tao.OpenGl.dll</HintPath>
-    </Reference>
-    <Reference Include="Tao.Platform.Windows, Version=1.0.0.4, Culture=neutral, PublicKeyToken=701104b2da67a104, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\net-2.0\Tao.Platform.Windows.dll</HintPath>
-    </Reference>
     <Reference Include="Tao.Sdl">
       <Name>Tao.Sdl</Name>
       <HintPath>../lib/net-2.0\Tao.Sdl.dll</HintPath>
