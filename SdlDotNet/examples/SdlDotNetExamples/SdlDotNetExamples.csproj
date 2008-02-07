@@ -66,14 +66,6 @@
       <Name>System</Name>
       <HintPath>\System.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms">
-      <Name>System.Windows.Forms</Name>
-      <HintPath>\System.Windows.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data">
-      <Name>System.Data</Name>
-      <HintPath>\System.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
       <HintPath>\System.Drawing.dll</HintPath>
