@@ -78,30 +78,6 @@
       <Name>System.Drawing</Name>
       <HintPath>\System.Drawing.dll</HintPath>
     </Reference>
-    <Reference Include="atk-sharp">
-      <Name>atk-sharp</Name>
-      <HintPath>../../lib/net-2.0\atk-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="gdk-sharp">
-      <Name>gdk-sharp</Name>
-      <HintPath>../../lib/net-2.0\gdk-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="pango-sharp">
-      <Name>pango-sharp</Name>
-      <HintPath>../../lib/net-2.0\pango-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="gtk-sharp">
-      <Name>gtk-sharp</Name>
-      <HintPath>../../lib/net-2.0\gtk-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="glib-sharp">
-      <Name>glib-sharp</Name>
-      <HintPath>../../lib/net-2.0\glib-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="glade-sharp">
-      <Name>glade-sharp</Name>
-      <HintPath>../../lib/net-2.0\glade-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="Tao.Sdl">
       <Name>Tao.Sdl</Name>
       <HintPath>../../lib/net-2.0\Tao.Sdl.dll</HintPath>
@@ -122,21 +98,9 @@
       <Project>{7697533B-8996-45E1-BC7E-FA969789FC72}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
-    <ProjectReference Include="..\GtkSharp\SdlDotNet.GtkSharp.csproj">
-      <Name>SdlDotNet.GtkSharp</Name>
-      <Project>{48A130BE-E071-41E7-8DC7-CA9579438E02}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
-    <ProjectReference Include="..\Particles\SdlDotNet.Particles.csproj">
-      <Name>SdlDotNet.Particles</Name>
-      <Project>{6CF5FE4F-7952-41AB-9FD4-3B8CC141BB0E}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.ico">
-    </EmbeddedResource>
-    <EmbeddedResource Include="SmallDemos\ui.glade">
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
@@ -500,18 +464,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SmallDemos\Gears.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="SmallDemos\GtkSprite.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="SmallDemos\GtkSpriteExample.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="SmallDemos\GtkWindow.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="SmallDemos\GtkWindowExample.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SmallDemos\HelloWorld.cs">
