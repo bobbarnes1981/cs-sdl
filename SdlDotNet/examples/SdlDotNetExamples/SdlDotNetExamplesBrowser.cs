@@ -147,7 +147,7 @@ namespace SdlDotNetExamples
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Demo Browser";
             screen = Video.SetVideoMode(width, height);
-            Tao.FreeGlut.Glut.glutInit();
+            
             demoList = new SortedDictionary<string, SortedDictionary<string, string>>();
             stringManager =
                 new ResourceManager("SdlDotNetExamples.Properties.Resources", Assembly.GetExecutingAssembly());
