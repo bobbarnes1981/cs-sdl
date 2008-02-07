@@ -29,7 +29,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Globalization;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Reflection;
@@ -307,8 +307,8 @@ namespace SdlDotNetExamples.NeHe
                 // Handle Any Exceptions While Loading Object Data, Exit App
                 string errorMsg = SdlDotNetExamplesBrowser.StringManager.GetString(
                         "LoadError", CultureInfo.CurrentUICulture) + "\n\t" + filename + "\n" + "\n\n\n\t" + e.StackTrace + "\n";
-                MessageBox.Show(errorMsg, SdlDotNetExamplesBrowser.StringManager.GetString(
-                        "Error", CultureInfo.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                //MessageBox.Show(errorMsg, SdlDotNetExamplesBrowser.StringManager.GetString(
+                //        "Error", CultureInfo.CurrentUICulture), MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 throw;
             }
             finally

@@ -66,7 +66,6 @@
       <Name>System</Name>
       <HintPath>\System.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
       <HintPath>\System.Windows.Forms.dll</HintPath>
@@ -75,7 +74,6 @@
       <Name>System.Drawing</Name>
       <HintPath>\System.Drawing.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
     <Reference Include="Tao.Sdl">
       <Name>Tao.Sdl</Name>
       <HintPath>../lib/net-2.0\Tao.Sdl.dll</HintPath>
