@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="8ddd8a6e-c353-4489-9935-63b8f0e4c6c4" 
+    UpgradeCode="8e01ab03-62bd-41aa-9a73-8dad76e58976"
+    Name="SdlDotNet SDK" Language="1033" Version="6.1.0.0" 
+    Manufacturer="SdlDotNet" 
+  >
+		<Package InstallerVersion="200" Compressed="yes" />
+
+		<Media Id="1" Cabinet="SdlDotNetSDK.cab" EmbedCab="yes" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir" FileSource="..\..\..\dist\sdldotnet-6.1.0\bin\assemblies">
+			<Component Id="ProductComponent" Guid="27af1a85-9a01-4c79-bdeb-d73fd4bd9574">
+        <File Id="f1" Name="SdlDotNet.dll" />
+        <File Id="f2" Name="Tao.Sdl.dll" />
+      </Component>
+		</Directory>
+
+		<Feature Id="ProductFeature" Title="Main Feature" Level="1">
+			<ComponentRef Id="ProductComponent" />
+		</Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="TARGETDIR" />
+    <UIRef Id="WixUI_InstallDir"/>
+	</Product>
+</Wix>

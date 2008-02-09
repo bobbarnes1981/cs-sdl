@@ -376,8 +376,10 @@ namespace SdlDotNet.Graphics
                     typeof(Sdl.SDL_Surface));
             }
         }
+
+        private Sdl.SDL_PixelFormat? pixelFormat;
         //TODO: Cache this so getpixel/setpixel is faster
-        internal Sdl.SDL_PixelFormat PixelFormat
+        internal Sdl.SDL_PixelFormat? PixelFormat
         {
             get
             {
@@ -386,8 +388,12 @@ namespace SdlDotNet.Graphics
                     throw (new ObjectDisposedException(this.ToString()));
                 }
                 GC.KeepAlive(this);
-                return (Sdl.SDL_PixelFormat)Marshal.PtrToStructure(this.SurfaceStruct.format,
+                if (!pixelFormat.HasValue)
+                {
+                    pixelFormat = (Sdl.SDL_PixelFormat)Marshal.PtrToStructure(this.SurfaceStruct.format,
                     typeof(Sdl.SDL_PixelFormat));
+                }
+                return pixelFormat;
             }
         }
 
@@ -756,11 +762,11 @@ namespace SdlDotNet.Graphics
                 flag,
                 width,
                 height,
-                this.PixelFormat.BitsPerPixel,
-                this.PixelFormat.Rmask,
-                this.PixelFormat.Gmask,
-                this.PixelFormat.Bmask,
-                this.PixelFormat.Amask));
+                this.PixelFormat.Value.BitsPerPixel,
+                this.PixelFormat.Value.Rmask,
+                this.PixelFormat.Value.Gmask,
+                this.PixelFormat.Value.Bmask,
+                this.PixelFormat.Value.Amask));
             CloneFields(this, surface);
             return surface;
         }
@@ -1323,7 +1329,7 @@ namespace SdlDotNet.Graphics
             {
                 return;
             }
-            int bytesPerPixel = this.PixelFormat.BytesPerPixel;
+            int bytesPerPixel = this.PixelFormat.Value.BytesPerPixel;
             IntPtr ptr = new IntPtr(surfaceStruct.pixels.ToInt32() + point.Y * surfaceStruct.pitch + point.X * bytesPerPixel);
             switch (bytesPerPixel)
             {
@@ -1507,7 +1513,7 @@ namespace SdlDotNet.Graphics
             {
                 throw new ArgumentOutOfRangeException("point", Events.StringManager.GetString("HeightOutOfRange", CultureInfo.CurrentUICulture));
             }
-            int bytesPerPixel = this.PixelFormat.BytesPerPixel;
+            int bytesPerPixel = this.PixelFormat.Value.BytesPerPixel;
             IntPtr ptr = new IntPtr(surfaceStruct.pixels.ToInt32() + point.Y * surfaceStruct.pitch + point.X * bytesPerPixel);
             int value;
             switch (bytesPerPixel)
@@ -1564,7 +1570,7 @@ namespace SdlDotNet.Graphics
             Lock();
             try
             {
-                int bytesPerPixel = this.PixelFormat.BytesPerPixel;
+                int bytesPerPixel = this.PixelFormat.Value.BytesPerPixel;
                 //the base address for the pixels.
                 int pixels = surfaceStruct.pixels.ToInt32() + rectangle.X * bytesPerPixel;
                 int pitch = surfaceStruct.pitch;
@@ -1670,7 +1676,7 @@ namespace SdlDotNet.Graphics
             Lock();
             try
             {
-                int bytesPerPixel = this.PixelFormat.BytesPerPixel;
+                int bytesPerPixel = this.PixelFormat.Value.BytesPerPixel;
                 //the base address for the pixels.
                 int pixels = surfaceStruct.pixels.ToInt32() + point.X * bytesPerPixel;
                 int pitch = surfaceStruct.pitch;
@@ -2439,7 +2445,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.BitsPerPixel;
+                return this.PixelFormat.Value.BitsPerPixel;
             }
         }
 
@@ -2451,7 +2457,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.BytesPerPixel;
+                return this.PixelFormat.Value.BytesPerPixel;
             }
         }
 
@@ -2462,7 +2468,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Amask;
+                return this.PixelFormat.Value.Amask;
             }
         }
 
@@ -2473,7 +2479,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Rmask;
+                return this.PixelFormat.Value.Rmask;
             }
         }
 
@@ -2484,7 +2490,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Gmask;
+                return this.PixelFormat.Value.Gmask;
             }
         }
 
@@ -2495,7 +2501,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Bmask;
+                return this.PixelFormat.Value.Bmask;
             }
         }
 
@@ -2506,7 +2512,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Bshift;
+                return this.PixelFormat.Value.Bshift;
             }
         }
 
@@ -2517,7 +2523,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Rshift;
+                return this.PixelFormat.Value.Rshift;
             }
         }
 
@@ -2528,7 +2534,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Gshift;
+                return this.PixelFormat.Value.Gshift;
             }
         }
 
@@ -2539,7 +2545,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Ashift;
+                return this.PixelFormat.Value.Ashift;
             }
         }
 
@@ -2550,7 +2556,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Aloss;
+                return this.PixelFormat.Value.Aloss;
             }
         }
 
@@ -2561,7 +2567,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Rloss;
+                return this.PixelFormat.Value.Rloss;
             }
         }
 
@@ -2572,7 +2578,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Gloss;
+                return this.PixelFormat.Value.Gloss;
             }
         }
 
@@ -2583,7 +2589,7 @@ namespace SdlDotNet.Graphics
         {
             get
             {
-                return this.PixelFormat.Bloss;
+                return this.PixelFormat.Value.Bloss;
             }
         }
 
@@ -2666,7 +2672,7 @@ namespace SdlDotNet.Graphics
 
     /// <summary>
     /// A class to help with the manipulation of 24 bit ints.
-    /// TODO: test to see if BigEndian will brake it.
+    /// TODO: test to see if BigEndian will break it.
     /// </summary>
     static class MarshalHelper
     {
