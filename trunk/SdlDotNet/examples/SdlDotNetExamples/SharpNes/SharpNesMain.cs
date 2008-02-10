@@ -21,7 +21,7 @@ using System.Threading;
 using SdlDotNet.Core;
 using SdlDotNet.Input;
 
-namespace SdlDotNetExamples.SharpNes
+namespace SdlDotNetExamples.LargeDemos
 {
     public static class SharpNesMain
     {
@@ -56,23 +56,23 @@ namespace SdlDotNetExamples.SharpNes
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        public static void Main()
         {
-            foreach (string arg in args)
-            {
-                if (!String.IsNullOrEmpty(arg) && arg.Trim().Length != 0)
-                {
-                    if (arg.Trim() == "-f")
-                    {
-                        fullScreen = true;
-                        Mouse.ShowCursor = false;
-                    }
-                    else
-                    {
-                        fileName = arg.Trim();
-                    }
-                }
-            }
+            //foreach (string arg in args)
+            //{
+            //    if (!String.IsNullOrEmpty(arg) && arg.Trim().Length != 0)
+            //    {
+            //        if (arg.Trim() == "-f")
+            //        {
+            //            fullScreen = true;
+            //            Mouse.ShowCursor = false;
+            //        }
+            //        else
+            //        {
+            //            fileName = arg.Trim();
+            //        }
+            //    }
+            //}
             Run(fileName);
         }
 
@@ -161,5 +161,15 @@ namespace SdlDotNetExamples.SharpNes
         //        //gameThread.Join();
         //    }
         //}
+        /// <summary>
+        /// Lesson Title
+        /// </summary>
+        public static string Title
+        {
+            get
+            {
+                return "SharpNes: NES emulator";
+            }
+        }
     }
 }

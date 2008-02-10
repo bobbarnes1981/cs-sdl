@@ -18,7 +18,7 @@ using System;
 using System.IO;
 using SdlDotNet.Input;
 
-namespace SdlDotNetExamples.SharpNes
+namespace SdlDotNetExamples.LargeDemos
 {
     public class Joypad
     {

@@ -21,7 +21,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Input;
 using SdlDotNet.Graphics;
 
-namespace SdlDotNetExamples.SharpNes
+namespace SdlDotNetExamples.LargeDemos
 {
     public class NesEngine : EngineBase
     {
