@@ -107,6 +107,15 @@
     <Compile Include="SdlDotNetExamplesBrowser.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SharpNes\EngineBase.cs" />
+    <Compile Include="SharpNes\Nes\Cartridge.cs" />
+    <Compile Include="SharpNes\Nes\Joypad.cs" />
+    <Compile Include="SharpNes\Nes\Mapper.cs" />
+    <Compile Include="SharpNes\Nes\Nes6502.cs" />
+    <Compile Include="SharpNes\Nes\NesEngine.cs" />
+    <Compile Include="SharpNes\Nes\Ppu.cs" />
+    <Compile Include="SharpNes\SharpNesMain.cs" />
+    <Compile Include="SharpNes\VideoNes.cs" />
     <Compile Include="TextButtonSprite.cs">
       <SubType>Code</SubType>
     </Compile>

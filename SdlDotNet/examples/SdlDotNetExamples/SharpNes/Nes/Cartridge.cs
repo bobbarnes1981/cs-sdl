@@ -17,7 +17,7 @@ using System;
 
 // created on 10/30/2004 at 09:56
 
-namespace SdlDotNetExamples.SharpNes
+namespace SdlDotNetExamples.LargeDemos
 {
     public enum Mirroring
     {

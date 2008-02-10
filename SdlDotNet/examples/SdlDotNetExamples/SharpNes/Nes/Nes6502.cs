@@ -17,7 +17,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 using System;
 using System.Threading;
 
-namespace SdlDotNetExamples.SharpNes
+namespace SdlDotNetExamples.LargeDemos
 {
     // The NES's primary processor
     public class ProcessorNes6502

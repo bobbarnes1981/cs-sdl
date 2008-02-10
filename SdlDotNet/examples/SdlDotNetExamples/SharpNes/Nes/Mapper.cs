@@ -16,7 +16,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 // created on 10/30/2004 at 09:54
 using System;
 
-namespace SdlDotNetExamples.SharpNes
+namespace SdlDotNetExamples.LargeDemos
 {
     public class Mapper
     {

@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 using SdlDotNet.Graphics;
 using System.Threading;
 
-namespace SdlDotNetExamples.SharpNes
+namespace SdlDotNetExamples.LargeDemos
 {
     public class VideoNes
     {
