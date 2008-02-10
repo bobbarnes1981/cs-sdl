@@ -51,7 +51,6 @@
         <nant buildfile="tests/Tests.dll.build" target="clean" />
         <nant buildfile="examples/OpenGl/SdlDotNet.OpenGl.dll.build" target="clean" />
         <nant buildfile="examples/SdlDotNetExamples/SdlDotNetExamples.exe.build" target="clean" />
-        <nant buildfile="examples/SharpNes/SharpNes.exe.build" target="clean" />
     </target>
 
     <target name="build" depends="init" description="">
@@ -60,7 +59,6 @@
         <nant buildfile="examples/SdlDotNetExamples/SdlDotNetExamples.exe.build" target="build" />
         <nant buildfile="tests/Tests.dll.build" target="build" />
         <nant buildfile="examples/CDPlayer/CDPlayer.exe.build" target="build" />
-        <nant buildfile="examples/SharpNes/SharpNes.exe.build" target="build" />
     </target>
 
     <target name="build-release" depends="Release, init, build" description="Builds in Release mode" />
