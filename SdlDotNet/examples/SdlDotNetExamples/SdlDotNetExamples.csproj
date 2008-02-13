@@ -85,11 +85,6 @@
       <Project>{7B28E1B7-FADB-4D0A-BA54-77E2BE941418}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
-    <ProjectReference Include="..\OpenGl\SdlDotNet.OpenGl.csproj">
-      <Name>SdlDotNet.OpenGl</Name>
-      <Project>{7697533B-8996-45E1-BC7E-FA969789FC72}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.ico">
