@@ -149,26 +149,17 @@
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>
-	<if test="${platform::is-win32()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
-		<fileset>
-		    <include name="${lib.dir}/net-2.0/*.dll" />
-		    <include name="${examples.dir}/**/*.dll" />
-		</fileset>
-	    </copy>
-	</if>
-	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
-		<fileset>
-		    <include name="${lib.dir}/net-2.0/*.dll" />
-		    <include name="${examples.dir}/**/*.dll" />
-		</fileset>
-	    </copy>
-	</if>
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+	    <fileset>
+		<include name="${lib.dir}/net-2.0/*.dll" />
+		<include name="${examples.dir}/**/*.dll" />
+	    </fileset>
+	</copy>
 	<if test="${platform::is-unix()}">
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
 		<fileset>
 		    <include name="${lib.dir}/net-2.0/*.config" />
+		    <include name="${src.dir}/SdlDotNet.dll.config"/>
 		</fileset>
 	    </copy>
 	</if>
@@ -197,8 +188,8 @@
 	</copy>
 	<if test="${is-osx}">
 	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}"/>
-	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/Tao.OpenGl.dll -r:${examples.path}/Tao.OpenGl.dll.config -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:SdlDotNetExamples -a:${examples.path}/SdlDotNetExamples.exe" />
-	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config  -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:CDPlayer -a:${examples.path}/CDPlayer.exe" />
+	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.dll.config -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/Tao.OpenGl.dll -r:${examples.path}/Tao.OpenGl.dll.config -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:SdlDotNetExamples -a:${examples.path}/SdlDotNetExamples.exe" />
+	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.dll.config -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config  -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:CDPlayer -a:${examples.path}/CDPlayer.exe" />
 	</if>
     </target>
 
