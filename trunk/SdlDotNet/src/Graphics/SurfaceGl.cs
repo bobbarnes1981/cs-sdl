@@ -24,11 +24,13 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
+using System.Security;
 
 using SdlDotNet.Graphics;
-using Tao.OpenGl;
+using Tao.Sdl;
 
-namespace SdlDotNet.OpenGl
+namespace SdlDotNet.Graphics
 {
     /// <summary>
     /// The texture minifying function is used whenever
@@ -63,63 +65,63 @@ namespace SdlDotNet.OpenGl
         None = 0,
         /// <summary>
         /// Returns the value	of the texture element
-		///	that is nearest (in Manhattan distance)
-		///	to the center of the pixel being
-		///	textured.
+        ///	that is nearest (in Manhattan distance)
+        ///	to the center of the pixel being
+        ///	textured.
         /// </summary>
-        Nearest = Gl.GL_NEAREST,
+        Nearest = ((int)0x2600), //Gl.GL_NEAREST,
         /// <summary>
         /// Returns the weighted average of the four
-		/// texture elements that are closest	to the
-		/// center of the pixel being textured.
-		/// These can include border texture
-		/// elements, depending on the values	of
-		/// GL_TEXTURE_WRAP_S and GL_TEXTURE_WRAP_T,
+        /// texture elements that are closest	to the
+        /// center of the pixel being textured.
+        /// These can include border texture
+        /// elements, depending on the values	of
+        /// GL_TEXTURE_WRAP_S and GL_TEXTURE_WRAP_T,
         /// and on the exact mapping.
         /// </summary>
-        Linear = Gl.GL_LINEAR,
+        Linear = ((int)0x2601), //Gl.GL_LINEAR,
         /// <summary>
         /// Chooses the mipmap that most closely
-		/// matches the size of the pixel being
-		/// textured and uses the GL_NEAREST
-		/// criterion (the texture element nearest
-		/// to the center of the pixel) to produce a
+        /// matches the size of the pixel being
+        /// textured and uses the GL_NEAREST
+        /// criterion (the texture element nearest
+        /// to the center of the pixel) to produce a
         /// texture value.
         /// </summary>
-        NearestMipMapNearest = Gl.GL_NEAREST_MIPMAP_NEAREST,
+        NearestMipMapNearest = ((int)0x2700), //Gl.GL_NEAREST_MIPMAP_NEAREST,
         /// <summary>
         /// Chooses the mipmap that most closely
-		/// matches the size of the pixel being
-		/// textured and uses the GL_LINEAR
-		/// criterion (a weighted average of the
-		/// four texture elements that are closest
-		/// to the center of the pixel) to produce a
+        /// matches the size of the pixel being
+        /// textured and uses the GL_LINEAR
+        /// criterion (a weighted average of the
+        /// four texture elements that are closest
+        /// to the center of the pixel) to produce a
         /// texture value.
         /// </summary>
-        LinearMipMapNearest = Gl.GL_LINEAR_MIPMAP_NEAREST,
+        LinearMipMapNearest = ((int)0x2701), //Gl.GL_LINEAR_MIPMAP_NEAREST,
         /// <summary>
         /// Chooses the two mipmaps that most
-		/// closely match the	size of	the pixel
-		/// being textured and uses the GL_NEAREST
-		/// criterion	(the texture element nearest
-		/// to the center of the pixel) to produce a
-		/// texture value from each mipmap. The
-		/// final texture value is a weighted
+        /// closely match the	size of	the pixel
+        /// being textured and uses the GL_NEAREST
+        /// criterion	(the texture element nearest
+        /// to the center of the pixel) to produce a
+        /// texture value from each mipmap. The
+        /// final texture value is a weighted
         /// average of those two values.
         /// </summary>
-        NearestMipMapLinear = Gl.GL_NEAREST_MIPMAP_LINEAR,
+        NearestMipMapLinear = ((int)0x2702), //Gl.GL_NEAREST_MIPMAP_LINEAR,
         /// <summary>
         /// Chooses the two mipmaps that most
-		/// closely match the size of the pixel
-		/// being textured and uses the GL_LINEAR
-		/// criterion (a weighted average of the
-		/// four texture elements that are closest
-		/// to the center of the pixel) to produce a
-		/// texture value from each mipmap. The
-		/// final texture value is a weighted
+        /// closely match the size of the pixel
+        /// being textured and uses the GL_LINEAR
+        /// criterion (a weighted average of the
+        /// four texture elements that are closest
+        /// to the center of the pixel) to produce a
+        /// texture value from each mipmap. The
+        /// final texture value is a weighted
         /// average of those two values.
         /// </summary>
-        LinearMipMapLinear = Gl.GL_LINEAR_MIPMAP_LINEAR
+        LinearMipMapLinear = ((int)0x2703), //Gl.GL_LINEAR_MIPMAP_LINEAR
     }
     /// <summary>
     /// The texture magnification function is used when
@@ -145,7 +147,7 @@ namespace SdlDotNet.OpenGl
         ///	to the center of the pixel being
         ///	textured.
         /// </summary>
-        Nearest = Gl.GL_NEAREST,
+        Nearest = ((int)0x2600), //Gl.GL_NEAREST,
         /// <summary>
         /// Returns the weighted average of the four
         /// texture elements that are closest	to the
@@ -155,7 +157,7 @@ namespace SdlDotNet.OpenGl
         /// GL_TEXTURE_WRAP_S and GL_TEXTURE_WRAP_T,
         /// and on the exact mapping.
         /// </summary>
-        Linear = Gl.GL_LINEAR
+        Linear = ((int)0x2601) //Gl.GL_LINEAR
     }
     /// <summary>
     /// The wrap parameter for a texture coordinate
@@ -168,16 +170,16 @@ namespace SdlDotNet.OpenGl
         None = 0,
         /// <summary>
         /// Causes texture coordinates to be clamped to the range [0,1] and
-		/// is useful for preventing wrapping artifacts	when
+        /// is useful for preventing wrapping artifacts	when
         /// mapping a single image onto	an object.
         /// </summary>
-        Clamp = Gl.GL_CLAMP,
+        Clamp = ((int)0x2900), //Gl.GL_CLAMP,
         /// <summary>
         /// Causes texture coordinates to loop around so to remain in the 
         /// range [0,1] where 1.5 would be .5. this is useful for repeating
         /// a texture for a tiled floor.
         /// </summary>
-        Repeat = Gl.GL_REPEAT
+        Repeat = ((int)0x2901) //Gl.GL_REPEAT
     }
 
     /// <summary>
@@ -186,7 +188,99 @@ namespace SdlDotNet.OpenGl
     [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class SurfaceGl : IDisposable
     {
+        private const CallingConvention CALLING_CONVENTION = CallingConvention.Winapi;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="internalFormat"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="format"></param>
+        /// <param name="type"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [DllImport("glu32.dll", CallingConvention = CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
+        public static extern int gluBuild2DMipmaps(int target, int internalFormat, int width, int height, int format, int type, [In] IntPtr data);
+
         #region Static
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_ENABLE_BIT = ((int)0x00002000);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_DEPTH_TEST = ((int)0x0B71);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_QUADS = ((int)0x0007);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_CULL_FACE = ((int)0x0B44);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_TEXTURE_2D = ((int)0x0DE1);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_BLEND = ((int)0x0BE2);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_ONE_MINUS_SRC_ALPHA = ((int)0x0303);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_SRC_ALPHA = ((int)0x0302);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_PROJECTION = ((int)0x1701);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_TEXTURE_ENV = ((int)0x2300);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_TEXTURE_ENV_MODE = ((int)0x2200);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_DECAL = ((int)0x2101);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_MODELVIEW = ((int)0x1700);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_TEXTURE_MIN_FILTER = ((int)0x2801);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_TEXTURE_MAG_FILTER = ((int)0x2800);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_TEXTURE_WRAP_T = ((int)0x2803);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_TEXTURE_WRAP_S = ((int)0x2802);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_RGBA = ((int)0x1908);
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int GL_UNSIGNED_BYTE = ((int)0x1401);
+
         static bool mode2D;
 
         /// <summary>
@@ -202,39 +296,39 @@ namespace SdlDotNet.OpenGl
             {
                 if (value)
                 {
-                    Gl.glPushAttrib(Gl.GL_ENABLE_BIT);
-                    Gl.glDisable(Gl.GL_DEPTH_TEST);
-                    Gl.glDisable(Gl.GL_CULL_FACE);
-                    Gl.glEnable(Gl.GL_TEXTURE_2D);
+                    glPushAttrib(GL_ENABLE_BIT);
+                    glDisable(GL_DEPTH_TEST);
+                    glDisable(GL_CULL_FACE);
+                    glEnable(GL_TEXTURE_2D);
 
                     /* This allows alpha blending of 2D textures with the scene */
-                    Gl.glEnable(Gl.GL_BLEND);
-                    Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
+                    glEnable(GL_BLEND);
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-                    Gl.glViewport(0, 0, Video.Screen.Width, Video.Screen.Height);
+                    glViewport(0, 0, Video.Screen.Width, Video.Screen.Height);
 
-                    Gl.glMatrixMode(Gl.GL_PROJECTION);
-                    Gl.glPushMatrix();
-                    Gl.glLoadIdentity();
+                    glMatrixMode(GL_PROJECTION);
+                    glPushMatrix();
+                    glLoadIdentity();
 
-                    Gl.glOrtho(0.0, (double)Video.Screen.Width, (double)Video.Screen.Height, 0.0, 0.0, 1.0);
+                    glOrtho(0.0, (double)Video.Screen.Width, (double)Video.Screen.Height, 0.0, 0.0, 1.0);
 
-                    Gl.glMatrixMode(Gl.GL_MODELVIEW);
-                    Gl.glPushMatrix();
-                    Gl.glLoadIdentity();
+                    glMatrixMode(GL_MODELVIEW);
+                    glPushMatrix();
+                    glLoadIdentity();
 
-                    Gl.glTexEnvf(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL);
+                    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
                     mode2D = value;
                 }
                 else
                 {
-                    Gl.glDisable(Gl.GL_BLEND);
-                    Gl.glEnable(Gl.GL_DEPTH_TEST);
-                    Gl.glMatrixMode(Gl.GL_MODELVIEW);
-                    Gl.glPopMatrix();
-                    Gl.glMatrixMode(Gl.GL_PROJECTION);
-                    Gl.glPopMatrix();
-                    Gl.glPopAttrib();
+                    glDisable(GL_BLEND);
+                    glEnable(GL_DEPTH_TEST);
+                    glMatrixMode(GL_MODELVIEW);
+                    glPopMatrix();
+                    glMatrixMode(GL_PROJECTION);
+                    glPopMatrix();
+                    glPopAttrib();
                     mode2D = value;
                 }
             }
@@ -244,7 +338,7 @@ namespace SdlDotNet.OpenGl
         {
             return option != MinifyingOption.Linear && option != MinifyingOption.Nearest;
         }
-        
+
         #endregion
 
         #region Fields
@@ -264,7 +358,77 @@ namespace SdlDotNet.OpenGl
         WrapOption wrapT;
         #endregion
 
+        delegate void glLoadIndentityDelegate();
+        static glLoadIndentityDelegate glLoadIdentity;
+        delegate void glBindTextureDeledate(int target, int texture);
+        static glBindTextureDeledate glBindTexture;
+        delegate void glTexParameteriDelegate(int target, int pname, int param);
+        static glTexParameteriDelegate glTexParameteri;
+        delegate int glIsTextureDelegate(int texture);
+        static glIsTextureDelegate glIsTexture;
+        delegate void glBeginDelegate(int mode);
+        static glBeginDelegate glBegin;
+        delegate void glEndDelegate();
+        static glEndDelegate glEnd;
+        delegate void glTexCoord2fDelegate(float s, float t);
+        static glTexCoord2fDelegate glTexCoord2f;
+        delegate void glVertex2fDelegate(float x, float y);
+        static glVertex2fDelegate glVertex2f;
+        delegate void glPushAttribDelegate(int mask);
+        static glPushAttribDelegate glPushAttrib;
+        delegate void glPopAttribDelegate();
+        static glPopAttribDelegate glPopAttrib;
+        delegate void glDisableDelegate(int cap);
+        static glDisableDelegate glDisable;
+        delegate void glEnableDelegate(int cap);
+        static glEnableDelegate glEnable;
+        delegate void glBlendFuncDelegate(int sfactor, int dfactor);
+        static glBlendFuncDelegate glBlendFunc;
+        delegate void glViewportDelegate(int x, int y, int width, int height);
+        static glViewportDelegate glViewport;
+        delegate void glMatrixModeDelegate(int mode);
+        static glMatrixModeDelegate glMatrixMode;
+        delegate void glPopMatrixDelegate();
+        static glPopMatrixDelegate glPopMatrix;
+        delegate void glPushMatrixDelegate();
+        static glPushMatrixDelegate glPushMatrix;
+        delegate void glTexEnvfDelegate(int target, int pname, float param);
+        static glTexEnvfDelegate glTexEnvf;
+        delegate void glOrthoDelegate(double left, double right, double bottom, double top, double zNear, double zFar);
+        static glOrthoDelegate glOrtho;
+        delegate void glTexImage2DDelegate(int target, int level, int internalformat, int width, int height, int border, int format, int type, IntPtr pixels);
+        static glTexImage2DDelegate glTexImage2D;
+        delegate void glGenTexturesDelegate(int n, int[] textures);
+        static glGenTexturesDelegate glGenTextures;
+        delegate void glDeleteTexturesDelegate(int n, int[] textures);
+        static glDeleteTexturesDelegate glDeleteTextures;
+
         #region Constructors
+        static SurfaceGl()
+        {
+            glLoadIdentity = (glLoadIndentityDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glLoadIdentity"), typeof(glLoadIndentityDelegate));
+            glBindTexture = (glBindTextureDeledate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBindTexture"), typeof(glBindTextureDeledate));
+            glTexParameteri = (glTexParameteriDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexParameteri"), typeof(glTexParameteriDelegate));
+            glIsTexture = (glIsTextureDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glIsTexture"), typeof(glIsTextureDelegate));
+            glBegin = (glBeginDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBegin"), typeof(glBeginDelegate));
+            glEnd = (glEndDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glEnd"), typeof(glEndDelegate));
+            glTexCoord2f = (glTexCoord2fDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexCoord2f"), typeof(glTexCoord2fDelegate));
+            glVertex2f = (glVertex2fDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glVertex2f"), typeof(glVertex2fDelegate));
+            glPushAttrib = (glPushAttribDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPushAttrib"), typeof(glPushAttribDelegate));
+            glPopAttrib = (glPopAttribDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPopAttrib"), typeof(glPopAttribDelegate));
+            glDisable = (glDisableDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glDisable"), typeof(glDisableDelegate));
+            glEnable = (glEnableDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glEnable"), typeof(glEnableDelegate));
+            glBlendFunc = (glBlendFuncDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBlendFunc"), typeof(glBlendFuncDelegate));
+            glViewport = (glViewportDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glViewport"), typeof(glViewportDelegate));
+            glMatrixMode = (glMatrixModeDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glMatrixMode"), typeof(glMatrixModeDelegate));
+            glPushMatrix = (glPushMatrixDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPushMatrix"), typeof(glPushMatrixDelegate));
+            glPopMatrix = (glPopMatrixDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPopMatrix"), typeof(glPopMatrixDelegate));
+            glTexEnvf = (glTexEnvfDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexEnvf"), typeof(glTexEnvfDelegate));
+            glOrtho = (glOrthoDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glOrtho"), typeof(glOrthoDelegate));
+            glTexImage2D = (glTexImage2DDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexImage2D"), typeof(glTexImage2DDelegate));
+            glGenTextures = (glGenTexturesDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glGenTextures"), typeof(glGenTexturesDelegate));
+            glDeleteTextures = (glDeleteTexturesDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glDeleteTextures"), typeof(glDeleteTexturesDelegate));
+        }
         /// <summary>
         /// Creates a new Instance of SurfaceGl.
         /// </summary>
@@ -280,7 +444,10 @@ namespace SdlDotNet.OpenGl
         /// <param name="isFlipped">States if the surface should be flipped when copied into a OpenGl Texture.</param>
         public SurfaceGl(Surface surface, bool isFlipped)
         {
-            if (surface == null) { throw new ArgumentNullException("surface"); }
+            if (surface == null) 
+            { 
+                throw new ArgumentNullException("surface"); 
+            }
             this.surface = surface;
             this.isFlipped = isFlipped;
             this.textureId = -1;
@@ -373,27 +540,27 @@ namespace SdlDotNet.OpenGl
         /// <summary>
         /// Gets and Sets 
         /// The texture minifying function is used whenever
-		/// the	pixel being textured maps to an	area greater
-		/// than one texture element. There are	six defined
-		/// minifying functions.  Two of them use the nearest
-		/// one	or nearest four	texture	elements to compute
-		/// the	texture	value. The other four use mipmaps.
+        /// the	pixel being textured maps to an	area greater
+        /// than one texture element. There are	six defined
+        /// minifying functions.  Two of them use the nearest
+        /// one	or nearest four	texture	elements to compute
+        /// the	texture	value. The other four use mipmaps.
         /// 
-		/// A mipmap is	an ordered set of arrays representing
-		/// the	same image at progressively lower resolutions.
-		/// If the texture has dimensions 2nx2m, there are
-		/// max(n,m)+1 mipmaps.	The first mipmap is the
-		/// original texture, with dimensions 2nx2m. Each
-		/// subsequent mipmap has dimensions 2k-1x2l-1,	where
-		/// 2kx2l are the dimensions of	the previous mipmap,
-		/// until either k=0 or	l=0.  At that point,
-		/// subsequent mipmaps have dimension 1x2l-1 or	2k-1x1
-		/// until the final mipmap, which has dimension	1x1.
-		/// To define the mipmaps, call	glTexImage1D,
-		/// glTexImage2D, glCopyTexImage1D, or
-		/// glCopyTexImage2D with the level argument
-		/// indicating the order of the	mipmaps.  Level	0 is
-		/// the	original texture; level	max(n,m) is the	final
+        /// A mipmap is	an ordered set of arrays representing
+        /// the	same image at progressively lower resolutions.
+        /// If the texture has dimensions 2nx2m, there are
+        /// max(n,m)+1 mipmaps.	The first mipmap is the
+        /// original texture, with dimensions 2nx2m. Each
+        /// subsequent mipmap has dimensions 2k-1x2l-1,	where
+        /// 2kx2l are the dimensions of	the previous mipmap,
+        /// until either k=0 or	l=0.  At that point,
+        /// subsequent mipmaps have dimension 1x2l-1 or	2k-1x1
+        /// until the final mipmap, which has dimension	1x1.
+        /// To define the mipmaps, call	glTexImage1D,
+        /// glTexImage2D, glCopyTexImage1D, or
+        /// glCopyTexImage2D with the level argument
+        /// indicating the order of the	mipmaps.  Level	0 is
+        /// the	original texture; level	max(n,m) is the	final
         /// 1x1	mipmap.
         /// </summary>
         public MinifyingOption MinFilter
@@ -415,18 +582,18 @@ namespace SdlDotNet.OpenGl
                 }
             }
         }
-        
+
         /// <summary>
         /// Gets and Sets 
         /// The texture magnification function is used when
-		/// the	pixel being textured maps to an	area less than
-		/// or equal to	one texture element.  It sets the
-		/// texture magnification function to either
-		/// GL_NEAREST or GL_LINEAR. GL_NEAREST is
-		/// generally faster than GL_LINEAR, but it can
-		/// produce textured images with sharper edges because
-		/// the	transition between texture elements is not as
-		/// smooth. The	initial	value of GL_TEXTURE_MAG_FILTER
+        /// the	pixel being textured maps to an	area less than
+        /// or equal to	one texture element.  It sets the
+        /// texture magnification function to either
+        /// GL_NEAREST or GL_LINEAR. GL_NEAREST is
+        /// generally faster than GL_LINEAR, but it can
+        /// produce textured images with sharper edges because
+        /// the	transition between texture elements is not as
+        /// smooth. The	initial	value of GL_TEXTURE_MAG_FILTER
         /// is GL_LINEAR.
         /// </summary>
         public MagnificationOption MagnificationFilter
@@ -445,15 +612,15 @@ namespace SdlDotNet.OpenGl
         /// <summary>
         /// Gets and Sets
         /// The wrap parameter for texture coordinate s
-		/// to either GL_CLAMP or GL_REPEAT.  GL_CLAMP causes
-		/// s coordinates to be	clamped	to the range [0,1] and
-		/// is useful for preventing wrapping artifacts	when
-		/// mapping a single image onto	an object. GL_REPEAT
-		/// causes the integer part of the s coordinate	to be
-		/// ignored; the GL uses only the fractional part,
-		/// thereby creating a repeating pattern. Border
-		/// texture elements are accessed only if wrapping is
-		/// set	to GL_CLAMP.  Initially, GL_TEXTURE_WRAP_S is
+        /// to either GL_CLAMP or GL_REPEAT.  GL_CLAMP causes
+        /// s coordinates to be	clamped	to the range [0,1] and
+        /// is useful for preventing wrapping artifacts	when
+        /// mapping a single image onto	an object. GL_REPEAT
+        /// causes the integer part of the s coordinate	to be
+        /// ignored; the GL uses only the fractional part,
+        /// thereby creating a repeating pattern. Border
+        /// texture elements are accessed only if wrapping is
+        /// set	to GL_CLAMP.  Initially, GL_TEXTURE_WRAP_S is
         /// set	to GL_REPEAT.
         /// </summary>
         public WrapOption WrapS
@@ -468,7 +635,7 @@ namespace SdlDotNet.OpenGl
                 }
             }
         }
-        
+
         /// <summary>
         /// Gets and Sets
         /// The wrap parameter for	texture	coordinate t
@@ -514,11 +681,11 @@ namespace SdlDotNet.OpenGl
 
         private void BindOptions()
         {
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, textureId);
-            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, (int)minifyingFilter);
-            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, (int)magnificationFilter);
-            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, (int)wrapS);
-            Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, (int)wrapT);
+            glBindTexture(GL_TEXTURE_2D, textureId);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (int)minifyingFilter);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, (int)magnificationFilter);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, (int)wrapS);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (int)wrapT);
             needSetOptions = false;
         }
 
@@ -553,10 +720,10 @@ namespace SdlDotNet.OpenGl
         /// </summary>
         public void Delete()
         {
-            if (Gl.glIsTexture(this.textureId) != 0)
+            if (glIsTexture(this.textureId) != 0)
             {
                 int[] texId = new int[] { textureId };
-                Gl.glDeleteTextures(1, texId);
+                glDeleteTextures(1, texId);
             }
             this.textureId = -1;
             this.textureWidth = -1;
@@ -582,7 +749,7 @@ namespace SdlDotNet.OpenGl
         {
             Refresh(surface, isFlipped, this.minifyingFilter, this.magnificationFilter, this.wrapS, this.wrapT);
         }
-        
+
         /// <summary>
         /// Reloads the OpenGl Texture from the Surface.
         /// </summary>
@@ -600,7 +767,7 @@ namespace SdlDotNet.OpenGl
             using (Surface textureSurface = TransformSurface(isFlipped))
             {
                 int[] textures = new int[1];
-                Gl.glGenTextures(1, textures);
+                glGenTextures(1, textures);
                 this.textureId = textures[0];
 
                 this.textureWidth = textureSurface.Width;
@@ -613,22 +780,22 @@ namespace SdlDotNet.OpenGl
                 this.widthRatio = (float)surface.Width / textureWidth;
                 this.heightRatio = (float)surface.Height / textureHeight;
 
-                Gl.glBindTexture(Gl.GL_TEXTURE_2D, textureId);
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, (int)minifyingFilter);
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, (int)magnificationFilter);
+                glBindTexture(GL_TEXTURE_2D, textureId);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (int)minifyingFilter);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, (int)magnificationFilter);
 
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, (int)wrapS);
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, (int)wrapT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, (int)wrapS);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (int)wrapT);
 
 
 
                 if (minifyingFilter == MinifyingOption.Linear || minifyingFilter == MinifyingOption.Nearest)
                 {
-                    Gl.glTexImage2D(Gl.GL_TEXTURE_2D, 0, textureSurface.BytesPerPixel, textureWidth, textureHeight, 0, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, textureSurface.Pixels);
+                    glTexImage2D(GL_TEXTURE_2D, 0, textureSurface.BytesPerPixel, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureSurface.Pixels);
                 }
                 else
                 {
-                    Glu.gluBuild2DMipmaps(Gl.GL_TEXTURE_2D, textureSurface.BytesPerPixel, textureWidth, textureHeight, Gl.GL_RGBA, Gl.GL_UNSIGNED_BYTE, textureSurface.Pixels);
+                    gluBuild2DMipmaps(GL_TEXTURE_2D, textureSurface.BytesPerPixel, textureWidth, textureHeight, GL_RGBA, GL_UNSIGNED_BYTE, textureSurface.Pixels);
                 }
 
                 needRefresh = false;
@@ -650,7 +817,7 @@ namespace SdlDotNet.OpenGl
         /// <param name="location">The offset for the Texture.</param>
         public void Draw(Point location)
         {
-            Draw(location.X, location.Y,surface.Width,surface.Height);
+            Draw(location.X, location.Y, surface.Width, surface.Height);
         }
 
         /// <summary>
@@ -671,7 +838,7 @@ namespace SdlDotNet.OpenGl
         {
             Draw(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
         }
-       
+
         /// <summary>
         /// Draws the Texture.
         /// </summary>
@@ -682,17 +849,17 @@ namespace SdlDotNet.OpenGl
         public void Draw(float locationX, float locationY, float width, float height)
         {
             Check();
-            Gl.glBindTexture(Gl.GL_TEXTURE_2D, this.textureId);
-            Gl.glBegin(Gl.GL_QUADS);
-            Gl.glTexCoord2f(0, heightRatio);
-            Gl.glVertex2f(locationX, locationY);
-            Gl.glTexCoord2f(widthRatio, heightRatio);
-            Gl.glVertex2f(locationX + width, locationY);
-            Gl.glTexCoord2f(widthRatio, 0);
-            Gl.glVertex2f(locationX + width, locationY + height);
-            Gl.glTexCoord2f(0, 0);
-            Gl.glVertex2f(locationX, locationY + height);
-            Gl.glEnd();
+            glBindTexture(GL_TEXTURE_2D, this.textureId);
+            glBegin(GL_QUADS);
+            glTexCoord2f(0, heightRatio);
+            glVertex2f(locationX, locationY);
+            glTexCoord2f(widthRatio, heightRatio);
+            glVertex2f(locationX + width, locationY);
+            glTexCoord2f(widthRatio, 0);
+            glVertex2f(locationX + width, locationY + height);
+            glTexCoord2f(0, 0);
+            glVertex2f(locationX, locationY + height);
+            glEnd();
         }
 
         /// <summary>

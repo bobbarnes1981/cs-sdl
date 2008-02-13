@@ -49,13 +49,11 @@
         <nant buildfile="src/SdlDotNet.dll.build" target="clean" />
         <nant buildfile="examples/CDPlayer/CDPlayer.exe.build" target="clean" />
         <nant buildfile="tests/Tests.dll.build" target="clean" />
-        <nant buildfile="examples/OpenGl/SdlDotNet.OpenGl.dll.build" target="clean" />
         <nant buildfile="examples/SdlDotNetExamples/SdlDotNetExamples.exe.build" target="clean" />
     </target>
 
     <target name="build" depends="init" description="">
         <nant buildfile="src/SdlDotNet.dll.build" target="build" />
-        <nant buildfile="examples/OpenGl/SdlDotNet.OpenGl.dll.build" target="build" />
         <nant buildfile="examples/SdlDotNetExamples/SdlDotNetExamples.exe.build" target="build" />
         <nant buildfile="tests/Tests.dll.build" target="build" />
         <nant buildfile="examples/CDPlayer/CDPlayer.exe.build" target="build" />
@@ -70,7 +68,6 @@
     <target name="doc" depends="build-release">
         <echo message="Generating all documentation from all builds" />
         <nant buildfile="src/SdlDotNet.dll.build" target="doc" />
-        <nant buildfile="examples/OpenGl/SdlDotNet.OpenGl.dll.build" target="doc" />
     </target>
 
 </project>

@@ -27,7 +27,6 @@ using System.Diagnostics.CodeAnalysis;
 using SdlDotNet.Core;
 using SdlDotNet.Input;
 using SdlDotNet.Graphics;
-using SdlDotNet.OpenGl;
 using Tao.OpenGl;
 
 namespace SdlDotNetExamples.SmallDemos
