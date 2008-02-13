@@ -128,6 +128,13 @@
 		</fileset>
 	    </copy>
 	</if>
+	<if test="${platform::is-unix()}">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+		<fileset basedir="${src.dir}">
+		    <include name="SdlDotNet.dll.config"/>
+		</fileset>
+	    </copy>
+	</if>
 	<if test="${platform::is-win32()}">
 	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/win32deps">
 		<fileset basedir="${lib.dir}/win32deps">
