@@ -201,85 +201,85 @@ namespace SdlDotNet.Graphics
         /// <param name="data"></param>
         /// <returns></returns>
         [DllImport("glu32.dll", CallingConvention = CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-        public static extern int gluBuild2DMipmaps(int target, int internalFormat, int width, int height, int format, int type, [In] IntPtr data);
+        static extern int gluBuild2DMipmaps(int target, int internalFormat, int width, int height, int format, int type, [In] IntPtr data);
 
         #region Static
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_ENABLE_BIT = ((int)0x00002000);
+        const int GL_ENABLE_BIT = ((int)0x00002000);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_DEPTH_TEST = ((int)0x0B71);
+        const int GL_DEPTH_TEST = ((int)0x0B71);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_QUADS = ((int)0x0007);
+        const int GL_QUADS = ((int)0x0007);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_CULL_FACE = ((int)0x0B44);
+        const int GL_CULL_FACE = ((int)0x0B44);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_TEXTURE_2D = ((int)0x0DE1);
+        const int GL_TEXTURE_2D = ((int)0x0DE1);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_BLEND = ((int)0x0BE2);
+        const int GL_BLEND = ((int)0x0BE2);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_ONE_MINUS_SRC_ALPHA = ((int)0x0303);
+        const int GL_ONE_MINUS_SRC_ALPHA = ((int)0x0303);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_SRC_ALPHA = ((int)0x0302);
+        const int GL_SRC_ALPHA = ((int)0x0302);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_PROJECTION = ((int)0x1701);
+        const int GL_PROJECTION = ((int)0x1701);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_TEXTURE_ENV = ((int)0x2300);
+        const int GL_TEXTURE_ENV = ((int)0x2300);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_TEXTURE_ENV_MODE = ((int)0x2200);
+        const int GL_TEXTURE_ENV_MODE = ((int)0x2200);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_DECAL = ((int)0x2101);
+        const int GL_DECAL = ((int)0x2101);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_MODELVIEW = ((int)0x1700);
+        const int GL_MODELVIEW = ((int)0x1700);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_TEXTURE_MIN_FILTER = ((int)0x2801);
+        const int GL_TEXTURE_MIN_FILTER = ((int)0x2801);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_TEXTURE_MAG_FILTER = ((int)0x2800);
+        const int GL_TEXTURE_MAG_FILTER = ((int)0x2800);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_TEXTURE_WRAP_T = ((int)0x2803);
+        const int GL_TEXTURE_WRAP_T = ((int)0x2803);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_TEXTURE_WRAP_S = ((int)0x2802);
+        const int GL_TEXTURE_WRAP_S = ((int)0x2802);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_RGBA = ((int)0x1908);
+        const int GL_RGBA = ((int)0x1908);
         /// <summary>
         /// 
         /// </summary>
-        public const int GL_UNSIGNED_BYTE = ((int)0x1401);
+        const int GL_UNSIGNED_BYTE = ((int)0x1401);
 
         static bool mode2D;
 
@@ -444,9 +444,9 @@ namespace SdlDotNet.Graphics
         /// <param name="isFlipped">States if the surface should be flipped when copied into a OpenGl Texture.</param>
         public SurfaceGl(Surface surface, bool isFlipped)
         {
-            if (surface == null) 
-            { 
-                throw new ArgumentNullException("surface"); 
+            if (surface == null)
+            {
+                throw new ArgumentNullException("surface");
             }
             this.surface = surface;
             this.isFlipped = isFlipped;
