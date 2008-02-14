@@ -109,54 +109,54 @@
 		</fileset>
 	    </copy>
 	</if>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 		<include name="*.xml"/>
 	    </fileset>
 	</copy>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
 	    <fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
 		<include name="${native.sdl}.dll"/>
 		<include name="${native.sdl}.xml"/>
 	    </fileset>
 	</copy>
 	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
 		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
 		    <include name="${native.sdl}.dll.config"/>
 		</fileset>
 	    </copy>
 	</if>
 	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/assemblies">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
 		<fileset basedir="${src.dir}">
 		    <include name="SdlDotNet.dll.config"/>
 		</fileset>
 	    </copy>
 	</if>
 	<if test="${platform::is-win32()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/win32deps">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/win32deps">
 		<fileset basedir="${lib.dir}/win32deps">
 		    <include name="**"/>
 		</fileset>
 	    </copy>
 	</if>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}" flatten="true">
 	    <fileset>
 		<include name="${examples.dir}/**/*.exe" />
 		<include name="${examples.dir}/**/*.sh" />
 		<include name="${examples.dir}/**/*.chm" />
 	    </fileset>
 	</copy>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}" flatten="true">
 	    <fileset>
 		<include name="${lib.dir}/net-2.0/*.dll" />
 		<include name="${examples.dir}/**/*.dll" />
 	    </fileset>
 	</copy>
 	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}" flatten="true">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}" flatten="true">
 		<fileset>
 		    <include name="${lib.dir}/net-2.0/*.config" />
 		    <include name="${src.dir}/SdlDotNet.dll.config"/>
@@ -172,7 +172,7 @@
 		    </items>
 		</in>
 		<do>
-		    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}">
+		    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}">
 			<fileset basedir="${foldername}/${bin.dir}/${project.config}/doc">
 			    <include name="**" />
 			    <exclude name="*.chm"/>
@@ -181,13 +181,13 @@
 		</do>
 	    </foreach>
 	</if>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}/Data" flatten="true">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}/Data" flatten="true">
 	    <fileset>
 		<include name="examples/**/Data/**" />
 	    </fileset>
 	</copy>
 	<if test="${is-osx}">
-	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${bin.dir}/${examples.dir}"/>
+	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}"/>
 	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.dll.config -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/Tao.OpenGl.dll -r:${examples.path}/Tao.OpenGl.dll.config -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:SdlDotNetExamples -a:${examples.path}/SdlDotNetExamples.exe" />
 	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.dll.config -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config  -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:CDPlayer -a:${examples.path}/CDPlayer.exe" />
 	</if>
