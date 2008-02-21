@@ -24,7 +24,6 @@ using System.Drawing;
 using SdlDotNet.Graphics;
 using SdlDotNet.Core;
 using SdlDotNet.Particles;
-using SdlDotNet.Particles.Particle;
 
 namespace SdlDotNet.Particles.Emitters
 {
@@ -36,7 +35,7 @@ namespace SdlDotNet.Particles.Emitters
     /// <code>
     /// public class BluePixelEmitter : ParticleEmitter
     /// {
-    ///		protected override SdlDotNet.Particles.Particle.BaseParticle CreateParticle()
+    ///		protected override SdlDotNet.Particles.BaseParticle CreateParticle()
     ///		{
     ///			ParticlePixel p = new ParticlePixel();
     ///			p.Color = Color.Blue;

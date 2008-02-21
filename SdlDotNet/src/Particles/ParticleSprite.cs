@@ -26,7 +26,7 @@ using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Core;
 
 
-namespace SdlDotNet.Particles.Particle
+namespace SdlDotNet.Particles
 {
     /// <summary>
     /// A particle represented by a Sprite.

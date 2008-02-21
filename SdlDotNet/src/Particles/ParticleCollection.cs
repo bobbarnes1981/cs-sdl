@@ -26,7 +26,7 @@ using SdlDotNet.Graphics;
 
 using SdlDotNet.Particles.Emitters;
 
-namespace SdlDotNet.Particles.Particle
+namespace SdlDotNet.Particles
 {
     /// <summary>
     /// A collection of particles.

@@ -22,7 +22,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 
 using SdlDotNet.Graphics;
-using SdlDotNet.Particles.Particle;
+using SdlDotNet.Particles;
 using SdlDotNet.Particles.Manipulators;
 using SdlDotNet.Particles.Emitters;
 

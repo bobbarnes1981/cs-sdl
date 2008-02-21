@@ -24,7 +24,7 @@ using System.Drawing;
 using SdlDotNet.Core;
 using SdlDotNet.Graphics;
 
-namespace SdlDotNet.Particles.Particle
+namespace SdlDotNet.Particles
 {
     /// <summary>
     /// A particle represented by a pixel on the destination surface.

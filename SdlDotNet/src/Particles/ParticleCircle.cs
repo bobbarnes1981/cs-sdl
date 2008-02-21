@@ -23,7 +23,7 @@ using System;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Primitives;
 
-namespace SdlDotNet.Particles.Particle
+namespace SdlDotNet.Particles
 {
     /// <summary>
     /// A particle represented by a circle.
