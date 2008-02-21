@@ -20,7 +20,7 @@
 using System;
 using System.Drawing;
 
-using SdlDotNet.Particles.Particle;
+using SdlDotNet.Particles;
 
 namespace SdlDotNet.Particles.Emitters
 {
@@ -163,7 +163,7 @@ namespace SdlDotNet.Particles.Emitters
 		/// Creates a new ParticleRectangle with the set attributes.
 		/// </summary>
 		/// <returns>The new particle rectangle represented by a BaseParticle.</returns>
-		protected override SdlDotNet.Particles.Particle.BaseParticle CreateParticle()
+		protected override SdlDotNet.Particles.BaseParticle CreateParticle()
 		{
 			ParticleRectangle p = new ParticleRectangle();
 			p.Color = Color.FromArgb(

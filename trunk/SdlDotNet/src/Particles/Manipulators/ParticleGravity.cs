@@ -21,7 +21,7 @@
 using System;
 
 using SdlDotNet.Core;
-using SdlDotNet.Particles.Particle;
+using SdlDotNet.Particles;
 
 namespace SdlDotNet.Particles.Manipulators
 {

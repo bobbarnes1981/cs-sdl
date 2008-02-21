@@ -21,7 +21,7 @@
 using System;
 using System.Drawing;
 
-using SdlDotNet.Particles.Particle;
+using SdlDotNet.Particles;
 
 namespace SdlDotNet.Particles.Emitters
 {
@@ -213,7 +213,7 @@ namespace SdlDotNet.Particles.Emitters
         /// A protected method to return a new particle pixel with the randomized color attributes.
         /// </summary>
         /// <returns>A new particle pixel with the new color values.</returns>
-        protected override SdlDotNet.Particles.Particle.BaseParticle CreateParticle()
+        protected override SdlDotNet.Particles.BaseParticle CreateParticle()
         {
             ParticlePixel p = new ParticlePixel();
             p.Color = Color.FromArgb(

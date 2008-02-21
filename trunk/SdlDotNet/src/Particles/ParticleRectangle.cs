@@ -24,7 +24,7 @@ using System.Drawing;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Primitives;
 
-namespace SdlDotNet.Particles.Particle
+namespace SdlDotNet.Particles
 {
     /// <summary>
     /// Uses a rectangle to represent a particle on the destination surface.

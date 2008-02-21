@@ -26,7 +26,6 @@ using System.Drawing;
 using SdlDotNet.Particles;
 using SdlDotNet.Particles.Emitters;
 using SdlDotNet.Particles.Manipulators;
-using SdlDotNet.Particles.Particle;
 using SdlDotNet.Graphics.Sprites;
 using SdlDotNet.Core;
 using SdlDotNet.Input;

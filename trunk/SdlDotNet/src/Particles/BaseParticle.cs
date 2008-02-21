@@ -26,7 +26,7 @@ using SdlDotNet.Core;
 using SdlDotNet.Graphics;
 using SdlDotNet.Graphics.Sprites;
 
-namespace SdlDotNet.Particles.Particle
+namespace SdlDotNet.Particles
 {
     /// <summary>
     /// An abstract class describing a base particle.

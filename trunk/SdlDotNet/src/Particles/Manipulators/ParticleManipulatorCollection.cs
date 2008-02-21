@@ -21,7 +21,7 @@
 using System;
 using System.Collections.ObjectModel;
 
-using SdlDotNet.Particles.Particle;
+using SdlDotNet.Particles;
 
 namespace SdlDotNet.Particles.Manipulators
 {

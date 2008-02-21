@@ -21,7 +21,7 @@
 using System;
 
 using SdlDotNet.Graphics.Sprites;
-using SdlDotNet.Particles.Particle;
+using SdlDotNet.Particles;
 
 namespace SdlDotNet.Particles.Emitters
 {
