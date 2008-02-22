@@ -358,7 +358,7 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             Gears gears = new Gears();
             gears.Go();

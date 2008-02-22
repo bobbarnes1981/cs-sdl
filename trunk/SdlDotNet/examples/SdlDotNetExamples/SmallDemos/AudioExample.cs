@@ -130,7 +130,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// 
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             AudioExample t = new AudioExample();
             t.Go();

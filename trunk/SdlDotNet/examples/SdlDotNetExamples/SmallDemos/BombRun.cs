@@ -64,7 +64,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// 
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             if (File.Exists(Path.Combine(dataDirectory, "Background1.png")))
             {

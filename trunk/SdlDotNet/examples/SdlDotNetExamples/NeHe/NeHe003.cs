@@ -131,7 +131,7 @@ namespace SdlDotNetExamples.NeHe
         /// Starts lesson
         /// </summary>
         [STAThread]
-        public static new void Main()
+        public static new void Run()
         {
             NeHe003 t = new NeHe003();
             t.Reshape();

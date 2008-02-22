@@ -86,7 +86,7 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             OpenGlFont openGlFont = new OpenGlFont();
             openGlFont.Go();

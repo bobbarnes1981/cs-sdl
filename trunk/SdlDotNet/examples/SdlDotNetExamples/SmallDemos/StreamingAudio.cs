@@ -82,7 +82,7 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             StreamingAudio t = new StreamingAudio();
             t.Go();

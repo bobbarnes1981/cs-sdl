@@ -121,7 +121,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// Main entry point
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             ParticlesExample p = new ParticlesExample();
             p.Go();

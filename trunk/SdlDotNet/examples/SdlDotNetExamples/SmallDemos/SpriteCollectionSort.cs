@@ -90,7 +90,7 @@ namespace SdlDotNetExamples.SmallDemos
             screen.Update(screen.Blit(manager));
         }
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             SpriteCollectionSort p = new SpriteCollectionSort();
             p.Go();

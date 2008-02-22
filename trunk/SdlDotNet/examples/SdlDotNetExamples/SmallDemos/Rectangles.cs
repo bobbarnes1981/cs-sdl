@@ -102,7 +102,7 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             Rectangles rectangles = new Rectangles();
             rectangles.Go();

@@ -140,7 +140,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// Application EntryPoint.
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             JoystickExample joystickExample = new JoystickExample();
             joystickExample.Go();
