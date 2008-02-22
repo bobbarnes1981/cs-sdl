@@ -220,7 +220,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Main()
+		public static void Run()
 		{
 			RedBookDrawF t = new RedBookDrawF(); t.Reshape();
 			Init();

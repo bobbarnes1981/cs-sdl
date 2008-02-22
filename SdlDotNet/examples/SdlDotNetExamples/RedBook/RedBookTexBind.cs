@@ -293,7 +293,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Main()
+		public static void Run()
 		{
 			RedBookTexBind t = new RedBookTexBind();
             t.Reshape();

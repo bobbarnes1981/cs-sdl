@@ -130,7 +130,7 @@ namespace SdlDotNetExamples.LargeDemos
         }
 
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             TriadMain s = new TriadMain();
             s.Go();

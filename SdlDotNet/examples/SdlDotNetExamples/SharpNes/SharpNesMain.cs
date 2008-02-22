@@ -56,7 +56,7 @@ namespace SdlDotNetExamples.LargeDemos
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             //foreach (string arg in args)
             //{

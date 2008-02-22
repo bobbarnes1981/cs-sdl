@@ -284,7 +284,7 @@ namespace SdlDotNetExamples.RedBook
 		/// <summary>
 		/// Starts demo
 		/// </summary>
-		public static void Main()
+		public static void Run()
 		{
 			RedBookAAPoly t = new RedBookAAPoly(); t.Reshape();
 			Init();

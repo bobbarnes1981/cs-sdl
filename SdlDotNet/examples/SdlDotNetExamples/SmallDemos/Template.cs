@@ -19,7 +19,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// 
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             Template game = new Template();
             game.Go();

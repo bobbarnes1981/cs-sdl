@@ -129,7 +129,7 @@ namespace SdlDotNetExamples.SmallDemos
         /// Entry point for App.
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             BounceSprites bounce = new BounceSprites();
             bounce.Go();

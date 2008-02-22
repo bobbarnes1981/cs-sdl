@@ -37,7 +37,7 @@ namespace SdlDotNetExamples.LargeDemos
         /// 
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Run()
         {
             if (CheckInstance() == null)
             {
