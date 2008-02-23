@@ -1,215 +1,223 @@
 <?xml version="1.0" ?>
 <project name="SdlDotNet" default="package">
-    <!--
-    Targets:
-    buildrelease: builds release versions of libraries and examples.
-    package: creates release zip file for .NET and Mono.
-    -->
-    <echo message="Using '${nant.settings.currentframework}' Framework"/>
-    <echo message="Using '${platform::get-name()}' Platform"/>
+<!--
+Targets:
+buildrelease: builds release versions of libraries and examples.
+package: creates release zip file for .NET and Mono.
+-->
+<echo message="Using '${nant.settings.currentframework}' Framework"/>
+<echo message="Using '${platform::get-name()}' Platform"/>
 
-    <!-- global project settings -->
-    <property name="project.config" value="Release" />
-    <property name="project.version" value="6.1.0" />
-    <property name="src.dir" value="src" />
-    <property name="examples.dir" value="examples" />
-    <property name="extras.dir" value="extras" />
-    <property name="tests.dir" value="tests" />
-    <property name="dist.dir" value="dist" />
-    <property name="source.dir" value="source" />
-    <property name="bin.dir" value="bin" />
-    <property name="obj.dir" value="obj" />
-    <property name="lib.dir" value="lib" />
-    <property name="doc.dir" value="doc" />
-    <property name="native.sdl" value="Tao.Sdl"/>
-    <property name="dmg.dir" value="SdlDotNet" />
-    <property name="is-osx" value="false"/>
+<!-- global project settings -->
+<property name="project.config" value="Release" />
+<property name="project.version" value="6.1.0" />
+<property name="src.dir" value="src" />
+<property name="examples.dir" value="examples" />
+<property name="extras.dir" value="extras" />
+<property name="tests.dir" value="tests" />
+<property name="dist.dir" value="dist" />
+<property name="source.dir" value="source" />
+<property name="bin.dir" value="bin" />
+<property name="obj.dir" value="obj" />
+<property name="lib.dir" value="lib" />
+<property name="doc.dir" value="doc" />
+<property name="native.sdl" value="Tao.Sdl"/>
+<property name="dmg.dir" value="SdlDotNet" />
+<property name="is-osx" value="false"/>
 
-    <target name="net-2.0" description="Sets framework to .NET 2.0">
-	<property name="nant.settings.currentframework" value="net-2.0" />
-    </target>
+<target name="net-2.0" description="Sets framework to .NET 2.0">
+<property name="nant.settings.currentframework" value="net-2.0" />
+</target>
 
-    <target name="mono-2.0" description="Sets framework to mono 2.0">
-	<call target="check-osx" />
-	<property name="nant.settings.currentframework" value="mono-2.0" />
-    </target>
+<target name="mono-2.0" description="Sets framework to mono 2.0">
+<call target="check-osx" />
+<property name="nant.settings.currentframework" value="mono-2.0" />
+</target>
 
-    <target name="check-osx" description="Checks if running on OSX">
-	<if test="${file::exists('/System/Library/Frameworks/Cocoa.framework/Cocoa')}">
-	    <property name="is-osx" value="true" />
-	</if>
-    </target>
+<target name="check-osx" description="Checks if running on OSX">
+<if test="${file::exists('/System/Library/Frameworks/Cocoa.framework/Cocoa')}">
+<property name="is-osx" value="true" />
+</if>
+</target>
 
-    <target name="clean" description="Clean project">
-	<delete dir="${bin.dir}" failonerror="false" />
-	<delete dir="${obj.dir}" failonerror="false" />
-	<delete dir="${dist.dir}" failonerror="false" />
-	<nant buildfile="SdlDotNet.build" target="clean" />
-    </target>
+<target name="clean" description="Clean project">
+<delete dir="${bin.dir}" failonerror="false" />
+<delete dir="${obj.dir}" failonerror="false" />
+<delete dir="${dist.dir}" failonerror="false" />
+<nant buildfile="SdlDotNet.build" target="clean" />
+</target>
 
-    <target name="all" depends="package"/>
+<target name="all" depends="package"/>
 
-    <target name="package" description="Package" depends="clean">
-	<nant buildfile="SdlDotNet.build" target="${nant.settings.currentframework} package" />
-	<call target="copyfiles" />
-	<call target="zip" />
-    </target>
+<target name="package" description="Package" depends="clean">
+<nant buildfile="SdlDotNet.build" target="${nant.settings.currentframework} package" />
+<call target="copyfiles" />
+<call target="zip" />
+</target>
 
-    <target name="package-debug" description="Package Debug Mode" depends="clean">
-	<property name="project.config" value="Debug" />
-	<nant buildfile="SdlDotNet.build" target="${nant.settings.currentframework} clean build-debug" />
-	<call target="copyfiles" />
-    </target>
+<target name="package-debug" description="Package Debug Mode" depends="clean">
+<property name="project.config" value="Debug" />
+<nant buildfile="SdlDotNet.build" target="${nant.settings.currentframework} clean build-debug" />
+<call target="copyfiles" />
+</target>
 
-    <!-- copy project files -->
-    <target name="copyfiles">
-	<if test="${is-osx}">
-	    <property name="dist.dir" value="${dist.dir}/${dmg.dir}" />
-	</if>
-	<if test="${project.config=='Release'}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${source.dir}">
-		<fileset>
-		    <include name="**" />
+<!-- copy project files -->
+<target name="copyfiles">
+<if test="${is-osx}">
+<property name="dist.dir" value="${dist.dir}/${dmg.dir}" />
+</if>
+<if test="${project.config=='Release'}">
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${source.dir}">
+<fileset>
+<include name="**" />
 
-		    <exclude name="**/${obj.dir}/**" />
-		    <exclude name="**/${bin.dir}/**" />
-		    <exclude name="**/*j.user" />
-		    <exclude name="**.suo" />
-		    <exclude name="**/*.old" />
-		    <exclude name="**/Makefile" />
-		    <exclude name="**/*.in" />
-		    <exclude name="**/*.pc" />
-		    <exclude name="**/*.stackdump" />
-		    <exclude name="**/*.lnk" />
-		    <exclude name="**/config.status" />
-		    <exclude name="**/config.log" />
-		    <exclude name="**/aclocal.m4" />
-		    <exclude name="**/doc/**" />
-		    <exclude name="**/dist/**" />
-		    <exclude name="**/autom4te.cache/**" />
-		    <exclude name="**/Debug/**" />
-		    <exclude name="**/Release/**" />
-		    <exclude name="**.swp" />
-		    <exclude name="**.bak" />
-		    <exclude name="**.project" />
-		</fileset>
-	    </copy>
-	</if>
+<exclude name="**/${obj.dir}/**" />
+<exclude name="**/${bin.dir}/**" />
+<exclude name="**/*j.user" />
+<exclude name="**.suo" />
+<exclude name="**/*.old" />
+<exclude name="**/Makefile" />
+<exclude name="**/*.in" />
+<exclude name="**/*.pc" />
+<exclude name="**/*.stackdump" />
+<exclude name="**/*.lnk" />
+<exclude name="**/config.status" />
+<exclude name="**/config.log" />
+<exclude name="**/aclocal.m4" />
+<exclude name="**/doc/**" />
+<exclude name="**/dist/**" />
+<exclude name="**/autom4te.cache/**" />
+<exclude name="**/Debug/**" />
+<exclude name="**/Release/**" />
+<exclude name="**.swp" />
+<exclude name="**.bak" />
+<exclude name="**.project" />
+</fileset>
+</copy>
+</if>
 
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}" flatten="true">
-	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
-		<include name="**/*.chm"/>
-	    </fileset>
-	</copy>
-	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}">
-		<fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
-		    <include name="**" />
-		    <exclude name="*.chm"/>
-		</fileset>
-	    </copy>
-	</if>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
-	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
-		<include name="*.dll"/>
-		<include name="*.xml"/>
-	    </fileset>
-	</copy>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
-	    <fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
-		<include name="${native.sdl}.dll"/>
-		<include name="${native.sdl}.xml"/>
-	    </fileset>
-	</copy>
-	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
-		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
-		    <include name="${native.sdl}.dll.config"/>
-		</fileset>
-	    </copy>
-	</if>
-	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
-		<fileset basedir="${src.dir}">
-		    <include name="SdlDotNet.dll.config"/>
-		</fileset>
-	    </copy>
-	</if>
-	<if test="${platform::is-win32()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/win32deps">
-		<fileset basedir="${lib.dir}/win32deps">
-		    <include name="**"/>
-		</fileset>
-	    </copy>
-	</if>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}" flatten="true">
-	    <fileset>
-		<include name="${examples.dir}/**/*.exe" />
-		<include name="${examples.dir}/**/*.sh" />
-		<include name="${examples.dir}/**/*.chm" />
-	    </fileset>
-	</copy>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}" flatten="true">
-	    <fileset>
-		<include name="${lib.dir}/net-2.0/*.dll" />
-		<include name="${examples.dir}/**/*.dll" />
-	    </fileset>
-	</copy>
-	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}" flatten="true">
-		<fileset>
-		    <include name="${lib.dir}/net-2.0/*.config" />
-		    <include name="${src.dir}/SdlDotNet.dll.config"/>
-		</fileset>
-	    </copy>
-	</if>
-	<if test="${platform::is-unix()}">
-	    <foreach item="Folder" property="foldername">
-		<echo message="${foldername}"/>
-		<in>
-		    <items>
-			<include name="${examples.dir}/*"/>
-		    </items>
-		</in>
-		<do>
-		    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}">
-			<fileset basedir="${foldername}/${bin.dir}/${project.config}/doc">
-			    <include name="**" />
-			    <exclude name="*.chm"/>
-			</fileset>
-		    </copy>
-		</do>
-	    </foreach>
-	</if>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}/Data" flatten="true">
-	    <fileset>
-		<include name="examples/**/Data/**" />
-	    </fileset>
-	</copy>
-	<if test="${is-osx}">
-	    <property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}"/>
-	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.dll.config -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/Tao.OpenGl.dll -r:${examples.path}/Tao.OpenGl.dll.config -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:SdlDotNetExamples -a:${examples.path}/SdlDotNetExamples.exe" />
-	    <exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.dll.config -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config  -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:CDPlayer -a:${examples.path}/CDPlayer.exe" />
-	</if>
-    </target>
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}" flatten="true">
+<fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
+<include name="**/*.chm"/>
+</fileset>
+</copy>
+<if test="${platform::is-unix()}">
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${doc.dir}">
+<fileset basedir="${src.dir}/${bin.dir}/${project.config}/doc">
+<include name="**" />
+<exclude name="*.chm"/>
+</fileset>
+</copy>
+</if>
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
+<fileset basedir="${src.dir}/${bin.dir}/${project.config}">
+<include name="*.dll"/>
+<include name="*.xml"/>
+</fileset>
+</copy>
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
+<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
+<include name="${native.sdl}.dll"/>
+<include name="${native.sdl}.xml"/>
+</fileset>
+</copy>
+<if test="${platform::is-unix()}">
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
+<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
+<include name="${native.sdl}.dll.config"/>
+</fileset>
+</copy>
+</if>
+<if test="${platform::is-unix()}">
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
+<fileset basedir="${src.dir}">
+<include name="SdlDotNet.dll.config"/>
+</fileset>
+</copy>
+</if>
+<if test="${platform::is-win32()}">
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/win32deps">
+<fileset basedir="${lib.dir}/win32deps">
+<include name="**"/>
+</fileset>
+</copy>
+</if>
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}" flatten="true">
+<fileset>
+<include name="${examples.dir}/**/*.exe" />
+<include name="${examples.dir}/**/*.sh" />
+<include name="${examples.dir}/**/*.chm" />
+</fileset>
+</copy>
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}" flatten="true">
+<fileset>
+<include name="${lib.dir}/net-2.0/*.dll" />
+<include name="${examples.dir}/**/*.dll" />
+</fileset>
+</copy>
+<if test="${platform::is-unix()}">
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}" flatten="true">
+<fileset>
+<include name="${lib.dir}/net-2.0/*.config" />
+<include name="${src.dir}/SdlDotNet.dll.config"/>
+</fileset>
+</copy>
+</if>
+<if test="${platform::is-unix()}">
+<foreach item="Folder" property="foldername">
+<echo message="${foldername}"/>
+<in>
+<items>
+<include name="${examples.dir}/*"/>
+</items>
+</in>
+<do>
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}">
+<fileset basedir="${foldername}/${bin.dir}/${project.config}/doc">
+<include name="**" />
+<exclude name="*.chm"/>
+</fileset>
+</copy>
+</do>
+</foreach>
+</if>
+<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}/Data" flatten="true">
+<fileset>
+<include name="examples/**/Data/**" />
+</fileset>
+</copy>
+<if test="${is-osx}">
+<property name="examples.path" value="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}"/>
+<exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.dll.config -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config -r:${examples.path}/Tao.OpenGl.dll -r:${examples.path}/Tao.OpenGl.dll.config -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:SdlDotNetExamples -a:${examples.path}/SdlDotNetExamples.exe" />
+<exec program="macpack" commandline="-m:2 -o:${examples.path}  -m cocoa -r:${examples.path}/SdlDotNet.dll -r:${examples.path}/SdlDotNet.dll.config -r:${examples.path}/Tao.Sdl.dll -r:${examples.path}/Tao.Sdl.dll.config  -r:${examples.path}/Data -i:tools/logos/sdldotnet.icns  -n:CDPlayer -a:${examples.path}/CDPlayer.exe" />
+<move todir="${dist.dir}">
+<fileset basedir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}">
+<include name="SdlDotNetExamples.app/**"/>
+<include name="CDPlayer.app/**"/>
+</fileset>
+</move>
+<delete dir="${examples.path}"/>
 
-    <!-- create zip file -->
-    <target name="zip" description="zip/gzip files">
-	<property name="project.zip-path" value="${project::get-base-directory()}/${dist.dir}/${string::to-lower(project::get-name())}-${project.version}"/>
-	<if test="${platform::is-unix() and not is-osx}">
-	    <tar destfile="${project.zip-path}.tar.gz" compression="GZip">
-		<fileset basedir="${dist.dir}">
-		    <include name="${project.zip-path}/**" />
-		</fileset>
-	    </tar>
-	</if>
-	<if test="${platform::is-win32()}">
-	    <zip zipfile="${project.zip-path}.zip">
-		<fileset basedir="${dist.dir}">
-		    <include name="${project.zip-path}/**" />
-		</fileset>
-	    </zip>
-	</if>
-	<echo message="Created '${project::get-name()}' packages at ${project.zip-path}" />
-    </target>
+</if>
+</target>
+
+<!-- create zip file -->
+<target name="zip" description="zip/gzip files">
+<property name="project.zip-path" value="${project::get-base-directory()}/${dist.dir}/${string::to-lower(project::get-name())}-${project.version}"/>
+<if test="${platform::is-unix() and not is-osx}">
+<tar destfile="${project.zip-path}.tar.gz" compression="GZip">
+<fileset basedir="${dist.dir}">
+<include name="${project.zip-path}/**" />
+</fileset>
+</tar>
+</if>
+<if test="${platform::is-win32()}">
+<zip zipfile="${project.zip-path}.zip">
+<fileset basedir="${dist.dir}">
+<include name="${project.zip-path}/**" />
+</fileset>
+</zip>
+</if>
+<echo message="Created '${project::get-name()}' packages at ${project.zip-path}" />
+</target>
 </project>
