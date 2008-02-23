@@ -24,13 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SdlDotNetExamples", "exampl
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SdlDotNetInstallerSDK", "setup\windows\sdk\SdlDotNetInstallerSDK.wixproj", "{2B0AA14E-7D46-4B99-B41A-DE15356F92AB}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SdlDotNetInstaller", "setup\windows\runtime\SdlDotNetInstaller.wixproj", "{09E33326-676D-409E-898C-EE6352A3E74C}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SdlDotNetInstaller", "setup\windows\SdlDotNetInstaller.wixproj", "{A1CF6ED8-BA33-4F08-881D-E5E4551BE346}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.Debug = "False"
@@ -58,14 +52,10 @@ Global
 		{F6147BF0-9807-4CD9-832E-AD42FC833288}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6147BF0-9807-4CD9-832E-AD42FC833288}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6147BF0-9807-4CD9-832E-AD42FC833288}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B0AA14E-7D46-4B99-B41A-DE15356F92AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B0AA14E-7D46-4B99-B41A-DE15356F92AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B0AA14E-7D46-4B99-B41A-DE15356F92AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B0AA14E-7D46-4B99-B41A-DE15356F92AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09E33326-676D-409E-898C-EE6352A3E74C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09E33326-676D-409E-898C-EE6352A3E74C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09E33326-676D-409E-898C-EE6352A3E74C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09E33326-676D-409E-898C-EE6352A3E74C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CF6ED8-BA33-4F08-881D-E5E4551BE346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CF6ED8-BA33-4F08-881D-E5E4551BE346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CF6ED8-BA33-4F08-881D-E5E4551BE346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CF6ED8-BA33-4F08-881D-E5E4551BE346}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
