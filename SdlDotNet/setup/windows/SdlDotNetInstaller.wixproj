@@ -24,10 +24,10 @@
     <WixExtension Include="C:\Program Files\Windows Installer XML v3\bin\WixUIExtension.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SdlDotNetInstallerSDK.wxs" />
+    <Content Include="License.rtf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="License.rtf" />
+    <Compile Include="SdlDotNetInstaller.wxs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets" />
 </Project>
