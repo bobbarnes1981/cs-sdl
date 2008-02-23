@@ -2,13 +2,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProductVersion>3.0</ProductVersion>
-    <ProjectGuid>{2b0aa14e-7d46-4b99-b41a-de15356f92ab}</ProjectGuid>
+    <ProjectGuid>{a1cf6ed8-ba33-4f08-881d-e5e4551be346}</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>SdlDotNetInstallSDK</OutputName>
+    <OutputName>sdldotnet-install</OutputName>
     <OutputType>Package</OutputType>
     <WixToolPath>C:\Program Files\Windows Installer XML v3\bin\</WixToolPath>
     <Cultures>en-US</Cultures>
-    <Name>SdlDotNetInstaller</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -26,6 +25,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SdlDotNetInstallerSDK.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License.rtf" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets" />
 </Project>
