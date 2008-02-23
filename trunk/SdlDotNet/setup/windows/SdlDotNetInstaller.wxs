@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="34d0f6de-2dff-4321-8e0b-926a86e98678"
     UpgradeCode="9c8fcd7b-4632-4872-99ad-18394618cc89"
-    Name="SdlDotNet Gaming Library" Language="1033" Version="1.0.0.0"
+    Name="SdlDotNet Gaming Library" Language="1033" Version="6.1.0.0"
     Manufacturer="SdlDotNet Project"
   >
     <Package InstallerVersion="200" Compressed="yes" />
