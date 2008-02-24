@@ -1,2 +1,2 @@
-call nant -buildfile:build.xml mono-2.0 package
+call nant mono-2.0 package
 pause

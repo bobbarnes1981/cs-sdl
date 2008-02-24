@@ -1,2 +1,2 @@
-NAnt.exe -buildfile:build.xml net-2.0 package-debug
+NAnt.exe net-2.0 package-debug
 pause

@@ -1,2 +1,2 @@
 #!/bin/sh
-nant -buildfile:build.xml mono-2.0 package-debug
+nant mono-2.0 package-debug
