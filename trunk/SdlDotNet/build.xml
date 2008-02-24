@@ -22,7 +22,7 @@
     <property name="lib.dir" value="lib" />
     <property name="doc.dir" value="doc" />
     <property name="native.sdl" value="Tao.Sdl"/>
-    <property name="dmg.dir" value="SdlDotNet" />
+    <property name="dmg.dir" value="SdlDotNet-${project.version}" />
     <property name="is-osx" value="false"/>
 
     <target name="net-2.0" description="Sets framework to .NET 2.0">
@@ -53,6 +53,29 @@
 	<nant buildfile="SdlDotNet.build" target="${nant.settings.currentframework} package" />
 	<call target="copyfiles" />
 	<call target="zip" />
+    </target>
+
+    <target name="gac-install">
+	<call target="check-osx" />
+	<if test="${is-osx}">
+	    <property name="dist.dir" value="${dist.dir}/${dmg.dir}" />
+	</if>
+    <exec program="gacutil">
+    <arg line="-i ${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies/SdlDotNet.dll"/>
+    </exec>
+    <exec program="gacutil">
+    <arg line="-i ${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies/Tao.Sdl.dll"/>
+    </exec>
+
+    </target>
+
+    <target name="gac-uninstall">
+    <exec program="gacutil">
+    <arg line="-u SdlDotNet.dll"/>
+    </exec>
+    <exec program="gacutil">
+    <arg line="-u Tao.Sdl.dll"/>
+    </exec>
     </target>
 
     <target name="package-debug" description="Package Debug Mode" depends="clean">
