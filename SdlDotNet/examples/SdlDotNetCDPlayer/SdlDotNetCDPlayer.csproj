@@ -1,4 +1,4 @@
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>8.0.50727</ProductVersion>
@@ -9,7 +9,7 @@
     <ApplicationIcon>App.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>CDPlayer</AssemblyName>
+    <AssemblyName>SdlDotNetCDPlayer</AssemblyName>
     <AssemblyOriginatorKeyFile>../../src/SdlDotNet.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <DefaultClientScript>JScript</DefaultClientScript>
@@ -30,7 +30,8 @@
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>DEBUG;TRACE;CODE_ANALYSIS</DefineConstants>
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <DebugSymbols>True</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <Optimize>False</Optimize>
@@ -48,7 +49,8 @@
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <DebugSymbols>False</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <Optimize>True</Optimize>
@@ -61,15 +63,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
-        <Name>System</Name>
+      <Name>System</Name>
       <HintPath>\System.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing">
-        <Name>System.Drawing</Name>
+      <Name>System.Drawing</Name>
       <HintPath>\System.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms">
-        <Name>System.Windows.Forms</Name>
+      <Name>System.Windows.Forms</Name>
       <HintPath>\System.Windows.Forms.dll</HintPath>
     </Reference>
   </ItemGroup>
