@@ -9,13 +9,19 @@
     <Media Id="1" Cabinet="SdlDotNet.cab" EmbedCab="yes" />
 
     <Directory Id="TARGETDIR" Name="SourceDir" FileSource=".\">
-      <Component Id="ProductComponent" Guid="13b4d0a3-2d1d-4f2d-8765-bd8043aee206">
-        <File Id="f1" Name="License.rtf" />
+      <Component Id="ProductComponentTaoSdl" Guid="29436d22-5bad-4f43-b1ea-1581167536a9">
+        <File Id="Tao.Sdl" Name="Tao.Sdl.dll" DiskId="1" Assembly=".net"
+    Source="../../dist/sdldotnet-6.1.0/assemblies/Tao.Sdl.dll" KeyPath="yes"/>
+      </Component>
+      <Component Id="ProductComponentSdlDotNet" Guid="518485b5-beb7-4a5e-8483-c565c8974a9a">
+        <File Id="SdlDotNet" Name="SdlDotNet.dll" DiskId="1" Assembly=".net"
+    Source="../../dist/sdldotnet-6.1.0/assemblies/SdlDotNet.dll" KeyPath="yes"/>
       </Component>
     </Directory>
-
+    
     <Feature Id="ProductFeature" Title="Main Feature" Level="1">
-      <ComponentRef Id="ProductComponent" />
+      <ComponentRef Id="ProductComponentTaoSdl" />
+      <ComponentRef Id="ProductComponentSdlDotNet" />
     </Feature>
 
     <UIRef Id="WixUI_Mondo" />
