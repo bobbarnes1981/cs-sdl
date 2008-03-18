@@ -65,7 +65,7 @@ namespace SdlDotNet.Core
         /// <summary>
         /// 
         /// </summary>
-        protected internal Sdl.SDL_Event EventStruct
+        public Sdl.SDL_Event EventStruct
         {
             get
             {
