@@ -84,7 +84,7 @@ namespace SdlDotNet.Core
         /// <summary>
         /// 
         /// </summary>
-        protected internal IntPtr Handle
+        public IntPtr Handle
         {
             get
             {
