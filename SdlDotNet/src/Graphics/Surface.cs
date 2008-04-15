@@ -56,28 +56,6 @@ namespace SdlDotNet.Graphics
 
     #endregion
 
-    #region ColorMask
-    /// <summary>
-    /// Color mask.
-    /// </summary>
-    public enum ColorMask
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        R,
-        /// <summary>
-        /// 
-        /// </summary>
-        G,
-        /// <summary>
-        /// 
-        /// </summary>
-        B
-    };
-
-    #endregion
-
     /// <summary>
     /// Represents an Sdl drawing surface.
     /// You can create instances of this class with the methods in the Video 
@@ -1310,61 +1288,61 @@ namespace SdlDotNet.Graphics
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dstPos"></param>
-        /// <param name="source"></param>
-        /// <param name="srcPos"></param>
-        /// <param name="sz"></param>
-        public void BlitAlpha(Point dstPos, Surface source, Point srcPos, Size sz)
-        {
-            source.Alpha = 128;
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="dstPos"></param>
+        ///// <param name="source"></param>
+        ///// <param name="srcPos"></param>
+        ///// <param name="sz"></param>
+        //public void BlitAlpha(Point dstPos, Surface source, Point srcPos, Size sz)
+        //{
+        //    source.Alpha = 128;
 
-            this.Blit(source, new Rectangle((short)dstPos.X,(short)dstPos.Y, (short)sz.Width,(short)sz.Height), new Rectangle( (short)srcPos.X, (short)srcPos.Y,(short)sz.Width,  (short)sz.Height));
-            source.Alpha = 255;
-        }
+        //    this.Blit(source, new Rectangle((short)dstPos.X,(short)dstPos.Y, (short)sz.Width,(short)sz.Height), new Rectangle( (short)srcPos.X, (short)srcPos.Y,(short)sz.Width,  (short)sz.Height));
+        //    source.Alpha = 255;
+        //}
 
         /// <summary>
-        /// Source color key. A mask color that will not be copied to other plains.
+        /// Source color key. A mask color that will not be copied to other Surfaces.
         /// </summary>
         public Color SourceColorKey
         {
-            get { return Color.FromArgb(colKey); }
+            get { return Color.FromArgb(colorKey); }
             set
             {
-                colorKey = Sdl.SDL_MapRGB(this.SurfaceStruct.format, value.R, value.G, value.B);
+                ColorKey = Sdl.SDL_MapRGB(this.SurfaceStruct.format, value.R, value.G, value.B);
             }
         }
 
-        private int colKey;
-        private int colorKey
+        private int colorKey;
+        private int ColorKey
         {
-            get { return colKey; }
-            set { colKey = value; Tao.Sdl.Sdl.SDL_SetColorKey(this.Handle, Sdl.SDL_SRCCOLORKEY | Sdl.SDL_RLEACCEL, colKey); }
+            get { return colorKey; }
+            set { colorKey = value; Tao.Sdl.Sdl.SDL_SetColorKey(this.Handle, Sdl.SDL_SRCCOLORKEY | Sdl.SDL_RLEACCEL, colorKey); }
         }
 
-        // retruns true if the color at the specified pixel is valid (opaque).
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        public bool HitTest(Point p) { return HitTest(p.X, p.Y); }
+        //// retruns true if the color at the specified pixel is valid (opaque).
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="p"></param>
+        ///// <returns></returns>
+        //public bool HitTest(Point p) { return HitTest(p.X, p.Y); }
 
-        // retruns true if the color at the specified pixel is valid (opaque).
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public bool HitTest(int x, int y)
-        {
-            if (x < 0 || x > this.Size.Width || y < 0 || y > this.Size.Height)
-                return false;
-            return ((getColorAt(x, y) & 0xffffff) == colorKey);
-        }
+        //// retruns true if the color at the specified pixel is valid (opaque).
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="x"></param>
+        ///// <param name="y"></param>
+        ///// <returns></returns>
+        //public bool HitTest(int x, int y)
+        //{
+        //    if (x < 0 || x > this.Size.Width || y < 0 || y > this.Size.Height)
+        //        return false;
+        //    return ((getColorAt(x, y) & 0xffffff) == colorKey);
+        //}
 
         // returns color at specified point.
         // the return value suited for current pixel format.
@@ -1391,7 +1369,7 @@ namespace SdlDotNet.Graphics
                     Surface.ConvertRecttoSDLRect(new System.Drawing.Rectangle());
                 Sdl.SDL_GetClipRect(this.Handle, ref sdlrect);
                 GC.KeepAlive(this);
-               return new System.Drawing.Rectangle(sdlrect.x, sdlrect.y, sdlrect.w, sdlrect.h);
+                return new System.Drawing.Rectangle(sdlrect.x, sdlrect.y, sdlrect.w, sdlrect.h);
             }
             set
             {
