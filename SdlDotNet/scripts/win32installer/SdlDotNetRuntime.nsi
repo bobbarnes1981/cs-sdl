@@ -1,9 +1,9 @@
 !verbose 3
 
-!define PRODUCT_NAME "SDL.NET Runtime"
+!define PRODUCT_NAME "SdlDotNet Runtime"
 !define PRODUCT_TYPE "runtime"
-!define PRODUCT_VERSION "6.0.1"
-!define PRODUCT_PUBLISHER "SDL.NET"
+!define PRODUCT_VERSION "6.1.0"
+!define PRODUCT_PUBLISHER "SdlDotNet"
 !define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\SdlDotNetRuntime"
@@ -12,7 +12,9 @@
 !define PRODUCT_DIR "..\..\dist"
 !define PRODUCT_PATH "${PRODUCT_DIR}\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
 !define PRODUCT_SOURCE "${PRODUCT_PATH}\source"
+!define PRODUCT_EXAMPLES "${PRODUCT_PATH}\examples"
 !define PRODUCT_BIN "${PRODUCT_PATH}\bin"
+!define PRODUCT_DEPS "${PRODUCT_PATH}\lib"
 !define PRODUCT_DOC "${PRODUCT_PATH}\doc"
 
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
@@ -20,7 +22,7 @@
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
 ;!define MUI_UNWELCOMEFINISHPAGE_BITMAP_NOSTRETCH
 
-BrandingText "© 2003-2007 David Hudson, http://cs-sdl.sourceforge.net/"
+BrandingText "© 2003-2008 David Hudson, http://cs-sdl.sourceforge.net/"
 SetCompressor lzma
 CRCCheck on
 
@@ -104,26 +106,26 @@ FunctionEnd
 
 Section "Runtime" SecRuntime
   SetOverwrite ifnewer
-  SetOutPath "$INSTDIR\runtime\bin"
-  File /r /x CVS /x *Particles* /x *OpenGl* /x *Gtk* ${PRODUCT_BIN}\assemblies\*.*
+  SetOutPath "$INSTDIR\bin"
+  File "${PRODUCT_BIN}\*"
 
-  SetOutPath "$INSTDIR\runtime\tools"
-  File /r ${PRODUCT_SOURCE}\tools\Prebuild\Prebuild.exe
+  SetOutPath "$INSTDIR\tools\prebuild"
+  File "${PRODUCT_SOURCE}\tools\prebuild\*"
 
-  SetOutPath "$INSTDIR\runtime\lib"
-  File /r /x CVS ${PRODUCT_BIN}\win32deps\*.*
+  SetOutPath "$INSTDIR\lib"
+  File "${PRODUCT_DEPS}\*"
   
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
   
   SetOutPath "$SYSDIR"
-  File /r /x CVS ${PRODUCT_BIN}\win32deps\*.*
+  File "${PRODUCT_DEPS}\*"
   
   Push "SdlDotNet"
-  Push $INSTDIR\runtime\bin
+  Push $INSTDIR\bin
   Call AddManagedDLL
   Push "Tao.Sdl"
-  Push $INSTDIR\runtime\bin
+  Push $INSTDIR\bin
   Call AddManagedDLL
   
 SectionEnd
@@ -152,7 +154,6 @@ Function un.DeleteManagedDLLKey
   Exch
   Exch $R1
  
- Call un.GACUnInstall
   DeleteRegKey HKLM "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
   DeleteRegKey HKCU "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
   DeleteRegKey HKLM "SOFTWARE\Microsoft\VisualStudio\8.0\AssemblyFolders\$R1"
@@ -171,13 +172,13 @@ LangString DESC_SecRuntime ${LANG_ENGLISH} "Installs the runtime libaries "
 
 
 Section -AdditionalIcons
-  WriteIniStr "$INSTDIR\runtime\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
+  WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
 SectionEnd
 
 Section -Post
-  WriteUninstaller "$INSTDIR\runtime\uninst.exe"
+  WriteUninstaller "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\runtime\uninst.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
@@ -187,13 +188,15 @@ Section Uninstall
   
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+  
+  Call un.GACUnInstall
 
   Push "SdlDotNet"
-  Push $INSTDIR\runtime\bin\assemblies
+  Push $INSTDIR\bin
   Call un.DeleteManagedDLLKey
   
   Push "Tao.Sdl"
-  Push $INSTDIR\runtime\bin\assemblies
+  Push $INSTDIR\bin
   Call un.DeleteManagedDLLKey
 
   RMDir /r "$INSTDIR"
@@ -273,13 +276,16 @@ Function IsSupportedWindowsVersion
 FunctionEnd
 
 Function GACInstall
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /install "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /install "$INSTDIR/runtime/bin/SdlDotNet.dll"'
+  nsExec::Exec '"$INSTDIR/tools/prebuild/prebuild.exe" /install "$INSTDIR\bin\Tao.Sdl.dll"'
+  nsExec::Exec '"$INSTDIR/tools/prebuild/prebuild.exe" /install "$INSTDIR\bin\SdlDotNet.dll"'
 
 FunctionEnd
 
 Function un.GACUnInstall
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /remove "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /remove "$INSTDIR/runtime/bin/SdlDotNet.dll"'
+  ;nsExec::Exec '"C:\Program Files\SdlDotNet/tools/prebuild/prebuild.exe" /remove "C:\Program Files\SdlDotNet\bin\Tao.Sdl.dll"'
+  ;nsExec::Exec '"C:\Program Files\SdlDotNet/tools/prebuild/prebuild.exe" /remove "C:\Program Files\SdlDotNet\bin\SdlDotNet.dll"'
+  nsExec::Exec '"$INSTDIR/tools/prebuild/prebuild.exe" /remove "$INSTDIR/bin\SdlDotNet.dll"'
+  nsExec::Exec '"$INSTDIR/tools/prebuild/prebuild.exe" /remove "$INSTDIR/bin\Tao.Sdl.dll"'
 
 FunctionEnd
+

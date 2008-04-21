@@ -76,10 +76,10 @@
 	    <property name="dist.dir" value="${dist.dir}/${dmg.dir}" />
 	</if>
 	<exec program="gacutil">
-	    <arg line="-i ${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies/SdlDotNet.dll"/>
+	    <arg line="-i ${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/bin/SdlDotNet.dll"/>
 	</exec>
 	<exec program="gacutil">
-	    <arg line="-i ${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies/Tao.Sdl.dll"/>
+	    <arg line="-i ${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/bin/Tao.Sdl.dll"/>
 	</exec>
 
     </target>
@@ -164,34 +164,34 @@
 		</fileset>
 	    </copy>
 	</if>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/bin">
 	    <fileset basedir="${src.dir}/${bin.dir}/${project.config}">
 		<include name="*.dll"/>
 		<include name="*.xml"/>
 	    </fileset>
 	</copy>
-	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/bin">
 	    <fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
 		<include name="${native.sdl}.dll"/>
 		<include name="${native.sdl}.xml"/>
 	    </fileset>
 	</copy>
 	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/bin">
 		<fileset basedir="${project::get-base-directory()}/${lib.dir}/net-2.0">
 		    <include name="${native.sdl}.dll.config"/>
 		</fileset>
 	    </copy>
 	</if>
 	<if test="${platform::is-unix()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/assemblies">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/bin">
 		<fileset basedir="${src.dir}">
 		    <include name="SdlDotNet.dll.config"/>
 		</fileset>
 	    </copy>
 	</if>
 	<if test="${platform::is-win32()}">
-	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/win32deps">
+	    <copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/lib">
 		<fileset basedir="${lib.dir}/win32deps">
 		    <include name="**"/>
 		</fileset>
