@@ -1,9 +1,9 @@
 !verbose 3
 
-!define PRODUCT_NAME "SDL.NET SDK"
+!define PRODUCT_NAME "SdlDotNet SDK"
 !define PRODUCT_TYPE "sdk"
-!define PRODUCT_VERSION "6.0.1"
-!define PRODUCT_PUBLISHER "SDL.NET"
+!define PRODUCT_VERSION "6.1.0"
+!define PRODUCT_PUBLISHER "SdlDotNet"
 !define PRODUCT_PACKAGE "sdldotnet"
 !define PRODUCT_WEB_SITE "http://cs-sdl.sourceforge.net"
 !define PRODUCT_TUTORIALS_WEB_SITE "http://cs-sdl.sourceforge.net/index.php/Category:Tutorials"
@@ -14,7 +14,9 @@
 !define PRODUCT_DIR "..\..\dist"
 !define PRODUCT_PATH "${PRODUCT_DIR}\${PRODUCT_PACKAGE}-${PRODUCT_VERSION}"
 !define PRODUCT_SOURCE "${PRODUCT_PATH}\source"
+!define PRODUCT_EXAMPLES "${PRODUCT_PATH}\examples"
 !define PRODUCT_BIN "${PRODUCT_PATH}\bin"
+!define PRODUCT_DEPS "${PRODUCT_PATH}\lib"
 !define PRODUCT_DOC "${PRODUCT_PATH}\doc"
 
 ;!define MUI_WELCOMEFINISHPAGE_BITMAP "SdlDotNetLogo.bmp"
@@ -115,23 +117,26 @@ FunctionEnd
 Section "Source" SecSrc
   SetOverwrite ifnewer
   
-  SetOutPath "$INSTDIR\sdk\tools"
-  File /r ${PRODUCT_SOURCE}\tools\*.*
+  SetOutPath "$INSTDIR\source\tools"
+  File /r "${PRODUCT_SOURCE}\tools\*"
 
-  SetOutPath "$INSTDIR\sdk\tests"
-  File /r /x obj /x CVS ${PRODUCT_SOURCE}\tests\*.*
+  SetOutPath "$INSTDIR\source\tests"
+  File /r "${PRODUCT_SOURCE}\tests\*"
 
-  SetOutPath "$INSTDIR\sdk\src"
-  File /r /x obj /x bin /x CVS ${PRODUCT_SOURCE}\src\*.*
+  SetOutPath "$INSTDIR\source\src"
+  File /r "${PRODUCT_SOURCE}\src\*"
   
-  SetOutPath "$INSTDIR\sdk\examples"
-  File /r /x obj /x bin /x CVS ${PRODUCT_SOURCE}\examples\*.*
+  SetOutPath "$INSTDIR\source\examples"
+  File /r "${PRODUCT_SOURCE}\examples\*"
 
-  SetOutPath "$INSTDIR\sdk\scripts"
-  File /r /x CVS ${PRODUCT_SOURCE}\scripts\*.*
+  SetOutPath "$INSTDIR\source\scripts"
+  File /r "${PRODUCT_SOURCE}\scripts\*"
 
-  SetOutPath "$INSTDIR\sdk"
-  File ${PRODUCT_SOURCE}\*.*
+  SetOutPath "$INSTDIR\source\lib"
+  File /r "${PRODUCT_SOURCE}\lib\*"
+
+  SetOutPath "$INSTDIR\source"
+  File "${PRODUCT_SOURCE}\*"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
@@ -140,23 +145,26 @@ SectionEnd
 
 Section "Runtime" SecRuntime
   SetOverwrite ifnewer
-  SetOutPath "$INSTDIR\runtime\bin"
-  File /r /x CVS /x *Particles* /x *OpenGl* /x *Gtk* ${PRODUCT_BIN}\assemblies\*.*
+  SetOutPath "$INSTDIR\bin"
+  File "${PRODUCT_BIN}\*"
 
-  SetOutPath "$INSTDIR\runtime\lib"
-  File /r /x CVS ${PRODUCT_BIN}\win32deps\*.*
+  SetOutPath "$INSTDIR\tools\prebuild"
+  File "${PRODUCT_SOURCE}\tools\prebuild\*"
+
+  SetOutPath "$INSTDIR\lib"
+  File "${PRODUCT_DEPS}\*"
   
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
   
   SetOutPath "$SYSDIR"
-  File /r /x CVS ${PRODUCT_BIN}\win32deps\*.*
+  File "${PRODUCT_DEPS}\*"
   
   Push "SdlDotNet"
-  Push $INSTDIR\runtime\bin
+  Push $INSTDIR\bin
   Call AddManagedDLL
   Push "Tao.Sdl"
-  Push $INSTDIR\runtime\bin
+  Push $INSTDIR\bin
   Call AddManagedDLL
   
 SectionEnd
@@ -166,21 +174,17 @@ Section "Examples" SecExamples
 
   CreateDirectory "$SMPROGRAMS\SdlDotNet"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Examples"
-  SetOutPath "$INSTDIR\sdk\bin\examples"
-  File /r /x CVS ${PRODUCT_BIN}\examples\*.*
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SdlDotNetExamples.lnk" "$INSTDIR\sdk\bin\examples\SdlDotNetExamples.exe"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\CDPlayer.lnk" "$INSTDIR\sdk\bin\examples\CDPlayer.exe"
+  SetOutPath "$INSTDIR\examples"
+  File /r "${PRODUCT_EXAMPLES}\*"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SdlDotNetExamples.lnk" "$INSTDIR\examples\SdlDotNetExamples.exe"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Examples\SdlDotNetCDPlayer.lnk" "$INSTDIR\examples\SdlDotNetCDPlayer.exe"
   CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation"
   CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet Help.lnk" "$INSTDIR\doc\SdlDotNet.chm"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.Particles Help.lnk" "$INSTDIR\sdk\bin\examples\SdlDotNet.Particles.chm"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.OpenGl Help.lnk" "$INSTDIR\sdk\bin\examples\SdlDotNet.OpenGl.chm"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\SdlDotNet.GtkSharp Help.lnk" "$INSTDIR\sdk\bin\examples\SdlDotNet.GtkSharp.chm"
   
-  CreateDirectory "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples"
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}_Tutorials.url" "InternetShortcut" "URL" "${PRODUCT_TUTORIALS_WEB_SITE}"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples\Tutorials.lnk" "$INSTDIR\${PRODUCT_NAME}_Tutorials.url"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials.lnk" "$INSTDIR\${PRODUCT_NAME}_Tutorials.url"
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}_Examples.url" "InternetShortcut" "URL" "${PRODUCT_EXAMPLES_WEB_SITE}"
-  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Tutorials and Examples\Examples.lnk" "$INSTDIR\${PRODUCT_NAME}_Examples.url"
+  CreateShortCut "$SMPROGRAMS\SdlDotNet\Documentation\Examples.lnk" "$INSTDIR\${PRODUCT_NAME}_Examples.url"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\SdlDotNet" "" $INSTDIR
@@ -232,12 +236,14 @@ Section Uninstall
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
 
+  Call un.GACUnInstall
+
   Push "SdlDotNet"
-  Push $INSTDIR\runtime\bin\assemblies
+  Push $INSTDIR\bin
   Call un.DeleteManagedDLLKey
   
   Push "Tao.Sdl"
-  Push $INSTDIR\runtime\bin\assemblies
+  Push $INSTDIR\bin
   Call un.DeleteManagedDLLKey
 
   RMDir /r "$INSTDIR"
@@ -249,7 +255,6 @@ Section Uninstall
   
   RMDir /r "$SMPROGRAMS\SdlDotNet"
  
-  
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
 
@@ -330,14 +335,14 @@ Function IsSupportedWindowsVersion
 FunctionEnd
 
 Function GACInstall
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /install "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /install "$INSTDIR/runtime/bin/SdlDotNet.dll"'
+  nsExec::Exec '"$INSTDIR/tools/prebuild/prebuild.exe" /install "$INSTDIR/bin/Tao.Sdl.dll"'
+  nsExec::Exec '"$INSTDIR/tools/prebuild/prebuild.exe" /install "$INSTDIR/bin/SdlDotNet.dll"'
 
 FunctionEnd
 
 Function un.GACUnInstall
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /remove "$INSTDIR/runtime/bin/Tao.Sdl.dll"'
-  nsExec::Exec '"$INSTDIR/runtime/tools/Prebuild.exe" /remove "$INSTDIR/runtime/bin/SdlDotNet.dll"'
+  nsExec::Exec '"$INSTDIR/tools/prebuild/prebuild.exe" /remove "$INSTDIR/bin/Tao.Sdl.dll"'
+  nsExec::Exec '"$INSTDIR/tools/prebuild/prebuild.exe" /remove "$INSTDIR/bin/SdlDotNet.dll"'
 
 FunctionEnd
 
@@ -346,7 +351,6 @@ Function un.DeleteManagedDLLKey
   Exch
   Exch $R1
  
- Call un.GACUnInstall
   DeleteRegKey HKLM "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
   DeleteRegKey HKCU "SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\$R1" 
   DeleteRegKey HKLM "SOFTWARE\Microsoft\VisualStudio\8.0\AssemblyFolders\$R1"
