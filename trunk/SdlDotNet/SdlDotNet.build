@@ -280,5 +280,16 @@
         <echo message="Generating all documentation from all builds" />
         <nant buildfile="src/SdlDotNet.dll.build" target="doc" />
     </target>
+
+    <target name="create-installer" depends="package" description="Create Installer file">
+	<if test="${platform::is-unix() and not is-osx}">
+	</if>
+	<if test="${platform::is-win32()}">
+	    <exec program="C:\Program Files\NSIS\makensis.exe" commandline="setup/windows/SdlDotNetRuntime.nsi" />
+	    <exec program="C:\Program Files\NSIS\makensis.exe" commandline="setup/windows/SdlDotNetSDK.nsi" />
+	</if>
+	<if test="${is-osx}">
+	</if>
+    </target>
 </project>
 
