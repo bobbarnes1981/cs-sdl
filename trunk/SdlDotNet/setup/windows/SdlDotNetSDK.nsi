@@ -129,8 +129,8 @@ Section "Source" SecSrc
   SetOutPath "$INSTDIR\source\examples"
   File /r "${PRODUCT_SOURCE}\examples\*"
 
-  SetOutPath "$INSTDIR\source\scripts"
-  File /r "${PRODUCT_SOURCE}\scripts\*"
+  SetOutPath "$INSTDIR\source\setup"
+  File /r "${PRODUCT_SOURCE}\setup\*"
 
   SetOutPath "$INSTDIR\source\lib"
   File /r "${PRODUCT_SOURCE}\lib\*"
