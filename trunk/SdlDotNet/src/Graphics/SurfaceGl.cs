@@ -188,21 +188,6 @@ namespace SdlDotNet.Graphics
     [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Correct Spelling")]
     public class SurfaceGl : IDisposable
     {
-        private const CallingConvention CALLING_CONVENTION = CallingConvention.Winapi;
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="internalFormat"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="format"></param>
-        /// <param name="type"></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        [DllImport("glu32.dll", CallingConvention = CALLING_CONVENTION), SuppressUnmanagedCodeSecurity]
-        static extern int gluBuild2DMipmaps(int target, int internalFormat, int width, int height, int format, int type, [In] IntPtr data);
-
         #region Static
         /// <summary>
         /// 
@@ -359,76 +344,97 @@ namespace SdlDotNet.Graphics
         #endregion
 
         delegate void glLoadIndentityDelegate();
-        static glLoadIndentityDelegate glLoadIdentity;
+        static glLoadIndentityDelegate glLoadIdentity = (glLoadIndentityDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glLoadIdentity"), typeof(glLoadIndentityDelegate));
+
         delegate void glBindTextureDeledate(int target, int texture);
-        static glBindTextureDeledate glBindTexture;
+        static glBindTextureDeledate glBindTexture = (glBindTextureDeledate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBindTexture"), typeof(glBindTextureDeledate));
+
         delegate void glTexParameteriDelegate(int target, int pname, int param);
-        static glTexParameteriDelegate glTexParameteri;
+        static glTexParameteriDelegate glTexParameteri = (glTexParameteriDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexParameteri"), typeof(glTexParameteriDelegate));
+
         delegate int glIsTextureDelegate(int texture);
-        static glIsTextureDelegate glIsTexture;
+        static glIsTextureDelegate glIsTexture = (glIsTextureDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glIsTexture"), typeof(glIsTextureDelegate));
+
         delegate void glBeginDelegate(int mode);
-        static glBeginDelegate glBegin;
+        static glBeginDelegate glBegin = (glBeginDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBegin"), typeof(glBeginDelegate));
+
         delegate void glEndDelegate();
-        static glEndDelegate glEnd;
+        static glEndDelegate glEnd = (glEndDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glEnd"), typeof(glEndDelegate));
+
         delegate void glTexCoord2fDelegate(float s, float t);
-        static glTexCoord2fDelegate glTexCoord2f;
+        static glTexCoord2fDelegate glTexCoord2f = (glTexCoord2fDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexCoord2f"), typeof(glTexCoord2fDelegate));
+
         delegate void glVertex2fDelegate(float x, float y);
-        static glVertex2fDelegate glVertex2f;
+        static glVertex2fDelegate glVertex2f = (glVertex2fDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glVertex2f"), typeof(glVertex2fDelegate));
+
         delegate void glPushAttribDelegate(int mask);
-        static glPushAttribDelegate glPushAttrib;
+        static glPushAttribDelegate glPushAttrib = (glPushAttribDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPushAttrib"), typeof(glPushAttribDelegate));
+
         delegate void glPopAttribDelegate();
-        static glPopAttribDelegate glPopAttrib;
+        static glPopAttribDelegate glPopAttrib = (glPopAttribDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPopAttrib"), typeof(glPopAttribDelegate));
+
         delegate void glDisableDelegate(int cap);
-        static glDisableDelegate glDisable;
+        static glDisableDelegate glDisable = (glDisableDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glDisable"), typeof(glDisableDelegate));
+
         delegate void glEnableDelegate(int cap);
-        static glEnableDelegate glEnable;
+        static glEnableDelegate glEnable = (glEnableDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glEnable"), typeof(glEnableDelegate));
+
         delegate void glBlendFuncDelegate(int sfactor, int dfactor);
-        static glBlendFuncDelegate glBlendFunc;
+        static glBlendFuncDelegate glBlendFunc = (glBlendFuncDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBlendFunc"), typeof(glBlendFuncDelegate));
+
         delegate void glViewportDelegate(int x, int y, int width, int height);
-        static glViewportDelegate glViewport;
+        static glViewportDelegate glViewport = (glViewportDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glViewport"), typeof(glViewportDelegate));
+
         delegate void glMatrixModeDelegate(int mode);
-        static glMatrixModeDelegate glMatrixMode;
+        static glMatrixModeDelegate glMatrixMode = (glMatrixModeDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glMatrixMode"), typeof(glMatrixModeDelegate));
+
         delegate void glPopMatrixDelegate();
-        static glPopMatrixDelegate glPopMatrix;
+        static glPopMatrixDelegate glPopMatrix = (glPopMatrixDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPopMatrix"), typeof(glPopMatrixDelegate));
+
         delegate void glPushMatrixDelegate();
-        static glPushMatrixDelegate glPushMatrix;
+        static glPushMatrixDelegate glPushMatrix = (glPushMatrixDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPushMatrix"), typeof(glPushMatrixDelegate));
+
         delegate void glTexEnvfDelegate(int target, int pname, float param);
-        static glTexEnvfDelegate glTexEnvf;
+        static glTexEnvfDelegate glTexEnvf = (glTexEnvfDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexEnvf"), typeof(glTexEnvfDelegate));
+
         delegate void glOrthoDelegate(double left, double right, double bottom, double top, double zNear, double zFar);
-        static glOrthoDelegate glOrtho;
+        static glOrthoDelegate glOrtho = (glOrthoDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glOrtho"), typeof(glOrthoDelegate));
+
         delegate void glTexImage2DDelegate(int target, int level, int internalformat, int width, int height, int border, int format, int type, IntPtr pixels);
-        static glTexImage2DDelegate glTexImage2D;
+        static glTexImage2DDelegate glTexImage2D = (glTexImage2DDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexImage2D"), typeof(glTexImage2DDelegate));
+
         delegate void glGenTexturesDelegate(int n, int[] textures);
-        static glGenTexturesDelegate glGenTextures;
+        static glGenTexturesDelegate glGenTextures = (glGenTexturesDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glGenTextures"), typeof(glGenTexturesDelegate));
+
         delegate void glDeleteTexturesDelegate(int n, int[] textures);
-        static glDeleteTexturesDelegate glDeleteTextures;
+        static glDeleteTexturesDelegate glDeleteTextures = (glDeleteTexturesDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glDeleteTextures"), typeof(glDeleteTexturesDelegate));
 
         #region Constructors
-        static SurfaceGl()
-        {
-            glLoadIdentity = (glLoadIndentityDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glLoadIdentity"), typeof(glLoadIndentityDelegate));
-            glBindTexture = (glBindTextureDeledate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBindTexture"), typeof(glBindTextureDeledate));
-            glTexParameteri = (glTexParameteriDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexParameteri"), typeof(glTexParameteriDelegate));
-            glIsTexture = (glIsTextureDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glIsTexture"), typeof(glIsTextureDelegate));
-            glBegin = (glBeginDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBegin"), typeof(glBeginDelegate));
-            glEnd = (glEndDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glEnd"), typeof(glEndDelegate));
-            glTexCoord2f = (glTexCoord2fDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexCoord2f"), typeof(glTexCoord2fDelegate));
-            glVertex2f = (glVertex2fDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glVertex2f"), typeof(glVertex2fDelegate));
-            glPushAttrib = (glPushAttribDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPushAttrib"), typeof(glPushAttribDelegate));
-            glPopAttrib = (glPopAttribDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPopAttrib"), typeof(glPopAttribDelegate));
-            glDisable = (glDisableDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glDisable"), typeof(glDisableDelegate));
-            glEnable = (glEnableDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glEnable"), typeof(glEnableDelegate));
-            glBlendFunc = (glBlendFuncDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBlendFunc"), typeof(glBlendFuncDelegate));
-            glViewport = (glViewportDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glViewport"), typeof(glViewportDelegate));
-            glMatrixMode = (glMatrixModeDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glMatrixMode"), typeof(glMatrixModeDelegate));
-            glPushMatrix = (glPushMatrixDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPushMatrix"), typeof(glPushMatrixDelegate));
-            glPopMatrix = (glPopMatrixDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPopMatrix"), typeof(glPopMatrixDelegate));
-            glTexEnvf = (glTexEnvfDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexEnvf"), typeof(glTexEnvfDelegate));
-            glOrtho = (glOrthoDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glOrtho"), typeof(glOrthoDelegate));
-            glTexImage2D = (glTexImage2DDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexImage2D"), typeof(glTexImage2DDelegate));
-            glGenTextures = (glGenTexturesDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glGenTextures"), typeof(glGenTexturesDelegate));
-            glDeleteTextures = (glDeleteTexturesDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glDeleteTextures"), typeof(glDeleteTexturesDelegate));
-        }
+        //static SurfaceGl()
+        //{
+            //glLoadIdentity = (glLoadIndentityDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glLoadIdentity"), typeof(glLoadIndentityDelegate));
+            //glBindTexture = (glBindTextureDeledate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBindTexture"), typeof(glBindTextureDeledate));
+            //glTexParameteri = (glTexParameteriDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexParameteri"), typeof(glTexParameteriDelegate));
+            //glIsTexture = (glIsTextureDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glIsTexture"), typeof(glIsTextureDelegate));
+            //glBegin = (glBeginDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBegin"), typeof(glBeginDelegate));
+            //glEnd = (glEndDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glEnd"), typeof(glEndDelegate));
+            //glTexCoord2f = (glTexCoord2fDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexCoord2f"), typeof(glTexCoord2fDelegate));
+            //glVertex2f = (glVertex2fDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glVertex2f"), typeof(glVertex2fDelegate));
+            //glPushAttrib = (glPushAttribDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPushAttrib"), typeof(glPushAttribDelegate));
+            //glPopAttrib = (glPopAttribDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPopAttrib"), typeof(glPopAttribDelegate));
+            //glDisable = (glDisableDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glDisable"), typeof(glDisableDelegate));
+            //glEnable = (glEnableDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glEnable"), typeof(glEnableDelegate));
+            //glBlendFunc = (glBlendFuncDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glBlendFunc"), typeof(glBlendFuncDelegate));
+            //glViewport = (glViewportDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glViewport"), typeof(glViewportDelegate));
+            //glMatrixMode = (glMatrixModeDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glMatrixMode"), typeof(glMatrixModeDelegate));
+            //glPushMatrix = (glPushMatrixDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPushMatrix"), typeof(glPushMatrixDelegate));
+            //glPopMatrix = (glPopMatrixDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glPopMatrix"), typeof(glPopMatrixDelegate));
+            //glTexEnvf = (glTexEnvfDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexEnvf"), typeof(glTexEnvfDelegate));
+            //glOrtho = (glOrthoDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glOrtho"), typeof(glOrthoDelegate));
+            //glTexImage2D = (glTexImage2DDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glTexImage2D"), typeof(glTexImage2DDelegate));
+            //glGenTextures = (glGenTexturesDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glGenTextures"), typeof(glGenTexturesDelegate));
+            //glDeleteTextures = (glDeleteTexturesDelegate)Marshal.GetDelegateForFunctionPointer(Sdl.SDL_GL_GetProcAddress("glDeleteTextures"), typeof(glDeleteTexturesDelegate));
+        //}
         /// <summary>
         /// Creates a new Instance of SurfaceGl.
         /// </summary>
@@ -795,7 +801,7 @@ namespace SdlDotNet.Graphics
                 }
                 else
                 {
-                    gluBuild2DMipmaps(GL_TEXTURE_2D, textureSurface.BytesPerPixel, textureWidth, textureHeight, GL_RGBA, GL_UNSIGNED_BYTE, textureSurface.Pixels);
+                    NativeMethods.gluBuild2DMipmaps(GL_TEXTURE_2D, textureSurface.BytesPerPixel, textureWidth, textureHeight, GL_RGBA, GL_UNSIGNED_BYTE, textureSurface.Pixels);
                 }
 
                 needRefresh = false;

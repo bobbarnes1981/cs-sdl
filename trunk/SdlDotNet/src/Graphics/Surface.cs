@@ -339,7 +339,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         /// <param name="rect"></param>
         /// <returns></returns>
-        public static Sdl.SDL_Rect ConvertRecttoSDLRect(
+        public static Sdl.SDL_Rect ConvertRectToSdlRect(
             System.Drawing.Rectangle rect)
         {
             return new Sdl.SDL_Rect(
@@ -583,7 +583,7 @@ namespace SdlDotNet.Graphics
                 throw (new ObjectDisposedException(this.ToString()));
             }
 
-            Sdl.SDL_Rect sdlrect = ConvertRecttoSDLRect(rectangle);
+            Sdl.SDL_Rect sdlrect = ConvertRectToSdlRect(rectangle);
 
             int result = Sdl.SDL_FillRect(this.Handle, ref sdlrect, GetColorValue(color));
             GC.KeepAlive(this);
@@ -1048,8 +1048,8 @@ namespace SdlDotNet.Graphics
             {
                 throw (new ObjectDisposedException(this.ToString()));
             }
-            Sdl.SDL_Rect s = Surface.ConvertRecttoSDLRect(sourceRectangle);
-            Sdl.SDL_Rect d = Surface.ConvertRecttoSDLRect(destinationRectangle);
+            Sdl.SDL_Rect s = Surface.ConvertRectToSdlRect(sourceRectangle);
+            Sdl.SDL_Rect d = Surface.ConvertRectToSdlRect(destinationRectangle);
             int result = Sdl.SDL_BlitSurface(sourceSurface.Handle, ref s, this.Handle, ref d);
             GC.KeepAlive(this);
             if (result != (int)SdlFlag.Success)
@@ -1308,10 +1308,10 @@ namespace SdlDotNet.Graphics
         /// </summary>
         public Color SourceColorKey
         {
-            get { return Color.FromArgb(colorKey); }
+            get { return Color.FromArgb(this.ColorKey); }
             set
             {
-                ColorKey = Sdl.SDL_MapRGB(this.SurfaceStruct.format, value.R, value.G, value.B);
+                this.ColorKey = Sdl.SDL_MapRGB(this.SurfaceStruct.format, value.R, value.G, value.B);
             }
         }
 
@@ -1347,12 +1347,12 @@ namespace SdlDotNet.Graphics
         // returns color at specified point.
         // the return value suited for current pixel format.
         // outrange point will raise an error.
-        int getColorAt(int x, int y)
-        {
-            Color c = this.GetPixel(new Point(x, y));
-            return c.R & c.G & c.B;
+        //int getColorAt(int x, int y)
+        //{
+        //    Color c = this.GetPixel(new Point(x, y));
+        //    return c.R & c.G & c.B;
 
-        }
+        //}
 
         /// <summary>
         /// Sets/Gets the clipping rectangle for the surface
@@ -1366,14 +1366,14 @@ namespace SdlDotNet.Graphics
                     throw (new ObjectDisposedException(this.ToString()));
                 }
                 Sdl.SDL_Rect sdlrect =
-                    Surface.ConvertRecttoSDLRect(new System.Drawing.Rectangle());
+                    Surface.ConvertRectToSdlRect(new System.Drawing.Rectangle());
                 Sdl.SDL_GetClipRect(this.Handle, ref sdlrect);
                 GC.KeepAlive(this);
                 return new System.Drawing.Rectangle(sdlrect.x, sdlrect.y, sdlrect.w, sdlrect.h);
             }
             set
             {
-                Sdl.SDL_Rect sdlrect = Surface.ConvertRecttoSDLRect(value);
+                Sdl.SDL_Rect sdlrect = Surface.ConvertRectToSdlRect(value);
                 Sdl.SDL_SetClipRect(this.Handle, ref sdlrect);
                 GC.KeepAlive(this);
             }
@@ -2479,7 +2479,7 @@ namespace SdlDotNet.Graphics
             Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangles.Length];
             for (int i = 0; i < rectangles.Length; i++)
             {
-                rects[i] = Surface.ConvertRecttoSDLRect(rectangles[i]);
+                rects[i] = Surface.ConvertRectToSdlRect(rectangles[i]);
             }
             Sdl.SDL_UpdateRects(this.Handle, rects.Length, rects);
             GC.KeepAlive(this);
@@ -2502,7 +2502,7 @@ namespace SdlDotNet.Graphics
             Sdl.SDL_Rect[] rects = new Sdl.SDL_Rect[rectangles.Count];
             for (int i = 0; i < rectangles.Count; i++)
             {
-                rects[i] = Surface.ConvertRecttoSDLRect(rectangles[i]);
+                rects[i] = Surface.ConvertRectToSdlRect(rectangles[i]);
             }
             Sdl.SDL_UpdateRects(this.Handle, rects.Length, rects);
             GC.KeepAlive(this);
