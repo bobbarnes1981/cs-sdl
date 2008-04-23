@@ -102,3 +102,7 @@ using System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", Scope = "member", Target = "SdlDotNet.Graphics.Surface.SetPixels(System.Drawing.Point,System.Drawing.Color[,]):System.Void", MessageId = "1#")]
 [module: SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Scope = "member", Target = "SdlDotNet.Graphics.MarshalHelper..cctor()")]
 [module: SuppressMessage("Microsoft.Performance", "CA1802:UseLiteralsWhereAppropriate", Scope = "member", Target = "SdlDotNet.Graphics.MarshalHelper.offset")]
+[module: SuppressMessage("Microsoft.Naming", "CA1705:LongAcronymsShouldBePascalCased", Scope = "member", Target = "SdlDotNet.Graphics.OverlayFormat.UYVY", MessageId = "Member")]
+[module: SuppressMessage("Microsoft.Naming", "CA1705:LongAcronymsShouldBePascalCased", Scope = "member", Target = "SdlDotNet.Graphics.OverlayFormat.YVYU", MessageId = "Member")]
+[module: SuppressMessage("Microsoft.Naming", "CA1705:LongAcronymsShouldBePascalCased", Scope = "member", Target = "SdlDotNet.Graphics.OverlayFormat.IYUV", MessageId = "Member")]
+[module: SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage", Scope = "member", Target = "SdlDotNet.Graphics.NativeMethods.gluBuild2DMipmaps(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.IntPtr):System.Int32")]

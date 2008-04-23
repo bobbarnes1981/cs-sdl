@@ -188,8 +188,7 @@ namespace SdlDotNet.Graphics
     /// <summary>
     /// 
     /// </summary>
-    [FlagsAttribute]
-    public enum OverlayFormats
+    public enum OverlayFormat
     {
         /// <summary>
         /// 
