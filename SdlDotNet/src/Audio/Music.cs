@@ -177,8 +177,15 @@ namespace SdlDotNet.Audio
         /// </param>
         public void Play(int numberOfTimes)
         {
-            MusicPlayer.CurrentMusic = this;
-            MusicPlayer.Play(numberOfTimes);
+            try
+            {
+                MusicPlayer.CurrentMusic = this;
+                MusicPlayer.Play(numberOfTimes);
+            }
+            catch (DivideByZeroException)
+            {
+                // Linux audio problem
+            }
         }
 
         /// <summary>
