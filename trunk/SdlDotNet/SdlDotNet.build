@@ -289,7 +289,7 @@
 	    <exec program="C:\Program Files\NSIS\makensis.exe" commandline="setup/windows/SdlDotNetSDK.nsi" />
 	</if>
 	<if test="${is-osx}">
-	    <exec program="hdiutil" commandline="create -srcfolder ${dist.dir}/${string::to-lower(project::get-name())}-${project.version} ${string::to-lower(project::get-name())}-${project.version}" />
+	    <exec program="hdiutil" commandline="create -srcfolder ${dist.dir}/${string::to-lower(project::get-name())}-${project.version} ${dist.dir}/${dmg.dir}" />
 	</if>
     </target>
 </project>
