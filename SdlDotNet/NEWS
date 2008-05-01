@@ -11,7 +11,7 @@ A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changel
 SDL.NET is licensed under the LGPL.
 
 ===6.1.0===
-David Hudson 01 May 2008
+David Hudson 02 May 2008
 * Update to SDL 1.2.13 and the TaoFramework 2.1 releases.
 * Consolidated SdlDotNet.Particles and SdlDotNet.OpenGL into the main SdlDotNet assembly.
 * Exposed some internal handles in the Surface and Event classes to make it easier to use Tao.Sdl and SdlDotNet at the same time.
