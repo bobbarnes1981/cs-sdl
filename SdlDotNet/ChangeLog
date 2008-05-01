@@ -1,3 +1,18 @@
+===6.1.0===
+David Hudson 01 May 2008
+* Update to SDL 1.2.13 and the TaoFramework 2.1 releases.
+* Consolidated SdlDotNet.Particles and SdlDotNet.OpenGL into the main SdlDotNet assembly.
+* Exposed some internal handles in the Surface and Event classes to make it easier to use Tao.Sdl and SdlDotNet at the same time.
+* Removed a lot of dependencies in the examples. All examples that used Tao.FreeGlut, Tao.Windows.Platform, SdlDotNet.Gtk have been removed. This makes packaging, support and cross-platform functionality much simpler.
+* Fixed a bug where the MouseMotion Event for the SurfaceControl would only fire if a Mouse Button was pressed. (Thanks Zerkel)
+* Fixed a regression bug in SurfaceControl so MouseWheel events fire properly. (Thanks YAYitsAndrew)
+* Fixed Unicode bug in the Keyboard and KeyboardEventArgs. (Thanks Silicon)
+* Fixed bug where the maximum FPS possible was very low.
+* Bioslayer added options and overloads to SurfaceGl.
+* Cached Pixel information in the Surface class for better performance.
+* Fixed uninstall problems in the NSIS installer.
+* Many FXCop fixes
+
 ===6.0.0===
 David Hudson 05 May 2007
 * All examples use a Main() method instead of a Run() method for startup. This eases the re-use of the examples, especially the SimpleExample and Template.

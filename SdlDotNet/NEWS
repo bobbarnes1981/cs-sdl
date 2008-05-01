@@ -1,13 +1,29 @@
 === Release Summary ===
 SDL.NET is a set of object-oriented CLS-compliant .NET 2.0 bindings for the SDL multimedia library. It provides high-level access to audio, keyboard, mouse, joystick, TrueType fonts, various image formats, sound mixing, MPEG-1 movies, 2D video framebuffer and 3D hardware via OpenGL.
 
-This release fully leverages .NET 2.0 functionality. This release uses the latest SDL library release (1.2.11). The API has been completely revamped with reorganized namespaces, consolidated method names and generics. The Sprite and Audio systems have been revamped. A library that integrates SDL.NET and Gtk# has been added. The OpenGl integration library has been rewritten. Many examples have been added to the new examples browser application.
+This release uses the latest SDL library release (1.2.13). SdlDotNet.Particles and SdlDotNet.OpenGL have been consolidated into the main SdlDotNet assembly.
+Using Tao.Sdl and SdlDotNet at the same time is now much easier. All examples that used Tao.FreeGlut, Tao.Windows.Platform, SdlDotNet.Gtk have been removed. This makes packaging, support and cross-platform functionality much simpler.
 
 Documentation and downloads are available at http://cs-sdl.sourceforge.net.
 
 A full changelog can be found at http://cs-sdl.sourceforge.net/index.php/Changelog
 
 SDL.NET is licensed under the LGPL.
+
+===6.1.0===
+David Hudson 01 May 2008
+* Update to SDL 1.2.13 and the TaoFramework 2.1 releases.
+* Consolidated SdlDotNet.Particles and SdlDotNet.OpenGL into the main SdlDotNet assembly.
+* Exposed some internal handles in the Surface and Event classes to make it easier to use Tao.Sdl and SdlDotNet at the same time.
+* Removed a lot of dependencies in the examples. All examples that used Tao.FreeGlut, Tao.Windows.Platform, SdlDotNet.Gtk have been removed. This makes packaging, support and cross-platform functionality much simpler.
+* Fixed a bug where the MouseMotion Event for the SurfaceControl would only fire if a Mouse Button was pressed. (Thanks Zerkel)
+* Fixed a regression bug in SurfaceControl so MouseWheel events fire properly. (Thanks YAYitsAndrew)
+* Fixed Unicode bug in the Keyboard and KeyboardEventArgs. (Thanks Silicon)
+* Fixed bug where the maximum FPS possible was very low.
+* Bioslayer added options and overloads to SurfaceGl.
+* Cached Pixel information in the Surface class for better performance.
+* Fixed uninstall problems in the NSIS installer.
+* Many FXCop fixes
 
 ===6.0.0===
 David Hudson 05 May 2007
