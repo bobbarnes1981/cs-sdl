@@ -1,0 +1,605 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F6147BF0-9807-4CD9-832E-AD42FC833288}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>SdlDotNetExamples</AssemblyName>
+    <AssemblyOriginatorKeyFile>../../src/SdlDotNet.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SdlDotNetExamples</RootNamespace>
+    <StartupObject>SdlDotNetExamples.SdlDotNetExamplesBrowser</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE;CODE_ANALYSIS</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>True</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <RemoveIntegerChecks>False</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1595</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>False</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <RemoveIntegerChecks>False</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>1595</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+      <HintPath>\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+      <HintPath>\System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+      <Name>Tao.Sdl</Name>
+      <HintPath>../../lib/net-2.0\Tao.Sdl.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.OpenGl">
+      <Name>Tao.OpenGl</Name>
+      <HintPath>../../lib/net-2.0\Tao.OpenGl.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SdlDotNet.csproj">
+      <Name>SdlDotNet</Name>
+      <Project>{7B28E1B7-FADB-4D0A-BA54-77E2BE941418}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.ico">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SdlDotNetExamplesBrowser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SharpNes\EngineBase.cs" />
+    <Compile Include="SharpNes\Nes\Cartridge.cs" />
+    <Compile Include="SharpNes\Nes\Joypad.cs" />
+    <Compile Include="SharpNes\Nes\Mapper.cs" />
+    <Compile Include="SharpNes\Nes\Nes6502.cs" />
+    <Compile Include="SharpNes\Nes\NesEngine.cs" />
+    <Compile Include="SharpNes\Nes\Ppu.cs" />
+    <Compile Include="SharpNes\SharpNesMain.cs" />
+    <Compile Include="SharpNes\VideoNes.cs" />
+    <Compile Include="TextButtonSprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Actor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Anime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Collider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Dissolver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\DissolverRandomCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Engine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Isometric.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\IsotopeMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Keys.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\LeadActor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Monster.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Object3d.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\ObjectGravity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\ObjectPortable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\ObjectTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Physics.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Pointing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Portal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Scene.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Simulator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Skin.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\SkinsLib.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Sprites.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\Vector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Isotope\View.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe001.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe002.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe003.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe004.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe005.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe006.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe007.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe008.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe009.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe010.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe011.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe012.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe016.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe018.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe019.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe020.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe023.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe025.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe026.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NeHe\NeHe034.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\Jitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\JitterPoint.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookAAIndex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookAAPoly.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookAARgb.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookAlpha.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookBezierCurve.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookBezierMesh.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookBezierSurface.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookChecker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookCheckerOld.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookDisplayList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookDouble.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookDrawF.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookFeedback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookFont.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookHello.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookImage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookLines.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookMipMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookNurbs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookPickDepth.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookPickSquare.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookPlane.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookPolygonStippling.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookQuadric.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookSelect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookSmooth.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookStroke.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookSurface.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookSurfaceOld.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookTess.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookTessWind.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookTexBind.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookTexSub.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookTextureProxies.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookTextureSurf.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookTorus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookTrim.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookUnproject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookVertexArray.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RedBook\RedBookWrap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\Entity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\EntityMoveEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\EntityMoveRequestEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\EntityPlaceEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\EntitySprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\EventManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\Game.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\GameStatusEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\GameView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\InputController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\LogFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\Map.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\MapBuiltEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\Names.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\Player.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\Sector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\SectorSprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SimpleGame\SimpleGameMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\AudioExample.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\Bomb.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\BombRun.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\BounceSprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\BounceSprites.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\Bullet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\FireEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\FontExample.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\Gears.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\HelloWorld.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\HeroExample.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\JoystickExample.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\MoviePlayer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\OpenGlFont.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\ParticlesExample.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\Player.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\PongExample.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\PrimitivesExample.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\Rectangles.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\SimpleExample.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\SnowDemo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\Snowflake.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\SpriteCollectionSort.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\StreamingAudio.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\Template.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmallDemos\TextItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\BounceMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\BounceSprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\BoundedSprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\BoundedTextSprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\DemoMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\DragMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\DragSprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\FontMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\MultipleMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\SpriteDemosMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteDemos\ViewportMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\Block.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\BlockGrid.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\BlueSquare.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\BouncingSquare.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\Enums.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\Events.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\GameArea.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\GameException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\GameObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\MyGameArea.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\NullBlock.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\Scoreboard.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\TriadGame.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\TriadMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\TriadTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Triad\Utilities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
