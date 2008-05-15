@@ -648,7 +648,7 @@ namespace SdlDotNet.Core
         }
 
         /// <summary>
-        /// Gets and sets the length of the vector. Direction part needs to be updatet
+        /// Gets and sets the length of the vector. Direction part needs to be updated
         /// </summary>
         public float Length
         {
@@ -662,6 +662,17 @@ namespace SdlDotNet.Core
                 m_x = (float)(Math.Cos(direction) * value);
                 m_y = (float)(Math.Sin(direction) * value);
             }
+        }
+
+        /// <summary>
+        /// Returns quare of the length 
+        /// </summary>
+        public float SquareLength 
+        { 
+            get 
+            { 
+                return (m_x * m_x) + (m_y * m_y) + (m_z * m_z); 
+            } 
         }
 
         /// <summary>
