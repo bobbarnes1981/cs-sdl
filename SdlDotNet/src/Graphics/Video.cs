@@ -64,7 +64,7 @@ namespace SdlDotNet.Graphics
         /// </summary>
         BufferSize = Sdl.SDL_GL_BUFFER_SIZE,
         /// <summary>
-        /// 0 or 1, enable or disable double buffering
+        /// 0 to disable or 1 to enable double buffering
         /// </summary>
         DoubleBuffer = Sdl.SDL_GL_DOUBLEBUFFER,
         /// <summary>
@@ -959,11 +959,11 @@ namespace SdlDotNet.Graphics
                 int result = Video.GLGetAttribute(OpenGLAttr.DoubleBuffer);
                 if (result == 1)
                 {
-                    return false;
+                    return true;
                 }
                 else if (result == 0)
                 {
-                    return true;
+                    return false;
                 }
                 else
                 {
@@ -975,11 +975,11 @@ namespace SdlDotNet.Graphics
             {
                 if (value == true)
                 {
-                    Video.GLSetAttribute(OpenGLAttr.DoubleBuffer, 0);
+                    Video.GLSetAttribute(OpenGLAttr.DoubleBuffer, 1);
                 }
                 else
                 {
-                    Video.GLSetAttribute(OpenGLAttr.DoubleBuffer, 1);
+                    Video.GLSetAttribute(OpenGLAttr.DoubleBuffer, 0);
                 }
             }
         }
