@@ -99,10 +99,10 @@ namespace SdlDotNet.Graphics
         #region Constructors and Destructors
 
         /// <summary>
-        /// 
+        /// Use this in conjuntion with Tao.Sdl
         /// </summary>
         /// <param name="handle"></param>
-        internal Surface(IntPtr handle)
+        public Surface(IntPtr handle)
         {
             this.Handle = handle;
         }
