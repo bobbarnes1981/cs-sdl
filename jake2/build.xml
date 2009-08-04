@@ -5,7 +5,7 @@
          classname="com.izforge.izpack.ant.IzPackTask"/>
          
 	<!-- properties -->
-	<property name="version" value="cvs"/> 
+	<property name="version" value="svn"/> 
 	<property name="src" location="src"/>
 	<property name="test" location="test"/>
 	<property name="build" location="build"/>
@@ -13,9 +13,6 @@
 
 	<!-- different classpaths -->
 	<path id="build.class.path">
-		<pathelement location="lib/jogl/jogl.jar"/>
-		<pathelement location="lib/jogl/gluegen-rt.jar"/>
-		<pathelement location="lib/joal/joal.jar"/>
 		<pathelement location="lib/lwjgl/lwjgl.jar"/>
 		<pathelement location="lib/lwjgl/lwjgl_util.jar"/>
 		<pathelement location="${java.home}/lib/plugin.jar"/>
@@ -62,49 +59,19 @@
 	<!-- copy files -->
 	<target name="copy">
 		<copy todir="${dist}/lib">
-			<fileset dir="lib/jogl">
-				<include name="*.jar"/>
-			</fileset>
-			<fileset dir="lib/joal">
-				<include name="*.jar"/>
-			</fileset>
 			<fileset dir="lib/lwjgl">
 				<include name="*.jar"/>
 			</fileset>
-		</copy>
-		<copy todir="${dist}/lib/linux">
-			<fileset dir="lib/jogl/linux">
-				<include name="*"/>
-			</fileset>
-			<fileset dir="lib/joal/linux">
-				<include name="*"/>
-			</fileset>			
 		</copy>
 		<copy todir="${dist}/lib/linux/lwjgl">
 			<fileset dir="lib/lwjgl/linux">
 				<include name="*"/>
 			</fileset>				
 		</copy>
-		<copy todir="${dist}/lib/windows">
-			<fileset dir="lib/jogl/windows">
-				<include name="*"/>
-			</fileset>
-			<fileset dir="lib/joal/windows">
-				<include name="*"/>
-			</fileset>
-		</copy>
 		<copy todir="${dist}/lib/windows/lwjgl">
 			<fileset dir="lib/lwjgl/windows">
 				<include name="*"/>
 			</fileset>				
-		</copy>
-		<copy todir="${dist}/lib/osx">
-			<fileset dir="lib/jogl/osx">
-				<include name="*"/>
-			</fileset>			
-			<fileset dir="lib/joal/osx">
-				<include name="*"/>
-			</fileset>
 		</copy>
 		<copy todir="${dist}/lib/osx/lwjgl">
 			<fileset dir="lib/lwjgl/osx">
@@ -245,8 +212,6 @@
 		<copy todir="webstart/lib">
 			<fileset dir="${dist}/lib">
 				<include name="**/*.jar"/>
-				<exclude name="jogl.jar"/>
-				<exclude name="joal.jar"/>
 				<exclude name="gluegen-rt.jar"/>
 			</fileset>
 		</copy>
