@@ -70,60 +70,10 @@
             	<include name="*mac.sh"/>
             </fileset>
             <executable targetfile="$INSTALL_PATH/Jake2_mac.sh"/>
-        </pack>                
-        
-        <pack name="jogl OpenGL library" required="yes">
-        	<description>default OpenGL library</description>
-        	<os family="windows"/>
-        	<fileset dir="lib" targetdir="$INSTALL_PATH/lib">
-        		<include name="windows/jogl*"/>
-        		<include name="jogl.jar"/>
-        	</fileset>
-        </pack>
-        <pack name="jogl OpenGL library" required="yes">
-        	<description>default OpenGL library</description>
-			<os name="Linux"/>
-        	<fileset dir="lib" targetdir="$INSTALL_PATH/lib">      		
-        		<include name="linux/*jogl*"/>
-        		<include name="jogl.jar"/>
-        	</fileset>
-        </pack>
-        <pack name="jogl OpenGL library" required="yes">
-        	<description>default OpenGL library</description>
-			<os name="Mac OS X"/>
-        	<fileset dir="lib" targetdir="$INSTALL_PATH/lib">      		
-         		<include name="osx/*jogl*"/>
-        		<include name="jogl.jar"/>
-        	</fileset>
-        </pack>        
-               
-        <pack name="joal sound library" required="no">
-        	<description>default sound library</description>
-        	<os family="windows"/>
-        	<fileset dir="lib" targetdir="$INSTALL_PATH/lib">
-        		<include name="windows/joal*"/>
-        		<include name="windows/OpenAL*"/>
-        	</fileset>
-        </pack>
-        <pack name="joal sound library" required="no">
-        	<description>default sound library</description>
-        	<os name="Linux"/>
-        	<fileset dir="lib" targetdir="$INSTALL_PATH/lib">
-        		<include name="linux/*joal*"/>
-        		<include name="linux/*openal*"/>
-        	</fileset>
-        </pack>        
-        <pack name="joal sound library" required="no">
-        	<description>default sound library</description>
-        	<os name="Mac OS X"/>
-        	<fileset dir="lib" targetdir="$INSTALL_PATH/lib">
-        		<include name="osx/*joal*"/>
-        		<include name="osx/*openal*"/>
-        	</fileset>
         </pack>
         
         <pack name="lwjgl library" required="no">
-        	<description>alternative OpenGL and sound driver</description>
+        	<description>OpenGL and sound driver</description>
         	<os family="windows"/>
         	<fileset dir="lib" targetdir="$INSTALL_PATH/lib">  		
         		<include name="windows/lwjgl*"/>
@@ -134,7 +84,7 @@
         	</fileset>
         </pack>
         <pack name="lwjgl library" required="no">
-        	<description>alternative OpenGL and sound driver</description>
+        	<description>OpenGL and sound driver</description>
         	<os name="Linux"/>
         	<fileset dir="lib" targetdir="$INSTALL_PATH/lib">
         		<include name="linux/lwjgl/*"/>
@@ -146,7 +96,7 @@
         	<executable targetfile="$INSTALL_PATH/Jake2_lwjgl.sh"/>
         </pack>
         <pack name="lwjgl library" required="no">
-        	<description>alternative OpenGL and sound driver</description>
+        	<description>OpenGL and sound driver</description>
         	<os name="Mac OS X"/>
         	<fileset dir="lib" targetdir="$INSTALL_PATH/lib">
         		<include name="osx/lwjgl/*"/>
