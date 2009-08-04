@@ -1,5 +1,5 @@
 <!-- Buildfile -->
-<project name="jake2" default="usage" basedir=".">
+<project name="jake2" default="all" basedir=".">
 
 	<taskdef name="izpack" classpath="lib/izpack/standalone-compiler.jar"
          classname="com.izforge.izpack.ant.IzPackTask"/>
