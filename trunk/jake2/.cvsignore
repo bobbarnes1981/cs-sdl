@@ -1,0 +1,7 @@
+build
+baseq2
+dist
+*.tar.gz
+*.zip
+*.jar
+*.map
