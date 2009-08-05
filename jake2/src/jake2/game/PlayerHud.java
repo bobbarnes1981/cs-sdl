@@ -168,7 +168,7 @@ public class PlayerHud {
     public static void DeathmatchScoreboardMessage(edict_t ent, edict_t killer) {
         StringBuffer string = new StringBuffer(1400);
 
-        int stringlength;
+        //int stringlength;
         int i, j, k;
         int sorted[] = new int[Defines.MAX_CLIENTS];
         int sortedscores[] = new int[Defines.MAX_CLIENTS];

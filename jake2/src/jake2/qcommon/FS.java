@@ -73,7 +73,7 @@ public final class FS extends Globals {
 
         int numfiles;
 
-        Hashtable files; // with packfile_t entries
+        Hashtable<String, packfile_t> files; // with packfile_t entries
     }
 
     public static String fs_gamedir;
@@ -95,7 +95,7 @@ public final class FS extends Globals {
     }
 
     // with filelink_t entries
-    public static List fs_links = new LinkedList();
+    public static List<filelink_t> fs_links = new LinkedList<filelink_t>();
 
     public static class searchpath_t {
         String filename;
@@ -169,7 +169,7 @@ public final class FS extends Globals {
         file_from_pak = 0;
 
         // check for links first
-        for (Iterator it = fs_links.iterator(); it.hasNext();) {
+        for (Iterator<filelink_t> it = fs_links.iterator(); it.hasNext();) {
             link = (filelink_t) it.next();
 
             if (filename.regionMatches(0, link.from, 0, link.fromlength)) {
@@ -242,7 +242,7 @@ public final class FS extends Globals {
         file_from_pak = 0;
 
         // check for links first
-        for (Iterator it = fs_links.iterator(); it.hasNext();) {
+        for (Iterator<filelink_t> it = fs_links.iterator(); it.hasNext();) {
             link = (filelink_t) it.next();
 
             //			if (!strncmp (filename, link->from, link->fromlength))
@@ -399,7 +399,7 @@ public final class FS extends Globals {
 
         try {
             // check for links first
-            for (Iterator it = fs_links.iterator(); it.hasNext();) {
+            for (Iterator<filelink_t> it = fs_links.iterator(); it.hasNext();) {
                 link = (filelink_t) it.next();
 
                 if (filename.regionMatches(0, link.from, 0, link.fromlength)) {
@@ -518,7 +518,7 @@ public final class FS extends Globals {
     static pack_t LoadPackFile(String packfile) {
 
         dpackheader_t header;
-        Hashtable newfiles;
+        Hashtable<String, packfile_t> newfiles;
         RandomAccessFile file;
         int numpackfiles = 0;
         pack_t pack = null;
@@ -549,7 +549,7 @@ public final class FS extends Globals {
                 Com.Error(Defines.ERR_FATAL, packfile + " has " + numpackfiles
                         + " files");
 
-            newfiles = new Hashtable(numpackfiles);
+            newfiles = new Hashtable<String, packfile_t>(numpackfiles);
 
             packhandle.position(header.dirofs);
 
@@ -739,7 +739,7 @@ public final class FS extends Globals {
         }
 
         // see if the link already exists
-        for (Iterator it = fs_links.iterator(); it.hasNext();) {
+        for (Iterator<filelink_t> it = fs_links.iterator(); it.hasNext();) {
             entry = (filelink_t) it.next();
 
             if (entry.from.equals(Cmd.Argv(1))) {
@@ -843,7 +843,7 @@ public final class FS extends Globals {
         }
 
         Com.Printf("\nLinks:\n");
-        for (Iterator it = fs_links.iterator(); it.hasNext();) {
+        for (Iterator<filelink_t> it = fs_links.iterator(); it.hasNext();) {
             link = (filelink_t) it.next();
             Com.Printf(link.from + " : " + link.to + '\n');
         }

@@ -418,9 +418,9 @@ public class Cvar extends Globals {
     /**
      * Variable typing auto completition.
      */
-    public static Vector CompleteVariable(String partial) {
+    public static Vector<String> CompleteVariable(String partial) {
 
-        Vector vars = new Vector();
+        Vector<String> vars = new Vector<String>();
 
         // check match
         for (cvar_t cvar = Globals.cvar_vars; cvar != null; cvar = cvar.next)

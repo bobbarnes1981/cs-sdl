@@ -34,7 +34,7 @@ public class GameSave {
         GameBase.g_edicts = new edict_t[GameBase.game.maxentities];
         for (int i = 0; i < GameBase.game.maxentities; i++)
             GameBase.g_edicts[i] = new edict_t(i);
-        GameBase.g_edicts = GameBase.g_edicts;
+        //GameBase.g_edicts = GameBase.g_edicts;
     }
 
     public static void CreateClients() {

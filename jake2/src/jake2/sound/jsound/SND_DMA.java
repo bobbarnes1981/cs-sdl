@@ -357,7 +357,7 @@ public class SND_DMA extends SND_MIX {
     public static void EndRegistration() {
         int i;
         sfx_t sfx;
-        int size;
+        //int size;
 
         // free any sounds not from this registration sequence
         for (i = 0; i < num_sfx; i++) {
@@ -796,7 +796,8 @@ public class SND_DMA extends SND_MIX {
     static void AddLoopSounds() {
         int i, j;
         int[] sounds = new int[Defines.MAX_EDICTS];
-        int left, right, left_total, right_total;
+        int left_total, right_total;
+        //int left, right;
         channel_t ch;
         sfx_t sfx;
         sfxcache_t sc;
@@ -882,7 +883,8 @@ public class SND_DMA extends SND_MIX {
             ByteBuffer data) {
         //TODO RawSamples
         int i;
-        int src, dst;
+        //int src;
+        //int dst;
         float scale;
 
         if (!sound_started)
@@ -986,7 +988,7 @@ public class SND_DMA extends SND_MIX {
         Math3D.VectorCopy(right, listener_right);
         Math3D.VectorCopy(up, listener_up);
 
-        channel_t combine = null;
+        //channel_t combine = null;
 
         // update spatialization for dynamic sounds
         channel_t ch;

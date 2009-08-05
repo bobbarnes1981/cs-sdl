@@ -39,7 +39,7 @@ public abstract class SuperAdapter {
 	}
 
 	/** Adapter repository. */
-	private static Hashtable adapters= new Hashtable();
+	private static Hashtable<String, SuperAdapter> adapters= new Hashtable<String, SuperAdapter>();
 
 	/** Returns the adapter from the repository given by its ID. */
 	public static SuperAdapter getFromID(String key) {

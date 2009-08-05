@@ -31,12 +31,12 @@
 
 package jake2;
 
-import java.applet.*;
-import java.awt.Canvas;
+//import java.applet.*;
+//import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Frame;
+//import java.awt.FontMetrics;
+//import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.*;
@@ -76,6 +76,10 @@ import java.util.*;
  */
 
 public class CompatibilityApplet extends java.applet.Applet {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private Font font;
     private static final String inputText = "Click here to get the new Java Plug-In";
     private static final String url = "https://jdk6.dev.java.net/6uNea.html";
@@ -123,10 +127,10 @@ public class CompatibilityApplet extends java.applet.Applet {
 
     public void paint(Graphics graphics) {
         Graphics2D g = (Graphics2D) graphics;
-        List/*<LineInfo>*/ lines = new ArrayList();
-        FontMetrics fm = g.getFontMetrics();
+        List<LineInfo> lines = new ArrayList<LineInfo>();
+        //FontMetrics fm = g.getFontMetrics();
         FontRenderContext frc = g.getFontRenderContext();
-        Map attrs = new HashMap();
+        Map<TextAttribute, Font> attrs = new HashMap<TextAttribute, Font>();
         attrs.put(TextAttribute.FONT, font);
         float totalHeight = 0;
         int curPos = 0;
@@ -147,7 +151,7 @@ public class CompatibilityApplet extends java.applet.Applet {
         // Draw the strings centered vertically and horizontally in this component
         g.setFont(font);
         float curY = (getHeight() - totalHeight) / 2;
-        for (Iterator iter = lines.iterator(); iter.hasNext(); ) {
+        for (Iterator<LineInfo> iter = lines.iterator(); iter.hasNext(); ) {
             LineInfo line = (LineInfo) iter.next();
             curY += line.height;
             float x = (getWidth() - line.width) / 2;

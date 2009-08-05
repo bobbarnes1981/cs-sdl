@@ -668,7 +668,7 @@ public class Key extends Globals {
 
 	}
 
-	private static void printCompletions(String type, Vector compl) {
+	private static void printCompletions(String type, Vector<?> compl) {
 		Com.Printf(type);
 		for (int i = 0; i < compl.size(); i++) {
 			Com.Printf((String)compl.get(i) + " ");
@@ -687,8 +687,8 @@ public class Key extends Globals {
 			
 		String s = new String(key_lines[edit_line], start, end-start);
 		
-		Vector cmds = Cmd.CompleteCommand(s);
-		Vector vars = Cvar.CompleteVariable(s);
+		Vector<?> cmds = Cmd.CompleteCommand(s);
+		Vector<?> vars = Cvar.CompleteVariable(s);
 		
 		int c = cmds.size();
 		int v = vars.size();

@@ -31,8 +31,6 @@ import jake2.game.cvar_t;
 import jake2.qcommon.*;
 import jake2.sound.S;
 import jake2.sys.*;
-import jake2.sys.NET;
-import jake2.sys.Sys;
 import jake2.util.*;
 
 import java.awt.Dimension;
@@ -3931,7 +3929,7 @@ public final class Menu extends Key {
         }
 
         //qsort(s_pmi, s_numplayermodels, sizeof(s_pmi[0]), pmicmpfnc);
-        Arrays.sort(s_pmi, 0, s_numplayermodels, new Comparator() {
+        Arrays.sort(s_pmi, 0, s_numplayermodels, new Comparator<Object>() {
             public int compare(Object o1, Object o2) {
                 return pmicmpfnc(o1, o2);
             }
@@ -4660,7 +4658,7 @@ public final class Menu extends Key {
     public static void Menu_DrawStatusBar(String string) {
         if (string != null) {
             int l = string.length();
-            int maxrow = viddef.getHeight() / 8;
+            //int maxrow = viddef.getHeight() / 8;
             int maxcol = viddef.getWidth() / 8;
             int col = maxcol / 2 - l / 2;
 
@@ -4872,7 +4870,7 @@ public final class Menu extends Key {
 
     public static void SpinControl_Draw(menulist_s s) {
         //char buffer[100];
-        String buffer;
+        //String buffer;
 
         if (s.name != null) {
             Menu_DrawStringR2LDark(s.x + s.parent.x + LCOLUMN_OFFSET, s.y

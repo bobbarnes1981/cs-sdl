@@ -33,8 +33,6 @@ import jake2.server.SV_GAME;
 import jake2.util.Lib;
 
 import java.util.*;
-import java.util.Arrays;
-import java.util.Vector;
 
 /**
  * Cmd
@@ -162,8 +160,8 @@ public final class Cmd {
 
     private static char temporary[] = new char[Defines.MAX_STRING_CHARS];
 
-    public static Comparator PlayerSort = new Comparator() {
-        public int compare(Object o1, Object o2) {
+    public static Comparator<Integer> PlayerSort = new Comparator<Integer>() {
+        public int compare(Integer o1, Integer o2) {
             int anum = ((Integer) o1).intValue();
             int bnum = ((Integer) o2).intValue();
     
@@ -1183,8 +1181,8 @@ public final class Cmd {
     /**
      * Cmd_CompleteCommand.
      */
-    public static Vector CompleteCommand(String partial) {
-        Vector cmds = new Vector();
+    public static Vector<String> CompleteCommand(String partial) {
+        Vector<String> cmds = new Vector<String>();
 
         // check for match
         for (cmd_function_t cmd = cmd_functions; cmd != null; cmd = cmd.next)

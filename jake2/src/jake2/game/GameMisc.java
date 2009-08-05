@@ -1819,7 +1819,7 @@ public class GameMisc {
             if (other.client == null)
                 return;
 
-            EdictIterator es = null;
+            //EdictIterator es = null;
             dest = GameBase.G_Find(null, GameBase.findByTarget, self.target).o;
 
             if (dest == null) {

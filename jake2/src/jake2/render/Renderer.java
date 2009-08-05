@@ -39,7 +39,7 @@ public class Renderer {
     static RenderAPI fastRenderer = new jake2.render.fast.Misc();
     static RenderAPI basicRenderer = new jake2.render.basic.Misc();
 
-    static Vector drivers = new Vector(3);
+    static Vector<Ref> drivers = new Vector<Ref>(3);
 
     static {
         try {

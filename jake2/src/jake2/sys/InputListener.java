@@ -35,7 +35,7 @@ public final class InputListener implements KeyListener, MouseListener,
 		MouseMotionListener, ComponentListener, MouseWheelListener {
 
 	// modifications of eventQueue must be thread safe!
-	private static LinkedList eventQueue = new LinkedList();
+	private static LinkedList<Jake2InputEvent> eventQueue = new LinkedList<Jake2InputEvent>();
 
 	static void addEvent(Jake2InputEvent ev) {
 		synchronized (eventQueue) {

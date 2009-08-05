@@ -1127,7 +1127,7 @@ public class TestMD4 {
 		test("abc");
 		test("abcdefghijklmnopqrstuvwxyz");
 		test("hi");
-		MD4 md4 = new MD4();
+		//MD4 md4 = new MD4();
 		
 		byte data[]=
 			{

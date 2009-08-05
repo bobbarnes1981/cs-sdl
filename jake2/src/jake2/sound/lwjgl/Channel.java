@@ -60,7 +60,7 @@ public class Channel {
     private static IntBuffer sources = Lib.newIntBuffer(MAX_CHANNELS);
     // a reference of L:WJGLSoundImpl.buffers 
     private static IntBuffer buffers;
-    private static Map looptable = new Hashtable(MAX_CHANNELS);
+    private static Map<Object, Channel> looptable = new Hashtable<Object, Channel>(MAX_CHANNELS);
 
     private static int numChannels;
 
@@ -421,7 +421,7 @@ public class Channel {
     private static void removeUnusedLoopSounds() {
 	Channel ch;
 	// stop unused loopsounds
-	for (Iterator iter = looptable.values().iterator(); iter.hasNext();) {
+	for (Iterator<Channel> iter = looptable.values().iterator(); iter.hasNext();) {
 	    ch = (Channel)iter.next();
 	    if (!ch.autosound) {
 		AL10.alSourceStop(ch.sourceId);
