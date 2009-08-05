@@ -30,4 +30,9 @@ package jake2.qcommon;
  */
 public final class longjmpException extends IllegalStateException {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
 }

@@ -1331,7 +1331,7 @@ public class M_Soldier {
                     || self.monsterinfo.currentmove == soldier_move_walk2
                     || self.monsterinfo.currentmove == soldier_move_start_run) {
                 self.monsterinfo.currentmove = soldier_move_run;
-                int a = 2;
+                //int a = 2;
             } else {
                 self.monsterinfo.currentmove = soldier_move_start_run;
             }

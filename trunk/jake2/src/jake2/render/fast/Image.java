@@ -1440,7 +1440,7 @@ public abstract class Image extends Main {
 		return image;
 	}
     
-    Map imageCache = new HashMap(MAX_GLTEXTURES);
+    Map<String, image_t> imageCache = new HashMap<String, image_t>(MAX_GLTEXTURES);
 
 	/*
 	===============

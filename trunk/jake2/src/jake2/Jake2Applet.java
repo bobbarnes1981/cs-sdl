@@ -41,6 +41,10 @@ import netscape.javascript.*;
  */
 public class Jake2Applet extends JApplet {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private JSObject self;
     private volatile boolean shouldShutDown;
     private boolean shutDown;

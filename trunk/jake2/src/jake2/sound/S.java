@@ -41,7 +41,7 @@ public class S {
 	static Sound impl;
 	static cvar_t s_impl;
 	
-	static Vector drivers = new Vector(3);
+	static Vector<Sound> drivers = new Vector<Sound>(3);
 	
 	/** 
 	 * Searches for and initializes all known sound drivers.

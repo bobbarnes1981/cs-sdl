@@ -363,7 +363,7 @@ public class TestMap
 		re.RenderFrame(refdef);
 	}
 	
-	private LinkedList active_particles = new LinkedList();
+	private LinkedList<cparticle_t> active_particles = new LinkedList<cparticle_t>();
 	private void animateParticles()
 	{
 		cparticle_t p;
@@ -374,7 +374,7 @@ public class TestMap
 
 		time = 0.0f;
 
-		for (Iterator it = active_particles.iterator(); it.hasNext();)
+		for (Iterator<cparticle_t> it = active_particles.iterator(); it.hasNext();)
 		{
 			p = (cparticle_t) it.next();
 

@@ -429,7 +429,7 @@ public class SND_MIX extends SND_JAVA {
         int[] rscale;
         int sfx;
         int i;
-        portable_samplepair_t samp;
+        //portable_samplepair_t samp;
 
         if (ch.leftvol > 255)
             ch.leftvol = 255;
@@ -457,7 +457,7 @@ public class SND_MIX extends SND_JAVA {
         ch.pos += count;
     }
 
-    private static ByteBuffer bb;
+    //private static ByteBuffer bb;
 
     private static ShortBuffer sb;
 
@@ -468,7 +468,7 @@ public class SND_MIX extends SND_JAVA {
         int leftvol, rightvol;
         int sfx;
         int i;
-        portable_samplepair_t samp;
+        //portable_samplepair_t samp;
 
         leftvol = ch.leftvol * snd_vol;
         rightvol = ch.rightvol * snd_vol;

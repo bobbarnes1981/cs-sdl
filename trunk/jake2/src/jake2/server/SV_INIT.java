@@ -395,7 +395,8 @@ public class SV_INIT {
     public static void SV_Map(boolean attractloop, String levelstring, boolean loadgame) {
 
         int l;
-        String level, ch, spawnpoint;
+        String level, spawnpoint;
+        //String ch;
 
         sv.loadgame = loadgame;
         sv.attractloop = attractloop;

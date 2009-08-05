@@ -24,7 +24,11 @@ import javax.swing.*;
 
 public class Q2DataDialog extends javax.swing.JDialog {
 	
-	static final String home = System.getProperty("user.home");
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    static final String home = System.getProperty("user.home");
 	static final String sep = System.getProperty("file.separator");
     
     public Q2DataDialog() {
@@ -299,7 +303,11 @@ public class Q2DataDialog extends javax.swing.JDialog {
 	}
 		
 	static class Jake2Canvas extends Canvas {
-		private Image image;
+		/**
+         * 
+         */
+        private static final long serialVersionUID = 1L;
+        private Image image;
 		Jake2Canvas() {
 			setSize(400, 200);
 			try {
@@ -320,7 +328,11 @@ public class Q2DataDialog extends javax.swing.JDialog {
 	
 	static class NotFoundPanel extends JPanel {
 		
-		private Q2DataDialog parent;
+		/**
+         * 
+         */
+        private static final long serialVersionUID = 1L;
+        private Q2DataDialog parent;
 		private ButtonGroup selection;
 		private JRadioButton dir;
 		private JRadioButton install;
@@ -434,8 +446,12 @@ public class Q2DataDialog extends javax.swing.JDialog {
 	
 	static class InstallPanel extends JPanel {
 		
-		private Vector mirrorNames = new Vector();
-		private Vector mirrorLinks = new Vector();		
+		/**
+         * 
+         */
+        private static final long serialVersionUID = 1L;
+        private Vector<String> mirrorNames = new Vector<String>();
+		private Vector<String> mirrorLinks = new Vector<String>();		
 		private Q2DataDialog parent;
 		private JComboBox mirrorBox;
 		private JTextField destDir;
@@ -601,7 +617,11 @@ public class Q2DataDialog extends javax.swing.JDialog {
 	
 	static class ProgressPanel extends JPanel implements Runnable {
 		
-		static byte[] buf = new byte[8192];
+		/**
+         * 
+         */
+        private static final long serialVersionUID = 1L;
+        static byte[] buf = new byte[8192];
 		String destDir;
 		String mirror;
 		
@@ -735,7 +755,7 @@ public class Q2DataDialog extends javax.swing.JDialog {
 			OutputStream out = null;
 			try {
 				ZipFile f = new ZipFile(filename);
-				Enumeration e = f.entries();
+				Enumeration<?> e = f.entries();
 				while (e.hasMoreElements()) {
 					ZipEntry entry = (ZipEntry)e.nextElement();
 					String name = entry.getName();

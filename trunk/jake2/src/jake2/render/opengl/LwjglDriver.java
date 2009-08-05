@@ -67,7 +67,7 @@ public abstract class LwjglDriver extends LwjglGL implements GLDriver {
 	    Com.Println(e.getMessage());
 	    return new java.awt.DisplayMode[0];
 	}
-        LinkedList l = new LinkedList();
+        LinkedList<java.awt.DisplayMode> l = new LinkedList<java.awt.DisplayMode>();
         l.add(toAwtDisplayMode(oldDisplayMode));
 
         for (int i = 0; i < modes.length; i++) {
@@ -114,7 +114,7 @@ public abstract class LwjglDriver extends LwjglGL implements GLDriver {
 	    return new DisplayMode[0];
 	}
 
-        LinkedList l = new LinkedList();
+        LinkedList<DisplayMode> l = new LinkedList<DisplayMode>();
         l.add(oldDisplayMode);
 
         for (int i = 0; i < modes.length; i++) {
