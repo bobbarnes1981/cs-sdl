@@ -118,25 +118,12 @@
         </condition> 		
 	</target>
 	
-	<target name="patch" depends="copy">
-		<!-- performance patch for lwjgl -->
-		<javac destdir="${build}" optimize="off" debug="on" source="1.4">
-			<src path="lib/lwjgl/patch"/>
-			<include name="org/lwjgl/**"/>
-			<classpath refid="build.class.path"/>
-		</javac>
-		<!-- update original lwjgl.jar -->
-		<jar destfile="${dist}/lib/lwjgl.jar" basedir="${build}" update="true">
-			<include name="org/lwjgl/**"/>
-		</jar>
-	</target>
-	
 	<!-- everything -->
 	<target name="all" depends="installer,bindist,srcdist">
 	</target>
 
 	<!-- dist -->
-	<target name="dist" depends="jar,copy,patch">
+	<target name="dist" depends="jar,copy">
 	</target>
 		
 	<!-- binary distribution -->
