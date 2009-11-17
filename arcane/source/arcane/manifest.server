@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: arcane.server.Server
+Class-Path: Server.jar DeckBuilder.jar . lib/arcane.jar lib/network.jar lib/jgn.jar lib/antlr-2.7.7.jar lib/h2.jar lib/stringtemplate.jar
