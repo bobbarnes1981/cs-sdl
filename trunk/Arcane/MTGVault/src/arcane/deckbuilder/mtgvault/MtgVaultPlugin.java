@@ -1,4 +1,3 @@
-
 package arcane.deckbuilder.mtgvault;
 
 import java.awt.event.ActionEvent;
@@ -30,21 +29,25 @@ public class MtgVaultPlugin extends DeckBuilderPlugin {
 	private SaveToVaultDialog saveDialog;
 	private LoadFromVaultDialog loadDialog;
 
-	public MtgVaultPlugin () {
+	public MtgVaultPlugin() {
 		instance = this;
 	}
 
-	public void install (final DeckBuilder deckBuilder) {
+	public void install(final DeckBuilder deckBuilder) {
 		this.deckBuilder = deckBuilder;
 		JMenu menu = new JMenu(getName());
 		{
 			JMenuItem loadMenuItem = new JMenuItem("Load from vault...");
 			menu.add(loadMenuItem);
 			loadMenuItem.addActionListener(new ActionListener() {
-				public void actionPerformed (ActionEvent evt) {
-					if (getUsername() == null) return;
-					if (getPassword() == null) return;
-					if (loadDialog == null) loadDialog = new LoadFromVaultDialog(MtgVaultPlugin.this);
+				public void actionPerformed(ActionEvent evt) {
+					if (getUsername() == null)
+						return;
+					if (getPassword() == null)
+						return;
+					if (loadDialog == null)
+						loadDialog = new LoadFromVaultDialog(
+								MtgVaultPlugin.this);
 					loadDialog.refresh();
 					loadDialog.setVisible(true);
 				}
@@ -54,10 +57,13 @@ public class MtgVaultPlugin extends DeckBuilderPlugin {
 			JMenuItem saveMenuItem = new JMenuItem("Save to vault...");
 			menu.add(saveMenuItem);
 			saveMenuItem.addActionListener(new ActionListener() {
-				public void actionPerformed (ActionEvent evt) {
-					if (getUsername() == null) return;
-					if (getPassword() == null) return;
-					if (saveDialog == null) saveDialog = new SaveToVaultDialog(MtgVaultPlugin.this);
+				public void actionPerformed(ActionEvent evt) {
+					if (getUsername() == null)
+						return;
+					if (getPassword() == null)
+						return;
+					if (saveDialog == null)
+						saveDialog = new SaveToVaultDialog(MtgVaultPlugin.this);
 					saveDialog.refresh();
 					saveDialog.setVisible(true);
 				}
@@ -65,10 +71,11 @@ public class MtgVaultPlugin extends DeckBuilderPlugin {
 		}
 		menu.addSeparator();
 		{
-			JMenuItem setUserMenuItem = new JMenuItem("Set username/password...");
+			JMenuItem setUserMenuItem = new JMenuItem(
+					"Set username/password...");
 			menu.add(setUserMenuItem);
 			setUserMenuItem.addActionListener(new ActionListener() {
-				public void actionPerformed (ActionEvent evt) {
+				public void actionPerformed(ActionEvent evt) {
 					promptUsernameAndPassword();
 				}
 			});
@@ -76,24 +83,31 @@ public class MtgVaultPlugin extends DeckBuilderPlugin {
 		deckBuilder.addPluginMenu(menu);
 	}
 
-	private void promptUsernameAndPassword () {
-		String usernameResult = JOptionPane.showInputDialog(deckBuilder, "Enter your MTG Vault username:",
-			"MTG Vault - Set username", JOptionPane.QUESTION_MESSAGE);
-		if (usernameResult == null || usernameResult.trim().length() == 0) return;
-		String passwordResult = JOptionPane.showInputDialog(deckBuilder, "Enter your MTG Vault password:",
-			"MTG Vault - Set password", JOptionPane.QUESTION_MESSAGE);
-		if (passwordResult == null || passwordResult.trim().length() == 0) return;
+	private void promptUsernameAndPassword() {
+		String usernameResult = JOptionPane.showInputDialog(deckBuilder,
+				"Enter your MTG Vault username:", "MTG Vault - Set username",
+				JOptionPane.QUESTION_MESSAGE);
+		if (usernameResult == null || usernameResult.trim().length() == 0)
+			return;
+		String passwordResult = JOptionPane.showInputDialog(deckBuilder,
+				"Enter your MTG Vault password:", "MTG Vault - Set password",
+				JOptionPane.QUESTION_MESSAGE);
+		if (passwordResult == null || passwordResult.trim().length() == 0)
+			return;
 		username = usernameResult.trim();
 		password = passwordResult.trim();
 	}
 
-	public List<MtgVaultDecklist> getVaultDecklists () {
+	public List<MtgVaultDecklist> getVaultDecklists() {
 		final String username = getUsername();
-		if (username == null) return new ArrayList(0);
+		if (username == null)
+			return new ArrayList(0);
 		final String password = getPassword();
-		if (password == null) return new ArrayList(0);
+		if (password == null)
+			return new ArrayList(0);
 
-		final ProgressDialog dialog = new ProgressDialog(deckBuilder, "MTG Vault");
+		final ProgressDialog dialog = new ProgressDialog(deckBuilder,
+				"MTG Vault");
 		dialog.setMessage("Loading decks from vault...");
 		dialog.setAlwaysOnTop(true);
 		dialog.setValue(-1);
@@ -101,17 +115,23 @@ public class MtgVaultPlugin extends DeckBuilderPlugin {
 		class LoadVaultDecks implements Runnable {
 			public List<MtgVaultDecklist> decklists = new ArrayList();
 
-			public void run () {
+			public void run() {
 				try {
 					CSVReader reader = getCsvReader("getDecks", "");
 					while (true) {
 						List<String> fields = reader.getFields();
-						if (fields == null) break;
-						if (fields.size() != 2) throw new ArcaneException("MTG Vault returned invalid data: " + fields);
-						decklists.add(new MtgVaultDecklist(fields.get(1), fields.get(0)));
+						if (fields == null)
+							break;
+						if (fields.size() != 2)
+							throw new ArcaneException(
+									"MTG Vault returned invalid data: "
+											+ fields);
+						decklists.add(new MtgVaultDecklist(fields.get(1),
+								fields.get(0)));
 					}
 				} catch (IOException ex) {
-					throw new ArcaneException("Error communicating with MTG Vault.", ex);
+					throw new ArcaneException(
+							"Error communicating with MTG Vault.", ex);
 				} finally {
 					dialog.setVisible(false);
 				}
@@ -127,39 +147,46 @@ public class MtgVaultPlugin extends DeckBuilderPlugin {
 		return loadVaultDecks.decklists;
 	}
 
-	String getUsername () {
-		if (username == null) promptUsernameAndPassword();
+	String getUsername() {
+		if (username == null)
+			promptUsernameAndPassword();
 		return username;
 	}
 
-	String getPassword () {
-		if (password == null) promptUsernameAndPassword();
+	String getPassword() {
+		if (password == null)
+			promptUsernameAndPassword();
 		return password;
 	}
 
-	public String getName () {
+	public String getName() {
 		return "MTG Vault";
 	}
 
-	public void savePreferences () {
+	public void savePreferences() {
 		Preferences props = Arcane.getInstance().getPrefs();
-		if (username != null) props.set("mtgvault.username", username);
-		if (password != null) props.set("mtgvault.password", password);
+		if (username != null)
+			props.set("mtgvault.username", username);
+		if (password != null)
+			props.set("mtgvault.password", password);
 	}
 
-	public void loadPreferences () {
+	public void loadPreferences() {
 		Preferences props = Arcane.getInstance().getPrefs();
 		username = props.get("mtgvault.username", null);
 		password = props.get("mtgvault.password", null);
 	}
 
-	CSVReader getCsvReader (String action, String extraParams) throws IOException {
-		URL url = new URL("http://www.mtgvault.com/api/" + action + ".php?username=" + getUsername() + "&password=" + getPassword()
-			+ "&" + extraParams);
-		return new CSVReader(new InputStreamReader(new BufferedInputStream(url.openStream())), ",", "'", true, false);
+	CSVReader getCsvReader(String action, String extraParams)
+			throws IOException {
+		URL url = new URL("http://www.mtgvault.com/api/" + action
+				+ ".php?username=" + getUsername() + "&password="
+				+ getPassword() + "&" + extraParams);
+		return new CSVReader(new InputStreamReader(new BufferedInputStream(url
+				.openStream())), ",", "'", true, false);
 	}
 
-	static public MtgVaultPlugin getInstance () {
+	static public MtgVaultPlugin getInstance() {
 		return instance;
 	}
 }

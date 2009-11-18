@@ -1,4 +1,3 @@
-
 package arcane.deckbuilder.mtgvault;
 
 import java.awt.Dimension;
@@ -25,7 +24,8 @@ import arcane.Decklist;
 public class LoadFromVaultDialog extends JDialog {
 	private final MtgVaultPlugin plugin;
 
-	public LoadFromVaultDialog (final MtgVaultPlugin plugin) throws HeadlessException {
+	public LoadFromVaultDialog(final MtgVaultPlugin plugin)
+			throws HeadlessException {
 		super(plugin.deckBuilder, "MTG Vault - Load", true);
 
 		this.plugin = plugin;
@@ -33,45 +33,50 @@ public class LoadFromVaultDialog extends JDialog {
 		initialize();
 
 		refreshButton.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 				refresh();
 			}
 		});
 
 		cancelButton.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 				setVisible(false);
 			}
 		});
 
 		loadButton.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 				if (deckList.getSelectedIndex() == -1) {
-					JOptionPane.showMessageDialog(LoadFromVaultDialog.this, "Please select a deck to load.", "MTG Vault - Load",
-						JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(LoadFromVaultDialog.this,
+							"Please select a deck to load.",
+							"MTG Vault - Load", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				plugin.deckBuilder.loadDecklist((Decklist)deckList.getSelectedValue());
+				plugin.deckBuilder.loadDecklist((Decklist) deckList
+						.getSelectedValue());
 				setVisible(false);
 			}
 		});
 	}
 
-	public void refresh () {
+	public void refresh() {
 		deckList.setModel(new DefaultComboBoxModel(new String[0]));
-		deckList.setModel(new DefaultComboBoxModel(plugin.getVaultDecklists().toArray()));
+		deckList.setModel(new DefaultComboBoxModel(plugin.getVaultDecklists()
+				.toArray()));
 	}
 
-	private void initialize () {
+	private void initialize() {
 		setSize(320, 240);
 		GridBagLayout thisLayout = new GridBagLayout();
 		getContentPane().setLayout(thisLayout);
 		{
 			decksLabel = new JLabel();
 			getContentPane().add(
-				decksLabel,
-				new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(6, 6,
-					0, 0), 0, 0));
+					decksLabel,
+					new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+							GridBagConstraints.NORTHEAST,
+							GridBagConstraints.NONE, new Insets(6, 6, 0, 0), 0,
+							0));
 			decksLabel.setText("Decks:");
 		}
 		{
@@ -81,9 +86,10 @@ public class LoadFromVaultDialog extends JDialog {
 			buttonSectionLayout.setVgap(6);
 			buttonSection.setLayout(buttonSectionLayout);
 			getContentPane().add(
-				buttonSection,
-				new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE,
-					new Insets(0, 0, 0, 0), 0, 0));
+					buttonSection,
+					new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0,
+							GridBagConstraints.EAST, GridBagConstraints.NONE,
+							new Insets(0, 0, 0, 0), 0, 0));
 			{
 				refreshButton = new JButton();
 				buttonSection.add(refreshButton);
@@ -103,16 +109,18 @@ public class LoadFromVaultDialog extends JDialog {
 		{
 			decksScrollPane = new JScrollPane();
 			getContentPane().add(
-				decksScrollPane,
-				new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(6, 6, 0,
-					6), 0, 0));
+					decksScrollPane,
+					new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0,
+							GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+							new Insets(6, 6, 0, 6), 0, 0));
 			{
 				deckList = new JList();
 				decksScrollPane.setViewportView(deckList);
 			}
 		}
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
+		setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height
+				/ 2 - getHeight() / 2);
 	}
 
 	private JList deckList;

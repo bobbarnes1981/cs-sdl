@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.sql.SQLException;
+//import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +22,7 @@ import javax.swing.JMenuItem;
 import arcane.Arcane;
 import arcane.ArcaneException;
 import arcane.Card;
-import arcane.CardDataStore.CardDataStoreConnection;
+//import arcane.CardDataStore.CardDataStoreConnection;
 import arcane.deckbuilder.DeckBuilderPlugin;
 import arcane.deckbuilder.ui.DeckBuilder;
 import arcane.ui.util.ProgressDialog;
@@ -89,7 +89,7 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 
 	private void loadPricesFromFile() {
 		try {
-			Map<String, Map<String, Float>> titleToSetToPrice = new HashMap();
+			Map<String, Map<String, Float>> titleToSetToPrice = new HashMap<String, Map<String, Float>>();
 			BufferedReader reader = new BufferedReader(new FileReader(
 					"plugins/MagicTraders/prices.txt"));
 			while (true) {
@@ -136,7 +136,7 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 				}
 
 				if (titleToSetToPrice.get(title) == null)
-					titleToSetToPrice.put(title, new HashMap());
+					titleToSetToPrice.put(title, new HashMap<String, Float>());
 				if (titleToSetToPrice.get(title).get("") == null
 						|| titleToSetToPrice.get(title).get("") < price)
 					titleToSetToPrice.get(title).put("", price);
@@ -152,8 +152,8 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 				}
 			}
 
-			CardDataStoreConnection conn = Arcane.getInstance()
-					.getCardDataStoreConnection();
+//			CardDataStoreConnection conn = Arcane.getInstance()
+//					.getCardDataStoreConnection();
 			for (Entry<String, Map<String, Float>> setToPrice : titleToSetToPrice
 					.entrySet()) {
 				String title = setToPrice.getKey();
@@ -198,8 +198,8 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 		} catch (IOException ex) {
 			throw new ArcaneException("Error downloading pricing information.",
 					ex);
-		} catch (SQLException ex) {
-			throw new ArcaneException("Error updating pricing information.", ex);
+//		} catch (SQLException ex) {
+//			throw new ArcaneException("Error updating pricing information.", ex);
 		}
 	}
 

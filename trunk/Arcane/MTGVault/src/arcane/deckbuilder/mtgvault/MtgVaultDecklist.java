@@ -1,4 +1,3 @@
-
 package arcane.deckbuilder.mtgvault;
 
 import java.io.IOException;
@@ -18,18 +17,18 @@ public class MtgVaultDecklist implements Decklist {
 	public String name;
 	public String id;
 
-	private List<DecklistCard> decklistCards = new ArrayList();
+	private List<DecklistCard> decklistCards = new ArrayList<DecklistCard>();
 
-	public MtgVaultDecklist (String name, String id) {
+	public MtgVaultDecklist(String name, String id) {
 		this.name = name;
 		this.id = id;
 	}
 
-	public List<DecklistCard> getDecklistCards () {
+	public List<DecklistCard> getDecklistCards() {
 		return decklistCards;
 	}
 
-	public void open () throws IOException {
+	public void open() throws IOException {
 		final ProgressDialog dialog = new ProgressDialog("MTG Vault");
 		dialog.setMessage("Loading deck from vault: " + name);
 		dialog.setAlwaysOnTop(true);
@@ -40,25 +39,33 @@ public class MtgVaultDecklist implements Decklist {
 		class LoadDecklist implements Runnable {
 			public IOException ex;
 
-			public void run () {
+			public void run() {
 				try {
 					StringBuffer errorBuffer = new StringBuffer(64);
 					MtgVaultPlugin plugin = MtgVaultPlugin.getInstance();
-					if (plugin == null) return;
-					CSVReader reader = plugin.getCsvReader("loadDeck", "deckid=" + id);
+					if (plugin == null)
+						return;
+					CSVReader reader = plugin.getCsvReader("loadDeck",
+							"deckid=" + id);
 					while (true) {
 						List<String> fields = reader.getFields();
-						if (fields == null) break;
-						if (fields.size() != 3) throw new ArcaneException("MTG Vault returned invalid data: " + fields);
+						if (fields == null)
+							break;
+						if (fields.size() != 3)
+							throw new ArcaneException(
+									"MTG Vault returned invalid data: "
+											+ fields);
 
 						String cardName = fields.get(1).replace("''", "'");
-						String set = Arcane.getInstance().getMainSet(fields.get(2));
+						String set = Arcane.getInstance().getMainSet(
+								fields.get(2));
 
 						int qty = 1;
 						try {
 							qty = Integer.parseInt(fields.get(0));
 						} catch (NumberFormatException ignored) {
-							errorBuffer.append("Invalid qty: " + cardName + "\n");
+							errorBuffer.append("Invalid qty: " + cardName
+									+ "\n");
 						}
 
 						Card card = Arcane.getInstance().getCard(cardName, set);
@@ -66,7 +73,8 @@ public class MtgVaultDecklist implements Decklist {
 							decklistCards.add(new DecklistCard(card, false));
 					}
 					reader.close();
-					if (errorBuffer.length() > 0) throw new ArcaneException(errorBuffer.toString());
+					if (errorBuffer.length() > 0)
+						throw new ArcaneException(errorBuffer.toString());
 				} catch (IOException ex) {
 					this.ex = ex;
 				} finally {
@@ -80,10 +88,13 @@ public class MtgVaultDecklist implements Decklist {
 		dialog.setVisible(true);
 		dialog.dispose();
 
-		if (runnable.ex != null) throw runnable.ex;
+		if (runnable.ex != null)
+			throw runnable.ex;
 	}
 
-	public void save (List<Card> deckCards, Map<Card, Integer> deckCardToQty, List<Card> sideCards, Map<Card, Integer> sideCardToQty) throws IOException {
+	public void save(List<Card> deckCards, Map<Card, Integer> deckCardToQty,
+			List<Card> sideCards, Map<Card, Integer> sideCardToQty)
+			throws IOException {
 		final ProgressDialog dialog = new ProgressDialog("MTG Vault");
 		dialog.setMessage("Saving deck to vault: " + name);
 		dialog.setAlwaysOnTop(true);
@@ -92,21 +103,26 @@ public class MtgVaultDecklist implements Decklist {
 		class SaveDecklist implements Runnable {
 			public IOException ex;
 
-			public void run () {
+			public void run() {
 				try {
 					MtgVaultPlugin plugin = MtgVaultPlugin.getInstance();
-					if (plugin == null) return;
+					if (plugin == null)
+						return;
 					// BOZO - Save deck.
-					dialog.setMessage("Saving to MTG Vault is not yet implemented!");
+					dialog
+							.setMessage("Saving to MTG Vault is not yet implemented!");
 					try {
 						Thread.sleep(2500);
 					} catch (InterruptedException ignored) {
 					}
 					/*
-					 * CSVReader reader; if (id == null) reader = plugin.getCsvReader("saveDeck", "deckname=" + name); else reader =
-					 * plugin.getCsvReader("saveDeck", "deckid=" + id); reader.close();
+					 * CSVReader reader; if (id == null) reader =
+					 * plugin.getCsvReader("saveDeck", "deckname=" + name); else
+					 * reader = plugin.getCsvReader("saveDeck", "deckid=" + id);
+					 * reader.close();
 					 */
-					if (false) throw new IOException();
+					if (false)
+						throw new IOException();
 				} catch (IOException ex) {
 					this.ex = ex;
 				} finally {
@@ -120,32 +136,35 @@ public class MtgVaultDecklist implements Decklist {
 		dialog.setVisible(true);
 		dialog.dispose();
 
-		if (runnable.ex != null) throw runnable.ex;
+		if (runnable.ex != null)
+			throw runnable.ex;
 	}
 
-	public boolean exists () {
+	public boolean exists() {
 		return true;
 	}
 
-	public String getData () {
+	public String getData() {
 		return name + "|" + id;
 	}
 
-	public String getName () {
+	public String getName() {
 		return name;
 	}
 
-	public boolean isOpenable () {
+	public boolean isOpenable() {
 		return true;
 	}
 
-	public boolean equals (Object obj) {
-		if (!(obj instanceof MtgVaultDecklist)) return false;
-		if (id == null) return false;
-		return id.equals(((MtgVaultDecklist)obj).id);
+	public boolean equals(Object obj) {
+		if (!(obj instanceof MtgVaultDecklist))
+			return false;
+		if (id == null)
+			return false;
+		return id.equals(((MtgVaultDecklist) obj).id);
 	}
 
-	public String toString () {
+	public String toString() {
 		return name;
 	}
 }

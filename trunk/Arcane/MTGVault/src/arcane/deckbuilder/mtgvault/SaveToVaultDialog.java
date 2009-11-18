@@ -1,4 +1,3 @@
-
 package arcane.deckbuilder.mtgvault;
 
 import java.awt.Dimension;
@@ -30,7 +29,7 @@ public class SaveToVaultDialog extends JDialog {
 	private List<MtgVaultDecklist> decklists;
 	private MtgVaultPlugin plugin;
 
-	public SaveToVaultDialog (MtgVaultPlugin plugin) throws HeadlessException {
+	public SaveToVaultDialog(MtgVaultPlugin plugin) throws HeadlessException {
 		super(plugin.deckBuilder, "MTG Vault - Save", true);
 
 		this.plugin = plugin;
@@ -38,22 +37,23 @@ public class SaveToVaultDialog extends JDialog {
 		initialize();
 
 		refreshButton.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 				refresh();
 			}
 		});
 
 		cancelButton.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 				setVisible(false);
 			}
 		});
 
 		saveButton.addActionListener(new ActionListener() {
-			public void actionPerformed (ActionEvent evt) {
+			public void actionPerformed(ActionEvent evt) {
 				if (saveAsTextField.getText().trim().length() == 0) {
-					JOptionPane.showMessageDialog(SaveToVaultDialog.this, "Please enter a deck name to save.", "MTG Vault - Save",
-						JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(SaveToVaultDialog.this,
+							"Please enter a deck name to save.",
+							"MTG Vault - Save", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				saveDeck(saveAsTextField.getText());
@@ -61,27 +61,34 @@ public class SaveToVaultDialog extends JDialog {
 		});
 
 		deckList.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged (ListSelectionEvent evt) {
-				if (deckList.getSelectedIndex() == -1) return;
-				saveAsTextField.setText(((Decklist)deckList.getSelectedValue()).getName());
+			public void valueChanged(ListSelectionEvent evt) {
+				if (deckList.getSelectedIndex() == -1)
+					return;
+				saveAsTextField
+						.setText(((Decklist) deckList.getSelectedValue())
+								.getName());
 			}
 		});
 	}
 
-	public void refresh () {
+	public void refresh() {
 		deckList.setModel(new DefaultComboBoxModel(new String[0]));
 		decklists = plugin.getVaultDecklists();
 		deckList.setModel(new DefaultComboBoxModel(decklists.toArray()));
 	}
 
-	private void saveDeck (String deckName) {
+	private void saveDeck(String deckName) {
 		MtgVaultDecklist newDecklist = new MtgVaultDecklist(deckName, null);
 
 		for (MtgVaultDecklist decklist : decklists) {
 			if (decklist.getName().equals(deckName)) {
-				int result = JOptionPane.showConfirmDialog(SaveToVaultDialog.this, "The existing deck will be overwritten.",
-					"MTG Vault - Save", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-				if (result != JOptionPane.OK_OPTION) return;
+				int result = JOptionPane.showConfirmDialog(
+						SaveToVaultDialog.this,
+						"The existing deck will be overwritten.",
+						"MTG Vault - Save", JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (result != JOptionPane.OK_OPTION)
+					return;
 				newDecklist.id = decklist.id;
 			}
 		}
@@ -91,32 +98,37 @@ public class SaveToVaultDialog extends JDialog {
 		setVisible(false);
 	}
 
-	private void initialize () {
+	private void initialize() {
 		setSize(320, 240);
 		GridBagLayout thisLayout = new GridBagLayout();
 		getContentPane().setLayout(thisLayout);
 		{
 			decksLabel = new JLabel();
 			getContentPane().add(
-				decksLabel,
-				new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(6, 6,
-					0, 0), 0, 0));
+					decksLabel,
+					new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+							GridBagConstraints.NORTHEAST,
+							GridBagConstraints.NONE, new Insets(6, 6, 0, 0), 0,
+							0));
 			decksLabel.setText("Decks:");
 		}
 		{
 			saveAsLabel = new JLabel();
 			getContentPane().add(
-				saveAsLabel,
-				new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE,
-					new Insets(0, 0, 0, 0), 0, 0));
+					saveAsLabel,
+					new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+							GridBagConstraints.EAST, GridBagConstraints.NONE,
+							new Insets(0, 0, 0, 0), 0, 0));
 			saveAsLabel.setText("Save as:");
 		}
 		{
 			saveAsTextField = new JTextField();
 			getContentPane().add(
-				saveAsTextField,
-				new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0,
-					6, 0, 6), 0, 0));
+					saveAsTextField,
+					new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+							GridBagConstraints.CENTER,
+							GridBagConstraints.HORIZONTAL, new Insets(0, 6, 0,
+									6), 0, 0));
 		}
 		{
 			buttonSection = new JPanel();
@@ -125,9 +137,10 @@ public class SaveToVaultDialog extends JDialog {
 			buttonSectionLayout.setVgap(6);
 			buttonSection.setLayout(buttonSectionLayout);
 			getContentPane().add(
-				buttonSection,
-				new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE,
-					new Insets(0, 0, 0, 0), 0, 0));
+					buttonSection,
+					new GridBagConstraints(0, 3, 2, 1, 0.0, 0.0,
+							GridBagConstraints.EAST, GridBagConstraints.NONE,
+							new Insets(0, 0, 0, 0), 0, 0));
 			{
 				refreshButton = new JButton();
 				buttonSection.add(refreshButton);
@@ -147,16 +160,18 @@ public class SaveToVaultDialog extends JDialog {
 		{
 			decksScrollPane = new JScrollPane();
 			getContentPane().add(
-				decksScrollPane,
-				new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(6, 6, 6,
-					6), 0, 0));
+					decksScrollPane,
+					new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0,
+							GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+							new Insets(6, 6, 6, 6), 0, 0));
 			{
 				deckList = new JList();
 				decksScrollPane.setViewportView(deckList);
 			}
 		}
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
+		setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height
+				/ 2 - getHeight() / 2);
 	}
 
 	private JList deckList;
