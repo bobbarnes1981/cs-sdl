@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="MacRoman"?>
 <jardesc>
-<jar path="/Users/dhudson/Documents/workspace-arcane/plugin-mtgvault.jar"/>
+<jar path="/Users/dhudson/Documents/workspace-arcane/arcane/plugins/MTGVault/plugin-mtgvault.jar"/>
 <options buildIfNeeded="true" compress="true" descriptionLocation="/plugin-mtgvault/jar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
 <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
 <selectedProjects/>
@@ -11,6 +11,7 @@
 </sealing>
 </manifest>
 <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+<javaElement handleIdentifier="=plugin-mtgvault/src"/>
 <javaElement handleIdentifier="=plugin-mtgvault/resources"/>
 </selectedElements>
 </jardesc>
