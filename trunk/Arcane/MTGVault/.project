@@ -3,6 +3,7 @@
 	<name>plugin-mtgvault</name>
 	<comment></comment>
 	<projects>
+		<project>arcane</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
