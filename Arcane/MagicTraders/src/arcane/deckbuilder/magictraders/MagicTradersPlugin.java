@@ -1,4 +1,3 @@
-
 package arcane.deckbuilder.magictraders;
 
 import java.awt.event.ActionEvent;
@@ -29,36 +28,41 @@ import arcane.deckbuilder.ui.DeckBuilder;
 import arcane.ui.util.ProgressDialog;
 
 public class MagicTradersPlugin extends DeckBuilderPlugin {
-	public void install (final DeckBuilder deckBuilder) {
+	public void install(final DeckBuilder deckBuilder) {
 		JMenu menu = new JMenu(getName());
 		{
 			JMenuItem loadMenuItem = new JMenuItem("Update prices...");
 			menu.add(loadMenuItem);
 			loadMenuItem.addActionListener(new ActionListener() {
-				public void actionPerformed (ActionEvent evt) {
+				public void actionPerformed(ActionEvent evt) {
 					updatePrices(deckBuilder);
 				}
 			});
 		}
 		deckBuilder.addPluginMenu(menu);
-		if (new File("plugins/MagicTraders/prices.txt").exists()) loadPricesFromFile();
+		if (new File("plugins/MagicTraders/prices.txt").exists())
+			loadPricesFromFile();
 	}
 
-	public void install (ProgressDialog dialog){
-		
+	public void install(ProgressDialog dialog) {
+
 	}
-	
-	private void updatePrices (DeckBuilder deckBuilder) {
-		final ProgressDialog dialog = new ProgressDialog(deckBuilder, "Magic Traders");
+
+	private void updatePrices(DeckBuilder deckBuilder) {
+		final ProgressDialog dialog = new ProgressDialog(deckBuilder,
+				"Magic Traders");
 		dialog.setMessage("Downloading pricing information...");
 		dialog.setAlwaysOnTop(true);
 		dialog.setValue(-1);
 
 		new Thread(new Runnable() {
-			public void run () {
+			public void run() {
 				try {
-					InputStream input = new URL("http://www.magictraders.com/pricelists/current-magic").openStream();
-					OutputStream out = new FileOutputStream("plugins/MagicTraders/prices.txt");
+					InputStream input = new URL(
+							"http://www.magictraders.com/pricelists/current-magic")
+							.openStream();
+					OutputStream out = new FileOutputStream(
+							"plugins/MagicTraders/prices.txt");
 					try {
 						byte[] buffer = new byte[2048];
 						int bytesRead;
@@ -71,7 +75,8 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 					dialog.setMessage("Loading prices...");
 					loadPricesFromFile();
 				} catch (IOException ex) {
-					throw new ArcaneException("Error downloading pricing information.", ex);
+					throw new ArcaneException(
+							"Error downloading pricing information.", ex);
 				} finally {
 					dialog.setVisible(false);
 				}
@@ -82,23 +87,29 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 		dialog.dispose();
 	}
 
-	private void loadPricesFromFile () {
+	private void loadPricesFromFile() {
 		try {
 			Map<String, Map<String, Float>> titleToSetToPrice = new HashMap();
-			BufferedReader reader = new BufferedReader(new FileReader("plugins/MagicTraders/prices.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader(
+					"plugins/MagicTraders/prices.txt"));
 			while (true) {
 				String line = reader.readLine();
-				if (line == null) break;
-				if (line.startsWith("total:")) continue;
+				if (line == null)
+					break;
+				if (line.startsWith("total:"))
+					continue;
 				int commaIndex = line.indexOf(",  ");
-				if (commaIndex == -1) continue;
+				if (commaIndex == -1)
+					continue;
 
 				String title = line.substring(0, commaIndex).toLowerCase();
 				String set = null;
 				if (title.endsWith(")")) {
-					set = title.substring(title.indexOf("(") + 1, title.length() - 1);
+					set = title.substring(title.indexOf("(") + 1, title
+							.length() - 1);
 
-					if (set.equals("bk")) continue;
+					if (set.equals("bk"))
+						continue;
 
 					if (set.equals("st1"))
 						set = "ST";
@@ -113,17 +124,21 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 					title = title.substring(0, title.indexOf("(") - 1);
 				}
 
-				String priceString = line.substring(commaIndex+1, line.indexOf(",", commaIndex+1)).trim();
+				String priceString = line.substring(commaIndex + 1,
+						line.indexOf(",", commaIndex + 1)).trim();
 				float price;
 				try {
 					price = Float.parseFloat(priceString);
 				} catch (NumberFormatException ex) {
-					System.out.println("MagicTraders: Invalid price \"" + priceString + "\" for card: " + title);
+					System.out.println("MagicTraders: Invalid price \""
+							+ priceString + "\" for card: " + title);
 					continue;
 				}
 
-				if (titleToSetToPrice.get(title) == null) titleToSetToPrice.put(title, new HashMap());
-				if (titleToSetToPrice.get(title).get("") == null || titleToSetToPrice.get(title).get("") < price)
+				if (titleToSetToPrice.get(title) == null)
+					titleToSetToPrice.put(title, new HashMap());
+				if (titleToSetToPrice.get(title).get("") == null
+						|| titleToSetToPrice.get(title).get("") < price)
 					titleToSetToPrice.get(title).put("", price);
 
 				if (set != null && set.length() > 0) {
@@ -131,59 +146,64 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 					if (mainSet != null)
 						titleToSetToPrice.get(title).put(mainSet, price);
 					else
-						Arcane.getInstance().log("MagicTraders: Unknown set \"" + set + "\" for card: " + title);
+						Arcane.getInstance().log(
+								"MagicTraders: Unknown set \"" + set
+										+ "\" for card: " + title);
 				}
 			}
 
-			CardDataStoreConnection conn = Arcane.getInstance().getCardDataStoreConnection();
-			for (Entry<String, Map<String, Float>> setToPrice : titleToSetToPrice.entrySet()) {
+			CardDataStoreConnection conn = Arcane.getInstance()
+					.getCardDataStoreConnection();
+			for (Entry<String, Map<String, Float>> setToPrice : titleToSetToPrice
+					.entrySet()) {
 				String title = setToPrice.getKey();
-				if(title.contains("token"))
-					title = title.substring(0, title.indexOf("token")-1);
-				else if(title.equals("ach! hans, run!"))
-					title ="\"ach! hans, run!\"";
-				else if(title.equals("longest card name ever elemental"))
+				if (title.contains("token"))
+					title = title.substring(0, title.indexOf("token") - 1);
+				else if (title.equals("ach! hans, run!"))
+					title = "\"ach! hans, run!\"";
+				else if (title.equals("longest card name ever elemental"))
 					title = "our market research shows that players like really long card names so we made th";
-				else if(title.equals("no name"))
+				else if (title.equals("no name"))
 					continue;
-				else if(title.equals("pang tong, young phoenix"))
+				else if (title.equals("pang tong, young phoenix"))
 					title = "pang tong, \"young phoenix\"";
-				else if(title.equals("question elemental?"))
+				else if (title.equals("question elemental?"))
 					title = "question elemental";
-				else if(title.equals("kongming, sleeping dragon"))
+				else if (title.equals("kongming, sleeping dragon"))
 					title = "kongming, \"sleeping dragon\"";
-				else if(title.equals("who/what/when/where/why"))
+				else if (title.equals("who/what/when/where/why"))
 					title = title.replace("/", " ");
 				try {
 					List<Card> cards = Arcane.getInstance().getCards(title);
 					Float defaultPrice = setToPrice.getValue().get("");
 					for (Card card : cards) {
 						Float price = setToPrice.getValue().get(card.set);
-						if(price == null)
+						if (price == null)
 							price = defaultPrice;
 						card.price = price;
 					}
-				} catch(ArcaneException e) {
-					//card not found, skip it
+				} catch (ArcaneException e) {
+					// card not found, skip it
 					System.out.println(e);
 				}
 				/*
-				for (Entry<String, Float> entry : setToPrice.getValue().entrySet()){
-					if( entry.getKey().length() > 0)
-						conn.setPrice(title, entry.getKey(), entry.getValue());
-					else
-						conn.setPrice(title, entry.getValue());
-					System.out.println(title + "\t" + entry.getKey() + "\t" + entry.getValue());
-				}*/
+				 * for (Entry<String, Float> entry :
+				 * setToPrice.getValue().entrySet()){ if(
+				 * entry.getKey().length() > 0) conn.setPrice(title,
+				 * entry.getKey(), entry.getValue()); else conn.setPrice(title,
+				 * entry.getValue()); System.out.println(title + "\t" +
+				 * entry.getKey() + "\t" + entry.getValue()); }
+				 */
 			}
 		} catch (IOException ex) {
-			throw new ArcaneException("Error downloading pricing information.", ex);
+			throw new ArcaneException("Error downloading pricing information.",
+					ex);
 		} catch (SQLException ex) {
 			throw new ArcaneException("Error updating pricing information.", ex);
 		}
 	}
 
-	public String getName () {
+	public String getName() {
 		return "Magic Traders";
 	}
 }

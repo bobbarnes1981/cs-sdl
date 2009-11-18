@@ -1,4 +1,3 @@
-
 package arcane.deckbuilder.mwsplay;
 
 import java.awt.event.ActionEvent;
@@ -14,20 +13,24 @@ import arcane.DecklistFile;
 import arcane.deckbuilder.DeckBuilderPlugin;
 import arcane.deckbuilder.ui.DeckBuilder;
 import arcane.ui.util.Menu;
-import arcane.ui.util.ProgressDialog;
+//import arcane.ui.util.ProgressDialog;
 
 public class MWSPlayPlugin extends DeckBuilderPlugin {
-	public void install (final DeckBuilder deckBuilder) {
+	public void install(final DeckBuilder deckBuilder) {
 		JMenu menu = new Menu(getName());
 		{
 			JMenuItem loadMenuItem = new JMenuItem("Open with MWSPlay...");
 			menu.add(loadMenuItem);
 			loadMenuItem.addActionListener(new ActionListener() {
-				public void actionPerformed (ActionEvent evt) {
+				public void actionPerformed(ActionEvent evt) {
 					try {
-						File tempFile = File.createTempFile("deckbuilder", "mwsplay");
-						deckBuilder.saveDecklist(new DecklistFile(tempFile.getAbsolutePath(), "MWS (mwDeck)"), false);
-						Runtime.getRuntime().exec("plugins/MWSPlay/MWSPlay/solitaire.bat \"" + tempFile.getAbsolutePath() + "\"");
+						File tempFile = File.createTempFile("deckbuilder",
+								"mwsplay");
+						deckBuilder.saveDecklist(new DecklistFile(tempFile
+								.getAbsolutePath(), "MWS (mwDeck)"), false);
+						Runtime.getRuntime().exec(
+								"plugins/MWSPlay/MWSPlay/solitaire.bat \""
+										+ tempFile.getAbsolutePath() + "\"");
 					} catch (IOException ex) {
 						throw new ArcaneException("Error running MWSPlay.", ex);
 					}
@@ -37,7 +40,7 @@ public class MWSPlayPlugin extends DeckBuilderPlugin {
 		deckBuilder.addPluginMenu(menu);
 	}
 
-	public String getName () {
+	public String getName() {
 		return "MWSPlay";
 	}
 }
