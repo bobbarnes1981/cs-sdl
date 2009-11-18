@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1250" standalone="no"?>
 <jardesc>
-    <jar path="C:/arcane.jar"/>
+    <jar path="/Users/dhudson/Documents/workspace-arcane/arcane.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/arcane/jar-arcane.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
@@ -12,7 +12,6 @@
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <javaElement handleIdentifier="=resources"/>
-        <javaElement handleIdentifier="=src"/>
     </selectedElements>
     <fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>
 </jardesc>
