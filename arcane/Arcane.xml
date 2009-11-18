@@ -1,9 +1,9 @@
 <launch4jConfig>
   <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>DeckBuilder.jar</jar>
-  <outfile>../../DeckBuilder.exe</outfile>
-  <errTitle>DeckBuilder</errTitle>
+  <jar>arcane.jar</jar>
+  <outfile>arcane.exe</outfile>
+  <errTitle>Arcane</errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>
   <priority>normal</priority>
@@ -12,7 +12,7 @@
   <customProcName>true</customProcName>
   <stayAlive>false</stayAlive>
   <manifest></manifest>
-  <icon>../deckbuilder/resources/deckbuilder.ico</icon>
+  <icon>resources/deckbuilder.ico</icon>
   <jre>
     <path></path>
     <minVersion>1.5.0</minVersion>
