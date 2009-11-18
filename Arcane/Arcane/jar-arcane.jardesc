@@ -1,17 +1,23 @@
-<?xml version="1.0" encoding="WINDOWS-1250" standalone="no"?>
+<?xml version="1.0" encoding="MacRoman"?>
 <jardesc>
-    <jar path="/Users/dhudson/Documents/workspace-arcane/arcane.jar"/>
-    <options buildIfNeeded="true" compress="true" descriptionLocation="/arcane/jar-arcane.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
-    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
-    <selectedProjects/>
-    <manifest generateManifest="false" manifestLocation="/arcane/manifest.arcane" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
-        <sealing sealJar="false">
-            <packagesToSeal/>
-            <packagesToUnSeal/>
-        </sealing>
-    </manifest>
-    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=resources"/>
-    </selectedElements>
-    <fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>
+<jar path="/Users/dhudson/Documents/workspace-arcane/arcane.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/arcane/jar-arcane.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+<storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+<selectedProjects/>
+<manifest generateManifest="false" manifestLocation="/arcane/manifest.arcane" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+<sealing sealJar="false">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+<folder path="/arcane/logs"/>
+<javaElement handleIdentifier="=arcane/src"/>
+<folder path="/arcane/data"/>
+<javaElement handleIdentifier="=arcane/resources"/>
+<folder path="/arcane/decks"/>
+<folder path="/arcane/templates"/>
+<folder path="/arcane/images"/>
+<folder path="/arcane/lib"/>
+</selectedElements>
 </jardesc>
