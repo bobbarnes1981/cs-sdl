@@ -11,13 +11,7 @@
 </sealing>
 </manifest>
 <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-<folder path="/arcane/logs"/>
-<javaElement handleIdentifier="=arcane/src"/>
-<folder path="/arcane/data"/>
 <javaElement handleIdentifier="=arcane/resources"/>
-<folder path="/arcane/decks"/>
-<folder path="/arcane/templates"/>
-<folder path="/arcane/images"/>
-<folder path="/arcane/lib"/>
+<javaElement handleIdentifier="=arcane/src"/>
 </selectedElements>
 </jardesc>
