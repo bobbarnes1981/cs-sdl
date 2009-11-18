@@ -1,6 +1,0 @@
-11-16 09:44:43 jdbc[2]: SQLException
-org.h2.jdbc.JdbcSQLException: Table RULES not found; SQL statement:
-SELECT 1 FROM rules [42102-118]
-11-16 09:44:45 jdbc[4]: SQLException
-org.h2.jdbc.JdbcSQLException: Table RULINGS not found; SQL statement:
-SELECT 1 FROM rulings [42102-118]
