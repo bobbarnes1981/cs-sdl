@@ -3,6 +3,7 @@
 	<name>testPlugin</name>
 	<comment></comment>
 	<projects>
+		<project>arcane</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
