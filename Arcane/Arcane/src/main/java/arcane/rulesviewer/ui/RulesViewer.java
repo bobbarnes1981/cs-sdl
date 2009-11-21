@@ -463,8 +463,8 @@ public class RulesViewer extends ArcaneFrame {
 		}
 	}
 
-	public static void main (String[] args) throws Exception {
-		Arcane.setup("data/arcane.properties", "arcane.log", true);
-		new RulesViewer().setVisible(true);
-	}
+//	public static void main (String[] args) throws Exception {
+//		Arcane.setup("data/arcane.properties", "arcane.log", true);
+//		new RulesViewer().setVisible(true);
+//	}
 }
