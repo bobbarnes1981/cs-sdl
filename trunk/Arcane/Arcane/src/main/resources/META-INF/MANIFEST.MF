@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: . arcane.jar lib/antlr-2.7.7.jar lib/h2.jar lib/stringtemplate.jar
+Main-Class: arcane.deckbuilder.ui.DeckBuilder
+
