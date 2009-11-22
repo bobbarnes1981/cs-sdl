@@ -16,6 +16,13 @@
 			UTF-8
         </project.reporting.outputEncoding>
 	</properties>
+	<distributionManagement> 
+  <repository> 
+      <id>arcane-repository</id> 
+      <name>Arcane Repository</name> 
+      <url>file://${basedir}/target/deploy</url> 
+    </repository> 
+  </distributionManagement> 
 	<developers>
 		<developer>
 			<id>jendave</id>
