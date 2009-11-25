@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>slightlymagic</groupId>
-	<artifactId>MWSPlay</artifactId>
+	<groupId>net.slightlymagic</groupId>
+	<artifactId>mwsplay</artifactId>
 	<packaging>jar</packaging>
 	<name>MWSPlay</name>
 	<version>1.0-SNAPSHOT</version>
@@ -70,7 +70,6 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
-						<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
 					</archive>
 				</configuration>
 			</plugin>
@@ -105,6 +104,12 @@
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.slightlymagic</groupId>
+			<artifactId>arcane</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<optional>false</optional>
 		</dependency>
 	</dependencies>
 </project>
