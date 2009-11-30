@@ -9,6 +9,7 @@
 	<description>Deckbuilder for Magic: The Gathering</description>
 	<url>http://www.slightlymagic.net/</url>
 	<modules> 
+	<module>Arcane</module> 
     <module>CardGenerator</module> 
     <module>CrystalKeepRulings</module> 
     <module>MagicTraders</module> 
@@ -62,6 +63,9 @@
 			<url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
 		</license>
 	</licenses>
+	<scm>
+		<url>https://cs-sdl.svn.sourceforge.net/svnroot/cs-sdl/trunk/Arcane/</url>
+	</scm>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
