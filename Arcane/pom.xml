@@ -9,12 +9,12 @@
 	<description>Deckbuilder for Magic: The Gathering</description>
 	<url>http://www.slightlymagic.net/</url>
 	<modules> 
-	<module>Arcane</module> 
-    <module>CardGenerator</module> 
-    <module>CrystalKeepRulings</module> 
-    <module>MagicTraders</module> 
-    <module>MTGVault</module> 
-    <module>MWSPlay</module> 
+		<module>Arcane</module>
+    	<module>CardGenerator</module> 
+    	<module>CrystalKeepRulings</module> 
+    	<module>MagicTraders</module> 
+    	<module>MTGVault</module> 
+    	<module>MWSPlay</module> 
     </modules>
 	<properties>
 		<project.build.sourceEncoding>
