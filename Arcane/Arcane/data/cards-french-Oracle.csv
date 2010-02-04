@@ -762,7 +762,7 @@ Retirez un marqueur +1/+0 de l'Hydre de Balduvia: Prévenez la prochaine blessur
 {R}{R}{R}: Mettez un marqueur +1/+0 sur l'Hydre de Balduvia. Ne jouez cette capacité que pendant votre entretien."
 Balduvian Rage,Rage Balduviane,Ephémère,"La créature attaquante ciblée gagne +X/+0 jusqu'à la fin du tour.
 Piochez une carte au début de l'entretien du prochain tour."
-Balduvian Shaman,Shamane balduvian,Créature - Humain et Clerc et Shamane,{T}: Changez le texte de l'enchantement blanc ciblé que vous contrôlez et qui n'a pas d'entretien cumulatif en remplacant toutes les occurences d'une couleur par une autre. Cet enchantement acquiert 'Entretien cumulatif - {1}.' 
+Balduvian Shaman,Shamane balduvian,Créature - Humain et Clerc et Shamane,{T}: Changez le texte de l'enchantement blanc ciblé que vous contrôlez et qui n'a pas d'entretien cumulatif en remplacant toutes les occurences d'une couleur par une autre. Cet enchantement acquiert 'Entretien cumulatif - {1}.'
 Balduvian Trading Post,Comptoir balduvian,Terrain,"Si le Comptoir balduvian devait arriver en jeu, sacrifiez une montagne dégagée à la place. Si vous le faites, mettez le Comptoir balduvian en jeu. Sinon mettez-le dans le cimetière de son propriétaire.
 {T}: Ajoutez {1}{R} à votre réserve.
 {1}, {T}: Le Comptoir balduvian inflige une blessure à une créature attaquante ciblée."
@@ -5979,7 +5979,7 @@ Sacrifiez un jeton Plante et Mur : Ajoutez {R} à votre réserve."
 Jungle Troll,Troll des jungles,Créature - Troll,"{R}: Régénérez le Troll des jungles.
 {G}: Régénérez le Troll des jungles."
 Jungle Wurm,Guivre des jungles,Créature - Guivre,"A chaque fois que la Guivre des jungles devient bloquée par deux créatures ou plus, elle gagne -1/-1 jusqu'à la fin du tour pour chaque créature qui la bloque en plus de la première."
-Juniper Order Advocate,Apotre de l'ordre du genévrier,Créature - Humain et Chevalier,Les créatures vertes que vous contrôlez gagnent +1/+1 aussi longtemps que l'Apotre de l'ordre du genévrier est dégagé. 
+Juniper Order Advocate,Apotre de l'ordre du genévrier,Créature - Humain et Chevalier,Les créatures vertes que vous contrôlez gagnent +1/+1 aussi longtemps que l'Apotre de l'ordre du genévrier est dégagé.
 Juniper Order Druid,Druide de l'ordre de genévrier,Créature - Humain et Clerc et Druide,{T}: Dégagez le terrain ciblé.
 Juniper Order Ranger,Ranger de l'ordre du genévrier,Créature - Humain et Chevalier,"A chaque fois qu'une autre créature arrive en jeu sous votre contrôle, mettez un marqueur +1/+1 sur cette créature et un marqueur +1/+1 sur le Ranger de l'ordre du genévrier."
 Junk Diver,Mécaplongeur,Créature Artefact - Oiseau,"Vol
@@ -7384,7 +7384,7 @@ Mistform Skyreaver,Pillard célèste changebrume,Créature - Illusion,"Vol
 Mistform Sliver,Slivoïde changebrume,Créature - Illusion et Slivoïde,Tous les slivoïdes ont “{1}: Ce permanent devient du type de créature de votre choix en plus de ses autres types jusqu'à la fin du tour.”
 Mistform Stalker,Pisteur changebrume,Créature - Illusion,"{1}: Le type du Pisteur changebrume devient le type de créature de votre choix jusqu'à la fin du tour.
 {2}{U}{U}: Le Pisteur changebrume gagne +2/+2 et a le vol jusqu'à la fin du tour."
-Mistform Ultimus,Ultimus changebrume,Créature légendaire - Illusion,L'Ultimus changebrume est de tous les types de créature #(meme si cette carte n'est pas en jeu)#. 
+Mistform Ultimus,Ultimus changebrume,Créature légendaire - Illusion,L'Ultimus changebrume est de tous les types de créature #(meme si cette carte n'est pas en jeu)#.
 Mistform Wakecaster,Lanceveille changebrume,Créature - Illusion,"Vol
 {1}: Le type du Lanceveille changebrume devient le type de créature de votre choix jusqu'à la fin du tour.
 {2}{U}{U}, {T}: Choisissez un type de créature. Le type de chaque créature que vous contrôlez devient de ce type jusqu'à la fin du tour."
@@ -13623,7 +13623,7 @@ Zombie Boa,Boa zombie,Créature - Serpent et Zombie,"{1}{B}: Choisissez une coul
 Zombie Brute,Brute zombie,Créature - Zombie,"Amplification 1 #(Au moment où cette carte arrive en jeu, mettez un marqueur +1/+1 sur elle pour chaque carte de zombie que vous révélez de votre main.)#
 Piétinement"
 Zombie Cannibal,Zombie cannibale,Créature - Zombie,"A chaque fois que le Zombie cannibale inflige des blessures de combat à un joueur, vous pouvez retirer de la partie la carte ciblée du cimetière de ce joueur."
-Zombie Cutthroat,Surineur zombie,Créature - Zombie,Mue - Payez 5 points de vie #(Vous pouvez jouer cette carte face cachée comme une créature 2/2 pour {3}. Retournez-la quand vous le désirez pour son coût de mue.)# 
+Zombie Cutthroat,Surineur zombie,Créature - Zombie,Mue - Payez 5 points de vie #(Vous pouvez jouer cette carte face cachée comme une créature 2/2 pour {3}. Retournez-la quand vous le désirez pour son coût de mue.)#
 Zombie Infestation,Infestation de zombies,Enchantement,Défaussez-vous de deux cartes : Mettez un jeton de créature noire zombie 2/2 en jeu.
 Zombie Master,Maitre des zombies,Créature - Zombie,"Toutes les autres créatures Zombie ont la traversée des marais.
 Tous les autres Zombie ont “{B}: Régénérez ce permanent.”"
