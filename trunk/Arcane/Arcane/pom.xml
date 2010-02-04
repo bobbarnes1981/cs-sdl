@@ -67,6 +67,7 @@
                 <version>1.0-alpha-1</version>
                 <configuration>
                     <mainClass>arcane.deckbuilder.ui.DeckBuilder</mainClass>
+                    <iconFile>src/main/resources/deckbuilder.icns</iconFile>
                 </configuration>
                 <executions>
                     <execution>
@@ -80,8 +81,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.5</source>
+					<target>1.5</target>
 				</configuration>
 			</plugin>
 			<plugin>
