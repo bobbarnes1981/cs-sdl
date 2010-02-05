@@ -130,8 +130,8 @@ public class RatingRenderer extends PaddedRenderer {
 	}
 
 	static public void loadImages () {
-		starImage = UI.getImageIcon("images/star.png").getImage();
-		greyStarImage = UI.getImageIcon("images/star_grey.png").getImage();
-		overStarImage = UI.getImageIcon("images/star_over.png").getImage();
+		starImage = UI.getImageIcon("/images/star.png").getImage();
+		greyStarImage = UI.getImageIcon("/images/star_grey.png").getImage();
+		overStarImage = UI.getImageIcon("/images/star_over.png").getImage();
 	}
 }

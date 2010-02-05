@@ -162,10 +162,10 @@ public abstract class CardInfoPane extends JEditorPane {
 				if (card.rating > 0 || card.flags.length() > 0) {
 					buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td>");
 					for (int ii = 0, nn = card.rating; ii < nn; ii++)
-						buffer.append("<img src='file:images/star.png' width=14 height=14>");
+						buffer.append("<img src='file:/images/star.png' width=14 height=14>");
 					buffer.append("</td><td align='right'>");
 					for (int ii = 0, nn = card.flags.length(); ii < nn; ii++) {
-						buffer.append("<img src='file:images/flag_");
+						buffer.append("<img src='file:/images/flag_");
 						buffer.append(card.flags.charAt(ii));
 						buffer.append(".png' width=14 height=14>");
 					}
