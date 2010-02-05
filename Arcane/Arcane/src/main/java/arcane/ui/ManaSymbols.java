@@ -20,7 +20,7 @@ public class ManaSymbols {
 				"4", "5", "6", "7", "8", "9", "B", "BG", "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", 
 				"UR", "W", "WB", "WU", "X", "Y", "Z", "slash"};
 		for (String symbol : symbols)
-			manaImages.put(symbol, UI.getImageIcon("images/symbols-13/" + symbol + ".png").getImage());
+			manaImages.put(symbol, UI.getImageIcon("/images/symbols-13/" + symbol + ".png").getImage());
 	}
 
 	static public void draw (Graphics g, String manaCost, int x, int y) {
@@ -51,13 +51,13 @@ public class ManaSymbols {
 
 	static public synchronized String replaceSymbolsWithHTML (String value, boolean small) {
 		if (small){
-			value = value.replace("{C}", "<img src='file:images/symbols-11/C.png' width=13 height=11>");
-			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:images/symbols-11/$1$2.png' width=11 height=11>");
+			value = value.replace("{C}", "<img src='file:/images/symbols-11/C.png' width=13 height=11>");
+			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:/images/symbols-11/$1$2.png' width=11 height=11>");
 		}
 		else {
-			value = value.replace("{slash}", "<img src='file:images/symbols-13/slash.png' width=10 height=13>");
-			value = value.replace("{C}", "<img src='file:images/symbols-13/C.png' width=16 height=13>");
-			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:images/symbols-13/$1$2.png' width=13 height=13>");
+			value = value.replace("{slash}", "<img src='file:/images/symbols-13/slash.png' width=10 height=13>");
+			value = value.replace("{C}", "<img src='file:/images/symbols-13/C.png' width=16 height=13>");
+			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:/images/symbols-13/$1$2.png' width=13 height=13>");
 		}
 	}
 }

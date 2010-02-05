@@ -129,12 +129,12 @@ public class FlagRenderer extends PaddedRenderer {
 	}
 
 	static public void loadImages () {
-		greyFlagImage = UI.getImageIcon("images/flag_grey.png").getImage();
-		indexToFlag.put(0, new Flag("Blue", UI.getImageIcon("images/flag_b.png").getImage()));
-		indexToFlag.put(1, new Flag("Green", UI.getImageIcon("images/flag_g.png").getImage()));
-		indexToFlag.put(2, new Flag("Yellow", UI.getImageIcon("images/flag_y.png").getImage()));
-		indexToFlag.put(3, new Flag("Orange", UI.getImageIcon("images/flag_o.png").getImage()));
-		indexToFlag.put(4, new Flag("Red", UI.getImageIcon("images/flag_r.png").getImage()));
+		greyFlagImage = UI.getImageIcon("/images/flag_grey.png").getImage();
+		indexToFlag.put(0, new Flag("Blue", UI.getImageIcon("/images/flag_b.png").getImage()));
+		indexToFlag.put(1, new Flag("Green", UI.getImageIcon("/images/flag_g.png").getImage()));
+		indexToFlag.put(2, new Flag("Yellow", UI.getImageIcon("/images/flag_y.png").getImage()));
+		indexToFlag.put(3, new Flag("Orange", UI.getImageIcon("/images/flag_o.png").getImage()));
+		indexToFlag.put(4, new Flag("Red", UI.getImageIcon("/images/flag_r.png").getImage()));
 	}
 
 	static public class Flag {
