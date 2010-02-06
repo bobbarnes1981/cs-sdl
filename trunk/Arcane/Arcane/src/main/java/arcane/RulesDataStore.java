@@ -2,6 +2,7 @@
 package arcane;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,8 +18,9 @@ import arcane.util.DataStore;
 import arcane.util.InputStreamMonitor;
 
 public class RulesDataStore extends DataStore<RulesDataStore.RulesDataStoreConnection> {
+	
 	public RulesDataStore () throws SQLException {
-		super("data/rulesdb/rules", "rules", false);
+		super(Arcane.getHomeDirectory() + "data/rulesdb/rules", "rules", false);
 		addColumn("rule VARCHAR (32)");
 		addColumn("subrule VARCHAR (32)");
 		addColumn("text VARCHAR (4096)");
