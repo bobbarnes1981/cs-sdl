@@ -160,10 +160,10 @@ public class DeckBuilder extends DeckBuilderUI {
 				updateCardImageType();
 				updateButtons();
 
-				saveFileChooser = new JFileChooser("decks");
+				saveFileChooser = new JFileChooser(Arcane.getHomeDirectory() + "decks");
 				saveFileChooser.setAcceptAllFileFilterUsed(false);
 				Pattern pattern = Pattern.compile("(.+)\\((.+)\\)\\.st$");
-				for (File file : new File("templates").listFiles(FileUtil.filenameEndsWith(".st"))) {
+				for (File file : new File(Arcane.getHomeDirectory() + "templates").listFiles(FileUtil.filenameEndsWith(".st"))) {
 					Matcher matcher = pattern.matcher(file.getName());
 					if (!matcher.matches()) continue;
 					String name = matcher.group(1).trim();
@@ -2686,6 +2686,7 @@ public class DeckBuilder extends DeckBuilderUI {
 	}
 
 	public static void main (String[] args) throws Exception {
+		Arcane.getHomeDirectory();
 		Arcane.setup("data/arcane.properties", "arcane.log", true);
 		new DeckBuilder().setVisible(true);
 	}

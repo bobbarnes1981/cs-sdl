@@ -80,14 +80,30 @@ public class Arcane {
 	private boolean loadRuleData;
 
 	static private Arcane instance;
+	static private String dataDir;
 
 	private Arcane (boolean loadRuleData) {
 		this.loadRuleData = loadRuleData;
+		String os = System.getProperty("os.name");
+		if (os.contains("Windows")) {
+			dataDir = "";
+		} else if (os.contains("Mac")) {
+			dataDir = System.getProperty("user.home") + "/Library/Application Support/Arcane/";
+			System.setProperty("com.apple.macos.useScreenMenuBar","true");
+		} else {
+			dataDir = System.getProperty("user.home") + ".arcane/";
+		}
+		System.out.println(dataDir);
+	}
+	
+	static public String getHomeDirectory() {
+		return dataDir;
 	}
 
 	static public void setup (String prefsFileName, String logFileName, boolean loadRuleData) {
 		if (instance != null) return;
-		File logDir = new File("logs");
+		instance = new Arcane(loadRuleData);
+		File logDir = new File(Arcane.getHomeDirectory() + "logs");
 		logDir.mkdir();
 		File logFile = new File(logDir, logFileName);
 		logFile.delete();
@@ -105,8 +121,8 @@ public class Arcane {
 		UI.setSystemLookAndFeel();
 		//UI.setDefaultFont(Font.decode("Tahoma-11"));
 
-		instance = new Arcane(loadRuleData);
-		Loader loader = instance.new DataLoader("Arcane v" + Arcane.version, prefsFileName);
+		//instance = new Arcane(loadRuleData);
+		Loader loader = instance.new DataLoader("Arcane v" + Arcane.version, Arcane.getHomeDirectory() + prefsFileName);
 		loader.start("ArcaneLoader");
 		if (loader.failed()) throw new ArcaneException("Arcane initialization aborted.");
 	}
@@ -352,17 +368,17 @@ public class Arcane {
 	private class DataLoader extends Loader {
 		private String prefsFileName;
 		private String transFileName;
-		private String dataDir;
+		//private String dataDir;
 
 		public DataLoader (String title, String prefsFileName) {
 			super(title);
-			this.prefsFileName = prefsFileName;
-			dataDir = new File("data-test").exists() ? "data-test/" : "data/";
+			this.prefsFileName = prefsFileName;	
 		}
 		
 		public void load () throws Exception {
+			//System.console().writer().write("dataDir: " + dataDir);
 			// Check if we are running from the right directory.
-			if (!new File("data").exists()) {
+			if (!new File(Arcane.getHomeDirectory()).exists()) {
 				MessageFrame errorFrame = getErrorFrame();
 				errorFrame.appendText("This application must be started from its own directory.\n");
 				errorFrame.appendText("\n");
@@ -395,17 +411,17 @@ public class Arcane {
 			if (!prefs.version.equals(version)) {
 				dialog.setMessage("Updating version...");
 				new File("arcane.properties").delete();
-				FileUtil.deleteDirectory(new File(dataDir + "rulesdb"));
+				FileUtil.deleteDirectory(new File(Arcane.getHomeDirectory() + "data/rulesdb"));
 			}
 			
-			transFileName = "data/" + prefs.uiLanguage.toLowerCase() + ".lang";
+			transFileName = dataDir + prefs.uiLanguage.toLowerCase() + ".lang";
 			trans = new ArcaneTranslation(transFileName);
 			
 			// Reset rule data if it changed.
-			long rulesStamp = new File(dataDir + "rule-cards.txt").lastModified();
-			long rulingsStamp = new File(dataDir + "rule-general.txt").lastModified();
+			long rulesStamp = new File(Arcane.getHomeDirectory() + "data/rule-cards.txt").lastModified();
+			long rulingsStamp = new File(Arcane.getHomeDirectory() + "data/rule-general.txt").lastModified();
 			if (rulesStamp != prefs.rulesTimestamp || rulingsStamp != prefs.rulingsTimestamp)
-				FileUtil.deleteDirectory(new File(dataDir + "rulesdb"));
+				FileUtil.deleteDirectory(new File(Arcane.getHomeDirectory() + "data/rulesdb"));
 			prefs.rulesTimestamp = rulesStamp;
 			prefs.rulingsTimestamp = rulingsStamp;
 
@@ -415,12 +431,12 @@ public class Arcane {
 				// Load rule data.
 				dialog.setMessage("Initializing rules datastore...");
 				rulesDatastore = new RulesDataStore();
-				rulesDatastore.populate(dialog, dataDir);
+				rulesDatastore.populate(dialog, Arcane.getHomeDirectory() + "data/");
 				if (isCancelled()) return;
 
 				dialog.setMessage("Initializing rulings datastore...");
 				rulingsDatastore = new RulingsDataStore();
-				rulingsDatastore.populate(dialog, dataDir);
+				rulingsDatastore.populate(dialog, Arcane.getHomeDirectory() + "data/");
 				if (isCancelled()) return;
 			}
 
@@ -460,7 +476,7 @@ public class Arcane {
 		}
 
 		private void loadPlugins () throws IOException {
-			File pluginsDir = new File("plugins");
+			File pluginsDir = new File(Arcane.getHomeDirectory() + "plugins");
 			if (!pluginsDir.exists() || !pluginsDir.isDirectory()) return;
 
 			dialog.setMessage("Initializing plugins...");
@@ -503,7 +519,7 @@ public class Arcane {
 			loadSets();
 
 			cardDataStore = new CardDataStore();
-			allCards = cardDataStore.populate(dialog, dataDir);
+			allCards = cardDataStore.populate(dialog, Arcane.getHomeDirectory() + "data/");
 
 			if (isCancelled()) return;
 			dialog.setValue(-1);
@@ -533,8 +549,8 @@ public class Arcane {
 
 			loadUserData();
 
-			loadManaProduced(dataDir + "titleToLandColors.csv");
-			loadManaProduced(dataDir + "titleToCardColors.csv");
+			loadManaProduced(Arcane.getHomeDirectory() + "data/titleToLandColors.csv");
+			loadManaProduced(Arcane.getHomeDirectory() + "data/titleToCardColors.csv");
 
 			loadFormats();
 
@@ -543,7 +559,7 @@ public class Arcane {
 
 		private void loadSets () throws IOException, SQLException {
 			int ordinal = 0;
-			BufferedReader reader = new BufferedReader(new UnicodeReader(new FileInputStream(dataDir + "sets.txt"), "UTF-8"));
+			BufferedReader reader = new BufferedReader(new UnicodeReader(new FileInputStream(Arcane.getHomeDirectory() + "data/sets.txt"), "UTF-8"));
 			while (true) {
 				String line = reader.readLine();
 				if (line == null) break;
@@ -551,7 +567,7 @@ public class Arcane {
 				if (line.length() == 0) continue;
 				if (line.charAt(0) == '#') continue;
 				int spaceIndex = line.indexOf(' ');
-				if (spaceIndex == 0) throw new ArcaneException("Error parsing \"data/sets.txt\". Invalid entry: " + line);
+				if (spaceIndex == 0) throw new ArcaneException("Error parsing " + Arcane.getHomeDirectory() + "data/sets.txt\". Invalid entry: " + line);
 
 				String[] abbreviations = line.substring(0, spaceIndex).split(",");
 
@@ -579,7 +595,7 @@ public class Arcane {
 				}
 			};
 			languages.add("English");
-			for (File cardsFile : new File("data").listFiles(cardsFilter)) {
+			for (File cardsFile : new File(Arcane.getHomeDirectory() + "data/").listFiles(cardsFilter)) {
 				languages.add(cardsFile.getName().substring(6, 7).toUpperCase()
 					+ cardsFile.getName().substring(7, cardsFile.getName().length() - 4));
 			}
@@ -590,7 +606,7 @@ public class Arcane {
 				}
 			};
 			uiLanguages.add("English");
-			for (File uiLangFile : new File("data").listFiles(uiLanguagesFilter)) {
+			for (File uiLangFile : new File(Arcane.getHomeDirectory() + "data/").listFiles(uiLanguagesFilter)) {
 				uiLanguages.add(uiLangFile.getName().substring(0, 1).toUpperCase()
 					+ uiLangFile.getName().substring(1, uiLangFile.getName().length() - 5));
 			}
@@ -599,7 +615,7 @@ public class Arcane {
 
 			dialog.setMessage("Loading language: " + prefs.language);
 
-			File languageFile = new File(dataDir + "cards-" + prefs.language.toLowerCase() + ".csv");
+			File languageFile = new File(Arcane.getHomeDirectory() + "data/cards-" + prefs.language.toLowerCase() + ".csv");
 			if (!languageFile.exists()) {
 				logError("Missing language file: " + languageFile.getAbsolutePath());
 				return;
@@ -704,7 +720,7 @@ public class Arcane {
 		}
 
 		private void loadFormats () throws IOException {
-			BufferedReader reader = new BufferedReader(new FileReader(dataDir + "formats.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader(Arcane.getHomeDirectory() + "data/formats.txt"));
 			try {
 				while (true) {
 					Format currentFormat = Format.getByText(reader.readLine());
@@ -720,7 +736,7 @@ public class Arcane {
 							state = line;
 							continue;
 						}
-						if (state == null) throw new ArcaneException("Error parsing \"data/formats.txt\". Invalid section: " + line);
+						if (state == null) throw new ArcaneException("Error parsing " + Arcane.getHomeDirectory() + "data/formats.txt\". Invalid section: " + line);
 						if (state.equals("BANNED")) {
 							String cardName = line.toLowerCase();
 							getCards(line);
@@ -742,7 +758,7 @@ public class Arcane {
 						} else if (state.equals("SETS")) {
 							String set = setToMainSet.get(line.toLowerCase());
 							if (!setToOrdinal.containsKey(set))
-								throw new ArcaneException("Error parsing \"data/formats.txt\". Invalid set: " + line);
+								throw new ArcaneException("Error parsing" + Arcane.getHomeDirectory() + "data/formats.txt\". Invalid set: " + line);
 							Set<String> sets = getFormatSets(currentFormat);
 							if (sets == null) {
 								sets = new HashSet();
