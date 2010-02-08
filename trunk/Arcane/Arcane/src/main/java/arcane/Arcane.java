@@ -89,7 +89,7 @@ public class Arcane {
 			dataDir = "";
 		} else if (os.contains("Mac")) {
 			dataDir = System.getProperty("user.home") + "/Library/Application Support/Arcane/";
-			System.setProperty("com.apple.macos.useScreenMenuBar","true");
+			System.setProperty("apple.laf.useScreenMenuBar", "true");
 		} else {
 			dataDir = System.getProperty("user.home") + ".arcane/";
 		}
