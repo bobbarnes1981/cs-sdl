@@ -16,13 +16,13 @@
 			UTF-8
         </project.reporting.outputEncoding>
 	</properties>
-	<distributionManagement> 
-  <repository> 
-      <id>arcane-repository</id> 
-      <name>Arcane Repository</name> 
-      <url>file://${basedir}/target/deploy</url> 
-    </repository> 
-  </distributionManagement> 
+	<distributionManagement>
+		<repository>
+			<id>arcane-repository</id>
+			<name>Arcane Repository</name>
+			<url>file://${basedir}/target/deploy</url>
+		</repository>
+	</distributionManagement>
 	<developers>
 		<developer>
 			<id>jendave</id>
@@ -51,12 +51,12 @@
 	</developers>
 	<licenses>
 		<license>
-			<name>GPL</name>
-			<url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+			<name>GPL 3</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0-standalone.html</url>
 		</license>
 	</licenses>
 	<scm>
-		<url>https://cs-sdl.svn.sourceforge.net/svnroot/cs-sdl/trunk/Arcane/CrystalKeepRulings/</url>
+		<url>https://cs-sdl.svn.sourceforge.net/svnroot/cs-sdl/trunk/Arcane/CardGenerator/</url>
 	</scm>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -64,8 +64,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.5</source>
+					<target>1.5</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -79,29 +79,6 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<dependency>
-			<groupId>org.bluestemsoftware.open.maven.plugin</groupId>
-			<artifactId>launch4j-plugin</artifactId>
-			<version>1.0.0.3</version>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.2.123</version>
-			<optional>false</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.antlr</groupId>
-			<artifactId>stringtemplate</artifactId>
-			<version>3.2.1</version>
-			<optional>false</optional>
-		</dependency>
-		<dependency>
-			<groupId>antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>2.7.7</version>
-			<optional>false</optional>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
