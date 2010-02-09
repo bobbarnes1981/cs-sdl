@@ -23,16 +23,50 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 	static private JFileChooser dirFileChooser;
 
 	private DeckBuilder deckBuilder;
+	
+	private String generateCardsWindows = "generateCards.bat";
+	private String generateCardsDecklistsWindows = "generateCards-decklists.bat";
+	private String generatePagesWindows = "generatePages.bat";
+	private String generatePagesDecklistsWindows = "generatePages-decklists.bat";
+	private String createCardWindows = "createCard.bat";
+	
+	private String generateCardsUnix = "generateCards.sh";
+	private String generateCardsDecklistsUnix = "generateCards-decklists.sh";
+	private String generatePagesUnix = "generatePages.sh";
+	private String generatePagesDecklistsUnix = "generatePages-decklists.sh";
+	private String createCardUnix = "createCard.sh";
+	
+	private String generateCards;
+	private String generateCardsDecklists;
+	private String generatePages;
+	private String generatePagesDecklists;
+	private String createCard;
+
 
 	public void install(DeckBuilder deckBuilder) {
 		this.deckBuilder = deckBuilder;
+		if (Util.isWindows) {
+			generateCards = generateCardsWindows;
+			generateCardsDecklists = generateCardsDecklistsWindows;
+			generatePages = generatePagesWindows;
+			generatePagesDecklists = generatePagesDecklistsWindows;
+			createCard = createCardWindows;
+		}
+		else
+		{
+			generateCards = generateCardsUnix;
+			generateCardsDecklists = generateCardsDecklistsUnix;
+			generatePages = generatePagesUnix;
+			generatePagesDecklists = generatePagesDecklistsUnix;
+			createCard = createCardUnix;
+		}
 		JMenu menu = new JMenu(getName());
 		{
 			JMenuItem menuItem = new JMenuItem("Generate cards...");
 			menu.add(menuItem);
 			menuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
-					launchGenerator("generateCards.bat");
+					launchGenerator(generateCards);
 				}
 			});
 		}
@@ -41,7 +75,7 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 			menu.add(menuItem);
 			menuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
-					launchGenerator("generateCards-decklists.bat");
+					launchGenerator(generateCardsDecklists);
 				}
 			});
 		}
@@ -50,7 +84,7 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 			menu.add(menuItem);
 			menuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
-					launchGenerator("generatePages.bat");
+					launchGenerator(generatePages);
 				}
 			});
 		}
@@ -60,7 +94,7 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 			menu.add(menuItem);
 			menuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
-					launchGenerator("generatePages-decklists.bat");
+					launchGenerator(generatePagesDecklists);
 				}
 			});
 		}
@@ -80,7 +114,7 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 										"cmd",
 										"/C",
 										directory.getAbsolutePath()
-												+ "\\misc\\createCard.bat" });
+												+ "\\misc\\" + createCard });
 					} catch (IOException ex) {
 						throw new ArcaneException(
 								"Error launching card generator.", ex);
@@ -103,8 +137,8 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 	}
 
 	private void promptDirectory() {
-		if (!checkWindows())
-			return;
+//		if (!checkWindows())
+//			return;
 
 		if (dirFileChooser == null) {
 			dirFileChooser = new JFileChooser((directory == null || !directory
@@ -121,19 +155,19 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 		directory = file;
 	}
 
-	private boolean checkWindows() {
-		if (Util.isWindows) {
-			JOptionPane.showMessageDialog(deckBuilder,
-					"Sorry, the card generator plugin only works on Windows.",
-					"Windows Only", JOptionPane.WARNING_MESSAGE);
-			return false;
-		}
-		return true;
-	}
+//	private boolean checkWindows() {
+//		if (Util.isWindows) {
+//			JOptionPane.showMessageDialog(deckBuilder,
+//					"Sorry, the card generator plugin only works on Windows.",
+//					"Windows Only", JOptionPane.WARNING_MESSAGE);
+//			return false;
+//		}
+//		return true;
+//	}
 
 	private void launchGenerator(String batchFile) {
-		if (!checkWindows())
-			return;
+//		if (!checkWindows())
+//			return;
 
 		if (directory == null || !directory.exists()) {
 			promptDirectory();

@@ -26,6 +26,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 //import arcane.Arcane;
+import arcane.Arcane;
 import arcane.ArcaneException;
 //import arcane.Card;
 //import arcane.CardDataStore.CardDataStoreConnection;
@@ -73,7 +74,7 @@ public class CrystalKeepRulingsPlugin extends DeckBuilderPlugin {
 					try {
 						ZipEntry entry;
 						while ((entry = zip.getNextEntry()) != null) {
-							out = new FileOutputStream("data/"
+							out = new FileOutputStream(Arcane.getHomeDirectory() + "data/"
 									+ entry.getName());
 							dest = new BufferedOutputStream(out, 2048);
 							int count;

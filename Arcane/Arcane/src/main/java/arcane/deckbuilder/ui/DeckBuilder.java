@@ -2687,7 +2687,7 @@ public class DeckBuilder extends DeckBuilderUI {
 
 	public static void main (String[] args) throws Exception {
 		Arcane.getHomeDirectory();
-		Arcane.setup("data/arcane.properties", "arcane.log", true);
+		Arcane.setup("arcane.properties", "arcane.log", true);
 		new DeckBuilder().setVisible(true);
 	}
 }

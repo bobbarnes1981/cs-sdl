@@ -27,7 +27,7 @@ import arcane.util.CSVReader;
 import arcane.util.FileUtil;
 
 public class DecklistFile implements Decklist {
-	static private StringTemplateGroup templates = new StringTemplateGroup("templates", "templates");
+	static private StringTemplateGroup templates = new StringTemplateGroup("templates", Arcane.getHomeDirectory() + "templates");
 	static private JFileChooser openFileChooser;
 
 	public final File file;
