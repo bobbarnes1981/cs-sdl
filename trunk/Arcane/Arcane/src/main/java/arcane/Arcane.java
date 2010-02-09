@@ -1,4 +1,3 @@
-
 package arcane;
 
 import java.awt.Font;
@@ -82,226 +81,259 @@ public class Arcane {
 	static private Arcane instance;
 	static private String dataDir;
 
-	private Arcane (boolean loadRuleData) {
+	private Arcane(boolean loadRuleData) {
 		this.loadRuleData = loadRuleData;
 		String os = System.getProperty("os.name");
 		if (os.contains("Windows")) {
 			dataDir = "";
 		} else if (os.contains("Mac")) {
-			dataDir = System.getProperty("user.home") + "/Library/Application Support/Arcane/";
+			dataDir = System.getProperty("user.home")
+					+ "/Library/Application Support/Arcane/";
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
 		} else {
 			dataDir = System.getProperty("user.home") + ".arcane/";
 		}
 		System.out.println(dataDir);
 	}
-	
+
 	static public String getHomeDirectory() {
 		return dataDir;
 	}
 
-	static public void setup (String prefsFileName, String logFileName, boolean loadRuleData) {
-		if (instance != null) return;
+	static public void setup(String prefsFileName, String logFileName,
+			boolean loadRuleData) {
+		if (instance != null)
+			return;
 		instance = new Arcane(loadRuleData);
 		File logDir = new File(Arcane.getHomeDirectory() + "logs");
 		logDir.mkdir();
 		File logFile = new File(logDir, logFileName);
 		logFile.delete();
 		try {
-			OutputStream logFileStream = new BufferedOutputStream(new FileOutputStream(logFile));
-			System.setOut(new PrintStream(new MultiplexOutputStream(System.out, logFileStream), true));
-			System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
+			OutputStream logFileStream = new BufferedOutputStream(
+					new FileOutputStream(logFile));
+			System.setOut(new PrintStream(new MultiplexOutputStream(System.out,
+					logFileStream), true));
+			System.setErr(new PrintStream(new MultiplexOutputStream(System.err,
+					logFileStream), true));
 		} catch (FileNotFoundException ex) {
 			throw new ArcaneException("Error setting up logging.", ex);
 		}
 
 		System.out.println("Arcane v" + version);
 		System.out.println();
+		// System.out.println(logDir);
 
 		UI.setSystemLookAndFeel();
-		//UI.setDefaultFont(Font.decode("Tahoma-11"));
+		// UI.setDefaultFont(Font.decode("Tahoma-11"));
 
-		//instance = new Arcane(loadRuleData);
-		Loader loader = instance.new DataLoader("Arcane v" + Arcane.version, Arcane.getHomeDirectory() + prefsFileName);
+		// instance = new Arcane(loadRuleData);
+		Loader loader = instance.new DataLoader("Arcane v" + Arcane.version,
+				Arcane.getHomeDirectory() + prefsFileName);
 		loader.start("ArcaneLoader");
-		if (loader.failed()) throw new ArcaneException("Arcane initialization aborted.");
+		if (loader.failed())
+			throw new ArcaneException("Arcane initialization aborted.");
 	}
 
-	static public synchronized Arcane getInstance () {
-		if (instance == null) throw new IllegalStateException("Arcane not setup.");
+	static public synchronized Arcane getInstance() {
+		if (instance == null)
+			throw new IllegalStateException("Arcane not setup.");
 		return instance;
 	}
 
 	/**
 	 * Returns the standard set abbreviation (interned) for the specified set.
 	 */
-	public String getMainSet (String set) {
-		if (set == null) System.out.println();
+	public String getMainSet(String set) {
+		if (set == null)
+			System.out.println();
 		return setToMainSet.get(set.toLowerCase());
 	}
 
-	public Set<String> getAlternateSets (String set) {
+	public Set<String> getAlternateSets(String set) {
 		set = getMainSet(set);
 		Set<String> alternateSets = new LinkedHashSet();
 		for (Entry<String, String> entry : setToMainSet.entrySet())
-			if (entry.getValue() == set) alternateSets.add(entry.getKey());
+			if (entry.getValue() == set)
+				alternateSets.add(entry.getKey());
 		return alternateSets;
 	}
 
-	public String getSetName (String set) {
+	public String getSetName(String set) {
 		return setToName.get(getMainSet(set));
 	}
 
-	public Integer getSetOrdinal (String set) {
+	public Integer getSetOrdinal(String set) {
 		return setToOrdinal.get(getMainSet(set));
 	}
 
-	public Set<String> getSets () {
+	public Set<String> getSets() {
 		return setToOrdinal.keySet();
 	}
 
-	public Set<String> getSets (String cardName) {
+	public Set<String> getSets(String cardName) {
 		Set<String> sets = new LinkedHashSet();
 		for (Card card : getCards(cardName))
 			sets.add(card.set);
 		return sets;
 	}
 
-	public Set<Integer> getPictureNumbers (String cardName, String set) {
+	public Set<Integer> getPictureNumbers(String cardName, String set) {
 		Set<Integer> pictureNumbers = new HashSet();
 		for (Card card : getCards(cardName, set))
 			pictureNumbers.add(card.pictureNumber);
 		return pictureNumbers;
 	}
 
-	public Set<String> getFormatSets (Format format) {
+	public Set<String> getFormatSets(Format format) {
 		return formatToSets.get(format);
 	}
 
-	public List<String> getLanguages () {
+	public List<String> getLanguages() {
 		return languages;
 	}
-	
-	public List<String> getUILanguages () {
+
+	public List<String> getUILanguages() {
 		return uiLanguages;
 	}
 
-	public List<Card> getCards () {
+	public List<Card> getCards() {
 		return allCards;
 	}
 
-	public List<Card> getCards (String name) {
-		if (name == null) throw new IllegalArgumentException("name cannot be null.");
+	public List<Card> getCards(String name) {
+		if (name == null)
+			throw new IllegalArgumentException("name cannot be null.");
 		List<Card> cards = nameToCards.get(name.toLowerCase());
-		if (cards == null) throw new ArcaneException("Card not found: " + name);
+		if (cards == null)
+			throw new ArcaneException("Card not found: " + name);
 		return cards;
 	}
 
-	public List<Card> getCards (String name, String set) throws ArcaneException {
-		if (set == null) return getCards(name);
+	public List<Card> getCards(String name, String set) throws ArcaneException {
+		if (set == null)
+			return getCards(name);
 		set = getMainSet(set);
 		List<Card> cards = new ArrayList();
 		for (Card card : getCards(name))
-			if (card.set == set) cards.add(card);
-		if (cards.isEmpty()) throw new ArcaneException("Card \"" + name + "\" not found with set: " + set);
+			if (card.set == set)
+				cards.add(card);
+		if (cards.isEmpty())
+			throw new ArcaneException("Card \"" + name
+					+ "\" not found with set: " + set);
 		return cards;
 	}
 
-	public Card getCard (int cardID) {
+	public Card getCard(int cardID) {
 		Card card = idToCard.get(cardID);
-		if (card == null) throw new ArcaneException("Card ID not found: " + cardID);
+		if (card == null)
+			throw new ArcaneException("Card ID not found: " + cardID);
 		return card;
 	}
 
-	public Card getCard (String name) {
+	public Card getCard(String name) {
 		return getCards(name).get(0);
 	}
 
-	public Card getRandomCard () {
+	public Card getRandomCard() {
 		return allCards.get(new Random().nextInt(allCards.size()));
 	}
 
-	public Card getCard (String name, String set) {
-		if (set == null) return getCard(name);
+	public Card getCard(String name, String set) {
+		if (set == null)
+			return getCard(name);
 		set = getMainSet(set);
 		for (Card card : getCards(name))
-			if (card.set == set) return card;
-		throw new ArcaneException("Card \"" + name + "\" not found with set: " + set);
+			if (card.set == set)
+				return card;
+		throw new ArcaneException("Card \"" + name + "\" not found with set: "
+				+ set);
 	}
 
-	public Card getCard (String name, String set, int pictureNumber) {
-		if (pictureNumber == -1) return getCard(name, set);
+	public Card getCard(String name, String set, int pictureNumber) {
+		if (pictureNumber == -1)
+			return getCard(name, set);
 		for (Card card : getCards(name, set))
-			if (card.pictureNumber == pictureNumber) return card;
-		throw new ArcaneException("Card \"" + name + "\" not found in set \"" + set + "\" with picture number: " + pictureNumber);
+			if (card.pictureNumber == pictureNumber)
+				return card;
+		throw new ArcaneException("Card \"" + name + "\" not found in set \""
+				+ set + "\" with picture number: " + pictureNumber);
 	}
 
-	public ArcanePreferences getPrefs () {
+	public ArcanePreferences getPrefs() {
 		return prefs;
 	}
-	
-	public ArcaneTranslation getTrans () {
+
+	public ArcaneTranslation getTrans() {
 		return trans;
 	}
 
-	public CardDataStoreConnection getCardDataStoreConnection () throws SQLException {
+	public CardDataStoreConnection getCardDataStoreConnection()
+			throws SQLException {
 		return cardDataStore.getThreadConnection();
 	}
 
-	public RulesDataStoreConnection getRulesDataStoreConnection () throws SQLException {
+	public RulesDataStoreConnection getRulesDataStoreConnection()
+			throws SQLException {
 		return rulesDatastore.getThreadConnection();
 	}
 
-	public RulingsDataStoreConnection getRulingsDataStoreConnection () throws SQLException {
+	public RulingsDataStoreConnection getRulingsDataStoreConnection()
+			throws SQLException {
 		return rulingsDatastore.getThreadConnection();
 	}
 
-	public MessageFrame getLogFrame () {
+	public MessageFrame getLogFrame() {
 		return logFrame;
 	}
 
-	public void log (String message) {
+	public void log(String message) {
 		System.out.println(message);
 	}
 
-	public void log (Exception ex) {
+	public void log(Exception ex) {
 		ex.printStackTrace();
 	}
 
-	public void log (String message, Exception ex) {
+	public void log(String message, Exception ex) {
 		System.out.println(message);
 		ex.printStackTrace();
 	}
 
-	public void logError (Exception ex) {
+	public void logError(Exception ex) {
 		exceptionHandler.uncaughtException(Thread.currentThread(), ex);
 	}
 
-	public void logError (String message) {
+	public void logError(String message) {
 		logError(new ArcaneException(message));
 	}
 
-	public void logError (String message, Exception ex) {
+	public void logError(String message, Exception ex) {
 		logError(new ArcaneException(message, ex));
 	}
 
-	public void showLogFrame () {
-		if (logFrame != null) logFrame.setVisible(true);
+	public void showLogFrame() {
+		if (logFrame != null)
+			logFrame.setVisible(true);
 	}
 
-	public boolean isBanned (String englishCardName, Format format) {
-		Set<Format> bannedFormats = cardNameToBannedFormats.get(englishCardName.toLowerCase());
-		if (bannedFormats == null) return false;
+	public boolean isBanned(String englishCardName, Format format) {
+		Set<Format> bannedFormats = cardNameToBannedFormats.get(englishCardName
+				.toLowerCase());
+		if (bannedFormats == null)
+			return false;
 		return bannedFormats.contains(format);
 	}
 
-	public boolean isRestricted (String englishCardName, Format format) {
-		Set<Format> restrictedFormats = cardNameToRestrictedFormats.get(englishCardName.toLowerCase());
-		if (restrictedFormats == null) return false;
+	public boolean isRestricted(String englishCardName, Format format) {
+		Set<Format> restrictedFormats = cardNameToRestrictedFormats
+				.get(englishCardName.toLowerCase());
+		if (restrictedFormats == null)
+			return false;
 		return restrictedFormats.contains(format);
 	}
 
-	public void saveUserData () throws IOException {
+	public void saveUserData() throws IOException {
 		boolean wroteEntries = false;
 		CSVWriter writer = new CSVWriter(new FileWriter("userData.csv"));
 		writer.writeField("Name");
@@ -344,58 +376,67 @@ public class Arcane {
 			}
 		}
 		writer.close();
-		if (!wroteEntries) new File("userData.csv").delete();
+		if (!wroteEntries)
+			new File("userData.csv").delete();
 	}
 
-	public int getTotalOwnedQty (String cardName) {
+	public int getTotalOwnedQty(String cardName) {
 		int qty = 0;
 		for (Card card : getCards(cardName))
 			qty += card.ownedQty;
 		return qty;
 	}
 
-	public List<Plugin> getPluginsList(){
+	public List<Plugin> getPluginsList() {
 		return plugins;
 	}
-	
+
 	/**
 	 * Looks up a class that might be defined in a plugin JAR.
 	 */
-	public Class getPluginClass (String pluginClassName) throws ClassNotFoundException {
+	public Class getPluginClass(String pluginClassName)
+			throws ClassNotFoundException {
 		return Class.forName(pluginClassName, true, pluginClassLoader);
 	}
 
 	private class DataLoader extends Loader {
 		private String prefsFileName;
 		private String transFileName;
-		//private String dataDir;
 
-		public DataLoader (String title, String prefsFileName) {
+		// private String dataDir;
+
+		public DataLoader(String title, String prefsFileName) {
 			super(title);
-			this.prefsFileName = prefsFileName;	
+			this.prefsFileName = prefsFileName;
 		}
-		
-		public void load () throws Exception {
-			//System.console().writer().write("dataDir: " + dataDir);
+
+		public void load() throws Exception {
+			// System.console().writer().write("dataDir: " + dataDir);
 			// Check if we are running from the right directory.
 			if (!new File(Arcane.getHomeDirectory()).exists()) {
 				MessageFrame errorFrame = getErrorFrame();
-				errorFrame.appendText("This application must be started from its own directory.\n");
+				errorFrame
+						.appendText("This application must be started from its own directory.\n");
 				errorFrame.appendText("\n");
 				errorFrame.appendText("Current directory:\n");
 				errorFrame.appendText(new File("").getAbsolutePath());
 				errorFrame.appendText("\n\n");
-				URL url = Arcane.class.getProtectionDomain().getCodeSource().getLocation();
+				URL url = Arcane.class.getProtectionDomain().getCodeSource()
+						.getLocation();
 				errorFrame.appendText("Required directory:\n");
 				File dir = new File(url.toURI());
-				if (dir.isFile()) dir = dir.getParentFile();
+				if (dir.isFile())
+					dir = dir.getParentFile();
 				dir = dir.getParentFile();
 				errorFrame.appendText(dir.getAbsolutePath());
 				errorFrame.appendText("\n\n");
-				errorFrame.appendText("To fix the problem, try running this application from the command line.\n");
-				errorFrame.appendText("Open a command line, change to the required directory, then execute:\n");
+				errorFrame
+						.appendText("To fix the problem, try running this application from the command line.\n");
+				errorFrame
+						.appendText("Open a command line, change to the required directory, then execute:\n");
 				errorFrame.appendText("java -jar Xxx.jar\n");
-				errorFrame.appendText("Replace Xxx.jar with the JAR file you want to run.\n\n\n");
+				errorFrame
+						.appendText("Replace Xxx.jar with the JAR file you want to run.\n\n\n");
 				errorFrame.setVisible(true);
 				cancel();
 				return;
@@ -406,65 +447,81 @@ public class Arcane {
 			FlagRenderer.loadImages();
 
 			prefs = new ArcanePreferences(prefsFileName);
-			
+
 			// Reset some data when versions change.
 			if (!prefs.version.equals(version)) {
 				dialog.setMessage("Updating version...");
 				new File("arcane.properties").delete();
-				FileUtil.deleteDirectory(new File(Arcane.getHomeDirectory() + "data/rulesdb"));
+				FileUtil.deleteDirectory(new File(Arcane.getHomeDirectory()
+						+ "data/rulesdb"));
 			}
-			
+
 			transFileName = dataDir + prefs.uiLanguage.toLowerCase() + ".lang";
 			trans = new ArcaneTranslation(transFileName);
-			
+
 			// Reset rule data if it changed.
-			long rulesStamp = new File(Arcane.getHomeDirectory() + "data/rule-cards.txt").lastModified();
-			long rulingsStamp = new File(Arcane.getHomeDirectory() + "data/rule-general.txt").lastModified();
-			if (rulesStamp != prefs.rulesTimestamp || rulingsStamp != prefs.rulingsTimestamp)
-				FileUtil.deleteDirectory(new File(Arcane.getHomeDirectory() + "data/rulesdb"));
+			long rulesStamp = new File(Arcane.getHomeDirectory()
+					+ "data/rule-cards.txt").lastModified();
+			long rulingsStamp = new File(Arcane.getHomeDirectory()
+					+ "data/rule-general.txt").lastModified();
+			if (rulesStamp != prefs.rulesTimestamp
+					|| rulingsStamp != prefs.rulingsTimestamp)
+				FileUtil.deleteDirectory(new File(Arcane.getHomeDirectory()
+						+ "data/rulesdb"));
 			prefs.rulesTimestamp = rulesStamp;
 			prefs.rulingsTimestamp = rulingsStamp;
 
-			if (isCancelled()) return;
+			if (isCancelled())
+				return;
 
 			if (loadRuleData) {
 				// Load rule data.
 				dialog.setMessage("Initializing rules datastore...");
 				rulesDatastore = new RulesDataStore();
-				rulesDatastore.populate(dialog, Arcane.getHomeDirectory() + "data/");
-				if (isCancelled()) return;
+				rulesDatastore.populate(dialog, Arcane.getHomeDirectory()
+						+ "data/");
+				if (isCancelled())
+					return;
 
 				dialog.setMessage("Initializing rulings datastore...");
 				rulingsDatastore = new RulingsDataStore();
-				rulingsDatastore.populate(dialog, Arcane.getHomeDirectory() + "data/");
-				if (isCancelled()) return;
+				rulingsDatastore.populate(dialog, Arcane.getHomeDirectory()
+						+ "data/");
+				if (isCancelled())
+					return;
 			}
 
 			// Load card data.
 			loadCardData(dialog);
 
-			if (isCancelled()) return;
+			if (isCancelled())
+				return;
 
 			// Load plugins.
 			loadPlugins();
 
-			if (isCancelled()) return;
+			if (isCancelled())
+				return;
 
 			// Displays errors logged after initialization.
-			logFrame = new MessageFrame("Log Viewer - Arcane v" + Arcane.version);
+			logFrame = new MessageFrame("Log Viewer - Arcane v"
+					+ Arcane.version);
 			logFrame.addButton("Clear").addActionListener(new ActionListener() {
-				public void actionPerformed (ActionEvent evt) {
+				public void actionPerformed(ActionEvent evt) {
 					logFrame.editorPane.setText("");
 				}
 			});
 			logFrame.addButton("Close");
 			logFrame.editorPane.setContentType("text/plain");
-			TextComponentOutputStream logStream = new TextComponentOutputStream(logFrame.editorPane);
-			System.setOut(new PrintStream(new MultiplexOutputStream(System.out, logStream), true));
-			System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logStream), true));
+			TextComponentOutputStream logStream = new TextComponentOutputStream(
+					logFrame.editorPane);
+			System.setOut(new PrintStream(new MultiplexOutputStream(System.out,
+					logStream), true));
+			System.setErr(new PrintStream(new MultiplexOutputStream(System.err,
+					logStream), true));
 
 			exceptionHandler = new UncaughtExceptionHandler() {
-				public void uncaughtException (Thread thread, Throwable ex) {
+				public void uncaughtException(Thread thread, Throwable ex) {
 					ex.printStackTrace();
 					if (logFrame != null && prefs.showLogOnError) {
 						logFrame.setVisible(true);
@@ -475,53 +532,88 @@ public class Arcane {
 			Thread.setDefaultUncaughtExceptionHandler(exceptionHandler);
 		}
 
-		private void loadPlugins () throws IOException {
+		private void loadPlugins() throws IOException {
 			File pluginsDir = new File(Arcane.getHomeDirectory() + "plugins");
-			if (!pluginsDir.exists() || !pluginsDir.isDirectory()) return;
+			if (!pluginsDir.exists() || !pluginsDir.isDirectory())
+				return;
 
 			dialog.setMessage("Initializing plugins...");
+			// System.out.println(pluginsDir);
+			// System.out.println("Initializing plugins...");
 
 			FilenameFilter jarFilter = new FilenameFilter() {
-				public boolean accept (File dir, String filename) {
+				public boolean accept(File dir, String filename) {
 					return filename.toLowerCase().endsWith(".jar");
 				}
 			};
+
+			// for (File pluginDir : pluginsDir.listFiles()) {
+			// System.out.println(pluginDir.toString());
+			// }
+			// for (File pluginJar : pluginsDir.listFiles(jarFilter)) {
+			// System.out.println(pluginJar.toString());
+			// }
+
 			for (File pluginDir : pluginsDir.listFiles()) {
-				if (!pluginDir.isDirectory()) continue;
+				if (!pluginDir.isDirectory())
+					continue;
 				for (File pluginJar : pluginDir.listFiles(jarFilter)) {
-					ZipInputStream input = new ZipInputStream(new FileInputStream(pluginJar));
-					while (true) {
-						ZipEntry entry = input.getNextEntry();
-						if (entry == null) break;
-						pluginClassLoader.addURL(pluginJar.toURI().toURL());
-						if (!entry.isDirectory() && entry.getName().equalsIgnoreCase("plugin.txt")) {
-							try {
-								String pluginClassName = new BufferedReader(new InputStreamReader(input)).readLine();
+					// System.out.println(pluginJar.getName());
+					ZipInputStream input = new ZipInputStream(
+							new FileInputStream(pluginJar));
+					ZipEntry entry;
+					boolean pluginTxtFound = false;
+					do {
+						entry = input.getNextEntry();
+						try {
+
+							// System.out.println(entry.getName());
+							if (entry == null)
+								break;
+							pluginClassLoader.addURL(pluginJar.toURI().toURL());
+							// System.out.println(entry.getName());
+							if (!entry.isDirectory()
+									&& entry.getName().equalsIgnoreCase(
+											"plugin.txt")) {
+
+								String pluginClassName = new BufferedReader(
+										new InputStreamReader(input))
+										.readLine();
 								Class pluginClass = getPluginClass(pluginClassName);
-								Plugin plugin = (Plugin)pluginClass.newInstance();
-								dialog.setMessage("Initializing plugin: " + plugin.getName());
+								Plugin plugin = (Plugin) pluginClass
+										.newInstance();
+								dialog.setMessage("Initializing plugin: "
+										+ plugin.getName());
+								// System.out.println(plugin.getName());
 								plugin.install(dialog);
 								plugins.add(plugin);
-							} catch (Exception ex) {
-								logError("Error loading plugin file: " + pluginJar.getAbsolutePath(), ex);
+								pluginTxtFound = true;
 							}
+						} catch (Exception ex) {
+							logError("Error loading plugin file: "
+									+ pluginJar.getAbsolutePath(), ex);
 						}
-					}
+
+						// }
+					} while (entry != null && pluginTxtFound == false);
 				}
 			}
 			for (Plugin plugin : plugins)
 				plugin.loadPreferences();
 		}
-		
-		private void loadCardData (ProgressDialog dialog) throws IOException, SQLException {
+
+		private void loadCardData(ProgressDialog dialog) throws IOException,
+				SQLException {
 			dialog.setMessage("Loading card data...");
 
 			loadSets();
 
 			cardDataStore = new CardDataStore();
-			allCards = cardDataStore.populate(dialog, Arcane.getHomeDirectory() + "data/");
+			allCards = cardDataStore.populate(dialog, Arcane.getHomeDirectory()
+					+ "data/");
 
-			if (isCancelled()) return;
+			if (isCancelled())
+				return;
 			dialog.setValue(-1);
 
 			for (Card card : allCards) {
@@ -536,11 +628,12 @@ public class Arcane {
 
 			// Sort the cards by set and picture number.
 			Comparator<Card> cardSetComparator = new Comparator<Card>() {
-				public int compare (Card card1, Card card2) {
+				public int compare(Card card1, Card card2) {
 					int ordinal1 = setToOrdinal.get(card1.set);
 					int ordinal2 = setToOrdinal.get(card2.set);
 					int diff = ordinal1 - ordinal2;
-					if (diff != 0) return diff;
+					if (diff != 0)
+						return diff;
 					return card1.pictureNumber - card2.pictureNumber;
 				}
 			};
@@ -549,31 +642,43 @@ public class Arcane {
 
 			loadUserData();
 
-			loadManaProduced(Arcane.getHomeDirectory() + "data/titleToLandColors.csv");
-			loadManaProduced(Arcane.getHomeDirectory() + "data/titleToCardColors.csv");
+			loadManaProduced(Arcane.getHomeDirectory()
+					+ "data/titleToLandColors.csv");
+			loadManaProduced(Arcane.getHomeDirectory()
+					+ "data/titleToCardColors.csv");
 
 			loadFormats();
 
 			loadLanguage(dialog);
 		}
 
-		private void loadSets () throws IOException, SQLException {
+		private void loadSets() throws IOException, SQLException {
 			int ordinal = 0;
-			BufferedReader reader = new BufferedReader(new UnicodeReader(new FileInputStream(Arcane.getHomeDirectory() + "data/sets.txt"), "UTF-8"));
+			BufferedReader reader = new BufferedReader(new UnicodeReader(
+					new FileInputStream(Arcane.getHomeDirectory()
+							+ "data/sets.txt"), "UTF-8"));
 			while (true) {
 				String line = reader.readLine();
-				if (line == null) break;
+				if (line == null)
+					break;
 				line = line.trim();
-				if (line.length() == 0) continue;
-				if (line.charAt(0) == '#') continue;
+				if (line.length() == 0)
+					continue;
+				if (line.charAt(0) == '#')
+					continue;
 				int spaceIndex = line.indexOf(' ');
-				if (spaceIndex == 0) throw new ArcaneException("Error parsing " + Arcane.getHomeDirectory() + "data/sets.txt\". Invalid entry: " + line);
+				if (spaceIndex == 0)
+					throw new ArcaneException("Error parsing "
+							+ Arcane.getHomeDirectory()
+							+ "data/sets.txt\". Invalid entry: " + line);
 
-				String[] abbreviations = line.substring(0, spaceIndex).split(",");
+				String[] abbreviations = line.substring(0, spaceIndex).split(
+						",");
 
 				String mainSet = "";
 				for (String set : abbreviations)
-					if (mainSet.length() < set.length() &&  set.length()<=3) mainSet = set;
+					if (mainSet.length() < set.length() && set.length() <= 3)
+						mainSet = set;
 				mainSet = mainSet.toLowerCase().intern();
 				setToOrdinal.put(mainSet, ordinal++);
 
@@ -587,58 +692,77 @@ public class Arcane {
 			reader.close();
 		}
 
-		private void loadLanguage (ProgressDialog dialog) {
+		private void loadLanguage(ProgressDialog dialog) {
 			FilenameFilter cardsFilter = new FilenameFilter() {
-				public boolean accept (File dir, String filename) {
-					return filename.toLowerCase().startsWith("cards-") && filename.toLowerCase().endsWith(".csv")
-						&& filename.length() > 10;
+				public boolean accept(File dir, String filename) {
+					return filename.toLowerCase().startsWith("cards-")
+							&& filename.toLowerCase().endsWith(".csv")
+							&& filename.length() > 10;
 				}
 			};
 			languages.add("English");
-			for (File cardsFile : new File(Arcane.getHomeDirectory() + "data/").listFiles(cardsFilter)) {
+			for (File cardsFile : new File(Arcane.getHomeDirectory() + "data/")
+					.listFiles(cardsFilter)) {
 				languages.add(cardsFile.getName().substring(6, 7).toUpperCase()
-					+ cardsFile.getName().substring(7, cardsFile.getName().length() - 4));
+						+ cardsFile.getName().substring(7,
+								cardsFile.getName().length() - 4));
 			}
-			
+
 			FilenameFilter uiLanguagesFilter = new FilenameFilter() {
-				public boolean accept (File dir, String filename) {
-					return filename.toLowerCase().endsWith(".lang") && !filename.toLowerCase().startsWith("english");
+				public boolean accept(File dir, String filename) {
+					return filename.toLowerCase().endsWith(".lang")
+							&& !filename.toLowerCase().startsWith("english");
 				}
 			};
 			uiLanguages.add("English");
-			for (File uiLangFile : new File(Arcane.getHomeDirectory() + "data/").listFiles(uiLanguagesFilter)) {
-				uiLanguages.add(uiLangFile.getName().substring(0, 1).toUpperCase()
-					+ uiLangFile.getName().substring(1, uiLangFile.getName().length() - 5));
+			for (File uiLangFile : new File(Arcane.getHomeDirectory() + "data/")
+					.listFiles(uiLanguagesFilter)) {
+				uiLanguages.add(uiLangFile.getName().substring(0, 1)
+						.toUpperCase()
+						+ uiLangFile.getName().substring(1,
+								uiLangFile.getName().length() - 5));
 			}
 
-			if (prefs.isEnglishLanguage()) return;
+			if (prefs.isEnglishLanguage())
+				return;
 
 			dialog.setMessage("Loading language: " + prefs.language);
 
-			File languageFile = new File(Arcane.getHomeDirectory() + "data/cards-" + prefs.language.toLowerCase() + ".csv");
+			File languageFile = new File(Arcane.getHomeDirectory()
+					+ "data/cards-" + prefs.language.toLowerCase() + ".csv");
 			if (!languageFile.exists()) {
-				logError("Missing language file: " + languageFile.getAbsolutePath());
+				logError("Missing language file: "
+						+ languageFile.getAbsolutePath());
 				return;
 			}
 			try {
-				CardDataStoreConnection conn = cardDataStore.getThreadConnection();
-				CSVReader reader = new CSVReader(new UnicodeReader(new FileInputStream(languageFile), "UTF-8"), ",", "\"", true, true);
+				CardDataStoreConnection conn = cardDataStore
+						.getThreadConnection();
+				CSVReader reader = new CSVReader(new UnicodeReader(
+						new FileInputStream(languageFile), "UTF-8"), ",", "\"",
+						true, true);
 				while (true) {
 					List<String> fields = reader.getFields();
-					if (fields == null) break;
+					if (fields == null)
+						break;
 					if (fields.size() < 4) {
-						//logError("Invalid row for language \"" + prefs.language + "\": " + fields);
-						log("Invalid row for language \"" + prefs.language + "\": " + fields);
+						// logError("Invalid row for language \"" +
+						// prefs.language + "\": " + fields);
+						log("Invalid row for language \"" + prefs.language
+								+ "\": " + fields);
 						continue;
 					}
 					String name = fields.get(0);
 					String newName = fields.get(1);
-					if (name.toLowerCase().equals("name") && newName.toLowerCase().equals("native name")) continue;
-					if (newName.length() == 0) newName = name;
+					if (name.toLowerCase().equals("name")
+							&& newName.toLowerCase().equals("native name"))
+						continue;
+					if (newName.length() == 0)
+						newName = name;
 					String newType = fields.get(2);
 					String newLegal = fields.get(3);
 					conn.updateCardLanguage(name, newName, newType, newLegal);
-					try{
+					try {
 						List<Card> cards = getCards(name);
 						for (Card card : cards) {
 							card.name = newName;
@@ -646,10 +770,11 @@ public class Arcane {
 							card.legal = newLegal;
 						}
 						List<Card> tmp = nameToCards.get(newName.toLowerCase());
-						if(tmp != null && !tmp.get(0).englishName.equals(name))
-							log("Duplicate localized name for card: " + name + "\t" + tmp.get(0).englishName);
+						if (tmp != null && !tmp.get(0).englishName.equals(name))
+							log("Duplicate localized name for card: " + name
+									+ "\t" + tmp.get(0).englishName);
 						nameToCards.put(newName.toLowerCase(), cards);
-					} catch (ArcaneException e){
+					} catch (ArcaneException e) {
 						log("Localized data for missing card: " + name);
 					}
 				}
@@ -660,53 +785,69 @@ public class Arcane {
 			}
 		}
 
-		private void loadUserData () throws IOException {
-			if (!new File("userData.csv").exists()) return;
-			CSVReader csvReader = new CSVReader(new FileReader("userData.csv"), ",", "\"", true, false);
+		private void loadUserData() throws IOException {
+			if (!new File("userData.csv").exists())
+				return;
+			CSVReader csvReader = new CSVReader(new FileReader("userData.csv"),
+					",", "\"", true, false);
 			csvReader.getFields();
 			while (true) {
 				List<String> fields = csvReader.getFields();
-				if (fields == null) break;
-				if (fields.size() < 4) continue;
+				if (fields == null)
+					break;
+				if (fields.size() < 4)
+					continue;
 
 				String cardName = fields.get(0);
 				String set = fields.get(1);
-				
+
 				int rating = -1;
 				String flags = null;
 				int pictureNumber = -1, qty = 0;
 				if (set.length() == 0) {
-					if (fields.get(4).length() > 0) rating = Integer.parseInt(fields.get(4));
+					if (fields.get(4).length() > 0)
+						rating = Integer.parseInt(fields.get(4));
 					flags = fields.get(5);
 				} else {
 					pictureNumber = 0;
-					if (fields.get(2).length() > 0) pictureNumber = Integer.parseInt(fields.get(2));
+					if (fields.get(2).length() > 0)
+						pictureNumber = Integer.parseInt(fields.get(2));
 					qty = Integer.parseInt(fields.get(3));
 				}
-				
+
 				for (Card card : getCards(cardName)) {
-					if (rating != -1) card.rating = rating;
-					if (flags != null) card.flags = flags;
-					if (card.set.equals(set) && card.pictureNumber == pictureNumber) card.ownedQty = qty;
+					if (rating != -1)
+						card.rating = rating;
+					if (flags != null)
+						card.flags = flags;
+					if (card.set.equals(set)
+							&& card.pictureNumber == pictureNumber)
+						card.ownedQty = qty;
 				}
 			}
 			csvReader.close();
 		}
 
-		private void loadManaProduced (String fileName) throws IOException, SQLException {
+		private void loadManaProduced(String fileName) throws IOException,
+				SQLException {
 			CardDataStoreConnection conn = cardDataStore.newConnection();
-			CSVReader reader = new CSVReader(new UnicodeReader(new FileInputStream(fileName), "UTF-8"), ",", "\"", true, true);
+			CSVReader reader = new CSVReader(new UnicodeReader(
+					new FileInputStream(fileName), "UTF-8"), ",", "\"", true,
+					true);
 			while (true) {
 				List<String> fields = reader.getFields();
-				if (fields == null) break;
-				if (fields.size() < 2) continue;
+				if (fields == null)
+					break;
+				if (fields.size() < 2)
+					continue;
 				String cardName = fields.get(0);
 				String colors = fields.get(1);
 				List<Card> cards = getCards(cardName);
 				for (Card card : cards) {
 					StringBuffer buffer = new StringBuffer(16);
 					for (int i = 0, n = colors.length(); i < n; i++) {
-						if (colors.charAt(i) == 'A') continue;
+						if (colors.charAt(i) == 'A')
+							continue;
 						buffer.append('{');
 						buffer.append(colors.charAt(i));
 						buffer.append('}');
@@ -719,46 +860,63 @@ public class Arcane {
 			conn.close();
 		}
 
-		private void loadFormats () throws IOException {
-			BufferedReader reader = new BufferedReader(new FileReader(Arcane.getHomeDirectory() + "data/formats.txt"));
+		private void loadFormats() throws IOException {
+			BufferedReader reader = new BufferedReader(new FileReader(Arcane
+					.getHomeDirectory()
+					+ "data/formats.txt"));
 			try {
 				while (true) {
 					Format currentFormat = Format.getByText(reader.readLine());
-					if (currentFormat == null) return;
+					if (currentFormat == null)
+						return;
 					String line;
 					String state = null;
 					while (true) {
 						line = reader.readLine();
-						if (line == null) return;
+						if (line == null)
+							return;
 						line = line.trim();
-						if (line.length() == 0) break;
-						if (line.equals("BANNED") || line.equals("RESTRICTED") || line.equals("SETS")) {
+						if (line.length() == 0)
+							break;
+						if (line.equals("BANNED") || line.equals("RESTRICTED")
+								|| line.equals("SETS")) {
 							state = line;
 							continue;
 						}
-						if (state == null) throw new ArcaneException("Error parsing " + Arcane.getHomeDirectory() + "data/formats.txt\". Invalid section: " + line);
+						if (state == null)
+							throw new ArcaneException("Error parsing "
+									+ Arcane.getHomeDirectory()
+									+ "data/formats.txt\". Invalid section: "
+									+ line);
 						if (state.equals("BANNED")) {
 							String cardName = line.toLowerCase();
 							getCards(line);
-							Set<Format> bannedFormats = cardNameToBannedFormats.get(cardName);
+							Set<Format> bannedFormats = cardNameToBannedFormats
+									.get(cardName);
 							if (bannedFormats == null) {
 								bannedFormats = new HashSet();
-								cardNameToBannedFormats.put(cardName, bannedFormats);
+								cardNameToBannedFormats.put(cardName,
+										bannedFormats);
 							}
 							bannedFormats.add(currentFormat);
 						} else if (state.equals("RESTRICTED")) {
 							String cardName = line.toLowerCase();
 							getCards(cardName);
-							Set<Format> restrictedFormats = cardNameToRestrictedFormats.get(cardName);
+							Set<Format> restrictedFormats = cardNameToRestrictedFormats
+									.get(cardName);
 							if (restrictedFormats == null) {
 								restrictedFormats = new HashSet();
-								cardNameToRestrictedFormats.put(cardName, restrictedFormats);
+								cardNameToRestrictedFormats.put(cardName,
+										restrictedFormats);
 							}
 							restrictedFormats.add(currentFormat);
 						} else if (state.equals("SETS")) {
 							String set = setToMainSet.get(line.toLowerCase());
 							if (!setToOrdinal.containsKey(set))
-								throw new ArcaneException("Error parsing" + Arcane.getHomeDirectory() + "data/formats.txt\". Invalid set: " + line);
+								throw new ArcaneException("Error parsing"
+										+ Arcane.getHomeDirectory()
+										+ "data/formats.txt\". Invalid set: "
+										+ line);
 							Set<String> sets = getFormatSets(currentFormat);
 							if (sets == null) {
 								sets = new HashSet();
@@ -775,11 +933,11 @@ public class Arcane {
 	}
 
 	static private class PluginClassLoader extends URLClassLoader {
-		public PluginClassLoader () {
+		public PluginClassLoader() {
 			super(new URL[0], Arcane.class.getClassLoader());
 		}
 
-		public void addURL (URL url) {
+		public void addURL(URL url) {
 			super.addURL(url);
 		}
 	}
