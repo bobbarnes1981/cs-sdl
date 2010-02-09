@@ -8,14 +8,14 @@
 	<version>1.0-SNAPSHOT</version>
 	<description>Deckbuilder for Magic: The Gathering</description>
 	<url>http://www.slightlymagic.net/</url>
-	<modules> 
+	<modules>
 		<module>Arcane</module>
-        <module>CardGenerator</module> 
-    	<module>CrystalKeepRulings</module> 
-    	<module>MagicTraders</module> 
-    	<module>MTGVault</module> 
-        <module>MWSPlay</module>
-    </modules>
+		<module>CardGenerator</module>
+		<module>CrystalKeepRulings</module>
+		<module>MagicTraders</module>
+		<module>MTGVault</module>
+		<module>MWSPlay</module>
+	</modules>
 	<properties>
 		<project.build.sourceEncoding>
 			UTF-8
@@ -23,14 +23,16 @@
 		<project.reporting.outputEncoding>
 			UTF-8
         </project.reporting.outputEncoding>
+		<staging.dir>${project.build.directory}/staging</staging.dir>
+		<izpack-standalone.version>4.3.1</izpack-standalone.version>
 	</properties>
-	<distributionManagement> 
-  <repository> 
-      <id>arcane-repository</id> 
-      <name>Arcane Repository</name> 
-      <url>file://${basedir}/target/deploy</url> 
-    </repository> 
-  </distributionManagement> 
+	<distributionManagement>
+		<repository>
+			<id>arcane-repository</id>
+			<name>Arcane Repository</name>
+			<url>file://${basedir}/target/deploy</url>
+		</repository>
+	</distributionManagement>
 	<developers>
 		<developer>
 			<id>jendave</id>

@@ -21,7 +21,7 @@ import arcane.ArcaneException;
 
 public class Util {
 	static public final boolean isMac = System.getProperty("os.name").toLowerCase().indexOf("mac") != -1;
-	static public final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") == -1;
+	static public final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") != -1;
 
 	static public Robot robot;
 	static {

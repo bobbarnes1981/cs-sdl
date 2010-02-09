@@ -80,7 +80,6 @@
 						</goals>
 						<configuration>
 							<descriptorRefs>
-								<descriptorRef>project</descriptorRef>
 								<descriptorRef>jar-with-dependencies</descriptorRef>
 							</descriptorRefs>
 							<archive>

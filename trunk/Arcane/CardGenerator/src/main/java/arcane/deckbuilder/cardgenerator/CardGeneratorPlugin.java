@@ -188,13 +188,16 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 					deckBuilder.getSideCardToQty());
 			Runtime.getRuntime().exec(
 					new String[] {
-							"cmd",
-							"/C",
-							"start",
-							"Card Generator",
-							"cmd /C \"\"" + directory.getAbsolutePath() + "\\"
-									+ batchFile + "\" \""
-									+ tempFile.getAbsolutePath() + "\"\"" });
+							directory.getAbsolutePath() + "/" + batchFile,
+							tempFile.getAbsolutePath()});
+//					new String[] {
+//							"cmd",
+//							"/C",
+//							"start",
+//							"Card Generator",
+//							"cmd /C \"\"" + directory.getAbsolutePath() + "\\"
+//									+ batchFile + "\" \""
+//									+ tempFile.getAbsolutePath() + "\"\"" });
 		} catch (IOException ex) {
 			throw new ArcaneException("Error launching card generator.", ex);
 		}
