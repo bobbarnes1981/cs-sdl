@@ -40,7 +40,7 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 			});
 		}
 		deckBuilder.addPluginMenu(menu);
-		if (new File("plugins/MagicTraders/prices.txt").exists())
+		if (new File(Arcane.getHomeDirectory() + "plugins/MagicTraders/prices.txt").exists())
 			loadPricesFromFile();
 	}
 
@@ -61,7 +61,7 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 					InputStream input = new URL(
 							"http://www.magictraders.com/pricelists/current-magic")
 							.openStream();
-					OutputStream out = new FileOutputStream(
+					OutputStream out = new FileOutputStream(Arcane.getHomeDirectory() + 
 							"plugins/MagicTraders/prices.txt");
 					try {
 						byte[] buffer = new byte[2048];
@@ -90,7 +90,7 @@ public class MagicTradersPlugin extends DeckBuilderPlugin {
 	private void loadPricesFromFile() {
 		try {
 			Map<String, Map<String, Float>> titleToSetToPrice = new HashMap<String, Map<String, Float>>();
-			BufferedReader reader = new BufferedReader(new FileReader(
+			BufferedReader reader = new BufferedReader(new FileReader(Arcane.getHomeDirectory() + 
 					"plugins/MagicTraders/prices.txt"));
 			while (true) {
 				String line = reader.readLine();

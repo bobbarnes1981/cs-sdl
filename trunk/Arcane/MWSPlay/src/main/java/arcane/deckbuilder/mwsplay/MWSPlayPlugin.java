@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import arcane.Arcane;
 import arcane.ArcaneException;
 import arcane.DecklistFile;
 import arcane.deckbuilder.DeckBuilderPlugin;
@@ -28,7 +29,7 @@ public class MWSPlayPlugin extends DeckBuilderPlugin {
 								"mwsplay");
 						deckBuilder.saveDecklist(new DecklistFile(tempFile
 								.getAbsolutePath(), "MWS (mwDeck)"), false);
-						Runtime.getRuntime().exec(
+						Runtime.getRuntime().exec(Arcane.getHomeDirectory() + 
 								"plugins/MWSPlay/MWSPlay/solitaire.bat \""
 										+ tempFile.getAbsolutePath() + "\"");
 					} catch (IOException ex) {

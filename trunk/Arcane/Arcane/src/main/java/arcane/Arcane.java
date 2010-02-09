@@ -93,7 +93,7 @@ public class Arcane {
 		} else {
 			dataDir = System.getProperty("user.home") + ".arcane/";
 		}
-		System.out.println(dataDir);
+		//System.out.println(dataDir);
 	}
 
 	static public String getHomeDirectory() {
@@ -129,7 +129,7 @@ public class Arcane {
 
 		// instance = new Arcane(loadRuleData);
 		Loader loader = instance.new DataLoader("Arcane v" + Arcane.version,
-				Arcane.getHomeDirectory() + prefsFileName);
+				Arcane.getHomeDirectory() + "data/" + prefsFileName);
 		loader.start("ArcaneLoader");
 		if (loader.failed())
 			throw new ArcaneException("Arcane initialization aborted.");
