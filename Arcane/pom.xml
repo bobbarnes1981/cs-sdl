@@ -67,7 +67,6 @@
 		<url>https://cs-sdl.svn.sourceforge.net/svnroot/cs-sdl/trunk/Arcane/</url>
 	</scm>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
