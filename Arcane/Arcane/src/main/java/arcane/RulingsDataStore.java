@@ -21,7 +21,7 @@ public class RulingsDataStore extends DataStore<RulingsDataStore.RulingsDataStor
 	public RulingsDataStore () throws SQLException {
 		super(Arcane.getHomeDirectory() + "data/rulesdb/rules", "rulings", false);
 		addColumn("name VARCHAR (256)");
-		addColumn("ruling VARCHAR (2048)");
+		addColumn("ruling VARCHAR (4096)");
 		open();
 		addIndex("name");
 	}
