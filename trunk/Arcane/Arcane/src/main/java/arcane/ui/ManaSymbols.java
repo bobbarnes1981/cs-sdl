@@ -51,13 +51,13 @@ public class ManaSymbols {
 
 	static public synchronized String replaceSymbolsWithHTML (String value, boolean small) {
 		if (small){
-			value = value.replace("{C}", "<img src='file:/images/symbols-11/C.png' width=13 height=11>");
-			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:/images/symbols-11/$1$2.png' width=11 height=11>");
+			value = value.replace("{C}", "<img src='file:" + Arcane.getHomeDirectory() + "images/symbols-11/C.png' width=13 height=11>");
+			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:" + Arcane.getHomeDirectory() + "images/symbols-11/$1$2.png' width=11 height=11>");
 		}
 		else {
-			value = value.replace("{slash}", "<img src='file:/images/symbols-13/slash.png' width=10 height=13>");
-			value = value.replace("{C}", "<img src='file:/images/symbols-13/C.png' width=16 height=13>");
-			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:/images/symbols-13/$1$2.png' width=13 height=13>");
+			value = value.replace("{slash}", "<img src='file:" + Arcane.getHomeDirectory() + "images/symbols-13/slash.png' width=10 height=13>");
+			value = value.replace("{C}", "<img src='file:" + Arcane.getHomeDirectory() + "images/symbols-13/C.png' width=16 height=13>");
+			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:" + Arcane.getHomeDirectory() + "images/symbols-13/$1$2.png' width=13 height=13>");
 		}
 	}
 }

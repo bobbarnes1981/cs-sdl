@@ -41,6 +41,8 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 	private String generatePages;
 	private String generatePagesDecklists;
 	private String createCard;
+	
+	private String[] commandString;
 
 
 	public void install(DeckBuilder deckBuilder) {
@@ -105,16 +107,22 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 			menuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					try {
-						Runtime.getRuntime().exec(
-								new String[] {
-										"cmd",
-										"/C",
-										"start",
-										"Card Generator",
-										"cmd",
-										"/C",
-										directory.getAbsolutePath()
-												+ "\\misc\\" + createCard });
+						String[] commandCreateCard;
+						if (Util.isWindows) {
+							commandCreateCard = new String[] {
+									"cmd",
+									"/C",
+									"start",
+									"Card Generator",
+									"cmd",
+									"/C",
+									directory.getAbsolutePath()
+											+ "\\misc\\" + createCard };
+						} else {
+							commandCreateCard = new String[] {
+									directory.getAbsolutePath() + "/misc/" + createCard };
+						}
+						Runtime.getRuntime().exec(commandCreateCard);
 					} catch (IOException ex) {
 						throw new ArcaneException(
 								"Error launching card generator.", ex);
@@ -186,18 +194,21 @@ public class CardGeneratorPlugin extends DeckBuilderPlugin {
 			decklistFile.save(deckBuilder.getDeckCards(), deckBuilder
 					.getDeckCardToQty(), deckBuilder.getSideCards(),
 					deckBuilder.getSideCardToQty());
-			Runtime.getRuntime().exec(
-					new String[] {
-							directory.getAbsolutePath() + "/" + batchFile,
-							tempFile.getAbsolutePath()});
-//					new String[] {
-//							"cmd",
-//							"/C",
-//							"start",
-//							"Card Generator",
-//							"cmd /C \"\"" + directory.getAbsolutePath() + "\\"
-//									+ batchFile + "\" \""
-//									+ tempFile.getAbsolutePath() + "\"\"" });
+			if (Util.isWindows) {
+				commandString = new String[] {
+						"cmd",
+						"/C",
+						"start",
+						"Card Generator",
+						"cmd /C \"\"" + directory.getAbsolutePath() + "\\"
+								+ batchFile + "\" \""
+								+ tempFile.getAbsolutePath() + "\"\"" };
+			} else {
+				commandString = new String[] {
+						directory.getAbsolutePath() + "/" + batchFile,
+						tempFile.getAbsolutePath()};
+			}
+			Runtime.getRuntime().exec(commandString);					
 		} catch (IOException ex) {
 			throw new ArcaneException("Error launching card generator.", ex);
 		}

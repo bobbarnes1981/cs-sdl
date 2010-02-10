@@ -183,6 +183,9 @@ public class Arcane {
 		if (!(new File(Arcane.getHomeDirectory() + "plugins").exists())){
 			instance.extractDirFromJar("plugins");
 		}
+		if (!(new File(Arcane.getHomeDirectory() + "images").exists())){
+			instance.extractDirFromJar("images");
+		}
 		
 				
 		System.out.println("Arcane v" + version);
