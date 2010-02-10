@@ -170,20 +170,25 @@ public class Arcane {
 		} catch (FileNotFoundException ex) {
 			throw new ArcaneException("Error setting up logging.", ex);
 		}
-
+ProgressDialog dialog = new ProgressDialog();
 		if (!(new File(Arcane.getHomeDirectory() + "data").exists())){
+			dialog.setMessage("Initializing default data files...");
 			instance.extractDirFromJar("data");
 		}
 		if (!(new File(Arcane.getHomeDirectory() + "decks").exists())){
+			dialog.setMessage("Initializing default deck files...");
 			instance.extractDirFromJar("decks");
 		}
 		if (!(new File(Arcane.getHomeDirectory() + "templates").exists())){
+			dialog.setMessage("Initializing default template files...");
 			instance.extractDirFromJar("templates");
 		}
 		if (!(new File(Arcane.getHomeDirectory() + "plugins").exists())){
+			dialog.setMessage("Initializing default plugin files...");
 			instance.extractDirFromJar("plugins");
 		}
 		if (!(new File(Arcane.getHomeDirectory() + "images").exists())){
+			dialog.setMessage("Initializing image files...");
 			instance.extractDirFromJar("images");
 		}
 		
