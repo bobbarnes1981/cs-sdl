@@ -3,7 +3,10 @@ package arcane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
+import java.util.jar.JarFile; //import java.util.zip.*;
 import java.io.BufferedOutputStream;
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +24,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -93,7 +97,52 @@ public class Arcane {
 		} else {
 			dataDir = System.getProperty("user.home") + ".arcane/";
 		}
-		//System.out.println(dataDir);
+		// System.out.println(dataDir);
+	}
+
+	public void extractDirFromJar(String directory) {
+		try {
+			// System.out.println(getClass().getProtectionDomain().
+			// getCodeSource().getLocation().toString().substring(5));
+			String home = getClass().getProtectionDomain().getCodeSource()
+					.getLocation().toString().substring(5);
+			java.util.jar.JarFile jar = new java.util.jar.JarFile(home);
+			java.util.Enumeration enumeration = jar.entries();
+			// System.out.println(jar.entries().toString());
+			while (enumeration.hasMoreElements()) {
+				java.util.jar.JarEntry file = (java.util.jar.JarEntry) enumeration
+						.nextElement();
+				// System.out.println("file " + file.getName());
+				// System.out.println(file.getName().substring(0,
+				// directory.length()));
+				if (file.getName().length() >= directory.length() && file.getName().substring(0, directory.length()).equals(
+						directory)) {
+
+					// System.out.println("file " + file.getName());
+					java.io.File f = new java.io.File(Arcane.getHomeDirectory()
+							+ java.io.File.separator + file.getName());
+					if (file.isDirectory()) { // if its a directory, create it
+						f.mkdir();
+						continue;
+					}
+					java.io.InputStream is = jar.getInputStream(file); // get
+																		// the
+																		// input
+																		// stream
+					java.io.FileOutputStream fos = new java.io.FileOutputStream(
+							f);
+					while (is.available() > 0) { // write contents of 'is' to
+													// 'fos'
+						fos.write(is.read());
+					}
+					fos.close();
+					is.close();
+				}
+			}
+		} catch (IOException e) {
+			System.out.println(e.getStackTrace().toString());
+		}
+
 	}
 
 	static public String getHomeDirectory() {
@@ -105,6 +154,8 @@ public class Arcane {
 		if (instance != null)
 			return;
 		instance = new Arcane(loadRuleData);
+		File homeDir = new File(Arcane.getHomeDirectory());
+		homeDir.mkdir();
 		File logDir = new File(Arcane.getHomeDirectory() + "logs");
 		logDir.mkdir();
 		File logFile = new File(logDir, logFileName);
@@ -120,6 +171,20 @@ public class Arcane {
 			throw new ArcaneException("Error setting up logging.", ex);
 		}
 
+		if (!(new File(Arcane.getHomeDirectory() + "data").exists())){
+			instance.extractDirFromJar("data");
+		}
+		if (!(new File(Arcane.getHomeDirectory() + "decks").exists())){
+			instance.extractDirFromJar("decks");
+		}
+		if (!(new File(Arcane.getHomeDirectory() + "templates").exists())){
+			instance.extractDirFromJar("templates");
+		}
+		if (!(new File(Arcane.getHomeDirectory() + "plugins").exists())){
+			instance.extractDirFromJar("plugins");
+		}
+		
+				
 		System.out.println("Arcane v" + version);
 		System.out.println();
 		// System.out.println(logDir);
