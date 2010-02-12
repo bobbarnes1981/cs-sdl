@@ -69,43 +69,43 @@
 	</scm>
 	<build>
 		<plugins>
-		<plugin>
-    <inherited>false</inherited>
-    <groupId>com.mycila.maven-license-plugin</groupId>
-    <artifactId>maven-license-plugin</artifactId>
-    <version>1.5.1</version>
-    <configuration>
-        <header>${basedir}/src/main/config/header.txt</header>
-        <failIfMissing>true</failIfMissing>
-        <aggregate>true</aggregate>
-        <properties>
-            <owner>snacko</owner>
-            <year>2010</year>
-            <email>snacko@slightlymagic.net</email>
-        </properties>
-        <excludes>
-        <exclude>**/COPYING</exclude>
-            <exclude>**/*.txt</exclude>
-            <exclude>**/*.csv</exclude>
-            <exclude>**/*.db</exclude>
-            <exclude>**/*.st</exclude>
-            <exclude>**/*.lang</exclude>
-            <exclude>**/*.icns</exclude>
-            <exclude>**/*.properties</exclude>
-            <exclude>**/src/test/resources/**</exclude>
-            <exclude>**/src/test/data/**</exclude>
-        </excludes>
-    </configuration>
-    <executions>
-        <execution>
-            <id>check-headers</id>
-            <phase>verify</phase>
-            <goals>
-                <goal>format</goal>
-            </goals>
-        </execution>
-    </executions>
-</plugin>
+			<plugin>
+				<inherited>false</inherited>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.5.1</version>
+				<configuration>
+					<header>${basedir}/src/main/config/header.txt</header>
+					<failIfMissing>true</failIfMissing>
+					<aggregate>true</aggregate>
+					<properties>
+						<owner>snacko</owner>
+						<year>2010</year>
+						<email>snacko@slightlymagic.net</email>
+					</properties>
+					<excludes>
+						<exclude>**/COPYING</exclude>
+						<exclude>**/*.txt</exclude>
+						<exclude>**/*.csv</exclude>
+						<exclude>**/*.db</exclude>
+						<exclude>**/*.st</exclude>
+						<exclude>**/*.lang</exclude>
+						<exclude>**/*.icns</exclude>
+						<exclude>**/*.properties</exclude>
+						<exclude>**/src/test/resources/**</exclude>
+						<exclude>**/src/test/data/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>check-headers</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -113,7 +113,7 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
-						<plugin>
+			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.2-beta-5</version>
 				<executions>
