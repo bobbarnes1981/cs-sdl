@@ -10776,8 +10776,4 @@ Acknowledgements and Disclaimers
     a ruling is known, the name of that person is listed with the ruling.
     "CompRules" marks rules from the Comprehensive Rules.
     "D'Angelo" is Stephen D'Angelo, the former Rules Summary network
-      representative, and former MTG-L mailing list NetRep.
-    "WotC Rules Team" marks official rulings from the rules team.
-  These files may be freely copied and posted anywhere you'd like.  The
-    contents can also be included in other formats (such as HTML or databases)
-    or in products, but there are two restrictions.  I
+    

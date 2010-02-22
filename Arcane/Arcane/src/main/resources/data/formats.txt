@@ -160,6 +160,7 @@ Conflux
 Alara Reborn
 Magic 2010
 Zendikar
+Worldwake
 
 Legacy (T1.5)
 BANNED
@@ -325,6 +326,7 @@ Conflux
 Alara Reborn
 Magic 2010
 Zendikar
+Worldwake
 
 Extended (T1.x)
 BANNED
@@ -359,6 +361,7 @@ Conflux
 Alara Reborn
 Magic 2010
 Zendikar
+Worldwake
 
 Standard (T2)
 SETS
@@ -367,3 +370,4 @@ Conflux
 Alara Reborn
 Magic 2010
 Zendikar
+Worldwake
