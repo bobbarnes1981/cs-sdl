@@ -9554,3 +9554,260 @@ Undercity Reaches,Unterstadt-Viertel,Welt — Ravnica,"Immer wenn eine Kreatur e
 Immer wenn du chaos würfelst, hast du für den Rest des Spiels keine maximale Handkartenzahl."
 Velis Vel,Velis Vel,Welt — Lorwyn,"Jede Kreatur erhält +1/+1 für jede andere Kreatur im Spiel, mit der sie mindestens einen Kreaturentyp teilt. #(Sind zum Beispiel zwei „Elementarwesen, Schamane“ sowie ein „Elementarwesen, Geist” im Spiel, erhalten alle +2/+2.)#
 Immer wenn du chaos würfelst, erhält eine Kreatur deiner Wahl bis zum Ende des Zuges alle Kreaturentypen"
+Abyssal Persecutor,Höllischer Verfolger,Kreatur — Dämon,"Fliegend, verursacht Trampelschaden
+Du kannst das Spiel nicht gewinnen, und deine Gegner können das Spiel nicht verlieren."
+Admonition Angel,Mahnender Engel,Kreatur — Engel,"Fliegend
+Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, kannst du eine bleibende Karte deiner Wahl, die kein Land und nicht der Mahnende Engel ist, ins Exil schicken.
+Wenn der Mahnende Engel das Spiel verlässt, bringe alle Karten, die durch ihn ins Exil geschickt wurden, unter der Kontrolle ihrer Besitzer ins Spiel zurück."
+AEther Tradewinds,Äther-Passat,Spontanzauber,"Bringe eine bleibende Karte deiner Wahl, die du kontrollierst, und eine bleibende Karte deiner Wahl, die du nicht kontrollierst, auf die Hand ihrer Besitzer zurück."
+Agadeem Occultist,Okkultist aus Agadeem,"Kreatur — Mensch, Schamane, Verbündeter","{T}: Bringe eine Kreaturenkarte deiner Wahl aus dem Friedhof eines Gegners unter deiner Kontrolle ins Spiel, falls deren umgewandelte Manakosten kleiner oder gleich der Anzahl an Verbündeten sind, die du kontrollierst."
+Akoum Battlesinger,Schlachtensängerin aus Akoum,"Kreatur — Mensch, Berserker, Verbündeter","Eile
+Immer wenn die Schlachtensängerin aus Akoum oder ein anderer Verbündeter unter deiner Kontrolle ins Spiel kommt, kannst du Verbündete-Kreaturen, die du kontrollierst, +1/+0 bis zum Ende des Zuges dazu erhalten lassen."
+Amulet of Vigor,Amulett der Energie,Artefakt,"Immer wenn eine bleibende Karte getappt und unter deiner Kontrolle ins Spiel kommt, enttappe sie."
+"Anowon, the Ruin Sage","Anowon, der Weise der Ruine","Legendäre Kreatur — Vampir, Schamane","Zu Beginn deines Versorgungssegments opfert jeder Spieler eine Kreatur, die kein Vampir ist."
+Apex Hawks,Gipfelfalken,Kreatur — Vogel,"Multibonus {1}{W} #(Du kannst zusätzlich beliebig oft {1}{W} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Fliegend
+Die Gipfelfalken kommen mit X +1/+1-Marken ins Spiel, wobei X die Anzahl ist, wie oft du ihre Bonuskosten bezahlt hast."
+Arbor Elf,Lauben-Elf,"Kreatur — Elf, Druide",{T}: Enttappe einen Wald deiner Wahl.
+Archon of Redemption,Archon der Erlösung,Kreatur — Archon,"Fliegend
+Immer wenn der Archon der Erlösung oder eine andere fliegende Kreatur unter deiner Kontrolle ins Spiel kommt, kannst du so viele Lebenspunkte dazu erhalten, wie die Stärke der Kreatur beträgt."
+Avenger of Zendikar,Zendikars Rächer,Kreatur — Elementarwesen,"Wenn Zendikars Rächer ins Spiel kommt, bringe für jedes Land, das du kontrollierst, einen 0/1 grünen Pflanzen-Kreaturenspielstein ins Spiel.
+Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, kannst du eine +1/+1-Marke auf jede Pflanzen-Kreatur legen, die du kontrollierst."
+Basilisk Collar,Basiliskenhalsband,Artefakt — Ausrüstung,"Die ausgerüstete Kreatur hat Todesberührung und Lebensverknüpfung.
+Ausrüsten {2}"
+Battle Hurda,Kampf-Hurda,Kreatur — Riese,Erstschlag
+Bazaar Trader,Basarhändler,Kreatur — Goblin,"{T}: Ein Spieler deiner Wahl übernimmt die Kontrolle über ein Artefakt, eine Kreatur oder ein Land, das bzw. die du kontrollierst."
+Bestial Menace,Tierplage,Hexerei,"Bringe einen 1/1 grünen Ophis-Kreaturenspielstein, einen 2/2 grünen Wolf-Kreaturenspielstein und einen 3/3 grünen Elefanten-Kreaturenspielstein ins Spiel."
+Bloodhusk Ritualist,Bluthüllen-Ritualist,"Kreatur — Vampir, Schamane","Multibonus {B} #(Du kannst zusätzlich beliebig oft {B} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Wenn der Bluthüllen-Ritualist ins Spiel kommt, wirft ein Gegner deiner Wahl für jedes Mal, dass du seine Bonuskosten bezahlt hast, eine Karte aus seiner Hand ab."
+Bojuka Bog,Bojukamoor,Land,"Das Bojukamoor kommt getappt ins Spiel.
+Wenn das Bojukamoor ins Spiel kommt, schicke alle Karten aus dem Friedhof eines Spielers deiner Wahl ins Exil.
+{T}: Erhöhe deinen Manavorrat um {B}."
+Bojuka Brigand,Bojuka-Brigant,"Kreatur — Mensch, Krieger, Verbündeter","Der Bojuka-Brigant kann nicht blocken.
+Immer wenn der Bojuka-Brigant oder ein anderer Verbündeter unter deiner Kontrolle ins Spiel kommt, kannst du eine +1/+1-Marke auf den Bojuka-Briganten legen."
+Brink of Disaster,Rand des Desasters,Verzauberung — Aura,"Kreatur-oder-Land-Verzauberung
+Wenn die verzauberte bleibende Karte getappt wird, zerstöre sie."
+Bull Rush,Bullenansturm,Spontanzauber,Eine Kreatur deiner Wahl erhält +2/+0 bis zum Ende des Zuges.
+Butcher of Malakir,Schlächter von Malakir,"Kreatur — Vampir, Krieger","Fliegend
+Immer wenn der Schlächter von Malakir oder eine andere Kreatur, die du kontrollierst, aus dem Spiel auf einen Friedhof gelegt wird, opfern alle Gegner eine Kreatur."
+Calcite Snapper,Kalzit-Schnapper,Kreatur — Schildkröte,"Verhüllt #(Diese Kreatur kann nicht das Ziel von Zaubersprüchen oder Fähigkeiten sein.)#
+Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, kannst du bis zum Ende des Zuges Stärke und Widerstandskraft des Kalzit-Schnappers vertauschen."
+Canopy Cover,Schützendes Blätterdach,Verzauberung — Aura,"Kreaturenverzauberung
+Die verzauberte Kreatur kann außer von fliegenden Kreaturen und Kreaturen mit Reichweite nicht geblockt werden.
+Die verzauberte Kreatur kann nicht das Ziel von Zaubersprüchen oder Fähigkeiten sein, die deine Gegner kontrollieren."
+Caustic Crawler,Ätzender Krabbler,Kreatur — Insekt,"Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, kannst du eine Kreatur deiner Wahl bis zum Ende des Zuges -1/-1 erhalten lassen."
+Celestial Colonnade,Himmlische Säulenreihe,Land,"Die Himmlische Säulenreihe kommt getappt ins Spiel.
+{T}: Erhöhe deinen Manavorrat um {W} oder {U}.
+{3}{W}{U}: Bis zum Ende des Zuges wird die Himmlische Säulenreihe zu einer 4/4 weißen und blauen fliegenden Elementarwesen-Kreatur mit Wachsamkeit. Sie ist immer noch ein Land."
+Chain Reaction,Kettenreaktion,Hexerei,"Die Kettenreaktion fügt allen Kreaturen X Schadenspunkte zu, wobei X gleich der Anzahl an Kreaturen im Spiel ist."
+Claws of Valakut,Valakut-Klauen,Verzauberung — Aura,"Kreaturenverzauberung
+Die verzauberte Kreatur hat Erstschlag und erhält +1/+0 für jedes Gebirge, das du kontrollierst."
+Comet Storm,Kometenhagel,Spontanzauber,"Multibonus {1} #(Du kannst zusätzlich beliebig oft {1} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Bestimme eine Kreatur oder einen Spieler deiner Wahl; bestimme dann für jedes Mal, dass du die Bonuskosten des Kometenhagels bezahlt hast, eine andere Kreatur oder einen anderen Spieler deiner Wahl. Der Kometenhagel fügt jedem dieser Ziele X Schadenspunkte zu."
+Corrupted Zendikon,Verdorbenes Zendikon,Verzauberung — Aura,"Landverzauberung
+Das verzauberte Land ist eine 3/3 schwarze Schlammwesen-Kreatur. Es ist immer noch ein Land.
+Wenn das verzauberte Land auf einen Friedhof gelegt wird, bringe es auf die Hand seines Besitzers zurück."
+Cosi's Ravager,Cosis Verwüster,Kreatur — Elementarwesen,"Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, kannst du Cosis Verwüster einem Spieler deiner Wahl 1 Schadenspunkt zufügen lassen."
+Creeping Tar Pit,Kriechende Teergrube,Land,"Die Kriechende Teergrube kommt getappt ins Spiel.
+{T}: Erhöhe deinen Manavorrat um {U} oder {B}.
+{1}{U}{B}: Bis zum Ende des Zuges wird die Kriechende Teergrube zu einer 3/2 blauen und schwarzen Elementarwesen-Kreatur und ist unblockbar. Sie ist immer noch ein Land."
+Crusher Zendikon,Brecher-Zendikon,Verzauberung — Aura,"Landverzauberung
+Das verzauberte Land ist eine 4/2 rote Bestien-Kreatur, die Trampelschaden verursacht. Es ist immer noch ein Land.
+Wenn das verzauberte Land auf einen Friedhof gelegt wird, bringe es auf die Hand seines Besitzers zurück."
+Cunning Sparkmage,Listiger Funkenmagier,"Kreatur — Mensch, Schamane","Eile
+{T}: Der Listige Funkenmagier fügt einer Kreatur oder einem Spieler deiner Wahl 1 Schadenspunkt zu."
+Dead Reckoning,Abrechnung der Toten,Hexerei,"Du kannst eine Kreaturenkarte deiner Wahl aus deinem Friedhof oben auf deine Bibliothek legen. Falls du dies tust, fügt die Abrechnung der Toten einer Kreatur deiner Wahl Schadenspunkte in Höhe der Stärke der Kreaturenkarte zu."
+Deathforge Shaman,Todesschmieden-Schamane,"Kreatur — Oger, Schamane","Multibonus {R} #(Du kannst zusätzlich beliebig oft {R} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Wenn der Todesschmieden-Schamane ins Spiel kommt, fügt er einem Spieler deiner Wahl doppelt so viele Schadenspunkte zu, wie oft du seine Bonuskosten bezahlt hast."
+Death's Shadow,Schatten des Todes,Kreatur — Avatar,"Der Schatten des Todes erhält -X/-X, wobei X dein Lebenspunktestand ist."
+Dispel,Bannzauber,Spontanzauber,Neutralisiere einen Spontanzauber deiner Wahl.
+Dragonmaster Outcast,Ausgestoßener Drachenmeister,"Kreatur — Mensch, Schamane","Bringe zu Beginn deines Versorgungssegments einen 5/5 roten Drachen-Kreaturenspielstein mit Flugfähigkeit ins Spiel, falls du sechs oder mehr Länder kontrollierst."
+Dread Statuary,Furchteinflößende Statue,Land,"{T}: Erhöhe deinen Manavorrat um {1}.
+{4}: Bis zum Ende des Zuges wird die Furchteinflößende Statue eine 4/2 Golem-Artefaktkreatur. Sie ist immer noch ein Land."
+Enclave Elite,Elite der Enklave,"Kreatur — Meervolk, Soldat","Multibonus {1}{U} #(Du kannst zusätzlich beliebig oft {1}{U} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Inseltarnung
+Die Elite der Enklave kommt mit X +1/+1-Marken ins Spiel, wobei X die Anzahl ist, wie oft du ihre Bonuskosten bezahlt hast."
+Everflowing Chalice,Immervoller Kelch,Artefakt,"Multibonus {2} #(Du kannst zusätzlich beliebig oft {2} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Der Immervolle Kelch kommt mit X Ladungs-Marken ins Spiel, wobei X die Anzahl ist, wie oft du seine Bonuskosten bezahlt hast.
+{T}: Erhöhe deinen Manavorrat für jede Ladungsmarke auf dem Immervollen Kelch um {1}."
+Explore,Erkunden,Hexerei,"Du kannst in diesem Zug ein zusätzliches Land spielen.
+Ziehe eine Karte."
+Eye of Ugin,Das Auge von Ugin,Legendäres Land,"Farblose Eldrazi-Zauber, die du wirkst, kosten beim Wirken {2} weniger.
+{7}, {T}: Durchsuche deine Bibliothek nach einer farblosen Kreaturenkarte, zeige sie offen vor und nimm sie auf deine Hand. Mische danach deine Bibliothek."
+Feral Contest,Ungezähmtes Kräftemessen,Hexerei,"Lege eine +1/+1-Marke auf eine Kreatur deiner Wahl, die du kontrollierst. Eine andere Kreatur deiner Wahl blockt sie in diesem Zug, falls möglich."
+Fledgling Griffin,Heranwachsender Greif,Kreatur — Greif,"Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, erhält der Heranwachsende Greif bis zum Ende des Zuges Flugfähigkeit."
+Gnarlid Pack,Knurrer-Rudel,Kreatur — Bestie,"Multibonus {1}{G} #(Du kannst zusätzlich beliebig oft {1}{G} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Das Knurrer-Rudel kommt mit X +1/+1-Marken ins Spiel, wobei X die Anzahl ist, wie oft du seine Bonuskosten bezahlt hast."
+Goblin Roughrider,Goblin-Raureiter,"Kreatur — Goblin, Ritter",
+Goliath Sphinx,Goliath-Sphinx,Kreatur — Sphinx,Fliegend
+Grappler Spider,Greifer-Spinne,Kreatur — Spinne,Reichweite #(Diese Kreatur kann fliegende Kreaturen blocken.)#
+Graypelt Hunter,Graupelz-Jäger,"Kreatur — Mensch, Krieger, Verbündeter","Verursacht Trampelschaden
+Immer wenn der Graupelz-Jäger oder ein anderer Verbündeter unter deiner Kontrolle ins Spiel kommt, kannst du eine +1/+1-Marke auf den Graupelz-Jäger legen."
+Grotag Thrasher,Grotag-Schläger,Kreatur — Eidechse,"Immer wenn der Grotag-Schläger angreift, kann eine Kreatur deiner Wahl in diesem Zug nicht blocken."
+Groundswell,Landhebung,Spontanzauber,"Eine Kreatur deiner Wahl erhält +2/+2 bis zum Ende des Zuges.
+Landung — Falls ein Land unter deiner Kontrolle in diesem Zug ins Spiel gekommen ist, erhält diese Kreatur stattdessen +4/+4 bis zum Ende des Zuges."
+Guardian Zendikon,Wächter-Zendikon,Verzauberung — Aura,"Landverzauberung
+Das verzauberte Land ist eine 2/6 weiße Mauer-Kreatur mit Verteidiger. Es ist immer noch ein Land.
+Wenn das verzauberte Land auf einen Friedhof gelegt wird, bringe es auf die Hand seines Besitzers zurück."
+Hada Freeblade,Freikämpfer aus Hada,"Kreatur — Mensch, Soldat, Verbündeter","Immer wenn der Freikämpfer aus Hada oder ein anderer Verbündeter unter deiner Kontrolle ins Spiel kommt, kannst du eine +1/+1-Marke auf den Freikämpfer aus Hada legen."
+Halimar Depths,Halimar-Untiefe,Land,"Die Halimar-Untiefe kommt getappt ins Spiel.
+Wenn die Halimar-Untiefe ins Spiel kommt, schaue dir die obersten drei Karten deiner Bibliothek an und lege sie in beliebiger Reihenfolge zurück.
+{T}: Erhöhe deinen Manavorrat um {U}."
+Halimar Excavator,Ausgräber aus Halimar,"Kreatur — Mensch, Zauberer, Verbündeter","Immer wenn der Ausgräber aus Halimar oder ein anderer Verbündeter unter deiner Kontrolle ins Spiel kommt, legt ein Spieler deiner Wahl die obersten X Karten seiner Bibliothek auf seinen Friedhof, wobei X gleich der Anzahl an Verbündeten ist, die du kontrollierst."
+Hammer of Ruin,Hammer des Verderbens,Artefakt — Ausrüstung,"Die ausgerüstete Kreatur erhält +2/+0.
+Immer wenn die ausgerüstete Kreatur einem Spieler Kampfschaden zufügt, kannst du eine Ausrüstung deiner Wahl, die dieser Spieler kontrolliert, zerstören.
+Ausrüsten {2}"
+Harabaz Druid,Druidin aus Harabaz,"Kreatur — Mensch, Druide, Verbündeter","{T}: Erhöhe deinen Manavorrat um X Mana genau einer beliebigen Farbe, wobei X gleich der Anzahl an Verbündeten ist, die du kontrollierst."
+Hedron Rover,Polyeder-Vagabund,Artefaktkreatur — Konstrukt,"Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, erhält der Polyeder-Vagabund +2/+2 bis zum Ende des Zuges."
+Horizon Drake,Horizont-Sceada,Kreatur — Sceada,"Fliegend, Schutz vor Ländern"
+Iona's Judgment,Ionas Richtspruch,Hexerei,Schicke eine Kreatur oder eine Verzauberung deiner Wahl ins Exil.
+"Jace, the Mind Sculptor","Jace, der Gedankenformer",Planeswalker — Jace,"+2: Schaue dir die oberste Karte der Bibliothek eines Spielers deiner Wahl an. Du kannst diese Karte unter die Bibliothek dieses Spielers legen.
+0: Ziehe drei Karten und lege dann zwei Karten aus deiner Hand in beliebiger Reihenfolge oben auf deine Bibliothek.
+-1: Bringe eine Kreatur deiner Wahl auf die Hand ihres Besitzers zurück.
+-12: Schicke alle Karten der Bibliothek eines Spielers deiner Wahl ins Exil, anschließend mischt dieser Spieler die Karten auf seiner Hand in seine Bibliothek."
+Jagwasp Swarm,Zackenwespen-Schwarm,Kreatur — Insekt,Fliegend
+Join the Ranks,Schulterschluss,Spontanzauber,"Bringe zwei 1/1 weiße #(Soldat, Verbündeter)#-Kreaturenspielsteine ins Spiel."
+Joraga Warcaller,Kriegssänger aus Joraga,"Kreatur — Elf, Krieger","Multibonus {1}{G} #(Du kannst zusätzlich beliebig oft {1}{G} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Der Kriegssänger aus Joraga kommt mit X +1/+1-Marken ins Spiel, wobei X die Anzahl ist, wie oft du seine Bonuskosten bezahlt hast.
+Andere Elfen-Kreaturen, die du kontrollierst, erhalten für jede +1/+1-Marke auf dem Kriegssänger aus Joraga +1/+1."
+Jwari Shapeshifter,Jwari-Gestaltwandler,"Kreatur — Gestaltwandler, Verbündeter",Du kannst den Jwari-Gestaltwandler als Kopie einer beliebigen Verbündeten-Kreatur im Spiel ins Spiel kommen lassen.
+Kalastria Highborn,Hochgeborene Kalastria,"Kreatur — Vampir, Schamane","Immer wenn die Hochgeborene Kalastria oder ein anderer Vampir, den du kontrollierst, aus dem Spiel auf einen Friedhof gelegt wird, kannst du {B} bezahlen. Falls du dies tust, verliert ein Spieler deiner Wahl 2 Lebenspunkte, und du erhältst 2 Lebenspunkte dazu."
+"Kazuul, Tyrant of the Cliffs","Kazuul, der Tyrann der Klippen","Legendäre Kreatur — Oger, Krieger","Immer wenn eine Kreatur angreift, die ein Gegner kontrolliert, und du der verteidigende Spieler bist, bringe einen 3/3 roten Oger-Kreaturenspielstein ins Spiel, falls der Beherrscher der angreifenden Kreatur nicht {3} bezahlt."
+Khalni Garden,Khalni-Garten,Land,"Der Khalni-Garten kommt getappt ins Spiel.
+Wenn der Khalni-Garten ins Spiel kommt, bringe einen 0/1 grünen Pflanzen-Kreaturenspielstein ins Spiel.
+{T}: Erhöhe deinen Manavorrat um {G}."
+Kitesail,Lenkdrachensegler,Artefakt — Ausrüstung,"Die ausgerüstete Kreatur erhält +1/+0 und Flugfähigkeit.
+Ausrüsten {2} #({2}: Lege diese Karte an eine Kreatur deiner Wahl an, die du kontrollierst. Spiele Ausrüsten wie eine Hexerei.)#"
+Kitesail Apprentice,Lenkdrachensegler-Lehrling,"Kreatur — Kor, Soldat","Solange der Lenkdrachensegler-Lehrling ausgerüstet ist, erhält er +1/+1 und Flugfähigkeit."
+Kor Firewalker,Kor-Feuerläufer,"Kreatur — Kor, Soldat","Schutz vor Rot
+Immer wenn ein Spieler einen roten Zauberspruch wirkt, kannst du 1 Lebenspunkt dazu erhalten."
+Lavaclaw Reaches,Lavaklauen-Gebiet,Land,"Das Lavaklauen-Gebiet kommt getappt ins Spiel.
+{T}: Erhöhe deinen Manavorrat um {B} oder {R}.
+{1}{B}{R}: Bis zum Ende des Zuges wird das Lavaklauen-Gebiet zu einer 2/2 schwarzen und roten Elementarwesen-Kreatur mit „{X}: Diese Kreatur erhält +X/+0 bis zum Ende des Zuges.” Es ist immer noch ein Land."
+Leatherback Baloth,Lederrückenbaloth,Kreatur — Bestie,
+Lightkeeper of Emeria,Emerias Lichtbewahrer,Kreatur — Engel,"Multibonus {W} #(Du kannst zusätzlich beliebig oft {W} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Fliegend
+Wenn Emerias Lichtbewahrer ins Spiel kommt, erhältst du für jedes Mal, dass du seine Bonuskosten bezahlt hast, 2 Lebenspunkte dazu."
+Loam Lion,Lehmlöwe,Kreatur — Katze,"Der Lehmlöwe erhält +1/+2, solange du einen Wald kontrollierst."
+Lodestone Golem,Magneteisengolem,Artefaktkreatur — Golem,"Zaubersprüche, die keine Artefakte sind, kosten beim Wirken {1} mehr."
+Marsh Threader,Marschenwinder,"Kreatur — Kor, Späher",Sumpftarnung
+Marshal's Anthem,Hymne des Marschalls,Verzauberung,"Multibonus {1}{W} #(Du kannst zusätzlich beliebig oft {1}{W} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Kreaturen, die du kontrollierst, erhalten +1/+1.
+Wenn die Hymne des Marschalls ins Spiel kommt, bringe bis zu X Kreaturenkarten deiner Wahl aus deinem Friedhof ins Spiel zurück, wobei X gleich der Anzahl ist, wie oft du die Bonuskosten der Hymne des Marschalls gezahlt hast."
+Mire's Toll,Tribut des Schlammlochs,Hexerei,"Ein Spieler deiner Wahl zeigt so viele Karten aus seiner Hand offen vor, wie du Sümpfe kontrollierst. Du bestimmst eine davon. Dieser Spieler wirft diese Karte aus seiner Hand ab."
+Mordant Dragon,Beizespeiender Drache,Kreatur — Drache,"Fliegend
+{1}{R}: Der Beizespeiende Drache erhält +1/+0 bis zum Ende des Zuges.
+Immer wenn der Beizespeiende Drache einem Spieler Kampfschaden zufügt, kannst du ihn einer Kreatur deiner Wahl, die dieser Spieler kontrolliert, so viele Schadenspunkte zufügen lassen."
+Mysteries of the Deep,Geheimnisse der Tiefe,Spontanzauber,"Ziehe zwei Karten.
+Landung — Falls ein Land unter deiner Kontrolle in diesem Zug ins Spiel gekommen ist, ziehe stattdessen drei Karten."
+Nature's Claim,Forderung der Natur,Spontanzauber,Zerstöre ein Artefakt oder eine Verzauberung deiner Wahl. Sein bzw. ihr Beherrscher erhält 4 Lebenspunkte dazu.
+Nemesis Trap,Nemesis-Falle,Spontanzauber — Falle,"Falls eine weiße Kreatur angreift, kannst du {B}{B} bezahlen, anstatt die Manakosten der Nemesis-Falle zu bezahlen.
+Schicke eine angreifende Kreatur deiner Wahl ins Exil. Bringe einen Kreaturen-Spielstein ins Spiel, der eine Kopie dieser Kreatur ist. Schicke ihn zu Beginn des nächsten Endsegments ins Exil."
+Novablast Wurm,Supernova-Wurm,Kreatur — Wurm,"Immer wenn der Supernova-Wurm angreift, zerstöre alle anderen Kreaturen."
+"Omnath, Locus of Mana","Omnath, der Sammelpunkt des Manas",Legendäre Kreatur — Elementarwesen,"Grünes Mana wird nicht am Ende eines Segments oder einer Phase aus deinem Manavorrat entfernt.
+Omnath, der Sammelpunkt des Manas, erhält +1/+1 für jedes grüne Mana in deinem Manavorrat."
+Perimeter Captain,Hauptmann des Grenzgebiets,"Kreatur — Mensch, Soldat","Verteidiger
+Immer wenn eine Kreatur blockt, die du kontrollierst und die Verteidiger hat, kannst du 2 Lebenspunkte dazu erhalten."
+Permafrost Trap,Permafrost-Falle,Spontanzauber — Falle,"Falls ein Gegner in diesem Zug eine grüne Kreatur unter seiner Kontrolle ins Spiel bekommen hat, kannst du {U} bezahlen, anstatt die Manakosten der Permafrost-Falle zu bezahlen.
+Tappe bis zu zwei Kreaturen deiner Wahl. Diese Kreaturen enttappen nicht während des nächsten Enttappsegments ihrer Beherscher."
+Pilgrim's Eye,Auge der Pilger,Artefaktkreatur — Thopter,"Fliegend
+Wenn das Auge der Pilger ins Spiel kommt, kannst du deine Bibliothek nach einer Standardland-Karte durchsuchen, sie offen vorzeigen, auf deine Hand nehmen und dann deine Bibliothek mischen."
+Pulse Tracker,Pulssucher,"Kreatur — Vampir, Räuber","Immer wenn der Pulssucher angreift, verliert jeder Gegner 1 Lebenspunkt."
+Quag Vampires,Pfuhlvampire,"Kreatur — Vampir, Räuber","Multibonus {1}{B} #(Du kannst zusätzlich beliebig oft {1}{B} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Sumpftarnung
+Die Pfuhlvampire kommen mit X +1/+1-Marken ins Spiel, wobei X die Anzahl ist, wie oft du ihre Bonuskosten bezahlt hast."
+Quest for Renewal,Suche nach der Erneuerung,Verzauberung,"Immer wenn eine Kreatur getappt wird, die du kontrollierst, kannst du eine Quest-Marke auf die Suche nach der Erneuerung legen.
+So lange vier oder mehr Quest-Marken auf der Suche nach der Erneuerung liegen, enttappe alle Kreaturen, die du kontrollierst, während des Entappsegments jedes anderen Spielers."
+Quest for the Goblin Lord,Suche nach dem Goblinherrscher,Verzauberung,"Immer wenn ein Goblin unter deiner Kontrolle ins Spiel kommt, kannst du eine Quest-Marke auf die Suche nach dem Goblinherrscher legen.
+Solange auf der Suche nach dem Goblinherrscher fünf oder mehr Quest-Marken liegen, erhalten Kreaturen, die du kontrollierst, +2/+0."
+Quest for the Nihil Stone,Suche nach dem Stein Nihil,Verzauberung,"Immer wenn ein Gegner eine Karte aus der Hand abwirft, kannst du eine Quest-Marke auf die Suche nach dem Stein Nihil legen.
+Falls zu Beginn des Versorgungssegments eines Gegners dieser Spieler keine Karten auf der Hand hat und auf der Suche nach dem Stein Nihil zwei oder mehr Quest-Marken liegen, kannst du diesen Spieler 5 Lebenspunkte verlieren lassen."
+Quest for Ula's Temple,Suche nach Ulas Tempel,Verzauberung,"Zu Beginn deines Versorgungssegments kannst du dir die oberste Karte deiner Bibliothek anschauen. Falls es eine Kreaturenkarte ist, kannst du sie offen vorzeigen und eine Quest-Marke auf die Suche nach Ulas Tempel legen.
+Befinden sich zu Beginn eines Endsegments drei oder mehr Quest-Marken auf der Suche nach Ulas Tempel, kannst du eine Kraken-, Leviathan-, Oktopus- oder Schlangen-Kreaturenkarte aus deiner Hand ins Spiel bringen."
+Quicksand,Treibsand,Land,"{T}: Erhöhe deinen Manavorrat um {1}.
+{T}, opfere den Treibsand: Eine angreifende nichtfliegende Kreatur deiner Wahl erhält -1/-2 bis zum Ende des Zuges."
+Raging Ravine,Tosende Klamm,Land,"Die Tosende Klamm kommt getappt ins Spiel.
+{T}: Erhöhe deinen Manavorrat um {R} oder {G}.
+{2}{R}{G}: Bis zum Ende des Zuges wird die Tosende Klamm eine 3/3 rote und grüne Elementarwesen-Kreatur mit „Immer wenn diese Kreatur angreift, lege eine +1/+1-Marke auf sie.” Sie ist immer noch ein Land."
+Razor Boomerang,Messerscharfer Bumerang,Artefakt — Ausrüstung,"Die ausgerüstete Kreatur hat „{T}, löse den Messerscharfen Bumerang: Der Messerscharfe Bumerang fügt einer Kreatur oder einem Spieler deiner Wahl 1 Schadenspunkt zu. Bringe den Messerscharfen Bumerang auf die Hand seines Besitzers zurück.”
+Ausrüsten {2}"
+Refraction Trap,Lichtbrechungs-Falle,Spontanzauber — Falle,"Falls ein Gegner in diesem Zug einen roten Spontanzauber oder eine rote Hexerei gewirkt hat, kannst du {W} bezahlen, anstatt die Manakosten der Lichtbrechungs-Falle zu bezahlen.
+Verhindere die nächsten 3 Schadenspunkte, die in diesem Zug dir und/oder bleibenden Karten, die du kontrollierst, von einer Schadensquelle, die du bestimmst, zugefügt würden. Falls auf diese Weise Schaden verhindert wurde, fügt die Lichtbrechungs-Falle einer Kreatur oder einem Spieler deiner Wahl so viele Schadenspunkte zu."
+Rest for the Weary,Ruhe für die Erschöpften,Spontanzauber,"Ein Spieler deiner Wahl erhält 4 Lebenspunkte dazu.
+Landung — Falls ein Land unter deiner Kontrolle in diesem Zug ins Spiel gekommen ist, erhält dieser Spieler stattdessen 8 Lebenspunkte dazu."
+Ricochet Trap,Querschläger-Falle,Spontanzauber — Falle,"Falls ein Gegner in diesem Zug einen blauen Zauberspruch gewirkt hat, kannst du {R} bezahlen, anstatt die Manakosten der Querschläger-Falle zu bezahlen.
+Verändere das Ziel eines Zauberspruchs deiner Wahl, der nur ein einzelnes Ziel hat."
+Roiling Terrain,Turbulentes Gelände,Hexerei,"Zerstöre ein Land deiner Wahl; dann fügt Turbulentes Gelände dem Beherrscher dieses Landes so viele Schadenspunkte zu, wie sich Länder im Friedhof dieses Spielers befinden."
+Ruin Ghost,Ruinengeist,Kreatur — Geist,"{W}, {T}: Schicke ein Land deiner Wahl, das du kontrollierst, ins Exil und bringe es dann unter deiner Kontrolle ins Spiel zurück."
+Rumbling Aftershocks,Rumpelndes Nachbeben,Verzauberung,"Immer wenn du einen Zauberspruch wirkst und Bonuskosten für ihn bezahlst, kannst du das Rumpelnde Nachbeben einer Kreatur oder einem Spieler deiner Wahl so viele Schadenspunkte zufügen lassen, wie oft die Bonuskosten des Zauberspruchs bezahlt wurden."
+Ruthless Cullblade,Rücksichtslose Keulerin,"Kreatur — Vampir, Krieger","Die Rücksichtslose Keulerin erhält +2/+1, solange mindestens ein Gegner 10 Lebenspunkte oder weniger hat."
+Scrib Nibblers,Gekritzelnager,Kreatur — Ratte,"{T}: Schicke die oberste Karte der Bibliothek eines Spielers deiner Wahl ins Exil. Falls es ein Land ist, erhältst du 1 Lebenspunkt dazu.
+Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, kannst du die Gekritzelnager enttappen."
+Searing Blaze,Sengende Strahlen,Spontanzauber,"Die Sengenden Strahlen fügen einem Spieler deiner Wahl 1 Schadenspunkt und einer Kreatur deiner Wahl, die dieser Spieler kontrolliert, 1 Schadenspunkt zu.
+Landung — Falls ein Land unter deiner Kontrolle in diesem Zug ins Spiel gekommen ist, fügen die Sengenden Strahlen stattdessen diesem Spieler 3 Schadenspunkte und dieser Kreatur 3 Schadenspunkte zu."
+Seer's Sundial,Sonnenuhr des Sehers,Artefakt,"Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, kannst du {2} bezahlen. Falls du dies tust, ziehe eine Karte."
+Sejiri Merfolk,Sejiri-Meervolk,"Kreatur — Meervolk, Soldat","Solange du eine Ebene kontrollierst, hat das Sejiri-Meervolk Erstschlag und Lebensverknüpfung. #(Schaden, der von einer Kreatur mit Lebensverknüpfung zugefügt wird, lässt ihren Beherrscher ebenso viele Lebenspunkte dazu erhalten.)#"
+Sejiri Steppe,Sejiri-Steppe,Land,"Die Sejiri-Steppe kommt getappt ins Spiel.
+Wenn die Sejiri-Steppe ins Spiel kommt, erhält eine Kreatur deiner Wahl, die du kontrollierst, bis zum Ende des Zuges Schutz vor einer Farbe, die du bestimmst.
+{T}: Erhöhe deinen Manavorrat um {W}."
+Selective Memory,Selektive Erinnerung,Hexerei,"Durchsuche deine Bibliothek nach einer beliebigen Anzahl von Karten, die kein Land sind, und schicke sie ins Exil. Mische danach deine Bibliothek."
+Shoreline Salvager,Strandgutberger,Kreatur — Surrakar,"Immer wenn der Strandgutberger einem Spieler Kampfschaden zufügt, kannst du eine Karte ziehen, falls du eine Insel kontrollierst."
+Skitter of Lizards,Echsen-Jagdrudel,Kreatur — Eidechse,"Multibonus {1}{R} #(Du kannst zusätzlich beliebig oft {1}{R} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Eile
+Das Echsen-Jagdrudel kommt mit X +1/+1-Marken ins Spiel, wobei X die Anzahl ist, wie oft du seine Bonuskosten bezahlt hast."
+Slavering Nulls,Sabbernde Nullen,"Kreatur — Goblin, Zombie","Immer wenn die Sabbernden Nullen einem Spieler Kampfschaden zufügen, kannst du diesen Spieler eine Karte aus der Hand abwerfen lassen, falls du einen Sumpf kontrollierst."
+Slingbow Trap,Speerschleuderfalle,Spontanzauber — Falle,"Falls eine schwarze fliegende Kreatur angreift, kannst du {G} bezahlen, anstatt die Manakosten der Speerschleuderfalle zu bezahlen.
+Zerstöre eine angreifende fliegende Kreatur deiner Wahl."
+Smoldering Spires,Dampfende Bergspitzen,Land,"Die Dampfenden Bergspitzen kommen getappt ins Spiel.
+Wenn die Dampfenden Bergspitzen ins Spiel kommen, kann eine Kreatur deiner Wahl in diesem Zug nicht blocken.
+{T}: Erhöhe deinen Manavorrat um {R}."
+Smother,Ersticken,Spontanzauber,Zerstöre eine Kreatur deiner Wahl mit umgewandelten Manakosten von 3 oder weniger. Sie kann nicht regeneriert werden.
+Snapping Creeper,Schnappender Kriecher,Kreatur — Pflanze,"Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, erhält der Schnappende Kriecher bis zum Ende des Zuges Wachsamkeit."
+Spell Contortion,Zauberverkrümmung,Spontanzauber,"Multibonus {1}{U} #(Du kannst zusätzlich beliebig oft {1}{U} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Neutralisiere einen Zauberspruch deiner Wahl, falls sein Beherrscher nicht {2} bezahlt. Ziehe für jedes Mal, dass du die Bonuskosten der Zauberverkrümmung bezahlt hast, eine Karte."
+Stirring Wildwood,Aufgerüttelte Waldwildnis,Land,"Die Aufgerüttelte Waldwildnis kommt getappt ins Spiel.
+{T}: Erhöhe deinen Manavorrat um {G} oder {W}.
+{1}{G}{W}: Bis zum Ende des Zuges wird die Aufgerüttelte Waldwildnis zu einer 3/4 grünen und weißen Elementarwesen-Kreatur mit Reichweite. Sie ist immer noch ein Land."
+Stone Idol Trap,Steingötzen-Falle,Spontanzauber — Falle,"Die Steingötzen-Falle zu wirken kostet für jede angreifende Kreatur {1} weniger.
+Bringe einen 6/12 farblosen Konstrukt-Artefaktkreaturenspielstein, der Trampelschaden verursacht, ins Spiel. Schicke ihn zu Beginn deines nächsten Endsegments ins Exil."
+Stoneforge Mystic,Steinschmelz-Mystiker,"Kreatur — Kor, Handwerker","Wenn der Steinschmelz-Mystiker ins Spiel kommt, kannst du deine Bibliothek nach einer Ausrüstungs-Karte durchsuchen, sie offen vorzeigen, auf deine Hand nehmen und dann deine Bibliothek mischen.
+{1}{W}, {T}: Du kannst eine Ausrüstungs-Karte aus deiner Hand ins Spiel bringen."
+Strength of the Tajuru,Stärke der Tajuru,Spontanzauber,"Multibonus {1} #(Du kannst zusätzlich beliebig oft {1} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Bestimme eine Kreatur deiner Wahl; bestimme dann für jedes Mal, dass du die Bonuskosten der Stärke der Tajuru bezahlt hast, eine andere Kreatur deiner Wahl. Lege X +1/+1-Marken auf jede davon."
+Summit Apes,Gipfelaffen,Kreatur — Menschenaffe,"Solange du ein Gebirge kontrollierst, können die Gipfelaffen nicht geblockt werden, außer von zwei oder mehr Kreaturen."
+Surrakar Banisher,Surrakar-Austreiber,Kreatur — Surrakar,"Wenn der Surrakar-Austreiber ins Spiel kommt, kannst du eine getappte Kreatur deiner Wahl auf die Hand ihres Besitzers zurückbringen."
+Talus Paladin,Talus-Paladin,"Kreatur — Mensch, Ritter, Verbündeter","Immer wenn der Talus-Paladin oder ein anderer Verbündeter unter deiner Kontrolle ins Spiel kommt, kannst du Verbündete, die du kontrollierst, Lebensverknüpfung bis zum Ende des Zuges dazu erhalten lassen, und du kannst eine +1/+1-Marke auf den Talus-Paladin legen."
+Tectonic Edge,Tektonische Kante,Land,"{T}: Erhöhe deinen Manavorrat um {1}.
+{1}, {T}, opfere die Tektonische Kante: Zerstöre ein Nichtstandardland deiner Wahl. Aktiviere diese Fähigkeit nur, falls ein Gegner vier oder mehr Länder kontrolliert."
+Terastodon,Terastodon,Kreatur — Elefant,"Wenn das Terastodon ins Spiel kommt, kannst du bis zu drei bleibende Karten deiner Wahl, die keine Kreaturen sind, zerstören. Für jede auf diese Weise auf den Friedhof gelegte bleibende Karte bringt ihr Beherrscher einen 3/3 grünen Elefant-Kreaturenspielstein ins Spiel."
+Terra Eternal,Ewige Erde,Verzauberung,Alle Länder sind unzerstörbar.
+"Thada Adel, Acquisitor","Thada Adel, die Erwerberin","Legendäre Kreatur — Meervolk, Räuber","Inseltarnung
+Immer wenn Thada Adel, die Erwerberin einem Spieler Kampfschaden zufügt, durchsuche die Bibliothek dieses Spielers nach einer Artefaktkarte und schicke sie ins Exil. Dieser Spieler mischt dann seine Bibliothek. Bis zum Ende des Zuges kannst du diese Karte spielen."
+Tideforce Elemental,Tidenkraftelementar,Kreatur — Elementarwesen,"{U}, {T}: Du kannst eine andere Kreatur deiner Wahl tappen oder enttappen.
+Landung — Immer wenn ein Land unter deiner Kontrolle ins Spiel kommt, kannst du das Tidenkraftelementar enttappen."
+Tomb Hex,Gruftfluch,Spontanzauber,"Eine Kreatur deiner Wahl erhält -2/-2 bis zum Ende des Zuges.
+Landung — Falls ein Land unter deiner Kontrolle in diesem Zug ins Spiel gekommen ist, erhält diese Kreatur stattdessen -4/-4 bis zum Ende des Zuges."
+Treasure Hunt,Schatzsuche,Hexerei,"Decke Karten oben von deiner Bibliothek auf, bis du eine Karte aufdeckst, die kein Land ist, und nimm alle auf diese Weise aufgedeckten Karten dann auf deine Hand"
+Tuktuk Scrapper,Tuktuk-Raufbold,"Kreatur — Goblin, Handwerker, Verbündeter","Immer wenn der Tuktuk-Raufbold oder ein anderer Verbündeter unter deiner Kontrolle ins Spiel kommt, kannst du ein Artefakt deiner Wahl zerstören. Falls dieses Artefakt auf diese Weise auf einen Friedhof gelegt wird, fügt der Tuktuk-Raufbold dem Beherrscher dieses Artefakts so viele Schadenspunkte zu, wie du Verbündete kontrollierst."
+Twitch,Taumeln,Spontanzauber,"Du kannst ein Artefakt, eine Kreatur oder ein Land deiner Wahl tappen oder enttappen.
+Ziehe eine Karte."
+Urge to Feed,Drang zu trinken,Spontanzauber,"Eine Kreatur deiner Wahl erhält -3/-3 bis zum Ende des Zuges. Du kannst eine beliebige Anzahl ungetappter Vampir-Kreaturen, die du kontrollierst, tappen. Falls du dies tust, lege eine +1/+1-Marke auf jeden dieser Vampire."
+Vapor Snare,Schlinge aus Dunst,Verzauberung — Aura,"Kreaturenverzauberung
+Du kontrollierst die verzauberte Kreatur.
+Opfere zu Beginn deines Versorgungssegments die Schlinge aus Dunst, falls du nicht ein Land, das du kontrollierst, auf die Hand seines Besitzers zurückbringst."
+Vastwood Animist,Riesenholz-Animist,"Kreatur — Elf, Schamane, Verbündeter","{T}: Ein Land deiner Wahl, das du kontrollierst, wird bis zum Ende des Zuges zu einer X/X Elementarwesen-Kreatur, wobei X gleich der Anzahl an Verbündeten ist, die du kontrollierst. Es ist immer noch ein Land."
+Vastwood Zendikon,Riesenholz-Zendikon,Verzauberung — Aura,"Landverzauberung
+Das verzauberte Land ist eine 6/4 grüne Elementarwesen-Kreatur. Es ist immer noch ein Land.
+Wenn das verzauberte Land auf einen Friedhof gelegt wird, bringe es auf die Hand seines Besitzers zurück."
+Veteran's Reflexes,Reflexe wie ein Veteran,Spontanzauber,Eine Kreatur deiner Wahl erhält +1/+1 bis zum Ende des Zuges. Enttappe diese Kreatur.
+Voyager Drake,Reise-Sceada,Kreatur — Sceada,"Multibonus {U} #(Du kannst zusätzlich beliebig oft {U} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Fliegend
+Wenn der Reise-Sceada ins Spiel kommt, erhalten bis zu X Kreaturen deiner Wahl bis zum Ende des Zuges Flugfähigkeit, wobei X gleich der Anzahl ist, wie oft du die Bonuskosten des Reise-Sceadas gezahlt hast."
+Walking Atlas,Wandernder Atlas,Kreatur — Konstrukt,{T}: Du kannst ein Land aus deiner Hand ins Spiel bringen.
+Wind Zendikon,Wind-Zendikon,Verzauberung — Aura,"Landverzauberung
+Das verzauberte Land ist eine 2/2 blaue Elementarwesen-Kreatur mit Flugfähigkeit. Es ist immer noch ein Land.
+Wenn das verzauberte Land auf einen Friedhof gelegt wird, bringe es auf die Hand seines Besitzers zurück."
+Wolfbriar Elemental,Dornenwolfelementar,Kreatur — Elementarwesen,"Multibonus {G} #(Du kannst zusätzlich beliebig oft {G} bezahlen, sowie du diesen Zauberspruch wirkst.)#
+Wenn das Dornenwolfelementar ins Spiel kommt, bringe für jedes Mal, dass du seine Bonuskosten bezahlt hast, einen 2/2 grünen Wolf-Kreaturenspielstein ins Spiel."
+"Wrexial, the Risen Deep",Wrexial aus der Tiefe,Legendäre Kreatur — Kraken,"Inseltarnung, Sumpftarnung
+Immer wenn Wrexial aus der Tiefe einem Spieler Kampfschaden zufügt, kannst du einen Spontanzauber oder eine Hexerei aus dem Friedhof dieses Spielers spielen, ohne die Manakosten zu bezahlen. Falls jene Karte in diesem Zug auf den Friedhof gelegt würde, schicke sie stattdessen ins Exil."
