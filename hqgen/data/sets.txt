@@ -1,4 +1,5 @@
-﻿REL Promo - Release Events
+﻿REW Promo - Rewards
+REL Promo - Release Events
 PRE Promo - Prerelease Events
 PR Promo - Other
 JGC Promo - Judge Gift Cards
@@ -9,6 +10,9 @@ ARE Promo - Arena
 THG Promo - Two-Headed Giant
 SUM Promo - Summer of Magic
 HHL Promo - Happy Holidays
+APL Promo - Asia Pacific Land
+EUL Promo - European Land Program
+GUR Promo - Guru Lands
 ARC Promo - Armada Comics
 DLM Promo - DCI Legend Membership
 PTR Promo - Pro Tour
@@ -18,6 +22,8 @@ GPX Grand - Prix
 STO Promo - Stores
 JUN Promo - Junior Series
 DCI Promo
+TKX Tokens - Tenth Edition
+TK Tokens
 FBP Full Box Promotion
 MGD Magic Game Day
 BIN Book Inserts

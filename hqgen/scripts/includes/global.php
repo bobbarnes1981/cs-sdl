@@ -16,7 +16,7 @@
 require_once 'version.php';
 
 set_time_limit(0);
-ini_set('memory_limit', '128M');
+ini_set('memory_limit', '256M');
 srand((float) microtime() * 10000000);
 
 $config = parse_ini_file('config.txt', false);
