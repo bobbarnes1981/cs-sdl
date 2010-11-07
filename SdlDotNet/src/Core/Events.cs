@@ -593,7 +593,7 @@ namespace SdlDotNet.Core
         public static void Wait()
         {
             Sdl.SDL_Event ev;
-            if (Sdl.SDL_WaitEvent(out ev) == (int)SdlFlag.Error2)
+            if (Sdl.SDL_WaitEvent(out ev) == (int)SdlFlag.Error)
             {
                 throw SdlException.Generate();
             }
