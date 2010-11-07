@@ -498,15 +498,15 @@ namespace SdlDotNet.Core
         /// </summary>
         public static void CloseMixer()
         {
-            try
-            {
+            try {
                 SdlMixer.Mix_CloseAudio();
-                if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != 0)
-                {
+                if (Sdl.SDL_WasInit(Sdl.SDL_INIT_AUDIO) != 0) {
                     Sdl.SDL_QuitSubSystem(Sdl.SDL_INIT_AUDIO);
                 }
-            }
-            catch (AccessViolationException)
+            } catch (AccessViolationException)
+            { }
+                // No DLL? No problem.
+            catch (DllNotFoundException) 
             { }
         }
 
