@@ -1,0 +1,76 @@
+﻿#region Header
+
+/*
+ * Copyright (C) 2010 Pikablu
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+#endregion Header
+
+namespace SdlDotNet.Widgets
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Text;
+
+    // TODO: Finish the ScrollableWidget
+    public class ScrollableWidget : Widget, IContainer
+    {
+        #region Fields
+
+        HScrollBar hScrollBar;
+        Panel pnlVisibleWidgets;
+        Size totalSize;
+        VScrollBar vScrollBar;
+
+        #endregion Fields
+
+        #region Constructors
+
+        public ScrollableWidget(string name)
+            : base(name) {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+
+        public void ClearRegion(Rectangle bounds, Widget widgetToSkip) {
+            bounds.X -= hScrollBar.Value;
+            bounds.Y -= vScrollBar.Value;
+            pnlVisibleWidgets.ClearRegion(bounds, widgetToSkip);
+        }
+
+        public void LoadComplete() {
+            pnlVisibleWidgets.LoadComplete();
+        }
+
+        public void UpdateBuffer() {
+            pnlVisibleWidgets.UpdateBuffer();
+        }
+
+        public void UpdateBuffer(bool resetBackground) {
+            pnlVisibleWidgets.UpdateBuffer(resetBackground);
+        }
+
+        public void UpdateWidget(Widget widget) {
+            pnlVisibleWidgets.UpdateWidget(widget);
+        }
+
+        #endregion Methods
+    }
+}

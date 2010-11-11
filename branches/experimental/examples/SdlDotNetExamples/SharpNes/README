@@ -1,0 +1,39 @@
+Sharpnes v0.2
+(c)2005 Jonathan Turner
+See LICENSE.TXT
+(SDL.NET port and changes by David Hudson 2007)
+
+Here it is, another release of my toy to help me learn C#. 
+Lots more is working this time around, but lots still doesn't work. 
+No worries.
+
+To run it just type:
+
+[mono] sharpnes.exe [-f] [ROM name]
+
+[-f] for fullscreen
+
+What it requires:
+
+* A .NET platform (I use Mono)
+* SDL (http://www.libsdl.org)
+
+What it supports:
+
+* Mappers 1 (mostly), 2, 3, 4 (mostly), 7 (partial), 9 (mostly), 10, 11 (partial), 22 (partial), 
+  34, 64 (partial), 66
+* SaveRAM using the .sav files other NES emulators use
+* 100% clean room, no proprietary information was harmed in the making of this emulator
+
+Keys:
+
+* z -- A button
+* x -- B button
+* a -- SELECT button
+* s -- START button
+* arrow keys -- direction pad
+* space -- Play/pause
+* space then escape -- quit
+
+
+-- Jonathan Turner
