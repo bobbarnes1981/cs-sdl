@@ -49,6 +49,11 @@ namespace SdlDotNetExamples.SmallDemos
         }
 
         public void Go() {
+	    if (File.Exists(Path.Combine(dataDirectory,fontName)))
+            {
+
+                filePath = "";
+            }	
             Video.WindowIcon();
             Video.WindowCaption = "SDL.NET - Gui Example";
             screen = Video.SetVideoMode(640, 480, 16);

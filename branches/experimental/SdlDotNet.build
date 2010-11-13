@@ -9,8 +9,8 @@
     <echo message="Using '${platform::get-name()}' Platform"/>
 
     <!-- global project settings -->
-    <property name="project.config" value="Release" />
-    <property name="project.version" value="6.1.0" />
+    <property name="project.config" value="Debug" />
+    <property name="project.version" value="6.9.0" />
     <property name="src.dir" value="src" />
     <property name="examples.dir" value="examples" />
     <property name="extras.dir" value="extras" />
@@ -239,6 +239,11 @@
 	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}/Data" flatten="true">
 	    <fileset>
 		<include name="examples/**/Data/**" />
+	    </fileset>
+	</copy>
+	<copy todir="${dist.dir}/${string::to-lower(project::get-name())}-${project.version}/${examples.dir}/Data/Widgets" flatten="false">
+	    <fileset basedir="examples/SdlDotNetExamples/Data/Widgets">
+		<include name="**/*" />
 	    </fileset>
 	</copy>
 	<if test="${is-osx}">
