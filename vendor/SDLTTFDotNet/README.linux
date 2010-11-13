@@ -1,0 +1,5 @@
+I didn't bother varying the library filename for different platforms because it is easier to just add this line to mono's config file:
+
+<dllmap dll="SDL_ttf.dll" target="libSDL_ttf.so" />
+
+I don't know if portable.net has a similar system.
