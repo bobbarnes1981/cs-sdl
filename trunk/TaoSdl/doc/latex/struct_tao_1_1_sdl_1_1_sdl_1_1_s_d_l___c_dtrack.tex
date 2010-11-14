@@ -1,0 +1,98 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack}{
+\section{Tao.Sdl.Sdl.SDL\_\-CDtrack Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack}\index{Tao::Sdl::Sdl::SDL\_\-CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}}
+}
+
+
+CD Track Information Structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a0aee57191de5fac82251bd827fcf64bf}{id}
+\begin{DoxyCompactList}\small\item\em Track number(0-\/99). \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a95bceb0ab5ca32c3572ae36613e5a299}{type}
+\begin{DoxyCompactList}\small\item\em Data or audio track. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_aebba7b7ca29edf4232172d0b9356a5a7}{unused}
+\begin{DoxyCompactList}\small\item\em Unused. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a827b339b0fbd1afa16e999bb4f8b88ef}{length}
+\begin{DoxyCompactList}\small\item\em Length, in frames, of this track. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_ae49a94c371c0d1626c09dc2f9a5225e4}{offset}
+\begin{DoxyCompactList}\small\item\em Offset, in frames, from start of disk. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+CD Track Information Structure. \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack}{SDL\_\-CDtrack} stores data on each track on a CD, its fields should be pretty self explainatory. It is a member a the \hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d}{SDL\_\-CD} structure. 
+
+Note: Frames can be converted to standard timings. There are CD\_\-FPS frames per second, so \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a827b339b0fbd1afa16e999bb4f8b88ef}{SDL\_\-CDtrack.length}/CD\_\-FPS=length\_\-in\_\-seconds. 
+
+Struct in SDL\_\-cdrom.h 
+\begin{DoxyCode}
+            typedef struct{
+            Uint8 id;
+            Uint8 type;
+            Uint32 length;
+            Uint32 offset;
+            } SDL_CDtrack;
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{class_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_d}{SDL\_\-CD}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a0aee57191de5fac82251bd827fcf64bf}{
+\index{Tao::Sdl::Sdl::SDL\_\-CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}!id@{id}}
+\index{id@{id}!Tao::Sdl::Sdl::SDL_CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}}
+\subsubsection[{id}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-CDtrack.id}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a0aee57191de5fac82251bd827fcf64bf}
+
+
+Track number(0-\/99). 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a827b339b0fbd1afa16e999bb4f8b88ef}{
+\index{Tao::Sdl::Sdl::SDL\_\-CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}!length@{length}}
+\index{length@{length}!Tao::Sdl::Sdl::SDL_CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-CDtrack.length}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a827b339b0fbd1afa16e999bb4f8b88ef}
+
+
+Length, in frames, of this track. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_ae49a94c371c0d1626c09dc2f9a5225e4}{
+\index{Tao::Sdl::Sdl::SDL\_\-CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}!offset@{offset}}
+\index{offset@{offset}!Tao::Sdl::Sdl::SDL_CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}}
+\subsubsection[{offset}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Sdl.Sdl.SDL\_\-CDtrack.offset}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_ae49a94c371c0d1626c09dc2f9a5225e4}
+
+
+Offset, in frames, from start of disk. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a95bceb0ab5ca32c3572ae36613e5a299}{
+\index{Tao::Sdl::Sdl::SDL\_\-CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}!type@{type}}
+\index{type@{type}!Tao::Sdl::Sdl::SDL_CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-CDtrack.type}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_a95bceb0ab5ca32c3572ae36613e5a299}
+
+
+Data or audio track. 
+
+SDL\_\-AUDIO\_\-TRACK or SDL\_\-DATA\_\-TRACK \hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_aebba7b7ca29edf4232172d0b9356a5a7}{
+\index{Tao::Sdl::Sdl::SDL\_\-CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}!unused@{unused}}
+\index{unused@{unused}!Tao::Sdl::Sdl::SDL_CDtrack@{Tao::Sdl::Sdl::SDL\_\-CDtrack}}
+\subsubsection[{unused}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-CDtrack.unused}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___c_dtrack_aebba7b7ca29edf4232172d0b9356a5a7}
+
+
+Unused. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

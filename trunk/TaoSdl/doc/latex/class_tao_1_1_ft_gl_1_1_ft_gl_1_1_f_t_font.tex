@@ -1,0 +1,394 @@
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font}{
+\section{Tao.FtGl.FtGl.FTFont Class Reference}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font}\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+}
+
+
+Generic Font abstract class.  
+
+
+Inheritance diagram for Tao.FtGl.FtGl.FTFont:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.928690cm]{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a46004ffd2b225934325bb45947dbdc38}{FTFont} ()
+\item 
+void \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ab9028c4aace7648b961eeaacf700afd4}{Destroy} ()
+\item 
+float \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a86ab336691731ffa37a7dc3217bd7492}{LineHeight} ()
+\item 
+int \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ae3b0cefd65957be938fb18076c81840d}{CharMap} (\hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{FT\_\-Encoding} encoding)
+\item 
+void \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a95e01ca23cdf074a1f9f7ca019210958}{BBox} (string str, out float x1, out float y1, out float z1, out float x2, out float y2, out float z2)
+\item 
+void \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a1451727b550abf2344bf110ddeaf8461}{BBox} (string str, int len, out float x1, out float y1, out float z1, out float x2, out float y2, out float z2)
+\item 
+int \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_abee247a7e90dc2c3e46cb7ef02836663}{FaceSize} ()
+\item 
+int \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ab7f4656d0b96f7d4c334964687c364c8}{FaceSize} (int size, int res)
+\item 
+int \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a38061a3a420c847b2039e0b0972b0486}{FaceSize} (int size)
+\item 
+float \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a5f6ded89c89d6befae9af223ba45e197}{Descender} ()
+\item 
+float \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a25ed65ee6011fd2f4805f875402ea31e}{Ascender} ()
+\item 
+float \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a40e84b5de06d3a12124c0266a6d61e68}{Advance} (string str)
+\item 
+void \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_afec637c0e7cc6cfaa2047066af6488cf}{Depth} (float depth)
+\item 
+void \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ab79c8814386e1f31a034f182c4c0e664}{Outset} (float front, float back)
+\item 
+void \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a4dca0cdd86fb267165638ab7989dc459}{Render} (string str)
+\item 
+int \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a3339555a40fea1089d1a1f8321e54b9f}{Error} ()
+\item 
+bool \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_abcd3b8046da359bae8972052f0cb4410}{Attach} (string pathFont)
+\item 
+bool \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a6d45015b27c7303be7b0092e2bfb44df}{Attach} (string p, int size)
+\item 
+int \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a27eec2ce8486896c4baa53625a7b970a}{CharMapCount} ()
+\item 
+List$<$ \hyperlink{namespace_tao_1_1_free_type_a87a3c6633d19c2af09744e5a3d0a51ed}{FT\_\-Encoding} $>$ \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_aa9ae86bafe92de04f5fa6d29d92a1100}{CharMapList} ()
+\item 
+void \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a8574dbf75151599b8148d787ba842f03}{SetDisplayList} (bool use)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+IntPtr \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ae90b1c2f0ad98e4af764da8afedbdcdc}{\_\-ptr} = IntPtr.Zero
+\item 
+byte\mbox{[}$\,$\mbox{]} \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a264bf74df4541688591c0b7d4edf219c}{\_\-data} = null
+\item 
+GCHandle \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_afc3521c1424646b6df272c7eb62a50d3}{\_\-gch}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+IntPtr \hyperlink{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a0fe6dcd8dda1097cb79f22cb14f8caca}{Pointer}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Generic Font abstract class. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a46004ffd2b225934325bb45947dbdc38}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!FTFont@{FTFont}}
+\index{FTFont@{FTFont}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{FTFont}]{\setlength{\rightskip}{0pt plus 5cm}Tao.FtGl.FtGl.FTFont.FTFont (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a46004ffd2b225934325bb45947dbdc38}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a40e84b5de06d3a12124c0266a6d61e68}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Advance@{Advance}}
+\index{Advance@{Advance}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Advance}]{\setlength{\rightskip}{0pt plus 5cm}float Tao.FtGl.FtGl.FTFont.Advance (
+\begin{DoxyParamCaption}
+\item[{string}]{ str}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a40e84b5de06d3a12124c0266a6d61e68}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a25ed65ee6011fd2f4805f875402ea31e}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Ascender@{Ascender}}
+\index{Ascender@{Ascender}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Ascender}]{\setlength{\rightskip}{0pt plus 5cm}float Tao.FtGl.FtGl.FTFont.Ascender (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a25ed65ee6011fd2f4805f875402ea31e}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_abcd3b8046da359bae8972052f0cb4410}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Attach@{Attach}}
+\index{Attach@{Attach}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Attach}]{\setlength{\rightskip}{0pt plus 5cm}bool Tao.FtGl.FtGl.FTFont.Attach (
+\begin{DoxyParamCaption}
+\item[{string}]{ pathFont}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_abcd3b8046da359bae8972052f0cb4410}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em pathFont}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a6d45015b27c7303be7b0092e2bfb44df}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Attach@{Attach}}
+\index{Attach@{Attach}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Attach}]{\setlength{\rightskip}{0pt plus 5cm}bool Tao.FtGl.FtGl.FTFont.Attach (
+\begin{DoxyParamCaption}
+\item[{string}]{ p, }
+\item[{int}]{ size}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a6d45015b27c7303be7b0092e2bfb44df}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em p}]\item[{\em size}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a95e01ca23cdf074a1f9f7ca019210958}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!BBox@{BBox}}
+\index{BBox@{BBox}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{BBox}]{\setlength{\rightskip}{0pt plus 5cm}void Tao.FtGl.FtGl.FTFont.BBox (
+\begin{DoxyParamCaption}
+\item[{string}]{ str, }
+\item[{out float}]{ x1, }
+\item[{out float}]{ y1, }
+\item[{out float}]{ z1, }
+\item[{out float}]{ x2, }
+\item[{out float}]{ y2, }
+\item[{out float}]{ z2}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a95e01ca23cdf074a1f9f7ca019210958}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]\item[{\em x1}]\item[{\em y1}]\item[{\em z1}]\item[{\em x2}]\item[{\em y2}]\item[{\em z2}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a1451727b550abf2344bf110ddeaf8461}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!BBox@{BBox}}
+\index{BBox@{BBox}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{BBox}]{\setlength{\rightskip}{0pt plus 5cm}void Tao.FtGl.FtGl.FTFont.BBox (
+\begin{DoxyParamCaption}
+\item[{string}]{ str, }
+\item[{int}]{ len, }
+\item[{out float}]{ x1, }
+\item[{out float}]{ y1, }
+\item[{out float}]{ z1, }
+\item[{out float}]{ x2, }
+\item[{out float}]{ y2, }
+\item[{out float}]{ z2}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a1451727b550abf2344bf110ddeaf8461}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]\item[{\em start}]\item[{\em end}]\item[{\em x1}]\item[{\em y1}]\item[{\em z1}]\item[{\em x2}]\item[{\em y2}]\item[{\em z2}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ae3b0cefd65957be938fb18076c81840d}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!CharMap@{CharMap}}
+\index{CharMap@{CharMap}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{CharMap}]{\setlength{\rightskip}{0pt plus 5cm}int Tao.FtGl.FtGl.FTFont.CharMap (
+\begin{DoxyParamCaption}
+\item[{{\bf FT\_\-Encoding}}]{ encoding}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ae3b0cefd65957be938fb18076c81840d}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em encoding}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a27eec2ce8486896c4baa53625a7b970a}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!CharMapCount@{CharMapCount}}
+\index{CharMapCount@{CharMapCount}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{CharMapCount}]{\setlength{\rightskip}{0pt plus 5cm}int Tao.FtGl.FtGl.FTFont.CharMapCount (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a27eec2ce8486896c4baa53625a7b970a}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_aa9ae86bafe92de04f5fa6d29d92a1100}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!CharMapList@{CharMapList}}
+\index{CharMapList@{CharMapList}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{CharMapList}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf FT\_\-Encoding}$>$ Tao.FtGl.FtGl.FTFont.CharMapList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_aa9ae86bafe92de04f5fa6d29d92a1100}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_afec637c0e7cc6cfaa2047066af6488cf}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Depth@{Depth}}
+\index{Depth@{Depth}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Depth}]{\setlength{\rightskip}{0pt plus 5cm}void Tao.FtGl.FtGl.FTFont.Depth (
+\begin{DoxyParamCaption}
+\item[{float}]{ depth}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_afec637c0e7cc6cfaa2047066af6488cf}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em depth}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a5f6ded89c89d6befae9af223ba45e197}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Descender@{Descender}}
+\index{Descender@{Descender}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Descender}]{\setlength{\rightskip}{0pt plus 5cm}float Tao.FtGl.FtGl.FTFont.Descender (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a5f6ded89c89d6befae9af223ba45e197}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ab9028c4aace7648b961eeaacf700afd4}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Destroy@{Destroy}}
+\index{Destroy@{Destroy}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Destroy}]{\setlength{\rightskip}{0pt plus 5cm}void Tao.FtGl.FtGl.FTFont.Destroy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ab9028c4aace7648b961eeaacf700afd4}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a3339555a40fea1089d1a1f8321e54b9f}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Error@{Error}}
+\index{Error@{Error}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Error}]{\setlength{\rightskip}{0pt plus 5cm}int Tao.FtGl.FtGl.FTFont.Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a3339555a40fea1089d1a1f8321e54b9f}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ab7f4656d0b96f7d4c334964687c364c8}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!FaceSize@{FaceSize}}
+\index{FaceSize@{FaceSize}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{FaceSize}]{\setlength{\rightskip}{0pt plus 5cm}int Tao.FtGl.FtGl.FTFont.FaceSize (
+\begin{DoxyParamCaption}
+\item[{int}]{ size, }
+\item[{int}]{ res}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ab7f4656d0b96f7d4c334964687c364c8}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em size}]\item[{\em res}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a38061a3a420c847b2039e0b0972b0486}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!FaceSize@{FaceSize}}
+\index{FaceSize@{FaceSize}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{FaceSize}]{\setlength{\rightskip}{0pt plus 5cm}int Tao.FtGl.FtGl.FTFont.FaceSize (
+\begin{DoxyParamCaption}
+\item[{int}]{ size}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a38061a3a420c847b2039e0b0972b0486}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em size}]\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_abee247a7e90dc2c3e46cb7ef02836663}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!FaceSize@{FaceSize}}
+\index{FaceSize@{FaceSize}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{FaceSize}]{\setlength{\rightskip}{0pt plus 5cm}int Tao.FtGl.FtGl.FTFont.FaceSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_abee247a7e90dc2c3e46cb7ef02836663}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a86ab336691731ffa37a7dc3217bd7492}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!LineHeight@{LineHeight}}
+\index{LineHeight@{LineHeight}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{LineHeight}]{\setlength{\rightskip}{0pt plus 5cm}float Tao.FtGl.FtGl.FTFont.LineHeight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a86ab336691731ffa37a7dc3217bd7492}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ab79c8814386e1f31a034f182c4c0e664}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Outset@{Outset}}
+\index{Outset@{Outset}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Outset}]{\setlength{\rightskip}{0pt plus 5cm}void Tao.FtGl.FtGl.FTFont.Outset (
+\begin{DoxyParamCaption}
+\item[{float}]{ front, }
+\item[{float}]{ back}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ab79c8814386e1f31a034f182c4c0e664}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em front}]\item[{\em back}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a4dca0cdd86fb267165638ab7989dc459}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Render@{Render}}
+\index{Render@{Render}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Render}]{\setlength{\rightskip}{0pt plus 5cm}void Tao.FtGl.FtGl.FTFont.Render (
+\begin{DoxyParamCaption}
+\item[{string}]{ str}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a4dca0cdd86fb267165638ab7989dc459}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]\end{DoxyParams}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a8574dbf75151599b8148d787ba842f03}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!SetDisplayList@{SetDisplayList}}
+\index{SetDisplayList@{SetDisplayList}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{SetDisplayList}]{\setlength{\rightskip}{0pt plus 5cm}void Tao.FtGl.FtGl.FTFont.SetDisplayList (
+\begin{DoxyParamCaption}
+\item[{bool}]{ use}
+\end{DoxyParamCaption}
+)}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a8574dbf75151599b8148d787ba842f03}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em use}]\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a264bf74df4541688591c0b7d4edf219c}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!\_\-data@{\_\-data}}
+\index{\_\-data@{\_\-data}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}byte \mbox{[}$\,$\mbox{]} {\bf Tao.FtGl.FtGl.FTFont.\_\-data} = null\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a264bf74df4541688591c0b7d4edf219c}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_afc3521c1424646b6df272c7eb62a50d3}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!\_\-gch@{\_\-gch}}
+\index{\_\-gch@{\_\-gch}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{\_\-gch}]{\setlength{\rightskip}{0pt plus 5cm}GCHandle {\bf Tao.FtGl.FtGl.FTFont.\_\-gch}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_afc3521c1424646b6df272c7eb62a50d3}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ae90b1c2f0ad98e4af764da8afedbdcdc}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!\_\-ptr@{\_\-ptr}}
+\index{\_\-ptr@{\_\-ptr}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{\_\-ptr}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf Tao.FtGl.FtGl.FTFont.\_\-ptr} = IntPtr.Zero\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_ae90b1c2f0ad98e4af764da8afedbdcdc}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a0fe6dcd8dda1097cb79f22cb14f8caca}{
+\index{Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}!Pointer@{Pointer}}
+\index{Pointer@{Pointer}!Tao::FtGl::FtGl::FTFont@{Tao::FtGl::FtGl::FTFont}}
+\subsubsection[{Pointer}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr Tao.FtGl.FtGl.FTFont.Pointer\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}}}
+\label{class_tao_1_1_ft_gl_1_1_ft_gl_1_1_f_t_font_a0fe6dcd8dda1097cb79f22cb14f8caca}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.FtGl/\hyperlink{_ft_gl_8cs}{FtGl.cs}\end{DoxyCompactItemize}

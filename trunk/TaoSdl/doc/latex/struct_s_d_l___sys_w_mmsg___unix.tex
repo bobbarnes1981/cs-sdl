@@ -1,0 +1,48 @@
+\hypertarget{struct_s_d_l___sys_w_mmsg___unix}{
+\section{SDL\_\-SysWMmsg\_\-Unix Struct Reference}
+\label{struct_s_d_l___sys_w_mmsg___unix}\index{SDL\_\-SysWMmsg\_\-Unix@{SDL\_\-SysWMmsg\_\-Unix}}
+}
+
+
+The UNIX custom event structure. TODO.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_s_d_l__version}{SDL\_\-version} \hyperlink{struct_s_d_l___sys_w_mmsg___unix_acf903b0c75268bf29c761d3c7f0a0ace}{version}
+\item 
+int \hyperlink{struct_s_d_l___sys_w_mmsg___unix_aa6da499d8a77199e966e0f03218f665c}{subsystem}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The UNIX custom event structure. TODO. Struct in SDL\_\-syswm.h 
+\begin{DoxyCode}
+            struct SDL_SysWMmsg {
+                        SDL_version version;
+                        SDL_SYSWM_TYPE subsystem;
+                        union 
+                        {
+                        XEvent xevent;
+                } event;
+            };          
+\end{DoxyCode}
+  
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_s_d_l___sys_w_mmsg___unix_aa6da499d8a77199e966e0f03218f665c}{
+\index{SDL\_\-SysWMmsg\_\-Unix@{SDL\_\-SysWMmsg\_\-Unix}!subsystem@{subsystem}}
+\index{subsystem@{subsystem}!SDL_SysWMmsg_Unix@{SDL\_\-SysWMmsg\_\-Unix}}
+\subsubsection[{subsystem}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SDL\_\-SysWMmsg\_\-Unix.subsystem}}}
+\label{struct_s_d_l___sys_w_mmsg___unix_aa6da499d8a77199e966e0f03218f665c}
+\hypertarget{struct_s_d_l___sys_w_mmsg___unix_acf903b0c75268bf29c761d3c7f0a0ace}{
+\index{SDL\_\-SysWMmsg\_\-Unix@{SDL\_\-SysWMmsg\_\-Unix}!version@{version}}
+\index{version@{version}!SDL_SysWMmsg_Unix@{SDL\_\-SysWMmsg\_\-Unix}}
+\subsubsection[{version}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SDL\_\-version} {\bf SDL\_\-SysWMmsg\_\-Unix.version}}}
+\label{struct_s_d_l___sys_w_mmsg___unix_acf903b0c75268bf29c761d3c7f0a0ace}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

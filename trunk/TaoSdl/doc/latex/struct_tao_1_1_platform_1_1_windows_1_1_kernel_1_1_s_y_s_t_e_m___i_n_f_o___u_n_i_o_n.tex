@@ -1,0 +1,89 @@
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n}{
+\section{Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO\_\-UNION Struct Reference}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n}\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION}}
+}
+
+
+Union for the OemId, ProcessorArchitecture, and Reserved fields of the \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o}{SYSTEM\_\-INFO} structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n_afdbd9f4c92a56503a9b8fd4f0843c84a}{OemId}
+\begin{DoxyCompactList}\small\item\em An obsolete member that is retained for compatibility with \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 3.5 and earlier. New applications should use the {\itshape ProcessorArchitecture\/} branch of the union. 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} Me/98/95:} The system always sets this member to zero, the value defined for WinNt.PROCESSOR\_\-ARCHITECTURE\_\-INTEL. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n_ab03cf53885bba407280234cb6e5059bb}{ProcessorArchitecture}
+\begin{DoxyCompactList}\small\item\em System's processor architecture. This value can be one of the following values: 
+
+WinNt.PROCESSOR\_\-ARCHITECTURE\_\-UNKNOWN 
+
+WinNt.PROCESSOR\_\-ARCHITECTURE\_\-INTEL 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 3.51:} WinNt.PROCESSOR\_\-ARCHITECTURE\_\-MIPS 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 4.0 and earlier:} WinNt.PROCESSOR\_\-ARCHITECTURE\_\-ALPHA 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 4.0 and earlier:} WinNt.PROCESSOR\_\-ARCHITECTURE\_\-PPC 
+
+{\bfseries 64-\/bit \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows}:} WinNt.PROCESSOR\_\-ARCHITECTURE\_\-IA64, WinNt.PROCESSOR\_\-ARCHITECTURE\_\-IA32\_\-ON\_\-WIN64, WinNt.PROCESSOR\_\-ARCHITECTURE\_\-AMD64 \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n_adfb1716ec09e2b0ceb6edf6e32d8a2fc}{Reserved}
+\begin{DoxyCompactList}\small\item\em Reserved for future use. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Union for the OemId, ProcessorArchitecture, and Reserved fields of the \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o}{SYSTEM\_\-INFO} structure. \begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o}{SYSTEM\_\-INFO}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n_afdbd9f4c92a56503a9b8fd4f0843c84a}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION}!OemId@{OemId}}
+\index{OemId@{OemId}!Tao::Platform::Windows::Kernel::SYSTEM_INFO_UNION@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION}}
+\subsubsection[{OemId}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO\_\-UNION.OemId}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n_afdbd9f4c92a56503a9b8fd4f0843c84a}
+
+
+An obsolete member that is retained for compatibility with \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 3.5 and earlier. New applications should use the {\itshape ProcessorArchitecture\/} branch of the union. 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} Me/98/95:} The system always sets this member to zero, the value defined for WinNt.PROCESSOR\_\-ARCHITECTURE\_\-INTEL. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n_ab03cf53885bba407280234cb6e5059bb}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION}!ProcessorArchitecture@{ProcessorArchitecture}}
+\index{ProcessorArchitecture@{ProcessorArchitecture}!Tao::Platform::Windows::Kernel::SYSTEM_INFO_UNION@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION}}
+\subsubsection[{ProcessorArchitecture}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO\_\-UNION.ProcessorArchitecture}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n_ab03cf53885bba407280234cb6e5059bb}
+
+
+System's processor architecture. This value can be one of the following values: 
+
+WinNt.PROCESSOR\_\-ARCHITECTURE\_\-UNKNOWN 
+
+WinNt.PROCESSOR\_\-ARCHITECTURE\_\-INTEL 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 3.51:} WinNt.PROCESSOR\_\-ARCHITECTURE\_\-MIPS 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 4.0 and earlier:} WinNt.PROCESSOR\_\-ARCHITECTURE\_\-ALPHA 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 4.0 and earlier:} WinNt.PROCESSOR\_\-ARCHITECTURE\_\-PPC 
+
+{\bfseries 64-\/bit \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows}:} WinNt.PROCESSOR\_\-ARCHITECTURE\_\-IA64, WinNt.PROCESSOR\_\-ARCHITECTURE\_\-IA32\_\-ON\_\-WIN64, WinNt.PROCESSOR\_\-ARCHITECTURE\_\-AMD64 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n_adfb1716ec09e2b0ceb6edf6e32d8a2fc}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION}!Reserved@{Reserved}}
+\index{Reserved@{Reserved}!Tao::Platform::Windows::Kernel::SYSTEM_INFO_UNION@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO\_\-UNION}}
+\subsubsection[{Reserved}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO\_\-UNION.Reserved}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n_adfb1716ec09e2b0ceb6edf6e32d8a2fc}
+
+
+Reserved for future use. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Platform.Windows/\hyperlink{_kernel_8cs}{Kernel.cs}\end{DoxyCompactItemize}

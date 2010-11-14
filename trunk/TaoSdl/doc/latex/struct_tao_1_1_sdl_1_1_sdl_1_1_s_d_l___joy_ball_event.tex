@@ -1,0 +1,96 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event}{
+\section{Tao.Sdl.Sdl.SDL\_\-JoyBallEvent Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event}\index{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}}
+}
+
+
+Joystick trackball motion event structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_a6a038a07869c454162161bb1705fc5d8}{type}
+\begin{DoxyCompactList}\small\item\em SDL\_\-JOYBALLMOTION. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_ae830b51d29124cac5cd566050bdb89c9}{which}
+\begin{DoxyCompactList}\small\item\em The joystick device index. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_ae04564d94976afbed00b8f63f7cc4b76}{ball}
+\begin{DoxyCompactList}\small\item\em The joystick trackball index. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_af581dbbfb3bd257fc84db29b95a7a17e}{xrel}
+\begin{DoxyCompactList}\small\item\em The relative motion in the X direction. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_a6a627ec33bba38a21c2d0c6f2b09a41a}{yrel}
+\begin{DoxyCompactList}\small\item\em The relative motion in the Y direction. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Joystick trackball motion event structure. \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event}{SDL\_\-JoyBallEvent} is a member of the \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event} union and is used when an event of type SDL\_\-JOYBALLMOTION is reported. 
+
+A SDL\_\-JOYBALLMOTION event occurs when a user moves a trackball on the joystick. The field which is the index of the joystick that reported the event and ball is the index of the trackball (for a more detailed explaination see the Joystick section). Trackballs only return relative motion, this is the change in position on the ball since it was last polled (last cycle of the event loop) and it is stored in xrel and yrel. 
+
+Struct in SDL\_\-events.h 
+\begin{DoxyCode}
+            typedef struct{
+                        Uint8 type;
+                        Uint8 which;
+                        Uint8 ball;
+                        Sint16 xrel, yrel;
+                } SDL_JoyBallEvent;
+\end{DoxyCode}
+ \begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event}, \hyperlink{_sdl_8cs_a4b5786d792bade406949c738f0290eca}{SDL\_\-JoystickEventState}, \hyperlink{_sdl_8cs_ac507b201a80334bc2e9a62ba44d8534b}{SDL\_\-JoystickGetBall}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_ae04564d94976afbed00b8f63f7cc4b76}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}!ball@{ball}}
+\index{ball@{ball}!Tao::Sdl::Sdl::SDL_JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}}
+\subsubsection[{ball}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyBallEvent.ball}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_ae04564d94976afbed00b8f63f7cc4b76}
+
+
+The joystick trackball index. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_a6a038a07869c454162161bb1705fc5d8}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}!type@{type}}
+\index{type@{type}!Tao::Sdl::Sdl::SDL_JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyBallEvent.type}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_a6a038a07869c454162161bb1705fc5d8}
+
+
+SDL\_\-JOYBALLMOTION. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_ae830b51d29124cac5cd566050bdb89c9}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}!which@{which}}
+\index{which@{which}!Tao::Sdl::Sdl::SDL_JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}}
+\subsubsection[{which}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyBallEvent.which}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_ae830b51d29124cac5cd566050bdb89c9}
+
+
+The joystick device index. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_af581dbbfb3bd257fc84db29b95a7a17e}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}!xrel@{xrel}}
+\index{xrel@{xrel}!Tao::Sdl::Sdl::SDL_JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}}
+\subsubsection[{xrel}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-JoyBallEvent.xrel}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_af581dbbfb3bd257fc84db29b95a7a17e}
+
+
+The relative motion in the X direction. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_a6a627ec33bba38a21c2d0c6f2b09a41a}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}!yrel@{yrel}}
+\index{yrel@{yrel}!Tao::Sdl::Sdl::SDL_JoyBallEvent@{Tao::Sdl::Sdl::SDL\_\-JoyBallEvent}}
+\subsubsection[{yrel}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-JoyBallEvent.yrel}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_ball_event_a6a627ec33bba38a21c2d0c6f2b09a41a}
+
+
+The relative motion in the Y direction. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

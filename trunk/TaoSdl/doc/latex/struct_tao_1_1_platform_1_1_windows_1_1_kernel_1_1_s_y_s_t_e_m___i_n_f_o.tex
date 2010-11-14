@@ -1,0 +1,288 @@
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o}{
+\section{Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO Struct Reference}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o}\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+}
+
+
+The {\bfseries \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o}{SYSTEM\_\-INFO}} structure contains information about the current computer system. This includes the architecture and type of the processor, the number of processors in the system, the page size, and other such information.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n}{SYSTEM\_\-INFO\_\-UNION} \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a6e86574f6bf20eeb3067718c06c919ad}{SystemInfoUnion}
+\begin{DoxyCompactList}\small\item\em Union for the OemId, ProcessorArchitecture, and Reserved fields of the \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o}{SYSTEM\_\-INFO} structure. See \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n}{SYSTEM\_\-INFO\_\-UNION}. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a5c72c40ccfdf4070f7ed58033db8c892}{PageSize}
+\begin{DoxyCompactList}\small\item\em Page size and the granularity of page protection and commitment. This is the page size used by the {\bfseries VirtualAlloc} function. \item\end{DoxyCompactList}\item 
+IntPtr \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a0f0c6aa8c394aed872e003895c045ee3}{MinimumApplicationAddress}
+\begin{DoxyCompactList}\small\item\em Pointer to the lowest memory address accessible to applications and dynamic-\/link libraries (DLLs). \item\end{DoxyCompactList}\item 
+IntPtr \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a28e5d33f7be1fc703b3021c7175c1d3b}{MaximumApplicationAddress}
+\begin{DoxyCompactList}\small\item\em Pointer to the highest memory address accessible to applications and DLLs. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_ab4d5f2e6af269fd08c2a05fe2b9c821b}{ActiveProcessorMask}
+\begin{DoxyCompactList}\small\item\em Mask representing the set of processors configured into the system. Bit 0 is processor 0; bit 31 is processor 31. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a0ac7829baa6c9870245d5ce59d539356}{NumberOfProcessors}
+\begin{DoxyCompactList}\small\item\em Number of processors in the system. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_ac5729610c75fec173cab9d4e363bcc03}{ProcessorType}
+\begin{DoxyCompactList}\small\item\em An obsolete member that is retained for compatibility with \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 3.5 and earlier. Use the {\itshape SystemInfoUnion.ProcessorArchitecture\/}, {\itshape ProcessorLevel\/}, and {\itshape ProcessorRevision\/} members to determine the type of processor. 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} Me/98/95:} Specifies the type of processor in the system. This member is one of the following values: 
+
+WinNt.PROCESSOR\_\-INTEL\_\-386 
+
+WinNt.PROCESSOR\_\-INTEL\_\-486 
+
+WinNt.PROCESSOR\_\-INTEL\_\-PENTIUM \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a4c5fa3e71d82e4ba21014707b3cf0f53}{AllocationGranularity}
+\begin{DoxyCompactList}\small\item\em Granularity with which virtual memory is allocated. For example, a {\bfseries VirtualAlloc} request to allocate 1 byte will reserve an address space of {\itshape AllocationGranularity\/} bytes. This value was hard coded as 64K in the past, but other hardware architectures may require different values. \item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a52a0d3b28f7fc40b45377a30f13ebebe}{ProcessorLevel}
+\begin{DoxyCompactList}\small\item\em System's architecture-\/dependent processor level. It should be used only for display purposes. To determine the feature set of a processor, use the IsProcessorFeaturePresent function. 
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-INTEL, {\itshape ProcessorLevel\/} is defined by the CPU vendor. 
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-IA64, {\itshape ProcessorLevel\/} is set to 1. 
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-MIPS, {\itshape ProcessorLevel\/} is of the form 00xx, where xx is an 8-\/bit implementation number (bits 8-\/15 of the PRId register). The member can be the following value: 
+
+\begin{TabularC}{2}
+\hline
+Value} &Description  \\\cline{1-2}
+0004} &MIPS R4000  \\\cline{1-2}
+\end{TabularC}
+
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-ALPHA, {\itshape ProcessorLevel\/} is of the form xxxx, where xxxx is a 16-\/bit processor version number (the low-\/order 16 bits of a version number from the firmware). The member can be one of the following values: 
+
+\begin{TabularC}{2}
+\hline
+Value} &Description  \\\cline{1-2}
+21064} &Alpha 21064  \\\cline{1-2}
+21066} &Alpha 21066  \\\cline{1-2}
+21164} &Alpha 21164  \\\cline{1-2}
+\end{TabularC}
+
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-PPC, {\itshape ProcessorLevel\/} is of the form xxxx, where xxxx is a 16-\/bit processor version number (the high-\/order 16 bits of the Processor Version Register). The member can be one of the following values: 
+
+\begin{TabularC}{2}
+\hline
+Value} &Description  \\\cline{1-2}
+1} &PPC 601  \\\cline{1-2}
+3} &PPC 603  \\\cline{1-2}
+4} &PPC 604  \\\cline{1-2}
+6} &PPC 603+  \\\cline{1-2}
+9} &PPC 604+  \\\cline{1-2}
+20} &PPC 620  \\\cline{1-2}
+\end{TabularC}
+\item\end{DoxyCompactList}\item 
+int \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a3390dea5c0bcfaeae36cd427d01c51a2}{ProcessorRevision}
+\begin{DoxyCompactList}\small\item\em Architecture-\/dependent processor revision. The following table shows how the revision value is assembled for each type of processor architecture: 
+
+\begin{TabularC}{2}
+\hline
+Processor} &Description  \\\cline{1-2}
+Intel 80386 or 80486} &A value of the form xxyz. \\\cline{1-2}
+\end{TabularC}
+
+
+If xx is equal to 0xFF, y -\/ 0xA is the model number, and z is the stepping identifier. For example, an Intel 80486-\/D0 system returns 0xFFD0. 
+
+If xx is not equal to 0xFF, xx + 'A' is the stepping letter and yz is the minor stepping. 
+
+{\bfseries Intel Pentium, Cyrix, or NextGen 586}  
+
+A value of the form xxyy, where xx is the model number and yy is the stepping. Display this value of 0x0201 as follows: 
+
+Model xx, Stepping yy. 
+
+{\bfseries MIPS}  A value of the form 00xx, where xx is the 8-\/bit revision number of the processor (the low-\/order 8 bits of the PRId register).    {\bfseries ALPHA}  
+
+A value of the form xxyy, where xxyy is the low-\/order 16 bits of the processor revision number from the firmware. Display this value as follows: 
+
+Model A+xx, Pass yy. 
+
+{\bfseries PPC}  
+
+A value of the form xxyy, where xxyy is the low-\/order 16 bits of the processor version register. Display this value as follows: 
+
+xx.yy. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The {\bfseries \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o}{SYSTEM\_\-INFO}} structure contains information about the current computer system. This includes the architecture and type of the processor, the number of processors in the system, the page size, and other such information. \begin{DoxySeeAlso}{See also}
+GetSystemInfo, \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n}{SYSTEM\_\-INFO\_\-UNION}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_ab4d5f2e6af269fd08c2a05fe2b9c821b}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!ActiveProcessorMask@{ActiveProcessorMask}}
+\index{ActiveProcessorMask@{ActiveProcessorMask}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{ActiveProcessorMask}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.ActiveProcessorMask}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_ab4d5f2e6af269fd08c2a05fe2b9c821b}
+
+
+Mask representing the set of processors configured into the system. Bit 0 is processor 0; bit 31 is processor 31. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a4c5fa3e71d82e4ba21014707b3cf0f53}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!AllocationGranularity@{AllocationGranularity}}
+\index{AllocationGranularity@{AllocationGranularity}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{AllocationGranularity}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.AllocationGranularity}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a4c5fa3e71d82e4ba21014707b3cf0f53}
+
+
+Granularity with which virtual memory is allocated. For example, a {\bfseries VirtualAlloc} request to allocate 1 byte will reserve an address space of {\itshape AllocationGranularity\/} bytes. This value was hard coded as 64K in the past, but other hardware architectures may require different values. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a28e5d33f7be1fc703b3021c7175c1d3b}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!MaximumApplicationAddress@{MaximumApplicationAddress}}
+\index{MaximumApplicationAddress@{MaximumApplicationAddress}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{MaximumApplicationAddress}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.MaximumApplicationAddress}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a28e5d33f7be1fc703b3021c7175c1d3b}
+
+
+Pointer to the highest memory address accessible to applications and DLLs. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a0f0c6aa8c394aed872e003895c045ee3}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!MinimumApplicationAddress@{MinimumApplicationAddress}}
+\index{MinimumApplicationAddress@{MinimumApplicationAddress}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{MinimumApplicationAddress}]{\setlength{\rightskip}{0pt plus 5cm}IntPtr {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.MinimumApplicationAddress}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a0f0c6aa8c394aed872e003895c045ee3}
+
+
+Pointer to the lowest memory address accessible to applications and dynamic-\/link libraries (DLLs). 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a0ac7829baa6c9870245d5ce59d539356}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!NumberOfProcessors@{NumberOfProcessors}}
+\index{NumberOfProcessors@{NumberOfProcessors}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{NumberOfProcessors}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.NumberOfProcessors}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a0ac7829baa6c9870245d5ce59d539356}
+
+
+Number of processors in the system. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a5c72c40ccfdf4070f7ed58033db8c892}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!PageSize@{PageSize}}
+\index{PageSize@{PageSize}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{PageSize}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.PageSize}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a5c72c40ccfdf4070f7ed58033db8c892}
+
+
+Page size and the granularity of page protection and commitment. This is the page size used by the {\bfseries VirtualAlloc} function. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a52a0d3b28f7fc40b45377a30f13ebebe}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!ProcessorLevel@{ProcessorLevel}}
+\index{ProcessorLevel@{ProcessorLevel}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{ProcessorLevel}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.ProcessorLevel}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a52a0d3b28f7fc40b45377a30f13ebebe}
+
+
+System's architecture-\/dependent processor level. It should be used only for display purposes. To determine the feature set of a processor, use the IsProcessorFeaturePresent function. 
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-INTEL, {\itshape ProcessorLevel\/} is defined by the CPU vendor. 
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-IA64, {\itshape ProcessorLevel\/} is set to 1. 
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-MIPS, {\itshape ProcessorLevel\/} is of the form 00xx, where xx is an 8-\/bit implementation number (bits 8-\/15 of the PRId register). The member can be the following value: 
+
+\begin{TabularC}{2}
+\hline
+Value} &Description  \\\cline{1-2}
+0004} &MIPS R4000  \\\cline{1-2}
+\end{TabularC}
+
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-ALPHA, {\itshape ProcessorLevel\/} is of the form xxxx, where xxxx is a 16-\/bit processor version number (the low-\/order 16 bits of a version number from the firmware). The member can be one of the following values: 
+
+\begin{TabularC}{2}
+\hline
+Value} &Description  \\\cline{1-2}
+21064} &Alpha 21064  \\\cline{1-2}
+21066} &Alpha 21066  \\\cline{1-2}
+21164} &Alpha 21164  \\\cline{1-2}
+\end{TabularC}
+
+
+If {\itshape SystemInfoUnion.ProcessorArchitecture\/} is WinNt.PROCESSOR\_\-ARCHITECTURE\_\-PPC, {\itshape ProcessorLevel\/} is of the form xxxx, where xxxx is a 16-\/bit processor version number (the high-\/order 16 bits of the Processor Version Register). The member can be one of the following values: 
+
+\begin{TabularC}{2}
+\hline
+Value} &Description  \\\cline{1-2}
+1} &PPC 601  \\\cline{1-2}
+3} &PPC 603  \\\cline{1-2}
+4} &PPC 604  \\\cline{1-2}
+6} &PPC 603+  \\\cline{1-2}
+9} &PPC 604+  \\\cline{1-2}
+20} &PPC 620  \\\cline{1-2}
+\end{TabularC}
+
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a3390dea5c0bcfaeae36cd427d01c51a2}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!ProcessorRevision@{ProcessorRevision}}
+\index{ProcessorRevision@{ProcessorRevision}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{ProcessorRevision}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.ProcessorRevision}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a3390dea5c0bcfaeae36cd427d01c51a2}
+
+
+Architecture-\/dependent processor revision. The following table shows how the revision value is assembled for each type of processor architecture: 
+
+\begin{TabularC}{2}
+\hline
+Processor} &Description  \\\cline{1-2}
+Intel 80386 or 80486} &A value of the form xxyz. \\\cline{1-2}
+\end{TabularC}
+
+
+If xx is equal to 0xFF, y -\/ 0xA is the model number, and z is the stepping identifier. For example, an Intel 80486-\/D0 system returns 0xFFD0. 
+
+If xx is not equal to 0xFF, xx + 'A' is the stepping letter and yz is the minor stepping. 
+
+{\bfseries Intel Pentium, Cyrix, or NextGen 586}  
+
+A value of the form xxyy, where xx is the model number and yy is the stepping. Display this value of 0x0201 as follows: 
+
+Model xx, Stepping yy. 
+
+{\bfseries MIPS}  A value of the form 00xx, where xx is the 8-\/bit revision number of the processor (the low-\/order 8 bits of the PRId register).    {\bfseries ALPHA}  
+
+A value of the form xxyy, where xxyy is the low-\/order 16 bits of the processor revision number from the firmware. Display this value as follows: 
+
+Model A+xx, Pass yy. 
+
+{\bfseries PPC}  
+
+A value of the form xxyy, where xxyy is the low-\/order 16 bits of the processor version register. Display this value as follows: 
+
+xx.yy. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_ac5729610c75fec173cab9d4e363bcc03}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!ProcessorType@{ProcessorType}}
+\index{ProcessorType@{ProcessorType}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{ProcessorType}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.ProcessorType}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_ac5729610c75fec173cab9d4e363bcc03}
+
+
+An obsolete member that is retained for compatibility with \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} NT 3.5 and earlier. Use the {\itshape SystemInfoUnion.ProcessorArchitecture\/}, {\itshape ProcessorLevel\/}, and {\itshape ProcessorRevision\/} members to determine the type of processor. 
+
+{\bfseries \hyperlink{namespace_tao_1_1_platform_1_1_windows}{Windows} Me/98/95:} Specifies the type of processor in the system. This member is one of the following values: 
+
+WinNt.PROCESSOR\_\-INTEL\_\-386 
+
+WinNt.PROCESSOR\_\-INTEL\_\-486 
+
+WinNt.PROCESSOR\_\-INTEL\_\-PENTIUM 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a6e86574f6bf20eeb3067718c06c919ad}{
+\index{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}!SystemInfoUnion@{SystemInfoUnion}}
+\index{SystemInfoUnion@{SystemInfoUnion}!Tao::Platform::Windows::Kernel::SYSTEM_INFO@{Tao::Platform::Windows::Kernel::SYSTEM\_\-INFO}}
+\subsubsection[{SystemInfoUnion}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SYSTEM\_\-INFO\_\-UNION} {\bf Tao.Platform.Windows.Kernel.SYSTEM\_\-INFO.SystemInfoUnion}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o_a6e86574f6bf20eeb3067718c06c919ad}
+
+
+Union for the OemId, ProcessorArchitecture, and Reserved fields of the \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o}{SYSTEM\_\-INFO} structure. See \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_kernel_1_1_s_y_s_t_e_m___i_n_f_o___u_n_i_o_n}{SYSTEM\_\-INFO\_\-UNION}. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Platform.Windows/\hyperlink{_kernel_8cs}{Kernel.cs}\end{DoxyCompactItemize}

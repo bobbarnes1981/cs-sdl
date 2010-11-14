@@ -1,0 +1,88 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event}{
+\section{Tao.Sdl.Sdl.SDL\_\-KeyboardEvent Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event}\index{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent@{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent}}
+}
+
+
+Keyboard event structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_ad75c476fd7d0b3a6100e58cb3538984c}{type}
+\begin{DoxyCompactList}\small\item\em SDL\_\-KEYDOWN or SDL\_\-KEYUP. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_aee0d1eb02947a6037bb20d049d5893c6}{which}
+\begin{DoxyCompactList}\small\item\em The keyboard device index. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_a3d1da595fe959e927580c85b5e710b63}{state}
+\begin{DoxyCompactList}\small\item\em SDL\_\-PRESSED or SDL\_\-RELEASED. \item\end{DoxyCompactList}\item 
+\hyperlink{struct_tao_1_1_sdl_1_1_s_d_l__keysym}{SDL\_\-keysym} \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_ad6998ba475cab7e1e3743fc5a988e650}{keysym}
+\begin{DoxyCompactList}\small\item\em Contains key press information. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Keyboard event structure. \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event}{SDL\_\-KeyboardEvent} is a member of the \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event} union and is used when an event of type SDL\_\-KEYDOWN or SDL\_\-KEYUP is reported. 
+
+The type and state actually report the same information, they just use different values to do it! A keyboard event occurs when a key is released (type=SDK\_\-KEYUP or state=SDL\_\-RELEASED) and when a key is pressed (type=SDL\_\-KEYDOWN or state=SDL\_\-PRESSED). The information on what key was pressed or released is in the \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l__keysym}{SDL\_\-keysym} structure. 
+
+Note: Repeating SDL\_\-KEYDOWN events will occur if key repeat is enabled (see \hyperlink{_sdl_8cs_af31ec1fa8ac9f58ec682d0ae0b363cc8}{SDL\_\-EnableKeyRepeat}). 
+
+Struct in SDL\_\-events.h 
+\begin{DoxyCode}
+            typedef struct{
+                        Uint8 type;
+                        Uint8 state;
+                        SDL_keysym keysym;
+                } SDL_KeyboardEvent;
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event}, \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l__keysym}{SDL\_\-keysym}, \hyperlink{_sdl_8cs_af31ec1fa8ac9f58ec682d0ae0b363cc8}{SDL\_\-EnableKeyRepeat}, \hyperlink{_sdl_8cs_a84ff6db83e36f31aa5b5643cc18b1364}{SDL\_\-EnableUNICODE}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_ad6998ba475cab7e1e3743fc5a988e650}{
+\index{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent@{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent}!keysym@{keysym}}
+\index{keysym@{keysym}!Tao::Sdl::Sdl::SDL_KeyboardEvent@{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent}}
+\subsubsection[{keysym}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SDL\_\-keysym} {\bf Tao.Sdl.Sdl.SDL\_\-KeyboardEvent.keysym}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_ad6998ba475cab7e1e3743fc5a988e650}
+
+
+Contains key press information. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_a3d1da595fe959e927580c85b5e710b63}{
+\index{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent@{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent}!state@{state}}
+\index{state@{state}!Tao::Sdl::Sdl::SDL_KeyboardEvent@{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-KeyboardEvent.state}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_a3d1da595fe959e927580c85b5e710b63}
+
+
+SDL\_\-PRESSED or SDL\_\-RELEASED. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_ad75c476fd7d0b3a6100e58cb3538984c}{
+\index{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent@{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent}!type@{type}}
+\index{type@{type}!Tao::Sdl::Sdl::SDL_KeyboardEvent@{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-KeyboardEvent.type}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_ad75c476fd7d0b3a6100e58cb3538984c}
+
+
+SDL\_\-KEYDOWN or SDL\_\-KEYUP. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_aee0d1eb02947a6037bb20d049d5893c6}{
+\index{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent@{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent}!which@{which}}
+\index{which@{which}!Tao::Sdl::Sdl::SDL_KeyboardEvent@{Tao::Sdl::Sdl::SDL\_\-KeyboardEvent}}
+\subsubsection[{which}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-KeyboardEvent.which}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___keyboard_event_aee0d1eb02947a6037bb20d049d5893c6}
+
+
+The keyboard device index. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

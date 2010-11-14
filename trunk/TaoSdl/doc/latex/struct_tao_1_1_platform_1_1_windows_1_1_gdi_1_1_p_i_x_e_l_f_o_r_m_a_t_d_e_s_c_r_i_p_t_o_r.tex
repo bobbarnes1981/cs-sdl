@@ -1,0 +1,364 @@
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r}{
+\section{Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR Struct Reference}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r}\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+}
+
+
+The {\bfseries \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r}{PIXELFORMATDESCRIPTOR}} structure describes the pixel format of a drawing surface.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Int16 \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a5ae66abd3e766d17973ae05db44a4865}{nSize}
+\begin{DoxyCompactList}\small\item\em Specifies the size of this data structure. This value should be set to {\ttfamily sizeof(PIXELFORMATDESCRIPTOR)}. \item\end{DoxyCompactList}\item 
+Int16 \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a64275a08e1cc1955f13d576eaf8667ca}{nVersion}
+\begin{DoxyCompactList}\small\item\em Specifies the version of this data structure. This value should be set to 1. \item\end{DoxyCompactList}\item 
+Int32 \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_af5fb7fa704eb45ea26aad410ab299f66}{dwFlags}
+\begin{DoxyCompactList}\small\item\em A set of bit flags that specify properties of the pixel buffer. The properties are generally not mutually exclusive; you can set any combination of bit flags, with the exceptions noted. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ae51ec99cf213a8bec317162fc313b34f}{iPixelType}
+\begin{DoxyCompactList}\small\item\em Specifies the type of pixel data. The following types are defined. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a5c0e0428c67157754e663f38482228ab}{cColorBits}
+\begin{DoxyCompactList}\small\item\em Specifies the number of color bitplanes in each color buffer. For RGBA pixel types, it is the size of the color buffer, excluding the alpha bitplanes. For color-\/index pixels, it is the size of the color-\/index buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a71b6b8de02a741921530818f08a2be88}{cRedBits}
+\begin{DoxyCompactList}\small\item\em Specifies the number of red bitplanes in each RGBA color buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_afee35f417dfd8608e8c0690107ebab3b}{cRedShift}
+\begin{DoxyCompactList}\small\item\em Specifies the shift count for red bitplanes in each RGBA color buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a7f673a48f7d6724469890c48741ba512}{cGreenBits}
+\begin{DoxyCompactList}\small\item\em Specifies the number of green bitplanes in each RGBA color buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a1acaf61f35f3eb8f1ea75c890b764580}{cGreenShift}
+\begin{DoxyCompactList}\small\item\em Specifies the shift count for green bitplanes in each RGBA color buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a77e9803e55cb7e08b6aec0af6d2620ba}{cBlueBits}
+\begin{DoxyCompactList}\small\item\em Specifies the number of blue bitplanes in each RGBA color buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a3731caf144f9cf5935d36f8a75a47dc3}{cBlueShift}
+\begin{DoxyCompactList}\small\item\em Specifies the shift count for blue bitplanes in each RGBA color buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_acd4c882b125ec4272cf913f6f634e2ed}{cAlphaBits}
+\begin{DoxyCompactList}\small\item\em Specifies the number of alpha bitplanes in each RGBA color buffer. Alpha bitplanes are not supported. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a8ca4af8bb308e33de59a7004667c7b26}{cAlphaShift}
+\begin{DoxyCompactList}\small\item\em Specifies the shift count for alpha bitplanes in each RGBA color buffer. Alpha bitplanes are not supported. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_acaa9ebd6993b6d6058dd11739868c964}{cAccumBits}
+\begin{DoxyCompactList}\small\item\em Specifies the total number of bitplanes in the accumulation buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ab4cf46554fac9447711cfbdfb302e45f}{cAccumRedBits}
+\begin{DoxyCompactList}\small\item\em Specifies the number of red bitplanes in the accumulation buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a4ee69f197d75c41060f031b4189768a4}{cAccumGreenBits}
+\begin{DoxyCompactList}\small\item\em Specifies the number of green bitplanes in the accumulation buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_acb16c445481897dd3d3c1892efd65fa5}{cAccumBlueBits}
+\begin{DoxyCompactList}\small\item\em Specifies the number of blue bitplanes in the accumulation buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a9ac96be0a40a98bce22582529cb8d45a}{cAccumAlphaBits}
+\begin{DoxyCompactList}\small\item\em Specifies the number of alpha bitplanes in the accumulation buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ac7f87af2fe3f317ba331c9e6da484867}{cDepthBits}
+\begin{DoxyCompactList}\small\item\em Specifies the depth of the depth (z-\/axis) buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a09f40e25a8edadd1c3e20feae9899113}{cStencilBits}
+\begin{DoxyCompactList}\small\item\em Specifies the depth of the stencil buffer. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ac1d139bcff3eddaef2b43bc8b94d507a}{cAuxBuffers}
+\begin{DoxyCompactList}\small\item\em Specifies the number of auxiliary buffers. Auxiliary buffers are not supported. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a014b1ee8659cc68d34c1f01d4ece7cb3}{iLayerType}
+\begin{DoxyCompactList}\small\item\em Ignored. Earlier implementations of OpenGL used this member, but it is no longer used. \item\end{DoxyCompactList}\item 
+Byte \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a17cebccecdb56ef2f219f9b46e888a57}{bReserved}
+\begin{DoxyCompactList}\small\item\em Specifies the number of overlay and underlay planes. Bits 0 through 3 specify up to 15 overlay planes and bits 4 through 7 specify up to 15 underlay planes. \item\end{DoxyCompactList}\item 
+Int32 \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a845b1d2dde8756ca45807233ec266a3f}{dwLayerMask}
+\begin{DoxyCompactList}\small\item\em Ignored. Earlier implementations of OpenGL used this member, but it is no longer used. \item\end{DoxyCompactList}\item 
+Int32 \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ac2a5fd400e1fec92b422438c2629cb4b}{dwVisibleMask}
+\begin{DoxyCompactList}\small\item\em Specifies the transparent color or index of an underlay plane. When the pixel type is RGBA, {\bfseries dwVisibleMask} is a transparent RGB color value. When the pixel type is color index, it is a transparent index value. \item\end{DoxyCompactList}\item 
+Int32 \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a24eb16cff0e49e7f052163afbc149f89}{dwDamageMask}
+\begin{DoxyCompactList}\small\item\em Ignored. Earlier implementations of OpenGL used this member, but it is no longer used. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The {\bfseries \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r}{PIXELFORMATDESCRIPTOR}} structure describes the pixel format of a drawing surface. Please notice carefully, as documented in the members, that certain pixel format properties are not supported in the current generic implementation. The generic implementation is the Microsoft GDI software implementation of OpenGL. Hardware manufacturers may enhance parts of OpenGL, and may support some pixel format properties not supported by the generic implementation.
+
+\begin{DoxySeeAlso}{See also}
+ChoosePixelFormat, SetPixelFormat
+
+
+\end{DoxySeeAlso}
+seealso cref=\char`\"{}DescribePixelFormat\char`\"{} /$>$ seealso cref=\char`\"{}GetPixelFormat\char`\"{} /$>$  
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a17cebccecdb56ef2f219f9b46e888a57}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!bReserved@{bReserved}}
+\index{bReserved@{bReserved}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{bReserved}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.bReserved}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a17cebccecdb56ef2f219f9b46e888a57}
+
+
+Specifies the number of overlay and underlay planes. Bits 0 through 3 specify up to 15 overlay planes and bits 4 through 7 specify up to 15 underlay planes. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a9ac96be0a40a98bce22582529cb8d45a}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cAccumAlphaBits@{cAccumAlphaBits}}
+\index{cAccumAlphaBits@{cAccumAlphaBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cAccumAlphaBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cAccumAlphaBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a9ac96be0a40a98bce22582529cb8d45a}
+
+
+Specifies the number of alpha bitplanes in the accumulation buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_acaa9ebd6993b6d6058dd11739868c964}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cAccumBits@{cAccumBits}}
+\index{cAccumBits@{cAccumBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cAccumBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cAccumBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_acaa9ebd6993b6d6058dd11739868c964}
+
+
+Specifies the total number of bitplanes in the accumulation buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_acb16c445481897dd3d3c1892efd65fa5}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cAccumBlueBits@{cAccumBlueBits}}
+\index{cAccumBlueBits@{cAccumBlueBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cAccumBlueBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cAccumBlueBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_acb16c445481897dd3d3c1892efd65fa5}
+
+
+Specifies the number of blue bitplanes in the accumulation buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a4ee69f197d75c41060f031b4189768a4}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cAccumGreenBits@{cAccumGreenBits}}
+\index{cAccumGreenBits@{cAccumGreenBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cAccumGreenBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cAccumGreenBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a4ee69f197d75c41060f031b4189768a4}
+
+
+Specifies the number of green bitplanes in the accumulation buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ab4cf46554fac9447711cfbdfb302e45f}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cAccumRedBits@{cAccumRedBits}}
+\index{cAccumRedBits@{cAccumRedBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cAccumRedBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cAccumRedBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ab4cf46554fac9447711cfbdfb302e45f}
+
+
+Specifies the number of red bitplanes in the accumulation buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_acd4c882b125ec4272cf913f6f634e2ed}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cAlphaBits@{cAlphaBits}}
+\index{cAlphaBits@{cAlphaBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cAlphaBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cAlphaBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_acd4c882b125ec4272cf913f6f634e2ed}
+
+
+Specifies the number of alpha bitplanes in each RGBA color buffer. Alpha bitplanes are not supported. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a8ca4af8bb308e33de59a7004667c7b26}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cAlphaShift@{cAlphaShift}}
+\index{cAlphaShift@{cAlphaShift}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cAlphaShift}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cAlphaShift}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a8ca4af8bb308e33de59a7004667c7b26}
+
+
+Specifies the shift count for alpha bitplanes in each RGBA color buffer. Alpha bitplanes are not supported. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ac1d139bcff3eddaef2b43bc8b94d507a}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cAuxBuffers@{cAuxBuffers}}
+\index{cAuxBuffers@{cAuxBuffers}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cAuxBuffers}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cAuxBuffers}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ac1d139bcff3eddaef2b43bc8b94d507a}
+
+
+Specifies the number of auxiliary buffers. Auxiliary buffers are not supported. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a77e9803e55cb7e08b6aec0af6d2620ba}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cBlueBits@{cBlueBits}}
+\index{cBlueBits@{cBlueBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cBlueBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cBlueBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a77e9803e55cb7e08b6aec0af6d2620ba}
+
+
+Specifies the number of blue bitplanes in each RGBA color buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a3731caf144f9cf5935d36f8a75a47dc3}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cBlueShift@{cBlueShift}}
+\index{cBlueShift@{cBlueShift}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cBlueShift}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cBlueShift}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a3731caf144f9cf5935d36f8a75a47dc3}
+
+
+Specifies the shift count for blue bitplanes in each RGBA color buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a5c0e0428c67157754e663f38482228ab}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cColorBits@{cColorBits}}
+\index{cColorBits@{cColorBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cColorBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cColorBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a5c0e0428c67157754e663f38482228ab}
+
+
+Specifies the number of color bitplanes in each color buffer. For RGBA pixel types, it is the size of the color buffer, excluding the alpha bitplanes. For color-\/index pixels, it is the size of the color-\/index buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ac7f87af2fe3f317ba331c9e6da484867}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cDepthBits@{cDepthBits}}
+\index{cDepthBits@{cDepthBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cDepthBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cDepthBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ac7f87af2fe3f317ba331c9e6da484867}
+
+
+Specifies the depth of the depth (z-\/axis) buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a7f673a48f7d6724469890c48741ba512}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cGreenBits@{cGreenBits}}
+\index{cGreenBits@{cGreenBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cGreenBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cGreenBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a7f673a48f7d6724469890c48741ba512}
+
+
+Specifies the number of green bitplanes in each RGBA color buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a1acaf61f35f3eb8f1ea75c890b764580}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cGreenShift@{cGreenShift}}
+\index{cGreenShift@{cGreenShift}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cGreenShift}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cGreenShift}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a1acaf61f35f3eb8f1ea75c890b764580}
+
+
+Specifies the shift count for green bitplanes in each RGBA color buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a71b6b8de02a741921530818f08a2be88}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cRedBits@{cRedBits}}
+\index{cRedBits@{cRedBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cRedBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cRedBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a71b6b8de02a741921530818f08a2be88}
+
+
+Specifies the number of red bitplanes in each RGBA color buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_afee35f417dfd8608e8c0690107ebab3b}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cRedShift@{cRedShift}}
+\index{cRedShift@{cRedShift}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cRedShift}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cRedShift}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_afee35f417dfd8608e8c0690107ebab3b}
+
+
+Specifies the shift count for red bitplanes in each RGBA color buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a09f40e25a8edadd1c3e20feae9899113}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!cStencilBits@{cStencilBits}}
+\index{cStencilBits@{cStencilBits}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{cStencilBits}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.cStencilBits}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a09f40e25a8edadd1c3e20feae9899113}
+
+
+Specifies the depth of the stencil buffer. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a24eb16cff0e49e7f052163afbc149f89}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!dwDamageMask@{dwDamageMask}}
+\index{dwDamageMask@{dwDamageMask}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{dwDamageMask}]{\setlength{\rightskip}{0pt plus 5cm}Int32 {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.dwDamageMask}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a24eb16cff0e49e7f052163afbc149f89}
+
+
+Ignored. Earlier implementations of OpenGL used this member, but it is no longer used. 
+
+Specifies whether more than one pixel format shares the same frame buffer. If the result of the bitwise AND of the damage masks between two pixel formats is nonzero, then they share the same buffers. \hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_af5fb7fa704eb45ea26aad410ab299f66}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!dwFlags@{dwFlags}}
+\index{dwFlags@{dwFlags}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{dwFlags}]{\setlength{\rightskip}{0pt plus 5cm}Int32 {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.dwFlags}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_af5fb7fa704eb45ea26aad410ab299f66}
+
+
+A set of bit flags that specify properties of the pixel buffer. The properties are generally not mutually exclusive; you can set any combination of bit flags, with the exceptions noted. 
+
+The following bit flag constants are defined:
+
+\begin{TabularC}{2}
+\hline
+Value} &Meaning  \\\cline{1-2}
+PFD\_\-DRAW\_\-TO\_\-WINDOW} &The buffer can draw to a window or device surface.  \\\cline{1-2}
+PFD\_\-DRAW\_\-TO\_\-BITMAP} &The buffer can draw to a memory bitmap.  \\\cline{1-2}
+PFD\_\-SUPPORT\_\-GDI} &The buffer supports GDI drawing. This flag and PFD\_\-DOUBLEBUFFER are mutually exclusive in the current generic implementation.   \\\cline{1-2}
+PFD\_\-SUPPORT\_\-OPENGL} &The buffer supports OpenGL drawing.  \\\cline{1-2}
+PFD\_\-GENERIC\_\-ACCELERATED} &The pixel format is supported by a device driver that accelerates the generic implementation. If this flag is clear and the PFD\_\-GENERIC\_\-FORMAT flag is set, the pixel format is supported by the generic implementation only.   \\\cline{1-2}
+PFD\_\-GENERIC\_\-FORMAT} &The pixel format is supported by the GDI software implementation, which is also known as the generic implementation. If this bit is clear, the pixel format is supported by a device driver or hardware.   \\\cline{1-2}
+PFD\_\-NEED\_\-PALETTE} &The buffer uses RGBA pixels on a palette-\/managed device. A logical palette is required to achieve the best results for this pixel type. Colors in the palette should be specified according to the values of the {\bfseries cRedBits}, {\bfseries cRedShift}, {\bfseries cGreenBits}, {\bfseries cGreenShift}, {\bfseries cBluebits}, and {\bfseries cBlueShift} members. The palette should be created and realized in the device context before calling Wgl.wglMakeCurrent.   \\\cline{1-2}
+PFD\_\-NEED\_\-SYSTEM\_\-PALETTE} &Defined in the pixel format descriptors of hardware that supports one hardware palette in 256-\/color mode only. For such systems to use hardware acceleration, the hardware palette must be in a fixed order (for example, 3-\/3-\/2) when in RGBA mode or must match the logical palette when in color-\/index mode.
+
+When this flag is set, you must call SetSystemPaletteUse in your program to force a one-\/to-\/one mapping of the logical palette and the system palette. If your OpenGL hardware supports multiple hardware palettes and the device driver can allocate spare hardware palettes for OpenGL, this flag is typically clear.
+
+This flag is not set in the generic pixel formats.   \\\cline{1-2}
+PFD\_\-DOUBLEBUFFER} &The buffer is double-\/buffered. This flag and PFD\_\-SUPPORT\_\-GDI are mutually exclusive in the current generic implementation.   \\\cline{1-2}
+PFD\_\-STEREO} &The buffer is stereoscopic. This flag is not supported in the current generic implementation.   \\\cline{1-2}
+PFD\_\-SWAP\_\-LAYER\_\-BUFFERS} &Indicates whether a device can swap individual layer planes with pixel formats that include double-\/buffered overlay or underlay planes. Otherwise all layer planes are swapped together as a group. When this flag is set, {\bfseries wglSwapLayerBuffers} is supported.   \\\cline{1-2}
+\end{TabularC}
+
+
+You can specify the following bit flags when calling ChoosePixelFormat.
+
+\begin{TabularC}{2}
+\hline
+Value} &Meaning  \\\cline{1-2}
+PFD\_\-DEPTH\_\-DONTCARE} &The requested pixel format can either have or not have a depth buffer. To select a pixel format without a depth buffer, you must specify this flag. The requested pixel format can be with or without a depth buffer. Otherwise, only pixel formats with a depth buffer are considered.   \\\cline{1-2}
+PFD\_\-DOUBLEBUFFER\_\-DONTCARE} &The requested pixel format can be either single-\/ or double-\/buffered.  \\\cline{1-2}
+PFD\_\-STEREO\_\-DONTCARE} &The requested pixel format can be either monoscopic or stereoscopic.  \\\cline{1-2}
+\end{TabularC}
+
+
+With the {\bfseries glAddSwapHintRectWIN} extension function, two new flags are included for the {\bfseries \hyperlink{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r}{PIXELFORMATDESCRIPTOR}} pixel format structure. 
+
+\begin{TabularC}{2}
+\hline
+Value} &Meaning  \\\cline{1-2}
+PFD\_\-SWAP\_\-COPY} &Specifies the content of the back buffer in the double-\/buffered main color plane following a buffer swap. Swapping the color buffers causes the content of the back buffer to be copied to the front buffer. The content of the back buffer is not affected by the swap. PFD\_\-SWAP\_\-COPY is a hint only and might not be provided by a driver.   \\\cline{1-2}
+PFD\_\-SWAP\_\-EXCHANGE} &Specifies the content of the back buffer in the double-\/buffered main color plane following a buffer swap. Swapping the color buffers causes the exchange of the back buffer's content with the front buffer's content. Following the swap, the back buffer's content contains the front buffer's content before the swap. PFD\_\-SWAP\_\-EXCHANGE is a hint only and might not be provided by a driver.   \\\cline{1-2}
+\end{TabularC}
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a845b1d2dde8756ca45807233ec266a3f}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!dwLayerMask@{dwLayerMask}}
+\index{dwLayerMask@{dwLayerMask}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{dwLayerMask}]{\setlength{\rightskip}{0pt plus 5cm}Int32 {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.dwLayerMask}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a845b1d2dde8756ca45807233ec266a3f}
+
+
+Ignored. Earlier implementations of OpenGL used this member, but it is no longer used. 
+
+Specifies the layer mask. The layer mask is used in conjunction with the visible mask to determine if one layer overlays another. \hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ac2a5fd400e1fec92b422438c2629cb4b}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!dwVisibleMask@{dwVisibleMask}}
+\index{dwVisibleMask@{dwVisibleMask}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{dwVisibleMask}]{\setlength{\rightskip}{0pt plus 5cm}Int32 {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.dwVisibleMask}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ac2a5fd400e1fec92b422438c2629cb4b}
+
+
+Specifies the transparent color or index of an underlay plane. When the pixel type is RGBA, {\bfseries dwVisibleMask} is a transparent RGB color value. When the pixel type is color index, it is a transparent index value. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a014b1ee8659cc68d34c1f01d4ece7cb3}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!iLayerType@{iLayerType}}
+\index{iLayerType@{iLayerType}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{iLayerType}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.iLayerType}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a014b1ee8659cc68d34c1f01d4ece7cb3}
+
+
+Ignored. Earlier implementations of OpenGL used this member, but it is no longer used. 
+
+Specifies the type of layer. \hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ae51ec99cf213a8bec317162fc313b34f}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!iPixelType@{iPixelType}}
+\index{iPixelType@{iPixelType}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{iPixelType}]{\setlength{\rightskip}{0pt plus 5cm}Byte {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.iPixelType}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_ae51ec99cf213a8bec317162fc313b34f}
+
+
+Specifies the type of pixel data. The following types are defined. 
+
+\begin{TabularC}{2}
+\hline
+Value} &Meaning  \\\cline{1-2}
+PFD\_\-TYPE\_\-RGBA} &RGBA pixels. Each pixel has four components in this order: red, green, blue, and alpha.   \\\cline{1-2}
+PFD\_\-TYPE\_\-COLORINDEX} &Color-\/index pixels. Each pixel uses a color-\/index value.  \\\cline{1-2}
+\end{TabularC}
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a5ae66abd3e766d17973ae05db44a4865}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!nSize@{nSize}}
+\index{nSize@{nSize}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{nSize}]{\setlength{\rightskip}{0pt plus 5cm}Int16 {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.nSize}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a5ae66abd3e766d17973ae05db44a4865}
+
+
+Specifies the size of this data structure. This value should be set to {\ttfamily sizeof(PIXELFORMATDESCRIPTOR)}. 
+
+\hypertarget{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a64275a08e1cc1955f13d576eaf8667ca}{
+\index{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}!nVersion@{nVersion}}
+\index{nVersion@{nVersion}!Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR@{Tao::Platform::Windows::Gdi::PIXELFORMATDESCRIPTOR}}
+\subsubsection[{nVersion}]{\setlength{\rightskip}{0pt plus 5cm}Int16 {\bf Tao.Platform.Windows.Gdi.PIXELFORMATDESCRIPTOR.nVersion}}}
+\label{struct_tao_1_1_platform_1_1_windows_1_1_gdi_1_1_p_i_x_e_l_f_o_r_m_a_t_d_e_s_c_r_i_p_t_o_r_a64275a08e1cc1955f13d576eaf8667ca}
+
+
+Specifies the version of this data structure. This value should be set to 1. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Platform.Windows/\hyperlink{_gdi_8cs}{Gdi.cs}\end{DoxyCompactItemize}

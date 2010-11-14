@@ -1,0 +1,88 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event}{
+\section{Tao.Sdl.Sdl.SDL\_\-JoyAxisEvent Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event}\index{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent@{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent}}
+}
+
+
+Joystick axis motion event structure.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_ae28dc8524a0c589e54e7fc31381d3279}{type}
+\begin{DoxyCompactList}\small\item\em SDL\_\-JOYAXISMOTION. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_acba47760d8072344474515532a6841c1}{which}
+\begin{DoxyCompactList}\small\item\em The joystick device index. \item\end{DoxyCompactList}\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_a960c36c78c9a4a05890cdd20b191505f}{axis}
+\begin{DoxyCompactList}\small\item\em Joystick axis index. \item\end{DoxyCompactList}\item 
+short \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_a33ccbbcde34a6c14aa27f1eed7851dc1}{val}
+\begin{DoxyCompactList}\small\item\em Axis value (range: -\/32768 to 32767). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Joystick axis motion event structure. \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event}{SDL\_\-JoyAxisEvent} is a member of the \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event} union and is used when an event of type SDL\_\-JOYAXISMOTION is reported. 
+
+A SDL\_\-JOYAXISMOTION event occurs when ever a user moves an axis on the joystick. The field which is the index of the joystick that reported the event and axis is the index of the axis (for a more detailed explaination see the Joystick section). value is the current position of the axis. 
+
+
+\begin{DoxyCode}
+Struct in SDL_cdrom.h
+            typedef struct{
+                        Uint8 type;
+                        Uint8 which;
+                        Uint8 axis;
+                        Sint16 value;
+                } SDL_JoyAxisEvent;
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event}, \hyperlink{_sdl_8cs_a4b5786d792bade406949c738f0290eca}{SDL\_\-JoystickEventState}, \hyperlink{_sdl_8cs_ab6c4b492ca0368f81c3aef8c49ebf21d}{SDL\_\-JoystickGetAxis}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_a960c36c78c9a4a05890cdd20b191505f}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent@{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent}!axis@{axis}}
+\index{axis@{axis}!Tao::Sdl::Sdl::SDL_JoyAxisEvent@{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent}}
+\subsubsection[{axis}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyAxisEvent.axis}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_a960c36c78c9a4a05890cdd20b191505f}
+
+
+Joystick axis index. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_ae28dc8524a0c589e54e7fc31381d3279}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent@{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent}!type@{type}}
+\index{type@{type}!Tao::Sdl::Sdl::SDL_JoyAxisEvent@{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyAxisEvent.type}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_ae28dc8524a0c589e54e7fc31381d3279}
+
+
+SDL\_\-JOYAXISMOTION. 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_a33ccbbcde34a6c14aa27f1eed7851dc1}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent@{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent}!val@{val}}
+\index{val@{val}!Tao::Sdl::Sdl::SDL_JoyAxisEvent@{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent}}
+\subsubsection[{val}]{\setlength{\rightskip}{0pt plus 5cm}short {\bf Tao.Sdl.Sdl.SDL\_\-JoyAxisEvent.val}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_a33ccbbcde34a6c14aa27f1eed7851dc1}
+
+
+Axis value (range: -\/32768 to 32767). 
+
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_acba47760d8072344474515532a6841c1}{
+\index{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent@{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent}!which@{which}}
+\index{which@{which}!Tao::Sdl::Sdl::SDL_JoyAxisEvent@{Tao::Sdl::Sdl::SDL\_\-JoyAxisEvent}}
+\subsubsection[{which}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-JoyAxisEvent.which}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___joy_axis_event_acba47760d8072344474515532a6841c1}
+
+
+The joystick device index. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}

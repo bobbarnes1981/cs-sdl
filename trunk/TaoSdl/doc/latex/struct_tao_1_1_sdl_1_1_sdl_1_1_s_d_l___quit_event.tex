@@ -1,0 +1,51 @@
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___quit_event}{
+\section{Tao.Sdl.Sdl.SDL\_\-QuitEvent Struct Reference}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___quit_event}\index{Tao::Sdl::Sdl::SDL\_\-QuitEvent@{Tao::Sdl::Sdl::SDL\_\-QuitEvent}}
+}
+
+
+Quit requested event.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___quit_event_a000e04d4783f821917569ef4942128fa}{type}
+\begin{DoxyCompactList}\small\item\em SDL\_\-QUIT. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Quit requested event. \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___quit_event}{SDL\_\-QuitEvent} is a member of the \hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event} union and is used whan an event of type SDL\_\-QUIT is reported. 
+
+As can be seen, the \hyperlink{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___quit_event}{SDL\_\-QuitEvent} structure serves no useful purpose. The event itself, on the other hand, is very important. If you filter out or ignore a quit event then it is impossible for the user to close the window. On the other hand, if you do accept a quit event then the application window will be closed, and screen updates will still report success event though the application will no longer be visible. 
+
+Note: The macro SDL\_\-QuitRequested will return non-\/zero if a quit event is pending 
+
+Struct in SDL\_\-events.h 
+\begin{DoxyCode}
+            typedef struct{
+                        Uint8 type
+                        } SDL_QuitEvent;
+\end{DoxyCode}
+ \begin{DoxySeeAlso}{See also}
+\hyperlink{struct_tao_1_1_sdl_1_1_s_d_l___event}{SDL\_\-Event}, \hyperlink{_sdl_8cs_afd1ab8f1891d71ad6544323050271d2d}{SDL\_\-SetEventFilter}
+
+
+\end{DoxySeeAlso}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___quit_event_a000e04d4783f821917569ef4942128fa}{
+\index{Tao::Sdl::Sdl::SDL\_\-QuitEvent@{Tao::Sdl::Sdl::SDL\_\-QuitEvent}!type@{type}}
+\index{type@{type}!Tao::Sdl::Sdl::SDL_QuitEvent@{Tao::Sdl::Sdl::SDL\_\-QuitEvent}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}byte {\bf Tao.Sdl.Sdl.SDL\_\-QuitEvent.type}}}
+\label{struct_tao_1_1_sdl_1_1_sdl_1_1_s_d_l___quit_event_a000e04d4783f821917569ef4942128fa}
+
+
+SDL\_\-QUIT. 
+
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/Tao.Sdl/\hyperlink{_sdl_8cs}{Sdl.cs}\end{DoxyCompactItemize}
